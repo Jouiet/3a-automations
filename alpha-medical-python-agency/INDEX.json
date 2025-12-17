@@ -1,0 +1,98 @@
+{
+  "quadrant": "Q1_PYTHON_AGENCY",
+  "source": "Alpha-Medical/scripts",
+  "classification": "Automation + Generic APIs",
+  "usage": "Scripts Python réutilisables pour agence automation",
+  "total": 41,
+  "copied_date": "2025-12-16",
+  "tagged": true,
+  "tag_format": {
+    "header": "# Type: agency",
+    "fields": ["Type", "Category", "Source", "Reusable"]
+  },
+  "categories": {
+    "n8n": {
+      "count": 15,
+      "purpose": "N8N workflow management (activation, debugging, credentials)",
+      "scripts": [
+        "activate_n8n_workflow_simple.py",
+        "activate_workflow_patch.py",
+        "add_filter_node.py",
+        "complete_flow_automation.py",
+        "complete_workflow_final_push.py",
+        "diagnose_loop_problem.py",
+        "diagnose_no_trigger.py",
+        "get_exec_details.py",
+        "get_execution_error.py",
+        "get_latest_execution_full.py",
+        "investigate_output_file.py",
+        "list_all_workflow_nodes.py",
+        "remove_filter_restore_workflow.py",
+        "restart_workflow.py",
+        "show_workflow_credential_ids.py"
+      ]
+    },
+    "klaviyo": {
+      "count": 4,
+      "purpose": "Klaviyo email marketing API (templates, flows)",
+      "scripts": [
+        "automate_klaviyo_email.py",
+        "get_klaviyo_templates.py",
+        "upload_professional_templates_correct_ids.py",
+        "upload_templates_to_klaviyo.py"
+      ]
+    },
+    "shopify": {
+      "count": 4,
+      "purpose": "Shopify policies & legal automation",
+      "scripts": [
+        "automate_legal_compliance.py",
+        "complete_all_shopify_policies_final.py",
+        "complete_shopify_policies.py",
+        "recategorize_products.py"
+      ]
+    },
+    "data": {
+      "count": 9,
+      "purpose": "Data sync, import/export, retrieval",
+      "scripts": [
+        "get_blog_info.py",
+        "get_file_gids.py",
+        "get_missing_products.py",
+        "get_product_samples.py",
+        "import_leads_to_sheet.py",
+        "list_collections.py",
+        "list_recent_customers.py",
+        "setup_google_sheet.py",
+        "sync_typeform_to_sheet.py"
+      ]
+    },
+    "setup": {
+      "count": 8,
+      "purpose": "Configuration & installation scripts",
+      "scripts": [
+        "configure_existing_sheet.py",
+        "configure_klaviyo.py",
+        "configure_reconvert.py",
+        "configure_shopify_email.py",
+        "get_google_ads_conversion_id.py",
+        "install_google_ads_pixel.py",
+        "install_gtm.py",
+        "setup_google_sheet_user.py"
+      ]
+    },
+    "marketing": {
+      "count": 1,
+      "purpose": "Facebook/Meta API automation",
+      "scripts": [
+        "facebook_automation_complete.py"
+      ]
+    }
+  },
+  "NOT_COPIED": [
+    "features/bundles/ - Alpha Medical specific products",
+    "analysis/audits/ - Business-specific audits", 
+    "deployment/ investor pages - Content specific",
+    "maintenance/fixes/ - Project-specific fixes"
+  ]
+}

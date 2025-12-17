@@ -1,0 +1,39 @@
+# Environment files with secrets
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.Python
+pip-log.txt
+
+# Outputs (can regenerate)
+# outputs/
+
+# Credentials
+*.pem
+*.key
+service-account.json
+google-services.json
+*-credentials.json
