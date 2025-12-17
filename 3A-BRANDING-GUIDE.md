@@ -1,0 +1,350 @@
+# 3A AUTOMATION - BRANDING GUIDE
+## Version: 1.0 | Created: 2025-12-17
+## Extracted from Official Logo
+
+---
+
+## 1. LOGO
+
+### Fichiers Officiels
+```
+/3a-automations Logo/
+├── Logo 3a-automations.png          (272 KB - Web usage)
+├── Logo 3a-automations.svg          (273 KB - Print/Vector)
+└── Logo Transparent - 3a-automations.svg (273 KB - Overlay)
+```
+
+### Description
+- **Icone**: Triple "A" interconnecte en forme geometrique/triangulaire
+- **Style**: Moderne, tech, professionnel
+- **Orientation**: Centree verticale
+- **Texte**: "3A" (bold) + "AUTOMATIONS" (light, espace)
+
+---
+
+## 2. PALETTE DE COULEURS (Exacte)
+
+### Couleurs Primaires
+
+| Nom | Hex | RGB | Usage |
+|-----|-----|-----|-------|
+| **Cyan Primary** | `#4FBAF1` | rgb(79, 186, 241) | CTA, accents, liens |
+| **Ice White** | `#E4F4FC` | rgb(228, 244, 252) | Texte sur fond sombre |
+| **Light Blue** | `#ADD4F0` | rgb(173, 212, 240) | Gradients, highlights |
+
+### Couleurs Fond/Background
+
+| Nom | Hex | RGB | Usage |
+|-----|-----|-----|-------|
+| **Navy Deep** | `#191E35` | rgb(25, 30, 53) | Fond principal dark |
+| **Navy Blue** | `#1B2F54` | rgb(27, 47, 84) | Fond secondaire |
+| **Dark Teal** | `#254E70` | rgb(37, 78, 112) | Fond tertiaire |
+
+### Couleurs Secondaires
+
+| Nom | Hex | RGB | Usage |
+|-----|-----|-----|-------|
+| **Teal Blue** | `#2B6685` | rgb(43, 102, 133) | Accents secondaires |
+| **Blue Gray** | `#516C86` | rgb(81, 108, 134) | Texte secondaire |
+| **Muted Purple** | `#4E4962` | rgb(78, 73, 98) | Ombres, overlays |
+
+### Gradient Principal (Logo)
+```css
+/* Direction: Haut vers Bas */
+background: linear-gradient(180deg,
+  #E4F4FC 0%,    /* Ice White */
+  #ADD4F0 30%,   /* Light Blue */
+  #4FBAF1 100%   /* Cyan Primary */
+);
+```
+
+---
+
+## 3. TYPOGRAPHIE
+
+### Police Principale
+```
+Font Family: Inter (Google Fonts)
+Fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+```
+
+### Hierarchie
+
+| Element | Font | Weight | Size | Line Height |
+|---------|------|--------|------|-------------|
+| H1 | Inter | 700 (Bold) | 48px / 3rem | 1.1 |
+| H2 | Inter | 600 (SemiBold) | 32px / 2rem | 1.2 |
+| H3 | Inter | 600 (SemiBold) | 24px / 1.5rem | 1.3 |
+| Body | Inter | 400 (Regular) | 16px / 1rem | 1.6 |
+| Small | Inter | 400 (Regular) | 14px / 0.875rem | 1.5 |
+| Caption | Inter | 500 (Medium) | 12px / 0.75rem | 1.4 |
+
+### Logo Text
+- "3A": Inter Bold, 32px, letterspacing: 0
+- "AUTOMATIONS": Inter Light/Regular, 14px, letterspacing: 0.2em (uppercase)
+
+---
+
+## 4. VARIABLES CSS
+
+```css
+:root {
+  /* Primary Colors */
+  --color-primary: #4FBAF1;
+  --color-primary-light: #ADD4F0;
+  --color-primary-dark: #2B6685;
+
+  /* Background Colors */
+  --color-bg-dark: #191E35;
+  --color-bg-navy: #1B2F54;
+  --color-bg-teal: #254E70;
+
+  /* Text Colors */
+  --color-text-light: #E4F4FC;
+  --color-text-secondary: #516C86;
+  --color-text-muted: #4E4962;
+
+  /* Semantic Colors */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(180deg, #E4F4FC 0%, #ADD4F0 30%, #4FBAF1 100%);
+  --gradient-bg: linear-gradient(135deg, #191E35 0%, #1B2F54 50%, #254E70 100%);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(25, 30, 53, 0.05);
+  --shadow-md: 0 4px 6px rgba(25, 30, 53, 0.1);
+  --shadow-lg: 0 10px 15px rgba(25, 30, 53, 0.15);
+  --shadow-xl: 0 20px 25px rgba(25, 30, 53, 0.2);
+}
+```
+
+---
+
+## 5. COMPOSANTS UI
+
+### Boutons
+
+```css
+/* Primary Button */
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-bg-dark);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background: rgba(79, 186, 241, 0.1);
+}
+```
+
+### Cards
+
+```css
+.card {
+  background: var(--color-bg-navy);
+  border: 1px solid rgba(79, 186, 241, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.card:hover {
+  border-color: rgba(79, 186, 241, 0.3);
+  box-shadow: var(--shadow-lg);
+}
+```
+
+### Forms
+
+```css
+.input {
+  background: rgba(25, 30, 53, 0.5);
+  border: 1px solid var(--color-text-muted);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--color-text-light);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 186, 241, 0.2);
+}
+```
+
+---
+
+## 6. USAGE DU LOGO
+
+### Zones de Protection
+```
+┌─────────────────────────────┐
+│                             │
+│    ┌───────────────┐        │
+│    │               │        │
+│    │   LOGO 3A     │ ← min 20px margin
+│    │               │        │
+│    └───────────────┘        │
+│                             │
+└─────────────────────────────┘
+```
+
+### Tailles Minimales
+- Web: 120px largeur minimum
+- Print: 30mm largeur minimum
+- Favicon: 32x32px (icone seule)
+
+### Versions Autorisees
+1. Logo complet (icone + texte) - Usage principal
+2. Icone seule - Favicon, avatar, espaces reduits
+3. Texte seul "3A" - Header compact
+
+### Interdictions
+- Ne pas deformer le logo
+- Ne pas changer les couleurs du gradient
+- Ne pas ajouter d'effets (ombre portee, glow excessif)
+- Ne pas utiliser sur fond cyan (contraste insuffisant)
+
+---
+
+## 7. FONDS AUTORISES
+
+### Fond Sombre (Recommande)
+```css
+/* Option 1: Navy uni */
+background: #191E35;
+
+/* Option 2: Gradient */
+background: linear-gradient(135deg, #191E35 0%, #1B2F54 100%);
+
+/* Option 3: Avec texture motion blur (comme logo original) */
+background: #191E35;
+/* + image texture en overlay */
+```
+
+### Fond Clair
+```css
+/* Blanc pur */
+background: #FFFFFF;
+
+/* Gris tres clair */
+background: #F8FAFC;
+```
+
+Note: Sur fond clair, utiliser version sombre du logo (a creer si necessaire)
+
+---
+
+## 8. TONE OF VOICE
+
+### Principes
+1. **Professionnel** - Expert technique, pas vendeur
+2. **Direct** - Pas de jargon inutile
+3. **Factuel** - Que des faits verifiables
+4. **Accessible** - Comprehensible par non-techniciens
+
+### Exemples
+
+**BON:**
+> "Nous automatisons vos flows Klaviyo pour augmenter le revenue email de 20-40%."
+
+**MAUVAIS:**
+> "Notre solution revolutionnaire va transformer votre business!"
+
+### Mots-cles de Marque
+- Automation
+- Analytics
+- AI
+- Data-driven
+- ROI
+- PME
+- Efficacite
+- Transparence
+
+---
+
+## 9. ICONOGRAPHIE
+
+### Style
+- Line icons (stroke 1.5-2px)
+- Coins arrondis
+- Style coherent avec Lucide/Feather icons
+
+### Couleurs Icones
+- Primaire: `#4FBAF1` (Cyan)
+- Secondaire: `#E4F4FC` (Ice White)
+- Disabled: `#516C86` (Blue Gray)
+
+---
+
+## 10. APPLICATION
+
+### Website
+- Fond: Gradient navy ou uni dark
+- Texte: Ice White pour titres, Blue Gray pour body
+- Accents: Cyan Primary pour CTAs et liens
+
+### Documents
+- Fond: Blanc
+- Texte: Navy Deep
+- Accents: Cyan Primary
+
+### Emails
+- Header: Navy avec logo
+- Body: Fond blanc
+- CTAs: Cyan Primary buttons
+
+### Social Media
+- Avatar: Logo icone seule
+- Posts: Fond navy ou gradient
+- Text overlays: Ice White
+
+---
+
+## CHANGELOG
+
+| Date | Version | Modification |
+|------|---------|--------------|
+| 2025-12-17 | 1.0 | Creation - Extraction couleurs du logo officiel |

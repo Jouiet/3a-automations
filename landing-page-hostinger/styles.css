@@ -1,7 +1,8 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   AAA AGENCY - LANDING PAGE STYLES
-   Version: 1.0
+   3A AUTOMATION - LANDING PAGE STYLES
+   Version: 2.0 - Brand Colors Update
    Date: 17 Décembre 2025
+   Brand Guide: /3A-BRANDING-GUIDE.md
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -14,23 +15,43 @@
 }
 
 :root {
-  /* Colors */
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --primary-light: #3b82f6;
-  --secondary: #0f172a;
-  --accent: #10b981;
+  /* ═══════════════════════════════════════════════════════════════════════
+     BRAND COLORS - Extracted from Official Logo
+     ═══════════════════════════════════════════════════════════════════════ */
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
+  /* Primary Colors (from logo gradient) */
+  --primary: #4FBAF1;          /* Cyan Primary - CTAs, accents */
+  --primary-dark: #2B6685;     /* Teal Blue - hover states */
+  --primary-light: #ADD4F0;    /* Light Blue - highlights */
+  --primary-ice: #E4F4FC;      /* Ice White - text on dark */
 
+  /* Background Colors (from logo background) */
+  --secondary: #191E35;        /* Navy Deep - main dark bg */
+  --bg-navy: #1B2F54;          /* Navy Blue - secondary dark */
+  --bg-teal: #254E70;          /* Dark Teal - tertiary */
+
+  /* Accent */
+  --accent: #10B981;           /* Success green */
+
+  /* Text Colors */
+  --text-primary: #191E35;     /* Navy Deep */
+  --text-secondary: #516C86;   /* Blue Gray */
+  --text-muted: #4E4962;       /* Muted Purple */
+  --text-light: #E4F4FC;       /* Ice White */
+
+  /* Light Theme Backgrounds */
   --bg-white: #ffffff;
   --bg-light: #f8fafc;
-  --bg-dark: #0f172a;
+  --bg-dark: #191E35;          /* Navy Deep */
 
+  /* Borders */
   --border: #e2e8f0;
   --border-light: #f1f5f9;
+  --border-dark: rgba(79, 186, 241, 0.2);  /* Cyan transparent */
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(180deg, #E4F4FC 0%, #ADD4F0 30%, #4FBAF1 100%);
+  --gradient-bg-dark: linear-gradient(135deg, #191E35 0%, #1B2F54 50%, #254E70 100%);
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -446,8 +467,8 @@ section {
    CTA / CONTACT
    ───────────────────────────────────────────────────────────────────────────── */
 .cta {
-  background: var(--bg-dark);
-  color: var(--bg-white);
+  background: var(--gradient-bg-dark);
+  color: var(--text-light);
 }
 
 .cta-content {
@@ -518,7 +539,7 @@ section {
    ───────────────────────────────────────────────────────────────────────────── */
 .footer {
   background: var(--secondary);
-  color: var(--bg-white);
+  color: var(--text-light);
   padding: 60px 0 30px;
 }
 
