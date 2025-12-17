@@ -7,6 +7,38 @@
 document.addEventListener('DOMContentLoaded', function() {
 
   // ───────────────────────────────────────────────────────────────────────────
+  // MOBILE NAVIGATION TOGGLE
+  // ───────────────────────────────────────────────────────────────────────────
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      document.body.classList.toggle('nav-open');
+    });
+
+    // Close menu when clicking a nav link
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.classList.remove('nav-open');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.classList.remove('nav-open');
+      }
+    });
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
   // SMOOTH SCROLL
   // ───────────────────────────────────────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {

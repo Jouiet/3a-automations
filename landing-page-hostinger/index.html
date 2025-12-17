@@ -4,11 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="3A Automation - Automation, Analytics & AI pour PME. Automatisation marketing, processus business, dashboards analytics pour tous secteurs.">
+  <meta name="author" content="3A Automation">
+  <meta name="robots" content="index, follow">
+  <meta name="geo.region" content="MA">
+  <meta name="geo.placename" content="Casablanca">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://3a-automation.com/">
+  <meta property="og:title" content="3A Automation | Automation - Analytics - AI pour PME">
+  <meta property="og:description" content="Automatisez votre business avec des solutions sur mesure. Automation, Analytics & AI pour PME de tous secteurs.">
+  <meta property="og:image" content="https://3a-automation.com/og-image.png">
+  <meta property="og:locale" content="fr_FR">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://3a-automation.com/">
+  <meta name="twitter:title" content="3A Automation | Automation - Analytics - AI pour PME">
+  <meta name="twitter:description" content="Automatisez votre business avec des solutions sur mesure.">
+  <meta name="twitter:image" content="https://3a-automation.com/og-image.png">
+
+  <link rel="canonical" href="https://3a-automation.com/">
   <title>3A Automation | Automation - Analytics - AI pour PME</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "3A Automation",
+    "description": "Consultant Automation, Analytics & AI pour PME",
+    "url": "https://3a-automation.com",
+    "logo": "https://3a-automation.com/logo.png",
+    "email": "contact@3a-automation.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "MA"
+    },
+    "areaServed": ["MA", "AE", "FR", "US"],
+    "serviceType": ["E-commerce Automation", "Marketing Analytics", "AI Integration"]
+  }
+  </script>
 </head>
 <body>
   <!-- Header -->
@@ -18,11 +59,14 @@
         <span class="logo-text">3A</span>
         <span class="logo-sub">Automation</span>
       </div>
-      <nav class="nav">
+      <nav class="nav" id="nav-menu">
         <a href="#services">Services</a>
         <a href="#process">Process</a>
         <a href="#contact" class="btn-nav">Contact</a>
       </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span class="hamburger"></span>
+      </button>
     </div>
   </header>
 
