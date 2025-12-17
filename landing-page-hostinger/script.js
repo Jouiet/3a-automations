@@ -527,10 +527,200 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ───────────────────────────────────────────────────────────────────────────
+  // BUTTON MOUSE TRACKING EFFECT
+  // ───────────────────────────────────────────────────────────────────────────
+  const cyberButtons = document.querySelectorAll('.btn-cyber');
+
+  cyberButtons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      btn.style.setProperty('--mouse-x', `${x}%`);
+      btn.style.setProperty('--mouse-y', `${y}%`);
+    });
+  });
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // 3D TILT EFFECT ON CARDS
+  // ───────────────────────────────────────────────────────────────────────────
+  const tiltCards = document.querySelectorAll('.service-card-ultra, .flow-card, .feature-card');
+
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+      card.style.transition = 'transform 0.5s ease';
+    });
+
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'none';
+    });
+  });
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // ENHANCED STAT COUNTER WITH PLUS SIGN
+  // ───────────────────────────────────────────────────────────────────────────
+  const enhancedStatObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const targetValue = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const hasPlus = el.textContent.includes('+');
+
+        if (targetValue) {
+          let current = 0;
+          const duration = 2500;
+          const increment = targetValue / (duration / 16);
+
+          const animate = () => {
+            current += increment;
+            if (current >= targetValue) {
+              el.textContent = targetValue + (hasPlus ? '+' : '') + suffix;
+            } else {
+              el.textContent = Math.floor(current) + suffix;
+              requestAnimationFrame(animate);
+            }
+          };
+
+          animate();
+        }
+        enhancedStatObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-count]').forEach(el => {
+    enhancedStatObserver.observe(el);
+  });
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // MAGNETIC HOVER EFFECT ON BUTTONS
+  // ───────────────────────────────────────────────────────────────────────────
+  const magneticElements = document.querySelectorAll('.btn-primary-cyber, .orbital-center');
+
+  magneticElements.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = 'translate(0, 0)';
+    });
+  });
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // PARTICLE SYSTEM ENHANCEMENT
+  // ───────────────────────────────────────────────────────────────────────────
+  const createParticle = (x, y) => {
+    const particle = document.createElement('div');
+    particle.style.cssText = `
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: ${x}px;
+      top: ${y}px;
+      box-shadow: 0 0 10px var(--primary);
+    `;
+    document.body.appendChild(particle);
+
+    const angle = Math.random() * Math.PI * 2;
+    const velocity = Math.random() * 50 + 30;
+    const vx = Math.cos(angle) * velocity;
+    const vy = Math.sin(angle) * velocity;
+
+    let opacity = 1;
+    let posX = x;
+    let posY = y;
+
+    const animate = () => {
+      posX += vx * 0.016;
+      posY += vy * 0.016;
+      opacity -= 0.02;
+
+      particle.style.left = posX + 'px';
+      particle.style.top = posY + 'px';
+      particle.style.opacity = opacity;
+
+      if (opacity > 0) {
+        requestAnimationFrame(animate);
+      } else {
+        particle.remove();
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
+
+  // Emit particles on click
+  document.addEventListener('click', (e) => {
+    for (let i = 0; i < 8; i++) {
+      setTimeout(() => createParticle(e.clientX, e.clientY), i * 30);
+    }
+  });
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // SMOOTH SECTION REVEAL
+  // ───────────────────────────────────────────────────────────────────────────
+  const sections = document.querySelectorAll('section');
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '-50px'
+  });
+
+  sections.forEach(section => {
+    section.classList.add('section-hidden');
+    sectionObserver.observe(section);
+  });
+
+  // Add CSS for section animations
+  const sectionStyle = document.createElement('style');
+  sectionStyle.textContent = `
+    .section-hidden {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .section-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  `;
+  document.head.appendChild(sectionStyle);
+
+  // ───────────────────────────────────────────────────────────────────────────
   // INITIALIZE
   // ───────────────────────────────────────────────────────────────────────────
   animateOnScroll();
 
-  console.log('3A Automation - Ultra Futuristic Site Initialized');
+  console.log('3A Automation - Ultra Futuristic Site v3.1 Initialized');
 
 });
