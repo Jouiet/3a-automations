@@ -518,10 +518,52 @@ Q1 2026:
 
 ---
 
+## INTÉGRATION GROK/xAI
+
+### Configuration Projet Grok
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Nom du projet | `3a-automations` |
+| API Console | https://console.x.ai/ |
+| Documentation | https://docs.x.ai/ |
+| Variable env | `XAI_API_KEY` |
+
+### Fichiers Grok
+
+| Fichier | Description |
+|---------|-------------|
+| `GROK.md` | Configuration complète projet Grok |
+| `scripts/grok-client.py` | Client Python xAI SDK |
+| `scripts/grok-client.cjs` | Client Node.js (fetch API) |
+
+### Commandes Grok
+
+```bash
+# Test client Python (nécessite xai-sdk)
+pip install xai-sdk python-dotenv
+python scripts/grok-client.py
+
+# Test client Node.js
+node scripts/grok-client.cjs
+```
+
+### System Prompt 3A Automation
+
+Le system prompt est défini dans `GROK.md` et inclut:
+- Identité 3A Automation
+- Expertise technique
+- Services offerts
+- Principes de communication
+- Format de réponse
+
+---
+
 ## CHANGELOG
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-17 | 2.2 | **Intégration Grok**: GROK.md créé, clients Python/Node.js ajoutés, XAI_API_KEY dans .env |
 | 2025-12-17 | 2.1 | **Session API Tests**: .env créé, APIs testées (Shopify+Klaviyo OK), 4 scripts production créés, audits générés, correction identité store (azffej-as = Alpha Medical Care) |
 | 2025-12-17 | 2.0 | Refonte complète - Ajout références docs techniques, métriques factuelles |
 | 2025-12-17 | 1.1 | Ajout branding 3A Automation |
