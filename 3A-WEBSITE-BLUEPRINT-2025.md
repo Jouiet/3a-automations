@@ -103,7 +103,13 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 93/100 (màj 17/12/2025 - Session 7)
+SCORE ACTUEL: 95/100 (màj 18/12/2025 - Session 8)
+  - +2: Page À Propos créée (a-propos.html) - Trust building
+  - Page Cas Clients créée (cas-clients.html) - Social proof
+  - Sitemap mis à jour avec nouvelles pages
+  - CSS About page styles ajoutés (300+ lignes)
+
+SCORE SESSION 7: 93/100
   - +2: Design ultra premium futuriste (effets holographiques, animations 3D)
   - Morphing blobs, data streams, scanlines
   - Interactions: tilt cards, magnetic buttons, particle burst
@@ -153,11 +159,11 @@ Détail:
 - Contenu: 8/10 ✅ (pages services, audit, contact créées)
 - Légal: 10/10 ✅ (mentions, confidentialité, cookie consent)
 
-RESTE À FAIRE (7 points):
-- Configurer vrais IDs GA4/GTM (-5 quand fait)
+RESTE À FAIRE (5 points):
+- Configurer vrais IDs GA4/GTM (-5 quand fait) → Nécessite création comptes
 - Configurer Meta Pixel ID réel (-0, placeholder prêt)
 - Configurer LinkedIn Partner ID réel (-0, placeholder prêt)
-- Blog/Case studies (-2 quand fait)
+- Blog articles (-0, page structure prête pour Phase 2)
 ```
 
 ---
@@ -261,8 +267,8 @@ PHASE 3: Arabe (optionnel - ROI à évaluer)
 | P1 | 404 | Page erreur custom | ✅ CRÉÉE |
 | P1 | automations | Catalogue automations | ✅ CRÉÉE |
 | P1 | pricing | Tarifs | ✅ CRÉÉE |
-| P2 | cas-clients | Preuve sociale | ❌ À créer |
-| P2 | a-propos | Trust | ❌ À créer |
+| P2 | cas-clients | Preuve sociale | ✅ CRÉÉE (Session 8) |
+| P2 | a-propos | Trust | ✅ CRÉÉE (Session 8) |
 | P3 | blog | SEO long-terme | ❌ Phase 2 |
 
 ---
