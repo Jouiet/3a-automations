@@ -1,0 +1,199 @@
+{
+  "timestamp": "2025-12-17T16:07:39.189Z",
+  "flows": [
+    {
+      "id": "QU8phk",
+      "name": "Welcome Series - Final Email Discount",
+      "status": "live",
+      "trigger_type": "Added to List",
+      "created": "2025-11-26T22:57:00+00:00",
+      "updated": "2025-11-26T22:57:00+00:00"
+    },
+    {
+      "id": "REgfmx",
+      "name": "Essential Flow Recommendation_",
+      "status": "draft",
+      "trigger_type": "Unconfigured",
+      "created": "2025-11-24T17:23:17+00:00",
+      "updated": "2025-11-24T17:23:17+00:00"
+    },
+    {
+      "id": "SFmLH7",
+      "name": "Customer Winback - Standard (Email & SMS)",
+      "status": "live",
+      "trigger_type": "Added to List",
+      "created": "2025-11-26T22:56:14+00:00",
+      "updated": "2025-11-27T07:03:10+00:00"
+    },
+    {
+      "id": "TxcQgE",
+      "name": "Product Review / Cross-Sell - Standard",
+      "status": "live",
+      "trigger_type": "Metric",
+      "created": "2025-11-26T22:58:33+00:00",
+      "updated": "2025-11-26T22:58:33+00:00"
+    },
+    {
+      "id": "U5HbuD",
+      "name": "Essential Flow Recommendation_",
+      "status": "draft",
+      "trigger_type": "Unconfigured",
+      "created": "2025-11-24T17:23:17+00:00",
+      "updated": "2025-11-24T17:23:17+00:00"
+    },
+    {
+      "id": "Uu9Eev",
+      "name": "Repeat Purchase Nurture - Order Count Split",
+      "status": "live",
+      "trigger_type": "Metric",
+      "created": "2025-11-26T22:57:56+00:00",
+      "updated": "2025-11-26T22:57:56+00:00"
+    },
+    {
+      "id": "VS94Z8",
+      "name": "Abandoned Checkout",
+      "status": "live",
+      "trigger_type": "Metric",
+      "created": "2025-11-24T17:23:17+00:00",
+      "updated": "2025-12-15T12:04:58+00:00"
+    }
+  ],
+  "lists": [
+    {
+      "id": "RPkJu9",
+      "name": "Prévisualiser la liste",
+      "created": "2025-10-15T23:59:35+00:00",
+      "updated": "2025-10-16T00:00:11+00:00"
+    },
+    {
+      "id": "UjqUWD",
+      "name": "Liste de SMS",
+      "created": "2025-10-15T23:59:34+00:00",
+      "updated": "2025-10-15T23:59:34+00:00"
+    },
+    {
+      "id": "VuPKQv",
+      "name": "Liste d’adresses e-mail",
+      "created": "2025-10-15T23:59:34+00:00",
+      "updated": "2025-10-16T00:00:11+00:00"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "RTXYPx",
+      "name": "Failed to Deliver SMS",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "RgWWcU",
+      "name": "Subscribed to SMS Marketing",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "S2Cfjs",
+      "name": "Refunded Order",
+      "integration": "Shopify"
+    },
+    {
+      "id": "SDDhW5",
+      "name": "Ordered Product",
+      "integration": "Shopify"
+    },
+    {
+      "id": "SGfy8W",
+      "name": "Clicked email to unsubscribe",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "Sd5g6W",
+      "name": "Subscribed to List",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "SsmM6L",
+      "name": "Opened Text",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "T5nPHp",
+      "name": "Sent SMS",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "TP48PV",
+      "name": "Checkout Started",
+      "integration": "Shopify"
+    },
+    {
+      "id": "Tc36di",
+      "name": "Active on Site",
+      "integration": "API"
+    },
+    {
+      "id": "URNHdS",
+      "name": "Received Automated Response SMS",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "UTPHnp",
+      "name": "Opened Email",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "UYsXHM",
+      "name": "Clicked Email",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "Us5bsy",
+      "name": "Placed Order",
+      "integration": "Shopify"
+    },
+    {
+      "id": "UuFrDr",
+      "name": "Marked Email as Spam",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "W7QNt8",
+      "name": "Received SMS",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "WEeAJm",
+      "name": "Failed to Deliver Automated Response SMS",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "WGfASS",
+      "name": "Received Email",
+      "integration": "Klaviyo"
+    },
+    {
+      "id": "WLSReg",
+      "name": "Viewed Product",
+      "integration": "API"
+    },
+    {
+      "id": "Wev4X3",
+      "name": "Cancelled Order",
+      "integration": "Shopify"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "FLOWS",
+      "issue": "Flows essentiels manquants: Browse Abandonment, Post-Purchase, Win-Back",
+      "action": "Créer les flows manquants pour capturer le revenue automatisé",
+      "impact": "+20-40% revenue email automatisé"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "FLOWS",
+      "issue": "2 flow(s) en brouillon",
+      "action": "Finaliser et activer les flows en brouillon",
+      "impact": "Revenue email non capturé"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/.mcp.schema.json",
+  "mcpServers": {
+
+    "google-analytics": {
+      "command": "pipx",
+      "args": ["run", "analytics-mcp"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GOOGLE_PROJECT_ID": "${GOOGLE_PROJECT_ID}"
+      },
+      "description": "Google Analytics 4 - Query reports, dimensions, metrics"
+    },
+
+    "google-sheets": {
+      "command": "npx",
+      "args": ["-y", "google-sheets-mcp"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}"
+      },
+      "description": "Google Sheets - Read/write spreadsheets"
+    },
+
+    "klaviyo": {
+      "command": "uvx",
+      "args": ["klaviyo-mcp-server@latest"],
+      "env": {
+        "PRIVATE_API_KEY": "${KLAVIYO_API_KEY}",
+        "READ_ONLY": "false",
+        "ALLOW_USER_GENERATED_CONTENT": "true"
+      },
+      "description": "Klaviyo - Email flows, campaigns, segments, lists"
+    },
+
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"],
+      "description": "Chrome DevTools - Browser debugging, screenshots, network, console"
+    },
+
+    "shopify-dev": {
+      "command": "npx",
+      "args": ["-y", "@shopify/dev-mcp@latest"],
+      "description": "Shopify Dev - API docs, schema exploration, Functions"
+    },
+
+    "shopify-admin": {
+      "command": "npx",
+      "args": ["-y", "@ajackus/shopify-mcp-server"],
+      "env": {
+        "SHOPIFY_STORE_DOMAIN": "${SHOPIFY_STORE}",
+        "SHOPIFY_ACCESS_TOKEN": "${SHOPIFY_ACCESS_TOKEN}"
+      },
+      "description": "Shopify Admin - Products, orders, customers, inventory"
+    },
+
+    "meta-ads": {
+      "command": "npx",
+      "args": ["-y", "@smithery/cli", "install", "@gomarble-ai/facebook-ads-mcp-server", "--client", "claude"],
+      "env": {
+        "META_ACCESS_TOKEN": "${META_PAGE_ACCESS_TOKEN}"
+      },
+      "description": "Meta Ads - Facebook/Instagram campaigns, analytics"
+    },
+
+    "apify": {
+      "command": "npx",
+      "args": ["-y", "@apify/actors-mcp-server"],
+      "env": {
+        "APIFY_TOKEN": "${APIFY_TOKEN}"
+      },
+      "description": "Apify - Web scraping, Instagram, Facebook, Google Shopping"
+    }
+  }
+}
