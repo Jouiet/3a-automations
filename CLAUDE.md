@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 2.3 | Dernière mise à jour: 2025-12-17
+## Version: 2.5 | Dernière mise à jour: 2025-12-17
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -506,6 +506,13 @@ COMPLÉTÉ (17/12/2025 - Session 2):
 ✅ Mettre à jour CSS landing page avec couleurs marque
 ✅ Pusher tous les fichiers sur GitHub
 
+COMPLÉTÉ (17/12/2025 - Session 3):
+✅ Recherche web factuelle: tendances animation 2025, outils AI
+✅ Créer AI-PROMPTS-LANDING-PAGE-2025.md avec prompts optimisés
+✅ Comparer outils: v0.dev, Bolt.new, Lovable.dev, Hostinger AI
+✅ Identifier GSAP ScrollTrigger gratuit depuis 2025 (acquisition Webflow)
+✅ Documenter tendances: purposeful motion, micro-interactions, glassmorphism
+
 IMMÉDIAT (Prochaine session):
 □ Créer Google Service Account
 □ Obtenir XAI_API_KEY (console.x.ai)
@@ -571,6 +578,7 @@ Le system prompt est défini dans `GROK.md` et inclut:
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-17 | 2.5 | **AI Prompts**: AI-PROMPTS-LANDING-PAGE-2025.md créé, recherche web factuelle (v0.dev, Bolt.new, Hostinger AI, GSAP), tendances 2025 documentées |
 | 2025-12-17 | 2.4 | **Branding**: Couleurs exactes extraites du logo, CSS màj, 3A-BRANDING-GUIDE.md |
 | 2025-12-17 | 2.3 | **GitHub**: Repo connecté github.com/Jouiet/3a-automations, logos ajoutés |
 | 2025-12-17 | 2.2 | **Intégration Grok**: GROK.md créé, clients Python/Node.js ajoutés, XAI_API_KEY dans .env |
