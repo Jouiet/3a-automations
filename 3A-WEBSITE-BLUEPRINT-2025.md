@@ -78,7 +78,7 @@
 | Formulaire fonctionnel | ✅ FONCTIONNEL | n8n webhook intégré (audit-gratuit + contact) |
 | GA4 | ✅ INTÉGRÉ | G-XXXXXXXXXX (placeholder - à configurer) |
 | GTM | ✅ INTÉGRÉ | GTM-XXXXXXX (placeholder - à configurer) |
-| Pixels (FB, LinkedIn) | ❌ Absent | 0% retargeting possible |
+| Pixels (FB, LinkedIn) | ✅ INTÉGRÉS | Meta Pixel + LinkedIn Insight (placeholders) |
 | robots.txt | ✅ CRÉÉ | `/landing-page-hostinger/robots.txt` |
 | sitemap.xml | ✅ CRÉÉ | `/landing-page-hostinger/sitemap.xml` (toutes pages) |
 | llm.txt | ✅ CRÉÉ | `/landing-page-hostinger/llm.txt` |
@@ -103,7 +103,11 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 90/100 (màj 17/12/2025 - Session 5)
+SCORE ACTUEL: 91/100 (màj 17/12/2025 - Session 6)
+  - +1: LinkedIn Insight Tag ajouté à toutes les pages (placeholder à configurer)
+  - Tech stack complet représenté (hero, orbital 3 rings, 5 catégories)
+
+SCORE SESSION 5: 90/100
   - +2: Meta Pixel ajouté à toutes les pages (placeholder à configurer)
   - +0: Formulaires avec fallback mailto (robustesse)
 
@@ -139,15 +143,15 @@ Détail:
 - CSS/Design: 15/15 ✅ (futuriste, favicon, images)
 - JavaScript: 10/10 ✅ (mobile nav fonctionnelle)
 - SEO Technique: 15/15 ✅ (robots, sitemap, schema, OG, all pages)
-- Tracking: 10/15 ⚠️ (GA4, GTM intégrés - IDs à configurer, pixels absents)
+- Tracking: 11/15 ⚠️ (GA4, GTM, Meta Pixel, LinkedIn intégrés - IDs placeholders)
 - Lead Capture: 10/10 ✅ (formulaires n8n webhook fonctionnels)
 - Contenu: 8/10 ✅ (pages services, audit, contact créées)
 - Légal: 10/10 ✅ (mentions, confidentialité, cookie consent)
 
-RESTE À FAIRE (10 points):
+RESTE À FAIRE (9 points):
 - Configurer vrais IDs GA4/GTM (-5 quand fait)
 - Configurer Meta Pixel ID réel (-0, placeholder prêt)
-- Ajouter pixel LinkedIn (-1 quand fait)
+- Configurer LinkedIn Partner ID réel (-0, placeholder prêt)
 - Blog/Case studies (-2 quand fait)
 - Klaviyo integration directe (-2 quand fait)
 ```
