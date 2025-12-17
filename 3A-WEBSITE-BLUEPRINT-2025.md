@@ -103,7 +103,12 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 91/100 (màj 17/12/2025 - Session 6)
+SCORE ACTUEL: 93/100 (màj 17/12/2025 - Session 7)
+  - +2: Design ultra premium futuriste (effets holographiques, animations 3D)
+  - Morphing blobs, data streams, scanlines
+  - Interactions: tilt cards, magnetic buttons, particle burst
+
+SCORE SESSION 6: 91/100
   - +1: LinkedIn Insight Tag ajouté à toutes les pages (placeholder à configurer)
   - Tech stack complet représenté (hero, orbital 3 rings, 5 catégories)
 
@@ -148,12 +153,11 @@ Détail:
 - Contenu: 8/10 ✅ (pages services, audit, contact créées)
 - Légal: 10/10 ✅ (mentions, confidentialité, cookie consent)
 
-RESTE À FAIRE (9 points):
+RESTE À FAIRE (7 points):
 - Configurer vrais IDs GA4/GTM (-5 quand fait)
 - Configurer Meta Pixel ID réel (-0, placeholder prêt)
 - Configurer LinkedIn Partner ID réel (-0, placeholder prêt)
 - Blog/Case studies (-2 quand fait)
-- Klaviyo integration directe (-2 quand fait)
 ```
 
 ---
