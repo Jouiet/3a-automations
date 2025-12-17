@@ -492,18 +492,25 @@ node scripts/audit-klaviyo-flows.cjs
 ## PROCHAINES ACTIONS PRIORITAIRES
 
 ```
-COMPLÉTÉ (17/12/2025):
+COMPLÉTÉ (17/12/2025 - Session 1):
 ✅ Créer fichier .env avec vraies credentials
 ✅ Tester connexion Shopify API
 ✅ Tester connexion Klaviyo API
 ✅ Créer scripts audit production
 ✅ Générer premiers rapports d'audit
 
+COMPLÉTÉ (17/12/2025 - Session 2):
+✅ Connecter GitHub repo (github.com/Jouiet/3a-automations)
+✅ Intégrer Grok/xAI (GROK.md + clients Python/Node.js)
+✅ Extraire branding exact du logo officiel (3A-BRANDING-GUIDE.md)
+✅ Mettre à jour CSS landing page avec couleurs marque
+✅ Pusher tous les fichiers sur GitHub
+
 IMMÉDIAT (Prochaine session):
-□ Créer Google Service Account (docs/GUIDE-GOOGLE-SERVICE-ACCOUNT.md)
-□ Résoudre conflit git avec repo parent Mbnb-Code
-□ Push vers GitHub
+□ Créer Google Service Account
+□ Obtenir XAI_API_KEY (console.x.ai)
 □ Trouver credentials Henderson Shop (manquantes)
+□ Déployer landing page sur Hostinger
 
 CETTE SEMAINE:
 □ Envoyer emails restart aux 3 clients
@@ -564,6 +571,7 @@ Le system prompt est défini dans `GROK.md` et inclut:
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-17 | 2.4 | **Branding**: Couleurs exactes extraites du logo, CSS màj, 3A-BRANDING-GUIDE.md |
 | 2025-12-17 | 2.3 | **GitHub**: Repo connecté github.com/Jouiet/3a-automations, logos ajoutés |
 | 2025-12-17 | 2.2 | **Intégration Grok**: GROK.md créé, clients Python/Node.js ajoutés, XAI_API_KEY dans .env |
 | 2025-12-17 | 2.1 | **Session API Tests**: .env créé, APIs testées (Shopify+Klaviyo OK), 4 scripts production créés, audits générés, correction identité store (azffej-as = Alpha Medical Care) |

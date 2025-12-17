@@ -79,14 +79,14 @@
 | GA4 | ❌ Absent | 0% tracking visiteurs |
 | GTM | ❌ Absent | 0% tracking événements |
 | Pixels (FB, LinkedIn) | ❌ Absent | 0% retargeting possible |
-| robots.txt | ❌ Absent | SEO technique incomplet |
-| sitemap.xml | ❌ Absent | Indexation non optimisée |
-| llm.txt | ❌ Absent | AEO non implémenté |
+| robots.txt | ✅ CRÉÉ | `/landing-page-hostinger/robots.txt` |
+| sitemap.xml | ✅ CRÉÉ | `/landing-page-hostinger/sitemap.xml` |
+| llm.txt | ✅ CRÉÉ | `/landing-page-hostinger/llm.txt` |
 | Schema.org | ❌ Absent | Rich snippets absents |
 | Open Graph | ❌ Absent | Partage social non optimisé |
 | Favicon | ❌ Absent | Branding incomplet |
 | Cookies consent | ❌ Absent | Non conforme RGPD |
-| Pages légales | ❌ Absent | Non conforme légalement |
+| Pages légales | ✅ CRÉÉ | `/landing-page-hostinger/legal/` (mentions + confidentialité) |
 | Blog | ❌ Absent | 0 contenu SEO |
 | Case studies | ❌ Absent | 0 preuve sociale |
 | Navigation mobile | ❌ Cassée | display: none (menu burger absent) |
@@ -96,7 +96,16 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 15/100
+SCORE ACTUEL: 35/100 (màj 17/12/2025 - Session 2)
+  - +5: robots.txt créé
+  - +5: sitemap.xml créé
+  - +5: llm.txt créé (AEO)
+  - +5: Pages légales créées
+  - +5: Logo officiel créé
+  - +5: Branding/CSS mis à jour
+  - +5: GitHub repo connecté
+
+SCORE PRÉCÉDENT: 15/100
 
 Détail:
 - Structure HTML: 15/15 ✅
@@ -319,15 +328,37 @@ SOLUTION: Collecter métriques et testimonials des clients existants
 
 ## 5. DESIGN UI/UX
 
-### 5.1 Design System Existant
+### 5.1 Design System - COULEURS OFFICIELLES (Extraites du Logo 17/12/2025)
 
 ```css
-/* COULEURS (à conserver) */
---primary: #2563eb;        /* Bleu principal */
---primary-dark: #1d4ed8;   /* Bleu hover */
---accent: #10b981;         /* Vert accent (checkmarks) */
---secondary: #0f172a;      /* Noir texte */
---bg-light: #f8fafc;       /* Fond gris clair */
+/* ═══════════════════════════════════════════════════════════════════════
+   COULEURS MARQUE - Extraites du logo officiel via ImageMagick
+   Référence: /3A-BRANDING-GUIDE.md
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* PRIMARY (Logo Gradient) */
+--primary: #4FBAF1;          /* Cyan Primary - CTAs, accents */
+--primary-dark: #2B6685;     /* Teal Blue - hover states */
+--primary-light: #ADD4F0;    /* Light Blue - highlights */
+--primary-ice: #E4F4FC;      /* Ice White - text on dark */
+
+/* BACKGROUNDS (Logo Background) */
+--secondary: #191E35;        /* Navy Deep - main dark bg */
+--bg-navy: #1B2F54;          /* Navy Blue - secondary dark */
+--bg-teal: #254E70;          /* Dark Teal - tertiary */
+--bg-light: #f8fafc;         /* Light gray - sections */
+
+/* ACCENT */
+--accent: #10B981;           /* Success green (checkmarks) */
+
+/* TEXT */
+--text-primary: #191E35;     /* Navy Deep */
+--text-secondary: #516C86;   /* Blue Gray */
+--text-muted: #4E4962;       /* Muted Purple */
+
+/* GRADIENT PRINCIPAL */
+--gradient-primary: linear-gradient(180deg, #E4F4FC 0%, #ADD4F0 30%, #4FBAF1 100%);
+--gradient-bg-dark: linear-gradient(135deg, #191E35 0%, #1B2F54 50%, #254E70 100%);
 
 /* TYPOGRAPHIE */
 Font: Inter (Google Fonts)
@@ -338,12 +369,14 @@ Base: 1rem (16px)
 Scale: xs(4px), sm(8px), md(16px), lg(24px), xl(32px), 2xl(48px), 3xl(64px)
 ```
 
+**Note:** CSS déjà mis à jour dans `/landing-page-hostinger/styles.css` (17/12/2025)
+
 ### 5.2 Améliorations UI Requises
 
 | Élément | Status Actuel | Action |
 |---------|---------------|--------|
-| Logo | Texte "3A" | Créer logo SVG simple |
-| Favicon | Absent | Créer favicon (16x16, 32x32, apple-touch) |
+| Logo | ✅ CRÉÉ | `/3a-automations Logo/` (PNG, SVG, Transparent) |
+| Favicon | ❌ Absent | Extraire de l'icône logo |
 | Images | Aucune | Ajouter illustrations/icons SVG |
 | Dark mode | Absent | Phase 2 (optionnel) |
 | Mobile nav | Cassée | Ajouter hamburger menu |
