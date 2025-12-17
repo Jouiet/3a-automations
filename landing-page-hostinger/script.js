@@ -78,11 +78,19 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ───────────────────────────────────────────────────────────────────────────
-  // FORM HANDLING - n8n Webhook Integration
+  // FORM HANDLING - Multi-Fallback System
+  // Priorité: 1. Webhook n8n → 2. Mailto fallback
   // ───────────────────────────────────────────────────────────────────────────
   const form = document.getElementById('audit-form');
   const formSuccess = document.getElementById('form-success');
   const formError = document.getElementById('form-error');
+
+  // Configuration
+  const FORM_CONFIG = {
+    webhookUrl: 'https://n8n.srv1168256.hstgr.cloud/webhook/audit-request',
+    fallbackEmail: 'contact@3a-automation.com',
+    timeout: 5000 // 5 seconds
+  };
 
   if (form) {
     // Set timestamp on load
@@ -121,55 +129,88 @@ document.addEventListener('DOMContentLoaded', function() {
       data.referrer = document.referrer || 'direct';
       data.page = window.location.href;
 
+      // Try webhook first, then fallback to mailto
+      let success = false;
+
       try {
-        const response = await fetch(form.action, {
+        // Method 1: Try webhook with timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), FORM_CONFIG.timeout);
+
+        const response = await fetch(FORM_CONFIG.webhookUrl, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+          signal: controller.signal
         });
 
+        clearTimeout(timeoutId);
+
         if (response.ok) {
-          // Success
-          form.style.display = 'none';
-          if (formSuccess) {
-            formSuccess.style.display = 'flex';
-            formSuccess.classList.add('animated');
-          }
-
-          // Track conversion (GA4)
-          if (typeof gtag === 'function') {
-            gtag('event', 'generate_lead', {
-              event_category: 'engagement',
-              event_label: data.service || 'audit-request',
-              value: 1
-            });
-          }
-
-          // Reset form for potential future use
-          form.reset();
-        } else {
-          throw new Error('Server error');
+          success = true;
         }
-      } catch (error) {
-        console.error('Form submission error:', error);
+      } catch (webhookError) {
+        console.log('Webhook unavailable, using mailto fallback');
+      }
 
+      // Fallback: Open mailto with pre-filled data
+      if (!success) {
+        const subject = encodeURIComponent(`[3A Automation] ${data.subject || 'Demande'} - ${data.name}`);
+        const body = encodeURIComponent(
+          `Nom: ${data.name || 'Non spécifié'}\n` +
+          `Email: ${data.email || 'Non spécifié'}\n` +
+          `Entreprise: ${data.company || 'Non spécifié'}\n` +
+          `Site web: ${data.website || 'Non spécifié'}\n` +
+          `Sujet: ${data.subject || 'Non spécifié'}\n` +
+          `Plateforme: ${data.platform || 'Non spécifié'}\n` +
+          `Pays: ${data.country || 'Non spécifié'}\n` +
+          `\n--- Message ---\n${data.message || data.challenges || 'Pas de message'}\n` +
+          `\n--- Métadonnées ---\n` +
+          `Source: ${data.source || 'website'}\n` +
+          `Page: ${data.page}\n` +
+          `Date: ${data.timestamp}`
+        );
+
+        // Open mailto
+        window.location.href = `mailto:${FORM_CONFIG.fallbackEmail}?subject=${subject}&body=${body}`;
+        success = true; // Consider it success since user can send
+      }
+
+      if (success) {
+        // Success
+        form.style.display = 'none';
+        if (formSuccess) {
+          formSuccess.style.display = 'flex';
+          formSuccess.classList.add('animated');
+        }
+
+        // Track conversion (GA4)
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', {
+            event_category: 'engagement',
+            event_label: data.subject || data.service || 'audit-request',
+            value: 1
+          });
+        }
+
+        // Reset form for potential future use
+        form.reset();
+      } else {
         // Show error message
         if (formError) {
           formError.style.display = 'flex';
           formError.classList.add('animated');
         }
-
-        // Restore button
-        if (btnText) {
-          btnText.textContent = originalText;
-        } else {
-          submitBtn.textContent = originalText;
-        }
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
       }
+
+      // Restore button
+      if (btnText) {
+        btnText.textContent = originalText;
+      } else {
+        submitBtn.textContent = originalText;
+      }
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
     });
   }
 
