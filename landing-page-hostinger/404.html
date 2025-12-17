@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page non trouvée - 3A Automation">
+  <meta name="robots" content="noindex, nofollow">
+  <title>404 - Page non trouvée | 3A Automation</title>
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--spacing-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .error-content {
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .error-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 700;
+      background: var(--gradient-cyber);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: var(--spacing-lg);
+      animation: glitch 2s infinite;
+    }
+
+    @keyframes glitch {
+      0%, 100% { transform: translateX(0); opacity: 1; }
+      10% { transform: translateX(-2px); }
+      20% { transform: translateX(2px); opacity: 0.9; }
+      30% { transform: translateX(-2px); }
+      40% { transform: translateX(2px); }
+      50% { transform: translateX(0); opacity: 1; }
+    }
+
+    .error-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .error-message {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-2xl);
+      line-height: 1.6;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .error-links {
+      margin-top: var(--spacing-3xl);
+      padding-top: var(--spacing-xl);
+      border-top: 1px solid rgba(79, 186, 241, 0.1);
+    }
+
+    .error-links p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .error-links-list {
+      display: flex;
+      gap: var(--spacing-lg);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .error-links-list a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: color 0.2s ease;
+    }
+
+    .error-links-list a:hover {
+      color: var(--accent);
+    }
+
+    /* Decorative elements */
+    .error-decoration {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79, 186, 241, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .error-decoration-1 {
+      top: -200px;
+      right: -100px;
+    }
+
+    .error-decoration-2 {
+      bottom: -200px;
+      left: -100px;
+    }
+
+    .terminal-hint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      background: rgba(79, 186, 241, 0.05);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(79, 186, 241, 0.1);
+      margin-top: var(--spacing-xl);
+      display: inline-block;
+    }
+
+    .terminal-hint code {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Cyber Background -->
+  <div class="cyber-bg">
+    <div class="cyber-grid"></div>
+    <div class="cyber-glow cyber-glow-1"></div>
+    <div class="cyber-glow cyber-glow-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M20 4L36 34H4L20 4Z" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
+            <path d="M20 12L28 28H12L20 12Z" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4FBAF1"/>
+                <stop offset="100%" stop-color="#2B6685"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-text">3A</span>
+          <span class="logo-sub">AUTOMATION</span>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- Error Page -->
+  <main class="error-page">
+    <div class="error-decoration error-decoration-1"></div>
+    <div class="error-decoration error-decoration-2"></div>
+
+    <div class="error-content">
+      <div class="error-code">404</div>
+      <h1 class="error-title">Page non trouvée</h1>
+      <p class="error-message">
+        La page que vous cherchez n'existe pas ou a été déplacée.
+        Pas de panique, même les meilleurs automatisations ont besoin de redirection parfois.
+      </p>
+
+      <div class="error-actions">
+        <a href="/" class="btn-cyber">
+          <span class="btn-text">Retour à l'accueil</span>
+          <span class="btn-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <span class="btn-glow"></span>
+        </a>
+        <a href="/#contact" class="btn-cyber btn-cyber-outline">
+          <span class="btn-text">Nous contacter</span>
+          <span class="btn-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </span>
+          <span class="btn-glow"></span>
+        </a>
+      </div>
+
+      <div class="terminal-hint">
+        <code>$ redirect --to /</code> recommended
+      </div>
+
+      <div class="error-links">
+        <p>Pages populaires :</p>
+        <div class="error-links-list">
+          <a href="/services/ecommerce.html">E-commerce</a>
+          <a href="/services/pme.html">PME</a>
+          <a href="/automations.html">Automations</a>
+          <a href="/pricing.html">Tarifs</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/script.js"></script>
+</body>
+</html>

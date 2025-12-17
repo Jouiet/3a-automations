@@ -51,8 +51,33 @@
     "serviceType": ["E-commerce Automation", "Marketing Analytics", "AI Integration"]
   }
   </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      'anonymize_ip': true,
+      'cookie_flags': 'SameSite=None;Secure'
+    });
+  </script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <!-- Cyber Background -->
   <div class="cyber-bg">
     <div class="cyber-grid"></div>
@@ -493,21 +518,32 @@
           <h2 class="cta-title">Prêt à scaler?</h2>
           <p class="cta-desc">Audit gratuit. Rapport détaillé sous 48h. Zéro engagement.</p>
 
-          <form class="form-ultra" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form class="form-ultra" id="audit-form" action="https://n8n.srv1168256.hstgr.cloud/webhook/audit-request" method="POST">
             <div class="form-grid">
               <div class="form-field">
-                <input type="text" name="name" id="name" required placeholder=" ">
+                <input type="text" name="name" id="name" required placeholder=" " autocomplete="name">
                 <label for="name">Nom</label>
                 <span class="field-border"></span>
               </div>
               <div class="form-field">
-                <input type="email" name="email" id="email" required placeholder=" ">
+                <input type="email" name="email" id="email" required placeholder=" " autocomplete="email">
                 <label for="email">Email</label>
                 <span class="field-border"></span>
               </div>
               <div class="form-field full-width">
-                <input type="url" name="website" id="website" required placeholder=" ">
+                <input type="url" name="website" id="website" required placeholder=" " autocomplete="url">
                 <label for="website">URL de votre site</label>
+                <span class="field-border"></span>
+              </div>
+              <div class="form-field full-width">
+                <select name="service" id="service" required>
+                  <option value="" disabled selected>Type de service</option>
+                  <option value="audit-shopify">Audit Shopify</option>
+                  <option value="audit-klaviyo">Audit Klaviyo</option>
+                  <option value="automation-ecommerce">Automation E-commerce</option>
+                  <option value="automation-pme">Automation PME</option>
+                  <option value="consultation">Consultation gratuite</option>
+                </select>
                 <span class="field-border"></span>
               </div>
               <div class="form-field full-width">
@@ -516,6 +552,8 @@
                 <span class="field-border"></span>
               </div>
             </div>
+            <input type="hidden" name="source" value="3a-automation-website">
+            <input type="hidden" name="timestamp" id="form-timestamp">
             <button type="submit" class="btn-cyber btn-submit">
               <span class="btn-text">Demander mon audit gratuit</span>
               <span class="btn-icon">
@@ -527,7 +565,26 @@
             </button>
           </form>
 
-          <p class="form-note-ultra">Réponse garantie sous 24-48h</p>
+          <!-- Success Message -->
+          <div id="form-success" class="form-message success" style="display: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <span>Demande envoyée! Nous vous répondons sous 24-48h.</span>
+          </div>
+
+          <!-- Error Message -->
+          <div id="form-error" class="form-message error" style="display: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="15" y1="9" x2="9" y2="15"/>
+              <line x1="9" y1="9" x2="15" y2="15"/>
+            </svg>
+            <span>Erreur d'envoi. Réessayez ou contactez-nous directement.</span>
+          </div>
+
+          <p class="form-note-ultra">Réponse garantie sous 24-48h • <a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a></p>
         </div>
       </div>
     </div>
@@ -600,6 +657,19 @@
       </div>
     </div>
   </footer>
+
+  <!-- Cookie Consent Banner RGPD -->
+  <div id="cookie-consent" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+      <div class="cookie-text">
+        <p>Nous utilisons des cookies pour améliorer votre expérience et analyser le trafic. <a href="/privacy.html">Politique de confidentialité</a></p>
+      </div>
+      <div class="cookie-actions">
+        <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">Refuser</button>
+        <button id="cookie-accept" class="cookie-btn cookie-btn-primary">Accepter</button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
