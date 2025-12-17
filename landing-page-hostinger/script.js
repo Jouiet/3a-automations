@@ -78,16 +78,31 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ───────────────────────────────────────────────────────────────────────────
-  // FORM HANDLING
+  // FORM HANDLING - n8n Webhook Integration
   // ───────────────────────────────────────────────────────────────────────────
-  const form = document.querySelector('.form-ultra');
+  const form = document.getElementById('audit-form');
+  const formSuccess = document.getElementById('form-success');
+  const formError = document.getElementById('form-error');
 
   if (form) {
-    form.addEventListener('submit', function(e) {
+    // Set timestamp on load
+    const timestampField = document.getElementById('form-timestamp');
+    if (timestampField) {
+      timestampField.value = new Date().toISOString();
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
       const submitBtn = form.querySelector('button[type="submit"]');
       const btnText = submitBtn.querySelector('.btn-text');
       const originalText = btnText ? btnText.textContent : submitBtn.textContent;
 
+      // Hide previous messages
+      if (formSuccess) formSuccess.style.display = 'none';
+      if (formError) formError.style.display = 'none';
+
+      // Loading state
       if (btnText) {
         btnText.textContent = 'Envoi en cours...';
       } else {
@@ -96,8 +111,57 @@ document.addEventListener('DOMContentLoaded', function() {
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.7';
 
-      // Re-enable after form submission (handled by Formspree)
-      setTimeout(() => {
+      // Collect form data
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Add metadata
+      data.timestamp = new Date().toISOString();
+      data.userAgent = navigator.userAgent;
+      data.referrer = document.referrer || 'direct';
+      data.page = window.location.href;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          // Success
+          form.style.display = 'none';
+          if (formSuccess) {
+            formSuccess.style.display = 'flex';
+            formSuccess.classList.add('animated');
+          }
+
+          // Track conversion (GA4)
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              event_category: 'engagement',
+              event_label: data.service || 'audit-request',
+              value: 1
+            });
+          }
+
+          // Reset form for potential future use
+          form.reset();
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+
+        // Show error message
+        if (formError) {
+          formError.style.display = 'flex';
+          formError.classList.add('animated');
+        }
+
+        // Restore button
         if (btnText) {
           btnText.textContent = originalText;
         } else {
@@ -105,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
-      }, 3000);
+      }
     });
   }
 
@@ -338,6 +402,87 @@ document.addEventListener('DOMContentLoaded', function() {
   // Hide cursor glow on mobile
   if ('ontouchstart' in window) {
     cursorGlow.style.display = 'none';
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // COOKIE CONSENT - RGPD COMPLIANCE
+  // ───────────────────────────────────────────────────────────────────────────
+  const cookieBanner = document.getElementById('cookie-consent');
+  const cookieAccept = document.getElementById('cookie-accept');
+  const cookieReject = document.getElementById('cookie-reject');
+
+  const COOKIE_CONSENT_KEY = '3a_cookie_consent';
+  const COOKIE_CONSENT_DURATION = 365; // days
+
+  // Check if user already made a choice
+  const cookieConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
+
+  if (!cookieConsent && cookieBanner) {
+    // Show banner after 1 second
+    setTimeout(() => {
+      cookieBanner.style.display = 'block';
+    }, 1000);
+  } else if (cookieConsent === 'accepted') {
+    // Enable tracking
+    enableTracking();
+  }
+
+  function setCookieConsent(value) {
+    localStorage.setItem(COOKIE_CONSENT_KEY, value);
+    if (cookieBanner) {
+      cookieBanner.style.animation = 'slideUp 0.3s ease reverse forwards';
+      setTimeout(() => {
+        cookieBanner.style.display = 'none';
+      }, 300);
+    }
+  }
+
+  function enableTracking() {
+    // Enable GA4 tracking
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted',
+        'ad_storage': 'granted'
+      });
+    }
+
+    // Push consent event to dataLayer for GTM
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'cookie_consent_granted',
+      'consent_type': 'all'
+    });
+  }
+
+  function disableTracking() {
+    // Disable GA4 tracking
+    if (typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied'
+      });
+    }
+
+    // Push rejection event to dataLayer
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'cookie_consent_rejected',
+      'consent_type': 'none'
+    });
+  }
+
+  if (cookieAccept) {
+    cookieAccept.addEventListener('click', () => {
+      setCookieConsent('accepted');
+      enableTracking();
+    });
+  }
+
+  if (cookieReject) {
+    cookieReject.addEventListener('click', () => {
+      setCookieConsent('rejected');
+      disableTracking();
+    });
   }
 
   // ───────────────────────────────────────────────────────────────────────────
