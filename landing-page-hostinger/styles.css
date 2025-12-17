@@ -545,8 +545,8 @@ section {
 
 .footer-content {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: var(--spacing-3xl);
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: var(--spacing-2xl);
   margin-bottom: var(--spacing-3xl);
 }
 
@@ -1060,6 +1060,21 @@ section {
    ───────────────────────────────────────────────────────────────────────────── */
 .services {
   background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-light) 100%);
+}
+
+/* PME Services - Different visual style */
+.services-pme {
+  background: linear-gradient(180deg, var(--bg-light) 0%, #e8f4f8 100%);
+  border-top: 1px solid rgba(79, 186, 241, 0.1);
+}
+
+.services-pme .section-badge {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #ffffff;
+}
+
+.services-pme .service-icon {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
 }
 
 .service-card {
