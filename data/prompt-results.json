@@ -1,0 +1,105 @@
+{
+  "prompts": {
+    "PROMPT-HERO-001": {
+      "id": "PROMPT-HERO-001",
+      "category": "hero",
+      "tool": "leonardo",
+      "status": "validated",
+      "iterations": 1,
+      "currentScore": 8.3,
+      "bestScore": 8.3,
+      "tests": [
+        "PROMPT-HERO-001-test-1"
+      ],
+      "created": "2025-12-17T23:23:47.941Z",
+      "validated": true
+    },
+    "PROMPT-HERO-002": {
+      "id": "PROMPT-HERO-002",
+      "category": "icons",
+      "tool": "leonardo",
+      "status": "pending",
+      "iterations": 0,
+      "currentScore": null,
+      "bestScore": null,
+      "tests": [],
+      "created": "2025-12-17T23:23:48.308Z",
+      "validated": false
+    },
+    "PROMPT-PERSONA-001": {
+      "id": "PROMPT-PERSONA-001",
+      "category": "persona",
+      "tool": "leonardo",
+      "status": "needs_iteration",
+      "iterations": 1,
+      "currentScore": 6.3,
+      "bestScore": 6.3,
+      "tests": [
+        "PROMPT-PERSONA-001-test-1"
+      ],
+      "created": "2025-12-17T23:23:48.662Z",
+      "validated": false
+    },
+    "PROMPT-SERVICE-001": {
+      "id": "PROMPT-SERVICE-001",
+      "category": "service",
+      "tool": "leonardo",
+      "status": "pending",
+      "iterations": 0,
+      "currentScore": null,
+      "bestScore": null,
+      "tests": [],
+      "created": "2025-12-17T23:23:49.031Z",
+      "validated": false
+    },
+    "PROMPT-VIDEO-001": {
+      "id": "PROMPT-VIDEO-001",
+      "category": "video",
+      "tool": "kling",
+      "status": "pending",
+      "iterations": 0,
+      "currentScore": null,
+      "bestScore": null,
+      "tests": [],
+      "created": "2025-12-17T23:23:49.390Z",
+      "validated": false
+    }
+  },
+  "tests": [
+    {
+      "id": "PROMPT-HERO-001-test-1",
+      "promptId": "PROMPT-HERO-001",
+      "iteration": 1,
+      "timestamp": "2025-12-17T23:23:58.466Z",
+      "scores": {
+        "pertinence": 9,
+        "qualite": 8,
+        "coherence": 8,
+        "utilisabilite": 9,
+        "originalite": 7
+      },
+      "finalScore": 8.3,
+      "notes": "Excellent résultat, couleurs parfaites"
+    },
+    {
+      "id": "PROMPT-PERSONA-001-test-1",
+      "promptId": "PROMPT-PERSONA-001",
+      "iteration": 1,
+      "timestamp": "2025-12-17T23:24:09.824Z",
+      "scores": {
+        "pertinence": 7,
+        "qualite": 6,
+        "coherence": 5,
+        "utilisabilite": 7,
+        "originalite": 6
+      },
+      "finalScore": 6.3,
+      "notes": "Couleurs incorrectes, style trop générique"
+    }
+  ],
+  "metadata": {
+    "created": "2025-12-17T23:23:47.938Z",
+    "lastUpdated": "2025-12-17T23:24:10.090Z",
+    "version": "1.0"
+  }
+}
