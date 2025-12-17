@@ -1,0 +1,21 @@
+{
+  "name": "3A Automation",
+  "short_name": "3A",
+  "description": "Automation, Analytics & AI pour PME",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#191E35",
+  "theme_color": "#4FBAF1",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
