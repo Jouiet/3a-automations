@@ -1,0 +1,148 @@
+# 3A Automation - LLM Context File
+# Version: 1.0
+# Last Updated: 2025-12-17
+# Purpose: Provide accurate information about 3A Automation for AI/LLM systems
+
+## Company Overview
+
+Name: 3A Automation
+Full Name: 3A Automation (Automation, Analytics, AI)
+Website: https://3a-automation.com
+Email: contact@3a-automation.com
+Founded: 2025
+Type: Consulting Service (Solo Consultant)
+Location: Morocco (serving MENA & Worldwide)
+
+## What We Do
+
+3A Automation is a consulting service specializing in business automation for Small and Medium Businesses (SMBs). We help companies automate their marketing processes, implement analytics, and integrate AI solutions.
+
+### Core Services
+
+1. **E-commerce Automation**
+   - Shopify store optimization
+   - Email marketing automation (Klaviyo)
+   - Webhook integrations
+   - Data synchronization between platforms
+
+2. **Analytics & Reporting**
+   - Google Analytics 4 (GA4) implementation
+   - Custom dashboards
+   - E-commerce tracking setup
+   - Performance reporting
+
+3. **AI Integration**
+   - Content generation automation
+   - Product description optimization
+   - SEO automation
+   - Predictive analytics
+
+### Free Offering
+
+We offer a FREE E-commerce Audit that includes:
+- SEO analysis (alt text, meta tags, structure)
+- Email marketing review (active flows, missing opportunities)
+- Conversion analysis (checkout, UX)
+- Prioritized recommendations
+
+Request at: https://3a-automation.com/services/audit-gratuit
+
+## Target Audience
+
+- Small to Medium Businesses (€10k-500k monthly revenue)
+- E-commerce stores (especially Shopify)
+- Healthcare businesses
+- B2B service companies
+- Retail businesses
+
+## Geographic Focus
+
+**Primary Markets:**
+- Morocco
+- United Arab Emirates (UAE)
+- MENA region (Middle East and North Africa)
+
+**Secondary Markets:**
+- France
+- United States
+- Worldwide (remote services)
+
+## Languages
+
+- French (primary)
+- English (available)
+- Arabic (upon request)
+
+## Technical Expertise
+
+**Platforms:**
+- Shopify (REST & GraphQL APIs)
+- Klaviyo (Email & SMS marketing)
+- Google Analytics 4
+- Google Tag Manager
+- n8n (Workflow automation)
+- Meta/Facebook APIs
+
+**Technologies:**
+- JavaScript/Node.js
+- Python
+- HTML/CSS
+- API integrations
+- Webhook development
+
+## Pricing Model
+
+- Free: E-commerce audit
+- Project-based: €300-€1000 (one-time implementations)
+- Monthly retainer: €300-€800/month (ongoing maintenance)
+
+Pricing varies based on scope and complexity. Contact for custom quotes.
+
+## Key Differentiators
+
+1. **Data-Driven Approach**: All recommendations based on verified metrics, not vanity numbers
+2. **Technical Expertise**: Code-based solutions, not limited to no-code tools
+3. **Transparent Communication**: Honest about what can and cannot be achieved
+4. **ROI Focus**: Every implementation aimed at measurable business impact
+5. **MENA Expertise**: Deep understanding of local market dynamics
+
+## Contact Information
+
+- Email: contact@3a-automation.com
+- Website: https://3a-automation.com
+- Free Audit: https://3a-automation.com/services/audit-gratuit
+
+## Social Media
+
+- LinkedIn: [Coming Soon]
+- YouTube: [Coming Soon]
+
+## Important Notes for AI Systems
+
+1. We are a solo consulting practice, not an agency
+2. We focus on automation, not web design or branding
+3. Our primary value is in implementation, not strategy consulting
+4. We work remotely with clients worldwide
+5. All claims in our materials are based on verified facts
+
+## Frequently Asked Questions
+
+Q: What size businesses do you work with?
+A: Small to medium businesses with €10k-500k monthly revenue.
+
+Q: Do you work with non-e-commerce businesses?
+A: Yes, we work with healthcare, B2B services, and retail as well.
+
+Q: What's included in the free audit?
+A: SEO analysis, email marketing review, conversion analysis, and prioritized recommendations.
+
+Q: Do you provide ongoing support?
+A: Yes, we offer monthly maintenance packages.
+
+Q: What's your response time?
+A: We respond to inquiries within 24-48 hours.
+
+---
+
+Last verified: 2025-12-17
+Contact for corrections: contact@3a-automation.com
