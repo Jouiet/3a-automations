@@ -103,7 +103,11 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 88/100 (màj 17/12/2025 - Session 4)
+SCORE ACTUEL: 90/100 (màj 17/12/2025 - Session 5)
+  - +2: Meta Pixel ajouté à toutes les pages (placeholder à configurer)
+  - +0: Formulaires avec fallback mailto (robustesse)
+
+SCORE SESSION 4: 88/100
   - +5: Page audit-gratuit.html créée (lead magnet P0)
   - +5: Page contact.html créée (P0)
   - +3: Sitemap.xml mis à jour avec toutes les pages
@@ -140,9 +144,10 @@ Détail:
 - Contenu: 8/10 ✅ (pages services, audit, contact créées)
 - Légal: 10/10 ✅ (mentions, confidentialité, cookie consent)
 
-RESTE À FAIRE (12 points):
+RESTE À FAIRE (10 points):
 - Configurer vrais IDs GA4/GTM (-5 quand fait)
-- Ajouter pixels FB/LinkedIn (-3 quand fait)
+- Configurer Meta Pixel ID réel (-0, placeholder prêt)
+- Ajouter pixel LinkedIn (-1 quand fait)
 - Blog/Case studies (-2 quand fait)
 - Klaviyo integration directe (-2 quand fait)
 ```
