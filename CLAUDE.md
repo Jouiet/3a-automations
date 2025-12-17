@@ -1,6 +1,7 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 2.0 | Dernière mise à jour: 2025-12-17
+## Version: 2.3 | Dernière mise à jour: 2025-12-17
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
+## GitHub: https://github.com/Jouiet/3a-automations
 
 ---
 
@@ -563,6 +564,7 @@ Le system prompt est défini dans `GROK.md` et inclut:
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-17 | 2.3 | **GitHub**: Repo connecté github.com/Jouiet/3a-automations, logos ajoutés |
 | 2025-12-17 | 2.2 | **Intégration Grok**: GROK.md créé, clients Python/Node.js ajoutés, XAI_API_KEY dans .env |
 | 2025-12-17 | 2.1 | **Session API Tests**: .env créé, APIs testées (Shopify+Klaviyo OK), 4 scripts production créés, audits générés, correction identité store (azffej-as = Alpha Medical Care) |
 | 2025-12-17 | 2.0 | Refonte complète - Ajout références docs techniques, métriques factuelles |
