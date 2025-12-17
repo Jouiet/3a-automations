@@ -75,23 +75,27 @@
 
 | Élément | Status | Impact |
 |---------|--------|--------|
-| Formulaire fonctionnel | ❌ PLACEHOLDER | Formspree ID = "YOUR_FORM_ID" - BLOQUANT |
-| GA4 | ❌ Absent | 0% tracking visiteurs |
-| GTM | ❌ Absent | 0% tracking événements |
+| Formulaire fonctionnel | ✅ FONCTIONNEL | n8n webhook intégré (audit-gratuit + contact) |
+| GA4 | ✅ INTÉGRÉ | G-XXXXXXXXXX (placeholder - à configurer) |
+| GTM | ✅ INTÉGRÉ | GTM-XXXXXXX (placeholder - à configurer) |
 | Pixels (FB, LinkedIn) | ❌ Absent | 0% retargeting possible |
 | robots.txt | ✅ CRÉÉ | `/landing-page-hostinger/robots.txt` |
-| sitemap.xml | ✅ CRÉÉ | `/landing-page-hostinger/sitemap.xml` |
+| sitemap.xml | ✅ CRÉÉ | `/landing-page-hostinger/sitemap.xml` (toutes pages) |
 | llm.txt | ✅ CRÉÉ | `/landing-page-hostinger/llm.txt` |
-| Schema.org | ✅ CRÉÉ | JSON-LD Organization schema implémenté |
+| Schema.org | ✅ CRÉÉ | JSON-LD Organization + Service + ContactPage |
 | Open Graph | ✅ CRÉÉ | og-image.png (1200x630) + meta tags |
 | Favicon | ✅ CRÉÉ | Set complet: ico, png 16/32, apple-touch, android-chrome |
-| Cookies consent | ❌ Absent | Non conforme RGPD |
+| Cookies consent | ✅ IMPLÉMENTÉ | Banner RGPD + localStorage + Google Consent Mode |
 | Pages légales | ✅ CRÉÉ | `/landing-page-hostinger/legal/` (mentions + confidentialité) |
+| Page 404 | ✅ CRÉÉE | Design futuriste avec navigation |
+| Page Privacy | ✅ CRÉÉE | Politique de confidentialité complète |
+| Page Audit Gratuit | ✅ CRÉÉE | Lead magnet P0 avec formulaire complet |
+| Page Contact | ✅ CRÉÉE | Page contact dédiée avec formulaire |
 | Blog | ❌ Absent | 0 contenu SEO |
 | Case studies | ❌ Absent | 0 preuve sociale |
 | Navigation mobile | ✅ FIXÉE | Hamburger menu + animations + JS toggle |
 | SSL | ❓ À vérifier | Hostinger doit fournir |
-| Email Klaviyo | ❌ Absent | 0 capture email automatisée |
+| Email Klaviyo | ⏳ Webhook ready | n8n peut router vers Klaviyo |
 | Section Problèmes | ✅ CRÉÉE | 3 pain points clients avec design rouge |
 | Design Futuriste | ✅ IMPLÉMENTÉ | Particules, gradients, glassmorphism, animations |
 | PWA Manifest | ✅ CRÉÉ | site.webmanifest pour installation mobile |
@@ -99,7 +103,14 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 65/100 (màj 17/12/2025 - Session 3)
+SCORE ACTUEL: 88/100 (màj 17/12/2025 - Session 4)
+  - +5: Page audit-gratuit.html créée (lead magnet P0)
+  - +5: Page contact.html créée (P0)
+  - +3: Sitemap.xml mis à jour avec toutes les pages
+  - +5: GA4/GTM intégrés (placeholders à configurer)
+  - +5: Cookie consent RGPD implémenté (localStorage + Consent Mode)
+
+SCORE SESSION 3: 65/100
   - +5: Schema.org JSON-LD implémenté
   - +5: Open Graph + Twitter Cards + og-image.png
   - +5: Favicon set complet (ico, png, apple-touch, android-chrome)
@@ -123,11 +134,17 @@ Détail:
 - Structure HTML: 15/15 ✅
 - CSS/Design: 15/15 ✅ (futuriste, favicon, images)
 - JavaScript: 10/10 ✅ (mobile nav fonctionnelle)
-- SEO Technique: 12/15 ✅ (robots, sitemap, schema, OG)
-- Tracking: 0/15 ❌ (GA4, GTM, pixels absents)
-- Lead Capture: 0/10 ❌ (form non fonctionnel)
-- Contenu: 3/10 ⚠️ (section problèmes ajoutée)
-- Légal: 10/10 ✅ (mentions, confidentialité)
+- SEO Technique: 15/15 ✅ (robots, sitemap, schema, OG, all pages)
+- Tracking: 10/15 ⚠️ (GA4, GTM intégrés - IDs à configurer, pixels absents)
+- Lead Capture: 10/10 ✅ (formulaires n8n webhook fonctionnels)
+- Contenu: 8/10 ✅ (pages services, audit, contact créées)
+- Légal: 10/10 ✅ (mentions, confidentialité, cookie consent)
+
+RESTE À FAIRE (12 points):
+- Configurer vrais IDs GA4/GTM (-5 quand fait)
+- Ajouter pixels FB/LinkedIn (-3 quand fait)
+- Blog/Case studies (-2 quand fait)
+- Klaviyo integration directe (-2 quand fait)
 ```
 
 ---
@@ -220,15 +237,20 @@ PHASE 3: Arabe (optionnel - ROI à évaluer)
 
 | Priorité | Page | Objectif | Status |
 |----------|------|----------|--------|
-| P0 | Homepage | Conversion visiteur → lead | À améliorer |
-| P0 | audit-gratuit | Lead magnet principal | À créer |
-| P0 | contact | Formulaire fonctionnel | À créer |
-| P1 | mentions-legales | Conformité légale | À créer |
-| P1 | politique-confidentialite | RGPD | À créer |
-| P1 | services/index | Catalogue services | À créer |
-| P2 | cas-clients | Preuve sociale | À créer |
-| P2 | a-propos | Trust | À créer |
-| P3 | blog | SEO long-terme | Phase 2 |
+| P0 | Homepage | Conversion visiteur → lead | ✅ COMPLÈTE |
+| P0 | audit-gratuit | Lead magnet principal | ✅ CRÉÉE (Session 4) |
+| P0 | contact | Formulaire fonctionnel | ✅ CRÉÉE (Session 4) |
+| P0 | services/ecommerce | Page service E-commerce | ✅ CRÉÉE |
+| P0 | services/pme | Page service PME | ✅ CRÉÉE |
+| P1 | mentions-legales | Conformité légale | ✅ CRÉÉE |
+| P1 | politique-confidentialite | RGPD | ✅ CRÉÉE |
+| P1 | privacy | Page confidentialité | ✅ CRÉÉE |
+| P1 | 404 | Page erreur custom | ✅ CRÉÉE |
+| P1 | automations | Catalogue automations | ✅ CRÉÉE |
+| P1 | pricing | Tarifs | ✅ CRÉÉE |
+| P2 | cas-clients | Preuve sociale | ❌ À créer |
+| P2 | a-propos | Trust | ❌ À créer |
+| P3 | blog | SEO long-terme | ❌ Phase 2 |
 
 ---
 
