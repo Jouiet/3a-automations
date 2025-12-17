@@ -69,12 +69,37 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
+  <!-- Cyber Background with Enhanced Effects -->
+  <div class="cyber-bg">
+    <div class="cyber-grid"></div>
+    <div class="cyber-glow cyber-glow-1"></div>
+    <div class="cyber-glow cyber-glow-2"></div>
+    <div class="cyber-glow cyber-glow-3"></div>
+    <!-- Morphing Blobs -->
+    <div class="morph-blob" style="width: 400px; height: 400px; background: rgba(79, 186, 241, 0.1); top: 20%; right: 10%;"></div>
+    <div class="morph-blob" style="width: 300px; height: 300px; background: rgba(139, 92, 246, 0.08); bottom: 30%; left: 5%; animation-delay: -7s;"></div>
+  </div>
+
   <!-- Header -->
   <header class="header">
     <div class="container">
       <a href="/" class="logo">
-        <span class="logo-text">3A</span>
-        <span class="logo-sub">Automation</span>
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M20 4L36 34H4L20 4Z" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
+            <path d="M20 12L28 28H12L20 12Z" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4FBAF1"/>
+                <stop offset="100%" stop-color="#2B6685"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-text">3A</span>
+          <span class="logo-sub">AUTOMATION</span>
+        </div>
       </a>
       <nav class="nav" id="nav-menu">
         <a href="/services/ecommerce.html">E-commerce</a>
@@ -523,41 +548,70 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- Footer Ultra -->
+  <footer class="footer-ultra">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
+      <div class="footer-grid-ultra">
+        <div class="footer-brand-ultra">
           <div class="logo">
-            <span class="logo-text">3A</span>
-            <span class="logo-sub">Automation</span>
+            <div class="logo-icon">
+              <svg viewBox="0 0 40 40" fill="none">
+                <path d="M20 4L36 34H4L20 4Z" stroke="url(#logoGrad2)" stroke-width="2" fill="none"/>
+                <path d="M20 12L28 28H12L20 12Z" stroke="url(#logoGrad2)" stroke-width="2" fill="none"/>
+                <defs>
+                  <linearGradient id="logoGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#4FBAF1"/>
+                    <stop offset="100%" stop-color="#2B6685"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="logo-text-wrap">
+              <span class="logo-text">3A</span>
+              <span class="logo-sub">AUTOMATION</span>
+            </div>
           </div>
-          <p>Automation - Analytics - AI pour PME.</p>
+          <p class="footer-tagline">Automation - Analytics - AI</p>
+          <p class="footer-stats">207+ automatisations | 8 MCPs | 15+ APIs</p>
         </div>
-        <div class="footer-links">
+
+        <div class="footer-links-ultra">
           <h4>Services</h4>
           <ul>
             <li><a href="/services/ecommerce.html">E-commerce</a></li>
             <li><a href="/services/pme.html">PME & Services</a></li>
-            <li><a href="/automations.html">Automations</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Ressources</h4>
-          <ul>
+            <li><a href="/automations.html">Catalogue</a></li>
             <li><a href="/pricing.html">Tarifs</a></li>
-            <li><a href="/process.html">Process</a></li>
           </ul>
         </div>
-        <div class="footer-links">
+
+        <div class="footer-links-ultra">
+          <h4>Stack</h4>
+          <ul>
+            <li>Shopify + Flow</li>
+            <li>Klaviyo</li>
+            <li>GA4 / GTM</li>
+            <li>n8n + Claude AI</li>
+          </ul>
+        </div>
+
+        <div class="footer-links-ultra">
           <h4>Contact</h4>
           <ul>
             <li><a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a></li>
+            <li><a href="/legal/mentions-legales.html">Mentions légales</a></li>
+            <li><a href="/legal/politique-confidentialite.html">Confidentialité</a></li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">
+
+      <div class="footer-bottom-ultra">
         <p>&copy; 2025 3A Automation. Tous droits réservés.</p>
+        <div class="footer-tech">
+          <span>Built with</span>
+          <span class="tech-badge">Claude AI</span>
+          <span class="tech-badge">MCP</span>
+        </div>
       </div>
     </div>
   </footer>
