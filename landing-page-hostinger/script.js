@@ -79,15 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ───────────────────────────────────────────────────────────────────────────
   // FORM HANDLING - Multi-Fallback System
-  // Priorité: 1. Webhook n8n → 2. Mailto fallback
+  // Priorité: 1. Formspree → 2. Mailto fallback
   // ───────────────────────────────────────────────────────────────────────────
   const form = document.getElementById('audit-form');
   const formSuccess = document.getElementById('form-success');
   const formError = document.getElementById('form-error');
 
-  // Configuration
+  // Configuration - AGENCE 3A AUTOMATION (pas de credentials clients!)
+  // Pour activer: créer compte Formspree et remplacer YOUR_FORM_ID
   const FORM_CONFIG = {
-    webhookUrl: 'https://n8n.srv1168256.hstgr.cloud/webhook/audit-request',
+    formspreeUrl: 'https://formspree.io/f/YOUR_FORM_ID', // À configurer sur formspree.io
     fallbackEmail: 'contact@3a-automation.com',
     timeout: 5000 // 5 seconds
   };
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), FORM_CONFIG.timeout);
 
-        const response = await fetch(FORM_CONFIG.webhookUrl, {
+        const response = await fetch(FORM_CONFIG.formspreeUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),

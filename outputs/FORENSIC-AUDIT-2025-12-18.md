@@ -1408,13 +1408,91 @@ Pour tester les automatisations:
 2. **Post-déploiement**
    - Créer GA4 property
    - Créer GTM container
+   - Créer compte Formspree et configurer formulaires
    - Tester formulaires en production
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.9**
+# SECTION 21: SESSION 21 - CORRECTION VIOLATION SÉPARATION
+
+## 21.1 Date et Contexte
+
+**Date:** 2025-12-18 (Session 21)
+**Objectif:** Corriger violation règle séparation agence/clients
+
+## 21.2 Problème Détecté
+
+**VIOLATION GRAVE:** Les formulaires du site agence pointaient vers l'instance n8n d'un CLIENT:
+```
+AVANT: action="https://n8n.srv1168256.hstgr.cloud/webhook/audit-request"
+       ^^^ URL Alpha Medical n8n instance
+```
+
+## 21.3 Corrections Appliquées
+
+### Fichiers Modifiés (4 fichiers)
+
+| Fichier | Correction |
+|---------|------------|
+| `script.js` | `webhookUrl` → `formspreeUrl`, placeholder Formspree |
+| `index.html` | `action="https://formspree.io/f/YOUR_FORM_ID"` |
+| `contact.html` | `action="https://formspree.io/f/YOUR_FORM_ID"` |
+| `services/audit-gratuit.html` | `action="https://formspree.io/f/YOUR_FORM_ID"` |
+
+### Pourquoi Formspree?
+
+| Critère | n8n client | Formspree |
+|---------|------------|-----------|
+| Séparation | ❌ VIOLATION | ✅ Service tiers |
+| Coût | Gratuit (client paie) | Gratuit (50 soumissions/mois) |
+| Configuration | Webhook spécifique | Simple (email) |
+| Dépendance | Instance client | Aucune |
+| Fallback | Non | mailto: intégré |
+
+### Action Requise Post-Déploiement
+
+1. Créer compte sur https://formspree.io
+2. Créer nouveau formulaire lié à contact@3a-automation.com
+3. Remplacer `YOUR_FORM_ID` par l'ID réel (format: `xXxXxXxX`)
+4. Tester soumission
+
+## 21.4 Vérification Automatisations
+
+```
+validate-all-automations.cjs: 42/42 VALID ✅
+├── agency/core: 4/4 ✅
+├── clients/*: 36/36 ✅
+└── generic: 2/2 ✅
+
+Note: Toutes les automatisations nécessitent des credentials API.
+Pour tester en production → environnement client séparé requis.
+```
+
+## 21.5 État MCPs (Vérifié)
+
+| MCP | Config | Status |
+|-----|--------|--------|
+| chrome-devtools | ✅ | Fonctionnel |
+| playwright | ✅ | Fonctionnel |
+| shopify | Placeholder | À configurer |
+| klaviyo | Placeholder | À configurer |
+| n8n | Placeholder | À configurer |
+| google-analytics | SA manquant | À créer |
+| google-sheets | SA manquant | À créer |
+| apify | Placeholder | À configurer |
+| gemini | Placeholder | À configurer |
+| github | Placeholder | À configurer |
+| hostinger | Placeholder | À configurer |
+| wordpress | Non configuré | wp-sites.json vide |
+
+**TOTAL: 12 MCPs déclarés, 2 fonctionnels, 10 avec placeholders**
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v3.0**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v3.0: Session 21 - Correction violation formulaires (n8n client → Formspree)*
 *v2.9: Session 20 - Deploy-ready checklist, structure vérifiée*
 *v2.8: Session 19 - Terminologie professionnelle uniformisée (scripts→automatisations)*
 *v2.7: Session 18 - .env.example créé, liens internes vérifiés (0 cassés)*
