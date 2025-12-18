@@ -367,11 +367,11 @@ KLAVIYO:
 
 # Shopify - Alpha Medical Care ✅ TESTÉ
 SHOPIFY_STORE_DOMAIN=azffej-as.myshopify.com
-SHOPIFY_ACCESS_TOKEN=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
+SHOPIFY_ACCESS_TOKEN=shpat_xxxx...xxxx
 SHOPIFY_API_VERSION=2024-01
 
 # Klaviyo ✅ TESTÉ
-KLAVIYO_API_KEY=pk_16c08fae7644ad0ff14c16bc4f70accf5b
+KLAVIYO_API_KEY=pk_xxxx...xxxx
 
 # n8n - Alpha Medical ✅ CONFIGURÉ
 N8N_HOST=https://n8n.srv1168256.hstgr.cloud
