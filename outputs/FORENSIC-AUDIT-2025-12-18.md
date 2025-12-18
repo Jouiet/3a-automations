@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 3.4 (Màj Session 21b - 4 services configurés)
+## Date: 2025-12-18 | Version: 3.5 (Màj Session 21b - 5 services configurés)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -1764,14 +1764,15 @@ node scripts/test-google-auth.cjs
 | ⏳ GA4 | P1 | EN ATTENTE | Nécessite Property ID |
 | ⏳ Shopify Partners | P0 | À FAIRE | Dev store à créer |
 | ⏳ n8n Agence | P0 | À FAIRE | Instance à créer |
-| ⏳ xAI/Grok | P1 | À FAIRE | Crédits à acheter |
+| ⚠️ xAI/Grok | P1 | KEY SAVED | `.env` (crédits requis: https://console.x.ai/team/1d41cf68-38bb-48d7-93f6-a5d5854912a6) |
 | ⏳ Apify | P2 | À FAIRE | Compte à créer |
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v3.4**
+**FIN DE L'AUDIT FORENSIQUE v3.5**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v3.5: Session 21b - 5 services (GitHub, Google Cloud, Sheets, Gemini, xAI key saved)*
 *v3.4: Session 21b - 4 services configurés (GitHub, Google Cloud, Sheets, Gemini)*
 *v3.3: Session 21b - GitHub ✅ + Google Cloud ✅ + Google Sheets ✅ configurés*
 *v3.2: Session 21b - GitHub ✅ + Google Cloud Service Account ✅ configurés*
