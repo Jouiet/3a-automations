@@ -911,7 +911,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
-| 2025-12-18 | 4.3 | **Session 21 - FORM URLS FIX**: Correction VIOLATION séparation (formulaires pointaient vers n8n client Alpha Medical → Formspree placeholder), 4 fichiers corrigés (script.js, index.html, contact.html, audit-gratuit.html), FORENSIC-AUDIT v3.0, 42/42 automatisations validées |
+| 2025-12-18 | 4.3 | **Session 21 - FORM URLS FIX**: Correction VIOLATION séparation (formulaires pointaient vers n8n client Alpha Medical → Google Apps Script placeholder), 4 fichiers corrigés (script.js, index.html, contact.html, audit-gratuit.html), FORENSIC-AUDIT v3.0, 42/42 automatisations validées |
 | 2025-12-18 | 4.2 | **Session 20 - DEPLOY-READY CHECKLIST**: Blueprint score 99/100, deploy checklist complet (33 fichiers, 1.7MB, 12 pages HTML), FORENSIC-AUDIT v2.9 Section 20 ajoutée, test-all-apis 0/7 (expected - .env agence vide by design) |
 | 2025-12-18 | 4.1 | **Session 19 - TERMINOLOGIE PROFESSIONNELLE**: "scripts"→"automatisations" sur 12 pages, métriques factuelles (42/12/8+/3), FORENSIC-AUDIT v2.8 |
 | 2025-12-18 | 4.0 | **Session 18 - .ENV.EXAMPLE + LIENS**: .env.example créé (template complet, 0 creds), tous liens internes vérifiés (~150 liens, 0 cassés), FORENSIC-AUDIT v2.7 |

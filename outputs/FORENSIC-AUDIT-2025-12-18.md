@@ -1434,27 +1434,28 @@ AVANT: action="https://n8n.srv1168256.hstgr.cloud/webhook/audit-request"
 
 | Fichier | Correction |
 |---------|------------|
-| `script.js` | `webhookUrl` → `formspreeUrl`, placeholder Formspree |
-| `index.html` | `action="https://formspree.io/f/YOUR_FORM_ID"` |
-| `contact.html` | `action="https://formspree.io/f/YOUR_FORM_ID"` |
-| `services/audit-gratuit.html` | `action="https://formspree.io/f/YOUR_FORM_ID"` |
+| `script.js` | `webhookUrl` → `googleScriptUrl`, placeholder Google Apps Script |
+| `index.html` | `action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"` |
+| `contact.html` | `action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"` |
+| `services/audit-gratuit.html` | `action="https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"` |
 
-### Pourquoi Formspree?
+### Pourquoi Google Apps Script?
 
-| Critère | n8n client | Formspree |
+| Critère | n8n client | Google Apps Script |
 |---------|------------|-----------|
-| Séparation | ❌ VIOLATION | ✅ Service tiers |
-| Coût | Gratuit (client paie) | Gratuit (50 soumissions/mois) |
-| Configuration | Webhook spécifique | Simple (email) |
-| Dépendance | Instance client | Aucune |
+| Séparation | ❌ VIOLATION | ✅ Service agence |
+| Coût | Gratuit (client paie) | Gratuit (Google Workspace) |
+| Configuration | Webhook spécifique | Web App + Google Sheets |
+| Dépendance | Instance client | Compte Google agence |
 | Fallback | Non | mailto: intégré |
 
 ### Action Requise Post-Déploiement
 
-1. Créer compte sur https://formspree.io
-2. Créer nouveau formulaire lié à contact@3a-automation.com
-3. Remplacer `YOUR_FORM_ID` par l'ID réel (format: `xXxXxXxX`)
-4. Tester soumission
+1. Créer Google Apps Script Web App (doPost handler)
+2. Configurer écriture dans Google Sheets agence
+3. Déployer comme Web App (accès: "Tout le monde")
+4. Remplacer `YOUR_SCRIPT_ID` par l'ID du script déployé
+5. Tester soumission
 
 ## 21.4 Vérification Automatisations
 
@@ -1492,7 +1493,7 @@ Pour tester en production → environnement client séparé requis.
 **FIN DE L'AUDIT FORENSIQUE v3.0**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
-*v3.0: Session 21 - Correction violation formulaires (n8n client → Formspree)*
+*v3.0: Session 21 - Correction violation formulaires (n8n client → Google Apps Script)*
 *v2.9: Session 20 - Deploy-ready checklist, structure vérifiée*
 *v2.8: Session 19 - Terminologie professionnelle uniformisée (scripts→automatisations)*
 *v2.7: Session 18 - .env.example créé, liens internes vérifiés (0 cassés)*
