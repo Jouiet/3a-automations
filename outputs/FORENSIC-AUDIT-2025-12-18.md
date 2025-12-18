@@ -1490,9 +1490,180 @@ Pour tester en production → environnement client séparé requis.
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v3.0**
+# SECTION 22: ANALYSE FORENSIQUE COMPLÈTE - SERVICES REQUIS
+
+## 22.1 Contexte
+
+**Date:** 2025-12-18 (Session 21 - Suite)
+**Objectif:** Identifier TOUS les services/APIs requis par 3A-Automation
+
+## 22.2 Méthodologie
+
+Scan exhaustif de:
+- `/automations/` (42 automatisations génériques)
+- `/AGENCY-CORE-SCRIPTS-V3/` (57 scripts legacy)
+- `/agency-scripts-Q1-GOLD/` (109 scripts legacy)
+- `/alpha-medical-python-agency/` (41 scripts legacy)
+- Configuration MCPs
+
+## 22.3 Variables d'Environnement Identifiées
+
+### Par Fréquence d'Utilisation
+
+| Variable | Occurrences | Service |
+|----------|-------------|---------|
+| SHOPIFY_ACCESS_TOKEN | 83 | Shopify |
+| SHOPIFY_STORE | 73 | Shopify |
+| SHOPIFY_STORE_DOMAIN | 18 | Shopify |
+| SHOPIFY_ADMIN_API_TOKEN | 27 | Shopify |
+| KLAVIYO_API_KEY | 6 | Klaviyo |
+| KLAVIYO_PRIVATE_API_KEY | 4 | Klaviyo |
+| GOOGLE_APPLICATION_CREDENTIALS | 7 | Google Cloud |
+| GOOGLE_SERVICE_ACCOUNT_FILE | 4 | Google Cloud |
+| GOOGLE_SHEETS_ID | 6 | Google Sheets |
+| APIFY_TOKEN | 8 | Apify |
+| XAI_API_KEY | 4 | xAI/Grok |
+| FACEBOOK_ACCESS_TOKEN | 6 | Meta |
+| TIKTOK_ACCESS_TOKEN | 4 | TikTok |
+| N8N_HOST | 2 | n8n |
+
+## 22.4 Services Requis - Inventaire Complet
+
+### PRIORITÉ 0 - CRITIQUE (Requis pour fonctionnement)
+
+| Service | Variables | Status Agence | Action Requise |
+|---------|-----------|---------------|----------------|
+| **Google Cloud** | GOOGLE_APPLICATION_CREDENTIALS, GOOGLE_PROJECT_ID | ❌ Non configuré | Créer Service Account |
+| **Shopify Partners** | SHOPIFY_STORE_DOMAIN, SHOPIFY_ACCESS_TOKEN | ❌ Non configuré | Créer dev store |
+| **n8n** | N8N_HOST, N8N_API_KEY | ❌ Non configuré | Créer instance agence |
+| **GitHub** | GITHUB_TOKEN | ❌ Non configuré | Créer token |
+
+### PRIORITÉ 1 - IMPORTANT (Requis pour automatisations complètes)
+
+| Service | Variables | Status Agence | Action Requise |
+|---------|-----------|---------------|----------------|
+| **Google Analytics** | GA4_PROPERTY_ID | ❌ Non configuré | Créer property |
+| **Google Sheets** | GOOGLE_SHEETS_ID | ❌ Non configuré | Créer spreadsheet |
+| **Klaviyo** | KLAVIYO_API_KEY | ❌ Non configuré | Créer compte démo |
+| **xAI/Grok** | XAI_API_KEY | ❌ Non configuré | Activer crédits ($5) |
+| **Gemini** | GEMINI_API_KEY | ❌ Non configuré | Créer clé API |
+
+### PRIORITÉ 2 - OPTIONNEL (Pour fonctionnalités avancées)
+
+| Service | Variables | Status Agence | Action Requise |
+|---------|-----------|---------------|----------------|
+| **Meta Ads** | META_ACCESS_TOKEN, META_AD_ACCOUNT_ID | ❌ Non configuré | Créer app Meta |
+| **TikTok Ads** | TIKTOK_ACCESS_TOKEN, TIKTOK_ADVERTISER_ID | ❌ Non configuré | Créer compte business |
+| **Apify** | APIFY_TOKEN | ❌ Non configuré | Créer compte |
+| **Google Ads** | GOOGLE_ADS_* (5 vars) | ❌ Non configuré | Créer MCC |
+| **Hostinger** | HOSTINGER_API_TOKEN | ❌ Non configuré | Créer token API |
+| **Typeform** | TYPEFORM_API_TOKEN | ❌ Non configuré | Si formulaires Typeform |
+| **Apollo.io** | APOLLO_API_KEY | ❌ Non configuré | Si lead enrichment |
+| **HubSpot** | HUBSPOT_API_KEY | ❌ Non configuré | Si CRM HubSpot |
+
+## 22.5 Nombre Total de Variables
+
+| Catégorie | Variables Uniques |
+|-----------|-------------------|
+| Google Cloud | 10 |
+| Shopify | 10 |
+| Klaviyo | 5 |
+| Meta/Facebook | 10 |
+| TikTok | 3 |
+| Apify | 3 |
+| n8n | 2 |
+| AI Services | 4 |
+| GitHub | 2 |
+| Hostinger | 1 |
+| Autres | 7 |
+| **TOTAL** | **57** |
+
+## 22.6 MCPs Configurés vs Variables
+
+| MCP | Variables Requises | Fichier Config |
+|-----|-------------------|----------------|
+| chrome-devtools | Aucune | ~/.config/claude-code/mcp.json |
+| playwright | Aucune | ~/.config/claude-code/mcp.json |
+| shopify | SHOPIFY_ACCESS_TOKEN, SHOPIFY_STORE_DOMAIN | ~/.config/claude-code/mcp.json |
+| klaviyo | KLAVIYO_API_KEY | ~/.config/claude-code/mcp.json |
+| n8n | N8N_HOST, N8N_API_KEY | ~/.config/claude-code/mcp.json |
+| google-analytics | GOOGLE_APPLICATION_CREDENTIALS, GA4_PROPERTY_ID | ~/.config/claude-code/mcp.json |
+| google-sheets | GOOGLE_APPLICATION_CREDENTIALS | ~/.config/claude-code/mcp.json |
+| apify | APIFY_TOKEN | ~/.config/claude-code/mcp.json |
+| gemini | GEMINI_API_KEY | ~/.config/claude-code/mcp.json |
+| github | GITHUB_TOKEN | ~/.config/claude-code/mcp.json |
+| hostinger | HOSTINGER_API_TOKEN | ~/.config/claude-code/mcp.json |
+| wordpress | WP_SITES_PATH | ~/.config/claude-code/mcp.json |
+
+## 22.7 Fichiers Mis à Jour
+
+| Fichier | Description |
+|---------|-------------|
+| `.env.example` | Template complet avec 57 variables, 13 sections |
+| `.env` | Copie de .env.example (valeurs vides) |
+
+## 22.8 Plan d'Action Configuration Agence
+
+### Étape 1: Google Cloud (P0)
+```bash
+1. Aller sur https://console.cloud.google.com
+2. Créer projet "3a-automation-agency"
+3. Activer APIs:
+   - Analytics Admin API
+   - Analytics Data API
+   - Google Sheets API
+   - Google Drive API
+4. IAM → Service Accounts → Créer
+5. Télécharger JSON → /Users/mac/.config/google/3a-automation-service-account.json
+```
+
+### Étape 2: Shopify Partners (P0)
+```bash
+1. Aller sur https://partners.shopify.com
+2. Créer compte ou se connecter
+3. Stores → Create store → Development store
+4. Nom: 3a-automation-dev
+5. Apps → Create app → Get API credentials
+```
+
+### Étape 3: n8n Agence (P0)
+```bash
+Option A: n8n Cloud (20€/mois)
+1. https://n8n.io → Sign up
+2. Créer workspace
+3. Settings → API → Create key
+
+Option B: Self-hosted (0€ + temps)
+1. VPS Hostinger ou autre
+2. Docker: docker run -d -p 5678:5678 n8nio/n8n
+```
+
+### Étape 4: GitHub Token (P0)
+```bash
+1. https://github.com/settings/tokens
+2. Generate new token (classic)
+3. Scopes: repo, workflow, read:org
+4. Copier le token
+```
+
+### Étape 5: AI Services (P1)
+```bash
+# xAI/Grok
+1. https://console.x.ai/
+2. Add payment method ($5 min)
+3. Create API key
+
+# Gemini
+1. https://aistudio.google.com/apikey
+2. Create API key (free tier)
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v3.1**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v3.1: Session 21 - Analyse forensique complète services (57 variables, 13 services)*
 *v3.0: Session 21 - Correction violation formulaires (n8n client → Google Apps Script)*
 *v2.9: Session 20 - Deploy-ready checklist, structure vérifiée*
 *v2.8: Session 19 - Terminologie professionnelle uniformisée (scripts→automatisations)*
