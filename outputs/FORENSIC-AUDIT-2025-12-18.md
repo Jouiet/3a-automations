@@ -1162,9 +1162,103 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.6**
+# SECTION 17: SESSION 18 - .ENV.EXAMPLE + VÉRIFICATION LIENS
+
+## 17.1 Date et Contexte
+
+**Date:** 2025-12-18 (Session 18)
+**Objectif:** Créer .env.example propre + vérifier liens internes site
+
+## 17.2 Accomplissements
+
+1. ✅ **Créé .env.example** - Template complet sans credentials
+   - Toutes les variables requises documentées
+   - Instructions de configuration incluses
+   - Architecture agence/clients expliquée
+   - Aucune credential réelle (valeurs vides)
+
+2. ✅ **Vérifié tous les liens internes du site**
+   - 12 pages HTML analysées
+   - ~150 liens href vérifiés
+   - **0 liens cassés (404)**
+   - Toutes les pages référencées existent
+
+## 17.3 Structure .env.example
+
+```
+VARIABLES DOCUMENTÉES:
+├── Google Cloud (4 vars): Credentials, Project ID, GA4 Property, Sheets ID
+├── Shopify (3 vars): Domain, Token, API Version
+├── Klaviyo (1 var): API Key
+├── Meta (3 vars): Token, Ad Account, Page ID
+├── Apify (1 var): Token
+├── n8n (2 vars): Host, API Key
+├── AI Services (4 vars): xAI, OpenAI, Anthropic, Gemini
+└── Output (2 vars): Directory, Log Level
+```
+
+## 17.4 Pages HTML Vérifiées
+
+| Page | Liens internes | Status |
+|------|----------------|--------|
+| index.html | ~30 liens | ✅ |
+| automations.html | ~20 liens | ✅ |
+| pricing.html | ~15 liens | ✅ |
+| contact.html | ~15 liens | ✅ |
+| a-propos.html | ~15 liens | ✅ |
+| cas-clients.html | ~15 liens | ✅ |
+| 404.html | ~10 liens | ✅ |
+| services/ecommerce.html | ~15 liens | ✅ |
+| services/pme.html | ~15 liens | ✅ |
+| services/audit-gratuit.html | ~15 liens | ✅ |
+| legal/mentions-legales.html | ~10 liens | ✅ |
+| legal/politique-confidentialite.html | ~10 liens | ✅ |
+
+**TOTAL: ~150 liens vérifiés, 0 cassés**
+
+---
+
+# SECTION 18: PLAN ACTIONNABLE - PROCHAINE SESSION
+
+## FAIT (Sessions 16, 17, 18) ✅
+
+1. ✅ **Nettoyer mcp.json** - Credentials Alpha Medical retirées
+2. ✅ **Génériciser 42 automatisations** - 100% validées
+3. ✅ **Créer validate-all-automations.cjs** - Validation batch
+4. ✅ **Créer .env.example** - Template propre
+5. ✅ **Vérifier liens internes** - 0 cassés
+
+## P0 - CRITIQUE (Prochaine session)
+
+1. **Créer store de développement Shopify Partners**
+   - URL: https://partners.shopify.com
+   - Pour tester automations sans toucher clients réels
+   - Configurer mcp.json avec store démo
+
+2. **Configurer MCPs avec vrais tokens**
+   - Google Service Account → GA4 + Sheets MCPs
+   - GitHub Token personnel → GitHub MCP
+   - Gemini API Key → Gemini MCP
+
+## P1 - IMPORTANT (Cette semaine)
+
+1. **Déployer site sur Hostinger**
+   - Fichiers prêts dans landing-page-hostinger/
+   - Vérifier SSL, DNS après déploiement
+   - Tester formulaire contact
+
+## P2 - NORMAL (Semaine prochaine)
+
+1. **Tester toutes les automatisations avec store démo**
+2. **Préparer emails restart clients**
+3. **Documenter catalogue automatisations public**
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v2.7**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.7: Session 18 - .env.example créé, liens internes vérifiés (0 cassés)*
 *v2.6: Session 17 - Validation batch 42/42 (100%), création validate-all-automations.cjs*
 *v2.5: Session 16 - Nettoyage MCP + 41 automatisations 100% génériques*
 *v2.4: Session 15b - Audit code automatisations, création dossiers clients*
