@@ -4,7 +4,7 @@
  * Uses product.metafields.custom.shopify_product_taxonomy
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const https = require('https');
 const fs = require('fs');
 

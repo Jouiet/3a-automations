@@ -19,7 +19,7 @@
  *   3. Run: node scripts/parse-warehouse-csv.cjs
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const fs = require('fs');
 
 // CONFIGURATION

@@ -18,12 +18,12 @@
  * 2. Create OAuth2 credentials
  * 3. Get Developer Token
  * 4. Get Customer ID (244-792-8423)
- * 5. Add credentials to .env.local
+ * 5. Add credentials to .env
  *
  * Documentation: https://developers.google.com/google-ads/api/docs/start
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const fetch = require('node-fetch');
 
 // ========================================
@@ -83,7 +83,7 @@ async function getGoogleAdsAccessToken() {
  */
 async function fetchGoogleAdsLeads(since = null) {
   if (!CONFIG.GOOGLE_ADS_DEVELOPER_TOKEN) {
-    throw new Error('Google Ads credentials not configured in .env.local');
+    throw new Error('Google Ads credentials not configured in .env');
   }
 
   console.log('\n📥 Fetching Google Ads Lead Form Extensions...');
@@ -301,18 +301,18 @@ async function main() {
 
   // Validate credentials
   if (!CONFIG.SHOPIFY_STORE || !CONFIG.SHOPIFY_ACCESS_TOKEN) {
-    console.error('❌ Missing Shopify credentials in .env.local');
+    console.error('❌ Missing Shopify credentials in .env');
     process.exit(1);
   }
 
   if (!CONFIG.GOOGLE_ADS_DEVELOPER_TOKEN || !CONFIG.GOOGLE_ADS_REFRESH_TOKEN) {
-    console.error('❌ Missing Google Ads credentials in .env.local');
+    console.error('❌ Missing Google Ads credentials in .env');
     console.error('\nSETUP REQUIRED:');
     console.error('1. Enable Google Ads API: https://ads.google.com/aw/apicenter');
     console.error('2. Create OAuth2 credentials: https://console.cloud.google.com');
     console.error('3. Get Developer Token: https://ads.google.com/aw/apicenter');
     console.error('4. Complete OAuth flow to get refresh token');
-    console.error('5. Add to .env.local:');
+    console.error('5. Add to .env:');
     console.error('   GOOGLE_ADS_CUSTOMER_ID=2447928423');
     console.error('   GOOGLE_ADS_DEVELOPER_TOKEN=your_dev_token');
     console.error('   GOOGLE_ADS_CLIENT_ID=your_client_id');

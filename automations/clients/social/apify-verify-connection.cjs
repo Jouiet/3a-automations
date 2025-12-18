@@ -6,7 +6,14 @@
  * Verify API token and list available actors before running expensive tests
  */
 
-const APIFY_TOKEN = 'apify_api_CjGBvorJEO5VIu5MEqTMkhepvLpQxY1c0Rx0';
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
+
+const APIFY_TOKEN = process.env.APIFY_TOKEN;
+
+if (!APIFY_TOKEN) {
+  console.error('❌ ERROR: APIFY_TOKEN not set in .env');
+  process.exit(1);
+}
 
 async function verifyApifyConnection() {
   console.log('🔐 Verifying Apify API connection...\n');

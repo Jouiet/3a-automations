@@ -1,14 +1,23 @@
-// © 2025 MyDealz. All rights reserved.
-// See LICENSE file for details.
+#!/usr/bin/env node
+/**
+ * GENERATE IMAGE SITEMAP
+ * Purpose: Create XML sitemap for product images (SEO)
+ * Method: Shopify Admin API → XML sitemap
+ */
 
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
 const https = require('https');
 const fs = require('fs');
 
-const SHOPIFY_DOMAIN = '5dc028-dd.myshopify.com';
-const API_TOKEN = process.env.SHOPIFY_ADMIN_API_TOKEN;
-const API_VERSION = '2024-01';
-const STORE_URL = 'https://mydealz.shop';
+const SHOPIFY_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN;
+const API_TOKEN = process.env.SHOPIFY_ACCESS_TOKEN;
+const API_VERSION = process.env.SHOPIFY_API_VERSION || '2024-01';
+const STORE_URL = process.env.STORE_PUBLIC_URL || `https://${SHOPIFY_DOMAIN}`;
+
+if (!SHOPIFY_DOMAIN || !API_TOKEN) {
+  console.error('❌ ERROR: SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN required in .env');
+  process.exit(1);
+}
 
 async function fetchAllProducts() {
   return new Promise((resolve, reject) => {

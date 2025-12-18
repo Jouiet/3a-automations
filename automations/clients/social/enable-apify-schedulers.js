@@ -4,7 +4,7 @@
  */
 
 const https = require('https');
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 
 const APIFY_TOKEN = process.env.APIFY_TOKEN;
 

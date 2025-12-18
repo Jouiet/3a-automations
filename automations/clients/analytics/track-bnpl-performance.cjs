@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const https = require('https');
 const fs = require('fs');
 

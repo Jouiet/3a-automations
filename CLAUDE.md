@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.7 | Dernière mise à jour: 2025-12-18 (Session 15 - Séparation Agence/Clients)
+## Version: 3.8 | Dernière mise à jour: 2025-12-18 (Session 16 - 41 Automatisations Génériques)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -47,7 +47,7 @@
 - ❌ Plateforme SaaS
 - ❌ Solution plug-and-play
 - ❌ Limité à un seul secteur
-- ❌ Stack "agency-ready" - CORRIGÉ Session 15: seulement 6 automatisations testées
+- ❌ Stack "agency-ready" - CORRIGÉ Session 16: 41 automatisations génériques (100%)
 
 ---
 
@@ -596,19 +596,18 @@ node scripts/audit-klaviyo-flows.cjs
 - 10+ scripts refactorés (généricisés)
 - 3+ testimonials
 
-### KPIs Actuels (17 Déc 2025 - Post Session)
+### KPIs Actuels (18 Déc 2025 - Session 16)
 
 | Métrique | Valeur |
 |----------|--------|
 | Clients actifs | 0 (restart 25/01/2026) |
 | Revenue mensuel | €0 |
-| Scripts génériques | ~25 + 4 nouveaux |
-| Scripts configurables | ~33 |
-| MCPs fonctionnels | 3/6 |
-| Fichier .env | ✅ CRÉÉ ET FONCTIONNEL |
-| API Shopify | ✅ TESTÉE (Alpha Medical) |
-| API Klaviyo | ✅ TESTÉE (7 flows, 3 lists) |
-| Audits générés | 3 fichiers (JSON+MD) |
+| **Automatisations génériques** | **41 (100%)** ✅ |
+| Automatisations legacy | 2 (non généralisables) |
+| MCPs configurés | 12 (tous avec placeholders) |
+| MCPs avec creds clients | **0** ✅ (règle séparation) |
+| Fichier .env agence | VIDE (pas de creds clients) |
+| Dossiers clients séparés | 3 (alpha-medical, henderson, mydealz) |
 
 ---
 
@@ -910,6 +909,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.8 | **Session 16 - 41 AUTOMATISATIONS GÉNÉRIQUES**: mcp.json nettoyé (0 creds clients), 21 fichiers .env.local→.env, 4 fichiers refactorisés (domaines hardcodés→process.env), 2 fichiers Apify généralisés, 2 fichiers legacy déplacés, TAUX GÉNÉRICITÉ: 100%, site web màj (41/12/8+/3) |
 | 2025-12-18 | 3.7 | **Session 15 - SÉPARATION AGENCE/CLIENTS**: .env nettoyé (credentials clients retirées), règle critique ajoutée (pas de creds clients dans agence), audit factuel: seulement 6 automatisations testées (pas 49!), MCPs réévalués (2 fonctionnels vs 9 claimed), architecture correcte documentée |
 | 2025-12-18 | 3.6 | **Session 13 - AEO/SEO Vérification**: Schema.org 100% (12/12 pages), robots.txt complet (8 crawlers AI), llms.txt créé (spec-compliant), images confirmées optimisées, FORENSIC-AUDIT v2.1, Blueprint score 98/100 |
 | 2025-12-18 | 3.5 | **Session 12 - Suite Finale**: +11 automatisations (49 total), video/ + google-merchant/ ajoutés, privacy.html dupliqué supprimé, liens mis à jour, AAA-AUTOMATIONS-CATALOG v2.0, sitemap.xml nettoyé |

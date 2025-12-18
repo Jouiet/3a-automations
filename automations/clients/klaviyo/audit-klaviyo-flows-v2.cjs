@@ -6,11 +6,11 @@
  * User note: "Klaviyo API is working!"
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const https = require('https');
 const fs = require('fs');
 
-// Klaviyo API credentials (check .env.local)
+// Klaviyo API credentials (check .env)
 const KLAVIYO_API_KEY = process.env.KLAVIYO_API_KEY || process.env.KLAVIYO_PRIVATE_KEY;
 
 console.log('================================================================================');
@@ -21,10 +21,10 @@ console.log(`API Key: ${KLAVIYO_API_KEY ? '✅ SET' : '❌ NOT SET'}`);
 console.log('================================================================================\n');
 
 if (!KLAVIYO_API_KEY) {
-  console.log('⚠️  KLAVIYO_API_KEY not found in .env.local\n');
+  console.log('⚠️  KLAVIYO_API_KEY not found in .env\n');
   console.log('To enable Klaviyo API verification:');
   console.log('1. Get API key from: https://www.klaviyo.com/account#api-keys-tab');
-  console.log('2. Add to .env.local: KLAVIYO_API_KEY=pk_...');
+  console.log('2. Add to .env: KLAVIYO_API_KEY=pk_...');
   console.log('3. Re-run this script\n');
   console.log('Note: Klaviyo was found installed via Shopify Admin API');
   console.log('      This script will verify email flows once API key is configured\n');
@@ -210,7 +210,7 @@ async function main() {
   } catch (error) {
     console.error('❌ ERROR:', error.message);
     console.error('\nTroubleshooting:');
-    console.error('1. Verify KLAVIYO_API_KEY in .env.local');
+    console.error('1. Verify KLAVIYO_API_KEY in .env');
     console.error('2. Check API key permissions in Klaviyo dashboard');
     console.error('3. Ensure Klaviyo app is properly connected to Shopify\n');
     process.exit(1);

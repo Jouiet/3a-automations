@@ -1,11 +1,30 @@
+#!/usr/bin/env node
+/**
+ * APIFY INSPECT RAW DATA
+ * Purpose: Fetch and inspect data from an Apify dataset
+ * Usage: APIFY_DATASET_ID=xxx node apify-inspect-raw-data.cjs
+ */
+
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
 const https = require('https');
 
-const APIFY_TOKEN = 'apify_api_CjGBvorJEO5VIu5MEqTMkhepvLpQxY1c0Rx0';
-const datasetId = 'hOfV1nLhirkccY2pU';
+const APIFY_TOKEN = process.env.APIFY_TOKEN;
+const datasetId = process.env.APIFY_DATASET_ID;
 
-console.log('=== FETCHING RAW INSTAGRAM DATA ===');
+if (!APIFY_TOKEN) {
+  console.error('❌ ERROR: APIFY_TOKEN not set in .env');
+  process.exit(1);
+}
+
+if (!datasetId) {
+  console.error('❌ ERROR: APIFY_DATASET_ID not set in .env or environment');
+  console.error('   Usage: APIFY_DATASET_ID=xxx node apify-inspect-raw-data.cjs');
+  process.exit(1);
+}
+
+console.log('=== FETCHING APIFY DATASET DATA ===');
 console.log('Dataset ID:', datasetId);
-console.log('Fetching first 3 leads to inspect structure...');
+console.log('Fetching first 3 items to inspect structure...');
 console.log('');
 
 const options = {
