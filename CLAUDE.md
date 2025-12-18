@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.6 | Dernière mise à jour: 2025-12-18 (Session 13 - AEO/SEO Vérification)
+## Version: 3.7 | Dernière mise à jour: 2025-12-18 (Session 15 - Séparation Agence/Clients)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -47,7 +47,40 @@
 - ❌ Plateforme SaaS
 - ❌ Solution plug-and-play
 - ❌ Limité à un seul secteur
-- ✅ Stack "agency-ready" (49 automatisations génériques depuis Session 12)
+- ❌ Stack "agency-ready" - CORRIGÉ Session 15: seulement 6 automatisations testées
+
+---
+
+## RÈGLE CRITIQUE: SÉPARATION AGENCE / CLIENTS
+
+```
+╔════════════════════════════════════════════════════════════════════╗
+║     ⚠️  RÈGLE ABSOLUE - SÉPARATION DES ENVIRONNEMENTS  ⚠️          ║
+╠════════════════════════════════════════════════════════════════════╣
+║                                                                    ║
+║  ❌ INTERDIT:                                                      ║
+║  ├── Credentials clients dans .env de 3A-Automation               ║
+║  ├── Exécuter scripts agence sur stores clients réels             ║
+║  └── Mélanger environnements agence/clients                        ║
+║                                                                    ║
+║  ✅ ARCHITECTURE CORRECTE:                                         ║
+║                                                                    ║
+║  /Users/mac/Desktop/JO-AAA/           ← AGENCE                     ║
+║  └── .env                             ← VIDE (pas de creds clients)║
+║                                                                    ║
+║  /Users/mac/Desktop/clients/alpha-medical/                         ║
+║  └── .env                             ← Creds Alpha Medical        ║
+║                                                                    ║
+║  /Users/mac/Desktop/clients/henderson/                             ║
+║  └── .env                             ← Creds Henderson            ║
+║                                                                    ║
+║  /Users/mac/Desktop/clients/mydealz/                               ║
+║  └── .env                             ← Creds MyDealz              ║
+║                                                                    ║
+╚════════════════════════════════════════════════════════════════════╝
+```
+
+**RAISON:** Éviter d'exécuter des modifications sur des stores clients par erreur.
 
 ---
 
@@ -99,50 +132,56 @@
 
 ---
 
-## MÉTRIQUES FACTUELLES (Vérifiées 17/12/2025 - Session API Tests)
+## MÉTRIQUES FACTUELLES (Vérifiées 18/12/2025 - Session 15)
 
-### Écart Documentation vs Réalité
+### VÉRITÉ BRUTALE - État Réel des Automatisations
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    MÉTRIQUES: CLAIMS VS RÉALITÉ                              │
+│                    MÉTRIQUES: VÉRITÉ SESSION 15                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│  MÉTRIQUE               │ DOCUMENTÉ        │ RÉALITÉ VÉRIFIÉE               │
-│  ══════════════════════════════════════════════════════════════════════════ │
-│  Scripts totaux         │ 207              │ ~198                           │
-│  Scripts réutilisables  │ 120              │ ~25 (génériques purs)          │
-│  Scripts configurables  │ -                │ ~33 (avec process.env)         │
-│  Scripts client-specific│ -                │ ~140 (hardcoded)               │
-│                         │                  │                                │
-│  MCPs configurés        │ 8-10             │ 6 déclarés                     │
-│  MCPs fonctionnels      │ -                │ 3 (Klaviyo, Shopify, n8n)      │
-│  MCPs cassés            │ -                │ 2 (Google - SA manquant)       │
-│  MCPs placeholder       │ -                │ 1 (Apify - "YOUR_TOKEN")       │
-│                         │                  │                                │
-│  Readiness global       │ 68%              │ ~35% (post-session)            │
-│                         │                  │                                │
+│  AUTOMATISATIONS TESTÉES ET FONCTIONNELLES:                    6            │
+│  ├── audit-shopify-complete.cjs        ✅ TESTÉ                             │
+│  ├── audit-klaviyo-flows.cjs           ✅ TESTÉ                             │
+│  ├── fix-missing-alt-text.cjs          ✅ TESTÉ                             │
+│  ├── test-shopify-connection.cjs       ✅ TESTÉ                             │
+│  ├── test-klaviyo-connection.cjs       ✅ TESTÉ                             │
+│  └── test-all-apis.cjs                 ✅ CRÉÉ                              │
+│                                                                              │
+│  SCRIPTS DANS automations/:                                                 │
+│  ├── automations/generic/              1 script                             │
+│  └── automations/clients/              43 scripts                           │
+│      ├── 14 hardcodés (domaines spécifiques)                                │
+│      ├── 21 utilisent .env.local (non standard)                             │
+│      └── ~8 potentiellement génériques                                      │
+│                                                                              │
+│  MCPs RÉELLEMENT TESTABLES:            0 (credentials clients retirées)     │
+│                                                                              │
+│  READINESS AGENCE:                     ~14% (6/44 testés)                   │
+│                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### État MCPs (Mis à jour 18/12/2025 - Session 10)
+### État MCPs (Corrigé 18/12/2025 - Session 15)
 
 | MCP | Statut | Package NPM | Détail |
 |-----|--------|-------------|--------|
-| ✅ chrome-devtools | **CONFIGURÉ** | `chrome-devtools-mcp` | Debug browser, screenshots, console |
-| ✅ playwright | **CONFIGURÉ** | `@playwright/mcp` | Browser automation testing |
-| ✅ gemini | **CONFIGURÉ** | `github:rlabs-inc/gemini-mcp` | ⚠️ Nécessite GEMINI_API_KEY |
-| ✅ github | **CONFIGURÉ** | `@modelcontextprotocol/server-github` | ⚠️ Nécessite GITHUB_TOKEN |
-| ✅ hostinger | **CONFIGURÉ** | `hostinger-api-mcp` | Deploy, DNS, billing (23 tools) |
-| ✅ wordpress | **CONFIGURÉ** | `claudeus-wp-mcp` | 145 tools pour clients WP |
-| ✅ Shopify | **TESTÉ OK** | `shopify-mcp` | azffej-as = Alpha Medical Care |
-| ✅ Klaviyo | **TESTÉ OK** | `klaviyo-mcp-server` | 3 listes, 7 flows |
-| ✅ n8n | **CONFIGURÉ** | SSE remote | Alpha Medical (JWT token) |
-| ⚠️ Google Analytics | CASSÉ | `mcp-server-google-analytics` | Service Account MANQUANT |
-| ⚠️ Google Sheets | CASSÉ | `mcp-gsheets` | Service Account MANQUANT |
-| ❌ Apify | Non configuré | `@apify/actors-mcp-server` | Token placeholder |
+| ✅ chrome-devtools | **CONFIGURÉ** | `chrome-devtools-mcp` | Debug browser, screenshots |
+| ✅ playwright | **CONFIGURÉ** | `@playwright/mcp` | Browser automation |
+| ⚠️ gemini | SANS API KEY | `github:rlabs-inc/gemini-mcp` | GEMINI_API_KEY vide |
+| ⚠️ github | SANS TOKEN | `@modelcontextprotocol/server-github` | GITHUB_TOKEN vide |
+| ⚠️ hostinger | NON TESTÉ | `hostinger-api-mcp` | Credentials non vérifiées |
+| ⚠️ wordpress | NON TESTÉ | `claudeus-wp-mcp` | wp-sites.json requis |
+| ❌ Shopify | CREDENTIALS RETIRÉES | `shopify-mcp` | .env nettoyé Session 15 |
+| ❌ Klaviyo | CREDENTIALS RETIRÉES | `klaviyo-mcp-server` | .env nettoyé Session 15 |
+| ❌ n8n | CREDENTIALS RETIRÉES | SSE remote | .env nettoyé Session 15 |
+| ❌ Google Analytics | CASSÉ | `mcp-server-google-analytics` | Service Account MANQUANT |
+| ❌ Google Sheets | CASSÉ | `mcp-gsheets` | Service Account MANQUANT |
+| ❌ Apify | NON CONFIGURÉ | `@apify/actors-mcp-server` | Token vide |
 
-**Total: 12 MCPs configurés (9 fonctionnels, 3 en attente config)**
+**Total: 12 MCPs déclarés - 2 fonctionnels (chrome-devtools, playwright)**
+**⚠️ Les MCPs Shopify/Klaviyo/n8n fonctionnaient avec credentials CLIENTS (violation règle séparation)**
 
 ### CORRECTION IMPORTANTE (17/12/2025):
 ```
@@ -871,6 +910,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.7 | **Session 15 - SÉPARATION AGENCE/CLIENTS**: .env nettoyé (credentials clients retirées), règle critique ajoutée (pas de creds clients dans agence), audit factuel: seulement 6 automatisations testées (pas 49!), MCPs réévalués (2 fonctionnels vs 9 claimed), architecture correcte documentée |
 | 2025-12-18 | 3.6 | **Session 13 - AEO/SEO Vérification**: Schema.org 100% (12/12 pages), robots.txt complet (8 crawlers AI), llms.txt créé (spec-compliant), images confirmées optimisées, FORENSIC-AUDIT v2.1, Blueprint score 98/100 |
 | 2025-12-18 | 3.5 | **Session 12 - Suite Finale**: +11 automatisations (49 total), video/ + google-merchant/ ajoutés, privacy.html dupliqué supprimé, liens mis à jour, AAA-AUTOMATIONS-CATALOG v2.0, sitemap.xml nettoyé |
 | 2025-12-18 | 3.4 | **Session 12 - Forensic Matrix**: Analyse forensique approfondie 218 scripts legacy, matrice utilisation/complémentarité créée, 148 scripts normalisables (<1h) identifiés, workflows Lead/SEO/Email documentés, correction métrique "210 non utilisables" → "68% réutilisable" |
