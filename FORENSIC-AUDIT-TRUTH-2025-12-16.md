@@ -286,7 +286,8 @@ Détail (mis à jour 17/12/2025):
 - Configuration .env: 0% → 100% (CRÉÉ ET FONCTIONNEL)
 - Shopify API: 0% → 100% TESTÉ
 - Klaviyo API: 0% → 100% TESTÉ
-- Voice AI: 0%
+- Voice AI: 5% (Scope clarifié, KB prête, infra à construire)
+- Knowledge Base RAG: 100% Phase 1 COMPLÈTE (273 chunks, BM25)
 - Google Analytics: 0% (Service Account manquant)
 ```
 
@@ -393,12 +394,250 @@ KLAVIYO METRICS:
 ```
 ❌ Google Service Account: Fichier ~/.config/google/service-account.json N'EXISTE PAS
 ❌ Henderson Shop credentials: INCONNUES - à retrouver
-❌ Git push: Conflit avec repo parent Mbnb-Code
+✅ Git push: RÉSOLU - github.com/Jouiet/3a-automations connecté
+```
+
+---
+
+## 11. MISE À JOUR SESSION 4 (17/12/2025)
+
+### 11.1 Actions Complétées
+
+```
+✅ GitHub repo connecté: github.com/Jouiet/3a-automations
+✅ Branding extrait: 3A-BRANDING-GUIDE.md (couleurs exactes du logo)
+✅ CSS landing page mis à jour avec couleurs marque
+✅ Logos ajoutés au repo
+✅ AI-PROMPTS-LANDING-PAGE-2025.md créé (recherche web factuelle)
+✅ xAI API Key obtenue et sauvegardée dans .env
+✅ Sécurité vérifiée: .env dans .gitignore
+```
+
+### 11.2 État xAI/Grok API
+
+```
+STATUT: CONFIGURÉ mais NON FONCTIONNEL (nécessite crédits)
+
+DÉTAIL:
+├── Clé API: xai-B0Tf0... (84 caractères) - VALIDE
+├── Fichiers créés: GROK.md, grok-client.py, grok-client.cjs
+├── Test connexion: ERREUR 403 "No credits"
+└── Action requise: Acheter $5 crédits minimum
+
+PRICING xAI (Vérifié 17/12/2025):
+├── $150/mois gratuit: Après $5 dépensés + data sharing opt-in
+├── Grok 4 Fast: $0.20/1M tokens input, $0.50-1.00/1M output
+└── Grok 4: $3.00/1M tokens input, $15.00/1M output
+```
+
+### 11.3 Découvertes Clés Session 4
+
+```
+GSAP ScrollTrigger: GRATUIT depuis 2025 (acquisition Webflow)
+Hostinger AI Image: GRATUIT depuis Sept 2025 (pas de crédits)
+Hostinger Website Builder: PAS d'accès code (pas FTP, pas SSH, pas API)
+v0.dev: 200 crédits gratuits/mois, React/Tailwind output
+Bolt.new: Full-stack, 1M+ sites déployés
+```
+
+### 11.4 Bloqueurs Actualisés
+
+```
+⚠️ xAI API: Clé OK mais $5 requis pour activer
+❌ Google Service Account: Toujours MANQUANT
+❌ Henderson Shop credentials: INCONNUES
+✅ Landing page: Prompts optimisés prêts pour Hostinger AI
+```
+
+### 11.5 Grok Voice Agent API (Recherche 17/12/2025)
+
+```
+DÉCOUVERTE MAJEURE: xAI offre Voice Agent API
+
+PRICING VÉRIFIÉ:
+├── $0.05/minute de connexion (flat rate)
+├── Comparé OpenAI Realtime: $0.06-0.24/min
+└── 100 appels × 5 min = $25/mois
+
+SPECS TECHNIQUES:
+├── WebSocket bidirectionnel (pas WebRTC direct)
+├── Compatible OpenAI Realtime API spec
+├── Time-to-first-audio: < 1 seconde
+├── 100+ langues avec détection auto
+├── Formats: PCM 8-48kHz, G.711 μ-law/A-law
+└── Intégrations: Twilio, Vonage, LiveKit
+
+IMPLÉMENTATION:
+├── LiveKit plugin: livekit-agents[openai]~=1.3
+├── Modèle: grok-4-1-fast-non-reasoning
+└── Env: XAI_API_KEY requis + crédits
+
+IMPACT 3A AUTOMATION:
+├── Voice AI devient POSSIBLE avec budget actuel
+├── Coût estimé: $25-50/mois pour usage modéré
+├── Alternative viable à Vapi.ai (plus complexe)
+└── BLOQUEUR: $5 crédits xAI toujours requis
+```
+
+---
+
+### 11.6 Knowledge Base RAG (Complété 18/12/2025)
+
+```
+PHASE 1 TERMINÉE - VÉRIFIÉ:
+├── knowledge-base/src/document-parser.cjs
+│   └── 273 chunks générés (233,072 chars)
+├── knowledge-base/src/vector-store.cjs
+│   └── BM25 index (2,853 tokens uniques)
+├── knowledge-base/src/rag-query.cjs
+│   └── Multi-search avec variations françaises
+├── knowledge-base/src/catalog-extractor.cjs
+│   └── 3 packages, 15 automations, 5 services, 4 MCPs
+└── scripts/grok-client.cjs v2.0
+    └── RAG-enhanced avec /catalog et /stats
+
+DOCUMENTS INDEXÉS:
+├── AAA-AUTOMATIONS-CATALOG-2025.md (catalog)
+├── FLYWHEEL-BLUEPRINT-2025.md (methodology)
+├── BUSINESS-MODEL-FACTUEL-2025.md (business)
+├── 3A-WEBSITE-BLUEPRINT-2025.md (website)
+├── 3A-BRANDING-GUIDE.md (branding)
+└── CLAUDE.md (context)
+
+TESTS EMPIRIQUES:
+✅ "Combien coûte le package Growth?" → Confidence 100%
+✅ "Quelles automatisations Klaviyo?" → Confidence 73.7%
+✅ "Comment fonctionne Flywheel?" → Confidence 61.5%
+```
+
+### 11.7 Voice Agent Scope (Clarifié 18/12/2025)
+
+```
+SCOPE UTILISATEUR (Confirmé):
+├── Use Case 1: AI SHOPPING ASSISTANT
+│   ├── Recherche produits vocale
+│   ├── Recommandations
+│   ├── Prix, stock, promos
+│   └── Guidage checkout
+│
+├── Use Case 2: SUPPORT CLIENT
+│   ├── Suivi commande
+│   ├── Livraison
+│   ├── Retours/remboursements
+│   └── FAQ + escalade
+
+DIFFÉRENCE VS DOCUMENTATION INITIALE:
+├── AVANT: "Salty Pretzel" = Lead magnet demo (8-16h)
+├── APRÈS: Agent opérationnel dual-purpose (116-172h)
+└── FACTEUR COMPLEXITÉ: ~10x
+
+INTÉGRATIONS REQUISES:
+✅ Shopify Products/Orders API (via MCP)
+✅ Klaviyo API (via MCP)
+✅ Knowledge Base RAG (COMPLÉTÉ)
+❌ Voice Gateway (À CONSTRUIRE)
+❌ STT/TTS Pipeline (À CONSTRUIRE)
+❌ Intent Router (À CONSTRUIRE)
+
+ESTIMATION EFFORT:
+├── Phase 1: Voice infra (44-68h)
+├── Phase 2: Intent + Shopify (36-52h)
+└── Phase 3: Shopping + Support (36-52h)
+TOTAL: 116-172 heures
+```
+
+---
+
+## 12. MISE À JOUR SESSION 6 (18/12/2025) - Performance
+
+### 12.1 Problème Identifié
+
+```
+SYMPTÔMES UTILISATEUR:
+├── Pages automations.html et pricing.html "non optimales"
+├── Page services/pme.html lente
+├── Section "Notre Méthode" décalée visuellement
+└── Toutes les pages devenues lentes
+
+DIAGNOSTIC FORENSIQUE:
+├── filter: blur(100px) → GPU overload
+├── animation: morph-blob 15s infinite → CPU strain
+├── script.js 32K (particles, cursor glow, 3D tilt) → Heavy
+├── styles.css 84K sur toutes les pages → Wasteful
+└── timeline-line positioning incorrect
+```
+
+### 12.2 Solutions Implémentées
+
+```
+ASSETS LÉGERS CRÉÉS:
+├── styles-lite.css (40K) - 52% plus léger
+│   ├── Pas d'animations lourdes
+│   ├── Glows statiques (blur: 60px)
+│   ├── morph-blobs masqués
+│   └── Tous les styles de composants préservés
+│
+└── script-lite.js (8K) - 75% plus léger
+    ├── Navigation mobile
+    ├── Smooth scroll
+    ├── Header scroll effect
+    └── Cookie consent RGPD
+
+OPTIMISATIONS styles.css:
+├── blur: 100px → 80px
+├── morph-blob 15s → 20s (slower = smoother)
+├── will-change + contain ajoutés
+├── hero-visual: justify-self: center
+└── timeline-line: top/bottom ajustés
+
+PAGES MIGRÉES VERS LITE (8 pages):
+├── automations.html
+├── pricing.html
+├── services/pme.html
+├── services/ecommerce.html
+├── privacy.html
+├── 404.html
+├── contact.html
+├── a-propos.html
+├── cas-clients.html
+├── legal/mentions-legales.html
+├── legal/politique-confidentialite.html
+└── services/audit-gratuit.html
+```
+
+### 12.3 Alignement "Notre Méthode" (Fix)
+
+```
+AVANT:
+├── timeline-line left: 40px (fixe)
+├── top: 0, bottom: 0 (pleine hauteur)
+└── Décalé par rapport aux markers
+
+APRÈS:
+├── timeline-line left: 39px (centre marker 80px)
+├── top: 40px, bottom: 40px (centre markers)
+└── Mobile: recalculé pour markers 50px
+```
+
+### 12.4 Vérification
+
+```
+PERFORMANCE GAINS (ESTIMÉS):
+├── CSS: 84K → 40K (-52%) sur 8 pages
+├── JS: 32K → 8K (-75%) sur 8 pages
+├── Homepage: Optimizations blur/animation
+└── Timeline: Alignement corrigé
+
+PAGES HOMEPAGE (styles.css complet):
+└── index.html - Design premium préservé
+
+PAGES SECONDAIRES (styles-lite.css):
+└── 8 pages - Chargement optimisé
 ```
 
 ---
 
 *Audit initial: 2025-12-16*
-*Dernière mise à jour: 2025-12-17 (Session API Tests)*
+*Dernière mise à jour: 2025-12-18 (Session 6 - Performance Optimization)*
 *Méthode: Vérification fichier par fichier + Tests API empiriques*
 *Principe: Aucune confiance aveugle, faits uniquement*

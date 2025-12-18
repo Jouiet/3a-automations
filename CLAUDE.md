@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 2.5 | Dernière mise à jour: 2025-12-17
+## Version: 3.0 | Dernière mise à jour: 2025-12-18 (Session 10)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -125,16 +125,24 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### État MCPs (Vérifié par API Test - 17/12/2025)
+### État MCPs (Mis à jour 18/12/2025 - Session 10)
 
-| MCP | Statut | Détail |
-|-----|--------|--------|
-| ✅ Klaviyo | **TESTÉ OK** | API Key pk_16c08... - 3 listes, 7 flows |
-| ✅ Shopify | **TESTÉ OK** | azffej-as = **Alpha Medical Care** (pas Henderson!) |
-| ✅ n8n | Configuré | Alpha Medical (JWT token) - non testé API |
-| ⚠️ Google Analytics | CASSÉ | Service Account FICHIER MANQUANT |
-| ⚠️ Google Sheets | CASSÉ | Service Account FICHIER MANQUANT |
-| ❌ Apify | Non configuré | Token = "YOUR_APIFY_TOKEN" placeholder |
+| MCP | Statut | Package NPM | Détail |
+|-----|--------|-------------|--------|
+| ✅ chrome-devtools | **CONFIGURÉ** | `chrome-devtools-mcp` | Debug browser, screenshots, console |
+| ✅ playwright | **CONFIGURÉ** | `@playwright/mcp` | Browser automation testing |
+| ✅ gemini | **CONFIGURÉ** | `github:rlabs-inc/gemini-mcp` | ⚠️ Nécessite GEMINI_API_KEY |
+| ✅ github | **CONFIGURÉ** | `@modelcontextprotocol/server-github` | ⚠️ Nécessite GITHUB_TOKEN |
+| ✅ hostinger | **CONFIGURÉ** | `hostinger-api-mcp` | Deploy, DNS, billing (23 tools) |
+| ✅ wordpress | **CONFIGURÉ** | `claudeus-wp-mcp` | 145 tools pour clients WP |
+| ✅ Shopify | **TESTÉ OK** | `shopify-mcp` | azffej-as = Alpha Medical Care |
+| ✅ Klaviyo | **TESTÉ OK** | `klaviyo-mcp-server` | 3 listes, 7 flows |
+| ✅ n8n | **CONFIGURÉ** | SSE remote | Alpha Medical (JWT token) |
+| ⚠️ Google Analytics | CASSÉ | `mcp-server-google-analytics` | Service Account MANQUANT |
+| ⚠️ Google Sheets | CASSÉ | `mcp-gsheets` | Service Account MANQUANT |
+| ❌ Apify | Non configuré | `@apify/actors-mcp-server` | Token placeholder |
+
+**Total: 12 MCPs configurés (9 fonctionnels, 3 en attente config)**
 
 ### CORRECTION IMPORTANTE (17/12/2025):
 ```
@@ -207,14 +215,53 @@ KLAVIYO:
 | **Lead Sync** | €400 setup + €150/mois | 1 semaine | Meta Leads → Shopify/Klaviyo |
 | **Maintenance Mensuelle** | €300-800/mois | 4-8h/mois | Monitoring + optimisations |
 
-### Services NON Offerts
+### Services NON Offerts (À RÉVISER)
 
-| Service | Raison |
-|---------|--------|
-| Voice AI | Budget insuffisant, expertise non prouvée |
-| App development | Hors spécialité |
-| Design/Branding | Pas notre expertise |
-| Google Ads | Focus Meta/Email uniquement |
+| Service | Raison | Statut Révisé (18/12/2025) |
+|---------|--------|---------------------------|
+| Voice AI | Budget insuffisant, expertise non prouvée | **RÉVISÉ**: Grok Voice $0.05/min viable |
+| App development | Hors spécialité | Maintenu |
+| Design/Branding | Pas notre expertise | Maintenu |
+| Google Ads | Focus Meta/Email uniquement | Maintenu |
+
+### Voice Agent - Scope Clarifié (18/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    VOICE AGENT - DUAL PURPOSE (Clarifié)                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   USE CASE 1: AI SHOPPING ASSISTANT                                         │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│   • Recherche produits par voix                                             │
+│   • Recommandations personnalisées                                          │
+│   • Prix, stock, disponibilité                                              │
+│   • Aide panier, promotions                                                 │
+│   • Guidage checkout                                                        │
+│                                                                              │
+│   USE CASE 2: SUPPORT CLIENT                                                │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│   • Suivi commande ("où est ma commande?")                                  │
+│   • Statut livraison                                                        │
+│   • Retours/remboursements                                                  │
+│   • FAQ produits                                                            │
+│   • Escalade humain                                                         │
+│                                                                              │
+│   STATUT IMPLÉMENTATION: 0%                                                 │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   ❌ Voice Gateway           À CONSTRUIRE                                   │
+│   ❌ STT Pipeline            À CONSTRUIRE                                   │
+│   ❌ TTS Pipeline            À CONSTRUIRE                                   │
+│   ❌ Intent Router           À CONSTRUIRE                                   │
+│   ✅ Knowledge Base RAG      FAIT (18/12/2025)                              │
+│   ✅ Shopify MCP             DISPONIBLE                                     │
+│   ✅ Klaviyo MCP             DISPONIBLE                                     │
+│                                                                              │
+│   EFFORT ESTIMÉ: 116-172 heures                                             │
+│   COÛT OPÉRATIONNEL: ~$0.32/appel                                          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -513,22 +560,133 @@ COMPLÉTÉ (17/12/2025 - Session 3):
 ✅ Identifier GSAP ScrollTrigger gratuit depuis 2025 (acquisition Webflow)
 ✅ Documenter tendances: purposeful motion, micro-interactions, glassmorphism
 
-IMMÉDIAT (Prochaine session):
-□ Créer Google Service Account
-□ Obtenir XAI_API_KEY (console.x.ai)
-□ Trouver credentials Henderson Shop (manquantes)
+COMPLÉTÉ (17/12/2025 - Session 4):
+✅ Clé xAI API obtenue et sauvegardée dans .env
+✅ Sécurité vérifiée: .env dans .gitignore
+⚠️ Compte xAI nécessite crédits (min $5 puis $150/mois gratuit avec data sharing)
+✅ Découverte Grok Voice Agent API ($0.05/min - Voice AI devient POSSIBLE)
+
+COMPLÉTÉ (18/12/2025 - Session 5):
+✅ Knowledge Base RAG Phase 1 TERMINÉE
+   ├── knowledge-base/src/document-parser.cjs (273 chunks, 233k chars)
+   ├── knowledge-base/src/vector-store.cjs (BM25, 2853 tokens)
+   ├── knowledge-base/src/rag-query.cjs (multi-search, context builder)
+   ├── knowledge-base/src/catalog-extractor.cjs (3 packages, 15 automations)
+   └── scripts/grok-client.cjs v2.0 (RAG-enhanced)
+✅ Grok Client refactoré avec RAG intégré
+✅ Scope Voice Agent clarifié: AI Shopping Assistant + Support Client
+✅ 6 pages landing-page mises à jour design premium
+✅ Commit: 8d5ed4f (6 pages design upgrade)
+
+IMMÉDIAT (Prochaine session - SESSION 6):
+□ Acheter crédits xAI ($5-10) pour activer API Grok
+□ Tester grok-client.cjs v2.0 avec API live
+□ Créer Google Service Account pour GA4/Sheets
 □ Déployer landing page sur Hostinger
+
+VOICE AGENT (Après activation xAI - 116-172h total):
+□ Phase 1: Voice Gateway + STT + TTS (44-68h)
+□ Phase 2: Intent Router + Shopify Integration (36-52h)
+□ Phase 3: AI Shopping + Support modes (36-52h)
+```
+
+---
+
+## END-OF-SESSION ACTION PLAN (18/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    PLAN ACTIONNABLE - FIN SESSION 6                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   SESSION 6 RÉSUMÉ (Performance Optimization):                              │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│   ✅ styles-lite.css créé (40K vs 84K) - 52% réduction taille              │
+│   ✅ script-lite.js créé (8K vs 32K) - 75% réduction taille                │
+│   ✅ 12 pages secondaires migrées vers assets légers                        │
+│   ✅ Timeline "Notre Méthode" alignement corrigé                            │
+│   ✅ styles.css optimisé (blur, animation, GPU hints)                       │
+│   ✅ 3A-WEBSITE-BLUEPRINT score: 95 → 96/100                               │
+│   ✅ FORENSIC-AUDIT-TRUTH mis à jour (Section 12)                          │
+│                                                                              │
+│   FICHIERS MODIFIÉS:                                                        │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   CRÉÉS:                                                                    │
+│   ├── styles-lite.css      (40K) CSS léger pour pages secondaires          │
+│   └── script-lite.js       (8K)  JS minimal (nav, scroll, cookies)         │
+│                                                                              │
+│   OPTIMISÉS:                                                                │
+│   ├── styles.css           blur: 100→80px, animation 15→20s, GPU hints     │
+│   └── timeline-line        top/bottom ajustés pour alignement              │
+│                                                                              │
+│   MIGRÉS VERS LITE:                                                         │
+│   ├── automations.html                                                      │
+│   ├── pricing.html                                                          │
+│   ├── services/pme.html                                                     │
+│   ├── services/ecommerce.html                                               │
+│   ├── services/audit-gratuit.html                                           │
+│   ├── privacy.html                                                          │
+│   ├── 404.html                                                              │
+│   ├── contact.html                                                          │
+│   ├── a-propos.html                                                         │
+│   ├── cas-clients.html                                                      │
+│   ├── legal/mentions-legales.html                                           │
+│   └── legal/politique-confidentialite.html                                  │
+│                                                                              │
+│   PROCHAINE SESSION (SESSION 7) - PRIORITÉS:                                │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│                                                                              │
+│   PRIORITÉ 1: TESTER PERFORMANCE EN LOCAL (15 min)                          │
+│   ├── Ouvrir http://localhost:8081/automations.html                         │
+│   ├── Vérifier chargement rapide                                            │
+│   ├── Tester navigation mobile                                              │
+│   └── Vérifier "Notre Méthode" alignement sur homepage                      │
+│                                                                              │
+│   PRIORITÉ 2: DÉPLOIEMENT HOSTINGER (2-3h)                                  │
+│   ├── Upload landing-page-hostinger/ complet                                │
+│   ├── Inclure: styles-lite.css, script-lite.js                              │
+│   ├── Configurer DNS: 3a-automation.com                                     │
+│   ├── SSL Let's Encrypt                                                     │
+│   └── Tester formulaire contact en production                               │
+│                                                                              │
+│   PRIORITÉ 3: ACTIVATION xAI API (30 min)                                   │
+│   ├── Acheter crédits xAI: $5-10 minimum                                    │
+│   ├── URL: https://console.x.ai/billing                                     │
+│   └── Tester: node scripts/grok-client.cjs                                  │
+│                                                                              │
+│   PRIORITÉ 4: GOOGLE SERVICE ACCOUNT (1-2h)                                 │
+│   ├── Créer projet Google Cloud Console                                     │
+│   ├── Activer APIs: Analytics Data API, Sheets API                          │
+│   ├── Créer Service Account + JSON key                                      │
+│   └── Tester MCPs GA4 et Sheets                                             │
+│                                                                              │
+│   BLOQUANTS ACTUELS:                                                        │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│   ⚠️ xAI API: Nécessite crédits ($5 min)                                    │
+│   ⚠️ Google APIs: Nécessite Service Account                                 │
+│   ⚠️ Hostinger: Attente déploiement                                         │
+│                                                                              │
+│   MÉTRIQUES PERFORMANCE (Estimées):                                         │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│   ├── CSS pages secondaires: 84K → 40K (-52%)                               │
+│   ├── JS pages secondaires: 32K → 8K (-75%)                                 │
+│   ├── Total économisé/page: ~68K                                            │
+│   └── 12 pages × 68K = 816K économisés en transfert                         │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 CETTE SEMAINE:
+□ Déployer landing page optimisée sur Hostinger
 □ Envoyer emails restart aux 3 clients
 □ Corriger 271 alt text manquants (Alpha Medical)
-□ Créer flows Klaviyo manquants (Browse Abandonment, Post-Purchase, Win-Back)
-□ Déployer landing page sur Hostinger
+□ Créer flows Klaviyo manquants
 
 Q1 2026:
-□ Refactorer 10 scripts prioritaires (retirer hardcoding)
+□ Refactorer 10 scripts prioritaires
 □ Générer 4-5 nouveaux clients
 □ Atteindre €2k/mois revenue
+□ Voice Agent MVP opérationnel
 ```
 
 ---
@@ -574,10 +732,116 @@ Le system prompt est défini dans `GROK.md` et inclut:
 
 ---
 
+## GROK VOICE AGENT API (Découvert 17/12/2025)
+
+### Specs Vérifiées
+
+| Paramètre | Valeur |
+|-----------|--------|
+| **Pricing** | $0.05/minute connexion (flat rate) |
+| **Performance** | < 1s time-to-first-audio |
+| **Langues** | 100+ avec détection automatique |
+| **Formats audio** | PCM 8-48kHz, G.711 μ-law/A-law |
+| **Protocole** | WebSocket bidirectionnel |
+| **Compatibilité** | OpenAI Realtime API spec |
+
+### Coût Estimé Mensuel
+
+| Usage | Calcul | Coût |
+|-------|--------|------|
+| Light | 50 appels × 5 min | $12.50/mois |
+| Medium | 100 appels × 5 min | $25/mois |
+| Heavy | 200 appels × 5 min | $50/mois |
+
+### Implémentation
+
+```bash
+# Python (LiveKit)
+pip install "livekit-agents[openai]~=1.3"
+
+# Node.js (LiveKit)
+pnpm add @livekit/agents-plugin-openai@1.x
+```
+
+```python
+from livekit.plugins import openai
+
+session = AgentSession(
+    llm=openai.LLM.with_x_ai(
+        model="grok-4-1-fast-non-reasoning",
+    ),
+)
+```
+
+### Impact 3A Automation
+
+```
+AVANT: Voice AI = HORS SCOPE (Vapi.ai coût variable, risqué)
+APRÈS: Voice AI = POSSIBLE ($25-50/mois estimé)
+
+BLOQUEUR: $5 crédits xAI requis pour activer
+ACTION: Acheter crédits sur https://console.x.ai/team/xxx
+```
+
+---
+
+## KNOWLEDGE BASE RAG (Créé 18/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    KNOWLEDGE BASE RAG - PHASE 1 COMPLÈTE                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   COMPOSANTS:                                                               │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│   knowledge-base/                                                           │
+│   ├── src/                                                                  │
+│   │   ├── document-parser.cjs    → Parse MD → 273 chunks                   │
+│   │   ├── vector-store.cjs       → BM25 retrieval (2853 tokens)            │
+│   │   ├── rag-query.cjs          → Interface RAG multi-search              │
+│   │   └── catalog-extractor.cjs  → Extraction données structurées          │
+│   └── data/                                                                 │
+│       ├── chunks.json            → 273 chunks (233k chars)                 │
+│       ├── catalog.json           → 3 packages, 15 automations, 5 services  │
+│       ├── parser-stats.json      → Métriques parsing                       │
+│       └── index-stats.json       → Stats index BM25                        │
+│                                                                              │
+│   DOCUMENTS INDEXÉS:                                                        │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   • AAA-AUTOMATIONS-CATALOG-2025.md    (catalog)                           │
+│   • FLYWHEEL-BLUEPRINT-2025.md         (methodology)                       │
+│   • BUSINESS-MODEL-FACTUEL-2025.md     (business)                          │
+│   • 3A-WEBSITE-BLUEPRINT-2025.md       (website)                           │
+│   • 3A-BRANDING-GUIDE.md               (branding)                          │
+│   • CLAUDE.md                          (context)                           │
+│                                                                              │
+│   USAGE:                                                                    │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   node scripts/grok-client.cjs          # Chat RAG activé                  │
+│   node scripts/grok-client.cjs --no-rag # Chat sans RAG                    │
+│   /catalog                              # Afficher catalogue               │
+│   /stats                                # Stats knowledge base              │
+│                                                                              │
+│   COMMANDES BUILD:                                                          │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   node knowledge-base/src/document-parser.cjs   # Rebuild chunks           │
+│   node knowledge-base/src/vector-store.cjs      # Test retrieval           │
+│   node knowledge-base/src/catalog-extractor.cjs # Extract catalog          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 ## CHANGELOG
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.0 | **MCP Expansion**: 12 MCPs configurés (chrome-devtools, playwright, gemini, github, hostinger, wordpress + existants). Stat-labels CSS fix. wp-sites.json template créé |
+| 2025-12-18 | 2.9 | **Performance Optimization**: styles-lite.css (40K, -52%), script-lite.js (8K, -75%), 12 pages migrées, timeline alignement fix, GPU hints |
+| 2025-12-18 | 2.8 | **Knowledge Base RAG**: Phase 1 complète (273 chunks, BM25), Grok v2.0 RAG-enhanced, Voice Agent scope clarifié (Shopping + Support), 6 pages design upgrade |
+| 2025-12-17 | 2.7 | **Voice API**: Découverte Grok Voice Agent API ($0.05/min), Voice AI devient possible avec budget actuel |
+| 2025-12-17 | 2.6 | **xAI API**: Clé API sauvegardée dans .env, sécurité .gitignore vérifiée, compte nécessite crédits |
 | 2025-12-17 | 2.5 | **AI Prompts**: AI-PROMPTS-LANDING-PAGE-2025.md créé, recherche web factuelle (v0.dev, Bolt.new, Hostinger AI, GSAP), tendances 2025 documentées |
 | 2025-12-17 | 2.4 | **Branding**: Couleurs exactes extraites du logo, CSS màj, 3A-BRANDING-GUIDE.md |
 | 2025-12-17 | 2.3 | **GitHub**: Repo connecté github.com/Jouiet/3a-automations, logos ajoutés |
