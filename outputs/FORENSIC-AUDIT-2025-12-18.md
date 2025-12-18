@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 2.3 (Màj Session 15 - Correction critique architecture)
+## Date: 2025-12-18 | Version: 2.4 (Màj Session 15b - Audit code + dossiers clients)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -849,24 +849,74 @@ APRÈS: VIDE (toutes credentials clients retirées)
 
 **TOTAL VÉRIFIÉ: 6 automatisations (pas 49!)**
 
-## 12.5 MCPs - État Réel
+## 12.4b Automatisations Génériques (Audit Code Session 15b)
 
-| MCP | Statut Réel |
-|-----|-------------|
-| chrome-devtools | ✅ Fonctionnel |
-| playwright | ✅ Fonctionnel |
-| Shopify | ❌ Credentials retirées |
-| Klaviyo | ❌ Credentials retirées |
-| n8n | ❌ Credentials retirées |
-| Google Analytics | ❌ Service Account manquant |
-| Google Sheets | ❌ Service Account manquant |
-| Apify | ❌ Token vide |
-| Gemini | ⚠️ API Key vide |
-| GitHub | ⚠️ Token vide |
-| Hostinger | ⚠️ Non testé |
-| WordPress | ⚠️ Non testé |
+### 100% Génériques (pas de hardcoding, pas de .env.local)
 
-**TOTAL FONCTIONNEL: 2/12 MCPs**
+| # | Automation | Folder | Status |
+|---|------------|--------|--------|
+| 1 | audit-shopify-complete.cjs | shopify/ | ✅ TESTÉ |
+| 2 | audit-klaviyo-flows.cjs | klaviyo/ | ✅ TESTÉ |
+| 3 | fix-missing-alt-text.cjs | seo/ | ✅ TESTÉ |
+| 4 | test-shopify-connection.cjs | shopify/ | ✅ TESTÉ |
+| 5 | test-klaviyo-connection.cjs | klaviyo/ | ✅ TESTÉ |
+| 6 | test-all-apis.cjs | generic/ | ✅ CRÉÉ |
+| 7 | apify-verify-connection.cjs | social/ | ⚪ À TESTER |
+| 8 | apify-inspect-raw-data.cjs | social/ | ⚪ À TESTER |
+| 9 | generate-all-promo-videos.cjs | video/ | ⚪ À TESTER |
+| 10 | convert-video-portrait.cjs | video/ | ⚪ À TESTER |
+
+**TOTAL 100% GÉNÉRIQUES: 10 automatisations**
+
+### Fixables (utilisent .env.local - 15 scripts)
+
+Ces scripts utilisent `.env.local` au lieu de `.env`. Un simple find/replace les rendrait génériques:
+- sync-google-ads-leads-to-shopify.cjs
+- sync-meta-leads-to-shopify.cjs
+- sync-tiktok-ads-leads-to-shopify.cjs
+- audit-klaviyo-flows-v2.cjs
+- parse-warehouse-csv.cjs
+- import-taxonomy-test.cjs
+- import-taxonomy-via-api.cjs
+- import-taxonomy-metafield.cjs
+- analyze-ga4-conversion-source.cjs
+- audit-tiktok-pixel-config.cjs
+- track-bnpl-performance.cjs
+- create-warehouse-metafield.cjs
+- export-shopify-customers-facebook.cjs
+- verify-hubspot-status.cjs
+- (+ 1 autre)
+
+### Hardcodés (14 scripts - non génériques)
+
+Ces scripts contiennent des références hardcodées à des domaines/chemins clients spécifiques.
+
+## 12.5 MCPs - État Réel (Audit mcp.json)
+
+| MCP | Config mcp.json | Problème |
+|-----|-----------------|----------|
+| chrome-devtools | ✅ OK | Fonctionnel |
+| playwright | ✅ OK | Fonctionnel |
+| Shopify | ⚠️ Creds CLIENT | azffej-as = Alpha Medical (VIOLATION!) |
+| Klaviyo | ⚠️ Creds CLIENT | pk_16c08... = Alpha Medical (VIOLATION!) |
+| n8n | ⚠️ Creds CLIENT | n8n.srv1168256 = Alpha Medical (VIOLATION!) |
+| Google Analytics | ❌ SA manquant | /Users/mac/.config/google/service-account.json inexistant |
+| Google Sheets | ❌ SA manquant | Même fichier inexistant |
+| Apify | ❌ Placeholder | "YOUR_APIFY_TOKEN_FROM_CONSOLE" |
+| Gemini | ❌ Placeholder | "REPLACE_WITH_YOUR_GEMINI_API_KEY" |
+| GitHub | ❌ Placeholder | "ghp_REPLACE_WITH_YOUR_TOKEN" |
+| Hostinger | ❌ Placeholder | "REPLACE_WITH_YOUR_HOSTINGER_API_TOKEN" |
+| WordPress | ⚠️ Non configuré | wp-sites.json vide ou manquant |
+
+**RÉSUMÉ:**
+- ✅ Fonctionnels: 2 (chrome-devtools, playwright)
+- ⚠️ Avec creds CLIENT (violation règle): 3 (Shopify, Klaviyo, n8n)
+- ❌ Placeholders: 4 (Apify, Gemini, GitHub, Hostinger)
+- ❌ Fichiers manquants: 2 (Google Analytics, Google Sheets)
+- ⚠️ Non configuré: 1 (WordPress)
+
+**ACTION REQUISE:** Les MCPs Shopify/Klaviyo/n8n dans mcp.json utilisent des credentials CLIENT.
+Pour respecter la règle de séparation, ils devraient pointer vers un store DEMO.
 
 ## 12.6 Site Web - Claims Mis à Jour
 
@@ -894,29 +944,39 @@ APRÈS: VIDE (toutes credentials clients retirées)
 
 # SECTION 13: PLAN ACTIONNABLE - PROCHAINE SESSION
 
-## P0 - CRITIQUE (Avant toute autre chose)
+## FAIT (Session 15b)
 
-1. **Créer environnements clients séparés**
-   ```bash
-   mkdir -p /Users/mac/Desktop/clients/alpha-medical
-   mkdir -p /Users/mac/Desktop/clients/henderson
-   mkdir -p /Users/mac/Desktop/clients/mydealz
+1. ✅ **Créer environnements clients séparés**
    ```
+   /Users/mac/Desktop/clients/
+   ├── alpha-medical/   ✅ CRÉÉ + .env.example
+   ├── henderson/       ✅ CRÉÉ + .env.example
+   └── mydealz/         ✅ CRÉÉ + .env.example
+   ```
+
+2. ✅ **Audit code automatisations**
+   - 10 automatisations 100% génériques identifiées
+   - 15 automatisations fixables (.env.local → .env)
+   - 14 automatisations hardcodées (non génériques)
+
+## P0 - CRITIQUE (Prochaine session)
+
+1. **Nettoyer mcp.json** - Retirer credentials clients Alpha Medical
+   - Shopify MCP → Pointer vers store DEMO
+   - Klaviyo MCP → Pointer vers compte DEMO
+   - n8n MCP → Retirer ou pointer vers instance DEMO
 
 2. **Créer store de développement Shopify Partners**
    - URL: https://partners.shopify.com
    - Pour tester automations sans toucher clients réels
 
-3. **Obtenir compte Klaviyo démo**
-   - Pour tester sans données clients
-
 ## P1 - IMPORTANT (Cette semaine)
 
-1. **Augmenter automatisations testées** (6 → 15)
-   - Tester avec store démo
-   - Documenter chaque test
+1. **Fixer 15 automatisations** (.env.local → .env)
+   - Simple find/replace
+   - Augmente automatisations génériques de 10 → 25
 
-2. **Configurer MCPs manquants**
+2. **Configurer MCPs avec vrais tokens**
    - Google Service Account
    - GitHub Token personnel
    - Gemini API Key
@@ -925,13 +985,14 @@ APRÈS: VIDE (toutes credentials clients retirées)
 
 1. **Déployer site sur Hostinger**
 2. **Préparer emails restart clients**
-3. **Créer démo vidéo des automatisations**
+3. **Tester les 4 automatisations génériques non testées**
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.3**
+**FIN DE L'AUDIT FORENSIQUE v2.4**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.4: Session 15b - Audit code automatisations, création dossiers clients*
 *v2.3: Session 15 - CORRECTION CRITIQUE (séparation agence/clients, métriques honnêtes)*
 *v2.2: Session 14 - Vérification automations (Shopify, Klaviyo, SEO)*
 *v2.1: Session 13 - Vérification statuts (Schema, robots.txt, llms.txt, images)*
