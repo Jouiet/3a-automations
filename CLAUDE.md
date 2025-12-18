@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.3 | Dernière mise à jour: 2025-12-18 (Session 12 - Automations Normalisées)
+## Version: 3.4 | Dernière mise à jour: 2025-12-18 (Session 12 - Forensic Matrix)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -303,8 +303,17 @@ KLAVIYO:
 | **Clients - SEO** | 4 | ✅ Génériques |
 | **Clients - Social** | 4 | ✅ Génériques |
 | **TOTAL GÉNÉRIQUES** | **38** | ✅ |
-| Legacy (client-specific) | 210 | ⚠️ Non utilisables |
 
+### Legacy Scripts - Analyse Forensique (18/12/2025)
+
+| Catégorie | Quantité | Effort | Statut |
+|-----------|----------|--------|--------|
+| Normalisables (<1h) | 148 | NONE/LOW/MEDIUM | ✅ Réutilisables |
+| Effort moyen (1-2h) | 58 | HIGH | ⚠️ À planifier |
+| Réécriture (>2h) | 12 | CRITICAL | ❌ Faible priorité |
+| **TOTAL LEGACY** | **218** | - | **68% réutilisable** |
+
+**Matrice complète:** `outputs/FORENSIC-AUTOMATION-MATRIX-2025-12-18.md`
 **Documentation:** `automations/INDEX.md`
 
 ### Configuration .env (CRÉÉ 17/12/2025)
@@ -858,6 +867,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.4 | **Session 12 - Forensic Matrix**: Analyse forensique approfondie 218 scripts legacy, matrice utilisation/complémentarité créée, 148 scripts normalisables (<1h) identifiés, workflows Lead/SEO/Email documentés, correction métrique "210 non utilisables" → "68% réutilisable" |
 | 2025-12-18 | 3.3 | **Session 12 - Automations Normalisées**: Structure automations/ créée (agency/ + clients/), 38 automatisations génériques migrées (6 catégories: shopify, klaviyo, analytics, leads, seo, social), INDEX.md avec méthodologie intégration clients, distinction agency vs client-facing |
 | 2025-12-18 | 3.2 | **Session 12 - AEO/SEO Fix**: robots.txt +5 AI crawlers, llms.txt spec-compliant, Schema.org +8 pages, images compressed (-76%/-91%), marketing claims corrected (50+ scripts, 3 MCPs, 10+ APIs), forensic audit v2.0 |
 | 2025-12-18 | 3.1 | **Session 11**: Stat-labels visibility fix (data-count moved to .stat-number-ultra), Section reveal fallback (3s timeout), Stats design compact & premium, puppeteer installed for testing |
