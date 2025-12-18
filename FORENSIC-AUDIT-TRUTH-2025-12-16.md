@@ -419,9 +419,11 @@ KLAVIYO METRICS:
 STATUT: CONFIGURÉ mais NON FONCTIONNEL (nécessite crédits)
 
 DÉTAIL:
-├── Clé API: xai-B0Tf0... (84 caractères) - VALIDE
+├── Clé API: xai-WUigh... (84 caractères) - NOUVELLE CLÉ (18/12/2025)
+├── Team: 3a-automation (1d41cf68-38bb-48d7-93f6-a5d5854912a6)
 ├── Fichiers créés: GROK.md, grok-client.py, grok-client.cjs
 ├── Test connexion: ERREUR 403 "No credits"
+├── Ancienne clé: xai-B0Tf0... - ANNULÉE
 └── Action requise: Acheter $5 crédits minimum
 
 PRICING xAI (Vérifié 17/12/2025):
