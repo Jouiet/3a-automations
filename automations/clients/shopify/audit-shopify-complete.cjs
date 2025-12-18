@@ -6,7 +6,8 @@
  * Usage: node scripts/audit-shopify-complete.cjs
  */
 
-require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
+// Chercher .env à la racine du projet (3 niveaux au-dessus: shopify -> clients -> automations -> root)
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
 
 const https = require('https');
 const fs = require('fs');
