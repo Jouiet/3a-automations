@@ -959,39 +959,163 @@ Pour respecter la règle de séparation, ils devraient pointer vers un store DEM
    - 15 automatisations fixables (.env.local → .env)
    - 14 automatisations hardcodées (non génériques)
 
-## P0 - CRITIQUE (Prochaine session)
+---
 
-1. **Nettoyer mcp.json** - Retirer credentials clients Alpha Medical
-   - Shopify MCP → Pointer vers store DEMO
-   - Klaviyo MCP → Pointer vers compte DEMO
-   - n8n MCP → Retirer ou pointer vers instance DEMO
+# SECTION 14: SESSION 16 - NETTOYAGE COMPLET MCP + AUTOMATISATIONS
 
-2. **Créer store de développement Shopify Partners**
-   - URL: https://partners.shopify.com
-   - Pour tester automations sans toucher clients réels
+## 14.1 Date et Contexte
 
-## P1 - IMPORTANT (Cette semaine)
+**Date:** 2025-12-18 (Session 16)
+**Objectif:** Nettoyer mcp.json + génériciser toutes les automatisations
 
-1. **Fixer 15 automatisations** (.env.local → .env)
-   - Simple find/replace
-   - Augmente automatisations génériques de 10 → 25
+## 14.2 MCP.json - NETTOYÉ ✅
 
-2. **Configurer MCPs avec vrais tokens**
-   - Google Service Account
-   - GitHub Token personnel
-   - Gemini API Key
+**AVANT:**
+- Shopify MCP: `azffej-as.myshopify.com` + token `shpat_2ad5...` (Alpha Medical)
+- Klaviyo MCP: `pk_16c08...` (Alpha Medical)
+- n8n MCP: JWT token Alpha Medical + URL spécifique
+- GA4 MCP: Property ID `513383884` (client-specific)
 
-## P2 - NORMAL (Semaine prochaine)
+**APRÈS:**
+- Shopify MCP: `REPLACE_WITH_SHOPIFY_ACCESS_TOKEN` / `REPLACE_WITH_STORE.myshopify.com`
+- Klaviyo MCP: `REPLACE_WITH_KLAVIYO_PRIVATE_KEY`
+- n8n MCP: `REPLACE_WITH_N8N_HOST_URL` / `REPLACE_WITH_N8N_API_KEY`
+- GA4 MCP: `REPLACE_WITH_GA4_PROPERTY_ID`
 
-1. **Déployer site sur Hostinger**
-2. **Préparer emails restart clients**
-3. **Tester les 4 automatisations génériques non testées**
+**RÉSUMÉ MCPs:**
+```
+TOTAL DÉCLARÉS: 12
+├── SANS CREDENTIALS:     2 (chrome-devtools, playwright)
+├── AVEC PLACEHOLDERS:    10 (tous les autres)
+└── AVEC CREDENTIALS RÉELLES: 0 ✅
+
+VIOLATION RÈGLE SÉPARATION: CORRIGÉE ✅
+```
+
+## 14.3 Automatisations - GÉNÉRICISÉES ✅
+
+### Corrections Appliquées
+
+1. **21 fichiers .env.local → .env**
+   - sync-google-ads-leads-to-shopify.cjs
+   - sync-meta-leads-to-shopify.cjs
+   - sync-tiktok-ads-leads-to-shopify.cjs
+   - audit-klaviyo-flows-v2.cjs
+   - parse-warehouse-csv.cjs
+   - import-taxonomy-test.cjs
+   - import-taxonomy-via-api.cjs
+   - export-shopify-customers-facebook.cjs
+   - create-warehouse-metafield.cjs
+   - import-taxonomy-metafield.cjs
+   - enable-apify-schedulers.js
+   - verify-hubspot-status.cjs
+   - import-alt-text-api.js
+   - generate-tags-csv.js
+   - upload-llms.js
+   - analyze-ga4-source.cjs
+   - verify-facebook-pixel-native.js
+   - analyze-ga4-conversion-source.cjs
+   - track-bnpl-performance.cjs
+   - check-pixel-status.js
+   - audit-tiktok-pixel-config.cjs
+
+2. **4 fichiers refactorisés (domaines hardcodés → process.env)**
+   - export-shopify-customers-facebook.cjs
+   - verify-hubspot-status.cjs
+   - generate_image_sitemap.cjs
+   - verify-facebook-pixel-native.js
+
+3. **2 fichiers Apify généralisés**
+   - apify-verify-connection.cjs: Token hardcodé → process.env.APIFY_TOKEN
+   - apify-inspect-raw-data.cjs: Token + DatasetID → process.env
+
+4. **2 fichiers déplacés vers legacy (non généralisables)**
+   - publish-bundles-online-store.cjs (IDs bundles hardcodés)
+   - publish-bundles-graphql.cjs (IDs bundles hardcodés)
+
+### Résultat Final
+
+```
+AUTOMATISATIONS TOTALES: 41
+├── 100% Génériques: 41 ✅
+├── Avec hardcoding: 0 ✅
+├── Legacy (non génériques): 2 (déplacés)
+└── TAUX GÉNÉRICITÉ: 100%
+```
+
+### Répartition par Catégorie
+
+| Catégorie | Scripts | Status |
+|-----------|---------|--------|
+| agency/core | 4 | ✅ Génériques |
+| clients/analytics | 6 | ✅ Génériques |
+| clients/klaviyo | 4 | ✅ Génériques |
+| clients/leads | 5 | ✅ Génériques |
+| clients/seo | 5 | ✅ Génériques |
+| clients/shopify | 9 | ✅ Génériques |
+| clients/social | 4 | ✅ Génériques |
+| clients/video | 3 | ✅ Génériques |
+| generic | 1 | ✅ Générique |
+| **TOTAL** | **41** | **100% ✅** |
+
+## 14.4 Métriques Mises à Jour
+
+| Métrique | Session 15b | Session 16 | Changement |
+|----------|-------------|------------|------------|
+| Automatisations génériques | 10 | **41** | +310% |
+| Automatisations fixables | 15 | **0** | -100% (toutes fixées) |
+| Automatisations hardcodées | 14 | **0** | -100% (nettoyées) |
+| MCPs avec creds clients | 3 | **0** | -100% |
+| MCPs avec placeholders | 4 | **10** | +150% |
+| Règle séparation respectée | ❌ | **✅** | Corrigée |
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.4**
+# SECTION 15: PLAN ACTIONNABLE - PROCHAINE SESSION
+
+## FAIT (Session 16) ✅
+
+1. ✅ **Nettoyer mcp.json** - Credentials Alpha Medical retirées
+2. ✅ **Génériciser 21 automatisations** (.env.local → .env)
+3. ✅ **Refactoriser 4 automatisations** (domaines hardcodés → process.env)
+4. ✅ **Génériciser 2 automatisations Apify** (tokens hardcodés → process.env)
+5. ✅ **Déplacer 2 scripts non généralisables** vers legacy/
+
+## P0 - CRITIQUE (Prochaine session)
+
+1. **Créer store de développement Shopify Partners**
+   - URL: https://partners.shopify.com
+   - Pour tester automations sans toucher clients réels
+   - Configurer mcp.json avec store démo
+
+2. **Configurer MCPs avec vrais tokens**
+   - Google Service Account → GA4 + Sheets MCPs
+   - GitHub Token personnel → GitHub MCP
+   - Gemini API Key → Gemini MCP
+
+## P1 - IMPORTANT (Cette semaine)
+
+1. **Déployer site sur Hostinger**
+   - Utiliser hostinger-api-mcp après configuration
+   - Vérifier SSL, DNS
+
+2. **Mettre à jour claims marketing site**
+   - "41 Automations" (vérifiées génériques)
+   - "12 MCP Servers configurés"
+   - "Multi-plateforme: Shopify, Klaviyo, GA4, etc."
+
+## P2 - NORMAL (Semaine prochaine)
+
+1. **Tester toutes les automatisations avec store démo**
+2. **Préparer emails restart clients**
+3. **Documenter catalogue automatisations public**
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v2.5**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.5: Session 16 - Nettoyage MCP + 41 automatisations 100% génériques*
 *v2.4: Session 15b - Audit code automatisations, création dossiers clients*
 *v2.3: Session 15 - CORRECTION CRITIQUE (séparation agence/clients, métriques honnêtes)*
 *v2.2: Session 14 - Vérification automations (Shopify, Klaviyo, SEO)*

@@ -5,7 +5,7 @@
  */
 
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') });
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 console.log('='.repeat(80));
 console.log('📊 ANALYSE GOOGLE ANALYTICS 4 - SOURCE TRAFFIC');

@@ -18,12 +18,12 @@
  * 2. Get Marketing API access (Business account required)
  * 3. Get Access Token with lead.list permission
  * 4. Get Advertiser ID from TikTok Ads Manager
- * 5. Add credentials to .env.local
+ * 5. Add credentials to .env
  *
  * Documentation: https://business-api.tiktok.com/portal/docs?id=1739566885879809
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const fetch = require('node-fetch');
 
 // ========================================
@@ -53,7 +53,7 @@ const CONFIG = {
  */
 async function fetchTikTokLeads(since = null) {
   if (!CONFIG.TIKTOK_ACCESS_TOKEN || !CONFIG.TIKTOK_ADVERTISER_ID) {
-    throw new Error('TikTok credentials not configured in .env.local');
+    throw new Error('TikTok credentials not configured in .env');
   }
 
   console.log('\n📥 Fetching TikTok Lead Generation ads...');
@@ -262,18 +262,18 @@ async function main() {
 
   // Validate credentials
   if (!CONFIG.SHOPIFY_STORE || !CONFIG.SHOPIFY_ACCESS_TOKEN) {
-    console.error('❌ Missing Shopify credentials in .env.local');
+    console.error('❌ Missing Shopify credentials in .env');
     process.exit(1);
   }
 
   if (!CONFIG.TIKTOK_ACCESS_TOKEN || !CONFIG.TIKTOK_ADVERTISER_ID) {
-    console.error('❌ Missing TikTok credentials in .env.local');
+    console.error('❌ Missing TikTok credentials in .env');
     console.error('\nSETUP REQUIRED:');
     console.error('1. Create TikTok Developer App: https://developers.tiktok.com');
     console.error('2. Apply for Marketing API access (Business account)');
     console.error('3. Get Access Token with lead.list permission');
     console.error('4. Get Advertiser ID from TikTok Ads Manager');
-    console.error('5. Add to .env.local:');
+    console.error('5. Add to .env:');
     console.error('   TIKTOK_ACCESS_TOKEN=your_access_token');
     console.error('   TIKTOK_ADVERTISER_ID=your_advertiser_id');
     process.exit(1);

@@ -8,15 +8,19 @@
  * Session: 63
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const https = require('https');
 
-const SHOP = process.env.SHOPIFY_STORE_DOMAIN || 'jqp1x4-7e.myshopify.com';
+const SHOP = process.env.SHOPIFY_STORE_DOMAIN;
+if (!SHOP) {
+  console.error('❌ SHOPIFY_STORE_DOMAIN not found in .env');
+  process.exit(1);
+}
 const ACCESS_TOKEN = process.env.SHOPIFY_ACCESS_TOKEN || process.env.SHOPIFY_ADMIN_API_TOKEN;
 const API_VERSION = '2024-10';
 
 if (!ACCESS_TOKEN) {
-  console.error('❌ SHOPIFY_ACCESS_TOKEN not found in .env.local');
+  console.error('❌ SHOPIFY_ACCESS_TOKEN not found in .env');
   process.exit(1);
 }
 

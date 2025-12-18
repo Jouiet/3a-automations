@@ -6,14 +6,18 @@
  * Context: Session 98+ - Resolving Dec 3 vs Dec 5 inconsistency
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const https = require('https');
 
-const SHOPIFY_STORE = process.env.SHOPIFY_STORE || 'jqp1x4-7e.myshopify.com';
+const SHOPIFY_STORE = process.env.SHOPIFY_STORE_DOMAIN;
+if (!SHOPIFY_STORE) {
+  console.error('❌ ERROR: SHOPIFY_STORE_DOMAIN not set in .env');
+  process.exit(1);
+}
 const SHOPIFY_ACCESS_TOKEN = process.env.SHOPIFY_ACCESS_TOKEN;
 
 if (!SHOPIFY_ACCESS_TOKEN) {
-  console.error('❌ ERROR: SHOPIFY_ACCESS_TOKEN not set in .env.local');
+  console.error('❌ ERROR: SHOPIFY_ACCESS_TOKEN not set in .env');
   process.exit(1);
 }
 

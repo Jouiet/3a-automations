@@ -12,7 +12,7 @@
  */
 
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') });
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 const GA4_PROPERTY_ID = '465925975'; // G-HFRWK3TR61
 const TRANSACTION_DATE = '2025-11-15';
@@ -116,9 +116,9 @@ async function analyzeGA4Transaction() {
                           process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
     if (!hasCredentials) {
-      console.log('❌ No GA4 API credentials found in .env.local');
+      console.log('❌ No GA4 API credentials found in .env');
       console.log('');
-      console.log('To enable API access, add to .env.local:');
+      console.log('To enable API access, add to .env:');
       console.log('  GA4_SERVICE_ACCOUNT_KEY=path/to/service-account.json');
       console.log('');
       console.log('OR use manual dashboard method above.');

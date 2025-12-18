@@ -4,7 +4,7 @@
  * Reads products_taxonomy_import.csv and updates each product
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const https = require('https');
 const fs = require('fs');
 

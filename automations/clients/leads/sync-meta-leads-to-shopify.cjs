@@ -18,12 +18,12 @@
  * 2. Add app to Meta Business Manager
  * 3. Get Page Access Token with leads_retrieval permission
  * 4. Get Lead Form ID from Ads Manager
- * 5. Add credentials to .env.local
+ * 5. Add credentials to .env
  *
  * Documentation: https://developers.facebook.com/docs/marketing-api/guides/lead-ads/
  */
 
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const fetch = require('node-fetch');
 
 // ========================================
@@ -54,7 +54,7 @@ const CONFIG = {
  */
 async function fetchMetaLeads(since = null) {
   if (!CONFIG.META_PAGE_ACCESS_TOKEN || !CONFIG.META_LEAD_FORM_ID) {
-    throw new Error('Meta credentials not configured in .env.local');
+    throw new Error('Meta credentials not configured in .env');
   }
 
   console.log('\n📥 Fetching Meta Lead Ads...');
@@ -244,18 +244,18 @@ async function main() {
 
   // Validate credentials
   if (!CONFIG.SHOPIFY_STORE || !CONFIG.SHOPIFY_ACCESS_TOKEN) {
-    console.error('❌ Missing Shopify credentials in .env.local');
+    console.error('❌ Missing Shopify credentials in .env');
     process.exit(1);
   }
 
   if (!CONFIG.META_PAGE_ACCESS_TOKEN || !CONFIG.META_LEAD_FORM_ID) {
-    console.error('❌ Missing Meta credentials in .env.local');
+    console.error('❌ Missing Meta credentials in .env');
     console.error('\nSETUP REQUIRED:');
     console.error('1. Create Meta App: https://developers.facebook.com/apps');
     console.error('2. Add app to Business Manager');
     console.error('3. Get Page Access Token with leads_retrieval permission');
     console.error('4. Get Lead Form ID from Ads Manager');
-    console.error('5. Add to .env.local:');
+    console.error('5. Add to .env:');
     console.error('   META_PAGE_ACCESS_TOKEN=your_token');
     console.error('   META_PAGE_ID=your_page_id');
     console.error('   META_LEAD_FORM_ID=your_form_id');

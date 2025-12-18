@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '.env.local' });
+require('dotenv').config({ path: '.env' });
 const fs = require('fs');
 
 const SHOPIFY_STORE = process.env.SHOPIFY_STORE;
