@@ -623,23 +623,14 @@ body {
 }
 
 .stat-label-ultra {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  z-index: 10 !important;
-  font-size: 0.9rem !important;
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  background: none !important;
-  background-clip: initial !important;
-  -webkit-background-clip: initial !important;
-  text-transform: uppercase !important;
+  display: block;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-top: 10px !important;
-  font-weight: 600 !important;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 0 20px rgba(79, 186, 241, 0.8);
-  line-height: 1.4 !important;
+  margin-top: 8px;
+  font-weight: 500;
 }
 
 .stat-glow {
