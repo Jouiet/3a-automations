@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 2.0 (Mise à jour post-évaluation Gemini)
+## Date: 2025-12-18 | Version: 2.1 (Màj Session 13 - Vérification status)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -212,66 +212,54 @@ DOCUMENTÉ (CLAUDE.md): "3 fonctionnels" → FAUX (n8n cassé = HTTP 401)
 | OG tags | 13/13 | 100% |
 | Twitter cards | ~5/13 | 38% |
 
-### Schema.org (JSON-LD)
+### Schema.org (JSON-LD) - MISE À JOUR Session 13
 | Page | Schema Présent | Type |
 |------|----------------|------|
 | index.html | ✅ | Organization |
 | a-propos.html | ✅ | PersonOrOrganization |
 | contact.html | ✅ | ContactPage |
-| cas-clients.html | ✅ | ? |
+| cas-clients.html | ✅ | CaseStudy |
 | services/audit-gratuit.html | ✅ | Service |
-| automations.html | ❌ MANQUANT | - |
-| pricing.html | ❌ MANQUANT | - |
-| services/ecommerce.html | ❌ MANQUANT | - |
-| services/pme.html | ❌ MANQUANT | - |
-| privacy.html | ❌ MANQUANT | - |
-| 404.html | ❌ MANQUANT | - |
-| legal/mentions-legales.html | ❌ MANQUANT | - |
-| legal/politique-confidentialite.html | ❌ MANQUANT | - |
+| automations.html | ✅ | ItemList |
+| pricing.html | ✅ | PriceSpecification |
+| services/ecommerce.html | ✅ | Service |
+| services/pme.html | ✅ | Service |
+| 404.html | ✅ | WebPage |
+| legal/mentions-legales.html | ✅ | WebPage |
+| legal/politique-confidentialite.html | ✅ | WebPage |
 
-**Couverture Schema: 5/13 pages = 38%**
+**Couverture Schema: 12/12 pages = 100%** ✅ CORRIGÉ
 
 ## 4.3 AEO (Answer Engine Optimization)
 
-### robots.txt - PARTIELLEMENT CONFIGURÉ
+### robots.txt - COMPLET ✅ (Màj Session 13)
 ```
 ✅ GPTBot: Allow
 ✅ ChatGPT-User: Allow
 ✅ Claude-Web: Allow
+✅ Anthropic-AI: Allow
+✅ Google-Extended: Allow (pour Gemini)
+✅ PerplexityBot: Allow
+✅ CCBot: Allow
+✅ cohere-ai: Allow
 ✅ llm.txt: Référencé
-❌ Google-Extended: MANQUANT (pour Gemini)
-❌ PerplexityBot: MANQUANT
-❌ Anthropic-AI: MANQUANT (nouveau crawler)
+✅ llms.txt: Référencé (spec llmstxt.org)
 ```
 
-### llms.txt (llm.txt) - NON CONFORME À LA SPEC
+### llms.txt - CONFORME À LA SPEC ✅ (Màj Session 13)
 
 **ÉTAT ACTUEL:**
-- Fichier: `landing-page-hostinger/llm.txt` (149 lignes)
-- Format: Markdown simple
-- Contenu: Bon briefing textuel
+- Fichiers: `llm.txt` + `llms.txt` (63 lignes, 2.6KB)
+- Format: Markdown spec-compliant
+- Contenu: Structure H1 + blockquote + H2 sections avec URLs
 
-**PROBLÈMES DE CONFORMITÉ (spec llmstxt.org):**
-1. ❌ Pas de sections H2 avec listes de fichiers URLs
-2. ❌ Pas de liens cliquables vers pages importantes
-3. ❌ Pas de `llms-full.txt` pour contexte complet
-4. ❌ Format ne respecte pas la structure requise
-
-**SPEC REQUISE (llmstxt.org):**
-```markdown
-# 3A Automation
-
-> Consultant Automation, Analytics & AI pour PME. Services d'automatisation
-> pour e-commerce et PME.
-
-## Documentation
-- [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Shopify automation
-- [Services PME](https://3a-automation.com/services/pme.html): Lead gen, analytics
-- [Pricing](https://3a-automation.com/pricing.html): Tarifs et packages
-
-## API Reference
-- [Automations Catalog](https://3a-automation.com/automations.html): Catalogue complet
-```
+**CONFORMITÉ (spec llmstxt.org):**
+1. ✅ Titre H1: `# 3A Automation`
+2. ✅ Blockquote description: `> Consultant Automation...`
+3. ✅ Sections H2 avec listes de liens cliquables
+4. ✅ URLs complètes vers toutes les pages principales
+5. ✅ Contact et pricing documentés
+6. ⚠️ `llms-full.txt` optionnel (non créé)
 
 ### Script llms.txt Dynamique
 ```
@@ -324,17 +312,16 @@ Fallback JS: mailto:contact@3a-automation.com
 
 ## 4.7 Problèmes de Cohérence
 
-### Pages Dupliquées (Privacy)
+### Pages Dupliquées (Privacy) - CORRIGÉ ✅ (Session 12)
 ```
-/privacy.html                          → 208 lignes
-/legal/politique-confidentialite.html  → 384 lignes
+❌ /privacy.html                        → SUPPRIMÉ
+✅ /legal/politique-confidentialite.html → Seule page privacy
 
-PROBLÈMES:
-├── Contenus DIFFÉRENTS (pas duplicata)
-├── Sitemap référence: /privacy.html
-├── Cookie banner link: /privacy.html
-├── Footer link: /legal/politique-confidentialite.html
-└── CONFUSION pour utilisateurs et SEO
+CORRECTIONS EFFECTUÉES:
+├── privacy.html supprimé
+├── Sitemap mis à jour (privacy retiré)
+├── Tous les liens màj vers /legal/politique-confidentialite.html
+└── Plus de confusion SEO
 ```
 
 ### Incohérences CSS
@@ -613,24 +600,23 @@ logo.png:        273KB → <50KB  (SVG ou WebP)
 
 # SECTION 8: MÉTRIQUES DE RÉFÉRENCE
 
-## État Actuel (18/12/2025)
+## État Actuel (18/12/2025 - Session 13 Update)
 
 | Catégorie | Métrique | Valeur |
 |-----------|----------|--------|
-| Scripts | Total | 227 |
-| Scripts | Réutilisables (strict) | ~14 (6.2%) |
-| Scripts | Avec process.env | 108 (47.6%) |
-| Scripts | Hardcodés | ~213 (93.8%) |
+| Automatisations | Génériques | 49 |
+| Automatisations | Legacy analysés | 218 |
+| Automatisations | Normalisables (<1h) | 148 (68%) |
 | APIs | Fonctionnelles | 2/5 (40%) |
 | MCPs | Fonctionnels | 2/12 (16.7%) |
-| Landing | Pages | 13 |
-| Landing | Schema.org | 5/13 (38%) |
-| Landing | Images optimisées | 0/8 (0%) |
-| Tracking | Actif | 0/4 (0%) |
-| AEO | robots.txt crawlers | 3/5 (60%) |
-| AEO | llms.txt conforme | Non |
+| Landing | Pages | 12 (privacy supprimé) |
+| Landing | Schema.org | **12/12 (100%)** ✅ |
+| Landing | Images optimisées | **2/2 critiques (100%)** ✅ |
+| Tracking | Actif | 0/4 (0%) - placeholders |
+| AEO | robots.txt crawlers | **8/8 (100%)** ✅ |
+| AEO | llms.txt conforme | **Oui** ✅ |
 | Revenue | Mensuel | €0 |
-| Clients | Actifs | 0 |
+| Clients | Actifs | 0 (restart 25/01/2026) |
 
 ## Objectifs Q1 2026
 
@@ -710,9 +696,10 @@ Pour la stratégie → Audit Gemini (recommandations valides)
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.0**
+**FIN DE L'AUDIT FORENSIQUE v2.1**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.1: Session 13 - Vérification statuts (Schema, robots.txt, llms.txt, images)*
 *Mis à jour après évaluation croisée avec audits Gemini*
 *Tous les faits vérifiés par exécution de code*
 
