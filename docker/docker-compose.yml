@@ -1,0 +1,21 @@
+services:
+  website:
+    image: nginx:alpine
+    restart: always
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    entrypoint: ["/bin/sh", "-c", "apk add --no-cache wget && wget --header=\"Authorization: token ${GITHUB_TOKEN}\" -qO- https://api.github.com/repos/Jouiet/3a-automations/tarball/main | tar xz -C /tmp && cp -r /tmp/Jouiet-3a-automations-*/landing-page-hostinger/* /usr/share/nginx/html/ && rm -rf /tmp/Jouiet-3a-automations-* && nginx -g 'daemon off;'"]
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.website.rule=Host(`3a-automation.com`) || Host(`www.3a-automation.com`)
+      - traefik.http.routers.website.tls=true
+      - traefik.http.routers.website.entrypoints=web,websecure
+      - traefik.http.routers.website.tls.certresolver=mytlschallenge
+      - traefik.http.services.website.loadbalancer.server.port=80
+    networks:
+      - traefik_network
+
+networks:
+  traefik_network:
+    external: true
+    name: root_default
