@@ -693,14 +693,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }, {
-    threshold: 0.1,
-    rootMargin: '-50px'
+    threshold: 0.05,  // Lower threshold for earlier reveal
+    rootMargin: '100px 0px -50px 0px'  // Trigger 100px before entering viewport
   });
 
   sections.forEach(section => {
     section.classList.add('section-hidden');
     sectionObserver.observe(section);
   });
+
+  // Fallback: reveal all sections after 3 seconds (for slow/headless browsers)
+  setTimeout(() => {
+    sections.forEach(section => {
+      if (!section.classList.contains('section-visible')) {
+        section.classList.add('section-visible');
+      }
+    });
+  }, 3000);
 
   // Add CSS for section animations
   const sectionStyle = document.createElement('style');
