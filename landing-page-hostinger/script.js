@@ -86,9 +86,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const formError = document.getElementById('form-error');
 
   // Configuration - AGENCE 3A AUTOMATION (pas de credentials clients!)
-  // Pour activer: créer compte Formspree et remplacer YOUR_FORM_ID
+  // Pour activer: créer Google Apps Script Web App → remplacer YOUR_SCRIPT_ID
+  // Guide: https://developers.google.com/apps-script/guides/web
   const FORM_CONFIG = {
-    formspreeUrl: 'https://formspree.io/f/YOUR_FORM_ID', // À configurer sur formspree.io
+    googleScriptUrl: 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', // Google Apps Script
     fallbackEmail: 'contact@3a-automation.com',
     timeout: 5000 // 5 seconds
   };
@@ -138,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), FORM_CONFIG.timeout);
 
-        const response = await fetch(FORM_CONFIG.formspreeUrl, {
+        const response = await fetch(FORM_CONFIG.googleScriptUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
