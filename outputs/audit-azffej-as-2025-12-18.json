@@ -1,0 +1,127 @@
+{
+  "timestamp": "2025-12-18T11:54:09.118Z",
+  "store": "azffej-as.myshopify.com",
+  "sections": {
+    "shop": {
+      "id": 67103162445,
+      "name": "Alpha Medical Care",
+      "email": "contact@alphamedical.shop",
+      "domain": "www.alphamedical.shop",
+      "province": "Delaware",
+      "country": "US",
+      "address1": "611 South Dupont Highway suite 102",
+      "zip": "19901",
+      "city": "Harrington",
+      "source": null,
+      "phone": "",
+      "latitude": 39.1516484,
+      "longitude": -75.51279319999999,
+      "primary_locale": "en",
+      "address2": "611, Suite 102 (street)",
+      "created_at": "2025-10-10T15:59:30-04:00",
+      "updated_at": "2025-12-17T12:47:39-05:00",
+      "country_code": "US",
+      "country_name": "United States",
+      "currency": "USD",
+      "customer_email": "contact@alphamedical.shop",
+      "timezone": "(GMT-05:00) America/New_York",
+      "iana_timezone": "America/New_York",
+      "shop_owner": "Hatim JOUIET",
+      "money_format": "${{amount}}",
+      "money_with_currency_format": "${{amount}} USD",
+      "weight_unit": "kg",
+      "province_code": "DE",
+      "taxes_included": false,
+      "auto_configure_tax_inclusivity": null,
+      "tax_shipping": null,
+      "county_taxes": true,
+      "plan_display_name": "Basic",
+      "plan_name": "basic",
+      "has_discounts": true,
+      "has_gift_cards": false,
+      "myshopify_domain": "azffej-as.myshopify.com",
+      "google_apps_domain": null,
+      "google_apps_login_enabled": null,
+      "money_in_emails_format": "${{amount}}",
+      "money_with_currency_in_emails_format": "${{amount}} USD",
+      "eligible_for_payments": true,
+      "requires_extra_payments_agreement": false,
+      "password_enabled": false,
+      "has_storefront": true,
+      "finances": true,
+      "primary_location_id": 76344000589,
+      "checkout_api_supported": true,
+      "multi_location_enabled": true,
+      "setup_required": false,
+      "pre_launch_enabled": false,
+      "enabled_presentment_currencies": [
+        "USD"
+      ],
+      "marketing_sms_consent_enabled_at_checkout": false,
+      "transactional_sms_disabled": true
+    },
+    "products": {
+      "total": 90,
+      "published": 85,
+      "draft": 5,
+      "withImages": 90,
+      "withoutImages": 0,
+      "avgPrice": "139.79",
+      "priceRange": {
+        "min": "49.26",
+        "max": "1025.48"
+      },
+      "seoIssues": {
+        "missingAltText": 106,
+        "missingDescription": 0,
+        "shortTitle": 0
+      }
+    },
+    "orders": {
+      "last30Days": 0,
+      "totalRevenue": "0.00",
+      "avgOrderValue": 0,
+      "fulfillmentRate": 0,
+      "byStatus": {}
+    },
+    "customers": {
+      "total": 17,
+      "acceptsMarketing": 0,
+      "withOrders": 0,
+      "returningCustomers": 0
+    },
+    "collections": {
+      "custom": 6,
+      "smart": 0,
+      "total": 6
+    },
+    "inventory": {
+      "locations": 2,
+      "lowStock": 35,
+      "outOfStock": 145
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "SEO",
+      "issue": "106 images sans alt text",
+      "action": "Ajouter alt text descriptif pour améliorer SEO images",
+      "impact": "+15-25% trafic organique images"
+    },
+    {
+      "priority": "HIGH",
+      "category": "EMAIL",
+      "issue": "Seulement 0% opt-in email",
+      "action": "Ajouter popup newsletter avec incentive (10% discount)",
+      "impact": "+20-40% liste email"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "INVENTORY",
+      "issue": "145 variants en rupture",
+      "action": "Configurer alertes stock bas et back-in-stock emails",
+      "impact": "Récupérer ventes perdues"
+    }
+  ]
+}

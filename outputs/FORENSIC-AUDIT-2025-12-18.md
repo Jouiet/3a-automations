@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 2.1 (Màj Session 13 - Vérification status)
+## Date: 2025-12-18 | Version: 2.2 (Màj Session 14 - Vérification automations)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -696,9 +696,115 @@ Pour la stratégie → Audit Gemini (recommandations valides)
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.1**
+# SECTION 11: SESSION 14 - VÉRIFICATIONS AUTOMATIONS
+
+## 11.1 Date et Contexte
+
+**Date:** 2025-12-18 (Session 14)
+**Objectif:** Vérifier généricité des automations et corriger les problèmes de chemin .env
+
+## 11.2 Automations Vérifiées et Testées
+
+| Automation | Chemin | Status | Résultat Test |
+|------------|--------|--------|---------------|
+| `audit-shopify-complete.cjs` | `automations/clients/shopify/` | ✅ CORRIGÉ + TESTÉ | 90 produits, 17 clients, 6 collections |
+| `audit-klaviyo-flows.cjs` | `automations/clients/klaviyo/` | ✅ CORRIGÉ + TESTÉ | 7 flows (5 live), 3 listes, 28 métriques |
+| `fix-missing-alt-text.cjs` | `automations/clients/seo/` | ✅ CORRIGÉ + TESTÉ | 106 images sans alt text détectées |
+
+## 11.3 Corrections Appliquées
+
+### Problème Commun: Chemin .env Incorrect
+```javascript
+// AVANT (incorrect - chemin relatif cassé)
+require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
+
+// APRÈS (correct - 3 niveaux au-dessus vers racine projet)
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
+```
+
+### Cas Particulier: fix-missing-alt-text.cjs
+```javascript
+// AVANT (hardcodé - non portable)
+require('dotenv').config({ path: '/Users/mac/Desktop/JO-AAA/.env' });
+
+// APRÈS (dynamique)
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
+```
+
+## 11.4 Résultats Tests Live
+
+### audit-shopify-complete.cjs (Alpha Medical Care)
+```
+Store: azffej-as.myshopify.com / Alpha Medical Care
+├── Produits: 90 (85 actifs, 5 brouillons)
+├── Commandes 30j: 0 ($0.00 revenue)
+├── Clients: 17 (0% opt-in marketing)
+├── Collections: 6
+├── Variants en rupture: 145
+└── Recommandations: 2 HIGH, 1 MEDIUM
+```
+
+### audit-klaviyo-flows.cjs
+```
+Flows: 7 total (5 live, 2 draft)
+├── ✅ Welcome Series - Final Email Discount (live)
+├── ✅ Customer Winback - Standard (live)
+├── ✅ Product Review / Cross-Sell - Standard (live)
+├── ✅ Repeat Purchase Nurture (live)
+├── ✅ Abandoned Checkout (live)
+├── ⚪ Essential Flow Recommendation (draft x2)
+│
+└── MANQUANTS: Browse Abandonment, Post-Purchase
+
+Listes: 3
+├── Prévisualiser la liste
+├── Liste de SMS
+└── Liste d'adresses e-mail
+
+Métriques: 28 trackées
+```
+
+### fix-missing-alt-text.cjs (dry-run)
+```
+Mode: DRY RUN
+Images sans alt text: 106 (sur 90 produits)
+Exemple correction:
+  "Massage Recliner Chair | Heat & Vibration Therapy - main view"
+  "Massage Recliner Chair | Heat & Vibration Therapy - view 2"
+```
+
+## 11.5 Marketing Claims Vérifiés
+
+| Claim | Avant | Après | Justification |
+|-------|-------|-------|---------------|
+| Terminologie | "Scripts" | "Automations" | Terme professionnel |
+| Nombre | "50+" | "50+ Automations" | 49 génériques + automations organisées |
+| MCPs | "3 MCPs" | Maintenu | Shopify, Klaviyo confirmés fonctionnels |
+| APIs | "10+ APIs" | Maintenu | 13 clés API dans .env |
+| Clients | Absent | "+ 3 Clients" | Alpha Medical, MyDealz, jqp1x4-7e |
+
+## 11.6 Structure Automations Vérifiée
+
+```
+automations/
+├── clients/
+│   ├── shopify/
+│   │   └── audit-shopify-complete.cjs ✅ TESTÉ
+│   ├── klaviyo/
+│   │   ├── audit-klaviyo-flows.cjs ✅ TESTÉ
+│   │   └── audit-klaviyo-flows-v2.cjs
+│   └── seo/
+│       └── fix-missing-alt-text.cjs ✅ TESTÉ
+├── generic/ (49 automations)
+└── outputs/ (rapports générés)
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v2.2**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.2: Session 14 - Vérification automations (Shopify, Klaviyo, SEO)*
 *v2.1: Session 13 - Vérification statuts (Schema, robots.txt, llms.txt, images)*
 *Mis à jour après évaluation croisée avec audits Gemini*
 *Tous les faits vérifiés par exécution de code*

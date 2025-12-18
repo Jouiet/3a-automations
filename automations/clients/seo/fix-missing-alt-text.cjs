@@ -10,7 +10,8 @@
  *   --limit=N  : Limite le nombre de produits à traiter
  */
 
-require('dotenv').config({ path: '/Users/mac/Desktop/JO-AAA/.env' });
+// Chercher .env à la racine du projet (3 niveaux au-dessus: seo -> clients -> automations -> root)
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
 
 const SHOPIFY_STORE = process.env.SHOPIFY_STORE_DOMAIN || process.env.SHOPIFY_STORE;
 const SHOPIFY_TOKEN = process.env.SHOPIFY_ACCESS_TOKEN;
