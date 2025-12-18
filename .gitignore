@@ -31,6 +31,13 @@ pip-log.txt
 # Outputs (can regenerate)
 # outputs/
 
+# API test results (may contain client credentials status)
+outputs/api-test-*.json
+
+# Client-specific audit outputs (should be in client repos)
+outputs/audit-*-202*.json
+outputs/audit-*-202*.md
+
 # Credentials
 *.pem
 *.key
