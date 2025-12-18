@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.8 | Dernière mise à jour: 2025-12-18 (Session 16 - 41 Automatisations Génériques)
+## Version: 3.9 | Dernière mise à jour: 2025-12-18 (Session 17 - 42/42 Automatisations Validées 100%)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -596,18 +596,20 @@ node scripts/audit-klaviyo-flows.cjs
 - 10+ scripts refactorés (généricisés)
 - 3+ testimonials
 
-### KPIs Actuels (18 Déc 2025 - Session 16)
+### KPIs Actuels (18 Déc 2025 - Session 17)
 
 | Métrique | Valeur |
 |----------|--------|
 | Clients actifs | 0 (restart 25/01/2026) |
 | Revenue mensuel | €0 |
-| **Automatisations génériques** | **41 (100%)** ✅ |
+| **Automatisations génériques** | **42 (100%)** ✅ |
+| **Automatisations validées** | **42/42 (100%)** ✅ |
 | Automatisations legacy | 2 (non généralisables) |
 | MCPs configurés | 12 (tous avec placeholders) |
 | MCPs avec creds clients | **0** ✅ (règle séparation) |
 | Fichier .env agence | VIDE (pas de creds clients) |
 | Dossiers clients séparés | 3 (alpha-medical, henderson, mydealz) |
+| Script validation | `validate-all-automations.cjs` |
 
 ---
 
@@ -909,6 +911,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.9 | **Session 17 - VALIDATION BATCH 100%**: validate-all-automations.cjs créé, rotation_email.cjs corrigé (shebang+.env), 42/42 automatisations validées (100%), site web màj (42/12/8+/3), FORENSIC-AUDIT v2.6 |
 | 2025-12-18 | 3.8 | **Session 16 - 41 AUTOMATISATIONS GÉNÉRIQUES**: mcp.json nettoyé (0 creds clients), 21 fichiers .env.local→.env, 4 fichiers refactorisés (domaines hardcodés→process.env), 2 fichiers Apify généralisés, 2 fichiers legacy déplacés, TAUX GÉNÉRICITÉ: 100%, site web màj (41/12/8+/3) |
 | 2025-12-18 | 3.7 | **Session 15 - SÉPARATION AGENCE/CLIENTS**: .env nettoyé (credentials clients retirées), règle critique ajoutée (pas de creds clients dans agence), audit factuel: seulement 6 automatisations testées (pas 49!), MCPs réévalués (2 fonctionnels vs 9 claimed), architecture correcte documentée |
 | 2025-12-18 | 3.6 | **Session 13 - AEO/SEO Vérification**: Schema.org 100% (12/12 pages), robots.txt complet (8 crawlers AI), llms.txt créé (spec-compliant), images confirmées optimisées, FORENSIC-AUDIT v2.1, Blueprint score 98/100 |
