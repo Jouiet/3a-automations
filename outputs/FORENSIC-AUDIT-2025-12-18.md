@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 2.4 (Màj Session 15b - Audit code + dossiers clients)
+## Date: 2025-12-18 | Version: 3.2 (Màj Session 21b - GitHub + Google Cloud configurés)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -1660,9 +1660,106 @@ Option B: Self-hosted (0€ + temps)
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v3.1**
+# SECTION 23: SESSION 21b - CONFIGURATION SERVICES AGENCE
+
+## 23.1 GitHub Token - CONFIGURÉ ✅
+
+**Date:** 2025-12-18
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Username | Jouiet |
+| Token | `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` |
+| Fichiers | `.env`, `~/.config/claude-code/mcp.json` |
+| Test | ✅ API call réussie |
+
+```bash
+# Test effectué
+curl -s -H "Authorization: token ghp_brdy..." https://api.github.com/user
+# → {"login":"Jouiet",...}
+```
+
+## 23.2 Google Cloud Service Account - CONFIGURÉ ✅
+
+**Date:** 2025-12-18
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Project ID | `a-automation-agency` |
+| Project Number | `359870692708` |
+| Service Account Email | `id-a-automation-service@a-automation-agency.iam.gserviceaccount.com` |
+| Service Account ID | `111508590594861079835` |
+| Private Key ID | `da2bac8b924a198c065c63abd7407f1f1e194743` |
+| JSON Path | `/Users/mac/.config/google/3a-automation-service-account.json` |
+| Permissions | `600` (sécurisé) |
+
+### Fichiers Mis à Jour
+
+```bash
+# .env
+GOOGLE_APPLICATION_CREDENTIALS=/Users/mac/.config/google/3a-automation-service-account.json
+GOOGLE_SERVICE_ACCOUNT_FILE=/Users/mac/.config/google/3a-automation-service-account.json
+GOOGLE_CREDS_PATH=/Users/mac/.config/google/3a-automation-service-account.json
+GOOGLE_PROJECT_ID=a-automation-agency
+
+# ~/.config/claude-code/mcp.json
+"google-analytics": {
+  "env": {
+    "GOOGLE_APPLICATION_CREDENTIALS": "/Users/mac/.config/google/3a-automation-service-account.json"
+  }
+}
+"google-sheets": {
+  "env": {
+    "GOOGLE_APPLICATION_CREDENTIALS": "/Users/mac/.config/google/3a-automation-service-account.json"
+  }
+}
+```
+
+### Test Script Créé
+
+```bash
+node scripts/test-google-auth.cjs
+# → ✅ SERVICE ACCOUNT PRÊT À L'UTILISATION
+```
+
+## 23.3 Prochaines Étapes Manuelles
+
+### Google Sheets (À faire par l'utilisateur)
+
+```
+1. Créer Google Sheets "3A Automation - Leads & CRM"
+   → https://sheets.google.com
+
+2. Partager le spreadsheet avec:
+   → id-a-automation-service@a-automation-agency.iam.gserviceaccount.com
+   → Permission: Éditeur
+
+3. Copier le Spreadsheet ID depuis l'URL:
+   → https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit
+
+4. Me fournir le Spreadsheet ID pour configurer dans .env
+```
+
+## 23.4 État de Configuration Services
+
+| Service | Priorité | Status | Fichiers |
+|---------|----------|--------|----------|
+| ✅ GitHub | P0 | CONFIGURÉ | `.env`, `mcp.json` |
+| ✅ Google Cloud | P0 | CONFIGURÉ | `.env`, `mcp.json`, JSON SA |
+| ⏳ Google Sheets | P1 | EN ATTENTE | Utilisateur doit créer spreadsheet |
+| ⏳ GA4 | P1 | EN ATTENTE | Nécessite Property ID |
+| ⏳ Shopify Partners | P0 | À FAIRE | Dev store à créer |
+| ⏳ n8n Agence | P0 | À FAIRE | Instance à créer |
+| ⏳ xAI/Grok | P1 | À FAIRE | Crédits à acheter |
+| ⏳ Gemini | P1 | À FAIRE | API key à créer |
+| ⏳ Apify | P2 | À FAIRE | Compte à créer |
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v3.2**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v3.2: Session 21b - GitHub ✅ + Google Cloud Service Account ✅ configurés*
 *v3.1: Session 21 - Analyse forensique complète services (57 variables, 13 services)*
 *v3.0: Session 21 - Correction violation formulaires (n8n client → Google Apps Script)*
 *v2.9: Session 20 - Deploy-ready checklist, structure vérifiée*
