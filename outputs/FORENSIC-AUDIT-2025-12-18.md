@@ -1255,9 +1255,53 @@ VARIABLES DOCUMENTÉES:
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.7**
+# SECTION 19: SESSION 19 - TERMINOLOGIE PROFESSIONNELLE
+
+## 19.1 Date et Contexte
+
+**Date:** 2025-12-18 (Session 19)
+**Objectif:** Uniformiser terminologie "scripts" → "automatisations/workflows"
+
+## 19.2 Accomplissements
+
+1. ✅ **Terminologie mise à jour sur 12 pages HTML**
+   - "scripts" → "automatisations" ou "workflows"
+   - "50+" → "42" (chiffre factuel)
+   - "3 MCPs" → "12 MCPs" (chiffre factuel)
+   - "10+ APIs" → "8+ APIs" (chiffre factuel)
+
+2. ✅ **Pages modifiées:**
+   - index.html
+   - automations.html
+   - pricing.html
+   - a-propos.html
+   - cas-clients.html
+   - services/ecommerce.html
+   - services/pme.html
+   - services/audit-gratuit.html
+   - legal/mentions-legales.html
+   - legal/politique-confidentialite.html
+
+3. ✅ **Métriques factuelles alignées:**
+   - 42 automatisations (validées par validate-all-automations.cjs)
+   - 12 MCP Servers (comptés dans mcp.json)
+   - 8+ APIs (services distincts: Shopify, Klaviyo, GA4, Meta, Apify, n8n, xAI, Gemini)
+   - 3 Clients (Alpha Medical, MyDealz, Henderson)
+
+## 19.3 Terminologie Professionnelle
+
+| Ancien terme | Nouveau terme |
+|--------------|---------------|
+| Scripts | Automatisations |
+| Scripts automatisés | Workflows automatisés |
+| Scripts testés | Automatisations validées |
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v2.8**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.8: Session 19 - Terminologie professionnelle uniformisée (scripts→automatisations)*
 *v2.7: Session 18 - .env.example créé, liens internes vérifiés (0 cassés)*
 *v2.6: Session 17 - Validation batch 42/42 (100%), création validate-all-automations.cjs*
 *v2.5: Session 16 - Nettoyage MCP + 41 automatisations 100% génériques*
