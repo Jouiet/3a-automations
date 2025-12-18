@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.2 | Dernière mise à jour: 2025-12-18 (Session 12)
+## Version: 3.3 | Dernière mise à jour: 2025-12-18 (Session 12 - Automations Normalisées)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -47,7 +47,7 @@
 - ❌ Plateforme SaaS
 - ❌ Solution plug-and-play
 - ❌ Limité à un seul secteur
-- ❌ Stack "agency-ready" (scripts client-spécifiques actuellement)
+- ✅ Stack "agency-ready" (38 automatisations génériques depuis Session 12)
 
 ---
 
@@ -267,21 +267,45 @@ KLAVIYO:
 
 ## STACK TECHNIQUE - ÉTAT RÉEL
 
-### Structure Fichiers Scripts
+### Structure Automatisations (Session 12 - 18/12/2025)
 
 ```
 /Users/mac/Desktop/JO-AAA/
+├── automations/                  # NOUVELLE STRUCTURE NORMALISÉE ✅
+│   ├── agency/                   # Outils internes 3A Automation (6)
+│   │   └── core/                 # grok-client, forensic-api-test, etc.
+│   └── clients/                  # Automatisations offertes clients (32)
+│       ├── shopify/              # 11 automatisations
+│       ├── klaviyo/              # 3 automatisations
+│       ├── analytics/            # 4 automatisations
+│       ├── leads/                # 6 automatisations
+│       ├── seo/                  # 4 automatisations
+│       └── social/               # 4 automatisations
+│
+├── # LEGACY (Client-spécifiques - À NE PAS UTILISER directement)
 ├── AGENCY-CORE-SCRIPTS-V3/       # 60 scripts (MyDealz-specific)
-│   ├── *.cjs                     # 17 avec credentials hardcodées
-│   └── *.py                      # Python scripts
 ├── agency-scripts-Q1-GOLD/       # 109 scripts (Henderson-specific)
 ├── alpha-medical-python-agency/  # 41 scripts (Alpha Medical)
-│   └── klaviyo/                  # Klaviyo automation
-├── scripts/                      # 2 scripts génériques
-│   ├── test-env.cjs              # Test configuration
-│   └── audit-shopify-store.cjs   # Audit refactoré
-└── outputs/                      # Résultats des scripts
+│
+├── scripts/                      # Scripts originaux (11)
+└── outputs/                      # Résultats des automatisations
 ```
+
+### Statistiques Automatisations
+
+| Catégorie | Quantité | Statut |
+|-----------|----------|--------|
+| **Agency (internes)** | 6 | ✅ Génériques |
+| **Clients - Shopify** | 11 | ✅ Génériques |
+| **Clients - Klaviyo** | 3 | ✅ Génériques |
+| **Clients - Analytics** | 4 | ✅ Génériques |
+| **Clients - Leads** | 6 | ✅ Génériques |
+| **Clients - SEO** | 4 | ✅ Génériques |
+| **Clients - Social** | 4 | ✅ Génériques |
+| **TOTAL GÉNÉRIQUES** | **38** | ✅ |
+| Legacy (client-specific) | 210 | ⚠️ Non utilisables |
+
+**Documentation:** `automations/INDEX.md`
 
 ### Configuration .env (CRÉÉ 17/12/2025)
 
@@ -834,6 +858,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.3 | **Session 12 - Automations Normalisées**: Structure automations/ créée (agency/ + clients/), 38 automatisations génériques migrées (6 catégories: shopify, klaviyo, analytics, leads, seo, social), INDEX.md avec méthodologie intégration clients, distinction agency vs client-facing |
 | 2025-12-18 | 3.2 | **Session 12 - AEO/SEO Fix**: robots.txt +5 AI crawlers, llms.txt spec-compliant, Schema.org +8 pages, images compressed (-76%/-91%), marketing claims corrected (50+ scripts, 3 MCPs, 10+ APIs), forensic audit v2.0 |
 | 2025-12-18 | 3.1 | **Session 11**: Stat-labels visibility fix (data-count moved to .stat-number-ultra), Section reveal fallback (3s timeout), Stats design compact & premium, puppeteer installed for testing |
 | 2025-12-18 | 3.0 | **MCP Expansion**: 12 MCPs configurés (chrome-devtools, playwright, gemini, github, hostinger, wordpress + existants). Stat-labels CSS fix. wp-sites.json template créé |
