@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.9 | Dernière mise à jour: 2025-12-18 (Session 17 - 42/42 Automatisations Validées 100%)
+## Version: 4.0 | Dernière mise à jour: 2025-12-18 (Session 18 - .env.example + liens vérifiés)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -911,6 +911,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 4.0 | **Session 18 - .ENV.EXAMPLE + LIENS**: .env.example créé (template complet, 0 creds), tous liens internes vérifiés (~150 liens, 0 cassés), FORENSIC-AUDIT v2.7 |
 | 2025-12-18 | 3.9 | **Session 17 - VALIDATION BATCH 100%**: validate-all-automations.cjs créé, rotation_email.cjs corrigé (shebang+.env), 42/42 automatisations validées (100%), site web màj (42/12/8+/3), FORENSIC-AUDIT v2.6 |
 | 2025-12-18 | 3.8 | **Session 16 - 41 AUTOMATISATIONS GÉNÉRIQUES**: mcp.json nettoyé (0 creds clients), 21 fichiers .env.local→.env, 4 fichiers refactorisés (domaines hardcodés→process.env), 2 fichiers Apify généralisés, 2 fichiers legacy déplacés, TAUX GÉNÉRICITÉ: 100%, site web màj (41/12/8+/3) |
 | 2025-12-18 | 3.7 | **Session 15 - SÉPARATION AGENCE/CLIENTS**: .env nettoyé (credentials clients retirées), règle critique ajoutée (pas de creds clients dans agence), audit factuel: seulement 6 automatisations testées (pas 49!), MCPs réévalués (2 fonctionnels vs 9 claimed), architecture correcte documentée |
