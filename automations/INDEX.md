@@ -1,5 +1,5 @@
 # 3A Automation - Catalogue Automatisations
-## Version 1.0 | 18 Décembre 2025
+## Version 2.0 | 18 Décembre 2025
 
 ---
 
@@ -13,13 +13,15 @@ automations/
 │
 └── clients/                   # Automatisations offertes aux clients
     ├── shopify/               # E-commerce Shopify (11)
-    ├── klaviyo/               # Email Marketing (3)
-    ├── analytics/             # Tracking & Pixels (4)
-    ├── leads/                 # Génération de leads (6)
-    ├── seo/                   # Optimisation SEO (4)
-    └── social/                # Réseaux sociaux (4)
+    ├── klaviyo/               # Email Marketing (4)
+    ├── analytics/             # Tracking & Pixels (6)
+    ├── leads/                 # Génération de leads (9)
+    ├── seo/                   # Optimisation SEO (5)
+    ├── social/                # Réseaux sociaux (4)
+    ├── video/                 # Génération vidéo (3) NEW
+    └── google-merchant/       # Google Merchant Center (1) NEW
 
-TOTAL: 38 automatisations génériques
+TOTAL: 49 automatisations génériques
 ```
 
 ---
@@ -265,11 +267,11 @@ main().catch(err => {
 
 | Métrique | Valeur |
 |----------|--------|
-| Automatisations totales | 38 |
+| Automatisations totales | 49 |
 | Agency (internes) | 6 |
-| Clients (offertes) | 32 |
-| Catégories | 6 |
-| APIs supportées | Shopify, Klaviyo, Meta, TikTok, Apify, HubSpot |
+| Clients (offertes) | 43 |
+| Catégories | 8 |
+| APIs supportées | Shopify, Klaviyo, Meta, TikTok, Apify, HubSpot, Google Merchant |
 
 ---
 
@@ -277,4 +279,5 @@ main().catch(err => {
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 2.0 | +11 automatisations: video/ (3), google-merchant/ (1), leads/ (+3), analytics/ (+2), klaviyo/ (+1), seo/ (+1) |
 | 2025-12-18 | 1.0 | Création initiale - Migration 38 automatisations |

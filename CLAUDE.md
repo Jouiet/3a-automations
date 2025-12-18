@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.4 | Dernière mise à jour: 2025-12-18 (Session 12 - Forensic Matrix)
+## Version: 3.5 | Dernière mise à jour: 2025-12-18 (Session 12 - Suite Finale)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -47,7 +47,7 @@
 - ❌ Plateforme SaaS
 - ❌ Solution plug-and-play
 - ❌ Limité à un seul secteur
-- ✅ Stack "agency-ready" (38 automatisations génériques depuis Session 12)
+- ✅ Stack "agency-ready" (49 automatisations génériques depuis Session 12)
 
 ---
 
@@ -274,15 +274,17 @@ KLAVIYO:
 ├── automations/                  # NOUVELLE STRUCTURE NORMALISÉE ✅
 │   ├── agency/                   # Outils internes 3A Automation (6)
 │   │   └── core/                 # grok-client, forensic-api-test, etc.
-│   └── clients/                  # Automatisations offertes clients (32)
+│   └── clients/                  # Automatisations offertes clients (43)
 │       ├── shopify/              # 11 automatisations
-│       ├── klaviyo/              # 3 automatisations
-│       ├── analytics/            # 4 automatisations
-│       ├── leads/                # 6 automatisations
-│       ├── seo/                  # 4 automatisations
-│       └── social/               # 4 automatisations
+│       ├── klaviyo/              # 4 automatisations
+│       ├── analytics/            # 6 automatisations
+│       ├── leads/                # 9 automatisations
+│       ├── seo/                  # 5 automatisations
+│       ├── social/               # 4 automatisations
+│       ├── video/                # 3 automatisations (NEW)
+│       └── google-merchant/      # 1 automatisation (NEW)
 │
-├── # LEGACY (Client-spécifiques - À NE PAS UTILISER directement)
+├── # LEGACY (Client-spécifiques - À NORMALISER selon Forensic Matrix)
 ├── AGENCY-CORE-SCRIPTS-V3/       # 60 scripts (MyDealz-specific)
 ├── agency-scripts-Q1-GOLD/       # 109 scripts (Henderson-specific)
 ├── alpha-medical-python-agency/  # 41 scripts (Alpha Medical)
@@ -297,12 +299,14 @@ KLAVIYO:
 |-----------|----------|--------|
 | **Agency (internes)** | 6 | ✅ Génériques |
 | **Clients - Shopify** | 11 | ✅ Génériques |
-| **Clients - Klaviyo** | 3 | ✅ Génériques |
-| **Clients - Analytics** | 4 | ✅ Génériques |
-| **Clients - Leads** | 6 | ✅ Génériques |
-| **Clients - SEO** | 4 | ✅ Génériques |
+| **Clients - Klaviyo** | 4 | ✅ Génériques |
+| **Clients - Analytics** | 6 | ✅ Génériques |
+| **Clients - Leads** | 9 | ✅ Génériques |
+| **Clients - SEO** | 5 | ✅ Génériques |
 | **Clients - Social** | 4 | ✅ Génériques |
-| **TOTAL GÉNÉRIQUES** | **38** | ✅ |
+| **Clients - Video** | 3 | ✅ Génériques (NEW) |
+| **Clients - Google Merchant** | 1 | ✅ Génériques (NEW) |
+| **TOTAL GÉNÉRIQUES** | **49** | ✅ |
 
 ### Legacy Scripts - Analyse Forensique (18/12/2025)
 
@@ -867,6 +871,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.5 | **Session 12 - Suite Finale**: +11 automatisations (49 total), video/ + google-merchant/ ajoutés, privacy.html dupliqué supprimé, liens mis à jour, AAA-AUTOMATIONS-CATALOG v2.0, sitemap.xml nettoyé |
 | 2025-12-18 | 3.4 | **Session 12 - Forensic Matrix**: Analyse forensique approfondie 218 scripts legacy, matrice utilisation/complémentarité créée, 148 scripts normalisables (<1h) identifiés, workflows Lead/SEO/Email documentés, correction métrique "210 non utilisables" → "68% réutilisable" |
 | 2025-12-18 | 3.3 | **Session 12 - Automations Normalisées**: Structure automations/ créée (agency/ + clients/), 38 automatisations génériques migrées (6 catégories: shopify, klaviyo, analytics, leads, seo, social), INDEX.md avec méthodologie intégration clients, distinction agency vs client-facing |
 | 2025-12-18 | 3.2 | **Session 12 - AEO/SEO Fix**: robots.txt +5 AI crawlers, llms.txt spec-compliant, Schema.org +8 pages, images compressed (-76%/-91%), marketing claims corrected (50+ scripts, 3 MCPs, 10+ APIs), forensic audit v2.0 |

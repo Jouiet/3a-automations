@@ -2,12 +2,14 @@
 ## AI Automation Agency - Inventaire Factuel & Rigoureux
 
 ```
-Document Version: 1.1
+Document Version: 2.0
 Date: 2025-12-18
 Auteur: Claude 4.5 Opus
 Statut: PRODUCTION-READY INVENTORY
-Méthode: Analyse exhaustive de 212 scripts + 8 MCPs
-Màj: v1.1 - Ajout Knowledge Base RAG (5 scripts)
+Méthode: Analyse forensique de 227 scripts + 12 MCPs
+Màj: v2.0 - Structure automations/ normalisée (49 automatisations génériques)
+         - Forensic Matrix créée (68% réutilisable)
+         - Workflows complémentaires documentés
 ```
 
 ---
@@ -30,37 +32,47 @@ Màj: v1.1 - Ajout Knowledge Base RAG (5 scripts)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         AAA AUTOMATION INVENTORY                             │
+│                    3A AUTOMATION - INVENTAIRE v2.0                           │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│   SCRIPTS TOTAUX                           212                              │
-│   ├── Production-Ready                     ~125 (59%)                       │
-│   ├── Test/Diagnostic                      ~50 (24%)                        │
-│   └── Templates/Utilities                  ~37 (17%)                        │
+│   AUTOMATISATIONS GÉNÉRIQUES (automations/)     49                          │
+│   ├── Lead Generation & Sync                    11                          │
+│   ├── SEO & Content                             10                          │
+│   ├── Email/Klaviyo                             8                           │
+│   ├── Shopify Admin                             8                           │
+│   ├── Analytics & Reporting                     5                           │
+│   ├── Video Generation                          3                           │
+│   ├── Google Merchant                           1                           │
+│   └── RAG/Knowledge Base                        3                           │
 │                                                                              │
-│   MCP SERVERS CONFIGURÉS                   8                                │
-│   ├── Google (Analytics + Sheets)          2                                │
-│   ├── Shopify (Admin + Dev)                2                                │
-│   ├── Marketing (Klaviyo + Meta)           2                                │
-│   ├── Scraping (Apify)                     1                                │
-│   └── Debug (Chrome DevTools)              1                                │
+│   LEGACY SCRIPTS ANALYSÉS                       218                         │
+│   ├── Normalisables (<1h effort)                148 (68%) ✅                │
+│   ├── Effort moyen (1-2h)                       58 (27%) ⚠️                 │
+│   └── Réécriture requise (>2h)                  12 (5%) ❌                  │
 │                                                                              │
-│   APIs INTÉGRÉES DIRECTEMENT               16+                              │
-│   ├── xAI Grok API (NEW)                   1 (RAG-enhanced)                │
-│   VERTICALES COUVERTES                     4 (E-com, B2C, B2B, Healthcare) │
+│   MCP SERVERS CONFIGURÉS                        12                          │
+│   ├── Fonctionnels                              9 (Shopify, Klaviyo, n8n...)│
+│   ├── En attente config                         3 (Google SA, Apify)        │
+│                                                                              │
+│   VERTICALES COUVERTES                          4                           │
+│   └── E-commerce, B2C, B2B, Healthcare                                      │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 Couverture Flywheel
+**Forensic Matrix:** `outputs/FORENSIC-AUTOMATION-MATRIX-2025-12-18.md`
 
-| Phase Flywheel | Scripts | MCP Support | Maturité |
-|----------------|---------|-------------|----------|
-| **ACQUISITION** | 33 | Meta Ads, Apify, GA4 | Production |
-| **CONVERSION** | 28 | Shopify Admin/Dev | Production |
-| **RETENTION** | 22 | Klaviyo, Sheets | Production |
-| **ADVOCACY** | 15 | Apify, Sheets | Production |
-| **ANALYTICS** | 22 | GA4, Sheets | Production |
+### 1.2 Couverture Flywheel (Automatisations Génériques)
+
+| Phase Flywheel | Génériques | Legacy Normalisables | MCP Support |
+|----------------|------------|---------------------|-------------|
+| **ACQUISITION** | 11 | +23 (68% ready) | Meta Ads, Apify, GA4 |
+| **CONVERSION** | 8 | +34 (72% ready) | Shopify Admin/Dev |
+| **RETENTION** | 8 | +10 (80% ready) | Klaviyo, Sheets |
+| **ADVOCACY** | 5 | +19 (58% ready) | Apify, Sheets |
+| **ANALYTICS** | 5 | +9 (78% ready) | GA4, Sheets |
+| **GOOGLE MERCHANT** | 1 | +4 (100% ready) | Merchant Center |
+| **TOTAL** | **49** | **+148** | - |
 
 ---
 
@@ -1402,6 +1414,7 @@ node AGENCY-CORE-SCRIPTS-V3/add_google_shopping_attributes.cjs
 ---
 
 *Document généré par Claude 4.5 Opus*
-*Version 1.1 - December 18, 2025*
-*212 scripts analysés, 8 MCPs configurés*
-*Màj v1.1: Knowledge Base RAG (5 scripts) ajouté*
+*Version 2.0 - 18 Décembre 2025*
+*49 automatisations génériques + 218 legacy analysés (68% normalisables)*
+*12 MCPs configurés (9 fonctionnels)*
+*Forensic Matrix: outputs/FORENSIC-AUTOMATION-MATRIX-2025-12-18.md*
