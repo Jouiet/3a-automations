@@ -596,69 +596,66 @@ VOICE AGENT (Après activation xAI - 116-172h total):
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    PLAN ACTIONNABLE - FIN SESSION 6                          │
+│                    PLAN ACTIONNABLE - FIN SESSION 11                         │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│   SESSION 6 RÉSUMÉ (Performance Optimization):                              │
+│   SESSION 11 RÉSUMÉ (Stat-Labels Fix + Design):                             │
 │   ═══════════════════════════════════════════════════════════════════════   │
-│   ✅ styles-lite.css créé (40K vs 84K) - 52% réduction taille              │
-│   ✅ script-lite.js créé (8K vs 32K) - 75% réduction taille                │
-│   ✅ 12 pages secondaires migrées vers assets légers                        │
-│   ✅ Timeline "Notre Méthode" alignement corrigé                            │
-│   ✅ styles.css optimisé (blur, animation, GPU hints)                       │
-│   ✅ 3A-WEBSITE-BLUEPRINT score: 95 → 96/100                               │
-│   ✅ FORENSIC-AUDIT-TRUTH mis à jour (Section 12)                          │
+│   ✅ ROOT CAUSE FOUND: data-count sur parent détruisait enfants             │
+│   ✅ FIX: data-count déplacé vers .stat-number-ultra                        │
+│   ✅ Section reveal fallback (3s timeout) ajouté                            │
+│   ✅ IntersectionObserver threshold: 0.1 → 0.05                             │
+│   ✅ Stats design inline: "207 AUTOMATISATIONS | 8 MCP SERVERS"             │
+│   ✅ Puppeteer installé pour tests visuels automatisés                      │
+│   ✅ 3A-WEBSITE-BLUEPRINT score: 96 → 97/100                               │
+│   ✅ FORENSIC-AUDIT-TRUTH mis à jour (Section 13)                          │
+│                                                                              │
+│   COMMITS:                                                                  │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   32cc8cf - fix(stats): Resolve stat-labels visibility issue                │
+│   212d72b - fix(landing): stat-labels visibility + inline design            │
 │                                                                              │
 │   FICHIERS MODIFIÉS:                                                        │
 │   ───────────────────────────────────────────────────────────────────────   │
-│   CRÉÉS:                                                                    │
-│   ├── styles-lite.css      (40K) CSS léger pour pages secondaires          │
-│   └── script-lite.js       (8K)  JS minimal (nav, scroll, cookies)         │
+│   ├── index.html           data-count déplacé vers .stat-number-ultra       │
+│   ├── script.js            Fallback timeout 3s + threshold 0.05             │
+│   ├── styles.css           Stats inline flex design                         │
+│   ├── CLAUDE.md            Version 3.1                                      │
+│   ├── FORENSIC-AUDIT-TRUTH Section 13 ajoutée                               │
+│   └── 3A-WEBSITE-BLUEPRINT Score 97/100                                     │
 │                                                                              │
-│   OPTIMISÉS:                                                                │
-│   ├── styles.css           blur: 100→80px, animation 15→20s, GPU hints     │
-│   └── timeline-line        top/bottom ajustés pour alignement              │
+│   PROBLÈME RÉSOLU EN DÉTAIL:                                                │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   SYMPTÔME: Stat-labels invisibles ("AUTOMATISATIONS", "MCP SERVERS"...)    │
+│   CAUSE: enhancedStatObserver ciblait [data-count] sur parent               │
+│          el.textContent = ... DÉTRUISAIT tous les enfants                   │
+│   SOLUTION: data-count maintenant sur .stat-number-ultra (enfant)           │
 │                                                                              │
-│   MIGRÉS VERS LITE:                                                         │
-│   ├── automations.html                                                      │
-│   ├── pricing.html                                                          │
-│   ├── services/pme.html                                                     │
-│   ├── services/ecommerce.html                                               │
-│   ├── services/audit-gratuit.html                                           │
-│   ├── privacy.html                                                          │
-│   ├── 404.html                                                              │
-│   ├── contact.html                                                          │
-│   ├── a-propos.html                                                         │
-│   ├── cas-clients.html                                                      │
-│   ├── legal/mentions-legales.html                                           │
-│   └── legal/politique-confidentialite.html                                  │
-│                                                                              │
-│   PROCHAINE SESSION (SESSION 7) - PRIORITÉS:                                │
+│   PROCHAINE SESSION (SESSION 12) - PRIORITÉS:                               │
 │   ═══════════════════════════════════════════════════════════════════════   │
 │                                                                              │
-│   PRIORITÉ 1: TESTER PERFORMANCE EN LOCAL (15 min)                          │
-│   ├── Ouvrir http://localhost:8081/automations.html                         │
-│   ├── Vérifier chargement rapide                                            │
-│   ├── Tester navigation mobile                                              │
-│   └── Vérifier "Notre Méthode" alignement sur homepage                      │
-│                                                                              │
-│   PRIORITÉ 2: DÉPLOIEMENT HOSTINGER (2-3h)                                  │
+│   PRIORITÉ 1: DÉPLOIEMENT HOSTINGER (2-3h)                                  │
 │   ├── Upload landing-page-hostinger/ complet                                │
-│   ├── Inclure: styles-lite.css, script-lite.js                              │
+│   ├── Vérifier stats visibles en production                                 │
 │   ├── Configurer DNS: 3a-automation.com                                     │
 │   ├── SSL Let's Encrypt                                                     │
-│   └── Tester formulaire contact en production                               │
+│   └── Tester formulaire contact + webhook n8n                               │
 │                                                                              │
-│   PRIORITÉ 3: ACTIVATION xAI API (30 min)                                   │
+│   PRIORITÉ 2: ACTIVATION xAI API (30 min)                                   │
 │   ├── Acheter crédits xAI: $5-10 minimum                                    │
 │   ├── URL: https://console.x.ai/billing                                     │
 │   └── Tester: node scripts/grok-client.cjs                                  │
 │                                                                              │
-│   PRIORITÉ 4: GOOGLE SERVICE ACCOUNT (1-2h)                                 │
+│   PRIORITÉ 3: GOOGLE SERVICE ACCOUNT (1-2h)                                 │
 │   ├── Créer projet Google Cloud Console                                     │
 │   ├── Activer APIs: Analytics Data API, Sheets API                          │
 │   ├── Créer Service Account + JSON key                                      │
 │   └── Tester MCPs GA4 et Sheets                                             │
+│                                                                              │
+│   PRIORITÉ 4: SEO ALPHA MEDICAL (2h)                                        │
+│   ├── Corriger 271 alt text manquants                                       │
+│   ├── Script: node scripts/fix-missing-alt-text.cjs                         │
+│   └── Vérifier avec audit-shopify-complete.cjs                              │
 │                                                                              │
 │   BLOQUANTS ACTUELS:                                                        │
 │   ═══════════════════════════════════════════════════════════════════════   │
@@ -666,28 +663,28 @@ VOICE AGENT (Après activation xAI - 116-172h total):
 │   ⚠️ Google APIs: Nécessite Service Account                                 │
 │   ⚠️ Hostinger: Attente déploiement                                         │
 │                                                                              │
-│   MÉTRIQUES PERFORMANCE (Estimées):                                         │
+│   MÉTRIQUES SITE:                                                           │
 │   ═══════════════════════════════════════════════════════════════════════   │
-│   ├── CSS pages secondaires: 84K → 40K (-52%)                               │
-│   ├── JS pages secondaires: 32K → 8K (-75%)                                 │
-│   ├── Total économisé/page: ~68K                                            │
-│   └── 12 pages × 68K = 816K économisés en transfert                         │
+│   ├── Score Blueprint: 97/100                                               │
+│   ├── Pages: 14 (index + 13 secondaires)                                    │
+│   ├── Stats visibles: 4/4 ✅                                                │
+│   ├── Sections visibles: 6/6 ✅                                             │
+│   └── Tests Puppeteer: PASS                                                 │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 CETTE SEMAINE:
 □ Déployer landing page optimisée sur Hostinger
+□ Vérifier stats inline en production
 □ Envoyer emails restart aux 3 clients
 □ Corriger 271 alt text manquants (Alpha Medical)
-□ Créer flows Klaviyo manquants
 
 Q1 2026:
 □ Refactorer 10 scripts prioritaires
 □ Générer 4-5 nouveaux clients
 □ Atteindre €2k/mois revenue
 □ Voice Agent MVP opérationnel
-```
 
 ---
 

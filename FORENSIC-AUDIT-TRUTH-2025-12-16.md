@@ -637,7 +637,118 @@ PAGES SECONDAIRES (styles-lite.css):
 
 ---
 
+## 13. MISE À JOUR SESSION 11 (18/12/2025) - Stat-Labels Fix
+
+### 13.1 Problème Identifié
+
+```
+SYMPTÔME:
+├── Stat-labels invisibles (AUTOMATISATIONS, MCP SERVERS, APIs, VERTICALS)
+├── Chiffres visibles (207, 8, 15+, 4)
+├── CSS debug (red background/border) non appliqué
+└── Sections restaient opacity: 0 après scroll
+
+DIAGNOSTIC FORENSIQUE (Puppeteer):
+├── DOM Analysis: .stat-label-ultra n'existe pas après render
+├── Cause: enhancedStatObserver (script.js:606) cible [data-count]
+├── data-count était sur .stat-ultra (parent)
+├── el.textContent = ... DÉTRUIT tous les enfants
+└── IntersectionObserver threshold trop restrictif (0.1)
+```
+
+### 13.2 Root Cause Analysis
+
+```
+PROBLÈME JAVASCRIPT (script.js lignes 576-594):
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  const enhancedStatObserver = new IntersectionObserver((entries) => {       │
+│    entries.forEach(entry => {                                               │
+│      if (entry.isIntersecting) {                                            │
+│        const el = entry.target;                                             │
+│        ...                                                                   │
+│        el.textContent = current.toString() + suffix;  // ← DESTRUCTEUR!    │
+│      }                                                                       │
+│    });                                                                       │
+│  });                                                                         │
+│                                                                              │
+│  document.querySelectorAll('[data-count]').forEach(el => {                  │
+│    enhancedStatObserver.observe(el);  // ← Cible PARENT avec enfants       │
+│  });                                                                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+HTML AVANT:
+<div class="stat-ultra" data-count="207">  ← Observer cible ICI
+  <div class="stat-number-ultra">207</div>  ← DÉTRUIT
+  <div class="stat-label-ultra">Automatisations</div>  ← DÉTRUIT
+</div>
+
+RÉSULTAT APRÈS ANIMATION:
+<div class="stat-ultra" data-count="207">207</div>  ← Enfants disparus!
+```
+
+### 13.3 Solutions Implémentées
+
+```
+FIX 1: DÉPLACER data-count (index.html)
+├── AVANT: <div class="stat-ultra" data-count="207">
+├── APRÈS: <div class="stat-number-ultra" data-count="207">
+└── Animation ne modifie QUE le nombre, préserve label
+
+FIX 2: FALLBACK TIMEOUT (script.js)
+├── Ajout: setTimeout → reveal all sections après 3s
+├── Raison: IntersectionObserver ne fonctionne pas toujours en headless
+└── Garantit visibilité même si observer échoue
+
+FIX 3: THRESHOLD AJUSTÉ (script.js)
+├── AVANT: threshold: 0.1, rootMargin: '-50px'
+├── APRÈS: threshold: 0.05, rootMargin: '100px 0px -50px 0px'
+└── Déclenchement plus précoce
+
+FIX 4: DESIGN INLINE (styles.css)
+├── .stat-ultra: display: flex; align-items: baseline;
+├── .stat-number-ultra: 1.5rem gradient cyber
+├── .stat-label-ultra: 0.75rem uppercase inline
+└── Format: "207 AUTOMATISATIONS | 8 MCP SERVERS | 15+ APIS | 4 VERTICALS"
+```
+
+### 13.4 Vérification Empirique
+
+```
+MÉTHODE: Puppeteer headless browser
+├── node /tmp/debug-dom.js → DOM analysis
+├── node /tmp/scroll-test.js → Scroll simulation
+└── node /tmp/final-test.js → Screenshot + validation
+
+RÉSULTATS POST-FIX:
+├── Labels found: 4 ✅
+├── Numbers found: 4 ✅
+├── All sections visible: 6/6 ✅
+├── opacity: 1 sur toutes sections ✅
+└── Screenshot: /tmp/final-homepage.png
+
+COMMITS:
+├── 32cc8cf - fix(stats): Resolve stat-labels visibility issue
+└── 212d72b - fix(landing): stat-labels visibility + inline design + section reveal
+```
+
+### 13.5 Outils Ajoutés
+
+```
+PUPPETEER INSTALLÉ:
+├── cd /tmp && npm install puppeteer
+├── Usage: Tests visuels automatisés
+└── Scripts: debug-dom.js, scroll-test.js, final-test.js
+
+WORKFLOW DE TEST:
+1. python3 -m http.server 8080 (background)
+2. node /tmp/final-test.js
+3. Vérifier screenshot + console output
+4. pkill -f "python3 -m http.server"
+```
+
+---
+
 *Audit initial: 2025-12-16*
-*Dernière mise à jour: 2025-12-18 (Session 6 - Performance Optimization)*
-*Méthode: Vérification fichier par fichier + Tests API empiriques*
+*Dernière mise à jour: 2025-12-18 (Session 11 - Stat-Labels Fix)*
+*Méthode: Vérification fichier par fichier + Tests API empiriques + Puppeteer*
 *Principe: Aucune confiance aveugle, faits uniquement*
