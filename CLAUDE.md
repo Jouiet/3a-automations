@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.1 | Dernière mise à jour: 2025-12-18 (Session 11)
+## Version: 3.2 | Dernière mise à jour: 2025-12-18 (Session 12)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -834,6 +834,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.2 | **Session 12 - AEO/SEO Fix**: robots.txt +5 AI crawlers, llms.txt spec-compliant, Schema.org +8 pages, images compressed (-76%/-91%), marketing claims corrected (50+ scripts, 3 MCPs, 10+ APIs), forensic audit v2.0 |
 | 2025-12-18 | 3.1 | **Session 11**: Stat-labels visibility fix (data-count moved to .stat-number-ultra), Section reveal fallback (3s timeout), Stats design compact & premium, puppeteer installed for testing |
 | 2025-12-18 | 3.0 | **MCP Expansion**: 12 MCPs configurés (chrome-devtools, playwright, gemini, github, hostinger, wordpress + existants). Stat-labels CSS fix. wp-sites.json template créé |
 | 2025-12-18 | 2.9 | **Performance Optimization**: styles-lite.css (40K, -52%), script-lite.js (8K, -75%), 12 pages migrées, timeline alignement fix, GPU hints |
