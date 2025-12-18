@@ -1,0 +1,205 @@
+{
+  "version": "2025.1",
+  "generated": "2025-12-17T23:56:09.322Z",
+  "packages": [
+    {
+      "name": "STARTER",
+      "setup": "$5,000-8,000",
+      "monthly": "$1,500-2,500",
+      "automations": "~15 scripts",
+      "flows": "3 Klaviyo Flows",
+      "features": [
+        "Lead Sync (1 source)",
+        "Basic SEO",
+        "Weekly reporting",
+        "Email support"
+      ]
+    },
+    {
+      "name": "GROWTH",
+      "setup": "$5,000-8,000",
+      "monthly": "$1,500-2,500",
+      "automations": "~35 scripts",
+      "flows": "6 Klaviyo Flows",
+      "features": [
+        "Lead Sync (3 sources)",
+        "Full SEO automation",
+        "Daily reporting",
+        "Slack support",
+        "Monthly strategy call"
+      ]
+    },
+    {
+      "name": "SCALE",
+      "setup": "$5,000-8,000",
+      "monthly": "$1,500-2,500",
+      "automations": "~70+ scripts",
+      "flows": "12+ Klaviyo Flows",
+      "features": [
+        "All sources",
+        "Full SEO",
+        "Real-time reporting",
+        "Dedicated strategist",
+        "Custom integrations"
+      ]
+    }
+  ],
+  "automations": [
+    {
+      "id": "2.1.1",
+      "name": "Facebook/Meta Lead Ads",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition"
+    },
+    {
+      "id": "2.1.2",
+      "name": "Google Ads Lead Sync",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition"
+    },
+    {
+      "id": "2.1.3",
+      "name": "TikTok Lead Sync",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition"
+    },
+    {
+      "id": "2.1.4",
+      "name": "Lead Qualification & Segmentation",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition"
+    },
+    {
+      "id": "2.1.5",
+      "name": "Scraping & Competitor Monitoring",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition"
+    },
+    {
+      "id": "2.2.1",
+      "name": "Blog Content Automation",
+      "category": "seo_content",
+      "categoryName": "SEO & Content"
+    },
+    {
+      "id": "2.2.2",
+      "name": "SEO Technical Automation",
+      "category": "seo_content",
+      "categoryName": "SEO & Content"
+    },
+    {
+      "id": "2.2.3",
+      "name": "Schema.org Implementation",
+      "category": "seo_content",
+      "categoryName": "SEO & Content"
+    },
+    {
+      "id": "2.3.1",
+      "name": "Klaviyo Flow Management",
+      "category": "email_sms",
+      "categoryName": "Email/SMS Marketing"
+    },
+    {
+      "id": "2.4.1",
+      "name": "Product Management",
+      "category": "shopify",
+      "categoryName": "Shopify Admin"
+    },
+    {
+      "id": "2.4.2",
+      "name": "Webhooks & Automations",
+      "category": "shopify",
+      "categoryName": "Shopify Admin"
+    },
+    {
+      "id": "2.4.3",
+      "name": "Media & Assets",
+      "category": "shopify",
+      "categoryName": "Shopify Admin"
+    },
+    {
+      "id": "2.4.4",
+      "name": "Compliance & Legal",
+      "category": "shopify",
+      "categoryName": "Shopify Admin"
+    },
+    {
+      "id": "2.5.1",
+      "name": "Dashboards & Bridges",
+      "category": "analytics",
+      "categoryName": "Analytics & Reporting"
+    },
+    {
+      "id": "2.5.2",
+      "name": "Inventory & Stock",
+      "category": "analytics",
+      "categoryName": "Analytics & Reporting"
+    }
+  ],
+  "services": [
+    {
+      "name": "AUDIT E-COMMERCE",
+      "type": "service",
+      "price": "GRATUIT (pour acquisition)                                           │"
+    },
+    {
+      "name": "EMAIL MACHINE MINI                                              │",
+      "type": "service",
+      "price": "€500 setup + €200/mois                                               │"
+    },
+    {
+      "name": "SEO QUICK FIX                                                   │",
+      "type": "service",
+      "price": "€300-500 one-time                                                    │"
+    },
+    {
+      "name": "LEAD SYNC                                                       │",
+      "type": "service",
+      "price": "€400 setup + €150/mois                                               │"
+    },
+    {
+      "name": "MAINTENANCE MENSUELLE                                           │",
+      "type": "service",
+      "price": "€300-800/mois selon scope                                            │"
+    }
+  ],
+  "mcps": [
+    {
+      "name": "Klaviyo",
+      "status": "active",
+      "statusText": "TESTÉ OK",
+      "detail": "API Key pk_16c08... - 3 listes, 7 flows"
+    },
+    {
+      "name": "Shopify",
+      "status": "active",
+      "statusText": "TESTÉ OK",
+      "detail": "azffej-as = **Alpha Medical Care** (pas Henderson!)"
+    },
+    {
+      "name": "n8n",
+      "status": "active",
+      "statusText": "Configuré",
+      "detail": "Alpha Medical (JWT token) - non testé API"
+    },
+    {
+      "name": "Apify",
+      "status": "inactive",
+      "statusText": "Non configuré",
+      "detail": "Token = \"YOUR_APIFY_TOKEN\" placeholder"
+    }
+  ],
+  "stats": {
+    "totalPackages": 3,
+    "totalAutomations": 15,
+    "totalServices": 5,
+    "totalMCPs": 4,
+    "automationsByCategory": {
+      "lead_generation": 5,
+      "seo_content": 3,
+      "email_sms": 1,
+      "shopify": 4,
+      "analytics": 2
+    }
+  }
+}

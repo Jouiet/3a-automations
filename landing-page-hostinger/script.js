@@ -609,8 +609,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ───────────────────────────────────────────────────────────────────────────
   // MAGNETIC HOVER EFFECT ON BUTTONS
+  // Note: .orbital-center removed - its translate(-50%, -50%) centering is incompatible
   // ───────────────────────────────────────────────────────────────────────────
-  const magneticElements = document.querySelectorAll('.btn-primary-cyber, .orbital-center');
+  const magneticElements = document.querySelectorAll('.btn-primary-cyber');
 
   magneticElements.forEach(el => {
     el.addEventListener('mousemove', (e) => {

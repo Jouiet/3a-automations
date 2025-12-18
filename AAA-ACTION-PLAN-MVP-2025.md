@@ -7,13 +7,16 @@
 ## CONTEXTE
 
 ```
-SITUATION AU 17 DÉCEMBRE 2025:
+SITUATION AU 17 DÉCEMBRE 2025 (Mise à jour Session 4):
 ├── Opérateur: Solo (1 personne)
 ├── Temps: 20h/semaine
 ├── Cash flow: €0
 ├── Budget: €50
 ├── Clients: 0 actifs (3 restart 25/01/2026)
 ├── Hébergement: Hostinger (disponible)
+├── GitHub: github.com/Jouiet/3a-automations ✅
+├── Branding: 3A-BRANDING-GUIDE.md ✅
+├── xAI API: Clé configurée, nécessite crédits ($5 min)
 └── Objectif: Cash flow + préparation restart
 ```
 
@@ -101,11 +104,18 @@ RÉSULTAT ATTENDU:
 ✅ Fichier JSON avec client_email et private_key
 ```
 
-#### Tâche 1.3: Créer fichier .env (1h)
+#### Tâche 1.3: Créer fichier .env (1h) ✅ COMPLÉTÉ
 ```
-FICHIER À CRÉER: /Users/mac/Desktop/JO-AAA/.env
+FICHIER CRÉÉ: /Users/mac/Desktop/JO-AAA/.env
 
-Voir section IMPLÉMENTATION ci-dessous pour le contenu complet.
+STATUT SESSION 4 (17/12/2025):
+├── ✅ Fichier .env créé avec credentials réelles
+├── ✅ Shopify API testée (Alpha Medical Care)
+├── ✅ Klaviyo API testée (7 flows, 3 listes)
+├── ✅ xAI API key configurée
+├── ⚠️ xAI nécessite crédits ($5 min puis $150/mois gratuit avec data sharing)
+├── ❌ Google Service Account toujours MANQUANT
+└── ✅ .env dans .gitignore (sécurité OK)
 ```
 
 #### Tâche 1.4: Tester MCPs Google (1h)
@@ -463,6 +473,7 @@ N8N_API_KEY=
 # ═══════════════════════════════════════════════════════════════════
 # AI SERVICES
 # ═══════════════════════════════════════════════════════════════════
+XAI_API_KEY=xai-xxx...  # ⚠️ CONFIGURÉ mais nécessite crédits ($5 min)
 OPENAI_API_KEY=
 ANTHROPIC_API_KEY=
 
@@ -588,6 +599,57 @@ Google Cloud Console: https://console.cloud.google.com
 Calendly: https://calendly.com
 Shopify Partners: https://partners.shopify.com
 Klaviyo: https://www.klaviyo.com
+xAI Console: https://console.x.ai
+xAI Voice API Docs: https://docs.x.ai/docs/guides/voice
+LiveKit xAI Plugin: https://docs.livekit.io/agents/integrations/llm/xai/
+```
+
+### KNOWLEDGE BASE RAG (Complété 18/12/2025)
+```
+PHASE 1 TERMINÉE:
+├── knowledge-base/src/document-parser.cjs   → 273 chunks
+├── knowledge-base/src/vector-store.cjs      → BM25 (2853 tokens)
+├── knowledge-base/src/rag-query.cjs         → Multi-search interface
+├── knowledge-base/src/catalog-extractor.cjs → 3 packages, 15 automations
+└── scripts/grok-client.cjs v2.0             → RAG-enhanced
+
+USAGE:
+node scripts/grok-client.cjs          # Chat avec RAG
+node scripts/grok-client.cjs --no-rag # Chat sans RAG
+/catalog                              # Voir catalogue
+/stats                                # Stats KB
+```
+
+### Voice AI - Scope Clarifié (18/12/2025)
+```
+DUAL PURPOSE (Clarifié par User):
+├── Use Case 1: AI SHOPPING ASSISTANT
+│   ├── Recherche produits vocale
+│   ├── Recommandations
+│   ├── Prix, stock, promos
+│   └── Guidage checkout
+│
+├── Use Case 2: SUPPORT CLIENT
+│   ├── Suivi commande
+│   ├── Livraison
+│   ├── Retours/remboursements
+│   └── FAQ + escalade
+
+STACK: xAI Grok Voice ($0.05/min)
+EFFORT ESTIMÉ: 116-172 heures (6-9 semaines @ 20h/sem)
+COÛT OPÉRATIONNEL: ~$0.32/appel
+
+PHASES IMPLÉMENTATION:
+□ Phase 1: Voice Gateway + STT + TTS (44-68h)
+□ Phase 2: Intent Router + Shopify (36-52h)
+□ Phase 3: Shopping + Support modes (36-52h)
+
+PRÉREQUIS:
+├── XAI_API_KEY configurée ✅
+├── Crédits xAI ($5 minimum) ❌ MANQUANT
+├── Knowledge Base RAG ✅ COMPLÉTÉ
+├── Shopify MCP ✅ DISPONIBLE
+└── Klaviyo MCP ✅ DISPONIBLE
 ```
 
 ### Documents de référence
@@ -600,5 +662,6 @@ Klaviyo: https://www.klaviyo.com
 ---
 
 **Document créé:** 17 Décembre 2025
+**Mis à jour:** 18 Décembre 2025 (Knowledge Base + Voice Scope)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables

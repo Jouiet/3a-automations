@@ -1,6 +1,6 @@
 # 3A AUTOMATION - WEBSITE BLUEPRINT
 ## Document Exhaustif de Création du Site Web
-### Version: 1.1 | Date: 17/12/2025 | Auteur: 3A Automation
+### Version: 1.2 | Date: 18/12/2025 | Auteur: 3A Automation
 
 ---
 
@@ -103,7 +103,16 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 95/100 (màj 18/12/2025 - Session 8)
+SCORE ACTUEL: 96/100 (màj 18/12/2025 - Session 9)
+  - +1: Performance optimization complète
+  - styles-lite.css créé (40K vs 84K) - 52% réduction
+  - script-lite.js créé (8K vs 32K) - 75% réduction
+  - 8 pages secondaires migrées vers assets légers
+  - Timeline "Notre Méthode" alignement corrigé
+  - Blur filters optimisés (100px → 80px)
+  - GPU hints ajoutés (will-change, contain)
+
+SCORE SESSION 8: 95/100
   - +2: Page À Propos créée (a-propos.html) - Trust building
   - Page Cas Clients créée (cas-clients.html) - Social proof
   - Sitemap mis à jour avec nouvelles pages

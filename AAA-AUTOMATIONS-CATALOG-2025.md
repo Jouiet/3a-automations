@@ -2,11 +2,12 @@
 ## AI Automation Agency - Inventaire Factuel & Rigoureux
 
 ```
-Document Version: 1.0
-Date: 2025-12-16
+Document Version: 1.1
+Date: 2025-12-18
 Auteur: Claude 4.5 Opus
 Statut: PRODUCTION-READY INVENTORY
-Méthode: Analyse exhaustive de 207 scripts + 8 MCPs
+Méthode: Analyse exhaustive de 212 scripts + 8 MCPs
+Màj: v1.1 - Ajout Knowledge Base RAG (5 scripts)
 ```
 
 ---
@@ -32,10 +33,10 @@ Méthode: Analyse exhaustive de 207 scripts + 8 MCPs
 │                         AAA AUTOMATION INVENTORY                             │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│   SCRIPTS TOTAUX                           207                              │
-│   ├── Production-Ready                     ~120 (58%)                       │
+│   SCRIPTS TOTAUX                           212                              │
+│   ├── Production-Ready                     ~125 (59%)                       │
 │   ├── Test/Diagnostic                      ~50 (24%)                        │
-│   └── Templates/Utilities                  ~37 (18%)                        │
+│   └── Templates/Utilities                  ~37 (17%)                        │
 │                                                                              │
 │   MCP SERVERS CONFIGURÉS                   8                                │
 │   ├── Google (Analytics + Sheets)          2                                │
@@ -44,7 +45,8 @@ Méthode: Analyse exhaustive de 207 scripts + 8 MCPs
 │   ├── Scraping (Apify)                     1                                │
 │   └── Debug (Chrome DevTools)              1                                │
 │                                                                              │
-│   APIs INTÉGRÉES DIRECTEMENT               15+                              │
+│   APIs INTÉGRÉES DIRECTEMENT               16+                              │
+│   ├── xAI Grok API (NEW)                   1 (RAG-enhanced)                │
 │   VERTICALES COUVERTES                     4 (E-com, B2C, B2B, Healthcare) │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -747,6 +749,127 @@ LOW STOCK ALERT - 2025-12-16 08:00:00
 
 ---
 
+### 2.9 KNOWLEDGE BASE RAG (5 scripts) - NEW v1.1
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    KNOWLEDGE BASE RAG - Phase 1 Complète                     │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   STATUT: PRODUCTION-READY (18/12/2025)                                     │
+│   LOCATION: knowledge-base/src/ + scripts/                                  │
+│   FONCTION: RAG pour chat client enrichi avec contexte 3A                   │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+| Script | Fonction | Input | Output |
+|--------|----------|-------|--------|
+| `document-parser.cjs` | Parse markdown → chunks | Markdown files | 273 chunks JSON |
+| `vector-store.cjs` | BM25 indexation | Chunks | 2,853 tokens index |
+| `rag-query.cjs` | Recherche sémantique | Query string | Contexte + sources |
+| `catalog-extractor.cjs` | Extraction catalogue | Markdown catalog | JSON API (packages, automations) |
+| `grok-client.cjs` v2.0 | Chat RAG-enhanced | User query | AI response + citations |
+
+**Architecture:**
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         RAG PIPELINE ARCHITECTURE                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   1. INGESTION (document-parser.cjs)                                        │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   Sources:                                                                   │
+│   ├── CLAUDE.md (system context)                                            │
+│   ├── BUSINESS-MODEL-FACTUEL-2025.md                                        │
+│   ├── AAA-AUTOMATIONS-CATALOG-2025.md                                       │
+│   ├── AAA-ACTION-PLAN-MVP-2025.md                                           │
+│   └── FORENSIC-AUDIT-TRUTH-2025-12-16.md                                    │
+│   Output: knowledge-base/data/chunks.json (273 chunks)                      │
+│                                                                              │
+│   2. INDEXATION (vector-store.cjs)                                          │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   Méthode: BM25 (Best Matching 25)                                          │
+│   ├── Tokenization: French + English                                        │
+│   ├── TF-IDF scoring                                                        │
+│   ├── k1=1.5, b=0.75 (optimal parameters)                                   │
+│   └── 2,853 unique tokens indexed                                           │
+│                                                                              │
+│   3. QUERY (rag-query.cjs)                                                  │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   Stratégie: Multi-search avec variations françaises                        │
+│   ├── Query originale                                                       │
+│   ├── Variations (tarif/prix/coût, automation/automatisation)               │
+│   ├── Score fusion + deduplication                                          │
+│   ├── Confidence calculation                                                │
+│   └── Source attribution                                                    │
+│                                                                              │
+│   4. CATALOG API (catalog-extractor.cjs)                                    │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   Extraction structurée:                                                    │
+│   ├── 3 packages (STARTER, GROWTH, SCALE)                                   │
+│   ├── 15 automations par catégorie                                          │
+│   ├── Services avec pricing                                                 │
+│   └── MCPs status                                                           │
+│                                                                              │
+│   5. CHAT INTEGRATION (grok-client.cjs v2.0)                                │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   ├── xAI Grok API (grok-2-latest)                                          │
+│   ├── RAG context injection in system prompt                                │
+│   ├── Source citations [Source: document]                                   │
+│   └── Commandes: /catalog, /stats                                           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Exemple d'utilisation:**
+```bash
+# Lancer le chat RAG-enhanced
+node scripts/grok-client.cjs
+
+# Chat sans RAG (baseline)
+node scripts/grok-client.cjs --no-rag
+
+# Commandes spéciales dans le chat:
+/catalog  # Affiche packages, automations, services
+/stats    # Statistiques knowledge base
+```
+
+**Exemple Output RAG:**
+```
+Vous: Quels sont vos tarifs?
+
+3A Assistant: Voici les tarifs 3A Automation [Source: BUSINESS-MODEL-FACTUEL-2025.md]:
+
+PACKAGES DISPONIBLES:
+├── STARTER: Setup $5,000-8,000, Monthly $1,500-2,500
+│   └── Idéal pour <$50k/mois de CA
+├── GROWTH: Setup $10,000-15,000, Monthly $3,500-5,000
+│   └── Idéal pour $50k-200k/mois de CA
+└── SCALE: Setup $20,000-35,000, Monthly $7,000-12,000
+    └── Idéal pour >$200k/mois de CA
+
+OFFRE GRATUITE: Audit e-commerce complet
+→ https://3a-automation.com/#contact
+```
+
+**Statistiques Knowledge Base:**
+```
+═══════════════════════════════════════════════════════════════════
+KNOWLEDGE BASE STATS (18/12/2025)
+═══════════════════════════════════════════════════════════════════
+Chunks:       273
+Tokens:       2,853 (unique)
+Avg chunk:    ~150 tokens
+Categories:   business, technical, pricing, services, status
+Sources:      5 documents
+Index size:   ~45 KB
+Query time:   <50ms
+═══════════════════════════════════════════════════════════════════
+```
+
+---
+
 ## 3. EXEMPLES CONCRETS D'IMPLÉMENTATION
 
 ### 3.1 Cas Client: E-commerce Moto (MyDealz)
@@ -1279,5 +1402,6 @@ node AGENCY-CORE-SCRIPTS-V3/add_google_shopping_attributes.cjs
 ---
 
 *Document généré par Claude 4.5 Opus*
-*Version 1.0 - December 16, 2025*
-*207 scripts analysés, 8 MCPs configurés*
+*Version 1.1 - December 18, 2025*
+*212 scripts analysés, 8 MCPs configurés*
+*Màj v1.1: Knowledge Base RAG (5 scripts) ajouté*

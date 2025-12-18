@@ -37,7 +37,7 @@
 
   /* Text Colors */
   --text-primary: #191E35;     /* Navy Deep */
-  --text-secondary: #516C86;   /* Blue Gray */
+  --text-secondary: #8BA3B9;   /* Light Blue Gray - improved contrast on dark bg */
   --text-muted: #4E4962;       /* Muted Purple */
   --text-light: #E4F4FC;       /* Ice White */
 
@@ -136,9 +136,11 @@ body {
 .cyber-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.4;
+  filter: blur(80px); /* Reduced from 100px for better performance */
+  opacity: 0.35;
   animation: glowPulse 8s ease-in-out infinite;
+  will-change: opacity, transform; /* GPU acceleration hint */
+  contain: strict; /* Layout containment for performance */
 }
 
 .cyber-glow-1 {
@@ -485,11 +487,13 @@ body {
   color: var(--text-light);
 }
 
+/* Base gradient-text - enhanced version defined later overrides this */
 .gradient-text {
-  background: var(--gradient-cyber);
+  background: linear-gradient(135deg, #5EC8F7 0%, #A78BFA 50%, #34D399 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
 .hero-description {
@@ -619,12 +623,23 @@ body {
 }
 
 .stat-label-ultra {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 10 !important;
+  font-size: 0.9rem !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  background: none !important;
+  background-clip: initial !important;
+  -webkit-background-clip: initial !important;
+  text-transform: uppercase !important;
   letter-spacing: 0.1em;
-  margin-top: var(--spacing-xs);
+  margin-top: 10px !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8), 0 0 20px rgba(79, 186, 241, 0.8);
+  line-height: 1.4 !important;
 }
 
 .stat-glow {
@@ -653,7 +668,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  justify-self: center; /* Center within grid cell */
+  align-self: center;   /* Center within grid cell */
   height: 500px;
+  width: 100%;
+  max-width: 500px;     /* Prevent overflow */
 }
 
 .tech-orbital {
@@ -716,7 +735,7 @@ body {
 .tech-icon:hover {
   border-color: var(--primary);
   box-shadow: var(--shadow-glow);
-  transform: scale(1.1);
+  /* Note: Do NOT use transform here - it overrides positioning transforms */
 }
 
 .tech-icon span {
@@ -1231,13 +1250,14 @@ body {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
+  padding-left: 0;
 }
 
 .timeline-line {
   position: absolute;
-  left: 40px;
-  top: 0;
-  bottom: 0;
+  left: 39px; /* Center of 80px marker (40px - 1px for 2px line width) */
+  top: 40px; /* Start from center of first marker */
+  bottom: 40px; /* End at center of last marker */
   width: 2px;
   background: linear-gradient(180deg, var(--primary), var(--accent), var(--accent-purple), var(--accent-orange));
 }
@@ -1811,7 +1831,9 @@ body {
   }
 
   .timeline-line {
-    left: 20px;
+    left: calc(var(--spacing-md) + 24px); /* Center of 50px marker (25px - 1px) + padding */
+    top: 25px;
+    bottom: 25px;
   }
 
   .step-marker {
@@ -2144,8 +2166,17 @@ body {
 .morph-blob {
   position: absolute;
   border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-  filter: blur(60px);
-  animation: morphBlob 15s ease-in-out infinite;
+  filter: blur(50px); /* Reduced for performance */
+  animation: morphBlob 20s ease-in-out infinite; /* Slower for less CPU */
+  will-change: border-radius;
+  contain: layout style;
+}
+
+/* Hide morph-blobs on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .morph-blob {
+    display: none;
+  }
 }
 
 @keyframes morphBlob {
@@ -2172,7 +2203,7 @@ body {
   100% { background-position: 200% 0; }
 }
 
-/* Enhanced Hero Title */
+/* Enhanced Hero Title - Animation with guaranteed visibility */
 .title-line {
   display: block;
   font-size: 3.5rem;
@@ -2180,9 +2211,9 @@ body {
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--text-light);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: titleReveal 0.8s ease forwards;
+  opacity: 1; /* Visible by default - animation enhances, not required */
+  transform: translateY(0);
+  animation: titleReveal 0.8s ease both;
 }
 
 .title-line:nth-child(2) {
@@ -2190,24 +2221,29 @@ body {
 }
 
 @keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Gradient Text Enhanced */
+/* Gradient Text Enhanced - High contrast for dark backgrounds */
 .gradient-text {
   background: linear-gradient(
     135deg,
-    var(--primary) 0%,
-    var(--accent-purple) 50%,
-    var(--accent) 100%
+    #5EC8F7 0%,      /* Brighter cyan for better contrast */
+    #A78BFA 50%,     /* Brighter violet */
+    #34D399 100%     /* Brighter emerald */
   );
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent; /* Fallback for older browsers */
   animation: gradientShift 5s ease infinite;
 }
 
@@ -3088,13 +3124,14 @@ body {
   color: var(--accent);
 }
 
-/* Process Section */
+/* Process Section - AUDIT PAGE ONLY */
 .audit-process {
   padding: var(--spacing-4xl) 0;
   background: rgba(0, 0, 0, 0.2);
 }
 
-.process-timeline {
+/* Specific selector to avoid conflict with .process-ultra .process-timeline */
+.audit-process .process-timeline {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-xl);
@@ -3198,13 +3235,13 @@ body {
     position: static;
   }
 
-  .process-timeline {
+  .audit-process .process-timeline {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
-  .process-timeline {
+  .audit-process .process-timeline {
     grid-template-columns: 1fr;
   }
 

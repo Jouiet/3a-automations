@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 2.0 - Mise à jour 17 Décembre 2025
+## Version 2.3 - Mise à jour 18 Décembre 2025 (Knowledge Base + Voice Scope)
 ## Basé sur données réelles confirmées
 
 ---
@@ -67,9 +67,10 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │                                                                              │
 │  MCPs CONFIGURÉS                                                            │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  ✅ Klaviyo MCP - Fonctionnel                                               │
-│  ✅ Shopify MCP - Fonctionnel (Henderson/Alpha)                             │
+│  ✅ Klaviyo MCP - Fonctionnel (TESTÉ 17/12)                                 │
+│  ✅ Shopify MCP - Fonctionnel (Alpha Medical - TESTÉ 17/12)                 │
 │  ✅ n8n MCP - Fonctionnel (Alpha Medical)                                   │
+│  ⚠️ xAI/Grok - Clé OK, nécessite $5 crédits                                │
 │  ❌ Google Analytics - Service Account MANQUANT                             │
 │  ❌ Google Sheets - Service Account MANQUANT                                │
 │  ❌ Apify - Token placeholder                                               │
@@ -85,19 +86,28 @@ Mis à jour avec les données confirmées le 17/12/2025.
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │  TECHNIQUE (bloquant)                                                       │
-│  ├── ❌ Fichier .env (n'existe pas)                                        │
+│  ├── ✅ Fichier .env CRÉÉ (17/12/2025)                                     │
+│  ├── ⚠️ xAI API: Clé OK, $5 crédits requis                                 │
 │  ├── ❌ Google Service Account (fichier JSON manquant)                      │
 │  ├── ❌ Scripts non refactorés (hardcoding)                                 │
-│  └── ❌ Tests de validation                                                 │
+│  └── ⚠️ Tests de validation: Shopify+Klaviyo OK, Google NON                │
 │                                                                              │
 │  COMMERCIAL (bloquant)                                                      │
-│  ├── ❌ Page de présentation (landing page)                                 │
+│  ├── ⚠️ Page de présentation: Prompts AI créés (AI-PROMPTS-LANDING-PAGE)   │
+│  ├── ✅ Branding: 3A-BRANDING-GUIDE.md (couleurs exactes du logo)          │
+│  ├── ✅ GitHub: github.com/Jouiet/3a-automations connecté                   │
 │  ├── ❌ Système de booking (Calendly)                                       │
 │  ├── ❌ Testimonials/Case studies publics                                   │
 │  └── ❌ Pipeline prospects                                                  │
 │                                                                              │
-│  HORS SCOPE (budget €50 insuffisant)                                        │
-│  ├── ❌ Voice AI Demo (Vapi.ai) - Coût variable                            │
+│  RÉVISÉ (18/12/2025 - Voice Scope Clarifié)                                │
+│  ├── ✅ Knowledge Base RAG: PHASE 1 COMPLÈTE (273 chunks, BM25)            │
+│  ├── ⚠️ Voice AI: SCOPE CLARIFIÉ - Dual Purpose:                           │
+│  │   ├── Use Case 1: AI Shopping Assistant                                 │
+│  │   ├── Use Case 2: Support Client                                        │
+│  │   ├── Stack: xAI Grok Voice ($0.05/min)                                 │
+│  │   ├── Effort estimé: 116-172 heures                                     │
+│  │   └── Coût opérationnel: ~$0.32/appel                                   │
 │  ├── ❌ Domaine custom - €10-15/an possible                                │
 │  └── ❌ Outils premium                                                      │
 │                                                                              │
@@ -422,8 +432,8 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 ---
 
-**Document mis à jour:** 17 Décembre 2025
-**Version:** 2.0
+**Document mis à jour:** 18 Décembre 2025
+**Version:** 2.3
 **Principe:** Faits uniquement, zéro bullshit
 
 ---
@@ -432,5 +442,8 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 | Version | Date | Modifications |
 |---------|------|---------------|
+| 2.3 | 18 Déc 2025 | Knowledge Base RAG Phase 1 complète, Voice Agent scope clarifié (Shopping + Support), effort 116-172h |
+| 2.2 | 17 Déc 2025 | Découverte Grok Voice Agent API ($0.05/min) - Voice AI devient possible |
+| 2.1 | 17 Déc 2025 | Session 4: xAI API configurée, GitHub connecté, branding extrait, prompts landing page |
 | 2.0 | 17 Déc 2025 | Mise à jour avec données confirmées (solo, €0, €50 budget, restart 25/01) |
 | 1.0 | 16 Déc 2025 | Version initiale basée sur audit forensique |
