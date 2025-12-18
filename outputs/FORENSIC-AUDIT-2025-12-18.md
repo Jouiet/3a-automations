@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 2.2 (Màj Session 14 - Vérification automations)
+## Date: 2025-12-18 | Version: 2.3 (Màj Session 15 - Correction critique architecture)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -801,9 +801,138 @@ automations/
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.2**
+# SECTION 12: SESSION 15 - CORRECTION CRITIQUE ARCHITECTURE
+
+## 12.1 Problème Identifié
+
+**VIOLATION GRAVE DÉTECTÉE:**
+- Scripts agence exécutés sur store client réel (Alpha Medical)
+- Credentials clients dans .env agence
+- 106 images modifiées sur store LIVE sans autorisation explicite
+
+## 12.2 Corrections Appliquées
+
+### .env Nettoyé
+```
+AVANT: Credentials Alpha Medical, Klaviyo, n8n
+APRÈS: VIDE (toutes credentials clients retirées)
+```
+
+### Architecture Correcte Documentée
+```
+/Users/mac/Desktop/JO-AAA/           ← AGENCE (pas de creds clients)
+/Users/mac/Desktop/clients/alpha-medical/  ← Creds Alpha Medical
+/Users/mac/Desktop/clients/henderson/      ← Creds Henderson
+/Users/mac/Desktop/clients/mydealz/        ← Creds MyDealz
+```
+
+## 12.3 Métriques Corrigées (Vérité Brutale)
+
+| Métrique | AVANT (gonflé) | APRÈS (réel) |
+|----------|----------------|--------------|
+| Automations | 50+ | **6 testées** |
+| MCPs Testés | 3 | **2 actifs** |
+| APIs | 10+ | **5+** |
+| Scripts génériques | 49 | **6 fonctionnels** |
+| MCPs fonctionnels | 9 | **2** (chrome-devtools, playwright) |
+
+## 12.4 Automatisations Réellement Fonctionnelles
+
+| # | Automation | Statut | Testé |
+|---|------------|--------|-------|
+| 1 | audit-shopify-complete.cjs | ✅ | Oui |
+| 2 | audit-klaviyo-flows.cjs | ✅ | Oui |
+| 3 | fix-missing-alt-text.cjs | ✅ | Oui |
+| 4 | test-shopify-connection.cjs | ✅ | Oui |
+| 5 | test-klaviyo-connection.cjs | ✅ | Oui |
+| 6 | test-all-apis.cjs | ✅ | Créé |
+
+**TOTAL VÉRIFIÉ: 6 automatisations (pas 49!)**
+
+## 12.5 MCPs - État Réel
+
+| MCP | Statut Réel |
+|-----|-------------|
+| chrome-devtools | ✅ Fonctionnel |
+| playwright | ✅ Fonctionnel |
+| Shopify | ❌ Credentials retirées |
+| Klaviyo | ❌ Credentials retirées |
+| n8n | ❌ Credentials retirées |
+| Google Analytics | ❌ Service Account manquant |
+| Google Sheets | ❌ Service Account manquant |
+| Apify | ❌ Token vide |
+| Gemini | ⚠️ API Key vide |
+| GitHub | ⚠️ Token vide |
+| Hostinger | ⚠️ Non testé |
+| WordPress | ⚠️ Non testé |
+
+**TOTAL FONCTIONNEL: 2/12 MCPs**
+
+## 12.6 Site Web - Claims Mis à Jour
+
+```html
+<!-- AVANT -->
+50+ Automations | 3 MCPs | 10+ APIs
+
+<!-- APRÈS -->
+6 Core Automations | 2 MCPs | 5+ APIs
+```
+
+## 12.7 Règle Critique Ajoutée
+
+```
+╔════════════════════════════════════════════════════════════════════╗
+║     ⚠️  RÈGLE ABSOLUE - SÉPARATION DES ENVIRONNEMENTS  ⚠️          ║
+╠════════════════════════════════════════════════════════════════════╣
+║  ❌ INTERDIT: Credentials clients dans .env agence                 ║
+║  ❌ INTERDIT: Exécuter scripts agence sur stores clients réels     ║
+║  ✅ REQUIS: Environnements clients séparés                         ║
+╚════════════════════════════════════════════════════════════════════╝
+```
+
+---
+
+# SECTION 13: PLAN ACTIONNABLE - PROCHAINE SESSION
+
+## P0 - CRITIQUE (Avant toute autre chose)
+
+1. **Créer environnements clients séparés**
+   ```bash
+   mkdir -p /Users/mac/Desktop/clients/alpha-medical
+   mkdir -p /Users/mac/Desktop/clients/henderson
+   mkdir -p /Users/mac/Desktop/clients/mydealz
+   ```
+
+2. **Créer store de développement Shopify Partners**
+   - URL: https://partners.shopify.com
+   - Pour tester automations sans toucher clients réels
+
+3. **Obtenir compte Klaviyo démo**
+   - Pour tester sans données clients
+
+## P1 - IMPORTANT (Cette semaine)
+
+1. **Augmenter automatisations testées** (6 → 15)
+   - Tester avec store démo
+   - Documenter chaque test
+
+2. **Configurer MCPs manquants**
+   - Google Service Account
+   - GitHub Token personnel
+   - Gemini API Key
+
+## P2 - NORMAL (Semaine prochaine)
+
+1. **Déployer site sur Hostinger**
+2. **Préparer emails restart clients**
+3. **Créer démo vidéo des automatisations**
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v2.3**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.3: Session 15 - CORRECTION CRITIQUE (séparation agence/clients, métriques honnêtes)*
 *v2.2: Session 14 - Vérification automations (Shopify, Klaviyo, SEO)*
 *v2.1: Session 13 - Vérification statuts (Schema, robots.txt, llms.txt, images)*
 *Mis à jour après évaluation croisée avec audits Gemini*
