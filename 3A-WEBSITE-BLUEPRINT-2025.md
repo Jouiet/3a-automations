@@ -1,6 +1,6 @@
 # 3A AUTOMATION - WEBSITE BLUEPRINT
 ## Document Exhaustif de Création du Site Web
-### Version: 1.3 | Date: 18/12/2025 | Auteur: 3A Automation
+### Version: 1.4 | Date: 18/12/2025 | Auteur: 3A Automation
 
 ---
 
@@ -103,11 +103,19 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 97/100 (màj 18/12/2025 - Session 11)
-├── +1: Stat-labels visibility fix (root cause: JS data-count targeting)
-├── +1: Section reveal fallback (3s timeout)
+SCORE ACTUEL: 98/100 (màj 18/12/2025 - Session 13)
+├── +1: Session 13 - llms.txt créé (spec-compliant)
+├── Schema.org: 12/12 pages (100%) ✅
+├── robots.txt: 8 crawlers AI configurés ✅
+├── Images: logo.png (-76%), og-image.png (-91%) ✅
+├── privacy.html dupliqué supprimé ✅
+└── Automatisations: 49 génériques + 218 legacy (68% normalisables)
+
+SCORE SESSION 11: 97/100
+├── Stat-labels visibility fix (root cause: JS data-count targeting)
+├── Section reveal fallback (3s timeout)
 └── Stats inline design: "207 AUTOMATISATIONS | 8 MCP SERVERS | 15+ APIS | 4 VERTICALS"
-  - +1: Performance optimization complète
+  - Performance optimization complète
   - styles-lite.css créé (40K vs 84K) - 52% réduction
   - script-lite.js créé (8K vs 32K) - 75% réduction
   - 8 pages secondaires migrées vers assets légers

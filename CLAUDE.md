@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 3.5 | Dernière mise à jour: 2025-12-18 (Session 12 - Suite Finale)
+## Version: 3.6 | Dernière mise à jour: 2025-12-18 (Session 13 - AEO/SEO Vérification)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations
 
@@ -871,6 +871,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 3.6 | **Session 13 - AEO/SEO Vérification**: Schema.org 100% (12/12 pages), robots.txt complet (8 crawlers AI), llms.txt créé (spec-compliant), images confirmées optimisées, FORENSIC-AUDIT v2.1, Blueprint score 98/100 |
 | 2025-12-18 | 3.5 | **Session 12 - Suite Finale**: +11 automatisations (49 total), video/ + google-merchant/ ajoutés, privacy.html dupliqué supprimé, liens mis à jour, AAA-AUTOMATIONS-CATALOG v2.0, sitemap.xml nettoyé |
 | 2025-12-18 | 3.4 | **Session 12 - Forensic Matrix**: Analyse forensique approfondie 218 scripts legacy, matrice utilisation/complémentarité créée, 148 scripts normalisables (<1h) identifiés, workflows Lead/SEO/Email documentés, correction métrique "210 non utilisables" → "68% réutilisable" |
 | 2025-12-18 | 3.3 | **Session 12 - Automations Normalisées**: Structure automations/ créée (agency/ + clients/), 38 automatisations génériques migrées (6 catégories: shopify, klaviyo, analytics, leads, seo, social), INDEX.md avec méthodologie intégration clients, distinction agency vs client-facing |
