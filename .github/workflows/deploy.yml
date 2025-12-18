@@ -1,0 +1,23 @@
+name: Deploy to Hostinger VPS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'landing-page-hostinger/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Hostinger VPS
+        uses: hostinger/deploy-on-vps@v2
+        with:
+          api-key: ${{ secrets.HOSTINGER_API_KEY }}
+          virtual-machine: ${{ vars.HOSTINGER_VM_ID }}
+          project-name: 3a-website
+          docker-compose-path: docker/docker-compose.yml
+          environment-variables: |
+            GITHUB_TOKEN=${{ secrets.GH_DEPLOY_TOKEN }}

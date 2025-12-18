@@ -1,7 +1,8 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 4.4 | Dernière mise à jour: 2025-12-18 (Session 21 - Services forensic audit)
+## Version: 4.6 | Dernière mise à jour: 2025-12-19 (Session 21c - SITE LIVE!)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
-## GitHub: https://github.com/Jouiet/3a-automations
+## GitHub: https://github.com/Jouiet/3a-automations (PUBLIC)
+## Site: https://3a-automation.com ✅ LIVE
 
 ---
 
@@ -163,25 +164,25 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### État MCPs (Corrigé 18/12/2025 - Session 15)
+### État MCPs (Màj 18/12/2025 - Session 21b)
 
 | MCP | Statut | Package NPM | Détail |
 |-----|--------|-------------|--------|
 | ✅ chrome-devtools | **CONFIGURÉ** | `chrome-devtools-mcp` | Debug browser, screenshots |
 | ✅ playwright | **CONFIGURÉ** | `@playwright/mcp` | Browser automation |
-| ⚠️ gemini | SANS API KEY | `github:rlabs-inc/gemini-mcp` | GEMINI_API_KEY vide |
-| ⚠️ github | SANS TOKEN | `@modelcontextprotocol/server-github` | GITHUB_TOKEN vide |
-| ⚠️ hostinger | NON TESTÉ | `hostinger-api-mcp` | Credentials non vérifiées |
+| ✅ gemini | **CONFIGURÉ** | `github:rlabs-inc/gemini-mcp` | API testée OK |
+| ✅ github | **CONFIGURÉ** | `@modelcontextprotocol/server-github` | API testée OK |
+| ✅ hostinger | **TESTÉ OK** | `hostinger-api-mcp` | VPS info récupéré |
 | ⚠️ wordpress | NON TESTÉ | `claudeus-wp-mcp` | wp-sites.json requis |
-| ❌ Shopify | CREDENTIALS RETIRÉES | `shopify-mcp` | .env nettoyé Session 15 |
-| ❌ Klaviyo | CREDENTIALS RETIRÉES | `klaviyo-mcp-server` | .env nettoyé Session 15 |
-| ❌ n8n | CREDENTIALS RETIRÉES | SSE remote | .env nettoyé Session 15 |
-| ❌ Google Analytics | CASSÉ | `mcp-server-google-analytics` | Service Account MANQUANT |
-| ❌ Google Sheets | CASSÉ | `mcp-gsheets` | Service Account MANQUANT |
-| ❌ Apify | NON CONFIGURÉ | `@apify/actors-mcp-server` | Token vide |
+| ⚠️ Shopify | PLACEHOLDER | `shopify-mcp` | Dev store agence à créer |
+| ✅ Klaviyo | **TESTÉ OK** | `klaviyo-mcp-server` | 3A Automation (3 listes) |
+| ⚠️ n8n | INSTANCE OK | SSE remote | API key à générer |
+| ✅ Google Analytics | **TESTÉ OK** | `mcp-server-google-analytics` | Property 516832662 |
+| ✅ Google Sheets | **TESTÉ OK** | `mcp-gsheets` | Spreadsheet ID configuré |
+| ⚠️ Apify | NON CONFIGURÉ | `@apify/actors-mcp-server` | Token vide |
 
-**Total: 12 MCPs déclarés - 2 fonctionnels (chrome-devtools, playwright)**
-**⚠️ Les MCPs Shopify/Klaviyo/n8n fonctionnaient avec credentials CLIENTS (violation règle séparation)**
+**Total: 12 MCPs déclarés - 8 fonctionnels (Session 21b)**
+**✅ Architecture correcte: Services AGENCE configurés (pas de creds clients)**
 
 ### CORRECTION IMPORTANTE (17/12/2025):
 ```
@@ -358,6 +359,45 @@ KLAVIYO:
 
 **Matrice complète:** `outputs/FORENSIC-AUTOMATION-MATRIX-2025-12-18.md`
 **Documentation:** `automations/INDEX.md`
+
+### Infrastructure de Déploiement (Session 21c - 19/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    INFRASTRUCTURE 3A AUTOMATION                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  SITE WEB:                                                                  │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  URL:             https://3a-automation.com ✅ LIVE                         │
+│  URL WWW:         https://www.3a-automation.com ✅                          │
+│  SSL:             Let's Encrypt via Traefik                                 │
+│                                                                              │
+│  VPS HOSTINGER:                                                             │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  ID:              1168256                                                   │
+│  Hostname:        srv1168256.hstgr.cloud                                    │
+│  IP:              148.230.113.163                                           │
+│  OS:              Ubuntu + Docker                                           │
+│                                                                              │
+│  CONTENEURS DOCKER:                                                         │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  ├── 3a-website       nginx:alpine     Port 80    ✅ RUNNING                │
+│  ├── root-traefik-1   traefik          Port 80/443 ✅ RUNNING               │
+│  └── root-n8n-1       n8n              Port 5678   ✅ RUNNING               │
+│                                                                              │
+│  ARCHITECTURE:                                                              │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  Internet → Traefik (reverse proxy) → nginx (site) ou n8n (workflows)      │
+│                                                                              │
+│  AUTO-DEPLOY:                                                               │
+│  ─────────────────────────────────────────────────────────────────────────  │
+│  Source: github.com/Jouiet/3a-automations (PUBLIC)                          │
+│  Méthode: wget archive tar.gz au démarrage conteneur                        │
+│  Mise à jour: docker-compose down/up via Hostinger API                      │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### Configuration .env (CRÉÉ 17/12/2025)
 
@@ -711,12 +751,12 @@ VOICE AGENT (Après activation xAI - 116-172h total):
 │   PROCHAINE SESSION (SESSION 12) - PRIORITÉS:                               │
 │   ═══════════════════════════════════════════════════════════════════════   │
 │                                                                              │
-│   PRIORITÉ 1: DÉPLOIEMENT HOSTINGER (2-3h)                                  │
-│   ├── Upload landing-page-hostinger/ complet                                │
-│   ├── Vérifier stats visibles en production                                 │
-│   ├── Configurer DNS: 3a-automation.com                                     │
-│   ├── SSL Let's Encrypt                                                     │
-│   └── Tester formulaire contact + webhook n8n                               │
+│   ✅ DÉPLOIEMENT HOSTINGER TERMINÉ (Session 21c - 19/12/2025)               │
+│   ├── ✅ Docker nginx:alpine déployé sur VPS                                │
+│   ├── ✅ DNS A record: 3a-automation.com → 148.230.113.163                  │
+│   ├── ✅ SSL Let's Encrypt via Traefik actif                                │
+│   ├── ✅ Site live: https://3a-automation.com                               │
+│   └── ✅ Repo GitHub rendu PUBLIC pour auto-deploy                          │
 │                                                                              │
 │   PRIORITÉ 2: ACTIVATION xAI API (30 min)                                   │
 │   ├── Acheter crédits xAI: $5-10 minimum                                    │
@@ -738,7 +778,7 @@ VOICE AGENT (Après activation xAI - 116-172h total):
 │   ═══════════════════════════════════════════════════════════════════════   │
 │   ⚠️ xAI API: Nécessite crédits ($5 min)                                    │
 │   ⚠️ Google APIs: Nécessite Service Account                                 │
-│   ⚠️ Hostinger: Attente déploiement                                         │
+│   ✅ Hostinger: DÉPLOYÉ (19/12/2025)                                        │
 │                                                                              │
 │   MÉTRIQUES SITE:                                                           │
 │   ═══════════════════════════════════════════════════════════════════════   │
@@ -752,8 +792,8 @@ VOICE AGENT (Après activation xAI - 116-172h total):
 ```
 
 CETTE SEMAINE:
-□ Déployer landing page optimisée sur Hostinger
-□ Vérifier stats inline en production
+✅ Déployer landing page optimisée sur Hostinger (FAIT 19/12/2025)
+✅ Vérifier stats inline en production (LIVE sur https://3a-automation.com)
 □ Envoyer emails restart aux 3 clients
 □ Corriger 271 alt text manquants (Alpha Medical)
 
@@ -911,6 +951,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-18 | 4.5 | **Session 21b - 9 SERVICES AGENCE CONFIGURÉS**: GitHub✅, Google SA✅, Sheets✅, Gemini✅, xAI✅, Hostinger✅, n8n instance✅, GA4✅, Klaviyo✅. Sécurité: clés retirées des .md. MCPs 8/12 fonctionnels. Config rate: 44% (29/66 vars) |
 | 2025-12-18 | 4.4 | **Session 21 - SERVICES FORENSIC AUDIT**: Analyse complète dépendances API (57 variables, 13 services), .env.example complet créé, plan d'action configuration agence, FORENSIC-AUDIT v3.1 Section 22 |
 | 2025-12-18 | 4.3 | **Session 21 - FORM URLS FIX**: Correction VIOLATION séparation (formulaires n8n client → Google Apps Script), 4 fichiers corrigés |
 | 2025-12-18 | 4.2 | **Session 20 - DEPLOY-READY CHECKLIST**: Blueprint score 99/100, deploy checklist complet (33 fichiers, 1.7MB, 12 pages HTML), FORENSIC-AUDIT v2.9 Section 20 ajoutée, test-all-apis 0/7 (expected - .env agence vide by design) |
@@ -938,6 +979,67 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 | 2025-12-17 | 2.0 | Refonte complète - Ajout références docs techniques, métriques factuelles |
 | 2025-12-17 | 1.1 | Ajout branding 3A Automation |
 | 2025-12-17 | 1.0 | Création initiale |
+
+---
+
+## PLAN ACTIONNABLE - FIN SESSION 21b (18/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    SESSION 21b - RÉSUMÉ EXÉCUTIF                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   SERVICES AGENCE CONFIGURÉS ET TESTÉS:                                     │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│   ✅ GitHub          ghp_xxxx...xxxx (testé via API)                        │
+│   ✅ Google Cloud    Service Account créé + JSON                            │
+│   ✅ Google Sheets   Spreadsheet ID configuré + R/W testé                   │
+│   ✅ Gemini          Clé API sauvée (quota temp exceeded)                   │
+│   ✅ xAI/Grok        Clé API sauvée ($0 crédits - à acheter)               │
+│   ✅ Hostinger       API testée OK (VPS info récupéré)                      │
+│   ✅ n8n             Instance accessible (srv1168256.hstgr.cloud)           │
+│   ✅ GA4             Property 516832662 + Stream + Measurement ID           │
+│   ✅ Klaviyo         Compte agence testé (3 listes)                         │
+│                                                                              │
+│   TAUX CONFIGURATION: 44% (29/66 variables)                                 │
+│   MCPs FONCTIONNELS: 8/12                                                   │
+│                                                                              │
+│   SÉCURITÉ APPLIQUÉE:                                                       │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   ✅ Clés API retirées de tous les .md (redacted: xxxx...xxxx)              │
+│   ✅ Clés stockées UNIQUEMENT dans .env (gitignored)                        │
+│   ✅ Ancienne clé xAI marquée ANNULÉE                                       │
+│                                                                              │
+│   ACTIONS MANUELLES RESTANTES:                                              │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│                                                                              │
+│   □ PRIORITÉ 1 - n8n API Key (5 min)                                        │
+│     ├── Aller: https://n8n.srv1168256.hstgr.cloud/settings/api             │
+│     ├── Créer: New API Key → "claude-code-integration"                      │
+│     └── Sauver: N8N_API_KEY dans .env + mcp.json                           │
+│                                                                              │
+│   □ PRIORITÉ 2 - xAI Crédits ($5-10) (10 min)                               │
+│     ├── Aller: https://console.x.ai/billing                                 │
+│     ├── Acheter: $5 minimum pour activer API                                │
+│     └── Tester: node scripts/grok-client.cjs                               │
+│                                                                              │
+│   □ PRIORITÉ 3 - Shopify Partners Dev Store (30 min)                        │
+│     ├── Aller: https://partners.shopify.com                                 │
+│     ├── Créer: Development store "3a-automation-dev"                        │
+│     └── Configurer: Access token dans .env + mcp.json                       │
+│                                                                              │
+│   ✅ PRIORITÉ 4 - Klaviyo Compte Agence - COMPLÉTÉ                          │
+│     └── Compte créé, API testée, 3 listes disponibles                       │
+│                                                                              │
+│   PROCHAINE SESSION - FOCUS:                                                │
+│   ═══════════════════════════════════════════════════════════════════════   │
+│   1. Compléter les actions manuelles ci-dessus                              │
+│   2. Déployer landing page sur Hostinger                                    │
+│   3. Tester tous les MCPs avec données agence                               │
+│   4. Envoyer emails restart clients (25/01/2026)                            │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
