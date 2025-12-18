@@ -1298,9 +1298,124 @@ VARIABLES DOCUMENTÉES:
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.8**
+# SECTION 20: SESSION 20 - DEPLOY-READY CHECKLIST
+
+## 20.1 Date et Contexte
+
+**Date:** 2025-12-18 (Session 20)
+**Objectif:** Vérifier que tout est prêt pour déploiement Hostinger
+
+## 20.2 Site Web - PRÊT POUR DÉPLOIEMENT ✅
+
+### Structure Fichiers
+
+```
+landing-page-hostinger/
+├── TAILLE TOTALE: 1.7MB ✅
+├── FICHIERS: 33 ✅
+├── PAGES HTML: 12 ✅
+│
+├── Pages principales:
+│   ├── index.html              (40K)
+│   ├── automations.html        (36K)
+│   ├── pricing.html            (28K)
+│   ├── contact.html            (20K)
+│   ├── a-propos.html           (20K)
+│   ├── cas-clients.html        (28K)
+│   └── 404.html                (8K)
+│
+├── Services:
+│   ├── services/ecommerce.html
+│   ├── services/pme.html
+│   └── services/audit-gratuit.html
+│
+├── Legal:
+│   ├── legal/mentions-legales.html
+│   └── legal/politique-confidentialite.html
+│
+├── Assets CSS:
+│   ├── styles.css              (88K) - Version complète
+│   └── styles-lite.css         (40K) - Version optimisée
+│
+├── Assets JS:
+│   ├── script.js               (32K) - Version complète
+│   └── script-lite.js          (8K)  - Version optimisée
+│
+├── Images:
+│   ├── logo.png                (66K, compressé -76%)
+│   ├── og-image.png            (47K, compressé -91%)
+│   ├── favicon.ico + 16/32.png
+│   ├── apple-touch-icon.png
+│   └── android-chrome-192/512.png
+│
+└── SEO/AEO:
+    ├── robots.txt              (10 bots configurés)
+    ├── sitemap.xml             (11 URLs)
+    ├── llms.txt                (spec-compliant)
+    ├── llm.txt                 (alias)
+    └── site.webmanifest        (PWA)
+```
+
+### Checklist Déploiement
+
+| Élément | Status | Note |
+|---------|--------|------|
+| Structure HTML | ✅ | 12 pages, tous liens validés |
+| CSS | ✅ | 2 versions (full + lite) |
+| JavaScript | ✅ | 2 versions (full + lite) |
+| Images | ✅ | Compressées, optimisées |
+| Favicon set | ✅ | ico, png, apple-touch, android |
+| robots.txt | ✅ | 10 bots (8 AI + Googlebot + Bingbot) |
+| sitemap.xml | ✅ | 11 URLs |
+| llms.txt | ✅ | Spec-compliant |
+| Schema.org | ✅ | JSON-LD sur 12/12 pages |
+| PWA manifest | ✅ | site.webmanifest |
+| Cookie consent | ✅ | RGPD compliant |
+| Formulaires | ✅ | n8n webhook ready |
+| Métriques factuelles | ✅ | 42/12/8+/3 |
+| Terminologie | ✅ | "automatisations" (pas "scripts") |
+
+### Ce qui reste à configurer POST-DÉPLOIEMENT
+
+| Élément | Action requise |
+|---------|----------------|
+| GA4 | Créer propriété → remplacer G-XXXXXXXXXX |
+| GTM | Créer container → remplacer GTM-XXXXXXX |
+| Meta Pixel | Créer pixel → remplacer PIXEL_ID_HERE |
+| LinkedIn | Créer partner ID → remplacer LINKEDIN_PARTNER_ID |
+| SSL | Vérifier certificat Let's Encrypt |
+| DNS | Configurer 3a-automation.com → Hostinger |
+| n8n webhook | Vérifier endpoint fonctionnel |
+
+## 20.3 APIs Agence - État
+
+```
+test-all-apis.cjs result: 0/7 configurés
+ATTENDU: .env agence VIDE (séparation agence/clients respectée)
+
+Pour tester les automatisations:
+→ Utiliser environnement client spécifique
+→ OU créer store Shopify Partners démo
+```
+
+## 20.4 Prochaines Actions P0
+
+1. **Déployer sur Hostinger**
+   - Upload fichiers via FTP ou File Manager
+   - Configurer DNS
+   - Vérifier SSL
+
+2. **Post-déploiement**
+   - Créer GA4 property
+   - Créer GTM container
+   - Tester formulaires en production
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v2.9**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.9: Session 20 - Deploy-ready checklist, structure vérifiée*
 *v2.8: Session 19 - Terminologie professionnelle uniformisée (scripts→automatisations)*
 *v2.7: Session 18 - .env.example créé, liens internes vérifiés (0 cassés)*
 *v2.6: Session 17 - Validation batch 42/42 (100%), création validate-all-automations.cjs*
