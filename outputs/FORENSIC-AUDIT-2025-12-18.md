@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 3.5 (Màj Session 21b - 5 services configurés)
+## Date: 2025-12-18 | Version: 3.6 (Màj Session 21b - 7 services + Hostinger + n8n)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -1762,16 +1762,18 @@ node scripts/test-google-auth.cjs
 | ✅ Google Sheets | P1 | CONFIGURÉ | `.env` (ID sauvegardé) |
 | ✅ Gemini API | P1 | CONFIGURÉ | `.env`, `mcp.json` (quota free tier) |
 | ⏳ GA4 | P1 | EN ATTENTE | Nécessite Property ID |
+| ✅ Hostinger API | P0 | CONFIGURÉ | `.env`, `mcp.json` - VPS 1168256 confirmé |
+| ✅ n8n Instance | P0 | ACCESSIBLE | `https://n8n.srv1168256.hstgr.cloud` - API key manquante |
 | ⏳ Shopify Partners | P0 | À FAIRE | Dev store à créer |
-| ⏳ n8n Agence | P0 | À FAIRE | Instance à créer |
 | ⚠️ xAI/Grok | P1 | KEY SAVED | `.env` (crédits requis: https://console.x.ai/team/1d41cf68-38bb-48d7-93f6-a5d5854912a6) |
 | ⏳ Apify | P2 | À FAIRE | Compte à créer |
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v3.5**
+**FIN DE L'AUDIT FORENSIQUE v3.6**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v3.6: Session 21b - 7 services configurés + Hostinger API testé + n8n instance confirmée*
 *v3.5: Session 21b - 5 services (GitHub, Google Cloud, Sheets, Gemini, xAI key saved)*
 *v3.4: Session 21b - 4 services configurés (GitHub, Google Cloud, Sheets, Gemini)*
 *v3.3: Session 21b - GitHub ✅ + Google Cloud ✅ + Google Sheets ✅ configurés*
