@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 3.3 (Màj Session 21b - GitHub + Google Cloud + Sheets configurés)
+## Date: 2025-12-18 | Version: 3.4 (Màj Session 21b - 4 services configurés)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -1760,18 +1760,19 @@ node scripts/test-google-auth.cjs
 | ✅ GitHub | P0 | CONFIGURÉ | `.env`, `mcp.json` |
 | ✅ Google Cloud | P0 | CONFIGURÉ | `.env`, `mcp.json`, JSON SA |
 | ✅ Google Sheets | P1 | CONFIGURÉ | `.env` (ID sauvegardé) |
+| ✅ Gemini API | P1 | CONFIGURÉ | `.env`, `mcp.json` (quota free tier) |
 | ⏳ GA4 | P1 | EN ATTENTE | Nécessite Property ID |
 | ⏳ Shopify Partners | P0 | À FAIRE | Dev store à créer |
 | ⏳ n8n Agence | P0 | À FAIRE | Instance à créer |
 | ⏳ xAI/Grok | P1 | À FAIRE | Crédits à acheter |
-| ⏳ Gemini | P1 | À FAIRE | API key à créer |
 | ⏳ Apify | P2 | À FAIRE | Compte à créer |
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v3.3**
+**FIN DE L'AUDIT FORENSIQUE v3.4**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v3.4: Session 21b - 4 services configurés (GitHub, Google Cloud, Sheets, Gemini)*
 *v3.3: Session 21b - GitHub ✅ + Google Cloud ✅ + Google Sheets ✅ configurés*
 *v3.2: Session 21b - GitHub ✅ + Google Cloud Service Account ✅ configurés*
 *v3.1: Session 21 - Analyse forensique complète services (57 variables, 13 services)*
