@@ -10,7 +10,8 @@
     "audit": "node AGENCY-CORE-SCRIPTS-V3/forensic_flywheel_analysis_complete.cjs"
   },
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "googleapis": "^169.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
