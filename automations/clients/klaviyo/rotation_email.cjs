@@ -1,25 +1,22 @@
-// © 2025 MyDealz. All rights reserved.
-// See LICENSE file for details.
-
 #!/usr/bin/env node
 /**
- * SYSTEM2: EMAIL ROTATION - 5 PRODUITS POUR CUSTOM LIQUID
- * Date: November 5, 2025
- * Objectif: Créer shop metafields pour afficher 5 produits dans emails
+ * EMAIL ROTATION - 5 PRODUITS POUR CUSTOM LIQUID
+ * Purpose: Create shop metafields for email product rotation
+ * Method: Scoring algorithm + anti-repetition + Shopify metafields API
  *
  * Process:
- * 1. Fetch all products (106) from Shopify API
+ * 1. Fetch all products from Shopify API
  * 2. Calculate score for ALL products (global top 5)
  * 3. Select top 5 products with anti-repetition
  * 4. Create/update shop metafields: email_rotation.product_1 to product_5
  * 5. Store product HANDLES (not IDs) for Liquid all_products[handle]
  * 6. Log rotation history
  *
- * Run: node scripts/rotation_email.cjs
+ * Run: node automations/clients/klaviyo/rotation_email.cjs
  * Frequency: Every 15 days (via GitHub Actions)
  */
 
-require('dotenv').config({ path: '/Users/mac/Desktop/MyDealz/.env' });
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
 const fs = require('fs');
 const path = require('path');
 

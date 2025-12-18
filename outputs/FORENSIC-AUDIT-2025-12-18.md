@@ -1033,53 +1033,103 @@ VIOLATION RÈGLE SÉPARATION: CORRIGÉE ✅
    - publish-bundles-online-store.cjs (IDs bundles hardcodés)
    - publish-bundles-graphql.cjs (IDs bundles hardcodés)
 
-### Résultat Final
+### Résultat Final (Session 17 Update)
 
 ```
-AUTOMATISATIONS TOTALES: 41
-├── 100% Génériques: 41 ✅
+AUTOMATISATIONS TOTALES: 42
+├── 100% Génériques: 42 ✅
 ├── Avec hardcoding: 0 ✅
 ├── Legacy (non génériques): 2 (déplacés)
+├── Syntaxe validée: 42/42 (100%)
 └── TAUX GÉNÉRICITÉ: 100%
 ```
 
-### Répartition par Catégorie
+### Répartition par Catégorie (Validée Session 17)
 
-| Catégorie | Scripts | Status |
-|-----------|---------|--------|
-| agency/core | 4 | ✅ Génériques |
-| clients/analytics | 6 | ✅ Génériques |
-| clients/klaviyo | 4 | ✅ Génériques |
-| clients/leads | 5 | ✅ Génériques |
-| clients/seo | 5 | ✅ Génériques |
-| clients/shopify | 9 | ✅ Génériques |
-| clients/social | 4 | ✅ Génériques |
-| clients/video | 3 | ✅ Génériques |
-| generic | 1 | ✅ Générique |
-| **TOTAL** | **41** | **100% ✅** |
+| Catégorie | Scripts | Validés | Status |
+|-----------|---------|---------|--------|
+| agency/core | 4 | 4/4 | ✅ 100% |
+| clients/analytics | 6 | 6/6 | ✅ 100% |
+| clients/klaviyo | 4 | 4/4 | ✅ 100% |
+| clients/leads | 5 | 5/5 | ✅ 100% |
+| clients/seo | 5 | 5/5 | ✅ 100% |
+| clients/shopify | 9 | 9/9 | ✅ 100% |
+| clients/social | 4 | 4/4 | ✅ 100% |
+| clients/video | 3 | 3/3 | ✅ 100% |
+| generic | 2 | 2/2 | ✅ 100% |
+| **TOTAL** | **42** | **42/42** | **100% ✅** |
+
+### Script de Validation Créé (Session 17)
+
+```
+automations/generic/validate-all-automations.cjs
+├── Vérifie syntaxe Node.js (node --check)
+├── Détecte hardcoding (domaines, tokens)
+├── Liste variables d'environnement requises
+└── Rapport par catégorie
+```
 
 ## 14.4 Métriques Mises à Jour
 
-| Métrique | Session 15b | Session 16 | Changement |
+| Métrique | Session 15b | Session 16 | Session 17 |
 |----------|-------------|------------|------------|
-| Automatisations génériques | 10 | **41** | +310% |
-| Automatisations fixables | 15 | **0** | -100% (toutes fixées) |
-| Automatisations hardcodées | 14 | **0** | -100% (nettoyées) |
-| MCPs avec creds clients | 3 | **0** | -100% |
-| MCPs avec placeholders | 4 | **10** | +150% |
-| Règle séparation respectée | ❌ | **✅** | Corrigée |
+| Automatisations génériques | 10 | 41 | **42** |
+| Automatisations validées | - | - | **42/42 (100%)** |
+| Automatisations fixables | 15 | 0 | 0 |
+| Automatisations hardcodées | 14 | 0 | 0 |
+| MCPs avec creds clients | 3 | 0 | 0 |
+| MCPs avec placeholders | 4 | 10 | 10 |
+| Règle séparation respectée | ❌ | ✅ | ✅ |
 
 ---
 
-# SECTION 15: PLAN ACTIONNABLE - PROCHAINE SESSION
+# SECTION 15: SESSION 17 - VALIDATION BATCH 100%
 
-## FAIT (Session 16) ✅
+## 15.1 Accomplissements Session 17
+
+1. ✅ **Créé validate-all-automations.cjs** - Script de validation batch
+2. ✅ **Corrigé rotation_email.cjs** - Shebang mal positionné (ligne 4 → ligne 1)
+3. ✅ **Validé 42/42 automatisations** - 100% syntaxe OK, 0 hardcoding
+4. ✅ **Mis à jour site web** - 41 → 42 Automations
+
+## 15.2 Corrections Appliquées
+
+### rotation_email.cjs (Syntax Fix)
+```javascript
+// AVANT (erreur - shebang ligne 4)
+// © 2025 MyDealz...
+#!/usr/bin/env node
+
+// APRÈS (correct - shebang ligne 1)
+#!/usr/bin/env node
+/**
+ * EMAIL ROTATION...
+```
+
+### Chemin .env généralisé
+```javascript
+// AVANT (hardcodé)
+require('dotenv').config({ path: '/Users/mac/Desktop/MyDealz/.env' });
+
+// APRÈS (dynamique)
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
+```
+
+---
+
+# SECTION 16: PLAN ACTIONNABLE - PROCHAINE SESSION
+
+## FAIT (Session 16 + 17) ✅
 
 1. ✅ **Nettoyer mcp.json** - Credentials Alpha Medical retirées
 2. ✅ **Génériciser 21 automatisations** (.env.local → .env)
 3. ✅ **Refactoriser 4 automatisations** (domaines hardcodés → process.env)
 4. ✅ **Génériciser 2 automatisations Apify** (tokens hardcodés → process.env)
 5. ✅ **Déplacer 2 scripts non généralisables** vers legacy/
+6. ✅ **Créer validate-all-automations.cjs** - Validation batch
+7. ✅ **Corriger rotation_email.cjs** - Shebang + .env path
+8. ✅ **Valider 42/42 automatisations** - 100% syntaxe OK
+9. ✅ **Mettre à jour site web** - 42 Automations
 
 ## P0 - CRITIQUE (Prochaine session)
 
@@ -1099,10 +1149,10 @@ AUTOMATISATIONS TOTALES: 41
    - Utiliser hostinger-api-mcp après configuration
    - Vérifier SSL, DNS
 
-2. **Mettre à jour claims marketing site**
-   - "41 Automations" (vérifiées génériques)
+2. ✅ **Claims marketing mis à jour**
+   - "42 Automations" (validées 100%)
    - "12 MCP Servers configurés"
-   - "Multi-plateforme: Shopify, Klaviyo, GA4, etc."
+   - "8+ APIs intégrées"
 
 ## P2 - NORMAL (Semaine prochaine)
 
@@ -1112,9 +1162,10 @@ AUTOMATISATIONS TOTALES: 41
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v2.5**
+**FIN DE L'AUDIT FORENSIQUE v2.6**
 
 *Généré le 2025-12-18 par analyse empirique bottom-up*
+*v2.6: Session 17 - Validation batch 42/42 (100%), création validate-all-automations.cjs*
 *v2.5: Session 16 - Nettoyage MCP + 41 automatisations 100% génériques*
 *v2.4: Session 15b - Audit code automatisations, création dossiers clients*
 *v2.3: Session 15 - CORRECTION CRITIQUE (séparation agence/clients, métriques honnêtes)*
