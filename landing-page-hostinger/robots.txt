@@ -34,8 +34,28 @@ User-agent: Claude-Web
 Allow: /
 Allow: /llm.txt
 
+User-agent: Anthropic-AI
+Allow: /
+Allow: /llm.txt
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llm.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llm.txt
+
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
+
+User-agent: CCBot
+Allow: /
+Allow: /llm.txt
+
+User-agent: cohere-ai
+Allow: /
+Allow: /llm.txt

@@ -1,148 +1,62 @@
-# 3A Automation - LLM Context File
-# Version: 1.0
-# Last Updated: 2025-12-17
-# Purpose: Provide accurate information about 3A Automation for AI/LLM systems
+# 3A Automation
 
-## Company Overview
+> Consultant Automation, Analytics & AI pour PME. Services d'automatisation e-commerce et marketing pour Small/Mid Business de tous secteurs.
 
-Name: 3A Automation
-Full Name: 3A Automation (Automation, Analytics, AI)
-Website: https://3a-automation.com
-Email: contact@3a-automation.com
-Founded: 2025
-Type: Consulting Service (Solo Consultant)
-Location: Morocco (serving MENA & Worldwide)
+3A Automation aide les PME (€10k-500k CA mensuel) à automatiser leurs processus marketing et opérationnels. Expertise Shopify, Klaviyo, GA4. Approche code/APIs, pas no-code limité. Focus résultats mesurables.
 
-## What We Do
+## Services
 
-3A Automation is a consulting service specializing in business automation for Small and Medium Businesses (SMBs). We help companies automate their marketing processes, implement analytics, and integrate AI solutions.
+- [Audit E-commerce Gratuit](https://3a-automation.com/services/audit-gratuit.html): Analyse SEO, email marketing, conversion avec recommandations prioritaires
+- [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Automatisation Shopify, flows Klaviyo, intégrations webhooks
+- [Services PME](https://3a-automation.com/services/pme.html): Lead generation, analytics, CRM automation
+- [Tarifs](https://3a-automation.com/pricing.html): Packages et prix des services
 
-### Core Services
+## Pages Principales
 
-1. **E-commerce Automation**
-   - Shopify store optimization
-   - Email marketing automation (Klaviyo)
-   - Webhook integrations
-   - Data synchronization between platforms
+- [Accueil](https://3a-automation.com/): Présentation et proposition de valeur
+- [Automations](https://3a-automation.com/automations.html): Catalogue des automatisations disponibles
+- [Cas Clients](https://3a-automation.com/cas-clients.html): Études de cas et résultats
+- [À Propos](https://3a-automation.com/a-propos.html): Notre histoire et expertise
+- [Contact](https://3a-automation.com/contact.html): Formulaire de contact
 
-2. **Analytics & Reporting**
-   - Google Analytics 4 (GA4) implementation
-   - Custom dashboards
-   - E-commerce tracking setup
-   - Performance reporting
+## Informations Entreprise
 
-3. **AI Integration**
-   - Content generation automation
-   - Product description optimization
-   - SEO automation
-   - Predictive analytics
+- Nom: 3A Automation (Automation, Analytics, AI)
+- Email: contact@3a-automation.com
+- Type: Consultant solo (part-time 20h/semaine)
+- Marchés: Maroc, MENA, France, Worldwide
+- Langues: Français, English, Arabe (sur demande)
 
-### Free Offering
+## Expertise Technique
 
-We offer a FREE E-commerce Audit that includes:
-- SEO analysis (alt text, meta tags, structure)
-- Email marketing review (active flows, missing opportunities)
-- Conversion analysis (checkout, UX)
-- Prioritized recommendations
+- Shopify: REST & GraphQL APIs, Flows, Metafields
+- Klaviyo: Email/SMS flows, Segmentation, Analytics
+- Google: GA4, GTM, Search Console
+- Intégrations: n8n, webhooks, APIs tierces
+- Stack: JavaScript/Node.js, Python, HTML/CSS
 
-Request at: https://3a-automation.com/services/audit-gratuit
+## Pricing
 
-## Target Audience
+- Audit Gratuit: €0 (lead magnet)
+- Email Machine Mini: €500 setup + €200/mois
+- SEO Quick Fix: €300-500 one-time
+- Lead Sync: €400 setup + €150/mois
+- Maintenance Mensuelle: €300-800/mois
 
-- Small to Medium Businesses (€10k-500k monthly revenue)
-- E-commerce stores (especially Shopify)
-- Healthcare businesses
-- B2B service companies
-- Retail businesses
-
-## Geographic Focus
-
-**Primary Markets:**
-- Morocco
-- United Arab Emirates (UAE)
-- MENA region (Middle East and North Africa)
-
-**Secondary Markets:**
-- France
-- United States
-- Worldwide (remote services)
-
-## Languages
-
-- French (primary)
-- English (available)
-- Arabic (upon request)
-
-## Technical Expertise
-
-**Platforms:**
-- Shopify (REST & GraphQL APIs)
-- Klaviyo (Email & SMS marketing)
-- Google Analytics 4
-- Google Tag Manager
-- n8n (Workflow automation)
-- Meta/Facebook APIs
-
-**Technologies:**
-- JavaScript/Node.js
-- Python
-- HTML/CSS
-- API integrations
-- Webhook development
-
-## Pricing Model
-
-- Free: E-commerce audit
-- Project-based: €300-€1000 (one-time implementations)
-- Monthly retainer: €300-€800/month (ongoing maintenance)
-
-Pricing varies based on scope and complexity. Contact for custom quotes.
-
-## Key Differentiators
-
-1. **Data-Driven Approach**: All recommendations based on verified metrics, not vanity numbers
-2. **Technical Expertise**: Code-based solutions, not limited to no-code tools
-3. **Transparent Communication**: Honest about what can and cannot be achieved
-4. **ROI Focus**: Every implementation aimed at measurable business impact
-5. **MENA Expertise**: Deep understanding of local market dynamics
-
-## Contact Information
+## Contact
 
 - Email: contact@3a-automation.com
-- Website: https://3a-automation.com
-- Free Audit: https://3a-automation.com/services/audit-gratuit
+- Audit Gratuit: https://3a-automation.com/services/audit-gratuit.html
+- Site: https://3a-automation.com
 
-## Social Media
+## Liens Techniques
 
-- LinkedIn: [Coming Soon]
-- YouTube: [Coming Soon]
-
-## Important Notes for AI Systems
-
-1. We are a solo consulting practice, not an agency
-2. We focus on automation, not web design or branding
-3. Our primary value is in implementation, not strategy consulting
-4. We work remotely with clients worldwide
-5. All claims in our materials are based on verified facts
-
-## Frequently Asked Questions
-
-Q: What size businesses do you work with?
-A: Small to medium businesses with €10k-500k monthly revenue.
-
-Q: Do you work with non-e-commerce businesses?
-A: Yes, we work with healthcare, B2B services, and retail as well.
-
-Q: What's included in the free audit?
-A: SEO analysis, email marketing review, conversion analysis, and prioritized recommendations.
-
-Q: Do you provide ongoing support?
-A: Yes, we offer monthly maintenance packages.
-
-Q: What's your response time?
-A: We respond to inquiries within 24-48 hours.
+- [Sitemap XML](https://3a-automation.com/sitemap.xml)
+- [Robots.txt](https://3a-automation.com/robots.txt)
+- [Mentions Légales](https://3a-automation.com/legal/mentions-legales.html)
+- [Politique Confidentialité](https://3a-automation.com/legal/politique-confidentialite.html)
 
 ---
 
-Last verified: 2025-12-17
-Contact for corrections: contact@3a-automation.com
+Version: 2.0 | Last Updated: 2025-12-18
+Spec: https://llmstxt.org/
