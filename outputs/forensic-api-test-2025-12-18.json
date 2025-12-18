@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-12-18T07:36:01.266Z",
+  "tests": [
+    {
+      "name": "Shopify API",
+      "status": "OK",
+      "details": {
+        "httpStatus": 200,
+        "latency": 579,
+        "storeName": "Alpha Medical Care",
+        "domain": "www.alphamedical.shop",
+        "plan": "basic",
+        "email": "contact@alphamedical.shop"
+      }
+    },
+    {
+      "name": "Klaviyo API",
+      "status": "OK",
+      "details": {
+        "httpStatus": 200,
+        "latency": 263,
+        "listCount": 3,
+        "lists": [
+          "Prévisualiser la liste",
+          "Liste de SMS",
+          "Liste d’adresses e-mail"
+        ]
+      }
+    },
+    {
+      "name": "n8n API",
+      "status": "FAILED",
+      "details": {
+        "httpStatus": 401,
+        "latency": 437,
+        "error": "{\"message\":\"'X-N8N-API-KEY' header required\"}"
+      }
+    },
+    {
+      "name": "xAI/Grok API",
+      "status": "FAILED",
+      "details": {
+        "httpStatus": 403,
+        "latency": 198,
+        "error": "Forbidden"
+      }
+    },
+    {
+      "name": "Google Service Account",
+      "status": "FILE_MISSING",
+      "details": {
+        "path": "/Users/mac/.config/google/service-account.json"
+      }
+    }
+  ]
+}
