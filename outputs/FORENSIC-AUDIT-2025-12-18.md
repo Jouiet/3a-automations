@@ -1669,13 +1669,13 @@ Option B: Self-hosted (0€ + temps)
 | Paramètre | Valeur |
 |-----------|--------|
 | Username | Jouiet |
-| Token | `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` |
+| Token | `ghp_xxxx...xxxx` |
 | Fichiers | `.env`, `~/.config/claude-code/mcp.json` |
 | Test | ✅ API call réussie |
 
 ```bash
 # Test effectué
-curl -s -H "Authorization: token ghp_brdy..." https://api.github.com/user
+curl -s -H "Authorization: token ghp_xxxx..." https://api.github.com/user
 # → {"login":"Jouiet",...}
 ```
 
