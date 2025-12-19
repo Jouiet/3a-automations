@@ -586,17 +586,17 @@
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer-ultra">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="logo">
+      <div class="footer-grid-ultra">
+        <div class="footer-brand-ultra">
+          <a href="/en/" class="logo">
             <div class="logo-icon">
               <svg viewBox="0 0 40 40" fill="none">
-                <path d="M20 4L36 34H4L20 4Z" stroke="url(#footerLogoGrad)" stroke-width="2" fill="none"/>
-                <path d="M20 12L28 28H12L20 12Z" stroke="url(#footerLogoGrad)" stroke-width="2" fill="none"/>
+                <path d="M20 4L36 34H4L20 4Z" stroke="url(#logoGradF)" stroke-width="2" fill="none"/>
+                <path d="M20 12L28 28H12L20 12Z" stroke="url(#logoGradF)" stroke-width="2" fill="none"/>
                 <defs>
-                  <linearGradient id="footerLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient id="logoGradF" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stop-color="#4FBAF1"/>
                     <stop offset="100%" stop-color="#2B6685"/>
                   </linearGradient>
@@ -607,36 +607,48 @@
               <span class="logo-text">3A</span>
               <span class="logo-sub">AUTOMATION</span>
             </div>
-          </div>
-          <p>Automation, Analytics, AI for E-commerce & SMB B2B.</p>
+          </a>
+          <p class="footer-tagline">Automation · Analytics · AI</p>
+          <p class="footer-desc">Operations automated. Strategy liberated.</p>
         </div>
 
-        <div class="footer-links">
-          <h4>Services</h4>
-          <a href="/en/services/ecommerce.html">E-commerce</a>
-          <a href="/en/services/smb.html">SMB</a>
-          <a href="/en/automations.html">Automations</a>
-          <a href="/en/pricing.html">Pricing</a>
+        <div class="footer-links-ultra">
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="/en/services/ecommerce.html">E-commerce</a></li>
+            <li><a href="/en/services/smb.html">SMB & B2B</a></li>
+            <li><a href="/en/services/flywheel-360.html">Flywheel 360°</a></li>
+            <li><a href="/en/automations.html">Automations</a></li>
+            <li><a href="/en/pricing.html">Pricing</a></li>
+          </ul>
         </div>
 
-        <div class="footer-links">
+        <div class="footer-links-ultra">
           <h4>Resources</h4>
-          <a href="/en/about.html">About</a>
-          <a href="/en/case-studies.html">Case Studies</a>
-          <a href="/en/services/free-audit.html">Free Audit</a>
+          <ul>
+            <li><a href="/en/services/free-audit.html">Free Audit</a></li>
+            <li><a href="/en/case-studies.html">Case Studies</a></li>
+            <li><a href="/en/about.html">About</a></li>
+            <li><a href="/en/contact.html">Contact</a></li>
+          </ul>
         </div>
 
-        <div class="footer-links">
-          <h4>Legal</h4>
-          <a href="/en/legal/terms.html">Terms</a>
-          <a href="/en/legal/privacy.html">Privacy</a>
+        <div class="footer-links-ultra">
+          <h4>Legal <a href="mailto:contact@3a-automation.com" class="footer-email">contact@3a-automation.com</a></h4>
+          <ul>
+            <li><a href="/en/legal/terms.html">Terms of Service</a></li>
+            <li><a href="/en/legal/privacy.html">Privacy Policy</a></li>
+          </ul>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="footer-bottom-ultra">
         <p>&copy; 2025 3A Automation. All rights reserved.</p>
         <div class="footer-tech">
-          <span>Powered by Claude Opus 4.5 + Grok</span>
+          <span>Powered by</span>
+          <span class="tech-badge">Anthropic</span>
+          <span class="tech-badge">MCP</span>
+          <span class="tech-badge">Hostinger</span>
         </div>
       </div>
     </div>
@@ -646,5 +658,30 @@
   <script src="../geo-locale.js"></script>
   <!-- Voice Assistant Widget -->
   <script src="/voice-assistant/voice-widget-en.js?v=1.0" defer></script>
+
+  <!-- Currency Selector Handler -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const currencyBtns = document.querySelectorAll('.currency-btn');
+
+    currencyBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        currencyBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const currency = this.dataset.currency;
+        if (window.GeoLocale) {
+          window.GeoLocale.setCurrency(currency);
+        }
+      });
+    });
+
+    document.addEventListener('geo-locale-ready', function(e) {
+      const currency = e.detail.currency;
+      currencyBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.currency === currency);
+      });
+    });
+  });
+  </script>
 </body>
 </html>
