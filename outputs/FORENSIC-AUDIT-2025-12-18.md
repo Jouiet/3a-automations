@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 5.1 (Màj Session 28 - Audit Mobile/Responsive/Performance)
+## Date: 2025-12-19 | Version: 5.2 (Màj Session 33 - Claims Factuels + Flywheel Dual-Segment)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -646,23 +646,25 @@ logo.png:        273KB → <50KB  (SVG ou WebP)
 
 # SECTION 8: MÉTRIQUES DE RÉFÉRENCE
 
-## État Actuel (19/12/2025 - Session 21d Update)
+## État Actuel (19/12/2025 - Session 33 Update)
 
 | Catégorie | Métrique | Valeur |
 |-----------|----------|--------|
 | Site | Status | **✅ LIVE (https://3a-automation.com)** |
 | Site | SSL | **✅ Let's Encrypt actif** |
-| Automatisations | Génériques | 42 (validées 100%) |
+| Automatisations | Génériques | **52 (validées 100%)** ✅ |
 | Automatisations | Legacy analysés | 218 |
 | APIs | Fonctionnelles | **10/12 (83%)** |
-| MCPs | Fonctionnels | **9/12 (75%)** |
-| Landing | Pages | 12 (privacy supprimé) |
+| MCPs | Configurés | **12** ✅ |
+| Landing | Pages | 13 (+ flywheel-360) |
 | Landing | Schema.org | **12/12 (100%)** ✅ |
 | Landing | Images optimisées | **2/2 critiques (100%)** ✅ |
 | Tracking | GA4 | **✅ G-87F6FDJG45 LIVE** |
 | Tracking | GTM | **✅ GTM-WLVJQC3M LIVE** |
 | AEO | robots.txt crawlers | **8/8 (100%)** ✅ |
 | AEO | llms.txt conforme | **Oui** ✅ |
+| Flywheel | E-commerce + PME/B2B | **Dual-segment** ✅ |
+| Flywheel | Timeline | **12 Semaines** ✅ |
 | Blueprint | Score | **100/100** ✅ |
 | Revenue | Mensuel | €0 |
 | Clients | Actifs | 0 (restart 25/01/2026) |
@@ -3061,9 +3063,136 @@ CONSÉQUENCE:
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v5.5**
+# SECTION 32: SESSION 32-33 - FLYWHEEL DUAL-SEGMENT + CLAIMS FACTUELS
+
+## Date: 2025-12-19
+
+## 32.1 Flywheel 360 - Redesign Complet
+
+**PROBLÈME:** La page `/services/flywheel-360.html` ne couvrait que le Flywheel E-commerce, ignorant le PME/B2B.
+
+**SOLUTION:** Refonte complète avec dual-segment architecture:
+
+### Structure Nouvelle
+
+| Section | Contenu |
+|---------|---------|
+| Hero | Titre unifié "Flywheel 360°" |
+| Segment Selector | Boutons E-commerce / PME avec JavaScript toggle |
+| E-commerce Flywheel | Acquisition → Conversion → Rétention → Advocacy |
+| PME/B2B Flywheel | Lead Gen → Qualification → Delivery → Referral |
+| Sections Communes | Comparaison, ROI, Timeline, Qualification, CTA |
+
+### Spécificités par Segment
+
+| Aspect | E-commerce | PME/B2B |
+|--------|-----------|---------|
+| CRM | Klaviyo, Omnisend | HubSpot, Pipedrive |
+| ROI | 40-85x | 20-50x |
+| KPIs | ROAS, LTV, Panier moyen | CAC, Pipeline, Taux closing |
+| Outils | Shopify, Meta Ads | LinkedIn, Apify |
+
+### JavaScript `switchSegment()`
+
+```javascript
+function switchSegment(segment) {
+  // Toggle button active state
+  document.querySelectorAll('.segment-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.segment === segment);
+  });
+  // Toggle content visibility
+  document.querySelectorAll('.segment-content').forEach(content => {
+    content.classList.remove('active');
+  });
+  document.getElementById('segment-' + segment).classList.add('active');
+  // Dynamic ROI update
+  document.getElementById('metric-roi').textContent =
+    segment === 'ecommerce' ? '40-85x' : '20-50x';
+}
+```
+
+## 32.2 Timeline Réaliste
+
+**AVANT:** 8 Semaines (irréaliste)
+**APRÈS:** 12 Semaines (professionnel)
+
+| Phase | Semaines | Description |
+|-------|----------|-------------|
+| S1-4 | Audit & Setup | Analyse approfondie, accès, configuration MCPs |
+| S5-8 | Acquisition | Tracking, campagnes, SEO, intégrations |
+| S9-10 | Conversion | Flows, automations, CRM, tests A/B |
+| S11-12 | Scale | Rétention, advocacy, optimisation continue |
+
+## 32.3 Critères Client Mis à Jour
+
+| Critère | Valeur |
+|---------|--------|
+| CA E-commerce | €7k/mois minimum |
+| CA PME/B2B | €20k/mois minimum |
+| Engagement | 12 semaines |
+
+## 32.4 Claims Marketing Corrigés (56 → 52)
+
+**VÉRIFICATION EMPIRIQUE:**
+```bash
+$ node automations/generic/validate-all-automations.cjs
+TOTAL: 52/52 automations valid (100%)
+```
+
+**CORRECTIONS APPLIQUÉES:**
+
+| Fichier | Avant | Après |
+|---------|-------|-------|
+| index.html (OG/Twitter) | 56 | 52 |
+| index.html (hero stats) | 56 | 52 |
+| index.html (card badge) | 56 | 52 |
+| index.html (footer) | 56 | 52 |
+| automations.html (meta) | 56 | 52 |
+| automations.html (stat) | 56 | 52 |
+| a-propos.html | 56 | 52 |
+| pricing.html | 56 | 52 |
+| flywheel-360.html | 56 | 52 |
+| llms.txt | 56 | 52 |
+
+## 32.5 MCPs Harmonisés (9 → 12)
+
+Certaines pages indiquaient "9 MCPs" alors que 12 sont configurés:
+
+| Fichier | Avant | Après |
+|---------|-------|-------|
+| automations.html | 9 | 12 |
+| a-propos.html | 9 | 12 |
+| pricing.html | 9 | 12 |
+| flywheel-360.html | 9 | 12 |
+
+## 32.6 Commits
+
+| Commit | Description |
+|--------|-------------|
+| fd39729 | feat(flywheel): Complete redesign with E-commerce + PME/B2B dual segments |
+| 2e57f65 | fix(flywheel): Update client CA criteria (€7k E-commerce, €20k PME) |
+| 8373355 | fix(flywheel): Update timeline to 12 weeks (realistic deployment) |
+| cd392a9 | fix(claims): Update factual metrics across all pages (56→52, 9→12 MCPs) |
+
+## 32.7 Vérification Production
+
+```bash
+$ curl -s "https://3a-automation.com/" | grep -oE "[0-9]+ Automatisations|[0-9]+ MCPs"
+52 Automatisations
+12 MCPs
+
+$ curl -s "https://3a-automation.com/services/flywheel-360.html" | grep -oE "12 Semaines|S1-4|segment-selector"
+12 Semaines
+S1-4
+segment-selector
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v5.6**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v5.6: Session 32-33 - Flywheel Dual-Segment + Claims Factuels (52 automatisations, 12 MCPs, 12 semaines)*
 *v5.5: Session 31 - CRITICAL CSS FIX (styles-lite.css +137 lignes: btn-primary-cyber, footer-email, flywheel-promo)*
 *v5.4: Session 30 - Flywheel 360 page + Footer harmonization (email inline, tagline unifié, nav updated)*
 *v5.3: Session 29 - Mobile optimization complète (image -68%, JS -168KB, touch support, font-sizes)*
