@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 6.1 | Dernière mise à jour: 2025-12-19 (Session 33 - Mobile Fixes)
+## Version: 6.2 | Dernière mise à jour: 2025-12-19 (Session 34 - Pricing Refonte)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -28,24 +28,40 @@
 
 ---
 
-## MÉTRIQUES ACTUELLES (Session 33 - 19/12/2025)
+## MÉTRIQUES ACTUELLES (Session 34 - 19/12/2025)
 
 | Métrique | Valeur |
 |----------|--------|
 | Site | https://3a-automation.com ✅ LIVE (14 pages) |
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
-| Automatisations validées | **52** (validé par script, pas 56) |
+| Automatisations validées | **52** (validé par script) |
 | MCPs configurés | **12** |
-| Scripts généricisés | **48/58** utilisant process.env |
-| Scripts hardcodés | **0** ✅ |
-| MCPs fonctionnels | **9/12** (credentials réelles) |
-| APIs testées OK | **3/7** (Klaviyo, GA4, Apify) |
-| Formulaires | **3 connectés** (Google Apps Script v2) |
-| AEO | robots.txt 18 crawlers, llms.txt v3.0 |
-| Footer | "Powered by Claude Opus 4.5 \| MCP \| Hostinger" (11 pages) |
-| Flywheel Timeline | **12 semaines** (réaliste) |
-| CA Cible | **€7k E-commerce / €20k PME** |
+| APIs fonctionnelles | Klaviyo ✅, Shopify ✅, GA4 ✅ |
+
+## TARIFICATION (Refonte Session 34 - Data-Driven 2025-2026)
+
+| Plan | Prix/mois | Heures | Cible CA |
+|------|-----------|--------|----------|
+| **Essentiel** | 390€ | 4-5h | <10k€/mois |
+| **Pro** | 790€ | 8-10h | 10k-50k€/mois |
+| **Premium** | 1490€ | 15-18h | 50k€+/mois |
+
+| Projet One-Time | Prix |
+|-----------------|------|
+| Quick Start | 990-1490€ |
+| Full Setup | 2490-3990€ |
+| Transformation | Sur devis |
+
+## TOP 3 SERVICES (Data-Driven 2025-2026)
+
+| Rang | Service | Score | Demande Marché |
+|------|---------|-------|----------------|
+| 🥇 #1 | Email Automation Klaviyo | 9.25/10 | 26.7% marché, ROI $42:$1 |
+| 🥈 #2 | Analytics & Dashboards | 7.75/10 | 18.4% CAGR (fastest) |
+| 🥉 #3 | Audit E-commerce + Quick Wins | 6.95/10 | Entry point, Flywheel |
+
+**Sources:** Klaviyo 2025 Benchmark, Gartner 2026, Forrester 2026, Mordor Intelligence
 
 ---
 
@@ -164,23 +180,25 @@ VPS Hostinger (ID: 1168256)
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 
-## SESSION 33 COMPLÉTÉE ✅ (19/12/2025 - Mobile Fixes)
+## SESSION 34 COMPLÉTÉE ✅ (19/12/2025 - Pricing Refonte Data-Driven)
 
 | Tâche | Statut | Détails |
 |-------|--------|---------|
-| Flywheel Timeline | ✅ | 8→12 semaines (réaliste) |
-| CA Criteria | ✅ | €7k E-commerce / €20k PME |
-| Marketing Claims | ✅ | 56→52 automatisations (factuellement correct) |
-| PWA Prompt Mobile | ✅ | display: browser (pas de popup install) |
-| Scroll Indicator Mobile | ✅ | display: none en mobile |
-| MCPs Count | ✅ | Unifié à 12 sur toutes les pages |
+| Analyse Pricing Actuel | ✅ | Identifié: prix $ (incohérent), claims non vérifiés |
+| Recherche Marché 2025-2026 | ✅ | Klaviyo, Gartner, Forrester, Mordor Intelligence |
+| TOP 3 Services Définis | ✅ | Email (9.25), Analytics (7.75), Audit (6.95) |
+| Nouvelle Tarification | ✅ | €390/790/1490 par mois (data-driven) |
+| pricing.html Refait | ✅ | TOP 3 services, plans €, sources citées |
 
-**Commits Session 32-33:**
-- `2e57f65` fix(flywheel): Update timeline 8→12 weeks + CA criteria
-- `8373355` feat(flywheel): Update CA criteria dual-segment
-- `cd392a9` fix(marketing): Correct automation count 56→52 across all pages
-- `f1b408a` fix(mobile): Remove PWA install prompt
-- `56795f9` fix(mobile): Hide scroll indicator on mobile
+**Données Clés 2025-2026 (Vérifiées):**
+- Email ROI: $42 pour $1 investi (Klaviyo 2025)
+- Abandoned Cart RPR: $3.07 moyen, $28.89 top 10%
+- Marché Automation: $7.23B (2025) → $18.36B (2030) CAGR 12.9%
+- Gartner 2026: $80B réduction coûts via Conversational AI
+- Forrester 2026: 15% réduction headcount agences
+
+**Commits Session 34:**
+- `[pending]` feat(pricing): Complete pricing page refonte with data-driven TOP 3 services
 
 ---
 
