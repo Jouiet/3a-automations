@@ -137,8 +137,48 @@ curl -s "https://developers.hostinger.com/api/vps/v1/virtual-machines/1168256/do
 
 | Date | Problème | Cause | Solution |
 |------|----------|-------|----------|
+| 2025-12-19 | **404/502 intermittent** | **2 workflows en conflit (race condition)** | **Supprimé deploy.yml, gardé deploy-website.yml** |
 | 2025-12-19 | Container exit code 128 | Repo PRIVATE | Rendu PUBLIC |
 | 2025-12-19 | Default nginx page | docker-compose avec volume vide | Supprimé docker-compose.yml, utiliser commande inline |
+
+---
+
+## ANALYSE FORENSIQUE: RACE CONDITION (19/12/2025)
+
+### Symptôme
+Site retourne 404 ou 502 de façon intermittente après chaque push.
+
+### Cause Racine
+**DEUX workflows** se déclenchaient simultanément:
+1. `deploy.yml` → "Deploy to Hostinger VPS" (utilisait hostinger/deploy-on-vps@v2)
+2. `deploy-website.yml` → "Deploy Website" (appel API direct)
+
+Les deux avaient le même trigger:
+```yaml
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'landing-page-hostinger/**'
+```
+
+### Problèmes
+1. **Race condition**: Les deux workflows appelaient l'API Hostinger en même temps
+2. **Fichier manquant**: deploy.yml référençait `docker/docker-compose.yml` (inexistant)
+3. **Conflits Docker**: Deux containers différents essayaient de démarrer
+
+### Solution Appliquée
+```bash
+rm .github/workflows/deploy.yml  # Supprimé le workflow cassé
+# Gardé uniquement deploy-website.yml
+```
+
+### Vérification
+```bash
+# Après un push, UN SEUL workflow doit apparaître
+gh run list --limit 3
+# Expected: Un seul "Deploy Website" en cours
+```
 
 ---
 
@@ -151,4 +191,4 @@ curl -s "https://developers.hostinger.com/api/vps/v1/virtual-machines/1168256/do
 
 ---
 
-**Dernière mise à jour**: 19/12/2025 - Session 21e
+**Dernière mise à jour**: 19/12/2025 - Session 22 (Race condition fix)
