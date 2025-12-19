@@ -1,9 +1,10 @@
 # 3A Automation - robots.txt
 # https://3a-automation.com/robots.txt
-# Last Updated: 2025-12-17
+# Last Updated: 2025-12-19 (AEO Optimized)
 
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # Block admin and private areas
 Disallow: /admin/
@@ -18,53 +19,94 @@ Disallow: /thank-you
 # Sitemap location
 Sitemap: https://3a-automation.com/sitemap.xml
 
-# Crawl delay (be gentle with our server)
-Crawl-delay: 1
+# =============================================================================
+# AI CRAWLERS - EXPLICITLY ALLOWED FOR AEO (Answer Engine Optimization)
+# Reference: https://searchengineland.com/llms-txt-proposed-standard-453676
+# =============================================================================
 
-# Specific bot rules
+# OpenAI Crawlers
 User-agent: GPTBot
 Allow: /
-Allow: /llm.txt
-Allow: /llms.txt
-Allow: /llms.txt
 
 User-agent: ChatGPT-User
 Allow: /
-Allow: /llm.txt
-Allow: /llms.txt
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic (Claude) Crawlers
+User-agent: ClaudeBot
+Allow: /
 
 User-agent: Claude-Web
 Allow: /
-Allow: /llm.txt
-Allow: /llms.txt
 
-User-agent: Anthropic-AI
+User-agent: Claude-SearchBot
 Allow: /
-Allow: /llm.txt
-Allow: /llms.txt
 
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google AI Crawlers
 User-agent: Google-Extended
 Allow: /
-Allow: /llm.txt
-Allow: /llms.txt
-
-User-agent: PerplexityBot
-Allow: /
-Allow: /llm.txt
-Allow: /llms.txt
 
 User-agent: Googlebot
 Allow: /
 
+# Perplexity Crawlers
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Microsoft/Bing
 User-agent: Bingbot
 Allow: /
 
-User-agent: CCBot
+# Meta AI Crawlers
+User-agent: Meta-ExternalAgent
 Allow: /
-Allow: /llm.txt
-Allow: /llms.txt
 
+User-agent: FacebookBot
+Allow: /
+
+# Cohere AI
 User-agent: cohere-ai
 Allow: /
-Allow: /llm.txt
-Allow: /llms.txt
+
+# Common Crawl (used by many AI training)
+User-agent: CCBot
+Allow: /
+
+# Apple AI
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon AI
+User-agent: Amazonbot
+Allow: /
+
+# ByteDance AI
+User-agent: Bytespider
+Allow: /
+
+# Other AI Research
+User-agent: Diffbot
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+# =============================================================================
+# LLMS.TXT REFERENCE
+# =============================================================================
+# AI systems should also check /llms.txt for structured content guide
+# Spec: https://llmstxt.org/

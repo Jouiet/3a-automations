@@ -1,55 +1,79 @@
 # 3A Automation
 
-> Consultant Automation, Analytics & AI pour PME. Services d'automatisation e-commerce et marketing pour Small/Mid Business de tous secteurs.
+> Consultant Automation, Analytics & AI pour PME. Automatisation e-commerce et marketing pour Small/Mid Business de tous secteurs.
 
-3A Automation aide les PME (€10k-500k CA mensuel) à automatiser leurs processus marketing et opérationnels. Expertise Shopify, Klaviyo, GA4. Approche code/APIs, pas no-code limité. Focus résultats mesurables.
+3A Automation aide les PME (€10k-500k CA mensuel) à automatiser leurs processus marketing et opérationnels. Expertise Shopify, Klaviyo, GA4. Approche code/APIs (pas no-code limité). Focus résultats mesurables.
 
-## Services
+**Fondateur**: Consultant technique solo, 20h/semaine
+**Marchés**: Maroc, MENA, France, Worldwide
+**Langues**: Français, English, Arabe
 
-- [Audit E-commerce Gratuit](https://3a-automation.com/services/audit-gratuit.html): Analyse SEO, email marketing, conversion avec recommandations prioritaires
-- [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Automatisation Shopify, flows Klaviyo, intégrations webhooks
-- [Services PME](https://3a-automation.com/services/pme.html): Lead generation, analytics, CRM automation
-- [Tarifs](https://3a-automation.com/pricing.html): Packages et prix des services
+## Services Principaux
 
-## Pages Principales
+- [Audit E-commerce Gratuit](https://3a-automation.com/services/audit-gratuit.html): Analyse SEO, email marketing, conversion - rapport sous 48h
+- [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Automatisation Shopify, flows Klaviyo, SEO produits, sync multi-canaux
+- [Services PME](https://3a-automation.com/services/pme.html): Lead generation B2B, analytics, CRM automation
+- [Catalogue Automatisations](https://3a-automation.com/automations.html): 56 automatisations testées et documentées
 
-- [Accueil](https://3a-automation.com/): Présentation et proposition de valeur
-- [Automations](https://3a-automation.com/automations.html): Catalogue des automatisations disponibles
-- [Cas Clients](https://3a-automation.com/cas-clients.html): Études de cas et résultats
-- [À Propos](https://3a-automation.com/a-propos.html): Notre histoire et expertise
+## Tarification
+
+| Service | Prix |
+|---------|------|
+| Audit Gratuit | €0 |
+| Email Machine Mini | €500 setup + €200/mois |
+| SEO Quick Fix | €300-500 one-time |
+| Lead Sync | €400 setup + €150/mois |
+| Maintenance | €300-800/mois |
+
+## Stack Technique
+
+- **E-commerce**: Shopify REST & GraphQL APIs, Flows, Metafields, DSers
+- **Email/SMS**: Klaviyo flows, segmentation, analytics
+- **Analytics**: Google Analytics 4, GTM, Search Console
+- **Automation**: n8n workflows, webhooks, MCP servers
+- **AI**: Claude, Grok, Gemini integrations
+- **Langages**: JavaScript/Node.js, Python, HTML/CSS
+
+## Pages Clés
+
+- [Accueil](https://3a-automation.com/): Proposition de valeur et services
+- [Cas Clients](https://3a-automation.com/cas-clients.html): Études de cas avec résultats mesurables
+- [À Propos](https://3a-automation.com/a-propos.html): Histoire et expertise technique
+- [Tarifs](https://3a-automation.com/pricing.html): Packages et prix détaillés
 - [Contact](https://3a-automation.com/contact.html): Formulaire de contact
 
-## Informations Entreprise
+## Automatisations Disponibles
 
-- Nom: 3A Automation (Automation, Analytics, AI)
-- Email: contact@3a-automation.com
-- Type: Consultant solo (part-time 20h/semaine)
-- Marchés: Maroc, MENA, France, Worldwide
-- Langues: Français, English, Arabe (sur demande)
+### E-commerce (Shopify)
+- Audit complet catalogue et SEO
+- Correction automatique alt text images
+- Sync inventaire multi-canaux
+- Webhooks temps réel
 
-## Expertise Technique
+### Email Marketing (Klaviyo)
+- Welcome Series (5 emails)
+- Abandoned Cart Recovery
+- Post-Purchase flows
+- Win-Back campaigns
+- VIP Tier automation
 
-- Shopify: REST & GraphQL APIs, Flows, Metafields
-- Klaviyo: Email/SMS flows, Segmentation, Analytics
-- Google: GA4, GTM, Search Console
-- Intégrations: n8n, webhooks, APIs tierces
-- Stack: JavaScript/Node.js, Python, HTML/CSS
+### Lead Generation
+- Meta Ads → Shopify/CRM sync
+- Google Forms → Klaviyo integration
+- LinkedIn/Google Maps data sourcing
 
-## Pricing
-
-- Audit Gratuit: €0 (lead magnet)
-- Email Machine Mini: €500 setup + €200/mois
-- SEO Quick Fix: €300-500 one-time
-- Lead Sync: €400 setup + €150/mois
-- Maintenance Mensuelle: €300-800/mois
+### Analytics
+- GA4 reporting automatisé
+- Attribution multi-touch
+- ROI tracking par canal
 
 ## Contact
 
-- Email: contact@3a-automation.com
-- Audit Gratuit: https://3a-automation.com/services/audit-gratuit.html
-- Site: https://3a-automation.com
+- **Email**: contact@3a-automation.com
+- **Site**: https://3a-automation.com
+- **Audit Gratuit**: https://3a-automation.com/services/audit-gratuit.html
 
-## Liens Techniques
+## Documentation Technique
 
 - [Sitemap XML](https://3a-automation.com/sitemap.xml)
 - [Robots.txt](https://3a-automation.com/robots.txt)
@@ -58,5 +82,5 @@
 
 ---
 
-Version: 2.0 | Last Updated: 2025-12-18
+Version: 3.0 | Last Updated: 2025-12-19
 Spec: https://llmstxt.org/
