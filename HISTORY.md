@@ -4,7 +4,8 @@
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
-| 5.1 | 23 | **ARCHITECTURE CONSOLIDATION**: scripts/→automations/agency/core/ (+5), 56 automatisations total, INDEX.md v3.0, claims marketing vérifiés |
+| 5.4 | 23b | **ARCHITECTURE GLOBALE**: docs/ créé (8 fichiers), archive/docs-legacy/ (12 fichiers), README.md amélioré, docker-compose.yml racine, 23→4 MD racine |
+| 5.1 | 23 | **CONSOLIDATION SCRIPTS**: scripts/→automations/agency/core/ (+5), 56 automatisations total, INDEX.md v3.0 |
 | 5.0 | 22 | **MEMORY OPTIMIZATION**: CLAUDE.md réduit 1041→158 lignes (-85%), rules/ modulaires créés, HISTORY.md créé, Race condition fix, Claims accuracy (50+/3 MCPs/10+ APIs) |
 | 4.9 | 21e | GTM LIVE + REPO PUBLIC: GTM-WLVJQC3M sur 11 pages |
 | 4.8 | 21d | GA4 LIVE: G-87F6FDJG45 sur 11 pages, Blueprint 100/100 |
