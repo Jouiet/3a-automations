@@ -1,9 +1,10 @@
 # HISTORY - Changelog 3A Automation
 
-## Sessions 27-42 (19/12/2025)
+## Sessions 27-43 (20/12/2025)
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 7.3 | 43 | **B2B INCLUSION COMPLÈTE**: audit-gratuit.html + pricing.html réécrits pour E-commerce ET B2B, Business type selector (toggle E-com/B2B), Formulaires avec business_type + CRM platforms (HubSpot, Pipedrive, Salesforce, Zoho), Packs Essentials/Growth montrent E-com flows + B2B flows, Supprimé PrestaShop/Magento (uniquement Shopify+WooCommerce), 4 pages mises à jour (FR+EN) |
 | 7.2 | 42 | **VOICE ASSISTANT INTELLIGENT**: Système de réponse intelligent avec context tracking (industry, need, lastTopic), détection industrie (BTP, ecommerce, B2B, SaaS, services, retail), détection besoins (leads, email, analytics), réponses "oui/non" contextuelles, knowledge-base.js créé (pricing, industries, FAQ, objections), multi-keyword matching, réponses spécifiques par industrie |
 | 7.1 | 41 | **VOICE WIDGET 100% + STATS FIX**: Widget branding corrigé (gradient cyber #4FBAF1→#2B6685→#10B981), Stats site corrigées (52→56 automatisations, 9→12 MCPs, 3→42+ clients), Script test empirique créé (100% pass), fadeIn/fadeOut ajoutés, CTA links fixés |
 | 7.0 | 40b | **VOICE ASSISTANT LIVE**: Widget flottant déployé 26 pages, Web Speech API (gratuit), reconnaissance vocale + synthèse, réponses pré-définies (pricing, audit, services), bilingue FR/EN |
