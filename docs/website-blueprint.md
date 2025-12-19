@@ -1,6 +1,6 @@
 # 3A AUTOMATION - WEBSITE BLUEPRINT
 ## Document Exhaustif de Création du Site Web
-### Version: 1.8 | Date: 19/12/2025 | Auteur: 3A Automation (Session 24)
+### Version: 1.9 | Date: 19/12/2025 | Auteur: 3A Automation (Session 25)
 
 ---
 
@@ -75,7 +75,7 @@
 
 | Élément | Status | Impact |
 |---------|--------|--------|
-| Formulaire fonctionnel | ✅ FONCTIONNEL | n8n webhook intégré (audit-gratuit + contact) |
+| Formulaire fonctionnel | ✅ FONCTIONNEL | Google Apps Script v2 (3 formulaires connectés - Session 25) |
 | GA4 | ✅ **CONFIGURÉ** | G-87F6FDJG45 (LIVE sur 11 pages - Session 21d) |
 | GTM | ✅ **CONFIGURÉ** | GTM-WLVJQC3M (LIVE sur 11 pages - Session 21e) |
 | Pixels (FB, LinkedIn) | ✅ INTÉGRÉS | Meta Pixel + LinkedIn Insight (placeholders) |
@@ -103,9 +103,11 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 100/100 (màj 19/12/2025 - Session 24)
+SCORE ACTUEL: 100/100 (màj 19/12/2025 - Session 25)
+├── Session 25: Audit forensique 12 pages, Claims corrigés (42→56, 12→9, 8+→10+)
+├── Session 25: Google Apps Script v2 déployé, 3 formulaires connectés
+├── Session 25: Google Sheets "Leads" créé, email notifications OK
 ├── Session 24: Claims MCPs corrigés (3→9 fonctionnels)
-├── Session 24: Automatisations 50+→56 (comptées)
 ├── Session 21d: GA4 CONFIGURÉ (G-87F6FDJG45) sur 11 pages LIVE
 ├── Site LIVE: https://3a-automation.com ✅
 ├── SSL: Let's Encrypt actif (auto-renewal) ✅

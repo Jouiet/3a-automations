@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 2.3 - Mise à jour 18 Décembre 2025 (Knowledge Base + Voice Scope)
+## Version 2.4 - Mise à jour 19 Décembre 2025 (Session 25: Formulaires + Claims)
 ## Basé sur données réelles confirmées
 
 ---
@@ -95,11 +95,16 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │  ├── ✅ Fichier .env CRÉÉ (17/12/2025)                                     │
 │  ├── ⚠️ xAI API: Clé OK, $5 crédits requis                                 │
 │  ├── ✅ Google Service Account CRÉÉ (Session 24)                            │
+│  ├── ✅ Google Apps Script v2 DÉPLOYÉ (Session 25)                          │
 │  ├── ❌ Scripts non refactorés (hardcoding)                                 │
 │  └── ⚠️ Tests de validation: Shopify+Klaviyo OK, Google NON                │
 │                                                                              │
 │  COMMERCIAL (bloquant)                                                      │
-│  ├── ⚠️ Page de présentation: Prompts AI créés (AI-PROMPTS-LANDING-PAGE)   │
+│  ├── ✅ Page de présentation: LIVE (3a-automation.com)                      │
+│  ├── ✅ Formulaires: 3 connectés (Google Apps Script v2)                    │
+│  ├── ✅ Leads: Google Sheets auto-créé                                      │
+│  ├── ✅ Notifications: Email vers contact@3a-automation.com                 │
+│  ├── ✅ Claims marketing: CORRIGÉS (56 auto, 9 MCPs, 10+ APIs)             │
 │  ├── ✅ Branding: 3A-BRANDING-GUIDE.md (couleurs exactes du logo)          │
 │  ├── ✅ GitHub: github.com/Jouiet/3a-automations connecté                   │
 │  ├── ❌ Système de booking (Calendly)                                       │
