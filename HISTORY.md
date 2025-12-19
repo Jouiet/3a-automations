@@ -1,9 +1,10 @@
 # HISTORY - Changelog 3A Automation
 
-## Sessions 17-23 (19/12/2025)
+## Sessions 17-26 (19/12/2025)
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 5.7 | 26 | **HOMEPAGE UX**: Orbital étendu 14→24 techs (+LinkedIn, Gemini, o1, Google Ads, Playwright, DevTools, WordPress, Hostinger, Apps Script), Tech Stack compact marquee (-40% hauteur), Footer avec status bar système, animations GPU optimisées |
 | 5.6 | 25 | **FORMULAIRES & CLAIMS**: Audit forensique 12 pages HTML, Claims corrigés (42→56, 12→9, 8+→10+), Google Apps Script v2 déployé, 3 formulaires connectés, Google Sheets Leads créé, Email notifications OK |
 | 5.5 | 24 | **FACTUAL AUDIT**: MCPs corrigés (3→9 fonctionnels), Claims marketing mis à jour (56 auto, 9 MCPs), llm.txt doublon supprimé, Section MCP automations.html refondue (12 MCPs listés, 9 actifs) |
 | 5.4 | 23b | **ARCHITECTURE GLOBALE**: docs/ créé (8 fichiers), archive/docs-legacy/ (12 fichiers), README.md amélioré, docker-compose.yml racine, 23→4 MD racine |
