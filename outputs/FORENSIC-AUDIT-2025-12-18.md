@@ -20,6 +20,15 @@
 - **Pas d'icône transparente** disponible dans le projet
 - Solution: CSS `object-fit: contain` pour contraindre à 40x40px
 
+**BUG CRITIQUE RÉSOLU (20/12/2025):**
+```
+ROOT CAUSE: styles-lite.css manquait .logo-icon img { width: 100% }
+SYMPTÔME: Logo 500x500px débordant sur 20+ pages
+ANALYSE: Playwright computed styles → width: 500px (devrait être 40px)
+FIX: Ajouté .logo-icon img à styles-lite.css
+COMMIT: beb8aad
+```
+
 ---
 
 # SECTION 0b: ÉTAT ACTUEL (19 Dec 2025 - Post-Généricisation)

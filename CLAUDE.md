@@ -249,6 +249,12 @@ VPS Hostinger (ID: 1168256)
 - Toujours vérifier l'asset AVANT application site-wide
 - logo.png ≠ icône transparente → nécessite CSS contrainte
 - Tester visuellement AVANT push
+- **CRITIQUE:** Vérifier TOUS les fichiers CSS (styles.css ET styles-lite.css)
+
+**Bug critique corrigé (Session 46b):**
+- `styles-lite.css` manquait `.logo-icon img { width: 100% }`
+- 20+ pages affichaient le logo à 500x500px au lieu de 40x40px
+- Commit: `beb8aad` fix(css): Add .logo-icon img rule to styles-lite.css
 
 ---
 
