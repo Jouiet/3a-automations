@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 5.8 (Màj Session 35 - i18n Complet EN + hreflang SEO)
+## Date: 2025-12-19 | Version: 5.9 (Màj Session 36 - Lang-Switch + Currency Conversion)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---

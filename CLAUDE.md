@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 6.3 | Dernière mise à jour: 2025-12-19 (Session 35 - i18n Complet)
+## Version: 6.4 | Dernière mise à jour: 2025-12-19 (Session 36 - Lang-Switch + Currency)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -185,30 +185,47 @@ VPS Hostinger (ID: 1168256)
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 
+## SESSION 36 COMPLÉTÉE ✅ (19/12/2025 - Lang-Switch + Currency)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Lang-switch header | ✅ | 26/26 pages avec bouton FR↔EN |
+| geo-locale.js v2.0 | ✅ | Conversion devises real-time |
+| Multi-devise | ✅ | EUR, USD, MAD, GBP |
+| Pricing intégré | ✅ | Auto-détection currency |
+
+**Fonctionnalités ajoutées:**
+- Sélecteur de langue dans header de toutes les pages
+- Conversion automatique EUR→USD/MAD selon géolocalisation
+- `data-price-eur` pour tarifs dynamiques
+- localStorage pour persistance préférences
+
+**geo-locale.js v2.0:**
+```javascript
+exchangeRates: { EUR: 1.00, USD: 1.08, MAD: 10.90, GBP: 0.83 }
+convert(amountEUR, toCurrency)
+formatPrice(amount, currency)  // Locale-aware
+updatePrices(currency)         // data-price-eur elements
+setCurrency(currency)          // Manual override
+```
+
+**Commits Session 36:**
+- `7e15949` feat(i18n): Add language switcher + currency conversion system
+
+---
+
 ## SESSION 35 COMPLÉTÉE ✅ (19/12/2025 - i18n Complet)
 
 | Tâche | Statut | Détails |
 |-------|--------|---------|
 | Site EN complet | ✅ | 13 pages EN créées |
 | hreflang SEO | ✅ | 26/26 pages avec tags fr/en/x-default |
-| Geo-detection | ✅ | geo-locale.js (ipapi.co, localStorage) |
+| Geo-detection | ✅ | geo-locale.js v1.0 |
 | Sitemap.xml | ✅ | 26 URLs avec hreflang |
-| Multi-devise | ✅ | EUR (EU), MAD (Maghreb), USD (International) |
 
-**Pages EN créées:**
-- /en/index.html, /en/pricing.html, /en/automations.html
-- /en/contact.html, /en/about.html, /en/case-studies.html
-- /en/services/ecommerce.html, /en/services/smb.html
-- /en/services/flywheel-360.html, /en/services/free-audit.html
-- /en/legal/terms.html, /en/legal/privacy.html, /en/404.html
-
-**3 Marchés Supportés:**
-- 🇲🇦 Maroc/Maghreb → Français + MAD
-- 🇪🇺 Europe → Français + EUR
-- 🌍 International → English + USD
-
-**Commit Session 35:**
+**Commits Session 35:**
 - `a24fae5` feat(i18n): Complete English website + hreflang SEO implementation
+- `3e22366` docs: Update CLAUDE.md v6.3 + FORENSIC-AUDIT v5.8
 
 ---
 
