@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 5.3 (Màj Session 34 - Pricing Refonte Data-Driven)
+## Date: 2025-12-19 | Version: 5.8 (Màj Session 35 - i18n Complet EN + hreflang SEO)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -646,23 +646,30 @@ logo.png:        273KB → <50KB  (SVG ou WebP)
 
 # SECTION 8: MÉTRIQUES DE RÉFÉRENCE
 
-## État Actuel (19/12/2025 - Session 33 Update)
+## État Actuel (19/12/2025 - Session 35 Update)
 
 | Catégorie | Métrique | Valeur |
 |-----------|----------|--------|
 | Site | Status | **✅ LIVE (https://3a-automation.com)** |
 | Site | SSL | **✅ Let's Encrypt actif** |
+| Site | Langues | **2 (FR + EN)** ✅ |
+| Site | Pages FR | **13** |
+| Site | Pages EN | **13** |
+| Site | Total Pages | **26** ✅ |
+| i18n | hreflang tags | **26/26 (100%)** ✅ |
+| i18n | Geo-detection | **✅ geo-locale.js** |
+| i18n | Marchés | **3 (MA/Maghreb, EU, International)** |
 | Automatisations | Génériques | **52 (validées 100%)** ✅ |
 | Automatisations | Legacy analysés | 218 |
 | APIs | Fonctionnelles | **10/12 (83%)** |
 | MCPs | Configurés | **12** ✅ |
-| Landing | Pages | 13 (+ flywheel-360) |
-| Landing | Schema.org | **12/12 (100%)** ✅ |
+| Landing | Schema.org | **12/12 FR (100%)** ✅ |
 | Landing | Images optimisées | **2/2 critiques (100%)** ✅ |
 | Tracking | GA4 | **✅ G-87F6FDJG45 LIVE** |
 | Tracking | GTM | **✅ GTM-WLVJQC3M LIVE** |
 | AEO | robots.txt crawlers | **8/8 (100%)** ✅ |
 | AEO | llms.txt conforme | **Oui** ✅ |
+| AEO | sitemap.xml | **26 URLs + hreflang** ✅ |
 | Flywheel | E-commerce + PME/B2B | **Dual-segment** ✅ |
 | Flywheel | Timeline | **12 Semaines** ✅ |
 | Blueprint | Score | **100/100** ✅ |
@@ -3189,17 +3196,17 @@ segment-selector
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v5.6**
+**FIN DE L'AUDIT FORENSIQUE v5.8**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
-*v5.6: Session 32-33 - Flywheel Dual-Segment + Claims Factuels (52 automatisations, 12 MCPs, 12 semaines)*
-*v5.5: Session 31 - CRITICAL CSS FIX (styles-lite.css +137 lignes: btn-primary-cyber, footer-email, flywheel-promo)*
-*v5.4: Session 30 - Flywheel 360 page + Footer harmonization (email inline, tagline unifié, nav updated)*
-*v5.3: Session 29 - Mobile optimization complète (image -68%, JS -168KB, touch support, font-sizes)*
-*v5.2: Session 28 (Suite) - Copywriting Senior (hero, footer, Stack→Expertise, emoji→SVG)*
-*v5.3: Session 34 - Pricing Refonte Data-Driven (TOP 3 services, plans €390/790/1490, sources 2025-2026)*
-*v5.2: Session 33 - Claims Factuels + Mobile Fixes (52 automations, scroll indicator, PWA prompt)*
-*v5.1: Session 28 - Audit Mobile/Responsive/Performance (7 pages JS à optimiser, font-sizes, touch support)*
+*v5.8: Session 35 - i18n Complet (13 pages EN, hreflang 26/26, geo-locale.js, sitemap 26 URLs, 3 marchés)*
+*v5.7: Session 34 - Pricing Refonte Data-Driven (TOP 3 services, plans €390/790/1490, sources 2025-2026)*
+*v5.6: Session 33 - Claims Factuels + Mobile Fixes (52 automations, scroll indicator, PWA prompt)*
+*v5.5: Session 32 - Flywheel Dual-Segment (E-commerce + PME/B2B, 12 semaines timeline)*
+*v5.4: Session 31 - CRITICAL CSS FIX (styles-lite.css +137 lignes: btn-primary-cyber, footer-email)*
+*v5.3: Session 30 - Flywheel 360 page + Footer harmonization (email inline, tagline unifié)*
+*v5.2: Session 29 - Mobile optimization complète (image -68%, JS -168KB, touch support)*
+*v5.1: Session 28 - Audit Mobile/Responsive/Performance (7 pages JS, font-sizes, touch support)*
 *v5.0: Session 27 - Généricisation complète + AEO (robots.txt 18 crawlers, llms.txt v3.0, footer harmonisé)*
 *v4.6: Session 23 - Consolidation architecture (scripts/→automations/, 56 automatisations total)*
 *v4.5: Session 22c - Legacy archivés (3 dossiers → archive/), Validation 42/42 (100%), APIs 3/7 OK*
