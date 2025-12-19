@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 5.2 (Màj Session 33 - Claims Factuels + Flywheel Dual-Segment)
+## Date: 2025-12-19 | Version: 5.3 (Màj Session 34 - Pricing Refonte Data-Driven)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -3197,6 +3197,8 @@ segment-selector
 *v5.4: Session 30 - Flywheel 360 page + Footer harmonization (email inline, tagline unifié, nav updated)*
 *v5.3: Session 29 - Mobile optimization complète (image -68%, JS -168KB, touch support, font-sizes)*
 *v5.2: Session 28 (Suite) - Copywriting Senior (hero, footer, Stack→Expertise, emoji→SVG)*
+*v5.3: Session 34 - Pricing Refonte Data-Driven (TOP 3 services, plans €390/790/1490, sources 2025-2026)*
+*v5.2: Session 33 - Claims Factuels + Mobile Fixes (52 automations, scroll indicator, PWA prompt)*
 *v5.1: Session 28 - Audit Mobile/Responsive/Performance (7 pages JS à optimiser, font-sizes, touch support)*
 *v5.0: Session 27 - Généricisation complète + AEO (robots.txt 18 crawlers, llms.txt v3.0, footer harmonisé)*
 *v4.6: Session 23 - Consolidation architecture (scripts/→automations/, 56 automatisations total)*
