@@ -1,5 +1,5 @@
 # 3A Automation - Catalogue Automatisations
-## Version 2.0 | 18 Décembre 2025
+## Version 3.0 | 19 Décembre 2025
 
 ---
 
@@ -8,27 +8,32 @@
 ```
 automations/
 ├── agency/                    # Outils internes 3A Automation
-│   ├── core/                  # Automatisations système (6)
-│   └── utils/                 # Utilitaires (à venir)
+│   └── core/                  # Automatisations système (11)
 │
-└── clients/                   # Automatisations offertes aux clients
-    ├── shopify/               # E-commerce Shopify (11)
-    ├── klaviyo/               # Email Marketing (4)
-    ├── analytics/             # Tracking & Pixels (6)
-    ├── leads/                 # Génération de leads (9)
-    ├── seo/                   # Optimisation SEO (5)
-    ├── social/                # Réseaux sociaux (4)
-    ├── video/                 # Génération vidéo (3) NEW
-    └── google-merchant/       # Google Merchant Center (1) NEW
+├── clients/                   # Automatisations offertes aux clients
+│   ├── shopify/               # E-commerce Shopify (8)
+│   ├── klaviyo/               # Email Marketing (4)
+│   ├── analytics/             # Tracking & Pixels (6)
+│   ├── leads/                 # Génération de leads (9)
+│   ├── seo/                   # Optimisation SEO (5)
+│   ├── social/                # Réseaux sociaux (4)
+│   ├── video/                 # Génération vidéo (3)
+│   └── google-merchant/       # Google Merchant Center (1)
+│
+├── generic/                   # Utilitaires réutilisables (2)
+│   ├── validate-all-automations.cjs
+│   └── test-all-apis.cjs
+│
+└── legacy-client-specific/    # Scripts client-spécifiques archivés (2)
 
-TOTAL: 49 automatisations génériques
+TOTAL: 56 automatisations (consolidation Session 23)
 ```
 
 ---
 
 ## Catégories
 
-### 1. Agency Core (Interne)
+### 1. Agency Core (11 automatisations internes)
 
 | Automatisation | Description | Usage |
 |----------------|-------------|-------|
@@ -38,6 +43,11 @@ TOTAL: 49 automatisations génériques
 | `test-env.cjs` | Validation configuration | Onboarding |
 | `prompt-feedback-tracker.cjs` | Suivi feedback prompts | Amélioration continue |
 | `test_system_readiness.py` | Test readiness système | Pre-deployment |
+| `check-env-status.cjs` | Vérification statut .env | Diagnostic |
+| `test-ga4.cjs` | Test connexion GA4 | Validation tracking |
+| `test-gemini.cjs` | Test API Gemini | Test LLM |
+| `test-google-auth.cjs` | Test auth Google | Validation OAuth |
+| `test-google-sheets.cjs` | Test Google Sheets API | Validation Sheets |
 
 ### 2. Shopify (11 automatisations)
 
@@ -267,11 +277,13 @@ main().catch(err => {
 
 | Métrique | Valeur |
 |----------|--------|
-| Automatisations totales | 49 |
-| Agency (internes) | 6 |
-| Clients (offertes) | 43 |
-| Catégories | 8 |
-| APIs supportées | Shopify, Klaviyo, Meta, TikTok, Apify, HubSpot, Google Merchant |
+| Automatisations totales | **56** |
+| Agency (internes) | 11 |
+| Clients (offertes) | 41 |
+| Generic (réutilisables) | 2 |
+| Legacy (archivés) | 2 |
+| Catégories | 9 |
+| APIs supportées | Shopify, Klaviyo, Meta, TikTok, Apify, HubSpot, Google Merchant, GA4, Gemini |
 
 ---
 
@@ -279,5 +291,6 @@ main().catch(err => {
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-19 | 3.0 | **Consolidation Session 23**: scripts/ → automations/agency/core/ (+5), Total 56 automatisations |
 | 2025-12-18 | 2.0 | +11 automatisations: video/ (3), google-merchant/ (1), leads/ (+3), analytics/ (+2), klaviyo/ (+1), seo/ (+1) |
 | 2025-12-18 | 1.0 | Création initiale - Migration 38 automatisations |

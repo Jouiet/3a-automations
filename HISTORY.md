@@ -1,9 +1,10 @@
 # HISTORY - Changelog 3A Automation
 
-## Sessions 17-22 (19/12/2025)
+## Sessions 17-23 (19/12/2025)
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 5.1 | 23 | **ARCHITECTURE CONSOLIDATION**: scripts/→automations/agency/core/ (+5), 56 automatisations total, INDEX.md v3.0, claims marketing vérifiés |
 | 5.0 | 22 | **MEMORY OPTIMIZATION**: CLAUDE.md réduit 1041→158 lignes (-85%), rules/ modulaires créés, HISTORY.md créé, Race condition fix, Claims accuracy (50+/3 MCPs/10+ APIs) |
 | 4.9 | 21e | GTM LIVE + REPO PUBLIC: GTM-WLVJQC3M sur 11 pages |
 | 4.8 | 21d | GA4 LIVE: G-87F6FDJG45 sur 11 pages, Blueprint 100/100 |
