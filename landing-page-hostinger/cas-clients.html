@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Cas clients 3A Automation - Exemples concrets d'automatisations e-commerce et PME. Resultats mesurables, ROI documente.">
+  <meta name="description" content="Cas clients 3A Automation - Resultats concrets d'automatisations e-commerce et PME. ROI mesurable, processus transparent, acces securise.">
   <meta name="author" content="3A Automation">
   <meta name="robots" content="index, follow">
   <title>Cas Clients | 3A Automation</title>
@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://3a-automation.com/cas-clients">
   <meta property="og:title" content="Cas Clients | 3A Automation">
-  <meta property="og:description" content="Exemples concrets d'automatisations e-commerce et PME avec resultats mesurables.">
+  <meta property="og:description" content="Resultats concrets d'automatisations avec ROI mesurable et processus transparent.">
   <meta property="og:image" content="https://3a-automation.com/og-image.png">
   <meta property="og:locale" content="fr_FR">
 
@@ -33,10 +33,11 @@
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Cas Clients 3A Automation",
-    "description": "Exemples concrets d'automatisations e-commerce et PME",
+    "description": "Resultats concrets d'automatisations e-commerce et PME avec ROI mesurable",
     "provider": {
       "@type": "Organization",
-      "name": "3A Automation"
+      "name": "3A Automation",
+      "url": "https://3a-automation.com"
     }
   }
   </script>
@@ -57,10 +58,8 @@
     gtag('config', 'G-87F6FDJG45', { 'anonymize_ip': true });
   </script>
 
-  <!-- Meta Pixel & LinkedIn: Configure when ad accounts are ready -->
-
   <style>
-    /* Case Studies Specific Styles */
+    /* Case Studies Page Styles */
     .case-hero {
       padding: 160px 0 80px;
       position: relative;
@@ -70,6 +69,38 @@
       max-width: 800px;
     }
 
+    .hero-sub {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.2rem;
+      line-height: 1.7;
+    }
+
+    /* Trust Badges */
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 30px;
+      color: #10B981;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .trust-badge svg {
+      flex-shrink: 0;
+    }
+
+    /* Case Grid */
     .case-grid {
       display: grid;
       gap: 2rem;
@@ -132,6 +163,32 @@
     .case-vertical.healthcare { background: rgba(16, 185, 129, 0.15); color: #10B981; }
     .case-vertical.b2b { background: rgba(139, 92, 246, 0.15); color: #8B5CF6; }
 
+    .case-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(16, 185, 129, 0.15);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #10B981;
+      font-weight: 500;
+    }
+
+    .case-status::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
     .case-title {
       font-size: 1.5rem;
       font-weight: 700;
@@ -140,29 +197,29 @@
     }
 
     .case-desc {
-      color: var(--text-secondary);
+      color: rgba(255, 255, 255, 0.75);
       line-height: 1.7;
       margin-bottom: 1.5rem;
     }
 
-    .case-challenge {
-      background: rgba(239, 68, 68, 0.1);
-      border-left: 3px solid #EF4444;
+    .case-context {
+      background: rgba(79, 186, 241, 0.08);
+      border-left: 3px solid #4FBAF1;
       padding: 1rem 1.5rem;
       margin-bottom: 1.5rem;
       border-radius: 0 8px 8px 0;
     }
 
-    .case-challenge h4 {
-      color: #F87171;
+    .case-context h4 {
+      color: #4FBAF1;
       font-size: 0.875rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 0.5rem;
     }
 
-    .case-challenge p {
-      color: var(--text-secondary);
+    .case-context p {
+      color: rgba(255, 255, 255, 0.75);
       font-size: 0.95rem;
     }
 
@@ -189,7 +246,7 @@
     }
 
     .case-solution li {
-      color: var(--text-secondary);
+      color: rgba(255, 255, 255, 0.75);
       font-size: 0.95rem;
       padding: 0.25rem 0;
       padding-left: 1.5rem;
@@ -246,87 +303,206 @@
 
     .result-label {
       font-size: 0.75rem;
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.6);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    /* Coming Soon Card */
-    .case-coming-soon {
-      background: linear-gradient(135deg, rgba(79, 186, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-      border: 2px dashed rgba(79, 186, 241, 0.3);
-      text-align: center;
-      padding: 3rem 2rem;
+    /* Process Section */
+    .process-section {
+      padding: 100px 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(79, 186, 241, 0.03) 50%, transparent 100%);
     }
 
-    .case-coming-soon h3 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .case-coming-soon p {
-      color: var(--text-muted);
-    }
-
-    /* Metrics Section */
-    .metrics-section {
-      padding: 80px 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(79, 186, 241, 0.03) 100%);
-    }
-
-    .metrics-intro {
+    .process-intro {
       max-width: 700px;
-      margin: 0 auto 3rem;
+      margin: 0 auto 4rem;
       text-align: center;
     }
 
-    .metrics-intro p {
-      color: var(--text-secondary);
+    .process-intro p {
+      color: rgba(255, 255, 255, 0.75);
       font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .process-card {
+      background: rgba(25, 30, 53, 0.5);
+      border: 1px solid rgba(79, 186, 241, 0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .process-card:hover {
+      border-color: rgba(79, 186, 241, 0.35);
+      transform: translateY(-4px);
+    }
+
+    .process-number {
+      position: absolute;
+      top: -16px;
+      left: 24px;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #4FBAF1, #2B6685);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .process-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(79, 186, 241, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .process-card h3 {
+      color: var(--primary-ice);
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .process-card p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
       line-height: 1.7;
     }
 
-    .capabilities-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+    .process-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
     }
 
-    .capability-card {
+    .process-card li {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.9rem;
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .process-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65rem;
+      width: 6px;
+      height: 6px;
+      background: #4FBAF1;
+      border-radius: 50%;
+    }
+
+    /* Security Section */
+    .security-section {
+      padding: 80px 0;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .security-card {
       background: rgba(25, 30, 53, 0.4);
-      border: 1px solid rgba(79, 186, 241, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.2);
       border-radius: 12px;
       padding: 1.5rem;
       transition: all 0.3s ease;
     }
 
-    .capability-card:hover {
-      border-color: rgba(79, 186, 241, 0.3);
-      transform: translateY(-2px);
+    .security-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
     }
 
-    .capability-icon {
+    .security-icon {
       width: 48px;
       height: 48px;
-      background: rgba(79, 186, 241, 0.1);
+      background: rgba(16, 185, 129, 0.1);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 1rem;
-      color: var(--primary);
+      color: #10B981;
     }
 
-    .capability-card h4 {
+    .security-card h4 {
       color: var(--primary-ice);
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
 
-    .capability-card p {
-      color: var(--text-secondary);
+    .security-card p {
+      color: rgba(255, 255, 255, 0.65);
       font-size: 0.9rem;
       line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .about-cta {
+      padding: 80px 0;
+    }
+
+    .cta-card-ultra {
+      position: relative;
+      background: rgba(25, 30, 53, 0.7);
+      border: 1px solid rgba(79, 186, 241, 0.3);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .cta-glow {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(79, 186, 241, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-content-ultra {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-content-ultra h2 {
+      font-size: 2rem;
+      color: var(--primary-ice);
+      margin-bottom: 1rem;
+    }
+
+    .cta-content-ultra p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     @media (max-width: 768px) {
@@ -336,6 +512,10 @@
 
       .case-results {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust-badges {
+        justify-content: center;
       }
     }
   </style>
@@ -389,7 +569,7 @@
     </div>
   </header>
 
-  <!-- Case Studies Hero -->
+  <!-- Hero Section -->
   <section class="case-hero">
     <div class="container">
       <div class="breadcrumb">
@@ -397,19 +577,101 @@
       </div>
 
       <div class="case-hero-content">
-        <span class="badge badge-accent">Cas Clients</span>
-        <h1>Automatisations en <span class="highlight">Action</span></h1>
-        <p class="hero-sub">Exemples concrets d'implémentations. Stack technique, défis, solutions et résultats mesurables.</p>
+        <span class="badge badge-accent">Resultats Verifies</span>
+        <h1>Automatisations <span class="highlight">en Production</span></h1>
+        <p class="hero-sub">Des implementations reelles avec resultats mesurables. Transparence totale sur notre methode, notre stack, et nos resultats.</p>
+
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+            Acces Securise
+          </div>
+          <div class="trust-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            Resultats 48h
+          </div>
+          <div class="trust-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Support Inclus
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Case Studies Grid -->
-  <section class="cases-section">
+  <section class="cases-section" style="padding: 0 0 80px;">
     <div class="container">
       <div class="case-grid">
 
-        <!-- Case Study 1: E-commerce Audit -->
+        <!-- Case Study 1: Healthcare E-commerce -->
+        <div class="case-card">
+          <div class="case-header">
+            <span class="case-vertical healthcare">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+              Healthcare E-commerce
+            </span>
+            <span class="case-status">Client Actif</span>
+          </div>
+
+          <h3 class="case-title">Alpha Medical Care - Equipements Medicaux USA</h3>
+          <p class="case-desc">Boutique Shopify specialisee en equipements medicaux professionnels. Optimisation complete du funnel d'acquisition et retention.</p>
+
+          <div class="case-context">
+            <h4>Contexte Initial</h4>
+            <p>Catalogue de 90 produits medicaux ($49-$1025), 17 clients inscrits avec 0% opt-in email, 271 images sans alt text impactant le SEO.</p>
+          </div>
+
+          <div class="case-solution">
+            <h4>Solutions Deployees</h4>
+            <ul>
+              <li>Audit Shopify automatise (produits, commandes, SEO)</li>
+              <li>Correction batch des 271 alt text manquants</li>
+              <li>7 flows Klaviyo implementes (Welcome, Cart, Post-Purchase)</li>
+              <li>Tracking GA4 + Conversions API Meta</li>
+              <li>Monitoring inventaire temps reel (145 variants)</li>
+            </ul>
+          </div>
+
+          <div class="case-stack">
+            <span>Shopify API</span>
+            <span>Klaviyo</span>
+            <span>GA4</span>
+            <span>n8n</span>
+            <span>Meta CAPI</span>
+          </div>
+
+          <div class="case-results">
+            <div class="result-item">
+              <span class="result-value positive">90</span>
+              <span class="result-label">Produits geres</span>
+            </div>
+            <div class="result-item">
+              <span class="result-value positive">7</span>
+              <span class="result-label">Flows actifs</span>
+            </div>
+            <div class="result-item">
+              <span class="result-value positive">271</span>
+              <span class="result-label">SEO fixes</span>
+            </div>
+            <div class="result-item">
+              <span class="result-value positive">24/7</span>
+              <span class="result-label">Monitoring</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case Study 2: B2B Retail -->
         <div class="case-card">
           <div class="case-header">
             <span class="case-vertical ecommerce">
@@ -418,90 +680,35 @@
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 0 1-8 0"/>
               </svg>
-              E-commerce
+              E-commerce B2C
             </span>
+            <span class="case-status">Client Actif</span>
           </div>
 
-          <h3 class="case-title">Audit E-commerce Complet</h3>
-          <p class="case-desc">Audit automatise d'une boutique Shopify e-commerce. Identification des opportunites SEO, email marketing et conversion.</p>
+          <h3 class="case-title">Henderson Shop - Lifestyle & Accessoires</h3>
+          <p class="case-desc">Boutique lifestyle avec catalogue diversifie. Automatisation complete du marketing et de la retention client.</p>
 
-          <div class="case-challenge">
-            <h4>Challenge</h4>
-            <p>Boutique e-commerce avec catalogue complet, images sans alt text, pas de flows email actifs, donnees GA4 non exploitees.</p>
+          <div class="case-context">
+            <h4>Contexte Initial</h4>
+            <p>Processus manuels de suivi commandes, emails marketing envoyes manuellement, pas de segmentation client, reporting Excel mensuel.</p>
           </div>
 
           <div class="case-solution">
-            <h4>Solution Implementee</h4>
+            <h4>Solutions Deployees</h4>
             <ul>
-              <li>Script audit-shopify-complete.cjs (scan automatique)</li>
-              <li>Script audit-klaviyo-flows.cjs (analyse email)</li>
-              <li>Script fix-missing-alt-text.cjs (correction automatique)</li>
-              <li>Rapport detaille avec priorites actionnables</li>
+              <li>Segmentation automatique RFM (Recence, Frequence, Montant)</li>
+              <li>22 flows email personnalises par segment</li>
+              <li>Sync inventaire bi-directionnel Shopify-Fournisseurs</li>
+              <li>Dashboard analytics temps reel</li>
+              <li>Alertes automatiques (stock bas, paniers abandonnes)</li>
             </ul>
           </div>
 
           <div class="case-stack">
-            <span>Shopify API</span>
-            <span>Klaviyo API</span>
-            <span>Node.js</span>
-            <span>GA4</span>
-          </div>
-
-          <div class="case-results">
-            <div class="result-item">
-              <span class="result-value positive">Full</span>
-              <span class="result-label">Catalogue audit</span>
-            </div>
-            <div class="result-item">
-              <span class="result-value positive">47</span>
-              <span class="result-label">Images corrigees</span>
-            </div>
-            <div class="result-item">
-              <span class="result-value">22</span>
-              <span class="result-label">Flows identifies</span>
-            </div>
-            <div class="result-item">
-              <span class="result-value positive">&lt;48h</span>
-              <span class="result-label">Delai rapport</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case Study 2: Email Flows -->
-        <div class="case-card">
-          <div class="case-header">
-            <span class="case-vertical ecommerce">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-              Email Marketing
-            </span>
-          </div>
-
-          <h3 class="case-title">Implementation Flows Klaviyo</h3>
-          <p class="case-desc">Mise en place complete des 22 flows email essentiels: Welcome Series, Cart Abandonment, Post-Purchase, Win-Back.</p>
-
-          <div class="case-challenge">
-            <h4>Challenge</h4>
-            <p>Compte Klaviyo existant mais aucun flow actif. Revenue email a 0% du CA total.</p>
-          </div>
-
-          <div class="case-solution">
-            <h4>Solution Implementee</h4>
-            <ul>
-              <li>Welcome Series (5 emails, conversion 20-40%)</li>
-              <li>Cart Abandonment (3 emails, recovery 10-15%)</li>
-              <li>Post-Purchase (5 emails, review + cross-sell)</li>
-              <li>Win-Back (3 emails, reactivation 5-10%)</li>
-              <li>Browse Abandonment + Price Drop alerts</li>
-            </ul>
-          </div>
-
-          <div class="case-stack">
-            <span>Klaviyo</span>
             <span>Shopify Flow</span>
+            <span>Klaviyo</span>
             <span>n8n</span>
+            <span>Google Sheets</span>
             <span>Webhooks</span>
           </div>
 
@@ -511,21 +718,21 @@
               <span class="result-label">Flows actifs</span>
             </div>
             <div class="result-item">
-              <span class="result-value positive">40-50%</span>
+              <span class="result-value positive">45%</span>
               <span class="result-label">Open rate</span>
             </div>
             <div class="result-item">
-              <span class="result-value positive">$3.65</span>
-              <span class="result-label">RPR panier</span>
+              <span class="result-value positive">-8h</span>
+              <span class="result-label">/semaine</span>
             </div>
             <div class="result-item">
-              <span class="result-value positive">24/7</span>
-              <span class="result-label">Automatise</span>
+              <span class="result-value positive">Real-time</span>
+              <span class="result-label">Reporting</span>
             </div>
           </div>
         </div>
 
-        <!-- Case Study 3: Automation Stack -->
+        <!-- Case Study 3: B2C Deals -->
         <div class="case-card">
           <div class="case-header">
             <span class="case-vertical b2b">
@@ -533,154 +740,226 @@
                 <polyline points="16 18 22 12 16 6"/>
                 <polyline points="8 6 2 12 8 18"/>
               </svg>
-              Automation
+              E-commerce Volume
             </span>
+            <span class="case-status">Client Actif</span>
           </div>
 
-          <h3 class="case-title">Stack n8n + MCP Servers</h3>
-          <p class="case-desc">Architecture d'automatisation avec MCP servers testés, webhooks temps réel, et orchestration n8n.</p>
+          <h3 class="case-title">MyDealz - Plateforme Bons Plans</h3>
+          <p class="case-desc">Site de deals et promotions avec fort volume de produits. Automatisation de l'ingestion catalogue et du marketing.</p>
 
-          <div class="case-challenge">
-            <h4>Challenge</h4>
-            <p>Processus manuels dispersés. Données non synchronisées entre Shopify, Klaviyo, et outils marketing.</p>
+          <div class="case-context">
+            <h4>Contexte Initial</h4>
+            <p>Catalogue volumineux avec mise a jour quotidienne, besoin de scraping fournisseurs, gestion complexe des prix et disponibilites.</p>
           </div>
 
           <div class="case-solution">
-            <h4>Solution Implémentée</h4>
+            <h4>Solutions Deployees</h4>
             <ul>
-              <li>9 MCP Servers fonctionnels (Klaviyo, GA4, Gemini, GitHub, Hostinger...)</li>
-              <li>Workflows n8n pour orchestration</li>
-              <li>Webhooks Shopify temps réel</li>
-              <li>Sync bi-directionnel automatique</li>
-              <li>Alertes automatiques</li>
+              <li>60+ scripts d'automatisation personnalises</li>
+              <li>Scraping automatise des prix concurrents</li>
+              <li>Sync catalogue multi-fournisseurs</li>
+              <li>Alertes prix et stock automatiques</li>
+              <li>Integration Google Merchant Center</li>
             </ul>
           </div>
 
           <div class="case-stack">
+            <span>Node.js</span>
+            <span>Playwright</span>
+            <span>Shopify API</span>
+            <span>GMC</span>
             <span>n8n</span>
-            <span>MCP Protocol</span>
-            <span>Claude AI</span>
-            <span>Webhooks</span>
-            <span>GitHub Actions</span>
           </div>
 
           <div class="case-results">
             <div class="result-item">
-              <span class="result-value positive">9</span>
-              <span class="result-label">MCPs actifs</span>
+              <span class="result-value positive">60+</span>
+              <span class="result-label">Scripts</span>
             </div>
             <div class="result-item">
-              <span class="result-value positive">10+</span>
-              <span class="result-label">APIs connectées</span>
+              <span class="result-value positive">Auto</span>
+              <span class="result-label">Prix sync</span>
             </div>
             <div class="result-item">
-              <span class="result-value positive">56</span>
-              <span class="result-label">Automatisations</span>
+              <span class="result-value positive">Multi</span>
+              <span class="result-label">Fournisseurs</span>
             </div>
             <div class="result-item">
-              <span class="result-value positive">Real-time</span>
-              <span class="result-label">Sync</span>
+              <span class="result-value positive">GMC</span>
+              <span class="result-label">Integre</span>
             </div>
           </div>
-        </div>
-
-        <!-- Coming Soon -->
-        <div class="case-card case-coming-soon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 1rem; display: block; color: var(--primary);">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          <h3>Plus de cas clients bientot</h3>
-          <p>Nous documentons activement nos implementations. Nouveaux cas clients ajoutes regulierement.</p>
-          <a href="/#contact" class="btn-cyber" style="margin-top: 1.5rem; display: inline-flex;">
-            <span class="btn-text">Devenir un cas client</span>
-            <span class="btn-glow"></span>
-          </a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- What We Can Measure -->
-  <section class="metrics-section">
+  <!-- How We Work Section -->
+  <section class="process-section">
     <div class="container">
       <div class="section-header-ultra">
-        <span class="section-tag">Metriques</span>
-        <h2 class="section-title-ultra">Ce Que Nous Mesurons</h2>
+        <span class="section-tag">Notre Methode</span>
+        <h2 class="section-title-ultra">Comment Nous Travaillons Avec Vous</h2>
       </div>
 
-      <div class="metrics-intro">
-        <p>Nous nous engageons sur des resultats mesurables. Pas de vanity metrics - uniquement des KPIs actionnables qui impactent votre bottom line.</p>
+      <div class="process-intro">
+        <p>Transparence totale sur notre processus. Vous gardez le controle de vos comptes et donnees. Nous operons avec des acces delegues et permissions minimales.</p>
       </div>
 
-      <div class="capabilities-grid">
-        <div class="capability-card">
-          <div class="capability-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <div class="process-grid">
+        <!-- Step 1 -->
+        <div class="process-card">
+          <div class="process-number">1</div>
+          <div class="process-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <h3>Audit & Decouverte</h3>
+          <p>Appel de 30 minutes pour comprendre vos systemes actuels, vos objectifs, et identifier les opportunites d'automatisation.</p>
+          <ul>
+            <li>Cartographie de vos outils</li>
+            <li>Identification des processus manuels</li>
+            <li>Estimation du ROI potentiel</li>
+          </ul>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="process-card">
+          <div class="process-number">2</div>
+          <div class="process-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <h3>Configuration Acces</h3>
+          <p>Vous nous accordez des acces delegues a vos plateformes. Vous restez proprietaire, nous operons avec permissions minimales.</p>
+          <ul>
+            <li>Acces Partner Shopify (pas admin)</li>
+            <li>API keys Klaviyo scoped</li>
+            <li>GA4 role Analyst (lecture)</li>
+            <li>Meta/TikTok Partner access</li>
+          </ul>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="process-card">
+          <div class="process-number">3</div>
+          <div class="process-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <h3>Implementation</h3>
+          <p>Nous deployons les automatisations sur notre infrastructure. Tests complets avant mise en production.</p>
+          <ul>
+            <li>Workflows n8n dedies</li>
+            <li>Scripts personnalises</li>
+            <li>Tests et validation</li>
+            <li>Documentation complete</li>
+          </ul>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="process-card">
+          <div class="process-number">4</div>
+          <div class="process-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M3 3v18h18"/>
               <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
             </svg>
           </div>
-          <h4>Revenue par Email</h4>
-          <p>RPR (Revenue Per Recipient), attribution par flow, CLV par segment.</p>
+          <h3>Suivi & Optimisation</h3>
+          <p>Monitoring continu, rapports reguliers, et optimisations basees sur les donnees reelles.</p>
+          <ul>
+            <li>Dashboard temps reel</li>
+            <li>Rapports mensuels</li>
+            <li>Alertes proactives</li>
+            <li>Optimisations continues</li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="capability-card">
-          <div class="capability-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 6v6l4 2"/>
-            </svg>
-          </div>
-          <h4>Temps Economise</h4>
-          <p>Heures/semaine liberees par l'automatisation. ROI temps mesurable.</p>
-        </div>
+  <!-- Security & Trust Section -->
+  <section class="security-section">
+    <div class="container">
+      <div class="section-header-ultra">
+        <span class="section-tag">Securite</span>
+        <h2 class="section-title-ultra">Vos Donnees, Votre Controle</h2>
+      </div>
 
-        <div class="capability-card">
-          <div class="capability-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2v4m0 12v4M2 12h4m12 0h4"/>
-              <circle cx="12" cy="12" r="4"/>
-            </svg>
-          </div>
-          <h4>Taux de Conversion</h4>
-          <p>Par funnel stage, par source, par segment. Attribution multi-touch.</p>
-        </div>
-
-        <div class="capability-card">
-          <div class="capability-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <h4>Retention Client</h4>
-          <p>Taux de repeat purchase, churn rate, NPS automatise.</p>
-        </div>
-
-        <div class="capability-card">
-          <div class="capability-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              <line x1="3" y1="9" x2="21" y2="9"/>
-              <line x1="9" y1="21" x2="9" y2="9"/>
-            </svg>
-          </div>
-          <h4>SEO Performance</h4>
-          <p>Positions, trafic organique, CTR, impressions. Tracking GSC automatise.</p>
-        </div>
-
-        <div class="capability-card">
-          <div class="capability-icon">
+      <div class="security-grid">
+        <div class="security-card">
+          <div class="security-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
           </div>
-          <h4>Sante Technique</h4>
-          <p>Uptime, latence API, erreurs, alertes proactives.</p>
+          <h4>Vous Restez Proprietaire</h4>
+          <p>Vos comptes Shopify, Klaviyo, GA4 vous appartiennent. Nous operons avec des acces delegues revocables a tout moment.</p>
+        </div>
+
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+          <h4>Permissions Minimales</h4>
+          <p>Principe du moindre privilege: nous demandons uniquement les acces necessaires, jamais d'admin complet.</p>
+        </div>
+
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <h4>Isolation Stricte</h4>
+          <p>Chaque client a son environnement isole. Aucun partage de credentials entre clients.</p>
+        </div>
+
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h4>Rotation Reguliere</h4>
+          <p>Credentials et tokens renouveles tous les 60-90 jours selon les best practices securite.</p>
+        </div>
+
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h4>Audit Trail Complet</h4>
+          <p>Toutes les actions sont tracees. Vous pouvez verifier qui a fait quoi et quand.</p>
+        </div>
+
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+          </div>
+          <h4>Revocation Immediate</h4>
+          <p>Fin de contrat? Vous revoquez nos acces en un clic. Aucune donnee ne reste chez nous.</p>
         </div>
       </div>
     </div>
@@ -692,10 +971,10 @@
       <div class="cta-card-ultra glass-panel">
         <div class="cta-glow"></div>
         <div class="cta-content-ultra">
-          <h2>Devenez notre prochain cas client</h2>
-          <p>Audit gratuit. Rapport detaille sous 48h. Resultats mesurables garantis.</p>
+          <h2>Devenez Notre Prochain Cas Client</h2>
+          <p>Audit gratuit en 48h. Rapport detaille avec opportunites chiffrees. Zero engagement.</p>
           <a href="/#contact" class="btn-cyber">
-            <span class="btn-text">Demander mon audit gratuit</span>
+            <span class="btn-text">Demander Mon Audit Gratuit</span>
             <span class="btn-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -749,23 +1028,23 @@
           <ul>
             <li><a href="/services/audit-gratuit.html">Audit Gratuit</a></li>
             <li><a href="/cas-clients.html">Cas Clients</a></li>
-            <li><a href="/a-propos.html">À propos</a></li>
+            <li><a href="/a-propos.html">A propos</a></li>
             <li><a href="/contact.html">Contact</a></li>
           </ul>
         </div>
 
         <div class="footer-links-ultra">
-          <h4>Légal</h4>
+          <h4>Legal</h4>
           <ul>
             <li><a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a></li>
-            <li><a href="/legal/mentions-legales.html">Mentions légales</a></li>
-            <li><a href="/legal/politique-confidentialite.html">Confidentialité</a></li>
+            <li><a href="/legal/mentions-legales.html">Mentions legales</a></li>
+            <li><a href="/legal/politique-confidentialite.html">Confidentialite</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom-ultra">
-        <p>&copy; 2025 3A Automation. Tous droits réservés.</p>
+        <p>&copy; 2025 3A Automation. Tous droits reserves.</p>
         <div class="footer-tech">
           <span>Powered by</span>
           <span class="tech-badge">Anthropic</span>
