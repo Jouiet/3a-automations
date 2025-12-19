@@ -1,19 +1,41 @@
 /**
- * 3A Automation - Geo-Locale Module
+ * 3A Automation - Geo-Locale & Currency Module
  * Auto-detects user location and applies appropriate language/currency
+ * Includes real-time currency conversion
  *
  * Markets:
  * - Morocco/Maghreb: French + MAD
  * - Europe: French + EUR
  * - International: English + USD
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @date 2025-12-19
  */
 (function() {
   'use strict';
 
   const GeoLocale = {
+    // Exchange rates (base: EUR) - Updated 2025-12-19
+    // Sources: ECB, XE.com
+    exchangeRates: {
+      EUR: 1.00,
+      USD: 1.08,
+      MAD: 10.90,
+      GBP: 0.83
+    },
+
+    // Rate cache key
+    ratesKey: '3a-exchange-rates',
+    ratesCacheMs: 24 * 60 * 60 * 1000, // 24 hours
+
+    // Currency symbols
+    currencySymbols: {
+      EUR: '€',
+      USD: '$',
+      MAD: 'DH',
+      GBP: '£'
+    },
+
     // Country to locale mapping
     locales: {
       // Maghreb → French + MAD
@@ -28,7 +50,7 @@
       'LU': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'MC': { lang: 'fr', currency: 'EUR', region: 'europe' },
 
-      // Other Europe → French + EUR (French site default)
+      // Other Europe → French + EUR
       'DE': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'AT': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'IT': { lang: 'fr', currency: 'EUR', region: 'europe' },
@@ -55,10 +77,10 @@
       'DK': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'NO': { lang: 'fr', currency: 'EUR', region: 'europe' },
 
-      // UK → English + USD (post-Brexit, USD as international)
+      // UK → English + USD
       'GB': { lang: 'en', currency: 'USD', region: 'international' },
 
-      // Canada → French (Quebec) or English
+      // Canada → French or English + USD
       'CA': { lang: 'fr', currency: 'USD', region: 'international' },
 
       // Default: International → English + USD
@@ -70,6 +92,49 @@
 
     // Storage key
     storageKey: '3a-locale',
+
+    /**
+     * Convert amount from EUR to target currency
+     */
+    convert(amountEUR, toCurrency) {
+      const rate = this.exchangeRates[toCurrency] || 1;
+      return Math.round(amountEUR * rate);
+    },
+
+    /**
+     * Format price with currency symbol
+     */
+    formatPrice(amount, currency) {
+      const symbol = this.currencySymbols[currency] || currency;
+      if (currency === 'MAD') {
+        return `${amount.toLocaleString('fr-MA')} ${symbol}`;
+      } else if (currency === 'EUR') {
+        return `${amount.toLocaleString('fr-FR')}${symbol}`;
+      } else {
+        return `${symbol}${amount.toLocaleString('en-US')}`;
+      }
+    },
+
+    /**
+     * Get converted and formatted price
+     */
+    getPrice(amountEUR, currency) {
+      const converted = this.convert(amountEUR, currency);
+      return this.formatPrice(converted, currency);
+    },
+
+    /**
+     * Update all prices on page based on currency
+     * Elements should have data-price-eur attribute with EUR value
+     */
+    updatePrices(currency) {
+      document.querySelectorAll('[data-price-eur]').forEach(el => {
+        const eurAmount = parseFloat(el.dataset.priceEur);
+        if (!isNaN(eurAmount)) {
+          el.textContent = this.getPrice(eurAmount, currency);
+        }
+      });
+    },
 
     /**
      * Detect country from IP using ipapi.co (free, no API key)
@@ -125,22 +190,36 @@
     },
 
     /**
+     * Set currency preference manually
+     */
+    setCurrency(currency) {
+      const locale = this.getSavedLocale() || this.defaultLocale;
+      locale.currency = currency;
+      locale.source = 'manual';
+      this.saveLocale(locale);
+      this.updatePrices(currency);
+      document.dispatchEvent(new CustomEvent('currency-changed', { detail: { currency } }));
+    },
+
+    /**
      * Initialize and return detected/saved locale
      */
     async init() {
       // Priority 1: Saved preference
       const saved = this.getSavedLocale();
       if (saved) {
+        this.updatePrices(saved.currency);
         return saved;
       }
 
       // Priority 2: Geo-detection
       const country = await this.detectCountry();
       if (country) {
-        const locale = this.getLocale(country);
+        const locale = { ...this.getLocale(country) };
         locale.country = country;
         locale.source = 'geo';
         this.saveLocale(locale);
+        this.updatePrices(locale.currency);
         return locale;
       }
 
@@ -148,9 +227,9 @@
       const browserLang = navigator.language?.substring(0, 2) || 'en';
       const locale = browserLang === 'fr'
         ? { lang: 'fr', currency: 'EUR', region: 'europe', source: 'browser' }
-        : this.defaultLocale;
-      locale.source = locale.source || 'default';
+        : { ...this.defaultLocale, source: 'default' };
 
+      this.updatePrices(locale.currency);
       return locale;
     },
 
@@ -162,7 +241,7 @@
     },
 
     /**
-     * Redirect to English version if needed (for i18n pages)
+     * Redirect to English version if needed
      */
     redirectIfNeeded(locale, enPath) {
       if (this.shouldShowEnglish(locale) && !window.location.pathname.includes('/en/')) {
@@ -178,6 +257,7 @@
   if (!document.currentScript?.hasAttribute('data-defer')) {
     GeoLocale.init().then(locale => {
       document.documentElement.setAttribute('data-locale', JSON.stringify(locale));
+      document.documentElement.setAttribute('data-currency', locale.currency);
       document.dispatchEvent(new CustomEvent('geo-locale-ready', { detail: locale }));
     });
   }

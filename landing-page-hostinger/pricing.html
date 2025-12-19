@@ -127,6 +127,7 @@
         <a href="/automations.html">Automations</a>
         <a href="/pricing.html" class="active">Tarifs</a>
         <a href="/#contact" class="btn-nav">Contact</a>
+        <a href="/en/pricing.html" class="lang-switch" title="Switch to English">EN</a>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>
@@ -800,6 +801,22 @@
       initCurrencySelector();
     }
   })();
+  </script>
+
+  <!-- Geo-Locale for auto currency detection -->
+  <script src="/geo-locale.js"></script>
+  <script>
+    // Auto-update currency based on detected locale
+    document.addEventListener('geo-locale-ready', (e) => {
+      const currency = e.detail.currency;
+      // Update currency selector to match detected currency
+      const selector = document.getElementById('currency-selector');
+      if (selector && selector.value !== currency) {
+        selector.value = currency;
+        // Trigger change event to update prices
+        selector.dispatchEvent(new Event('change'));
+      }
+    });
   </script>
 </body>
 </html>
