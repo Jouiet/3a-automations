@@ -1,9 +1,10 @@
 # HISTORY - Changelog 3A Automation
 
-## Sessions 27-36 (19/12/2025)
+## Sessions 27-38 (19/12/2025)
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 6.7 | 38 | **PRICING CURRENCY FIX**: Supprimé 🥇🥈🥉 rankings, harmonisé devises (ratios neutres 42:1, +15%), Target CA dynamique (data-ca-eur), FAQ multi-devise, formatCA() JS |
 | 6.6 | 37 | **API TESTS + VERIFICATION**: Test empirique 7 APIs (3/7 OK), Site FR+EN LIVE vérifié (26 pages HTTP 200), Lang-switch fonctionnel, FORENSIC-AUDIT v6.0 |
 | 6.5 | 36b | **CRM GEO-TARGETING**: Module geo-markets.cjs (8 marchés), Templates Klaviyo + Multi-CRM (HubSpot, Mailchimp, Brevo, AC), docs/geo-targeting.md, 64 automatisations total |
 | 6.4 | 36 | **LANG-SWITCH + CURRENCY**: Sélecteur langue FR↔EN ajouté 26 pages, geo-locale.js v2.0 (conversion devises real-time EUR/USD/MAD/GBP), Pricing pages intégrées, data-price-eur support |

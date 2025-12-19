@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 6.6 | Dernière mise à jour: 2025-12-19 (Session 37 - API Tests + Verification)
+## Version: 6.7 | Dernière mise à jour: 2025-12-19 (Session 38 - Pricing Currency Fix)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -184,6 +184,28 @@ VPS Hostinger (ID: 1168256)
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
+
+## SESSION 38 COMPLÉTÉE ✅ (19/12/2025 - Pricing Currency Fix)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Supprimer 🥇🥈🥉 | ✅ | Rankings retirés FR+EN |
+| Harmoniser devises | ✅ | Ratios neutres (42:1, +15%) |
+| Target CA dynamique | ✅ | data-ca-eur avec conversion |
+| FAQ multi-devise | ✅ | Explique EUR/MAD/USD |
+| JS conversion CA | ✅ | formatCA() function |
+
+**Problèmes corrigés:**
+- "$3.07 revenue/recipient" → "+15% Cart Recovery Rate"
+- "$42 ROI pour $1" → "42:1 ROI"
+- "0€ coût outils" → "Gratuit - Looker inclus"
+- "CA 10k-50k€" → Converti dynamiquement selon devise
+- FAQ obsolète → Multi-devise expliqué
+
+**Commit Session 38:**
+- `6bcd480` fix(pricing): Remove medal rankings + fix currency consistency
+
+---
 
 ## SESSION 37 COMPLÉTÉE ✅ (19/12/2025 - API Tests + Verification)
 
