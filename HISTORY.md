@@ -4,7 +4,8 @@
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
-| 5.8 | 26b | **B2B AUTOMATION ANALYSIS**: Audit 13 scripts leads existants, Gap analysis (LinkedIn Lead Gen, Google Forms), Matrice n8n vs Apify, 2 nouveaux scripts génériques (sync-google-forms-to-klaviyo.cjs, scrape-linkedin-profiles.cjs), Architecture recommandée n8n+Apify |
+| 5.9 | 26c | **B2B LEAD GEN EXHAUSTIVE**: Matrice complète 12 catégories/47+ outils (Google Maps CRITICAL, LinkedIn, Directories, Job Boards, Review Platforms, Tech Stack Detection), 4 nouveaux scripts (google-maps, linkedin-profiles, google-forms-klaviyo, hiring-companies), Architecture n8n+Apify détaillée, Coûts estimés €0-108/mois, ROI 2000-4000 leads/mois |
+| 5.8 | 26b | **B2B AUTOMATION ANALYSIS v1**: Audit 13 scripts leads existants, Gap analysis initial (LinkedIn Lead Gen, Google Forms), 2 scripts créés |
 | 5.7 | 26 | **HOMEPAGE UX**: Orbital étendu 14→24 techs (+LinkedIn, Gemini, o1, Google Ads, Playwright, DevTools, WordPress, Hostinger, Apps Script), Tech Stack compact marquee (-40% hauteur), Footer avec status bar système, animations GPU optimisées |
 | 5.6 | 25 | **FORMULAIRES & CLAIMS**: Audit forensique 12 pages HTML, Claims corrigés (42→56, 12→9, 8+→10+), Google Apps Script v2 déployé, 3 formulaires connectés, Google Sheets Leads créé, Email notifications OK |
 | 5.5 | 24 | **FACTUAL AUDIT**: MCPs corrigés (3→9 fonctionnels), Claims marketing mis à jour (56 auto, 9 MCPs), llm.txt doublon supprimé, Section MCP automations.html refondue (12 MCPs listés, 9 actifs) |
