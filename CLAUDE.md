@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 7.2 | Dernière mise à jour: 2025-12-20 (Session 45 - Premium UI/UX Optimization)
+## Version: 7.3 | Dernière mise à jour: 2025-12-20 (Session 46 - Branding Logo Fix)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -218,6 +218,37 @@ VPS Hostinger (ID: 1168256)
 
 **Commits Session 41:**
 - `f92e2b5` fix(voice-widget): Add missing CSS animations + fix CTA links
+
+---
+
+## SESSION 46 COMPLÉTÉE ✅ (20/12/2025 - Branding Logo Fix)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Voice widget pulse effect | ✅ | pulse-glow, pulse-ring animations |
+| Logo.png application | ✅ | 26 pages + widget avec contrainte 40x40px |
+| CSS fix | ✅ | .logo-icon img { object-fit: contain } |
+| Revert amateur changes | ✅ | Supprimé logo sans sizing |
+
+**Problème identifié:**
+- logo.png = image marketing AVEC fond cyberpunk + texte "3A AUTOMATIONS"
+- Utilisé sans contrainte CSS = débordement header/footer
+- **Pas d'icône transparente disponible** dans le projet
+
+**Solution appliquée:**
+- CSS: `.logo-icon img { width: 100%; height: 100%; object-fit: contain; }`
+- Résultat: logo.png contraint à 40x40px dans container
+
+**Commits Session 46:**
+- `64a6092` feat(widget): Pulse effect + 3A logo on voice assistant
+- `9be2f20` feat(branding): Apply official logo.png (amateur - trop grand)
+- `b31730a` revert: Remove amateur logo.png usage
+- `1ae9c8e` fix(branding): Apply official logo.png with proper 40x40px sizing
+
+**Leçon apprise:**
+- Toujours vérifier l'asset AVANT application site-wide
+- logo.png ≠ icône transparente → nécessite CSS contrainte
+- Tester visuellement AVANT push
 
 ---
 
