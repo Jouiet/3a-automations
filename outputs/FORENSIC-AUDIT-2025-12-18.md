@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 4.2 (Màj Session 21e - Déploiement Auto + GAS Template)
+## Date: 2025-12-19 | Version: 4.3 (Màj Session 22 - Race Condition Fix + Claims Accuracy)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -2004,9 +2004,97 @@ root-n8n                Running (workflow automation)
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v4.2**
+---
+
+## SESSION 22 - RÉSOLUTION RACE CONDITION + CLAIMS ACCURACY (19/12/2025)
+
+### Problème Root Cause: Déploiement 404/502 Intermittent
+
+**SYMPTÔME**: Site retournait 404 ou 502 de façon aléatoire après chaque push.
+
+**ANALYSE FORENSIQUE:**
+```
+.github/workflows/
+├── deploy.yml              ← CAUSAIT LE PROBLÈME (maintenant supprimé)
+└── deploy-website.yml      ← WORKFLOW FONCTIONNEL
+
+RACE CONDITION:
+Les DEUX workflows se déclenchaient sur le même trigger:
+  on:
+    push:
+      branches: [main]
+      paths: ['landing-page-hostinger/**']
+
+RÉSULTAT: 2 appels API Hostinger simultanés = conflit container
+```
+
+**SOLUTION APPLIQUÉE:**
+```bash
+rm .github/workflows/deploy.yml
+# Gardé uniquement deploy-website.yml
+```
+
+**VÉRIFICATION:**
+```bash
+gh run list --limit 3
+# RÉSULTAT: Un seul workflow "Deploy Website" se déclenche désormais
+```
+
+### Claims Marketing Corrigés
+
+**PROBLÈME**: Incohérences entre pages sur les métriques affichées.
+
+| Ancienne Claim | Nouvelle Claim | Justification |
+|----------------|----------------|---------------|
+| "42 automatisations" | "50+ automatisations" | Inventaire vérifié: 50+ scripts fonctionnels |
+| "12 MCPs" | "3 MCPs" | Seuls 3 testés fonctionnels (Shopify, Klaviyo, n8n) |
+| "8+ APIs" | "10+ APIs" | Intégrations vérifiées |
+| "2 MCPs" (footer index) | "3 MCPs" | Correction factuelle |
+
+**PAGES CORRIGÉES (10 fichiers):**
+- index.html, pricing.html, a-propos.html, cas-clients.html, contact.html
+- services/ecommerce.html, services/pme.html, services/audit-gratuit.html
+- legal/mentions-legales.html, legal/politique-confidentialite.html
+
+### Nettoyage Placeholder Scripts
+
+**PROBLÈME**: Scripts Meta Pixel & LinkedIn avec PIXEL_ID_HERE et LINKEDIN_PARTNER_ID causaient des erreurs JS.
+
+**SOLUTION**: Remplacés par commentaire:
+```html
+<!-- Meta Pixel & LinkedIn: Configure when ad accounts are ready -->
+```
+
+**FICHIERS NETTOYÉS**: 8 pages (placeholders supprimés)
+
+### État Post-Session 22
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ÉTAT SITE - POST SESSION 22                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  SITE LIVE: https://3a-automation.com                                       │
+│  STATUS: HTTP 200 ✅                                                         │
+│  DÉPLOIEMENT: Un seul workflow (deploy-website.yml)                         │
+│  CLAIMS: Factuellement corrects sur toutes les pages                        │
+│  PLACEHOLDERS: Supprimés (0 erreurs JS)                                     │
+│                                                                              │
+│  COMMITS SESSION 22:                                                        │
+│  ├── chore: cleanup test comment                                            │
+│  ├── test: Verify single workflow deployment                                │
+│  ├── fix(deploy): Remove duplicate workflow causing race condition          │
+│  └── fix(site): AEO/SEO optimizations + accurate marketing claims           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v4.3**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v4.3: Session 22 - Race condition fix (deploy.yml supprimé) + Claims accuracy (50+/3 MCPs/10+ APIs)*
 *v4.2: Session 21e - Déploiement automatique (GitHub Action v2.1), GAS form template créé, repo PUBLIC*
 *v4.1: Session 21e - GTM CONFIGURÉ (GTM-WLVJQC3M) sur 11 pages LIVE + Repo PUBLIC*
 *v4.0: Session 21d - GA4 CONFIGURÉ (G-87F6FDJG45) sur 11 pages LIVE + Blueprint 100/100*
