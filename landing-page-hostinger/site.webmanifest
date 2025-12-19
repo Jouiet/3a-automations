@@ -3,7 +3,7 @@
   "short_name": "3A",
   "description": "Automation, Analytics & AI pour PME",
   "start_url": "/",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#191E35",
   "theme_color": "#4FBAF1",
   "icons": [
