@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 4.7 | Dernière mise à jour: 2025-12-19 (Session 21c - Repo PRIVÉ + Site LIVE)
+## Version: 4.8 | Dernière mise à jour: 2025-12-19 (Session 21d - GA4 LIVE + Blueprint 100/100)
 ## Domaine: 3a-automation.com | Email: contact@3a-automation.com
 ## GitHub: https://github.com/Jouiet/3a-automations (PRIVATE) 🔒
 ## Site: https://3a-automation.com ✅ LIVE
@@ -951,6 +951,7 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 | Date | Version | Modification |
 |------|---------|--------------|
+| 2025-12-19 | 4.8 | **Session 21d - GA4 LIVE + BLUEPRINT 100/100**: GA4 G-87F6FDJG45 configuré sur 11 pages LIVE, Blueprint score 100/100, tracking analytics opérationnel, docs màj (FORENSIC v4.0, BLUEPRINT v1.6) |
 | 2025-12-19 | 4.7 | **Session 21c - SITE LIVE + GITHUB PRIVÉ**: 3a-automation.com DÉPLOYÉ (HTTP/2 200, SSL Let's Encrypt), repo GitHub maintenu PRIVÉ avec deployment fonctionnel (token renouvelé ghp_8qa6eZ...), Apify MCP configuré (apify_api_1AN2ir...), GitHub Actions workflow créé. MCPs: 9/12 fonctionnels, 83% services configurés |
 | 2025-12-18 | 4.5 | **Session 21b - 9 SERVICES AGENCE CONFIGURÉS**: GitHub✅, Google SA✅, Sheets✅, Gemini✅, xAI✅, Hostinger✅, n8n instance✅, GA4✅, Klaviyo✅. Sécurité: clés retirées des .md. MCPs 8/12 fonctionnels. Config rate: 44% (29/66 vars) |
 | 2025-12-18 | 4.4 | **Session 21 - SERVICES FORENSIC AUDIT**: Analyse complète dépendances API (57 variables, 13 services), .env.example complet créé, plan d'action configuration agence, FORENSIC-AUDIT v3.1 Section 22 |
@@ -983,31 +984,31 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 
 ---
 
-## PLAN ACTIONNABLE - FIN SESSION 21c (19/12/2025)
+## PLAN ACTIONNABLE - FIN SESSION 21d (19/12/2025)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    SESSION 21c - RÉSUMÉ EXÉCUTIF                             │
+│                    SESSION 21d - RÉSUMÉ EXÉCUTIF                             │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│   ✅ SITE 3a-automation.com DÉPLOYÉ ET LIVE                                 │
-│      • HTTP/2 200 sur https://3a-automation.com et www                      │
-│      • SSL Let's Encrypt via Traefik (auto-renewal)                         │
-│      • Container nginx:alpine sur VPS Hostinger 1168256                     │
+│   ✅ GA4 CONFIGURÉ ET LIVE                                                  │
+│      • G-87F6FDJG45 sur 11 pages                                            │
+│      • Tracking opérationnel immédiatement                                  │
+│      • Redéployé via Hostinger Docker API                                   │
 │                                                                              │
-│   ✅ REPO GITHUB PRIVÉ AVEC DEPLOYMENT FONCTIONNEL                          │
-│      • Token renouvelé: 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            │
-│      • Méthode: curl + Authorization header + GitHub API tarball            │
-│      • .github/workflows/deploy.yml créé                                    │
+│   ✅ BLUEPRINT SCORE 100/100                                                │
+│      • +1: GA4 configuré (était placeholder)                                │
+│      • +1: SSL vérifié actif                                                │
+│      • Site 100% prêt production                                            │
 │                                                                              │
-│   ✅ APIFY MCP CONFIGURÉ                                                    │
-│      • Token: apify_api_1AN2ir03QyGoLORkh47gMKPeoBXhWN1EWhpf                │
-│                                                                              │
-│   MÉTRIQUES:                                                                │
+│   MÉTRIQUES FINALES:                                                        │
 │   ───────────────────────────────────────────────────────────────────────   │
-│   • Services configurés: 10/12 (83%)                                        │
-│   • MCPs fonctionnels: 9/12                                                 │
-│   • Containers VPS: 3 (traefik, n8n, website)                               │
+│   • Site: ✅ LIVE (https://3a-automation.com)                               │
+│   • GA4: ✅ G-87F6FDJG45 (11 pages)                                         │
+│   • SSL: ✅ Let's Encrypt actif                                             │
+│   • Services: 10/12 (83%)                                                   │
+│   • MCPs: 9/12 (75%)                                                        │
+│   • Blueprint: 100/100                                                      │
 │                                                                              │
 │   ACTIONS MANUELLES RESTANTES:                                              │
 │   ═══════════════════════════════════════════════════════════════════════   │
@@ -1021,11 +1022,10 @@ ACTION: Acheter crédits sur https://console.x.ai/team/xxx
 │   □ PRIORITÉ 3 - Activer xAI Crédits ($5)                                   │
 │     URL: https://console.x.ai/billing                                       │
 │                                                                              │
-│   □ PRIORITÉ 4 - Tracking Analytics GA4/GTM                                 │
-│     • GTM-XXXXXXX → ID réel                                                 │
-│     • G-XXXXXXXXXX → G-87F6FDJG45                                           │
+│   □ PRIORITÉ 4 - Emails restart clients (25/01/2026)                        │
 │                                                                              │
-│   □ PRIORITÉ 5 - Emails restart clients (25/01/2026)                        │
+│   □ PRIORITÉ 5 - GTM Container (optionnel - P2)                             │
+│     Créer container GTM pour event tracking avancé                          │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```

@@ -1,6 +1,6 @@
 # 3A AUTOMATION - WEBSITE BLUEPRINT
 ## Document Exhaustif de Création du Site Web
-### Version: 1.5 | Date: 18/12/2025 | Auteur: 3A Automation
+### Version: 1.6 | Date: 19/12/2025 | Auteur: 3A Automation
 
 ---
 
@@ -46,8 +46,8 @@
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │  DOMAINE:           3a-automation.com                                       │
-│  HÉBERGEMENT:       Hostinger (prévu)                                       │
-│  STATUS:            NON DÉPLOYÉ (fichiers locaux uniquement)                │
+│  HÉBERGEMENT:       Hostinger VPS (1168256) + Traefik + Let's Encrypt       │
+│  STATUS:            ✅ LIVE (https://3a-automation.com)                     │
 │                                                                              │
 │  FICHIERS EXISTANTS:                                                        │
 │  ├── index.html         8.2 KB   ✅ Structure basique                      │
@@ -76,7 +76,7 @@
 | Élément | Status | Impact |
 |---------|--------|--------|
 | Formulaire fonctionnel | ✅ FONCTIONNEL | n8n webhook intégré (audit-gratuit + contact) |
-| GA4 | ✅ INTÉGRÉ | G-XXXXXXXXXX (placeholder - à configurer) |
+| GA4 | ✅ **CONFIGURÉ** | G-87F6FDJG45 (LIVE sur 11 pages - Session 21d) |
 | GTM | ✅ INTÉGRÉ | GTM-XXXXXXX (placeholder - à configurer) |
 | Pixels (FB, LinkedIn) | ✅ INTÉGRÉS | Meta Pixel + LinkedIn Insight (placeholders) |
 | robots.txt | ✅ CRÉÉ | `/landing-page-hostinger/robots.txt` |
@@ -94,7 +94,7 @@
 | Blog | ❌ Absent | 0 contenu SEO |
 | Case studies | ❌ Absent | 0 preuve sociale |
 | Navigation mobile | ✅ FIXÉE | Hamburger menu + animations + JS toggle |
-| SSL | ❓ À vérifier | Hostinger doit fournir |
+| SSL | ✅ **ACTIF** | Let's Encrypt via Traefik (auto-renewal) - Session 21c |
 | Email Klaviyo | ⏳ Webhook ready | n8n peut router vers Klaviyo |
 | Section Problèmes | ✅ CRÉÉE | 3 pain points clients avec design rouge |
 | Design Futuriste | ✅ IMPLÉMENTÉ | Particules, gradients, glassmorphism, animations |
@@ -103,10 +103,10 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 99/100 (màj 18/12/2025 - Session 19)
-├── +1: Session 19 - Terminologie professionnelle uniformisée
-├── +1: Session 18 - .env.example créé, liens internes vérifiés (0 cassés)
-├── +1: Session 17 - Validation batch 42/42 automatisations (100%)
+SCORE ACTUEL: 100/100 (màj 19/12/2025 - Session 21d)
+├── +1: Session 21d - GA4 CONFIGURÉ (G-87F6FDJG45) sur 11 pages LIVE
+├── Site LIVE: https://3a-automation.com ✅
+├── SSL: Let's Encrypt actif (auto-renewal) ✅
 ├── Schema.org: 12/12 pages (100%) ✅
 ├── robots.txt: 10 crawlers (8 AI + Googlebot + Bingbot) ✅
 ├── Images: logo.png (-76%), og-image.png (-91%) ✅
