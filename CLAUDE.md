@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 5.0 | Dernière mise à jour: 2025-12-19 (Session 22)
+## Version: 5.1 | Dernière mise à jour: 2025-12-19 (Session 22c)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -28,17 +28,16 @@
 
 ---
 
-## MÉTRIQUES ACTUELLES (Session 22 - 19/12/2025)
+## MÉTRIQUES ACTUELLES (Session 22c - 19/12/2025)
 
 | Métrique | Valeur |
 |----------|--------|
-| Site | https://3a-automation.com ✅ LIVE |
-| GA4 | G-87F6FDJG45 (11 pages) |
+| Site | https://3a-automation.com ✅ LIVE (10 pages HTTP 200) |
+| GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
-| Automatisations génériques | 50+ |
-| MCPs fonctionnels | 3 (Shopify, Klaviyo, n8n) |
-| MCPs configurés | 12 |
-| Scripts legacy | ~210 (à migrer) |
+| Automatisations validées | **42/42 (100%)** ✅ |
+| APIs fonctionnelles | 3/7 (Klaviyo, GA4, Apify) |
+| Legacy scripts | **ARCHIVÉS** → archive/ |
 
 ---
 
@@ -62,20 +61,17 @@ git push origin main  # Déclenche Deploy Website workflow
 
 ```
 /Users/mac/Desktop/JO-AAA/
-├── automations/              # Automatisations normalisées
-│   ├── generic/              # 100% réutilisables
-│   └── clients/              # Par service (shopify/, klaviyo/, etc.)
+├── automations/              # 42 automatisations validées
+│   ├── generic/              # test-all-apis, validate-all
+│   ├── clients/              # shopify/, klaviyo/, seo/, leads/, etc.
+│   └── agency/               # Outils internes
 ├── landing-page-hostinger/   # Site web (auto-deploy)
+├── archive/                  # Legacy scripts archivés
+│   ├── mydealz-scripts/
+│   ├── henderson-scripts/
+│   └── alpha-medical-scripts/
 ├── outputs/                  # Résultats audits
-├── .claude/rules/            # Règles modulaires
-│   ├── code-standards.md
-│   ├── factuality.md
-│   ├── infrastructure.md     # Config Hostinger/Docker/n8n
-│   └── mcps.md               # Configuration MCPs
-└── # LEGACY (à archiver):
-    ├── AGENCY-CORE-SCRIPTS-V3/
-    ├── agency-scripts-Q1-GOLD/
-    └── alpha-medical-python-agency/
+└── .claude/rules/            # Règles modulaires (4 fichiers)
 ```
 
 ---
@@ -144,12 +140,12 @@ VPS Hostinger (ID: 1168256)
 
 ---
 
-## ACTIONS PRIORITAIRES
+## ACTIONS PRIORITAIRES (Manuelles)
 
 1. **n8n API Key** - https://n8n.srv1168256.hstgr.cloud/settings/api
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
-4. **Archiver legacy scripts** - Déplacer vers archive/
+4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 
 ---
 
