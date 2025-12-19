@@ -150,21 +150,21 @@
 
       <span class="badge">Tarifs Transparents</span>
       <h1>Investissez dans votre <span class="highlight">croissance</span></h1>
-      <p class="hero-sub">Prix clairs. Pas de frais cachés. ROI email prouvé: <strong>42€ pour 1€ investi</strong>.</p>
+      <p class="hero-sub" id="pricing-subtitle">Pas de frais cachés. ROI email prouvé: <strong>42:1</strong> (Klaviyo 2025).</p>
 
-      <!-- ROI Stats -->
+      <!-- ROI Stats - Using neutral ratios for benchmarks -->
       <div class="roi-stats">
         <div class="roi-stat">
           <span class="roi-value">42:1</span>
-          <span class="roi-label">ROI Email (Klaviyo 2025)</span>
+          <span class="roi-label">ROI Email Marketing</span>
         </div>
         <div class="roi-stat">
-          <span class="roi-value">$3.07</span>
-          <span class="roi-label">Revenue/recipient Cart Abandonment</span>
+          <span class="roi-value">+15%</span>
+          <span class="roi-label">Taux récupération panier</span>
         </div>
         <div class="roi-stat">
           <span class="roi-value">30x</span>
-          <span class="roi-label">Plus de RPR vs campagnes manuelles</span>
+          <span class="roi-label">Plus de RPR vs campagnes</span>
         </div>
       </div>
     </div>
@@ -179,7 +179,6 @@
       <div class="services-grid-3">
         <!-- Service 1: Email Automation -->
         <div class="service-card featured">
-          <div class="service-rank">🥇 #1</div>
           <div class="service-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -189,7 +188,7 @@
           <p class="service-desc">Flows automatisés qui génèrent du revenue pendant que vous dormez.</p>
           <ul class="service-facts">
             <li><strong>26.7%</strong> du marché automation</li>
-            <li><strong>$42</strong> ROI pour $1 investi</li>
+            <li><strong>42:1</strong> ROI email marketing</li>
             <li><strong>+45%</strong> revenue email en 6 mois</li>
           </ul>
           <div class="service-includes">
@@ -206,7 +205,6 @@
 
         <!-- Service 2: Analytics -->
         <div class="service-card">
-          <div class="service-rank">🥈 #2</div>
           <div class="service-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
@@ -215,9 +213,9 @@
           <h3>Analytics & Dashboards</h3>
           <p class="service-desc">Vos KPIs en temps réel. Décisions data-driven.</p>
           <ul class="service-facts">
-            <li><strong>18.4%</strong> CAGR (croissance #1)</li>
+            <li><strong>18.4%</strong> croissance marché/an</li>
             <li><strong>80%</strong> moins de temps reporting</li>
-            <li><strong>0€</strong> coût outils (Looker gratuit)</li>
+            <li><strong>Gratuit</strong> - Looker Studio inclus</li>
           </ul>
           <div class="service-includes">
             <span>GA4 Setup</span>
@@ -233,7 +231,6 @@
 
         <!-- Service 3: Audit -->
         <div class="service-card">
-          <div class="service-rank">🥉 #3</div>
           <div class="service-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
@@ -314,7 +311,7 @@
             </ul>
 
             <div class="pricing-target">
-              <strong>Cible:</strong> CA &lt;10k€/mois
+              <strong>Cible:</strong> CA &lt;<span data-ca-eur="10000">10k€</span>/mois
             </div>
             <div class="pricing-engagement">
               Mensuel, résiliable à tout moment
@@ -378,7 +375,7 @@
             </ul>
 
             <div class="pricing-target">
-              <strong>Cible:</strong> CA 10k-50k€/mois
+              <strong>Cible:</strong> CA <span data-ca-eur="10000-50000">10k-50k€</span>/mois
             </div>
             <div class="pricing-engagement">
               Engagement 3 mois minimum
@@ -441,7 +438,7 @@
             </ul>
 
             <div class="pricing-target">
-              <strong>Cible:</strong> CA 50k€+/mois
+              <strong>Cible:</strong> CA <span data-ca-eur="50000">50k€</span>+/mois
             </div>
             <div class="pricing-engagement">
               Engagement 6 mois minimum
@@ -519,8 +516,8 @@
 
       <div class="faq-grid">
         <div class="faq-item">
-          <h3>Pourquoi des prix en euros?</h3>
-          <p>Notre marché cible est francophone (France, Belgique, Suisse, Canada). Les prix en euros évitent la confusion des taux de change.</p>
+          <h3>Dans quelle devise sont les prix?</h3>
+          <p>Les prix s'affichent automatiquement selon votre localisation: EUR pour l'Europe, MAD pour le Maroc/Maghreb, USD pour l'international. Vous pouvez changer manuellement via le sélecteur.</p>
         </div>
 
         <div class="faq-item">
@@ -714,6 +711,17 @@
       return formatPrice(convertPrice(Number(priceStr), currency), currency);
     }
 
+    // Format CA (revenue) values
+    function formatCA(value, currency) {
+      const converted = value * rates[currency];
+      if (converted >= 1000000) {
+        return Math.round(converted / 1000000) + 'M' + symbols[currency];
+      } else if (converted >= 1000) {
+        return Math.round(converted / 1000) + 'k' + symbols[currency];
+      }
+      return Math.round(converted) + symbols[currency];
+    }
+
     // Update all prices on the page
     function updatePrices(currency) {
       // Update elements with data-price-eur attribute
@@ -722,15 +730,26 @@
         el.textContent = parseAndConvert(eurPrice, currency);
       });
 
+      // Update CA targets with data-ca-eur attribute
+      document.querySelectorAll('[data-ca-eur]').forEach(el => {
+        const eurCA = el.getAttribute('data-ca-eur');
+        if (eurCA.includes('-')) {
+          const [min, max] = eurCA.split('-').map(Number);
+          el.textContent = formatCA(min, currency) + '-' + formatCA(max, currency);
+        } else {
+          el.textContent = formatCA(Number(eurCA), currency);
+        }
+      });
+
       // Update period suffix
       document.querySelectorAll('.price-period').forEach(el => {
         el.textContent = currency === 'USD' ? '/month' : '/mois';
       });
 
       // Update hero subtitle
-      const heroSub = document.querySelector('.hero-sub');
+      const heroSub = document.getElementById('pricing-subtitle');
       if (heroSub) {
-        heroSub.innerHTML = labels[currency] + '. Pas de frais cachés. ROI email prouvé: <strong>42€ pour 1€ investi</strong>.';
+        heroSub.innerHTML = labels[currency] + '. Pas de frais cachés. ROI email prouvé: <strong>42:1</strong> (Klaviyo 2025).';
       }
 
       // Save preference
