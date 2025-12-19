@@ -196,6 +196,14 @@
           transition: all 0.2s;
         }
         .va-cta a:hover { background: #059669; }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+          from { opacity: 1; transform: translateY(0); }
+          to { opacity: 0; transform: translateY(10px); }
+        }
         @media (max-width: 480px) { .va-panel { width: calc(100vw - 40px); right: -10px; } }
       </style>
 
@@ -232,7 +240,7 @@
         </div>
 
         <div class="va-cta">
-          <a href="/#contact">Request a free audit</a>
+          <a href="/en/contact.html">Request a free audit</a>
         </div>
       </div>
     `;

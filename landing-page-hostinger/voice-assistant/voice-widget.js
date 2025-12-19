@@ -341,6 +341,16 @@ OBJECTIF:
           background: #059669;
         }
 
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+          from { opacity: 1; transform: translateY(0); }
+          to { opacity: 0; transform: translateY(10px); }
+        }
+
         @media (max-width: 480px) {
           .va-panel {
             width: calc(100vw - 40px);
@@ -382,7 +392,7 @@ OBJECTIF:
         </div>
 
         <div class="va-cta">
-          <a href="/#contact">Demander un audit gratuit</a>
+          <a href="/contact.html">Demander un audit gratuit</a>
         </div>
       </div>
     `;
