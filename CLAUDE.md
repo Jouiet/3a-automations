@@ -35,8 +35,8 @@
 | Site | https://3a-automation.com ✅ LIVE (10 pages HTTP 200) |
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
-| Automatisations | **56 total** (42 validées, +14 agency/core) |
-| APIs fonctionnelles | 3/7 (Klaviyo, GA4, Apify) |
+| Automatisations | **56 total** (41 clients, 11 agency, 4 utils) |
+| MCPs fonctionnels | **9/12** (credentials réelles) |
 | Architecture | Consolidée (scripts/ → automations/) |
 
 ---
@@ -83,22 +83,22 @@ git push origin main  # Déclenche Deploy Website workflow
 
 ---
 
-## MCPs CONFIGURÉS
+## MCPs CONFIGURÉS (Audit 19/12/2025)
 
-| MCP | Status | Usage |
-|-----|--------|-------|
-| ✅ chrome-devtools | Fonctionnel | Debug browser |
-| ✅ playwright | Fonctionnel | Tests automatisés |
-| ✅ github | Fonctionnel | Gestion repo |
-| ✅ hostinger | Fonctionnel | Déploiement VPS |
-| ✅ klaviyo | Fonctionnel | Email marketing |
-| ✅ gemini | Fonctionnel | AI assistance |
-| ✅ google-analytics | Fonctionnel | GA4 data |
-| ✅ google-sheets | Fonctionnel | Spreadsheets |
-| ⚠️ shopify | Placeholder | Dev store à créer |
-| ⚠️ n8n | Instance OK | API key à générer |
-| ⚠️ wordpress | Non testé | wp-sites.json requis |
-| ⚠️ apify | Configuré | Non testé |
+| MCP | Status | Credentials |
+|-----|--------|-------------|
+| ✅ chrome-devtools | Fonctionnel | NPX standard |
+| ✅ playwright | Fonctionnel | NPX standard |
+| ✅ github | Fonctionnel | Token réel |
+| ✅ hostinger | Fonctionnel | Token réel |
+| ✅ klaviyo | Fonctionnel | API key réelle |
+| ✅ gemini | Fonctionnel | API key réelle |
+| ✅ google-analytics | Fonctionnel | Service Account |
+| ✅ google-sheets | Fonctionnel | Service Account |
+| ✅ apify | Fonctionnel | Token réel |
+| ⚠️ shopify | PLACEHOLDER | Config client requise |
+| ⚠️ n8n | PLACEHOLDER | API key à générer |
+| ⚠️ wordpress | PLACEHOLDER | wp-sites.json incomplet |
 
 ---
 
