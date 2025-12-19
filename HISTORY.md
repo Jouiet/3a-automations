@@ -4,6 +4,7 @@
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 5.6 | 25 | **FORMULAIRES & CLAIMS**: Audit forensique 12 pages HTML, Claims corrigés (42→56, 12→9, 8+→10+), Google Apps Script v2 déployé, 3 formulaires connectés, Google Sheets Leads créé, Email notifications OK |
 | 5.5 | 24 | **FACTUAL AUDIT**: MCPs corrigés (3→9 fonctionnels), Claims marketing mis à jour (56 auto, 9 MCPs), llm.txt doublon supprimé, Section MCP automations.html refondue (12 MCPs listés, 9 actifs) |
 | 5.4 | 23b | **ARCHITECTURE GLOBALE**: docs/ créé (8 fichiers), archive/docs-legacy/ (12 fichiers), README.md amélioré, docker-compose.yml racine, 23→4 MD racine |
 | 5.1 | 23 | **CONSOLIDATION SCRIPTS**: scripts/→automations/agency/core/ (+5), 56 automatisations total, INDEX.md v3.0 |

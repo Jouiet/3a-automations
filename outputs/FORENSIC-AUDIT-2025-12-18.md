@@ -2435,9 +2435,109 @@ CLAIMS MARKETING ACTUELS (FACTUELS):
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v4.7**
+---
+
+## 27. SESSION 25 - AUDIT FORENSIQUE COMPLET SITE WEB (19/12/2025)
+
+### 27.1 Analyse Complète des 12 Pages HTML
+
+| Page | Status | Corrections |
+|------|--------|-------------|
+| index.html | ✅ Corrigé | Hero stats (42→56, 12→9, 8+→10+), badge, card stats |
+| automations.html | ✅ Corrigé | Schema.org, hero text "Plus de 50"→"56" |
+| pricing.html | ✅ Corrigé | "8 serveurs"→"9 serveurs" |
+| a-propos.html | ✅ Corrigé | Pillar text, expertise stats |
+| cas-clients.html | ✅ Corrigé | Case results (3 MCPs→9, 42→56) |
+| contact.html | ✅ Corrigé | Footer + formulaire connecté |
+| services/ecommerce.html | ✅ Corrigé | Footer stats |
+| services/pme.html | ✅ Corrigé | Footer stats |
+| services/audit-gratuit.html | ✅ Corrigé | Footer + formulaire connecté |
+| legal/mentions-legales.html | ✅ Corrigé | Footer stats |
+| legal/politique-confidentialite.html | ✅ Corrigé | Footer stats |
+| 404.html | ✅ OK | Aucune correction nécessaire |
+
+### 27.2 Vérification Empirique Claims Marketing
+
+```
+AVANT SESSION 25:                    APRÈS SESSION 25:
+├── "42 automatisations" ❌         ├── "56 automatisations" ✅
+├── "12 MCP Servers" ❌             ├── "9 MCPs actifs" ✅
+├── "8+ APIs" ❌                    ├── "10+ APIs" ✅
+├── "3 MCPs fonctionnels" ❌        ├── "9 MCPs fonctionnels" ✅
+└── "Plus de 50" ❌                 └── "56" ✅
+
+VÉRIFICATION GREP:
+├── 0 occurrences "42 automatisations" ✅
+├── 0 occurrences "3 MCPs" ✅
+├── 0 occurrences "12 MCP" ✅
+├── 0 occurrences "8 serveurs" ✅
+├── 19 occurrences "56" ✅
+└── 10 occurrences "9 MCPs" ✅
+```
+
+### 27.3 Google Apps Script - Formulaires Connectés
+
+```
+DEPLOYMENT ID: AKfycbyzIHwTDfQpm57LBloFJ53BMkSvsSDd3zCXE41mMSFPMa1m6xOuji3ICKQJA1oiHb-4
+VERSION: 2 (19/12/2025)
+
+FORMULAIRES CONNECTÉS:
+├── index.html (ligne 622)
+├── contact.html (ligne 172)
+└── services/audit-gratuit.html (ligne 176)
+
+FONCTIONNALITÉS:
+├── ✅ Sauvegarde leads → Google Sheets
+├── ✅ Notification email → contact@3a-automation.com
+└── ✅ Réponse JSON (success/error)
+
+GOOGLE SHEETS:
+└── https://docs.google.com/spreadsheets/d/1rRKJ6sKfSOm6OYD1Hl5S5vFDTj8iLKeVTEmezaUqAjc/edit
+```
+
+### 27.4 Commits Session 25
+
+| Commit | Description |
+|--------|-------------|
+| 30775bb | fix(marketing): Forensic audit - all claims corrected |
+| 5bc5cc4 | fix(script): Remove French accents from Apps Script |
+| 89dde9b | feat(forms): Connect forms to Google Apps Script |
+
+### 27.5 Plan Actionnable - Fin Session 25
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    PLAN ACTIONNABLE - FIN SESSION 25                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  COMPLÉTÉ SESSION 25:                                                       │
+│  ✅ Audit forensique 12 pages HTML                                          │
+│  ✅ Correction 15 claims marketing incorrects                               │
+│  ✅ Footers uniformisés (9 pages)                                           │
+│  ✅ Google Apps Script déployé v2                                           │
+│  ✅ 3 formulaires connectés                                                 │
+│  ✅ Google Sheets "Leads" créé                                              │
+│  ✅ Email notifications fonctionnelles                                      │
+│  ✅ GitHub Actions deployment déclenché                                     │
+│                                                                              │
+│  DÉPLOIEMENT:                                                               │
+│  └── GitHub Actions: in_progress (Run #20370758455)                         │
+│                                                                              │
+│  PROCHAINE SESSION (26):                                                    │
+│  □ Vérifier déploiement Hostinger                                          │
+│  □ Tester formulaires sur site LIVE                                        │
+│  □ Configurer n8n API Key pour MCP                                         │
+│  □ Configurer Shopify Dev Store pour MCP                                   │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v4.8**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v4.8: Session 25 - Audit forensique complet site web, Claims corrigés (42→56, 3→9 MCPs), Google Apps Script v2 déployé*
 *v4.7: Session 24 - Audit factuel MCPs (3→9 fonctionnels), Claims marketing corrigés*
 *v4.6: Session 23 - Consolidation architecture (scripts/→automations/, 56 automatisations total)*
 
