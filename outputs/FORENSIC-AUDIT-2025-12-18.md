@@ -2999,9 +2999,72 @@ footer-links-ultra Légal
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v5.4**
+# SECTION 31: SESSION 31 - CRITICAL CSS FIX + FLYWHEEL PROMOTION
+
+## Date: 2025-12-19
+
+## 31.1 ROOT CAUSE ANALYSIS
+
+**PROBLÈME CRITIQUE IDENTIFIÉ:**
+```
+styles-lite.css était MANQUANT les classes suivantes:
+- .btn-cyber, .btn-primary-cyber (boutons CTA)
+- .footer-email (email inline footer)
+- .footer-links-ultra h4 flex display
+
+CONSÉQUENCE:
+- Pages secondaires (qui utilisent styles-lite.css) n'avaient PAS:
+  - Boutons CTA visibles (pas de background/color)
+  - Email inline dans footer (flex non appliqué)
+```
+
+## 31.2 Fichiers CSS
+
+| Fichier | Usage | Problème |
+|---------|-------|----------|
+| styles.css | index.html uniquement | ✅ Complet |
+| styles-lite.css | 12 pages secondaires | ❌ MANQUAIT classes critiques |
+
+## 31.3 Corrections Appliquées (+137 lignes CSS)
+
+- `.btn-cyber`, `.btn-primary-cyber`, `.btn-secondary-cyber`
+- `.footer-links-ultra h4` (flex display, uppercase, letter-spacing)
+- `.footer-email` (inline styling)
+- `.flywheel-promo`, `.flywheel-link`, `.promo-icon`, `.promo-text`, `.promo-arrow`
+- `.cta-actions` (dual buttons layout)
+
+## 31.4 automations.html - Flywheel Promotion
+
+- Banner `.flywheel-promo` ajouté dans hero après stats
+- Dual CTA buttons: "Discuter" + "Voir Flywheel 360°"
+
+## 31.5 Vérification LIVE
+
+| Élément | URL | Status |
+|---------|-----|--------|
+| CTA Button | /cas-clients.html | ✅ Visible avec contraste |
+| Footer Email | /cas-clients.html | ✅ Inline avec h4 |
+| Flywheel Promo | /automations.html | ✅ Banner visible |
+| CSS Classes | /styles-lite.css | ✅ 137 lignes ajoutées |
+
+## 31.6 Commit
+
+| Commit | Description |
+|--------|-------------|
+| 4a98775 | fix(critical): Add missing CSS to styles-lite.css + Flywheel promo |
+
+## 31.7 LEÇON CRITIQUE
+
+> Lors de l'ajout de classes CSS, TOUJOURS synchroniser:
+> 1. styles.css (index.html)
+> 2. styles-lite.css (12 pages secondaires)
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v5.5**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v5.5: Session 31 - CRITICAL CSS FIX (styles-lite.css +137 lignes: btn-primary-cyber, footer-email, flywheel-promo)*
 *v5.4: Session 30 - Flywheel 360 page + Footer harmonization (email inline, tagline unifié, nav updated)*
 *v5.3: Session 29 - Mobile optimization complète (image -68%, JS -168KB, touch support, font-sizes)*
 *v5.2: Session 28 (Suite) - Copywriting Senior (hero, footer, Stack→Expertise, emoji→SVG)*
