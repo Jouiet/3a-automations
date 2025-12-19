@@ -1,0 +1,53 @@
+# 3A Automation - Auto Deploy Website to Hostinger VPS
+# Version: 1.0 | Date: 2025-12-19
+#
+# TRIGGER: Push to main branch affecting landing-page-hostinger/**
+# ACTION: Redeploy Docker container on Hostinger VPS
+#
+# SETUP REQUIRED (one-time):
+# 1. GitHub Secrets → HOSTINGER_API_KEY (from hpanel.hostinger.com → API)
+# 2. GitHub Variables → HOSTINGER_VM_ID (1168256)
+
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'landing-page-hostinger/**'
+
+  # Manual trigger option
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Hostinger VPS
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Hostinger VPS
+        uses: hostinger/deploy-on-vps@v2
+        with:
+          api-key: ${{ secrets.HOSTINGER_API_KEY }}
+          virtual-machine: ${{ vars.HOSTINGER_VM_ID }}
+          project-name: 3a-website
+          docker-compose-path: landing-page-hostinger/docker-compose.yml
+
+      - name: Verify deployment
+        run: |
+          echo "Waiting for deployment to complete..."
+          sleep 30
+
+          echo "Checking site availability..."
+          HTTP_STATUS=$(curl -sI https://3a-automation.com | head -1 | grep -o '[0-9]\{3\}')
+
+          if [ "$HTTP_STATUS" = "200" ]; then
+            echo "✅ Deployment successful! Site is live."
+          else
+            echo "⚠️ Site returned HTTP $HTTP_STATUS - may need investigation"
+            exit 1
+          fi

@@ -1,0 +1,57 @@
+# 3A Automation - Docker Compose for Hostinger VPS
+# Version: 1.0 | Date: 2025-12-19
+#
+# ARCHITECTURE OPTIMISÉE:
+# - Volume persistant: les fichiers survivent aux redémarrages
+# - Startup script intelligent: git clone OU git pull selon besoin
+# - Compatible GitHub Action hostinger/deploy-on-vps@v2
+#
+# USAGE:
+# - Automatique via GitHub Action (sur push)
+# - Manuel: POST /api/vps/v1/virtual-machines/{id}/docker
+
+services:
+  website:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - website_content:/usr/share/nginx/html
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.website.rule=Host(`3a-automation.com`) || Host(`www.3a-automation.com`)
+      - traefik.http.routers.website.tls=true
+      - traefik.http.routers.website.entrypoints=web,websecure
+      - traefik.http.routers.website.tls.certresolver=mytlschallenge
+      - traefik.http.services.website.loadbalancer.server.port=80
+    networks:
+      - root_default
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        set -e
+        apk add --no-cache git
+
+        # Check if content exists (volume persistant)
+        if [ -f /usr/share/nginx/html/index.html ]; then
+          echo "Content exists - pulling updates..."
+          cd /usr/share/nginx/html
+          git pull origin main 2>/dev/null || echo "Git pull skipped (not a git repo)"
+        else
+          echo "First deploy - cloning repository..."
+          rm -rf /usr/share/nginx/html/*
+          git clone --depth 1 https://github.com/Jouiet/3a-automations.git /tmp/repo
+          cp -r /tmp/repo/landing-page-hostinger/* /usr/share/nginx/html/
+          rm -rf /tmp/repo
+        fi
+
+        echo "Starting nginx..."
+        nginx -g 'daemon off;'
+
+volumes:
+  website_content:
+    name: 3a-website-content
+
+networks:
+  root_default:
+    external: true
