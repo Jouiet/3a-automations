@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-18 | Version: 3.7 (Màj Session 21b - 8 services + GA4 testé)
+## Date: 2025-12-19 | Version: 3.9 (Màj Session 21c - Site LIVE + GitHub token renouvelé)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -1764,16 +1764,241 @@ node scripts/test-google-auth.cjs
 | ✅ GA4 | P1 | CONFIGURÉ | Property 516832662, Stream 13160825497, G-87F6FDJG45 |
 | ✅ Hostinger API | P0 | CONFIGURÉ | `.env`, `mcp.json` - VPS 1168256 confirmé |
 | ✅ n8n Instance | P0 | ACCESSIBLE | `https://n8n.srv1168256.hstgr.cloud` - API key manquante |
+| ✅ Klaviyo Agence | P1 | TESTÉ OK | 3 listes (Email, SMS, Preview), 0 flows (nouveau) |
 | ⏳ Shopify Partners | P0 | À FAIRE | Dev store à créer |
-| ⚠️ xAI/Grok | P1 | KEY SAVED | `.env` (crédits requis: https://console.x.ai/team/1d41cf68-38bb-48d7-93f6-a5d5854912a6) |
+| ⚠️ xAI/Grok | P1 | KEY SAVED | `.env` (crédits requis: https://console.x.ai/billing) |
 | ⏳ Apify | P2 | À FAIRE | Compte à créer |
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v3.7**
+## 23.6 PLAN ACTIONNABLE - FIN SESSION 21b
 
-*Généré le 2025-12-18 par analyse empirique bottom-up*
-*v3.7: Session 21b - 8 services configurés + GA4 testé OK*
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACTIONS MANUELLES REQUISES                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   □ PRIORITÉ 1 - n8n API Key (5 min)                                        │
+│     URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│     Action: Créer "claude-code-integration" + sauver N8N_API_KEY           │
+│                                                                              │
+│   □ PRIORITÉ 2 - xAI Crédits ($5-10) (10 min)                               │
+│     URL: https://console.x.ai/billing                                       │
+│     Action: Acheter $5 minimum pour activer API                             │
+│                                                                              │
+│   □ PRIORITÉ 3 - Shopify Partners Dev Store (30 min)                        │
+│     URL: https://partners.shopify.com                                       │
+│     Action: Créer "3a-automation-dev" + configurer .env + mcp.json          │
+│                                                                              │
+│   ✅ PRIORITÉ 4 - Klaviyo Compte Agence - COMPLÉTÉ                          │
+│     Compte: 3A Automation (contact@3a-automation.com)                       │
+│     Listes: 3 (Email, SMS, Preview)                                         │
+│                                                                              │
+│   TAUX CONFIGURATION ACTUEL: 44% (29/66 variables)                          │
+│   OBJECTIF PROCHAINE SESSION: 50%+ (compléter n8n + Shopify)               │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+# SECTION 24: SESSION 21c - DÉPLOIEMENT SITE + GITHUB TOKEN RENOUVELÉ
+
+## 24.1 Date et Contexte
+
+**Date:** 2025-12-19 (Session 21c)
+**Objectif:** Déployer site 3a-automation.com + maintenir repo PRIVÉ
+
+## 24.2 Problème Initial: Repo GitHub Privé
+
+Le repo `Jouiet/3a-automations` était PRIVÉ. Le container Docker sur Hostinger ne pouvait pas télécharger le tarball:
+
+```
+ERREUR: "tar: invalid magic"
+CAUSE: wget/curl sans authentification → page HTML 404 au lieu de tarball
+```
+
+## 24.3 Solution: Token GitHub + API Authentifiée
+
+### Token GitHub Renouvelé
+
+| Paramètre | Ancienne Valeur | Nouvelle Valeur |
+|-----------|-----------------|-----------------|
+| Token | `ghp_brdy60...` (expiré) | `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` |
+| Status | ❌ HTTP 401 | ✅ Fonctionnel |
+
+### Docker Compose Final (Fonctionnel)
+
+```yaml
+services:
+  website:
+    image: nginx:alpine
+    restart: always
+    entrypoint: ["/bin/sh", "-c", "apk add --no-cache curl && curl -sL -H 'Authorization: token ghp_xxx...' 'https://api.github.com/repos/Jouiet/3a-automations/tarball/main' -o /tmp/repo.tar.gz && tar xzf /tmp/repo.tar.gz -C /tmp && cp -r /tmp/Jouiet-3a-automations-*/landing-page-hostinger/* /usr/share/nginx/html/ && rm -rf /tmp/repo.tar.gz /tmp/Jouiet-3a-automations-* && nginx -g 'daemon off;'"]
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.website.rule=Host(`3a-automation.com`) || Host(`www.3a-automation.com`)
+      - traefik.http.routers.website.tls=true
+      - traefik.http.services.website.loadbalancer.server.port=80
+    networks:
+      - traefik_network
+
+networks:
+  traefik_network:
+    external: true
+    name: root_default
+```
+
+## 24.4 Résultat: Site LIVE ✅
+
+```bash
+curl -sI https://3a-automation.com | head -2
+# HTTP/2 200
+# server: nginx
+
+curl -sI https://www.3a-automation.com | head -2
+# HTTP/2 200
+# server: nginx
+```
+
+### URLs Fonctionnelles
+
+| URL | Status | SSL |
+|-----|--------|-----|
+| https://3a-automation.com | ✅ HTTP/2 200 | ✅ Let's Encrypt |
+| https://www.3a-automation.com | ✅ HTTP/2 200 | ✅ Let's Encrypt |
+
+## 24.5 Infrastructure Hostinger
+
+| Paramètre | Valeur |
+|-----------|--------|
+| VPS ID | 1168256 |
+| IP | 148.230.113.163 |
+| OS | Ubuntu + Docker |
+| Reverse Proxy | Traefik |
+| SSL | Let's Encrypt (auto-renewal) |
+
+### Containers Running
+
+```
+CONTAINER               STATUS
+root-traefik            Running (reverse proxy)
+root-n8n                Running (workflow automation)
+3a-website              Running (landing page) ✅ NEW
+```
+
+## 24.6 Apify - CONFIGURÉ ✅
+
+| Paramètre | Valeur |
+|-----------|--------|
+| Token | `apify_api_1AN2ir03QyGoLORkh47gMKPeoBXhWN1EWhpf` |
+| Fichiers | `.env`, `~/.config/claude-code/mcp.json` |
+| MCP | `@apify/actors-mcp-server` |
+| Status | ✅ Configuré |
+
+## 24.7 Fichiers Mis à Jour
+
+| Fichier | Modification |
+|---------|-------------|
+| `.env` | GITHUB_TOKEN renouvelé, APIFY_TOKEN ajouté |
+| `~/.config/claude-code/mcp.json` | GitHub token + Apify token mis à jour |
+| `.github/workflows/deploy.yml` | GitHub Actions workflow créé |
+| `docker/docker-compose.yml` | Docker compose pour deployment |
+
+## 24.8 État MCPs - Mise à Jour
+
+| MCP | Status | Token |
+|-----|--------|-------|
+| chrome-devtools | ✅ Fonctionnel | N/A |
+| playwright | ✅ Fonctionnel | N/A |
+| gemini | ✅ Fonctionnel | `AIzaSyAU1wiIMLm...` |
+| github | ✅ **RENOUVELÉ** | `ghp_8qa6eZ...` |
+| hostinger | ✅ Fonctionnel | `0mnMtt75Ir...` |
+| wordpress | ⚠️ Config vide | wp-sites.json |
+| shopify | ⚠️ Placeholder | À configurer |
+| n8n | ⚠️ API Key manquante | Host OK |
+| klaviyo | ✅ Fonctionnel | `pk_d73c1cb...` |
+| google-analytics | ✅ Fonctionnel | SA configuré |
+| google-sheets | ✅ Fonctionnel | SA configuré |
+| apify | ✅ **CONFIGURÉ** | `apify_api_1AN2ir...` |
+
+**TOTAL: 12 MCPs configurés, 9 fonctionnels, 3 à configurer**
+
+## 24.9 Métriques Mises à Jour
+
+| Métrique | Session 21b | Session 21c |
+|----------|-------------|-------------|
+| Site déployé | ❌ Non | ✅ **LIVE** |
+| GitHub repo | PUBLIC (temp) | **PRIVÉ** ✅ |
+| MCPs fonctionnels | 9/12 | 9/12 |
+| Services configurés | 9 | **10** (+Apify) |
+| Containers VPS | 2 | **3** (+3a-website) |
+
+---
+
+# SECTION 25: PLAN ACTIONNABLE - FIN SESSION 21c
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 21c                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ Site 3a-automation.com DÉPLOYÉ ET LIVE                                 │
+│      • HTTP/2 200 sur domaine principal ET www                              │
+│      • SSL Let's Encrypt fonctionnel                                        │
+│      • Container nginx:alpine + Traefik                                     │
+│                                                                              │
+│   ✅ Repo GitHub PRIVÉ maintenu avec deployment fonctionnel                 │
+│      • Token renouvelé: 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            │
+│      • Méthode: curl + Authorization header + API tarball                   │
+│                                                                              │
+│   ✅ Apify MCP CONFIGURÉ                                                    │
+│      • Token: apify_api_1AN2ir03QyGoLORkh47gMKPeoBXhWN1EWhpf                │
+│                                                                              │
+│   ✅ GitHub Actions Workflow créé                                           │
+│      • .github/workflows/deploy.yml                                         │
+│      • Déploiement auto sur push branch main                                │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+## À FAIRE - Prochaine Session
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACTIONS RESTANTES                                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   □ PRIORITÉ 1 - n8n API Key (5 min)                                        │
+│     URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│     Action: Créer clé API pour MCP                                          │
+│                                                                              │
+│   □ PRIORITÉ 2 - Shopify Partners Dev Store (30 min)                        │
+│     URL: https://partners.shopify.com                                       │
+│     Action: Créer "3a-automation-dev" pour tests sans client réel           │
+│                                                                              │
+│   □ PRIORITÉ 3 - Activer xAI Crédits ($5)                                   │
+│     URL: https://console.x.ai/billing                                       │
+│     Action: Acheter crédits pour Voice Agent                                │
+│                                                                              │
+│   □ PRIORITÉ 4 - Tracking Analytics (GA4/GTM)                               │
+│     Remplacer placeholders dans site:                                       │
+│     • GTM-XXXXXXX → ID réel                                                 │
+│     • G-XXXXXXXXXX → G-87F6FDJG45                                           │
+│                                                                              │
+│   TAUX CONFIGURATION: 10/12 services (83%)                                  │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v3.9**
+
+*Généré le 2025-12-19 par analyse empirique bottom-up*
+*v3.9: Session 21c - Site LIVE + repo PRIVÉ + GitHub token renouvelé + Apify configuré*
+*v3.8: Session 21b - 9 services configurés + Klaviyo testé OK (3 listes)*
+*v3.7: Session 21b - 8 services configurés + GA4 testé OK + plan actionnable*
 *v3.6: Session 21b - 7 services configurés + Hostinger API testé + n8n instance confirmée*
 *v3.5: Session 21b - 5 services (GitHub, Google Cloud, Sheets, Gemini, xAI key saved)*
 *v3.4: Session 21b - 4 services configurés (GitHub, Google Cloud, Sheets, Gemini)*

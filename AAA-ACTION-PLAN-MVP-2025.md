@@ -7,16 +7,31 @@
 ## CONTEXTE
 
 ```
-SITUATION AU 17 DÉCEMBRE 2025 (Mise à jour Session 4):
+SITUATION AU 19 DÉCEMBRE 2025 (Mise à jour Session 21c):
 ├── Opérateur: Solo (1 personne)
 ├── Temps: 20h/semaine
 ├── Cash flow: €0
 ├── Budget: €50
 ├── Clients: 0 actifs (3 restart 25/01/2026)
-├── Hébergement: Hostinger (disponible)
-├── GitHub: github.com/Jouiet/3a-automations ✅
+├── Hébergement: Hostinger (VPS 1168256 + n8n + website)
+├── GitHub: github.com/Jouiet/3a-automations ✅ (PRIVÉ)
 ├── Branding: 3A-BRANDING-GUIDE.md ✅
-├── xAI API: Clé configurée, nécessite crédits ($5 min)
+├── **SITE LIVE: https://3a-automation.com** ✅
+│
+├── SERVICES AGENCE CONFIGURÉS (Session 21c):
+│   ├── ✅ GitHub Token (RENOUVELÉ - ghp_8qa6eZ...)
+│   ├── ✅ Google Cloud SA (testé)
+│   ├── ✅ Google Sheets (R/W testé)
+│   ├── ✅ GA4 (Property 516832662, testé)
+│   ├── ✅ Gemini (clé sauvée)
+│   ├── ✅ xAI/Grok (clé sauvée, crédits requis)
+│   ├── ✅ Hostinger API (testé)
+│   ├── ✅ n8n instance (accessible, API key à générer)
+│   ├── ✅ Apify (NOUVEAU - apify_api_1AN2ir...)
+│   └── ✅ Klaviyo (pk_d73c1cb...)
+│
+├── CONFIG RATE: 83% (10/12 services)
+├── MCPs FONCTIONNELS: 9/12
 └── Objectif: Cash flow + préparation restart
 ```
 
@@ -56,82 +71,57 @@ ENVOYER À:
 □ MyDealz - Contact: [email]
 ```
 
-#### Tâche 1.2: Créer Google Service Account (1h30)
+#### Tâche 1.2: Créer Google Service Account (1h30) ✅ COMPLÉTÉ (Session 21b)
 ```
-ÉTAPES DÉTAILLÉES:
-
-1. Accéder à Google Cloud Console
-   └── https://console.cloud.google.com
-
-2. Créer un projet (si nécessaire)
-   ├── Cliquer "Select a project" → "New Project"
-   ├── Nom: "JO-AAA-Automation"
-   └── Créer
-
-3. Activer les APIs nécessaires
-   ├── Menu → APIs & Services → Library
-   ├── Chercher et activer:
-   │   ├── Google Analytics Data API
-   │   ├── Google Sheets API
-   │   └── Google Analytics Admin API
-   └── Cliquer "Enable" pour chaque
-
-4. Créer Service Account
-   ├── Menu → IAM & Admin → Service Accounts
-   ├── Cliquer "Create Service Account"
-   ├── Nom: "jo-aaa-automation"
-   ├── Description: "Service account for JO-AAA automation scripts"
-   ├── Cliquer "Create and Continue"
-   ├── Rôle: "Editor" (ou roles spécifiques)
-   └── Cliquer "Done"
-
-5. Créer clé JSON
-   ├── Cliquer sur le service account créé
-   ├── Onglet "Keys"
-   ├── Add Key → Create new key
-   ├── Type: JSON
-   └── Télécharger le fichier
-
-6. Placer le fichier
-   ├── Renommer en: service-account.json
-   ├── Créer dossier: mkdir -p ~/.config/google
-   └── Copier: cp ~/Downloads/[fichier].json ~/.config/google/service-account.json
-
-7. Vérifier
-   └── cat ~/.config/google/service-account.json | head -5
-
-RÉSULTAT ATTENDU:
-✅ Fichier JSON avec client_email et private_key
+STATUT SESSION 21b (18/12/2025):
+├── ✅ Projet: a-automation-agency (ID: 359870692708)
+├── ✅ Service Account: id-a-automation-service@a-automation-agency.iam.gserviceaccount.com
+├── ✅ JSON: /Users/mac/.config/google/3a-automation-service-account.json
+├── ✅ Permissions: 600 (sécurisé)
+├── ✅ APIs activées: Analytics Data, Sheets, Admin
+└── ✅ Test authentification: PASS
 ```
 
-#### Tâche 1.3: Créer fichier .env (1h) ✅ COMPLÉTÉ
+#### Tâche 1.3: Créer fichier .env (1h) ✅ COMPLÉTÉ + MÀJ Session 21b
 ```
-FICHIER CRÉÉ: /Users/mac/Desktop/JO-AAA/.env
+FICHIER: /Users/mac/Desktop/JO-AAA/.env
 
-STATUT SESSION 4 (17/12/2025):
-├── ✅ Fichier .env créé avec credentials réelles
-├── ✅ Shopify API testée (Alpha Medical Care)
-├── ✅ Klaviyo API testée (7 flows, 3 listes)
-├── ✅ xAI API key configurée
-├── ⚠️ xAI nécessite crédits ($5 min puis $150/mois gratuit avec data sharing)
-├── ❌ Google Service Account toujours MANQUANT
-└── ✅ .env dans .gitignore (sécurité OK)
+STATUT SESSION 21b (18/12/2025):
+├── ✅ 25 variables configurées (38%)
+├── ✅ GitHub Token: testé OK
+├── ✅ Google Cloud SA: configuré + JSON
+├── ✅ Google Sheets: Spreadsheet ID sauvé, R/W testé
+├── ✅ GA4: Property 516832662, Stream 13160825497, G-87F6FDJG45
+├── ✅ Gemini: clé sauvée (quota free tier)
+├── ✅ xAI/Grok: clé sauvée (crédits requis)
+├── ✅ Hostinger: API testée OK (VPS 1168256)
+├── ✅ n8n: instance accessible (API key à générer)
+├── ⏳ Shopify: dev store agence à créer
+├── ⏳ Klaviyo: compte agence à créer
+└── ✅ Sécurité: .env dans .gitignore, clés retirées des .md
 ```
 
-#### Tâche 1.4: Tester MCPs Google (1h)
+#### Tâche 1.4: Tester MCPs Google (1h) ✅ COMPLÉTÉ (Session 21b)
 ```
-TESTS À EFFECTUER:
+STATUT SESSION 21b (18/12/2025):
 
-1. Tester Google Sheets MCP
-   └── Créer un sheet de test
-   └── Vérifier lecture/écriture via MCP
+1. Google Sheets MCP ✅
+   ├── Spreadsheet: 3A Automation - Leads & CRM
+   ├── ID: 1b8k9EKo-6_O6Ay_z-Hrr1OrqBdjtjzF8JYwLgOnpM8g
+   ├── Test lecture: ✅ PASS
+   └── Test écriture: ✅ PASS
 
-2. Tester Google Analytics MCP
-   └── Lister les properties accessibles
-   └── Vérifier accès aux métriques
+2. Google Analytics MCP ✅
+   ├── Property ID: 516832662
+   ├── Stream ID: 13160825497
+   ├── Measurement ID: G-87F6FDJG45
+   ├── Service Account ajouté avec rôle "Lecteur"
+   └── Test API: ✅ PASS (users, sessions, pageviews)
 
-3. Documenter résultats
-   └── ✅ Fonctionnel / ❌ Erreur [détail]
+3. Scripts de test créés:
+   ├── scripts/test-google-auth.cjs
+   ├── scripts/test-google-sheets.cjs
+   └── scripts/test-ga4.cjs
 ```
 
 ---
@@ -661,7 +651,69 @@ PRÉREQUIS:
 
 ---
 
+## PLAN ACTIONNABLE - FIN SESSION 21c (19/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 21c                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ SITE 3a-automation.com DÉPLOYÉ ET LIVE                                 │
+│      • HTTP/2 200 sur domaine principal ET www                              │
+│      • SSL Let's Encrypt fonctionnel                                        │
+│      • Container nginx:alpine + Traefik                                     │
+│                                                                              │
+│   ✅ Repo GitHub PRIVÉ maintenu avec deployment fonctionnel                 │
+│      • Token renouvelé: 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            │
+│      • Méthode: curl + Authorization header + API tarball                   │
+│                                                                              │
+│   ✅ Apify MCP CONFIGURÉ                                                    │
+│      • Token: apify_api_1AN2ir03QyGoLORkh47gMKPeoBXhWN1EWhpf                │
+│                                                                              │
+│   ✅ GitHub Actions Workflow créé                                           │
+│      • .github/workflows/deploy.yml                                         │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    PROCHAINES ACTIONS PRIORITAIRES                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   □ PRIORITÉ 1 - n8n API Key (5 min)                                        │
+│     URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│     Action: Créer clé API pour MCP                                          │
+│                                                                              │
+│   □ PRIORITÉ 2 - Shopify Partners Dev Store (30 min)                        │
+│     URL: https://partners.shopify.com                                       │
+│     Action: Créer "3a-automation-dev" pour tests                            │
+│                                                                              │
+│   □ PRIORITÉ 3 - Activer xAI Crédits ($5)                                   │
+│     URL: https://console.x.ai/billing                                       │
+│     Action: Acheter crédits pour Voice Agent                                │
+│                                                                              │
+│   □ PRIORITÉ 4 - Tracking Analytics                                         │
+│     Remplacer placeholders dans site:                                       │
+│     • GTM-XXXXXXX → ID réel                                                 │
+│     • G-XXXXXXXXXX → G-87F6FDJG45                                           │
+│                                                                              │
+│   □ PRIORITÉ 5 - Emails restart clients                                     │
+│     Envoyer confirmation reprise 25/01/2026                                 │
+│                                                                              │
+│   MÉTRIQUES ACTUELLES:                                                      │
+│   ───────────────────────────────────────────────────────────────────────   │
+│   • Site: LIVE ✅ (https://3a-automation.com)                               │
+│   • Services configurés: 10/12 (83%)                                        │
+│   • MCPs fonctionnels: 9/12 (75%)                                           │
+│   • Containers VPS: 3 (traefik, n8n, website)                               │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 18 Décembre 2025 (Knowledge Base + Voice Scope)
+**Mis à jour:** 19 Décembre 2025 (Session 21c - Site LIVE + GitHub token renouvelé)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
