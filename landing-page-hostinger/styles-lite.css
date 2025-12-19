@@ -363,6 +363,64 @@ body {
   color: var(--text-secondary);
 }
 
+/* Flywheel Promo Banner */
+.flywheel-promo {
+  margin-top: var(--spacing-2xl);
+  text-align: center;
+}
+
+.flywheel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: linear-gradient(135deg, rgba(79, 186, 241, 0.1), rgba(43, 102, 133, 0.1));
+  border: 1px solid rgba(79, 186, 241, 0.3);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.flywheel-link:hover {
+  background: linear-gradient(135deg, rgba(79, 186, 241, 0.2), rgba(43, 102, 133, 0.2));
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.promo-icon {
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+}
+
+.promo-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.promo-text strong {
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.promo-text span {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.promo-arrow {
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.flywheel-link:hover .promo-arrow {
+  transform: translateX(4px);
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    CATALOG CATEGORIES
    ───────────────────────────────────────────────────────────────────────────── */
@@ -993,6 +1051,13 @@ code {
   margin-bottom: var(--spacing-xl);
 }
 
+.cta-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    BUTTONS
    ───────────────────────────────────────────────────────────────────────────── */
@@ -1037,6 +1102,58 @@ code {
   font-size: 1.125rem;
 }
 
+/* Cyber Buttons (CTA) */
+.btn-cyber {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary-cyber {
+  background: var(--gradient-cyber);
+  color: var(--secondary);
+}
+
+.btn-primary-cyber .btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary-cyber:hover .btn-glow {
+  left: 100%;
+}
+
+.btn-primary-cyber:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-strong);
+}
+
+.btn-secondary-cyber {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid rgba(79, 186, 241, 0.3);
+}
+
+.btn-secondary-cyber:hover {
+  border-color: var(--primary);
+  background: rgba(79, 186, 241, 0.1);
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    FOOTER
    ───────────────────────────────────────────────────────────────────────────── */
@@ -1072,7 +1189,27 @@ code {
   color: var(--text-light);
   font-size: 0.875rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.footer-email {
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--primary);
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.footer-email:hover {
+  opacity: 1;
 }
 
 .footer-links-ultra ul {
