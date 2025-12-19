@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 5.9 (Màj Session 36 - Lang-Switch + Currency Conversion)
+## Date: 2025-12-19 | Version: 6.0 (Màj Session 37 - API Tests + CRM Geo-Targeting)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -646,7 +646,7 @@ logo.png:        273KB → <50KB  (SVG ou WebP)
 
 # SECTION 8: MÉTRIQUES DE RÉFÉRENCE
 
-## État Actuel (19/12/2025 - Session 35 Update)
+## État Actuel (19/12/2025 - Session 37 Update)
 
 | Catégorie | Métrique | Valeur |
 |-----------|----------|--------|
@@ -657,11 +657,17 @@ logo.png:        273KB → <50KB  (SVG ou WebP)
 | Site | Pages EN | **13** |
 | Site | Total Pages | **26** ✅ |
 | i18n | hreflang tags | **26/26 (100%)** ✅ |
-| i18n | Geo-detection | **✅ geo-locale.js** |
-| i18n | Marchés | **3 (MA/Maghreb, EU, International)** |
-| Automatisations | Génériques | **52 (validées 100%)** ✅ |
+| i18n | Lang-switch | **26/26 (100%)** ✅ |
+| i18n | Geo-detection | **✅ geo-locale.js v2.0** |
+| i18n | Currency conversion | **✅ EUR/USD/MAD/GBP** |
+| i18n | Marchés | **8** (Europe, Maghreb, NA, UK, LATAM, APAC, ME, ROW) |
+| Automatisations | Total | **64** ✅ |
+| Automatisations | CRM Geo-Targeting | **3 nouveaux** (Klaviyo, Multi-CRM, geo-markets) |
 | Automatisations | Legacy analysés | 218 |
-| APIs | Fonctionnelles | **10/12 (83%)** |
+| APIs | Fonctionnelles | **3/7 (43%)** - Test empirique 19/12 |
+| APIs | Détail | Klaviyo ✅, Apify ✅, GA4 ✅ |
+| APIs | Non configurées | Shopify ⚠️, n8n ⚠️, Meta ⚠️ |
+| APIs | Bloquées | xAI 🚫 (crédits requis) |
 | MCPs | Configurés | **12** ✅ |
 | Landing | Schema.org | **12/12 FR (100%)** ✅ |
 | Landing | Images optimisées | **2/2 critiques (100%)** ✅ |

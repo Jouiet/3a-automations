@@ -4,6 +4,7 @@
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 6.6 | 37 | **API TESTS + VERIFICATION**: Test empirique 7 APIs (3/7 OK), Site FR+EN LIVE vérifié (26 pages HTTP 200), Lang-switch fonctionnel, FORENSIC-AUDIT v6.0 |
 | 6.5 | 36b | **CRM GEO-TARGETING**: Module geo-markets.cjs (8 marchés), Templates Klaviyo + Multi-CRM (HubSpot, Mailchimp, Brevo, AC), docs/geo-targeting.md, 64 automatisations total |
 | 6.4 | 36 | **LANG-SWITCH + CURRENCY**: Sélecteur langue FR↔EN ajouté 26 pages, geo-locale.js v2.0 (conversion devises real-time EUR/USD/MAD/GBP), Pricing pages intégrées, data-price-eur support |
 | 6.3 | 35 | **i18n COMPLET**: 13 pages EN créées, hreflang SEO 26/26 pages, geo-locale.js v1.0, sitemap.xml 26 URLs, 3 marchés (MA, EU, International) |
