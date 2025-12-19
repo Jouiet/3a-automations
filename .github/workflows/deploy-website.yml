@@ -1,11 +1,13 @@
 # 3A Automation - Auto Deploy Website to Hostinger VPS
-# Version: 1.0 | Date: 2025-12-19
+# Version: 2.0 | Date: 2025-12-19
 #
-# TRIGGER: Push to main branch affecting landing-page-hostinger/**
-# ACTION: Redeploy Docker container on Hostinger VPS
+# ARCHITECTURE:
+# - Trigger: Push to main affecting landing-page-hostinger/**
+# - Method: Direct Hostinger API call (not hostinger/deploy-on-vps action)
+# - Reason: Full control over docker-compose, guaranteed fresh git clone
 #
 # SETUP REQUIRED (one-time):
-# 1. GitHub Secrets → HOSTINGER_API_KEY (from hpanel.hostinger.com → API)
+# 1. GitHub Secrets → HOSTINGER_API_KEY
 # 2. GitHub Variables → HOSTINGER_VM_ID (1168256)
 
 name: Deploy Website
@@ -26,28 +28,104 @@ jobs:
     name: Deploy to Hostinger VPS
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Deploy via Hostinger API
+        env:
+          HOSTINGER_API_KEY: ${{ secrets.HOSTINGER_API_KEY }}
+          HOSTINGER_VM_ID: ${{ vars.HOSTINGER_VM_ID }}
+        run: |
+          echo "Deploying to Hostinger VPS..."
 
-      - name: Deploy to Hostinger VPS
-        uses: hostinger/deploy-on-vps@v2
-        with:
-          api-key: ${{ secrets.HOSTINGER_API_KEY }}
-          virtual-machine: ${{ vars.HOSTINGER_VM_ID }}
-          project-name: 3a-website
-          docker-compose-path: landing-page-hostinger/docker-compose.yml
+          # Docker Compose content (inline, with git clone command)
+          # This approach guarantees fresh content on every deploy
+          COMPOSE_CONTENT='services:
+            website:
+              image: nginx:alpine
+              restart: always
+              labels:
+                - traefik.enable=true
+                - traefik.http.routers.website.rule=Host(`3a-automation.com`) || Host(`www.3a-automation.com`)
+                - traefik.http.routers.website.tls=true
+                - traefik.http.routers.website.entrypoints=web,websecure
+                - traefik.http.routers.website.tls.certresolver=mytlschallenge
+                - traefik.http.services.website.loadbalancer.server.port=80
+              networks:
+                - root_default
+              command: sh -c '\''apk add --no-cache git && rm -rf /usr/share/nginx/html/* && git clone --depth 1 https://github.com/Jouiet/3a-automations.git /tmp/repo && cp -r /tmp/repo/landing-page-hostinger/* /usr/share/nginx/html/ && rm -rf /tmp/repo && nginx -g "daemon off;"'\''
 
-      - name: Verify deployment
+          networks:
+            root_default:
+              external: true'
+
+          # Create JSON payload
+          PAYLOAD=$(jq -n \
+            --arg project "3a-website" \
+            --arg content "$COMPOSE_CONTENT" \
+            '{project_name: $project, content: $content}')
+
+          # Call Hostinger API
+          RESPONSE=$(curl -s -X POST \
+            "https://developers.hostinger.com/api/vps/v1/virtual-machines/${HOSTINGER_VM_ID}/docker" \
+            -H "Authorization: Bearer ${HOSTINGER_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+
+          echo "API Response: $RESPONSE"
+
+          # Extract action ID
+          ACTION_ID=$(echo "$RESPONSE" | jq -r '.id // empty')
+
+          if [ -z "$ACTION_ID" ]; then
+            echo "❌ Failed to start deployment"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+          echo "Deployment started with action ID: $ACTION_ID"
+          echo "ACTION_ID=$ACTION_ID" >> $GITHUB_ENV
+
+      - name: Wait for deployment
+        env:
+          HOSTINGER_API_KEY: ${{ secrets.HOSTINGER_API_KEY }}
+          HOSTINGER_VM_ID: ${{ vars.HOSTINGER_VM_ID }}
         run: |
           echo "Waiting for deployment to complete..."
-          sleep 30
 
-          echo "Checking site availability..."
-          HTTP_STATUS=$(curl -sI https://3a-automation.com | head -1 | grep -o '[0-9]\{3\}')
+          for i in {1..12}; do
+            sleep 10
+
+            STATUS=$(curl -s \
+              "https://developers.hostinger.com/api/vps/v1/virtual-machines/${HOSTINGER_VM_ID}/actions/${ACTION_ID}" \
+              -H "Authorization: Bearer ${HOSTINGER_API_KEY}" \
+              | jq -r '.state')
+
+            echo "Status check $i: $STATUS"
+
+            if [ "$STATUS" = "success" ]; then
+              echo "✅ Deployment completed successfully!"
+              break
+            elif [ "$STATUS" = "error" ]; then
+              echo "❌ Deployment failed"
+              exit 1
+            fi
+          done
+
+      - name: Verify site
+        run: |
+          echo "Verifying site is live..."
+          sleep 20
+
+          HTTP_STATUS=$(curl -sI https://3a-automation.com | head -1 | awk '{print $2}')
 
           if [ "$HTTP_STATUS" = "200" ]; then
-            echo "✅ Deployment successful! Site is live."
+            echo "✅ Site is live (HTTP 200)"
+
+            # Verify tracking codes
+            if curl -s https://3a-automation.com | grep -q "GTM-WLVJQC3M"; then
+              echo "✅ GTM tracking verified"
+            else
+              echo "⚠️ GTM not found - content may not be fully loaded"
+            fi
           else
-            echo "⚠️ Site returned HTTP $HTTP_STATUS - may need investigation"
+            echo "⚠️ Site returned HTTP $HTTP_STATUS"
             exit 1
           fi
