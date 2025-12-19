@@ -9,8 +9,8 @@
 const path = require('path');
 const fs = require('fs');
 
-// Charger .env depuis la racine du projet
-require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+// Charger .env depuis la racine du projet (3 niveaux: core → agency → automations → racine)
+require('dotenv').config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
 console.log('');
 console.log('═══════════════════════════════════════════════════════════════');

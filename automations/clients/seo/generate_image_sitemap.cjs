@@ -137,7 +137,7 @@ async function main() {
   console.log('1. Upload sitemap_images.xml to your web server root');
   console.log('2. Add to main sitemap.xml:');
   console.log('   <sitemap>');
-  console.log('     <loc>https://mydealz.shop/sitemap_images.xml</loc>');
+  console.log(`     <loc>${STORE_URL}/sitemap_images.xml</loc>`);
   console.log('   </sitemap>');
   console.log('3. Submit to Google Search Console');
   console.log('');

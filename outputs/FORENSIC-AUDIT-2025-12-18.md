@@ -1,38 +1,84 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 4.7 (Màj Session 24 - Audit Factuel MCPs)
+## Date: 2025-12-19 | Version: 5.0 (Màj Session 27 - Généricisation Complète)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 1: INVENTAIRE FACTUEL
+# SECTION 0: ÉTAT ACTUEL (19 Dec 2025 - Post-Généricisation)
 
-## 1.1 Structure du Dossier
+## Résultat Généricisation
+
+| Métrique | Avant | Après |
+|----------|-------|-------|
+| Scripts hardcodés client | 4 | **0** ✅ |
+| Scripts utilisant process.env | 44 | **48** |
+| Chemins .env corrigés | N/A | **4 scripts** |
+
+## Scripts Corrigés (Session 27)
+
+1. `video/generate-promo-video.cjs` - Henderson → Generic
+2. `google-merchant/generate_merchant_center_feed.py` - MyDealz → Generic
+3. `analytics/analyze-ga4-source.cjs` - Henderson → Generic
+4. `seo/generate_image_sitemap.cjs` - MyDealz → Generic
+5. `agency/core/test-env.cjs` - Chemin .env corrigé
+
+## APIs Fonctionnelles (Test Empirique)
+
+| API | Statut | Détail |
+|-----|--------|--------|
+| Klaviyo | ✅ 100% | 3 listes, connexion OK |
+| Google Analytics | ✅ Credentials OK | Nécessite implémentation |
+| Apify | ✅ OK | Token configuré |
+| Shopify | ⚠️ Token vide | SHOPIFY_ACCESS_TOKEN manquant |
+| n8n | ⚠️ Token manquant | N8N_API_KEY requis |
+| xAI/Grok | ❌ Crédits requis | $5 min pour activer |
+| Meta | ⚠️ Non configuré | META_ACCESS_TOKEN requis |
+
+---
+
+# SECTION 1: INVENTAIRE FACTUEL (CORRIGÉ)
+
+## 1.1 Structure RÉELLE du Dossier
 
 ```
 /Users/mac/Desktop/JO-AAA/
-├── TOTAL: 227 fichiers scripts (.cjs, .js, .py)
-├── TAILLE TOTALE: ~5MB (hors node_modules)
+├── TOTAL: 65 scripts actifs + 223 archivés
 │
-├── DOSSIERS SCRIPTS:
-│   ├── AGENCY-CORE-SCRIPTS-V3/     57 scripts  (MyDealz-specific)
-│   ├── agency-scripts-Q1-GOLD/     109 scripts (jqp1x4-7e.myshopify.com-specific)
-│   ├── alpha-medical-python-agency/ 41 scripts  (Alpha Medical-specific)
-│   ├── scripts/                     10 scripts  (Génériques)
-│   └── knowledge-base/src/          4 scripts   (RAG)
+├── SCRIPTS ACTIFS:
+│   ├── automations/
+│   │   ├── agency/core/        11 scripts  (Tests, diagnostics)
+│   │   ├── generic/             6 scripts  (Réutilisables 100%)
+│   │   ├── clients/            41 scripts  (Configurables via .env)
+│   │   └── legacy/              2 scripts  (À migrer)
+│   ├── scripts/                 1 script   (Racine)
+│   └── knowledge-base/src/      4 scripts  (RAG)
+│
+├── SCRIPTS ARCHIVÉS:
+│   └── archive/
+│       ├── mydealz-scripts/    ~60 scripts (Legacy)
+│       ├── henderson-scripts/  ~100 scripts (Legacy)
+│       └── alpha-medical-scripts/ ~40 scripts (Legacy)
 │
 ├── LANDING PAGE:
-│   └── landing-page-hostinger/     1.6MB (13 pages HTML)
+│   └── landing-page-hostinger/ 14 pages HTML
 │
 ├── DOCUMENTATION:
-│   ├── CLAUDE.md                   Mémoire projet
-│   ├── FORENSIC-AUDIT-TRUTH-*.md   Audits précédents
 │   └── 15+ documents MD
 │
 └── CONFIGURATION:
-    ├── .env                        Credentials (EXISTE)
-    ├── .mcp.json                   MCPs projet (8 déclarés)
-    └── package.json                Dependencies
+    ├── .env                    ✅ CONFIGURÉ (8/11 variables)
+    ├── .mcp.json               12 MCPs déclarés
+    └── package.json            Dependencies
 ```
+
+## ⚠️ CORRECTION CRITIQUE
+
+Les dossiers suivants N'EXISTENT PLUS:
+- ❌ `AGENCY-CORE-SCRIPTS-V3/` → Migré vers `archive/mydealz-scripts/`
+- ❌ `agency-scripts-Q1-GOLD/` → Migré vers `archive/henderson-scripts/`
+- ❌ `alpha-medical-python-agency/` → Migré vers `archive/alpha-medical-scripts/`
+
+Les scripts actifs sont maintenant dans `automations/`.
 
 ## 1.2 Scripts - Analyse Factuelle Approfondie
 

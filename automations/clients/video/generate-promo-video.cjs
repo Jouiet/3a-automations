@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 /**
- * PROMO VIDEO GENERATOR - Proof of Concept
- * Purpose: Automated screen recording of Henderson Shop user experience
+ * PROMO VIDEO GENERATOR - Generic Version
+ * Purpose: Automated screen recording of e-commerce user experience
  * Method: Puppeteer + puppeteer-screen-recorder
- * Context: Session 98++ - Marketing automation (video content)
  *
- * Scenario: Homepage → Helmets Collection → Product Details
+ * Usage:
+ *   SITE_URL=https://example.com COLLECTION=products node generate-promo-video.cjs
+ *
+ * Environment Variables:
+ *   - SITE_URL: Target website URL (required)
+ *   - COLLECTION: Collection path to showcase (default: 'collections/all')
+ *   - VIDEO_FILENAME: Output filename (default: 'promo-demo.mp4')
+ *
  * Output: MP4 video (1080p, 30fps)
  */
 
@@ -14,15 +20,28 @@ const { PuppeteerScreenRecorder } = require('puppeteer-screen-recorder');
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://www.hendersonshop.com';
+// Load .env from project root
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
+
+// Configuration from environment
+const SITE_URL = process.env.SITE_URL || process.env.SHOPIFY_STORE_URL;
+const COLLECTION = process.env.COLLECTION || 'collections/all';
 const OUTPUT_DIR = path.join(__dirname, '../promo-videos');
-const VIDEO_FILENAME = 'henderson-helmets-demo.mp4';
+const VIDEO_FILENAME = process.env.VIDEO_FILENAME || 'promo-demo.mp4';
+
+// Validate required config
+if (!SITE_URL) {
+  console.error('❌ ERREUR: SITE_URL ou SHOPIFY_STORE_URL requis');
+  console.error('   Usage: SITE_URL=https://example.com node generate-promo-video.cjs');
+  process.exit(1);
+}
 
 console.log('================================================================================');
-console.log('HENDERSON SHOP - PROMO VIDEO GENERATOR (POC)');
+console.log('PROMO VIDEO GENERATOR - GENERIC');
 console.log('================================================================================');
 console.log(`Site URL: ${SITE_URL}`);
-console.log(`Scenario: Homepage → Helmets → Product Details`);
+console.log(`Collection: ${COLLECTION}`);
+console.log(`Scenario: Homepage → Collection → Product Details`);
 console.log(`Output: ${OUTPUT_DIR}/${VIDEO_FILENAME}`);
 console.log(`Timestamp: ${new Date().toISOString()}`);
 console.log('================================================================================\n');
@@ -100,10 +119,10 @@ async function generatePromoVideo() {
     await page.evaluate(() => window.scrollBy(0, 600));
     await wait(2000);
 
-    // Navigate to Helmets collection (direct navigation more reliable than clicking)
-    console.log('\n📍 Scene 2: Helmets Collection');
-    console.log('   → Navigating to helmets collection...');
-    await page.goto(`${SITE_URL}/collections/helmets`, {
+    // Navigate to collection (direct navigation more reliable than clicking)
+    console.log(`\n📍 Scene 2: ${COLLECTION}`);
+    console.log(`   → Navigating to ${COLLECTION}...`);
+    await page.goto(`${SITE_URL}/${COLLECTION}`, {
       waitUntil: 'networkidle2',
       timeout: 30000
     });
@@ -198,7 +217,7 @@ async function generatePromoVideo() {
     console.log('================================================================================\n');
 
     console.log('📋 NEXT STEPS:');
-    console.log('1. Review video: open promo-videos/henderson-helmets-demo.mp4');
+    console.log(`1. Review video: open promo-videos/${VIDEO_FILENAME}`);
     console.log('2. Optimize for social media (optional):');
     console.log('   - Instagram: 1080x1920 (portrait)');
     console.log('   - TikTok: 1080x1920 (portrait)');
