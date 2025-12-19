@@ -1,9 +1,10 @@
 # HISTORY - Changelog 3A Automation
 
-## Sessions 27-41 (19/12/2025)
+## Sessions 27-42 (19/12/2025)
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 7.2 | 42 | **VOICE ASSISTANT INTELLIGENT**: Système de réponse intelligent avec context tracking (industry, need, lastTopic), détection industrie (BTP, ecommerce, B2B, SaaS, services, retail), détection besoins (leads, email, analytics), réponses "oui/non" contextuelles, knowledge-base.js créé (pricing, industries, FAQ, objections), multi-keyword matching, réponses spécifiques par industrie |
 | 7.1 | 41 | **VOICE WIDGET 100% + STATS FIX**: Widget branding corrigé (gradient cyber #4FBAF1→#2B6685→#10B981), Stats site corrigées (52→56 automatisations, 9→12 MCPs, 3→42+ clients), Script test empirique créé (100% pass), fadeIn/fadeOut ajoutés, CTA links fixés |
 | 7.0 | 40b | **VOICE ASSISTANT LIVE**: Widget flottant déployé 26 pages, Web Speech API (gratuit), reconnaissance vocale + synthèse, réponses pré-définies (pricing, audit, services), bilingue FR/EN |
 | 6.9 | 40 | **PRICING REFONTE BOTTOM-UP + VOICE POC**: Packs Setup (390€/790€/1490€), Retainers (290€/490€/890€/mois), processus sans appels (4 étapes), Voice AI Grok POC créé (Node.js + Python/LiveKit), sources Gartner+Forrester ajoutées, CSS nouvelles sections |
