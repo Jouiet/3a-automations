@@ -12,6 +12,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch support for mobile */
+button, a, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
 }
 
 :root {
