@@ -1,58 +1,60 @@
 /**
  * Google Apps Script - Form Handler for 3A Automation
+ * Version: 1.0
  *
- * INSTRUCTIONS DE DÉPLOIEMENT:
- * 1. Aller sur https://script.google.com
- * 2. Créer un nouveau projet
- * 3. Coller ce code
- * 4. Sauvegarder (Ctrl+S)
- * 5. Déployer > Nouveau déploiement
- * 6. Type: Application Web
- * 7. Exécuter en tant que: Moi
- * 8. Qui a accès: Tout le monde
- * 9. Copier l'ID de déploiement
- * 10. Remplacer YOUR_SCRIPT_ID dans les fichiers HTML
- *
- * Ce script:
- * - Reçoit les soumissions de formulaire
- * - Les enregistre dans Google Sheets
- * - Envoie une notification par email
+ * DEPLOYMENT INSTRUCTIONS:
+ * 1. Go to https://script.google.com
+ * 2. Create new project
+ * 3. Paste this code
+ * 4. Save (Ctrl+S)
+ * 5. Deploy > New deployment
+ * 6. Type: Web app
+ * 7. Execute as: Me
+ * 8. Who has access: Anyone
+ * 9. Copy the deployment ID
+ * 10. Replace YOUR_SCRIPT_ID in HTML files
  */
 
-// Configuration
-const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID'; // Remplacer par l'ID de votre spreadsheet
-const SHEET_NAME = 'Leads';
-const NOTIFICATION_EMAIL = 'contact@3a-automation.com';
+// Configuration - REPLACE THESE VALUES
+var CONFIG = {
+  SPREADSHEET_ID: '', // Leave empty to create new spreadsheet
+  SHEET_NAME: 'Leads',
+  NOTIFICATION_EMAIL: 'contact@3a-automation.com'
+};
 
 /**
- * Traite les requêtes POST (soumissions de formulaire)
+ * Handle POST requests (form submissions)
  */
 function doPost(e) {
   try {
-    // Parser les données du formulaire
-    const data = e.parameter;
+    var data = e.parameter;
 
-    // Enregistrer dans Google Sheets
+    // Save to Google Sheets
     saveToSheet(data);
 
-    // Envoyer notification par email
+    // Send email notification
     sendNotificationEmail(data);
 
-    // Retourner succès
+    // Return success response
     return ContentService
-      .createTextOutput(JSON.stringify({ status: 'success', message: 'Form submitted successfully' }))
+      .createTextOutput(JSON.stringify({
+        status: 'success',
+        message: 'Form submitted successfully'
+      }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
-    // Retourner erreur
     return ContentService
-      .createTextOutput(JSON.stringify({ status: 'error', message: error.toString() }))
+      .createTextOutput(JSON.stringify({
+        status: 'error',
+        message: error.toString()
+      }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
 /**
- * Traite les requêtes GET (test)
+ * Handle GET requests (test endpoint)
  */
 function doGet(e) {
   return ContentService
@@ -65,16 +67,26 @@ function doGet(e) {
 }
 
 /**
- * Enregistre les données dans Google Sheets
+ * Save form data to Google Sheets
  */
 function saveToSheet(data) {
-  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-  let sheet = ss.getSheetByName(SHEET_NAME);
+  var ss;
 
-  // Créer la feuille si elle n'existe pas
+  // Create or open spreadsheet
+  if (CONFIG.SPREADSHEET_ID === '') {
+    ss = SpreadsheetApp.create('3A Automation - Leads');
+    CONFIG.SPREADSHEET_ID = ss.getId();
+    Logger.log('Created new spreadsheet: ' + ss.getUrl());
+  } else {
+    ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  }
+
+  var sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
+
+  // Create sheet if it does not exist
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    // Ajouter les en-têtes
+    sheet = ss.insertSheet(CONFIG.SHEET_NAME);
+    // Add headers
     sheet.appendRow([
       'Timestamp',
       'Name',
@@ -90,9 +102,11 @@ function saveToSheet(data) {
       'Challenges',
       'Source'
     ]);
+    // Format header row
+    sheet.getRange(1, 1, 1, 13).setFontWeight('bold');
   }
 
-  // Ajouter la ligne de données
+  // Add data row
   sheet.appendRow([
     new Date().toISOString(),
     data.name || '',
@@ -111,64 +125,53 @@ function saveToSheet(data) {
 }
 
 /**
- * Envoie une notification par email
+ * Send email notification for new lead
  */
 function sendNotificationEmail(data) {
-  const subject = `[3A Automation] Nouveau lead: ${data.name || 'Sans nom'}`;
+  var subject = '[3A Automation] New lead: ' + (data.name || 'No name');
 
-  const body = `
-Nouveau lead reçu sur 3a-automation.com
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Nom: ${data.name || 'Non spécifié'}
-Email: ${data.email || 'Non spécifié'}
-Entreprise: ${data.company || 'Non spécifié'}
-Site web: ${data.website || 'Non spécifié'}
-Service demandé: ${data.service || 'Non spécifié'}
-Sujet: ${data.subject || 'Non spécifié'}
-
-Message:
-${data.message || 'Aucun message'}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Plateforme: ${data.platform || 'Non spécifié'}
-Chiffre d'affaires: ${data.revenue || 'Non spécifié'}
-Pays: ${data.country || 'Non spécifié'}
-Défis: ${data.challenges || 'Non spécifié'}
-
-Source: ${data.source || 'website'}
-Date: ${new Date().toLocaleString('fr-FR')}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Répondre sous 24-48h comme promis!
-  `;
+  var body = 'New lead received on 3a-automation.com\n\n';
+  body += '========================================\n\n';
+  body += 'Name: ' + (data.name || 'Not specified') + '\n';
+  body += 'Email: ' + (data.email || 'Not specified') + '\n';
+  body += 'Company: ' + (data.company || 'Not specified') + '\n';
+  body += 'Website: ' + (data.website || 'Not specified') + '\n';
+  body += 'Service: ' + (data.service || 'Not specified') + '\n';
+  body += 'Subject: ' + (data.subject || 'Not specified') + '\n\n';
+  body += 'Message:\n' + (data.message || 'No message') + '\n\n';
+  body += '========================================\n\n';
+  body += 'Platform: ' + (data.platform || 'Not specified') + '\n';
+  body += 'Revenue: ' + (data.revenue || 'Not specified') + '\n';
+  body += 'Country: ' + (data.country || 'Not specified') + '\n';
+  body += 'Challenges: ' + (data.challenges || 'Not specified') + '\n\n';
+  body += 'Source: ' + (data.source || 'website') + '\n';
+  body += 'Date: ' + new Date().toLocaleString() + '\n\n';
+  body += '========================================\n';
+  body += 'Reply within 24-48h as promised!\n';
 
   MailApp.sendEmail({
-    to: NOTIFICATION_EMAIL,
+    to: CONFIG.NOTIFICATION_EMAIL,
     subject: subject,
     body: body
   });
 }
 
 /**
- * Fonction de test
+ * Test function - run this to verify setup
  */
 function testFormSubmission() {
-  const testData = {
+  var testData = {
     parameter: {
       name: 'Test User',
       email: 'test@example.com',
       company: 'Test Company',
       website: 'https://example.com',
       service: 'audit-shopify',
-      message: 'Ceci est un message de test',
+      message: 'This is a test message',
       source: 'test'
     }
   };
 
-  const result = doPost(testData);
+  var result = doPost(testData);
   Logger.log(result.getContent());
 }
