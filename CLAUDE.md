@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 5.7 | Dernière mise à jour: 2025-12-19 (Session 27 - Généricisation Complète)
+## Version: 5.8 | Dernière mise à jour: 2025-12-19 (Session 28 - Audit Mobile/Responsive)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -28,7 +28,7 @@
 
 ---
 
-## MÉTRIQUES ACTUELLES (Session 27 - 19/12/2025)
+## MÉTRIQUES ACTUELLES (Session 28 - 19/12/2025)
 
 | Métrique | Valeur |
 |----------|--------|
@@ -41,6 +41,8 @@
 | MCPs fonctionnels | **9/12** (credentials réelles) |
 | APIs testées OK | **3/7** (Klaviyo, GA4, Apify) |
 | Formulaires | **3 connectés** (Google Apps Script v2) |
+| AEO | robots.txt 18 crawlers, llms.txt v3.0 |
+| Footer | "Powered by Claude Opus 4.5 | MCP | Hostinger" (11 pages) |
 
 ---
 
@@ -158,6 +160,13 @@ VPS Hostinger (ID: 1168256)
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
+
+## ACTIONS PRIORITAIRES (Session 29 - Mobile)
+
+1. **Compresser android-chrome-512x512.png** (260KB → ~50KB)
+2. **JS Harmonisation** - 7 pages: script.js → script-lite.js (-168KB total)
+3. **CSS Font Sizes** - Minimum 0.75rem (12px) pour accessibilité
+4. **Mobile Touch Support** - touch-action, -webkit-tap-highlight-color
 
 ---
 
