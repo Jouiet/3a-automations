@@ -65,15 +65,21 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │  ├── ~33 scripts configurables (nécessitent .env)                          │
 │  └── ~140 scripts client-spécifiques (nécessitent refactoring)             │
 │                                                                              │
-│  MCPs CONFIGURÉS                                                            │
+│  MCPs CONFIGURÉS (Audit Session 24 - 19/12/2025)                            │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  ✅ Klaviyo MCP - Fonctionnel (TESTÉ 17/12)                                 │
-│  ✅ Shopify MCP - Fonctionnel (Alpha Medical - TESTÉ 17/12)                 │
-│  ✅ n8n MCP - Fonctionnel (Alpha Medical)                                   │
-│  ⚠️ xAI/Grok - Clé OK, nécessite $5 crédits                                │
-│  ❌ Google Analytics - Service Account MANQUANT                             │
-│  ❌ Google Sheets - Service Account MANQUANT                                │
-│  ❌ Apify - Token placeholder                                               │
+│  ✅ Klaviyo MCP - API key réelle                                            │
+│  ✅ Google Analytics - Service Account VALIDE                               │
+│  ✅ Google Sheets - Service Account VALIDE                                  │
+│  ✅ Hostinger MCP - Token réel                                              │
+│  ✅ GitHub MCP - Token réel                                                 │
+│  ✅ Gemini MCP - API key réelle                                             │
+│  ✅ Playwright MCP - NPX standard                                           │
+│  ✅ Chrome DevTools MCP - NPX standard                                      │
+│  ✅ Apify MCP - Token réel                                                  │
+│  ⚠️ Shopify MCP - PLACEHOLDER (config client requise)                      │
+│  ⚠️ n8n MCP - PLACEHOLDER (API key à générer)                              │
+│  ⚠️ WordPress MCP - PLACEHOLDER (config requise)                           │
+│  TOTAL: 9/12 fonctionnels (75%)                                             │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -88,7 +94,7 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │  TECHNIQUE (bloquant)                                                       │
 │  ├── ✅ Fichier .env CRÉÉ (17/12/2025)                                     │
 │  ├── ⚠️ xAI API: Clé OK, $5 crédits requis                                 │
-│  ├── ❌ Google Service Account (fichier JSON manquant)                      │
+│  ├── ✅ Google Service Account CRÉÉ (Session 24)                            │
 │  ├── ❌ Scripts non refactorés (hardcoding)                                 │
 │  └── ⚠️ Tests de validation: Shopify+Klaviyo OK, Google NON                │
 │                                                                              │
