@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 7.0 | Dernière mise à jour: 2025-12-19 (Session 41 - Voice Widget 100% Fix)
+## Version: 7.1 | Dernière mise à jour: 2025-12-19 (Session 41 - Voice Widget + Stats Fix)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
