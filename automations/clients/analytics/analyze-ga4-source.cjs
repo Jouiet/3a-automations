@@ -2,10 +2,24 @@
 /**
  * ANALYZE GA4 - D'où vient le trafic et la vente?
  * Note: Nécessite Google Analytics Data API access
+ *
+ * Usage:
+ *   node analyze-ga4-source.cjs
+ *
+ * Environment Variables:
+ *   - GA4_PROPERTY_ID: Google Analytics property ID
+ *   - GA4_MEASUREMENT_ID: GA4 Measurement ID (G-XXXXXX)
+ *   - STORE_NAME: Store name for display
  */
 
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+require('dotenv').config({ path: path.join(__dirname, '..', '..', '..', '.env') });
+
+// Configuration from environment
+const GA4_PROPERTY_ID = process.env.GA4_PROPERTY_ID;
+const GA4_MEASUREMENT_ID = process.env.GA4_MEASUREMENT_ID;
+const STORE_NAME = process.env.STORE_NAME || 'Your Store';
+const STORE_URL = process.env.STORE_URL || process.env.SHOPIFY_STORE_URL || 'your-store.com';
 
 console.log('='.repeat(80));
 console.log('📊 ANALYSE GOOGLE ANALYTICS 4 - SOURCE TRAFFIC');
@@ -18,8 +32,8 @@ console.log('Données disponibles via GA4 dashboard:');
 console.log('');
 console.log('🔗 ACCÈS GA4:');
 console.log('1. Aller sur: https://analytics.google.com');
-console.log('2. Property: Henderson Shop (510929364)');
-console.log('3. Measurement ID: G-HFRWK3TR61');
+console.log(`2. Property: ${STORE_NAME} (${GA4_PROPERTY_ID || 'Non configuré'})`);
+console.log(`3. Measurement ID: ${GA4_MEASUREMENT_ID || 'Non configuré'}`);
 console.log('');
 console.log('📊 ANALYSES RECOMMANDÉES:');
 console.log('');
@@ -51,7 +65,7 @@ console.log('   5. Location: Quelle région USA?');
 console.log('');
 console.log('📧 ALTERNATIVE - GOOGLE SEARCH CONSOLE:');
 console.log('1. https://search.google.com/search-console');
-console.log('2. Property: www.hendersonshop.com');
+console.log(`2. Property: ${STORE_URL}`);
 console.log('3. Performance > Search results');
 console.log('4. Filter dates: 15 Nov 2025');
 console.log('5. Voir: Queries, pages, impressions, clicks');
