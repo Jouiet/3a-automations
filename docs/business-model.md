@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 2.4 - Mise à jour 19 Décembre 2025 (Session 25: Formulaires + Claims)
+## Version 3.0 - Mise à jour 19 Décembre 2025 (Session 40: Pricing Bottom-Up)
 ## Basé sur données réelles confirmées
 
 ---
@@ -269,8 +269,29 @@ et augmentent leur revenue email de 25%+."
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 4.2 Pricing Summary
+### 4.2 Pricing Summary (MÀJ Session 40 - Bottom-Up ~90€/h)
 
+**PACKS SETUP (ONE-TIME):**
+| Pack | Prix | Temps | Contenu |
+|------|------|-------|---------|
+| Quick Win | 390€ | ~3-4h | Audit express + 1 flow + Doc PDF |
+| Essentials | 790€ | ~7-9h | Audit + 3 flows + A/B + Support 30j |
+| Growth | 1490€ | ~14-18h | 5 flows + RFM + Dashboard + Support 60j |
+
+**RETAINERS MENSUELS:**
+| Plan | Prix/mois | Heures | Contenu |
+|------|-----------|--------|---------|
+| Maintenance | 290€ | 3h | Monitoring + fixes + rapport |
+| Optimization | 490€ | 5h | + A/B tests + optimisation |
+| Growth | 890€ | 10h | + nouveaux flows + stratégie |
+
+**PROCESSUS SANS APPELS:**
+1. Formulaire diagnostic (5-10 min)
+2. Rapport PDF (24-48h)
+3. Proposition Google Docs
+4. Livraison + Documentation
+
+**LEGACY (ancienne grille - à remplacer progressivement):**
 | Service | Setup | Mensuel | Temps Requis |
 |---------|-------|---------|--------------|
 | Audit (gratuit) | €0 | - | 2-3h |

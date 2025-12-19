@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 6.0 (Màj Session 37 - API Tests + CRM Geo-Targeting)
+## Date: 2025-12-19 | Version: 7.0 (Màj Session 40 - Pricing Bottom-Up + Voice AI POC)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -3202,9 +3202,100 @@ segment-selector
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v5.8**
+# SECTION 33: SESSIONS 36-40 - PRICING REFONTE + VOICE AI POC
+
+## 33.1 Session 36: Lang-Switch + Currency (19/12/2025)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Lang-switch header | ✅ | 26/26 pages avec bouton FR↔EN |
+| geo-locale.js v2.0 | ✅ | Conversion devises real-time EUR/USD/MAD/GBP |
+| Pricing intégré | ✅ | Auto-détection currency |
+
+## 33.2 Session 37: API Tests Empiriques (19/12/2025)
+
+| API | Test Result | Détail |
+|-----|-------------|--------|
+| Klaviyo | ✅ OK | 3 listes, connexion confirmée |
+| Apify | ✅ OK | Token fonctionnel |
+| GA4 | ✅ Credentials OK | Service Account valide |
+| Shopify | ⚠️ Non configuré | Clients en pause |
+| n8n | ⚠️ Token invalide | À régénérer |
+| xAI/Grok | ❌ $5 requis | Crédits à acheter |
+| Meta | ⚠️ Non configuré | Token manquant |
+
+**Bilan APIs:** 3/7 fonctionnelles (43%)
+
+## 33.3 Session 38-39: Pricing Currency Fix (19/12/2025)
+
+- Supprimé medals 🥇🥈🥉
+- Ratios devises neutres (42:1 au lieu de $42)
+- Target CA dynamique avec data-ca-eur
+- FAQ multi-devise ajoutée
+
+## 33.4 Session 40: Pricing Refonte Bottom-Up + Voice AI POC (19/12/2025)
+
+### Nouvelle Structure Tarifaire (Bottom-Up ~90€/h)
+
+**Packs Setup (One-Time):**
+| Pack | Prix | Temps | Contenu |
+|------|------|-------|---------|
+| Quick Win | 390€ | ~3-4h | Audit express + 1 flow + Doc PDF |
+| Essentials | 790€ | ~7-9h | Audit + 3 flows + A/B + Support 30j |
+| Growth | 1490€ | ~14-18h | 5 flows + RFM + Dashboard + Support 60j |
+
+**Retainers Mensuels:**
+| Plan | Prix/mois | Heures | Contenu |
+|------|-----------|--------|---------|
+| Maintenance | 290€ | 3h | Monitoring + fixes + rapport |
+| Optimization | 490€ | 5h | + A/B tests + optimisation |
+| Growth | 890€ | 10h | + nouveaux flows + stratégie |
+
+### Processus Sans Appels (4 étapes)
+1. Formulaire diagnostic (5-10 min)
+2. Rapport PDF (24-48h)
+3. Proposition Google Docs
+4. Livraison + Documentation
+
+### Voice AI POC Créé
+
+**Fichiers:**
+- `automations/agency/core/grok-voice-poc.cjs` (Node.js)
+- `automations/agency/core/grok-voice-poc.py` (Python/LiveKit)
+
+**Faits Vérifiés Grok Voice API:**
+| Métrique | Valeur | Source |
+|----------|--------|--------|
+| Pricing | $0.05/min | xAI Docs (5x moins cher) |
+| Latence | <1 seconde | #1 Big Bench Audio |
+| Langues | 100+ | Auto-détection |
+| Voix | Sal, Rex, Eve, Leo, Mika, Valentin | xAI Docs |
+| Status | Code ready | $5 crédits requis |
+
+### Sources Pricing Ajoutées
+- Klaviyo 2025 Benchmark Report
+- Mordor Intelligence Market Forecast
+- Gartner 2026 Tech Trends
+- Forrester Predictions 2026
+- xAI Grok Voice API Docs
+
+### Fichiers Modifiés Session 40
+```
+M  CLAUDE.md (v6.9)
+M  HISTORY.md
+M  landing-page-hostinger/pricing.html (FR)
+M  landing-page-hostinger/en/pricing.html (EN)
+A  automations/agency/core/grok-voice-poc.cjs
+A  automations/agency/core/grok-voice-poc.py
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v7.0**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v7.0: Session 40 - Pricing Bottom-Up + Voice AI POC (Packs 390-1490€, Retainers 290-890€, Grok POC)*
+*v6.0: Session 37 - API Tests + CRM Geo-Targeting (3/7 APIs OK, 8 marchés)*
 *v5.8: Session 35 - i18n Complet (13 pages EN, hreflang 26/26, geo-locale.js, sitemap 26 URLs, 3 marchés)*
 *v5.7: Session 34 - Pricing Refonte Data-Driven (TOP 3 services, plans €390/790/1490, sources 2025-2026)*
 *v5.6: Session 33 - Claims Factuels + Mobile Fixes (52 automations, scroll indicator, PWA prompt)*
