@@ -1227,6 +1227,7 @@ body {
 .tech-pill {
   display: inline-flex;
   align-items: center;
+  gap: 0.4rem;
   padding: 0.5rem 1rem;
   background: rgba(25, 30, 53, 0.8);
   border: 1px solid rgba(79, 186, 241, 0.2);
@@ -1238,6 +1239,28 @@ body {
   transition: all 0.3s ease;
   backdrop-filter: blur(8px);
 }
+
+/* Tech Pill Logos */
+.tech-pill img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.tech-pill:hover img {
+  opacity: 1;
+}
+
+/* Category-specific logo colors */
+.tech-pill.ecommerce img { filter: brightness(0) saturate(100%) invert(63%) sepia(91%) saturate(401%) hue-rotate(166deg) brightness(96%) contrast(93%); }
+.tech-pill.analytics img { filter: brightness(0) saturate(100%) invert(64%) sepia(52%) saturate(512%) hue-rotate(114deg) brightness(91%) contrast(90%); }
+.tech-pill.ads img { filter: brightness(0) saturate(100%) invert(57%) sepia(85%) saturate(1556%) hue-rotate(360deg) brightness(101%) contrast(96%); }
+.tech-pill.ai img { filter: brightness(0) saturate(100%) invert(42%) sepia(76%) saturate(2155%) hue-rotate(235deg) brightness(94%) contrast(93%); }
+.tech-pill.automation img { filter: brightness(0) saturate(100%) invert(51%) sepia(54%) saturate(2424%) hue-rotate(307deg) brightness(98%) contrast(93%); }
+.tech-pill.infra img { filter: brightness(0) saturate(100%) invert(41%) sepia(76%) saturate(2048%) hue-rotate(224deg) brightness(93%) contrast(93%); }
 
 .tech-pill:hover {
   border-color: var(--primary);
