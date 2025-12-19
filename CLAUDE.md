@@ -66,13 +66,16 @@
 3. Proposition Google Docs
 4. Livraison + Documentation
 
-### Voice AI (POC Ready - Credits Required)
-- Grok Voice API: **$0.05/min** (industry cheapest)
-- Latence: **<1 seconde** (#1 Big Bench Audio)
-- 100+ langues, auto-détection
-- Voix: Sal, Rex, Eve, Leo, Mika, Valentin
-- POC: `automations/agency/core/grok-voice-poc.cjs`
-- Action: Acheter $5 crédits sur https://console.x.ai/billing
+### Voice AI Assistant ✅ LIVE
+- **Widget déployé**: 26 pages (FR + EN)
+- **Technologie**: Web Speech API (gratuit, pas de coût API)
+- **Fonctionnalités**:
+  - Reconnaissance vocale (micro)
+  - Synthèse vocale (réponses parlées)
+  - Réponses pré-définies (pricing, audit, services)
+  - Fallback texte pour tous navigateurs
+- **Fichiers**: `/voice-assistant/voice-widget.js` (FR) + `voice-widget-en.js` (EN)
+- **Upgrade futur**: Grok Voice API ($0.05/min) quand crédits achetés
 
 **Sources:** Klaviyo 2025, xAI Docs, Mordor Intelligence
 
