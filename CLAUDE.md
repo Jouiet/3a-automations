@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 5.9 | Dernière mise à jour: 2025-12-19 (Session 28 - Copywriting Senior)
+## Version: 6.0 | Dernière mise à jour: 2025-12-19 (Session 29 - Mobile Optimization)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -162,13 +162,20 @@ VPS Hostinger (ID: 1168256)
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 
-## ACTIONS PRIORITAIRES (Session 29 - Mobile + Déploiement)
+## SESSION 29 COMPLÉTÉE ✅ (19/12/2025 - Mobile Optimization)
 
-1. **git push** - Déployer changements copy Senior (hero, footer, Stack→Expertise)
-2. **Compresser android-chrome-512x512.png** (260KB → ~50KB)
-3. **JS Harmonisation** - 7 pages: script.js → script-lite.js (-168KB total)
-4. **CSS Font Sizes** - Minimum 0.75rem (12px) pour accessibilité
-5. **Mobile Touch Support** - touch-action, -webkit-tap-highlight-color
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Supprimer lien GitHub footer | ✅ | 11 pages nettoyées |
+| Compresser android-chrome-512x512.png | ✅ | 265KB → 84KB (-68%) |
+| JS Harmonisation | ✅ | 7 pages: script.js → script-lite.js |
+| CSS Font Sizes | ✅ | min 0.65-0.75rem (accessibilité) |
+| Mobile Touch Support | ✅ | touch-action, -webkit-tap-highlight-color |
+| Footer standardisé | ✅ | Solutions \| Ressources \| Légal |
+
+**Commits Session 29:**
+- `acab289` fix(footer): Standardize footer UI/UX across 11 pages
+- `eefad87` perf(mobile): Complete mobile optimization + footer cleanup
 
 ---
 

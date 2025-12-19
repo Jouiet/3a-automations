@@ -2832,9 +2832,69 @@ APRÈS: <svg> icons inline (design moderne, contrôle couleur)
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v5.2**
+# SECTION 29: SESSION 29 - MOBILE OPTIMIZATION COMPLÈTE
+
+## Date: 2025-12-19
+
+## 29.1 Optimisations Implémentées
+
+| Tâche | Avant | Après | Gain |
+|-------|-------|-------|------|
+| android-chrome-512x512.png | 265KB | 84KB | **-68%** |
+| JS pages secondaires | script.js (30KB) | script-lite.js (6KB) | **-80%** |
+| Font-sizes minimum | 0.5-0.6rem | 0.65-0.75rem | Accessibilité ✅ |
+| Touch support | Non | Oui | Mobile UX ✅ |
+
+## 29.2 Migrations JS
+
+| Page | Avant | Après |
+|------|-------|-------|
+| 404.html | /script.js | /script-lite.js |
+| a-propos.html | script.js | script-lite.js |
+| cas-clients.html | script.js | script-lite.js |
+| contact.html | script.js | script-lite.js |
+| services/audit-gratuit.html | ../script.js | ../script-lite.js |
+| legal/mentions-legales.html | ../script.js | ../script-lite.js |
+| legal/politique-confidentialite.html | ../script.js | ../script-lite.js |
+| **index.html** | script.js | **script.js** (conservé) |
+
+**Économie totale: 7 pages × 24KB = 168KB**
+
+## 29.3 CSS Améliorations
+
+```css
+/* Touch support ajouté */
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent;
+}
+button, a, input, select, textarea, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* Font-sizes corrigés */
+.tech-icon span { font-size: 0.75rem; }      /* était 0.6rem */
+.ring-3 .tech-icon span { font-size: 0.65rem; } /* était 0.5rem */
+.stat-label-ultra { font-size: 0.7rem; }     /* était 0.6rem */
+```
+
+## 29.4 Footer Cleanup
+
+- GitHub link supprimé des 11 pages (apparence professionnelle)
+- Structure finale: Solutions | Ressources | Légal
+
+## 29.5 Commits Session 29
+
+| Commit | Description |
+|--------|-------------|
+| acab289 | fix(footer): Standardize footer UI/UX across 11 pages |
+| eefad87 | perf(mobile): Complete mobile optimization + footer cleanup |
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v5.3**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v5.3: Session 29 - Mobile optimization complète (image -68%, JS -168KB, touch support, font-sizes)*
 *v5.2: Session 28 (Suite) - Copywriting Senior (hero, footer, Stack→Expertise, emoji→SVG)*
 *v5.1: Session 28 - Audit Mobile/Responsive/Performance (7 pages JS à optimiser, font-sizes, touch support)*
 *v5.0: Session 27 - Généricisation complète + AEO (robots.txt 18 crawlers, llms.txt v3.0, footer harmonisé)*
