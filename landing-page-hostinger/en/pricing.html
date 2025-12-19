@@ -151,21 +151,21 @@
 
       <span class="badge">Transparent Pricing</span>
       <h1>Invest in your <span class="highlight">growth</span></h1>
-      <p class="hero-sub">Clear pricing. No hidden fees. Proven email ROI: <strong>$42 for every $1 invested</strong>.</p>
+      <p class="hero-sub" id="pricing-subtitle">No hidden fees. Proven email ROI: <strong>42:1</strong> (Klaviyo 2025).</p>
 
-      <!-- ROI Stats -->
+      <!-- ROI Stats - Using neutral ratios for benchmarks -->
       <div class="roi-stats">
         <div class="roi-stat">
           <span class="roi-value">42:1</span>
-          <span class="roi-label">Email ROI (Klaviyo 2025)</span>
+          <span class="roi-label">Email Marketing ROI</span>
         </div>
         <div class="roi-stat">
-          <span class="roi-value">$3.07</span>
-          <span class="roi-label">Revenue/recipient Cart Abandonment</span>
+          <span class="roi-value">+15%</span>
+          <span class="roi-label">Cart Recovery Rate</span>
         </div>
         <div class="roi-stat">
           <span class="roi-value">30x</span>
-          <span class="roi-label">More RPR vs manual campaigns</span>
+          <span class="roi-label">More RPR vs campaigns</span>
         </div>
       </div>
     </div>
@@ -180,7 +180,6 @@
       <div class="services-grid-3">
         <!-- Service 1: Email Automation -->
         <div class="service-card featured">
-          <div class="service-rank">🥇 #1</div>
           <div class="service-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -190,7 +189,7 @@
           <p class="service-desc">Automated flows that generate revenue while you sleep.</p>
           <ul class="service-facts">
             <li><strong>26.7%</strong> of automation market</li>
-            <li><strong>$42</strong> ROI for every $1 spent</li>
+            <li><strong>42:1</strong> email marketing ROI</li>
             <li><strong>+45%</strong> email revenue in 6 months</li>
           </ul>
           <div class="service-includes">
@@ -207,7 +206,6 @@
 
         <!-- Service 2: Analytics -->
         <div class="service-card">
-          <div class="service-rank">🥈 #2</div>
           <div class="service-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
@@ -216,9 +214,9 @@
           <h3>Analytics & Dashboards</h3>
           <p class="service-desc">Your KPIs in real-time. Data-driven decisions.</p>
           <ul class="service-facts">
-            <li><strong>18.4%</strong> CAGR (#1 growth)</li>
+            <li><strong>18.4%</strong> market growth/year</li>
             <li><strong>80%</strong> less reporting time</li>
-            <li><strong>$0</strong> tool cost (Looker is free)</li>
+            <li><strong>Free</strong> - Looker Studio included</li>
           </ul>
           <div class="service-includes">
             <span>GA4 Setup</span>
@@ -234,7 +232,6 @@
 
         <!-- Service 3: Audit -->
         <div class="service-card">
-          <div class="service-rank">🥉 #3</div>
           <div class="service-icon">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
@@ -315,7 +312,7 @@
             </ul>
 
             <div class="pricing-target">
-              <strong>Target:</strong> Revenue &lt;$10k/month
+              <strong>Target:</strong> Revenue &lt;<span data-ca-eur="10000">$10k</span>/month
             </div>
             <div class="pricing-engagement">
               Monthly, cancel anytime
@@ -379,7 +376,7 @@
             </ul>
 
             <div class="pricing-target">
-              <strong>Target:</strong> Revenue $10k-$50k/month
+              <strong>Target:</strong> Revenue <span data-ca-eur="10000-50000">$10k-$50k</span>/month
             </div>
             <div class="pricing-engagement">
               3-month minimum commitment
@@ -442,7 +439,7 @@
             </ul>
 
             <div class="pricing-target">
-              <strong>Target:</strong> Revenue $50k+/month
+              <strong>Target:</strong> Revenue <span data-ca-eur="50000">$50k</span>+/month
             </div>
             <div class="pricing-engagement">
               6-month minimum commitment
@@ -520,8 +517,8 @@
 
       <div class="faq-grid">
         <div class="faq-item">
-          <h3>Why prices in USD?</h3>
-          <p>For our international clients, USD is the standard currency. European and Moroccan clients can use the currency selector to see prices in EUR or MAD.</p>
+          <h3>What currency are prices in?</h3>
+          <p>Prices are auto-detected based on your location: USD for international, EUR for Europe, MAD for Morocco/Maghreb. You can manually change it using the currency selector above.</p>
         </div>
 
         <div class="faq-item">
@@ -685,15 +682,33 @@
       return formatPrice(convertPrice(Number(priceStr), currency), currency);
     }
 
+    // Format CA (revenue) values
+    function formatCA(value, currency) {
+      const converted = value * rates[currency];
+      if (converted >= 1000000) return (currency === 'USD' ? '$' : '') + Math.round(converted / 1000000) + 'M' + (currency !== 'USD' ? symbols[currency] : '');
+      if (converted >= 1000) return (currency === 'USD' ? '$' : '') + Math.round(converted / 1000) + 'k' + (currency !== 'USD' ? symbols[currency] : '');
+      return formatPrice(converted, currency);
+    }
+
     function updatePrices(currency) {
       document.querySelectorAll('[data-price-eur]').forEach(el => {
         el.textContent = parseAndConvert(el.getAttribute('data-price-eur'), currency);
       });
+      // Update CA targets
+      document.querySelectorAll('[data-ca-eur]').forEach(el => {
+        const eurCA = el.getAttribute('data-ca-eur');
+        if (eurCA.includes('-')) {
+          const [min, max] = eurCA.split('-').map(Number);
+          el.textContent = formatCA(min, currency) + '-' + formatCA(max, currency);
+        } else {
+          el.textContent = formatCA(Number(eurCA), currency);
+        }
+      });
       document.querySelectorAll('.price-period').forEach(el => {
         el.textContent = '/month';
       });
-      const heroSub = document.querySelector('.hero-sub');
-      if (heroSub) heroSub.innerHTML = labels[currency] + '. No hidden fees. Proven email ROI: <strong>$42 for every $1 invested</strong>.';
+      const heroSub = document.getElementById('pricing-subtitle');
+      if (heroSub) heroSub.innerHTML = labels[currency] + '. No hidden fees. Proven email ROI: <strong>42:1</strong> (Klaviyo 2025).';
       localStorage.setItem('3a-currency', currency);
     }
 
