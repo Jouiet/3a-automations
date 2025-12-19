@@ -115,7 +115,7 @@
           animation: none;
           opacity: 0;
         }
-        .va-trigger img { width: 36px; height: 36px; object-fit: contain; border-radius: 50%; }
+        .va-trigger svg { width: 28px; height: 28px; fill: white; }
         .va-trigger.listening { animation: pulse 1.5s infinite; }
         @keyframes pulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(79, 186, 241, 0.7); }
@@ -265,13 +265,13 @@
       </style>
 
       <button class="va-trigger" id="va-trigger" aria-label="Open voice assistant">
-        <img src="/logo.png" alt="3A" />
+        <svg viewBox="0 0 40 40" fill="none"><path d="M20 4L36 34H4L20 4Z" stroke="white" stroke-width="2.5" fill="none"/><path d="M20 12L28 28H12L20 12Z" stroke="white" stroke-width="2" fill="none"/></svg>
       </button>
 
       <div class="va-panel" id="va-panel">
         <div class="va-header">
           <div class="va-header-icon">
-            <img src="/logo.png" alt="3A" style="width:24px;height:24px;object-fit:contain;" />
+            <svg viewBox="0 0 40 40" fill="none"><path d="M20 4L36 34H4L20 4Z" stroke="white" stroke-width="2" fill="none"/><path d="M20 12L28 28H12L20 12Z" stroke="white" stroke-width="1.5" fill="none"/></svg>
           </div>
           <div class="va-header-text">
             <h3>3A Assistant</h3>
