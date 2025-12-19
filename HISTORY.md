@@ -1,5 +1,16 @@
 # HISTORY - Changelog 3A Automation
 
+## Sessions 27-36 (19/12/2025)
+
+| Version | Session | Modifications |
+|---------|---------|---------------|
+| 6.4 | 36 | **LANG-SWITCH + CURRENCY**: Sélecteur langue FR↔EN ajouté 26 pages, geo-locale.js v2.0 (conversion devises real-time EUR/USD/MAD/GBP), Pricing pages intégrées, data-price-eur support |
+| 6.3 | 35 | **i18n COMPLET**: 13 pages EN créées, hreflang SEO 26/26 pages, geo-locale.js v1.0, sitemap.xml 26 URLs, 3 marchés (MA, EU, International) |
+| 6.2 | 34 | **PRICING REFONTE**: Analyse data-driven 2025-2026, TOP 3 services définis (Email 9.25, Analytics 7.75, Audit 6.95), Tarification €390/790/1490 |
+| 6.1 | 33 | **DESIGN PREMIUM**: 6 pages upgradées cyber design, consistency cross-pages |
+| 6.0 | 32 | **MCP EXPANSION**: 12 MCPs configurés, performance optimization |
+| 5.9 | 27-31 | Scripts génériques, API tests, architecture cleanup |
+
 ## Sessions 17-26 (19/12/2025)
 
 | Version | Session | Modifications |
