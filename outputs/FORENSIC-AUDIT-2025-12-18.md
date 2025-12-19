@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 4.0 (Màj Session 21d - GA4 configuré + Blueprint 100/100)
+## Date: 2025-12-19 | Version: 4.2 (Màj Session 21e - Déploiement Auto + GAS Template)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -1988,6 +1988,15 @@ root-n8n                Running (workflow automation)
 │     • GA4: G-87F6FDJG45 LIVE sur 11 pages ✅                                │
 │     • GTM: GTM-WLVJQC3M LIVE sur 11 pages ✅                                │
 │                                                                              │
+│   ✅ PRIORITÉ 5 - DÉPLOIEMENT AUTOMATIQUE (Session 21e)                     │
+│     • GitHub Action "Deploy Website" v2.1 ✅ TESTÉ                          │
+│     • Trigger: push landing-page-hostinger/** OU manual                     │
+│     • Temps: ~1.5 min auto (vs ~15 min manuel)                              │
+│                                                                              │
+│   ✅ PRIORITÉ 6 - GOOGLE APPS SCRIPT TEMPLATE (Session 21e)                 │
+│     • Template: automations/generic/forms/google-apps-script-form-handler.gs│
+│     • Action: Déployer sur script.google.com → remplacer YOUR_SCRIPT_ID     │
+│                                                                              │
 │   TAUX CONFIGURATION: 11/12 services (92%)                                  │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -1995,9 +2004,10 @@ root-n8n                Running (workflow automation)
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v4.1**
+**FIN DE L'AUDIT FORENSIQUE v4.2**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v4.2: Session 21e - Déploiement automatique (GitHub Action v2.1), GAS form template créé, repo PUBLIC*
 *v4.1: Session 21e - GTM CONFIGURÉ (GTM-WLVJQC3M) sur 11 pages LIVE + Repo PUBLIC*
 *v4.0: Session 21d - GA4 CONFIGURÉ (G-87F6FDJG45) sur 11 pages LIVE + Blueprint 100/100*
 *v3.9: Session 21c - Site LIVE + repo PRIVÉ + GitHub token renouvelé + Apify configuré*
