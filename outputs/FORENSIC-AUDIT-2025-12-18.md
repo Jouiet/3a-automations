@@ -1,10 +1,28 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 7.0 (Màj Session 40 - Pricing Bottom-Up + Voice AI POC)
+## Date: 2025-12-20 | Version: 7.1 (Màj Session 46 - Branding Logo Fix)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (19 Dec 2025 - Post-Généricisation)
+# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 46)
+
+## Website Branding Status
+
+| Élément | Statut | Détails |
+|---------|--------|---------|
+| Logo officiel | ✅ Appliqué | logo.png (65KB) avec contrainte 40x40px CSS |
+| Voice widget | ✅ Pulse effect | Animations pulse-glow, pulse-ring |
+| Pages FR | 13 | Toutes avec logo.png |
+| Pages EN | 13 | Toutes avec logo.png |
+
+**ALERTE BRANDING:**
+- `logo.png` = Image marketing AVEC fond + texte "3A AUTOMATIONS"
+- **Pas d'icône transparente** disponible dans le projet
+- Solution: CSS `object-fit: contain` pour contraindre à 40x40px
+
+---
+
+# SECTION 0b: ÉTAT ACTUEL (19 Dec 2025 - Post-Généricisation)
 
 ## Résultat Généricisation
 
