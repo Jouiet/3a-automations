@@ -90,11 +90,62 @@ OBJECTIF:
           justify-content: center;
           box-shadow: 0 4px 20px rgba(79, 186, 241, 0.4);
           transition: all 0.3s ease;
+          position: relative;
+          animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .va-trigger::before {
+          content: '';
+          position: absolute;
+          top: -4px;
+          left: -4px;
+          right: -4px;
+          bottom: -4px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, var(--va-primary), var(--va-accent));
+          opacity: 0;
+          z-index: -1;
+          animation: pulse-ring 2s ease-out infinite;
+        }
+
+        .va-trigger::after {
+          content: '';
+          position: absolute;
+          top: -8px;
+          left: -8px;
+          right: -8px;
+          bottom: -8px;
+          border-radius: 50%;
+          border: 2px solid var(--va-primary);
+          opacity: 0;
+          animation: pulse-ring-outer 2s ease-out infinite 0.5s;
+        }
+
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 4px 20px rgba(79, 186, 241, 0.4); transform: scale(1); }
+          50% { box-shadow: 0 4px 30px rgba(79, 186, 241, 0.7); transform: scale(1.02); }
+        }
+
+        @keyframes pulse-ring {
+          0% { transform: scale(1); opacity: 0.6; }
+          100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        @keyframes pulse-ring-outer {
+          0% { transform: scale(1); opacity: 0.4; }
+          100% { transform: scale(1.6); opacity: 0; }
         }
 
         .va-trigger:hover {
           transform: scale(1.1);
           box-shadow: 0 6px 30px rgba(79, 186, 241, 0.6);
+          animation: none;
+        }
+
+        .va-trigger:hover::before,
+        .va-trigger:hover::after {
+          animation: none;
+          opacity: 0;
         }
 
         .va-trigger svg {
@@ -364,13 +415,13 @@ OBJECTIF:
       </style>
 
       <button class="va-trigger" id="va-trigger" aria-label="Ouvrir l'assistant vocal">
-        <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93h2c0 3.31 2.69 6 6 6s6-2.69 6-6h2c0 4.08-3.06 7.44-7 7.93V20h4v2H8v-2h4v-4.07z"/></svg>
+        <svg viewBox="0 0 40 40" fill="none"><path d="M20 4L36 34H4L20 4Z" stroke="white" stroke-width="2.5" fill="none"/><path d="M20 12L28 28H12L20 12Z" stroke="white" stroke-width="2" fill="none"/></svg>
       </button>
 
       <div class="va-panel" id="va-panel">
         <div class="va-header">
           <div class="va-header-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/></svg>
+            <svg viewBox="0 0 40 40" fill="none"><path d="M20 4L36 34H4L20 4Z" stroke="white" stroke-width="2" fill="none"/><path d="M20 12L28 28H12L20 12Z" stroke="white" stroke-width="1.5" fill="none"/></svg>
           </div>
           <div class="va-header-text">
             <h3>Assistant 3A</h3>
