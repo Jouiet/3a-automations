@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 6.0 | Dernière mise à jour: 2025-12-19 (Session 29 - Mobile Optimization)
+## Version: 6.1 | Dernière mise à jour: 2025-12-19 (Session 33 - Mobile Fixes)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -28,22 +28,24 @@
 
 ---
 
-## MÉTRIQUES ACTUELLES (Session 28 - 19/12/2025)
+## MÉTRIQUES ACTUELLES (Session 33 - 19/12/2025)
 
 | Métrique | Valeur |
 |----------|--------|
 | Site | https://3a-automation.com ✅ LIVE (14 pages) |
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
-| Scripts actifs | **58** (41 clients, 11 agency, 6 generic) |
+| Automatisations validées | **52** (validé par script, pas 56) |
+| MCPs configurés | **12** |
 | Scripts généricisés | **48/58** utilisant process.env |
-| Scripts hardcodés | **0** ✅ (post-session 27) |
+| Scripts hardcodés | **0** ✅ |
 | MCPs fonctionnels | **9/12** (credentials réelles) |
 | APIs testées OK | **3/7** (Klaviyo, GA4, Apify) |
 | Formulaires | **3 connectés** (Google Apps Script v2) |
 | AEO | robots.txt 18 crawlers, llms.txt v3.0 |
 | Footer | "Powered by Claude Opus 4.5 \| MCP \| Hostinger" (11 pages) |
-| Copy Marketing | **Senior level** - hero, footer, Stack→Expertise |
+| Flywheel Timeline | **12 semaines** (réaliste) |
+| CA Cible | **€7k E-commerce / €20k PME** |
 
 ---
 
@@ -162,20 +164,23 @@ VPS Hostinger (ID: 1168256)
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 
-## SESSION 29 COMPLÉTÉE ✅ (19/12/2025 - Mobile Optimization)
+## SESSION 33 COMPLÉTÉE ✅ (19/12/2025 - Mobile Fixes)
 
 | Tâche | Statut | Détails |
 |-------|--------|---------|
-| Supprimer lien GitHub footer | ✅ | 11 pages nettoyées |
-| Compresser android-chrome-512x512.png | ✅ | 265KB → 84KB (-68%) |
-| JS Harmonisation | ✅ | 7 pages: script.js → script-lite.js |
-| CSS Font Sizes | ✅ | min 0.65-0.75rem (accessibilité) |
-| Mobile Touch Support | ✅ | touch-action, -webkit-tap-highlight-color |
-| Footer standardisé | ✅ | Solutions \| Ressources \| Légal |
+| Flywheel Timeline | ✅ | 8→12 semaines (réaliste) |
+| CA Criteria | ✅ | €7k E-commerce / €20k PME |
+| Marketing Claims | ✅ | 56→52 automatisations (factuellement correct) |
+| PWA Prompt Mobile | ✅ | display: browser (pas de popup install) |
+| Scroll Indicator Mobile | ✅ | display: none en mobile |
+| MCPs Count | ✅ | Unifié à 12 sur toutes les pages |
 
-**Commits Session 29:**
-- `acab289` fix(footer): Standardize footer UI/UX across 11 pages
-- `eefad87` perf(mobile): Complete mobile optimization + footer cleanup
+**Commits Session 32-33:**
+- `2e57f65` fix(flywheel): Update timeline 8→12 weeks + CA criteria
+- `8373355` feat(flywheel): Update CA criteria dual-segment
+- `cd392a9` fix(marketing): Correct automation count 56→52 across all pages
+- `f1b408a` fix(mobile): Remove PWA install prompt
+- `56795f9` fix(mobile): Hide scroll indicator on mobile
 
 ---
 
