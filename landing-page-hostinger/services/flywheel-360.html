@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Flywheel E-commerce 360 - Systeme d'automatisation complet: Acquisition, Conversion, Retention, Advocacy. ROI 40-85x. Pour decideurs serieux.">
+  <meta name="description" content="Flywheel 360 - Système d'automatisation complet pour E-commerce ET PME/B2B. Acquisition, Conversion, Rétention, Advocacy. ROI mesurable.">
   <meta name="author" content="3A Automation">
   <meta name="robots" content="index, follow">
-  <title>Flywheel 360 | Automatisation E-commerce Complete | 3A Automation</title>
+  <title>Flywheel 360 | Automatisation Complète E-commerce & PME | 3A Automation</title>
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="canonical" href="https://3a-automation.com/services/flywheel-360">
+  <link rel="canonical" href="https://3a-automation.com/services/flywheel-360.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://3a-automation.com/services/flywheel-360">
-  <meta property="og:title" content="Flywheel 360 | Automatisation E-commerce Complete">
-  <meta property="og:description" content="Systeme integre Acquisition-Conversion-Retention-Advocacy. ROI 40-85x. Implementation 8 semaines.">
+  <meta property="og:url" content="https://3a-automation.com/services/flywheel-360.html">
+  <meta property="og:title" content="Flywheel 360 | Automatisation E-commerce & PME">
+  <meta property="og:description" content="Système intégré Acquisition-Conversion-Rétention-Advocacy pour E-commerce et PME/B2B. ROI mesurable.">
   <meta property="og:image" content="https://3a-automation.com/og-image.png">
   <meta property="og:locale" content="fr_FR">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Flywheel 360 | 3A Automation">
-  <meta name="twitter:description" content="Automatisation e-commerce complete avec ROI mesurable.">
+  <meta name="twitter:description" content="Automatisation complète pour E-commerce et PME avec ROI mesurable.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,14 +32,14 @@
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Flywheel 360 - Automatisation E-commerce Complete",
-    "description": "Systeme d'automatisation integre couvrant Acquisition, Conversion, Retention et Advocacy pour e-commerce",
+    "name": "Flywheel 360 - Automatisation Complète",
+    "description": "Système d'automatisation intégré pour E-commerce et PME/B2B couvrant Acquisition, Conversion, Rétention et Advocacy",
     "provider": {
       "@type": "Organization",
       "name": "3A Automation",
       "url": "https://3a-automation.com"
     },
-    "serviceType": "E-commerce Automation",
+    "serviceType": ["E-commerce Automation", "B2B Automation", "Marketing Automation"],
     "areaServed": "Worldwide"
   }
   </script>
@@ -63,12 +63,14 @@
   <style>
     /* Page-specific styles */
     .flywheel-hero {
-      padding: 160px 0 100px;
+      padding: 160px 0 80px;
       position: relative;
     }
 
     .hero-content-flywheel {
-      max-width: 800px;
+      max-width: 900px;
+      text-align: center;
+      margin: 0 auto;
     }
 
     .hero-subtitle {
@@ -85,6 +87,7 @@
       margin-top: 3rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(79, 186, 241, 0.2);
+      justify-content: center;
     }
 
     .hero-metric {
@@ -105,40 +108,52 @@
       letter-spacing: 0.05em;
     }
 
-    /* Warning Banner */
-    .warning-banner {
-      background: rgba(234, 179, 8, 0.1);
-      border: 1px solid rgba(234, 179, 8, 0.3);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin: 3rem 0;
+    /* Segment Selector */
+    .segment-selector {
       display: flex;
+      justify-content: center;
       gap: 1rem;
-      align-items: flex-start;
+      margin: 3rem 0;
     }
 
-    .warning-icon {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      background: rgba(234, 179, 8, 0.2);
-      border-radius: 8px;
+    .segment-btn {
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(79, 186, 241, 0.3);
+      background: transparent;
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: #EAB308;
+      gap: 0.75rem;
     }
 
-    .warning-content h4 {
-      color: #EAB308;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
+    .segment-btn:hover {
+      border-color: var(--primary);
+      color: var(--text-light);
     }
 
-    .warning-content p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.95rem;
-      line-height: 1.6;
+    .segment-btn.active {
+      background: var(--gradient-cyber);
+      border-color: var(--primary);
+      color: var(--secondary);
+    }
+
+    .segment-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Segment Content */
+    .segment-content {
+      display: none;
+    }
+
+    .segment-content.active {
+      display: block;
     }
 
     /* Flywheel Diagram */
@@ -148,7 +163,7 @@
     }
 
     .flywheel-visual-container {
-      max-width: 600px;
+      max-width: 500px;
       margin: 3rem auto;
       position: relative;
     }
@@ -157,74 +172,48 @@
       position: relative;
       width: 100%;
       padding-bottom: 100%;
-      border-radius: 50%;
-      background: rgba(25, 30, 53, 0.5);
-      border: 2px solid rgba(79, 186, 241, 0.2);
     }
 
     .flywheel-phase {
       position: absolute;
-      width: 140px;
+      width: 120px;
       text-align: center;
-      transition: all 0.3s ease;
     }
 
-    .flywheel-phase:hover {
-      transform: scale(1.05);
-    }
-
-    .flywheel-phase.acquisition {
-      top: 5%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .flywheel-phase.conversion {
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%) translateX(50%);
-    }
-
-    .flywheel-phase.retention {
-      bottom: 5%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .flywheel-phase.advocacy {
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%) translateX(-50%);
-    }
+    .flywheel-phase.acquisition { top: 0; left: 50%; transform: translateX(-50%); }
+    .flywheel-phase.conversion { right: 0; top: 50%; transform: translateY(-50%); }
+    .flywheel-phase.retention { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .flywheel-phase.advocacy { left: 0; top: 50%; transform: translateY(-50%); }
 
     .phase-icon {
       width: 64px;
       height: 64px;
-      margin: 0 auto 0.75rem;
       background: rgba(79, 186, 241, 0.15);
-      border: 2px solid rgba(79, 186, 241, 0.4);
-      border-radius: 50%;
+      border: 2px solid var(--primary);
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0 auto 0.75rem;
       color: var(--primary);
+      transition: all 0.3s ease;
     }
 
-    .flywheel-phase.acquisition .phase-icon { border-color: #4FBAF1; color: #4FBAF1; }
-    .flywheel-phase.conversion .phase-icon { border-color: #10B981; color: #10B981; background: rgba(16, 185, 129, 0.15); }
-    .flywheel-phase.retention .phase-icon { border-color: #8B5CF6; color: #8B5CF6; background: rgba(139, 92, 246, 0.15); }
-    .flywheel-phase.advocacy .phase-icon { border-color: #F59E0B; color: #F59E0B; background: rgba(245, 158, 11, 0.15); }
+    .flywheel-phase:hover .phase-icon {
+      background: var(--primary);
+      color: var(--secondary);
+      transform: scale(1.1);
+    }
 
     .phase-label {
-      font-weight: 700;
-      color: var(--primary-ice);
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
+      font-weight: 600;
+      color: var(--text-light);
+      font-size: 0.95rem;
     }
 
     .phase-count {
       font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--primary);
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -235,28 +224,49 @@
       transform: translate(-50%, -50%);
       width: 120px;
       height: 120px;
-      background: linear-gradient(135deg, rgba(79, 186, 241, 0.2), rgba(16, 185, 129, 0.2));
+      background: linear-gradient(135deg, rgba(79, 186, 241, 0.2), rgba(139, 92, 246, 0.2));
+      border: 2px solid rgba(79, 186, 241, 0.4);
       border-radius: 50%;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      border: 2px solid rgba(79, 186, 241, 0.4);
     }
 
     .flywheel-center span:first-child {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 800;
-      color: var(--primary);
+      background: var(--gradient-cyber);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .flywheel-center span:last-child {
       font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.6);
-      text-transform: uppercase;
+      color: var(--text-secondary);
     }
 
-    /* Phase Details */
+    /* Flywheel Arrows */
+    .flywheel-circle::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 70%;
+      height: 70%;
+      transform: translate(-50%, -50%);
+      border: 2px dashed rgba(79, 186, 241, 0.3);
+      border-radius: 50%;
+      animation: spin 30s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Phases Section */
     .phases-section {
       padding: 80px 0;
     }
@@ -265,69 +275,48 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
+      margin-top: 3rem;
     }
 
-    @media (max-width: 768px) {
-      .phases-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 1024px) {
+      .phases-grid { grid-template-columns: 1fr; }
     }
 
     .phase-card {
-      background: rgba(25, 30, 53, 0.6);
-      border: 1px solid rgba(79, 186, 241, 0.2);
+      background: rgba(25, 30, 53, 0.5);
+      border: 1px solid rgba(79, 186, 241, 0.15);
       border-radius: 16px;
       padding: 2rem;
-      position: relative;
-      overflow: hidden;
+      transition: all 0.3s ease;
     }
 
-    .phase-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
+    .phase-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
     }
-
-    .phase-card.acquisition::before { background: linear-gradient(90deg, #4FBAF1, #2B6685); }
-    .phase-card.conversion::before { background: linear-gradient(90deg, #10B981, #059669); }
-    .phase-card.retention::before { background: linear-gradient(90deg, #8B5CF6, #7C3AED); }
-    .phase-card.advocacy::before { background: linear-gradient(90deg, #F59E0B, #D97706); }
 
     .phase-card-header {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .phase-card-number {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 2rem;
       font-weight: 800;
-      font-size: 1.25rem;
+      color: var(--primary);
+      opacity: 0.5;
       font-family: 'JetBrains Mono', monospace;
     }
 
-    .phase-card.acquisition .phase-card-number { background: rgba(79, 186, 241, 0.15); color: #4FBAF1; }
-    .phase-card.conversion .phase-card-number { background: rgba(16, 185, 129, 0.15); color: #10B981; }
-    .phase-card.retention .phase-card-number { background: rgba(139, 92, 246, 0.15); color: #8B5CF6; }
-    .phase-card.advocacy .phase-card-number { background: rgba(245, 158, 11, 0.15); color: #F59E0B; }
-
     .phase-card-title {
       font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary-ice);
+      color: var(--text-light);
     }
 
     .phase-card-desc {
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 1.5rem;
     }
@@ -340,216 +329,219 @@
     }
 
     .phase-tool {
-      padding: 0.375rem 0.75rem;
       background: rgba(79, 186, 241, 0.1);
-      border: 1px solid rgba(79, 186, 241, 0.2);
+      color: var(--primary);
+      padding: 0.375rem 0.75rem;
       border-radius: 6px;
       font-size: 0.8rem;
-      color: var(--primary);
-      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
     }
 
     .phase-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
       padding-top: 1rem;
       border-top: 1px solid rgba(79, 186, 241, 0.1);
     }
 
     .phase-kpi {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.5rem 0;
-      border-bottom: 1px dashed rgba(79, 186, 241, 0.1);
-    }
-
-    .phase-kpi:last-child {
-      border-bottom: none;
+      text-align: center;
     }
 
     .phase-kpi-label {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.9rem;
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
     }
 
     .phase-kpi-value {
-      color: #10B981;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Benchmarks Section */
-    .benchmarks-section {
+    /* Comparison Table */
+    .comparison-section {
       padding: 80px 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.03) 50%, transparent 100%);
+      background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%);
     }
 
-    .benchmarks-table {
-      background: rgba(25, 30, 53, 0.6);
-      border: 1px solid rgba(79, 186, 241, 0.2);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-top: 3rem;
+    .comparison-table-wrapper {
+      overflow-x: auto;
+      margin-top: 2rem;
     }
 
-    .benchmarks-table table {
+    .comparison-table {
       width: 100%;
       border-collapse: collapse;
+      min-width: 800px;
     }
 
-    .benchmarks-table th {
-      background: rgba(79, 186, 241, 0.1);
+    .comparison-table th,
+    .comparison-table td {
       padding: 1rem 1.5rem;
       text-align: left;
-      color: var(--primary);
+      border-bottom: 1px solid rgba(79, 186, 241, 0.1);
+    }
+
+    .comparison-table th {
+      background: rgba(79, 186, 241, 0.1);
+      color: var(--text-light);
       font-weight: 600;
-      font-size: 0.875rem;
       text-transform: uppercase;
+      font-size: 0.8rem;
       letter-spacing: 0.05em;
     }
 
-    .benchmarks-table td {
-      padding: 1rem 1.5rem;
-      border-top: 1px solid rgba(79, 186, 241, 0.1);
-      color: rgba(255, 255, 255, 0.8);
+    .comparison-table td {
+      color: var(--text-secondary);
     }
 
-    .benchmarks-table tr:hover td {
+    .comparison-table tr:hover td {
       background: rgba(79, 186, 241, 0.05);
     }
 
-    .benchmark-bad { color: #EF4444; }
-    .benchmark-ok { color: #F59E0B; }
-    .benchmark-good { color: #10B981; }
-    .benchmark-excellent { color: #4FBAF1; font-weight: 600; }
+    .comparison-table .highlight-cell {
+      color: var(--primary);
+      font-weight: 600;
+    }
 
     /* ROI Section */
     .roi-section {
       padding: 80px 0;
     }
 
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .roi-grid { grid-template-columns: 1fr; }
+    }
+
     .roi-card {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(25, 30, 53, 0.8));
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 20px;
-      padding: 3rem;
+      background: rgba(25, 30, 53, 0.5);
+      border: 1px solid rgba(79, 186, 241, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
       text-align: center;
     }
 
-    .roi-headline {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #10B981;
-      font-family: 'JetBrains Mono', monospace;
+    .roi-card-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1rem;
+      background: rgba(79, 186, 241, 0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .roi-card h3 {
+      font-size: 1.25rem;
+      color: var(--text-light);
       margin-bottom: 0.5rem;
     }
 
-    .roi-subline {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-    }
-
-    .roi-breakdown {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(16, 185, 129, 0.2);
-    }
-
-    .roi-item {
-      text-align: center;
-    }
-
-    .roi-item-value {
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: var(--primary-ice);
+    .roi-card-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: var(--gradient-cyber);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       font-family: 'JetBrains Mono', monospace;
     }
 
-    .roi-item-label {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.875rem;
+    .roi-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
     }
 
     /* Timeline Section */
     .timeline-section {
       padding: 80px 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.03) 50%, transparent 100%);
     }
 
-    .timeline-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
+    .timeline {
+      display: flex;
+      justify-content: space-between;
       margin-top: 3rem;
+      position: relative;
     }
 
-    @media (max-width: 992px) {
-      .timeline-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 576px) {
-      .timeline-grid {
-        grid-template-columns: 1fr;
-      }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 32px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), #8B5CF6, #10B981);
     }
 
     .timeline-item {
-      background: rgba(25, 30, 53, 0.5);
-      border: 1px solid rgba(79, 186, 241, 0.15);
-      border-radius: 12px;
-      padding: 1.5rem;
+      flex: 1;
+      text-align: center;
       position: relative;
+      max-width: 180px;
     }
 
     .timeline-week {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.375rem 0.75rem;
+      width: 64px;
+      height: 64px;
       background: rgba(79, 186, 241, 0.15);
-      border-radius: 20px;
-      font-size: 0.75rem;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--primary);
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .timeline-item h4 {
-      color: var(--primary-ice);
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .timeline-item ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .timeline-item li {
-      color: rgba(255, 255, 255, 0.65);
-      font-size: 0.875rem;
-      padding: 0.25rem 0;
-      padding-left: 1rem;
       position: relative;
+      z-index: 1;
     }
 
-    .timeline-item li::before {
-      content: '>';
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-family: 'JetBrains Mono', monospace;
+    .timeline-title {
+      font-weight: 600;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .timeline {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .timeline::before {
+        display: none;
+      }
+      .timeline-item {
+        max-width: 100%;
+      }
     }
 
     /* Qualification Section */
     .qualification-section {
       padding: 80px 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%);
     }
 
     .qualification-grid {
@@ -560,9 +552,7 @@
     }
 
     @media (max-width: 768px) {
-      .qualification-grid {
-        grid-template-columns: 1fr;
-      }
+      .qualification-grid { grid-template-columns: 1fr; }
     }
 
     .qualification-card {
@@ -587,13 +577,8 @@
       margin-bottom: 1.5rem;
     }
 
-    .qualification-card.ideal h3 {
-      color: #10B981;
-    }
-
-    .qualification-card.not-ideal h3 {
-      color: #EF4444;
-    }
+    .qualification-card.ideal h3 { color: #10B981; }
+    .qualification-card.not-ideal h3 { color: #EF4444; }
 
     .qualification-card ul {
       list-style: none;
@@ -610,25 +595,19 @@
     }
 
     .qualification-card.ideal li::before {
-      content: '';
+      content: '✓';
       position: absolute;
       left: 0;
-      top: 0.85rem;
-      width: 8px;
-      height: 8px;
-      background: #10B981;
-      border-radius: 50%;
+      color: #10B981;
+      font-weight: bold;
     }
 
     .qualification-card.not-ideal li::before {
-      content: '';
+      content: '✕';
       position: absolute;
       left: 0;
-      top: 0.85rem;
-      width: 8px;
-      height: 8px;
-      background: #EF4444;
-      border-radius: 50%;
+      color: #EF4444;
+      font-weight: bold;
     }
 
     /* CTA Section */
@@ -642,13 +621,11 @@
       border-radius: 20px;
       padding: 4rem 3rem;
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
 
     .cta-flywheel-card h2 {
       font-size: 2rem;
-      color: var(--primary-ice);
+      color: var(--text-light);
       margin-bottom: 1rem;
     }
 
@@ -667,39 +644,15 @@
     }
 
     @media (max-width: 768px) {
-      .hero-metrics {
-        justify-content: center;
-      }
-
-      .flywheel-visual-container {
-        max-width: 350px;
-      }
-
-      .flywheel-phase {
-        width: 100px;
-      }
-
-      .phase-icon {
-        width: 48px;
-        height: 48px;
-      }
-
-      .flywheel-center {
-        width: 80px;
-        height: 80px;
-      }
-
-      .flywheel-center span:first-child {
-        font-size: 1rem;
-      }
-
-      .benchmarks-table {
-        overflow-x: auto;
-      }
-
-      .roi-headline {
-        font-size: 2rem;
-      }
+      .hero-metrics { gap: 1.5rem; }
+      .hero-metric-value { font-size: 2rem; }
+      .segment-selector { flex-direction: column; }
+      .segment-btn { justify-content: center; }
+      .flywheel-visual-container { max-width: 350px; }
+      .flywheel-phase { width: 100px; }
+      .phase-icon { width: 48px; height: 48px; }
+      .flywheel-center { width: 80px; height: 80px; }
+      .phase-kpis { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -714,8 +667,6 @@
     <div class="cyber-glow cyber-glow-1"></div>
     <div class="cyber-glow cyber-glow-2"></div>
     <div class="cyber-glow cyber-glow-3"></div>
-    <div class="morph-blob" style="width: 500px; height: 500px; background: rgba(16, 185, 129, 0.1); top: 10%; right: 5%;"></div>
-    <div class="morph-blob" style="width: 400px; height: 400px; background: rgba(139, 92, 246, 0.08); bottom: 20%; left: 5%; animation-delay: -5s;"></div>
   </div>
 
   <!-- Header -->
@@ -755,16 +706,30 @@
   <!-- Hero Section -->
   <section class="flywheel-hero">
     <div class="container">
-      <div class="breadcrumb">
-        <a href="/">Accueil</a> / <a href="/services/ecommerce.html">Services</a> / <span>Flywheel 360</span>
-      </div>
-
       <div class="hero-content-flywheel">
-        <span class="badge badge-accent">Automatisation Complete</span>
-        <h1>Flywheel E-commerce <span class="highlight">360</span></h1>
-        <p class="hero-subtitle">Un systeme integre qui transforme chaque interaction en opportunite de croissance. Acquisition, Conversion, Retention, Advocacy - tout automatise, tout mesurable.</p>
+        <span class="badge badge-accent">Automatisation Complète</span>
+        <h1>Flywheel <span class="highlight">360°</span></h1>
+        <p class="hero-subtitle">Un système intégré qui transforme chaque interaction en opportunité de croissance. Pour <strong>E-commerce</strong> comme pour <strong>PME/B2B</strong>. Acquisition, Conversion, Rétention, Advocacy — tout automatisé, tout mesurable.</p>
 
-        <div class="hero-actions">
+        <!-- Segment Selector -->
+        <div class="segment-selector">
+          <button class="segment-btn active" data-segment="ecommerce" onclick="switchSegment('ecommerce')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            E-commerce
+          </button>
+          <button class="segment-btn" data-segment="pme" onclick="switchSegment('pme')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            PME / B2B
+          </button>
+        </div>
+
+        <div class="hero-actions" style="justify-content: center;">
           <a href="/#contact" class="btn-cyber btn-primary-cyber">
             <span class="btn-text">Demander une Consultation</span>
             <span class="btn-icon">
@@ -774,16 +739,12 @@
             </span>
             <span class="btn-glow"></span>
           </a>
-          <a href="/cas-clients.html" class="btn-cyber btn-secondary-cyber">
-            <span class="btn-text">Voir les Resultats</span>
-            <span class="btn-border"></span>
-          </a>
         </div>
 
         <div class="hero-metrics">
           <div class="hero-metric">
-            <div class="hero-metric-value">40-85x</div>
-            <div class="hero-metric-label">ROI Projete</div>
+            <div class="hero-metric-value" id="metric-roi">40-85x</div>
+            <div class="hero-metric-label">ROI Projeté</div>
           </div>
           <div class="hero-metric">
             <div class="hero-metric-value">8</div>
@@ -794,7 +755,7 @@
             <div class="hero-metric-label">Automatisations</div>
           </div>
           <div class="hero-metric">
-            <div class="hero-metric-value">12</div>
+            <div class="hero-metric-value">9</div>
             <div class="hero-metric-label">MCPs</div>
           </div>
         </div>
@@ -802,275 +763,452 @@
     </div>
   </section>
 
-  <!-- Warning Banner -->
-  <section style="padding: 0;">
+  <!-- E-COMMERCE FLYWHEEL -->
+  <div class="segment-content active" id="segment-ecommerce">
+
+    <!-- Flywheel Diagram Section -->
+    <section class="flywheel-diagram-section">
+      <div class="container">
+        <div class="section-header-ultra" style="text-align: center;">
+          <span class="section-tag">E-commerce</span>
+          <h2 class="section-title-ultra">Le Flywheel E-commerce</h2>
+          <p class="section-desc-ultra">Cycle vertueux optimisé pour les boutiques en ligne. Chaque vente génère les conditions de la suivante.</p>
+        </div>
+
+        <div class="flywheel-visual-container">
+          <div class="flywheel-circle">
+            <div class="flywheel-phase acquisition">
+              <div class="phase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+              </div>
+              <div class="phase-label">Acquisition</div>
+              <div class="phase-count">Meta, Google, SEO</div>
+            </div>
+            <div class="flywheel-phase conversion">
+              <div class="phase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                  <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+              </div>
+              <div class="phase-label">Conversion</div>
+              <div class="phase-count">Checkout, Bundles</div>
+            </div>
+            <div class="flywheel-phase retention">
+              <div class="phase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="phase-label">Rétention</div>
+              <div class="phase-count">Klaviyo Flows</div>
+            </div>
+            <div class="flywheel-phase advocacy">
+              <div class="phase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </div>
+              <div class="phase-label">Advocacy</div>
+              <div class="phase-count">Reviews, Referral</div>
+            </div>
+            <div class="flywheel-center">
+              <span>LTV</span>
+              <span>Croissance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase Details E-commerce -->
+    <section class="phases-section">
+      <div class="container">
+        <div class="section-header-ultra" style="text-align: center;">
+          <span class="section-tag">E-commerce</span>
+          <h2 class="section-title-ultra">Les 4 Phases E-commerce</h2>
+        </div>
+
+        <div class="phases-grid">
+          <!-- Acquisition -->
+          <div class="phase-card">
+            <div class="phase-card-header">
+              <div class="phase-card-number">01</div>
+              <h3 class="phase-card-title">Acquisition</h3>
+            </div>
+            <p class="phase-card-desc">Attirez des acheteurs qualifiés via des campagnes multi-canal. Tracking server-side pour des données fiables post-iOS14.</p>
+            <div class="phase-tools">
+              <span class="phase-tool">Meta CAPI</span>
+              <span class="phase-tool">Google PMax</span>
+              <span class="phase-tool">TikTok</span>
+              <span class="phase-tool">SEO/AEO</span>
+            </div>
+            <div class="phase-kpis">
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">ROAS Meta</span>
+                <span class="phase-kpi-value">>3x</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">ROAS Google</span>
+                <span class="phase-kpi-value">>5x</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Organic</span>
+                <span class="phase-kpi-value">22%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conversion -->
+          <div class="phase-card">
+            <div class="phase-card-header">
+              <div class="phase-card-number">02</div>
+              <h3 class="phase-card-title">Conversion</h3>
+            </div>
+            <p class="phase-card-desc">Optimisez chaque étape du checkout. Cart recovery automatique, bundles dynamiques, upsells intelligents.</p>
+            <div class="phase-tools">
+              <span class="phase-tool">Shopify Flow</span>
+              <span class="phase-tool">Cart Recovery</span>
+              <span class="phase-tool">Dynamic Bundles</span>
+              <span class="phase-tool">A/B Tests</span>
+            </div>
+            <div class="phase-kpis">
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">CVR cible</span>
+                <span class="phase-kpi-value">>3.5%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Cart Recovery</span>
+                <span class="phase-kpi-value">10-15%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">AOV uplift</span>
+                <span class="phase-kpi-value">+20%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Retention -->
+          <div class="phase-card">
+            <div class="phase-card-header">
+              <div class="phase-card-number">03</div>
+              <h3 class="phase-card-title">Rétention</h3>
+            </div>
+            <p class="phase-card-desc">Transformez un achat unique en relation durable. Flows email personnalisés, segmentation RFM, programmes fidélité.</p>
+            <div class="phase-tools">
+              <span class="phase-tool">Klaviyo</span>
+              <span class="phase-tool">Welcome Series</span>
+              <span class="phase-tool">Post-Purchase</span>
+              <span class="phase-tool">Win-Back</span>
+            </div>
+            <div class="phase-kpis">
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Email Rev</span>
+                <span class="phase-kpi-value">>30%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Repeat Rate</span>
+                <span class="phase-kpi-value">>25%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">LTV uplift</span>
+                <span class="phase-kpi-value">+40%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advocacy -->
+          <div class="phase-card">
+            <div class="phase-card-header">
+              <div class="phase-card-number">04</div>
+              <h3 class="phase-card-title">Advocacy</h3>
+            </div>
+            <p class="phase-card-desc">Vos clients deviennent vos meilleurs vendeurs. Reviews automatisés, programme referral, tiers VIP.</p>
+            <div class="phase-tools">
+              <span class="phase-tool">Judge.me</span>
+              <span class="phase-tool">Referral</span>
+              <span class="phase-tool">VIP Tiers</span>
+              <span class="phase-tool">UGC</span>
+            </div>
+            <div class="phase-kpis">
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Review Rate</span>
+                <span class="phase-kpi-value">>15%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Referral Rev</span>
+                <span class="phase-kpi-value">5-10%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">NPS</span>
+                <span class="phase-kpi-value">>50</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PME / B2B FLYWHEEL -->
+  <div class="segment-content" id="segment-pme">
+
+    <!-- Flywheel Diagram Section PME -->
+    <section class="flywheel-diagram-section">
+      <div class="container">
+        <div class="section-header-ultra" style="text-align: center;">
+          <span class="section-tag">PME / B2B</span>
+          <h2 class="section-title-ultra">Le Flywheel PME & B2B</h2>
+          <p class="section-desc-ultra">Cycle vertueux adapté aux services et B2B. Chaque client satisfait génère les conditions du suivant.</p>
+        </div>
+
+        <div class="flywheel-visual-container">
+          <div class="flywheel-circle">
+            <div class="flywheel-phase acquisition">
+              <div class="phase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <div class="phase-label">Lead Gen</div>
+              <div class="phase-count">LinkedIn, Ads, SEO</div>
+            </div>
+            <div class="flywheel-phase conversion">
+              <div class="phase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <div class="phase-label">Qualification</div>
+              <div class="phase-count">CRM, Scoring</div>
+            </div>
+            <div class="flywheel-phase retention">
+              <div class="phase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="3" y1="9" x2="21" y2="9"/>
+                  <line x1="9" y1="21" x2="9" y2="9"/>
+                </svg>
+              </div>
+              <div class="phase-label">Delivery</div>
+              <div class="phase-count">Onboarding, Service</div>
+            </div>
+            <div class="flywheel-phase advocacy">
+              <div class="phase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <div class="phase-label">Referral</div>
+              <div class="phase-count">Témoignages, Réseau</div>
+            </div>
+            <div class="flywheel-center">
+              <span>CLV</span>
+              <span>Croissance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase Details PME -->
+    <section class="phases-section">
+      <div class="container">
+        <div class="section-header-ultra" style="text-align: center;">
+          <span class="section-tag">PME / B2B</span>
+          <h2 class="section-title-ultra">Les 4 Phases PME & B2B</h2>
+        </div>
+
+        <div class="phases-grid">
+          <!-- Lead Gen -->
+          <div class="phase-card">
+            <div class="phase-card-header">
+              <div class="phase-card-number">01</div>
+              <h3 class="phase-card-title">Lead Generation</h3>
+            </div>
+            <p class="phase-card-desc">Générez des leads qualifiés via LinkedIn, content marketing et SEO B2B. Formulaires intelligents et landing pages optimisées.</p>
+            <div class="phase-tools">
+              <span class="phase-tool">LinkedIn Ads</span>
+              <span class="phase-tool">Google Ads B2B</span>
+              <span class="phase-tool">SEO/Content</span>
+              <span class="phase-tool">Webinars</span>
+            </div>
+            <div class="phase-kpis">
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">CPL cible</span>
+                <span class="phase-kpi-value"><€50</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">MQL/mois</span>
+                <span class="phase-kpi-value">>20</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Organic</span>
+                <span class="phase-kpi-value">30%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Qualification -->
+          <div class="phase-card">
+            <div class="phase-card-header">
+              <div class="phase-card-number">02</div>
+              <h3 class="phase-card-title">Qualification & Closing</h3>
+            </div>
+            <p class="phase-card-desc">Qualifiez automatiquement via lead scoring. Nurturing séquences, propositions automatisées, pipeline CRM.</p>
+            <div class="phase-tools">
+              <span class="phase-tool">HubSpot/Pipedrive</span>
+              <span class="phase-tool">Lead Scoring</span>
+              <span class="phase-tool">Email Nurturing</span>
+              <span class="phase-tool">Proposals</span>
+            </div>
+            <div class="phase-kpis">
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">MQL→SQL</span>
+                <span class="phase-kpi-value">>40%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">SQL→Won</span>
+                <span class="phase-kpi-value">>25%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Cycle vente</span>
+                <span class="phase-kpi-value"><30j</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery -->
+          <div class="phase-card">
+            <div class="phase-card-header">
+              <div class="phase-card-number">03</div>
+              <h3 class="phase-card-title">Delivery & Success</h3>
+            </div>
+            <p class="phase-card-desc">Onboarding automatisé, suivi projet, reporting client. Détection proactive des risques de churn.</p>
+            <div class="phase-tools">
+              <span class="phase-tool">Onboarding Auto</span>
+              <span class="phase-tool">Client Portal</span>
+              <span class="phase-tool">Health Scores</span>
+              <span class="phase-tool">QBRs</span>
+            </div>
+            <div class="phase-kpis">
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Rétention</span>
+                <span class="phase-kpi-value">>90%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">NPS</span>
+                <span class="phase-kpi-value">>50</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Upsell</span>
+                <span class="phase-kpi-value">20%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Referral -->
+          <div class="phase-card">
+            <div class="phase-card-header">
+              <div class="phase-card-number">04</div>
+              <h3 class="phase-card-title">Referral & Growth</h3>
+            </div>
+            <p class="phase-card-desc">Cas clients automatisés, programme de parrainage B2B, témoignages vidéo, introductions réseau.</p>
+            <div class="phase-tools">
+              <span class="phase-tool">Case Studies</span>
+              <span class="phase-tool">Referral B2B</span>
+              <span class="phase-tool">LinkedIn</span>
+              <span class="phase-tool">Témoignages</span>
+            </div>
+            <div class="phase-kpis">
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Referral Rate</span>
+                <span class="phase-kpi-value">>30%</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Case Studies</span>
+                <span class="phase-kpi-value">>5/an</span>
+              </div>
+              <div class="phase-kpi">
+                <span class="phase-kpi-label">Organic Inbound</span>
+                <span class="phase-kpi-value">40%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- UNIFIED SECTIONS (Both segments) -->
+
+  <!-- Comparison Section -->
+  <section class="comparison-section">
     <div class="container">
-      <div class="warning-banner">
-        <div class="warning-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-            <line x1="12" y1="9" x2="12" y2="13"/>
-            <line x1="12" y1="17" x2="12.01" y2="17"/>
-          </svg>
-        </div>
-        <div class="warning-content">
-          <h4>Ce Service N'est Pas Pour Tout le Monde</h4>
-          <p>Le Flywheel 360 est reserve aux entreprises serieuses avec un CA minimum de 10k/mois, prets a investir dans une transformation digitale complete. Si vous cherchez des solutions rapides sans engagement, ce n'est pas pour vous.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Flywheel Diagram Section -->
-  <section class="flywheel-diagram-section">
-    <div class="container">
-      <div class="section-header-ultra">
-        <span class="section-tag">Le Systeme</span>
-        <h2 class="section-title-ultra">Le Flywheel de Croissance</h2>
-        <p class="section-desc-ultra">Un cycle vertueux ou chaque phase alimente la suivante. Plus le flywheel tourne, plus il accelere.</p>
+      <div class="section-header-ultra" style="text-align: center;">
+        <span class="section-tag">Comparaison</span>
+        <h2 class="section-title-ultra">E-commerce vs PME/B2B</h2>
+        <p class="section-desc-ultra">Deux approches, une même méthodologie Flywheel.</p>
       </div>
 
-      <div class="flywheel-visual-container">
-        <div class="flywheel-circle">
-          <div class="flywheel-phase acquisition">
-            <div class="phase-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              </svg>
-            </div>
-            <div class="phase-label">Acquisition</div>
-            <div class="phase-count">12 automations</div>
-          </div>
-          <div class="flywheel-phase conversion">
-            <div class="phase-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-                <path d="M16 10a4 4 0 0 1-8 0"/>
-              </svg>
-            </div>
-            <div class="phase-label">Conversion</div>
-            <div class="phase-count">15 automations</div>
-          </div>
-          <div class="flywheel-phase retention">
-            <div class="phase-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <div class="phase-label">Retention</div>
-            <div class="phase-count">22 flows</div>
-          </div>
-          <div class="flywheel-phase advocacy">
-            <div class="phase-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-            </div>
-            <div class="phase-label">Advocacy</div>
-            <div class="phase-count">VIP Tiers</div>
-          </div>
-          <div class="flywheel-center">
-            <span>ROI</span>
-            <span>Croissance</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Phase Details Section -->
-  <section class="phases-section">
-    <div class="container">
-      <div class="section-header-ultra">
-        <span class="section-tag">Les 4 Phases</span>
-        <h2 class="section-title-ultra">Chaque Phase, Detaillee</h2>
-      </div>
-
-      <div class="phases-grid">
-        <!-- Acquisition -->
-        <div class="phase-card acquisition">
-          <div class="phase-card-header">
-            <div class="phase-card-number">01</div>
-            <h3 class="phase-card-title">Acquisition</h3>
-          </div>
-          <p class="phase-card-desc">Attirez des prospects qualifies via des campagnes multi-canal optimisees par l'IA. Tracking server-side pour des donnees fiables malgre iOS 14+.</p>
-          <div class="phase-tools">
-            <span class="phase-tool">Meta CAPI</span>
-            <span class="phase-tool">Google PMax</span>
-            <span class="phase-tool">TikTok Smart+</span>
-            <span class="phase-tool">SEO/AEO</span>
-            <span class="phase-tool">Apify</span>
-          </div>
-          <div class="phase-kpis">
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">ROAS Meta cible</span>
-              <span class="phase-kpi-value">>3x</span>
-            </div>
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">ROAS Google cible</span>
-              <span class="phase-kpi-value">>5x</span>
-            </div>
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Organic traffic</span>
-              <span class="phase-kpi-value">22% rev</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Conversion -->
-        <div class="phase-card conversion">
-          <div class="phase-card-header">
-            <div class="phase-card-number">02</div>
-            <h3 class="phase-card-title">Conversion</h3>
-          </div>
-          <p class="phase-card-desc">Optimisez chaque etape du checkout. Cart recovery automatique, bundles dynamiques, et tagging intelligent pour la segmentation.</p>
-          <div class="phase-tools">
-            <span class="phase-tool">Shopify Flow</span>
-            <span class="phase-tool">Cart Recovery</span>
-            <span class="phase-tool">Dynamic Bundles</span>
-            <span class="phase-tool">A/B Testing</span>
-          </div>
-          <div class="phase-kpis">
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Conversion Rate cible</span>
-              <span class="phase-kpi-value">>3.5%</span>
-            </div>
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Cart Recovery</span>
-              <span class="phase-kpi-value">10-15%</span>
-            </div>
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">AOV uplift</span>
-              <span class="phase-kpi-value">+15-25%</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Retention -->
-        <div class="phase-card retention">
-          <div class="phase-card-header">
-            <div class="phase-card-number">03</div>
-            <h3 class="phase-card-title">Retention</h3>
-          </div>
-          <p class="phase-card-desc">22 flows email/SMS Klaviyo pour maximiser la LTV. Welcome series, post-purchase, win-back, et tiers VIP automatises.</p>
-          <div class="phase-tools">
-            <span class="phase-tool">Klaviyo</span>
-            <span class="phase-tool">Welcome Series</span>
-            <span class="phase-tool">Post-Purchase</span>
-            <span class="phase-tool">Win-Back</span>
-            <span class="phase-tool">SMS</span>
-          </div>
-          <div class="phase-kpis">
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Email Revenue</span>
-              <span class="phase-kpi-value">30% total</span>
-            </div>
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Open Rate</span>
-              <span class="phase-kpi-value">>35%</span>
-            </div>
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Repeat Purchase</span>
-              <span class="phase-kpi-value">>35%</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Advocacy -->
-        <div class="phase-card advocacy">
-          <div class="phase-card-header">
-            <div class="phase-card-number">04</div>
-            <h3 class="phase-card-title">Advocacy</h3>
-          </div>
-          <p class="phase-card-desc">Transformez vos clients en ambassadeurs. Reviews automatiques, programme referral, et collecte UGC pour alimenter l'acquisition.</p>
-          <div class="phase-tools">
-            <span class="phase-tool">Judge.me</span>
-            <span class="phase-tool">Referral</span>
-            <span class="phase-tool">UGC Pipeline</span>
-            <span class="phase-tool">VIP Tiers</span>
-          </div>
-          <div class="phase-kpis">
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Review Rate</span>
-              <span class="phase-kpi-value">8-15%</span>
-            </div>
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Avg Rating</span>
-              <span class="phase-kpi-value">>4.5/5</span>
-            </div>
-            <div class="phase-kpi">
-              <span class="phase-kpi-label">Referral Conv.</span>
-              <span class="phase-kpi-value">5-10%</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Benchmarks Section -->
-  <section class="benchmarks-section">
-    <div class="container">
-      <div class="section-header-ultra">
-        <span class="section-tag">Standards</span>
-        <h2 class="section-title-ultra">Benchmarks Industrie 2025</h2>
-        <p class="section-desc-ultra">Ou vous situez-vous? Nos objectifs sont dans la colonne "Excellent".</p>
-      </div>
-
-      <div class="benchmarks-table">
-        <table>
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
           <thead>
             <tr>
-              <th>Metrique</th>
-              <th>Mauvais</th>
-              <th>Moyen</th>
-              <th>Bon</th>
-              <th>Excellent</th>
+              <th>Aspect</th>
+              <th>E-commerce</th>
+              <th>PME / B2B</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Conversion Rate</td>
-              <td class="benchmark-bad">&lt;1.5%</td>
-              <td class="benchmark-ok">2-3%</td>
-              <td class="benchmark-good">3-4%</td>
-              <td class="benchmark-excellent">&gt;4%</td>
+              <td>Acquisition</td>
+              <td>Meta, Google Shopping, TikTok</td>
+              <td>LinkedIn, Google B2B, Content</td>
             </tr>
             <tr>
-              <td>Cart Abandonment</td>
-              <td class="benchmark-bad">&gt;80%</td>
-              <td class="benchmark-ok">70-80%</td>
-              <td class="benchmark-good">60-70%</td>
-              <td class="benchmark-excellent">&lt;60%</td>
+              <td>Conversion</td>
+              <td>Checkout, Cart Recovery, Bundles</td>
+              <td>Lead Scoring, Nurturing, Proposals</td>
             </tr>
             <tr>
-              <td>Email Open Rate</td>
-              <td class="benchmark-bad">&lt;15%</td>
-              <td class="benchmark-ok">15-25%</td>
-              <td class="benchmark-good">25-35%</td>
-              <td class="benchmark-excellent">&gt;35%</td>
+              <td>Rétention</td>
+              <td>Klaviyo Flows, Email Marketing</td>
+              <td>CRM (HubSpot, Pipedrive), Success</td>
             </tr>
             <tr>
-              <td>Email Click Rate</td>
-              <td class="benchmark-bad">&lt;1.5%</td>
-              <td class="benchmark-ok">1.5-3%</td>
-              <td class="benchmark-good">3-5%</td>
-              <td class="benchmark-excellent">&gt;5%</td>
+              <td>Advocacy</td>
+              <td>Reviews, Referral, VIP</td>
+              <td>Case Studies, Referral B2B</td>
             </tr>
             <tr>
-              <td>LTV:CAC Ratio</td>
-              <td class="benchmark-bad">&lt;2:1</td>
-              <td class="benchmark-ok">2-3:1</td>
-              <td class="benchmark-good">3-4:1</td>
-              <td class="benchmark-excellent">&gt;4:1</td>
+              <td>KPI Principal</td>
+              <td class="highlight-cell">LTV / CAC > 3x</td>
+              <td class="highlight-cell">CLV / CAC > 5x</td>
             </tr>
             <tr>
-              <td>Customer Retention</td>
-              <td class="benchmark-bad">&lt;20%</td>
-              <td class="benchmark-ok">20-30%</td>
-              <td class="benchmark-good">30-40%</td>
-              <td class="benchmark-excellent">&gt;40%</td>
+              <td>Cycle</td>
+              <td>Court (jours/semaines)</td>
+              <td>Long (semaines/mois)</td>
+            </tr>
+            <tr>
+              <td>Volume</td>
+              <td>Élevé (transactions)</td>
+              <td>Faible (deals)</td>
+            </tr>
+            <tr>
+              <td>Valeur unitaire</td>
+              <td>€50-500/commande</td>
+              <td>€500-50k/contrat</td>
             </tr>
           </tbody>
         </table>
@@ -1081,33 +1219,34 @@
   <!-- ROI Section -->
   <section class="roi-section">
     <div class="container">
-      <div class="section-header-ultra">
-        <span class="section-tag">Retour sur Investissement</span>
-        <h2 class="section-title-ultra">ROI Projete</h2>
+      <div class="section-header-ultra" style="text-align: center;">
+        <span class="section-tag">Résultats</span>
+        <h2 class="section-title-ultra">ROI Attendu</h2>
+        <p class="section-desc-ultra">Projections basées sur nos implémentations clients.</p>
       </div>
 
-      <div class="roi-card">
-        <div class="roi-headline">40-85x</div>
-        <div class="roi-subline">Retour sur investissement stack annuel</div>
-        <p style="color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto;">Base sur les benchmarks industrie: 15% cart recovery, 30% email revenue, +1% conversion rate improvement, +10% LTV via retention.</p>
-
-        <div class="roi-breakdown">
-          <div class="roi-item">
-            <div class="roi-item-value">~$4,700</div>
-            <div class="roi-item-label">Stack annuel</div>
+      <div class="roi-grid">
+        <div class="roi-card">
+          <div class="roi-card-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
           </div>
-          <div class="roi-item">
-            <div class="roi-item-value">$15k+</div>
-            <div class="roi-item-label">Cart recovery/mois</div>
+          <h3>E-commerce</h3>
+          <div class="roi-card-value">40-85x</div>
+          <p>ROI annualisé sur investissement Flywheel</p>
+        </div>
+        <div class="roi-card">
+          <div class="roi-card-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
           </div>
-          <div class="roi-item">
-            <div class="roi-item-value">30%</div>
-            <div class="roi-item-label">Revenue email</div>
-          </div>
-          <div class="roi-item">
-            <div class="roi-item-value">+40%</div>
-            <div class="roi-item-label">Conversions</div>
-          </div>
+          <h3>PME / B2B</h3>
+          <div class="roi-card-value">20-50x</div>
+          <p>ROI annualisé sur investissement Flywheel</p>
         </div>
       </div>
     </div>
@@ -1116,51 +1255,32 @@
   <!-- Timeline Section -->
   <section class="timeline-section">
     <div class="container">
-      <div class="section-header-ultra">
-        <span class="section-tag">Implementation</span>
-        <h2 class="section-title-ultra">8 Semaines Pour Deployer</h2>
+      <div class="section-header-ultra" style="text-align: center;">
+        <span class="section-tag">Déploiement</span>
+        <h2 class="section-title-ultra">8 Semaines vers l'Excellence</h2>
+        <p class="section-desc-ultra">Implémentation progressive, résultats rapides.</p>
       </div>
 
-      <div class="timeline-grid">
+      <div class="timeline">
         <div class="timeline-item">
-          <span class="timeline-week">Semaines 1-2</span>
-          <h4>Foundation</h4>
-          <ul>
-            <li>Shopify Flow setup</li>
-            <li>Klaviyo integration</li>
-            <li>GA4 + GTM server-side</li>
-            <li>Meta CAPI</li>
-          </ul>
+          <div class="timeline-week">S1-2</div>
+          <div class="timeline-title">Audit & Setup</div>
+          <div class="timeline-desc">Analyse, accès, configuration MCPs</div>
         </div>
         <div class="timeline-item">
-          <span class="timeline-week">Semaines 3-4</span>
-          <h4>Acquisition</h4>
-          <ul>
-            <li>Meta Advantage+</li>
-            <li>Google PMax</li>
-            <li>TikTok Smart+</li>
-            <li>SEO schema</li>
-          </ul>
+          <div class="timeline-week">S3-4</div>
+          <div class="timeline-title">Acquisition</div>
+          <div class="timeline-desc">Tracking, campagnes, SEO</div>
         </div>
         <div class="timeline-item">
-          <span class="timeline-week">Semaines 5-6</span>
-          <h4>Retention</h4>
-          <ul>
-            <li>Welcome series</li>
-            <li>Post-purchase flows</li>
-            <li>SMS automation</li>
-            <li>Review collection</li>
-          </ul>
+          <div class="timeline-week">S5-6</div>
+          <div class="timeline-title">Conversion</div>
+          <div class="timeline-desc">Flows, automations, CRM</div>
         </div>
         <div class="timeline-item">
-          <span class="timeline-week">Semaines 7-8</span>
-          <h4>Scale</h4>
-          <ul>
-            <li>A/B testing</li>
-            <li>Competitor monitoring</li>
-            <li>GitHub Actions</li>
-            <li>Dashboards</li>
-          </ul>
+          <div class="timeline-week">S7-8</div>
+          <div class="timeline-title">Scale</div>
+          <div class="timeline-desc">Rétention, advocacy, optimisation</div>
         </div>
       </div>
     </div>
@@ -1169,9 +1289,10 @@
   <!-- Qualification Section -->
   <section class="qualification-section">
     <div class="container">
-      <div class="section-header-ultra">
+      <div class="section-header-ultra" style="text-align: center;">
         <span class="section-tag">Qualification</span>
-        <h2 class="section-title-ultra">Est-ce Pour Vous?</h2>
+        <h2 class="section-title-ultra">Est-ce pour Vous?</h2>
+        <p class="section-desc-ultra">Le Flywheel 360 n'est pas pour tout le monde. Voici comment savoir.</p>
       </div>
 
       <div class="qualification-grid">
@@ -1181,17 +1302,18 @@
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
               <polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
-            Client Ideal
+            Client Idéal
           </h3>
           <ul>
-            <li>CA minimum 10k/mois</li>
-            <li>Pret a investir dans la croissance</li>
-            <li>Vision long terme (6-12 mois min)</li>
-            <li>Equipe capable de fournir les acces</li>
-            <li>Produit/market fit valide</li>
-            <li>Comprend que l'automatisation != magie</li>
+            <li>CA minimum €10k/mois (E-commerce) ou €5k/mois (PME)</li>
+            <li>Prêt à investir dans une transformation sur 8 semaines</li>
+            <li>Équipe capable de fournir les accès et valider</li>
+            <li>Vision long-terme, pas juste quick-wins</li>
+            <li>Données existantes à exploiter (clients, ventes, leads)</li>
+            <li>Engagement dans le processus</li>
           </ul>
         </div>
+
         <div class="qualification-card not-ideal">
           <h3>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1199,15 +1321,15 @@
               <line x1="15" y1="9" x2="9" y2="15"/>
               <line x1="9" y1="9" x2="15" y2="15"/>
             </svg>
-            Pas Pour Vous Si
+            Pas pour Vous Si
           </h3>
           <ul>
-            <li>Startup sans revenue</li>
-            <li>Cherche des resultats en 1 semaine</li>
-            <li>Pas de budget pour les outils</li>
-            <li>Refuse de partager les acces necessaires</li>
-            <li>Attend une solution "plug and play"</li>
-            <li>Pas de temps pour les calls de sync</li>
+            <li>Startup sans traction (CA < €5k/mois)</li>
+            <li>Cherche des résultats immédiats sans investissement</li>
+            <li>Pas de temps à consacrer au projet</li>
+            <li>Budget serré, ne peut pas attendre 8 semaines</li>
+            <li>Préfère des solutions "magiques" sans effort</li>
+            <li>Ne croit pas à l'automatisation</li>
           </ul>
         </div>
       </div>
@@ -1218,11 +1340,11 @@
   <section class="cta-flywheel">
     <div class="container">
       <div class="cta-flywheel-card">
-        <h2>Pret a Deployer Votre Flywheel?</h2>
-        <p>Consultation strategique de 45 minutes pour evaluer votre situation actuelle et definir un plan d'action concret. Reserve aux decideurs serieux.</p>
+        <h2>Prêt à Activer votre Flywheel?</h2>
+        <p>Discutons de votre situation. Audit gratuit pour déterminer si le Flywheel 360 est adapté à votre business.</p>
         <div class="cta-actions">
           <a href="/#contact" class="btn-cyber btn-primary-cyber">
-            <span class="btn-text">Demander une Consultation</span>
+            <span class="btn-text">Demander l'Audit Gratuit</span>
             <span class="btn-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1230,8 +1352,8 @@
             </span>
             <span class="btn-glow"></span>
           </a>
-          <a href="/pricing.html" class="btn-cyber btn-secondary-cyber">
-            <span class="btn-text">Voir les Tarifs</span>
+          <a href="/cas-clients.html" class="btn-cyber btn-secondary-cyber">
+            <span class="btn-text">Voir les Cas Clients</span>
             <span class="btn-border"></span>
           </a>
         </div>
@@ -1239,7 +1361,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer Ultra -->
   <footer class="footer-ultra">
     <div class="container">
       <div class="footer-grid-ultra">
@@ -1282,7 +1404,7 @@
           <ul>
             <li><a href="/services/audit-gratuit.html">Audit Gratuit</a></li>
             <li><a href="/cas-clients.html">Cas Clients</a></li>
-            <li><a href="/a-propos.html">A propos</a></li>
+            <li><a href="/a-propos.html">À propos</a></li>
             <li><a href="/contact.html">Contact</a></li>
           </ul>
         </div>
@@ -1297,10 +1419,10 @@
       </div>
 
       <div class="footer-bottom-ultra">
-        <p>&copy; 2025 3A Automation. Tous droits reserves.</p>
+        <p>&copy; 2025 3A Automation. Tous droits réservés.</p>
         <div class="footer-tech">
           <span>Powered by</span>
-          <span class="tech-badge">Anthropic</span>
+          <span class="tech-badge">Claude Opus 4.5</span>
           <span class="tech-badge">MCP</span>
           <span class="tech-badge">Hostinger</span>
         </div>
@@ -1312,7 +1434,7 @@
   <div id="cookie-consent" class="cookie-banner" style="display: none;">
     <div class="cookie-content">
       <div class="cookie-text">
-        <p>Nous utilisons des cookies pour ameliorer votre experience. <a href="/legal/politique-confidentialite.html">Politique de confidentialite</a></p>
+        <p>Nous utilisons des cookies pour améliorer votre expérience. <a href="/legal/politique-confidentialite.html">Politique de confidentialité</a></p>
       </div>
       <div class="cookie-actions">
         <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">Refuser</button>
@@ -1322,5 +1444,32 @@
   </div>
 
   <script src="../script-lite.js"></script>
+
+  <!-- Segment Switcher -->
+  <script>
+    function switchSegment(segment) {
+      // Update buttons
+      document.querySelectorAll('.segment-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.segment === segment) {
+          btn.classList.add('active');
+        }
+      });
+
+      // Update content
+      document.querySelectorAll('.segment-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.getElementById('segment-' + segment).classList.add('active');
+
+      // Update metrics
+      const roiEl = document.getElementById('metric-roi');
+      if (segment === 'ecommerce') {
+        roiEl.textContent = '40-85x';
+      } else {
+        roiEl.textContent = '20-50x';
+      }
+    }
+  </script>
 </body>
 </html>
