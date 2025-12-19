@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 3.9 (Màj Session 21c - Site LIVE + GitHub token renouvelé)
+## Date: 2025-12-19 | Version: 4.0 (Màj Session 21d - GA4 configuré + Blueprint 100/100)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -600,21 +600,24 @@ logo.png:        273KB → <50KB  (SVG ou WebP)
 
 # SECTION 8: MÉTRIQUES DE RÉFÉRENCE
 
-## État Actuel (18/12/2025 - Session 13 Update)
+## État Actuel (19/12/2025 - Session 21d Update)
 
 | Catégorie | Métrique | Valeur |
 |-----------|----------|--------|
-| Automatisations | Génériques | 49 |
+| Site | Status | **✅ LIVE (https://3a-automation.com)** |
+| Site | SSL | **✅ Let's Encrypt actif** |
+| Automatisations | Génériques | 42 (validées 100%) |
 | Automatisations | Legacy analysés | 218 |
-| Automatisations | Normalisables (<1h) | 148 (68%) |
-| APIs | Fonctionnelles | 2/5 (40%) |
-| MCPs | Fonctionnels | 2/12 (16.7%) |
+| APIs | Fonctionnelles | **10/12 (83%)** |
+| MCPs | Fonctionnels | **9/12 (75%)** |
 | Landing | Pages | 12 (privacy supprimé) |
 | Landing | Schema.org | **12/12 (100%)** ✅ |
 | Landing | Images optimisées | **2/2 critiques (100%)** ✅ |
-| Tracking | Actif | 0/4 (0%) - placeholders |
+| Tracking | GA4 | **✅ G-87F6FDJG45 LIVE** |
+| Tracking | GTM | ⏳ placeholder (GTM-XXXXXXX) |
 | AEO | robots.txt crawlers | **8/8 (100%)** ✅ |
 | AEO | llms.txt conforme | **Oui** ✅ |
+| Blueprint | Score | **100/100** ✅ |
 | Revenue | Mensuel | €0 |
 | Clients | Actifs | 0 (restart 25/01/2026) |
 
@@ -1981,10 +1984,9 @@ root-n8n                Running (workflow automation)
 │     URL: https://console.x.ai/billing                                       │
 │     Action: Acheter crédits pour Voice Agent                                │
 │                                                                              │
-│   □ PRIORITÉ 4 - Tracking Analytics (GA4/GTM)                               │
-│     Remplacer placeholders dans site:                                       │
-│     • GTM-XXXXXXX → ID réel                                                 │
-│     • G-XXXXXXXXXX → G-87F6FDJG45                                           │
+│   ✅ PRIORITÉ 4 - GA4 Analytics CONFIGURÉ (Session 21d)                     │
+│     • G-87F6FDJG45 sur 11 pages LIVE ✅                                     │
+│     • GTM-XXXXXXX → (needs GTM container - P2)                              │
 │                                                                              │
 │   TAUX CONFIGURATION: 10/12 services (83%)                                  │
 │                                                                              │
@@ -1993,9 +1995,10 @@ root-n8n                Running (workflow automation)
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v3.9**
+**FIN DE L'AUDIT FORENSIQUE v4.0**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v4.0: Session 21d - GA4 CONFIGURÉ (G-87F6FDJG45) sur 11 pages LIVE + Blueprint 100/100*
 *v3.9: Session 21c - Site LIVE + repo PRIVÉ + GitHub token renouvelé + Apify configuré*
 *v3.8: Session 21b - 9 services configurés + Klaviyo testé OK (3 listes)*
 *v3.7: Session 21b - 8 services configurés + GA4 testé OK + plan actionnable*
