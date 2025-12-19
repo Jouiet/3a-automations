@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 5.8 | Dernière mise à jour: 2025-12-19 (Session 28 - Audit Mobile/Responsive)
+## Version: 5.9 | Dernière mise à jour: 2025-12-19 (Session 28 - Copywriting Senior)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -42,7 +42,8 @@
 | APIs testées OK | **3/7** (Klaviyo, GA4, Apify) |
 | Formulaires | **3 connectés** (Google Apps Script v2) |
 | AEO | robots.txt 18 crawlers, llms.txt v3.0 |
-| Footer | "Powered by Claude Opus 4.5 | MCP | Hostinger" (11 pages) |
+| Footer | "Powered by Claude Opus 4.5 \| MCP \| Hostinger" (11 pages) |
+| Copy Marketing | **Senior level** - hero, footer, Stack→Expertise |
 
 ---
 
@@ -161,12 +162,13 @@ VPS Hostinger (ID: 1168256)
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 
-## ACTIONS PRIORITAIRES (Session 29 - Mobile)
+## ACTIONS PRIORITAIRES (Session 29 - Mobile + Déploiement)
 
-1. **Compresser android-chrome-512x512.png** (260KB → ~50KB)
-2. **JS Harmonisation** - 7 pages: script.js → script-lite.js (-168KB total)
-3. **CSS Font Sizes** - Minimum 0.75rem (12px) pour accessibilité
-4. **Mobile Touch Support** - touch-action, -webkit-tap-highlight-color
+1. **git push** - Déployer changements copy Senior (hero, footer, Stack→Expertise)
+2. **Compresser android-chrome-512x512.png** (260KB → ~50KB)
+3. **JS Harmonisation** - 7 pages: script.js → script-lite.js (-168KB total)
+4. **CSS Font Sizes** - Minimum 0.75rem (12px) pour accessibilité
+5. **Mobile Touch Support** - touch-action, -webkit-tap-highlight-color
 
 ---
 

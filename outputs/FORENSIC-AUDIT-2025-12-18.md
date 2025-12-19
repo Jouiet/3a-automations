@@ -2741,9 +2741,101 @@ button, a, input, select, textarea {
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v5.1**
+# SECTION 28: SESSION 28 (Suite) - COPYWRITING SENIOR + REFACTORING FOOTER
+
+## Date: 2025-12-19
+
+## 28.1 Problème Copy Amateur (Rejeté)
+
+Première itération copywriting jugée AMATEUR par utilisateur:
+
+| Élément | Copy Amateur ❌ | Problème |
+|---------|----------------|----------|
+| automations.html | "56 workflows testés sur 3 projets clients" | Expose petit nombre |
+| index.html | "moins de tâches manuelles" | Formulation négative |
+| footer | "cœur de métier" | Cliché fatigué |
+| stats | Emoji texte | Design daté |
+
+## 28.2 Principes Copywriting B2B Senior
+
+1. **Verbes d'action forts** - pas de passif, pas de conditionnel
+2. **Rythme court & punchy** - phrases courtes, impact immédiat
+3. **Focus transformation** - pas "moins de X" mais "plus de Y"
+4. **Pas de chiffres faibles** - ne pas exposer "3 clients"
+5. **Autorité sans arrogance** - confiance, pas prétention
+
+## 28.3 Corrections Appliquées
+
+### automations.html - Hero (Senior)
+```
+APRÈS:
+"Déployées en production. Éprouvées sur des stores et PME réels.
+Du premier lead à la commande récurrente — chaque workflow tourne 24/7
+pendant que vous scalez."
+```
+
+### index.html - Hero (Senior)
+```
+APRÈS:
+"Vos processus s'exécutent. Vos leads se qualifient.
+Vos clients se fidélisent.
+Vous, vous pilotez la croissance."
+```
+
+### Footer Description (toutes pages)
+```
+AVANT: "Automatisez vos tâches répétitives. Concentrez-vous sur votre cœur de métier."
+APRÈS: "L'opérationnel automatisé. Le stratégique libéré."
+```
+
+### Footer "Stack Core" → "Expertise"
+```
+AVANT (tech-centric, jargon):        APRÈS (capability-centric):
+Stack Core                           Expertise
+├── Shopify + Flow                   ├── E-commerce Automation
+├── Klaviyo Email                    ├── Email & CRM
+├── GA4 / GTM                        ├── Analytics & Tracking
+├── n8n Workflows                    ├── Workflow Orchestration
+├── Claude AI + MCP                  └── AI Integration
+└── Apps Script
+```
+
+**Rationalisation:**
+- Abstraction des technologies spécifiques
+- Focus sur capacités business, pas stack technique
+- Suppression "Apps Script" (secondaire, amateur)
+- "Klaviyo Email" → "CRM Email" → "Email & CRM" (plus universel)
+
+### Icons (emoji → SVG)
+```
+AVANT: 📦 🧩 ⚡ (emoji texte)
+APRÈS: <svg> icons inline (design moderne, contrôle couleur)
+```
+
+## 28.4 Commits Session 28
+
+| Commit | Description |
+|--------|-------------|
+| d26e995 | Copy amateur (rejeté) |
+| 35e8bc5 | Copy senior (validé) |
+| [pending] | Stack Core → Expertise + docs |
+
+## 28.5 État Final Copy Marketing
+
+| Page | Hero | Footer | Status |
+|------|------|--------|--------|
+| index.html | ✅ Senior | ✅ Senior | DONE |
+| automations.html | ✅ Senior | ✅ Senior | DONE |
+| pricing.html | N/A | ✅ Senior | DONE |
+| services/* | N/A | ✅ Senior | DONE |
+| legal/* | N/A | ✅ Senior | DONE |
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v5.2**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v5.2: Session 28 (Suite) - Copywriting Senior (hero, footer, Stack→Expertise, emoji→SVG)*
 *v5.1: Session 28 - Audit Mobile/Responsive/Performance (7 pages JS à optimiser, font-sizes, touch support)*
 *v5.0: Session 27 - Généricisation complète + AEO (robots.txt 18 crawlers, llms.txt v3.0, footer harmonisé)*
 *v4.6: Session 23 - Consolidation architecture (scripts/→automations/, 56 automatisations total)*
