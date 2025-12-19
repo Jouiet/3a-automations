@@ -4,6 +4,7 @@
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 7.0 | 40b | **VOICE ASSISTANT LIVE**: Widget flottant déployé 26 pages, Web Speech API (gratuit), reconnaissance vocale + synthèse, réponses pré-définies (pricing, audit, services), bilingue FR/EN |
 | 6.9 | 40 | **PRICING REFONTE BOTTOM-UP + VOICE POC**: Packs Setup (390€/790€/1490€), Retainers (290€/490€/890€/mois), processus sans appels (4 étapes), Voice AI Grok POC créé (Node.js + Python/LiveKit), sources Gartner+Forrester ajoutées, CSS nouvelles sections |
 | 6.8 | 39 | **PRICE REDUCTION /1.5**: Prix compétitifs (260€/530€/990€), Quick Start enrichi (2→4 flows), EN+FR pricing updated, Schema.org updated, "Email Automation CRM" renaming |
 | 6.7 | 38 | **PRICING CURRENCY FIX**: Supprimé 🥇🥈🥉 rankings, harmonisé devises (ratios neutres 42:1, +15%), Target CA dynamique (data-ca-eur), FAQ multi-devise, formatCA() JS |
