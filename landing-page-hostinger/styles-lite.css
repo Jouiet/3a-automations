@@ -769,6 +769,56 @@ code {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   CURRENCY SELECTOR
+   ───────────────────────────────────────────────────────────────────────────── */
+.currency-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.currency-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.currency-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  background: rgba(27, 47, 84, 0.5);
+  padding: 4px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(79, 186, 241, 0.15);
+}
+
+.currency-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.currency-btn:hover {
+  color: var(--primary);
+  background: rgba(79, 186, 241, 0.1);
+}
+
+.currency-btn.active {
+  background: var(--primary);
+  color: var(--secondary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    ROI STATS (Pricing Hero)
    ───────────────────────────────────────────────────────────────────────────── */
 .roi-stats {
@@ -1754,6 +1804,22 @@ code {
 
   .stat-number {
     font-size: 2rem;
+  }
+
+  /* Currency Selector Mobile */
+  .currency-selector {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .currency-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .currency-btn {
+    padding: var(--spacing-sm) var(--spacing-sm);
+    font-size: 0.8125rem;
   }
 
   /* ROI Stats Mobile */

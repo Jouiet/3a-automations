@@ -134,9 +134,19 @@
   <!-- Hero Pricing -->
   <section class="pricing-hero">
     <div class="container">
+      <!-- Currency Selector -->
+      <div class="currency-selector">
+        <span class="currency-label">Devise:</span>
+        <div class="currency-buttons">
+          <button class="currency-btn active" data-currency="EUR">🇪🇺 EUR (€)</button>
+          <button class="currency-btn" data-currency="MAD">🇲🇦 MAD</button>
+          <button class="currency-btn" data-currency="USD">🌍 USD ($)</button>
+        </div>
+      </div>
+
       <span class="badge">Tarifs Transparents</span>
       <h1>Investissez dans votre <span class="highlight">croissance</span></h1>
-      <p class="hero-sub">Prix en euros. Pas de frais cachés. ROI email prouvé: <strong>42€ pour 1€ investi</strong>.</p>
+      <p class="hero-sub">Prix clairs. Pas de frais cachés. ROI email prouvé: <strong>42€ pour 1€ investi</strong>.</p>
 
       <!-- ROI Stats -->
       <div class="roi-stats">
@@ -186,7 +196,7 @@
           </div>
           <div class="service-price">
             <span class="price-label">Setup</span>
-            <span class="price-value">1490-2490€</span>
+            <span class="price-value" data-price-eur="1490-2490">1490-2490€</span>
           </div>
         </div>
 
@@ -213,7 +223,7 @@
           </div>
           <div class="service-price">
             <span class="price-label">Setup</span>
-            <span class="price-value">990-1490€</span>
+            <span class="price-value" data-price-eur="990-1490">990-1490€</span>
           </div>
         </div>
 
@@ -240,7 +250,7 @@
           </div>
           <div class="service-price">
             <span class="price-label">Audit</span>
-            <span class="price-value">GRATUIT</span>
+            <span class="price-value" data-price-eur="0">GRATUIT</span>
           </div>
         </div>
       </div>
@@ -259,10 +269,10 @@
           <div class="pricing-header">
             <span class="pricing-badge">Essentiel</span>
             <div class="pricing-price">
-              <span class="price-amount">390€</span>
+              <span class="price-amount" data-price-eur="390">390€</span>
               <span class="price-period">/mois</span>
             </div>
-            <p class="pricing-annual">ou 3 900€/an (2 mois offerts)</p>
+            <p class="pricing-annual">ou <span data-price-eur="3900">3 900€</span>/an (2 mois offerts)</p>
           </div>
           <div class="pricing-body">
             <p class="pricing-desc">Pour les micro-entreprises qui démarrent leur automation.</p>
@@ -317,10 +327,10 @@
           <div class="pricing-header">
             <span class="pricing-badge">Pro</span>
             <div class="pricing-price">
-              <span class="price-amount">790€</span>
+              <span class="price-amount" data-price-eur="790">790€</span>
               <span class="price-period">/mois</span>
             </div>
-            <p class="pricing-annual">ou 7 900€/an (2 mois offerts)</p>
+            <p class="pricing-annual">ou <span data-price-eur="7900">7 900€</span>/an (2 mois offerts)</p>
           </div>
           <div class="pricing-body">
             <p class="pricing-desc">Pour les PME E-commerce en croissance.</p>
@@ -380,10 +390,10 @@
           <div class="pricing-header">
             <span class="pricing-badge">Premium</span>
             <div class="pricing-price">
-              <span class="price-amount">1490€</span>
+              <span class="price-amount" data-price-eur="1490">1490€</span>
               <span class="price-period">/mois</span>
             </div>
-            <p class="pricing-annual">ou 14 900€/an (2 mois offerts)</p>
+            <p class="pricing-annual">ou <span data-price-eur="14900">14 900€</span>/an (2 mois offerts)</p>
           </div>
           <div class="pricing-body">
             <p class="pricing-desc">Pour les PME établies qui veulent dominer.</p>
@@ -449,7 +459,7 @@
       <div class="custom-grid">
         <div class="custom-card">
           <h3>Quick Start</h3>
-          <div class="custom-price">990-1490€</div>
+          <div class="custom-price" data-price-eur="990-1490">990-1490€</div>
           <ul>
             <li>Audit complet</li>
             <li>2 flows essentiels (Welcome + Cart)</li>
@@ -459,7 +469,7 @@
 
         <div class="custom-card">
           <h3>Full Setup</h3>
-          <div class="custom-price">2490-3990€</div>
+          <div class="custom-price" data-price-eur="2490-3990">2490-3990€</div>
           <ul>
             <li>5 flows complets</li>
             <li>Segmentation RFM de base</li>
@@ -471,7 +481,7 @@
 
         <div class="custom-card">
           <h3>Transformation</h3>
-          <div class="custom-price">Sur devis</div>
+          <div class="custom-price" data-price-eur="custom">Sur devis</div>
           <ul>
             <li>Audit multi-canal complet</li>
             <li>Stack personnalisée</li>
@@ -631,5 +641,117 @@
   </div>
 
   <script src="script-lite.js"></script>
+
+  <!-- Currency Converter -->
+  <script>
+  (function() {
+    'use strict';
+
+    // Exchange rates (approximate, updated Dec 2025)
+    const rates = {
+      EUR: 1,
+      MAD: 10.9,  // 1 EUR = 10.9 MAD
+      USD: 1.08   // 1 EUR = 1.08 USD
+    };
+
+    const symbols = {
+      EUR: '€',
+      MAD: 'MAD',
+      USD: '$'
+    };
+
+    const labels = {
+      EUR: 'Prix en euros',
+      MAD: 'Prix en dirhams marocains',
+      USD: 'Prices in US dollars'
+    };
+
+    // Format number with locale
+    function formatPrice(value, currency) {
+      if (currency === 'MAD') {
+        return Math.round(value).toLocaleString('fr-FR') + ' ' + symbols[currency];
+      } else if (currency === 'USD') {
+        return symbols[currency] + Math.round(value).toLocaleString('en-US');
+      } else {
+        return Math.round(value).toLocaleString('fr-FR') + symbols[currency];
+      }
+    }
+
+    // Convert EUR to target currency
+    function convertPrice(eurValue, currency) {
+      return eurValue * rates[currency];
+    }
+
+    // Parse price string (handles ranges like "990-1490")
+    function parseAndConvert(priceStr, currency) {
+      if (priceStr === '0') return currency === 'EUR' ? 'GRATUIT' : (currency === 'USD' ? 'FREE' : 'GRATUIT');
+      if (priceStr === 'custom') return currency === 'USD' ? 'Custom quote' : 'Sur devis';
+
+      if (priceStr.includes('-')) {
+        const [min, max] = priceStr.split('-').map(Number);
+        return formatPrice(convertPrice(min, currency), currency) + '-' + formatPrice(convertPrice(max, currency), currency);
+      }
+
+      return formatPrice(convertPrice(Number(priceStr), currency), currency);
+    }
+
+    // Update all prices on the page
+    function updatePrices(currency) {
+      // Update elements with data-price-eur attribute
+      document.querySelectorAll('[data-price-eur]').forEach(el => {
+        const eurPrice = el.getAttribute('data-price-eur');
+        el.textContent = parseAndConvert(eurPrice, currency);
+      });
+
+      // Update period suffix
+      document.querySelectorAll('.price-period').forEach(el => {
+        el.textContent = currency === 'USD' ? '/month' : '/mois';
+      });
+
+      // Update hero subtitle
+      const heroSub = document.querySelector('.hero-sub');
+      if (heroSub) {
+        heroSub.innerHTML = labels[currency] + '. Pas de frais cachés. ROI email prouvé: <strong>42€ pour 1€ investi</strong>.';
+      }
+
+      // Save preference
+      localStorage.setItem('3a-currency', currency);
+    }
+
+    // Initialize currency buttons
+    function initCurrencySelector() {
+      const buttons = document.querySelectorAll('.currency-btn');
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const currency = this.getAttribute('data-currency');
+
+          // Update active state
+          buttons.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          // Update prices
+          updatePrices(currency);
+        });
+      });
+
+      // Load saved preference
+      const saved = localStorage.getItem('3a-currency');
+      if (saved && rates[saved]) {
+        const savedBtn = document.querySelector(`.currency-btn[data-currency="${saved}"]`);
+        if (savedBtn) {
+          savedBtn.click();
+        }
+      }
+    }
+
+    // Init on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCurrencySelector);
+    } else {
+      initCurrencySelector();
+    }
+  })();
+  </script>
 </body>
 </html>
