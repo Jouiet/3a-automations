@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 6.5 | Dernière mise à jour: 2025-12-19 (Session 36b - CRM Geo-Targeting)
+## Version: 6.6 | Dernière mise à jour: 2025-12-19 (Session 37 - API Tests + Verification)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -42,7 +42,7 @@
 | GTM | GTM-WLVJQC3M |
 | Automatisations validées | **64** (validé par script) |
 | MCPs configurés | **12** |
-| APIs fonctionnelles | Klaviyo ✅, Shopify ✅, GA4 ✅ |
+| APIs fonctionnelles | Klaviyo ✅, Apify ✅, GA4 ✅ (3/7 testé 19/12) |
 
 ## TARIFICATION (Refonte Session 34 - Data-Driven 2025-2026)
 
@@ -184,6 +184,30 @@ VPS Hostinger (ID: 1168256)
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
+
+## SESSION 37 COMPLÉTÉE ✅ (19/12/2025 - API Tests + Verification)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Test APIs empirique | ✅ | 3/7 fonctionnelles (Klaviyo, Apify, GA4) |
+| FORENSIC-AUDIT v6.0 | ✅ | Métriques Session 37 |
+| Site FR LIVE | ✅ | 13 pages, HTTP 200 |
+| Site EN LIVE | ✅ | 13 pages, HTTP 200 |
+| Lang-switch | ✅ | Fonctionnel FR↔EN |
+
+**APIs Testées (19/12/2025 20:43 UTC):**
+- ✅ Klaviyo: OK
+- ✅ Apify: OK
+- ✅ Google Analytics: Credentials OK
+- ⚠️ Shopify: Non configuré (clients pause)
+- ⚠️ n8n: Token à régénérer
+- ⚠️ Meta: Non configuré
+- 🚫 xAI: Crédits requis ($5)
+
+**Commit Session 37:**
+- `[pending]` docs: Session 37 - API tests + verification
+
+---
 
 ## SESSION 36b COMPLÉTÉE ✅ (19/12/2025 - CRM Geo-Targeting)
 
