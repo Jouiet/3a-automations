@@ -9,13 +9,16 @@
 (function() {
   'use strict';
 
+  // Configuration - 3A Automation Branding
   const CONFIG = {
     apiEndpoint: '/voice-assistant/api.php',
     welcomeMessage: 'Hello! I\'m the 3A Automation assistant. How can I help you today?',
     placeholder: 'Ask your question...',
     position: 'bottom-right',
-    primaryColor: '#10B981',
-    darkBg: '#0a0a0a'
+    primaryColor: '#4FBAF1',      // 3A Primary Blue
+    primaryDark: '#2B6685',       // 3A Primary Dark
+    accentColor: '#10B981',       // 3A Accent Green
+    darkBg: '#191E35'             // 3A Secondary (Dark)
   };
 
   let isOpen = false;
@@ -34,6 +37,8 @@
       <style>
         #voice-assistant-widget {
           --va-primary: ${CONFIG.primaryColor};
+          --va-primary-dark: ${CONFIG.primaryDark};
+          --va-accent: ${CONFIG.accentColor};
           --va-dark: ${CONFIG.darkBg};
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
           position: fixed;
@@ -45,24 +50,24 @@
           width: 60px;
           height: 60px;
           border-radius: 50%;
-          background: linear-gradient(135deg, var(--va-primary), #059669);
+          background: linear-gradient(135deg, var(--va-primary) 0%, var(--va-primary-dark) 50%, var(--va-accent) 100%);
           border: none;
           cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+          box-shadow: 0 4px 20px rgba(79, 186, 241, 0.4);
           transition: all 0.3s ease;
         }
         .va-trigger:hover {
           transform: scale(1.1);
-          box-shadow: 0 6px 30px rgba(16, 185, 129, 0.6);
+          box-shadow: 0 6px 30px rgba(79, 186, 241, 0.6);
         }
         .va-trigger svg { width: 28px; height: 28px; fill: white; }
         .va-trigger.listening { animation: pulse 1.5s infinite; }
         @keyframes pulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-          50% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(79, 186, 241, 0.7); }
+          50% { box-shadow: 0 0 0 15px rgba(79, 186, 241, 0); }
         }
         .va-panel {
           display: none;
@@ -88,7 +93,7 @@
         }
         .va-header {
           padding: 16px;
-          background: linear-gradient(135deg, var(--va-primary), #059669);
+          background: linear-gradient(135deg, var(--va-primary) 0%, var(--va-primary-dark) 50%, var(--va-accent) 100%);
           display: flex;
           align-items: center;
           gap: 12px;
@@ -182,7 +187,7 @@
           0%, 60%, 100% { transform: translateY(0); }
           30% { transform: translateY(-6px); }
         }
-        .va-cta { padding: 12px 16px; background: rgba(16, 185, 129, 0.1); border-top: 1px solid rgba(16, 185, 129, 0.2); }
+        .va-cta { padding: 12px 16px; background: rgba(79, 186, 241, 0.1); border-top: 1px solid rgba(79, 186, 241, 0.2); }
         .va-cta a {
           display: block;
           text-align: center;
@@ -195,7 +200,7 @@
           font-weight: 500;
           transition: all 0.2s;
         }
-        .va-cta a:hover { background: #059669; }
+        .va-cta a:hover { background: var(--va-primary-dark); }
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
