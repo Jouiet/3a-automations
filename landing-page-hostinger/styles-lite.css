@@ -769,10 +769,302 @@ code {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   ROI STATS (Pricing Hero)
+   ───────────────────────────────────────────────────────────────────────────── */
+.roi-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-2xl);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-2xl);
+}
+
+.roi-stat {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: rgba(79, 186, 241, 0.05);
+  border: 1px solid rgba(79, 186, 241, 0.15);
+  border-radius: var(--radius-lg);
+  min-width: 180px;
+}
+
+.roi-value {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: var(--gradient-cyber);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-xs);
+}
+
+.roi-label {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   TOP 3 SERVICES SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+.services-highlight {
+  padding: var(--spacing-4xl) 0;
+  background: rgba(27, 47, 84, 0.2);
+}
+
+.services-highlight h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-md);
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.services-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+}
+
+.service-card {
+  background: rgba(27, 47, 84, 0.4);
+  border: 1px solid rgba(79, 186, 241, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: rgba(79, 186, 241, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.service-card.featured {
+  border-color: var(--primary);
+  background: rgba(79, 186, 241, 0.08);
+}
+
+.service-rank {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.service-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  background: rgba(79, 186, 241, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.service-card h3 {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+.service-desc {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.service-facts {
+  list-style: none;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: var(--radius-md);
+}
+
+.service-facts li {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  padding: var(--spacing-xs) 0;
+}
+
+.service-facts li strong {
+  color: var(--accent);
+}
+
+.service-includes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.service-includes span {
+  font-size: 0.75rem;
+  background: rgba(79, 186, 241, 0.1);
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.service-price {
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(79, 186, 241, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.service-price .price-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.service-price .price-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: var(--gradient-cyber);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CUSTOM PROJECTS SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+.custom-projects {
+  padding: var(--spacing-4xl) 0;
+}
+
+.custom-projects h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.custom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+}
+
+.custom-card {
+  background: rgba(27, 47, 84, 0.3);
+  border: 1px solid rgba(79, 186, 241, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  transition: border-color 0.2s ease;
+}
+
+.custom-card:hover {
+  border-color: rgba(79, 186, 241, 0.3);
+}
+
+.custom-card h3 {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-md);
+}
+
+.custom-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient-cyber);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-lg);
+}
+
+.custom-card ul {
+  list-style: none;
+}
+
+.custom-card li {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  padding: var(--spacing-xs) 0;
+  padding-left: var(--spacing-lg);
+  position: relative;
+}
+
+.custom-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   DATA SOURCES SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+.data-sources {
+  padding: var(--spacing-2xl) 0;
+  background: rgba(27, 47, 84, 0.15);
+}
+
+.data-sources h3 {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+.data-sources p {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.sources-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.sources-list a {
+  font-size: 0.8125rem;
+  color: var(--primary);
+  text-decoration: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(79, 186, 241, 0.05);
+  border: 1px solid rgba(79, 186, 241, 0.15);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.sources-list a:hover {
+  background: rgba(79, 186, 241, 0.1);
+  border-color: var(--primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    PRICING SECTION
    ───────────────────────────────────────────────────────────────────────────── */
 .pricing-section {
   padding: var(--spacing-3xl) 0;
+}
+
+.pricing-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-md);
 }
 
 .pricing-grid {
@@ -921,6 +1213,87 @@ code {
 
 .pricing-footer .btn {
   width: 100%;
+}
+
+/* Pricing Card Extended Elements */
+.price-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--gradient-cyber);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.price-period {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.pricing-annual {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+}
+
+.pricing-hours {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: rgba(79, 186, 241, 0.05);
+  border-radius: var(--radius-md);
+}
+
+.hours-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.hours-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.pricing-features {
+  list-style: none;
+  margin-bottom: var(--spacing-xl);
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  font-size: 0.9375rem;
+  color: var(--text-light);
+  padding: var(--spacing-sm) 0;
+}
+
+.pricing-features li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pricing-target {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: var(--radius-sm);
+}
+
+.pricing-target strong {
+  color: var(--accent);
+}
+
+.pricing-engagement {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -1327,6 +1700,18 @@ code {
     margin: 0 auto;
   }
 
+  .services-grid-3 {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .custom-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
   .other-categories {
     grid-template-columns: 1fr;
   }
@@ -1371,6 +1756,59 @@ code {
     font-size: 2rem;
   }
 
+  /* ROI Stats Mobile */
+  .roi-stats {
+    gap: var(--spacing-md);
+  }
+
+  .roi-stat {
+    min-width: 140px;
+    padding: var(--spacing-md);
+  }
+
+  .roi-value {
+    font-size: 1.75rem;
+  }
+
+  .roi-label {
+    font-size: 0.75rem;
+  }
+
+  /* Services Grid Mobile */
+  .services-highlight h2 {
+    font-size: 1.5rem;
+  }
+
+  .service-card {
+    padding: var(--spacing-lg);
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Custom Projects Mobile */
+  .custom-projects h2 {
+    font-size: 1.5rem;
+  }
+
+  .custom-price {
+    font-size: 1.25rem;
+  }
+
+  /* Data Sources Mobile */
+  .sources-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sources-list a {
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+  }
+
   .faq-grid {
     grid-template-columns: 1fr;
   }
@@ -1411,6 +1849,37 @@ code {
 
   .cta-content {
     padding: var(--spacing-2xl);
+  }
+
+  /* ROI Stats Small Screen */
+  .roi-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .roi-stat {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  /* Pricing Cards Small Screen */
+  .price-amount {
+    font-size: 2rem;
+  }
+
+  .hours-value {
+    font-size: 1.25rem;
+  }
+
+  .pricing-features li {
+    font-size: 0.875rem;
+  }
+
+  /* Service Cards Small Screen */
+  .service-price {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    text-align: center;
   }
 }
 
