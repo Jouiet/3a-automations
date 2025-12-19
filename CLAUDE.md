@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 6.4 | Dernière mise à jour: 2025-12-19 (Session 36 - Lang-Switch + Currency)
+## Version: 6.5 | Dernière mise à jour: 2025-12-19 (Session 36b - CRM Geo-Targeting)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -40,7 +40,7 @@
 | Marchés | **3** (MA/Maghreb, EU, International) |
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
-| Automatisations validées | **52** (validé par script) |
+| Automatisations validées | **64** (validé par script) |
 | MCPs configurés | **12** |
 | APIs fonctionnelles | Klaviyo ✅, Shopify ✅, GA4 ✅ |
 
@@ -184,6 +184,35 @@ VPS Hostinger (ID: 1168256)
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
+
+## SESSION 36b COMPLÉTÉE ✅ (19/12/2025 - CRM Geo-Targeting)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| geo-markets.cjs | ✅ | Module core 8 marchés |
+| Klaviyo geo-segment | ✅ | Segmentation par pays |
+| Generic CRM adapter | ✅ | HubSpot, Mailchimp, Brevo, AC |
+| Documentation | ✅ | docs/geo-targeting.md |
+
+**Scripts créés:**
+- `automations/generic/geo-markets.cjs` - Module core
+- `automations/clients/klaviyo/geo-segment-profiles.cjs` - Klaviyo
+- `automations/clients/crm/geo-segment-generic.cjs` - Multi-CRM
+
+**8 Marchés définis:**
+- Europe (FR, DE, IT...) → FR + EUR
+- Maghreb (MA, DZ, TN) → FR + MAD
+- North America (US, CA) → EN + USD
+- UK & Commonwealth → EN + USD
+- LATAM, APAC, Middle East, ROW
+
+**CRMs supportés:**
+- Klaviyo, HubSpot, Mailchimp, Brevo, ActiveCampaign
+
+**Commits Session 36b:**
+- `d455a3b` feat(crm): Add geo-segmentation templates for all CRMs
+
+---
 
 ## SESSION 36 COMPLÉTÉE ✅ (19/12/2025 - Lang-Switch + Currency)
 
