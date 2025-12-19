@@ -1106,7 +1106,7 @@ code {
   align-items: center;
   gap: var(--spacing-sm);
   font-size: 0.8125rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.85); /* WCAG AA contrast fix */
 }
 
 .tech-badge {
