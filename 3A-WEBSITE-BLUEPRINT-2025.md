@@ -1,6 +1,6 @@
 # 3A AUTOMATION - WEBSITE BLUEPRINT
 ## Document Exhaustif de Création du Site Web
-### Version: 1.6 | Date: 19/12/2025 | Auteur: 3A Automation
+### Version: 1.7 | Date: 19/12/2025 | Auteur: 3A Automation
 
 ---
 
@@ -77,7 +77,7 @@
 |---------|--------|--------|
 | Formulaire fonctionnel | ✅ FONCTIONNEL | n8n webhook intégré (audit-gratuit + contact) |
 | GA4 | ✅ **CONFIGURÉ** | G-87F6FDJG45 (LIVE sur 11 pages - Session 21d) |
-| GTM | ✅ INTÉGRÉ | GTM-XXXXXXX (placeholder - à configurer) |
+| GTM | ✅ **CONFIGURÉ** | GTM-WLVJQC3M (LIVE sur 11 pages - Session 21e) |
 | Pixels (FB, LinkedIn) | ✅ INTÉGRÉS | Meta Pixel + LinkedIn Insight (placeholders) |
 | robots.txt | ✅ CRÉÉ | `/landing-page-hostinger/robots.txt` |
 | sitemap.xml | ✅ CRÉÉ | `/landing-page-hostinger/sitemap.xml` (toutes pages) |

@@ -272,15 +272,15 @@ STATUT: Non fonctionnel - template Liquid requis
 
 | Tracker | État | Valeur Actuelle | Impact |
 |---------|------|-----------------|--------|
-| GTM | PLACEHOLDER | `GTM-XXXXXXX` | Aucun tracking |
-| GA4 | PLACEHOLDER | `G-XXXXXXXXXX` | Aucune donnée |
+| GTM | **✅ CONFIGURÉ** | `GTM-WLVJQC3M` | **LIVE sur 11 pages** |
+| GA4 | **✅ CONFIGURÉ** | `G-87F6FDJG45` | **LIVE sur 11 pages** |
 | Meta Pixel | PLACEHOLDER | `PIXEL_ID_HERE` | Pas de retargeting |
 | LinkedIn | PLACEHOLDER | `LINKEDIN_PARTNER_ID` | Pas de B2B tracking |
 
-**IMPACT CRITIQUE: AUCUNE DONNÉE COLLECTÉE**
-- Pas de analytics
-- Pas de conversions trackées
-- Pas de données pour optimisation
+**TRACKING OPERATIONNEL ✅** (Session 21d/21e)
+- GA4: G-87F6FDJG45 collecte les données
+- GTM: GTM-WLVJQC3M prêt pour tags additionnels
+- Meta/LinkedIn: À configurer quand comptes créés
 
 ## 4.5 Formulaire Contact
 
@@ -614,7 +614,7 @@ logo.png:        273KB → <50KB  (SVG ou WebP)
 | Landing | Schema.org | **12/12 (100%)** ✅ |
 | Landing | Images optimisées | **2/2 critiques (100%)** ✅ |
 | Tracking | GA4 | **✅ G-87F6FDJG45 LIVE** |
-| Tracking | GTM | ⏳ placeholder (GTM-XXXXXXX) |
+| Tracking | GTM | **✅ GTM-WLVJQC3M LIVE** |
 | AEO | robots.txt crawlers | **8/8 (100%)** ✅ |
 | AEO | llms.txt conforme | **Oui** ✅ |
 | Blueprint | Score | **100/100** ✅ |
@@ -630,7 +630,7 @@ logo.png:        273KB → <50KB  (SVG ou WebP)
 | Claims corrigés | 100% | 30min | P0 |
 | MCPs fonctionnels | 5/12 | 4h | P1 |
 | Schema.org | 100% | 3h | P1 |
-| Tracking actif | GTM + GA4 | 2h | P1 |
+| Tracking actif | **✅ GTM + GA4 LIVE** | 0h | **DONE** |
 | llms.txt conforme | Oui | 2h | P1 |
 | Scripts réutilisables | 25+ | 20h | P2 |
 | Clients actifs | 4-5 | Outreach | P2 |
@@ -1382,13 +1382,13 @@ landing-page-hostinger/
 
 | Élément | Action requise |
 |---------|----------------|
-| GA4 | Créer propriété → remplacer G-XXXXXXXXXX |
-| GTM | Créer container → remplacer GTM-XXXXXXX |
-| Meta Pixel | Créer pixel → remplacer PIXEL_ID_HERE |
-| LinkedIn | Créer partner ID → remplacer LINKEDIN_PARTNER_ID |
-| SSL | Vérifier certificat Let's Encrypt |
-| DNS | Configurer 3a-automation.com → Hostinger |
-| n8n webhook | Vérifier endpoint fonctionnel |
+| GA4 | **✅ FAIT** - G-87F6FDJG45 LIVE sur 11 pages |
+| GTM | **✅ FAIT** - GTM-WLVJQC3M LIVE sur 11 pages |
+| Meta Pixel | ⏳ Créer pixel → remplacer PIXEL_ID_HERE |
+| LinkedIn | ⏳ Créer partner ID → remplacer LINKEDIN_PARTNER_ID |
+| SSL | **✅ FAIT** - Let's Encrypt via Traefik |
+| DNS | **✅ FAIT** - 3a-automation.com → Hostinger |
+| n8n webhook | ⏳ Régénérer API key |
 
 ## 20.3 APIs Agence - État
 
@@ -1984,20 +1984,21 @@ root-n8n                Running (workflow automation)
 │     URL: https://console.x.ai/billing                                       │
 │     Action: Acheter crédits pour Voice Agent                                │
 │                                                                              │
-│   ✅ PRIORITÉ 4 - GA4 Analytics CONFIGURÉ (Session 21d)                     │
-│     • G-87F6FDJG45 sur 11 pages LIVE ✅                                     │
-│     • GTM-XXXXXXX → (needs GTM container - P2)                              │
+│   ✅ PRIORITÉ 4 - TRACKING COMPLET (Sessions 21d/21e)                       │
+│     • GA4: G-87F6FDJG45 LIVE sur 11 pages ✅                                │
+│     • GTM: GTM-WLVJQC3M LIVE sur 11 pages ✅                                │
 │                                                                              │
-│   TAUX CONFIGURATION: 10/12 services (83%)                                  │
+│   TAUX CONFIGURATION: 11/12 services (92%)                                  │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v4.0**
+**FIN DE L'AUDIT FORENSIQUE v4.1**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v4.1: Session 21e - GTM CONFIGURÉ (GTM-WLVJQC3M) sur 11 pages LIVE + Repo PUBLIC*
 *v4.0: Session 21d - GA4 CONFIGURÉ (G-87F6FDJG45) sur 11 pages LIVE + Blueprint 100/100*
 *v3.9: Session 21c - Site LIVE + repo PRIVÉ + GitHub token renouvelé + Apify configuré*
 *v3.8: Session 21b - 9 services configurés + Klaviyo testé OK (3 listes)*
