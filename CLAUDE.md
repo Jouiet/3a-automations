@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 5.2 | Dernière mise à jour: 2025-12-19 (Session 23)
+## Version: 5.4 | Dernière mise à jour: 2025-12-19 (Session 23b - Architecture Optimisée)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -57,23 +57,28 @@ git push origin main  # Déclenche Deploy Website workflow
 
 ---
 
-## STRUCTURE PROJET
+## STRUCTURE PROJET (Optimisée Session 23b)
 
 ```
-/Users/mac/Desktop/JO-AAA/
-├── automations/              # 56 automatisations
-│   ├── agency/core/          # 11 outils internes
-│   ├── clients/              # 41 automatisations (shopify, klaviyo, seo, leads, etc.)
-│   ├── generic/              # 2 utilitaires (validate-all, test-all-apis)
-│   └── legacy-client-specific/  # 2 scripts non génériques
-├── landing-page-hostinger/   # Site web (auto-deploy)
-├── archive/                  # Legacy scripts archivés
-│   ├── mydealz-scripts/
-│   ├── henderson-scripts/
-│   ├── alpha-medical-scripts/
-│   └── scripts-legacy/
-├── outputs/                  # Résultats audits
-└── .claude/rules/            # Règles modulaires (4 fichiers)
+/Users/mac/Desktop/JO-AAA/        # 15MB hors node_modules
+├── CLAUDE.md                     # Mémoire Claude
+├── README.md                     # Documentation racine
+├── GROK.md                       # Config Grok AI
+├── HISTORY.md                    # Changelog
+├── docker-compose.yml            # Config déploiement
+│
+├── automations/                  # 56 automatisations
+│   ├── agency/core/              # 11 outils internes
+│   ├── clients/                  # 41 templates clients
+│   ├── generic/                  # 2 utilitaires
+│   └── legacy-client-specific/   # 2 legacy
+│
+├── docs/                         # 8 docs actives
+├── landing-page-hostinger/       # Site web (auto-deploy)
+├── knowledge-base/               # RAG system (484KB)
+├── outputs/                      # Rapports & résultats
+├── archive/                      # Legacy (scripts + docs + assets)
+└── .claude/rules/                # 4 règles modulaires
 ```
 
 ---
@@ -136,8 +141,10 @@ VPS Hostinger (ID: 1168256)
 | Document | Usage |
 |----------|-------|
 | `outputs/FORENSIC-AUDIT-2025-12-18.md` | Source de vérité factuelle |
-| `DEPLOYMENT-GUIDE.md` | Processus déploiement |
-| `3A-WEBSITE-BLUEPRINT-2025.md` | Design & UX site |
+| `docs/deployment.md` | Processus déploiement |
+| `docs/website-blueprint.md` | Design & UX site |
+| `docs/business-model.md` | Modèle économique |
+| `docs/flywheel.md` | Architecture Flywheel |
 | `.claude/rules/*.md` | Standards code & factualité |
 
 ---
