@@ -1,31 +1,34 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="3A Automation - Consultant Automation, Analytics & AI pour PME. Audits e-commerce, automatisations Shopify & Klaviyo, optimisation SEO. Services sur mesure.">
+  <meta name="description" content="3A Automation - Automation, Analytics & AI Consultant for SMBs. E-commerce audits, Shopify & Klaviyo automations, SEO optimization. Tailored services.">
   <meta name="author" content="3A Automation">
   <meta name="robots" content="index, follow">
   <meta name="geo.region" content="MA">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://3a-automation.com/">
+  <meta property="og:url" content="https://3a-automation.com/en/">
   <meta property="og:title" content="3A Automation | Automation - Analytics - AI">
-  <meta property="og:description" content="Automatisation E-commerce & PME. Shopify, Klaviyo, GA4, n8n. 52 automatisations testées.">
+  <meta property="og:description" content="E-commerce & SMB Automation. Shopify, Klaviyo, GA4, n8n. 52 tested automations.">
   <meta property="og:image" content="https://3a-automation.com/og-image.png">
-  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="fr_FR">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="3A Automation | Automation - Analytics - AI">
-  <meta name="twitter:description" content="Automatisation E-commerce & PME. 52 automatisations testées et déployées.">
+  <meta name="twitter:description" content="E-commerce & SMB Automation. 52 tested and deployed automations.">
   <meta name="twitter:image" content="https://3a-automation.com/og-image.png">
 
-  <link rel="canonical" href="https://3a-automation.com/">
-  <link rel="alternate" hreflang="fr" href="https://3a-automation.com/">
+  <!-- Hreflang tags -->
   <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/">
+  <link rel="alternate" hreflang="fr" href="https://3a-automation.com/">
   <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/">
+
+  <link rel="canonical" href="https://3a-automation.com/en/">
   <title>3A Automation | Automation - Analytics - AI</title>
 
   <!-- Favicon -->
@@ -38,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3.2">
+  <link rel="stylesheet" href="../styles.css?v=3.2">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -46,7 +49,7 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "3A Automation",
-    "description": "Consultant Automation, Analytics & AI pour PME et E-commerce",
+    "description": "Automation, Analytics & AI Consultant for SMBs and E-commerce",
     "url": "https://3a-automation.com",
     "logo": "https://3a-automation.com/logo.png",
     "email": "contact@3a-automation.com",
@@ -103,7 +106,7 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <a href="/" class="logo">
+      <a href="/en/" class="logo">
         <div class="logo-icon">
           <svg viewBox="0 0 40 40" fill="none">
             <path d="M20 4L36 34H4L20 4Z" stroke="url(#logoGrad)" stroke-width="2" fill="none"/>
@@ -122,10 +125,11 @@
         </div>
       </a>
       <nav class="nav" id="nav-menu">
-        <a href="/services/ecommerce.html">E-commerce</a>
-        <a href="/services/pme.html">PME</a>
-        <a href="/automations.html">Automations</a>
-        <a href="/pricing.html">Tarifs</a>
+        <a href="/en/services/ecommerce.html">E-commerce</a>
+        <a href="/en/services/smb.html">SMB</a>
+        <a href="/en/automations.html">Automations</a>
+        <a href="/en/pricing.html">Pricing</a>
+        <a href="/" class="lang-switcher" title="Switch to French">FR</a>
         <a href="#contact" class="btn-nav">
           <span>Contact</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -139,7 +143,7 @@
     </div>
   </header>
 
-  <!-- Hero Ultra Futuriste -->
+  <!-- Hero Ultra Futuristic -->
   <section class="hero-ultra scanline">
     <div class="hero-particles">
       <div class="particle-orb orb-1"></div>
@@ -162,18 +166,18 @@
         </div>
 
         <h1 class="hero-title">
-          <span class="title-line">Automatisez votre</span>
-          <span class="title-line gradient-text">croissance digitale</span>
+          <span class="title-line">Automate your</span>
+          <span class="title-line gradient-text">digital growth</span>
         </h1>
 
         <p class="hero-description">
-          Vos processus s'exécutent. Vos leads se qualifient. Vos clients se fidélisent.<br>
-          <strong>Vous, vous pilotez la croissance.</strong>
+          Your processes run automatically. Your leads qualify themselves. Your customers stay loyal.<br>
+          <strong>You focus on growth.</strong>
         </p>
 
         <div class="hero-actions">
           <a href="#contact" class="btn-cyber btn-primary-cyber">
-            <span class="btn-text">Audit Gratuit</span>
+            <span class="btn-text">Free Audit</span>
             <span class="btn-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -181,8 +185,8 @@
             </span>
             <span class="btn-glow"></span>
           </a>
-          <a href="/automations.html" class="btn-cyber btn-secondary-cyber">
-            <span class="btn-text">Explorer le Catalogue</span>
+          <a href="/en/automations.html" class="btn-cyber btn-secondary-cyber">
+            <span class="btn-text">Explore Catalog</span>
             <span class="btn-border"></span>
           </a>
         </div>
@@ -190,12 +194,12 @@
         <div class="hero-stats-ultra">
           <div class="stat-ultra">
             <div class="stat-number-ultra" data-count="52">52</div>
-            <div class="stat-label-ultra">Automatisations</div>
+            <div class="stat-label-ultra">Automations</div>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-ultra">
             <div class="stat-number-ultra" data-count="12">12</div>
-            <div class="stat-label-ultra">MCPs Actifs</div>
+            <div class="stat-label-ultra">Active MCPs</div>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-ultra">
@@ -265,9 +269,9 @@
   <section class="flywheel-section">
     <div class="container">
       <div class="section-header-ultra">
-        <span class="section-tag">Notre Approche</span>
-        <h2 class="section-title-ultra">Le Flywheel de Croissance</h2>
-        <p class="section-desc-ultra">Un système intégré qui transforme chaque interaction en opportunité.</p>
+        <span class="section-tag">Our Approach</span>
+        <h2 class="section-title-ultra">The Growth Flywheel</h2>
+        <p class="section-desc-ultra">An integrated system that transforms every interaction into an opportunity.</p>
       </div>
 
       <div class="flywheel-visual">
@@ -334,14 +338,14 @@
   <section id="services" class="services-ultra">
     <div class="container">
       <div class="section-header-ultra">
-        <span class="section-tag">Nos Services</span>
-        <h2 class="section-title-ultra">Solutions Complètes</h2>
-        <p class="section-desc-ultra">De l'acquisition à l'advocacy, nous couvrons tout le cycle client.</p>
+        <span class="section-tag">Our Services</span>
+        <h2 class="section-title-ultra">Complete Solutions</h2>
+        <p class="section-desc-ultra">From acquisition to advocacy, we cover the entire customer lifecycle.</p>
       </div>
 
       <div class="services-grid-ultra">
         <!-- E-commerce Card -->
-        <a href="/services/ecommerce.html" class="service-card-ultra holographic">
+        <a href="/en/services/ecommerce.html" class="service-card-ultra holographic">
           <div class="card-glow"></div>
           <div class="card-border"></div>
           <div class="card-content">
@@ -353,7 +357,7 @@
               </svg>
             </div>
             <h3 class="card-title">E-commerce & Dropshipping</h3>
-            <p class="card-desc">Shopify, Klaviyo, DSers. Audit, SEO, flows email, sync multi-canaux.</p>
+            <p class="card-desc">Shopify, Klaviyo, DSers. Audit, SEO, email flows, multi-channel sync.</p>
             <div class="card-stats">
               <span class="card-stat"><strong>20+</strong> automations</span>
               <span class="card-stat"><strong>7</strong> email flows</span>
@@ -366,8 +370,8 @@
           </div>
         </a>
 
-        <!-- PME Card -->
-        <a href="/services/pme.html" class="service-card-ultra holographic">
+        <!-- SMB Card -->
+        <a href="/en/services/smb.html" class="service-card-ultra holographic">
           <div class="card-glow"></div>
           <div class="card-border"></div>
           <div class="card-content">
@@ -379,8 +383,8 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
             </div>
-            <h3 class="card-title">PME & Services</h3>
-            <p class="card-desc">Lead gen, analytics, dashboards, IA. Automatisez votre croissance.</p>
+            <h3 class="card-title">SMB & Services</h3>
+            <p class="card-desc">Lead gen, analytics, dashboards, AI. Automate your growth.</p>
             <div class="card-stats">
               <span class="card-stat"><strong>10+</strong> lead automations</span>
               <span class="card-stat"><strong>6</strong> analytics</span>
@@ -394,10 +398,10 @@
         </a>
 
         <!-- Full Catalog Card -->
-        <a href="/automations.html" class="service-card-ultra card-featured holographic">
+        <a href="/en/automations.html" class="service-card-ultra card-featured holographic">
           <div class="card-glow"></div>
           <div class="card-border"></div>
-          <div class="card-badge">52 Automatisations</div>
+          <div class="card-badge">52 Automations</div>
           <div class="card-content">
             <div class="card-icon catalog">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -405,10 +409,10 @@
                 <polyline points="8 6 2 12 8 18"/>
               </svg>
             </div>
-            <h3 class="card-title">Catalogue Complet</h3>
-            <p class="card-desc">Explorez nos 52 automatisations: Lead gen, SEO, Email, Shopify, Analytics.</p>
+            <h3 class="card-title">Full Catalog</h3>
+            <p class="card-desc">Explore our 52 automations: Lead gen, SEO, Email, Shopify, Analytics.</p>
             <div class="card-stats">
-              <span class="card-stat"><strong>12</strong> MCPs actifs</span>
+              <span class="card-stat"><strong>12</strong> active MCPs</span>
               <span class="card-stat"><strong>10+</strong> APIs</span>
             </div>
             <span class="card-arrow">
@@ -426,81 +430,81 @@
   <section class="tech-stack-section">
     <div class="container">
       <div class="section-header-ultra compact">
-        <span class="section-tag">Notre Stack</span>
-        <h2 class="section-title-ultra">30+ Technologies Maîtrisées</h2>
+        <span class="section-tag">Our Stack</span>
+        <h2 class="section-title-ultra">30+ Mastered Technologies</h2>
       </div>
 
       <!-- Marquee Row 1: E-commerce, Analytics, Ads -->
       <div class="tech-marquee">
         <div class="tech-marquee-track">
-          <span class="tech-pill ecommerce"><img src="assets/logos/shopify.svg" alt="" loading="lazy">Shopify</span>
-          <span class="tech-pill ecommerce"><img src="assets/logos/klaviyo.svg" alt="" loading="lazy">Klaviyo</span>
-          <span class="tech-pill ecommerce"><img src="assets/logos/flow.svg" alt="" loading="lazy">Shopify Flow</span>
-          <span class="tech-pill ecommerce"><img src="assets/logos/dsers.svg" alt="" loading="lazy">Dsers</span>
-          <span class="tech-pill analytics"><img src="assets/logos/ga4.svg" alt="" loading="lazy">GA4</span>
-          <span class="tech-pill analytics"><img src="assets/logos/gtm.svg" alt="" loading="lazy">GTM</span>
-          <span class="tech-pill analytics"><img src="assets/logos/meta.svg" alt="" loading="lazy">Meta Pixel</span>
-          <span class="tech-pill analytics"><img src="assets/logos/tiktok.svg" alt="" loading="lazy">TikTok Pixel</span>
-          <span class="tech-pill analytics"><img src="assets/logos/linkedin.svg" alt="" loading="lazy">LinkedIn Pixel</span>
-          <span class="tech-pill analytics"><img src="assets/logos/gsc.svg" alt="" loading="lazy">GSC</span>
-          <span class="tech-pill analytics"><img src="assets/logos/looker.svg" alt="" loading="lazy">Looker Studio</span>
-          <span class="tech-pill analytics"><img src="assets/logos/clarity.svg" alt="" loading="lazy">Clarity</span>
-          <span class="tech-pill analytics"><img src="assets/logos/powerbi.svg" alt="" loading="lazy">Power BI</span>
-          <span class="tech-pill ads"><img src="assets/logos/meta.svg" alt="" loading="lazy">Meta Ads</span>
-          <span class="tech-pill ads"><img src="assets/logos/googleads.svg" alt="" loading="lazy">Google Ads</span>
-          <span class="tech-pill ads"><img src="assets/logos/tiktok.svg" alt="" loading="lazy">TikTok Ads</span>
-          <span class="tech-pill ads"><img src="assets/logos/linkedin.svg" alt="" loading="lazy">LinkedIn Ads</span>
+          <span class="tech-pill ecommerce"><img src="../assets/logos/shopify.svg" alt="" loading="lazy">Shopify</span>
+          <span class="tech-pill ecommerce"><img src="../assets/logos/klaviyo.svg" alt="" loading="lazy">Klaviyo</span>
+          <span class="tech-pill ecommerce"><img src="../assets/logos/flow.svg" alt="" loading="lazy">Shopify Flow</span>
+          <span class="tech-pill ecommerce"><img src="../assets/logos/dsers.svg" alt="" loading="lazy">Dsers</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/ga4.svg" alt="" loading="lazy">GA4</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/gtm.svg" alt="" loading="lazy">GTM</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/meta.svg" alt="" loading="lazy">Meta Pixel</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/tiktok.svg" alt="" loading="lazy">TikTok Pixel</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/linkedin.svg" alt="" loading="lazy">LinkedIn Pixel</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/gsc.svg" alt="" loading="lazy">GSC</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/looker.svg" alt="" loading="lazy">Looker Studio</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/clarity.svg" alt="" loading="lazy">Clarity</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/powerbi.svg" alt="" loading="lazy">Power BI</span>
+          <span class="tech-pill ads"><img src="../assets/logos/meta.svg" alt="" loading="lazy">Meta Ads</span>
+          <span class="tech-pill ads"><img src="../assets/logos/googleads.svg" alt="" loading="lazy">Google Ads</span>
+          <span class="tech-pill ads"><img src="../assets/logos/tiktok.svg" alt="" loading="lazy">TikTok Ads</span>
+          <span class="tech-pill ads"><img src="../assets/logos/linkedin.svg" alt="" loading="lazy">LinkedIn Ads</span>
           <!-- Duplicate for seamless loop -->
-          <span class="tech-pill ecommerce"><img src="assets/logos/shopify.svg" alt="" loading="lazy">Shopify</span>
-          <span class="tech-pill ecommerce"><img src="assets/logos/klaviyo.svg" alt="" loading="lazy">Klaviyo</span>
-          <span class="tech-pill ecommerce"><img src="assets/logos/flow.svg" alt="" loading="lazy">Shopify Flow</span>
-          <span class="tech-pill ecommerce"><img src="assets/logos/dsers.svg" alt="" loading="lazy">Dsers</span>
-          <span class="tech-pill analytics"><img src="assets/logos/ga4.svg" alt="" loading="lazy">GA4</span>
-          <span class="tech-pill analytics"><img src="assets/logos/gtm.svg" alt="" loading="lazy">GTM</span>
-          <span class="tech-pill analytics"><img src="assets/logos/meta.svg" alt="" loading="lazy">Meta Pixel</span>
-          <span class="tech-pill analytics"><img src="assets/logos/tiktok.svg" alt="" loading="lazy">TikTok Pixel</span>
-          <span class="tech-pill analytics"><img src="assets/logos/linkedin.svg" alt="" loading="lazy">LinkedIn Pixel</span>
-          <span class="tech-pill analytics"><img src="assets/logos/gsc.svg" alt="" loading="lazy">GSC</span>
-          <span class="tech-pill analytics"><img src="assets/logos/looker.svg" alt="" loading="lazy">Looker Studio</span>
-          <span class="tech-pill analytics"><img src="assets/logos/clarity.svg" alt="" loading="lazy">Clarity</span>
-          <span class="tech-pill analytics"><img src="assets/logos/powerbi.svg" alt="" loading="lazy">Power BI</span>
-          <span class="tech-pill ads"><img src="assets/logos/meta.svg" alt="" loading="lazy">Meta Ads</span>
-          <span class="tech-pill ads"><img src="assets/logos/googleads.svg" alt="" loading="lazy">Google Ads</span>
-          <span class="tech-pill ads"><img src="assets/logos/tiktok.svg" alt="" loading="lazy">TikTok Ads</span>
-          <span class="tech-pill ads"><img src="assets/logos/linkedin.svg" alt="" loading="lazy">LinkedIn Ads</span>
+          <span class="tech-pill ecommerce"><img src="../assets/logos/shopify.svg" alt="" loading="lazy">Shopify</span>
+          <span class="tech-pill ecommerce"><img src="../assets/logos/klaviyo.svg" alt="" loading="lazy">Klaviyo</span>
+          <span class="tech-pill ecommerce"><img src="../assets/logos/flow.svg" alt="" loading="lazy">Shopify Flow</span>
+          <span class="tech-pill ecommerce"><img src="../assets/logos/dsers.svg" alt="" loading="lazy">Dsers</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/ga4.svg" alt="" loading="lazy">GA4</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/gtm.svg" alt="" loading="lazy">GTM</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/meta.svg" alt="" loading="lazy">Meta Pixel</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/tiktok.svg" alt="" loading="lazy">TikTok Pixel</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/linkedin.svg" alt="" loading="lazy">LinkedIn Pixel</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/gsc.svg" alt="" loading="lazy">GSC</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/looker.svg" alt="" loading="lazy">Looker Studio</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/clarity.svg" alt="" loading="lazy">Clarity</span>
+          <span class="tech-pill analytics"><img src="../assets/logos/powerbi.svg" alt="" loading="lazy">Power BI</span>
+          <span class="tech-pill ads"><img src="../assets/logos/meta.svg" alt="" loading="lazy">Meta Ads</span>
+          <span class="tech-pill ads"><img src="../assets/logos/googleads.svg" alt="" loading="lazy">Google Ads</span>
+          <span class="tech-pill ads"><img src="../assets/logos/tiktok.svg" alt="" loading="lazy">TikTok Ads</span>
+          <span class="tech-pill ads"><img src="../assets/logos/linkedin.svg" alt="" loading="lazy">LinkedIn Ads</span>
         </div>
       </div>
 
       <!-- Marquee Row 2: Automation, AI (reverse direction) -->
       <div class="tech-marquee reverse">
         <div class="tech-marquee-track">
-          <span class="tech-pill ai featured"><img src="assets/logos/anthropic.svg" alt="" loading="lazy">Anthropic</span>
-          <span class="tech-pill ai"><img src="assets/logos/grok.svg" alt="" loading="lazy">Grok (xAI)</span>
-          <span class="tech-pill ai"><img src="assets/logos/gemini.svg" alt="" loading="lazy">Gemini</span>
-          <span class="tech-pill ai"><img src="assets/logos/leonardo.svg" alt="" loading="lazy">Leonardo.ai</span>
-          <span class="tech-pill ai"><img src="assets/logos/kling.svg" alt="" loading="lazy">Kling AI</span>
-          <span class="tech-pill automation"><img src="assets/logos/n8n.svg" alt="" loading="lazy">n8n</span>
-          <span class="tech-pill automation"><img src="assets/logos/github.svg" alt="" loading="lazy">GitHub Actions</span>
-          <span class="tech-pill automation"><img src="assets/logos/apify.svg" alt="" loading="lazy">Apify</span>
-          <span class="tech-pill automation"><img src="assets/logos/appsscript.svg" alt="" loading="lazy">Apps Script</span>
-          <span class="tech-pill automation"><img src="assets/logos/playwright.svg" alt="" loading="lazy">Playwright</span>
-          <span class="tech-pill automation"><img src="assets/logos/devtools.svg" alt="" loading="lazy">Chrome DevTools</span>
-          <span class="tech-pill infra"><img src="assets/logos/hostinger.svg" alt="" loading="lazy">Hostinger</span>
-          <span class="tech-pill infra"><img src="assets/logos/wordpress.svg" alt="" loading="lazy">WordPress</span>
+          <span class="tech-pill ai featured"><img src="../assets/logos/anthropic.svg" alt="" loading="lazy">Anthropic</span>
+          <span class="tech-pill ai"><img src="../assets/logos/grok.svg" alt="" loading="lazy">Grok (xAI)</span>
+          <span class="tech-pill ai"><img src="../assets/logos/gemini.svg" alt="" loading="lazy">Gemini</span>
+          <span class="tech-pill ai"><img src="../assets/logos/leonardo.svg" alt="" loading="lazy">Leonardo.ai</span>
+          <span class="tech-pill ai"><img src="../assets/logos/kling.svg" alt="" loading="lazy">Kling AI</span>
+          <span class="tech-pill automation"><img src="../assets/logos/n8n.svg" alt="" loading="lazy">n8n</span>
+          <span class="tech-pill automation"><img src="../assets/logos/github.svg" alt="" loading="lazy">GitHub Actions</span>
+          <span class="tech-pill automation"><img src="../assets/logos/apify.svg" alt="" loading="lazy">Apify</span>
+          <span class="tech-pill automation"><img src="../assets/logos/appsscript.svg" alt="" loading="lazy">Apps Script</span>
+          <span class="tech-pill automation"><img src="../assets/logos/playwright.svg" alt="" loading="lazy">Playwright</span>
+          <span class="tech-pill automation"><img src="../assets/logos/devtools.svg" alt="" loading="lazy">Chrome DevTools</span>
+          <span class="tech-pill infra"><img src="../assets/logos/hostinger.svg" alt="" loading="lazy">Hostinger</span>
+          <span class="tech-pill infra"><img src="../assets/logos/wordpress.svg" alt="" loading="lazy">WordPress</span>
           <!-- Duplicate for seamless loop -->
-          <span class="tech-pill ai featured"><img src="assets/logos/anthropic.svg" alt="" loading="lazy">Anthropic</span>
-          <span class="tech-pill ai"><img src="assets/logos/grok.svg" alt="" loading="lazy">Grok (xAI)</span>
-          <span class="tech-pill ai"><img src="assets/logos/gemini.svg" alt="" loading="lazy">Gemini</span>
-          <span class="tech-pill ai"><img src="assets/logos/leonardo.svg" alt="" loading="lazy">Leonardo.ai</span>
-          <span class="tech-pill ai"><img src="assets/logos/kling.svg" alt="" loading="lazy">Kling AI</span>
-          <span class="tech-pill automation"><img src="assets/logos/n8n.svg" alt="" loading="lazy">n8n</span>
-          <span class="tech-pill automation"><img src="assets/logos/github.svg" alt="" loading="lazy">GitHub Actions</span>
-          <span class="tech-pill automation"><img src="assets/logos/apify.svg" alt="" loading="lazy">Apify</span>
-          <span class="tech-pill automation"><img src="assets/logos/appsscript.svg" alt="" loading="lazy">Apps Script</span>
-          <span class="tech-pill automation"><img src="assets/logos/playwright.svg" alt="" loading="lazy">Playwright</span>
-          <span class="tech-pill automation"><img src="assets/logos/devtools.svg" alt="" loading="lazy">Chrome DevTools</span>
-          <span class="tech-pill infra"><img src="assets/logos/hostinger.svg" alt="" loading="lazy">Hostinger</span>
-          <span class="tech-pill infra"><img src="assets/logos/wordpress.svg" alt="" loading="lazy">WordPress</span>
+          <span class="tech-pill ai featured"><img src="../assets/logos/anthropic.svg" alt="" loading="lazy">Anthropic</span>
+          <span class="tech-pill ai"><img src="../assets/logos/grok.svg" alt="" loading="lazy">Grok (xAI)</span>
+          <span class="tech-pill ai"><img src="../assets/logos/gemini.svg" alt="" loading="lazy">Gemini</span>
+          <span class="tech-pill ai"><img src="../assets/logos/leonardo.svg" alt="" loading="lazy">Leonardo.ai</span>
+          <span class="tech-pill ai"><img src="../assets/logos/kling.svg" alt="" loading="lazy">Kling AI</span>
+          <span class="tech-pill automation"><img src="../assets/logos/n8n.svg" alt="" loading="lazy">n8n</span>
+          <span class="tech-pill automation"><img src="../assets/logos/github.svg" alt="" loading="lazy">GitHub Actions</span>
+          <span class="tech-pill automation"><img src="../assets/logos/apify.svg" alt="" loading="lazy">Apify</span>
+          <span class="tech-pill automation"><img src="../assets/logos/appsscript.svg" alt="" loading="lazy">Apps Script</span>
+          <span class="tech-pill automation"><img src="../assets/logos/playwright.svg" alt="" loading="lazy">Playwright</span>
+          <span class="tech-pill automation"><img src="../assets/logos/devtools.svg" alt="" loading="lazy">Chrome DevTools</span>
+          <span class="tech-pill infra"><img src="../assets/logos/hostinger.svg" alt="" loading="lazy">Hostinger</span>
+          <span class="tech-pill infra"><img src="../assets/logos/wordpress.svg" alt="" loading="lazy">WordPress</span>
         </div>
       </div>
     </div>
@@ -511,8 +515,8 @@
     <div class="container">
       <div class="section-header-ultra">
         <span class="section-tag">Process</span>
-        <h2 class="section-title-ultra">Notre Méthode</h2>
-        <p class="section-desc-ultra">Une approche systématique en 4 phases.</p>
+        <h2 class="section-title-ultra">Our Method</h2>
+        <p class="section-desc-ultra">A systematic approach in 4 phases.</p>
       </div>
 
       <div class="process-timeline">
@@ -524,7 +528,7 @@
           </div>
           <div class="step-content-ultra">
             <h3>Audit</h3>
-            <p>Analyse forensique complète de votre stack. Workflows automatisés pour identifier chaque opportunité.</p>
+            <p>Complete forensic analysis of your stack. Automated workflows to identify every opportunity.</p>
           </div>
         </div>
         <div class="process-step-ultra">
@@ -534,7 +538,7 @@
           </div>
           <div class="step-content-ultra">
             <h3>Architecture</h3>
-            <p>Design du système intégré. MCPs, workflows, flows email - tout interconnecté.</p>
+            <p>Integrated system design. MCPs, workflows, email flows - everything interconnected.</p>
           </div>
         </div>
         <div class="process-step-ultra">
@@ -543,8 +547,8 @@
             <div class="step-pulse"></div>
           </div>
           <div class="step-content-ultra">
-            <h3>Implémentation</h3>
-            <p>Déploiement progressif avec tests A/B. Chaque script validé avant mise en production.</p>
+            <h3>Implementation</h3>
+            <p>Progressive deployment with A/B testing. Every script validated before production.</p>
           </div>
         </div>
         <div class="process-step-ultra">
@@ -553,8 +557,8 @@
             <div class="step-pulse"></div>
           </div>
           <div class="step-content-ultra">
-            <h3>Optimisation</h3>
-            <p>Monitoring continu. Dashboards temps réel. Itérations basées sur les données.</p>
+            <h3>Optimization</h3>
+            <p>Continuous monitoring. Real-time dashboards. Data-driven iterations.</p>
           </div>
         </div>
       </div>
@@ -567,14 +571,14 @@
       <div class="cta-card-ultra glass-panel">
         <div class="cta-glow"></div>
         <div class="cta-content-ultra">
-          <h2 class="cta-title">Prêt à scaler?</h2>
-          <p class="cta-desc">Audit gratuit. Rapport détaillé sous 48h. Zéro engagement.</p>
+          <h2 class="cta-title">Ready to scale?</h2>
+          <p class="cta-desc">Free audit. Detailed report within 48h. Zero commitment.</p>
 
           <form class="form-ultra" id="audit-form" action="https://script.google.com/macros/s/AKfycbyzIHwTDfQpm57LBloFJ53BMkSvsSDd3zCXE41mMSFPMa1m6xOuji3ICKQJA1oiHb-4/exec" method="POST">
             <div class="form-grid">
               <div class="form-field">
                 <input type="text" name="name" id="name" required placeholder=" " autocomplete="name">
-                <label for="name">Nom</label>
+                <label for="name">Name</label>
                 <span class="field-border"></span>
               </div>
               <div class="form-field">
@@ -584,30 +588,30 @@
               </div>
               <div class="form-field full-width">
                 <input type="url" name="website" id="website" required placeholder=" " autocomplete="url">
-                <label for="website">URL de votre site</label>
+                <label for="website">Website URL</label>
                 <span class="field-border"></span>
               </div>
               <div class="form-field full-width">
                 <select name="service" id="service" required>
-                  <option value="" disabled selected>Type de service</option>
-                  <option value="audit-shopify">Audit Shopify</option>
-                  <option value="audit-crm">Audit CRM</option>
-                  <option value="automation-ecommerce">Automation E-commerce</option>
-                  <option value="automation-pme">Automation PME</option>
-                  <option value="consultation">Consultation gratuite</option>
+                  <option value="" disabled selected>Service type</option>
+                  <option value="audit-shopify">Shopify Audit</option>
+                  <option value="audit-crm">CRM Audit</option>
+                  <option value="automation-ecommerce">E-commerce Automation</option>
+                  <option value="automation-smb">SMB Automation</option>
+                  <option value="consultation">Free Consultation</option>
                 </select>
                 <span class="field-border"></span>
               </div>
               <div class="form-field full-width">
                 <textarea name="message" id="message" rows="3" placeholder=" "></textarea>
-                <label for="message">Message (optionnel)</label>
+                <label for="message">Message (optional)</label>
                 <span class="field-border"></span>
               </div>
             </div>
-            <input type="hidden" name="source" value="3a-automation-website">
+            <input type="hidden" name="source" value="3a-automation-website-en">
             <input type="hidden" name="timestamp" id="form-timestamp">
             <button type="submit" class="btn-cyber btn-submit">
-              <span class="btn-text">Demander mon audit gratuit</span>
+              <span class="btn-text">Request my free audit</span>
               <span class="btn-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -623,7 +627,7 @@
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
               <polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
-            <span>Demande envoyée! Nous vous répondons sous 24-48h.</span>
+            <span>Request sent! We'll respond within 24-48h.</span>
           </div>
 
           <!-- Error Message -->
@@ -633,10 +637,10 @@
               <line x1="15" y1="9" x2="9" y2="15"/>
               <line x1="9" y1="9" x2="15" y2="15"/>
             </svg>
-            <span>Erreur d'envoi. Réessayez ou contactez-nous directement.</span>
+            <span>Sending error. Try again or contact us directly.</span>
           </div>
 
-          <p class="form-note-ultra">Réponse garantie sous 24-48h • <a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a></p>
+          <p class="form-note-ultra">Response guaranteed within 24-48h • <a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a></p>
         </div>
       </div>
     </div>
@@ -649,19 +653,19 @@
       <div class="footer-status-bar">
         <div class="status-item">
           <span class="status-dot online"></span>
-          <span>Système opérationnel</span>
+          <span>System operational</span>
         </div>
         <div class="status-item">
           <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
-          <span>52 Automatisations</span>
+          <span>52 Automations</span>
         </div>
         <div class="status-item">
           <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v10M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m6 0h10M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg></span>
-          <span>12 MCPs actifs</span>
+          <span>12 active MCPs</span>
         </div>
         <div class="status-item">
           <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-          <span>10+ APIs intégrées</span>
+          <span>10+ integrated APIs</span>
         </div>
       </div>
 
@@ -686,41 +690,41 @@
             </div>
           </div>
           <p class="footer-tagline">Automation · Analytics · AI</p>
-          <p class="footer-desc">L'opérationnel automatisé. Le stratégique libéré.</p>
+          <p class="footer-desc">Operations automated. Strategy liberated.</p>
         </div>
 
         <div class="footer-links-ultra">
           <h4>Solutions</h4>
           <ul>
-            <li><a href="/services/ecommerce.html">E-commerce</a></li>
-            <li><a href="/services/pme.html">PME & B2B</a></li>
-            <li><a href="/services/flywheel-360.html">Flywheel 360°</a></li>
-            <li><a href="/automations.html">Automations</a></li>
-            <li><a href="/pricing.html">Tarifs</a></li>
+            <li><a href="/en/services/ecommerce.html">E-commerce</a></li>
+            <li><a href="/en/services/smb.html">SMB & B2B</a></li>
+            <li><a href="/en/services/flywheel-360.html">Flywheel 360°</a></li>
+            <li><a href="/en/automations.html">Automations</a></li>
+            <li><a href="/en/pricing.html">Pricing</a></li>
           </ul>
         </div>
 
         <div class="footer-links-ultra">
-          <h4>Ressources</h4>
+          <h4>Resources</h4>
           <ul>
-            <li><a href="/services/audit-gratuit.html">Audit Gratuit</a></li>
-            <li><a href="/cas-clients.html">Cas Clients</a></li>
-            <li><a href="/a-propos.html">À propos</a></li>
-            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/en/services/free-audit.html">Free Audit</a></li>
+            <li><a href="/en/case-studies.html">Case Studies</a></li>
+            <li><a href="/en/about.html">About</a></li>
+            <li><a href="/en/contact.html">Contact</a></li>
           </ul>
         </div>
 
         <div class="footer-links-ultra">
-          <h4>Légal <a href="mailto:contact@3a-automation.com" class="footer-email">contact@3a-automation.com</a></h4>
+          <h4>Legal <a href="mailto:contact@3a-automation.com" class="footer-email">contact@3a-automation.com</a></h4>
           <ul>
-            <li><a href="/legal/mentions-legales.html">Mentions légales</a></li>
-            <li><a href="/legal/politique-confidentialite.html">Confidentialité</a></li>
+            <li><a href="/en/legal/terms.html">Terms & Conditions</a></li>
+            <li><a href="/en/legal/privacy.html">Privacy Policy</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom-ultra">
-        <p>&copy; 2025 3A Automation. Tous droits réservés.</p>
+        <p>&copy; 2025 3A Automation. All rights reserved.</p>
         <div class="footer-tech">
           <span>Powered by</span>
           <span class="tech-badge">Anthropic</span>
@@ -731,19 +735,19 @@
     </div>
   </footer>
 
-  <!-- Cookie Consent Banner RGPD -->
+  <!-- Cookie Consent Banner GDPR -->
   <div id="cookie-consent" class="cookie-banner" style="display: none;">
     <div class="cookie-content">
       <div class="cookie-text">
-        <p>Nous utilisons des cookies pour améliorer votre expérience et analyser le trafic. <a href="/legal/politique-confidentialite.html">Politique de confidentialité</a></p>
+        <p>We use cookies to improve your experience and analyze traffic. <a href="/en/legal/privacy.html">Privacy Policy</a></p>
       </div>
       <div class="cookie-actions">
-        <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">Refuser</button>
-        <button id="cookie-accept" class="cookie-btn cookie-btn-primary">Accepter</button>
+        <button id="cookie-reject" class="cookie-btn cookie-btn-secondary">Decline</button>
+        <button id="cookie-accept" class="cookie-btn cookie-btn-primary">Accept</button>
       </div>
     </div>
   </div>
 
-  <script src="script.js?v=2.1"></script>
+  <script src="../script-lite.js?v=2.1"></script>
 </body>
 </html>
