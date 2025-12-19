@@ -1749,7 +1749,7 @@ body {
   align-items: center;
   gap: var(--spacing-sm);
   font-size: 0.75rem;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.85); /* WCAG AA contrast fix */
 }
 
 .tech-badge {
