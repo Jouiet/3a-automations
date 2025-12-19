@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-19 | Version: 5.0 (Màj Session 27 - Généricisation Complète)
+## Date: 2025-12-19 | Version: 5.1 (Màj Session 28 - Audit Mobile/Responsive/Performance)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -2618,9 +2618,134 @@ GOOGLE SHEETS:
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v4.6**
+# SECTION 27: SESSION 28 - AUDIT MOBILE/RESPONSIVE/PERFORMANCE
+
+## Date: 2025-12-19
+
+## 27.1 Analyse CSS/JS
+
+| Fichier | Taille | Lignes | Usage |
+|---------|--------|--------|-------|
+| styles.css | **89KB** | 3835 | index.html only |
+| styles-lite.css | 43KB | 1727 | 10 autres pages (-52%) |
+| script.js | **30KB** | 738 | index.html + 6 pages |
+| script-lite.js | 6KB | 158 | 4 pages only (-80%) |
+
+## 27.2 Responsive Breakpoints (✅ OK)
+
+| Breakpoint | Cible | Couverture |
+|------------|-------|------------|
+| 1024px | Tablette | ✅ Complet |
+| 768px | Mobile | ✅ Complet |
+| 480px | Small Mobile | ✅ Complet |
+
+**Media Queries Count:**
+- styles.css: 14 @media rules
+- styles-lite.css: 6 @media rules
+- prefers-reduced-motion: ✅ Inclus
+
+## 27.3 Viewport Meta Tags (✅ OK)
+
+```
+✅ TOUTES les 12 pages ont: <meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+## 27.4 Problèmes Identifiés
+
+### PERFORMANCES (⚠️ À CORRIGER)
+
+| Problème | Impact | Priorité |
+|----------|--------|----------|
+| android-chrome-512x512.png: **260KB** | Mobile data | HIGH |
+| 6 pages chargent script.js (30KB) au lieu de script-lite.js (6KB) | 24KB gaspillés/page | MEDIUM |
+| styles.css: 89KB pour index.html | Première visite | LOW |
+
+### ACCESSIBILITÉ (⚠️ À CORRIGER)
+
+| Problème | Valeur | Minimum Recommandé |
+|----------|--------|-------------------|
+| .ring-3 .tech-icon span | font-size: 0.5rem (~8px) | 12px minimum |
+| .tech-icon span | font-size: 0.6rem (~10px) | 12px minimum |
+| .stat-label-ultra (mobile) | font-size: 0.6rem (~10px) | 12px minimum |
+| Form label focused | font-size: 0.7rem (~11px) | 12px borderline |
+
+### CSS/JS INCONSISTANCES
+
+| Page | CSS | JS | Optimal |
+|------|-----|-----|---------|
+| audit-gratuit.html | styles-lite | **script.js** ⚠️ | script-lite |
+| 404.html | styles-lite | **script.js** ⚠️ | script-lite |
+| contact.html | styles-lite | **script.js** ⚠️ | script-lite |
+| a-propos.html | styles-lite | **script.js** ⚠️ | script-lite |
+| cas-clients.html | styles-lite | **script.js** ⚠️ | script-lite |
+| mentions-legales.html | styles-lite | **script.js** ⚠️ | script-lite |
+| politique-confidentialite.html | styles-lite | **script.js** ⚠️ | script-lite |
+
+**Impact: 7 pages × 24KB = 168KB économisables**
+
+### MOBILE MANQUANTS
+
+- ❌ Pas de touch-action CSS
+- ❌ Pas de -webkit-tap-highlight-color
+- ❌ Pas de safe-area-inset support (notched devices)
+
+## 27.5 Points Positifs
+
+- ✅ Logo SVG inline (pas de requête HTTP)
+- ✅ Font preconnect configuré
+- ✅ display=swap pour fonts
+- ✅ og-image.png déjà optimisé (46KB vs 508KB original)
+- ✅ logo.png déjà optimisé (64KB vs 266KB original)
+- ✅ Mobile nav toggle fonctionnel
+- ✅ overflow-x: hidden sur body
+
+## 27.6 Plan d'Action Immédiat
+
+### PRIORITÉ 1: Images (Quick Win)
+```bash
+# Compresser android-chrome-512x512.png (260KB → ~50KB)
+sips -s format png -s formatOptions low -Z 512 android-chrome-512x512.png
+```
+
+### PRIORITÉ 2: JS Harmonisation (7 fichiers)
+```
+audit-gratuit.html: ../script.js → ../script-lite.js
+404.html: /script.js → /script-lite.js
+contact.html: script.js → script-lite.js
+a-propos.html: script.js → script-lite.js
+cas-clients.html: script.js → script-lite.js
+legal/mentions-legales.html: ../script.js → ../script-lite.js
+legal/politique-confidentialite.html: ../script.js → ../script-lite.js
+```
+
+### PRIORITÉ 3: CSS Font Sizes
+```css
+/* Minimum 12px pour accessibilité */
+.ring-3 .tech-icon span { font-size: 0.75rem; }
+.tech-icon span { font-size: 0.75rem; }
+@media (max-width: 768px) {
+  .stat-label-ultra { font-size: 0.75rem; }
+}
+```
+
+### PRIORITÉ 4: Mobile Touch Support
+```css
+/* Ajouter à styles.css et styles-lite.css */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+button, a, input, select, textarea {
+  touch-action: manipulation;
+}
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v5.1**
 
 *Généré le 2025-12-19 par analyse empirique bottom-up*
+*v5.1: Session 28 - Audit Mobile/Responsive/Performance (7 pages JS à optimiser, font-sizes, touch support)*
+*v5.0: Session 27 - Généricisation complète + AEO (robots.txt 18 crawlers, llms.txt v3.0, footer harmonisé)*
 *v4.6: Session 23 - Consolidation architecture (scripts/→automations/, 56 automatisations total)*
 *v4.5: Session 22c - Legacy archivés (3 dossiers → archive/), Validation 42/42 (100%), APIs 3/7 OK*
 *v4.4: Session 22b - Memory optimization (CLAUDE.md 1041→157 lignes, -85%), rules/ modulaires, HISTORY.md*
