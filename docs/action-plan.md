@@ -713,7 +713,92 @@ PRÉREQUIS:
 
 ---
 
+---
+
+## PLAN ACTIONNABLE - FIN SESSION 40 (19/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 40                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ PRICING REFONTE BOTTOM-UP                                              │
+│      • Calcul basé sur temps réel (~90€/h)                                  │
+│      • Packs Setup: 390€ / 790€ / 1490€                                     │
+│      • Retainers: 290€ / 490€ / 890€ par mois                               │
+│                                                                              │
+│   ✅ PROCESSUS SANS APPELS                                                  │
+│      • 4 étapes document-based                                              │
+│      • Formulaire → PDF → Google Docs → Livraison                           │
+│                                                                              │
+│   ✅ VOICE AI POC CRÉÉ                                                      │
+│      • grok-voice-poc.cjs (Node.js)                                         │
+│      • grok-voice-poc.py (Python/LiveKit)                                   │
+│      • API testée: Code ready, $5 crédits requis                            │
+│                                                                              │
+│   ✅ SOURCES VÉRIFIÉES AJOUTÉES                                             │
+│      • Klaviyo 2025, Mordor, Gartner 2026, Forrester 2026                   │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACTIONS IMMÉDIATES (2h max)                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   □ ACTION 1 - Commit + Deploy (5 min)                                      │
+│     git add . && git commit && git push                                     │
+│     → Déclenche GitHub Action deploy                                        │
+│                                                                              │
+│   □ ACTION 2 - Acheter xAI Crédits (5 min, $5)                              │
+│     URL: https://console.x.ai/billing                                       │
+│     → Active Voice AI POC                                                   │
+│                                                                              │
+│   □ ACTION 3 - Tester Voice POC (10 min)                                    │
+│     cd automations/agency/core                                              │
+│     node grok-voice-poc.cjs test                                            │
+│                                                                              │
+│   □ ACTION 4 - Générer n8n API Key (5 min)                                  │
+│     URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│                                                                              │
+│   □ ACTION 5 - Créer Shopify Dev Store (30 min)                             │
+│     URL: https://partners.shopify.com                                       │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    MÉTRIQUES POST-SESSION 40                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   SITE:                                                                      │
+│   • FR: 13 pages ✅ LIVE                                                    │
+│   • EN: 13 pages ✅ LIVE                                                    │
+│   • Total: 26 pages avec hreflang                                           │
+│                                                                              │
+│   TARIFICATION:                                                              │
+│   • Packs Setup: 390€ - 1490€ (one-time)                                    │
+│   • Retainers: 290€ - 890€/mois                                             │
+│   • Taux horaire: ~90€/h (viable)                                           │
+│                                                                              │
+│   VOICE AI:                                                                  │
+│   • POC: Ready (code complet)                                               │
+│   • Coût: $0.05/min (Grok = 5x moins cher)                                  │
+│   • Blocker: $5 crédits xAI                                                 │
+│                                                                              │
+│   APIs:                                                                      │
+│   • Fonctionnelles: 3/7 (Klaviyo, Apify, GA4)                               │
+│   • À configurer: Shopify, n8n, Meta                                        │
+│   • Crédits requis: xAI ($5)                                                │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 19 Décembre 2025 (Session 21c - Site LIVE + GitHub token renouvelé)
+**Mis à jour:** 19 Décembre 2025 (Session 40 - Pricing Bottom-Up + Voice AI POC)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables

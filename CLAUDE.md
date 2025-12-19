@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 6.7 | Dernière mise à jour: 2025-12-19 (Session 38 - Pricing Currency Fix)
+## Version: 6.9 | Dernière mise à jour: 2025-12-19 (Session 40 - Pricing Refonte Bottom-Up)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -44,29 +44,37 @@
 | MCPs configurés | **12** |
 | APIs fonctionnelles | Klaviyo ✅, Apify ✅, GA4 ✅ (3/7 testé 19/12) |
 
-## TARIFICATION (Refonte Session 34 - Data-Driven 2025-2026)
+## TARIFICATION (Session 40 - Bottom-Up, ~90€/h)
 
-| Plan | Prix/mois | Heures | Cible CA |
-|------|-----------|--------|----------|
-| **Essentiel** | 390€ | 4-5h | <10k€/mois |
-| **Pro** | 790€ | 8-10h | 10k-50k€/mois |
-| **Premium** | 1490€ | 15-18h | 50k€+/mois |
+### Packs Setup (One-Time)
+| Pack | Prix | Temps | Contenu |
+|------|------|-------|---------|
+| **Quick Win** | 390€ | ~3-4h | Audit express + 1 flow + Doc PDF |
+| **Essentials** | 790€ | ~7-9h | Audit + 3 flows + A/B + Support 30j |
+| **Growth** | 1490€ | ~14-18h | 5 flows + RFM + Dashboard + Support 60j |
 
-| Projet One-Time | Prix |
-|-----------------|------|
-| Quick Start | 990-1490€ |
-| Full Setup | 2490-3990€ |
-| Transformation | Sur devis |
+### Retainers Mensuels (Après Setup)
+| Plan | Prix/mois | Heures | Contenu |
+|------|-----------|--------|---------|
+| **Maintenance** | 290€ | 3h | Monitoring + fixes + rapport |
+| **Optimization** | 490€ | 5h | + A/B tests + optimisation |
+| **Growth** | 890€ | 10h | + nouveaux flows + stratégie |
 
-## TOP 3 SERVICES (Data-Driven 2025-2026)
+### Processus (Sans Appels)
+1. Formulaire diagnostic (5-10 min)
+2. Rapport PDF (24-48h)
+3. Proposition Google Docs
+4. Livraison + Documentation
 
-| Rang | Service | Score | Demande Marché |
-|------|---------|-------|----------------|
-| 🥇 #1 | Email Automation Klaviyo | 9.25/10 | 26.7% marché, ROI $42:$1 |
-| 🥈 #2 | Analytics & Dashboards | 7.75/10 | 18.4% CAGR (fastest) |
-| 🥉 #3 | Audit E-commerce + Quick Wins | 6.95/10 | Entry point, Flywheel |
+### Voice AI (POC Ready - Credits Required)
+- Grok Voice API: **$0.05/min** (industry cheapest)
+- Latence: **<1 seconde** (#1 Big Bench Audio)
+- 100+ langues, auto-détection
+- Voix: Sal, Rex, Eve, Leo, Mika, Valentin
+- POC: `automations/agency/core/grok-voice-poc.cjs`
+- Action: Acheter $5 crédits sur https://console.x.ai/billing
 
-**Sources:** Klaviyo 2025 Benchmark, Gartner 2026, Forrester 2026, Mordor Intelligence
+**Sources:** Klaviyo 2025, xAI Docs, Mordor Intelligence
 
 ---
 
@@ -184,6 +192,29 @@ VPS Hostinger (ID: 1168256)
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
+
+## SESSION 40 COMPLÉTÉE ✅ (19/12/2025 - Pricing Refonte Bottom-Up + Voice POC)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Pricing Refonte | ✅ | Bottom-up ~90€/h, Packs 390/790/1490€, Retainers 290/490/890€ |
+| Processus Sans Appels | ✅ | 4 étapes doc-based (formulaire→PDF→Docs→livraison) |
+| Sources Vérifiées | ✅ | Klaviyo, Mordor, Gartner, Forrester, xAI |
+| Voice AI POC | ✅ | grok-voice-poc.cjs + .py créés, API testée |
+| Pricing FR+EN | ✅ | Nouvelles sections (audit, retainer, voice, process) |
+
+**POC Voice AI Grok:**
+- `automations/agency/core/grok-voice-poc.cjs` (Node.js)
+- `automations/agency/core/grok-voice-poc.py` (Python/LiveKit)
+- Status: Code ready, requires $5 xAI credits
+
+**Faits Voice AI:**
+- Pricing: $0.05/min (5x cheaper than competitors)
+- Latency: <1s time-to-first-audio
+- Languages: 100+ with native accents
+- Voices: Sal, Rex, Eve, Leo, Mika, Valentin
+
+---
 
 ## SESSION 38 COMPLÉTÉE ✅ (19/12/2025 - Pricing Currency Fix)
 

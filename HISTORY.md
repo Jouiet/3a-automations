@@ -1,9 +1,11 @@
 # HISTORY - Changelog 3A Automation
 
-## Sessions 27-38 (19/12/2025)
+## Sessions 27-40 (19/12/2025)
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 6.9 | 40 | **PRICING REFONTE BOTTOM-UP + VOICE POC**: Packs Setup (390€/790€/1490€), Retainers (290€/490€/890€/mois), processus sans appels (4 étapes), Voice AI Grok POC créé (Node.js + Python/LiveKit), sources Gartner+Forrester ajoutées, CSS nouvelles sections |
+| 6.8 | 39 | **PRICE REDUCTION /1.5**: Prix compétitifs (260€/530€/990€), Quick Start enrichi (2→4 flows), EN+FR pricing updated, Schema.org updated, "Email Automation CRM" renaming |
 | 6.7 | 38 | **PRICING CURRENCY FIX**: Supprimé 🥇🥈🥉 rankings, harmonisé devises (ratios neutres 42:1, +15%), Target CA dynamique (data-ca-eur), FAQ multi-devise, formatCA() JS |
 | 6.6 | 37 | **API TESTS + VERIFICATION**: Test empirique 7 APIs (3/7 OK), Site FR+EN LIVE vérifié (26 pages HTTP 200), Lang-switch fonctionnel, FORENSIC-AUDIT v6.0 |
 | 6.5 | 36b | **CRM GEO-TARGETING**: Module geo-markets.cjs (8 marchés), Templates Klaviyo + Multi-CRM (HubSpot, Mailchimp, Brevo, AC), docs/geo-targeting.md, 64 automatisations total |
