@@ -547,38 +547,211 @@ OBJECTIF:
     }
   }
 
-  // Obtenir réponse IA (simulation locale ou API)
-  async function getAIResponse(userMessage) {
-    // Réponses pré-définies pour les questions courantes (fallback gratuit)
-    const responses = {
-      'audit': 'Notre audit e-commerce est 100% gratuit ! Remplissez le formulaire en bas de page, et vous recevrez un rapport PDF détaillé sous 24-48h avec 3 quick wins actionnables.',
-      'prix': 'Nos tarifs : Quick Win à 390€ (1 flow), Essentials à 790€ (3 flows + A/B tests), ou Growth à 1490€ (5 flows + dashboard). Commencez par l\'audit gratuit pour voir ce qui vous convient !',
-      'tarif': 'Nos tarifs : Quick Win à 390€ (1 flow), Essentials à 790€ (3 flows + A/B tests), ou Growth à 1490€ (5 flows + dashboard). Commencez par l\'audit gratuit pour voir ce qui vous convient !',
-      'combien': 'Nos tarifs : Quick Win à 390€ (1 flow), Essentials à 790€ (3 flows + A/B tests), ou Growth à 1490€ (5 flows + dashboard). Commencez par l\'audit gratuit pour voir ce qui vous convient !',
-      'gratuit': 'Oui ! L\'audit e-commerce est totalement gratuit. Formulaire → Rapport PDF sous 24-48h → 3 recommandations prioritaires. Aucun engagement.',
-      'email': 'Je suis spécialisé en email automation avec Klaviyo. Flows automatisés : welcome series, abandoned cart, post-purchase, winback. ROI moyen : 42€ pour 1€ investi.',
-      'klaviyo': 'Expert Klaviyo confirmé ! Je configure vos flows automatisés : welcome series, abandoned cart, post-purchase, winback. Demandez l\'audit gratuit pour voir vos opportunités.',
-      'shopify': 'J\'intègre Shopify avec Klaviyo pour synchroniser vos clients, commandes et produits. Automation complète de votre email marketing.',
-      'bonjour': 'Bonjour ! Je suis l\'assistant 3A Automation. Je peux vous renseigner sur nos services d\'automation e-commerce. Que puis-je faire pour vous ?',
-      'salut': 'Salut ! Comment puis-je vous aider avec votre e-commerce ? Audit gratuit, email automation, analytics... je suis là !',
-      'aide': 'Je peux vous aider avec : email automation (Klaviyo), analytics (GA4), audit e-commerce gratuit, ou répondre à vos questions sur nos services.',
-      'contact': 'Pour nous contacter : email contact@3a-automation.com ou remplissez le formulaire sur cette page. Réponse sous 24h garantie.',
-      'merci': 'Avec plaisir ! N\'hésitez pas si vous avez d\'autres questions. Et pensez à demander votre audit gratuit !',
-      'comment': 'Le processus est simple : 1) Remplissez le formulaire (5 min), 2) Recevez votre rapport PDF (24-48h), 3) On discute des recommandations par email. Pas d\'appel obligatoire !',
-      'retainer': 'Nos retainers mensuels : Maintenance 290€/mois (3h), Optimization 490€/mois (5h), Growth 890€/mois (10h). Après un pack setup initial.',
-      'mensuel': 'Nos retainers mensuels : Maintenance 290€/mois (3h), Optimization 490€/mois (5h), Growth 890€/mois (10h). Idéal pour l\'optimisation continue.',
+  // === SYSTÈME DE RÉPONSE INTELLIGENT ===
+
+  // Contexte conversationnel
+  let conversationContext = {
+    industry: null,        // B2B, e-commerce, BTP, etc.
+    companySize: null,     // PME, startup, etc.
+    need: null,            // leads, email, analytics
+    budget: null,          // identifié ou non
+    stage: 'discovery',    // discovery, qualification, proposal
+    lastTopic: null        // dernier sujet abordé
+  };
+
+  // Détection d'industrie
+  function detectIndustry(text) {
+    const lower = text.toLowerCase();
+    const industries = {
+      'btp': ['btp', 'construction', 'batiment', 'chantier', 'artisan', 'renovation', 'travaux'],
+      'ecommerce': ['e-commerce', 'ecommerce', 'boutique', 'shopify', 'vente en ligne', 'magasin en ligne'],
+      'b2b': ['b2b', 'btob', 'entreprise', 'professionnel', 'corporate', 'industrie'],
+      'saas': ['saas', 'software', 'application', 'startup', 'tech', 'logiciel'],
+      'services': ['service', 'prestataire', 'consultant', 'agence', 'freelance', 'cabinet'],
+      'retail': ['retail', 'magasin', 'point de vente', 'commerce']
     };
 
-    // Chercher une correspondance
-    const lowerMessage = userMessage.toLowerCase();
-    for (const [keyword, response] of Object.entries(responses)) {
-      if (lowerMessage.includes(keyword)) {
-        return response;
+    for (const [industry, keywords] of Object.entries(industries)) {
+      if (keywords.some(kw => lower.includes(kw))) {
+        return industry;
+      }
+    }
+    return null;
+  }
+
+  // Détection de besoin
+  function detectNeed(text) {
+    const lower = text.toLowerCase();
+    const needs = {
+      'leads': ['lead', 'prospect', 'client', 'acquisition', 'prospection', 'trouver des clients'],
+      'email': ['email', 'mail', 'newsletter', 'klaviyo', 'emailing'],
+      'analytics': ['analytics', 'données', 'dashboard', 'rapport', 'statistiques', 'ga4'],
+      'automation': ['automatiser', 'automatisation', 'workflow', 'gagner du temps'],
+      'devis': ['devis', 'prix', 'tarif', 'combien', 'coût', 'budget']
+    };
+
+    for (const [need, keywords] of Object.entries(needs)) {
+      if (keywords.some(kw => lower.includes(kw))) {
+        return need;
+      }
+    }
+    return null;
+  }
+
+  // Réponses par industrie
+  const industryResponses = {
+    btp: {
+      intro: 'Pour le BTP, je propose des solutions spécifiques : capture de leads chantiers via Google Maps et annuaires, relances automatiques de devis, et demandes d\'avis post-travaux.',
+      services: 'Mes automatisations BTP incluent :\n• Scraping Google Maps pour nouveaux chantiers\n• Veille appels d\'offres automatique\n• Relances devis programmées\n• Emails satisfaction post-travaux\n• Demandes avis Google automatiques',
+      leads: 'Pour générer des leads BTP, j\'utilise le scraping Google Maps pour identifier les chantiers en cours et les entreprises qui recrutent. Je peux aussi surveiller les appels d\'offres publics automatiquement.'
+    },
+    b2b: {
+      intro: 'Pour le B2B, je me concentre sur la qualification automatique des leads, le lead scoring, et les séquences de nurturing pour convertir les prospects froids en clients.',
+      services: 'Mes automatisations B2B incluent :\n• Lead scoring automatique\n• Séquences nurturing (5-10 emails)\n• Sync CRM (HubSpot, Pipedrive)\n• Alertes commerciales temps réel\n• Qualification automatique des leads',
+      leads: 'Pour la génération de leads B2B, je configure des workflows de capture depuis LinkedIn, les formulaires web, et je qualifie automatiquement selon vos critères. Les leads chauds sont alertés en temps réel.'
+    },
+    ecommerce: {
+      intro: 'Pour l\'e-commerce, je suis expert Klaviyo et Shopify. Mes flows automatisés récupèrent 5-15% des paniers abandonnés et génèrent en moyenne 42€ pour 1€ investi.',
+      services: 'Mes automatisations e-commerce incluent :\n• Abandon de panier (3 emails)\n• Welcome series nouveaux clients\n• Post-purchase pour fidéliser\n• Back-in-stock automatique\n• Segmentation RFM\n• Winback clients dormants',
+      leads: 'Pour l\'e-commerce, les "leads" sont vos visiteurs. Je configure le tracking complet, les popups intelligents, et les flows de conversion pour transformer les visiteurs en acheteurs.'
+    },
+    saas: {
+      intro: 'Pour les SaaS, je configure l\'onboarding automatisé, la prévention du churn, et les emails de feature adoption pour maximiser la rétention.',
+      services: 'Mes automatisations SaaS incluent :\n• Onboarding séquencé\n• Churn prevention (users à risque)\n• Feature adoption emails\n• NPS automatique\n• Upsell triggers intelligents'
+    },
+    services: {
+      intro: 'Pour les prestataires de services, je configure l\'automatisation de la prospection, les rappels rendez-vous, et les demandes de témoignages post-mission.',
+      services: 'Mes automatisations services incluent :\n• Prospection automatisée\n• Nurturing leads longs\n• Rappels rendez-vous\n• Demandes de témoignages\n• Facturation automatique'
+    }
+  };
+
+  // Réponses enrichies par topic
+  const topicResponses = {
+    processus: {
+      keywords: ['processus', 'comment ça marche', 'fonctionnement', 'étapes', 'déroulement', 'explique'],
+      response: `Voici comment ça se passe :\n\n1️⃣ **Formulaire diagnostic** (5 min)\nVous me décrivez votre activité et vos besoins\n\n2️⃣ **Rapport PDF** (24-48h)\nJe vous envoie 3 recommandations prioritaires\n\n3️⃣ **Proposition** \nSi ça vous intéresse, je vous envoie un devis détaillé\n\n4️⃣ **Implémentation**\nJe configure tout, vous n'avez rien à faire de technique\n\n✅ Pas d'appel obligatoire, tout par écrit si vous préférez !`
+    },
+    pricing: {
+      keywords: ['prix', 'tarif', 'combien', 'coût', 'budget', 'devis', 'cher'],
+      response: `Voici mes tarifs :\n\n**PACKS ONE-TIME:**\n• Quick Win: 390€ (1 flow, ~4h)\n• Essentials: 790€ (3 flows + A/B tests)\n• Growth: 1490€ (5 flows + dashboard)\n\n**RETAINERS MENSUELS:**\n• Maintenance: 290€/mois (3h)\n• Optimization: 490€/mois (5h)\n• Growth: 890€/mois (10h)\n\n💡 L'audit est GRATUIT et vous aide à choisir. Quel est votre besoin principal ?`
+    },
+    audit: {
+      keywords: ['audit', 'gratuit', 'diagnostic', 'analyse'],
+      response: `L'audit e-commerce est 100% gratuit !\n\n📋 **Ce que vous recevez:**\n• Analyse de vos automatisations actuelles\n• 3 quick wins prioritaires\n• Estimation du ROI potentiel\n• Recommandations personnalisées\n\n⏱️ **Délai:** 24-48h après le formulaire\n\n👉 Voulez-vous que je vous envoie le lien du formulaire ?`
+    },
+    automatisations: {
+      keywords: ['automatisation', 'automatisations', 'workflow', 'flows', 'quoi automatiser'],
+      response: `J'ai 56 automatisations prêtes à déployer :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports auto\n\n🛒 **E-commerce:**\nSync produits, Stock alerts, Reviews\n\nQuel type vous intéresse le plus ?`
+    },
+    leads: {
+      keywords: ['lead', 'prospect', 'client', 'acquisition', 'trouver des clients'],
+      response: null // Sera remplacé par réponse industry-specific
+    },
+    difference: {
+      keywords: ['différence', 'pourquoi vous', 'agence', 'freelance', 'avantage'],
+      response: `Ce qui me différencie :\n\n✅ **Consultant solo, pas agence**\nPas de commercial, pas de junior - vous travaillez avec l'expert directement\n\n✅ **Prix justes**\nPas de marge agence (30-50% en moins)\n\n✅ **Spécialisation**\nExpert Klaviyo, Shopify, n8n - pas généraliste\n\n✅ **Résultats prouvés**\n42+ clients servis, ROI moyen 42:1 sur email\n\n✅ **Flexibilité**\nPas d'engagement long terme obligatoire`
+    },
+    garantie: {
+      keywords: ['garantie', 'risque', 'marche pas', 'satisfait'],
+      response: `Ma garantie est simple :\n\n🔒 **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, je corrige jusqu'à satisfaction - pas de limite de révisions.\n\n📝 **Documentation complète**\nVous gardez le contrôle, même sans moi.\n\n🚪 **Pas d'engagement**\nLes packs sont one-time. Les retainers sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
+    },
+    delai: {
+      keywords: ['délai', 'temps', 'quand', 'combien de temps', 'durée'],
+      response: `Les délais dépendent du pack :\n\n⚡ **Quick Win (390€):** 1 semaine\n📦 **Essentials (790€):** 2 semaines\n🚀 **Growth (1490€):** 3 semaines\n\n📋 **Audit gratuit:** 24-48h\n\nCes délais incluent les révisions. Je peux accélérer si urgence (supplément 20%).`
+    },
+    oui: {
+      keywords: ['oui', 'd\'accord', 'ok', 'allons-y', 'intéressé', 'je veux'],
+      response: null // Dépend du contexte
+    },
+    non: {
+      keywords: ['non', 'pas maintenant', 'plus tard', 'je réfléchis'],
+      response: `Pas de problème ! Prenez votre temps. \n\nSi vous changez d'avis, l'audit gratuit reste disponible. Vous pouvez aussi m'envoyer un email à contact@3a-automation.com.\n\n📌 Et n'hésitez pas à revenir ici si vous avez d'autres questions !`
+    },
+    salutations: {
+      keywords: ['bonjour', 'salut', 'hello', 'hi', 'coucou', 'bonsoir'],
+      response: `Bonjour ! 👋 Je suis l'assistant 3A Automation.\n\nJe peux vous aider à :\n• Automatiser votre marketing (emails, leads)\n• Comprendre nos services et tarifs\n• Obtenir un audit gratuit\n\nQuel est votre secteur d'activité ?`
+    },
+    remerciements: {
+      keywords: ['merci', 'super', 'génial', 'parfait', 'excellent'],
+      response: `Avec plaisir ! 😊\n\nSi vous êtes prêt à passer à l'action, je vous recommande de demander l'audit gratuit - c'est le meilleur moyen de voir concrètement ce qu'on peut faire pour vous.\n\n📧 Autre question ? Je suis là !`
+    }
+  };
+
+  // Obtenir réponse intelligente
+  async function getAIResponse(userMessage) {
+    const lower = userMessage.toLowerCase();
+
+    // Mise à jour du contexte
+    const detectedIndustry = detectIndustry(userMessage);
+    if (detectedIndustry) {
+      conversationContext.industry = detectedIndustry;
+    }
+
+    const detectedNeed = detectNeed(userMessage);
+    if (detectedNeed) {
+      conversationContext.need = detectedNeed;
+    }
+
+    // Vérifier si c'est une confirmation ("oui")
+    if (topicResponses.oui.keywords.some(kw => lower.includes(kw))) {
+      // Répondre en fonction du dernier sujet
+      if (conversationContext.lastTopic === 'processus') {
+        return `Parfait ! Pour démarrer, rendez-vous sur notre page contact :\n👉 /contact.html\n\nRemplissez le formulaire (5 min) et je vous envoie le rapport sous 24-48h.\n\nDes questions avant de commencer ?`;
+      }
+      if (conversationContext.lastTopic === 'audit') {
+        return `Super ! Pour votre audit gratuit :\n👉 Rendez-vous sur /contact.html\n\nJe vous envoie le rapport avec 3 recommandations sous 24-48h.\n\n📧 Ou envoyez-moi directement un email à contact@3a-automation.com avec le lien de votre site !`;
+      }
+      return `Excellent ! La prochaine étape c'est l'audit gratuit.\n\n👉 Remplissez le formulaire sur /contact.html\n📧 Ou email: contact@3a-automation.com\n\nJe vous réponds sous 24h !`;
+    }
+
+    // Vérifier les topics enrichis
+    for (const [topic, data] of Object.entries(topicResponses)) {
+      if (data.keywords.some(kw => lower.includes(kw))) {
+        conversationContext.lastTopic = topic;
+
+        // Cas spécial: leads -> adapter selon l'industrie
+        if (topic === 'leads' && conversationContext.industry) {
+          const industryData = industryResponses[conversationContext.industry];
+          if (industryData && industryData.leads) {
+            return industryData.leads + '\n\nVoulez-vous en savoir plus sur les tarifs ?';
+          }
+        }
+
+        if (data.response) {
+          return data.response;
+        }
       }
     }
 
-    // Réponse par défaut
-    return 'Bonne question ! Pour une réponse personnalisée, je vous recommande de demander votre audit gratuit. Vous recevrez un rapport détaillé sous 24-48h. Souhaitez-vous que je vous explique le processus ?';
+    // Réponse spécifique à l'industrie détectée
+    if (conversationContext.industry) {
+      const industryData = industryResponses[conversationContext.industry];
+      if (industryData) {
+        // Si on parle de services/automatisations
+        if (lower.includes('service') || lower.includes('automatisation') || lower.includes('quoi')) {
+          conversationContext.lastTopic = 'services';
+          return industryData.services + '\n\nQu\'est-ce qui vous intéresse le plus ?';
+        }
+        // Réponse intro industrie
+        if (!conversationHistory.some(m => m.content.includes(industryData.intro.substring(0, 30)))) {
+          return industryData.intro + '\n\nQuel est votre besoin principal ?';
+        }
+      }
+    }
+
+    // Si on a détecté un besoin mais pas encore répondu spécifiquement
+    if (conversationContext.need === 'devis') {
+      conversationContext.lastTopic = 'pricing';
+      return topicResponses.pricing.response;
+    }
+
+    // Réponse par défaut intelligente basée sur le contexte
+    if (conversationContext.industry) {
+      return `Pour votre activité ${conversationContext.industry.toUpperCase()}, je peux vous proposer plusieurs solutions.\n\nCommençons par l'audit gratuit : je vous envoie un rapport personnalisé avec 3 recommandations prioritaires sous 24-48h.\n\n👉 Ça vous intéresse ?`;
+    }
+
+    // Vraie réponse par défaut - poser une question de qualification
+    return `Pour mieux vous aider, pouvez-vous me dire :\n\n• Quel est votre secteur d'activité ?\n• Quel est votre besoin principal ? (leads, email, analytics...)\n\nOu si vous préférez, demandez directement l'audit gratuit et je vous recontacte avec des recommandations personnalisées !`;
   }
 
   // Toggle panel
