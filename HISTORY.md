@@ -4,6 +4,7 @@
 
 | Version | Session | Modifications |
 |---------|---------|---------------|
+| 5.5 | 24 | **CLEANUP**: llm.txt doublon supprimé (garde llms.txt), APIs testées (3/7 OK: Klaviyo/GA4/Apify), 56 automatisations confirmées |
 | 5.4 | 23b | **ARCHITECTURE GLOBALE**: docs/ créé (8 fichiers), archive/docs-legacy/ (12 fichiers), README.md amélioré, docker-compose.yml racine, 23→4 MD racine |
 | 5.1 | 23 | **CONSOLIDATION SCRIPTS**: scripts/→automations/agency/core/ (+5), 56 automatisations total, INDEX.md v3.0 |
 | 5.0 | 22 | **MEMORY OPTIMIZATION**: CLAUDE.md réduit 1041→158 lignes (-85%), rules/ modulaires créés, HISTORY.md créé, Race condition fix, Claims accuracy (50+/3 MCPs/10+ APIs) |
