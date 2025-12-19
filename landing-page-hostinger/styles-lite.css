@@ -514,6 +514,94 @@ code {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
+   AUTOMATIONS GRID (Card Layout)
+   ───────────────────────────────────────────────────────────────────────────── */
+.automations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.automation-card {
+  background: rgba(25, 30, 53, 0.6);
+  border: 1px solid rgba(79, 186, 241, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  transition: all 0.2s ease;
+}
+
+.automation-card:hover {
+  border-color: rgba(79, 186, 241, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.automation-card.highlight-card {
+  border-color: rgba(79, 186, 241, 0.3);
+  background: rgba(79, 186, 241, 0.05);
+}
+
+.automation-card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+.automation-card p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.automation-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(79, 186, 241, 0.1);
+}
+
+.automation-meta .freq {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: rgba(79, 186, 241, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.automation-meta .benefit {
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: rgba(16, 185, 129, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+
+/* MCP Card Active State */
+.mcp-card.mcp-active {
+  border-color: var(--accent);
+  background: rgba(16, 185, 129, 0.05);
+  position: relative;
+}
+
+.mcp-card .mcp-status {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
    OTHER CATEGORIES
    ───────────────────────────────────────────────────────────────────────────── */
 .other-categories {
