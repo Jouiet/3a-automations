@@ -257,16 +257,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, observerOptions);
 
-  // Observe various elements for fade-in animation
-  const animatedElements = document.querySelectorAll(
-    '.service-card-ultra, .flywheel-stage, .process-step-ultra, .tech-item, .feature-card, .flow-card'
-  );
+  // Observe various elements for fade-in animation (grouped by section for faster perceived load)
+  const animatedGroups = [
+    '.service-card-ultra',
+    '.flywheel-stage',
+    '.process-step-ultra',
+    '.tech-item',
+    '.feature-card',
+    '.flow-card'
+  ];
 
-  animatedElements.forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-    fadeInObserver.observe(el);
+  animatedGroups.forEach(selector => {
+    document.querySelectorAll(selector).forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = `opacity 0.5s ease ${index * 0.08}s, transform 0.5s ease ${index * 0.08}s`;
+      fadeInObserver.observe(el);
+    });
   });
 
   // ───────────────────────────────────────────────────────────────────────────
