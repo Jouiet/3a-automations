@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 5.1 | Dernière mise à jour: 2025-12-19 (Session 22c)
+## Version: 5.2 | Dernière mise à jour: 2025-12-19 (Session 23)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -28,16 +28,16 @@
 
 ---
 
-## MÉTRIQUES ACTUELLES (Session 22c - 19/12/2025)
+## MÉTRIQUES ACTUELLES (Session 23 - 19/12/2025)
 
 | Métrique | Valeur |
 |----------|--------|
 | Site | https://3a-automation.com ✅ LIVE (10 pages HTTP 200) |
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
-| Automatisations validées | **42/42 (100%)** ✅ |
+| Automatisations | **56 total** (42 validées, +14 agency/core) |
 | APIs fonctionnelles | 3/7 (Klaviyo, GA4, Apify) |
-| Legacy scripts | **ARCHIVÉS** → archive/ |
+| Architecture | Consolidée (scripts/ → automations/) |
 
 ---
 
@@ -61,15 +61,17 @@ git push origin main  # Déclenche Deploy Website workflow
 
 ```
 /Users/mac/Desktop/JO-AAA/
-├── automations/              # 42 automatisations validées
-│   ├── generic/              # test-all-apis, validate-all
-│   ├── clients/              # shopify/, klaviyo/, seo/, leads/, etc.
-│   └── agency/               # Outils internes
+├── automations/              # 56 automatisations
+│   ├── agency/core/          # 11 outils internes
+│   ├── clients/              # 41 automatisations (shopify, klaviyo, seo, leads, etc.)
+│   ├── generic/              # 2 utilitaires (validate-all, test-all-apis)
+│   └── legacy-client-specific/  # 2 scripts non génériques
 ├── landing-page-hostinger/   # Site web (auto-deploy)
 ├── archive/                  # Legacy scripts archivés
 │   ├── mydealz-scripts/
 │   ├── henderson-scripts/
-│   └── alpha-medical-scripts/
+│   ├── alpha-medical-scripts/
+│   └── scripts-legacy/
 ├── outputs/                  # Résultats audits
 └── .claude/rules/            # Règles modulaires (4 fichiers)
 ```
