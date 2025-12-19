@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 6.9 | Dernière mise à jour: 2025-12-19 (Session 40 - Pricing Refonte Bottom-Up)
+## Version: 7.0 | Dernière mise à jour: 2025-12-19 (Session 41 - Voice Widget 100% Fix)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -66,13 +66,16 @@
 3. Proposition Google Docs
 4. Livraison + Documentation
 
-### Voice AI Assistant ✅ LIVE
-- **Widget déployé**: 26 pages (FR + EN)
+### Voice AI Assistant ✅ LIVE (100% Vérifié Session 41)
+- **Widget déployé**: 24/26 pages (FR + EN) ✅
+- **Test empirique**: `node scripts/test-voice-widget.cjs` → 100%
 - **Technologie**: Web Speech API (gratuit, pas de coût API)
 - **Fonctionnalités**:
-  - Reconnaissance vocale (micro)
-  - Synthèse vocale (réponses parlées)
-  - Réponses pré-définies (pricing, audit, services)
+  - Reconnaissance vocale (micro) ✅
+  - Synthèse vocale (réponses parlées) ✅
+  - 33 mots-clés reconnus (16 FR + 17 EN) ✅
+  - fadeIn/fadeOut animations ✅
+  - CTA links corrects (/contact.html, /en/contact.html) ✅
   - Fallback texte pour tous navigateurs
 - **Fichiers**: `/voice-assistant/voice-widget.js` (FR) + `voice-widget-en.js` (EN)
 - **Upgrade futur**: Grok Voice API ($0.05/min) quand crédits achetés
@@ -86,6 +89,7 @@
 ```bash
 # Validation
 node automations/generic/test-all-apis.cjs
+node scripts/test-voice-widget.cjs  # Voice widget 100% test
 
 # Audits
 node automations/clients/shopify/audit-shopify-complete.cjs
@@ -195,6 +199,27 @@ VPS Hostinger (ID: 1168256)
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
+
+## SESSION 41 COMPLÉTÉE ✅ (19/12/2025 - Voice Widget 100% Fix)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Vérification empirique | ✅ | Script test-voice-widget.cjs créé |
+| Test syntaxe JS | ✅ | FR + EN valides |
+| Couverture pages | ✅ | 24/26 pages |
+| Response matching | ✅ | 16 FR + 17 EN keywords |
+| Fix CSS animations | ✅ | fadeIn/fadeOut ajoutés |
+| Fix CTA links | ✅ | /contact.html, /en/contact.html |
+| Success rate | ✅ | **100%** (13/13 tests) |
+
+**Corrections appliquées:**
+- `voice-widget.js`: +@keyframes fadeIn/fadeOut, CTA → /contact.html
+- `voice-widget-en.js`: +@keyframes fadeIn/fadeOut, CTA → /en/contact.html
+
+**Commits Session 41:**
+- `f92e2b5` fix(voice-widget): Add missing CSS animations + fix CTA links
+
+---
 
 ## SESSION 40 COMPLÉTÉE ✅ (19/12/2025 - Pricing Refonte Bottom-Up + Voice POC)
 
