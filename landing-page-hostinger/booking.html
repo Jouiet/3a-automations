@@ -483,11 +483,12 @@
 
     // Configuration
     const CONFIG = {
-      // n8n webhook URLs (production)
-      webhookUrl: 'https://n8n.srv1168256.hstgr.cloud/webhook/booking',
-      availabilityUrl: 'https://n8n.srv1168256.hstgr.cloud/webhook/availability',
+      // Google Apps Script Web App URL (DIRECT - no n8n needed!)
+      // Deploy the script from: automations/agency/core/google-apps-script-booking.js
+      // Then paste your Web App URL here:
+      webAppUrl: 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec',
 
-      // Business hours (as fallback if API unavailable)
+      // Business hours (Morocco time UTC+1)
       businessHours: {
         1: { start: 9, end: 18 }, // Monday
         2: { start: 9, end: 18 },
@@ -655,10 +656,12 @@
       submitBtn.innerHTML = '<span class="loading-spinner"></span> Réservation en cours...';
 
       try {
-        const response = await fetch(CONFIG.webhookUrl, {
+        // Google Apps Script direct call
+        const response = await fetch(CONFIG.webAppUrl, {
           method: 'POST',
+          mode: 'cors',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain' // Required for Google Apps Script CORS
           },
           body: JSON.stringify(bookingData)
         });
@@ -681,7 +684,7 @@
             `${dateStr} à ${selectedTime}`;
 
         } else {
-          throw new Error(result.error || 'Erreur lors de la réservation');
+          throw new Error(result.message || 'Erreur lors de la réservation');
         }
 
       } catch (error) {
