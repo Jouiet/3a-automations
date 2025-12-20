@@ -1903,8 +1903,15 @@ body.lite {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   RESPONSIVE - LAPTOP (1200px)
-   Smooth transition between desktop and tablet
+   RESPONSIVE - LAPTOP (1200px) - FORENSIC FIX
+
+   DIMENSIONS:
+   - Container: 450x450px (35px margin for icon overflow)
+   - Orbital: 380px
+   - Ring-1: 380px, icons 50x50 (overflow 25px) ✓
+   - Ring-2: 266px, icons 50x50 (overflow 25px) ✓
+   - Ring-3: 171px, icons 42x42 (overflow 21px) ✓
+   - Center: 90px
    ───────────────────────────────────────────────────────────────────────────── */
 @media (max-width: 1200px) {
   .hero-visual {
@@ -1915,18 +1922,41 @@ body.lite {
   .tech-orbital {
     width: 380px;
     height: 380px;
+    margin: 35px auto;
   }
 
   .orbital-center {
-    width: 95px;
-    height: 95px;
+    width: 90px;
+    height: 90px;
   }
 
   .orbital-center .center-text {
     font-size: 1.4rem;
   }
 
-  /* Ring-3: slightly smaller on laptop */
+  /* Ring-1 at 1200px - slightly smaller */
+  .ring-1 .tech-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .ring-1 .tech-icon:nth-child(1) { top: -25px; }
+  .ring-1 .tech-icon:nth-child(3) { right: -25px; }
+  .ring-1 .tech-icon:nth-child(5) { bottom: -25px; }
+  .ring-1 .tech-icon:nth-child(7) { left: -25px; }
+
+  /* Ring-2 at 1200px */
+  .ring-2 .tech-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .ring-2 .tech-icon:nth-child(1) { top: -24px; }
+  .ring-2 .tech-icon:nth-child(3) { right: -24px; }
+  .ring-2 .tech-icon:nth-child(5) { bottom: -24px; }
+  .ring-2 .tech-icon:nth-child(7) { left: -24px; }
+
+  /* Ring-3 at 1200px */
   .ring-3 .tech-icon {
     width: 42px;
     height: 42px;
@@ -1935,6 +1965,11 @@ body.lite {
   .ring-3 .tech-icon span {
     font-size: 0.6rem;
   }
+
+  .ring-3 .tech-icon:nth-child(1) { top: -21px; }
+  .ring-3 .tech-icon:nth-child(3) { right: -21px; }
+  .ring-3 .tech-icon:nth-child(5) { bottom: -21px; }
+  .ring-3 .tech-icon:nth-child(7) { left: -21px; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -1964,62 +1999,85 @@ body.lite {
     justify-content: center;
   }
 
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ORBITAL TABLET (1024px) - FORENSIC FIX
+
+     DIMENSIONS:
+     - Container: 390x390px (margin 25px each side for 48px icons)
+     - Orbital: 340px
+     - Ring-1: 340px, icons 48x48 (overflow 24px) - margin 25px OK
+     - Ring-2: 238px, icons 44x44 (overflow 22px)
+     - Ring-3: 153px, icons 38x38 (overflow 19px)
+     - Center: 80px
+     ═══════════════════════════════════════════════════════════════════════════ */
   .hero-visual {
     display: flex;
     width: 100%;
-    height: 360px;
-    max-width: 360px;
+    height: 390px;
+    max-width: 390px;
     margin: 20px auto var(--spacing-lg);
     order: -1;
   }
 
-  /* ═══════════════════════════════════════════════════════════════════════════
-     ORBITAL TABLET - Explicit sizing (no scale transform = no blur)
-     ═══════════════════════════════════════════════════════════════════════════ */
   .tech-orbital {
     width: 340px;
     height: 340px;
-    /* NO transform: scale() - causes blur and sizing issues */
+    margin: 25px auto;
   }
 
   .orbital-center {
-    width: 85px;
-    height: 85px;
+    width: 80px;
+    height: 80px;
   }
 
   .orbital-center .center-text {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
-  /* Ring 1 icons - explicit sizing */
+  /* ─── RING 1 at 1024px ─── */
   .ring-1 .tech-icon {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
   }
 
   .ring-1 .tech-icon span {
     font-size: 0.7rem;
   }
 
-  /* Ring 2 icons */
+  .ring-1 .tech-icon:nth-child(1) { top: -24px; }
+  .ring-1 .tech-icon:nth-child(3) { right: -24px; }
+  .ring-1 .tech-icon:nth-child(5) { bottom: -24px; }
+  .ring-1 .tech-icon:nth-child(7) { left: -24px; }
+
+  /* ─── RING 2 at 1024px ─── */
   .ring-2 .tech-icon {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
   }
 
   .ring-2 .tech-icon span {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
   }
 
-  /* Ring 3 icons - smaller to prevent overlap */
+  .ring-2 .tech-icon:nth-child(1) { top: -22px; }
+  .ring-2 .tech-icon:nth-child(3) { right: -22px; }
+  .ring-2 .tech-icon:nth-child(5) { bottom: -22px; }
+  .ring-2 .tech-icon:nth-child(7) { left: -22px; }
+
+  /* ─── RING 3 at 1024px ─── */
   .ring-3 .tech-icon {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
 
   .ring-3 .tech-icon span {
     font-size: 0.55rem;
   }
+
+  .ring-3 .tech-icon:nth-child(1) { top: -19px; }
+  .ring-3 .tech-icon:nth-child(3) { right: -19px; }
+  .ring-3 .tech-icon:nth-child(5) { bottom: -19px; }
+  .ring-3 .tech-icon:nth-child(7) { left: -19px; }
 
   .services-grid-ultra {
     grid-template-columns: 1fr 1fr;
@@ -2197,108 +2255,132 @@ body.lite {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     ORBITAL TECH-ICONS MOBILE - UX Optimized
-     - Touch targets: min 48px (Apple HIG + comfortable)
-     - Text: 0.8rem (13px) for clear readability
-     - overflow: hidden prevents icons from going under header
+     ORBITAL MOBILE (768px) - FORENSIC FIX
+
+     DIMENSIONS:
+     - Container: 350x350px (margin 25px each side for 44px icons)
+     - Orbital: 300px
+     - Ring-1: 300px, icons 44x44 (overflow 22px) - margin 25px OK
+     - Ring-2: 210px, icons 40x40 (overflow 20px)
+     - Ring-3: 135px, icons 32x32 (overflow 16px)
+     - Center: 65px
+
+     CRITICAL: Icons must remain visible - no clipping!
      ═══════════════════════════════════════════════════════════════════════════ */
   .hero-visual {
-    height: 320px;
-    max-width: 320px;
-    overflow: hidden; /* Clip icons that rotate beyond container */
-    margin-top: 10px;
+    height: 350px;
+    max-width: 350px;
+    margin-top: 0;
+    position: relative;
   }
 
   .tech-orbital {
     width: 300px;
     height: 300px;
-    margin-top: 10px; /* Push down slightly to avoid top clipping */
+    margin: 25px auto;
   }
 
-  /* Ring-3 on mobile - smaller icons to fit */
-  .ring-3 {
-    display: block;
-    opacity: 0.85;
+  /* ─── RING 1: Outer ring (300px) ─── */
+  .ring-1 .tech-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 4px;
   }
 
-  .ring-3 .tech-icon {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
-    min-height: 36px;
-    padding: 4px 2px;
-  }
-
-  .ring-3 .tech-icon span {
-    font-size: 0.55rem;
-    line-height: 1;
-    white-space: nowrap;
-    overflow: visible;
-  }
-
-  /* Base tech-icon mobile - larger text, comfortable touch */
-  .tech-icon {
-    min-width: 48px;
-    min-height: 48px;
-    padding: 8px 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
-  }
-
-  .tech-icon span {
-    font-size: 0.8rem; /* 13px - readable */
+  .ring-1 .tech-icon span {
+    font-size: 0.65rem;
     font-weight: 600;
     line-height: 1.1;
-    color: var(--primary);
-    white-space: nowrap;
-    overflow: visible;
   }
 
-  /* Ring 1 - Outer ring: larger icons for text */
-  .ring-1 .tech-icon {
-    width: 56px;
-    height: 48px;
-    padding: 8px 4px;
-  }
+  /* Ring 1 positions - scaled for 44px icons (offset = 22px) */
+  .ring-1 .tech-icon:nth-child(1) { top: -22px; }
+  .ring-1 .tech-icon:nth-child(3) { right: -22px; }
+  .ring-1 .tech-icon:nth-child(5) { bottom: -22px; }
+  .ring-1 .tech-icon:nth-child(7) { left: -22px; }
 
-  /* Ring 2 - Middle ring */
+  /* ─── RING 2: Middle ring (210px) ─── */
   .ring-2 .tech-icon {
-    width: 52px;
-    height: 46px;
-    padding: 6px 4px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 4px;
   }
 
   .ring-2 .tech-icon span {
-    font-size: 0.8rem; /* 13px */
+    font-size: 0.6rem;
+    font-weight: 600;
   }
 
-  /* Orbital center - proportional */
+  /* Ring 2 positions - scaled for 40px icons (offset = 20px) */
+  .ring-2 .tech-icon:nth-child(1) { top: -20px; }
+  .ring-2 .tech-icon:nth-child(3) { right: -20px; }
+  .ring-2 .tech-icon:nth-child(5) { bottom: -20px; }
+  .ring-2 .tech-icon:nth-child(7) { left: -20px; }
+
+  /* ─── RING 3: Inner ring (135px) ─── */
+  .ring-3 {
+    display: block;
+    opacity: 0.9;
+  }
+
+  .ring-3 .tech-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 2px;
+  }
+
+  .ring-3 .tech-icon span {
+    font-size: 0.5rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  /* Ring 3 positions - scaled for 32px icons (offset = 16px) */
+  .ring-3 .tech-icon:nth-child(1) { top: -16px; }
+  .ring-3 .tech-icon:nth-child(3) { right: -16px; }
+  .ring-3 .tech-icon:nth-child(5) { bottom: -16px; }
+  .ring-3 .tech-icon:nth-child(7) { left: -16px; }
+
+  /* ─── CENTER ─── */
   .orbital-center {
-    width: 72px;
-    height: 72px;
+    width: 65px;
+    height: 65px;
   }
 
   .orbital-center .center-text {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
   }
 
-  /* Slow down animation on mobile for less distraction */
+  /* ─── ANIMATIONS: Slow and synchronized ─── */
   .ring-1 {
-    animation-duration: 45s; /* Slower: 30s -> 45s */
+    animation-duration: 50s;
   }
 
   .ring-2 {
-    animation-duration: 35s; /* Slower: 20s -> 35s */
+    animation-duration: 40s;
   }
 
+  .ring-3 {
+    animation-duration: 30s; /* Was 15s - too fast! */
+  }
+
+  /* Counter-rotation must match ring duration exactly */
   .ring-1 .tech-icon {
-    animation-duration: 45s;
+    animation-duration: 50s;
   }
 
   .ring-2 .tech-icon {
-    animation-duration: 35s;
+    animation-duration: 40s;
+  }
+
+  .ring-3 .tech-icon {
+    animation-duration: 30s; /* Sync with ring-3 */
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -2796,76 +2878,96 @@ body.lite {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     ORBITAL SMALL MOBILE - Fits 320px viewport
-     Viewport 320px - padding 32px = 288px available
+     ORBITAL SMALL MOBILE (480px) - FORENSIC FIX
+
+     DIMENSIONS:
+     - Container: 290x290px (fits 320px viewport with padding)
+     - Orbital: 250px
+     - Ring-1: 250px, icons 38x38 (overflow 19px)
+     - Ring-2: 175px, icons 34x34 (overflow 17px)
+     - Ring-3: 112px, icons 28x28 (overflow 14px)
+     - Center: 55px
+
+     CRITICAL: NO overflow:hidden!
      ═══════════════════════════════════════════════════════════════════════════ */
   .hero-visual {
-    height: 280px;
-    max-width: 280px;
-    overflow: hidden;
-    margin-top: 5px;
+    height: 290px;
+    max-width: 290px;
+    margin-top: 0;
   }
 
   .tech-orbital {
-    width: 260px;
-    height: 260px;
-    margin-top: 10px;
+    width: 250px;
+    height: 250px;
+    margin: 20px auto;
   }
 
-  /* Ring-2 faded on small screens for clarity */
-  .ring-2 {
-    opacity: 0.4; /* Fade ring-2 on very small screens */
-  }
-
-  .tech-icon {
-    min-width: 44px;
-    min-height: 44px;
-    padding: 6px 4px;
-  }
-
-  .tech-icon span {
-    font-size: 0.75rem; /* 12px - still readable */
-    font-weight: 600;
-  }
-
+  /* ─── RING 1 at 480px ─── */
   .ring-1 .tech-icon {
-    width: 48px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    padding: 3px;
   }
 
+  .ring-1 .tech-icon span {
+    font-size: 0.55rem;
+  }
+
+  .ring-1 .tech-icon:nth-child(1) { top: -19px; }
+  .ring-1 .tech-icon:nth-child(3) { right: -19px; }
+  .ring-1 .tech-icon:nth-child(5) { bottom: -19px; }
+  .ring-1 .tech-icon:nth-child(7) { left: -19px; }
+
+  /* ─── RING 2 at 480px ─── */
   .ring-2 .tech-icon {
-    width: 42px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+    padding: 3px;
   }
 
   .ring-2 .tech-icon span {
-    font-size: 0.7rem; /* 11px */
+    font-size: 0.5rem;
   }
 
-  /* Ring-3 at 480px - even smaller but still visible */
+  .ring-2 .tech-icon:nth-child(1) { top: -17px; }
+  .ring-2 .tech-icon:nth-child(3) { right: -17px; }
+  .ring-2 .tech-icon:nth-child(5) { bottom: -17px; }
+  .ring-2 .tech-icon:nth-child(7) { left: -17px; }
+
+  /* ─── RING 3 at 480px ─── */
   .ring-3 {
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   .ring-3 .tech-icon {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    min-height: 30px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
     padding: 2px;
   }
 
   .ring-3 .tech-icon span {
-    font-size: 0.45rem;
+    font-size: 0.4rem;
   }
 
+  .ring-3 .tech-icon:nth-child(1) { top: -14px; }
+  .ring-3 .tech-icon:nth-child(3) { right: -14px; }
+  .ring-3 .tech-icon:nth-child(5) { bottom: -14px; }
+  .ring-3 .tech-icon:nth-child(7) { left: -14px; }
+
+  /* ─── CENTER at 480px ─── */
   .orbital-center {
-    width: 58px;
-    height: 58px;
+    width: 55px;
+    height: 55px;
   }
 
   .orbital-center .center-text {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .flywheel-section {
