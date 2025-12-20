@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 8.7 | Dernière mise à jour: 2025-12-20 (Session 56 - GTM Performance Fix)
+## Version: 8.8 | Dernière mise à jour: 2025-12-20 (Session 57 - Pricing Update)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -113,24 +113,25 @@ ACTION REQUISE:   RÉVOQUER TOKEN shpat_146b... sur Shopify (manuel)
 | Cartes catalog EN | **50** ✅ |
 | MCPs .mcp.json | **8** |
 | APIs fonctionnelles | Klaviyo ✅, Apify ✅, GA4 ✅ |
-| Lighthouse Performance | **24%** ❌ (GTM blocking) |
+| Lighthouse Performance | **70%** 🟡 (GTM lazy loaded) |
 | Lighthouse SEO | **100%** ✅ |
 
-## TARIFICATION (Session 40 - Bottom-Up, ~90€/h)
+## TARIFICATION (Session 57 - Mise à jour 20/12/2025)
 
 ### Packs Setup (One-Time)
-| Pack | Prix | Temps | Contenu |
-|------|------|-------|---------|
-| **Quick Win** | 390€ | ~3-4h | Audit express + 1 flow + Doc PDF |
-| **Essentials** | 790€ | ~7-9h | Audit + 3 flows + A/B + Support 30j |
-| **Growth** | 1490€ | ~14-18h | 5 flows + RFM + Dashboard + Support 60j |
+| Pack | EUR | USD | MAD |
+|------|-----|-----|-----|
+| **Quick Win** | 390€ | $450 | 3.990 DH |
+| **Essentials** | 790€ | $920 | 7.990 DH |
+| **Growth** | 1.399€ | $1,690 | 14.990 DH |
 
-### Retainers Mensuels (Après Setup)
-| Plan | Prix/mois | Heures | Contenu |
-|------|-----------|--------|---------|
-| **Maintenance** | 290€ | 3h | Monitoring + fixes + rapport |
-| **Optimization** | 490€ | 5h | + A/B tests + optimisation |
-| **Growth** | 890€ | 10h | + nouveaux flows + stratégie |
+### Retainers Mensuels
+| Plan | EUR | USD | MAD |
+|------|-----|-----|-----|
+| **Maintenance** | 290€ | $330 | 2.900 DH |
+| **Optimization / Growth** | 490€ | $550 | 5.200 DH |
+
+*Optimization et Growth fusionnés (même contenu: A/B tests, optimisation flows, recommandations, support prioritaire 24h)*
 
 ### Processus (Sans Appels)
 1. Formulaire diagnostic (5-10 min)
