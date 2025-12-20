@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 8.5 | Dernière mise à jour: 2025-12-20 (Session 55 - Automations Registry)
+## Version: 8.6 | Dernière mise à jour: 2025-12-20 (Session 55 - Architecture Cleanup)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -7,19 +7,41 @@
 ## 🔴 SOURCE DE VÉRITÉ: AUTOMATIONS
 
 **Fichier unique:** `automations/automations-registry.json`
-**Validation:** `node automations/validate-automations-registry.cjs`
+**Validation:** `npm run validate-automations`
 
 | Métrique | Valeur | Vérifié |
 |----------|--------|---------|
 | Total | **50** | ✅ |
 | FR Catalog | 50 | ✅ |
 | EN Catalog | 50 | ✅ |
-| Avec script .cjs | 20 | ✅ |
-| Klaviyo templates | 7 | ✅ |
+| Scripts .cjs | 20 | ✅ |
+| Klaviyo flows | 5 | ✅ |
 | n8n workflows | 3 | ✅ |
 
 **Catégories:**
 - Lead Gen: 12 | SEO: 6 | Email: 8 | Shopify: 9 | Analytics: 8 | Content: 7
+
+---
+
+## ARCHITECTURE (Vérifié Session 55)
+
+```
+/Users/mac/Desktop/JO-AAA/           ← AGENCE (48 scripts)
+├── automations/                     ← 48 scripts (legacy supprimé)
+├── landing-page-hostinger/          ← Site 26 pages
+├── docs/                            ← 9 fichiers doc
+├── outputs/                         ← Rapports
+├── scripts/                         ← Outils session
+├── archive/                         ← logo-source seulement
+└── .env                             ← Credentials agence
+
+/Users/mac/Desktop/clients/          ← CLIENTS (180 scripts)
+├── henderson/                       ← 114 scripts
+├── mydealz/                         ← 59 scripts
+└── alpha-medical/                   ← 7 scripts
+```
+
+**✅ Séparation respectée - Aucun credential client dans repo agence**
 
 ---
 
@@ -72,7 +94,7 @@ ACTION REQUISE:   RÉVOQUER TOKEN shpat_146b... sur Shopify (manuel)
 
 ---
 
-## MÉTRIQUES ACTUELLES (Session 53 - 20/12/2025)
+## MÉTRIQUES ACTUELLES (Session 55 - 20/12/2025)
 
 | Métrique | Valeur |
 |----------|--------|
@@ -83,15 +105,14 @@ ACTION REQUISE:   RÉVOQUER TOKEN shpat_146b... sur Shopify (manuel)
 | hreflang SEO | **26/26 (100%)** ✅ |
 | Marchés | **3** (MA/Maghreb, EU, International) |
 | GA4 | G-87F6FDJG45 |
-| GTM | GTM-WLVJQC3M (bloque 496ms!) |
-| Scripts /automations | **50** (vérifié empiriquement) |
-| Cartes automations.html | **44** |
-| Claim site (à corriger) | 56/45 → **50** |
-| MCPs configurés | **13** |
-| APIs fonctionnelles | Klaviyo ✅, Apify ✅, GA4 ✅ (3/7 testé 19/12) |
-| Lighthouse Performance | **24%** ❌❌ |
+| GTM | GTM-WLVJQC3M |
+| Automations agence | **48** scripts .cjs |
+| Cartes catalog FR | **50** ✅ |
+| Cartes catalog EN | **50** ✅ |
+| MCPs .mcp.json | **8** |
+| APIs fonctionnelles | Klaviyo ✅, Apify ✅, GA4 ✅ |
+| Lighthouse Performance | **24%** ❌ (GTM blocking) |
 | Lighthouse SEO | **100%** ✅ |
-| Lighthouse Best Practices | **100%** ✅ |
 
 ## TARIFICATION (Session 40 - Bottom-Up, ~90€/h)
 

@@ -1216,7 +1216,111 @@ PRÉREQUIS:
 
 ---
 
+## PLAN ACTIONNABLE - FIN SESSION 55 (20/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 55                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ ARCHITECTURE NETTOYÉE                                                  │
+│      • Tokens exposés supprimés (legacy-client-specific/)                   │
+│      • package.json corrigé (références cassées)                            │
+│      • Scripts clients déplacés vers /clients/                              │
+│      • Doublons archive/ supprimés                                          │
+│                                                                              │
+│   ✅ AUTOMATIONS REGISTRY - SOURCE UNIQUE                                   │
+│      • automations-registry.json créé                                        │
+│      • 50 automations documentées (FR + EN catalog = 50)                    │
+│      • validate-automations-registry.cjs créé                                │
+│      • npm run validate-automations → 100% PASS                              │
+│                                                                              │
+│   ✅ SÉPARATION AGENCE/CLIENTS RESPECTÉE                                    │
+│      /Users/mac/Desktop/JO-AAA/ (48 scripts agence)                         │
+│      /Users/mac/Desktop/clients/ (180 scripts clients)                      │
+│         ├── henderson/ (114 scripts)                                        │
+│         ├── mydealz/ (59 scripts)                                           │
+│         └── alpha-medical/ (7 scripts)                                      │
+│                                                                              │
+│   ✅ SUPPRIMÉ:                                                              │
+│      • automations/legacy-client-specific/ (tokens hardcodés)               │
+│      • archive/scripts-legacy/ (19 doublons)                                │
+│      • archive/docs-legacy/ (12 fichiers obsolètes)                         │
+│      • archive/henderson-scripts/ → /clients/henderson/                     │
+│      • archive/mydealz-scripts/ → /clients/mydealz/                         │
+│      • archive/alpha-medical-scripts/ → /clients/alpha-medical/             │
+│                                                                              │
+│   COMMITS SESSION 55:                                                        │
+│   • b0bbb6f fix(automations): Align FR=EN=50 cards + 4x4 grid              │
+│   • 4223626 feat(registry): Single source of truth for 50 automations      │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACTIONS PRIORITAIRES POST-SESSION 55                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ⏳ PRIORITÉ 1 - Lighthouse Performance (Score: 24%, Target: >90%)         │
+│      • GTM bloque main thread (496ms)                                       │
+│      • LCP 6.1s (target <2.5s)                                              │
+│      • TBT 1330ms (target <200ms)                                           │
+│                                                                              │
+│   ⏳ PRIORITÉ 2 - n8n API Key (5 min) - ACTION MANUELLE                     │
+│      URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│                                                                              │
+│   ⏳ PRIORITÉ 3 - Shopify Partners Dev Store (30 min) - ACTION MANUELLE     │
+│      URL: https://partners.shopify.com                                       │
+│                                                                              │
+│   ⏳ PRIORITÉ 4 - xAI Crédits ($5) - ACTION MANUELLE                        │
+│      URL: https://console.x.ai/billing                                       │
+│                                                                              │
+│   ⏳ PRIORITÉ 5 - RÉVOQUER Token Shopify Exposé                             │
+│      Token: shpat_146b... (MyDealz)                                         │
+│      Action: Révoquer sur Shopify Admin                                      │
+│                                                                              │
+│   ⏳ PRIORITÉ 6 - Acquisition Premier Client                                │
+│      Date cible: avant 25/01/2026                                           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    MÉTRIQUES POST-SESSION 55                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ARCHITECTURE:                                                              │
+│   • Scripts agence: 48 (was 161 avec doublons)                              │
+│   • Scripts clients: 180 (séparés dans /clients/)                           │
+│   • Archive: logo-source seulement                                          │
+│   • Séparation: ✅ RESPECTÉE                                                │
+│                                                                              │
+│   AUTOMATIONS:                                                               │
+│   • Registry: 50 (source unique)                                            │
+│   • FR Catalog: 50 ✅                                                       │
+│   • EN Catalog: 50 ✅                                                       │
+│   • Scripts .cjs: 20                                                        │
+│   • Klaviyo flows: 5                                                        │
+│   • n8n workflows: 3                                                        │
+│                                                                              │
+│   SITE:                                                                      │
+│   • FR: 13 pages ✅                                                         │
+│   • EN: 13 pages ✅                                                         │
+│   • Grid automations: 4x4 ✅                                                │
+│                                                                              │
+│   MCPs:                                                                      │
+│   • Configurés: 8 dans .mcp.json                                            │
+│   • Fonctionnels: Klaviyo, Apify, GA4                                       │
+│   • Placeholders: Shopify, n8n                                              │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 20 Décembre 2025 (Session 50 - Orbital Forensic + Automations Count)
+**Mis à jour:** 20 Décembre 2025 (Session 55 - Architecture Cleanup + Registry)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
