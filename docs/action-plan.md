@@ -1013,18 +1013,44 @@ PRÉREQUIS:
 │      │ └── CSS corrigé: cible maintenant .hero-ultra-content               ││
 │      └─────────────────────────────────────────────────────────────────────┘│
 │                                                                              │
-│   CSS SIZES:                                                                 │
-│   • styles.css: 127KB                                                       │
-│   • styles.min.css: 85KB                                                    │
+│   4. CTA "Ready to Scale" - Centré + Form agrandi:                          │
+│      • Container: flex + justify-content center                              │
+│      • Card: padding reduced, full width                                     │
+│      • Content: max-width 100% (was 600px)                                   │
+│      • Form: 100% width + box-sizing border-box                              │
 │                                                                              │
-│   COMMITS SESSION 49:                                                        │
+│   5. Footer Mobile - Entièrement centré:                                     │
+│      • Grid: flex column + align-items center                                │
+│      • Brand/Links/Bottom: tous flex column centered                         │
+│      • Status bar: justify-content center + flex-wrap                        │
+│                                                                              │
+│   6. Flywheel +20% Mobile:                                                   │
+│      • wheel: 280px → 340px                                                  │
+│      • stage: 90px → 108px                                                   │
+│      • stage-icon: 36px → 44px                                               │
+│      • arrows: 230px → 280px                                                 │
+│                                                                              │
+│   CSS SIZES (FINAL):                                                         │
+│   • styles.css: 130KB                                                       │
+│   • styles.min.css: 87KB                                                    │
+│                                                                              │
+│   COMMITS SESSION 49 (5 total):                                              │
 │   • fdac0d3 - Comprehensive homepage mobile UX improvements                  │
 │   • ed96481 - Orbital -5%, Timeline -20%, containers centered               │
 │   • f9009a6 - Restore orbital + correct centering selectors (FORENSIC)      │
+│   • 815b1ef - Center CTA "Ready to Scale" + expand form                     │
+│   • 1beb8a3 - Footer centered + Flywheel +20%                               │
 │                                                                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                    ACTIONS PRIORITAIRES POST-SESSION 49                      │
 ├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ MOBILE UX - COMPLÈTE                                                   │
+│      • Hero: centré, orbital visible                                         │
+│      • Timeline: -20% (plus compact)                                         │
+│      • CTA: centré, form agrandi                                             │
+│      • Footer: entièrement centré                                            │
+│      • Flywheel: +20% (plus visible)                                         │
 │                                                                              │
 │   ⏳ PRIORITÉ 1 - Performance Lighthouse (Score actuel: 52)                 │
 │      • GTM defer/lazy loading (bloque 397ms main thread)                    │
@@ -1045,6 +1071,6 @@ PRÉREQUIS:
 ---
 
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 20 Décembre 2025 (Session 49 - Mobile + Forensic Fix)
+**Mis à jour:** 20 Décembre 2025 (Session 49 - Mobile UX Complete)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
