@@ -1752,7 +1752,8 @@ body.lite {
   font-weight: 500;
 }
 
-.footer-links-ultra h4 {
+.footer-links-ultra h4,
+.footer-links-ultra .footer-heading {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-light);
