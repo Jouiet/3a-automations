@@ -257,8 +257,9 @@
           <div class="pricing-header">
             <span class="pricing-badge">Quick Win</span>
             <div class="pricing-price">
-              <span class="price-amount">390€</span>
-              <span class="price-alt">$450 · 3 990 DH</span>
+              <span class="price-amount price-eur">390€</span>
+              <span class="price-amount price-usd">$450</span>
+              <span class="price-amount price-mad">3 990 DH</span>
             </div>
             <p class="pricing-time">~3-4h de travail</p>
           </div>
@@ -307,8 +308,9 @@
           <div class="pricing-header">
             <span class="pricing-badge">Essentials</span>
             <div class="pricing-price">
-              <span class="price-amount">790€</span>
-              <span class="price-alt">$920 · 7 990 DH</span>
+              <span class="price-amount price-eur">790€</span>
+              <span class="price-amount price-usd">$920</span>
+              <span class="price-amount price-mad">7 990 DH</span>
             </div>
             <p class="pricing-time">~7-9h de travail</p>
           </div>
@@ -362,8 +364,9 @@
           <div class="pricing-header">
             <span class="pricing-badge">Growth</span>
             <div class="pricing-price">
-              <span class="price-amount">1 399€</span>
-              <span class="price-alt">$1 690 · 14 990 DH</span>
+              <span class="price-amount price-eur">1 399€</span>
+              <span class="price-amount price-usd">$1 690</span>
+              <span class="price-amount price-mad">14 990 DH</span>
             </div>
             <p class="pricing-time">~14-18h de travail</p>
           </div>
@@ -432,11 +435,15 @@
         <div class="retainer-card">
           <h3>Maintenance</h3>
           <div class="retainer-price">
-            <span class="price-amount">290€<span class="price-alt-inline"> · $330 · 2 900 DH</span></span>
+            <span class="price-amount price-eur">290€</span>
+            <span class="price-amount price-usd">$330</span>
+            <span class="price-amount price-mad">2 900 DH</span>
             <span class="price-period">/mois</span>
           </div>
           <div class="retainer-annual">
-            <span class="annual-price">2 900€ · $3 300 · 29 000 DH /an</span>
+            <span class="annual-price price-eur">2 900€/an</span>
+            <span class="annual-price price-usd">$3 300/an</span>
+            <span class="annual-price price-mad">29 000 DH/an</span>
             <span class="annual-savings">(2 mois gratuits)</span>
           </div>
           <div class="retainer-hours">3h/mois</div>
@@ -453,11 +460,15 @@
           <div class="retainer-badge">Populaire</div>
           <h3>Optimization / Growth</h3>
           <div class="retainer-price">
-            <span class="price-amount">490€<span class="price-alt-inline"> · $550 · 5 200 DH</span></span>
+            <span class="price-amount price-eur">490€</span>
+            <span class="price-amount price-usd">$550</span>
+            <span class="price-amount price-mad">5 200 DH</span>
             <span class="price-period">/mois</span>
           </div>
           <div class="retainer-annual">
-            <span class="annual-price">4 900€ · $5 500 · 52 000 DH /an</span>
+            <span class="annual-price price-eur">4 900€/an</span>
+            <span class="annual-price price-usd">$5 500/an</span>
+            <span class="annual-price price-mad">52 000 DH/an</span>
             <span class="annual-savings">(2 mois gratuits)</span>
           </div>
           <div class="retainer-hours">5h/mois</div>
@@ -665,14 +676,21 @@
   document.addEventListener('DOMContentLoaded', function() {
     const currencyBtns = document.querySelectorAll('.currency-btn');
 
+    // Set default currency on HTML element
+    if (!document.documentElement.hasAttribute('data-currency')) {
+      document.documentElement.setAttribute('data-currency', 'EUR');
+    }
+
     currencyBtns.forEach(btn => {
       btn.addEventListener('click', function() {
         // Remove active class from all buttons
         currencyBtns.forEach(b => b.classList.remove('active'));
         // Add active to clicked button
         this.classList.add('active');
-        // Set currency via GeoLocale
+        // Set currency on HTML element for CSS switching
         const currency = this.dataset.currency;
+        document.documentElement.setAttribute('data-currency', currency);
+        // Also update via GeoLocale for persistence
         if (window.GeoLocale) {
           window.GeoLocale.setCurrency(currency);
         }
@@ -682,6 +700,7 @@
     // Update active button based on detected/saved currency
     document.addEventListener('geo-locale-ready', function(e) {
       const currency = e.detail.currency;
+      document.documentElement.setAttribute('data-currency', currency);
       currencyBtns.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.currency === currency);
       });

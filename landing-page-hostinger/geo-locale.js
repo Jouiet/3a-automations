@@ -134,6 +134,8 @@
       locale.currency = currency;
       locale.source = 'manual';
       this.saveLocale(locale);
+      // Update data-currency attribute for CSS switching
+      document.documentElement.setAttribute('data-currency', currency);
       document.dispatchEvent(new CustomEvent('currency-changed', { detail: { currency } }));
     },
 
