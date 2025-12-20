@@ -5096,8 +5096,15 @@ body.lite {
 
 .pricing-price { margin: var(--spacing-md) 0; }
 .price-amount { font-size: 3rem; font-weight: 700; color: var(--text-light); font-family: var(--font-mono); }
-.price-alt { display: block; font-size: 0.9rem; color: var(--text-secondary); font-weight: 400; margin-top: 4px; }
-.price-alt-inline { font-size: 0.7em; color: var(--text-secondary); font-weight: 400; }
+
+/* Currency switching - show only selected currency */
+.price-eur, .price-usd, .price-mad { display: none; }
+[data-currency="EUR"] .price-eur { display: inline; }
+[data-currency="USD"] .price-usd { display: inline; }
+[data-currency="MAD"] .price-mad { display: inline; }
+/* Default to EUR if no data-currency set */
+html:not([data-currency]) .price-eur { display: inline; }
+
 .pricing-time { color: var(--text-secondary); font-size: 0.875rem; }
 
 .pricing-body { padding: var(--spacing-xl); }
