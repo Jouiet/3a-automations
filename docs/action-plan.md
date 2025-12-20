@@ -4,15 +4,28 @@
 
 ---
 
-## ✅ SESSION 61: VOICE AI = ATOUT MARKETING (20/12/2025)
+## ✅ SESSION 61 COMPLETE: SEGMENTATION + VOICE AI (21/12/2025)
 
 ```
-DÉCISIONS STRATÉGIQUES:
-├── ✅ Voice AI Booking = BONUS dans TOUS les packs (différenciateur)
+SEGMENTATION AUTOMATIONS (CORRIGÉE):
+├── ✅ 66 automations client-facing (était 75 pollué)
+├── ✅ 36 scripts avec code
+├── ✅ 30 templates/workflows
+├── ✅ 23 outils internes EXCLUS du registre
+└── ✅ sync-knowledge-base.cjs v4.0 avec règles strictes
+
+RÈGLES DE SEGMENTATION:
+├── agency/core/: WHITELIST (booking files only)
+├── clients/*: All EXCEPT test-/check-/verify-
+├── generic/*: All EXCEPT test-/validate-/modules
+└── lib/: EXCLUDED entirely
+
+VOICE AI = ATOUT MARKETING:
+├── ✅ Voice AI Booking = BONUS dans TOUS les packs
 ├── ✅ WhatsApp Business API > SMS (gratuit, 98% open rate)
-├── ✅ Stack propriétaire: Web Speech + Grok Voice (pas Synthflow)
-├── ✅ Catalogue: 50 → 51 automatisations
-└── ✅ Pricing FR+EN mis à jour avec BONUS Voice AI
+├── ✅ Stack propriétaire: Web Speech + Grok Voice
+├── ✅ Booking 100% flexible (pas de templates hardcodés)
+└── ✅ Overnight hours support (11h-2AM scenarios)
 
 MARCHÉ VOICE AI (Sources vérifiées):
 ├── Market 2024: $2.4B → 2034: $47.5B (CAGR 34.8%)
@@ -27,39 +40,46 @@ MARCHÉ VOICE AI (Sources vérifiées):
 
 ```
 CRITIQUE (Bloquant pour production):
+├── ✅ Check dispo calendrier temps réel (FAIT - GA4 events ajoutés)
+├── ✅ Booking 100% flexible (FAIT - pas de templates hardcodés)
 ├── ❌ Fallback texte-only Firefox/Safari (+30% coverage)
-├── ❌ Check dispo calendrier temps réel (UX critique)
 └── ❌ WhatsApp Business API integration
 
 HIGH PRIORITY:
 ├── ❌ Rappels WhatsApp 24h + 1h avant RDV (-30% no-shows)
-├── ❌ Grok Voice integration (téléphone, $0.05/min)
-└── ❌ Analytics booking (GA4 events)
+├── ❌ Grok Voice integration (téléphone, $0.05/min) - requires $5 credits
+└── ❌ Test booking flow end-to-end (voice → calendar → confirmation)
 
 MEDIUM:
 ├── ❌ Détection timezone auto
-└── ❌ Flow reschedule/cancel
+├── ❌ Flow reschedule/cancel
+└── ❌ Voice widget pulse animation (attire l'attention)
+
+ACQUISITION CLIENTS:
+├── ❌ Formulaire diagnostic (Google Forms → Klaviyo)
+├── ❌ Premier cold outreach (LinkedIn)
+└── ❌ Contenu LinkedIn (1 post/semaine)
 ```
 
 ---
 
-## 🟡 ALERTES (Session 56 - 20/12/2025)
+## 🟡 ALERTES (Session 61 - 21/12/2025)
 
 ```
 SÉCURITÉ:
 ├── ⚠️ Token Shopify exposé (git history): shpat_146b...
 └── → ACTION MANUELLE: RÉVOQUER sur Shopify Admin
 
-PERFORMANCE SITE (POST GTM FIX):
-├── Lighthouse Performance: 70% 🟡 (+46 pts depuis Session 53)
+PERFORMANCE SITE:
+├── Lighthouse Performance: 70% 🟡
 ├── LCP: 3.8s 🟡 | TBT: 450ms 🟡 | CLS: 0 ✅
-├── GTM Blocking: 175ms (était 496ms, -65%)
 └── ✅ GTM lazy loading appliqué (24 pages)
 
 FACTUALITÉ (Corrigée Session 61):
-├── ✅ Claims "51" automatisations (aligné Session 61)
+├── ✅ Claims "66" automatisations (corrigé de 75 pollué)
+├── ✅ Segmentation stricte (23 outils internes exclus)
 ├── ✅ Voice AI Booking = BONUS dans tous les packs
-└── ✅ Architecture nettoyée (180 scripts → /clients/)
+└── ✅ Booking 100% flexible (templates hardcodés supprimés)
 ```
 
 ---

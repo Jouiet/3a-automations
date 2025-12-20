@@ -1,10 +1,56 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-20 | Version: 7.9 (Màj Session 61 - Voice AI Marketing Strategy)
+## Date: 2025-12-21 | Version: 8.0 (Màj Session 61 - Segmentation 66 Automations)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 61)
+# SECTION 0: ÉTAT ACTUEL (21 Dec 2025 - Session 61 Complete)
+
+## ✅ SESSION 61: SEGMENTATION AUTOMATIONS (66 total)
+
+### Résultat Final Vérifié
+```
+AVANT (pollué):     75 automations (incluait outils internes)
+APRÈS (corrigé):    66 automations client-facing
+
+Composition:
+├── Scripts avec code:     36
+├── Templates/workflows:   30
+└── Outils internes:       23 (EXCLUS)
+```
+
+### Règles de Segmentation v4.0
+```
+agency/core/   → WHITELIST: google-*-booking.* seulement
+clients/*      → INCLUS sauf test-/check-/verify-
+generic/*      → INCLUS sauf test-/validate-/modules
+lib/           → EXCLU totalement
+
+EXCLUS (23 fichiers):
+├── Préfixes: test-, check-, validate-, forensic-, env-
+├── Suffixes: -test, -poc, -connection
+├── Patterns: verify-, inspect-
+└── Spécifiques: grok-client, geo-markets, prompt-feedback-tracker
+```
+
+### Catégories (66 automations)
+```
+Lead Generation & Acquisition:  18
+Shopify Admin:                  13
+SEO & Contenu:                   9
+Email Marketing (CRM):           9
+Analytics & Reporting:           9
+Contenu & Vidéo:                 8
+```
+
+### Commits Session 61 (Segmentation)
+```
+a297b3f fix(sync): Proper segmentation - 66 client-facing automations only
+060ceef fix(booking): Remove hardcoded templates - 100% flexible
+0733b40 fix(booking): Full overnight hours support (11h-2AM scenarios)
+```
+
+---
 
 ## ✅ SESSION 61: VOICE AI = ATOUT STRATÉGIQUE
 
@@ -13,7 +59,7 @@
 1. Voice AI Booking = BONUS dans TOUS les packs (Quick Win, Essentials, Growth)
 2. WhatsApp Business API > SMS Twilio (gratuit, 98% open rate)
 3. Stack propriétaire avec Grok Voice (pas de Synthflow)
-4. Catalogue: 50 → 51 automatisations
+4. Catalogue: 50 → 66 automatisations (après segmentation correcte)
 ```
 
 ### Marché Voice AI (Sources vérifiées)

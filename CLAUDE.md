@@ -62,8 +62,24 @@ Basé sur recherche Cal.com v5.5 + Google Calendar 2025:
 | Open rate | 20% | 98% |
 | Maroc/Maghreb | Rare | Dominant |
 
-### Commits Session 61 (8 total)
+### Segmentation Automations (sync-knowledge-base.cjs v4.0)
 ```
+WHITELIST (agency/core/):
+  - google-apps-script-booking.js ✅
+  - google-calendar-booking.cjs ✅
+
+EXCLUSIONS (23 outils internes):
+  - test-*, check-*, validate-*, forensic-*, env-*
+  - *-test, *-poc, *-connection
+  - verify-*, inspect-*
+  - sync-knowledge-base.cjs, geo-markets.cjs, etc.
+
+RÉSULTAT: 66 client-facing / 23 internal
+```
+
+### Commits Session 61 (9 total)
+```
+a297b3f fix(sync): Proper segmentation - 66 client-facing automations only
 060ceef fix(booking): Remove hardcoded templates - 100% flexible
 0733b40 fix(booking): Full overnight hours support (11h-2AM)
 3f0be74 feat(voice-booking): Real-time calendar + GA4 + Flywheel
