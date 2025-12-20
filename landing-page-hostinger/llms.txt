@@ -13,7 +13,7 @@
 - [Audit E-commerce Gratuit](https://3a-automation.com/services/audit-gratuit.html): Analyse SEO, email marketing, conversion - rapport sous 48h
 - [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Automatisation Shopify, flows Klaviyo, SEO produits, sync multi-canaux
 - [Services PME](https://3a-automation.com/services/pme.html): Lead generation B2B, analytics, CRM automation
-- [Catalogue Automatisations](https://3a-automation.com/automations.html): 52 automatisations testées et documentées
+- [Catalogue Automatisations](https://3a-automation.com/automations.html): 66 automatisations testées et documentées
 
 ## Tarification
 
@@ -82,5 +82,5 @@
 
 ---
 
-Version: 3.0 | Last Updated: 2025-12-19
+Version: 3.1 | Last Updated: 2025-12-21
 Spec: https://llmstxt.org/
