@@ -1,0 +1,365 @@
+{
+  "name": "3A Automation - Booking System",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "booking",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "id": "webhook-booking",
+      "name": "Webhook Booking",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [250, 300],
+      "webhookId": "3a-booking-webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "availability",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-availability",
+      "name": "Webhook Availability",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [250, 500],
+      "webhookId": "3a-availability-webhook"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": "primary"
+        },
+        "returnAll": false,
+        "limit": 50,
+        "options": {
+          "timeMax": "={{ $now.plus(14, 'days').toISO() }}",
+          "timeMin": "={{ $now.toISO() }}",
+          "singleEvents": true,
+          "orderBy": "startTime"
+        }
+      },
+      "id": "google-calendar-get",
+      "name": "Get Calendar Events",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.1,
+      "position": [500, 500],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "google-calendar-creds",
+          "name": "Google Calendar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Business hours configuration (Morocco time UTC+1)\nconst BUSINESS_HOURS = {\n  1: { start: 9, end: 18 }, // Monday\n  2: { start: 9, end: 18 }, // Tuesday\n  3: { start: 9, end: 18 }, // Wednesday\n  4: { start: 9, end: 18 }, // Thursday\n  5: { start: 9, end: 18 }, // Friday\n  6: null, // Saturday - closed\n  0: null  // Sunday - closed\n};\n\nconst SLOT_DURATION = 30; // minutes\nconst BUFFER_TIME = 15; // minutes between meetings\n\n// Get existing events\nconst events = $input.all().map(item => ({\n  start: new Date(item.json.start.dateTime || item.json.start.date),\n  end: new Date(item.json.end.dateTime || item.json.end.date)\n}));\n\n// Generate available slots for next 14 days\nconst availableSlots = [];\nconst now = new Date();\n\nfor (let d = 1; d <= 14; d++) {\n  const date = new Date(now);\n  date.setDate(now.getDate() + d);\n  \n  const dayOfWeek = date.getDay();\n  const hours = BUSINESS_HOURS[dayOfWeek];\n  \n  if (!hours) continue; // Skip closed days\n  \n  // Generate slots for this day\n  for (let h = hours.start; h < hours.end; h++) {\n    for (let m = 0; m < 60; m += SLOT_DURATION) {\n      const slotStart = new Date(date);\n      slotStart.setHours(h, m, 0, 0);\n      \n      const slotEnd = new Date(slotStart.getTime() + SLOT_DURATION * 60000);\n      \n      // Check if slot conflicts with existing events\n      const hasConflict = events.some(event => {\n        const bufferStart = new Date(event.start.getTime() - BUFFER_TIME * 60000);\n        const bufferEnd = new Date(event.end.getTime() + BUFFER_TIME * 60000);\n        return slotStart < bufferEnd && slotEnd > bufferStart;\n      });\n      \n      if (!hasConflict && slotEnd.getHours() <= hours.end) {\n        availableSlots.push({\n          date: slotStart.toISOString().split('T')[0],\n          time: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`,\n          start: slotStart.toISOString(),\n          end: slotEnd.toISOString(),\n          dayName: slotStart.toLocaleDateString('fr-FR', { weekday: 'long' })\n        });\n      }\n    }\n  }\n}\n\nreturn [{ json: { slots: availableSlots, count: availableSlots.length } }];"
+      },
+      "id": "calculate-availability",
+      "name": "Calculate Available Slots",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 500]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-availability",
+      "name": "Respond Availability",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 500]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "validate-required",
+              "leftValue": "={{ $json.body.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "id": "validate-email",
+              "leftValue": "={{ $json.body.email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "id": "validate-datetime",
+              "leftValue": "={{ $json.body.datetime }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "validate-booking",
+      "name": "Validate Booking Data",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": "primary"
+        },
+        "summary": "=RDV: {{ $json.body.name }} - {{ $json.body.service || 'Consultation' }}",
+        "description": "=Client: {{ $json.body.name }}\nEmail: {{ $json.body.email }}\nTéléphone: {{ $json.body.phone || 'Non fourni' }}\nService: {{ $json.body.service || 'Consultation initiale' }}\nNotes: {{ $json.body.notes || 'Aucune' }}\n\n---\nBooking créé via 3A Automation",
+        "additionalFields": {
+          "attendees": [
+            {
+              "email": "={{ $json.body.email }}"
+            }
+          ],
+          "guestsCanModify": false,
+          "sendUpdates": "all",
+          "start": "={{ $json.body.datetime }}",
+          "end": "={{ DateTime.fromISO($json.body.datetime).plus({ minutes: 30 }).toISO() }}",
+          "conferenceDataVersion": 0,
+          "color": "9"
+        }
+      },
+      "id": "create-calendar-event",
+      "name": "Create Calendar Event",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.1,
+      "position": [700, 200],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "google-calendar-creds",
+          "name": "Google Calendar"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.GOOGLE_SHEETS_ID || '1b8k9EKo-6_O6Ay_z-Hrr1OrqBdjtjzF8JYwLgOnpM8g' }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Bookings"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $now.toISO() }}",
+            "Nom": "={{ $('Webhook Booking').item.json.body.name }}",
+            "Email": "={{ $('Webhook Booking').item.json.body.email }}",
+            "Telephone": "={{ $('Webhook Booking').item.json.body.phone || '' }}",
+            "Service": "={{ $('Webhook Booking').item.json.body.service || 'Consultation' }}",
+            "RDV": "={{ $('Webhook Booking').item.json.body.datetime }}",
+            "EventID": "={{ $json.id }}",
+            "Status": "Confirmé"
+          }
+        },
+        "options": {}
+      },
+      "id": "log-to-sheets",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.2,
+      "position": [900, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "google-sheets-creds",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"Votre rendez-vous a été confirmé!\",\n  \"booking\": {\n    \"id\": \"{{ $json.id }}\",\n    \"datetime\": \"{{ $('Webhook Booking').item.json.body.datetime }}\",\n    \"name\": \"{{ $('Webhook Booking').item.json.body.name }}\",\n    \"email\": \"{{ $('Webhook Booking').item.json.body.email }}\"\n  }\n}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-success",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1100, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": false,\n  \"error\": \"Données manquantes. Veuillez fournir: name, email, datetime\"\n}",
+        "options": {
+          "responseCode": "400",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-error",
+      "name": "Respond Error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [700, 400]
+    }
+  ],
+  "connections": {
+    "Webhook Booking": {
+      "main": [
+        [
+          {
+            "node": "Validate Booking Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Availability": {
+      "main": [
+        [
+          {
+            "node": "Get Calendar Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Calendar Events": {
+      "main": [
+        [
+          {
+            "node": "Calculate Available Slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Available Slots": {
+      "main": [
+        [
+          {
+            "node": "Respond Availability",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Booking Data": {
+      "main": [
+        [
+          {
+            "node": "Create Calendar Event",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Calendar Event": {
+      "main": [
+        [
+          {
+            "node": "Log to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "booking"
+    },
+    {
+      "name": "3a-automation"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2025-12-20T22:00:00.000Z",
+  "versionId": "1.0.0"
+}

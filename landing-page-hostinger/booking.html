@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réservez votre consultation gratuite avec 3A Automation. Choisissez un créneau disponible et recevez une confirmation immédiate.">
+  <title>Réserver un RDV | 3A Automation</title>
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://3a-automation.com/booking.html">
+  <link rel="alternate" hreflang="fr" href="https://3a-automation.com/booking.html">
+  <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/booking.html">
+  <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/booking.html">
+
+  <meta property="og:title" content="Réserver un RDV | 3A Automation">
+  <meta property="og:description" content="Consultation gratuite de 30 minutes. Automation, Analytics, AI.">
+  <meta property="og:image" content="https://3a-automation.com/og-image.png">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
+
+  <link rel="preload" href="styles.min.css?v=5.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.min.css?v=5.0"></noscript>
+
+  <style>
+    /* Booking-specific styles */
+    .booking-hero {
+      padding: 8rem 0 4rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(79, 186, 241, 0.05) 0%, transparent 100%);
+    }
+    .booking-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+    }
+    .booking-hero p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .booking-section {
+      padding: 4rem 0;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .booking-calendar {
+      background: rgba(25, 30, 53, 0.6);
+      border: 1px solid rgba(79, 186, 241, 0.15);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+    }
+
+    .booking-calendar h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+    }
+
+    .date-selector {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .date-btn {
+      padding: 0.75rem 0.5rem;
+      border: 1px solid rgba(79, 186, 241, 0.2);
+      background: rgba(25, 30, 53, 0.8);
+      color: var(--text-secondary);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .date-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      color: var(--text-light);
+    }
+    .date-btn.selected {
+      background: var(--primary);
+      color: var(--secondary);
+      border-color: var(--primary);
+    }
+    .date-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .date-btn .day-name {
+      font-size: 0.7rem;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .date-btn .day-num {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+    }
+
+    .time-btn {
+      padding: 0.75rem;
+      border: 1px solid rgba(79, 186, 241, 0.2);
+      background: rgba(25, 30, 53, 0.8);
+      color: var(--text-secondary);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+    }
+    .time-btn:hover {
+      border-color: var(--primary);
+      color: var(--text-light);
+    }
+    .time-btn.selected {
+      background: var(--primary);
+      color: var(--secondary);
+      border-color: var(--primary);
+    }
+
+    .no-slots {
+      color: var(--text-secondary);
+      text-align: center;
+      padding: 2rem;
+      font-style: italic;
+    }
+
+    .booking-form {
+      background: rgba(25, 30, 53, 0.6);
+      border: 1px solid rgba(79, 186, 241, 0.15);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+    }
+
+    .booking-form h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: rgba(25, 30, 53, 0.8);
+      border: 1px solid rgba(79, 186, 241, 0.2);
+      border-radius: var(--radius-md);
+      color: var(--text-light);
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 186, 241, 0.1);
+    }
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .selected-slot {
+      background: rgba(79, 186, 241, 0.1);
+      border: 1px solid rgba(79, 186, 241, 0.3);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .selected-slot .date {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .selected-slot .time {
+      color: var(--text-secondary);
+    }
+    .selected-slot.empty {
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .booking-submit {
+      width: 100%;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: none;
+      border-radius: var(--radius-lg);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .booking-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(79, 186, 241, 0.4);
+    }
+    .booking-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .booking-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .booking-success.show {
+      display: block;
+    }
+    .booking-success .icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .booking-success h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .booking-success p {
+      color: var(--text-secondary);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .booking-benefits {
+      padding: 4rem 0;
+      background: rgba(79, 186, 241, 0.03);
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .benefit-card {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .benefit-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .benefit-card h4 {
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    .benefit-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body class="lite">
+  <!-- Cyber Background -->
+  <div class="cyber-bg">
+    <div class="cyber-grid"></div>
+    <div class="cyber-glow cyber-glow-1"></div>
+    <div class="cyber-glow cyber-glow-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <div class="logo-icon">
+          <img src="/logo.png" alt="" />
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-text">3A</span>
+          <span class="logo-sub">AUTOMATION</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav-menu">
+        <a href="/services/ecommerce.html">E-commerce</a>
+        <a href="/services/pme.html">PME</a>
+        <a href="/automations.html">Automations</a>
+        <a href="/pricing.html">Tarifs</a>
+        <a href="/booking.html" class="active">RDV</a>
+        <a href="/en/booking.html" class="lang-switch" title="Switch to English">EN</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="booking-hero">
+    <div class="container">
+      <span class="badge">Consultation Gratuite</span>
+      <h1>Réservez votre <span class="highlight">rendez-vous</span></h1>
+      <p>30 minutes pour discuter de vos besoins en automation. Choisissez un créneau qui vous convient.</p>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section class="booking-section">
+    <div class="container">
+      <div class="booking-grid" id="booking-container">
+        <!-- Calendar -->
+        <div class="booking-calendar">
+          <h3>1. Choisissez une date</h3>
+          <div class="date-selector" id="date-selector">
+            <!-- Dates generated by JS -->
+          </div>
+
+          <h3>2. Choisissez un horaire</h3>
+          <div class="time-slots" id="time-slots">
+            <p class="no-slots">Sélectionnez une date pour voir les créneaux disponibles</p>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="booking-form">
+          <h3>3. Vos informations</h3>
+
+          <div class="selected-slot empty" id="selected-slot">
+            Aucun créneau sélectionné
+          </div>
+
+          <form id="booking-form">
+            <div class="form-group">
+              <label for="name">Nom complet *</label>
+              <input type="text" id="name" name="name" required placeholder="Votre nom">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="votre@email.com">
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Téléphone</label>
+              <input type="tel" id="phone" name="phone" placeholder="+212 6XX XXX XXX">
+            </div>
+
+            <div class="form-group">
+              <label for="service">Type de consultation</label>
+              <select id="service" name="service">
+                <option value="Audit E-commerce">Audit E-commerce</option>
+                <option value="Audit PME/B2B">Audit PME/B2B</option>
+                <option value="Email Automation">Email Automation</option>
+                <option value="Analytics Setup">Analytics Setup</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Message (optionnel)</label>
+              <textarea id="notes" name="notes" placeholder="Décrivez brièvement votre projet..."></textarea>
+            </div>
+
+            <button type="submit" class="booking-submit" id="submit-btn" disabled>
+              Confirmer le rendez-vous
+            </button>
+          </form>
+        </div>
+
+        <!-- Success Message (hidden by default) -->
+        <div class="booking-success" id="booking-success">
+          <div class="icon">&#10003;</div>
+          <h2>Rendez-vous confirmé!</h2>
+          <p>Vous recevrez un email de confirmation avec les détails du rendez-vous.</p>
+          <p style="margin-top: 1rem; color: var(--primary);" id="confirmation-details"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="booking-benefits">
+    <div class="container">
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">&#128337;</div>
+          <h4>30 minutes</h4>
+          <p>Une consultation ciblée pour identifier vos opportunités d'automation.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">&#127919;</div>
+          <h4>100% gratuit</h4>
+          <p>Sans engagement. Découvrez ce que l'automation peut apporter à votre business.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">&#128640;</div>
+          <h4>Actionable</h4>
+          <p>Repartez avec des recommandations concrètes et un plan d'action clair.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-ultra">
+    <div class="container">
+      <div class="footer-grid-ultra">
+        <div class="footer-brand-ultra">
+          <a href="/" class="logo">
+            <div class="logo-icon">
+              <img src="/logo.png" alt="" />
+            </div>
+            <div class="logo-text-wrap">
+              <span class="logo-text">3A</span>
+              <span class="logo-sub">AUTOMATION</span>
+            </div>
+          </a>
+          <p class="footer-tagline">Automation - Analytics - AI</p>
+        </div>
+        <div class="footer-links-ultra">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom-ultra">
+        <p>&copy; 2025 3A Automation. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script-lite.js"></script>
+
+  <!-- Booking Logic -->
+  <script>
+  (function() {
+    'use strict';
+
+    // Configuration
+    const CONFIG = {
+      // n8n webhook URLs (production)
+      webhookUrl: 'https://n8n.srv1168256.hstgr.cloud/webhook/booking',
+      availabilityUrl: 'https://n8n.srv1168256.hstgr.cloud/webhook/availability',
+
+      // Business hours (as fallback if API unavailable)
+      businessHours: {
+        1: { start: 9, end: 18 }, // Monday
+        2: { start: 9, end: 18 },
+        3: { start: 9, end: 18 },
+        4: { start: 9, end: 18 },
+        5: { start: 9, end: 18 },
+        6: null, // Saturday
+        0: null  // Sunday
+      },
+      slotDuration: 30, // minutes
+      daysToShow: 14
+    };
+
+    // State
+    let selectedDate = null;
+    let selectedTime = null;
+    let availableSlots = [];
+
+    // DOM Elements
+    const dateSelector = document.getElementById('date-selector');
+    const timeSlots = document.getElementById('time-slots');
+    const selectedSlotDisplay = document.getElementById('selected-slot');
+    const bookingForm = document.getElementById('booking-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const bookingContainer = document.getElementById('booking-container');
+    const bookingSuccess = document.getElementById('booking-success');
+
+    // Generate date buttons
+    function generateDateButtons() {
+      const today = new Date();
+      dateSelector.innerHTML = '';
+
+      for (let i = 1; i <= CONFIG.daysToShow; i++) {
+        const date = new Date(today);
+        date.setDate(today.getDate() + i);
+
+        const dayOfWeek = date.getDay();
+        const isOpen = CONFIG.businessHours[dayOfWeek] !== null;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'date-btn';
+        btn.disabled = !isOpen;
+        btn.dataset.date = date.toISOString().split('T')[0];
+
+        const dayName = date.toLocaleDateString('fr-FR', { weekday: 'short' });
+        const dayNum = date.getDate();
+
+        btn.innerHTML = `
+          <span class="day-name">${dayName}</span>
+          <span class="day-num">${dayNum}</span>
+        `;
+
+        btn.addEventListener('click', () => selectDate(date, btn));
+        dateSelector.appendChild(btn);
+      }
+    }
+
+    // Select date
+    function selectDate(date, btn) {
+      // Update UI
+      document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      selectedDate = date;
+      selectedTime = null;
+      updateSelectedSlotDisplay();
+
+      // Generate time slots
+      generateTimeSlots(date);
+    }
+
+    // Generate time slots for selected date
+    function generateTimeSlots(date) {
+      const dayOfWeek = date.getDay();
+      const hours = CONFIG.businessHours[dayOfWeek];
+
+      if (!hours) {
+        timeSlots.innerHTML = '<p class="no-slots">Fermé ce jour</p>';
+        return;
+      }
+
+      timeSlots.innerHTML = '';
+
+      for (let h = hours.start; h < hours.end; h++) {
+        for (let m = 0; m < 60; m += CONFIG.slotDuration) {
+          const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'time-btn';
+          btn.textContent = timeStr;
+          btn.dataset.time = timeStr;
+
+          btn.addEventListener('click', () => selectTime(timeStr, btn));
+          timeSlots.appendChild(btn);
+        }
+      }
+    }
+
+    // Select time
+    function selectTime(time, btn) {
+      document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      selectedTime = time;
+      updateSelectedSlotDisplay();
+      submitBtn.disabled = false;
+    }
+
+    // Update selected slot display
+    function updateSelectedSlotDisplay() {
+      if (selectedDate && selectedTime) {
+        const dateStr = selectedDate.toLocaleDateString('fr-FR', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        selectedSlotDisplay.innerHTML = `
+          <div class="date">${dateStr}</div>
+          <div class="time">${selectedTime} - 30 minutes</div>
+        `;
+        selectedSlotDisplay.classList.remove('empty');
+      } else {
+        selectedSlotDisplay.innerHTML = 'Aucun créneau sélectionné';
+        selectedSlotDisplay.classList.add('empty');
+      }
+    }
+
+    // Submit booking
+    async function submitBooking(e) {
+      e.preventDefault();
+
+      if (!selectedDate || !selectedTime) {
+        alert('Veuillez sélectionner une date et un horaire.');
+        return;
+      }
+
+      const formData = new FormData(bookingForm);
+      const name = formData.get('name');
+      const email = formData.get('email');
+
+      if (!name || !email) {
+        alert('Veuillez remplir les champs obligatoires.');
+        return;
+      }
+
+      // Build datetime
+      const [hours, minutes] = selectedTime.split(':');
+      const datetime = new Date(selectedDate);
+      datetime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+
+      const bookingData = {
+        name: name,
+        email: email,
+        phone: formData.get('phone') || '',
+        service: formData.get('service') || 'Consultation',
+        notes: formData.get('notes') || '',
+        datetime: datetime.toISOString()
+      };
+
+      // Show loading
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span> Réservation en cours...';
+
+      try {
+        const response = await fetch(CONFIG.webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bookingData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Show success
+          bookingContainer.querySelectorAll('.booking-calendar, .booking-form').forEach(el => {
+            el.style.display = 'none';
+          });
+          bookingSuccess.classList.add('show');
+
+          const dateStr = selectedDate.toLocaleDateString('fr-FR', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long'
+          });
+          document.getElementById('confirmation-details').textContent =
+            `${dateStr} à ${selectedTime}`;
+
+        } else {
+          throw new Error(result.error || 'Erreur lors de la réservation');
+        }
+
+      } catch (error) {
+        console.error('Booking error:', error);
+
+        // Fallback: Open mailto
+        const subject = encodeURIComponent(`Demande RDV - ${bookingData.service}`);
+        const body = encodeURIComponent(
+          `Bonjour,\n\nJe souhaite réserver un rendez-vous.\n\n` +
+          `Nom: ${bookingData.name}\n` +
+          `Email: ${bookingData.email}\n` +
+          `Téléphone: ${bookingData.phone}\n` +
+          `Service: ${bookingData.service}\n` +
+          `Date souhaitée: ${selectedDate.toLocaleDateString('fr-FR')} à ${selectedTime}\n` +
+          `Notes: ${bookingData.notes}\n\n` +
+          `Cordialement`
+        );
+
+        const confirmFallback = confirm(
+          'Le système de réservation automatique est temporairement indisponible.\n\n' +
+          'Voulez-vous envoyer votre demande par email?'
+        );
+
+        if (confirmFallback) {
+          window.location.href = `mailto:contact@3a-automation.com?subject=${subject}&body=${body}`;
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirmer le rendez-vous';
+      }
+    }
+
+    // Initialize
+    function init() {
+      generateDateButtons();
+      bookingForm.addEventListener('submit', submitBooking);
+    }
+
+    // Run on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>
+</body>
+</html>
