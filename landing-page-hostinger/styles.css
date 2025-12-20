@@ -2208,9 +2208,25 @@ body.lite {
     height: 300px;
   }
 
-  /* Hide ring-3 on mobile - too crowded, causes overlap */
+  /* Ring-3 on mobile - smaller icons to fit */
   .ring-3 {
-    display: none;
+    display: block;
+    opacity: 0.85;
+  }
+
+  .ring-3 .tech-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 4px 2px;
+  }
+
+  .ring-3 .tech-icon span {
+    font-size: 0.55rem;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: visible;
   }
 
   /* Base tech-icon mobile - larger text, comfortable touch */
@@ -2221,12 +2237,16 @@ body.lite {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: visible;
   }
 
   .tech-icon span {
-    font-size: 0.85rem; /* 14px - clearly readable */
+    font-size: 0.8rem; /* 13px - readable */
     font-weight: 600;
     line-height: 1.1;
+    color: var(--primary);
+    white-space: nowrap;
+    overflow: visible;
   }
 
   /* Ring 1 - Outer ring: larger icons for text */
@@ -2810,6 +2830,23 @@ body.lite {
 
   .ring-2 .tech-icon span {
     font-size: 0.7rem; /* 11px */
+  }
+
+  /* Ring-3 at 480px - even smaller but still visible */
+  .ring-3 {
+    opacity: 0.7;
+  }
+
+  .ring-3 .tech-icon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    padding: 2px;
+  }
+
+  .ring-3 .tech-icon span {
+    font-size: 0.45rem;
   }
 
   .orbital-center {
