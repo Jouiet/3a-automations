@@ -5168,12 +5168,18 @@ html:not([data-currency]) .price-eur { display: inline; }
   margin-left: 4px;
 }
 
-/* Period switching - show only selected period */
-.period-monthly, .period-annual { display: none; }
-[data-period="monthly"] .period-monthly { display: inline; }
-[data-period="annual"] .period-annual { display: inline; }
+/* Period switching - MUST override currency for dual-condition elements */
+/* !important required: elements like .price-eur.period-annual must hide
+   when period=monthly, even though [data-currency="EUR"] .price-eur says inline */
+.period-monthly, .period-annual { display: none !important; }
+[data-period="monthly"] .period-monthly { display: inline !important; }
+[data-period="annual"] .period-annual { display: inline !important; }
 /* Default to monthly */
-html:not([data-period]) .period-monthly { display: inline; }
+html:not([data-period]) .period-monthly { display: inline !important; }
+
+/* Annual savings badge */
+.annual-savings { display: none !important; }
+[data-period="annual"] .annual-savings { display: block !important; }
 
 .retainer-grid {
   display: grid;
