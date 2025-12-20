@@ -5096,6 +5096,8 @@ body.lite {
 
 .pricing-price { margin: var(--spacing-md) 0; }
 .price-amount { font-size: 3rem; font-weight: 700; color: var(--text-light); font-family: var(--font-mono); }
+.price-alt { display: block; font-size: 0.9rem; color: var(--text-secondary); font-weight: 400; margin-top: 4px; }
+.price-alt-inline { font-size: 0.7em; color: var(--text-secondary); font-weight: 400; }
 .pricing-time { color: var(--text-secondary); font-size: 0.875rem; }
 
 .pricing-body { padding: var(--spacing-xl); }
@@ -5161,6 +5163,15 @@ body.lite {
 .retainer-price { margin-bottom: var(--spacing-sm); }
 .retainer-price .price-amount { font-size: 2.5rem; }
 .price-period { color: var(--text-secondary); font-size: 1rem; }
+.retainer-annual {
+  background: rgba(79, 186, 241, 0.1);
+  border: 1px solid rgba(79, 186, 241, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin: var(--spacing-md) 0;
+}
+.annual-price { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+.annual-savings { display: block; color: var(--accent); font-size: 0.8rem; font-weight: 500; }
 .retainer-hours { color: var(--primary); font-size: 0.9rem; font-weight: 600; margin-bottom: var(--spacing-lg); }
 
 .retainer-card ul { list-style: none; padding: 0; margin: 0 0 var(--spacing-lg) 0; text-align: left; }
