@@ -6,8 +6,9 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "test-env": "node scripts/test-env.cjs",
-    "audit": "node AGENCY-CORE-SCRIPTS-V3/forensic_flywheel_analysis_complete.cjs"
+    "test-env": "node automations/agency/core/test-env.cjs",
+    "validate-automations": "node automations/validate-automations-registry.cjs",
+    "test-apis": "node automations/generic/test-all-apis.cjs"
   },
   "dependencies": {
     "@google-analytics/data": "^5.2.1",

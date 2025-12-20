@@ -1,4 +1,0 @@
-{
-  "project_name": "3a-website",
-  "content": "services:\n  website:\n    image: nginx:alpine\n    restart: always\n    entrypoint: [\"/bin/sh\", \"-c\", \"apk add --no-cache wget && wget -qO- https://github.com/Jouiet/3a-automations/archive/main.tar.gz | tar xz -C /tmp && cp -r /tmp/3a-automations-main/landing-page-hostinger/* /usr/share/nginx/html/ && rm -rf /tmp/3a-automations-main && nginx -g 'daemon off;'\"]\n    labels:\n      - traefik.enable=true\n      - traefik.http.routers.website.rule=Host(`3a-automation.com`) || Host(`www.3a-automation.com`)\n      - traefik.http.routers.website.tls=true\n      - traefik.http.routers.website.entrypoints=web,websecure\n      - traefik.http.routers.website.tls.certresolver=mytlschallenge\n      - traefik.http.services.website.loadbalancer.server.port=80\n    networks:\n      - traefik_network\n\nnetworks:\n  traefik_network:\n    external: true\n    name: root_default"
-}
