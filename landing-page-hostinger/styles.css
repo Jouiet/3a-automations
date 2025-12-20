@@ -1350,10 +1350,58 @@ body.lite {
   font-weight: 600;
 }
 
-/* Performance optimization */
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY - Reduced Motion Support
+   Respects user preference for reduced motion (vestibular disorders, etc.)
+   ═══════════════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
+  /* Disable all orbital animations */
+  .orbital-ring,
+  .ring-1,
+  .ring-2,
+  .ring-3,
+  .tech-icon,
+  .ring-1 .tech-icon,
+  .ring-2 .tech-icon,
+  .ring-3 .tech-icon {
+    animation: none !important;
+  }
+
+  /* Disable center pulse */
+  .center-pulse,
+  .step-pulse {
+    animation: none !important;
+  }
+
+  /* Disable marquee */
   .tech-marquee-track {
-    animation: none;
+    animation: none !important;
+  }
+
+  /* Disable all decorative animations */
+  .cyber-glow,
+  .morph-blob,
+  .data-stream,
+  .particle-orb,
+  .particle-line,
+  .scroll-dot,
+  .holographic::before,
+  .gradient-border::before,
+  .glitch::before,
+  .glitch::after {
+    animation: none !important;
+  }
+
+  /* Disable hover transform effects */
+  .tech-icon:hover,
+  .service-card-ultra:hover,
+  .btn-cyber:hover {
+    transform: none !important;
+  }
+
+  /* Keep essential transitions but make them instant */
+  * {
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -2086,55 +2134,76 @@ body.lite {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     ORBITAL TECH-ICONS MOBILE - Prevent overlap
-     Ring-3 icons reduced to prevent Hostinger/WordPress, Kling/Playwright overlap
+     ORBITAL TECH-ICONS MOBILE - UX Optimized
+     - Touch targets: min 44px (Apple HIG compliant)
+     - Text: min 0.7rem (11px) for readability
+     - Ring-3: Hidden on mobile (too crowded, overlap issues)
+     - Simplified 2-ring design for clarity
      ═══════════════════════════════════════════════════════════════════════════ */
   .tech-orbital {
-    width: 300px;
-    height: 300px;
+    width: 280px;
+    height: 280px;
   }
 
+  /* Hide ring-3 on mobile - too crowded, causes overlap */
+  .ring-3 {
+    display: none;
+  }
+
+  /* Base tech-icon mobile - 44px minimum touch target */
   .tech-icon {
-    padding: 4px 6px;
-    min-width: auto;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .tech-icon span {
-    font-size: 0.6rem;
+    font-size: 0.7rem; /* 11px - readable */
+    line-height: 1.2;
   }
 
-  /* Ring 1 - Outer ring: smaller icons */
+  /* Ring 1 - Outer ring: 44px touch targets */
   .ring-1 .tech-icon {
-    width: 42px;
-    height: auto;
-    padding: 4px 5px;
+    width: 48px;
+    height: 44px;
+    padding: 6px 4px;
   }
 
-  /* Ring 2 - Middle ring */
+  /* Ring 2 - Middle ring: 44px touch targets */
   .ring-2 .tech-icon {
-    width: 40px;
-    height: auto;
-    padding: 4px 5px;
+    width: 46px;
+    height: 44px;
+    padding: 6px 4px;
   }
 
-  /* Ring 3 - Inner ring: much smaller to prevent overlap */
-  .ring-3 .tech-icon {
-    width: 32px;
-    height: auto;
-    padding: 3px 4px;
-  }
-
-  .ring-3 .tech-icon span {
-    font-size: 0.5rem;
-  }
-
+  /* Orbital center - proportional */
   .orbital-center {
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
   }
 
-  .orbital-center span {
+  .orbital-center .center-text {
     font-size: 1.25rem;
+  }
+
+  /* Slow down animation on mobile for less distraction */
+  .ring-1 {
+    animation-duration: 45s; /* Slower: 30s -> 45s */
+  }
+
+  .ring-2 {
+    animation-duration: 35s; /* Slower: 20s -> 35s */
+  }
+
+  .ring-1 .tech-icon {
+    animation-duration: 45s;
+  }
+
+  .ring-2 .tech-icon {
+    animation-duration: 35s;
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -2629,6 +2698,58 @@ body.lite {
 
   .stat-number-ultra {
     font-size: 2rem;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ORBITAL SMALL MOBILE - Fits 320px viewport
+     Viewport 320px - padding 32px = 288px available
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .hero-visual {
+    height: 260px;
+    max-width: 260px;
+  }
+
+  .tech-orbital {
+    width: 240px;
+    height: 240px;
+  }
+
+  /* Show only ring-1 with 6 most important techs visible */
+  .ring-2 {
+    opacity: 0.5; /* Fade ring-2 on very small screens */
+  }
+
+  .tech-icon {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 4px 6px;
+  }
+
+  .tech-icon span {
+    font-size: 0.65rem;
+  }
+
+  .ring-1 .tech-icon {
+    width: 42px;
+    height: 40px;
+  }
+
+  .ring-2 .tech-icon {
+    width: 38px;
+    height: 36px;
+  }
+
+  .ring-2 .tech-icon span {
+    font-size: 0.6rem;
+  }
+
+  .orbital-center {
+    width: 55px;
+    height: 55px;
+  }
+
+  .orbital-center .center-text {
+    font-size: 1rem;
   }
 
   .flywheel-section {
