@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 7.6 | Dernière mise à jour: 2025-12-20 (Session 49 - Mobile Optimization)
+## Version: 7.7 | Dernière mise à jour: 2025-12-20 (Session 49 - Mobile UX Complete)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -201,15 +201,17 @@ VPS Hostinger (ID: 1168256)
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 5. ~~Fusionner CSS~~ ✅ FAIT - styles.min.css (82KB minifié)
 
-## SESSION 49 COMPLÉTÉE ✅ (20/12/2025 - Mobile Optimization + Forensic Fix)
+## SESSION 49 COMPLÉTÉE ✅ (20/12/2025 - Mobile UX Complete)
 
 | Tâche | Statut | Détails |
 |-------|--------|---------|
-| Orbital restauré | ✅ | 390px, scale 0.98 (taille originale) |
-| Orbital repositionné | ✅ | margin-top: 20px (évite header) |
+| Orbital repositionné | ✅ | 390px, margin-top: 20px (évite header) |
 | Process Timeline -20% | ✅ | step-marker 50px→40px, fonts réduits |
 | Containers centrés | ✅ | Sélecteur corrigé: .hero-ultra-content |
-| CSS minifié | ✅ | 127KB → 85KB |
+| CTA "Ready to Scale" | ✅ | Centré + form agrandi |
+| Footer mobile | ✅ | Flex column + tout centré |
+| Flywheel +20% | ✅ | 280px→340px, stage 90px→108px |
+| CSS minifié | ✅ | 130KB → 87KB |
 
 **FORENSIC ANALYSIS - Bug centrage identifié:**
 ```
@@ -223,14 +225,19 @@ SOLUTION:
 ```
 
 **Changements CSS mobile (768px):**
-- Orbital: `height: 390px`, `max-width: 390px`, `scale: 0.98`, `margin: 20px auto`
-- Process timeline: step-marker `40px`, fonts `-20%`
-- Centering: `.hero-ultra-content` (sélecteur correct)
+- Orbital: `390px`, `margin: 20px auto` (évite header)
+- Timeline: step-marker `40px`, fonts `-20%`
+- Hero: `.hero-ultra-content` centré
+- CTA: container flex centered, form 100% width
+- Footer: flex column + align-items center (tous éléments)
+- Flywheel: +20% (wheel 340px, stage 108px, icon 44px)
 
 **Commits Session 49:**
 - `fdac0d3` feat(mobile): Comprehensive homepage mobile UX improvements
 - `ed96481` fix(mobile): Orbital -5%, Timeline -20%, containers centered
 - `f9009a6` fix(mobile): Restore orbital size + correct centering selectors
+- `815b1ef` fix(mobile): Center CTA "Ready to Scale" + expand form
+- `1beb8a3` fix(mobile): Footer centered + Flywheel +20%
 
 ---
 
