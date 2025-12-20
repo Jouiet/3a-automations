@@ -27,10 +27,20 @@
   <meta name="twitter:title" content="Flywheel 360 | 3A Automation">
   <meta name="twitter:description" content="Complete automation for E-commerce and SMB with measurable ROI.">
 
+  <!-- Critical CSS Inline for Fast FCP -->
+  <style>*,::after,::before{box-sizing:border-box;margin:0;padding:0}:root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}html{scroll-behavior:smooth}body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased;overflow-x:hidden}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.95);backdrop-filter:blur(10px)}.header-inner{display:flex;justify-content:space-between;align-items:center}.logo-link{display:flex;align-items:center;gap:.75rem;text-decoration:none}.logo-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center}.logo-icon img{width:100%;height:100%;object-fit:contain}.logo-text{font-weight:700;font-size:1.25rem;color:var(--primary)}.nav-links{display:flex;gap:2rem;list-style:none}.nav-links a{color:var(--text-light);text-decoration:none;font-size:.95rem}.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 0 4rem;position:relative}.hero-content{text-align:center;max-width:900px;margin:0 auto}.hero-title{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem}.hero-subtitle{font-size:1.25rem;color:var(--text-secondary);margin-bottom:2rem;max-width:600px;margin-left:auto;margin-right:auto}.btn-primary-cyber{display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2rem;background:linear-gradient(135deg,var(--primary) 0,var(--primary-dark) 100%);color:#fff;font-weight:600;border-radius:.75rem;text-decoration:none;transition:transform .2s,box-shadow .2s}.btn-primary-cyber:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(79,186,241,.4)}@media (max-width:768px){.nav-links{display:none}.hero-title{font-size:2rem}.hero-subtitle{font-size:1rem}}</style>
+
+  <!-- Preconnect for external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../styles-lite.css">
+
+  <!-- Deferred font loading -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
+
+  <!-- Main CSS deferred -->
+  <link rel="preload" href="../../styles.min.css?v=4.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="../../styles.min.css?v=4.0"></noscript>
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -679,7 +689,7 @@
     <div class="container">
       <a href="/en/" class="logo">
         <div class="logo-icon">
-              <img src="/logo.png" alt="3A Automation" />
+              <img src="/logo.png" alt="" />
             </div>
         <div class="logo-text-wrap">
           <span class="logo-text">3A</span>
@@ -1365,7 +1375,7 @@
         <div class="footer-brand-ultra">
           <a href="/en/" class="logo">
             <div class="logo-icon">
-              <img src="/logo.png" alt="3A Automation" />
+              <img src="/logo.png" alt="" />
             </div>
             <div class="logo-text-wrap">
               <span class="logo-text">3A</span>
