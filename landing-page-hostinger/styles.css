@@ -5097,13 +5097,60 @@ body.lite {
 .pricing-price { margin: var(--spacing-md) 0; }
 .price-amount { font-size: 3rem; font-weight: 700; color: var(--text-light); font-family: var(--font-mono); }
 
-/* Currency switching - show only selected currency */
-.price-eur, .price-usd, .price-mad { display: none; }
-[data-currency="EUR"] .price-eur { display: inline; }
-[data-currency="USD"] .price-usd { display: inline; }
-[data-currency="MAD"] .price-mad { display: inline; }
-/* Default to EUR if no data-currency set */
-html:not([data-currency]) .price-eur { display: inline; }
+/* ═══════════════════════════════════════════════════════════════════════════
+   CURRENCY + PERIOD SWITCHING SYSTEM
+
+   PROBLEM: Elements have BOTH currency (.price-eur) AND period (.period-monthly)
+   Old approach failed because [data-period=monthly] .period-monthly showed ALL
+   monthly prices regardless of currency!
+
+   SOLUTION: Use COMBINED attribute selectors [data-currency][data-period]
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* STEP 1: Hide ALL price elements by default */
+.price-eur, .price-usd, .price-mad { display: none !important; }
+.period-monthly, .period-annual { display: none !important; }
+
+/* STEP 2: SETUP PRICES (inside .pricing-price, NO period class) */
+/* These only need currency matching */
+[data-currency="EUR"] .pricing-price .price-eur { display: inline !important; }
+[data-currency="USD"] .pricing-price .price-usd { display: inline !important; }
+[data-currency="MAD"] .pricing-price .price-mad { display: inline !important; }
+html:not([data-currency]) .pricing-price .price-eur { display: inline !important; }
+
+/* STEP 3: RETAINER PRICES - Must match BOTH currency AND period */
+/* EUR + Monthly */
+[data-currency="EUR"][data-period="monthly"] .price-eur.period-monthly { display: inline !important; }
+html:not([data-currency])[data-period="monthly"] .price-eur.period-monthly { display: inline !important; }
+html:not([data-currency]):not([data-period]) .price-eur.period-monthly { display: inline !important; }
+[data-currency="EUR"]:not([data-period]) .price-eur.period-monthly { display: inline !important; }
+
+/* EUR + Annual */
+[data-currency="EUR"][data-period="annual"] .price-eur.period-annual { display: inline !important; }
+html:not([data-currency])[data-period="annual"] .price-eur.period-annual { display: inline !important; }
+
+/* USD + Monthly */
+[data-currency="USD"][data-period="monthly"] .price-usd.period-monthly { display: inline !important; }
+[data-currency="USD"]:not([data-period]) .price-usd.period-monthly { display: inline !important; }
+
+/* USD + Annual */
+[data-currency="USD"][data-period="annual"] .price-usd.period-annual { display: inline !important; }
+
+/* MAD + Monthly */
+[data-currency="MAD"][data-period="monthly"] .price-mad.period-monthly { display: inline !important; }
+[data-currency="MAD"]:not([data-period]) .price-mad.period-monthly { display: inline !important; }
+
+/* MAD + Annual */
+[data-currency="MAD"][data-period="annual"] .price-mad.period-annual { display: inline !important; }
+
+/* STEP 4: Period labels (/mois, /an) - only need period matching */
+[data-period="monthly"] .price-period.period-monthly { display: inline !important; }
+[data-period="annual"] .price-period.period-annual { display: inline !important; }
+html:not([data-period]) .price-period.period-monthly { display: inline !important; }
+
+/* STEP 5: Annual savings badge */
+.annual-savings { display: none !important; }
+[data-period="annual"] .annual-savings { display: block !important; }
 
 .pricing-time { color: var(--text-secondary); font-size: 0.875rem; }
 
@@ -5167,19 +5214,6 @@ html:not([data-currency]) .price-eur { display: inline; }
   font-weight: 700;
   margin-left: 4px;
 }
-
-/* Period switching - MUST override currency for dual-condition elements */
-/* !important required: elements like .price-eur.period-annual must hide
-   when period=monthly, even though [data-currency="EUR"] .price-eur says inline */
-.period-monthly, .period-annual { display: none !important; }
-[data-period="monthly"] .period-monthly { display: inline !important; }
-[data-period="annual"] .period-annual { display: inline !important; }
-/* Default to monthly */
-html:not([data-period]) .period-monthly { display: inline !important; }
-
-/* Annual savings badge */
-.annual-savings { display: none !important; }
-[data-period="annual"] .annual-savings { display: block !important; }
 
 .retainer-grid {
   display: grid;
