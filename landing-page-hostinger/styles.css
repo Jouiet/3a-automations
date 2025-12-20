@@ -1780,6 +1780,7 @@ body.lite {
   color: var(--primary);
   opacity: 0.9;
   transition: opacity 0.3s ease;
+  white-space: nowrap;
 }
 
 .footer-email:hover {
