@@ -2732,8 +2732,14 @@ body.lite {
 /* Email Flow Cards */
 .flows-showcase {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .flows-showcase {
+    grid-template-columns: 1fr;
+  }
 }
 
 .flow-card {
