@@ -884,7 +884,105 @@ PRÉREQUIS:
 
 ---
 
+---
+
+## PLAN ACTIONNABLE - FIN SESSION 48 (20/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 48                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ PRIORITÉ 4 - AUDIT UX MOBILE - COMPLÉTÉ                                │
+│      • Lighthouse audit FR + EN exécuté                                     │
+│      • Animation orbitale visible sur mobile (+38% taille)                  │
+│      • Counter-rotation: texte tech-icons reste droit                       │
+│                                                                              │
+│   ✅ PRIORITÉ 5 - PERFORMANCE LIGHTHOUSE - COMPLÉTÉ                         │
+│      • Critical CSS inline (~2KB) pour FCP rapide                           │
+│      • CSS minifié: 117KB → 82KB (-30%)                                     │
+│      • Fonts async loading (preload + onload)                               │
+│      • Scores: Perf 52, A11y 90, BP 100, SEO 100                            │
+│                                                                              │
+│   ✅ ACCESSIBILITÉ AMÉLIORÉE                                                │
+│      • Alt text redondant supprimé                                          │
+│      • Footer heading CSS class ajoutée                                     │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACTIONS PRIORITAIRES POST-SESSION 48                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   □ PRIORITÉ 1 - n8n API Key (5 min) - ACTION MANUELLE                      │
+│     URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│     Action: Créer clé API pour MCP                                          │
+│                                                                              │
+│   □ PRIORITÉ 2 - Shopify Partners Dev Store (30 min) - ACTION MANUELLE     │
+│     URL: https://partners.shopify.com                                       │
+│     Action: Créer "3a-automation-dev" pour tests                            │
+│                                                                              │
+│   □ PRIORITÉ 3 - xAI Crédits ($5) - ACTION MANUELLE                        │
+│     URL: https://console.x.ai/billing                                       │
+│     Action: Acheter crédits pour Voice Agent Grok                           │
+│                                                                              │
+│   ✅ PRIORITÉ 4 - Audit UX mobile - FAIT (Session 48)                       │
+│                                                                              │
+│   ✅ PRIORITÉ 5 - Performance Lighthouse - FAIT (Session 48)                │
+│                                                                              │
+│   □ PRIORITÉ 6 - GTM Performance Optimization (optionnel)                   │
+│     Bottleneck: GTM bloque 397ms main thread                                │
+│     Solutions: Defer GTM / Partytown / Reduce container                     │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    MÉTRIQUES POST-SESSION 48                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   LIGHTHOUSE SCORES:                                                         │
+│   ┌──────────────┬────────┬────────┬────────┐                               │
+│   │ Métrique     │ Avant  │ Après  │ Target │                               │
+│   ├──────────────┼────────┼────────┼────────┤                               │
+│   │ Performance  │ 44     │ 52     │ >90    │                               │
+│   │ Accessibility│ 89     │ 90     │ >95    │                               │
+│   │ Best Pract.  │ 100    │ 100    │ 100 ✅ │                               │
+│   │ SEO          │ 100    │ 100    │ 100 ✅ │                               │
+│   └──────────────┴────────┴────────┴────────┘                               │
+│                                                                              │
+│   CORE WEB VITALS:                                                           │
+│   • FCP: 3.4s → 3.1s (target <1.8s)                                         │
+│   • LCP: 6.4s → 6.2s (target <2.5s)                                         │
+│   • SI: 15.8s → 4.4s (target <3.4s) ← AMÉLIORATION MAJEURE                  │
+│   • CLS: 0.024 ✅ (target <0.1)                                             │
+│                                                                              │
+│   MOBILE UX:                                                                 │
+│   • Animation orbitale: visible sur tablet/mobile                           │
+│   • Taille augmentée: +38% vs original                                      │
+│   • Tech-icons: texte reste horizontal (counter-rotation)                   │
+│                                                                              │
+│   CSS OPTIMIZATION:                                                          │
+│   • styles.css: 117KB                                                       │
+│   • styles.min.css: 82KB (-30%)                                             │
+│   • Critical CSS inline: ~2KB                                               │
+│                                                                              │
+│   COMMITS SESSION 48:                                                        │
+│   • 9ea262f - Critical CSS + async fonts                                    │
+│   • 731e956 - Mobile orbital + counter-rotation                             │
+│   • 438c8da - Orbital +20% size                                             │
+│   • 436172a - Orbital +15% size (total +38%)                                │
+│   • c6829e7 - CLAUDE.md v7.5 update                                         │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 20 Décembre 2025 (Session 47 - UX/UI Grid Fixes + Terminology)
+**Mis à jour:** 20 Décembre 2025 (Session 48 - Performance + Mobile UX)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
