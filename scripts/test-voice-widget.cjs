@@ -253,9 +253,9 @@ async function testCSSAnimations() {
       results.errors.push('EN: fadeIn/fadeOut animations missing');
     }
 
-    // Check CTA links
-    const ctaLinkFR = frWidget.data.includes('href="/contact.html"');
-    const ctaLinkEN = enWidget.data.includes('href="/en/contact.html"');
+    // Check CTA links (note: source may use single or double quotes)
+    const ctaLinkFR = frWidget.data.includes('href="/contact.html"') || frWidget.data.includes("href='/contact.html'");
+    const ctaLinkEN = enWidget.data.includes('href="/en/contact.html"') || enWidget.data.includes("href='/en/contact.html'");
 
     if (ctaLinkFR) {
       console.log('✅ FR: CTA link correct (/contact.html)');
