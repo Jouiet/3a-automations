@@ -1036,9 +1036,150 @@ STACK OPTIMAL (MCP-Ready)
 
 ---
 
+---
+
+## 11. VOICE AI & BOOKING INTEGRATION
+
+### 11.1 Position dans le Flywheel
+
+```
+                         VOICE AI BOOKING INTEGRATION
+                         ════════════════════════════
+
+                    ┌─────────────────────────────────────┐
+                    │         WEBSITE VISITOR             │
+                    │     (Any page, any time zone)       │
+                    └───────────────┬─────────────────────┘
+                                    │
+                                    ▼
+                    ┌─────────────────────────────────────┐
+                    │      🎤 VOICE AI ASSISTANT          │
+                    │  - Web Speech API (gratuit)         │
+                    │  - 60 automations catalog           │
+                    │  - Sector-specific responses        │
+                    │  - Fallback text for Firefox        │
+                    └───────────────┬─────────────────────┘
+                                    │
+              ┌─────────────────────┼─────────────────────┐
+              │                     │                     │
+              ▼                     ▼                     ▼
+      ┌───────────────┐     ┌───────────────┐     ┌───────────────┐
+      │  ACQUISITION  │     │  CONVERSION   │     │   RETENTION   │
+      │ Lead captured │     │ RDV booked    │     │ Email/WhatsApp│
+      │ Industry tag  │     │ Google Cal    │     │ reminders     │
+      │ Source track  │     │ Confirmation  │     │ Follow-up     │
+      └───────┬───────┘     └───────┬───────┘     └───────┬───────┘
+              │                     │                     │
+              └─────────────────────┼─────────────────────┘
+                                    ▼
+                    ┌─────────────────────────────────────┐
+                    │         KLAVIYO PROFILES            │
+                    │  - Geo-segmentation (MA/EU/INT)     │
+                    │  - Industry segmentation            │
+                    │  - Booking history                  │
+                    │  - Engagement scoring               │
+                    └─────────────────────────────────────┘
+```
+
+### 11.2 Data Flow Voice AI → Flywheel
+
+```javascript
+// Voice AI Booking Data Flow
+const VOICE_BOOKING_INTEGRATION = {
+  // 1. ACQUISITION: Voice captures lead
+  acquisition: {
+    trigger: 'voice_booking_started',
+    actions: [
+      'Create lead in CRM',
+      'Tag with industry',
+      'Tag with source (voice)',
+      'Track GA4 event'
+    ]
+  },
+
+  // 2. CONVERSION: Booking confirmed
+  conversion: {
+    trigger: 'voice_booking_completed',
+    actions: [
+      'Create Google Calendar event',
+      'Send confirmation email',
+      'Create Klaviyo profile',
+      'Track conversion event'
+    ]
+  },
+
+  // 3. RETENTION: Follow-up automation
+  retention: {
+    trigger: 'booking_reminder',
+    actions: [
+      'Send WhatsApp reminder (24h before)',
+      'Send email reminder (1h before)',
+      'Post-meeting follow-up',
+      'Feedback request'
+    ]
+  }
+};
+```
+
+### 11.3 Sector Templates (Booking Config)
+
+| Sector | Hours | Blocked | Duration | Buffer |
+|--------|-------|---------|----------|--------|
+| **Consultant** | Lun-Ven 9h-18h | 12h-14h | 30min | 0min |
+| **Restaurant** | Mar-Dim 11h-23h | 15h-18h | 60min | 15min |
+| **Medical** | Lun-Sam 8h-20h | 12h-14h | 20min | 10min |
+| **Architect** | Lun-Ven 9h-19h | - | 60min | 0min |
+| **E-commerce** | 24/7 | - | 15min | 0min |
+| **Nightclub** | Jeu-Sam 20h-4h | - | 30min | 0min |
+
+### 11.4 GA4 Events Tracked
+
+| Event | Trigger | Parameters |
+|-------|---------|------------|
+| `voice_booking_started` | User initiates booking | step, industry |
+| `voice_booking_slot_selected` | Slot chosen | slot_date, slot_time |
+| `voice_booking_completed` | Booking confirmed | service, datetime |
+| `voice_booking_cancelled` | User cancels | step |
+| `voice_booking_failed` | Error occurred | error |
+
+### 11.5 WhatsApp Business API Integration (FREE)
+
+```
+WHATSAPP REMINDERS (POST-BOOKING)
+│
+├─► T-24h: Service conversation (FREE)
+│   └─► "Bonjour {name}! Rappel: RDV demain à {time}"
+│   └─► Include: Reschedule link, Cancel option
+│
+├─► T-1h: Service conversation (FREE)
+│   └─► "RDV dans 1h! Voici le lien: {meeting_url}"
+│
+└─► T+24h: Follow-up (FREE if within 24h window)
+    └─► "Comment s'est passé votre RDV?"
+    └─► Include: Feedback link, Referral offer
+
+Note: Service conversations are FREE since Nov 2024
+Marketing messages require template approval + cost
+```
+
+### 11.6 Knowledge Base Auto-Sync
+
+```bash
+# Sync automations to voice assistant knowledge
+node automations/agency/core/sync-knowledge-base.cjs
+
+# Output:
+# - knowledge-base/data/catalog.json (full catalog)
+# - voice-assistant/knowledge.json (voice-optimized)
+#
+# Run after adding new automations to keep voice AI updated
+```
+
+---
+
 *Document generated by Claude 4.5 Opus - AI Agency Automation Blueprint*
-*Last Updated: December 20, 2025 (Session 50)*
-*Version: 2.2 - Updated automations count + mobile orbital animation fixes*
+*Last Updated: December 20, 2025 (Session 61)*
+*Version: 2.3 - Voice AI + Booking Flywheel Integration*
 
 ---
 
@@ -1046,5 +1187,6 @@ STACK OPTIMAL (MCP-Ready)
 
 | Version | Date | Modifications |
 |---------|------|---------------|
+| 2.3 | 20/12/2025 | Session 61: Voice AI + Booking integration, 60 automations, sector templates |
 | 2.2 | 20/12/2025 | Session 50: Automations count 45 (vérifié), référence mobile UX |
 | 2.1 | 16/12/2025 | Shopify Grow + Klaviyo + Judge.me + Dual Agency Model |

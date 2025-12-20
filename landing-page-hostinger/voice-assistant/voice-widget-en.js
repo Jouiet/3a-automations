@@ -21,6 +21,24 @@
     darkBg: '#191E35'             // 3A Secondary (Dark)
   };
 
+  // === GA4 ANALYTICS TRACKING ===
+  function trackEvent(eventName, params = {}) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, {
+        event_category: 'voice_assistant',
+        ...params
+      });
+    }
+    // Fallback dataLayer if gtag not available
+    if (typeof dataLayer !== 'undefined' && Array.isArray(dataLayer)) {
+      dataLayer.push({
+        event: eventName,
+        event_category: 'voice_assistant',
+        ...params
+      });
+    }
+  }
+
   let isOpen = false;
   let isListening = false;
   let recognition = null;
@@ -473,6 +491,10 @@
   const BOOKING_API = 'https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec';
   const BOOKING_KEYWORDS = ['appointment', 'book', 'booking', 'schedule', 'call', 'meeting', 'talk', 'discuss'];
 
+  // Cache for available slots (5 min TTL)
+  let availableSlotsCache = { slots: [], timestamp: 0 };
+  const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
   function isBookingIntent(text) {
     const lower = text.toLowerCase();
     return BOOKING_KEYWORDS.some(kw => lower.includes(kw));
@@ -482,7 +504,45 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function getNextSlotSuggestion() {
+  // Fetch real slots from Google Calendar API
+  async function fetchAvailableSlots() {
+    const now = Date.now();
+    // Use cache if valid
+    if (availableSlotsCache.slots.length > 0 && (now - availableSlotsCache.timestamp) < CACHE_TTL) {
+      return availableSlotsCache.slots;
+    }
+
+    try {
+      const response = await fetch(BOOKING_API + '?action=availability', {
+        method: 'GET',
+        mode: 'cors'
+      });
+      const result = await response.json();
+
+      if (result.success && result.data && result.data.slots) {
+        // Format slots for display
+        const formattedSlots = result.data.slots.slice(0, 6).map(slot => {
+          const date = new Date(slot.start);
+          return {
+            date: date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }),
+            time: date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
+            iso: slot.start
+          };
+        });
+        // Cache it
+        availableSlotsCache = { slots: formattedSlots, timestamp: now };
+        return formattedSlots;
+      }
+    } catch (error) {
+      console.error('Error fetching slots:', error);
+    }
+
+    // Fallback: static slots if API unavailable
+    return getStaticSlots();
+  }
+
+  // Static slots (fallback)
+  function getStaticSlots() {
     const now = new Date();
     const slots = [];
     for (let d = 1; d <= 7; d++) {
@@ -502,6 +562,15 @@
     return slots;
   }
 
+  // Compatibility: keep sync function for existing usage
+  function getNextSlotSuggestion() {
+    // Return cache if exists, otherwise static slots
+    if (availableSlotsCache.slots.length > 0) {
+      return availableSlotsCache.slots.slice(0, 3);
+    }
+    return getStaticSlots();
+  }
+
   async function submitBooking(data) {
     try {
       const response = await fetch(BOOKING_API, {
@@ -518,11 +587,12 @@
     }
   }
 
-  function handleBookingFlow(userMessage) {
+  async function handleBookingFlow(userMessage) {
     const lower = userMessage.toLowerCase();
     const booking = conversationContext.bookingFlow;
 
     if (lower.includes('cancel') || lower.includes('no') || lower.includes('stop')) {
+      trackEvent('voice_booking_cancelled', { step: booking.step });
       booking.active = false;
       booking.step = null;
       booking.data = { name: null, email: null, datetime: null, service: 'Consultation' };
@@ -539,6 +609,7 @@
       return "Thanks " + name + "! What's your email address for the confirmation?";
     }
 
+    // Step: Collect email - Fetch real slots from API
     if (booking.step === 'email') {
       const email = userMessage.trim().toLowerCase();
       if (!isValidEmail(email)) {
@@ -546,14 +617,23 @@
       }
       booking.data.email = email;
       booking.step = 'datetime';
-      const slots = getNextSlotSuggestion();
+
+      // Fetch real slots from Google Calendar
+      const slots = await fetchAvailableSlots();
+      const displaySlots = slots.slice(0, 3);
+
+      if (displaySlots.length === 0) {
+        return "Sorry, no slots available this week. Please email contact@3a-automation.com to schedule a meeting.";
+      }
+
       return "Perfect! Here are the next available slots:\n\n" +
-        slots.map((s, i) => (i + 1) + ". " + s.date + " at " + s.time).join("\n") +
+        displaySlots.map((s, i) => (i + 1) + ". " + s.date + " at " + s.time).join("\n") +
         "\n\nReply with the number (1, 2, or 3).";
     }
 
+    // Step: Collect datetime - Use cached slots
     if (booking.step === 'datetime') {
-      const slots = getNextSlotSuggestion();
+      const slots = getNextSlotSuggestion(); // Uses cache from fetchAvailableSlots
       let selectedSlot = null;
 
       if (lower.includes('1') || lower.includes('first')) {
@@ -567,6 +647,10 @@
       if (selectedSlot) {
         booking.data.datetime = selectedSlot.iso;
         booking.step = 'confirm';
+        trackEvent('voice_booking_slot_selected', {
+          slot_date: selectedSlot.date,
+          slot_time: selectedSlot.time
+        });
         return "Great! Here's the summary:\n\n" +
           "Name: " + booking.data.name + "\n" +
           "Email: " + booking.data.email + "\n" +
@@ -603,8 +687,15 @@
     booking.step = null;
 
     if (result.success) {
+      trackEvent('voice_booking_completed', {
+        service: booking.data.service,
+        datetime: booking.data.datetime
+      });
       return "Your appointment is confirmed! You'll receive a confirmation email at " + booking.data.email + ".\n\nSee you soon!";
     } else {
+      trackEvent('voice_booking_failed', {
+        error: result.message
+      });
       return "Sorry, there was an issue: " + result.message + "\n\nYou can book directly at /en/booking.html";
     }
   }
@@ -729,7 +820,7 @@
 
     // === BOOKING FLOW - Top priority if active ===
     if (conversationContext.bookingFlow.active) {
-      const bookingResponse = handleBookingFlow(userMessage);
+      const bookingResponse = await handleBookingFlow(userMessage);
       if (conversationContext.bookingFlow.step === 'submitting') {
         return await processBookingConfirmation();
       }
@@ -742,6 +833,7 @@
     if (isBookingIntent(lower)) {
       conversationContext.bookingFlow.active = true;
       conversationContext.bookingFlow.step = 'name';
+      trackEvent('voice_booking_started', { step: 'name' });
       return "Great! I'll help you book an appointment.\n\nFirst, what's your name?";
     }
 

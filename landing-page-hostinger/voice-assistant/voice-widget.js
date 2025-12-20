@@ -23,20 +23,38 @@
     darkBg: '#191E35'             // 3A Secondary (Dark)
   };
 
-  // System prompt pour l'assistant
+  // System prompt pour l'assistant (mise à jour auto via knowledge.json)
   const SYSTEM_PROMPT = `Tu es l'assistant vocal de 3A Automation.
 
 IDENTITÉ:
-- Consultant automation pour PME e-commerce
-- Expert Klaviyo, Shopify, Analytics
+- Consultant automation pour PME (tous secteurs)
+- Expert Klaviyo, Shopify, Analytics, Voice AI
 - Site: 3a-automation.com
+- 60 automatisations disponibles dans 9 catégories
+
+CATÉGORIES D'AUTOMATISATIONS:
+- Lead Generation & Acquisition (Facebook Ads, Google Ads, TikTok)
+- Email/SMS Marketing (Klaviyo flows, segmentation)
+- E-commerce Automation (Shopify, inventaire, commandes)
+- Analytics & Reporting (GA4, pixels, dashboards)
+- SEO & Content (alt text, sitemaps, optimisation)
+- Voice AI & Booking (prise de RDV vocale, calendrier)
+- CRM & Customer Data (segmentation, profils)
+- Geo-Targeting (multi-langue, multi-devise)
 
 SERVICES (nouveaux prix):
 - Audit gratuit: Formulaire → Rapport PDF 24-48h
-- Quick Win: 390€ (1 flow optimisé)
-- Essentials: 790€ (3 flows + A/B tests)
-- Growth: 1490€ (5 flows + dashboard)
+- Quick Win: 390€ (1 flow optimisé) + BONUS Voice AI
+- Essentials: 790€ (3 flows + A/B tests) + BONUS Voice AI + WhatsApp
+- Growth: 1490€ (5 flows + dashboard) + BONUS complet
 - Retainers: 290-890€/mois
+
+SECTEURS SERVIS:
+- E-commerce / Shopify
+- Restaurants / Food
+- Médecins / Cabinets médicaux
+- Architectes / BTP
+- Comptables / Services B2B
 
 STYLE:
 - Réponses courtes (2-3 phrases max)
@@ -45,9 +63,42 @@ STYLE:
 - Ton professionnel mais accessible
 
 OBJECTIF:
-- Qualifier le prospect
+- Qualifier le prospect (secteur, besoin)
 - Proposer l'audit gratuit
-- Rediriger vers le formulaire contact`;
+- Rediriger vers le formulaire contact ou la prise de RDV vocale`;
+
+  // Knowledge base (chargé dynamiquement)
+  let knowledgeBase = null;
+  async function loadKnowledgeBase() {
+    try {
+      const response = await fetch('/voice-assistant/knowledge.json');
+      if (response.ok) {
+        knowledgeBase = await response.json();
+        console.log('Knowledge base loaded:', knowledgeBase.totalAutomations, 'automations');
+      }
+    } catch (e) {
+      console.log('Knowledge base not available, using defaults');
+    }
+  }
+  loadKnowledgeBase();
+
+  // === GA4 ANALYTICS TRACKING ===
+  function trackEvent(eventName, params = {}) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, {
+        event_category: 'voice_assistant',
+        ...params
+      });
+    }
+    // Fallback dataLayer si gtag pas dispo
+    if (typeof dataLayer !== 'undefined' && Array.isArray(dataLayer)) {
+      dataLayer.push({
+        event: eventName,
+        event_category: 'voice_assistant',
+        ...params
+      });
+    }
+  }
 
   // État du widget
   let isOpen = false;
@@ -737,6 +788,10 @@ OBJECTIF:
   const BOOKING_API = 'https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec';
   const BOOKING_KEYWORDS = ['rdv', 'rendez-vous', 'rendez vous', 'reserver', 'reservation', 'prendre rdv', 'booking', 'appel', 'discuter', 'parler'];
 
+  // Cache pour les créneaux disponibles (5 min TTL)
+  let availableSlotsCache = { slots: [], timestamp: 0 };
+  const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
   function isBookingIntent(text) {
     const lower = text.toLowerCase();
     return BOOKING_KEYWORDS.some(kw => lower.includes(kw));
@@ -746,7 +801,45 @@ OBJECTIF:
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function getNextSlotSuggestion() {
+  // Récupère les créneaux réels depuis l'API Google Calendar
+  async function fetchAvailableSlots() {
+    const now = Date.now();
+    // Utiliser le cache si valide
+    if (availableSlotsCache.slots.length > 0 && (now - availableSlotsCache.timestamp) < CACHE_TTL) {
+      return availableSlotsCache.slots;
+    }
+
+    try {
+      const response = await fetch(BOOKING_API + '?action=availability', {
+        method: 'GET',
+        mode: 'cors'
+      });
+      const result = await response.json();
+
+      if (result.success && result.data && result.data.slots) {
+        // Formater les créneaux pour l'affichage
+        const formattedSlots = result.data.slots.slice(0, 6).map(slot => {
+          const date = new Date(slot.start);
+          return {
+            date: date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }),
+            time: slot.time,
+            iso: slot.start
+          };
+        });
+        // Mettre en cache
+        availableSlotsCache = { slots: formattedSlots, timestamp: now };
+        return formattedSlots;
+      }
+    } catch (error) {
+      console.error('Erreur fetch créneaux:', error);
+    }
+
+    // Fallback: créneaux statiques si API indisponible
+    return getStaticSlots();
+  }
+
+  // Créneaux statiques (fallback)
+  function getStaticSlots() {
     const now = new Date();
     const slots = [];
     for (let d = 1; d <= 7; d++) {
@@ -766,6 +859,15 @@ OBJECTIF:
     return slots;
   }
 
+  // Compatibilité: garde la fonction sync pour les usages existants
+  function getNextSlotSuggestion() {
+    // Retourne le cache s'il existe, sinon slots statiques
+    if (availableSlotsCache.slots.length > 0) {
+      return availableSlotsCache.slots.slice(0, 3);
+    }
+    return getStaticSlots();
+  }
+
   async function submitBooking(data) {
     try {
       const response = await fetch(BOOKING_API, {
@@ -782,12 +884,13 @@ OBJECTIF:
     }
   }
 
-  function handleBookingFlow(userMessage) {
+  async function handleBookingFlow(userMessage) {
     const lower = userMessage.toLowerCase();
     const booking = conversationContext.bookingFlow;
 
     // Cancel booking
     if (lower.includes('annuler') || lower.includes('non') || lower.includes('stop')) {
+      trackEvent('voice_booking_cancelled', { step: booking.step });
       booking.active = false;
       booking.step = null;
       booking.data = { name: null, email: null, datetime: null, service: 'Consultation' };
@@ -805,7 +908,7 @@ OBJECTIF:
       return "Merci " + name + " ! Quelle est votre adresse email pour recevoir la confirmation ?";
     }
 
-    // Step: Collect email
+    // Step: Collect email - Fetch real slots from API
     if (booking.step === 'email') {
       const email = userMessage.trim().toLowerCase();
       if (!isValidEmail(email)) {
@@ -813,15 +916,23 @@ OBJECTIF:
       }
       booking.data.email = email;
       booking.step = 'datetime';
-      const slots = getNextSlotSuggestion();
+
+      // Fetch créneaux réels depuis Google Calendar
+      const slots = await fetchAvailableSlots();
+      const displaySlots = slots.slice(0, 3);
+
+      if (displaySlots.length === 0) {
+        return "Desole, il n'y a pas de creneaux disponibles cette semaine. Envoyez un email a contact@3a-automation.com pour convenir d'un rendez-vous.";
+      }
+
       return "Parfait ! Voici les prochains creneaux disponibles :\n\n" +
-        slots.map((s, i) => (i + 1) + ". " + s.date + " a " + s.time).join("\n") +
+        displaySlots.map((s, i) => (i + 1) + ". " + s.date + " a " + s.time).join("\n") +
         "\n\nRepondez avec le numero (1, 2 ou 3) ou proposez une autre date.";
     }
 
-    // Step: Collect datetime
+    // Step: Collect datetime - Use cached slots
     if (booking.step === 'datetime') {
-      const slots = getNextSlotSuggestion();
+      const slots = getNextSlotSuggestion(); // Uses cache from fetchAvailableSlots
       let selectedSlot = null;
 
       if (lower.includes('1') || lower.includes('premier')) {
@@ -835,6 +946,10 @@ OBJECTIF:
       if (selectedSlot) {
         booking.data.datetime = selectedSlot.iso;
         booking.step = 'confirm';
+        trackEvent('voice_booking_slot_selected', {
+          slot_date: selectedSlot.date,
+          slot_time: selectedSlot.time
+        });
         return "Parfait ! Voici le recapitulatif :\n\n" +
           "Nom: " + booking.data.name + "\n" +
           "Email: " + booking.data.email + "\n" +
@@ -872,8 +987,15 @@ OBJECTIF:
     booking.step = null;
 
     if (result.success) {
+      trackEvent('voice_booking_completed', {
+        service: booking.data.service,
+        datetime: booking.data.datetime
+      });
       return "Votre rendez-vous est confirme ! Vous allez recevoir un email de confirmation a " + booking.data.email + ".\n\nA bientot !";
     } else {
+      trackEvent('voice_booking_failed', {
+        error: result.message
+      });
       return "Desole, il y a eu un probleme : " + result.message + "\n\nVous pouvez reserver directement sur /booking.html";
     }
   }
@@ -1002,7 +1124,7 @@ OBJECTIF:
 
     // === BOOKING FLOW - Priorité absolue si actif ===
     if (conversationContext.bookingFlow.active) {
-      const bookingResponse = handleBookingFlow(userMessage);
+      const bookingResponse = await handleBookingFlow(userMessage);
       if (conversationContext.bookingFlow.step === 'submitting') {
         // Confirmation async
         return await processBookingConfirmation();
@@ -1016,6 +1138,7 @@ OBJECTIF:
     if (isBookingIntent(lower)) {
       conversationContext.bookingFlow.active = true;
       conversationContext.bookingFlow.step = 'name';
+      trackEvent('voice_booking_started', { step: 'name' });
       return "Super ! Je vais vous aider a reserver un rendez-vous.\n\nPour commencer, quel est votre nom ?";
     }
 

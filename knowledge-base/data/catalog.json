@@ -1,6 +1,6 @@
 {
-  "version": "2025.1",
-  "generated": "2025-12-17T23:56:09.322Z",
+  "version": "2025-12-20",
+  "generated": "2025-12-20T22:50:16.925Z",
   "packages": [
     {
       "name": "STARTER",
@@ -46,94 +46,544 @@
   ],
   "automations": [
     {
-      "id": "2.1.1",
-      "name": "Facebook/Meta Lead Ads",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition"
+      "id": "auto-1",
+      "name": "Check Env Status",
+      "description": "CHECK ENV STATUS",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/check-env-status.cjs"
     },
     {
-      "id": "2.1.2",
-      "name": "Google Ads Lead Sync",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition"
+      "id": "auto-2",
+      "name": "Forensic Api Test",
+      "description": "FORENSIC API TEST - Verification empirique de toutes les APIs",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/forensic-api-test.cjs"
     },
     {
-      "id": "2.1.3",
-      "name": "TikTok Lead Sync",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition"
+      "id": "auto-3",
+      "name": "Google Apps Script Booking",
+      "description": "CONFIG - 100% Flexible Business Hours",
+      "category": "ai_voice",
+      "categoryName": "Voice AI & Booking",
+      "version": "1.1.0",
+      "path": "agency/core/google-apps-script-booking.js"
     },
     {
-      "id": "2.1.4",
-      "name": "Lead Qualification & Segmentation",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition"
+      "id": "auto-4",
+      "name": "Google Calendar Booking",
+      "description": "Google Calendar Booking System",
+      "category": "ai_voice",
+      "categoryName": "Voice AI & Booking",
+      "version": "1.0.0",
+      "path": "agency/core/google-calendar-booking.cjs"
     },
     {
-      "id": "2.1.5",
-      "name": "Scraping & Competitor Monitoring",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition"
+      "id": "auto-5",
+      "name": "Grok Client",
+      "description": "Version: 2.0 - RAG Enhanced",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/grok-client.cjs"
     },
     {
-      "id": "2.2.1",
-      "name": "Blog Content Automation",
-      "category": "seo_content",
-      "categoryName": "SEO & Content"
+      "id": "auto-6",
+      "name": "Grok Voice Poc",
+      "description": "Version: 1.0",
+      "category": "ai_voice",
+      "categoryName": "Voice AI & Booking",
+      "version": "1.0.0",
+      "path": "agency/core/grok-voice-poc.cjs"
     },
     {
-      "id": "2.2.2",
-      "name": "SEO Technical Automation",
-      "category": "seo_content",
-      "categoryName": "SEO & Content"
+      "id": "auto-7",
+      "name": "Prompt Feedback Tracker",
+      "description": "AI PROMPTS FEEDBACK TRACKER",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/prompt-feedback-tracker.cjs"
     },
     {
-      "id": "2.2.3",
-      "name": "Schema.org Implementation",
-      "category": "seo_content",
-      "categoryName": "SEO & Content"
+      "id": "auto-8",
+      "name": "Sync Knowledge Base",
+      "description": "Scans automations directory and updates:",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/sync-knowledge-base.cjs"
     },
     {
-      "id": "2.3.1",
-      "name": "Klaviyo Flow Management",
+      "id": "auto-9",
+      "name": "Test Env",
+      "description": "Tester que le fichier .env est correctement configuré",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/test-env.cjs"
+    },
+    {
+      "id": "auto-10",
+      "name": "Test Ga4",
+      "description": "TEST GOOGLE ANALYTICS 4 API ACCESS",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/test-ga4.cjs"
+    },
+    {
+      "id": "auto-11",
+      "name": "Test Gemini",
+      "description": "TEST GEMINI API",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/test-gemini.cjs"
+    },
+    {
+      "id": "auto-12",
+      "name": "Test Google Auth",
+      "description": "TEST GOOGLE SERVICE ACCOUNT AUTHENTICATION",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/test-google-auth.cjs"
+    },
+    {
+      "id": "auto-13",
+      "name": "Test Google Sheets",
+      "description": "TEST GOOGLE SHEETS ACCESS",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "agency/core/test-google-sheets.cjs"
+    },
+    {
+      "id": "auto-14",
+      "name": "Analyze Ga4 Conversion Source",
+      "description": "ANALYZE GA4 CONVERSION SOURCE - $309 Sale",
+      "category": "analytics",
+      "categoryName": "Analytics & Reporting",
+      "version": "1.0.0",
+      "path": "clients/analytics/analyze-ga4-conversion-source.cjs"
+    },
+    {
+      "id": "auto-15",
+      "name": "Analyze Ga4 Source",
+      "description": "ANALYZE GA4 - D'où vient le trafic et la vente?",
+      "category": "analytics",
+      "categoryName": "Analytics & Reporting",
+      "version": "1.0.0",
+      "path": "clients/analytics/analyze-ga4-source.cjs"
+    },
+    {
+      "id": "auto-16",
+      "name": "Audit Tiktok Pixel Config",
+      "description": "AUDIT: TikTok Pixel Configuration",
+      "category": "analytics",
+      "categoryName": "Analytics & Reporting",
+      "version": "1.0.0",
+      "path": "clients/analytics/audit-tiktok-pixel-config.cjs"
+    },
+    {
+      "id": "auto-17",
+      "name": "Check Pixel Status",
+      "description": "Check Facebook & TikTok Pixel Configuration Status",
+      "category": "analytics",
+      "categoryName": "Analytics & Reporting",
+      "version": "1.0.0",
+      "path": "clients/analytics/check-pixel-status.js"
+    },
+    {
+      "id": "auto-18",
+      "name": "Track Bnpl Performance",
+      "description": "BNPL PERFORMANCE TRACKER",
+      "category": "analytics",
+      "categoryName": "Analytics & Reporting",
+      "version": "1.0.0",
+      "path": "clients/analytics/track-bnpl-performance.cjs"
+    },
+    {
+      "id": "auto-19",
+      "name": "Verify Facebook Pixel Native",
+      "description": "VERIFY FACEBOOK PIXEL - NATIVE SHOPIFY APP",
+      "category": "analytics",
+      "categoryName": "Analytics & Reporting",
+      "version": "1.0.0",
+      "path": "clients/analytics/verify-facebook-pixel-native.js"
+    },
+    {
+      "id": "auto-20",
+      "name": "Geo Segment Generic",
+      "description": "GENERIC CRM GEO-SEGMENTATION",
+      "category": "crm",
+      "categoryName": "CRM & Customer Data",
+      "version": "1.0.0",
+      "path": "clients/crm/geo-segment-generic.cjs"
+    },
+    {
+      "id": "auto-21",
+      "name": "Audit Klaviyo Flows V2",
+      "description": "AUDIT: Klaviyo Email Flows (Empirical Verification)",
       "category": "email_sms",
-      "categoryName": "Email/SMS Marketing"
+      "categoryName": "Email/SMS Marketing",
+      "version": "1.0.0",
+      "path": "clients/klaviyo/audit-klaviyo-flows-v2.cjs"
     },
     {
-      "id": "2.4.1",
-      "name": "Product Management",
-      "category": "shopify",
-      "categoryName": "Shopify Admin"
+      "id": "auto-22",
+      "name": "Audit Klaviyo Flows",
+      "description": "Audit complet des flows Klaviyo",
+      "category": "email_sms",
+      "categoryName": "Email/SMS Marketing",
+      "version": "1.0.0",
+      "path": "clients/klaviyo/audit-klaviyo-flows.cjs"
     },
     {
-      "id": "2.4.2",
-      "name": "Webhooks & Automations",
-      "category": "shopify",
-      "categoryName": "Shopify Admin"
+      "id": "auto-23",
+      "name": "Geo Segment Profiles",
+      "description": "KLAVIYO GEO-SEGMENTATION",
+      "category": "email_sms",
+      "categoryName": "Email/SMS Marketing",
+      "version": "1.0.0",
+      "path": "clients/klaviyo/geo-segment-profiles.cjs"
     },
     {
-      "id": "2.4.3",
-      "name": "Media & Assets",
-      "category": "shopify",
-      "categoryName": "Shopify Admin"
+      "id": "auto-24",
+      "name": "Rotation Email",
+      "description": "EMAIL ROTATION - 5 PRODUITS POUR CUSTOM LIQUID",
+      "category": "email_sms",
+      "categoryName": "Email/SMS Marketing",
+      "version": "1.0.0",
+      "path": "clients/klaviyo/rotation_email.cjs"
     },
     {
-      "id": "2.4.4",
-      "name": "Compliance & Legal",
-      "category": "shopify",
-      "categoryName": "Shopify Admin"
+      "id": "auto-25",
+      "name": "Test Klaviyo Connection",
+      "description": "Test direct de la connexion Klaviyo API",
+      "category": "email_sms",
+      "categoryName": "Email/SMS Marketing",
+      "version": "1.0.0",
+      "path": "clients/klaviyo/test-klaviyo-connection.cjs"
     },
     {
-      "id": "2.5.1",
-      "name": "Dashboards & Bridges",
-      "category": "analytics",
-      "categoryName": "Analytics & Reporting"
+      "id": "auto-26",
+      "name": "Import Facebook Lead Ads",
+      "description": "Objectif: Importer automatiquement les leads depuis Facebook Lead Ads",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition",
+      "version": "1.0.0",
+      "path": "clients/leads/import-facebook-lead-ads.js"
     },
     {
-      "id": "2.5.2",
-      "name": "Inventory & Stock",
-      "category": "analytics",
-      "categoryName": "Analytics & Reporting"
+      "id": "auto-27",
+      "name": "Segment Leads",
+      "description": "Objectif: Segmenter automatiquement les leads depuis RAW LEADS vers",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition",
+      "version": "1.0.0",
+      "path": "clients/leads/segment-leads.js"
+    },
+    {
+      "id": "auto-28",
+      "name": "Sync Google Ads Leads To Shopify",
+      "description": "HENDERSON SHOP - GOOGLE ADS LEAD SYNC AUTOMATION",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition",
+      "version": "1.0.0",
+      "path": "clients/leads/sync-google-ads-leads-to-shopify.cjs"
+    },
+    {
+      "id": "auto-29",
+      "name": "Sync Meta Leads To Shopify",
+      "description": "HENDERSON SHOP - META ADS LEAD SYNC AUTOMATION",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition",
+      "version": "1.0.0",
+      "path": "clients/leads/sync-meta-leads-to-shopify.cjs"
+    },
+    {
+      "id": "auto-30",
+      "name": "Sync Tiktok Ads Leads To Shopify",
+      "description": "HENDERSON SHOP - TIKTOK ADS LEAD SYNC AUTOMATION",
+      "category": "lead_generation",
+      "categoryName": "Lead Generation & Acquisition",
+      "version": "1.0.0",
+      "path": "clients/leads/sync-tiktok-ads-leads-to-shopify.cjs"
+    },
+    {
+      "id": "auto-31",
+      "name": "Fix Missing Alt Text",
+      "description": "Génère automatiquement des alt text SEO pour les images produits",
+      "category": "seo_content",
+      "categoryName": "SEO & Content",
+      "version": "1.0.0",
+      "path": "clients/seo/fix-missing-alt-text.cjs"
+    },
+    {
+      "id": "auto-32",
+      "name": "Generate Tags Csv",
+      "description": "",
+      "category": "seo_content",
+      "categoryName": "SEO & Content",
+      "version": "1.0.0",
+      "path": "clients/seo/generate-tags-csv.js"
+    },
+    {
+      "id": "auto-33",
+      "name": "Generate Image Sitemap",
+      "description": "GENERATE IMAGE SITEMAP",
+      "category": "seo_content",
+      "categoryName": "SEO & Content",
+      "version": "1.0.0",
+      "path": "clients/seo/generate_image_sitemap.cjs"
+    },
+    {
+      "id": "auto-34",
+      "name": "Import Alt Text Api",
+      "description": "",
+      "category": "seo_content",
+      "categoryName": "SEO & Content",
+      "version": "1.0.0",
+      "path": "clients/seo/import-alt-text-api.js"
+    },
+    {
+      "id": "auto-35",
+      "name": "Upload Llms",
+      "description": "",
+      "category": "seo_content",
+      "categoryName": "SEO & Content",
+      "version": "1.0.0",
+      "path": "clients/seo/upload-llms.js"
+    },
+    {
+      "id": "auto-36",
+      "name": "Audit Shopify Complete",
+      "description": "Audit complet d'une boutique Shopify - Version production",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/audit-shopify-complete.cjs"
+    },
+    {
+      "id": "auto-37",
+      "name": "Audit Shopify Store",
+      "description": "Script d'audit réutilisable pour tout client Shopify.",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/audit-shopify-store.cjs"
+    },
+    {
+      "id": "auto-38",
+      "name": "Create Warehouse Metafield",
+      "description": "OPTION 3: Create Warehouse Location Metafield",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/create-warehouse-metafield.cjs"
+    },
+    {
+      "id": "auto-39",
+      "name": "Export Shopify Customers Facebook",
+      "description": "EXPORT SHOPIFY CUSTOMERS FOR FACEBOOK CUSTOM AUDIENCES",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/export-shopify-customers-facebook.cjs"
+    },
+    {
+      "id": "auto-40",
+      "name": "Import Taxonomy Metafield",
+      "description": "P0.2: Import Shopify Product Taxonomy via Metafield",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/import-taxonomy-metafield.cjs"
+    },
+    {
+      "id": "auto-41",
+      "name": "Import Taxonomy Test",
+      "description": "P0.2: Import Shopify Product Taxonomy via Metafield",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/import-taxonomy-test.cjs"
+    },
+    {
+      "id": "auto-42",
+      "name": "Import Taxonomy Via Api",
+      "description": "P0.2: Import Shopify Product Taxonomy via API",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/import-taxonomy-via-api.cjs"
+    },
+    {
+      "id": "auto-43",
+      "name": "Parse Warehouse Csv",
+      "description": "OPTION 1: Warehouse CSV Parser",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/parse-warehouse-csv.cjs"
+    },
+    {
+      "id": "auto-44",
+      "name": "Test Shopify Connection",
+      "description": "Test direct de la connexion Shopify API",
+      "category": "ecommerce",
+      "categoryName": "E-commerce Automation",
+      "version": "1.0.0",
+      "path": "clients/shopify/test-shopify-connection.cjs"
+    },
+    {
+      "id": "auto-45",
+      "name": "Apify Inspect Raw Data",
+      "description": "APIFY INSPECT RAW DATA",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "clients/social/apify-inspect-raw-data.cjs"
+    },
+    {
+      "id": "auto-46",
+      "name": "Apify Verify Connection",
+      "description": "APIFY CONNECTION VERIFICATION",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "clients/social/apify-verify-connection.cjs"
+    },
+    {
+      "id": "auto-47",
+      "name": "Enable Apify Schedulers",
+      "description": "ENABLE APIFY SCHEDULERS",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "clients/social/enable-apify-schedulers.js"
+    },
+    {
+      "id": "auto-48",
+      "name": "Verify Hubspot Status",
+      "description": "VERIFY: HubSpot Installation Status",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "clients/social/verify-hubspot-status.cjs"
+    },
+    {
+      "id": "auto-49",
+      "name": "Convert Video Portrait",
+      "description": "VIDEO FORMAT CONVERTER - Landscape to Portrait",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "clients/video/convert-video-portrait.cjs"
+    },
+    {
+      "id": "auto-50",
+      "name": "Generate All Promo Videos",
+      "description": "BATCH VIDEO GENERATION MASTER",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "clients/video/generate-all-promo-videos.cjs"
+    },
+    {
+      "id": "auto-51",
+      "name": "Generate Promo Video",
+      "description": "PROMO VIDEO GENERATOR - Generic Version",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "clients/video/generate-promo-video.cjs"
+    },
+    {
+      "id": "auto-52",
+      "name": "Geo Markets",
+      "description": "GEO-MARKETS MODULE",
+      "category": "localization",
+      "categoryName": "Geo-Targeting & i18n",
+      "version": "1.0.0",
+      "path": "generic/geo-markets.cjs"
+    },
+    {
+      "id": "auto-53",
+      "name": "Scrape Google Maps Businesses",
+      "description": "SCRAPE GOOGLE MAPS BUSINESSES VIA APIFY",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "generic/scrape-google-maps-businesses.cjs"
+    },
+    {
+      "id": "auto-54",
+      "name": "Scrape Hiring Companies",
+      "description": "SCRAPE HIRING COMPANIES VIA APIFY",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "generic/scrape-hiring-companies.cjs"
+    },
+    {
+      "id": "auto-55",
+      "name": "Scrape Linkedin Profiles",
+      "description": "SCRAPE LINKEDIN PROFILES VIA APIFY",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "generic/scrape-linkedin-profiles.cjs"
+    },
+    {
+      "id": "auto-56",
+      "name": "Sync Google Forms To Klaviyo",
+      "description": "SYNC GOOGLE FORMS TO KLAVIYO",
+      "category": "email_sms",
+      "categoryName": "Email/SMS Marketing",
+      "version": "1.0.0",
+      "path": "generic/sync-google-forms-to-klaviyo.cjs"
+    },
+    {
+      "id": "auto-57",
+      "name": "Test All Apis",
+      "description": "Test de toutes les APIs configurées dans .env",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "generic/test-all-apis.cjs"
+    },
+    {
+      "id": "auto-58",
+      "name": "Validate All Automations",
+      "description": "VALIDATE ALL AUTOMATIONS",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "generic/validate-all-automations.cjs"
+    },
+    {
+      "id": "auto-59",
+      "name": "Env Loader",
+      "description": "Chargement standardisé du fichier .env depuis n'importe quel script",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "lib/env-loader.cjs"
+    },
+    {
+      "id": "auto-60",
+      "name": "Validate Automations Registry",
+      "description": "VALIDATE AUTOMATIONS REGISTRY",
+      "category": "general",
+      "categoryName": "General Automation",
+      "version": "1.0.0",
+      "path": "validate-automations-registry.cjs"
     }
   ],
   "services": [
@@ -201,5 +651,6 @@
       "shopify": 4,
       "analytics": 2
     }
-  }
+  },
+  "count": 60
 }
