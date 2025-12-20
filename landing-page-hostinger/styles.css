@@ -1806,6 +1806,10 @@ body.lite {
   color: var(--primary);
 }
 
+.footer-links-ultra a[href^="mailto:"] {
+  white-space: nowrap;
+}
+
 .footer-bottom-ultra {
   display: flex;
   justify-content: space-between;
