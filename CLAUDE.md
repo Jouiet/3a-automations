@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 8.8 | Dernière mise à jour: 2025-12-20 (Session 57 - Pricing Update)
+## Version: 8.9 | Dernière mise à jour: 2025-12-20 (Session 57 - Prix Fixes + geo-locale v3)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -72,12 +72,10 @@ FICHIER SUPPRIMÉ: archive/mydealz-scripts/forensic_flywheel_analysis_complete.c
 ACTION REQUISE:   RÉVOQUER TOKEN shpat_146b... sur Shopify (manuel)
 ```
 
-### Taux de Change ✅ CORRIGÉ Session 54
-| Devise | Valeur | Source |
-|--------|--------|--------|
-| USD | **1.17** | fawazahmed0/currency-api |
-| MAD | **10.74** | fawazahmed0/currency-api |
-| GBP | **0.88** | fawazahmed0/currency-api |
+### Conversion Devises ✅ SUPPRIMÉE Session 57
+- **Prix fixes par devise** (pas de conversion dynamique)
+- **geo-locale.js v3.0.0** simplifié (langue + région uniquement)
+- **Supprimé:** exchangeRates, data-price-eur, updatePrices()
 
 ---
 
@@ -126,11 +124,12 @@ ACTION REQUISE:   RÉVOQUER TOKEN shpat_146b... sur Shopify (manuel)
 | **Growth** | 1.399€ | $1,690 | 14.990 DH |
 
 ### Retainers Mensuels
-| Plan | EUR | USD | MAD |
-|------|-----|-----|-----|
-| **Maintenance** | 290€ | $330 | 2.900 DH |
-| **Optimization / Growth** | 490€ | $550 | 5.200 DH |
+| Plan | EUR/mois | USD/mois | MAD/mois | EUR/an | USD/an | MAD/an |
+|------|----------|----------|----------|--------|--------|--------|
+| **Maintenance** | 290€ | $330 | 2.900 DH | 2.900€ | $3,300 | 29.000 DH |
+| **Optimization / Growth** | 490€ | $550 | 5.200 DH | 4.900€ | $5,500 | 52.000 DH |
 
+*Annuel = 10 mois pour 12 (2 mois gratuits)*
 *Optimization et Growth fusionnés (même contenu: A/B tests, optimisation flows, recommandations, support prioritaire 24h)*
 
 ### Processus (Sans Appels)
