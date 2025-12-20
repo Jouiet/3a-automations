@@ -407,6 +407,28 @@ OBJECTIF:
           to { opacity: 0; transform: translateY(10px); }
         }
 
+        @keyframes notifSlideIn {
+          from {
+            opacity: 0;
+            transform: translateX(20px) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+          }
+        }
+
+        @keyframes notifSlideOut {
+          from {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: translateX(20px) scale(0.9);
+          }
+        }
+
         @media (max-width: 480px) {
           .va-panel {
             width: calc(100vw - 40px);
@@ -464,33 +486,122 @@ OBJECTIF:
     }, 2000);
   }
 
-  // Notification bubble
+  // Notification bubble - Premium UI/UX
   function showNotificationBubble() {
     const trigger = document.getElementById('va-trigger');
     const bubble = document.createElement('div');
     bubble.className = 'va-notification';
-    bubble.innerHTML = '👋 Besoin d\'aide ?';
+    bubble.innerHTML = `
+      <div class="va-notif-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <div class="va-notif-text">
+        <span class="va-notif-title">Besoin d'aide ?</span>
+        <span class="va-notif-sub">Je suis là pour vous</span>
+      </div>
+    `;
     bubble.style.cssText = `
       position: absolute;
-      bottom: 70px;
+      bottom: 75px;
       right: 0;
-      background: white;
-      color: #333;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      animation: fadeIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(25, 30, 53, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(79, 186, 241, 0.3);
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(79, 186, 241, 0.15);
+      animation: notifSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
+      white-space: nowrap;
+      z-index: 9999;
     `;
+
+    // Icon styles
+    const icon = bubble.querySelector('.va-notif-icon');
+    if (icon) {
+      icon.style.cssText = `
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, rgba(79, 186, 241, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #4FBAF1;
+        flex-shrink: 0;
+      `;
+    }
+
+    // Text container styles
+    const textContainer = bubble.querySelector('.va-notif-text');
+    if (textContainer) {
+      textContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      `;
+    }
+
+    // Title styles
+    const title = bubble.querySelector('.va-notif-title');
+    if (title) {
+      title.style.cssText = `
+        font-size: 14px;
+        font-weight: 600;
+        color: #E4F4FC;
+        letter-spacing: -0.01em;
+      `;
+    }
+
+    // Subtitle styles
+    const sub = bubble.querySelector('.va-notif-sub');
+    if (sub) {
+      sub.style.cssText = `
+        font-size: 11px;
+        color: rgba(79, 186, 241, 0.8);
+        font-weight: 400;
+      `;
+    }
+
+    // Arrow pointer
+    const arrow = document.createElement('div');
+    arrow.style.cssText = `
+      position: absolute;
+      bottom: -6px;
+      right: 24px;
+      width: 12px;
+      height: 12px;
+      background: rgba(25, 30, 53, 0.95);
+      border-right: 1px solid rgba(79, 186, 241, 0.3);
+      border-bottom: 1px solid rgba(79, 186, 241, 0.3);
+      transform: rotate(45deg);
+    `;
+    bubble.appendChild(arrow);
+
     trigger.parentNode.appendChild(bubble);
+
+    // Hover effect
+    bubble.addEventListener('mouseenter', () => {
+      bubble.style.borderColor = 'rgba(79, 186, 241, 0.6)';
+      bubble.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 30px rgba(79, 186, 241, 0.25)';
+    });
+    bubble.addEventListener('mouseleave', () => {
+      bubble.style.borderColor = 'rgba(79, 186, 241, 0.3)';
+      bubble.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(79, 186, 241, 0.15)';
+    });
 
     bubble.addEventListener('click', togglePanel);
 
     setTimeout(() => {
-      bubble.style.animation = 'fadeOut 0.3s ease forwards';
+      bubble.style.animation = 'notifSlideOut 0.3s ease forwards';
       setTimeout(() => bubble.remove(), 300);
-    }, 5000);
+    }, 6000);
   }
 
   // Ajouter un message à la conversation
