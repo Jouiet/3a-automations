@@ -1,656 +1,939 @@
 {
   "version": "2025-12-20",
-  "generated": "2025-12-20T22:50:16.925Z",
-  "packages": [
-    {
-      "name": "STARTER",
-      "setup": "$5,000-8,000",
-      "monthly": "$1,500-2,500",
-      "automations": "~15 scripts",
-      "flows": "3 Klaviyo Flows",
-      "features": [
-        "Lead Sync (1 source)",
-        "Basic SEO",
-        "Weekly reporting",
-        "Email support"
-      ]
-    },
-    {
-      "name": "GROWTH",
-      "setup": "$5,000-8,000",
-      "monthly": "$1,500-2,500",
-      "automations": "~35 scripts",
-      "flows": "6 Klaviyo Flows",
-      "features": [
-        "Lead Sync (3 sources)",
-        "Full SEO automation",
-        "Daily reporting",
-        "Slack support",
-        "Monthly strategy call"
-      ]
-    },
-    {
-      "name": "SCALE",
-      "setup": "$5,000-8,000",
-      "monthly": "$1,500-2,500",
-      "automations": "~70+ scripts",
-      "flows": "12+ Klaviyo Flows",
-      "features": [
-        "All sources",
-        "Full SEO",
-        "Real-time reporting",
-        "Dedicated strategist",
-        "Custom integrations"
-      ]
-    }
-  ],
-  "automations": [
-    {
-      "id": "auto-1",
-      "name": "Check Env Status",
-      "description": "CHECK ENV STATUS",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/check-env-status.cjs"
-    },
-    {
-      "id": "auto-2",
-      "name": "Forensic Api Test",
-      "description": "FORENSIC API TEST - Verification empirique de toutes les APIs",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/forensic-api-test.cjs"
-    },
-    {
-      "id": "auto-3",
-      "name": "Google Apps Script Booking",
-      "description": "CONFIG - 100% Flexible Business Hours",
-      "category": "ai_voice",
-      "categoryName": "Voice AI & Booking",
-      "version": "1.1.0",
-      "path": "agency/core/google-apps-script-booking.js"
-    },
-    {
-      "id": "auto-4",
-      "name": "Google Calendar Booking",
-      "description": "Google Calendar Booking System",
-      "category": "ai_voice",
-      "categoryName": "Voice AI & Booking",
-      "version": "1.0.0",
-      "path": "agency/core/google-calendar-booking.cjs"
-    },
-    {
-      "id": "auto-5",
-      "name": "Grok Client",
-      "description": "Version: 2.0 - RAG Enhanced",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/grok-client.cjs"
-    },
-    {
-      "id": "auto-6",
-      "name": "Grok Voice Poc",
-      "description": "Version: 1.0",
-      "category": "ai_voice",
-      "categoryName": "Voice AI & Booking",
-      "version": "1.0.0",
-      "path": "agency/core/grok-voice-poc.cjs"
-    },
-    {
-      "id": "auto-7",
-      "name": "Prompt Feedback Tracker",
-      "description": "AI PROMPTS FEEDBACK TRACKER",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/prompt-feedback-tracker.cjs"
-    },
-    {
-      "id": "auto-8",
-      "name": "Sync Knowledge Base",
-      "description": "Scans automations directory and updates:",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/sync-knowledge-base.cjs"
-    },
-    {
-      "id": "auto-9",
-      "name": "Test Env",
-      "description": "Tester que le fichier .env est correctement configuré",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/test-env.cjs"
-    },
-    {
-      "id": "auto-10",
-      "name": "Test Ga4",
-      "description": "TEST GOOGLE ANALYTICS 4 API ACCESS",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/test-ga4.cjs"
-    },
-    {
-      "id": "auto-11",
-      "name": "Test Gemini",
-      "description": "TEST GEMINI API",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/test-gemini.cjs"
-    },
-    {
-      "id": "auto-12",
-      "name": "Test Google Auth",
-      "description": "TEST GOOGLE SERVICE ACCOUNT AUTHENTICATION",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/test-google-auth.cjs"
-    },
-    {
-      "id": "auto-13",
-      "name": "Test Google Sheets",
-      "description": "TEST GOOGLE SHEETS ACCESS",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "agency/core/test-google-sheets.cjs"
-    },
-    {
-      "id": "auto-14",
-      "name": "Analyze Ga4 Conversion Source",
-      "description": "ANALYZE GA4 CONVERSION SOURCE - $309 Sale",
-      "category": "analytics",
-      "categoryName": "Analytics & Reporting",
-      "version": "1.0.0",
-      "path": "clients/analytics/analyze-ga4-conversion-source.cjs"
-    },
-    {
-      "id": "auto-15",
-      "name": "Analyze Ga4 Source",
-      "description": "ANALYZE GA4 - D'où vient le trafic et la vente?",
-      "category": "analytics",
-      "categoryName": "Analytics & Reporting",
-      "version": "1.0.0",
-      "path": "clients/analytics/analyze-ga4-source.cjs"
-    },
-    {
-      "id": "auto-16",
-      "name": "Audit Tiktok Pixel Config",
-      "description": "AUDIT: TikTok Pixel Configuration",
-      "category": "analytics",
-      "categoryName": "Analytics & Reporting",
-      "version": "1.0.0",
-      "path": "clients/analytics/audit-tiktok-pixel-config.cjs"
-    },
-    {
-      "id": "auto-17",
-      "name": "Check Pixel Status",
-      "description": "Check Facebook & TikTok Pixel Configuration Status",
-      "category": "analytics",
-      "categoryName": "Analytics & Reporting",
-      "version": "1.0.0",
-      "path": "clients/analytics/check-pixel-status.js"
-    },
-    {
-      "id": "auto-18",
-      "name": "Track Bnpl Performance",
-      "description": "BNPL PERFORMANCE TRACKER",
-      "category": "analytics",
-      "categoryName": "Analytics & Reporting",
-      "version": "1.0.0",
-      "path": "clients/analytics/track-bnpl-performance.cjs"
-    },
-    {
-      "id": "auto-19",
-      "name": "Verify Facebook Pixel Native",
-      "description": "VERIFY FACEBOOK PIXEL - NATIVE SHOPIFY APP",
-      "category": "analytics",
-      "categoryName": "Analytics & Reporting",
-      "version": "1.0.0",
-      "path": "clients/analytics/verify-facebook-pixel-native.js"
-    },
-    {
-      "id": "auto-20",
-      "name": "Geo Segment Generic",
-      "description": "GENERIC CRM GEO-SEGMENTATION",
-      "category": "crm",
-      "categoryName": "CRM & Customer Data",
-      "version": "1.0.0",
-      "path": "clients/crm/geo-segment-generic.cjs"
-    },
-    {
-      "id": "auto-21",
-      "name": "Audit Klaviyo Flows V2",
-      "description": "AUDIT: Klaviyo Email Flows (Empirical Verification)",
-      "category": "email_sms",
-      "categoryName": "Email/SMS Marketing",
-      "version": "1.0.0",
-      "path": "clients/klaviyo/audit-klaviyo-flows-v2.cjs"
-    },
-    {
-      "id": "auto-22",
-      "name": "Audit Klaviyo Flows",
-      "description": "Audit complet des flows Klaviyo",
-      "category": "email_sms",
-      "categoryName": "Email/SMS Marketing",
-      "version": "1.0.0",
-      "path": "clients/klaviyo/audit-klaviyo-flows.cjs"
-    },
-    {
-      "id": "auto-23",
-      "name": "Geo Segment Profiles",
-      "description": "KLAVIYO GEO-SEGMENTATION",
-      "category": "email_sms",
-      "categoryName": "Email/SMS Marketing",
-      "version": "1.0.0",
-      "path": "clients/klaviyo/geo-segment-profiles.cjs"
-    },
-    {
-      "id": "auto-24",
-      "name": "Rotation Email",
-      "description": "EMAIL ROTATION - 5 PRODUITS POUR CUSTOM LIQUID",
-      "category": "email_sms",
-      "categoryName": "Email/SMS Marketing",
-      "version": "1.0.0",
-      "path": "clients/klaviyo/rotation_email.cjs"
-    },
-    {
-      "id": "auto-25",
-      "name": "Test Klaviyo Connection",
-      "description": "Test direct de la connexion Klaviyo API",
-      "category": "email_sms",
-      "categoryName": "Email/SMS Marketing",
-      "version": "1.0.0",
-      "path": "clients/klaviyo/test-klaviyo-connection.cjs"
-    },
-    {
-      "id": "auto-26",
-      "name": "Import Facebook Lead Ads",
-      "description": "Objectif: Importer automatiquement les leads depuis Facebook Lead Ads",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition",
-      "version": "1.0.0",
-      "path": "clients/leads/import-facebook-lead-ads.js"
-    },
-    {
-      "id": "auto-27",
-      "name": "Segment Leads",
-      "description": "Objectif: Segmenter automatiquement les leads depuis RAW LEADS vers",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition",
-      "version": "1.0.0",
-      "path": "clients/leads/segment-leads.js"
-    },
-    {
-      "id": "auto-28",
-      "name": "Sync Google Ads Leads To Shopify",
-      "description": "HENDERSON SHOP - GOOGLE ADS LEAD SYNC AUTOMATION",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition",
-      "version": "1.0.0",
-      "path": "clients/leads/sync-google-ads-leads-to-shopify.cjs"
-    },
-    {
-      "id": "auto-29",
-      "name": "Sync Meta Leads To Shopify",
-      "description": "HENDERSON SHOP - META ADS LEAD SYNC AUTOMATION",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition",
-      "version": "1.0.0",
-      "path": "clients/leads/sync-meta-leads-to-shopify.cjs"
-    },
-    {
-      "id": "auto-30",
-      "name": "Sync Tiktok Ads Leads To Shopify",
-      "description": "HENDERSON SHOP - TIKTOK ADS LEAD SYNC AUTOMATION",
-      "category": "lead_generation",
-      "categoryName": "Lead Generation & Acquisition",
-      "version": "1.0.0",
-      "path": "clients/leads/sync-tiktok-ads-leads-to-shopify.cjs"
-    },
-    {
-      "id": "auto-31",
-      "name": "Fix Missing Alt Text",
-      "description": "Génère automatiquement des alt text SEO pour les images produits",
-      "category": "seo_content",
-      "categoryName": "SEO & Content",
-      "version": "1.0.0",
-      "path": "clients/seo/fix-missing-alt-text.cjs"
-    },
-    {
-      "id": "auto-32",
-      "name": "Generate Tags Csv",
-      "description": "",
-      "category": "seo_content",
-      "categoryName": "SEO & Content",
-      "version": "1.0.0",
-      "path": "clients/seo/generate-tags-csv.js"
-    },
-    {
-      "id": "auto-33",
-      "name": "Generate Image Sitemap",
-      "description": "GENERATE IMAGE SITEMAP",
-      "category": "seo_content",
-      "categoryName": "SEO & Content",
-      "version": "1.0.0",
-      "path": "clients/seo/generate_image_sitemap.cjs"
-    },
-    {
-      "id": "auto-34",
-      "name": "Import Alt Text Api",
-      "description": "",
-      "category": "seo_content",
-      "categoryName": "SEO & Content",
-      "version": "1.0.0",
-      "path": "clients/seo/import-alt-text-api.js"
-    },
-    {
-      "id": "auto-35",
-      "name": "Upload Llms",
-      "description": "",
-      "category": "seo_content",
-      "categoryName": "SEO & Content",
-      "version": "1.0.0",
-      "path": "clients/seo/upload-llms.js"
-    },
-    {
-      "id": "auto-36",
-      "name": "Audit Shopify Complete",
-      "description": "Audit complet d'une boutique Shopify - Version production",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/audit-shopify-complete.cjs"
-    },
-    {
-      "id": "auto-37",
-      "name": "Audit Shopify Store",
-      "description": "Script d'audit réutilisable pour tout client Shopify.",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/audit-shopify-store.cjs"
-    },
-    {
-      "id": "auto-38",
-      "name": "Create Warehouse Metafield",
-      "description": "OPTION 3: Create Warehouse Location Metafield",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/create-warehouse-metafield.cjs"
-    },
-    {
-      "id": "auto-39",
-      "name": "Export Shopify Customers Facebook",
-      "description": "EXPORT SHOPIFY CUSTOMERS FOR FACEBOOK CUSTOM AUDIENCES",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/export-shopify-customers-facebook.cjs"
-    },
-    {
-      "id": "auto-40",
-      "name": "Import Taxonomy Metafield",
-      "description": "P0.2: Import Shopify Product Taxonomy via Metafield",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/import-taxonomy-metafield.cjs"
-    },
-    {
-      "id": "auto-41",
-      "name": "Import Taxonomy Test",
-      "description": "P0.2: Import Shopify Product Taxonomy via Metafield",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/import-taxonomy-test.cjs"
-    },
-    {
-      "id": "auto-42",
-      "name": "Import Taxonomy Via Api",
-      "description": "P0.2: Import Shopify Product Taxonomy via API",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/import-taxonomy-via-api.cjs"
-    },
-    {
-      "id": "auto-43",
-      "name": "Parse Warehouse Csv",
-      "description": "OPTION 1: Warehouse CSV Parser",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/parse-warehouse-csv.cjs"
-    },
-    {
-      "id": "auto-44",
-      "name": "Test Shopify Connection",
-      "description": "Test direct de la connexion Shopify API",
-      "category": "ecommerce",
-      "categoryName": "E-commerce Automation",
-      "version": "1.0.0",
-      "path": "clients/shopify/test-shopify-connection.cjs"
-    },
-    {
-      "id": "auto-45",
-      "name": "Apify Inspect Raw Data",
-      "description": "APIFY INSPECT RAW DATA",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "clients/social/apify-inspect-raw-data.cjs"
-    },
-    {
-      "id": "auto-46",
-      "name": "Apify Verify Connection",
-      "description": "APIFY CONNECTION VERIFICATION",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "clients/social/apify-verify-connection.cjs"
-    },
-    {
-      "id": "auto-47",
-      "name": "Enable Apify Schedulers",
-      "description": "ENABLE APIFY SCHEDULERS",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "clients/social/enable-apify-schedulers.js"
-    },
-    {
-      "id": "auto-48",
-      "name": "Verify Hubspot Status",
-      "description": "VERIFY: HubSpot Installation Status",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "clients/social/verify-hubspot-status.cjs"
-    },
-    {
-      "id": "auto-49",
-      "name": "Convert Video Portrait",
-      "description": "VIDEO FORMAT CONVERTER - Landscape to Portrait",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "clients/video/convert-video-portrait.cjs"
-    },
-    {
-      "id": "auto-50",
-      "name": "Generate All Promo Videos",
-      "description": "BATCH VIDEO GENERATION MASTER",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "clients/video/generate-all-promo-videos.cjs"
-    },
-    {
-      "id": "auto-51",
-      "name": "Generate Promo Video",
-      "description": "PROMO VIDEO GENERATOR - Generic Version",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "clients/video/generate-promo-video.cjs"
-    },
-    {
-      "id": "auto-52",
-      "name": "Geo Markets",
-      "description": "GEO-MARKETS MODULE",
-      "category": "localization",
-      "categoryName": "Geo-Targeting & i18n",
-      "version": "1.0.0",
-      "path": "generic/geo-markets.cjs"
-    },
-    {
-      "id": "auto-53",
-      "name": "Scrape Google Maps Businesses",
-      "description": "SCRAPE GOOGLE MAPS BUSINESSES VIA APIFY",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "generic/scrape-google-maps-businesses.cjs"
-    },
-    {
-      "id": "auto-54",
-      "name": "Scrape Hiring Companies",
-      "description": "SCRAPE HIRING COMPANIES VIA APIFY",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "generic/scrape-hiring-companies.cjs"
-    },
-    {
-      "id": "auto-55",
-      "name": "Scrape Linkedin Profiles",
-      "description": "SCRAPE LINKEDIN PROFILES VIA APIFY",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "generic/scrape-linkedin-profiles.cjs"
-    },
-    {
-      "id": "auto-56",
-      "name": "Sync Google Forms To Klaviyo",
-      "description": "SYNC GOOGLE FORMS TO KLAVIYO",
-      "category": "email_sms",
-      "categoryName": "Email/SMS Marketing",
-      "version": "1.0.0",
-      "path": "generic/sync-google-forms-to-klaviyo.cjs"
-    },
-    {
-      "id": "auto-57",
-      "name": "Test All Apis",
-      "description": "Test de toutes les APIs configurées dans .env",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "generic/test-all-apis.cjs"
-    },
-    {
-      "id": "auto-58",
-      "name": "Validate All Automations",
-      "description": "VALIDATE ALL AUTOMATIONS",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "generic/validate-all-automations.cjs"
-    },
-    {
-      "id": "auto-59",
-      "name": "Env Loader",
-      "description": "Chargement standardisé du fichier .env depuis n'importe quel script",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "lib/env-loader.cjs"
-    },
-    {
-      "id": "auto-60",
-      "name": "Validate Automations Registry",
-      "description": "VALIDATE AUTOMATIONS REGISTRY",
-      "category": "general",
-      "categoryName": "General Automation",
-      "version": "1.0.0",
-      "path": "validate-automations-registry.cjs"
-    }
-  ],
-  "services": [
-    {
-      "name": "AUDIT E-COMMERCE",
-      "type": "service",
-      "price": "GRATUIT (pour acquisition)                                           │"
-    },
-    {
-      "name": "EMAIL MACHINE MINI                                              │",
-      "type": "service",
-      "price": "€500 setup + €200/mois                                               │"
-    },
-    {
-      "name": "SEO QUICK FIX                                                   │",
-      "type": "service",
-      "price": "€300-500 one-time                                                    │"
-    },
-    {
-      "name": "LEAD SYNC                                                       │",
-      "type": "service",
-      "price": "€400 setup + €150/mois                                               │"
-    },
-    {
-      "name": "MAINTENANCE MENSUELLE                                           │",
-      "type": "service",
-      "price": "€300-800/mois selon scope                                            │"
-    }
-  ],
-  "mcps": [
-    {
-      "name": "Klaviyo",
-      "status": "active",
-      "statusText": "TESTÉ OK",
-      "detail": "API Key pk_16c08... - 3 listes, 7 flows"
-    },
-    {
-      "name": "Shopify",
-      "status": "active",
-      "statusText": "TESTÉ OK",
-      "detail": "azffej-as = **Alpha Medical Care** (pas Henderson!)"
-    },
-    {
-      "name": "n8n",
-      "status": "active",
-      "statusText": "Configuré",
-      "detail": "Alpha Medical (JWT token) - non testé API"
-    },
-    {
-      "name": "Apify",
-      "status": "inactive",
-      "statusText": "Non configuré",
-      "detail": "Token = \"YOUR_APIFY_TOKEN\" placeholder"
-    }
-  ],
-  "stats": {
-    "totalPackages": 3,
-    "totalAutomations": 15,
-    "totalServices": 5,
-    "totalMCPs": 4,
-    "automationsByCategory": {
-      "lead_generation": 5,
-      "seo_content": 3,
-      "email_sms": 1,
-      "shopify": 4,
-      "analytics": 2
+  "generated": "2025-12-20T23:12:42.733Z",
+  "count": 75,
+  "categories": {
+    "lead-gen": {
+      "name_fr": "Lead Generation & Acquisition",
+      "name_en": "Lead Generation & Acquisition",
+      "count": 24
+    },
+    "seo": {
+      "name_fr": "SEO & Contenu",
+      "name_en": "SEO & Content",
+      "count": 9
+    },
+    "email": {
+      "name_fr": "Email Marketing (CRM)",
+      "name_en": "Email Marketing (CRM)",
+      "count": 9
+    },
+    "shopify": {
+      "name_fr": "Shopify Admin",
+      "name_en": "Shopify Admin",
+      "count": 14
+    },
+    "analytics": {
+      "name_fr": "Analytics & Reporting",
+      "name_en": "Analytics & Reporting",
+      "count": 10
+    },
+    "content": {
+      "name_fr": "Contenu & Vidéo",
+      "name_en": "Content & Video",
+      "count": 9
     }
   },
-  "count": 60
+  "automations": [
+    {
+      "id": "meta-leads-sync",
+      "name_fr": "Sync Meta Leads → Shopify",
+      "name_en": "Meta Leads → Shopify Sync",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/leads/sync-meta-leads-to-shopify.cjs",
+      "frequency_fr": "Toutes les heures",
+      "frequency_en": "Every hour",
+      "benefit_fr": "+15% leads capturés",
+      "benefit_en": "+15% leads captured"
+    },
+    {
+      "id": "google-ads-sync",
+      "name_fr": "Sync Google Ads → Shopify",
+      "name_en": "Google Ads → Shopify Sync",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/leads/sync-google-ads-leads-to-shopify.cjs",
+      "frequency_fr": "Toutes les heures",
+      "frequency_en": "Every hour",
+      "benefit_fr": "Zéro perte de leads",
+      "benefit_en": "Zero lead loss"
+    },
+    {
+      "id": "tiktok-leads-sync",
+      "name_fr": "Sync TikTok Leads → Shopify",
+      "name_en": "TikTok Leads → Shopify Sync",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/leads/sync-tiktok-ads-leads-to-shopify.cjs",
+      "frequency_fr": "Toutes les heures",
+      "frequency_en": "Every hour",
+      "benefit_fr": "Nouvelle audience captée",
+      "benefit_en": "New audience captured"
+    },
+    {
+      "id": "lead-scoring",
+      "name_fr": "Qualification & Scoring",
+      "name_en": "Lead Qualification & Scoring",
+      "category": "lead-gen",
+      "type": "n8n-workflow",
+      "script": null,
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "Focus sur leads chauds",
+      "benefit_en": "Focus on hot leads"
+    },
+    {
+      "id": "hot-warm-cold",
+      "name_fr": "Segmentation HOT/WARM/COLD",
+      "name_en": "HOT/WARM/COLD Segmentation",
+      "category": "lead-gen",
+      "type": "klaviyo-segment",
+      "script": null,
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Meilleur taux conversion",
+      "benefit_en": "Better conversion rate"
+    },
+    {
+      "id": "data-enrichment",
+      "name_fr": "Enrichissement Données",
+      "name_en": "Data Enrichment",
+      "category": "lead-gen",
+      "type": "apollo-integration",
+      "script": null,
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Leads B2B qualifiés",
+      "benefit_en": "Qualified B2B leads"
+    },
+    {
+      "id": "geo-segmentation",
+      "name_fr": "Geo-Segmentation",
+      "name_en": "Geo-Segmentation",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/klaviyo/geo-segment-profiles.cjs",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "Messages localisés",
+      "benefit_en": "Localized messages"
+    },
+    {
+      "id": "google-forms-crm",
+      "name_fr": "Google Forms → CRM",
+      "name_en": "Google Forms → CRM",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "generic/sync-google-forms-to-klaviyo.cjs",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Capture formulaires",
+      "benefit_en": "Form capture"
+    },
+    {
+      "id": "typeform-klaviyo",
+      "name_fr": "Typeform → Klaviyo",
+      "name_en": "Typeform → Klaviyo",
+      "category": "lead-gen",
+      "type": "n8n-workflow",
+      "script": null,
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Quiz → Email list",
+      "benefit_en": "Quiz → Email list"
+    },
+    {
+      "id": "scraping-google-maps",
+      "name_fr": "Scraping Google Maps",
+      "name_en": "Google Maps Scraping",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "generic/scrape-google-maps-businesses.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Leads locaux ciblés",
+      "benefit_en": "Targeted local leads"
+    },
+    {
+      "id": "scraping-linkedin",
+      "name_fr": "Scraping LinkedIn",
+      "name_en": "LinkedIn Scraping",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "generic/scrape-linkedin-profiles.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Base prospects B2B",
+      "benefit_en": "B2B prospect database"
+    },
+    {
+      "id": "scraping-hiring",
+      "name_fr": "Scraping Recruteurs",
+      "name_en": "Hiring Companies Scraping",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "generic/scrape-hiring-companies.cjs",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Timing parfait",
+      "benefit_en": "Perfect timing"
+    },
+    {
+      "id": "voice-booking",
+      "name_fr": "Voice AI + Réservation",
+      "name_en": "Voice AI + Booking",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/core/google-apps-script-booking.js",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "-67% temps booking, +37% conversion",
+      "benefit_en": "-67% booking time, +37% conversion"
+    },
+    {
+      "id": "alt-text-fix",
+      "name_fr": "Correction Alt Text Images",
+      "name_en": "Image Alt Text Correction",
+      "category": "seo",
+      "type": "script",
+      "script": "clients/seo/fix-missing-alt-text.cjs",
+      "frequency_fr": "Batch",
+      "frequency_en": "Batch",
+      "benefit_fr": "+20% trafic image Google",
+      "benefit_en": "+20% Google image traffic"
+    },
+    {
+      "id": "auto-meta-tags",
+      "name_fr": "Meta Tags Automatiques",
+      "name_en": "Automatic Meta Tags",
+      "category": "seo",
+      "type": "shopify-flow",
+      "script": null,
+      "frequency_fr": "Batch",
+      "frequency_en": "Batch",
+      "benefit_fr": "Meilleur CTR Google",
+      "benefit_en": "Better Google CTR"
+    },
+    {
+      "id": "image-sitemap",
+      "name_fr": "Sitemap Images",
+      "name_en": "Image Sitemap",
+      "category": "seo",
+      "type": "script",
+      "script": "clients/seo/generate_image_sitemap.cjs",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Indexation complète",
+      "benefit_en": "Full indexing"
+    },
+    {
+      "id": "schema-products",
+      "name_fr": "Schema.org Produits",
+      "name_en": "Schema.org Products",
+      "category": "seo",
+      "type": "shopify-theme",
+      "script": null,
+      "frequency_fr": "Batch",
+      "frequency_en": "Batch",
+      "benefit_fr": "Meilleure visibilité SERP",
+      "benefit_en": "Better SERP visibility"
+    },
+    {
+      "id": "internal-linking",
+      "name_fr": "Internal Linking",
+      "name_en": "Internal Linking",
+      "category": "seo",
+      "type": "manual-process",
+      "script": null,
+      "frequency_fr": "Batch",
+      "frequency_en": "Batch",
+      "benefit_fr": "Meilleur maillage SEO",
+      "benefit_en": "Better SEO structure"
+    },
+    {
+      "id": "llms-txt",
+      "name_fr": "llms.txt (AEO)",
+      "name_en": "llms.txt (AEO)",
+      "category": "seo",
+      "type": "manual-file",
+      "script": null,
+      "frequency_fr": "Une fois",
+      "frequency_en": "One-time",
+      "benefit_fr": "Visibilité IA",
+      "benefit_en": "AI visibility"
+    },
+    {
+      "id": "welcome-series",
+      "name_fr": "Welcome Series",
+      "name_en": "Welcome Series",
+      "category": "email",
+      "type": "klaviyo-flow",
+      "script": null,
+      "frequency_fr": "5 emails",
+      "frequency_en": "5 emails",
+      "benefit_fr": "Open: 40-50%",
+      "benefit_en": "Open: 40-50%"
+    },
+    {
+      "id": "abandoned-cart",
+      "name_fr": "Abandoned Cart",
+      "name_en": "Abandoned Cart",
+      "category": "email",
+      "type": "klaviyo-flow",
+      "script": null,
+      "frequency_fr": "3 emails",
+      "frequency_en": "3 emails",
+      "benefit_fr": "Recovery: 10-15%",
+      "benefit_en": "Recovery: 10-15%"
+    },
+    {
+      "id": "browse-abandonment",
+      "name_fr": "Browse Abandonment",
+      "name_en": "Browse Abandonment",
+      "category": "email",
+      "type": "klaviyo-flow",
+      "script": null,
+      "frequency_fr": "2 emails",
+      "frequency_en": "2 emails",
+      "benefit_fr": "+5% conversions",
+      "benefit_en": "+5% conversions"
+    },
+    {
+      "id": "post-purchase",
+      "name_fr": "Post-Achat",
+      "name_en": "Post-Purchase",
+      "category": "email",
+      "type": "klaviyo-flow",
+      "script": null,
+      "frequency_fr": "5 emails",
+      "frequency_en": "5 emails",
+      "benefit_fr": "Repeat: 25-35%",
+      "benefit_en": "Repeat: 25-35%"
+    },
+    {
+      "id": "win-back",
+      "name_fr": "Win-Back",
+      "name_en": "Win-Back",
+      "category": "email",
+      "type": "klaviyo-flow",
+      "script": null,
+      "frequency_fr": "3 emails",
+      "frequency_en": "3 emails",
+      "benefit_fr": "Réactivation: 5-10%",
+      "benefit_en": "Reactivation: 5-10%"
+    },
+    {
+      "id": "vip-tiers",
+      "name_fr": "VIP Tiers",
+      "name_en": "VIP Tiers",
+      "category": "email",
+      "type": "klaviyo-segment",
+      "script": null,
+      "frequency_fr": "4 segments",
+      "frequency_en": "4 segments",
+      "benefit_fr": "LTV +30%",
+      "benefit_en": "LTV +30%"
+    },
+    {
+      "id": "flows-audit",
+      "name_fr": "Audit Flows Complet",
+      "name_en": "Complete Flows Audit",
+      "category": "email",
+      "type": "script",
+      "script": "clients/klaviyo/audit-klaviyo-flows.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Diagnostic email",
+      "benefit_en": "Email diagnostic"
+    },
+    {
+      "id": "ab-sender-rotation",
+      "name_fr": "Rotation A/B Sender",
+      "name_en": "A/B Sender Rotation",
+      "category": "email",
+      "type": "script",
+      "script": "clients/klaviyo/rotation_email.cjs",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "+5-10% opens",
+      "benefit_en": "+5-10% opens"
+    },
+    {
+      "id": "product-enrichment",
+      "name_fr": "Enrichissement Produits",
+      "name_en": "Product Enrichment",
+      "category": "shopify",
+      "type": "ai-process",
+      "script": null,
+      "frequency_fr": "50 produits/batch",
+      "frequency_en": "50 products/batch",
+      "benefit_fr": "Meilleur SEO produits",
+      "benefit_en": "Better product SEO"
+    },
+    {
+      "id": "shopping-attributes",
+      "name_fr": "Google Shopping Attributes",
+      "name_en": "Google Shopping Attributes",
+      "category": "shopify",
+      "type": "shopify-metafield",
+      "script": null,
+      "frequency_fr": "100 produits/batch",
+      "frequency_en": "100 products/batch",
+      "benefit_fr": "Approbation GMC",
+      "benefit_en": "GMC approval"
+    },
+    {
+      "id": "collection-management",
+      "name_fr": "Gestion Collections",
+      "name_en": "Collection Management",
+      "category": "shopify",
+      "type": "shopify-flow",
+      "script": null,
+      "frequency_fr": "250 produits/batch",
+      "frequency_en": "250 products/batch",
+      "benefit_fr": "Organisation auto",
+      "benefit_en": "Auto organization"
+    },
+    {
+      "id": "legal-pages",
+      "name_fr": "Pages Légales",
+      "name_en": "Legal Pages",
+      "category": "shopify",
+      "type": "template",
+      "script": null,
+      "frequency_fr": "Une fois",
+      "frequency_en": "One-time",
+      "benefit_fr": "Conformité légale",
+      "benefit_en": "Legal compliance"
+    },
+    {
+      "id": "gtm-installation",
+      "name_fr": "Installation GTM",
+      "name_en": "GTM Installation",
+      "category": "shopify",
+      "type": "manual-setup",
+      "script": null,
+      "frequency_fr": "Une fois",
+      "frequency_en": "One-time",
+      "benefit_fr": "Tracking complet",
+      "benefit_en": "Complete tracking"
+    },
+    {
+      "id": "loyalty-webhooks",
+      "name_fr": "Webhooks Loyalty",
+      "name_en": "Loyalty Webhooks",
+      "category": "shopify",
+      "type": "shopify-webhook",
+      "script": null,
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Fidélisation auto",
+      "benefit_en": "Auto loyalty"
+    },
+    {
+      "id": "store-audit",
+      "name_fr": "Audit Store Complet",
+      "name_en": "Complete Store Audit",
+      "category": "shopify",
+      "type": "script",
+      "script": "clients/shopify/audit-shopify-complete.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Diagnostic complet",
+      "benefit_en": "Full diagnostic"
+    },
+    {
+      "id": "facebook-audiences",
+      "name_fr": "Export → Facebook Audiences",
+      "name_en": "Export → Facebook Audiences",
+      "category": "shopify",
+      "type": "script",
+      "script": "clients/shopify/export-shopify-customers-facebook.cjs",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Retargeting précis",
+      "benefit_en": "Precise retargeting"
+    },
+    {
+      "id": "google-taxonomy",
+      "name_fr": "Import Taxonomie Google",
+      "name_en": "Google Taxonomy Import",
+      "category": "shopify",
+      "type": "script",
+      "script": "clients/shopify/import-taxonomy-via-api.cjs",
+      "frequency_fr": "Une fois",
+      "frequency_en": "One-time",
+      "benefit_fr": "GMC compliant",
+      "benefit_en": "GMC compliant"
+    },
+    {
+      "id": "looker-dashboard",
+      "name_fr": "Dashboard Looker Studio",
+      "name_en": "Looker Studio Dashboard",
+      "category": "analytics",
+      "type": "looker-template",
+      "script": null,
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Vision 360° business",
+      "benefit_en": "360° business view"
+    },
+    {
+      "id": "ga4-source-report",
+      "name_fr": "Rapport Sources GA4",
+      "name_en": "GA4 Source Report",
+      "category": "analytics",
+      "type": "script",
+      "script": "clients/analytics/analyze-ga4-source.cjs",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Optimisation budget ads",
+      "benefit_en": "Ads budget optimization"
+    },
+    {
+      "id": "system-audit",
+      "name_fr": "Audit Système Complet",
+      "name_en": "Complete Flywheel Audit",
+      "category": "analytics",
+      "type": "multi-tool",
+      "script": null,
+      "frequency_fr": "Mensuel",
+      "frequency_en": "Monthly",
+      "benefit_fr": "Identification gaps",
+      "benefit_en": "Gap identification"
+    },
+    {
+      "id": "low-stock-alert",
+      "name_fr": "Alerte Stock Bas",
+      "name_en": "Low Stock Alert",
+      "category": "analytics",
+      "type": "shopify-flow",
+      "script": null,
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Zéro rupture stock",
+      "benefit_en": "Zero stockouts"
+    },
+    {
+      "id": "margin-projections",
+      "name_fr": "Projections Marges",
+      "name_en": "Margin Projections",
+      "category": "analytics",
+      "type": "sheets-template",
+      "script": null,
+      "frequency_fr": "Mensuel",
+      "frequency_en": "Monthly",
+      "benefit_fr": "Vraie rentabilité",
+      "benefit_en": "True profitability"
+    },
+    {
+      "id": "inventory-analysis",
+      "name_fr": "Analyse Inventaire",
+      "name_en": "Inventory Analysis",
+      "category": "analytics",
+      "type": "sheets-template",
+      "script": null,
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Cash flow optimisé",
+      "benefit_en": "Optimized cash flow"
+    },
+    {
+      "id": "bnpl-tracking",
+      "name_fr": "Suivi BNPL Performance",
+      "name_en": "BNPL Performance Tracking",
+      "category": "analytics",
+      "type": "script",
+      "script": "clients/analytics/track-bnpl-performance.cjs",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Optimisation checkout",
+      "benefit_en": "Checkout optimization"
+    },
+    {
+      "id": "pixel-verification",
+      "name_fr": "Vérification Pixels",
+      "name_en": "Pixel Verification",
+      "category": "analytics",
+      "type": "script",
+      "script": "clients/analytics/audit-tiktok-pixel-config.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Tracking fiable",
+      "benefit_en": "Reliable tracking"
+    },
+    {
+      "id": "promo-video",
+      "name_fr": "Vidéo Promo Produit",
+      "name_en": "Product Promo Video",
+      "category": "content",
+      "type": "script",
+      "script": "clients/video/generate-promo-video.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Contenu social ready",
+      "benefit_en": "Social ready content"
+    },
+    {
+      "id": "cart-recovery-video",
+      "name_fr": "Vidéo Cart Recovery",
+      "name_en": "Cart Recovery Video",
+      "category": "content",
+      "type": "video-template",
+      "script": null,
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "+5% recovery rate",
+      "benefit_en": "+5% recovery rate"
+    },
+    {
+      "id": "portrait-video",
+      "name_fr": "Vidéo Format Portrait",
+      "name_en": "Portrait Video Format",
+      "category": "content",
+      "type": "script",
+      "script": "clients/video/convert-video-portrait.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Multi-plateforme",
+      "benefit_en": "Multi-platform"
+    },
+    {
+      "id": "shopping-feed",
+      "name_fr": "Feed Google Shopping",
+      "name_en": "Google Shopping Feed",
+      "category": "content",
+      "type": "shopify-app",
+      "script": null,
+      "frequency_fr": "Quotidien",
+      "frequency_en": "Daily",
+      "benefit_fr": "Produits toujours à jour",
+      "benefit_en": "Always up-to-date products"
+    },
+    {
+      "id": "gmc-diagnostic",
+      "name_fr": "Diagnostic GMC",
+      "name_en": "GMC Diagnostic",
+      "category": "content",
+      "type": "manual-audit",
+      "script": null,
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Approbation produits",
+      "benefit_en": "Product approval"
+    },
+    {
+      "id": "auto-blog",
+      "name_fr": "Article Blog Auto",
+      "name_en": "Auto Blog Article",
+      "category": "content",
+      "type": "ai-process",
+      "script": null,
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Contenu SEO continu",
+      "benefit_en": "Continuous SEO content"
+    },
+    {
+      "id": "n8n-workflow",
+      "name_fr": "Workflow n8n Complet",
+      "name_en": "Complete n8n Workflow",
+      "category": "content",
+      "type": "n8n-workflow",
+      "script": null,
+      "frequency_fr": "Personnalisé",
+      "frequency_en": "Custom",
+      "benefit_fr": "Automation sur-mesure",
+      "benefit_en": "Tailor-made automation"
+    },
+    {
+      "id": "google-calendar-booking",
+      "name_fr": "Google Calendar Booking",
+      "name_en": "Google Calendar Booking",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/core/google-calendar-booking.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "grok-client",
+      "name_fr": "Grok Client",
+      "name_en": "Grok Client",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/core/grok-client.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "grok-voice-poc",
+      "name_fr": "Grok Voice Poc",
+      "name_en": "Grok Voice Poc",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/core/grok-voice-poc.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "prompt-feedback-tracker",
+      "name_fr": "Prompt Feedback Tracker",
+      "name_en": "Prompt Feedback Tracker",
+      "category": "content",
+      "type": "script",
+      "script": "agency/core/prompt-feedback-tracker.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "analyze-ga4-conversion-source",
+      "name_fr": "Analyze Ga4 Conversion Source",
+      "name_en": "Analyze Ga4 Conversion Source",
+      "category": "analytics",
+      "type": "script",
+      "script": "clients/analytics/analyze-ga4-conversion-source.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "verify-facebook-pixel-native",
+      "name_fr": "Verify Facebook Pixel Native",
+      "name_en": "Verify Facebook Pixel Native",
+      "category": "analytics",
+      "type": "script",
+      "script": "clients/analytics/verify-facebook-pixel-native.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "geo-segment-generic",
+      "name_fr": "Geo Segment Generic",
+      "name_en": "Geo Segment Generic",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/crm/geo-segment-generic.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "audit-klaviyo-flows-v2",
+      "name_fr": "Audit Klaviyo Flows V2",
+      "name_en": "Audit Klaviyo Flows V2",
+      "category": "email",
+      "type": "script",
+      "script": "clients/klaviyo/audit-klaviyo-flows-v2.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "import-facebook-lead-ads",
+      "name_fr": "Import Facebook Lead Ads",
+      "name_en": "Import Facebook Lead Ads",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/leads/import-facebook-lead-ads.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "segment-leads",
+      "name_fr": "Segment Leads",
+      "name_en": "Segment Leads",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/leads/segment-leads.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "generate-tags-csv",
+      "name_fr": "Generate Tags Csv",
+      "name_en": "Generate Tags Csv",
+      "category": "seo",
+      "type": "script",
+      "script": "clients/seo/generate-tags-csv.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "import-alt-text-api",
+      "name_fr": "Import Alt Text Api",
+      "name_en": "Import Alt Text Api",
+      "category": "seo",
+      "type": "script",
+      "script": "clients/seo/import-alt-text-api.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "upload-llms",
+      "name_fr": "Upload Llms",
+      "name_en": "Upload Llms",
+      "category": "seo",
+      "type": "script",
+      "script": "clients/seo/upload-llms.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "audit-shopify-store",
+      "name_fr": "Audit Shopify Store",
+      "name_en": "Audit Shopify Store",
+      "category": "shopify",
+      "type": "script",
+      "script": "clients/shopify/audit-shopify-store.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "create-warehouse-metafield",
+      "name_fr": "Create Warehouse Metafield",
+      "name_en": "Create Warehouse Metafield",
+      "category": "shopify",
+      "type": "script",
+      "script": "clients/shopify/create-warehouse-metafield.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "import-taxonomy-metafield",
+      "name_fr": "Import Taxonomy Metafield",
+      "name_en": "Import Taxonomy Metafield",
+      "category": "shopify",
+      "type": "script",
+      "script": "clients/shopify/import-taxonomy-metafield.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "import-taxonomy-test",
+      "name_fr": "Import Taxonomy Test",
+      "name_en": "Import Taxonomy Test",
+      "category": "shopify",
+      "type": "script",
+      "script": "clients/shopify/import-taxonomy-test.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "parse-warehouse-csv",
+      "name_fr": "Parse Warehouse Csv",
+      "name_en": "Parse Warehouse Csv",
+      "category": "shopify",
+      "type": "script",
+      "script": "clients/shopify/parse-warehouse-csv.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "apify-inspect-raw-data",
+      "name_fr": "Apify Inspect Raw Data",
+      "name_en": "Apify Inspect Raw Data",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/social/apify-inspect-raw-data.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "apify-verify-connection",
+      "name_fr": "Apify Verify Connection",
+      "name_en": "Apify Verify Connection",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/social/apify-verify-connection.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "enable-apify-schedulers",
+      "name_fr": "Enable Apify Schedulers",
+      "name_en": "Enable Apify Schedulers",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/social/enable-apify-schedulers.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "verify-hubspot-status",
+      "name_fr": "Verify Hubspot Status",
+      "name_en": "Verify Hubspot Status",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "clients/social/verify-hubspot-status.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "generate-all-promo-videos",
+      "name_fr": "Generate All Promo Videos",
+      "name_en": "Generate All Promo Videos",
+      "category": "content",
+      "type": "script",
+      "script": "clients/video/generate-all-promo-videos.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "geo-markets",
+      "name_fr": "Geo Markets",
+      "name_en": "Geo Markets",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "generic/geo-markets.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    }
+  ]
 }
