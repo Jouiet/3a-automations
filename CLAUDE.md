@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 7.5 | Dernière mise à jour: 2025-12-20 (Session 48 - Performance + Mobile UX)
+## Version: 7.6 | Dernière mise à jour: 2025-12-20 (Session 49 - Mobile Optimization)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -200,6 +200,26 @@ VPS Hostinger (ID: 1168256)
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 5. ~~Fusionner CSS~~ ✅ FAIT - styles.min.css (82KB minifié)
+
+## SESSION 49 COMPLÉTÉE ✅ (20/12/2025 - Mobile Optimization)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Orbital -5% mobile | ✅ | 390px→370px, scale 0.98→0.93 |
+| Process Timeline -20% | ✅ | step-marker 50px→40px, fonts réduits |
+| Containers centrés | ✅ | Toutes sections centrées sur mobile |
+| CSS minifié | ✅ | 126KB → 85KB |
+
+**Changements CSS mobile (768px):**
+- Orbital animation: `height: 370px`, `max-width: 370px`, `scale: 0.93`
+- Process timeline: step-marker `40px`, fonts `-20%`
+- Mobile centering block: containers, sections, headers, CTA
+
+**Commits Session 49:**
+- `fdac0d3` feat(mobile): Comprehensive homepage mobile UX improvements
+- `ed96481` fix(mobile): Orbital -5%, Timeline -20%, containers centered
+
+---
 
 ## SESSION 48 COMPLÉTÉE ✅ (20/12/2025 - Performance + Mobile UX)
 
