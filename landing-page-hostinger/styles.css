@@ -2199,13 +2199,20 @@ body.lite {
   /* ═══════════════════════════════════════════════════════════════════════════
      ORBITAL TECH-ICONS MOBILE - UX Optimized
      - Touch targets: min 48px (Apple HIG + comfortable)
-     - Text: 0.85rem (14px) for clear readability
-     - Ring-3: Hidden on mobile (too crowded, overlap issues)
-     - Simplified 2-ring design for clarity
+     - Text: 0.8rem (13px) for clear readability
+     - overflow: hidden prevents icons from going under header
      ═══════════════════════════════════════════════════════════════════════════ */
+  .hero-visual {
+    height: 320px;
+    max-width: 320px;
+    overflow: hidden; /* Clip icons that rotate beyond container */
+    margin-top: 10px;
+  }
+
   .tech-orbital {
     width: 300px;
     height: 300px;
+    margin-top: 10px; /* Push down slightly to avoid top clipping */
   }
 
   /* Ring-3 on mobile - smaller icons to fit */
@@ -2793,16 +2800,19 @@ body.lite {
      Viewport 320px - padding 32px = 288px available
      ═══════════════════════════════════════════════════════════════════════════ */
   .hero-visual {
-    height: 260px;
-    max-width: 260px;
+    height: 280px;
+    max-width: 280px;
+    overflow: hidden;
+    margin-top: 5px;
   }
 
   .tech-orbital {
     width: 260px;
     height: 260px;
+    margin-top: 10px;
   }
 
-  /* Show only ring-1 with 6 most important techs visible */
+  /* Ring-2 faded on small screens for clarity */
   .ring-2 {
     opacity: 0.4; /* Fade ring-2 on very small screens */
   }
