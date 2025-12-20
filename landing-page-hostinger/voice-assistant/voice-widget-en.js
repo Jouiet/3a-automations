@@ -352,7 +352,7 @@
     const title = bubble.querySelector('.va-notif-title');
     if (title) title.style.cssText = `font-size: 14px; font-weight: 600; color: #E4F4FC; letter-spacing: -0.01em;`;
     const sub = bubble.querySelector('.va-notif-sub');
-    if (sub) sub.style.cssText = `font-size: 11px; color: rgba(79, 186, 241, 0.8); font-weight: 400;`;
+    if (sub) sub.style.cssText = `font-size: 11px; color: rgba(255, 255, 255, 0.7); font-weight: 400;`;
     const arrow = document.createElement('div');
     arrow.style.cssText = `position: absolute; bottom: -6px; right: 24px; width: 12px; height: 12px; background: rgba(25, 30, 53, 0.95); border-right: 1px solid rgba(79, 186, 241, 0.3); border-bottom: 1px solid rgba(79, 186, 241, 0.3); transform: rotate(45deg);`;
     bubble.appendChild(arrow);
