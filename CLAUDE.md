@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 7.4 | Dernière mise à jour: 2025-12-20 (Session 47 - UX/UI Grid Fixes + Terminology)
+## Version: 7.5 | Dernière mise à jour: 2025-12-20 (Session 48 - Performance + Mobile UX)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -199,7 +199,51 @@ VPS Hostinger (ID: 1168256)
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
-5. **Fusionner CSS** - styles.css + styles-lite.css → 1 seul fichier (éviter bugs duplication)
+5. ~~Fusionner CSS~~ ✅ FAIT - styles.min.css (82KB minifié)
+
+## SESSION 48 COMPLÉTÉE ✅ (20/12/2025 - Performance + Mobile UX)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Lighthouse audit | ✅ | FR: 52/90/100/100, EN: 54/90/100/100 |
+| Critical CSS inline | ✅ | ~2KB inline pour FCP rapide |
+| CSS minification | ✅ | 117KB → 82KB (-30%) |
+| Font async loading | ✅ | preload + onload technique |
+| Alt text fix | ✅ | Redundant alt removed |
+| Mobile orbital animation | ✅ | Visible sur tablet/mobile (+20% size) |
+| Counter-rotation | ✅ | Tech icons text upright |
+
+**Lighthouse Scores (Post-Optimization):**
+| Métrique | Avant | Après | Target |
+|----------|-------|-------|--------|
+| Performance | 44 | 52 | >90 |
+| Accessibility | 89 | 90 | >95 |
+| Best Practices | 100 | 100 | 100 ✅ |
+| SEO | 100 | 100 | 100 ✅ |
+
+**Core Web Vitals:**
+- FCP: 3.4s → 3.1s (⚠️ target <1.8s)
+- LCP: 6.4s → 6.2s (❌ target <2.5s)
+- TBT: 710ms → 720ms (❌ target <200ms)
+- CLS: 0.001 → 0.024 (✅ target <0.1)
+- SI: 15.8s → 4.4s (⚠️ target <3.4s)
+
+**Bottleneck identifié:**
+- GTM blocking: 397ms main thread
+- Solution future: GTM defer/lazy load
+
+**Fichiers créés:**
+- `styles.min.css` - CSS minifié (82KB)
+- `critical.css` - CSS critique pour above-fold
+- `outputs/lighthouse-fr.json` - Audit pre-optimization
+- `outputs/lighthouse-fr-v2.json` - Audit post-optimization
+
+**Commits Session 48:**
+- `9ea262f` perf(site): Critical CSS inlining + async font/CSS loading
+- `731e956` fix(mobile): Show orbital animation on mobile + fix upside-down text
+- `438c8da` fix(mobile): Increase orbital animation size +20% on tablet
+
+---
 
 ## SESSION 41 COMPLÉTÉE ✅ (19/12/2025 - Voice Widget 100% Fix)
 
