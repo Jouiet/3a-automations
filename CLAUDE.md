@@ -240,28 +240,36 @@ VPS Hostinger (ID: 1168256)
 | Tâche | Statut | Détails |
 |-------|--------|---------|
 | Token Shopify file | ✅ | Fichier supprimé (rm -f) |
-| Claims "56" → "50" | ✅ | 2 occurrences (voice widgets) |
-| Claims "45" → "50" | ✅ | 18 occurrences (HTML + meta + JSON-LD) |
+| Claims "56" → "50" | ✅ | **9 occurrences** (voice, stats, flywheel) |
+| Claims "45" → "50" | ✅ | **18 occurrences** (HTML + meta + JSON-LD) |
 | Taux USD 1.08 → 1.17 | ✅ | geo-locale.js mis à jour |
 | Taux MAD 10.90 → 10.74 | ✅ | geo-locale.js mis à jour |
 | Taux GBP 0.83 → 0.88 | ✅ | geo-locale.js mis à jour |
 
-**Fichiers modifiés:**
-- `geo-locale.js` - Taux de change corrigés
-- `voice-widget.js` - 56 → 50
-- `voice-widget-en.js` - 56 → 50
-- `index.html` (FR + EN) - 45 → 50 (meta, badges, footer)
-- `a-propos.html` - 45 → 50 (trust bar, pillar)
-- `about.html` - 45 → 50 (trust bar, pillar, footer)
-- `automations.html` (FR + EN) - 45 → 50 (meta, JSON-LD)
-- `services/audit-gratuit.html` - 56 → 50 (footer)
-- `en/services/free-audit.html` - 56 → 50 (footer)
+**Total: 27 corrections sur 15 fichiers**
+
+**Fichiers modifiés (Claims):**
+- `index.html` (FR + EN) - hero-stats-ultra 56→50, meta 45→50
+- `a-propos.html` / `about.html` - expertise-stats 56→50, trust-bar 45→50
+- `automations.html` (FR + EN) - catalog-stats 45→50, meta, JSON-LD
+- `services/flywheel-360.html` (FR + EN) - hero-metric 56→50
+- `voice-widget.js` / `voice-widget-en.js` - 56→50
+- `voice-assistant/knowledge-base.js` - total: 56→50
+- `services/audit-gratuit.html` / `free-audit.html` - footer 56→50
+
+**Fichiers modifiés (Taux):**
+- `geo-locale.js` - USD 1.08→1.17, MAD 10.90→10.74, GBP 0.83→0.88
 
 **Supprimé:**
 - `archive/mydealz-scripts/forensic_flywheel_analysis_complete.cjs` (token exposé)
 
 **ACTION MANUELLE REQUISE:**
 - Révoquer token `shpat_146b...` sur Shopify Partners
+
+**Commits:**
+- `8f7748d` fix(factuality): Correct automation claims + exchange rates + remove token
+- `1fbdf2a` fix(factuality): Correct stat-number 45 → 50 on catalog pages
+- `e835adf` fix(factuality): Complete 56 → 50 corrections across all pages
 
 ---
 
