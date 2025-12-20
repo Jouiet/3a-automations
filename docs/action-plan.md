@@ -1,25 +1,26 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 53)
+## Document Exécutable - Décembre 2025 (màj Session 56)
 ## Objectif: Premier client payant en 4 semaines
 
 ---
 
-## 🔴 ALERTES CRITIQUES (Session 53 - 20/12/2025)
+## 🟡 ALERTES (Session 56 - 20/12/2025)
 
 ```
-SÉCURITÉ IMMÉDIATE:
-├── ❌ Token Shopify exposé: shpat_146b899e9ea8a... (archive/mydealz-scripts/)
-├── → ACTION: RÉVOQUER sur Shopify Admin AVANT tout
-└── → Supprimer fichier forensic_flywheel_analysis_complete.cjs
+SÉCURITÉ:
+├── ⚠️ Token Shopify exposé (git history): shpat_146b...
+└── → ACTION MANUELLE: RÉVOQUER sur Shopify Admin
 
-PERFORMANCE SITE:
-├── Lighthouse Performance: 24% ❌❌ (target >90%)
-├── LCP: 6.1s ❌ | TBT: 1,330ms ❌❌ | CLS: 1.0 ❌❌
-└── Bottleneck: GTM bloque 496ms
+PERFORMANCE SITE (POST GTM FIX):
+├── Lighthouse Performance: 70% 🟡 (+46 pts depuis Session 53)
+├── LCP: 3.8s 🟡 | TBT: 450ms 🟡 | CLS: 0 ✅
+├── GTM Blocking: 175ms (était 496ms, -65%)
+└── ✅ GTM lazy loading appliqué (24 pages)
 
-FACTUALITÉ:
-├── Claims à corriger: "56"/"45" → "50" automatisations
-└── Taux USD obsolète: 1.08 → 1.17 (+8.46% écart)
+FACTUALITÉ (Corrigée Session 54-55):
+├── ✅ Claims "50" automatisations (aligné registry)
+├── ✅ Taux USD: 1.17, MAD: 10.74, GBP: 0.88
+└── ✅ Architecture nettoyée (180 scripts → /clients/)
 ```
 
 ---
@@ -37,11 +38,11 @@ SITUATION AU 20 DÉCEMBRE 2025 (Mise à jour Session 53):
 ├── GitHub: github.com/Jouiet/3a-automations ✅ (PRIVÉ)
 ├── **SITE LIVE: https://3a-automation.com** ✅
 │
-├── MÉTRIQUES VÉRIFIÉES (Session 53):
-│   ├── Scripts /automations: 50 (pas 56)
+├── MÉTRIQUES VÉRIFIÉES (Session 56):
+│   ├── Scripts /automations: 50 (registry source de vérité)
 │   ├── MCPs configurés: 13 (9 fonctionnels)
 │   ├── Généricité scripts: 84% (42/50 utilisent process.env)
-│   ├── Lighthouse Performance: 24% ❌
+│   ├── Lighthouse Performance: 70% 🟡 (+46 pts)
 │   ├── Lighthouse SEO: 100% ✅
 │   └── Lighthouse Best Practices: 100% ✅
 │
