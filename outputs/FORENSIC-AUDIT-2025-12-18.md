@@ -1,10 +1,85 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-20 | Version: 7.2 (Màj Session 47 - UX/UI Grid Fixes + Terminology)
+## Date: 2025-12-20 | Version: 7.3 (Màj Session 50 - Orbital Forensic + Automations Count)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 47)
+# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 50)
+
+## Automations Count & Orbital Animation Fix
+
+| Élément | Statut | Détails |
+|---------|--------|---------|
+| Automations count | ✅ **45** | Corrigé de 56 (vérifié par script) |
+| B2B automations | ❌ Retirées | Apollo.io, ZoomInfo, LinkedIn B2B (hors cible) |
+| B2C automations | ✅ +9 ajoutées | Geo-Segmentation, VIP Program, Product Launch... |
+| Orbital forensic | ✅ 48/48 tests | Calculs mathématiques validés |
+| CSS breakpoints | ✅ 5 breakpoints | Desktop, 1200px, 1024px, 768px, 480px |
+
+**ORBITAL ANIMATION - ANALYSE FORENSIQUE MATHÉMATIQUE:**
+```
+PROBLÈMES RACINE IDENTIFIÉS:
+├── BUG 1: overflow:hidden sur hero-visual clippait les icons en haut
+├── BUG 2: Offsets fixes (-26px) non scalés selon taille icons
+├── BUG 3: Container margins insuffisants (icon overflow > margin)
+├── BUG 4: ring-3 animation 15s vs 30s (désynchronisé)
+└── BUG 5: ring-3 counter-rotation avec durée incorrecte
+
+FORMULES APPLIQUÉES:
+├── offset = -icon_size / 2 (ex: 44px icon → -22px offset)
+├── margin = (container - orbital) / 2
+├── RÈGLE: margin ≥ offset (sinon icons clippés)
+└── animation: ring duration = icon counter-rotation duration
+
+BREAKPOINTS FINAUX (48 tests validés):
+┌──────────┬───────────┬─────────┬───────┬────────┐
+│ Breakpt  │ Container │ Orbital │ Icons │ Offset │
+├──────────┼───────────┼─────────┼───────┼────────┤
+│ Desktop  │ 500px     │ 400px   │ 52px  │ -26px  │
+│ 1200px   │ 450px     │ 380px   │ 50px  │ -25px  │
+│ 1024px   │ 390px     │ 340px   │ 48px  │ -24px  │
+│ 768px    │ 350px     │ 300px   │ 44px  │ -22px  │
+│ 480px    │ 290px     │ 250px   │ 38px  │ -19px  │
+└──────────┴───────────┴─────────┴───────┴────────┘
+```
+
+**AUTOMATIONS - COMPTAGE EMPIRIQUE:**
+```
+MÉTHODE: Comptage manuel de .automation-card dans automations.html
+RÉSULTAT: 45 cards (pas 56 comme claim précédent)
+
+RETRAITS B2B (5):
+├── Apollo.io Prospection B2B
+├── ZoomInfo Lead Enrichment
+├── LinkedIn Sales Navigator Sync
+├── CRM B2B Pipeline Automation
+└── B2B Lead Scoring
+
+AJOUTS B2C (9):
+├── Geo-Segmentation par Marché (MA, EU, International)
+├── VIP Program Automation (loyalty tiers)
+├── Product Launch Sequence
+├── Review Request Automation (post-purchase)
+├── Wishlist Reminder (browse abandonment)
+├── Price Drop Alert
+├── Size Guide Popup
+├── Returns Automation
+└── Referral Program
+```
+
+**SCRIPTS DE VÉRIFICATION:**
+- `scripts/test-orbital-forensic.cjs` - 48 tests CSS
+- `scripts/test-session-50-fixes.cjs` - Automations + orbital
+
+**COMMITS SESSION 50:**
+- `790b61d` fix(mobile): Restore ring-3 visibility + explicit sizing
+- `c5b1dd8` fix(mobile): Hide orbital overflow under header
+- `33e4055` fix(css): Complete forensic fix for orbital animation
+- `b540f35` docs: Session 49 final - Mobile UX complete
+
+---
+
+# SECTION 0-prev: ÉTAT (20 Dec 2025 - Session 47)
 
 ## Website UX/UI Status
 

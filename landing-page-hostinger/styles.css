@@ -5396,6 +5396,84 @@ body.lite {
   .mcp-grid { grid-template-columns: repeat(2, 1fr); }
   .flywheel-link { flex-direction: column; text-align: center; }
   .promo-text { text-align: center; }
+
+  /* CTA SECTIONS - Mobile UX Optimization */
+  .cta {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .cta-content {
+    padding: var(--spacing-xl) var(--spacing-md);
+    margin: 0 var(--spacing-sm);
+    border-radius: var(--radius-xl);
+  }
+
+  .cta-content h2 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta-content p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .cta-actions {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    width: 100%;
+  }
+
+  .cta-actions .btn,
+  .cta-actions .btn-large,
+  .cta-content .btn,
+  .cta-content .btn-large {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* Fix inline style buttons in CTA */
+  .cta-content > div[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    width: 100%;
+  }
+
+  .cta-content > div[style*="display: flex"] .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .cta-content {
+    padding: var(--spacing-lg) var(--spacing-sm);
+    margin: 0;
+    border-radius: var(--radius-lg);
+  }
+
+  .cta-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .cta-content p {
+    font-size: 0.85rem;
+  }
+
+  .cta-actions .btn,
+  .cta-actions .btn-large,
+  .cta-content .btn,
+  .cta-content .btn-large {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────

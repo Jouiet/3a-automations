@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 3.0 - Mise à jour 19 Décembre 2025 (Session 40: Pricing Bottom-Up)
+## Version 3.1 - Mise à jour 20 Décembre 2025 (Session 50: Automations Count Fix)
 ## Basé sur données réelles confirmées
 
 ---
@@ -464,8 +464,8 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 ---
 
-**Document mis à jour:** 18 Décembre 2025
-**Version:** 2.3
+**Document mis à jour:** 20 Décembre 2025
+**Version:** 3.1
 **Principe:** Faits uniquement, zéro bullshit
 
 ---
@@ -474,8 +474,27 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 | Version | Date | Modifications |
 |---------|------|---------------|
+| 3.1 | 20 Déc 2025 | Session 50: Automations count 45 (vérifié), B2B retirées, B2C ajoutées |
 | 2.3 | 18 Déc 2025 | Knowledge Base RAG Phase 1 complète, Voice Agent scope clarifié (Shopping + Support), effort 116-172h |
 | 2.2 | 17 Déc 2025 | Découverte Grok Voice Agent API ($0.05/min) - Voice AI devient possible |
 | 2.1 | 17 Déc 2025 | Session 4: xAI API configurée, GitHub connecté, branding extrait, prompts landing page |
 | 2.0 | 17 Déc 2025 | Mise à jour avec données confirmées (solo, €0, €50 budget, restart 25/01) |
 | 1.0 | 16 Déc 2025 | Version initiale basée sur audit forensique |
+
+---
+
+## SESSION 50 UPDATE (20/12/2025)
+
+### Métriques Corrigées
+
+| Métrique | Avant (non vérifié) | Après (vérifié) | Méthode |
+|----------|---------------------|-----------------|---------|
+| Automations | 56 | **45** | Comptage réel .automation-card |
+| B2B automations | Présentes | **Retirées** | Hors cible PME e-commerce |
+| B2C automations | - | **+9 ajoutées** | Geo-Segmentation, VIP Program... |
+
+### Assets Techniques Session 50
+
+- `scripts/test-orbital-forensic.cjs` - 48 tests CSS breakpoints
+- `scripts/test-session-50-fixes.cjs` - Validation automations + orbital
+- CSS: 5 breakpoints orbital avec calculs mathématiques
