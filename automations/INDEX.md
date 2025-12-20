@@ -1,5 +1,5 @@
 # 3A Automation - Catalogue Automatisations
-## Version 3.0 | 19 Décembre 2025
+## Version 3.1 | 20 Décembre 2025
 
 ---
 
@@ -48,8 +48,28 @@ TOTAL: 56 automatisations (consolidation Session 23)
 | `test-gemini.cjs` | Test API Gemini | Test LLM |
 | `test-google-auth.cjs` | Test auth Google | Validation OAuth |
 | `test-google-sheets.cjs` | Test Google Sheets API | Validation Sheets |
+| `google-apps-script-booking.js` | Système de réservation RDV | Google Calendar |
+| `google-calendar-booking.cjs` | Module booking Node.js | API |
+| `BOOKING-SETUP.md` | Guide déploiement booking | Documentation |
 
-### 2. Shopify (11 automatisations)
+### 2. Voice Assistant + Booking (2 automatisations)
+
+| Automatisation | Description | Déclencheur |
+|----------------|-------------|-------------|
+| `voice-widget.js` | Assistant vocal FR avec booking | Widget flottant |
+| `voice-widget-en.js` | Assistant vocal EN avec booking | Widget flottant |
+
+**Fonctionnalités Voice Booking:**
+- Reconnaissance vocale (Web Speech API)
+- Conversation multi-étapes (nom → email → créneau → confirmation)
+- Appel API Google Apps Script
+- Création événement Google Calendar
+- Email confirmation automatique
+
+**Mots-clés booking FR:** rdv, rendez-vous, réserver, appel, discuter
+**Mots-clés booking EN:** appointment, book, schedule, call, meeting
+
+### 3. Shopify (11 automatisations)
 
 | Automatisation | Description | Déclencheur |
 |----------------|-------------|-------------|
