@@ -1383,8 +1383,9 @@ body.lite {
 .step-num {
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--primary);
+  color: #FFFFFF;
   font-family: var(--font-mono);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .step-pulse {
@@ -1426,18 +1427,11 @@ body.lite {
   line-height: 1.7;
 }
 
-/* Step colors */
+/* Step colors - borders only, text stays white for contrast */
 .process-step-ultra:nth-child(2) .step-marker { border-color: var(--primary); }
-.process-step-ultra:nth-child(2) .step-num { color: var(--primary); }
-
 .process-step-ultra:nth-child(3) .step-marker { border-color: var(--accent); }
-.process-step-ultra:nth-child(3) .step-num { color: var(--accent); }
-
 .process-step-ultra:nth-child(4) .step-marker { border-color: var(--accent-purple); }
-.process-step-ultra:nth-child(4) .step-num { color: var(--accent-purple); }
-
 .process-step-ultra:nth-child(5) .step-marker { border-color: var(--accent-orange); }
-.process-step-ultra:nth-child(5) .step-num { color: var(--accent-orange); }
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CTA ULTRA
