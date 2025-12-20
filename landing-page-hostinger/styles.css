@@ -2301,34 +2301,57 @@ body.lite {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     FLYWHEEL SECTION MOBILE (+20% larger)
+     FLYWHEEL SECTION MOBILE - Optimized to prevent overlap
+     Wheel 320px with stage 75px = safe margin between stages
      ═══════════════════════════════════════════════════════════════════════════ */
+  .flywheel-section {
+    padding: var(--spacing-2xl) 0;
+  }
+
   .flywheel-wheel {
-    width: 340px;
-    height: 340px;
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
   }
 
   .flywheel-stage {
-    width: 108px;
-    padding: var(--spacing-sm);
+    width: 75px;
+    padding: var(--spacing-xs);
   }
 
   .stage-icon {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .stage-icon svg {
+    width: 16px;
+    height: 16px;
   }
 
   .stage-label {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
+    line-height: 1.2;
   }
 
   .stage-count {
-    font-size: 0.7rem;
+    font-size: 0.55rem;
+    margin-top: 2px;
   }
 
   .flywheel-arrows {
-    width: 280px;
-    height: 280px;
+    width: 260px;
+    height: 260px;
+  }
+
+  .flywheel-center-hub {
+    width: 70px;
+    height: 70px;
+  }
+
+  .hub-label {
+    font-size: 0.6rem;
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -2540,26 +2563,53 @@ body.lite {
   }
 
   .flywheel-section {
-    padding: var(--spacing-2xl) 0;
+    padding: var(--spacing-xl) 0;
   }
 
   .flywheel-wheel {
-    width: 280px;
-    height: 280px;
+    width: 260px;
+    height: 260px;
   }
 
   .flywheel-stage {
-    width: 90px;
-    padding: var(--spacing-sm);
+    width: 65px;
+    padding: 4px;
+  }
+
+  .stage-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .stage-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .stage-label {
+    font-size: 0.55rem;
+  }
+
+  .stage-count {
+    display: none; /* Hide on very small screens */
+  }
+
+  .flywheel-arrows {
+    width: 210px;
+    height: 210px;
   }
 
   .flywheel-center-hub {
-    width: 70px;
-    height: 70px;
+    width: 55px;
+    height: 55px;
   }
 
   .hub-text {
-    font-size: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .hub-label {
+    font-size: 0.5rem;
   }
 
   .section-title-ultra {
