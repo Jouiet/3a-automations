@@ -53,37 +53,37 @@ const reducedMotionMatch = css.match(/@media\s*\(prefers-reduced-motion:\s*reduc
 const reducedMotion = reducedMotionMatch ? reducedMotionMatch[1] : '';
 
 console.log('─────────────────────────────────────────────────────────────────');
-console.log('1. TOUCH TARGETS (min 44px - Apple HIG)');
+console.log('1. TOUCH TARGETS (min 48px - comfortable touch)');
 console.log('─────────────────────────────────────────────────────────────────\n');
 
-// Test 1: Touch targets in 768px
+// Test 1: Touch targets in 768px - upgraded to 48px
 test(
-  'Mobile 768px: min-height 44px for .tech-icon',
-  mobile768.includes('min-height: 44px') || mobile768.includes('min-height:44px'),
-  'Required for Apple HIG compliance'
+  'Mobile 768px: min-height 48px for .tech-icon',
+  mobile768.includes('min-height: 48px') || mobile768.includes('min-height:48px'),
+  'Comfortable touch target (48px)'
 );
 
 test(
-  'Mobile 768px: min-width 44px for .tech-icon',
-  mobile768.includes('min-width: 44px') || mobile768.includes('min-width:44px'),
-  'Touch target width'
+  'Mobile 768px: min-width 48px for .tech-icon',
+  mobile768.includes('min-width: 48px') || mobile768.includes('min-width:48px'),
+  'Touch target width (48px)'
 );
 
 console.log('\n─────────────────────────────────────────────────────────────────');
-console.log('2. TEXT READABILITY (min 0.7rem / 11px)');
+console.log('2. TEXT READABILITY (0.85rem / 14px for clear visibility)');
 console.log('─────────────────────────────────────────────────────────────────\n');
 
-// Test 2: Text readability
+// Test 2: Text readability - larger text
 test(
-  'Mobile 768px: font-size >= 0.7rem for .tech-icon span',
-  mobile768.includes('font-size: 0.7rem') || mobile768.includes('font-size:0.7rem'),
-  'Minimum readable size is 11px (0.7rem)'
+  'Mobile 768px: font-size 0.85rem for .tech-icon span',
+  mobile768.includes('font-size: 0.85rem') || mobile768.includes('font-size:0.85rem'),
+  'Clearly readable size is 14px (0.85rem)'
 );
 
 // Check NO 0.5rem in mobile768 for tech-icon
 test(
   'Mobile 768px: NO font-size 0.5rem (too small)',
-  !mobile768.includes('.tech-icon span') || !mobile768.includes('font-size: 0.5rem'),
+  !mobile768.includes('font-size: 0.5rem'),
   '0.5rem (8px) is below WCAG minimum'
 );
 
@@ -110,9 +110,9 @@ test(
 );
 
 test(
-  'Mobile 480px: orbital width <= 260px',
-  mobile480.includes('width: 240px') || mobile480.includes('width: 250px') || mobile480.includes('width: 260px'),
-  'Viewport 320px - 32px padding = 288px available'
+  'Mobile 480px: orbital width 260px',
+  mobile480.includes('width: 260px') || mobile480.includes('width:260px'),
+  'Viewport 320px - 32px padding = 288px available, 260px fits'
 );
 
 test(
