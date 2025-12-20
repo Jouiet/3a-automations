@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 8.0 | Dernière mise à jour: 2025-12-20 (Session 51 - SEO + CTA Mobile + Broken Links)
+## Version: 8.1 | Dernière mise à jour: 2025-12-20 (Session 52 - Accents Français Forensique)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -92,6 +92,7 @@ node automations/generic/test-all-apis.cjs
 node scripts/test-voice-widget.cjs      # Voice widget 100% test
 node scripts/test-seo-complete.cjs      # SEO complet 142 tests
 node scripts/test-orbital-forensic.cjs  # Orbital animation 48 tests
+node scripts/verify-accents-fr.cjs      # Accents français 13 pages
 
 # Audits
 node automations/clients/shopify/audit-shopify-complete.cjs
@@ -202,6 +203,45 @@ VPS Hostinger (ID: 1168256)
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 5. ~~Fusionner CSS~~ ✅ FAIT - styles.min.css (82KB minifié)
+
+## SESSION 52 COMPLÉTÉE ✅ (20/12/2025 - Accents Français Forensique)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Audit accents FR | ✅ | 13 pages scannées, 84 fautes trouvées |
+| Corrections | ✅ | 8 pages modifiées (cas-clients: 70 corrections) |
+| Bug JS évité | ✅ | e.detail non modifié (propriété JavaScript) |
+| Scripts créés | ✅ | audit-accents-fr.cjs, fix-accents-fr.cjs, verify-accents-fr.cjs |
+| Vérification | ✅ | 13/13 pages correctes (100%) |
+
+**FAUTES PRINCIPALES CORRIGÉES:**
+```
+cas-clients.html (70 corrections):
+├── "Notre Methode" → "Notre Méthode"
+├── "Securite" → "Sécurité"
+├── "Vos Donnees, Votre Controle" → "Vos Données, Votre Contrôle"
+├── "Audit & Decouverte" → "Audit & Découverte"
+├── "Configuration Acces" → "Configuration Accès"
+├── "Rotation Reguliere" → "Rotation Régulière"
+├── "Revocation Immediate" → "Révocation Immédiate"
+├── "Integre" → "Intégré"
+├── "Proprietaire" → "Propriétaire"
+├── "Implementation" → "Implémentation"
+├── "a vos plateformes" → "à vos plateformes"
+└── +60 autres corrections (accès, délégués, systèmes, etc.)
+
+Autres fichiers: automations, 404, legal, services (14 corrections)
+```
+
+**Scripts de vérification:**
+- `audit-accents-fr.cjs` → Détection (241 patterns)
+- `fix-accents-fr.cjs` → Correction automatique
+- `verify-accents-fr.cjs` → **13/13 (100%)** ✅
+
+**Commit Session 52:**
+- `f952d4e` fix(i18n): Correct French accent errors across 8 pages
+
+---
 
 ## SESSION 51 COMPLÉTÉE ✅ (20/12/2025 - SEO + CTA Mobile + Broken Links)
 
