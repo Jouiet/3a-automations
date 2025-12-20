@@ -146,9 +146,9 @@
       "benefit_en": "Quiz → Email list"
     },
     {
-      "id": "scraping-google-maps",
-      "name_fr": "Scraping Google Maps",
-      "name_en": "Google Maps Scraping",
+      "id": "sourcing-google-maps",
+      "name_fr": "Sourcing Google Maps",
+      "name_en": "Google Maps Sourcing",
       "category": "lead-gen",
       "type": "script",
       "script": "generic/scrape-google-maps-businesses.cjs",
@@ -158,9 +158,9 @@
       "benefit_en": "Targeted local leads"
     },
     {
-      "id": "scraping-linkedin",
-      "name_fr": "Scraping LinkedIn",
-      "name_en": "LinkedIn Scraping",
+      "id": "sourcing-linkedin",
+      "name_fr": "Sourcing LinkedIn",
+      "name_en": "LinkedIn Sourcing",
       "category": "lead-gen",
       "type": "script",
       "script": "generic/scrape-linkedin-profiles.cjs",
@@ -170,9 +170,9 @@
       "benefit_en": "B2B prospect database"
     },
     {
-      "id": "scraping-hiring",
-      "name_fr": "Scraping Recruteurs",
-      "name_en": "Hiring Companies Scraping",
+      "id": "veille-recrutement",
+      "name_fr": "Veille Recrutement",
+      "name_en": "Hiring Intelligence",
       "category": "lead-gen",
       "type": "script",
       "script": "generic/scrape-hiring-companies.cjs",
