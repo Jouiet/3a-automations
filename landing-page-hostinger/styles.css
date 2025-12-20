@@ -2364,6 +2364,13 @@ body.lite {
   .ring-3 .tech-icon:nth-child(5) { bottom: -16px; }
   .ring-3 .tech-icon:nth-child(7) { left: -16px; }
 
+  /* ─── DIAGONAL ICONS FIX @768px ───
+     Ring ~135px, Icons 32px - need corner positioning */
+  .ring-3 .tech-icon:nth-child(2) { top: 12%; right: 5%; }
+  .ring-3 .tech-icon:nth-child(4) { bottom: 12%; right: 5%; }
+  .ring-3 .tech-icon:nth-child(6) { bottom: 12%; left: 5%; }
+  .ring-3 .tech-icon:nth-child(8) { top: 12%; left: 5%; }
+
   /* ─── CENTER ─── */
   .orbital-center {
     width: 65px;
@@ -2976,6 +2983,13 @@ body.lite {
   .ring-3 .tech-icon:nth-child(3) { right: -14px; }
   .ring-3 .tech-icon:nth-child(5) { bottom: -14px; }
   .ring-3 .tech-icon:nth-child(7) { left: -14px; }
+
+  /* ─── DIAGONAL ICONS FIX @480px ───
+     Ring ~112px, Icons 28px - need corner positioning */
+  .ring-3 .tech-icon:nth-child(2) { top: 15%; right: 8%; }
+  .ring-3 .tech-icon:nth-child(4) { bottom: 15%; right: 8%; }
+  .ring-3 .tech-icon:nth-child(6) { bottom: 15%; left: 8%; }
+  .ring-3 .tech-icon:nth-child(8) { top: 15%; left: 8%; }
 
   /* ─── CENTER at 480px ─── */
   .orbital-center {
