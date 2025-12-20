@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 3.1 - Mise à jour 20 Décembre 2025 (Session 50: Automations Count Fix)
+## Version 3.2 - Mise à jour 20 Décembre 2025 (Session 53: Audit Forensique)
 ## Basé sur données réelles confirmées
 
 ---
@@ -60,10 +60,10 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │                                                                              │
 │  SCRIPTS DISPONIBLES                                                        │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  Total: ~198 scripts                                                        │
-│  ├── ~25 scripts génériques (réutilisables immédiatement)                  │
-│  ├── ~33 scripts configurables (nécessitent .env)                          │
-│  └── ~140 scripts client-spécifiques (nécessitent refactoring)             │
+│  Total: 50 scripts dans /automations (vérifié 20/12/2025)                   │
+│  ├── 37 scripts client-facing                                              │
+│  ├── 13 scripts internes/test (non client-facing)                          │
+│  └── Genericité: 84% utilisent process.env                                 │
 │                                                                              │
 │  MCPs CONFIGURÉS (Audit Session 24 - 19/12/2025)                            │
 │  ════════════════════════════════════════════════════════════════════════   │
@@ -104,7 +104,7 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │  ├── ✅ Formulaires: 3 connectés (Google Apps Script v2)                    │
 │  ├── ✅ Leads: Google Sheets auto-créé                                      │
 │  ├── ✅ Notifications: Email vers contact@3a-automation.com                 │
-│  ├── ✅ Claims marketing: CORRIGÉS (56 auto, 9 MCPs, 10+ APIs)             │
+│  ├── ⚠️ Claims marketing: À CORRIGER (56→50 auto, 13 MCPs, 10+ APIs)       │
 │  ├── ✅ Branding: 3A-BRANDING-GUIDE.md (couleurs exactes du logo)          │
 │  ├── ✅ GitHub: github.com/Jouiet/3a-automations connecté                   │
 │  ├── ❌ Système de booking (Calendly)                                       │
@@ -474,7 +474,8 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 | Version | Date | Modifications |
 |---------|------|---------------|
-| 3.1 | 20 Déc 2025 | Session 50: Automations count 45 (vérifié), B2B retirées, B2C ajoutées |
+| 3.1 | 20 Déc 2025 | Session 50: Automations count vérifié |
+| 3.2 | 20 Déc 2025 | Session 53: 50 scripts réels, Performance 24%, Token Shopify exposé |
 | 2.3 | 18 Déc 2025 | Knowledge Base RAG Phase 1 complète, Voice Agent scope clarifié (Shopping + Support), effort 116-172h |
 | 2.2 | 17 Déc 2025 | Découverte Grok Voice Agent API ($0.05/min) - Voice AI devient possible |
 | 2.1 | 17 Déc 2025 | Session 4: xAI API configurée, GitHub connecté, branding extrait, prompts landing page |
@@ -489,7 +490,7 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 | Métrique | Avant (non vérifié) | Après (vérifié) | Méthode |
 |----------|---------------------|-----------------|---------|
-| Automations | 56 | **45** | Comptage réel .automation-card |
+| Automations | 56 | **50** | Comptage réel scripts /automations |
 | B2B automations | Présentes | **Retirées** | Hors cible PME e-commerce |
 | B2C automations | - | **+9 ajoutées** | Geo-Segmentation, VIP Program... |
 

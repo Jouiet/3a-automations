@@ -1,16 +1,59 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-20 | Version: 7.3 (Màj Session 50 - Orbital Forensic + Automations Count)
+## Date: 2025-12-20 | Version: 7.4 (Màj Session 53 - Lighthouse Empirique + Corrections)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 50)
+# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 53)
 
-## Automations Count & Orbital Animation Fix
+## ⚠️ CORRECTIONS CRITIQUES (Session 53)
+
+### Performance RÉELLE (Lighthouse 20/12/2025 17:41 UTC)
+```
+╔═══════════════════════════════════════════════════════════════╗
+║  LIGHTHOUSE LIVE - https://3a-automation.com                  ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Performance     │ 24%  │ ❌❌ CRITIQUE                        ║
+║  Accessibility   │ 90%  │ ⚠️                                  ║
+║  Best Practices  │ 100% │ ✅                                  ║
+║  SEO             │ 100% │ ✅                                  ║
+╠═══════════════════════════════════════════════════════════════╣
+║  CORE WEB VITALS:                                             ║
+║  FCP: 2.2s (target <1.8s)     │ ⚠️ -22%                       ║
+║  LCP: 6.1s (target <2.5s)     │ ❌ -144%                      ║
+║  TBT: 1,330ms (target <200ms) │ ❌❌ -565%                     ║
+║  CLS: 1.0 (target <0.1)       │ ❌❌ -900%                     ║
+║  SI: 4.1s (target <3.4s)      │ ⚠️ -21%                       ║
+╠═══════════════════════════════════════════════════════════════╣
+║  BOTTLENECKS:                                                 ║
+║  • Main Thread "Other": 2,397ms                               ║
+║  • Style & Layout: 2,147ms                                    ║
+║  • GTM blocking: 496ms                                        ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+### 🔴 SÉCURITÉ - TOKEN HARDCODÉ CONFIRMÉ
+```
+FICHIER:  archive/mydealz-scripts/forensic_flywheel_analysis_complete.cjs
+LIGNE:    26
+CONTENU:  const SHOPIFY_TOKEN = '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'
+STATUS:   EN GIT HISTORY - À RÉVOQUER IMMÉDIATEMENT
+```
+
+### Automations Count CORRIGÉ
+| Élément | Valeur | Source |
+|---------|--------|--------|
+| Scripts .cjs dans /automations | **50** | `find ... -name "*.cjs" \| wc -l` |
+| Cartes sur automations.html | 44 | Comptage HTML |
+| Claim site (incorrecte) | 56 ou 45 | À corriger → **50** |
+
+---
+
+## Automations Count & Orbital Animation Fix (Session 50)
 
 | Élément | Statut | Détails |
 |---------|--------|---------|
-| Automations count | ✅ **45** | Corrigé de 56 (vérifié par script) |
+| Automations count | ⚠️ **50** scripts | Page affiche 44 cartes, claim dit 56/45 |
 | B2B automations | ❌ Retirées | Apollo.io, ZoomInfo, LinkedIn B2B (hors cible) |
 | B2C automations | ✅ +9 ajoutées | Geo-Segmentation, VIP Program, Product Launch... |
 | Orbital forensic | ✅ 48/48 tests | Calculs mathématiques validés |

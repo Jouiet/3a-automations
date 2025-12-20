@@ -1,6 +1,6 @@
 # 3A AUTOMATION - WEBSITE BLUEPRINT
 ## Document Exhaustif de Création du Site Web
-### Version: 2.0 | Date: 20/12/2025 | Auteur: 3A Automation (Session 50)
+### Version: 2.1 | Date: 20/12/2025 | Auteur: 3A Automation (Session 53)
 
 ---
 
@@ -103,19 +103,32 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 100/100 (màj 20/12/2025 - Session 50)
-├── Session 50: Automations count corrigé (56→45, vérifié par script)
+SCORE ACTUEL: 85/100 (màj 20/12/2025 - Session 53)
+
+⚠️ ALERTES PERFORMANCE (Lighthouse LIVE 20/12/2025):
+├── Performance: 24% ❌❌ (target >90%)
+├── LCP: 6.1s ❌ (target <2.5s)
+├── TBT: 1,330ms ❌❌ (target <200ms)
+├── CLS: 1.0 ❌❌ (target <0.1)
+└── Bottleneck: GTM bloque 496ms main thread
+
+✅ POINTS FORTS:
+├── SEO: 100% ✅
+├── Best Practices: 100% ✅
+├── Accessibility: 90% ⚠️
+
+HISTORIQUE:
+├── Session 53: Audit forensique empirique (Lighthouse 24%, Token exposé)
+├── Session 53: Automations count corrigé (56/45→50 scripts réels)
 ├── Session 50: Orbital animation forensic fix (48/48 tests)
-├── Session 50: CSS breakpoints calculés mathématiquement (5 breakpoints)
 ├── Session 49: Mobile UX optimisé (Timeline -20%, Footer compact)
-├── Session 48: Lighthouse audit (Performance 52, SEO 100)
+├── Session 48: Lighthouse audit (Performance 52→24 dégradé!)
 ├── Session 47: Terminologie FR-friendly (Flywheel→Système 360°)
-├── Session 25: Google Apps Script v2 déployé, 3 formulaires connectés
 ├── Site LIVE: https://3a-automation.com ✅
 ├── SSL: Let's Encrypt actif (auto-renewal) ✅
 ├── Schema.org: 26/26 pages (100%) ✅
-├── robots.txt: 10 crawlers (8 AI + Googlebot + Bingbot) ✅
-├── Métriques factuelles: 45 automatisations | 9 MCPs | 10+ APIs | 3 clients ✅
+├── robots.txt: 24 crawlers AI autorisés ✅
+├── Métriques factuelles: 50 scripts | 13 MCPs | 10+ APIs | 42+ clients servis ✅
 └── Terminologie: FR-friendly (Système 360°, Moteur de Croissance) ✅
 
 SCORE SESSION 13: 98/100
