@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 8.9 | Dernière mise à jour: 2025-12-20 (Session 57 - Prix Fixes + geo-locale v3)
+## Version: 9.0 | Dernière mise à jour: 2025-12-20 (Session 60 - Voice Booking + Performance)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -11,7 +11,7 @@
 
 | Métrique | Valeur | Vérifié |
 |----------|--------|---------|
-| Total | **50** | ✅ |
+| Total | **50** | ✅ Session 60 |
 | FR Catalog | 50 | ✅ |
 | EN Catalog | 50 | ✅ |
 | Scripts .cjs | 20 | ✅ |
@@ -23,7 +23,36 @@
 
 ---
 
-## ARCHITECTURE (Vérifié Session 55)
+## SESSION 60 COMPLÉTÉE ✅ (20/12/2025)
+
+### Voice Assistant + Booking
+- **Booking via Voice:** Clients peuvent réserver RDV via assistant vocal
+- **Keywords FR:** rdv, rendez-vous, réserver, appel, discuter
+- **Keywords EN:** appointment, book, schedule, call, meeting
+- **Flow:** Nom → Email → Créneau → Confirmation → Google Calendar
+
+### Google Apps Script Booking (LIVE)
+```
+URL: https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec
+Health: ✅ {"success":true,"service":"3A Booking"}
+Coût: $0 (100% gratuit)
+```
+
+### Performance Fixes
+- **CSS minifié:** 150KB → 97KB (-35%)
+- **Logo dimensions:** width="40" height="40" sur toutes pages
+- **Pricing CSS:** Sélecteurs combinés [data-currency][data-period]
+
+### Commits Session 60
+```
+d5f3727 feat(voice): Add booking capability to voice assistant
+3593dac feat(booking): Connect live Google Apps Script endpoint
+144b67c docs: Session 60 - Pricing CSS fix + Booking system + WebP images
+```
+
+---
+
+## ARCHITECTURE (Vérifié Session 60)
 
 ```
 /Users/mac/Desktop/JO-AAA/           ← AGENCE (48 scripts)
