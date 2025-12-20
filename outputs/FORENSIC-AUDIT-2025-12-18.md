@@ -1,10 +1,93 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-20 | Version: 7.6 (Màj Session 58 - Pricing Multi-Devise + SEO Check)
+## Date: 2025-12-20 | Version: 7.7 (Màj Session 60 - Pricing CSS Fix + Booking System)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 58)
+# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 60)
+
+## ✅ PRICING CSS FIX (Session 59-60)
+
+### Problème Résolu
+```
+AVANT (bug):
+├── Retainers affichaient TOUTES les devises: "$330 2 900€ $3 300 29 000 DH /an"
+├── CSS [data-period="monthly"] .period-monthly { display: inline !important }
+└── Affichait TOUS les .period-monthly peu importe la devise active
+
+APRÈS (fix):
+├── CSS avec sélecteurs COMBINÉS: [data-currency="X"][data-period="Y"]
+├── Seule la devise ET période sélectionnées s'affichent
+└── Exemple: EUR + Monthly = seulement ".price-eur.period-monthly" visible
+```
+
+### CSS Sélecteurs Combinés (styles.css)
+```css
+/* STEP 1: Hide ALL by default */
+.price-eur, .price-usd, .price-mad { display: none !important; }
+.period-monthly, .period-annual { display: none !important; }
+
+/* STEP 2: Setup prices (inside .pricing-price, NO period) */
+[data-currency="EUR"] .pricing-price .price-eur { display: inline !important; }
+
+/* STEP 3: Retainer prices - BOTH currency AND period */
+[data-currency="EUR"][data-period="monthly"] .price-eur.period-monthly { display: inline !important; }
+[data-currency="EUR"][data-period="annual"] .price-eur.period-annual { display: inline !important; }
+/* ... idem USD, MAD */
+```
+
+## ✅ BOOKING SYSTEM (Session 59-60)
+
+### Architecture Google Apps Script (NO n8n!)
+```
+[User] → [booking.html] → [Google Apps Script] → [Google Calendar]
+                                              → [Email Confirmation]
+
+Coût: $0 (100% gratuit)
+Dépendances: Aucune (pas de n8n, pas de serveur)
+```
+
+### Fichiers Créés
+```
+automations/agency/core/
+├── google-apps-script-booking.js  ← 340 lignes, 9 fonctions
+├── BOOKING-SETUP.md               ← Guide installation 5 min
+└── google-calendar-booking.cjs    ← Module Node.js (optionnel)
+
+landing-page-hostinger/
+├── booking.html                   ← Page FR avec calendrier
+└── en/booking.html                ← Page EN avec calendrier
+```
+
+### Fonctionnalités Booking
+```
+✅ doPost() - Créer réservation
+✅ doGet() - Vérifier disponibilités (14 jours)
+✅ isSlotAvailable() - Business hours (Lun-Ven 9h-18h)
+✅ createCalendarEvent() - Ajout Google Calendar
+✅ sendConfirmationEmail() - Email client automatique
+✅ sendAdminNotification() - Email admin automatique
+✅ testSetup() - Fonction de test
+```
+
+### Déploiement (Manuel requis)
+```
+1. https://script.google.com → Nouveau projet
+2. Coller google-apps-script-booking.js
+3. Déployer → Application Web → Tout le monde
+4. Copier URL dans booking.html
+```
+
+### Commits Session 59-60
+```
+638973a fix(pricing): CORRECT currency+period switching with combined selectors
+c79ac71 feat(booking): Complete Google Calendar booking system
+2471f90 feat(booking): Direct Google Calendar via Apps Script (NO n8n)
+```
+
+---
+
+# SECTION 0-prev: ÉTAT (20 Dec 2025 - Session 58)
 
 ## ✅ PRICING MULTI-DEVISE (Session 57-58)
 
