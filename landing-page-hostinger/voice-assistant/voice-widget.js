@@ -719,8 +719,164 @@ OBJECTIF:
     need: null,            // leads, email, analytics
     budget: null,          // identifié ou non
     stage: 'discovery',    // discovery, qualification, proposal
-    lastTopic: null        // dernier sujet abordé
+    lastTopic: null,       // dernier sujet abordé
+    // === BOOKING FLOW ===
+    bookingFlow: {
+      active: false,
+      step: null,          // 'name', 'email', 'datetime', 'confirm'
+      data: {
+        name: null,
+        email: null,
+        datetime: null,
+        service: 'Consultation'
+      }
+    }
   };
+
+  // === BOOKING SYSTEM ===
+  const BOOKING_API = 'https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec';
+  const BOOKING_KEYWORDS = ['rdv', 'rendez-vous', 'rendez vous', 'reserver', 'reservation', 'prendre rdv', 'booking', 'appel', 'discuter', 'parler'];
+
+  function isBookingIntent(text) {
+    const lower = text.toLowerCase();
+    return BOOKING_KEYWORDS.some(kw => lower.includes(kw));
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function getNextSlotSuggestion() {
+    const now = new Date();
+    const slots = [];
+    for (let d = 1; d <= 7; d++) {
+      const date = new Date(now);
+      date.setDate(now.getDate() + d);
+      const day = date.getDay();
+      if (day >= 1 && day <= 5) { // Lun-Ven
+        date.setHours(10, 0, 0, 0);
+        slots.push({
+          date: date.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }),
+          time: '10:00',
+          iso: date.toISOString()
+        });
+        if (slots.length >= 3) break;
+      }
+    }
+    return slots;
+  }
+
+  async function submitBooking(data) {
+    try {
+      const response = await fetch(BOOKING_API, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error('Booking error:', error);
+      return { success: false, message: error.message };
+    }
+  }
+
+  function handleBookingFlow(userMessage) {
+    const lower = userMessage.toLowerCase();
+    const booking = conversationContext.bookingFlow;
+
+    // Cancel booking
+    if (lower.includes('annuler') || lower.includes('non') || lower.includes('stop')) {
+      booking.active = false;
+      booking.step = null;
+      booking.data = { name: null, email: null, datetime: null, service: 'Consultation' };
+      return "Pas de probleme, reservation annulee. Comment puis-je vous aider autrement ?";
+    }
+
+    // Step: Collect name
+    if (booking.step === 'name') {
+      const name = userMessage.trim();
+      if (name.length < 2) {
+        return "Je n'ai pas compris votre nom. Pouvez-vous me le redonner ?";
+      }
+      booking.data.name = name;
+      booking.step = 'email';
+      return "Merci " + name + " ! Quelle est votre adresse email pour recevoir la confirmation ?";
+    }
+
+    // Step: Collect email
+    if (booking.step === 'email') {
+      const email = userMessage.trim().toLowerCase();
+      if (!isValidEmail(email)) {
+        return "Cette adresse email ne semble pas valide. Pouvez-vous la verifier ? (format: exemple@email.com)";
+      }
+      booking.data.email = email;
+      booking.step = 'datetime';
+      const slots = getNextSlotSuggestion();
+      return "Parfait ! Voici les prochains creneaux disponibles :\n\n" +
+        slots.map((s, i) => (i + 1) + ". " + s.date + " a " + s.time).join("\n") +
+        "\n\nRepondez avec le numero (1, 2 ou 3) ou proposez une autre date.";
+    }
+
+    // Step: Collect datetime
+    if (booking.step === 'datetime') {
+      const slots = getNextSlotSuggestion();
+      let selectedSlot = null;
+
+      if (lower.includes('1') || lower.includes('premier')) {
+        selectedSlot = slots[0];
+      } else if (lower.includes('2') || lower.includes('deux')) {
+        selectedSlot = slots[1];
+      } else if (lower.includes('3') || lower.includes('trois')) {
+        selectedSlot = slots[2];
+      }
+
+      if (selectedSlot) {
+        booking.data.datetime = selectedSlot.iso;
+        booking.step = 'confirm';
+        return "Parfait ! Voici le recapitulatif :\n\n" +
+          "Nom: " + booking.data.name + "\n" +
+          "Email: " + booking.data.email + "\n" +
+          "Date: " + selectedSlot.date + " a " + selectedSlot.time + "\n\n" +
+          "Confirmez-vous ce rendez-vous ? (oui/non)";
+      }
+
+      return "Je n'ai pas compris votre choix. Repondez 1, 2 ou 3 pour choisir un creneau.";
+    }
+
+    // Step: Confirm
+    if (booking.step === 'confirm') {
+      if (lower.includes('oui') || lower.includes('ok') || lower.includes('confirme')) {
+        booking.step = 'submitting';
+        return null; // Will be handled async
+      }
+      return "Dites 'oui' pour confirmer ou 'annuler' pour recommencer.";
+    }
+
+    return null;
+  }
+
+  async function processBookingConfirmation() {
+    const booking = conversationContext.bookingFlow;
+    const result = await submitBooking({
+      name: booking.data.name,
+      email: booking.data.email,
+      datetime: booking.data.datetime,
+      service: booking.data.service,
+      phone: '',
+      notes: 'Reservation via assistant vocal'
+    });
+
+    booking.active = false;
+    booking.step = null;
+
+    if (result.success) {
+      return "Votre rendez-vous est confirme ! Vous allez recevoir un email de confirmation a " + booking.data.email + ".\n\nA bientot !";
+    } else {
+      return "Desole, il y a eu un probleme : " + result.message + "\n\nVous pouvez reserver directement sur /booking.html";
+    }
+  }
 
   // Détection d'industrie
   function detectIndustry(text) {
@@ -843,6 +999,25 @@ OBJECTIF:
   // Obtenir réponse intelligente
   async function getAIResponse(userMessage) {
     const lower = userMessage.toLowerCase();
+
+    // === BOOKING FLOW - Priorité absolue si actif ===
+    if (conversationContext.bookingFlow.active) {
+      const bookingResponse = handleBookingFlow(userMessage);
+      if (conversationContext.bookingFlow.step === 'submitting') {
+        // Confirmation async
+        return await processBookingConfirmation();
+      }
+      if (bookingResponse) {
+        return bookingResponse;
+      }
+    }
+
+    // Détecter intention de réservation
+    if (isBookingIntent(lower)) {
+      conversationContext.bookingFlow.active = true;
+      conversationContext.bookingFlow.step = 'name';
+      return "Super ! Je vais vous aider a reserver un rendez-vous.\n\nPour commencer, quel est votre nom ?";
+    }
 
     // Mise à jour du contexte
     const detectedIndustry = detectIndustry(userMessage);

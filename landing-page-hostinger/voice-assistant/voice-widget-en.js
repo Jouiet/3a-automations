@@ -455,8 +455,159 @@
     industry: null,
     need: null,
     stage: 'discovery',
-    lastTopic: null
+    lastTopic: null,
+    // === BOOKING FLOW ===
+    bookingFlow: {
+      active: false,
+      step: null,
+      data: {
+        name: null,
+        email: null,
+        datetime: null,
+        service: 'Consultation'
+      }
+    }
   };
+
+  // === BOOKING SYSTEM ===
+  const BOOKING_API = 'https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec';
+  const BOOKING_KEYWORDS = ['appointment', 'book', 'booking', 'schedule', 'call', 'meeting', 'talk', 'discuss'];
+
+  function isBookingIntent(text) {
+    const lower = text.toLowerCase();
+    return BOOKING_KEYWORDS.some(kw => lower.includes(kw));
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function getNextSlotSuggestion() {
+    const now = new Date();
+    const slots = [];
+    for (let d = 1; d <= 7; d++) {
+      const date = new Date(now);
+      date.setDate(now.getDate() + d);
+      const day = date.getDay();
+      if (day >= 1 && day <= 5) {
+        date.setHours(10, 0, 0, 0);
+        slots.push({
+          date: date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }),
+          time: '10:00 AM',
+          iso: date.toISOString()
+        });
+        if (slots.length >= 3) break;
+      }
+    }
+    return slots;
+  }
+
+  async function submitBooking(data) {
+    try {
+      const response = await fetch(BOOKING_API, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error('Booking error:', error);
+      return { success: false, message: error.message };
+    }
+  }
+
+  function handleBookingFlow(userMessage) {
+    const lower = userMessage.toLowerCase();
+    const booking = conversationContext.bookingFlow;
+
+    if (lower.includes('cancel') || lower.includes('no') || lower.includes('stop')) {
+      booking.active = false;
+      booking.step = null;
+      booking.data = { name: null, email: null, datetime: null, service: 'Consultation' };
+      return "No problem, booking cancelled. How can I help you?";
+    }
+
+    if (booking.step === 'name') {
+      const name = userMessage.trim();
+      if (name.length < 2) {
+        return "I didn't catch your name. Could you repeat it?";
+      }
+      booking.data.name = name;
+      booking.step = 'email';
+      return "Thanks " + name + "! What's your email address for the confirmation?";
+    }
+
+    if (booking.step === 'email') {
+      const email = userMessage.trim().toLowerCase();
+      if (!isValidEmail(email)) {
+        return "This email doesn't seem valid. Can you check it? (format: example@email.com)";
+      }
+      booking.data.email = email;
+      booking.step = 'datetime';
+      const slots = getNextSlotSuggestion();
+      return "Perfect! Here are the next available slots:\n\n" +
+        slots.map((s, i) => (i + 1) + ". " + s.date + " at " + s.time).join("\n") +
+        "\n\nReply with the number (1, 2, or 3).";
+    }
+
+    if (booking.step === 'datetime') {
+      const slots = getNextSlotSuggestion();
+      let selectedSlot = null;
+
+      if (lower.includes('1') || lower.includes('first')) {
+        selectedSlot = slots[0];
+      } else if (lower.includes('2') || lower.includes('second')) {
+        selectedSlot = slots[1];
+      } else if (lower.includes('3') || lower.includes('third')) {
+        selectedSlot = slots[2];
+      }
+
+      if (selectedSlot) {
+        booking.data.datetime = selectedSlot.iso;
+        booking.step = 'confirm';
+        return "Great! Here's the summary:\n\n" +
+          "Name: " + booking.data.name + "\n" +
+          "Email: " + booking.data.email + "\n" +
+          "Date: " + selectedSlot.date + " at " + selectedSlot.time + "\n\n" +
+          "Confirm this appointment? (yes/no)";
+      }
+
+      return "I didn't understand. Reply 1, 2, or 3 to choose a slot.";
+    }
+
+    if (booking.step === 'confirm') {
+      if (lower.includes('yes') || lower.includes('ok') || lower.includes('confirm')) {
+        booking.step = 'submitting';
+        return null;
+      }
+      return "Say 'yes' to confirm or 'cancel' to start over.";
+    }
+
+    return null;
+  }
+
+  async function processBookingConfirmation() {
+    const booking = conversationContext.bookingFlow;
+    const result = await submitBooking({
+      name: booking.data.name,
+      email: booking.data.email,
+      datetime: booking.data.datetime,
+      service: booking.data.service,
+      phone: '',
+      notes: 'Booking via voice assistant'
+    });
+
+    booking.active = false;
+    booking.step = null;
+
+    if (result.success) {
+      return "Your appointment is confirmed! You'll receive a confirmation email at " + booking.data.email + ".\n\nSee you soon!";
+    } else {
+      return "Sorry, there was an issue: " + result.message + "\n\nYou can book directly at /en/booking.html";
+    }
+  }
 
   // Industry detection
   function detectIndustry(text) {
@@ -575,6 +726,24 @@
   // Get intelligent response
   async function getAIResponse(userMessage) {
     const lower = userMessage.toLowerCase();
+
+    // === BOOKING FLOW - Top priority if active ===
+    if (conversationContext.bookingFlow.active) {
+      const bookingResponse = handleBookingFlow(userMessage);
+      if (conversationContext.bookingFlow.step === 'submitting') {
+        return await processBookingConfirmation();
+      }
+      if (bookingResponse) {
+        return bookingResponse;
+      }
+    }
+
+    // Detect booking intent
+    if (isBookingIntent(lower)) {
+      conversationContext.bookingFlow.active = true;
+      conversationContext.bookingFlow.step = 'name';
+      return "Great! I'll help you book an appointment.\n\nFirst, what's your name?";
+    }
 
     // Update context
     const detectedIndustry = detectIndustry(userMessage);

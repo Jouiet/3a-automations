@@ -1,10 +1,87 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-20 | Version: 7.7 (Màj Session 60 - Pricing CSS Fix + Booking System)
+## Date: 2025-12-20 | Version: 7.8 (Màj Session 60 - Voice Booking Integration)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
 # SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 60)
+
+## ✅ VOICE ASSISTANT BOOKING (Session 60)
+
+### Architecture Complète
+```
+[User] → [Voice Widget] → [Conversation Flow] → [Google Apps Script] → [Google Calendar]
+              ↓                    ↓                                  → [Email Confirm]
+         Web Speech API    Multi-step collection
+         (gratuit)         (name → email → slot → confirm)
+```
+
+### Fichiers Modifiés
+```
+voice-assistant/
+├── voice-widget.js     ← +170 lignes (booking flow FR)
+└── voice-widget-en.js  ← +160 lignes (booking flow EN)
+
+Fonctions ajoutées:
+├── isBookingIntent()           - Détection intention RDV
+├── handleBookingFlow()         - Gestion conversation multi-étapes
+├── processBookingConfirmation() - Appel API + confirmation
+├── submitBooking()             - Fetch vers Google Apps Script
+├── getNextSlotSuggestion()     - Génération créneaux disponibles
+└── isValidEmail()              - Validation email
+```
+
+### Mots-clés Booking
+```
+FR: rdv, rendez-vous, réserver, reservation, prendre rdv, booking, appel, discuter, parler
+EN: appointment, book, booking, schedule, call, meeting, talk, discuss
+```
+
+### Conversation Flow
+```
+User: "Je veux prendre un rdv"
+Bot:  "Super ! Je vais vous aider à réserver. Quel est votre nom ?"
+User: "Jean Dupont"
+Bot:  "Merci Jean Dupont ! Quelle est votre adresse email ?"
+User: "jean@example.com"
+Bot:  "Voici les prochains créneaux:
+       1. Lundi 23 décembre à 10:00
+       2. Mardi 24 décembre à 10:00
+       3. Mercredi 25 décembre à 10:00
+       Répondez avec le numéro (1, 2 ou 3)"
+User: "1"
+Bot:  "Récapitulatif:
+       Nom: Jean Dupont
+       Email: jean@example.com
+       Date: Lundi 23 décembre à 10:00
+       Confirmez-vous ? (oui/non)"
+User: "oui"
+Bot:  "Votre rendez-vous est confirmé ! Email envoyé à jean@example.com"
+```
+
+### Intégration API
+```javascript
+BOOKING_API = 'https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec'
+
+// Appel POST avec données booking
+fetch(BOOKING_API, {
+  method: 'POST',
+  headers: { 'Content-Type': 'text/plain' },
+  body: JSON.stringify({ name, email, datetime, service, notes })
+})
+```
+
+### Tests Vérifiés
+```
+✅ Syntaxe JS valide (node --check)
+✅ API Health check: {"success":true,"service":"3A Booking"}
+✅ Keywords FR: 10 mots-clés
+✅ Keywords EN: 8 mots-clés
+✅ Multi-step flow: 4 étapes
+✅ Cancel handling: "annuler", "non", "stop"
+```
+
+---
 
 ## ✅ PRICING CSS FIX (Session 59-60)
 
