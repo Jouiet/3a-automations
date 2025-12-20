@@ -11,14 +11,13 @@
 
 | Métrique | Valeur | Vérifié |
 |----------|--------|---------|
-| Total | **75** | ✅ Session 61 |
-| Scripts avec code | 45 | ✅ |
+| Total | **66** | ✅ Session 61 |
+| Scripts avec code | 36 | ✅ |
 | Templates/workflows | 30 | ✅ |
-| Klaviyo flows | 7 | ✅ |
-| n8n workflows | 3 | ✅ |
+| Outils internes exclus | 23 | ✅ |
 
-**Catégories (via sync-knowledge-base.cjs v3.1):**
-- Lead Gen: 24 | SEO: 9 | Email: 9 | Shopify: 14 | Analytics: 10 | Content: 9
+**Catégories (via sync-knowledge-base.cjs v4.0):**
+- Lead Gen: 18 | SEO: 9 | Email: 9 | Shopify: 13 | Analytics: 9 | Content: 8
 
 ---
 

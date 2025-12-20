@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 /**
  * 3A Automation - Knowledge Base Auto-Sync
- * @version 3.1.0
+ * @version 4.0.0
  * @date 2025-12-21
  *
- * Auto-discovers NEW automations and updates:
- * 1. automations-registry.json (source of truth)
- * 2. knowledge-base/data/catalog.json
- * 3. voice-assistant/knowledge.json
+ * Auto-discovers CLIENT-FACING automations only.
+ * Internal tools, tests, POCs are excluded.
  *
- * IMPORTANT: Compares by SCRIPT PATH to avoid duplicates
- *
- * Run after adding new automations:
- * node automations/agency/core/sync-knowledge-base.cjs
+ * SEGMENTATION:
+ * - agency/core/: ONLY booking files (whitelist)
+ * - clients/*: All EXCEPT test/verify/check files
+ * - generic/: All EXCEPT test/validate/module files
+ * - lib/: EXCLUDED entirely
  */
 
 const fs = require('fs');
@@ -24,12 +23,106 @@ const REGISTRY_PATH = path.join(ROOT, 'automations/automations-registry.json');
 const CATALOG_PATH = path.join(ROOT, 'knowledge-base/data/catalog.json');
 const VOICE_KB_PATH = path.join(ROOT, 'landing-page-hostinger/voice-assistant/knowledge.json');
 
-// Files to EXCLUDE (internal tools, not marketing automations)
-const EXCLUDED_PREFIXES = ['test-', 'check-', 'validate-', 'sync-', 'env-', 'forensic-'];
-const EXCLUDED_DIRS = ['node_modules', 'legacy', 'test', 'tests', '.git', 'lib'];
-const EXCLUDED_FILES = ['env-loader.cjs', 'validate-automations-registry.cjs'];
+// ============================================
+// SEGMENTATION RULES
+// ============================================
 
-// Category detection based on path/filename
+// agency/core/ - WHITELIST approach (only these are client-facing)
+const AGENCY_CORE_WHITELIST = [
+  'google-apps-script-booking.js',
+  'google-calendar-booking.cjs'
+];
+
+// Prefixes that indicate INTERNAL tools
+const EXCLUDED_PREFIXES = [
+  'test-',
+  'check-',
+  'validate-',
+  'forensic-',
+  'env-'
+  // NOTE: sync- removed because sync-*-leads-to-* are client automations
+];
+
+// Suffixes that indicate INTERNAL tools
+const EXCLUDED_SUFFIXES = [
+  '-test',
+  '-poc',
+  '-connection'  // connection tests
+];
+
+// Patterns that indicate INTERNAL tools
+const EXCLUDED_CONTAINS = [
+  'verify-',
+  'inspect-'
+];
+
+// Specific files to EXCLUDE
+const EXCLUDED_FILES = [
+  'env-loader.cjs',
+  'validate-automations-registry.cjs',
+  'geo-markets.cjs',  // Module, not standalone
+  'grok-client.cjs',  // API client library
+  'prompt-feedback-tracker.cjs',  // Internal tool
+  'sync-knowledge-base.cjs'  // This script itself
+];
+
+// Directories to EXCLUDE entirely
+const EXCLUDED_DIRS = ['node_modules', 'legacy', 'test', 'tests', '.git', 'lib'];
+
+// ============================================
+// DETECTION LOGIC
+// ============================================
+
+function isClientFacing(filename, relPath) {
+  const lower = filename.toLowerCase();
+  const dir = relPath.split('/')[0];  // First directory level
+
+  // 1. agency/core/ - WHITELIST only
+  if (relPath.startsWith('agency/core/')) {
+    return AGENCY_CORE_WHITELIST.includes(filename);
+  }
+
+  // 2. lib/ - EXCLUDE entirely
+  if (dir === 'lib') {
+    return false;
+  }
+
+  // 3. Root level files - EXCLUDE
+  if (!relPath.includes('/')) {
+    return false;
+  }
+
+  // 4. Check excluded files
+  if (EXCLUDED_FILES.includes(filename)) {
+    return false;
+  }
+
+  // 5. Check excluded prefixes
+  for (const prefix of EXCLUDED_PREFIXES) {
+    if (lower.startsWith(prefix)) {
+      return false;
+    }
+  }
+
+  // 6. Check excluded suffixes
+  const nameWithoutExt = lower.replace(/\.(cjs|js|mjs)$/, '');
+  for (const suffix of EXCLUDED_SUFFIXES) {
+    if (nameWithoutExt.endsWith(suffix)) {
+      return false;
+    }
+  }
+
+  // 7. Check excluded patterns
+  for (const pattern of EXCLUDED_CONTAINS) {
+    if (lower.includes(pattern)) {
+      return false;
+    }
+  }
+
+  // 8. clients/* and generic/* - INCLUDE if passed all checks
+  return true;
+}
+
 function detectCategory(filename, relPath) {
   const lower = filename.toLowerCase();
   const dir = relPath.toLowerCase();
@@ -42,13 +135,11 @@ function detectCategory(filename, relPath) {
   if (dir.includes('video') || lower.includes('video') || lower.includes('promo')) return 'content';
   if (lower.includes('voice') || lower.includes('booking') || lower.includes('grok')) return 'lead-gen';
   if (dir.includes('social') || lower.includes('apify') || lower.includes('hubspot')) return 'lead-gen';
-  if (dir.includes('crm') || lower.includes('crm')) return 'lead-gen';
-  if (dir.includes('geo') || lower.includes('geo')) return 'lead-gen';
+  if (dir.includes('crm') || lower.includes('crm') || lower.includes('geo-segment')) return 'lead-gen';
 
-  return 'content'; // Default
+  return 'content';
 }
 
-// Generate automation ID from filename
 function generateId(filename) {
   return filename
     .replace(/\.(cjs|js|mjs)$/, '')
@@ -56,7 +147,6 @@ function generateId(filename) {
     .toLowerCase();
 }
 
-// Generate display name from filename
 function generateName(filename) {
   return filename
     .replace(/\.(cjs|js|mjs)$/, '')
@@ -64,30 +154,14 @@ function generateName(filename) {
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
-// Check if file should be excluded
-function isExcluded(filename, relPath) {
-  if (EXCLUDED_FILES.includes(filename)) return true;
-
-  for (const prefix of EXCLUDED_PREFIXES) {
-    if (filename.toLowerCase().startsWith(prefix)) return true;
-  }
-
-  for (const dir of EXCLUDED_DIRS) {
-    if (relPath.includes(dir)) return true;
-  }
-
-  return false;
-}
-
-// Normalize path for comparison
 function normalizePath(p) {
   if (!p) return '';
   return p.replace(/\\/g, '/').toLowerCase();
 }
 
-// Scan automations directory
 function scanAutomations() {
   const found = [];
+  const excluded = [];
 
   const scanDir = (dir, relPath = '') => {
     if (!fs.existsSync(dir)) return;
@@ -96,7 +170,7 @@ function scanAutomations() {
 
     for (const item of items) {
       const fullPath = path.join(dir, item);
-      const itemRelPath = path.join(relPath, item);
+      const itemRelPath = relPath ? path.join(relPath, item) : item;
       const stat = fs.statSync(fullPath);
 
       if (stat.isDirectory()) {
@@ -104,23 +178,25 @@ function scanAutomations() {
           scanDir(fullPath, itemRelPath);
         }
       } else if (item.endsWith('.cjs') || item.endsWith('.js')) {
-        if (!isExcluded(item, relPath)) {
+        if (isClientFacing(item, itemRelPath)) {
           found.push({
             filename: item,
             relPath: itemRelPath,
-            category: detectCategory(item, relPath)
+            category: detectCategory(item, itemRelPath)
           });
+        } else {
+          excluded.push(itemRelPath);
         }
       }
     }
   };
 
   scanDir(AUTOMATIONS_DIR);
-  return found;
+  return { found, excluded };
 }
 
 function main() {
-  console.log('🔍 Auto-discovering automations...');
+  console.log('🔍 Scanning for CLIENT-FACING automations only...\n');
 
   // Read existing registry
   let registry = { automations: [], categories: {} };
@@ -128,34 +204,43 @@ function main() {
     try {
       registry = JSON.parse(fs.readFileSync(REGISTRY_PATH, 'utf8'));
     } catch (e) {
-      console.error('⚠️ Could not read registry, starting fresh');
+      console.error('⚠️ Could not read registry');
+      process.exit(1);
     }
   }
 
-  // Get existing script paths (normalized for comparison)
+  // Get existing script paths
   const existingPaths = new Set();
   for (const auto of registry.automations) {
     if (auto.script) {
       existingPaths.add(normalizePath(auto.script));
     }
   }
-
-  // Also track existing IDs to avoid conflicts
   const existingIds = new Set(registry.automations.map(a => a.id));
 
-  // Scan for new automations
-  const scanned = scanAutomations();
-  let newCount = 0;
+  // Scan
+  const { found, excluded } = scanAutomations();
 
-  for (const file of scanned) {
+  console.log(`📊 SEGMENTATION RESULTS:`);
+  console.log(`   ✅ Client-facing scripts: ${found.length}`);
+  console.log(`   ❌ Internal tools excluded: ${excluded.length}\n`);
+
+  // Show what was excluded
+  if (excluded.length > 0) {
+    console.log(`🚫 EXCLUDED (internal tools):`);
+    excluded.forEach(f => console.log(`   - ${f}`));
+    console.log('');
+  }
+
+  // Find NEW automations
+  let newCount = 0;
+  for (const file of found) {
     const normalizedPath = normalizePath(file.relPath);
 
-    // Skip if script path already exists in registry
     if (existingPaths.has(normalizedPath)) {
       continue;
     }
 
-    // Generate unique ID
     let id = generateId(file.filename);
     let counter = 1;
     while (existingIds.has(id)) {
@@ -163,7 +248,7 @@ function main() {
       counter++;
     }
 
-    console.log(`  ✅ NEW: ${file.relPath}`);
+    console.log(`   ✅ NEW: ${file.relPath}`);
 
     registry.automations.push({
       id: id,
@@ -183,10 +268,9 @@ function main() {
     newCount++;
   }
 
-  // Update totalCount
+  // Update counts
   registry.totalCount = registry.automations.length;
 
-  // Update category counts
   const catCounts = {};
   for (const auto of registry.automations) {
     catCounts[auto.category] = (catCounts[auto.category] || 0) + 1;
@@ -197,14 +281,13 @@ function main() {
     }
   }
 
-  // Update stats
   registry.stats = registry.stats || {};
   registry.stats.withScript = registry.automations.filter(a => a.script).length;
   registry.stats.withoutScript = registry.automations.filter(a => !a.script).length;
 
-  // Save registry
+  // Save
   fs.writeFileSync(REGISTRY_PATH, JSON.stringify(registry, null, 2));
-  console.log(`\n📦 Registry: ${registry.totalCount} automations (${newCount} new discovered)`);
+  console.log(`\n📦 Registry: ${registry.totalCount} automations (${newCount} new)`);
 
   // Generate voice knowledge
   const grouped = {};
@@ -234,16 +317,12 @@ function main() {
     }
   };
 
-  // Ensure directories exist
   const voiceDir = path.dirname(VOICE_KB_PATH);
   if (!fs.existsSync(voiceDir)) fs.mkdirSync(voiceDir, { recursive: true });
+  fs.writeFileSync(VOICE_KB_PATH, JSON.stringify(voiceKB, null, 2));
+
   const catalogDir = path.dirname(CATALOG_PATH);
   if (!fs.existsSync(catalogDir)) fs.mkdirSync(catalogDir, { recursive: true });
-
-  fs.writeFileSync(VOICE_KB_PATH, JSON.stringify(voiceKB, null, 2));
-  console.log(`✅ Updated ${VOICE_KB_PATH}`);
-
-  // Update catalog
   const catalog = {
     version: new Date().toISOString().split('T')[0],
     generated: new Date().toISOString(),
@@ -252,14 +331,14 @@ function main() {
     automations: registry.automations
   };
   fs.writeFileSync(CATALOG_PATH, JSON.stringify(catalog, null, 2));
-  console.log(`✅ Updated ${CATALOG_PATH}`);
 
-  // Summary
-  console.log('\n📊 By category:');
+  console.log(`✅ Updated knowledge.json + catalog.json`);
+
+  console.log('\n📊 BY CATEGORY:');
   for (const [cat, items] of Object.entries(grouped)) {
-    console.log(`  ${cat}: ${items.length}`);
+    console.log(`   ${cat}: ${items.length}`);
   }
-  console.log(`\n🎯 Total: ${registry.totalCount} marketing automations`);
+  console.log(`\n🎯 TOTAL: ${registry.totalCount} client-facing automations`);
 }
 
 main();

@@ -1,9 +1,9 @@
 {
   "version": "2025-12-20",
-  "generated": "2025-12-20T23:12:42.732Z",
-  "totalAutomations": 75,
+  "generated": "2025-12-20T23:22:06.381Z",
+  "totalAutomations": 66,
   "categories": 6,
-  "summary": "3A Automation dispose de 75 automatisations dans 6 catégories.",
+  "summary": "3A Automation dispose de 66 automatisations dans 6 catégories.",
   "automationsByCategory": {
     "Lead Generation & Acquisition": [
       "Sync Meta Leads → Shopify",
@@ -18,18 +18,12 @@
       "Scraping Google Maps",
       "Scraping LinkedIn",
       "Scraping Recruteurs",
-      "Voice AI + Réservation",
+      "Google Apps Script Booking",
       "Google Calendar Booking",
-      "Grok Client",
-      "Grok Voice Poc",
       "Geo Segment Generic",
       "Import Facebook Lead Ads",
       "Segment Leads",
-      "Apify Inspect Raw Data",
-      "Apify Verify Connection",
-      "Enable Apify Schedulers",
-      "Verify Hubspot Status",
-      "Geo Markets"
+      "Enable Apify Schedulers"
     ],
     "SEO & Contenu": [
       "Correction Alt Text Images",
@@ -66,7 +60,6 @@
       "Audit Shopify Store",
       "Create Warehouse Metafield",
       "Import Taxonomy Metafield",
-      "Import Taxonomy Test",
       "Parse Warehouse Csv"
     ],
     "Analytics & Reporting": [
@@ -78,8 +71,7 @@
       "Analyse Inventaire",
       "Suivi BNPL Performance",
       "Vérification Pixels",
-      "Analyze Ga4 Conversion Source",
-      "Verify Facebook Pixel Native"
+      "Analyze Ga4 Conversion Source"
     ],
     "Contenu & Vidéo": [
       "Vidéo Promo Produit",
@@ -89,7 +81,6 @@
       "Diagnostic GMC",
       "Article Blog Auto",
       "Workflow n8n Complet",
-      "Prompt Feedback Tracker",
       "Generate All Promo Videos"
     ]
   },
