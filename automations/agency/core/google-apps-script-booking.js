@@ -162,23 +162,72 @@ function doGet(e) {
   }
 }
 
+/**
+ * Helper: Check if a time falls within business hours (supports overnight)
+ * @param {number} hour - Hour to check (0-23)
+ * @param {Object} businessHours - {start: HH, end: HH} where end can be >24
+ * @returns {boolean}
+ *
+ * Examples:
+ * - {start: 11, end: 23} = 11:00 AM to 11:00 PM (same day)
+ * - {start: 11, end: 25} = 11:00 AM to 1:00 AM next day (overnight)
+ * - {start: 20, end: 28} = 8:00 PM to 4:00 AM next day (nightclub)
+ */
+function isWithinBusinessHours(hour, dayOfWeek, isNextDay) {
+  var hours = CONFIG.BUSINESS_HOURS[dayOfWeek];
+  if (!hours) return false;
+
+  var checkHour = isNextDay ? hour + 24 : hour;
+
+  // If end > 24, it means overnight operation
+  if (hours.end > 24) {
+    // For current day: start <= hour < 24
+    // For next day (after midnight): 0 <= hour < (end - 24)
+    if (isNextDay) {
+      return hour < (hours.end - 24);
+    } else {
+      return hour >= hours.start;
+    }
+  } else {
+    // Normal hours (same day)
+    return !isNextDay && hour >= hours.start && hour < hours.end;
+  }
+}
+
 function isSlotAvailable(startTime, endTime) {
   var calendar = CalendarApp.getCalendarById(CONFIG.CALENDAR_ID) || CalendarApp.getDefaultCalendar();
   var events = calendar.getEvents(startTime, endTime);
 
+  var startHour = startTime.getHours();
   var dayOfWeek = startTime.getDay();
   var hours = CONFIG.BUSINESS_HOURS[dayOfWeek];
 
-  // Day closed
-  if (!hours) return false;
+  // Check if this slot might be part of previous day's overnight hours
+  var prevDayOfWeek = (dayOfWeek + 6) % 7; // Previous day
+  var prevHours = CONFIG.BUSINESS_HOURS[prevDayOfWeek];
 
-  var startHour = startTime.getHours();
-  var endHour = endTime.getHours();
+  var isValid = false;
 
-  // Outside business hours
-  if (startHour < hours.start || endHour > hours.end) {
-    return false;
+  // Check current day's hours
+  if (hours) {
+    if (hours.end > 24) {
+      // Overnight: valid if after opening
+      isValid = startHour >= hours.start;
+    } else {
+      // Normal hours
+      isValid = startHour >= hours.start && startHour < hours.end;
+    }
   }
+
+  // Check if this is continuation of previous day's overnight hours
+  if (!isValid && prevHours && prevHours.end > 24) {
+    var overnightEnd = prevHours.end - 24;
+    if (startHour < overnightEnd) {
+      isValid = true;
+    }
+  }
+
+  if (!isValid) return false;
 
   // Check minimum notice
   var now = new Date();
@@ -205,6 +254,13 @@ function isSlotAvailable(startTime, endTime) {
   return events.length === 0;
 }
 
+/**
+ * Get available slots supporting overnight hours
+ *
+ * For overnight businesses (end > 24):
+ * - {start: 11, end: 25} = 11:00 AM to 1:00 AM next day
+ * - {start: 20, end: 28} = 8:00 PM to 4:00 AM next day
+ */
 function getAvailableSlots(days) {
   var calendar = CalendarApp.getCalendarById(CONFIG.CALENDAR_ID) || CalendarApp.getDefaultCalendar();
   var slots = [];
@@ -227,15 +283,30 @@ function getAvailableSlots(days) {
 
     if (!hours) continue;
 
+    // Calculate actual end hour (handle overnight)
+    var effectiveEndHour = hours.end;
+    var extendsToNextDay = hours.end > 24;
+
+    // For calendar events, we need to account for overnight
     var dayStart = new Date(date);
     dayStart.setHours(hours.start, 0, 0, 0);
 
     var dayEnd = new Date(date);
-    dayEnd.setHours(hours.end, 0, 0, 0);
+    if (extendsToNextDay) {
+      // Set to next day at the overflow hour
+      dayEnd.setDate(dayEnd.getDate() + 1);
+      dayEnd.setHours(hours.end - 24, 0, 0, 0);
+    } else {
+      dayEnd.setHours(hours.end, 0, 0, 0);
+    }
 
     var events = calendar.getEvents(dayStart, dayEnd);
 
-    for (var h = hours.start; h < hours.end; h++) {
+    // Generate slots for the day
+    for (var h = hours.start; h < effectiveEndHour; h++) {
+      // Actual hour on clock (0-23)
+      var actualHour = h >= 24 ? h - 24 : h;
+
       // Check recurring blocked slots
       var isBlockedHour = false;
       for (var b = 0; b < CONFIG.BLOCKED_RECURRING.length; b++) {
@@ -249,7 +320,14 @@ function getAvailableSlots(days) {
 
       for (var m = 0; m < 60; m += CONFIG.SLOT_DURATION) {
         var slotStart = new Date(date);
-        slotStart.setHours(h, m, 0, 0);
+
+        // If hour >= 24, this slot is on the next calendar day
+        if (h >= 24) {
+          slotStart.setDate(slotStart.getDate() + 1);
+          slotStart.setHours(actualHour, m, 0, 0);
+        } else {
+          slotStart.setHours(h, m, 0, 0);
+        }
 
         // Skip if before minimum notice time
         if (slotStart < minNotice) continue;
@@ -266,13 +344,14 @@ function getAvailableSlots(days) {
           }
         }
 
-        if (isAvailable && slotEnd.getHours() <= hours.end) {
+        if (isAvailable) {
           slots.push({
             date: Utilities.formatDate(slotStart, CONFIG.TIMEZONE, "yyyy-MM-dd"),
             time: Utilities.formatDate(slotStart, CONFIG.TIMEZONE, "HH:mm"),
             start: slotStart.toISOString(),
             end: slotEnd.toISOString(),
-            dayName: Utilities.formatDate(slotStart, CONFIG.TIMEZONE, "EEEE")
+            dayName: Utilities.formatDate(slotStart, CONFIG.TIMEZONE, "EEEE"),
+            overnight: h >= 24 // Flag if this is an overnight slot
           });
         }
       }
@@ -492,6 +571,62 @@ var CONFIG_TEMPLATES = {
       6: { start: 20, end: 28 }   // Samedi 20h - Dimanche 4h
     },
     BLOCKED_RECURRING: []
+  },
+
+  // RESTAURANT AVEC ALCOOL (11h-1h30, fermé Lundi)
+  // end: 25.5 = 1:30 AM next day
+  restaurantBar: {
+    BUSINESS_HOURS: {
+      0: { start: 11, end: 25 },  // Dimanche 11h - Lundi 1h
+      1: null,                     // Lundi fermé
+      2: { start: 11, end: 25 },  // Mardi 11h - Mercredi 1h
+      3: { start: 11, end: 25 },  // Mercredi 11h - Jeudi 1h
+      4: { start: 11, end: 26 },  // Jeudi 11h - Vendredi 2h
+      5: { start: 11, end: 26 },  // Vendredi 11h - Samedi 2h
+      6: { start: 11, end: 26 }   // Samedi 11h - Dimanche 2h
+    },
+    BLOCKED_RECURRING: [
+      { day: 2, start: 15, end: 18 },
+      { day: 3, start: 15, end: 18 },
+      { day: 4, start: 15, end: 18 },
+      { day: 5, start: 15, end: 18 },
+      { day: 6, start: 15, end: 18 },
+      { day: 0, start: 15, end: 18 }
+    ]
+  },
+
+  // FAST FOOD / KEBAB (10h-2h, tous les jours)
+  fastFood: {
+    BUSINESS_HOURS: {
+      0: { start: 10, end: 26 },  // 10h - 2h
+      1: { start: 10, end: 26 },
+      2: { start: 10, end: 26 },
+      3: { start: 10, end: 26 },
+      4: { start: 10, end: 27 },  // Jeudi prolongé jusqu'à 3h
+      5: { start: 10, end: 27 },  // Vendredi prolongé jusqu'à 3h
+      6: { start: 10, end: 27 }   // Samedi prolongé jusqu'à 3h
+    },
+    BLOCKED_RECURRING: []  // Pas de pause (service continu)
+  },
+
+  // BOULANGERIE (6h-20h, fermé Lundi)
+  bakery: {
+    BUSINESS_HOURS: {
+      0: { start: 7, end: 19 },   // Dimanche matin
+      1: null,                     // Lundi fermé
+      2: { start: 6, end: 20 },
+      3: { start: 6, end: 20 },
+      4: { start: 6, end: 20 },
+      5: { start: 6, end: 20 },
+      6: { start: 6, end: 20 }
+    },
+    BLOCKED_RECURRING: [
+      { day: 2, start: 13, end: 15 },  // Pause l'après-midi
+      { day: 3, start: 13, end: 15 },
+      { day: 4, start: 13, end: 15 },
+      { day: 5, start: 13, end: 15 },
+      { day: 6, start: 13, end: 15 }
+    ]
   }
 };
 
