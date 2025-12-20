@@ -199,6 +199,7 @@ VPS Hostinger (ID: 1168256)
 2. **Shopify Dev Store** - https://partners.shopify.com
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
+5. **Fusionner CSS** - styles.css + styles-lite.css → 1 seul fichier (éviter bugs duplication)
 
 ## SESSION 41 COMPLÉTÉE ✅ (19/12/2025 - Voice Widget 100% Fix)
 
