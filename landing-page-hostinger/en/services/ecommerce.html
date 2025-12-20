@@ -33,12 +33,46 @@
   <link rel="preload" href="../../styles.min.css?v=4.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="../../styles.min.css?v=4.0"></noscript>
 
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-WLVJQC3M');</script>
+  <!-- Google Tag Manager + GA4 - Lazy Loaded for Performance -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    // Lazy load GTM + GA4 after user interaction or 3s delay
+    (function() {
+      var loaded = false;
+      function loadAnalytics() {
+        if (loaded) return;
+        loaded = true;
+
+        // Load GTM
+        var gtmScript = document.createElement('script');
+        gtmScript.async = true;
+        gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-WLVJQC3M';
+        document.head.appendChild(gtmScript);
+        window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+
+        // Load GA4
+        var ga4Script = document.createElement('script');
+        ga4Script.async = true;
+        ga4Script.src = 'https://www.googletagmanager.com/gtag/js?id=G-87F6FDJG45';
+        ga4Script.onload = function() {
+          gtag('js', new Date());
+          gtag('config', 'G-87F6FDJG45', {
+            'anonymize_ip': true,
+            'cookie_flags': 'SameSite=None;Secure'
+          });
+        };
+        document.head.appendChild(ga4Script);
+      }
+
+      // Load on user interaction (scroll, click, touch) or after 3s
+      ['scroll', 'click', 'touchstart', 'keydown'].forEach(function(evt) {
+        window.addEventListener(evt, loadAnalytics, {once: true, passive: true});
+      });
+      setTimeout(loadAnalytics, 3000);
+    })();
+  </script>
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-87F6FDJG45"></script>
