@@ -1,40 +1,20 @@
 /**
- * 3A Automation - Geo-Locale & Currency Module
- * Auto-detects user location and applies appropriate language/currency
- * Includes real-time currency conversion
+ * 3A Automation - Geo-Locale Module
+ * Auto-detects user location and applies appropriate language
+ * Prices are fixed per currency (no dynamic conversion)
  *
  * Markets:
  * - Morocco/Maghreb: French + MAD
  * - Europe: French + EUR
  * - International: English + USD
  *
- * @version 2.0.0
- * @date 2025-12-19
+ * @version 3.0.0
+ * @date 2025-12-20
  */
 (function() {
   'use strict';
 
   const GeoLocale = {
-    // Exchange rates (base: EUR) - Updated 2025-12-20
-    // Adjusted for fixed pricing tiers
-    exchangeRates: {
-      EUR: 1.00,
-      USD: 1.15,
-      MAD: 10.25,
-      GBP: 0.85
-    },
-
-    // Rate cache key
-    ratesKey: '3a-exchange-rates',
-    ratesCacheMs: 24 * 60 * 60 * 1000, // 24 hours
-
-    // Currency symbols
-    currencySymbols: {
-      EUR: '€',
-      USD: '$',
-      MAD: 'DH',
-      GBP: '£'
-    },
 
     // Country to locale mapping
     locales: {
@@ -92,49 +72,6 @@
 
     // Storage key
     storageKey: '3a-locale',
-
-    /**
-     * Convert amount from EUR to target currency
-     */
-    convert(amountEUR, toCurrency) {
-      const rate = this.exchangeRates[toCurrency] || 1;
-      return Math.round(amountEUR * rate);
-    },
-
-    /**
-     * Format price with currency symbol
-     */
-    formatPrice(amount, currency) {
-      const symbol = this.currencySymbols[currency] || currency;
-      if (currency === 'MAD') {
-        return `${amount.toLocaleString('fr-MA')} ${symbol}`;
-      } else if (currency === 'EUR') {
-        return `${amount.toLocaleString('fr-FR')}${symbol}`;
-      } else {
-        return `${symbol}${amount.toLocaleString('en-US')}`;
-      }
-    },
-
-    /**
-     * Get converted and formatted price
-     */
-    getPrice(amountEUR, currency) {
-      const converted = this.convert(amountEUR, currency);
-      return this.formatPrice(converted, currency);
-    },
-
-    /**
-     * Update all prices on page based on currency
-     * Elements should have data-price-eur attribute with EUR value
-     */
-    updatePrices(currency) {
-      document.querySelectorAll('[data-price-eur]').forEach(el => {
-        const eurAmount = parseFloat(el.dataset.priceEur);
-        if (!isNaN(eurAmount)) {
-          el.textContent = this.getPrice(eurAmount, currency);
-        }
-      });
-    },
 
     /**
      * Detect country from IP using ipapi.co (free, no API key)
@@ -197,7 +134,6 @@
       locale.currency = currency;
       locale.source = 'manual';
       this.saveLocale(locale);
-      this.updatePrices(currency);
       document.dispatchEvent(new CustomEvent('currency-changed', { detail: { currency } }));
     },
 
@@ -208,7 +144,6 @@
       // Priority 1: Saved preference
       const saved = this.getSavedLocale();
       if (saved) {
-        this.updatePrices(saved.currency);
         return saved;
       }
 
@@ -219,7 +154,6 @@
         locale.country = country;
         locale.source = 'geo';
         this.saveLocale(locale);
-        this.updatePrices(locale.currency);
         return locale;
       }
 
@@ -229,7 +163,6 @@
         ? { lang: 'fr', currency: 'EUR', region: 'europe', source: 'browser' }
         : { ...this.defaultLocale, source: 'default' };
 
-      this.updatePrices(locale.currency);
       return locale;
     },
 
