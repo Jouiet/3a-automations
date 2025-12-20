@@ -1,87 +1,96 @@
 {
   "version": "2025-12-20",
-  "generated": "2025-12-20T22:50:16.927Z",
-  "totalAutomations": 60,
-  "categories": 9,
-  "summary": "3A Automation dispose de 60 automatisations dans 9 catégories.",
+  "generated": "2025-12-20T23:12:42.732Z",
+  "totalAutomations": 75,
+  "categories": 6,
+  "summary": "3A Automation dispose de 75 automatisations dans 6 catégories.",
   "automationsByCategory": {
-    "General Automation": [
-      "Check Env Status",
-      "Forensic Api Test",
+    "Lead Generation & Acquisition": [
+      "Sync Meta Leads → Shopify",
+      "Sync Google Ads → Shopify",
+      "Sync TikTok Leads → Shopify",
+      "Qualification & Scoring",
+      "Segmentation HOT/WARM/COLD",
+      "Enrichissement Données",
+      "Geo-Segmentation",
+      "Google Forms → CRM",
+      "Typeform → Klaviyo",
+      "Scraping Google Maps",
+      "Scraping LinkedIn",
+      "Scraping Recruteurs",
+      "Voice AI + Réservation",
+      "Google Calendar Booking",
       "Grok Client",
-      "Prompt Feedback Tracker",
-      "Sync Knowledge Base",
-      "Test Env",
-      "Test Ga4",
-      "Test Gemini",
-      "Test Google Auth",
-      "Test Google Sheets",
+      "Grok Voice Poc",
+      "Geo Segment Generic",
+      "Import Facebook Lead Ads",
+      "Segment Leads",
       "Apify Inspect Raw Data",
       "Apify Verify Connection",
       "Enable Apify Schedulers",
       "Verify Hubspot Status",
-      "Convert Video Portrait",
-      "Generate All Promo Videos",
-      "Generate Promo Video",
-      "Scrape Google Maps Businesses",
-      "Scrape Hiring Companies",
-      "Scrape Linkedin Profiles",
-      "Test All Apis",
-      "Validate All Automations",
-      "Env Loader",
-      "Validate Automations Registry"
+      "Geo Markets"
     ],
-    "Voice AI & Booking": [
-      "Google Apps Script Booking",
-      "Google Calendar Booking",
-      "Grok Voice Poc"
-    ],
-    "Analytics & Reporting": [
-      "Analyze Ga4 Conversion Source",
-      "Analyze Ga4 Source",
-      "Audit Tiktok Pixel Config",
-      "Check Pixel Status",
-      "Track Bnpl Performance",
-      "Verify Facebook Pixel Native"
-    ],
-    "CRM & Customer Data": [
-      "Geo Segment Generic"
-    ],
-    "Email/SMS Marketing": [
-      "Audit Klaviyo Flows V2",
-      "Audit Klaviyo Flows",
-      "Geo Segment Profiles",
-      "Rotation Email",
-      "Test Klaviyo Connection",
-      "Sync Google Forms To Klaviyo"
-    ],
-    "Lead Generation & Acquisition": [
-      "Import Facebook Lead Ads",
-      "Segment Leads",
-      "Sync Google Ads Leads To Shopify",
-      "Sync Meta Leads To Shopify",
-      "Sync Tiktok Ads Leads To Shopify"
-    ],
-    "SEO & Content": [
-      "Fix Missing Alt Text",
+    "SEO & Contenu": [
+      "Correction Alt Text Images",
+      "Meta Tags Automatiques",
+      "Sitemap Images",
+      "Schema.org Produits",
+      "Internal Linking",
+      "llms.txt (AEO)",
       "Generate Tags Csv",
-      "Generate Image Sitemap",
       "Import Alt Text Api",
       "Upload Llms"
     ],
-    "E-commerce Automation": [
-      "Audit Shopify Complete",
+    "Email Marketing (CRM)": [
+      "Welcome Series",
+      "Abandoned Cart",
+      "Browse Abandonment",
+      "Post-Achat",
+      "Win-Back",
+      "VIP Tiers",
+      "Audit Flows Complet",
+      "Rotation A/B Sender",
+      "Audit Klaviyo Flows V2"
+    ],
+    "Shopify Admin": [
+      "Enrichissement Produits",
+      "Google Shopping Attributes",
+      "Gestion Collections",
+      "Pages Légales",
+      "Installation GTM",
+      "Webhooks Loyalty",
+      "Audit Store Complet",
+      "Export → Facebook Audiences",
+      "Import Taxonomie Google",
       "Audit Shopify Store",
       "Create Warehouse Metafield",
-      "Export Shopify Customers Facebook",
       "Import Taxonomy Metafield",
       "Import Taxonomy Test",
-      "Import Taxonomy Via Api",
-      "Parse Warehouse Csv",
-      "Test Shopify Connection"
+      "Parse Warehouse Csv"
     ],
-    "Geo-Targeting & i18n": [
-      "Geo Markets"
+    "Analytics & Reporting": [
+      "Dashboard Looker Studio",
+      "Rapport Sources GA4",
+      "Audit Système Complet",
+      "Alerte Stock Bas",
+      "Projections Marges",
+      "Analyse Inventaire",
+      "Suivi BNPL Performance",
+      "Vérification Pixels",
+      "Analyze Ga4 Conversion Source",
+      "Verify Facebook Pixel Native"
+    ],
+    "Contenu & Vidéo": [
+      "Vidéo Promo Produit",
+      "Vidéo Cart Recovery",
+      "Vidéo Format Portrait",
+      "Feed Google Shopping",
+      "Diagnostic GMC",
+      "Article Blog Auto",
+      "Workflow n8n Complet",
+      "Prompt Feedback Tracker",
+      "Generate All Promo Videos"
     ]
   },
   "packs": {

@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 9.1 | Dernière mise à jour: 2025-12-20 (Session 61 - Voice AI Marketing Strategy)
+## Version: 9.2 | Dernière mise à jour: 2025-12-20 (Session 61 - Voice AI Booking Complete)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -11,19 +11,18 @@
 
 | Métrique | Valeur | Vérifié |
 |----------|--------|---------|
-| Total | **51** | ✅ Session 61 |
-| FR Catalog | 51 | ✅ |
-| EN Catalog | 51 | ✅ |
-| Scripts .cjs | 20 | ✅ |
-| Klaviyo flows | 5 | ✅ |
+| Total | **75** | ✅ Session 61 |
+| Scripts avec code | 45 | ✅ |
+| Templates/workflows | 30 | ✅ |
+| Klaviyo flows | 7 | ✅ |
 | n8n workflows | 3 | ✅ |
 
-**Catégories:**
-- Lead Gen: 13 (+Voice Booking) | SEO: 6 | Email: 8 | Shopify: 9 | Analytics: 8 | Content: 7
+**Catégories (via sync-knowledge-base.cjs v3.1):**
+- Lead Gen: 24 | SEO: 9 | Email: 9 | Shopify: 14 | Analytics: 10 | Content: 9
 
 ---
 
-## SESSION 61 COMPLÉTÉE ✅ (20/12/2025 - Voice AI Marketing Strategy)
+## SESSION 61 COMPLÉTÉE ✅ (20/12/2025 - Voice AI Booking Complete)
 
 ### Voice AI Booking = BONUS MARKETING
 - **Stratégie:** Inclus GRATUIT dans TOUS les packs (Quick Win, Essentials, Growth)
@@ -49,6 +48,14 @@ Growth (1399€):    + BONUS Voice AI + Booking + WhatsApp + Rappels
 └─────────────────────────────────────────────────────────────┘
 ```
 
+### Booking System 100% Flexible (Research 2025)
+Basé sur recherche Cal.com v5.5 + Google Calendar 2025:
+- **CONFIG.BUSINESS_HOURS:** Client configure SES propres heures
+- **Overnight support:** end > 24 (ex: 20h-4h = {start:20, end:28})
+- **BLOCKED_RECURRING:** Pauses personnalisables
+- **NO hardcoded templates:** Supprimés (was 9 sector templates)
+- **Real-time slots:** Google Calendar API + 5min cache
+
 ### WhatsApp > SMS (Décision Session 61)
 | Critère | SMS (Twilio) | WhatsApp |
 |---------|--------------|----------|
@@ -56,11 +63,15 @@ Growth (1399€):    + BONUS Voice AI + Booking + WhatsApp + Rappels
 | Open rate | 20% | 98% |
 | Maroc/Maghreb | Rare | Dominant |
 
-### Commits Session 61
+### Commits Session 61 (8 total)
 ```
-15ecc28 feat(marketing): Add Voice Booking automation to catalog (50→51)
-d7e1398 feat(marketing): Update 50→51 automations + Voice AI messaging
+060ceef fix(booking): Remove hardcoded templates - 100% flexible
+0733b40 fix(booking): Full overnight hours support (11h-2AM)
+3f0be74 feat(voice-booking): Real-time calendar + GA4 + Flywheel
+33576da docs: Session 61 - Voice AI Marketing Strategy updates
 ce82e83 feat(pricing): Add Voice AI Booking as BONUS in ALL packs
+d7e1398 feat(marketing): Update 50→51 automations + Voice AI messaging
+15ecc28 feat(marketing): Add Voice Booking automation to catalog
 ```
 
 ---
