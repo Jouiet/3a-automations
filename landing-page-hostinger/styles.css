@@ -2353,57 +2353,61 @@ body.lite {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     FLYWHEEL SECTION MOBILE - Optimized to prevent overlap
-     Wheel 320px with stage 75px = safe margin between stages
+     FLYWHEEL SECTION MOBILE - +10% enlarged
+     Wheel 350px with stage 82px
      ═══════════════════════════════════════════════════════════════════════════ */
   .flywheel-section {
     padding: var(--spacing-2xl) 0;
   }
 
   .flywheel-wheel {
-    width: 320px;
-    height: 320px;
+    width: 350px;
+    height: 350px;
     margin: 0 auto;
   }
 
   .flywheel-stage {
-    width: 75px;
+    width: 82px;
     padding: var(--spacing-xs);
   }
 
   .stage-icon {
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     margin-bottom: var(--spacing-xs);
   }
 
   .stage-icon svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 
   .stage-label {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     line-height: 1.2;
   }
 
   .stage-count {
-    font-size: 0.55rem;
+    font-size: 0.6rem;
     margin-top: 2px;
   }
 
   .flywheel-arrows {
-    width: 260px;
-    height: 260px;
+    width: 285px;
+    height: 285px;
   }
 
   .flywheel-center-hub {
-    width: 70px;
-    height: 70px;
+    width: 77px;
+    height: 77px;
   }
 
   .hub-label {
-    font-size: 0.6rem;
+    font-size: 0.66rem;
+  }
+
+  .hub-text {
+    font-size: 1.1rem;
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
