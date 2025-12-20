@@ -989,12 +989,12 @@ PRÉREQUIS:
 │                    ACCOMPLISSEMENTS SESSION 49                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│   ✅ MOBILE OPTIMIZATION COMPLÈTE                                           │
+│   ✅ MOBILE OPTIMIZATION + FORENSIC FIX                                     │
 │                                                                              │
-│   1. Orbital Animation -5%:                                                  │
-│      • hero-visual: 390px → 370px                                           │
-│      • tech-orbital: 350px → 332px                                          │
-│      • scale: 0.98 → 0.93                                                   │
+│   1. Orbital Animation (restauré):                                           │
+│      • hero-visual: 390px (taille originale)                                │
+│      • tech-orbital: 350px, scale 0.98                                      │
+│      • margin-top: 20px (évite overlap header)                              │
 │                                                                              │
 │   2. Process Timeline -20%:                                                  │
 │      • step-marker: 50px → 40px                                             │
@@ -1002,19 +1002,25 @@ PRÉREQUIS:
 │      • step-content h3: 1rem → 0.85rem                                      │
 │      • step-content p: 0.85rem → 0.7rem                                     │
 │                                                                              │
-│   3. Mobile Centering Fix:                                                   │
-│      • Containers: padding left/right avec spacing-md                        │
-│      • Hero content: text-align center, align-items center                   │
-│      • All sections: services, flywheel, process, CTA centered              │
-│      • Section headers: margin auto                                          │
+│   3. FORENSIC ANALYSIS - Bug centrage identifié:                            │
+│      ┌─────────────────────────────────────────────────────────────────────┐│
+│      │ PROBLÈME:                                                           ││
+│      │ ├── HTML utilise: class="hero-ultra-content" (index.html:156)       ││
+│      │ ├── CSS ciblait: .hero-content (INCORRECT)                          ││
+│      │ └── RÉSULTAT: Centrage ne s'appliquait pas!                         ││
+│      │                                                                      ││
+│      │ SOLUTION:                                                            ││
+│      │ └── CSS corrigé: cible maintenant .hero-ultra-content               ││
+│      └─────────────────────────────────────────────────────────────────────┘│
 │                                                                              │
 │   CSS SIZES:                                                                 │
-│   • styles.css: 126KB                                                       │
+│   • styles.css: 127KB                                                       │
 │   • styles.min.css: 85KB                                                    │
 │                                                                              │
 │   COMMITS SESSION 49:                                                        │
 │   • fdac0d3 - Comprehensive homepage mobile UX improvements                  │
 │   • ed96481 - Orbital -5%, Timeline -20%, containers centered               │
+│   • f9009a6 - Restore orbital + correct centering selectors (FORENSIC)      │
 │                                                                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                    ACTIONS PRIORITAIRES POST-SESSION 49                      │
@@ -1039,6 +1045,6 @@ PRÉREQUIS:
 ---
 
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 20 Décembre 2025 (Session 49 - Mobile Optimization)
+**Mis à jour:** 20 Décembre 2025 (Session 49 - Mobile + Forensic Fix)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
