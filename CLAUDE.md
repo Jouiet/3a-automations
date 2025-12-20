@@ -201,23 +201,36 @@ VPS Hostinger (ID: 1168256)
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 5. ~~Fusionner CSS~~ ✅ FAIT - styles.min.css (82KB minifié)
 
-## SESSION 49 COMPLÉTÉE ✅ (20/12/2025 - Mobile Optimization)
+## SESSION 49 COMPLÉTÉE ✅ (20/12/2025 - Mobile Optimization + Forensic Fix)
 
 | Tâche | Statut | Détails |
 |-------|--------|---------|
-| Orbital -5% mobile | ✅ | 390px→370px, scale 0.98→0.93 |
+| Orbital restauré | ✅ | 390px, scale 0.98 (taille originale) |
+| Orbital repositionné | ✅ | margin-top: 20px (évite header) |
 | Process Timeline -20% | ✅ | step-marker 50px→40px, fonts réduits |
-| Containers centrés | ✅ | Toutes sections centrées sur mobile |
-| CSS minifié | ✅ | 126KB → 85KB |
+| Containers centrés | ✅ | Sélecteur corrigé: .hero-ultra-content |
+| CSS minifié | ✅ | 127KB → 85KB |
+
+**FORENSIC ANALYSIS - Bug centrage identifié:**
+```
+PROBLÈME:
+├── HTML utilise: class="hero-ultra-content" (index.html:156)
+├── CSS ciblait: .hero-content, .hero-content-ultra (INCORRECT)
+└── RÉSULTAT: Centrage ne s'appliquait pas!
+
+SOLUTION:
+└── CSS corrigé: cible maintenant .hero-ultra-content
+```
 
 **Changements CSS mobile (768px):**
-- Orbital animation: `height: 370px`, `max-width: 370px`, `scale: 0.93`
+- Orbital: `height: 390px`, `max-width: 390px`, `scale: 0.98`, `margin: 20px auto`
 - Process timeline: step-marker `40px`, fonts `-20%`
-- Mobile centering block: containers, sections, headers, CTA
+- Centering: `.hero-ultra-content` (sélecteur correct)
 
 **Commits Session 49:**
 - `fdac0d3` feat(mobile): Comprehensive homepage mobile UX improvements
 - `ed96481` fix(mobile): Orbital -5%, Timeline -20%, containers centered
+- `f9009a6` fix(mobile): Restore orbital size + correct centering selectors
 
 ---
 
