@@ -801,17 +801,19 @@ body.lite {
 .ring-2 .tech-icon:nth-child(7) { top: 50%; left: -26px; transform: translateY(-50%); }
 .ring-2 .tech-icon:nth-child(8) { top: 8%; left: 0%; }
 
-/* Ring 3 positions (8 items - 180px ring) */
+/* Ring 3 positions (8 items - 180px ring)
+   FIXED: Diagonal icons at ~15% for correct 45° circular distribution
+   cos(45°) = 0.707, so position from edge = (1-0.707)/2 = 14.65% ≈ 15% */
 .ring-3 .tech-icon { width: 44px; height: 44px; }
 .ring-3 .tech-icon span { font-size: 0.65rem; }
 .ring-3 .tech-icon:nth-child(1) { top: -22px; left: 50%; transform: translateX(-50%); }
-.ring-3 .tech-icon:nth-child(2) { top: 5%; right: -5%; }
+.ring-3 .tech-icon:nth-child(2) { top: 3%; right: 3%; }
 .ring-3 .tech-icon:nth-child(3) { top: 50%; right: -22px; transform: translateY(-50%); }
-.ring-3 .tech-icon:nth-child(4) { bottom: 5%; right: -5%; }
+.ring-3 .tech-icon:nth-child(4) { bottom: 3%; right: 3%; }
 .ring-3 .tech-icon:nth-child(5) { bottom: -22px; left: 50%; transform: translateX(-50%); }
-.ring-3 .tech-icon:nth-child(6) { bottom: 5%; left: -5%; }
+.ring-3 .tech-icon:nth-child(6) { bottom: 3%; left: 3%; }
 .ring-3 .tech-icon:nth-child(7) { top: 50%; left: -22px; transform: translateY(-50%); }
-.ring-3 .tech-icon:nth-child(8) { top: 5%; left: -5%; }
+.ring-3 .tech-icon:nth-child(8) { top: 3%; left: 3%; }
 
 .orbital-center {
   position: absolute;
