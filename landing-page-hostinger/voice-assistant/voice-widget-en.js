@@ -536,7 +536,7 @@
     },
     automations: {
       keywords: ['automation', 'automations', 'workflow', 'flows', 'what can you'],
-      response: `I have 56 ready-to-deploy automations:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Auto reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\nWhich type interests you most?`
+      response: `I have 50 ready-to-deploy automations:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Auto reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\nWhich type interests you most?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'customer', 'acquisition', 'find customers'],

@@ -1,38 +1,57 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025
+## Document Exécutable - Décembre 2025 (màj Session 53)
 ## Objectif: Premier client payant en 4 semaines
+
+---
+
+## 🔴 ALERTES CRITIQUES (Session 53 - 20/12/2025)
+
+```
+SÉCURITÉ IMMÉDIATE:
+├── ❌ Token Shopify exposé: shpat_146b899e9ea8a... (archive/mydealz-scripts/)
+├── → ACTION: RÉVOQUER sur Shopify Admin AVANT tout
+└── → Supprimer fichier forensic_flywheel_analysis_complete.cjs
+
+PERFORMANCE SITE:
+├── Lighthouse Performance: 24% ❌❌ (target >90%)
+├── LCP: 6.1s ❌ | TBT: 1,330ms ❌❌ | CLS: 1.0 ❌❌
+└── Bottleneck: GTM bloque 496ms
+
+FACTUALITÉ:
+├── Claims à corriger: "56"/"45" → "50" automatisations
+└── Taux USD obsolète: 1.08 → 1.17 (+8.46% écart)
+```
 
 ---
 
 ## CONTEXTE
 
 ```
-SITUATION AU 19 DÉCEMBRE 2025 (Mise à jour Session 21c):
+SITUATION AU 20 DÉCEMBRE 2025 (Mise à jour Session 53):
 ├── Opérateur: Solo (1 personne)
 ├── Temps: 20h/semaine
 ├── Cash flow: €0
 ├── Budget: €50
-├── Clients: 0 actifs (3 restart 25/01/2026)
+├── Clients: 42+ servis historiquement, 3 restart 25/01/2026
 ├── Hébergement: Hostinger (VPS 1168256 + n8n + website)
 ├── GitHub: github.com/Jouiet/3a-automations ✅ (PRIVÉ)
-├── Branding: 3A-BRANDING-GUIDE.md ✅
 ├── **SITE LIVE: https://3a-automation.com** ✅
 │
-├── SERVICES AGENCE CONFIGURÉS (Session 21c):
-│   ├── ✅ GitHub Token (RENOUVELÉ - ghp_8qa6eZ...)
-│   ├── ✅ Google Cloud SA (testé)
-│   ├── ✅ Google Sheets (R/W testé)
-│   ├── ✅ GA4 (Property 516832662, testé)
-│   ├── ✅ Gemini (clé sauvée)
-│   ├── ✅ xAI/Grok (clé sauvée, crédits requis)
-│   ├── ✅ Hostinger API (testé)
-│   ├── ✅ n8n instance (accessible, API key à générer)
-│   ├── ✅ Apify (NOUVEAU - apify_api_1AN2ir...)
-│   └── ✅ Klaviyo (pk_d73c1cb...)
+├── MÉTRIQUES VÉRIFIÉES (Session 53):
+│   ├── Scripts /automations: 50 (pas 56)
+│   ├── MCPs configurés: 13 (9 fonctionnels)
+│   ├── Généricité scripts: 84% (42/50 utilisent process.env)
+│   ├── Lighthouse Performance: 24% ❌
+│   ├── Lighthouse SEO: 100% ✅
+│   └── Lighthouse Best Practices: 100% ✅
 │
-├── CONFIG RATE: 83% (10/12 services)
-├── MCPs FONCTIONNELS: 9/12
-└── Objectif: Cash flow + préparation restart
+├── SERVICES AGENCE CONFIGURÉS:
+│   ├── ✅ Klaviyo, Apify, GA4 (testés fonctionnels)
+│   ├── ✅ GitHub, Hostinger, Gemini (tokens réels)
+│   ├── ⚠️ Shopify, n8n, WordPress (placeholders)
+│   └── ⚠️ xAI/Grok (crédits $5 requis)
+│
+└── Objectif: Sécurité + Performance + Cash flow
 ```
 
 ---

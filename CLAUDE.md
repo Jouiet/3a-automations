@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 8.2 | Dernière mise à jour: 2025-12-20 (Session 53 - Orbital Laptop Fix)
+## Version: 8.4 | Dernière mise à jour: 2025-12-20 (Session 54 - Factuality Fixes)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -10,6 +10,31 @@
 - Consultant solo automation & marketing (1 personne, 20h/semaine)
 - Cible: PME tous secteurs €10k-500k/mois CA
 - Budget: €50 | Cash flow: €0 (restart clients 25/01/2026)
+
+---
+
+## 🔴 ALERTES CRITIQUES (Session 53-54)
+
+### Performance CRITIQUE (Lighthouse 20/12/2025)
+| Métrique | Valeur | Cible | Écart |
+|----------|--------|-------|-------|
+| Performance | **24%** | >90% | ❌❌ -73% |
+| LCP | **6.1s** | <2.5s | ❌ -144% |
+| TBT | **1,330ms** | <200ms | ❌❌ -565% |
+| CLS | **1.0** | <0.1 | ❌❌ -900% |
+
+### Sécurité - Token Exposé ✅ RÉSOLU Session 54
+```
+FICHIER SUPPRIMÉ: archive/mydealz-scripts/forensic_flywheel_analysis_complete.cjs
+ACTION REQUISE:   RÉVOQUER TOKEN shpat_146b... sur Shopify (manuel)
+```
+
+### Taux de Change ✅ CORRIGÉ Session 54
+| Devise | Ancien | Nouveau | Source |
+|--------|--------|---------|--------|
+| USD | 1.08 | **1.17** | fawazahmed0/currency-api |
+| MAD | 10.90 | **10.74** | fawazahmed0/currency-api |
+| GBP | 0.83 | **0.88** | fawazahmed0/currency-api |
 
 ---
 
@@ -28,7 +53,7 @@
 
 ---
 
-## MÉTRIQUES ACTUELLES (Session 35 - 19/12/2025)
+## MÉTRIQUES ACTUELLES (Session 53 - 20/12/2025)
 
 | Métrique | Valeur |
 |----------|--------|
@@ -39,10 +64,15 @@
 | hreflang SEO | **26/26 (100%)** ✅ |
 | Marchés | **3** (MA/Maghreb, EU, International) |
 | GA4 | G-87F6FDJG45 |
-| GTM | GTM-WLVJQC3M |
-| Automatisations validées | **45** (vérifié 20/12 - Session 50) |
-| MCPs configurés | **12** |
+| GTM | GTM-WLVJQC3M (bloque 496ms!) |
+| Scripts /automations | **50** (vérifié empiriquement) |
+| Cartes automations.html | **44** |
+| Claim site (à corriger) | 56/45 → **50** |
+| MCPs configurés | **13** |
 | APIs fonctionnelles | Klaviyo ✅, Apify ✅, GA4 ✅ (3/7 testé 19/12) |
+| Lighthouse Performance | **24%** ❌❌ |
+| Lighthouse SEO | **100%** ✅ |
+| Lighthouse Best Practices | **100%** ✅ |
 
 ## TARIFICATION (Session 40 - Bottom-Up, ~90€/h)
 
@@ -205,49 +235,100 @@ VPS Hostinger (ID: 1168256)
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 5. ~~Fusionner CSS~~ ✅ FAIT - styles.min.css (82KB minifié)
 
-## SESSION 53 COMPLÉTÉE ✅ (20/12/2025 - Orbital Laptop Overlap Fix)
+## SESSION 54 COMPLÉTÉE ✅ (20/12/2025 - Factuality Fixes)
 
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Token Shopify file | ✅ | Fichier supprimé (rm -f) |
+| Claims "56" → "50" | ✅ | 2 occurrences (voice widgets) |
+| Claims "45" → "50" | ✅ | 18 occurrences (HTML + meta + JSON-LD) |
+| Taux USD 1.08 → 1.17 | ✅ | geo-locale.js mis à jour |
+| Taux MAD 10.90 → 10.74 | ✅ | geo-locale.js mis à jour |
+| Taux GBP 0.83 → 0.88 | ✅ | geo-locale.js mis à jour |
+
+**Fichiers modifiés:**
+- `geo-locale.js` - Taux de change corrigés
+- `voice-widget.js` - 56 → 50
+- `voice-widget-en.js` - 56 → 50
+- `index.html` (FR + EN) - 45 → 50 (meta, badges, footer)
+- `a-propos.html` - 45 → 50 (trust bar, pillar)
+- `about.html` - 45 → 50 (trust bar, pillar, footer)
+- `automations.html` (FR + EN) - 45 → 50 (meta, JSON-LD)
+- `services/audit-gratuit.html` - 56 → 50 (footer)
+- `en/services/free-audit.html` - 56 → 50 (footer)
+
+**Supprimé:**
+- `archive/mydealz-scripts/forensic_flywheel_analysis_complete.cjs` (token exposé)
+
+**ACTION MANUELLE REQUISE:**
+- Révoquer token `shpat_146b...` sur Shopify Partners
+
+---
+
+## SESSION 53 COMPLÉTÉE ✅ (20/12/2025 - Audit Forensique Empirique)
+
+### Phase 1: Orbital Laptop Fix
 | Tâche | Statut | Détails |
 |-------|--------|---------|
 | Analyse forensique | ✅ | Identifié bug: positions diagonales non redéfinies |
 | Fix @1200px | ✅ | nth-child 2,4,6,8 ajoutés (8%/0%) |
 | Fix @1024px | ✅ | nth-child 2,4,6,8 ajoutés (10%/2%) |
 | Script analyse | ✅ | analyze-orbital-overlap.cjs créé |
-| Vérification | ✅ | 0 chevauchement à tous breakpoints |
 
-**PROBLÈME IDENTIFIÉ:**
-```
-Ring-3 diagonal icons (nth-child 2,4,6,8) JAMAIS redéfinis
-en media queries laptop. Gardaient valeurs desktop (5%/-5%)
-causant chevauchement à tailles réduites.
+### Phase 2: Audit Forensique Complet
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Lighthouse LIVE | ✅ | Performance: **24%** (pas 60%!) |
+| Section 7 audit | ✅ | Token Shopify confirmé exposé |
+| Section 8 audit | ✅ | Taux USD obsolète (+8.46%) |
+| Màj FORENSIC-AUDIT | ✅ | v7.4 avec données Lighthouse |
+| Màj CLAUDE.md | ✅ | v8.3 avec alertes critiques |
 
-Pairs affectés:
-- Hostinger (7) ↔ WordPress (6) = OVERLAP
-- Kling (3) ↔ Playwright (4) = OVERLAP
+### Lighthouse LIVE (20/12/2025 17:41 UTC)
+```
+Performance:     24%  ❌❌ CRITIQUE
+Accessibility:   90%  ⚠️
+Best Practices:  100% ✅
+SEO:             100% ✅
+
+LCP:  6.1s  (target <2.5s)  ❌ -144%
+TBT:  1,330ms (target <200ms) ❌❌ -565%
+CLS:  1.0   (target <0.1)   ❌❌ -900%
+
+BOTTLENECKS:
+├── Main Thread "Other": 2,397ms
+├── Style & Layout: 2,147ms
+└── GTM blocking: 496ms
 ```
 
-**SOLUTION APPLIQUÉE:**
-```css
-/* @1200px - Ring 171px, Icons 42px */
-.ring-3 .tech-icon:nth-child(2) { top: 8%; right: 0%; }
-.ring-3 .tech-icon:nth-child(4) { bottom: 8%; right: 0%; }
-.ring-3 .tech-icon:nth-child(6) { bottom: 8%; left: 0%; }
-.ring-3 .tech-icon:nth-child(8) { top: 8%; left: 0%; }
+### Corrections Audit Externe
+| Claim Audit | Vérification | Verdict |
+|-------------|--------------|---------|
+| Performance 60% | **24%** réel | ❌ AUDIT FAUX |
+| Token Shopify | shpat_146b... ligne 26 | ✅ CONFIRMÉ |
+| 42+ Clients "mensonge" | Historique VRAI | ❌ AUDIT FAUX |
+| Taux USD hardcodé | +8.46% écart | ✅ CONFIRMÉ |
+| Contact form placeholder | URL RÉELLE | ❌ AUDIT FAUX |
 
-/* @1024px - Ring 153px, Icons 38px */
-.ring-3 .tech-icon:nth-child(2) { top: 10%; right: 2%; }
-.ring-3 .tech-icon:nth-child(4) { bottom: 10%; right: 2%; }
-.ring-3 .tech-icon:nth-child(6) { bottom: 10%; left: 2%; }
-.ring-3 .tech-icon:nth-child(8) { top: 10%; left: 2%; }
-```
+### 🔴 PLAN D'ACTION PRIORISÉ
 
-**VÉRIFICATION MATHÉMATIQUE:**
-```
-@1200px: Kling↔Playwright = 74.8px (min 42px) ✅
-@1200px: WordPress↔Hostinger = 74.8px (min 42px) ✅
-@1024px: Kling↔Playwright = 63.2px (min 38px) ✅
-@1024px: WordPress↔Hostinger = 65.1px (min 38px) ✅
-```
+**IMMÉDIAT (Sécurité):**
+1. RÉVOQUER token `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` sur Shopify
+2. Supprimer fichier `archive/mydealz-scripts/forensic_flywheel_analysis_complete.cjs`
+
+**URGENT (Factualité):**
+3. Corriger claims "56"/"45" → "50" (9 fichiers + 14 occurrences)
+4. Mettre à jour taux USD: 1.08 → 1.17 dans geo-locale.js
+
+**HAUTE (Performance):**
+5. Lazy load GTM (bloque 496ms)
+6. Réduire Main Thread work (2,397ms)
+7. Optimiser Style & Layout (2,147ms)
+8. Fixer CLS (score 1.0 → <0.1)
+
+**MOYENNE:**
+9. Implémenter API taux de change dynamiques
+10. Ajouter Schema.org FAQPage
 
 **Commit Session 53:**
 - `366a4d0` fix(orbital): Laptop breakpoint diagonal icon overlap
