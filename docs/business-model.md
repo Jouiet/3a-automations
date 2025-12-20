@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 3.3 - Mise à jour 20 Décembre 2025 (Session 61: Voice AI Marketing Strategy)
+## Version 3.4 - Mise à jour 21 Décembre 2025 (Session 61: Segmentation 66 Automations)
 ## Basé sur données réelles confirmées
 
 ---
@@ -60,10 +60,11 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │                                                                              │
 │  SCRIPTS DISPONIBLES                                                        │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  Total: 51 scripts dans /automations (vérifié 20/12/2025 Session 61)        │
-│  ├── 38 scripts client-facing (+Voice AI Booking)                          │
-│  ├── 13 scripts internes/test (non client-facing)                          │
-│  └── Genericité: 84% utilisent process.env                                 │
+│  Total: 66 automations client-facing (vérifié 21/12/2025 Session 61)        │
+│        (36 scripts + 30 templates/workflows)                                 │
+│  ├── Lead Gen: 18 | Shopify: 13 | SEO: 9                                    │
+│  ├── Email: 9 | Analytics: 9 | Content: 8                                   │
+│  └── 23 outils internes EXCLUS (test-, verify-, check-)                     │
 │                                                                              │
 │  MCPs CONFIGURÉS (Audit Session 24 - 19/12/2025)                            │
 │  ════════════════════════════════════════════════════════════════════════   │
