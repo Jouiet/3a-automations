@@ -1,6 +1,25 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 8.4 | Dernière mise à jour: 2025-12-20 (Session 54 - Factuality Fixes)
+## Version: 8.5 | Dernière mise à jour: 2025-12-20 (Session 55 - Automations Registry)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
+
+---
+
+## 🔴 SOURCE DE VÉRITÉ: AUTOMATIONS
+
+**Fichier unique:** `automations/automations-registry.json`
+**Validation:** `node automations/validate-automations-registry.cjs`
+
+| Métrique | Valeur | Vérifié |
+|----------|--------|---------|
+| Total | **50** | ✅ |
+| FR Catalog | 50 | ✅ |
+| EN Catalog | 50 | ✅ |
+| Avec script .cjs | 20 | ✅ |
+| Klaviyo templates | 7 | ✅ |
+| n8n workflows | 3 | ✅ |
+
+**Catégories:**
+- Lead Gen: 12 | SEO: 6 | Email: 8 | Shopify: 9 | Analytics: 8 | Content: 7
 
 ---
 
