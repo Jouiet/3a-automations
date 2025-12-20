@@ -429,25 +429,32 @@
   <!-- Monthly Retainers -->
   <section class="retainer-section">
     <div class="container">
-      <h2>Monthly Retainers</h2>
+      <h2>Retainers</h2>
       <p class="section-sub">After initial setup. Continuous maintenance and growth.</p>
+
+      <!-- Period Toggle -->
+      <div class="period-selector">
+        <button class="period-btn active" data-period="monthly">Monthly</button>
+        <button class="period-btn" data-period="annual">Annual <span class="period-badge">-17%</span></button>
+      </div>
 
       <div class="retainer-grid">
         <!-- Maintenance -->
         <div class="retainer-card">
           <h3>Maintenance</h3>
           <div class="retainer-price">
-            <span class="price-amount price-usd">$330</span>
-            <span class="price-amount price-eur">290€</span>
-            <span class="price-amount price-mad">2 900 DH</span>
-            <span class="price-period">/month</span>
+            <!-- Monthly prices -->
+            <span class="price-amount price-usd period-monthly">$330</span>
+            <span class="price-amount price-eur period-monthly">290€</span>
+            <span class="price-amount price-mad period-monthly">2 900 DH</span>
+            <span class="price-period period-monthly">/month</span>
+            <!-- Annual prices -->
+            <span class="price-amount price-usd period-annual">$3 300</span>
+            <span class="price-amount price-eur period-annual">2 900€</span>
+            <span class="price-amount price-mad period-annual">29 000 DH</span>
+            <span class="price-period period-annual">/year</span>
           </div>
-          <div class="retainer-annual">
-            <span class="annual-price price-usd">$3 300/year</span>
-            <span class="annual-price price-eur">2 900€/year</span>
-            <span class="annual-price price-mad">29 000 DH/year</span>
-            <span class="annual-savings">(2 months free)</span>
-          </div>
+          <div class="annual-savings period-annual">(2 months free)</div>
           <div class="retainer-hours">3h/month</div>
           <ul>
             <li>Flow monitoring</li>
@@ -462,17 +469,18 @@
           <div class="retainer-badge">Popular</div>
           <h3>Optimization / Growth</h3>
           <div class="retainer-price">
-            <span class="price-amount price-usd">$550</span>
-            <span class="price-amount price-eur">490€</span>
-            <span class="price-amount price-mad">5 200 DH</span>
-            <span class="price-period">/month</span>
+            <!-- Monthly prices -->
+            <span class="price-amount price-usd period-monthly">$550</span>
+            <span class="price-amount price-eur period-monthly">490€</span>
+            <span class="price-amount price-mad period-monthly">5 200 DH</span>
+            <span class="price-period period-monthly">/month</span>
+            <!-- Annual prices -->
+            <span class="price-amount price-usd period-annual">$5 500</span>
+            <span class="price-amount price-eur period-annual">4 900€</span>
+            <span class="price-amount price-mad period-annual">52 000 DH</span>
+            <span class="price-period period-annual">/year</span>
           </div>
-          <div class="retainer-annual">
-            <span class="annual-price price-usd">$5 500/year</span>
-            <span class="annual-price price-eur">4 900€/year</span>
-            <span class="annual-price price-mad">52 000 DH/year</span>
-            <span class="annual-savings">(2 months free)</span>
-          </div>
+          <div class="annual-savings period-annual">(2 months free)</div>
           <div class="retainer-hours">5h/month</div>
           <ul>
             <li>Everything in Maintenance</li>
@@ -702,6 +710,23 @@
       document.documentElement.setAttribute('data-currency', currency);
       currencyBtns.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.currency === currency);
+      });
+    });
+
+    // Period Toggle (Monthly/Annual)
+    const periodBtns = document.querySelectorAll('.period-btn');
+
+    // Set default period
+    if (!document.documentElement.hasAttribute('data-period')) {
+      document.documentElement.setAttribute('data-period', 'monthly');
+    }
+
+    periodBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        periodBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const period = this.dataset.period;
+        document.documentElement.setAttribute('data-period', period);
       });
     });
   });
