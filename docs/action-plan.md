@@ -1,6 +1,45 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 56)
+## Document Exécutable - Décembre 2025 (màj Session 61)
 ## Objectif: Premier client payant en 4 semaines
+
+---
+
+## ✅ SESSION 61: VOICE AI = ATOUT MARKETING (20/12/2025)
+
+```
+DÉCISIONS STRATÉGIQUES:
+├── ✅ Voice AI Booking = BONUS dans TOUS les packs (différenciateur)
+├── ✅ WhatsApp Business API > SMS (gratuit, 98% open rate)
+├── ✅ Stack propriétaire: Web Speech + Grok Voice (pas Synthflow)
+├── ✅ Catalogue: 50 → 51 automatisations
+└── ✅ Pricing FR+EN mis à jour avec BONUS Voice AI
+
+MARCHÉ VOICE AI (Sources vérifiées):
+├── Market 2024: $2.4B → 2034: $47.5B (CAGR 34.8%)
+├── Conversion boost: +37-72%
+├── Booking cost reduction: -70%
+└── ROI 12-18 mois: 250-400%
+```
+
+---
+
+## 🔴 PROCHAINES ACTIONS (Session 62+)
+
+```
+CRITIQUE (Bloquant pour production):
+├── ❌ Fallback texte-only Firefox/Safari (+30% coverage)
+├── ❌ Check dispo calendrier temps réel (UX critique)
+└── ❌ WhatsApp Business API integration
+
+HIGH PRIORITY:
+├── ❌ Rappels WhatsApp 24h + 1h avant RDV (-30% no-shows)
+├── ❌ Grok Voice integration (téléphone, $0.05/min)
+└── ❌ Analytics booking (GA4 events)
+
+MEDIUM:
+├── ❌ Détection timezone auto
+└── ❌ Flow reschedule/cancel
+```
 
 ---
 
@@ -17,9 +56,9 @@ PERFORMANCE SITE (POST GTM FIX):
 ├── GTM Blocking: 175ms (était 496ms, -65%)
 └── ✅ GTM lazy loading appliqué (24 pages)
 
-FACTUALITÉ (Corrigée Session 54-55):
-├── ✅ Claims "50" automatisations (aligné registry)
-├── ✅ Taux USD: 1.17, MAD: 10.74, GBP: 0.88
+FACTUALITÉ (Corrigée Session 61):
+├── ✅ Claims "51" automatisations (aligné Session 61)
+├── ✅ Voice AI Booking = BONUS dans tous les packs
 └── ✅ Architecture nettoyée (180 scripts → /clients/)
 ```
 
@@ -28,7 +67,7 @@ FACTUALITÉ (Corrigée Session 54-55):
 ## CONTEXTE
 
 ```
-SITUATION AU 20 DÉCEMBRE 2025 (Mise à jour Session 53):
+SITUATION AU 20 DÉCEMBRE 2025 (Mise à jour Session 61):
 ├── Opérateur: Solo (1 personne)
 ├── Temps: 20h/semaine
 ├── Cash flow: €0
@@ -38,10 +77,10 @@ SITUATION AU 20 DÉCEMBRE 2025 (Mise à jour Session 53):
 ├── GitHub: github.com/Jouiet/3a-automations ✅ (PRIVÉ)
 ├── **SITE LIVE: https://3a-automation.com** ✅
 │
-├── MÉTRIQUES VÉRIFIÉES (Session 56):
-│   ├── Scripts /automations: 50 (registry source de vérité)
+├── MÉTRIQUES VÉRIFIÉES (Session 61):
+│   ├── Scripts /automations: 51 (+Voice AI Booking)
 │   ├── MCPs configurés: 13 (9 fonctionnels)
-│   ├── Généricité scripts: 84% (42/50 utilisent process.env)
+│   ├── Généricité scripts: 84% (43/51 utilisent process.env)
 │   ├── Lighthouse Performance: 70% 🟡 (+46 pts)
 │   ├── Lighthouse SEO: 100% ✅
 │   └── Lighthouse Best Practices: 100% ✅
@@ -49,10 +88,11 @@ SITUATION AU 20 DÉCEMBRE 2025 (Mise à jour Session 53):
 ├── SERVICES AGENCE CONFIGURÉS:
 │   ├── ✅ Klaviyo, Apify, GA4 (testés fonctionnels)
 │   ├── ✅ GitHub, Hostinger, Gemini (tokens réels)
+│   ├── ✅ Voice AI Booking (Google Apps Script + Calendar)
 │   ├── ⚠️ Shopify, n8n, WordPress (placeholders)
-│   └── ⚠️ xAI/Grok (crédits $5 requis)
+│   └── ⚠️ xAI/Grok Voice ($5 crédits requis)
 │
-└── Objectif: Sécurité + Performance + Cash flow
+└── Objectif: Voice AI production-ready + Cash flow
 ```
 
 ---
