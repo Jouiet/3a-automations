@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 7.7 | Dernière mise à jour: 2025-12-20 (Session 49 - Mobile UX Complete)
+## Version: 7.8 | Dernière mise à jour: 2025-12-20 (Session 49 - Mobile UX Final)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -201,43 +201,52 @@ VPS Hostinger (ID: 1168256)
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 5. ~~Fusionner CSS~~ ✅ FAIT - styles.min.css (82KB minifié)
 
-## SESSION 49 COMPLÉTÉE ✅ (20/12/2025 - Mobile UX Complete)
+## SESSION 49 COMPLÉTÉE ✅ (20/12/2025 - Mobile UX Final)
 
 | Tâche | Statut | Détails |
 |-------|--------|---------|
-| Orbital repositionné | ✅ | 390px, margin-top: 20px (évite header) |
-| Process Timeline -20% | ✅ | step-marker 50px→40px, fonts réduits |
+| Orbital repositionné | ✅ | 300-320px, margin-top: 20px |
+| Process Timeline -20% | ✅ | step-marker 40px, fonts réduits |
 | Containers centrés | ✅ | Sélecteur corrigé: .hero-ultra-content |
-| CTA "Ready to Scale" | ✅ | Centré + form agrandi |
-| Footer mobile | ✅ | Flex column + tout centré |
-| Flywheel +20% | ✅ | 280px→340px, stage 90px→108px |
-| CSS minifié | ✅ | 130KB → 87KB |
+| CTA "Ready to Scale" | ✅ | Centré + form 100% width |
+| Footer mobile compact | ✅ | Réduit + flex column centré |
+| Flywheel optimisé | ✅ | 350px wheel, 82px stage (+10%) |
+| Orbital icons overlap | ✅ | ring-3: 32px (Hostinger/WordPress fix) |
+| CSS minifié | ✅ | 132KB → 88KB |
 
-**FORENSIC ANALYSIS - Bug centrage identifié:**
+**FORENSIC ANALYSIS - Bugs identifiés et corrigés:**
 ```
-PROBLÈME:
+BUG 1 - Centrage Hero:
 ├── HTML utilise: class="hero-ultra-content" (index.html:156)
-├── CSS ciblait: .hero-content, .hero-content-ultra (INCORRECT)
-└── RÉSULTAT: Centrage ne s'appliquait pas!
+├── CSS ciblait: .hero-content (INCORRECT)
+└── FIX: CSS cible maintenant .hero-ultra-content
 
-SOLUTION:
-└── CSS corrigé: cible maintenant .hero-ultra-content
+BUG 2 - Flywheel overlap:
+├── Stage 108px sur wheel 340px = chevauchement
+└── FIX: Stage réduit à 82px, proportions recalculées
+
+BUG 3 - Orbital icons overlap:
+├── Hostinger/WordPress + Kling/Playwright se chevauchaient
+└── FIX: ring-3 icons réduits à 32px, fonts 0.5rem
 ```
 
-**Changements CSS mobile (768px):**
-- Orbital: `390px`, `margin: 20px auto` (évite header)
+**Valeurs CSS mobile finales (768px):**
+- Orbital: `300px`, icons ring-3 `32px`
+- Flywheel: `350px` wheel, `82px` stage, `0.72rem` labels
 - Timeline: step-marker `40px`, fonts `-20%`
-- Hero: `.hero-ultra-content` centré
-- CTA: container flex centered, form 100% width
-- Footer: flex column + align-items center (tous éléments)
-- Flywheel: +20% (wheel 340px, stage 108px, icon 44px)
+- Footer: compact, fonts `0.75-0.8rem`, logo scale(0.9)
+- CTA: form 100% width, centered
 
-**Commits Session 49:**
+**Commits Session 49 (9 total):**
 - `fdac0d3` feat(mobile): Comprehensive homepage mobile UX improvements
 - `ed96481` fix(mobile): Orbital -5%, Timeline -20%, containers centered
 - `f9009a6` fix(mobile): Restore orbital size + correct centering selectors
 - `815b1ef` fix(mobile): Center CTA "Ready to Scale" + expand form
 - `1beb8a3` fix(mobile): Footer centered + Flywheel +20%
+- `0a1b206` docs: Session 49 complete - Mobile UX finalized
+- `fba4ad8` fix(mobile): Flywheel stages overlap - recalculated proportions
+- `69cffd8` fix(mobile): Footer compact + Orbital icons overlap fixed
+- `3ec785f` fix(mobile): Flywheel +10% larger with text
 
 ---
 

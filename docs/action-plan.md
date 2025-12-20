@@ -1034,23 +1034,42 @@ PRÉREQUIS:
 │   • styles.css: 130KB                                                       │
 │   • styles.min.css: 87KB                                                    │
 │                                                                              │
-│   COMMITS SESSION 49 (5 total):                                              │
+│   7. Orbital Icons Overlap Fix:                                              │
+│      • Hostinger/WordPress se chevauchaient (ring-3)                        │
+│      • Kling/Playwright se chevauchaient (ring-3)                           │
+│      • ring-3 icons: 44px → 32px, fonts 0.5rem                              │
+│                                                                              │
+│   8. Flywheel +10% (final):                                                  │
+│      • wheel: 320px → 350px                                                  │
+│      • stage: 75px → 82px                                                    │
+│      • labels: 0.65rem → 0.72rem                                             │
+│                                                                              │
+│   CSS SIZES (FINAL):                                                         │
+│   • styles.css: 132KB                                                       │
+│   • styles.min.css: 88KB                                                    │
+│                                                                              │
+│   COMMITS SESSION 49 (9 total):                                              │
 │   • fdac0d3 - Comprehensive homepage mobile UX improvements                  │
 │   • ed96481 - Orbital -5%, Timeline -20%, containers centered               │
 │   • f9009a6 - Restore orbital + correct centering selectors (FORENSIC)      │
 │   • 815b1ef - Center CTA "Ready to Scale" + expand form                     │
 │   • 1beb8a3 - Footer centered + Flywheel +20%                               │
+│   • 0a1b206 - docs: Session 49 complete                                     │
+│   • fba4ad8 - Flywheel stages overlap - recalculated proportions            │
+│   • 69cffd8 - Footer compact + Orbital icons overlap fixed                  │
+│   • 3ec785f - Flywheel +10% larger with text                                │
 │                                                                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                    ACTIONS PRIORITAIRES POST-SESSION 49                      │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│   ✅ MOBILE UX - COMPLÈTE                                                   │
-│      • Hero: centré, orbital visible                                         │
-│      • Timeline: -20% (plus compact)                                         │
-│      • CTA: centré, form agrandi                                             │
-│      • Footer: entièrement centré                                            │
-│      • Flywheel: +20% (plus visible)                                         │
+│   ✅ MOBILE UX - COMPLÈTE ET OPTIMISÉE                                      │
+│      • Hero: centré, orbital 300px, icons overlap fixed                      │
+│      • Timeline: -20% (compact)                                              │
+│      • CTA: centré, form 100% width                                          │
+│      • Footer: compact, fonts réduits                                        │
+│      • Flywheel: 350px wheel, 82px stage, +10%                              │
+│      • Orbital icons: ring-3 32px (no overlap)                               │
 │                                                                              │
 │   ⏳ PRIORITÉ 1 - Performance Lighthouse (Score actuel: 52)                 │
 │      • GTM defer/lazy loading (bloque 397ms main thread)                    │
@@ -1071,6 +1090,6 @@ PRÉREQUIS:
 ---
 
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 20 Décembre 2025 (Session 49 - Mobile UX Complete)
+**Mis à jour:** 20 Décembre 2025 (Session 49 - Mobile UX Final)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
