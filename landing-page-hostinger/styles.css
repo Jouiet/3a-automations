@@ -2214,11 +2214,71 @@ body.lite {
     max-width: 100%;
   }
 
-  /* CTA centered */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     CTA "READY TO SCALE" MOBILE - Centered + Form Expanded
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .cta-ultra {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .cta-ultra .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 var(--spacing-sm);
+  }
+
   .cta-card-ultra {
     width: 100%;
+    max-width: 100%;
     text-align: center;
     box-sizing: border-box;
+    padding: var(--spacing-lg);
+    margin: 0 auto;
+  }
+
+  .cta-content-ultra {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta-desc {
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* Form expanded to fill container */
+  .form-ultra {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--spacing-lg);
+    box-sizing: border-box;
+  }
+
+  .form-grid {
+    width: 100%;
+  }
+
+  .form-field {
+    width: 100%;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .btn-submit {
+    width: 100%;
+    justify-content: center;
   }
 
   .cta-actions {
@@ -2394,11 +2454,7 @@ body.lite {
   }
 
   .cta-title {
-    font-size: 2rem;
-  }
-
-  .cta-card-ultra {
-    padding: var(--spacing-2xl);
+    font-size: 1.5rem;
   }
 }
 
