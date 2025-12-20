@@ -1,10 +1,75 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-20 | Version: 7.5 (Màj Session 56 - GTM Performance Fix)
+## Date: 2025-12-20 | Version: 7.6 (Màj Session 58 - Pricing Multi-Devise + SEO Check)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 56)
+# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 58)
+
+## ✅ PRICING MULTI-DEVISE (Session 57-58)
+
+### Tarification Affichée (Tous marchés visibles)
+```
+╔═══════════════════════════════════════════════════════════════╗
+║                 PACKS SETUP (ONE-TIME)                         ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Quick Win    │ 390€ │ $450 │ 3 990 DH                        ║
+║  Essentials   │ 790€ │ $920 │ 7 990 DH                        ║
+║  Growth       │ 1 399€ │ $1,690 │ 14 990 DH                   ║
+╠═══════════════════════════════════════════════════════════════╣
+║                 RETAINERS MENSUELS                             ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Maintenance       │ 290€ │ $330 │ 2 900 DH /mois             ║
+║                    │ 2 900€ │ $3,300 │ 29 000 DH /an          ║
+║  Optimization      │ 490€ │ $550 │ 5 200 DH /mois             ║
+║                    │ 4 900€ │ $5,500 │ 52 000 DH /an          ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Annuel = 10 mois pour 12 (2 mois gratuits)                   ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+### geo-locale.js Simplifié (v3.0.0)
+```
+SUPPRIMÉ:
+├── exchangeRates (était EUR/USD/MAD/GBP)
+├── convert() function
+├── formatPrice() function
+├── getPrice() function
+├── updatePrices() function
+└── data-price-eur attributes (6 éléments)
+
+CONSERVÉ:
+├── detectCountry() via ipapi.co
+├── locales mapping (pays → lang/currency/region)
+├── localStorage pour préférences
+└── shouldShowEnglish() + redirectIfNeeded()
+
+TAILLE: 265 lignes → 198 lignes (-25%)
+```
+
+### SEO Check (Session 58)
+```
+╔═══════════════════════════════════════════════════════════════╗
+║  SEO TECHNICAL AUDIT                                           ║
+╠═══════════════════════════════════════════════════════════════╣
+║  Total HTML files  │ 26                                       ║
+║  With hreflang     │ 26/26 (100%) ✅                          ║
+║  Sitemap.xml       │ ✅ EXISTS                                ║
+║  Robots.txt        │ ✅ EXISTS                                ║
+║  HTTP Status       │ 200 (FR + EN) ✅                         ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+### Commits Session 57-58
+```
+fa489e6 refactor(pricing): Remove dynamic currency conversion
+fcb94ac docs: Session 57 - Fixed pricing + geo-locale v3
+815dcde feat(pricing): Display all currencies (EUR/USD/MAD) + annual pricing
+```
+
+---
+
+# SECTION 0-prev: ÉTAT (20 Dec 2025 - Session 56)
 
 ## ✅ PERFORMANCE FIX (Session 56 - GTM Lazy Loading)
 
@@ -48,12 +113,13 @@ CONTENU:  const SHOPIFY_TOKEN = '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'
 STATUS:   EN GIT HISTORY - À RÉVOQUER IMMÉDIATEMENT
 ```
 
-### Automations Count CORRIGÉ
+### Automations Count ✅ ALIGNÉ (Session 55-58)
 | Élément | Valeur | Source |
 |---------|--------|--------|
-| Scripts .cjs dans /automations | **50** | `find ... -name "*.cjs" \| wc -l` |
-| Cartes sur automations.html | 44 | Comptage HTML |
-| Claim site (incorrecte) | 56 ou 45 | À corriger → **50** |
+| Registry (source unique) | **50** | automations-registry.json |
+| Cartes FR catalog | **50** | automations.html ✅ |
+| Cartes EN catalog | **50** | en/automations.html ✅ |
+| Validation | **PASS** | npm run validate-automations |
 
 ---
 

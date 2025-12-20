@@ -1321,7 +1321,100 @@ PRÉREQUIS:
 
 ---
 
+## PLAN ACTIONNABLE - FIN SESSION 58 (20/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 57-58                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ PRICING MULTI-DEVISE VISIBLE                                           │
+│      • Tous les prix affichent EUR + USD + MAD                              │
+│      • Packs Setup: 390€/$450/3990DH - 1399€/$1690/14990DH                 │
+│      • Retainers: Mensuel + Annuel (2 mois gratuits)                        │
+│      • CSS: .price-alt + .price-alt-inline + .retainer-annual               │
+│                                                                              │
+│   ✅ GEO-LOCALE.JS SIMPLIFIÉ (v3.0.0)                                       │
+│      • Supprimé: exchangeRates, convert, formatPrice, updatePrices          │
+│      • Supprimé: data-price-eur (6 attributs)                               │
+│      • Conservé: detectCountry, localStorage, redirect                       │
+│      • Taille: 265 → 198 lignes (-25%)                                      │
+│                                                                              │
+│   ✅ SEO TECHNIQUE VÉRIFIÉ                                                  │
+│      • hreflang: 26/26 pages (100%)                                         │
+│      • sitemap.xml: EXISTS                                                   │
+│      • robots.txt: EXISTS                                                    │
+│      • HTTP Status: 200 (FR + EN)                                           │
+│                                                                              │
+│   ✅ AUTOMATIONS ALIGNÉES                                                   │
+│      • Registry: 50 | FR Catalog: 50 | EN Catalog: 50                       │
+│      • npm run validate-automations: PASS                                    │
+│                                                                              │
+│   COMMITS SESSION 57-58:                                                     │
+│   • fa489e6 refactor(pricing): Remove dynamic currency conversion           │
+│   • fcb94ac docs: Session 57 - Fixed pricing + geo-locale v3                │
+│   • 815dcde feat(pricing): Display all currencies + annual pricing          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACTIONS PRIORITAIRES (MANUELLES)                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ⏳ PRIORITÉ 1 - RÉVOQUER Token Shopify (SÉCURITÉ)                        │
+│      Token: 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                          │
+│      Action: Révoquer sur Shopify Admin MyDealz                              │
+│                                                                              │
+│   ⏳ PRIORITÉ 2 - n8n API Key (5 min)                                       │
+│      URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│                                                                              │
+│   ⏳ PRIORITÉ 3 - Shopify Partners Dev Store (30 min)                       │
+│      URL: https://partners.shopify.com                                       │
+│                                                                              │
+│   ⏳ PRIORITÉ 4 - xAI Crédits ($5)                                          │
+│      URL: https://console.x.ai/billing                                       │
+│                                                                              │
+│   ⏳ PRIORITÉ 5 - Acquisition Premier Client                                │
+│      Date cible: avant 25/01/2026                                           │
+│      Stratégie: LinkedIn outreach + audit gratuit                           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    MÉTRIQUES POST-SESSION 58                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   SITE:                                                                      │
+│   • Pages FR: 13 ✅ | Pages EN: 13 ✅ | Total: 26                           │
+│   • hreflang SEO: 26/26 (100%) ✅                                           │
+│   • Automations: 50 (registry = FR catalog = EN catalog)                    │
+│   • Performance: 70% | SEO: 100% | Best Practices: 100%                     │
+│                                                                              │
+│   PRICING:                                                                   │
+│   • 3 devises affichées: EUR, USD, MAD                                      │
+│   • Tarifs annuels visibles (2 mois gratuits)                               │
+│   • geo-locale.js v3.0.0 (simplifié)                                        │
+│                                                                              │
+│   TECHNIQUE:                                                                 │
+│   • GTM lazy loading: 175ms blocking (était 496ms)                          │
+│   • CSS: styles.css ~135KB, styles.min.css ~90KB                            │
+│   • JS: script.js defer, geo-locale simplifié                               │
+│                                                                              │
+│   INFRASTRUCTURE:                                                            │
+│   • VPS Hostinger: 1168256 (nginx + traefik + n8n)                          │
+│   • Deploy: GitHub Actions → git pull                                        │
+│   • Domain: 3a-automation.com (SSL Let's Encrypt)                           │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 20 Décembre 2025 (Session 55 - Architecture Cleanup + Registry)
+**Mis à jour:** 20 Décembre 2025 (Session 58 - Pricing Multi-Devise + SEO Check)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
