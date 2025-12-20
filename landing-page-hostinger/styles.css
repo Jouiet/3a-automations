@@ -1970,6 +1970,14 @@ body.lite {
   .ring-3 .tech-icon:nth-child(3) { right: -21px; }
   .ring-3 .tech-icon:nth-child(5) { bottom: -21px; }
   .ring-3 .tech-icon:nth-child(7) { left: -21px; }
+
+  /* ─── DIAGONAL ICONS FIX @1200px ───
+     Push diagonals toward corners to prevent overlap with cardinals
+     At 171px ring with 42px icons, 5%/-5% positions cause overlap */
+  .ring-3 .tech-icon:nth-child(2) { top: 8%; right: 0%; }      /* Leonardo - top-right */
+  .ring-3 .tech-icon:nth-child(4) { bottom: 8%; right: 0%; }   /* Playwright - bottom-right */
+  .ring-3 .tech-icon:nth-child(6) { bottom: 8%; left: 0%; }    /* WordPress - bottom-left */
+  .ring-3 .tech-icon:nth-child(8) { top: 8%; left: 0%; }       /* Apps Script - top-left */
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -2078,6 +2086,13 @@ body.lite {
   .ring-3 .tech-icon:nth-child(3) { right: -19px; }
   .ring-3 .tech-icon:nth-child(5) { bottom: -19px; }
   .ring-3 .tech-icon:nth-child(7) { left: -19px; }
+
+  /* ─── DIAGONAL ICONS FIX @1024px ───
+     At 153px ring with 38px icons, need more corner offset */
+  .ring-3 .tech-icon:nth-child(2) { top: 10%; right: 2%; }     /* Leonardo - top-right */
+  .ring-3 .tech-icon:nth-child(4) { bottom: 10%; right: 2%; }  /* Playwright - bottom-right */
+  .ring-3 .tech-icon:nth-child(6) { bottom: 10%; left: 2%; }   /* WordPress - bottom-left */
+  .ring-3 .tech-icon:nth-child(8) { top: 10%; left: 2%; }      /* Apps Script - top-left */
 
   .services-grid-ultra {
     grid-template-columns: 1fr 1fr;
