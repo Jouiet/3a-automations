@@ -2673,8 +2673,14 @@ body.lite {
 /* Features Grid */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .feature-card {
@@ -4595,9 +4601,9 @@ body.lite {
 
 .sectors-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-lg);
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -4630,6 +4636,12 @@ body.lite {
 }
 
 /* PME Mobile Responsive */
+@media (max-width: 900px) {
+  .sectors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .workflow-steps {
     flex-direction: column;
@@ -4644,10 +4656,6 @@ body.lite {
   .workflow-arrow {
     transform: rotate(90deg);
     margin: var(--spacing-sm) 0;
-  }
-
-  .sectors-grid {
-    grid-template-columns: 1fr 1fr;
   }
 }
 
