@@ -16,12 +16,12 @@
 
   const GeoLocale = {
     // Exchange rates (base: EUR) - Updated 2025-12-20
-    // Sources: fawazahmed0/currency-api (live rates)
+    // Adjusted for fixed pricing tiers
     exchangeRates: {
       EUR: 1.00,
-      USD: 1.17,
-      MAD: 10.74,
-      GBP: 0.88
+      USD: 1.15,
+      MAD: 10.25,
+      GBP: 0.85
     },
 
     // Rate cache key
