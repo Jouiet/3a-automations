@@ -1,6 +1,6 @@
 # 3A AUTOMATION - WEBSITE BLUEPRINT
 ## Document Exhaustif de Création du Site Web
-### Version: 1.9 | Date: 19/12/2025 | Auteur: 3A Automation (Session 25)
+### Version: 2.0 | Date: 20/12/2025 | Auteur: 3A Automation (Session 50)
 
 ---
 
@@ -103,19 +103,20 @@
 ### 1.4 Score de Readiness Site Web
 
 ```
-SCORE ACTUEL: 100/100 (màj 19/12/2025 - Session 25)
-├── Session 25: Audit forensique 12 pages, Claims corrigés (42→56, 12→9, 8+→10+)
+SCORE ACTUEL: 100/100 (màj 20/12/2025 - Session 50)
+├── Session 50: Automations count corrigé (56→45, vérifié par script)
+├── Session 50: Orbital animation forensic fix (48/48 tests)
+├── Session 50: CSS breakpoints calculés mathématiquement (5 breakpoints)
+├── Session 49: Mobile UX optimisé (Timeline -20%, Footer compact)
+├── Session 48: Lighthouse audit (Performance 52, SEO 100)
+├── Session 47: Terminologie FR-friendly (Flywheel→Système 360°)
 ├── Session 25: Google Apps Script v2 déployé, 3 formulaires connectés
-├── Session 25: Google Sheets "Leads" créé, email notifications OK
-├── Session 24: Claims MCPs corrigés (3→9 fonctionnels)
-├── Session 21d: GA4 CONFIGURÉ (G-87F6FDJG45) sur 11 pages LIVE
 ├── Site LIVE: https://3a-automation.com ✅
 ├── SSL: Let's Encrypt actif (auto-renewal) ✅
-├── Schema.org: 12/12 pages (100%) ✅
+├── Schema.org: 26/26 pages (100%) ✅
 ├── robots.txt: 10 crawlers (8 AI + Googlebot + Bingbot) ✅
-├── Images: logo.png (-76%), og-image.png (-91%) ✅
-├── Métriques factuelles: 56 automatisations | 9 MCPs | 10+ APIs | 3 clients ✅
-└── Terminologie: "scripts" → "automatisations" sur 12 pages ✅
+├── Métriques factuelles: 45 automatisations | 9 MCPs | 10+ APIs | 3 clients ✅
+└── Terminologie: FR-friendly (Système 360°, Moteur de Croissance) ✅
 
 SCORE SESSION 13: 98/100
 ├── llms.txt créé (spec-compliant llmstxt.org)
@@ -1512,6 +1513,16 @@ scripts/
 ---
 
 *Document créé le 17/12/2025*
+*Dernière mise à jour: 20/12/2025 (Session 50)*
 *Auteur: 3A Automation*
 *Méthode: Approche bottom-up, faits vérifiés uniquement*
-*Prochaine révision: Après déploiement Phase 0*
+
+---
+
+## CHANGELOG
+
+| Version | Date | Modifications |
+|---------|------|---------------|
+| 2.0 | 20/12/2025 | Session 50: Automations 45, Orbital forensic fix, métriques actualisées |
+| 1.9 | 19/12/2025 | Session 25: Claims corrigés, Google Apps Script v2 |
+| 1.8 | 18/12/2025 | GA4 configuré, SSL Let's Encrypt |

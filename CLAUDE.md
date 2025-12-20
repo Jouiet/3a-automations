@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 7.8 | Dernière mise à jour: 2025-12-20 (Session 49 - Mobile UX Final)
+## Version: 7.9 | Dernière mise à jour: 2025-12-20 (Session 50 - Orbital Forensic + Automations Count Fix)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -40,7 +40,7 @@
 | Marchés | **3** (MA/Maghreb, EU, International) |
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
-| Automatisations validées | **64** (validé par script) |
+| Automatisations validées | **45** (vérifié 20/12 - Session 50) |
 | MCPs configurés | **12** |
 | APIs fonctionnelles | Klaviyo ✅, Apify ✅, GA4 ✅ (3/7 testé 19/12) |
 
@@ -111,7 +111,7 @@ git push origin main  # Déclenche Deploy Website workflow
 ├── HISTORY.md                    # Changelog
 ├── docker-compose.yml            # Config déploiement
 │
-├── automations/                  # 56 automatisations
+├── automations/                  # 45 automatisations
 │   ├── agency/core/              # 11 outils internes
 │   ├── clients/                  # 41 templates clients
 │   ├── generic/                  # 2 utilitaires
@@ -200,6 +200,75 @@ VPS Hostinger (ID: 1168256)
 3. **xAI Crédits ($5)** - https://console.x.ai/billing
 4. ~~Archiver legacy scripts~~ ✅ FAIT (Session 22c)
 5. ~~Fusionner CSS~~ ✅ FAIT - styles.min.css (82KB minifié)
+
+## SESSION 50 COMPLÉTÉE ✅ (20/12/2025 - Orbital Forensic + Automations Count)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Automations count fix | ✅ | 56 → 45 (comptage réel vérifié) |
+| B2B automations removed | ✅ | Apollo.io, ZoomInfo, LinkedIn B2B retirées |
+| B2C automations added | ✅ | +9 automations (Geo-Segmentation, VIP Program...) |
+| Orbital forensic fix | ✅ | 48/48 tests passent (test-orbital-forensic.cjs) |
+| CSS breakpoints corrigés | ✅ | 5 breakpoints avec calculs mathématiques |
+| Icons overlap fix | ✅ | ring-3 visible sur mobile avec offsets proportionnels |
+
+**FORENSIC ORBITAL - Analyse mathématique complète:**
+```
+PROBLÈMES IDENTIFIÉS:
+├── BUG 1: Icons clipped en haut (overflow:hidden incorrect)
+├── BUG 2: Positions non scalées (-26px fixe pour tous breakpoints)
+├── BUG 3: Container margins insuffisants pour icon overflow
+├── BUG 4: ring-3 animation desynchronisée (15s vs 30s)
+└── BUG 5: ring-3 counter-rotation non syncée
+
+SOLUTION MATHÉMATIQUE:
+├── Formule offset: icon_size / 2 (ex: 44px → -22px)
+├── Formule margin: container - orbital / 2 ≥ icon_size / 2
+└── Animation sync: ring duration = icon counter-rotation duration
+
+BREAKPOINTS FINAUX (vérifié par script):
+├── Desktop: container 500px, orbital 400px, icons 52px
+├── 1200px:  container 450px, orbital 380px, icons 50px
+├── 1024px:  container 390px, orbital 340px, icons 48px
+├── 768px:   container 350px, orbital 300px, icons 44px
+└── 480px:   container 290px, orbital 250px, icons 38px
+```
+
+**AUTOMATIONS COUNT - Vérification empirique:**
+```
+AVANT: 56 automatisations (claim non vérifié)
+APRÈS: 45 automatisations (comptées réellement)
+
+RETRAITS (B2B - hors cible PME e-commerce):
+├── Apollo.io Prospection
+├── ZoomInfo Enrichment
+├── LinkedIn Sales Navigator B2B
+├── CRM B2B Sync
+└── Lead Scoring B2B
+
+AJOUTS (B2C pertinentes):
+├── Geo-Segmentation par Marché
+├── VIP Program Automation
+├── Product Launch Sequence
+├── Review Request Automation
+├── Wishlist Reminder
+├── Price Drop Alert
+├── Size Guide Popup
+├── Returns Automation
+└── Referral Program
+```
+
+**Scripts de test créés:**
+- `scripts/test-orbital-forensic.cjs` - 48 tests, 100% pass
+- `scripts/test-session-50-fixes.cjs` - Vérification automations + orbital
+
+**Commits Session 50 (4 total):**
+- `790b61d` fix(mobile): Restore ring-3 visibility + explicit sizing
+- `c5b1dd8` fix(mobile): Hide orbital overflow under header
+- `33e4055` fix(css): Complete forensic fix for orbital animation
+- `b540f35` docs: Session 49 final - Mobile UX complete (9 commits)
+
+---
 
 ## SESSION 49 COMPLÉTÉE ✅ (20/12/2025 - Mobile UX Final)
 

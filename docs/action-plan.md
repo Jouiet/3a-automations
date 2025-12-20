@@ -1089,7 +1089,115 @@ PRÉREQUIS:
 
 ---
 
+## PLAN ACTIONNABLE - FIN SESSION 50 (20/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 50                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ AUTOMATIONS COUNT CORRIGÉ                                              │
+│      • Avant: 56 (claim non vérifié)                                        │
+│      • Après: 45 (comptage réel dans automations.html)                      │
+│      • Méthode: grep -c 'automation-card' automations.html                  │
+│                                                                              │
+│   ✅ B2B AUTOMATIONS RETIRÉES (hors cible PME e-commerce)                  │
+│      • Apollo.io Prospection B2B                                            │
+│      • ZoomInfo Lead Enrichment                                             │
+│      • LinkedIn Sales Navigator Sync                                        │
+│      • CRM B2B Pipeline Automation                                          │
+│      • B2B Lead Scoring                                                     │
+│                                                                              │
+│   ✅ B2C AUTOMATIONS AJOUTÉES (+9)                                          │
+│      • Geo-Segmentation par Marché                                          │
+│      • VIP Program Automation                                               │
+│      • Product Launch Sequence                                              │
+│      • Review Request Automation                                            │
+│      • Wishlist Reminder, Price Drop Alert, Size Guide, Returns, Referral   │
+│                                                                              │
+│   ✅ ORBITAL ANIMATION - FORENSIC FIX COMPLET                               │
+│      • 48/48 tests passent (test-orbital-forensic.cjs)                      │
+│      • 5 breakpoints calculés mathématiquement                              │
+│      • Formules: offset = -icon_size/2, margin ≥ offset                     │
+│      • ring-3 animation synchronisée (30s)                                  │
+│                                                                              │
+│   ✅ SCRIPTS DE VÉRIFICATION CRÉÉS                                          │
+│      • scripts/test-orbital-forensic.cjs (48 tests)                         │
+│      • scripts/test-session-50-fixes.cjs (automations + orbital)            │
+│                                                                              │
+│   COMMITS SESSION 50 (4):                                                    │
+│   • 790b61d fix(mobile): Restore ring-3 visibility                          │
+│   • c5b1dd8 fix(mobile): Hide orbital overflow under header                 │
+│   • 33e4055 fix(css): Complete forensic fix for orbital animation           │
+│   • b540f35 docs: Session 49 final                                          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACTIONS PRIORITAIRES POST-SESSION 50                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ⏳ PRIORITÉ 1 - Lighthouse Performance (Score: 52, Target: >90)           │
+│      • GTM defer/lazy loading (bloque 397ms main thread)                    │
+│      • Image optimization (LCP 6.2s, target <2.5s)                          │
+│      • TBT optimization (720ms, target <200ms)                              │
+│                                                                              │
+│   ⏳ PRIORITÉ 2 - n8n API Key (5 min) - ACTION MANUELLE                     │
+│      URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│                                                                              │
+│   ⏳ PRIORITÉ 3 - Shopify Partners Dev Store (30 min) - ACTION MANUELLE     │
+│      URL: https://partners.shopify.com                                       │
+│                                                                              │
+│   ⏳ PRIORITÉ 4 - xAI Crédits ($5) - ACTION MANUELLE                        │
+│      URL: https://console.x.ai/billing                                       │
+│                                                                              │
+│   ⏳ PRIORITÉ 5 - Acquisition Premier Client                                │
+│      • Date cible: avant 25/01/2026                                         │
+│      • Stratégie: LinkedIn outreach + audit gratuit                         │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    MÉTRIQUES POST-SESSION 50                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   SITE:                                                                      │
+│   • FR: 13 pages ✅ LIVE                                                    │
+│   • EN: 13 pages ✅ LIVE                                                    │
+│   • Total: 26 pages avec hreflang                                           │
+│   • Automations: 45 (vérifié par script)                                    │
+│                                                                              │
+│   MOBILE UX:                                                                 │
+│   • Orbital: 5 breakpoints, 48/48 tests                                     │
+│   • Timeline: -20% compact                                                   │
+│   • Footer: compact, centré                                                  │
+│   • Flywheel: 350px wheel, 82px stage                                       │
+│                                                                              │
+│   CSS:                                                                       │
+│   • styles.css: ~135KB                                                      │
+│   • styles.min.css: ~90KB                                                   │
+│   • 5 breakpoints orbital (Desktop, 1200px, 1024px, 768px, 480px)           │
+│                                                                              │
+│   LIGHTHOUSE:                                                                │
+│   • Performance: 52 (target >90)                                            │
+│   • Accessibility: 90                                                        │
+│   • Best Practices: 100 ✅                                                  │
+│   • SEO: 100 ✅                                                             │
+│                                                                              │
+│   PROCHAINE SESSION SUGGÉRÉE:                                               │
+│   • Performance Lighthouse (GTM defer, images)                               │
+│   • Ou: Premier client outreach                                              │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 20 Décembre 2025 (Session 49 - Mobile UX Final)
+**Mis à jour:** 20 Décembre 2025 (Session 50 - Orbital Forensic + Automations Count)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
