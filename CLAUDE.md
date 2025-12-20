@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 7.3 | Dernière mise à jour: 2025-12-20 (Session 46 - Branding Logo Fix)
+## Version: 7.4 | Dernière mise à jour: 2025-12-20 (Session 47 - UX/UI Grid Fixes + Terminology)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -219,6 +219,50 @@ VPS Hostinger (ID: 1168256)
 
 **Commits Session 41:**
 - `f92e2b5` fix(voice-widget): Add missing CSS animations + fix CTA links
+
+---
+
+## SESSION 47 COMPLÉTÉE ✅ (20/12/2025 - UX/UI Grid Fixes + Terminology)
+
+| Tâche | Statut | Détails |
+|-------|--------|---------|
+| Email flows grid (3+1 → 2+2) | ✅ | ecommerce.html flows-showcase |
+| Terminology "Flywheel" | ✅ | Remplacé par termes FR-friendly |
+| Footer email inline | ✅ | Déplacé sous Confidentialité + white-space: nowrap |
+| CSS grid balances | ✅ | Multiple pages corrigées |
+
+**Corrections terminologie appliquées:**
+- "Flywheel 360°" → "Système 360°" (footers toutes pages)
+- "Le Flywheel de Croissance" → "Le Moteur de Croissance" (index.html)
+- "Audit Flywheel Complet" → "Audit Système Complet" (automations.html)
+- "Voir Flywheel 360°" → "Voir le Système 360°" (automations.html)
+- "Découvrir le Flywheel 360" → "Découvrir le Système 360°" (ecommerce.html)
+
+**Problème footer résolu:**
+- Email "contact@3a-automation.com" wrappait sur 2 lignes
+- Fix: Déplacé en list item + CSS `white-space: nowrap` sur mailto links
+- Structure finale:
+  ```
+  LÉGAL
+  ├── Mentions légales
+  ├── Confidentialité
+  └── contact@3a-automation.com ← INLINE ✅
+  ```
+
+**CSS Grid fixes:**
+- `.flows-showcase`: `repeat(auto-fit, minmax())` → `repeat(2, 1fr)` (2+2 équilibré)
+- `.footer-links-ultra a[href^="mailto:"]`: `white-space: nowrap`
+
+**Commits Session 47:**
+- `238a8dc` fix(ux): Email flows grid balance + French terminology
+- `4d63c73` fix(footer): Force email inline with nowrap
+- `e10aff7` fix(footer): Prevent email text wrap
+- `e447783` fix(footer): Move email to list item under Confidentialité
+- `93248e6` fix(footer): Force email link to single line with white-space: nowrap
+
+**Leçon apprise:**
+- Terminologie anglophone ("Flywheel") incompréhensible pour public francophone
+- Toujours utiliser termes universels ou équivalents FR
 
 ---
 

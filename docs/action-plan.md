@@ -798,7 +798,93 @@ PRÉREQUIS:
 
 ---
 
+## PLAN ACTIONNABLE - FIN SESSION 47 (20/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 47                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ UX/UI GRID FIXES                                                       │
+│      • flows-showcase: 3+1 → 2+2 (équilibré)                                │
+│      • Footer email inline: white-space: nowrap                             │
+│                                                                              │
+│   ✅ TERMINOLOGIE FR-FRIENDLY                                               │
+│      • "Flywheel 360°" → "Système 360°" (footers)                           │
+│      • "Le Flywheel de Croissance" → "Le Moteur de Croissance"              │
+│      • "Audit Flywheel Complet" → "Audit Système Complet"                   │
+│                                                                              │
+│   ✅ FOOTER STRUCTURE AMÉLIORÉE                                             │
+│      • Email déplacé sous "Confidentialité" en list item                    │
+│      • CSS: .footer-links-ultra a[href^="mailto:"] { white-space: nowrap }  │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACTIONS PRIORITAIRES POST-SESSION 47                      │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   □ PRIORITÉ 1 - n8n API Key (5 min) - TOUJOURS EN ATTENTE                 │
+│     URL: https://n8n.srv1168256.hstgr.cloud/settings/api                   │
+│     Action: Créer clé API pour MCP                                          │
+│                                                                              │
+│   □ PRIORITÉ 2 - Shopify Partners Dev Store (30 min) - TOUJOURS EN ATTENTE │
+│     URL: https://partners.shopify.com                                       │
+│     Action: Créer "3a-automation-dev" pour tests                            │
+│                                                                              │
+│   □ PRIORITÉ 3 - xAI Crédits ($5) - TOUJOURS EN ATTENTE                    │
+│     URL: https://console.x.ai/billing                                       │
+│     Action: Acheter crédits pour Voice Agent avancé                         │
+│                                                                              │
+│   □ PRIORITÉ 4 - Audit UX mobile (nouveau)                                  │
+│     Action: Tester responsive sur 320px/375px/768px viewports               │
+│     Vérifier: grids, fonts, images, navigation                              │
+│                                                                              │
+│   □ PRIORITÉ 5 - Performance audit (nouveau)                                │
+│     Action: Lighthouse audit + WebPageTest                                   │
+│     Target: Performance >90, Accessibility >95, SEO 100                     │
+│                                                                              │
+│   □ PRIORITÉ 6 - Emails restart clients (5 jours restants)                  │
+│     Deadline: Avant 25/01/2026                                              │
+│     Action: Envoyer confirmation reprise                                    │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    MÉTRIQUES POST-SESSION 47                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   SITE:                                                                      │
+│   • FR: 13 pages ✅ LIVE (terminologie FR-friendly)                         │
+│   • EN: 13 pages ✅ LIVE                                                    │
+│   • Total: 26 pages avec hreflang                                           │
+│   • Footer: Email inline ✅ (white-space: nowrap)                           │
+│   • Grids: Équilibrées ✅ (2+2, 3+3 patterns)                               │
+│                                                                              │
+│   TERMINOLOGIE:                                                              │
+│   • "Flywheel" → "Système 360°" / "Moteur de Croissance"                    │
+│   • Accessibilité linguistique améliorée pour public francophone            │
+│                                                                              │
+│   COMMITS SESSION 47:                                                        │
+│   • 238a8dc - Email flows grid + terminology                                │
+│   • 4d63c73, e10aff7 - Footer nowrap fixes                                  │
+│   • e447783, 93248e6 - Footer email structure                               │
+│                                                                              │
+│   PROCHAINE SESSION SUGGÉRÉE:                                               │
+│   • Audit mobile responsive                                                  │
+│   • Performance Lighthouse                                                   │
+│   • n8n API Key configuration                                               │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 19 Décembre 2025 (Session 40 - Pricing Bottom-Up + Voice AI POC)
+**Mis à jour:** 20 Décembre 2025 (Session 47 - UX/UI Grid Fixes + Terminology)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables

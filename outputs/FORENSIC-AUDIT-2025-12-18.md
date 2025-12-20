@@ -1,10 +1,48 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-20 | Version: 7.1 (Màj Session 46 - Branding Logo Fix)
+## Date: 2025-12-20 | Version: 7.2 (Màj Session 47 - UX/UI Grid Fixes + Terminology)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 46)
+# SECTION 0: ÉTAT ACTUEL (20 Dec 2025 - Session 47)
+
+## Website UX/UI Status
+
+| Élément | Statut | Détails |
+|---------|--------|---------|
+| Logo officiel | ✅ Appliqué | logo.png (65KB) avec contrainte 40x40px CSS |
+| Voice widget | ✅ Pulse effect | Animations pulse-glow, pulse-ring |
+| Pages FR | 13 | Toutes avec terminologie FR-friendly |
+| Pages EN | 13 | Toutes avec terminologie cohérente |
+| Footer email | ✅ INLINE | white-space: nowrap appliqué |
+| Grid balances | ✅ Équilibrées | flows-showcase 2+2 |
+
+**TERMINOLOGIE CORRIGÉE (Session 47):**
+- "Flywheel 360°" → "Système 360°" (footers)
+- "Le Flywheel de Croissance" → "Le Moteur de Croissance" (index.html)
+- "Audit Flywheel Complet" → "Audit Système Complet" (automations.html)
+- "Découvrir le Flywheel 360" → "Découvrir le Système 360°" (ecommerce.html)
+
+**FOOTER EMAIL FIX (Session 47):**
+```
+ROOT CAUSE: Email wrappait sur 2 lignes dans colonne trop étroite
+SYMPTÔME: "contact@3a-" sur ligne 1, "automation.com" sur ligne 2
+FIX: 1) Déplacé email en list item sous Confidentialité
+     2) Ajouté CSS: .footer-links-ultra a[href^="mailto:"] { white-space: nowrap }
+COMMITS: e447783, 93248e6
+```
+
+**Structure footer finale:**
+```
+LÉGAL
+├── Mentions légales
+├── Confidentialité
+└── contact@3a-automation.com ← INLINE ✅
+```
+
+---
+
+# SECTION 0a: ÉTAT ACTUEL (20 Dec 2025 - Session 46)
 
 ## Website Branding Status
 
