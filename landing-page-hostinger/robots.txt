@@ -1,6 +1,6 @@
 # 3A Automation - robots.txt
 # https://3a-automation.com/robots.txt
-# Last Updated: 2025-12-19 (AEO Optimized)
+# Last Updated: 2025-12-21 (AEO Optimized)
 
 User-agent: *
 Allow: /
