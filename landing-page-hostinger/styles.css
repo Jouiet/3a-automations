@@ -1884,16 +1884,16 @@ body.lite {
   .hero-visual {
     display: flex;
     width: 100%;
-    height: 390px;
-    max-width: 390px;
-    margin: 20px auto var(--spacing-xl); /* 20px top to clear header */
+    height: 340px;
+    max-width: 340px;
+    margin: 20px auto var(--spacing-lg); /* 20px top to clear header */
     order: -1; /* Move above hero content */
   }
 
   .tech-orbital {
-    width: 350px;
-    height: 350px;
-    transform: scale(0.98);
+    width: 320px;
+    height: 320px;
+    transform: scale(0.95);
   }
 
   .orbital-center {
@@ -2083,6 +2083,58 @@ body.lite {
 
   .stat-divider {
     display: none;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ORBITAL TECH-ICONS MOBILE - Prevent overlap
+     Ring-3 icons reduced to prevent Hostinger/WordPress, Kling/Playwright overlap
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .tech-orbital {
+    width: 300px;
+    height: 300px;
+  }
+
+  .tech-icon {
+    padding: 4px 6px;
+    min-width: auto;
+  }
+
+  .tech-icon span {
+    font-size: 0.6rem;
+  }
+
+  /* Ring 1 - Outer ring: smaller icons */
+  .ring-1 .tech-icon {
+    width: 42px;
+    height: auto;
+    padding: 4px 5px;
+  }
+
+  /* Ring 2 - Middle ring */
+  .ring-2 .tech-icon {
+    width: 40px;
+    height: auto;
+    padding: 4px 5px;
+  }
+
+  /* Ring 3 - Inner ring: much smaller to prevent overlap */
+  .ring-3 .tech-icon {
+    width: 32px;
+    height: auto;
+    padding: 3px 4px;
+  }
+
+  .ring-3 .tech-icon span {
+    font-size: 0.5rem;
+  }
+
+  .orbital-center {
+    width: 65px;
+    height: 65px;
+  }
+
+  .orbital-center span {
+    font-size: 1.25rem;
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -2446,22 +2498,23 @@ body.lite {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     FOOTER MOBILE - Fully centered and optimized
+     FOOTER MOBILE - Compact and centered
      ═══════════════════════════════════════════════════════════════════════════ */
   .footer-ultra {
-    padding: var(--spacing-2xl) 0;
+    padding: var(--spacing-lg) 0;
   }
 
   .footer-ultra .container {
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-sm);
   }
 
   .footer-grid-ultra {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-2xl);
+    gap: var(--spacing-lg);
     text-align: center;
+    margin-bottom: var(--spacing-md);
   }
 
   .footer-brand-ultra {
@@ -2470,16 +2523,24 @@ body.lite {
     align-items: center;
     text-align: center;
     width: 100%;
+    gap: var(--spacing-xs);
   }
 
   .footer-brand-ultra .logo {
     justify-content: center;
+    transform: scale(0.9);
   }
 
-  .footer-tagline,
+  .footer-tagline {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
   .footer-desc {
+    font-size: 0.75rem;
     text-align: center;
     max-width: 100%;
+    margin: 0;
   }
 
   .footer-links-ultra {
@@ -2487,41 +2548,45 @@ body.lite {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    gap: var(--spacing-xs);
   }
 
   .footer-links-ultra h4,
   .footer-links-ultra .footer-heading {
     text-align: center;
-    width: 100%;
+    font-size: 0.8rem;
+    margin-bottom: var(--spacing-xs);
   }
 
   .footer-links-ultra ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    gap: 4px;
   }
 
   .footer-links-ultra li {
     text-align: center;
+    margin: 0;
   }
 
   .footer-links-ultra a {
-    display: inline-block;
-    text-align: center;
+    font-size: 0.8rem;
+    padding: 2px 0;
   }
 
   .footer-bottom-ultra {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-sm);
     text-align: center;
-    width: 100%;
+    padding-top: var(--spacing-md);
   }
 
   .footer-bottom-ultra p {
-    text-align: center;
+    font-size: 0.75rem;
+    margin: 0;
   }
 
   .footer-tech {
