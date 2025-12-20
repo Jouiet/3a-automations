@@ -564,7 +564,7 @@ OBJECTIF:
     if (sub) {
       sub.style.cssText = `
         font-size: 11px;
-        color: rgba(79, 186, 241, 0.8);
+        color: rgba(255, 255, 255, 0.7);
         font-weight: 400;
       `;
     }
