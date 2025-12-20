@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 3.2 - Mise à jour 20 Décembre 2025 (Session 53: Audit Forensique)
+## Version 3.3 - Mise à jour 20 Décembre 2025 (Session 61: Voice AI Marketing Strategy)
 ## Basé sur données réelles confirmées
 
 ---
@@ -60,8 +60,8 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │                                                                              │
 │  SCRIPTS DISPONIBLES                                                        │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  Total: 50 scripts dans /automations (vérifié 20/12/2025)                   │
-│  ├── 37 scripts client-facing                                              │
+│  Total: 51 scripts dans /automations (vérifié 20/12/2025 Session 61)        │
+│  ├── 38 scripts client-facing (+Voice AI Booking)                          │
 │  ├── 13 scripts internes/test (non client-facing)                          │
 │  └── Genericité: 84% utilisent process.env                                 │
 │                                                                              │
@@ -104,10 +104,10 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │  ├── ✅ Formulaires: 3 connectés (Google Apps Script v2)                    │
 │  ├── ✅ Leads: Google Sheets auto-créé                                      │
 │  ├── ✅ Notifications: Email vers contact@3a-automation.com                 │
-│  ├── ⚠️ Claims marketing: À CORRIGER (56→50 auto, 13 MCPs, 10+ APIs)       │
+│  ├── ✅ Claims marketing: CORRIGÉ (51 auto, 13 MCPs, 10+ APIs)              │
 │  ├── ✅ Branding: 3A-BRANDING-GUIDE.md (couleurs exactes du logo)          │
 │  ├── ✅ GitHub: github.com/Jouiet/3a-automations connecté                   │
-│  ├── ❌ Système de booking (Calendly)                                       │
+│  ├── ✅ Système de booking: Voice AI + Google Calendar (Session 60-61)     │
 │  ├── ❌ Testimonials/Case studies publics                                   │
 │  └── ❌ Pipeline prospects                                                  │
 │                                                                              │

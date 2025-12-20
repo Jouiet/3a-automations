@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 9.0 | Dernière mise à jour: 2025-12-20 (Session 60 - Voice Booking + Performance)
+## Version: 9.1 | Dernière mise à jour: 2025-12-20 (Session 61 - Voice AI Marketing Strategy)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -11,15 +11,57 @@
 
 | Métrique | Valeur | Vérifié |
 |----------|--------|---------|
-| Total | **50** | ✅ Session 60 |
-| FR Catalog | 50 | ✅ |
-| EN Catalog | 50 | ✅ |
+| Total | **51** | ✅ Session 61 |
+| FR Catalog | 51 | ✅ |
+| EN Catalog | 51 | ✅ |
 | Scripts .cjs | 20 | ✅ |
 | Klaviyo flows | 5 | ✅ |
 | n8n workflows | 3 | ✅ |
 
 **Catégories:**
-- Lead Gen: 12 | SEO: 6 | Email: 8 | Shopify: 9 | Analytics: 8 | Content: 7
+- Lead Gen: 13 (+Voice Booking) | SEO: 6 | Email: 8 | Shopify: 9 | Analytics: 8 | Content: 7
+
+---
+
+## SESSION 61 COMPLÉTÉE ✅ (20/12/2025 - Voice AI Marketing Strategy)
+
+### Voice AI Booking = BONUS MARKETING
+- **Stratégie:** Inclus GRATUIT dans TOUS les packs (Quick Win, Essentials, Growth)
+- **Différenciateur:** <1% agences automation ont ça
+- **Market Size:** $2.4B → $47.5B by 2034 (CAGR 34.8%)
+- **ROI prouvé:** -67% temps booking, +37-72% conversion leads
+
+### Pricing Updates (FR + EN)
+```
+Quick Win (390€):  + BONUS Voice AI + Booking
+Essentials (790€): + BONUS Voice AI + Booking + WhatsApp
+Growth (1399€):    + BONUS Voice AI + Booking + WhatsApp + Rappels
+```
+
+### Tech Stack Voice AI (Propriétaire - NO Synthflow)
+```
+┌─────────────────────────────────────────────────────────────┐
+│  WEB: Web Speech API (gratuit, Chrome/Edge)                │
+│  TÉLÉPHONE: Grok Voice ($0.05/min) - FUTUR                 │
+│  CONFIRMATIONS: WhatsApp Business API (gratuit tier)       │
+│  BACKEND: Google Apps Script (serverless, $0)              │
+│  CALENDAR: Google Calendar API                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### WhatsApp > SMS (Décision Session 61)
+| Critère | SMS (Twilio) | WhatsApp |
+|---------|--------------|----------|
+| Coût | $0.05/msg | GRATUIT |
+| Open rate | 20% | 98% |
+| Maroc/Maghreb | Rare | Dominant |
+
+### Commits Session 61
+```
+15ecc28 feat(marketing): Add Voice Booking automation to catalog (50→51)
+d7e1398 feat(marketing): Update 50→51 automations + Voice AI messaging
+ce82e83 feat(pricing): Add Voice AI Booking as BONUS in ALL packs
+```
 
 ---
 
