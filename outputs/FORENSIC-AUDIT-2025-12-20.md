@@ -134,3 +134,121 @@ C'est le cœur du business model et aussi sa plus grande faiblesse actuelle.
 
 5.  **QUALITÉ DE VIE (BASSE PRIORITÉ):**
     *   Harmoniser le `docker-compose.yml` local avec la configuration utilisée dans le workflow GitHub Actions pour éviter toute confusion future.
+
+---
+
+## 8. GUIDES DE CORRECTION
+
+Cette section détaille la marche à suivre pour corriger les problèmes techniques identifiés.
+
+### 8.1 Correction des Taux de Change Hardcodés
+
+#### Problème
+
+Le fichier `landing-page-hostinger/geo-locale.js` contient un objet `exchangeRates` avec des taux de change inscrits en dur. Ceci représente un risque majeur car les prix affichés peuvent être incorrects.
+
+#### Solution
+
+Remplacer les valeurs statiques par un appel à une API externe, avec un système de cache local (`localStorage`) pour la performance et la résilience. Nous utiliserons l'API gratuite de `fawazahmed0/exchange-api` qui ne requiert pas de clé.
+
+#### Implémentation (Guide)
+
+Les modifications suivantes doivent être appliquées au fichier `landing-page-hostinger/geo-locale.js`.
+
+**1. Ajouter une fonction pour récupérer les taux de change (`fetchExchangeRates`)**
+
+Cette fonction gère la récupération des taux depuis le cache ou l'API.
+
+```javascript
+// ... (dans l'objet GeoLocale)
+
+/**
+ * Fetch exchange rates from API or cache
+ */
+async fetchExchangeRates() {
+  const cacheKey = '3a-exchange-rates';
+  const cacheDuration = 24 * 60 * 60 * 1000; // 24 hours
+
+  try {
+    const cachedData = JSON.parse(localStorage.getItem(cacheKey));
+    if (cachedData && (new Date().getTime() - cachedData.timestamp < cacheDuration)) {
+      console.log('Using cached exchange rates.');
+      this.exchangeRates = cachedData.rates;
+      return;
+    }
+  } catch (e) {
+    // Cache is invalid or doesn't exist
+  }
+
+  try {
+    console.log('Fetching fresh exchange rates...');
+    const response = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json');
+    if (!response.ok) throw new Error('Failed to fetch rates');
+    const data = await response.json();
+
+    // L'API retourne les taux sous la clé "eur"
+    const rates = {
+      EUR: 1.00,
+      USD: data.eur.usd,
+      MAD: data.eur.mad,
+      GBP: data.eur.gbp,
+    };
+    
+    this.exchangeRates = rates;
+    
+    localStorage.setItem(cacheKey, JSON.stringify({
+      timestamp: new Date().getTime(),
+      rates: rates
+    }));
+
+  } catch (error) {
+    console.error('Failed to fetch exchange rates, using fallback static rates.', error);
+    // En cas d'erreur, on garde les taux hardcodés comme solution de secours
+  }
+},
+```
+
+**2. Modifier la fonction `init` pour appeler `fetchExchangeRates`**
+
+La fonction `init` doit appeler la nouvelle fonction au démarrage pour garantir que les taux sont à jour avant d'afficher les prix.
+
+```javascript
+// ... (dans l'objet GeoLocale)
+
+/**
+ * Initialize and return detected/saved locale
+ */
+async init() {
+  // D'ABORD: récupérer les taux de change
+  await this.fetchExchangeRates();
+
+  // Priority 1: Saved preference
+  const saved = this.getSavedLocale();
+  if (saved) {
+    this.updatePrices(saved.currency);
+    return saved;
+  }
+
+  // Priority 2: Geo-detection
+  const country = await this.detectCountry();
+  if (country) {
+    const locale = { ...this.getLocale(country) };
+    locale.country = country;
+    locale.source = 'geo';
+    this.saveLocale(locale);
+    this.updatePrices(locale.currency);
+    return locale;
+  }
+
+  // Priority 3: Browser language
+  const browserLang = navigator.language?.substring(0, 2) || 'en';
+  const locale = browserLang === 'fr'
+    ? { lang: 'fr', currency: 'EUR', region: 'europe', source: 'browser' }
+    : { ...this.defaultLocale, source: 'default' };
+
+  this.updatePrices(locale.currency);
+  return locale;
+},
+```
+
+Cette approche résout le problème des taux hardcodés tout en étant résiliente (elle se rabat sur les taux statiques en cas d'erreur) et performante (grâce au cache).
