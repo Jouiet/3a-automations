@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Pour activer: créer Google Apps Script Web App → remplacer YOUR_SCRIPT_ID
   // Guide: https://developers.google.com/apps-script/guides/web
   const FORM_CONFIG = {
-    googleScriptUrl: 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', // Google Apps Script
+    googleScriptUrl: 'https://script.google.com/macros/s/AKfycbyzIHwTDfQpm57LBloFJ53BMkSvsSDd3zCXE41mMSFPMa1m6xOuji3ICKQJA1oiHb-4/exec', // Google Apps Script
     fallbackEmail: 'contact@3a-automation.com',
     timeout: 5000 // 5 seconds
   };
