@@ -5392,7 +5392,34 @@ body.lite {
   .catalog-stat { padding: var(--spacing-md); }
   .stat-number { font-size: 2rem; }
   .category-header { flex-direction: column; text-align: center; }
-  .automations-grid { grid-template-columns: 1fr; }
+
+  /* Automations Grid - 2x2 layout on mobile */
+  .automations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+  .automation-card {
+    padding: var(--spacing-md);
+  }
+  .automation-card h3 {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-xs);
+  }
+  .automation-card p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-bottom: var(--spacing-sm);
+  }
+  .automation-meta {
+    font-size: 0.65rem;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+  }
+  .automation-meta span {
+    padding: 0.2rem 0.4rem;
+  }
+
   .mcp-grid { grid-template-columns: repeat(2, 1fr); }
   .flywheel-link { flex-direction: column; text-align: center; }
   .promo-text { text-align: center; }
@@ -5473,6 +5500,31 @@ body.lite {
   .cta-content .btn-large {
     padding: 0.75rem 1.25rem;
     font-size: 0.9rem;
+  }
+
+  /* Automations Grid - 2x2 compact on small mobile */
+  .automations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .automation-card {
+    padding: var(--spacing-sm);
+  }
+  .automation-card h3 {
+    font-size: 0.8rem;
+  }
+  .automation-card p {
+    font-size: 0.7rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .automation-meta {
+    font-size: 0.6rem;
+  }
+  .automation-meta span {
+    padding: 0.15rem 0.3rem;
   }
 }
 
