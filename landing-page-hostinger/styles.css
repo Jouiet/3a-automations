@@ -2781,6 +2781,9 @@ body.lite {
 
   .footer-ultra .container {
     padding: 0 var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .footer-grid-ultra {
