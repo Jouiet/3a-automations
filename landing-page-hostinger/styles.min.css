@@ -2781,17 +2781,17 @@ body.lite {
 
   .footer-ultra .container {
     padding: 0 var(--spacing-sm);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   .footer-grid-ultra {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl); /* Increased gap for better spacing */
-    margin: 0 auto var(--spacing-lg); /* Center the block and add bottom margin */
-    max-width: 500px; /* Constrain width on larger mobile screens */
+    gap: var(--spacing-lg);
+    width: 90%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--spacing-lg);
   }
   
   .footer-brand-ultra {
