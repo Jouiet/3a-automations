@@ -2777,48 +2777,64 @@ body.lite {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     FOOTER MOBILE - Definitive Centering Fix (v4)
+     FOOTER MOBILE - Definitive Centering Fix (v5)
      ═══════════════════════════════════════════════════════════════════════════ */
   .footer-ultra {
     padding: var(--spacing-2xl) 0;
   }
 
   .footer-status-bar {
-    width: 90%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: var(--spacing-2xl);
     justify-content: center;
     flex-wrap: wrap;
     gap: var(--spacing-md);
+    display: flex;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: rgba(25, 30, 53, 0.6);
+    border: 1px solid rgba(79, 186, 241, 0.15);
+    border-radius: var(--radius-lg);
   }
 
   .footer-grid-ultra {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl);
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    gap: var(--spacing-lg);
+    width: 100%;
     margin-bottom: var(--spacing-2xl);
   }
   
-  .footer-brand-ultra,
+  .footer-brand-ultra {
+    text-align: left;
+  }
+
   .footer-links-ultra {
     text-align: left;
   }
+
+  .footer-links-ultra ul {
+    /* No special rules needed */
+  }
   
   .footer-bottom-ultra {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
     flex-direction: column;
     gap: var(--spacing-md);
     text-align: center;
+    display: flex;
+    align-items: center;
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid rgba(79, 186, 241, 0.1);
   }
 
   .footer-tech {
     justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
   }
 
   .section-title-ultra {
