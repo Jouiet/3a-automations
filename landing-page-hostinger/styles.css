@@ -1796,10 +1796,10 @@ body.lite {
 
 .footer-desc {
   font-size: 0.875rem;
-  color: var(--text-secondary);
+  color: var(--text-light); /* Changed from --text-secondary to --text-light */
   line-height: 1.6;
   max-width: 280px;
-  font-weight: bold; /* Added for bold text */
+  font-weight: bold;
 }
 
 .footer-grid-ultra {
