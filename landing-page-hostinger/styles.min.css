@@ -1752,7 +1752,7 @@ body.lite {
 
 /* Footer Status Bar */
 .footer-status-bar {
-  display: flex;
+  display: flex; /* Ensure it's a flex container */
   justify-content: center;
   flex-wrap: wrap;
   gap: var(--spacing-lg);
@@ -1761,6 +1761,9 @@ body.lite {
   border: 1px solid rgba(79, 186, 241, 0.15);
   border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-2xl);
+  width: 95%; /* Enlarge as requested */
+  margin-left: auto; /* Center the bar */
+  margin-right: auto; /* Center the bar */
 }
 
 .status-item {
@@ -2456,6 +2459,7 @@ body.lite {
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
     box-sizing: border-box;
+    margin: 0 auto; /* Added for centering */
   }
 
   /* Hero centering - CORRECT selector */
@@ -2773,60 +2777,48 @@ body.lite {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     FOOTER MOBILE - Compact and centered
+     FOOTER MOBILE - Definitive Centering Fix (v4)
      ═══════════════════════════════════════════════════════════════════════════ */
   .footer-ultra {
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-2xl) 0;
   }
 
-  .footer-ultra .container {
-    padding: 0 var(--spacing-sm);
+  .footer-status-bar {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--spacing-2xl);
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
   }
 
   .footer-grid-ultra {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-xl);
     width: 90%;
-    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
   }
   
-  .footer-brand-ultra {
-    text-align: left;
-  }
-
+  .footer-brand-ultra,
   .footer-links-ultra {
     text-align: left;
   }
-
-  .footer-links-ultra ul {
-    /* No specific alignment needed for grid text content */
-  }
   
   .footer-bottom-ultra {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
     gap: var(--spacing-md);
-  }
-
-  .footer-bottom-ultra p {
-    font-size: 0.75rem;
-    margin: 0;
+    text-align: center;
   }
 
   .footer-tech {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-  }
-
-  .footer-status-bar {
-    justify-content: center;
-    flex-wrap: wrap;
   }
 
   .section-title-ultra {
