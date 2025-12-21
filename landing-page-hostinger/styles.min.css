@@ -1799,6 +1799,7 @@ body.lite {
   color: var(--text-secondary);
   line-height: 1.6;
   max-width: 280px;
+  font-weight: bold; /* Added for bold text */
 }
 
 .footer-grid-ultra {
