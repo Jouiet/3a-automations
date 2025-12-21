@@ -706,7 +706,12 @@ document.addEventListener('DOMContentLoaded', function() {
     rootMargin: '100px 0px -50px 0px'  // Trigger 100px before entering viewport
   });
 
-  sections.forEach(section => {
+  sections.forEach((section, index) => {
+    // Do not apply the hidden effect to the first section (hero)
+    if (index === 0) {
+      section.classList.add('section-visible');
+      return;
+    }
     section.classList.add('section-hidden');
     sectionObserver.observe(section);
   });
