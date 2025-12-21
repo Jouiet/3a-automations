@@ -2783,9 +2783,11 @@ body.lite {
   }
 
   .footer-grid-ultra {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+    gap: var(--spacing-xl); /* Increased gap for better spacing */
+    margin: 0 auto var(--spacing-lg); /* Center the block and add bottom margin */
+    max-width: 500px; /* Constrain width on larger mobile screens */
   }
   
   .footer-brand-ultra {
@@ -2797,7 +2799,7 @@ body.lite {
   }
 
   .footer-links-ultra ul {
-    align-items: flex-start;
+    /* No specific alignment needed for grid text content */
   }
   
   .footer-bottom-ultra {
