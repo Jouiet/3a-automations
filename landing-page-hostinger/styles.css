@@ -1752,7 +1752,7 @@ body.lite {
 
 /* Footer Status Bar */
 .footer-status-bar {
-  display: flex;
+  display: flex; /* Ensure it's a flex container */
   justify-content: center;
   flex-wrap: wrap;
   gap: var(--spacing-lg);
@@ -1761,6 +1761,9 @@ body.lite {
   border: 1px solid rgba(79, 186, 241, 0.15);
   border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-2xl);
+  width: 95%; /* Enlarge as requested */
+  margin-left: auto; /* Center the bar */
+  margin-right: auto; /* Center the bar */
 }
 
 .status-item {
@@ -2456,6 +2459,7 @@ body.lite {
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
     box-sizing: border-box;
+    margin: 0 auto; /* Added for centering */
   }
 
   /* Hero centering - CORRECT selector */
@@ -2779,16 +2783,14 @@ body.lite {
     padding: var(--spacing-lg) 0;
   }
 
-  .footer-ultra .container {
-    padding: 0 var(--spacing-sm);
-  }
+
 
   .footer-grid-ultra {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-lg);
-    width: 90%;
-    max-width: 500px;
+    gap: var(--spacing-xl); /* Use larger gap as previously intended */
+    width: 95%; /* Enlarge as requested */
+    max-width: 500px; /* Keep max-width as safeguard */
     margin-left: auto;
     margin-right: auto;
     margin-bottom: var(--spacing-lg);
