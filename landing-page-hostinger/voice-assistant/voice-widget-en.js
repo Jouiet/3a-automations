@@ -13,6 +13,7 @@
   const CONFIG = {
     apiEndpoint: '/voice-assistant/api.php',
     welcomeMessage: 'Hello! I\'m the 3A Automation assistant. How can I help you today?',
+    welcomeMessageTextOnly: 'Hello! I\'m the 3A Automation assistant. Type your question and I\'ll respond instantly.',
     placeholder: 'Ask your question...',
     position: 'bottom-right',
     primaryColor: '#4FBAF1',      // 3A Primary Blue
@@ -47,6 +48,11 @@
 
   const hasSpeechRecognition = 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window;
   const hasSpeechSynthesis = 'speechSynthesis' in window;
+
+  // Browser detection for fallback
+  const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const needsTextFallback = !hasSpeechRecognition || isFirefox || isSafari;
 
   function createWidget() {
     const widget = document.createElement('div');
@@ -301,7 +307,7 @@
           </div>
           <div class="va-header-text">
             <h3>3A Assistant</h3>
-            <p>${hasSpeechRecognition ? 'Speak or type' : 'Type your question'}</p>
+            <p>${needsTextFallback ? 'Type your question' : 'Speak or type'}</p>
           </div>
           <button class="va-close" id="va-close" aria-label="Close">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
@@ -312,7 +318,7 @@
 
         <div class="va-input-area">
           <input type="text" class="va-input" id="va-input" placeholder="${CONFIG.placeholder}">
-          ${hasSpeechRecognition ? `
+          ${!needsTextFallback && hasSpeechRecognition ? `
           <button class="va-mic-btn" id="va-mic" aria-label="Enable microphone">
             <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93h2c0 3.31 2.69 6 6 6s6-2.69 6-6h2c0 4.08-3.06 7.44-7 7.93V20h4v2H8v-2h4v-4.07z"/></svg>
           </button>
@@ -778,7 +784,7 @@
     },
     automations: {
       keywords: ['automation', 'automations', 'workflow', 'flows', 'what can you'],
-      response: `I have 50 ready-to-deploy automations:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Auto reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\nWhich type interests you most?`
+      response: `I have 66 ready-to-deploy automations:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Auto reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\nWhich type interests you most?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'customer', 'acquisition', 'find customers'],
@@ -906,7 +912,10 @@
     const panel = document.getElementById('va-panel');
     if (isOpen) {
       panel.classList.add('open');
-      if (conversationHistory.length === 0) addMessage(CONFIG.welcomeMessage, 'assistant');
+      if (conversationHistory.length === 0) {
+        const welcomeMsg = needsTextFallback ? CONFIG.welcomeMessageTextOnly : CONFIG.welcomeMessage;
+        addMessage(welcomeMsg, 'assistant');
+      }
       document.getElementById('va-input').focus();
     } else {
       panel.classList.remove('open');
