@@ -25,8 +25,8 @@
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
 
   <!-- Main CSS deferred -->
-  <link rel="preload" href="../styles.min.css?v=18.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="../styles.min.css?v=18.0"></noscript>
+  <link rel="preload" href="../styles.min.css?v=19.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="../styles.min.css?v=19.0"></noscript>
 
   <!-- Google Tag Manager + GA4 - Lazy Loaded for Performance -->
   <script>
@@ -125,12 +125,18 @@
         </div>
       </a>
       <nav class="nav" id="nav-menu">
-        <a href="/services/ecommerce.html">E-commerce</a>
-        <a href="/services/pme.html">PME</a>
-        <a href="/automations.html">Automations</a>
-        <a href="/pricing.html">Tarifs</a>
-        <a href="/#contact" class="btn-nav">Contact</a>
-        <a href="/en/legal/terms.html" class="lang-switch" title="Switch to English">EN</a>
+        <a href="../services/ecommerce.html">E-commerce</a>
+        <a href="../services/pme.html">PME</a>
+        <a href="../automations.html">Automations</a>
+        <a href="../pricing.html">Tarifs</a>
+        <a href="../booking.html">RDV</a>
+        <a href="..#contact" class="btn-nav">
+          <span>Contact</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="../en/" class="lang-switch" title="Switch to English">EN</a>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>
@@ -214,11 +220,31 @@
   <!-- Footer Ultra -->
   <footer class="footer-ultra">
     <div class="container">
+      <!-- System Status Banner -->
+      <div class="footer-status-bar">
+        <div class="status-item">
+          <span class="status-dot online"></span>
+          <span>Système opérationnel</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <span>66 Automatisations</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v10M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m6 0h10M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg></span>
+          <span>12 MCPs actifs</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <span>10+ APIs intégrées</span>
+        </div>
+      </div>
+
       <div class="footer-grid-ultra">
         <div class="footer-brand-ultra">
           <div class="logo">
             <div class="logo-icon">
-              <img src="/logo.png" alt="" width="40" height="40" />
+              <img src="../logo.png" alt="" width="40" height="40" />
             </div>
             <div class="logo-text-wrap">
               <span class="logo-text">3A</span>
@@ -232,29 +258,29 @@
         <div class="footer-links-ultra">
           <h4>Solutions</h4>
           <ul>
-            <li><a href="/services/ecommerce.html">E-commerce</a></li>
-            <li><a href="/services/pme.html">PME & B2B</a></li>
-            <li><a href="/services/flywheel-360.html">Système 360°</a></li>
-            <li><a href="/automations.html">Automations</a></li>
-            <li><a href="/pricing.html">Tarifs</a></li>
+            <li><a href="../services/ecommerce.html">E-commerce</a></li>
+            <li><a href="../services/pme.html">PME & B2B</a></li>
+            <li><a href="../services/flywheel-360.html">Système 360°</a></li>
+            <li><a href="../automations.html">Automations</a></li>
+            <li><a href="../pricing.html">Tarifs</a></li>
           </ul>
         </div>
 
         <div class="footer-links-ultra">
           <h4>Ressources</h4>
           <ul>
-            <li><a href="/services/audit-gratuit.html">Audit Gratuit</a></li>
-            <li><a href="/cas-clients.html">Cas Clients</a></li>
-            <li><a href="/a-propos.html">À propos</a></li>
-            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="../services/audit-gratuit.html">Audit Gratuit</a></li>
+            <li><a href="../cas-clients.html">Cas Clients</a></li>
+            <li><a href="../a-propos.html">À propos</a></li>
+            <li><a href="../contact.html">Contact</a></li>
           </ul>
         </div>
 
         <div class="footer-links-ultra">
           <h4>Légal</h4>
           <ul>
-            <li><a href="/legal/mentions-legales.html">Mentions légales</a></li>
-            <li><a href="/legal/politique-confidentialite.html">Confidentialité</a></li>
+            <li><a href="../legal/mentions-legales.html">Mentions légales</a></li>
+            <li><a href="../legal/politique-confidentialite.html">Confidentialité</a></li>
             <li><a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a></li>
           </ul>
         </div>
@@ -287,6 +313,6 @@
 
   <script src="../script-lite.js"></script>
   <!-- Voice Assistant Widget -->
-  <script src="/voice-assistant/voice-widget.js?v=18.0" defer></script>
+  <script src="/voice-assistant/voice-widget.js?v=19.0" defer></script>
 </body>
 </html>

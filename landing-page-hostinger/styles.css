@@ -5866,3 +5866,24 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
   display: none !important;
 }
 
+
+/* Language Switcher Styling */
+.lang-switch {
+  padding: 4px 10px;
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem !important;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+.lang-switch:hover {
+  background: var(--primary);
+  color: var(--secondary) !important;
+  border-color: var(--primary);
+  box-shadow: none;
+}
+/* Remove the underline hover effect inherited from .nav a */
+.lang-switch::after {
+  display: none !important;
+}
+
