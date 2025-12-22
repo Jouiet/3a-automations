@@ -1,6 +1,44 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 9.3 | Dernière mise à jour: 2025-12-22 (Session 62 - Forensic Audit Complete)
+## Version: 9.4 | Dernière mise à jour: 2025-12-23 (Session 63 - CinematicAds Forensic + Booking Test)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
+
+---
+
+## SESSION 63 COMPLÉTÉE ✅ (23/12/2025 - CinematicAds Forensic + Booking Test)
+
+### Analyse Forensique CinematicAds
+- **Fichier créé:** `automations-cinematicads/FORENSIC-ANALYSIS.md` (905 lignes, v1.4)
+- **Architecture analysée:** AssetFactory, MCPHub, n8n workflows, config
+- **Dual-Provider AI:** Vertex AI | xAI Grok (A/B testing implémenté)
+
+### STATE OF THE ART Models (Décembre 2025)
+| Provider | Model | Usage | Prix |
+|----------|-------|-------|------|
+| Vertex AI | `gemini-3-pro-preview` | Texte | - |
+| Vertex AI | `imagen-4.0-generate-001` | Image | $0.04/img |
+| Vertex AI | `veo-3.1-generate-preview` | Video | $0.40/sec |
+| xAI | `grok-4.1` 🏆 #1 LMArena (1483 Elo) | Texte | - |
+| xAI | `grok-2-image-1212` | Image | $0.07/img |
+| xAI | Grok Voice | Audio | $0.05/min |
+
+### MCP Hub Redundancy (Constat Technique)
+- Claude Code gère nativement 12 MCPs via `~/.config/claude-code/mcp.json`
+- MCPHub.js réimplémente ce que Claude Code fait automatiquement
+- **Recommandation:** Utiliser MCPs natifs Claude Code
+
+### Booking Flow Test End-to-End
+| Composant | Status | Détails |
+|-----------|--------|---------|
+| API GET (slots) | ✅ LIVE | 180 créneaux, Lun-Ven 9h-18h |
+| booking.html FR | ✅ HTTP 200 | Page fonctionnelle |
+| booking.html EN | ✅ HTTP 200 | Page fonctionnelle |
+| Voice Widget | ✅ | Keywords booking intégrés |
+| Fallback Email | ✅ | mailto:contact@3a-automation.com |
+
+### Commit Session 63
+```
+5c9dbf2 docs(cinematicads): Complete forensic analysis v1.4 with TOP 2025 models
+```
 
 ---
 
