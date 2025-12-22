@@ -1,144 +1,256 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Flywheel 360 - Système d'automatisation complet pour E-commerce ET PME/B2B. Acquisition, Conversion, Rétention, Advocacy. ROI mesurable.">
-  <title>Flywheel 360 | Automatisation Complète E-commerce & PME | 3A Automation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Système Flywheel 360° | 3A Automation</title>
+    <meta name="description" content="Découvrez le Flywheel 360°, notre système d'automatisation interactif qui couvre l'Acquisition, la Conversion, la Rétention et l'Advocacy.">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="canonical" href="https://3a-automation.com/services/flywheel-360.html">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="../styles.min.css?v=19.0">
+    <style>
+        /* Flywheel Page Specific Styles */
+        :root {
+            --flywheel-bg: #1A1E33;
+            --flywheel-border: rgba(79, 186, 241, 0.2);
+            --flywheel-highlight: var(--primary);
+            --flywheel-inactive: #4A5568;
+        }
+        .flywheel-body { background: var(--flywheel-bg); }
+        .flywheel-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .flywheel-hero { text-align: center; padding: 120px 0 4rem; }
+        .flywheel-hero h1 { font-size: 3.5rem; color: var(--text-light); margin-bottom: 1rem; }
+        .flywheel-hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+        
+        .flywheel-main { display: grid; grid-template-columns: 1fr 1.25fr; gap: 2rem; align-items: start; }
+        
+        .flywheel-diagram-container { position: sticky; top: 120px; }
+        .flywheel-svg { width: 100%; height: auto; }
+        .flywheel-svg .stage-bg { fill: rgba(255,255,255,0.02); stroke: var(--flywheel-border); transition: all 0.3s ease; }
+        .flywheel-svg .stage { cursor: pointer; }
+        .flywheel-svg .stage:hover .stage-bg { fill: rgba(79, 186, 241, 0.1); }
+        .flywheel-svg .stage.active .stage-bg { fill: rgba(79, 186, 241, 0.2); stroke: var(--flywheel-highlight); }
+        .flywheel-svg .stage-icon { fill: var(--text-secondary); transition: fill 0.3s ease; }
+        .flywheel-svg .stage.active .stage-icon { fill: var(--flywheel-highlight); }
+        .flywheel-svg .stage-text { fill: var(--text-secondary); font-family: var(--font-sans); font-weight: 600; font-size: 14px; transition: fill 0.3s ease;}
+        .flywheel-svg .stage.active .stage-text { fill: var(--text-light); }
+        .flywheel-svg .center-hub { fill: var(--primary); }
+        .flywheel-svg .center-text { fill: var(--secondary); font-family: var(--font-sans); font-weight: 800; font-size: 24px; }
+        .flywheel-svg .arrows { stroke: var(--flywheel-border); animation: rotate 40s linear infinite; transform-origin: center; }
+        
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-  <link rel="icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="canonical" href="https://3a-automation.com/services/flywheel-360.html">
-  <link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/flywheel-360.html">
-  <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/flywheel-360.html">
-  <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/services/flywheel-360.html">
+        .flywheel-content-panel { min-height: 500px; }
+        .flywheel-stage-content { display: none; }
+        .flywheel-stage-content.active { display: block; animation: fadeIn 0.5s ease; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; translateY(0); } }
 
-  <meta property="og:title" content="Flywheel 360 | Automatisation E-commerce & PME">
-  <meta property="og:description" content="Système intégré Acquisition-Conversion-Rétention-Advocacy pour E-commerce et PME/B2B. ROI mesurable.">
-  <meta property="og:image" content="https://3a-automation.com/og-image.png">
+        .stage-header h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .stage-header p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; }
 
-  <!-- Critical CSS Inline for Fast FCP -->
-  <style>*,::after,::before{box-sizing:border-box;margin:0;padding:0}:root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}html{scroll-behavior:smooth}body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased;overflow-x:hidden}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.95);backdrop-filter:blur(10px)}.nav{display:flex;gap:2rem;list-style:none}.nav a{color:var(--text-light);text-decoration:none;font-size:.95rem}}</style>
+        .kpi-grid, .automation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        .grid-title { font-size: 1.2rem; color: var(--text-light); margin-bottom: 1rem; border-bottom: 1px solid var(--flywheel-border); padding-bottom: 0.5rem; }
 
-  <!-- Preconnect and deferred styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-  <link rel="preload" href="../styles.min.css?v=19.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="../styles.min.css?v=19.0"></noscript>
+        .kpi-card, .automation-card { background: rgba(255,255,255,0.03); border: 1px solid var(--flywheel-border); padding: 1rem; border-radius: var(--radius-lg); }
+        .kpi-card-value { font-size: 1.75rem; font-weight: 700; color: var(--flywheel-highlight); font-family: var(--font-mono); }
+        .kpi-card-label { font-size: 0.9rem; color: var(--text-secondary); }
+        .automation-card { display: flex; flex-direction: column; justify-content: space-between; min-height: 120px; }
+        .automation-card-name { font-weight: 600; color: var(--text-light); }
+        .automation-card-benefit { font-size: 0.85rem; color: var(--accent); font-family: var(--font-mono); margin-top: 0.5rem; }
+
+    </style>
 </head>
-<body class="lite">
-  <header class="header">
-    <div class="container">
-      <a href="/" class="logo">
-        <div class="logo-icon"><img src="../logo.png" alt="3A Automation Logo" width="40" height="40" /></div>
-        <div class="logo-text-wrap"><span class="logo-text">3A</span><span class="logo-sub">AUTOMATION</span></div>
-      </a>
-      <nav class="nav" id="nav-menu">
-        <a href="../services/ecommerce.html">E-commerce</a>
-        <a href="../services/pme.html">PME</a>
-        <a href="../automations.html">Automations</a>
-        <a href="../pricing.html">Tarifs</a>
-        <a href="../booking.html">RDV</a>
-        <a href="#contact" class="btn-nav"><span>Contact</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        <a href="../en/services/flywheel-360.html" class="lang-switch" title="Switch to English">EN</a>
-      </nav>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span class="hamburger"></span></button>
-    </div>
-  </header>
+<body class="flywheel-body">
+    <header class="header">
+        <div class="container">
+          <a href="/" class="logo">
+            <div class="logo-icon"><img src="../logo.png" alt="3A Automation Logo"></div>
+            <div class="logo-text-wrap"><span class="logo-text">3A</span><span class="logo-sub">AUTOMATION</span></div>
+          </a>
+          <nav class="nav" id="nav-menu">
+            <a href="../services/ecommerce.html">E-commerce</a>
+            <a href="../services/pme.html">PME</a>
+            <a href="../automations.html">Automations</a>
+            <a href="../pricing.html">Tarifs</a>
+            <a href="../booking.html">RDV</a>
+            <a href="/#contact" class="btn-nav"><span>Contact</span></a>
+            <a href="../en/services/flywheel-360.html" class="lang-switch">EN</a>
+          </nav>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span class="hamburger"></span></button>
+        </div>
+      </header>
 
-  <section class="service-hero">
-    <div class="container">
-      <div class="breadcrumb"><a href="/">Accueil</a> / <span>Flywheel 360</span></div>
-      <span class="badge">Système Complet</span>
-      <h1>Le <span class="highlight">Flywheel 360°</span></h1>
-      <p class="hero-sub">Un écosystème d'automatisation intégré qui couvre tout le cycle de vie client, de l'acquisition à la fidélisation.</p>
-      <div class="hero-cta">
-        <a href="/#contact" class="btn btn-primary">Planifier une démo</a>
-        <a href="/pricing.html" class="btn btn-secondary">Voir les tarifs</a>
-      </div>
-    </div>
-  </section>
+    <div class="flywheel-container">
+        <div class="flywheel-hero">
+            <h1>Le Système Flywheel 360°</h1>
+            <p>Une approche data-driven pour une croissance durable. Cliquez sur une étape pour explorer les automations associées.</p>
+        </div>
 
-  <section class="services-détail">
-    <div class="container">
-      <!-- Stage 1: Acquisition -->
-      <div class="service-block">
-        <div class="service-block-header">
-          <div class="service-icon-large">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          </div>
-          <div><h2>Phase 1: Acquisition</h2><p>Attirer et capturer des leads qualifiés automatiquement.</p></div>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card"><h3>Génération de Leads</h3><ul class="feature-list"><li>Scraping de profils qualifiés</li><li>Enrichissement de données</li><li>Prise de contact automatisée</li></ul></div>
-          <div class="feature-card"><h3>Marketing de Contenu</h3><ul class="feature-list"><li>Génération d'articles SEO</li><li>Publication auto sur les réseaux</li><li>Recyclage de contenu</li></ul></div>
-        </div>
-      </div>
-      <!-- Stage 2: Conversion -->
-      <div class="service-block">
-        <div class="service-block-header">
-          <div class="service-icon-large email">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          </div>
-          <div><h2>Phase 2: Conversion</h2><p>Transformer les prospects en clients avec des workflows personnalisés.</p></div>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card"><h3>Nurturing & Scoring</h3><ul class="feature-list"><li>Séquences email personnalisées</li><li>Lead scoring basé sur le comportement</li><li>Alertes pour les leads chauds</li></ul></div>
-          <div class="feature-card"><h3>Optimisation de la Vente</h3><ul class="feature-list"><li>Récupération de paniers abandonnés</li><li>Upsells & cross-sells intelligents</li><li>Prise de RDV automatisée</li></ul></div>
-        </div>
-      </div>
-      <!-- Stage 3: Rétention -->
-      <div class="service-block">
-        <div class="service-block-header">
-          <div class="service-icon-large dropship">
-             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div><h2>Phase 3: Rétention</h2><p>Fidéliser les clients et maximiser la LTV.</p></div>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card"><h3>Engagement Client</h3><ul class="feature-list"><li>Séquences post-achat</li><li>Demandes d'avis automatiques</li><li>Support client via IA</li></ul></div>
-          <div class="feature-card"><h3>Segmentation Avancée</h3><ul class="feature-list"><li>Segmentation RFM automatique</li><li>Programmes de fidélité (VIP)</li><li>Offres personnalisées</li></ul></div>
-        </div>
-      </div>
+        <main class="flywheel-main">
+            <div class="flywheel-diagram-container">
+                <svg id="flywheel-diagram" class="flywheel-svg" viewBox="0 0 500 500">
+                    <defs><filter id="glow"><feGaussianBlur stdDeviation="5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                    <circle class="arrows" cx="250" cy="250" r="170" fill="none" stroke-width="1" stroke-dasharray="5, 10"/>
+                    
+                    <!-- Stages -->
+                    <g id="acquisition" class="stage active" data-stage="acquisition">
+                        <circle class="stage-bg" cx="250" cy="80" r="70"/>
+                        <path class="stage-icon" d="M11 11A4 4 0 1 1 7 7a4 4 0 0 1 4 4Zm10 10-4.35-4.35"/>
+                        <text class="stage-text" x="250" y="90" text-anchor="middle">Acquisition</text>
+                    </g>
+                    <g id="conversion" class="stage" data-stage="conversion">
+                        <circle class="stage-bg" cx="420" cy="250" r="70"/>
+                        <path class="stage-icon" d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18m-5 4a4 4 0 0 1-8 0"/>
+                        <text class="stage-text" x="420" y="260" text-anchor="middle">Conversion</text>
+                    </g>
+                    <g id="retention" class="stage" data-stage="retention">
+                        <circle class="stage-bg" cx="250" cy="420" r="70"/>
+                        <path class="stage-icon" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm18 2-8 7-8-7"/>
+                        <text class="stage-text" x="250" y="430" text-anchor="middle">Rétention</text>
+                    </g>
+                    <g id="advocacy" class="stage" data-stage="advocacy">
+                        <circle class="stage-bg" cx="80" cy="250" r="70"/>
+                        <path class="stage-icon" d="m20.84 4.61-1.06 1.06L12 13.45l-7.78-7.78-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        <text class="stage-text" x="80" y="260" text-anchor="middle">Advocacy</text>
+                    </g>
+                    
+                    <circle class="center-hub" cx="250" cy="250" r="50"/>
+                    <text class="center-text" x="250" y="255" text-anchor="middle">ROI</text>
+                </svg>
+            </div>
+            <div id="flywheel-content-panel" class="flywheel-content-panel">
+                <!-- Content will be injected here by JS -->
+            </div>
+        </main>
     </div>
-  </section>
+    
+    <script id="flywheel-data" type="application/json">
+        {
+            "acquisition": {
+                "title": "Acquisition",
+                "description": "Attirer des visiteurs qualifiés et les convertir en leads exploitables.",
+                "kpis": [
+                    {"label": "Coût par Lead (CPL)", "value": "-25%"},
+                    {"label": "Taux de Conversion Visiteur→Lead", "value": "+15%"},
+                    {"label": "Trafic Organique", "value": "+30%"}
+                ],
+                "automations": ["sourcing-linkedin", "sourcing-google-maps", "veille-recrutement", "alt-text-fix", "auto-meta-tags", "llms-txt"]
+            },
+            "conversion": {
+                "title": "Conversion",
+                "description": "Transformer les leads en clients payants et maximiser la valeur de la première commande.",
+                "kpis": [
+                    {"label": "Taux de Conversion Achat", "value": "+10%"},
+                    {"label": "Valeur Panier Moyen (AOV)", "value": "+18%"},
+                    {"label": "Taux d'Abandon de Panier", "value": "-20%"}
+                ],
+                "automations": ["abandoned-cart", "browse-abandonment", "promo-video", "shopping-attributes"]
+            },
+            "retention": {
+                "title": "Rétention",
+                "description": "Fidéliser les clients existants pour augmenter leur valeur à vie (LTV).",
+                "kpis": [
+                    {"label": "Taux de Rétention Client", "value": "+22%"},
+                    {"label": "Fréquence d'Achat", "value": "+12%"},
+                    {"label": "Lifetime Value (LTV)", "value": "+40%"}
+                ],
+                "automations": ["welcome-series", "post-purchase", "win-back"]
+            },
+            "advocacy": {
+                "title": "Advocacy",
+                "description": "Transformer vos meilleurs clients en ambassadeurs de votre marque.",
+                "kpis": [
+                    {"label": "Taux de Recommandation (NPS)", "value": "+15 pts"},
+                    {"label": "Engagement VIP", "value": "+50%"},
+                    {"label": "Avis Clients Positifs", "value": "+35%"}
+                ],
+                "automations": ["vip-tiers"]
+            }
+        }
+    </script>
+    <script id="automation-details" type="application/json">
+        {
+          "sourcing-linkedin": {"name_fr": "Sourcing LinkedIn", "benefit_fr": "Base prospects B2B"},
+          "sourcing-google-maps": {"name_fr": "Sourcing Google Maps", "benefit_fr": "Leads locaux ciblés"},
+          "veille-recrutement": {"name_fr": "Veille Recrutement", "benefit_fr": "Timing parfait"},
+          "alt-text-fix": {"name_fr": "Correction Alt Text Images", "benefit_fr": "+20% trafic image"},
+          "auto-meta-tags": {"name_fr": "Meta Tags Automatiques", "benefit_fr": "Meilleur CTR Google"},
+          "llms-txt": {"name_fr": "llms.txt (AEO)", "benefit_fr": "Visibilité IA"},
+          "abandoned-cart": {"name_fr": "Abandoned Cart", "benefit_fr": "Recovery: 10-15%"},
+          "browse-abandonment": {"name_fr": "Browse Abandonment", "benefit_fr": "+5% conversions"},
+          "promo-video": {"name_fr": "Vidéo Promo Produit", "benefit_fr": "Contenu social ready"},
+          "shopping-attributes": {"name_fr": "Google Shopping Attributes", "benefit_fr": "Approbation GMC"},
+          "welcome-series": {"name_fr": "Welcome Series", "benefit_fr": "Open: 40-50%"},
+          "post-purchase": {"name_fr": "Post-Achat", "benefit_fr": "Repeat: 25-35%"},
+          "win-back": {"name_fr": "Win-Back", "benefit_fr": "Réactivation: 5-10%"},
+          "vip-tiers": {"name_fr": "VIP Tiers", "benefit_fr": "LTV +30%"}
+        }
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const flywheelData = JSON.parse(document.getElementById('flywheel-data').textContent);
+            const automationDetails = JSON.parse(document.getElementById('automation-details').textContent);
+            const contentPanel = document.getElementById('flywheel-content-panel');
+            const stages = document.querySelectorAll('.flywheel-svg .stage');
 
-  <footer class="footer-ultra">
-    <div class="container">
-      <div class="footer-grid-ultra">
-        <div class="footer-brand-ultra">
-          <a href="/" class="logo"><div class="logo-icon"><img src="../logo.png" alt="3A Automation Logo" width="40" height="40"></div><div class="logo-text-wrap"><span class="logo-text">3A</span><span class="logo-sub">AUTOMATION</span></div></a>
-          <p class="footer-tagline">Automation · Analytics · AI</p>
-        </div>
-        <div class="footer-links-ultra">
-          <h4>Solutions</h4>
-          <ul>
-            <li><a href="../services/ecommerce.html">E-commerce</a></li>
-            <li><a href="../services/pme.html">PME & B2B</a></li>
-            <li><a href="../services/flywheel-360.html">Système 360°</a></li>
-          </ul>
-        </div>
-        <div class="footer-links-ultra">
-          <h4>Ressources</h4>
-          <ul>
-            <li><a href="../automations.html">Automations</a></li>
-            <li><a href="../pricing.html">Tarifs</a></li>
-            <li><a href="../booking.html">RDV</a></li>
-          </ul>
-        </div>
-        <div class="footer-links-ultra">
-          <h4>Légal</h4>
-          <ul>
-            <li><a href="../legal/mentions-legales.html">Mentions légales</a></li>
-            <li><a href="../legal/politique-confidentialite.html">Confidentialité</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom-ultra"><p>© 2025 3A Automation. Tous droits réservés.</p></div>
-    </div>
-  </footer>
+            function renderStageContent(stageKey) {
+                const stage = flywheelData[stageKey];
+                if (!stage) return;
 
-  <script src="../script-lite.js?v=19.0" defer></script>
+                const kpisHtml = stage.kpis.map(kpi => `
+                    <div class="kpi-card">
+                        <div class="kpi-card-value">${kpi.value}</div>
+                        <div class="kpi-card-label">${kpi.label}</div>
+                    </div>
+                `).join('');
+
+                const automationsHtml = stage.automations.map(id => {
+                    const details = automationDetails[id];
+                    return details ? `
+                        <div class="automation-card">
+                            <div class="automation-card-name">${details.name_fr}</div>
+                            <div class="automation-card-benefit">${details.benefit_fr}</div>
+                        </div>
+                    ` : '';
+                }).join('');
+
+                contentPanel.innerHTML = `
+                    <div class="flywheel-stage-content active" id="content-${stageKey}">
+                        <header class="stage-header">
+                            <h2>${stage.title}</h2>
+                            <p>${stage.description}</p>
+                        </header>
+                        <div class="kpis-section">
+                            <h3 class="grid-title">KPIs Impactés</h3>
+                            <div class="kpi-grid">${kpisHtml}</div>
+                        </div>
+                        <div class="automations-section" style="margin-top: 2rem;">
+                            <h3 class="grid-title">Automations Associées</h3>
+                            <div class="automation-grid">${automationsHtml}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            stages.forEach(stageEl => {
+                stageEl.addEventListener('click', () => {
+                    const stageKey = stageEl.dataset.stage;
+                    
+                    // Update active class on diagram
+                    stages.forEach(s => s.classList.remove('active'));
+                    stageEl.classList.add('active');
+
+                    // Render content
+                    renderStageContent(stageKey);
+                });
+            });
+
+            // Initial render
+            renderStageContent('acquisition');
+        });
+    </script>
 </body>
 </html>
