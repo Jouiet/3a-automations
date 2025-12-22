@@ -36,7 +36,7 @@ const KNOWLEDGE_BASE = {
         ideal: 'Démarrer sérieusement'
       },
       growth: {
-        price: '1490€',
+        price: '1399€',
         time: '14-18h',
         includes: ['5 flows complets', 'Segmentation RFM', 'Dashboard personnalisé', 'Support 60 jours'],
         ideal: 'Transformation complète'
@@ -44,8 +44,7 @@ const KNOWLEDGE_BASE = {
     },
     retainer: {
       maintenance: { price: '290€/mois', hours: '3h', includes: ['Monitoring', 'Fixes', 'Rapport mensuel'] },
-      optimization: { price: '490€/mois', hours: '5h', includes: ['+ A/B tests', 'Optimisation continue'] },
-      growth: { price: '890€/mois', hours: '10h', includes: ['+ Nouveaux flows', 'Stratégie'] }
+      optimization: { price: '490€/mois', hours: '5h', includes: ['+ A/B tests', 'Optimisation continue', 'Support prioritaire'] }
     },
     free: {
       audit: {
@@ -139,7 +138,7 @@ const KNOWLEDGE_BASE = {
 
   // === AUTOMATISATIONS DISPONIBLES ===
   automations: {
-    total: 50,
+    total: 66,
     categories: {
       email: ['Welcome series', 'Abandon panier', 'Post-achat', 'Winback', 'Browse abandonment', 'Anniversaire'],
       leads: ['Capture Google Maps', 'LinkedIn scraping', 'Qualification auto', 'Lead scoring', 'Nurturing'],
