@@ -30,7 +30,7 @@ IDENTITÉ:
 - Consultant automation pour PME (tous secteurs)
 - Expert Klaviyo, Shopify, Analytics, Voice AI
 - Site: 3a-automation.com
-- 60 automatisations disponibles dans 9 catégories
+- 66 automatisations disponibles dans 6 catégories
 
 CATÉGORIES D'AUTOMATISATIONS:
 - Lead Generation & Acquisition (Facebook Ads, Google Ads, TikTok)
@@ -46,8 +46,8 @@ SERVICES (nouveaux prix):
 - Audit gratuit: Formulaire → Rapport PDF 24-48h
 - Quick Win: 390€ (1 flow optimisé) + BONUS Voice AI
 - Essentials: 790€ (3 flows + A/B tests) + BONUS Voice AI + WhatsApp
-- Growth: 1490€ (5 flows + dashboard) + BONUS complet
-- Retainers: 290-890€/mois
+- Growth: 1399€ (5 flows + dashboard) + BONUS complet
+- Retainers: 290-490€/mois
 
 SECTEURS SERVIS:
 - E-commerce / Shopify
@@ -1074,7 +1074,7 @@ OBJECTIF:
     },
     pricing: {
       keywords: ['prix', 'tarif', 'combien', 'coût', 'budget', 'devis', 'cher'],
-      response: `Voici mes tarifs :\n\n**PACKS ONE-TIME:**\n• Quick Win: 390€ (1 flow, ~4h)\n• Essentials: 790€ (3 flows + A/B tests)\n• Growth: 1490€ (5 flows + dashboard)\n\n**RETAINERS MENSUELS:**\n• Maintenance: 290€/mois (3h)\n• Optimization: 490€/mois (5h)\n• Growth: 890€/mois (10h)\n\n💡 L'audit est GRATUIT et vous aide à choisir. Quel est votre besoin principal ?`
+      response: `Voici mes tarifs :\n\n**PACKS ONE-TIME:**\n• Quick Win: 390€ (1 flow, ~4h)\n• Essentials: 790€ (3 flows + A/B tests)\n• Growth: 1399€ (5 flows + dashboard)\n\n**RETAINERS MENSUELS:**\n• Maintenance: 290€/mois (3h)\n• Optimization/Growth: 490€/mois (5h)\n\n💡 L'audit est GRATUIT et vous aide à choisir. Quel est votre besoin principal ?`
     },
     audit: {
       keywords: ['audit', 'gratuit', 'diagnostic', 'analyse'],
@@ -1082,7 +1082,7 @@ OBJECTIF:
     },
     automatisations: {
       keywords: ['automatisation', 'automatisations', 'workflow', 'flows', 'quoi automatiser'],
-      response: `J'ai 50 automatisations prêtes à déployer :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports auto\n\n🛒 **E-commerce:**\nSync produits, Stock alerts, Reviews\n\nQuel type vous intéresse le plus ?`
+      response: `J'ai 66 automatisations prêtes à déployer :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports auto\n\n🛒 **E-commerce:**\nSync produits, Stock alerts, Reviews\n\nQuel type vous intéresse le plus ?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'client', 'acquisition', 'trouver des clients'],
@@ -1098,7 +1098,7 @@ OBJECTIF:
     },
     delai: {
       keywords: ['délai', 'temps', 'quand', 'combien de temps', 'durée'],
-      response: `Les délais dépendent du pack :\n\n⚡ **Quick Win (390€):** 1 semaine\n📦 **Essentials (790€):** 2 semaines\n🚀 **Growth (1490€):** 3 semaines\n\n📋 **Audit gratuit:** 24-48h\n\nCes délais incluent les révisions. Je peux accélérer si urgence (supplément 20%).`
+      response: `Les délais dépendent du pack :\n\n⚡ **Quick Win (390€):** 48-72h\n📦 **Essentials (790€):** 5-7 jours\n🚀 **Growth (1399€):** 10-14 jours\n\n📋 **Audit gratuit:** 24-48h\n\nCes délais incluent les révisions. Je peux accélérer si urgence (supplément 20%).`
     },
     oui: {
       keywords: ['oui', 'd\'accord', 'ok', 'allons-y', 'intéressé', 'je veux'],

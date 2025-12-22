@@ -96,7 +96,7 @@
       "bonus": "Voice AI + Booking + WhatsApp"
     },
     "growth": {
-      "price": "1490€",
+      "price": "1399€",
       "automations": "5 flows + dashboard",
       "bonus": "Voice AI + Booking + WhatsApp + Rappels"
     }
@@ -109,10 +109,6 @@
     "optimization": {
       "price": "490€/mois",
       "hours": "5h"
-    },
-    "growth": {
-      "price": "890€/mois",
-      "hours": "10h"
     }
   }
 }
