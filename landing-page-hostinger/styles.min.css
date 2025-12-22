@@ -4917,6 +4917,22 @@ body.lite {
 .currency-btn:hover { color: var(--text-light); }
 .currency-btn.active { background: var(--primary); color: var(--secondary); }
 
+/* Mobile: Larger touch targets for currency/period buttons */
+@media (max-width: 480px) {
+  .currency-btn, .period-btn {
+    padding: 0.75rem 1rem;
+    min-height: 44px;
+    font-size: 0.9rem;
+  }
+  .currency-buttons, .period-selector {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .roi-stat { min-width: 100px; }
+  .roi-value { font-size: 1.5rem; }
+  .roi-label { font-size: 0.75rem; }
+}
+
 .roi-stats {
   display: flex;
   justify-content: center;

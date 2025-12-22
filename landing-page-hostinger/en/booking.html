@@ -70,6 +70,15 @@
       gap: 0.5rem;
       margin-bottom: 1.5rem;
     }
+    @media (max-width: 600px) {
+      .date-selector { grid-template-columns: repeat(4, 1fr); gap: 0.4rem; }
+    }
+    @media (max-width: 400px) {
+      .date-selector { grid-template-columns: repeat(3, 1fr); }
+      .date-btn { padding: 0.6rem 0.25rem; min-height: 60px; }
+      .date-btn .day-name { font-size: 0.6rem; }
+      .date-btn .day-num { font-size: 0.9rem; }
+    }
     .date-btn {
       padding: 0.75rem 0.5rem;
       border: 1px solid rgba(79, 186, 241, 0.2);
@@ -86,6 +95,13 @@
     .date-btn .day-name { font-size: 0.7rem; display: block; margin-bottom: 2px; }
     .date-btn .day-num { font-size: 1rem; font-weight: 600; }
     .time-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+    @media (max-width: 600px) {
+      .time-slots { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 400px) {
+      .time-slots { grid-template-columns: repeat(2, 1fr); }
+      .time-btn { padding: 1rem 0.5rem; min-height: 48px; }
+    }
     .time-btn {
       padding: 0.75rem;
       border: 1px solid rgba(79, 186, 241, 0.2);
