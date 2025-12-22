@@ -1,0 +1,47 @@
+{
+  "name": "Project 3A - Workflow A: Competitor Clone",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "competitor-clone",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "command": "=node /home/node/app/automations/workflows/competitor-clone.js --url=\"{{$json.body.url}}\" --brand=\"{{$json.body.brand}}\""
+      },
+      "name": "Execute Clone Script",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "sheetId": "={{$env.GOOGLE_SHEETS_ID}}",
+        "range": "campaign_queue!C{{$json.row_number}}",
+        "cellFormat": "RAW",
+        "fields": ["Status"],
+        "values": [["DONE"]]
+      },
+      "name": "Update Status",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 1,
+      "position": [500, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Execute Clone Script", "type": "main", "index": 0 }]]
+    },
+    "Execute Clone Script": {
+      "main": [[{ "node": "Update Status", "type": "main", "index": 0 }]]
+    }
+  }
+}

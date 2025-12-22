@@ -1,0 +1,31 @@
+{
+  "name": "Project 3A - Workflow B: E-Commerce Factory",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": { "item": [{ "mode": "everyMinute" }] },
+        "documentId": { "__rl": true, "value": "={{$env.GOOGLE_SHEETS_ID}}", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "campaign_queue", "mode": "name" },
+        "options": {}
+      },
+      "name": "Google Sheets Trigger",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "command": "=node /home/node/app/automations/workflows/ecommerce-factory.js --url=\"{{$json.Input_URL}}\" --variants=5"
+      },
+      "name": "Execute Factory Script",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [300, 300]
+    }
+  ],
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [[{ "node": "Execute Factory Script", "type": "main", "index": 0 }]]
+    }
+  }
+}

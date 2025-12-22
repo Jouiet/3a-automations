@@ -1,0 +1,36 @@
+{
+  "_comment": "DEPRECATED - Use Claude Code native MCPs (~/.config/claude-code/mcp.json) instead of MCPHub",
+  "_migration": "Claude Code manages MCPs automatically. Remove MCPHub usage from your code.",
+  "_docs": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"],
+      "_note": "Fallback for Playwright. Uses Puppeteer + Chrome DevTools Protocol"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-playwright"],
+      "_note": "Primary browser automation. Preferred over chrome-devtools"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-github"],
+      "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "" }
+    },
+    "n8n": {
+      "command": "npx",
+      "args": ["-y", "mcp-server-n8n"],
+      "env": { "N8N_API_KEY": "", "N8N_BASE_URL": "" }
+    },
+    "google-drive": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-google-drive"]
+    },
+    "hostinger": {
+      "command": "npx",
+      "args": ["-y", "@hostinger/api-mcp-server"],
+      "env": { "HOSTINGER_API_KEY": "" }
+    }
+  }
+}

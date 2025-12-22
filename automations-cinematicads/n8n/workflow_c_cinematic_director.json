@@ -1,0 +1,30 @@
+{
+  "name": "Project 3A - Workflow C: Cinematic Director",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cinematic-director",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "command": "=node /home/node/app/automations/workflows/cinematic-director.js --concept=\"{{$json.body.concept}}\""
+      },
+      "name": "Execute Director Script",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [300, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Execute Director Script", "type": "main", "index": 0 }]]
+    }
+  }
+}
