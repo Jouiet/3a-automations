@@ -16,6 +16,7 @@
   <link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/flywheel-360.html">
   <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/en/services/flywheel-360.html">
 
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://3a-automation.com/en/services/flywheel-360.html">
   <meta property="og:title" content="Flywheel 360 | E-commerce & SMB Automation">
@@ -23,6 +24,7 @@
   <meta property="og:image" content="https://3a-automation.com/og-image.png">
   <meta property="og:locale" content="en_US">
 
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Flywheel 360 | 3A Automation">
   <meta name="twitter:description" content="Complete automation for E-commerce and SMB with measurable ROI.">
@@ -42,23 +44,28 @@
     .flywheel-container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
     .flywheel-hero { text-align: center; padding: 120px 0 4rem; }
     .flywheel-hero h1 { font-size: 3.5rem; color: var(--text-light); margin-bottom: 1rem; }
-    .flywheel-hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+    .flywheel-hero .hero-subtitle { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem; }
+    .flywheel-hero .hero-stats { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
+    .flywheel-hero .stat-item { text-align: center; }
+    .flywheel-hero .stat-value { font-size: 2.5rem; font-weight: 800; color: var(--primary); font-family: var(--font-mono); }
+    .flywheel-hero .stat-label { font-size: 0.9rem; color: var(--text-secondary); }
 
     .flywheel-main { display: grid; grid-template-columns: 1fr 1.25fr; gap: 2rem; align-items: start; }
 
     .flywheel-diagram-container { position: sticky; top: 120px; }
     .flywheel-svg { width: 100%; height: auto; }
-    .flywheel-svg .stage-bg { fill: rgba(255,255,255,0.02); stroke: var(--flywheel-border); transition: all 0.3s ease; }
+    .flywheel-svg .stage-bg { fill: rgba(255,255,255,0.02); stroke: var(--flywheel-border); stroke-width: 2; transition: all 0.3s ease; }
     .flywheel-svg .stage { cursor: pointer; }
-    .flywheel-svg .stage:hover .stage-bg { fill: rgba(79, 186, 241, 0.1); }
-    .flywheel-svg .stage.active .stage-bg { fill: rgba(79, 186, 241, 0.2); stroke: var(--flywheel-highlight); }
-    .flywheel-svg .stage-icon { fill: var(--text-secondary); transition: fill 0.3s ease; }
-    .flywheel-svg .stage.active .stage-icon { fill: var(--flywheel-highlight); }
-    .flywheel-svg .stage-text { fill: var(--text-secondary); font-family: var(--font-sans); font-weight: 600; font-size: 14px; transition: fill 0.3s ease;}
+    .flywheel-svg .stage:hover .stage-bg { fill: rgba(79, 186, 241, 0.1); stroke: var(--primary); }
+    .flywheel-svg .stage.active .stage-bg { fill: rgba(79, 186, 241, 0.2); stroke: var(--flywheel-highlight); stroke-width: 3; filter: drop-shadow(0 0 15px rgba(79, 186, 241, 0.4)); }
+    .flywheel-svg .stage-icon { fill: none; stroke: var(--text-secondary); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.3s ease; }
+    .flywheel-svg .stage.active .stage-icon { stroke: var(--flywheel-highlight); }
+    .flywheel-svg .stage-text { fill: var(--text-secondary); font-family: var(--font-sans); font-weight: 600; font-size: 14px; transition: fill 0.3s ease; }
     .flywheel-svg .stage.active .stage-text { fill: var(--text-light); }
-    .flywheel-svg .center-hub { fill: var(--primary); }
-    .flywheel-svg .center-text { fill: var(--secondary); font-family: var(--font-sans); font-weight: 800; font-size: 24px; }
+    .flywheel-svg .center-hub { fill: var(--primary); filter: drop-shadow(0 0 20px rgba(79, 186, 241, 0.5)); }
+    .flywheel-svg .center-text { fill: var(--secondary); font-family: var(--font-sans); font-weight: 800; font-size: 20px; }
     .flywheel-svg .arrows { stroke: var(--flywheel-border); animation: rotate 40s linear infinite; transform-origin: center; }
+    .flywheel-svg .arrow-head { fill: var(--primary); opacity: 0.6; }
 
     @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
@@ -66,27 +73,56 @@
     .flywheel-stage-content { display: none; }
     .flywheel-stage-content.active { display: block; animation: fadeIn 0.5s ease; }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+    .stage-header { margin-bottom: 2rem; }
     .stage-header h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; }
-    .stage-header p { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; }
+    .stage-header p { font-size: 1.1rem; color: var(--text-secondary); }
 
-    .kpi-grid, .automation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-    .grid-title { font-size: 1.2rem; color: var(--text-light); margin-bottom: 1rem; border-bottom: 1px solid var(--flywheel-border); padding-bottom: 0.5rem; }
+    .kpi-grid, .automation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .grid-title { font-size: 1.2rem; color: var(--text-light); margin-bottom: 1rem; border-bottom: 1px solid var(--flywheel-border); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .grid-title svg { width: 20px; height: 20px; stroke: var(--primary); }
 
-    .kpi-card, .automation-card { background: rgba(255,255,255,0.03); border: 1px solid var(--flywheel-border); padding: 1rem; border-radius: var(--radius-lg); }
-    .kpi-card-value { font-size: 1.75rem; font-weight: 700; color: var(--flywheel-highlight); font-family: var(--font-mono); }
-    .kpi-card-label { font-size: 0.9rem; color: var(--text-secondary); }
-    .automation-card { display: flex; flex-direction: column; justify-content: space-between; min-height: 120px; }
-    .automation-card-name { font-weight: 600; color: var(--text-light); }
-    .automation-card-benefit { font-size: 0.85rem; color: var(--accent); font-family: var(--font-mono); margin-top: 0.5rem; }
+    .kpi-card { background: rgba(255,255,255,0.03); border: 1px solid var(--flywheel-border); padding: 1.25rem; border-radius: var(--radius-lg); transition: all 0.3s ease; }
+    .kpi-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .kpi-card-value { font-size: 2rem; font-weight: 700; color: var(--flywheel-highlight); font-family: var(--font-mono); }
+    .kpi-card-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.25rem; }
 
+    .automation-card { background: rgba(255,255,255,0.03); border: 1px solid var(--flywheel-border); padding: 1.25rem; border-radius: var(--radius-lg); display: flex; flex-direction: column; justify-content: space-between; min-height: 110px; transition: all 0.3s ease; }
+    .automation-card:hover { border-color: var(--primary); background: rgba(79, 186, 241, 0.05); transform: translateY(-2px); }
+    .automation-card-name { font-weight: 600; color: var(--text-light); font-size: 1rem; }
+    .automation-card-benefit { font-size: 0.85rem; color: var(--accent); font-family: var(--font-mono); margin-top: 0.75rem; }
+
+    /* CTA Section */
+    .flywheel-cta { margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, rgba(79, 186, 241, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 1px solid var(--flywheel-border); border-radius: var(--radius-xl); text-align: center; }
+    .flywheel-cta h2 { font-size: 2rem; color: var(--text-light); margin-bottom: 1rem; }
+    .flywheel-cta p { color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .flywheel-cta .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .flywheel-cta .btn-primary-cyber { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; font-weight: 600; border-radius: var(--radius-lg); text-decoration: none; transition: all 0.3s ease; }
+    .flywheel-cta .btn-primary-cyber:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(79, 186, 241, 0.4); }
+    .flywheel-cta .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: transparent; border: 1px solid var(--primary); color: var(--primary); font-weight: 600; border-radius: var(--radius-lg); text-decoration: none; transition: all 0.3s ease; }
+    .flywheel-cta .btn-secondary:hover { background: rgba(79, 186, 241, 0.1); }
+
+    /* Mobile Responsive */
     @media (max-width: 1024px) {
       .flywheel-main { grid-template-columns: 1fr; }
-      .flywheel-diagram-container { position: relative; top: 0; }
+      .flywheel-diagram-container { position: relative; top: 0; max-width: 450px; margin: 0 auto 2rem; }
     }
     @media (max-width: 768px) {
+      .flywheel-hero { padding: 100px 0 2rem; }
       .flywheel-hero h1 { font-size: 2.5rem; }
+      .flywheel-hero .hero-stats { gap: 1.5rem; }
+      .flywheel-hero .stat-value { font-size: 2rem; }
+      .stage-header h2 { font-size: 2rem; }
+      .kpi-grid, .automation-grid { grid-template-columns: 1fr 1fr; }
+      .flywheel-cta { padding: 2rem 1.5rem; }
+      .flywheel-cta h2 { font-size: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .flywheel-hero h1 { font-size: 2rem; }
+      .kpi-grid, .automation-grid { grid-template-columns: 1fr; }
+      .flywheel-cta .cta-buttons { flex-direction: column; }
+      .flywheel-cta .btn-primary-cyber, .flywheel-cta .btn-secondary { width: 100%; justify-content: center; }
     }
   </style>
 
@@ -103,7 +139,7 @@
       "url": "https://3a-automation.com"
     },
     "serviceType": ["E-commerce Automation", "B2B Automation", "Marketing Automation"],
-    "areaServed": "Worldwide"
+    "areaServed": ["United States", "United Kingdom", "Europe", "Worldwide"]
   }
   </script>
 
@@ -167,7 +203,7 @@
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
-        <a href="/" class="lang-switch" title="Switch to French">FR</a>
+        <a href="/services/flywheel-360.html" class="lang-switch" title="Switch to French">FR</a>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span class="hamburger"></span></button>
     </div>
@@ -175,46 +211,126 @@
 
   <div class="flywheel-container">
     <div class="flywheel-hero">
-      <h1>The Flywheel 360° System</h1>
-      <p>A data-driven approach for sustainable growth. Click on a stage to explore the associated automations.</p>
+      <h1>The Flywheel 360 System</h1>
+      <p class="hero-subtitle">A data-driven approach for sustainable growth. Click on a stage to explore the associated automations.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-value">66</div>
+          <div class="stat-label">Automations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">4</div>
+          <div class="stat-label">Cycle Stages</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">42:1</div>
+          <div class="stat-label">Avg Email ROI</div>
+        </div>
+      </div>
     </div>
 
     <main class="flywheel-main">
       <div class="flywheel-diagram-container">
         <svg id="flywheel-diagram" class="flywheel-svg" viewBox="0 0 500 500">
-          <defs><filter id="glow"><feGaussianBlur stdDeviation="5" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-          <circle class="arrows" cx="250" cy="250" r="170" fill="none" stroke-width="1" stroke-dasharray="5, 10"/>
+          <defs>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <linearGradient id="hubGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#4FBAF1"/>
+              <stop offset="100%" style="stop-color:#10B981"/>
+            </linearGradient>
+          </defs>
 
-          <!-- Stages -->
+          <!-- Rotating arrows circle -->
+          <circle class="arrows" cx="250" cy="250" r="175" fill="none" stroke-width="1" stroke-dasharray="8, 12"/>
+
+          <!-- Connection lines -->
+          <path d="M 250 150 Q 350 150 350 250" fill="none" stroke="rgba(79,186,241,0.15)" stroke-width="2"/>
+          <path d="M 350 250 Q 350 350 250 350" fill="none" stroke="rgba(79,186,241,0.15)" stroke-width="2"/>
+          <path d="M 250 350 Q 150 350 150 250" fill="none" stroke="rgba(79,186,241,0.15)" stroke-width="2"/>
+          <path d="M 150 250 Q 150 150 250 150" fill="none" stroke="rgba(79,186,241,0.15)" stroke-width="2"/>
+
+          <!-- Acquisition Stage (Top) -->
           <g id="acquisition" class="stage active" data-stage="acquisition">
-            <circle class="stage-bg" cx="250" cy="80" r="70"/>
-            <path class="stage-icon" d="M11 11A4 4 0 1 1 7 7a4 4 0 0 1 4 4Zm10 10-4.35-4.35"/>
-            <text class="stage-text" x="250" y="90" text-anchor="middle">Acquisition</text>
-          </g>
-          <g id="conversion" class="stage" data-stage="conversion">
-            <circle class="stage-bg" cx="420" cy="250" r="70"/>
-            <path class="stage-icon" d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18m-5 4a4 4 0 0 1-8 0"/>
-            <text class="stage-text" x="420" y="260" text-anchor="middle">Conversion</text>
-          </g>
-          <g id="retention" class="stage" data-stage="retention">
-            <circle class="stage-bg" cx="250" cy="420" r="70"/>
-            <path class="stage-icon" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm18 2-8 7-8-7"/>
-            <text class="stage-text" x="250" y="430" text-anchor="middle">Retention</text>
-          </g>
-          <g id="advocacy" class="stage" data-stage="advocacy">
-            <circle class="stage-bg" cx="80" cy="250" r="70"/>
-            <path class="stage-icon" d="m20.84 4.61-1.06 1.06L12 13.45l-7.78-7.78-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            <text class="stage-text" x="80" y="260" text-anchor="middle">Advocacy</text>
+            <circle class="stage-bg" cx="250" cy="80" r="60"/>
+            <g transform="translate(230, 60)">
+              <circle class="stage-icon" cx="12" cy="10" r="4"/>
+              <path class="stage-icon" d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+              <path class="stage-icon" d="M20 10l4 4m0-4l-4 4"/>
+            </g>
+            <text class="stage-text" x="250" y="115" text-anchor="middle">Acquisition</text>
           </g>
 
-          <circle class="center-hub" cx="250" cy="250" r="50"/>
-          <text class="center-text" x="250" y="255" text-anchor="middle">ROI</text>
+          <!-- Conversion Stage (Right) -->
+          <g id="conversion" class="stage" data-stage="conversion">
+            <circle class="stage-bg" cx="420" cy="250" r="60"/>
+            <g transform="translate(400, 230)">
+              <path class="stage-icon" d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4H6z"/>
+              <path class="stage-icon" d="M3 6h18"/>
+              <path class="stage-icon" d="M16 10a4 4 0 01-8 0"/>
+            </g>
+            <text class="stage-text" x="420" y="285" text-anchor="middle">Conversion</text>
+          </g>
+
+          <!-- Retention Stage (Bottom) -->
+          <g id="retention" class="stage" data-stage="retention">
+            <circle class="stage-bg" cx="250" cy="420" r="60"/>
+            <g transform="translate(230, 400)">
+              <path class="stage-icon" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <path class="stage-icon" d="M22 6l-10 7L2 6"/>
+            </g>
+            <text class="stage-text" x="250" y="455" text-anchor="middle">Retention</text>
+          </g>
+
+          <!-- Advocacy Stage (Left) -->
+          <g id="advocacy" class="stage" data-stage="advocacy">
+            <circle class="stage-bg" cx="80" cy="250" r="60"/>
+            <g transform="translate(60, 230)">
+              <path class="stage-icon" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+            </g>
+            <text class="stage-text" x="80" y="285" text-anchor="middle">Advocacy</text>
+          </g>
+
+          <!-- Center Hub -->
+          <circle class="center-hub" cx="250" cy="250" r="55" fill="url(#hubGradient)"/>
+          <text class="center-text" x="250" y="245" text-anchor="middle" fill="#191E35">ROI</text>
+          <text x="250" y="265" text-anchor="middle" fill="#191E35" font-size="12" font-weight="600">Measurable</text>
         </svg>
       </div>
+
       <div id="flywheel-content-panel" class="flywheel-content-panel">
         <!-- Content will be injected here by JS -->
       </div>
     </main>
+
+    <!-- CTA Section -->
+    <section class="flywheel-cta">
+      <h2>Ready to accelerate your growth?</h2>
+      <p>Discover how the Flywheel 360 system can transform your business. Free audit and personalized recommendations within 24-48h.</p>
+      <div class="cta-buttons">
+        <a href="/en/services/free-audit.html" class="btn-primary-cyber">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+          Free Audit
+        </a>
+        <a href="/en/booking.html" class="btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Book a Call
+        </a>
+      </div>
+    </section>
   </div>
 
   <script id="flywheel-data" type="application/json">
@@ -225,9 +341,10 @@
         "kpis": [
           {"label": "Cost per Lead (CPL)", "value": "-25%"},
           {"label": "Visitor-to-Lead Conversion Rate", "value": "+15%"},
-          {"label": "Organic Traffic", "value": "+30%"}
+          {"label": "Organic Traffic", "value": "+30%"},
+          {"label": "Qualified Leads / month", "value": "+40%"}
         ],
-        "automations": ["sourcing-linkedin", "sourcing-google-maps", "veille-recrutement", "alt-text-fix", "auto-meta-tags", "llms-txt"]
+        "automations": ["sourcing-linkedin", "sourcing-google-maps", "recruitment-monitoring", "alt-text-fix", "auto-meta-tags", "llms-txt", "geo-segmentation", "facebook-ads-sync"]
       },
       "conversion": {
         "title": "Conversion",
@@ -235,9 +352,10 @@
         "kpis": [
           {"label": "Purchase Conversion Rate", "value": "+10%"},
           {"label": "Average Order Value (AOV)", "value": "+18%"},
-          {"label": "Cart Abandonment Rate", "value": "-20%"}
+          {"label": "Cart Abandonment Rate", "value": "-20%"},
+          {"label": "Recovery Rate", "value": "10-15%"}
         ],
-        "automations": ["abandoned-cart", "browse-abandonment", "promo-video", "shopping-attributes"]
+        "automations": ["abandoned-cart", "browse-abandonment", "promo-video", "shopping-attributes", "price-drop-alert", "stock-alert", "upsell-cross-sell"]
       },
       "retention": {
         "title": "Retention",
@@ -245,9 +363,10 @@
         "kpis": [
           {"label": "Customer Retention Rate", "value": "+22%"},
           {"label": "Purchase Frequency", "value": "+12%"},
-          {"label": "Lifetime Value (LTV)", "value": "+40%"}
+          {"label": "Lifetime Value (LTV)", "value": "+40%"},
+          {"label": "Repeat Purchase Rate", "value": "+25%"}
         ],
-        "automations": ["welcome-series", "post-purchase", "win-back"]
+        "automations": ["welcome-series", "post-purchase", "win-back", "birthday-flow", "review-request", "replenishment", "loyalty-program"]
       },
       "advocacy": {
         "title": "Advocacy",
@@ -255,9 +374,10 @@
         "kpis": [
           {"label": "Net Promoter Score (NPS)", "value": "+15 pts"},
           {"label": "VIP Engagement", "value": "+50%"},
-          {"label": "Positive Customer Reviews", "value": "+35%"}
+          {"label": "Positive Customer Reviews", "value": "+35%"},
+          {"label": "Referral Revenue", "value": "+20%"}
         ],
-        "automations": ["vip-tiers"]
+        "automations": ["vip-tiers", "referral-program", "user-generated-content", "nps-survey", "testimonial-request", "ambassador-program"]
       }
     }
   </script>
@@ -265,18 +385,32 @@
     {
       "sourcing-linkedin": {"name_en": "LinkedIn Sourcing", "benefit_en": "B2B prospect database"},
       "sourcing-google-maps": {"name_en": "Google Maps Sourcing", "benefit_en": "Targeted local leads"},
-      "veille-recrutement": {"name_en": "Recruitment Monitoring", "benefit_en": "Perfect timing"},
+      "recruitment-monitoring": {"name_en": "Recruitment Monitoring", "benefit_en": "Perfect timing"},
       "alt-text-fix": {"name_en": "Image Alt Text Fix", "benefit_en": "+20% image traffic"},
       "auto-meta-tags": {"name_en": "Auto Meta Tags", "benefit_en": "Better Google CTR"},
       "llms-txt": {"name_en": "llms.txt (AEO)", "benefit_en": "AI visibility"},
+      "geo-segmentation": {"name_en": "Geo-Segmentation", "benefit_en": "Market targeting"},
+      "facebook-ads-sync": {"name_en": "Facebook Ads Sync", "benefit_en": "Auto audiences"},
       "abandoned-cart": {"name_en": "Abandoned Cart", "benefit_en": "Recovery: 10-15%"},
       "browse-abandonment": {"name_en": "Browse Abandonment", "benefit_en": "+5% conversions"},
       "promo-video": {"name_en": "Product Promo Video", "benefit_en": "Social-ready content"},
       "shopping-attributes": {"name_en": "Google Shopping Attributes", "benefit_en": "GMC approval"},
+      "price-drop-alert": {"name_en": "Price Drop Alert", "benefit_en": "+8% conversions"},
+      "stock-alert": {"name_en": "Back in Stock Alert", "benefit_en": "Demand recovery"},
+      "upsell-cross-sell": {"name_en": "Upsell / Cross-sell", "benefit_en": "+15% AOV"},
       "welcome-series": {"name_en": "Welcome Series", "benefit_en": "Open: 40-50%"},
       "post-purchase": {"name_en": "Post-Purchase", "benefit_en": "Repeat: 25-35%"},
       "win-back": {"name_en": "Win-Back", "benefit_en": "Reactivation: 5-10%"},
-      "vip-tiers": {"name_en": "VIP Tiers", "benefit_en": "LTV +30%"}
+      "birthday-flow": {"name_en": "Birthday Flow", "benefit_en": "+20% engagement"},
+      "review-request": {"name_en": "Review Request", "benefit_en": "+35% reviews"},
+      "replenishment": {"name_en": "Replenishment", "benefit_en": "Auto purchase timing"},
+      "loyalty-program": {"name_en": "Loyalty Program", "benefit_en": "+30% retention"},
+      "vip-tiers": {"name_en": "VIP Tiers", "benefit_en": "LTV +30%"},
+      "referral-program": {"name_en": "Referral Program", "benefit_en": "+20% new customers"},
+      "user-generated-content": {"name_en": "UGC Automation", "benefit_en": "Free content"},
+      "nps-survey": {"name_en": "NPS Survey Auto", "benefit_en": "Continuous feedback"},
+      "testimonial-request": {"name_en": "Testimonial Request", "benefit_en": "Social proof"},
+      "ambassador-program": {"name_en": "Ambassador Program", "benefit_en": "Advocacy at scale"}
     }
   </script>
 
@@ -315,11 +449,17 @@
               <p>${stage.description}</p>
             </header>
             <div class="kpis-section">
-              <h3 class="grid-title">Impacted KPIs</h3>
+              <h3 class="grid-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21H3V3"/><path d="M21 9l-6 6-4-4-6 6"/></svg>
+                Impacted KPIs
+              </h3>
               <div class="kpi-grid">${kpisHtml}</div>
             </div>
             <div class="automations-section" style="margin-top: 2rem;">
-              <h3 class="grid-title">Related Automations</h3>
+              <h3 class="grid-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v10M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24"/></svg>
+                Related Automations (${stage.automations.length})
+              </h3>
               <div class="automation-grid">${automationsHtml}</div>
             </div>
           </div>
@@ -336,6 +476,14 @@
 
           // Render content
           renderStageContent(stageKey);
+
+          // Track in GA4
+          if (typeof gtag === 'function') {
+            gtag('event', 'flywheel_stage_click', {
+              event_category: 'engagement',
+              event_label: stageKey
+            });
+          }
         });
       });
 
@@ -386,7 +534,7 @@
           <ul>
             <li><a href="/en/services/ecommerce.html">E-commerce</a></li>
             <li><a href="/en/services/smb.html">SMB & B2B</a></li>
-            <li><a href="/en/services/flywheel-360.html">Flywheel 360°</a></li>
+            <li><a href="/en/services/flywheel-360.html">Flywheel 360</a></li>
             <li><a href="/en/automations.html">Automations</a></li>
             <li><a href="/en/pricing.html">Pricing</a></li>
           </ul>
