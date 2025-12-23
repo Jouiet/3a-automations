@@ -183,7 +183,7 @@ MEDIUM:
 
 ACQUISITION CLIENTS:
 ├── ✅ Formulaire diagnostic script (FAIT - sync-google-forms-to-klaviyo.cjs)
-├── ❌ Google Form diagnostic à créer (manuellement)
+├── ✅ Google Form diagnostic template (FAIT Session 80)
 ├── ✅ Templates LinkedIn cold outreach (FAIT Session 79)
 └── ❌ Executer cold outreach + posts (manuel)
 ```

@@ -1,0 +1,297 @@
+{
+  "formTitle": "Audit Diagnostic E-commerce - 3A Automation",
+  "formDescription": "Formulaire de diagnostic gratuit pour identifier vos opportunites d'automatisation. Temps: 5-10 minutes. Resultat: Rapport PDF personnalise sous 24-48h.",
+  "sections": [
+    {
+      "title": "1. Informations Generales",
+      "questions": [
+        {
+          "type": "short_text",
+          "question": "Nom complet",
+          "required": true
+        },
+        {
+          "type": "email",
+          "question": "Email professionnel",
+          "required": true,
+          "validation": "email"
+        },
+        {
+          "type": "short_text",
+          "question": "Nom de votre entreprise/boutique",
+          "required": true
+        },
+        {
+          "type": "url",
+          "question": "URL de votre site web",
+          "required": true
+        },
+        {
+          "type": "dropdown",
+          "question": "Secteur d'activite",
+          "required": true,
+          "options": [
+            "Mode & Accessoires",
+            "Beaute & Cosmetiques",
+            "Maison & Deco",
+            "Alimentation & Boissons",
+            "Electronique & Tech",
+            "Sport & Loisirs",
+            "Sante & Bien-etre",
+            "B2B / Wholesale",
+            "Autre"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. Situation Actuelle",
+      "questions": [
+        {
+          "type": "dropdown",
+          "question": "Chiffre d'affaires mensuel actuel",
+          "required": true,
+          "options": [
+            "< 5 000 EUR",
+            "5 000 - 10 000 EUR",
+            "10 000 - 25 000 EUR",
+            "25 000 - 50 000 EUR",
+            "50 000 - 100 000 EUR",
+            "100 000 - 250 000 EUR",
+            "> 250 000 EUR"
+          ]
+        },
+        {
+          "type": "dropdown",
+          "question": "Plateforme e-commerce utilisee",
+          "required": true,
+          "options": [
+            "Shopify",
+            "WooCommerce",
+            "PrestaShop",
+            "Magento",
+            "Wix",
+            "Squarespace",
+            "Custom / Autre"
+          ]
+        },
+        {
+          "type": "checkboxes",
+          "question": "Outils marketing actuellement utilises",
+          "required": false,
+          "options": [
+            "Klaviyo",
+            "Mailchimp",
+            "Brevo (ex-Sendinblue)",
+            "HubSpot",
+            "ActiveCampaign",
+            "Google Analytics",
+            "Meta Ads Manager",
+            "Google Ads",
+            "TikTok Ads",
+            "Aucun"
+          ]
+        },
+        {
+          "type": "dropdown",
+          "question": "Combien de personnes gerent le marketing?",
+          "required": true,
+          "options": [
+            "Je gere seul(e)",
+            "1-2 personnes",
+            "3-5 personnes",
+            "Equipe > 5 personnes",
+            "Agence externe"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. Points de Douleur",
+      "questions": [
+        {
+          "type": "checkboxes",
+          "question": "Quelles taches vous prennent le plus de temps?",
+          "required": true,
+          "options": [
+            "Gestion des emails marketing",
+            "Creation de contenu",
+            "Analyse des donnees / reporting",
+            "Gestion des commandes",
+            "Service client",
+            "Gestion des stocks",
+            "Publicite (Meta, Google, TikTok)",
+            "Mise a jour du catalogue produits"
+          ]
+        },
+        {
+          "type": "dropdown",
+          "question": "Combien d'heures/semaine passez-vous sur des taches repetitives?",
+          "required": true,
+          "options": [
+            "< 5 heures",
+            "5-10 heures",
+            "10-20 heures",
+            "20-30 heures",
+            "> 30 heures"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "question": "Decrivez votre plus gros defi actuel en 2-3 phrases",
+          "required": true
+        }
+      ]
+    },
+    {
+      "title": "4. Email Marketing",
+      "questions": [
+        {
+          "type": "dropdown",
+          "question": "Taille de votre liste email",
+          "required": true,
+          "options": [
+            "< 500 abonnes",
+            "500 - 2 000 abonnes",
+            "2 000 - 5 000 abonnes",
+            "5 000 - 10 000 abonnes",
+            "10 000 - 25 000 abonnes",
+            "> 25 000 abonnes",
+            "Je ne sais pas"
+          ]
+        },
+        {
+          "type": "checkboxes",
+          "question": "Quels flows email avez-vous en place?",
+          "required": false,
+          "options": [
+            "Welcome Series",
+            "Abandon de panier",
+            "Post-achat",
+            "Win-back (clients inactifs)",
+            "Anniversaire",
+            "Browse abandonment",
+            "VIP / Loyalty",
+            "Aucun flow automatise"
+          ]
+        },
+        {
+          "type": "dropdown",
+          "question": "Frequence d'envoi de newsletters",
+          "required": true,
+          "options": [
+            "Jamais",
+            "1x par mois",
+            "2-3x par mois",
+            "1x par semaine",
+            "2-3x par semaine",
+            "Quotidien"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "5. Objectifs & Budget",
+      "questions": [
+        {
+          "type": "checkboxes",
+          "question": "Quels sont vos objectifs prioritaires?",
+          "required": true,
+          "options": [
+            "Augmenter le chiffre d'affaires",
+            "Gagner du temps sur les taches repetitives",
+            "Ameliorer la retention client",
+            "Reduire les couts marketing",
+            "Automatiser le service client",
+            "Mieux comprendre mes donnees",
+            "Lancer sur de nouveaux canaux"
+          ]
+        },
+        {
+          "type": "dropdown",
+          "question": "Budget mensuel envisage pour l'automatisation",
+          "required": true,
+          "options": [
+            "< 300 EUR/mois",
+            "300 - 500 EUR/mois",
+            "500 - 1 000 EUR/mois",
+            "1 000 - 2 000 EUR/mois",
+            "> 2 000 EUR/mois",
+            "A definir selon ROI"
+          ]
+        },
+        {
+          "type": "dropdown",
+          "question": "Delai de mise en place souhaite",
+          "required": true,
+          "options": [
+            "Le plus vite possible",
+            "Dans le mois",
+            "Dans les 3 mois",
+            "Pas de rush, je veux bien faire"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "6. Disponibilite",
+      "questions": [
+        {
+          "type": "dropdown",
+          "question": "Quand etes-vous disponible pour un appel de 30 min?",
+          "required": true,
+          "options": [
+            "Cette semaine",
+            "Semaine prochaine",
+            "Dans 2 semaines",
+            "Je prefere echanger par email d'abord"
+          ]
+        },
+        {
+          "type": "checkboxes",
+          "question": "Creneaux horaires preferes (heure de Paris)",
+          "required": false,
+          "options": [
+            "Matin (9h-12h)",
+            "Debut d'apres-midi (14h-16h)",
+            "Fin d'apres-midi (16h-18h)",
+            "Soir (18h-20h)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "question": "Autre chose que vous souhaitez nous communiquer?",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "collectEmail": true,
+    "confirmationMessage": "Merci! Votre diagnostic sera pret sous 24-48h. Vous recevrez un email avec votre rapport PDF personnalise.",
+    "emailNotification": "contact@3a-automation.com",
+    "responseLimit": false,
+    "shuffleQuestions": false
+  },
+  "automation": {
+    "klaviyoSync": {
+      "enabled": true,
+      "listId": "diagnostic_leads",
+      "script": "sync-google-forms-to-klaviyo.cjs"
+    },
+    "pdfGeneration": {
+      "enabled": true,
+      "template": "diagnostic-report-template.pdf"
+    }
+  },
+  "createUrl": "https://docs.google.com/forms/u/0/create",
+  "instructions": [
+    "1. Aller sur Google Forms (forms.google.com)",
+    "2. Creer un nouveau formulaire",
+    "3. Copier les sections et questions de ce template",
+    "4. Activer la collecte d'emails",
+    "5. Configurer la notification email vers contact@3a-automation.com",
+    "6. Copier l'URL du formulaire publie",
+    "7. Integrer sur le site via iframe ou lien direct"
+  ]
+}
