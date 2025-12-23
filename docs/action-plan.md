@@ -8,7 +8,7 @@
 
 ```
 SEGMENTATION AUTOMATIONS (CORRIGÉE):
-├── ✅ 66 automations client-facing (était 75 pollué)
+├── ✅ 72 automations client-facing (était 75 pollué)
 ├── ✅ 36 scripts avec code
 ├── ✅ 30 templates/workflows
 ├── ✅ 23 outils internes EXCLUS du registre

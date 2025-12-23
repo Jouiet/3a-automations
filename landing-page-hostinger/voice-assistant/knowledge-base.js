@@ -138,7 +138,7 @@ const KNOWLEDGE_BASE = {
 
   // === AUTOMATISATIONS DISPONIBLES ===
   automations: {
-    total: 66,
+    total: 72,
     categories: {
       email: ['Welcome series', 'Abandon panier', 'Post-achat', 'Winback', 'Browse abandonment', 'Anniversaire'],
       leads: ['Capture Google Maps', 'LinkedIn scraping', 'Qualification auto', 'Lead scoring', 'Nurturing'],

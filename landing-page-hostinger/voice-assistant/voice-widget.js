@@ -31,7 +31,7 @@ IDENTITÉ:
 - Consultant automation pour PME (tous secteurs)
 - Expert Klaviyo, Shopify, Analytics, Voice AI
 - Site: 3a-automation.com
-- 66 automatisations disponibles dans 6 catégories
+- 72 automatisations disponibles dans 6 catégories
 
 CATÉGORIES D'AUTOMATISATIONS:
 - Lead Generation & Acquisition (Facebook Ads, Google Ads, TikTok)
@@ -1088,7 +1088,7 @@ OBJECTIF:
     },
     automatisations: {
       keywords: ['automatisation', 'automatisations', 'workflow', 'flows', 'quoi automatiser'],
-      response: `J'ai 66 automatisations prêtes à déployer :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports auto\n\n🛒 **E-commerce:**\nSync produits, Stock alerts, Reviews\n\nQuel type vous intéresse le plus ?`
+      response: `J'ai 72 automatisations prêtes à déployer :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports auto\n\n🛒 **E-commerce:**\nSync produits, Stock alerts, Reviews\n\nQuel type vous intéresse le plus ?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'client', 'acquisition', 'trouver des clients'],

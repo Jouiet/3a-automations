@@ -88,7 +88,7 @@ Le Flywheel 360° automatise chaque étape du parcours client pour créer une cr
 
 ---
 
-## Catalogue des 70 Automatisations
+## Catalogue des 72 Automatisations
 
 ### Lead Generation (18 automatisations)
 - Meta Ads Lead Sync → CRM
@@ -256,7 +256,7 @@ Oui, chaque pack inclut un niveau de support. Le pack Growth inclut un support p
 - [Flywheel 360°](https://3a-automation.com/services/flywheel-360.html): Méthodologie complète
 
 ### Pages Catalogue
-- [Automatisations](https://3a-automation.com/automations.html): 70 automatisations disponibles
+- [Automatisations](https://3a-automation.com/automations.html): 72 automatisations disponibles
 - [Tarifs](https://3a-automation.com/pricing.html): Packages et prix
 - [Cas Clients](https://3a-automation.com/cas-clients.html): Études de cas
 
