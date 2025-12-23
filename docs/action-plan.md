@@ -171,7 +171,7 @@ CRITIQUE (Tout complété):
 HIGH PRIORITY:
 ├── ✅ Rappels WhatsApp 24h + 1h avant RDV (FAIT Session 77)
 ├── ✅ Grok Voice telephony (FAIT Session 78 - $0.05/min, <1s latency)
-├── ❌ Flow reschedule booking (needs eventId storage)
+├── ✅ Flow reschedule booking (FAIT Session 79 - cancel/reschedule API)
 ├── ❌ Configurer WhatsApp Business sur Meta (manuel)
 └── ❌ Configurer Twilio/Vonage SIP trunk (manuel)
 

@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 11.2 | Date: 2025-12-23 | Session: 78
+## Version: 11.3 | Date: 2025-12-23 | Session: 79
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -7,12 +7,12 @@
 ## SOURCE DE VERITE
 
 **Automations Registry:** `automations/automations-registry.json` (75 automations v1.4.0)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-78)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-79)
 **Audit Forensique:** `outputs/FORENSIC-AUDIT-2025-12-18.md`
 
 ---
 
-## ETAT ACTUEL (Session 78 - 23/12/2025)
+## ETAT ACTUEL (Session 79 - 23/12/2025)
 
 | Metrique | Valeur |
 |----------|--------|
@@ -25,6 +25,22 @@
 | hreflang SEO | 28/28 (100%) |
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
+
+### Session 79 Completée - BOOKING CANCEL/RESCHEDULE
+```
+GOOGLE APPS SCRIPT v1.2.0:
+├── ✅ Cancel booking (action: "cancel")
+├── ✅ Reschedule booking (action: "reschedule")
+├── ✅ Dual lookup: eventId OR email+datetime
+├── ✅ Slot availability check with exclusion
+├── ✅ Email notifications (cancel + reschedule)
+└── ✅ Audits clean (SEO 0, A11y 0)
+
+API ENDPOINTS:
+├── POST {eventId} + action:"cancel" → Delete event + email
+├── POST {eventId, newDatetime} + action:"reschedule" → Move event + email
+└── POST {name, email, datetime} → Create booking (default)
+```
 
 ### Session 78 Completée - GROK VOICE API LIVE!
 ```
