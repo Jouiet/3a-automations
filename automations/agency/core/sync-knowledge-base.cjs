@@ -308,12 +308,11 @@ function main() {
     packs: {
       quickWin: { price: '390€', automations: '1 flow optimisé', bonus: 'Voice AI + Booking' },
       essentials: { price: '790€', automations: '3 flows + A/B tests', bonus: 'Voice AI + Booking + WhatsApp' },
-      growth: { price: '1490€', automations: '5 flows + dashboard', bonus: 'Voice AI + Booking + WhatsApp + Rappels' }
+      growth: { price: '1399€', automations: '5 flows + dashboard', bonus: 'Voice AI + Booking + WhatsApp + Rappels' }
     },
     retainers: {
       maintenance: { price: '290€/mois', hours: '3h' },
-      optimization: { price: '490€/mois', hours: '5h' },
-      growth: { price: '890€/mois', hours: '10h' }
+      optimization: { price: '490€/mois', hours: '5h' }
     }
   };
 

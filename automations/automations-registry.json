@@ -33,7 +33,7 @@
     "content": {
       "name_fr": "Contenu & Vidéo",
       "name_en": "Content & Video",
-      "count": 10
+      "count": 8
     },
     "ai-avatar": {
       "name_fr": "AI Avatar & Influencer",
@@ -1007,7 +1007,7 @@
     "cinematicads-core": "CinematicAds Core Engine"
   },
   "stats": {
-    "withScript": 42,
+    "withScript": 47,
     "withoutScript": 30,
     "klaviyoTemplates": 7,
     "n8nWorkflows": 8,

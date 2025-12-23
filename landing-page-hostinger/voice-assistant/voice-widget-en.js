@@ -802,7 +802,7 @@
     },
     automations: {
       keywords: ['automation', 'automations', 'workflow', 'flows', 'what can you'],
-      response: `I have 72 ready-to-deploy automations:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Auto reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\nWhich type interests you most?`
+      response: `I have 77 ready-to-deploy automations in 10 categories:\n\n📧 **Email Marketing (9):**\nWelcome, Abandoned cart, Post-purchase, Winback, VIP Tiers\n\n🎯 **Lead Generation (20):**\nMeta/Google/TikTok Leads, LinkedIn, Google Maps, Scoring\n\n📊 **Analytics (9):**\nGA4 Dashboards, Looker Studio, Pixel checks, Alerts\n\n🛒 **Shopify Admin (13):**\nProduct enrichment, Google Shopping, Collections\n\n🔍 **SEO & AEO (9):**\nAlt text, Schema.org, llms.txt, Meta tags\n\n🎬 **CinematicAds AI (4):**\nGemini 3 Pro + Imagen 4 + Veo 3 video generation\n\n📱 **WhatsApp Business (2):**\nBooking confirmations, Reminders\n\n🎙️ **Voice AI (1):**\nGrok Voice Telephony\n\nWhich type interests you most?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'customer', 'acquisition', 'find customers'],

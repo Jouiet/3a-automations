@@ -1,12 +1,12 @@
 {
-  "version": "2025-12-20",
-  "generated": "2025-12-20T23:22:06.381Z",
-  "count": 66,
+  "version": "2025-12-23",
+  "generated": "2025-12-23T20:27:50.184Z",
+  "count": 77,
   "categories": {
     "lead-gen": {
       "name_fr": "Lead Generation & Acquisition",
       "name_en": "Lead Generation & Acquisition",
-      "count": 18
+      "count": 20
     },
     "seo": {
       "name_fr": "SEO & Contenu",
@@ -32,6 +32,26 @@
       "name_fr": "Contenu & Vidéo",
       "name_en": "Content & Video",
       "count": 8
+    },
+    "ai-avatar": {
+      "name_fr": "AI Avatar & Influencer",
+      "name_en": "AI Avatar & Influencer",
+      "count": 2
+    },
+    "cinematicads": {
+      "name_fr": "CinematicAds AI",
+      "name_en": "CinematicAds AI",
+      "count": 4
+    },
+    "whatsapp": {
+      "name_fr": "WhatsApp Business",
+      "name_en": "WhatsApp Business",
+      "count": 2
+    },
+    "voice-ai": {
+      "name_fr": "Voice AI & Téléphonie",
+      "name_en": "Voice AI & Telephony",
+      "count": 1
     }
   },
   "automations": [
@@ -144,9 +164,9 @@
       "benefit_en": "Quiz → Email list"
     },
     {
-      "id": "scraping-google-maps",
-      "name_fr": "Scraping Google Maps",
-      "name_en": "Google Maps Scraping",
+      "id": "sourcing-google-maps",
+      "name_fr": "Sourcing Google Maps",
+      "name_en": "Google Maps Sourcing",
       "category": "lead-gen",
       "type": "script",
       "script": "generic/scrape-google-maps-businesses.cjs",
@@ -156,9 +176,9 @@
       "benefit_en": "Targeted local leads"
     },
     {
-      "id": "scraping-linkedin",
-      "name_fr": "Scraping LinkedIn",
-      "name_en": "LinkedIn Scraping",
+      "id": "sourcing-linkedin",
+      "name_fr": "Sourcing LinkedIn",
+      "name_en": "LinkedIn Sourcing",
       "category": "lead-gen",
       "type": "script",
       "script": "generic/scrape-linkedin-profiles.cjs",
@@ -168,9 +188,9 @@
       "benefit_en": "B2B prospect database"
     },
     {
-      "id": "scraping-hiring",
-      "name_fr": "Scraping Recruteurs",
-      "name_en": "Hiring Companies Scraping",
+      "id": "veille-recrutement",
+      "name_fr": "Veille Recrutement",
+      "name_en": "Hiring Intelligence",
       "category": "lead-gen",
       "type": "script",
       "script": "generic/scrape-hiring-companies.cjs",
@@ -644,8 +664,8 @@
       "script": "agency/core/google-apps-script-booking.js",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
-      "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_fr": "Booking + annulation + report automatisé",
+      "benefit_en": "Booking + cancel + reschedule automation"
     },
     {
       "id": "google-calendar-booking",
@@ -826,6 +846,138 @@
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
       "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "cinematic-director",
+      "name_fr": "CinematicAds Director",
+      "name_en": "CinematicAds Director",
+      "category": "cinematicads",
+      "type": "cinematicads-workflow",
+      "script": "../automations-cinematicads/workflows/cinematic-director.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Vidéos cinématiques AI (Gemini 3 Pro + Imagen 4 + Veo 3.1)",
+      "benefit_en": "AI cinematic videos (Gemini 3 Pro + Imagen 4 + Veo 3.1)"
+    },
+    {
+      "id": "competitor-clone",
+      "name_fr": "Competitor Clone AI",
+      "name_en": "Competitor Clone AI",
+      "category": "cinematicads",
+      "type": "cinematicads-workflow",
+      "script": "../automations-cinematicads/workflows/competitor-clone.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Clone pubs concurrents (analyse + script + production multi-scènes)",
+      "benefit_en": "Clone competitor ads (analysis + script + multi-scene production)"
+    },
+    {
+      "id": "ecommerce-factory",
+      "name_fr": "E-commerce Ads Factory",
+      "name_en": "E-commerce Ads Factory",
+      "category": "cinematicads",
+      "type": "cinematicads-workflow",
+      "script": "../automations-cinematicads/workflows/ecommerce-factory.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Ads multi-ratio (Google Ads 1.91:1, Social 1:1, TikTok 9:16)",
+      "benefit_en": "Multi-ratio ads (Google Ads 1.91:1, Social 1:1, TikTok 9:16)"
+    },
+    {
+      "id": "asset-factory",
+      "name_fr": "Asset Factory (Dual AI)",
+      "name_en": "Asset Factory (Dual AI)",
+      "category": "cinematicads",
+      "type": "cinematicads-core",
+      "script": "../automations-cinematicads/gateway/AssetFactory.js",
+      "frequency_fr": "Core engine",
+      "frequency_en": "Core engine",
+      "benefit_fr": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
+      "benefit_en": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1"
+    },
+    {
+      "id": "ai-avatar-generator",
+      "name_fr": "AI Avatar Generator",
+      "name_en": "AI Avatar Generator",
+      "category": "ai-avatar",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/ai-avatar-generator.json",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Avatar IA consistent multi-scenes (Imagen 3 + Gemini API)",
+      "benefit_en": "Consistent AI avatar multi-scenes (Imagen 3 + Gemini API)"
+    },
+    {
+      "id": "ai-talking-video",
+      "name_fr": "AI Talking Video",
+      "name_en": "AI Talking Video",
+      "category": "ai-avatar",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/ai-talking-video.json",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Video lip-sync IA (ElevenLabs + fal.ai Kling)",
+      "benefit_en": "AI lip-sync video (ElevenLabs + fal.ai Kling)"
+    },
+    {
+      "id": "whatsapp-booking-confirmation",
+      "name_fr": "Confirmation WhatsApp RDV",
+      "name_en": "WhatsApp Booking Confirmation",
+      "category": "whatsapp",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/whatsapp-booking-confirmation.json",
+      "frequency_fr": "À chaque réservation",
+      "frequency_en": "On each booking",
+      "benefit_fr": "98% taux d'ouverture vs 20% SMS",
+      "benefit_en": "98% open rate vs 20% SMS"
+    },
+    {
+      "id": "whatsapp-booking-reminders",
+      "name_fr": "Rappels WhatsApp 24h + 1h",
+      "name_en": "WhatsApp Reminders 24h + 1h",
+      "category": "whatsapp",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/whatsapp-booking-reminders.json",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "-30% no-shows",
+      "benefit_en": "-30% no-shows"
+    },
+    {
+      "id": "grok-voice-telephony",
+      "name_fr": "Grok Voice Téléphonie",
+      "name_en": "Grok Voice Telephony",
+      "category": "voice-ai",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/grok-voice-telephony.json",
+      "frequency_fr": "Appels entrants",
+      "frequency_en": "Inbound calls",
+      "benefit_fr": "Réservation par téléphone IA ($0.05/min)",
+      "benefit_en": "AI phone booking ($0.05/min)"
+    },
+    {
+      "id": "linkedin-lead-scraper",
+      "name_fr": "LinkedIn Lead Scraper",
+      "name_en": "LinkedIn Lead Scraper",
+      "category": "lead-gen",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/linkedin-lead-scraper.json",
+      "frequency_fr": "Toutes les 6 heures",
+      "frequency_en": "Every 6 hours",
+      "benefit_fr": "+400 leads/jour avec scoring AI",
+      "benefit_en": "+400 leads/day with AI scoring"
+    },
+    {
+      "id": "email-outreach-sequence",
+      "name_fr": "Email Outreach Sequence",
+      "name_en": "Email Outreach Sequence",
+      "category": "lead-gen",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/email-outreach-sequence.json",
+      "frequency_fr": "Déclenché",
+      "frequency_en": "Triggered",
+      "benefit_fr": "Séquence 3 emails personnalisée",
+      "benefit_en": "3-email personalized sequence"
     }
   ]
 }
