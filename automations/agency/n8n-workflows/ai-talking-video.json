@@ -1,0 +1,399 @@
+{
+  "name": "AI Talking Video Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ai-talking-video",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Validate input and prepare for TTS\nconst input = $input.first().json.body || $input.first().json;\n\nconst sceneImageUrl = input.scene_image_url || input.sceneImageUrl;\nconst script = input.script;\nconst voiceId = input.voice_id || input.voiceId || '21m00Tcm4TlvDq8ikWAM'; // Default: Rachel\nconst durationSeconds = input.duration_seconds || input.durationSeconds || 30;\n\nif (!sceneImageUrl) {\n  throw new Error('Missing required field: scene_image_url');\n}\n\nif (!script) {\n  throw new Error('Missing required field: script');\n}\n\nreturn {\n  json: {\n    sceneImageUrl,\n    script,\n    voiceId,\n    durationSeconds,\n    characterCount: script.length\n  }\n};"
+      },
+      "id": "code-validate",
+      "name": "Validate Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.elevenlabs.io/v1/text-to-speech/{{ $json.voiceId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"text\": \"{{ $json.script }}\",\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.75,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "http-elevenlabs",
+      "name": "ElevenLabs TTS",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "elevenlabs-credentials",
+          "name": "ElevenLabs API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare audio for fal.ai\nconst audioBuffer = $input.first().binary?.data;\nconst previousData = $('Validate Input').first().json;\n\nif (!audioBuffer) {\n  throw new Error('No audio data received from ElevenLabs');\n}\n\n// Convert binary to base64 for fal.ai\nconst audioBase64 = Buffer.from(audioBuffer.data, 'base64').toString('base64');\n\nreturn {\n  json: {\n    sceneImageUrl: previousData.sceneImageUrl,\n    audioBase64: audioBase64,\n    audioDuration: previousData.durationSeconds\n  },\n  binary: $input.first().binary\n};"
+      },
+      "id": "code-prepare-audio",
+      "name": "Prepare Audio Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [920, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://queue.fal.run/fal-ai/kling-video/lipsync/audio-to-video",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"image_url\": \"{{ $json.sceneImageUrl }}\",\n  \"audio_url\": \"data:audio/mpeg;base64,{{ $json.audioBase64 }}\"\n}",
+        "options": {}
+      },
+      "id": "http-falai-submit",
+      "name": "Submit to fal.ai Kling LipSync",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1140, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "falai-credentials",
+          "name": "fal.ai API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract request ID for polling\nconst response = $input.first().json;\n\nif (!response.request_id) {\n  throw new Error('No request_id received from fal.ai');\n}\n\nreturn {\n  json: {\n    requestId: response.request_id,\n    status: 'submitted',\n    pollCount: 0,\n    maxPolls: 60 // Max 5 minutes (60 x 5 seconds)\n  }\n};"
+      },
+      "id": "code-extract-request",
+      "name": "Extract Request ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1360, 300]
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "wait-poll",
+      "name": "Wait 5 Seconds",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1580, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://queue.fal.run/fal-ai/kling-video/lipsync/audio-to-video/status/{{ $json.requestId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "http-falai-status",
+      "name": "Check fal.ai Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1800, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "falai-credentials",
+          "name": "fal.ai API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-completed",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "COMPLETED",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-completed",
+      "name": "Is Completed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2020, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Increment poll count and check if we should continue\nconst previousData = $('Extract Request ID').first().json;\nconst currentStatus = $input.first().json;\n\nconst newPollCount = (previousData.pollCount || 0) + 1;\n\nif (newPollCount >= previousData.maxPolls) {\n  throw new Error('Polling timeout: Video generation took too long');\n}\n\nreturn {\n  json: {\n    requestId: previousData.requestId,\n    status: currentStatus.status,\n    pollCount: newPollCount,\n    maxPolls: previousData.maxPolls\n  }\n};"
+      },
+      "id": "code-increment-poll",
+      "name": "Increment Poll Count",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2240, 420]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://queue.fal.run/fal-ai/kling-video/lipsync/audio-to-video/result/{{ $json.requestId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "http-falai-result",
+      "name": "Get fal.ai Result",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2240, 180],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "falai-credentials",
+          "name": "fal.ai API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format final response\nconst result = $input.first().json;\n\nreturn {\n  json: {\n    success: true,\n    videoUrl: result.video?.url || result.output?.video_url || null,\n    duration: result.video?.duration || null,\n    generatedAt: new Date().toISOString(),\n    provider: 'fal.ai/kling-lipsync'\n  }\n};"
+      },
+      "id": "code-format-result",
+      "name": "Format Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2460, 180]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [2680, 180]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Validate Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Input": {
+      "main": [
+        [
+          {
+            "node": "ElevenLabs TTS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ElevenLabs TTS": {
+      "main": [
+        [
+          {
+            "node": "Prepare Audio Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Audio Data": {
+      "main": [
+        [
+          {
+            "node": "Submit to fal.ai Kling LipSync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Submit to fal.ai Kling LipSync": {
+      "main": [
+        [
+          {
+            "node": "Extract Request ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Request ID": {
+      "main": [
+        [
+          {
+            "node": "Wait 5 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 5 Seconds": {
+      "main": [
+        [
+          {
+            "node": "Check fal.ai Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check fal.ai Status": {
+      "main": [
+        [
+          {
+            "node": "Is Completed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Completed?": {
+      "main": [
+        [
+          {
+            "node": "Get fal.ai Result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Increment Poll Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Increment Poll Count": {
+      "main": [
+        [
+          {
+            "node": "Wait 5 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get fal.ai Result": {
+      "main": [
+        [
+          {
+            "node": "Format Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Result": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "3a-automation"
+  },
+  "pinData": {},
+  "versionId": "1.0.0",
+  "triggerCount": 0,
+  "tags": [
+    {
+      "name": "AI Video",
+      "createdAt": "2025-12-23T00:00:00.000Z",
+      "updatedAt": "2025-12-23T00:00:00.000Z"
+    },
+    {
+      "name": "CinematicAds",
+      "createdAt": "2025-12-23T00:00:00.000Z",
+      "updatedAt": "2025-12-23T00:00:00.000Z"
+    },
+    {
+      "name": "Lip-Sync",
+      "createdAt": "2025-12-23T00:00:00.000Z",
+      "updatedAt": "2025-12-23T00:00:00.000Z"
+    }
+  ]
+}

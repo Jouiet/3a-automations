@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "lastUpdated": "2025-12-23",
-  "totalCount": 70,
+  "totalCount": 72,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -33,7 +33,12 @@
     "content": {
       "name_fr": "Contenu & Vidéo",
       "name_en": "Content & Video",
-      "count": 12
+      "count": 10
+    },
+    "ai-avatar": {
+      "name_fr": "AI Avatar & Influencer",
+      "name_en": "AI Avatar & Influencer",
+      "count": 2
     },
     "cinematicads": {
       "name_fr": "CinematicAds AI",
@@ -881,6 +886,30 @@
       "frequency_en": "Core engine",
       "benefit_fr": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
       "benefit_en": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1"
+    },
+    {
+      "id": "ai-avatar-generator",
+      "name_fr": "AI Avatar Generator",
+      "name_en": "AI Avatar Generator",
+      "category": "ai-avatar",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/ai-avatar-generator.json",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Avatar IA consistent multi-scenes (Imagen 3 + Gemini API)",
+      "benefit_en": "Consistent AI avatar multi-scenes (Imagen 3 + Gemini API)"
+    },
+    {
+      "id": "ai-talking-video",
+      "name_fr": "AI Talking Video",
+      "name_en": "AI Talking Video",
+      "category": "ai-avatar",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/ai-talking-video.json",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Video lip-sync IA (ElevenLabs + fal.ai Kling)",
+      "benefit_en": "AI lip-sync video (ElevenLabs + fal.ai Kling)"
     }
   ],
   "types": {
@@ -908,14 +937,15 @@
     "cinematicads-core": "CinematicAds Core Engine"
   },
   "stats": {
-    "withScript": 40,
+    "withScript": 42,
     "withoutScript": 30,
     "klaviyoTemplates": 7,
-    "n8nWorkflows": 3,
+    "n8nWorkflows": 5,
     "shopifyNative": 6,
     "manualProcesses": 5,
     "aiAssisted": 2,
     "thirdPartyIntegrations": 3,
-    "cinematicadsWorkflows": 4
+    "cinematicadsWorkflows": 4,
+    "aiAvatarWorkflows": 2
   }
 }
