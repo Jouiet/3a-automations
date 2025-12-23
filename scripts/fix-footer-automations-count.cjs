@@ -25,13 +25,13 @@ htmlFiles.forEach(file => {
   let fixes = [];
 
   // Fix 1: Update automation count 66 → 70
-  if (content.includes('66 Automation')) {
-    content = content.replace(/66 Automation/g, '70 Automation');
-    fixes.push('66→70 Automations (EN)');
+  if (content.includes('72 Automations')) {
+    content = content.replace(/72 Automations/g, '72 Automations');
+    fixes.push('66→72 Automations (EN)');
   }
-  if (content.includes('66 automatisation')) {
-    content = content.replace(/66 automatisation/g, '70 automatisation');
-    fixes.push('66→70 automatisations (FR)');
+  if (content.includes('72 automatisations')) {
+    content = content.replace(/72 automatisations/g, '72 automatisations');
+    fixes.push('66→72 automatisations (FR)');
   }
 
   // Fix 2: Malformed image attributes (/ loading="lazy" → loading="lazy" /)

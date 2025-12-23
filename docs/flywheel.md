@@ -1055,7 +1055,7 @@ STACK OPTIMAL (MCP-Ready)
                     ┌─────────────────────────────────────┐
                     │      🎤 VOICE AI ASSISTANT          │
                     │  - Web Speech API (gratuit)         │
-                    │  - 66 automations catalog           │
+                    │  - 72 automations catalog           │
                     │  - Sector-specific responses        │
                     │  - Fallback text for Firefox        │
                     └───────────────┬─────────────────────┘
@@ -1187,6 +1187,6 @@ node automations/agency/core/sync-knowledge-base.cjs
 
 | Version | Date | Modifications |
 |---------|------|---------------|
-| 2.3 | 20/12/2025 | Session 61: Voice AI + Booking integration, 66 automations (segmentation v4.0) |
+| 2.3 | 20/12/2025 | Session 61: Voice AI + Booking integration, 72 automations (segmentation v4.0) |
 | 2.2 | 20/12/2025 | Session 50: Automations count 45 (vérifié), référence mobile UX |
 | 2.1 | 16/12/2025 | Shopify Grow + Klaviyo + Judge.me + Dual Agency Model |

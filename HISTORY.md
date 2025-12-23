@@ -17,7 +17,7 @@
 | **68** | **Audit 88% Reduction**: Twitter cards 20 pages, lazy loading 56 images, WebP conversion, image dimensions for CLS |
 | **67** | **FAQPage Schema**: 10 pages (5 FR + 5 EN), 3 FAQs each, rich snippets |
 | **66** | **SEO Audit Complete**: 349→309 issues, meta descriptions fixed, canonical URLs, OG descriptions |
-| **65** | **Forensic Frontend + CinematicAds**: 588→349 issues, titles/metas/H1s/schema.org, 70 automations (+4 CinematicAds) |
+| **65** | **Forensic Frontend + CinematicAds**: 588→349 issues, titles/metas/H1s/schema.org, 72 automations (+4 CinematicAds) |
 
 ## Sessions 60-64 (22-23/12/2025) - Links + Booking
 

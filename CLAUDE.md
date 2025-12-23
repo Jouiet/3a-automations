@@ -6,7 +6,7 @@
 
 ## SOURCE DE VERITE
 
-**Automations Registry:** `automations/automations-registry.json` (70 automations)
+**Automations Registry:** `automations/automations-registry.json` (72 automations)
 **Historique Sessions:** `HISTORY.md` (Sessions 0-74)
 **Audit Forensique:** `outputs/FORENSIC-AUDIT-2025-12-18.md`
 
@@ -84,7 +84,7 @@ Deploy: GitHub Action -> Hostinger API -> git pull
 
 ```
 /Users/mac/Desktop/JO-AAA/           <- AGENCE
-├── automations/                     <- 70 automations
+├── automations/                     <- 72 automations
 │   ├── automations-registry.json    <- SOURCE VERITE
 │   ├── agency/core/                 <- Outils internes
 │   ├── clients/                     <- Templates clients

@@ -34,8 +34,8 @@ const SEO_FIXES = {
         h1: 'Tarifs & Packs'
     },
     'automations.html': {
-        title: 'Catalogue 66 Automations E-commerce & Marketing | 3A',
-        meta: 'Explorez notre catalogue de 66 automations: Shopify, Klaviyo, GA4, CRM. Scripts testés en production. Lead gen, email flows, analytics automatisés.',
+        title: 'Catalogue 72 Automations E-commerce & Marketing | 3A',
+        meta: 'Explorez notre catalogue de 72 automations: Shopify, Klaviyo, GA4, CRM. Scripts testés en production. Lead gen, email flows, analytics automatisés.',
         h1: 'Catalogue Automations'
     },
     'booking.html': {
@@ -91,7 +91,7 @@ const SEO_FIXES = {
     },
     'en/automations.html': {
         title: '66 E-commerce & Marketing Automations | 3A Automation',
-        meta: 'Explore our catalog of 66 automations: Shopify, Klaviyo, GA4, CRM. Production-tested scripts. Lead gen, email flows, automated analytics.',
+        meta: 'Explore our catalog of 72 automations: Shopify, Klaviyo, GA4, CRM. Production-tested scripts. Lead gen, email flows, automated analytics.',
         h1: 'Automation Catalog'
     },
     'en/booking.html': {
