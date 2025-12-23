@@ -1,48 +1,56 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-23 | Version: 9.0 (Màj Session 76 - 72 Automations Vérifiées)
+## Date: 2025-12-23 | Version: 10.0 (Màj Session 82 - 77 Automations Vérifiées)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (23 Dec 2025 - Session 76)
+# SECTION 0: ÉTAT ACTUEL (23 Dec 2025 - Session 82)
 
-## ✅ ÉTAT VÉRIFIÉ: 72 AUTOMATIONS
+## ✅ ÉTAT VÉRIFIÉ: 77 AUTOMATIONS
 
-### Résultat Final Vérifié
+### Résultat Final Vérifié (Session 82)
 ```
-AVANT (pollué):     75 automations (incluait outils internes)
-APRÈS (corrigé):    72 automations client-facing
+Registry v1.5.0:    77 automations client-facing
+HTML Pages:         77 automations (synced)
+llms.txt:           77 automatisations (v3.2)
 
-Composition:
-├── Scripts avec code:     36
-├── Templates/workflows:   30
-└── Outils internes:       23 (EXCLUS)
+Source de vérité: automations/automations-registry.json
 ```
 
-### Règles de Segmentation v4.0
+### Catégories (77 automations - Registry v1.5.0)
 ```
-agency/core/   → WHITELIST: google-*-booking.* seulement
-clients/*      → INCLUS sauf test-/check-/verify-
-generic/*      → INCLUS sauf test-/validate-/modules
-lib/           → EXCLU totalement
-
-EXCLUS (23 fichiers):
-├── Préfixes: test-, check-, validate-, forensic-, env-
-├── Suffixes: -test, -poc, -connection
-├── Patterns: verify-, inspect-
-└── Spécifiques: grok-client, geo-markets, prompt-feedback-tracker
-```
-
-### Catégories (72 automations - Registry v1.2.0)
-```
-Lead Generation & Acquisition:  18
+Lead Generation & Acquisition:  20 (+2: LinkedIn scraper, Email outreach)
 Shopify Admin:                  13
 SEO & Contenu:                   9
 Email Marketing (CRM):           9
 Analytics & Reporting:           9
 Contenu & Vidéo:                10
-AI Avatar & Influencer:          2 (NEW Session 75)
+AI Avatar & Influencer:          2
 CinematicAds AI:                 4
+WhatsApp Business:               2
+Voice AI (Grok):                 1
+```
+
+### Audits Passés (Session 82)
+```
+✅ Forensic Complete:     0 critical, 0 high, 0 medium, 2 low (CSS !important)
+✅ Frontend SEO/AEO:      0 issues
+✅ Accessibility WCAG:    0 issues
+✅ Automation count:      Synced across 28 pages + llms.txt
+
+Scripts d'audit:
+├── scripts/forensic-audit-complete.cjs
+├── scripts/forensic-frontend-audit.cjs (10 categories)
+└── scripts/audit-accessibility.cjs
+```
+
+### AEO Status (Answer Engine Optimization)
+```
+✅ robots.txt:    AI crawlers allowed (GPTBot, ClaudeBot, PerplexityBot)
+✅ llms.txt:      v3.2 updated (77 automations)
+✅ sitemap.xml:   28 URLs with hreflang alternates
+✅ Schema.org:    JSON-LD on all pages
+✅ FAQPage:       On pricing + service pages
 ```
 
 ### Commits Session 61 (Segmentation)
