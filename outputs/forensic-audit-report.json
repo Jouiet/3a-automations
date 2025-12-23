@@ -1,11 +1,11 @@
 {
-  "date": "2025-12-22T23:36:25.770Z",
+  "date": "2025-12-23T02:00:19.861Z",
   "summary": {
     "critical": 0,
     "high": 0,
-    "medium": 2,
-    "low": 8,
-    "total": 10
+    "medium": 0,
+    "low": 2,
+    "total": 2
   },
   "issues": [
     {
@@ -13,7 +13,7 @@
       "severity": "LOW",
       "file": "/styles.css",
       "line": 0,
-      "description": "Excessive !important usage: 45 instances",
+      "description": "Excessive !important usage: 65 instances",
       "fix": "Reduce !important usage for better maintainability"
     },
     {
@@ -21,72 +21,8 @@
       "severity": "LOW",
       "file": "/styles.min.css",
       "line": 0,
-      "description": "Excessive !important usage: 45 instances",
+      "description": "Excessive !important usage: 65 instances",
       "fix": "Reduce !important usage for better maintainability"
-    },
-    {
-      "category": "SEO",
-      "severity": "MEDIUM",
-      "file": "/404.html",
-      "line": 0,
-      "description": "Missing canonical URL",
-      "fix": "Add <link rel=\"canonical\" href=\"...\">"
-    },
-    {
-      "category": "SEO",
-      "severity": "LOW",
-      "file": "/404.html",
-      "line": 0,
-      "description": "Missing Open Graph tags",
-      "fix": "Add og:title, og:description, og:image"
-    },
-    {
-      "category": "SEO",
-      "severity": "MEDIUM",
-      "file": "/en/404.html",
-      "line": 0,
-      "description": "Missing canonical URL",
-      "fix": "Add <link rel=\"canonical\" href=\"...\">"
-    },
-    {
-      "category": "SEO",
-      "severity": "LOW",
-      "file": "/en/404.html",
-      "line": 0,
-      "description": "Missing Open Graph tags",
-      "fix": "Add og:title, og:description, og:image"
-    },
-    {
-      "category": "SEO",
-      "severity": "LOW",
-      "file": "/en/legal/privacy.html",
-      "line": 0,
-      "description": "Missing Open Graph tags",
-      "fix": "Add og:title, og:description, og:image"
-    },
-    {
-      "category": "SEO",
-      "severity": "LOW",
-      "file": "/en/legal/terms.html",
-      "line": 0,
-      "description": "Missing Open Graph tags",
-      "fix": "Add og:title, og:description, og:image"
-    },
-    {
-      "category": "SEO",
-      "severity": "LOW",
-      "file": "/legal/mentions-legales.html",
-      "line": 0,
-      "description": "Missing Open Graph tags",
-      "fix": "Add og:title, og:description, og:image"
-    },
-    {
-      "category": "SEO",
-      "severity": "LOW",
-      "file": "/legal/politique-confidentialite.html",
-      "line": 0,
-      "description": "Missing Open Graph tags",
-      "fix": "Add og:title, og:description, og:image"
     }
   ]
 }
