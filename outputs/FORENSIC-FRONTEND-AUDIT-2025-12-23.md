@@ -134,4 +134,4 @@ Les crawlers AI suivants doivent être autorisés pour maximiser la visibilité:
 ---
 
 *Rapport généré automatiquement par forensic-frontend-complete.cjs*
-*Date: 2025-12-23T01:21:37.792Z*
+*Date: 2025-12-23T01:40:21.608Z*
