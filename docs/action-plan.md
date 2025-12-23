@@ -203,12 +203,12 @@ PERFORMANCE SITE:
 ├── CLS: 0 ✅
 └── ✅ GTM lazy loading appliqué (28 pages)
 
-FACTUALITÉ (Session 78):
-├── ✅ 75 automations (registry v1.4.0)
+FACTUALITÉ (Session 80):
+├── ✅ 77 automations (registry v1.5.0)
 ├── ✅ Grok Voice API: CONNECTION OK
-├── ✅ WhatsApp + Grok Voice workflows (4 n8n workflows total)
+├── ✅ Lead Gen workflows: LinkedIn scraper + Email sequence
 ├── ✅ Audits SEO/AEO et WCAG/RGAA = 0 issues
-└── ✅ HTML pages updated (74 → 75)
+└── ✅ Admin Dashboard Blueprint: docs/ADMIN-DASHBOARD-BLUEPRINT.md
 
 PRÊT POUR PRODUCTION:
 ├── ✅ Voice AI Booking (Web): Web Speech API + Calendar

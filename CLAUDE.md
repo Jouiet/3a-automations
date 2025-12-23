@@ -6,7 +6,7 @@
 
 ## SOURCE DE VERITE
 
-**Automations Registry:** `automations/automations-registry.json` (75 automations v1.4.0)
+**Automations Registry:** `automations/automations-registry.json` (77 automations v1.5.0)
 **Historique Sessions:** `HISTORY.md` (Sessions 0-80)
 **Audit Forensique:** `outputs/FORENSIC-AUDIT-2025-12-18.md`
 
@@ -18,7 +18,7 @@
 |----------|--------|
 | Site | https://3a-automation.com LIVE |
 | Pages | 28 (14 FR + 14 EN) - HTTP 200 |
-| Automations | **75** (Lead Gen 18, Shopify 13, SEO 9, Email 9, Analytics 9, Content 10, AI Avatar 2, CinematicAds 4, WhatsApp 2, **Voice AI 1**) |
+| Automations | **77** (Lead Gen 20, Shopify 13, SEO 9, Email 9, Analytics 9, Content 10, AI Avatar 2, CinematicAds 4, WhatsApp 2, Voice AI 1) |
 | Audit SEO/AEO | 0 issues PASSED |
 | Audit WCAG/RGAA | 0 issues PASSED |
 | Lighthouse Perf | ~70% |
@@ -26,19 +26,24 @@
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
 
-### Session 80 Completée - TEMPLATES & VERIFICATION
+### Session 80 Completée - LEAD GEN ENGINE + DASHBOARD BLUEPRINT
 ```
-TEMPLATES CREES:
-├── ✅ google-form-diagnostic.json (formulaire 6 sections)
-├── ✅ linkedin-content-templates.json (cold outreach + posts)
-└── ✅ deploy-n8n-workflows.cjs (script deploiement)
+ADMIN DASHBOARD BLUEPRINT:
+├── ✅ docs/ADMIN-DASHBOARD-BLUEPRINT.md (architecture complete)
+├── ✅ Stack: Next.js 14 + Shadcn/UI + Tailwind
+├── ✅ Modules: Overview, Lead Management, Automation Hub, Analytics
+└── ✅ Sources: Shadcn Dashboard, n8n Templates, Apify Docs
 
-VERIFICATION COMPLETE:
-├── ✅ 28 pages HTTP 200 (FR 14 + EN 14)
-├── ✅ Audit SEO: 0 critical, 0 high, 0 medium, 2 low
-├── ✅ Audit A11y: 0 issues
-├── ✅ CSS !important: 65 (tous justifies - currency toggle + reduced-motion)
-└── ✅ Assets optimises (CSS 98KB, JS 10KB, Voice 32KB)
+LEAD GENERATION WORKFLOWS:
+├── ✅ linkedin-lead-scraper.json (Apify + AI scoring)
+├── ✅ email-outreach-sequence.json (3-touch Klaviyo)
+├── ✅ Schedule: Every 6h, 100 profiles/run
+├── ✅ Scoring: Title +30, Size +20, Industry +20, Location +15
+└── ✅ Target: 400 leads/jour, >50% open rate, >5% reply
+
+REGISTRY v1.5.0:
+├── 77 automations (+2 lead gen)
+└── Lead Gen: 18 → 20 automations
 ```
 
 ### Session 79 Completée - BOOKING CANCEL/RESCHEDULE

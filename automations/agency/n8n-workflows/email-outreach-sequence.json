@@ -1,0 +1,231 @@
+{
+  "name": "Email Outreach Sequence - Multi-Touch Campaign",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "leads/new",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-new-lead",
+      "name": "Webhook - New Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "new-lead",
+      "notes": "Triggered when new lead added"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.email }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "check-email",
+      "name": "Has Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "notes": "Only process if email exists"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate personalized email content\nconst lead = $input.first().json;\n\nconst firstName = lead.firstName || 'there';\nconst company = lead.company || 'your company';\nconst title = lead.headline || '';\n\n// Email 1: Introduction\nconst email1 = {\n  subject: `${firstName}, question rapide sur ${company}`,\n  body: `Bonjour ${firstName},\\n\\nJe vois que vous travaillez chez ${company} en tant que ${title}.\\n\\nJe travaille avec des PME e-commerce qui perdent 10-15h/semaine sur des taches manuelles (reporting, relances emails, mise a jour produits).\\n\\nQuestion: combien de temps passez-vous par semaine sur ces taches repetitives?\\n\\nSi c'est plus de 5h, je peux vous montrer comment automatiser ca en moins d'une semaine.\\n\\nCordialement,\\nJouiet\\n3A Automation\\nhttps://3a-automation.com`\n};\n\n// Email 2: Value Add (Day 3)\nconst email2 = {\n  subject: `Case study: comment reduire 10h/semaine de taches manuelles`,\n  body: `Bonjour ${firstName},\\n\\nSuite a mon message precedent, je voulais partager un cas concret.\\n\\nUn de mes clients e-commerce passait 2h/jour sur:\\n- Reporting manuel GA4 + Shopify\\n- Relances paniers abandonnes\\n- Mise a jour des prix\\n\\nResultat apres automatisation:\\n→ 10h/semaine recuperees\\n→ +23% revenus email\\n→ ROI 42:1 sur les automations\\n\\nVoulez-vous que je vous montre comment on peut faire pareil pour ${company}?\\n\\n30 minutes suffisent pour identifier vos quick wins.\\n\\nCordialement,\\nJouiet`\n};\n\n// Email 3: Direct Ask (Day 5)\nconst email3 = {\n  subject: `Audit gratuit pour ${company}?`,\n  body: `Bonjour ${firstName},\\n\\nJe ne veux pas vous spammer - dernier message promis.\\n\\nSi l'automatisation e-commerce vous interesse, je propose un audit gratuit de 30 min ou j'analyse:\\n\\n1. Vos flows email actuels\\n2. Vos opportunites d'automatisation\\n3. Le ROI potentiel\\n\\nSans engagement, sans pitch commercial.\\n\\nDisponible cette semaine? Voici mon calendrier:\\nhttps://3a-automation.com/booking.html\\n\\nSi ce n'est pas le bon moment, pas de souci - je comprends.\\n\\nCordialement,\\nJouiet\\n3A Automation`\n};\n\nreturn {\n  json: {\n    ...lead,\n    emails: {\n      email1,\n      email2,\n      email3\n    },\n    sequenceStartDate: new Date().toISOString()\n  }\n};"
+      },
+      "id": "generate-emails",
+      "name": "Generate Personalized Emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 200],
+      "notes": "AI personalization"
+    },
+    {
+      "parameters": {
+        "operation": "createEvent",
+        "listId": "={{ $env.KLAVIYO_LIST_OUTREACH }}",
+        "eventName": "outreach_started",
+        "eventProperties": {
+          "email": "={{ $json.email }}",
+          "firstName": "={{ $json.firstName }}",
+          "company": "={{ $json.company }}",
+          "leadScore": "={{ $json.leadScore }}"
+        }
+      },
+      "id": "klaviyo-event",
+      "name": "Trigger Klaviyo Flow",
+      "type": "n8n-nodes-base.klaviyo",
+      "typeVersion": 1,
+      "position": [900, 200],
+      "credentials": {
+        "klaviyoApi": {
+          "id": "KLAVIYO_CRED",
+          "name": "Klaviyo API"
+        }
+      },
+      "notes": "Start email sequence in Klaviyo"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "{{ $env.GOOGLE_SHEET_OUTREACH_ID }}",
+          "mode": "id"
+        },
+        "sheetName": "Outreach Log",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $json.email }}",
+            "name": "={{ $json.firstName }} {{ $json.lastName }}",
+            "company": "={{ $json.company }}",
+            "sequence_started": "={{ $json.sequenceStartDate }}",
+            "status": "active"
+          }
+        },
+        "options": {}
+      },
+      "id": "log-outreach",
+      "name": "Log Outreach",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1120, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GOOGLE_SHEETS_CRED",
+          "name": "Google Sheets"
+        }
+      },
+      "notes": "Track outreach status"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Outreach sequence started', lead: $json.email }) }}",
+        "options": {}
+      },
+      "id": "respond-success",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1340, 200],
+      "notes": "Confirm sequence started"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: 'No email provided' }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "respond-no-email",
+      "name": "Respond No Email",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [680, 400],
+      "notes": "Error: no email"
+    }
+  ],
+  "connections": {
+    "Webhook - New Lead": {
+      "main": [
+        [
+          {
+            "node": "Has Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Email?": {
+      "main": [
+        [
+          {
+            "node": "Generate Personalized Emails",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond No Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Personalized Emails": {
+      "main": [
+        [
+          {
+            "node": "Trigger Klaviyo Flow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger Klaviyo Flow": {
+      "main": [
+        [
+          {
+            "node": "Log Outreach",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Outreach": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "3a-automation"
+  },
+  "tags": [
+    {
+      "name": "lead-gen",
+      "id": "lead-gen"
+    },
+    {
+      "name": "email",
+      "id": "email"
+    },
+    {
+      "name": "outreach",
+      "id": "outreach"
+    }
+  ],
+  "documentation": {
+    "description": "Multi-touch email outreach sequence via Klaviyo",
+    "sequence": [
+      "Day 0: Introduction email (pain point)",
+      "Day 3: Value-add email (case study)",
+      "Day 5: Direct ask (free audit offer)"
+    ],
+    "targetOpenRate": ">50%",
+    "targetReplyRate": ">5%"
+  }
+}
