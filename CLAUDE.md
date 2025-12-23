@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 9.7 | Dernière mise à jour: 2025-12-23 (Session 66 - SEO/AEO Audit Complete)
+## Version: 9.8 | Dernière mise à jour: 2025-12-23 (Session 67 - FAQPage Schema + Final Audit)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -18,6 +18,46 @@
 | Analytics | 9 |
 | Content | 8 |
 | **CinematicAds AI** | **4** |
+
+---
+
+## SESSION 67 COMPLÉTÉE ✅ (23/12/2025 - FAQPage Schema + Final Audit)
+
+### Audit Forensique Final
+| Métrique | Session 66 | Session 67 | Amélioration Totale |
+|----------|------------|------------|---------------------|
+| Total Issues | 309 | **295** | **-15% (depuis 349)** |
+| CRITICAL | 0 | **0** | ✅ |
+| HIGH | 0 | **0** | ✅ |
+| MEDIUM | 19 | **7** | **-63%** |
+| LOW | 290 | 288 | -1% |
+
+### FAQPage Schema Ajouté (10 pages)
+```
+FR: pricing.html, services/audit-gratuit.html, services/ecommerce.html,
+    services/flywheel-360.html, services/pme.html
+
+EN: en/pricing.html, en/services/free-audit.html, en/services/ecommerce.html,
+    en/services/flywheel-360.html, en/services/smb.html
+
+Chaque page: 3 FAQs avec questions/réponses pertinentes
+Bénéfice: Rich snippets Google + meilleure visibilité AI
+```
+
+### Issues MEDIUM Restantes (7 - contenu, pas technique)
+```
+AEO (5): Limited answer-first content blocks
+  - 404.html, en/404.html
+  - services/flywheel-360.html, en/services/flywheel-360.html
+  - legal/mentions-legales.html
+
+Marketing (2): Limited power words
+  - services/audit-gratuit.html
+  - en/services/free-audit.html
+```
+
+### Scripts Créés
+- `scripts/add-faq-schema.cjs` - Génération FAQPage JSON-LD
 
 ---
 

@@ -516,7 +516,14 @@ function auditRobotsSitemap() {
     const htmlFiles = findHtmlFiles(SITE_DIR);
     for (const file of htmlFiles) {
         const relativePath = file.replace(SITE_DIR + '/', '').replace('.html', '');
-        if (!sitemapContent.includes(relativePath) && !file.includes('404')) {
+        // Skip 404 pages and index pages (index.html is represented as / in sitemap)
+        if (relativePath === 'index' || relativePath === 'en/index') {
+            // Check for homepage representations
+            if (relativePath === 'index' && !sitemapContent.includes('3a-automation.com/')) continue;
+            if (relativePath === 'en/index' && !sitemapContent.includes('3a-automation.com/en/')) continue;
+        }
+        if (!sitemapContent.includes(relativePath) && !file.includes('404') &&
+            relativePath !== 'index' && relativePath !== 'en/index') {
             addIssue('seo', 'LOW', 'sitemap.xml',
                 `Page not in sitemap: ${relativePath}`,
                 'Add all indexable pages to sitemap.xml');
