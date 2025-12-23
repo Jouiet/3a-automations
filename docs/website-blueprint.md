@@ -1,6 +1,6 @@
 # 3A AUTOMATION - WEBSITE BLUEPRINT
 ## Document Exhaustif de Création du Site Web
-### Version: 2.1 | Date: 20/12/2025 | Auteur: 3A Automation (Session 53)
+### Version: 2.2 | Date: 23/12/2025 | Auteur: 3A Automation (Session 76)
 
 ---
 
