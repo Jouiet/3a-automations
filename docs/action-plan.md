@@ -179,13 +179,13 @@ MEDIUM:
 ├── ✅ Voice widget pulse animation (FAIT - pulse-glow + pulse-ring)
 ├── ✅ Voice widget minification (FAIT Session 74 - 29% reduction)
 ├── ❌ Créer templates messages WhatsApp sur Meta Business Suite
-└── ❌ Déployer Grok Voice workflow sur n8n VPS
+└── ❌ Déployer workflows sur n8n VPS (script ready, API key manuelle)
 
 ACQUISITION CLIENTS:
 ├── ✅ Formulaire diagnostic script (FAIT - sync-google-forms-to-klaviyo.cjs)
 ├── ❌ Google Form diagnostic à créer (manuellement)
-├── ❌ Premier cold outreach (LinkedIn)
-└── ❌ Contenu LinkedIn (1 post/semaine)
+├── ✅ Templates LinkedIn cold outreach (FAIT Session 79)
+└── ❌ Executer cold outreach + posts (manuel)
 ```
 
 ---
