@@ -1,83 +1,118 @@
 # HISTORY - Changelog 3A Automation
 
-## Sessions 27-43 (20/12/2025)
+## Sessions 69-74 (23/12/2025) - Audit 100% Clean + Performance
 
-| Version | Session | Modifications |
-|---------|---------|---------------|
-| 7.3 | 43 | **B2B INCLUSION COMPLÈTE**: audit-gratuit.html + pricing.html réécrits pour E-commerce ET B2B, Business type selector (toggle E-com/B2B), Formulaires avec business_type + CRM platforms (HubSpot, Pipedrive, Salesforce, Zoho), Packs Essentials/Growth montrent E-com flows + B2B flows, Supprimé PrestaShop/Magento (uniquement Shopify+WooCommerce), 4 pages mises à jour (FR+EN) |
-| 7.2 | 42 | **VOICE ASSISTANT INTELLIGENT**: Système de réponse intelligent avec context tracking (industry, need, lastTopic), détection industrie (BTP, ecommerce, B2B, SaaS, services, retail), détection besoins (leads, email, analytics), réponses "oui/non" contextuelles, knowledge-base.js créé (pricing, industries, FAQ, objections), multi-keyword matching, réponses spécifiques par industrie |
-| 7.1 | 41 | **VOICE WIDGET 100% + STATS FIX**: Widget branding corrigé (gradient cyber #4FBAF1→#2B6685→#10B981), Stats site corrigées (52→56 automatisations, 9→12 MCPs, 3→42+ clients), Script test empirique créé (100% pass), fadeIn/fadeOut ajoutés, CTA links fixés |
-| 7.0 | 40b | **VOICE ASSISTANT LIVE**: Widget flottant déployé 26 pages, Web Speech API (gratuit), reconnaissance vocale + synthèse, réponses pré-définies (pricing, audit, services), bilingue FR/EN |
-| 6.9 | 40 | **PRICING REFONTE BOTTOM-UP + VOICE POC**: Packs Setup (390€/790€/1490€), Retainers (290€/490€/890€/mois), processus sans appels (4 étapes), Voice AI Grok POC créé (Node.js + Python/LiveKit), sources Gartner+Forrester ajoutées, CSS nouvelles sections |
-| 6.8 | 39 | **PRICE REDUCTION /1.5**: Prix compétitifs (260€/530€/990€), Quick Start enrichi (2→4 flows), EN+FR pricing updated, Schema.org updated, "Email Automation CRM" renaming |
-| 6.7 | 38 | **PRICING CURRENCY FIX**: Supprimé 🥇🥈🥉 rankings, harmonisé devises (ratios neutres 42:1, +15%), Target CA dynamique (data-ca-eur), FAQ multi-devise, formatCA() JS |
-| 6.6 | 37 | **API TESTS + VERIFICATION**: Test empirique 7 APIs (3/7 OK), Site FR+EN LIVE vérifié (26 pages HTTP 200), Lang-switch fonctionnel, FORENSIC-AUDIT v6.0 |
-| 6.5 | 36b | **CRM GEO-TARGETING**: Module geo-markets.cjs (8 marchés), Templates Klaviyo + Multi-CRM (HubSpot, Mailchimp, Brevo, AC), docs/geo-targeting.md, 64 automatisations total |
-| 6.4 | 36 | **LANG-SWITCH + CURRENCY**: Sélecteur langue FR↔EN ajouté 26 pages, geo-locale.js v2.0 (conversion devises real-time EUR/USD/MAD/GBP), Pricing pages intégrées, data-price-eur support |
-| 6.3 | 35 | **i18n COMPLET**: 13 pages EN créées, hreflang SEO 26/26 pages, geo-locale.js v1.0, sitemap.xml 26 URLs, 3 marchés (MA, EU, International) |
-| 6.2 | 34 | **PRICING REFONTE**: Analyse data-driven 2025-2026, TOP 3 services définis (Email 9.25, Analytics 7.75, Audit 6.95), Tarification €390/790/1490 |
-| 6.1 | 33 | **DESIGN PREMIUM**: 6 pages upgradées cyber design, consistency cross-pages |
-| 6.0 | 32 | **MCP EXPANSION**: 12 MCPs configurés, performance optimization |
-| 5.9 | 27-31 | Scripts génériques, API tests, architecture cleanup |
+| Session | Modifications |
+|---------|---------------|
+| **74** | **LCP/TBT Optimization**: Preload logo.webp (28 pages), DNS prefetch GTM/GA, voice-widget.min.js -29% (46→33KB), voice-widget-en.min.js -27% (40→29KB) |
+| **73** | **Audits 100% Verified**: SEO/AEO 0 issues, WCAG/RGAA 0 issues, forensic-audit-complete.cjs fixed |
+| **72** | **WCAG 2.1 AA / RGAA Compliance**: 61→0 accessibility issues, skip links, focus visible, reduced motion, high contrast |
+| **71** | **Performance Optimization**: styles.min.css -35%, script.min.js -65%, WebP icons -87%, ~170KB savings/page |
+| **69** | **Audit 100% Clean**: 349→0 issues, AEO answer-first, power words, heading structure, llms-full.txt |
+
+## Sessions 65-68 (23/12/2025) - SEO/AEO Complete
+
+| Session | Modifications |
+|---------|---------------|
+| **68** | **Audit 88% Reduction**: Twitter cards 20 pages, lazy loading 56 images, WebP conversion, image dimensions for CLS |
+| **67** | **FAQPage Schema**: 10 pages (5 FR + 5 EN), 3 FAQs each, rich snippets |
+| **66** | **SEO Audit Complete**: 349→309 issues, meta descriptions fixed, canonical URLs, OG descriptions |
+| **65** | **Forensic Frontend + CinematicAds**: 588→349 issues, titles/metas/H1s/schema.org, 70 automations (+4 CinematicAds) |
+
+## Sessions 60-64 (22-23/12/2025) - Links + Booking
+
+| Session | Modifications |
+|---------|---------------|
+| **64** | **Links Fix**: 223 broken `../en/` links fixed, STATE OF THE ART models (Gemini 3 Pro, Imagen 4, Veo 3.1, Grok 4.1) |
+| **63** | **CinematicAds Forensic**: FORENSIC-ANALYSIS.md (905 lines), Dual-Provider AI (Vertex AI + xAI), Booking flow E2E test |
+| **62** | **Forensic Audit**: 275→11 issues (-96%), 252 broken links fixed, price inconsistencies corrected |
+| **61** | **Voice AI Booking**: Included FREE in all packs, WhatsApp > SMS, 100% flexible booking system, 66 client-facing automations |
+| **60** | **Voice + Booking**: Booking via voice, Google Apps Script LIVE ($0), CSS minified -35% |
+
+## Sessions 54-59 (20/12/2025) - Factuality + Performance
+
+| Session | Modifications |
+|---------|---------------|
+| **56** | **GTM Performance**: Lazy load GTM+GA4, Performance 52→70%, TBT 720→450ms |
+| **55** | **Architecture Cleanup**: Registry source of truth, 180 scripts → /clients/ |
+| **54** | **Factuality Fixes**: Token file removed, 27 corrections (56→50, rates fixed) |
+| **53** | **Forensic Audit**: Lighthouse LIVE 24%, orbital laptop fix, action plan created |
+| **52** | **French Accents**: 84 errors fixed across 8 pages (cas-clients: 70 corrections) |
+| **51** | **SEO + Mobile**: CTA mobile UX, 6 broken link patterns fixed, 142 SEO tests pass |
+| **50** | **Orbital Forensic**: 56→45 automations (real count), B2B removed/B2C added, 48/48 tests pass |
+
+## Sessions 45-49 (20/12/2025) - Mobile UX + Premium UI
+
+| Session | Modifications |
+|---------|---------------|
+| **49** | **Mobile UX Final**: Orbital 300-320px, timeline -20%, flywheel optimized, 9 commits |
+| **48** | **Performance + Mobile**: Lighthouse audit, critical CSS inline, CSS 117→82KB, orbital visible mobile |
+| **47** | **UX/UI Grid**: Email flows 2+2, "Flywheel"→"Système 360°" FR terminology, footer email inline |
+| **46** | **Branding Logo**: Voice widget pulse, logo.png 40x40px constraint, styles-lite.css fix |
+| **45** | **Premium UI/UX**: Hero particles, FAQ grid ultra, CTA glass-panel, 8 pages optimized |
+
+## Sessions 40-44 (19-20/12/2025) - Voice AI + Pricing
+
+| Session | Modifications |
+|---------|---------------|
+| **43** | **B2B Inclusion**: audit-gratuit + pricing rewritten for E-commerce AND B2B |
+| **42** | **Voice Assistant Intelligent**: Context tracking, industry detection, knowledge-base.js |
+| **41** | **Voice Widget 100%**: Widget branding, stats corrected 52→56, test script 100% pass |
+| **40** | **Pricing Refonte**: Packs 390/790/1490€, Retainers 290/490/890€, Voice AI Grok POC |
+
+## Sessions 35-39 (19/12/2025) - i18n Complete
+
+| Session | Modifications |
+|---------|---------------|
+| **38** | **Pricing Currency Fix**: Removed medal rankings, neutral ratios (42:1, +15%) |
+| **37** | **API Tests**: 3/7 OK (Klaviyo, Apify, GA4), Site FR+EN LIVE verified |
+| **36** | **Lang-Switch + Currency**: FR↔EN selector 26 pages, geo-locale.js v2.0 |
+| **35** | **i18n Complete**: 13 EN pages, hreflang SEO 26/26, sitemap.xml 26 URLs |
+
+## Sessions 27-34 (18-19/12/2025)
+
+| Session | Modifications |
+|---------|---------------|
+| **34** | Pricing refonte data-driven, TOP 3 services defined |
+| **33** | Design premium, 6 pages cyber design |
+| **32** | MCP expansion, 12 MCPs configured |
+| **27-31** | Scripts génériques, API tests, architecture cleanup |
 
 ## Sessions 17-26 (19/12/2025)
 
-| Version | Session | Modifications |
-|---------|---------|---------------|
-| 5.9 | 26c | **B2B LEAD GEN EXHAUSTIVE**: Matrice complète 12 catégories/47+ outils (Google Maps CRITICAL, LinkedIn, Directories, Job Boards, Review Platforms, Tech Stack Detection), 4 nouveaux scripts (google-maps, linkedin-profiles, google-forms-klaviyo, hiring-companies), Architecture n8n+Apify détaillée, Coûts estimés €0-108/mois, ROI 2000-4000 leads/mois |
-| 5.8 | 26b | **B2B AUTOMATION ANALYSIS v1**: Audit 13 scripts leads existants, Gap analysis initial (LinkedIn Lead Gen, Google Forms), 2 scripts créés |
-| 5.7 | 26 | **HOMEPAGE UX**: Orbital étendu 14→24 techs (+LinkedIn, Gemini, o1, Google Ads, Playwright, DevTools, WordPress, Hostinger, Apps Script), Tech Stack compact marquee (-40% hauteur), Footer avec status bar système, animations GPU optimisées |
-| 5.6 | 25 | **FORMULAIRES & CLAIMS**: Audit forensique 12 pages HTML, Claims corrigés (42→56, 12→9, 8+→10+), Google Apps Script v2 déployé, 3 formulaires connectés, Google Sheets Leads créé, Email notifications OK |
-| 5.5 | 24 | **FACTUAL AUDIT**: MCPs corrigés (3→9 fonctionnels), Claims marketing mis à jour (56 auto, 9 MCPs), llm.txt doublon supprimé, Section MCP automations.html refondue (12 MCPs listés, 9 actifs) |
-| 5.4 | 23b | **ARCHITECTURE GLOBALE**: docs/ créé (8 fichiers), archive/docs-legacy/ (12 fichiers), README.md amélioré, docker-compose.yml racine, 23→4 MD racine |
-| 5.1 | 23 | **CONSOLIDATION SCRIPTS**: scripts/→automations/agency/core/ (+5), 56 automatisations total, INDEX.md v3.0 |
-| 5.0 | 22 | **MEMORY OPTIMIZATION**: CLAUDE.md réduit 1041→158 lignes (-85%), rules/ modulaires créés, HISTORY.md créé, Race condition fix, Claims accuracy (50+/3 MCPs/10+ APIs) |
-| 4.9 | 21e | GTM LIVE + REPO PUBLIC: GTM-WLVJQC3M sur 11 pages |
-| 4.8 | 21d | GA4 LIVE: G-87F6FDJG45 sur 11 pages, Blueprint 100/100 |
-| 4.7 | 21c | SITE LIVE: 3a-automation.com déployé, SSL Let's Encrypt |
-| 4.5 | 21b | 9 services agence configurés |
-| 4.4 | 21 | Services forensic audit, .env.example créé |
-| 4.3 | 21 | Form URLs fix (n8n → Google Apps Script) |
-| 4.2 | 20 | Deploy-ready checklist, Blueprint 99/100 |
-| 4.1 | 19 | Terminologie professionnelle (scripts→automatisations) |
-| 4.0 | 18 | .env.example créé, liens vérifiés |
-| 3.9 | 17 | Validation batch 100% (42/42 automatisations) |
+| Session | Modifications |
+|---------|---------------|
+| **26** | Homepage UX, orbital 14→24 techs, footer status bar |
+| **25** | Forms + Claims audit, Google Apps Script v2 |
+| **24** | Factual audit, MCPs 3→9 functional |
+| **23** | Architecture globale, docs/ created, 23→4 MD racine |
+| **22** | Memory optimization, CLAUDE.md -85%, rules/ modulaires |
+| **21** | GTM+GA4 LIVE, site deployed, SSL Let's Encrypt |
+| **17-20** | Deploy-ready, terminology, .env.example |
 
 ## Sessions 11-16 (18/12/2025)
 
-| Version | Session | Modifications |
-|---------|---------|---------------|
-| 3.8 | 16 | 41 automatisations génériques, mcp.json nettoyé |
-| 3.7 | 15 | Séparation agence/clients, audit factuel |
-| 3.6 | 13 | AEO/SEO vérification, Schema.org 100% |
-| 3.5 | 12 | +11 automatisations, video/ + google-merchant/ |
-| 3.4 | 12 | Forensic Matrix, 148 scripts normalisables |
-| 3.3 | 12 | Structure automations/ créée |
-| 3.2 | 12 | AEO/SEO Fix, images compressed |
-| 3.1 | 11 | Stat-labels visibility fix |
+| Session | Modifications |
+|---------|---------------|
+| **16** | 41 generic automations, mcp.json cleaned |
+| **15** | Agency/clients separation, factual audit |
+| **13** | AEO/SEO verification, Schema.org 100% |
+| **12** | Forensic Matrix, 148 scripts normalisables |
+| **11** | Stat-labels visibility fix |
 
-## Sessions 6-10 (18/12/2025)
+## Sessions 1-10 (17-18/12/2025)
 
-| Version | Session | Modifications |
-|---------|---------|---------------|
-| 3.0 | 10 | MCP Expansion: 12 MCPs configurés |
-| 2.9 | 9 | Performance: styles-lite.css, script-lite.js |
-| 2.8 | 5 | Knowledge Base RAG Phase 1 |
-| 2.7 | 4 | Grok Voice API découvert ($0.05/min) |
-| 2.6 | 4 | xAI API key sauvegardée |
-
-## Sessions 1-5 (17/12/2025)
-
-| Version | Session | Modifications |
-|---------|---------|---------------|
-| 2.5 | 3 | AI Prompts, tendances 2025 |
-| 2.4 | 2 | Branding guide créé |
-| 2.3 | 2 | GitHub repo connecté |
-| 2.2 | 2 | Intégration Grok |
-| 2.1 | 1 | APIs testées (Shopify+Klaviyo OK) |
-| 2.0 | 1 | Refonte complète |
-| 1.0 | 0 | Création initiale |
+| Session | Modifications |
+|---------|---------------|
+| **10** | MCP Expansion: 12 MCPs configured |
+| **9** | Performance: styles-lite.css, script-lite.js |
+| **5** | Knowledge Base RAG Phase 1 |
+| **4** | Grok Voice API discovered ($0.05/min) |
+| **3** | AI Prompts, tendances 2025 |
+| **2** | Branding guide, GitHub repo, Grok integration |
+| **1** | APIs tested, refonte complète |
+| **0** | Initial creation |
 
 ---
 
-*Ce fichier archive l'historique des sessions. Le CLAUDE.md principal ne contient que l'état actuel.*
+*Fichier archive des sessions. CLAUDE.md = état actuel uniquement.*
