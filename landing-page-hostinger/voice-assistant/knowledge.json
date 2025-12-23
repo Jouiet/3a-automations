@@ -1,9 +1,9 @@
 {
-  "version": "2025-12-20",
-  "generated": "2025-12-20T23:22:06.381Z",
-  "totalAutomations": 72,
-  "categories": 6,
-  "summary": "3A Automation dispose de 72 automatisations dans 6 catégories.",
+  "version": "2025-12-23",
+  "generated": "2025-12-23T20:27:50.183Z",
+  "totalAutomations": 77,
+  "categories": 10,
+  "summary": "3A Automation dispose de 77 automatisations dans 10 catégories.",
   "automationsByCategory": {
     "Lead Generation & Acquisition": [
       "Sync Meta Leads → Shopify",
@@ -23,7 +23,9 @@
       "Geo Segment Generic",
       "Import Facebook Lead Ads",
       "Segment Leads",
-      "Enable Apify Schedulers"
+      "Enable Apify Schedulers",
+      "LinkedIn Lead Scraper",
+      "Email Outreach Sequence"
     ],
     "SEO & Contenu": [
       "Correction Alt Text Images",
@@ -82,6 +84,23 @@
       "Article Blog Auto",
       "Workflow n8n Complet",
       "Generate All Promo Videos"
+    ],
+    "CinematicAds AI": [
+      "CinematicAds Director",
+      "Competitor Clone AI",
+      "E-commerce Ads Factory",
+      "Asset Factory (Dual AI)"
+    ],
+    "AI Avatar & Influencer": [
+      "AI Avatar Generator",
+      "AI Talking Video"
+    ],
+    "WhatsApp Business": [
+      "Confirmation WhatsApp RDV",
+      "Rappels WhatsApp 24h + 1h"
+    ],
+    "Voice AI & Téléphonie": [
+      "Grok Voice Téléphonie"
     ]
   },
   "packs": {
