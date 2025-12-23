@@ -1,30 +1,46 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 11.0 | Date: 2025-12-23 | Session: 75
+## Version: 11.1 | Date: 2025-12-23 | Session: 77
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
 
 ## SOURCE DE VERITE
 
-**Automations Registry:** `automations/automations-registry.json` (72 automations)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-74)
+**Automations Registry:** `automations/automations-registry.json` (74 automations v1.3.0)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-77)
 **Audit Forensique:** `outputs/FORENSIC-AUDIT-2025-12-18.md`
 
 ---
 
-## ETAT ACTUEL (Session 75 - 23/12/2025)
+## ETAT ACTUEL (Session 77 - 23/12/2025)
 
 | Metrique | Valeur |
 |----------|--------|
 | Site | https://3a-automation.com LIVE |
 | Pages | 28 (14 FR + 14 EN) - HTTP 200 |
-| Automations | 72 (Lead Gen 18, Shopify 13, SEO 9, Email 9, Analytics 9, Content 10, AI Avatar 2, CinematicAds 4) |
+| Automations | **74** (Lead Gen 18, Shopify 13, SEO 9, Email 9, Analytics 9, Content 10, AI Avatar 2, CinematicAds 4, **WhatsApp 2**) |
 | Audit SEO/AEO | 0 issues PASSED |
 | Audit WCAG/RGAA | 0 issues PASSED |
 | Lighthouse Perf | ~70% |
 | hreflang SEO | 28/28 (100%) |
 | GA4 | G-87F6FDJG45 |
 | GTM | GTM-WLVJQC3M |
+
+### Session 77 Completée
+```
+WHATSAPP BUSINESS API:
+├── ✅ whatsapp-booking-confirmation.json (n8n workflow)
+├── ✅ whatsapp-booking-reminders.json (24h + 1h avant RDV)
+├── ✅ Registry v1.3.0 (72 → 74 automations)
+└── ✅ HTML pages updated (74 automations)
+
+RECHERCHE WHATSAPP:
+├── Service messages: GRATUITS (24h window)
+├── Template messages: ~$0.005-0.015/msg
+├── Free tier: 1000 conversations/mois
+├── Open rate: 98% vs 20% SMS
+└── No-show reduction: -30%
+```
 
 ---
 
@@ -84,8 +100,8 @@ Deploy: GitHub Action -> Hostinger API -> git pull
 
 ```
 /Users/mac/Desktop/JO-AAA/           <- AGENCE
-├── automations/                     <- 72 automations
-│   ├── automations-registry.json    <- SOURCE VERITE
+├── automations/                     <- 74 automations
+│   ├── automations-registry.json    <- SOURCE VERITE (v1.3.0)
 │   ├── agency/core/                 <- Outils internes
 │   ├── clients/                     <- Templates clients
 │   └── generic/                     <- Utilitaires

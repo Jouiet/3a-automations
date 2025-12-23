@@ -1,0 +1,292 @@
+{
+  "name": "WhatsApp Booking Reminders",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300],
+      "notes": "Check every hour for upcoming bookings"
+    },
+    {
+      "parameters": {
+        "url": "https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "get-bookings",
+      "name": "Get Upcoming Bookings",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300],
+      "notes": "Fetch bookings from Google Apps Script API"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter bookings needing reminders (24h or 1h before)\nconst now = new Date();\nconst bookings = $input.all();\nconst reminders = [];\n\nfor (const item of bookings) {\n  const booking = item.json;\n  if (!booking.datetime || !booking.phone) continue;\n  \n  const bookingTime = new Date(booking.datetime);\n  const hoursUntil = (bookingTime - now) / (1000 * 60 * 60);\n  \n  // 24h reminder (23-25h window)\n  if (hoursUntil >= 23 && hoursUntil <= 25 && !booking.reminder24h) {\n    reminders.push({\n      ...booking,\n      reminderType: '24h',\n      hoursUntil: Math.round(hoursUntil)\n    });\n  }\n  \n  // 1h reminder (0.5-1.5h window)\n  if (hoursUntil >= 0.5 && hoursUntil <= 1.5 && !booking.reminder1h) {\n    reminders.push({\n      ...booking,\n      reminderType: '1h',\n      hoursUntil: Math.round(hoursUntil * 60) + ' minutes'\n    });\n  }\n}\n\nreturn reminders.map(r => ({ json: r }));"
+      },
+      "id": "filter-reminders",
+      "name": "Filter Upcoming Reminders",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "notes": "Find bookings needing 24h or 1h reminders"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "reminder-type",
+              "leftValue": "={{ $json.reminderType }}",
+              "rightValue": "24h",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "switch-reminder-type",
+      "name": "24h or 1h?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [900, 300],
+      "notes": "Route to appropriate message template"
+    },
+    {
+      "parameters": {
+        "operation": "sendTemplate",
+        "phoneNumberId": "={{ $env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $json.phone }}",
+        "templateName": "booking_reminder_24h",
+        "templateLanguage": "fr",
+        "templateParameters": {
+          "parameters": [
+            {
+              "type": "body",
+              "body_parameters": [
+                {
+                  "parameterType": "text",
+                  "textValue": "={{ $json.name }}"
+                },
+                {
+                  "parameterType": "text",
+                  "textValue": "={{ $json.datetime }}"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "id": "whatsapp-24h",
+      "name": "Send 24h Reminder",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 2,
+      "position": [1120, 200],
+      "credentials": {
+        "whatsAppBusinessCloudApi": {
+          "id": "WHATSAPP_CRED_ID",
+          "name": "WhatsApp Business Cloud"
+        }
+      },
+      "notes": "Send 24h reminder via WhatsApp"
+    },
+    {
+      "parameters": {
+        "operation": "sendTemplate",
+        "phoneNumberId": "={{ $env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $json.phone }}",
+        "templateName": "booking_reminder_1h",
+        "templateLanguage": "fr",
+        "templateParameters": {
+          "parameters": [
+            {
+              "type": "body",
+              "body_parameters": [
+                {
+                  "parameterType": "text",
+                  "textValue": "={{ $json.name }}"
+                },
+                {
+                  "parameterType": "text",
+                  "textValue": "={{ $json.hoursUntil }}"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "id": "whatsapp-1h",
+      "name": "Send 1h Reminder",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 2,
+      "position": [1120, 400],
+      "credentials": {
+        "whatsAppBusinessCloudApi": {
+          "id": "WHATSAPP_CRED_ID",
+          "name": "WhatsApp Business Cloud"
+        }
+      },
+      "notes": "Send 1h reminder via WhatsApp"
+    },
+    {
+      "parameters": {
+        "url": "https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec",
+        "sendQuery": true,
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ action: 'markReminded', bookingId: $json.id, reminderType: $json.reminderType }) }}",
+        "options": {}
+      },
+      "id": "mark-reminded",
+      "name": "Mark Reminder Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300],
+      "notes": "Update booking to prevent duplicate reminders"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Upcoming Bookings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Upcoming Bookings": {
+      "main": [
+        [
+          {
+            "node": "Filter Upcoming Reminders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Upcoming Reminders": {
+      "main": [
+        [
+          {
+            "node": "24h or 1h?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "24h or 1h?": {
+      "main": [
+        [
+          {
+            "node": "Send 24h Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send 1h Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send 24h Reminder": {
+      "main": [
+        [
+          {
+            "node": "Mark Reminder Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send 1h Reminder": {
+      "main": [
+        [
+          {
+            "node": "Mark Reminder Sent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "3a-automation"
+  },
+  "tags": [
+    {
+      "name": "booking",
+      "id": "booking"
+    },
+    {
+      "name": "whatsapp",
+      "id": "whatsapp"
+    },
+    {
+      "name": "reminders",
+      "id": "reminders"
+    }
+  ],
+  "pinData": {},
+  "versionId": "1.0.0",
+  "documentation": {
+    "description": "Automated WhatsApp booking reminders - 24h and 1h before appointments",
+    "setup": [
+      "1. Configure WhatsApp Business Cloud API credentials in n8n",
+      "2. Create message templates in Meta Business Suite: booking_reminder_24h, booking_reminder_1h",
+      "3. Set WHATSAPP_PHONE_NUMBER_ID environment variable",
+      "4. Deploy workflow to n8n instance"
+    ],
+    "pricing": {
+      "whatsapp": "Service messages are FREE within 24h window",
+      "template_messages": "Utility templates: ~$0.005-0.015/message depending on country",
+      "free_tier": "1000 service conversations/month included"
+    },
+    "benefits": [
+      "-30% no-show rate reduction",
+      "98% open rate vs 20% for SMS",
+      "FREE service replies within 24h window"
+    ]
+  }
+}
