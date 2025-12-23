@@ -1,0 +1,303 @@
+{
+  "name": "Grok Voice Telephony - Phone Booking",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "voice/inbound",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-inbound-call",
+      "name": "Webhook - Inbound Call",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "voice-inbound",
+      "notes": "Twilio/Vonage sends incoming call notification"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract call info from Twilio/Vonage webhook\nconst body = $input.first().json.body || $input.first().json;\n\nreturn {\n  json: {\n    callSid: body.CallSid || body.uuid,\n    from: body.From || body.from,\n    to: body.To || body.to,\n    direction: body.Direction || 'inbound',\n    provider: body.AccountSid ? 'twilio' : 'vonage',\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "id": "parse-call-info",
+      "name": "Parse Call Info",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "notes": "Extract caller info from webhook"
+    },
+    {
+      "parameters": {
+        "url": "https://api.x.ai/v1/realtime/sessions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.XAI_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"model\": \"grok-2-audio-preview\",\n  \"voice\": \"{{ $env.GROK_VOICE || 'Sal' }}\",\n  \"modalities\": [\"audio\", \"text\"],\n  \"turn_detection\": {\n    \"type\": \"server_vad\",\n    \"threshold\": 0.5,\n    \"prefix_padding_ms\": 300,\n    \"silence_duration_ms\": 500\n  },\n  \"instructions\": \"Tu es l'assistant vocal de 3A Automation. Tu aides les clients à prendre rendez-vous. Étapes: 1) Saluer et demander le nom, 2) Demander l'email, 3) Proposer les créneaux disponibles, 4) Confirmer la réservation. Sois concis et naturel. Maximum 2 phrases par réponse.\"\n}",
+        "options": {}
+      },
+      "id": "create-grok-session",
+      "name": "Create Grok Voice Session",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300],
+      "notes": "Initialize Grok Voice realtime session"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare WebSocket connection details for SIP bridge\nconst session = $input.first().json;\nconst callInfo = $('Parse Call Info').first().json;\n\nreturn {\n  json: {\n    sessionId: session.id,\n    webSocketUrl: session.url || 'wss://api.x.ai/v1/realtime',\n    callSid: callInfo.callSid,\n    from: callInfo.from,\n    streamUrl: `wss://api.x.ai/v1/realtime/${session.id}`,\n    twimlResponse: `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n  <Connect>\n    <Stream url=\"wss://your-n8n-server.com/webhook/voice/stream/${callInfo.callSid}\">\n      <Parameter name=\"sessionId\" value=\"${session.id}\"/>\n    </Stream>\n  </Connect>\n</Response>`\n  }\n};"
+      },
+      "id": "prepare-stream",
+      "name": "Prepare Audio Stream",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "notes": "Setup bidirectional audio streaming"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.twimlResponse }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/xml"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-twiml",
+      "name": "Respond with TwiML",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1120, 300],
+      "notes": "Return TwiML to connect call to Grok"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "voice/stream/:callSid",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-stream",
+      "name": "Webhook - Audio Stream",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 500],
+      "webhookId": "voice-stream",
+      "notes": "Receive audio chunks from call"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle audio streaming event\nconst event = $input.first().json;\n\n// Event types: connected, start, media, stop\nif (event.event === 'media' && event.media) {\n  // Forward audio payload to Grok\n  return {\n    json: {\n      type: 'input_audio_buffer.append',\n      audio: event.media.payload // base64 encoded audio\n    }\n  };\n}\n\nif (event.event === 'stop') {\n  return {\n    json: {\n      type: 'session.close',\n      reason: 'call_ended'\n    }\n  };\n}\n\nreturn { json: { type: 'ignored', event: event.event } };"
+      },
+      "id": "process-audio",
+      "name": "Process Audio Event",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 500],
+      "notes": "Handle Twilio media stream events"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "voice/booking-complete",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-booking-complete",
+      "name": "Webhook - Booking Complete",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 700],
+      "webhookId": "booking-complete",
+      "notes": "Called when Grok confirms a booking"
+    },
+    {
+      "parameters": {
+        "url": "https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.bookingData) }}",
+        "options": {}
+      },
+      "id": "create-booking",
+      "name": "Create Calendar Booking",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 700],
+      "notes": "Create booking in Google Calendar"
+    },
+    {
+      "parameters": {
+        "operation": "sendTemplate",
+        "phoneNumberId": "={{ $env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $json.phone }}",
+        "templateName": "booking_confirmation",
+        "templateLanguage": "fr"
+      },
+      "id": "send-whatsapp-confirm",
+      "name": "Send WhatsApp Confirmation",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 2,
+      "position": [680, 700],
+      "credentials": {
+        "whatsAppBusinessCloudApi": {
+          "id": "WHATSAPP_CRED_ID",
+          "name": "WhatsApp Business Cloud"
+        }
+      },
+      "notes": "Send booking confirmation via WhatsApp"
+    }
+  ],
+  "connections": {
+    "Webhook - Inbound Call": {
+      "main": [
+        [
+          {
+            "node": "Parse Call Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Call Info": {
+      "main": [
+        [
+          {
+            "node": "Create Grok Voice Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Grok Voice Session": {
+      "main": [
+        [
+          {
+            "node": "Prepare Audio Stream",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Audio Stream": {
+      "main": [
+        [
+          {
+            "node": "Respond with TwiML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Audio Stream": {
+      "main": [
+        [
+          {
+            "node": "Process Audio Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook - Booking Complete": {
+      "main": [
+        [
+          {
+            "node": "Create Calendar Booking",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Calendar Booking": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "3a-automation"
+  },
+  "tags": [
+    {
+      "name": "voice",
+      "id": "voice"
+    },
+    {
+      "name": "grok",
+      "id": "grok"
+    },
+    {
+      "name": "telephony",
+      "id": "telephony"
+    },
+    {
+      "name": "booking",
+      "id": "booking"
+    }
+  ],
+  "documentation": {
+    "description": "Phone booking system using Grok Voice Agent API",
+    "architecture": {
+      "flow": "Twilio/Vonage → n8n webhook → Grok Voice WebSocket → Audio streaming → Booking creation",
+      "providers": {
+        "voice_ai": "xAI Grok Voice ($0.05/min)",
+        "telephony": "Twilio/Vonage SIP",
+        "calendar": "Google Calendar API",
+        "notifications": "WhatsApp Business API"
+      }
+    },
+    "setup": [
+      "1. Configure XAI_API_KEY in n8n environment",
+      "2. Set up Twilio/Vonage account with SIP trunk",
+      "3. Point phone number webhook to n8n endpoint",
+      "4. Configure GROK_VOICE environment variable (default: Sal)",
+      "5. Test with inbound call"
+    ],
+    "voices": ["Sal", "Rex", "Eve", "Leo", "Mika", "Valentin"],
+    "pricing": {
+      "grok_voice": "$0.05/min",
+      "twilio_inbound": "~$0.01/min",
+      "total_per_call": "~$0.15-0.30 for 3-5 min booking call"
+    },
+    "performance": {
+      "latency": "<1 second time-to-first-audio",
+      "languages": "100+ with native accents",
+      "benchmark": "#1 Big Bench Audio"
+    }
+  }
+}
