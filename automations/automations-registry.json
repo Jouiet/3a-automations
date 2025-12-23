@@ -666,8 +666,8 @@
       "script": "agency/core/google-apps-script-booking.js",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
-      "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_fr": "Booking + annulation + report automatisé",
+      "benefit_en": "Booking + cancel + reschedule automation"
     },
     {
       "id": "google-calendar-booking",

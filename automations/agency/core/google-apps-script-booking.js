@@ -1,7 +1,9 @@
 /**
  * 3A Automation - Google Apps Script Booking System
- * @version 1.1.0
- * @date 2025-12-20
+ * @version 1.2.0
+ * @date 2025-12-23
+ *
+ * v1.2.0: Added cancel + reschedule booking flows
  *
  * Features:
  * - Real-time Google Calendar availability check
@@ -101,7 +103,19 @@ var CONFIG = {
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
+    var action = data.action || "book";
 
+    // CANCEL BOOKING
+    if (action === "cancel") {
+      return handleCancelBooking(data);
+    }
+
+    // RESCHEDULE BOOKING
+    if (action === "reschedule") {
+      return handleRescheduleBooking(data);
+    }
+
+    // CREATE NEW BOOKING (default)
     if (!data.name || !data.email || !data.datetime) {
       return createResponse(false, "Missing required fields");
     }
@@ -135,6 +149,226 @@ function doPost(e) {
 
   } catch (error) {
     return createResponse(false, "Error: " + error.message);
+  }
+}
+
+/**
+ * Cancel an existing booking
+ * Required: eventId OR (email + datetime)
+ */
+function handleCancelBooking(data) {
+  try {
+    var event = findBookingEvent(data);
+
+    if (!event) {
+      return createResponse(false, "Booking not found");
+    }
+
+    var eventDetails = {
+      title: event.getTitle(),
+      startTime: event.getStartTime().toISOString(),
+      email: extractEmailFromDescription(event.getDescription())
+    };
+
+    // Delete the event
+    event.deleteEvent();
+
+    // Send cancellation email
+    sendCancellationEmail(eventDetails);
+
+    return createResponse(true, "Booking cancelled", {
+      cancelled: true,
+      originalDatetime: eventDetails.startTime
+    });
+
+  } catch (error) {
+    return createResponse(false, "Cancel error: " + error.message);
+  }
+}
+
+/**
+ * Reschedule an existing booking to a new datetime
+ * Required: eventId OR (email + datetime), newDatetime
+ */
+function handleRescheduleBooking(data) {
+  try {
+    if (!data.newDatetime) {
+      return createResponse(false, "Missing newDatetime for reschedule");
+    }
+
+    var event = findBookingEvent(data);
+
+    if (!event) {
+      return createResponse(false, "Booking not found");
+    }
+
+    var newStartTime = new Date(data.newDatetime);
+    var newEndTime = new Date(newStartTime.getTime() + CONFIG.SLOT_DURATION * 60000);
+
+    // Check if new slot is available (excluding current event)
+    if (!isSlotAvailableExcluding(newStartTime, newEndTime, event.getId())) {
+      return createResponse(false, "New slot not available");
+    }
+
+    var oldStartTime = event.getStartTime();
+    var clientEmail = extractEmailFromDescription(event.getDescription());
+    var clientName = extractNameFromTitle(event.getTitle());
+
+    // Update the event time
+    event.setTime(newStartTime, newEndTime);
+
+    // Send reschedule notification
+    sendRescheduleEmail({
+      name: clientName,
+      email: clientEmail,
+      oldDatetime: oldStartTime,
+      newDatetime: newStartTime
+    });
+
+    return createResponse(true, "Booking rescheduled", {
+      eventId: event.getId(),
+      oldDatetime: oldStartTime.toISOString(),
+      newDatetime: newStartTime.toISOString()
+    });
+
+  } catch (error) {
+    return createResponse(false, "Reschedule error: " + error.message);
+  }
+}
+
+/**
+ * Find a booking event by eventId OR email+datetime
+ */
+function findBookingEvent(data) {
+  var calendar = CalendarApp.getCalendarById(CONFIG.CALENDAR_ID) || CalendarApp.getDefaultCalendar();
+
+  // Method 1: Find by eventId
+  if (data.eventId) {
+    try {
+      return calendar.getEventById(data.eventId);
+    } catch (e) {
+      // Event not found by ID, try other methods
+    }
+  }
+
+  // Method 2: Find by email + datetime
+  if (data.email && data.datetime) {
+    var searchDate = new Date(data.datetime);
+    var searchEnd = new Date(searchDate.getTime() + CONFIG.SLOT_DURATION * 60000);
+    var events = calendar.getEvents(searchDate, searchEnd);
+
+    for (var i = 0; i < events.length; i++) {
+      var desc = events[i].getDescription() || "";
+      if (desc.indexOf(data.email) !== -1) {
+        return events[i];
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Check slot availability excluding a specific event (for reschedule)
+ */
+function isSlotAvailableExcluding(startTime, endTime, excludeEventId) {
+  var calendar = CalendarApp.getCalendarById(CONFIG.CALENDAR_ID) || CalendarApp.getDefaultCalendar();
+  var events = calendar.getEvents(startTime, endTime);
+
+  // Filter out the event being rescheduled
+  var conflictingEvents = events.filter(function(event) {
+    return event.getId() !== excludeEventId;
+  });
+
+  // Also check business hours
+  var startHour = startTime.getHours();
+  var dayOfWeek = startTime.getDay();
+  var hours = CONFIG.BUSINESS_HOURS[dayOfWeek];
+
+  if (!hours) return false;
+  if (startHour < hours.start || startHour >= (hours.end > 24 ? 24 : hours.end)) {
+    // Check overnight scenario
+    var prevDay = (dayOfWeek + 6) % 7;
+    var prevHours = CONFIG.BUSINESS_HOURS[prevDay];
+    if (!prevHours || prevHours.end <= 24 || startHour >= (prevHours.end - 24)) {
+      return false;
+    }
+  }
+
+  // Check minimum notice
+  var now = new Date();
+  var minNotice = new Date(now.getTime() + CONFIG.MIN_NOTICE_HOURS * 60 * 60 * 1000);
+  if (startTime < minNotice) {
+    return false;
+  }
+
+  return conflictingEvents.length === 0;
+}
+
+/**
+ * Extract email from event description
+ */
+function extractEmailFromDescription(description) {
+  var match = description.match(/Email:\s*([^\n]+)/);
+  return match ? match[1].trim() : null;
+}
+
+/**
+ * Extract client name from event title
+ */
+function extractNameFromTitle(title) {
+  var match = title.match(/RDV:\s*([^-]+)/);
+  return match ? match[1].trim() : "Client";
+}
+
+/**
+ * Send cancellation email to client
+ */
+function sendCancellationEmail(details) {
+  var subject = "Annulation RDV - 3A Automation";
+  var body = "Bonjour,\n\n" +
+    "Votre rendez-vous a ete annule.\n\n" +
+    "Date initiale: " + Utilities.formatDate(new Date(details.startTime), CONFIG.TIMEZONE, "EEEE d MMMM yyyy HH:mm") + "\n\n" +
+    "Si vous souhaitez reprendre rendez-vous:\n" +
+    "https://3a-automation.com/booking.html\n\n" +
+    "---\n3A Automation";
+
+  try {
+    MailApp.sendEmail({
+      to: details.email,
+      subject: subject,
+      body: body,
+      name: "3A Automation"
+    });
+  } catch (err) {
+    Logger.log("Cancellation email error: " + err);
+  }
+}
+
+/**
+ * Send reschedule notification email
+ */
+function sendRescheduleEmail(details) {
+  var oldDateStr = Utilities.formatDate(details.oldDatetime, CONFIG.TIMEZONE, "EEEE d MMMM yyyy HH:mm");
+  var newDateStr = Utilities.formatDate(details.newDatetime, CONFIG.TIMEZONE, "EEEE d MMMM yyyy HH:mm");
+
+  var subject = "Modification RDV - 3A Automation";
+  var body = "Bonjour " + details.name + ",\n\n" +
+    "Votre rendez-vous a ete modifie.\n\n" +
+    "Ancienne date: " + oldDateStr + "\n" +
+    "Nouvelle date: " + newDateStr + "\n\n" +
+    "A bientot!\n\n" +
+    "---\n3A Automation";
+
+  try {
+    MailApp.sendEmail({
+      to: details.email,
+      subject: subject,
+      body: body,
+      name: "3A Automation"
+    });
+  } catch (err) {
+    Logger.log("Reschedule email error: " + err);
   }
 }
 
