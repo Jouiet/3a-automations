@@ -27,6 +27,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- DNS Prefetch for performance -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
 
@@ -230,7 +233,7 @@
   <header class="header">
     <div class="container">
       <a href="/en/" class="logo">
-        <div class="logo-icon"><img loading="eager" src="/logo.webp" alt="3A Automation Logo" width="40" height="40" /></div>
+        <div class="logo-icon"><img loading="eager" src="/logo.webp" fetchpriority="high" alt="3A Automation Logo" width="40" height="40" /></div>
         <div class="logo-text-wrap">
           <span class="logo-text">3A</span>
           <span class="logo-sub">AUTOMATION</span>
