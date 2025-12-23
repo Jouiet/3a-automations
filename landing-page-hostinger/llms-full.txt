@@ -1,0 +1,287 @@
+# 3A Automation - Complete AI Training Document
+
+> Consultant Automation, Analytics & AI pour PME. Automatisation e-commerce et marketing pour Small/Mid Business de tous secteurs.
+
+3A Automation aide les PME (€10k-500k CA mensuel) à automatiser leurs processus marketing et opérationnels. Expertise Shopify, Klaviyo, GA4. Approche code/APIs (pas no-code limité). Focus résultats mesurables.
+
+**Fondateur**: Consultant technique solo, 20h/semaine
+**Marchés**: Maroc, MENA, France, Worldwide
+**Langues**: Français, English, Arabe
+
+---
+
+## About 3A Automation
+
+3A = Automation, Analytics, AI
+
+Nous sommes un consultant solo spécialisé dans l'automatisation e-commerce. Notre mission est d'aider les PME à automatiser leurs processus marketing et opérationnels pour scaler efficacement.
+
+### Notre Approche
+
+1. **Code-first**: Nous utilisons les APIs directement (Shopify, Klaviyo, GA4) plutôt que des outils no-code limités
+2. **Résultats mesurables**: Chaque automatisation est accompagnée de KPIs clairs
+3. **Documentation complète**: Chaque projet inclut une documentation technique
+4. **Support continu**: Options de maintenance et d'optimisation mensuelle
+
+### Expertise Technique
+
+- **10+ ans** d'expérience en développement web et automation
+- **Certifié** Shopify Partner et Google Analytics
+- **70+ automatisations** prêtes à l'emploi testées et documentées
+
+---
+
+## Services Détaillés
+
+### Audit E-commerce Gratuit
+**URL**: https://3a-automation.com/services/audit-gratuit.html
+
+Notre audit gratuit analyse votre boutique e-commerce et identifie les opportunités d'automatisation:
+
+- Analyse technique SEO (vitesse, structure, meta tags)
+- Audit flows email Klaviyo existants
+- Vérification tracking GA4/GTM
+- Identification 3-5 quick wins actionnables
+
+**Livrable**: Rapport PDF complet sous 24-48h
+**Prix**: GRATUIT, sans engagement
+
+### Automatisation E-commerce
+**URL**: https://3a-automation.com/services/ecommerce.html
+
+Services pour boutiques Shopify:
+
+- Setup flows email Klaviyo (welcome, abandon panier, post-achat)
+- Optimisation fiches produit SEO
+- Synchronisation inventaire multi-canaux
+- Intégration apps tierces via APIs
+- Automatisation reporting GA4
+
+**Résultats moyens**:
+- +25% revenus email
+- -40% temps admin
+- 3x ROI en 90 jours
+
+### Services PME
+**URL**: https://3a-automation.com/services/pme.html
+
+Solutions pour PME tous secteurs:
+
+- Lead generation automatisée (Meta Ads, Google Ads)
+- CRM setup et automation
+- Analytics et dashboards personnalisés
+- Intégration outils existants
+
+### Système Flywheel 360°
+**URL**: https://3a-automation.com/services/flywheel-360.html
+
+Notre méthodologie complète d'automatisation:
+
+```
+ACQUISITION → CONVERSION → RÉTENTION → ADVOCACY
+     ↑                                      ↓
+     └──────────────────────────────────────┘
+                   (Boucle vertueuse)
+```
+
+Le Flywheel 360° automatise chaque étape du parcours client pour créer une croissance exponentielle.
+
+---
+
+## Catalogue des 70 Automatisations
+
+### Lead Generation (18 automatisations)
+- Meta Ads Lead Sync → CRM
+- Google Forms → Klaviyo
+- LinkedIn Scraper → Enrichment
+- Apify Web Scraping
+- Voice AI Booking System
+
+### Shopify (13 automatisations)
+- Product Sync Multi-Channel
+- Inventory Alerts
+- Order Webhooks
+- SEO Bulk Editor
+- Image Alt Text Generator
+
+### SEO (9 automatisations)
+- Technical SEO Audit
+- Meta Tags Generator
+- Sitemap Generator
+- Schema.org Markup
+- Core Web Vitals Monitor
+
+### Email Marketing (9 automatisations)
+- Welcome Series (5 emails)
+- Abandoned Cart (3 emails)
+- Post-Purchase Upsell
+- Win-Back Campaign
+- VIP Tier Automation
+
+### Analytics (9 automatisations)
+- GA4 Daily Report
+- Attribution Multi-Touch
+- Conversion Path Analysis
+- Custom Dashboards
+- Alert Automation
+
+### Content (8 automatisations)
+- Product Description Generator
+- Blog Post Automation
+- Social Media Scheduler
+- Image Optimization
+- Video Thumbnail Generator
+
+### CinematicAds AI (4 automatisations)
+- CinematicAds Director (Gemini 3 Pro + Imagen 4 + Veo 3.1)
+- Competitor Clone Analysis
+- E-commerce Factory
+- Asset Factory Multi-Format
+
+---
+
+## Tarification Détaillée
+
+### Packs Setup (One-Time)
+
+| Pack | EUR | USD | MAD | Inclus |
+|------|-----|-----|-----|--------|
+| Quick Win | 390€ | $450 | 3.990 DH | 3-5 quick wins + Voice AI Booking |
+| Essentials | 790€ | $920 | 7.990 DH | 8-10 automations + WhatsApp |
+| Growth | 1.399€ | $1,690 | 14.990 DH | 15+ automations + Priority support |
+
+### Retainers Mensuels
+
+| Plan | EUR/mois | Inclus |
+|------|----------|--------|
+| Maintenance | 290€ | Monitoring + bug fixes + updates |
+| Optimization | 490€ | A/B tests + recommandations + support 24h |
+
+**Annuel**: 10 mois pour 12 (2 mois gratuits)
+
+---
+
+## FAQ
+
+### Qu'est-ce que 3A Automation?
+3A Automation est un service de consulting en automatisation e-commerce qui aide les PME à automatiser leurs processus marketing et opérationnels. Le nom 3A signifie: Automation, Analytics, AI.
+
+### Quelles plateformes supportez-vous?
+Nous sommes spécialisés Shopify avec intégrations Klaviyo, GA4, Meta Ads, TikTok Ads, et de nombreuses autres APIs.
+
+### L'audit est-il vraiment gratuit?
+Oui, 100% gratuit et sans engagement. C'est notre façon de démontrer notre valeur avant toute collaboration.
+
+### Quel ROI puis-je espérer?
+Nos clients constatent en moyenne 3x ROI en 90 jours, +25% revenus email, et -40% temps admin.
+
+### Comment fonctionne le Voice AI Booking?
+Notre système Voice AI permet aux clients de réserver des consultations par commande vocale. C'est inclus gratuitement dans tous nos packs.
+
+### Proposez-vous du support?
+Oui, chaque pack inclut un niveau de support. Le pack Growth inclut un support prioritaire 24h.
+
+---
+
+## Stack Technique Complet
+
+### E-commerce
+- Shopify REST API v2024-01
+- Shopify GraphQL Admin API
+- Shopify Flow (pour clients Plus)
+- DSers Dropshipping Integration
+- Meta Commerce Manager
+
+### Email Marketing
+- Klaviyo v3 API
+- Flows automation
+- Segmentation avancée
+- A/B testing
+- Analytics email
+
+### Analytics & Tracking
+- Google Analytics 4 Data API
+- Google Tag Manager Server-Side
+- Google Search Console API
+- Meta Pixel & Conversions API
+- TikTok Events API
+
+### AI & Generation
+- Claude 4.5 Opus (Anthropic)
+- Gemini 3 Pro (Google Vertex AI)
+- Imagen 4 (Google Vertex AI)
+- Veo 3.1 (Google Vertex AI)
+- Grok 4.1 (xAI)
+
+### Automation
+- n8n Workflows
+- GitHub Actions
+- Google Apps Script
+- Webhooks & APIs
+- MCP Servers
+
+### Langages
+- JavaScript/Node.js (primary)
+- Python (AI/ML)
+- HTML/CSS/JS (frontend)
+- SQL (analytics)
+
+---
+
+## Contact & Support
+
+- **Email**: contact@3a-automation.com
+- **Site**: https://3a-automation.com
+- **Audit Gratuit**: https://3a-automation.com/services/audit-gratuit.html
+- **Réserver**: https://3a-automation.com/booking.html
+
+### Horaires
+- Lundi-Vendredi: 9h-18h (GMT+1)
+- Réponse sous 24h ouvrées
+
+### Langues Support
+- Français (principal)
+- English (fluent)
+- Arabe (marocain)
+
+---
+
+## Pages du Site
+
+### Pages Principales
+- [Accueil](https://3a-automation.com/): Proposition de valeur et services
+- [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Automatisation Shopify/Klaviyo
+- [Services PME](https://3a-automation.com/services/pme.html): Solutions pour PME
+- [Audit Gratuit](https://3a-automation.com/services/audit-gratuit.html): Analyse complète gratuite
+- [Flywheel 360°](https://3a-automation.com/services/flywheel-360.html): Méthodologie complète
+
+### Pages Catalogue
+- [Automatisations](https://3a-automation.com/automations.html): 70 automatisations disponibles
+- [Tarifs](https://3a-automation.com/pricing.html): Packages et prix
+- [Cas Clients](https://3a-automation.com/cas-clients.html): Études de cas
+
+### Pages Légales
+- [Mentions Légales](https://3a-automation.com/legal/mentions-legales.html)
+- [Confidentialité](https://3a-automation.com/legal/politique-confidentialite.html)
+
+### Pages EN (English)
+- [Homepage](https://3a-automation.com/en/): Main services
+- [E-commerce](https://3a-automation.com/en/services/ecommerce.html): Shopify automation
+- [SMB](https://3a-automation.com/en/services/smb.html): SMB solutions
+- [Free Audit](https://3a-automation.com/en/services/free-audit.html): Free analysis
+- [Pricing](https://3a-automation.com/en/pricing.html): Packages
+
+---
+
+## Documentation Technique
+
+- [Sitemap XML](https://3a-automation.com/sitemap.xml): Plan du site complet
+- [Robots.txt](https://3a-automation.com/robots.txt): Règles crawlers
+- [llms.txt](https://3a-automation.com/llms.txt): Version courte AI
+- [llms-full.txt](https://3a-automation.com/llms-full.txt): Ce document
+
+---
+
+Version: 1.0 | Last Updated: 2025-12-23
+Spec: https://llmstxt.org/
+AI Training: Full content for comprehensive AI understanding

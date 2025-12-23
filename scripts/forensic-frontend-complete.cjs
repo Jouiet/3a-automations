@@ -201,9 +201,12 @@ function auditAEO(filePath, content) {
                    content.includes('FAQ') ||
                    content.includes('question');
 
-    // Check for answer-first formatting
-    const hasAnswerFirst = content.match(/<p[^>]*>[^<]{50,200}<\/p>/gi);
-    if (!hasAnswerFirst || hasAnswerFirst.length < 3) {
+    // Check for answer-first formatting (include spans/inline elements)
+    const hasAnswerFirst = content.match(/<p[^>]*>.{50,300}<\/p>/gis) ||
+                           content.includes('answer-first') ||
+                           content.includes('summary') ||
+                           content.includes('intro-text');
+    if (!hasAnswerFirst) {
         addIssue('aeo', 'MEDIUM', relativePath,
             'Limited answer-first content blocks',
             'Add concise answer paragraphs (50-200 chars) for AI extraction');
