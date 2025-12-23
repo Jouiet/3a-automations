@@ -143,11 +143,18 @@
      * Initialize and return detected/saved locale
      */
     async init() {
-      // Priority 1: Saved preference
+      // Always detect current timezone (may change if user travels)
+      const currentTimezone = this.getTimezone();
+
+      // Priority 1: Saved preference (but update timezone)
       const saved = this.getSavedLocale();
       if (saved) {
+        saved.timezone = currentTimezone; // Always use current timezone
         return saved;
       }
+
+      // Priority 2+ uses currentTimezone
+      const timezone = currentTimezone;
 
       // Priority 2: Geo-detection
       const country = await this.detectCountry();
@@ -155,6 +162,7 @@
         const locale = { ...this.getLocale(country) };
         locale.country = country;
         locale.source = 'geo';
+        locale.timezone = timezone;
         this.saveLocale(locale);
         return locale;
       }
@@ -162,10 +170,38 @@
       // Priority 3: Browser language
       const browserLang = navigator.language?.substring(0, 2) || 'en';
       const locale = browserLang === 'fr'
-        ? { lang: 'fr', currency: 'EUR', region: 'europe', source: 'browser' }
-        : { ...this.defaultLocale, source: 'default' };
+        ? { lang: 'fr', currency: 'EUR', region: 'europe', source: 'browser', timezone }
+        : { ...this.defaultLocale, source: 'default', timezone };
 
       return locale;
+    },
+
+    /**
+     * Get user timezone using Intl API (reliable, no API call needed)
+     * Falls back to UTC offset if Intl unavailable
+     */
+    getTimezone() {
+      try {
+        // Modern browsers: use Intl API
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (timezone) {
+          return {
+            iana: timezone, // e.g., "Africa/Casablanca", "Europe/Paris"
+            offset: new Date().getTimezoneOffset(), // minutes from UTC
+            offsetHours: -new Date().getTimezoneOffset() / 60 // e.g., +1, -5
+          };
+        }
+      } catch (e) {
+        // Fallback for old browsers
+      }
+
+      // Fallback: just use offset
+      const offset = new Date().getTimezoneOffset();
+      return {
+        iana: null,
+        offset: offset,
+        offsetHours: -offset / 60
+      };
     },
 
     /**
