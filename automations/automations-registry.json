@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "lastUpdated": "2025-12-23",
-  "totalCount": 72,
+  "totalCount": 74,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -44,6 +44,11 @@
       "name_fr": "CinematicAds AI",
       "name_en": "CinematicAds AI",
       "count": 4
+    },
+    "whatsapp": {
+      "name_fr": "WhatsApp Business",
+      "name_en": "WhatsApp Business",
+      "count": 2
     }
   },
   "automations": [
@@ -910,6 +915,30 @@
       "frequency_en": "On demand",
       "benefit_fr": "Video lip-sync IA (ElevenLabs + fal.ai Kling)",
       "benefit_en": "AI lip-sync video (ElevenLabs + fal.ai Kling)"
+    },
+    {
+      "id": "whatsapp-booking-confirmation",
+      "name_fr": "Confirmation WhatsApp RDV",
+      "name_en": "WhatsApp Booking Confirmation",
+      "category": "whatsapp",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/whatsapp-booking-confirmation.json",
+      "frequency_fr": "À chaque réservation",
+      "frequency_en": "On each booking",
+      "benefit_fr": "98% taux d'ouverture vs 20% SMS",
+      "benefit_en": "98% open rate vs 20% SMS"
+    },
+    {
+      "id": "whatsapp-booking-reminders",
+      "name_fr": "Rappels WhatsApp 24h + 1h",
+      "name_en": "WhatsApp Reminders 24h + 1h",
+      "category": "whatsapp",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/whatsapp-booking-reminders.json",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "-30% no-shows",
+      "benefit_en": "-30% no-shows"
     }
   ],
   "types": {
@@ -940,7 +969,7 @@
     "withScript": 42,
     "withoutScript": 30,
     "klaviyoTemplates": 7,
-    "n8nWorkflows": 5,
+    "n8nWorkflows": 7,
     "shopifyNative": 6,
     "manualProcesses": 5,
     "aiAssisted": 2,
