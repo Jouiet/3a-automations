@@ -1,0 +1,876 @@
+# AUDIT FORENSIQUE FRONTEND COMPLET
+## 3A-AUTOMATION.COM
+## Date: 2025-12-23
+## Version: 1.0
+
+---
+
+# RÉSUMÉ EXÉCUTIF
+
+| Métrique | Valeur |
+|----------|--------|
+| Pages analysées | 28 |
+| Total issues | 349 |
+| CRITICAL | 0 |
+| HIGH | 30 |
+| MEDIUM | 29 |
+| LOW | 290 |
+
+---
+
+# SECTION 1: SEO (61 issues)
+
+
+## SEO (61 issues)
+
+### 🟠 HIGH (30)
+
+- **404.html**: Meta description too short (29 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **a-propos.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **automations.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **booking.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **cas-clients.html**: Meta description too short (48 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **cas-clients.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **contact.html**: Meta description too short (8 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **contact.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/404.html**: Meta description too short (12 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **en/about.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/automations.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/booking.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/case-studies.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/contact.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/index.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/legal/privacy.html**: Meta description too short (69 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **en/legal/terms.html**: Meta description too short (84 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **en/pricing.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/services/ecommerce.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/services/free-audit.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **en/services/smb.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **index.html**: Meta description too short (28 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **index.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **legal/mentions-legales.html**: Meta description too short (89 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **legal/politique-confidentialite.html**: Meta description too short (97 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **pricing.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **services/audit-gratuit.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **services/ecommerce.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+- **services/flywheel-360.html**: Meta description too short (24 chars)
+  - *Fix:* Meta description should be 150-160 characters
+- **services/pme.html**: Missing H1 tag
+  - *Fix:* Every page should have exactly one H1 tag
+
+### 🟡 MEDIUM (8)
+
+- **404.html**: Missing canonical URL
+  - *Fix:* Add <link rel="canonical" href="..."> to prevent duplicate content
+- **404.html**: Missing Open Graph tag: og:description
+  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
+- **en/404.html**: Missing canonical URL
+  - *Fix:* Add <link rel="canonical" href="..."> to prevent duplicate content
+- **en/404.html**: Missing Open Graph tag: og:description
+  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
+- **en/legal/privacy.html**: Missing Open Graph tag: og:description
+  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
+- **en/legal/terms.html**: Missing Open Graph tag: og:description
+  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
+- **legal/mentions-legales.html**: Missing Open Graph tag: og:description
+  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
+- **legal/politique-confidentialite.html**: Missing Open Graph tag: og:description
+  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
+
+### 🟢 LOW (23)
+
+- **404.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **a-propos.html**: Meta description slightly long (165 chars)
+  - *Fix:* Consider trimming to under 160 characters
+- **automations.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **booking.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **contact.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/404.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/automations.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/booking.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/contact.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/legal/privacy.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/legal/terms.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/pricing.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/services/ecommerce.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/services/free-audit.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **en/services/smb.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **legal/mentions-legales.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **legal/politique-confidentialite.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **pricing.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **services/audit-gratuit.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **services/ecommerce.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **services/pme.html**: Missing Twitter Card meta tags
+  - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
+- **sitemap.xml**: Page not in sitemap: en/index
+  - *Fix:* Add all indexable pages to sitemap.xml
+- **sitemap.xml**: Page not in sitemap: index
+  - *Fix:* Add all indexable pages to sitemap.xml
+
+
+## AEO (14 issues)
+
+### 🟡 MEDIUM (7)
+
+- **404.html**: Limited answer-first content blocks
+  - *Fix:* Add concise answer paragraphs (50-200 chars) for AI extraction
+- **en/404.html**: Limited answer-first content blocks
+  - *Fix:* Add concise answer paragraphs (50-200 chars) for AI extraction
+- **en/services/flywheel-360.html**: Limited answer-first content blocks
+  - *Fix:* Add concise answer paragraphs (50-200 chars) for AI extraction
+- **legal/mentions-legales.html**: Limited answer-first content blocks
+  - *Fix:* Add concise answer paragraphs (50-200 chars) for AI extraction
+- **services/flywheel-360.html**: Limited answer-first content blocks
+  - *Fix:* Add concise answer paragraphs (50-200 chars) for AI extraction
+- **robots.txt**: AI crawler not mentioned: Anthropic-AI
+  - *Fix:* Add "User-agent: Anthropic-AI\nAllow: /" to allow AI indexing
+- **robots.txt**: AI crawler not mentioned: Cohere-ai
+  - *Fix:* Add "User-agent: Cohere-ai\nAllow: /" to allow AI indexing
+
+### 🟢 LOW (7)
+
+- **404.html**: Limited heading structure (0 H2s)
+  - *Fix:* Add more H2 subheadings for better content structure
+- **booking.html**: Limited heading structure (1 H2s)
+  - *Fix:* Add more H2 subheadings for better content structure
+- **en/404.html**: Limited heading structure (0 H2s)
+  - *Fix:* Add more H2 subheadings for better content structure
+- **en/booking.html**: Limited heading structure (1 H2s)
+  - *Fix:* Add more H2 subheadings for better content structure
+- **en/services/free-audit.html**: Limited heading structure (1 H2s)
+  - *Fix:* Add more H2 subheadings for better content structure
+- **services/audit-gratuit.html**: Limited heading structure (1 H2s)
+  - *Fix:* Add more H2 subheadings for better content structure
+- **llms-full.txt**: llms-full.txt not found (optional)
+  - *Fix:* Consider creating llms-full.txt with complete content for comprehensive AI training
+
+
+## MARKETING (4 issues)
+
+### 🟡 MEDIUM (4)
+
+- **en/services/free-audit.html**: Limited power words (2 found)
+  - *Fix:* Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
+- **en/services/smb.html**: Weak value proposition
+  - *Fix:* Highlight time savings, ROI, growth benefits more clearly
+- **services/audit-gratuit.html**: Limited power words (1 found)
+  - *Fix:* Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
+- **services/pme.html**: Limited power words (1 found)
+  - *Fix:* Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
+
+
+## CONVERSION (0 issues)
+
+✅ Aucun problème détecté
+
+## SCHEMA (10 issues)
+
+### 🟡 MEDIUM (10)
+
+- **en/pricing.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **en/services/ecommerce.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **en/services/flywheel-360.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **en/services/free-audit.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **en/services/smb.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **pricing.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **services/audit-gratuit.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **services/ecommerce.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **services/flywheel-360.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+- **services/pme.html**: Missing FAQPage schema
+  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
+
+
+## META (0 issues)
+
+✅ Aucun problème détecté
+
+## IMAGES (232 issues)
+
+### 🟢 LOW (232)
+
+- **404.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **404.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **404.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **404.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **a-propos.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **a-propos.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **a-propos.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **a-propos.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **automations.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **automations.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **automations.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **automations.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **booking.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **booking.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **booking.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **booking.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **cas-clients.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **cas-clients.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **cas-clients.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **cas-clients.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **contact.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **contact.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **contact.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **contact.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/404.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/404.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/404.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/404.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/about.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/about.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/about.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/about.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/automations.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/automations.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/automations.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/automations.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/booking.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/booking.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/booking.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/booking.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/case-studies.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/case-studies.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/case-studies.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/case-studies.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/contact.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/contact.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/contact.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/contact.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/index.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/index.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **en/index.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/index.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/legal/privacy.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/legal/privacy.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/legal/privacy.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/legal/privacy.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/legal/terms.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/legal/terms.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/legal/terms.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/legal/terms.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/pricing.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/pricing.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/pricing.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/pricing.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/services/ecommerce.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/services/ecommerce.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/services/ecommerce.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/services/ecommerce.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/services/flywheel-360.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/services/flywheel-360.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/services/flywheel-360.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/services/flywheel-360.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/services/free-audit.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/services/free-audit.html**: Image not in WebP format: ../../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/services/free-audit.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/services/free-audit.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/services/smb.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/services/smb.html**: Image not in WebP format: ../../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **en/services/smb.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **en/services/smb.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **index.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **index.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing width/height
+  - *Fix:* Add width and height attributes to prevent layout shifts
+- **index.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **index.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **legal/mentions-legales.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **legal/mentions-legales.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **legal/mentions-legales.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **legal/mentions-legales.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **legal/politique-confidentialite.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **legal/politique-confidentialite.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **legal/politique-confidentialite.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **legal/politique-confidentialite.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **pricing.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **pricing.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **pricing.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **pricing.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **services/audit-gratuit.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **services/audit-gratuit.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **services/audit-gratuit.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **services/audit-gratuit.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **services/ecommerce.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **services/ecommerce.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **services/ecommerce.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **services/ecommerce.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **services/flywheel-360.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **services/flywheel-360.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **services/flywheel-360.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **services/flywheel-360.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **services/pme.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **services/pme.html**: Image not in WebP format: ../logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+- **services/pme.html**: Image missing lazy loading
+  - *Fix:* Add loading="lazy" for below-fold images
+- **services/pme.html**: Image not in WebP format: /logo.png
+  - *Fix:* Convert to WebP for smaller file sizes
+
+
+## TECHNICAL (28 issues)
+
+### 🟢 LOW (28)
+
+- **404.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **a-propos.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **automations.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **booking.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **cas-clients.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **contact.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/404.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/about.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/automations.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/booking.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/case-studies.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/contact.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/index.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/legal/privacy.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/legal/terms.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/pricing.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/services/ecommerce.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/services/flywheel-360.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/services/free-audit.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **en/services/smb.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **index.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **legal/mentions-legales.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **legal/politique-confidentialite.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **pricing.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **services/audit-gratuit.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **services/ecommerce.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **services/flywheel-360.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+- **services/pme.html**: Missing skip navigation link
+  - *Fix:* Add skip-to-content link for accessibility
+
+
+---
+
+# SECTION 2: AEO BEST PRACTICES (Answer Engine Optimization)
+
+## AI Crawlers Configuration (robots.txt)
+
+Les crawlers AI suivants doivent être autorisés pour maximiser la visibilité:
+
+| Crawler | Company | Status |
+|---------|---------|--------|
+| GPTBot | OpenAI | ✅ Configuré |
+| ChatGPT-User | OpenAI | ✅ Configuré |
+| ClaudeBot | Anthropic | ✅ Configuré |
+| Claude-Web | Anthropic | ✅ Configuré |
+| Anthropic-AI | Anthropic | ❌ Manquant |
+| Google-Extended | Google | ✅ Configuré |
+| PerplexityBot | Perplexity | ✅ Configuré |
+| Cohere-ai | Cohere | ❌ Manquant |
+| CCBot | Common Crawl | ✅ Configuré |
+| Bytespider | ByteDance | ✅ Configuré |
+| Amazonbot | Amazon | ✅ Configuré |
+
+## llms.txt Compliance
+
+| Élément | Requis | Status |
+|---------|--------|--------|
+| H1 Title | Oui | ✅ |
+| Blockquote | Oui | ✅ |
+| H2 Sections | Oui | ✅ |
+| URLs | Oui | ✅ |
+| llms-full.txt | Optionnel | ❌ |
+
+## Content Optimization for AI
+
+### Ce que les LLMs préfèrent:
+1. **Listicles**: 32% des citations AI viennent de listes
+2. **Answer-first**: Réponses directes en début de paragraphe
+3. **Freshness**: Inclure l'année 2025 dans le contenu
+4. **Structured data**: FAQPage, HowTo schemas
+5. **Clear headings**: H1 > H2 > H3 hierarchy
+
+
+---
+
+# SECTION 3: RECOMMANDATIONS PRIORITAIRES
+
+## Actions Immédiates (CRITICAL + HIGH)
+
+1. **404.html**: Meta description should be 150-160 characters
+2. **a-propos.html**: Every page should have exactly one H1 tag
+3. **automations.html**: Every page should have exactly one H1 tag
+4. **booking.html**: Every page should have exactly one H1 tag
+5. **cas-clients.html**: Meta description should be 150-160 characters
+6. **cas-clients.html**: Every page should have exactly one H1 tag
+7. **contact.html**: Meta description should be 150-160 characters
+8. **contact.html**: Every page should have exactly one H1 tag
+9. **en/404.html**: Meta description should be 150-160 characters
+10. **en/about.html**: Every page should have exactly one H1 tag
+
+## Actions Moyennes (MEDIUM)
+
+1. 404.html: Add <link rel="canonical" href="..."> to prevent duplicate content
+2. 404.html: Add <meta property="og:description" content="..."> for social sharing
+3. en/404.html: Add <link rel="canonical" href="..."> to prevent duplicate content
+4. en/404.html: Add <meta property="og:description" content="..."> for social sharing
+5. en/legal/privacy.html: Add <meta property="og:description" content="..."> for social sharing
+6. en/legal/terms.html: Add <meta property="og:description" content="..."> for social sharing
+7. legal/mentions-legales.html: Add <meta property="og:description" content="..."> for social sharing
+8. legal/politique-confidentialite.html: Add <meta property="og:description" content="..."> for social sharing
+9. 404.html: Add concise answer paragraphs (50-200 chars) for AI extraction
+10. en/404.html: Add concise answer paragraphs (50-200 chars) for AI extraction
+
+---
+
+# SECTION 4: CHECKLIST TECHNIQUE
+
+## SEO Technique
+
+| Élément | FR | EN |
+|---------|----|----|
+| Title tag optimisé | ✅ | ✅ |
+| Meta description 150+ chars | ❌ | ❌ |
+| Canonical URL | ✅ | ✅ |
+| hreflang tags | ✅ | ✅ |
+| OG:image | ✅ | ✅ |
+| Schema.org JSON-LD | ✅ | ✅ |
+| GTM/GA4 | ✅ | ✅ |
+
+## Fichiers Techniques
+
+| Fichier | Status | Action |
+|---------|--------|--------|
+| robots.txt | ✅ | Vérifier AI crawlers |
+| sitemap.xml | ✅ | Vérifier toutes pages |
+| llms.txt | ✅ | Optimiser pour spec |
+| favicon.ico | ✅ | - |
+| apple-touch-icon | ✅ | - |
+
+---
+
+*Rapport généré automatiquement par forensic-frontend-complete.cjs*
+*Date: 2025-12-23T00:43:29.660Z*
