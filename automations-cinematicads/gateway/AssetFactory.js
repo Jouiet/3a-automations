@@ -46,18 +46,22 @@ class AssetFactory {
             this.logger.info('xAI Grok initialized (dual-provider mode available)');
         }
 
-        // STATE OF THE ART Model Registry - December 2025
+        // STATE OF THE ART Model Registry - December 2025 (Verified Factually)
+        // Sources: docs.cloud.google.com, x.ai/news, blog.google
         this.models = {
-            // Vertex AI (Google Cloud)
+            // Vertex AI (Google Cloud) - December 2025 Latest
             vertex: {
-                text: 'gemini-2.0-flash-exp',           // Latest Gemini
-                image: 'imagen-3.0-generate-001',       // Imagen 3 ($0.04/img)
-                video: 'veo-002'                        // Veo 2 (production)
+                text: 'gemini-3-pro-preview',           // #1 LMArena (1501 Elo), PhD-level reasoning
+                image: 'imagen-4.0-generate-001',       // Imagen 4 ($0.04/img, 2K resolution)
+                imageUltra: 'imagen-4.0-ultra-generate-001', // Imagen 4 Ultra ($0.06/img, 2816x1536)
+                imageFast: 'imagen-4.0-fast-generate-001',   // Imagen 4 Fast ($0.02/img, 150 req/min)
+                video: 'veo-3.1-generate-preview'       // Veo 3.1 (8s 1080p, native audio)
             },
-            // xAI Grok (#1 LMArena - 1483 Elo)
+            // xAI Grok - November/December 2025 Latest
             grok: {
-                text: 'grok-2-latest',                  // Grok 2 latest
-                image: 'grok-2-image-1212',             // Grok Image ($0.07/img)
+                text: 'grok-4-1-fast-reasoning',        // Grok 4.1 Fast (2M context, agent tools)
+                textFast: 'grok-4-1-fast-non-reasoning', // Grok 4.1 Fast (instant, no reasoning)
+                image: 'grok-2-image-1212',             // Grok Image ($0.07/img) - no Grok 4 image yet
                 voice: 'grok-2-audio'                   // Grok Voice ($0.05/min)
             }
         };
@@ -172,12 +176,13 @@ class AssetFactory {
     }
 
     /**
-     * Generates an image using Imagen 3 (Vertex) or Grok Image (xAI)
+     * Generates an image using Imagen 4 (Vertex) or Grok Image (xAI)
      * @param {string} prompt - Image generation prompt
      * @param {string} aspectRatio - Aspect ratio: '1:1', '16:9', '9:16', '4:3'
      * @param {string} provider - Override provider: 'vertex_ai' | 'grok' | 'auto'
+     * @param {string} quality - Image quality: 'standard' | 'ultra' | 'fast'
      */
-    async generateImage(prompt, aspectRatio = '1:1', provider = 'auto') {
+    async generateImage(prompt, aspectRatio = '1:1', provider = 'auto', quality = 'standard') {
         const useProvider = provider === 'auto' ? this.aiProvider : provider;
 
         // xAI Grok Image
@@ -185,13 +190,24 @@ class AssetFactory {
             return this._generateImageGrok(prompt);
         }
 
-        // Vertex AI Imagen 3 (default)
-        return this._generateImageVertex(prompt, aspectRatio);
+        // Vertex AI Imagen 4 (default)
+        return this._generateImageVertex(prompt, aspectRatio, quality);
     }
 
-    async _generateImageVertex(prompt, aspectRatio) {
-        const modelId = this.models.vertex.image;
-        this.logger.info(`Calling Vertex AI ${modelId} [Ratio: ${aspectRatio}]...`);
+    async _generateImageVertex(prompt, aspectRatio, quality = 'standard') {
+        // Select model based on quality tier
+        let modelId;
+        switch (quality) {
+            case 'ultra':
+                modelId = this.models.vertex.imageUltra;
+                break;
+            case 'fast':
+                modelId = this.models.vertex.imageFast;
+                break;
+            default:
+                modelId = this.models.vertex.image;
+        }
+        this.logger.info(`Calling Vertex AI ${modelId} [Ratio: ${aspectRatio}, Quality: ${quality}]...`);
 
         try {
             const model = this.vertexAI.getGenerativeModel({ model: modelId });
@@ -210,11 +226,11 @@ class AssetFactory {
             const outputDir = path.join(__dirname, '../../data/output/generated');
             if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
-            const filename = `imagen_${Date.now()}.png`;
+            const filename = `imagen4_${quality}_${Date.now()}.png`;
             const filepath = path.join(outputDir, filename);
 
             const base64Data = result.response.candidates[0]?.content?.parts[0]?.inlineData?.data;
-            if (!base64Data) throw new Error('No image data received from Imagen 3');
+            if (!base64Data) throw new Error('No image data received from Imagen 4');
 
             fs.writeFileSync(filepath, base64Data, 'base64');
             this.logger.success(`Image saved to ${filepath}`);
@@ -268,15 +284,17 @@ class AssetFactory {
     }
 
     /**
-     * Generates video using Veo 2 (Vertex AI)
+     * Generates video using Veo 3.1 (Vertex AI) - STATE OF THE ART December 2025
+     * Features: 8s 1080p, native audio generation, stunning realism
      * Note: xAI Grok Imagine Video has NO public API (consumer only)
      * @param {string} imagePath - Source image for video generation
      * @param {string} prompt - Video generation prompt
-     * @param {number} duration - Video duration in seconds (5-60)
+     * @param {number} duration - Video duration in seconds (4, 6, or 8)
+     * @param {string} resolution - '720p' or '1080p'
      */
-    async generateVideo(imagePath, prompt, duration = 5) {
+    async generateVideo(imagePath, prompt, duration = 8, resolution = '1080p') {
         const modelId = this.models.vertex.video;
-        this.logger.info(`Calling Vertex AI ${modelId} [Duration: ${duration}s]...`);
+        this.logger.info(`Calling Vertex AI ${modelId} [Duration: ${duration}s, Resolution: ${resolution}]...`);
 
         try {
             const model = this.vertexAI.getGenerativeModel({ model: modelId });
@@ -284,6 +302,7 @@ class AssetFactory {
             const imageBuffer = fs.readFileSync(imagePath);
             const imageBase64 = imageBuffer.toString('base64');
 
+            // Veo 3.1 supports: 4s, 6s, 8s durations at 720p or 1080p
             const req = {
                 contents: [
                     {
@@ -295,7 +314,9 @@ class AssetFactory {
                     }
                 ],
                 generationConfig: {
-                    videoDuration: duration
+                    videoDuration: duration,
+                    videoResolution: resolution,
+                    fps: 24 // Veo 3.1 standard: 24 FPS
                 }
             };
 
@@ -304,7 +325,7 @@ class AssetFactory {
             const outputDir = path.join(__dirname, '../../data/output/generated');
             if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
-            const filename = `veo_${Date.now()}.mp4`;
+            const filename = `veo31_${resolution}_${Date.now()}.mp4`;
             const filepath = path.join(outputDir, filename);
 
             const videoData = result.response.candidates[0]?.content?.parts[0]?.inlineData?.data;
@@ -321,7 +342,7 @@ class AssetFactory {
                 return uri;
             }
 
-            throw new Error('No video data or URI returned from Veo 2.');
+            throw new Error('No video data or URI returned from Veo 3.1.');
 
         } catch (error) {
             this._handleError('Video Generation', error);

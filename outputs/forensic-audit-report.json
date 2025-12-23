@@ -1,11 +1,11 @@
 {
-  "date": "2025-12-22T21:19:20.788Z",
+  "date": "2025-12-22T23:36:25.770Z",
   "summary": {
     "critical": 0,
     "high": 0,
     "medium": 2,
-    "low": 9,
-    "total": 11
+    "low": 8,
+    "total": 10
   },
   "issues": [
     {
@@ -84,14 +84,6 @@
       "category": "SEO",
       "severity": "LOW",
       "file": "/legal/politique-confidentialite.html",
-      "line": 0,
-      "description": "Missing Open Graph tags",
-      "fix": "Add og:title, og:description, og:image"
-    },
-    {
-      "category": "SEO",
-      "severity": "LOW",
-      "file": "/services/flywheel-360.html",
       "line": 0,
       "description": "Missing Open Graph tags",
       "fix": "Add og:title, og:description, og:image"
