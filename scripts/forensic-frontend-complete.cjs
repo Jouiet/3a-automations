@@ -32,10 +32,10 @@ const AI_CRAWLERS = [
     'ChatGPT-User',     // OpenAI ChatGPT
     'ClaudeBot',        // Anthropic Claude
     'Claude-Web',       // Anthropic Claude
-    'Anthropic-AI',     // Anthropic
+    'anthropic-ai',     // Anthropic (lowercase in robots.txt)
     'Google-Extended',  // Google Gemini
     'PerplexityBot',    // Perplexity AI
-    'Cohere-ai',        // Cohere
+    'cohere-ai',        // Cohere (lowercase in robots.txt)
     'CCBot',            // Common Crawl (used by many LLMs)
     'Bytespider',       // ByteDance (TikTok AI)
     'Amazonbot'         // Amazon Alexa
@@ -131,8 +131,9 @@ function auditSEO(filePath, content) {
             'Title should be under 60 characters to avoid truncation');
     }
 
-    // Meta description
-    const descMatch = content.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i);
+    // Meta description (handle apostrophes in content - use closing quote as delimiter)
+    const descMatch = content.match(/<meta\s+name="description"\s+content="([^"]+)"/i) ||
+                      content.match(/<meta\s+name='description'\s+content='([^']+)'/i);
     if (!descMatch || descMatch[1].length < 120) {
         addIssue('seo', 'HIGH', relativePath,
             `Meta description too short (${descMatch ? descMatch[1].length : 0} chars)`,
@@ -150,16 +151,15 @@ function auditSEO(filePath, content) {
             'Add <link rel="canonical" href="..."> to prevent duplicate content');
     }
 
-    // H1 tag
-    const h1Match = content.match(/<h1[^>]*>([^<]*)<\/h1>/i);
-    if (!h1Match) {
+    // H1 tag (support multiline H1 with spans)
+    const h1Count = (content.match(/<h1[^>]*>/gi) || []).length;
+    if (h1Count === 0) {
         addIssue('seo', 'HIGH', relativePath,
             'Missing H1 tag',
             'Every page should have exactly one H1 tag');
     }
 
-    // Multiple H1s
-    const h1Count = (content.match(/<h1[^>]*>/gi) || []).length;
+    // Multiple H1s (reuse h1Count from above)
     if (h1Count > 1) {
         addIssue('seo', 'MEDIUM', relativePath,
             `Multiple H1 tags (${h1Count})`,
@@ -793,10 +793,10 @@ function getCrawlerCompany(crawler) {
         'ChatGPT-User': 'OpenAI',
         'ClaudeBot': 'Anthropic',
         'Claude-Web': 'Anthropic',
-        'Anthropic-AI': 'Anthropic',
+        'anthropic-ai': 'Anthropic',
         'Google-Extended': 'Google',
         'PerplexityBot': 'Perplexity',
-        'Cohere-ai': 'Cohere',
+        'cohere-ai': 'Cohere',
         'CCBot': 'Common Crawl',
         'Bytespider': 'ByteDance',
         'Amazonbot': 'Amazon'

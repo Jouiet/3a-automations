@@ -10,106 +10,24 @@
 | Métrique | Valeur |
 |----------|--------|
 | Pages analysées | 28 |
-| Total issues | 349 |
+| Total issues | 309 |
 | CRITICAL | 0 |
-| HIGH | 30 |
-| MEDIUM | 29 |
+| HIGH | 0 |
+| MEDIUM | 19 |
 | LOW | 290 |
 
 ---
 
-# SECTION 1: SEO (61 issues)
+# SECTION 1: SEO (23 issues)
 
 
-## SEO (61 issues)
-
-### 🟠 HIGH (30)
-
-- **404.html**: Meta description too short (29 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **a-propos.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **automations.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **booking.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **cas-clients.html**: Meta description too short (48 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **cas-clients.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **contact.html**: Meta description too short (8 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **contact.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/404.html**: Meta description too short (12 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **en/about.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/automations.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/booking.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/case-studies.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/contact.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/index.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/legal/privacy.html**: Meta description too short (69 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **en/legal/terms.html**: Meta description too short (84 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **en/pricing.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/services/ecommerce.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/services/free-audit.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **en/services/smb.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **index.html**: Meta description too short (28 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **index.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **legal/mentions-legales.html**: Meta description too short (89 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **legal/politique-confidentialite.html**: Meta description too short (97 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **pricing.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **services/audit-gratuit.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **services/ecommerce.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-- **services/flywheel-360.html**: Meta description too short (24 chars)
-  - *Fix:* Meta description should be 150-160 characters
-- **services/pme.html**: Missing H1 tag
-  - *Fix:* Every page should have exactly one H1 tag
-
-### 🟡 MEDIUM (8)
-
-- **404.html**: Missing canonical URL
-  - *Fix:* Add <link rel="canonical" href="..."> to prevent duplicate content
-- **404.html**: Missing Open Graph tag: og:description
-  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
-- **en/404.html**: Missing canonical URL
-  - *Fix:* Add <link rel="canonical" href="..."> to prevent duplicate content
-- **en/404.html**: Missing Open Graph tag: og:description
-  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
-- **en/legal/privacy.html**: Missing Open Graph tag: og:description
-  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
-- **en/legal/terms.html**: Missing Open Graph tag: og:description
-  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
-- **legal/mentions-legales.html**: Missing Open Graph tag: og:description
-  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
-- **legal/politique-confidentialite.html**: Missing Open Graph tag: og:description
-  - *Fix:* Add <meta property="og:description" content="..."> for social sharing
+## SEO (23 issues)
 
 ### 🟢 LOW (23)
 
 - **404.html**: Missing Twitter Card meta tags
   - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
-- **a-propos.html**: Meta description slightly long (165 chars)
+- **a-propos.html**: Meta description slightly long (181 chars)
   - *Fix:* Consider trimming to under 160 characters
 - **automations.html**: Missing Twitter Card meta tags
   - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
@@ -155,9 +73,9 @@
   - *Fix:* Add all indexable pages to sitemap.xml
 
 
-## AEO (14 issues)
+## AEO (12 issues)
 
-### 🟡 MEDIUM (7)
+### 🟡 MEDIUM (5)
 
 - **404.html**: Limited answer-first content blocks
   - *Fix:* Add concise answer paragraphs (50-200 chars) for AI extraction
@@ -169,10 +87,6 @@
   - *Fix:* Add concise answer paragraphs (50-200 chars) for AI extraction
 - **services/flywheel-360.html**: Limited answer-first content blocks
   - *Fix:* Add concise answer paragraphs (50-200 chars) for AI extraction
-- **robots.txt**: AI crawler not mentioned: Anthropic-AI
-  - *Fix:* Add "User-agent: Anthropic-AI\nAllow: /" to allow AI indexing
-- **robots.txt**: AI crawler not mentioned: Cohere-ai
-  - *Fix:* Add "User-agent: Cohere-ai\nAllow: /" to allow AI indexing
 
 ### 🟢 LOW (7)
 
@@ -786,10 +700,10 @@ Les crawlers AI suivants doivent être autorisés pour maximiser la visibilité:
 | ChatGPT-User | OpenAI | ✅ Configuré |
 | ClaudeBot | Anthropic | ✅ Configuré |
 | Claude-Web | Anthropic | ✅ Configuré |
-| Anthropic-AI | Anthropic | ❌ Manquant |
+| anthropic-ai | Anthropic | ✅ Configuré |
 | Google-Extended | Google | ✅ Configuré |
 | PerplexityBot | Perplexity | ✅ Configuré |
-| Cohere-ai | Cohere | ❌ Manquant |
+| cohere-ai | Cohere | ✅ Configuré |
 | CCBot | Common Crawl | ✅ Configuré |
 | Bytespider | ByteDance | ✅ Configuré |
 | Amazonbot | Amazon | ✅ Configuré |
@@ -820,29 +734,18 @@ Les crawlers AI suivants doivent être autorisés pour maximiser la visibilité:
 
 ## Actions Immédiates (CRITICAL + HIGH)
 
-1. **404.html**: Meta description should be 150-160 characters
-2. **a-propos.html**: Every page should have exactly one H1 tag
-3. **automations.html**: Every page should have exactly one H1 tag
-4. **booking.html**: Every page should have exactly one H1 tag
-5. **cas-clients.html**: Meta description should be 150-160 characters
-6. **cas-clients.html**: Every page should have exactly one H1 tag
-7. **contact.html**: Meta description should be 150-160 characters
-8. **contact.html**: Every page should have exactly one H1 tag
-9. **en/404.html**: Meta description should be 150-160 characters
-10. **en/about.html**: Every page should have exactly one H1 tag
 
 ## Actions Moyennes (MEDIUM)
 
-1. 404.html: Add <link rel="canonical" href="..."> to prevent duplicate content
-2. 404.html: Add <meta property="og:description" content="..."> for social sharing
-3. en/404.html: Add <link rel="canonical" href="..."> to prevent duplicate content
-4. en/404.html: Add <meta property="og:description" content="..."> for social sharing
-5. en/legal/privacy.html: Add <meta property="og:description" content="..."> for social sharing
-6. en/legal/terms.html: Add <meta property="og:description" content="..."> for social sharing
-7. legal/mentions-legales.html: Add <meta property="og:description" content="..."> for social sharing
-8. legal/politique-confidentialite.html: Add <meta property="og:description" content="..."> for social sharing
-9. 404.html: Add concise answer paragraphs (50-200 chars) for AI extraction
-10. en/404.html: Add concise answer paragraphs (50-200 chars) for AI extraction
+1. 404.html: Add concise answer paragraphs (50-200 chars) for AI extraction
+2. en/404.html: Add concise answer paragraphs (50-200 chars) for AI extraction
+3. en/services/flywheel-360.html: Add concise answer paragraphs (50-200 chars) for AI extraction
+4. legal/mentions-legales.html: Add concise answer paragraphs (50-200 chars) for AI extraction
+5. services/flywheel-360.html: Add concise answer paragraphs (50-200 chars) for AI extraction
+6. en/services/free-audit.html: Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
+7. en/services/smb.html: Highlight time savings, ROI, growth benefits more clearly
+8. services/audit-gratuit.html: Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
+9. services/pme.html: Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
 
 ---
 
@@ -853,7 +756,7 @@ Les crawlers AI suivants doivent être autorisés pour maximiser la visibilité:
 | Élément | FR | EN |
 |---------|----|----|
 | Title tag optimisé | ✅ | ✅ |
-| Meta description 150+ chars | ❌ | ❌ |
+| Meta description 150+ chars | ✅ | ❌ |
 | Canonical URL | ✅ | ✅ |
 | hreflang tags | ✅ | ✅ |
 | OG:image | ✅ | ✅ |
@@ -873,4 +776,4 @@ Les crawlers AI suivants doivent être autorisés pour maximiser la visibilité:
 ---
 
 *Rapport généré automatiquement par forensic-frontend-complete.cjs*
-*Date: 2025-12-23T00:43:29.660Z*
+*Date: 2025-12-23T01:01:41.720Z*

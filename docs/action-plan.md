@@ -1474,7 +1474,98 @@ PRÉREQUIS:
 
 ---
 
+## PLAN ACTIONNABLE - FIN SESSION 66 (23/12/2025)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    ACCOMPLISSEMENTS SESSION 66                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ SEO/AEO AUDIT - 0 CRITICAL, 0 HIGH                                     │
+│      • Issues totales: 349 → 309 (-11%)                                     │
+│      • HIGH priority: 30 → 0 (-100%) ✅                                     │
+│      • MEDIUM priority: 29 → 19 (-34%)                                      │
+│                                                                              │
+│   ✅ META DESCRIPTIONS CORRIGÉES (11 pages)                                 │
+│      • index, 404, cas-clients, contact, flywheel-360                       │
+│      • legal/mentions-legales, legal/politique-confidentialite              │
+│      • en/index, en/404, en/legal/privacy, en/legal/terms                   │
+│      • Longueur: 150-160 caractères (était <120)                            │
+│                                                                              │
+│   ✅ CANONICAL URLs AJOUTÉES                                                │
+│      • 404.html (FR + EN)                                                   │
+│                                                                              │
+│   ✅ OG DESCRIPTIONS AJOUTÉES (6 pages)                                     │
+│      • 404 FR/EN, legal/* FR, legal/* EN                                    │
+│                                                                              │
+│   ✅ AUDIT SCRIPT AMÉLIORÉ                                                  │
+│      • H1 multiline support (spans internes)                                │
+│      • Meta description apostrophes handling                                 │
+│      • AI crawlers lowercase (anthropic-ai, cohere-ai)                      │
+│                                                                              │
+│   COMMITS SESSION 66:                                                        │
+│   • [pending] fix(seo): Complete HIGH + MEDIUM SEO issues                   │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    MÉTRIQUES POST-SESSION 66                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   SITE:                                                                      │
+│   • Pages FR: 14 ✅ | Pages EN: 14 ✅ | Total: 28                           │
+│   • Automations: 70 (registry = FR = EN)                                    │
+│   • CinematicAds: 4 workflows intégrés                                      │
+│                                                                              │
+│   SEO/AEO AUDIT:                                                             │
+│   ┌──────────────┬────────┬────────┬─────────────┐                          │
+│   │ Severity     │ Avant  │ Après  │ Amélioration│                          │
+│   ├──────────────┼────────┼────────┼─────────────┤                          │
+│   │ CRITICAL     │ 0      │ 0      │ ✅ CLEAN    │                          │
+│   │ HIGH         │ 30     │ 0      │ -100%       │                          │
+│   │ MEDIUM       │ 29     │ 19     │ -34%        │                          │
+│   │ LOW          │ 290    │ 290    │ 0           │                          │
+│   │ TOTAL        │ 349    │ 309    │ -11%        │                          │
+│   └──────────────┴────────┴────────┴─────────────┘                          │
+│                                                                              │
+│   SCRIPTS CRÉÉS:                                                             │
+│   • scripts/fix-high-seo-issues.cjs                                         │
+│   • scripts/fix-medium-seo-issues.cjs                                       │
+│   • scripts/forensic-frontend-complete.cjs (amélioré)                       │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    PROCHAINES ACTIONS (Session 67+)                          │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ⏳ PRIORITÉ 1 - Corriger 19 MEDIUM issues restants                        │
+│      • FAQPage schema manquant (10 pages services/pricing)                  │
+│      • AEO answer-first content blocks                                       │
+│                                                                              │
+│   ⏳ PRIORITÉ 2 - Performance Lighthouse                                    │
+│      • Score actuel: 70%                                                    │
+│      • Target: >90%                                                          │
+│                                                                              │
+│   ⏳ PRIORITÉ 3 - ACTIONS MANUELLES                                         │
+│      • n8n API Key: https://n8n.srv1168256.hstgr.cloud/settings/api         │
+│      • xAI Crédits ($5): https://console.x.ai/billing                       │
+│      • Shopify Dev Store: https://partners.shopify.com                      │
+│                                                                              │
+│   ⏳ PRIORITÉ 4 - Acquisition Premier Client                                │
+│      • Date cible: avant 25/01/2026                                         │
+│      • Stratégie: LinkedIn outreach + audit gratuit                         │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 **Document créé:** 17 Décembre 2025
-**Mis à jour:** 20 Décembre 2025 (Session 58 - Pricing Multi-Devise + SEO Check)
+**Mis à jour:** 23 Décembre 2025 (Session 66 - SEO/AEO Audit Complete)
 **Objectif:** Premier client payant avant le 25 janvier 2026
 **Principe:** Actions concrètes, résultats mesurables
