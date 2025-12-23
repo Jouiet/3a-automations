@@ -1,0 +1,130 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-12-23",
+  "author": "3A Automation",
+  "description": "LinkedIn content templates for cold outreach and weekly posts",
+
+  "coldOutreach": {
+    "connectionRequest": {
+      "template_fr": "Bonjour {firstName}, je vois que vous travaillez chez {company} dans le {industry}. J'aide les PME e-commerce a automatiser leurs taches repetitives (emails, analytics, CRM). Serait ravi d'echanger si le sujet vous interesse.",
+      "template_en": "Hi {firstName}, I see you work at {company} in the {industry} space. I help SMB e-commerce businesses automate repetitive tasks (emails, analytics, CRM). Would love to connect if this resonates.",
+      "maxChars": 300
+    },
+    "followUp1": {
+      "delay_days": 3,
+      "template_fr": "Merci pour la connexion {firstName}! Question rapide: combien de temps passez-vous par semaine sur des taches manuelles (reporting, relances emails, mise a jour produits)? J'aide les PME a recuperer 10-15h/semaine avec l'automation.",
+      "template_en": "Thanks for connecting {firstName}! Quick question: how much time do you spend weekly on manual tasks (reporting, email follow-ups, product updates)? I help SMBs recover 10-15h/week with automation."
+    },
+    "followUp2": {
+      "delay_days": 7,
+      "template_fr": "Je propose un audit gratuit de 30min pour identifier vos quick wins automation. Dispo cette semaine? https://3a-automation.com/booking.html",
+      "template_en": "I offer a free 30min audit to identify your automation quick wins. Available this week? https://3a-automation.com/en/booking.html"
+    },
+    "valueMessage": {
+      "template_fr": "Je viens de publier un article sur les 5 automations Klaviyo qui boostent les revenus e-commerce de +20%. Ca vous interesse? Je peux vous envoyer le lien.",
+      "template_en": "Just published an article on 5 Klaviyo automations that boost e-commerce revenue by +20%. Interested? I can send you the link."
+    }
+  },
+
+  "weeklyPosts": {
+    "categories": ["automation_tips", "case_study", "industry_stats", "how_to"],
+    "templates": [
+      {
+        "type": "automation_tips",
+        "title_fr": "3 automations qui changent la donne pour les e-commercants",
+        "title_en": "3 Game-Changing Automations for E-commerce",
+        "hook_fr": "Les PME perdent 15h/semaine sur des taches manuelles.\n\nVoici 3 automations que j'implemente pour mes clients:",
+        "hook_en": "SMBs waste 15h/week on manual tasks.\n\nHere are 3 automations I implement for my clients:",
+        "points": [
+          {"fr": "Panier abandonne → Sequence 3 emails → +12% conversion", "en": "Cart abandonment → 3-email sequence → +12% conversion"},
+          {"fr": "Welcome flow → 5 emails personnalises → +25% retention", "en": "Welcome flow → 5 personalized emails → +25% retention"},
+          {"fr": "Reporting auto → Dashboard temps reel → 5h/semaine gagnees", "en": "Auto reporting → Real-time dashboard → 5h/week saved"}
+        ],
+        "cta_fr": "Vous voulez savoir lesquelles s'appliquent a votre business?\nAudit gratuit 30min: https://3a-automation.com/booking.html",
+        "cta_en": "Want to know which ones apply to your business?\nFree 30min audit: https://3a-automation.com/en/booking.html",
+        "hashtags": ["#ecommerce", "#automation", "#klaviyo", "#marketing", "#pme"]
+      },
+      {
+        "type": "case_study",
+        "title_fr": "Comment {company} a gagne 10h/semaine",
+        "title_en": "How {company} saved 10h/week",
+        "template_fr": "🔥 Avant: 2h/jour sur reporting manuel\n📊 Apres: Dashboard GA4 automatique\n\n🎯 Resultat: +10h/semaine pour se concentrer sur la croissance\n\nL'automation, c'est pas complique quand on sait ou commencer.",
+        "template_en": "🔥 Before: 2h/day on manual reporting\n📊 After: Automatic GA4 dashboard\n\n🎯 Result: +10h/week to focus on growth\n\nAutomation isn't complicated when you know where to start.",
+        "hashtags": ["#automation", "#casestudy", "#ecommerce", "#growth"]
+      },
+      {
+        "type": "industry_stats",
+        "title_fr": "Les chiffres de l'automation e-commerce 2025",
+        "title_en": "E-commerce Automation Stats 2025",
+        "template_fr": "📈 Les PME qui automatisent:\n\n→ +37% de revenus email (Klaviyo 2024)\n→ 10-15h/semaine economisees\n→ ROI moyen 42:1 sur email marketing\n\nEt pourtant 67% des e-commercants font encore tout manuellement.\n\nA quel camp appartenez-vous?",
+        "template_en": "📈 SMBs that automate:\n\n→ +37% email revenue (Klaviyo 2024)\n→ 10-15h/week saved\n→ Average 42:1 ROI on email marketing\n\nYet 67% of e-commerce still do everything manually.\n\nWhich camp are you in?",
+        "sources": ["Klaviyo Benchmarks 2024", "Litmus State of Email 2024"],
+        "hashtags": ["#stats", "#ecommerce", "#automation", "#email"]
+      },
+      {
+        "type": "how_to",
+        "title_fr": "Comment configurer un Welcome Flow en 30 minutes",
+        "title_en": "How to Set Up a Welcome Flow in 30 Minutes",
+        "template_fr": "Le Welcome Flow genere 50% de vos revenus email.\n\nVoici comment le configurer:\n\n1️⃣ Email 1 (J+0): Bienvenue + code promo\n2️⃣ Email 2 (J+2): Histoire de marque\n3️⃣ Email 3 (J+5): Best-sellers\n4️⃣ Email 4 (J+7): UGC/Reviews\n5️⃣ Email 5 (J+10): Urgence promo\n\n🎯 Open rate cible: >50%\n🎯 Click rate cible: >5%",
+        "template_en": "The Welcome Flow generates 50% of your email revenue.\n\nHere's how to set it up:\n\n1️⃣ Email 1 (D+0): Welcome + promo code\n2️⃣ Email 2 (D+2): Brand story\n3️⃣ Email 3 (D+5): Best-sellers\n4️⃣ Email 4 (D+7): UGC/Reviews\n5️⃣ Email 5 (D+10): Promo urgency\n\n🎯 Target open rate: >50%\n🎯 Target click rate: >5%",
+        "hashtags": ["#howto", "#emailmarketing", "#klaviyo", "#ecommerce"]
+      }
+    ],
+    "schedule": {
+      "frequency": "weekly",
+      "preferred_days": ["tuesday", "thursday"],
+      "preferred_times": ["09:00", "14:00"],
+      "timezone": "Europe/Paris"
+    }
+  },
+
+  "targetAudience": {
+    "titles": [
+      "E-commerce Manager",
+      "Digital Marketing Manager",
+      "CMO",
+      "Founder",
+      "CEO",
+      "Head of E-commerce",
+      "Marketing Director",
+      "Growth Manager"
+    ],
+    "industries": [
+      "E-commerce",
+      "Retail",
+      "Fashion",
+      "Beauty",
+      "Consumer Goods",
+      "DTC Brands"
+    ],
+    "companySize": "11-200",
+    "regions": {
+      "priority_1": ["Morocco", "France", "Belgium", "Switzerland", "Canada"],
+      "priority_2": ["USA", "UK", "Germany", "Spain", "Italy"],
+      "priority_3": ["Rest of EU", "MENA"]
+    }
+  },
+
+  "bestPractices": {
+    "connectionRequestRules": [
+      "Personalize with company/industry mention",
+      "No selling in first message",
+      "Keep under 300 characters",
+      "Research profile before connecting"
+    ],
+    "postRules": [
+      "Lead with value, not pitch",
+      "Use numbers and stats",
+      "Include clear CTA at end",
+      "Max 3-5 hashtags",
+      "Post consistently same days/times"
+    ],
+    "responseTime": "< 24 hours",
+    "weeklyGoals": {
+      "connectionRequests": 20,
+      "posts": 2,
+      "comments": 10,
+      "directMessages": 5
+    }
+  }
+}
