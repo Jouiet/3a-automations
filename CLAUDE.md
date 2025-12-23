@@ -30,7 +30,7 @@
 | GA4 | G-87F6FDJG45 | ✅ |
 | GTM | GTM-WLVJQC3M | ✅ |
 
-### Session 83 Completée - ULTRA FORENSIC AUDIT + FACTUALITY FIX
+### Session 83 Completée - ULTRA FORENSIC AUDIT + KB & PROMPTS OPTIMIZATION
 ```
 ULTRA FORENSIC AUDIT (20 categories):
 ├── Initial scan: 133 issues found
@@ -38,7 +38,7 @@ ULTRA FORENSIC AUDIT (20 categories):
 ├── Automation count: ALL synced to 77
 └── MCP count: Corrected 12 → 9 (factual)
 
-ISSUES FIXED:
+ISSUES FIXED (Part 1 - Frontend):
 ├── ✅ 43 automation count mismatches (72/74/75→77)
 ├── ✅ 13 duplicate GA4 scripts removed
 ├── ✅ 28 pages MCP count corrected (12→9)
@@ -49,25 +49,30 @@ ISSUES FIXED:
 ├── ✅ 16 logo paths normalized (../logo.webp → /logo.webp)
 └── ✅ SMB page B2B link fixed (../en/ → /en/)
 
-MCP VERIFICATION (FACTUAL):
-├── ✅ chrome-devtools: functional
-├── ✅ playwright: functional
-├── ✅ gemini: functional (API key)
-├── ✅ github: functional (token)
-├── ✅ hostinger: functional (token)
-├── ✅ klaviyo: functional (API key)
-├── ✅ google-analytics: functional (SA)
-├── ✅ google-sheets: functional (SA)
-├── ✅ apify: functional (token)
-├── ❌ shopify: PLACEHOLDER
-└── ❌ n8n: PLACEHOLDER
-TOTAL: 9 functional MCPs
+KNOWLEDGE BASE OPTIMIZATION (Part 2):
+├── ✅ knowledge-base.js: 72→77 automations, +WhatsApp +VoiceAI categories
+├── ✅ knowledge.json: Regenerated (77 automations, 10 categories)
+├── ✅ voice-widget.js: SYSTEM_PROMPT rewritten (77 automations, 9 MCPs)
+├── ✅ voice-widget-en.js: Updated automation count + categories
+└── ✅ sync-knowledge-base.cjs: Fixed Growth price 1490€→1399€
 
-SCRIPTS CREATED:
-├── scripts/session83-ultra-forensic-audit.cjs (20 categories)
-├── scripts/session83-fix-all-issues.cjs
-├── scripts/session83-fix-mcp-count.cjs
-└── scripts/session83-fix-logo-paths.cjs
+PROMPTS OPTIMIZATION (2025 Best Practices):
+├── ✅ prompts.js: Complete rewrite following official Google docs
+├── ✅ Gemini 3 Pro: thinking_level param, temperature 1.0 (mandatory), XML tags
+├── ✅ Imagen 4: Narrative descriptions, lens specs (85mm f/2.8), 14 ref max
+├── ✅ Veo 3: 100-200 words optimal, subject+action+setting+specs+style, "(no subtitles)"
+├── ✅ Added GEMINI_CONFIG, IMAGEN_CONFIG, VEO_CONFIG objects
+└── Sources: ai.google.dev/gemini-api/docs/gemini-3, deepmind.google/models/veo/prompt-guide/
+
+MCP VERIFICATION (FACTUAL):
+├── ✅ chrome-devtools, playwright, gemini, github, hostinger
+├── ✅ klaviyo, google-analytics, google-sheets, apify
+├── ❌ shopify: PLACEHOLDER | ❌ n8n: PLACEHOLDER
+└── TOTAL: 9 functional MCPs
+
+COMMITS:
+├── 4ffefd6 fix(session83): Ultra Forensic Frontend Audit - 133 issues fixed
+└── afac51e fix(session83): Knowledge Base + Prompts optimization for 2025
 ```
 
 ### Session 82 Completée - FORENSIC FRONTEND AUDIT
@@ -299,17 +304,27 @@ git push origin main
 
 ## DERNIERE SESSION (83 - 23/12/2025)
 
-**Ultra Forensic Audit:**
+**Part 1 - Ultra Forensic Audit:**
 - 133 issues detectes → 0 critical/high apres corrections
 - Automation count: 28 pages synchronisees a 77
 - MCP count: 28 pages corrigees (12 → 9 factuel)
 - Duplicate GA4 scripts: 13 retires
 - Meta descriptions: apostrophes francaises corrigees
 
+**Part 2 - Knowledge Base & Prompts:**
+- knowledge-base.js + knowledge.json: 72→77 automations
+- voice-widget.js/en.js: SYSTEM_PROMPT reecrit avec donnees exactes
+- prompts.js: Reecrit avec best practices 2025 (Gemini 3 Pro, Imagen 4, Veo 3)
+- sync-knowledge-base.cjs: Prix Growth corrige 1490€→1399€
+
 **Scripts crees:**
 - scripts/session83-ultra-forensic-audit.cjs (20 categories)
 - scripts/session83-fix-all-issues.cjs
 - scripts/session83-fix-mcp-count.cjs
+
+**Commits:**
+- 4ffefd6 fix(session83): Ultra Forensic Frontend Audit
+- afac51e fix(session83): Knowledge Base + Prompts optimization for 2025
 
 **Audit Status:** 0 CRITICAL, 0 HIGH - PASSED
 

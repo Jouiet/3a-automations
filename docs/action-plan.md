@@ -4,52 +4,53 @@
 
 ---
 
-## ✅ SESSION 83 COMPLETE: ULTRA FORENSIC FRONTEND AUDIT (23/12/2025)
+## ✅ SESSION 83 COMPLETE: ULTRA FORENSIC + KB & PROMPTS (23/12/2025)
 
+### Part 1: Ultra Forensic Frontend Audit
 ```
 ULTRA FORENSIC AUDIT (20 CATEGORIES):
 ├── 1. Automation count consistency
 ├── 2. Meta descriptions (120-160 chars)
 ├── 3. Schema.org markup counts
-├── 4. Title tags (30-65 chars)
-├── 5. OG tags validation
-├── 6. Twitter cards validation
-├── 7. CTA analysis
-├── 8. Image alt tags
-├── 9. Hreflang tags
-├── 10. Value proposition keywords
-├── 11. Canonical URLs
-├── 12. Duplicate scripts detection
-├── 13. Heading hierarchy (H1→H2→H3)
-├── 14. Accessibility attributes
-├── 15. Lang attributes
-├── 16. MCP count claims (FACTUALITY)
-├── 17. Client count claims
-├── 18. Form validation
-├── 19. Robots meta tags
-└── 20. Viewport meta tags
+├── 4-20. [Title, OG, Twitter, CTA, Alt, Hreflang, etc.]
 
 ISSUES FIXED (133 total → 0 CRITICAL, 0 HIGH):
 ├── ✅ 43 automation count mismatches (72/74/75/90/150 → 77)
 ├── ✅ 28 MCP count false claims (12 → 9 functional verified)
 ├── ✅ 13 duplicate GA4 scripts removed
-├── ✅ Schema.org counts fixed
-├── ✅ Twitter:image tags added
-├── ✅ Meta descriptions regex fixed (French apostrophes)
-├── ✅ 16 logo paths normalized (../logo.webp → /logo.webp)
-└── ✅ View B2B Automations link fixed (../en/ → /en/)
+├── ✅ Schema.org, Twitter:image, Meta descriptions fixed
+├── ✅ 16 logo paths normalized
+└── ✅ View B2B Automations link fixed
+```
 
-MCPs VÉRIFIÉS FONCTIONNELS (9/9):
-├── chrome-devtools, playwright, gemini, github
-├── hostinger, klaviyo, google-analytics
-├── google-sheets, apify
-└── ❌ shopify, n8n = PLACEHOLDERS (not counted)
+### Part 2: Knowledge Base & Prompts Optimization
+```
+KNOWLEDGE BASE FIXED:
+├── ✅ knowledge-base.js: 72→77 automations, +WhatsApp +VoiceAI categories
+├── ✅ knowledge.json: Regenerated (77 automations, 10 categories)
+├── ✅ voice-widget.js: SYSTEM_PROMPT rewritten (77 autos, 9 MCPs)
+├── ✅ voice-widget-en.js: Updated count + all 10 categories
+└── ✅ sync-knowledge-base.cjs: Fixed Growth price 1490€→1399€
 
-SCRIPTS CREATED:
-├── scripts/session83-ultra-forensic-audit.cjs (20 categories)
-├── scripts/session83-fix-all-issues.cjs
-├── scripts/session83-fix-mcp-count.cjs
-└── scripts/session83-fix-logo-paths.cjs
+PROMPTS OPTIMIZATION (2025 Best Practices - Official Google Docs):
+├── ✅ Gemini 3 Pro: thinking_level, temperature=1.0, XML tags
+├── ✅ Imagen 4: Narrative descriptions, 85mm f/2.8, 14 ref max
+├── ✅ Veo 3: 100-200 words, subject+action+setting+specs+style
+├── ✅ Added GEMINI_CONFIG, IMAGEN_CONFIG, VEO_CONFIG
+└── Sources: ai.google.dev/gemini-api/docs/gemini-3, deepmind.google/models/veo/
+```
+
+### Commits Session 83
+```
+├── 4ffefd6 fix(session83): Ultra Forensic Frontend Audit - 133 issues fixed
+└── afac51e fix(session83): Knowledge Base + Prompts optimization for 2025
+```
+
+### MCPs VÉRIFIÉS FONCTIONNELS (9/9):
+```
+✅ chrome-devtools, playwright, gemini, github, hostinger
+✅ klaviyo, google-analytics, google-sheets, apify
+❌ shopify, n8n = PLACEHOLDERS (not counted)
 ```
 
 ---

@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 3.7 - Mise à jour 23 Décembre 2025 (Session 83: Ultra Forensic Audit)
+## Version 3.8 - Mise à jour 23 Décembre 2025 (Session 83: KB & Prompts Optimization)
 ## Basé sur données réelles confirmées
 
 ---
@@ -60,12 +60,19 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │                                                                              │
 │  SCRIPTS DISPONIBLES                                                        │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  Total: 77 automations client-facing (vérifié 23/12/2025 Session 82)        │
-│        (Registry v1.5.0 - synced across HTML + llms.txt)                    │
+│  Total: 77 automations client-facing (vérifié 23/12/2025 Session 83)        │
+│        (Registry v1.5.0 - synced across HTML + llms.txt + Knowledge Base)   │
 │  ├── Lead Gen: 20 | Shopify: 13 | SEO: 9 | Email: 9                         │
 │  ├── Analytics: 9 | Content: 10 | AI Avatar: 2 | CinematicAds: 4            │
 │  ├── WhatsApp: 2 | Voice AI: 1                                              │
 │  └── 23 outils internes EXCLUS (test-, verify-, check-)                     │
+│                                                                              │
+│  CINEMATICADS AI PROMPTS (Session 83 - Optimisés 2025)                      │
+│  ════════════════════════════════════════════════════════════════════════   │
+│  ✅ Gemini 3 Pro: thinking_level, temperature=1.0 (obligatoire), XML tags   │
+│  ✅ Imagen 4: Descriptions narratives, specs objectif 85mm f/2.8            │
+│  ✅ Veo 3: 100-200 mots, structure subject+action+setting+specs+style       │
+│  Sources: ai.google.dev/gemini-api/docs, deepmind.google/models/veo/        │
 │                                                                              │
 │  MCPs CONFIGURÉS (Audit Session 24 - 19/12/2025)                            │
 │  ════════════════════════════════════════════════════════════════════════   │
