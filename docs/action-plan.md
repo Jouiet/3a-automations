@@ -1,6 +1,28 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 61)
+## Document Exécutable - Décembre 2025 (màj Session 75)
 ## Objectif: Premier client payant en 4 semaines
+
+---
+
+## ✅ SESSION 75 COMPLETE: AI AVATAR + AUTOMATION COUNT FIX (23/12/2025)
+
+```
+NOUVEAUX WORKFLOWS AI AVATAR:
+├── ✅ ai-avatar-generator.json (Imagen 3 + Gemini API)
+├── ✅ ai-talking-video.json (ElevenLabs TTS + fal.ai Kling)
+└── ✅ Catégorie "AI Avatar" ajoutée au registry
+
+CORRECTIONS FACTUALITÉ:
+├── ✅ 72 automations (était 66/70 incohérent)
+├── ✅ 52+ fichiers corrigés (HTML, JS, JSON, MD)
+├── ✅ Inner text des compteurs corrigé (data-count + texte visible)
+└── ✅ Registry v1.2.0 = source de vérité unique
+
+AUDITS PASSÉS:
+├── ✅ SEO/AEO: 0 issues (PASSED)
+├── ✅ WCAG/RGAA: 0 issues (PASSED)
+└── ✅ 28 pages HTTP 200 (14 FR + 14 EN)
+```
 
 ---
 
@@ -36,19 +58,21 @@ MARCHÉ VOICE AI (Sources vérifiées):
 
 ---
 
-## 🔴 PROCHAINES ACTIONS (Session 62+)
+## 🔴 PROCHAINES ACTIONS (Session 76+)
 
 ```
 CRITIQUE (Bloquant pour production):
 ├── ✅ Check dispo calendrier temps réel (FAIT - GA4 events ajoutés)
 ├── ✅ Booking 100% flexible (FAIT - pas de templates hardcodés)
+├── ✅ Audits SEO/A11y 100% clean (FAIT Session 75)
 ├── ❌ Fallback texte-only Firefox/Safari (+30% coverage)
 └── ❌ WhatsApp Business API integration
 
 HIGH PRIORITY:
 ├── ❌ Rappels WhatsApp 24h + 1h avant RDV (-30% no-shows)
 ├── ❌ Grok Voice integration (téléphone, $0.05/min) - requires $5 credits
-└── ❌ Test booking flow end-to-end (voice → calendar → confirmation)
+├── ❌ Test booking flow end-to-end (voice → calendar → confirmation)
+└── ❌ AI Avatar production workflow test
 
 MEDIUM:
 ├── ❌ Détection timezone auto
@@ -63,7 +87,7 @@ ACQUISITION CLIENTS:
 
 ---
 
-## 🟡 ALERTES (Session 61 - 21/12/2025)
+## 🟡 ALERTES (Session 75 - 23/12/2025)
 
 ```
 SÉCURITÉ:
@@ -73,13 +97,14 @@ SÉCURITÉ:
 PERFORMANCE SITE:
 ├── Lighthouse Performance: 70% 🟡
 ├── LCP: 3.8s 🟡 | TBT: 450ms 🟡 | CLS: 0 ✅
-└── ✅ GTM lazy loading appliqué (24 pages)
+└── ✅ GTM lazy loading appliqué (28 pages)
 
-FACTUALITÉ (Corrigée Session 61):
-├── ✅ Claims "66" automatisations (corrigé de 75 pollué)
-├── ✅ Segmentation stricte (23 outils internes exclus)
-├── ✅ Voice AI Booking = BONUS dans tous les packs
-└── ✅ Booking 100% flexible (templates hardcodés supprimés)
+FACTUALITÉ (Corrigée Session 75):
+├── ✅ 72 automations (était 66/70 incohérent)
+├── ✅ Registry v1.2.0 = source unique de vérité
+├── ✅ AI Avatar workflows ajoutés (2 nouveaux)
+├── ✅ Audits SEO/AEO et WCAG/RGAA = 0 issues
+└── ✅ 52+ fichiers corrigés pour cohérence
 ```
 
 ---
