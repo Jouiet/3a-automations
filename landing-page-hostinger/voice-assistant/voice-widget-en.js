@@ -678,15 +678,33 @@
     return null;
   }
 
+  // Get client timezone for booking
+  function getClientTimezone() {
+    // Priority 1: Use GeoLocale if available
+    if (window.GeoLocale && typeof window.GeoLocale.getTimezone === 'function') {
+      return window.GeoLocale.getTimezone();
+    }
+    // Priority 2: Direct detection
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      return { iana: tz, offset: new Date().getTimezoneOffset() };
+    } catch (e) {
+      return { iana: null, offset: new Date().getTimezoneOffset() };
+    }
+  }
+
   async function processBookingConfirmation() {
     const booking = conversationContext.bookingFlow;
+    const clientTz = getClientTimezone();
+
     const result = await submitBooking({
       name: booking.data.name,
       email: booking.data.email,
       datetime: booking.data.datetime,
       service: booking.data.service,
       phone: '',
-      notes: 'Booking via voice assistant'
+      notes: 'Booking via voice assistant',
+      timezone: clientTz.iana || `UTC${clientTz.offset > 0 ? '-' : '+'}${Math.abs(clientTz.offset / 60)}`
     });
 
     booking.active = false;
