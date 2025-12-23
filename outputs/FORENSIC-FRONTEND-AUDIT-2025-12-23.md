@@ -10,20 +10,20 @@
 | Métrique | Valeur |
 |----------|--------|
 | Pages analysées | 28 |
-| Total issues | 309 |
+| Total issues | 295 |
 | CRITICAL | 0 |
 | HIGH | 0 |
-| MEDIUM | 19 |
-| LOW | 290 |
+| MEDIUM | 7 |
+| LOW | 288 |
 
 ---
 
-# SECTION 1: SEO (23 issues)
+# SECTION 1: SEO (21 issues)
 
 
-## SEO (23 issues)
+## SEO (21 issues)
 
-### 🟢 LOW (23)
+### 🟢 LOW (21)
 
 - **404.html**: Missing Twitter Card meta tags
   - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
@@ -67,10 +67,6 @@
   - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
 - **services/pme.html**: Missing Twitter Card meta tags
   - *Fix:* Add twitter:card, twitter:title, twitter:description for Twitter sharing
-- **sitemap.xml**: Page not in sitemap: en/index
-  - *Fix:* Add all indexable pages to sitemap.xml
-- **sitemap.xml**: Page not in sitemap: index
-  - *Fix:* Add all indexable pages to sitemap.xml
 
 
 ## AEO (12 issues)
@@ -106,17 +102,13 @@
   - *Fix:* Consider creating llms-full.txt with complete content for comprehensive AI training
 
 
-## MARKETING (4 issues)
+## MARKETING (2 issues)
 
-### 🟡 MEDIUM (4)
+### 🟡 MEDIUM (2)
 
 - **en/services/free-audit.html**: Limited power words (2 found)
   - *Fix:* Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
-- **en/services/smb.html**: Weak value proposition
-  - *Fix:* Highlight time savings, ROI, growth benefits more clearly
-- **services/audit-gratuit.html**: Limited power words (1 found)
-  - *Fix:* Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
-- **services/pme.html**: Limited power words (1 found)
+- **services/audit-gratuit.html**: Limited power words (2 found)
   - *Fix:* Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
 
 
@@ -124,31 +116,9 @@
 
 ✅ Aucun problème détecté
 
-## SCHEMA (10 issues)
+## SCHEMA (0 issues)
 
-### 🟡 MEDIUM (10)
-
-- **en/pricing.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **en/services/ecommerce.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **en/services/flywheel-360.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **en/services/free-audit.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **en/services/smb.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **pricing.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **services/audit-gratuit.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **services/ecommerce.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **services/flywheel-360.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-- **services/pme.html**: Missing FAQPage schema
-  - *Fix:* Add FAQPage schema for better AI visibility and rich snippets
-
+✅ Aucun problème détecté
 
 ## META (0 issues)
 
@@ -743,9 +713,7 @@ Les crawlers AI suivants doivent être autorisés pour maximiser la visibilité:
 4. legal/mentions-legales.html: Add concise answer paragraphs (50-200 chars) for AI extraction
 5. services/flywheel-360.html: Add concise answer paragraphs (50-200 chars) for AI extraction
 6. en/services/free-audit.html: Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
-7. en/services/smb.html: Highlight time savings, ROI, growth benefits more clearly
-8. services/audit-gratuit.html: Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
-9. services/pme.html: Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
+7. services/audit-gratuit.html: Add urgency/value/trust words: gratuit, maintenant, garanti, exclusif
 
 ---
 
@@ -776,4 +744,4 @@ Les crawlers AI suivants doivent être autorisés pour maximiser la visibilité:
 ---
 
 *Rapport généré automatiquement par forensic-frontend-complete.cjs*
-*Date: 2025-12-23T01:01:41.720Z*
+*Date: 2025-12-23T01:07:12.364Z*
