@@ -1,0 +1,116 @@
+{
+  "name": "Blog Article Generator",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start",
+      "name": "Start",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "topic": "={{ $json.topic }}",
+        "language": "={{ $json.language }}",
+        "targetKeywords": "={{ $json.keywords }}"
+      },
+      "id": "set-params",
+      "name": "Set Article Params",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "model": "gemini-2.0-flash-exp",
+        "prompt": "Write a comprehensive blog article about: {{ $json.topic }}\n\nLanguage: {{ $json.language }}\nTarget Keywords: {{ $json.keywords }}\n\nRequirements:\n- 1500-2000 words\n- Include H2 and H3 headings\n- Include actionable tips\n- Include statistics and data\n- SEO optimized for the target keywords\n- Professional tone\n- Include a CTA at the end\n\nOutput format: HTML with proper heading tags (h2, h3), paragraphs (p), lists (ul, li), and emphasis (strong).",
+        "temperature": 0.7,
+        "maxOutputTokens": 4096
+      },
+      "id": "gemini-generate",
+      "name": "Generate with Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [640, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Gemini API Key"
+        }
+      },
+      "requestMethod": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent"
+    },
+    {
+      "parameters": {
+        "content": "={{ $json.candidates[0].content.parts[0].text }}"
+      },
+      "id": "extract-content",
+      "name": "Extract Content",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [840, 300]
+    },
+    {
+      "parameters": {
+        "title": "={{ $json.topic }}",
+        "slug": "={{ $json.topic.toLowerCase().replace(/[^a-z0-9]+/g, '-') }}",
+        "content": "={{ $json.content }}",
+        "language": "={{ $json.language }}",
+        "publishedDate": "={{ new Date().toISOString().split('T')[0] }}"
+      },
+      "id": "format-output",
+      "name": "Format Output",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [1040, 300]
+    },
+    {
+      "parameters": {
+        "filePath": "/blog/{{ $json.slug }}.html",
+        "options": {}
+      },
+      "id": "save-file",
+      "name": "Save to File",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [1240, 300]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [{"node": "Set Article Params", "type": "main", "index": 0}]
+      ]
+    },
+    "Set Article Params": {
+      "main": [
+        [{"node": "Generate with Gemini", "type": "main", "index": 0}]
+      ]
+    },
+    "Generate with Gemini": {
+      "main": [
+        [{"node": "Extract Content", "type": "main", "index": 0}]
+      ]
+    },
+    "Extract Content": {
+      "main": [
+        [{"node": "Format Output", "type": "main", "index": 0}]
+      ]
+    },
+    "Format Output": {
+      "main": [
+        [{"node": "Save to File", "type": "main", "index": 0}]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "description": "Generate SEO-optimized blog articles using Gemini AI",
+    "version": "1.0.0",
+    "author": "3A Automation",
+    "created": "2025-12-23"
+  }
+}
