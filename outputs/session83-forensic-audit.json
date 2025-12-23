@@ -1,0 +1,187 @@
+{
+  "date": "2025-12-23T20:11:13.264Z",
+  "correctAutomationCount": 77,
+  "stats": {
+    "pagesScanned": 28,
+    "totalIssues": 25,
+    "automationCountMismatches": 0,
+    "metaIssues": 0,
+    "schemaIssues": 0,
+    "hreflangIssues": 0,
+    "aeoIssues": 0,
+    "copyIssues": 0,
+    "ctaIssues": 5,
+    "imageIssues": 0,
+    "duplicateScripts": 0,
+    "brokenLinks": 0,
+    "accessibilityIssues": 0
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 7,
+    "low": 6,
+    "info": 12,
+    "total": 25
+  },
+  "issues": {
+    "critical": [],
+    "high": [],
+    "medium": [
+      {
+        "category": "CTA",
+        "file": "/booking.html",
+        "description": "Only 1 CTA button(s) found - may limit conversion",
+        "fix": "Consider adding more strategic CTAs"
+      },
+      {
+        "category": "FORMS",
+        "file": "/booking.html",
+        "description": "Form missing action attribute",
+        "fix": "Add action URL to form"
+      },
+      {
+        "category": "CTA",
+        "file": "/en/booking.html",
+        "description": "Only 1 CTA button(s) found - may limit conversion",
+        "fix": "Consider adding more strategic CTAs"
+      },
+      {
+        "category": "FORMS",
+        "file": "/en/booking.html",
+        "description": "Form missing action attribute",
+        "fix": "Add action URL to form"
+      },
+      {
+        "category": "CTA",
+        "file": "/en/legal/privacy.html",
+        "description": "Only 1 CTA button(s) found - may limit conversion",
+        "fix": "Consider adding more strategic CTAs"
+      },
+      {
+        "category": "CTA",
+        "file": "/en/legal/terms.html",
+        "description": "Only 1 CTA button(s) found - may limit conversion",
+        "fix": "Consider adding more strategic CTAs"
+      },
+      {
+        "category": "CTA",
+        "file": "/legal/mentions-legales.html",
+        "description": "Only 1 CTA button(s) found - may limit conversion",
+        "fix": "Consider adding more strategic CTAs"
+      }
+    ],
+    "low": [
+      {
+        "category": "FORMS",
+        "file": "/booking.html",
+        "description": "No spam protection detected on forms",
+        "fix": "Consider adding honeypot field or reCAPTCHA"
+      },
+      {
+        "category": "FORMS",
+        "file": "/contact.html",
+        "description": "No spam protection detected on forms",
+        "fix": "Consider adding honeypot field or reCAPTCHA"
+      },
+      {
+        "category": "FORMS",
+        "file": "/en/booking.html",
+        "description": "No spam protection detected on forms",
+        "fix": "Consider adding honeypot field or reCAPTCHA"
+      },
+      {
+        "category": "FORMS",
+        "file": "/en/contact.html",
+        "description": "No spam protection detected on forms",
+        "fix": "Consider adding honeypot field or reCAPTCHA"
+      },
+      {
+        "category": "FORMS",
+        "file": "/en/index.html",
+        "description": "No spam protection detected on forms",
+        "fix": "Consider adding honeypot field or reCAPTCHA"
+      },
+      {
+        "category": "FORMS",
+        "file": "/index.html",
+        "description": "No spam protection detected on forms",
+        "fix": "Consider adding honeypot field or reCAPTCHA"
+      }
+    ],
+    "info": [
+      {
+        "category": "ROBOTS_META",
+        "file": "/automations.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/booking.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/en/automations.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/en/booking.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/en/pricing.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/en/services/ecommerce.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/en/services/free-audit.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/en/services/smb.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/pricing.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/services/audit-gratuit.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/services/ecommerce.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      },
+      {
+        "category": "ROBOTS_META",
+        "file": "/services/pme.html",
+        "description": "No robots meta tag (defaults to index, follow)",
+        "fix": "Consider adding explicit robots meta"
+      }
+    ]
+  }
+}

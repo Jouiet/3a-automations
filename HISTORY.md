@@ -1,5 +1,18 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 83 (23/12/2025) - ULTRA FORENSIC FRONTEND AUDIT
+
+| Session | Modifications |
+|---------|---------------|
+| **83** | **Ultra Forensic Audit (20 categories)**: 133 issues found → 0 CRITICAL/HIGH, 43 automation counts fixed (72/74/75→77), 28 MCP counts corrected (12→9 factual), 13 duplicate GA4 removed, 16 logo paths normalized, SMB B2B link fixed, meta descriptions regex fixed (French apostrophes), 4 scripts created |
+
+## Sessions 81-82 (23/12/2025) - Forensic Frontend + 77 Automations
+
+| Session | Modifications |
+|---------|---------------|
+| **82** | **Forensic Frontend Audit**: llms.txt 72→77, privacy/terms pages fixed, 10-category audit script, AEO status verified |
+| **81** | **77 Automations Sync**: 16 HTML files updated (75→77), meta descriptions, JSON-LD, registry v1.5.0 |
+
 ## Sessions 69-74 (23/12/2025) - Audit 100% Clean + Performance
 
 | Session | Modifications |
