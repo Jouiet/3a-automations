@@ -18,7 +18,7 @@
 |----------|--------|
 | Site | https://3a-automation.com LIVE |
 | Pages | 28 (14 FR + 14 EN) - HTTP 200 |
-| Automations | 70 (Lead Gen 18, Shopify 13, SEO 9, Email 9, Analytics 9, Content 8, CinematicAds 4) |
+| Automations | 72 (Lead Gen 18, Shopify 13, SEO 9, Email 9, Analytics 9, Content 10, AI Avatar 2, CinematicAds 4) |
 | Audit SEO/AEO | 0 issues PASSED |
 | Audit WCAG/RGAA | 0 issues PASSED |
 | Lighthouse Perf | ~70% |
@@ -165,7 +165,7 @@ git push origin main
 **Optimisations:**
 - CLAUDE.md reduit de 53.1k a 5.1k chars (-90%)
 - HISTORY.md mis a jour (Sessions 0-74)
-- Footer automation count: 66 -> 70 (27 fichiers)
+- Footer automation count: 66 -> 72 (27 fichiers)
 - HTML malformed attributes corriges (43 fixes)
 - en/404.html: duplicate scripts retires
 
