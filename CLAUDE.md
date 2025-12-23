@@ -1,6 +1,49 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 9.4 | Dernière mise à jour: 2025-12-23 (Session 63 - CinematicAds Forensic + Booking Test)
+## Version: 9.5 | Dernière mise à jour: 2025-12-23 (Session 64 - Links Fix + STATE OF THE ART Models)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
+
+---
+
+## SESSION 64 COMPLÉTÉE ✅ (23/12/2025 - Links Fix + STATE OF THE ART Models)
+
+### Correction Liens Cassés (223 occurrences)
+- **Problème:** Pattern `../en/` dans pages EN créait doubles chemins `/en/en/*` → 404
+- **Fichiers affectés:** 13 fichiers EN
+- **Solution:** Remplacer `../en/` par `/en/` (chemins absolus)
+- **Vérification:** 28/28 pages HTTP 200, 0 liens cassés
+
+### STATE OF THE ART Models (Vérifiés Factuellement)
+```
+Vertex AI (Google Cloud):
+├── gemini-3-pro-preview       (#1 LMArena 1501 Elo)
+├── imagen-4.0-generate-001    ($0.04/img, 2K)
+├── imagen-4.0-ultra-generate-001 ($0.06/img, 2816x1536)
+├── imagen-4.0-fast-generate-001  ($0.02/img, 150 req/min)
+└── veo-3.1-generate-preview   (8s 1080p, native audio)
+
+xAI Grok:
+├── grok-4-1-fast-reasoning    (2M context, agent tools)
+├── grok-4-1-fast-non-reasoning (instant mode)
+├── grok-2-image-1212          ($0.07/img)
+└── grok-2-audio               ($0.05/min)
+```
+
+### PlaywrightClient Architecture
+```
+PlaywrightClient.js (275 lignes) ✅
+├── PRIMARY: Playwright (npm package)
+└── FALLBACK: Puppeteer (Chrome DevTools Protocol)
+    └── Remplace FirecrawlClient (gratuit vs $19/mois)
+```
+
+### Headers/Footers Standardisés
+- **28/28 pages:** Logo ✅, Nav ✅, Lang-switcher ✅, Footer ✅
+
+### Commits Session 64
+```
+aa367ef fix(models): STATE OF THE ART - Correct model IDs verified factually
+9891e5f fix(links): Correct 223 broken "../en/" links causing /en/en/ 404s
+```
 
 ---
 
