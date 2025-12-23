@@ -1,14 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "lastUpdated": "2025-12-23",
-  "totalCount": 75,
+  "totalCount": 77,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
       "name_fr": "Lead Generation & Acquisition",
       "name_en": "Lead Generation & Acquisition",
-      "count": 18
+      "count": 20
     },
     "seo": {
       "name_fr": "SEO & Contenu",
@@ -956,6 +956,30 @@
       "frequency_en": "Inbound calls",
       "benefit_fr": "Réservation par téléphone IA ($0.05/min)",
       "benefit_en": "AI phone booking ($0.05/min)"
+    },
+    {
+      "id": "linkedin-lead-scraper",
+      "name_fr": "LinkedIn Lead Scraper",
+      "name_en": "LinkedIn Lead Scraper",
+      "category": "lead-gen",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/linkedin-lead-scraper.json",
+      "frequency_fr": "Toutes les 6 heures",
+      "frequency_en": "Every 6 hours",
+      "benefit_fr": "+400 leads/jour avec scoring AI",
+      "benefit_en": "+400 leads/day with AI scoring"
+    },
+    {
+      "id": "email-outreach-sequence",
+      "name_fr": "Email Outreach Sequence",
+      "name_en": "Email Outreach Sequence",
+      "category": "lead-gen",
+      "type": "n8n-workflow",
+      "script": "agency/n8n-workflows/email-outreach-sequence.json",
+      "frequency_fr": "Déclenché",
+      "frequency_en": "Triggered",
+      "benefit_fr": "Séquence 3 emails personnalisée",
+      "benefit_en": "3-email personalized sequence"
     }
   ],
   "types": {

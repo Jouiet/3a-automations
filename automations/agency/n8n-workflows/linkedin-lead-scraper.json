@@ -1,0 +1,346 @@
+{
+  "name": "LinkedIn Lead Scraper - Aggressive Outbound",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300],
+      "notes": "Run every 6 hours"
+    },
+    {
+      "parameters": {
+        "url": "https://api.apify.com/v2/acts/curious_coder~linkedin-profile-scraper/runs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.APIFY_API_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"searchUrl\": \"https://www.linkedin.com/search/results/people/?keywords=e-commerce%20manager&geoUrn=%5B%22105015875%22%2C%22105015875%22%5D&industry=%5B%2244%22%2C%2218%22%5D&companySize=%5B%22C%22%2C%22D%22%5D\",\n  \"maxProfiles\": 100,\n  \"includeContactInfo\": true,\n  \"proxy\": {\n    \"useApifyProxy\": true,\n    \"apifyProxyGroups\": [\"RESIDENTIAL\"]\n  }\n}",
+        "options": {}
+      },
+      "id": "apify-linkedin-scrape",
+      "name": "Apify LinkedIn Scraper",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300],
+      "notes": "Scrape LinkedIn profiles via Apify"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "url": "=https://api.apify.com/v2/actor-runs/{{ $json.data.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.APIFY_API_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "wait-apify-run",
+      "name": "Wait for Apify Run",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300],
+      "notes": "Poll until run completes"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.data.status }}",
+              "operation": "equals",
+              "value2": "SUCCEEDED"
+            }
+          ]
+        }
+      },
+      "id": "check-status",
+      "name": "Check Run Status",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "notes": "Check if scraping succeeded"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.apify.com/v2/datasets/{{ $json.data.defaultDatasetId }}/items",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.APIFY_API_TOKEN }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "get-results",
+      "name": "Get Scrape Results",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 200],
+      "notes": "Fetch scraped profiles"
+    },
+    {
+      "parameters": {
+        "jsCode": "// AI Lead Scoring\nconst profiles = $input.all();\nconst scoredLeads = [];\n\nfor (const item of profiles) {\n  const profile = item.json;\n  let score = 0;\n  \n  // Title scoring (+30 max)\n  const titleKeywords = ['e-commerce', 'ecommerce', 'marketing', 'digital', 'growth', 'cmo', 'ceo', 'founder'];\n  const title = (profile.headline || '').toLowerCase();\n  if (titleKeywords.some(k => title.includes(k))) score += 30;\n  \n  // Company size scoring (+20 max)\n  const companySize = profile.companySize || '';\n  if (companySize.includes('11-50') || companySize.includes('51-200')) score += 20;\n  \n  // Industry scoring (+20 max)\n  const industry = (profile.industry || '').toLowerCase();\n  const targetIndustries = ['retail', 'fashion', 'beauty', 'consumer', 'e-commerce'];\n  if (targetIndustries.some(i => industry.includes(i))) score += 20;\n  \n  // Location scoring (+15 max)\n  const location = (profile.location || '').toLowerCase();\n  if (location.includes('morocco') || location.includes('maroc') || location.includes('france')) score += 15;\n  \n  // Has email (+15)\n  if (profile.email) score += 15;\n  \n  // Categorize\n  let category = 'cold';\n  if (score >= 80) category = 'hot';\n  else if (score >= 50) category = 'warm';\n  \n  scoredLeads.push({\n    json: {\n      ...profile,\n      leadScore: score,\n      leadCategory: category,\n      scrapedAt: new Date().toISOString()\n    }\n  });\n}\n\n// Sort by score descending\nreturn scoredLeads.sort((a, b) => b.json.leadScore - a.json.leadScore);"
+      },
+      "id": "ai-lead-scoring",
+      "name": "AI Lead Scoring",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 200],
+      "notes": "Score leads 0-100"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.leadScore }}",
+              "operation": "largerEqual",
+              "value2": 50
+            }
+          ]
+        }
+      },
+      "id": "filter-qualified",
+      "name": "Filter Qualified Leads",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1560, 200],
+      "notes": "Only process warm/hot leads"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "{{ $env.GOOGLE_SHEET_LEADS_ID }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData"
+        },
+        "options": {}
+      },
+      "id": "save-to-sheets",
+      "name": "Save to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1780, 100],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "GOOGLE_SHEETS_CRED",
+          "name": "Google Sheets"
+        }
+      },
+      "notes": "Store qualified leads"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "listId": "{{ $env.KLAVIYO_LIST_LEADS }}",
+        "profileData": {
+          "email": "={{ $json.email }}",
+          "first_name": "={{ $json.firstName }}",
+          "last_name": "={{ $json.lastName }}",
+          "properties": {
+            "linkedin_url": "={{ $json.linkedinUrl }}",
+            "company": "={{ $json.company }}",
+            "title": "={{ $json.headline }}",
+            "lead_score": "={{ $json.leadScore }}",
+            "lead_category": "={{ $json.leadCategory }}",
+            "source": "linkedin_scraper"
+          }
+        }
+      },
+      "id": "sync-klaviyo",
+      "name": "Sync to Klaviyo",
+      "type": "n8n-nodes-base.klaviyo",
+      "typeVersion": 1,
+      "position": [1780, 300],
+      "credentials": {
+        "klaviyoApi": {
+          "id": "KLAVIYO_CRED",
+          "name": "Klaviyo API"
+        }
+      },
+      "notes": "Add to email sequence"
+    },
+    {
+      "parameters": {
+        "url": "{{ $env.DASHBOARD_WEBHOOK_URL }}/api/leads",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "webhook-dashboard",
+      "name": "Notify Dashboard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2000, 200],
+      "notes": "Update admin dashboard"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Apify LinkedIn Scraper",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify LinkedIn Scraper": {
+      "main": [
+        [
+          {
+            "node": "Wait for Apify Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for Apify Run": {
+      "main": [
+        [
+          {
+            "node": "Check Run Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Run Status": {
+      "main": [
+        [
+          {
+            "node": "Get Scrape Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Scrape Results": {
+      "main": [
+        [
+          {
+            "node": "AI Lead Scoring",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Lead Scoring": {
+      "main": [
+        [
+          {
+            "node": "Filter Qualified Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Qualified Leads": {
+      "main": [
+        [
+          {
+            "node": "Save to Google Sheets",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Sync to Klaviyo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Save to Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Notify Dashboard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "3a-automation"
+  },
+  "tags": [
+    {
+      "name": "lead-gen",
+      "id": "lead-gen"
+    },
+    {
+      "name": "linkedin",
+      "id": "linkedin"
+    },
+    {
+      "name": "apify",
+      "id": "apify"
+    }
+  ],
+  "documentation": {
+    "description": "Aggressive LinkedIn lead scraper with AI scoring",
+    "schedule": "Every 6 hours",
+    "output": "Qualified leads (score >= 50) to Sheets + Klaviyo",
+    "cost": "~$3/1000 profiles (Apify)",
+    "targetVolume": "100 profiles/run = 400/day = 2800/week"
+  }
+}
