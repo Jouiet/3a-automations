@@ -65,7 +65,7 @@ CRITIQUE (Bloquant pour production):
 ├── ✅ Check dispo calendrier temps réel (FAIT - GA4 events ajoutés)
 ├── ✅ Booking 100% flexible (FAIT - pas de templates hardcodés)
 ├── ✅ Audits SEO/A11y 100% clean (FAIT Session 75)
-├── ❌ Fallback texte-only Firefox/Safari (+30% coverage)
+├── ✅ Fallback texte-only Firefox/Safari (FAIT - détection + UI adaptée)
 └── ❌ WhatsApp Business API integration
 
 HIGH PRIORITY:
@@ -75,9 +75,9 @@ HIGH PRIORITY:
 └── ❌ AI Avatar production workflow test
 
 MEDIUM:
+├── ✅ Voice widget pulse animation (FAIT - pulse-glow + pulse-ring)
 ├── ❌ Détection timezone auto
-├── ❌ Flow reschedule/cancel
-└── ❌ Voice widget pulse animation (attire l'attention)
+└── ❌ Flow reschedule/cancel
 
 ACQUISITION CLIENTS:
 ├── ❌ Formulaire diagnostic (Google Forms → Klaviyo)
