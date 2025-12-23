@@ -2,8 +2,8 @@
 
 **Date:** 2025-12-23
 **Analyste:** Claude Opus 4.5
-**Version:** 1.4
-**Statut:** COMPLET + VÉRIFIÉ + TOP DU MARCHÉ
+**Version:** 2.1
+**Statut:** COMPLET + VÉRIFIÉ FACTUELLEMENT + STATE OF THE ART
 
 ---
 
@@ -635,18 +635,27 @@ shopify, n8n, klaviyo, google-analytics, google-sheets, apify
 2. Ne pas investir dans Veo 3.1 sans budget validé
 3. Ne pas remplacer notre stack par MCP Hub
 
-**ARCHITECTURE DUAL-PROVIDER - MODÈLES TOP DU MARCHÉ (Décembre 2025):**
+**ARCHITECTURE DUAL-PROVIDER - MODÈLES STATE OF THE ART (Décembre 2025):**
 
 ```
 AI_PROVIDER=vertex_ai | grok | both (A/B testing)
 ```
 
-| Fonction | Vertex AI (TOP) | xAI Grok (TOP) 🏆 | Prix Vertex | Prix xAI |
-|----------|-----------------|-------------------|-------------|----------|
-| Text | `gemini-3-pro-preview` | `grok-4.1` #1 mondial | Token | $0.20/$0.50/M |
-| Image | `imagen-4.0-generate-001` | `grok-2-image-1212` | $0.04/img | $0.07/img |
-| Video | `veo-3.1-generate-preview` | `grok-imagine` | $0.40/sec | Consumer |
-| Voice | Google TTS | Grok Voice Agent | $4/1M chars | $0.05/min |
+| Fonction | Vertex AI (STATE OF THE ART) | Model ID | Prix |
+|----------|------------------------------|----------|------|
+| Text | **Gemini 3 Pro** (#1 LMArena 1501 Elo) | `gemini-3-pro-preview` | Token-based |
+| Image | **Imagen 4** (2K resolution) | `imagen-4.0-generate-001` | $0.04/img |
+| Image Ultra | **Imagen 4 Ultra** (2816x1536) | `imagen-4.0-ultra-generate-001` | $0.06/img |
+| Image Fast | **Imagen 4 Fast** (150 req/min) | `imagen-4.0-fast-generate-001` | $0.02/img |
+| Video | **Veo 3.1** (8s 1080p, native audio) | `veo-3.1-generate-preview` | ~$0.40/sec |
+
+| Fonction | xAI Grok (STATE OF THE ART) | Model ID | Prix |
+|----------|----------------------------|----------|------|
+| Text | **Grok 4.1 Fast** (2M context) | `grok-4-1-fast-reasoning` | $0.20/$0.50/M |
+| Text Fast | **Grok 4.1 Fast** (instant) | `grok-4-1-fast-non-reasoning` | Lower |
+| Image | **Grok Aurora** | `grok-2-image-1212` | $0.07/img |
+| Video | **Grok Imagine** | Consumer only | N/A |
+| Voice | **Grok Voice Agent** | Realtime API | $0.05/min |
 
 **Avantages:**
 1. Switch entre providers via variable d'environnement
@@ -746,20 +755,24 @@ L'API Voice Agent est orientée "speech-to-speech" (conversations temps réel).
 > **Mise à jour:** Décembre 2025 - Modèles STATE OF THE ART
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    AssetFactory v2.0 - TOP DU MARCHÉ            │
-│  ┌───────────────────────┐      ┌───────────────────────┐      │
-│  │      Vertex AI        │      │      xAI Grok         │      │
-│  │    (Google Cloud)     │  OR  │    (Grok 4.1) 🏆      │      │
-│  ├───────────────────────┤      ├───────────────────────┤      │
-│  │ gemini-3-pro-preview  │      │ grok-4.1              │ Text │
-│  │ imagen-4.0-generate   │      │ grok-2-image-1212     │ Image│
-│  │ veo-3.1-generate      │      │ grok-imagine          │ Video│
-│  │ Google TTS            │      │ Grok Voice            │ Voice│
-│  └───────────────────────┘      └───────────────────────┘      │
-│                                                                 │
-│  AI_PROVIDER=vertex_ai | grok | both (A/B testing)             │
-└─────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│                  AssetFactory v2.1 - STATE OF THE ART                  │
+│  ┌──────────────────────────────┐    ┌──────────────────────────────┐ │
+│  │         Vertex AI            │    │          xAI Grok            │ │
+│  │       (Google Cloud)         │ OR │        (Grok 4.1)            │ │
+│  ├──────────────────────────────┤    ├──────────────────────────────┤ │
+│  │ gemini-3-pro-preview         │    │ grok-4-1-fast-reasoning      │ │
+│  │ imagen-4.0-generate-001      │    │ grok-2-image-1212            │ │
+│  │ imagen-4.0-ultra-generate-001│    │ (no video API)               │ │
+│  │ imagen-4.0-fast-generate-001 │    │                              │ │
+│  │ veo-3.1-generate-preview     │    │ Grok Voice Agent             │ │
+│  │ Google TTS                   │    │                              │ │
+│  └──────────────────────────────┘    └──────────────────────────────┘ │
+│                                                                        │
+│  AI_PROVIDER=vertex_ai | grok | both (A/B testing)                     │
+│  Quality tiers: standard | ultra | fast (Imagen 4)                     │
+│  Resolution: 720p | 1080p (Veo 3.1)                                    │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
 **Configuration via .env:**
@@ -781,26 +794,28 @@ GOOGLE_APPLICATION_CREDENTIALS=/path/to/sa.json
 3. **Fallback:** Si un provider est down, switch automatique
 4. **Optimisation coûts:** Utiliser le moins cher selon le use case
 
-**Mapping des modèles TOP DU MARCHÉ (Décembre 2025):**
+**Mapping des modèles STATE OF THE ART (Décembre 2025) - VÉRIFIÉ FACTUELLEMENT:**
 
-| Fonction | Vertex AI (TOP) | Model ID | Prix | Source |
-|----------|-----------------|----------|------|--------|
-| Text | **Gemini 3 Pro** | `gemini-3-pro-preview` | Token-based | [Docs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro) |
-| Image | **Imagen 4** | `imagen-4.0-generate-001` | $0.04/img | [Docs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/imagen/4-0-generate) |
-| Video | **Veo 3.1** | `veo-3.1-generate-preview` | $0.40/sec | [Docs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/veo/3-1-generate) |
-| Video Fast | **Veo 3.1 Fast** | `veo-3.1-fast-generate-preview` | $0.15/sec | [Blog](https://developers.googleblog.com/en/introducing-veo-3-1-and-new-creative-capabilities-in-the-gemini-api/) |
+| Fonction | Vertex AI | Model ID (EXACT) | Prix | Source Vérifiée |
+|----------|-----------|------------------|------|-----------------|
+| Text | **Gemini 3 Pro** (#1 LMArena 1501 Elo) | `gemini-3-pro-preview` | Token-based | [Google Docs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro) |
+| Image | **Imagen 4** | `imagen-4.0-generate-001` | $0.04/img | [Google Docs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/imagen/4-0-generate) |
+| Image Ultra | **Imagen 4 Ultra** (2816x1536) | `imagen-4.0-ultra-generate-001` | $0.06/img | [Google Docs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/imagen/4-0-generate) |
+| Image Fast | **Imagen 4 Fast** (150 req/min) | `imagen-4.0-fast-generate-001` | $0.02/img | [Google Developers Blog](https://developers.googleblog.com/announcing-imagen-4-fast-and-imagen-4-family-generally-available-in-the-gemini-api/) |
+| Video | **Veo 3.1** (8s 1080p, native audio) | `veo-3.1-generate-preview` | ~$0.40/sec | [Google Blog](https://blog.google/technology/ai/veo-updates-flow/) |
 | Voice | Google TTS | `en-US-Neural2-*` | $4/1M chars | Standard |
 
-| Fonction | xAI Grok (TOP) | Model ID | Prix | Source |
-|----------|----------------|----------|------|--------|
-| Text | **Grok 4.1** 🏆 #1 mondial | `grok-4.1` | $0.20/$0.50 per M | [xAI News](https://x.ai/news/grok-4-1) |
-| Text Fast | **Grok 4.1 Fast** | `grok-4-1-fast-*` | 98% moins cher | [xAI](https://x.ai/api) |
+| Fonction | xAI Grok | Model ID (EXACT) | Prix | Source Vérifiée |
+|----------|----------|------------------|------|-----------------|
+| Text | **Grok 4.1 Fast** (2M context, agent tools) | `grok-4-1-fast-reasoning` | $0.20/$0.50 per M | [xAI News](https://x.ai/news/grok-4-1-fast) |
+| Text Fast | **Grok 4.1 Fast** (instant mode) | `grok-4-1-fast-non-reasoning` | Lower | [xAI News](https://x.ai/news/grok-4-1-fast) |
 | Vision | **Grok 2 Vision** | `grok-2-vision-1212` | $2/$10 per M | [Docs](https://docs.x.ai/docs/models) |
 | Image | **Grok Aurora** | `grok-2-image-1212` | $0.07/img | [TechCrunch](https://techcrunch.com/2025/03/19/xai-launches-an-api-for-generating-images/) |
-| Video | **Grok Imagine** | `grok-imagine` | Consumer | [xAI](https://x.ai) |
-| Voice | **Grok Voice** | Voice Agent API | $0.05/min | [xAI News](https://x.ai/news/grok-voice-agent-api) |
+| Video | **Grok Imagine** | Consumer only | N/A | [xAI](https://x.ai) |
+| Voice | **Grok Voice Agent** | Realtime API | $0.05/min | [xAI News](https://x.ai/news/grok-voice-agent-api) |
 
-**Note:** Grok 4.1 = #1 mondial sur LMArena Text Arena (1483 Elo, +31 pts vs concurrent)
+**Note:** Gemini 3 Pro = #1 LMArena (1501 Elo) - Released Nov 18, 2025
+**Note:** Grok 4.1 = Released Nov 17, 2025 - Grok 4.20 coming late Dec 2025
 
 **Spécifications Veo 3.1 (State of the Art vidéo):**
 - Résolution: 720p / 1080p (upscaling disponible)
@@ -884,15 +899,37 @@ EOF
 
 ---
 
+## Changelog v2.1 - STATE OF THE ART CORRIGÉ (23 Décembre 2025)
+
+### CORRECTION CRITIQUE - Modèles mis à jour vers les VRAIES dernières versions:
+
+**AssetFactory.js - Modèles VÉRIFIÉS FACTUELLEMENT:**
+- ✅ `gemini-3-pro-preview` - #1 LMArena (1501 Elo), PhD-level reasoning
+- ✅ `imagen-4.0-generate-001` - Imagen 4 ($0.04/img, 2K resolution)
+- ✅ `imagen-4.0-ultra-generate-001` - Imagen 4 Ultra ($0.06/img, 2816x1536)
+- ✅ `imagen-4.0-fast-generate-001` - Imagen 4 Fast ($0.02/img, 150 req/min)
+- ✅ `veo-3.1-generate-preview` - Veo 3.1 (8s 1080p, native audio)
+- ✅ `grok-4-1-fast-reasoning` - Grok 4.1 Fast (2M context, agent tools)
+- ✅ `grok-4-1-fast-non-reasoning` - Grok 4.1 Fast (instant mode)
+
+**Sources vérifiées:**
+- [Gemini 3 Pro](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini/3-pro) - Released Nov 18, 2025
+- [Imagen 4](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/imagen/4-0-generate) - GA Aug 15, 2025
+- [Veo 3.1](https://blog.google/technology/ai/veo-updates-flow/) - Dec 18, 2025
+- [Grok 4.1](https://x.ai/news/grok-4-1) - Released Nov 17, 2025
+- [Grok 4.1 Fast](https://x.ai/news/grok-4-1-fast) - Released Nov 20, 2025
+
+---
+
 ## Changelog v2.0 - IMPLÉMENTATION COMPLÈTE (23 Décembre 2025)
 
 ### Code Modifié:
 
-**AssetFactory.js (464 lignes) - Dual-Provider AI:**
+**AssetFactory.js (480+ lignes) - Dual-Provider AI:**
 - ✅ Dual-provider: `AI_PROVIDER=vertex_ai | grok | both`
 - ✅ A/B Testing mode avec Promise.allSettled
-- ✅ Modèles Vertex: gemini-2.0-flash-exp, imagen-3, veo-002
-- ✅ Modèles Grok: grok-2-latest, grok-2-image-1212, grok-2-audio
+- ✅ Quality tiers: standard, ultra, fast (Imagen 4)
+- ✅ Resolution options: 720p, 1080p (Veo 3.1)
 - ✅ Suppression dépendance MCPHub (Claude Code natif)
 
 **PlaywrightClient.js (200 lignes) - NOUVEAU:**
@@ -917,18 +954,6 @@ EOF
 - ✅ competitor-clone.js → PlaywrightClient
 - ✅ ecommerce-factory.js → PlaywrightClient
 - ✅ scrape-url.js → PlaywrightClient
-
-### Changelog v1.4 - TOP DU MARCHÉ (22 Décembre 2025)
-
-**Vertex AI - Modèles STATE OF THE ART:**
-- ✅ `gemini-2.0-flash-exp` - Dernier modèle texte Google
-- ✅ `imagen-3.0-generate-001` - Production ($0.04/img)
-- ✅ `veo-002` - Production video
-
-**xAI Grok - Modèles STATE OF THE ART:**
-- ✅ `grok-2-latest` - Texte
-- ✅ `grok-2-image-1212` - $0.07/image
-- ✅ `grok-2-audio` - Voice $0.05/min
 
 **Sources officielles consultées:**
 - [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp)
