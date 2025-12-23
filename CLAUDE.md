@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 12.0 | Date: 2025-12-23 | Session: 84
+## Version: 12.1 | Date: 2025-12-24 | Session: 85
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -7,13 +7,13 @@
 ## SOURCE DE VERITE
 
 **Automations Registry:** `automations/automations-registry.json` (77 automations v1.5.0)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-84)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-85)
 **Audit Session 84:** `outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md`
-**Audit Personas:** `outputs/audit-personas-2025-12-23.json`
+**Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
 
 ---
 
-## ETAT ACTUEL (Session 84 - 23/12/2025)
+## ETAT ACTUEL (Session 85 - 24/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
@@ -21,11 +21,37 @@
 | Pages | 32 (16 FR + 16 EN) - HTTP 200 | ✅ |
 | Automations | **77** (48 scripts + 29 conceptuelles) | ✅ Registry |
 | Implementation Rate | **62%** (48/77 scripts verified) | ✅ |
-| Personas Clients | **5** (factuels, base automations) | ✅ |
-| Lead Gen Automations | **8** (7/8 ready) | ✅ |
+| Personas Clients | **5** (documentes) | ✅ |
+| Claims Marketing | **CORRIGES** (ROI attribution, counts) | ✅ |
 | MCPs fonctionnels | **9** | ✅ Verified |
-| Lighthouse Perf | ~70% | ⚠️ Target >80% |
+| Lighthouse SEO | **100%** | ✅ |
+| Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.2 (77 automations) | ✅ |
+
+### Session 85 - CLAIMS MARKETING CORRIGES + FACTUALITE
+```
+CLAIMS CORRIGES (4 fichiers):
+├── ✅ services/ecommerce.html: "ROI 42:1 prouve" → "ROI 42:1 (Klaviyo 2025)"
+├── ✅ en/services/ecommerce.html: "+77% conversion" → supprime
+├── ✅ en/case-studies.html: Claims verifies avec sources
+└── ✅ Twitter descriptions: Synced avec meta descriptions
+
+COMPTAGE AUTOMATIONS ALIGNE (FR + EN):
+├── ✅ Shopify: 9 → 13 automatisations (aligne registry)
+├── ✅ Email Marketing: 4 → 9 automatisations (aligne registry)
+└── ✅ services/ecommerce.html + en/services/ecommerce.html
+
+LIGHTHOUSE RESULTS (24/12/2025):
+├── Performance: 44% (variable selon reseau)
+├── Accessibility: 93% ✅
+├── Best Practices: 96% ✅
+└── SEO: 100% ✅
+
+OPPORTUNITES PERFORMANCE:
+├── Reduce unused JS: 118 KiB (GTM/GA4)
+├── Enable text compression: 147 KiB (Hostinger)
+└── Reduce unused CSS: 52 KiB
+```
 
 ### Session 84 - AUDIT FORENSIQUE COMPLET (PERSONAS + LEAD GEN)
 ```
