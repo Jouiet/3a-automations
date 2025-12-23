@@ -36,6 +36,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
+  <!-- Preload critical above-fold image for LCP -->
+  <link rel="preload" href="/logo.webp" as="image" type="image/webp" fetchpriority="high">
   <meta name="theme-color" content="#4FBAF1">
 
   <!-- Critical CSS Inline for Fast FCP -->
@@ -44,6 +46,9 @@
   <!-- Preconnect for external resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- DNS Prefetch for performance -->
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
 
   <!-- Deferred font loading -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -770,6 +775,6 @@
 
   <script src="../script-lite.min.js?v=20.0"></script>
   <!-- Voice Assistant Widget -->
-  <script src="/voice-assistant/voice-widget-en.js?v=20.0" defer></script>
+  <script src="/voice-assistant/voice-widget-en.min.js?v=20.0" defer></script>
 </body>
 </html>

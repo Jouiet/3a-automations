@@ -61,17 +61,20 @@ function auditBrokenLinks(htmlFiles) {
     const lines = content.split('\n');
     lines.forEach((line, idx) => {
       // Check for double-slash links (should be single slash)
-      const doubleSlashMatches = line.match(/href="\/\/[^"]+"/g);
-      if (doubleSlashMatches) {
-        doubleSlashMatches.forEach(match => {
-          if (!match.includes('http') && !match.includes('schema.org')) {
-            addIssue('LINKS', 'CRITICAL', file, idx + 1,
-              `Double slash in href: ${match}`,
-              match.replace('"//', '"/')
-            );
-            count++;
-          }
-        });
+      // Exclude: dns-prefetch, preconnect, schema.org (all valid uses of //)
+      if (!line.includes('dns-prefetch') && !line.includes('preconnect')) {
+        const doubleSlashMatches = line.match(/href="\/\/[^"]+"/g);
+        if (doubleSlashMatches) {
+          doubleSlashMatches.forEach(match => {
+            if (!match.includes('http') && !match.includes('schema.org')) {
+              addIssue('LINKS', 'CRITICAL', file, idx + 1,
+                `Double slash in href: ${match}`,
+                match.replace('"//', '"/')
+              );
+              count++;
+            }
+          });
+        }
       }
 
       // Check for src with double slash
