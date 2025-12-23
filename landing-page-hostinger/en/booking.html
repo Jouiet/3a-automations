@@ -136,10 +136,11 @@
       font-size: 1rem;
       font-family: inherit;
     }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none;
+    .form-group input:focus-visible, .form-group select:focus-visible, .form-group textarea:focus-visible {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(79, 186, 241, 0.1);
+      box-shadow: 0 0 0 3px rgba(79, 186, 241, 0.2);
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
     }
     .form-group textarea { min-height: 100px; resize: vertical; }
     .selected-slot {
@@ -255,6 +256,7 @@
     </div>
   </header>
 
+  <main role="main">
   <section class="booking-hero" id="main-content">
     <div class="container">
       <span class="badge">Free Consultation</span>
@@ -326,22 +328,24 @@
       <div class="benefits-grid">
         <div class="benefit-card">
           <div class="benefit-icon">&#128337;</div>
-          <h4>30 minutes</h4>
+          <h3>30 minutes</h3>
           <p>A focused consultation to identify your automation opportunities.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-icon">&#127919;</div>
-          <h4>100% free</h4>
+          <h3>100% free</h3>
           <p>No commitment. Discover what automation can bring to your business.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-icon">&#128640;</div>
-          <h4>Actionable</h4>
+          <h3>Actionable</h3>
           <p>Leave with concrete recommendations and a clear action plan.</p>
         </div>
       </div>
     </div>
   </section>
+  </main>
+
 
   <footer class="footer-ultra">
     <div class="container">
@@ -381,7 +385,7 @@
         </div>
 
         <div class="footer-links-ultra">
-          <h4>Solutions</h4>
+          <div class="footer-heading">Solutions</div>
           <ul>
             <li><a href="/en/services/ecommerce.html">E-commerce</a></li>
             <li><a href="/en/services/smb.html">SMB & B2B</a></li>
@@ -393,7 +397,7 @@
         </div>
 
         <div class="footer-links-ultra">
-          <h4>Resources</h4>
+          <div class="footer-heading">Resources</div>
           <ul>
             <li><a href="/en/services/free-audit.html">Free Audit</a></li>
             <li><a href="/en/case-studies.html">Case Studies</a></li>
@@ -403,7 +407,7 @@
         </div>
 
         <div class="footer-links-ultra">
-          <h4>Legal</h4>
+          <div class="footer-heading">Legal</div>
           <ul>
             <li><a href="/en/legal/terms.html">Terms & Conditions</a></li>
             <li><a href="/en/legal/privacy.html">Privacy Policy</a></li>

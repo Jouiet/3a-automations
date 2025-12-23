@@ -5908,3 +5908,110 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
   display: none !important;
 }
 
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY - WCAG 2.1 AA Compliance
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Skip Link - WCAG 2.4.1 Bypass Blocks */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary);
+  color: var(--secondary);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  z-index: 10000;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid var(--text-light);
+  outline-offset: 2px;
+}
+
+/* Visually Hidden - Screen Reader Only */
+.visually-hidden,
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.visually-hidden:focus,
+.visually-hidden:active,
+.sr-only:focus,
+.sr-only:active {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+}
+
+/* Focus Visible - WCAG 2.4.7 */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Remove outline for mouse users, keep for keyboard */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High Contrast Focus for dark backgrounds */
+.header :focus-visible,
+.footer-ultra :focus-visible,
+[class*="dark"] :focus-visible {
+  outline-color: var(--text-light);
+}
+
+/* Footer Heading - Replaces H4 for accessibility */
+.footer-heading {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+/* Reduced Motion - WCAG 2.3.3 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  :root {
+    --primary: #00BFFF;
+    --text-secondary: #CCCCCC;
+    --border-dark: rgba(255, 255, 255, 0.5);
+  }
+
+  .btn {
+    border: 2px solid currentColor;
+  }
+}
