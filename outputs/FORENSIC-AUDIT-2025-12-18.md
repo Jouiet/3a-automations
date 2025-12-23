@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-23 | Version: 11.0 (Màj Session 83 - Ultra Forensic Frontend Audit)
+## Date: 2025-12-23 | Version: 11.1 (Màj Session 83 - KB & Prompts Optimization)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
@@ -14,6 +14,9 @@ Registry v1.5.0:    77 automations client-facing
 HTML Pages:         77 automations (synced - Session 83)
 llms.txt:           77 automatisations (v3.2)
 MCPs:               9/9 fonctionnels (factuel, vérifié)
+Knowledge Base:     77 automations (knowledge-base.js + knowledge.json)
+Voice Widget:       77 automations (FR + EN)
+CinematicAds:       Prompts optimisés 2025 (Gemini 3, Imagen 4, Veo 3)
 
 Source de vérité: automations/automations-registry.json
 ```
@@ -54,8 +57,10 @@ Voice AI (Grok):                 1
 ✅ Forensic Complete:     0 critical, 0 high, 0 medium, 2 low (CSS !important)
 ✅ Frontend SEO/AEO:      0 issues
 ✅ Accessibility WCAG:    0 issues
-✅ Automation count:      Synced across 28 pages + llms.txt
+✅ Automation count:      Synced across 28 pages + llms.txt + Knowledge Base
 ✅ MCP count:             Corrected 12→9 across 28 pages
+✅ Knowledge Base:        72→77 automations fixed (all sources)
+✅ Prompts CinematicAds:  Optimized for 2025 (Gemini 3, Imagen 4, Veo 3)
 
 Scripts d'audit:
 ├── scripts/session83-ultra-forensic-audit.cjs (20 categories)
@@ -64,6 +69,10 @@ Scripts d'audit:
 ├── scripts/forensic-audit-complete.cjs
 ├── scripts/forensic-frontend-audit.cjs (10 categories)
 └── scripts/audit-accessibility.cjs
+
+Commits Session 83:
+├── 4ffefd6 fix(session83): Ultra Forensic Frontend Audit - 133 issues fixed
+└── afac51e fix(session83): Knowledge Base + Prompts optimization for 2025
 ```
 
 ### AEO Status (Answer Engine Optimization - Session 83)
@@ -3941,3 +3950,72 @@ A  automations/agency/core/grok-voice-poc.py
 - [llms.txt Specification](https://llmstxt.org/)
 - [GitHub llms-txt](https://github.com/AnswerDotAI/llms-txt)
 - [What Is LLMs.txt](https://aioseo.com/what-is-llms-txt/)
+- [Gemini 3 Pro Docs](https://ai.google.dev/gemini-api/docs/gemini-3)
+- [Veo 3 Prompt Guide](https://deepmind.google/models/veo/prompt-guide/)
+- [Imagen 4 Prompt Guide](https://ai.google.dev/gemini-api/docs/imagen-prompt-guide)
+
+---
+
+# SECTION 99: PLAN ACTIONNABLE SESSION 83 (23/12/2025)
+
+## État Final Session 83
+
+```
+✅ COMPLÉTÉ:
+├── Ultra Forensic Audit: 133 issues → 0 CRITICAL, 0 HIGH
+├── Knowledge Base: 72→77 automations (all sources synced)
+├── Voice Widget FR/EN: SYSTEM_PROMPT rewritten (77 autos, 9 MCPs)
+├── CinematicAds Prompts: Optimized for Gemini 3, Imagen 4, Veo 3
+├── Pricing fix: 1490€→1399€ Growth pack
+└── Commits: 4ffefd6, afac51e pushed to GitHub
+```
+
+## Actions Prochaine Session (Session 84)
+
+### P0 - CRITIQUE (Bloquant)
+```
+1. [ ] Générer versions minifiées voice-widget (FR+EN)
+       → npx terser voice-widget.js -o voice-widget.min.js
+
+2. [ ] Tester CinematicAds prompts avec vraies API
+       → Gemini 3 Pro: test thinking_level param
+       → Veo 3: test prompt 100-200 words
+
+3. [ ] Configurer n8n MCP (API key manquante)
+       → https://n8n.srv1168256.hstgr.cloud/settings/api
+```
+
+### P1 - IMPORTANT
+```
+4. [ ] Shopify Dev Store pour MCP fonctionnel
+       → https://partners.shopify.com
+
+5. [ ] Tests automatisés prompts CinematicAds
+       → scripts/test-cinematicads-prompts.cjs
+
+6. [ ] Lighthouse Performance >80% (actuel ~70%)
+```
+
+### P2 - AMÉLIORATION
+```
+7. [ ] Premier article blog SEO
+8. [ ] Case study client documenté
+9. [ ] Améliorer UX Voice Widget
+```
+
+## Métriques à Surveiller
+
+| Métrique | Actuel | Objectif |
+|----------|--------|----------|
+| Automations | 77 | stable |
+| MCPs fonctionnels | 9/11 | 11/11 |
+| Lighthouse Perf | ~70% | >80% |
+| Issues SEO/AEO | 0 | 0 |
+| Issues WCAG | 0 | 0 |
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v11.1**
+
+*v11.1: Session 83 Part 2 - KB & Prompts Optimization (Gemini 3, Imagen 4, Veo 3)*
+*v11.0: Session 83 Part 1 - Ultra Forensic Frontend Audit (133 issues fixed)*
