@@ -27,7 +27,7 @@ Nous sommes un consultant solo spécialisé dans l'automatisation e-commerce. No
 
 - **10+ ans** d'expérience en développement web et automation
 - **Certifié** Shopify Partner et Google Analytics
-- **70+ automatisations** prêtes à l'emploi testées et documentées
+- **72 automatisations** prêtes à l'emploi testées et documentées
 
 ---
 
