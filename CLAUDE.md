@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 11.8 | Date: 2025-12-23 | Session: 83
+## Version: 12.0 | Date: 2025-12-23 | Session: 84
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -7,28 +7,67 @@
 ## SOURCE DE VERITE
 
 **Automations Registry:** `automations/automations-registry.json` (77 automations v1.5.0)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-83)
-**Audit Forensique:** `outputs/session83-forensic-audit.json`
-**Audit Frontend:** `outputs/frontend-forensic-audit.json`
+**Historique Sessions:** `HISTORY.md` (Sessions 0-84)
+**Audit Session 84:** `outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md`
+**Audit Personas:** `outputs/audit-personas-2025-12-23.json`
 
 ---
 
-## ETAT ACTUEL (Session 83 - 23/12/2025)
+## ETAT ACTUEL (Session 84 - 23/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
 | Site | https://3a-automation.com LIVE | ✅ |
 | Pages | 32 (16 FR + 16 EN) - HTTP 200 | ✅ |
-| Automations | **77** | ✅ Registry + HTML |
+| Automations | **77** (48 scripts + 29 conceptuelles) | ✅ Registry |
+| Implementation Rate | **62%** (48/77 scripts verified) | ✅ |
+| Personas Clients | **5** (factuels, base automations) | ✅ |
+| Lead Gen Automations | **8** (7/8 ready) | ✅ |
 | MCPs fonctionnels | **9** | ✅ Verified |
-| Audit SEO/AEO | **0 critical/high** PASSED | ✅ |
-| Audit WCAG/RGAA | **0 issues** PASSED | ✅ |
-| Audit Frontend | **0 critical/high** PASSED | ✅ |
-| Lighthouse Perf | ~70% | ⚠️ |
-| hreflang SEO | 32/32 (100%) | ✅ |
+| Lighthouse Perf | ~70% | ⚠️ Target >80% |
 | llms.txt | v3.2 (77 automations) | ✅ |
-| GA4 | G-87F6FDJG45 | ✅ |
-| GTM | GTM-WLVJQC3M | ✅ |
+
+### Session 84 - AUDIT FORENSIQUE COMPLET (PERSONAS + LEAD GEN)
+```
+AUDIT AUTOMATIONS:
+├── ✅ 77 automations analysees
+├── ✅ 48 scripts implementes (62%)
+├── ✅ 0 scripts manquants (integrite 100%)
+├── ✅ 29 automations conceptuelles (templates/manual)
+└── ✅ 10 categories mappees
+
+PERSONAS CLIENTS FACTUELS:
+├── 1. E-commerce Dropshipper (Quick Win €390) - 40 automations
+├── 2. E-commerce Scaler (Growth €1399) - 43 automations
+├── 3. B2B Lead Hunter (Essentials €790) - 29 automations
+├── 4. Commerce Local (Quick Win €390) - 23 automations
+└── 5. Marketing Agency (Custom) - 14 automations
+
+CLAIMS MARKETING A CORRIGER:
+├── ⚠️ "ROI 42:1 prouve sur nos clients" → "ROI 42:1 (Klaviyo 2025)"
+├── ⚠️ "+77% conversion" → Source non citee, a supprimer
+└── ⚠️ Comptage automations inconsistant sur pages services
+
+STRATEGIE LEAD GEN 3A:
+├── ✅ 8 automations identifiees pour notre usage
+├── ✅ 7/8 implementees (87.5%)
+├── ⏳ 1 manquante: Klaviyo welcome-series
+├── Volume potentiel: 18,000 leads/mois
+├── Revenue estime: €1,280/mois (conservatif)
+└── Revenue annuel: €15,358
+
+PRICING ANALYSIS:
+├── ✅ Taux ~90€/h = EXACT et coherent
+├── ✅ Quick Win €390 (3-4h) = ~€97-130/h
+├── ✅ Essentials €790 (7-9h) = ~€88-113/h
+├── ✅ Growth €1399 (14-18h) = ~€78-100/h
+└── ✅ Positionnement competitif vs agences (€150-250/h)
+
+OUTPUTS GENERES:
+├── outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md (rapport complet)
+├── outputs/audit-personas-2025-12-23.json (data structured)
+└── scripts/audit-personas-automations.cjs (script audit)
+```
 
 ### Session 83 Part 3 - BLOG + LIGHTHOUSE + CLAUDE WORKFLOW
 ```
