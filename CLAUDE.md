@@ -1,6 +1,71 @@
 # 3A AUTOMATION - Mémoire Projet Claude Code
-## Version: 9.5 | Dernière mise à jour: 2025-12-23 (Session 64 - Links Fix + STATE OF THE ART Models)
+## Version: 9.6 | Dernière mise à jour: 2025-12-23 (Session 65 - Forensic Frontend + CinematicAds Integration)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
+
+---
+
+## 🔴 SOURCE DE VÉRITÉ: AUTOMATIONS
+
+**Fichier unique:** `automations/automations-registry.json`
+**Total: 70 automations** (66 → 70 avec CinematicAds)
+
+| Catégorie | Count |
+|-----------|-------|
+| Lead Gen | 18 |
+| Shopify | 13 |
+| SEO | 9 |
+| Email | 9 |
+| Analytics | 9 |
+| Content | 8 |
+| **CinematicAds AI** | **4** |
+
+---
+
+## SESSION 65 COMPLÉTÉE ✅ (23/12/2025 - Forensic Frontend + CinematicAds Integration)
+
+### Audit Forensique Frontend Complet
+| Métrique | Avant | Après | Amélioration |
+|----------|-------|-------|--------------|
+| Total Issues | 588 | 349 | **-40%** |
+| HIGH | 49 | 30 | -39% |
+| MEDIUM | 245 | 29 | **-88%** |
+
+### Corrections SEO/AEO Appliquées
+- **Titles optimisés:** 24 pages (50-60 chars)
+- **Meta descriptions:** 19 pages (150-160 chars)
+- **H1 tags:** 22 pages ajoutés
+- **Schema.org JSON-LD:** 8 pages (404, booking, audit, pme/smb)
+- **OG tags:** 22 pages (og:url, og:type, og:image)
+- **Image alt texts:** 168 images corrigés
+- **Sitemap.xml:** +2 pages (booking FR/EN)
+
+### CinematicAds Intégré au Registry
+```
+automations-registry.json v1.1.0:
+├── Total: 70 automations (+4)
+├── Nouvelle catégorie: cinematicads (4 workflows)
+│   ├── cinematic-director.js  (Gemini 3 Pro + Imagen 4 + Veo 3.1)
+│   ├── competitor-clone.js    (Analyse + Script + Multi-scènes)
+│   ├── ecommerce-factory.js   (Multi-ratio: 1.91:1, 1:1, 9:16)
+│   └── AssetFactory.js        (Dual AI: Vertex AI + xAI Grok 4.1)
+└── Pages màj: automations.html (FR/EN) - 70 cartes chacune
+```
+
+### Scripts Créés
+```
+scripts/
+├── forensic-frontend-complete.cjs  # Audit complet (600+ lignes)
+├── fix-seo-issues.cjs              # Titles, metas, H1s, schema
+├── fix-og-tags.cjs                 # Open Graph tags
+├── fix-image-alts.cjs              # Accessibility alt texts
+└── sync-automations-html.cjs       # Registry → HTML sync
+```
+
+### Commits Session 65
+```
+aa3457d fix(seo): Comprehensive frontend SEO/AEO audit and fixes
+[pending] feat(cinematicads): Integrate 4 workflows to registry + HTML pages
+```
 
 ---
 
