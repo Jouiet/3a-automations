@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 3.5 - Mise à jour 23 Décembre 2025 (Session 76: 72 Automations Vérifiées)
+## Version 3.6 - Mise à jour 23 Décembre 2025 (Session 82: 77 Automations Vérifiées)
 ## Basé sur données réelles confirmées
 
 ---
@@ -60,10 +60,11 @@ Mis à jour avec les données confirmées le 17/12/2025.
 │                                                                              │
 │  SCRIPTS DISPONIBLES                                                        │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  Total: 72 automations client-facing (vérifié 23/12/2025 Session 76)        │
-│        (36 scripts + 30 templates/workflows + 2 n8n AI Avatar)              │
-│  ├── Lead Gen: 18 | Shopify: 13 | SEO: 9 | Email: 9                         │
+│  Total: 77 automations client-facing (vérifié 23/12/2025 Session 82)        │
+│        (Registry v1.5.0 - synced across HTML + llms.txt)                    │
+│  ├── Lead Gen: 20 | Shopify: 13 | SEO: 9 | Email: 9                         │
 │  ├── Analytics: 9 | Content: 10 | AI Avatar: 2 | CinematicAds: 4            │
+│  ├── WhatsApp: 2 | Voice AI: 1                                              │
 │  └── 23 outils internes EXCLUS (test-, verify-, check-)                     │
 │                                                                              │
 │  MCPs CONFIGURÉS (Audit Session 24 - 19/12/2025)                            │
