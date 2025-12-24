@@ -42,15 +42,32 @@ async function sheetsRequest<T>(
   data?: Record<string, any>
 ): Promise<ApiResponse<T>> {
   try {
+    // Google Apps Script redirects POST requests
+    // We need to follow the redirect to get the actual response
     const response = await fetch(SHEETS_API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action, sheet, data }),
+      redirect: "follow",
     });
 
-    const result = await response.json();
-    return result;
+    // Get response as text first to handle any encoding issues
+    const text = await response.text();
+
+    // Try to parse as JSON
+    try {
+      const result = JSON.parse(text);
+      return result;
+    } catch {
+      // If not JSON, it might be an error page
+      console.error("Google Sheets API returned non-JSON:", text.substring(0, 200));
+      return {
+        success: false,
+        error: "Invalid response from Google Sheets API",
+      };
+    }
   } catch (error) {
+    console.error("Google Sheets API error:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",
