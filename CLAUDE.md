@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 13.0 | Date: 2025-12-24 | Session: 86
+## Version: 13.1 | Date: 2025-12-24 | Session: 87
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -8,19 +8,19 @@
 
 **Automations Registry:** `automations/automations-registry.json` (77 automations v1.5.0)
 **Dashboard:** `dashboard/` (Next.js 14 + Google Sheets)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-86)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-87)
 **Audit Session 84:** `outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md`
 **Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
 
 ---
 
-## ETAT ACTUEL (Session 86 - 24/12/2025)
+## ETAT ACTUEL (Session 87 - 24/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
 | Site | https://3a-automation.com LIVE | ✅ |
-| **Dashboard** | **IMPLEMENTED** (Next.js 14 + GSheets) | ✅ NEW |
-| Pages | 32 (16 FR + 16 EN) - HTTP 200 | ✅ |
+| **Dashboard** | **TESTED** (14 pages, 7 routes HTTP 200) | ✅ |
+| Pages Site | 32 (16 FR + 16 EN) - HTTP 200 | ✅ |
 | Automations | **77** (48 scripts + 29 conceptuelles) | ✅ Registry |
 | Implementation Rate | **62%** (48/77 scripts verified) | ✅ |
 | Personas Clients | **5** (documentes) | ✅ |
@@ -29,6 +29,26 @@
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.2 (77 automations) | ✅ |
+
+### Session 87 - DASHBOARD TESTED + DEPENDENCIES FIXED
+```
+DASHBOARD BUILD VERIFIED:
+├── ✅ npm install: 539 packages installed
+├── ✅ Next.js upgraded: 14.2.18 → 14.2.28 (security patch)
+├── ✅ Added tailwindcss-animate (required for Shadcn)
+├── ✅ Build: 14 pages compiled successfully
+└── ✅ All 7 routes tested: HTTP 200
+
+ROUTES TESTED:
+├── / (home redirect)
+├── /login
+├── /admin (+ leads, automations, analytics, settings)
+└── /client (+ automations, reports)
+
+COMMITS:
+├── be18fd6 fix(dashboard): Add dependencies + security upgrade
+└── .gitignore added for node_modules, .next, .env
+```
 
 ### Session 86 - DASHBOARD ADMIN + CLIENT COMPLET
 ```
