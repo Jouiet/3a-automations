@@ -50,28 +50,36 @@ async function sheetsRequest<T>(
     });
 
     const url = `${SHEETS_API}?${params.toString()}`;
+    console.log("[sheetsRequest] Calling:", url.substring(0, 150) + "...");
+
     const response = await fetch(url, {
       method: "GET",
       redirect: "follow",
     });
 
+    console.log("[sheetsRequest] Response status:", response.status);
+    console.log("[sheetsRequest] Response headers:", Object.fromEntries(response.headers.entries()));
+
     // Get response as text first to handle any encoding issues
     const text = await response.text();
+    console.log("[sheetsRequest] Response text (first 300 chars):", text.substring(0, 300));
 
     // Try to parse as JSON
     try {
       const result = JSON.parse(text);
+      console.log("[sheetsRequest] Parsed JSON successfully");
       return result;
-    } catch {
+    } catch (parseError) {
       // If not JSON, it might be an error page
-      console.error("Google Sheets API returned non-JSON:", text.substring(0, 200));
+      console.error("[sheetsRequest] JSON parse error:", parseError);
+      console.error("[sheetsRequest] Raw text:", text);
       return {
         success: false,
         error: "Invalid response from Google Sheets API",
       };
     }
   } catch (error) {
-    console.error("Google Sheets API error:", error);
+    console.error("[sheetsRequest] Fetch error:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",
