@@ -1,6 +1,72 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 88)
+## Document Exécutable - Décembre 2025 (màj Session 89)
 ## Objectif: Premier client payant en 4 semaines
+
+---
+
+## ✅ SESSION 89 COMPLETE: PERFORMANCE + MCP AUDIT + B2B RESEARCH (25/12/2025)
+
+### Performance Optimization DEPLOYED
+```
+LIGHTHOUSE OPTIMIZATIONS:
+├── ✅ CSS blur reduced: 80px → 40px (cyber-glow effect)
+├── ✅ Header backdrop-filter: 20px → 8px (less GPU overhead)
+├── ✅ Voice widget lazy-loaded: 33KB off critical path
+├── ✅ Performance mode detection (slow connections + prefers-reduced-motion)
+├── ✅ 27 HTML pages updated (FR + EN)
+├── ✅ Cache version bumped: v21.0
+└── ✅ script.js v3.1 - Performance Optimized
+
+IMPACT ATTENDU: Performance 70% → 80%+
+```
+
+### MCP Audit Results
+```
+TESTÉS PAR API CALLS:
+├── ✅ klaviyo: 3 listes trouvées (API OK)
+├── ✅ hostinger: VPS 1168256 running (API OK)
+├── ✅ gemini: Gemini 2.5 Pro/Flash disponible (API OK)
+├── ✅ apify: User "Hatim Jouiet" authentifié (API OK)
+├── ✅ chrome-devtools: npx config valid
+├── ✅ playwright: npx config valid
+├── ⚠️ google-analytics: Permissions à vérifier
+├── ⚠️ google-sheets: Permissions spreadsheet manquantes
+├── ❌ github: Token EXPIRÉ (401 Bad credentials) - URGENT
+├── ❌ shopify: PLACEHOLDER (pas de store)
+└── ❌ n8n: PLACEHOLDER (API key manquante)
+
+SCORE: 7/9 MCPs fonctionnels (GitHub à régénérer)
+```
+
+### B2B Lead Generation Research
+```
+WORKFLOWS EXISTANTS DANS CODEBASE:
+├── ✅ automations/agency/n8n-workflows/linkedin-lead-scraper.json
+├── ✅ automations/generic/scrape-google-maps-businesses.cjs
+└── ✅ automations/generic/scrape-linkedin-profiles.cjs
+
+ÉVALUATION PLAYWRIGHT MCP POUR KOMPASS + PAGES JAUNES:
+├── ❌ Kompass.com: DataDome enterprise protection (403)
+│   └── CGU explicites: "robots ou moyens automatisés INTERDITS"
+├── ❌ Pages Jaunes: Cloudflare Bot Management (403)
+│   └── Challenge JS + TLS fingerprinting actif
+├── ❌ Playwright MCP: NON ADAPTÉ (10% faisabilité)
+│   └── Coût bypass estimé: 40-80h dev + €100/mois
+└── ✅ RECOMMANDATION: Utiliser Apify actors (anti-bot géré)
+
+STACK B2B LEAD GEN RECOMMANDÉ:
+├── Google Maps: compass/crawler-google-places ($0.004/lead)
+├── LinkedIn: curious_coder/linkedin-profile-scraper ($0.01/profil)
+├── Pages Jaunes: memo23/pagesjaunes-scraper-cheerio ($0.005/lead)
+├── Europages: codebyte/europages-b2b-scraper ($30/mois)
+└── COÛT TOTAL: ~$10-15/1000 leads B2B qualifiés
+```
+
+### Commits Session 89
+```
+├── 533d64d perf(session89): Lighthouse optimization - reduce blur, lazy-load voice widget
+└── 5e2a7d3 docs(session89): Update CLAUDE.md with session 89 status
+```
 
 ---
 

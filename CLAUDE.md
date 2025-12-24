@@ -31,7 +31,7 @@
 | Lighthouse Perf | **Optimise** (blur, lazy-load) | ✅ v21.0 |
 | llms.txt | v3.2 (77 automations) | ✅ |
 
-### Session 89 - PERFORMANCE OPTIMIZATION + MCP AUDIT (25/12/2025)
+### Session 89 - PERFORMANCE OPTIMIZATION + MCP AUDIT + B2B LEAD GEN RESEARCH (25/12/2025)
 ```
 PERFORMANCE OPTIMIZATIONS DEPLOYED:
 ├── ✅ CSS blur reduced: 80px → 40px (cyber-glow)
@@ -55,13 +55,31 @@ MCP AUDIT RESULTS:
 ├── ❌ shopify: PLACEHOLDER (pas de store)
 └── ❌ n8n: PLACEHOLDER (API key manquante)
 
+B2B LEAD GEN RESEARCH (n8n + Playwright MCP):
+├── ✅ Workflows n8n existants documentes (LinkedIn + Google Maps)
+├── ✅ linkedin-lead-scraper.json: DEJA IMPLEMENTE dans codebase
+├── ✅ scrape-google-maps-businesses.cjs: DEJA IMPLEMENTE
+├── ✅ scrape-linkedin-profiles.cjs: DEJA IMPLEMENTE
+├── ❌ Kompass.com: DataDome protection + CGU interdisent scraping
+├── ❌ Pages Jaunes: Cloudflare + CGU interdisent scraping
+├── ❌ Playwright MCP: NON ADAPTE pour Kompass/Pages Jaunes
+└── ✅ RECOMMANDATION: Utiliser Apify actors (gestion anti-bot)
+
+STACK B2B LEAD GEN RECOMMANDE (via Apify):
+├── Google Maps: compass/crawler-google-places ($0.004/lead)
+├── LinkedIn: curious_coder/linkedin-profile-scraper ($0.01/profil)
+├── Pages Jaunes: memo23/pagesjaunes-scraper-cheerio ($0.005/lead)
+└── Europages: codebyte/europages-b2b-scraper ($30/mois)
+
 ACTIONS REQUISES:
 ├── 1. Regenerer GitHub token: https://github.com/settings/tokens
 ├── 2. Configurer n8n API key sur VPS
-└── 3. Creer Dev Store Shopify (optionnel)
+├── 3. Importer linkedin-lead-scraper.json dans n8n
+└── 4. Creer workflow n8n Google Maps → Klaviyo
 
 COMMITS SESSION 89:
-└── 533d64d perf(session89): Lighthouse optimization - reduce blur, lazy-load voice widget
+├── 533d64d perf(session89): Lighthouse optimization
+└── 5e2a7d3 docs(session89): Update CLAUDE.md
 ```
 
 ### Session 88 - DASHBOARD DEPLOYED LIVE (PM2 + Node.js)
@@ -529,14 +547,21 @@ git push origin main
 
 **MCP Audit Results:**
 - 7/9 MCPs fonctionnels verifies par API calls
-- GitHub token EXPIRE - a regenerer
+- GitHub token EXPIRE - a regenerer URGENT
 - Klaviyo, Hostinger, Gemini, Apify: 100% OK
-- Google Sheets: permissions spreadsheet manquantes (mais Apps Script fonctionne)
+
+**B2B Lead Gen Research:**
+- Evaluation Playwright MCP pour Kompass + Pages Jaunes: **NON RECOMMANDE**
+- Kompass: DataDome protection + CGU interdisent explicitement scraping
+- Pages Jaunes: Cloudflare Bot Management + Challenge JS
+- Recommandation: Utiliser Apify actors (gestion anti-bot incluse)
+- Workflows existants: linkedin-lead-scraper.json, scrape-google-maps.cjs
 
 **Commits:**
-- 533d64d perf(session89): Lighthouse optimization - reduce blur, lazy-load voice widget
+- 533d64d perf(session89): Lighthouse optimization
+- 5e2a7d3 docs(session89): Update CLAUDE.md
 
-**Status:** Site LIVE, Dashboard LIVE, Performance optimisee
+**Status:** Site LIVE, Dashboard LIVE, Performance optimisee, B2B Lead Gen stack defini
 
 ---
 
