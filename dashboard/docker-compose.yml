@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 3a-dashboard
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - GOOGLE_SHEETS_ID=${GOOGLE_SHEETS_ID}
+      - GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - NEXT_PUBLIC_SITE_URL=https://dashboard.3a-automation.com
+    ports:
+      - "3000:3000"
+    networks:
+      - traefik-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.3a-automation.com`)"
+      - "traefik.http.routers.dashboard.entrypoints=websecure"
+      - "traefik.http.routers.dashboard.tls.certresolver=letsencrypt"
+      - "traefik.http.services.dashboard.loadbalancer.server.port=3000"
+
+networks:
+  traefik-network:
+    external: true

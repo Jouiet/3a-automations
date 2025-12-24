@@ -34,24 +34,16 @@ interface RecentActivity {
   time: string;
 }
 
-const mockStats: DashboardStats = {
-  totalLeads: 1247,
-  newLeadsToday: 23,
-  qualifiedLeads: 342,
-  conversionRate: 27.4,
-  activeAutomations: 77,
-  automationErrors: 2,
-  revenueThisMonth: 24500,
-  revenueGrowth: 12.5,
+const defaultStats: DashboardStats = {
+  totalLeads: 0,
+  newLeadsToday: 0,
+  qualifiedLeads: 0,
+  conversionRate: 0,
+  activeAutomations: 0,
+  automationErrors: 0,
+  revenueThisMonth: 0,
+  revenueGrowth: 0,
 };
-
-const mockActivities: RecentActivity[] = [
-  { id: "1", type: "lead", message: "Nouveau lead: Marie Dupont (Shopify Store)", time: "Il y a 5 min" },
-  { id: "2", type: "automation", message: "Workflow 'Welcome Email' execute avec succes", time: "Il y a 12 min" },
-  { id: "3", type: "email", message: "Campagne 'Black Friday' envoyee a 1,200 contacts", time: "Il y a 25 min" },
-  { id: "4", type: "lead", message: "Lead qualifie: Jean Martin (Score: 85)", time: "Il y a 1h" },
-  { id: "5", type: "call", message: "Appel entrant enregistre: +33 6 12 34 56 78", time: "Il y a 2h" },
-];
 
 const statCards = [
   {
@@ -106,32 +98,66 @@ const getActivityIcon = (type: RecentActivity["type"]) => {
 };
 
 export default function AdminDashboardPage() {
-  const [stats, setStats] = useState<DashboardStats>(mockStats);
-  const [activities, setActivities] = useState<RecentActivity[]>(mockActivities);
+  const [stats, setStats] = useState<DashboardStats>(defaultStats);
+  const [activities, setActivities] = useState<RecentActivity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simulate loading data from Google Sheets
     const loadData = async () => {
       try {
-        // In production, fetch from /api/dashboard/stats
-        // const response = await fetch("/api/dashboard/stats");
-        // const data = await response.json();
-        // setStats(data.stats);
-        // setActivities(data.activities);
+        setIsLoading(true);
+        setError(null);
 
-        // For now, use mock data
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 500);
-      } catch (error) {
-        console.error("Failed to load dashboard data:", error);
+        // Fetch stats from API
+        const [statsRes, activitiesRes] = await Promise.all([
+          fetch("/api/stats"),
+          fetch("/api/stats?type=activities&limit=5")
+        ]);
+
+        if (statsRes.ok) {
+          const statsData = await statsRes.json();
+          if (statsData.success && statsData.data) {
+            setStats(statsData.data);
+          }
+        }
+
+        if (activitiesRes.ok) {
+          const activitiesData = await activitiesRes.json();
+          if (activitiesData.success && activitiesData.data) {
+            // Transform activities to match our interface
+            const transformed = activitiesData.data.map((a: any) => ({
+              id: a.id,
+              type: a.action?.includes("lead") ? "lead" :
+                    a.action?.includes("automation") ? "automation" :
+                    a.action?.includes("email") ? "email" : "call",
+              message: a.details || a.action,
+              time: formatTimeAgo(a.createdAt)
+            }));
+            setActivities(transformed);
+          }
+        }
+
+        setIsLoading(false);
+      } catch (err) {
+        setError("Erreur de chargement des donnees");
         setIsLoading(false);
       }
     };
 
     loadData();
   }, []);
+
+  function formatTimeAgo(dateStr: string): string {
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    const minutes = Math.floor(diff / 60000);
+    if (minutes < 60) return `Il y a ${minutes} min`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `Il y a ${hours}h`;
+    return `Il y a ${Math.floor(hours / 24)}j`;
+  }
 
   if (isLoading) {
     return (
