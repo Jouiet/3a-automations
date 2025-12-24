@@ -42,12 +42,16 @@ async function sheetsRequest<T>(
   data?: Record<string, any>
 ): Promise<ApiResponse<T>> {
   try {
-    // Google Apps Script redirects POST requests
-    // We need to follow the redirect to get the actual response
-    const response = await fetch(SHEETS_API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action, sheet, data }),
+    // Use GET with URL parameters to avoid POST redirect issues with Google Apps Script
+    const params = new URLSearchParams({
+      action,
+      sheet,
+      data: JSON.stringify(data || {}),
+    });
+
+    const url = `${SHEETS_API}?${params.toString()}`;
+    const response = await fetch(url, {
+      method: "GET",
       redirect: "follow",
     });
 
