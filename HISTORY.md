@@ -1,5 +1,15 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 88 (24/12/2025) - DASHBOARD PRODUCTION LIVE
+
+| Session | Modifications |
+|---------|---------------|
+| **88** | **Dashboard PRODUCTION**: https://dashboard.3a-automation.com LIVE, PM2 + Node.js 20 (NO Docker), Google Sheets DB (5 sheets: Users, Leads, Automations, Activities, Metrics), Auth JWT + bcrypt + Role-based (ADMIN/CLIENT/VIEWER), Apps Script API v2 (GET+POST), admin@3a-automation.com / Admin3A2025 |
+| **87** | **Dashboard Build**: npm install 539 packages, Next.js 14.2.28, tailwindcss-animate added, 14 pages compiled, 7 routes tested HTTP 200 |
+| **86** | **Dashboard Implementation**: Next.js 14 + Shadcn/UI, Admin (/admin) + Client (/client) portals, 38 files, 5656 LOC |
+| **85** | **Claims Marketing Corriges**: ROI 42:1 attribution fixed, automation counts aligned (Shopify 13, Email 9) |
+| **84** | **Forensic Audit Personas**: 77 automations, 48 scripts implementes (62%), 5 personas clients, pricing ~90€/h verified |
+
 ## Session 83 (23/12/2025) - ULTRA FORENSIC FRONTEND AUDIT
 
 | Session | Modifications |
