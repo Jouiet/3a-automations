@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 12.1 | Date: 2025-12-24 | Session: 85
+## Version: 13.0 | Date: 2025-12-24 | Session: 86
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -7,17 +7,19 @@
 ## SOURCE DE VERITE
 
 **Automations Registry:** `automations/automations-registry.json` (77 automations v1.5.0)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-85)
+**Dashboard:** `dashboard/` (Next.js 14 + Google Sheets)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-86)
 **Audit Session 84:** `outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md`
 **Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
 
 ---
 
-## ETAT ACTUEL (Session 85 - 24/12/2025)
+## ETAT ACTUEL (Session 86 - 24/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
 | Site | https://3a-automation.com LIVE | ✅ |
+| **Dashboard** | **IMPLEMENTED** (Next.js 14 + GSheets) | ✅ NEW |
 | Pages | 32 (16 FR + 16 EN) - HTTP 200 | ✅ |
 | Automations | **77** (48 scripts + 29 conceptuelles) | ✅ Registry |
 | Implementation Rate | **62%** (48/77 scripts verified) | ✅ |
@@ -27,6 +29,42 @@
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.2 (77 automations) | ✅ |
+
+### Session 86 - DASHBOARD ADMIN + CLIENT COMPLET
+```
+DASHBOARD IMPLEMENTATION (REAL - NOT MVP):
+├── ✅ Next.js 14 + App Router + TypeScript
+├── ✅ Shadcn/UI + Tailwind CSS (dark cyber theme)
+├── ✅ Simple Email/Password auth (JWT + bcrypt)
+├── ✅ Google Sheets backend (NO Supabase)
+└── ✅ 38 fichiers, 5656 lignes de code
+
+ADMIN DASHBOARD (/admin):
+├── ✅ Dashboard Overview (KPIs, stats, activity feed)
+├── ✅ Leads CRM (table, filters, status, scoring)
+├── ✅ Automations Hub (n8n integration)
+├── ✅ Analytics (metrics, charts, funnels)
+└── ✅ Settings (profile, integrations, security)
+
+CLIENT PORTAL (/client):
+├── ✅ Dashboard personnalise (stats client)
+├── ✅ Mes Automations (status, performance)
+└── ✅ Rapports (monthly, campaign reports)
+
+BACKEND:
+├── ✅ Google Apps Script (CRUD operations)
+├── ✅ JWT auth (7 days expiry)
+├── ✅ Role-based access (ADMIN, CLIENT, VIEWER)
+└── ✅ n8n API integration ready
+
+TECH CONSTRAINTS RESPECTEES:
+├── ✅ NO Supabase
+├── ✅ NO Vercel
+├── ✅ Google Sheets as database
+└── ✅ Hostinger-ready deployment
+
+COMMIT: acec739
+```
 
 ### Session 85 - CLAIMS MARKETING CORRIGES + FACTUALITE
 ```
