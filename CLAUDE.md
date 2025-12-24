@@ -30,32 +30,38 @@
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.2 (77 automations) | ✅ |
 
-### Session 88 - DASHBOARD DEPLOYED LIVE ON HOSTINGER
+### Session 88 - DASHBOARD DEPLOYED LIVE (PM2 + Node.js)
 ```
 DASHBOARD PRODUCTION DEPLOYMENT:
 ├── ✅ https://dashboard.3a-automation.com LIVE
-├── ✅ Docker container: 3a-dashboard (Next.js standalone)
+├── ✅ PM2 process: dashboard (Next.js 14, port 3001)
+├── ✅ NO Docker - Native Node.js on Hostinger VPS
+├── ✅ Traefik routing via dynamic config /root/traefik/dashboard.yml
 ├── ✅ SSL certificate: Let's Encrypt via Traefik
-├── ✅ All 13 pages: HTTP 200
 └── ✅ Health endpoint: /api/health responding
 
-GOOGLE APPS SCRIPT BACKEND:
+GOOGLE SHEETS DATABASE:
 ├── ✅ Spreadsheet ID: 1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w
-├── ✅ API URL deployed as Web App
-├── ✅ CRUD operations: Users, Leads, Automations, Activities, Metrics
-└── ✅ Dashboard stats endpoint
+├── ✅ Apps Script API v2: GET support for CORS
+├── ✅ Sheets: Users, Leads, Automations, Activities, Metrics
+├── ✅ Admin user created: admin@3a-automation.com
+└── ✅ Password: Admin3A2025
 
-DNS CONFIGURATION:
-├── ✅ A record: dashboard.3a-automation.com → 148.230.113.163
-└── ✅ Propagation verified
+LOGIN VERIFIED:
+├── ✅ Auth flow working (JWT + bcrypt)
+├── ✅ Admin dashboard accessible with real data
+├── ✅ Stats showing from Google Sheets (currently 0 - empty DB)
+└── ✅ Role-based navigation (ADMIN/CLIENT)
 
-PAGES VERIFIED (HTTP 200):
-├── Admin: dashboard, leads, automations, analytics, settings, workflows, campaigns, calendar, reports
-└── Client: dashboard, automations, documents, reports, settings, support
+INFRASTRUCTURE:
+├── Node.js 20 installed on VPS
+├── PM2 6.0.14 managing dashboard
+├── Traefik proxying from 443 → 3001
+└── No Docker dependency
 
 COMMITS:
-├── c89c22d fix(dashboard): Use npm install instead of npm ci
-└── Docker labels fixed (Traefik backticks)
+├── 241841c fix(dashboard): Add debug logging to Google Sheets API
+└── Dashboard google-sheets.ts: GET requests + response.text()
 ```
 
 ### Session 87 - DASHBOARD TESTED + DEPENDENCIES FIXED
@@ -367,12 +373,14 @@ WHATSAPP BUSINESS API:
 ```
 VPS Hostinger (ID: 1168256)
 IP: 148.230.113.163
-Containers: nginx (site) + traefik (proxy+SSL) + n8n
+Docker Containers: traefik (proxy+SSL) + n8n + 3a-website (nginx)
+Native: PM2 dashboard (Node.js 20, port 3001)
 Deploy: GitHub Action -> Hostinger API -> git pull
 ```
 
 **URLs:**
 - Site: https://3a-automation.com
+- Dashboard: https://dashboard.3a-automation.com
 - n8n: https://n8n.srv1168256.hstgr.cloud
 
 ---
@@ -475,31 +483,27 @@ git push origin main
 
 ---
 
-## DERNIERE SESSION (83 - 23/12/2025)
+## DERNIERE SESSION (88 - 24/12/2025)
 
-**Part 1 - Ultra Forensic Audit:**
-- 133 issues detectes → 0 critical/high apres corrections
-- Automation count: 28 pages synchronisees a 77
-- MCP count: 28 pages corrigees (12 → 9 factuel)
-- Duplicate GA4 scripts: 13 retires
-- Meta descriptions: apostrophes francaises corrigees
+**Dashboard Production Deployment:**
+- https://dashboard.3a-automation.com LIVE et fonctionnel
+- PM2 + Node.js 20 (pas Docker) sur Hostinger VPS
+- Google Sheets comme base de donnees (Users, Leads, Automations, Activities, Metrics)
+- Login admin verifie: admin@3a-automation.com / Admin3A2025
 
-**Part 2 - Knowledge Base & Prompts:**
-- knowledge-base.js + knowledge.json: 72→77 automations
-- voice-widget.js/en.js: SYSTEM_PROMPT reecrit avec donnees exactes
-- prompts.js: Reecrit avec best practices 2025 (Gemini 3 Pro, Imagen 4, Veo 3)
-- sync-knowledge-base.cjs: Prix Growth corrige 1490€→1399€
+**Infrastructure:**
+- Traefik routing via /root/traefik/dashboard.yml
+- SSL Let's Encrypt automatique
+- API Google Apps Script v2 (GET support)
 
-**Scripts crees:**
-- scripts/session83-ultra-forensic-audit.cjs (20 categories)
-- scripts/session83-fix-all-issues.cjs
-- scripts/session83-fix-mcp-count.cjs
+**Forensic Analysis:**
+- Probleme JSON parse resolu (caracteres speciaux bash dans tests curl)
+- Code google-sheets.ts: utilise response.text() + URLSearchParams
 
 **Commits:**
-- 4ffefd6 fix(session83): Ultra Forensic Frontend Audit
-- afac51e fix(session83): Knowledge Base + Prompts optimization for 2025
+- 241841c fix(dashboard): Add debug logging to Google Sheets API
 
-**Audit Status:** 0 CRITICAL, 0 HIGH - PASSED
+**Status:** Dashboard LIVE, Login OK, Data from Google Sheets
 
 ---
 
