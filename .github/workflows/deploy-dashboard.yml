@@ -1,0 +1,55 @@
+name: Deploy Dashboard to Hostinger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dashboard/**'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Install dependencies
+        working-directory: dashboard
+        run: npm ci
+
+      - name: Build dashboard
+        working-directory: dashboard
+        env:
+          GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
+          GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: npm run build
+
+      - name: Deploy to Hostinger VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          script: |
+            cd /home/3a-automation
+            git pull origin main
+            cd dashboard
+            docker compose down
+            docker compose build --no-cache
+            docker compose up -d
+            docker system prune -f
+
+      - name: Verify deployment
+        run: |
+          sleep 30
+          curl -f https://dashboard.3a-automation.com/api/health || exit 1

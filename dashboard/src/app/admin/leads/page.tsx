@@ -56,82 +56,7 @@ interface Lead {
   lastContact?: string;
 }
 
-const mockLeads: Lead[] = [
-  {
-    id: "1",
-    name: "Marie Dupont",
-    email: "marie.dupont@shopify-store.com",
-    phone: "+33 6 12 34 56 78",
-    company: "Boutique Mode Paris",
-    jobTitle: "CEO",
-    linkedinUrl: "https://linkedin.com/in/mariedupont",
-    source: "LinkedIn",
-    status: "QUALIFIED",
-    score: 85,
-    priority: "HIGH",
-    tags: ["e-commerce", "mode", "shopify"],
-    createdAt: "2024-12-23T10:30:00Z",
-    lastContact: "2024-12-22T14:00:00Z",
-  },
-  {
-    id: "2",
-    name: "Jean Martin",
-    email: "jean.martin@tech-startup.fr",
-    phone: "+33 6 98 76 54 32",
-    company: "TechStartup SAS",
-    jobTitle: "CTO",
-    source: "Website Form",
-    status: "NEW",
-    score: 65,
-    priority: "MEDIUM",
-    tags: ["saas", "tech"],
-    createdAt: "2024-12-23T09:15:00Z",
-  },
-  {
-    id: "3",
-    name: "Sophie Bernard",
-    email: "sophie@beaute-naturelle.ma",
-    company: "Beaute Naturelle",
-    jobTitle: "Founder",
-    source: "Referral",
-    status: "PROPOSAL",
-    score: 92,
-    priority: "HIGH",
-    tags: ["cosmetics", "morocco", "e-commerce"],
-    createdAt: "2024-12-22T16:45:00Z",
-    lastContact: "2024-12-23T11:00:00Z",
-  },
-  {
-    id: "4",
-    name: "Ahmed Benali",
-    email: "ahmed@import-export.dz",
-    phone: "+213 5 55 12 34 56",
-    company: "Algiers Trading Co",
-    jobTitle: "Director",
-    source: "Cold Outreach",
-    status: "CONTACTED",
-    score: 45,
-    priority: "LOW",
-    tags: ["import-export", "algeria"],
-    createdAt: "2024-12-21T11:30:00Z",
-    lastContact: "2024-12-22T09:00:00Z",
-  },
-  {
-    id: "5",
-    name: "Claire Dubois",
-    email: "claire@restaurant-gourmet.fr",
-    phone: "+33 1 23 45 67 89",
-    company: "Le Gourmet",
-    jobTitle: "Manager",
-    source: "Google Ads",
-    status: "WON",
-    score: 95,
-    priority: "HIGH",
-    tags: ["restaurant", "hospitality"],
-    createdAt: "2024-12-15T14:20:00Z",
-    lastContact: "2024-12-20T16:30:00Z",
-  },
-];
+// No mock data - fetch from API
 
 const statusConfig = {
   NEW: { label: "Nouveau", variant: "info" as const, icon: AlertCircle },
@@ -149,15 +74,41 @@ const priorityConfig = {
 };
 
 export default function LeadsPage() {
-  const [leads, setLeads] = useState<Lead[]>(mockLeads);
-  const [filteredLeads, setFilteredLeads] = useState<Lead[]>(mockLeads);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [filteredLeads, setFilteredLeads] = useState<Lead[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simulate loading
-    setTimeout(() => setIsLoading(false), 500);
+    const fetchLeads = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch("/api/leads");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.data) {
+            // Transform API data to match our interface
+            const transformedLeads = data.data.map((lead: any) => ({
+              ...lead,
+              status: lead.status?.toUpperCase() || "NEW",
+              priority: lead.priority?.toUpperCase() || "MEDIUM",
+            }));
+            setLeads(transformedLeads);
+            setFilteredLeads(transformedLeads);
+          }
+        } else {
+          setError("Erreur de chargement des leads");
+        }
+      } catch (err) {
+        setError("Erreur de connexion au serveur");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchLeads();
   }, []);
 
   useEffect(() => {

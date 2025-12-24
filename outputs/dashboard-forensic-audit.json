@@ -1,0 +1,52 @@
+{
+  "critical": [
+    "MOCK DATA in /app/admin/automations/page.tsx: const mockAutomations",
+    "MOCK DATA in /app/admin/calendar/page.tsx: mockEvents, mockEvents",
+    "MOCK DATA in /app/admin/calendar/page.tsx: const mockEvents",
+    "MOCK DATA in /app/admin/campaigns/page.tsx: mockCampaigns, mockCampaigns",
+    "MOCK DATA in /app/admin/campaigns/page.tsx: const mockCampaigns",
+    "MOCK DATA in /app/admin/reports/page.tsx: mockReports, mockReports",
+    "MOCK DATA in /app/admin/reports/page.tsx: const mockReports",
+    "MOCK DATA in /app/admin/workflows/page.tsx: mockWorkflows, mockWorkflows",
+    "MOCK DATA in /app/admin/workflows/page.tsx: const mockWorkflows",
+    "MOCK DATA in /app/client/automations/page.tsx: const mockAutomations",
+    "MOCK DATA in /app/client/documents/page.tsx: mockDocuments, mockDocuments",
+    "MOCK DATA in /app/client/documents/page.tsx: const mockDocuments",
+    "MOCK DATA in /app/client/page.tsx: const mockStats, const mockTasks, const mockActivities",
+    "MOCK DATA in /app/client/reports/page.tsx: mockReports, mockReports",
+    "MOCK DATA in /app/client/reports/page.tsx: const mockReports",
+    "MOCK DATA in /app/client/settings/page.tsx: mockSettings, mockSettings",
+    "MOCK DATA in /app/client/settings/page.tsx: const mockSettings",
+    "MOCK DATA in /app/client/support/page.tsx: mockTickets, mockTickets",
+    "MOCK DATA in /app/client/support/page.tsx: const mockTickets",
+    "Dashboard NOT deployed - runs locally only",
+    "Real lead data from Google Sheets: MISSING",
+    "Real automation sync with n8n: MISSING",
+    "Real email campaign data: MISSING",
+    "Real calendar events from Google Calendar: MISSING",
+    "Real document storage (S3/GCS): MISSING",
+    "Real support tickets system: MISSING",
+    "Webhook endpoints for n8n: MISSING",
+    "Email notifications: MISSING",
+    "WhatsApp integration: MISSING",
+    "Payment/billing integration: MISSING"
+  ],
+  "high": [
+    "INCOMPLETE in /app/(auth)/login/page.tsx",
+    "INCOMPLETE in /app/admin/automations/page.tsx",
+    "INCOMPLETE in /app/admin/leads/page.tsx",
+    "INCOMPLETE in /app/admin/page.tsx",
+    "INCOMPLETE in /app/admin/settings/page.tsx",
+    "INCOMPLETE in /app/client/settings/page.tsx",
+    "INCOMPLETE in /app/client/support/page.tsx",
+    "INCOMPLETE in /components/layouts/admin-header.tsx",
+    "INCOMPLETE in /components/ui/input.tsx",
+    "INCOMPLETE in /components/ui/textarea.tsx"
+  ],
+  "medium": [
+    "localStorage auth is insecure"
+  ],
+  "low": [],
+  "info": [],
+  "stats": {}
+}
