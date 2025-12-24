@@ -34,8 +34,8 @@
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
 
-  <link rel="preload" href="styles.min.css?v=20.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="styles.min.css?v=20.0"></noscript>
+  <link rel="preload" href="styles.min.css?v=21.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.min.css?v=21.0"></noscript>
 
   <style>
     /* Booking-specific styles */
@@ -625,7 +625,23 @@
 
   <script src="script-lite.min.js"></script>
   <!-- Voice Assistant Widget -->
-  <script src="/voice-assistant/voice-widget.min.js?v=20.0" defer></script>
+  <script>
+  (function(){
+    var loaded = false;
+    function loadVoiceWidget() {
+      if (loaded) return;
+      loaded = true;
+      var s = document.createElement('script');
+      s.src = '/voice-assistant/voice-widget.min.js?v=20.1';
+      s.defer = true;
+      document.body.appendChild(s);
+    }
+    setTimeout(loadVoiceWidget, 10000);
+    ['scroll','click','touchstart','keydown'].forEach(function(e) {
+      window.addEventListener(e, loadVoiceWidget, {once:true, passive:true});
+    });
+  })();
+  </script>
 
   <!-- Booking Logic -->
   <script>

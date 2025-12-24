@@ -1,8 +1,34 @@
 /**
  * 3A Automation - Ultra Futuristic Scripts
- * Version: 3.0
- * Date: 17 Décembre 2025
+ * Version: 3.1 - Performance Optimized
+ * Date: 24 Décembre 2025
  */
+
+// ───────────────────────────────────────────────────────────────────────────
+// PERFORMANCE: Lite mode for slow connections & reduced motion preference
+// Pauses CPU-intensive animations until user interaction
+// ───────────────────────────────────────────────────────────────────────────
+(function() {
+  // Check for slow connection or reduced motion preference
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const isSlowConnection = connection && (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g' || connection.saveData === true);
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Enable lite mode by default for slow connections
+  if (isSlowConnection || prefersReducedMotion) {
+    document.body.classList.add('lite');
+  }
+
+  // Enable animations on first user interaction (unless prefers-reduced-motion)
+  if (!prefersReducedMotion) {
+    const enableAnimations = () => {
+      document.body.classList.remove('lite');
+    };
+    ['scroll', 'click', 'touchstart', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, enableAnimations, { once: true, passive: true });
+    });
+  }
+})();
 
 document.addEventListener('DOMContentLoaded', function() {
 
