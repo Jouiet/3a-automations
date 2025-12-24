@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>3A Dashboard - Demo Access</title>
+  <style>
+    body {
+      font-family: system-ui;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+    }
+    h1 { color: #4fbaf1; }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      background: #4fbaf1;
+      color: #0f172a;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .btn:hover { background: #3aa8df; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>3A Dashboard Demo</h1>
+    <p>Cliquez pour accéder aux dashboards:</p>
+    <a class="btn" href="#" onclick="loginAsAdmin()">Admin Dashboard</a>
+    <a class="btn" href="#" onclick="loginAsClient()">Client Portal</a>
+  </div>
+  <script>
+    function loginAsAdmin() {
+      localStorage.setItem('auth_token', 'demo_token_admin');
+      localStorage.setItem('user', JSON.stringify({
+        id: 'demo_admin',
+        email: 'admin@3a-automation.com',
+        name: 'Admin Demo',
+        role: 'ADMIN'
+      }));
+      window.location.href = '/admin';
+    }
+    function loginAsClient() {
+      localStorage.setItem('auth_token', 'demo_token_client');
+      localStorage.setItem('user', JSON.stringify({
+        id: 'demo_client',
+        email: 'client@demo.com',
+        name: 'Client Demo',
+        role: 'CLIENT'
+      }));
+      window.location.href = '/client';
+    }
+  </script>
+</body>
+</html>
