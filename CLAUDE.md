@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 13.1 | Date: 2025-12-24 | Session: 87
+## Version: 13.2 | Date: 2025-12-24 | Session: 88
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -7,19 +7,19 @@
 ## SOURCE DE VERITE
 
 **Automations Registry:** `automations/automations-registry.json` (77 automations v1.5.0)
-**Dashboard:** `dashboard/` (Next.js 14 + Google Sheets)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-87)
+**Dashboard:** https://dashboard.3a-automation.com (Next.js 14 + Google Sheets)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-88)
 **Audit Session 84:** `outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md`
 **Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
 
 ---
 
-## ETAT ACTUEL (Session 87 - 24/12/2025)
+## ETAT ACTUEL (Session 88 - 24/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
 | Site | https://3a-automation.com LIVE | ✅ |
-| **Dashboard** | **TESTED** (14 pages, 7 routes HTTP 200) | ✅ |
+| **Dashboard** | **https://dashboard.3a-automation.com LIVE** | ✅ |
 | Pages Site | 32 (16 FR + 16 EN) - HTTP 200 | ✅ |
 | Automations | **77** (48 scripts + 29 conceptuelles) | ✅ Registry |
 | Implementation Rate | **62%** (48/77 scripts verified) | ✅ |
@@ -29,6 +29,34 @@
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.2 (77 automations) | ✅ |
+
+### Session 88 - DASHBOARD DEPLOYED LIVE ON HOSTINGER
+```
+DASHBOARD PRODUCTION DEPLOYMENT:
+├── ✅ https://dashboard.3a-automation.com LIVE
+├── ✅ Docker container: 3a-dashboard (Next.js standalone)
+├── ✅ SSL certificate: Let's Encrypt via Traefik
+├── ✅ All 13 pages: HTTP 200
+└── ✅ Health endpoint: /api/health responding
+
+GOOGLE APPS SCRIPT BACKEND:
+├── ✅ Spreadsheet ID: 1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w
+├── ✅ API URL deployed as Web App
+├── ✅ CRUD operations: Users, Leads, Automations, Activities, Metrics
+└── ✅ Dashboard stats endpoint
+
+DNS CONFIGURATION:
+├── ✅ A record: dashboard.3a-automation.com → 148.230.113.163
+└── ✅ Propagation verified
+
+PAGES VERIFIED (HTTP 200):
+├── Admin: dashboard, leads, automations, analytics, settings, workflows, campaigns, calendar, reports
+└── Client: dashboard, automations, documents, reports, settings, support
+
+COMMITS:
+├── c89c22d fix(dashboard): Use npm install instead of npm ci
+└── Docker labels fixed (Traefik backticks)
+```
 
 ### Session 87 - DASHBOARD TESTED + DEPENDENCIES FIXED
 ```
