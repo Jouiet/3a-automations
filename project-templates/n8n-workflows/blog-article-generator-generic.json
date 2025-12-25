@@ -1,0 +1,131 @@
+{
+  "name": "[PROJECT_NAME] Blog Article Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "={{ $env.WEBHOOK_PATH || 'blog/generate' }}",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "notes": "POST: { topic, language, keywords, wordCount }"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst brandName = process.env.BRAND_NAME || 'Company';\nconst brandUrl = process.env.BRAND_URL || 'https://example.com';\n\nreturn {\n  json: {\n    topic: input.topic || 'Marketing Digital',\n    language: input.language || process.env.DEFAULT_LANGUAGE || 'fr',\n    keywords: input.keywords || '',\n    wordCount: input.wordCount || 1500,\n    brandName,\n    brandUrl,\n    ctaText: process.env.CTA_TEXT || `Decouvrez nos services sur ${brandUrl}`\n  }\n};"
+      },
+      "id": "set-params",
+      "name": "Set Article Params",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "={{ $env.CLAUDE_API_KEY }}"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2024-01-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"{{ $env.CLAUDE_MODEL || 'claude-sonnet-4-20250514' }}\",\n  \"max_tokens\": 4096,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Write a comprehensive blog article about: {{ $json.topic }}\\n\\nLanguage: {{ $json.language }}\\nTarget Keywords: {{ $json.keywords }}\\nWord Count: {{ $json.wordCount }}-{{ $json.wordCount + 500 }} words\\nBrand: {{ $json.brandName }}\\n\\nRequirements:\\n- Include H2 and H3 headings\\n- Include actionable tips with concrete examples\\n- Include statistics and data (cite sources)\\n- SEO optimized for the target keywords\\n- Professional but accessible tone\\n- Focus on 2026 trends and future outlook\\n- Include a strong CTA at the end directing to {{ $json.brandUrl }}\\n\\nOutput format: HTML with proper heading tags (h2, h3), paragraphs (p), lists (ul, li), and emphasis (strong).\\n\\nIMPORTANT: Output ONLY the HTML content, no markdown, no explanations.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "claude-generate",
+      "name": "Generate with Claude",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [640, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst content = response.content?.[0]?.text || '';\nconst params = $('Set Article Params').first().json;\n\n// Generate slug from topic\nconst slug = params.topic\n  .toLowerCase()\n  .normalize('NFD')\n  .replace(/[\\u0300-\\u036f]/g, '')\n  .replace(/[^a-z0-9]+/g, '-')\n  .replace(/^-|-$/g, '');\n\nreturn {\n  json: {\n    title: params.topic,\n    slug,\n    content,\n    language: params.language,\n    keywords: params.keywords,\n    brandName: params.brandName,\n    publishedDate: new Date().toISOString().split('T')[0],\n    generatedAt: new Date().toISOString()\n  }\n};"
+      },
+      "id": "format-output",
+      "name": "Format Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [840, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1040, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{"node": "Set Article Params", "type": "main", "index": 0}]]
+    },
+    "Set Article Params": {
+      "main": [[{"node": "Generate with Claude", "type": "main", "index": 0}]]
+    },
+    "Generate with Claude": {
+      "main": [[{"node": "Format Output", "type": "main", "index": 0}]]
+    },
+    "Format Output": {
+      "main": [[{"node": "Respond to Webhook", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "templateId": "blog-article-generator-generic",
+    "version": "1.0.0",
+    "description": "Generic SEO blog article generator using Claude AI",
+    "author": "3A Automation",
+    "created": "2025-12-25"
+  },
+  "envVariables": {
+    "required": ["CLAUDE_API_KEY"],
+    "optional": [
+      "BRAND_NAME",
+      "BRAND_URL",
+      "WEBHOOK_PATH",
+      "CLAUDE_MODEL",
+      "DEFAULT_LANGUAGE",
+      "CTA_TEXT"
+    ],
+    "examples": {
+      "cinematicads": {
+        "BRAND_NAME": "CinematicAds",
+        "BRAND_URL": "https://cinematicads.studio",
+        "DEFAULT_LANGUAGE": "en",
+        "CTA_TEXT": "Try CinematicAds free today"
+      },
+      "ecommerce": {
+        "BRAND_NAME": "MonShop",
+        "BRAND_URL": "https://monshop.com",
+        "DEFAULT_LANGUAGE": "fr",
+        "CTA_TEXT": "Decouvrez notre catalogue"
+      }
+    }
+  },
+  "tags": ["Blog", "Content", "SEO", "Claude", "Generic"]
+}
