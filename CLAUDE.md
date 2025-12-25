@@ -94,20 +94,26 @@ ACTIONS COMPLÉTÉES SESSION 89:
 ├── [x] Configuration permissions Google Sheets
 ├── [x] Nettoyage tokens de la documentation
 ├── [x] Mise à jour complète docs (FORENSIC-AUDIT, action-plan, etc.)
-├── [x] Activation 3/9 workflows n8n (WhatsApp x2, AI Avatar)
+├── [x] Activation 6/9 workflows n8n (66%)
+│   ├── ✅ WhatsApp Booking Confirmation
+│   ├── ✅ WhatsApp Booking Reminders
+│   ├── ✅ AI Avatar Generator
+│   ├── ✅ Email Outreach (Klaviyo→HTTP Request)
+│   ├── ✅ LinkedIn Lead Scraper (Klaviyo→HTTP Request)
+│   └── ✅ Blog Article Generator (webhook trigger added)
 ├── [x] Test Grok Voice POC (grok-3-mini): OK, réponses correctes
 └── [x] Documentation Session 89 complète
 
-n8n WORKFLOWS STATUS (3/9 actifs):
+n8n WORKFLOWS STATUS (6/9 = 66%):
+├── ✅ ACTIVE: Email Outreach Sequence (HTTP Request)
+├── ✅ ACTIVE: LinkedIn Lead Scraper (HTTP Request)
+├── ✅ ACTIVE: Blog Article Generator (webhook)
 ├── ✅ ACTIVE: WhatsApp Booking Confirmation
 ├── ✅ ACTIVE: WhatsApp Booking Reminders
 ├── ✅ ACTIVE: AI Avatar Generator
-├── ⏸️ INACTIVE: Email Outreach (node Klaviyo manquant)
-├── ⏸️ INACTIVE: LinkedIn Lead Scraper (node Klaviyo manquant)
-├── ⏸️ INACTIVE: Blog Article Generator (pas de trigger)
-├── ⏸️ INACTIVE: Grok Voice Telephony
-├── ⏸️ INACTIVE: AI Talking Video
-└── ⏸️ INACTIVE: Enhance Product Photos (OAuth expiré)
+├── ⏸️ INACTIVE: Grok Voice Telephony (needs Twilio)
+├── ⏸️ INACTIVE: AI Talking Video Generator
+└── ⏸️ INACTIVE: Enhance Product Photos (OAuth expired)
 
 GROK VOICE POC TEST (25/12/2025):
 ├── ✅ API Connection: OK
