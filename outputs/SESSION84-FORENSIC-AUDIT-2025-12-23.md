@@ -1,5 +1,32 @@
-# SESSION 84-88 - AUDIT FORENSIQUE COMPLET
-## Date: 2025-12-23 (màj 2025-12-24 Session 88) | Version: 1.1.0
+# SESSION 84-90 - AUDIT FORENSIQUE COMPLET
+## Date: 2025-12-23 (màj 2025-12-25 Session 90 FINAL) | Version: 1.2.0
+
+---
+
+## 0. SESSION 90 UPDATE (25/12/2025)
+
+### Problème Résolu: Klaviyo Welcome Series
+```
+DIAGNOSTIC FACTUEL:
+├── Symptôme: Workflow échouait sur Google Sheets node
+├── Cause: n8n + Service Account + Google Sheets = NON SUPPORTÉ
+│   └── Référence: github.com/n8n-io/n8n/issues/22018, #17422
+├── Solution: Retirer Google Sheets logging
+└── Résultat: Workflow fonctionnel (Klaviyo only)
+
+TEST VÉRIFIÉ:
+curl -X POST https://n8n.srv1168256.hstgr.cloud/webhook/subscribe/new
+  -d '{"email":"test@example.com","first_name":"Test"}'
+→ {"success":true,"message":"Welcome series started for test@example.com"}
+```
+
+### État Actuel (Factuel)
+| Métrique | Valeur | Vérification |
+|----------|--------|--------------|
+| n8n Workflows | **10/10 ACTIFS** | API call 25/12 |
+| MCPs Fonctionnels | **12/13** (92%) | API calls |
+| Klaviyo Welcome Series | **FONCTIONNEL** | Test webhook |
+| Google Sheets + n8n | **LIMITATION** | Service Account non supporté |
 
 ---
 
@@ -8,7 +35,7 @@
 ### Objectif Session 84
 Audit approfondi, factuel et rigoureux de toutes les fonctionnalites, services et automatisations pour definir precisement les personas clients et optimiser notre strategie lead gen.
 
-### Resultats Cles (màj Session 88)
+### Resultats Cles (màj Session 90)
 | Metrique | Valeur | Verification |
 |----------|--------|--------------|
 | Total Automations | 77 | VERIFIE registry |
@@ -16,7 +43,8 @@ Audit approfondi, factuel et rigoureux de toutes les fonctionnalites, services e
 | Scripts Manquants | 0 | VERIFIE FS |
 | Automations Conceptuelles | 29 (38%) | Templates/Manual |
 | Personas Identifies | 5 | Base automations |
-| Automations Lead Gen 3A | 8 | 7/8 implementees |
+| Automations Lead Gen 3A | 8 | **8/8 implementees** |
+| n8n Workflows | **10/10 ACTIFS** | API call Session 90 |
 | **Dashboard Admin** | **LIVE** | https://dashboard.3a-automation.com |
 | **Infrastructure** | PM2 + Node.js 20 | NO Docker |
 | **Database** | Google Sheets | 5 sheets CRUD OK |
