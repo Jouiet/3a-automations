@@ -2442,11 +2442,11 @@ node scripts/test-google-auth.cjs
 | ✅ Gemini API | P1 | CONFIGURÉ | `.env`, `mcp.json` (quota free tier) |
 | ✅ GA4 | P1 | CONFIGURÉ | Property 516832662, Stream 13160825497, G-87F6FDJG45 |
 | ✅ Hostinger API | P0 | CONFIGURÉ | `.env`, `mcp.json` - VPS 1168256 confirmé |
-| ✅ n8n Instance | P0 | CONFIGURÉ | API key + 9 workflows déployés (Session 89) |
+| ✅ n8n Instance | P0 | CONFIGURÉ | API key + 8/9 workflows ACTIFS (88%) Session 89 |
 | ✅ Klaviyo Agence | P1 | TESTÉ OK | 3 listes (Email, SMS, Preview), 0 flows (nouveau) |
 | ⏳ Shopify Partners | P0 | À FAIRE | Dev store à créer |
 | ✅ xAI/Grok | P1 | CONFIGURÉ | Crédits actifs, 11 modèles Grok (Session 89) |
-| ⏳ Apify | P2 | À FAIRE | Compte à créer |
+| ✅ Apify | P1 | CONFIGURÉ | 15 actors disponibles (Google Maps, LinkedIn, etc.) |
 
 ---
 

@@ -4,7 +4,7 @@
 
 | Session | Modifications |
 |---------|---------------|
-| **89** | **MCP STACK COMPLET 11/12 (92%)**: n8n 6/9 workflows ACTIFS (Email Outreach, LinkedIn Lead Scraper, Blog Article Generator, WhatsApp x2, AI Avatar) - Klaviyo nodes→HTTP Request conversion, xAI/Grok crédits ACTIFS (11 modèles: grok-4, grok-3, vision), Google Analytics permissions (30 users, 90 sessions/7j), Google Sheets permissions (Leads & CRM), GitHub token configuré, Sécurité: 0 tokens exposés, .gitignore updated |
+| **89** | **MCP STACK COMPLET 11/12 (92%) + n8n 8/9 (88%)**: Workflows ACTIFS: Email Outreach, LinkedIn Lead Scraper, Blog Article Generator, WhatsApp x2, AI Avatar, Grok Voice Telephony, AI Talking Video - Klaviyo nodes→HTTP Request conversion, xAI/Grok crédits ACTIFS (11 modèles), GA4 (30 users, 90 sessions/7j), Google Sheets, Sécurité: 0 tokens exposés |
 
 ## Session 88 (24/12/2025) - DASHBOARD PRODUCTION LIVE
 
