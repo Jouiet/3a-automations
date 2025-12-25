@@ -1,0 +1,173 @@
+{
+  "name": "WhatsApp Booking Confirmation (Generic)",
+  "description": "Generic template - Configure via environment variables",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "={{ $env.WEBHOOK_PATH || 'booking-confirmation' }}",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook - New Booking",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "booking-confirmation",
+      "notes": "Triggered by booking system after booking creation"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Format booking data for WhatsApp\n// CONFIGURABLE: Timezone, phone format, locale\nconst booking = $input.first().json;\n\nconst TIMEZONE = $env.TIMEZONE || 'UTC';\nconst LOCALE = $env.LOCALE || 'en-US';\nconst PHONE_PREFIX = $env.PHONE_PREFIX || '+1';\n\n// Format date for locale\nconst bookingDate = new Date(booking.datetime);\nconst options = { \n  weekday: 'long', \n  year: 'numeric', \n  month: 'long', \n  day: 'numeric',\n  hour: '2-digit',\n  minute: '2-digit',\n  timeZone: booking.timezone || TIMEZONE\n};\nconst formattedDate = bookingDate.toLocaleDateString(LOCALE, options);\n\n// Clean phone number\nlet phone = booking.phone || '';\nphone = phone.replace(/\\s+/g, '');\nif (!phone.startsWith('+')) {\n  phone = phone.startsWith('0') ? PHONE_PREFIX + phone.slice(1) : PHONE_PREFIX + phone;\n}\n\nreturn {\n  json: {\n    name: booking.name,\n    email: booking.email,\n    phone: phone,\n    service: booking.service || 'Consultation',\n    datetime: formattedDate,\n    rawDatetime: booking.datetime,\n    timezone: booking.timezone || TIMEZONE,\n    bookingId: booking.id || booking.eventId,\n    hasPhone: phone.length > 8,\n    brandName: $env.BRAND_NAME || 'Your Brand'\n  }\n};"
+      },
+      "id": "format-data",
+      "name": "Format Booking Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "notes": "Prepare data for WhatsApp message"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.hasPhone }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "check-phone",
+      "name": "Has Phone Number?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "notes": "Only send WhatsApp if phone number provided"
+    },
+    {
+      "parameters": {
+        "operation": "sendTemplate",
+        "phoneNumberId": "={{ $env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $json.phone }}",
+        "templateName": "={{ $env.TEMPLATE_NAME || 'booking_confirmation' }}",
+        "templateLanguage": "={{ $env.TEMPLATE_LANG || 'en' }}",
+        "templateParameters": {
+          "parameters": [
+            {
+              "type": "body",
+              "body_parameters": [
+                {
+                  "parameterType": "text",
+                  "textValue": "={{ $json.name }}"
+                },
+                {
+                  "parameterType": "text",
+                  "textValue": "={{ $json.service }}"
+                },
+                {
+                  "parameterType": "text",
+                  "textValue": "={{ $json.datetime }}"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "id": "send-whatsapp",
+      "name": "Send WhatsApp Confirmation",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 2,
+      "position": [900, 200],
+      "credentials": {
+        "whatsAppBusinessCloudApi": {
+          "id": "{{ $env.WHATSAPP_CRED_ID }}",
+          "name": "WhatsApp Business Cloud"
+        }
+      },
+      "notes": "Send confirmation via WhatsApp"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, whatsappSent: true, phone: $json.phone }) }}"
+      },
+      "id": "respond-success",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1120, 200],
+      "notes": "Return success response"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, whatsappSent: false, reason: 'No phone number' }) }}"
+      },
+      "id": "respond-no-phone",
+      "name": "Respond - No Phone",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [900, 400],
+      "notes": "No phone number provided"
+    }
+  ],
+  "connections": {
+    "Webhook - New Booking": {
+      "main": [[{"node": "Format Booking Data", "type": "main", "index": 0}]]
+    },
+    "Format Booking Data": {
+      "main": [[{"node": "Has Phone Number?", "type": "main", "index": 0}]]
+    },
+    "Has Phone Number?": {
+      "main": [
+        [{"node": "Send WhatsApp Confirmation", "type": "main", "index": 0}],
+        [{"node": "Respond - No Phone", "type": "main", "index": 0}]
+      ]
+    },
+    "Send WhatsApp Confirmation": {
+      "main": [[{"node": "Respond Success", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {"executionOrder": "v1"},
+  "meta": {"templateCredsSetupCompleted": false},
+  "tags": [
+    {"name": "booking", "id": "booking"},
+    {"name": "whatsapp", "id": "whatsapp"},
+    {"name": "generic", "id": "generic"}
+  ],
+  "envVariables": {
+    "required": [
+      "WHATSAPP_PHONE_NUMBER_ID",
+      "WHATSAPP_CRED_ID"
+    ],
+    "optional": [
+      "WEBHOOK_PATH",
+      "TIMEZONE",
+      "LOCALE",
+      "PHONE_PREFIX",
+      "TEMPLATE_NAME",
+      "TEMPLATE_LANG",
+      "BRAND_NAME"
+    ],
+    "examples": {
+      "3a-automation": {
+        "TIMEZONE": "Africa/Casablanca",
+        "LOCALE": "fr-FR",
+        "PHONE_PREFIX": "+212",
+        "TEMPLATE_NAME": "booking_confirmation",
+        "TEMPLATE_LANG": "fr",
+        "BRAND_NAME": "3A Automation"
+      },
+      "cinematicads": {
+        "TIMEZONE": "America/New_York",
+        "LOCALE": "en-US",
+        "PHONE_PREFIX": "+1",
+        "TEMPLATE_NAME": "demo_scheduled",
+        "TEMPLATE_LANG": "en",
+        "BRAND_NAME": "CinematicAds"
+      }
+    }
+  }
+}

@@ -43,7 +43,11 @@
     "cinematicads": {
       "name_fr": "CinematicAds AI",
       "name_en": "CinematicAds AI",
-      "count": 4
+      "count": 4,
+      "external": true,
+      "partner_url": "https://cinematicads.studio",
+      "description_fr": "Plateforme SaaS partenaire pour génération vidéos publicitaires IA",
+      "description_en": "Partner SaaS platform for AI video ad generation"
     },
     "whatsapp": {
       "name_fr": "WhatsApp Business",
@@ -854,8 +858,9 @@
       "name_fr": "CinematicAds Director",
       "name_en": "CinematicAds Director",
       "category": "cinematicads",
-      "type": "cinematicads-workflow",
-      "script": "../automations-cinematicads/workflows/cinematic-director.js",
+      "type": "external-service",
+      "external": true,
+      "url": "https://cinematicads.studio",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Vidéos cinématiques AI (Gemini 3 Pro + Imagen 4 + Veo 3.1)",
@@ -866,8 +871,9 @@
       "name_fr": "Competitor Clone AI",
       "name_en": "Competitor Clone AI",
       "category": "cinematicads",
-      "type": "cinematicads-workflow",
-      "script": "../automations-cinematicads/workflows/competitor-clone.js",
+      "type": "external-service",
+      "external": true,
+      "url": "https://cinematicads.studio",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Clone pubs concurrents (analyse + script + production multi-scènes)",
@@ -878,8 +884,9 @@
       "name_fr": "E-commerce Ads Factory",
       "name_en": "E-commerce Ads Factory",
       "category": "cinematicads",
-      "type": "cinematicads-workflow",
-      "script": "../automations-cinematicads/workflows/ecommerce-factory.js",
+      "type": "external-service",
+      "external": true,
+      "url": "https://cinematicads.studio",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Ads multi-ratio (Google Ads 1.91:1, Social 1:1, TikTok 9:16)",
@@ -890,8 +897,9 @@
       "name_fr": "Asset Factory (Dual AI)",
       "name_en": "Asset Factory (Dual AI)",
       "category": "cinematicads",
-      "type": "cinematicads-core",
-      "script": "../automations-cinematicads/gateway/AssetFactory.js",
+      "type": "external-service",
+      "external": true,
+      "url": "https://cinematicads.studio",
       "frequency_fr": "Core engine",
       "frequency_en": "Core engine",
       "benefit_fr": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
@@ -1003,8 +1011,7 @@
     "manual-file": "Fichier manuel",
     "manual-audit": "Audit manuel",
     "multi-tool": "Combinaison multi-outils",
-    "cinematicads-workflow": "CinematicAds AI Workflow (Vertex AI + xAI)",
-    "cinematicads-core": "CinematicAds Core Engine"
+    "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
     "withScript": 47,
@@ -1015,7 +1022,7 @@
     "manualProcesses": 5,
     "aiAssisted": 2,
     "thirdPartyIntegrations": 3,
-    "cinematicadsWorkflows": 4,
+    "externalServices": 4,
     "aiAvatarWorkflows": 2
   }
 }
