@@ -26,7 +26,7 @@
 | Personas Clients | **5** (documentes) | ✅ |
 | Claims Marketing | **CORRIGES** (ROI attribution, counts) | ✅ |
 | MCPs fonctionnels | **12/13** (92%) | ✅ Session 90 |
-| n8n Workflows | **9/10 ACTIFS** (90%) | ✅ Session 90 |
+| n8n Workflows | **10/10 ACTIFS** (100%) | ✅ Session 90 |
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
 | Lighthouse Perf | **Optimise** (blur, lazy-load) | ✅ v21.0 |
@@ -38,7 +38,7 @@
                     SESSION 90 - RÉSULTATS VÉRIFIÉS
 ═══════════════════════════════════════════════════════════════════
 
-n8n WORKFLOWS (9/10 = 90%):
+n8n WORKFLOWS (10/10 = 100%):
 ├── ✅ ACTIVE: Grok Voice Telephony - Phone Booking
 ├── ✅ ACTIVE: Email Outreach Sequence - Multi-Touch Campaign
 ├── ✅ ACTIVE: WhatsApp Booking Confirmation
@@ -48,7 +48,7 @@ n8n WORKFLOWS (9/10 = 90%):
 ├── ✅ ACTIVE: LinkedIn Lead Scraper - Aggressive Outbound
 ├── ✅ ACTIVE: AI Talking Video Generator
 ├── ✅ ACTIVE: Klaviyo Welcome Series - 5 Emails Automation [NEW]
-└── ⏸️ INACTIVE: Enhance Product Photos (OAuth expired)
+└── ✅ ACTIVE: Enhance Product Photos (webhook+schedule triggers)
 
 ACTIONS COMPLÉTÉES SESSION 90:
 ├── [x] Vérification MCPs via API (11/12 OK)
@@ -66,6 +66,9 @@ ACTIONS COMPLÉTÉES SESSION 90:
 ├── [x] Création workflow klaviyo-welcome-series.json
 ├── [x] Déploiement + activation sur n8n (ID: JaooDwzmJojEe6bx)
 ├── [x] Installation claude-mcp server
+├── [x] Création credential Google Service Account dans n8n
+├── [x] Fix Enhance Product Photos: OAuth→webhook+schedule triggers
+├── [x] Activation 10/10 workflows n8n (100%)
 └── [x] Mise à jour CLAUDE.md
 
 CLAUDE-MCP SERVER:
