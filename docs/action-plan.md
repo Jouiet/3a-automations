@@ -6,7 +6,7 @@
 
 ## ✅ SESSION 90: WELCOME SERIES + CLAUDE-MCP (25/12/2025)
 
-### n8n Workflows Final - 9/10 ACTIFS (90%)
+### n8n Workflows Final - 10/10 ACTIFS (100%)
 ```
 VÉRIFIÉ PAR API CALLS (25/12/2025):
 ├── ✅ Grok Voice Telephony - Phone Booking
@@ -18,7 +18,7 @@ VÉRIFIÉ PAR API CALLS (25/12/2025):
 ├── ✅ LinkedIn Lead Scraper - Aggressive Outbound (schedule: 6h)
 ├── ✅ AI Talking Video Generator
 ├── ✅ Klaviyo Welcome Series - 5 Emails Automation [NEW]
-└── ⏸️ Enhance Product Photos (OAuth expired - action manuelle)
+└── ✅ Enhance Product Photos (webhook+schedule - FIXED Session 90)
 
 WORKFLOW IDs:
 ├── Welcome Series: JaooDwzmJojEe6bx
