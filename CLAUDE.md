@@ -35,10 +35,10 @@
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.3 (77 automations) | ✅ |
 
-### Session 94 - RECHARTS DASHBOARDS COMPLETS (25/12/2025)
+### Session 94 - RECHARTS + FULL DEPLOYMENT LIVE (25/12/2025)
 ```
 ═══════════════════════════════════════════════════════════════════
-                    SESSION 94 - DASHBOARD ENHANCEMENT
+                    SESSION 94 - DASHBOARD COMPLETE
 ═══════════════════════════════════════════════════════════════════
 
 ADMIN DASHBOARD ENHANCED:
@@ -61,19 +61,31 @@ CLIENT DASHBOARD (Session 92):
 ├── Build: SUCCESS (client: 4.55kB + 199kB bundle)
 └── n8n API routes: /api/n8n/workflows, /api/n8n/executions
 
-GITHUB ACTIONS (deploy-dashboard.yml):
-├── Trigger: push to dashboard/** OR workflow_dispatch
-├── PM2 deployment (not Docker)
-├── Secrets: N8N_HOST, N8N_API_KEY
-├── Script: git pull → npm ci → npm run build → pm2 restart
-└── Verify: curl dashboard.3a-automation.com/api/health
+GITHUB ACTIONS FIX:
+├── Fixed npm ci → npm install --legacy-peer-deps
+├── Updated SSH deployment script for /root/dashboard
+├── Added all secrets: HOSTINGER_HOST, HOSTINGER_USERNAME, HOSTINGER_SSH_KEY
+├── Added: N8N_HOST, N8N_API_KEY secrets
+└── Workflow: 20506135842 SUCCESS
 
-BUILD FINAL:
-├── npm run build: SUCCESS
-├── 27 pages compiled
-├── /admin: 12.5kB + 207kB (Recharts)
-├── /client: 4.55kB + 199kB (Recharts)
-└── Push: GitHub ✅
+DEPLOYMENT HOSTINGER VPS:
+├── Created /root/dashboard with correct code
+├── Created .env.local with N8N_API_KEY
+├── Build: SUCCESS (27 pages)
+├── PM2: dashboard running on port 3001
+└── Traefik: routing dashboard.3a-automation.com → localhost:3001
+
+VERIFICATION:
+├── /api/health: ✅ {"status":"healthy"}
+├── /api/n8n/workflows: ✅ 10 workflows returned
+├── /api/n8n/executions: ✅ Real execution data
+└── Dashboard LIVE: https://dashboard.3a-automation.com ✅
+
+COMMITS SESSION 94:
+├── 3a328f2 feat(session94): Admin dashboard Recharts + real n8n data
+├── 7d9e593 docs(session94): Update CLAUDE.md
+├── 5cfa6c0 fix(ci): Use npm install instead of npm ci
+└── 89e61a6 fix(ci): Update dashboard deployment script
 ```
 
 ### Session 93 - CINEMATICADS MARKETING-ONLY + GENERICS (25/12/2025)
