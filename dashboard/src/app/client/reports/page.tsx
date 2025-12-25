@@ -1,10 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+  LineChart,
+  Line,
+} from "recharts";
 import {
   FileText,
   Download,
@@ -16,49 +31,118 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   BarChart3,
-  PieChart,
+  PieChart as PieChartIcon,
   Eye,
+  RefreshCw,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
+import { generatePDFReport } from "@/lib/pdf-generator";
 
 interface Report {
   id: string;
-  title: string;
+  name: string;
   type: "monthly" | "weekly" | "campaign";
-  date: string;
+  period: string;
+  generatedAt: string;
   status: "ready" | "generating";
+  metrics: {
+    workflows?: number;
+    activeWorkflows?: number;
+    totalExecutions?: number;
+    successfulExecutions?: number;
+    failedExecutions?: number;
+    successRate?: number;
+  };
+  workflowStats?: Array<{
+    id: string;
+    name: string;
+    active: boolean;
+    totalExecutions: number;
+    successCount: number;
+    errorCount: number;
+    successRate: number;
+  }>;
 }
 
-interface MetricSummary {
-  label: string;
-  value: string;
-  change: number;
-  icon: typeof TrendingUp;
-  color: string;
+interface ReportsResponse {
+  success: boolean;
+  reports: Report[];
+  summary: {
+    totalReports: number;
+    totalWorkflows: number;
+    totalExecutions: number;
+    overallSuccessRate: number;
+  };
 }
-
-const mockReports: Report[] = [
-  { id: "1", title: "Rapport Mensuel - Decembre 2024", type: "monthly", date: "2024-12-01", status: "ready" },
-  { id: "2", title: "Rapport Mensuel - Novembre 2024", type: "monthly", date: "2024-11-01", status: "ready" },
-  { id: "3", title: "Campagne Black Friday 2024", type: "campaign", date: "2024-11-29", status: "ready" },
-  { id: "4", title: "Rapport Mensuel - Octobre 2024", type: "monthly", date: "2024-10-01", status: "ready" },
-  { id: "5", title: "Campagne Rentree 2024", type: "campaign", date: "2024-09-01", status: "ready" },
-];
-
-const metrics: MetricSummary[] = [
-  { label: "Emails Envoyes", value: "45,678", change: 12.5, icon: Mail, color: "text-emerald-400" },
-  { label: "Leads Generes", value: "1,247", change: 8.3, icon: Users, color: "text-sky-400" },
-  { label: "Taux Conversion", value: "27.4%", change: 2.1, icon: TrendingUp, color: "text-amber-400" },
-  { label: "Revenue Attribue", value: "24,500 EUR", change: 18.7, icon: DollarSign, color: "text-purple-400" },
-];
 
 export default function ClientReportsPage() {
-  const [reports, setReports] = useState<Report[]>(mockReports);
+  const [reports, setReports] = useState<Report[]>([]);
+  const [summary, setSummary] = useState<ReportsResponse["summary"] | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [isLoading, setIsLoading] = useState(true);
+  const [isExporting, setIsExporting] = useState(false);
+  const [selectedReport, setSelectedReport] = useState<Report | null>(null);
+
+  const fetchReports = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch("/api/reports");
+      const data: ReportsResponse = await response.json();
+
+      if (data.success) {
+        setReports(data.reports);
+        setSummary(data.summary);
+        if (data.reports.length > 0) {
+          setSelectedReport(data.reports[0]);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching reports:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500);
-  }, []);
+    fetchReports();
+  }, [fetchReports]);
+
+  const handleGeneratePDF = async (report: Report) => {
+    try {
+      setIsExporting(true);
+      const response = await fetch(`/api/reports/pdf?id=${report.id}`);
+      const data = await response.json();
+
+      if (data.success) {
+        await generatePDFReport(data.data);
+      }
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  const handleExportAll = async () => {
+    try {
+      setIsExporting(true);
+      const response = await fetch("/api/reports/export?type=summary&format=csv");
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `rapport-complet-${new Date().toISOString().split("T")[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Error exporting:", error);
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -68,6 +152,56 @@ export default function ClientReportsPage() {
       year: "numeric",
     }).format(date);
   };
+
+  // Prepare chart data
+  const getBarChartData = () => {
+    if (!selectedReport?.workflowStats) return [];
+    return selectedReport.workflowStats.slice(0, 5).map((wf) => ({
+      name: wf.name.substring(0, 12) + (wf.name.length > 12 ? "..." : ""),
+      succes: wf.successCount,
+      erreurs: wf.errorCount,
+    }));
+  };
+
+  const getPieData = () => {
+    if (!selectedReport?.metrics) return [];
+    return [
+      { name: "Succes", value: selectedReport.metrics.successfulExecutions || 0, color: "#10b981" },
+      { name: "Echecs", value: selectedReport.metrics.failedExecutions || 0, color: "#ef4444" },
+    ];
+  };
+
+  // Metrics cards
+  const metrics = [
+    {
+      label: "Workflows Actifs",
+      value: summary?.totalWorkflows?.toString() || "0",
+      change: 0,
+      icon: BarChart3,
+      color: "text-emerald-400",
+    },
+    {
+      label: "Executions Totales",
+      value: summary?.totalExecutions?.toString() || "0",
+      change: 0,
+      icon: TrendingUp,
+      color: "text-sky-400",
+    },
+    {
+      label: "Taux de Succes",
+      value: `${summary?.overallSuccessRate || 0}%`,
+      change: summary?.overallSuccessRate || 0 >= 80 ? 5 : -5,
+      icon: CheckCircle,
+      color: "text-amber-400",
+    },
+    {
+      label: "Rapports Disponibles",
+      value: summary?.totalReports?.toString() || "0",
+      change: 0,
+      icon: FileText,
+      color: "text-purple-400",
+    },
+  ];
 
   if (isLoading) {
     return (
@@ -94,20 +228,26 @@ export default function ClientReportsPage() {
         <div>
           <h1 className="text-3xl font-bold">Rapports</h1>
           <p className="text-muted-foreground">
-            Analysez les performances de vos automations
+            Analysez les performances de vos automations en temps reel
           </p>
         </div>
-        <Button>
-          <Download className="h-4 w-4 mr-2" />
-          Exporter tout
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={fetchReports} disabled={isLoading}>
+            <RefreshCw className={`h-4 w-4 mr-2 ${isLoading ? "animate-spin" : ""}`} />
+            Actualiser
+          </Button>
+          <Button onClick={handleExportAll} disabled={isExporting}>
+            <Download className="h-4 w-4 mr-2" />
+            {isExporting ? "Export..." : "Exporter tout"}
+          </Button>
+        </div>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
           <TabsTrigger value="overview">Vue d&apos;ensemble</TabsTrigger>
           <TabsTrigger value="monthly">Rapports mensuels</TabsTrigger>
-          <TabsTrigger value="campaigns">Campagnes</TabsTrigger>
+          <TabsTrigger value="weekly">Rapports hebdos</TabsTrigger>
         </TabsList>
 
         {/* Overview Tab */}
@@ -119,17 +259,19 @@ export default function ClientReportsPage() {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <metric.icon className={`h-5 w-5 ${metric.color}`} />
-                    <Badge
-                      variant={metric.change >= 0 ? "success" : "destructive"}
-                      className="gap-1"
-                    >
-                      {metric.change >= 0 ? (
-                        <ArrowUpRight className="h-3 w-3" />
-                      ) : (
-                        <ArrowDownRight className="h-3 w-3" />
-                      )}
-                      {Math.abs(metric.change)}%
-                    </Badge>
+                    {metric.change !== 0 && (
+                      <Badge
+                        variant={metric.change >= 0 ? "default" : "destructive"}
+                        className="gap-1"
+                      >
+                        {metric.change >= 0 ? (
+                          <ArrowUpRight className="h-3 w-3" />
+                        ) : (
+                          <ArrowDownRight className="h-3 w-3" />
+                        )}
+                        {Math.abs(metric.change)}%
+                      </Badge>
+                    )}
                   </div>
                   <div className="mt-4">
                     <p className="text-2xl font-bold">{metric.value}</p>
@@ -146,35 +288,87 @@ export default function ClientReportsPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-primary" />
-                  Performance Mensuelle
+                  Performance par Workflow
                 </CardTitle>
-                <CardDescription>Evolution sur les 6 derniers mois</CardDescription>
+                <CardDescription>Succes vs Echecs sur la periode</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-[250px] flex items-center justify-center border border-dashed border-border/50 rounded-lg bg-muted/20">
-                  <div className="text-center text-muted-foreground">
-                    <BarChart3 className="h-10 w-10 mx-auto mb-2 opacity-50" />
-                    <p className="text-sm">Graphique performances</p>
-                  </div>
-                </div>
+                <ResponsiveContainer width="100%" height={280}>
+                  <BarChart data={getBarChartData()}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                    <XAxis
+                      dataKey="name"
+                      stroke="#94a3b8"
+                      fontSize={10}
+                      angle={-30}
+                      textAnchor="end"
+                      height={60}
+                    />
+                    <YAxis stroke="#94a3b8" fontSize={12} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#1e293b",
+                        border: "1px solid #334155",
+                        borderRadius: "8px",
+                        color: "#f8fafc",
+                      }}
+                    />
+                    <Legend />
+                    <Bar
+                      dataKey="succes"
+                      fill="#10b981"
+                      name="Succes"
+                      radius={[4, 4, 0, 0]}
+                    />
+                    <Bar
+                      dataKey="erreurs"
+                      fill="#ef4444"
+                      name="Erreurs"
+                      radius={[4, 4, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
               </CardContent>
             </Card>
 
             <Card className="border-border/50">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <PieChart className="h-5 w-5 text-emerald-400" />
-                  Repartition par Canal
+                  <PieChartIcon className="h-5 w-5 text-emerald-400" />
+                  Repartition Succes/Echecs
                 </CardTitle>
-                <CardDescription>Sources de leads ce mois</CardDescription>
+                <CardDescription>Vue globale des executions</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-[250px] flex items-center justify-center border border-dashed border-border/50 rounded-lg bg-muted/20">
-                  <div className="text-center text-muted-foreground">
-                    <PieChart className="h-10 w-10 mx-auto mb-2 opacity-50" />
-                    <p className="text-sm">Graphique repartition</p>
-                  </div>
-                </div>
+                <ResponsiveContainer width="100%" height={280}>
+                  <PieChart>
+                    <Pie
+                      data={getPieData()}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={({ name, percent }) =>
+                        `${name}: ${(percent * 100).toFixed(0)}%`
+                      }
+                      outerRadius={90}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {getPieData().map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#1e293b",
+                        border: "1px solid #334155",
+                        borderRadius: "8px",
+                        color: "#f8fafc",
+                      }}
+                    />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
               </CardContent>
             </Card>
           </div>
@@ -185,7 +379,13 @@ export default function ClientReportsPage() {
           {reports
             .filter((r) => r.type === "monthly")
             .map((report) => (
-              <Card key={report.id} className="border-border/50 hover:border-primary/30 transition-colors">
+              <Card
+                key={report.id}
+                className={`border-border/50 hover:border-primary/30 transition-colors cursor-pointer ${
+                  selectedReport?.id === report.id ? "border-primary bg-primary/5" : ""
+                }`}
+                onClick={() => setSelectedReport(report)}
+              >
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
@@ -193,35 +393,81 @@ export default function ClientReportsPage() {
                         <FileText className="h-6 w-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-semibold">{report.title}</h3>
+                        <h3 className="font-semibold">{report.name}</h3>
                         <p className="text-sm text-muted-foreground flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
-                          {formatDate(report.date)}
+                          {report.period}
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm">
-                        <Eye className="h-4 w-4 mr-2" />
-                        Voir
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Download className="h-4 w-4 mr-2" />
-                        PDF
-                      </Button>
+                    <div className="flex items-center gap-4">
+                      {report.metrics?.totalExecutions !== undefined && (
+                        <div className="text-center">
+                          <p className="font-semibold">{report.metrics.totalExecutions}</p>
+                          <p className="text-xs text-muted-foreground">Executions</p>
+                        </div>
+                      )}
+                      {report.metrics?.successRate !== undefined && (
+                        <div className="text-center">
+                          <p className="font-semibold text-emerald-400">
+                            {report.metrics.successRate}%
+                          </p>
+                          <p className="text-xs text-muted-foreground">Taux</p>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedReport(report);
+                          }}
+                        >
+                          <Eye className="h-4 w-4 mr-2" />
+                          Voir
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleGeneratePDF(report);
+                          }}
+                          disabled={isExporting}
+                        >
+                          <Download className="h-4 w-4 mr-2" />
+                          PDF
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             ))}
+
+          {reports.filter((r) => r.type === "monthly").length === 0 && (
+            <Card className="border-border/50">
+              <CardContent className="p-8 text-center text-muted-foreground">
+                <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                <p>Aucun rapport mensuel disponible</p>
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
 
-        {/* Campaigns Tab */}
-        <TabsContent value="campaigns" className="space-y-4">
+        {/* Weekly Reports Tab */}
+        <TabsContent value="weekly" className="space-y-4">
           {reports
-            .filter((r) => r.type === "campaign")
+            .filter((r) => r.type === "weekly")
             .map((report) => (
-              <Card key={report.id} className="border-border/50 hover:border-primary/30 transition-colors">
+              <Card
+                key={report.id}
+                className={`border-border/50 hover:border-primary/30 transition-colors cursor-pointer ${
+                  selectedReport?.id === report.id ? "border-primary bg-primary/5" : ""
+                }`}
+                onClick={() => setSelectedReport(report)}
+              >
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
@@ -229,28 +475,49 @@ export default function ClientReportsPage() {
                         <TrendingUp className="h-6 w-6 text-amber-400" />
                       </div>
                       <div>
-                        <h3 className="font-semibold">{report.title}</h3>
+                        <h3 className="font-semibold">{report.name}</h3>
                         <p className="text-sm text-muted-foreground flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
-                          {formatDate(report.date)}
+                          {report.period}
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="success">Complete</Badge>
-                      <Button variant="outline" size="sm">
-                        <Eye className="h-4 w-4 mr-2" />
-                        Voir
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        <Download className="h-4 w-4 mr-2" />
-                        PDF
-                      </Button>
+                    <div className="flex items-center gap-4">
+                      {report.metrics?.totalExecutions !== undefined && (
+                        <div className="text-center">
+                          <p className="font-semibold">{report.metrics.totalExecutions}</p>
+                          <p className="text-xs text-muted-foreground">Executions</p>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-2">
+                        <Badge variant="default">Cette semaine</Badge>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleGeneratePDF(report);
+                          }}
+                          disabled={isExporting}
+                        >
+                          <Download className="h-4 w-4 mr-2" />
+                          PDF
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             ))}
+
+          {reports.filter((r) => r.type === "weekly").length === 0 && (
+            <Card className="border-border/50">
+              <CardContent className="p-8 text-center text-muted-foreground">
+                <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                <p>Aucun rapport hebdomadaire disponible</p>
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
       </Tabs>
     </div>
