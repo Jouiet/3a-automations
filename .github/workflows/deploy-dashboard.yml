@@ -42,9 +42,10 @@ jobs:
           host: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USERNAME }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          envs: N8N_HOST,N8N_API_KEY,JWT_SECRET,GOOGLE_SHEETS_ID,GOOGLE_SHEETS_API_URL
           script: |
             # Navigate to dashboard directory
-            cd /root/dashboard
+            cd /root/dashboard || mkdir -p /root/dashboard
 
             # Pull latest code from GitHub (sparse checkout for dashboard only)
             if [ ! -d ".git" ]; then
@@ -58,6 +59,15 @@ jobs:
               git pull origin main
             fi
 
+            # Create .env.local with runtime environment variables
+            cat > .env.local << ENVEOF
+N8N_HOST=${N8N_HOST}
+N8N_API_KEY=${N8N_API_KEY}
+JWT_SECRET=${JWT_SECRET}
+GOOGLE_SHEETS_ID=${GOOGLE_SHEETS_ID}
+GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}
+ENVEOF
+
             # Install dependencies and build
             npm install --legacy-peer-deps
             npm run build
@@ -65,6 +75,12 @@ jobs:
             # Restart PM2 process
             pm2 restart dashboard || pm2 start npm --name "dashboard" -- start
             pm2 save
+        env:
+          N8N_HOST: ${{ secrets.N8N_HOST }}
+          N8N_API_KEY: ${{ secrets.N8N_API_KEY }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
+          GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
 
       - name: Verify deployment
         run: |
