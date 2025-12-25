@@ -1,6 +1,58 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 89)
+## Document Exécutable - Décembre 2025 (màj Session 90)
 ## Objectif: Premier client payant en 4 semaines
+
+---
+
+## ✅ SESSION 90: WELCOME SERIES + CLAUDE-MCP (25/12/2025)
+
+### n8n Workflows Final - 9/10 ACTIFS (90%)
+```
+VÉRIFIÉ PAR API CALLS (25/12/2025):
+├── ✅ Grok Voice Telephony - Phone Booking
+├── ✅ Email Outreach Sequence - Multi-Touch Campaign
+├── ✅ WhatsApp Booking Confirmation
+├── ✅ WhatsApp Booking Reminders
+├── ✅ Blog Article Generator
+├── ✅ AI Avatar Generator
+├── ✅ LinkedIn Lead Scraper - Aggressive Outbound (schedule: 6h)
+├── ✅ AI Talking Video Generator
+├── ✅ Klaviyo Welcome Series - 5 Emails Automation [NEW]
+└── ⏸️ Enhance Product Photos (OAuth expired - action manuelle)
+
+WORKFLOW IDs:
+├── Welcome Series: JaooDwzmJojEe6bx
+├── LinkedIn Scraper: l0ABBPUCzffaPvon (runs every 6h)
+└── Email Outreach: 3qdH7ySnR0a2yH10
+```
+
+### MCP Stack Final - 12/13 (92%)
+```
+AJOUTÉ SESSION 90:
+├── ✅ claude-mcp: Connected (npx claude-mcp)
+│   ├── Env: MCP_CLAUDE_DEBUG=false, MCP_NOTIFICATIONS=true
+│   └── Tools: start, resume, status, cancel
+└── TOTAL: 12/13 MCPs fonctionnels
+
+SITE & DASHBOARD VERIFIED:
+├── ✅ https://3a-automation.com → HTTP 200
+├── ✅ https://3a-automation.com/en/ → HTTP 200
+└── ✅ https://dashboard.3a-automation.com/api/health → healthy
+```
+
+### Documents Synced
+```
+├── ✅ llms-full.txt: 72 → 77 automations
+├── ✅ voice-widget.js: 72 → 77 automations
+├── ✅ voice-widget.min.js: regenerated (33KB)
+└── ✅ CLAUDE.md: v13.6, Session 90
+```
+
+### Commits Session 90
+```
+├── 00899f5 feat(session90): n8n 9/10 workflows + Klaviyo welcome-series
+└── 88a019a feat(session90): Add claude-mcp server
+```
 
 ---
 
