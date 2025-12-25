@@ -47,28 +47,36 @@
     },
     {
       "parameters": {
-        "operation": "createEvent",
-        "listId": "={{ $env.KLAVIYO_LIST_OUTREACH }}",
-        "eventName": "outreach_started",
-        "eventProperties": {
-          "email": "={{ $json.email }}",
-          "firstName": "={{ $json.firstName }}",
-          "company": "={{ $json.company }}",
-          "leadScore": "={{ $json.leadScore }}"
-        }
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Klaviyo-API-Key {{ $env.KLAVIYO_API_KEY }}"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $json.email }}\",\n            \"first_name\": \"{{ $json.firstName }}\",\n            \"properties\": {\n              \"company\": \"{{ $json.company }}\"\n            }\n          }\n        }\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"outreach_started\"\n          }\n        }\n      },\n      \"properties\": {\n        \"leadScore\": {{ $json.leadScore || 50 }},\n        \"email1_subject\": \"{{ $json.emails.email1.subject }}\",\n        \"email2_subject\": \"{{ $json.emails.email2.subject }}\",\n        \"email3_subject\": \"{{ $json.emails.email3.subject }}\"\n      }\n    }\n  }\n}",
+        "options": {}
       },
-      "id": "klaviyo-event",
-      "name": "Trigger Klaviyo Flow",
-      "type": "n8n-nodes-base.klaviyo",
-      "typeVersion": 1,
+      "id": "klaviyo-http-event",
+      "name": "Trigger Klaviyo Flow (HTTP)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [900, 200],
-      "credentials": {
-        "klaviyoApi": {
-          "id": "KLAVIYO_CRED",
-          "name": "Klaviyo API"
-        }
-      },
-      "notes": "Start email sequence in Klaviyo"
+      "notes": "Create event in Klaviyo via REST API"
     },
     {
       "parameters": {
@@ -167,14 +175,14 @@
       "main": [
         [
           {
-            "node": "Trigger Klaviyo Flow",
+            "node": "Trigger Klaviyo Flow (HTTP)",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Trigger Klaviyo Flow": {
+    "Trigger Klaviyo Flow (HTTP)": {
       "main": [
         [
           {
@@ -201,31 +209,8 @@
     "executionOrder": "v1"
   },
   "meta": {
-    "templateCredsSetupCompleted": false,
-    "instanceId": "3a-automation"
-  },
-  "tags": [
-    {
-      "name": "lead-gen",
-      "id": "lead-gen"
-    },
-    {
-      "name": "email",
-      "id": "email"
-    },
-    {
-      "name": "outreach",
-      "id": "outreach"
-    }
-  ],
-  "documentation": {
-    "description": "Multi-touch email outreach sequence via Klaviyo",
-    "sequence": [
-      "Day 0: Introduction email (pain point)",
-      "Day 3: Value-add email (case study)",
-      "Day 5: Direct ask (free audit offer)"
-    ],
-    "targetOpenRate": ">50%",
-    "targetReplyRate": ">5%"
+    "version": "2.0.0",
+    "description": "Multi-touch email outreach sequence via Klaviyo HTTP API",
+    "updated": "2025-12-25"
   }
 }
