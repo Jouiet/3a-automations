@@ -1,0 +1,137 @@
+{
+  "name": "[PROJECT_NAME] WhatsApp Booking Confirmation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "={{ $env.WEBHOOK_PATH || 'whatsapp/booking/confirm' }}",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook - New Booking",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "notes": "POST: { name, phone, date, time, service, notes }"
+    },
+    {
+      "parameters": {
+        "jsCode": "const booking = $input.first().json;\nconst brandName = process.env.BRAND_NAME || 'Company';\nconst timezone = process.env.TIMEZONE || 'Europe/Paris';\nconst locale = process.env.LOCALE || 'fr-FR';\n\n// Format phone number\nlet phone = booking.phone.replace(/[^0-9]/g, '');\nif (!phone.startsWith(process.env.PHONE_PREFIX || '33')) {\n  phone = (process.env.PHONE_PREFIX || '33') + phone.replace(/^0/, '');\n}\n\n// Format date/time\nconst dateObj = new Date(booking.date);\nconst formattedDate = dateObj.toLocaleDateString(locale, {\n  weekday: 'long',\n  year: 'numeric',\n  month: 'long',\n  day: 'numeric',\n  timeZone: timezone\n});\n\nreturn {\n  json: {\n    to: phone,\n    name: booking.name || 'Client',\n    date: formattedDate,\n    time: booking.time || '10:00',\n    service: booking.service || 'Consultation',\n    notes: booking.notes || '',\n    brandName,\n    bookingId: `BK-${Date.now()}`\n  }\n};"
+      },
+      "id": "format-data",
+      "name": "Format Booking Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v18.0/{{ $env.WHATSAPP_PHONE_NUMBER_ID }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.WHATSAPP_ACCESS_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $json.to }}\",\n  \"type\": \"template\",\n  \"template\": {\n    \"name\": \"{{ $env.TEMPLATE_CONFIRMATION || 'booking_confirmation' }}\",\n    \"language\": {\n      \"code\": \"{{ $env.TEMPLATE_LANGUAGE || 'fr' }}\"\n    },\n    \"components\": [\n      {\n        \"type\": \"body\",\n        \"parameters\": [\n          { \"type\": \"text\", \"text\": \"{{ $json.name }}\" },\n          { \"type\": \"text\", \"text\": \"{{ $json.service }}\" },\n          { \"type\": \"text\", \"text\": \"{{ $json.date }}\" },\n          { \"type\": \"text\", \"text\": \"{{ $json.time }}\" }\n        ]\n      }\n    ]\n  }\n}",
+        "options": {}
+      },
+      "id": "send-whatsapp",
+      "name": "Send WhatsApp Confirmation",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"Confirmation sent\",\n  \"bookingId\": \"{{ $('Format Booking Data').item.json.bookingId }}\",\n  \"whatsappMessageId\": \"{{ $json.messages?.[0]?.id || 'pending' }}\"\n}",
+        "options": {}
+      },
+      "id": "respond-success",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [920, 300]
+    }
+  ],
+  "connections": {
+    "Webhook - New Booking": {
+      "main": [[{"node": "Format Booking Data", "type": "main", "index": 0}]]
+    },
+    "Format Booking Data": {
+      "main": [[{"node": "Send WhatsApp Confirmation", "type": "main", "index": 0}]]
+    },
+    "Send WhatsApp Confirmation": {
+      "main": [[{"node": "Respond Success", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "templateId": "whatsapp-booking-confirmation-generic",
+    "version": "1.0.0",
+    "description": "Generic WhatsApp booking confirmation via Meta Business API",
+    "author": "3A Automation",
+    "created": "2025-12-25"
+  },
+  "envVariables": {
+    "required": [
+      "WHATSAPP_PHONE_NUMBER_ID",
+      "WHATSAPP_ACCESS_TOKEN"
+    ],
+    "optional": [
+      "BRAND_NAME",
+      "WEBHOOK_PATH",
+      "TIMEZONE",
+      "LOCALE",
+      "PHONE_PREFIX",
+      "TEMPLATE_CONFIRMATION",
+      "TEMPLATE_LANGUAGE"
+    ],
+    "examples": {
+      "cinematicads": {
+        "BRAND_NAME": "CinematicAds",
+        "WEBHOOK_PATH": "cinematicads/booking/confirm",
+        "TIMEZONE": "America/New_York",
+        "LOCALE": "en-US",
+        "PHONE_PREFIX": "1",
+        "TEMPLATE_LANGUAGE": "en"
+      },
+      "morocco": {
+        "BRAND_NAME": "MyBusiness",
+        "WEBHOOK_PATH": "booking/confirm",
+        "TIMEZONE": "Africa/Casablanca",
+        "LOCALE": "fr-MA",
+        "PHONE_PREFIX": "212",
+        "TEMPLATE_LANGUAGE": "fr"
+      },
+      "france": {
+        "BRAND_NAME": "MonEntreprise",
+        "WEBHOOK_PATH": "reservation/confirmer",
+        "TIMEZONE": "Europe/Paris",
+        "LOCALE": "fr-FR",
+        "PHONE_PREFIX": "33",
+        "TEMPLATE_LANGUAGE": "fr"
+      }
+    }
+  },
+  "whatsappTemplateRequired": {
+    "name": "booking_confirmation",
+    "category": "UTILITY",
+    "language": "fr",
+    "body": "Bonjour {{1}}, votre rendez-vous pour {{2}} est confirme le {{3}} a {{4}}. A bientot !",
+    "variables": ["name", "service", "date", "time"]
+  },
+  "tags": ["WhatsApp", "Booking", "Meta", "Generic"]
+}

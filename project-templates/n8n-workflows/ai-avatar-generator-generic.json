@@ -1,0 +1,250 @@
+{
+  "name": "[PROJECT_NAME] AI Avatar Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "={{ $env.WEBHOOK_PATH || 'ai-avatar-generator' }}",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "notes": "POST: { audience: string, style: string, scenes: string[] }"
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "={{ $env.OPENAI_MODEL || 'gpt-4' }}",
+        "messages": {
+          "values": [
+            {
+              "content": "=Tu es un expert en creation d'avatars IA pour le marketing digital.\n\nMarque: {{ $env.BRAND_NAME || 'Brand' }}\nCible: {{ $json.audience }}\nStyle: {{ $json.style }}\n\nGenere une description physique detaillee (en anglais) pour un avatar IA qui representerait parfaitement cette audience. La description doit inclure:\n- Age apparent\n- Caracteristiques faciales\n- Couleur des yeux et cheveux\n- Style vestimentaire\n- Expression faciale\n- Posture\n\nFormat: Un paragraphe de 100-150 mots, style prompt pour generation d'image.",
+              "role": "system"
+            },
+            {
+              "content": "=Genere la description de l'avatar pour l'audience: {{ $json.audience }}",
+              "role": "user"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "id": "openai-persona",
+      "name": "Generate Persona Prompt",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.4,
+      "position": [480, 300],
+      "credentials": {
+        "openAiApi": {
+          "id": "={{ $env.OPENAI_CRED_ID || 'openai-credentials' }}",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare Gemini API request for base image generation\nconst personaDescription = $input.first().json.message.content;\nconst brandName = process.env.BRAND_NAME || 'Brand';\n\nreturn {\n  json: {\n    personaPrompt: personaDescription,\n    baseImagePrompt: `Professional portrait photograph, ${personaDescription}, high quality, 4K resolution, studio lighting, neutral background, looking at camera`,\n    scenes: $input.first().json.body?.scenes || ['office', 'casual', 'outdoor'],\n    style: $input.first().json.body?.style || 'professional',\n    brandName: brandName\n  }\n};"
+      },
+      "id": "code-prepare-prompt",
+      "name": "Prepare Image Prompts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $env.GOOGLE_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"instances\": [\n    {\n      \"prompt\": \"{{ $json.baseImagePrompt }}\"\n    }\n  ],\n  \"parameters\": {\n    \"sampleCount\": 1,\n    \"aspectRatio\": \"{{ $env.IMAGE_ASPECT_RATIO || '1:1' }}\",\n    \"personGeneration\": \"allow_adult\"\n  }\n}",
+        "options": {}
+      },
+      "id": "http-imagen-base",
+      "name": "Generate Base Image (Imagen 3)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [920, 300],
+      "credentials": {
+        "googleApi": {
+          "id": "={{ $env.GOOGLE_CRED_ID || 'google-api-credentials' }}",
+          "name": "Google Gemini API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract base image and prepare scene generation\nconst response = $input.first().json;\nconst baseImageData = response.predictions?.[0]?.bytesBase64Encoded || null;\n\nif (!baseImageData) {\n  throw new Error('No image generated from Imagen API');\n}\n\nconst previousData = $('Prepare Image Prompts').first().json;\n\nreturn {\n  json: {\n    baseImage: `data:image/png;base64,${baseImageData}`,\n    personaPrompt: previousData.personaPrompt,\n    scenes: previousData.scenes,\n    brandName: previousData.brandName,\n    characterSheetPrompt: `Character reference sheet showing same person from multiple angles: front view, 3/4 view, profile view. ${previousData.personaPrompt}. Consistent facial features, same lighting, white background, professional quality.`\n  }\n};"
+      },
+      "id": "code-extract-base",
+      "name": "Extract Base Image",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1140, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare scene generation items - CONFIGURABLE SCENES\nconst previousData = $input.first().json;\n\n// Scene prompts - customize per project\nconst scenePrompts = {\n  'office': 'Professional office setting, modern workspace, sitting at desk, natural lighting through windows',\n  'casual': 'Casual setting, cozy cafe or living room, relaxed pose, warm lighting',\n  'outdoor': 'Outdoor setting, urban street or park, natural daylight, confident posture',\n  'gym': 'Fitness setting, modern gym, athletic wear, energetic pose',\n  'kitchen': 'Home kitchen setting, cooking or preparing food, domestic atmosphere',\n  'studio': 'Creative studio setting, artistic environment, professional lighting',\n  'beach': 'Beach setting, vacation mood, natural sunlight, relaxed pose',\n  'conference': 'Conference room, professional meeting, business attire'\n};\n\nconst scenes = previousData.scenes || ['office', 'casual', 'outdoor'];\n\nreturn scenes.map(scene => ({\n  json: {\n    sceneName: scene,\n    scenePrompt: `${previousData.personaPrompt}. ${scenePrompts[scene] || scenePrompts['casual']}. High quality, 4K, photorealistic.`,\n    baseImage: previousData.baseImage,\n    brandName: previousData.brandName\n  }\n}));"
+      },
+      "id": "code-prepare-scenes",
+      "name": "Prepare Scene Items",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1360, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-scenes",
+      "name": "Split Into Scenes",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [1580, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "={{ $env.GOOGLE_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"instances\": [\n    {\n      \"prompt\": \"{{ $json.scenePrompt }}\",\n      \"image\": {\n        \"bytesBase64Encoded\": \"{{ $json.baseImage.replace('data:image/png;base64,', '') }}\"\n      }\n    }\n  ],\n  \"parameters\": {\n    \"sampleCount\": 1,\n    \"aspectRatio\": \"{{ $env.VIDEO_ASPECT_RATIO || '9:16' }}\"\n  }\n}",
+        "options": {}
+      },
+      "id": "http-imagen-scene",
+      "name": "Generate Scene Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1800, 300],
+      "credentials": {
+        "googleApi": {
+          "id": "={{ $env.GOOGLE_CRED_ID || 'google-api-credentials' }}",
+          "name": "Google Gemini API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aggregate all scene results\nconst allItems = $input.all();\n\nconst sceneImages = allItems.map((item, index) => {\n  const sceneData = $('Split Into Scenes').all()[index]?.json || {};\n  const imageData = item.json.predictions?.[0]?.bytesBase64Encoded || null;\n  \n  return {\n    sceneName: sceneData.sceneName || `scene_${index}`,\n    imageBase64: imageData ? `data:image/png;base64,${imageData}` : null,\n    success: !!imageData\n  };\n});\n\nreturn {\n  json: {\n    success: true,\n    brand: process.env.BRAND_NAME || 'Brand',\n    totalScenes: sceneImages.length,\n    scenes: sceneImages,\n    generatedAt: new Date().toISOString()\n  }\n};"
+      },
+      "id": "code-aggregate",
+      "name": "Aggregate Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2020, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [2240, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{"node": "Generate Persona Prompt", "type": "main", "index": 0}]]
+    },
+    "Generate Persona Prompt": {
+      "main": [[{"node": "Prepare Image Prompts", "type": "main", "index": 0}]]
+    },
+    "Prepare Image Prompts": {
+      "main": [[{"node": "Generate Base Image (Imagen 3)", "type": "main", "index": 0}]]
+    },
+    "Generate Base Image (Imagen 3)": {
+      "main": [[{"node": "Extract Base Image", "type": "main", "index": 0}]]
+    },
+    "Extract Base Image": {
+      "main": [[{"node": "Prepare Scene Items", "type": "main", "index": 0}]]
+    },
+    "Prepare Scene Items": {
+      "main": [[{"node": "Split Into Scenes", "type": "main", "index": 0}]]
+    },
+    "Split Into Scenes": {
+      "main": [
+        [{"node": "Generate Scene Image", "type": "main", "index": 0}],
+        [{"node": "Aggregate Results", "type": "main", "index": 0}]
+      ]
+    },
+    "Generate Scene Image": {
+      "main": [[{"node": "Split Into Scenes", "type": "main", "index": 0}]]
+    },
+    "Aggregate Results": {
+      "main": [[{"node": "Respond to Webhook", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateId": "ai-avatar-generator-generic",
+    "version": "1.0.0",
+    "description": "Generic AI Avatar Generator - works with any project",
+    "author": "3A Automation",
+    "created": "2025-12-25"
+  },
+  "envVariables": {
+    "required": [
+      "GOOGLE_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "optional": [
+      "BRAND_NAME",
+      "WEBHOOK_PATH",
+      "OPENAI_MODEL",
+      "OPENAI_CRED_ID",
+      "GOOGLE_CRED_ID",
+      "IMAGE_ASPECT_RATIO",
+      "VIDEO_ASPECT_RATIO"
+    ],
+    "examples": {
+      "cinematicads": {
+        "BRAND_NAME": "CinematicAds",
+        "WEBHOOK_PATH": "cinematicads/avatar",
+        "IMAGE_ASPECT_RATIO": "1:1",
+        "VIDEO_ASPECT_RATIO": "9:16"
+      },
+      "ecommerce": {
+        "BRAND_NAME": "MyStore",
+        "WEBHOOK_PATH": "store/avatar",
+        "IMAGE_ASPECT_RATIO": "1:1",
+        "VIDEO_ASPECT_RATIO": "16:9"
+      }
+    }
+  },
+  "tags": ["AI Avatar", "Generic", "Image Generation"]
+}

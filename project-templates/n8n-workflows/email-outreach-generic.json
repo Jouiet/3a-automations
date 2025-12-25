@@ -1,0 +1,195 @@
+{
+  "name": "[PROJECT_NAME] Email Outreach Sequence",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "={{ $env.WEBHOOK_PATH || 'leads/new' }}",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-new-lead",
+      "name": "Webhook - New Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "new-lead",
+      "notes": "POST: { email, firstName, lastName, company, headline, leadScore }"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.email }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "check-email",
+      "name": "Has Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate personalized email content - CUSTOMIZE MESSAGES PER PROJECT\nconst lead = $input.first().json;\nconst brandName = process.env.BRAND_NAME || 'Your Company';\nconst brandUrl = process.env.BRAND_URL || 'https://example.com';\nconst bookingUrl = process.env.BOOKING_URL || `${brandUrl}/booking`;\nconst senderName = process.env.SENDER_NAME || 'Team';\n\nconst firstName = lead.firstName || 'there';\nconst company = lead.company || 'your company';\nconst title = lead.headline || '';\n\n// Email 1: Introduction\nconst email1 = {\n  subject: `${firstName}, question rapide sur ${company}`,\n  body: `Bonjour ${firstName},\n\nJe vois que vous travaillez chez ${company}${title ? ` en tant que ${title}` : ''}.\n\nJe travaille avec des entreprises qui perdent 10-15h/semaine sur des taches manuelles (reporting, relances emails, mise a jour produits).\n\nQuestion: combien de temps passez-vous par semaine sur ces taches repetitives?\n\nSi c'est plus de 5h, je peux vous montrer comment automatiser ca en moins d'une semaine.\n\nCordialement,\n${senderName}\n${brandName}\n${brandUrl}`\n};\n\n// Email 2: Value Add (Day 3)\nconst email2 = {\n  subject: `Case study: comment reduire 10h/semaine de taches manuelles`,\n  body: `Bonjour ${firstName},\n\nSuite a mon message precedent, je voulais partager un cas concret.\n\nUn de mes clients passait 2h/jour sur:\n- Reporting manuel\n- Relances clients\n- Mise a jour des donnees\n\nResultat apres automatisation:\n- 10h/semaine recuperees\n- +23% productivite\n- ROI immediat\n\nVoulez-vous que je vous montre comment on peut faire pareil pour ${company}?\n\n30 minutes suffisent pour identifier vos quick wins.\n\nCordialement,\n${senderName}`\n};\n\n// Email 3: Direct Ask (Day 5)\nconst email3 = {\n  subject: `Audit gratuit pour ${company}?`,\n  body: `Bonjour ${firstName},\n\nJe ne veux pas vous spammer - dernier message promis.\n\nSi l'automatisation vous interesse, je propose un audit gratuit de 30 min ou j'analyse:\n\n1. Vos processus actuels\n2. Vos opportunites d'automatisation\n3. Le ROI potentiel\n\nSans engagement.\n\nDisponible cette semaine? Voici mon calendrier:\n${bookingUrl}\n\nSi ce n'est pas le bon moment, pas de souci.\n\nCordialement,\n${senderName}\n${brandName}`\n};\n\nreturn {\n  json: {\n    ...lead,\n    emails: { email1, email2, email3 },\n    brandName,\n    sequenceStartDate: new Date().toISOString()\n  }\n};"
+      },
+      "id": "generate-emails",
+      "name": "Generate Personalized Emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Klaviyo-API-Key {{ $env.KLAVIYO_API_KEY }}"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $json.email }}\",\n            \"first_name\": \"{{ $json.firstName }}\",\n            \"properties\": {\n              \"company\": \"{{ $json.company }}\",\n              \"source\": \"{{ $env.BRAND_NAME || 'outreach' }}\"\n            }\n          }\n        }\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"{{ $env.KLAVIYO_METRIC || 'outreach_started' }}\"\n          }\n        }\n      },\n      \"properties\": {\n        \"leadScore\": {{ $json.leadScore || 50 }},\n        \"email1_subject\": \"{{ $json.emails.email1.subject }}\",\n        \"email2_subject\": \"{{ $json.emails.email2.subject }}\",\n        \"email3_subject\": \"{{ $json.emails.email3.subject }}\"\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "klaviyo-http-event",
+      "name": "Trigger Klaviyo Flow (HTTP)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $env.GOOGLE_SHEET_ID }}",
+          "mode": "id"
+        },
+        "sheetName": "={{ $env.SHEET_NAME || 'Outreach Log' }}",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $json.email }}",
+            "name": "={{ $json.firstName }} {{ $json.lastName }}",
+            "company": "={{ $json.company }}",
+            "sequence_started": "={{ $json.sequenceStartDate }}",
+            "status": "active",
+            "brand": "={{ $json.brandName }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "log-outreach",
+      "name": "Log Outreach",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1120, 200],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "={{ $env.GOOGLE_SHEETS_CRED_ID || 'GOOGLE_SHEETS_CRED' }}",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Outreach sequence started', lead: $json.email, brand: $json.brandName }) }}",
+        "options": {}
+      },
+      "id": "respond-success",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: 'No email provided' }) }}",
+        "options": { "responseCode": 400 }
+      },
+      "id": "respond-no-email",
+      "name": "Respond No Email",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [680, 400]
+    }
+  ],
+  "connections": {
+    "Webhook - New Lead": {
+      "main": [[{"node": "Has Email?", "type": "main", "index": 0}]]
+    },
+    "Has Email?": {
+      "main": [
+        [{"node": "Generate Personalized Emails", "type": "main", "index": 0}],
+        [{"node": "Respond No Email", "type": "main", "index": 0}]
+      ]
+    },
+    "Generate Personalized Emails": {
+      "main": [[{"node": "Trigger Klaviyo Flow (HTTP)", "type": "main", "index": 0}]]
+    },
+    "Trigger Klaviyo Flow (HTTP)": {
+      "main": [[{"node": "Log Outreach", "type": "main", "index": 0}]]
+    },
+    "Log Outreach": {
+      "main": [[{"node": "Respond Success", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "templateId": "email-outreach-generic",
+    "version": "1.0.0",
+    "description": "Generic multi-touch email outreach via Klaviyo",
+    "author": "3A Automation",
+    "created": "2025-12-25"
+  },
+  "envVariables": {
+    "required": ["KLAVIYO_API_KEY", "GOOGLE_SHEET_ID"],
+    "optional": [
+      "BRAND_NAME",
+      "BRAND_URL",
+      "BOOKING_URL",
+      "SENDER_NAME",
+      "WEBHOOK_PATH",
+      "SHEET_NAME",
+      "KLAVIYO_METRIC",
+      "GOOGLE_SHEETS_CRED_ID"
+    ],
+    "examples": {
+      "cinematicads": {
+        "BRAND_NAME": "CinematicAds",
+        "BRAND_URL": "https://cinematicads.studio",
+        "BOOKING_URL": "https://cinematicads.studio/demo",
+        "SENDER_NAME": "Alex",
+        "KLAVIYO_METRIC": "demo_request_started"
+      },
+      "ecommerce": {
+        "BRAND_NAME": "MyShop",
+        "BRAND_URL": "https://myshop.com",
+        "BOOKING_URL": "https://myshop.com/contact",
+        "SENDER_NAME": "Support",
+        "KLAVIYO_METRIC": "lead_captured"
+      }
+    }
+  },
+  "tags": ["Email", "Outreach", "Klaviyo", "Generic"]
+}

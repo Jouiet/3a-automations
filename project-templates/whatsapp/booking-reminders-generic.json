@@ -1,0 +1,213 @@
+{
+  "name": "[PROJECT_NAME] WhatsApp Booking Reminders",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Check Upcoming Bookings",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [260, 300],
+      "notes": "Run every hour"
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.BOOKING_API_URL || 'https://api.example.com/bookings' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.BOOKING_API_KEY }}"
+            }
+          ]
+        },
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "status",
+              "value": "confirmed"
+            },
+            {
+              "name": "reminder_sent",
+              "value": "false"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fetch-bookings",
+      "name": "Fetch Upcoming Bookings",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const bookings = $input.first().json.bookings || $input.first().json.data || [];\nconst now = new Date();\nconst reminder24h = parseInt(process.env.REMINDER_24H_MINUTES) || 1440; // 24 hours\nconst reminder1h = parseInt(process.env.REMINDER_1H_MINUTES) || 60;     // 1 hour\nconst brandName = process.env.BRAND_NAME || 'Company';\nconst phonePrefix = process.env.PHONE_PREFIX || '33';\n\nconst reminders = [];\n\nfor (const booking of bookings) {\n  const bookingTime = new Date(booking.datetime || `${booking.date}T${booking.time}`);\n  const minutesUntil = (bookingTime - now) / (1000 * 60);\n  \n  // Format phone\n  let phone = (booking.phone || '').replace(/[^0-9]/g, '');\n  if (!phone.startsWith(phonePrefix)) {\n    phone = phonePrefix + phone.replace(/^0/, '');\n  }\n  \n  // 24h reminder (between 23-25 hours before)\n  if (minutesUntil > (reminder24h - 60) && minutesUntil <= (reminder24h + 60) && !booking.reminder24hSent) {\n    reminders.push({\n      type: '24h',\n      bookingId: booking.id,\n      to: phone,\n      name: booking.name || booking.clientName || 'Client',\n      service: booking.service || 'Rendez-vous',\n      date: bookingTime.toLocaleDateString(process.env.LOCALE || 'fr-FR'),\n      time: booking.time || bookingTime.toLocaleTimeString(process.env.LOCALE || 'fr-FR', { hour: '2-digit', minute: '2-digit' }),\n      brandName\n    });\n  }\n  \n  // 1h reminder (between 45-75 minutes before)\n  if (minutesUntil > (reminder1h - 15) && minutesUntil <= (reminder1h + 15) && !booking.reminder1hSent) {\n    reminders.push({\n      type: '1h',\n      bookingId: booking.id,\n      to: phone,\n      name: booking.name || booking.clientName || 'Client',\n      service: booking.service || 'Rendez-vous',\n      date: bookingTime.toLocaleDateString(process.env.LOCALE || 'fr-FR'),\n      time: booking.time || bookingTime.toLocaleTimeString(process.env.LOCALE || 'fr-FR', { hour: '2-digit', minute: '2-digit' }),\n      brandName\n    });\n  }\n}\n\nreturn reminders.map(r => ({ json: r }));"
+      },
+      "id": "filter-reminders",
+      "name": "Filter Due Reminders",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $input.all().length }}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      },
+      "id": "has-reminders",
+      "name": "Has Reminders?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [920, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v18.0/{{ $env.WHATSAPP_PHONE_NUMBER_ID }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.WHATSAPP_ACCESS_TOKEN }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $json.to }}\",\n  \"type\": \"template\",\n  \"template\": {\n    \"name\": \"{{ $json.type === '24h' ? ($env.TEMPLATE_REMINDER_24H || 'booking_reminder_24h') : ($env.TEMPLATE_REMINDER_1H || 'booking_reminder_1h') }}\",\n    \"language\": {\n      \"code\": \"{{ $env.TEMPLATE_LANGUAGE || 'fr' }}\"\n    },\n    \"components\": [\n      {\n        \"type\": \"body\",\n        \"parameters\": [\n          { \"type\": \"text\", \"text\": \"{{ $json.name }}\" },\n          { \"type\": \"text\", \"text\": \"{{ $json.service }}\" },\n          { \"type\": \"text\", \"text\": \"{{ $json.date }}\" },\n          { \"type\": \"text\", \"text\": \"{{ $json.time }}\" }\n        ]\n      }\n    ]\n  }\n}",
+        "options": {}
+      },
+      "id": "send-reminder",
+      "name": "Send WhatsApp Reminder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1140, 200]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $env.BOOKING_API_URL }}/{{ $('Filter Due Reminders').item.json.bookingId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{ $env.BOOKING_API_KEY }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"{{ $('Filter Due Reminders').item.json.type === '24h' ? 'reminder24hSent' : 'reminder1hSent' }}\": true,\n  \"{{ $('Filter Due Reminders').item.json.type === '24h' ? 'reminder24hAt' : 'reminder1hAt' }}\": \"{{ new Date().toISOString() }}\"\n}",
+        "options": {}
+      },
+      "id": "mark-sent",
+      "name": "Mark Reminder Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1360, 200]
+    }
+  ],
+  "connections": {
+    "Check Upcoming Bookings": {
+      "main": [[{"node": "Fetch Upcoming Bookings", "type": "main", "index": 0}]]
+    },
+    "Fetch Upcoming Bookings": {
+      "main": [[{"node": "Filter Due Reminders", "type": "main", "index": 0}]]
+    },
+    "Filter Due Reminders": {
+      "main": [[{"node": "Has Reminders?", "type": "main", "index": 0}]]
+    },
+    "Has Reminders?": {
+      "main": [
+        [{"node": "Send WhatsApp Reminder", "type": "main", "index": 0}],
+        []
+      ]
+    },
+    "Send WhatsApp Reminder": {
+      "main": [[{"node": "Mark Reminder Sent", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "templateId": "whatsapp-booking-reminders-generic",
+    "version": "1.0.0",
+    "description": "Generic WhatsApp booking reminders (24h + 1h before)",
+    "author": "3A Automation",
+    "created": "2025-12-25"
+  },
+  "envVariables": {
+    "required": [
+      "WHATSAPP_PHONE_NUMBER_ID",
+      "WHATSAPP_ACCESS_TOKEN",
+      "BOOKING_API_URL",
+      "BOOKING_API_KEY"
+    ],
+    "optional": [
+      "BRAND_NAME",
+      "PHONE_PREFIX",
+      "LOCALE",
+      "REMINDER_24H_MINUTES",
+      "REMINDER_1H_MINUTES",
+      "TEMPLATE_REMINDER_24H",
+      "TEMPLATE_REMINDER_1H",
+      "TEMPLATE_LANGUAGE"
+    ],
+    "examples": {
+      "cinematicads": {
+        "BRAND_NAME": "CinematicAds",
+        "BOOKING_API_URL": "https://api.cinematicads.studio/bookings",
+        "PHONE_PREFIX": "1",
+        "LOCALE": "en-US",
+        "TEMPLATE_LANGUAGE": "en"
+      },
+      "agency": {
+        "BRAND_NAME": "3A Automation",
+        "BOOKING_API_URL": "https://api.3a-automation.com/bookings",
+        "PHONE_PREFIX": "33",
+        "LOCALE": "fr-FR",
+        "TEMPLATE_LANGUAGE": "fr"
+      }
+    }
+  },
+  "whatsappTemplatesRequired": [
+    {
+      "name": "booking_reminder_24h",
+      "category": "UTILITY",
+      "body": "Bonjour {{1}}, rappel: votre {{2}} est demain, le {{3}} a {{4}}. A demain !",
+      "variables": ["name", "service", "date", "time"]
+    },
+    {
+      "name": "booking_reminder_1h",
+      "category": "UTILITY",
+      "body": "{{1}}, votre {{2}} commence dans 1 heure ({{3}} a {{4}}). On vous attend !",
+      "variables": ["name", "service", "date", "time"]
+    }
+  ],
+  "tags": ["WhatsApp", "Reminders", "Booking", "Meta", "Generic"]
+}
