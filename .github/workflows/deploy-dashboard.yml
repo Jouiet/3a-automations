@@ -43,10 +43,26 @@ jobs:
           username: ${{ secrets.HOSTINGER_USERNAME }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           script: |
+            # Navigate to dashboard directory
             cd /root/dashboard
-            git pull origin main
-            npm ci --production=false
+
+            # Pull latest code from GitHub (sparse checkout for dashboard only)
+            if [ ! -d ".git" ]; then
+              cd /root
+              rm -rf dashboard
+              git clone --depth 1 https://github.com/Jouiet/3a-automations.git temp-repo
+              mv temp-repo/dashboard /root/dashboard
+              rm -rf temp-repo
+              cd /root/dashboard
+            else
+              git pull origin main
+            fi
+
+            # Install dependencies and build
+            npm install --legacy-peer-deps
             npm run build
+
+            # Restart PM2 process
             pm2 restart dashboard || pm2 start npm --name "dashboard" -- start
             pm2 save
 
