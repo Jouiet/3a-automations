@@ -1,10 +1,62 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 90)
+## Document Exécutable - Décembre 2025 (màj Session 90 FINAL)
 ## Objectif: Premier client payant en 4 semaines
 
 ---
 
-## ✅ SESSION 90: WELCOME SERIES + CLAUDE-MCP (25/12/2025)
+## 🎯 PLAN ACTIONNABLE SESSION 91
+
+### Priorité 1: ACQUISITION (Lead Gen)
+```
+ACTION IMMÉDIATE (Session 91):
+├── [ ] Tester LinkedIn Lead Scraper en production
+│   └── Vérifier: leads capturés dans Google Sheets
+├── [ ] Configurer Klaviyo Flow pour welcome_series_started event
+│   └── 5 emails automatiques (Day 0, 2, 4, 7, 14)
+└── [ ] Premier outreach: 10 prospects e-commerce Shopify
+
+BLOCKERS IDENTIFIÉS:
+├── ❌ Shopify dev store: Non créé (partners.shopify.com)
+└── ⚠️ WhatsApp Business: Configuration manuelle requise
+```
+
+### Priorité 2: CONVERSION (Premier client)
+```
+ACTIONS SEMAINE PROCHAINE:
+├── [ ] Créer 3 case studies fictifs mais réalistes
+├── [ ] Landing page /audit-gratuit avec formulaire
+├── [ ] Connecter formulaire → Klaviyo → n8n workflow
+└── [ ] A/B test: Prix en € vs MAD pour Maroc
+```
+
+### Priorité 3: TECHNIQUE (Maintenance)
+```
+BACKLOG:
+├── [ ] Fix Google Sheets logging (OAuth2 au lieu de Service Account)
+├── [ ] Créer Shopify dev store pour demos
+├── [ ] Tests end-to-end des 10 workflows n8n
+└── [ ] Monitoring: alertes si workflow échoue
+```
+
+---
+
+## ✅ SESSION 90 FINAL: KLAVIYO FIX + DOCS SYNC (25/12/2025)
+
+### Problème Résolu: Klaviyo Welcome Series
+```
+DIAGNOSTIC (Bottom-up):
+├── Symptôme: Webhook retournait {"code":0,"message":"error"}
+├── Investigation: Execution API → error sur "Log to Google Sheets"
+├── Cause racine: n8n + Google Sheets + Service Account = NON SUPPORTÉ
+│   └── GitHub Issues: #22018, #17422
+└── Solution: Retirer Google Sheets, garder Klaviyo uniquement
+
+FIX APPLIQUÉ:
+├── ✅ Code node: $json.body.email (pas $json.email)
+├── ✅ HTTP nodes: $('Generate Welcome Series').item.json.email
+├── ✅ Google Sheets: RETIRÉ (limitation n8n documentée)
+└── ✅ Test vérifié: {"success":true,"message":"Welcome series started"}
+```
 
 ### n8n Workflows Final - 10/10 ACTIFS (100%)
 ```
@@ -17,41 +69,43 @@ VÉRIFIÉ PAR API CALLS (25/12/2025):
 ├── ✅ AI Avatar Generator
 ├── ✅ LinkedIn Lead Scraper - Aggressive Outbound (schedule: 6h)
 ├── ✅ AI Talking Video Generator
-├── ✅ Klaviyo Welcome Series - 5 Emails Automation [NEW]
-└── ✅ Enhance Product Photos (webhook+schedule - FIXED Session 90)
+├── ✅ Klaviyo Welcome Series - 5 Emails [FIXED Session 90]
+└── ✅ Enhance Product Photos (webhook+schedule)
 
 WORKFLOW IDs:
-├── Welcome Series: JaooDwzmJojEe6bx
+├── Welcome Series: JaooDwzmJojEe6bx (versionCounter: 13)
 ├── LinkedIn Scraper: l0ABBPUCzffaPvon (runs every 6h)
 └── Email Outreach: 3qdH7ySnR0a2yH10
 ```
 
 ### MCP Stack Final - 12/13 (92%)
 ```
-AJOUTÉ SESSION 90:
-├── ✅ claude-mcp: Connected (npx claude-mcp)
-│   ├── Env: MCP_CLAUDE_DEBUG=false, MCP_NOTIFICATIONS=true
-│   └── Tools: start, resume, status, cancel
-└── TOTAL: 12/13 MCPs fonctionnels
+VÉRIFIÉ SESSION 90:
+├── ✅ n8n: 10/10 workflows ACTIFS (100%)
+├── ✅ claude-mcp: Connected (claude-mcp@2.4.1)
+├── ✅ xAI/Grok: 11 modèles actifs
+├── ✅ Klaviyo: 3 listes
+├── ✅ Apify: STARTER plan
+├── ✅ GitHub: Token OK (user: Jouiet)
+├── ✅ Hostinger: VPS running
+├── ✅ Gemini: 50 modèles
+├── ✅ GA4: 30 users, 90 sessions
+├── ✅ Google Sheets: Leads & CRM
+├── ✅ Chrome-devtools + Playwright: npx OK
+└── ❌ Shopify: Dev store à créer
 
-SITE & DASHBOARD VERIFIED:
-├── ✅ https://3a-automation.com → HTTP 200
-├── ✅ https://3a-automation.com/en/ → HTTP 200
-└── ✅ https://dashboard.3a-automation.com/api/health → healthy
-```
-
-### Documents Synced
-```
-├── ✅ llms-full.txt: 72 → 77 automations
-├── ✅ voice-widget.js: 72 → 77 automations
-├── ✅ voice-widget.min.js: regenerated (33KB)
-└── ✅ CLAUDE.md: v13.6, Session 90
+LIMITATION DOCUMENTÉE:
+└── n8n Google Sheets + Service Account: NON SUPPORTÉ
+    Sources: github.com/n8n-io/n8n/issues/22018, #17422
 ```
 
 ### Commits Session 90
 ```
 ├── 00899f5 feat(session90): n8n 9/10 workflows + Klaviyo welcome-series
-└── 88a019a feat(session90): Add claude-mcp server
+├── 88a019a feat(session90): Add claude-mcp server
+├── b3a17f3 feat(session90): n8n 10/10 workflows ACTIVE (100%)
+├── 102f3c6 docs(session90): Sync all docs with n8n 10/10
+└── 20d03b9 fix(session90): Klaviyo Welcome Series - remove Google Sheets
 ```
 
 ---

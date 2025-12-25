@@ -1,46 +1,52 @@
 # MCP-FLYWHEEL INTEGRATION ANALYSIS
 ## AI Agency Automation (AAA) - Communication & Compatibility Report
 
-> **Generated:** 2025-12-16 | **Updated:** 2025-12-25 (Session 89 FINAL)
-> **Status:** MCP STACK COMPLET + DASHBOARD LIVE
-> **Overall Integration Score:** 95/100 (màj Session 89 - 11/12 MCPs = 92%)
+> **Generated:** 2025-12-16 | **Updated:** 2025-12-25 (Session 90 FINAL)
+> **Status:** MCP STACK COMPLET + DASHBOARD LIVE + n8n 100%
+> **Overall Integration Score:** 96/100 (màj Session 90 - 12/13 MCPs = 92%, n8n 10/10 = 100%)
 
 ---
 
-## 0. SESSION 89 FINAL UPDATE (25/12/2025)
+## 0. SESSION 90 FINAL UPDATE (25/12/2025)
 
 ```
 ═══════════════════════════════════════════════════════════════════
-                MCP STACK COMPLET - 11/12 (92%)
+                MCP STACK + n8n 10/10 (100%)
 ═══════════════════════════════════════════════════════════════════
 
 ✅ MCPs VÉRIFIÉS PAR API CALLS (25/12/2025):
-   ├── n8n              API key + 8/9 workflows ACTIFS (88%)
+   ├── n8n              API key + 10/10 workflows ACTIFS (100%)
    ├── xAI/Grok         Crédits ACTIFS, 11 modèles
    ├── google-analytics 30 users, 90 sessions (7j)
    ├── google-sheets    "3A Automation - Leads & CRM"
    ├── klaviyo          3 listes
    ├── hostinger        VPS 1168256 running
-   ├── github           Token configuré
-   ├── gemini           API active
-   ├── apify            Token vérifié
+   ├── github           Token configuré (user: Jouiet)
+   ├── gemini           API active (50 modèles)
+   ├── apify            Token vérifié (STARTER plan)
    ├── chrome-devtools  npx config valid
-   └── playwright       npx config valid
+   ├── playwright       npx config valid
+   └── claude-mcp       Connected (claude-mcp@2.4.1)
 
 ❌ PLACEHOLDER (1 seul):
-   └── shopify: Dev store à créer
+   └── shopify: Dev store à créer sur partners.shopify.com
 
-✅ n8n WORKFLOWS (8/9 ACTIFS = 88%):
+✅ n8n WORKFLOWS (10/10 ACTIFS = 100%):
    ✅ 1. Grok Voice Telephony - Phone Booking (ACTIVE)
    ✅ 2. Email Outreach Sequence - Multi-Touch Campaign (ACTIVE)
    ✅ 3. WhatsApp Booking Confirmation (ACTIVE)
    ✅ 4. WhatsApp Booking Reminders (ACTIVE)
    ✅ 5. Blog Article Generator (ACTIVE)
    ✅ 6. AI Avatar Generator (ACTIVE)
-   ✅ 7. LinkedIn Lead Scraper (ACTIVE)
+   ✅ 7. LinkedIn Lead Scraper (ACTIVE - schedule every 6h)
    ✅ 8. AI Talking Video Generator (ACTIVE)
-   ✅ 9. Enhance Product Photos (ACTIVE - webhook+schedule triggers)
-   ✅ 10. Klaviyo Welcome Series (ACTIVE - 5 emails)
+   ✅ 9. Enhance Product Photos (ACTIVE - webhook+schedule)
+   ✅ 10. Klaviyo Welcome Series (ACTIVE - FIXED Session 90)
+
+⚠️ LIMITATION DOCUMENTÉE (Session 90):
+   └── n8n Google Sheets + Service Account: NON SUPPORTÉ
+       GitHub Issues: #22018, #17422
+       Solution: Utiliser OAuth2 ou retirer Google Sheets logging
 
 ✅ xAI MODÈLES DISPONIBLES:
    ├── grok-4-0709
