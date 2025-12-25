@@ -25,7 +25,7 @@
 | Implementation Rate | **62%** (48/77 scripts verified) | ✅ |
 | Personas Clients | **5** (documentes) | ✅ |
 | Claims Marketing | **CORRIGES** (ROI attribution, counts) | ✅ |
-| MCPs fonctionnels | **11/12** (92%) | ✅ Session 90 |
+| MCPs fonctionnels | **12/13** (92%) | ✅ Session 90 |
 | n8n Workflows | **9/10 ACTIFS** (90%) | ✅ Session 90 |
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
@@ -65,7 +65,15 @@ ACTIONS COMPLÉTÉES SESSION 90:
 ├── [x] Minification voice-widget.min.js
 ├── [x] Création workflow klaviyo-welcome-series.json
 ├── [x] Déploiement + activation sur n8n (ID: JaooDwzmJojEe6bx)
+├── [x] Installation claude-mcp server
 └── [x] Mise à jour CLAUDE.md
+
+CLAUDE-MCP SERVER:
+├── Package: claude-mcp@2.4.1
+├── Status: ✅ Connected
+├── Env: MCP_CLAUDE_DEBUG=false, MCP_NOTIFICATIONS=true
+├── Tools: start, resume, status, cancel
+└── Use: AI tools interact with Claude Code programmatically
 
 KLAVIYO WELCOME SERIES WORKFLOW:
 ├── Webhook: POST /subscribe/new
