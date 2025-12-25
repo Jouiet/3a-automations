@@ -4,7 +4,7 @@
 
 | Session | Modifications |
 |---------|---------------|
-| **89** | **MCP STACK COMPLET 11/12 (92%)**: n8n API key + 9 workflows déployés (Grok Voice, Email Outreach, WhatsApp, LinkedIn, AI Avatar, Blog), xAI/Grok crédits ACTIFS (11 modèles: grok-4, grok-3, vision), Google Analytics permissions (30 users, 90 sessions/7j), Google Sheets permissions (Leads & CRM), GitHub token configuré, Sécurité: 0 tokens exposés, .gitignore updated, Documentation: FORENSIC-AUDIT v12.0, business-model v4.0, action-plan + mcp-integration + flywheel + website-blueprint mis à jour |
+| **89** | **MCP STACK COMPLET 11/12 (92%)**: n8n 6/9 workflows ACTIFS (Email Outreach, LinkedIn Lead Scraper, Blog Article Generator, WhatsApp x2, AI Avatar) - Klaviyo nodes→HTTP Request conversion, xAI/Grok crédits ACTIFS (11 modèles: grok-4, grok-3, vision), Google Analytics permissions (30 users, 90 sessions/7j), Google Sheets permissions (Leads & CRM), GitHub token configuré, Sécurité: 0 tokens exposés, .gitignore updated |
 
 ## Session 88 (24/12/2025) - DASHBOARD PRODUCTION LIVE
 
