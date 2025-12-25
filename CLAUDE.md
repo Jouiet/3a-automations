@@ -81,9 +81,10 @@ CLAUDE-MCP SERVER:
 KLAVIYO WELCOME SERIES WORKFLOW:
 ├── Webhook: POST /subscribe/new
 ├── 5 emails personnalisés (Day 0, 2, 4, 7, 14)
-├── Profil Klaviyo créé/updated
-├── Event welcome_series_started
-├── Log Google Sheets
+├── Profil Klaviyo créé/updated avec properties
+├── Event welcome_series_started triggé
+├── ⚠️ Google Sheets logging RETIRÉ (Service Account limitation n8n)
+├── Test vérifié: {"success":true,"message":"Welcome series started"}
 └── URL: https://n8n.srv1168256.hstgr.cloud/webhook/subscribe/new
 ```
 
