@@ -1,6 +1,6 @@
 # DASHBOARD BLUEPRINT - 3A AUTOMATION
-## Version: 1.0.0 | Date: 2025-12-25 | Session: 91
-## Document: Recherche, Audit et Planification (NO IMPLEMENTATION)
+## Version: 1.1.0 | Date: 2025-12-25 | Session: 93
+## Document: Recherche, Audit, Planification et Suivi Implementation
 
 ---
 
@@ -13,25 +13,27 @@ Ce document constitue l'analyse exhaustive des dashboards Admin et Client de 3A 
 - **Recherche GitHub**: Patterns d'intégration n8n
 - **Analyse business model**: Alignement features/pricing
 
-### Verdict Global
-| Aspect | État Actuel | Gravité |
-|--------|-------------|---------|
-| Admin Dashboard | Fonctionnel, API connectée | OK |
-| Client Dashboard | **MOCK DATA ONLY** | CRITIQUE |
-| n8n Integration | Placeholder UI only | HAUTE |
-| Real-time Updates | Absent | MOYENNE |
-| Charts/Graphs | Placeholder | MOYENNE |
-| On-demand Services UI | Absent | HAUTE |
+### Verdict Global (Mise à jour Session 93)
+| Aspect | État Actuel | Gravité | Session |
+|--------|-------------|---------|---------|
+| Admin Dashboard | Fonctionnel, API connectée | ✅ OK | 86 |
+| Client Dashboard | **REAL API DATA** | ✅ RÉSOLU | 92 |
+| n8n Integration | **API PROXY FONCTIONNEL** | ✅ RÉSOLU | 92 |
+| CinematicAds UI | **REDIRECT cinematicads.studio** | ✅ STRATÉGIE | 93 |
+| Real-time Updates | Polling 30s implémenté | ✅ OK | 92 |
+| Charts/Graphs | Placeholder | MOYENNE | - |
+| On-demand Services UI | Voice/WhatsApp generics créés | BASSE | 93 |
 
-### Contrainte Business Fondamentale
+### Contrainte Business Fondamentale (Mise à jour Session 93)
 > **3A Automation n'est PAS une plateforme self-service.**
 >
-> Seuls 3 services sont vendus à la demande:
-> 1. CinematicAds AI (vidéo génération)
-> 2. AI Assistant (Voice AI Téléphonie)
-> 3. WhatsApp Business
+> **STRATÉGIE SESSION 93:**
+> - CinematicAds = **PROJET SÉPARÉ** → cinematicads.studio (SaaS autonome)
+> - 3A Automation = Marketing-only (redirect, pas d'implémentation)
+> - Voice AI + WhatsApp = Templates génériques créés pour multi-projets
 >
-> Les autres 74 automations font partie des packs (Quick Win, Essentials, Growth).
+> Les 73 autres automations font partie des packs (Quick Win, Essentials, Growth).
+> Les 4 CinematicAds sont marquées "external-service" dans le registry.
 
 ---
 
@@ -766,28 +768,65 @@ n8n API VERIFIED:
 └── Connection: OK
 ```
 
-### Session 93 - Phase 2: On-Demand Services UI
+### Session 93 - STRATÉGIE PARTENAIRE VALIDÉE (25/12/2025)
 
 ```
-[ ] 1. Page CinematicAds avec upload/status
-[ ] 2. Page Voice AI avec stats appels
-[ ] 3. Page WhatsApp avec stats messages
-[ ] 4. API routes pour chaque service
+DÉCISION STRATÉGIQUE:
+├── CinematicAds = PAS d'UI dans 3A Dashboard
+│   ├── Raison: Projet SaaS séparé (cinematicads.studio)
+│   ├── Action: Marketing-only avec redirect
+│   └── CTAs ajoutés sur pages automations (FR + EN)
+├── Voice AI + WhatsApp = Templates génériques créés
+│   ├── Dossier: automations/shared-components/
+│   ├── Voice Widget: 3 configs (example, 3A, CinematicAds)
+│   └── WhatsApp: 2 workflows n8n (confirmation, reminders)
+└── Dashboard Phase 2 = ANNULÉE (services déjà gérés)
+
+FICHIERS CRÉÉS SESSION 93:
+├── automations/shared-components/voice-widget/
+│   ├── config.example.js
+│   ├── config-3a-automation.js
+│   ├── config-cinematicads.js
+│   └── README.md
+├── automations/shared-components/whatsapp-workflows/
+│   ├── booking-confirmation-generic.json
+│   ├── booking-reminders-generic.json
+│   └── README.md
+├── automations.html: CinematicAds cards → cinematicads.studio
+├── en/automations.html: idem EN
+├── styles.css: .category-cta, .clickable-card, .card-cta
+└── automations-registry.json: v1.6.0 (external-service type)
+
+COMMIT: b12aa9d
 ```
 
-### Validation Requise Avant Implémentation
+### Prochaines Étapes (Session 94+)
 
-1. **Confirmer priorité on-demand services UI**
-   - CinematicAds, Voice AI, WhatsApp = Phase 2?
+```
+PHASE 3 - VISUALISATION (Priorité basse):
+[ ] 3.1 Implémenter Recharts avec vraies données
+[ ] 3.2 Rapport PDF automatique mensuel
+[ ] 3.3 Export CSV leads/metrics
 
-2. **Confirmer scope Phase 1**
-   - Juste connexion API ou aussi charts?
-
-3. **Confirmer client test**
-   - Quel client utiliser pour validation?
+PHASE 4 - DÉPLOIEMENT CINEMATICADS (Projet séparé):
+[ ] 4.1 Copier shared-components vers /Desktop/Ads-Automations/
+[ ] 4.2 Configurer n8n pour CinematicAds
+[ ] 4.3 Créer templates WhatsApp Meta
+[ ] 4.4 Déployer voice-widget sur cinematicads.studio
+```
 
 ---
 
-*Document généré le 2025-12-25*
-*Session 91 - Recherche et Planification Dashboards*
-*Aucune implémentation effectuée - Planification uniquement*
+## 14. HISTORIQUE DES SESSIONS
+
+| Session | Date | Actions | Status |
+|---------|------|---------|--------|
+| 91 | 25/12/2025 | Recherche + Blueprint | ✅ COMPLETE |
+| 92 | 25/12/2025 | Phase 1 - Client dashboard API | ✅ COMPLETE |
+| 93 | 25/12/2025 | Stratégie CinematicAds + Generics | ✅ COMPLETE |
+
+---
+
+*Document mis à jour le 2025-12-25*
+*Session 93 - Stratégie partenaire CinematicAds validée*
+*Shared components Voice/WhatsApp créés*
