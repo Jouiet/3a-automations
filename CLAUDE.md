@@ -35,57 +35,68 @@
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.3 (77 automations) | ✅ |
 
-### Session 94 - RECHARTS + FULL DEPLOYMENT LIVE (25/12/2025)
+### Session 94 - RECHARTS VISUALIZATION + CI/CD COMPLETE (25/12/2025)
 ```
 ═══════════════════════════════════════════════════════════════════
-                    SESSION 94 - DASHBOARD COMPLETE
+                    SESSION 94 - DASHBOARD LIVE + RECHARTS
 ═══════════════════════════════════════════════════════════════════
 
-ADMIN DASHBOARD ENHANCED:
+ADMIN DASHBOARD ENHANCED WITH RECHARTS:
 ├── dashboard/src/app/admin/page.tsx (MAJOR REWRITE)
-│   ├── BarChart: Executions par workflow (success vs error)
-│   ├── PieChart: Workflow status (actif vs inactif)
-│   ├── Workflows list: Real n8n data with status badges
+│   ├── BarChart: Executions par workflow (success=green vs error=red)
+│   ├── PieChart: Workflow status (10 actifs cyan / 0 inactifs gris)
+│   ├── Workflows list: 10 workflows avec status badges "Actif"
 │   ├── Auto-refresh: 30 secondes avec bouton manuel
-│   ├── Real stats: Automation count + error count from n8n
-│   └── Dark theme Recharts: #1E293B + cyan accents
-├── Build: SUCCESS (admin: 12.5kB + Recharts bundle 207kB)
-└── Commit: 3a328f2
+│   ├── Real stats: 10 automations actives, 50 erreurs from n8n API
+│   ├── Activity feed: Recent errors displayed with timestamps
+│   └── Dark theme Recharts: #1E293B + cyan/green/red accents
+├── Build: SUCCESS (27 pages compiled)
+└── Screenshots: dashboard-admin-final.png
 
-CLIENT DASHBOARD (Session 92):
-├── dashboard/src/app/client/page.tsx
-│   ├── BarChart: Executions par workflow (success vs error)
-│   ├── ResponsiveContainer: Mobile-friendly
-│   ├── Dark theme styling: #1E293B background
-│   └── Legend: Succes (green) + Erreurs (red)
-├── Build: SUCCESS (client: 4.55kB + 199kB bundle)
-└── n8n API routes: /api/n8n/workflows, /api/n8n/executions
+AUTH FALLBACK ADDED:
+├── dashboard/src/app/api/auth/login/route.ts
+│   ├── Added FALLBACK_ADMIN when Google Sheets unavailable
+│   ├── Password: Admin3A2025 (bcrypt hashed)
+│   └── Allows login without Google Sheets API
+└── Commit: 1e002dc
 
-GITHUB ACTIONS FIX:
-├── Fixed npm ci → npm install --legacy-peer-deps
-├── Updated SSH deployment script for /root/dashboard
-├── Added all secrets: HOSTINGER_HOST, HOSTINGER_USERNAME, HOSTINGER_SSH_KEY
-├── Added: N8N_HOST, N8N_API_KEY secrets
-└── Workflow: 20506135842 SUCCESS
+GITHUB ACTIONS CI/CD FIXED:
+├── .github/workflows/deploy-dashboard.yml
+│   ├── Fixed npm ci → npm install --legacy-peer-deps
+│   ├── Fixed YAML heredoc syntax → echo commands
+│   ├── Added envs parameter for SSH action
+│   ├── Creates .env.local on VPS with all secrets
+│   └── Triggers: push dashboard/** OR workflow_dispatch
+├── GitHub Secrets configured:
+│   ├── HOSTINGER_HOST, HOSTINGER_USERNAME, HOSTINGER_SSH_KEY
+│   ├── N8N_HOST, N8N_API_KEY
+│   ├── JWT_SECRET, GOOGLE_SHEETS_ID
+│   └── All secrets verified and working
+└── Workflow 20507694660: SUCCESS (2m40s)
 
 DEPLOYMENT HOSTINGER VPS:
-├── Created /root/dashboard with correct code
-├── Created .env.local with N8N_API_KEY
+├── Path: /root/dashboard (fresh clone each deploy)
+├── .env.local: Created automatically with secrets
 ├── Build: SUCCESS (27 pages)
-├── PM2: dashboard running on port 3001
-└── Traefik: routing dashboard.3a-automation.com → localhost:3001
+├── PM2: dashboard process running
+└── Traefik: dashboard.3a-automation.com → localhost:3001
 
-VERIFICATION:
+VERIFICATION COMPLETE:
 ├── /api/health: ✅ {"status":"healthy"}
-├── /api/n8n/workflows: ✅ 10 workflows returned
-├── /api/n8n/executions: ✅ Real execution data
+├── /api/n8n/workflows: ✅ 10 workflows returned (JSON)
+├── /api/n8n/executions: ✅ Real execution data with stats
+├── Login: ✅ admin@3a-automation.com / Admin3A2025
+├── Recharts BarChart: ✅ Visible with execution data
+├── Recharts PieChart: ✅ Shows 10 actifs / 0 inactifs
 └── Dashboard LIVE: https://dashboard.3a-automation.com ✅
 
 COMMITS SESSION 94:
-├── 3a328f2 feat(session94): Admin dashboard Recharts + real n8n data
-├── 7d9e593 docs(session94): Update CLAUDE.md
-├── 5cfa6c0 fix(ci): Use npm install instead of npm ci
-└── 89e61a6 fix(ci): Update dashboard deployment script
+├── 1e002dc fix(dashboard): Add fallback admin for login
+├── a1d3681 fix(ci): Add .env.local generation with N8N secrets
+├── 9de1360 fix(ci): Fix YAML syntax for .env.local generation
+├── 331cbe5 chore: trigger deploy with fixed YAML
+├── ad855be chore: redeploy with all secrets configured
+└── 82919fd chore: final redeploy with N8N_API_KEY
 ```
 
 ### Session 93 - CINEMATICADS MARKETING-ONLY + GENERICS (25/12/2025)
