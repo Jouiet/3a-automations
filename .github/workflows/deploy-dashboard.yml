@@ -60,13 +60,11 @@ jobs:
             fi
 
             # Create .env.local with runtime environment variables
-            cat > .env.local << ENVEOF
-N8N_HOST=${N8N_HOST}
-N8N_API_KEY=${N8N_API_KEY}
-JWT_SECRET=${JWT_SECRET}
-GOOGLE_SHEETS_ID=${GOOGLE_SHEETS_ID}
-GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}
-ENVEOF
+            echo "N8N_HOST=${N8N_HOST}" > .env.local
+            echo "N8N_API_KEY=${N8N_API_KEY}" >> .env.local
+            echo "JWT_SECRET=${JWT_SECRET}" >> .env.local
+            echo "GOOGLE_SHEETS_ID=${GOOGLE_SHEETS_ID}" >> .env.local
+            echo "GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}" >> .env.local
 
             # Install dependencies and build
             npm install --legacy-peer-deps
