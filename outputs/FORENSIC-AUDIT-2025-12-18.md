@@ -48,7 +48,7 @@ Voice AI (Grok):                 1
 ✅ apify              token présent
 
 ❌ shopify            PLACEHOLDER (nécessite Dev Store)
-✅ n8n                API key + 9 workflows (Session 89)
+✅ n8n                API key + 8/9 workflows ACTIFS (88%) Session 89
 ```
 
 ### Audits Passés (Session 83 - Ultra Forensic)
@@ -641,7 +641,7 @@ COMMIT: beb8aad
 | Google Analytics | ✅ Credentials OK | Nécessite implémentation |
 | Apify | ✅ OK | Token configuré |
 | Shopify | ⚠️ Token vide | SHOPIFY_ACCESS_TOKEN manquant |
-| n8n | ✅ OK | API key + 9 workflows (Session 89) |
+| n8n | ✅ OK | API key + 8/9 workflows ACTIFS (88%) |
 | xAI/Grok | ✅ OK | Crédits actifs, 11 modèles disponibles (Session 89) |
 | Meta | ⚠️ Non configuré | META_ACCESS_TOKEN requis |
 
@@ -787,7 +787,7 @@ STATUT: MANQUANT - Script non fonctionnel
 |-----|--------|---------|---------|
 | Shopify | **OK** | 579ms | Alpha Medical Care - Connexion réussie |
 | Klaviyo | **OK** | 263ms | 3 listes trouvées |
-| n8n | **OK** | 437ms | API key configurée, 9 workflows (Session 89) |
+| n8n | **OK** | 437ms | API key configurée, 8/9 workflows ACTIFS (88%) |
 | xAI/Grok | **OK** | 198ms | 11 modèles disponibles (grok-4, grok-3, vision, image) |
 | Google SA | **MANQUANT** | N/A | Fichier inexistant: `/Users/mac/.config/google/service-account.json` |
 
@@ -803,7 +803,7 @@ CASSÉES: 1/5 (20%)
 └── Google: Fichier SA manquant (permissions requises)
 
 CORRIGÉES SESSION 89:
-├── n8n: ✅ API key configurée, 9 workflows
+├── n8n: ✅ API key configurée, 8/9 workflows ACTIFS (88%)
 └── xAI: ✅ Crédits actifs, 11 modèles (grok-4, grok-3, vision)
 
 SCRIPT DE TEST: scripts/forensic-api-test.cjs
@@ -1018,7 +1018,7 @@ Pages utilisant styles-lite.css (41KB):
 
 | Claim | Source | Réalité | Verdict |
 |-------|--------|---------|---------|
-| "n8n configuré et fonctionnel" | CLAUDE.md | ✅ API key + 9 workflows (Session 89) | **VRAI** |
+| "n8n configuré et fonctionnel" | CLAUDE.md | ✅ API key + 8/9 workflows ACTIFS (88%) | **VRAI** |
 | "Voice Agent viable" | CLAUDE.md | ✅ xAI crédits actifs (Session 89) | **VRAI** |
 | "Knowledge Base RAG" | CLAUDE.md | 273 chunks, BM25 OK | **VRAI** |
 | "~25 scripts génériques" | Audit Gemini | ~14 vraiment génériques | **EXAGÉRÉ** |
@@ -3833,7 +3833,7 @@ segment-selector
 | Apify | ✅ OK | Token fonctionnel |
 | GA4 | ✅ Credentials OK | Service Account valide |
 | Shopify | ⚠️ Non configuré | Clients en pause |
-| n8n | ✅ OK | API key + 9 workflows (Session 89) |
+| n8n | ✅ OK | API key + 8/9 workflows ACTIFS (88%) |
 | xAI/Grok | ✅ OK | Crédits actifs, 11 modèles (Session 89) |
 | Meta | ⚠️ Non configuré | Token manquant |
 
@@ -4047,7 +4047,7 @@ A  automations/agency/core/grok-voice-poc.py
 
 | MCP | Status | Test | Détails |
 |-----|--------|------|---------|
-| n8n | ✅ OK | API call | 9 workflows déployés |
+| n8n | ✅ OK | API call | 8/9 workflows ACTIFS (88%) |
 | xAI/Grok | ✅ OK | API call | 11 modèles (grok-4, grok-3, vision) |
 | github | ✅ OK | Config | Token configuré |
 | google-analytics | ✅ OK | API call | 30 users, 90 sessions (7j) |
@@ -4218,7 +4218,7 @@ Tokens exposés dans documentation: 0
 
 **FIN DE L'AUDIT FORENSIQUE v12.0**
 
-*v12.0: Session 89 FINAL - MCP Stack 11/12 (92%) + Plan Actionnable Complet*
+*v12.1: Session 89 COMPLETE - MCP Stack 11/12 (92%) + n8n 8/9 (88%) + APIs Verified*
 *v11.2: Session 83 Part 3 - Blog + Lighthouse + Claude Workflow*
 *v11.1: Session 83 Part 2 - KB & Prompts Optimization (Gemini 3, Imagen 4, Veo 3)*
 *v11.0: Session 83 Part 1 - Ultra Forensic Frontend Audit (133 issues fixed)*

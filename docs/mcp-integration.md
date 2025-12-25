@@ -15,7 +15,7 @@
 ═══════════════════════════════════════════════════════════════════
 
 ✅ MCPs VÉRIFIÉS PAR API CALLS (25/12/2025):
-   ├── n8n              API key + 9 workflows déployés
+   ├── n8n              API key + 8/9 workflows ACTIFS (88%)
    ├── xAI/Grok         Crédits ACTIFS, 11 modèles
    ├── google-analytics 30 users, 90 sessions (7j)
    ├── google-sheets    "3A Automation - Leads & CRM"
@@ -30,16 +30,16 @@
 ❌ PLACEHOLDER (1 seul):
    └── shopify: Dev store à créer
 
-✅ n8n WORKFLOWS DÉPLOYÉS:
-   1. Grok Voice Telephony - Phone Booking
-   2. Email Outreach Sequence - Multi-Touch Campaign
-   3. WhatsApp Booking Confirmation
-   4. WhatsApp Booking Reminders
-   5. Blog Article Generator
-   6. AI Avatar Generator
-   7. LinkedIn Lead Scraper
-   8. AI Talking Video Generator
-   9. Enhance Product Photos
+✅ n8n WORKFLOWS (8/9 ACTIFS = 88%):
+   ✅ 1. Grok Voice Telephony - Phone Booking (ACTIVE)
+   ✅ 2. Email Outreach Sequence - Multi-Touch Campaign (ACTIVE)
+   ✅ 3. WhatsApp Booking Confirmation (ACTIVE)
+   ✅ 4. WhatsApp Booking Reminders (ACTIVE)
+   ✅ 5. Blog Article Generator (ACTIVE)
+   ✅ 6. AI Avatar Generator (ACTIVE)
+   ✅ 7. LinkedIn Lead Scraper (ACTIVE)
+   ✅ 8. AI Talking Video Generator (ACTIVE)
+   ⏸️ 9. Enhance Product Photos (INACTIVE - OAuth expired)
 
 ✅ xAI MODÈLES DISPONIBLES:
    ├── grok-4-0709

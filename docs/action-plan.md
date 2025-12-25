@@ -9,7 +9,7 @@
 ### MCP Stack Final - 11/12 (92%)
 ```
 VÉRIFIÉ PAR API CALLS (25/12/2025):
-├── ✅ n8n: API key + 9 workflows déployés
+├── ✅ n8n: API key + 8/9 workflows ACTIFS (88%)
 │   ├── Grok Voice Telephony
 │   ├── Email Outreach Sequence
 │   ├── WhatsApp Booking Confirmation/Reminders
@@ -485,7 +485,7 @@ SITUATION AU 20 DÉCEMBRE 2025 (Mise à jour Session 61):
 │   ├── ✅ Klaviyo, Apify, GA4 (testés fonctionnels)
 │   ├── ✅ GitHub, Hostinger, Gemini (tokens réels)
 │   ├── ✅ Voice AI Booking (Google Apps Script + Calendar)
-│   ├── ✅ n8n configuré (9 workflows déployés Session 89)
+│   ├── ✅ n8n configuré (8/9 workflows ACTIFS = 88%)
 │   ├── ⚠️ Shopify, WordPress (placeholders)
 │   └── ✅ xAI/Grok Voice (crédits actifs, 11 modèles)
 │
@@ -552,7 +552,7 @@ STATUT SESSION 21b (18/12/2025):
 ├── ✅ Gemini: clé sauvée (quota free tier)
 ├── ✅ xAI/Grok: crédits actifs, 11 modèles (Session 89)
 ├── ✅ Hostinger: API testée OK (VPS 1168256)
-├── ✅ n8n: API key + 9 workflows (Session 89)
+├── ✅ n8n: API key + 8/9 workflows ACTIFS (88%)
 ├── ⏳ Shopify: dev store agence à créer
 ├── ⏳ Klaviyo: compte agence à créer
 └── ✅ Sécurité: .env dans .gitignore, clés retirées des .md
