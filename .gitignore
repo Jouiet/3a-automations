@@ -44,3 +44,9 @@ outputs/audit-*-202*.md
 service-account.json
 google-services.json
 *-credentials.json
+
+# Claude Code local settings (contains permission history with tokens)
+.claude/settings.local.json
+
+# MCP config (may contain API keys)
+mcp.json

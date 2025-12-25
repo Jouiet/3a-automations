@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 3.9 - Mise à jour 24 Décembre 2025 (Session 88: Dashboard LIVE)
+## Version 4.0 - Mise à jour 25 Décembre 2025 (Session 89: MCP Stack 92%)
 ## Basé sur données réelles confirmées
 
 ---
@@ -11,11 +11,13 @@ CE DOCUMENT CONTIENT UNIQUEMENT DES FAITS VÉRIFIÉS.
 Aucun wishful thinking. Aucune projection non fondée.
 Mis à jour avec les données confirmées le 24/12/2025.
 
-SESSION 88 UPDATE:
-✅ Dashboard Admin LIVE: https://dashboard.3a-automation.com
-✅ PM2 + Node.js 20 (NO Docker)
-✅ Google Sheets Database avec Apps Script API v2
-✅ Auth: JWT + bcrypt + Role-based (ADMIN/CLIENT/VIEWER)
+SESSION 89 UPDATE (25/12/2025):
+✅ MCP Stack: 11/12 fonctionnels (92%)
+✅ n8n: API key + 9 workflows déployés
+✅ xAI/Grok: Crédits ACTIFS, 11 modèles disponibles
+✅ Google Analytics: 30 users, 90 sessions (7j)
+✅ Google Sheets: Permissions configurées
+✅ Dashboard: https://dashboard.3a-automation.com LIVE
 ```
 
 ---
@@ -80,21 +82,21 @@ SESSION 88 UPDATE:
 │  ✅ Veo 3: 100-200 mots, structure subject+action+setting+specs+style       │
 │  Sources: ai.google.dev/gemini-api/docs, deepmind.google/models/veo/        │
 │                                                                              │
-│  MCPs CONFIGURÉS (Audit Session 24 - 19/12/2025)                            │
+│  MCPs CONFIGURÉS (Session 89 - 25/12/2025 - VÉRIFIÉ PAR API)               │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  ✅ Klaviyo MCP - API key réelle                                            │
-│  ✅ Google Analytics - Service Account VALIDE                               │
-│  ✅ Google Sheets - Service Account VALIDE                                  │
-│  ✅ Hostinger MCP - Token réel                                              │
-│  ✅ GitHub MCP - Token réel                                                 │
-│  ✅ Gemini MCP - API key réelle                                             │
-│  ✅ Playwright MCP - NPX standard                                           │
-│  ✅ Chrome DevTools MCP - NPX standard                                      │
-│  ✅ Apify MCP - Token réel                                                  │
-│  ⚠️ Shopify MCP - PLACEHOLDER (config client requise)                      │
-│  ⚠️ n8n MCP - PLACEHOLDER (API key à générer)                              │
-│  ⚠️ WordPress MCP - PLACEHOLDER (config requise)                           │
-│  TOTAL: 9/9 fonctionnels (100% - Session 83 vérifiés)                       │
+│  ✅ n8n - API key + 9 workflows déployés                                    │
+│  ✅ xAI/Grok - Crédits ACTIFS, 11 modèles (grok-4, grok-3, vision)         │
+│  ✅ Klaviyo - 3 listes (API testé)                                          │
+│  ✅ Google Analytics - 30 users, 90 sessions (7j)                           │
+│  ✅ Google Sheets - "3A Automation - Leads & CRM"                           │
+│  ✅ Hostinger - VPS 1168256 running                                         │
+│  ✅ GitHub - Token configuré                                                │
+│  ✅ Gemini - API active                                                     │
+│  ✅ Apify - Token vérifié                                                   │
+│  ✅ Playwright - NPX standard                                               │
+│  ✅ Chrome DevTools - NPX standard                                          │
+│  ❌ Shopify - Dev store à créer                                             │
+│  TOTAL: 11/12 fonctionnels (92%) - Session 89                              │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -111,7 +113,7 @@ SESSION 88 UPDATE:
 │  ├── ✅ PM2 + Node.js 20 (NO Docker) sur Hostinger VPS                     │
 │  ├── ✅ Google Sheets DB: Users, Leads, Automations, Activities, Metrics   │
 │  ├── ✅ Auth: JWT + bcrypt + Role-based (ADMIN/CLIENT/VIEWER)              │
-│  ├── ✅ xAI API: $5 crédits PURCHASED, Grok Voice ready                    │
+│  ├── ✅ xAI API: Crédits ACTIFS, 11 modèles Grok disponibles               │
 │  └── ✅ Apps Script API v2: GET+POST, CRUD operations verified             │
 │                                                                              │
 │  COMMERCIAL (bloquant)                                                      │
