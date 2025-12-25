@@ -18,7 +18,20 @@ import {
   ExternalLink,
   AlertCircle,
   RefreshCw,
+  BarChart3,
 } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 
 interface ClientStats {
   activeAutomations: number;
@@ -52,6 +65,18 @@ interface RecentActivity {
   status: "success" | "error" | "pending";
 }
 
+interface ExecutionChartData {
+  name: string;
+  success: number;
+  error: number;
+}
+
+const CHART_COLORS = {
+  success: "#10B981",
+  error: "#EF4444",
+  primary: "#4FBAF1",
+};
+
 export default function ClientDashboardPage() {
   const [stats, setStats] = useState<ClientStats>({
     activeAutomations: 0,
@@ -62,6 +87,7 @@ export default function ClientDashboardPage() {
   const [workflows, setWorkflows] = useState<N8nWorkflow[]>([]);
   const [executions, setExecutions] = useState<N8nExecution[]>([]);
   const [activities, setActivities] = useState<RecentActivity[]>([]);
+  const [executionChartData, setExecutionChartData] = useState<ExecutionChartData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
@@ -117,6 +143,29 @@ export default function ClientDashboardPage() {
                       exec.status === "error" ? "error" as const : "pending" as const,
             }));
           setActivities(recentActivities);
+
+          // Generate chart data from executions grouped by workflow
+          const workflowStats: { [key: string]: { success: number; error: number } } = {};
+          (executionsData.data || []).forEach((exec: N8nExecution) => {
+            const name = exec.workflowName?.split(" - ")[0] || "Unknown";
+            if (!workflowStats[name]) {
+              workflowStats[name] = { success: 0, error: 0 };
+            }
+            if (exec.status === "success") {
+              workflowStats[name].success++;
+            } else if (exec.status === "error") {
+              workflowStats[name].error++;
+            }
+          });
+
+          const chartData = Object.entries(workflowStats)
+            .map(([name, data]) => ({
+              name: name.length > 15 ? name.substring(0, 12) + "..." : name,
+              success: data.success,
+              error: data.error,
+            }))
+            .slice(0, 6);
+          setExecutionChartData(chartData);
         }
       }
 
@@ -359,6 +408,60 @@ export default function ClientDashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Execution Chart */}
+      {executionChartData.length > 0 && (
+        <Card className="border-border/50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart3 className="h-5 w-5 text-primary" />
+              Executions par Workflow
+            </CardTitle>
+            <CardDescription>
+              Performance des workflows (succes vs erreurs)
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={executionChartData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                  <XAxis
+                    dataKey="name"
+                    stroke="#94A3B8"
+                    fontSize={11}
+                    angle={-45}
+                    textAnchor="end"
+                    height={60}
+                    tick={{ fill: '#94A3B8' }}
+                  />
+                  <YAxis stroke="#94A3B8" fontSize={12} tick={{ fill: '#94A3B8' }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#1E293B',
+                      border: '1px solid rgba(79, 186, 241, 0.2)',
+                      borderRadius: '8px',
+                      color: '#fff'
+                    }}
+                  />
+                  <Bar dataKey="success" name="Succes" fill={CHART_COLORS.success} radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="error" name="Erreurs" fill={CHART_COLORS.error} radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-center gap-6 mt-4">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: CHART_COLORS.success }} />
+                <span className="text-sm text-muted-foreground">Succes</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: CHART_COLORS.error }} />
+                <span className="text-sm text-muted-foreground">Erreurs</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Quick Actions */}
       <Card className="border-border/50">
