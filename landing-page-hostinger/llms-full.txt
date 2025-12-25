@@ -194,48 +194,37 @@ Oui, chaque pack inclut un niveau de support. Le pack Growth inclut un support p
 
 ---
 
-## Stack Technique Complet
+## Expertise & Partenariats
 
 ### E-commerce
-- Shopify REST API v2024-01
-- Shopify GraphQL Admin API
-- Shopify Flow (pour clients Plus)
-- DSers Dropshipping Integration
-- Meta Commerce Manager
+- Shopify Partner certifié
+- Intégrations e-commerce avancées
+- Multi-channel management
+- Dropshipping automation
 
 ### Email Marketing
-- Klaviyo v3 API
-- Flows automation
-- Segmentation avancée
-- A/B testing
-- Analytics email
+- Klaviyo Partner
+- Automation avancée
+- Segmentation comportementale
+- Tests A/B continus
 
 ### Analytics & Tracking
-- Google Analytics 4 Data API
-- Google Tag Manager Server-Side
-- Google Search Console API
-- Meta Pixel & Conversions API
-- TikTok Events API
+- Google Cloud Partner
+- Attribution multi-touch
+- Tracking cross-platform
+- Privacy-first implementation
 
-### AI & Generation
-- Claude 4.5 Opus (Anthropic)
-- Gemini 3 Pro (Google Vertex AI)
-- Imagen 4 (Google Vertex AI)
-- Veo 3.1 (Google Vertex AI)
-- Grok 4.1 (xAI)
+### AI & Content
+- Partenaire Anthropic
+- Génération de contenu IA
+- Création visuelle automatisée
+- Voice AI integration
 
 ### Automation
-- n8n Workflows
-- GitHub Actions
-- Google Apps Script
-- Webhooks & APIs
-- MCP Servers
-
-### Langages
-- JavaScript/Node.js (primary)
-- Python (AI/ML)
-- HTML/CSS/JS (frontend)
-- SQL (analytics)
+- Workflows personnalisés
+- Intégrations sur mesure
+- Orchestration multi-services
+- Monitoring temps réel
 
 ---
 
