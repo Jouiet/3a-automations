@@ -5425,6 +5425,47 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
 }
 .automation-meta .benefit { font-size: 0.75rem; color: var(--accent); font-weight: 600; }
 
+/* CinematicAds Partner CTAs */
+.category-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: var(--radius-lg);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: auto;
+  transition: all 0.3s ease;
+}
+.category-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 186, 241, 0.3);
+}
+.category-cta svg { transition: transform 0.3s ease; }
+.category-cta:hover svg { transform: translate(2px, -2px); }
+
+a.clickable-card {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+a.clickable-card:hover { text-decoration: none; }
+
+.card-cta {
+  display: block;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(79, 186, 241, 0.1);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+a.clickable-card:hover .card-cta { color: var(--accent); }
+
 .mcp-section { padding: var(--spacing-4xl) 0; background: rgba(79, 186, 241, 0.03); }
 .section-header { text-align: center; margin-bottom: var(--spacing-3xl); }
 .section-badge {

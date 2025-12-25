@@ -1,0 +1,203 @@
+{
+  "name": "WhatsApp Booking Reminders (Generic)",
+  "description": "Generic template - Sends 24h and 1h reminders before appointments",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{"field": "hours", "hoursInterval": 1}]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300],
+      "notes": "Check every hour for upcoming bookings"
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.BOOKING_API_URL }}",
+        "options": {
+          "response": {"response": {"responseFormat": "json"}}
+        }
+      },
+      "id": "get-bookings",
+      "name": "Get Upcoming Bookings",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300],
+      "notes": "Fetch bookings from API"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter bookings needing reminders (24h or 1h before)\n// CONFIGURABLE via env: REMINDER_24H_WINDOW, REMINDER_1H_WINDOW\nconst now = new Date();\nconst bookings = $input.all();\nconst reminders = [];\n\nconst REMINDER_24H_MIN = parseFloat($env.REMINDER_24H_MIN || '23');\nconst REMINDER_24H_MAX = parseFloat($env.REMINDER_24H_MAX || '25');\nconst REMINDER_1H_MIN = parseFloat($env.REMINDER_1H_MIN || '0.5');\nconst REMINDER_1H_MAX = parseFloat($env.REMINDER_1H_MAX || '1.5');\nconst TIMEZONE = $env.TIMEZONE || 'UTC';\nconst LOCALE = $env.LOCALE || 'en-US';\n\nfor (const item of bookings) {\n  const booking = item.json;\n  if (!booking.datetime || !booking.phone) continue;\n  \n  const bookingTime = new Date(booking.datetime);\n  const hoursUntil = (bookingTime - now) / (1000 * 60 * 60);\n  \n  // 24h reminder\n  if (hoursUntil >= REMINDER_24H_MIN && hoursUntil <= REMINDER_24H_MAX && !booking.reminder24h) {\n    reminders.push({\n      ...booking,\n      reminderType: '24h',\n      hoursUntil: Math.round(hoursUntil),\n      formattedDate: bookingTime.toLocaleDateString(LOCALE, {\n        weekday: 'long',\n        month: 'long',\n        day: 'numeric',\n        hour: '2-digit',\n        minute: '2-digit',\n        timeZone: TIMEZONE\n      })\n    });\n  }\n  \n  // 1h reminder\n  if (hoursUntil >= REMINDER_1H_MIN && hoursUntil <= REMINDER_1H_MAX && !booking.reminder1h) {\n    reminders.push({\n      ...booking,\n      reminderType: '1h',\n      hoursUntil: Math.round(hoursUntil * 60) + ' minutes',\n      formattedDate: bookingTime.toLocaleDateString(LOCALE, {\n        hour: '2-digit',\n        minute: '2-digit',\n        timeZone: TIMEZONE\n      })\n    });\n  }\n}\n\nreturn reminders.map(r => ({ json: r }));"
+      },
+      "id": "filter-reminders",
+      "name": "Filter Upcoming Reminders",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "notes": "Find bookings needing 24h or 1h reminders"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.reminderType }}",
+              "value2": "24h"
+            }
+          ]
+        }
+      },
+      "id": "check-type",
+      "name": "24h or 1h?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "operation": "sendTemplate",
+        "phoneNumberId": "={{ $env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $json.phone }}",
+        "templateName": "={{ $env.TEMPLATE_REMINDER_24H || 'reminder_24h' }}",
+        "templateLanguage": "={{ $env.TEMPLATE_LANG || 'en' }}",
+        "templateParameters": {
+          "parameters": [{
+            "type": "body",
+            "body_parameters": [
+              {"parameterType": "text", "textValue": "={{ $json.name }}"},
+              {"parameterType": "text", "textValue": "={{ $json.service }}"},
+              {"parameterType": "text", "textValue": "={{ $json.formattedDate }}"}
+            ]
+          }]
+        }
+      },
+      "id": "send-24h",
+      "name": "Send 24h Reminder",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 2,
+      "position": [1120, 200],
+      "credentials": {
+        "whatsAppBusinessCloudApi": {
+          "id": "{{ $env.WHATSAPP_CRED_ID }}",
+          "name": "WhatsApp Business Cloud"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendTemplate",
+        "phoneNumberId": "={{ $env.WHATSAPP_PHONE_NUMBER_ID }}",
+        "recipientPhoneNumber": "={{ $json.phone }}",
+        "templateName": "={{ $env.TEMPLATE_REMINDER_1H || 'reminder_1h' }}",
+        "templateLanguage": "={{ $env.TEMPLATE_LANG || 'en' }}",
+        "templateParameters": {
+          "parameters": [{
+            "type": "body",
+            "body_parameters": [
+              {"parameterType": "text", "textValue": "={{ $json.name }}"},
+              {"parameterType": "text", "textValue": "={{ $json.formattedDate }}"}
+            ]
+          }]
+        }
+      },
+      "id": "send-1h",
+      "name": "Send 1h Reminder",
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 2,
+      "position": [1120, 400],
+      "credentials": {
+        "whatsAppBusinessCloudApi": {
+          "id": "{{ $env.WHATSAPP_CRED_ID }}",
+          "name": "WhatsApp Business Cloud"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $env.BOOKING_API_URL }}",
+        "method": "POST",
+        "body": {
+          "bookingId": "={{ $json.bookingId }}",
+          "field": "={{ $json.reminderType === '24h' ? 'reminder24h' : 'reminder1h' }}",
+          "value": true
+        }
+      },
+      "id": "mark-sent",
+      "name": "Mark Reminder Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300],
+      "notes": "Update booking to prevent duplicate reminders"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [[{"node": "Get Upcoming Bookings", "type": "main", "index": 0}]]
+    },
+    "Get Upcoming Bookings": {
+      "main": [[{"node": "Filter Upcoming Reminders", "type": "main", "index": 0}]]
+    },
+    "Filter Upcoming Reminders": {
+      "main": [[{"node": "24h or 1h?", "type": "main", "index": 0}]]
+    },
+    "24h or 1h?": {
+      "main": [
+        [{"node": "Send 24h Reminder", "type": "main", "index": 0}],
+        [{"node": "Send 1h Reminder", "type": "main", "index": 0}]
+      ]
+    },
+    "Send 24h Reminder": {
+      "main": [[{"node": "Mark Reminder Sent", "type": "main", "index": 0}]]
+    },
+    "Send 1h Reminder": {
+      "main": [[{"node": "Mark Reminder Sent", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {"executionOrder": "v1"},
+  "meta": {"templateCredsSetupCompleted": false},
+  "tags": [
+    {"name": "reminder", "id": "reminder"},
+    {"name": "whatsapp", "id": "whatsapp"},
+    {"name": "generic", "id": "generic"}
+  ],
+  "envVariables": {
+    "required": [
+      "WHATSAPP_PHONE_NUMBER_ID",
+      "WHATSAPP_CRED_ID",
+      "BOOKING_API_URL"
+    ],
+    "optional": [
+      "TIMEZONE",
+      "LOCALE",
+      "TEMPLATE_REMINDER_24H",
+      "TEMPLATE_REMINDER_1H",
+      "TEMPLATE_LANG",
+      "REMINDER_24H_MIN",
+      "REMINDER_24H_MAX",
+      "REMINDER_1H_MIN",
+      "REMINDER_1H_MAX"
+    ],
+    "examples": {
+      "3a-automation": {
+        "BOOKING_API_URL": "https://script.google.com/macros/s/xxx/exec",
+        "TIMEZONE": "Africa/Casablanca",
+        "LOCALE": "fr-FR",
+        "TEMPLATE_REMINDER_24H": "rappel_24h",
+        "TEMPLATE_REMINDER_1H": "rappel_1h",
+        "TEMPLATE_LANG": "fr"
+      },
+      "cinematicads": {
+        "BOOKING_API_URL": "https://api.cinematicads.studio/bookings",
+        "TIMEZONE": "America/New_York",
+        "LOCALE": "en-US",
+        "TEMPLATE_REMINDER_24H": "demo_reminder_24h",
+        "TEMPLATE_REMINDER_1H": "demo_reminder_1h",
+        "TEMPLATE_LANG": "en"
+      }
+    }
+  }
+}
