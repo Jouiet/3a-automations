@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { getUserByEmail, updateUserLastLogin } from "@/lib/google-sheets";
 import { comparePassword, generateToken } from "@/lib/auth";
 
+// Fallback admin user for when Google Sheets is not configured
+// Password: Admin3A2025 (bcrypt hash)
+const FALLBACK_ADMIN = {
+  id: "user_admin",
+  email: "admin@3a-automation.com",
+  name: "Admin 3A",
+  password: "$2a$12$9gYq5nU4zuM5DUhWE5Mfx.0nfmzgwPg1vNd5/DSPZA3o6dKeE343G",
+  role: "ADMIN" as const,
+  createdAt: "2025-12-25T00:00:00.000Z",
+};
+
 export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json();
@@ -13,8 +24,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get user from Google Sheets
-    const user = await getUserByEmail(email);
+    // Try to get user from Google Sheets first
+    let user = await getUserByEmail(email);
+
+    // Fallback to hardcoded admin if Google Sheets fails or user not found
+    if (!user && email === FALLBACK_ADMIN.email) {
+      console.log("[Login] Using fallback admin user");
+      user = FALLBACK_ADMIN;
+    }
 
     if (!user) {
       return NextResponse.json(
