@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 13.4 | Date: 2025-12-25 | Session: 89 (FINAL)
+## Version: 13.5 | Date: 2025-12-25 | Session: 89 (COMPLETE)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -38,7 +38,7 @@
 ═══════════════════════════════════════════════════════════════════
 
 MCP STACK FINAL (11/12 = 92%):
-├── ✅ n8n: API key + 9 workflows déployés
+├── ✅ n8n: API key + 8/9 workflows ACTIFS (88%)
 │   ├── Grok Voice Telephony
 │   ├── Email Outreach Sequence
 │   ├── WhatsApp Booking Confirmation
