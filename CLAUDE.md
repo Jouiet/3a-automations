@@ -1,37 +1,81 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 13.7 | Date: 2025-12-25 | Session: 92 (COMPLETE)
+## Version: 13.8 | Date: 2025-12-25 | Session: 93 (COMPLETE)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
 
 ## SOURCE DE VERITE
 
-**Automations Registry:** `automations/automations-registry.json` (77 automations v1.5.0)
+**Automations Registry:** `automations/automations-registry.json` (77 automations v1.6.0)
 **Dashboard:** https://dashboard.3a-automation.com (Next.js 14 + Google Sheets + n8n API)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-92)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-93)
 **Audit Session 84:** `outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md`
 **Dashboard Blueprint:** `outputs/DASHBOARD-BLUEPRINT-2025-12-25.md`
 **Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
+**Shared Components:** `automations/shared-components/` (Voice Widget + WhatsApp generics)
 
 ---
 
-## ETAT ACTUEL (Session 92 - 25/12/2025)
+## ETAT ACTUEL (Session 93 - 25/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
 | Site | https://3a-automation.com LIVE | ✅ |
 | **Dashboard** | **https://dashboard.3a-automation.com LIVE** | ✅ |
 | Pages Site | 32 (16 FR + 16 EN) - HTTP 200 | ✅ |
-| Automations | **77** (48 scripts + 29 conceptuelles) | ✅ Registry |
-| Implementation Rate | **62%** (48/77 scripts verified) | ✅ |
+| Automations | **77** (44 scripts + 29 conceptuelles + 4 external) | ✅ Registry v1.6.0 |
+| Implementation Rate | **62%** (48/77 verified) | ✅ |
+| CinematicAds | **EXTERNAL** (cinematicads.studio) | ✅ Session 93 |
+| Shared Components | **2** (Voice Widget + WhatsApp) | ✅ Session 93 |
 | Personas Clients | **5** (documentes) | ✅ |
 | Claims Marketing | **CORRIGES** (ROI attribution, counts) | ✅ |
 | MCPs fonctionnels | **12/13** (92%) | ✅ Session 90 |
 | n8n Workflows | **10/10 ACTIFS** (100%) | ✅ Session 90 |
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
-| Lighthouse Perf | **Optimise** (blur, lazy-load) | ✅ v21.0 |
 | llms.txt | v3.3 (77 automations) | ✅ |
+
+### Session 93 - CINEMATICADS MARKETING-ONLY + GENERICS (25/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 93 - STRATÉGIE PARTENAIRE
+═══════════════════════════════════════════════════════════════════
+
+STRATÉGIE VALIDÉE: Marketing-only pour CinematicAds
+├── CinematicAds = Projet SaaS SÉPARÉ (cinematicads.studio)
+├── 3A Automation = Marketing + redirect (pas d'implémentation)
+├── Avantage: Profite du SEO 3A sans alourdir le système
+└── Les 4 automations CinematicAds restent dans le catalogue
+
+MODIFICATIONS APPLIQUÉES:
+├── automations.html (FR): 4 cards CinematicAds → liens cinematicads.studio
+├── en/automations.html (EN): 4 cards → liens cinematicads.studio
+├── CTA header: "Accéder au Studio" / "Access Studio"
+├── CTA cards: "Essayer gratuitement" / "Try for free"
+├── CSS: .category-cta, .clickable-card, .card-cta
+└── styles.css: 40 lignes ajoutées
+
+REGISTRY UPDATE (v1.6.0):
+├── cinematicads category: external=true, partner_url added
+├── 4 automations: type="external-service", url=cinematicads.studio
+├── Types: "external-service" ajouté
+└── Stats: externalServices=4, aiAvatarWorkflows=2
+
+SHARED COMPONENTS CRÉÉS:
+├── automations/shared-components/voice-widget/
+│   ├── config.example.js (template générique)
+│   ├── config-3a-automation.js (77 automations, 10 categories)
+│   ├── config-cinematicads.js (4 workflows, purple theme)
+│   └── README.md
+└── automations/shared-components/whatsapp-workflows/
+    ├── booking-confirmation-generic.json (env vars configurable)
+    ├── booking-reminders-generic.json (24h + 1h)
+    └── README.md
+
+COMMIT: b12aa9d
+Push: ✅ GitHub main
+Files: 12 modified, 7223 insertions
+```
 
 ### Session 92 - DASHBOARD PHASE 1 COMPLETE (25/12/2025)
 ```

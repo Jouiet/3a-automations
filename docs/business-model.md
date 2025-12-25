@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 4.0 - Mise à jour 25 Décembre 2025 (Session 89: MCP Stack 92%)
+## Version 4.1 - Mise à jour 25 Décembre 2025 (Session 93: Stratégie Partenaire)
 ## Basé sur données réelles confirmées
 
 ---
@@ -9,15 +9,16 @@
 ```
 CE DOCUMENT CONTIENT UNIQUEMENT DES FAITS VÉRIFIÉS.
 Aucun wishful thinking. Aucune projection non fondée.
-Mis à jour avec les données confirmées le 24/12/2025.
+Mis à jour avec les données confirmées le 25/12/2025.
 
-SESSION 89 COMPLETE (25/12/2025):
-✅ MCP Stack: 11/12 fonctionnels (92%)
-✅ n8n: API key + 8/9 workflows ACTIFS (88%)
+SESSION 93 COMPLETE (25/12/2025):
+✅ MCP Stack: 12/13 fonctionnels (92%)
+✅ n8n: API key + 10/10 workflows ACTIFS (100%)
 ✅ xAI/Grok: Crédits ACTIFS, 11 modèles disponibles
 ✅ Google Analytics: 30 users, 90 sessions (7j)
-✅ Google Sheets: Permissions configurées
-✅ Dashboard: https://dashboard.3a-automation.com LIVE
+✅ Dashboard: https://dashboard.3a-automation.com LIVE (real API data)
+✅ CinematicAds: STRATÉGIE PARTENAIRE (cinematicads.studio = projet séparé)
+✅ Shared Components: Voice Widget + WhatsApp generics créés
 ```
 
 ---
@@ -68,10 +69,11 @@ SESSION 89 COMPLETE (25/12/2025):
 │                                                                              │
 │  SCRIPTS DISPONIBLES                                                        │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  Total: 77 automations client-facing (vérifié 23/12/2025 Session 83)        │
-│        (Registry v1.5.0 - synced across HTML + llms.txt + Knowledge Base)   │
+│  Total: 77 automations client-facing (vérifié 25/12/2025 Session 93)        │
+│        (Registry v1.6.0 - synced across HTML + llms.txt + Knowledge Base)   │
 │  ├── Lead Gen: 20 | Shopify: 13 | SEO: 9 | Email: 9                         │
-│  ├── Analytics: 9 | Content: 10 | AI Avatar: 2 | CinematicAds: 4            │
+│  ├── Analytics: 9 | Content: 10 | AI Avatar: 2                              │
+│  ├── CinematicAds: 4 (EXTERNAL → cinematicads.studio)                       │
 │  ├── WhatsApp: 2 | Voice AI: 1                                              │
 │  └── 23 outils internes EXCLUS (test-, verify-, check-)                     │
 │                                                                              │

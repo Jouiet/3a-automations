@@ -1,41 +1,47 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 90 FINAL)
+## Document Exécutable - Décembre 2025 (màj Session 93)
 ## Objectif: Premier client payant en 4 semaines
 
 ---
 
-## 🎯 PLAN ACTIONNABLE SESSION 91
+## 🎯 PLAN ACTIONNABLE SESSION 94+
 
 ### Priorité 1: ACQUISITION (Lead Gen)
 ```
-ACTION IMMÉDIATE (Session 91):
-├── [ ] Tester LinkedIn Lead Scraper en production
-│   └── Vérifier: leads capturés dans Google Sheets
-├── [ ] Configurer Klaviyo Flow pour welcome_series_started event
-│   └── 5 emails automatiques (Day 0, 2, 4, 7, 14)
-└── [ ] Premier outreach: 10 prospects e-commerce Shopify
+ACTIONS IMMÉDIATES:
+├── [x] LinkedIn Lead Scraper: ACTIF (n8n workflow)
+├── [x] Klaviyo Welcome Series: ACTIF (5 emails, Day 0-14)
+├── [ ] Premier outreach: 10 prospects e-commerce Shopify
+└── [ ] Test campaign: Formulaire → Klaviyo → n8n
 
-BLOCKERS IDENTIFIÉS:
+BLOCKERS:
 ├── ❌ Shopify dev store: Non créé (partners.shopify.com)
-└── ⚠️ WhatsApp Business: Configuration manuelle requise
+└── ⚠️ WhatsApp Business: Configuration Meta requise
 ```
 
-### Priorité 2: CONVERSION (Premier client)
+### Priorité 2: STRATÉGIE PARTENAIRE (Session 93)
 ```
-ACTIONS SEMAINE PROCHAINE:
-├── [ ] Créer 3 case studies fictifs mais réalistes
-├── [ ] Landing page /audit-gratuit avec formulaire
-├── [ ] Connecter formulaire → Klaviyo → n8n workflow
-└── [ ] A/B test: Prix en € vs MAD pour Maroc
+DÉCISION VALIDÉE:
+├── [x] CinematicAds = Projet SÉPARÉ (cinematicads.studio)
+├── [x] 3A Automation = Marketing-only (redirect, pas d'implémentation)
+├── [x] CTAs ajoutés: automations.html FR + EN
+├── [x] Registry: 4 automations marquées "external-service"
+└── [x] Shared components créés (Voice + WhatsApp generics)
+
+PROCHAINES ÉTAPES CINEMATICADS:
+├── [ ] Copier shared-components vers Ads-Automations/
+├── [ ] Configurer n8n CinematicAds
+├── [ ] Créer templates WhatsApp Meta
+└── [ ] Déployer voice-widget sur cinematicads.studio
 ```
 
 ### Priorité 3: TECHNIQUE (Maintenance)
 ```
 BACKLOG:
-├── [ ] Fix Google Sheets logging (OAuth2 au lieu de Service Account)
 ├── [ ] Créer Shopify dev store pour demos
 ├── [ ] Tests end-to-end des 10 workflows n8n
-└── [ ] Monitoring: alertes si workflow échoue
+├── [ ] Monitoring: alertes si workflow échoue
+└── [ ] Phase 3 Dashboard: Charts Recharts
 ```
 
 ---
