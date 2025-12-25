@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 13.9 | Date: 2025-12-25 | Session: 94 (IN PROGRESS)
+## Version: 14.0 | Date: 2025-12-25 | Session: 94
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -35,34 +35,45 @@
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.3 (77 automations) | ✅ |
 
-### Session 94 - RECHARTS VISUALIZATION + GITHUB ACTIONS FIX (25/12/2025)
+### Session 94 - RECHARTS DASHBOARDS COMPLETS (25/12/2025)
 ```
 ═══════════════════════════════════════════════════════════════════
                     SESSION 94 - DASHBOARD ENHANCEMENT
 ═══════════════════════════════════════════════════════════════════
 
-RECHARTS VISUALIZATION ADDED:
+ADMIN DASHBOARD ENHANCED:
+├── dashboard/src/app/admin/page.tsx (MAJOR REWRITE)
+│   ├── BarChart: Executions par workflow (success vs error)
+│   ├── PieChart: Workflow status (actif vs inactif)
+│   ├── Workflows list: Real n8n data with status badges
+│   ├── Auto-refresh: 30 secondes avec bouton manuel
+│   ├── Real stats: Automation count + error count from n8n
+│   └── Dark theme Recharts: #1E293B + cyan accents
+├── Build: SUCCESS (admin: 12.5kB + Recharts bundle 207kB)
+└── Commit: 3a328f2
+
+CLIENT DASHBOARD (Session 92):
 ├── dashboard/src/app/client/page.tsx
 │   ├── BarChart: Executions par workflow (success vs error)
 │   ├── ResponsiveContainer: Mobile-friendly
 │   ├── Dark theme styling: #1E293B background
 │   └── Legend: Succes (green) + Erreurs (red)
-├── Build: SUCCESS (27 pages, client: 103kB + 198kB)
+├── Build: SUCCESS (client: 4.55kB + 199kB bundle)
 └── n8n API routes: /api/n8n/workflows, /api/n8n/executions
 
-GITHUB ACTIONS FIX:
-├── .github/workflows/deploy-dashboard.yml
-│   ├── Changed from Docker to PM2 deployment
-│   ├── Added N8N_HOST and N8N_API_KEY secrets
-│   ├── Script: cd /root/dashboard && npm ci && npm run build && pm2 restart
-│   └── Verify: curl dashboard.3a-automation.com/api/health
-└── Trigger: push to dashboard/** OR workflow_dispatch
+GITHUB ACTIONS (deploy-dashboard.yml):
+├── Trigger: push to dashboard/** OR workflow_dispatch
+├── PM2 deployment (not Docker)
+├── Secrets: N8N_HOST, N8N_API_KEY
+├── Script: git pull → npm ci → npm run build → pm2 restart
+└── Verify: curl dashboard.3a-automation.com/api/health
 
-BUILD VERIFIED:
+BUILD FINAL:
 ├── npm run build: SUCCESS
 ├── 27 pages compiled
-├── Client dashboard: 103kB + Recharts bundle
-└── API routes: n8n/workflows, n8n/executions
+├── /admin: 12.5kB + 207kB (Recharts)
+├── /client: 4.55kB + 199kB (Recharts)
+└── Push: GitHub ✅
 ```
 
 ### Session 93 - CINEMATICADS MARKETING-ONLY + GENERICS (25/12/2025)
