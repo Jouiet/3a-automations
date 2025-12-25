@@ -207,16 +207,14 @@ Détail:
 - CSS/Design: 15/15 ✅ (futuriste, favicon, images)
 - JavaScript: 10/10 ✅ (mobile nav fonctionnelle)
 - SEO Technique: 15/15 ✅ (robots, sitemap, schema, OG, all pages)
-- Tracking: 11/15 ⚠️ (GA4, GTM, Meta Pixel, LinkedIn intégrés - IDs placeholders)
+- Tracking: 15/15 ✅ (GA4 G-87F6FDJG45, GTM-WLVJQC3M réels + Meta Pixel placeholder)
 - Lead Capture: 10/10 ✅ (formulaires n8n webhook fonctionnels)
-- Contenu: 8/10 ✅ (pages services, audit, contact créées)
+- Contenu: 10/10 ✅ (pages services, blog, audit, contact créées)
 - Légal: 10/10 ✅ (mentions, confidentialité, cookie consent)
 
-RESTE À FAIRE (5 points):
-- Configurer vrais IDs GA4/GTM (-5 quand fait) → Nécessite création comptes
-- Configurer Meta Pixel ID réel (-0, placeholder prêt)
-- Configurer LinkedIn Partner ID réel (-0, placeholder prêt)
-- Blog articles (-0, page structure prête pour Phase 2)
+RESTE À FAIRE:
+- Configurer Meta Pixel ID réel (placeholder prêt)
+- Configurer LinkedIn Partner ID réel (placeholder prêt)
 ```
 
 ---

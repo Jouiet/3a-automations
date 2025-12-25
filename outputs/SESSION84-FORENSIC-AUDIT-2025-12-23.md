@@ -193,7 +193,7 @@ Audit approfondi, factuel et rigoureux de toutes les fonctionnalites, services e
 | grok-voice-telephony | READY | 24/7 | P1 |
 | google-apps-script-booking | READY | Illimite | P0 |
 | whatsapp-booking-confirmation | READY | 98% open | P1 |
-| welcome-series | MISSING | 5 emails | P1 |
+| welcome-series | ✅ DONE | 5 emails (Session 90) | P1 |
 
 ### 6.2 Funnel Estimation (Conservatif)
 ```

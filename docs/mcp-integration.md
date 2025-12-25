@@ -39,7 +39,8 @@
    ✅ 6. AI Avatar Generator (ACTIVE)
    ✅ 7. LinkedIn Lead Scraper (ACTIVE)
    ✅ 8. AI Talking Video Generator (ACTIVE)
-   ⏸️ 9. Enhance Product Photos (INACTIVE - OAuth expired)
+   ✅ 9. Enhance Product Photos (ACTIVE - webhook+schedule triggers)
+   ✅ 10. Klaviyo Welcome Series (ACTIVE - 5 emails)
 
 ✅ xAI MODÈLES DISPONIBLES:
    ├── grok-4-0709
