@@ -11,9 +11,9 @@ CE DOCUMENT CONTIENT UNIQUEMENT DES FAITS VÉRIFIÉS.
 Aucun wishful thinking. Aucune projection non fondée.
 Mis à jour avec les données confirmées le 24/12/2025.
 
-SESSION 89 UPDATE (25/12/2025):
+SESSION 89 COMPLETE (25/12/2025):
 ✅ MCP Stack: 11/12 fonctionnels (92%)
-✅ n8n: API key + 9 workflows déployés
+✅ n8n: API key + 8/9 workflows ACTIFS (88%)
 ✅ xAI/Grok: Crédits ACTIFS, 11 modèles disponibles
 ✅ Google Analytics: 30 users, 90 sessions (7j)
 ✅ Google Sheets: Permissions configurées
@@ -84,7 +84,7 @@ SESSION 89 UPDATE (25/12/2025):
 │                                                                              │
 │  MCPs CONFIGURÉS (Session 89 - 25/12/2025 - VÉRIFIÉ PAR API)               │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  ✅ n8n - API key + 9 workflows déployés                                    │
+│  ✅ n8n - API key + 8/9 workflows ACTIFS (88%)                              │
 │  ✅ xAI/Grok - Crédits ACTIFS, 11 modèles (grok-4, grok-3, vision)         │
 │  ✅ Klaviyo - 3 listes (API testé)                                          │
 │  ✅ Google Analytics - 30 users, 90 sessions (7j)                           │
