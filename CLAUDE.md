@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 13.8 | Date: 2025-12-25 | Session: 93 (COMPLETE)
+## Version: 13.9 | Date: 2025-12-25 | Session: 94 (IN PROGRESS)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -34,6 +34,36 @@
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.3 (77 automations) | ✅ |
+
+### Session 94 - RECHARTS VISUALIZATION + GITHUB ACTIONS FIX (25/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 94 - DASHBOARD ENHANCEMENT
+═══════════════════════════════════════════════════════════════════
+
+RECHARTS VISUALIZATION ADDED:
+├── dashboard/src/app/client/page.tsx
+│   ├── BarChart: Executions par workflow (success vs error)
+│   ├── ResponsiveContainer: Mobile-friendly
+│   ├── Dark theme styling: #1E293B background
+│   └── Legend: Succes (green) + Erreurs (red)
+├── Build: SUCCESS (27 pages, client: 103kB + 198kB)
+└── n8n API routes: /api/n8n/workflows, /api/n8n/executions
+
+GITHUB ACTIONS FIX:
+├── .github/workflows/deploy-dashboard.yml
+│   ├── Changed from Docker to PM2 deployment
+│   ├── Added N8N_HOST and N8N_API_KEY secrets
+│   ├── Script: cd /root/dashboard && npm ci && npm run build && pm2 restart
+│   └── Verify: curl dashboard.3a-automation.com/api/health
+└── Trigger: push to dashboard/** OR workflow_dispatch
+
+BUILD VERIFIED:
+├── npm run build: SUCCESS
+├── 27 pages compiled
+├── Client dashboard: 103kB + Recharts bundle
+└── API routes: n8n/workflows, n8n/executions
+```
 
 ### Session 93 - CINEMATICADS MARKETING-ONLY + GENERICS (25/12/2025)
 ```

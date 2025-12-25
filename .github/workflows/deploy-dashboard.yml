@@ -32,22 +32,23 @@ jobs:
           GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
           GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          N8N_HOST: ${{ secrets.N8N_HOST }}
+          N8N_API_KEY: ${{ secrets.N8N_API_KEY }}
         run: npm run build
 
-      - name: Deploy to Hostinger VPS
+      - name: Deploy to Hostinger VPS (PM2)
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USERNAME }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           script: |
-            cd /home/3a-automation
+            cd /root/dashboard
             git pull origin main
-            cd dashboard
-            docker compose down
-            docker compose build --no-cache
-            docker compose up -d
-            docker system prune -f
+            npm ci --production=false
+            npm run build
+            pm2 restart dashboard || pm2 start npm --name "dashboard" -- start
+            pm2 save
 
       - name: Verify deployment
         run: |
