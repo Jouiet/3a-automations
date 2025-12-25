@@ -1,0 +1,282 @@
+{
+  "name": "Klaviyo Welcome Series - 5 Emails Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "subscribe/new",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-new-subscriber",
+      "name": "Webhook - New Subscriber",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "new-subscriber",
+      "notes": "Triggered when new subscriber joins list"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.email }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "check-email",
+      "name": "Has Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "notes": "Only process if email exists"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate welcome series emails\nconst subscriber = $input.first().json;\n\nconst firstName = subscriber.first_name || subscriber.firstName || 'there';\nconst source = subscriber.source || 'website';\n\n// Welcome Series - 5 Emails over 14 days\nconst welcomeSeries = {\n  // Day 0: Welcome + Brand Story\n  email1: {\n    delay: 0,\n    subject: `Bienvenue chez 3A Automation, ${firstName}!`,\n    preheader: 'Votre parcours automation commence maintenant',\n    body: `Bonjour ${firstName},\\n\\nMerci de rejoindre 3A Automation!\\n\\nJe suis Jouiet, consultant automation specialise e-commerce et PME. Mon objectif: vous aider a recuperer 10h+ par semaine grace a l'automatisation intelligente.\\n\\n**Ce que vous allez decouvrir:**\\n- Comment automatiser vos taches repetitives\\n- Les meilleurs workflows pour votre secteur\\n- Des cas concrets avec ROI mesure\\n\\nA tres bientot,\\nJouiet\\n3A Automation\\n\\nP.S. Repondez a cet email si vous avez une question specifique!`\n  },\n  // Day 2: Social Proof + Reviews\n  email2: {\n    delay: 2,\n    subject: `Comment nos clients gagnent 10h/semaine`,\n    preheader: 'Cas concrets et resultats verifies',\n    body: `Bonjour ${firstName},\\n\\n\"Avant 3A Automation, je passais 15h/semaine sur le reporting et les relances. Maintenant c'est 2h max.\" - Client E-commerce\\n\\n**Resultats moyens constates:**\\n→ 10-15h recuperees par semaine\\n→ +25% revenus email\\n→ ROI 42:1 sur les flows Klaviyo\\n\\nVoulez-vous voir comment ca marche pour votre secteur?\\n\\n[Voir les cas clients](https://3a-automation.com/cas-clients.html)\\n\\nCordialement,\\nJouiet`\n  },\n  // Day 4: Best Sellers Showcase\n  email3: {\n    delay: 4,\n    subject: `Les 3 automatisations les plus demandees`,\n    preheader: 'Quick wins a deployer en moins d\\'une semaine',\n    body: `Bonjour ${firstName},\\n\\nVoici les 3 automatisations les plus demandees par mes clients:\\n\\n**1. Recuperation paniers abandonnes**\\n→ +10-15% revenus email\\n→ Setup en 48h\\n\\n**2. Welcome series email**\\n→ +40% open rate vs emails ponctuels\\n→ 5 emails automatiques\\n\\n**3. Reporting automatise**\\n→ Dashboard temps reel\\n→ Alertes intelligentes\\n\\nLaquelle vous interesse le plus?\\n\\n[Reserver un audit gratuit](https://3a-automation.com/booking.html)\\n\\nJouiet`\n  },\n  // Day 7: Educational Content\n  email4: {\n    delay: 7,\n    subject: `Guide: Automatisation E-commerce 2026`,\n    preheader: 'Tendances et strategies qui fonctionnent',\n    body: `Bonjour ${firstName},\\n\\nJe viens de publier mon guide complet sur l'automatisation e-commerce en 2026.\\n\\n**Au sommaire:**\\n1. Les 5 automations essentielles\\n2. Stack technique optimal (Shopify + Klaviyo + GA4)\\n3. Erreurs a eviter absolument\\n4. ROI attendu par type d'automation\\n\\n[Lire le guide complet](https://3a-automation.com/blog/automatisation-ecommerce-2026.html)\\n\\nC'est gratuit, sans inscription.\\n\\nBonne lecture!\\nJouiet`\n  },\n  // Day 14: First Purchase Incentive\n  email5: {\n    delay: 14,\n    subject: `[Exclusif] 10% sur votre premier pack automation`,\n    preheader: 'Offre reservee aux nouveaux abonnes',\n    body: `Bonjour ${firstName},\\n\\nCa fait 2 semaines que vous nous suivez. Merci pour votre confiance!\\n\\nPour vous remercier, voici une offre exclusive:\\n\\n**-10% sur votre premier pack**\\nCode: WELCOME10\\nValable 7 jours\\n\\n**Nos packs:**\\n- Quick Win (390€ → 351€): 1 automation + Voice AI Booking\\n- Essentials (790€ → 711€): 3 automations + WhatsApp\\n- Growth (1399€ → 1259€): 5+ automations + Dashboard\\n\\n[Voir les tarifs](https://3a-automation.com/pricing.html)\\n\\nOu commencez par l'audit gratuit:\\n[Reserver maintenant](https://3a-automation.com/booking.html)\\n\\nCordialement,\\nJouiet\\n3A Automation`\n  }\n};\n\nreturn {\n  json: {\n    email: subscriber.email,\n    firstName,\n    source,\n    welcomeSeries,\n    seriesStartDate: new Date().toISOString()\n  }\n};"
+      },
+      "id": "generate-welcome-series",
+      "name": "Generate Welcome Series",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 200],
+      "notes": "5 emails personnalises"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profiles",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Klaviyo-API-Key {{ $env.KLAVIYO_API_KEY }}"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"profile\",\n    \"attributes\": {\n      \"email\": \"{{ $json.email }}\",\n      \"first_name\": \"{{ $json.firstName }}\",\n      \"properties\": {\n        \"welcome_series_started\": \"{{ $json.seriesStartDate }}\",\n        \"source\": \"{{ $json.source }}\",\n        \"welcome_series_status\": \"active\"\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "create-klaviyo-profile",
+      "name": "Create/Update Klaviyo Profile",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200],
+      "notes": "Upsert profile with welcome series property"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Klaviyo-API-Key {{ $env.KLAVIYO_API_KEY }}"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $json.email }}\"\n          }\n        }\n      },\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"welcome_series_started\"\n          }\n        }\n      },\n      \"properties\": {\n        \"source\": \"{{ $json.source }}\",\n        \"email1_subject\": \"{{ $json.welcomeSeries.email1.subject }}\",\n        \"email2_delay_days\": 2,\n        \"email3_delay_days\": 4,\n        \"email4_delay_days\": 7,\n        \"email5_delay_days\": 14\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "trigger-klaviyo-flow",
+      "name": "Trigger Welcome Series Flow",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 200],
+      "notes": "Create event to trigger Klaviyo flow"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "{{ $env.GOOGLE_SHEETS_ID }}",
+          "mode": "id"
+        },
+        "sheetName": "Welcome Series Log",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $json.email }}",
+            "name": "={{ $json.firstName }}",
+            "source": "={{ $json.source }}",
+            "series_started": "={{ $json.seriesStartDate }}",
+            "status": "active"
+          }
+        },
+        "options": {}
+      },
+      "id": "log-to-sheets",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1340, 200],
+      "notes": "Track welcome series subscribers"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "success"
+            },
+            {
+              "name": "message",
+              "value": "Welcome series started for {{ $json.email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "success-response",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1560, 200],
+      "notes": "Return success"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "error"
+            },
+            {
+              "name": "message",
+              "value": "Missing email address"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "error-response",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [680, 400],
+      "notes": "Return error"
+    }
+  ],
+  "connections": {
+    "Webhook - New Subscriber": {
+      "main": [
+        [
+          {
+            "node": "Has Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Email?": {
+      "main": [
+        [
+          {
+            "node": "Generate Welcome Series",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Welcome Series": {
+      "main": [
+        [
+          {
+            "node": "Create/Update Klaviyo Profile",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create/Update Klaviyo Profile": {
+      "main": [
+        [
+          {
+            "node": "Trigger Welcome Series Flow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger Welcome Series Flow": {
+      "main": [
+        [
+          {
+            "node": "Log to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log to Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "email-marketing"
+    },
+    {
+      "name": "klaviyo"
+    },
+    {
+      "name": "welcome-series"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-12-25T08:45:00.000Z",
+  "versionId": "1.0.0"
+}

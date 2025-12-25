@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 13.5 | Date: 2025-12-25 | Session: 89 (COMPLETE)
+## Version: 13.6 | Date: 2025-12-25 | Session: 90 (COMPLETE)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -8,13 +8,13 @@
 
 **Automations Registry:** `automations/automations-registry.json` (77 automations v1.5.0)
 **Dashboard:** https://dashboard.3a-automation.com (Next.js 14 + Google Sheets)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-89)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-90)
 **Audit Session 84:** `outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md`
 **Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
 
 ---
 
-## ETAT ACTUEL (Session 89 - 25/12/2025)
+## ETAT ACTUEL (Session 90 - 25/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
@@ -25,13 +25,58 @@
 | Implementation Rate | **62%** (48/77 scripts verified) | ✅ |
 | Personas Clients | **5** (documentes) | ✅ |
 | Claims Marketing | **CORRIGES** (ROI attribution, counts) | ✅ |
-| MCPs fonctionnels | **11/12** (92%) | ✅ Session 89 |
+| MCPs fonctionnels | **11/12** (92%) | ✅ Session 90 |
+| n8n Workflows | **9/10 ACTIFS** (90%) | ✅ Session 90 |
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
 | Lighthouse Perf | **Optimise** (blur, lazy-load) | ✅ v21.0 |
-| llms.txt | v3.2 (77 automations) | ✅ |
+| llms.txt | v3.3 (77 automations) | ✅ |
 
-### Session 89 FINAL - FULL MCP STACK CONFIGURED (25/12/2025)
+### Session 90 - WELCOME SERIES + DOCS SYNC (25/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 90 - RÉSULTATS VÉRIFIÉS
+═══════════════════════════════════════════════════════════════════
+
+n8n WORKFLOWS (9/10 = 90%):
+├── ✅ ACTIVE: Grok Voice Telephony - Phone Booking
+├── ✅ ACTIVE: Email Outreach Sequence - Multi-Touch Campaign
+├── ✅ ACTIVE: WhatsApp Booking Confirmation
+├── ✅ ACTIVE: WhatsApp Booking Reminders
+├── ✅ ACTIVE: Blog Article Generator
+├── ✅ ACTIVE: AI Avatar Generator
+├── ✅ ACTIVE: LinkedIn Lead Scraper - Aggressive Outbound
+├── ✅ ACTIVE: AI Talking Video Generator
+├── ✅ ACTIVE: Klaviyo Welcome Series - 5 Emails Automation [NEW]
+└── ⏸️ INACTIVE: Enhance Product Photos (OAuth expired)
+
+ACTIONS COMPLÉTÉES SESSION 90:
+├── [x] Vérification MCPs via API (11/12 OK)
+│   ├── n8n: API key OK, 10 workflows
+│   ├── xAI/Grok: 11 modèles actifs
+│   ├── Klaviyo: 3 listes
+│   ├── Apify: Plan STARTER
+│   ├── GitHub: Token OK (user Jouiet)
+│   ├── Hostinger: VPS running
+│   ├── Gemini: 50 modèles
+│   └── Dashboard: Health OK
+├── [x] Correction llms-full.txt (72 → 77 automations)
+├── [x] Correction voice-widget.js (72 → 77 automations)
+├── [x] Minification voice-widget.min.js
+├── [x] Création workflow klaviyo-welcome-series.json
+├── [x] Déploiement + activation sur n8n (ID: JaooDwzmJojEe6bx)
+└── [x] Mise à jour CLAUDE.md
+
+KLAVIYO WELCOME SERIES WORKFLOW:
+├── Webhook: POST /subscribe/new
+├── 5 emails personnalisés (Day 0, 2, 4, 7, 14)
+├── Profil Klaviyo créé/updated
+├── Event welcome_series_started
+├── Log Google Sheets
+└── URL: https://n8n.srv1168256.hstgr.cloud/webhook/subscribe/new
+```
+
+### Session 89 - FULL MCP STACK CONFIGURED (25/12/2025)
 ```
 ═══════════════════════════════════════════════════════════════════
                     SESSION 89 - RÉSULTATS VÉRIFIÉS
