@@ -4327,16 +4327,94 @@ VOICE AI PHONE:
 
 DASHBOARD:
 ├── Analytics intégrées: ✅ DONE (Session 97 - Recharts + n8n API)
-└── Conversion tracking: ⬜ PENDING (Google Sheets)
+└── Conversion tracking: ✅ DONE (Google Sheets API vérifié Session 97)
 
 DOCS:
 └── 78 automations synced: ✅ DONE (Session 96)
+
+INVOICING:
+├── Template HTML: ✅ DONE (automations/invoicing/invoice-template.html)
+├── Generator JS: ✅ DONE (automations/invoicing/invoice-generator.cjs)
+├── Multi-currency: ✅ MAD/EUR/USD
+└── Test: ✅ INV-202512-907 generated
 ```
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v12.4**
+# SECTION 102: SESSION 97 - INVOICE TEMPLATE SYSTEM (26/12/2025)
 
+## Invoice Template Multi-Devises
+
+### Fichiers Créés
+```
+automations/invoicing/
+├── invoice-template.html     Design futuriste 3A branding
+├── invoice-generator.cjs     Classe InvoiceGenerator
+└── generated/                Factures générées (gitignored)
+```
+
+### Fonctionnalités
+```
+Multi-devises:
+├── MAD 🇲🇦: Virement bancaire (RIB), TVA 20%
+├── EUR 🇪🇺: Wise Business (IBAN), TVA 0% (export services)
+└── USD 🌍: Payoneer (ABA routing), TVA 0%
+
+Multi-langue:
+├── FR: Facture, Émetteur, Date d'échéance...
+└── EN: Invoice, Issuer, Due date...
+
+Packs configurés:
+├── Quick Win: 3990 MAD / 390€ / $450
+├── Essentials: 7990 MAD / 790€ / $920
+├── Growth: 14990 MAD / 1399€ / $1690
+├── Maintenance: 2900 MAD / 290€ / $330
+└── Optimization: 5200 MAD / 490€ / $550
+```
+
+### Design
+```
+CSS Variables:
+├── --primary: #4FBAF1 (cyan 3A)
+├── --accent: #10B981 (green)
+├── --secondary: #191E35 (dark navy)
+└── --border: rgba(79, 186, 241, 0.2)
+
+Features:
+├── Dark cyber gradient background
+├── Print-ready (@page A4, -webkit-print-color-adjust)
+├── Payment methods section (3 columns)
+└── Status badges (paid/pending)
+```
+
+### Usage Exemple
+```javascript
+const { InvoiceGenerator } = require('./invoice-generator.cjs');
+
+const invoice = new InvoiceGenerator({
+  client: {
+    name: 'Client SARL',
+    address: '123 Rue...',
+    city: 'Casablanca',
+    country: 'Maroc',
+    email: 'client@example.ma'
+  },
+  items: [
+    { name: 'Pack Essentials', unitPrice: 790, qty: 1 }
+  ],
+  currency: 'EUR',
+  language: 'fr'
+});
+
+invoice.generate();
+invoice.save('./factures/INV-001.html');
+```
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v12.5**
+
+*v12.5: Session 97 - Invoice Template System (MAD/EUR/USD) + Blog Article #2*
 *v12.4: Session 97 - Dashboard Analytics Real Data (n8n + Recharts)*
 *v12.3: Session 96 Part 4 - Voice AI Product + 78 Automations + Action Plan*
 *v12.2: Session 96 - Voice AI Status + Geographic Cleanup + Twilio blocker*
