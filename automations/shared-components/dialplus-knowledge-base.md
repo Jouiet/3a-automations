@@ -87,7 +87,7 @@
 
 ---
 
-## 5. CATALOGUE D'AUTOMATISATIONS (77 total)
+## 5. CATALOGUE D'AUTOMATISATIONS (78 total)
 
 ### Lead Generation & Acquisition (20)
 - Sync Meta/Google/TikTok Leads

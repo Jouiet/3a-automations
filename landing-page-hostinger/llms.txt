@@ -1,86 +1,148 @@
 # 3A Automation
 
-> Consultant Automation, Analytics & AI pour PME. Automatisation e-commerce et marketing pour Small/Mid Business de tous secteurs.
+> Consultant Automation, Analytics & AI pour PME. Automatisation e-commerce, marketing et Voice AI pour Small/Mid Business de tous secteurs.
 
-3A Automation aide les PME (€10k-500k CA mensuel) à automatiser leurs processus marketing et opérationnels. Expertise Shopify, Klaviyo, GA4. Approche code/APIs (pas no-code limité). Focus résultats mesurables.
+3A Automation aide les PME (10k-500k EUR CA mensuel) a automatiser leurs processus marketing et operationnels. Expertise Shopify, Klaviyo, GA4, Voice AI. Approche code/APIs (pas no-code limite). Focus resultats mesurables.
 
-**Fondateur**: Consultant technique solo, 20h/semaine
-**Marchés**: Maroc, MENA, France, Worldwide
-**Langues**: Français, English, Arabe
+**Fondateur**: Jonathan, Consultant technique solo expert
+**Marches**: Maroc, MENA, France, Europe, Worldwide
+**Langues**: Francais, English, Arabe
 
-## Services Principaux
+## Produits & Services
 
-- [Audit E-commerce Gratuit](https://3a-automation.com/services/audit-gratuit.html): Analyse SEO, email marketing, conversion - rapport sous 48h
-- [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Automatisation Shopify, flows Klaviyo, SEO produits, sync multi-canaux
-- [Services PME](https://3a-automation.com/services/pme.html): Lead generation B2B, analytics, CRM automation
-- [Catalogue Automatisations](https://3a-automation.com/automations.html): 77 automatisations testées et documentées (incl. CinematicAds AI)
+### Assistant Vocal IA (NOUVEAU)
+- Assistant vocal intelligent disponible 24/7 sur tout le site
+- Reconnaissance vocale + reponses instantanees
+- Prise de rendez-vous automatisee par la voix
+- Qualification leads en temps reel
+- **Gratuit pour les visiteurs** - essayez-le maintenant sur n'importe quelle page
+- Disponible aussi pour vos clients (setup inclus dans packs)
+
+### Automatisation E-commerce
+- 78 automatisations testees et documentees
+- Shopify, WooCommerce, Klaviyo, GA4
+- ROI moyen email marketing: 42 EUR pour 1 EUR investi
+- Recuperation paniers abandonnes: +10-15%
+
+### Services PME & B2B
+- Lead generation automatisee (LinkedIn, Google Maps, Meta Ads)
+- CRM sync et qualification automatique
+- Reduction 60% du temps de qualification leads
 
 ## Tarification
 
-| Service | Prix |
-|---------|------|
-| Audit Gratuit | €0 |
-| Email Machine Mini | €500 setup + €200/mois |
-| SEO Quick Fix | €300-500 one-time |
-| Lead Sync | €400 setup + €150/mois |
-| Maintenance | €300-800/mois |
+| Pack | Prix | Inclus |
+|------|------|--------|
+| Audit Gratuit | 0 EUR | Analyse + 3 recommandations PDF (24-48h) |
+| Quick Win | 390 EUR | 1 flow automatise + documentation |
+| Essentials | 790 EUR | 3 flows + A/B tests + 30j support |
+| Growth | 1399 EUR | 5 flows + dashboard + 60j support |
 
-## Stack Technique
+| Retainer | Prix/mois | Heures |
+|----------|-----------|--------|
+| Maintenance | 290 EUR | 3h incluses |
+| Optimization | 490 EUR | 5h incluses |
 
-- **E-commerce**: Shopify REST & GraphQL APIs, Flows, Metafields, DSers
-- **Email/SMS**: Klaviyo flows, segmentation, analytics
-- **Analytics**: Google Analytics 4, GTM, Search Console
-- **Automation**: n8n workflows, webhooks, MCP servers
-- **AI**: Claude, Grok, Gemini integrations
-- **Langages**: JavaScript/Node.js, Python, HTML/CSS
+Annuel: 2 mois gratuits (10 pour 12)
 
-## Pages Clés
+## Resultats Clients
 
-- [Accueil](https://3a-automation.com/): Proposition de valeur et services
-- [Cas Clients](https://3a-automation.com/cas-clients.html): Études de cas avec résultats mesurables
-- [À Propos](https://3a-automation.com/a-propos.html): Histoire et expertise technique
-- [Tarifs](https://3a-automation.com/pricing.html): Packages et prix détaillés
-- [Contact](https://3a-automation.com/contact.html): Formulaire de contact
+- ROI email marketing: 42:1 (source Klaviyo 2025)
+- Paniers abandonnes recuperes: +10-15%
+- Temps qualification leads: -60%
+- Lifetime Value clients: +30% avec segmentation VIP
 
-## Automatisations Disponibles
+## Automatisations par Categorie
 
-### E-commerce (Shopify)
-- Audit complet catalogue et SEO
-- Correction automatique alt text images
-- Sync inventaire multi-canaux
-- Webhooks temps réel
+### Voice AI & Telephonie (1)
+- Assistant Vocal IA 24/7
 
-### Email Marketing (Klaviyo)
-- Welcome Series (5 emails)
-- Abandoned Cart Recovery
-- Post-Purchase flows
-- Win-Back campaigns
-- VIP Tier automation
+### Lead Generation (20)
+- Sync Meta/Google/TikTok Leads
+- LinkedIn scraping B2B
+- Google Maps sourcing local
+- Lead scoring automatique
 
-### Lead Generation
-- Meta Ads → Shopify/CRM sync
-- Google Forms → Klaviyo integration
-- LinkedIn/Google Maps data sourcing
+### Email Marketing CRM (9)
+- Welcome series (40-50% ouverture)
+- Abandoned cart (+10-15% recuperation)
+- Post-purchase flows
+- Win-back campaigns
+- VIP Tiers
 
-### Analytics
-- GA4 reporting automatisé
-- Attribution multi-touch
-- ROI tracking par canal
+### Shopify Admin (13)
+- Enrichissement produits automatique
+- Google Shopping attributes
+- Collections dynamiques
+- Audit store complet
+
+### Analytics & Reporting (9)
+- Dashboard Looker Studio
+- Rapport sources GA4
+- Alertes stock bas
+
+### SEO & Contenu (9)
+- Correction alt text images
+- Meta tags automatiques
+- Schema.org produits
+
+### WhatsApp Business (2)
+- Confirmation reservations
+- Rappels automatiques
+
+### Contenu & Video (8)
+- Video promo produit
+- Articles blog automatiques
+
+### AI Avatar (2)
+- Generation avatars IA
+- Videos influenceur virtuel
+
+### CinematicAds AI - Partenaire (4)
+- Generation videos publicitaires IA
+- https://cinematicads.studio
+
+## Integrations Supportees
+
+- E-commerce: Shopify, WooCommerce
+- CRM: HubSpot, Pipedrive, Salesforce, Zoho
+- Email: Klaviyo, Mailchimp
+- Publicite: Meta Ads, Google Ads, TikTok Ads
+- Analytics: Google Analytics 4
+- Messagerie: WhatsApp Business, SMS
+
+## Pages Cles
+
+- [Accueil](https://3a-automation.com/): Proposition de valeur
+- [Tarifs](https://3a-automation.com/pricing.html): Packages detailles
+- [Automatisations](https://3a-automation.com/automations.html): 78 automatisations
+- [Cas Clients](https://3a-automation.com/cas-clients.html): Etudes de cas
+- [Contact](https://3a-automation.com/contact.html): Formulaire + Voice AI
+- [Reservation](https://3a-automation.com/booking.html): Prendre RDV
 
 ## Contact
 
 - **Email**: contact@3a-automation.com
 - **Site**: https://3a-automation.com
-- **Audit Gratuit**: https://3a-automation.com/services/audit-gratuit.html
+- **Dashboard**: https://dashboard.3a-automation.com
+- **Audit Gratuit**: Disponible sur toutes les pages via l'assistant vocal
 
-## Documentation Technique
+## Pourquoi Choisir 3A Automation
+
+1. **Expertise directe** - Consultant solo, pas d'agence, vous travaillez avec l'expert
+2. **Resultats prouves** - ROI 42:1 documente
+3. **Prix justes** - Pas de marge agence
+4. **Flexibilite** - Packs one-time, retainers resiliables
+5. **Garantie** - Corrections jusqu'a satisfaction
+6. **Voice AI inclus** - Assistant vocal disponible 24/7
+
+## Documentation
 
 - [Sitemap XML](https://3a-automation.com/sitemap.xml)
 - [Robots.txt](https://3a-automation.com/robots.txt)
-- [Mentions Légales](https://3a-automation.com/legal/mentions-legales.html)
-- [Politique Confidentialité](https://3a-automation.com/legal/politique-confidentialite.html)
+- [Blog](https://3a-automation.com/blog/)
 
 ---
 
-Version: 3.2 | Last Updated: 2025-12-23
+Version: 4.0 | Last Updated: 2025-12-26
 Spec: https://llmstxt.org/
