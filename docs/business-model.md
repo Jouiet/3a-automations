@@ -71,12 +71,12 @@ SESSION 96 COMPLETE (26/12/2025):
 │                                                                              │
 │  SCRIPTS DISPONIBLES                                                        │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  Total: 77 automations client-facing (vérifié 25/12/2025 Session 93)        │
-│        (Registry v1.6.0 - synced across HTML + llms.txt + Knowledge Base)   │
+│  Total: 78 automations client-facing (vérifié 26/12/2025 Session 96)        │
+│        (Registry v1.8.0 - synced across HTML + llms.txt + Knowledge Base)   │
 │  ├── Lead Gen: 20 | Shopify: 13 | SEO: 9 | Email: 9                         │
 │  ├── Analytics: 9 | Content: 10 | AI Avatar: 2                              │
 │  ├── CinematicAds: 4 (EXTERNAL → cinematicads.studio)                       │
-│  ├── WhatsApp: 2 | Voice AI: 1                                              │
+│  ├── WhatsApp: 2 | Voice AI: 2 (Web Widget + Phone)                         │
 │  └── 23 outils internes EXCLUS (test-, verify-, check-)                     │
 │                                                                              │
 │  CINEMATICADS AI PROMPTS (Session 83 - Optimisés 2025)                      │
@@ -499,6 +499,7 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 | Version | Date | Modifications |
 |---------|------|---------------|
+| 3.8 | 26 Déc 2025 | Session 96: 78 automations, Voice AI Product, Schema.org SoftwareApplication, llms.txt v4.0 |
 | 3.7 | 23 Déc 2025 | Session 83: Ultra Forensic Audit (133 issues fixed), 9 MCPs vérifiés fonctionnels, logo paths normalisés |
 | 3.6 | 23 Déc 2025 | Session 82: 77 automations vérifiées, llms.txt v3.2 |
 | 3.2 | 20 Déc 2025 | Session 53: 50 scripts réels, Performance 24%, Token Shopify exposé |

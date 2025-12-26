@@ -2,8 +2,16 @@
 
 **Date:** 25 décembre 2025
 **Session:** 94 (Strategy) → 96 (Implementation Complete)
+**Version:** 2.1 (Session 96 Part 4)
 **Objectif:** Réduire l'exposition technique sans perdre la crédibilité
 **Status:** ✅ **100% CORE COMPLETE** (26/12/2025) - Blog & Docs = Q1 2026 backlog
+
+### Session 96 Part 4 Additions (26/12/2025)
+- ✅ **Voice AI repositionné comme PRODUIT** (pas feature)
+- ✅ llms.txt v4.0: Voice AI Product en section primaire
+- ✅ Schema.org SoftwareApplication markup (pricing removed)
+- ✅ Blueprint protection: $0.05/min, Web Speech API → PRIVATE
+- ✅ 78 automations (nouveau: voice-ai-web-widget)
 
 ---
 
@@ -34,8 +42,8 @@
 
 | Information Exposée | Où | Impact Concurrentiel |
 |---------------------|-----|----------------------|
-| Taux horaire ~90€/h | pricing.html | Undercut immédiat possible |
-| 77 automations nommées | automations.html | Catalogue copiable |
+| ~~Taux horaire ~90€/h~~ | ~~pricing.html~~ | ~~Undercut immédiat possible~~ ✅ RETIRÉ |
+| 78 automations nommées | automations.html | Catalogue copiable (mais outcomes, pas méthodes) |
 | Stack technique complet | llms-full.txt | Roadmap révélée |
 | 9 MCPs listés | Footer toutes pages | Architecture exposée |
 | System prompts voice | voice-widget.js | UX copiable |
@@ -382,4 +390,16 @@ Certains éléments techniques DOIVENT rester pour la crédibilité:
 
 ---
 
-*Document généré Session 94 - Mise à jour Session 96 (26/12/2025)*
+---
+
+## CHANGELOG
+
+| Version | Date | Changements |
+|---------|------|-------------|
+| 2.1 | 26/12/2025 | Voice AI Product, 78 automations, llms.txt v4.0 |
+| 2.0 | 26/12/2025 | Implementation complete Session 96 |
+| 1.0 | 25/12/2025 | Document initial Session 94 |
+
+---
+
+*Document généré Session 94 - Mise à jour Session 96 Part 4 (26/12/2025)*

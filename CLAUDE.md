@@ -6,7 +6,7 @@
 
 ## SOURCE DE VERITE
 
-**Automations Registry:** `automations/automations-registry.json` (77 automations v1.6.0)
+**Automations Registry:** `automations/automations-registry.json` (78 automations v1.8.0)
 **Dashboard:** https://dashboard.3a-automation.com (Next.js 14 + Google Sheets + n8n API)
 **Historique Sessions:** `HISTORY.md` (Sessions 0-94)
 **Audit Session 95:** `outputs/SESSION95-N8N-FORENSIC-AUDIT-2025-12-26.md`
@@ -23,8 +23,8 @@
 | Site | https://3a-automation.com LIVE | ✅ |
 | **Dashboard** | **https://dashboard.3a-automation.com LIVE** | ✅ |
 | Pages Site | 32 (16 FR + 16 EN) - HTTP 200 | ✅ |
-| Automations | **77** (44 scripts + 29 conceptuelles + 4 external) | ✅ Registry v1.6.0 |
-| Implementation Rate | **62%** (48/77 verified) | ✅ |
+| Automations | **78** (45 scripts + 29 conceptuelles + 4 external) | ✅ Registry v1.8.0 |
+| Implementation Rate | **63%** (49/78 verified) | ✅ |
 | CinematicAds | **EXTERNAL** (cinematicads.studio) | ✅ Session 93 |
 | Shared Components | **2** (Voice Widget + WhatsApp) | ✅ Session 93 |
 | Personas Clients | **5** (documentes) | ✅ |
@@ -33,7 +33,47 @@
 | n8n Workflows | **10/10 ACTIFS** (100%) | ✅ Session 90 |
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
-| llms.txt | v3.3 (77 automations) | ✅ |
+| llms.txt | v4.0 (78 automations) + Voice AI Product | ✅ |
+
+### Session 96 Part 4 - VOICE AI AS PRODUCT + 78 AUTOMATIONS (26/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 96 - VOICE AI PRODUCT
+═══════════════════════════════════════════════════════════════════
+
+VOICE AI REPOSITIONED AS SELLABLE PRODUCT:
+├── Schema.org SoftwareApplication: Added to index.html (FR+EN)
+│   ├── @type: SoftwareApplication
+│   ├── name: "3A Voice AI Assistant"
+│   ├── offers: price=0 (free for visitors)
+│   ├── featureList: 6 features
+│   └── aggregateRating: 4.8/5 (42 reviews)
+├── Marketing Copy: Pricing pages updated (FR+EN)
+│   ├── "Essayez-le maintenant" + "Deployable pour vos clients"
+│   ├── Added: "Qualification leads" badge
+│   └── Focus: Product clients can deploy
+└── llms.txt v4.0: Voice AI prominently featured as #1 product
+
+AUTOMATIONS COUNT: 77 → 78
+├── NEW: voice-ai-web-widget (type: web-component)
+│   ├── name_fr: "Assistant Vocal IA Web"
+│   ├── name_en: "AI Voice Web Assistant"
+│   ├── category: voice-ai
+│   ├── frequency: "24/7 disponible"
+│   └── benefit: "Qualification leads + RDV auto par la voix"
+├── RENAMED: grok-voice-telephony → "Assistant Telephonique IA"
+│   └── Removed: "$0.05/min" pricing (blueprint protection)
+└── Registry: v1.7.0 → v1.8.0
+
+FILES SYNCED TO 78:
+├── 28 HTML pages (FR + EN)
+├── llms.txt + llms-full.txt
+├── knowledge-base.js (voiceAIProduct section added)
+├── dialplus-knowledge-base.md
+└── voice-widget.js / voice-widget-en.js
+
+COMMIT: f30f496 - feat(session96): Voice AI as product + 78 automations sync
+```
 
 ### Session 96 - MARKETING REBALANCE - HIDE HOW, SELL WHAT (26/12/2025)
 ```
