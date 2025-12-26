@@ -1056,7 +1056,7 @@ STACK OPTIMAL (MCP-Ready)
                     ┌─────────────────────────────────────┐
                     │      🎤 VOICE AI ASSISTANT          │
                     │  - Web Speech API (gratuit)         │
-                    │  - 77 automations catalog           │
+                    │  - 78 automations catalog           │
                     │  - Sector-specific responses        │
                     │  - Fallback text for Firefox        │
                     └───────────────┬─────────────────────┘
@@ -1188,6 +1188,7 @@ node automations/agency/core/sync-knowledge-base.cjs
 
 | Version | Date | Modifications |
 |---------|------|---------------|
+| 2.6 | 26/12/2025 | Session 96: 78 automations, Voice AI Product (Schema.org SoftwareApplication), blueprint protection |
 | 2.5 | 23/12/2025 | Session 83: Ultra Forensic 20 categories, 133 issues fixed (0 CRITICAL), 9 MCPs fonctionnels vérifiés, logo paths normalisés |
 | 2.4 | 23/12/2025 | Session 82: Forensic frontend audit, AEO optimization, 77 automations |
 | 2.3 | 20/12/2025 | Session 61: Voice AI + Booking integration, 72 automations (segmentation v4.0) |
