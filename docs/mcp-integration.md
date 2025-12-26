@@ -1,13 +1,41 @@
 # MCP-FLYWHEEL INTEGRATION ANALYSIS
 ## AI Agency Automation (AAA) - Communication & Compatibility Report
 
-> **Generated:** 2025-12-16 | **Updated:** 2025-12-25 (Session 90 FINAL)
-> **Status:** MCP STACK COMPLET + DASHBOARD LIVE + n8n 100%
-> **Overall Integration Score:** 96/100 (màj Session 90 - 12/13 MCPs = 92%, n8n 10/10 = 100%)
+> **Generated:** 2025-12-16 | **Updated:** 2025-12-26 (Session 97 Complete)
+> **Status:** MCP STACK COMPLET + DASHBOARD LIVE + n8n 100% + LEAD TRACKING LIVE
+> **Overall Integration Score:** 96/100 (11/13 MCPs = 85%, n8n 10/10 = 100%, Lead Pipeline 100%)
 
 ---
 
-## 0. SESSION 90 FINAL UPDATE (25/12/2025)
+## 0. SESSION 97 UPDATE (26/12/2025)
+
+```
+═══════════════════════════════════════════════════════════════════
+                SESSION 97: LEAD TRACKING + INVOICE SYSTEM
+═══════════════════════════════════════════════════════════════════
+
+✅ LEAD TRACKING PIPELINE (26/12/2025):
+   ├── Landing Page Forms → Dashboard CRM INTÉGRÉ
+   ├── script.js: createDashboardLead() ajouté
+   ├── Dual submission: Original handler + CRM (non-blocking)
+   ├── Google Sheets API: GET requests (CORS-safe)
+   └── Test lead: lead_test_session97 créé ✅
+
+✅ INVOICE SYSTEM (26/12/2025):
+   ├── automations/invoicing/invoice-template.html
+   ├── automations/invoicing/invoice-generator.cjs
+   ├── Multi-currency: MAD (DH), EUR (€), USD ($)
+   └── Test: INV-202512-907.html généré ✅
+
+✅ CONVERSION TRACKING VÉRIFIÉ:
+   ├── Landing Page Apps Script: LIVE (v2.0)
+   ├── Dashboard CRM Apps Script: LIVE
+   └── CRUD Operations: CREATE/READ/UPDATE/DELETE
+```
+
+---
+
+## 0.1 SESSION 90 FINAL UPDATE (25/12/2025)
 
 ```
 ═══════════════════════════════════════════════════════════════════

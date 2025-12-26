@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 14.4 | Date: 2025-12-26 | Session: 97 (IN PROGRESS)
+## Version: 14.5 | Date: 2025-12-26 | Session: 97 (COMPLETE)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -8,11 +8,12 @@
 
 **Automations Registry:** `automations/automations-registry.json` (78 automations v1.8.0)
 **Dashboard:** https://dashboard.3a-automation.com (Next.js 14 + Google Sheets + n8n API)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-94)
-**Audit Session 95:** `outputs/SESSION95-N8N-FORENSIC-AUDIT-2025-12-26.md`
+**Historique Sessions:** `HISTORY.md` (Sessions 0-97)
+**Audit Forensique:** `outputs/FORENSIC-AUDIT-2025-12-18.md` (v12.6)
 **Dashboard Blueprint:** `outputs/DASHBOARD-BLUEPRINT-2025-12-25.md`
 **Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
 **Shared Components:** `automations/shared-components/` (Voice Widget + WhatsApp generics)
+**Invoice System:** `automations/invoicing/` (Multi-currency MAD/EUR/USD)
 
 ---
 
@@ -37,8 +38,50 @@
 | Dashboard Analytics | **REAL DATA** (n8n + Recharts) | ✅ Session 97 |
 | Blog | **2 articles** (E-commerce + Voice AI) | ✅ Session 97 |
 | sitemap.xml | **36 URLs** with hreflang | ✅ Session 97 |
+| **Lead Tracking** | **Landing → Dashboard CRM INTÉGRÉ** | ✅ Session 97 |
+| **Invoice System** | **Multi-currency MAD/EUR/USD** | ✅ Session 97 |
+| **Conversion Tracking** | **Google Sheets API VERIFIED** | ✅ Session 97 |
 
-### Session 97 - DASHBOARD ANALYTICS + BLOG ARTICLE #2 (26/12/2025)
+### Session 97 - LEAD TRACKING + INVOICE SYSTEM + CONVERSION (26/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 97 - COMPLETE (26/12/2025)
+═══════════════════════════════════════════════════════════════════
+
+LEAD TRACKING INTEGRATION (VERIFIED):
+├── script.js: createDashboardLead() function ajouté
+├── Dual submission: Original form handler + Dashboard CRM
+├── Non-blocking: Fire-and-forget pour ne pas ralentir le formulaire
+├── Google Sheets API: GET requests (CORS-safe)
+├── Test lead créé: lead_test_session97 ✅
+├── script.min.js régénéré: 33KB → 12KB
+└── Dashboard CRM Apps Script: LIVE et fonctionnel
+
+INVOICE TEMPLATE SYSTEM:
+├── automations/invoicing/invoice-template.html
+│   ├── Design: Futuristic dark cyber theme (3A branding)
+│   ├── Multi-currency: MAD (DH), EUR (€), USD ($)
+│   ├── Payment methods: Bank transfer, Wise, Payoneer
+│   └── Print-ready: @page A4, CSS print styles
+├── automations/invoicing/invoice-generator.cjs
+│   ├── InvoiceGenerator class: Programmatic generation
+│   ├── CONFIG: currencies, packs, vatRates by country
+│   └── Test: ✅ INV-202512-907 generated successfully
+└── .gitignore: automations/invoicing/generated/
+
+CONVERSION TRACKING VERIFIED:
+├── Landing Page Apps Script: ✅ LIVE (v2.0)
+│   └── URL: AKfycbyzIHwT... (form submissions)
+├── Dashboard CRM Apps Script: ✅ LIVE
+│   └── URL: AKfycbzFP751... (leads CRUD)
+└── CRUD Operations: CREATE/READ/UPDATE/DELETE all working
+
+COMMITS SESSION 97:
+├── 3324c5f feat(session97): Multi-currency invoice template system
+└── bbc2a92 feat(session97): Lead tracking + conversion integration
+```
+
+### Session 97 Part 1 - DASHBOARD ANALYTICS + BLOG ARTICLE #2 (26/12/2025)
 ```
 ═══════════════════════════════════════════════════════════════════
                     SESSION 97 - DASHBOARD + BLOG
