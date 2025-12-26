@@ -78,9 +78,22 @@ CHANGES APPLIED (32 files modified):
    ├── Changed: "10+ APIs intégrées" → "24/7 Toujours actif"
    └── Changed: "APIs intégrées" → "Connecteurs" in about pages
 
+5. CASE STUDIES (FR + EN):
+   ├── Removed: All <div class="case-stack"> with API names
+   │   └── "Shopify API", "Klaviyo", "GA4", "n8n", "Meta CAPI"
+   ├── Changed: "Solutions Deployees" → "Résultats Obtenus" (FR)
+   ├── Changed: "Deployed Solutions" → "Results Achieved" (EN)
+   ├── Changed: Technical descriptions → Outcome-focused copy
+   │   ├── "7 flows Klaviyo" → "Emails automatisés pour chaque étape client"
+   │   ├── "Tracking GA4 + Conversions API" → "Tracking conversions multi-canal"
+   │   └── "Segmentation RFM" → "Segmentation clients intelligente"
+   └── Changed: "Scripts" → "Automations" (consistent terminology)
+
 FILES MODIFIED:
 ├── landing-page-hostinger/*.html (16 FR pages)
 ├── landing-page-hostinger/en/*.html (16 EN pages)
+├── landing-page-hostinger/cas-clients.html (FR case studies)
+├── landing-page-hostinger/en/case-studies.html (EN case studies)
 ├── landing-page-hostinger/llms-full.txt
 └── project-templates/n8n-workflows/blog-article-generator-generic.json
 ```
