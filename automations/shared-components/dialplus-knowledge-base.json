@@ -383,28 +383,37 @@
     "closing": "Merci pour votre appel ! Vous recevrez un email de confirmation dans les prochaines minutes."
   },
 
-  "technical_stack": {
-    "integrations": [
-      "Klaviyo (Email Marketing)",
-      "Shopify (E-commerce)",
-      "Google Analytics 4",
-      "n8n (Workflow Automation)",
-      "Google Sheets (Database)",
-      "WhatsApp Business API",
-      "Meta Ads API",
-      "Google Ads API",
-      "TikTok Ads API"
+  "urgency": {
+    "cost_of_inaction": [
+      "Paniers abandonnes non relances = 70% de ventes perdues",
+      "Leads non qualifies = temps commercial gaspille",
+      "Clients non fidelises = ils partent chez vos concurrents",
+      "Taches manuelles = vous ne travaillez pas SUR votre business"
     ],
-    "mcps_configured": 11,
-    "n8n_workflows_active": 10
+    "expected_results": {
+      "email_marketing": "ROI 42 EUR pour 1 EUR investi (Klaviyo 2025)",
+      "cart_recovery": "+10-15% de ventes recuperees",
+      "lead_qualification": "-60% de temps",
+      "customer_ltv": "+30% avec segmentation VIP"
+    },
+    "guarantee": "Si ca ne marche pas comme promis, on corrige jusqu'a satisfaction. ZERO risque.",
+    "next_step": "Audit gratuit en 24-48h. Aucun engagement. Aucun appel obligatoire."
+  },
+
+  "integrations": {
+    "ecommerce": ["Shopify", "WooCommerce"],
+    "crm": ["HubSpot", "Pipedrive", "Salesforce", "Zoho"],
+    "advertising": ["Meta Ads", "Google Ads", "TikTok Ads"],
+    "analytics": ["Google Analytics 4"],
+    "messaging": ["WhatsApp Business", "SMS", "Email"],
+    "note": "On s'adapte a VOS outils existants"
   },
 
   "contact_info": {
     "email": "contact@3a-automation.com",
     "website": "https://3a-automation.com",
     "booking": "https://3a-automation.com/booking.html",
-    "pricing": "https://3a-automation.com/pricing.html",
-    "dashboard": "https://dashboard.3a-automation.com"
+    "pricing": "https://3a-automation.com/pricing.html"
   },
 
   "voice_agent_instructions": {

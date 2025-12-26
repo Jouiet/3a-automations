@@ -315,8 +315,49 @@ Si question complexe ou devis personnalise: proposer RDV avec Jonathan.
 | Site | https://3a-automation.com |
 | Tarifs | https://3a-automation.com/pricing.html |
 | Reservation | https://3a-automation.com/booking.html |
-| Dashboard | https://dashboard.3a-automation.com |
 
 ---
 
-*3A Automation - Knowledge Base v1.0 - 26/12/2025*
+## 14. POURQUOI AGIR MAINTENANT
+
+### Chaque jour sans automatisation vous coute de l'argent
+
+- **Paniers abandonnes** non relances = 70% de ventes perdues
+- **Leads non qualifies** = temps commercial gaspille
+- **Clients non fidelises** = ils partent chez vos concurrents
+- **Taches manuelles** = vous ne travaillez pas SUR votre business
+
+### Resultats que vous pouvez attendre
+
+| Domaine | Resultat |
+|---------|----------|
+| Email Marketing | ROI 42 EUR pour 1 EUR investi |
+| Paniers abandonnes | +10-15% de ventes recuperees |
+| Qualification leads | -60% de temps |
+| Lifetime Value | +30% avec segmentation VIP |
+
+### Notre engagement
+
+Si les automatisations ne fonctionnent pas comme promis, on corrige jusqu'a satisfaction. **ZERO risque pour vous.**
+
+### Prochaine etape
+
+L'audit gratuit vous montre exactement combien vous perdez et comment le recuperer. **24-48h** pour recevoir votre rapport. Aucun engagement. Aucun appel obligatoire.
+
+**Pret a voir votre potentiel? Demandez votre audit gratuit maintenant.**
+
+---
+
+## 15. INTEGRATIONS
+
+- **E-commerce:** Shopify, WooCommerce
+- **CRM:** HubSpot, Pipedrive, Salesforce, Zoho
+- **Publicite:** Meta Ads, Google Ads, TikTok Ads
+- **Analytics:** Google Analytics 4
+- **Messagerie:** WhatsApp Business, SMS, Email
+
+*On s'adapte a VOS outils existants.*
+
+---
+
+*3A Automation - Knowledge Base v1.2 - 26/12/2025*
