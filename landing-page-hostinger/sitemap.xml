@@ -279,7 +279,7 @@
     <loc>https://3a-automation.com/blog/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/"/>
-    <lastmod>2025-12-23</lastmod>
+    <lastmod>2025-12-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -289,7 +289,7 @@
     <loc>https://3a-automation.com/en/blog/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/"/>
-    <lastmod>2025-12-23</lastmod>
+    <lastmod>2025-12-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -310,6 +310,26 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/automatisation-ecommerce-2026.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/ecommerce-automation-2026.html"/>
     <lastmod>2025-12-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Article - Assistant Vocal IA PME 2026 FR -->
+  <url>
+    <loc>https://3a-automation.com/blog/assistant-vocal-ia-pme-2026.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/assistant-vocal-ia-pme-2026.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/voice-ai-assistant-sme-2026.html"/>
+    <lastmod>2025-12-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Article - Voice AI Assistant SME 2026 EN -->
+  <url>
+    <loc>https://3a-automation.com/en/blog/voice-ai-assistant-sme-2026.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/assistant-vocal-ia-pme-2026.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/voice-ai-assistant-sme-2026.html"/>
+    <lastmod>2025-12-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
