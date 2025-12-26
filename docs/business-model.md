@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 4.1 - Mise à jour 25 Décembre 2025 (Session 93: Stratégie Partenaire)
+## Version 4.2 - Mise à jour 26 Décembre 2025 (Session 96: Lead Pipeline + Voice)
 ## Basé sur données réelles confirmées
 
 ---
@@ -9,16 +9,18 @@
 ```
 CE DOCUMENT CONTIENT UNIQUEMENT DES FAITS VÉRIFIÉS.
 Aucun wishful thinking. Aucune projection non fondée.
-Mis à jour avec les données confirmées le 25/12/2025.
+Mis à jour avec les données confirmées le 26/12/2025.
 
-SESSION 93 COMPLETE (25/12/2025):
+SESSION 96 COMPLETE (26/12/2025):
 ✅ MCP Stack: 12/13 fonctionnels (92%)
 ✅ n8n: API key + 10/10 workflows ACTIFS (100%)
-✅ xAI/Grok: Crédits ACTIFS, 11 modèles disponibles
-✅ Google Analytics: 30 users, 90 sessions (7j)
-✅ Dashboard: https://dashboard.3a-automation.com LIVE (real API data)
-✅ CinematicAds: STRATÉGIE PARTENAIRE (cinematicads.studio = projet séparé)
-✅ Shared Components: Voice Widget + WhatsApp generics créés
+✅ xAI/Grok: Crédits ACTIFS, API testé OK (grok-3-mini)
+✅ Dashboard: Recharts visualization + n8n API intégré
+✅ Lead Pipeline: Form → Apps Script v2 → n8n webhook → Klaviyo ✅
+✅ Voice Widget Web: Web Speech API OPÉRATIONNEL (keyword matching)
+✅ Engagement: "Résiliable à tout moment" (no commitment)
+✅ Marketing: Location-agnostic (aucune mention géographique)
+❌ Grok Voice Telephony: BLOQUÉ (Twilio credentials manquants)
 ```
 
 ---
@@ -84,9 +86,9 @@ SESSION 93 COMPLETE (25/12/2025):
 │  ✅ Veo 3: 100-200 mots, structure subject+action+setting+specs+style       │
 │  Sources: ai.google.dev/gemini-api/docs, deepmind.google/models/veo/        │
 │                                                                              │
-│  MCPs CONFIGURÉS (Session 89 - 25/12/2025 - VÉRIFIÉ PAR API)               │
+│  MCPs CONFIGURÉS (Session 96 - 26/12/2025 - VÉRIFIÉ PAR API)               │
 │  ════════════════════════════════════════════════════════════════════════   │
-│  ✅ n8n - API key + 8/9 workflows ACTIFS (88%)                              │
+│  ✅ n8n - API key + 10/10 workflows ACTIFS (100%)                              │
 │  ✅ xAI/Grok - Crédits ACTIFS, 11 modèles (grok-4, grok-3, vision)         │
 │  ✅ Klaviyo - 3 listes (API testé)                                          │
 │  ✅ Google Analytics - 30 users, 90 sessions (7j)                           │
@@ -98,7 +100,8 @@ SESSION 93 COMPLETE (25/12/2025):
 │  ✅ Playwright - NPX standard                                               │
 │  ✅ Chrome DevTools - NPX standard                                          │
 │  ❌ Shopify - Dev store à créer                                             │
-│  TOTAL: 11/12 fonctionnels (92%) - Session 89                              │
+│  ❌ Twilio - MANQUANT (bloque Grok Voice Telephony)                        │
+│  TOTAL: 11/13 fonctionnels (85%) - Session 96                              │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -110,13 +113,16 @@ SESSION 93 COMPLETE (25/12/2025):
 │                    GAPS À COMBLER AVANT NOUVEAUX CLIENTS                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
-│  TECHNIQUE (màj Session 88 - 24/12/2025)                                    │
+│  TECHNIQUE (màj Session 96 - 26/12/2025)                                    │
 │  ├── ✅ Dashboard PRODUCTION: https://dashboard.3a-automation.com          │
+│  ├── ✅ Recharts: Visualisation workflows (success vs error)               │
 │  ├── ✅ PM2 + Node.js 20 (NO Docker) sur Hostinger VPS                     │
 │  ├── ✅ Google Sheets DB: Users, Leads, Automations, Activities, Metrics   │
 │  ├── ✅ Auth: JWT + bcrypt + Role-based (ADMIN/CLIENT/VIEWER)              │
-│  ├── ✅ xAI API: Crédits ACTIFS, 11 modèles Grok disponibles               │
-│  └── ✅ Apps Script API v2: GET+POST, CRUD operations verified             │
+│  ├── ✅ xAI API: Crédits ACTIFS, testé grok-3-mini OK                      │
+│  ├── ✅ Apps Script v2 (v4): Form → n8n webhook → Klaviyo LIVE             │
+│  ├── ✅ Voice Widget Web: Web Speech API (gratuit, 33 keywords)            │
+│  └── ❌ Grok Voice Telephony: Twilio credentials manquants                 │
 │                                                                              │
 │  COMMERCIAL (bloquant)                                                      │
 │  ├── ✅ Page de présentation: LIVE (3a-automation.com)                      │

@@ -104,29 +104,54 @@ FILES MODIFIED:
                     SESSION 96 - PIPELINE VERIFICATION
 ═══════════════════════════════════════════════════════════════════
 
-PIPELINE TESTED:
-├── ✅ n8n Webhook: POST /webhook/subscribe/new → 200 OK
+PIPELINE TESTED & DEPLOYED:
+├── ✅ Google Apps Script v2 → Version 4 DEPLOYED
+│   ├── OAuth scopes added (UrlFetchApp, Gmail, Sheets)
+│   ├── n8n webhook: POST /webhook/subscribe/new → 200 OK
+│   └── Files: outputs/google-apps-script-form-handler-v2.txt
+├── ✅ n8n Webhook: 200 OK with Klaviyo integration
 ├── ✅ Klaviyo Profile: Created with welcome_series_status=active
 ├── ✅ Welcome Series Event: Triggered (5 emails programmed)
-└── ✅ Full pipeline: Form → Script → n8n → Klaviyo VERIFIED
+└── ✅ Full pipeline: Form → Script v4 → n8n → Klaviyo VERIFIED
+```
 
-FILES CREATED:
-├── automations/generic/forms/google-apps-script-form-handler-v2.gs
-│   ├── n8n webhook integration
-│   ├── Email notification (HTML + plain text)
-│   ├── Google Sheets backup
-│   └── Slack notification (optional)
-├── scripts/verify-lead-pipeline.cjs
-│   ├── Automated pipeline verification
-│   ├── Creates test profile → verifies Klaviyo → cleans up
-│   └── Run: node scripts/verify-lead-pipeline.cjs
+### Session 96 Part 3 - LOCATION-AGNOSTIC + VOICE AUDIT (26/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 96 - GEOGRAPHIC CLEANUP + VOICE STATUS
+═══════════════════════════════════════════════════════════════════
 
-CLEANUP:
-└── ✅ blog-article-generator.json DELETED (obsolete, replaced by multi-channel)
+GEOGRAPHIC MENTIONS REMOVED (18 pages):
+├── a-propos.html, en/about.html: "Du Maroc au Monde" → "100% Remote"
+├── contact.html, en/contact.html: "Maroc, MENA, France" → "Clients worldwide"
+├── index.html, en/index.html: Removed <meta name="geo.region" content="MA">
+├── 12 service pages: areaServed ["MA","AE","FR","US"] → "Worldwide"
+├── booking.html: "Morocco time" → "CET/UTC+1"
+└── Languages: "Français, English, العربية" → "Français et English" (FACTUEL)
 
-NEXT STEPS:
-├── [ ] Deploy v2.gs to Google Apps Script
-└── [ ] Replace form action URL in HTML pages
+ENGAGEMENT POLICY UPDATED:
+├── FR: "Résiliable à tout moment. La désactivation prend effet à la fin de la période déjà payée."
+├── EN: "Cancel anytime. Cancellation takes effect at the end of the current paid period."
+└── Removed: "Engagement minimum 3 mois mensuel, 12 mois annuel"
+
+PROCESS SECTION REMOVED:
+├── pricing.html: "Processus (Sans Appels)" section DELETED
+└── en/pricing.html: "Our Process (No Calls)" section DELETED
+
+VOICE AI STATUS (FACTUEL):
+├── ✅ Voice Widget Web: OPÉRATIONNEL (Web Speech API, gratuit, 33 keywords)
+│   ├── Location: /voice-assistant/voice-widget.min.js (32KB)
+│   ├── Features: Keyword matching, booking flow, GA4 tracking
+│   └── Browsers: Chrome, Edge (Firefox/Safari = text fallback)
+├── ❌ Grok Voice Telephony: BLOQUÉ
+│   ├── Blocker: Twilio credentials MANQUANTS
+│   ├── n8n workflow: Déployé mais non fonctionnel
+│   └── xAI API: ✅ Testé OK (grok-3-mini)
+└── Dial.Plus: +1 775 254 7428 (usage interne 3A, pas pour revente)
+
+COMMITS:
+├── 83715b2 fix(session96): Remove geographic mentions + process section
+└── Push: ✅ GitHub main
 ```
 
 ### Session 95 - N8N FORENSIC AUDIT + BLOG WORKFLOW FIXES (26/12/2025)
