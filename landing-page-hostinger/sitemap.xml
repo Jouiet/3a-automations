@@ -46,6 +46,16 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Services - Voice AI FR -->
+  <url>
+    <loc>https://3a-automation.com/services/voice-ai.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/voice-ai.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/voice-ai.html"/>
+    <lastmod>2025-12-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Services - Audit Gratuit FR -->
   <url>
     <loc>https://3a-automation.com/services/audit-gratuit.html</loc>
@@ -176,6 +186,16 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/flywheel-360.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/flywheel-360.html"/>
     <lastmod>2025-12-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Services - Voice AI EN -->
+  <url>
+    <loc>https://3a-automation.com/en/services/voice-ai.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/voice-ai.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/voice-ai.html"/>
+    <lastmod>2025-12-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
