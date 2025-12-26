@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Guide: https://developers.google.com/apps-script/guides/web
   const FORM_CONFIG = {
     googleScriptUrl: 'https://script.google.com/macros/s/AKfycbyzIHwTDfQpm57LBloFJ53BMkSvsSDd3zCXE41mMSFPMa1m6xOuji3ICKQJA1oiHb-4/exec', // Google Apps Script
+    dashboardApiUrl: 'https://script.google.com/macros/s/AKfycbzFP751mwK04FguPrIISQlMHHUULw5-e-n_Pn63h-SXEBOUvD-wpM7wmbGDPauGdzIZ/exec', // Dashboard CRM
     fallbackEmail: 'contact@3a-automation.com',
     timeout: 5000 // 5 seconds
   };
@@ -157,11 +158,40 @@ document.addEventListener('DOMContentLoaded', function() {
       data.referrer = document.referrer || 'direct';
       data.page = window.location.href;
 
-      // Try webhook first, then fallback to mailto
+      // Try webhooks, then fallback to mailto
       let success = false;
 
+      // Create lead in Dashboard CRM (GET request - more reliable with Apps Script)
+      const createDashboardLead = async () => {
+        try {
+          const leadData = {
+            id: 'lead_' + Date.now(),
+            name: data.name || 'Unknown',
+            email: data.email || '',
+            phone: data.phone || '',
+            company: data.company || data.website || '',
+            source: 'website-form',
+            status: 'new',
+            score: 50,
+            priority: 'medium',
+            notes: `Subject: ${data.subject || 'N/A'}\nMessage: ${data.message || data.challenges || 'N/A'}\nPage: ${data.page}`,
+            tags: ['website', data.subject || 'general'].filter(Boolean),
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          };
+          const params = new URLSearchParams({
+            action: 'create',
+            sheet: 'Leads',
+            data: JSON.stringify(leadData)
+          });
+          await fetch(`${FORM_CONFIG.dashboardApiUrl}?${params}`, { method: 'GET' });
+        } catch (e) {
+          console.log('Dashboard lead creation failed (non-blocking):', e);
+        }
+      };
+
       try {
-        // Method 1: Try webhook with timeout
+        // Method 1: Try Google Apps Script webhook with timeout
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), FORM_CONFIG.timeout);
 
@@ -176,9 +206,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (response.ok) {
           success = true;
+          // Also create lead in Dashboard CRM (async, non-blocking)
+          createDashboardLead();
         }
       } catch (webhookError) {
-        console.log('Webhook unavailable, using mailto fallback');
+        console.log('Webhook unavailable, trying fallback...');
+        // Still try to create dashboard lead even if main webhook fails
+        createDashboardLead();
       }
 
       // Fallback: Open mailto with pre-filled data
