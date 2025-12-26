@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,70 +22,190 @@ import {
   Target,
   ShoppingCart,
   Repeat,
+  RefreshCw,
+  Loader2,
+  CheckCircle2,
+  XCircle,
+  Clock,
+  Activity,
 } from "lucide-react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  PieChart as RechartsPie,
+  Pie,
+  Cell,
+  LineChart as RechartsLine,
+  Line,
+} from "recharts";
 
-interface MetricCard {
-  title: string;
-  value: string;
-  change: number;
-  changeLabel: string;
-  icon: typeof TrendingUp;
-  iconColor: string;
+interface WorkflowData {
+  id: string;
+  name: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
-const metrics: MetricCard[] = [
-  {
-    title: "Leads Generes",
-    value: "1,247",
-    change: 12.5,
-    changeLabel: "vs mois dernier",
-    icon: Users,
-    iconColor: "text-primary",
-  },
-  {
-    title: "Taux Ouverture Email",
-    value: "42.3%",
-    change: 5.2,
-    changeLabel: "vs mois dernier",
-    icon: Mail,
-    iconColor: "text-emerald-400",
-  },
-  {
-    title: "Taux de Clic",
-    value: "8.7%",
-    change: -1.3,
-    changeLabel: "vs mois dernier",
-    icon: MousePointer,
-    iconColor: "text-amber-400",
-  },
-  {
-    title: "Revenue Automations",
-    value: "24,500 EUR",
-    change: 18.2,
-    changeLabel: "vs mois dernier",
-    icon: DollarSign,
-    iconColor: "text-sky-400",
-  },
-];
+interface ExecutionData {
+  id: string;
+  workflowId: string;
+  workflowName: string;
+  status: string;
+  mode: string;
+  startedAt: string;
+  stoppedAt: string;
+  finished: boolean;
+}
 
-const channelPerformance = [
-  { channel: "Email", leads: 456, conversion: 28.5, revenue: 12400 },
-  { channel: "LinkedIn", leads: 234, conversion: 22.1, revenue: 6800 },
-  { channel: "Website", leads: 312, conversion: 31.2, revenue: 8900 },
-  { channel: "Referral", leads: 145, conversion: 45.3, revenue: 7200 },
-  { channel: "Ads", leads: 100, conversion: 15.8, revenue: 3200 },
-];
+interface ExecutionStats {
+  total: number;
+  success: number;
+  error: number;
+  running: number;
+  waiting: number;
+}
 
-const automationPerformance = [
-  { name: "Welcome Sequence", runs: 1247, success: 98.5, revenue: 5600 },
-  { name: "Abandon Cart", runs: 856, success: 97.2, revenue: 12400 },
-  { name: "Re-engagement", runs: 543, success: 94.8, revenue: 3200 },
-  { name: "Upsell Campaign", runs: 234, success: 96.1, revenue: 8900 },
-  { name: "NPS Survey", runs: 678, success: 99.1, revenue: 0 },
-];
+interface DashboardStats {
+  totalLeads: number;
+  newLeadsToday: number;
+  qualifiedLeads: number;
+  conversionRate: number;
+  activeAutomations: number;
+  automationErrors: number;
+  revenueThisMonth: number;
+  revenueGrowth: number;
+}
+
+const COLORS = ['#10B981', '#EF4444', '#F59E0B', '#3B82F6', '#8B5CF6'];
 
 export default function AnalyticsPage() {
   const [dateRange, setDateRange] = useState("30d");
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [workflows, setWorkflows] = useState<WorkflowData[]>([]);
+  const [executions, setExecutions] = useState<ExecutionData[]>([]);
+  const [executionStats, setExecutionStats] = useState<ExecutionStats>({
+    total: 0,
+    success: 0,
+    error: 0,
+    running: 0,
+    waiting: 0,
+  });
+  const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = async () => {
+    try {
+      setRefreshing(true);
+      setError(null);
+
+      // Fetch n8n workflows
+      const workflowsRes = await fetch("/api/n8n/workflows");
+      const workflowsData = await workflowsRes.json();
+
+      if (workflowsData.success) {
+        setWorkflows(workflowsData.data || []);
+      }
+
+      // Fetch n8n executions (last 100)
+      const executionsRes = await fetch("/api/n8n/executions?limit=100");
+      const executionsData = await executionsRes.json();
+
+      if (executionsData.success) {
+        setExecutions(executionsData.data || []);
+        setExecutionStats(executionsData.stats || {
+          total: 0,
+          success: 0,
+          error: 0,
+          running: 0,
+          waiting: 0,
+        });
+      }
+
+      // Fetch dashboard stats from Google Sheets
+      const statsRes = await fetch("/api/stats");
+      const statsData = await statsRes.json();
+
+      if (statsData.success) {
+        setDashboardStats(statsData.data);
+      }
+
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      setError("Erreur lors du chargement des donnees");
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    // Auto-refresh every 60 seconds
+    const interval = setInterval(fetchData, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Prepare chart data
+  const workflowChartData = workflows.map(wf => ({
+    name: wf.name.length > 20 ? wf.name.substring(0, 20) + "..." : wf.name,
+    status: wf.active ? 1 : 0,
+    active: wf.active,
+  }));
+
+  // Execution stats by workflow
+  const executionsByWorkflow = workflows.map(wf => {
+    const wfExecs = executions.filter(e => e.workflowId === wf.id);
+    return {
+      name: wf.name.length > 15 ? wf.name.substring(0, 15) + "..." : wf.name,
+      success: wfExecs.filter(e => e.status === "success").length,
+      error: wfExecs.filter(e => e.status === "error").length,
+      total: wfExecs.length,
+    };
+  }).filter(d => d.total > 0);
+
+  // Status distribution for pie chart
+  const statusData = [
+    { name: "Success", value: executionStats.success, color: "#10B981" },
+    { name: "Error", value: executionStats.error, color: "#EF4444" },
+    { name: "Running", value: executionStats.running, color: "#3B82F6" },
+    { name: "Waiting", value: executionStats.waiting, color: "#F59E0B" },
+  ].filter(d => d.value > 0);
+
+  // Executions over time (group by day)
+  const executionsByDate = executions.reduce((acc, exec) => {
+    const date = new Date(exec.startedAt).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
+    if (!acc[date]) {
+      acc[date] = { date, success: 0, error: 0 };
+    }
+    if (exec.status === "success") acc[date].success++;
+    else if (exec.status === "error") acc[date].error++;
+    return acc;
+  }, {} as Record<string, { date: string; success: number; error: number }>);
+
+  const timelineData = Object.values(executionsByDate).slice(-14).reverse();
+
+  const successRate = executionStats.total > 0
+    ? ((executionStats.success / executionStats.total) * 100).toFixed(1)
+    : "0";
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
+          <p className="mt-2 text-muted-foreground">Chargement des analytics...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -94,18 +214,23 @@ export default function AnalyticsPage() {
         <div>
           <h1 className="text-3xl font-bold">Analytics</h1>
           <p className="text-muted-foreground">
-            Performance de vos automations et campagnes
+            Performance temps reel de vos automations n8n
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Tabs value={dateRange} onValueChange={setDateRange}>
-            <TabsList>
-              <TabsTrigger value="7d">7J</TabsTrigger>
-              <TabsTrigger value="30d">30J</TabsTrigger>
-              <TabsTrigger value="90d">90J</TabsTrigger>
-              <TabsTrigger value="1y">1A</TabsTrigger>
-            </TabsList>
-          </Tabs>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={fetchData}
+            disabled={refreshing}
+          >
+            {refreshing ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <RefreshCw className="h-4 w-4" />
+            )}
+            <span className="ml-2">Actualiser</span>
+          </Button>
           <Button variant="outline" size="sm">
             <Download className="h-4 w-4 mr-2" />
             Export
@@ -113,231 +238,313 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
-      {/* KPI Cards */}
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-400">
+          {error}
+        </div>
+      )}
+
+      {/* KPI Cards - Real Data */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {metrics.map((metric, index) => (
-          <Card key={index} className="border-border/50">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <metric.icon className={`h-5 w-5 ${metric.iconColor}`} />
-                <Badge
-                  variant={metric.change >= 0 ? "success" : "destructive"}
-                  className="gap-1"
-                >
-                  {metric.change >= 0 ? (
-                    <ArrowUpRight className="h-3 w-3" />
-                  ) : (
-                    <ArrowDownRight className="h-3 w-3" />
-                  )}
-                  {Math.abs(metric.change)}%
+        <Card className="border-border/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <Activity className="h-5 w-5 text-primary" />
+              <Badge variant="outline" className="gap-1">
+                Live
+              </Badge>
+            </div>
+            <div className="mt-4">
+              <p className="text-2xl font-bold">{workflows.length}</p>
+              <p className="text-sm text-muted-foreground">Workflows n8n</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+              <Badge variant="success" className="gap-1">
+                {successRate}%
+              </Badge>
+            </div>
+            <div className="mt-4">
+              <p className="text-2xl font-bold">{executionStats.success}</p>
+              <p className="text-sm text-muted-foreground">Executions Reussies</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <XCircle className="h-5 w-5 text-red-400" />
+              {executionStats.error > 0 && (
+                <Badge variant="destructive" className="gap-1">
+                  {executionStats.error}
                 </Badge>
-              </div>
-              <div className="mt-4">
-                <p className="text-2xl font-bold">{metric.value}</p>
-                <p className="text-sm text-muted-foreground">{metric.title}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              )}
+            </div>
+            <div className="mt-4">
+              <p className="text-2xl font-bold">{executionStats.error}</p>
+              <p className="text-sm text-muted-foreground">Erreurs</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-border/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <Clock className="h-5 w-5 text-amber-400" />
+              <Badge variant="outline" className="gap-1">
+                {executionStats.running + executionStats.waiting}
+              </Badge>
+            </div>
+            <div className="mt-4">
+              <p className="text-2xl font-bold">{executionStats.total}</p>
+              <p className="text-sm text-muted-foreground">Total Executions</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Charts Row */}
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Leads Over Time Chart */}
+        {/* Executions Bar Chart */}
         <Card className="border-border/50">
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="flex items-center gap-2">
-                  <LineChart className="h-5 w-5 text-primary" />
-                  Leads par Semaine
-                </CardTitle>
-                <CardDescription>Evolution sur les 12 dernieres semaines</CardDescription>
-              </div>
-            </div>
+            <CardTitle className="flex items-center gap-2">
+              <BarChart3 className="h-5 w-5 text-primary" />
+              Executions par Workflow
+            </CardTitle>
+            <CardDescription>Success vs Erreurs</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-[250px] flex items-center justify-center border border-dashed border-border/50 rounded-lg bg-muted/20">
-              <div className="text-center text-muted-foreground">
-                <LineChart className="h-10 w-10 mx-auto mb-2 opacity-50" />
-                <p className="text-sm">Graphique Leads/Semaine</p>
-                <p className="text-xs">(Recharts integration)</p>
+            {executionsByWorkflow.length > 0 ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={executionsByWorkflow} layout="vertical">
+                  <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                  <XAxis type="number" stroke="#94A3B8" />
+                  <YAxis
+                    dataKey="name"
+                    type="category"
+                    width={120}
+                    stroke="#94A3B8"
+                    fontSize={12}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#1E293B',
+                      border: '1px solid #334155',
+                      borderRadius: '8px'
+                    }}
+                  />
+                  <Legend />
+                  <Bar dataKey="success" name="Succes" fill="#10B981" radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="error" name="Erreurs" fill="#EF4444" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+                Aucune execution enregistree
               </div>
-            </div>
+            )}
           </CardContent>
         </Card>
 
-        {/* Conversion Funnel */}
-        <Card className="border-border/50">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="flex items-center gap-2">
-                  <Target className="h-5 w-5 text-amber-400" />
-                  Funnel de Conversion
-                </CardTitle>
-                <CardDescription>Du lead a la vente</CardDescription>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span>Visiteurs</span>
-                  <span className="font-medium">12,450</span>
-                </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <div className="h-full bg-primary rounded-full" style={{ width: "100%" }} />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span>Leads</span>
-                  <span className="font-medium">1,247 (10%)</span>
-                </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <div className="h-full bg-sky-400 rounded-full" style={{ width: "60%" }} />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span>Qualifies</span>
-                  <span className="font-medium">342 (27%)</span>
-                </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <div className="h-full bg-amber-400 rounded-full" style={{ width: "35%" }} />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span>Clients</span>
-                  <span className="font-medium">89 (26%)</span>
-                </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <div className="h-full bg-emerald-400 rounded-full" style={{ width: "15%" }} />
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Tables Row */}
-      <div className="grid gap-6 lg:grid-cols-2">
-        {/* Channel Performance */}
+        {/* Status Distribution Pie Chart */}
         <Card className="border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <PieChart className="h-5 w-5 text-emerald-400" />
-              Performance par Canal
+              Distribution des Status
             </CardTitle>
+            <CardDescription>Repartition des executions</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {channelPerformance.map((channel, index) => (
-                <div key={index} className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="font-medium">{channel.channel}</span>
-                  </div>
-                  <div className="flex items-center gap-6 text-sm">
-                    <span className="text-muted-foreground w-20">
-                      {channel.leads} leads
-                    </span>
-                    <span className="text-emerald-400 w-16">
-                      {channel.conversion}%
-                    </span>
-                    <span className="font-medium w-24 text-right">
-                      {channel.revenue.toLocaleString()} EUR
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {statusData.length > 0 ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <RechartsPie>
+                  <Pie
+                    data={statusData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={100}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, value, percent }) =>
+                      `${name}: ${value} (${(percent * 100).toFixed(0)}%)`
+                    }
+                  >
+                    {statusData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#1E293B',
+                      border: '1px solid #334155',
+                      borderRadius: '8px'
+                    }}
+                  />
+                </RechartsPie>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-[300px] flex items-center justify-center text-muted-foreground">
+                Aucune donnee disponible
+              </div>
+            )}
           </CardContent>
         </Card>
+      </div>
 
-        {/* Automation Performance */}
-        <Card className="border-border/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-sky-400" />
-              Top Automations
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {automationPerformance.map((automation, index) => (
-                <div key={index} className="flex items-center justify-between">
+      {/* Timeline Chart */}
+      <Card className="border-border/50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <LineChart className="h-5 w-5 text-sky-400" />
+            Executions dans le Temps
+          </CardTitle>
+          <CardDescription>14 derniers jours</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {timelineData.length > 0 ? (
+            <ResponsiveContainer width="100%" height={250}>
+              <RechartsLine data={timelineData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                <XAxis dataKey="date" stroke="#94A3B8" fontSize={12} />
+                <YAxis stroke="#94A3B8" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#1E293B',
+                    border: '1px solid #334155',
+                    borderRadius: '8px'
+                  }}
+                />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="success"
+                  name="Succes"
+                  stroke="#10B981"
+                  strokeWidth={2}
+                  dot={{ fill: '#10B981' }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="error"
+                  name="Erreurs"
+                  stroke="#EF4444"
+                  strokeWidth={2}
+                  dot={{ fill: '#EF4444' }}
+                />
+              </RechartsLine>
+            </ResponsiveContainer>
+          ) : (
+            <div className="h-[250px] flex items-center justify-center text-muted-foreground">
+              Aucune donnee temporelle
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Workflows Table */}
+      <Card className="border-border/50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Activity className="h-5 w-5 text-primary" />
+            Workflows n8n
+          </CardTitle>
+          <CardDescription>{workflows.filter(w => w.active).length} actifs sur {workflows.length}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {workflows.map((workflow) => {
+              const wfExecs = executions.filter(e => e.workflowId === workflow.id);
+              const wfSuccess = wfExecs.filter(e => e.status === "success").length;
+              const wfError = wfExecs.filter(e => e.status === "error").length;
+              const wfRate = wfExecs.length > 0 ? ((wfSuccess / wfExecs.length) * 100).toFixed(0) : "-";
+
+              return (
+                <div key={workflow.id} className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-xs font-medium">
-                      {index + 1}
+                    <div className={`w-2 h-2 rounded-full ${workflow.active ? 'bg-emerald-400' : 'bg-gray-500'}`} />
+                    <div>
+                      <p className="font-medium">{workflow.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        Mis a jour: {new Date(workflow.updatedAt).toLocaleDateString('fr-FR')}
+                      </p>
                     </div>
-                    <span className="font-medium">{automation.name}</span>
                   </div>
                   <div className="flex items-center gap-6 text-sm">
                     <span className="text-muted-foreground w-20">
-                      {automation.runs} runs
+                      {wfExecs.length} runs
                     </span>
                     <span className="text-emerald-400 w-16">
-                      {automation.success}%
+                      {wfSuccess} OK
                     </span>
-                    <span className="font-medium w-24 text-right">
-                      {automation.revenue > 0 ? `${automation.revenue.toLocaleString()} EUR` : "-"}
+                    <span className="text-red-400 w-16">
+                      {wfError} err
                     </span>
+                    <Badge variant={workflow.active ? "success" : "secondary"}>
+                      {workflow.active ? "Actif" : "Inactif"}
+                    </Badge>
                   </div>
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
 
-      {/* Additional Metrics */}
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card className="border-border/50">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-purple-500/10">
-                <Repeat className="h-6 w-6 text-purple-400" />
+      {/* Additional Stats from Google Sheets */}
+      {dashboardStats && (
+        <div className="grid gap-4 md:grid-cols-3">
+          <Card className="border-border/50">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="p-3 rounded-xl bg-purple-500/10">
+                  <Users className="h-6 w-6 text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{dashboardStats.totalLeads}</p>
+                  <p className="text-sm text-muted-foreground">Total Leads</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-bold">3.2x</p>
-                <p className="text-sm text-muted-foreground">ROI Automations</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        <Card className="border-border/50">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-emerald-500/10">
-                <ShoppingCart className="h-6 w-6 text-emerald-400" />
+          <Card className="border-border/50">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="p-3 rounded-xl bg-emerald-500/10">
+                  <Target className="h-6 w-6 text-emerald-400" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{dashboardStats.conversionRate}%</p>
+                  <p className="text-sm text-muted-foreground">Taux Conversion</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-bold">156 EUR</p>
-                <p className="text-sm text-muted-foreground">Valeur Moyenne Lead</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
 
-        <Card className="border-border/50">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-3">
-              <div className="p-3 rounded-xl bg-sky-500/10">
-                <Calendar className="h-6 w-6 text-sky-400" />
+          <Card className="border-border/50">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="p-3 rounded-xl bg-sky-500/10">
+                  <DollarSign className="h-6 w-6 text-sky-400" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold">{dashboardStats.revenueThisMonth} EUR</p>
+                  <p className="text-sm text-muted-foreground">Revenue Ce Mois</p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl font-bold">14 jours</p>
-                <p className="text-sm text-muted-foreground">Cycle Vente Moyen</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
