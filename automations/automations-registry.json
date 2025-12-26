@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.5.0",
-  "lastUpdated": "2025-12-23",
+  "version": "1.7.0",
+  "lastUpdated": "2025-12-26",
   "totalCount": 77,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
@@ -639,15 +639,18 @@
     },
     {
       "id": "auto-blog",
-      "name_fr": "Article Blog Auto",
-      "name_en": "Auto Blog Article",
+      "name_fr": "Article Blog + Distribution Multi-Canal",
+      "name_en": "Auto Blog + Multi-Channel Distribution",
       "category": "content",
       "type": "n8n-workflow",
-      "script": "agency/n8n-workflows/blog-article-generator.json",
+      "script": "agency/n8n-workflows/blog-article-multi-channel.json",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
-      "benefit_fr": "Contenu SEO continu",
-      "benefit_en": "Continuous SEO content"
+      "benefit_fr": "SEO + Social en 1 clic",
+      "benefit_en": "SEO + Social in 1 click",
+      "channels": ["website", "facebook", "linkedin"],
+      "description_fr": "Génère article SEO via Claude AI et publie simultanément sur site web + Facebook + LinkedIn",
+      "description_en": "Generates SEO article via Claude AI and publishes simultaneously to website + Facebook + LinkedIn"
     },
     {
       "id": "n8n-workflow",

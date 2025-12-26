@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 14.1 | Date: 2025-12-25 | Session: 94 (COMPLETE)
+## Version: 14.3 | Date: 2025-12-26 | Session: 96 (COMPLETE)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -8,15 +8,15 @@
 
 **Automations Registry:** `automations/automations-registry.json` (77 automations v1.6.0)
 **Dashboard:** https://dashboard.3a-automation.com (Next.js 14 + Google Sheets + n8n API)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-93)
-**Audit Session 84:** `outputs/SESSION84-FORENSIC-AUDIT-2025-12-23.md`
+**Historique Sessions:** `HISTORY.md` (Sessions 0-94)
+**Audit Session 95:** `outputs/SESSION95-N8N-FORENSIC-AUDIT-2025-12-26.md`
 **Dashboard Blueprint:** `outputs/DASHBOARD-BLUEPRINT-2025-12-25.md`
 **Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
 **Shared Components:** `automations/shared-components/` (Voice Widget + WhatsApp generics)
 
 ---
 
-## ETAT ACTUEL (Session 93 - 25/12/2025)
+## ETAT ACTUEL (Session 96 - 26/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
@@ -34,6 +34,90 @@
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
 | llms.txt | v3.3 (77 automations) | ✅ |
+
+### Session 96 - MARKETING REBALANCE - HIDE HOW, SELL WHAT (26/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 96 - MARKETING PROTECTION
+═══════════════════════════════════════════════════════════════════
+
+STRATEGY: "Sell the WHAT + WHY, not the HOW"
+├── Goal: Prevent competitors from copying our technical stack
+├── Remove: Hourly rates, API names, MCP mentions, frequencies
+├── Keep: Value propositions, benefits, partner logos
+└── Principle: Show expertise without revealing implementation
+
+CHANGES APPLIED (32 files modified):
+
+1. PRICING.HTML (FR + EN):
+   ├── Removed: "~3-4h of work", "~7-9h of work", "~14-18h of work"
+   ├── Added: "Fixed project" / "Projet forfaitaire"
+   └── Impact: Competitors can't calculate ~90€/h rate
+
+2. LLMS-FULL.TXT (Complete rewrite v1.1):
+   ├── Removed: "Shopify Partner certifié", "Klaviyo", "GA4" specific mentions
+   ├── Removed: "20h/semaine", "Meta Ads, Google Ads", "TikTok Ads"
+   ├── Removed: "Gemini 3 Pro + Imagen 4 + Veo 3.1" AI model names
+   ├── Removed: "LinkedIn Scraper", "Apify", "fal.ai" tool names
+   ├── Changed: "Grok Voice Telephony" → "Voice Telephony AI"
+   ├── Changed: "WhatsApp" → "Messaging" category
+   └── Abstracted: Partners to "Partenaire certifié email/analytics/e-commerce"
+
+3. AUTOMATIONS.HTML (FR):
+   ├── CinematicAds: Removed "Gemini 3 Pro + Imagen 4 + Veo 3.1"
+   ├── CinematicAds: Removed "Vertex AI + xAI Grok 4.1"
+   ├── Removed: All `<span class="freq">` frequency indicators
+   ├── Changed: "Asset Factory (Dual AI)" → "Asset Factory Multi-AI"
+   └── Abstracted: Technical descriptions to value-focused copy
+
+4. FOOTER ALL PAGES (32 files):
+   ├── Changed: "9 MCPs fonctionnels" → "10+ Partenaires intégrés"
+   ├── Changed: "9 Active MCPs" → "10+ Integrated Partners"
+   ├── Changed: `<span class="tech-badge">MCP</span>` → `<span class="tech-badge">n8n</span>`
+   ├── Changed: "MCPs Actifs" → "Intégrations"
+   ├── Changed: "10+ APIs intégrées" → "24/7 Toujours actif"
+   └── Changed: "APIs intégrées" → "Connecteurs" in about pages
+
+FILES MODIFIED:
+├── landing-page-hostinger/*.html (16 FR pages)
+├── landing-page-hostinger/en/*.html (16 EN pages)
+├── landing-page-hostinger/llms-full.txt
+└── project-templates/n8n-workflows/blog-article-generator-generic.json
+```
+
+### Session 95 - N8N FORENSIC AUDIT + BLOG WORKFLOW FIXES (26/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 95 - N8N AUDIT + FIXES
+═══════════════════════════════════════════════════════════════════
+
+AUDIT RESULTS (20 workflows analyzed):
+├── COMPLETS: 16/20 (80%)
+├── INCOMPLETS: 1/20 (5%)
+├── STUBS: 3/20 (15%) - CinematicAds intentional delegation
+└── Gaps Critiques: 0 ✅
+
+FIXES APPLIED:
+├── blog-article-generator-generic.json: v1.0 → v2.0 (11 nodes)
+│   ├── Added: Save HTML File node
+│   ├── Added: Facebook Page publishing
+│   ├── Added: LinkedIn publishing
+│   ├── Added: Aggregate Results node
+│   └── Full distribution pipeline now complete
+└── blog-multi-channel-cinematicads.json: NEW (11 nodes)
+    ├── CinematicAds branded content generation
+    ├── Claude sonnet-4 for article generation
+    ├── #CinematicAds #AIVideo #VideoMarketing hashtags
+    └── Distribution: Website + Facebook + LinkedIn
+
+WORKFLOW COMPLETENESS MATRIX:
+├── Agency Workflows: 9/10 complets (90%)
+├── Template Workflows: 5/5 complets (100%) ✅ FIXED
+├── Shared Components: 2/2 complets (100%)
+└── CinematicAds: 1/4 complet (stubs intentional)
+
+OUTPUT: outputs/SESSION95-N8N-FORENSIC-AUDIT-2025-12-26.md
+```
 
 ### Session 94 - DASHBOARD COMPLETE + PDF/CSV EXPORT (25/12/2025)
 ```
