@@ -1,6 +1,39 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 96)
+## Document Exécutable - Décembre 2025 (màj Session 97)
 ## Objectif: Premier client payant en 4 semaines
+
+---
+
+## ✅ SESSION 97 COMPLETE: LEAD TRACKING + INVOICE SYSTEM (26/12/2025)
+
+### Session 97 Livrables = 100% COMPLETE
+```
+INVOICE TEMPLATE SYSTEM:
+├── [x] automations/invoicing/invoice-template.html (template professionnel)
+├── [x] automations/invoicing/invoice-generator.cjs (générateur Node.js)
+├── [x] Multi-currency: MAD (DH), EUR (€), USD ($)
+├── [x] Test généré: INV-202512-907.html ✅
+└── [x] .gitignore: automations/invoicing/generated/
+
+LEAD TRACKING INTEGRATION:
+├── [x] script.js: createDashboardLead() ajouté
+├── [x] Dual submission: Form → Apps Script + Dashboard CRM
+├── [x] Non-blocking: Dashboard CRM errors silencieux
+└── [x] Test lead: lead_test_session97 créé ✅
+
+CONVERSION TRACKING VÉRIFIÉ:
+├── [x] Google Sheets API v2: GET requests OK
+├── [x] Dashboard CRM: Leads sheet populated
+└── [x] Pipeline: Landing Page → Google Sheets → Dashboard
+
+DOCUMENTATION MISE À JOUR:
+├── [x] CLAUDE.md v14.5 (Session 97 COMPLETE)
+├── [x] FORENSIC-AUDIT v12.6 (Session 97 additions)
+├── [x] MARKETING-REBALANCE v2.2 (Session 97 complete)
+├── [x] flywheel.md v2.7 (changelog)
+├── [x] mcp-integration.md (Session 97 update)
+└── [x] action-plan.md (this file)
+```
 
 ---
 
@@ -79,20 +112,29 @@ NEXT STEP:
 
 ---
 
-## 🎯 PLAN ACTIONNABLE SESSION 97+
+## 🎯 PLAN ACTIONNABLE SESSION 98+
 
 ### Priorité 1: ACQUISITION (Lead Gen)
 ```
-ACTIONS IMMÉDIATES:
+SESSION 97 COMPLETED:
 ├── [x] LinkedIn Lead Scraper: ACTIF (n8n workflow)
-├── [x] Klaviyo Welcome Series: ACTIF + TESTÉ Session 94
-├── [x] Test campaign: Formulaire site → Klaviyo → n8n ✅ VÉRIFIÉ Session 96
-├── [ ] Déployer google-apps-script-form-handler-v2.gs
-└── [ ] Premier outreach: 10 prospects e-commerce Shopify
+├── [x] Klaviyo Welcome Series: ACTIF + TESTÉ
+├── [x] Lead Tracking: Landing Page → Dashboard CRM ✅ Session 97
+├── [x] Invoice System: Multi-currency MAD/EUR/USD ✅ Session 97
+└── [x] Conversion Tracking: Google Sheets API LIVE ✅ Session 97
 
-BLOCKERS:
-├── ❌ Shopify dev store: Non créé (partners.shopify.com)
-└── ⚠️ WhatsApp Business: Configuration Meta requise
+ACTIONS SESSION 98:
+├── [ ] Déployer google-apps-script-form-handler-v2.gs (production)
+├── [ ] Premier outreach: 10 prospects e-commerce Shopify
+├── [ ] Test invoice generation: Premier devis client
+└── [ ] Analytics: Vérifier leads entrants Dashboard
+
+BLOCKERS HUMAINS (Requis pour débloquer):
+├── ❌ Shopify dev store: partners.shopify.com (démos)
+├── ❌ Twilio credentials: Console Twilio (Grok Voice Phone)
+├── ❌ WhatsApp Business: Configuration Meta requise
+├── ❌ Meta Pixel: Facebook Business Manager
+└── ❌ LinkedIn Partner ID: LinkedIn Marketing Solutions
 ```
 
 ### Priorité 2: STRATÉGIE PARTENAIRE (Session 93)

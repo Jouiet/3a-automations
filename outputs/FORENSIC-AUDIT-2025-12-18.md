@@ -1,14 +1,14 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-26 | Version: 12.5 (Màj Session 97 - Blog Article #2 Voice AI)
+## Date: 2025-12-26 | Version: 12.6 (Màj Session 97 - Lead Tracking + Invoice System)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (26 Dec 2025 - Session 96 Part 4)
+# SECTION 0: ÉTAT ACTUEL (26 Dec 2025 - Session 97 Complete)
 
 ## ✅ ÉTAT VÉRIFIÉ: 78 AUTOMATIONS + 11 MCPs FONCTIONNELS
 
-### Résultat Final Vérifié (Session 96 Part 4)
+### Résultat Final Vérifié (Session 97 Complete)
 ```
 Registry v1.8.0:    78 automations client-facing
 HTML Pages:         78 automations (synced - 28 pages updated)
@@ -16,13 +16,38 @@ llms.txt:           78 automatisations (v4.0 - Voice AI Product)
 MCPs:               11/13 fonctionnels (85%)
 n8n Workflows:      10/10 ACTIFS (100%)
 Dashboard:          https://dashboard.3a-automation.com LIVE
-Dashboard Analytics: REAL DATA (n8n + Recharts) - Session 97
+Dashboard Analytics: REAL DATA (n8n + Recharts)
+Lead Tracking:      ✅ Landing Page → Dashboard CRM INTÉGRÉ (Session 97)
+Invoice System:     ✅ Multi-currency MAD/EUR/USD (Session 97)
 Voice Widget Web:   OPÉRATIONNEL + PRODUIT VENDABLE (Web Speech API)
 Grok Voice Phone:   BLOQUÉ (Twilio credentials manquants)
 CinematicAds:       EXTERNAL (cinematicads.studio)
 Schema.org:         SoftwareApplication ajouté pour Voice AI
 
 Source de vérité: automations/automations-registry.json
+```
+
+### Session 97 Additions (26/12/2025)
+```
+INVOICE TEMPLATE SYSTEM:
+├── automations/invoicing/invoice-template.html (template professionnel)
+├── automations/invoicing/invoice-generator.cjs (générateur Node.js)
+├── Multi-currency: MAD (DH), EUR (€), USD ($)
+├── Test généré: INV-202512-907.html ✅
+└── .gitignore: automations/invoicing/generated/
+
+LEAD TRACKING INTEGRATION:
+├── script.js: createDashboardLead() ajouté
+├── Dual submission: Form → Apps Script + Dashboard CRM
+├── Google Sheets API: GET requests (CORS-safe)
+├── Test lead: lead_test_session97 créé ✅
+└── script.min.js régénéré (12KB)
+
+CONVERSION TRACKING VÉRIFIÉ:
+├── Landing Page Apps Script: ✅ LIVE (v2.0)
+├── Dashboard CRM Apps Script: ✅ LIVE
+├── CRUD Operations: CREATE/READ/UPDATE/DELETE
+└── Leads automatiquement sync avec Dashboard
 ```
 
 ### Catégories (78 automations - Registry v1.8.0)
