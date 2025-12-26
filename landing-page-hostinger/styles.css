@@ -5136,14 +5136,14 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
 .pricing-footer { padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-2xl); }
 .pricing-footer .btn { width: 100%; justify-content: center; }
 
-.retainer-section { padding: var(--spacing-4xl) 0; background: rgba(79, 186, 241, 0.03); }
+.retainer-section { padding: var(--spacing-2xl) 0; background: rgba(79, 186, 241, 0.03); }
 
 /* Period Selector (Monthly/Annual toggle) */
 .period-selector {
   display: flex;
   justify-content: center;
   gap: var(--spacing-xs);
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-lg);
   background: rgba(25, 30, 53, 0.6);
   border-radius: var(--radius-full);
   padding: var(--spacing-xs);
@@ -5179,9 +5179,9 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
 
 .retainer-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xl);
-  max-width: 1000px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -5195,7 +5195,7 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
   background: rgba(25, 30, 53, 0.6);
   border: 1px solid rgba(79, 186, 241, 0.15);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-xl) var(--spacing-lg);
   text-align: center;
   position: relative;
   transition: all 0.3s ease;
@@ -5215,9 +5215,9 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
   text-transform: uppercase; letter-spacing: 0.05em;
 }
 
-.retainer-card h3 { font-size: 1.25rem; color: var(--text-light); margin-bottom: var(--spacing-md); }
-.retainer-price { margin-bottom: var(--spacing-sm); }
-.retainer-price .price-amount { font-size: 2.5rem; }
+.retainer-card h3 { font-size: 1.1rem; color: var(--text-light); margin-bottom: var(--spacing-sm); }
+.retainer-price { margin-bottom: var(--spacing-xs); }
+.retainer-price .price-amount { font-size: 2rem; }
 .price-period { color: var(--text-secondary); font-size: 1rem; }
 .retainer-annual {
   background: rgba(79, 186, 241, 0.1);
@@ -5237,7 +5237,7 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
 }
 .retainer-card ul li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); }
 .retainer-rate { color: var(--text-muted); font-size: 0.8rem; font-style: italic; }
-.retainer-note { text-align: center; color: var(--text-secondary); font-size: 0.875rem; margin-top: var(--spacing-xl); }
+.retainer-note { text-align: center; color: var(--text-secondary); font-size: 0.875rem; margin-top: var(--spacing-md); }
 
 .voice-section { padding: var(--spacing-3xl) 0; }
 .voice-card {
