@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "lastUpdated": "2025-12-26",
-  "totalCount": 77,
+  "totalCount": 78,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -57,7 +57,7 @@
     "voice-ai": {
       "name_fr": "Voice AI & Téléphonie",
       "name_en": "Voice AI & Telephony",
-      "count": 1
+      "count": 2
     }
   },
   "automations": [
@@ -957,16 +957,28 @@
       "benefit_en": "-30% no-shows"
     },
     {
+      "id": "voice-ai-web-widget",
+      "name_fr": "Assistant Vocal IA Web",
+      "name_en": "AI Voice Web Assistant",
+      "category": "voice-ai",
+      "type": "web-component",
+      "script": "shared-components/voice-widget/voice-widget.js",
+      "frequency_fr": "24/7 disponible",
+      "frequency_en": "24/7 available",
+      "benefit_fr": "Qualification leads + RDV auto par la voix",
+      "benefit_en": "Lead qualification + auto booking by voice"
+    },
+    {
       "id": "grok-voice-telephony",
-      "name_fr": "Grok Voice Téléphonie",
-      "name_en": "Grok Voice Telephony",
+      "name_fr": "Assistant Telephonique IA",
+      "name_en": "AI Phone Assistant",
       "category": "voice-ai",
       "type": "n8n-workflow",
       "script": "agency/n8n-workflows/grok-voice-telephony.json",
       "frequency_fr": "Appels entrants",
       "frequency_en": "Inbound calls",
-      "benefit_fr": "Réservation par téléphone IA ($0.05/min)",
-      "benefit_en": "AI phone booking ($0.05/min)"
+      "benefit_fr": "Reservation par telephone automatique",
+      "benefit_en": "Automatic phone booking"
     },
     {
       "id": "linkedin-lead-scraper",

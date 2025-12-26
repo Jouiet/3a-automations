@@ -138,16 +138,21 @@ const KNOWLEDGE_BASE = {
 
   // === AUTOMATISATIONS DISPONIBLES ===
   automations: {
-    total: 77,
+    total: 78,
     categories: {
-      leadGen: ['Sync Meta/Google/TikTok Leads', 'LinkedIn scraping', 'Google Maps sourcing', 'Lead scoring', 'Geo-Segmentation', 'Voice AI Booking'],
+      leadGen: ['Sync Meta/Google/TikTok Leads', 'LinkedIn scraping', 'Google Maps sourcing', 'Lead scoring', 'Geo-Segmentation'],
       email: ['Welcome series', 'Abandon panier', 'Post-achat', 'Winback', 'Browse abandonment', 'VIP Tiers'],
       shopify: ['Enrichissement produits', 'Google Shopping', 'Collections', 'Webhooks Loyalty', 'Audit Store'],
       analytics: ['Dashboard Looker', 'Rapport GA4', 'Alertes Stock', 'Pixels vérification', 'Projections'],
       seo: ['Alt text auto', 'Meta tags', 'Schema.org', 'Sitemap images', 'llms.txt AEO'],
       content: ['Vidéo Promo Produit', 'Cart Recovery Video', 'Feed Google Shopping', 'Article Blog Auto'],
       whatsapp: ['WhatsApp Booking Confirmation', 'WhatsApp Reminders'],
-      voiceAI: ['Grok Voice Telephony']
+      voiceAI: ['Assistant Vocal IA Web (24/7)', 'Assistant Telephonique IA']
+    },
+    voiceAIProduct: {
+      description: 'Assistant vocal IA deployable pour vos clients',
+      features: ['Reconnaissance vocale', 'Reponses instantanees', 'Prise RDV auto', 'Qualification leads', 'Disponible 24/7'],
+      included: 'Setup inclus dans tous les packs clients'
     }
   },
 
