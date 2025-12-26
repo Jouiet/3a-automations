@@ -1,0 +1,422 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2025-12-26",
+    "lastUpdated": "2025-12-26",
+    "purpose": "Knowledge Base for Dial.Plus AI Phone Agent",
+    "language": "fr",
+    "company": "3A Automation"
+  },
+
+  "identity": {
+    "name": "3A Automation",
+    "fullName": "3A Automation Agency",
+    "meaning": "Automation, Analytics, AI",
+    "tagline": "Vos opérations automatisées. Votre stratégie libérée.",
+    "type": "Consultant solo expert en automatisation marketing",
+    "founder": "Jonathan",
+    "email": "contact@3a-automation.com",
+    "website": "https://3a-automation.com",
+    "phone": "+1 775 254 7428",
+    "dashboard": "https://dashboard.3a-automation.com"
+  },
+
+  "positioning": {
+    "target": "PME et e-commerce avec CA mensuel de 10k€ à 500k€",
+    "differentiator": "Consultant solo expert - relation directe, pas d'agence, prix justes",
+    "value_proposition": "Automatiser les tâches répétitives pour libérer votre temps stratégique",
+    "approach": "Tout par écrit - pas d'appels obligatoires sauf si vous préférez"
+  },
+
+  "pricing": {
+    "currency": "EUR",
+    "setup_packs": {
+      "quick_win": {
+        "name": "Quick Win",
+        "price": 390,
+        "time_hours": "3-4h",
+        "includes": [
+          "Audit express de vos processus",
+          "1 flow optimisé et déployé",
+          "Documentation PDF complète"
+        ],
+        "ideal_for": "Tester notre approche et voir des résultats rapides"
+      },
+      "essentials": {
+        "name": "Essentials",
+        "price": 790,
+        "time_hours": "7-9h",
+        "includes": [
+          "Audit complet de vos systèmes",
+          "3 flows automatisés",
+          "Tests A/B configurés",
+          "Support 30 jours inclus"
+        ],
+        "ideal_for": "Démarrer sérieusement l'automatisation"
+      },
+      "growth": {
+        "name": "Growth",
+        "price": 1399,
+        "time_hours": "14-18h",
+        "includes": [
+          "5 flows complets interconnectés",
+          "Segmentation RFM avancée",
+          "Dashboard personnalisé",
+          "Support 60 jours inclus"
+        ],
+        "ideal_for": "Transformation complète de vos opérations"
+      }
+    },
+    "retainers": {
+      "maintenance": {
+        "name": "Maintenance",
+        "price_monthly": 290,
+        "hours_included": 3,
+        "includes": [
+          "Monitoring quotidien",
+          "Corrections et ajustements",
+          "Rapport mensuel de performance"
+        ]
+      },
+      "optimization": {
+        "name": "Optimization",
+        "price_monthly": 490,
+        "hours_included": 5,
+        "includes": [
+          "Tout Maintenance +",
+          "Tests A/B continus",
+          "Optimisations proactives",
+          "Support prioritaire"
+        ]
+      }
+    },
+    "annual_discount": "2 mois gratuits (10 mois pour 12)",
+    "engagement": "Résiliable à tout moment. La désactivation prend effet à la fin de la période déjà payée."
+  },
+
+  "free_offer": {
+    "name": "Audit Gratuit",
+    "description": "Analyse complète de vos processus actuels",
+    "deliverable": "Rapport PDF avec 3 recommandations prioritaires",
+    "delay": "24-48h après réception du formulaire",
+    "how_to_get": "Remplir le formulaire sur 3a-automation.com/contact.html ou envoyer un email avec le lien de votre site"
+  },
+
+  "automations": {
+    "total_count": 77,
+    "categories": {
+      "lead_generation": {
+        "name": "Lead Generation & Acquisition",
+        "count": 20,
+        "examples": [
+          "Sync Meta/Google/TikTok Leads",
+          "LinkedIn scraping B2B",
+          "Google Maps sourcing local",
+          "Lead scoring automatique",
+          "Geo-segmentation",
+          "Voice AI Booking"
+        ]
+      },
+      "email_marketing": {
+        "name": "Email Marketing (CRM)",
+        "count": 9,
+        "examples": [
+          "Welcome series (taux ouverture 40-50%)",
+          "Abandoned cart (récupère 10-15% des paniers)",
+          "Post-purchase (fidélisation 25-35%)",
+          "Win-back (réactivation 5-10%)",
+          "VIP Tiers (+30% LTV)",
+          "Browse abandonment"
+        ]
+      },
+      "shopify": {
+        "name": "Shopify Admin",
+        "count": 13,
+        "examples": [
+          "Enrichissement produits automatique",
+          "Google Shopping attributes",
+          "Gestion collections dynamiques",
+          "Installation GTM complète",
+          "Webhooks loyalty",
+          "Audit store complet"
+        ]
+      },
+      "analytics": {
+        "name": "Analytics & Reporting",
+        "count": 9,
+        "examples": [
+          "Dashboard Looker Studio",
+          "Rapport sources GA4",
+          "Alertes stock bas",
+          "Projections marges",
+          "Vérification pixels"
+        ]
+      },
+      "seo_content": {
+        "name": "SEO & Contenu",
+        "count": 9,
+        "examples": [
+          "Correction alt text images (+20% trafic)",
+          "Meta tags automatiques",
+          "Schema.org produits",
+          "llms.txt pour IA (AEO)"
+        ]
+      },
+      "video_content": {
+        "name": "Contenu & Vidéo",
+        "count": 8,
+        "examples": [
+          "Vidéo promo produit",
+          "Vidéo cart recovery",
+          "Feed Google Shopping",
+          "Articles blog automatiques"
+        ]
+      },
+      "whatsapp": {
+        "name": "WhatsApp Business",
+        "count": 2,
+        "examples": [
+          "Confirmation de réservation WhatsApp",
+          "Rappels automatiques (24h + 1h avant)"
+        ]
+      },
+      "voice_ai": {
+        "name": "Voice AI & Téléphonie",
+        "count": 1,
+        "examples": [
+          "Assistant vocal téléphonique pour réservations"
+        ]
+      },
+      "ai_avatar": {
+        "name": "AI Avatar & Influencer",
+        "count": 2,
+        "examples": [
+          "Génération avatars IA",
+          "Vidéos influenceur virtuel"
+        ]
+      },
+      "cinematicads": {
+        "name": "CinematicAds AI (Partenaire)",
+        "count": 4,
+        "external": true,
+        "partner_url": "https://cinematicads.studio",
+        "examples": [
+          "Génération vidéos publicitaires IA"
+        ]
+      }
+    }
+  },
+
+  "industries_served": {
+    "ecommerce": {
+      "keywords": ["e-commerce", "ecommerce", "boutique", "shopify", "woocommerce", "prestashop", "vente en ligne"],
+      "services": [
+        "Abandon de panier automatisé (récupère 5-15% des ventes perdues)",
+        "Welcome series pour nouveaux clients",
+        "Post-purchase flows pour fidélisation",
+        "Back-in-stock alerts",
+        "Segmentation RFM automatique",
+        "Dashboard performance temps réel"
+      ],
+      "roi_reference": "ROI moyen email marketing: 42€ pour 1€ investi (source: Klaviyo 2025)"
+    },
+    "b2b": {
+      "keywords": ["b2b", "entreprise", "professionnel", "services", "consulting"],
+      "services": [
+        "Lead scoring automatique",
+        "Nurturing sequences",
+        "CRM sync (HubSpot, Pipedrive, Salesforce)",
+        "Qualification automatique",
+        "Alertes commerciales",
+        "Reporting pipeline"
+      ],
+      "roi_reference": "Réduction typique 60% du temps de qualification leads"
+    },
+    "btp": {
+      "keywords": ["btp", "construction", "bâtiment", "chantier", "artisan", "rénovation"],
+      "services": [
+        "Capture leads chantiers (Google Maps, annuaires)",
+        "Relances automatiques devis",
+        "Suivi clients post-travaux",
+        "Demandes d'avis automatisées"
+      ]
+    },
+    "saas": {
+      "keywords": ["saas", "software", "application", "startup", "tech"],
+      "services": [
+        "Onboarding automatisé",
+        "Churn prevention",
+        "Feature adoption emails",
+        "NPS automatique"
+      ]
+    },
+    "services": {
+      "keywords": ["service", "prestataire", "consultant", "agence", "freelance"],
+      "services": [
+        "Automatisation prospection",
+        "Nurturing leads longs cycles",
+        "Rappels rendez-vous",
+        "Demandes de témoignages"
+      ]
+    }
+  },
+
+  "process": {
+    "steps": [
+      {
+        "number": 1,
+        "name": "Formulaire Diagnostic",
+        "duration": "5-10 minutes",
+        "description": "Vous remplissez un court formulaire sur votre activité et vos besoins"
+      },
+      {
+        "number": 2,
+        "name": "Rapport PDF",
+        "duration": "24-48h",
+        "description": "Je vous envoie un rapport avec 3 recommandations prioritaires"
+      },
+      {
+        "number": 3,
+        "name": "Proposition",
+        "duration": "Google Docs partagé",
+        "description": "Proposition détaillée avec prix exact et planning"
+      },
+      {
+        "number": 4,
+        "name": "Livraison",
+        "duration": "Selon le pack choisi",
+        "description": "Implémentation complète + documentation + support"
+      }
+    ],
+    "no_calls_required": true,
+    "guarantee": "Satisfait ou on itère jusqu'à ce que ça marche"
+  },
+
+  "faq": {
+    "delai": {
+      "question": "Quels sont les délais de livraison ?",
+      "answer": "Les packs Setup sont livrés en 1-3 semaines selon complexité. L'audit gratuit est envoyé sous 24-48h."
+    },
+    "garantie": {
+      "question": "Y a-t-il une garantie ?",
+      "answer": "Si les automatisations ne fonctionnent pas comme prévu, je corrige jusqu'à satisfaction. Pas de limite de révisions."
+    },
+    "outils": {
+      "question": "Quels outils utilisez-vous ?",
+      "answer": "Klaviyo, Shopify, GA4, n8n, Google Sheets. Je m'adapte à vos outils existants."
+    },
+    "difference": {
+      "question": "Quelle différence avec une agence ?",
+      "answer": "Consultant solo = pas de commercial, pas de junior, vous travaillez directement avec l'expert. Prix justes, pas de marge agence."
+    },
+    "engagement": {
+      "question": "Y a-t-il un engagement ?",
+      "answer": "Les packs Setup sont one-time, pas d'engagement. Les retainers sont mensuels, résiliables à tout moment."
+    },
+    "taille": {
+      "question": "Pour quelle taille d'entreprise ?",
+      "answer": "PME de 10k€ à 500k€ de CA mensuel. En dessous, l'audit gratuit peut déjà beaucoup aider."
+    },
+    "secteur": {
+      "question": "Travaillez-vous dans mon secteur ?",
+      "answer": "Tous secteurs: e-commerce, B2B, SaaS, services, BTP, retail. L'automation s'adapte à votre contexte."
+    },
+    "resultats": {
+      "question": "Quels résultats attendre ?",
+      "answer": "Exemples typiques: +15% récupération paniers abandonnés, ROI 42:1 email marketing, -60% temps qualification leads."
+    },
+    "technique": {
+      "question": "Dois-je avoir des compétences techniques ?",
+      "answer": "Non, je gère tout. Vous recevez une documentation claire et gardez le contrôle sans les maux de tête."
+    }
+  },
+
+  "objection_handling": {
+    "trop_cher": {
+      "objection": "C'est trop cher",
+      "response": "Les prix peuvent sembler élevés mais le ROI est rapide. L'email marketing génère en moyenne 42€ pour 1€ investi. Commençons par l'audit gratuit pour voir le potentiel concret pour votre business."
+    },
+    "pas_technique": {
+      "objection": "Je ne suis pas technique",
+      "response": "Vous n'avez rien à faire de technique. Je gère tout et je vous livre une documentation claire. Vous gardez le contrôle sans les maux de tête."
+    },
+    "pas_temps": {
+      "objection": "Je n'ai pas le temps",
+      "response": "Justement ! L'objectif est de vous faire gagner du temps. Les automatisations tournent 24/7 sans vous. Une fois en place, c'est du temps libéré."
+    },
+    "deja_teste": {
+      "objection": "J'ai déjà essayé des automatisations",
+      "response": "Beaucoup ont essayé seuls ou avec des outils basiques. La différence c'est l'expertise et la stratégie derrière les outils. Commençons par l'audit pour voir ce qui peut être amélioré."
+    },
+    "pas_urgent": {
+      "objection": "Ce n'est pas urgent",
+      "response": "Chaque jour sans automatisation = opportunités perdues. Paniers abandonnés non relancés, leads qui refroidissent, clients qui partent chez les concurrents. L'audit gratuit vous montrera l'impact."
+    },
+    "concurrent_moins_cher": {
+      "objection": "J'ai trouvé moins cher ailleurs",
+      "response": "Je suis consultant solo, pas une agence. Mes prix reflètent le travail réel. Moins cher signifie souvent junior ou templates génériques. Avec moi, c'est sur-mesure et expertise directe."
+    }
+  },
+
+  "booking": {
+    "available_days": ["lundi", "mardi", "mercredi", "jeudi", "vendredi"],
+    "available_hours": "9h-18h (heure de Paris)",
+    "duration_minutes": 30,
+    "booking_url": "https://3a-automation.com/booking.html",
+    "required_info": ["nom", "email", "créneau souhaité"],
+    "confirmation": "Confirmation par email + WhatsApp"
+  },
+
+  "call_flow": {
+    "greeting": "Bonjour ! Je suis l'assistant de 3A Automation. Comment puis-je vous aider aujourd'hui ?",
+    "qualification_questions": [
+      "Quel est votre secteur d'activité ?",
+      "Quel est votre besoin principal ?",
+      "Quel est votre CA mensuel approximatif ?"
+    ],
+    "next_steps": [
+      "Proposer l'audit gratuit",
+      "Prendre rendez-vous si intéressé",
+      "Envoyer le formulaire de contact par email/WhatsApp"
+    ],
+    "closing": "Merci pour votre appel ! Vous recevrez un email de confirmation dans les prochaines minutes."
+  },
+
+  "technical_stack": {
+    "integrations": [
+      "Klaviyo (Email Marketing)",
+      "Shopify (E-commerce)",
+      "Google Analytics 4",
+      "n8n (Workflow Automation)",
+      "Google Sheets (Database)",
+      "WhatsApp Business API",
+      "Meta Ads API",
+      "Google Ads API",
+      "TikTok Ads API"
+    ],
+    "mcps_configured": 11,
+    "n8n_workflows_active": 10
+  },
+
+  "contact_info": {
+    "email": "contact@3a-automation.com",
+    "website": "https://3a-automation.com",
+    "booking": "https://3a-automation.com/booking.html",
+    "pricing": "https://3a-automation.com/pricing.html",
+    "dashboard": "https://dashboard.3a-automation.com"
+  },
+
+  "voice_agent_instructions": {
+    "tone": "Professionnel mais accessible, enthousiaste sans être pushy",
+    "language": "Français, vouvoiement",
+    "max_response_length": "2-3 phrases maximum par réponse",
+    "always_offer": "Proposer l'audit gratuit comme prochaine étape",
+    "never_do": [
+      "Ne jamais inventer de prix ou de fonctionnalités",
+      "Ne jamais promettre de résultats garantis",
+      "Ne jamais critiquer les concurrents"
+    ],
+    "redirect_to_human": "Si question complexe ou demande de devis personnalisé, proposer de prendre rendez-vous avec Jonathan"
+  }
+}
