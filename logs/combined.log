@@ -6,3 +6,11 @@
 2025-12-25T12:01:02.621Z [[32minfo[39m]: Starting Gemini MCP Server...
 2025-12-25T12:01:02.621Z [[32minfo[39m]: Gemini MCP Server started successfully
 2025-12-25T12:01:02.632Z [[32minfo[39m]: Handling list_tools request
+2025-12-26T23:34:21.568Z [[32minfo[39m]: Starting Gemini MCP Server via CLI...
+2025-12-26T23:34:21.572Z [[32minfo[39m]: Gemini service initialized
+2025-12-26T23:34:21.579Z [[32minfo[39m]: Tools initialized
+2025-12-26T23:34:21.579Z [[32minfo[39m]: Gemini MCP Server initialized
+2025-12-26T23:34:39.992Z [[32minfo[39m]: Gemini API key validation successful
+2025-12-26T23:34:39.993Z [[32minfo[39m]: Starting Gemini MCP Server...
+2025-12-26T23:34:39.993Z [[32minfo[39m]: Gemini MCP Server started successfully
+2025-12-26T23:34:40.008Z [[32minfo[39m]: Handling list_tools request
