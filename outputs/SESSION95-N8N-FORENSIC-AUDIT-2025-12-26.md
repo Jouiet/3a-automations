@@ -386,7 +386,7 @@ Implementation:
 |----------|------|-------|--------|-------|
 | ai-avatar-generator | Agency | 10 | ✅ COMPLET | 100% |
 | ai-talking-video | Agency | 8+ | ✅ COMPLET | 100% |
-| blog-article-generator | Agency | 4 | ❌ OBSOLETE | 40% |
+| ~~blog-article-generator~~ | Agency | 4 | 🗑️ SUPPRIMÉ | N/A |
 | blog-article-multi-channel | Agency | 11 | ✅ COMPLET | 100% |
 | email-outreach-sequence | Agency | 7 | ✅ COMPLET | 100% |
 | grok-voice-telephony | Agency | 8+ | ✅ COMPLET | 100% |
@@ -451,7 +451,7 @@ La majorite des workflows n8n sont **COMPLETS et fonctionnels**.
 2. ✅ **blog-multi-channel-cinematicads.json CREE** - Workflow CinematicAds branded
 
 ### ACTIONS OPTIONNELLES
-1. 🧹 **Supprimer blog-article-generator.json obsolete** - Cleanup (non bloquant)
+1. ✅ **blog-article-generator.json SUPPRIMÉ** - Cleanup Session 96 (26/12/2025)
 
 ---
 

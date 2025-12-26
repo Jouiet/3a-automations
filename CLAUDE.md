@@ -98,6 +98,37 @@ FILES MODIFIED:
 └── project-templates/n8n-workflows/blog-article-generator-generic.json
 ```
 
+### Session 96 Part 2 - LEAD PIPELINE VERIFICATION (26/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 96 - PIPELINE VERIFICATION
+═══════════════════════════════════════════════════════════════════
+
+PIPELINE TESTED:
+├── ✅ n8n Webhook: POST /webhook/subscribe/new → 200 OK
+├── ✅ Klaviyo Profile: Created with welcome_series_status=active
+├── ✅ Welcome Series Event: Triggered (5 emails programmed)
+└── ✅ Full pipeline: Form → Script → n8n → Klaviyo VERIFIED
+
+FILES CREATED:
+├── automations/generic/forms/google-apps-script-form-handler-v2.gs
+│   ├── n8n webhook integration
+│   ├── Email notification (HTML + plain text)
+│   ├── Google Sheets backup
+│   └── Slack notification (optional)
+├── scripts/verify-lead-pipeline.cjs
+│   ├── Automated pipeline verification
+│   ├── Creates test profile → verifies Klaviyo → cleans up
+│   └── Run: node scripts/verify-lead-pipeline.cjs
+
+CLEANUP:
+└── ✅ blog-article-generator.json DELETED (obsolete, replaced by multi-channel)
+
+NEXT STEPS:
+├── [ ] Deploy v2.gs to Google Apps Script
+└── [ ] Replace form action URL in HTML pages
+```
+
 ### Session 95 - N8N FORENSIC AUDIT + BLOG WORKFLOW FIXES (26/12/2025)
 ```
 ═══════════════════════════════════════════════════════════════════

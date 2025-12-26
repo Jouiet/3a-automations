@@ -57,15 +57,38 @@ VÉRIFICATIONS:
 
 ---
 
-## 🎯 PLAN ACTIONNABLE SESSION 95+
+## ✅ SESSION 96 COMPLETE: PIPELINE VERIFICATION (26/12/2025)
+
+### Lead Pipeline = 100% VERIFIED
+```
+TEST RESULTS (26/12/2025):
+├── ✅ n8n Webhook: WORKING (POST /webhook/subscribe/new)
+├── ✅ Klaviyo Profile: CREATED avec welcome_series_status=active
+├── ✅ Welcome Series Event: TRIGGERED (5 emails programmés)
+└── ✅ Pipeline complet: Form → Script → n8n → Klaviyo
+
+FICHIERS CRÉÉS:
+├── automations/generic/forms/google-apps-script-form-handler-v2.gs
+│   └── Intégration n8n + notification email + backup Sheets
+└── scripts/verify-lead-pipeline.cjs
+    └── Script de vérification automatique du pipeline
+
+NEXT STEP:
+└── [ ] Déployer v2 sur Google Apps Script (remplacer l'ancien)
+```
+
+---
+
+## 🎯 PLAN ACTIONNABLE SESSION 97+
 
 ### Priorité 1: ACQUISITION (Lead Gen)
 ```
 ACTIONS IMMÉDIATES:
 ├── [x] LinkedIn Lead Scraper: ACTIF (n8n workflow)
 ├── [x] Klaviyo Welcome Series: ACTIF + TESTÉ Session 94
-├── [ ] Premier outreach: 10 prospects e-commerce Shopify
-└── [ ] Test campaign: Formulaire site → Klaviyo → n8n
+├── [x] Test campaign: Formulaire site → Klaviyo → n8n ✅ VÉRIFIÉ Session 96
+├── [ ] Déployer google-apps-script-form-handler-v2.gs
+└── [ ] Premier outreach: 10 prospects e-commerce Shopify
 
 BLOCKERS:
 ├── ❌ Shopify dev store: Non créé (partners.shopify.com)
