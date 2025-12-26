@@ -1,22 +1,24 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-23 | Version: 11.1 (Màj Session 83 - KB & Prompts Optimization)
+## Date: 2025-12-26 | Version: 12.2 (Màj Session 96 - Voice AI Status + Geographic Cleanup)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (23 Dec 2025 - Session 83)
+# SECTION 0: ÉTAT ACTUEL (26 Dec 2025 - Session 96)
 
-## ✅ ÉTAT VÉRIFIÉ: 77 AUTOMATIONS + 9 MCPs FONCTIONNELS
+## ✅ ÉTAT VÉRIFIÉ: 77 AUTOMATIONS + 11 MCPs FONCTIONNELS
 
-### Résultat Final Vérifié (Session 83)
+### Résultat Final Vérifié (Session 96)
 ```
-Registry v1.5.0:    77 automations client-facing
-HTML Pages:         77 automations (synced - Session 83)
-llms.txt:           77 automatisations (v3.2)
-MCPs:               9/9 fonctionnels (factuel, vérifié)
-Knowledge Base:     77 automations (knowledge-base.js + knowledge.json)
-Voice Widget:       77 automations (FR + EN)
-CinematicAds:       Prompts optimisés 2025 (Gemini 3, Imagen 4, Veo 3)
+Registry v1.6.0:    77 automations client-facing
+HTML Pages:         77 automations (synced)
+llms.txt:           77 automatisations (v3.3)
+MCPs:               11/13 fonctionnels (85%)
+n8n Workflows:      10/10 ACTIFS (100%)
+Dashboard:          https://dashboard.3a-automation.com LIVE
+Voice Widget Web:   OPÉRATIONNEL (Web Speech API, 33 keywords)
+Grok Voice Phone:   BLOQUÉ (Twilio credentials manquants)
+CinematicAds:       EXTERNAL (cinematicads.studio)
 
 Source de vérité: automations/automations-registry.json
 ```
@@ -35,7 +37,7 @@ WhatsApp Business:               2
 Voice AI (Grok):                 1
 ```
 
-### MCPs Fonctionnels (9/9 - Vérifié Session 83)
+### MCPs Fonctionnels (11/13 - Vérifié Session 96)
 ```
 ✅ chrome-devtools    npx, debug browser
 ✅ playwright         npx, browser automation
@@ -46,9 +48,11 @@ Voice AI (Grok):                 1
 ✅ google-analytics   Service Account JSON
 ✅ google-sheets      Service Account JSON
 ✅ apify              token présent
+✅ n8n                API key + 10/10 workflows ACTIFS (100%)
+✅ claude-mcp         Package 2.4.1 installé
 
 ❌ shopify            PLACEHOLDER (nécessite Dev Store)
-✅ n8n                API key + 8/9 workflows ACTIFS (88%) Session 89
+❌ twilio             MANQUANT (bloqueur Grok Voice Phone)
 ```
 
 ### Audits Passés (Session 83 - Ultra Forensic)
@@ -4216,8 +4220,75 @@ Tokens exposés dans documentation: 0
 
 ---
 
-**FIN DE L'AUDIT FORENSIQUE v12.0**
+# SECTION 101: SESSION 96 - VOICE AI STATUS + GEOGRAPHIC CLEANUP (26/12/2025)
 
+## Voice AI - État Factuel
+
+### ✅ Voice Widget Web (OPÉRATIONNEL)
+```
+Technologie:     Web Speech API (gratuit, natif browser)
+Fichiers:        landing-page-hostinger/voice-assistant/voice-widget.js
+                 landing-page-hostinger/voice-assistant/voice-widget-en.js
+Status:          LIVE sur 28 pages
+Keywords:        33 (FR + EN)
+Fonctionnalités: Reconnaissance vocale, synthèse vocale, booking flow
+Booking:         Google Apps Script intégré
+```
+
+### ❌ Grok Voice Telephony (BLOQUÉ - Twilio manquant)
+```
+Workflow n8n:    automations/clients/workflows-n8n/grok-voice-telephony.json
+xAI API:         ✅ TESTÉ OK (grok-3-mini, 11 modèles)
+Twilio:          ❌ CREDENTIALS MANQUANTS (Account SID + Auth Token)
+Business Model:  PRODUIT À VENDRE aux clients (pas usage interne)
+                 → Chaque client = son propre numéro + agent configuré
+Usage interne:   Dial.Plus (+1 775 254 7428) pour 3A uniquement
+```
+
+## Modifications Session 96
+
+### Pages pricing.html (FR + EN)
+```
+✅ SUPPRIMÉ:  Section "Processus" (4 cards process)
+✅ MODIFIÉ:   Politique engagement
+   AVANT:    "Engagement minimum 3 mois mensuel, 12 mois annuel"
+   APRÈS:    "Résiliable à tout moment. La désactivation prend effet
+              à la fin de la période déjà payée."
+```
+
+### Geographic Cleanup (18 pages)
+```
+SUPPRIMÉ:    Mentions spécifiques Maghreb/France de 18 pages HTML
+RAISON:      Ciblage international, éviter limitations géographiques
+CONSERVÉ:    Support multidevise (EUR/USD/MAD) sur pricing
+```
+
+### Credentials API Vérifiés (.env)
+```
+✅ ANTHROPIC_API_KEY    Présent
+✅ XAI_API_KEY          Présent + Testé OK
+✅ SHOPIFY_API_KEY      Présent
+✅ KLAVIYO_API_KEY      Présent
+✅ META_APP_ID          Présent
+✅ GOOGLE_*             Service Account présent
+✅ HOSTINGER_API_TOKEN  Présent
+❌ TWILIO_*             MANQUANT (bloqueur Grok Voice)
+```
+
+## Actions Requises
+
+| # | Action | Status | Notes |
+|---|--------|--------|-------|
+| 1 | Obtenir Twilio credentials | ⏳ WAITING | console.twilio.com |
+| 2 | Configurer n8n Grok Voice | PENDING | Dépend #1 |
+| 3 | Test appel end-to-end | PENDING | Dépend #2 |
+| 4 | Déployer pour premier client | PENDING | Dépend #3 |
+
+---
+
+**FIN DE L'AUDIT FORENSIQUE v12.2**
+
+*v12.2: Session 96 - Voice AI Status + Geographic Cleanup + Twilio blocker*
 *v12.1: Session 89 COMPLETE - MCP Stack 11/12 (92%) + n8n 8/9 (88%) + APIs Verified*
 *v11.2: Session 83 Part 3 - Blog + Lighthouse + Claude Workflow*
 *v11.1: Session 83 Part 2 - KB & Prompts Optimization (Gemini 3, Imagen 4, Veo 3)*
