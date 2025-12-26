@@ -1,0 +1,854 @@
+{
+  "version": "1.7.0",
+  "lastUpdated": "2025-12-26",
+  "totalCount": 77,
+  "description": "3A Automation - Catalog of marketing automation solutions",
+  "categories": {
+    "lead-gen": {
+      "name_fr": "Lead Generation & Acquisition",
+      "name_en": "Lead Generation & Acquisition",
+      "count": 20
+    },
+    "seo": {
+      "name_fr": "SEO & Contenu",
+      "name_en": "SEO & Content",
+      "count": 9
+    },
+    "email": {
+      "name_fr": "Email Marketing (CRM)",
+      "name_en": "Email Marketing (CRM)",
+      "count": 9
+    },
+    "shopify": {
+      "name_fr": "Shopify Admin",
+      "name_en": "Shopify Admin",
+      "count": 13
+    },
+    "analytics": {
+      "name_fr": "Analytics & Reporting",
+      "name_en": "Analytics & Reporting",
+      "count": 9
+    },
+    "content": {
+      "name_fr": "Contenu & Vidéo",
+      "name_en": "Content & Video",
+      "count": 8
+    },
+    "ai-avatar": {
+      "name_fr": "AI Avatar & Influencer",
+      "name_en": "AI Avatar & Influencer",
+      "count": 2
+    },
+    "cinematicads": {
+      "name_fr": "CinematicAds AI",
+      "name_en": "CinematicAds AI",
+      "count": 4,
+      "external": true,
+      "partner_url": "https://cinematicads.studio"
+    },
+    "whatsapp": {
+      "name_fr": "WhatsApp Business",
+      "name_en": "WhatsApp Business",
+      "count": 2
+    },
+    "voice-ai": {
+      "name_fr": "Voice AI & Téléphonie",
+      "name_en": "Voice AI & Telephony",
+      "count": 1
+    }
+  },
+  "automations": [
+    {
+      "id": "meta-leads-sync",
+      "name_fr": "Sync Meta Leads → Shopify",
+      "name_en": "Meta Leads → Shopify Sync",
+      "category": "lead-gen",
+      "frequency_fr": "Toutes les heures",
+      "frequency_en": "Every hour",
+      "benefit_fr": "+15% leads capturés",
+      "benefit_en": "+15% leads captured"
+    },
+    {
+      "id": "google-ads-sync",
+      "name_fr": "Sync Google Ads → Shopify",
+      "name_en": "Google Ads → Shopify Sync",
+      "category": "lead-gen",
+      "frequency_fr": "Toutes les heures",
+      "frequency_en": "Every hour",
+      "benefit_fr": "Zéro perte de leads",
+      "benefit_en": "Zero lead loss"
+    },
+    {
+      "id": "tiktok-leads-sync",
+      "name_fr": "Sync TikTok Leads → Shopify",
+      "name_en": "TikTok Leads → Shopify Sync",
+      "category": "lead-gen",
+      "frequency_fr": "Toutes les heures",
+      "frequency_en": "Every hour",
+      "benefit_fr": "Nouvelle audience captée",
+      "benefit_en": "New audience captured"
+    },
+    {
+      "id": "lead-scoring",
+      "name_fr": "Qualification & Scoring",
+      "name_en": "Lead Qualification & Scoring",
+      "category": "lead-gen",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "Focus sur leads chauds",
+      "benefit_en": "Focus on hot leads"
+    },
+    {
+      "id": "hot-warm-cold",
+      "name_fr": "Segmentation HOT/WARM/COLD",
+      "name_en": "HOT/WARM/COLD Segmentation",
+      "category": "lead-gen",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Meilleur taux conversion",
+      "benefit_en": "Better conversion rate"
+    },
+    {
+      "id": "data-enrichment",
+      "name_fr": "Enrichissement Données",
+      "name_en": "Data Enrichment",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Leads B2B qualifiés",
+      "benefit_en": "Qualified B2B leads"
+    },
+    {
+      "id": "geo-segmentation",
+      "name_fr": "Geo-Segmentation",
+      "name_en": "Geo-Segmentation",
+      "category": "lead-gen",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "Messages localisés",
+      "benefit_en": "Localized messages"
+    },
+    {
+      "id": "google-forms-crm",
+      "name_fr": "Google Forms → CRM",
+      "name_en": "Google Forms → CRM",
+      "category": "lead-gen",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Capture formulaires",
+      "benefit_en": "Form capture"
+    },
+    {
+      "id": "typeform-klaviyo",
+      "name_fr": "Typeform → Klaviyo",
+      "name_en": "Typeform → Klaviyo",
+      "category": "lead-gen",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Quiz → Email list",
+      "benefit_en": "Quiz → Email list"
+    },
+    {
+      "id": "sourcing-google-maps",
+      "name_fr": "Sourcing Google Maps",
+      "name_en": "Google Maps Sourcing",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Leads locaux ciblés",
+      "benefit_en": "Targeted local leads"
+    },
+    {
+      "id": "sourcing-linkedin",
+      "name_fr": "Sourcing LinkedIn",
+      "name_en": "LinkedIn Sourcing",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Base prospects B2B",
+      "benefit_en": "B2B prospect database"
+    },
+    {
+      "id": "veille-recrutement",
+      "name_fr": "Veille Recrutement",
+      "name_en": "Hiring Intelligence",
+      "category": "lead-gen",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Timing parfait",
+      "benefit_en": "Perfect timing"
+    },
+    {
+      "id": "alt-text-fix",
+      "name_fr": "Correction Alt Text Images",
+      "name_en": "Image Alt Text Correction",
+      "category": "seo",
+      "frequency_fr": "Batch",
+      "frequency_en": "Batch",
+      "benefit_fr": "+20% trafic image Google",
+      "benefit_en": "+20% Google image traffic"
+    },
+    {
+      "id": "auto-meta-tags",
+      "name_fr": "Meta Tags Automatiques",
+      "name_en": "Automatic Meta Tags",
+      "category": "seo",
+      "frequency_fr": "Batch",
+      "frequency_en": "Batch",
+      "benefit_fr": "Meilleur CTR Google",
+      "benefit_en": "Better Google CTR"
+    },
+    {
+      "id": "image-sitemap",
+      "name_fr": "Sitemap Images",
+      "name_en": "Image Sitemap",
+      "category": "seo",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Indexation complète",
+      "benefit_en": "Full indexing"
+    },
+    {
+      "id": "schema-products",
+      "name_fr": "Schema.org Produits",
+      "name_en": "Schema.org Products",
+      "category": "seo",
+      "frequency_fr": "Batch",
+      "frequency_en": "Batch",
+      "benefit_fr": "Meilleure visibilité SERP",
+      "benefit_en": "Better SERP visibility"
+    },
+    {
+      "id": "internal-linking",
+      "name_fr": "Internal Linking",
+      "name_en": "Internal Linking",
+      "category": "seo",
+      "frequency_fr": "Batch",
+      "frequency_en": "Batch",
+      "benefit_fr": "Meilleur maillage SEO",
+      "benefit_en": "Better SEO structure"
+    },
+    {
+      "id": "llms-txt",
+      "name_fr": "llms.txt (AEO)",
+      "name_en": "llms.txt (AEO)",
+      "category": "seo",
+      "frequency_fr": "Une fois",
+      "frequency_en": "One-time",
+      "benefit_fr": "Visibilité IA",
+      "benefit_en": "AI visibility"
+    },
+    {
+      "id": "welcome-series",
+      "name_fr": "Welcome Series",
+      "name_en": "Welcome Series",
+      "category": "email",
+      "frequency_fr": "5 emails",
+      "frequency_en": "5 emails",
+      "benefit_fr": "Open: 40-50%",
+      "benefit_en": "Open: 40-50%"
+    },
+    {
+      "id": "abandoned-cart",
+      "name_fr": "Abandoned Cart",
+      "name_en": "Abandoned Cart",
+      "category": "email",
+      "frequency_fr": "3 emails",
+      "frequency_en": "3 emails",
+      "benefit_fr": "Recovery: 10-15%",
+      "benefit_en": "Recovery: 10-15%"
+    },
+    {
+      "id": "browse-abandonment",
+      "name_fr": "Browse Abandonment",
+      "name_en": "Browse Abandonment",
+      "category": "email",
+      "frequency_fr": "2 emails",
+      "frequency_en": "2 emails",
+      "benefit_fr": "+5% conversions",
+      "benefit_en": "+5% conversions"
+    },
+    {
+      "id": "post-purchase",
+      "name_fr": "Post-Achat",
+      "name_en": "Post-Purchase",
+      "category": "email",
+      "frequency_fr": "5 emails",
+      "frequency_en": "5 emails",
+      "benefit_fr": "Repeat: 25-35%",
+      "benefit_en": "Repeat: 25-35%"
+    },
+    {
+      "id": "win-back",
+      "name_fr": "Win-Back",
+      "name_en": "Win-Back",
+      "category": "email",
+      "frequency_fr": "3 emails",
+      "frequency_en": "3 emails",
+      "benefit_fr": "Réactivation: 5-10%",
+      "benefit_en": "Reactivation: 5-10%"
+    },
+    {
+      "id": "vip-tiers",
+      "name_fr": "VIP Tiers",
+      "name_en": "VIP Tiers",
+      "category": "email",
+      "frequency_fr": "4 segments",
+      "frequency_en": "4 segments",
+      "benefit_fr": "LTV +30%",
+      "benefit_en": "LTV +30%"
+    },
+    {
+      "id": "flows-audit",
+      "name_fr": "Audit Flows Complet",
+      "name_en": "Complete Flows Audit",
+      "category": "email",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Diagnostic email",
+      "benefit_en": "Email diagnostic"
+    },
+    {
+      "id": "ab-sender-rotation",
+      "name_fr": "Rotation A/B Sender",
+      "name_en": "A/B Sender Rotation",
+      "category": "email",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "+5-10% opens",
+      "benefit_en": "+5-10% opens"
+    },
+    {
+      "id": "product-enrichment",
+      "name_fr": "Enrichissement Produits",
+      "name_en": "Product Enrichment",
+      "category": "shopify",
+      "frequency_fr": "50 produits/batch",
+      "frequency_en": "50 products/batch",
+      "benefit_fr": "Meilleur SEO produits",
+      "benefit_en": "Better product SEO"
+    },
+    {
+      "id": "shopping-attributes",
+      "name_fr": "Google Shopping Attributes",
+      "name_en": "Google Shopping Attributes",
+      "category": "shopify",
+      "frequency_fr": "100 produits/batch",
+      "frequency_en": "100 products/batch",
+      "benefit_fr": "Approbation GMC",
+      "benefit_en": "GMC approval"
+    },
+    {
+      "id": "collection-management",
+      "name_fr": "Gestion Collections",
+      "name_en": "Collection Management",
+      "category": "shopify",
+      "frequency_fr": "250 produits/batch",
+      "frequency_en": "250 products/batch",
+      "benefit_fr": "Organisation auto",
+      "benefit_en": "Auto organization"
+    },
+    {
+      "id": "legal-pages",
+      "name_fr": "Pages Légales",
+      "name_en": "Legal Pages",
+      "category": "shopify",
+      "frequency_fr": "Une fois",
+      "frequency_en": "One-time",
+      "benefit_fr": "Conformité légale",
+      "benefit_en": "Legal compliance"
+    },
+    {
+      "id": "gtm-installation",
+      "name_fr": "Installation GTM",
+      "name_en": "GTM Installation",
+      "category": "shopify",
+      "frequency_fr": "Une fois",
+      "frequency_en": "One-time",
+      "benefit_fr": "Tracking complet",
+      "benefit_en": "Complete tracking"
+    },
+    {
+      "id": "loyalty-webhooks",
+      "name_fr": "Webhooks Loyalty",
+      "name_en": "Loyalty Webhooks",
+      "category": "shopify",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Fidélisation auto",
+      "benefit_en": "Auto loyalty"
+    },
+    {
+      "id": "store-audit",
+      "name_fr": "Audit Store Complet",
+      "name_en": "Complete Store Audit",
+      "category": "shopify",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Diagnostic complet",
+      "benefit_en": "Full diagnostic"
+    },
+    {
+      "id": "facebook-audiences",
+      "name_fr": "Export → Facebook Audiences",
+      "name_en": "Export → Facebook Audiences",
+      "category": "shopify",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Retargeting précis",
+      "benefit_en": "Precise retargeting"
+    },
+    {
+      "id": "google-taxonomy",
+      "name_fr": "Import Taxonomie Google",
+      "name_en": "Google Taxonomy Import",
+      "category": "shopify",
+      "frequency_fr": "Une fois",
+      "frequency_en": "One-time",
+      "benefit_fr": "GMC compliant",
+      "benefit_en": "GMC compliant"
+    },
+    {
+      "id": "looker-dashboard",
+      "name_fr": "Dashboard Looker Studio",
+      "name_en": "Looker Studio Dashboard",
+      "category": "analytics",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Vision 360° business",
+      "benefit_en": "360° business view"
+    },
+    {
+      "id": "ga4-source-report",
+      "name_fr": "Rapport Sources GA4",
+      "name_en": "GA4 Source Report",
+      "category": "analytics",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Optimisation budget ads",
+      "benefit_en": "Ads budget optimization"
+    },
+    {
+      "id": "system-audit",
+      "name_fr": "Audit Système Complet",
+      "name_en": "Complete Flywheel Audit",
+      "category": "analytics",
+      "frequency_fr": "Mensuel",
+      "frequency_en": "Monthly",
+      "benefit_fr": "Identification gaps",
+      "benefit_en": "Gap identification"
+    },
+    {
+      "id": "low-stock-alert",
+      "name_fr": "Alerte Stock Bas",
+      "name_en": "Low Stock Alert",
+      "category": "analytics",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Zéro rupture stock",
+      "benefit_en": "Zero stockouts"
+    },
+    {
+      "id": "margin-projections",
+      "name_fr": "Projections Marges",
+      "name_en": "Margin Projections",
+      "category": "analytics",
+      "frequency_fr": "Mensuel",
+      "frequency_en": "Monthly",
+      "benefit_fr": "Vraie rentabilité",
+      "benefit_en": "True profitability"
+    },
+    {
+      "id": "inventory-analysis",
+      "name_fr": "Analyse Inventaire",
+      "name_en": "Inventory Analysis",
+      "category": "analytics",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Cash flow optimisé",
+      "benefit_en": "Optimized cash flow"
+    },
+    {
+      "id": "bnpl-tracking",
+      "name_fr": "Suivi BNPL Performance",
+      "name_en": "BNPL Performance Tracking",
+      "category": "analytics",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Optimisation checkout",
+      "benefit_en": "Checkout optimization"
+    },
+    {
+      "id": "pixel-verification",
+      "name_fr": "Vérification Pixels",
+      "name_en": "Pixel Verification",
+      "category": "analytics",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Tracking fiable",
+      "benefit_en": "Reliable tracking"
+    },
+    {
+      "id": "promo-video",
+      "name_fr": "Vidéo Promo Produit",
+      "name_en": "Product Promo Video",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Contenu social ready",
+      "benefit_en": "Social ready content"
+    },
+    {
+      "id": "cart-recovery-video",
+      "name_fr": "Vidéo Cart Recovery",
+      "name_en": "Cart Recovery Video",
+      "category": "content",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "+5% recovery rate",
+      "benefit_en": "+5% recovery rate"
+    },
+    {
+      "id": "portrait-video",
+      "name_fr": "Vidéo Format Portrait",
+      "name_en": "Portrait Video Format",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Multi-plateforme",
+      "benefit_en": "Multi-platform"
+    },
+    {
+      "id": "shopping-feed",
+      "name_fr": "Feed Google Shopping",
+      "name_en": "Google Shopping Feed",
+      "category": "content",
+      "frequency_fr": "Quotidien",
+      "frequency_en": "Daily",
+      "benefit_fr": "Produits toujours à jour",
+      "benefit_en": "Always up-to-date products"
+    },
+    {
+      "id": "gmc-diagnostic",
+      "name_fr": "Diagnostic GMC",
+      "name_en": "GMC Diagnostic",
+      "category": "content",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Approbation produits",
+      "benefit_en": "Product approval"
+    },
+    {
+      "id": "auto-blog",
+      "name_fr": "Article Blog + Distribution Multi-Canal",
+      "name_en": "Auto Blog + Multi-Channel Distribution",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "SEO + Social en 1 clic",
+      "benefit_en": "SEO + Social in 1 click",
+      "description_fr": "Génère article SEO via Claude AI et publie simultanément sur site web + Facebook + LinkedIn",
+      "description_en": "Generates SEO article via Claude AI and publishes simultaneously to website + Facebook + LinkedIn"
+    },
+    {
+      "id": "n8n-workflow",
+      "name_fr": "Workflow n8n Complet",
+      "name_en": "Complete n8n Workflow",
+      "category": "content",
+      "frequency_fr": "Personnalisé",
+      "frequency_en": "Custom",
+      "benefit_fr": "Automation sur-mesure",
+      "benefit_en": "Tailor-made automation"
+    },
+    {
+      "id": "google-apps-script-booking",
+      "name_fr": "Google Apps Script Booking",
+      "name_en": "Google Apps Script Booking",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Booking + annulation + report automatisé",
+      "benefit_en": "Booking + cancel + reschedule automation"
+    },
+    {
+      "id": "google-calendar-booking",
+      "name_fr": "Google Calendar Booking",
+      "name_en": "Google Calendar Booking",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "analyze-ga4-conversion-source",
+      "name_fr": "Analyze Ga4 Conversion Source",
+      "name_en": "Analyze Ga4 Conversion Source",
+      "category": "analytics",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "geo-segment-generic",
+      "name_fr": "Geo Segment Generic",
+      "name_en": "Geo Segment Generic",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "audit-klaviyo-flows-v2",
+      "name_fr": "Audit Klaviyo Flows V2",
+      "name_en": "Audit Klaviyo Flows V2",
+      "category": "email",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "import-facebook-lead-ads",
+      "name_fr": "Import Facebook Lead Ads",
+      "name_en": "Import Facebook Lead Ads",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "segment-leads",
+      "name_fr": "Segment Leads",
+      "name_en": "Segment Leads",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "generate-tags-csv",
+      "name_fr": "Generate Tags Csv",
+      "name_en": "Generate Tags Csv",
+      "category": "seo",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "import-alt-text-api",
+      "name_fr": "Import Alt Text Api",
+      "name_en": "Import Alt Text Api",
+      "category": "seo",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "upload-llms",
+      "name_fr": "Upload Llms",
+      "name_en": "Upload Llms",
+      "category": "seo",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "audit-shopify-store",
+      "name_fr": "Audit Shopify Store",
+      "name_en": "Audit Shopify Store",
+      "category": "shopify",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "create-warehouse-metafield",
+      "name_fr": "Create Warehouse Metafield",
+      "name_en": "Create Warehouse Metafield",
+      "category": "shopify",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "import-taxonomy-metafield",
+      "name_fr": "Import Taxonomy Metafield",
+      "name_en": "Import Taxonomy Metafield",
+      "category": "shopify",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "parse-warehouse-csv",
+      "name_fr": "Parse Warehouse Csv",
+      "name_en": "Parse Warehouse Csv",
+      "category": "shopify",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "enable-apify-schedulers",
+      "name_fr": "Enable Apify Schedulers",
+      "name_en": "Enable Apify Schedulers",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "generate-all-promo-videos",
+      "name_fr": "Generate All Promo Videos",
+      "name_en": "Generate All Promo Videos",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "cinematic-director",
+      "name_fr": "CinematicAds Director",
+      "name_en": "CinematicAds Director",
+      "category": "cinematicads",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Vidéos cinématiques AI (Gemini 3 Pro + Imagen 4 + Veo 3.1)",
+      "benefit_en": "AI cinematic videos (Gemini 3 Pro + Imagen 4 + Veo 3.1)",
+      "external": true,
+      "url": "https://cinematicads.studio"
+    },
+    {
+      "id": "competitor-clone",
+      "name_fr": "Competitor Clone AI",
+      "name_en": "Competitor Clone AI",
+      "category": "cinematicads",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Clone pubs concurrents (analyse + script + production multi-scènes)",
+      "benefit_en": "Clone competitor ads (analysis + script + multi-scene production)",
+      "external": true,
+      "url": "https://cinematicads.studio"
+    },
+    {
+      "id": "ecommerce-factory",
+      "name_fr": "E-commerce Ads Factory",
+      "name_en": "E-commerce Ads Factory",
+      "category": "cinematicads",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Ads multi-ratio (Google Ads 1.91:1, Social 1:1, TikTok 9:16)",
+      "benefit_en": "Multi-ratio ads (Google Ads 1.91:1, Social 1:1, TikTok 9:16)",
+      "external": true,
+      "url": "https://cinematicads.studio"
+    },
+    {
+      "id": "asset-factory",
+      "name_fr": "Asset Factory (Dual AI)",
+      "name_en": "Asset Factory (Dual AI)",
+      "category": "cinematicads",
+      "frequency_fr": "Core engine",
+      "frequency_en": "Core engine",
+      "benefit_fr": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
+      "benefit_en": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
+      "external": true,
+      "url": "https://cinematicads.studio"
+    },
+    {
+      "id": "ai-avatar-generator",
+      "name_fr": "AI Avatar Generator",
+      "name_en": "AI Avatar Generator",
+      "category": "ai-avatar",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Avatar IA consistent multi-scenes (Imagen 3 + Gemini API)",
+      "benefit_en": "Consistent AI avatar multi-scenes (Imagen 3 + Gemini API)"
+    },
+    {
+      "id": "ai-talking-video",
+      "name_fr": "AI Talking Video",
+      "name_en": "AI Talking Video",
+      "category": "ai-avatar",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Video lip-sync IA (ElevenLabs + fal.ai Kling)",
+      "benefit_en": "AI lip-sync video (ElevenLabs + fal.ai Kling)"
+    },
+    {
+      "id": "whatsapp-booking-confirmation",
+      "name_fr": "Confirmation WhatsApp RDV",
+      "name_en": "WhatsApp Booking Confirmation",
+      "category": "whatsapp",
+      "frequency_fr": "À chaque réservation",
+      "frequency_en": "On each booking",
+      "benefit_fr": "98% taux d'ouverture vs 20% SMS",
+      "benefit_en": "98% open rate vs 20% SMS"
+    },
+    {
+      "id": "whatsapp-booking-reminders",
+      "name_fr": "Rappels WhatsApp 24h + 1h",
+      "name_en": "WhatsApp Reminders 24h + 1h",
+      "category": "whatsapp",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "-30% no-shows",
+      "benefit_en": "-30% no-shows"
+    },
+    {
+      "id": "grok-voice-telephony",
+      "name_fr": "Grok Voice Téléphonie",
+      "name_en": "Grok Voice Telephony",
+      "category": "voice-ai",
+      "frequency_fr": "Appels entrants",
+      "frequency_en": "Inbound calls",
+      "benefit_fr": "Réservation par téléphone IA ($0.05/min)",
+      "benefit_en": "AI phone booking ($0.05/min)"
+    },
+    {
+      "id": "linkedin-lead-scraper",
+      "name_fr": "LinkedIn Lead Scraper",
+      "name_en": "LinkedIn Lead Scraper",
+      "category": "lead-gen",
+      "frequency_fr": "Toutes les 6 heures",
+      "frequency_en": "Every 6 hours",
+      "benefit_fr": "+400 leads/jour avec scoring AI",
+      "benefit_en": "+400 leads/day with AI scoring"
+    },
+    {
+      "id": "email-outreach-sequence",
+      "name_fr": "Email Outreach Sequence",
+      "name_en": "Email Outreach Sequence",
+      "category": "lead-gen",
+      "frequency_fr": "Déclenché",
+      "frequency_en": "Triggered",
+      "benefit_fr": "Séquence 3 emails personnalisée",
+      "benefit_en": "3-email personalized sequence"
+    }
+  ],
+  "summary": {
+    "totalAutomations": 77,
+    "categoriesCount": 10,
+    "highlights": [
+      "Email Marketing Flows",
+      "Lead Generation & Scoring",
+      "E-commerce Automation",
+      "AI Video & Avatar",
+      "WhatsApp Business",
+      "Voice AI Telephony"
+    ]
+  }
+}
