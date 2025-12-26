@@ -10,9 +10,9 @@
 | Composant | Status | Notes |
 |-----------|--------|-------|
 | Voice Widget Web | ✅ OPÉRATIONNEL | Web Speech API, 33 keywords, booking flow |
-| Dial.Plus Agent | ✅ OPÉRATIONNEL | +1 775 254 7428, usage interne 3A |
+| Dial.Plus Agent | ✅ OPÉRATIONNEL | +1 775 254 7428, knowledge base uploadée |
 | Grok Voice Phone | ❌ BLOQUÉ | xAI API OK, carrier manquant |
-| Knowledge Base | ✅ CRÉÉ | dialplus-knowledge-base.json |
+| Knowledge Base | ✅ UPLOADÉ | dialplus-knowledge-base.txt sur Dial.Plus |
 
 ---
 
@@ -193,14 +193,14 @@ Option B: Grok Voice + Telnyx (Full Control)
 
 ## ACTIONS REQUISES
 
-| # | Action | Priorité | Dépendance |
-|---|--------|----------|------------|
-| 1 | Uploader knowledge base sur Dial.Plus | P0 | Aucune |
-| 2 | Tester appels entrants Dial.Plus | P0 | #1 |
-| 3 | Créer compte Telnyx (alternative Twilio) | P1 | Aucune |
-| 4 | Configurer workflow n8n avec Telnyx | P1 | #3 |
-| 5 | Tester appel Grok Voice end-to-end | P1 | #4 |
-| 6 | Documenter procédure setup client | P2 | #5 |
+| # | Action | Priorité | Status |
+|---|--------|----------|--------|
+| 1 | Uploader knowledge base sur Dial.Plus | P0 | ✅ FAIT |
+| 2 | Tester appels entrants Dial.Plus | P0 | 🔄 À TESTER |
+| 3 | Créer compte Telnyx (alternative Twilio) | P1 | ⏳ Pending |
+| 4 | Configurer workflow n8n avec Telnyx | P1 | ⏳ Pending |
+| 5 | Tester appel Grok Voice end-to-end | P1 | ⏳ Pending |
+| 6 | Documenter procédure setup client | P2 | ⏳ Pending |
 
 ---
 
