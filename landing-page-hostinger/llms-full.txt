@@ -2,9 +2,9 @@
 
 > Consultant Automation, Analytics & AI pour PME. Automatisation e-commerce et marketing pour Small/Mid Business de tous secteurs.
 
-3A Automation aide les PME (€10k-500k CA mensuel) à automatiser leurs processus marketing et opérationnels. Expertise Shopify, Klaviyo, GA4. Approche code/APIs (pas no-code limité). Focus résultats mesurables.
+3A Automation aide les PME (€10k-500k CA mensuel) à automatiser leurs processus marketing et opérationnels. Approche résultats mesurables. Focus ROI et impact business.
 
-**Fondateur**: Consultant technique solo, 20h/semaine
+**Fondateur**: Consultant technique solo
 **Marchés**: Maroc, MENA, France, Worldwide
 **Langues**: Français, English, Arabe
 
@@ -18,16 +18,16 @@ Nous sommes un consultant solo spécialisé dans l'automatisation e-commerce. No
 
 ### Notre Approche
 
-1. **Code-first**: Nous utilisons les APIs directement (Shopify, Klaviyo, GA4) plutôt que des outils no-code limités
-2. **Résultats mesurables**: Chaque automatisation est accompagnée de KPIs clairs
-3. **Documentation complète**: Chaque projet inclut une documentation technique
-4. **Support continu**: Options de maintenance et d'optimisation mensuelle
+1. **Résultats-first**: Chaque automatisation est accompagnée de KPIs clairs
+2. **Documentation complète**: Chaque projet inclut une documentation technique
+3. **Support continu**: Options de maintenance et d'optimisation mensuelle
+4. **Intégrations natives**: Connexion avec vos outils existants
 
-### Expertise Technique
+### Expertise
 
 - **10+ ans** d'expérience en développement web et automation
-- **Certifié** Shopify Partner et Google Analytics
 - **77 automatisations** prêtes à l'emploi testées et documentées
+- Partenaire certifié des principales plateformes e-commerce
 
 ---
 
@@ -39,8 +39,8 @@ Nous sommes un consultant solo spécialisé dans l'automatisation e-commerce. No
 Notre audit gratuit analyse votre boutique e-commerce et identifie les opportunités d'automatisation:
 
 - Analyse technique SEO (vitesse, structure, meta tags)
-- Audit flows email Klaviyo existants
-- Vérification tracking GA4/GTM
+- Audit flows email existants
+- Vérification tracking analytics
 - Identification 3-5 quick wins actionnables
 
 **Livrable**: Rapport PDF complet sous 24-48h
@@ -49,13 +49,13 @@ Notre audit gratuit analyse votre boutique e-commerce et identifie les opportuni
 ### Automatisation E-commerce
 **URL**: https://3a-automation.com/services/ecommerce.html
 
-Services pour boutiques Shopify:
+Services pour boutiques e-commerce:
 
-- Setup flows email Klaviyo (welcome, abandon panier, post-achat)
+- Setup flows email (welcome, abandon panier, post-achat)
 - Optimisation fiches produit SEO
 - Synchronisation inventaire multi-canaux
-- Intégration apps tierces via APIs
-- Automatisation reporting GA4
+- Intégration apps tierces
+- Automatisation reporting
 
 **Résultats moyens**:
 - +25% revenus email
@@ -67,7 +67,7 @@ Services pour boutiques Shopify:
 
 Solutions pour PME tous secteurs:
 
-- Lead generation automatisée (Meta Ads, Google Ads)
+- Lead generation automatisée
 - CRM setup et automation
 - Analytics et dashboards personnalisés
 - Intégration outils existants
@@ -91,13 +91,13 @@ Le Flywheel 360° automatise chaque étape du parcours client pour créer une cr
 ## Catalogue des 77 Automatisations
 
 ### Lead Generation (20 automatisations)
-- Meta Ads Lead Sync → CRM
-- Google Forms → Klaviyo
-- LinkedIn Scraper → Enrichment
-- Apify Web Scraping
+- Ads Lead Sync → CRM
+- Forms → Email Marketing
+- Social Scraper → Enrichment
+- Web Scraping automatisé
 - Voice AI Booking System
 
-### Shopify (13 automatisations)
+### E-commerce (13 automatisations)
 - Product Sync Multi-Channel
 - Inventory Alerts
 - Order Webhooks
@@ -119,7 +119,7 @@ Le Flywheel 360° automatise chaque étape du parcours client pour créer une cr
 - VIP Tier Automation
 
 ### Analytics (9 automatisations)
-- GA4 Daily Report
+- Daily Report automation
 - Attribution Multi-Touch
 - Conversion Path Analysis
 - Custom Dashboards
@@ -132,22 +132,22 @@ Le Flywheel 360° automatise chaque étape du parcours client pour créer une cr
 - Image Optimization
 - Video Thumbnail Generator
 
-### CinematicAds AI (4 automatisations)
-- CinematicAds Director (Gemini 3 Pro + Imagen 4 + Veo 3.1)
+### Video AI (4 automatisations)
+- Video Director AI
 - Competitor Clone Analysis
 - E-commerce Factory
 - Asset Factory Multi-Format
 
 ### AI Avatar (2 automatisations)
-- AI Avatar Generator (fal.ai)
+- AI Avatar Generator
 - AI Talking Video Generator
 
-### WhatsApp (2 automatisations)
-- WhatsApp Booking Confirmation
-- WhatsApp Booking Reminders
+### Messaging (2 automatisations)
+- Booking Confirmation
+- Booking Reminders
 
 ### Voice AI (1 automatisation)
-- Grok Voice Telephony
+- Voice Telephony AI
 
 ---
 
@@ -158,7 +158,7 @@ Le Flywheel 360° automatise chaque étape du parcours client pour créer une cr
 | Pack | EUR | USD | MAD | Inclus |
 |------|-----|-----|-----|--------|
 | Quick Win | 390€ | $450 | 3.990 DH | 3-5 quick wins + Voice AI Booking |
-| Essentials | 790€ | $920 | 7.990 DH | 8-10 automations + WhatsApp |
+| Essentials | 790€ | $920 | 7.990 DH | 8-10 automations + Messaging |
 | Growth | 1.399€ | $1,690 | 14.990 DH | 15+ automations + Priority support |
 
 ### Retainers Mensuels
@@ -178,7 +178,7 @@ Le Flywheel 360° automatise chaque étape du parcours client pour créer une cr
 3A Automation est un service de consulting en automatisation e-commerce qui aide les PME à automatiser leurs processus marketing et opérationnels. Le nom 3A signifie: Automation, Analytics, AI.
 
 ### Quelles plateformes supportez-vous?
-Nous sommes spécialisés Shopify avec intégrations Klaviyo, GA4, Meta Ads, TikTok Ads, et de nombreuses autres APIs.
+Nous supportons les principales plateformes e-commerce, email marketing, analytics, et advertising. Intégrations sur mesure disponibles.
 
 ### L'audit est-il vraiment gratuit?
 Oui, 100% gratuit et sans engagement. C'est notre façon de démontrer notre valeur avant toute collaboration.
@@ -197,28 +197,28 @@ Oui, chaque pack inclut un niveau de support. Le pack Growth inclut un support p
 ## Expertise & Partenariats
 
 ### E-commerce
-- Shopify Partner certifié
+- Partenaire certifié plateformes e-commerce
 - Intégrations e-commerce avancées
 - Multi-channel management
 - Dropshipping automation
 
 ### Email Marketing
-- Klaviyo Partner
+- Partenaire certifié email marketing
 - Automation avancée
 - Segmentation comportementale
 - Tests A/B continus
 
 ### Analytics & Tracking
-- Google Cloud Partner
+- Partenaire certifié analytics
 - Attribution multi-touch
 - Tracking cross-platform
 - Privacy-first implementation
 
 ### AI & Content
-- Partenaire Anthropic
 - Génération de contenu IA
 - Création visuelle automatisée
 - Voice AI integration
+- Video AI automation
 
 ### Automation
 - Workflows personnalisés
@@ -250,7 +250,7 @@ Oui, chaque pack inclut un niveau de support. Le pack Growth inclut un support p
 
 ### Pages Principales
 - [Accueil](https://3a-automation.com/): Proposition de valeur et services
-- [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Automatisation Shopify/Klaviyo
+- [Services E-commerce](https://3a-automation.com/services/ecommerce.html): Automatisation e-commerce
 - [Services PME](https://3a-automation.com/services/pme.html): Solutions pour PME
 - [Audit Gratuit](https://3a-automation.com/services/audit-gratuit.html): Analyse complète gratuite
 - [Flywheel 360°](https://3a-automation.com/services/flywheel-360.html): Méthodologie complète
@@ -266,7 +266,7 @@ Oui, chaque pack inclut un niveau de support. Le pack Growth inclut un support p
 
 ### Pages EN (English)
 - [Homepage](https://3a-automation.com/en/): Main services
-- [E-commerce](https://3a-automation.com/en/services/ecommerce.html): Shopify automation
+- [E-commerce](https://3a-automation.com/en/services/ecommerce.html): E-commerce automation
 - [SMB](https://3a-automation.com/en/services/smb.html): SMB solutions
 - [Free Audit](https://3a-automation.com/en/services/free-audit.html): Free analysis
 - [Pricing](https://3a-automation.com/en/pricing.html): Packages
@@ -282,6 +282,6 @@ Oui, chaque pack inclut un niveau de support. Le pack Growth inclut un support p
 
 ---
 
-Version: 1.0 | Last Updated: 2025-12-23
+Version: 1.1 | Last Updated: 2025-12-26
 Spec: https://llmstxt.org/
 AI Training: Full content for comprehensive AI understanding

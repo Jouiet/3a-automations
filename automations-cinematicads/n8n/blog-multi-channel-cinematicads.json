@@ -1,0 +1,243 @@
+{
+  "name": "CinematicAds - Blog Article + Multi-Channel Distribution",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cinematicads/blog/generate",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "cinematicads-blog",
+      "notes": "POST: { topic, language, keywords, publishToFacebook, publishToLinkedIn }"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json.body || $input.first().json;\n\nreturn {\n  json: {\n    topic: input.topic || 'AI Video Marketing',\n    language: input.language || 'en',\n    keywords: input.keywords || 'AI video, marketing automation, ad creation',\n    wordCount: input.wordCount || 1500,\n    brandName: 'CinematicAds',\n    brandDomain: 'cinematicads.studio',\n    brandTone: input.brandTone || 'creative',\n    publishToFacebook: input.publishToFacebook !== false,\n    publishToLinkedIn: input.publishToLinkedIn !== false,\n    ctaUrl: 'https://cinematicads.studio/demo',\n    ctaText: 'Try CinematicAds Free'\n  }\n};"
+      },
+      "id": "set-params",
+      "name": "Set Article Params",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {"name": "x-api-key", "value": "={{ $credentials.httpHeaderAuth.value }}"},
+            {"name": "anthropic-version", "value": "2024-01-01"},
+            {"name": "content-type", "value": "application/json"}
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 4096,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Write a comprehensive blog article for CinematicAds (AI-powered video ad creation platform) about: {{ $json.topic }}\\n\\nLanguage: {{ $json.language }}\\nTarget Keywords: {{ $json.keywords }}\\nBrand Tone: {{ $json.brandTone }} - innovative, forward-thinking, results-driven\\n\\nContext about CinematicAds:\\n- AI platform that creates professional video ads in minutes\\n- Features: Competitor ad cloning, e-commerce product videos, cinematic storytelling\\n- Target audience: Marketing agencies, e-commerce brands, content creators\\n- Value prop: 10x faster video production, fraction of the cost\\n\\nRequirements:\\n- {{ $json.wordCount }}-{{ $json.wordCount + 500 }} words\\n- Include H2 and H3 headings\\n- Include actionable tips with concrete examples\\n- Include statistics about video marketing ROI\\n- SEO optimized for the target keywords\\n- Creative, engaging tone that showcases innovation\\n- Include a strong CTA: {{ $json.ctaText }} at {{ $json.ctaUrl }}\\n\\nOutput format: JSON with these fields:\\n{\\n  \\\"title\\\": \\\"Article Title\\\",\\n  \\\"excerpt\\\": \\\"150 char summary for social media\\\",\\n  \\\"content\\\": \\\"Full HTML article content with proper heading tags\\\",\\n  \\\"hashtags\\\": [\\\"relevant\\\", \\\"hashtags\\\"]\\n}\\n\\nIMPORTANT: Output ONLY valid JSON, no markdown, no explanations.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "claude-generate",
+      "name": "Generate with Claude",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Anthropic API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Claude response\nconst claudeResponse = JSON.parse($input.first().json.content[0].text);\nconst params = $('Set Article Params').first().json;\n\n// Generate slug from title\nconst slug = claudeResponse.title\n  .toLowerCase()\n  .normalize('NFD')\n  .replace(/[\\u0300-\\u036f]/g, '')\n  .replace(/[^a-z0-9]+/g, '-')\n  .replace(/^-|-$/g, '');\n\n// Format hashtags for social media\nconst hashtags = ['#CinematicAds', '#AIVideo', '#VideoMarketing', ...claudeResponse.hashtags];\nconst hashtagsString = hashtags\n  .map(h => h.startsWith('#') ? h : '#' + h)\n  .slice(0, 8)\n  .join(' ');\n\n// Build article URL\nconst articleUrl = `https://${params.brandDomain}/blog/${slug}`;\n\nreturn {\n  // Article data\n  title: claudeResponse.title,\n  slug: slug,\n  excerpt: claudeResponse.excerpt,\n  content: claudeResponse.content,\n  hashtags: hashtags,\n  hashtagsString: hashtagsString,\n  \n  // Meta\n  language: params.language,\n  publishedDate: new Date().toISOString().split('T')[0],\n  brandName: params.brandName,\n  brandDomain: params.brandDomain,\n  articleUrl: articleUrl,\n  \n  // Social content - CinematicAds branded\n  facebookPost: `🎬 ${claudeResponse.excerpt}\\n\\n${hashtagsString}\\n\\n📖 Read more: ${articleUrl}\\n\\n🚀 Create stunning video ads in minutes: ${params.ctaUrl}`,\n  linkedInPost: `${claudeResponse.excerpt}\\n\\nAt CinematicAds, we're revolutionizing how brands create video content with AI.\\n\\n${hashtagsString}\\n\\n📖 Full article: ${articleUrl}`,\n  \n  // Publishing flags\n  publishToFacebook: params.publishToFacebook,\n  publishToLinkedIn: params.publishToLinkedIn\n};"
+      },
+      "id": "parse-content",
+      "name": "Parse & Format Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "filePath": "=/output/cinematicads/blog/{{ $json.slug }}.html",
+        "fileContent": "=<!DOCTYPE html>\n<html lang=\"{{ $json.language }}\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>{{ $json.title }} | CinematicAds Blog</title>\n  <meta name=\"description\" content=\"{{ $json.excerpt }}\">\n  <meta property=\"og:title\" content=\"{{ $json.title }}\">\n  <meta property=\"og:description\" content=\"{{ $json.excerpt }}\">\n  <meta property=\"og:type\" content=\"article\">\n  <meta property=\"og:url\" content=\"{{ $json.articleUrl }}\">\n  <link rel=\"canonical\" href=\"{{ $json.articleUrl }}\">\n</head>\n<body>\n  <article class=\"blog-article\" itemscope itemtype=\"https://schema.org/BlogPosting\">\n    <header>\n      <h1 itemprop=\"headline\">{{ $json.title }}</h1>\n      <time datetime=\"{{ $json.publishedDate }}\" itemprop=\"datePublished\">{{ $json.publishedDate }}</time>\n      <meta itemprop=\"author\" content=\"CinematicAds\">\n    </header>\n    <div class=\"article-content\" itemprop=\"articleBody\">\n      {{ $json.content }}\n    </div>\n    <footer class=\"article-cta\">\n      <a href=\"https://cinematicads.studio/demo\" class=\"cta-button\">Try CinematicAds Free</a>\n    </footer>\n  </article>\n</body>\n</html>",
+        "options": {}
+      },
+      "id": "save-file",
+      "name": "Save HTML File",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [1120, 180]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.publishToFacebook }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "check-facebook",
+      "name": "Publish to Facebook?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.publishToLinkedIn }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "check-linkedin",
+      "name": "Publish to LinkedIn?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1120, 420]
+    },
+    {
+      "parameters": {
+        "resource": "post",
+        "operation": "create",
+        "postType": "link",
+        "message": "={{ $json.facebookPost }}",
+        "additionalFields": {
+          "link": "={{ $json.articleUrl }}"
+        }
+      },
+      "id": "facebook-post",
+      "name": "Post to Facebook Page",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [1340, 300],
+      "credentials": {
+        "facebookGraphApi": {
+          "name": "CinematicAds Facebook Page"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "post",
+        "operation": "create",
+        "text": "={{ $json.linkedInPost }}",
+        "additionalFields": {
+          "visibility": "PUBLIC"
+        }
+      },
+      "id": "linkedin-post",
+      "name": "Post to LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [1340, 420],
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "name": "CinematicAds LinkedIn"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Aggregate results from all branches\nconst article = $('Parse & Format Content').first().json;\nconst fileResult = $('Save HTML File').first()?.json || null;\nconst fbResult = $('Post to Facebook Page').first()?.json || null;\nconst liResult = $('Post to LinkedIn').first()?.json || null;\n\nreturn {\n  success: true,\n  brand: 'CinematicAds',\n  article: {\n    title: article.title,\n    slug: article.slug,\n    url: article.articleUrl,\n    publishedDate: article.publishedDate\n  },\n  distribution: {\n    website: {\n      status: 'generated',\n      path: `/output/cinematicads/blog/${article.slug}.html`\n    },\n    facebook: fbResult ? {\n      status: 'published',\n      postId: fbResult.id || 'success'\n    } : {\n      status: 'skipped',\n      reason: article.publishToFacebook ? 'Error or not configured' : 'Not enabled'\n    },\n    linkedin: liResult ? {\n      status: 'published',\n      postId: liResult.id || 'success'\n    } : {\n      status: 'skipped',\n      reason: article.publishToLinkedIn ? 'Error or not configured' : 'Not enabled'\n    }\n  }\n};"
+      },
+      "id": "aggregate-results",
+      "name": "Aggregate Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1780, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{"node": "Set Article Params", "type": "main", "index": 0}]]
+    },
+    "Set Article Params": {
+      "main": [[{"node": "Generate with Claude", "type": "main", "index": 0}]]
+    },
+    "Generate with Claude": {
+      "main": [[{"node": "Parse & Format Content", "type": "main", "index": 0}]]
+    },
+    "Parse & Format Content": {
+      "main": [
+        [
+          {"node": "Save HTML File", "type": "main", "index": 0},
+          {"node": "Publish to Facebook?", "type": "main", "index": 0},
+          {"node": "Publish to LinkedIn?", "type": "main", "index": 0}
+        ]
+      ]
+    },
+    "Publish to Facebook?": {
+      "main": [
+        [{"node": "Post to Facebook Page", "type": "main", "index": 0}],
+        [{"node": "Aggregate Results", "type": "main", "index": 0}]
+      ]
+    },
+    "Publish to LinkedIn?": {
+      "main": [
+        [{"node": "Post to LinkedIn", "type": "main", "index": 0}],
+        [{"node": "Aggregate Results", "type": "main", "index": 0}]
+      ]
+    },
+    "Save HTML File": {
+      "main": [[{"node": "Aggregate Results", "type": "main", "index": 0}]]
+    },
+    "Post to Facebook Page": {
+      "main": [[{"node": "Aggregate Results", "type": "main", "index": 0}]]
+    },
+    "Post to LinkedIn": {
+      "main": [[{"node": "Aggregate Results", "type": "main", "index": 0}]]
+    },
+    "Aggregate Results": {
+      "main": [[{"node": "Respond to Webhook", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "description": "CinematicAds blog article generator with multi-channel distribution to Facebook and LinkedIn",
+    "version": "1.0.0",
+    "author": "3A Automation for CinematicAds",
+    "created": "2025-12-26",
+    "ai_model": "claude-sonnet-4-20250514",
+    "channels": ["website", "facebook", "linkedin"],
+    "brand": {
+      "name": "CinematicAds",
+      "domain": "cinematicads.studio",
+      "tone": "creative, innovative, results-driven"
+    },
+    "credentials_required": [
+      "Anthropic API Key (httpHeaderAuth)",
+      "CinematicAds Facebook Page (facebookGraphApi)",
+      "CinematicAds LinkedIn (linkedInOAuth2Api)"
+    ]
+  }
+}
