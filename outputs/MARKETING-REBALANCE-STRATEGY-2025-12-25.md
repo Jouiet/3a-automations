@@ -14,7 +14,7 @@
 - ✅ **Results Section**: 29 automations, -80% manual, 24/7 visibility
 - ✅ **CTA Section Added** (was missing - conversion killer fixed)
 - ✅ **Outcome-focused copy**: "WHAT + WHY, not HOW" applied throughout
-- ✅ **Footer fixed**: 77 automations (was 78 inconsistency)
+- ✅ **Footer fixed**: 78 automations (was 78 inconsistency)
 
 ### Session 97 Complete (26/12/2025)
 - ✅ **Lead Tracking intégré**: Landing Page → Dashboard CRM automatique
@@ -380,7 +380,7 @@ Certains éléments techniques DOIVENT rester pour la crédibilité:
 |-----------|--------|------------|
 | **Pricing** | Formule exposée | Prix fixes sans calcul |
 | **Tech stack** | APIs versionnées | Logos partenaires |
-| **Automations** | 77 workflows détaillés | Catégories + outcomes |
+| **Automations** | 78 workflows détaillés | Catégories + outcomes |
 | **Voice widget** | Prompts client-side | Backend API |
 | **llms.txt** | Playbook technique | Positionnement expert |
 | **MCPs** | Liste fonctionnelle | Crédibilité partenaire |
