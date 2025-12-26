@@ -5674,6 +5674,16 @@ a.clickable-card:hover .card-cta { color: var(--accent); }
 .partner-card.messaging .partner-icon svg { stroke: #25D366; }
 .partner-card.messaging:hover .partner-icon { box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
 
+/* Partners more text */
+.partners-more {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  opacity: 0.9;
+}
+
 /* Partners grid responsive */
 @media (max-width: 1024px) {
   .partners-grid { grid-template-columns: repeat(3, 1fr); }
