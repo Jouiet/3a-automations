@@ -50,3 +50,6 @@ google-services.json
 
 # MCP config (may contain API keys)
 mcp.json
+
+# Generated invoices
+automations/invoicing/generated/
