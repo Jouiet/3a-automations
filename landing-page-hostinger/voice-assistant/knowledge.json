@@ -1,133 +1,43 @@
 {
-  "version": "2025-12-23",
-  "generated": "2025-12-23T20:27:50.183Z",
-  "totalAutomations": 77,
-  "categories": 10,
-  "summary": "3A Automation dispose de 77 automatisations dans 10 catégories.",
-  "automationsByCategory": {
-    "Lead Generation & Acquisition": [
-      "Sync Meta Leads → Shopify",
-      "Sync Google Ads → Shopify",
-      "Sync TikTok Leads → Shopify",
-      "Qualification & Scoring",
-      "Segmentation HOT/WARM/COLD",
-      "Enrichissement Données",
-      "Geo-Segmentation",
-      "Google Forms → CRM",
-      "Typeform → Klaviyo",
-      "Sourcing Google Maps",
-      "Sourcing LinkedIn",
-      "Veille Recrutement",
-      "Google Apps Script Booking",
-      "Google Calendar Booking",
-      "Geo Segment Generic",
-      "Import Facebook Lead Ads",
-      "Segment Leads",
-      "Enable Apify Schedulers",
-      "LinkedIn Lead Scraper",
-      "Email Outreach Sequence"
-    ],
-    "SEO & Contenu": [
-      "Correction Alt Text Images",
-      "Meta Tags Automatiques",
-      "Sitemap Images",
-      "Schema.org Produits",
-      "Internal Linking",
-      "llms.txt (AEO)",
-      "Generate Tags Csv",
-      "Import Alt Text Api",
-      "Upload Llms"
-    ],
-    "Email Marketing (CRM)": [
-      "Welcome Series",
-      "Abandoned Cart",
-      "Browse Abandonment",
-      "Post-Achat",
-      "Win-Back",
-      "VIP Tiers",
-      "Audit Flows Complet",
-      "Rotation A/B Sender",
-      "Audit Klaviyo Flows V2"
-    ],
-    "Shopify Admin": [
-      "Enrichissement Produits",
-      "Google Shopping Attributes",
-      "Gestion Collections",
-      "Pages Légales",
-      "Installation GTM",
-      "Webhooks Loyalty",
-      "Audit Store Complet",
-      "Export → Facebook Audiences",
-      "Import Taxonomie Google",
-      "Audit Shopify Store",
-      "Create Warehouse Metafield",
-      "Import Taxonomy Metafield",
-      "Parse Warehouse Csv"
-    ],
-    "Analytics & Reporting": [
-      "Dashboard Looker Studio",
-      "Rapport Sources GA4",
-      "Audit Système Complet",
-      "Alerte Stock Bas",
-      "Projections Marges",
-      "Analyse Inventaire",
-      "Suivi BNPL Performance",
-      "Vérification Pixels",
-      "Analyze Ga4 Conversion Source"
-    ],
-    "Contenu & Vidéo": [
-      "Vidéo Promo Produit",
-      "Vidéo Cart Recovery",
-      "Vidéo Format Portrait",
-      "Feed Google Shopping",
-      "Diagnostic GMC",
-      "Article Blog Auto",
-      "Workflow n8n Complet",
-      "Generate All Promo Videos"
-    ],
-    "CinematicAds AI": [
-      "CinematicAds Director",
-      "Competitor Clone AI",
-      "E-commerce Ads Factory",
-      "Asset Factory (Dual AI)"
-    ],
-    "AI Avatar & Influencer": [
-      "AI Avatar Generator",
-      "AI Talking Video"
-    ],
-    "WhatsApp Business": [
-      "Confirmation WhatsApp RDV",
-      "Rappels WhatsApp 24h + 1h"
-    ],
-    "Voice AI & Téléphonie": [
-      "Grok Voice Téléphonie"
-    ]
-  },
-  "packs": {
-    "quickWin": {
-      "price": "390€",
-      "automations": "1 flow optimisé",
-      "bonus": "Voice AI + Booking"
+  "version": "2025-12-26",
+  "generated": "2025-12-26T00:00:00.000Z",
+  "summary": "3A Automation - Expert en automatisation marketing pour PME et e-commerce.",
+  "categories": [
+    "Lead Generation",
+    "Email Marketing",
+    "E-commerce",
+    "Analytics",
+    "SEO & Contenu",
+    "AI & Video",
+    "WhatsApp Business",
+    "Voice AI"
+  ],
+  "services": {
+    "audit": {
+      "description": "Analyse gratuite de vos processus",
+      "deliverable": "Rapport PDF avec recommandations",
+      "delay": "24-48h"
     },
-    "essentials": {
-      "price": "790€",
-      "automations": "3 flows + A/B tests",
-      "bonus": "Voice AI + Booking + WhatsApp"
+    "packs": {
+      "description": "Du projet ponctuel au déploiement complet",
+      "type": "Forfait one-time"
     },
-    "growth": {
-      "price": "1399€",
-      "automations": "5 flows + dashboard",
-      "bonus": "Voice AI + Booking + WhatsApp + Rappels"
+    "retainers": {
+      "description": "Maintenance et optimisation continue",
+      "type": "Abonnement mensuel"
     }
   },
-  "retainers": {
-    "maintenance": {
-      "price": "290€/mois",
-      "hours": "3h"
-    },
-    "optimization": {
-      "price": "490€/mois",
-      "hours": "5h"
-    }
+  "sectors": [
+    "E-commerce / Shopify",
+    "BTP / Construction",
+    "Services B2B",
+    "SaaS",
+    "Prestataires de services"
+  ],
+  "contact": {
+    "email": "contact@3a-automation.com",
+    "website": "3a-automation.com",
+    "pricing": "/pricing.html",
+    "booking": "/booking.html"
   }
 }

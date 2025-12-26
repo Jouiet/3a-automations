@@ -24,52 +24,8 @@
     darkBg: '#191E35'             // 3A Secondary (Dark)
   };
 
-  // System prompt pour l'assistant (mise à jour auto via knowledge.json)
-  const SYSTEM_PROMPT = `Tu es l'assistant vocal de 3A Automation.
-
-IDENTITÉ:
-- Consultant automation pour PME et e-commerce (tous secteurs)
-- Expert Klaviyo, Shopify, GA4/GTM, n8n, Voice AI
-- Site: 3a-automation.com
-- 77 automatisations disponibles dans 10 catégories
-- 9 MCPs fonctionnels (Model Context Protocol)
-
-CATÉGORIES D'AUTOMATISATIONS (77 total):
-- Lead Generation & Acquisition (20): Meta/Google/TikTok Leads, LinkedIn, Google Maps
-- Email Marketing Klaviyo (9): Welcome, Abandon panier, Post-achat, Winback, VIP
-- Shopify Admin (13): Produits, Collections, Webhooks, Audit Store
-- Analytics & Reporting (9): GA4, Looker Studio, Alertes, Pixels
-- SEO & Contenu (9): Alt text, Meta tags, Schema.org, llms.txt AEO
-- Contenu & Vidéo (10): Promo produit, Cart recovery, Article blog
-- AI Avatar & Influencer (2): Consistent avatar multi-scenes
-- CinematicAds AI (4): Gemini 3 Pro + Imagen 4 + Veo 3.1
-- WhatsApp Business (2): Confirmations, Rappels RDV
-- Voice AI Grok (1): Téléphonie vocale IA
-
-SERVICES (nouveaux prix):
-- Audit gratuit: Formulaire → Rapport PDF 24-48h
-- Quick Win: 390€ (1 flow optimisé) + BONUS Voice AI
-- Essentials: 790€ (3 flows + A/B tests) + BONUS Voice AI + WhatsApp
-- Growth: 1399€ (5 flows + dashboard) + BONUS complet
-- Retainers: 290-490€/mois
-
-SECTEURS SERVIS:
-- E-commerce / Shopify
-- Restaurants / Food
-- Médecins / Cabinets médicaux
-- Architectes / BTP
-- Comptables / Services B2B
-
-STYLE:
-- Réponses courtes (2-3 phrases max)
-- Propose toujours l'audit gratuit
-- Pas de jargon technique
-- Ton professionnel mais accessible
-
-OBJECTIF:
-- Qualifier le prospect (secteur, besoin)
-- Proposer l'audit gratuit
-- Rediriger vers le formulaire contact ou la prise de RDV vocale`;
+  // API Backend pour réponses (prompts privés côté serveur)
+  const VOICE_API_ENDPOINT = 'https://dashboard.3a-automation.com/api/voice/respond';
 
   // Knowledge base (chargé dynamiquement)
   let knowledgeBase = null;
@@ -1066,50 +1022,50 @@ OBJECTIF:
     return null;
   }
 
-  // Réponses par industrie
+  // Réponses par industrie - OUTCOMES FOCUSED (no technical details)
   const industryResponses = {
     btp: {
-      intro: 'Pour le BTP, je propose des solutions spécifiques : capture de leads chantiers via Google Maps et annuaires, relances automatiques de devis, et demandes d\'avis post-travaux.',
-      services: 'Mes automatisations BTP incluent :\n• Scraping Google Maps pour nouveaux chantiers\n• Veille appels d\'offres automatique\n• Relances devis programmées\n• Emails satisfaction post-travaux\n• Demandes avis Google automatiques',
-      leads: 'Pour générer des leads BTP, j\'utilise le scraping Google Maps pour identifier les chantiers en cours et les entreprises qui recrutent. Je peux aussi surveiller les appels d\'offres publics automatiquement.'
+      intro: 'Pour le BTP, je propose des solutions spécifiques : identification de nouveaux prospects, relances automatiques de devis, et demandes d\'avis post-travaux.',
+      services: 'Automatisations BTP :\n• Identification prospects locaux\n• Veille opportunités automatique\n• Relances devis programmées\n• Emails satisfaction post-travaux\n• Collecte avis clients automatique',
+      leads: 'Pour générer des leads BTP, j\'identifie automatiquement les opportunités dans votre zone et je qualifie les prospects selon vos critères.'
     },
     b2b: {
-      intro: 'Pour le B2B, je me concentre sur la qualification automatique des leads, le lead scoring, et les séquences de nurturing pour convertir les prospects froids en clients.',
-      services: 'Mes automatisations B2B incluent :\n• Lead scoring automatique\n• Séquences nurturing (5-10 emails)\n• Sync CRM (HubSpot, Pipedrive)\n• Alertes commerciales temps réel\n• Qualification automatique des leads',
-      leads: 'Pour la génération de leads B2B, je configure des workflows de capture depuis LinkedIn, les formulaires web, et je qualifie automatiquement selon vos critères. Les leads chauds sont alertés en temps réel.'
+      intro: 'Pour le B2B, je me concentre sur la qualification automatique des leads et les séquences de nurturing pour convertir les prospects en clients.',
+      services: 'Automatisations B2B :\n• Lead scoring automatique\n• Séquences nurturing personnalisées\n• Synchronisation CRM\n• Alertes commerciales temps réel\n• Qualification automatique',
+      leads: 'Pour la génération de leads B2B, je configure des workflows de capture et qualification automatique. Les leads chauds déclenchent des alertes en temps réel.'
     },
     ecommerce: {
-      intro: 'Pour l\'e-commerce, je suis expert Klaviyo et Shopify. Mes flows automatisés récupèrent 5-15% des paniers abandonnés et génèrent en moyenne 42€ pour 1€ investi.',
-      services: 'Mes automatisations e-commerce incluent :\n• Abandon de panier (3 emails)\n• Welcome series nouveaux clients\n• Post-purchase pour fidéliser\n• Back-in-stock automatique\n• Segmentation RFM\n• Winback clients dormants',
-      leads: 'Pour l\'e-commerce, les "leads" sont vos visiteurs. Je configure le tracking complet, les popups intelligents, et les flows de conversion pour transformer les visiteurs en acheteurs.'
+      intro: 'Pour l\'e-commerce, j\'optimise tout le parcours client : de l\'acquisition à la fidélisation, en passant par la récupération des paniers abandonnés.',
+      services: 'Automatisations e-commerce :\n• Récupération paniers abandonnés\n• Welcome series nouveaux clients\n• Post-achat pour fidéliser\n• Alertes retour en stock\n• Réactivation clients dormants',
+      leads: 'Pour l\'e-commerce, je configure les flows de conversion pour transformer les visiteurs en acheteurs et maximiser la valeur client.'
     },
     saas: {
-      intro: 'Pour les SaaS, je configure l\'onboarding automatisé, la prévention du churn, et les emails de feature adoption pour maximiser la rétention.',
-      services: 'Mes automatisations SaaS incluent :\n• Onboarding séquencé\n• Churn prevention (users à risque)\n• Feature adoption emails\n• NPS automatique\n• Upsell triggers intelligents'
+      intro: 'Pour les SaaS, je configure l\'onboarding automatisé, la prévention du churn, et les emails pour maximiser l\'adoption et la rétention.',
+      services: 'Automatisations SaaS :\n• Onboarding séquencé\n• Prévention churn proactive\n• Adoption des fonctionnalités\n• Collecte feedback automatique\n• Upsell intelligent'
     },
     services: {
-      intro: 'Pour les prestataires de services, je configure l\'automatisation de la prospection, les rappels rendez-vous, et les demandes de témoignages post-mission.',
-      services: 'Mes automatisations services incluent :\n• Prospection automatisée\n• Nurturing leads longs\n• Rappels rendez-vous\n• Demandes de témoignages\n• Facturation automatique'
+      intro: 'Pour les prestataires de services, j\'automatise la prospection, les rappels rendez-vous, et les demandes de témoignages post-mission.',
+      services: 'Automatisations services :\n• Prospection automatisée\n• Nurturing leads longs\n• Rappels rendez-vous\n• Demandes de témoignages\n• Suivi administratif'
     }
   };
 
-  // Réponses enrichies par topic
+  // Réponses enrichies par topic - OUTCOMES FOCUSED (no prices, no tech details)
   const topicResponses = {
     processus: {
       keywords: ['processus', 'comment ça marche', 'fonctionnement', 'étapes', 'déroulement', 'explique'],
-      response: `Voici comment ça se passe :\n\n1️⃣ **Formulaire diagnostic** (5 min)\nVous me décrivez votre activité et vos besoins\n\n2️⃣ **Rapport PDF** (24-48h)\nJe vous envoie 3 recommandations prioritaires\n\n3️⃣ **Proposition** \nSi ça vous intéresse, je vous envoie un devis détaillé\n\n4️⃣ **Implémentation**\nJe configure tout, vous n'avez rien à faire de technique\n\n✅ Pas d'appel obligatoire, tout par écrit si vous préférez !`
+      response: `Voici comment ça se passe :\n\n1️⃣ **Formulaire diagnostic** (5 min)\nVous me décrivez votre activité et vos objectifs\n\n2️⃣ **Rapport personnalisé** (24-48h)\nJe vous envoie 3 recommandations prioritaires\n\n3️⃣ **Proposition sur mesure** \nSi ça vous intéresse, devis détaillé adapté à vos besoins\n\n4️⃣ **Implémentation clé en main**\nJe configure tout, vous n'avez rien à faire de technique\n\n✅ Pas d'appel obligatoire, tout par écrit si vous préférez !`
     },
     pricing: {
       keywords: ['prix', 'tarif', 'combien', 'coût', 'budget', 'devis', 'cher'],
-      response: `Voici mes tarifs :\n\n**PACKS ONE-TIME:**\n• Quick Win: 390€ (1 flow, ~4h)\n• Essentials: 790€ (3 flows + A/B tests)\n• Growth: 1399€ (5 flows + dashboard)\n\n**RETAINERS MENSUELS:**\n• Maintenance: 290€/mois (3h)\n• Optimization/Growth: 490€/mois (5h)\n\n💡 L'audit est GRATUIT et vous aide à choisir. Quel est votre besoin principal ?`
+      response: `Nos tarifs sont forfaitaires, sans surprise :\n\n**PACKS ONE-TIME:**\nDu projet ponctuel au déploiement complet\n\n**RETAINERS MENSUELS:**\nMaintenance et optimisation continue\n\n💡 L'audit est GRATUIT et vous aide à choisir le pack adapté à vos besoins.\n\n👉 Consultez nos tarifs sur /pricing.html ou demandez un devis personnalisé !`
     },
     audit: {
       keywords: ['audit', 'gratuit', 'diagnostic', 'analyse'],
-      response: `L'audit e-commerce est 100% gratuit !\n\n📋 **Ce que vous recevez:**\n• Analyse de vos automatisations actuelles\n• 3 quick wins prioritaires\n• Estimation du ROI potentiel\n• Recommandations personnalisées\n\n⏱️ **Délai:** 24-48h après le formulaire\n\n👉 Voulez-vous que je vous envoie le lien du formulaire ?`
+      response: `L'audit est 100% gratuit !\n\n📋 **Ce que vous recevez:**\n• Analyse de vos processus actuels\n• Opportunités d'automatisation identifiées\n• Estimation du ROI potentiel\n• Recommandations personnalisées\n\n⏱️ **Délai:** 24-48h après le formulaire\n\n👉 Voulez-vous que je vous envoie le lien du formulaire ?`
     },
     automatisations: {
       keywords: ['automatisation', 'automatisations', 'workflow', 'flows', 'quoi automatiser'],
-      response: `J'ai 77 automatisations prêtes à déployer :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports auto\n\n🛒 **E-commerce:**\nSync produits, Stock alerts, Reviews\n\n🤖 **AI & Video:**\nCinematicAds, AI Avatar, Voice AI\n\nQuel type vous intéresse le plus ?`
+      response: `Je propose un large catalogue d'automatisations :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports automatiques\n\n🛒 **E-commerce:**\nSync produits, Alertes stock, Reviews\n\n🤖 **AI & Video:**\nVidéos marketing, Avatar IA, Voix IA\n\nQuel type vous intéresse le plus ?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'client', 'acquisition', 'trouver des clients'],
@@ -1117,15 +1073,15 @@ OBJECTIF:
     },
     difference: {
       keywords: ['différence', 'pourquoi vous', 'agence', 'freelance', 'avantage'],
-      response: `Ce qui me différencie :\n\n✅ **Consultant solo, pas agence**\nPas de commercial, pas de junior - vous travaillez avec l'expert directement\n\n✅ **Prix justes**\nPas de marge agence (30-50% en moins)\n\n✅ **Spécialisation**\nExpert Klaviyo, Shopify, n8n - pas généraliste\n\n✅ **Résultats prouvés**\n42+ clients servis, ROI moyen 42:1 sur email\n\n✅ **Flexibilité**\nPas d'engagement long terme obligatoire`
+      response: `Ce qui me différencie :\n\n✅ **Consultant expert, pas agence**\nVous travaillez directement avec l'expert, pas un commercial\n\n✅ **Prix justes**\nPas de marge agence\n\n✅ **Spécialisation**\nExpert automation marketing - pas généraliste\n\n✅ **Résultats mesurables**\nROI prouvé sur chaque projet\n\n✅ **Flexibilité**\nPas d'engagement long terme obligatoire`
     },
     garantie: {
       keywords: ['garantie', 'risque', 'marche pas', 'satisfait'],
-      response: `Ma garantie est simple :\n\n🔒 **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, je corrige jusqu'à satisfaction - pas de limite de révisions.\n\n📝 **Documentation complète**\nVous gardez le contrôle, même sans moi.\n\n🚪 **Pas d'engagement**\nLes packs sont one-time. Les retainers sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
+      response: `Ma garantie est simple :\n\n🔒 **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, je corrige jusqu'à satisfaction.\n\n📝 **Documentation complète**\nVous gardez le contrôle, même sans moi.\n\n🚪 **Pas d'engagement**\nLes packs sont one-time. Les retainers sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
     },
     delai: {
       keywords: ['délai', 'temps', 'quand', 'combien de temps', 'durée'],
-      response: `Les délais dépendent du pack :\n\n⚡ **Quick Win (390€):** 48-72h\n📦 **Essentials (790€):** 5-7 jours\n🚀 **Growth (1399€):** 10-14 jours\n\n📋 **Audit gratuit:** 24-48h\n\nCes délais incluent les révisions. Je peux accélérer si urgence (supplément 20%).`
+      response: `Les délais varient selon le projet :\n\n⚡ **Projet simple:** 48-72h\n📦 **Projet standard:** 5-7 jours\n🚀 **Projet complet:** 10-14 jours\n\n📋 **Audit gratuit:** 24-48h\n\nCes délais incluent les révisions. Possibilité d'accélérer si urgence.`
     },
     oui: {
       keywords: ['oui', 'd\'accord', 'ok', 'allons-y', 'intéressé', 'je veux'],
@@ -1137,7 +1093,7 @@ OBJECTIF:
     },
     salutations: {
       keywords: ['bonjour', 'salut', 'hello', 'hi', 'coucou', 'bonsoir'],
-      response: `Bonjour ! 👋 Je suis l'assistant 3A Automation.\n\nJe peux vous aider à :\n• Automatiser votre marketing (emails, leads)\n• Comprendre nos services et tarifs\n• Obtenir un audit gratuit\n\nQuel est votre secteur d'activité ?`
+      response: `Bonjour ! 👋 Je suis l'assistant 3A Automation.\n\nJe peux vous aider à :\n• Automatiser votre marketing (emails, leads)\n• Comprendre nos services\n• Obtenir un audit gratuit\n\nQuel est votre secteur d'activité ?`
     },
     remerciements: {
       keywords: ['merci', 'super', 'génial', 'parfait', 'excellent'],

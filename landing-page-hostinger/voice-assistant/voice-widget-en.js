@@ -787,22 +787,23 @@
   };
 
   // Topic responses
+  // Responses by topic - OUTCOMES FOCUSED (no prices, no tech details)
   const topicResponses = {
     process: {
       keywords: ['process', 'how does it work', 'steps', 'explain', 'how do you'],
-      response: `Here's how it works:\n\n1️⃣ **Diagnostic form** (5 min)\nDescribe your business and needs\n\n2️⃣ **PDF Report** (24-48h)\nI send you 3 priority recommendations\n\n3️⃣ **Proposal**\nIf interested, I send a detailed quote\n\n4️⃣ **Implementation**\nI configure everything - no technical skills needed\n\n✅ No mandatory calls - all written if you prefer!`
+      response: `Here's how it works:\n\n1️⃣ **Diagnostic form** (5 min)\nDescribe your business and goals\n\n2️⃣ **Personalized Report** (24-48h)\nI send you 3 priority recommendations\n\n3️⃣ **Custom Proposal**\nIf interested, I send a detailed quote tailored to your needs\n\n4️⃣ **Turnkey Implementation**\nI configure everything - no technical skills needed\n\n✅ No mandatory calls - all written if you prefer!`
     },
     pricing: {
       keywords: ['price', 'cost', 'budget', 'quote', 'how much', 'pricing'],
-      response: `Here's my pricing:\n\n**ONE-TIME PACKS:**\n• Quick Win: $420 (1 flow, ~4h)\n• Essentials: $855 (3 flows + A/B tests)\n• Growth: $1,610 (5 flows + dashboard)\n\n**MONTHLY RETAINERS:**\n• Maintenance: $315/month (3h)\n• Optimization: $530/month (5h)\n• Growth: $960/month (10h)\n\n💡 The audit is FREE and helps you choose. What's your main need?`
+      response: `Our pricing is fixed and transparent:\n\n**ONE-TIME PACKS:**\nFrom simple projects to complete deployments\n\n**MONTHLY RETAINERS:**\nOngoing maintenance and optimization\n\n💡 The audit is FREE and helps you choose the right package.\n\n👉 See our pricing at /en/pricing.html or request a custom quote!`
     },
     audit: {
       keywords: ['audit', 'free', 'diagnostic', 'analysis'],
-      response: `The e-commerce audit is 100% free!\n\n📋 **What you get:**\n• Analysis of your current automations\n• 3 priority quick wins\n• Estimated ROI potential\n• Personalized recommendations\n\n⏱️ **Timeframe:** 24-48h after the form\n\n👉 Would you like me to send you the form link?`
+      response: `The audit is 100% free!\n\n📋 **What you get:**\n• Analysis of your current processes\n• Automation opportunities identified\n• Estimated ROI potential\n• Personalized recommendations\n\n⏱️ **Timeframe:** 24-48h after the form\n\n👉 Would you like me to send you the form link?`
     },
     automations: {
       keywords: ['automation', 'automations', 'workflow', 'flows', 'what can you'],
-      response: `I have 77 ready-to-deploy automations in 10 categories:\n\n📧 **Email Marketing (9):**\nWelcome, Abandoned cart, Post-purchase, Winback, VIP Tiers\n\n🎯 **Lead Generation (20):**\nMeta/Google/TikTok Leads, LinkedIn, Google Maps, Scoring\n\n📊 **Analytics (9):**\nGA4 Dashboards, Looker Studio, Pixel checks, Alerts\n\n🛒 **Shopify Admin (13):**\nProduct enrichment, Google Shopping, Collections\n\n🔍 **SEO & AEO (9):**\nAlt text, Schema.org, llms.txt, Meta tags\n\n🎬 **CinematicAds AI (4):**\nGemini 3 Pro + Imagen 4 + Veo 3 video generation\n\n📱 **WhatsApp Business (2):**\nBooking confirmations, Reminders\n\n🎙️ **Voice AI (1):**\nGrok Voice Telephony\n\nWhich type interests you most?`
+      response: `I offer a comprehensive automation catalog:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Automated reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\n🤖 **AI & Video:**\nMarketing videos, AI Avatar, Voice AI\n\nWhich type interests you most?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'customer', 'acquisition', 'find customers'],
@@ -810,15 +811,15 @@
     },
     difference: {
       keywords: ['difference', 'why you', 'agency', 'advantage', 'unique'],
-      response: `What makes me different:\n\n✅ **Solo consultant, not agency**\nNo salespeople, no juniors - you work directly with the expert\n\n✅ **Fair pricing**\nNo agency markup (30-50% less)\n\n✅ **Specialization**\nKlaviyo, Shopify, n8n expert - not generalist\n\n✅ **Proven results**\n42+ clients served, average 42:1 email ROI\n\n✅ **Flexibility**\nNo long-term commitment required`
+      response: `What makes me different:\n\n✅ **Expert consultant, not agency**\nYou work directly with the expert, not a salesperson\n\n✅ **Fair pricing**\nNo agency markup\n\n✅ **Specialization**\nMarketing automation expert - not generalist\n\n✅ **Measurable results**\nProven ROI on every project\n\n✅ **Flexibility**\nNo long-term commitment required`
     },
     guarantee: {
       keywords: ['guarantee', 'risk', 'not work', 'satisfied'],
-      response: `My guarantee is simple:\n\n🔒 **Satisfied or we iterate**\nIf automations don't work as expected, I fix until satisfied - no revision limit.\n\n📝 **Complete documentation**\nYou keep control, even without me.\n\n🚪 **No commitment**\nPacks are one-time. Retainers cancelable anytime.\n\nWant to start with the free audit?`
+      response: `My guarantee is simple:\n\n🔒 **Satisfied or we iterate**\nIf automations don't work as expected, I fix until satisfied.\n\n📝 **Complete documentation**\nYou keep control, even without me.\n\n🚪 **No commitment**\nPacks are one-time. Retainers cancelable anytime.\n\nWant to start with the free audit?`
     },
     timeline: {
       keywords: ['timeline', 'when', 'how long', 'duration', 'time'],
-      response: `Timelines depend on the pack:\n\n⚡ **Quick Win ($420):** 1 week\n📦 **Essentials ($855):** 2 weeks\n🚀 **Growth ($1,610):** 3 weeks\n\n📋 **Free audit:** 24-48h\n\nThese include revisions. Rush available (+20%).`
+      response: `Timelines vary by project:\n\n⚡ **Simple project:** 48-72h\n📦 **Standard project:** 5-7 days\n🚀 **Complete project:** 10-14 days\n\n📋 **Free audit:** 24-48h\n\nThese include revisions. Rush available if needed.`
     },
     yes: {
       keywords: ['yes', 'sure', 'ok', 'let\'s go', 'interested', 'i want'],
@@ -830,7 +831,7 @@
     },
     greetings: {
       keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon'],
-      response: `Hello! 👋 I'm the 3A Automation assistant.\n\nI can help you:\n• Automate your marketing (emails, leads)\n• Understand our services and pricing\n• Get a free audit\n\nWhat industry are you in?`
+      response: `Hello! 👋 I'm the 3A Automation assistant.\n\nI can help you:\n• Automate your marketing (emails, leads)\n• Understand our services\n• Get a free audit\n\nWhat industry are you in?`
     },
     thanks: {
       keywords: ['thanks', 'thank you', 'great', 'perfect', 'awesome'],
