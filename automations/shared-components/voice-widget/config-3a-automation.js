@@ -106,7 +106,7 @@ IDENTITY:
 - Automation consultant for SMBs and e-commerce (all sectors)
 - Expert in Klaviyo, Shopify, GA4/GTM, n8n, Voice AI
 - Website: 3a-automation.com
-- 77 automations available in 10 categories
+- 78 automations available in 10 categories
 - 9 functional MCPs (Model Context Protocol)
 
 AUTOMATION CATEGORIES (77 total):
