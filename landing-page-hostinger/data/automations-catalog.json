@@ -809,14 +809,14 @@
       "benefit_en": "-30% no-shows"
     },
     {
-      "id": "grok-voice-telephony",
-      "name_fr": "Grok Voice Téléphonie",
-      "name_en": "Grok Voice Telephony",
+      "id": "voice-ai-assistant",
+      "name_fr": "Assistant Vocal IA",
+      "name_en": "AI Voice Assistant",
       "category": "voice-ai",
-      "frequency_fr": "Appels entrants",
-      "frequency_en": "Inbound calls",
-      "benefit_fr": "Réservation par téléphone IA ($0.05/min)",
-      "benefit_en": "AI phone booking ($0.05/min)"
+      "frequency_fr": "24/7 disponible",
+      "frequency_en": "24/7 available",
+      "benefit_fr": "Réservation et qualification par voix",
+      "benefit_en": "Voice booking and qualification"
     },
     {
       "id": "linkedin-lead-scraper",
