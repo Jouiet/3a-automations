@@ -4936,12 +4936,12 @@ body.lite {
 }
 .roi-label { font-size: 0.875rem; color: var(--text-secondary); }
 
-.audit-section { padding: var(--spacing-3xl) 0; }
+.audit-section { padding: var(--spacing-xl) 0; }
 .audit-card {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(79, 186, 241, 0.1) 100%);
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: var(--radius-2xl);
-  padding: var(--spacing-3xl);
+  padding: var(--spacing-xl) var(--spacing-2xl);
   text-align: center;
 }
 
@@ -4957,15 +4957,15 @@ body.lite {
   margin-bottom: var(--spacing-lg);
 }
 
-.audit-card h2 { font-size: 1.75rem; color: var(--text-light); margin-bottom: var(--spacing-md); }
-.audit-desc { color: var(--text-secondary); max-width: 500px; margin: 0 auto var(--spacing-2xl); }
+.audit-card h2 { font-size: 1.75rem; color: var(--text-light); margin-bottom: var(--spacing-sm); }
+.audit-desc { color: var(--text-secondary); max-width: 500px; margin: 0 auto var(--spacing-lg); }
 
 .audit-process {
   display: flex;
   justify-content: center;
   gap: var(--spacing-xl);
   flex-wrap: wrap;
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: var(--spacing-lg);
 }
 
 .audit-step { display: flex; align-items: center; gap: var(--spacing-sm); }
