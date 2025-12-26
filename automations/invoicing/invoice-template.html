@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facture 3A Automation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #4FBAF1;
+      --primary-dark: #2B6685;
+      --secondary: #191E35;
+      --accent: #10B981;
+      --text-light: #E4F4FC;
+      --text-secondary: #8BA3B9;
+      --border: rgba(79, 186, 241, 0.2);
+      --bg-card: rgba(255, 255, 255, 0.03);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #0F1219 0%, #191E35 50%, #1a1f3a 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+      padding: 40px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .invoice-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(25, 30, 53, 0.95) 0%, rgba(15, 18, 25, 0.98) 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 0 60px rgba(79, 186, 241, 0.1),
+        0 25px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Header */
+    .invoice-header {
+      background: linear-gradient(135deg, rgba(79, 186, 241, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+      padding: 40px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .company-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 24px;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(79, 186, 241, 0.3);
+    }
+
+    .company-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .company-tagline {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .invoice-title {
+      text-align: right;
+    }
+
+    .invoice-label {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-light);
+      letter-spacing: 2px;
+    }
+
+    .invoice-number {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .invoice-status {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .status-pending {
+      background: rgba(251, 191, 36, 0.15);
+      color: #FBBF24;
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .status-paid {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* Info Section */
+    .invoice-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .info-block h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .info-block p {
+      color: var(--text-light);
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .info-block .highlight {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Dates Section */
+    .invoice-dates {
+      display: flex;
+      gap: 40px;
+      padding: 24px 40px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .date-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .date-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(79, 186, 241, 0.1);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .date-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .date-value {
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    /* Items Table */
+    .invoice-items {
+      padding: 40px;
+    }
+
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .items-table thead th {
+      text-align: left;
+      padding: 16px 0;
+      border-bottom: 2px solid var(--border);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .items-table thead th:last-child {
+      text-align: right;
+    }
+
+    .items-table tbody td {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      vertical-align: top;
+    }
+
+    .items-table tbody td:last-child {
+      text-align: right;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .item-name {
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .item-description {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      max-width: 400px;
+    }
+
+    .item-qty, .item-rate {
+      color: var(--text-secondary);
+    }
+
+    /* Totals */
+    .invoice-totals {
+      padding: 0 40px 40px;
+    }
+
+    .totals-box {
+      margin-left: auto;
+      width: 300px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .total-row:last-child {
+      border-bottom: none;
+      padding-top: 16px;
+      margin-top: 8px;
+      border-top: 2px solid var(--border);
+    }
+
+    .total-label {
+      color: var(--text-secondary);
+    }
+
+    .total-value {
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .total-row.grand-total .total-label,
+    .total-row.grand-total .total-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .total-row.grand-total .total-value {
+      color: var(--primary);
+    }
+
+    /* Payment Section */
+    .invoice-payment {
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(79, 186, 241, 0.05) 0%, rgba(16, 185, 129, 0.03) 100%);
+      border-top: 1px solid var(--border);
+    }
+
+    .payment-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .payment-method {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .payment-method-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .payment-flag {
+      font-size: 1.5rem;
+    }
+
+    .payment-method-title {
+      font-weight: 600;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .payment-method-details {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .payment-method-details strong {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .invoice-footer {
+      padding: 30px 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      font-size: 0.85rem;
+    }
+
+    .footer-contact a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+
+      .invoice-container {
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+
+    /* Currency Badge */
+    .currency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(79, 186, 241, 0.1);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 500;
+      margin-left: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="invoice-container">
+    <!-- Header -->
+    <div class="invoice-header">
+      <div class="company-info">
+        <div class="logo">3A</div>
+        <div>
+          <div class="company-name">3A Automation</div>
+          <div class="company-tagline">Automation &bull; Analytics &bull; AI</div>
+        </div>
+      </div>
+      <div class="invoice-title">
+        <div class="invoice-label">FACTURE</div>
+        <div class="invoice-number">#INV-2025-001</div>
+        <div class="invoice-status status-pending">En attente</div>
+      </div>
+    </div>
+
+    <!-- Client & Company Info -->
+    <div class="invoice-info">
+      <div class="info-block">
+        <h3>Facturé à</h3>
+        <p>
+          <strong class="highlight">[Nom du Client]</strong><br>
+          [Adresse ligne 1]<br>
+          [Code postal, Ville]<br>
+          [Pays]<br><br>
+          <span style="color: var(--text-secondary)">Email:</span> [email@client.com]
+        </p>
+      </div>
+      <div class="info-block">
+        <h3>Émetteur</h3>
+        <p>
+          <strong class="highlight">3A Automation</strong><br>
+          [Adresse]<br>
+          [Code postal, Ville]<br>
+          Maroc<br><br>
+          <span style="color: var(--text-secondary)">ICE:</span> [Numéro ICE]
+        </p>
+      </div>
+    </div>
+
+    <!-- Dates -->
+    <div class="invoice-dates">
+      <div class="date-item">
+        <div class="date-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="date-label">Date d'émission</div>
+          <div class="date-value">26 Décembre 2025</div>
+        </div>
+      </div>
+      <div class="date-item">
+        <div class="date-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div>
+          <div class="date-label">Date d'échéance</div>
+          <div class="date-value">10 Janvier 2026</div>
+        </div>
+      </div>
+      <div class="date-item">
+        <div class="date-icon" style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="date-label">Devise</div>
+          <div class="date-value">EUR <span class="currency-badge">Europe</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Items -->
+    <div class="invoice-items">
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th style="width: 50%">Description</th>
+            <th style="width: 15%">Quantité</th>
+            <th style="width: 15%">Prix unitaire</th>
+            <th style="width: 20%">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="item-name">Pack Essentials - Setup Automatisations</div>
+              <div class="item-description">Configuration complète: 9 workflows email marketing, 5 automations analytics, intégration Voice AI</div>
+            </td>
+            <td class="item-qty">1</td>
+            <td class="item-rate">790,00 €</td>
+            <td>790,00 €</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="item-name">Retainer Maintenance - 1 mois</div>
+              <div class="item-description">Monitoring, optimisation continue, support prioritaire</div>
+            </td>
+            <td class="item-qty">1</td>
+            <td class="item-rate">290,00 €</td>
+            <td>290,00 €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Totals -->
+    <div class="invoice-totals">
+      <div class="totals-box">
+        <div class="total-row">
+          <span class="total-label">Sous-total</span>
+          <span class="total-value">1 080,00 €</span>
+        </div>
+        <div class="total-row">
+          <span class="total-label">TVA (0%)</span>
+          <span class="total-value">0,00 €</span>
+        </div>
+        <div class="total-row grand-total">
+          <span class="total-label">Total</span>
+          <span class="total-value">1 080,00 €</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="invoice-payment">
+      <div class="payment-title">Moyens de paiement acceptés</div>
+      <div class="payment-methods">
+        <div class="payment-method">
+          <div class="payment-method-header">
+            <span class="payment-flag">🇲🇦</span>
+            <span class="payment-method-title">Maroc (MAD)</span>
+          </div>
+          <div class="payment-method-details">
+            <strong>Banque:</strong> [Nom Banque]<br>
+            <strong>RIB:</strong> [24 chiffres]<br>
+            <strong>Bénéficiaire:</strong> 3A Automation
+          </div>
+        </div>
+        <div class="payment-method">
+          <div class="payment-method-header">
+            <span class="payment-flag">🇪🇺</span>
+            <span class="payment-method-title">Europe (EUR)</span>
+          </div>
+          <div class="payment-method-details">
+            <strong>IBAN:</strong> BE** **** **** ****<br>
+            <strong>BIC:</strong> TRWIBEB1XXX<br>
+            <strong>Banque:</strong> Wise
+          </div>
+        </div>
+        <div class="payment-method">
+          <div class="payment-method-header">
+            <span class="payment-flag">🌍</span>
+            <span class="payment-method-title">International (USD)</span>
+          </div>
+          <div class="payment-method-details">
+            <strong>Account:</strong> [Payoneer]<br>
+            <strong>Routing:</strong> [ABA]<br>
+            <strong>Swift:</strong> [Code]
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="invoice-footer">
+      <p class="footer-text">
+        Merci pour votre confiance. Cette facture est payable sous 15 jours.
+      </p>
+      <div class="footer-contact">
+        <a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a>
+        <span style="color: var(--text-secondary)">|</span>
+        <a href="https://3a-automation.com">3a-automation.com</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
