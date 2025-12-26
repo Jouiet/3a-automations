@@ -1,6 +1,31 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 94)
+## Document Exécutable - Décembre 2025 (màj Session 96)
 ## Objectif: Premier client payant en 4 semaines
+
+---
+
+## ✅ SESSION 96 COMPLETE: MARKETING REBALANCE (26/12/2025)
+
+### Strategy "Sell the WHAT + WHY, not the HOW" = 98% COMPLETE
+```
+CHANGES DEPLOYED:
+├── [x] pricing.html: Hourly rates removed (FR + EN)
+├── [x] llms-full.txt: Tech stack abstracted v1.1
+├── [x] voice-widget.js: Prompts migrated to backend
+├── [x] automations.html: Frequencies/APIs removed
+├── [x] Footer (32 pages): MCPs → Partners
+├── [x] automations-registry.json: Public version created
+├── [x] Services pages: Outcomes vs features (ecommerce, pme/smb)
+└── [x] Case studies (FR + EN): Results without methods
+
+VÉRIFICATIONS VISUELLES:
+├── ✅ Homepage hero: 77 Automatisations, 9 Intégrations
+├── ✅ Footer: "10+ Partenaires intégrés" (not MCPs)
+├── ✅ Case studies: "Résultats Obtenus" (not "Solutions Deployées")
+└── ✅ No technical stack badges visible on case cards
+
+COMMIT: efb56eb
+```
 
 ---
 
