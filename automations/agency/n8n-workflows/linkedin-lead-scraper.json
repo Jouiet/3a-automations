@@ -217,6 +217,39 @@
       "typeVersion": 4.2,
       "position": [2000, 200],
       "notes": "Update admin dashboard"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.email }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "has-email",
+      "name": "Has Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2000, 400],
+      "notes": "Only trigger outreach if email exists"
+    },
+    {
+      "parameters": {
+        "url": "https://n8n.srv1168256.hstgr.cloud/webhook/leads/new",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ email: $json.email, firstName: $json.firstName, lastName: $json.lastName, company: $json.company, headline: $json.headline, leadScore: $json.leadScore }) }}",
+        "options": {}
+      },
+      "id": "trigger-outreach",
+      "name": "Trigger Email Outreach",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2220, 300],
+      "notes": "Start email outreach sequence for leads with email"
     }
   ],
   "connections": {
@@ -312,6 +345,29 @@
             "index": 0
           }
         ]
+      ]
+    },
+    "Sync to Klaviyo": {
+      "main": [
+        [
+          {
+            "node": "Has Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Email?": {
+      "main": [
+        [
+          {
+            "node": "Trigger Email Outreach",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
       ]
     }
   },
