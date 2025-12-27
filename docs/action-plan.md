@@ -142,7 +142,7 @@ FICHIERS CRÉÉS:
     └── Script de vérification automatique du pipeline
 
 NEXT STEP:
-└── [ ] Déployer v2 sur Google Apps Script (remplacer l'ancien)
+└── [HUMAN] Déployer v2 sur Google Apps Script (copier outputs/google-apps-script-form-handler-v2.txt)
 ```
 
 ---
@@ -158,11 +158,11 @@ SESSION 97 COMPLETED:
 ├── [x] Invoice System: Multi-currency MAD/EUR/USD ✅ Session 97
 └── [x] Conversion Tracking: Google Sheets API LIVE ✅ Session 97
 
-ACTIONS SESSION 98:
-├── [ ] Déployer google-apps-script-form-handler-v2.gs (production)
-├── [ ] Premier outreach: 10 prospects e-commerce Shopify
-├── [ ] Test invoice generation: Premier devis client
-└── [ ] Analytics: Vérifier leads entrants Dashboard
+ACTIONS SESSION 98+ (Updated Session 102):
+├── [HUMAN] Déployer google-apps-script-form-handler-v2.gs (copier outputs/)
+├── [HUMAN] Premier outreach: 10 prospects e-commerce Shopify
+├── [HUMAN] Test invoice generation: Premier devis client réel
+└── [x] Analytics: Dashboard avec Recharts ✅ Session 94+97
 
 BLOCKERS HUMAINS (Requis pour débloquer):
 ├── ❌ Shopify dev store: partners.shopify.com (démos)
@@ -181,20 +181,21 @@ DÉCISION VALIDÉE:
 ├── [x] Registry: 4 automations marquées "external-service"
 └── [x] Shared components créés (Voice + WhatsApp generics)
 
-PROCHAINES ÉTAPES CINEMATICADS:
-├── [ ] Copier shared-components vers Ads-Automations/
-├── [ ] Configurer n8n CinematicAds
-├── [ ] Créer templates WhatsApp Meta
-└── [ ] Déployer voice-widget sur cinematicads.studio
+PROCHAINES ÉTAPES CINEMATICADS (HUMAN BLOCKERS):
+├── [HUMAN] Copier shared-components vers Ads-Automations/
+├── [HUMAN] Configurer n8n CinematicAds (instance séparée)
+├── [HUMAN] Créer templates WhatsApp Meta (Business Manager)
+└── [HUMAN] Déployer voice-widget sur cinematicads.studio (hosting)
 ```
 
 ### Priorité 3: TECHNIQUE (Maintenance)
 ```
-BACKLOG:
-├── [ ] Créer Shopify dev store pour demos
-├── [ ] Tests end-to-end des 10 workflows n8n
-├── [ ] Monitoring: alertes si workflow échoue
-└── [x] Phase 3 Dashboard: Charts Recharts ✅ DONE Session 94
+BACKLOG (Updated Session 102):
+├── [HUMAN] Créer Shopify dev store pour demos (partners.shopify.com)
+├── [x] Tests n8n: 10/10 workflows ACTIFS ✅ Session 90
+├── [x] Phase 3 Dashboard: Charts Recharts ✅ DONE Session 94
+├── [x] Dashboard LIVE: https://dashboard.3a-automation.com ✅ Session 88
+└── [x] SEO BreadcrumbList: 14 pages conversion ✅ Session 102
 ```
 
 ---
@@ -533,7 +534,7 @@ AUDITS PASSÉS:
 ├── ✅ SEO/AEO: 0 issues (2 low CSS)
 └── ✅ WCAG/RGAA: 0 issues
 
-COMMIT: [pending]
+COMMIT: e04436d feat(grok-voice): Add Grok Voice telephony workflow + xAI API verified
 ```
 
 ---
@@ -563,7 +564,7 @@ AUDITS PASSÉS:
 ├── ✅ SEO/AEO: 0 issues (2 low CSS)
 └── ✅ WCAG/RGAA: 0 issues
 
-COMMIT: [pending]
+COMMIT: c039610 feat(whatsapp): Add WhatsApp Business API workflows + update to 74 automations
 ```
 
 ---
@@ -2146,7 +2147,7 @@ PRÉREQUIS:
 │      • AI crawlers lowercase (anthropic-ai, cohere-ai)                      │
 │                                                                              │
 │   COMMITS SESSION 66:                                                        │
-│   • [pending] fix(seo): Complete HIGH + MEDIUM SEO issues                   │
+│   • 07c2fca fix(seo): Complete HIGH + MEDIUM SEO issues                     │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
