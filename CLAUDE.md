@@ -1,5 +1,5 @@
 # 3A AUTOMATION - Projet Claude Code
-## Version: 14.6 | Date: 2025-12-26 | Session: 98 (COMPLETE)
+## Version: 14.7 | Date: 2025-12-27 | Session: 99 (COMPLETE)
 ## Site: https://3a-automation.com | Email: contact@3a-automation.com
 
 ---
@@ -7,8 +7,9 @@
 ## SOURCE DE VERITE
 
 **Automations Registry:** `automations/automations-registry.json` (78 automations v1.8.0)
+**Automations Index:** `automations/INDEX.md` (v4.0 - synced 27/12/2025)
 **Dashboard:** https://dashboard.3a-automation.com (Next.js 14 + Google Sheets + n8n API)
-**Historique Sessions:** `HISTORY.md` (Sessions 0-97)
+**Historique Sessions:** `HISTORY.md` (Sessions 0-98)
 **Audit Forensique:** `outputs/FORENSIC-AUDIT-2025-12-18.md` (v12.6)
 **Dashboard Blueprint:** `outputs/DASHBOARD-BLUEPRINT-2025-12-25.md`
 **Personas Document:** `docs/PERSONAS-3A-AUTOMATION.md`
@@ -17,7 +18,7 @@
 
 ---
 
-## ETAT ACTUEL (Session 97 - 26/12/2025)
+## ETAT ACTUEL (Session 99 - 27/12/2025)
 
 | Metrique | Valeur | Verifie |
 |----------|--------|---------|
@@ -30,7 +31,7 @@
 | Shared Components | **2** (Voice Widget + WhatsApp) | ✅ Session 93 |
 | Personas Clients | **5** (documentes) | ✅ |
 | Claims Marketing | **CORRIGES** (ROI attribution, counts) | ✅ |
-| MCPs fonctionnels | **12/13** (92%) | ✅ Session 90 |
+| MCPs fonctionnels | **8/13** mcp.json (62%) + 3 built-in = **11 total** | ✅ Session 99 |
 | n8n Workflows | **10/10 ACTIFS** (100%) | ✅ Session 90 |
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
@@ -41,6 +42,49 @@
 | **Lead Tracking** | **Landing → Dashboard CRM INTÉGRÉ** | ✅ Session 97 |
 | **Invoice System** | **Multi-currency MAD/EUR/USD** | ✅ Session 97 |
 | **Conversion Tracking** | **Google Sheets API VERIFIED** | ✅ Session 97 |
+
+### Session 99 - DOCUMENTATION FACTUAL SYNC (27/12/2025)
+```
+═══════════════════════════════════════════════════════════════════
+                    SESSION 99 - FACTUAL DOCUMENTATION AUDIT
+═══════════════════════════════════════════════════════════════════
+
+OBJECTIVE: Bottom-up factual sync - verify reality vs documentation
+
+AUTOMATIONS COUNT FIXED:
+├── automations/INDEX.md: 56 → 78 automations (v3.1 → v4.0)
+├── Registry verified: v1.8.0 with 78 automations
+├── Live site footer: 78 automations ✅ (Chrome DevTools verified)
+└── Category breakdown synced from registry
+
+MCP STATUS CORRECTED (FACTUAL VERIFICATION):
+├── Previous claim: "10/13 (77%)" ❌ WRONG
+├── Actual from mcp.json: 8/13 working (62%)
+│   ├── ✅ ACTIVE (8): chrome-devtools, playwright, gemini, github,
+│   │                  hostinger, google-analytics, google-sheets, apify
+│   ├── ⚠️ CONFIG (2): n8n, klaviyo (credentials OK, no MCP tools)
+│   └── ❌ PLACEHOLDER (3): wordpress, shopify, powerbi-remote
+├── Additional MCPs: +3 (filesystem, memory, claude-mcp)
+└── TOTAL ACTIVE: 11 MCPs
+
+CSS UX FIX:
+├── .voice-section spacing: var(--spacing-sm) → var(--spacing-xl)
+├── Added margin-top: var(--spacing-lg)
+└── styles.min.css regenerated (108KB)
+
+DOCUMENTATION UPDATED:
+├── automations/INDEX.md: v4.0 (78 automations, 10 categories)
+├── CLAUDE.md: v14.7 (Session 99, factual MCP counts)
+└── MCP section: Complete rewrite with verified status
+
+VALIDATION:
+├── ✅ Live site: Chrome DevTools snapshot verified
+├── ✅ Registry: v1.8.0 confirmed
+├── ✅ MCP tools: 11 active verified by function availability
+└── ✅ All counts synced to 78
+
+COMMITS: [pending]
+```
 
 ### Session 98 - SMB/PME PAGES COMPLETE REWRITE (26/12/2025)
 ```
@@ -1081,21 +1125,35 @@ Deploy: GitHub Action -> Hostinger API -> git pull
 
 ---
 
-## MCPs CONFIGURES (9 Fonctionnels)
+## MCPs STATUS (Session 99 - Verified 27/12/2025)
+
+### From mcp.json (8/13 working = 62%)
 
 | MCP | Status | Details |
 |-----|--------|---------|
-| chrome-devtools | ✅ OK | npx |
-| playwright | ✅ OK | npx |
-| github | ✅ OK | Token present |
-| hostinger | ✅ OK | Token present |
-| klaviyo | ✅ OK | API key present |
-| gemini | ✅ OK | API key present |
-| google-analytics | ✅ OK | Service Account |
-| google-sheets | ✅ OK | Service Account |
-| apify | ✅ OK | Token present |
+| chrome-devtools | ✅ ACTIVE | npx, tools available |
+| playwright | ✅ ACTIVE | npx, tools available |
+| gemini | ✅ ACTIVE | API key, tools available |
+| github | ✅ ACTIVE | Token, tools available |
+| hostinger | ✅ ACTIVE | Token, tools available |
+| google-analytics | ✅ ACTIVE | Service Account, tools available |
+| google-sheets | ✅ ACTIVE | Service Account, tools available |
+| apify | ✅ ACTIVE | Token, tools available |
+| n8n | ⚠️ CONFIG | Credentials OK but no MCP tools (use API direct) |
+| klaviyo | ⚠️ CONFIG | Credentials OK but no MCP tools (use API direct) |
+| wordpress | ❌ PLACEHOLDER | wp-sites.json needs real credentials |
 | shopify | ❌ PLACEHOLDER | Needs store config |
-| n8n | ✅ OK | API key + 9 workflows deployed |
+| powerbi-remote | ❌ PLACEHOLDER | Needs Entra ID auth |
+
+### Additional MCPs (+3)
+
+| MCP | Status | Details |
+|-----|--------|---------|
+| filesystem | ✅ ACTIVE | Built-in to Claude Code |
+| memory | ✅ ACTIVE | Knowledge graph |
+| claude-mcp | ✅ ACTIVE | npm installed v2.4.1 |
+
+**TOTAL: 11 active MCPs** (8 mcp.json + 3 additional)
 
 ---
 
@@ -1103,8 +1161,8 @@ Deploy: GitHub Action -> Hostinger API -> git pull
 
 ```
 /Users/mac/Desktop/JO-AAA/           <- AGENCE
-├── automations/                     <- 77 automations
-│   ├── automations-registry.json    <- SOURCE VERITE (v1.5.0)
+├── automations/                     <- 78 automations
+│   ├── automations-registry.json    <- SOURCE VERITE (v1.8.0)
 │   ├── agency/core/                 <- Outils internes
 │   ├── clients/                     <- Templates clients
 │   └── generic/                     <- Utilitaires

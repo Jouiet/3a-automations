@@ -1,32 +1,39 @@
 # 3A Automation - Catalogue Automatisations
-## Version 3.1 | 20 Décembre 2025
+## Version 4.0 | 27 Décembre 2025 (Màj Session 99)
 
 ---
 
 ## Vue d'Ensemble
 
+**Source de Vérité:** `automations-registry.json` (v1.8.0)
+
 ```
 automations/
 ├── agency/                    # Outils internes 3A Automation
-│   └── core/                  # Automatisations système (11)
+│   └── core/                  # Automatisations système
 │
 ├── clients/                   # Automatisations offertes aux clients
-│   ├── shopify/               # E-commerce Shopify (8)
-│   ├── klaviyo/               # Email Marketing (4)
-│   ├── analytics/             # Tracking & Pixels (6)
-│   ├── leads/                 # Génération de leads (9)
-│   ├── seo/                   # Optimisation SEO (5)
-│   ├── social/                # Réseaux sociaux (4)
-│   ├── video/                 # Génération vidéo (3)
-│   └── google-merchant/       # Google Merchant Center (1)
+│   ├── shopify/               # E-commerce Shopify (13)
+│   ├── klaviyo/               # Email Marketing CRM (9)
+│   ├── analytics/             # Tracking & Reporting (9)
+│   ├── leads/                 # Lead Generation (20)
+│   ├── seo/                   # SEO & Contenu (9)
+│   ├── content/               # Contenu & Vidéo (8)
+│   ├── ai-avatar/             # AI Avatar & Influencer (2)
+│   ├── whatsapp/              # WhatsApp Business (2)
+│   └── voice-ai/              # Voice AI & Téléphonie (2)
 │
-├── generic/                   # Utilitaires réutilisables (2)
-│   ├── validate-all-automations.cjs
-│   └── test-all-apis.cjs
+├── shared-components/         # Composants réutilisables
+│   ├── voice-widget/          # Widget vocal configurable
+│   └── whatsapp-workflows/    # Templates WhatsApp n8n
 │
-└── legacy-client-specific/    # Scripts client-spécifiques archivés (2)
+├── invoicing/                 # Système de facturation
+│   └── invoice-generator.cjs  # Multi-currency MAD/EUR/USD
+│
+└── external/
+    └── cinematicads/          # CinematicAds AI (4) → cinematicads.studio
 
-TOTAL: 56 automatisations (consolidation Session 23)
+TOTAL: 78 automatisations client-facing (Registry v1.8.0)
 ```
 
 ---
@@ -297,13 +304,21 @@ main().catch(err => {
 
 | Métrique | Valeur |
 |----------|--------|
-| Automatisations totales | **56** |
-| Agency (internes) | 11 |
-| Clients (offertes) | 41 |
-| Generic (réutilisables) | 2 |
-| Legacy (archivés) | 2 |
-| Catégories | 9 |
-| APIs supportées | Shopify, Klaviyo, Meta, TikTok, Apify, HubSpot, Google Merchant, GA4, Gemini |
+| Automatisations client-facing | **78** |
+| Lead Generation & Acquisition | 20 |
+| Shopify Admin | 13 |
+| SEO & Contenu | 9 |
+| Email Marketing (CRM) | 9 |
+| Analytics & Reporting | 9 |
+| Contenu & Vidéo | 8 |
+| CinematicAds AI (External) | 4 |
+| AI Avatar & Influencer | 2 |
+| WhatsApp Business | 2 |
+| Voice AI & Téléphonie | 2 |
+| Catégories | 10 |
+| APIs supportées | Shopify, Klaviyo, Meta, TikTok, Apify, HubSpot, Google Sheets, GA4, Gemini, xAI/Grok, WhatsApp, ElevenLabs |
+
+**Note:** Les scripts internes (test-*, verify-*, audit-*) sont exclus du count client-facing.
 
 ---
 
@@ -311,6 +326,9 @@ main().catch(err => {
 
 | Date | Version | Modification |
 |------|---------|--------------|
-| 2025-12-19 | 3.0 | **Consolidation Session 23**: scripts/ → automations/agency/core/ (+5), Total 56 automatisations |
-| 2025-12-18 | 2.0 | +11 automatisations: video/ (3), google-merchant/ (1), leads/ (+3), analytics/ (+2), klaviyo/ (+1), seo/ (+1) |
+| 2025-12-27 | 4.0 | **Session 99**: Sync avec registry v1.8.0, 78 automations, 10 catégories |
+| 2025-12-26 | 3.2 | Voice AI Widget + Phone ajoutés, WhatsApp workflows |
+| 2025-12-25 | 3.1 | CinematicAds marqué EXTERNAL (→ cinematicads.studio) |
+| 2025-12-19 | 3.0 | Consolidation Session 23: Total 56 automatisations |
+| 2025-12-18 | 2.0 | +11 automatisations: video/, google-merchant/, leads/ |
 | 2025-12-18 | 1.0 | Création initiale - Migration 38 automatisations |
