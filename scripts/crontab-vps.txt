@@ -1,0 +1,54 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# 3A AUTOMATION - CRONTAB CONFIGURATION
+# VPS: srv1168256.hstgr.cloud (148.230.113.163)
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# Install with: crontab crontab-vps.txt
+# View with: crontab -l
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Environment
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin:/root/.nvm/versions/node/v20.10.0/bin
+NODE_ENV=production
+PROJECT_DIR=/root/3a-automations
+
+# ═══════════════════════════════════════════════════════════════════════════
+# MASTER SCHEDULER - Runs every 5 minutes to check what needs to run
+# ═══════════════════════════════════════════════════════════════════════════
+*/5 * * * * cd $PROJECT_DIR && /root/.nvm/versions/node/v20.10.0/bin/node scripts/master-scheduler.cjs >> logs/cron.log 2>&1
+
+# ═══════════════════════════════════════════════════════════════════════════
+# ALTERNATIVE: Direct schedule (if master-scheduler.cjs not used)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# HOURLY - Lead syncs
+# 0 * * * * cd $PROJECT_DIR && node automations/clients/leads/sync-meta-leads-to-shopify.cjs >> logs/meta-leads.log 2>&1
+# 0 * * * * cd $PROJECT_DIR && node automations/clients/leads/sync-google-ads-leads-to-shopify.cjs >> logs/google-leads.log 2>&1
+# 0 * * * * cd $PROJECT_DIR && node automations/clients/leads/sync-tiktok-ads-leads-to-shopify.cjs >> logs/tiktok-leads.log 2>&1
+
+# DAILY 6:00 AM - Segmentation
+# 0 6 * * * cd $PROJECT_DIR && node automations/clients/klaviyo/geo-segment-profiles.cjs >> logs/geo-segment.log 2>&1
+# 0 6 * * * cd $PROJECT_DIR && node automations/clients/klaviyo/rotation_email.cjs >> logs/rotation.log 2>&1
+
+# WEEKLY Monday 9:00 AM - Reports & Content
+# 0 9 * * 1 cd $PROJECT_DIR && node scripts/generate-blog-article.cjs --topic "Weekly Automation Tips" --category "Automation" --deploy >> logs/blog.log 2>&1
+# 0 9 * * 1 cd $PROJECT_DIR && node automations/generic/scrape-hiring-companies.cjs >> logs/hiring.log 2>&1
+# 0 9 * * 1 cd $PROJECT_DIR && node automations/clients/seo/generate_image_sitemap.cjs >> logs/sitemap.log 2>&1
+# 0 9 * * 1 cd $PROJECT_DIR && node automations/clients/shopify/export-shopify-customers-facebook.cjs >> logs/fb-export.log 2>&1
+# 0 9 * * 1 cd $PROJECT_DIR && node automations/clients/analytics/analyze-ga4-source.cjs >> logs/ga4.log 2>&1
+# 0 9 * * 1 cd $PROJECT_DIR && node automations/clients/analytics/track-bnpl-performance.cjs >> logs/bnpl.log 2>&1
+
+# BATCH Tuesday 3:00 AM - Heavy processing
+# 0 3 * * 2 cd $PROJECT_DIR && node automations/clients/seo/fix-missing-alt-text.cjs >> logs/alt-text.log 2>&1
+
+# ═══════════════════════════════════════════════════════════════════════════
+# MAINTENANCE
+# ═══════════════════════════════════════════════════════════════════════════
+
+# Clean old logs weekly (keep 7 days)
+0 0 * * 0 find $PROJECT_DIR/logs -name "*.log" -mtime +7 -delete
+
+# Git pull daily at 5:00 AM (get latest code)
+0 5 * * * cd $PROJECT_DIR && git pull origin main >> logs/git-pull.log 2>&1
