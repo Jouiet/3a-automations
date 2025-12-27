@@ -3,6 +3,43 @@
   "nodes": [
     {
       "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * 1"
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 180],
+      "notes": "Every Monday at 9:00 AM"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {"name": "topic", "value": "Automation Tip of the Week"},
+            {"name": "language", "value": "fr"},
+            {"name": "keywords", "value": "automation, productivité, e-commerce"},
+            {"name": "publishToFacebook", "value": "true"},
+            {"name": "publishToLinkedIn", "value": "true"}
+          ]
+        }
+      },
+      "id": "schedule-defaults",
+      "name": "Schedule Defaults",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [460, 180],
+      "notes": "Default topic for scheduled runs"
+    },
+    {
+      "parameters": {
         "httpMethod": "POST",
         "path": "blog/generate",
         "responseMode": "responseNode",
@@ -183,6 +220,12 @@
     }
   ],
   "connections": {
+    "Weekly Schedule": {
+      "main": [[{"node": "Schedule Defaults", "type": "main", "index": 0}]]
+    },
+    "Schedule Defaults": {
+      "main": [[{"node": "Generate with Claude", "type": "main", "index": 0}]]
+    },
     "Webhook Trigger": {
       "main": [[{"node": "Set Article Params", "type": "main", "index": 0}]]
     },
