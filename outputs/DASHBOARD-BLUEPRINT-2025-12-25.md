@@ -1,5 +1,5 @@
 # DASHBOARD BLUEPRINT - 3A AUTOMATION
-## Version: 1.2.0 | Date: 2025-12-25 | Session: 94
+## Version: 1.3.0 | Date: 2025-12-27 | Session: 102
 ## Document: Recherche, Audit, Planification et Suivi Implementation
 
 ---
@@ -838,16 +838,16 @@ COMMITS:
 ### Prochaines Étapes (Session 95+)
 
 ```
-PHASE 4 - DÉPLOIEMENT CINEMATICADS (Projet séparé):
-[ ] 4.1 Copier shared-components vers /Desktop/Ads-Automations/
-[ ] 4.2 Configurer n8n pour CinematicAds
-[ ] 4.3 Créer templates WhatsApp Meta
-[ ] 4.4 Déployer voice-widget sur cinematicads.studio
+PHASE 4 - DÉPLOIEMENT CINEMATICADS [HUMAN - Projet Séparé]:
+[ ] 4.1 [HUMAN] Copier shared-components vers /Desktop/Ads-Automations/
+[ ] 4.2 [HUMAN] Configurer n8n pour CinematicAds
+[ ] 4.3 [HUMAN] Créer templates WhatsApp Meta
+[ ] 4.4 [HUMAN] Déployer voice-widget sur cinematicads.studio
 
-PHASE 5 - LEAD GENERATION (Priorité HAUTE):
-[ ] 5.1 Premier outreach: 10 prospects e-commerce Shopify
-[ ] 5.2 Test campaign: Formulaire → Klaviyo → n8n
-[ ] 5.3 Monitoring alertes si workflow échoue
+PHASE 5 - LEAD GENERATION [HUMAN - Manual Outreach]:
+[ ] 5.1 [HUMAN] Premier outreach: 10 prospects e-commerce Shopify
+[ ] 5.2 [HUMAN] Test campaign: Formulaire → Klaviyo → n8n
+[ ] 5.3 [HUMAN] Monitoring alertes si workflow échoue
 ```
 
 ---
