@@ -1,5 +1,43 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 102 (27/12/2025) - MEMORY OPTIMIZATION + MOCK ELIMINATION
+
+| Session | Modifications |
+|---------|---------------|
+| **102** | **Memory Restructure**: CLAUDE.md 56KB→2KB (-96%), modular rules in .claude/rules/ (11 files), session history in HISTORY.md. Dashboard mock elimination: 4 pages fixed (admin/workflows, admin/automations, client/automations, client/settings), 8/12 pages now real API (67%). SEO BreadcrumbList Schema added (8 pages), sitemap.xml dates updated. |
+| **101** | **Documentation Sync + Bug Fixes**: MCP count corrected (11/14 + 3 built-in), corrupted meta tags fixed (en/pricing.html), automation count synced (77→78), "Retainer"→"Abonnement" terminology FR, all strategy docs audited |
+| **100** | **MCP Empirical Verification**: 11/14 MCPs working (79%) + 3 built-in = 14 functional, GitHub MCP fixed (repo name), Google permissions documented, Apify MCP package bug identified |
+
+## Session 98-99 (26/12/2025) - SMB PAGES + GROK MCP
+
+| Session | Modifications |
+|---------|---------------|
+| **99** | **Grok MCP Added**: xAI API integration, 11 models (grok-4, grok-3, etc.) |
+| **98** | **SMB/PME Pages Rewrite**: FR+EN complete rewrite, pain points + 4 service blocks + B2B workflow diagram + FAQ + CTA, CSS .pain-grid + .results-grid added |
+
+## Session 96-97 (26/12/2025) - MARKETING PROTECTION + LEAD TRACKING
+
+| Session | Modifications |
+|---------|---------------|
+| **97** | **Lead Tracking + Invoice**: Landing→Dashboard CRM integration, multi-currency invoice template (MAD/EUR/USD), blog article #2 (Voice AI), analytics page real data (Recharts) |
+| **96** | **Marketing Rebalance**: "Sell WHAT+WHY, not HOW", removed hourly rates/API names/frequencies, Voice AI as product (78th automation), geographic mentions removed, engagement policy updated |
+
+## Session 94-95 (25-26/12/2025) - DASHBOARD REPORTS + N8N AUDIT
+
+| Session | Modifications |
+|---------|---------------|
+| **95** | **n8n Forensic Audit**: 16/20 workflows complete (80%), blog-article-generator v2.0 (11 nodes), blog-multi-channel-cinematicads.json new |
+| **94** | **Dashboard Phase 3 Complete**: Recharts visualization, PDF report generation (jsPDF), CSV export, GitHub Actions CI/CD fixed |
+| **93** | **CinematicAds Strategy**: Marketing-only (external links to cinematicads.studio), shared components (voice-widget + whatsapp) |
+| **92** | **Dashboard Phase 1**: Client dashboard real API (n8n workflows + executions), no more mock data |
+| **91** | **Dashboard Blueprint**: Research + planning, 450+ lines blueprint document |
+
+## Session 90 (25/12/2025) - WELCOME SERIES + 10/10 WORKFLOWS
+
+| Session | Modifications |
+|---------|---------------|
+| **90** | **n8n 10/10 Active**: Klaviyo Welcome Series workflow deployed, claude-mcp server installed, Enhance Product Photos fixed (OAuth→webhook), all 10 workflows verified active |
+
 ## Session 89 FINAL (25/12/2025) - MCP STACK COMPLET 92%
 
 | Session | Modifications |
