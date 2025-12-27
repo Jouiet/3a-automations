@@ -1077,7 +1077,7 @@
     },
     garantie: {
       keywords: ['garantie', 'risque', 'marche pas', 'satisfait'],
-      response: `Ma garantie est simple :\n\n🔒 **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, je corrige jusqu'à satisfaction.\n\n📝 **Documentation complète**\nVous gardez le contrôle, même sans moi.\n\n🚪 **Pas d'engagement**\nLes packs sont one-time. Les retainers sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
+      response: `Ma garantie est simple :\n\n🔒 **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, je corrige jusqu'à satisfaction.\n\n📝 **Documentation complète**\nVous gardez le contrôle, même sans moi.\n\n🚪 **Pas d'engagement**\nLes packs sont one-time. Les abonnements sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
     },
     delai: {
       keywords: ['délai', 'temps', 'quand', 'combien de temps', 'durée'],

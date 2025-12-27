@@ -42,7 +42,7 @@ const KNOWLEDGE_BASE = {
         ideal: 'Transformation complète'
       }
     },
-    retainer: {
+    abonnement: {
       maintenance: { price: '290€/mois', hours: '3h', includes: ['Monitoring', 'Fixes', 'Rapport mensuel'] },
       optimization: { price: '490€/mois', hours: '5h', includes: ['+ A/B tests', 'Optimisation continue', 'Support prioritaire'] }
     },
@@ -162,7 +162,7 @@ const KNOWLEDGE_BASE = {
     garantie: 'Si les automatisations ne fonctionnent pas comme prévu, je corrige jusqu\'à satisfaction. Pas de limite de révisions.',
     outils: 'Je travaille principalement avec Klaviyo, Shopify, GA4, n8n, Google Sheets. Je m\'adapte à vos outils existants.',
     difference: 'Consultant solo = pas de commercial, pas de junior, vous travaillez directement avec l\'expert. Prix justes, pas de marge agence.',
-    engagement: 'Les packs Setup sont one-time, pas d\'engagement. Les retainers sont au mois, résiliables à tout moment.',
+    engagement: 'Les packs Setup sont one-time, pas d\'engagement. Les abonnements sont au mois, résiliables à tout moment.',
     taille: 'Je travaille avec des PME de €10k à €500k/mois de CA. En dessous, l\'audit gratuit peut déjà beaucoup aider.',
     secteur: 'Je travaille tous secteurs: e-commerce, B2B, SaaS, services, BTP, retail... L\'automation s\'adapte.',
     resultats: 'Exemples: +15% récupération paniers abandonnés, 42:1 ROI email, -60% temps qualification leads.'

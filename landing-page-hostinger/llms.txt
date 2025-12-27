@@ -38,7 +38,7 @@
 | Essentials | 790 EUR | 3 flows + A/B tests + 30j support |
 | Growth | 1399 EUR | 5 flows + dashboard + 60j support |
 
-| Retainer | Prix/mois | Heures |
+| Abonnement | Prix/mois | Heures |
 |----------|-----------|--------|
 | Maintenance | 290 EUR | 3h incluses |
 | Optimization | 490 EUR | 5h incluses |
@@ -132,7 +132,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 1. **Expertise directe** - Consultant solo, pas d'agence, vous travaillez avec l'expert
 2. **Resultats prouves** - ROI 42:1 documente
 3. **Prix justes** - Pas de marge agence
-4. **Flexibilite** - Packs one-time, retainers resiliables
+4. **Flexibilite** - Packs one-time, abonnements resiliables
 5. **Garantie** - Corrections jusqu'a satisfaction
 6. **Voice AI inclus** - Assistant vocal disponible 24/7
 
