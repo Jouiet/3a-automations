@@ -210,7 +210,7 @@
 
   "industries_served": {
     "ecommerce": {
-      "keywords": ["e-commerce", "ecommerce", "boutique", "shopify", "woocommerce", "prestashop", "vente en ligne"],
+      "keywords": ["e-commerce", "ecommerce", "boutique", "shopify", "woocommerce", "vente en ligne"],
       "services": [
         "Abandon de panier automatisé (récupère 5-15% des ventes perdues)",
         "Welcome series pour nouveaux clients",
