@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +15,8 @@ import {
   HelpCircle,
   Phone,
   Mail,
-  ExternalLink,
+  RefreshCw,
+  Loader2,
 } from "lucide-react";
 
 interface Ticket {
@@ -27,36 +28,6 @@ interface Ticket {
   lastUpdate: string;
   messages: number;
 }
-
-const mockTickets: Ticket[] = [
-  {
-    id: "TKT-001",
-    subject: "Question sur l'integration Shopify",
-    status: "open",
-    priority: "medium",
-    createdAt: "2024-12-22",
-    lastUpdate: "2024-12-24",
-    messages: 3
-  },
-  {
-    id: "TKT-002",
-    subject: "Probleme avec workflow email",
-    status: "resolved",
-    priority: "high",
-    createdAt: "2024-12-15",
-    lastUpdate: "2024-12-18",
-    messages: 5
-  },
-  {
-    id: "TKT-003",
-    subject: "Demande d'ajout de fonctionnalite",
-    status: "pending",
-    priority: "low",
-    createdAt: "2024-12-20",
-    lastUpdate: "2024-12-21",
-    messages: 2
-  },
-];
 
 const statusConfig = {
   open: { label: "Ouvert", color: "bg-sky-500/20 text-sky-400", icon: AlertCircle },
@@ -71,13 +42,40 @@ const priorityConfig = {
 };
 
 export default function SupportPage() {
-  const [tickets, setTickets] = useState<Ticket[]>(mockTickets);
+  const [tickets, setTickets] = useState<Ticket[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [newTicket, setNewTicket] = useState({ subject: "", message: "" });
 
-  useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500);
+  const fetchTickets = useCallback(async () => {
+    try {
+      setError(null);
+      const response = await fetch("/api/tickets");
+      const data = await response.json();
+
+      if (!data.success && data.error) {
+        setError(data.error);
+        return;
+      }
+
+      setTickets(data.data || []);
+      if (data.message) {
+        setMessage(data.message);
+      }
+    } catch (err) {
+      console.error("Error fetching tickets:", err);
+      setError(err instanceof Error ? err.message : "Erreur de connexion");
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchTickets();
+  }, [fetchTickets]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("fr-FR", {
@@ -87,23 +85,76 @@ export default function SupportPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In production, this would send to Google Sheets via Apps Script
-    console.log("New ticket:", newTicket);
-    setNewTicket({ subject: "", message: "" });
+
+    if (!newTicket.subject.trim() || !newTicket.message.trim()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitSuccess(false);
+
+    try {
+      const response = await fetch("/api/tickets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          subject: newTicket.subject,
+          message: newTicket.message,
+          priority: "medium"
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitSuccess(true);
+        setNewTicket({ subject: "", message: "" });
+        // Refresh tickets list
+        fetchTickets();
+      } else {
+        setError(data.error || "Erreur lors de l'envoi du ticket");
+      }
+    } catch (err) {
+      console.error("Error submitting ticket:", err);
+      setError("Erreur lors de l'envoi du ticket");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isLoading) {
-    return <div className="h-96 bg-muted rounded animate-pulse" />;
+    return (
+      <div className="space-y-6">
+        <div className="h-8 w-48 bg-muted rounded animate-pulse" />
+        <div className="grid gap-4 md:grid-cols-3">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-24 bg-muted rounded animate-pulse" />
+          ))}
+        </div>
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="h-80 bg-muted rounded animate-pulse" />
+          <div className="h-80 bg-muted rounded animate-pulse" />
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold">Support</h1>
-        <p className="text-muted-foreground">Besoin d'aide? Contactez notre equipe</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Support</h1>
+          <p className="text-muted-foreground">Besoin d'aide? Contactez notre equipe</p>
+        </div>
+        <Button onClick={fetchTickets} variant="outline" size="sm">
+          <RefreshCw className="h-4 w-4 mr-2" />
+          Actualiser
+        </Button>
       </div>
 
       {/* Contact Cards */}
@@ -126,7 +177,7 @@ export default function SupportPage() {
             </div>
             <div>
               <h3 className="font-semibold">WhatsApp</h3>
-              <p className="text-sm text-muted-foreground">+212 6XX XXX XXX</p>
+              <p className="text-sm text-muted-foreground">Reponse sous 24h</p>
             </div>
           </CardContent>
         </Card>
@@ -153,6 +204,14 @@ export default function SupportPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
+            {submitSuccess && (
+              <div className="mb-4 p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                <p className="text-sm text-emerald-400 flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4" />
+                  Ticket envoye avec succes! Nous vous repondrons dans les 24h.
+                </p>
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">Sujet</label>
@@ -161,6 +220,7 @@ export default function SupportPage() {
                   value={newTicket.subject}
                   onChange={(e) => setNewTicket({ ...newTicket, subject: e.target.value })}
                   className="bg-background"
+                  required
                 />
               </div>
               <div>
@@ -171,11 +231,21 @@ export default function SupportPage() {
                   value={newTicket.message}
                   onChange={(e) => setNewTicket({ ...newTicket, message: e.target.value })}
                   className="bg-background resize-none"
+                  required
                 />
               </div>
-              <Button type="submit" className="w-full">
-                <Send className="h-4 w-4 mr-2" />
-                Envoyer le Ticket
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Envoi en cours...
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4 mr-2" />
+                    Envoyer le Ticket
+                  </>
+                )}
               </Button>
             </form>
           </CardContent>
@@ -190,40 +260,55 @@ export default function SupportPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {tickets.map((ticket) => {
-                const StatusIcon = statusConfig[ticket.status].icon;
-                return (
-                  <div
-                    key={ticket.id}
-                    className="p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors cursor-pointer"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs text-muted-foreground">{ticket.id}</span>
-                          <Badge className={statusConfig[ticket.status].color}>
-                            <StatusIcon className="h-3 w-3 mr-1" />
-                            {statusConfig[ticket.status].label}
-                          </Badge>
+            {tickets.length === 0 ? (
+              <div className="text-center py-8">
+                <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                <h3 className="font-semibold mb-2">Aucun ticket</h3>
+                <p className="text-sm text-muted-foreground">
+                  {message || "Utilisez le formulaire pour creer votre premier ticket de support."}
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {tickets.map((ticket) => {
+                  const StatusIcon = statusConfig[ticket.status]?.icon || Clock;
+                  const statusColor = statusConfig[ticket.status]?.color || "bg-gray-500/20 text-gray-400";
+                  const statusLabel = statusConfig[ticket.status]?.label || ticket.status;
+                  const priorityColor = priorityConfig[ticket.priority]?.color || "text-gray-400";
+                  const priorityLabel = priorityConfig[ticket.priority]?.label || ticket.priority;
+
+                  return (
+                    <div
+                      key={ticket.id}
+                      className="p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors cursor-pointer"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-xs text-muted-foreground">{ticket.id}</span>
+                            <Badge className={statusColor}>
+                              <StatusIcon className="h-3 w-3 mr-1" />
+                              {statusLabel}
+                            </Badge>
+                          </div>
+                          <h4 className="font-medium">{ticket.subject}</h4>
+                          <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                            <span>Cree le {formatDate(ticket.createdAt)}</span>
+                            <span className={priorityColor}>
+                              Priorite {priorityLabel}
+                            </span>
+                          </div>
                         </div>
-                        <h4 className="font-medium">{ticket.subject}</h4>
-                        <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                          <span>Cree le {formatDate(ticket.createdAt)}</span>
-                          <span className={priorityConfig[ticket.priority].color}>
-                            Priorite {priorityConfig[ticket.priority].label}
-                          </span>
+                        <div className="flex items-center gap-1 text-muted-foreground">
+                          <MessageSquare className="h-4 w-4" />
+                          <span className="text-sm">{ticket.messages}</span>
                         </div>
-                      </div>
-                      <div className="flex items-center gap-1 text-muted-foreground">
-                        <MessageSquare className="h-4 w-4" />
-                        <span className="text-sm">{ticket.messages}</span>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
