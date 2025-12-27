@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useEffect, useCallback } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -30,9 +30,9 @@ import {
   RefreshCw,
   CheckCircle2,
   XCircle,
-  AlertTriangle,
   ExternalLink,
   Activity,
+  AlertCircle,
 } from "lucide-react";
 
 interface Automation {
@@ -48,96 +48,23 @@ interface Automation {
   runCount: number;
   successCount: number;
   errorCount: number;
+  ownerId?: string;
 }
-
-const mockAutomations: Automation[] = [
-  {
-    id: "1",
-    name: "Welcome Email Sequence",
-    description: "Envoie une serie d'emails de bienvenue aux nouveaux abonnes",
-    category: "email",
-    status: "ACTIVE",
-    n8nWorkflowId: "wf_001",
-    trigger: "Nouveau Lead",
-    lastRunAt: "2024-12-23T14:30:00Z",
-    runCount: 1247,
-    successCount: 1235,
-    errorCount: 12,
-  },
-  {
-    id: "2",
-    name: "Abandon Cart Recovery",
-    description: "Rappel automatique pour les paniers abandonnes",
-    category: "ecommerce",
-    status: "ACTIVE",
-    n8nWorkflowId: "wf_002",
-    trigger: "Panier abandonne > 1h",
-    lastRunAt: "2024-12-23T13:45:00Z",
-    runCount: 856,
-    successCount: 854,
-    errorCount: 2,
-  },
-  {
-    id: "3",
-    name: "Lead Scoring Update",
-    description: "Met a jour le score des leads en fonction de leurs interactions",
-    category: "crm",
-    status: "ACTIVE",
-    n8nWorkflowId: "wf_003",
-    trigger: "Chaque interaction",
-    lastRunAt: "2024-12-23T14:25:00Z",
-    runCount: 5432,
-    successCount: 5430,
-    errorCount: 2,
-  },
-  {
-    id: "4",
-    name: "WhatsApp Booking Confirmation",
-    description: "Confirmation de rendez-vous via WhatsApp",
-    category: "communication",
-    status: "ACTIVE",
-    n8nWorkflowId: "wf_004",
-    trigger: "Nouveau RDV",
-    lastRunAt: "2024-12-23T12:00:00Z",
-    runCount: 342,
-    successCount: 340,
-    errorCount: 2,
-  },
-  {
-    id: "5",
-    name: "Daily Report Generation",
-    description: "Genere un rapport quotidien des KPIs",
-    category: "analytics",
-    status: "PAUSED",
-    n8nWorkflowId: "wf_005",
-    trigger: "Chaque jour a 8h",
-    nextRunAt: "2024-12-24T08:00:00Z",
-    runCount: 89,
-    successCount: 87,
-    errorCount: 2,
-  },
-  {
-    id: "6",
-    name: "Inventory Sync Shopify",
-    description: "Synchronise l'inventaire avec Shopify",
-    category: "ecommerce",
-    status: "ERROR",
-    n8nWorkflowId: "wf_006",
-    trigger: "Toutes les 15 min",
-    lastRunAt: "2024-12-23T14:00:00Z",
-    runCount: 2156,
-    successCount: 2150,
-    errorCount: 6,
-  },
-];
 
 const categoryConfig: Record<string, { label: string; icon: typeof Zap; color: string }> = {
   email: { label: "Email", icon: Mail, color: "text-emerald-400" },
+  "email-marketing": { label: "Email Marketing", icon: Mail, color: "text-emerald-400" },
   ecommerce: { label: "E-commerce", icon: ShoppingCart, color: "text-amber-400" },
+  shopify: { label: "Shopify", icon: ShoppingCart, color: "text-amber-400" },
   crm: { label: "CRM", icon: Users, color: "text-sky-400" },
+  "lead-generation": { label: "Lead Gen", icon: Users, color: "text-sky-400" },
   communication: { label: "Communication", icon: MessageSquare, color: "text-purple-400" },
+  whatsapp: { label: "WhatsApp", icon: MessageSquare, color: "text-green-400" },
+  "voice-ai": { label: "Voice AI", icon: MessageSquare, color: "text-pink-400" },
   analytics: { label: "Analytics", icon: Activity, color: "text-pink-400" },
   scheduling: { label: "Planification", icon: Calendar, color: "text-orange-400" },
+  "content-generation": { label: "Content", icon: Zap, color: "text-violet-400" },
+  social: { label: "Social", icon: Users, color: "text-blue-400" },
 };
 
 const statusConfig = {
@@ -148,19 +75,68 @@ const statusConfig = {
 };
 
 export default function AutomationsPage() {
-  const [automations, setAutomations] = useState<Automation[]>(mockAutomations);
+  const [automations, setAutomations] = useState<Automation[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+
+  const fetchAutomations = useCallback(async () => {
+    try {
+      setError(null);
+      const response = await fetch("/api/automations");
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.success && data.data) {
+        setAutomations(data.data);
+        setLastRefresh(new Date());
+      } else {
+        throw new Error(data.error || "Failed to fetch automations");
+      }
+    } catch (err) {
+      console.error("Error fetching automations:", err);
+      setError(err instanceof Error ? err.message : "Erreur de connexion");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500);
-  }, []);
+    fetchAutomations();
+
+    // Auto-refresh every 30 seconds
+    const interval = setInterval(fetchAutomations, 30000);
+    return () => clearInterval(interval);
+  }, [fetchAutomations]);
+
+  const toggleStatus = async (id: string, currentStatus: string) => {
+    const newStatus = currentStatus === "ACTIVE" ? "PAUSED" : "ACTIVE";
+
+    try {
+      const response = await fetch("/api/automations", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, status: newStatus }),
+      });
+
+      if (response.ok) {
+        fetchAutomations();
+      }
+    } catch (err) {
+      console.error("Error updating automation status:", err);
+    }
+  };
 
   const filteredAutomations = automations.filter((automation) => {
     const matchesSearch =
       automation.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      automation.description.toLowerCase().includes(searchTerm.toLowerCase());
+      automation.description?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesTab =
       activeTab === "all" ||
@@ -177,12 +153,11 @@ export default function AutomationsPage() {
     active: automations.filter((a) => a.status === "ACTIVE").length,
     paused: automations.filter((a) => a.status === "PAUSED").length,
     errors: automations.filter((a) => a.status === "ERROR").length,
-    totalRuns: automations.reduce((sum, a) => sum + a.runCount, 0),
-    successRate: (
-      (automations.reduce((sum, a) => sum + a.successCount, 0) /
-        automations.reduce((sum, a) => sum + a.runCount, 0)) *
-      100
-    ).toFixed(1),
+    totalRuns: automations.reduce((sum, a) => sum + (a.runCount || 0), 0),
+    successRate: automations.length > 0 && automations.reduce((sum, a) => sum + (a.runCount || 0), 0) > 0
+      ? ((automations.reduce((sum, a) => sum + (a.successCount || 0), 0) /
+          automations.reduce((sum, a) => sum + (a.runCount || 0), 0)) * 100).toFixed(1)
+      : "0.0",
   };
 
   const formatDate = (dateString?: string) => {
@@ -194,18 +169,6 @@ export default function AutomationsPage() {
       hour: "2-digit",
       minute: "2-digit",
     }).format(date);
-  };
-
-  const toggleStatus = (id: string) => {
-    setAutomations((prev) =>
-      prev.map((a) => {
-        if (a.id === id) {
-          const newStatus = a.status === "ACTIVE" ? "PAUSED" : "ACTIVE";
-          return { ...a, status: newStatus };
-        }
-        return a;
-      })
-    );
   };
 
   if (isLoading) {
@@ -226,6 +189,29 @@ export default function AutomationsPage() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Automations</h1>
+          <Button onClick={fetchAutomations} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Reessayer
+          </Button>
+        </div>
+        <Card className="border-red-500/30 bg-red-500/5">
+          <CardContent className="p-6 flex items-center gap-4">
+            <AlertCircle className="h-8 w-8 text-red-400" />
+            <div>
+              <h3 className="font-semibold text-red-400">Erreur de connexion</h3>
+              <p className="text-sm text-muted-foreground">{error}</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -234,18 +220,26 @@ export default function AutomationsPage() {
           <h1 className="text-3xl font-bold">Automations</h1>
           <p className="text-muted-foreground">
             Gerez vos workflows et automations n8n
+            <span className="text-xs ml-2 opacity-50">
+              Maj: {formatDate(lastRefresh.toISOString())}
+            </span>
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Button variant="outline" size="icon" onClick={fetchAutomations}>
+            <RefreshCw className="h-4 w-4" />
+          </Button>
           <Button variant="outline" size="sm" asChild>
             <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4 mr-2" />
               Ouvrir n8n
             </a>
           </Button>
-          <Button size="sm">
-            <Plus className="h-4 w-4 mr-2" />
-            Nouvelle Automation
+          <Button size="sm" asChild>
+            <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank">
+              <Plus className="h-4 w-4 mr-2" />
+              Nouvelle Automation
+            </a>
           </Button>
         </div>
       </div>
@@ -330,107 +324,134 @@ export default function AutomationsPage() {
 
             <TabsContent value={activeTab} className="mt-0">
               <div className="grid gap-4">
-                {filteredAutomations.map((automation) => {
-                  const CategoryIcon = categoryConfig[automation.category]?.icon || Zap;
-                  const categoryColor = categoryConfig[automation.category]?.color || "text-primary";
+                {filteredAutomations.length === 0 ? (
+                  <Card className="border-border/50">
+                    <CardContent className="p-12 text-center">
+                      <Zap className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+                      <h3 className="font-semibold text-lg">Aucune automation</h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {searchTerm ? "Aucun resultat pour cette recherche" : "Creez votre premiere automation dans n8n"}
+                      </p>
+                      <Button className="mt-4" asChild>
+                        <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          Ouvrir n8n
+                        </a>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  filteredAutomations.map((automation) => {
+                    const CategoryIcon = categoryConfig[automation.category]?.icon || Zap;
+                    const categoryColor = categoryConfig[automation.category]?.color || "text-primary";
 
-                  return (
-                    <Card
-                      key={automation.id}
-                      className="border-border/50 hover:border-primary/30 transition-colors"
-                    >
-                      <CardContent className="p-4">
-                        <div className="flex items-start justify-between">
-                          <div className="flex items-start gap-4">
-                            <div className="p-2 rounded-lg bg-muted">
-                              <CategoryIcon className={`h-5 w-5 ${categoryColor}`} />
-                            </div>
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <h3 className="font-semibold">{automation.name}</h3>
-                                <Badge className={statusConfig[automation.status].color}>
-                                  {statusConfig[automation.status].label}
-                                </Badge>
+                    return (
+                      <Card
+                        key={automation.id}
+                        className="border-border/50 hover:border-primary/30 transition-colors"
+                      >
+                        <CardContent className="p-4">
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-start gap-4">
+                              <div className="p-2 rounded-lg bg-muted">
+                                <CategoryIcon className={`h-5 w-5 ${categoryColor}`} />
                               </div>
-                              <p className="text-sm text-muted-foreground mt-1">
-                                {automation.description}
-                              </p>
-                              <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                                <span className="flex items-center gap-1">
-                                  <Bell className="h-3 w-3" />
-                                  {automation.trigger}
-                                </span>
-                                <span className="flex items-center gap-1">
-                                  <RefreshCw className="h-3 w-3" />
-                                  {automation.runCount.toLocaleString()} executions
-                                </span>
-                                {automation.lastRunAt && (
-                                  <span>Dernier: {formatDate(automation.lastRunAt)}</span>
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <h3 className="font-semibold">{automation.name}</h3>
+                                  <Badge className={statusConfig[automation.status]?.color || statusConfig.DISABLED.color}>
+                                    {statusConfig[automation.status]?.label || automation.status}
+                                  </Badge>
+                                </div>
+                                <p className="text-sm text-muted-foreground mt-1">
+                                  {automation.description || "No description"}
+                                </p>
+                                <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                                  {automation.trigger && (
+                                    <span className="flex items-center gap-1">
+                                      <Bell className="h-3 w-3" />
+                                      {automation.trigger}
+                                    </span>
+                                  )}
+                                  {automation.runCount > 0 && (
+                                    <span className="flex items-center gap-1">
+                                      <RefreshCw className="h-3 w-3" />
+                                      {automation.runCount.toLocaleString()} executions
+                                    </span>
+                                  )}
+                                  {automation.lastRunAt && (
+                                    <span>Dernier: {formatDate(automation.lastRunAt)}</span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => toggleStatus(automation.id, automation.status)}
+                              >
+                                {automation.status === "ACTIVE" ? (
+                                  <Pause className="h-4 w-4" />
+                                ) : (
+                                  <Play className="h-4 w-4" />
                                 )}
-                              </div>
+                              </Button>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button variant="ghost" size="icon">
+                                    <MoreHorizontal className="h-4 w-4" />
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                  <DropdownMenuSeparator />
+                                  <DropdownMenuItem>
+                                    <Play className="h-4 w-4 mr-2" />
+                                    Executer maintenant
+                                  </DropdownMenuItem>
+                                  {automation.n8nWorkflowId && (
+                                    <DropdownMenuItem asChild>
+                                      <a href={`https://n8n.srv1168256.hstgr.cloud/workflow/${automation.n8nWorkflowId}`} target="_blank">
+                                        <ExternalLink className="h-4 w-4 mr-2" />
+                                        Voir dans n8n
+                                      </a>
+                                    </DropdownMenuItem>
+                                  )}
+                                  <DropdownMenuItem>Voir logs</DropdownMenuItem>
+                                  <DropdownMenuSeparator />
+                                  <DropdownMenuItem className="text-destructive">
+                                    Supprimer
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
                             </div>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={() => toggleStatus(automation.id)}
-                            >
-                              {automation.status === "ACTIVE" ? (
-                                <Pause className="h-4 w-4" />
-                              ) : (
-                                <Play className="h-4 w-4" />
-                              )}
-                            </Button>
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon">
-                                  <MoreHorizontal className="h-4 w-4" />
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
-                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem>
-                                  <Play className="h-4 w-4 mr-2" />
-                                  Executer maintenant
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                  <ExternalLink className="h-4 w-4 mr-2" />
-                                  Voir dans n8n
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>Modifier</DropdownMenuItem>
-                                <DropdownMenuItem>Voir logs</DropdownMenuItem>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem className="text-destructive">
-                                  Supprimer
-                                </DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </div>
-                        </div>
 
-                        {/* Progress bar for success rate */}
-                        <div className="mt-4">
-                          <div className="flex items-center justify-between text-xs mb-1">
-                            <span className="text-muted-foreground">Taux de succes</span>
-                            <span className="text-emerald-400">
-                              {((automation.successCount / automation.runCount) * 100).toFixed(1)}%
-                            </span>
-                          </div>
-                          <div className="h-1.5 bg-muted rounded-full overflow-hidden">
-                            <div
-                              className="h-full bg-emerald-500 rounded-full transition-all"
-                              style={{
-                                width: `${(automation.successCount / automation.runCount) * 100}%`,
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                          {/* Progress bar for success rate - only if there are runs */}
+                          {automation.runCount > 0 && (
+                            <div className="mt-4">
+                              <div className="flex items-center justify-between text-xs mb-1">
+                                <span className="text-muted-foreground">Taux de succes</span>
+                                <span className="text-emerald-400">
+                                  {((automation.successCount / automation.runCount) * 100).toFixed(1)}%
+                                </span>
+                              </div>
+                              <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+                                <div
+                                  className="h-full bg-emerald-500 rounded-full transition-all"
+                                  style={{
+                                    width: `${(automation.successCount / automation.runCount) * 100}%`,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    );
+                  })
+                )}
               </div>
             </TabsContent>
           </Tabs>
