@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,8 @@ import {
   FileSpreadsheet,
   File,
   FolderOpen,
+  RefreshCw,
+  AlertCircle,
 } from "lucide-react";
 
 interface Document {
@@ -22,50 +24,8 @@ interface Document {
   size: string;
   uploadedAt: string;
   status: "signed" | "pending" | "draft";
+  url?: string;
 }
-
-const mockDocuments: Document[] = [
-  {
-    id: "1",
-    name: "Contrat Pack Growth - Decembre 2024",
-    type: "contract",
-    size: "245 KB",
-    uploadedAt: "2024-12-01",
-    status: "signed"
-  },
-  {
-    id: "2",
-    name: "Facture #2024-12-001",
-    type: "invoice",
-    size: "89 KB",
-    uploadedAt: "2024-12-15",
-    status: "signed"
-  },
-  {
-    id: "3",
-    name: "Guide Integration Shopify",
-    type: "guide",
-    size: "1.2 MB",
-    uploadedAt: "2024-12-01",
-    status: "signed"
-  },
-  {
-    id: "4",
-    name: "Rapport Performance Q4 2024",
-    type: "report",
-    size: "567 KB",
-    uploadedAt: "2024-12-20",
-    status: "signed"
-  },
-  {
-    id: "5",
-    name: "Avenant Retainer 2025",
-    type: "contract",
-    size: "156 KB",
-    uploadedAt: "2024-12-23",
-    status: "pending"
-  },
-];
 
 const typeConfig = {
   contract: { label: "Contrat", icon: FileCheck, color: "text-primary" },
@@ -81,12 +41,37 @@ const statusConfig = {
 };
 
 export default function DocumentsPage() {
-  const [documents, setDocuments] = useState<Document[]>(mockDocuments);
+  const [documents, setDocuments] = useState<Document[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const fetchDocuments = useCallback(async () => {
+    try {
+      setError(null);
+      const response = await fetch("/api/documents");
+      const data = await response.json();
+
+      if (!data.success && data.error) {
+        setError(data.error);
+        return;
+      }
+
+      setDocuments(data.data || []);
+      if (data.message) {
+        setMessage(data.message);
+      }
+    } catch (err) {
+      console.error("Error fetching documents:", err);
+      setError(err instanceof Error ? err.message : "Erreur de connexion");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500);
-  }, []);
+    fetchDocuments();
+  }, [fetchDocuments]);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("fr-FR", {
@@ -97,15 +82,54 @@ export default function DocumentsPage() {
   };
 
   if (isLoading) {
-    return <div className="h-96 bg-muted rounded animate-pulse" />;
+    return (
+      <div className="space-y-6">
+        <div className="h-8 w-48 bg-muted rounded animate-pulse" />
+        <div className="grid gap-4 md:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-24 bg-muted rounded animate-pulse" />
+          ))}
+        </div>
+        <div className="h-96 bg-muted rounded animate-pulse" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Documents</h1>
+          <Button onClick={fetchDocuments} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Reessayer
+          </Button>
+        </div>
+        <Card className="border-red-500/30 bg-red-500/5">
+          <CardContent className="p-6 flex items-center gap-4">
+            <AlertCircle className="h-8 w-8 text-red-400" />
+            <div>
+              <h3 className="font-semibold text-red-400">Erreur de chargement</h3>
+              <p className="text-sm text-muted-foreground">{error}</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold">Documents</h1>
-        <p className="text-muted-foreground">Vos contrats, factures et documents</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Documents</h1>
+          <p className="text-muted-foreground">Vos contrats, factures et documents</p>
+        </div>
+        <Button onClick={fetchDocuments} variant="outline" size="sm">
+          <RefreshCw className="h-4 w-4 mr-2" />
+          Actualiser
+        </Button>
       </div>
 
       {/* Stats */}
@@ -160,45 +184,60 @@ export default function DocumentsPage() {
           <CardTitle>Tous les Documents</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {documents.map((doc) => {
-              const TypeIcon = typeConfig[doc.type].icon;
-              return (
-                <div
-                  key={doc.id}
-                  className="flex items-center justify-between p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-muted">
-                      <TypeIcon className={`h-6 w-6 ${typeConfig[doc.type].color}`} />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-semibold">{doc.name}</h3>
-                        <Badge className={statusConfig[doc.status].color}>
-                          {statusConfig[doc.status].label}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        {typeConfig[doc.type].label} • {doc.size} • {formatDate(doc.uploadedAt)}
-                      </p>
-                    </div>
-                  </div>
+          {documents.length === 0 ? (
+            <div className="text-center py-12">
+              <FolderOpen className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <h3 className="font-semibold mb-2">Aucun document</h3>
+              <p className="text-sm text-muted-foreground">
+                {message || "Vos documents apparaitront ici une fois ajoutes a votre compte."}
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {documents.map((doc) => {
+                const TypeIcon = typeConfig[doc.type]?.icon || File;
+                const typeColor = typeConfig[doc.type]?.color || "text-muted-foreground";
+                const typeLabel = typeConfig[doc.type]?.label || doc.type;
+                const statusColor = statusConfig[doc.status]?.color || "bg-gray-500/20 text-gray-400";
+                const statusLabel = statusConfig[doc.status]?.label || doc.status;
 
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
-                      <Eye className="h-4 w-4 mr-2" />
-                      Voir
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Download className="h-4 w-4 mr-2" />
-                      Telecharger
-                    </Button>
+                return (
+                  <div
+                    key={doc.id}
+                    className="flex items-center justify-between p-4 rounded-lg border border-border/50 hover:border-primary/30 transition-colors"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 rounded-xl bg-muted">
+                        <TypeIcon className={`h-6 w-6 ${typeColor}`} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-semibold">{doc.name}</h3>
+                          <Badge className={statusColor}>
+                            {statusLabel}
+                          </Badge>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          {typeLabel} • {doc.size} • {formatDate(doc.uploadedAt)}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" disabled={!doc.url}>
+                        <Eye className="h-4 w-4 mr-2" />
+                        Voir
+                      </Button>
+                      <Button variant="outline" size="sm" disabled={!doc.url}>
+                        <Download className="h-4 w-4 mr-2" />
+                        Telecharger
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

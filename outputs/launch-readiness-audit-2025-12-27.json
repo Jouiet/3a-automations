@@ -1,0 +1,299 @@
+{
+  "timestamp": "2025-12-27T17:21:16.749Z",
+  "website": {
+    "pages": [
+      {
+        "path": "404.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "a-propos.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "automations.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "blog/assistant-vocal-ia-pme-2026.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "blog/automatisation-ecommerce-2026.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "blog/index.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "booking.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "cas-clients.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "contact.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/404.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/about.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/automations.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/blog/ecommerce-automation-2026.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/blog/index.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/blog/voice-ai-assistant-sme-2026.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/booking.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/case-studies.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/contact.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/index.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/legal/privacy.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/legal/terms.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/pricing.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/services/ecommerce.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/services/flywheel-360.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/services/free-audit.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/services/smb.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "en/services/voice-ai.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "index.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "legal/mentions-legales.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "legal/politique-confidentialite.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "pricing.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "services/audit-gratuit.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "services/ecommerce.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "services/flywheel-360.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "services/pme.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      },
+      {
+        "path": "services/voice-ai.html",
+        "issues": [],
+        "warnings": [
+          "Outdated: 78 automations (should be 77)"
+        ]
+      }
+    ],
+    "issues": [],
+    "score": 0
+  },
+  "dashboard": {
+    "pages": [],
+    "apis": [],
+    "mocks": [],
+    "issues": [],
+    "score": 0
+  },
+  "integrations": {
+    "verified": [
+      "KLAVIYO_API_KEY",
+      "GOOGLE_APPLICATION_CREDENTIALS",
+      "N8N_API_KEY",
+      "N8N_HOST",
+      "HOSTINGER_API_TOKEN",
+      "GITHUB_TOKEN",
+      "GEMINI_API_KEY",
+      "XAI_API_KEY",
+      "APIFY_TOKEN"
+    ],
+    "failed": [],
+    "pending": [
+      "GOOGLE_CALENDAR_ID"
+    ]
+  },
+  "seo": {
+    "issues": []
+  },
+  "accessibility": {
+    "issues": []
+  },
+  "security": {
+    "issues": []
+  },
+  "summary": {
+    "ready": true,
+    "blockers": [],
+    "warnings": []
+  }
+}
