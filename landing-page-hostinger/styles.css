@@ -5239,16 +5239,16 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
 .retainer-rate { color: var(--text-muted); font-size: 0.8rem; font-style: italic; }
 .retainer-note { text-align: center; color: var(--text-secondary); font-size: 0.875rem; margin-top: var(--spacing-md); }
 
-.voice-section { padding: var(--spacing-xl) 0; margin-top: var(--spacing-lg); }
+.voice-section { padding: var(--spacing-2xl) 0; margin-top: var(--spacing-xl); }
 .voice-card {
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(79, 186, 241, 0.05) 100%);
   border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-lg) var(--spacing-xl);
+  padding: var(--spacing-xl) var(--spacing-2xl);
   text-align: center;
 }
-.voice-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); }
-.voice-half { padding: var(--spacing-md); border-radius: var(--radius-lg); background: rgba(139, 92, 246, 0.05); }
+.voice-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); }
+.voice-half { padding: var(--spacing-lg); border-radius: var(--radius-lg); background: rgba(139, 92, 246, 0.05); }
 .voice-half h4 { font-size: 0.95rem; color: var(--text-light); margin-bottom: var(--spacing-xs); }
 .voice-half > p { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: var(--spacing-xs); }
 .voice-badge-phone { background: rgba(79, 186, 241, 0.2) !important; color: var(--accent) !important; }
