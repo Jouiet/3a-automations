@@ -53,3 +53,4 @@ mcp.json
 
 # Generated invoices
 automations/invoicing/generated/
+logs/
