@@ -91,8 +91,8 @@
 | Page Privacy | ✅ CRÉÉE | Politique de confidentialité complète |
 | Page Audit Gratuit | ✅ CRÉÉE | Lead magnet P0 avec formulaire complet |
 | Page Contact | ✅ CRÉÉE | Page contact dédiée avec formulaire |
-| Blog | ❌ Absent | 0 contenu SEO |
-| Case studies | ❌ Absent | 0 preuve sociale |
+| Blog | ✅ CRÉÉ | 4 articles FR+EN (Session 83+97) |
+| Case studies | ✅ CRÉÉ | cas-clients.html + en/case-studies.html (Session 8+96) |
 | Navigation mobile | ✅ FIXÉE | Hamburger menu + animations + JS toggle |
 | SSL | ✅ **ACTIF** | Let's Encrypt via Traefik (auto-renewal) - Session 21c |
 | Email Klaviyo | ⏳ Webhook ready | n8n peut router vers Klaviyo |
@@ -321,7 +321,7 @@ PHASE 3: Arabe (optionnel - ROI à évaluer)
 | P1 | pricing | Tarifs | ✅ CRÉÉE |
 | P2 | cas-clients | Preuve sociale | ✅ CRÉÉE (Session 8) |
 | P2 | a-propos | Trust | ✅ CRÉÉE (Session 8) |
-| P3 | blog | SEO long-terme | ❌ Phase 2 |
+| P3 | blog | SEO long-terme | ✅ CRÉÉ (4 articles FR+EN) |
 
 ---
 
@@ -1533,7 +1533,7 @@ scripts/
 ---
 
 *Document créé le 17/12/2025*
-*Dernière mise à jour: 20/12/2025 (Session 50)*
+*Dernière mise à jour: 27/12/2025 (Session 102)*
 *Auteur: 3A Automation*
 *Méthode: Approche bottom-up, faits vérifiés uniquement*
 
@@ -1543,6 +1543,7 @@ scripts/
 
 | Version | Date | Modifications |
 |---------|------|---------------|
+| 2.6 | 27/12/2025 | Session 102: Blog + Case Studies marked as CREATED (4 articles FR+EN, cas-clients verified) |
 | 2.5 | 26/12/2025 | Session 96: 78 automations, Voice AI SoftwareApplication schema, llms.txt v4.0 |
 | 2.4 | 23/12/2025 | Session 83: Ultra Forensic Frontend Audit - 133 issues fixed (0 CRITICAL, 0 HIGH) |
 | 2.3 | 23/12/2025 | Session 82: 77 automations verified, llms.txt v3.2 |

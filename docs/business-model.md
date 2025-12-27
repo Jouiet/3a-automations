@@ -101,7 +101,7 @@ SESSION 96 COMPLETE (26/12/2025):
 │  ✅ Chrome DevTools - NPX standard                                          │
 │  ❌ Shopify - Dev store à créer                                             │
 │  ❌ Twilio - MANQUANT (bloque Grok Voice Telephony)                        │
-│  TOTAL: 11/13 fonctionnels (85%) - Session 96                              │
+│  TOTAL: 12/13 fonctionnels (92%) - Session 102                              │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -489,8 +489,8 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 ---
 
-**Document mis à jour:** 23 Décembre 2025
-**Version:** 3.7
+**Document mis à jour:** 27 Décembre 2025
+**Version:** 4.3
 **Principe:** Faits uniquement, zéro bullshit
 
 ---
@@ -499,6 +499,7 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 | Version | Date | Modifications |
 |---------|------|---------------|
+| 4.3 | 27 Déc 2025 | Session 102: MCPs 12/13 (92%), BreadcrumbList Schema, SMB pages complete rewrite, documentation sync |
 | 3.8 | 26 Déc 2025 | Session 96: 78 automations, Voice AI Product, Schema.org SoftwareApplication, llms.txt v4.0 |
 | 3.7 | 23 Déc 2025 | Session 83: Ultra Forensic Audit (133 issues fixed), 9 MCPs vérifiés fonctionnels, logo paths normalisés |
 | 3.6 | 23 Déc 2025 | Session 82: 77 automations vérifiées, llms.txt v3.2 |
