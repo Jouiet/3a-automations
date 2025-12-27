@@ -161,7 +161,7 @@ Le Flywheel 360° automatise chaque étape du parcours client pour créer une cr
 | Essentials | 790€ | $920 | 7.990 DH | 8-10 automations + Messaging |
 | Growth | 1.399€ | $1,690 | 14.990 DH | 15+ automations + Priority support |
 
-### Retainers Mensuels
+### Abonnements Mensuels
 
 | Plan | EUR/mois | Inclus |
 |------|----------|--------|

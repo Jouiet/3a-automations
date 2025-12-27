@@ -74,9 +74,20 @@ PAGE VERIFICATION COMPLETE:
 ├── Homepage counter: ✅ 78 (verified via evaluate_script)
 └── All hreflang: ✅ Correct FR↔EN pairs
 
+TERMINOLOGIE FR CORRIGÉE (Retainer → Abonnement):
+├── pricing.html: meta, JSON-LD, H2, FAQ (6 occurrences)
+├── llms.txt + llms-full.txt: Headers + text (3 occurrences)
+├── voice-widget.js: Garantie response
+├── knowledge-base.js: Object key + FAQ text
+├── knowledge.json: Object key
+├── voice-widget.min.js: Regenerated (32KB)
+└── CSS classes GARDÉES (.retainer-*) = identifiants techniques
+└── EN pages GARDÉES = "retainer" correct en anglais
+
 COMMITS SESSION 101:
 ├── d451a42 fix(docs): Correct MCP count 11/17 → 11/14 (79%)
-└── [pending] fix(session101): Meta tags + automation count sync
+├── 71ecba7 fix(session101): Meta tags + automation count sync
+└── [pending] fix(i18n): Retainer → Abonnement terminology FR
 ```
 
 ### Session 100 - MCP EMPIRICAL VERIFICATION (27/12/2025)

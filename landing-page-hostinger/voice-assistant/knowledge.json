@@ -22,7 +22,7 @@
       "description": "Du projet ponctuel au déploiement complet",
       "type": "Forfait one-time"
     },
-    "retainers": {
+    "abonnements": {
       "description": "Maintenance et optimisation continue",
       "type": "Abonnement mensuel"
     }
