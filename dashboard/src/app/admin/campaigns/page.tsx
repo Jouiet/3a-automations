@@ -1,23 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Mail,
   Send,
   Users,
-  MousePointer,
   Eye,
   Plus,
   Calendar,
-  BarChart3,
   Clock,
   CheckCircle2,
   PauseCircle,
-  PlayCircle,
+  RefreshCw,
+  AlertCircle,
+  ExternalLink,
 } from "lucide-react";
 
 interface Campaign {
@@ -32,68 +31,8 @@ interface Campaign {
   clicked: number;
   scheduledAt?: string;
   sentAt?: string;
+  createdAt?: string;
 }
-
-const mockCampaigns: Campaign[] = [
-  {
-    id: "1",
-    name: "Newsletter Noel 2024",
-    subject: "Offres speciales de Noel - Jusqu'a -50%",
-    status: "sent",
-    type: "newsletter",
-    recipients: 2450,
-    sent: 2438,
-    opened: 1024,
-    clicked: 312,
-    sentAt: "2024-12-20T10:00:00Z"
-  },
-  {
-    id: "2",
-    name: "Black Friday Recap",
-    subject: "Merci pour votre confiance - Resultats Black Friday",
-    status: "sent",
-    type: "newsletter",
-    recipients: 1850,
-    sent: 1842,
-    opened: 892,
-    clicked: 234,
-    sentAt: "2024-12-02T14:00:00Z"
-  },
-  {
-    id: "3",
-    name: "Nouvel An 2025",
-    subject: "Bonne annee 2025 - Nouvelles automations",
-    status: "scheduled",
-    type: "newsletter",
-    recipients: 2680,
-    sent: 0,
-    opened: 0,
-    clicked: 0,
-    scheduledAt: "2025-01-01T09:00:00Z"
-  },
-  {
-    id: "4",
-    name: "Welcome Series - Email 1",
-    subject: "Bienvenue chez 3A Automation",
-    status: "sending",
-    type: "automation",
-    recipients: 156,
-    sent: 89,
-    opened: 67,
-    clicked: 23,
-  },
-  {
-    id: "5",
-    name: "Re-engagement Q4",
-    subject: "Vous nous manquez - Decouvrez nos nouveautes",
-    status: "draft",
-    type: "newsletter",
-    recipients: 0,
-    sent: 0,
-    opened: 0,
-    clicked: 0,
-  },
-];
 
 const statusConfig = {
   draft: { label: "Brouillon", color: "bg-gray-500/20 text-gray-400", icon: PauseCircle },
@@ -104,12 +43,35 @@ const statusConfig = {
 };
 
 export default function CampaignsPage() {
-  const [campaigns, setCampaigns] = useState<Campaign[]>(mockCampaigns);
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [source, setSource] = useState<string>("loading");
+
+  const fetchCampaigns = useCallback(async () => {
+    try {
+      setError(null);
+      const response = await fetch("/api/klaviyo/campaigns");
+      const data = await response.json();
+
+      if (data.error && !data.fallback) {
+        setError(data.error);
+        return;
+      }
+
+      setCampaigns(data.data || []);
+      setSource(data.source || (data.fallback ? "fallback" : "klaviyo"));
+    } catch (err) {
+      console.error("Error fetching campaigns:", err);
+      setError(err instanceof Error ? err.message : "Erreur de connexion");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500);
-  }, []);
+    fetchCampaigns();
+  }, [fetchCampaigns]);
 
   const stats = {
     total: campaigns.length,
@@ -135,6 +97,38 @@ export default function CampaignsPage() {
     return (
       <div className="space-y-6">
         <div className="h-8 w-48 bg-muted rounded animate-pulse" />
+        <div className="grid gap-4 md:grid-cols-5">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Card key={i} className="animate-pulse">
+              <CardContent className="p-4">
+                <div className="h-8 bg-muted rounded" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Campagnes Email</h1>
+          <Button onClick={fetchCampaigns} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Reessayer
+          </Button>
+        </div>
+        <Card className="border-red-500/30 bg-red-500/5">
+          <CardContent className="p-6 flex items-center gap-4">
+            <AlertCircle className="h-8 w-8 text-red-400" />
+            <div>
+              <h3 className="font-semibold text-red-400">Erreur de connexion Klaviyo</h3>
+              <p className="text-sm text-muted-foreground">{error}</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -145,12 +139,29 @@ export default function CampaignsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Campagnes Email</h1>
-          <p className="text-muted-foreground">Gerez vos campagnes email marketing</p>
+          <p className="text-muted-foreground">
+            {source === "klaviyo" ? (
+              <span className="flex items-center gap-1">
+                <CheckCircle2 className="h-3 w-3 text-emerald-400" />
+                Connecte a Klaviyo
+              </span>
+            ) : (
+              "Gerez vos campagnes email marketing"
+            )}
+          </p>
         </div>
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          Nouvelle Campagne
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button onClick={fetchCampaigns} variant="outline" size="sm">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Actualiser
+          </Button>
+          <Button asChild>
+            <a href="https://www.klaviyo.com/campaigns" target="_blank" rel="noopener noreferrer">
+              <ExternalLink className="h-4 w-4 mr-2" />
+              Ouvrir Klaviyo
+            </a>
+          </Button>
+        </div>
       </div>
 
       {/* Stats */}
@@ -208,6 +219,23 @@ export default function CampaignsPage() {
           <CardTitle>Toutes les Campagnes</CardTitle>
         </CardHeader>
         <CardContent>
+          {campaigns.length === 0 ? (
+            <div className="text-center py-12">
+              <Mail className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <h3 className="font-semibold mb-2">Aucune campagne</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                {source === "fallback"
+                  ? "Configurez votre cle API Klaviyo pour voir vos campagnes"
+                  : "Creez votre premiere campagne dans Klaviyo"}
+              </p>
+              <Button asChild variant="outline">
+                <a href="https://www.klaviyo.com/campaigns/create" target="_blank" rel="noopener noreferrer">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Creer une campagne
+                </a>
+              </Button>
+            </div>
+          ) : (
           <div className="space-y-4">
             {campaigns.map((campaign) => {
               const StatusIcon = statusConfig[campaign.status].icon;
@@ -265,6 +293,7 @@ export default function CampaignsPage() {
               );
             })}
           </div>
+          )}
         </CardContent>
       </Card>
     </div>

@@ -5325,8 +5325,22 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
 }
+.faq-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, rgba(79, 186, 241, 0.2), rgba(0, 210, 180, 0.1));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+  color: var(--primary);
+}
 .faq-item h3 { font-size: 1rem; color: var(--text-light); margin-bottom: var(--spacing-sm); }
 .faq-item p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+.faq-item p strong { color: var(--text-light); }
+.faq-item p a { color: var(--primary); text-decoration: none; }
+.faq-item p a:hover { text-decoration: underline; }
 
 .cta-section { padding: var(--spacing-4xl) 0; text-align: center; }
 .cta-section h2 { font-size: 2rem; color: var(--text-light); margin-bottom: var(--spacing-md); }
