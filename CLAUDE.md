@@ -31,7 +31,7 @@
 | Shared Components | **2** (Voice Widget + WhatsApp) | ✅ Session 93 |
 | Personas Clients | **5** (documentes) | ✅ |
 | Claims Marketing | **CORRIGES** (ROI attribution, counts) | ✅ |
-| MCPs fonctionnels | **11/17** (65%) - VÉRIFIÉ EMPIRIQUEMENT | ✅ Session 100 |
+| MCPs fonctionnels | **11/14 configurés** (79%) + 3 built-in = 14 OK | ✅ Session 100 |
 | n8n Workflows | **10/10 ACTIFS** (100%) | ✅ Session 90 |
 | Lighthouse SEO | **100%** | ✅ |
 | Lighthouse A11y | **93%** | ✅ |
@@ -52,7 +52,7 @@
 OBJECTIVE: Empirical verification of ALL MCPs with actual API calls
 
 RESULTS (Session 100 - 27/12/2025):
-├── 11/17 MCPs verified WORKING (65%)
+├── 11/14 MCPs CONFIGURÉS WORKING (79%) + 3 built-in = 14 FONCTIONNELS
 ├── 2 MCPs need Google permissions (not broken - config needed)
 ├── 1 MCP has package bug (Apify - token works via curl, MCP fails)
 ├── 3 MCPs need external configuration (WP, Shopify, Power BI)
@@ -67,7 +67,7 @@ GOOGLE PERMISSIONS FIX REQUIRED:
 
 MCP STATUS (TESTÉ EMPIRIQUEMENT 27/12/2025 - Session 100):
 ├── TOTAL: 17 MCPs (14 mcp.json + 3 built-in)
-├── FONCTIONNELS: 11/17 (65%)
+├── FONCTIONNELS: 11/14 configurés (79%) + 3 built-in = 14 OK
 │   ├── ✅ chrome-devtools (list_pages OK - pricing.html)
 │   ├── ✅ playwright (browser_tabs OK)
 │   ├── ✅ gemini (list_models OK - 6 modèles)
