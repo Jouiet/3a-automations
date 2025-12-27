@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useEffect, useCallback } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -15,6 +15,7 @@ import {
   Clock,
   Zap,
   Settings,
+  AlertCircle,
 } from "lucide-react";
 
 interface N8nWorkflow {
@@ -24,6 +25,19 @@ interface N8nWorkflow {
   createdAt: string;
   updatedAt: string;
   nodes: number;
+  tags: string[];
+}
+
+interface N8nExecution {
+  id: string;
+  workflowId: string;
+  status: string;
+  startedAt: string;
+  stoppedAt?: string;
+  mode: string;
+}
+
+interface WorkflowWithStats extends N8nWorkflow {
   executionsCount: number;
   lastExecution?: {
     status: "success" | "error" | "running";
@@ -32,66 +46,85 @@ interface N8nWorkflow {
   };
 }
 
-const mockWorkflows: N8nWorkflow[] = [
-  {
-    id: "wf_1",
-    name: "Lead Capture → CRM",
-    active: true,
-    createdAt: "2024-12-01",
-    updatedAt: "2024-12-23",
-    nodes: 8,
-    executionsCount: 1247,
-    lastExecution: { status: "success", startedAt: "2024-12-24T10:30:00Z", finishedAt: "2024-12-24T10:30:05Z" }
-  },
-  {
-    id: "wf_2",
-    name: "Abandon Cart Recovery",
-    active: true,
-    createdAt: "2024-11-15",
-    updatedAt: "2024-12-22",
-    nodes: 12,
-    executionsCount: 856,
-    lastExecution: { status: "success", startedAt: "2024-12-24T09:45:00Z", finishedAt: "2024-12-24T09:45:12Z" }
-  },
-  {
-    id: "wf_3",
-    name: "Welcome Email Sequence",
-    active: true,
-    createdAt: "2024-10-20",
-    updatedAt: "2024-12-20",
-    nodes: 6,
-    executionsCount: 2341,
-    lastExecution: { status: "success", startedAt: "2024-12-24T08:00:00Z", finishedAt: "2024-12-24T08:00:03Z" }
-  },
-  {
-    id: "wf_4",
-    name: "Daily Analytics Report",
-    active: false,
-    createdAt: "2024-12-10",
-    updatedAt: "2024-12-15",
-    nodes: 5,
-    executionsCount: 14,
-    lastExecution: { status: "error", startedAt: "2024-12-15T08:00:00Z" }
-  },
-  {
-    id: "wf_5",
-    name: "WhatsApp Booking Confirmation",
-    active: true,
-    createdAt: "2024-12-18",
-    updatedAt: "2024-12-23",
-    nodes: 7,
-    executionsCount: 89,
-    lastExecution: { status: "success", startedAt: "2024-12-24T11:00:00Z", finishedAt: "2024-12-24T11:00:08Z" }
-  },
-];
-
 export default function WorkflowsPage() {
-  const [workflows, setWorkflows] = useState<N8nWorkflow[]>(mockWorkflows);
+  const [workflows, setWorkflows] = useState<WorkflowWithStats[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+
+  const fetchData = useCallback(async () => {
+    try {
+      setError(null);
+
+      const [workflowsRes, executionsRes] = await Promise.all([
+        fetch("/api/n8n/workflows"),
+        fetch("/api/n8n/executions?limit=100"),
+      ]);
+
+      if (!workflowsRes.ok) {
+        throw new Error(`Workflows API error: ${workflowsRes.status}`);
+      }
+
+      const workflowsData = await workflowsRes.json();
+      const executionsData = executionsRes.ok ? await executionsRes.json() : { data: [] };
+
+      if (workflowsData.success && workflowsData.data) {
+        const executions: N8nExecution[] = executionsData.data || [];
+
+        // Map workflows with execution stats
+        const workflowsWithStats: WorkflowWithStats[] = workflowsData.data.map((wf: N8nWorkflow) => {
+          const wfExecutions = executions.filter(e => e.workflowId === wf.id);
+          const lastExec = wfExecutions[0]; // Most recent first
+
+          return {
+            ...wf,
+            executionsCount: wfExecutions.length,
+            lastExecution: lastExec ? {
+              status: lastExec.status === "success" ? "success" :
+                      lastExec.status === "error" ? "error" : "running",
+              startedAt: lastExec.startedAt,
+              finishedAt: lastExec.stoppedAt,
+            } : undefined,
+          };
+        });
+
+        setWorkflows(workflowsWithStats);
+        setLastRefresh(new Date());
+      } else {
+        throw new Error(workflowsData.error || "Failed to fetch workflows");
+      }
+    } catch (err) {
+      console.error("Error fetching workflows:", err);
+      setError(err instanceof Error ? err.message : "Erreur de connexion");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500);
-  }, []);
+    fetchData();
+
+    // Auto-refresh every 30 seconds
+    const interval = setInterval(fetchData, 30000);
+    return () => clearInterval(interval);
+  }, [fetchData]);
+
+  const handleToggleWorkflow = async (workflowId: string, currentActive: boolean) => {
+    try {
+      const res = await fetch("/api/n8n/workflows", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ workflowId, active: !currentActive }),
+      });
+
+      if (res.ok) {
+        // Refresh data after toggle
+        fetchData();
+      }
+    } catch (err) {
+      console.error("Error toggling workflow:", err);
+    }
+  };
 
   const stats = {
     total: workflows.length,
@@ -124,24 +157,51 @@ export default function WorkflowsPage() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Workflows n8n</h1>
+          <Button onClick={fetchData} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Reessayer
+          </Button>
+        </div>
+        <Card className="border-red-500/30 bg-red-500/5">
+          <CardContent className="p-6 flex items-center gap-4">
+            <AlertCircle className="h-8 w-8 text-red-400" />
+            <div>
+              <h3 className="font-semibold text-red-400">Erreur de connexion</h3>
+              <p className="text-sm text-muted-foreground">{error}</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Workflows n8n</h1>
-          <p className="text-muted-foreground">Gerez vos workflows d'automatisation</p>
+          <p className="text-muted-foreground">
+            Gerez vos workflows d'automatisation
+            <span className="text-xs ml-2 opacity-50">
+              Maj: {formatDate(lastRefresh.toISOString())}
+            </span>
+          </p>
         </div>
         <div className="flex gap-2">
+          <Button variant="outline" size="icon" onClick={fetchData}>
+            <RefreshCw className="h-4 w-4" />
+          </Button>
           <Button variant="outline" asChild>
             <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4 mr-2" />
               Ouvrir n8n
             </a>
-          </Button>
-          <Button>
-            <Bot className="h-4 w-4 mr-2" />
-            Nouveau Workflow
           </Button>
         </div>
       </div>
@@ -188,69 +248,98 @@ export default function WorkflowsPage() {
 
       {/* Workflows List */}
       <div className="space-y-4">
-        {workflows.map((workflow) => (
-          <Card key={workflow.id} className="border-border/50 hover:border-primary/30 transition-colors">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className={`p-3 rounded-xl ${workflow.active ? 'bg-emerald-500/10' : 'bg-muted'}`}>
-                    <Bot className={`h-6 w-6 ${workflow.active ? 'text-emerald-400' : 'text-muted-foreground'}`} />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-lg">{workflow.name}</h3>
-                      <Badge className={workflow.active
-                        ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-                        : "bg-gray-500/20 text-gray-400 border-gray-500/30"
-                      }>
-                        {workflow.active ? "Actif" : "Inactif"}
-                      </Badge>
-                      {workflow.lastExecution && (
-                        <Badge className={
-                          workflow.lastExecution.status === "success"
-                            ? "bg-emerald-500/20 text-emerald-400"
-                            : workflow.lastExecution.status === "error"
-                            ? "bg-red-500/20 text-red-400"
-                            : "bg-amber-500/20 text-amber-400"
-                        }>
-                          {workflow.lastExecution.status === "success" ? <CheckCircle2 className="h-3 w-3 mr-1" /> : <XCircle className="h-3 w-3 mr-1" />}
-                          {workflow.lastExecution.status}
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-                      <span>{workflow.nodes} nodes</span>
-                      <span>{workflow.executionsCount.toLocaleString()} executions</span>
-                      {workflow.lastExecution && (
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {formatDate(workflow.lastExecution.startedAt)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="icon">
-                    <RefreshCw className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon">
-                    {workflow.active ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                  </Button>
-                  <Button variant="ghost" size="icon">
-                    <Settings className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={`https://n8n.srv1168256.hstgr.cloud/workflow/${workflow.id}`} target="_blank">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Editer
-                    </a>
-                  </Button>
-                </div>
-              </div>
+        {workflows.length === 0 ? (
+          <Card className="border-border/50">
+            <CardContent className="p-12 text-center">
+              <Bot className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+              <h3 className="font-semibold text-lg">Aucun workflow</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Creez votre premier workflow dans n8n
+              </p>
+              <Button className="mt-4" asChild>
+                <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank">
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Ouvrir n8n
+                </a>
+              </Button>
             </CardContent>
           </Card>
-        ))}
+        ) : (
+          workflows.map((workflow) => (
+            <Card key={workflow.id} className="border-border/50 hover:border-primary/30 transition-colors">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className={`p-3 rounded-xl ${workflow.active ? 'bg-emerald-500/10' : 'bg-muted'}`}>
+                      <Bot className={`h-6 w-6 ${workflow.active ? 'text-emerald-400' : 'text-muted-foreground'}`} />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold text-lg">{workflow.name}</h3>
+                        <Badge className={workflow.active
+                          ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                          : "bg-gray-500/20 text-gray-400 border-gray-500/30"
+                        }>
+                          {workflow.active ? "Actif" : "Inactif"}
+                        </Badge>
+                        {workflow.lastExecution && (
+                          <Badge className={
+                            workflow.lastExecution.status === "success"
+                              ? "bg-emerald-500/20 text-emerald-400"
+                              : workflow.lastExecution.status === "error"
+                              ? "bg-red-500/20 text-red-400"
+                              : "bg-amber-500/20 text-amber-400"
+                          }>
+                            {workflow.lastExecution.status === "success" ? <CheckCircle2 className="h-3 w-3 mr-1" /> : <XCircle className="h-3 w-3 mr-1" />}
+                            {workflow.lastExecution.status}
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+                        <span>{workflow.nodes} nodes</span>
+                        <span>{workflow.executionsCount.toLocaleString()} executions</span>
+                        {workflow.tags.length > 0 && (
+                          <span className="flex gap-1">
+                            {workflow.tags.slice(0, 3).map(tag => (
+                              <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>
+                            ))}
+                          </span>
+                        )}
+                        {workflow.lastExecution && (
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {formatDate(workflow.lastExecution.startedAt)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Button variant="ghost" size="icon" onClick={fetchData}>
+                      <RefreshCw className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleToggleWorkflow(workflow.id, workflow.active)}
+                    >
+                      {workflow.active ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <Settings className="h-4 w-4" />
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={`https://n8n.srv1168256.hstgr.cloud/workflow/${workflow.id}`} target="_blank">
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Editer
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState, useEffect, useCallback } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +17,10 @@ import {
   Play,
   Pause,
   Info,
+  RefreshCw,
+  AlertCircle,
+  Activity,
+  Calendar,
 } from "lucide-react";
 
 interface ClientAutomation {
@@ -24,81 +28,75 @@ interface ClientAutomation {
   name: string;
   description: string;
   category: string;
-  status: "ACTIVE" | "PAUSED";
-  lastRunAt: string;
+  status: "ACTIVE" | "PAUSED" | "ERROR" | "DISABLED";
+  lastRunAt?: string;
   runCount: number;
-  successRate: number;
+  successCount: number;
+  errorCount: number;
+  ownerId?: string;
 }
-
-const mockAutomations: ClientAutomation[] = [
-  {
-    id: "1",
-    name: "Welcome Email Sequence",
-    description: "Envoie automatiquement une serie de 3 emails de bienvenue aux nouveaux abonnes",
-    category: "email",
-    status: "ACTIVE",
-    lastRunAt: "2024-12-23T14:30:00Z",
-    runCount: 1247,
-    successRate: 98.5,
-  },
-  {
-    id: "2",
-    name: "Abandon Cart Recovery",
-    description: "Rappel automatique pour les paniers abandonnes apres 1 heure",
-    category: "ecommerce",
-    status: "ACTIVE",
-    lastRunAt: "2024-12-23T13:45:00Z",
-    runCount: 856,
-    successRate: 97.2,
-  },
-  {
-    id: "3",
-    name: "Lead Nurturing",
-    description: "Sequence d'emails educatifs pour convertir les leads en clients",
-    category: "crm",
-    status: "ACTIVE",
-    lastRunAt: "2024-12-23T12:00:00Z",
-    runCount: 543,
-    successRate: 94.8,
-  },
-  {
-    id: "4",
-    name: "NPS Survey",
-    description: "Envoie une enquete de satisfaction 30 jours apres achat",
-    category: "feedback",
-    status: "ACTIVE",
-    lastRunAt: "2024-12-22T16:00:00Z",
-    runCount: 234,
-    successRate: 99.1,
-  },
-  {
-    id: "5",
-    name: "Birthday Campaign",
-    description: "Email d'anniversaire avec code promo personnalise",
-    category: "email",
-    status: "PAUSED",
-    lastRunAt: "2024-12-15T10:00:00Z",
-    runCount: 89,
-    successRate: 100,
-  },
-];
 
 const categoryConfig: Record<string, { label: string; icon: typeof Zap; color: string }> = {
   email: { label: "Email", icon: Mail, color: "text-emerald-400" },
+  "email-marketing": { label: "Email Marketing", icon: Mail, color: "text-emerald-400" },
   ecommerce: { label: "E-commerce", icon: ShoppingCart, color: "text-amber-400" },
+  shopify: { label: "Shopify", icon: ShoppingCart, color: "text-amber-400" },
   crm: { label: "CRM", icon: Users, color: "text-sky-400" },
+  "lead-generation": { label: "Lead Gen", icon: Users, color: "text-sky-400" },
+  communication: { label: "Communication", icon: MessageSquare, color: "text-purple-400" },
+  whatsapp: { label: "WhatsApp", icon: MessageSquare, color: "text-green-400" },
+  "voice-ai": { label: "Voice AI", icon: MessageSquare, color: "text-pink-400" },
+  analytics: { label: "Analytics", icon: Activity, color: "text-pink-400" },
+  scheduling: { label: "Planification", icon: Calendar, color: "text-orange-400" },
   feedback: { label: "Feedback", icon: MessageSquare, color: "text-purple-400" },
+  "content-generation": { label: "Content", icon: Zap, color: "text-violet-400" },
 };
 
 export default function ClientAutomationsPage() {
-  const [automations, setAutomations] = useState<ClientAutomation[]>(mockAutomations);
+  const [automations, setAutomations] = useState<ClientAutomation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
 
-  useEffect(() => {
-    setTimeout(() => setIsLoading(false), 500);
+  const fetchAutomations = useCallback(async () => {
+    try {
+      setError(null);
+      const response = await fetch("/api/automations");
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.success && data.data) {
+        // Filter to show only ACTIVE automations for client view
+        const activeAutomations = data.data.filter(
+          (a: ClientAutomation) => a.status === "ACTIVE" || a.status === "PAUSED"
+        );
+        setAutomations(activeAutomations);
+        setLastRefresh(new Date());
+      } else {
+        throw new Error(data.error || "Failed to fetch automations");
+      }
+    } catch (err) {
+      console.error("Error fetching automations:", err);
+      setError(err instanceof Error ? err.message : "Erreur de connexion");
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
-  const formatDate = (dateString: string) => {
+  useEffect(() => {
+    fetchAutomations();
+
+    // Auto-refresh every 60 seconds
+    const interval = setInterval(fetchAutomations, 60000);
+    return () => clearInterval(interval);
+  }, [fetchAutomations]);
+
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return "-";
     const date = new Date(dateString);
     return new Intl.DateTimeFormat("fr-FR", {
       day: "numeric",
@@ -108,13 +106,18 @@ export default function ClientAutomationsPage() {
     }).format(date);
   };
 
+  const calculateSuccessRate = (automation: ClientAutomation) => {
+    if (!automation.runCount || automation.runCount === 0) return 0;
+    return ((automation.successCount || 0) / automation.runCount) * 100;
+  };
+
   const stats = {
     total: automations.length,
     active: automations.filter((a) => a.status === "ACTIVE").length,
-    totalRuns: automations.reduce((sum, a) => sum + a.runCount, 0),
-    avgSuccess: (
-      automations.reduce((sum, a) => sum + a.successRate, 0) / automations.length
-    ).toFixed(1),
+    totalRuns: automations.reduce((sum, a) => sum + (a.runCount || 0), 0),
+    avgSuccess: automations.length > 0
+      ? (automations.reduce((sum, a) => sum + calculateSuccessRate(a), 0) / automations.length).toFixed(1)
+      : "0.0",
   };
 
   if (isLoading) {
@@ -135,14 +138,45 @@ export default function ClientAutomationsPage() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Mes Automations</h1>
+          <Button onClick={fetchAutomations} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Reessayer
+          </Button>
+        </div>
+        <Card className="border-red-500/30 bg-red-500/5">
+          <CardContent className="p-6 flex items-center gap-4">
+            <AlertCircle className="h-8 w-8 text-red-400" />
+            <div>
+              <h3 className="font-semibold text-red-400">Erreur de connexion</h3>
+              <p className="text-sm text-muted-foreground">{error}</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold">Mes Automations</h1>
-        <p className="text-muted-foreground">
-          Suivez les performances de vos workflows automatises
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Mes Automations</h1>
+          <p className="text-muted-foreground">
+            Suivez les performances de vos workflows automatises
+            <span className="text-xs ml-2 opacity-50">
+              Maj: {formatDate(lastRefresh.toISOString())}
+            </span>
+          </p>
+        </div>
+        <Button variant="outline" size="icon" onClick={fetchAutomations}>
+          <RefreshCw className="h-4 w-4" />
+        </Button>
       </div>
 
       {/* Stats */}
@@ -187,90 +221,115 @@ export default function ClientAutomationsPage() {
 
       {/* Automations List */}
       <div className="space-y-4">
-        {automations.map((automation) => {
-          const category = categoryConfig[automation.category] || {
-            label: automation.category,
-            icon: Zap,
-            color: "text-primary",
-          };
-          const CategoryIcon = category.icon;
+        {automations.length === 0 ? (
+          <Card className="border-border/50">
+            <CardContent className="p-12 text-center">
+              <Zap className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+              <h3 className="font-semibold text-lg">Aucune automation</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Contactez notre equipe pour configurer vos premieres automations
+              </p>
+              <Button className="mt-4" variant="outline">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Contacter le support
+              </Button>
+            </CardContent>
+          </Card>
+        ) : (
+          automations.map((automation) => {
+            const category = categoryConfig[automation.category] || {
+              label: automation.category,
+              icon: Zap,
+              color: "text-primary",
+            };
+            const CategoryIcon = category.icon;
+            const successRate = calculateSuccessRate(automation);
 
-          return (
-            <Card
-              key={automation.id}
-              className="border-border/50 hover:border-primary/30 transition-colors"
-            >
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-muted">
-                      <CategoryIcon className={`h-6 w-6 ${category.color}`} />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-lg">{automation.name}</h3>
-                        <Badge
-                          className={
-                            automation.status === "ACTIVE"
-                              ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-                              : "bg-gray-500/20 text-gray-400 border-gray-500/30"
-                          }
-                        >
-                          {automation.status === "ACTIVE" ? (
+            return (
+              <Card
+                key={automation.id}
+                className="border-border/50 hover:border-primary/30 transition-colors"
+              >
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 rounded-xl bg-muted">
+                        <CategoryIcon className={`h-6 w-6 ${category.color}`} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-semibold text-lg">{automation.name}</h3>
+                          <Badge
+                            className={
+                              automation.status === "ACTIVE"
+                                ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                                : "bg-gray-500/20 text-gray-400 border-gray-500/30"
+                            }
+                          >
+                            {automation.status === "ACTIVE" ? (
+                              <>
+                                <Play className="h-3 w-3 mr-1" />
+                                Actif
+                              </>
+                            ) : (
+                              <>
+                                <Pause className="h-3 w-3 mr-1" />
+                                En pause
+                              </>
+                            )}
+                          </Badge>
+                        </div>
+                        <p className="text-muted-foreground mt-1">{automation.description || "No description"}</p>
+
+                        {/* Stats row */}
+                        <div className="flex items-center gap-6 mt-4 text-sm">
+                          {automation.runCount > 0 && (
                             <>
-                              <Play className="h-3 w-3 mr-1" />
-                              Actif
-                            </>
-                          ) : (
-                            <>
-                              <Pause className="h-3 w-3 mr-1" />
-                              En pause
+                              <div className="flex items-center gap-2 text-muted-foreground">
+                                <BarChart3 className="h-4 w-4" />
+                                <span>{automation.runCount.toLocaleString()} executions</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                                <span className="text-emerald-400">{successRate.toFixed(1)}% succes</span>
+                              </div>
                             </>
                           )}
-                        </Badge>
-                      </div>
-                      <p className="text-muted-foreground mt-1">{automation.description}</p>
-
-                      {/* Stats row */}
-                      <div className="flex items-center gap-6 mt-4 text-sm">
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <BarChart3 className="h-4 w-4" />
-                          <span>{automation.runCount.toLocaleString()} executions</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                          <span className="text-emerald-400">{automation.successRate}% succes</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Clock className="h-4 w-4" />
-                          <span>Dernier: {formatDate(automation.lastRunAt)}</span>
+                          {automation.lastRunAt && (
+                            <div className="flex items-center gap-2 text-muted-foreground">
+                              <Clock className="h-4 w-4" />
+                              <span>Dernier: {formatDate(automation.lastRunAt)}</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
+                    <Button variant="outline" size="sm">
+                      <Info className="h-4 w-4 mr-2" />
+                      Details
+                    </Button>
                   </div>
-                  <Button variant="outline" size="sm">
-                    <Info className="h-4 w-4 mr-2" />
-                    Details
-                  </Button>
-                </div>
 
-                {/* Progress bar */}
-                <div className="mt-4 pt-4 border-t border-border/50">
-                  <div className="flex items-center justify-between text-xs mb-1">
-                    <span className="text-muted-foreground">Taux de succes</span>
-                    <span className="text-emerald-400 font-medium">{automation.successRate}%</span>
-                  </div>
-                  <div className="h-2 bg-muted rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full transition-all"
-                      style={{ width: `${automation.successRate}%` }}
-                    />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+                  {/* Progress bar - only show if there are runs */}
+                  {automation.runCount > 0 && (
+                    <div className="mt-4 pt-4 border-t border-border/50">
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className="text-muted-foreground">Taux de succes</span>
+                        <span className="text-emerald-400 font-medium">{successRate.toFixed(1)}%</span>
+                      </div>
+                      <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full transition-all"
+                          style={{ width: `${successRate}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            );
+          })
+        )}
       </div>
 
       {/* Info Card */}
