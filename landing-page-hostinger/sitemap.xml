@@ -354,4 +354,24 @@
     <priority>0.7</priority>
   </url>
 
+
+  <!-- Blog Article FR: comment-automatiser-votre-service-client-avec-l-ia -->
+  <url>
+    <loc>https://3a-automation.com/blog/comment-automatiser-votre-service-client-avec-l-ia.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/comment-automatiser-votre-service-client-avec-l-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/how-to-automate-customer-service-with-ai-effectively.html"/>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Article EN: how-to-automate-customer-service-with-ai-effectively -->
+  <url>
+    <loc>https://3a-automation.com/en/blog/how-to-automate-customer-service-with-ai-effectively.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/comment-automatiser-votre-service-client-avec-l-ia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/how-to-automate-customer-service-with-ai-effectively.html"/>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
