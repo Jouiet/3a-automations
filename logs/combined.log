@@ -14,3 +14,9 @@
 2025-12-26T23:34:39.993Z [[32minfo[39m]: Starting Gemini MCP Server...
 2025-12-26T23:34:39.993Z [[32minfo[39m]: Gemini MCP Server started successfully
 2025-12-26T23:34:40.008Z [[32minfo[39m]: Handling list_tools request
+2025-12-27T00:37:57.896Z [[32minfo[39m]: Handling call_tool request
+2025-12-27T00:37:57.899Z [[32minfo[39m]: Executing gemini_list_models tool
+2025-12-27T00:37:57.900Z [[32minfo[39m]: Listing available models
+2025-12-27T00:55:22.602Z [[32minfo[39m]: Handling call_tool request
+2025-12-27T00:55:22.602Z [[32minfo[39m]: Executing gemini_list_models tool
+2025-12-27T00:55:22.602Z [[32minfo[39m]: Listing available models

@@ -58,7 +58,7 @@ const KNOWLEDGE_BASE = {
   // === SERVICES PAR INDUSTRIE ===
   industries: {
     ecommerce: {
-      keywords: ['e-commerce', 'ecommerce', 'boutique', 'shopify', 'woocommerce', 'prestashop', 'magento', 'vente en ligne'],
+      keywords: ['e-commerce', 'ecommerce', 'boutique', 'shopify', 'woocommerce', 'vente en ligne'],
       services: [
         'Abandon de panier automatisé (récupère 5-15% des ventes perdues)',
         'Welcome series (nouveaux clients)',
