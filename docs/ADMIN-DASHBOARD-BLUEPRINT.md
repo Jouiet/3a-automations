@@ -223,49 +223,58 @@ Day 14: Final follow-up
 
 ---
 
-## IMPLEMENTATION ROADMAP
+## IMPLEMENTATION STATUS (Updated Session 102 - 27/12/2025)
 
-### Phase 1: MVP (Semaine 1-2)
+### Phase 1: MVP ✅ COMPLETE (Session 86-88)
 ```
-├── [ ] Setup Next.js 14 + Shadcn UI
-├── [ ] Implement auth (NextAuth)
-├── [ ] Create lead management CRUD
-├── [ ] Connect n8n webhooks
-├── [ ] Basic analytics dashboard
-└── [ ] Deploy to Vercel
+├── [x] Setup Next.js 14 + Shadcn UI ✅
+├── [x] Implement auth (JWT + bcrypt, NO NextAuth) ✅
+├── [x] Create lead management CRUD ✅
+├── [x] Connect n8n webhooks ✅
+├── [x] Basic analytics dashboard ✅
+└── [x] Deploy to Hostinger VPS (PM2) ✅ NOT Vercel
+```
+**URL:** https://dashboard.3a-automation.com
+
+### Phase 2: Automation ✅ COMPLETE (Session 90-94)
+```
+├── [x] LinkedIn scraper workflow (n8n) ✅
+├── [x] AI lead scoring (via Klaviyo properties) ✅
+├── [x] Email sequence automation (Klaviyo Welcome Series) ✅
+├── [x] WhatsApp integration (n8n workflows) ✅
+└── [x] Real-time notifications (webhook events) ✅
 ```
 
-### Phase 2: Automation (Semaine 3-4)
+### Phase 3: Scale ✅ COMPLETE (Session 94-97)
 ```
-├── [ ] Apify LinkedIn scraper workflow
-├── [ ] AI lead scoring integration
-├── [ ] Email sequence automation
-├── [ ] WhatsApp integration
-└── [ ] Real-time notifications
+├── [x] Advanced analytics (Recharts + n8n API) ✅
+├── [x] PDF/CSV report builder ✅
+├── [x] Client portal (/client pages) ✅
+├── [x] API for integrations (/api/* routes) ✅
+└── [x] Performance optimization (lazy load, auto-refresh) ✅
 ```
 
-### Phase 3: Scale (Semaine 5-8)
+### Tech Stack Actuel (NOT as originally planned)
 ```
-├── [ ] Advanced analytics
-├── [ ] Custom report builder
-├── [ ] Client portal (read-only)
-├── [ ] API for integrations
-└── [ ] Performance optimization
+ORIGINAL PLAN → ACTUAL IMPLEMENTATION
+├── Vercel → Hostinger VPS (PM2)
+├── Supabase → Google Sheets (Apps Script CRUD)
+├── NextAuth → JWT + bcrypt (simple auth)
+└── Apify direct → n8n orchestration
 ```
 
 ---
 
-## COUTS ESTIMES
+## COUTS ACTUELS (Factuel - Session 102)
 
 | Service | Plan | Cout/mois |
 |---------|------|-----------|
-| Vercel | Pro | $20 |
-| Supabase | Pro | $25 |
+| Hostinger VPS | KVM1 | ~$5 (inclus site + n8n + dashboard) |
+| Google Sheets | Free | $0 |
+| n8n (self-hosted) | Free | $0 |
+| Klaviyo | Starter | $45 |
 | Apify | Starter | $49 |
-| n8n Cloud | Starter | €24 |
-| Klaviyo | Free tier | $0 |
-| Upstash Redis | Free tier | $0 |
-| **TOTAL** | | **~€100/mois** |
+| **TOTAL** | | **~$99/mois** |
 
 ---
 

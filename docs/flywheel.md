@@ -226,14 +226,14 @@ TIKTOK SMART+ CATALOG
 }
 ```
 
-**AEO Checklist:**
-- [ ] FAQ Schema sur pages produits
-- [ ] HowTo Schema pour guides
-- [ ] Article Schema pour blog
-- [ ] Organization Schema (homepage)
-- [ ] BreadcrumbList Schema
-- [ ] llms.txt file (AI crawlers)
-- [ ] Sitemap XML optimisé
+**AEO Checklist (Verified 27/12/2025):**
+- [x] FAQ Schema sur pages services (pricing, ecommerce, voice-ai, smb/pme, flywheel-360, audit)
+- [ ] HowTo Schema pour guides (N/A - no tutorial content currently)
+- [x] Article Schema pour blog (4 articles FR+EN avec Article schema)
+- [x] Organization Schema (34 pages - all pages)
+- [x] BreadcrumbList Schema (14 conversion pages - Session 102)
+- [x] llms.txt file (v4.0 + llms-full.txt - AI crawlers allowed)
+- [x] Sitemap XML optimisé (36 URLs + hreflang alternates)
 
 ### 2.6 Apify Competitor Monitoring
 
