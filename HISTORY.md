@@ -1,5 +1,11 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 107 (28/12/2025) - NEWSLETTER + DELIVERY TIMES + MATH.RANDOM FIX
+
+| Session | Modifications |
+|---------|---------------|
+| **107** | **Newsletter Workflow Created**: `newsletter-3a-automation.json` - Bi-monthly (1st & 15th) AI-generated newsletter via Claude + Klaviyo. **Délais Livraison Augmentés (+24-72h)**: Quick Win 48-72h→3-6 jours, Essentials 5-7j→6-10j, Growth 10-14j→11-17j (FR+EN). **Math.random() Fixed**: `invoice-generator.cjs` + `MCPHub.js` now use Date.now() for unique IDs (script.js particle animation + rotation_email.cjs shuffle = intentional, kept). **CinematicAds**: Section partenaire CONSERVÉE sur site, workflows séparés dans webapp externe. n8n workflows: 8 locaux (was 7). |
+
 ## Session 106 (28/12/2025) - N8N WEBHOOK DEBUG + FIX
 
 | Session | Modifications |

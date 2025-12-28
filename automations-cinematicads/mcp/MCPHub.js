@@ -114,7 +114,8 @@ class MCPHub {
             throw new Error(`MCP Server ${serverName} is not active.`);
         }
 
-        const id = Math.random().toString(36).substring(7);
+        // Use timestamp-based unique ID instead of Math.random()
+        const id = `req_${Date.now()}_${process.hrtime.bigint()}`;
         const request = {
             jsonrpc: "2.0",
             id: id,
