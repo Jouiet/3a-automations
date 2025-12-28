@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 103 - 28/12/2025)
+## Current State (Session 105 - 28/12/2025)
 
 | Metric | Value |
 |--------|-------|
@@ -8,35 +8,31 @@
 | Dashboard | https://dashboard.3a-automation.com LIVE |
 | Pages | 32 (16 FR + 16 EN) |
 | Automations | 78 (Registry v1.9.0) |
-| **Automation Rate** | **35.9% REAL (28/78)** |
-| Schedulable | 28/78 (100% de ce qui PEUT l'être) |
-| Non-schedulable | 50/78 (on-demand, templates, external) |
-| n8n Workflows | 10/10 ACTIVE |
-| MCPs | 12/13 (92%) |
-| SEO Score | 100% |
+| **System Score** | **67% RÉALISTE** (Session 104 audit) |
+| APIs Configured | 8/9 (SHOPIFY_ACCESS_TOKEN manquant) |
+| n8n Workflows | 7 local (AI Avatar/Video = webapp externe) |
+| Client Readiness | B2B/Services: 100%, E-commerce: 67% |
 
-## Session 103 Factual Audit (28/12/2025)
+## Session 105 Updates (28/12/2025)
 
 ```
-SCHEDULABILITY BREAKDOWN (78 automations):
-├── ✅ Déjà schedulé (master-scheduler + n8n): 17
-├── ✅ Plateforme gère (Klaviyo/Shopify):     11
-├── 🔧 On-demand (exécution client):          29
-├── 📝 Templates:                              6
-├── 🔗 External (CinematicAds):                6
-├── 📋 One-time setup:                         5
-├── 💭 Conceptual:                             3
-└── ⚡ Event-driven:                           1
+CORRECTIONS APPLIQUÉES:
+├── Email Outreach workflow: responseMode corrigé
+├── n8n deploy script: PATCH→PUT fix
+├── Workflows AI Avatar/Video: supprimés (webapp externe)
+└── Scripts fixes: +2 nouveaux (fix-email-outreach-n8n.cjs)
 
-RÉSULTAT: 28/28 schedulables = 100% automatisées
-          50/78 NON schedulables = par nature
+BLOCKERS IDENTIFIÉS (Action Humaine):
+├── n8n Google Sheets OAuth2: Non configuré
+├── Klaviyo: 0 flows (guide créé Session 104)
+└── Shopify Dev Store: Non créé
 ```
 
 ## Source of Truth
 
 - **Automations:** `automations/automations-registry.json`
 - **Sessions:** `HISTORY.md`
-- **Audit:** `outputs/FORENSIC-AUDIT-2025-12-18.md`
+- **Audit S104:** `outputs/SESSION-104-DEEP-AUDIT-FINAL.md`
 
 ## URLs
 
@@ -46,7 +42,8 @@ RÉSULTAT: 28/28 schedulables = 100% automatisées
 
 ## Human Blockers (Manual Action Required)
 
-1. Shopify Dev Store: partners.shopify.com
-2. Twilio Credentials: For Grok Voice Phone
-3. WhatsApp Business API: Meta Business Manager
-4. Google Permissions: SA → GA4 + Sheets
+1. **n8n Google Sheets OAuth2:** Configurer credentials (15min)
+2. **Klaviyo Flow:** Créer Welcome Series (30min) → `docs/KLAVIYO-WELCOME-FLOW-SETUP.md`
+3. **Shopify Dev Store:** partners.shopify.com (30min)
+4. Twilio Credentials: For Grok Voice Phone
+5. WhatsApp Business API: Meta Business Manager

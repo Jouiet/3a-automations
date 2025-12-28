@@ -5,7 +5,7 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "leads/new",
-        "responseMode": "lastNode",
+        "responseMode": "responseNode",
         "options": {}
       },
       "id": "webhook-new-lead",

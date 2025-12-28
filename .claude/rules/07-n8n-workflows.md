@@ -1,17 +1,25 @@
-# n8n Workflows (10/10 Active)
+# n8n Workflows (7 Local + 2 Webapp Externe)
 
-## Active Workflows
+## Local Workflows (7)
 
 1. ✅ Grok Voice Telephony - Phone Booking
 2. ✅ Email Outreach Sequence - Multi-Touch Campaign
 3. ✅ WhatsApp Booking Confirmation
 4. ✅ WhatsApp Booking Reminders
-5. ✅ Blog Article Generator
-6. ✅ AI Avatar Generator
-7. ✅ LinkedIn Lead Scraper - Aggressive Outbound
-8. ✅ AI Talking Video Generator
-9. ✅ Klaviyo Welcome Series - 5 Emails
-10. ✅ Enhance Product Photos (Gemini AI)
+5. ✅ Blog Article Generator (Weekly Monday 9AM)
+6. ✅ LinkedIn Lead Scraper - Aggressive Outbound
+7. ✅ Klaviyo Welcome Series - 5 Emails
+
+## Webapp Externe (CinematicAds)
+
+- AI Avatar Generator → cinematicads.studio
+- AI Talking Video Generator → cinematicads.studio
+
+## Blockers Identifiés (Session 105)
+
+- ⚠️ Google Sheets OAuth2: Non configuré sur n8n
+- ⚠️ WhatsApp Business API: Non configuré
+- ⚠️ Twilio: Credentials manquantes
 
 ## URLs
 
@@ -20,5 +28,6 @@
 
 ## Key Webhooks
 
+- `/leads/new` - Email Outreach Sequence
 - `/subscribe/new` - Klaviyo welcome series
 - Form handlers via Google Apps Script

@@ -1,5 +1,17 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 105 (28/12/2025) - WORKFLOW FIXES + CLEANUP
+
+| Session | Modifications |
+|---------|---------------|
+| **105** | **Workflow Fixes**: Email Outreach responseMode corrigé (lastNode→responseNode). n8n deploy script PATCH→PUT. **CLEANUP**: ai-avatar-generator.json et ai-talking-video.json supprimés (webapp externe CinematicAds). **BLOCKERS HUMAINS IDENTIFIÉS**: (1) n8n Google Sheets OAuth2 non configuré, (2) Klaviyo 0 flows, (3) Shopify Dev Store. Scripts: `fix-email-outreach-n8n.cjs` créé. n8n workflows locaux: 7 (vs 9 sur n8n - 2 = webapp externe). |
+
+## Session 104 (28/12/2025) - DEEP SYSTEM AUDIT + IMPLEMENTATION
+
+| Session | Modifications |
+|---------|---------------|
+| **104** | **Deep System Audit**: Ultra-rigorous empirical analysis. **SYSTEM SCORE: 67% RÉALISTE** (vs 76% optimiste). APIs: 8/9 (SHOPIFY manquant). Scripts: 22/29 fonctionnels. Intégrations: 3/8 working. n8n: 6/9 sans blockers. **PROBLÈMES CACHÉS DÉCOUVERTS**: (1) Klaviyo = 0 flows malgré API OK, (2) Voice Widget Chrome/Edge only = fallback texte déjà OK, (3) Personnalisation 4h/client = générateur créé → 30min. **IMPLÉMENTATIONS**: `scripts/generate-voice-widget-client.cjs` (générateur), `templates/voice-widget-client-config.json`, `docs/KLAVIYO-WELCOME-FLOW-SETUP.md`. **ACTIONS HUMAINES REQUISES**: Klaviyo flow (30min), Shopify Dev Store (30min). |
+
 ## Session 103 (28/12/2025) - SCHEDULABILITY AUDIT
 
 | Session | Modifications |

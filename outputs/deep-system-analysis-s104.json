@@ -1,0 +1,523 @@
+{
+  "timestamp": "2025-12-28T14:22:28.036Z",
+  "session": 104,
+  "environment": {
+    "total": 9,
+    "configured": 8,
+    "missing": 1,
+    "critical_missing": [
+      "SHOPIFY_ACCESS_TOKEN"
+    ],
+    "by_category": {
+      "email": {
+        "configured": 1,
+        "missing": 0
+      },
+      "ecommerce": {
+        "configured": 0,
+        "missing": 1
+      },
+      "workflows": {
+        "configured": 1,
+        "missing": 0
+      },
+      "scraping": {
+        "configured": 1,
+        "missing": 0
+      },
+      "ai": {
+        "configured": 2,
+        "missing": 0
+      },
+      "google": {
+        "configured": 2,
+        "missing": 0
+      },
+      "infrastructure": {
+        "configured": 1,
+        "missing": 0
+      }
+    }
+  },
+  "scriptAnalysis": {
+    "Klaviyo Integration": {
+      "patterns": [
+        "klaviyo",
+        "email",
+        "flow",
+        "subscriber"
+      ],
+      "scripts": [
+        "audit-klaviyo-flows-v2.cjs",
+        "audit-klaviyo-flows.cjs",
+        "rotation_email.cjs",
+        "test-klaviyo-connection.cjs",
+        "sync-google-forms-to-klaviyo.cjs"
+      ],
+      "working": 5,
+      "broken": 0
+    },
+    "Shopify Integration": {
+      "patterns": [
+        "shopify",
+        "product",
+        "collection",
+        "order"
+      ],
+      "scripts": [
+        "sync-google-ads-leads-to-shopify.cjs",
+        "sync-meta-leads-to-shopify.cjs",
+        "sync-tiktok-ads-leads-to-shopify.cjs",
+        "audit-shopify-complete.cjs",
+        "audit-shopify-store.cjs",
+        "export-shopify-customers-facebook.cjs",
+        "test-shopify-connection.cjs"
+      ],
+      "working": 0,
+      "broken": 7
+    },
+    "Lead Generation": {
+      "patterns": [
+        "lead",
+        "scrape",
+        "google-maps",
+        "linkedin"
+      ],
+      "scripts": [
+        "import-facebook-lead-ads.js",
+        "segment-leads.js",
+        "scrape-google-maps-businesses.cjs",
+        "scrape-hiring-companies.cjs",
+        "scrape-linkedin-profiles.cjs"
+      ],
+      "working": 5,
+      "broken": 0
+    },
+    "Analytics": {
+      "patterns": [
+        "analytics",
+        "ga4",
+        "looker",
+        "report"
+      ],
+      "scripts": [
+        "test-ga4.cjs",
+        "analyze-ga4-conversion-source.cjs",
+        "analyze-ga4-source.cjs"
+      ],
+      "working": 3,
+      "broken": 0
+    },
+    "SEO": {
+      "patterns": [
+        "seo",
+        "meta",
+        "sitemap",
+        "schema"
+      ],
+      "scripts": [
+        "generate_image_sitemap.cjs",
+        "create-warehouse-metafield.cjs",
+        "import-taxonomy-metafield.cjs"
+      ],
+      "working": 0,
+      "broken": 3
+    },
+    "AI/Content": {
+      "patterns": [
+        "gemini",
+        "grok",
+        "avatar",
+        "video",
+        "content"
+      ],
+      "scripts": [
+        "grok-client.cjs",
+        "grok-voice-poc.cjs",
+        "test-gemini.cjs",
+        "convert-video-portrait.cjs",
+        "generate-all-promo-videos.cjs",
+        "generate-promo-video.cjs"
+      ],
+      "working": 6,
+      "broken": 0
+    }
+  },
+  "integrations": {
+    "integrations": [
+      {
+        "name": "Voice Widget → Booking API",
+        "description": "Widget vocal capture RDV via Google Apps Script",
+        "components": [
+          "voice-widget.min.js",
+          "Google Apps Script"
+        ],
+        "status": "working",
+        "evidence": "Booking API retourne 180 slots"
+      },
+      {
+        "name": "n8n → Klaviyo",
+        "description": "Workflows n8n déclenchent flows Klaviyo",
+        "components": [
+          "n8n workflows",
+          "Klaviyo API"
+        ],
+        "status": "working",
+        "evidence": "Email Outreach workflow utilise Klaviyo HTTP API"
+      },
+      {
+        "name": "n8n → Shopify",
+        "description": "Workflows n8n interagissent avec Shopify",
+        "components": [
+          "n8n workflows",
+          "Shopify API"
+        ],
+        "status": "blocked",
+        "evidence": "SHOPIFY_ACCESS_TOKEN vide"
+      },
+      {
+        "name": "Scripts → Apify",
+        "description": "Scripts de scraping utilisent Apify actors",
+        "components": [
+          "scrape-google-maps.cjs",
+          "Apify API"
+        ],
+        "status": "working",
+        "evidence": "APIFY_TOKEN configuré"
+      },
+      {
+        "name": "n8n → WhatsApp",
+        "description": "Workflows n8n envoient via WhatsApp Business",
+        "components": [
+          "WhatsApp confirmation workflow",
+          "WhatsApp Business API"
+        ],
+        "status": "blocked",
+        "evidence": "WhatsApp Business API non configurée"
+      },
+      {
+        "name": "n8n → Grok Voice",
+        "description": "Telephony via Twilio + Grok AI",
+        "components": [
+          "Grok Voice Telephony workflow",
+          "Twilio",
+          "xAI API"
+        ],
+        "status": "partial",
+        "evidence": "xAI API OK, Twilio non configuré"
+      },
+      {
+        "name": "Blog Generator → Claude",
+        "description": "Génération articles via Claude API",
+        "components": [
+          "Blog workflow",
+          "Anthropic API"
+        ],
+        "status": "unknown",
+        "evidence": "Anthropic credentials non vérifiés"
+      },
+      {
+        "name": "Scripts → Google Analytics",
+        "description": "Scripts analytics utilisent GA4 API",
+        "components": [
+          "analyze-ga4*.cjs",
+          "GA4 API"
+        ],
+        "status": "partial",
+        "evidence": "Service Account configuré, permissions GA4 à vérifier"
+      }
+    ],
+    "stats": {
+      "working": 3,
+      "partial": 2,
+      "blocked": 2,
+      "unknown": 1
+    }
+  },
+  "clientCapacity": [
+    {
+      "type": "E-commerce Shopify + Klaviyo",
+      "requirements": [
+        "Shopify API",
+        "Klaviyo API",
+        "n8n workflows"
+      ],
+      "available": {
+        "Shopify API": false,
+        "Klaviyo API": true,
+        "n8n workflows": true
+      },
+      "automations": [
+        "Abandon panier",
+        "Welcome series",
+        "Post-purchase",
+        "Enrichissement produits",
+        "Google Shopping feed"
+      ],
+      "readiness": 67
+    },
+    {
+      "type": "B2B / Consultant Lead Gen",
+      "requirements": [
+        "Apify",
+        "n8n workflows",
+        "Email outreach"
+      ],
+      "available": {
+        "Apify": true,
+        "n8n workflows": true,
+        "Email outreach": true
+      },
+      "automations": [
+        "LinkedIn scraping",
+        "Google Maps scraping",
+        "Email sequence",
+        "Lead scoring"
+      ],
+      "readiness": 100
+    },
+    {
+      "type": "Service Local (BTP, etc.)",
+      "requirements": [
+        "Voice Widget",
+        "Booking API",
+        "Google Maps"
+      ],
+      "available": {
+        "Voice Widget": true,
+        "Booking API": true,
+        "Google Maps": true
+      },
+      "automations": [
+        "Voice assistant",
+        "RDV automatique",
+        "Local lead capture",
+        "Avis clients"
+      ],
+      "readiness": 100
+    },
+    {
+      "type": "Analytics / Reporting",
+      "requirements": [
+        "GA4 API",
+        "Looker Studio",
+        "Gemini"
+      ],
+      "available": {
+        "GA4 API": true,
+        "Looker Studio": true,
+        "Gemini": true
+      },
+      "automations": [
+        "Dashboard GA4",
+        "Alertes",
+        "Rapports auto"
+      ],
+      "readiness": 100
+    },
+    {
+      "type": "Content Automation",
+      "requirements": [
+        "Gemini",
+        "n8n",
+        "Social APIs"
+      ],
+      "available": {
+        "Gemini": true,
+        "n8n": true,
+        "Social APIs": false
+      },
+      "automations": [
+        "Blog generation",
+        "Social distribution",
+        "SEO content"
+      ],
+      "readiness": 67
+    }
+  ],
+  "n8nWorkflows": [
+    {
+      "name": "AI Avatar Generator",
+      "nodes": 11,
+      "triggers": [
+        "n8n-nodes-base.webhook"
+      ],
+      "integrations": [],
+      "envVarsUsed": [],
+      "blockers": []
+    },
+    {
+      "name": "AI Talking Video Generator",
+      "nodes": 13,
+      "triggers": [
+        "n8n-nodes-base.webhook"
+      ],
+      "integrations": [],
+      "envVarsUsed": [],
+      "blockers": []
+    },
+    {
+      "name": "Blog Article Generator + Multi-Channel Distribution",
+      "nodes": 13,
+      "triggers": [
+        "n8n-nodes-base.scheduleTrigger",
+        "n8n-nodes-base.webhook"
+      ],
+      "integrations": [],
+      "envVarsUsed": [],
+      "blockers": []
+    },
+    {
+      "name": "Email Outreach Sequence - Multi-Touch Campaign",
+      "nodes": 7,
+      "triggers": [
+        "n8n-nodes-base.webhook"
+      ],
+      "integrations": [
+        "n8n-nodes-base.googleSheets"
+      ],
+      "envVarsUsed": [
+        "KLAVIYO_API_KEY",
+        "GOOGLE_SHEET_OUTREACH_ID"
+      ],
+      "blockers": []
+    },
+    {
+      "name": "Grok Voice Telephony - Phone Booking",
+      "nodes": 10,
+      "triggers": [
+        "n8n-nodes-base.webhook",
+        "n8n-nodes-base.webhook",
+        "n8n-nodes-base.webhook"
+      ],
+      "integrations": [
+        "n8n-nodes-base.whatsApp"
+      ],
+      "envVarsUsed": [
+        "XAI_API_KEY",
+        "GROK_VOICE",
+        "WHATSAPP_PHONE_NUMBER_ID"
+      ],
+      "blockers": [
+        "WhatsApp Business API"
+      ]
+    },
+    {
+      "name": "Klaviyo Welcome Series - 5 Emails Automation",
+      "nodes": 8,
+      "triggers": [
+        "n8n-nodes-base.webhook"
+      ],
+      "integrations": [
+        "n8n-nodes-base.googleSheets"
+      ],
+      "envVarsUsed": [
+        "KLAVIYO_API_KEY",
+        "GOOGLE_SHEETS_ID"
+      ],
+      "blockers": []
+    },
+    {
+      "name": "LinkedIn Lead Scraper - Aggressive Outbound",
+      "nodes": 12,
+      "triggers": [
+        "n8n-nodes-base.scheduleTrigger"
+      ],
+      "integrations": [
+        "n8n-nodes-base.googleSheets",
+        "n8n-nodes-base.klaviyo"
+      ],
+      "envVarsUsed": [
+        "APIFY_API_TOKEN",
+        "GOOGLE_SHEET_LEADS_ID",
+        "KLAVIYO_LIST_LEADS",
+        "DASHBOARD_WEBHOOK_URL"
+      ],
+      "blockers": []
+    },
+    {
+      "name": "WhatsApp Booking Confirmation",
+      "nodes": 6,
+      "triggers": [
+        "n8n-nodes-base.webhook"
+      ],
+      "integrations": [
+        "n8n-nodes-base.whatsApp"
+      ],
+      "envVarsUsed": [
+        "WHATSAPP_PHONE_NUMBER_ID"
+      ],
+      "blockers": [
+        "WhatsApp Business API"
+      ]
+    },
+    {
+      "name": "WhatsApp Booking Reminders",
+      "nodes": 7,
+      "triggers": [
+        "n8n-nodes-base.scheduleTrigger"
+      ],
+      "integrations": [
+        "n8n-nodes-base.whatsApp",
+        "n8n-nodes-base.whatsApp"
+      ],
+      "envVarsUsed": [
+        "WHATSAPP_PHONE_NUMBER_ID"
+      ],
+      "blockers": [
+        "WhatsApp Business API"
+      ]
+    }
+  ],
+  "summary": {
+    "envConfigured": "8/9",
+    "criticalMissing": [
+      "SHOPIFY_ACCESS_TOKEN"
+    ],
+    "integrationsWorking": 3,
+    "integrationsBlocked": 2,
+    "clientReadiness": {
+      "ready": 3,
+      "partial": 2,
+      "blocked": 0
+    }
+  },
+  "criticalFindings": [
+    {
+      "severity": "CRITICAL",
+      "finding": "Missing critical API: SHOPIFY_ACCESS_TOKEN",
+      "impact": "E-commerce clients cannot be served"
+    },
+    {
+      "severity": "HIGH",
+      "finding": "2 integrations blocked",
+      "impact": "Reduced automation capacity"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "P1",
+      "action": "Configure Shopify Dev Store",
+      "effort": "30 min",
+      "impact": "Unlocks 100% e-commerce capacity"
+    },
+    {
+      "priority": "P2",
+      "action": "Configure WhatsApp Business API",
+      "effort": "4h",
+      "impact": "Enables 2 n8n workflows"
+    },
+    {
+      "priority": "P2",
+      "action": "Verify GA4 Service Account permissions",
+      "effort": "15 min",
+      "impact": "Full analytics capability"
+    },
+    {
+      "priority": "P3",
+      "action": "Configure Twilio for Voice Telephony",
+      "effort": "2h",
+      "impact": "Enables Grok Voice calls"
+    }
+  ]
+}
