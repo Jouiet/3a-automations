@@ -1,16 +1,40 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-27 | Version: 12.8 (Màj Session 102 Part 6 - Dashboard Mock Elimination)
+## Date: 2025-12-28 | Version: 12.9 (Màj Session 103 - Schedulability Audit)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (27 Dec 2025 - Session 102)
+# SECTION 0: ÉTAT ACTUEL (28 Dec 2025 - Session 103)
 
-## ✅ ÉTAT VÉRIFIÉ: 78 AUTOMATIONS + 12 MCPs FONCTIONNELS
+## ✅ ÉTAT VÉRIFIÉ: 78 AUTOMATIONS - TAUX RÉEL 35.9%
 
-### Résultat Final Vérifié (Session 102)
+### Session 103 - Schedulability Audit (28/12/2025)
 ```
-Registry v1.8.0:    78 automations client-facing
+QUESTION: Combien d'automations PEUVENT et DOIVENT être schedulées?
+
+RÉPONSE FACTUELLE:
+├── Schedulables:       28/78 (35.9%)
+├── Non-schedulables:   50/78 (64.1%) - par nature
+└── Déjà automatisées:  28/28 (100% de ce qui PEUT l'être)
+
+BREAKDOWN DES 78 AUTOMATIONS:
+├── ✅ Déjà schedulé (master-scheduler + n8n): 17
+├── ✅ Plateforme gère (Klaviyo/Shopify):     11
+├── 🔧 On-demand (exécution client):          29
+├── 📝 Templates:                              6
+├── 🔗 External (CinematicAds):                6
+├── 📋 One-time setup:                         5
+├── 💭 Conceptual:                             3
+└── ⚡ Event-driven:                           1
+
+CONCLUSION: Aucune automation à ajouter au scheduler.
+            50 automations ne PEUVENT pas être schedulées (on-demand, templates, etc.)
+```
+
+### Résultat Final Vérifié (Session 103)
+```
+Registry v1.9.0:    78 automations client-facing
+Automation Rate:    35.9% REAL (28/78 schedulables, 100% automatisées)
 HTML Pages:         78 automations (synced - 28 pages updated)
 llms.txt:           78 automatisations (v4.0 - Voice AI Product)
 MCPs:               12/13 fonctionnels (92%)
