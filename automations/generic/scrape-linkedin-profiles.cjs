@@ -42,9 +42,9 @@ const CONFIG = {
 
   // Actor IDs (from Apify Store)
   ACTORS: {
-    PROFILE_SCRAPER: 'curious_coder/linkedin-profile-scraper',
+    PROFILE_SCRAPER: 'dev_fusion/Linkedin-Profile-Scraper', // Profile data by URL
     EMPLOYEE_SCRAPER: 'caprolok/linkedin-employees-scraper',
-    SEARCH_SCRAPER: 'dev_fusion/linkedin-profile-scraper', // No cookies required
+    SEARCH_SCRAPER: 'harvestapi/linkedin-profile-search', // Search for profiles
   },
 
   // Output
@@ -71,8 +71,9 @@ async function runApifyActor(actorId, input) {
   console.log(`\n🚀 Starting Apify actor: ${actorId}`);
   console.log(`   Input: ${JSON.stringify(input).substring(0, 100)}...`);
 
-  // Start actor run
-  const startUrl = `https://api.apify.com/v2/acts/${actorId}/runs?token=${CONFIG.APIFY_TOKEN}`;
+  // Start actor run - convert username/actor to username~actor for API
+  const actorPath = actorId.replace('/', '~');
+  const startUrl = `https://api.apify.com/v2/acts/${actorPath}/runs?token=${CONFIG.APIFY_TOKEN}`;
 
   const startResponse = await fetch(startUrl, {
     method: 'POST',
@@ -102,7 +103,7 @@ async function runApifyActor(actorId, input) {
 
     await new Promise(r => setTimeout(r, CONFIG.POLL_INTERVAL));
 
-    const statusUrl = `https://api.apify.com/v2/acts/${actorId}/runs/${runId}?token=${CONFIG.APIFY_TOKEN}`;
+    const statusUrl = `https://api.apify.com/v2/acts/${actorPath}/runs/${runId}?token=${CONFIG.APIFY_TOKEN}`;
     const statusResponse = await fetch(statusUrl);
     const statusData = await statusResponse.json();
 
