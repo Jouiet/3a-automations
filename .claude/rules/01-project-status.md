@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 109 - 28/12/2025)
+## Current State (Session 109 - 28/12/2025 21:30 CET)
 
 | Metric | Value |
 |--------|-------|
@@ -8,47 +8,48 @@
 | Dashboard | https://dashboard.3a-automation.com LIVE ✅ |
 | Pages | **39 (19 FR + 20 EN)** |
 | Automations | 78 (Registry v1.9.0) |
-| n8n Workflows | **9 DEPLOYED, 0 FUNCTIONAL** |
+| Email Automation | ✅ **FONCTIONNEL** (script natif) |
+| n8n Workflows | 9 déployés (limitation $env) |
 | Booking API | ✅ 180 slots (GAS) |
 | Infrastructure | 3 Docker containers RUNNING |
 
-## Session 109 - AUDIT BOTTOM-UP BRUTAL (28/12/2025)
+## Session 109 - DÉCOUVERTE + SOLUTION (28/12/2025)
 
-### FAITS VÉRIFIÉS EMPIRIQUEMENT
-
+### DÉCOUVERTE CRITIQUE
 ```
-INFRASTRUCTURE (Hostinger MCP):
-├── 3a-website: RUNNING ✅
-├── cinematicads: RUNNING ✅
-├── root (n8n+traefik): RUNNING ✅
-└── HTTP Status: Tous 200 OK
+n8n Community Edition NE SUPPORTE PAS $env variables!
+"Your license does not allow for feat:variables"
 
-n8n WORKFLOWS - RÉALITÉ:
-├── Déployés: 9 workflows
-├── Actifs dans UI: 9/9
-├── FONCTIONNELS: 0/9 ❌
-└── Erreurs continues depuis 27/12
+CAUSE RÉELLE: Pas les connexions JSON, mais limitation licence n8n
+```
 
-n8n ERREURS (logs réels):
-├── "Cannot read properties of undefined (reading 'name')"
-├── "The workflow has issues and cannot be executed"
-├── "Unused Respond to Webhook node found"
-└── Cause: Connexions JSON corrompues
+### SOLUTION HYBRIDE IMPLÉMENTÉE
+```
+SCRIPTS NATIFS (TESTÉS OK 21:32 CET):
+├── automations/agency/email-automation-unified.cjs
+├── Welcome mode: ✅ Klaviyo profile + event créés
+├── Outreach mode: ✅ Klaviyo profile + event créés
+└── Double usage: 3A-Automation + clients agence
 
-PAGES HTML (vérification find):
-├── FR: 19 pages
-├── EN: 20 pages
-└── TOTAL: 39 (PAS 32!)
+n8n (GARDE POUR):
+├── Blog Generator (credentials Claude)
+├── LinkedIn Scraper (Apify)
+└── Grok Voice (WebSocket - bloqué Twilio)
+```
 
-BOOKING API (GAS):
-└── ✅ 180 créneaux disponibles
+### APIs VÉRIFIÉES
+```
+├── Klaviyo: ✅ 3 listes, 4 segments, events créés
+├── n8n API: ✅ 9 workflows listés
+├── Hostinger: ✅ Via MCP
+└── Booking GAS: ✅ 180 slots
 ```
 
 ## Source of Truth
 
 - **Automations:** `automations/automations-registry.json`
 - **Sessions:** `HISTORY.md`
-- **Audit:** `outputs/FORENSIC-AUDIT-2025-12-18.md` (v13.0)
+- **Audit:** `outputs/FORENSIC-AUDIT-2025-12-18.md`
 
 ## URLs
 
@@ -56,17 +57,11 @@ BOOKING API (GAS):
 - Dashboard: https://dashboard.3a-automation.com
 - n8n: https://n8n.srv1168256.hstgr.cloud
 
-## BLOCKERS CRITIQUES
+## BLOCKERS HUMAINS (Action manuelle requise)
 
-### Priorité 1: n8n Workflows Cassés
-- Tous les webhooks échouent à l'exécution
-- Fix requis: Réparer connexions JSON dans chaque workflow
-
-### Priorité 2: Credentials Manquants
-- KLAVIYO_API_KEY: Pas dans env n8n
-- Twilio: Credentials absents
-- WhatsApp Business API: Non configuré
-
-### Priorité 3: Setup Initial
-- Shopify Dev Store: partners.shopify.com
-- Google SA: Permissions GA4 + Sheets
+| Blocker | Action | Impact |
+|---------|--------|--------|
+| Twilio | Créer compte + credentials | Grok Voice |
+| WhatsApp Business | Meta Business Manager | WhatsApp workflows |
+| Klaviyo Flows | Créer dans UI Klaviyo | Trigger sur events |
+| n8n Credentials | Configurer via UI | Workflows restants |
