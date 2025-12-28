@@ -113,31 +113,25 @@
     },
     {
       "parameters": {
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "{{ $env.GOOGLE_SHEETS_ID }}",
-          "mode": "id"
-        },
-        "sheetName": "Welcome Series Log",
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "email": "={{ $json.email }}",
-            "name": "={{ $json.firstName }}",
-            "source": "={{ $json.source }}",
-            "series_started": "={{ $json.seriesStartDate }}",
-            "status": "active"
+        "method": "POST",
+        "url": "https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"action\": \"log_welcome_series\",\n  \"data\": {\n    \"email\": \"{{ $json.email }}\",\n    \"name\": \"{{ $json.firstName }}\",\n    \"source\": \"{{ $json.source }}\",\n    \"series_started\": \"{{ $json.seriesStartDate }}\",\n    \"status\": \"active\"\n  }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
           }
-        },
-        "options": {}
+        }
       },
       "id": "log-to-sheets",
-      "name": "Log to Google Sheets",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
+      "name": "Log to Dashboard API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [1340, 200],
-      "notes": "Track welcome series subscribers"
+      "notes": "Track welcome series subscribers via Google Apps Script API"
     },
     {
       "parameters": {
@@ -242,14 +236,14 @@
       "main": [
         [
           {
-            "node": "Log to Google Sheets",
+            "node": "Log to Dashboard API",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Log to Google Sheets": {
+    "Log to Dashboard API": {
       "main": [
         [
           {
@@ -277,6 +271,12 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-12-25T08:45:00.000Z",
-  "versionId": "1.0.0"
+  "updatedAt": "2025-12-28T17:00:00.000Z",
+  "versionId": "1.1.0",
+  "meta": {
+    "version": "1.2.0",
+    "description": "Welcome series 5 emails via Klaviyo HTTP API + Dashboard logging. Fixed: connection name mismatch.",
+    "updated": "2025-12-28",
+    "session": "108"
+  }
 }

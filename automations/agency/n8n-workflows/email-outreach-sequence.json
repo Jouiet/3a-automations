@@ -99,6 +99,52 @@
       "typeVersion": 4.2,
       "position": [1120, 200],
       "notes": "Log to Dashboard CRM via Google Apps Script API"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "success"
+            },
+            {
+              "name": "message",
+              "value": "Email outreach sequence started for {{ $json.email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "success-response",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1340, 200],
+      "notes": "Return success to webhook caller"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "status",
+              "value": "error"
+            },
+            {
+              "name": "message",
+              "value": "Missing email address"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "error-response",
+      "name": "Error Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [680, 400],
+      "notes": "Return error when no email"
     }
   ],
   "connections": {
@@ -122,7 +168,13 @@
             "index": 0
           }
         ],
-        []
+        [
+          {
+            "node": "Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Generate Personalized Emails": {
@@ -146,15 +198,26 @@
           }
         ]
       ]
+    },
+    "Log Outreach (Dashboard API)": {
+      "main": [
+        [
+          {
+            "node": "Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
     "executionOrder": "v1"
   },
   "meta": {
-    "version": "2.2.0",
-    "description": "Multi-touch email outreach sequence via Klaviyo HTTP API + Dashboard CRM. Uses lastNode response mode (no respond nodes).",
+    "version": "2.3.0",
+    "description": "Multi-touch email outreach sequence via Klaviyo HTTP API + Dashboard CRM. Uses lastNode response mode with proper error handling.",
     "updated": "2025-12-28",
-    "session": "106"
+    "session": "108"
   }
 }

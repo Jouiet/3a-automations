@@ -1,28 +1,30 @@
-# n8n Workflows (8 Local + 2 Webapp Externe)
+# n8n Workflows (10 Active)
 
-## Local Workflows (8)
+## Active Workflows (10)
 
 1. ✅ Grok Voice Telephony - Phone Booking
-2. ✅ Email Outreach Sequence - Multi-Touch Campaign (v2.2.0)
+2. ✅ Email Outreach Sequence - Multi-Touch Campaign (v2.3.0)
 3. ✅ WhatsApp Booking Confirmation
 4. ✅ WhatsApp Booking Reminders
-5. ✅ Blog Article Generator (Weekly Monday 9AM)
+5. ✅ Blog Article Generator + Multi-Channel Distribution
 6. ✅ LinkedIn Lead Scraper - Aggressive Outbound
-7. ✅ Klaviyo Welcome Series - 5 Emails
+7. ✅ Klaviyo Welcome Series - 5 Emails (v1.2.0)
 8. ✅ Newsletter 3A Automation (Bi-Monthly 1st & 15th)
+9. ✅ Enhance Product Photos (Gemini AI)
+10. ✅ Test Webhook - Minimal
 
-## Webapp Externe (CinematicAds)
+## Session 108 Fixes (28/12/2025)
 
-- AI Avatar Generator → cinematicads.studio
-- AI Talking Video Generator → cinematicads.studio
+- ✅ Email Outreach v2.3.0: Fixed connections + response nodes
+- ✅ Klaviyo Welcome v1.2.0: Fixed connection name mismatch
+- ✅ Replaced Google Sheets OAuth → HTTP Request (Apps Script)
+- ✅ All 8 local workflows deployed successfully
 
-## Blockers Identifiés (Session 106)
+## Blockers (HUMAN ACTION REQUIRED)
 
-- ✅ Email Outreach: Webhook FIXED (v2.2.0, lastNode mode)
-- ⚠️ KLAVIYO_API_KEY: Manquant dans variables n8n
-- ⚠️ Google Sheets OAuth2: Non configuré sur n8n
-- ⚠️ WhatsApp Business API: Non configuré
-- ⚠️ Twilio: Credentials manquantes
+- ⚠️ KLAVIYO_API_KEY: Not set in n8n environment variables
+- ⚠️ WhatsApp Business API: Not configured
+- ⚠️ Twilio: Credentials missing
 
 ## URLs
 
@@ -33,4 +35,5 @@
 
 - `/leads/new` - Email Outreach Sequence
 - `/subscribe/new` - Klaviyo welcome series
+- `/blog/generate` - Blog article generator
 - Form handlers via Google Apps Script
