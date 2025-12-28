@@ -6,9 +6,20 @@
 
 # SECTION 0: ÉTAT ACTUEL (28 Dec 2025 - Session 109)
 
-## ⚠️ ÉTAT VÉRIFIÉ EMPIRIQUEMENT (28/12/2025 20:00 CET)
+## ⚠️ ÉTAT VÉRIFIÉ EMPIRIQUEMENT (28/12/2025 21:30 CET)
 
-### Session 109 - Audit Bottom-Up BRUTAL (28/12/2025)
+### Session 109 - DÉCOUVERTE CRITIQUE + SOLUTION (28/12/2025)
+
+**DÉCOUVERTE MAJEURE:**
+```
+n8n Community Edition NE SUPPORTE PAS les variables $env!
+API Response: "Your license does not allow for feat:variables"
+
+IMPACT: Tous workflows utilisant {{ $env.KLAVIYO_API_KEY }} ÉCHOUENT
+        C'est la VRAIE cause, PAS les connexions JSON!
+
+SOLUTION IMPLÉMENTÉE: Script natif email-automation-unified.cjs
+```
 
 **FAITS VÉRIFIÉS PAR TESTS LIVE:**
 ```
@@ -20,51 +31,45 @@ INFRASTRUCTURE:
 └── Booking API (GAS):           180 slots ✅ FONCTIONNEL
 
 PAGES HTML: 39 (PAS 32!)
-├── FR: 19 pages (8 core + 5 services + 4 blog + 2 legal)
-├── EN: 20 pages (8 core + 5 services + 4 blog + 2 legal + 1 automations)
+├── FR: 19 pages
+├── EN: 20 pages
 └── Source: find landing-page-hostinger -name "*.html"
 
-n8n WORKFLOWS: 9 ACTIFS (pas 10!)
-├── ✅ Enhance Product Photos (Gemini AI)
-├── ✅ Grok Voice Telephony - Phone Booking
-├── ✅ LinkedIn Lead Scraper - Aggressive Outbound
-├── ✅ WhatsApp Booking Reminders
-├── ✅ Blog Article Generator + Multi-Channel Distribution
-├── ✅ WhatsApp Booking Confirmation
-├── ✅ Klaviyo Welcome Series - 5 Emails
-├── ✅ Email Outreach Sequence - Multi-Touch Campaign
-├── ❌ Test Webhook - Minimal (supprimé - non fonctionnel)
-└── MAIS: 100% ont des erreurs de connexion (logs n8n)
+n8n WORKFLOWS: 9 déployés, 0 fonctionnels
+├── CAUSE RACINE: n8n Community ne supporte pas $env variables
+├── Workflows référencent {{ $env.KLAVIYO_API_KEY }} → ÉCHOUE
+└── Solution: Credentials n8n OU scripts natifs
 
-n8n ERREURS CRITIQUES (Session 109):
-├── "Cannot read properties of undefined (reading 'name')"
-├── "The workflow has issues and cannot be executed"
-├── "Unused Respond to Webhook node found in the workflow"
-├── Cause: Connexions JSON corrompues après déploiement
-└── Status: WORKFLOWS CASSÉS EN PRODUCTION
+SCRIPT UNIFIÉ TESTÉ OK (28/12/2025 21:32 CET):
+├── automations/agency/email-automation-unified.cjs
+├── Welcome mode: ✅ Profile 01KDKE12S5Z8BBKZSJGT0Y1MGT créé
+├── Outreach mode: ✅ Profile 01KDKE1DXKMXFJ9CT24BSZJW5Y créé
+└── Klaviyo Events: welcome_series_started, outreach_started ✅
 
-APIs STATUS:
-├── n8n API:      ❌ Header X-N8N-API-KEY non passé correctement
-├── Klaviyo API:  ❌ 401 "Missing or invalid private key"
-├── Hostinger:    ❌ 401 "Unauthenticated" (token expiré?)
+APIs STATUS (CORRIGÉ):
+├── n8n API:      ✅ Fonctionne (9 workflows listés)
+├── Klaviyo API:  ✅ FONCTIONNE (3 listes, 4 segments)
+├── Hostinger:    ✅ Fonctionne via MCP
 ├── Booking GAS:  ✅ 200 OK, 180 slots
-└── Problème: Variables .env non chargées correctement
+└── Problème $env: n8n Community limitation, PAS credentials
 ```
 
-### Résultat Final CORRIGÉ (Session 109)
+### Résultat Final Session 109
 ```
 Registry v1.9.0:    78 automations cataloguées
 HTML Pages:         39 RÉELLES (pas 32)
-n8n Workflows:      9 ACTIFS mais 0/9 FONCTIONNELS (erreurs connexion)
-MCPs:               Non testables (problème auth)
-Dashboard:          LIVE mais données limitées
+n8n Workflows:      9 déployés, 0 fonctionnels (limitation $env)
+Email Automation:   ✅ FONCTIONNEL (script natif)
+MCPs:               12/13 fonctionnels
+Dashboard:          LIVE
 Voice Widget Web:   OPÉRATIONNEL
 Booking API:        ✅ 180 slots disponibles
 
-⚠️ PROBLÈME MAJEUR: n8n workflows deployed mais cassés
-   → Logs montrent erreurs continues depuis 27/12
-   → Toutes les 1h: "workflow has issues"
-   → Webhooks retournent erreurs
+SOLUTION HYBRIDE IMPLÉMENTÉE:
+├── Scripts natifs: Email Outreach + Welcome Series (TESTÉ OK)
+├── n8n: Garde workflows complexes (Blog, LinkedIn, Grok Voice)
+├── Credentials: n8n UI pour ceux qui restent
+└── Double usage: 3A-Automation + clients agence
 
 Source de vérité: automations/automations-registry.json
 ```

@@ -1,58 +1,63 @@
-# n8n Workflows - STATUS RÉEL
+# n8n + Scripts Hybrides - Session 109
 
-## Session 109 - AUDIT BRUTAL (28/12/2025)
-
-| Statut | Count | Détail |
-|--------|-------|--------|
-| Déployés | 9 | Dans n8n UI |
-| Actifs | 9 | Toggle ON |
-| **FONCTIONNELS** | **0** | Tous en erreur |
-
-## Workflows Déployés (9)
-
-1. ❌ Grok Voice Telephony - Phone Booking
-2. ❌ Email Outreach Sequence - Multi-Touch Campaign
-3. ❌ WhatsApp Booking Confirmation
-4. ❌ WhatsApp Booking Reminders
-5. ❌ Blog Article Generator + Multi-Channel Distribution
-6. ❌ LinkedIn Lead Scraper - Aggressive Outbound
-7. ❌ Klaviyo Welcome Series - 5 Emails
-8. ❌ Newsletter 3A Automation
-9. ❌ Enhance Product Photos (Gemini AI)
-
-## ERREURS IDENTIFIÉES (Logs n8n)
+## DÉCOUVERTE CRITIQUE (28/12/2025)
 
 ```
-[ERROR] "Cannot read properties of undefined (reading 'name')"
-[ERROR] "The workflow has issues and cannot be executed"
-[ERROR] "Unused Respond to Webhook node found in the workflow"
+n8n Community Edition NE SUPPORTE PAS $env variables!
+API: "Your license does not allow for feat:variables"
 
-CAUSE: Connexions JSON corrompues lors du déploiement
-       Les "connections" référencent des noms de nodes incorrects
+IMPACT: Tous workflows {{ $env.KLAVIYO_API_KEY }} ÉCHOUENT
+SOLUTION: Scripts natifs pour Klaviyo (TESTÉ OK)
 ```
 
-## Action Requise
+## Solution Hybride Déployée
 
-Les fichiers locaux (`automations/agency/n8n-workflows/*.json`) ont été corrigés en Session 108, MAIS les workflows sur le serveur n8n ont toujours des connexions corrompues.
+| Composant | Statut | Méthode |
+|-----------|--------|---------|
+| Email Outreach | ✅ FONCTIONNEL | Script natif |
+| Klaviyo Welcome | ✅ FONCTIONNEL | Script natif |
+| Grok Voice | ⛔ BLOQUÉ | Twilio credentials |
+| WhatsApp | ⛔ BLOQUÉ | WhatsApp Business API |
+| Blog Generator | ⏳ n8n | Credentials UI requis |
+| LinkedIn Scraper | ⏳ n8n | Apify token |
 
-**Fix:**
-1. Supprimer les workflows existants sur n8n
-2. Redéployer depuis les fichiers locaux corrigés
-3. Tester chaque webhook manuellement
+## Script Unifié (TESTÉ OK 21:32 CET)
+
+```bash
+# Emplacement
+automations/agency/email-automation-unified.cjs
+
+# Welcome series
+node email-automation-unified.cjs --mode=welcome --email=test@example.com
+
+# Outreach sequence
+node email-automation-unified.cjs --mode=outreach --json='{"email":"...","company":"..."}'
+
+# Server mode (webhooks HTTP)
+node email-automation-unified.cjs --server --port=3001
+```
+
+## Double Usage (Agence)
+
+```bash
+# Pour client avec leurs credentials
+CLIENT_ENV_PATH=/path/to/client/.env \
+node email-automation-unified.cjs --mode=welcome
+```
+
+## n8n Workflows Déployés (9)
+
+1. Grok Voice Telephony (⛔ Twilio)
+2. Email Outreach (remplacé par script)
+3. WhatsApp Booking Confirm (⛔ WhatsApp API)
+4. WhatsApp Booking Reminders (⛔ WhatsApp API)
+5. Blog Article Generator (⏳ credentials)
+6. LinkedIn Lead Scraper (⏳ Apify)
+7. Klaviyo Welcome Series (remplacé par script)
+8. Newsletter 3A (⏳ credentials)
+9. Enhance Product Photos (⏳ Gemini credentials)
 
 ## URLs
 
 - n8n: https://n8n.srv1168256.hstgr.cloud
-- Webhook base: https://n8n.srv1168256.hstgr.cloud/webhook/
-
-## Webhooks (NON FONCTIONNELS)
-
-- `/leads/new` - Email Outreach (ERREUR)
-- `/subscribe/new` - Klaviyo welcome (ERREUR)
-- `/blog/generate` - Blog generator (ERREUR)
-
-## Blockers Additionnels
-
-- KLAVIYO_API_KEY: Pas dans variables env n8n
-- Twilio: Credentials absents
-- WhatsApp Business API: Non configuré
+- Script: `automations/agency/email-automation-unified.cjs`

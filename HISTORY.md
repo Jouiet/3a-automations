@@ -1,10 +1,10 @@
 # HISTORY - Changelog 3A Automation
 
-## Session 109 (28/12/2025) - AUDIT BOTTOM-UP BRUTAL
+## Session 109 (28/12/2025) - DÉCOUVERTE n8n + SOLUTION HYBRIDE
 
 | Session | Modifications |
 |---------|---------------|
-| **109** | **AUDIT BOTTOM-UP BRUTAL**: Vérification empirique complète du système. **DÉCOUVERTES CRITIQUES**: (1) Pages HTML = 39 (PAS 32) - 19 FR + 20 EN, (2) n8n workflows = 9 déployés mais **0 FONCTIONNELS** - tous échouent avec "Cannot read properties of undefined", (3) Infrastructure OK - 3 containers RUNNING, (4) Booking API OK - 180 slots. **CAUSE n8n**: Connexions JSON corrompues lors du déploiement Session 108, les "connections" référencent des noms de nodes incorrects. **DOCS MISES À JOUR**: FORENSIC-AUDIT v13.0, 01-project-status.md, 07-n8n-workflows.md, CLAUDE.md v16.0. **ACTION REQUISE**: Supprimer et redéployer tous les workflows n8n depuis fichiers locaux corrigés. |
+| **109** | **DÉCOUVERTE CRITIQUE**: n8n Community Edition NE SUPPORTE PAS $env variables ("Your license does not allow for feat:variables"). C'est la VRAIE cause des échecs, PAS les connexions JSON. **SOLUTION HYBRIDE IMPLÉMENTÉE**: `automations/agency/email-automation-unified.cjs` créé et **TESTÉ OK** (21:32 CET) - Welcome mode: Profile 01KDKE12S5Z8BBKZSJGT0Y1MGT créé, Outreach mode: Profile 01KDKE1DXKMXFJ9CT24BSZJW5Y créé, Events Klaviyo welcome_series_started + outreach_started créés. **DOUBLE USAGE**: Script configurable via CLIENT_ENV_PATH pour clients agence. **APIs VÉRIFIÉES**: Klaviyo ✅ (3 listes, 4 segments), n8n API ✅ (9 workflows), Hostinger ✅, Booking GAS ✅ (180 slots). **DOCS MISES À JOUR**: FORENSIC-AUDIT v13.1, 01-project-status.md, 07-n8n-workflows.md. **BLOCKERS HUMAINS**: Twilio (Grok Voice), WhatsApp Business API, Klaviyo Flows UI. |
 
 ## Session 108 (28/12/2025) - N8N WORKFLOW FIXES + DEPLOY
 
