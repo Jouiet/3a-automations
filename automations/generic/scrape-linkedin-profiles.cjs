@@ -153,12 +153,15 @@ async function scrapeProfilesByUrls(urls) {
 }
 
 /**
- * Search and scrape profiles by query
+ * Search and scrape profiles by query (2-step workflow for emails)
+ * Step 1: Search for profiles → get URLs
+ * Step 2: Scrape profile URLs → get emails + full data
  */
-async function scrapeProfilesBySearch(searchQuery, maxResults = 50) {
-  console.log(`\n🔍 Searching LinkedIn for: "${searchQuery}"`);
+async function scrapeProfilesBySearch(searchQuery, maxResults = 50, enrichWithEmails = true) {
+  console.log(`\n🔍 Step 1: Searching LinkedIn for: "${searchQuery}"`);
 
-  const input = {
+  // Step 1: Search for profiles
+  const searchInput = {
     searchQuery: searchQuery,
     maxResults: Math.min(maxResults, CONFIG.MAX_PROFILES_PER_RUN),
     proxyConfiguration: {
@@ -166,7 +169,40 @@ async function scrapeProfilesBySearch(searchQuery, maxResults = 50) {
     },
   };
 
-  return await runApifyActor(CONFIG.ACTORS.SEARCH_SCRAPER, input);
+  const searchResults = await runApifyActor(CONFIG.ACTORS.SEARCH_SCRAPER, searchInput);
+
+  if (!enrichWithEmails || !searchResults || searchResults.length === 0) {
+    return searchResults;
+  }
+
+  // Step 2: Extract profile URLs and enrich with emails
+  const profileUrls = searchResults
+    .map(p => p.linkedinUrl || p.profileUrl || p.url)
+    .filter(Boolean)
+    .slice(0, maxResults);
+
+  if (profileUrls.length === 0) {
+    console.log('⚠️ No profile URLs found to enrich');
+    return searchResults;
+  }
+
+  console.log(`\n📧 Step 2: Enriching ${profileUrls.length} profiles with emails...`);
+
+  const enrichInput = {
+    profileUrls: profileUrls,
+    proxyConfiguration: {
+      useApifyProxy: true,
+    },
+  };
+
+  try {
+    const enrichedResults = await runApifyActor(CONFIG.ACTORS.PROFILE_SCRAPER, enrichInput);
+    console.log(`✅ Enriched ${enrichedResults.length} profiles with email data`);
+    return enrichedResults;
+  } catch (err) {
+    console.log(`⚠️ Email enrichment failed: ${err.message}. Returning search results.`);
+    return searchResults;
+  }
 }
 
 /**
