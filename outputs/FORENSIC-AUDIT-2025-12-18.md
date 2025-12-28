@@ -1,12 +1,82 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-28 | Version: 12.9 (Màj Session 103 - Schedulability Audit)
+## Date: 2025-12-28 | Version: 13.0 (Màj Session 109 - Bottom-Up Audit)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (28 Dec 2025 - Session 103)
+# SECTION 0: ÉTAT ACTUEL (28 Dec 2025 - Session 109)
 
-## ✅ ÉTAT VÉRIFIÉ: 78 AUTOMATIONS - TAUX RÉEL 35.9%
+## ⚠️ ÉTAT VÉRIFIÉ EMPIRIQUEMENT (28/12/2025 20:00 CET)
+
+### Session 109 - Audit Bottom-Up BRUTAL (28/12/2025)
+
+**FAITS VÉRIFIÉS PAR TESTS LIVE:**
+```
+INFRASTRUCTURE:
+├── 3a-automation.com:          HTTP 200 ✅ LIVE
+├── dashboard.3a-automation.com: HTTP 200 ✅ LIVE
+├── n8n.srv1168256.hstgr.cloud:  HTTP 200 ✅ LIVE (UI accessible)
+├── VPS Hostinger 1168256:       3 projets Docker running
+└── Booking API (GAS):           180 slots ✅ FONCTIONNEL
+
+PAGES HTML: 39 (PAS 32!)
+├── FR: 19 pages (8 core + 5 services + 4 blog + 2 legal)
+├── EN: 20 pages (8 core + 5 services + 4 blog + 2 legal + 1 automations)
+└── Source: find landing-page-hostinger -name "*.html"
+
+n8n WORKFLOWS: 9 ACTIFS (pas 10!)
+├── ✅ Enhance Product Photos (Gemini AI)
+├── ✅ Grok Voice Telephony - Phone Booking
+├── ✅ LinkedIn Lead Scraper - Aggressive Outbound
+├── ✅ WhatsApp Booking Reminders
+├── ✅ Blog Article Generator + Multi-Channel Distribution
+├── ✅ WhatsApp Booking Confirmation
+├── ✅ Klaviyo Welcome Series - 5 Emails
+├── ✅ Email Outreach Sequence - Multi-Touch Campaign
+├── ❌ Test Webhook - Minimal (supprimé - non fonctionnel)
+└── MAIS: 100% ont des erreurs de connexion (logs n8n)
+
+n8n ERREURS CRITIQUES (Session 109):
+├── "Cannot read properties of undefined (reading 'name')"
+├── "The workflow has issues and cannot be executed"
+├── "Unused Respond to Webhook node found in the workflow"
+├── Cause: Connexions JSON corrompues après déploiement
+└── Status: WORKFLOWS CASSÉS EN PRODUCTION
+
+APIs STATUS:
+├── n8n API:      ❌ Header X-N8N-API-KEY non passé correctement
+├── Klaviyo API:  ❌ 401 "Missing or invalid private key"
+├── Hostinger:    ❌ 401 "Unauthenticated" (token expiré?)
+├── Booking GAS:  ✅ 200 OK, 180 slots
+└── Problème: Variables .env non chargées correctement
+```
+
+### Résultat Final CORRIGÉ (Session 109)
+```
+Registry v1.9.0:    78 automations cataloguées
+HTML Pages:         39 RÉELLES (pas 32)
+n8n Workflows:      9 ACTIFS mais 0/9 FONCTIONNELS (erreurs connexion)
+MCPs:               Non testables (problème auth)
+Dashboard:          LIVE mais données limitées
+Voice Widget Web:   OPÉRATIONNEL
+Booking API:        ✅ 180 slots disponibles
+
+⚠️ PROBLÈME MAJEUR: n8n workflows deployed mais cassés
+   → Logs montrent erreurs continues depuis 27/12
+   → Toutes les 1h: "workflow has issues"
+   → Webhooks retournent erreurs
+
+Source de vérité: automations/automations-registry.json
+```
+
+### Session 108 - Fixes Partiels (28/12/2025)
+```
+CORRECTIONS APPLIQUÉES:
+├── klaviyo-welcome-series.json v1.2.0: Connection name fix
+├── email-outreach-sequence.json v2.3.0: Response nodes fix
+├── Déploiement: 8 workflows poussés
+└── Résultat: Toujours cassé (problème plus profond)
+```
 
 ### Session 103 - Schedulability Audit (28/12/2025)
 ```
@@ -26,31 +96,9 @@ BREAKDOWN DES 78 AUTOMATIONS:
 ├── 📋 One-time setup:                         5
 ├── 💭 Conceptual:                             3
 └── ⚡ Event-driven:                           1
-
-CONCLUSION: Aucune automation à ajouter au scheduler.
-            50 automations ne PEUVENT pas être schedulées (on-demand, templates, etc.)
 ```
-
-### Résultat Final Vérifié (Session 103)
-```
-Registry v1.9.0:    78 automations client-facing
-Automation Rate:    35.9% REAL (28/78 schedulables, 100% automatisées)
-HTML Pages:         78 automations (synced - 28 pages updated)
-llms.txt:           78 automatisations (v4.0 - Voice AI Product)
-MCPs:               12/13 fonctionnels (92%)
-n8n Workflows:      10/10 ACTIFS (100%)
-Dashboard:          https://dashboard.3a-automation.com LIVE
-Dashboard Pages:    8/12 REAL API (67%) - Session 102 Part 6
-Dashboard Analytics: REAL DATA (n8n + Recharts)
-Lead Tracking:      ✅ Landing Page → Dashboard CRM INTÉGRÉ (Session 97)
-Invoice System:     ✅ Multi-currency MAD/EUR/USD (Session 97)
-Voice Widget Web:   OPÉRATIONNEL + PRODUIT VENDABLE (Web Speech API)
-Grok Voice Phone:   BLOQUÉ (Twilio credentials manquants)
-CinematicAds:       EXTERNAL (cinematicads.studio)
-Schema.org:         SoftwareApplication ajouté pour Voice AI
 
 Source de vérité: automations/automations-registry.json
-```
 
 ### Session 102 Part 6 - Dashboard Mock Elimination (27/12/2025)
 ```

@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 15.3 | Date: 2025-12-28 | Session: 105
+## Version: 16.0 | Date: 2025-12-28 | Session: 109
 
 ---
 
@@ -11,16 +11,27 @@
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
 | Automations | `automations/automations-registry.json` (78, v1.9.0) |
-| History | `HISTORY.md` (Sessions 0-105) |
+| History | `HISTORY.md` (Sessions 0-109) |
 
-## Session 105 Fixes
+## Session 109 - AUDIT BOTTOM-UP BRUTAL
 
-| Fix | Details |
-|-----|---------|
-| Email Outreach Workflow | responseMode: lastNode→responseNode |
-| n8n Deploy Script | PATCH→PUT method |
-| Workflows Cleanup | AI Avatar/Video supprimés (webapp externe) |
-| Blocker Identifié | n8n Google Sheets OAuth2 non configuré |
+| Fait | Valeur Vérifiée |
+|------|-----------------|
+| Pages HTML | **39** (19 FR + 20 EN) - PAS 32 |
+| n8n Workflows | 9 déployés, **0 fonctionnels** |
+| Infrastructure | 3 containers RUNNING |
+| Booking API | 180 slots OK |
+
+### PROBLÈME CRITIQUE: n8n
+
+Tous les 9 workflows sont "actifs" dans l'UI mais **100% échouent à l'exécution**.
+
+```
+ERREURS (logs réels):
+├── "Cannot read properties of undefined (reading 'name')"
+├── "The workflow has issues and cannot be executed"
+└── Cause: Connexions JSON corrompues
+```
 
 ## Memory Structure
 
@@ -32,9 +43,9 @@ This project uses **modular rules** in `.claude/rules/`:
 | `02-pricing.md` | Packs, retainers, currencies |
 | `03-commands.md` | Scripts, deploy, assets |
 | `04-architecture.md` | Directory structure, identity |
-| `05-mcps-status.md` | MCP status (10/17 working) |
+| `05-mcps-status.md` | MCP status |
 | `06-voice-ai.md` | Widget, Grok telephony |
-| `07-n8n-workflows.md` | 10 active workflows |
+| `07-n8n-workflows.md` | Workflow status (9 deployed, 0 functional) |
 | `code-standards.md` | CommonJS, process.env |
 | `factuality.md` | Verification rules |
 | `infrastructure.md` | VPS, Docker, Traefik |
