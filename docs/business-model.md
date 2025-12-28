@@ -1,5 +1,5 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 4.2 - Mise à jour 26 Décembre 2025 (Session 96: Lead Pipeline + Voice)
+## Version 4.3 - Mise à jour 28 Décembre 2025 (Session 103: Schedulability Audit)
 ## Basé sur données réelles confirmées
 
 ---
@@ -9,18 +9,25 @@
 ```
 CE DOCUMENT CONTIENT UNIQUEMENT DES FAITS VÉRIFIÉS.
 Aucun wishful thinking. Aucune projection non fondée.
-Mis à jour avec les données confirmées le 26/12/2025.
+Mis à jour avec les données confirmées le 28/12/2025.
 
-SESSION 96 COMPLETE (26/12/2025):
+SESSION 103 COMPLETE (28/12/2025):
+✅ AUTOMATION RATE: 35.9% RÉEL (28/78 schedulables)
+✅ SCHEDULABILITY: 28/28 = 100% de ce qui PEUT être automatisé
+✅ Registry: v1.9.0 (78 automations)
 ✅ MCP Stack: 12/13 fonctionnels (92%)
 ✅ n8n: API key + 10/10 workflows ACTIFS (100%)
-✅ xAI/Grok: Crédits ACTIFS, API testé OK (grok-3-mini)
+✅ n8n Updated: Blog Generator (schedule), LinkedIn (email outreach)
 ✅ Dashboard: Recharts visualization + n8n API intégré
 ✅ Lead Pipeline: Form → Apps Script v2 → n8n webhook → Klaviyo ✅
 ✅ Voice Widget Web: Web Speech API OPÉRATIONNEL (keyword matching)
-✅ Engagement: "Résiliable à tout moment" (no commitment)
-✅ Marketing: Location-agnostic (aucune mention géographique)
 ❌ Grok Voice Telephony: BLOQUÉ (Twilio credentials manquants)
+
+BREAKDOWN 78 AUTOMATIONS:
+├── Déjà schedulé (master-scheduler + n8n): 17
+├── Plateforme gère (Klaviyo/Shopify): 11
+├── On-demand (exécution client): 29
+├── Templates: 6 | External: 6 | One-time: 5 | Conceptual: 3 | Event: 1
 ```
 
 ---

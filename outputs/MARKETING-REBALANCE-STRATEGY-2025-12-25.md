@@ -1,10 +1,17 @@
 # Stratégie de Rééquilibrage Marketing/Technique
 
 **Date:** 25 décembre 2025
-**Session:** 94 (Strategy) → 98 (Full Implementation)
-**Version:** 2.3 (Session 98 Complete)
+**Session:** 94 (Strategy) → 103 (Schedulability Audit)
+**Version:** 2.4 (Session 103 Complete)
 **Objectif:** Réduire l'exposition technique sans perdre la crédibilité
-**Status:** ✅ **100% CORE COMPLETE** (26/12/2025) - Blog & Docs = Q1 2026 backlog
+**Status:** ✅ **100% CORE COMPLETE** (28/12/2025) - Blog & Docs = Q1 2026 backlog
+
+### Session 103 Complete (28/12/2025)
+- ✅ **Schedulability Audit**: 78 automations analyzed bottom-up
+- ✅ **Automation Rate**: 35.9% RÉEL (28/78 schedulables)
+- ✅ **100% Automated**: 28/28 schedulables = fully automated
+- ✅ **50 Non-schedulables**: On-demand, templates, external (by design)
+- ✅ **n8n Updates**: Blog Generator schedule + LinkedIn email outreach
 
 ### Session 98 Complete (26/12/2025)
 - ✅ **SMB/PME Pages Complete Rewrite**: EN + FR synchronized

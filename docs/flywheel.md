@@ -1,6 +1,26 @@
 # FLYWHEEL E-COMMERCE BLUEPRINT 2025
 ## AI Agency Automation (AAA) - Architecture Optimale
-### Mis à jour: Session 100 (27/12/2025) - MCP Stack 11/14 (79%) + Voice AI Section +15%
+### Mis à jour: Session 103 (28/12/2025) - Automation Rate 35.9% (28/78 schedulables)
+
+---
+
+## SESSION 103 UPDATE (28/12/2025)
+
+```
+AUTOMATION RATE FACTUEL:
+├── Schedulables: 28/78 (35.9%) - TOUS AUTOMATISÉS
+│   ├── Master-scheduler + n8n: 17 automations
+│   └── Plateforme (Klaviyo/Shopify): 11 automations
+├── Non-schedulables: 50/78 (64.1%)
+│   └── On-demand, templates, external, one-time, conceptual
+└── CONCLUSION: 100% de ce qui PEUT être automatisé EST automatisé
+
+n8n WORKFLOW UPDATES:
+├── blog-article-multi-channel.json: Weekly Schedule trigger (Monday 9AM)
+└── linkedin-lead-scraper.json: Email outreach connection ajoutée
+```
+
+---
 
 ```
                     ╔═══════════════════════════════════════════════════════════════╗
