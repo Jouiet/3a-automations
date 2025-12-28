@@ -1,5 +1,17 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 109 (28/12/2025) - AUDIT BOTTOM-UP BRUTAL
+
+| Session | Modifications |
+|---------|---------------|
+| **109** | **AUDIT BOTTOM-UP BRUTAL**: Vérification empirique complète du système. **DÉCOUVERTES CRITIQUES**: (1) Pages HTML = 39 (PAS 32) - 19 FR + 20 EN, (2) n8n workflows = 9 déployés mais **0 FONCTIONNELS** - tous échouent avec "Cannot read properties of undefined", (3) Infrastructure OK - 3 containers RUNNING, (4) Booking API OK - 180 slots. **CAUSE n8n**: Connexions JSON corrompues lors du déploiement Session 108, les "connections" référencent des noms de nodes incorrects. **DOCS MISES À JOUR**: FORENSIC-AUDIT v13.0, 01-project-status.md, 07-n8n-workflows.md, CLAUDE.md v16.0. **ACTION REQUISE**: Supprimer et redéployer tous les workflows n8n depuis fichiers locaux corrigés. |
+
+## Session 108 (28/12/2025) - N8N WORKFLOW FIXES + DEPLOY
+
+| Session | Modifications |
+|---------|---------------|
+| **108** | **n8n Workflow Fixes**: Email Outreach v2.3.0 (fixed connections + response nodes), Klaviyo Welcome v1.2.0 (fixed connection name mismatch), Google Sheets OAuth→HTTP Request (Apps Script). **Deploy Script**: scripts/deploy-n8n-workflows.cjs created. 8 workflows deployed to production. **NOTE**: Deploy semblait OK mais workflows cassés en production (découvert Session 109). |
+
 ## Session 107 (28/12/2025) - NEWSLETTER + DELIVERY TIMES + MATH.RANDOM FIX
 
 | Session | Modifications |

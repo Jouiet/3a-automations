@@ -1,38 +1,54 @@
 # 3A Automation - Project Status
 
-## Current State (Session 105 - 28/12/2025)
+## Current State (Session 109 - 28/12/2025)
 
 | Metric | Value |
 |--------|-------|
-| Site | https://3a-automation.com LIVE |
-| Dashboard | https://dashboard.3a-automation.com LIVE |
-| Pages | 32 (16 FR + 16 EN) |
+| Site | https://3a-automation.com LIVE ✅ |
+| Dashboard | https://dashboard.3a-automation.com LIVE ✅ |
+| Pages | **39 (19 FR + 20 EN)** |
 | Automations | 78 (Registry v1.9.0) |
-| **System Score** | **67% RÉALISTE** (Session 104 audit) |
-| APIs Configured | 8/9 (SHOPIFY_ACCESS_TOKEN manquant) |
-| n8n Workflows | 7 local (AI Avatar/Video = webapp externe) |
-| Client Readiness | B2B/Services: 100%, E-commerce: 67% |
+| n8n Workflows | **9 DEPLOYED, 0 FUNCTIONAL** |
+| Booking API | ✅ 180 slots (GAS) |
+| Infrastructure | 3 Docker containers RUNNING |
 
-## Session 105 Updates (28/12/2025)
+## Session 109 - AUDIT BOTTOM-UP BRUTAL (28/12/2025)
+
+### FAITS VÉRIFIÉS EMPIRIQUEMENT
 
 ```
-CORRECTIONS APPLIQUÉES:
-├── Email Outreach workflow: responseMode corrigé
-├── n8n deploy script: PATCH→PUT fix
-├── Workflows AI Avatar/Video: supprimés (webapp externe)
-└── Scripts fixes: +2 nouveaux (fix-email-outreach-n8n.cjs)
+INFRASTRUCTURE (Hostinger MCP):
+├── 3a-website: RUNNING ✅
+├── cinematicads: RUNNING ✅
+├── root (n8n+traefik): RUNNING ✅
+└── HTTP Status: Tous 200 OK
 
-BLOCKERS IDENTIFIÉS (Action Humaine):
-├── n8n Google Sheets OAuth2: Non configuré
-├── Klaviyo: 0 flows (guide créé Session 104)
-└── Shopify Dev Store: Non créé
+n8n WORKFLOWS - RÉALITÉ:
+├── Déployés: 9 workflows
+├── Actifs dans UI: 9/9
+├── FONCTIONNELS: 0/9 ❌
+└── Erreurs continues depuis 27/12
+
+n8n ERREURS (logs réels):
+├── "Cannot read properties of undefined (reading 'name')"
+├── "The workflow has issues and cannot be executed"
+├── "Unused Respond to Webhook node found"
+└── Cause: Connexions JSON corrompues
+
+PAGES HTML (vérification find):
+├── FR: 19 pages
+├── EN: 20 pages
+└── TOTAL: 39 (PAS 32!)
+
+BOOKING API (GAS):
+└── ✅ 180 créneaux disponibles
 ```
 
 ## Source of Truth
 
 - **Automations:** `automations/automations-registry.json`
 - **Sessions:** `HISTORY.md`
-- **Audit S104:** `outputs/SESSION-104-DEEP-AUDIT-FINAL.md`
+- **Audit:** `outputs/FORENSIC-AUDIT-2025-12-18.md` (v13.0)
 
 ## URLs
 
@@ -40,10 +56,17 @@ BLOCKERS IDENTIFIÉS (Action Humaine):
 - Dashboard: https://dashboard.3a-automation.com
 - n8n: https://n8n.srv1168256.hstgr.cloud
 
-## Human Blockers (Manual Action Required)
+## BLOCKERS CRITIQUES
 
-1. **n8n Google Sheets OAuth2:** Configurer credentials (15min)
-2. **Klaviyo Flow:** Créer Welcome Series (30min) → `docs/KLAVIYO-WELCOME-FLOW-SETUP.md`
-3. **Shopify Dev Store:** partners.shopify.com (30min)
-4. Twilio Credentials: For Grok Voice Phone
-5. WhatsApp Business API: Meta Business Manager
+### Priorité 1: n8n Workflows Cassés
+- Tous les webhooks échouent à l'exécution
+- Fix requis: Réparer connexions JSON dans chaque workflow
+
+### Priorité 2: Credentials Manquants
+- KLAVIYO_API_KEY: Pas dans env n8n
+- Twilio: Credentials absents
+- WhatsApp Business API: Non configuré
+
+### Priorité 3: Setup Initial
+- Shopify Dev Store: partners.shopify.com
+- Google SA: Permissions GA4 + Sheets
