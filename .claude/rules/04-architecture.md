@@ -3,24 +3,40 @@
 ## Directory Structure
 
 ```
-/Users/mac/Desktop/JO-AAA/           <- AGENCY
-├── automations/                     <- 78 automations
+/Users/mac/Desktop/JO-AAA/           <- AGENCY (public Git repo)
+├── automations/                     <- 79 automations
 │   ├── automations-registry.json    <- SOURCE OF TRUTH
-│   ├── agency/core/                 <- Internal tools
-│   ├── clients/                     <- Client templates
-│   └── generic/                     <- Utilities
-├── landing-page-hostinger/          <- Site 32 pages
+│   ├── agency/core/                 <- Internal agency tools
+│   ├── templates/                   <- Reusable client templates
+│   └── generic/                     <- Shared utilities
+├── landing-page-hostinger/          <- Site 39 pages
 ├── dashboard/                       <- Next.js 14 admin
 ├── scripts/                         <- Session tools
 ├── docs/                            <- Documentation
 ├── outputs/                         <- Reports
-└── .env                             <- Credentials
+└── .env                             <- Agency credentials ONLY
 
-/Users/mac/Desktop/clients/          <- CLIENTS (isolated)
-├── henderson/                       <- 114 scripts
-├── mydealz/                         <- 59 scripts
-└── alpha-medical/                   <- 7 scripts
+/Users/mac/Projects/clients/         <- CLIENTS (private Git repos)
+├── henderson/                       <- 114 scripts (Git repo)
+│   ├── .git/                        <- Version controlled
+│   ├── .gitignore                   <- Ignores .env
+│   └── .env.example                 <- Template (no secrets)
+├── mydealz/                         <- 59 scripts (Git repo)
+│   ├── .git/
+│   ├── .gitignore
+│   └── .env.example
+└── alpha-medical/                   <- 45 scripts (Git repo)
+    ├── .git/
+    ├── .gitignore
+    └── .env.example
 ```
+
+## Key Principles
+
+1. **Agency code = Public** - JO-AAA repo on GitHub
+2. **Client code = Private** - Individual Git repos per client
+3. **Credentials isolation** - Each project has its own .env (never committed)
+4. **Off Desktop** - Client repos in /Projects/ (not Desktop) for safety
 
 ## Identity
 
