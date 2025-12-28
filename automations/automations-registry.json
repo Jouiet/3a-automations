@@ -992,27 +992,45 @@
     },
     {
       "id": "linkedin-lead-scraper",
-      "name_fr": "LinkedIn Lead Scraper",
-      "name_en": "LinkedIn Lead Scraper",
+      "name_fr": "LinkedIn Lead Automation",
+      "name_en": "LinkedIn Lead Automation",
       "category": "lead-gen",
-      "type": "n8n-workflow",
-      "script": "agency/n8n-workflows/linkedin-lead-scraper.json",
+      "type": "script",
+      "script": "agency/linkedin-lead-automation.cjs",
       "frequency_fr": "Toutes les 6 heures",
       "frequency_en": "Every 6 hours",
       "benefit_fr": "+400 leads/jour avec scoring AI",
-      "benefit_en": "+400 leads/day with AI scoring"
+      "benefit_en": "+400 leads/day with AI scoring",
+      "replaces": "n8n-workflow:LinkedIn Lead Scraper (used $env → FAILED)",
+      "status": "tested-ok"
+    },
+    {
+      "id": "newsletter-automation",
+      "name_fr": "Newsletter Automation",
+      "name_en": "Newsletter Automation",
+      "category": "marketing",
+      "type": "script",
+      "script": "agency/newsletter-automation.cjs",
+      "frequency_fr": "Bi-mensuel",
+      "frequency_en": "Bi-monthly",
+      "benefit_fr": "Newsletter AI générée automatiquement",
+      "benefit_en": "AI-generated newsletter automatically",
+      "replaces": "n8n-workflow:Newsletter 3A Automation (used $env → FAILED + INACTIVE)",
+      "status": "ready-blocked-api-credits"
     },
     {
       "id": "email-outreach-sequence",
       "name_fr": "Email Outreach Sequence",
       "name_en": "Email Outreach Sequence",
       "category": "lead-gen",
-      "type": "n8n-workflow",
-      "script": "agency/n8n-workflows/email-outreach-sequence.json",
+      "type": "script",
+      "script": "agency/email-automation-unified.cjs",
       "frequency_fr": "Déclenché",
       "frequency_en": "Triggered",
       "benefit_fr": "Séquence 3 emails personnalisée",
-      "benefit_en": "3-email personalized sequence"
+      "benefit_en": "3-email personalized sequence",
+      "replaces": "n8n-workflow:Email Outreach Sequence (used $env → FAILED)",
+      "status": "tested-ok"
     }
   ],
   "types": {

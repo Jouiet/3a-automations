@@ -1,67 +1,57 @@
 # 3A Automation - Project Status
 
-## Current State (Session 110 - 28/12/2025 22:50 CET)
+## Current State (Session 111 - 28/12/2025 23:45 CET)
 
 | Metric | Value |
 |--------|-------|
-| Site | https://3a-automation.com LIVE ✅ |
-| Dashboard | https://dashboard.3a-automation.com LIVE ✅ |
+| Site | https://3a-automation.com LIVE |
+| Dashboard | https://dashboard.3a-automation.com LIVE |
 | Pages | 39 (19 FR + 20 EN) |
-| Automations | 78 (Registry v1.9.0) |
-| Scripts existants | 65 fichiers (.cjs/.js) |
-| n8n Workflows | **9 (2 OK, 7 $env FAIL)** |
-| Booking API | ✅ 180 slots (GAS) |
+| Automations | 79 (Registry v2.0.0) |
+| Scripts natifs | 67 fichiers (.cjs/.js) |
+| n8n Workflows | **9 (6 OK, 3 bloqués credentials externes)** |
+| Booking API | 180 slots (GAS) |
 | Infrastructure | 3 Docker containers RUNNING |
 
-## ÉTAT FACTUEL n8n (Session 110)
+## SESSION 111 - Scripts Natifs Convertis
 
-| Workflow | Status | Blocker |
-|----------|--------|---------|
-| Blog Generator | ✅ OK | - |
-| Product Photos (Gemini) | ✅ OK | - |
-| Grok Voice Telephony | ⛔ FAIL | $env.XAI_API_KEY |
-| Klaviyo Welcome | ⛔ FAIL | $env.KLAVIYO_API_KEY |
-| Email Outreach | ⛔ FAIL | $env.KLAVIYO_API_KEY |
-| LinkedIn Scraper | ⛔ FAIL | $env.KLAVIYO_API_KEY |
-| WhatsApp Confirmation | ⛔ FAIL | $env.WHATSAPP_PHONE_NUMBER_ID |
-| WhatsApp Reminders | ⛔ FAIL | $env.WHATSAPP_PHONE_NUMBER_ID |
-| Newsletter 3A | ⛔ INACTIVE | $env.KLAVIYO_API_KEY |
+| Script | Remplace | Status |
+|--------|----------|--------|
+| email-automation-unified.cjs | n8n Klaviyo Welcome + Email Outreach | TESTÉ OK |
+| linkedin-lead-automation.cjs | n8n LinkedIn Lead Scraper | TESTÉ OK |
+| newsletter-automation.cjs | n8n Newsletter 3A | PRÊT (bloqué API credits) |
 
-## SOLUTION HYBRIDE (Session 109-110)
+## ÉTAT FACTUEL n8n (Session 111)
 
-```
-SCRIPT NATIF TESTÉ OK (22:47 CET):
-├── automations/agency/email-automation-unified.cjs
-├── Welcome: ✅ Profile 01KDKEX3WFFN3CYNV7DNH2N3S1 créé
-└── Outreach: ✅ Profile + event créés
+| Workflow | n8n Status | Script Natif | Final |
+|----------|------------|--------------|-------|
+| Blog Generator | OK | - | FONCTIONNE |
+| Product Photos (Gemini) | OK | - | FONCTIONNE |
+| Grok Voice Telephony | $env FAIL | - | BLOQUÉ (Twilio) |
+| Klaviyo Welcome Series | $env FAIL | email-automation-unified.cjs | TESTÉ OK |
+| Email Outreach Sequence | $env FAIL | email-automation-unified.cjs | TESTÉ OK |
+| LinkedIn Lead Scraper | $env FAIL | linkedin-lead-automation.cjs | TESTÉ OK |
+| WhatsApp Confirmation | $env FAIL | - | BLOQUÉ (Meta) |
+| WhatsApp Reminders | $env FAIL | - | BLOQUÉ (Meta) |
+| Newsletter 3A | INACTIVE | newsletter-automation.cjs | PRÊT (API credits) |
 
-CAUSE ROOT n8n:
-n8n Community Edition NE SUPPORTE PAS $env variables
-→ "Your license does not allow for feat:variables"
-```
+**Résultat: 6/9 fonctionnels (67%)** - 3 bloqués par credentials externes
 
-## Schedulability Matrix (78 automations)
+## APIs Status
 
-| Type | Count | Status |
-|------|-------|--------|
-| Schedulable (cron/trigger) | 25 | master-scheduler.cjs |
-| Platform-managed (Klaviyo/Shopify) | 11 | Géré par plateforme |
-| On-demand (manual trigger) | 28 | Exécution client |
-| External (CinematicAds) | 6 | Partner SaaS |
-| Templates | 6 | Docs/Templates |
-| One-time setup | 2 | Configuration unique |
-
-## Source of Truth
-
-- **Automations:** `automations/automations-registry.json`
-- **Sessions:** `HISTORY.md`
-- **Audit:** `outputs/FORENSIC-AUDIT-2025-12-18.md`
-
-## URLs
-
-- Site: https://3a-automation.com
-- Dashboard: https://dashboard.3a-automation.com
-- n8n: https://n8n.srv1168256.hstgr.cloud
+| API | Status | Notes |
+|-----|--------|-------|
+| Klaviyo | OK | 3 listes, 0 flows (UI required) |
+| n8n | OK | 9 workflows |
+| Booking (GAS) | OK | 180 slots |
+| xAI/Grok | OK | 11 modèles |
+| Gemini | QUOTA | Reset minuit UTC |
+| Anthropic | NO CREDITS | console.anthropic.com |
+| Apify | OK | 15 actors |
+| GitHub | OK | 3a-automations repo |
+| Hostinger | OK | VPS 1168256 |
+| GA4 | SA ERROR | Configuration issue |
+| Shopify | EMPTY | Access token manquant |
 
 ## BLOCKERS HUMAINS
 
@@ -70,4 +60,17 @@ n8n Community Edition NE SUPPORTE PAS $env variables
 | Twilio | Créer compte + credentials | Grok Voice |
 | WhatsApp Business | Meta Business Manager | 2 workflows |
 | Klaviyo Flows UI | Créer flows sur events | Welcome/Outreach |
-| n8n Credentials UI | Configurer dans n8n | Blog/Photos |
+| Shopify Dev Store | partners.shopify.com | E-commerce scripts |
+| Anthropic Credits | console.anthropic.com | Newsletter |
+
+## Source of Truth
+
+- **Automations:** `automations/automations-registry.json`
+- **Sessions:** `HISTORY.md`
+- **n8n Status:** `.claude/rules/07-n8n-workflows.md`
+
+## URLs
+
+- Site: https://3a-automation.com
+- Dashboard: https://dashboard.3a-automation.com
+- n8n: https://n8n.srv1168256.hstgr.cloud
