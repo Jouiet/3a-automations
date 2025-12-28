@@ -1,77 +1,91 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-28 | Version: 13.0 (Màj Session 109 - Bottom-Up Audit)
+## Date: 2025-12-28 | Version: 14.0 (Màj Session 110 - Audit n8n $env)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (28 Dec 2025 - Session 109)
+# SECTION 0: ÉTAT ACTUEL (28 Dec 2025 - Session 110)
 
-## ⚠️ ÉTAT VÉRIFIÉ EMPIRIQUEMENT (28/12/2025 21:30 CET)
+## ⚠️ ÉTAT VÉRIFIÉ EMPIRIQUEMENT (28/12/2025 22:50 CET)
 
-### Session 109 - DÉCOUVERTE CRITIQUE + SOLUTION (28/12/2025)
+### Session 110 - AUDIT n8n DÉTAILLÉ (28/12/2025)
 
-**DÉCOUVERTE MAJEURE:**
+**n8n WORKFLOWS - ÉTAT FACTUEL:**
 ```
-n8n Community Edition NE SUPPORTE PAS les variables $env!
-API Response: "Your license does not allow for feat:variables"
+TOTAL: 9 workflows
+├── ✅ OK:        2 (Blog Generator, Product Photos)
+├── ⛔ $env FAIL: 7 (utilisent $env.* → ÉCHOUENT)
+└── Résultat:     22% fonctionnels
 
-IMPACT: Tous workflows utilisant {{ $env.KLAVIYO_API_KEY }} ÉCHOUENT
-        C'est la VRAIE cause, PAS les connexions JSON!
-
-SOLUTION IMPLÉMENTÉE: Script natif email-automation-unified.cjs
+DÉTAIL $env par workflow:
+├── Grok Voice:      XAI_API_KEY, WHATSAPP_PHONE_NUMBER_ID, GROK_VOICE
+├── Klaviyo Welcome: KLAVIYO_API_KEY
+├── Email Outreach:  KLAVIYO_API_KEY
+├── LinkedIn Scraper: KLAVIYO_API_KEY
+├── WhatsApp Confirm: WHATSAPP_PHONE_NUMBER_ID
+├── WhatsApp Remind:  WHATSAPP_PHONE_NUMBER_ID
+└── Newsletter:       KLAVIYO_API_KEY (INACTIVE)
 ```
 
-**FAITS VÉRIFIÉS PAR TESTS LIVE:**
+**SOLUTION HYBRIDE - TESTS LIVE:**
 ```
-INFRASTRUCTURE:
+SCRIPT TESTÉ OK (28/12/2025 22:47 CET):
+├── automations/agency/email-automation-unified.cjs
+├── Welcome mode: ✅ Profile 01KDKEX3WFFN3CYNV7DNH2N3S1 créé
+└── Outreach mode: ✅ Profile + event créés
+
+CAUSE ROOT CONFIRMÉE:
+n8n Community Edition NE SUPPORTE PAS $env variables
+→ API: "Your license does not allow for feat:variables"
+```
+
+**INFRASTRUCTURE VÉRIFIÉE:**
+```
 ├── 3a-automation.com:          HTTP 200 ✅ LIVE
 ├── dashboard.3a-automation.com: HTTP 200 ✅ LIVE
-├── n8n.srv1168256.hstgr.cloud:  HTTP 200 ✅ LIVE (UI accessible)
+├── n8n.srv1168256.hstgr.cloud:  HTTP 200 ✅ LIVE
 ├── VPS Hostinger 1168256:       3 projets Docker running
-└── Booking API (GAS):           180 slots ✅ FONCTIONNEL
-
-PAGES HTML: 39 (PAS 32!)
-├── FR: 19 pages
-├── EN: 20 pages
-└── Source: find landing-page-hostinger -name "*.html"
-
-n8n WORKFLOWS: 9 déployés, 0 fonctionnels
-├── CAUSE RACINE: n8n Community ne supporte pas $env variables
-├── Workflows référencent {{ $env.KLAVIYO_API_KEY }} → ÉCHOUE
-└── Solution: Credentials n8n OU scripts natifs
-
-SCRIPT UNIFIÉ TESTÉ OK (28/12/2025 21:32 CET):
-├── automations/agency/email-automation-unified.cjs
-├── Welcome mode: ✅ Profile 01KDKE12S5Z8BBKZSJGT0Y1MGT créé
-├── Outreach mode: ✅ Profile 01KDKE1DXKMXFJ9CT24BSZJW5Y créé
-└── Klaviyo Events: welcome_series_started, outreach_started ✅
-
-APIs STATUS (CORRIGÉ):
-├── n8n API:      ✅ Fonctionne (9 workflows listés)
-├── Klaviyo API:  ✅ FONCTIONNE (3 listes, 4 segments)
-├── Hostinger:    ✅ Fonctionne via MCP
-├── Booking GAS:  ✅ 200 OK, 180 slots
-└── Problème $env: n8n Community limitation, PAS credentials
+├── Booking API (GAS):           180 slots ✅
+└── Scripts existants:           65 fichiers (.cjs/.js)
 ```
 
-### Résultat Final Session 109
+**AUTOMATIONS REGISTRY (78):**
+```
+├── Schedulable (cron/trigger):      25
+├── Platform-managed (Klaviyo/Shop): 11
+├── On-demand (manual):              28
+├── External (CinematicAds):          6
+├── Templates:                        6
+└── One-time setup:                   2
+```
+
+### Résultat Final Session 110
 ```
 Registry v1.9.0:    78 automations cataloguées
 HTML Pages:         39 RÉELLES (pas 32)
-n8n Workflows:      9 déployés, 0 fonctionnels (limitation $env)
+n8n Workflows:      9 déployés, 2 fonctionnels (22%)
 Email Automation:   ✅ FONCTIONNEL (script natif)
+Script Files:       65 existants
 MCPs:               12/13 fonctionnels
 Dashboard:          LIVE
 Voice Widget Web:   OPÉRATIONNEL
 Booking API:        ✅ 180 slots disponibles
 
-SOLUTION HYBRIDE IMPLÉMENTÉE:
-├── Scripts natifs: Email Outreach + Welcome Series (TESTÉ OK)
-├── n8n: Garde workflows complexes (Blog, LinkedIn, Grok Voice)
-├── Credentials: n8n UI pour ceux qui restent
-└── Double usage: 3A-Automation + clients agence
+SOLUTION HYBRIDE:
+├── Script natif: email-automation-unified.cjs ✅ TESTÉ
+├── n8n OK: Blog Generator, Product Photos
+├── n8n FAIL: 7 workflows avec $env
+└── Bloqueurs: Twilio, WhatsApp Business, n8n credentials UI
 
 Source de vérité: automations/automations-registry.json
+```
+
+### Session 109 - DÉCOUVERTE + SOLUTION (28/12/2025)
+```
+DÉCOUVERTE CRITIQUE:
+n8n Community Edition NE SUPPORTE PAS $env variables
+→ Impact: Tous workflows {{ $env.* }} ÉCHOUENT
+→ Solution: Script natif implémenté et testé OK
 ```
 
 ### Session 108 - Fixes Partiels (28/12/2025)

@@ -1,30 +1,46 @@
-# n8n + Scripts Hybrides - Session 109
+# n8n Workflows - Session 110
 
-## DÉCOUVERTE CRITIQUE (28/12/2025)
+## DÉCOUVERTE CRITIQUE
 
 ```
 n8n Community Edition NE SUPPORTE PAS $env variables!
 API: "Your license does not allow for feat:variables"
 
-IMPACT: Tous workflows {{ $env.KLAVIYO_API_KEY }} ÉCHOUENT
-SOLUTION: Scripts natifs pour Klaviyo (TESTÉ OK)
+IMPACT: 7/9 workflows ÉCHOUENT à l'exécution
 ```
+
+## État Factuel (28/12/2025 22:50 CET)
+
+| # | Workflow | Active | $env | Status |
+|---|----------|--------|------|--------|
+| 1 | Blog Generator | ✅ | - | OK (credentials UI) |
+| 2 | Product Photos (Gemini) | ✅ | - | OK (credentials UI) |
+| 3 | Grok Voice Telephony | ✅ | XAI, WHATSAPP, GROK | ⛔ FAIL |
+| 4 | Klaviyo Welcome Series | ✅ | KLAVIYO | ⛔ FAIL |
+| 5 | Email Outreach Sequence | ✅ | KLAVIYO | ⛔ FAIL |
+| 6 | LinkedIn Lead Scraper | ✅ | KLAVIYO | ⛔ FAIL |
+| 7 | WhatsApp Confirmation | ✅ | WHATSAPP | ⛔ FAIL |
+| 8 | WhatsApp Reminders | ✅ | WHATSAPP | ⛔ FAIL |
+| 9 | Newsletter 3A | ❌ | KLAVIYO | ⛔ INACTIVE |
+
+**Résultat: 2/9 fonctionnels (22%)**
 
 ## Solution Hybride Déployée
 
-| Composant | Statut | Méthode |
-|-----------|--------|---------|
-| Email Outreach | ✅ FONCTIONNEL | Script natif |
-| Klaviyo Welcome | ✅ FONCTIONNEL | Script natif |
-| Grok Voice | ⛔ BLOQUÉ | Twilio credentials |
-| WhatsApp | ⛔ BLOQUÉ | WhatsApp Business API |
-| Blog Generator | ⏳ n8n | Credentials UI requis |
-| LinkedIn Scraper | ⏳ n8n | Apify token |
+| Automation | n8n | Script Natif |
+|------------|-----|--------------|
+| Email Outreach | ⛔ $env | ✅ email-automation-unified.cjs |
+| Klaviyo Welcome | ⛔ $env | ✅ email-automation-unified.cjs |
+| Blog Generator | ✅ OK | - |
+| Product Photos | ✅ OK | - |
+| Grok Voice | ⛔ $env + Twilio | ⏳ Bloqué credentials |
+| WhatsApp | ⛔ $env + Meta | ⏳ Bloqué Meta approval |
+| LinkedIn Scraper | ⛔ $env | ⏳ À convertir |
 
-## Script Unifié (TESTÉ OK 21:32 CET)
+## Script Unifié (TESTÉ OK)
 
 ```bash
-# Emplacement
+# Location
 automations/agency/email-automation-unified.cjs
 
 # Welcome series
@@ -35,29 +51,12 @@ node email-automation-unified.cjs --mode=outreach --json='{"email":"...","compan
 
 # Server mode (webhooks HTTP)
 node email-automation-unified.cjs --server --port=3001
+
+# Double usage (clients agence)
+CLIENT_ENV_PATH=/path/to/client/.env node email-automation-unified.cjs --mode=welcome
 ```
-
-## Double Usage (Agence)
-
-```bash
-# Pour client avec leurs credentials
-CLIENT_ENV_PATH=/path/to/client/.env \
-node email-automation-unified.cjs --mode=welcome
-```
-
-## n8n Workflows Déployés (9)
-
-1. Grok Voice Telephony (⛔ Twilio)
-2. Email Outreach (remplacé par script)
-3. WhatsApp Booking Confirm (⛔ WhatsApp API)
-4. WhatsApp Booking Reminders (⛔ WhatsApp API)
-5. Blog Article Generator (⏳ credentials)
-6. LinkedIn Lead Scraper (⏳ Apify)
-7. Klaviyo Welcome Series (remplacé par script)
-8. Newsletter 3A (⏳ credentials)
-9. Enhance Product Photos (⏳ Gemini credentials)
 
 ## URLs
 
 - n8n: https://n8n.srv1168256.hstgr.cloud
-- Script: `automations/agency/email-automation-unified.cjs`
+- API: https://n8n.srv1168256.hstgr.cloud/api/v1/workflows
