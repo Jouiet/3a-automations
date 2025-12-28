@@ -15,8 +15,10 @@
 - AI Avatar Generator → cinematicads.studio
 - AI Talking Video Generator → cinematicads.studio
 
-## Blockers Identifiés (Session 105)
+## Blockers Identifiés (Session 106)
 
+- ✅ Email Outreach: Webhook FIXED (v2.2.0, lastNode mode)
+- ⚠️ KLAVIYO_API_KEY: Manquant dans variables n8n
 - ⚠️ Google Sheets OAuth2: Non configuré sur n8n
 - ⚠️ WhatsApp Business API: Non configuré
 - ⚠️ Twilio: Credentials manquantes
