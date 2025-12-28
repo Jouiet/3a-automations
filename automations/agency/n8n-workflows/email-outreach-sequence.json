@@ -5,7 +5,7 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "leads/new",
-        "responseMode": "responseNode",
+        "responseMode": "lastNode",
         "options": {}
       },
       "id": "webhook-new-lead",
@@ -80,65 +80,25 @@
     },
     {
       "parameters": {
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "{{ $env.GOOGLE_SHEET_OUTREACH_ID }}",
-          "mode": "id"
-        },
-        "sheetName": "Outreach Log",
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "email": "={{ $json.email }}",
-            "name": "={{ $json.firstName }} {{ $json.lastName }}",
-            "company": "={{ $json.company }}",
-            "sequence_started": "={{ $json.sequenceStartDate }}",
-            "status": "active"
+        "method": "POST",
+        "url": "https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"action\": \"log_outreach\",\n  \"data\": {\n    \"email\": \"{{ $json.email }}\",\n    \"name\": \"{{ $json.firstName }} {{ $json.lastName || '' }}\",\n    \"company\": \"{{ $json.company || '' }}\",\n    \"sequence_started\": \"{{ $json.sequenceStartDate }}\",\n    \"status\": \"active\",\n    \"source\": \"n8n_outreach\"\n  }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
           }
-        },
-        "options": {}
+        }
       },
       "id": "log-outreach",
-      "name": "Log Outreach",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
+      "name": "Log Outreach (Dashboard API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [1120, 200],
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "GOOGLE_SHEETS_CRED",
-          "name": "Google Sheets"
-        }
-      },
-      "notes": "Track outreach status"
-    },
-    {
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ JSON.stringify({ success: true, message: 'Outreach sequence started', lead: $json.email }) }}",
-        "options": {}
-      },
-      "id": "respond-success",
-      "name": "Respond Success",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [1340, 200],
-      "notes": "Confirm sequence started"
-    },
-    {
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ JSON.stringify({ success: false, message: 'No email provided' }) }}",
-        "options": {
-          "responseCode": 400
-        }
-      },
-      "id": "respond-no-email",
-      "name": "Respond No Email",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [680, 400],
-      "notes": "Error: no email"
+      "notes": "Log to Dashboard CRM via Google Apps Script API"
     }
   ],
   "connections": {
@@ -162,13 +122,7 @@
             "index": 0
           }
         ],
-        [
-          {
-            "node": "Respond No Email",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Generate Personalized Emails": {
@@ -186,18 +140,7 @@
       "main": [
         [
           {
-            "node": "Log Outreach",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Log Outreach": {
-      "main": [
-        [
-          {
-            "node": "Respond Success",
+            "node": "Log Outreach (Dashboard API)",
             "type": "main",
             "index": 0
           }
@@ -209,8 +152,9 @@
     "executionOrder": "v1"
   },
   "meta": {
-    "version": "2.0.0",
-    "description": "Multi-touch email outreach sequence via Klaviyo HTTP API",
-    "updated": "2025-12-25"
+    "version": "2.2.0",
+    "description": "Multi-touch email outreach sequence via Klaviyo HTTP API + Dashboard CRM. Uses lastNode response mode (no respond nodes).",
+    "updated": "2025-12-28",
+    "session": "106"
   }
 }

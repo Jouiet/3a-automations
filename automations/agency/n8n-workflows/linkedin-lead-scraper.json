@@ -143,65 +143,58 @@
     },
     {
       "parameters": {
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "{{ $env.GOOGLE_SHEET_LEADS_ID }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Leads",
-          "mode": "list"
-        },
-        "columns": {
-          "mappingMode": "autoMapInputData"
-        },
-        "options": {}
-      },
-      "id": "save-to-sheets",
-      "name": "Save to Google Sheets",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
-      "position": [1780, 100],
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "GOOGLE_SHEETS_CRED",
-          "name": "Google Sheets"
-        }
-      },
-      "notes": "Store qualified leads"
-    },
-    {
-      "parameters": {
-        "operation": "upsert",
-        "listId": "{{ $env.KLAVIYO_LIST_LEADS }}",
-        "profileData": {
-          "email": "={{ $json.email }}",
-          "first_name": "={{ $json.firstName }}",
-          "last_name": "={{ $json.lastName }}",
-          "properties": {
-            "linkedin_url": "={{ $json.linkedinUrl }}",
-            "company": "={{ $json.company }}",
-            "title": "={{ $json.headline }}",
-            "lead_score": "={{ $json.leadScore }}",
-            "lead_category": "={{ $json.leadCategory }}",
-            "source": "linkedin_scraper"
+        "method": "POST",
+        "url": "https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"action\": \"add_lead\",\n  \"data\": {{ JSON.stringify($json) }}\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
           }
         }
       },
-      "id": "sync-klaviyo",
-      "name": "Sync to Klaviyo",
-      "type": "n8n-nodes-base.klaviyo",
-      "typeVersion": 1,
-      "position": [1780, 300],
-      "credentials": {
-        "klaviyoApi": {
-          "id": "KLAVIYO_CRED",
-          "name": "Klaviyo API"
-        }
+      "id": "save-to-dashboard",
+      "name": "Save to Dashboard CRM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1780, 100],
+      "notes": "Store qualified leads via Dashboard API"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/profiles",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Klaviyo-API-Key {{ $env.KLAVIYO_API_KEY }}"
+            },
+            {
+              "name": "revision",
+              "value": "2024-10-15"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"profile\",\n    \"attributes\": {\n      \"email\": \"{{ $json.email }}\",\n      \"first_name\": \"{{ $json.firstName }}\",\n      \"last_name\": \"{{ $json.lastName || '' }}\",\n      \"properties\": {\n        \"linkedin_url\": \"{{ $json.linkedinUrl || '' }}\",\n        \"company\": \"{{ $json.company || '' }}\",\n        \"title\": \"{{ $json.headline || '' }}\",\n        \"lead_score\": {{ $json.leadScore || 0 }},\n        \"lead_category\": \"{{ $json.leadCategory || 'cold' }}\",\n        \"source\": \"linkedin_scraper\"\n      }\n    }\n  }\n}",
+        "options": {}
       },
-      "notes": "Add to email sequence"
+      "id": "sync-klaviyo",
+      "name": "Sync to Klaviyo (HTTP)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1780, 300],
+      "notes": "Add to Klaviyo via HTTP API"
     },
     {
       "parameters": {
@@ -323,12 +316,12 @@
       "main": [
         [
           {
-            "node": "Save to Google Sheets",
+            "node": "Save to Dashboard CRM",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Sync to Klaviyo",
+            "node": "Sync to Klaviyo (HTTP)",
             "type": "main",
             "index": 0
           }
@@ -336,7 +329,7 @@
         []
       ]
     },
-    "Save to Google Sheets": {
+    "Save to Dashboard CRM": {
       "main": [
         [
           {
@@ -347,7 +340,7 @@
         ]
       ]
     },
-    "Sync to Klaviyo": {
+    "Sync to Klaviyo (HTTP)": {
       "main": [
         [
           {

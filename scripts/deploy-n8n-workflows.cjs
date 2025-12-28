@@ -68,12 +68,13 @@ async function deployWorkflows() {
       if (existing) {
         // Update existing workflow using PUT
         // n8n API requires PUT for updates, not PATCH
+        // Build minimal update payload with only allowed fields
         const updatePayload = {
-          ...workflow,
-          id: existing.id,
-          active: existing.active  // Preserve active state
+          name: workflow.name,
+          nodes: workflow.nodes,
+          connections: workflow.connections,
+          settings: workflow.settings || {}
         };
-        delete updatePayload.meta;  // Remove meta field that causes issues
 
         response = await fetch(`${CONFIG.N8N_URL}/api/v1/workflows/${existing.id}`, {
           method: 'PUT',
@@ -84,9 +85,13 @@ async function deployWorkflows() {
           body: JSON.stringify(updatePayload)
         });
       } else {
-        // Create new workflow
-        const createPayload = { ...workflow };
-        delete createPayload.meta;  // Remove meta field that causes issues
+        // Create new workflow - minimal payload
+        const createPayload = {
+          name: workflow.name,
+          nodes: workflow.nodes,
+          connections: workflow.connections,
+          settings: workflow.settings || {}
+        };
 
         response = await fetch(`${CONFIG.N8N_URL}/api/v1/workflows`, {
           method: 'POST',

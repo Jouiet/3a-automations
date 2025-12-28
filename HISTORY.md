@@ -1,5 +1,11 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 106 (28/12/2025) - N8N WEBHOOK DEBUG + FIX
+
+| Session | Modifications |
+|---------|---------------|
+| **106** | **Email Outreach Webhook Fixed**: Root cause identified - n8n "Unused Respond to Webhook node" error with responseNode mode. **FIX**: Removed respond nodes, switched to lastNode mode. Workflow v2.2.0 deployed (5 nodes vs 7). **n8n Container Restarted** via Hostinger MCP. **LOGS ANALYSIS**: Discovered (1) "Unrecognized node type: n8n-nodes-base.klaviyo" in LinkedIn Scraper, (2) Multiple workflows failing due to Google Sheets OAuth2 missing. Scripts: `fix-email-outreach-v2.cjs` created. **REMAINING BLOCKERS**: (1) KLAVIYO_API_KEY not in n8n env vars, (2) Google Sheets OAuth2. |
+
 ## Session 105 (28/12/2025) - WORKFLOW FIXES + CLEANUP
 
 | Session | Modifications |
