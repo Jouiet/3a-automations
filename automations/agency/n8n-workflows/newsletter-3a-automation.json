@@ -1,0 +1,214 @@
+{
+  "name": "Newsletter 3A Automation - Bi-Monthly Digest",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 1,15 * *"
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Bi-Monthly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300],
+      "notes": "1st and 15th of each month at 10:00 AM"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "newsletter/send",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook - Manual Send",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 480],
+      "webhookId": "newsletter-send",
+      "notes": "Manual trigger via webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get current date info for newsletter\nconst now = new Date();\nconst monthNames = {\n  'fr': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],\n  'en': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']\n};\n\nconst day = now.getDate();\nconst month = now.getMonth();\nconst year = now.getFullYear();\nconst edition = day <= 7 ? 1 : 2;\n\n// Newsletter topics based on month\nconst topics = {\n  0: 'Objectifs automation 2026',\n  1: 'Optimisation email marketing',\n  2: 'Préparation Q2',\n  3: 'Analytics et KPIs',\n  4: 'Scaling automation',\n  5: 'Bilan S1 + perspectives S2',\n  6: 'Automatisations estivales',\n  7: 'Préparation rentrée',\n  8: 'Stratégie Q4',\n  9: 'Black Friday prep',\n  10: 'Black Friday + Cyber Monday',\n  11: 'Bilan annuel + 2027'\n};\n\nreturn {\n  json: {\n    edition: `${monthNames.fr[month]} ${year} - Edition ${edition}`,\n    editionNumber: (month + 1) * 2 + edition,\n    topic: topics[month],\n    language: 'fr',\n    date: now.toISOString().split('T')[0],\n    timestamp: now.toISOString()\n  }\n};"
+      },
+      "id": "set-newsletter-context",
+      "name": "Set Newsletter Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 380],
+      "notes": "Calculate edition number and topic"
+    },
+    {
+      "parameters": {
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {"name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}"},
+            {"name": "anthropic-version", "value": "2024-01-01"},
+            {"name": "content-type", "value": "application/json"}
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 2048,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Génère une newsletter professionnelle pour 3A Automation.\\n\\nEdition: {{ $json.edition }}\\nThème du mois: {{ $json.topic }}\\n\\nContexte: 3A Automation est un cabinet de conseil en automatisation pour PME et e-commerce. Spécialisé en Shopify, Klaviyo, workflows n8n, et Voice AI.\\n\\nStructure de la newsletter:\\n1. Introduction personnalisée (2-3 phrases)\\n2. Actualité du mois (1 paragraphe avec conseil actionnable)\\n3. Tip Automation du mois (astuce pratique)\\n4. Mise à jour 3A Automation (nouveau service ou amélioration)\\n5. CTA vers audit gratuit\\n\\nTon: professionnel mais accessible, direct, orienté résultats.\\nLongueur: 400-500 mots max.\\n\\nFormat JSON UNIQUEMENT:\\n{\\n  \\\"subject\\\": \\\"Ligne de sujet email (<60 chars)\\\",\\n  \\\"preheader\\\": \\\"Preheader (<100 chars)\\\",\\n  \\\"html_content\\\": \\\"Contenu HTML formaté\\\",\\n  \\\"plain_text\\\": \\\"Version texte simple\\\"\\n}\"\n    }\n  ]\n}"
+      },
+      "id": "claude-generate",
+      "name": "Generate Newsletter Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 380],
+      "notes": "AI-generated newsletter content"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Claude response\nconst response = $input.first().json;\nconst context = $('Set Newsletter Context').first().json;\n\nlet newsletterData;\ntry {\n  const content = response.content[0].text;\n  // Extract JSON from response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  newsletterData = JSON.parse(jsonMatch[0]);\n} catch (e) {\n  newsletterData = {\n    subject: `3A Automation - ${context.edition}`,\n    preheader: 'Votre dose mensuelle d\\'automation',\n    html_content: '<p>Newsletter content generation failed. Please check logs.</p>',\n    plain_text: 'Newsletter content generation failed.'\n  };\n}\n\nreturn {\n  json: {\n    ...context,\n    ...newsletterData,\n    campaignName: `Newsletter-${context.editionNumber}-${context.date}`\n  }\n};"
+      },
+      "id": "parse-newsletter",
+      "name": "Parse Newsletter Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 380],
+      "notes": "Format for Klaviyo"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/campaigns",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {"name": "Authorization", "value": "Klaviyo-API-Key {{ $env.KLAVIYO_API_KEY }}"},
+            {"name": "revision", "value": "2024-10-15"},
+            {"name": "Content-Type", "value": "application/json"}
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"campaign\",\n    \"attributes\": {\n      \"name\": \"{{ $json.campaignName }}\",\n      \"audiences\": {\n        \"included\": [\"{{ $env.KLAVIYO_NEWSLETTER_LIST_ID }}\"]\n      },\n      \"send_strategy\": {\n        \"method\": \"immediate\"\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "create-klaviyo-campaign",
+      "name": "Create Klaviyo Campaign",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 300],
+      "notes": "Create campaign in Klaviyo"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://a.klaviyo.com/api/campaign-messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {"name": "Authorization", "value": "Klaviyo-API-Key {{ $env.KLAVIYO_API_KEY }}"},
+            {"name": "revision", "value": "2024-10-15"},
+            {"name": "Content-Type", "value": "application/json"}
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"campaign-message\",\n    \"attributes\": {\n      \"label\": \"Newsletter Content\",\n      \"channel\": \"email\",\n      \"content\": {\n        \"subject\": \"{{ $json.subject }}\",\n        \"preview_text\": \"{{ $json.preheader }}\",\n        \"from_email\": \"newsletter@3a-automation.com\",\n        \"from_label\": \"3A Automation\",\n        \"reply_to_email\": \"contact@3a-automation.com\"\n      }\n    },\n    \"relationships\": {\n      \"campaign\": {\n        \"data\": {\n          \"type\": \"campaign\",\n          \"id\": \"{{ $('Create Klaviyo Campaign').first().json.data.id }}\"\n        }\n      },\n      \"template\": {\n        \"data\": {\n          \"type\": \"template\",\n          \"id\": \"{{ $env.KLAVIYO_NEWSLETTER_TEMPLATE_ID }}\"\n        }\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "set-campaign-content",
+      "name": "Set Campaign Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1340, 300],
+      "notes": "Add email content to campaign"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"action\": \"log_newsletter\",\n  \"data\": {\n    \"edition\": \"{{ $json.edition }}\",\n    \"subject\": \"{{ $json.subject }}\",\n    \"sent_at\": \"{{ $json.timestamp }}\",\n    \"campaign_id\": \"{{ $('Create Klaviyo Campaign').first().json.data.id }}\",\n    \"status\": \"sent\"\n  }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": true
+            }
+          }
+        }
+      },
+      "id": "log-to-dashboard",
+      "name": "Log to Dashboard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 480],
+      "notes": "Track newsletter sends"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {"name": "status", "value": "success"},
+            {"name": "message", "value": "Newsletter sent successfully"},
+            {"name": "edition", "value": "={{ $('Set Newsletter Context').first().json.edition }}"}
+          ]
+        },
+        "options": {}
+      },
+      "id": "success-response",
+      "name": "Success Response",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1560, 380],
+      "notes": "Return success for webhook"
+    }
+  ],
+  "connections": {
+    "Bi-Monthly Schedule": {
+      "main": [[{"node": "Set Newsletter Context", "type": "main", "index": 0}]]
+    },
+    "Webhook - Manual Send": {
+      "main": [[{"node": "Set Newsletter Context", "type": "main", "index": 0}]]
+    },
+    "Set Newsletter Context": {
+      "main": [[{"node": "Generate Newsletter Content", "type": "main", "index": 0}]]
+    },
+    "Generate Newsletter Content": {
+      "main": [[{"node": "Parse Newsletter Content", "type": "main", "index": 0}]]
+    },
+    "Parse Newsletter Content": {
+      "main": [
+        [
+          {"node": "Create Klaviyo Campaign", "type": "main", "index": 0},
+          {"node": "Log to Dashboard", "type": "main", "index": 0}
+        ]
+      ]
+    },
+    "Create Klaviyo Campaign": {
+      "main": [[{"node": "Set Campaign Content", "type": "main", "index": 0}]]
+    },
+    "Set Campaign Content": {
+      "main": [[{"node": "Success Response", "type": "main", "index": 0}]]
+    },
+    "Log to Dashboard": {
+      "main": [[{"node": "Success Response", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "Bi-monthly newsletter for 3A Automation subscribers. AI-generated content via Claude, distributed via Klaviyo.",
+    "author": "3A Automation",
+    "created": "2025-12-28",
+    "session": "107",
+    "schedule": "1st and 15th of each month at 10:00 AM",
+    "channels": ["email"],
+    "dependencies": ["KLAVIYO_API_KEY", "ANTHROPIC_API_KEY", "KLAVIYO_NEWSLETTER_LIST_ID"]
+  }
+}

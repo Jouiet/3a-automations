@@ -115,8 +115,9 @@ class InvoiceGenerator {
     const date = new Date();
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
-    const random = String(Math.floor(Math.random() * 1000)).padStart(3, '0');
-    return `INV-${year}${month}-${random}`;
+    // Use timestamp-based unique ID instead of Math.random()
+    const unique = String(Date.now() % 100000).padStart(5, '0');
+    return `INV-${year}${month}-${unique}`;
   }
 
   formatCurrency(amount, currency) {

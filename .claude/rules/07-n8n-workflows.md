@@ -1,14 +1,15 @@
-# n8n Workflows (7 Local + 2 Webapp Externe)
+# n8n Workflows (8 Local + 2 Webapp Externe)
 
-## Local Workflows (7)
+## Local Workflows (8)
 
 1. ✅ Grok Voice Telephony - Phone Booking
-2. ✅ Email Outreach Sequence - Multi-Touch Campaign
+2. ✅ Email Outreach Sequence - Multi-Touch Campaign (v2.2.0)
 3. ✅ WhatsApp Booking Confirmation
 4. ✅ WhatsApp Booking Reminders
 5. ✅ Blog Article Generator (Weekly Monday 9AM)
 6. ✅ LinkedIn Lead Scraper - Aggressive Outbound
 7. ✅ Klaviyo Welcome Series - 5 Emails
+8. ✅ Newsletter 3A Automation (Bi-Monthly 1st & 15th)
 
 ## Webapp Externe (CinematicAds)
 
