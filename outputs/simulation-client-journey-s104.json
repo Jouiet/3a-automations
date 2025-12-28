@@ -1,0 +1,324 @@
+{
+  "timestamp": "2025-12-28T13:58:10.258Z",
+  "scenarios": [
+    {
+      "id": "S1",
+      "name": "E-commerce Shopify + Klaviyo",
+      "persona": "PME e-commerce €50k-500k CA",
+      "needs": [
+        "Automatiser emails",
+        "Récupérer paniers abandonnés",
+        "Welcome series"
+      ],
+      "requiredAPIs": [
+        "Klaviyo API"
+      ],
+      "steps": [
+        {
+          "action": "Audit compte Klaviyo client",
+          "tool": "audit-klaviyo-flows-v2.cjs",
+          "requires": "KLAVIYO_API_KEY client"
+        },
+        {
+          "action": "Créer flows email",
+          "tool": "Klaviyo UI",
+          "requires": "Accès Klaviyo client"
+        },
+        {
+          "action": "Tester flows",
+          "tool": "test-klaviyo-connection.cjs",
+          "requires": "Triggers Shopify"
+        }
+      ],
+      "status": "partial",
+      "blockers": [
+        "KLAVIYO_API_KEY client"
+      ],
+      "apisReady": true
+    },
+    {
+      "id": "S2",
+      "name": "B2B Lead Generation",
+      "persona": "Consultant/Agence cherche clients",
+      "needs": [
+        "Scraper LinkedIn",
+        "Séquence email outreach",
+        "Scoring leads"
+      ],
+      "requiredAPIs": [
+        "Apify API",
+        "Klaviyo API",
+        "n8n API"
+      ],
+      "steps": [
+        {
+          "action": "Scraper leads LinkedIn",
+          "tool": "linkedin-lead-scraper n8n",
+          "requires": "Critères de recherche"
+        },
+        {
+          "action": "Enrichir données",
+          "tool": "Apollo.io",
+          "requires": "APOLLO_API_KEY (non configuré)"
+        },
+        {
+          "action": "Séquence outreach",
+          "tool": "email-outreach-sequence n8n",
+          "requires": "SMTP/Klaviyo"
+        }
+      ],
+      "status": "partial",
+      "blockers": [
+        "APOLLO_API_KEY (non configuré)"
+      ],
+      "apisReady": true
+    },
+    {
+      "id": "S3",
+      "name": "Voice Widget Integration",
+      "persona": "PME veut assistant vocal sur son site",
+      "needs": [
+        "Widget vocal",
+        "Prise de RDV auto",
+        "Personnalisation"
+      ],
+      "requiredAPIs": [
+        "Booking API"
+      ],
+      "steps": [
+        {
+          "action": "Copier voice-widget.min.js",
+          "tool": "FTP/SSH",
+          "requires": "Accès serveur client"
+        },
+        {
+          "action": "Créer config personnalisée",
+          "tool": "Éditeur",
+          "requires": "Couleurs/textes client"
+        },
+        {
+          "action": "Configurer booking",
+          "tool": "Google Apps Script",
+          "requires": "Calendar client"
+        }
+      ],
+      "status": "blocked",
+      "blockers": [
+        "Couleurs/textes client",
+        "Calendar client"
+      ],
+      "apisReady": false
+    },
+    {
+      "id": "S4",
+      "name": "Analytics Dashboard",
+      "persona": "E-commerce veut vision 360° données",
+      "needs": [
+        "Looker Studio",
+        "Alertes automatiques",
+        "Rapports hebdo"
+      ],
+      "requiredAPIs": [
+        "Gemini API"
+      ],
+      "steps": [
+        {
+          "action": "Connecter GA4",
+          "tool": "Looker Studio",
+          "requires": "Accès GA4 client"
+        },
+        {
+          "action": "Créer dashboard",
+          "tool": "Template Looker",
+          "requires": "Template existant"
+        },
+        {
+          "action": "Configurer alertes",
+          "tool": "analyze-ga4-source.cjs",
+          "requires": "Service Account"
+        }
+      ],
+      "status": "ready",
+      "blockers": [],
+      "apisReady": true
+    },
+    {
+      "id": "S5",
+      "name": "Content Automation",
+      "persona": "PME veut automatiser son contenu",
+      "needs": [
+        "Blog articles IA",
+        "Distribution multi-canal",
+        "SEO"
+      ],
+      "requiredAPIs": [
+        "Gemini API",
+        "n8n API"
+      ],
+      "steps": [
+        {
+          "action": "Générer article",
+          "tool": "blog-article-generator n8n",
+          "requires": "Anthropic API Key"
+        },
+        {
+          "action": "Publier sur site",
+          "tool": "n8n file write",
+          "requires": "Accès serveur"
+        },
+        {
+          "action": "Distribuer social",
+          "tool": "Facebook/LinkedIn APIs",
+          "requires": "Tokens social"
+        }
+      ],
+      "status": "ready",
+      "blockers": [],
+      "apisReady": true
+    }
+  ],
+  "apis": {
+    "Klaviyo API": {
+      "success": true,
+      "status": 200,
+      "listsCount": 3
+    },
+    "n8n API": {
+      "success": true,
+      "status": 200,
+      "workflowsCount": 8,
+      "activeWorkflows": 8
+    },
+    "Booking API (Google Apps Script)": {
+      "success": true,
+      "status": 200,
+      "slotsAvailable": 180
+    },
+    "xAI / Grok API": {
+      "success": true,
+      "status": 200,
+      "modelsCount": 11
+    },
+    "Gemini API": {
+      "success": true,
+      "status": 200,
+      "modelsCount": 50
+    },
+    "Apify API": {
+      "success": true,
+      "status": 200,
+      "actorsCount": 15
+    },
+    "GitHub API": {
+      "success": true,
+      "status": 200,
+      "user": "Jouiet"
+    },
+    "Hostinger API": {
+      "success": true,
+      "status": 200,
+      "vpsCount": 1
+    }
+  },
+  "workflows": {},
+  "widgetTests": {},
+  "summary": {
+    "apisWorking": 8,
+    "apisTotal": 8,
+    "apiScore": "100.0",
+    "scenariosReady": 2,
+    "scenariosPartial": 2,
+    "scenariosBlocked": 1,
+    "scenarioScore": "60.0",
+    "globalScore": "76.0",
+    "clientCapacity": {
+      "E-commerce Shopify": "⚠️ PARTIEL (Shopify manquant)",
+      "B2B/Consultant": "✅ PRÊT",
+      "Service local (BTP, etc.)": "✅ PRÊT",
+      "PME générique (Voice Widget)": "✅ PRÊT",
+      "Analytics/Reporting": "✅ PRÊT"
+    },
+    "date": "2025-12-28T13:58:16.180Z"
+  },
+  "swot": {
+    "strengths": [
+      "8/8 APIs fonctionnelles (100%)",
+      "Booking API opérationnel (180 slots)",
+      "n8n: 8 workflows actifs",
+      "Voice Widget déployé sur le site",
+      "Registry 78 automations documentées",
+      "Stack IA complète (Grok + Gemini)"
+    ],
+    "weaknesses": [
+      "Shopify non configuré → bloque e-commerce",
+      "Pas de templates de configuration client",
+      "Scripts hardcodés pour certains clients",
+      "Pas de système de onboarding documenté",
+      "WhatsApp Business non configuré",
+      "Apollo.io non configuré (enrichissement leads)"
+    ],
+    "opportunities": [
+      "Créer templates de déploiement réutilisables",
+      "Packager Voice Widget comme produit",
+      "Automatiser le onboarding client",
+      "Étendre à WhatsApp Business",
+      "Créer marketplace d'automations"
+    ],
+    "threats": [
+      "Dépendance à Google Apps Script (latence)",
+      "Credentials client à gérer manuellement",
+      "Pas de monitoring centralisé",
+      "Concurrence des outils no-code (Make, Zapier)"
+    ]
+  },
+  "recommendations": [
+    {
+      "priority": "P1 - CRITIQUE",
+      "action": "Créer Shopify Dev Store",
+      "effort": "30 min",
+      "impact": "Débloque 100% des scénarios e-commerce",
+      "steps": [
+        "1. Aller sur partners.shopify.com",
+        "2. Créer Development Store",
+        "3. Générer Admin API Token",
+        "4. Ajouter dans .env"
+      ]
+    },
+    {
+      "priority": "P2 - IMPORTANT",
+      "action": "Créer template config Voice Widget",
+      "effort": "2h",
+      "impact": "Réduit temps déploiement de 4h à 30min",
+      "steps": [
+        "1. Extraire variables configurables du widget",
+        "2. Créer config.template.js",
+        "3. Documenter le processus",
+        "4. Créer script d'installation"
+      ]
+    },
+    {
+      "priority": "P2 - IMPORTANT",
+      "action": "Documenter processus onboarding client",
+      "effort": "3h",
+      "impact": "Standardise la livraison des projets",
+      "steps": [
+        "1. Créer checklist par type de projet",
+        "2. Définir livrables standard",
+        "3. Créer templates de communication",
+        "4. Automatiser les rappels"
+      ]
+    },
+    {
+      "priority": "P3 - SOUHAITABLE",
+      "action": "Configurer WhatsApp Business API",
+      "effort": "4h",
+      "impact": "Active les workflows WhatsApp (confirmation RDV)",
+      "steps": [
+        "1. Créer compte Meta Business",
+        "2. Configurer WhatsApp Business Cloud",
+        "3. Créer templates de message",
+        "4. Tester avec n8n"
+      ]
+    }
+  ]
+}

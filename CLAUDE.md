@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 15.1 | Date: 2025-12-28 | Session: 103
+## Version: 15.3 | Date: 2025-12-28 | Session: 105
 
 ---
 
@@ -10,8 +10,17 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (78, v1.8.0) |
-| History | `HISTORY.md` (Sessions 0-102) |
+| Automations | `automations/automations-registry.json` (78, v1.9.0) |
+| History | `HISTORY.md` (Sessions 0-105) |
+
+## Session 105 Fixes
+
+| Fix | Details |
+|-----|---------|
+| Email Outreach Workflow | responseMode: lastNode→responseNode |
+| n8n Deploy Script | PATCH→PUT method |
+| Workflows Cleanup | AI Avatar/Video supprimés (webapp externe) |
+| Blocker Identifié | n8n Google Sheets OAuth2 non configuré |
 
 ## Memory Structure
 

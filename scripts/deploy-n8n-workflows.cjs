@@ -66,24 +66,35 @@ async function deployWorkflows() {
 
       let response;
       if (existing) {
-        // Update existing workflow
+        // Update existing workflow using PUT
+        // n8n API requires PUT for updates, not PATCH
+        const updatePayload = {
+          ...workflow,
+          id: existing.id,
+          active: existing.active  // Preserve active state
+        };
+        delete updatePayload.meta;  // Remove meta field that causes issues
+
         response = await fetch(`${CONFIG.N8N_URL}/api/v1/workflows/${existing.id}`, {
-          method: 'PATCH',
+          method: 'PUT',
           headers: {
             'X-N8N-API-KEY': CONFIG.API_KEY,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(workflow)
+          body: JSON.stringify(updatePayload)
         });
       } else {
         // Create new workflow
+        const createPayload = { ...workflow };
+        delete createPayload.meta;  // Remove meta field that causes issues
+
         response = await fetch(`${CONFIG.N8N_URL}/api/v1/workflows`, {
           method: 'POST',
           headers: {
             'X-N8N-API-KEY': CONFIG.API_KEY,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(workflow)
+          body: JSON.stringify(createPayload)
         });
       }
 

@@ -1,0 +1,461 @@
+{
+  "timestamp": "2025-12-28T13:53:17.582Z",
+  "summary": {
+    "scriptsScore": 97.8,
+    "apisConfigured": 5,
+    "apisWorking": 4,
+    "scenariosReady": 3,
+    "globalScore": "64.3",
+    "date": "2025-12-28T13:53:32.465Z"
+  },
+  "registryValidation": {
+    "version": "1.9.0",
+    "totalCount": 78,
+    "lastUpdated": "2025-12-28",
+    "automationsCount": 78,
+    "match": true,
+    "byType": {
+      "script": 36,
+      "n8n-workflow": 9,
+      "klaviyo-segment": 2,
+      "apollo-integration": 1,
+      "shopify-flow": 3,
+      "shopify-theme": 1,
+      "manual-process": 1,
+      "manual-file": 1,
+      "klaviyo-flow": 5,
+      "ai-process": 1,
+      "shopify-metafield": 1,
+      "template": 1,
+      "manual-setup": 1,
+      "shopify-webhook": 1,
+      "looker-template": 1,
+      "multi-tool": 1,
+      "sheets-template": 2,
+      "video-template": 1,
+      "shopify-app": 1,
+      "manual-audit": 1,
+      "external-service": 6,
+      "web-component": 1
+    },
+    "byCategory": {
+      "lead-gen": 20,
+      "seo": 9,
+      "email": 9,
+      "shopify": 13,
+      "analytics": 9,
+      "content": 8,
+      "cinematicads": 4,
+      "ai-avatar": 2,
+      "whatsapp": 2,
+      "voice-ai": 2
+    }
+  },
+  "scriptsExistence": {
+    "existing": [
+      {
+        "id": "meta-leads-sync",
+        "script": "clients/leads/sync-meta-leads-to-shopify.cjs"
+      },
+      {
+        "id": "google-ads-sync",
+        "script": "clients/leads/sync-google-ads-leads-to-shopify.cjs"
+      },
+      {
+        "id": "tiktok-leads-sync",
+        "script": "clients/leads/sync-tiktok-ads-leads-to-shopify.cjs"
+      },
+      {
+        "id": "geo-segmentation",
+        "script": "clients/klaviyo/geo-segment-profiles.cjs"
+      },
+      {
+        "id": "google-forms-crm",
+        "script": "generic/sync-google-forms-to-klaviyo.cjs"
+      },
+      {
+        "id": "sourcing-google-maps",
+        "script": "generic/scrape-google-maps-businesses.cjs"
+      },
+      {
+        "id": "sourcing-linkedin",
+        "script": "generic/scrape-linkedin-profiles.cjs"
+      },
+      {
+        "id": "veille-recrutement",
+        "script": "generic/scrape-hiring-companies.cjs"
+      },
+      {
+        "id": "alt-text-fix",
+        "script": "clients/seo/fix-missing-alt-text.cjs"
+      },
+      {
+        "id": "image-sitemap",
+        "script": "clients/seo/generate_image_sitemap.cjs"
+      },
+      {
+        "id": "flows-audit",
+        "script": "clients/klaviyo/audit-klaviyo-flows.cjs"
+      },
+      {
+        "id": "ab-sender-rotation",
+        "script": "clients/klaviyo/rotation_email.cjs"
+      },
+      {
+        "id": "store-audit",
+        "script": "clients/shopify/audit-shopify-complete.cjs"
+      },
+      {
+        "id": "facebook-audiences",
+        "script": "clients/shopify/export-shopify-customers-facebook.cjs"
+      },
+      {
+        "id": "google-taxonomy",
+        "script": "clients/shopify/import-taxonomy-via-api.cjs"
+      },
+      {
+        "id": "ga4-source-report",
+        "script": "clients/analytics/analyze-ga4-source.cjs"
+      },
+      {
+        "id": "bnpl-tracking",
+        "script": "clients/analytics/track-bnpl-performance.cjs"
+      },
+      {
+        "id": "pixel-verification",
+        "script": "clients/analytics/audit-tiktok-pixel-config.cjs"
+      },
+      {
+        "id": "promo-video",
+        "script": "clients/video/generate-promo-video.cjs"
+      },
+      {
+        "id": "portrait-video",
+        "script": "clients/video/convert-video-portrait.cjs"
+      },
+      {
+        "id": "auto-blog",
+        "script": "agency/n8n-workflows/blog-article-multi-channel.json"
+      },
+      {
+        "id": "google-apps-script-booking",
+        "script": "agency/core/google-apps-script-booking.js"
+      },
+      {
+        "id": "google-calendar-booking",
+        "script": "agency/core/google-calendar-booking.cjs"
+      },
+      {
+        "id": "analyze-ga4-conversion-source",
+        "script": "clients/analytics/analyze-ga4-conversion-source.cjs"
+      },
+      {
+        "id": "geo-segment-generic",
+        "script": "clients/crm/geo-segment-generic.cjs"
+      },
+      {
+        "id": "audit-klaviyo-flows-v2",
+        "script": "clients/klaviyo/audit-klaviyo-flows-v2.cjs"
+      },
+      {
+        "id": "import-facebook-lead-ads",
+        "script": "clients/leads/import-facebook-lead-ads.js"
+      },
+      {
+        "id": "segment-leads",
+        "script": "clients/leads/segment-leads.js"
+      },
+      {
+        "id": "generate-tags-csv",
+        "script": "clients/seo/generate-tags-csv.js"
+      },
+      {
+        "id": "import-alt-text-api",
+        "script": "clients/seo/import-alt-text-api.js"
+      },
+      {
+        "id": "upload-llms",
+        "script": "clients/seo/upload-llms.js"
+      },
+      {
+        "id": "audit-shopify-store",
+        "script": "clients/shopify/audit-shopify-store.cjs"
+      },
+      {
+        "id": "create-warehouse-metafield",
+        "script": "clients/shopify/create-warehouse-metafield.cjs"
+      },
+      {
+        "id": "import-taxonomy-metafield",
+        "script": "clients/shopify/import-taxonomy-metafield.cjs"
+      },
+      {
+        "id": "parse-warehouse-csv",
+        "script": "clients/shopify/parse-warehouse-csv.cjs"
+      },
+      {
+        "id": "enable-apify-schedulers",
+        "script": "clients/social/enable-apify-schedulers.js"
+      },
+      {
+        "id": "generate-all-promo-videos",
+        "script": "clients/video/generate-all-promo-videos.cjs"
+      },
+      {
+        "id": "ai-avatar-generator",
+        "script": "agency/n8n-workflows/ai-avatar-generator.json"
+      },
+      {
+        "id": "ai-talking-video",
+        "script": "agency/n8n-workflows/ai-talking-video.json"
+      },
+      {
+        "id": "whatsapp-booking-confirmation",
+        "script": "agency/n8n-workflows/whatsapp-booking-confirmation.json"
+      },
+      {
+        "id": "whatsapp-booking-reminders",
+        "script": "agency/n8n-workflows/whatsapp-booking-reminders.json"
+      },
+      {
+        "id": "grok-voice-telephony",
+        "script": "agency/n8n-workflows/grok-voice-telephony.json"
+      },
+      {
+        "id": "linkedin-lead-scraper",
+        "script": "agency/n8n-workflows/linkedin-lead-scraper.json"
+      },
+      {
+        "id": "email-outreach-sequence",
+        "script": "agency/n8n-workflows/email-outreach-sequence.json"
+      }
+    ],
+    "missing": [
+      {
+        "id": "voice-ai-web-widget",
+        "script": "shared-components/voice-widget/voice-widget.js",
+        "expectedPath": "/Users/mac/Desktop/JO-AAA/automations/shared-components/voice-widget/voice-widget.js"
+      }
+    ],
+    "summary": {
+      "total": 45,
+      "existing": 44,
+      "missing": 1,
+      "percentage": "97.8"
+    }
+  },
+  "apisStatus": {
+    "klaviyo": {
+      "envKey": "KLAVIYO_API_KEY",
+      "configured": true,
+      "tested": true,
+      "works": true
+    },
+    "googleSheets": {
+      "envKey": "GOOGLE_APPLICATION_CREDENTIALS",
+      "configured": true,
+      "tested": true,
+      "works": true
+    },
+    "shopify": {
+      "envKey": "SHOPIFY_ACCESS_TOKEN",
+      "configured": false,
+      "tested": false,
+      "works": false
+    },
+    "ga4": {
+      "envKey": "GA4_PROPERTY_ID",
+      "configured": true,
+      "tested": false,
+      "works": false
+    },
+    "xai": {
+      "envKey": "XAI_API_KEY",
+      "configured": true,
+      "tested": true,
+      "works": true
+    },
+    "gemini": {
+      "envKey": "GEMINI_API_KEY",
+      "configured": true,
+      "tested": true,
+      "works": true
+    }
+  },
+  "clientScenarios": [
+    {
+      "name": "E-commerce Shopify + Klaviyo",
+      "description": "Client e-commerce veut automatiser ses emails",
+      "requirements": [
+        "Shopify",
+        "Klaviyo"
+      ],
+      "automationsNeeded": [
+        "welcome-series",
+        "abandoned-cart",
+        "post-purchase"
+      ],
+      "status": "partial",
+      "issues": [
+        "❌ Shopify non configuré"
+      ]
+    },
+    {
+      "name": "B2B Lead Generation",
+      "description": "Client B2B veut générer des leads LinkedIn",
+      "requirements": [
+        "Apify ou scraping"
+      ],
+      "automationsNeeded": [
+        "sourcing-linkedin",
+        "lead-scoring",
+        "email-outreach-sequence"
+      ],
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "name": "BTP Local",
+      "description": "Artisan BTP veut trouver des clients locaux",
+      "requirements": [
+        "Google Maps scraping",
+        "Email"
+      ],
+      "automationsNeeded": [
+        "sourcing-google-maps",
+        "geo-segmentation"
+      ],
+      "status": "ready",
+      "issues": []
+    },
+    {
+      "name": "Voice AI Integration",
+      "description": "Client veut le voice widget sur son site",
+      "requirements": [
+        "Customisation widget",
+        "Calendar API"
+      ],
+      "automationsNeeded": [
+        "voice-ai-web-widget"
+      ],
+      "status": "partial",
+      "issues": [
+        "⚠️ Script manquant: voice-ai-web-widget"
+      ]
+    },
+    {
+      "name": "Analytics Dashboard",
+      "description": "Client veut un dashboard unifié",
+      "requirements": [
+        "GA4",
+        "Google Sheets"
+      ],
+      "automationsNeeded": [
+        "ga4-source-report",
+        "looker-dashboard"
+      ],
+      "status": "ready",
+      "issues": []
+    }
+  ],
+  "voiceWidgetAudit": {
+    "widgetExists": true,
+    "knowledgeExists": true,
+    "pagesWithWidget": 8,
+    "totalPages": 8,
+    "bookingApiWorks": false,
+    "limitations": [
+      "Web Speech API limité à Chrome/Edge",
+      "Booking dépend de Google Apps Script",
+      "Personnalisation nécessite modification code"
+    ]
+  },
+  "implementationMethodology": {
+    "voiceWidget": {
+      "name": "Voice Widget chez Client",
+      "steps": [
+        "1. Copier voice-widget.min.js sur le serveur client",
+        "2. Créer config.js avec personnalisation (couleurs, textes)",
+        "3. Ajouter script dans <body> des pages",
+        "4. Configurer Google Apps Script pour booking (si différent)",
+        "5. Créer knowledge.json avec données client",
+        "6. Tester sur Chrome/Edge",
+        "7. Ajouter fallback texte pour Firefox/Safari"
+      ],
+      "effort": "Moyen (2-4h)",
+      "prerequisites": [
+        "Accès FTP/SSH au site client",
+        "Google Calendar client (si booking)"
+      ],
+      "blockers": [
+        "Pas de templates de config prêts",
+        "Personnalisation manuelle requise"
+      ]
+    },
+    "klaviyoFlows": {
+      "name": "Flows Klaviyo",
+      "steps": [
+        "1. Accès admin Klaviyo client",
+        "2. Exporter templates depuis compte demo",
+        "3. Importer dans compte client",
+        "4. Adapter contenu (logo, textes, liens)",
+        "5. Configurer triggers (Shopify events)",
+        "6. Activer en mode test",
+        "7. Valider et activer en production"
+      ],
+      "effort": "Faible (1-2h par flow)",
+      "prerequisites": [
+        "Accès Klaviyo client",
+        "Intégration Shopify active"
+      ],
+      "blockers": []
+    },
+    "n8nWorkflows": {
+      "name": "Workflows n8n",
+      "steps": [
+        "1. Exporter workflow JSON depuis n8n agence",
+        "2. Importer dans n8n client OU utiliser n8n agence",
+        "3. Configurer credentials client",
+        "4. Adapter les webhooks URLs",
+        "5. Tester en mode manuel",
+        "6. Activer production"
+      ],
+      "effort": "Moyen à élevé (2-8h selon complexité)",
+      "prerequisites": [
+        "n8n client OU partage n8n agence",
+        "Credentials APIs client"
+      ],
+      "blockers": [
+        "Client doit avoir n8n ou utiliser notre instance"
+      ]
+    },
+    "scriptsCustom": {
+      "name": "Scripts .cjs Personnalisés",
+      "steps": [
+        "1. Copier script depuis repo agence",
+        "2. Créer .env client avec credentials",
+        "3. Installer dépendances npm",
+        "4. Adapter configurations spécifiques",
+        "5. Tester en dry-run",
+        "6. Configurer cron ou scheduler",
+        "7. Monitorer les premières exécutions"
+      ],
+      "effort": "Élevé (4-8h)",
+      "prerequisites": [
+        "Serveur client avec Node.js",
+        "Accès SSH",
+        "Credentials APIs"
+      ],
+      "blockers": [
+        "Beaucoup de scripts hardcodés",
+        "Pas de système de config générique"
+      ]
+    }
+  },
+  "recommendations": [
+    "CRITIQUE: Créer Shopify Dev Store sur partners.shopify.com",
+    "Créer 1 scripts manquants",
+    "Créer templates de configuration pour déploiement client",
+    "Documenter le processus d'onboarding client"
+  ]
+}
