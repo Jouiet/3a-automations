@@ -30,6 +30,9 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '.e
 const path = require('path');
 const fs = require('fs');
 
+// Security utilities
+const { secureRandomElement } = require('./lib/security-utils.cjs');
+
 // Import market configuration
 const { MARKETS, MARKET_GROUPS, getMarketsByPriority } = require('./config/markets.cjs');
 
@@ -135,8 +138,8 @@ async function runLinkedInPipeline(marketKey, options = {}) {
 
   console.log(`\n📋 LinkedIn Pipeline: ${market.name}`);
 
-  // Build search query
-  const query = options.query || CONFIG.LINKEDIN_QUERIES[Math.floor(Math.random() * CONFIG.LINKEDIN_QUERIES.length)];
+  // Build search query (using cryptographically secure random selection)
+  const query = options.query || secureRandomElement(CONFIG.LINKEDIN_QUERIES);
   const location = options.location || market.cities[0];
   const searchQuery = `${query} ${location}`;
 

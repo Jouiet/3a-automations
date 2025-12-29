@@ -12,6 +12,17 @@ require('dotenv').config();
 
 const { google } = require('googleapis');
 
+// Security utilities
+const {
+  validateInput,
+  validateRequestBody,
+  sanitizeInput,
+  RateLimiter,
+  requestSizeLimiter,
+  setSecurityHeaders,
+  corsMiddleware,
+} = require('../../lib/security-utils.cjs');
+
 // Configuration
 const CONFIG = {
   // Google Calendar OAuth2 credentials
@@ -221,11 +232,41 @@ async function getAvailableDates(days = 14, auth) {
   return availableDates;
 }
 
+// Rate limiter instance (30 requests per minute per IP)
+const rateLimiter = new RateLimiter({ windowMs: 60000, maxRequests: 30 });
+
+// Booking request validation schema
+const BOOKING_SCHEMA = {
+  name: { required: true, type: 'string', minLength: 2, maxLength: 100 },
+  email: { required: true, type: 'email' },
+  phone: { required: false, type: 'phone' },
+  service: { required: false, type: 'string', maxLength: 200 },
+  startTime: { required: true, type: 'datetime' },
+  notes: { required: false, type: 'string', maxLength: 1000 }
+};
+
 // Express server for webhook endpoints (used by n8n)
 async function startServer() {
   const express = require('express');
   const app = express();
-  app.use(express.json());
+
+  // Security middleware (order matters)
+  app.use(requestSizeLimiter(100 * 1024)); // 100KB max request size
+  app.use(express.json({ limit: '100kb' }));
+  app.use((req, res, next) => {
+    setSecurityHeaders(res);
+    next();
+  });
+  app.use(corsMiddleware(['https://3a-automation.com', 'https://dashboard.3a-automation.com']));
+
+  // Rate limiting middleware
+  app.use((req, res, next) => {
+    const clientIp = req.ip || req.connection.remoteAddress || 'unknown';
+    if (!rateLimiter.isAllowed(clientIp)) {
+      return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+    }
+    next();
+  });
 
   // Health check
   app.get('/health', (req, res) => {
@@ -241,7 +282,7 @@ async function startServer() {
         message: 'Please complete Google Calendar OAuth setup'
       });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error: 'Internal server error' });
     }
   });
 
@@ -249,34 +290,59 @@ async function startServer() {
   app.get('/api/booking/slots/:date', async (req, res) => {
     try {
       const { date } = req.params;
+
+      // Validate date format (YYYY-MM-DD)
+      if (!validateInput(date, 'date')) {
+        return res.status(400).json({ error: 'Invalid date format. Use YYYY-MM-DD.' });
+      }
+
+      // Sanitize the date parameter
+      const sanitizedDate = sanitizeInput(date);
+
       res.json({
-        date,
+        date: sanitizedDate,
         error: 'OAuth not configured',
         message: 'Please complete Google Calendar OAuth setup'
       });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error: 'Internal server error' });
     }
   });
 
   // Create booking
   app.post('/api/booking/create', async (req, res) => {
     try {
-      const { name, email, phone, service, startTime, notes } = req.body;
-
-      if (!name || !email || !startTime) {
+      // Validate request body against schema
+      const validation = validateRequestBody(req.body, BOOKING_SCHEMA);
+      if (!validation.valid) {
         return res.status(400).json({
-          error: 'Missing required fields: name, email, startTime'
+          error: 'Validation failed',
+          details: validation.errors
         });
       }
+
+      // Sanitize all string inputs
+      const sanitizedData = {
+        name: sanitizeInput(req.body.name),
+        email: sanitizeInput(req.body.email),
+        phone: req.body.phone ? sanitizeInput(req.body.phone) : null,
+        service: req.body.service ? sanitizeInput(req.body.service) : null,
+        startTime: req.body.startTime,
+        notes: req.body.notes ? sanitizeInput(req.body.notes) : null
+      };
 
       res.json({
         error: 'OAuth not configured',
         message: 'Please complete Google Calendar OAuth setup',
-        receivedData: { name, email, service, startTime }
+        receivedData: {
+          name: sanitizedData.name,
+          email: sanitizedData.email,
+          service: sanitizedData.service,
+          startTime: sanitizedData.startTime
+        }
       });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error: 'Internal server error' });
     }
   });
 
@@ -285,6 +351,7 @@ async function startServer() {
     console.log(`📅 3A Booking System running on port ${PORT}`);
     console.log(`   Health: http://localhost:${PORT}/health`);
     console.log(`   API: http://localhost:${PORT}/api/booking/`);
+    console.log(`   Security: Rate limiting, input validation, security headers enabled`);
   });
 }
 

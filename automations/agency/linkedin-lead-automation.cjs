@@ -25,6 +25,13 @@
 const path = require('path');
 const fs = require('fs');
 
+// Security utilities
+const {
+  fetchWithTimeout,
+  safePoll,
+  sanitizePath,
+} = require('../lib/security-utils.cjs');
+
 // Load environment
 const envPath = process.env.CLIENT_ENV_PATH || path.join(__dirname, '..', '..', '.env');
 require('dotenv').config({ path: envPath });
@@ -91,11 +98,11 @@ async function runApifyActor(actorId, input) {
   // Start actor run
   const startUrl = `https://api.apify.com/v2/acts/${actorId}/runs?token=${CONFIG.APIFY_TOKEN}`;
 
-  const startResponse = await fetch(startUrl, {
+  const startResponse = await fetchWithTimeout(startUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(input),
-  });
+  }, 30000);
 
   if (!startResponse.ok) {
     const error = await startResponse.text();
@@ -106,36 +113,40 @@ async function runApifyActor(actorId, input) {
   const runId = runData.data.id;
   console.log(`   Run ID: ${runId}`);
 
-  // Poll for completion
-  const startTime = Date.now();
-  let status = 'RUNNING';
+  // Poll for completion with safePoll (bounded retries + timeout)
+  const statusUrl = `https://api.apify.com/v2/acts/${actorId}/runs/${runId}?token=${CONFIG.APIFY_TOKEN}`;
 
-  while (status === 'RUNNING' || status === 'READY') {
-    if (Date.now() - startTime > CONFIG.APIFY_MAX_WAIT) {
-      throw new Error('Apify run timed out');
+  const finalStatus = await safePoll(
+    async () => {
+      const statusResponse = await fetchWithTimeout(statusUrl, {}, 15000);
+      const statusData = await statusResponse.json();
+      const status = statusData.data.status;
+      process.stdout.write(`   Status: ${status}\r`);
+
+      const done = status !== 'RUNNING' && status !== 'READY';
+      return { done, result: status, status };
+    },
+    {
+      maxRetries: 120,                           // Max 120 poll attempts
+      maxTimeMs: CONFIG.APIFY_MAX_WAIT,          // 10 min max
+      intervalMs: CONFIG.APIFY_POLL_INTERVAL,   // 5 sec interval
+      onProgress: (attempt, status) => {
+        if (attempt % 12 === 0) console.log(`   Polling attempt ${attempt}, status: ${status}`);
+      }
     }
+  );
 
-    await new Promise(r => setTimeout(r, CONFIG.APIFY_POLL_INTERVAL));
+  console.log(`   Status: ${finalStatus}`);
 
-    const statusUrl = `https://api.apify.com/v2/acts/${actorId}/runs/${runId}?token=${CONFIG.APIFY_TOKEN}`;
-    const statusResponse = await fetch(statusUrl);
-    const statusData = await statusResponse.json();
-
-    status = statusData.data.status;
-    process.stdout.write(`   Status: ${status}\r`);
-  }
-
-  console.log(`   Status: ${status}`);
-
-  if (status !== 'SUCCEEDED') {
-    throw new Error(`Apify run failed: ${status}`);
+  if (finalStatus !== 'SUCCEEDED') {
+    throw new Error(`Apify run failed: ${finalStatus}`);
   }
 
   // Get results
   const datasetId = runData.data.defaultDatasetId;
   const dataUrl = `https://api.apify.com/v2/datasets/${datasetId}/items?token=${CONFIG.APIFY_TOKEN}`;
 
-  const dataResponse = await fetch(dataUrl);
+  const dataResponse = await fetchWithTimeout(dataUrl, {}, 30000);
   const results = await dataResponse.json();
 
   console.log(`   ✅ Got ${results.length} profiles`);
@@ -270,7 +281,7 @@ async function klaviyoRequest(endpoint, method = 'GET', body = null) {
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(url, options);
+  const response = await fetchWithTimeout(url, options, 30000);
 
   if (!response.ok) {
     const errorText = await response.text();
@@ -397,7 +408,7 @@ async function triggerOutreachEvent(email, lead, segment, emailContent) {
  */
 async function logToDashboard(lead, action = 'linkedin_lead') {
   try {
-    await fetch(CONFIG.DASHBOARD_API_URL, {
+    await fetchWithTimeout(CONFIG.DASHBOARD_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -414,7 +425,7 @@ async function logToDashboard(lead, action = 'linkedin_lead') {
         }
       }),
       redirect: 'follow',
-    });
+    }, 15000);
     return true;
   } catch (error) {
     console.warn(`   ⚠️ Dashboard log failed: ${error.message}`);
@@ -602,14 +613,17 @@ async function processFromFile(filePath) {
   console.log(`Klaviyo: ${CONFIG.KLAVIYO_API_KEY ? '✅ SET' : '❌ NOT SET'}`);
   console.log('================================================================================');
 
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`File not found: ${filePath}`);
+  // Sanitize file path to prevent path traversal
+  const safePath = sanitizePath(filePath, CONFIG.OUTPUT_DIR);
+
+  if (!fs.existsSync(safePath)) {
+    throw new Error(`File not found: ${safePath}`);
   }
   if (!CONFIG.KLAVIYO_API_KEY) {
     throw new Error('KLAVIYO_API_KEY not configured');
   }
 
-  const leads = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const leads = JSON.parse(fs.readFileSync(safePath, 'utf-8'));
 
   // Add scores if missing
   const scoredLeads = leads.map(lead => ({

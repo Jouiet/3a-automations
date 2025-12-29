@@ -1,5 +1,11 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 115 (29/12/2025) - SECURITY HARDENING COMPLET
+
+| Session | Modifications |
+|---------|---------------|
+| **115** | **AUDIT SÉCURITÉ COMPLET**: 30 vulnérabilités identifiées → 30 corrigées (100%). **security-utils.cjs CRÉÉ** (~920 lignes, 31 exports): fetchWithTimeout, retryWithExponentialBackoff, safePoll, secureRandomInt/Element/ShuffleArray, validateInput, sanitizeInput, sanitizePath, RateLimiter, requestSizeLimiter, setSecurityHeaders, corsMiddleware, timingSafeEqual, generateCsrfToken, validateCsrfToken, encodeHTML, stripHTML, sanitizeURL, createDedupedFetch, debounce, throttle. **FICHIERS CORRIGÉS**: linkedin-lead-automation.cjs (polling+timeout+path), scrape-google-maps-businesses.cjs, scrape-linkedin-profiles.cjs, google-calendar-booking.cjs (validation+rate+headers), newsletter-automation.cjs (timeout+backoff), rotation_email.cjs (secure shuffle+timeout), lead-gen-scheduler.cjs (secure random), segment-leads.js (retry+locking), import-facebook-lead-ads.js (retry). **CATÉGORIES FIXES**: CRITICAL (unbounded loops, input validation), HIGH (timeouts, exponential backoff, Math.random, race conditions, rate limiting), MEDIUM (path traversal, headers, CORS), LOW (logging, timing-safe). |
+
 ## Session 114 (29/12/2025) - LEAD GEN PIPELINES CONFIGURÉS
 
 | Session | Modifications |

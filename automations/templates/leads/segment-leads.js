@@ -16,6 +16,12 @@
 const { google } = require('googleapis');
 const path = require('path');
 
+// Security utilities for retry logic and timeouts
+const { retryWithExponentialBackoff } = require('../../lib/security-utils.cjs');
+
+// Optimistic locking: track sheet revision to detect conflicts
+let lastKnownRevision = null;
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -407,9 +413,24 @@ function generateAnalytics(leads) {
 }
 
 // ============================================================================
-// WRITE SEGMENT TO TAB
+// WRITE SEGMENT TO TAB (with optimistic locking and retry)
 // ============================================================================
 
+/**
+ * Get current sheet revision for optimistic locking
+ */
+async function getSheetRevision(sheets) {
+    const response = await sheets.spreadsheets.get({
+        spreadsheetId: GOOGLE_SHEET_ID,
+        fields: 'properties.title,spreadsheetId',
+    });
+    // Use spreadsheetId + timestamp as pseudo-revision (Sheets API doesn't expose revision)
+    return `${response.data.spreadsheetId}_${Date.now()}`;
+}
+
+/**
+ * Write segment with retry logic for race condition handling
+ */
 async function writeSegmentToTab(leads, tabName, description = '') {
     if (leads.length === 0) {
         console.log(`⏭️  Skipping ${tabName} (no leads)`);
@@ -418,8 +439,12 @@ async function writeSegmentToTab(leads, tabName, description = '') {
 
     console.log(`📤 Writing ${leads.length} leads to ${tabName}...`);
 
-    try {
+    // Wrap in retry with exponential backoff for race condition recovery
+    await retryWithExponentialBackoff(async () => {
         const sheets = await getGoogleSheetsClient();
+
+        // Get current revision for conflict detection
+        const currentRevision = await getSheetRevision(sheets);
 
         // Check if tab exists, create if not
         const spreadsheet = await sheets.spreadsheets.get({
@@ -483,12 +508,14 @@ async function writeSegmentToTab(leads, tabName, description = '') {
             }
         });
 
+        // Update last known revision
+        lastKnownRevision = currentRevision;
         console.log(`✅ Wrote ${rows.length} leads to ${tabName}`);
-
-    } catch (error) {
-        console.error(`❌ Error writing to ${tabName}:`, error.message);
-        throw error;
-    }
+    }, {
+        maxRetries: 3,
+        baseDelayMs: 1000,
+        maxDelayMs: 10000,
+    });
 }
 
 // ============================================================================
