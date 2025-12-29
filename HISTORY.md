@@ -1,5 +1,11 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 114 (29/12/2025) - SYSTEM HEALTH CHECK + N8N CLEANUP
+
+| Session | Modifications |
+|---------|---------------|
+| **114** | **SYSTEM HEALTH CHECK SCRIPT**: `scripts/system-health-check.cjs` créé - monitoring centralisé de 8 APIs (n8n, Klaviyo, xAI, Apify, Gemini, GitHub, Hostinger, Booking). **SCORE 100%**: 8/8 APIs fonctionnelles. **FIX test-all-apis.cjs**: Header n8n corrigé (`X-N8N-API-KEY` au lieu de `Authorization: Bearer`). **N8N CLEANUP**: 3 workflows supprimés (remplacés par scripts natifs): Klaviyo Welcome Series, Email Outreach Sequence, LinkedIn Lead Scraper. **N8N FINAL: 6 workflows** (5 actifs, 1 inactif). **SHOPIFY CONFIG**: Domain mis à jour vers `guqsu3-yj.myshopify.com` (TOKEN REQUIS). **SCRIPTS NATIFS TESTÉS OK**: email-automation-unified.cjs (profil créé), linkedin-lead-automation.cjs (Apify+Klaviyo OK), google-maps-to-klaviyo-pipeline.cjs (6/6 OK). **REGISTRY**: v2.0.0, 82 automations. **WEBSITE**: 39 pages (20 FR, 19 EN). |
+
 ## Session 113 (29/12/2025) - B2B LEAD WORKFLOWS ALIGNÉS
 
 | Session | Modifications |

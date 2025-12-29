@@ -69,7 +69,7 @@ const APIS = [
         path: '/api/v1/workflows',
         protocol: url.protocol,
         headers: {
-          'Authorization': `Bearer ${apiKey}`,
+          'X-N8N-API-KEY': apiKey,
           'Accept': 'application/json'
         }
       });
