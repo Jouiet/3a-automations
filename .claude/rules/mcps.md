@@ -14,12 +14,12 @@
 | google-sheets | `mcp-gsheets` | Service Account JSON |
 | shopify | `shopify-mcp` | guqsu3-yj.myshopify.com ✅ |
 | n8n | SSE remote | n8n.srv1168256.hstgr.cloud ✅ |
+| wordpress | `claudeus-wp-mcp` | wp.3a-automation.com ✅ |
 
 ## MCPs à Configurer
 
 | MCP | Package | Action Requise |
 |-----|---------|----------------|
-| wordpress | `claudeus-wp-mcp` | Créer wp-sites.json |
 | apify | `@apify/actors-mcp-server` | Tester token |
 
 ## Fichier de Configuration

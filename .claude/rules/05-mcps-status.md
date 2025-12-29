@@ -24,12 +24,17 @@
 | google-sheets | Not shared | Share with SA |
 | apify | Token issue | MCP package bug |
 
-## Not Configured (2)
+## Not Configured (1)
 
 | MCP | Status |
 |-----|--------|
-| wordpress | wp-sites.json empty |
 | powerbi-remote | Entra ID required |
+
+## Configured (Session 115)
+
+| MCP | Status | Notes |
+|-----|--------|-------|
+| wordpress | ✅ OK | wp.3a-automation.com |
 
 ## Configured (Session 114)
 
