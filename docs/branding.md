@@ -277,31 +277,91 @@ Note: Sur fond clair, utiliser version sombre du logo (a creer si necessaire)
 
 ---
 
-## 8. TONE OF VOICE
+## 8. IDENTITÉ & TONE OF VOICE
 
-### Principes
-1. **Professionnel** - Expert technique, pas vendeur
-2. **Direct** - Pas de jargon inutile
-3. **Factuel** - Que des faits verifiables
-4. **Accessible** - Comprehensible par non-techniciens
+### Identité 3A Automation
 
-### Exemples
+```
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                         3A AUTOMATION - IDENTITÉ                              ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                               ║
+║   TYPE:       Agence d'Automatisation AI                                     ║
+║   MARCHÉ:     E-commerce & PME B2B                                           ║
+║   SIGNIFICATION: 3A = Automation, Analytics, AI                              ║
+║                                                                               ║
+║   CIBLE PRIMAIRE:                                                            ║
+║   • Boutiques e-commerce (Shopify, WooCommerce) €10k-500k/mois              ║
+║   • PME B2B cherchant à automatiser leurs processus                         ║
+║                                                                               ║
+║   EXPERTISE:                                                                  ║
+║   • Email Marketing Automation (Klaviyo, HubSpot)                           ║
+║   • Lead Generation & Nurturing                                              ║
+║   • Intégrations API & Data Sync                                            ║
+║   • SEO Technique & Analytics                                                ║
+║   • AI-Powered Workflows                                                     ║
+║                                                                               ║
+║   DIFFÉRENCIATION:                                                           ║
+║   • Approche technique (code/APIs, pas de no-code limité)                   ║
+║   • Focus résultats mesurables (ROI, temps gagné)                           ║
+║   • Stack moderne: n8n, Apify, Claude, Gemini                               ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+```
+
+### Règle Absolue: NOUS, jamais "je"
+
+```
+✅ CORRECT:   "Nous automatisons..."
+✅ CORRECT:   "Notre équipe..."
+✅ CORRECT:   "3A Automation propose..."
+
+❌ INTERDIT:  "J'automatise..."
+❌ INTERDIT:  "Je propose..."
+❌ INTERDIT:  "Mon expertise..."
+```
+
+### Messages Clés
+
+**ONE-LINER:**
+> "Nous automatisons les boutiques e-commerce et PME B2B pour éliminer les tâches répétitives et maximiser le ROI."
+
+**ELEVATOR PITCH (30 sec):**
+> "3A Automation est une agence spécialisée en automatisation AI pour l'e-commerce et les PME B2B. Nous connectons vos outils, automatisons vos emails, et synchronisons vos données. Nos clients récupèrent 10-20h/semaine et augmentent leur revenue email de 25%+."
+
+**TAGLINE:**
+> "Automation. Analytics. AI."
+
+### Principes de Communication
+
+1. **Professionnel** - Expert technique, pas vendeur agressif
+2. **Direct** - Pas de jargon inutile, aller droit au but
+3. **Factuel** - Que des faits vérifiables, pas de promesses vides
+4. **Accessible** - Compréhensible par non-techniciens
+5. **Orienté Résultats** - Toujours mentionner le bénéfice concret
+
+### Exemples de Ton
 
 **BON:**
 > "Nous automatisons vos flows Klaviyo pour augmenter le revenue email de 20-40%."
+> "Notre intégration synchronise vos leads Meta vers Klaviyo en temps réel."
+> "3A Automation a aidé 3 clients e-commerce à récupérer 15h/semaine."
 
-**MAUVAIS:**
-> "Notre solution revolutionnaire va transformer votre business!"
+**À ÉVITER:**
+> "Notre solution révolutionnaire va transformer votre business!" (trop vendeur)
+> "La meilleure agence d'automatisation du monde!" (non vérifiable)
+> "Nous allons exploser vos résultats!" (promesse vide)
+> Tout usage de "je" au lieu de "nous"
 
-### Mots-cles de Marque
-- Automation
-- Analytics
-- AI
-- Data-driven
-- ROI
-- PME
-- Efficacite
-- Transparence
+### Mots-clés de Marque
+
+| Catégorie | Mots-clés |
+|-----------|-----------|
+| Core | Automation, Analytics, AI, 3A |
+| Technique | API, Integration, Workflow, Data Sync |
+| Business | ROI, Efficacité, Temps gagné, Revenue |
+| Cible | E-commerce, PME, B2B, Shopify, Klaviyo |
+| Valeurs | Transparence, Résultats, Expertise |
 
 ---
 
