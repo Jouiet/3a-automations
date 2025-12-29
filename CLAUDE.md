@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 17.0 | Date: 2025-12-29 | Session: 113
+## Version: 18.0 | Date: 2025-12-29 | Session: 114
 
 ---
 
@@ -10,37 +10,49 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (79, v2.0.0) |
-| History | `HISTORY.md` (Sessions 0-113) |
+| Automations | `automations/automations-registry.json` (82, v2.0.0) |
+| History | `HISTORY.md` (Sessions 0-114) |
+| Shopify | guqsu3-yj.myshopify.com (TOKEN REQUIS) |
 
-## Session 113 - B2B LEAD WORKFLOWS ALIGNÉS
+## Session 114 - SYSTEM HEALTH CHECK + N8N CLEANUP
 
 | Fait | Valeur Vérifiée |
 |------|-----------------|
-| Lead Workflows | **5 alignés, 100% branding** |
+| APIs Health | **8/8 (100%)** via `scripts/system-health-check.cjs` |
 | Scripts natifs | **70 fichiers** (.cjs/.js) |
-| n8n Workflows | 9 déployés, **6/9 fonctionnels (67%)** |
+| n8n Workflows | **6 (5 actifs, 1 inactif)** - 3 supprimés (scripts natifs) |
 | Branding Tests | **119/119 (100%)** |
 
-### B2B LEAD WORKFLOWS (5 Alignés)
+### HEALTH CHECK (100%)
 
 ```
-MODÈLE RÉFÉRENCE: linkedin-to-klaviyo-pipeline.cjs
+n8n          ✅ 5/6 active
+Klaviyo      ✅ 3 lists
+xAI (Grok)   ✅ 11 models
+Apify        ✅ OK
+Gemini       ✅ 50 models
+GitHub       ✅ OK
+Hostinger    ✅ running
+Booking      ✅ OK
+```
 
-SCRIPTS ALIGNÉS (Session 112-113):
-├── b2b-email-templates.cjs          → Module partagé (6 segments)
-├── linkedin-lead-automation.cjs     → Segmentation intégrée ✅
-├── email-automation-unified.cjs     → Import templates ✅
-├── linkedin-to-klaviyo-pipeline.cjs → Référence modèle ✅
-└── google-maps-to-klaviyo-pipeline.cjs → CRÉÉ Session 113 ✅
+### N8N WORKFLOWS (6)
 
-SEGMENTS B2B (6):
-decision_maker | marketing | sales | tech | hr | other
+```
+ACTIFS (5):
+├── Blog Article Generator          → Claude API
+├── Enhance Product Photos          → Gemini API
+├── Grok Voice Telephony            → BLOQUÉ: Twilio credentials
+├── WhatsApp Booking Confirmation   → BLOQUÉ: WhatsApp API
+└── WhatsApp Booking Reminders      → BLOQUÉ: WhatsApp API
 
-BRANDING VALIDÉ (119/119):
-├── Signature "L'équipe 3A Automation"
-├── Tagline "Automation, Analytics, AI"
-└── URL https://3a-automation.com
+INACTIF (1):
+└── Newsletter 3A Automation        → PRÊT: API credits requis
+
+SUPPRIMÉS (remplacés par scripts natifs):
+├── Klaviyo Welcome Series          → email-automation-unified.cjs
+├── Email Outreach Sequence         → email-automation-unified.cjs
+└── LinkedIn Lead Scraper           → linkedin-lead-automation.cjs
 ```
 
 ## Memory Structure

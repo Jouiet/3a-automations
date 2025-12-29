@@ -1,48 +1,34 @@
-# n8n Workflows - Session 113
+# n8n Workflows - Session 114
 
-## DÉCOUVERTE CRITIQUE
-
-```
-n8n Community Edition NE SUPPORTE PAS $env variables!
-API: "Your license does not allow for feat:variables"
-
-SOLUTION: Scripts natifs (.cjs) avec process.env
-```
-
-## État Factuel (29/12/2025 02:00 CET)
-
-| # | Workflow | n8n Status | Script Natif | Status Final |
-|---|----------|------------|--------------|--------------|
-| 1 | Blog Generator | ✅ OK | - | ✅ FONCTIONNE |
-| 2 | Product Photos (Gemini) | ✅ OK | - | ✅ FONCTIONNE |
-| 3 | Grok Voice Telephony | ⛔ $env | ⏳ | ⛔ BLOQUÉ (Twilio) |
-| 4 | Klaviyo Welcome Series | ⛔ $env | ✅ email-automation-unified.cjs | ✅ TESTÉ OK |
-| 5 | Email Outreach Sequence | ⛔ $env | ✅ email-automation-unified.cjs | ✅ TESTÉ OK |
-| 6 | LinkedIn Lead Scraper | ⛔ $env | ✅ linkedin-lead-automation.cjs | ✅ TESTÉ OK |
-| 7 | WhatsApp Confirmation | ⛔ $env | ⏳ | ⛔ BLOQUÉ (Meta) |
-| 8 | WhatsApp Reminders | ⛔ $env | ⏳ | ⛔ BLOQUÉ (Meta) |
-| 9 | Newsletter 3A | ⛔ INACTIVE | ✅ newsletter-automation.cjs | ⚠️ PRÊT (API credits) |
-
-**Résultat: 6/9 fonctionnels (67%) - 3 bloqués par credentials externes**
-
-## B2B Lead Workflows (Session 113)
+## Architecture Finale
 
 ```
-5 SCRIPTS ALIGNÉS - 100% BRANDING (119/119)
-
-automations/agency/templates/b2b-email-templates.cjs   # Module partagé
-├── EMAIL_TEMPLATES (6 segments)
-├── WELCOME_TEMPLATES (5 emails)
-├── SEGMENT_KEYWORDS (job titles → segment)
-├── validateBranding(emailBody)
-├── validateAllTemplates()
-└── personalizeEmail(template, leadData)
-
-automations/agency/linkedin-to-klaviyo-pipeline.cjs    # Modèle référence
-automations/agency/linkedin-lead-automation.cjs        # LinkedIn → Klaviyo
-automations/agency/email-automation-unified.cjs        # Welcome + Outreach
-automations/agency/google-maps-to-klaviyo-pipeline.cjs # Local B2B → Klaviyo
+n8n Community Edition: NE SUPPORTE PAS $env variables
+Solution: Scripts natifs (.cjs) avec process.env
 ```
+
+## État Factuel (29/12/2025 11:00 CET)
+
+### Workflows Actifs (6)
+
+| # | Workflow | Status | Usage |
+|---|----------|--------|-------|
+| 1 | Blog Article Generator | ✅ ACTIF | Claude API |
+| 2 | Enhance Product Photos | ✅ ACTIF | Gemini API |
+| 3 | Grok Voice Telephony | ⏸️ BLOQUÉ | Twilio requis |
+| 4 | WhatsApp Booking Confirmation | ⏸️ BLOQUÉ | Meta Business requis |
+| 5 | WhatsApp Booking Reminders | ⏸️ BLOQUÉ | Meta Business requis |
+| 6 | Newsletter 3A Automation | ⏸️ INACTIF | API credits requis |
+
+### Workflows Supprimés (Session 114)
+
+| Workflow | Remplacement |
+|----------|--------------|
+| Klaviyo Welcome Series | `email-automation-unified.cjs` |
+| Email Outreach Sequence | `email-automation-unified.cjs` |
+| LinkedIn Lead Scraper | `linkedin-lead-automation.cjs` |
+
+**Raison:** Ces workflows utilisaient `$env` variables non supportées. Les scripts natifs utilisent `process.env` qui fonctionne.
 
 ## Scripts Natifs - Usage
 
@@ -72,6 +58,16 @@ node automations/agency/newsletter-automation.cjs --topic="Sujet" --list-id=XXX
 | Grok Voice | Twilio | Créer compte Twilio + Phone Number |
 | WhatsApp x2 | Meta | Business Manager approval |
 | Newsletter | API Credits | Ajouter crédits Anthropic ou attendre reset Gemini |
+
+## Webhooks Disponibles
+
+| Workflow | Webhook URL |
+|----------|-------------|
+| Blog Generator | `https://n8n.srv1168256.hstgr.cloud/webhook/blog/generate` |
+| Product Photos | `https://n8n.srv1168256.hstgr.cloud/webhook/photos/enhance` |
+| Voice Inbound | `https://n8n.srv1168256.hstgr.cloud/webhook/voice/inbound` |
+| Booking Confirm | `https://n8n.srv1168256.hstgr.cloud/webhook/booking-confirmation` |
+| Newsletter | `https://n8n.srv1168256.hstgr.cloud/webhook/newsletter/send` |
 
 ## URLs
 

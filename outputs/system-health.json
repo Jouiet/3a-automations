@@ -1,0 +1,162 @@
+{
+  "timestamp": "2025-12-29T09:55:47.278Z",
+  "version": "1.0.0",
+  "apis": {
+    "n8n": {
+      "ok": true,
+      "totalWorkflows": 9,
+      "active": 8,
+      "inactive": 1,
+      "workflows": [
+        {
+          "id": "0w9VVsZPM9ZubSF7",
+          "name": "Grok Voice Telephony - Phone Booking",
+          "active": true
+        },
+        {
+          "id": "89okodQfPx1gJAvo",
+          "name": "WhatsApp Booking Confirmation",
+          "active": true
+        },
+        {
+          "id": "Cf9hjEDQGEu2JZu7",
+          "name": "Blog Article Generator + Multi-Channel Distribution",
+          "active": true
+        },
+        {
+          "id": "JaooDwzmJojEe6bx",
+          "name": "Klaviyo Welcome Series - 5 Emails Automation",
+          "active": true
+        },
+        {
+          "id": "agt883kUIV8sOvvc",
+          "name": "WhatsApp Booking Reminders",
+          "active": true
+        },
+        {
+          "id": "g4ssn1IaWmmplfyn",
+          "name": "Email Outreach Sequence - Multi-Touch Campaign",
+          "active": true
+        },
+        {
+          "id": "gwvqRv30m0jil3rx",
+          "name": "Newsletter 3A Automation - Bi-Monthly Digest",
+          "active": false
+        },
+        {
+          "id": "l0ABBPUCzffaPvon",
+          "name": "LinkedIn Lead Scraper - Aggressive Outbound",
+          "active": true
+        },
+        {
+          "id": "q0kyXyhCUq5gjmG2",
+          "name": "Enhance Product Photos with Google Gemini AI for E-commerce Catalog",
+          "active": true
+        }
+      ]
+    },
+    "klaviyo": {
+      "ok": true,
+      "totalLists": 3,
+      "lists": [
+        {
+          "id": "SRBt82",
+          "name": "Prévisualiser la liste"
+        },
+        {
+          "id": "SWeHtq",
+          "name": "Liste de SMS"
+        },
+        {
+          "id": "YjwmYR",
+          "name": "Liste d’adresses e-mail"
+        }
+      ]
+    },
+    "xai": {
+      "ok": true,
+      "totalModels": 11,
+      "models": [
+        "grok-2-1212",
+        "grok-2-vision-1212",
+        "grok-3",
+        "grok-3-mini",
+        "grok-4-0709"
+      ]
+    },
+    "apify": {
+      "ok": true
+    },
+    "gemini": {
+      "ok": true,
+      "totalModels": 50,
+      "models": [
+        "embedding-gecko-001",
+        "gemini-2.5-flash",
+        "gemini-2.5-pro",
+        "gemini-2.0-flash-exp",
+        "gemini-2.0-flash"
+      ]
+    },
+    "github": {
+      "ok": true,
+      "repo": "Jouiet/3a-automations",
+      "lastPush": "2025-12-29T01:16:01Z",
+      "stars": 0
+    },
+    "hostinger": {
+      "ok": true,
+      "hostname": "srv1168256.hstgr.cloud",
+      "state": "running",
+      "ip": "148.230.113.163"
+    },
+    "booking": {
+      "ok": true,
+      "totalSlots": 0
+    }
+  },
+  "system": {
+    "scripts": {
+      "ok": true,
+      "scripts": {
+        "cjs": 58,
+        "js": 12,
+        "json": 14,
+        "total": 70
+      }
+    },
+    "registry": {
+      "ok": true,
+      "version": "2.0.0",
+      "totalAutomations": 82,
+      "categories": [
+        "lead-gen",
+        "seo",
+        "email",
+        "shopify",
+        "analytics",
+        "content",
+        "cinematicads",
+        "ai-avatar",
+        "whatsapp",
+        "voice-ai",
+        "marketing"
+      ]
+    },
+    "website": {
+      "ok": true,
+      "pages": {
+        "fr": 20,
+        "en": 19,
+        "total": 39
+      }
+    }
+  },
+  "summary": {
+    "ok": 8,
+    "fail": 0,
+    "total": 8,
+    "score": 100,
+    "duration": 20961
+  }
+}
