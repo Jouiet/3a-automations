@@ -1008,8 +1008,12 @@ OBJECTIF: 20 contacts minimum
 ```
 
 #### Tâche 4.4: Préparer message outreach (2h)
+
+> **⚠️ OBSOLÈTE**: Ces templates utilisent "je" (ancienne approche).
+> Voir `automations/agency/linkedin-to-klaviyo-pipeline.cjs` pour les templates actuels avec ton "NOUS".
+
 ```
-TEMPLATE MESSAGE LINKEDIN:
+TEMPLATE MESSAGE LINKEDIN (OBSOLÈTE):
 
 ───────────────────────────────────────────────────────────
 Salut [Prénom],

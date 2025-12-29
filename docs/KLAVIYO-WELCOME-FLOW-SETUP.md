@@ -59,8 +59,8 @@ Bonjour {{ first_name|default:"" }},
 
 Merci de rejoindre 3A Automation!
 
-Je suis Jouiet, consultant automation spécialisé e-commerce et PME.
-Mon objectif: vous aider à récupérer 10h+ par semaine grâce à l'automatisation intelligente.
+Bienvenue dans notre communauté d'automatisation e-commerce et PME.
+Notre objectif: vous aider à récupérer 10h+ par semaine grâce à l'automatisation intelligente.
 
 **Ce que vous allez découvrir:**
 - Comment automatiser vos tâches répétitives
@@ -68,8 +68,8 @@ Mon objectif: vous aider à récupérer 10h+ par semaine grâce à l'automatisat
 - Des cas concrets avec ROI mesuré
 
 À très bientôt,
-Jouiet
-3A Automation
+L'équipe 3A Automation
+Automation. Analytics. AI.
 
 P.S. Répondez à cet email si vous avez une question spécifique!
 ```
@@ -101,7 +101,7 @@ Voulez-vous voir comment ça marche pour votre secteur?
 [Voir les cas clients](https://3a-automation.com/cas-clients.html)
 
 Cordialement,
-Jouiet
+L'équipe 3A Automation
 ```
 
 ---
@@ -118,7 +118,7 @@ Jouiet
 ```
 Bonjour {{ first_name|default:"" }},
 
-Voici les 3 automatisations les plus demandées par mes clients:
+Voici les 3 automatisations les plus demandées par nos clients:
 
 **1. Récupération paniers abandonnés**
 → +10-15% revenus email
@@ -136,7 +136,7 @@ Laquelle vous intéresse le plus?
 
 [Réserver un audit gratuit](https://3a-automation.com/booking.html)
 
-Jouiet
+L'équipe 3A Automation
 ```
 
 ---
@@ -153,7 +153,7 @@ Jouiet
 ```
 Bonjour {{ first_name|default:"" }},
 
-Je viens de publier mon guide complet sur l'automatisation e-commerce en 2026.
+Nous venons de publier notre guide complet sur l'automatisation e-commerce en 2026.
 
 **Au sommaire:**
 1. Les 5 automations essentielles
@@ -166,7 +166,7 @@ Je viens de publier mon guide complet sur l'automatisation e-commerce en 2026.
 C'est gratuit, sans inscription.
 
 Bonne lecture!
-Jouiet
+L'équipe 3A Automation
 ```
 
 ---
@@ -202,7 +202,7 @@ Ou commencez par l'audit gratuit:
 [Réserver maintenant](https://3a-automation.com/booking.html)
 
 Cordialement,
-Jouiet
+L'équipe 3A Automation
 3A Automation
 ```
 

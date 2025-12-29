@@ -93,7 +93,7 @@ const SEGMENT_KEYWORDS = {
     'marketing', 'growth', 'brand', 'branding',
     'content', 'social media', 'digital',
     'communication', 'communications', 'pr ', 'public relations',
-    'acquisition', 'demand gen', 'demand generation',
+    'user acquisition', 'customer acquisition', 'demand gen', 'demand generation',
     'seo', 'sem', 'ppc', 'performance marketing',
     'email marketing', 'crm ', 'lifecycle',
     'product marketing', 'pmm',
@@ -123,7 +123,7 @@ const SEGMENT_KEYWORDS = {
 
   hr: [
     'hr ', 'human resources', 'ressources humaines', 'rh ',
-    'talent', 'recruiting', 'recruitment', 'recrutement',
+    'talent', 'recruiter', 'recruiting', 'recruitment', 'recrutement',
     'people', 'people ops', 'people operations',
     'culture', 'employer branding',
     'compensation', 'benefits', 'payroll',

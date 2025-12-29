@@ -1108,7 +1108,7 @@ CHAÎNE: 3A Automation
 
 CONTENT TYPES:
 1. Tutorials (5-15min): "Comment configurer Klaviyo flow cart abandonment"
-2. Audits publics (10-20min): "J'audite votre boutique Shopify en live"
+2. Audits publics (10-20min): "Audit live de votre boutique Shopify"
 3. Tips rapides (1-3min): "3 erreurs SEO à éviter sur Shopify"
 
 SEO YouTube:
