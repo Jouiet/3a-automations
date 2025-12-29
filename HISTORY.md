@@ -1,10 +1,11 @@
 # HISTORY - Changelog 3A Automation
 
-## Session 114 (29/12/2025) - SYSTEM HEALTH CHECK + N8N CLEANUP
+## Session 114 (29/12/2025) - LEAD GEN PIPELINES CONFIGURÉS
 
 | Session | Modifications |
 |---------|---------------|
-| **114** | **SYSTEM HEALTH CHECK SCRIPT**: `scripts/system-health-check.cjs` créé - monitoring centralisé de 9 APIs. **SCORE 100%**: 9/9 APIs fonctionnelles. **FIX test-all-apis.cjs**: Header n8n corrigé (`X-N8N-API-KEY`). **N8N CLEANUP**: 3 workflows supprimés (remplacés par scripts natifs): Klaviyo Welcome Series, Email Outreach Sequence, LinkedIn Lead Scraper. **N8N FINAL: 6 workflows** (5 actifs, 1 inactif). **SHOPIFY CONNECTÉ**: `guqsu3-yj.myshopify.com` - 137 scopes activés, plan basic, devise MAD. **SCRIPTS NATIFS TESTÉS OK**: email-automation-unified.cjs, linkedin-lead-automation.cjs, google-maps-to-klaviyo-pipeline.cjs. **REGISTRY**: v2.0.0, 82 automations. |
+| **114b** | **LEAD GEN PIPELINES**: 31 marchés configurés (`config/markets.cjs`). **PHASE 1**: 14 pays actifs (MENA + Europe, 6 mois). **DEVISES**: 3 uniquement (MAD/EUR/USD). **KLAVIYO**: 15 listes créées via API (LinkedIn 6, GMaps 6, General 3). **GITHUB ACTIONS**: `lead-generation.yml` créé - Cron LinkedIn 6AM, GMaps 8AM, Newsletter 1st/15th. **SCHEDULER**: `lead-gen-scheduler.cjs` centralisé. **ROTATION QUOTIDIENNE**: Dim:Maghreb, Lun:FR-Europe, Mar:Gulf, Mer:Germanic, Jeu:Southern, Ven:MENA, Sam:Priority. **STATUT LÉGAL**: Pré-incorporation (en attente ICE marocain). **BLOCKER CRITIQUE**: Apify $0.01 crédits → LinkedIn + GMaps BLOQUÉS. **NEWSLETTER OPTIMISÉ**: v2.0 xAI/Grok primary. |
+| **114a** | **SYSTEM HEALTH CHECK SCRIPT**: `scripts/system-health-check.cjs` créé - monitoring centralisé de 9 APIs. **SCORE 100%**: 9/9 APIs fonctionnelles. **N8N CLEANUP**: Newsletter workflow supprimé (script natif v2.0). **N8N FINAL: 5 workflows** (2 OK, 3 bloqués). **SCRIPTS NATIFS TESTÉS OK**: email-automation-unified.cjs, linkedin-lead-automation.cjs, google-maps-to-klaviyo-pipeline.cjs, newsletter-automation.cjs. |
 
 ## Session 113 (29/12/2025) - B2B LEAD WORKFLOWS ALIGNÉS
 

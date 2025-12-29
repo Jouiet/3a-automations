@@ -1,0 +1,202 @@
+# ==============================================================================
+# LEAD GENERATION CRON - 3A Automation
+# ==============================================================================
+# PHASE 1 (6 mois): Maroc + MENA + Europe
+# Schedule:
+#   - LinkedIn: Daily 6AM UTC (rotating markets)
+#   - Google Maps: Daily 8AM UTC (rotating cities)
+#   - Newsletter: 1st & 15th at 10AM UTC
+#
+# Created: 2025-12-29 | Session 114
+# ==============================================================================
+
+name: Lead Generation Pipeline
+
+on:
+  # Manual trigger with parameters
+  workflow_dispatch:
+    inputs:
+      pipeline:
+        description: 'Pipeline to run'
+        required: true
+        default: 'daily'
+        type: choice
+        options:
+          - daily
+          - linkedin
+          - gmaps
+          - newsletter
+          - tier1
+      market:
+        description: 'Specific market (for linkedin)'
+        required: false
+        type: string
+      dry_run:
+        description: 'Dry run (no API calls)'
+        required: false
+        default: false
+        type: boolean
+
+  # Scheduled runs
+  schedule:
+    # LinkedIn: Daily at 6AM UTC
+    - cron: '0 6 * * *'
+    # Google Maps: Daily at 8AM UTC
+    - cron: '0 8 * * *'
+    # Newsletter: 1st and 15th at 10AM UTC
+    - cron: '0 10 1,15 * *'
+
+jobs:
+  lead-generation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline
+
+      - name: Determine pipeline type
+        id: pipeline
+        run: |
+          # If manual dispatch, use input
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "type=${{ inputs.pipeline }}" >> $GITHUB_OUTPUT
+            echo "market=${{ inputs.market }}" >> $GITHUB_OUTPUT
+            echo "dry_run=${{ inputs.dry_run }}" >> $GITHUB_OUTPUT
+          else
+            # Scheduled run - determine by cron time
+            HOUR=$(date -u +%H)
+            DAY=$(date -u +%d)
+
+            if [ "$HOUR" = "06" ]; then
+              echo "type=daily" >> $GITHUB_OUTPUT
+              echo "Running LinkedIn daily rotation"
+            elif [ "$HOUR" = "08" ]; then
+              echo "type=gmaps" >> $GITHUB_OUTPUT
+              echo "Running Google Maps pipeline"
+            elif [ "$HOUR" = "10" ] && ([ "$DAY" = "01" ] || [ "$DAY" = "15" ]); then
+              echo "type=newsletter" >> $GITHUB_OUTPUT
+              echo "Running Newsletter"
+            else
+              echo "type=daily" >> $GITHUB_OUTPUT
+            fi
+            echo "dry_run=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run LinkedIn Daily Rotation
+        if: steps.pipeline.outputs.type == 'daily'
+        env:
+          KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          DRY_RUN=""
+          if [ "${{ steps.pipeline.outputs.dry_run }}" = "true" ]; then
+            DRY_RUN="--dry-run"
+          fi
+          node automations/agency/lead-gen-scheduler.cjs --pipeline=daily $DRY_RUN
+
+      - name: Run LinkedIn for Specific Market
+        if: steps.pipeline.outputs.type == 'linkedin' && steps.pipeline.outputs.market != ''
+        env:
+          KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          DRY_RUN=""
+          if [ "${{ steps.pipeline.outputs.dry_run }}" = "true" ]; then
+            DRY_RUN="--dry-run"
+          fi
+          node automations/agency/lead-gen-scheduler.cjs --pipeline=linkedin --market=${{ steps.pipeline.outputs.market }} $DRY_RUN
+
+      - name: Run Tier 1 Markets
+        if: steps.pipeline.outputs.type == 'tier1'
+        env:
+          KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          DRY_RUN=""
+          if [ "${{ steps.pipeline.outputs.dry_run }}" = "true" ]; then
+            DRY_RUN="--dry-run"
+          fi
+          node automations/agency/lead-gen-scheduler.cjs --pipeline=tier1 $DRY_RUN
+
+      - name: Run Google Maps Pipeline
+        if: steps.pipeline.outputs.type == 'gmaps'
+        env:
+          KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          DRY_RUN=""
+          if [ "${{ steps.pipeline.outputs.dry_run }}" = "true" ]; then
+            DRY_RUN="--dry-run"
+          fi
+          # Run for today's market cities
+          DAY=$(date -u +%w)
+          case $DAY in
+            0) LOCATION="Casablanca"; QUERY="agence marketing digital" ;;
+            1) LOCATION="Paris"; QUERY="consultant ecommerce" ;;
+            2) LOCATION="Dubai"; QUERY="digital marketing agency" ;;
+            3) LOCATION="Berlin"; QUERY="ecommerce agentur" ;;
+            4) LOCATION="Madrid"; QUERY="agencia marketing digital" ;;
+            5) LOCATION="Cairo"; QUERY="digital marketing agency" ;;
+            6) LOCATION="Lyon"; QUERY="agence automation" ;;
+          esac
+          node automations/agency/lead-gen-scheduler.cjs --pipeline=gmaps --query="$QUERY" --location="$LOCATION" $DRY_RUN
+
+      - name: Run Newsletter Pipeline
+        if: steps.pipeline.outputs.type == 'newsletter'
+        env:
+          KLAVIYO_API_KEY: ${{ secrets.KLAVIYO_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          # Generate topic based on date
+          DAY=$(date -u +%d)
+          if [ "$DAY" = "01" ]; then
+            TOPIC="automation tips for ecommerce"
+          else
+            TOPIC="AI trends in digital marketing"
+          fi
+
+          DRY_RUN=""
+          if [ "${{ steps.pipeline.outputs.dry_run }}" = "true" ]; then
+            DRY_RUN="--dry-run"
+          fi
+          node automations/agency/lead-gen-scheduler.cjs --pipeline=newsletter --topic="$TOPIC" $DRY_RUN
+
+      - name: Upload run logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lead-gen-logs-${{ github.run_id }}
+          path: outputs/lead-gen-runs.json
+          retention-days: 30
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Lead Generation Run Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Pipeline:** ${{ steps.pipeline.outputs.type }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Dry Run:** ${{ steps.pipeline.outputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Timestamp:** $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f outputs/lead-gen-runs.json ]; then
+            echo "### Recent Runs" >> $GITHUB_STEP_SUMMARY
+            tail -20 outputs/lead-gen-runs.json >> $GITHUB_STEP_SUMMARY
+          fi

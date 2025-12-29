@@ -1,6 +1,18 @@
 # BUSINESS MODEL FACTUEL JO-AAA
-## Version 4.3 - Mise à jour 28 Décembre 2025 (Session 103: Schedulability Audit)
-## Basé sur données réelles confirmées
+## Version 4.4 - Mise à jour 29 Décembre 2025 (Session 114: Lead Gen Pipelines)
+## Phase: PRÉ-INCORPORATION (en attente ICE marocain)
+
+---
+
+## ⚠️ STATUT LÉGAL
+
+```
+PHASE: Pré-incorporation
+BLOCKER: Dénomination sociale + ICE marocain NON FOURNIS
+IMPACT: Pas de facturation, pas de contrats clients possibles
+
+→ Démarrage commercial au jour de réception ICE marocain
+```
 
 ---
 
@@ -9,25 +21,24 @@
 ```
 CE DOCUMENT CONTIENT UNIQUEMENT DES FAITS VÉRIFIÉS.
 Aucun wishful thinking. Aucune projection non fondée.
-Mis à jour avec les données confirmées le 28/12/2025.
+Mis à jour avec les données confirmées le 29/12/2025.
 
-SESSION 103 COMPLETE (28/12/2025):
-✅ AUTOMATION RATE: 35.9% RÉEL (28/78 schedulables)
-✅ SCHEDULABILITY: 28/28 = 100% de ce qui PEUT être automatisé
-✅ Registry: v1.9.0 (78 automations)
-✅ MCP Stack: 12/13 fonctionnels (92%)
-✅ n8n: API key + 10/10 workflows ACTIFS (100%)
-✅ n8n Updated: Blog Generator (schedule), LinkedIn (email outreach)
-✅ Dashboard: Recharts visualization + n8n API intégré
-✅ Lead Pipeline: Form → Apps Script v2 → n8n webhook → Klaviyo ✅
-✅ Voice Widget Web: Web Speech API OPÉRATIONNEL (keyword matching)
-❌ Grok Voice Telephony: BLOQUÉ (Twilio credentials manquants)
+SESSION 114 COMPLETE (29/12/2025):
+✅ Lead Gen: 31 marchés configurés (config/markets.cjs)
+✅ Phase 1: 14 pays actifs (MENA + Europe)
+✅ Devises: 3 (MAD/EUR/USD uniquement)
+✅ Klaviyo: 15 listes créées via API
+✅ GitHub Actions: Cron lead-generation.yml
+✅ Scheduler: lead-gen-scheduler.cjs centralisé
+⛔ BLOCKER: Apify crédits $0.01 (LinkedIn + GMaps bloqués)
 
-BREAKDOWN 78 AUTOMATIONS:
-├── Déjà schedulé (master-scheduler + n8n): 17
-├── Plateforme gère (Klaviyo/Shopify): 11
-├── On-demand (exécution client): 29
-├── Templates: 6 | External: 6 | One-time: 5 | Conceptual: 3 | Event: 1
+ÉTAT n8n (5 workflows):
+├── 2 FONCTIONNENT: Blog Generator, Product Photos
+└── 3 BLOQUÉS: Grok Voice (Twilio), WhatsApp x2 (Meta)
+
+ÉTAT Lead Gen Scripts:
+├── 2 PRÊTS: Newsletter, Email Automation
+└── 2 BLOQUÉS: LinkedIn, Google Maps (Apify)
 ```
 
 ---

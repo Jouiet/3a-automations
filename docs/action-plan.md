@@ -1,6 +1,44 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 103)
-## Objectif: Premier client payant en 4 semaines
+## Document Exécutable - Décembre 2025 (màj Session 114)
+## Phase: PRÉ-INCORPORATION (en attente ICE marocain)
+
+---
+
+## ⚠️ STATUT LÉGAL
+
+```
+PHASE ACTUELLE: Pré-incorporation
+BLOCKER: Dénomination sociale + ICE marocain non fournis
+IMPACT: Pas de facturation possible, pas de contrats clients
+
+ACTIVATION COMMERCIALE REQUIERT:
+1. Dénomination sociale fournie par fondateur
+2. ICE marocain obtenu
+3. Compte bancaire entreprise créé
+→ ALORS: Facturation et contrats possibles
+```
+
+---
+
+## ✅ SESSION 114: LEAD GEN PIPELINES (29/12/2025)
+
+```
+CRÉÉS:
+├── config/markets.cjs (31 marchés, 3 devises)
+├── lead-gen-scheduler.cjs (scheduler centralisé)
+├── scripts/setup-klaviyo-lists.cjs
+└── .github/workflows/lead-generation.yml
+
+CONFIGURÉS:
+├── Phase 1: 14 pays (MENA + Europe)
+├── Rotation: 7 jours/semaine
+├── Cron: LinkedIn 6AM, GMaps 8AM, Newsletter 1st/15th
+└── Devises: MAD, EUR, USD uniquement
+
+BLOCKER:
+⛔ APIFY: $0.01 crédits restants
+   Action: https://console.apify.com/billing
+```
 
 ---
 

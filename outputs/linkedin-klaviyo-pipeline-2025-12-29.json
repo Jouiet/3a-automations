@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-29T00:06:12.850Z",
+  "timestamp": "2025-12-29T11:02:42.650Z",
   "search": "test",
   "totalProfiles": 5,
   "results": {
@@ -18,11 +18,11 @@
       "location": "Casablanca, Morocco",
       "linkedinUrl": "https://linkedin.com/in/sarahmartin",
       "connections": 1500,
-      "scrapedAt": "2025-12-29T00:06:12.848Z",
+      "scrapedAt": "2025-12-29T11:02:42.648Z",
       "segment": "decision_maker",
       "segmentDisplay": "Decision Maker",
       "emailSubject": "Sarah - Automatisation pour TechCorp Morocco",
-      "emailBody": "Bonjour Sarah,\n\nNous avons identifié TechCorp Morocco comme une entreprise qui pourrait bénéficier de nos solutions d'automatisation.\n\n3A Automation aide les dirigeants e-commerce et PME B2B à :\n• Automatiser les tâches répétitives (reporting, emails, data sync)\n• Récupérer 10-15h par semaine sur les processus manuels\n• Connecter leurs outils existants sans friction\n\nRésultat typique : nos clients augmentent leur revenue email de 25%+ et éliminent les tâches manuelles chronophages.\n\nSeriez-vous disponible pour un échange de 15 minutes ?\n\nCordialement,\nL'équipe 3A Automation\nAutomation. Analytics. AI.\nhttps://3a-automation.com"
+      "emailBody": "Bonjour Sarah,\n\nNous avons identifié TechCorp Morocco comme une entreprise qui pourrait bénéficier de nos solutions d'automatisation.\n\n3A Automation aide les dirigeants e-commerce et PME B2B à :\n• Automatiser les tâches répétitives (reporting, emails, data sync)\n• Récupérer 10-15h par semaine sur les processus manuels\n• Connecter leurs outils existants sans friction\n\nRésultat typique : nos clients obtiennent un ROI de 25%+ sur leur revenue email et éliminent les tâches manuelles chronophages.\n\nSeriez-vous disponible pour un échange de 15 minutes ?\n\nCordialement,\nL'équipe 3A Automation\nAutomation. Analytics. AI.\nhttps://3a-automation.com"
     },
     {
       "email": "ahmed.ceo@example.com",
@@ -36,11 +36,11 @@
       "location": "Rabat, Morocco",
       "linkedinUrl": "https://linkedin.com/in/ahmedbenali",
       "connections": 3000,
-      "scrapedAt": "2025-12-29T00:06:12.848Z",
+      "scrapedAt": "2025-12-29T11:02:42.648Z",
       "segment": "decision_maker",
       "segmentDisplay": "Decision Maker",
       "emailSubject": "Ahmed - Automatisation pour StartupHub",
-      "emailBody": "Bonjour Ahmed,\n\nNous avons identifié StartupHub comme une entreprise qui pourrait bénéficier de nos solutions d'automatisation.\n\n3A Automation aide les dirigeants e-commerce et PME B2B à :\n• Automatiser les tâches répétitives (reporting, emails, data sync)\n• Récupérer 10-15h par semaine sur les processus manuels\n• Connecter leurs outils existants sans friction\n\nRésultat typique : nos clients augmentent leur revenue email de 25%+ et éliminent les tâches manuelles chronophages.\n\nSeriez-vous disponible pour un échange de 15 minutes ?\n\nCordialement,\nL'équipe 3A Automation\nAutomation. Analytics. AI.\nhttps://3a-automation.com"
+      "emailBody": "Bonjour Ahmed,\n\nNous avons identifié StartupHub comme une entreprise qui pourrait bénéficier de nos solutions d'automatisation.\n\n3A Automation aide les dirigeants e-commerce et PME B2B à :\n• Automatiser les tâches répétitives (reporting, emails, data sync)\n• Récupérer 10-15h par semaine sur les processus manuels\n• Connecter leurs outils existants sans friction\n\nRésultat typique : nos clients obtiennent un ROI de 25%+ sur leur revenue email et éliminent les tâches manuelles chronophages.\n\nSeriez-vous disponible pour un échange de 15 minutes ?\n\nCordialement,\nL'équipe 3A Automation\nAutomation. Analytics. AI.\nhttps://3a-automation.com"
     },
     {
       "email": "jean.dev@example.com",
@@ -54,11 +54,11 @@
       "location": "Paris, France",
       "linkedinUrl": "https://linkedin.com/in/jeandupont",
       "connections": 800,
-      "scrapedAt": "2025-12-29T00:06:12.848Z",
+      "scrapedAt": "2025-12-29T11:02:42.648Z",
       "segment": "tech",
       "segmentDisplay": "Tech",
       "emailSubject": "Jean - APIs & Automations pour CodeFactory",
-      "emailBody": "Bonjour Jean,\n\nEn tant que profil tech chez CodeFactory, vous apprécierez notre approche technique :\n\n• Intégrations API robustes (REST, webhooks, GraphQL)\n• Workflows n8n et scripts Node.js maintenables\n• Architecture event-driven et scalable\n• Documentation technique complète\n\nNotre stack : n8n, Apify, Claude, Gemini, Klaviyo, Shopify.\n\nNous combinons l'expertise développeur avec l'efficacité du low-code.\n\nDisponible pour un échange technique ?\n\nCordialement,\nL'équipe 3A Automation\nAutomation. Analytics. AI.\nhttps://3a-automation.com"
+      "emailBody": "Bonjour Jean,\n\nEn tant que profil tech chez CodeFactory, vous apprécierez notre approche technique :\n\n• Intégrations API robustes (REST, webhooks, GraphQL)\n• Workflows n8n et scripts Node.js maintenables\n• Architecture event-driven et scalable\n• Documentation technique complète\n\nNotre stack : n8n, Apify, Claude, Gemini, Klaviyo, Shopify.\n\nRésultat : 90% de réduction du temps d'intégration grâce à notre approche hybride code + low-code.\n\nSeriez-vous disponible pour un échange technique de 15 minutes ?\n\nCordialement,\nL'équipe 3A Automation\nAutomation. Analytics. AI.\nhttps://3a-automation.com"
     },
     {
       "email": "fatima.sales@example.com",
@@ -72,7 +72,7 @@
       "location": "Marrakech, Morocco",
       "linkedinUrl": "https://linkedin.com/in/fatimaelamrani",
       "connections": 2200,
-      "scrapedAt": "2025-12-29T00:06:12.848Z",
+      "scrapedAt": "2025-12-29T11:02:42.648Z",
       "segment": "sales",
       "segmentDisplay": "Sales",
       "emailSubject": "Fatima - Automatisation prospection SalesForce Partner",
@@ -90,11 +90,11 @@
       "location": "Lyon, France",
       "linkedinUrl": "https://linkedin.com/in/marielambert",
       "connections": 1800,
-      "scrapedAt": "2025-12-29T00:06:12.848Z",
+      "scrapedAt": "2025-12-29T11:02:42.648Z",
       "segment": "decision_maker",
       "segmentDisplay": "Decision Maker",
       "emailSubject": "Marie - Automatisation pour PeopleFirst",
-      "emailBody": "Bonjour Marie,\n\nNous avons identifié PeopleFirst comme une entreprise qui pourrait bénéficier de nos solutions d'automatisation.\n\n3A Automation aide les dirigeants e-commerce et PME B2B à :\n• Automatiser les tâches répétitives (reporting, emails, data sync)\n• Récupérer 10-15h par semaine sur les processus manuels\n• Connecter leurs outils existants sans friction\n\nRésultat typique : nos clients augmentent leur revenue email de 25%+ et éliminent les tâches manuelles chronophages.\n\nSeriez-vous disponible pour un échange de 15 minutes ?\n\nCordialement,\nL'équipe 3A Automation\nAutomation. Analytics. AI.\nhttps://3a-automation.com"
+      "emailBody": "Bonjour Marie,\n\nNous avons identifié PeopleFirst comme une entreprise qui pourrait bénéficier de nos solutions d'automatisation.\n\n3A Automation aide les dirigeants e-commerce et PME B2B à :\n• Automatiser les tâches répétitives (reporting, emails, data sync)\n• Récupérer 10-15h par semaine sur les processus manuels\n• Connecter leurs outils existants sans friction\n\nRésultat typique : nos clients obtiennent un ROI de 25%+ sur leur revenue email et éliminent les tâches manuelles chronophages.\n\nSeriez-vous disponible pour un échange de 15 minutes ?\n\nCordialement,\nL'équipe 3A Automation\nAutomation. Analytics. AI.\nhttps://3a-automation.com"
     }
   ]
 }
