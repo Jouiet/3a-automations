@@ -51,6 +51,11 @@ const CONFIG = {
   hostinger: {
     token: process.env.HOSTINGER_API_TOKEN,
     vpsId: 1168256
+  },
+  shopify: {
+    store: process.env.SHOPIFY_STORE_DOMAIN,
+    token: process.env.SHOPIFY_ACCESS_TOKEN,
+    version: process.env.SHOPIFY_API_VERSION || '2024-01'
   }
 };
 
@@ -259,6 +264,27 @@ async function checkHostinger() {
   };
 }
 
+async function checkShopify() {
+  if (!CONFIG.shopify.store || !CONFIG.shopify.token) {
+    return { ok: false, reason: 'SHOPIFY credentials missing' };
+  }
+
+  const result = await httpRequest({
+    hostname: CONFIG.shopify.store,
+    path: `/admin/api/${CONFIG.shopify.version}/shop.json`,
+    headers: { 'X-Shopify-Access-Token': CONFIG.shopify.token }
+  });
+
+  if (!result.ok) return { ok: false, reason: result.error || `HTTP ${result.status}` };
+
+  return {
+    ok: true,
+    name: result.data?.shop?.name,
+    plan: result.data?.shop?.plan_name,
+    currency: result.data?.shop?.currency
+  };
+}
+
 async function checkBookingAPI() {
   // Google Apps Script uses redirects - we need to follow them
   return new Promise((resolve) => {
@@ -418,6 +444,7 @@ async function main() {
   const apiChecks = [
     { name: 'n8n', fn: checkN8n },
     { name: 'klaviyo', fn: checkKlaviyo },
+    { name: 'shopify', fn: checkShopify },
     { name: 'xai', fn: checkXai },
     { name: 'apify', fn: checkApify },
     { name: 'gemini', fn: checkGemini },
@@ -453,6 +480,7 @@ async function main() {
           let detail = '';
           if (result.totalWorkflows !== undefined) detail = `${result.active}/${result.totalWorkflows} active`;
           else if (result.totalLists !== undefined) detail = `${result.totalLists} lists`;
+          else if (result.plan && result.currency) detail = `${result.plan} - ${result.currency}`;
           else if (result.totalModels !== undefined) detail = `${result.totalModels} models`;
           else if (result.totalSlots !== undefined) detail = `${result.totalSlots} slots`;
           else if (result.state) detail = result.state;

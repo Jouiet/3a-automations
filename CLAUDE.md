@@ -12,22 +12,23 @@
 | n8n | https://n8n.srv1168256.hstgr.cloud |
 | Automations | `automations/automations-registry.json` (82, v2.0.0) |
 | History | `HISTORY.md` (Sessions 0-114) |
-| Shopify | guqsu3-yj.myshopify.com (TOKEN REQUIS) |
+| Shopify | guqsu3-yj.myshopify.com ✅ (137 scopes) |
 
 ## Session 114 - SYSTEM HEALTH CHECK + N8N CLEANUP
 
 | Fait | Valeur Vérifiée |
 |------|-----------------|
-| APIs Health | **8/8 (100%)** via `scripts/system-health-check.cjs` |
+| APIs Health | **9/9 (100%)** via `scripts/system-health-check.cjs` |
 | Scripts natifs | **70 fichiers** (.cjs/.js) |
 | n8n Workflows | **6 (5 actifs, 1 inactif)** - 3 supprimés (scripts natifs) |
-| Branding Tests | **119/119 (100%)** |
+| Shopify | **✅ Connecté** (137 scopes, basic plan, MAD) |
 
 ### HEALTH CHECK (100%)
 
 ```
 n8n          ✅ 5/6 active
 Klaviyo      ✅ 3 lists
+Shopify      ✅ basic - MAD
 xAI (Grok)   ✅ 11 models
 Apify        ✅ OK
 Gemini       ✅ 50 models

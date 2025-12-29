@@ -46,22 +46,23 @@
 |-----|--------|---------|
 | n8n | ✅ OK | 5/6 active |
 | Klaviyo | ✅ OK | 3 lists |
+| Shopify | ✅ OK | basic - MAD |
 | xAI/Grok | ✅ OK | 11 models |
 | Apify | ✅ OK | Connected |
 | Gemini | ✅ OK | 50 models |
 | GitHub | ✅ OK | 3a-automations |
 | Hostinger | ✅ OK | VPS running |
 | Booking | ✅ OK | GAS endpoint |
-| Shopify | ⚠️ CONFIG | Token manquant |
 
 ## BLOCKERS HUMAINS
 
 | Blocker | Action | Impact |
 |---------|--------|--------|
-| Shopify Token | Admin → Apps → Develop → API Token | E-commerce scripts |
 | Twilio | Créer compte + credentials | Grok Voice |
 | WhatsApp Business | Meta Business Manager | 2 workflows |
 | Anthropic Credits | console.anthropic.com | Newsletter n8n |
+
+**Shopify: ✅ RÉSOLU** - Token configuré, 137 scopes activés
 
 ## Source of Truth
 
