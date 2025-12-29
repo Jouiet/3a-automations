@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-12-29T10:18:46.389Z",
+  "timestamp": "2025-12-29T11:03:31.412Z",
   "version": "1.0.0",
   "apis": {
     "n8n": {
       "ok": true,
-      "totalWorkflows": 6,
+      "totalWorkflows": 5,
       "active": 5,
-      "inactive": 1,
+      "inactive": 0,
       "workflows": [
         {
           "id": "0w9VVsZPM9ZubSF7",
@@ -27,11 +27,6 @@
           "id": "agt883kUIV8sOvvc",
           "name": "WhatsApp Booking Reminders",
           "active": true
-        },
-        {
-          "id": "gwvqRv30m0jil3rx",
-          "name": "Newsletter 3A Automation - Bi-Monthly Digest",
-          "active": false
         },
         {
           "id": "q0kyXyhCUq5gjmG2",
@@ -92,7 +87,7 @@
     "github": {
       "ok": true,
       "repo": "Jouiet/3a-automations",
-      "lastPush": "2025-12-29T10:05:13Z",
+      "lastPush": "2025-12-29T10:20:42Z",
       "stars": 0
     },
     "hostinger": {
@@ -148,6 +143,6 @@
     "fail": 0,
     "total": 9,
     "score": 100,
-    "duration": 11588
+    "duration": 15719
   }
 }

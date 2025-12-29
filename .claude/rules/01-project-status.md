@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 114 - 29/12/2025 11:00 CET)
+## Current State (Session 114 - 29/12/2025 12:30 CET)
 
 | Metric | Value |
 |--------|-------|
@@ -9,71 +9,97 @@
 | Pages | 39 (20 FR + 19 EN) |
 | Automations | 82 (Registry v2.0.0) |
 | Scripts natifs | **70 fichiers (.cjs/.js)** |
-| n8n Workflows | **6 (5 actifs, 1 inactif)** |
-| Health Check | **100% (8/8 APIs)** |
-| Booking API | OK (GAS) |
+| n8n Workflows | **5 (2 fonctionnels, 3 bloqués)** |
+| Marchés | **31 pays (14 actifs Phase 1)** |
+| Listes Klaviyo | **15 créées** |
 | Infrastructure | 3 Docker containers RUNNING |
 
-## SESSION 114 - SYSTEM HEALTH CHECK + N8N CLEANUP
+## SESSION 114 - LEAD GEN PIPELINES
 
 | Action | Résultat |
 |--------|----------|
-| Health Check Script | `scripts/system-health-check.cjs` créé |
-| APIs Testées | 8/8 OK (100%) |
-| n8n Cleanup | 3 workflows supprimés (remplacés par scripts) |
-| test-all-apis.cjs | Fix header n8n |
-| Shopify | Domain configuré, TOKEN REQUIS |
+| Marchés configurés | **31 pays** (config/markets.cjs) |
+| Phase 1 active | **14 pays** (MENA + Europe) |
+| Devises standardisées | **3 (MAD/EUR/USD)** |
+| Listes Klaviyo | **15 créées via API** |
+| GitHub Actions cron | **lead-generation.yml créé** |
+| Scheduler centralisé | **lead-gen-scheduler.cjs créé** |
 
-## ÉTAT FACTUEL n8n (Session 114)
+## ÉTAT FACTUEL (Session 114 - VÉRIFIÉ)
 
-| Workflow | Status | Notes |
-|----------|--------|-------|
-| Blog Article Generator | ✅ ACTIF | Claude API |
-| Enhance Product Photos | ✅ ACTIF | Gemini API |
-| Grok Voice Telephony | ⏸️ BLOQUÉ | Twilio credentials requis |
-| WhatsApp Booking Confirmation | ⏸️ BLOQUÉ | WhatsApp Business API |
-| WhatsApp Booking Reminders | ⏸️ BLOQUÉ | WhatsApp Business API |
-| Newsletter 3A Automation | ⏸️ INACTIF | API credits requis |
+### Lead Generation Pipelines
 
-**Supprimés (remplacés par scripts natifs):**
-- Klaviyo Welcome Series → email-automation-unified.cjs
-- Email Outreach Sequence → email-automation-unified.cjs
-- LinkedIn Lead Scraper → linkedin-lead-automation.cjs
+| Script | Status | Blocker |
+|--------|--------|---------|
+| linkedin-lead-automation.cjs | ⛔ BLOQUÉ | Apify crédits ($0.01) |
+| google-maps-to-klaviyo-pipeline.cjs | ⛔ BLOQUÉ | Apify crédits |
+| newsletter-automation.cjs | ✅ PRÊT | API credits (xAI/Gemini OK) |
+| email-automation-unified.cjs | ✅ PRÊT | Testé OK |
 
-## APIs Health (via system-health-check.cjs)
+### n8n Workflows (5)
 
-| API | Status | Details |
-|-----|--------|---------|
-| n8n | ✅ OK | 5/6 active |
-| Klaviyo | ✅ OK | 3 lists |
-| Shopify | ✅ OK | basic - MAD |
-| xAI/Grok | ✅ OK | 11 models |
-| Apify | ✅ OK | Connected |
-| Gemini | ✅ OK | 50 models |
-| GitHub | ✅ OK | 3a-automations |
-| Hostinger | ✅ OK | VPS running |
-| Booking | ✅ OK | GAS endpoint |
+| Workflow | Status | Blocker |
+|----------|--------|---------|
+| Blog Article Generator | ✅ FONCTIONNE | - |
+| Enhance Product Photos | ✅ FONCTIONNE | - |
+| Grok Voice Telephony | ⛔ BLOQUÉ | Twilio |
+| WhatsApp Confirmation | ⛔ BLOQUÉ | Meta Business |
+| WhatsApp Reminders | ⛔ BLOQUÉ | Meta Business |
 
-## BLOCKERS HUMAINS
+## BLOCKERS CRITIQUES
 
-| Blocker | Action | Impact |
-|---------|--------|--------|
-| Twilio | Créer compte + credentials | Grok Voice |
-| WhatsApp Business | Meta Business Manager | 2 workflows |
-| Anthropic Credits | console.anthropic.com | Newsletter n8n |
+| Blocker | Action | Impact | Priorité |
+|---------|--------|--------|----------|
+| **Apify** | Recharger crédits | LinkedIn + GMaps | **P0** |
+| Twilio | Créer compte | Grok Voice | P2 |
+| Meta Business | Approval | WhatsApp x2 | P3 |
 
-**Shopify: ✅ RÉSOLU** - Token configuré, 137 scopes activés
+## Phase 1 - Marchés Actifs (6 mois)
+
+```
+ROTATION QUOTIDIENNE:
+  Dim: Morocco, Tunisia, Algeria (Maghreb)
+  Lun: France, Belgium, Switzerland (FR Europe)
+  Mar: UAE, Saudi Arabia (Gulf)
+  Mer: Germany, Netherlands (Germanic)
+  Jeu: Spain, Italy, Portugal (Southern)
+  Ven: Egypt, Morocco (MENA)
+  Sam: France, UAE (Priority)
+
+Devises: MAD, EUR, USD uniquement
+```
+
+## Listes Klaviyo (15)
+
+```
+LinkedIn: RPHxM8, XcZciz, WzY9FW, Ynq3cr, XKnYzN, R85eP7
+GMaps: YhLLR3, TsSUAP, X3JFBM, SPRRYc, ScQPmz, RzPLJW
+General: VaFxKU (Newsletter), SKeBCN (Welcome), S8dz2b (Outreach)
+```
+
+## APIs Health
+
+| API | Status | Notes |
+|-----|--------|-------|
+| n8n | ✅ | 5 workflows |
+| Klaviyo | ✅ | 15 listes |
+| Shopify | ✅ | Dev store |
+| xAI/Grok | ✅ | 11 models |
+| Apify | ⛔ | $0.01 crédits |
+| Gemini | ✅ | 50 models |
+| GitHub | ✅ | OK |
+| Hostinger | ✅ | Running |
 
 ## Source of Truth
 
 - **Automations:** `automations/automations-registry.json`
+- **Marchés:** `automations/agency/config/markets.cjs`
 - **Sessions:** `HISTORY.md`
-- **Health Check:** `scripts/system-health-check.cjs`
-- **n8n Status:** `.claude/rules/07-n8n-workflows.md`
+- **Health:** `outputs/system-health.json`
 
 ## URLs
 
 - Site: https://3a-automation.com
 - Dashboard: https://dashboard.3a-automation.com
 - n8n: https://n8n.srv1168256.hstgr.cloud
-- Shopify: guqsu3-yj.myshopify.com
+- Apify: https://console.apify.com/billing

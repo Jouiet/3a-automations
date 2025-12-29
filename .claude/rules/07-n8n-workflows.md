@@ -1,75 +1,82 @@
 # n8n Workflows - Session 114
 
-## Architecture Finale
+## Architecture
 
 ```
 n8n Community Edition: NE SUPPORTE PAS $env variables
 Solution: Scripts natifs (.cjs) avec process.env
 ```
 
-## État Factuel (29/12/2025 11:00 CET)
+## État Factuel (29/12/2025 12:30 CET)
 
-### Workflows Actifs (6)
+### Workflows n8n (5)
 
-| # | Workflow | Status | Usage |
-|---|----------|--------|-------|
-| 1 | Blog Article Generator | ✅ ACTIF | Claude API |
-| 2 | Enhance Product Photos | ✅ ACTIF | Gemini API |
-| 3 | Grok Voice Telephony | ⏸️ BLOQUÉ | Twilio requis |
-| 4 | WhatsApp Booking Confirmation | ⏸️ BLOQUÉ | Meta Business requis |
-| 5 | WhatsApp Booking Reminders | ⏸️ BLOQUÉ | Meta Business requis |
-| 6 | Newsletter 3A Automation | ⏸️ INACTIF | API credits requis |
+| Workflow | Status | Blocker |
+|----------|--------|---------|
+| Blog Article Generator | ✅ FONCTIONNE | - |
+| Enhance Product Photos | ✅ FONCTIONNE | - |
+| Grok Voice Telephony | ⛔ BLOQUÉ | Twilio credentials |
+| WhatsApp Booking Confirmation | ⛔ BLOQUÉ | Meta Business |
+| WhatsApp Booking Reminders | ⛔ BLOQUÉ | Meta Business |
 
-### Workflows Supprimés (Session 114)
+**Résultat: 2/5 fonctionnels (40%)**
 
-| Workflow | Remplacement |
-|----------|--------------|
-| Klaviyo Welcome Series | `email-automation-unified.cjs` |
-| Email Outreach Sequence | `email-automation-unified.cjs` |
-| LinkedIn Lead Scraper | `linkedin-lead-automation.cjs` |
+### Scripts Natifs (Remplacent n8n)
 
-**Raison:** Ces workflows utilisaient `$env` variables non supportées. Les scripts natifs utilisent `process.env` qui fonctionne.
+| Script | Status | Blocker |
+|--------|--------|---------|
+| linkedin-lead-automation.cjs | ⛔ | Apify $0.01 |
+| google-maps-to-klaviyo-pipeline.cjs | ⛔ | Apify $0.01 |
+| newsletter-automation.cjs | ✅ | - |
+| email-automation-unified.cjs | ✅ | - |
+| lead-gen-scheduler.cjs | ✅ | - |
 
-## Scripts Natifs - Usage
+## Lead Generation System (Session 114)
+
+```
+ARCHITECTURE:
+├── config/markets.cjs           # 31 marchés, 3 devises
+├── lead-gen-scheduler.cjs       # Scheduler centralisé
+├── linkedin-lead-automation.cjs # Apify → Klaviyo
+├── google-maps-to-klaviyo-pipeline.cjs
+├── newsletter-automation.cjs    # xAI/Grok primary
+└── email-automation-unified.cjs # Welcome + Outreach
+
+GITHUB ACTIONS:
+└── .github/workflows/lead-generation.yml
+
+CRON SCHEDULE:
+  6AM UTC: LinkedIn (rotating markets)
+  8AM UTC: Google Maps (rotating cities)
+  10AM 1st/15th: Newsletter
+```
+
+## Commandes
 
 ```bash
-# Email (Welcome + Outreach)
+# Scheduler
+node automations/agency/lead-gen-scheduler.cjs --status
+node automations/agency/lead-gen-scheduler.cjs --pipeline=linkedin --market=morocco
+node automations/agency/lead-gen-scheduler.cjs --pipeline=daily --dry-run
+
+# Email
 node automations/agency/email-automation-unified.cjs --mode=welcome --email=test@example.com
-node automations/agency/email-automation-unified.cjs --mode=outreach --json='{"email":"...","company":"..."}'
 node automations/agency/email-automation-unified.cjs --server --port=3001
-
-# LinkedIn Lead Automation
-node automations/agency/linkedin-lead-automation.cjs --test
-node automations/agency/linkedin-lead-automation.cjs --file=/path/to/leads.json
-
-# Google Maps Local B2B
-node automations/agency/google-maps-to-klaviyo-pipeline.cjs --test
-node automations/agency/google-maps-to-klaviyo-pipeline.cjs --file=/path/to/businesses.json
 
 # Newsletter
 node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
-node automations/agency/newsletter-automation.cjs --topic="Sujet" --list-id=XXX
+node automations/agency/newsletter-automation.cjs --server --port=3002
 ```
 
-## BLOCKERS EXTERNES (Non-code)
+## BLOCKERS
 
-| Workflow | Blocker | Action Requise |
-|----------|---------|----------------|
-| Grok Voice | Twilio | Créer compte Twilio + Phone Number |
-| WhatsApp x2 | Meta | Business Manager approval |
-| Newsletter | API Credits | Ajouter crédits Anthropic ou attendre reset Gemini |
-
-## Webhooks Disponibles
-
-| Workflow | Webhook URL |
-|----------|-------------|
-| Blog Generator | `https://n8n.srv1168256.hstgr.cloud/webhook/blog/generate` |
-| Product Photos | `https://n8n.srv1168256.hstgr.cloud/webhook/photos/enhance` |
-| Voice Inbound | `https://n8n.srv1168256.hstgr.cloud/webhook/voice/inbound` |
-| Booking Confirm | `https://n8n.srv1168256.hstgr.cloud/webhook/booking-confirmation` |
-| Newsletter | `https://n8n.srv1168256.hstgr.cloud/webhook/newsletter/send` |
+| Type | Blocker | Action | Priorité |
+|------|---------|--------|----------|
+| Lead Gen | Apify crédits | https://console.apify.com/billing | **P0** |
+| n8n | Twilio | Créer compte | P2 |
+| n8n | Meta Business | Approval | P3 |
 
 ## URLs
 
 - n8n: https://n8n.srv1168256.hstgr.cloud
-- API: https://n8n.srv1168256.hstgr.cloud/api/v1/workflows
+- Apify: https://console.apify.com/billing

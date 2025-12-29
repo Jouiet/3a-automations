@@ -1,0 +1,28 @@
+{
+  "runs": [
+    {
+      "timestamp": "2025-12-29T11:26:25.800Z",
+      "pipeline": "linkedin",
+      "market": "morocco",
+      "results": {
+        "error": "Provide --search or --company"
+      }
+    },
+    {
+      "timestamp": "2025-12-29T11:26:59.650Z",
+      "pipeline": "linkedin",
+      "market": "morocco",
+      "results": {
+        "error": "Apify start failed: 404 - {\n  \"error\": {\n    \"type\": \"page-not-found\",\n    \"message\": \"We have bad news: there is no API endpoint at this URL. Did you specify it correctly?\"\n  }\n}"
+      }
+    },
+    {
+      "timestamp": "2025-12-29T11:28:05.198Z",
+      "pipeline": "linkedin",
+      "market": "morocco",
+      "results": {
+        "error": "Apify start failed: 404 - {\n  \"error\": {\n    \"type\": \"page-not-found\",\n    \"message\": \"We have bad news: there is no API endpoint at this URL. Did you specify it correctly?\"\n  }\n}"
+      }
+    }
+  ]
+}

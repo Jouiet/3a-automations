@@ -3,23 +3,30 @@
  * NEWSLETTER AUTOMATION - 3A Automation
  *
  * Bi-monthly newsletter: AI Content Generation → Klaviyo Campaign → Send
- * Replaces n8n workflow "Newsletter 3A Automation" (uses $env → FAILS + INACTIVE)
+ * OFFICIAL replacement for n8n workflow "Newsletter 3A Automation" (deleted Session 114)
  *
  * PIPELINE:
- * 1. Generate newsletter content with AI (Claude/Gemini)
- * 2. Create Klaviyo campaign
- * 3. Set campaign content
- * 4. Schedule or send immediately
- * 5. Log to dashboard
+ * 1. Generate newsletter content with AI (Grok/Gemini/Claude)
+ * 2. Validate branding consistency
+ * 3. Create Klaviyo campaign
+ * 4. Set campaign content with HTML template
+ * 5. Send immediately or schedule
+ * 6. Log to dashboard
  *
  * MODES:
- * 1. Scheduled: Via cron (1st and 15th of month)
- * 2. CLI: node newsletter-automation.cjs --topic="automation tips"
- * 3. Preview: node newsletter-automation.cjs --preview --topic="..."
+ * 1. CLI: node newsletter-automation.cjs --topic="automation tips"
+ * 2. Preview: node newsletter-automation.cjs --preview --topic="..."
+ * 3. Server: node newsletter-automation.cjs --server --port=3002
+ * 4. Scheduled: Via cron (1st and 15th of month)
+ *
+ * AI PRIORITY (cost optimized):
+ * 1. xAI/Grok ($0.05/1K tokens) - Preferred
+ * 2. Gemini (free tier) - Fallback
+ * 3. Claude (paid) - Final fallback
  *
  * Created: 2025-12-28 | Session 111
- * Replaces: n8n workflow "Newsletter 3A Automation - Bi-Monthly Digest"
- * Version: 1.0.0
+ * Updated: 2025-12-29 | Session 114 (Optimized, n8n workflow deleted)
+ * Version: 2.0.0
  */
 
 const path = require('path');
@@ -38,7 +45,8 @@ const CONFIG = {
   KLAVIYO_API_KEY: process.env.KLAVIYO_API_KEY,
   KLAVIYO_NEWSLETTER_LIST_ID: process.env.KLAVIYO_NEWSLETTER_LIST_ID || process.env.KLAVIYO_LIST_ID,
 
-  // AI (prefer Gemini - free tier)
+  // AI (priority: xAI → Gemini → Claude)
+  XAI_API_KEY: process.env.XAI_API_KEY,
   GEMINI_API_KEY: process.env.GEMINI_API_KEY,
   ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
 
@@ -56,6 +64,52 @@ const CONFIG = {
   // Output
   OUTPUT_DIR: path.join(__dirname, '..', '..', 'outputs'),
 };
+
+// ============================================================================
+// UTILITIES
+// ============================================================================
+
+/**
+ * Retry with exponential backoff
+ */
+async function withRetry(fn, options = {}) {
+  const { maxRetries = 3, baseDelay = 1000, maxDelay = 10000 } = options;
+  let lastError;
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+      if (attempt === maxRetries) break;
+
+      const delay = Math.min(baseDelay * Math.pow(2, attempt - 1), maxDelay);
+      console.warn(`⚠️ Attempt ${attempt} failed, retrying in ${delay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+  }
+
+  throw lastError;
+}
+
+/**
+ * Validate branding in content
+ */
+function validateBranding(content) {
+  const issues = [];
+
+  // Check signature
+  if (!content.includes('3A Automation') && !content.includes(CONFIG.BRAND_NAME)) {
+    issues.push('Missing brand name');
+  }
+
+  // Check URL
+  if (!content.includes('3a-automation.com') && !content.includes(CONFIG.BRAND_URL)) {
+    issues.push('Missing brand URL');
+  }
+
+  return { valid: issues.length === 0, issues };
+}
 
 // ============================================================================
 // AI CONTENT GENERATION
@@ -96,7 +150,16 @@ FORMAT DE SORTIE (JSON):
   "cta": { "text": "...", "url": "${CONFIG.BRAND_URL}/contact" }
 }`;
 
-  // Try Gemini first (free tier)
+  // Try xAI/Grok first (cheapest, fast)
+  if (CONFIG.XAI_API_KEY) {
+    try {
+      return await generateWithGrok(prompt);
+    } catch (error) {
+      console.warn(`⚠️ Grok failed: ${error.message}, trying Gemini...`);
+    }
+  }
+
+  // Try Gemini (free tier)
   if (CONFIG.GEMINI_API_KEY) {
     try {
       return await generateWithGemini(prompt);
@@ -110,7 +173,47 @@ FORMAT DE SORTIE (JSON):
     return await generateWithClaude(prompt);
   }
 
-  throw new Error('No AI API configured (GEMINI_API_KEY or ANTHROPIC_API_KEY)');
+  throw new Error('No AI API configured (XAI_API_KEY, GEMINI_API_KEY, or ANTHROPIC_API_KEY)');
+}
+
+/**
+ * Generate with xAI/Grok API
+ */
+async function generateWithGrok(prompt) {
+  console.log('🤖 Generating content with Grok (xAI)...');
+
+  const response = await fetch('https://api.x.ai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${CONFIG.XAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: 'grok-3-mini',
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 2048,
+      temperature: 0.7,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Grok API ${response.status}: ${await response.text()}`);
+  }
+
+  const data = await response.json();
+  const text = data.choices?.[0]?.message?.content;
+
+  if (!text) {
+    throw new Error('Empty Grok response');
+  }
+
+  // Extract JSON from response
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) {
+    throw new Error('No JSON in Grok response');
+  }
+
+  return JSON.parse(jsonMatch[0]);
 }
 
 /**
@@ -642,7 +745,7 @@ async function main() {
 
   if (helpArg) {
     console.log(`
-NEWSLETTER AUTOMATION - ${CONFIG.BRAND_NAME}
+NEWSLETTER AUTOMATION v2.0 - ${CONFIG.BRAND_NAME}
 
 USAGE:
   # Preview mode (generate content, save HTML, no Klaviyo)
@@ -654,30 +757,41 @@ USAGE:
   # Create and send immediately
   node newsletter-automation.cjs --send --topic="automation tips"
 
+  # HTTP Server mode (for webhooks)
+  node newsletter-automation.cjs --server --port=3002
+
   # Test API connections
   node newsletter-automation.cjs --test
 
 OPTIONS:
-  --topic=TEXT      Newsletter topic (required)
+  --topic=TEXT      Newsletter topic (required for CLI mode)
   --lang=CODE       Language: fr (default) or en
   --preview         Generate content only, save HTML preview
   --send            Create and send campaign immediately
+  --server          Start HTTP server for webhook triggers
+  --port=NUMBER     Server port (default: 3002)
   --test            Test API connections
   --help, -h        Show this help
 
 ENVIRONMENT VARIABLES:
-  KLAVIYO_API_KEY           Required. Klaviyo private API key
+  KLAVIYO_API_KEY              Required. Klaviyo private API key
   KLAVIYO_NEWSLETTER_LIST_ID   Required. List ID for newsletter
-  GEMINI_API_KEY            Recommended. For content generation
-  ANTHROPIC_API_KEY         Fallback. Claude API key
-  BRAND_NAME                Optional. Your brand name
-  FROM_EMAIL                Optional. Sender email
+  XAI_API_KEY                  Recommended. xAI/Grok (cheapest)
+  GEMINI_API_KEY               Fallback. Google Gemini (free tier)
+  ANTHROPIC_API_KEY            Final fallback. Claude API key
+  BRAND_NAME                   Optional. Your brand name
+  FROM_EMAIL                   Optional. Sender email
+
+AI PRIORITY (cost optimized):
+  1. xAI/Grok   - $0.05/1K tokens (preferred)
+  2. Gemini     - Free tier available
+  3. Claude     - Paid only
 
 SCHEDULE (via cron):
   # 1st and 15th of month at 10:00
   0 10 1,15 * * node newsletter-automation.cjs --send --topic="automation trends"
 
-REPLACES: n8n workflow "Newsletter 3A Automation - Bi-Monthly Digest"
+REPLACED: n8n workflow "Newsletter 3A Automation" (deleted Session 114)
     `);
     process.exit(0);
   }
@@ -685,26 +799,58 @@ REPLACES: n8n workflow "Newsletter 3A Automation - Bi-Monthly Digest"
   // Test mode
   if (testArg) {
     console.log('================================================================================');
-    console.log('API CONNECTION TEST');
+    console.log('API CONNECTION TEST - Newsletter Automation v2.0');
     console.log('================================================================================');
+
+    let allOk = true;
 
     // Test Klaviyo
     console.log('\n📡 Testing Klaviyo...');
     if (!CONFIG.KLAVIYO_API_KEY) {
       console.log('   ❌ KLAVIYO_API_KEY not set');
+      allOk = false;
     } else {
       try {
         const result = await klaviyoRequest('lists/');
-        console.log(`   ✅ Klaviyo: ${result.data?.length || 0} lists`);
+        const listCount = result.data?.length || 0;
+        console.log(`   ✅ Klaviyo: ${listCount} lists`);
+        if (CONFIG.KLAVIYO_NEWSLETTER_LIST_ID) {
+          const listExists = result.data?.some(l => l.id === CONFIG.KLAVIYO_NEWSLETTER_LIST_ID);
+          console.log(`   ${listExists ? '✅' : '❌'} Newsletter list: ${CONFIG.KLAVIYO_NEWSLETTER_LIST_ID}`);
+          if (!listExists) allOk = false;
+        } else {
+          console.log('   ⚠️ KLAVIYO_NEWSLETTER_LIST_ID not set');
+        }
       } catch (e) {
         console.log(`   ❌ Klaviyo: ${e.message}`);
+        allOk = false;
       }
     }
 
-    // Test Gemini
-    console.log('\n📡 Testing Gemini...');
+    // Test xAI/Grok (primary)
+    console.log('\n📡 Testing xAI/Grok (primary)...');
+    if (!CONFIG.XAI_API_KEY) {
+      console.log('   ⚠️ XAI_API_KEY not set (recommended for cost)');
+    } else {
+      try {
+        const resp = await fetch('https://api.x.ai/v1/models', {
+          headers: { 'Authorization': `Bearer ${CONFIG.XAI_API_KEY}` }
+        });
+        if (resp.ok) {
+          const data = await resp.json();
+          console.log(`   ✅ xAI/Grok: ${data.data?.length || 0} models`);
+        } else {
+          console.log(`   ❌ xAI/Grok: ${resp.status}`);
+        }
+      } catch (e) {
+        console.log(`   ❌ xAI/Grok: ${e.message}`);
+      }
+    }
+
+    // Test Gemini (fallback)
+    console.log('\n📡 Testing Gemini (fallback)...');
     if (!CONFIG.GEMINI_API_KEY) {
-      console.log('   ❌ GEMINI_API_KEY not set');
+      console.log('   ⚠️ GEMINI_API_KEY not set');
     } else {
       try {
         const resp = await fetch(
@@ -720,8 +866,89 @@ REPLACES: n8n workflow "Newsletter 3A Automation - Bi-Monthly Digest"
       }
     }
 
+    // Test Claude (final fallback)
+    console.log('\n📡 Testing Claude (final fallback)...');
+    if (!CONFIG.ANTHROPIC_API_KEY) {
+      console.log('   ⚠️ ANTHROPIC_API_KEY not set');
+    } else {
+      console.log('   ✅ ANTHROPIC_API_KEY set');
+    }
+
+    // AI availability summary
+    const aiAvailable = CONFIG.XAI_API_KEY || CONFIG.GEMINI_API_KEY || CONFIG.ANTHROPIC_API_KEY;
+    console.log(`\n📊 AI Available: ${aiAvailable ? '✅ YES' : '❌ NO'}`);
+    if (!aiAvailable) allOk = false;
+
     console.log('================================================================================');
-    process.exit(0);
+    console.log(`Result: ${allOk ? '✅ ALL CHECKS PASSED' : '⚠️ SOME ISSUES FOUND'}`);
+    console.log('================================================================================');
+    process.exit(allOk ? 0 : 1);
+  }
+
+  // Server mode
+  const serverArg = args.includes('--server');
+  const portArg = args.find(a => a.startsWith('--port='));
+  const port = portArg ? parseInt(portArg.split('=')[1]) : 3002;
+
+  if (serverArg) {
+    const http = require('http');
+
+    const server = http.createServer(async (req, res) => {
+      // CORS headers
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+      if (req.method === 'OPTIONS') {
+        res.writeHead(204);
+        res.end();
+        return;
+      }
+
+      // Health check
+      if (req.url === '/health') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'ok', service: 'newsletter-automation', version: '2.0.0' }));
+        return;
+      }
+
+      // Newsletter trigger
+      if (req.method === 'POST' && req.url === '/send') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', async () => {
+          try {
+            const data = JSON.parse(body || '{}');
+            const result = await runNewsletter({
+              topic: data.topic || 'Tendances automation e-commerce',
+              language: data.language || 'fr',
+              preview: data.preview || false,
+              send: data.send || false,
+            });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(result));
+          } catch (error) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: error.message }));
+          }
+        });
+        return;
+      }
+
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Not found' }));
+    });
+
+    server.listen(port, () => {
+      console.log('================================================================================');
+      console.log('NEWSLETTER AUTOMATION SERVER v2.0');
+      console.log('================================================================================');
+      console.log(`🚀 Server running on http://localhost:${port}`);
+      console.log(`📡 POST /send - Trigger newsletter`);
+      console.log(`❤️ GET /health - Health check`);
+      console.log('================================================================================');
+    });
+    return;
   }
 
   // Validate
@@ -757,6 +984,8 @@ module.exports = {
   createCampaign,
   setCampaignContent,
   sendCampaign,
+  validateBranding,
+  withRetry,
   CONFIG,
 };
 

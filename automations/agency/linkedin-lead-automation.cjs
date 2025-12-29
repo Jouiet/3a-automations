@@ -47,7 +47,7 @@ const CONFIG = {
   // Apify
   APIFY_TOKEN: process.env.APIFY_TOKEN,
   APIFY_ACTOR_PROFILE: 'curious_coder/linkedin-profile-scraper',
-  APIFY_ACTOR_SEARCH: 'dev_fusion/linkedin-profile-scraper',
+  APIFY_ACTOR_SEARCH: 'harvestapi~linkedin-profile-search',
   APIFY_ACTOR_COMPANY: 'caprolok/linkedin-employees-scraper',
 
   // Klaviyo
