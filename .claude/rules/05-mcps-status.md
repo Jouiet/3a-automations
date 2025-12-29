@@ -24,13 +24,18 @@
 | google-sheets | Not shared | Share with SA |
 | apify | Token issue | MCP package bug |
 
-## Not Configured (3)
+## Not Configured (2)
 
 | MCP | Status |
 |-----|--------|
 | wordpress | wp-sites.json empty |
-| shopify | No access token |
 | powerbi-remote | Entra ID required |
+
+## Configured (Session 114)
+
+| MCP | Status | Notes |
+|-----|--------|-------|
+| shopify | ✅ OK | guqsu3-yj.myshopify.com |
 
 ## Service Account
 
