@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cours: Générer des Leads Qualifiés - Stratégies et outils pour attirer des prospects qualifiés.">
+  <title>Générer des Leads Qualifiés | Académie 3A Automation</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://3a-automation.com/academie/cours/leads.html">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
+    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
+    .container{max-width:800px;margin:0 auto;padding:0 1.5rem}
+    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
+    .header .container{display:flex;align-items:center;justify-content:space-between;max-width:1200px}
+    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
+    .logo img{width:40px;height:40px}
+    .logo-text{font-weight:700;font-size:1.25rem}
+    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
+    .nav{display:flex;gap:2rem}
+    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+    .nav a:hover{color:var(--primary)}
+    @media(max-width:768px){.nav{display:none}}
+    main{padding-top:100px;min-height:100vh;padding-bottom:4rem}
+    .breadcrumb{padding:1rem 0;font-size:0.875rem;color:var(--text-secondary)}
+    .breadcrumb a{color:var(--primary);text-decoration:none}
+    .course-hero{padding:2rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
+    .course-category{color:var(--primary);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
+    .course-hero h1{font-size:2rem;font-weight:800;margin-bottom:1rem}
+    .course-meta{display:flex;gap:2rem;margin:1rem 0;flex-wrap:wrap}
+    .course-meta-item{display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary);font-size:0.875rem}
+    .course-meta-item svg{color:var(--primary)}
+    .course-description{color:var(--text-secondary);font-size:1rem;line-height:1.7}
+    .lesson{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;margin-bottom:1.5rem;margin-top:2rem;overflow:hidden}
+    .lesson-header{padding:1.25rem;background:rgba(79,186,241,0.05);display:flex;align-items:center;gap:1rem}
+    .lesson-number{background:var(--primary);color:var(--secondary);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8125rem;flex-shrink:0}
+    .lesson-title{font-weight:600;flex:1}
+    .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
+    .lesson-content{padding:1.5rem}
+    .lesson-content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
+    .lesson-content h4:first-child{margin-top:0}
+    .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
+    .lesson-content ul,.lesson-content ol{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
+    .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
+    .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
+    .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
+    .nav-btn-prev{background:rgba(79,186,241,0.1);color:var(--text-light)}
+    .nav-btn-prev:hover{background:rgba(79,186,241,0.2)}
+    .nav-btn-next{background:var(--primary);color:var(--secondary)}
+    .nav-btn-next:hover{background:#6BC9F5}
+    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:2rem 0}
+    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+    .footer-text{color:var(--text-secondary);font-size:0.875rem}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <img src="/assets/images/logo.svg" alt="3A Automation">
+        <div>
+          <div class="logo-text">3A Automation</div>
+          <div class="logo-sub">AUTOMATION, ANALYTICS, AI</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="/">Accueil</a>
+        <a href="/services.html">Services</a>
+        <a href="/academie.html" style="color:var(--primary)">Académie</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/academie.html">Académie</a> / <a href="/academie.html#courses">Cours</a> / Générer des Leads
+      </div>
+
+      <section class="course-hero">
+        <p class="course-category">Génération de Leads</p>
+        <h1>Générer des Leads Qualifiés</h1>
+
+        <div class="course-meta">
+          <div class="course-meta-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            1h 15min
+          </div>
+          <div class="course-meta-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            6 leçons
+          </div>
+        </div>
+
+        <p class="course-description">
+          Stratégies et outils pour attirer des prospects qualifiés et les convertir en clients. De la configuration des sources à la qualification automatique.
+        </p>
+      </section>
+
+      <!-- Leçon 1 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">1</span>
+          <span class="lesson-title">Définir votre client idéal (ICP)</span>
+          <span class="lesson-duration">12 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Avant de générer des leads, vous devez savoir exactement qui cibler. L'ICP (Ideal Customer Profile) décrit les caractéristiques de vos meilleurs clients.</p>
+
+          <h4>Questions à vous poser</h4>
+          <ul>
+            <li>Quelle est la taille d'entreprise idéale ? (CA, effectif)</li>
+            <li>Quel secteur d'activité ?</li>
+            <li>Qui est le décideur ? (titre, rôle)</li>
+            <li>Quels problèmes résolvent vos solutions ?</li>
+          </ul>
+
+          <div class="step-box">
+            <h5>Exercice</h5>
+            <p>Analysez vos 5 meilleurs clients actuels. Quels points communs ont-ils ? C'est votre ICP.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 2 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">2</span>
+          <span class="lesson-title">Configurer les sources de leads</span>
+          <span class="lesson-duration">15 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>3A Automation se connecte à plusieurs sources pour collecter automatiquement vos leads.</p>
+
+          <h4>Sources disponibles</h4>
+          <ul>
+            <li><strong>LinkedIn</strong> : Profils correspondant à vos critères ICP</li>
+            <li><strong>Google Maps</strong> : Entreprises locales par secteur/zone</li>
+            <li><strong>Formulaires web</strong> : Intégration avec vos landing pages</li>
+            <li><strong>Import manuel</strong> : Fichiers CSV de prospects</li>
+          </ul>
+
+          <div class="step-box">
+            <h5>Configuration LinkedIn</h5>
+            <p>Dans Intégrations > LinkedIn, définissez vos critères de recherche : titre, secteur, localisation. Le système recherche automatiquement les profils correspondants.</p>
+          </div>
+
+          <div class="step-box">
+            <h5>Configuration Google Maps</h5>
+            <p>Pour les leads locaux B2B, définissez : type d'entreprise, zone géographique, mots-clés. Idéal pour cibler commerces et PME.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 3 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">3</span>
+          <span class="lesson-title">Segmentation automatique</span>
+          <span class="lesson-duration">12 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Chaque lead entrant est automatiquement catégorisé selon son profil.</p>
+
+          <h4>Segments par défaut</h4>
+          <ul>
+            <li><strong>Decision Makers</strong> : CEO, Founder, Director</li>
+            <li><strong>Marketing</strong> : CMO, Marketing Manager</li>
+            <li><strong>Sales</strong> : Sales Director, Account Executive</li>
+            <li><strong>Tech</strong> : CTO, Developer</li>
+            <li><strong>Local Business</strong> : Commerces, artisans (Google Maps)</li>
+          </ul>
+
+          <p>Chaque segment reçoit des emails personnalisés adaptés à son rôle et ses préoccupations.</p>
+
+          <div class="tip-box">
+            <h5>Conseil</h5>
+            <p>Un email personnalisé par segment a 2-3x plus de chances d'obtenir une réponse qu'un email générique.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 4 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">4</span>
+          <span class="lesson-title">Scoring et qualification</span>
+          <span class="lesson-duration">15 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Le lead scoring attribue un score à chaque prospect selon sa probabilité de conversion.</p>
+
+          <h4>Critères de scoring</h4>
+          <ul>
+            <li><strong>Démographiques</strong> : Correspond à l'ICP (+20pts), taille entreprise (+10pts)</li>
+            <li><strong>Comportementaux</strong> : Ouvre email (+5pts), clique lien (+10pts), visite pricing (+15pts)</li>
+            <li><strong>Engagement</strong> : Répond à email (+30pts), demande démo (+50pts)</li>
+          </ul>
+
+          <div class="step-box">
+            <h5>Seuils de qualification</h5>
+            <p>0-30 : Lead froid (nurturing). 31-60 : Lead tiède (relance). 61+ : Lead chaud (contact commercial).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 5 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">5</span>
+          <span class="lesson-title">Nurturing automatisé</span>
+          <span class="lesson-duration">12 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Les leads qui ne sont pas prêts à acheter aujourd'hui le seront peut-être demain. Le nurturing maintient la relation.</p>
+
+          <h4>Séquence type</h4>
+          <ol>
+            <li>Email 1 (J0) : Introduction et proposition de valeur</li>
+            <li>Email 2 (J3) : Cas d'usage / témoignage client</li>
+            <li>Email 3 (J7) : Contenu éducatif (guide, article)</li>
+            <li>Email 4 (J14) : Offre découverte ou démo</li>
+            <li>Email 5 (J21) : Dernière relance avec urgence</li>
+          </ol>
+
+          <div class="tip-box">
+            <h5>Conseil</h5>
+            <p>Arrêtez la séquence dès qu'un lead répond. Un commercial prend alors le relais.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 6 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">6</span>
+          <span class="lesson-title">Mesurer vos résultats</span>
+          <span class="lesson-duration">9 min</span>
+        </div>
+        <div class="lesson-content">
+          <h4>KPIs à suivre</h4>
+          <ul>
+            <li><strong>Volume</strong> : Nombre de leads générés par source</li>
+            <li><strong>Qualité</strong> : % de leads qualifiés (score > 60)</li>
+            <li><strong>Conversion</strong> : % de leads devenus clients</li>
+            <li><strong>Coût</strong> : CAC (Coût d'Acquisition Client)</li>
+          </ul>
+
+          <div class="step-box">
+            <h5>Tableau de bord</h5>
+            <p>Dans Analytics > Leads, visualisez l'entonnoir complet : sources → contacts → qualifiés → convertis.</p>
+          </div>
+
+          <h4>Optimisation</h4>
+          <p>Analysez quelle source génère les leads les plus qualifiés, pas seulement les plus nombreux. Concentrez vos efforts sur les canaux rentables.</p>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="/academie/cours/demarrer.html" class="nav-btn nav-btn-prev">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Cours précédent
+        </a>
+        <a href="/academie/cours/emails.html" class="nav-btn nav-btn-next">
+          Cours suivant
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">L'équipe 3A Automation - Automation, Analytics, AI</p>
+      <div class="footer-links">
+        <a href="/">Accueil</a>
+        <a href="/academie.html">Académie</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

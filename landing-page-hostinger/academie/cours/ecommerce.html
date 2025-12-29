@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cours: Optimiser Votre Boutique - Maximisez les ventes de votre boutique Shopify avec des automations.">
+  <title>Optimiser Votre Boutique | Académie 3A Automation</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://3a-automation.com/academie/cours/ecommerce.html">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
+    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
+    .container{max-width:800px;margin:0 auto;padding:0 1.5rem}
+    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
+    .header .container{display:flex;align-items:center;justify-content:space-between;max-width:1200px}
+    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
+    .logo img{width:40px;height:40px}
+    .logo-text{font-weight:700;font-size:1.25rem}
+    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
+    .nav{display:flex;gap:2rem}
+    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+    @media(max-width:768px){.nav{display:none}}
+    main{padding-top:100px;min-height:100vh;padding-bottom:4rem}
+    .breadcrumb{padding:1rem 0;font-size:0.875rem;color:var(--text-secondary)}
+    .breadcrumb a{color:var(--primary);text-decoration:none}
+    .course-hero{padding:2rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
+    .course-category{color:var(--primary);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
+    .course-hero h1{font-size:2rem;font-weight:800;margin-bottom:1rem}
+    .course-meta{display:flex;gap:2rem;margin:1rem 0;flex-wrap:wrap}
+    .course-meta-item{display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary);font-size:0.875rem}
+    .course-meta-item svg{color:var(--primary)}
+    .course-description{color:var(--text-secondary);font-size:1rem;line-height:1.7}
+    .lesson{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;margin-bottom:1.5rem;margin-top:2rem;overflow:hidden}
+    .lesson-header{padding:1.25rem;background:rgba(79,186,241,0.05);display:flex;align-items:center;gap:1rem}
+    .lesson-number{background:var(--primary);color:var(--secondary);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8125rem;flex-shrink:0}
+    .lesson-title{font-weight:600;flex:1}
+    .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
+    .lesson-content{padding:1.5rem}
+    .lesson-content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
+    .lesson-content h4:first-child{margin-top:0}
+    .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
+    .lesson-content ul{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
+    .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
+    .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
+    .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
+    .nav-btn-prev{background:rgba(79,186,241,0.1);color:var(--text-light)}
+    .nav-btn-next{background:var(--primary);color:var(--secondary)}
+    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:2rem 0}
+    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+    .footer-text{color:var(--text-secondary);font-size:0.875rem}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <img src="/assets/images/logo.svg" alt="3A Automation">
+        <div>
+          <div class="logo-text">3A Automation</div>
+          <div class="logo-sub">AUTOMATION, ANALYTICS, AI</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="/">Accueil</a>
+        <a href="/academie.html" style="color:var(--primary)">Académie</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/academie.html">Académie</a> / <a href="/academie.html#courses">Cours</a> / E-commerce
+      </div>
+
+      <section class="course-hero">
+        <p class="course-category">E-commerce</p>
+        <h1>Optimiser Votre Boutique</h1>
+
+        <div class="course-meta">
+          <div class="course-meta-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            1h
+          </div>
+          <div class="course-meta-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            6 leçons
+          </div>
+        </div>
+
+        <p class="course-description">
+          Maximisez les ventes de votre boutique Shopify avec des automations éprouvées : synchronisation produits, alertes stock, intégrations marketing.
+        </p>
+      </section>
+
+      <!-- Leçon 1 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">1</span>
+          <span class="lesson-title">Synchronisation Shopify-Klaviyo</span>
+          <span class="lesson-duration">12 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>La synchronisation entre votre boutique et Klaviyo est le socle de toutes vos automations e-commerce.</p>
+
+          <h4>Données synchronisées</h4>
+          <ul>
+            <li><strong>Clients</strong> : Email, nom, historique d'achat</li>
+            <li><strong>Commandes</strong> : Montant, produits, date</li>
+            <li><strong>Produits</strong> : Catalogue complet avec images</li>
+            <li><strong>Événements</strong> : Viewed Product, Added to Cart, Checkout Started</li>
+          </ul>
+
+          <div class="step-box">
+            <h5>Vérification</h5>
+            <p>Dans Intégrations > Shopify, vérifiez que le statut est "Connecté" et que la dernière sync date de moins de 24h.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 2 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">2</span>
+          <span class="lesson-title">Alertes de stock intelligent</span>
+          <span class="lesson-duration">10 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Ne perdez plus de ventes à cause de ruptures de stock. Recevez des alertes avant qu'il ne soit trop tard.</p>
+
+          <h4>Configuration</h4>
+          <ul>
+            <li><strong>Seuil d'alerte</strong> : Définissez le stock minimum (ex: 5 unités)</li>
+            <li><strong>Notification</strong> : Email ou Slack quand le seuil est atteint</li>
+            <li><strong>Retour en stock</strong> : Notification client automatique</li>
+          </ul>
+
+          <div class="step-box">
+            <h5>Email "Retour en stock"</h5>
+            <p>Les clients ayant visité un produit en rupture reçoivent automatiquement un email quand il revient. Taux de conversion moyen : 20-30%.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 3 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">3</span>
+          <span class="lesson-title">Browse Abandonment</span>
+          <span class="lesson-duration">10 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Au-delà des paniers abandonnés, ciblez aussi les visiteurs qui ont regardé des produits sans ajouter au panier.</p>
+
+          <h4>Séquence type</h4>
+          <ul>
+            <li><strong>Email 1 (2h)</strong> : "Ce produit vous intéresse ?" avec image et lien</li>
+            <li><strong>Email 2 (24h)</strong> : Avis clients sur le produit consulté</li>
+          </ul>
+
+          <div class="tip-box">
+            <h5>Conseil</h5>
+            <p>Ne déclenchez cette séquence que pour les visiteurs ayant passé plus de 30 secondes sur la page produit. Évitez de spammer les curieux passagers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 4 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">4</span>
+          <span class="lesson-title">Recommandations produits</span>
+          <span class="lesson-duration">10 min</span>
+        </div>
+        <div class="lesson-content">
+          <h4>Types de recommandations</h4>
+          <ul>
+            <li><strong>Cross-sell</strong> : Produits complémentaires (coque → film écran)</li>
+            <li><strong>Upsell</strong> : Produit supérieur (iPhone 128Go → 256Go)</li>
+            <li><strong>Viewed together</strong> : "Les clients ont aussi regardé"</li>
+            <li><strong>Bought together</strong> : "Fréquemment achetés ensemble"</li>
+          </ul>
+
+          <div class="step-box">
+            <h5>Intégration dans les emails</h5>
+            <p>Utilisez les blocs dynamiques Klaviyo pour insérer des recommandations personnalisées basées sur l'historique de chaque client.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leçon 5 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">5</span>
+          <span class="lesson-title">Segmentation e-commerce</span>
+          <span class="lesson-duration">10 min</span>
+        </div>
+        <div class="lesson-content">
+          <h4>Segments clés</h4>
+          <ul>
+            <li><strong>Premier achat</strong> : Nouveaux clients à fidéliser</li>
+            <li><strong>Récurrents</strong> : 2+ commandes, vos meilleurs clients</li>
+            <li><strong>VIP</strong> : Top 10% par CA, traitement privilégié</li>
+            <li><strong>Dormants</strong> : Pas d'achat depuis 90 jours</li>
+            <li><strong>Panier élevé</strong> : Panier moyen > X€</li>
+          </ul>
+
+          <p>Chaque segment reçoit des offres adaptées : les VIP ont des accès exclusifs, les dormants des incitations de retour.</p>
+        </div>
+      </div>
+
+      <!-- Leçon 6 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">6</span>
+          <span class="lesson-title">Métriques e-commerce</span>
+          <span class="lesson-duration">8 min</span>
+        </div>
+        <div class="lesson-content">
+          <h4>KPIs à suivre</h4>
+          <ul>
+            <li><strong>Revenu attribué</strong> : CA généré par les automations</li>
+            <li><strong>Taux de récupération panier</strong> : Objectif 10-15%</li>
+            <li><strong>AOV (Average Order Value)</strong> : Panier moyen</li>
+            <li><strong>LTV (Lifetime Value)</strong> : Valeur client sur la durée</li>
+            <li><strong>Taux de réachat</strong> : % de clients qui commandent à nouveau</li>
+          </ul>
+
+          <div class="tip-box">
+            <h5>Focus LTV</h5>
+            <p>Un client fidèle vaut 5-10x un nouveau client. Investissez dans la fidélisation autant que dans l'acquisition.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="/academie/cours/analytics.html" class="nav-btn nav-btn-prev">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Cours précédent
+        </a>
+        <a href="/academie/cours/contenu.html" class="nav-btn nav-btn-next">
+          Cours suivant
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">L'équipe 3A Automation - Automation, Analytics, AI</p>
+      <div class="footer-links">
+        <a href="/">Accueil</a>
+        <a href="/academie.html">Académie</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

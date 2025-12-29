@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Parcours Marketing Automation - Maîtrisez la génération de leads B2B et les séquences email personnalisées.">
+  <title>Parcours Marketing Automation | Académie 3A Automation</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://3a-automation.com/academie/parcours/marketing-automation.html">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
+    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--warning:#F59E0B;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
+    .container{max-width:900px;margin:0 auto;padding:0 1.5rem}
+    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
+    .header .container{display:flex;align-items:center;justify-content:space-between;max-width:1200px}
+    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
+    .logo img{width:40px;height:40px}
+    .logo-text{font-weight:700;font-size:1.25rem}
+    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
+    .nav{display:flex;gap:2rem}
+    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem;transition:color 0.2s}
+    .nav a:hover{color:var(--primary)}
+    @media(max-width:768px){.nav{display:none}}
+    main{padding-top:100px;min-height:100vh;padding-bottom:4rem}
+    .breadcrumb{padding:1rem 0;font-size:0.875rem;color:var(--text-secondary)}
+    .breadcrumb a{color:var(--primary);text-decoration:none}
+    .breadcrumb a:hover{text-decoration:underline}
+    .path-hero{padding:2rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
+    .path-badge{display:inline-block;background:var(--warning);color:var(--secondary);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.75rem;font-weight:600;text-transform:uppercase;margin-bottom:1rem}
+    .path-hero h1{font-size:2.25rem;font-weight:800;margin-bottom:0.5rem}
+    .path-hero h1 span{color:var(--primary)}
+    .path-meta{display:flex;gap:2rem;margin:1.5rem 0;flex-wrap:wrap}
+    .path-meta-item{display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary);font-size:0.875rem}
+    .path-meta-item svg{color:var(--primary)}
+    .path-description{color:var(--text-secondary);font-size:1.0625rem;line-height:1.7;max-width:700px}
+    .section{padding:3rem 0}
+    .section-title{font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem}
+    .section-title svg{color:var(--primary)}
+    .module-list{display:flex;flex-direction:column;gap:1rem}
+    .module{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;padding:1.5rem;transition:all 0.2s}
+    .module:hover{border-color:rgba(79,186,241,0.4)}
+    .module-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+    .module-number{background:var(--primary);color:var(--secondary);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.875rem}
+    .module-duration{color:var(--text-secondary);font-size:0.8125rem;display:flex;align-items:center;gap:0.375rem}
+    .module-title{font-size:1.125rem;font-weight:600;margin-bottom:0.5rem}
+    .module-description{color:var(--text-secondary);font-size:0.875rem;margin-bottom:1rem}
+    .module-lessons{display:flex;flex-direction:column;gap:0.5rem}
+    .lesson{display:flex;align-items:center;gap:0.5rem;font-size:0.8125rem;color:var(--text-light);padding:0.5rem;background:rgba(79,186,241,0.05);border-radius:6px}
+    .lesson svg{color:var(--success);width:16px;height:16px;flex-shrink:0}
+    .outcomes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+    .outcome{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:1.25rem;display:flex;gap:1rem}
+    .outcome svg{color:var(--success);flex-shrink:0;margin-top:2px}
+    .outcome-text h4{font-size:0.9375rem;font-weight:600;margin-bottom:0.25rem}
+    .outcome-text p{color:var(--text-secondary);font-size:0.8125rem}
+    .cta-section{background:linear-gradient(135deg,rgba(79,186,241,0.1) 0%,rgba(25,30,53,0.9) 100%);border:1px solid rgba(79,186,241,0.3);border-radius:16px;padding:2.5rem;text-align:center;margin-top:2rem}
+    .cta-section h3{font-size:1.5rem;margin-bottom:1rem}
+    .cta-section p{color:var(--text-secondary);margin-bottom:1.5rem}
+    .cta-btn{display:inline-block;background:var(--primary);color:var(--secondary);padding:0.875rem 2rem;border-radius:8px;font-weight:600;text-decoration:none;transition:background 0.2s}
+    .cta-btn:hover{background:#6BC9F5}
+    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:2rem 0}
+    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+    .footer-text{color:var(--text-secondary);font-size:0.875rem}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+    .footer-links a:hover{color:var(--primary)}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <img src="/assets/images/logo.svg" alt="3A Automation">
+        <div>
+          <div class="logo-text">3A Automation</div>
+          <div class="logo-sub">AUTOMATION, ANALYTICS, AI</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="/">Accueil</a>
+        <a href="/services.html">Services</a>
+        <a href="/automatisations.html">Automatisations</a>
+        <a href="/academie.html" style="color:var(--primary)">Académie</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/academie.html">Académie</a> / <a href="/academie.html#paths">Parcours</a> / Marketing Automation
+      </div>
+
+      <section class="path-hero">
+        <span class="path-badge">Avancé</span>
+        <h1>Parcours <span>Marketing Automation</span></h1>
+
+        <div class="path-meta">
+          <div class="path-meta-item">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            8 modules • ~6 heures
+          </div>
+          <div class="path-meta-item">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Pour responsables marketing
+          </div>
+          <div class="path-meta-item">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Certificat à la fin
+          </div>
+        </div>
+
+        <p class="path-description">
+          Maîtrisez l'acquisition de leads B2B et le nurturing automatisé. Ce parcours couvre la création de campagnes, la qualification des prospects, les séquences personnalisées, et l'analyse du ROI marketing.
+        </p>
+      </section>
+
+      <!-- Modules -->
+      <section class="section">
+        <h2 class="section-title">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          Programme du parcours
+        </h2>
+
+        <div class="module-list">
+          <!-- Module 1 -->
+          <div class="module">
+            <div class="module-header">
+              <div class="module-number">1</div>
+              <span class="module-duration">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                40 min
+              </span>
+            </div>
+            <h3 class="module-title">Stratégie d'acquisition B2B</h3>
+            <p class="module-description">Définissez votre cible idéale et les canaux d'acquisition prioritaires.</p>
+            <div class="module-lessons">
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Définir votre ICP (Ideal Customer Profile)
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Cartographier le parcours d'achat
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Choisir vos canaux d'acquisition
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 2 -->
+          <div class="module">
+            <div class="module-header">
+              <div class="module-number">2</div>
+              <span class="module-duration">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                50 min
+              </span>
+            </div>
+            <h3 class="module-title">Sources de leads automatisées</h3>
+            <p class="module-description">Configurez vos pipelines de génération de leads depuis LinkedIn et Google Maps.</p>
+            <div class="module-lessons">
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Pipeline LinkedIn → Klaviyo
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Pipeline Google Maps pour leads locaux
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Formulaires et landing pages
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Centraliser dans votre CRM
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 3 -->
+          <div class="module">
+            <div class="module-header">
+              <div class="module-number">3</div>
+              <span class="module-duration">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                45 min
+              </span>
+            </div>
+            <h3 class="module-title">Lead scoring et qualification</h3>
+            <p class="module-description">Attribuez des scores à vos leads pour prioriser les plus prometteurs.</p>
+            <div class="module-lessons">
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Créer votre modèle de scoring
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Critères démographiques vs comportementaux
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Automatiser le transfert Sales
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 4 -->
+          <div class="module">
+            <div class="module-header">
+              <div class="module-number">4</div>
+              <span class="module-duration">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                55 min
+              </span>
+            </div>
+            <h3 class="module-title">Séquences email B2B</h3>
+            <p class="module-description">Créez des séquences d'outreach et de nurturing adaptées au B2B.</p>
+            <div class="module-lessons">
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Structure d'une séquence d'outreach
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Personnalisation par segment
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Nurturing sur le long terme
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Respecter les bonnes pratiques (RGPD, opt-out)
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 5 -->
+          <div class="module">
+            <div class="module-header">
+              <div class="module-number">5</div>
+              <span class="module-duration">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                40 min
+              </span>
+            </div>
+            <h3 class="module-title">Content marketing automatisé</h3>
+            <p class="module-description">Utilisez l'IA pour générer du contenu pertinent à grande échelle.</p>
+            <div class="module-lessons">
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Génération d'articles de blog
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Newsletter automatisée
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Calendrier éditorial
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 6 -->
+          <div class="module">
+            <div class="module-header">
+              <div class="module-number">6</div>
+              <span class="module-duration">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                45 min
+              </span>
+            </div>
+            <h3 class="module-title">Multi-canal et retargeting</h3>
+            <p class="module-description">Coordonnez vos actions email, LinkedIn et publicités.</p>
+            <div class="module-lessons">
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Synchroniser vos audiences
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Retargeting sur Meta/Google
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Attribution multi-touch
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 7 -->
+          <div class="module">
+            <div class="module-header">
+              <div class="module-number">7</div>
+              <span class="module-duration">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                40 min
+              </span>
+            </div>
+            <h3 class="module-title">Analytics et reporting</h3>
+            <p class="module-description">Mesurez l'efficacité de vos campagnes et identifiez les optimisations.</p>
+            <div class="module-lessons">
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                KPIs marketing B2B essentiels
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Créer vos tableaux de bord
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Rapports automatisés hebdomadaires
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 8 -->
+          <div class="module">
+            <div class="module-header">
+              <div class="module-number">8</div>
+              <span class="module-duration">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                30 min
+              </span>
+            </div>
+            <h3 class="module-title">Calcul du ROI marketing</h3>
+            <p class="module-description">Démontrez la valeur de vos efforts marketing à la direction.</p>
+            <div class="module-lessons">
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Coût d'acquisition client (CAC)
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Lifetime Value (LTV)
+              </div>
+              <div class="lesson">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Présenter les résultats à la direction
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outcomes -->
+      <section class="section">
+        <h2 class="section-title">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Ce que vous saurez faire
+        </h2>
+
+        <div class="outcomes-grid">
+          <div class="outcome">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <div class="outcome-text">
+              <h4>Générer des leads qualifiés</h4>
+              <p>Pipelines automatisés depuis LinkedIn et Google Maps.</p>
+            </div>
+          </div>
+          <div class="outcome">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <div class="outcome-text">
+              <h4>Scorer et qualifier</h4>
+              <p>Prioriser les prospects les plus prometteurs automatiquement.</p>
+            </div>
+          </div>
+          <div class="outcome">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <div class="outcome-text">
+              <h4>Nurturing efficace</h4>
+              <p>Séquences email personnalisées par segment.</p>
+            </div>
+          </div>
+          <div class="outcome">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            <div class="outcome-text">
+              <h4>Mesurer le ROI</h4>
+              <p>Calculer CAC, LTV et démontrer la valeur marketing.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <div class="cta-section">
+        <h3>Prêt à automatiser votre acquisition ?</h3>
+        <p>Accédez à ce parcours avec votre abonnement client 3A Automation.</p>
+        <a href="/contact.html" class="cta-btn">Devenir client</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">L'équipe 3A Automation - Automation, Analytics, AI</p>
+      <div class="footer-links">
+        <a href="/">Accueil</a>
+        <a href="/academie.html">Académie</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
