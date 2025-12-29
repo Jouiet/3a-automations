@@ -204,25 +204,32 @@ IMPLICATION:
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
-║                    JO-AAA - IDENTITÉ FACTUELLE                                ║
+║                    3A AUTOMATION - IDENTITÉ FACTUELLE                         ║
 ╠═══════════════════════════════════════════════════════════════════════════════╣
 ║                                                                               ║
-║   QUI:     Consultant solo en automation e-commerce                          ║
+║   QUI:     Agence d'Automatisation AI                                        ║
+║            3A = Automation, Analytics, AI                                    ║
 ║                                                                               ║
-║   QUOI:    Automatisation Shopify + Klaviyo + Meta Ads                       ║
-║            Focus: Email automation, Lead sync, SEO technique                 ║
+║   QUOI:    Automatisation E-commerce & PME B2B                               ║
+║            • Email Marketing Automation (Klaviyo, HubSpot)                   ║
+║            • Lead Generation & Nurturing                                     ║
+║            • Intégrations API & Data Sync                                    ║
+║            • SEO Technique & Analytics                                       ║
 ║                                                                               ║
-║   POUR:    Boutiques Shopify €10k-200k/mois                                  ║
-║            Qui veulent automatiser sans embaucher                            ║
+║   POUR:    • Boutiques e-commerce €10k-500k/mois                            ║
+║            • PME B2B cherchant à automatiser leurs processus                ║
 ║                                                                               ║
-║   PREUVE:  3 clients e-commerce livrés                                       ║
+║   PREUVE:  3 clients e-commerce livrés (MyDealz, Henderson, Alpha Medical)  ║
+║            78 automations disponibles                                        ║
+║            12/13 MCPs fonctionnels (92%)                                     ║
 ║                                                                               ║
-║   USP:     Approche technique (code/APIs, pas de no-code limité)            ║
-║            Focus résultats mesurables                                        ║
+║   USP:     • Approche technique (code/APIs, pas de no-code limité)          ║
+║            • Focus résultats mesurables (ROI, temps gagné)                   ║
+║            • Stack moderne: n8n, Apify, Claude, Gemini                       ║
 ║                                                                               ║
-║   PAS:     ❌ Agence (1 personne)                                            ║
-║            ❌ Plateforme SaaS                                                 ║
+║   PAS:     ❌ Plateforme SaaS                                                 ║
 ║            ❌ Solution plug-and-play                                          ║
+║            ❌ Agence généraliste (spécialisée automation)                     ║
 ║                                                                               ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -230,15 +237,22 @@ IMPLICATION:
 ### 3.2 Messages Clés
 
 ```
+RÈGLE ABSOLUE: NOUS, jamais "je"
+✅ "Nous automatisons..."
+❌ "J'automatise..."
+
 ONE-LINER:
-"J'automatise les boutiques Shopify pour que les fondateurs
-arrêtent de perdre du temps sur les tâches répétitives."
+"Nous automatisons les boutiques e-commerce et PME B2B pour
+éliminer les tâches répétitives et maximiser le ROI."
 
 ELEVATOR PITCH (30 sec):
-"Je suis consultant automation e-commerce. J'aide les boutiques
-Shopify à automatiser leur email marketing, synchronisation de
-leads, et SEO technique. Mes clients récupèrent 10-20h/semaine
-et augmentent leur revenue email de 25%+."
+"3A Automation est une agence spécialisée en automatisation AI
+pour l'e-commerce et les PME B2B. Nous connectons vos outils,
+automatisons vos emails, et synchronisons vos données. Nos clients
+récupèrent 10-20h/semaine et augmentent leur revenue email de 25%+."
+
+TAGLINE:
+"Automation. Analytics. AI."
 ```
 
 ---

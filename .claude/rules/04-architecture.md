@@ -41,9 +41,11 @@
 ## Identity
 
 **3A = Automation, Analytics, AI**
-- Solo automation & marketing consultant
-- Target: SMEs €10k-500k revenue
-- Markets: Maghreb, Europe, International
+- Agence d'Automatisation AI
+- Markets: E-commerce & PME B2B
+- Target: €10k-500k revenue
+- Regions: Maghreb, Europe, International
+- Tone: NOUS (jamais "je")
 
 ## Critical Rules
 
