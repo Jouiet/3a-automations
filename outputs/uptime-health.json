@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "timestamp": "2025-12-29T17:52:29.489Z",
+      "overall": false,
+      "summary": {
+        "total": 5,
+        "healthy": 2,
+        "unhealthy": 3,
+        "critical": 1
+      }
+    },
+    {
+      "timestamp": "2025-12-29T17:59:19.763Z",
+      "overall": false,
+      "summary": {
+        "total": 5,
+        "healthy": 3,
+        "unhealthy": 2,
+        "critical": 0
+      }
+    },
+    {
+      "timestamp": "2025-12-29T18:00:48.877Z",
+      "overall": false,
+      "summary": {
+        "total": 5,
+        "healthy": 4,
+        "unhealthy": 1,
+        "critical": 0
+      }
+    }
+  ],
+  "lastUpdate": "2025-12-29T18:00:48.877Z",
+  "lastResults": {
+    "timestamp": "2025-12-29T18:00:48.877Z",
+    "overall": false,
+    "criticalHealthy": true,
+    "endpoints": [
+      {
+        "key": "site",
+        "name": "3A Automation Site",
+        "url": "https://3a-automation.com/index.html",
+        "healthy": true,
+        "status": 200,
+        "expectedStatus": 200,
+        "responseTime": 546,
+        "critical": true,
+        "timestamp": "2025-12-29T18:00:34.036Z",
+        "error": null
+      },
+      {
+        "key": "dashboard",
+        "name": "3A Dashboard",
+        "url": "https://dashboard.3a-automation.com",
+        "healthy": true,
+        "status": 200,
+        "expectedStatus": 200,
+        "responseTime": 488,
+        "critical": true,
+        "timestamp": "2025-12-29T18:00:34.040Z",
+        "error": null
+      },
+      {
+        "key": "n8n",
+        "name": "n8n Workflows",
+        "url": "https://n8n.srv1168256.hstgr.cloud",
+        "healthy": true,
+        "status": 200,
+        "expectedStatus": 200,
+        "responseTime": 493,
+        "critical": true,
+        "timestamp": "2025-12-29T18:00:34.046Z",
+        "error": null
+      },
+      {
+        "key": "wordpress",
+        "name": "WordPress Blog",
+        "url": "https://wp.3a-automation.com/wp-json/",
+        "healthy": false,
+        "status": 0,
+        "expectedStatus": [
+          200,
+          504
+        ],
+        "responseTime": 15000,
+        "critical": false,
+        "timestamp": "2025-12-29T18:00:48.877Z",
+        "error": "Timeout after 15000ms"
+      },
+      {
+        "key": "bookingApi",
+        "name": "Booking API (GAS)",
+        "url": "https://script.google.com/macros/s/AKfycbwseIKqyOvfZbjNdT2R7oH1lJGH4esQYIIrQ7D2LI4Gqz6qb_dfL8vx1lchPNJuN4Gu/exec",
+        "healthy": true,
+        "status": 404,
+        "expectedStatus": [
+          302,
+          404
+        ],
+        "responseTime": 640,
+        "critical": false,
+        "timestamp": "2025-12-29T18:00:34.197Z",
+        "error": null
+      }
+    ],
+    "summary": {
+      "total": 5,
+      "healthy": 4,
+      "unhealthy": 1,
+      "critical": 0
+    }
+  }
+}
