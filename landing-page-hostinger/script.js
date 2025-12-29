@@ -596,6 +596,174 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ───────────────────────────────────────────────────────────────────────────
+  // ADVANCED ANALYTICS - Time on Page, Scroll Depth, CTA Tracking
+  // Session 115 - Full conversion tracking implementation
+  // ───────────────────────────────────────────────────────────────────────────
+  (function initAdvancedAnalytics() {
+    // Only run if gtag is available
+    if (typeof gtag !== 'function') return;
+
+    // 1. TIME ON PAGE TRACKING
+    const startTime = Date.now();
+    let engagementTime = 0;
+    let isVisible = true;
+
+    // Track visibility changes
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        engagementTime += Date.now() - startTime;
+        isVisible = false;
+      } else {
+        isVisible = true;
+      }
+    });
+
+    // Send time on page when leaving
+    window.addEventListener('beforeunload', () => {
+      const totalTime = isVisible ? (engagementTime + (Date.now() - startTime)) : engagementTime;
+      const seconds = Math.round(totalTime / 1000);
+
+      // Only track if user spent > 5 seconds
+      if (seconds > 5) {
+        gtag('event', 'time_on_page', {
+          'event_category': 'engagement',
+          'event_label': window.location.pathname,
+          'value': seconds,
+          'time_bucket': seconds < 30 ? 'under_30s' : seconds < 60 ? '30s_to_1m' : seconds < 180 ? '1m_to_3m' : 'over_3m'
+        });
+      }
+    });
+
+    // 2. SCROLL DEPTH TRACKING
+    const scrollThresholds = [25, 50, 75, 100];
+    const scrolledThresholds = new Set();
+
+    const trackScrollDepth = () => {
+      const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+
+      scrollThresholds.forEach(threshold => {
+        if (scrollPercent >= threshold && !scrolledThresholds.has(threshold)) {
+          scrolledThresholds.add(threshold);
+          gtag('event', 'scroll_depth', {
+            'event_category': 'engagement',
+            'event_label': window.location.pathname,
+            'value': threshold,
+            'percent_scrolled': threshold
+          });
+        }
+      });
+    };
+
+    // Throttled scroll listener
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(() => {
+        trackScrollDepth();
+        scrollTimeout = null;
+      }, 200);
+    }, { passive: true });
+
+    // 3. CTA CLICK TRACKING
+    document.querySelectorAll('a.btn-cyber, a.btn-primary, a.cta-button, .cta-section a, a[href*="booking"]').forEach(cta => {
+      cta.addEventListener('click', (e) => {
+        const ctaText = cta.textContent.trim().substring(0, 50);
+        const ctaHref = cta.getAttribute('href') || '';
+
+        gtag('event', 'cta_click', {
+          'event_category': 'conversion',
+          'event_label': ctaText,
+          'cta_destination': ctaHref,
+          'page_section': cta.closest('section')?.className || 'unknown'
+        });
+      });
+    });
+
+    // 4. FORM ENGAGEMENT TRACKING
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+      let formStarted = false;
+      const formId = form.id || form.className || 'unknown_form';
+
+      // Track form start (first interaction)
+      form.querySelectorAll('input, textarea, select').forEach(field => {
+        field.addEventListener('focus', () => {
+          if (!formStarted) {
+            formStarted = true;
+            gtag('event', 'form_start', {
+              'event_category': 'form_engagement',
+              'event_label': formId,
+              'form_id': formId
+            });
+          }
+        }, { once: true });
+      });
+
+      // Track form abandonment
+      window.addEventListener('beforeunload', () => {
+        if (formStarted && !form.classList.contains('submitted')) {
+          gtag('event', 'form_abandon', {
+            'event_category': 'form_engagement',
+            'event_label': formId,
+            'form_id': formId
+          });
+        }
+      });
+
+      // Track form submission
+      form.addEventListener('submit', () => {
+        form.classList.add('submitted');
+        gtag('event', 'form_submit', {
+          'event_category': 'form_engagement',
+          'event_label': formId,
+          'form_id': formId
+        });
+      });
+    });
+
+    // 5. OUTBOUND LINK TRACKING
+    document.querySelectorAll('a[href^="http"]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href.includes(window.location.hostname)) {
+        link.addEventListener('click', () => {
+          gtag('event', 'outbound_click', {
+            'event_category': 'outbound',
+            'event_label': href,
+            'transport_type': 'beacon'
+          });
+        });
+      }
+    });
+
+    // 6. PRICING INTERACTION TRACKING
+    document.querySelectorAll('.pricing-card, .retainer-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const planName = card.querySelector('h3')?.textContent || card.querySelector('.retainer-name')?.textContent || 'unknown';
+        gtag('event', 'pricing_click', {
+          'event_category': 'pricing',
+          'event_label': planName.trim()
+        });
+      });
+    });
+
+    // 7. CURRENCY/PERIOD TOGGLE TRACKING
+    document.querySelectorAll('.currency-btn, .period-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.classList.contains('currency-btn') ? 'currency' : 'period';
+        const value = btn.dataset.currency || btn.dataset.period || btn.textContent.trim();
+        gtag('event', 'pricing_toggle', {
+          'event_category': 'pricing',
+          'event_label': `${type}_${value}`,
+          'toggle_type': type,
+          'toggle_value': value
+        });
+      });
+    });
+
+    console.log('📊 Advanced Analytics initialized');
+  })();
+
+  // ───────────────────────────────────────────────────────────────────────────
   // BUTTON MOUSE TRACKING EFFECT
   // ───────────────────────────────────────────────────────────────────────────
   const cyberButtons = document.querySelectorAll('.btn-cyber');
