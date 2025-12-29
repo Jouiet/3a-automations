@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Course: Emails That Convert - Create high-performing email sequences: welcome, cart recovery, reactivation.">
+  <title>Emails That Convert | Academy 3A Automation</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://3a-automation.com/en/academy/courses/emails.html">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
+    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
+    .container{max-width:800px;margin:0 auto;padding:0 1.5rem}
+    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
+    .header .container{display:flex;align-items:center;justify-content:space-between;max-width:1200px}
+    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
+    .logo img{width:40px;height:40px}
+    .logo-text{font-weight:700;font-size:1.25rem}
+    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
+    .nav{display:flex;gap:2rem}
+    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+    @media(max-width:768px){.nav{display:none}}
+    main{padding-top:100px;min-height:100vh;padding-bottom:4rem}
+    .breadcrumb{padding:1rem 0;font-size:0.875rem;color:var(--text-secondary)}
+    .breadcrumb a{color:var(--primary);text-decoration:none}
+    .course-hero{padding:2rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
+    .course-category{color:var(--primary);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
+    .course-hero h1{font-size:2rem;font-weight:800;margin-bottom:1rem}
+    .course-meta{display:flex;gap:2rem;margin:1rem 0;flex-wrap:wrap}
+    .course-meta-item{display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary);font-size:0.875rem}
+    .course-meta-item svg{color:var(--primary)}
+    .course-description{color:var(--text-secondary);font-size:1rem;line-height:1.7}
+    .lesson{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;margin-bottom:1.5rem;margin-top:2rem;overflow:hidden}
+    .lesson-header{padding:1.25rem;background:rgba(79,186,241,0.05);display:flex;align-items:center;gap:1rem}
+    .lesson-number{background:var(--primary);color:var(--secondary);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8125rem;flex-shrink:0}
+    .lesson-title{font-weight:600;flex:1}
+    .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
+    .lesson-content{padding:1.5rem}
+    .lesson-content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
+    .lesson-content h4:first-child{margin-top:0}
+    .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
+    .lesson-content ul{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
+    .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
+    .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
+    .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
+    .nav-btn-prev{background:rgba(79,186,241,0.1);color:var(--text-light)}
+    .nav-btn-next{background:var(--primary);color:var(--secondary)}
+    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:2rem 0}
+    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+    .footer-text{color:var(--text-secondary);font-size:0.875rem}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/en/" class="logo">
+        <img src="/assets/images/logo.svg" alt="3A Automation">
+        <div>
+          <div class="logo-text">3A Automation</div>
+          <div class="logo-sub">AUTOMATION, ANALYTICS, AI</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="/en/">Home</a>
+        <a href="/en/academy.html" style="color:var(--primary)">Academy</a>
+        <a href="/en/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/en/academy.html">Academy</a> / <a href="/en/academy.html#courses">Courses</a> / Emails
+      </div>
+
+      <section class="course-hero">
+        <p class="course-category">Email Marketing</p>
+        <h1>Emails That Convert</h1>
+        <div class="course-meta">
+          <div class="course-meta-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            1h 30min
+          </div>
+          <div class="course-meta-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            8 lessons
+          </div>
+        </div>
+        <p class="course-description">
+          Create high-performing email sequences: welcome, abandoned cart recovery, dormant customer reactivation.
+        </p>
+      </section>
+
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">1</span>
+          <span class="lesson-title">Email Marketing Fundamentals</span>
+          <span class="lesson-duration">10 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Before diving into sequences, understand the core principles of effective email marketing.</p>
+          <h4>Key Metrics</h4>
+          <ul>
+            <li><strong>Open Rate</strong> - % who open your email (target: >20%)</li>
+            <li><strong>Click Rate</strong> - % who click a link (target: >2%)</li>
+            <li><strong>Conversion Rate</strong> - % who take desired action</li>
+            <li><strong>Unsubscribe Rate</strong> - Keep under 0.5%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">2</span>
+          <span class="lesson-title">Welcome Sequence</span>
+          <span class="lesson-duration">12 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>First impressions matter. A strong welcome sequence sets expectations and drives first purchases.</p>
+          <div class="step-box">
+            <h5>Recommended Structure</h5>
+            <p>Email 1 (immediate): Welcome + brand story. Email 2 (day 1): Top products. Email 3 (day 3): Social proof. Email 4 (day 5): First-purchase offer.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">3</span>
+          <span class="lesson-title">Abandoned Cart Recovery</span>
+          <span class="lesson-duration">15 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Recover 10-15% of abandoned carts with the right sequence.</p>
+          <div class="tip-box">
+            <h5>Tip</h5>
+            <p>Don't offer a discount in the first email. Many customers will complete without incentive.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">4</span>
+          <span class="lesson-title">Post-Purchase Emails</span>
+          <span class="lesson-duration">12 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>The relationship doesn't end at purchase. Build loyalty with thoughtful follow-up.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">5</span>
+          <span class="lesson-title">Win-Back Campaigns</span>
+          <span class="lesson-duration">10 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Re-engage customers who haven't purchased in 60-90 days.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">6</span>
+          <span class="lesson-title">Subject Line Best Practices</span>
+          <span class="lesson-duration">10 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Your subject line determines if the email gets opened. Learn what works.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">7</span>
+          <span class="lesson-title">Personalization</span>
+          <span class="lesson-duration">12 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Go beyond "Hi {first_name}". Learn to personalize based on behavior and preferences.</p>
+        </div>
+      </div>
+
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">8</span>
+          <span class="lesson-title">A/B Testing</span>
+          <span class="lesson-duration">9 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Continuously improve through systematic testing.</p>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="/en/academy/courses/leads.html" class="nav-btn nav-btn-prev">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Previous Course
+        </a>
+        <a href="/en/academy/courses/analytics.html" class="nav-btn nav-btn-next">
+          Next Course
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">3A Automation Team - Automation, Analytics, AI</p>
+      <div class="footer-links">
+        <a href="/en/">Home</a>
+        <a href="/en/academy.html">Academy</a>
+        <a href="/en/contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

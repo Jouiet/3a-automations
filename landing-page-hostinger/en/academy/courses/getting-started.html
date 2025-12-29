@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Course: Getting Started with 3A Automation - Connect your accounts and launch your first automation.">
+  <title>Getting Started | Academy 3A Automation</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://3a-automation.com/en/academy/courses/getting-started.html">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
+    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
+    .container{max-width:800px;margin:0 auto;padding:0 1.5rem}
+    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
+    .header .container{display:flex;align-items:center;justify-content:space-between;max-width:1200px}
+    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
+    .logo img{width:40px;height:40px}
+    .logo-text{font-weight:700;font-size:1.25rem}
+    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
+    .nav{display:flex;gap:2rem}
+    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+    @media(max-width:768px){.nav{display:none}}
+    main{padding-top:100px;min-height:100vh;padding-bottom:4rem}
+    .breadcrumb{padding:1rem 0;font-size:0.875rem;color:var(--text-secondary)}
+    .breadcrumb a{color:var(--primary);text-decoration:none}
+    .course-hero{padding:2rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
+    .course-category{color:var(--primary);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
+    .course-hero h1{font-size:2rem;font-weight:800;margin-bottom:1rem}
+    .course-meta{display:flex;gap:2rem;margin:1rem 0;flex-wrap:wrap}
+    .course-meta-item{display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary);font-size:0.875rem}
+    .course-meta-item svg{color:var(--primary)}
+    .course-description{color:var(--text-secondary);font-size:1rem;line-height:1.7}
+    .lesson{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;margin-bottom:1.5rem;margin-top:2rem;overflow:hidden}
+    .lesson-header{padding:1.25rem;background:rgba(79,186,241,0.05);display:flex;align-items:center;gap:1rem}
+    .lesson-number{background:var(--primary);color:var(--secondary);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8125rem;flex-shrink:0}
+    .lesson-title{font-weight:600;flex:1}
+    .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
+    .lesson-content{padding:1.5rem}
+    .lesson-content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
+    .lesson-content h4:first-child{margin-top:0}
+    .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
+    .lesson-content ul{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
+    .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
+    .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
+    .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
+    .nav-btn-prev{background:rgba(79,186,241,0.1);color:var(--text-light)}
+    .nav-btn-next{background:var(--primary);color:var(--secondary)}
+    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:2rem 0}
+    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+    .footer-text{color:var(--text-secondary);font-size:0.875rem}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/en/" class="logo">
+        <img src="/assets/images/logo.svg" alt="3A Automation">
+        <div>
+          <div class="logo-text">3A Automation</div>
+          <div class="logo-sub">AUTOMATION, ANALYTICS, AI</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="/en/">Home</a>
+        <a href="/en/academy.html" style="color:var(--primary)">Academy</a>
+        <a href="/en/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/en/academy.html">Academy</a> / <a href="/en/academy.html#courses">Courses</a> / Getting Started
+      </div>
+
+      <section class="course-hero">
+        <p class="course-category">Fundamentals</p>
+        <h1>Getting Started with 3A Automation</h1>
+        <div class="course-meta">
+          <div class="course-meta-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            30 min
+          </div>
+          <div class="course-meta-item">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            4 lessons
+          </div>
+        </div>
+        <p class="course-description">
+          The fundamentals for getting started: connect your accounts, explore the dashboard, and launch your first automation.
+        </p>
+      </section>
+
+      <!-- Lesson 1 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">1</span>
+          <span class="lesson-title">Log in and Explore the Dashboard</span>
+          <span class="lesson-duration">8 min</span>
+        </div>
+        <div class="lesson-content">
+          <h4>Accessing Your Dashboard</h4>
+          <p>After subscribing to a pack, you'll receive login credentials by email. Go to dashboard.3a-automation.com to log in.</p>
+          <h4>Dashboard Overview</h4>
+          <ul>
+            <li><strong>Overview</strong> - Summary of last 7 days: emails sent, revenue, active leads</li>
+            <li><strong>Automations</strong> - List of your automation workflows</li>
+            <li><strong>Contacts</strong> - Your contact database with segments</li>
+            <li><strong>Analytics</strong> - Detailed reports</li>
+            <li><strong>Settings</strong> - Integrations and configuration</li>
+          </ul>
+          <div class="step-box">
+            <h5>Action</h5>
+            <p>Take 5 minutes to explore each section. Click on a few elements to familiarize yourself with navigation.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 2 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">2</span>
+          <span class="lesson-title">Connect Your Accounts</span>
+          <span class="lesson-duration">10 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Integrations are the heart of automation. Connect your marketing and sales tools to synchronize your data.</p>
+          <h4>Priority Integrations</h4>
+          <ul>
+            <li><strong>Klaviyo</strong> - Email marketing (see Quick Guide for API key setup)</li>
+            <li><strong>Shopify</strong> - E-commerce (app installation)</li>
+          </ul>
+          <div class="step-box">
+            <h5>In the Dashboard</h5>
+            <p>Go to Settings > Integrations. Click on the tool you want to connect and follow the instructions.</p>
+          </div>
+          <div class="tip-box">
+            <h5>Tip</h5>
+            <p>Start with one integration. Once it's working, add the others. This simplifies troubleshooting.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 3 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">3</span>
+          <span class="lesson-title">Launch Your First Automation</span>
+          <span class="lesson-duration">8 min</span>
+        </div>
+        <div class="lesson-content">
+          <p>Let's create a simple automation together: a welcome email for new newsletter subscribers.</p>
+          <div class="step-box">
+            <h5>Step 1: Create a new automation</h5>
+            <p>Automations > Create > Give it a name (e.g., "Welcome - Newsletter").</p>
+          </div>
+          <div class="step-box">
+            <h5>Step 2: Choose the trigger</h5>
+            <p>Trigger: "Added to List" > Select your newsletter list.</p>
+          </div>
+          <div class="step-box">
+            <h5>Step 3: Add an action</h5>
+            <p>Click "+ Add step" > "Email". Write a simple welcome message.</p>
+          </div>
+          <div class="step-box">
+            <h5>Step 4: Activate</h5>
+            <p>Click "Activate". The automation is now running for every new subscriber.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lesson 4 -->
+      <div class="lesson">
+        <div class="lesson-header">
+          <span class="lesson-number">4</span>
+          <span class="lesson-title">Verify and Test</span>
+          <span class="lesson-duration">4 min</span>
+        </div>
+        <div class="lesson-content">
+          <h4>Test Your Automation</h4>
+          <p>Before launching a real campaign, always test.</p>
+          <ul>
+            <li>Add yourself to your list with a test email</li>
+            <li>Verify that the email arrives in your inbox</li>
+            <li>Check that the automation appears in the activity history</li>
+          </ul>
+          <div class="tip-box">
+            <h5>Tip</h5>
+            <p>Use a separate test email address (e.g., yourname+test@gmail.com) so you don't pollute your stats.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <a href="/en/academy.html#courses" class="nav-btn nav-btn-prev">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          All Courses
+        </a>
+        <a href="/en/academy/courses/leads.html" class="nav-btn nav-btn-next">
+          Next Course
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">3A Automation Team - Automation, Analytics, AI</p>
+      <div class="footer-links">
+        <a href="/en/">Home</a>
+        <a href="/en/academy.html">Academy</a>
+        <a href="/en/contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

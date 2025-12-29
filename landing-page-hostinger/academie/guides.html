@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guides Rapides 3A Automation - 8 guides pratiques pour maîtriser vos automations en 15 minutes ou moins.">
+  <title>Guides Rapides | Académie 3A Automation</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://3a-automation.com/academie/guides.html">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
+    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
+    .container{max-width:900px;margin:0 auto;padding:0 1.5rem}
+    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
+    .header .container{display:flex;align-items:center;justify-content:space-between;max-width:1200px}
+    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
+    .logo img{width:40px;height:40px}
+    .logo-text{font-weight:700;font-size:1.25rem}
+    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
+    .nav{display:flex;gap:2rem}
+    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+    .nav a:hover{color:var(--primary)}
+    @media(max-width:768px){.nav{display:none}}
+    main{padding-top:100px;min-height:100vh;padding-bottom:4rem}
+    .breadcrumb{padding:1rem 0;font-size:0.875rem;color:var(--text-secondary)}
+    .breadcrumb a{color:var(--primary);text-decoration:none}
+    .page-hero{padding:2rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
+    .page-hero h1{font-size:2.25rem;font-weight:800;margin-bottom:0.5rem}
+    .page-hero h1 span{color:var(--primary)}
+    .page-description{color:var(--text-secondary);font-size:1.0625rem;line-height:1.7;max-width:700px}
+
+    .guide{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;margin:2rem 0;overflow:hidden}
+    .guide-header{padding:1.25rem 1.5rem;background:rgba(79,186,241,0.05);display:flex;align-items:center;gap:1rem;cursor:pointer;transition:background 0.2s}
+    .guide-header:hover{background:rgba(79,186,241,0.1)}
+    .guide-icon{width:40px;height:40px;background:rgba(79,186,241,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .guide-icon svg{width:20px;height:20px;color:var(--primary)}
+    .guide-info{flex:1}
+    .guide-title{font-weight:600;font-size:1.0625rem}
+    .guide-time{color:var(--text-secondary);font-size:0.8125rem;margin-top:0.25rem}
+    .guide-toggle{color:var(--primary);transition:transform 0.2s}
+    .guide.open .guide-toggle{transform:rotate(180deg)}
+    .guide-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
+    .guide.open .guide-content{max-height:2000px}
+    .guide-body{padding:1.5rem}
+    .guide-body h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
+    .guide-body h4:first-child{margin-top:0}
+    .guide-body p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
+    .guide-body ul,.guide-body ol{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
+    .guide-body li{margin-bottom:0.5rem;font-size:0.9375rem}
+    .step{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .step h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+    .tip{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
+    .tip h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip p{color:var(--text-secondary);font-size:0.875rem;margin:0}
+
+    .back-link{display:inline-flex;align-items:center;gap:0.5rem;color:var(--primary);text-decoration:none;font-size:0.875rem;margin-top:2rem}
+    .back-link:hover{text-decoration:underline}
+
+    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:2rem 0}
+    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+    .footer-text{color:var(--text-secondary);font-size:0.875rem}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <img src="/assets/images/logo.svg" alt="3A Automation">
+        <div>
+          <div class="logo-text">3A Automation</div>
+          <div class="logo-sub">AUTOMATION, ANALYTICS, AI</div>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="/">Accueil</a>
+        <a href="/services.html">Services</a>
+        <a href="/academie.html" style="color:var(--primary)">Académie</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/academie.html">Académie</a> / Guides Rapides
+      </div>
+
+      <section class="page-hero">
+        <h1>Guides <span>Rapides</span></h1>
+        <p class="page-description">
+          Apprenez en 15 minutes ou moins. 8 guides pratiques pour résoudre des problèmes spécifiques. Cliquez sur un guide pour l'ouvrir.
+        </p>
+      </section>
+
+      <!-- Guide 1: Connecter Klaviyo -->
+      <div class="guide" id="guide-klaviyo">
+        <div class="guide-header" onclick="toggleGuide('guide-klaviyo')">
+          <div class="guide-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">Connecter Klaviyo</h3>
+            <p class="guide-time">5 min de lecture</p>
+          </div>
+          <svg class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>Ce guide vous montre comment connecter votre compte Klaviyo à 3A Automation pour synchroniser vos contacts et automations.</p>
+
+            <h4>Prérequis</h4>
+            <ul>
+              <li>Un compte Klaviyo actif</li>
+              <li>Droits administrateur sur le compte</li>
+            </ul>
+
+            <h4>Étapes</h4>
+            <div class="step">
+              <h5>1. Obtenez votre clé API Klaviyo</h5>
+              <p>Dans Klaviyo, allez dans Account > Settings > API Keys. Cliquez sur "Create Private API Key". Nommez-la "3A Automation" et sélectionnez "Full Access".</p>
+            </div>
+
+            <div class="step">
+              <h5>2. Copiez la clé</h5>
+              <p>Copiez la clé privée (commence par "pk_"). Attention : elle ne sera affichée qu'une fois.</p>
+            </div>
+
+            <div class="step">
+              <h5>3. Ajoutez dans 3A Automation</h5>
+              <p>Dans votre tableau de bord 3A, allez dans Intégrations > Klaviyo. Collez la clé API et cliquez sur "Connecter".</p>
+            </div>
+
+            <div class="step">
+              <h5>4. Vérifiez la connexion</h5>
+              <p>Un message de confirmation apparaît. Vos listes Klaviyo sont maintenant visibles dans l'interface.</p>
+            </div>
+
+            <div class="tip">
+              <h5>Conseil sécurité</h5>
+              <p>Ne partagez jamais votre clé API. Si elle est compromise, supprimez-la dans Klaviyo et créez-en une nouvelle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide 2: Connecter Shopify -->
+      <div class="guide" id="guide-shopify">
+        <div class="guide-header" onclick="toggleGuide('guide-shopify')">
+          <div class="guide-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">Connecter Shopify</h3>
+            <p class="guide-time">5 min de lecture</p>
+          </div>
+          <svg class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>Connectez votre boutique Shopify pour synchroniser produits, commandes et clients.</p>
+
+            <h4>Étapes</h4>
+            <div class="step">
+              <h5>1. Accédez à l'installation</h5>
+              <p>Dans votre email de bienvenue 3A, cliquez sur le lien d'installation Shopify. Ou dans votre admin Shopify, cherchez "3A Automation" dans l'App Store.</p>
+            </div>
+
+            <div class="step">
+              <h5>2. Autorisez l'accès</h5>
+              <p>Shopify affiche les permissions demandées : lecture des produits, commandes, clients. Cliquez sur "Installer l'app".</p>
+            </div>
+
+            <div class="step">
+              <h5>3. Synchronisation initiale</h5>
+              <p>La première sync peut prendre quelques minutes selon la taille de votre catalogue. Un indicateur de progression s'affiche.</p>
+            </div>
+
+            <div class="step">
+              <h5>4. Vérification</h5>
+              <p>Dans 3A > Intégrations > Shopify, le statut doit indiquer "Connecté" avec la date de dernière sync.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide 3: Créer une séquence email -->
+      <div class="guide" id="guide-sequence">
+        <div class="guide-header" onclick="toggleGuide('guide-sequence')">
+          <div class="guide-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">Créer une séquence email</h3>
+            <p class="guide-time">10 min de lecture</p>
+          </div>
+          <svg class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>Créez une séquence automatique qui envoie plusieurs emails à intervalles définis.</p>
+
+            <h4>Étapes</h4>
+            <div class="step">
+              <h5>1. Créez une nouvelle automation</h5>
+              <p>Automations > Créer. Donnez un nom descriptif (ex: "Bienvenue nouveaux inscrits").</p>
+            </div>
+
+            <div class="step">
+              <h5>2. Définissez le déclencheur</h5>
+              <p>Choisissez l'événement qui lance la séquence : inscription à une liste, achat, panier abandonné, etc.</p>
+            </div>
+
+            <div class="step">
+              <h5>3. Ajoutez le premier email</h5>
+              <p>Cliquez sur "+ Ajouter étape" > "Email". Rédigez l'objet et le contenu. Le premier email est envoyé immédiatement après le déclencheur.</p>
+            </div>
+
+            <div class="step">
+              <h5>4. Ajoutez un délai</h5>
+              <p>Cliquez sur "+ Ajouter étape" > "Délai". Définissez le temps avant le prochain email (ex: 1 jour, 3 jours).</p>
+            </div>
+
+            <div class="step">
+              <h5>5. Répétez pour chaque email</h5>
+              <p>Ajoutez délai + email pour chaque message de la séquence. 3 à 5 emails sont recommandés.</p>
+            </div>
+
+            <div class="step">
+              <h5>6. Activez la séquence</h5>
+              <p>Cliquez sur "Activer". La séquence démarre pour les nouveaux déclencheurs.</p>
+            </div>
+
+            <div class="tip">
+              <h5>Conseil</h5>
+              <p>Testez d'abord avec votre propre email. Dans les paramètres, ajoutez votre adresse comme "Email de test" pour recevoir les previews.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide 4: Lire vos rapports -->
+      <div class="guide" id="guide-analytics">
+        <div class="guide-header" onclick="toggleGuide('guide-analytics')">
+          <div class="guide-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">Lire vos rapports analytics</h3>
+            <p class="guide-time">8 min de lecture</p>
+          </div>
+          <svg class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>Comprenez les métriques affichées dans votre tableau de bord et utilisez-les pour prendre des décisions.</p>
+
+            <h4>Métriques principales</h4>
+            <ul>
+              <li><strong>Taux d'ouverture</strong> : % des destinataires qui ont ouvert l'email. Objectif : > 20%</li>
+              <li><strong>Taux de clic (CTR)</strong> : % des ouvertures qui ont cliqué. Objectif : > 2%</li>
+              <li><strong>Revenu attribué</strong> : Ventes générées par vos automations</li>
+              <li><strong>Conversion</strong> : % des leads devenus clients</li>
+            </ul>
+
+            <h4>Interpréter les données</h4>
+            <ul>
+              <li>Ouverture faible → Améliorez l'objet de vos emails</li>
+              <li>Clics faibles → Améliorez le contenu et les CTA</li>
+              <li>Conversion faible → Revoyez votre offre ou votre ciblage</li>
+            </ul>
+
+            <div class="tip">
+              <h5>Conseil</h5>
+              <p>Comparez toujours à vos propres historiques plutôt qu'aux "moyennes du secteur". Chaque audience est différente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide 5: Segmenter vos contacts -->
+      <div class="guide" id="guide-segments">
+        <div class="guide-header" onclick="toggleGuide('guide-segments')">
+          <div class="guide-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">Segmenter vos contacts</h3>
+            <p class="guide-time">12 min de lecture</p>
+          </div>
+          <svg class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>Créez des segments pour envoyer des messages ciblés à différents groupes de contacts.</p>
+
+            <h4>Étapes</h4>
+            <div class="step">
+              <h5>1. Accédez aux segments</h5>
+              <p>Contacts > Segments > Créer un segment.</p>
+            </div>
+
+            <div class="step">
+              <h5>2. Définissez les conditions</h5>
+              <p>Ajoutez des règles : "A acheté dans les 30 derniers jours", "Panier moyen > 100€", "N'a pas ouvert d'email depuis 90 jours".</p>
+            </div>
+
+            <div class="step">
+              <h5>3. Combinez les conditions</h5>
+              <p>Utilisez ET pour cumuler (plus restrictif) ou OU pour élargir.</p>
+            </div>
+
+            <div class="step">
+              <h5>4. Prévisualisez</h5>
+              <p>Le nombre de contacts correspondant s'affiche. Vérifiez que c'est cohérent avant de sauvegarder.</p>
+            </div>
+
+            <h4>Segments recommandés</h4>
+            <ul>
+              <li><strong>VIP</strong> : 3+ commandes OU CA total > 500€</li>
+              <li><strong>À risque</strong> : A acheté il y a 60-90 jours ET n'a pas ouvert d'email depuis 30 jours</li>
+              <li><strong>Nouveaux</strong> : Inscrit dans les 7 derniers jours</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide 6: Récupérer les paniers abandonnés -->
+      <div class="guide" id="guide-cart">
+        <div class="guide-header" onclick="toggleGuide('guide-cart')">
+          <div class="guide-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">Récupérer les paniers abandonnés</h3>
+            <p class="guide-time">15 min de lecture</p>
+          </div>
+          <svg class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>Configurez une séquence automatique pour récupérer 10-15% des paniers abandonnés.</p>
+
+            <h4>Stratégie à 3 emails</h4>
+            <div class="step">
+              <h5>Email 1 - Après 1 heure</h5>
+              <p>Rappel simple : "Vous avez oublié quelque chose". Montrez les produits du panier avec images. Pas de réduction encore.</p>
+            </div>
+
+            <div class="step">
+              <h5>Email 2 - Après 24 heures</h5>
+              <p>Ajoutez de l'urgence : "Ces articles sont très demandés". Incluez un avis client sur un des produits du panier.</p>
+            </div>
+
+            <div class="step">
+              <h5>Email 3 - Après 72 heures</h5>
+              <p>Dernière tentative avec incitation : livraison gratuite ou -10%. Créez un sentiment de dernière chance.</p>
+            </div>
+
+            <h4>Configuration</h4>
+            <ul>
+              <li>Déclencheur : "Checkout Started" (panier créé)</li>
+              <li>Condition d'exclusion : "Placed Order" (a finalisé l'achat)</li>
+              <li>Bloc dynamique : Produits du panier avec images</li>
+            </ul>
+
+            <div class="tip">
+              <h5>Conseil</h5>
+              <p>N'offrez pas de réduction dès le premier email. Beaucoup de clients finalisent sans incitation - gardez vos marges.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide 7: Personnaliser vos templates -->
+      <div class="guide" id="guide-templates">
+        <div class="guide-header" onclick="toggleGuide('guide-templates')">
+          <div class="guide-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">Personnaliser vos templates</h3>
+            <p class="guide-time">10 min de lecture</p>
+          </div>
+          <svg class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>Adaptez les templates d'email à votre charte graphique.</p>
+
+            <h4>Éléments personnalisables</h4>
+            <ul>
+              <li><strong>Logo</strong> : Uploadez votre logo en en-tête</li>
+              <li><strong>Couleurs</strong> : Couleur principale, boutons, liens</li>
+              <li><strong>Typographie</strong> : Police de caractères</li>
+              <li><strong>Footer</strong> : Informations légales, réseaux sociaux</li>
+            </ul>
+
+            <h4>Étapes</h4>
+            <div class="step">
+              <h5>1. Accédez aux paramètres de design</h5>
+              <p>Paramètres > Branding > Templates email.</p>
+            </div>
+
+            <div class="step">
+              <h5>2. Uploadez votre logo</h5>
+              <p>Format recommandé : PNG transparent, largeur 200-400px.</p>
+            </div>
+
+            <div class="step">
+              <h5>3. Définissez vos couleurs</h5>
+              <p>Entrez les codes HEX de votre charte : couleur principale, secondaire, boutons.</p>
+            </div>
+
+            <div class="step">
+              <h5>4. Prévisualisez et sauvegardez</h5>
+              <p>Vérifiez le rendu sur desktop et mobile avant de valider.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guide 8: Configurer les notifications -->
+      <div class="guide" id="guide-notifications">
+        <div class="guide-header" onclick="toggleGuide('guide-notifications')">
+          <div class="guide-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">Configurer les notifications</h3>
+            <p class="guide-time">5 min de lecture</p>
+          </div>
+          <svg class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>Recevez des alertes sur les événements importants : nouveaux leads, ventes, erreurs.</p>
+
+            <h4>Types de notifications</h4>
+            <ul>
+              <li><strong>Nouveau lead</strong> : Quand un prospect entre dans le système</li>
+              <li><strong>Lead qualifié</strong> : Quand un lead dépasse le seuil de scoring</li>
+              <li><strong>Vente attribuée</strong> : Quand une automation génère une vente</li>
+              <li><strong>Erreur</strong> : Quand une automation échoue</li>
+              <li><strong>Stock faible</strong> : Quand un produit atteint le seuil d'alerte</li>
+            </ul>
+
+            <h4>Canaux disponibles</h4>
+            <ul>
+              <li><strong>Email</strong> : Notifications par email</li>
+              <li><strong>Slack</strong> : Messages dans un canal dédié</li>
+              <li><strong>Tableau de bord</strong> : Badge de notification dans l'interface</li>
+            </ul>
+
+            <div class="step">
+              <h5>Configuration</h5>
+              <p>Paramètres > Notifications. Activez/désactivez chaque type. Pour Slack, ajoutez votre webhook URL.</p>
+            </div>
+
+            <div class="tip">
+              <h5>Conseil</h5>
+              <p>Activez uniquement les notifications actionnables. Trop de notifications = vous les ignorerez toutes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/academie.html" class="back-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Retour à l'Académie
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p class="footer-text">L'équipe 3A Automation - Automation, Analytics, AI</p>
+      <div class="footer-links">
+        <a href="/">Accueil</a>
+        <a href="/academie.html">Académie</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleGuide(id) {
+      const guide = document.getElementById(id);
+      guide.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
