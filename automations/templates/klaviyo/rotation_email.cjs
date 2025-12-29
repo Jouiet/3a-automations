@@ -20,6 +20,9 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..
 const fs = require('fs');
 const path = require('path');
 
+// Security utilities
+const { secureShuffleArray, fetchWithTimeout } = require('../../lib/security-utils.cjs');
+
 const SHOPIFY_STORE = process.env.SHOPIFY_STORE_URL;
 const ACCESS_TOKEN = process.env.SHOPIFY_ADMIN_API_TOKEN;
 const API_VERSION = process.env.SHOPIFY_API_VERSION || '2025-10';
@@ -51,14 +54,14 @@ async function makeRequest(endpoint, options = {}) {
   const url = `${BASE_URL}${endpoint}`;
 
   try {
-    const response = await fetch(url, {
+    const response = await fetchWithTimeout(url, {
       method: options.method || 'GET',
       headers: {
         'X-Shopify-Access-Token': ACCESS_TOKEN,
         'Content-Type': 'application/json',
       },
       body: options.body ? JSON.stringify(options.body) : undefined
-    });
+    }, 30000); // 30s timeout
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -193,9 +196,9 @@ function selectTop5Products(products, previousHandles = []) {
     availablePool = sorted;
   }
 
-  // Add randomness: shuffle top 10 and pick 5 for variety
+  // Add randomness: shuffle top 10 and pick 5 for variety (using cryptographically secure shuffle)
   const top10 = availablePool.slice(0, 10);
-  const shuffled = [...top10].sort(() => Math.random() - 0.5);
+  const shuffled = secureShuffleArray([...top10]);
   const selected = shuffled.slice(0, 5);
 
   console.log('📋 Selected 5 products:\n');

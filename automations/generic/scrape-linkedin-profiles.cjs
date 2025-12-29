@@ -32,6 +32,13 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '.e
 const fs = require('fs');
 const path = require('path');
 
+// Security utilities
+const {
+  fetchWithTimeout,
+  safePoll,
+  sanitizePath,
+} = require('../lib/security-utils.cjs');
+
 // ========================================
 // CONFIGURATION
 // ========================================
@@ -75,11 +82,11 @@ async function runApifyActor(actorId, input) {
   const actorPath = actorId.replace('/', '~');
   const startUrl = `https://api.apify.com/v2/acts/${actorPath}/runs?token=${CONFIG.APIFY_TOKEN}`;
 
-  const startResponse = await fetch(startUrl, {
+  const startResponse = await fetchWithTimeout(startUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(input),
-  });
+  }, 30000);
 
   if (!startResponse.ok) {
     const error = await startResponse.text();
@@ -90,36 +97,35 @@ async function runApifyActor(actorId, input) {
   const runId = runData.data.id;
   console.log(`   Run ID: ${runId}`);
 
-  // Poll for completion
+  // Poll for completion with safePoll (bounded retries + timeout)
   console.log('   Waiting for completion...');
+  const statusUrl = `https://api.apify.com/v2/acts/${actorPath}/runs/${runId}?token=${CONFIG.APIFY_TOKEN}`;
 
-  const startTime = Date.now();
-  let status = 'RUNNING';
-
-  while (status === 'RUNNING' || status === 'READY') {
-    if (Date.now() - startTime > CONFIG.MAX_WAIT_TIME) {
-      throw new Error('Actor run timed out');
+  const finalStatus = await safePoll(
+    async () => {
+      const statusResponse = await fetchWithTimeout(statusUrl, {}, 15000);
+      const statusData = await statusResponse.json();
+      const status = statusData.data.status;
+      console.log(`   Status: ${status}`);
+      const done = status !== 'RUNNING' && status !== 'READY';
+      return { done, result: status, status };
+    },
+    {
+      maxRetries: 120,                     // Max 120 poll attempts (10 min / 5 sec)
+      maxTimeMs: CONFIG.MAX_WAIT_TIME,     // 10 min max
+      intervalMs: CONFIG.POLL_INTERVAL,    // 5 sec interval
     }
+  );
 
-    await new Promise(r => setTimeout(r, CONFIG.POLL_INTERVAL));
-
-    const statusUrl = `https://api.apify.com/v2/acts/${actorPath}/runs/${runId}?token=${CONFIG.APIFY_TOKEN}`;
-    const statusResponse = await fetch(statusUrl);
-    const statusData = await statusResponse.json();
-
-    status = statusData.data.status;
-    console.log(`   Status: ${status}`);
-  }
-
-  if (status !== 'SUCCEEDED') {
-    throw new Error(`Actor run failed with status: ${status}`);
+  if (finalStatus !== 'SUCCEEDED') {
+    throw new Error(`Actor run failed with status: ${finalStatus}`);
   }
 
   // Get results
   const datasetId = runData.data.defaultDatasetId;
   const dataUrl = `https://api.apify.com/v2/datasets/${datasetId}/items?token=${CONFIG.APIFY_TOKEN}`;
 
-  const dataResponse = await fetch(dataUrl);
+  const dataResponse = await fetchWithTimeout(dataUrl, {}, 30000);
   const results = await dataResponse.json();
 
   console.log(`✅ Got ${results.length} results`);
@@ -422,14 +428,16 @@ OUTPUT:
 
   try {
     if (urlsArg) {
-      // Scrape by URL list
+      // Scrape by URL list - sanitize path to prevent traversal
       const urlsFile = urlsArg.split('=')[1];
-      if (!fs.existsSync(urlsFile)) {
-        console.error(`❌ File not found: ${urlsFile}`);
+      const safePath = sanitizePath(urlsFile, process.cwd());
+
+      if (!fs.existsSync(safePath)) {
+        console.error(`❌ File not found: ${safePath}`);
         process.exit(1);
       }
 
-      const urls = fs.readFileSync(urlsFile, 'utf-8')
+      const urls = fs.readFileSync(safePath, 'utf-8')
         .split('\n')
         .map(u => u.trim())
         .filter(u => u);

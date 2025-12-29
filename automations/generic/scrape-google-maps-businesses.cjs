@@ -37,6 +37,12 @@ require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '.e
 const fs = require('fs');
 const path = require('path');
 
+// Security utilities
+const {
+  fetchWithTimeout,
+  safePoll,
+} = require('../lib/security-utils.cjs');
+
 // ========================================
 // CONFIGURATION
 // ========================================
@@ -83,11 +89,11 @@ async function runApifyActor(actorId, input) {
   // Start actor run
   const startUrl = `https://api.apify.com/v2/acts/${actorId}/runs?token=${CONFIG.APIFY_TOKEN}`;
 
-  const startResponse = await fetch(startUrl, {
+  const startResponse = await fetchWithTimeout(startUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(input),
-  });
+  }, 30000);
 
   if (!startResponse.ok) {
     const error = await startResponse.text();
@@ -98,43 +104,39 @@ async function runApifyActor(actorId, input) {
   const runId = runData.data.id;
   console.log(`   Run ID: ${runId}`);
 
-  // Poll for completion
+  // Poll for completion with safePoll (bounded retries + timeout)
   console.log('   Waiting for completion (this may take several minutes)...');
+  const statusUrl = `https://api.apify.com/v2/acts/${actorId}/runs/${runId}?token=${CONFIG.APIFY_TOKEN}`;
 
-  const startTime = Date.now();
-  let status = 'RUNNING';
-  let lastLog = Date.now();
-
-  while (status === 'RUNNING' || status === 'READY') {
-    if (Date.now() - startTime > CONFIG.MAX_WAIT_TIME) {
-      throw new Error('Actor run timed out after 15 minutes');
+  const finalStatus = await safePoll(
+    async () => {
+      const statusResponse = await fetchWithTimeout(statusUrl, {}, 15000);
+      const statusData = await statusResponse.json();
+      const status = statusData.data.status;
+      const done = status !== 'RUNNING' && status !== 'READY';
+      return { done, result: status, status };
+    },
+    {
+      maxRetries: 180,                     // Max 180 poll attempts (15 min / 5 sec)
+      maxTimeMs: CONFIG.MAX_WAIT_TIME,     // 15 min max
+      intervalMs: CONFIG.POLL_INTERVAL,    // 5 sec interval
+      onProgress: (attempt, status, elapsed) => {
+        if (attempt % 6 === 0) {
+          console.log(`   Status: ${status} (${Math.round(elapsed / 1000)}s elapsed)`);
+        }
+      }
     }
+  );
 
-    await new Promise(r => setTimeout(r, CONFIG.POLL_INTERVAL));
-
-    const statusUrl = `https://api.apify.com/v2/acts/${actorId}/runs/${runId}?token=${CONFIG.APIFY_TOKEN}`;
-    const statusResponse = await fetch(statusUrl);
-    const statusData = await statusResponse.json();
-
-    status = statusData.data.status;
-
-    // Log progress every 30 seconds
-    if (Date.now() - lastLog > 30000) {
-      const elapsed = Math.round((Date.now() - startTime) / 1000);
-      console.log(`   Status: ${status} (${elapsed}s elapsed)`);
-      lastLog = Date.now();
-    }
-  }
-
-  if (status !== 'SUCCEEDED') {
-    throw new Error(`Actor run failed with status: ${status}`);
+  if (finalStatus !== 'SUCCEEDED') {
+    throw new Error(`Actor run failed with status: ${finalStatus}`);
   }
 
   // Get results
   const datasetId = runData.data.defaultDatasetId;
   const dataUrl = `https://api.apify.com/v2/datasets/${datasetId}/items?token=${CONFIG.APIFY_TOKEN}`;
 
-  const dataResponse = await fetch(dataUrl);
+  const dataResponse = await fetchWithTimeout(dataUrl, {}, 30000);
   const results = await dataResponse.json();
 
   console.log(`✅ Got ${results.length} results`);

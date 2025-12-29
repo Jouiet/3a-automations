@@ -36,6 +36,13 @@ const fs = require('fs');
 const envPath = process.env.CLIENT_ENV_PATH || path.join(__dirname, '..', '..', '.env');
 require('dotenv').config({ path: envPath });
 
+// Security utilities
+const {
+  fetchWithTimeout,
+  retryWithExponentialBackoff,
+  sanitizeInput,
+} = require('./lib/security-utils.cjs');
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -70,26 +77,15 @@ const CONFIG = {
 // ============================================================================
 
 /**
- * Retry with exponential backoff
+ * Retry with exponential backoff and jitter (wrapper for security-utils)
  */
 async function withRetry(fn, options = {}) {
   const { maxRetries = 3, baseDelay = 1000, maxDelay = 10000 } = options;
-  let lastError;
-
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      return await fn();
-    } catch (error) {
-      lastError = error;
-      if (attempt === maxRetries) break;
-
-      const delay = Math.min(baseDelay * Math.pow(2, attempt - 1), maxDelay);
-      console.warn(`⚠️ Attempt ${attempt} failed, retrying in ${delay}ms...`);
-      await new Promise(resolve => setTimeout(resolve, delay));
-    }
-  }
-
-  throw lastError;
+  return retryWithExponentialBackoff(fn, {
+    maxRetries,
+    baseDelayMs: baseDelay,
+    maxDelayMs: maxDelay,
+  });
 }
 
 /**
@@ -182,7 +178,7 @@ FORMAT DE SORTIE (JSON):
 async function generateWithGrok(prompt) {
   console.log('🤖 Generating content with Grok (xAI)...');
 
-  const response = await fetch('https://api.x.ai/v1/chat/completions', {
+  const response = await fetchWithTimeout('https://api.x.ai/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -194,7 +190,7 @@ async function generateWithGrok(prompt) {
       max_tokens: 2048,
       temperature: 0.7,
     }),
-  });
+  }, 60000); // 60s timeout for AI generation
 
   if (!response.ok) {
     throw new Error(`Grok API ${response.status}: ${await response.text()}`);
@@ -222,7 +218,7 @@ async function generateWithGrok(prompt) {
 async function generateWithGemini(prompt) {
   console.log('🤖 Generating content with Gemini...');
 
-  const response = await fetch(
+  const response = await fetchWithTimeout(
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${CONFIG.GEMINI_API_KEY}`,
     {
       method: 'POST',
@@ -234,7 +230,8 @@ async function generateWithGemini(prompt) {
           maxOutputTokens: 2048,
         },
       }),
-    }
+    },
+    60000 // 60s timeout for AI generation
   );
 
   if (!response.ok) {
@@ -263,7 +260,7 @@ async function generateWithGemini(prompt) {
 async function generateWithClaude(prompt) {
   console.log('🤖 Generating content with Claude...');
 
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const response = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -275,7 +272,7 @@ async function generateWithClaude(prompt) {
       max_tokens: 2048,
       messages: [{ role: 'user', content: prompt }],
     }),
-  });
+  }, 60000); // 60s timeout for AI generation
 
   if (!response.ok) {
     throw new Error(`Claude API ${response.status}: ${await response.text()}`);
@@ -437,7 +434,7 @@ async function klaviyoRequest(endpoint, method = 'GET', body = null) {
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(url, options);
+  const response = await fetchWithTimeout(url, options, 30000); // 30s timeout
 
   if (!response.ok) {
     const errorText = await response.text();
@@ -590,7 +587,7 @@ async function sendCampaign(campaignId) {
 
 async function logToDashboard(action, data) {
   try {
-    await fetch(CONFIG.DASHBOARD_API_URL, {
+    await fetchWithTimeout(CONFIG.DASHBOARD_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -602,7 +599,7 @@ async function logToDashboard(action, data) {
         },
       }),
       redirect: 'follow',
-    });
+    }, 15000); // 15s timeout
     return true;
   } catch (error) {
     console.warn(`⚠️ Dashboard log failed: ${error.message}`);
@@ -833,9 +830,9 @@ REPLACED: n8n workflow "Newsletter 3A Automation" (deleted Session 114)
       console.log('   ⚠️ XAI_API_KEY not set (recommended for cost)');
     } else {
       try {
-        const resp = await fetch('https://api.x.ai/v1/models', {
+        const resp = await fetchWithTimeout('https://api.x.ai/v1/models', {
           headers: { 'Authorization': `Bearer ${CONFIG.XAI_API_KEY}` }
-        });
+        }, 15000);
         if (resp.ok) {
           const data = await resp.json();
           console.log(`   ✅ xAI/Grok: ${data.data?.length || 0} models`);
@@ -853,8 +850,10 @@ REPLACED: n8n workflow "Newsletter 3A Automation" (deleted Session 114)
       console.log('   ⚠️ GEMINI_API_KEY not set');
     } else {
       try {
-        const resp = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models?key=${CONFIG.GEMINI_API_KEY}`
+        const resp = await fetchWithTimeout(
+          `https://generativelanguage.googleapis.com/v1beta/models?key=${CONFIG.GEMINI_API_KEY}`,
+          {},
+          15000
         );
         if (resp.ok) {
           console.log('   ✅ Gemini: OK');

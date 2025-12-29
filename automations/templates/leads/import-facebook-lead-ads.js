@@ -19,6 +19,9 @@ const fs = require('fs');
 const path = require('path');
 const XLSX = require('xlsx');
 
+// Security utilities for retry logic
+const { retryWithExponentialBackoff } = require('../../lib/security-utils.cjs');
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -243,7 +246,8 @@ async function exportToGoogleSheets(structuredLeads, tabName = 'RAW LEADS') {
     console.log(`   Sheet ID: ${GOOGLE_SHEET_ID}`);
     console.log(`   Tab: ${tabName}`);
 
-    try {
+    // Wrap in retry with exponential backoff for race condition recovery
+    return await retryWithExponentialBackoff(async () => {
         const sheets = await getGoogleSheetsClient();
 
         // Prepare data for Google Sheets (2D array)
@@ -308,11 +312,11 @@ async function exportToGoogleSheets(structuredLeads, tabName = 'RAW LEADS') {
         console.log(`   Range: ${response.data.updates.updatedRange}`);
 
         return response.data;
-
-    } catch (error) {
-        console.error(`❌ Error exporting to Google Sheets:`, error.message);
-        throw error;
-    }
+    }, {
+        maxRetries: 3,
+        baseDelayMs: 1000,
+        maxDelayMs: 10000,
+    });
 }
 
 // ============================================================================
