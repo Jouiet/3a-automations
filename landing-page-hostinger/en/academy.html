@@ -3,268 +3,545 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="3A Automation Academy - Complete training to master your automations. Step-by-step guides, tutorials, technical documentation.">
-  <title>Academy - Automation Training | 3A Automation</title>
+  <meta name="description" content="3A Automation Technical Academy - Technical documentation and integration guides for subscribed clients. 81 automations, 6 B2B segments, Klaviyo/n8n APIs.">
+  <title>Technical Academy | 3A Automation</title>
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="canonical" href="https://3a-automation.com/en/academy.html">
   <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy.html">
   <link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie.html">
-  <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/academie.html">
 
-  <meta property="og:title" content="Academy - Training | 3A Automation">
-  <meta property="og:description" content="Complete training to master your automations.">
-  <meta property="og:image" content="https://3a-automation.com/og-image.webp">
+  <meta property="og:title" content="Technical Academy | 3A Automation">
+  <meta property="og:description" content="Technical documentation for subscribed clients.">
   <meta property="og:url" content="https://3a-automation.com/en/academy.html">
   <meta property="og:type" content="website">
 
   <meta name="robots" content="noindex, nofollow">
 
-  <style>*,::after,::before{box-sizing:border-box;margin:0;padding:0}:root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}html{scroll-behavior:smooth}body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased;overflow-x:hidden}.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}.header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.95);backdrop-filter:blur(8px)}@media (max-width:768px){.nav{display:none}}.module-card{background:rgba(79,186,241,0.05);border:1px solid rgba(79,186,241,0.2);border-radius:12px;padding:2rem;margin-bottom:2rem}.module-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}.module-number{background:var(--primary);color:var(--secondary);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.25rem}.module-title{font-size:1.5rem;font-weight:700}.module-duration{color:var(--text-secondary);font-size:0.875rem}.lesson-list{list-style:none;padding:0}.lesson-item{display:flex;align-items:flex-start;gap:1rem;padding:1rem;background:rgba(255,255,255,0.02);border-radius:8px;margin-bottom:0.75rem;border-left:3px solid var(--primary)}.lesson-icon{color:var(--primary);flex-shrink:0;margin-top:2px}.lesson-content h4{margin-bottom:0.25rem;font-weight:600}.lesson-content p{color:var(--text-secondary);font-size:0.875rem;margin:0}.step-box{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.3);border-radius:8px;padding:1.5rem;margin:1rem 0}.step-box h4{color:var(--primary);margin-bottom:1rem;font-size:1rem}.step-box ol,.step-box ul{margin-left:1.25rem;color:var(--text-secondary)}.step-box li{margin-bottom:0.5rem}.step-box code{background:rgba(79,186,241,0.1);padding:0.125rem 0.375rem;border-radius:4px;font-size:0.875rem}.code-block{background:#0d1117;border-radius:8px;padding:1rem;overflow-x:auto;margin:1rem 0;font-family:monospace;font-size:0.875rem;color:#e6edf3;border:1px solid #30363d}.accordion{border:1px solid rgba(79,186,241,0.2);border-radius:8px;margin-bottom:0.5rem}.accordion-header{background:rgba(79,186,241,0.05);padding:1rem 1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600}.accordion-header:hover{background:rgba(79,186,241,0.1)}.accordion-content{padding:1.5rem;display:none;border-top:1px solid rgba(79,186,241,0.1)}.accordion.open .accordion-content{display:block}.accordion-icon{transition:transform 0.3s}.accordion.open .accordion-icon{transform:rotate(180deg)}</style>
+  <style>
+    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
+    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--warning:#F59E0B;--error:#EF4444;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--font-mono:'Fira Code','Monaco','Consolas',monospace}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
+    .container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+
+    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
+    .header .container{display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
+    .logo img{width:40px;height:40px}
+    .logo-text{font-weight:700;font-size:1.25rem}
+    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
+    .nav{display:flex;gap:2rem}
+    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem;transition:color 0.2s}
+    .nav a:hover{color:var(--primary)}
+    @media(max-width:768px){.nav{display:none}}
+
+    main{padding-top:100px;min-height:100vh}
+
+    .hero-academy{padding:4rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
+    .hero-academy h1{font-size:2.5rem;font-weight:800;margin-bottom:1rem}
+    .hero-academy h1 span{color:var(--primary)}
+    .hero-subtitle{color:var(--text-secondary);font-size:1.125rem;margin-bottom:2rem;max-width:700px}
+    .hero-stats{display:flex;gap:3rem;flex-wrap:wrap}
+    .stat-item{text-align:left}
+    .stat-value{font-size:2rem;font-weight:700;color:var(--primary)}
+    .stat-label{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.05em}
+
+    .access-banner{background:rgba(79,186,241,0.08);border:1px solid rgba(79,186,241,0.2);border-radius:8px;padding:1.25rem 1.5rem;margin:2rem 0;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+    .access-banner svg{color:var(--primary);flex-shrink:0}
+    .access-banner p{margin:0;flex:1}
+    .access-banner strong{color:var(--text-light)}
+    .access-banner a{color:var(--primary)}
+
+    .section{padding:4rem 0}
+    .section-title{font-size:1.5rem;font-weight:700;margin-bottom:0.5rem}
+    .section-subtitle{color:var(--text-secondary);margin-bottom:2rem}
+
+    .nav-tabs{display:flex;gap:0.5rem;border-bottom:1px solid rgba(79,186,241,0.2);margin-bottom:2rem;overflow-x:auto;padding-bottom:0.5rem}
+    .nav-tab{padding:0.75rem 1.5rem;background:transparent;border:none;color:var(--text-secondary);cursor:pointer;font-size:0.875rem;font-weight:500;border-radius:6px 6px 0 0;white-space:nowrap;transition:all 0.2s}
+    .nav-tab:hover{color:var(--text-light);background:rgba(79,186,241,0.05)}
+    .nav-tab.active{color:var(--primary);background:rgba(79,186,241,0.1);border-bottom:2px solid var(--primary)}
+
+    .tab-content{display:none}
+    .tab-content.active{display:block}
+
+    .code-block{background:#0d1117;border-radius:8px;overflow:hidden;margin:1rem 0;border:1px solid #30363d}
+    .code-header{background:#161b22;padding:0.5rem 1rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #30363d}
+    .code-lang{color:#8b949e;font-size:0.75rem;font-family:var(--font-mono)}
+    .code-copy{background:transparent;border:1px solid #30363d;color:#8b949e;padding:0.25rem 0.5rem;border-radius:4px;cursor:pointer;font-size:0.75rem}
+    .code-copy:hover{background:#21262d;color:#c9d1d9}
+    .code-content{padding:1rem;overflow-x:auto;font-family:var(--font-mono);font-size:0.8125rem;line-height:1.5;color:#e6edf3}
+    .code-content .comment{color:#8b949e}
+    .code-content .string{color:#a5d6ff}
+    .code-content .keyword{color:#ff7b72}
+    .code-content .function{color:#d2a8ff}
+
+    .accordion{border:1px solid rgba(79,186,241,0.15);border-radius:8px;margin-bottom:0.75rem;overflow:hidden}
+    .accordion-header{background:rgba(25,30,53,0.6);padding:1rem 1.25rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:500;transition:background 0.2s}
+    .accordion-header:hover{background:rgba(79,186,241,0.05)}
+    .accordion-icon{transition:transform 0.3s;color:var(--text-secondary)}
+    .accordion.open .accordion-icon{transform:rotate(180deg)}
+    .accordion-content{padding:0 1.25rem;max-height:0;overflow:hidden;transition:max-height 0.3s,padding 0.3s}
+    .accordion.open .accordion-content{max-height:2000px;padding:1.25rem}
+
+    .spec-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:0.875rem}
+    .spec-table th,.spec-table td{padding:0.75rem 1rem;text-align:left;border-bottom:1px solid rgba(79,186,241,0.1)}
+    .spec-table th{color:var(--text-secondary);font-weight:500;background:rgba(79,186,241,0.03)}
+    .spec-table td{color:var(--text-light)}
+    .spec-table code{background:rgba(79,186,241,0.1);padding:0.125rem 0.375rem;border-radius:3px;font-size:0.8125rem;font-family:var(--font-mono)}
+
+    .status{display:inline-flex;align-items:center;gap:0.375rem;padding:0.25rem 0.625rem;border-radius:20px;font-size:0.75rem;font-weight:500}
+    .status-ok{background:rgba(16,185,129,0.1);color:var(--success)}
+    .status-warning{background:rgba(245,158,11,0.1);color:var(--warning)}
+    .status-error{background:rgba(239,68,68,0.1);color:var(--error)}
+    .status-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+    .architecture-diagram{background:#0d1117;border:1px solid #30363d;border-radius:8px;padding:1.5rem;overflow-x:auto;font-family:var(--font-mono);font-size:0.8125rem;line-height:1.6;color:#8b949e;margin:1.5rem 0}
+    .architecture-diagram .highlight{color:var(--primary)}
+    .architecture-diagram .arrow{color:#58a6ff}
+
+    .alert{padding:1rem 1.25rem;border-radius:8px;margin:1rem 0;display:flex;gap:0.75rem;font-size:0.875rem}
+    .alert-info{background:rgba(79,186,241,0.08);border:1px solid rgba(79,186,241,0.2)}
+    .alert-warning{background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2)}
+    .alert svg{flex-shrink:0;margin-top:2px}
+
+    .academy-footer{background:rgba(25,30,53,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:3rem 0;margin-top:4rem}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem}
+    .footer-section h4{font-size:0.875rem;font-weight:600;margin-bottom:1rem;color:var(--text-light)}
+    .footer-section a{display:block;color:var(--text-secondary);text-decoration:none;font-size:0.875rem;margin-bottom:0.5rem}
+    .footer-section a:hover{color:var(--primary)}
+    .footer-bottom{text-align:center;color:var(--text-secondary);font-size:0.75rem;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1)}
+  </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
-  <link rel="preload" href="../styles.min.css?v=26.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="../styles.min.css?v=26.0"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
-
-  <div class="cyber-bg">
-    <div class="cyber-grid"></div>
-    <div class="cyber-glow cyber-glow-1"></div>
-    <div class="cyber-glow cyber-glow-2"></div>
-  </div>
-
   <header class="header">
     <div class="container">
       <a href="/en/" class="logo">
-        <div class="logo-icon"><img loading="eager" src="/logo.webp" alt="3A Automation Logo" width="40" height="40" /></div>
-        <div class="logo-text-wrap"><span class="logo-text">3A</span><span class="logo-sub">AUTOMATION</span></div>
+        <img src="/logo.webp" alt="3A Automation" width="40" height="40">
+        <div>
+          <div class="logo-text">3A</div>
+          <div class="logo-sub">AUTOMATION</div>
+        </div>
       </a>
-      <nav class="nav" id="nav-menu">
+      <nav class="nav">
+        <a href="/en/">Home</a>
         <a href="/en/services/ecommerce.html">E-commerce</a>
-        <a href="/en/services/smb.html">SMB</a>
+        <a href="/en/services/pme.html">SMB</a>
         <a href="/en/automations.html">Automations</a>
-        <a href="/en/pricing.html">Pricing</a>
-        <a href="/academie.html" class="lang-switcher">FR</a>
-        <a href="https://dashboard.3a-automation.com" class="btn-nav btn-dashboard" target="_blank" rel="noopener">Dashboard</a>
       </nav>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span class="hamburger"></span></button>
     </div>
   </header>
 
-  <main role="main">
-    <section class="service-hero" id="main-content">
+  <main>
+    <section class="hero-academy">
       <div class="container">
-        <div class="breadcrumb"><a href="/en/">Home</a> / <span>Academy</span></div>
-        <span class="badge">Client Training</span>
-        <h1 class="hero-title">3A Automation Academy</h1>
-        <p class="hero-sub">Complete training to master your automations. Each module includes step-by-step tutorials.</p>
-        <p style="margin-top:1rem;padding:1rem;background:rgba(79,186,241,0.1);border-radius:8px;border-left:4px solid var(--primary);">
-          <strong>Reserved access</strong> for subscribed clients: Quick Win (€390) · Essentials (€790) · Growth (€1,399) · Retainers
-        </p>
+        <h1>Technical <span>Academy</span></h1>
+        <p class="hero-subtitle">Technical documentation and integration guides for subscribed clients. Complete reference for 81 automations, APIs, and workflows.</p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-value">81</div>
+            <div class="stat-label">Automations</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">50</div>
+            <div class="stat-label">.cjs Scripts</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">6</div>
+            <div class="stat-label">B2B Segments</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">9</div>
+            <div class="stat-label">n8n Workflows</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- MODULE 1: DASHBOARD -->
-    <section class="services-detail" style="padding-top:3rem;">
-      <div class="container">
+    <div class="container">
+      <div class="access-banner">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        <p><strong>Client Access Only</strong> — This technical documentation is reserved for clients with an active subscription (Quick Win €390, Essentials €790, Growth €1,399, or Retainer). <a href="/en/booking.html">Book a call</a></p>
+      </div>
+    </div>
 
-        <div class="module-card">
-          <div class="module-header">
-            <div class="module-number">1</div>
+    <section class="section">
+      <div class="container">
+        <div class="nav-tabs" role="tablist">
+          <button class="nav-tab active" data-tab="architecture" role="tab">Architecture</button>
+          <button class="nav-tab" data-tab="pipelines" role="tab">B2B Pipelines</button>
+          <button class="nav-tab" data-tab="api" role="tab">API Reference</button>
+          <button class="nav-tab" data-tab="cli" role="tab">CLI Commands</button>
+          <button class="nav-tab" data-tab="troubleshooting" role="tab">Troubleshooting</button>
+        </div>
+
+        <!-- Tab: Architecture -->
+        <div id="architecture" class="tab-content active">
+          <h2 class="section-title">System Architecture</h2>
+          <p class="section-subtitle">Technical overview of 3A Automation infrastructure</p>
+
+          <div class="accordion open">
+            <div class="accordion-header">
+              <span>Global Architecture Diagram</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="accordion-content">
+              <div class="architecture-diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           <span class="highlight">3A AUTOMATION - ARCHITECTURE</span>                          │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│  ┌──────────────┐     ┌──────────────┐     ┌──────────────┐                    │
+│  │   SOURCES    │     │  PROCESSING  │     │   OUTPUTS    │                    │
+│  └──────────────┘     └──────────────┘     └──────────────┘                    │
+│                                                                                 │
+│  ┌────────────┐       ┌────────────────┐   ┌────────────────┐                  │
+│  │  LinkedIn  │──────▶│  Apify Actor   │──▶│    Klaviyo     │                  │
+│  │  Profiles  │       │ (Email Extract)│   │   (6 Lists)    │                  │
+│  └────────────┘       └────────────────┘   └────────────────┘                  │
+│        │                      │                    │                           │
+│        ▼                      ▼                    ▼                           │
+│  ┌────────────┐       ┌────────────────┐   ┌────────────────┐                  │
+│  │Google Maps │──────▶│ Segmentation   │──▶│  Events Track  │                  │
+│  │ Businesses │       │  (6 segments)  │   │ (Flow Trigger) │                  │
+│  └────────────┘       └────────────────┘   └────────────────┘                  │
+│        │                      │                    │                           │
+│        ▼                      ▼                    ▼                           │
+│  ┌────────────┐       ┌────────────────┐   ┌────────────────┐                  │
+│  │  Typeform  │──────▶│ AI Scoring     │──▶│   Dashboard    │                  │
+│  │   Forms    │       │  (100 points)  │   │  (Next.js 14)  │                  │
+│  └────────────┘       └────────────────┘   └────────────────┘                  │
+│                                                                                 │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│  <span class="highlight">VPS INFRASTRUCTURE (Hostinger #1168256)</span>                                        │
+│  ┌─────────────────────────────────────────────────────────────────────────┐   │
+│  │  Traefik (Reverse Proxy + SSL) <span class="arrow">→</span> nginx (Site) / n8n (Workflows)         │   │
+│  │  IP: 148.230.113.163 | Ubuntu + Docker | 3 containers                  │   │
+│  └─────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+</pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">
+              <span>Technical Specifications</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="accordion-content">
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Component</th>
+                    <th>Technology</th>
+                    <th>Version</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Runtime</td>
+                    <td><code>Node.js</code></td>
+                    <td>20.x LTS</td>
+                    <td><span class="status status-ok"><span class="status-dot"></span>Production</span></td>
+                  </tr>
+                  <tr>
+                    <td>Scripts</td>
+                    <td><code>CommonJS (.cjs)</code></td>
+                    <td>ES2022</td>
+                    <td><span class="status status-ok"><span class="status-dot"></span>50 scripts</span></td>
+                  </tr>
+                  <tr>
+                    <td>Orchestration</td>
+                    <td><code>n8n</code></td>
+                    <td>Community</td>
+                    <td><span class="status status-warning"><span class="status-dot"></span>6/9 OK</span></td>
+                  </tr>
+                  <tr>
+                    <td>Email CRM</td>
+                    <td><code>Klaviyo API</code></td>
+                    <td>2024-02-15</td>
+                    <td><span class="status status-ok"><span class="status-dot"></span>Operational</span></td>
+                  </tr>
+                  <tr>
+                    <td>Scraping</td>
+                    <td><code>Apify</code></td>
+                    <td>SDK 3.x</td>
+                    <td><span class="status status-ok"><span class="status-dot"></span>15 actors</span></td>
+                  </tr>
+                  <tr>
+                    <td>Voice AI</td>
+                    <td><code>Web Speech API</code></td>
+                    <td>Standard</td>
+                    <td><span class="status status-ok"><span class="status-dot"></span>28 pages</span></td>
+                  </tr>
+                  <tr>
+                    <td>Dashboard</td>
+                    <td><code>Next.js</code></td>
+                    <td>14.x</td>
+                    <td><span class="status status-ok"><span class="status-dot"></span>Standalone</span></td>
+                  </tr>
+                  <tr>
+                    <td>Booking</td>
+                    <td><code>Google Apps Script</code></td>
+                    <td>V8</td>
+                    <td><span class="status status-ok"><span class="status-dot"></span>180 slots</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">
+              <span>Automations Registry (81 total)</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="accordion-content">
+              <p style="color:var(--text-secondary);margin-bottom:1rem;">Source of truth: <code>automations/automations-registry.json</code> (v2.0.0)</p>
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Count</th>
+                    <th>Primary Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Lead Generation</td><td><strong>23</strong></td><td>Scripts + Apify + n8n</td></tr>
+                  <tr><td>Shopify Admin</td><td><strong>13</strong></td><td>Scripts + Flows + Metafields</td></tr>
+                  <tr><td>Email Marketing</td><td><strong>9</strong></td><td>Klaviyo Flows + Scripts</td></tr>
+                  <tr><td>SEO & Content</td><td><strong>9</strong></td><td>Scripts + Manual</td></tr>
+                  <tr><td>Analytics</td><td><strong>9</strong></td><td>Scripts + Looker + Sheets</td></tr>
+                  <tr><td>Content & Video</td><td><strong>8</strong></td><td>Scripts + n8n + AI</td></tr>
+                  <tr><td>CinematicAds (Partner)</td><td><strong>4</strong></td><td>External SaaS</td></tr>
+                  <tr><td>AI Avatar (Partner)</td><td><strong>2</strong></td><td>External SaaS</td></tr>
+                  <tr><td>WhatsApp Business</td><td><strong>2</strong></td><td>n8n (Meta approval required)</td></tr>
+                  <tr><td>Voice AI</td><td><strong>2</strong></td><td>Widget + Telephony</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Pipelines B2B -->
+        <div id="pipelines" class="tab-content">
+          <h2 class="section-title">B2B Lead Generation Pipelines</h2>
+          <p class="section-subtitle">5 aligned scripts with intelligent segmentation and validated branding (119/119 tests)</p>
+
+          <div class="alert alert-info">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <div>
-              <div class="module-title">Mastering the Dashboard</div>
-              <div class="module-duration">4 lessons · 45 minutes</div>
+              <strong>Automatic B2B Segmentation</strong><br>
+              Persona detection via keywords in LinkedIn title: decision_maker, marketing, sales, tech, hr, other
             </div>
           </div>
 
           <div class="accordion open">
             <div class="accordion-header">
-              <span>1.1 Logging in and navigating</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              <span>linkedin-to-klaviyo-pipeline.cjs (Reference Model)</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
             </div>
             <div class="accordion-content">
-              <div class="step-box">
-                <h4>Login steps</h4>
-                <ol>
-                  <li>Open <a href="https://dashboard.3a-automation.com" style="color:var(--primary)">dashboard.3a-automation.com</a></li>
-                  <li>Enter your credentials (email + password provided)</li>
-                  <li>Click <strong>Sign in</strong></li>
-                </ol>
+              <p style="margin-bottom:1rem;">Complete LinkedIn → Klaviyo pipeline with segmentation and personalized emails. <strong>920 lines, production tested.</strong></p>
+
+              <div class="code-block">
+                <div class="code-header">
+                  <span class="code-lang">bash</span>
+                  <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+<span class="comment"># Dry run with test data</span>
+node automations/agency/linkedin-to-klaviyo-pipeline.cjs --test
+
+<span class="comment"># Live LinkedIn scraping</span>
+node automations/agency/linkedin-to-klaviyo-pipeline.cjs --search=<span class="string">"marketing director morocco"</span> --max=50
+
+<span class="comment"># Import from JSON file</span>
+node automations/agency/linkedin-to-klaviyo-pipeline.cjs --input=profiles.json --live
+                </div>
               </div>
-              <p style="margin-top:1rem;">The dashboard displays:</p>
-              <ul class="lesson-list">
-                <li class="lesson-item">
-                  <svg class="lesson-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                  <div class="lesson-content">
-                    <h4>Real-time metrics</h4>
-                    <p>Today's leads, MTD revenue, active workflows, conversion rate</p>
-                  </div>
-                </li>
-                <li class="lesson-item">
-                  <svg class="lesson-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                  <div class="lesson-content">
-                    <h4>Leads by source chart</h4>
-                    <p>LinkedIn, Meta Ads, Google Ads, Organic, Referral (last 30 days)</p>
-                  </div>
-                </li>
-                <li class="lesson-item">
-                  <svg class="lesson-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                  <div class="lesson-content">
-                    <h4>Alerts and notifications</h4>
-                    <p>Leads not contacted >24h, workflow status, remaining API credits</p>
-                  </div>
-                </li>
+
+              <h4 style="margin:1.5rem 0 1rem;font-size:0.9375rem;">B2B Segments Detected</h4>
+              <table class="spec-table">
+                <thead>
+                  <tr>
+                    <th>Segment</th>
+                    <th>Detected Keywords</th>
+                    <th>Klaviyo List</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>decision_maker</code></td><td>CEO, CFO, Founder, Director, VP, Partner, President</td><td>LinkedIn - Decision Makers</td></tr>
+                  <tr><td><code>marketing</code></td><td>CMO, Marketing, Growth, Content, SEO, Digital</td><td>LinkedIn - Marketing</td></tr>
+                  <tr><td><code>sales</code></td><td>Sales, Commercial, BDM, Account Executive, Revenue</td><td>LinkedIn - Sales</td></tr>
+                  <tr><td><code>tech</code></td><td>CTO, Developer, Engineer, DevOps, Data, Architect</td><td>LinkedIn - Tech</td></tr>
+                  <tr><td><code>hr</code></td><td>HR, Recruiter, Talent, People</td><td>LinkedIn - HR</td></tr>
+                  <tr><td><code>other</code></td><td>Fallback if no match</td><td>LinkedIn - Other</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">
+              <span>email-automation-unified.cjs (Welcome + Outreach)</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="accordion-content">
+              <p style="margin-bottom:1rem;">Unified email automation: Welcome Series (5 emails) + Outreach Sequence (3 emails per segment). <strong>598 lines.</strong></p>
+
+              <div class="code-block">
+                <div class="code-header">
+                  <span class="code-lang">bash</span>
+                  <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+<span class="comment"># CLI Mode - Welcome Series</span>
+node automations/agency/email-automation-unified.cjs --mode=welcome --email=client@example.com
+
+<span class="comment"># CLI Mode - Outreach with auto segment</span>
+node automations/agency/email-automation-unified.cjs --mode=outreach --json=<span class="string">'{"email":"ceo@company.com","firstName":"Ahmed","company":"TechCorp","title":"CEO"}'</span>
+
+<span class="comment"># HTTP Server Mode (n8n compatible)</span>
+node automations/agency/email-automation-unified.cjs --server --port=3001
+
+<span class="comment"># Available endpoints:</span>
+<span class="comment"># POST http://localhost:3001/welcome</span>
+<span class="comment"># POST http://localhost:3001/outreach</span>
+                </div>
+              </div>
+
+              <h4 style="margin:1.5rem 0 1rem;font-size:0.9375rem;">Klaviyo Events Created</h4>
+              <ul style="color:var(--text-secondary);margin-left:1.25rem;">
+                <li><code>welcome_series_started</code> → Triggers Welcome flow</li>
+                <li><code>outreach_decision_maker_started</code> → Decision Makers flow</li>
+                <li><code>outreach_marketing_started</code> → Marketing flow</li>
+                <li><code>outreach_sales_started</code> → Sales flow</li>
+                <li><code>outreach_tech_started</code> → Tech flow</li>
+                <li><code>outreach_hr_started</code> → HR flow</li>
               </ul>
             </div>
           </div>
 
           <div class="accordion">
             <div class="accordion-header">
-              <span>1.2 Managing your leads</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              <span>b2b-email-templates.cjs (Shared Module)</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
             </div>
             <div class="accordion-content">
-              <div class="step-box">
-                <h4>Lead pipeline</h4>
-                <p>Each lead goes through these statuses:</p>
-                <ol>
-                  <li><strong>New</strong> → Freshly captured lead</li>
-                  <li><strong>Contacted</strong> → First contact made</li>
-                  <li><strong>Qualified</strong> → Need confirmed, budget validated</li>
-                  <li><strong>Proposal</strong> → Quote sent</li>
-                  <li><strong>Won / Lost</strong> → Final result</li>
-                </ol>
+              <p style="margin-bottom:1rem;">Source of truth for branding and B2B email templates. <strong>604 lines, 119/119 branding tests.</strong></p>
+
+              <div class="code-block">
+                <div class="code-header">
+                  <span class="code-lang">javascript</span>
+                  <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+<span class="comment">// Usage in your scripts</span>
+<span class="keyword">const</span> {
+  EMAIL_TEMPLATES,      <span class="comment">// 6 templates per segment</span>
+  WELCOME_TEMPLATES,    <span class="comment">// 5 Welcome Series emails</span>
+  detectSegment,        <span class="comment">// profile → segment</span>
+  personalizeEmail,     <span class="comment">// template + profile → email</span>
+  validateBranding      <span class="comment">// checks signature, tagline, URL</span>
+} = <span class="function">require</span>(<span class="string">'./templates/b2b-email-templates.cjs'</span>);
+
+<span class="comment">// Automatic segment detection</span>
+<span class="keyword">const</span> segment = <span class="function">detectSegment</span>({ title: <span class="string">'Marketing Director'</span> });
+<span class="comment">// → 'marketing'</span>
+
+<span class="comment">// Template personalization</span>
+<span class="keyword">const</span> email = <span class="function">personalizeEmail</span>(EMAIL_TEMPLATES[segment], {
+  firstName: <span class="string">'Sarah'</span>,
+  company: <span class="string">'TechCorp'</span>
+});
+                </div>
               </div>
-              <p style="margin-top:1rem;"><strong>Quick actions on a lead:</strong></p>
-              <ul style="margin-left:1.5rem;color:var(--text-secondary);">
-                <li>Send an email (click email icon)</li>
-                <li>Send a WhatsApp (click phone icon)</li>
-                <li>Add a note</li>
-                <li>Change status</li>
-                <li>Assign to team member</li>
+
+              <h4 style="margin:1.5rem 0 1rem;font-size:0.9375rem;">Validated Branding Rules</h4>
+              <ul style="color:var(--text-secondary);margin-left:1.25rem;">
+                <li>✓ Signature: <code>"L'équipe 3A Automation"</code></li>
+                <li>✓ Tagline: <code>"Automation. Analytics. AI."</code></li>
+                <li>✓ URL: <code>https://3a-automation.com</code></li>
+                <li>✓ WE tone (never "I")</li>
+                <li>✓ No forbidden hype words</li>
               </ul>
-            </div>
-          </div>
-
-          <div class="accordion">
-            <div class="accordion-header">
-              <span>1.3 Reading analytics</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-            <div class="accordion-content">
-              <div class="step-box">
-                <h4>Key metrics to monitor</h4>
-                <ul>
-                  <li><strong>Leads/week</strong> — Target: 50+ for active SMB</li>
-                  <li><strong>Email open rate</strong> — Target: >50%</li>
-                  <li><strong>Response rate</strong> — Target: >5%</li>
-                  <li><strong>Conversion rate</strong> — Target: >2%</li>
-                </ul>
-              </div>
-              <p style="margin-top:1rem;">Charts refresh automatically every 30 seconds.</p>
-            </div>
-          </div>
-
-          <div class="accordion">
-            <div class="accordion-header">
-              <span>1.4 Exporting reports</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-            <div class="accordion-content">
-              <div class="step-box">
-                <h4>Available export formats</h4>
-                <ul>
-                  <li><strong>CSV</strong> — For Excel, Google Sheets</li>
-                  <li><strong>PDF</strong> — For client reports</li>
-                </ul>
-              </div>
-              <p>Click the <strong>Export</strong> button in the top right corner of each table.</p>
             </div>
           </div>
         </div>
 
-        <!-- MODULE 2: KLAVIYO -->
-        <div class="module-card">
-          <div class="module-header">
-            <div class="module-number">2</div>
-            <div>
-              <div class="module-title">Configuring Klaviyo</div>
-              <div class="module-duration">5 lessons · 60 minutes</div>
-            </div>
-          </div>
+        <!-- Tab: API Reference -->
+        <div id="api" class="tab-content">
+          <h2 class="section-title">API Reference</h2>
+          <p class="section-subtitle">Endpoints and API specifications</p>
 
-          <div class="accordion">
+          <div class="accordion open">
             <div class="accordion-header">
-              <span>2.1 Creating a Welcome Flow</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              <span>Klaviyo API (Primary)</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
             </div>
             <div class="accordion-content">
-              <div class="step-box">
-                <h4>Prerequisites</h4>
-                <ul>
-                  <li>Admin access to Klaviyo account</li>
-                  <li>Duration: 30 minutes</li>
-                </ul>
-              </div>
+              <table class="spec-table">
+                <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                <tbody>
+                  <tr><td>Base URL</td><td><code>https://a.klaviyo.com/api</code></td></tr>
+                  <tr><td>Revision</td><td><code>2024-02-15</code></td></tr>
+                  <tr><td>Auth Header</td><td><code>Authorization: Klaviyo-API-Key {API_KEY}</code></td></tr>
+                  <tr><td>Rate Limit</td><td>200-500ms between requests (configurable)</td></tr>
+                </tbody>
+              </table>
 
-              <div class="step-box">
-                <h4>Step 1: Access Klaviyo</h4>
-                <ol>
-                  <li>Log in to <a href="https://www.klaviyo.com" style="color:var(--primary)">klaviyo.com</a></li>
-                  <li>Navigate to <strong>Flows</strong> in the sidebar</li>
-                  <li>Click <strong>Create Flow</strong></li>
-                  <li>Select <strong>Create from Scratch</strong></li>
-                  <li>Name the flow: <code>Welcome Series - 5 Emails</code></li>
-                </ol>
-              </div>
+              <h4 style="margin:1.5rem 0 1rem;font-size:0.9375rem;">Used Endpoints</h4>
+              <div class="code-block">
+                <div class="code-header">
+                  <span class="code-lang">http</span>
+                  <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+<span class="comment"># Create/Update Profile</span>
+POST /profiles/
+Content-Type: application/json
+{
+  "data": {
+    "type": "profile",
+    "attributes": {
+      "email": "lead@company.com",
+      "first_name": "Ahmed",
+      "properties": {
+        "lead_segment": "decision_maker",
+        "lead_source": "linkedin_scraper"
+      }
+    }
+  }
+}
 
-              <div class="step-box">
-                <h4>Step 2: Configure the Trigger</h4>
-                <ol>
-                  <li>In the trigger panel, select <strong>Metric</strong></li>
-                  <li>Search and select: <code>welcome_series_started</code></li>
-                  <li>Configuration: Trigger <strong>Once per person</strong></li>
-                </ol>
-              </div>
+<span class="comment"># Add to List</span>
+POST /lists/{list_id}/relationships/profiles/
+{
+  "data": [{"type": "profile", "id": "{profile_id}"}]
+}
 
-              <div class="step-box">
-                <h4>Step 3: The 5 emails in the sequence</h4>
-                <ul>
-                  <li><strong>Email 1 (Day 0)</strong>: Welcome — Immediate send</li>
-                  <li><strong>Email 2 (Day 2)</strong>: Social Proof — Client results</li>
-                  <li><strong>Email 3 (Day 4)</strong>: Best Sellers — Top 3 automations</li>
-                  <li><strong>Email 4 (Day 7)</strong>: Educational — Complete guide</li>
-                  <li><strong>Email 5 (Day 14)</strong>: Offer — 10% promo code</li>
-                </ul>
-              </div>
-
-              <div class="step-box">
-                <h4>Flow Structure</h4>
-                <div class="code-block">
-[TRIGGER: welcome_series_started]
-         ↓
-    [EMAIL 1: Welcome]
-         ↓
-    [DELAY: 2 days]
-         ↓
-    [EMAIL 2: Social Proof]
-         ↓
-    [DELAY: 2 days]
-         ↓
-    [EMAIL 3: Best Sellers]
-         ↓
-    [DELAY: 3 days]
-         ↓
-    [EMAIL 4: Educational]
-         ↓
-    [DELAY: 7 days]
-         ↓
-    [EMAIL 5: Offer]
+<span class="comment"># Track Event (Trigger Flow)</span>
+POST /events/
+{
+  "data": {
+    "type": "event",
+    "attributes": {
+      "metric": {"data": {"type": "metric", "attributes": {"name": "LinkedIn Lead Captured"}}},
+      "profile": {"data": {"type": "profile", "id": "{profile_id}"}},
+      "properties": {"segment": "marketing"}
+    }
+  }
+}
                 </div>
               </div>
             </div>
@@ -272,239 +549,186 @@
 
           <div class="accordion">
             <div class="accordion-header">
-              <span>2.2 Testing the Flow</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              <span>n8n API</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
             </div>
             <div class="accordion-content">
-              <div class="step-box">
-                <h4>Test command</h4>
-                <div class="code-block">
-curl -X POST "https://n8n.srv1168256.hstgr.cloud/webhook/subscribe/new" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "test-flow@youremail.com",
-    "first_name": "TestFlow",
-    "source": "klaviyo-test"
-  }'
+              <table class="spec-table">
+                <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+                <tbody>
+                  <tr><td>Base URL</td><td><code>https://n8n.srv1168256.hstgr.cloud/api/v1</code></td></tr>
+                  <tr><td>Auth Header</td><td><code>X-N8N-API-KEY: {API_KEY}</code></td></tr>
+                  <tr><td>Workflows</td><td>9 deployed (6 functional)</td></tr>
+                </tbody>
+              </table>
+
+              <div class="alert alert-warning" style="margin-top:1rem;">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                <div>
+                  <strong>n8n Community Limitation</strong><br>
+                  Environment variables <code>$env</code> are not supported. Use native .cjs scripts with <code>process.env</code> instead.
                 </div>
               </div>
-              <div class="step-box">
-                <h4>Verification</h4>
-                <ol>
-                  <li>Profile created in Klaviyo → Profiles</li>
-                  <li>Event <code>welcome_series_started</code> visible on profile</li>
-                  <li>Email 1 queued/sent in Flow → Analytics</li>
-                </ol>
-              </div>
             </div>
           </div>
         </div>
 
-        <!-- MODULE 3: VOICE AI -->
-        <div class="module-card">
-          <div class="module-header">
-            <div class="module-number">3</div>
-            <div>
-              <div class="module-title">Voice AI & Telephony</div>
-              <div class="module-duration">3 lessons · 30 minutes</div>
-            </div>
-          </div>
+        <!-- Tab: CLI Commands -->
+        <div id="cli" class="tab-content">
+          <h2 class="section-title">CLI Commands Reference</h2>
+          <p class="section-subtitle">Available commands for all agency scripts</p>
 
-          <div class="accordion">
+          <div class="accordion open">
             <div class="accordion-header">
-              <span>3.1 Web Voice Widget</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-            <div class="accordion-content">
-              <div class="step-box">
-                <h4>How it works</h4>
-                <ul>
-                  <li><strong>Technology:</strong> Web Speech API (native browser, free)</li>
-                  <li><strong>Browsers:</strong> Chrome, Edge (Firefox/Safari = text fallback)</li>
-                  <li><strong>Features:</strong> 33 keywords FR + EN, integrated booking flow</li>
-                </ul>
-              </div>
-              <p style="margin-top:1rem;">The widget appears in the bottom right of each page. Click the microphone to activate voice recognition.</p>
-              <div class="step-box" style="margin-top:1rem;">
-                <h4>Available voice commands</h4>
-                <ul>
-                  <li>"Book appointment" → Opens calendar</li>
-                  <li>"Pricing" → Shows prices</li>
-                  <li>"Contact" → Contact form</li>
-                  <li>"Automations" → List of 81 automations</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion">
-            <div class="accordion-header">
-              <span>3.2 Phone Agent (Dial.Plus)</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-            <div class="accordion-content">
-              <div class="step-box">
-                <h4>Phone number</h4>
-                <p><strong>+1 775 254 7428</strong> (3A internal use)</p>
-              </div>
-              <div class="step-box">
-                <h4>Features</h4>
-                <ul>
-                  <li>Integrated AI agent with knowledge base</li>
-                  <li>Incoming lead qualification</li>
-                  <li>Automatic appointment booking</li>
-                  <li>Transfer to human if complex</li>
-                  <li>Automatic multi-language</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- MODULE 4: LEAD GENERATION -->
-        <div class="module-card">
-          <div class="module-header">
-            <div class="module-number">4</div>
-            <div>
-              <div class="module-title">Lead Generation Workflows</div>
-              <div class="module-duration">4 lessons · 45 minutes</div>
-            </div>
-          </div>
-
-          <div class="accordion">
-            <div class="accordion-header">
-              <span>4.1 System architecture</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              <span>Lead Generation</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
             </div>
             <div class="accordion-content">
               <div class="code-block">
-        LEAD SOURCES
-             │
-    ┌────────┼────────┐
-    ▼        ▼        ▼
-LinkedIn  Google   Meta
-Scraping   Ads     Ads
-             │
-             ▼
-    n8n ENRICHMENT
-    + AI SCORING
-             │
-    ┌────────┼────────┐
-    ▼        ▼        ▼
- Email   LinkedIn  WhatsApp
-Sequence  Connect   Message
-             │
-             ▼
-       CRM DASHBOARD
+                <div class="code-header">
+                  <span class="code-lang">bash</span>
+                  <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+<span class="comment"># LinkedIn → Klaviyo Pipeline</span>
+node automations/agency/linkedin-to-klaviyo-pipeline.cjs --test
+node automations/agency/linkedin-to-klaviyo-pipeline.cjs --search="cto france" --max=100
+node automations/agency/linkedin-to-klaviyo-pipeline.cjs --input=profiles.json --live
+
+<span class="comment"># Google Maps → Klaviyo Pipeline</span>
+node automations/agency/google-maps-to-klaviyo-pipeline.cjs --test
+node automations/agency/google-maps-to-klaviyo-pipeline.cjs --file=businesses.json
+
+<span class="comment"># Lead Scheduler (Markets Rotation)</span>
+node automations/agency/lead-gen-scheduler.cjs --status
+node automations/agency/lead-gen-scheduler.cjs --pipeline=linkedin --market=morocco
+node automations/agency/lead-gen-scheduler.cjs --pipeline=daily --dry-run
+                </div>
               </div>
             </div>
           </div>
 
           <div class="accordion">
             <div class="accordion-header">
-              <span>4.2 LinkedIn Scraper</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              <span>Email Automation</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
             </div>
             <div class="accordion-content">
-              <div class="step-box">
-                <h4>Configuration</h4>
-                <ul>
-                  <li><strong>Query:</strong> "E-commerce Manager" OR "Digital Marketing"</li>
-                  <li><strong>Location:</strong> Morocco, France, Belgium, Canada</li>
-                  <li><strong>Company size:</strong> 11-200 employees</li>
-                  <li><strong>Industry:</strong> Retail, Fashion, Beauty, Consumer Goods</li>
-                </ul>
-              </div>
-              <div class="step-box">
-                <h4>Output</h4>
-                <ul>
-                  <li>Name, Title, Company</li>
-                  <li>LinkedIn URL</li>
-                  <li>Work email (enriched)</li>
-                  <li>Score (0-100)</li>
-                </ul>
-              </div>
-              <p style="margin-top:1rem;"><strong>Frequency:</strong> Every 6 hours · <strong>Limit:</strong> 100 profiles/run</p>
-            </div>
-          </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span class="code-lang">bash</span>
+                  <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+<span class="comment"># Welcome Series (5 emails)</span>
+node automations/agency/email-automation-unified.cjs --mode=welcome --email=client@example.com
 
-          <div class="accordion">
-            <div class="accordion-header">
-              <span>4.3 AI Lead Scoring</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-            <div class="accordion-content">
-              <div class="step-box">
-                <h4>Scoring criteria (100 points)</h4>
-                <ul>
-                  <li><strong>Title match</strong> (E-commerce, Marketing, Growth) → +30 pts</li>
-                  <li><strong>Company size</strong> (11-200) → +20 pts</li>
-                  <li><strong>Industry match</strong> (Retail, E-commerce) → +20 pts</li>
-                  <li><strong>Location</strong> (Morocco, France) → +15 pts</li>
-                  <li><strong>Engagement signals</strong> → +15 pts</li>
-                </ul>
-              </div>
-              <div class="step-box">
-                <h4>Thresholds</h4>
-                <ul>
-                  <li><strong>Hot (80-100):</strong> Immediate outreach</li>
-                  <li><strong>Warm (50-79):</strong> Nurturing sequence</li>
-                  <li><strong>Cold (&lt;50):</strong> Low priority</li>
-                </ul>
+<span class="comment"># Outreach Sequence (3 segment-specific emails)</span>
+node automations/agency/email-automation-unified.cjs --mode=outreach --email=lead@company.com
+node automations/agency/email-automation-unified.cjs --mode=outreach --json='{"email":"...","title":"CEO"}'
+
+<span class="comment"># HTTP Server Mode (for n8n/webhooks)</span>
+node automations/agency/email-automation-unified.cjs --server --port=3001
+
+<span class="comment"># Newsletter</span>
+node automations/agency/newsletter-automation.cjs --preview --topic="AI Automation Trends"
+node automations/agency/newsletter-automation.cjs --topic="Subject" --list-id=VaFxKU
+                </div>
               </div>
             </div>
           </div>
 
           <div class="accordion">
             <div class="accordion-header">
-              <span>4.4 Multi-Channel Outreach Sequence</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              <span>Environment Variables Required</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
             </div>
             <div class="accordion-content">
-              <div class="step-box">
-                <h4>Outreach timeline</h4>
-                <ul>
-                  <li><strong>Day 0:</strong> LinkedIn connection request (personalized)</li>
-                  <li><strong>Day 1:</strong> Connection accepted → Welcome message</li>
-                  <li><strong>Day 3:</strong> Value-add content (case study)</li>
-                  <li><strong>Day 5:</strong> Email outreach (if email available)</li>
-                  <li><strong>Day 7:</strong> Follow-up email</li>
-                  <li><strong>Day 10:</strong> WhatsApp (if phone available)</li>
-                  <li><strong>Day 14:</strong> Final follow-up</li>
-                </ul>
+              <div class="code-block">
+                <div class="code-header">
+                  <span class="code-lang">.env</span>
+                  <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+<span class="comment"># Klaviyo (Required)</span>
+KLAVIYO_API_KEY=pk_xxxxxxxxxxxx
+KLAVIYO_LIST_ID=SKeBCN
+KLAVIYO_WELCOME_LIST_ID=VaFxKU
+
+<span class="comment"># Apify (For scraping)</span>
+APIFY_TOKEN=apify_api_xxxxxxxxxxxx
+
+<span class="comment"># n8n (For workflows)</span>
+N8N_HOST=https://n8n.srv1168256.hstgr.cloud
+N8N_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+<span class="comment"># AI APIs</span>
+XAI_API_KEY=xai-xxxxxxxxxxxx
+GEMINI_API_KEY=AIzaSy...
+
+<span class="comment"># GitHub (For deploy)</span>
+GITHUB_TOKEN=github_pat_xxxxxxxxxxxx
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- MODULE 5: EMAIL TEMPLATES -->
-        <div class="module-card">
-          <div class="module-header">
-            <div class="module-number">5</div>
-            <div>
-              <div class="module-title">B2B Email Templates</div>
-              <div class="module-duration">6 templates · 20 minutes</div>
+        <!-- Tab: Troubleshooting -->
+        <div id="troubleshooting" class="tab-content">
+          <h2 class="section-title">Troubleshooting</h2>
+          <p class="section-subtitle">Common errors and solutions</p>
+
+          <div class="accordion open">
+            <div class="accordion-header">
+              <span>Klaviyo Errors</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="accordion-content">
+              <table class="spec-table">
+                <thead><tr><th>Code</th><th>Message</th><th>Solution</th></tr></thead>
+                <tbody>
+                  <tr><td><code>401</code></td><td>Unauthorized</td><td>Check KLAVIYO_API_KEY in .env</td></tr>
+                  <tr><td><code>409</code></td><td>Duplicate profile</td><td>Normal - script updates existing profile</td></tr>
+                  <tr><td><code>429</code></td><td>Rate limited</td><td>Increase RATE_LIMIT_DELAY (default: 200ms)</td></tr>
+                  <tr><td><code>400</code></td><td>Invalid email</td><td>Filter invalid emails before push</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
           <div class="accordion">
             <div class="accordion-header">
-              <span>5.1 Available segments</span>
-              <svg class="accordion-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              <span>n8n Errors</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
             </div>
             <div class="accordion-content">
-              <div class="step-box">
-                <h4>6 B2B segments</h4>
-                <ul>
-                  <li><strong>decision_maker</strong> — CEO, Founder, Director</li>
-                  <li><strong>marketing</strong> — CMO, Marketing Manager</li>
-                  <li><strong>sales</strong> — Sales Director, Business Development</li>
-                  <li><strong>tech</strong> — CTO, IT Manager</li>
-                  <li><strong>hr</strong> — HR Director, Talent Acquisition</li>
-                  <li><strong>other</strong> — Other roles</li>
-                </ul>
-              </div>
-              <p style="margin-top:1rem;">Each segment has a personalized template with the right approach angle.</p>
+              <table class="spec-table">
+                <thead><tr><th>Error</th><th>Cause</th><th>Solution</th></tr></thead>
+                <tbody>
+                  <tr><td><code>$env not defined</code></td><td>n8n Community doesn't support $env</td><td>Use native .cjs scripts with process.env</td></tr>
+                  <tr><td><code>License error: feat:variables</code></td><td>Variables require paid license</td><td>Same - native scripts</td></tr>
+                  <tr><td><code>Workflow inactive</code></td><td>Workflow disabled</td><td>Activate via n8n UI or API</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">
+              <span>Infrastructure Errors</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="accordion-content">
+              <table class="spec-table">
+                <thead><tr><th>Error</th><th>Cause</th><th>Solution</th></tr></thead>
+                <tbody>
+                  <tr><td><code>Container restart loop</code></td><td>Git clone fails (private repo)</td><td>Add GITHUB_TOKEN to git clone URL</td></tr>
+                  <tr><td><code>Exit code 128</code></td><td>Missing GitHub authentication</td><td>Format: https://{TOKEN}@github.com/...</td></tr>
+                  <tr><td><code>502 Bad Gateway</code></td><td>Container not started</td><td>Check logs: docker logs {container}</td></tr>
+                  <tr><td><code>SSL certificate error</code></td><td>Traefik certresolver</td><td>Wait for DNS propagation (5-10min)</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -512,37 +736,64 @@ Sequence  Connect   Message
       </div>
     </section>
 
-    <section class="cta">
+    <footer class="academy-footer">
       <div class="container">
-        <div class="cta-content">
-          <h2>Questions about training?</h2>
-          <p>Contact support or access the dashboard directly.</p>
-          <div class="cta-actions">
-            <a href="https://dashboard.3a-automation.com" class="btn btn-primary btn-large" target="_blank" rel="noopener">Access Dashboard</a>
-            <a href="/en/contact.html" class="btn btn-secondary btn-large">Contact Support</a>
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h4>Documentation</h4>
+            <a href="#architecture">Architecture</a>
+            <a href="#pipelines">B2B Pipelines</a>
+            <a href="#api">API Reference</a>
+            <a href="#cli">CLI Commands</a>
+          </div>
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <a href="/en/automations.html">81 Automations</a>
+            <a href="/en/services/ecommerce.html">E-commerce</a>
+            <a href="/en/services/pme.html">SMB B2B</a>
+          </div>
+          <div class="footer-section">
+            <h4>Support</h4>
+            <a href="/en/booking.html">Book a call</a>
+            <a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a>
+          </div>
+          <div class="footer-section">
+            <h4>Endpoints</h4>
+            <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank">n8n Instance</a>
+            <a href="https://dashboard.3a-automation.com" target="_blank">Dashboard</a>
           </div>
         </div>
+        <div class="footer-bottom">
+          © 2025 3A Automation — Automation. Analytics. AI.<br>
+          Technical Documentation v2.0.0 | Last updated: 2025-12-29
+        </div>
       </div>
-    </section>
-
+    </footer>
   </main>
 
-  <footer class="footer-ultra">
-    <div class="container">
-      <div class="footer-bottom-ultra">
-        <p>&copy; 2025 3A Automation. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="../script.min.js?v=21.0" defer></script>
   <script>
-    document.querySelectorAll('.accordion-header').forEach(header => {
-      header.addEventListener('click', () => {
-        const accordion = header.parentElement;
-        accordion.classList.toggle('open');
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
       });
     });
+
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('open');
+      });
+    });
+
+    function copyCode(btn) {
+      const code = btn.closest('.code-block').querySelector('.code-content').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    }
   </script>
 </body>
 </html>
