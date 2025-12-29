@@ -12,12 +12,12 @@
 | gemini | `github:rlabs-inc/gemini-mcp` | GEMINI_API_KEY |
 | google-analytics | `mcp-server-google-analytics` | Service Account JSON |
 | google-sheets | `mcp-gsheets` | Service Account JSON |
+| shopify | `shopify-mcp` | guqsu3-yj.myshopify.com ✅ |
 
 ## MCPs à Configurer
 
 | MCP | Package | Action Requise |
 |-----|---------|----------------|
-| shopify | `shopify-mcp` | Créer Dev Store sur partners.shopify.com |
 | n8n | SSE remote | Générer API key sur n8n.srv1168256.hstgr.cloud |
 | wordpress | `claudeus-wp-mcp` | Créer wp-sites.json |
 | apify | `@apify/actors-mcp-server` | Tester token |
