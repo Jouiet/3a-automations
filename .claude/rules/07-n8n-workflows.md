@@ -1,4 +1,4 @@
-# n8n Workflows - Session 111
+# n8n Workflows - Session 113
 
 ## DÉCOUVERTE CRITIQUE
 
@@ -9,7 +9,7 @@ API: "Your license does not allow for feat:variables"
 SOLUTION: Scripts natifs (.cjs) avec process.env
 ```
 
-## État Factuel (28/12/2025 23:30 CET)
+## État Factuel (29/12/2025 02:00 CET)
 
 | # | Workflow | n8n Status | Script Natif | Status Final |
 |---|----------|------------|--------------|--------------|
@@ -25,24 +25,44 @@ SOLUTION: Scripts natifs (.cjs) avec process.env
 
 **Résultat: 6/9 fonctionnels (67%) - 3 bloqués par credentials externes**
 
-## Scripts Natifs Déployés
+## B2B Lead Workflows (Session 113)
+
+```
+5 SCRIPTS ALIGNÉS - 100% BRANDING (119/119)
+
+automations/agency/templates/b2b-email-templates.cjs   # Module partagé
+├── EMAIL_TEMPLATES (6 segments)
+├── WELCOME_TEMPLATES (5 emails)
+├── SEGMENT_KEYWORDS (job titles → segment)
+├── validateBranding(emailBody)
+├── validateAllTemplates()
+└── personalizeEmail(template, leadData)
+
+automations/agency/linkedin-to-klaviyo-pipeline.cjs    # Modèle référence
+automations/agency/linkedin-lead-automation.cjs        # LinkedIn → Klaviyo
+automations/agency/email-automation-unified.cjs        # Welcome + Outreach
+automations/agency/google-maps-to-klaviyo-pipeline.cjs # Local B2B → Klaviyo
+```
+
+## Scripts Natifs - Usage
 
 ```bash
 # Email (Welcome + Outreach)
-automations/agency/email-automation-unified.cjs
-node email-automation-unified.cjs --mode=welcome --email=test@example.com
-node email-automation-unified.cjs --mode=outreach --json='{"email":"...","company":"..."}'
-node email-automation-unified.cjs --server --port=3001
+node automations/agency/email-automation-unified.cjs --mode=welcome --email=test@example.com
+node automations/agency/email-automation-unified.cjs --mode=outreach --json='{"email":"...","company":"..."}'
+node automations/agency/email-automation-unified.cjs --server --port=3001
 
 # LinkedIn Lead Automation
-automations/agency/linkedin-lead-automation.cjs
-node linkedin-lead-automation.cjs --test
-node linkedin-lead-automation.cjs --file=/path/to/leads.json
+node automations/agency/linkedin-lead-automation.cjs --test
+node automations/agency/linkedin-lead-automation.cjs --file=/path/to/leads.json
+
+# Google Maps Local B2B
+node automations/agency/google-maps-to-klaviyo-pipeline.cjs --test
+node automations/agency/google-maps-to-klaviyo-pipeline.cjs --file=/path/to/businesses.json
 
 # Newsletter
-automations/agency/newsletter-automation.cjs
-node newsletter-automation.cjs --preview --topic="Sujet"
-node newsletter-automation.cjs --topic="Sujet" --list-id=XXX
+node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
+node automations/agency/newsletter-automation.cjs --topic="Sujet" --list-id=XXX
 ```
 
 ## BLOCKERS EXTERNES (Non-code)

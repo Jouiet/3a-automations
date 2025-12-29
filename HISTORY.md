@@ -1,5 +1,23 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 113 (29/12/2025) - B2B LEAD WORKFLOWS ALIGNÉS
+
+| Session | Modifications |
+|---------|---------------|
+| **113** | **GOOGLE MAPS PIPELINE CRÉÉ**: `google-maps-to-klaviyo-pipeline.cjs` (~700 lignes) - Pipeline B2B local suivant modèle linkedin-to-klaviyo. **B2B-EMAIL-TEMPLATES.CJS CORRIGÉ**: Ajout `validateAllTemplates()`, fix branding WELCOME_TEMPLATES.email1 ("À très vite" → "Cordialement"). **BRANDING 100%**: 119/119 templates valides (6 EMAIL_TEMPLATES + 5 WELCOME_TEMPLATES × 11 tests). **5 WORKFLOWS ALIGNÉS**: b2b-email-templates.cjs (module partagé), linkedin-lead-automation.cjs, email-automation-unified.cjs, linkedin-to-klaviyo-pipeline.cjs, google-maps-to-klaviyo-pipeline.cjs. **SEGMENTS B2B (6)**: decision_maker, marketing, sales, tech, hr, other. **CATEGORY_SEGMENTS**: Mapping catégories business → segments pour leads locaux. **SCRIPTS**: 70 fichiers (.cjs/.js). |
+
+## Session 112 (29/12/2025) - ALIGNEMENT LINKEDIN + EMAIL WORKFLOWS
+
+| Session | Modifications |
+|---------|---------------|
+| **112** | **B2B-EMAIL-TEMPLATES.CJS CRÉÉ**: Module partagé avec EMAIL_TEMPLATES (6 segments), WELCOME_TEMPLATES (5 emails), SEGMENT_KEYWORDS, validateBranding(), personalizeEmail(). **LINKEDIN-LEAD-AUTOMATION.CJS ALIGNÉ**: Import module partagé, détection segment via SEGMENT_KEYWORDS, emails personnalisés par segment. **EMAIL-AUTOMATION-UNIFIED.CJS ALIGNÉ**: Import templates, segment dans profil Klaviyo. **SIGNATURE**: "L'équipe 3A Automation". **TAGLINE**: "Automation, Analytics, AI". |
+
+## Session 111 (28/12/2025) - SCRIPTS NATIFS CONVERTIS
+
+| Session | Modifications |
+|---------|---------------|
+| **111** | **SCRIPTS NATIFS vs n8n**: email-automation-unified.cjs (remplace Klaviyo Welcome + Email Outreach) TESTÉ OK, linkedin-lead-automation.cjs (remplace LinkedIn Lead Scraper) TESTÉ OK, newsletter-automation.cjs PRÊT (bloqué API credits). **n8n STATUS FINAL**: 6/9 fonctionnels (67%) - Blog Generator OK, Product Photos OK, 3 bloqués credentials externes (Twilio, WhatsApp Business). **REGISTRY**: v2.0.0, 79 automations. |
+
 ## Session 110 (28/12/2025) - AUDIT n8n DÉTAILLÉ + SYNC
 
 | Session | Modifications |

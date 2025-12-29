@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 16.0 | Date: 2025-12-28 | Session: 109
+## Version: 17.0 | Date: 2025-12-29 | Session: 113
 
 ---
 
@@ -10,27 +10,37 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (78, v1.9.0) |
-| History | `HISTORY.md` (Sessions 0-109) |
+| Automations | `automations/automations-registry.json` (79, v2.0.0) |
+| History | `HISTORY.md` (Sessions 0-113) |
 
-## Session 109 - AUDIT BOTTOM-UP BRUTAL
+## Session 113 - B2B LEAD WORKFLOWS ALIGNÉS
 
 | Fait | Valeur Vérifiée |
 |------|-----------------|
-| Pages HTML | **39** (19 FR + 20 EN) - PAS 32 |
-| n8n Workflows | 9 déployés, **0 fonctionnels** |
-| Infrastructure | 3 containers RUNNING |
-| Booking API | 180 slots OK |
+| Lead Workflows | **5 alignés, 100% branding** |
+| Scripts natifs | **70 fichiers** (.cjs/.js) |
+| n8n Workflows | 9 déployés, **6/9 fonctionnels (67%)** |
+| Branding Tests | **119/119 (100%)** |
 
-### PROBLÈME CRITIQUE: n8n
-
-Tous les 9 workflows sont "actifs" dans l'UI mais **100% échouent à l'exécution**.
+### B2B LEAD WORKFLOWS (5 Alignés)
 
 ```
-ERREURS (logs réels):
-├── "Cannot read properties of undefined (reading 'name')"
-├── "The workflow has issues and cannot be executed"
-└── Cause: Connexions JSON corrompues
+MODÈLE RÉFÉRENCE: linkedin-to-klaviyo-pipeline.cjs
+
+SCRIPTS ALIGNÉS (Session 112-113):
+├── b2b-email-templates.cjs          → Module partagé (6 segments)
+├── linkedin-lead-automation.cjs     → Segmentation intégrée ✅
+├── email-automation-unified.cjs     → Import templates ✅
+├── linkedin-to-klaviyo-pipeline.cjs → Référence modèle ✅
+└── google-maps-to-klaviyo-pipeline.cjs → CRÉÉ Session 113 ✅
+
+SEGMENTS B2B (6):
+decision_maker | marketing | sales | tech | hr | other
+
+BRANDING VALIDÉ (119/119):
+├── Signature "L'équipe 3A Automation"
+├── Tagline "Automation, Analytics, AI"
+└── URL https://3a-automation.com
 ```
 
 ## Memory Structure
