@@ -187,7 +187,7 @@ Nous avons identifié {{company}} comme une entreprise qui pourrait bénéficier
 • Récupérer 10-15h par semaine sur les processus manuels
 • Connecter leurs outils existants sans friction
 
-Résultat typique : nos clients augmentent leur revenue email de 25%+ et éliminent les tâches manuelles chronophages.
+Résultat typique : nos clients obtiennent un ROI de 25%+ sur leur revenue email et éliminent les tâches manuelles chronophages.
 
 Seriez-vous disponible pour un échange de 15 minutes ?
 
@@ -254,9 +254,9 @@ En tant que profil tech chez {{company}}, vous apprécierez notre approche techn
 
 Notre stack : n8n, Apify, Claude, Gemini, Klaviyo, Shopify.
 
-Nous combinons l'expertise développeur avec l'efficacité du low-code.
+Résultat : 90% de réduction du temps d'intégration grâce à notre approche hybride code + low-code.
 
-Disponible pour un échange technique ?
+Seriez-vous disponible pour un échange technique de 15 minutes ?
 
 Cordialement,
 L'équipe 3A Automation
@@ -273,7 +273,7 @@ Les équipes RH passent des heures sur des tâches répétitives :
 • Tri de CVs et réponses automatiques → Automatisable
 • Planification d'entretiens → Automatisable
 • Onboarding des nouveaux collaborateurs → Automatisable
-• Suivi des candidatures → Automatisable
+• Processus de recrutement et suivi des candidatures → Automatisable
 
 Nos clients RH ont réduit de 60% leur temps admin grâce à nos automations.
 
