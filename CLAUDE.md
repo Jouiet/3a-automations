@@ -55,12 +55,13 @@ Security Headers:
   securityHeaders (CSP, X-Frame-Options, etc.)
 ```
 
-### BLOCKER CRITIQUE
+### APIs OPERATIONNELLES
 
 ```
-⛔ APIFY: Crédits $0.01 restant
-   Action: https://console.apify.com/billing
-   Impact: LinkedIn + Google Maps pipelines BLOQUÉS
+✅ Apify: STARTER $39/mo (LinkedIn + Google Maps OK)
+✅ Shopify: guqsu3-yj.myshopify.com
+✅ n8n: n8n.srv1168256.hstgr.cloud (6 workflows)
+✅ Klaviyo: 15 listes
 ```
 
 ### LEAD GEN ARCHITECTURE
