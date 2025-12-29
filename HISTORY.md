@@ -4,7 +4,7 @@
 
 | Session | Modifications |
 |---------|---------------|
-| **114** | **SYSTEM HEALTH CHECK SCRIPT**: `scripts/system-health-check.cjs` créé - monitoring centralisé de 8 APIs (n8n, Klaviyo, xAI, Apify, Gemini, GitHub, Hostinger, Booking). **SCORE 100%**: 8/8 APIs fonctionnelles. **FIX test-all-apis.cjs**: Header n8n corrigé (`X-N8N-API-KEY` au lieu de `Authorization: Bearer`). **N8N CLEANUP**: 3 workflows supprimés (remplacés par scripts natifs): Klaviyo Welcome Series, Email Outreach Sequence, LinkedIn Lead Scraper. **N8N FINAL: 6 workflows** (5 actifs, 1 inactif). **SHOPIFY CONFIG**: Domain mis à jour vers `guqsu3-yj.myshopify.com` (TOKEN REQUIS). **SCRIPTS NATIFS TESTÉS OK**: email-automation-unified.cjs (profil créé), linkedin-lead-automation.cjs (Apify+Klaviyo OK), google-maps-to-klaviyo-pipeline.cjs (6/6 OK). **REGISTRY**: v2.0.0, 82 automations. **WEBSITE**: 39 pages (20 FR, 19 EN). |
+| **114** | **SYSTEM HEALTH CHECK SCRIPT**: `scripts/system-health-check.cjs` créé - monitoring centralisé de 9 APIs. **SCORE 100%**: 9/9 APIs fonctionnelles. **FIX test-all-apis.cjs**: Header n8n corrigé (`X-N8N-API-KEY`). **N8N CLEANUP**: 3 workflows supprimés (remplacés par scripts natifs): Klaviyo Welcome Series, Email Outreach Sequence, LinkedIn Lead Scraper. **N8N FINAL: 6 workflows** (5 actifs, 1 inactif). **SHOPIFY CONNECTÉ**: `guqsu3-yj.myshopify.com` - 137 scopes activés, plan basic, devise MAD. **SCRIPTS NATIFS TESTÉS OK**: email-automation-unified.cjs, linkedin-lead-automation.cjs, google-maps-to-klaviyo-pipeline.cjs. **REGISTRY**: v2.0.0, 82 automations. |
 
 ## Session 113 (29/12/2025) - B2B LEAD WORKFLOWS ALIGNÉS
 
