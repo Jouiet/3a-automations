@@ -42,22 +42,18 @@ CLAIM → VÉRIFICATION → PREUVE → DOCUMENTATION
        CORRECTION ou SUPPRESSION
 ```
 
-## Métriques Actuelles (Vérifiées 17/12/2025)
+## Métriques Actuelles (Vérifiées 29/12/2025 - Session 115)
 
-| Métrique | Documenté | Réalité vérifiée | Source |
-|----------|-----------|------------------|--------|
-| Scripts totaux | 207 | ~198 | FORENSIC-AUDIT |
-| Scripts réutilisables | 120 | ~25 génériques | FORENSIC-AUDIT |
-| Scripts configurables | - | ~33 (process.env) | FORENSIC-AUDIT |
-| Scripts hardcoded | - | ~140 | FORENSIC-AUDIT |
-| MCPs configurés | 8-10 | 6 déclarés | MCP-INTEGRATION |
-| MCPs fonctionnels | - | 3 (Klaviyo, Shopify, n8n) | FORENSIC-AUDIT |
-| MCPs cassés | - | 2 (Google SA manquant) | FORENSIC-AUDIT |
-| MCPs placeholder | - | 1 (Apify) | FORENSIC-AUDIT |
-| Readiness global | 68% | ~25% | FORENSIC-AUDIT |
-| Fichier .env | Requis | INEXISTANT | FORENSIC-AUDIT |
+| Métrique | Valeur | Source |
+|----------|--------|--------|
+| Scripts natifs | ~70 (.cjs/.js) | Comptage fichiers |
+| Automations registry | 82 | automations-registry.json |
+| security-utils.cjs | 31 exports | Test empirique |
+| MCPs fonctionnels | 12+ | 05-mcps-status.md |
+| APIs opérationnelles | Shopify ✅, n8n ✅, Klaviyo ✅, Apify ✅ | Test API |
+| Fichier .env | ✅ Complet | Vérifié |
 
-**Source de vérité:** `FORENSIC-AUDIT-TRUTH-2025-12-16.md`
+**Source de vérité:** `.claude/rules/01-project-status.md`
 
 ---
 

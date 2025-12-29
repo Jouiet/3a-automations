@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 114 - 29/12/2025 12:30 CET)
+## Current State (Session 115 - 29/12/2025 16:00 CET)
 
 | Metric | Value |
 |--------|-------|
@@ -29,11 +29,11 @@
 
 ### Lead Generation Pipelines
 
-| Script | Status | Blocker |
-|--------|--------|---------|
-| linkedin-lead-automation.cjs | ⛔ BLOQUÉ | Apify crédits ($0.01) |
-| google-maps-to-klaviyo-pipeline.cjs | ⛔ BLOQUÉ | Apify crédits |
-| newsletter-automation.cjs | ✅ PRÊT | API credits (xAI/Gemini OK) |
+| Script | Status | Notes |
+|--------|--------|-------|
+| linkedin-lead-automation.cjs | ✅ PRÊT | Apify STARTER ($39/mo) |
+| google-maps-to-klaviyo-pipeline.cjs | ✅ PRÊT | Apify STARTER ($39/mo) |
+| newsletter-automation.cjs | ✅ PRÊT | xAI/Gemini OK |
 | email-automation-unified.cjs | ✅ PRÊT | Testé OK |
 
 ### n8n Workflows (5)
@@ -50,7 +50,6 @@
 
 | Blocker | Action | Impact | Priorité |
 |---------|--------|--------|----------|
-| **Apify** | Recharger crédits | LinkedIn + GMaps | **P0** |
 | Twilio | Créer compte | Grok Voice | P2 |
 | Meta Business | Approval | WhatsApp x2 | P3 |
 
@@ -85,7 +84,7 @@ General: VaFxKU (Newsletter), SKeBCN (Welcome), S8dz2b (Outreach)
 | Klaviyo | ✅ | 15 listes |
 | Shopify | ✅ | Dev store |
 | xAI/Grok | ✅ | 11 models |
-| Apify | ⛔ | $0.01 crédits |
+| Apify | ✅ | STARTER $39/mo |
 | Gemini | ✅ | 50 models |
 | GitHub | ✅ | OK |
 | Hostinger | ✅ | Running |

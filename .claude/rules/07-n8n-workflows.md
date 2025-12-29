@@ -1,4 +1,4 @@
-# n8n Workflows - Session 114
+# n8n Workflows - Session 115
 
 ## Architecture
 
@@ -7,7 +7,7 @@ n8n Community Edition: NE SUPPORTE PAS $env variables
 Solution: Scripts natifs (.cjs) avec process.env
 ```
 
-## État Factuel (29/12/2025 12:30 CET)
+## État Factuel (29/12/2025 16:00 CET)
 
 ### Workflows n8n (5)
 
@@ -23,15 +23,15 @@ Solution: Scripts natifs (.cjs) avec process.env
 
 ### Scripts Natifs (Remplacent n8n)
 
-| Script | Status | Blocker |
-|--------|--------|---------|
-| linkedin-lead-automation.cjs | ⛔ | Apify $0.01 |
-| google-maps-to-klaviyo-pipeline.cjs | ⛔ | Apify $0.01 |
-| newsletter-automation.cjs | ✅ | - |
-| email-automation-unified.cjs | ✅ | - |
-| lead-gen-scheduler.cjs | ✅ | - |
+| Script | Status | Notes |
+|--------|--------|-------|
+| linkedin-lead-automation.cjs | ✅ | Apify STARTER OK |
+| google-maps-to-klaviyo-pipeline.cjs | ✅ | Apify STARTER OK |
+| newsletter-automation.cjs | ✅ | xAI/Grok OK |
+| email-automation-unified.cjs | ✅ | Testé OK |
+| lead-gen-scheduler.cjs | ✅ | Cron ready |
 
-## Lead Generation System (Session 114)
+## Lead Generation System (Session 114-115)
 
 ```
 ARCHITECTURE:
@@ -72,11 +72,10 @@ node automations/agency/newsletter-automation.cjs --server --port=3002
 
 | Type | Blocker | Action | Priorité |
 |------|---------|--------|----------|
-| Lead Gen | Apify crédits | https://console.apify.com/billing | **P0** |
 | n8n | Twilio | Créer compte | P2 |
 | n8n | Meta Business | Approval | P3 |
 
 ## URLs
 
 - n8n: https://n8n.srv1168256.hstgr.cloud
-- Apify: https://console.apify.com/billing
+- Apify: https://console.apify.com (STARTER $39/mo ✅)
