@@ -29,6 +29,16 @@ const fs = require('fs');
 const envPath = process.env.CLIENT_ENV_PATH || path.join(__dirname, '..', '..', '.env');
 require('dotenv').config({ path: envPath });
 
+// Import B2B email templates (shared module)
+const {
+  EMAIL_TEMPLATES,
+  SEGMENT_KEYWORDS,
+  SEGMENT_LISTS,
+  detectSegment,
+  personalizeEmail,
+  getSegmentDisplayName,
+} = require('./templates/b2b-email-templates.cjs');
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -286,9 +296,9 @@ async function klaviyoRequest(endpoint, method = 'GET', body = null) {
 }
 
 /**
- * Create or update Klaviyo profile for a lead
+ * Create or update Klaviyo profile for a lead with segment and personalized email
  */
-async function syncLeadToKlaviyo(lead) {
+async function syncLeadToKlaviyo(lead, segment, emailContent) {
   const profileData = {
     data: {
       type: 'profile',
@@ -307,6 +317,11 @@ async function syncLeadToKlaviyo(lead) {
           location: lead.location || null,
           scraped_at: lead.scrapedAt,
           automation_type: 'linkedin_outreach',
+          // B2B Segmentation (aligned with linkedin-to-klaviyo model)
+          segment: segment,
+          segment_display: getSegmentDisplayName(segment),
+          email_subject: emailContent.subject,
+          email_body: emailContent.body,
         }
       }
     }
@@ -339,15 +354,18 @@ async function addToKlaviyoList(profileId, listId) {
 }
 
 /**
- * Create Klaviyo event to trigger outreach flow
+ * Create Klaviyo event to trigger outreach flow (segment-specific)
  */
-async function triggerOutreachEvent(email, lead) {
+async function triggerOutreachEvent(email, lead, segment, emailContent) {
+  // Segment-specific event name for targeted Klaviyo flows
+  const eventName = `linkedin_qualified_${segment}`;
+
   const eventData = {
     data: {
       type: 'event',
       attributes: {
         profile: { data: { type: 'profile', attributes: { email } } },
-        metric: { data: { type: 'metric', attributes: { name: 'linkedin_lead_qualified' } } },
+        metric: { data: { type: 'metric', attributes: { name: eventName } } },
         properties: {
           first_name: lead.firstName || '',
           company: lead.company || '',
@@ -356,6 +374,11 @@ async function triggerOutreachEvent(email, lead) {
           linkedin_url: lead.linkedinUrl || '',
           source: 'linkedin_lead_automation',
           brand: CONFIG.BRAND_NAME,
+          // B2B Segment data
+          segment: segment,
+          segment_display: getSegmentDisplayName(segment),
+          email_subject: emailContent.subject,
+          email_body: emailContent.body,
         },
         time: new Date().toISOString(),
       }
@@ -404,17 +427,22 @@ async function logToDashboard(lead, action = 'linkedin_lead') {
 // ============================================================================
 
 /**
- * Process a single lead through the pipeline
+ * Process a single lead through the pipeline (with B2B segmentation)
  */
 async function processLead(lead) {
   const email = lead.email;
   const score = lead.leadScore;
 
-  console.log(`\n  📧 ${email} (score: ${score})`);
+  // B2B Segmentation - detect persona from job title
+  const segment = detectSegment(lead);
+  const template = EMAIL_TEMPLATES[segment] || EMAIL_TEMPLATES.other;
+  const emailContent = personalizeEmail(template, lead);
+
+  console.log(`\n  📧 ${email} (score: ${score}, segment: ${getSegmentDisplayName(segment)})`);
 
   try {
-    // 1. Sync to Klaviyo
-    const profile = await syncLeadToKlaviyo(lead);
+    // 1. Sync to Klaviyo with segment + personalized email
+    const profile = await syncLeadToKlaviyo(lead, segment, emailContent);
     const profileId = profile.id;
     console.log(`     ✅ Klaviyo profile: ${profileId}`);
 
@@ -424,9 +452,9 @@ async function processLead(lead) {
       console.log(`     ✅ Added to list`);
     }
 
-    // 3. Trigger outreach event (for Klaviyo flow)
-    await triggerOutreachEvent(email, lead);
-    console.log(`     ✅ Event: linkedin_lead_qualified`);
+    // 3. Trigger segment-specific outreach event (for Klaviyo flow)
+    await triggerOutreachEvent(email, lead, segment, emailContent);
+    console.log(`     ✅ Event: linkedin_qualified_${segment}`);
 
     // 4. Log to dashboard
     await logToDashboard(lead);
@@ -435,7 +463,7 @@ async function processLead(lead) {
     // Rate limiting
     await new Promise(r => setTimeout(r, CONFIG.KLAVIYO_RATE_DELAY));
 
-    return { success: true, email, profileId };
+    return { success: true, email, profileId, segment };
 
   } catch (error) {
     console.error(`     ❌ Error: ${error.message}`);

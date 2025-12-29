@@ -1,42 +1,55 @@
 # AUDIT FORENSIQUE COMPLET - 3A AUTOMATION
-## Date: 2025-12-28 | Version: 14.0 (Màj Session 110 - Audit n8n $env)
+## Date: 2025-12-29 | Version: 15.0 (Màj Session 113 - B2B Lead Workflows)
 ## Approche: Bottom-up empirique avec vérification croisée
 
 ---
 
-# SECTION 0: ÉTAT ACTUEL (28 Dec 2025 - Session 110)
+# SECTION 0: ÉTAT ACTUEL (29 Dec 2025 - Session 113)
 
-## ⚠️ ÉTAT VÉRIFIÉ EMPIRIQUEMENT (28/12/2025 22:50 CET)
+## ⚠️ ÉTAT VÉRIFIÉ EMPIRIQUEMENT (29/12/2025 02:00 CET)
 
-### Session 110 - AUDIT n8n DÉTAILLÉ (28/12/2025)
+### Session 113 - B2B LEAD WORKFLOWS ALIGNÉS (29/12/2025)
 
-**n8n WORKFLOWS - ÉTAT FACTUEL:**
+**B2B LEAD WORKFLOWS - 5 ALIGNÉS:**
 ```
-TOTAL: 9 workflows
+MODÈLE: linkedin-to-klaviyo-pipeline.cjs
+
+SCRIPTS ALIGNÉS:
+├── automations/agency/templates/b2b-email-templates.cjs   → Module partagé
+├── automations/agency/linkedin-lead-automation.cjs        → Segmentation ✅
+├── automations/agency/email-automation-unified.cjs        → Import templates ✅
+├── automations/agency/linkedin-to-klaviyo-pipeline.cjs    → Référence ✅
+└── automations/agency/google-maps-to-klaviyo-pipeline.cjs → CRÉÉ ✅
+
+BRANDING VALIDATION (119/119 = 100%):
+├── 6 EMAIL_TEMPLATES × 3 checks = 18 ✅
+├── 5 WELCOME_TEMPLATES × 3 checks = 15 ✅
+└── + tests personnalisation = 119 ✅
+```
+
+**SEGMENTS B2B (6):**
+```
+├── decision_maker → Dirigeants, CEO, Fondateurs
+├── marketing      → CMO, Marketing Manager
+├── sales          → Commercial, Business Dev
+├── tech           → CTO, Dev, IT
+├── hr             → RH, Recrutement
+└── other          → Fallback
+```
+
+**SCRIPTS NATIFS - ÉTAT FACTUEL:**
+```
+TOTAL: 70 fichiers (.cjs/.js)
+├── automations/agency/: 5 scripts principaux
+├── automations/agency/templates/: 1 module partagé
+├── automations/agency/core/: 19 scripts
+└── Reste: scripts génériques + clients
+
+n8n STATUS (inchangé):
 ├── ✅ OK:        2 (Blog Generator, Product Photos)
-├── ⛔ $env FAIL: 7 (utilisent $env.* → ÉCHOUENT)
-└── Résultat:     22% fonctionnels
-
-DÉTAIL $env par workflow:
-├── Grok Voice:      XAI_API_KEY, WHATSAPP_PHONE_NUMBER_ID, GROK_VOICE
-├── Klaviyo Welcome: KLAVIYO_API_KEY
-├── Email Outreach:  KLAVIYO_API_KEY
-├── LinkedIn Scraper: KLAVIYO_API_KEY
-├── WhatsApp Confirm: WHATSAPP_PHONE_NUMBER_ID
-├── WhatsApp Remind:  WHATSAPP_PHONE_NUMBER_ID
-└── Newsletter:       KLAVIYO_API_KEY (INACTIVE)
-```
-
-**SOLUTION HYBRIDE - TESTS LIVE:**
-```
-SCRIPT TESTÉ OK (28/12/2025 22:47 CET):
-├── automations/agency/email-automation-unified.cjs
-├── Welcome mode: ✅ Profile 01KDKEX3WFFN3CYNV7DNH2N3S1 créé
-└── Outreach mode: ✅ Profile + event créés
-
-CAUSE ROOT CONFIRMÉE:
-n8n Community Edition NE SUPPORTE PAS $env variables
-→ API: "Your license does not allow for feat:variables"
+├── ✅ Script:    4 (remplacés par scripts natifs)
+├── ⛔ Bloqué:    3 (Twilio, WhatsApp Business)
+└── Résultat:     6/9 fonctionnels (67%)
 ```
 
 **INFRASTRUCTURE VÉRIFIÉE:**

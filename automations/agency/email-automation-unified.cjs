@@ -26,6 +26,16 @@ const http = require('http');
 const envPath = process.env.CLIENT_ENV_PATH || path.join(__dirname, '..', '..', '.env');
 require('dotenv').config({ path: envPath });
 
+// Import B2B email templates (shared module for PME/B2B alignment)
+const {
+  EMAIL_TEMPLATES,
+  WELCOME_TEMPLATES,
+  detectSegment,
+  personalizeEmail,
+  getSegmentDisplayName,
+  generateOutreachSeries,
+} = require('./templates/b2b-email-templates.cjs');
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -219,30 +229,17 @@ function generateWelcomeSeries(firstName) {
 }
 
 /**
- * Outreach Series - 3 emails over 5 days
+ * Outreach Series - NOW USES SEGMENT-SPECIFIC TEMPLATES
+ * Imported from: ./templates/b2b-email-templates.cjs
+ *
+ * The generateOutreachSeries(segment) function is imported and returns:
+ * - email1: First contact (segment-specific from EMAIL_TEMPLATES)
+ * - email2: Follow-up with value
+ * - email3: Final outreach with audit offer
+ *
+ * All emails have full body with branding (L'équipe 3A Automation, tagline, URL)
  */
-function generateOutreachSeries(firstName, company) {
-  const name = firstName || 'there';
-  const companyName = company || 'votre entreprise';
-
-  return {
-    email1: {
-      delay: 0,
-      subject: `${name}, question rapide sur ${companyName}`,
-      preheader: 'Automatisation e-commerce',
-    },
-    email2: {
-      delay: 3,
-      subject: `Case study: comment reduire 10h/semaine de taches manuelles`,
-      preheader: 'Resultats concrets',
-    },
-    email3: {
-      delay: 5,
-      subject: `Audit gratuit pour ${companyName}?`,
-      preheader: 'Dernier message',
-    },
-  };
-}
+// Note: generateOutreachSeries is now imported from b2b-email-templates.cjs
 
 // ============================================================================
 // PROCESSING FUNCTIONS
@@ -294,17 +291,35 @@ async function processWelcome(lead) {
 }
 
 /**
- * Process Outreach lead
+ * Process Outreach lead (with B2B segmentation)
  */
 async function processOutreach(lead) {
-  console.log(`\n📧 Processing OUTREACH: ${lead.email}`);
+  // B2B Segmentation - detect persona from job title
+  const segment = detectSegment(lead);
+  const segmentDisplay = getSegmentDisplayName(segment);
+
+  // Get segment-specific email templates
+  const template = EMAIL_TEMPLATES[segment] || EMAIL_TEMPLATES.other;
+  const emailContent = personalizeEmail(template, lead);
+  const series = generateOutreachSeries(segment);
+  const personalizedSeries = {
+    email1: { ...series.email1, ...personalizeEmail(series.email1, lead) },
+    email2: { ...series.email2, ...personalizeEmail(series.email2, lead) },
+    email3: { ...series.email3, ...personalizeEmail(series.email3, lead) },
+  };
+
+  console.log(`\n📧 Processing OUTREACH: ${lead.email} (segment: ${segmentDisplay})`);
 
   try {
-    // 1. Upsert profile
+    // 1. Upsert profile with segment and personalized email content
     const profile = await upsertProfile({
       ...lead,
       automationType: 'outreach_sequence',
       source: lead.source || 'linkedin_scrape',
+      segment: segment,
+      segment_display: segmentDisplay,
+      email_subject: emailContent.subject,
+      email_body: emailContent.body,
     });
 
     const profileId = profile.id;
@@ -316,22 +331,27 @@ async function processOutreach(lead) {
       console.log(`  ✅ Added to list`);
     }
 
-    // 3. Create event to trigger Klaviyo flow
-    const series = generateOutreachSeries(lead.firstName, lead.company);
-    await createEvent(lead.email, 'outreach_started', {
+    // 3. Create segment-specific event to trigger Klaviyo flow
+    const eventName = `outreach_${segment}_started`;
+    await createEvent(lead.email, eventName, {
       first_name: lead.firstName || '',
       company: lead.company || '',
       lead_score: lead.leadScore || 50,
-      email1_subject: series.email1.subject,
+      segment: segment,
+      segment_display: segmentDisplay,
+      email1_subject: personalizedSeries.email1.subject,
+      email1_body: personalizedSeries.email1.body,
+      email2_subject: personalizedSeries.email2.subject,
+      email3_subject: personalizedSeries.email3.subject,
       series_length: 3,
     });
-    console.log(`  ✅ Event created: outreach_started`);
+    console.log(`  ✅ Event created: ${eventName}`);
 
     // 4. Log to dashboard
     await logToDashboard('outreach', lead);
     console.log(`  ✅ Logged to dashboard`);
 
-    return { success: true, profileId, type: 'outreach' };
+    return { success: true, profileId, type: 'outreach', segment };
 
   } catch (error) {
     console.error(`  ❌ Error: ${error.message}`);

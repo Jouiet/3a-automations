@@ -1,14 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.9.0",
-  "lastUpdated": "2025-12-28",
-  "totalCount": 78,
+  "version": "2.0.0",
+  "lastUpdated": "2025-12-29",
+  "totalCount": 81,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
       "name_fr": "Lead Generation & Acquisition",
       "name_en": "Lead Generation & Acquisition",
-      "count": 20
+      "count": 23
     },
     "seo": {
       "name_fr": "SEO & Contenu",
@@ -1031,6 +1031,48 @@
       "benefit_en": "3-email personalized sequence",
       "replaces": "n8n-workflow:Email Outreach Sequence (used $env → FAILED)",
       "status": "tested-ok"
+    },
+    {
+      "id": "linkedin-to-klaviyo-pipeline",
+      "name_fr": "Pipeline LinkedIn → Klaviyo (B2B)",
+      "name_en": "LinkedIn → Klaviyo Pipeline (B2B)",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/linkedin-to-klaviyo-pipeline.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Leads LinkedIn qualifiés par segment",
+      "benefit_en": "LinkedIn leads qualified by segment",
+      "segments": ["decision_maker", "marketing", "sales", "tech", "hr", "other"],
+      "status": "tested-ok"
+    },
+    {
+      "id": "google-maps-to-klaviyo-pipeline",
+      "name_fr": "Pipeline Google Maps → Klaviyo (Local B2B)",
+      "name_en": "Google Maps → Klaviyo Pipeline (Local B2B)",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/google-maps-to-klaviyo-pipeline.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Leads locaux qualifiés par catégorie",
+      "benefit_en": "Local leads qualified by category",
+      "segments": ["decision_maker", "marketing", "sales", "tech", "hr", "other"],
+      "status": "tested-ok"
+    },
+    {
+      "id": "b2b-email-templates-module",
+      "name_fr": "Module Templates Email B2B",
+      "name_en": "B2B Email Templates Module",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/templates/b2b-email-templates.cjs",
+      "frequency_fr": "Module partagé",
+      "frequency_en": "Shared module",
+      "benefit_fr": "6 segments, branding 100% validé",
+      "benefit_en": "6 segments, 100% branding validated",
+      "exports": ["EMAIL_TEMPLATES", "WELCOME_TEMPLATES", "SEGMENT_KEYWORDS", "validateBranding", "personalizeEmail"],
+      "status": "tested-ok"
     }
   ],
   "types": {
@@ -1057,8 +1099,8 @@
     "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
-    "withScript": 47,
-    "withoutScript": 30,
+    "withScript": 50,
+    "withoutScript": 31,
     "klaviyoTemplates": 7,
     "n8nWorkflows": 8,
     "shopifyNative": 6,
@@ -1066,6 +1108,7 @@
     "aiAssisted": 2,
     "thirdPartyIntegrations": 3,
     "externalServices": 4,
-    "aiAvatarWorkflows": 2
+    "aiAvatarWorkflows": 2,
+    "b2bLeadPipelines": 3
   }
 }

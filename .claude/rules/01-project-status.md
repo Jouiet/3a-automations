@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 111 - 28/12/2025 23:45 CET)
+## Current State (Session 113 - 29/12/2025 02:00 CET)
 
 | Metric | Value |
 |--------|-------|
@@ -8,20 +8,23 @@
 | Dashboard | https://dashboard.3a-automation.com LIVE |
 | Pages | 39 (19 FR + 20 EN) |
 | Automations | 79 (Registry v2.0.0) |
-| Scripts natifs | 67 fichiers (.cjs/.js) |
+| Scripts natifs | **70 fichiers (.cjs/.js)** |
+| B2B Lead Workflows | **5 alignés, 100% branding** |
 | n8n Workflows | **9 (6 OK, 3 bloqués credentials externes)** |
 | Booking API | 180 slots (GAS) |
 | Infrastructure | 3 Docker containers RUNNING |
 
-## SESSION 111 - Scripts Natifs Convertis
+## SESSION 113 - B2B Lead Workflows Alignés
 
-| Script | Remplace | Status |
-|--------|----------|--------|
-| email-automation-unified.cjs | n8n Klaviyo Welcome + Email Outreach | TESTÉ OK |
-| linkedin-lead-automation.cjs | n8n LinkedIn Lead Scraper | TESTÉ OK |
-| newsletter-automation.cjs | n8n Newsletter 3A | PRÊT (bloqué API credits) |
+| Script | Rôle | Status |
+|--------|------|--------|
+| b2b-email-templates.cjs | Module partagé (6 segments) | ✅ 119/119 branding |
+| linkedin-to-klaviyo-pipeline.cjs | Modèle référence | ✅ OK |
+| linkedin-lead-automation.cjs | LinkedIn → Klaviyo | ✅ Segmentation |
+| email-automation-unified.cjs | Welcome + Outreach | ✅ Import templates |
+| google-maps-to-klaviyo-pipeline.cjs | Local B2B → Klaviyo | ✅ CRÉÉ |
 
-## ÉTAT FACTUEL n8n (Session 111)
+## ÉTAT FACTUEL n8n (Session 113)
 
 | Workflow | n8n Status | Script Natif | Final |
 |----------|------------|--------------|-------|
