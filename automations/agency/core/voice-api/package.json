@@ -1,0 +1,14 @@
+{
+  "name": "voice-api-resilient",
+  "version": "1.0.0",
+  "description": "3A Automation Voice API with multi-provider fallback",
+  "main": "voice-api-resilient.cjs",
+  "scripts": {
+    "start": "node voice-api-resilient.cjs --server --port=3004",
+    "test": "node voice-api-resilient.cjs --test=\"Bonjour\"",
+    "health": "node voice-api-resilient.cjs --health"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

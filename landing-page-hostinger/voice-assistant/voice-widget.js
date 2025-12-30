@@ -1,9 +1,10 @@
 /**
  * 3A Automation - Voice Assistant Widget
- * Version: 1.0
+ * Version: 2.0
  *
  * Widget flottant pour assistant vocal IA
- * Utilise Web Speech API (gratuit) + fallback texte
+ * - Mode FREE: Web Speech API (gratuit, voix robotique)
+ * - Mode PREMIUM: Grok Realtime WebSocket (voix naturelle, $0.05/min)
  *
  * Usage: Ajouter <script src="/voice-assistant/voice-widget.js"></script>
  */
@@ -21,11 +22,176 @@
     primaryColor: '#4FBAF1',      // 3A Primary Blue
     primaryDark: '#2B6685',       // 3A Primary Dark
     accentColor: '#10B981',       // 3A Accent Green
-    darkBg: '#191E35'             // 3A Secondary (Dark)
+    darkBg: '#191E35',            // 3A Secondary (Dark)
+
+    // === REALTIME VOICE CONFIG ===
+    realtimeEnabled: false,       // Enable premium realtime voice (requires proxy server)
+    realtimeProxyUrl: 'wss://voice-api.3a-automation.com/realtime',
+    realtimeFallbackUrl: 'ws://localhost:3007',
+    realtimeVoice: 'ara',         // ara, eve, leo, sal, rex, mika, valentin
+    realtimeAutoUpgrade: true     // Try realtime, fallback to Web Speech if unavailable
   };
 
-  // API Backend pour réponses (prompts privés côté serveur)
-  const VOICE_API_ENDPOINT = 'https://dashboard.3a-automation.com/api/voice/respond';
+  // API Backend pour réponses avec fallback multi-provider
+  // Fallback chain: Grok → Gemini → Claude → Local patterns
+  const VOICE_API_ENDPOINT = 'https://voice-api.3a-automation.com/respond';
+  const VOICE_API_TIMEOUT = 15000; // 15 seconds timeout
+
+  // === GROK REALTIME CLIENT (Embedded) ===
+  // WebSocket client for native audio - connects to proxy server
+  const GrokRealtime = {
+    ws: null,
+    connected: false,
+    audioContext: null,
+    audioQueue: [],
+    isPlaying: false,
+    onTranscript: null,
+    onAIResponse: null,
+    onError: null,
+
+    // Convert base64 PCM16 to Float32 for playback
+    base64ToFloat32(base64) {
+      const binary = atob(base64);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      const int16 = new Int16Array(bytes.buffer);
+      const float32 = new Float32Array(int16.length);
+      for (let i = 0; i < int16.length; i++) {
+        float32[i] = int16[i] / 32768.0;
+      }
+      return float32;
+    },
+
+    // Connect to proxy WebSocket
+    async connect() {
+      return new Promise((resolve, reject) => {
+        const url = `${CONFIG.realtimeProxyUrl}?voice=${CONFIG.realtimeVoice}`;
+        console.log('[Realtime] Connecting to proxy...');
+
+        try {
+          this.ws = new WebSocket(url);
+        } catch (e) {
+          // Try fallback
+          try {
+            this.ws = new WebSocket(`${CONFIG.realtimeFallbackUrl}?voice=${CONFIG.realtimeVoice}`);
+          } catch (e2) {
+            reject(new Error('WebSocket connection failed'));
+            return;
+          }
+        }
+
+        const timeout = setTimeout(() => {
+          reject(new Error('Connection timeout'));
+        }, 5000);
+
+        this.ws.onopen = () => {
+          clearTimeout(timeout);
+          console.log('[Realtime] Connected');
+          this.connected = true;
+          resolve();
+        };
+
+        this.ws.onmessage = (event) => this.handleMessage(event.data);
+
+        this.ws.onerror = (error) => {
+          clearTimeout(timeout);
+          console.error('[Realtime] Error:', error);
+          if (this.onError) this.onError(error);
+          if (!this.connected) reject(error);
+        };
+
+        this.ws.onclose = () => {
+          console.log('[Realtime] Disconnected');
+          this.connected = false;
+        };
+      });
+    },
+
+    // Handle incoming messages
+    handleMessage(data) {
+      try {
+        const msg = JSON.parse(data);
+
+        switch (msg.type) {
+          case 'proxy.connected':
+            console.log('[Realtime] Session:', msg.sessionId);
+            break;
+
+          case 'conversation.item.input_audio_transcription.completed':
+            if (this.onTranscript) this.onTranscript(msg.transcript);
+            break;
+
+          case 'response.audio.delta':
+            this.audioQueue.push(msg.delta);
+            this.processAudioQueue();
+            break;
+
+          case 'response.audio_transcript.done':
+            if (this.onAIResponse) this.onAIResponse(msg.transcript);
+            break;
+
+          case 'error':
+            console.error('[Realtime] Error:', msg.error);
+            if (this.onError) this.onError(new Error(msg.error?.message || 'Unknown error'));
+            break;
+        }
+      } catch (e) {
+        console.error('[Realtime] Parse error:', e);
+      }
+    },
+
+    // Process audio queue for playback
+    async processAudioQueue() {
+      if (this.isPlaying || this.audioQueue.length === 0) return;
+      this.isPlaying = true;
+
+      if (!this.audioContext) {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 24000 });
+      }
+
+      while (this.audioQueue.length > 0) {
+        const base64Audio = this.audioQueue.shift();
+        const float32Data = this.base64ToFloat32(base64Audio);
+        const buffer = this.audioContext.createBuffer(1, float32Data.length, 24000);
+        buffer.getChannelData(0).set(float32Data);
+        const source = this.audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(this.audioContext.destination);
+        source.start();
+        await new Promise(resolve => { source.onended = resolve; });
+      }
+
+      this.isPlaying = false;
+    },
+
+    // Send text message
+    sendText(text) {
+      if (!this.connected) return false;
+      this.ws.send(JSON.stringify({ type: 'proxy.text', text }));
+      return true;
+    },
+
+    // Disconnect
+    disconnect() {
+      if (this.ws) {
+        this.ws.close();
+        this.ws = null;
+      }
+      this.connected = false;
+      this.audioQueue = [];
+    },
+
+    // Check if supported
+    isSupported() {
+      return 'WebSocket' in window && 'AudioContext' in window;
+    }
+  };
+
+  // Realtime mode state
+  let realtimeActive = false;
+  let realtimeAvailable = false;
 
   // Knowledge base (chargé dynamiquement)
   let knowledgeBase = null;
@@ -494,6 +660,9 @@
     document.body.appendChild(widget);
     initEventListeners();
 
+    // Initialize Realtime mode (if enabled/auto-upgrade)
+    initRealtimeMode();
+
     // Message de bienvenue après 2 secondes
     setTimeout(() => {
       if (!isOpen) {
@@ -654,8 +823,16 @@
     if (typing) typing.remove();
   }
 
-  // Synthèse vocale
+  // Synthèse vocale - Mode FREE (Web Speech) ou PREMIUM (Grok Realtime)
   function speak(text) {
+    // Mode PREMIUM: Grok Realtime avec audio natif
+    if (realtimeActive && GrokRealtime.connected) {
+      // Audio will be received via WebSocket and played automatically
+      console.log('[Voice] Using Grok Realtime (premium audio)');
+      return;
+    }
+
+    // Mode FREE: Web Speech API (robotic but free)
     if (!hasSpeechSynthesis) return;
 
     synthesis.cancel();
@@ -664,6 +841,46 @@
     utterance.rate = 1.0;
     utterance.pitch = 1.0;
     synthesis.speak(utterance);
+  }
+
+  // Initialize Realtime mode if enabled
+  async function initRealtimeMode() {
+    if (!CONFIG.realtimeEnabled && !CONFIG.realtimeAutoUpgrade) return;
+    if (!GrokRealtime.isSupported()) {
+      console.log('[Realtime] Not supported in this browser');
+      return;
+    }
+
+    try {
+      await GrokRealtime.connect();
+      realtimeActive = true;
+      realtimeAvailable = true;
+      console.log('[Realtime] Premium voice activated');
+
+      // Setup callbacks - Add AI responses to chat
+      GrokRealtime.onAIResponse = (transcript) => {
+        console.log('[Realtime] AI:', transcript);
+        hideTyping();
+        // Add message without calling speak() since audio comes via WebSocket
+        const messagesContainer = document.getElementById('va-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'va-message assistant';
+        messageDiv.innerHTML = `<div class="va-message-content">${transcript}</div>`;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        conversationHistory.push({ role: 'assistant', content: transcript });
+      };
+
+      GrokRealtime.onError = (error) => {
+        console.error('[Realtime] Error, falling back to Web Speech:', error);
+        realtimeActive = false;
+      };
+
+    } catch (error) {
+      console.log('[Realtime] Unavailable, using Web Speech API:', error.message);
+      realtimeActive = false;
+      realtimeAvailable = false;
+    }
   }
 
   // Reconnaissance vocale
@@ -717,6 +934,16 @@
     showTyping();
 
     try {
+      // Mode PREMIUM: Grok Realtime (native audio response)
+      if (realtimeActive && GrokRealtime.connected) {
+        GrokRealtime.sendText(text);
+        // Response will come via WebSocket with native audio
+        // Wait a bit then hide typing (audio response is async)
+        setTimeout(() => hideTyping(), 500);
+        return;
+      }
+
+      // Mode FREE: Text API + Web Speech TTS
       const response = await getAIResponse(text);
       hideTyping();
       addMessage(response, 'assistant');
@@ -1101,7 +1328,39 @@
     }
   };
 
-  // Obtenir réponse intelligente
+  // Appel API avec fallback local
+  async function callVoiceAPI(message, history = []) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), VOICE_API_TIMEOUT);
+
+    try {
+      const response = await fetch(VOICE_API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, history }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.success && data.response) {
+        console.log(`[Voice] Response from ${data.provider}${data.fallbacksUsed > 0 ? ` (${data.fallbacksUsed} fallbacks)` : ''}`);
+        return { success: true, response: data.response, provider: data.provider };
+      }
+      throw new Error('Invalid API response');
+    } catch (err) {
+      clearTimeout(timeoutId);
+      console.log('[Voice] API unavailable, using local patterns:', err.message);
+      return { success: false, error: err.message };
+    }
+  }
+
+  // Obtenir réponse intelligente (API → Local fallback)
   async function getAIResponse(userMessage) {
     const lower = userMessage.toLowerCase();
 
@@ -1192,6 +1451,19 @@
     // Réponse par défaut intelligente basée sur le contexte
     if (conversationContext.industry) {
       return `Pour votre activité ${conversationContext.industry.toUpperCase()}, je peux vous proposer plusieurs solutions.\n\nCommençons par l'audit gratuit : je vous envoie un rapport personnalisé avec 3 recommandations prioritaires sous 24-48h.\n\n👉 Ça vous intéresse ?`;
+    }
+
+    // === TRY AI API WITH MULTI-PROVIDER FALLBACK ===
+    // Fallback chain: Grok → Gemini → Claude → Local patterns
+    const apiHistory = conversationHistory.slice(-6).map(m => ({
+      role: m.sender === 'user' ? 'user' : 'assistant',
+      content: m.content
+    }));
+
+    const apiResult = await callVoiceAPI(userMessage, apiHistory);
+    if (apiResult.success) {
+      trackEvent('voice_ai_response', { provider: apiResult.provider });
+      return apiResult.response;
     }
 
     // Vraie réponse par défaut - poser une question de qualification

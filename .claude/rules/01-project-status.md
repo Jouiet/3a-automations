@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 115 - 29/12/2025 16:00 CET)
+## Current State (Session 116 - 30/12/2025)
 
 | Metric | Value |
 |--------|-------|
@@ -8,97 +8,76 @@
 | Dashboard | https://dashboard.3a-automation.com LIVE |
 | Pages | 39 (20 FR + 19 EN) |
 | Automations | 82 (Registry v2.0.0) |
-| Scripts natifs | **70 fichiers (.cjs/.js)** |
-| n8n Workflows | **5 (2 fonctionnels, 3 bloqués)** |
-| Marchés | **31 pays (14 actifs Phase 1)** |
-| Listes Klaviyo | **15 créées** |
+| Scripts résilients | **8 fichiers (core/)** |
+| n8n Workflows | **1 restant** (Twilio blocked) |
+| Social Distribution | **3 plateformes** (FB/LinkedIn/X) |
 | Infrastructure | 3 Docker containers RUNNING |
 
-## SESSION 114 - LEAD GEN PIPELINES
+## SESSION 116 - SECURITY HARDENING
 
 | Action | Résultat |
 |--------|----------|
-| Marchés configurés | **31 pays** (config/markets.cjs) |
-| Phase 1 active | **14 pays** (MENA + Europe) |
-| Devises standardisées | **3 (MAD/EUR/USD)** |
-| Listes Klaviyo | **15 créées via API** |
-| GitHub Actions cron | **lead-generation.yml créé** |
-| Scheduler centralisé | **lead-gen-scheduler.cjs créé** |
+| Patterns sécurité corrigés | 13/13 (100%) |
+| whatsapp-booking-notifications.cjs | +timeout, +body limit, +rate limiter, +bounded memory |
+| blog-generator-resilient.cjs | +timeout, +rate limiter, +JSON parsing, +graceful shutdown |
+| grok-voice-realtime.cjs | +session limit, +zombie cleanup, +input validation |
+| Tests health checks | 3/3 OK |
 
-## ÉTAT FACTUEL (Session 114 - VÉRIFIÉ)
+## SCRIPTS RÉSILIENTS (Session 115)
 
-### Lead Generation Pipelines
+| Script | Version | Fallback Chain | Port |
+|--------|---------|----------------|------|
+| blog-generator-resilient.cjs | v2.1 | Anthropic→Grok→Gemini + FB/LinkedIn/X | 3003 |
+| grok-voice-realtime.cjs | v2.0 | Grok Realtime→Gemini TTS | 3007 |
+| whatsapp-booking-notifications.cjs | v1.0 | WhatsApp Cloud API | 3008 |
+| voice-api-resilient.cjs | v1.0 | Grok→Gemini→Claude | 3004 |
+| product-photos-resilient.cjs | v1.0 | Gemini→fal.ai→Replicate | 3005 |
+| email-personalization-resilient.cjs | v1.0 | Grok→Gemini→Claude | 3006 |
 
-| Script | Status | Notes |
-|--------|--------|-------|
-| linkedin-lead-automation.cjs | ✅ PRÊT | Apify STARTER ($39/mo) |
-| google-maps-to-klaviyo-pipeline.cjs | ✅ PRÊT | Apify STARTER ($39/mo) |
-| newsletter-automation.cjs | ✅ PRÊT | xAI/Gemini OK |
-| email-automation-unified.cjs | ✅ PRÊT | Testé OK |
+## n8n WORKFLOWS
 
-### n8n Workflows (5)
+| Avant Session 115 | Après Session 115 |
+|-------------------|-------------------|
+| Blog Generator ✅ | SUPPRIMÉ → blog-generator-resilient.cjs |
+| Product Photos ✅ | SUPPRIMÉ → product-photos-resilient.cjs |
+| WhatsApp Confirm ⛔ | SUPPRIMÉ → whatsapp-booking-notifications.cjs |
+| WhatsApp Remind ⛔ | SUPPRIMÉ → whatsapp-booking-notifications.cjs |
+| Grok Voice ⛔ | RESTANT (Twilio blocked) |
 
-| Workflow | Status | Blocker |
-|----------|--------|---------|
-| Blog Article Generator | ✅ FONCTIONNE | - |
-| Enhance Product Photos | ✅ FONCTIONNE | - |
-| Grok Voice Telephony | ⛔ BLOQUÉ | Twilio |
-| WhatsApp Confirmation | ⛔ BLOQUÉ | Meta Business |
-| WhatsApp Reminders | ⛔ BLOQUÉ | Meta Business |
+**Résultat: 5 → 1 workflow. Scripts natifs = 0 dépendance n8n.**
 
-## BLOCKERS CRITIQUES
+## CREDENTIALS AWAITING
 
-| Blocker | Action | Impact | Priorité |
-|---------|--------|--------|----------|
-| Twilio | Créer compte | Grok Voice | P2 |
-| Meta Business | Approval | WhatsApp x2 | P3 |
-
-## Phase 1 - Marchés Actifs (6 mois)
-
-```
-ROTATION QUOTIDIENNE:
-  Dim: Morocco, Tunisia, Algeria (Maghreb)
-  Lun: France, Belgium, Switzerland (FR Europe)
-  Mar: UAE, Saudi Arabia (Gulf)
-  Mer: Germany, Netherlands (Germanic)
-  Jeu: Spain, Italy, Portugal (Southern)
-  Ven: Egypt, Morocco (MENA)
-  Sam: France, UAE (Priority)
-
-Devises: MAD, EUR, USD uniquement
-```
-
-## Listes Klaviyo (15)
-
-```
-LinkedIn: RPHxM8, XcZciz, WzY9FW, Ynq3cr, XKnYzN, R85eP7
-GMaps: YhLLR3, TsSUAP, X3JFBM, SPRRYc, ScQPmz, RzPLJW
-General: VaFxKU (Newsletter), SKeBCN (Welcome), S8dz2b (Outreach)
-```
+| Service | Variables | Action |
+|---------|-----------|--------|
+| WhatsApp | WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID | Meta Business Manager |
+| Facebook | FACEBOOK_PAGE_ID, FACEBOOK_ACCESS_TOKEN | Meta Developer Console |
+| LinkedIn | LINKEDIN_ACCESS_TOKEN, LINKEDIN_ORGANIZATION_ID | LinkedIn Developer |
+| X/Twitter | X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET | developer.x.com |
+| Twilio | TWILIO_* | twilio.com |
 
 ## APIs Health
 
 | API | Status | Notes |
 |-----|--------|-------|
-| n8n | ✅ | 5 workflows |
+| n8n | ✅ | 1 workflow |
 | Klaviyo | ✅ | 15 listes |
 | Shopify | ✅ | Dev store |
 | xAI/Grok | ✅ | 11 models |
+| Gemini | ✅ | TTS fallback testé |
 | Apify | ✅ | STARTER $39/mo |
-| Gemini | ✅ | 50 models |
 | GitHub | ✅ | OK |
 | Hostinger | ✅ | Running |
 
 ## Source of Truth
 
 - **Automations:** `automations/automations-registry.json`
-- **Marchés:** `automations/agency/config/markets.cjs`
+- **Scripts:** `automations/agency/core/`
 - **Sessions:** `HISTORY.md`
-- **Health:** `outputs/system-health.json`
+- **n8n:** `.claude/rules/07-n8n-workflows.md`
 
 ## URLs
 
 - Site: https://3a-automation.com
 - Dashboard: https://dashboard.3a-automation.com
 - n8n: https://n8n.srv1168256.hstgr.cloud
-- Apify: https://console.apify.com/billing

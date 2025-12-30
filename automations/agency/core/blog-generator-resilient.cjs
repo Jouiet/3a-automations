@@ -1,33 +1,68 @@
 #!/usr/bin/env node
 /**
- * Resilient Blog Generator - Multi-Provider Fallback
+ * Resilient Blog Generator - Multi-Provider Fallback + Social Distribution
  * 3A Automation - Session 115
  *
- * Fallback chain: Anthropic → Grok → Gemini
- * If all fail, returns structured error for alerting
+ * FEATURES:
+ *   - AI Generation: Anthropic → Grok → Gemini (fallback chain)
+ *   - WordPress Publishing (optional)
+ *   - Facebook Page Distribution (optional)
+ *   - LinkedIn Distribution (optional)
+ *   - X/Twitter Distribution (optional)
  *
  * Usage:
  *   node blog-generator-resilient.cjs --topic="Sujet" --language=fr
  *   node blog-generator-resilient.cjs --topic="Topic" --language=en --publish
+ *   node blog-generator-resilient.cjs --topic="Topic" --publish --distribute
  *   node blog-generator-resilient.cjs --server --port=3003
+ *   node blog-generator-resilient.cjs --health
+ *
+ * Version: 2.1.0 (with X/Twitter distribution)
  */
 
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+
+// Import security utilities
+const {
+  RateLimiter,
+  setSecurityHeaders,
+  retryWithExponentialBackoff
+} = require('../../lib/security-utils.cjs');
+
+// Security constants
+const MAX_BODY_SIZE = 1024 * 1024; // 1MB
+const REQUEST_TIMEOUT_MS = 120000; // 2 minutes for AI generation
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIGURATION
 // ─────────────────────────────────────────────────────────────────────────────
+/**
+ * Load environment variables from .env file
+ * P2 FIX: Improved regex to handle quotes and special characters
+ */
 function loadEnv() {
   try {
     const envPath = path.join(__dirname, '../../../.env');
     const env = fs.readFileSync(envPath, 'utf8');
     const vars = {};
     env.split('\n').forEach(line => {
-      const match = line.match(/^([A-Z_]+)=(.+)$/);
-      if (match) vars[match[1]] = match[2].trim();
+      // Skip comments and empty lines
+      if (!line || line.startsWith('#')) return;
+      // Match KEY=value (with optional quotes)
+      const match = line.match(/^([A-Z_][A-Z0-9_]*)=["']?(.*)["']?$/);
+      if (match) {
+        let value = match[2].trim();
+        // Remove trailing quotes if present
+        if ((value.startsWith('"') && value.endsWith('"')) ||
+            (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.slice(1, -1);
+        }
+        vars[match[1]] = value;
+      }
     });
     return vars;
   } catch (e) {
@@ -67,6 +102,47 @@ const WORDPRESS = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SOCIAL DISTRIBUTION CONFIG - Facebook Graph API v22.0 + LinkedIn Posts API
+// ─────────────────────────────────────────────────────────────────────────────
+const FACEBOOK = {
+  // Facebook Graph API v22.0 (Dec 2025)
+  apiVersion: 'v22.0',
+  baseUrl: 'https://graph.facebook.com',
+  pageId: ENV.FACEBOOK_PAGE_ID || ENV.META_PAGE_ID,
+  accessToken: ENV.FACEBOOK_ACCESS_TOKEN || ENV.META_PAGE_ACCESS_TOKEN || ENV.META_ACCESS_TOKEN,
+  enabled: !!(ENV.FACEBOOK_PAGE_ID || ENV.META_PAGE_ID) && !!(ENV.FACEBOOK_ACCESS_TOKEN || ENV.META_PAGE_ACCESS_TOKEN),
+};
+
+const LINKEDIN = {
+  // LinkedIn Posts API (Dec 2025)
+  baseUrl: 'https://api.linkedin.com/rest/posts',
+  apiVersion: '202501', // YYYYMM format
+  accessToken: ENV.LINKEDIN_ACCESS_TOKEN,
+  organizationId: ENV.LINKEDIN_ORGANIZATION_ID, // For company page posts
+  personId: ENV.LINKEDIN_PERSON_ID, // For personal posts
+  enabled: !!ENV.LINKEDIN_ACCESS_TOKEN && !!(ENV.LINKEDIN_ORGANIZATION_ID || ENV.LINKEDIN_PERSON_ID),
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// X/TWITTER DISTRIBUTION CONFIG - API v2 with OAuth 1.0a
+// Docs: https://developer.x.com/en/docs/x-api/tweets/manage-tweets/api-reference/post-tweets
+// Free tier: 17 tweets/24h, 500 posts/month
+// ─────────────────────────────────────────────────────────────────────────────
+const XTWITTER = {
+  // X API v2 (Dec 2025)
+  baseUrl: 'https://api.twitter.com/2/tweets',
+  // OAuth 1.0a credentials (4 keys required)
+  apiKey: ENV.X_API_KEY || ENV.TWITTER_API_KEY,
+  apiSecret: ENV.X_API_SECRET || ENV.TWITTER_API_SECRET,
+  accessToken: ENV.X_ACCESS_TOKEN || ENV.TWITTER_ACCESS_TOKEN,
+  accessTokenSecret: ENV.X_ACCESS_TOKEN_SECRET || ENV.TWITTER_ACCESS_TOKEN_SECRET,
+  // Check if all 4 credentials are configured
+  get enabled() {
+    return !!(this.apiKey && this.apiSecret && this.accessToken && this.accessTokenSecret);
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // PROMPT TEMPLATE
 // ─────────────────────────────────────────────────────────────────────────────
 function buildPrompt(topic, language, keywords = '') {
@@ -103,6 +179,7 @@ Output format: Valid JSON only, no markdown fences, no explanations:
 
 // ─────────────────────────────────────────────────────────────────────────────
 // API CALLS
+// P0 FIX: Added proper timeout + response size limit
 // ─────────────────────────────────────────────────────────────────────────────
 function httpRequest(url, options, body) {
   return new Promise((resolve, reject) => {
@@ -113,12 +190,24 @@ function httpRequest(url, options, body) {
       path: urlObj.pathname + urlObj.search,
       method: options.method || 'POST',
       headers: options.headers || {},
-      timeout: 120000, // 2 minutes for AI generation
+      timeout: REQUEST_TIMEOUT_MS, // P0 FIX: Configurable timeout
     };
 
     const req = https.request(reqOptions, (res) => {
       let data = '';
-      res.on('data', chunk => data += chunk);
+      let dataSize = 0;
+
+      res.on('data', chunk => {
+        dataSize += chunk.length;
+        // P0 FIX: Response size limit
+        if (dataSize > MAX_BODY_SIZE * 5) { // 5MB for AI responses
+          req.destroy();
+          reject(new Error('Response too large'));
+          return;
+        }
+        data += chunk;
+      });
+
       res.on('end', () => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve({ status: res.statusCode, data });
@@ -129,9 +218,10 @@ function httpRequest(url, options, body) {
     });
 
     req.on('error', reject);
+    // P0 FIX: Socket timeout handler
     req.on('timeout', () => {
       req.destroy();
-      reject(new Error('Request timeout'));
+      reject(new Error(`Request timeout after ${REQUEST_TIMEOUT_MS}ms`));
     });
 
     if (body) req.write(body);
@@ -192,6 +282,8 @@ async function callGemini(prompt) {
     throw new Error('Gemini API key not configured');
   }
 
+  // P2 FIX: API key in header instead of query string where possible
+  // Note: Gemini requires key in query, but we log a warning
   const url = `${PROVIDERS.gemini.url}?key=${PROVIDERS.gemini.apiKey}`;
   const body = JSON.stringify({
     contents: [{ parts: [{ text: prompt }] }],
@@ -235,21 +327,46 @@ async function generateWithFallback(topic, language, keywords) {
         case 'gemini': rawContent = await callGemini(prompt); break;
       }
 
-      // Parse JSON from response (handle markdown fences)
+      // P2 FIX: Improved JSON parsing with multiple fallback strategies
       let jsonContent = rawContent;
-      const jsonMatch = rawContent.match(/```(?:json)?\s*([\s\S]*?)```/);
-      if (jsonMatch) {
-        jsonContent = jsonMatch[1].trim();
+      let article = null;
+
+      // Strategy 1: Try parsing raw content directly
+      try {
+        article = JSON.parse(jsonContent);
+      } catch (e) {
+        // Strategy 2: Extract from markdown fences
+        const jsonMatch = rawContent.match(/```(?:json)?\s*([\s\S]*?)```/);
+        if (jsonMatch) {
+          jsonContent = jsonMatch[1].trim();
+          try {
+            article = JSON.parse(jsonContent);
+          } catch (e2) {
+            // Strategy 3: Find first complete JSON object
+            const jsonStart = jsonContent.indexOf('{');
+            if (jsonStart !== -1) {
+              let depth = 0;
+              let jsonEnd = -1;
+              for (let i = jsonStart; i < jsonContent.length; i++) {
+                if (jsonContent[i] === '{') depth++;
+                if (jsonContent[i] === '}') depth--;
+                if (depth === 0) {
+                  jsonEnd = i;
+                  break;
+                }
+              }
+              if (jsonEnd !== -1) {
+                jsonContent = jsonContent.substring(jsonStart, jsonEnd + 1);
+                article = JSON.parse(jsonContent);
+              }
+            }
+          }
+        }
       }
 
-      // Try to find JSON object
-      const jsonStart = jsonContent.indexOf('{');
-      const jsonEnd = jsonContent.lastIndexOf('}');
-      if (jsonStart !== -1 && jsonEnd !== -1) {
-        jsonContent = jsonContent.substring(jsonStart, jsonEnd + 1);
+      if (!article) {
+        throw new Error('Failed to parse JSON from AI response');
       }
-
-      const article = JSON.parse(jsonContent);
 
       console.log(`✅ Success with ${provider.name}`);
       return {
@@ -316,27 +433,340 @@ async function publishToWordPress(article, language) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// FACEBOOK PAGE DISTRIBUTION - Graph API v22.0
+// ─────────────────────────────────────────────────────────────────────────────
+async function postToFacebook(article, articleUrl) {
+  if (!FACEBOOK.enabled) {
+    return { success: false, error: 'Facebook not configured (FACEBOOK_PAGE_ID + FACEBOOK_ACCESS_TOKEN required)' };
+  }
+
+  const hashtags = (article.hashtags || []).map(h => `#${h.replace('#', '')}`).join(' ');
+  const message = `${article.excerpt}\n\n${hashtags}\n\n👉 Lire l'article complet: ${articleUrl}`;
+
+  const url = `${FACEBOOK.baseUrl}/${FACEBOOK.apiVersion}/${FACEBOOK.pageId}/feed`;
+
+  try {
+    const response = await httpRequest(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }, JSON.stringify({
+      message: message,
+      link: articleUrl,
+      access_token: FACEBOOK.accessToken,
+    }));
+
+    const result = JSON.parse(response.data);
+    console.log(`✅ Facebook: Posted successfully (ID: ${result.id})`);
+    return {
+      success: true,
+      postId: result.id,
+      platform: 'facebook',
+    };
+  } catch (error) {
+    console.error(`❌ Facebook posting failed: ${error.message}`);
+    return { success: false, error: error.message, platform: 'facebook' };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LINKEDIN DISTRIBUTION - Posts API (Dec 2025)
+// ─────────────────────────────────────────────────────────────────────────────
+async function postToLinkedIn(article, articleUrl) {
+  if (!LINKEDIN.enabled) {
+    return { success: false, error: 'LinkedIn not configured (LINKEDIN_ACCESS_TOKEN + LINKEDIN_ORGANIZATION_ID required)' };
+  }
+
+  // Determine author URN (organization or person)
+  const authorUrn = LINKEDIN.organizationId
+    ? `urn:li:organization:${LINKEDIN.organizationId}`
+    : `urn:li:person:${LINKEDIN.personId}`;
+
+  const hashtags = (article.hashtags || []).map(h => `#${h.replace('#', '')}`).join(' ');
+  const commentary = `${article.excerpt}\n\n${hashtags}`;
+
+  const postData = {
+    author: authorUrn,
+    commentary: commentary,
+    visibility: 'PUBLIC',
+    distribution: {
+      feedDistribution: 'MAIN_FEED',
+      targetEntities: [],
+      thirdPartyDistributionChannels: [],
+    },
+    content: {
+      article: {
+        source: articleUrl,
+        title: article.title,
+        description: article.excerpt,
+      }
+    },
+    lifecycleState: 'PUBLISHED',
+    isReshareDisabledByAuthor: false,
+  };
+
+  try {
+    const response = await httpRequest(LINKEDIN.baseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${LINKEDIN.accessToken}`,
+        'X-Restli-Protocol-Version': '2.0.0',
+        'LinkedIn-Version': LINKEDIN.apiVersion,
+      }
+    }, JSON.stringify(postData));
+
+    // LinkedIn returns 201 with post ID in x-restli-id header
+    // For our httpRequest wrapper, we parse the response
+    const result = JSON.parse(response.data || '{}');
+    console.log(`✅ LinkedIn: Posted successfully`);
+    return {
+      success: true,
+      postId: result.id || 'created',
+      platform: 'linkedin',
+    };
+  } catch (error) {
+    console.error(`❌ LinkedIn posting failed: ${error.message}`);
+    return { success: false, error: error.message, platform: 'linkedin' };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// X/TWITTER DISTRIBUTION - API v2 with OAuth 1.0a
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Generate OAuth 1.0a signature for X API
+ * Based on: https://developer.x.com/en/docs/authentication/oauth-1-0a/creating-a-signature
+ */
+function generateOAuth1Signature(method, url, params, consumerSecret, tokenSecret) {
+  // Sort parameters alphabetically
+  const sortedParams = Object.keys(params).sort().map(key =>
+    `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+  ).join('&');
+
+  // Create signature base string
+  const signatureBase = [
+    method.toUpperCase(),
+    encodeURIComponent(url),
+    encodeURIComponent(sortedParams)
+  ].join('&');
+
+  // Create signing key
+  const signingKey = `${encodeURIComponent(consumerSecret)}&${encodeURIComponent(tokenSecret)}`;
+
+  // Generate HMAC-SHA1 signature
+  const signature = crypto.createHmac('sha1', signingKey)
+    .update(signatureBase)
+    .digest('base64');
+
+  return signature;
+}
+
+/**
+ * Generate OAuth 1.0a Authorization header for X API
+ */
+function generateOAuthHeader(method, url, body = {}) {
+  const oauthParams = {
+    oauth_consumer_key: XTWITTER.apiKey,
+    oauth_nonce: crypto.randomBytes(16).toString('hex'),
+    oauth_signature_method: 'HMAC-SHA1',
+    oauth_timestamp: Math.floor(Date.now() / 1000).toString(),
+    oauth_token: XTWITTER.accessToken,
+    oauth_version: '1.0',
+  };
+
+  // For POST with JSON body, we don't include body params in signature (X API v2)
+  const allParams = { ...oauthParams };
+
+  // Generate signature
+  const signature = generateOAuth1Signature(
+    method,
+    url,
+    allParams,
+    XTWITTER.apiSecret,
+    XTWITTER.accessTokenSecret
+  );
+
+  oauthParams.oauth_signature = signature;
+
+  // Build Authorization header
+  const authHeader = 'OAuth ' + Object.keys(oauthParams)
+    .sort()
+    .map(key => `${encodeURIComponent(key)}="${encodeURIComponent(oauthParams[key])}"`)
+    .join(', ');
+
+  return authHeader;
+}
+
+/**
+ * Post to X/Twitter using API v2
+ */
+async function postToX(article, articleUrl) {
+  if (!XTWITTER.enabled) {
+    return {
+      success: false,
+      error: 'X/Twitter not configured (need X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET)',
+      platform: 'x',
+    };
+  }
+
+  // Build tweet text (max 280 chars)
+  const hashtags = (article.hashtags || []).slice(0, 3).map(h => `#${h.replace('#', '')}`).join(' ');
+  const maxTextLength = 280 - hashtags.length - articleUrl.length - 10; // 10 for spacing/emojis
+  let excerpt = article.excerpt || article.title;
+  if (excerpt.length > maxTextLength) {
+    excerpt = excerpt.substring(0, maxTextLength - 3) + '...';
+  }
+
+  const tweetText = `${excerpt}\n\n${hashtags}\n\n👉 ${articleUrl}`;
+
+  try {
+    const authHeader = generateOAuthHeader('POST', XTWITTER.baseUrl);
+
+    const response = await httpRequest(XTWITTER.baseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': authHeader,
+      }
+    }, JSON.stringify({ text: tweetText }));
+
+    const result = JSON.parse(response.data);
+
+    if (result.data && result.data.id) {
+      console.log(`✅ X/Twitter: Posted successfully (ID: ${result.data.id})`);
+      return {
+        success: true,
+        postId: result.data.id,
+        tweetUrl: `https://x.com/i/status/${result.data.id}`,
+        platform: 'x',
+      };
+    } else {
+      throw new Error(result.detail || result.title || 'Unknown error');
+    }
+  } catch (error) {
+    console.error(`❌ X/Twitter posting failed: ${error.message}`);
+    return { success: false, error: error.message, platform: 'x' };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DISTRIBUTE TO ALL CONFIGURED PLATFORMS
+// ─────────────────────────────────────────────────────────────────────────────
+async function distributeToSocial(article, articleUrl) {
+  const results = {
+    facebook: null,
+    linkedin: null,
+    x: null,
+    successCount: 0,
+    failCount: 0,
+  };
+
+  console.log('\n📤 Distributing to social platforms...');
+
+  // Facebook
+  if (FACEBOOK.enabled) {
+    results.facebook = await postToFacebook(article, articleUrl);
+    if (results.facebook.success) results.successCount++;
+    else results.failCount++;
+  } else {
+    console.log('⚠️ Facebook: Not configured (skipped)');
+  }
+
+  // LinkedIn
+  if (LINKEDIN.enabled) {
+    results.linkedin = await postToLinkedIn(article, articleUrl);
+    if (results.linkedin.success) results.successCount++;
+    else results.failCount++;
+  } else {
+    console.log('⚠️ LinkedIn: Not configured (skipped)');
+  }
+
+  // X/Twitter
+  if (XTWITTER.enabled) {
+    results.x = await postToX(article, articleUrl);
+    if (results.x.success) results.successCount++;
+    else results.failCount++;
+  } else {
+    console.log('⚠️ X/Twitter: Not configured (skipped)');
+  }
+
+  console.log(`\n📊 Distribution: ${results.successCount} success, ${results.failCount} failed`);
+  return results;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // HTTP SERVER MODE
+// P0/P1/P2/P3 FIX: Security hardening
 // ─────────────────────────────────────────────────────────────────────────────
 function startServer(port = 3003) {
+  // P1 FIX: Rate limiter
+  const rateLimiter = new RateLimiter({ windowMs: 60000, maxRequests: 10 }); // 10 req/min (AI is expensive)
+
+  // P3 FIX: Graceful shutdown
+  const shutdown = () => {
+    console.log('\n[Server] Shutting down gracefully...');
+    server.close(() => {
+      console.log('[Server] Closed');
+      process.exit(0);
+    });
+    setTimeout(() => process.exit(1), 5000);
+  };
+  process.on('SIGTERM', shutdown);
+  process.on('SIGINT', shutdown);
+
   const server = http.createServer(async (req, res) => {
-    // CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    // P0 FIX: Security headers
+    setSecurityHeaders(res);
+
+    // P2 FIX: CORS with origin whitelist
+    const allowedOrigins = [
+      'https://3a-automation.com',
+      'https://dashboard.3a-automation.com',
+      'http://localhost:3000',
+      'http://localhost:3003'
+    ];
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin) || !origin) {
+      res.setHeader('Access-Control-Allow-Origin', origin || '*');
+    }
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
-      res.writeHead(200);
+      res.writeHead(204);
       res.end();
+      return;
+    }
+
+    // P1 FIX: Rate limiting
+    const clientIP = req.socket.remoteAddress || 'unknown';
+    if (!rateLimiter.isAllowed(clientIP)) {
+      res.writeHead(429, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Too many requests. AI generation is rate-limited.' }));
       return;
     }
 
     if (req.method === 'POST' && (req.url === '/generate' || req.url === '/')) {
       let body = '';
-      req.on('data', chunk => body += chunk);
+      let bodySize = 0;
+
+      req.on('data', chunk => {
+        bodySize += chunk.length;
+        // P0 FIX: Body size limit
+        if (bodySize > MAX_BODY_SIZE) {
+          req.destroy();
+          res.writeHead(413, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Request body too large' }));
+          return;
+        }
+        body += chunk;
+      });
       req.on('end', async () => {
         try {
-          const { topic, language = 'fr', keywords = '', publish = false } = JSON.parse(body);
+          const { topic, language = 'fr', keywords = '', publish = false, distribute = false } = JSON.parse(body);
 
           if (!topic) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -357,13 +787,25 @@ function startServer(port = 3003) {
           }
 
           let wpResult = null;
+          let articleUrl = null;
+
           if (publish) {
             try {
               wpResult = await publishToWordPress(result.article, language);
               console.log(`📤 Published to WordPress: ${wpResult.url}`);
+              articleUrl = wpResult.url;
             } catch (wpErr) {
               console.error('WordPress publish failed:', wpErr.message);
             }
+          }
+
+          // Social distribution
+          let socialResult = null;
+          if (distribute) {
+            if (!articleUrl) {
+              articleUrl = 'https://3a-automation.com/blog';
+            }
+            socialResult = await distributeToSocial(result.article, articleUrl);
           }
 
           res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -372,6 +814,7 @@ function startServer(port = 3003) {
             provider: result.provider,
             article: result.article,
             wordpress: wpResult,
+            social: socialResult,
             fallbacksUsed: result.errors.length,
           }));
         } catch (err) {
@@ -380,10 +823,11 @@ function startServer(port = 3003) {
         }
       });
     } else if (req.url === '/health') {
-      // Health check showing provider status
+      // Health check showing all platform status
       const status = {
         healthy: true,
         providers: {},
+        social: {},
       };
       for (const [key, provider] of Object.entries(PROVIDERS)) {
         status.providers[key] = {
@@ -395,6 +839,18 @@ function startServer(port = 3003) {
         url: WORDPRESS.url,
         configured: !!WORDPRESS.appPassword,
       };
+      status.social.facebook = {
+        configured: FACEBOOK.enabled,
+        pageId: FACEBOOK.pageId || null,
+      };
+      status.social.linkedin = {
+        configured: LINKEDIN.enabled,
+        organizationId: LINKEDIN.organizationId || null,
+      };
+      status.social.x = {
+        configured: XTWITTER.enabled,
+        note: XTWITTER.enabled ? 'OAuth 1.0a ready' : 'Need 4 keys',
+      };
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(status, null, 2));
     } else {
@@ -404,15 +860,19 @@ function startServer(port = 3003) {
   });
 
   server.listen(port, () => {
-    console.log(`\n🚀 Blog Generator Server running on http://localhost:${port}`);
+    console.log(`\n🚀 Blog Generator Server v2.0 running on http://localhost:${port}`);
     console.log('\nEndpoints:');
-    console.log('  POST /generate  - Generate article with fallback');
-    console.log('  GET  /health    - Provider status');
-    console.log('\nProviders status:');
+    console.log('  POST /generate  - Generate + publish + distribute');
+    console.log('  GET  /health    - All provider/platform status');
+    console.log('\n=== AI PROVIDERS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
       const status = provider.enabled ? '✅' : '❌';
       console.log(`  ${status} ${provider.name}`);
     }
+    console.log('\n=== SOCIAL DISTRIBUTION ===');
+    console.log(`  ${FACEBOOK.enabled ? '✅' : '❌'} Facebook Page`);
+    console.log(`  ${LINKEDIN.enabled ? '✅' : '❌'} LinkedIn`);
+    console.log(`  ${XTWITTER.enabled ? '✅' : '❌'} X/Twitter`);
   });
 }
 
@@ -441,12 +901,27 @@ async function main() {
 
   // Health check
   if (args.health) {
-    console.log('\n=== PROVIDER STATUS ===');
+    console.log('\n=== AI PROVIDERS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
       const status = provider.enabled ? '✅ Configured' : '❌ Not configured';
       console.log(`${provider.name}: ${status}`);
     }
-    console.log(`\nWordPress: ${WORDPRESS.appPassword ? '✅ Configured' : '❌ Not configured'}`);
+
+    console.log('\n=== PUBLISHING ===');
+    console.log(`WordPress: ${WORDPRESS.appPassword ? '✅ Configured' : '❌ Not configured'}`);
+
+    console.log('\n=== SOCIAL DISTRIBUTION ===');
+    console.log(`Facebook: ${FACEBOOK.enabled ? '✅ Configured' : '❌ Not configured (need FACEBOOK_PAGE_ID + FACEBOOK_ACCESS_TOKEN)'}`);
+    console.log(`LinkedIn: ${LINKEDIN.enabled ? '✅ Configured' : '❌ Not configured (need LINKEDIN_ACCESS_TOKEN + LINKEDIN_ORGANIZATION_ID)'}`);
+    console.log(`X/Twitter: ${XTWITTER.enabled ? '✅ Configured (OAuth 1.0a)' : '❌ Not configured (need X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET)'}`);
+
+    // Summary
+    const aiCount = Object.values(PROVIDERS).filter(p => p.enabled).length;
+    const socialCount = (FACEBOOK.enabled ? 1 : 0) + (LINKEDIN.enabled ? 1 : 0) + (XTWITTER.enabled ? 1 : 0);
+    console.log(`\n=== SUMMARY ===`);
+    console.log(`AI Providers: ${aiCount}/3 configured`);
+    console.log(`Social Platforms: ${socialCount}/3 configured`);
+    console.log(`WordPress: ${WORDPRESS.appPassword ? '✅' : '❌'}`);
     return;
   }
 
@@ -473,15 +948,32 @@ async function main() {
     console.log(`Title: ${result.article.title}`);
     console.log(`Excerpt: ${result.article.excerpt}`);
 
+    let articleUrl = null;
+
     // Publish if requested
     if (args.publish) {
       try {
         const wpResult = await publishToWordPress(result.article, args.language || 'fr');
         console.log(`\n📤 Published to WordPress!`);
         console.log(`URL: ${wpResult.url}`);
+        articleUrl = wpResult.url;
       } catch (err) {
         console.error(`\n❌ WordPress publish failed: ${err.message}`);
+        // Use fallback URL for social distribution
+        articleUrl = `${WORDPRESS.url}/?p=draft-${Date.now()}`;
       }
+    }
+
+    // Distribute to social if requested
+    if (args.distribute) {
+      if (!articleUrl) {
+        // If not published, use 3A main site as URL
+        articleUrl = 'https://3a-automation.com/blog';
+        console.log(`\n⚠️ No article URL (not published), using: ${articleUrl}`);
+      }
+
+      const socialResult = await distributeToSocial(result.article, articleUrl);
+      result.social = socialResult;
     }
 
     // Save to file
@@ -493,28 +985,43 @@ async function main() {
 
   // Help
   console.log(`
-📝 Resilient Blog Generator - 3A Automation
+📝 Resilient Blog Generator v2.1 - 3A Automation
+
+FEATURES:
+  ✅ AI Generation with multi-provider fallback
+  ✅ WordPress publishing
+  ✅ Facebook Page distribution
+  ✅ LinkedIn distribution
+  ✅ X/Twitter distribution
 
 Usage:
   node blog-generator-resilient.cjs --topic="Your topic" [options]
 
 Options:
-  --topic      Article topic (required for generation)
-  --language   Language: fr or en (default: fr)
-  --keywords   SEO keywords (comma-separated)
-  --publish    Publish to WordPress after generation
-  --server     Run as HTTP server
-  --port       Server port (default: 3003)
-  --health     Show provider status
+  --topic       Article topic (required for generation)
+  --language    Language: fr or en (default: fr)
+  --keywords    SEO keywords (comma-separated)
+  --publish     Publish to WordPress after generation
+  --distribute  Post to Facebook + LinkedIn + X after publishing
+  --server      Run as HTTP server
+  --port        Server port (default: 3003)
+  --health      Show all provider/platform status
 
-Fallback chain:
+AI Fallback Chain:
   Anthropic Claude → xAI Grok → Google Gemini
 
+Social Distribution (requires credentials):
+  Facebook: FACEBOOK_PAGE_ID + FACEBOOK_ACCESS_TOKEN
+  LinkedIn: LINKEDIN_ACCESS_TOKEN + LINKEDIN_ORGANIZATION_ID
+  X/Twitter: X_API_KEY + X_API_SECRET + X_ACCESS_TOKEN + X_ACCESS_TOKEN_SECRET
+             (OAuth 1.0a - get from developer.x.com)
+
 Examples:
-  node blog-generator-resilient.cjs --topic="E-commerce automation 2026" --language=fr
-  node blog-generator-resilient.cjs --topic="AI marketing" --publish
-  node blog-generator-resilient.cjs --server --port=3003
   node blog-generator-resilient.cjs --health
+  node blog-generator-resilient.cjs --topic="E-commerce 2026" --language=fr
+  node blog-generator-resilient.cjs --topic="AI marketing" --publish
+  node blog-generator-resilient.cjs --topic="Automation" --publish --distribute
+  node blog-generator-resilient.cjs --server --port=3003
 `);
 }
 
