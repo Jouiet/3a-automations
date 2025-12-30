@@ -99,7 +99,7 @@ Solution: Scripts natifs (.cjs) avec process.env + multi-provider fallback
 | email-automation-unified.cjs | ✅ | Testé OK |
 | lead-gen-scheduler.cjs | ✅ | Cron ready |
 | uptime-monitor.cjs | ✅ | 5 endpoints, alerting |
-| voice-widget-generator.cjs | ✅ | Client config generator |
+| voice-widget-templates.cjs | ✅ | 8 presets industrie, deploy 30min |
 | whatsapp-booking-notifications.cjs | ⏳ | Awaiting Meta credentials |
 
 ## Lead Generation System (Session 114-115)
@@ -165,9 +165,10 @@ node automations/agency/core/whatsapp-booking-notifications.cjs --server --port=
 node automations/agency/core/uptime-monitor.cjs
 node automations/agency/core/uptime-monitor.cjs --server --port=3002
 
-# Voice Widget Generator
-node automations/agency/core/voice-widget-generator.cjs --interactive
-node automations/agency/core/voice-widget-generator.cjs --client="Name" --domain="client.com"
+# Voice Widget Templates (8 presets industrie)
+node automations/agency/core/voice-widget-templates.cjs --list
+node automations/agency/core/voice-widget-templates.cjs --preset=ecommerce --client="Name" --domain="domain.com"
+node automations/agency/core/voice-widget-templates.cjs --preset=b2b --client="Acme" --domain="acme.com" --deploy
 
 # Scheduler
 node automations/agency/lead-gen-scheduler.cjs --status
