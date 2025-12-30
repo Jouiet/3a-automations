@@ -241,20 +241,20 @@ node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
 | Blog Schema | ✅ | BlogPosting with dates |
 | ItemList Schema | ✅ | automations.html |
 
-### FAQPage Coverage (AEO Critical)
+### FAQPage Coverage (AEO Critical) - Updated Session 117
 
 | Page Type | Has FAQPage | Count |
 |-----------|-------------|-------|
 | Service Pages (FR) | ✅ | 6/6 |
 | Service Pages (EN) | ✅ | 6/6 |
 | Pricing (FR/EN) | ✅ | 2/2 |
-| Homepage | ❌ | 0/2 |
-| Contact | ❌ | 0/2 |
+| Homepage (FR/EN) | ✅ | 2/2 (ADDED Session 117) |
+| Contact (FR/EN) | ✅ | 2/2 (ADDED Session 117) |
 | About | ❌ | 0/2 |
 | Blog Articles | ❌ | 0/8 |
 | Academy | ❌ | 0/24 |
 
-**TOTAL FAQPage: 12/61 pages (20%)**
+**TOTAL FAQPage: 16/61 pages (26%) - +4 pages Session 117**
 
 ### Multi-Currency (3 Markets)
 
@@ -264,10 +264,10 @@ node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
 | Europe | EUR | ✅ default |
 | International | USD | ✅ selector |
 
-### GAPS IDENTIFIED (Priority)
+### GAPS IDENTIFIED (Priority) - Updated Session 117
 
-1. **P1**: Add FAQPage to homepage (FR/EN) - high AEO impact
-2. **P1**: Add FAQPage to contact page - conversion critical
+1. ~~**P1**: Add FAQPage to homepage (FR/EN)~~ ✅ DONE
+2. ~~**P1**: Add FAQPage to contact page~~ ✅ DONE
 3. **P2**: Add HowTo schema to academy/tutorial pages
 4. **P2**: Add FAQPage to blog articles
 5. **P3**: Add VideoObject schema if video content added
