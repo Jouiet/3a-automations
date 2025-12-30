@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.0.0",
-  "lastUpdated": "2025-12-29",
-  "totalCount": 81,
+  "version": "2.1.0",
+  "lastUpdated": "2025-12-30",
+  "totalCount": 86,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -1073,6 +1073,64 @@
       "benefit_en": "6 segments, 100% branding validated",
       "exports": ["EMAIL_TEMPLATES", "WELCOME_TEMPLATES", "SEGMENT_KEYWORDS", "validateBranding", "personalizeEmail"],
       "status": "tested-ok"
+    },
+    {
+      "id": "voice-widget-templates",
+      "name_fr": "Templates Voice Widget (8 industries)",
+      "name_en": "Voice Widget Templates (8 industries)",
+      "category": "voice-ai",
+      "type": "script",
+      "script": "agency/core/voice-widget-templates.cjs",
+      "frequency_fr": "Déploiement client",
+      "frequency_en": "Client deployment",
+      "benefit_fr": "Déploiement 4h → 30min",
+      "benefit_en": "Deployment 4h → 30min",
+      "presets": ["ecommerce", "b2b", "agency", "restaurant", "retail", "saas", "healthcare", "realestate"],
+      "status": "tested-ok"
+    },
+    {
+      "id": "blog-generator-resilient",
+      "name_fr": "Blog Generator Résilient (3 AI + 3 Social)",
+      "name_en": "Resilient Blog Generator (3 AI + 3 Social)",
+      "category": "content",
+      "type": "script",
+      "script": "agency/core/blog-generator-resilient.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X",
+      "benefit_en": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X",
+      "port": 3003,
+      "replaces": "n8n-workflow:Blog Article Generator",
+      "status": "tested-ok"
+    },
+    {
+      "id": "grok-voice-realtime",
+      "name_fr": "Grok Voice Realtime (WebSocket + TTS)",
+      "name_en": "Grok Voice Realtime (WebSocket + TTS)",
+      "category": "voice-ai",
+      "type": "script",
+      "script": "agency/core/grok-voice-realtime.cjs",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Audio natif $0.05/min + fallback Gemini TTS",
+      "benefit_en": "Native audio $0.05/min + Gemini TTS fallback",
+      "port": 3007,
+      "status": "tested-ok"
+    },
+    {
+      "id": "whatsapp-booking-notifications",
+      "name_fr": "WhatsApp Booking Notifications",
+      "name_en": "WhatsApp Booking Notifications",
+      "category": "whatsapp",
+      "type": "script",
+      "script": "agency/core/whatsapp-booking-notifications.cjs",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "Confirmation + rappels 24h/1h",
+      "benefit_en": "Confirmation + 24h/1h reminders",
+      "port": 3008,
+      "replaces": "n8n-workflow:WhatsApp Confirmation + WhatsApp Reminders",
+      "status": "awaiting-credentials"
     }
   ],
   "types": {
@@ -1099,7 +1157,7 @@
     "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
-    "withScript": 50,
+    "withScript": 55,
     "withoutScript": 31,
     "klaviyoTemplates": 7,
     "n8nWorkflows": 8,
@@ -1109,6 +1167,8 @@
     "thirdPartyIntegrations": 3,
     "externalServices": 4,
     "aiAvatarWorkflows": 2,
-    "b2bLeadPipelines": 3
+    "b2bLeadPipelines": 3,
+    "resilientScripts": 5,
+    "voiceAiScripts": 3
   }
 }

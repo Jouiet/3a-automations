@@ -7,17 +7,22 @@
 | Site | https://3a-automation.com LIVE |
 | Dashboard | https://dashboard.3a-automation.com LIVE |
 | Pages | 39 (20 FR + 19 EN) |
-| Automations | 82 (Registry v2.0.0) |
+| Automations | **86** (Registry v2.1.0) |
 | Scripts résilients | **8 fichiers (core/)** |
 | n8n Workflows | **1 restant** (Twilio blocked) |
 | Social Distribution | **3 plateformes** (FB/LinkedIn/X) |
+| Voice Widget Templates | **8 industries** |
 | Infrastructure | 3 Docker containers RUNNING |
 
-## SESSION 116 - SECURITY HARDENING
+## SESSION 116 - SECURITY + VOICE TEMPLATES
 
 | Action | Résultat |
 |--------|----------|
-| Patterns sécurité corrigés | 13/13 (100%) |
+| Security patterns corrigés | **13/13 (100%)** |
+| Voice Widget Templates | **8 industries** (ecommerce, b2b, agency, restaurant, retail, saas, healthcare, realestate) |
+| Déploiement réduit | **4h → 30min** |
+| GA4 SA Access | ✅ Testé OK |
+| Google Sheets Access | ✅ Testé OK |
 | whatsapp-booking-notifications.cjs | +timeout, +body limit, +rate limiter, +bounded memory |
 | blog-generator-resilient.cjs | +timeout, +rate limiter, +JSON parsing, +graceful shutdown |
 | grok-voice-realtime.cjs | +session limit, +zombie cleanup, +input validation |
