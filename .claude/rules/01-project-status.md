@@ -11,8 +11,8 @@
 | Scripts résilients | **8 fichiers (core/)** - All P0-P1 secured |
 | n8n Workflows | **1 restant** (Twilio blocked) |
 | SEO Score | **92%** |
-| AEO Score | **87%** |
-| FAQPage Schema | **12/61 pages** (service+pricing) |
+| AEO Score | **89%** |
+| FAQPage Schema | **16/61 pages** (+4 homepage/contact) |
 | Infrastructure | 3 Docker containers RUNNING |
 
 ## SESSION 117 - SECURITY P1 + SEO/AEO AUDIT
@@ -39,13 +39,13 @@
 | Meta/OG/Twitter | 10/10 | 61/61 pages |
 | hreflang | 10/10 | FR/EN alternates |
 
-### AEO Gaps Identified
+### AEO Gaps - Updated Status
 
-| Priority | Gap | Impact |
+| Priority | Gap | Status |
 |----------|-----|--------|
-| P1 | FAQPage missing on homepage | High AEO |
-| P1 | FAQPage missing on contact | Conversion |
-| P2 | HowTo schema for academy | Medium |
+| ~~P1~~ | ~~FAQPage missing on homepage~~ | ✅ DONE |
+| ~~P1~~ | ~~FAQPage missing on contact~~ | ✅ DONE |
+| P2 | HowTo schema for academy | Pending |
 | P2 | FAQPage for blog articles | Medium |
 
 ## SESSION 116 - SECURITY + VOICE TEMPLATES
