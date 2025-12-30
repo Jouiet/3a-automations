@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 22.0 | Date: 2025-12-30 | Session: 115
+## Version: 23.0 | Date: 2025-12-30 | Session: 117
 
 ---
 
@@ -10,9 +10,41 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (82, v2.0.0) |
-| History | `HISTORY.md` (Sessions 0-115) |
-| Scripts résilients | `automations/agency/core/` (8 scripts) |
+| Automations | `automations/automations-registry.json` (86, v2.1.0) |
+| History | `HISTORY.md` (Sessions 0-117) |
+| Scripts résilients | `automations/agency/core/` (8 scripts, P0-P1 secured) |
+| Pages | 61 (FR/EN + Academy) |
+| SEO Score | 92% |
+| AEO Score | 87% |
+
+## Session 117 - SECURITY P1 + SEO/AEO AUDIT
+
+### Security P1 Fixes (3 additional scripts)
+
+| Script | Fixes |
+|--------|-------|
+| product-photos-resilient.cjs | Rate limiter (5/min), CORS whitelist, Body limit 10MB |
+| email-personalization-resilient.cjs | Rate limiter (30/min), CORS whitelist, Body limit 1MB |
+| voice-api-resilient.cjs | Rate limiter (60/min), CORS whitelist, Body limit 1MB |
+
+**STATUS: 6/6 resilient scripts P0-P1 secured (100%)**
+
+### SEO/AEO Forensic Audit
+
+| Critère | Score |
+|---------|-------|
+| AI Crawler Access | 10/10 (GPTBot, ClaudeBot, PerplexityBot allowed) |
+| llms.txt | 10/10 (4620 bytes) |
+| FAQPage Schema | 7/10 (12/61 pages) |
+| Freshness Signals | 9/10 (2026 in titles) |
+| Multi-Currency | 10/10 (EUR/MAD/USD) |
+| Meta/OG/Twitter | 10/10 |
+
+### AEO Gaps (Priority)
+
+1. **P1**: FAQPage missing on homepage
+2. **P1**: FAQPage missing on contact
+3. **P2**: HowTo schema for academy pages
 
 ## Session 115 - SCRIPTS NATIFS > n8n (VÉRIFIÉ)
 

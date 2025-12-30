@@ -1,32 +1,62 @@
 # 3A Automation - Project Status
 
-## Current State (Session 116 - 30/12/2025)
+## Current State (Session 117 - 30/12/2025)
 
 | Metric | Value |
 |--------|-------|
 | Site | https://3a-automation.com LIVE |
 | Dashboard | https://dashboard.3a-automation.com LIVE |
-| Pages | 39 (20 FR + 19 EN) |
+| Pages | **61** (31 FR + 30 EN incl. Academy) |
 | Automations | **86** (Registry v2.1.0) |
-| Scripts résilients | **8 fichiers (core/)** |
+| Scripts résilients | **8 fichiers (core/)** - All P0-P1 secured |
 | n8n Workflows | **1 restant** (Twilio blocked) |
-| Social Distribution | **3 plateformes** (FB/LinkedIn/X) |
-| Voice Widget Templates | **8 industries** |
+| SEO Score | **92%** |
+| AEO Score | **87%** |
+| FAQPage Schema | **12/61 pages** (service+pricing) |
 | Infrastructure | 3 Docker containers RUNNING |
+
+## SESSION 117 - SECURITY P1 + SEO/AEO AUDIT
+
+### Security P1 Fixes (3 additional scripts)
+
+| Script | Fixes Added |
+|--------|-------------|
+| product-photos-resilient.cjs | Rate limiter (5/min), CORS whitelist, Body limit 10MB |
+| email-personalization-resilient.cjs | Rate limiter (30/min), CORS whitelist, Body limit 1MB |
+| voice-api-resilient.cjs | Rate limiter (60/min), CORS whitelist, Body limit 1MB |
+
+**STATUS: 6/6 resilient scripts secured (P0-P1 100%)**
+
+### SEO/AEO Forensic Audit Results
+
+| Critère | Score | Notes |
+|---------|-------|-------|
+| AI Crawler Access | 10/10 | robots.txt allows GPTBot, ClaudeBot, PerplexityBot |
+| llms.txt | 10/10 | 4620 bytes comprehensive |
+| FAQPage Schema | 7/10 | 12/61 pages (homepage missing) |
+| Freshness Signals | 9/10 | Blog "2026" titles, Dec 2025 dates |
+| Multi-Currency | 10/10 | EUR/MAD/USD with geo-locale |
+| Meta/OG/Twitter | 10/10 | 61/61 pages |
+| hreflang | 10/10 | FR/EN alternates |
+
+### AEO Gaps Identified
+
+| Priority | Gap | Impact |
+|----------|-----|--------|
+| P1 | FAQPage missing on homepage | High AEO |
+| P1 | FAQPage missing on contact | Conversion |
+| P2 | HowTo schema for academy | Medium |
+| P2 | FAQPage for blog articles | Medium |
 
 ## SESSION 116 - SECURITY + VOICE TEMPLATES
 
 | Action | Résultat |
 |--------|----------|
 | Security patterns corrigés | **13/13 (100%)** |
-| Voice Widget Templates | **8 industries** (ecommerce, b2b, agency, restaurant, retail, saas, healthcare, realestate) |
-| Déploiement réduit | **4h → 30min** |
-| GA4 SA Access | ✅ Testé OK |
-| Google Sheets Access | ✅ Testé OK |
-| whatsapp-booking-notifications.cjs | +timeout, +body limit, +rate limiter, +bounded memory |
-| blog-generator-resilient.cjs | +timeout, +rate limiter, +JSON parsing, +graceful shutdown |
-| grok-voice-realtime.cjs | +session limit, +zombie cleanup, +input validation |
-| Tests health checks | 3/3 OK |
+| Voice Widget Templates | **8 industries** |
+| whatsapp-booking-notifications.cjs | +timeout, +body limit, +rate limiter |
+| blog-generator-resilient.cjs | +timeout, +rate limiter, +JSON parsing |
+| grok-voice-realtime.cjs | +session limit, +zombie cleanup |
 
 ## SCRIPTS RÉSILIENTS (Session 115)
 

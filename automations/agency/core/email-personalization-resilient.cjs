@@ -18,6 +18,22 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
+// Import security utilities
+const {
+  RateLimiter,
+  setSecurityHeaders
+} = require('../../lib/security-utils.cjs');
+
+// Security constants
+const MAX_BODY_SIZE = 1024 * 1024; // 1MB limit
+const CORS_WHITELIST = [
+  'https://3a-automation.com',
+  'https://www.3a-automation.com',
+  'https://dashboard.3a-automation.com',
+  'http://localhost:3000',
+  'http://localhost:5173'
+];
+
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIGURATION
 // ─────────────────────────────────────────────────────────────────────────────
@@ -431,14 +447,36 @@ async function generateSubjectLine(context) {
 // HTTP SERVER
 // ─────────────────────────────────────────────────────────────────────────────
 function startServer(port = 3006) {
+  // P1 FIX: Rate limiter (30 req/min per IP)
+  const rateLimiter = new RateLimiter(30, 60000);
+
   const server = http.createServer(async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // P1 FIX: CORS whitelist (no wildcard fallback)
+    const origin = req.headers.origin;
+    if (origin && CORS_WHITELIST.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+    } else if (!origin) {
+      res.setHeader('Access-Control-Allow-Origin', 'https://3a-automation.com');
+    } else {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Origin not allowed' }));
+      return;
+    }
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    setSecurityHeaders(res);
 
     if (req.method === 'OPTIONS') {
       res.writeHead(200);
       res.end();
+      return;
+    }
+
+    // P1 FIX: Rate limiting
+    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    if (!rateLimiter.tryAcquire(clientIp)) {
+      res.writeHead(429, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Too many requests. Max 30/min.' }));
       return;
     }
 
@@ -460,7 +498,17 @@ function startServer(port = 3006) {
     // Personalize endpoint
     if (req.url === '/personalize' && req.method === 'POST') {
       let body = '';
-      req.on('data', chunk => body += chunk);
+      let bodySize = 0;
+      req.on('data', chunk => {
+        bodySize += chunk.length;
+        if (bodySize > MAX_BODY_SIZE) {
+          req.destroy();
+          res.writeHead(413, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Request body too large. Max 1MB.' }));
+          return;
+        }
+        body += chunk;
+      });
       req.on('end', async () => {
         try {
           const { lead, segment } = JSON.parse(body);
@@ -488,7 +536,17 @@ function startServer(port = 3006) {
     // Subject endpoint
     if (req.url === '/subject' && req.method === 'POST') {
       let body = '';
-      req.on('data', chunk => body += chunk);
+      let bodySize = 0;
+      req.on('data', chunk => {
+        bodySize += chunk.length;
+        if (bodySize > MAX_BODY_SIZE) {
+          req.destroy();
+          res.writeHead(413, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Request body too large. Max 1MB.' }));
+          return;
+        }
+        body += chunk;
+      });
       req.on('end', async () => {
         try {
           const context = JSON.parse(body);
