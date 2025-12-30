@@ -1,4 +1,4 @@
-# n8n Workflows - Session 115
+# n8n Workflows - Session 117
 
 ## Architecture
 
@@ -54,6 +54,27 @@ Solution: Scripts natifs (.cjs) avec process.env + multi-provider fallback
 | grok-voice-realtime.cjs | P0: fetch timeout, message size limit. P1: rate limiter, session pool limit, zombie cleanup. P2: secure session ID, input validation, CORS whitelist |
 
 **STATUS: 13/13 patterns corrigés (100%)**
+
+### SESSION 117 - Security P1 Fixes (30/12/2025)
+
+| Script | Fixes Ajoutés |
+|--------|---------------|
+| product-photos-resilient.cjs | P1: Rate limiter (5/min), CORS whitelist strict, Body size limit (10MB) |
+| email-personalization-resilient.cjs | P1: Rate limiter (30/min), CORS whitelist strict, Body size limit (1MB) |
+| voice-api-resilient.cjs | P1: Rate limiter (60/min), CORS whitelist strict, Body size limit (1MB) |
+
+**STATUS: 6/6 resilient scripts sécurisés (P0-P1 100%)**
+
+### P2 RESTANT - JSON.parse try/catch
+
+| Script | Occurrences | Priority |
+|--------|-------------|----------|
+| product-photos-resilient.cjs | 12 | P2 |
+| email-personalization-resilient.cjs | 10 | P2 |
+| voice-api-resilient.cjs | 4 | P2 |
+| blog-generator-resilient.cjs | Déjà corrigé (try/catch présent) | ✅ |
+
+**NOTE:** Blog-generator a déjà try/catch autour des JSON.parse critiques (lignes 336-360)
 
 ### Workflows SUPPRIMÉS (Session 115)
 
@@ -193,3 +214,72 @@ node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
 
 - n8n: https://n8n.srv1168256.hstgr.cloud
 - Apify: https://console.apify.com (STARTER $39/mo ✅)
+
+## SESSION 117 - FRONTEND SEO/AEO FORENSIC AUDIT (30/12/2025)
+
+### AEO (Answer Engine Optimization) Score: 87%
+
+| Critère | Score | Notes |
+|---------|-------|-------|
+| AI Crawler Access | 10/10 | robots.txt: GPTBot, ClaudeBot, PerplexityBot, Google-Extended ✅ |
+| llms.txt | 10/10 | 4620 bytes, comprehensive (spec llmstxt.org) ✅ |
+| FAQPage Schema | 7/10 | 12/61 pages (service pages OK, homepage missing) |
+| Freshness Signals | 9/10 | Blog titles: "2026", dates: Dec 2025 ✅ |
+| Content Structure | 8/10 | Headings, listicles, workflow diagrams ✅ |
+| Schema.org Depth | 8/10 | Organization, SoftwareApplication, Blog, Offer, Service ✅ |
+
+### SEO Technical Score: 92%
+
+| Élément | Status | Pages |
+|---------|--------|-------|
+| Meta Descriptions | ✅ | 61/61 |
+| Open Graph Tags | ✅ | 61/61 |
+| Twitter Cards | ✅ | 61/61 |
+| hreflang (FR/EN) | ✅ | 61/61 |
+| Canonical URLs | ✅ | 61/61 |
+| BreadcrumbList Schema | ✅ | Service pages |
+| Blog Schema | ✅ | BlogPosting with dates |
+| ItemList Schema | ✅ | automations.html |
+
+### FAQPage Coverage (AEO Critical)
+
+| Page Type | Has FAQPage | Count |
+|-----------|-------------|-------|
+| Service Pages (FR) | ✅ | 6/6 |
+| Service Pages (EN) | ✅ | 6/6 |
+| Pricing (FR/EN) | ✅ | 2/2 |
+| Homepage | ❌ | 0/2 |
+| Contact | ❌ | 0/2 |
+| About | ❌ | 0/2 |
+| Blog Articles | ❌ | 0/8 |
+| Academy | ❌ | 0/24 |
+
+**TOTAL FAQPage: 12/61 pages (20%)**
+
+### Multi-Currency (3 Markets)
+
+| Market | Currency | Status |
+|--------|----------|--------|
+| Morocco | MAD | ✅ geo-locale.min.js |
+| Europe | EUR | ✅ default |
+| International | USD | ✅ selector |
+
+### GAPS IDENTIFIED (Priority)
+
+1. **P1**: Add FAQPage to homepage (FR/EN) - high AEO impact
+2. **P1**: Add FAQPage to contact page - conversion critical
+3. **P2**: Add HowTo schema to academy/tutorial pages
+4. **P2**: Add FAQPage to blog articles
+5. **P3**: Add VideoObject schema if video content added
+
+### STRENGTHS CONFIRMED
+
+- ✅ All AI crawlers explicitly allowed (robots.txt)
+- ✅ llms.txt present and comprehensive
+- ✅ Freshness signals in blog (2025-2026 dates)
+- ✅ Multi-language (FR/EN) with proper hreflang
+- ✅ Multi-currency (EUR/MAD/USD) with geo-detection
+- ✅ Lazy loading GTM/GA4 for performance
+- ✅ Critical CSS inline for FCP
+- ✅ Skip links for accessibility
+- ✅ Cookie consent banner
