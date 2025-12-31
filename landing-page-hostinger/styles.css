@@ -1809,17 +1809,18 @@ body.lite {
 /* Social Icons - Session 118 */
 .footer-social {
   display: flex;
-  gap: var(--spacing-md);
+  gap: 6px;
   margin-top: var(--spacing-lg);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
   border-radius: 50%;
   background: rgba(79, 186, 241, 0.1);
   color: var(--primary);
@@ -1835,8 +1836,8 @@ body.lite {
 }
 
 .social-link svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .footer-grid-ultra {
