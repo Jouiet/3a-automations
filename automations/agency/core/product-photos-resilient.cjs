@@ -118,6 +118,18 @@ const VISION_PROVIDERS = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SAFE JSON PARSING (P2 FIX - Session 117)
+// ─────────────────────────────────────────────────────────────────────────────
+function safeJsonParse(str, context = 'unknown') {
+  try {
+    return { success: true, data: JSON.parse(str) };
+  } catch (err) {
+    console.error(`[JSON Parse Error] Context: ${context}, Error: ${err.message}`);
+    return { success: false, error: err.message, raw: str?.substring(0, 200) };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // HTTP REQUEST HELPER
 // ─────────────────────────────────────────────────────────────────────────────
 function httpRequest(url, options, body) {
@@ -210,7 +222,9 @@ async function callGeminiImagen(imageBase64, prompt, mimeType) {
     headers: { 'Content-Type': 'application/json' }
   }, body);
 
-  const result = JSON.parse(response.data);
+  const parsed = safeJsonParse(response.data, 'Gemini Imagen response');
+  if (!parsed.success) throw new Error(`Gemini JSON parse failed: ${parsed.error}`);
+  const result = parsed.data;
 
   // Check for image in response
   const parts = result.candidates?.[0]?.content?.parts || [];
@@ -249,7 +263,9 @@ async function callGrokImage(imageBase64, prompt, mimeType) {
     }
   }, body);
 
-  const result = JSON.parse(response.data);
+  const parsed = safeJsonParse(response.data, 'Grok Image response');
+  if (!parsed.success) throw new Error(`Grok JSON parse failed: ${parsed.error}`);
+  const result = parsed.data;
 
   if (result.data?.[0]?.b64_json) {
     return {
@@ -283,7 +299,9 @@ async function callFalAI(imageBase64, prompt, mimeType) {
     }
   }, submitBody);
 
-  const submitResult = JSON.parse(submitResponse.data);
+  const submitParsed = safeJsonParse(submitResponse.data, 'fal.ai submit response');
+  if (!submitParsed.success) throw new Error(`fal.ai JSON parse failed: ${submitParsed.error}`);
+  const submitResult = submitParsed.data;
 
   // If immediate result
   if (submitResult.images?.[0]?.url) {
@@ -306,7 +324,9 @@ async function callFalAI(imageBase64, prompt, mimeType) {
         headers: { 'Authorization': `Key ${PROVIDERS.falai.apiKey}` }
       });
 
-      const status = JSON.parse(statusResponse.data);
+      const statusParsed = safeJsonParse(statusResponse.data, 'fal.ai status response');
+      if (!statusParsed.success) continue; // Try next poll iteration
+      const status = statusParsed.data;
 
       if (status.status === 'COMPLETED' && status.response?.images?.[0]?.url) {
         const imgResponse = await httpRequest(status.response.images[0].url, { method: 'GET' });
@@ -352,7 +372,9 @@ async function callReplicate(imageBase64, prompt, mimeType) {
     }
   }, body);
 
-  const result = JSON.parse(response.data);
+  const parsed = safeJsonParse(response.data, 'Replicate submit response');
+  if (!parsed.success) throw new Error(`Replicate JSON parse failed: ${parsed.error}`);
+  const result = parsed.data;
 
   // Poll for result
   if (result.urls?.get) {
@@ -364,7 +386,9 @@ async function callReplicate(imageBase64, prompt, mimeType) {
         headers: { 'Authorization': `Token ${PROVIDERS.replicate.apiKey}` }
       });
 
-      const status = JSON.parse(statusResponse.data);
+      const statusParsed = safeJsonParse(statusResponse.data, 'Replicate status response');
+      if (!statusParsed.success) continue; // Try next poll iteration
+      const status = statusParsed.data;
 
       if (status.status === 'succeeded' && status.output?.[0]) {
         const imgResponse = await httpRequest(status.output[0], { method: 'GET' });
@@ -418,7 +442,9 @@ async function analyzeWithVision(imageBase64, prompt, mimeType) {
           headers: { 'Content-Type': 'application/json' }
         }, body);
 
-        const data = JSON.parse(result.data);
+        const parsed = safeJsonParse(result.data, 'Gemini Vision response');
+        if (!parsed.success) throw new Error(`Gemini Vision JSON parse failed: ${parsed.error}`);
+        const data = parsed.data;
         response = data.candidates?.[0]?.content?.parts?.[0]?.text;
       }
 
@@ -442,7 +468,9 @@ async function analyzeWithVision(imageBase64, prompt, mimeType) {
           }
         }, body);
 
-        const data = JSON.parse(result.data);
+        const parsed = safeJsonParse(result.data, 'Grok Vision response');
+        if (!parsed.success) throw new Error(`Grok Vision JSON parse failed: ${parsed.error}`);
+        const data = parsed.data;
         response = data.choices?.[0]?.message?.content;
       }
 
@@ -468,7 +496,9 @@ async function analyzeWithVision(imageBase64, prompt, mimeType) {
           }
         }, body);
 
-        const data = JSON.parse(result.data);
+        const parsed = safeJsonParse(result.data, 'Anthropic Vision response');
+        if (!parsed.success) throw new Error(`Anthropic Vision JSON parse failed: ${parsed.error}`);
+        const data = parsed.data;
         response = data.content?.[0]?.text;
       }
 
@@ -632,7 +662,13 @@ function startServer(port = 3005) {
       });
       req.on('end', async () => {
         try {
-          const { imagePath, imageBase64, prompt } = JSON.parse(body);
+          const bodyParsed = safeJsonParse(body, '/enhance request body');
+          if (!bodyParsed.success) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: `Invalid JSON: ${bodyParsed.error}` }));
+            return;
+          }
+          const { imagePath, imageBase64, prompt } = bodyParsed.data;
 
           if (!prompt) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -670,10 +706,26 @@ function startServer(port = 3005) {
     // Analyze endpoint (vision)
     if (req.url === '/analyze' && req.method === 'POST') {
       let body = '';
-      req.on('data', chunk => body += chunk);
+      let bodySize = 0;
+      req.on('data', chunk => {
+        bodySize += chunk.length;
+        if (bodySize > MAX_BODY_SIZE) {
+          req.destroy();
+          res.writeHead(413, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Request body too large. Max 10MB.' }));
+          return;
+        }
+        body += chunk;
+      });
       req.on('end', async () => {
         try {
-          const { imagePath, imageBase64, prompt, mimeType = 'image/jpeg' } = JSON.parse(body);
+          const bodyParsed = safeJsonParse(body, '/analyze request body');
+          if (!bodyParsed.success) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: `Invalid JSON: ${bodyParsed.error}` }));
+            return;
+          }
+          const { imagePath, imageBase64, prompt, mimeType = 'image/jpeg' } = bodyParsed.data;
 
           if (!prompt) {
             res.writeHead(400, { 'Content-Type': 'application/json' });

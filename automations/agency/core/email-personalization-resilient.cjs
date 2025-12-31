@@ -90,6 +90,18 @@ const BRAND = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SAFE JSON PARSING (P2 FIX - Session 117)
+// ─────────────────────────────────────────────────────────────────────────────
+function safeJsonParse(str, context = 'unknown') {
+  try {
+    return { success: true, data: JSON.parse(str) };
+  } catch (err) {
+    console.error(`[JSON Parse Error] Context: ${context}, Error: ${err.message}`);
+    return { success: false, error: err.message, raw: str?.substring(0, 200) };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // HTTP REQUEST HELPER
 // ─────────────────────────────────────────────────────────────────────────────
 function httpRequest(url, options, body) {
@@ -188,8 +200,9 @@ async function callGrok(systemPrompt, userPrompt) {
     }
   }, body);
 
-  const result = JSON.parse(response.data);
-  return result.choices[0].message.content;
+  const parsed = safeJsonParse(response.data, 'Grok email response');
+  if (!parsed.success) throw new Error(`Grok JSON parse failed: ${parsed.error}`);
+  return parsed.data.choices[0].message.content;
 }
 
 async function callGemini(systemPrompt, userPrompt) {
@@ -213,8 +226,9 @@ async function callGemini(systemPrompt, userPrompt) {
     headers: { 'Content-Type': 'application/json' }
   }, body);
 
-  const result = JSON.parse(response.data);
-  return result.candidates[0].content.parts[0].text;
+  const parsed = safeJsonParse(response.data, 'Gemini email response');
+  if (!parsed.success) throw new Error(`Gemini JSON parse failed: ${parsed.error}`);
+  return parsed.data.candidates[0].content.parts[0].text;
 }
 
 async function callAnthropic(systemPrompt, userPrompt) {
@@ -238,8 +252,9 @@ async function callAnthropic(systemPrompt, userPrompt) {
     }
   }, body);
 
-  const result = JSON.parse(response.data);
-  return result.content[0].text;
+  const parsed = safeJsonParse(response.data, 'Anthropic email response');
+  if (!parsed.success) throw new Error(`Anthropic JSON parse failed: ${parsed.error}`);
+  return parsed.data.content[0].text;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -349,7 +364,7 @@ Contexte: Email de prospection B2B initial.`;
         case 'anthropic': response = await callAnthropic(PERSONALIZATION_PROMPT, userPrompt); break;
       }
 
-      // Parse JSON from response
+      // Parse JSON from response (with robust extraction)
       let jsonContent = response;
       const fenceMatch = response.match(/```(?:json)?\s*([\s\S]*?)```/);
       if (fenceMatch) jsonContent = fenceMatch[1].trim();
@@ -360,7 +375,9 @@ Contexte: Email de prospection B2B initial.`;
         jsonContent = jsonContent.substring(jsonStart, jsonEnd + 1);
       }
 
-      const personalized = JSON.parse(jsonContent);
+      const emailParsed = safeJsonParse(jsonContent, 'AI email content');
+      if (!emailParsed.success) throw new Error(`Email content JSON parse failed: ${emailParsed.error}`);
+      const personalized = emailParsed.data;
 
       return {
         success: true,
@@ -511,7 +528,13 @@ function startServer(port = 3006) {
       });
       req.on('end', async () => {
         try {
-          const { lead, segment } = JSON.parse(body);
+          const bodyParsed = safeJsonParse(body, '/personalize request body');
+          if (!bodyParsed.success) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: `Invalid JSON: ${bodyParsed.error}` }));
+            return;
+          }
+          const { lead, segment } = bodyParsed.data;
 
           if (!lead || !lead.email) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -549,7 +572,13 @@ function startServer(port = 3006) {
       });
       req.on('end', async () => {
         try {
-          const context = JSON.parse(body);
+          const bodyParsed = safeJsonParse(body, '/subject request body');
+          if (!bodyParsed.success) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: `Invalid JSON: ${bodyParsed.error}` }));
+            return;
+          }
+          const context = bodyParsed.data;
 
           console.log(`[Subject] Generating for segment: ${context.segment || 'default'}`);
           const result = await generateSubjectLine(context);
@@ -617,9 +646,14 @@ async function main() {
   }
 
   if (args.personalize && args.lead) {
+    const leadParsed = safeJsonParse(args.lead, 'CLI --lead argument');
+    if (!leadParsed.success) {
+      console.error('Error parsing lead JSON:', leadParsed.error);
+      process.exit(1);
+    }
+    const lead = leadParsed.data;
+    console.log(`\n📧 Personalizing email for: ${lead.email}\n`);
     try {
-      const lead = JSON.parse(args.lead);
-      console.log(`\n📧 Personalizing email for: ${lead.email}\n`);
 
       const result = await personalizeEmail(lead, args.segment || 'other');
 
@@ -629,22 +663,27 @@ async function main() {
       console.log('\nPersonalized Email:');
       console.log(JSON.stringify(result.email, null, 2));
     } catch (err) {
-      console.error('Error parsing lead JSON:', err.message);
+      console.error('Error personalizing email:', err.message);
     }
     return;
   }
 
   if (args.subject && args.context) {
+    const contextParsed = safeJsonParse(args.context, 'CLI --context argument');
+    if (!contextParsed.success) {
+      console.error('Error parsing context JSON:', contextParsed.error);
+      process.exit(1);
+    }
+    const context = contextParsed.data;
+    console.log(`\n📝 Generating subject line\n`);
     try {
-      const context = JSON.parse(args.context);
-      console.log(`\n📝 Generating subject line\n`);
 
       const result = await generateSubjectLine(context);
 
       console.log('Provider:', result.provider);
       console.log('Subject:', result.subject);
     } catch (err) {
-      console.error('Error parsing context JSON:', err.message);
+      console.error('Error generating subject:', err.message);
     }
     return;
   }

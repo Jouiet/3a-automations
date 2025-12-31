@@ -1,23 +1,46 @@
 # 3A Automation - Project Status
 
-## Current State (Session 117sexto - 31/12/2025)
+## Current State (Session 117septimo - 31/12/2025)
 
 | Metric | Value |
 |--------|-------|
 | Site | https://3a-automation.com LIVE |
 | Dashboard | https://dashboard.3a-automation.com LIVE |
 | Pages | **69** accessible (0 errors) |
-| Investor Pages | ✅ Created (FR + EN) |
+| Investor Pages | ✅ Created (FR + EN) with FAQPage + BreadcrumbList |
 | Automations | **86** (Registry v2.1.0) |
-| Scripts résilients | **8 fichiers (core/)** - All P0-P1 secured |
+| Scripts résilients | **8 fichiers (core/)** - All P0-P1-P2 secured |
 | n8n Workflows | **1 restant** (Twilio blocked) |
 | SEO Score | **96%** |
 | AEO Score | **95%** |
-| FAQPage Schema | **27/61 pages** |
+| FAQPage Schema | **29/69 pages** (+2 investor pages) |
 | Footer | **Enterprise-class (4 colonnes)** |
 | SSL | **Let's Encrypt (77 days) + HSTS** |
 | Infrastructure | 4 Docker containers RUNNING |
+| llms.txt | **v5.0** with investor section |
 | **INVESTOR-READY** | ✅ VERIFIED |
+
+## SESSION 117septimo - P2 FIXES + INVESTOR SCHEMA (31/12/2025)
+
+### P2 JSON Parsing Fixes
+
+| Script | Fixes |
+|--------|-------|
+| product-photos-resilient.cjs | +safeJsonParse helper (12 occurrences) |
+| email-personalization-resilient.cjs | +safeJsonParse helper (10 occurrences) |
+| voice-api-resilient.cjs | +safeJsonParse helper (4 occurrences) |
+
+**STATUS: ALL P2 COMPLETE - 6/6 scripts fully secured (P0+P1+P2)**
+
+### Investor Pages Enhanced
+
+| Page | Additions |
+|------|-----------|
+| investisseurs.html | FAQPage schema (5 questions), BreadcrumbList |
+| en/investors.html | FAQPage schema (5 questions), BreadcrumbList |
+| llms.txt | v5.0 with 50+ lines investor section |
+
+---
 
 ## SESSION 117sexto - INVESTOR PAGES (31/12/2025)
 

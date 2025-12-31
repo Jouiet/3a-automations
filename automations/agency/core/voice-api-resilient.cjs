@@ -123,6 +123,18 @@ RÈGLES STRICTES:
 - Si la question est hors sujet, ramener poliment vers les services 3A`;
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SAFE JSON PARSING (P2 FIX - Session 117)
+// ─────────────────────────────────────────────────────────────────────────────
+function safeJsonParse(str, context = 'unknown') {
+  try {
+    return { success: true, data: JSON.parse(str) };
+  } catch (err) {
+    console.error(`[JSON Parse Error] Context: ${context}, Error: ${err.message}`);
+    return { success: false, error: err.message, raw: str?.substring(0, 200) };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // HTTP REQUEST HELPER
 // ─────────────────────────────────────────────────────────────────────────────
 function httpRequest(url, options, body) {
@@ -189,8 +201,9 @@ async function callGrok(userMessage, conversationHistory = []) {
     }
   }, body);
 
-  const result = JSON.parse(response.data);
-  return result.choices[0].message.content;
+  const parsed = safeJsonParse(response.data, 'Grok voice response');
+  if (!parsed.success) throw new Error(`Grok JSON parse failed: ${parsed.error}`);
+  return parsed.data.choices[0].message.content;
 }
 
 async function callGemini(userMessage, conversationHistory = []) {
@@ -222,8 +235,9 @@ async function callGemini(userMessage, conversationHistory = []) {
     headers: { 'Content-Type': 'application/json' }
   }, body);
 
-  const result = JSON.parse(response.data);
-  return result.candidates[0].content.parts[0].text;
+  const parsed = safeJsonParse(response.data, 'Gemini voice response');
+  if (!parsed.success) throw new Error(`Gemini JSON parse failed: ${parsed.error}`);
+  return parsed.data.candidates[0].content.parts[0].text;
 }
 
 async function callAnthropic(userMessage, conversationHistory = []) {
@@ -252,8 +266,9 @@ async function callAnthropic(userMessage, conversationHistory = []) {
     }
   }, body);
 
-  const result = JSON.parse(response.data);
-  return result.content[0].text;
+  const parsed = safeJsonParse(response.data, 'Anthropic voice response');
+  if (!parsed.success) throw new Error(`Anthropic JSON parse failed: ${parsed.error}`);
+  return parsed.data.content[0].text;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -418,7 +433,13 @@ function startServer(port = 3004) {
       });
       req.on('end', async () => {
         try {
-          const { message, history = [] } = JSON.parse(body);
+          const bodyParsed = safeJsonParse(body, '/respond request body');
+          if (!bodyParsed.success) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: `Invalid JSON: ${bodyParsed.error}` }));
+            return;
+          }
+          const { message, history = [] } = bodyParsed.data;
 
           if (!message) {
             res.writeHead(400, { 'Content-Type': 'application/json' });

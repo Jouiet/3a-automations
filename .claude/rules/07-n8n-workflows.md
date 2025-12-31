@@ -65,16 +65,16 @@ Solution: Scripts natifs (.cjs) avec process.env + multi-provider fallback
 
 **STATUS: 6/6 resilient scripts sécurisés (P0-P1 100%)**
 
-### P2 RESTANT - JSON.parse try/catch
+### P2 COMPLETE - JSON.parse try/catch (Session 117septimo - 31/12/2025)
 
-| Script | Occurrences | Priority |
-|--------|-------------|----------|
-| product-photos-resilient.cjs | 12 | P2 |
-| email-personalization-resilient.cjs | 10 | P2 |
-| voice-api-resilient.cjs | 4 | P2 |
-| blog-generator-resilient.cjs | Déjà corrigé (try/catch présent) | ✅ |
+| Script | Occurrences | Status |
+|--------|-------------|--------|
+| product-photos-resilient.cjs | 12 | ✅ DONE (safeJsonParse helper) |
+| email-personalization-resilient.cjs | 10 | ✅ DONE (safeJsonParse helper) |
+| voice-api-resilient.cjs | 4 | ✅ DONE (safeJsonParse helper) |
+| blog-generator-resilient.cjs | Already had try/catch | ✅ |
 
-**NOTE:** Blog-generator a déjà try/catch autour des JSON.parse critiques (lignes 336-360)
+**ALL P2 JSON PARSING FIXED (4/4 scripts)**
 
 ### Workflows SUPPRIMÉS (Session 115)
 
