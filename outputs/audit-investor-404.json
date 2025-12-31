@@ -1,68 +1,14 @@
 {
-  "timestamp": "2025-12-31T12:52:42.786Z",
+  "timestamp": "2025-12-31T12:58:02.778Z",
   "domain": "3a-automation.com",
-  "totalPages": 80,
+  "totalPages": 67,
   "accessible": 67,
-  "errors": [
-    {
-      "url": "/a-propos",
-      "status": 404
-    },
-    {
-      "url": "/cas-clients",
-      "status": 404
-    },
-    {
-      "url": "/contact",
-      "status": 404
-    },
-    {
-      "url": "/en/about",
-      "status": 404
-    },
-    {
-      "url": "/en/blog/marketing-automation-pour-startups-2026-guide-complet.html",
-      "status": 404
-    },
-    {
-      "url": "/en/case-studies",
-      "status": 404
-    },
-    {
-      "url": "/en/contact",
-      "status": 404
-    },
-    {
-      "url": "/en/legal/privacy",
-      "status": 404
-    },
-    {
-      "url": "/en/legal/terms",
-      "status": 404
-    },
-    {
-      "url": "/en/services/ecommerce",
-      "status": 404
-    },
-    {
-      "url": "/legal/mentions-legales",
-      "status": 404
-    },
-    {
-      "url": "/legal/politique-confidentialite",
-      "status": 404
-    },
-    {
-      "url": "/services/ecommerce",
-      "status": 404
-    }
-  ],
+  "errors": [],
   "redirects": [],
   "slowPages": [],
   "allUrls": [
     "/",
     "/404.html",
-    "/a-propos",
     "/a-propos.html",
     "/academie.html",
     "/academie/cours/analytics.html",
@@ -83,13 +29,10 @@
     "/blog/comment-automatiser-votre-service-client-avec-l-ia.html",
     "/blog/marketing-automation-pour-startups-2026-guide-complet.html",
     "/booking.html",
-    "/cas-clients",
     "/cas-clients.html",
-    "/contact",
     "/contact.html",
     "/en/",
     "/en/404.html",
-    "/en/about",
     "/en/about.html",
     "/en/academy.html",
     "/en/academy/courses/analytics.html",
@@ -106,19 +49,13 @@
     "/en/blog/",
     "/en/blog/ecommerce-automation-2026.html",
     "/en/blog/how-to-automate-customer-service-with-ai-effectively.html",
-    "/en/blog/marketing-automation-pour-startups-2026-guide-complet.html",
     "/en/blog/voice-ai-assistant-sme-2026.html",
     "/en/booking.html",
-    "/en/case-studies",
     "/en/case-studies.html",
-    "/en/contact",
     "/en/contact.html",
-    "/en/legal/privacy",
     "/en/legal/privacy.html",
-    "/en/legal/terms",
     "/en/legal/terms.html",
     "/en/pricing.html",
-    "/en/services/ecommerce",
     "/en/services/ecommerce.html",
     "/en/services/flywheel-360.html",
     "/en/services/free-audit.html",
@@ -126,14 +63,11 @@
     "/en/services/voice-ai.html",
     "/favicon-32x32.png",
     "/favicon.ico",
-    "/legal/mentions-legales",
     "/legal/mentions-legales.html",
-    "/legal/politique-confidentialite",
     "/legal/politique-confidentialite.html",
     "/logo.webp",
     "/pricing.html",
     "/services/audit-gratuit.html",
-    "/services/ecommerce",
     "/services/ecommerce.html",
     "/services/flywheel-360.html",
     "/services/pme.html",
