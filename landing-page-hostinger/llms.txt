@@ -119,13 +119,56 @@ Annuel: 2 mois gratuits (10 pour 12)
 - [Cas Clients](https://3a-automation.com/cas-clients.html): Etudes de cas
 - [Contact](https://3a-automation.com/contact.html): Formulaire + Voice AI
 - [Reservation](https://3a-automation.com/booking.html): Prendre RDV
+- [Investisseurs](https://3a-automation.com/investisseurs.html): Opportunite d'investissement
 
 ## Contact
 
 - **Email**: contact@3a-automation.com
+- **Investisseurs**: invest@3a-automation.com
 - **Site**: https://3a-automation.com
 - **Dashboard**: https://dashboard.3a-automation.com
 - **Audit Gratuit**: Disponible sur toutes les pages via l'assistant vocal
+
+## Investisseurs
+
+3A Automation est ouverte aux investisseurs alignes avec notre vision: automatiser la croissance des PME en MENA et Europe.
+
+### Stade Actuel
+- **Phase**: Pre-revenue (Seed stage)
+- **Fondation**: 2025
+- **Marche primaire**: MENA ($37B e-commerce, source Statista)
+- **Marche secondaire**: France/Europe (4.2M PME, source INSEE)
+
+### Ce que nous AVONS
+- 86 workflows documentes et testes
+- 8 automations resilientes (multi-fallback AI)
+- Voice AI Widget fonctionnel (FR/EN)
+- Site web 69 pages bilingue
+- Infrastructure Docker (Hostinger VPS)
+- Stack: Shopify, Klaviyo, GA4, n8n, Claude/Gemini/Grok
+
+### Ce que nous N'AVONS PAS encore
+- Revenue recurrent
+- Clients payants actifs
+- Team au-dela du fondateur
+- Track record financier
+
+### 4 Types d'Investisseurs Cibles
+1. **Venture Capital**: €300K-1M (Series A target, horizon 24 mois)
+2. **Angel Investors**: €10K-50K (Seed stage, valorisation pre-traction)
+3. **Partenaires Strategiques**: Agences Shopify, integrateurs n8n, ESN
+4. **Acquereurs Potentiels**: M&A horizon 3-5 ans post-traction
+
+### Documents Disponibles (sur demande)
+- Pitch Deck (12 slides)
+- Projections Financieres (3 ans)
+- Catalogue Workflows (86 fiches)
+- Architecture Technique
+- Data Room (apres NDA)
+
+### Pages Investisseurs
+- [Investisseurs FR](https://3a-automation.com/investisseurs.html)
+- [Investors EN](https://3a-automation.com/en/investors.html)
 
 ## Pourquoi Choisir 3A Automation
 
@@ -144,5 +187,5 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 ---
 
-Version: 4.0 | Last Updated: 2025-12-26
+Version: 5.0 | Last Updated: 2025-12-31
 Spec: https://llmstxt.org/
