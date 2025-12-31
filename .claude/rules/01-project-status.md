@@ -14,14 +14,32 @@
 | SEO Score | **96%** |
 | AEO Score | **95%** |
 | FAQPage Schema | **29/63 pages** (+2 investor pages) |
-| Footer | **Enterprise-class (4 colonnes)** |
+| Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
 | SSL | **Let's Encrypt (77 days) + HSTS** |
 | Infrastructure | 4 Docker containers RUNNING |
 | llms.txt | **v5.0** with investor section |
 | Voice Widget Templates | **8 industries** (4h→30min deployment) |
 | **INVESTOR-READY** | ✅ VERIFIED |
 
-## SESSION 118 - SYSTEM VERIFICATION (31/12/2025)
+## SESSION 118 - FOOTER + SOCIAL ICONS (31/12/2025)
+
+### Footer Updates
+
+| Change | Status |
+|--------|--------|
+| Social Icons | ✅ 6 icons (WhatsApp, FB, Instagram, YouTube, X, LinkedIn) |
+| Icon Size | 32px + 6px gap (inline) |
+| Footer Grid | 5 colonnes (Brand, Solutions, Ressources, Entreprise, Légal) |
+| Academy Emoji | ✅ Removed 📚 from all pages |
+
+### Commits
+
+| Commit | Description |
+|--------|-------------|
+| 64821ea | Add 6 social icons to footer |
+| 1e6d186 | Fix footer to 5 columns |
+| e525a40 | Compact social icons for single line |
+| 9b9725f | Remove 📚 emoji from Academy |
 
 ### Infrastructure Verified
 
