@@ -1,15 +1,11 @@
 {
-  "timestamp": "2025-12-31T12:46:29.337Z",
+  "timestamp": "2025-12-31T12:52:42.786Z",
   "domain": "3a-automation.com",
-  "totalPages": 84,
+  "totalPages": 80,
   "accessible": 67,
   "errors": [
     {
       "url": "/a-propos",
-      "status": 404
-    },
-    {
-      "url": "/automatisations.html",
       "status": 404
     },
     {
@@ -37,19 +33,11 @@
       "status": 404
     },
     {
-      "url": "/en/legal.html",
-      "status": 404
-    },
-    {
       "url": "/en/legal/privacy",
       "status": 404
     },
     {
       "url": "/en/legal/terms",
-      "status": 404
-    },
-    {
-      "url": "/en/services.html",
       "status": 404
     },
     {
@@ -62,10 +50,6 @@
     },
     {
       "url": "/legal/politique-confidentialite",
-      "status": 404
-    },
-    {
-      "url": "/services.html",
       "status": 404
     },
     {
@@ -93,7 +77,6 @@
     "/academie/parcours/marketing-automation.html",
     "/apple-touch-icon.png",
     "/automations.html",
-    "/automatisations.html",
     "/blog/",
     "/blog/assistant-vocal-ia-pme-2026.html",
     "/blog/automatisation-ecommerce-2026.html",
@@ -130,13 +113,11 @@
     "/en/case-studies.html",
     "/en/contact",
     "/en/contact.html",
-    "/en/legal.html",
     "/en/legal/privacy",
     "/en/legal/privacy.html",
     "/en/legal/terms",
     "/en/legal/terms.html",
     "/en/pricing.html",
-    "/en/services.html",
     "/en/services/ecommerce",
     "/en/services/ecommerce.html",
     "/en/services/flywheel-360.html",
@@ -151,7 +132,6 @@
     "/legal/politique-confidentialite.html",
     "/logo.webp",
     "/pricing.html",
-    "/services.html",
     "/services/audit-gratuit.html",
     "/services/ecommerce",
     "/services/ecommerce.html",

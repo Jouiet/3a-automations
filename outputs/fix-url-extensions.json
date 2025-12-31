@@ -1,0 +1,76 @@
+{
+  "timestamp": "2025-12-31T12:55:45.657Z",
+  "totalFixes": 31,
+  "fixedFiles": [
+    {
+      "file": "a-propos.html",
+      "fixes": 1
+    },
+    {
+      "file": "blog/marketing-automation-pour-startups-2026-guide-complet.html",
+      "fixes": 1
+    },
+    {
+      "file": "cas-clients.html",
+      "fixes": 1
+    },
+    {
+      "file": "contact.html",
+      "fixes": 1
+    },
+    {
+      "file": "en/about.html",
+      "fixes": 5
+    },
+    {
+      "file": "en/case-studies.html",
+      "fixes": 5
+    },
+    {
+      "file": "en/contact.html",
+      "fixes": 5
+    },
+    {
+      "file": "en/legal/privacy.html",
+      "fixes": 4
+    },
+    {
+      "file": "en/legal/terms.html",
+      "fixes": 4
+    },
+    {
+      "file": "en/services/ecommerce.html",
+      "fixes": 4
+    }
+  ],
+  "pagesFixed": [
+    "a-propos",
+    "contact",
+    "cas-clients",
+    "automations",
+    "pricing",
+    "booking",
+    "en/about",
+    "en/contact",
+    "en/case-studies",
+    "en/automations",
+    "en/pricing",
+    "en/booking",
+    "services/ecommerce",
+    "services/pme",
+    "services/flywheel-360",
+    "services/voice-ai",
+    "services/audit-gratuit",
+    "en/services/ecommerce",
+    "en/services/smb",
+    "en/services/flywheel-360",
+    "en/services/voice-ai",
+    "en/services/free-audit",
+    "legal/mentions-legales",
+    "legal/politique-confidentialite",
+    "en/legal/terms",
+    "en/legal/privacy",
+    "academie",
+    "en/academy"
+  ]
+}
