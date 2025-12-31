@@ -1841,8 +1841,8 @@ body.lite {
 
 .footer-grid-ultra {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: var(--spacing-3xl);
+  grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+  gap: var(--spacing-xl);
   margin-bottom: var(--spacing-3xl);
 }
 
@@ -2152,7 +2152,12 @@ body.lite {
   }
 
   .footer-grid-ultra {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  .footer-brand-ultra {
+    grid-column: span 3;
   }
 }
 
@@ -2839,9 +2844,10 @@ body.lite {
     width: 100%;
     margin-bottom: var(--spacing-2xl);
   }
-  
+
   .footer-brand-ultra {
     text-align: left;
+    grid-column: span 2;
   }
 
   .footer-links-ultra {
