@@ -1806,6 +1806,39 @@ body.lite {
   font-weight: bold;
 }
 
+/* Social Icons - Session 118 */
+.footer-social {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(79, 186, 241, 0.1);
+  color: var(--primary);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(79, 186, 241, 0.2);
+}
+
+.social-link:hover {
+  background: var(--primary);
+  color: var(--bg-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(79, 186, 241, 0.3);
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+}
+
 .footer-grid-ultra {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;

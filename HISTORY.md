@@ -1,5 +1,23 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 118 (31/12/2025) - SYSTEM VERIFICATION
+
+| Session | Modifications |
+|---------|---------------|
+| **118** | **INFRASTRUCTURE VERIFIED**: 3a-automation.com ✅ HTTP 200, dashboard.3a-automation.com ✅ HTTP 200, n8n.srv1168256.hstgr.cloud ✅ HTTP 200. **DOCKER**: 4 projects running (3a-website, cinematicads, root, wordpress). **VOICE WIDGET TEMPLATES**: 8 presets verified operational. **DESIGN CONFIRMED**: ULTRA FUTURISTIC v3.0 with cyber grid, glow effects, Navy Deep (#191E35), Cyan Primary (#4FBAF1). **DOCUMENTATION UPDATED**: CLAUDE.md v25.0, 01-project-status.md Session 118 section. |
+
+## Session 117 (31/12/2025) - INVESTOR-READY + FORENSIC AUDIT
+
+| Session | Modifications |
+|---------|---------------|
+| **117octo** | **REGISTRY AUDIT v2.1.1**: content count 8→9, whatsapp count 2→3, voice-ai count 2→4, marketing category added (1). Category sum = totalCount = array length = 86 ✅. **PAGE COUNT VERIFIED**: 63 HTML (not 69). Commit `95daff3`. |
+| **117septimo** | **P2 JSON PARSING FIXES**: safeJsonParse helper added to product-photos-resilient.cjs (12), email-personalization-resilient.cjs (10), voice-api-resilient.cjs (4). ALL P2 COMPLETE - 6/6 scripts fully secured. **INVESTOR SCHEMA**: FAQPage + BreadcrumbList added to investisseurs.html and en/investors.html. llms.txt v5.0 with 50+ lines investor section. |
+| **117sexto** | **INVESTOR PAGES CREATED**: investisseurs.html (FR), en/investors.html (EN). 4 investor types: VC, Angel, Strategic Partners, Acquirers. HONEST assessment documented. Commit `defebba`. |
+| **117quinto** | **AGENCY BRANDING FIX**: 20 files, 83 changes. je→nous, Consultant→Agence across About, Legal, Blog, Index Schema, Voice widgets, Knowledge files. Commit `53896a5`. |
+| **117quater** | **404 AUDIT**: 67/67 pages accessible. ROI claims updated to Litmus/DMA 2025 (36:1 to 42:1). Visual verification via Playwright. |
+| **117ter** | **P2 GAPS CLOSED**: HSTS header deployed via Traefik, FAQPage added to 7 blog articles (4 FR + 3 EN). |
+| **117bis** | **FORENSIC AUDIT 10/10**: 78→86 consistency (43 fixed), Duplicate GTM (6 fixed), Sitemap (37/39), FAQPage (100% key), BreadcrumbList (5/5), Twitter Cards (39/39), Enterprise Footer (30 pages), HTML validity (2 fixed), SSL/HTTPS verified. |
+
 ## Session 116 (30/12/2025) - SECURITY HARDENING + VOICE TEMPLATES
 
 | Session | Modifications |
