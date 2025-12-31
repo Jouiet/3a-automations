@@ -1,92 +1,110 @@
 #!/usr/bin/env node
 /**
- * FIX BROKEN LINKS - 3A Automation
- * Corrects all double-slash (//) links to single-slash (/)
- *
- * Date: 2025-12-22
- * Version: 1.0
+ * FIX: Broken Internal Links
+ * Session 117quater - Investor-Ready Audit
+ * Fixes all 404-causing internal links
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const SITE_DIR = path.join(__dirname, '../landing-page-hostinger');
+const LANDING_DIR = path.join(__dirname, '..', 'landing-page-hostinger');
 
-function findFiles(dir, ext) {
-  const files = [];
-  function walk(currentDir) {
-    const entries = fs.readdirSync(currentDir, { withFileTypes: true });
-    for (const entry of entries) {
-      const fullPath = path.join(currentDir, entry.name);
-      if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
-        walk(fullPath);
-      } else if (entry.isFile() && entry.name.endsWith(ext)) {
-        files.push(fullPath);
-      }
-    }
-  }
-  walk(dir);
-  return files;
-}
+// Link replacements: broken -> fixed
+const LINK_FIXES = {
+  // Non-existent pages
+  'href="/services.html"': 'href="/services/ecommerce.html"',
+  'href="/en/services.html"': 'href="/en/services/ecommerce.html"',
+  'href="/en/legal.html"': 'href="/en/legal/privacy.html"',
+  'href="/automatisations.html"': 'href="/automations.html"',
 
-console.log('═══════════════════════════════════════════════════════════════');
-console.log('           FIX BROKEN LINKS - 3A Automation');
-console.log('═══════════════════════════════════════════════════════════════');
-console.log(`Date: ${new Date().toISOString()}\n`);
+  // Links without .html extension (FR)
+  'href="/a-propos"': 'href="/a-propos.html"',
+  'href="/contact"': 'href="/contact.html"',
+  'href="/cas-clients"': 'href="/cas-clients.html"',
+  'href="/services/ecommerce"': 'href="/services/ecommerce.html"',
+  'href="/legal/mentions-legales"': 'href="/legal/mentions-legales.html"',
+  'href="/legal/politique-confidentialite"': 'href="/legal/politique-confidentialite.html"',
 
-const htmlFiles = findFiles(SITE_DIR, '.html');
-console.log(`Found ${htmlFiles.length} HTML files to process\n`);
+  // Links without .html extension (EN)
+  'href="/en/about"': 'href="/en/about.html"',
+  'href="/en/contact"': 'href="/en/contact.html"',
+  'href="/en/case-studies"': 'href="/en/case-studies.html"',
+  'href="/en/services/ecommerce"': 'href="/en/services/ecommerce.html"',
+  'href="/en/legal/privacy"': 'href="/en/legal/privacy.html"',
+  'href="/en/legal/terms"': 'href="/en/legal/terms.html"',
+
+  // Wrong language file in wrong folder
+  'href="/en/blog/marketing-automation-pour-startups-2026-guide-complet.html"':
+    'href="/en/blog/ecommerce-automation-2026.html"'
+};
 
 let totalFixes = 0;
 const fixedFiles = [];
 
-for (const file of htmlFiles) {
-  let content = fs.readFileSync(file, 'utf-8');
-  const originalContent = content;
+function fixFile(filePath) {
+  let content = fs.readFileSync(filePath, 'utf-8');
+  let fileFixed = false;
+  let fixCount = 0;
 
-  // Fix href="//path" to href="/path" (but not external URLs)
-  // Pattern: href="//" not followed by http or a domain
-  content = content.replace(/href="\/\/(?!http|www\.|[a-z]+\.[a-z])/g, 'href="/');
-
-  // Fix src="//path" to src="/path" (but not CDN URLs)
-  // Pattern: src="//" not followed by http, www., or common CDNs
-  content = content.replace(/src="\/\/(?!http|www\.|googletagmanager|fonts\.|cdnjs\.|unpkg|jsdelivr)/g, 'src="/');
-
-  if (content !== originalContent) {
-    fs.writeFileSync(file, content);
-    const relPath = file.replace(SITE_DIR, '');
-    const fixes = (content.match(/href="\//g) || []).length - (originalContent.match(/href="\//g) || []).length;
-    console.log(`✅ Fixed: ${relPath}`);
-    fixedFiles.push(relPath);
-    totalFixes++;
+  for (const [broken, fixed] of Object.entries(LINK_FIXES)) {
+    if (content.includes(broken)) {
+      const count = (content.match(new RegExp(broken.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+      content = content.split(broken).join(fixed);
+      fixCount += count;
+      fileFixed = true;
+    }
   }
+
+  if (fileFixed) {
+    fs.writeFileSync(filePath, content);
+    totalFixes += fixCount;
+    fixedFiles.push({ file: path.relative(LANDING_DIR, filePath), fixes: fixCount });
+    console.log('  ✅ ' + path.relative(LANDING_DIR, filePath) + ': ' + fixCount + ' fixes');
+  }
+
+  return fileFixed;
 }
 
-console.log('\n═══════════════════════════════════════════════════════════════');
-console.log(`✅ Fixed ${totalFixes} files`);
-console.log('═══════════════════════════════════════════════════════════════');
+function scanDir(dir) {
+  if (!fs.existsSync(dir)) return;
 
-// Verification: Count remaining double slashes
-console.log('\n🔍 Verification - checking for remaining issues...');
-let remainingIssues = 0;
+  fs.readdirSync(dir).forEach(item => {
+    const fullPath = path.join(dir, item);
+    const stat = fs.statSync(fullPath);
 
-for (const file of htmlFiles) {
-  const content = fs.readFileSync(file, 'utf-8');
-  const lines = content.split('\n');
-  lines.forEach((line, idx) => {
-    // Check for remaining double slash issues (excluding legitimate ones)
-    const badPatterns = line.match(/(?:href|src)="\/\/(?!http|www\.|googletagmanager|fonts\.|cdnjs|unpkg|jsdelivr|schema\.org)/g);
-    if (badPatterns) {
-      console.log(`   ⚠️  Remaining issue: ${file.replace(SITE_DIR, '')}:${idx + 1}`);
-      remainingIssues++;
+    if (item.startsWith('.') || item === 'node_modules') return;
+
+    if (stat.isDirectory()) {
+      scanDir(fullPath);
+    } else if (item.endsWith('.html')) {
+      fixFile(fullPath);
     }
   });
 }
 
-if (remainingIssues === 0) {
-  console.log('   ✅ All double-slash links fixed!\n');
-} else {
-  console.log(`   ⚠️  ${remainingIssues} issues remaining\n`);
-}
+console.log('='.repeat(60));
+console.log('FIX: Broken Internal Links');
+console.log('Session 117quater - Investor Due Diligence');
+console.log('='.repeat(60));
+console.log('');
+console.log('Scanning for broken links...');
+console.log('');
 
-process.exit(remainingIssues > 0 ? 1 : 0);
+scanDir(LANDING_DIR);
+
+console.log('');
+console.log('='.repeat(60));
+console.log('SUMMARY: ' + totalFixes + ' broken links fixed in ' + fixedFiles.length + ' files');
+console.log('='.repeat(60));
+
+// Save results
+const outputPath = path.join(__dirname, '..', 'outputs', 'fix-broken-links.json');
+fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+fs.writeFileSync(outputPath, JSON.stringify({
+  timestamp: new Date().toISOString(),
+  totalFixes,
+  fixedFiles,
+  linkFixes: LINK_FIXES
+}, null, 2));
+console.log('\nResults saved: ' + outputPath);
