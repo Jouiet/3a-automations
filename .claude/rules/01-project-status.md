@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 117bis - 31/12/2025)
+## Current State (Session 117ter - 31/12/2025)
 
 | Metric | Value |
 |--------|-------|
@@ -10,12 +10,44 @@
 | Automations | **86** (Registry v2.1.0) |
 | Scripts résilients | **8 fichiers (core/)** - All P0-P1 secured |
 | n8n Workflows | **1 restant** (Twilio blocked) |
-| SEO Score | **95%** (+3) |
-| AEO Score | **92%** (+3) |
-| FAQPage Schema | **20/61 pages** |
+| SEO Score | **96%** (+1) |
+| AEO Score | **95%** (+3) |
+| FAQPage Schema | **27/61 pages** (+7 blog) |
 | Footer | **Enterprise-class (4 colonnes)** |
-| SSL | **Let's Encrypt (77 days)** |
-| Infrastructure | 3 Docker containers RUNNING |
+| SSL | **Let's Encrypt (77 days) + HSTS** |
+| Infrastructure | 4 Docker containers RUNNING |
+
+## SESSION 117ter - P2 FIXES COMPLETE (31/12/2025)
+
+### All P2 Gaps Closed
+
+| Task | Status | Details |
+|------|--------|---------|
+| HSTS Header | ✅ DONE | Traefik middleware deployed |
+| HowTo schema for academy | ✅ N/A | All academy pages noindex |
+| FAQPage for blog articles | ✅ DONE | 7 articles (4 FR + 3 EN) |
+
+### HSTS Security Headers (NEW)
+
+| Header | Value |
+|--------|-------|
+| strict-transport-security | max-age=31536000; includeSubDomains; preload |
+| x-content-type-options | nosniff |
+| x-frame-options | DENY |
+| x-xss-protection | 1; mode=block |
+
+### FAQPage Coverage Updated
+
+| Page Type | Has FAQPage | Count |
+|-----------|-------------|-------|
+| Homepage (FR/EN) | ✅ | 2/2 |
+| Contact (FR/EN) | ✅ | 2/2 |
+| Service Pages (FR/EN) | ✅ | 12/12 |
+| Pricing (FR/EN) | ✅ | 2/2 |
+| Blog Articles (FR) | ✅ | 4/4 (NEW) |
+| Blog Articles (EN) | ✅ | 3/3 (NEW) |
+| Academy | ❌ N/A | noindex pages |
+| **TOTAL** | | **27/61 (44%)** |
 
 ## SESSION 117bis - FORENSIC AUDIT COMPLETE (31/12/2025)
 
@@ -32,7 +64,7 @@
 | Enterprise Footer | ✅ | 30/30 pages |
 | No Duplicate Voice Widget | ✅ | 1 file (404.html) |
 | HTML Validity | ✅ | 2 issues fixed |
-| SSL/HTTPS | ✅ | HTTP/2, 308 redirect |
+| SSL/HTTPS + HSTS | ✅ | Full security headers |
 
 ### Enterprise Footer (30 pages)
 
@@ -52,15 +84,11 @@
 | HTTP/2 | ✅ h2 |
 | X-Content-Type-Options | ✅ nosniff |
 | Mixed Content | ✅ None |
-| HSTS | ⚠️ P2 (Traefik config) |
+| HSTS | ✅ DONE (31536000s, preload) |
 
-### P2 Backlog
+### P2 Backlog (CLEARED)
 
-| Priority | Gap | Status |
-|----------|-----|--------|
-| P2 | HSTS Header | Server config |
-| P2 | HowTo schema for academy | Pending |
-| P2 | FAQPage for blog articles | Medium |
+All P2 items completed Session 117ter.
 
 ## SESSION 116 - SECURITY + VOICE TEMPLATES
 
