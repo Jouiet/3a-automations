@@ -13,7 +13,7 @@
 | n8n Workflows | **1 restant** (Twilio blocked) |
 | SEO Score | **96%** |
 | AEO Score | **95%** |
-| FAQPage Schema | **29/63 pages** (+2 investor pages) |
+| FAQPage Schema | **29/35 indexable (83%)** |
 | Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
 | SSL | **Let's Encrypt (77 days) + HSTS** |
 | Infrastructure | 4 Docker containers RUNNING |

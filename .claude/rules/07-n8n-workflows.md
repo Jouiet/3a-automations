@@ -250,11 +250,11 @@ node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
 | Pricing (FR/EN) | ✅ | 2/2 |
 | Homepage (FR/EN) | ✅ | 2/2 (ADDED Session 117) |
 | Contact (FR/EN) | ✅ | 2/2 (ADDED Session 117) |
-| About | ❌ | 0/2 |
-| Blog Articles | ❌ | 0/8 |
-| Academy | ❌ | 0/24 |
+| About (FR/EN) | ✅ | 2/2 |
+| Blog Articles | ✅ | 7/7 |
+| Academy | ❌ N/A | noindex pages |
 
-**TOTAL FAQPage: 16/61 pages (26%) - +4 pages Session 117**
+**TOTAL FAQPage: 29/35 indexable pages (83%) - Blog articles included**
 
 ### Multi-Currency (3 Markets)
 
@@ -268,9 +268,10 @@ node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
 
 1. ~~**P1**: Add FAQPage to homepage (FR/EN)~~ ✅ DONE
 2. ~~**P1**: Add FAQPage to contact page~~ ✅ DONE
-3. **P2**: Add HowTo schema to academy/tutorial pages
-4. **P2**: Add FAQPage to blog articles
-5. **P3**: Add VideoObject schema if video content added
+3. ~~**P2**: Add HowTo schema to academy/tutorial pages~~ N/A (noindex)
+4. ~~**P2**: Add FAQPage to blog articles~~ ✅ DONE (7/7)
+5. ~~**P2**: Add FAQPage to About pages~~ ✅ DONE (2/2)
+6. **P3**: Add VideoObject schema if video content added
 
 ### STRENGTHS CONFIRMED
 
