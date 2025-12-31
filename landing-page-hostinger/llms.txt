@@ -1,10 +1,10 @@
 # 3A Automation
 
-> Consultant Automation, Analytics & AI pour PME. Automatisation e-commerce, marketing et Voice AI pour Small/Mid Business de tous secteurs.
+> Agence Automation, Analytics & AI pour PME. Automatisation e-commerce, marketing et Voice AI pour Small/Mid Business de tous secteurs.
 
 3A Automation aide les PME (10k-500k EUR CA mensuel) a automatiser leurs processus marketing et operationnels. Expertise Shopify, Klaviyo, GA4, Voice AI. Approche code/APIs (pas no-code limite). Focus resultats mesurables.
 
-**Fondateur**: Jonathan, Consultant technique solo expert
+**Fondateur**: Jonathan, Expert technique automation
 **Marches**: Maroc, MENA, France, Europe, Worldwide
 **Langues**: Francais, English, Arabe
 
@@ -129,7 +129,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 ## Pourquoi Choisir 3A Automation
 
-1. **Expertise directe** - Consultant solo, pas d'agence, vous travaillez avec l'expert
+1. **Expertise directe** - Équipe spécialisée, vous travaillez directement avec les experts
 2. **Resultats prouves** - ROI 42:1 documente
 3. **Prix justes** - Pas de marge agence
 4. **Flexibilite** - Packs one-time, abonnements resiliables

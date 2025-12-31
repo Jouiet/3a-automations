@@ -762,27 +762,27 @@
   // Industry-specific responses
   const industryResponses = {
     construction: {
-      intro: 'For construction, I offer specific solutions: lead capture via Google Maps, automated quote follow-ups, and post-project review requests.',
-      services: 'My construction automations include:\n• Google Maps scraping for new projects\n• Automated bid monitoring\n• Scheduled quote follow-ups\n• Post-project satisfaction emails\n• Automatic Google review requests',
-      leads: 'For construction leads, I use Google Maps scraping to identify ongoing projects and companies hiring. I can also monitor public bids automatically.'
+      intro: 'For construction, we offer specific solutions: lead capture via Google Maps, automated quote follow-ups, and post-project review requests.',
+      services: 'Our construction automations include:\n• Google Maps scraping for new projects\n• Automated bid monitoring\n• Scheduled quote follow-ups\n• Post-project satisfaction emails\n• Automatic Google review requests',
+      leads: 'For construction leads, we use Google Maps scraping to identify ongoing projects and companies hiring. We can also monitor public bids automatically.'
     },
     b2b: {
-      intro: 'For B2B, I focus on automatic lead qualification, lead scoring, and nurturing sequences to convert cold prospects into customers.',
-      services: 'My B2B automations include:\n• Automatic lead scoring\n• Nurturing sequences (5-10 emails)\n• CRM sync (HubSpot, Pipedrive)\n• Real-time sales alerts\n• Automatic lead qualification',
-      leads: 'For B2B lead generation, I configure capture workflows from LinkedIn, web forms, and automatically qualify based on your criteria. Hot leads trigger instant alerts.'
+      intro: 'For B2B, we focus on automatic lead qualification, lead scoring, and nurturing sequences to convert cold prospects into customers.',
+      services: 'Our B2B automations include:\n• Automatic lead scoring\n• Nurturing sequences (5-10 emails)\n• CRM sync (HubSpot, Pipedrive)\n• Real-time sales alerts\n• Automatic lead qualification',
+      leads: 'For B2B lead generation, we configure capture workflows from LinkedIn, web forms, and automatically qualify based on your criteria. Hot leads trigger instant alerts.'
     },
     ecommerce: {
-      intro: 'For e-commerce, I\'m a Klaviyo and Shopify expert. My automated flows recover 5-15% of abandoned carts and generate an average of $42 for every $1 invested.',
-      services: 'My e-commerce automations include:\n• Abandoned cart recovery (3 emails)\n• Welcome series for new customers\n• Post-purchase flows for retention\n• Automatic back-in-stock alerts\n• RFM segmentation\n• Winback for dormant customers',
-      leads: 'For e-commerce, "leads" are your visitors. I set up complete tracking, smart popups, and conversion flows to turn visitors into buyers.'
+      intro: 'For e-commerce, we\'re Klaviyo and Shopify experts. Our automated flows recover 5-15% of abandoned carts and generate an average of $42 for every $1 invested.',
+      services: 'Our e-commerce automations include:\n• Abandoned cart recovery (3 emails)\n• Welcome series for new customers\n• Post-purchase flows for retention\n• Automatic back-in-stock alerts\n• RFM segmentation\n• Winback for dormant customers',
+      leads: 'For e-commerce, "leads" are your visitors. We set up complete tracking, smart popups, and conversion flows to turn visitors into buyers.'
     },
     saas: {
-      intro: 'For SaaS, I configure automated onboarding, churn prevention, and feature adoption emails to maximize retention.',
-      services: 'My SaaS automations include:\n• Sequenced onboarding\n• Churn prevention (at-risk users)\n• Feature adoption emails\n• Automatic NPS surveys\n• Smart upsell triggers'
+      intro: 'For SaaS, we configure automated onboarding, churn prevention, and feature adoption emails to maximize retention.',
+      services: 'Our SaaS automations include:\n• Sequenced onboarding\n• Churn prevention (at-risk users)\n• Feature adoption emails\n• Automatic NPS surveys\n• Smart upsell triggers'
     },
     services: {
-      intro: 'For service providers, I configure prospecting automation, appointment reminders, and post-mission testimonial requests.',
-      services: 'My services automations include:\n• Automated prospecting\n• Long-cycle lead nurturing\n• Appointment reminders\n• Testimonial requests\n• Automatic invoicing'
+      intro: 'For service providers, we configure prospecting automation, appointment reminders, and post-mission testimonial requests.',
+      services: 'Our services automations include:\n• Automated prospecting\n• Long-cycle lead nurturing\n• Appointment reminders\n• Testimonial requests\n• Automatic invoicing'
     }
   };
 
@@ -791,7 +791,7 @@
   const topicResponses = {
     process: {
       keywords: ['process', 'how does it work', 'steps', 'explain', 'how do you'],
-      response: `Here's how it works:\n\n1️⃣ **Diagnostic form** (5 min)\nDescribe your business and goals\n\n2️⃣ **Personalized Report** (24-48h)\nI send you 3 priority recommendations\n\n3️⃣ **Custom Proposal**\nIf interested, I send a detailed quote tailored to your needs\n\n4️⃣ **Turnkey Implementation**\nI configure everything - no technical skills needed\n\n✅ No mandatory calls - all written if you prefer!`
+      response: `Here's how it works:\n\n1️⃣ **Diagnostic form** (5 min)\nDescribe your business and goals\n\n2️⃣ **Personalized Report** (24-48h)\nWe send you 3 priority recommendations\n\n3️⃣ **Custom Proposal**\nIf interested, we send a detailed quote tailored to your needs\n\n4️⃣ **Turnkey Implementation**\nWe configure everything - no technical skills needed\n\n✅ No mandatory calls - all written if you prefer!`
     },
     pricing: {
       keywords: ['price', 'cost', 'budget', 'quote', 'how much', 'pricing'],
@@ -803,7 +803,7 @@
     },
     automations: {
       keywords: ['automation', 'automations', 'workflow', 'flows', 'what can you'],
-      response: `I offer a comprehensive automation catalog:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Automated reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\n🤖 **AI & Video:**\nMarketing videos, AI Avatar, Voice AI\n\nWhich type interests you most?`
+      response: `We offer a comprehensive automation catalog:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Automated reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\n🤖 **AI & Video:**\nMarketing videos, AI Avatar, Voice AI\n\nWhich type interests you most?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'customer', 'acquisition', 'find customers'],
@@ -811,11 +811,11 @@
     },
     difference: {
       keywords: ['difference', 'why you', 'agency', 'advantage', 'unique'],
-      response: `What makes me different:\n\n✅ **Expert consultant, not agency**\nYou work directly with the expert, not a salesperson\n\n✅ **Fair pricing**\nNo agency markup\n\n✅ **Specialization**\nMarketing automation expert - not generalist\n\n✅ **Measurable results**\nProven ROI on every project\n\n✅ **Flexibility**\nNo long-term commitment required`
+      response: `What makes us different:\n\n✅ **Specialized agency**\nYou work directly with experts, not salespeople\n\n✅ **Fair pricing**\nTransparent, competitive rates\n\n✅ **Specialization**\nMarketing automation experts - not generalists\n\n✅ **Measurable results**\nProven ROI on every project\n\n✅ **Flexibility**\nNo long-term commitment required`
     },
     guarantee: {
       keywords: ['guarantee', 'risk', 'not work', 'satisfied'],
-      response: `My guarantee is simple:\n\n🔒 **Satisfied or we iterate**\nIf automations don't work as expected, I fix until satisfied.\n\n📝 **Complete documentation**\nYou keep control, even without me.\n\n🚪 **No commitment**\nPacks are one-time. Retainers cancelable anytime.\n\nWant to start with the free audit?`
+      response: `Our guarantee is simple:\n\n🔒 **Satisfied or we iterate**\nIf automations don't work as expected, we fix until you're satisfied.\n\n📝 **Complete documentation**\nYou keep control, even without us.\n\n🚪 **No commitment**\nPacks are one-time. Retainers cancelable anytime.\n\nWant to start with the free audit?`
     },
     timeline: {
       keywords: ['timeline', 'when', 'how long', 'duration', 'time'],
@@ -827,7 +827,7 @@
     },
     no: {
       keywords: ['no', 'not now', 'later', 'thinking'],
-      response: `No problem! Take your time.\n\nThe free audit is always available. You can also email me at contact@3a-automation.com.\n\n📌 Feel free to come back if you have questions!`
+      response: `No problem! Take your time.\n\nThe free audit is always available. You can also email us at contact@3a-automation.com.\n\n📌 Feel free to come back if you have questions!`
     },
     greetings: {
       keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon'],
@@ -835,7 +835,7 @@
     },
     thanks: {
       keywords: ['thanks', 'thank you', 'great', 'perfect', 'awesome'],
-      response: `You're welcome! 😊\n\nIf you're ready to take action, I recommend the free audit - it's the best way to see what we can do for you.\n\n📧 More questions? I'm here!`
+      response: `You're welcome! 😊\n\nIf you're ready to take action, we recommend the free audit - it's the best way to see what we can do for you.\n\n📧 More questions? We're here!`
     }
   };
 
@@ -872,12 +872,12 @@
     // Check for confirmation ("yes")
     if (topicResponses.yes.keywords.some(kw => lower.includes(kw))) {
       if (conversationContext.lastTopic === 'process') {
-        return `Perfect! To get started:\n👉 Go to /en/contact.html\n\nFill out the form (5 min) and I'll send the report in 24-48h.\n\nAny questions before starting?`;
+        return `Perfect! To get started:\n👉 Go to /en/contact.html\n\nFill out the form (5 min) and we'll send the report in 24-48h.\n\nAny questions before starting?`;
       }
       if (conversationContext.lastTopic === 'audit') {
-        return `Great! For your free audit:\n👉 Go to /en/contact.html\n\nI'll send the report with 3 recommendations in 24-48h.\n\n📧 Or email me directly at contact@3a-automation.com with your website link!`;
+        return `Great! For your free audit:\n👉 Go to /en/contact.html\n\nWe'll send the report with 3 recommendations in 24-48h.\n\n📧 Or email us directly at contact@3a-automation.com with your website link!`;
       }
-      return `Excellent! Next step is the free audit.\n\n👉 Fill out the form at /en/contact.html\n📧 Or email: contact@3a-automation.com\n\nI'll respond within 24h!`;
+      return `Excellent! Next step is the free audit.\n\n👉 Fill out the form at /en/contact.html\n📧 Or email: contact@3a-automation.com\n\nWe'll respond within 24h!`;
     }
 
     // Check enriched topics
@@ -919,11 +919,11 @@
 
     // Smart default based on context
     if (conversationContext.industry) {
-      return `For your ${conversationContext.industry.toUpperCase()} business, I can offer several solutions.\n\nLet's start with the free audit: I'll send you a personalized report with 3 priority recommendations in 24-48h.\n\n👉 Interested?`;
+      return `For your ${conversationContext.industry.toUpperCase()} business, we can offer several solutions.\n\nLet's start with the free audit: we'll send you a personalized report with 3 priority recommendations in 24-48h.\n\n👉 Interested?`;
     }
 
     // True default - qualification question
-    return `To help you better, could you tell me:\n\n• What industry are you in?\n• What's your main need? (leads, email, analytics...)\n\nOr just request the free audit directly and I'll get back to you with personalized recommendations!`;
+    return `To help you better, could you tell me:\n\n• What industry are you in?\n• What's your main need? (leads, email, analytics...)\n\nOr just request the free audit directly and we'll get back to you with personalized recommendations!`;
   }
 
   function togglePanel() {
