@@ -1,0 +1,11 @@
+{
+  "filesScanned": 61,
+  "issues": [],
+  "summary": {
+    "duplicateClass": 0,
+    "duplicateId": 0,
+    "missingAlt": 0,
+    "emptyHref": 0,
+    "duplicateVoiceWidget": 0
+  }
+}

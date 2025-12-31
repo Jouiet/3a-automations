@@ -374,4 +374,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Blog - Marketing Automation Startups 2026 FR -->
+  <url>
+    <loc>https://3a-automation.com/blog/marketing-automation-pour-startups-2026-guide-complet.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/marketing-automation-pour-startups-2026-guide-complet.html"/>
+    <lastmod>2025-12-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

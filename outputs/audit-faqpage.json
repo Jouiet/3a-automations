@@ -1,0 +1,27 @@
+{
+  "filesScanned": 20,
+  "pagesWithFAQ": [
+    "index.html",
+    "en/index.html",
+    "services/ecommerce.html",
+    "services/pme.html",
+    "services/voice-ai.html",
+    "services/audit-gratuit.html",
+    "services/flywheel-360.html",
+    "en/services/ecommerce.html",
+    "en/services/smb.html",
+    "en/services/voice-ai.html",
+    "en/services/free-audit.html",
+    "en/services/flywheel-360.html",
+    "pricing.html",
+    "en/pricing.html",
+    "contact.html",
+    "en/contact.html",
+    "a-propos.html",
+    "en/about.html",
+    "automations.html",
+    "en/automations.html"
+  ],
+  "pagesMissingFAQ": [],
+  "coverage": 100
+}

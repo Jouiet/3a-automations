@@ -1,0 +1,163 @@
+{
+  "filesScanned": 61,
+  "duplicatesFound": [
+    {
+      "file": "landing-page-hostinger/a-propos.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        79,
+        81,
+        106,
+        109
+      ],
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "landing-page-hostinger/cas-clients.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        77,
+        79,
+        104,
+        107
+      ],
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "landing-page-hostinger/contact.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        117,
+        119,
+        144,
+        147
+      ],
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "landing-page-hostinger/en/about.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        79,
+        81,
+        106,
+        109
+      ],
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "landing-page-hostinger/en/case-studies.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        77,
+        79,
+        104,
+        107
+      ],
+      "severity": "CRITICAL"
+    },
+    {
+      "file": "landing-page-hostinger/en/contact.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        117,
+        119,
+        144,
+        147
+      ],
+      "severity": "CRITICAL"
+    }
+  ],
+  "fileDetails": {
+    "landing-page-hostinger/a-propos.html": {
+      "file": "landing-page-hostinger/a-propos.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        79,
+        81,
+        106,
+        109
+      ],
+      "severity": "CRITICAL"
+    },
+    "landing-page-hostinger/cas-clients.html": {
+      "file": "landing-page-hostinger/cas-clients.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        77,
+        79,
+        104,
+        107
+      ],
+      "severity": "CRITICAL"
+    },
+    "landing-page-hostinger/contact.html": {
+      "file": "landing-page-hostinger/contact.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        117,
+        119,
+        144,
+        147
+      ],
+      "severity": "CRITICAL"
+    },
+    "landing-page-hostinger/en/about.html": {
+      "file": "landing-page-hostinger/en/about.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        79,
+        81,
+        106,
+        109
+      ],
+      "severity": "CRITICAL"
+    },
+    "landing-page-hostinger/en/case-studies.html": {
+      "file": "landing-page-hostinger/en/case-studies.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        77,
+        79,
+        104,
+        107
+      ],
+      "severity": "CRITICAL"
+    },
+    "landing-page-hostinger/en/contact.html": {
+      "file": "landing-page-hostinger/en/contact.html",
+      "gtmScriptCount": 2,
+      "hasLazyLoaded": false,
+      "hasInline": true,
+      "gtmLines": [
+        117,
+        119,
+        144,
+        147
+      ],
+      "severity": "CRITICAL"
+    }
+  }
+}
