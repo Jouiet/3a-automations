@@ -17,7 +17,7 @@ const KNOWLEDGE_BASE = {
     meaning: 'Automation, Analytics, AI',
     expertise: ['Email Marketing Klaviyo', 'E-commerce Shopify', 'Analytics GA4', 'Workflows n8n'],
     target: 'PME et e-commerce (€10k-500k/mois CA)',
-    differentiator: 'Consultant solo expert, pas d\'agence - relation directe, prix justes'
+    differentiator: 'Agence spécialisée automation - relation directe avec experts, prix justes'
   },
 
   // === TARIFICATION COMPLÈTE ===
@@ -128,7 +128,7 @@ const KNOWLEDGE_BASE = {
   process: {
     steps: [
       { num: 1, name: 'Formulaire Diagnostic', duration: '5-10 min', description: 'Vous remplissez un court formulaire sur votre activité' },
-      { num: 2, name: 'Rapport PDF', duration: '24-48h', description: 'Je vous envoie un rapport avec 3 recommandations prioritaires' },
+      { num: 2, name: 'Rapport PDF', duration: '24-48h', description: 'Nous vous envoyons un rapport avec 3 recommandations prioritaires' },
       { num: 3, name: 'Proposition', duration: 'Google Docs', description: 'Proposition détaillée avec prix et planning' },
       { num: 4, name: 'Livraison', duration: 'Selon pack', description: 'Implémentation + documentation + support' }
     ],
@@ -159,19 +159,19 @@ const KNOWLEDGE_BASE = {
   // === FAQ ENRICHIE ===
   faq: {
     delai: 'Les packs Setup sont livrés en 1-3 semaines selon complexité. L\'audit gratuit est envoyé sous 24-48h.',
-    garantie: 'Si les automatisations ne fonctionnent pas comme prévu, je corrige jusqu\'à satisfaction. Pas de limite de révisions.',
-    outils: 'Je travaille principalement avec Klaviyo, Shopify, GA4, n8n, Google Sheets. Je m\'adapte à vos outils existants.',
-    difference: 'Consultant solo = pas de commercial, pas de junior, vous travaillez directement avec l\'expert. Prix justes, pas de marge agence.',
+    garantie: 'Si les automatisations ne fonctionnent pas comme prévu, nous corrigeons jusqu\'à satisfaction. Pas de limite de révisions.',
+    outils: 'Nous travaillons principalement avec Klaviyo, Shopify, GA4, n8n, Google Sheets. Nous nous adaptons à vos outils existants.',
+    difference: 'Équipe spécialisée = pas de commercial, pas de junior, vous travaillez directement avec les experts. Prix justes, transparents.',
     engagement: 'Les packs Setup sont one-time, pas d\'engagement. Les abonnements sont au mois, résiliables à tout moment.',
-    taille: 'Je travaille avec des PME de €10k à €500k/mois de CA. En dessous, l\'audit gratuit peut déjà beaucoup aider.',
-    secteur: 'Je travaille tous secteurs: e-commerce, B2B, SaaS, services, BTP, retail... L\'automation s\'adapte.',
+    taille: 'Nous travaillons avec des PME de €10k à €500k/mois de CA. En dessous, l\'audit gratuit peut déjà beaucoup aider.',
+    secteur: 'Nous travaillons tous secteurs: e-commerce, B2B, SaaS, services, BTP, retail... L\'automation s\'adapte.',
     resultats: 'Exemples: +15% récupération paniers abandonnés, 36-42:1 ROI email (Litmus 2025), -60% temps qualification leads.'
   },
 
   // === OBJECTIONS COURANTES ===
   objections: {
     tropCher: 'Les prix peuvent sembler élevés mais le ROI est rapide. L\'email marketing génère en moyenne 36-42€ pour 1€ investi. Commencez par l\'audit gratuit pour voir le potentiel.',
-    pasTech: 'Vous n\'avez rien à faire de technique. Je gère tout et je vous livre une documentation claire. Vous gardez le contrôle sans les maux de tête.',
+    pasTech: 'Vous n\'avez rien à faire de technique. Nous gérons tout et nous vous livrons une documentation claire. Vous gardez le contrôle sans les maux de tête.',
     pasTemps: 'Justement ! L\'objectif est de vous faire gagner du temps. Les automatisations tournent 24/7 sans vous.',
     dejaTeste: 'Beaucoup ont essayé seuls ou avec des outils basiques. La différence c\'est l\'expertise et la stratégie derrière les outils.',
     pasUrgent: 'Chaque jour sans automatisation = opportunités perdues. Paniers abandonnés, leads non relancés, clients qui partent...'

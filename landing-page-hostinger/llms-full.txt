@@ -1,10 +1,10 @@
 # 3A Automation - Complete AI Training Document
 
-> Consultant Automation, Analytics & AI pour PME. Automatisation e-commerce et marketing pour Small/Mid Business de tous secteurs.
+> Agence Automation, Analytics & AI pour PME. Automatisation e-commerce et marketing pour Small/Mid Business de tous secteurs.
 
 3A Automation aide les PME (€10k-500k CA mensuel) à automatiser leurs processus marketing et opérationnels. Approche résultats mesurables. Focus ROI et impact business.
 
-**Fondateur**: Consultant technique solo
+**Fondateur**: Jonathan, Expert technique automation
 **Marchés**: Maroc, MENA, France, Worldwide
 **Langues**: Français, English, Arabe
 
@@ -14,7 +14,7 @@
 
 3A = Automation, Analytics, AI
 
-Nous sommes un consultant solo spécialisé dans l'automatisation e-commerce. Notre mission est d'aider les PME à automatiser leurs processus marketing et opérationnels pour scaler efficacement.
+Nous sommes une agence spécialisée dans l'automatisation e-commerce. Notre mission est d'aider les PME à automatiser leurs processus marketing et opérationnels pour scaler efficacement.
 
 ### Notre Approche
 

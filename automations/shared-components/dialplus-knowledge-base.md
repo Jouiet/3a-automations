@@ -243,7 +243,7 @@ R: Non requises. Documentation claire fournie.
 > ROI rapide. Email marketing = 42 EUR pour 1 EUR. Commençons par l'audit gratuit.
 
 **"Je ne suis pas technique"**
-> Je gere tout. Documentation claire. Controle sans maux de tete.
+> Nous gerons tout. Documentation claire. Controle sans maux de tete.
 
 **"Je n'ai pas le temps"**
 > Justement! Automatisations 24/7. Temps libere une fois en place.
@@ -255,7 +255,7 @@ R: Non requises. Documentation claire fournie.
 > Chaque jour = opportunites perdues. Audit montre l'impact.
 
 **"Moins cher ailleurs"**
-> Consultant solo, prix reels. Moins cher = junior ou generique.
+> Agence specialisee, prix justes. Moins cher = junior ou generique.
 
 ---
 

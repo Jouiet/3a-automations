@@ -1252,26 +1252,26 @@
   // Réponses par industrie - OUTCOMES FOCUSED (no technical details)
   const industryResponses = {
     btp: {
-      intro: 'Pour le BTP, je propose des solutions spécifiques : identification de nouveaux prospects, relances automatiques de devis, et demandes d\'avis post-travaux.',
+      intro: 'Pour le BTP, nous proposons des solutions spécifiques : identification de nouveaux prospects, relances automatiques de devis, et demandes d\'avis post-travaux.',
       services: 'Automatisations BTP :\n• Identification prospects locaux\n• Veille opportunités automatique\n• Relances devis programmées\n• Emails satisfaction post-travaux\n• Collecte avis clients automatique',
-      leads: 'Pour générer des leads BTP, j\'identifie automatiquement les opportunités dans votre zone et je qualifie les prospects selon vos critères.'
+      leads: 'Pour générer des leads BTP, nous identifions automatiquement les opportunités dans votre zone et qualifions les prospects selon vos critères.'
     },
     b2b: {
-      intro: 'Pour le B2B, je me concentre sur la qualification automatique des leads et les séquences de nurturing pour convertir les prospects en clients.',
+      intro: 'Pour le B2B, nous nous concentrons sur la qualification automatique des leads et les séquences de nurturing pour convertir les prospects en clients.',
       services: 'Automatisations B2B :\n• Lead scoring automatique\n• Séquences nurturing personnalisées\n• Synchronisation CRM\n• Alertes commerciales temps réel\n• Qualification automatique',
-      leads: 'Pour la génération de leads B2B, je configure des workflows de capture et qualification automatique. Les leads chauds déclenchent des alertes en temps réel.'
+      leads: 'Pour la génération de leads B2B, nous configurons des workflows de capture et qualification automatique. Les leads chauds déclenchent des alertes en temps réel.'
     },
     ecommerce: {
-      intro: 'Pour l\'e-commerce, j\'optimise tout le parcours client : de l\'acquisition à la fidélisation, en passant par la récupération des paniers abandonnés.',
+      intro: 'Pour l\'e-commerce, nous optimisons tout le parcours client : de l\'acquisition à la fidélisation, en passant par la récupération des paniers abandonnés.',
       services: 'Automatisations e-commerce :\n• Récupération paniers abandonnés\n• Welcome series nouveaux clients\n• Post-achat pour fidéliser\n• Alertes retour en stock\n• Réactivation clients dormants',
-      leads: 'Pour l\'e-commerce, je configure les flows de conversion pour transformer les visiteurs en acheteurs et maximiser la valeur client.'
+      leads: 'Pour l\'e-commerce, nous configurons les flows de conversion pour transformer les visiteurs en acheteurs et maximiser la valeur client.'
     },
     saas: {
-      intro: 'Pour les SaaS, je configure l\'onboarding automatisé, la prévention du churn, et les emails pour maximiser l\'adoption et la rétention.',
+      intro: 'Pour les SaaS, nous configurons l\'onboarding automatisé, la prévention du churn, et les emails pour maximiser l\'adoption et la rétention.',
       services: 'Automatisations SaaS :\n• Onboarding séquencé\n• Prévention churn proactive\n• Adoption des fonctionnalités\n• Collecte feedback automatique\n• Upsell intelligent'
     },
     services: {
-      intro: 'Pour les prestataires de services, j\'automatise la prospection, les rappels rendez-vous, et les demandes de témoignages post-mission.',
+      intro: 'Pour les prestataires de services, nous automatisons la prospection, les rappels rendez-vous, et les demandes de témoignages post-mission.',
       services: 'Automatisations services :\n• Prospection automatisée\n• Nurturing leads longs\n• Rappels rendez-vous\n• Demandes de témoignages\n• Suivi administratif'
     }
   };
@@ -1280,7 +1280,7 @@
   const topicResponses = {
     processus: {
       keywords: ['processus', 'comment ça marche', 'fonctionnement', 'étapes', 'déroulement', 'explique'],
-      response: `Voici comment ça se passe :\n\n1️⃣ **Formulaire diagnostic** (5 min)\nVous me décrivez votre activité et vos objectifs\n\n2️⃣ **Rapport personnalisé** (24-48h)\nJe vous envoie 3 recommandations prioritaires\n\n3️⃣ **Proposition sur mesure** \nSi ça vous intéresse, devis détaillé adapté à vos besoins\n\n4️⃣ **Implémentation clé en main**\nJe configure tout, vous n'avez rien à faire de technique\n\n✅ Pas d'appel obligatoire, tout par écrit si vous préférez !`
+      response: `Voici comment ça se passe :\n\n1️⃣ **Formulaire diagnostic** (5 min)\nVous nous décrivez votre activité et vos objectifs\n\n2️⃣ **Rapport personnalisé** (24-48h)\nNous vous envoyons 3 recommandations prioritaires\n\n3️⃣ **Proposition sur mesure** \nSi ça vous intéresse, devis détaillé adapté à vos besoins\n\n4️⃣ **Implémentation clé en main**\nNous configurons tout, vous n'avez rien à faire de technique\n\n✅ Pas d'appel obligatoire, tout par écrit si vous préférez !`
     },
     pricing: {
       keywords: ['prix', 'tarif', 'combien', 'coût', 'budget', 'devis', 'cher'],
@@ -1292,7 +1292,7 @@
     },
     automatisations: {
       keywords: ['automatisation', 'automatisations', 'workflow', 'flows', 'quoi automatiser'],
-      response: `Je propose un large catalogue d'automatisations :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports automatiques\n\n🛒 **E-commerce:**\nSync produits, Alertes stock, Reviews\n\n🤖 **AI & Video:**\nVidéos marketing, Avatar IA, Voix IA\n\nQuel type vous intéresse le plus ?`
+      response: `Nous proposons un large catalogue d'automatisations :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports automatiques\n\n🛒 **E-commerce:**\nSync produits, Alertes stock, Reviews\n\n🤖 **AI & Video:**\nVidéos marketing, Avatar IA, Voix IA\n\nQuel type vous intéresse le plus ?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'client', 'acquisition', 'trouver des clients'],
@@ -1300,11 +1300,11 @@
     },
     difference: {
       keywords: ['différence', 'pourquoi vous', 'agence', 'freelance', 'avantage'],
-      response: `Ce qui me différencie :\n\n✅ **Consultant expert, pas agence**\nVous travaillez directement avec l'expert, pas un commercial\n\n✅ **Prix justes**\nPas de marge agence\n\n✅ **Spécialisation**\nExpert automation marketing - pas généraliste\n\n✅ **Résultats mesurables**\nROI prouvé sur chaque projet\n\n✅ **Flexibilité**\nPas d'engagement long terme obligatoire`
+      response: `Ce qui nous différencie :\n\n✅ **Équipe spécialisée**\nVous travaillez directement avec les experts, pas des commerciaux\n\n✅ **Prix justes**\nTransparents et compétitifs\n\n✅ **Spécialisation**\nExperts automation marketing - pas généralistes\n\n✅ **Résultats mesurables**\nROI prouvé sur chaque projet\n\n✅ **Flexibilité**\nPas d'engagement long terme obligatoire`
     },
     garantie: {
       keywords: ['garantie', 'risque', 'marche pas', 'satisfait'],
-      response: `Ma garantie est simple :\n\n🔒 **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, je corrige jusqu'à satisfaction.\n\n📝 **Documentation complète**\nVous gardez le contrôle, même sans moi.\n\n🚪 **Pas d'engagement**\nLes packs sont one-time. Les abonnements sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
+      response: `Notre garantie est simple :\n\n🔒 **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, nous corrigeons jusqu'à satisfaction.\n\n📝 **Documentation complète**\nVous gardez le contrôle en toute autonomie.\n\n🚪 **Pas d'engagement**\nLes packs sont one-time. Les abonnements sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
     },
     delai: {
       keywords: ['délai', 'temps', 'quand', 'combien de temps', 'durée'],
@@ -1450,7 +1450,7 @@
 
     // Réponse par défaut intelligente basée sur le contexte
     if (conversationContext.industry) {
-      return `Pour votre activité ${conversationContext.industry.toUpperCase()}, je peux vous proposer plusieurs solutions.\n\nCommençons par l'audit gratuit : je vous envoie un rapport personnalisé avec 3 recommandations prioritaires sous 24-48h.\n\n👉 Ça vous intéresse ?`;
+      return `Pour votre activité ${conversationContext.industry.toUpperCase()}, nous pouvons vous proposer plusieurs solutions.\n\nCommençons par l'audit gratuit : nous vous envoyons un rapport personnalisé avec 3 recommandations prioritaires sous 24-48h.\n\n👉 Ça vous intéresse ?`;
     }
 
     // === TRY AI API WITH MULTI-PROVIDER FALLBACK ===
@@ -1467,7 +1467,7 @@
     }
 
     // Vraie réponse par défaut - poser une question de qualification
-    return `Pour mieux vous aider, pouvez-vous me dire :\n\n• Quel est votre secteur d'activité ?\n• Quel est votre besoin principal ? (leads, email, analytics...)\n\nOu si vous préférez, demandez directement l'audit gratuit et je vous recontacte avec des recommandations personnalisées !`;
+    return `Pour mieux vous aider, pouvez-vous nous dire :\n\n• Quel est votre secteur d'activité ?\n• Quel est votre besoin principal ? (leads, email, analytics...)\n\nOu si vous préférez, demandez directement l'audit gratuit et nous vous recontactons avec des recommandations personnalisées !`;
   }
 
   // Toggle panel
