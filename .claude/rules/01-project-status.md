@@ -1,24 +1,57 @@
 # 3A Automation - Project Status
 
-## Current State (Session 117septimo - 31/12/2025)
+## Current State (Session 117octo - 31/12/2025)
 
 | Metric | Value |
 |--------|-------|
 | Site | https://3a-automation.com LIVE |
 | Dashboard | https://dashboard.3a-automation.com LIVE |
-| Pages | **69** accessible (0 errors) |
+| Pages | **63** HTML files (verified count) |
 | Investor Pages | ✅ Created (FR + EN) with FAQPage + BreadcrumbList |
-| Automations | **86** (Registry v2.1.0) |
+| Automations | **86** (Registry v2.1.1 - counts fixed) |
 | Scripts résilients | **8 fichiers (core/)** - All P0-P1-P2 secured |
 | n8n Workflows | **1 restant** (Twilio blocked) |
 | SEO Score | **96%** |
 | AEO Score | **95%** |
-| FAQPage Schema | **29/69 pages** (+2 investor pages) |
+| FAQPage Schema | **29/63 pages** (+2 investor pages) |
 | Footer | **Enterprise-class (4 colonnes)** |
 | SSL | **Let's Encrypt (77 days) + HSTS** |
 | Infrastructure | 4 Docker containers RUNNING |
 | llms.txt | **v5.0** with investor section |
+| Voice Widget Templates | **8 industries** (4h→30min deployment) |
 | **INVESTOR-READY** | ✅ VERIFIED |
+
+## SESSION 117octo - REGISTRY AUDIT + CONSISTENCY (31/12/2025)
+
+### Automations Registry Fixed (v2.1.1)
+
+| Issue | Fix |
+|-------|-----|
+| content count: 8→9 | Fixed |
+| whatsapp count: 2→3 | Fixed |
+| voice-ai count: 2→4 | Fixed |
+| Missing category: marketing | Added (1 automation) |
+| Category sum vs totalCount | ✅ 86=86=86 |
+
+### Page Count Verified
+
+| Category | FR | EN | Total |
+|----------|----|----|-------|
+| Main pages | 10 | 10 | 20 |
+| Academy | 10 | 10 | 20 |
+| Blog | 5 | 4 | 9 |
+| Services | 5 | 5 | 10 |
+| Legal | 2 | 2 | 4 |
+| **Total** | | | **63** |
+
+### Voice Widget Templates OPERATIONAL
+
+```bash
+node automations/agency/core/voice-widget-templates.cjs --list
+# 8 presets: ecommerce, b2b, agency, restaurant, retail, saas, healthcare, realestate
+```
+
+---
 
 ## SESSION 117septimo - P2 FIXES + INVESTOR SCHEMA (31/12/2025)
 
