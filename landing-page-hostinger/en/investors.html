@@ -39,7 +39,7 @@
   <link rel="preload" href="/styles.min.css?v=26.0" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="/styles.min.css?v=26.0"></noscript>
 
-  <!-- Schema.org JSON-LD -->
+  <!-- Schema.org JSON-LD - WebPage + Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -47,6 +47,15 @@
     "name": "Investors - 3A Automation",
     "description": "Investment opportunity in e-commerce automation and AI",
     "url": "https://3a-automation.com/en/investors.html",
+    "dateModified": "2025-12-31",
+    "inLanguage": "en-US",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://3a-automation.com/en/"},
+        {"@type": "ListItem", "position": 2, "name": "Investors", "item": "https://3a-automation.com/en/investors.html"}
+      ]
+    },
     "mainEntity": {
       "@type": "Organization",
       "name": "3A Automation",
@@ -54,8 +63,60 @@
       "url": "https://3a-automation.com",
       "foundingDate": "2025",
       "areaServed": ["Morocco", "Europe", "MENA"],
-      "knowsAbout": ["E-commerce Automation", "Marketing Automation", "AI Integration", "Voice AI"]
+      "knowsAbout": ["E-commerce Automation", "Marketing Automation", "AI Integration", "Voice AI"],
+      "numberOfEmployees": {"@type": "QuantitativeValue", "value": 1},
+      "slogan": "Operations automated. Strategy unleashed."
     }
+  }
+  </script>
+
+  <!-- FAQPage Schema for AEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is 3A Automation's current stage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "3A Automation is in pre-revenue phase (Seed stage). We have 86 documented workflows, 8 resilient multi-fallback automations, a working Voice AI Widget, and a 69-page bilingual website. We don't yet have active paying clients or recurring revenue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the 4 investor types targeted?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1) Venture Capital (€300K-1M, Series A target), 2) Angel Investors (€10K-50K, Seed stage), 3) Strategic Partners (Shopify agencies, n8n integrators, IT consultancies), 4) Potential Acquirers (M&A horizon 3-5 years post-traction)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is 3A Automation's target market?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Primary market: MENA (e-commerce $37B in 2025 per Statista). Secondary market: France and Europe (4.2M SMBs per INSEE). Focus on SMBs with monthly revenue €10K-500K."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What documents are available for investors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On request: Pitch Deck (12 slides), Financial Projections (3 years), Workflow Catalog (86 sheets), Technical Architecture, Data Room (after NDA). Contact: invest@3a-automation.com"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is 3A Automation's competitive advantage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multi-fallback stack (3+ AI providers: Claude, Gemini, Grok), Voice AI differentiator, competitive MAD pricing for MENA market, 86 tested proprietary workflows, resilient Docker infrastructure."
+        }
+      }
+    ]
   }
   </script>
 
@@ -201,7 +262,7 @@
               <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• 86 documented & tested workflows</li>
               <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• 8 resilient automations (multi-fallback)</li>
               <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• Working Voice AI Widget (FR/EN)</li>
-              <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• 61-page website (bilingual)</li>
+              <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• 69-page website (bilingual)</li>
               <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• Next.js 14 Client Dashboard</li>
               <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• Docker Infrastructure (Hostinger VPS)</li>
               <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• Integrations: Shopify, Klaviyo, GA4, n8n</li>
@@ -246,7 +307,7 @@
           <p class="section-desc">Each investor profile has a different value proposition.</p>
         </div>
 
-        <div class="grid-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 2rem; margin-top: 3rem;">
+        <div class="grid-2" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 3rem;">
 
           <!-- 1. Venture Capital -->
           <div class="investor-card" style="background: linear-gradient(135deg, rgba(79, 186, 241, 0.15) 0%, rgba(25, 30, 53, 0.9) 100%); border: 1px solid rgba(79, 186, 241, 0.3); border-radius: 1.5rem; padding: 2.5rem; position: relative; overflow: hidden;">
