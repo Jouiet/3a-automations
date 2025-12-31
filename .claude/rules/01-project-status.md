@@ -1,12 +1,13 @@
 # 3A Automation - Project Status
 
-## Current State (Session 117quinto - 31/12/2025)
+## Current State (Session 117sexto - 31/12/2025)
 
 | Metric | Value |
 |--------|-------|
 | Site | https://3a-automation.com LIVE |
 | Dashboard | https://dashboard.3a-automation.com LIVE |
-| Pages | **67** accessible (0 errors) |
+| Pages | **69** accessible (0 errors) |
+| Investor Pages | ✅ Created (FR + EN) |
 | Automations | **86** (Registry v2.1.0) |
 | Scripts résilients | **8 fichiers (core/)** - All P0-P1 secured |
 | n8n Workflows | **1 restant** (Twilio blocked) |
@@ -17,6 +18,35 @@
 | SSL | **Let's Encrypt (77 days) + HSTS** |
 | Infrastructure | 4 Docker containers RUNNING |
 | **INVESTOR-READY** | ✅ VERIFIED |
+
+## SESSION 117sexto - INVESTOR PAGES (31/12/2025)
+
+### HONEST Investor Assessment
+
+| What We HAVE | What We DON'T HAVE |
+|--------------|-------------------|
+| 86 documented workflows | Recurring revenue |
+| 8 resilient automations | Active paying clients |
+| Voice AI Widget (FR/EN) | Team beyond founder |
+| 69-page bilingual website | Financial track record |
+| Docker infrastructure | Previous funding |
+
+### 4 Investor Types
+
+| Type | Target | Ticket |
+|------|--------|--------|
+| VC | Series A (24 months) | €300K-1M |
+| Angel | Seed stage | €10K-50K |
+| Strategic | Agencies, integrators | Partnership |
+| Acquirers | M&A (3-5 years) | Post-traction |
+
+### Pages Added
+- `/investisseurs.html` (FR)
+- `/en/investors.html` (EN)
+
+**Commit:** defebba
+
+---
 
 ## SESSION 117quinto - AGENCY BRANDING FIX (31/12/2025)
 
