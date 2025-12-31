@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 24.0 | Date: 2025-12-31 | Session: 117bis
+## Version: 24.1 | Date: 2025-12-31 | Session: 117bis (DEPLOYED)
 
 ---
 
@@ -53,6 +53,13 @@
 | HTTP/2 | ✅ h2 |
 | Mixed Content | ✅ None |
 | HSTS | ⚠️ P2 (server config) |
+
+### Deployment Fix (31/12/2025)
+
+Container `3a-website` was in restart loop (exit 128) due to GitHub authentication.
+- **Root cause**: Private repo clone without token
+- **Fix**: Added `GITHUB_TOKEN` environment variable to docker-compose
+- **Result**: Container running, site LIVE with all Session 117bis changes
 
 ### Scripts Créés (14)
 
