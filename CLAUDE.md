@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 24.3 | Date: 2025-12-31 | Session: 117sexto (DEPLOYED)
+## Version: 25.0 | Date: 2025-12-31 | Session: 118 (DEPLOYED)
 
 ---
 
@@ -10,12 +10,40 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (86, v2.1.0) |
-| History | `HISTORY.md` (Sessions 0-117) |
-| Scripts résilients | `automations/agency/core/` (8 scripts, P0-P1 secured) |
+| Automations | `automations/automations-registry.json` (86, v2.1.1) |
+| History | `HISTORY.md` (Sessions 0-118) |
+| Scripts résilients | `automations/agency/core/` (8 scripts, P0-P1-P2 secured) |
 | Pages | 63 (FR/EN + Academy + Investors) |
-| SEO Score | **95%** |
-| AEO Score | **92%** |
+| SEO Score | **96%** |
+| AEO Score | **95%** |
+| Docker Projects | 4 running (3a-website, cinematicads, root, wordpress) |
+
+## Session 118 - SYSTEM VERIFICATION (31/12/2025)
+
+### Infrastructure Verified
+
+| Component | Status |
+|-----------|--------|
+| 3a-automation.com | ✅ HTTP 200 |
+| dashboard.3a-automation.com | ✅ HTTP 200 |
+| n8n.srv1168256.hstgr.cloud | ✅ HTTP 200 |
+| Docker containers | 4 projects RUNNING |
+| Voice Widget Templates | 8 presets operational |
+| Registry | v2.1.1 - counts verified 86=86=86 |
+
+### Session 117octo - Registry Audit (31/12/2025)
+
+| Fix | Details |
+|-----|---------|
+| content count | 8→9 |
+| whatsapp count | 2→3 |
+| voice-ai count | 2→4 |
+| marketing category | Added (count: 1) |
+| Page count | 69→63 (verified) |
+
+**Commit:** `95daff3` fix(registry): Automations registry v2.1.1
+
+---
 
 ## Session 117sexto - INVESTOR PAGES CREATED (31/12/2025)
 
