@@ -1,0 +1,164 @@
+{
+  "timestamp": "2025-12-31T12:46:29.337Z",
+  "domain": "3a-automation.com",
+  "totalPages": 84,
+  "accessible": 67,
+  "errors": [
+    {
+      "url": "/a-propos",
+      "status": 404
+    },
+    {
+      "url": "/automatisations.html",
+      "status": 404
+    },
+    {
+      "url": "/cas-clients",
+      "status": 404
+    },
+    {
+      "url": "/contact",
+      "status": 404
+    },
+    {
+      "url": "/en/about",
+      "status": 404
+    },
+    {
+      "url": "/en/blog/marketing-automation-pour-startups-2026-guide-complet.html",
+      "status": 404
+    },
+    {
+      "url": "/en/case-studies",
+      "status": 404
+    },
+    {
+      "url": "/en/contact",
+      "status": 404
+    },
+    {
+      "url": "/en/legal.html",
+      "status": 404
+    },
+    {
+      "url": "/en/legal/privacy",
+      "status": 404
+    },
+    {
+      "url": "/en/legal/terms",
+      "status": 404
+    },
+    {
+      "url": "/en/services.html",
+      "status": 404
+    },
+    {
+      "url": "/en/services/ecommerce",
+      "status": 404
+    },
+    {
+      "url": "/legal/mentions-legales",
+      "status": 404
+    },
+    {
+      "url": "/legal/politique-confidentialite",
+      "status": 404
+    },
+    {
+      "url": "/services.html",
+      "status": 404
+    },
+    {
+      "url": "/services/ecommerce",
+      "status": 404
+    }
+  ],
+  "redirects": [],
+  "slowPages": [],
+  "allUrls": [
+    "/",
+    "/404.html",
+    "/a-propos",
+    "/a-propos.html",
+    "/academie.html",
+    "/academie/cours/analytics.html",
+    "/academie/cours/contenu.html",
+    "/academie/cours/demarrer.html",
+    "/academie/cours/ecommerce.html",
+    "/academie/cours/emails.html",
+    "/academie/cours/leads.html",
+    "/academie/guides.html",
+    "/academie/parcours/e-commerce.html",
+    "/academie/parcours/growth.html",
+    "/academie/parcours/marketing-automation.html",
+    "/apple-touch-icon.png",
+    "/automations.html",
+    "/automatisations.html",
+    "/blog/",
+    "/blog/assistant-vocal-ia-pme-2026.html",
+    "/blog/automatisation-ecommerce-2026.html",
+    "/blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+    "/blog/marketing-automation-pour-startups-2026-guide-complet.html",
+    "/booking.html",
+    "/cas-clients",
+    "/cas-clients.html",
+    "/contact",
+    "/contact.html",
+    "/en/",
+    "/en/404.html",
+    "/en/about",
+    "/en/about.html",
+    "/en/academy.html",
+    "/en/academy/courses/analytics.html",
+    "/en/academy/courses/content.html",
+    "/en/academy/courses/ecommerce.html",
+    "/en/academy/courses/emails.html",
+    "/en/academy/courses/getting-started.html",
+    "/en/academy/courses/leads.html",
+    "/en/academy/guides.html",
+    "/en/academy/paths/e-commerce.html",
+    "/en/academy/paths/growth.html",
+    "/en/academy/paths/marketing-automation.html",
+    "/en/automations.html",
+    "/en/blog/",
+    "/en/blog/ecommerce-automation-2026.html",
+    "/en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+    "/en/blog/marketing-automation-pour-startups-2026-guide-complet.html",
+    "/en/blog/voice-ai-assistant-sme-2026.html",
+    "/en/booking.html",
+    "/en/case-studies",
+    "/en/case-studies.html",
+    "/en/contact",
+    "/en/contact.html",
+    "/en/legal.html",
+    "/en/legal/privacy",
+    "/en/legal/privacy.html",
+    "/en/legal/terms",
+    "/en/legal/terms.html",
+    "/en/pricing.html",
+    "/en/services.html",
+    "/en/services/ecommerce",
+    "/en/services/ecommerce.html",
+    "/en/services/flywheel-360.html",
+    "/en/services/free-audit.html",
+    "/en/services/smb.html",
+    "/en/services/voice-ai.html",
+    "/favicon-32x32.png",
+    "/favicon.ico",
+    "/legal/mentions-legales",
+    "/legal/mentions-legales.html",
+    "/legal/politique-confidentialite",
+    "/legal/politique-confidentialite.html",
+    "/logo.webp",
+    "/pricing.html",
+    "/services.html",
+    "/services/audit-gratuit.html",
+    "/services/ecommerce",
+    "/services/ecommerce.html",
+    "/services/flywheel-360.html",
+    "/services/pme.html",
+    "/services/voice-ai.html",
+    "/site.webmanifest",
+    "/styles.min.css"
+  ]
+}

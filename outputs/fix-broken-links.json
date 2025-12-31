@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-12-31T12:48:10.598Z",
+  "totalFixes": 14,
+  "fixedFiles": [
+    {
+      "file": "academie/cours/demarrer.html",
+      "fixes": 1
+    },
+    {
+      "file": "academie/cours/emails.html",
+      "fixes": 1
+    },
+    {
+      "file": "academie/cours/leads.html",
+      "fixes": 1
+    },
+    {
+      "file": "academie/guides.html",
+      "fixes": 1
+    },
+    {
+      "file": "academie/parcours/e-commerce.html",
+      "fixes": 2
+    },
+    {
+      "file": "academie/parcours/growth.html",
+      "fixes": 2
+    },
+    {
+      "file": "academie/parcours/marketing-automation.html",
+      "fixes": 2
+    },
+    {
+      "file": "blog/marketing-automation-pour-startups-2026-guide-complet.html",
+      "fixes": 1
+    },
+    {
+      "file": "en/academy/guides.html",
+      "fixes": 1
+    },
+    {
+      "file": "en/academy.html",
+      "fixes": 2
+    }
+  ],
+  "linkFixes": {
+    "href=\"/services.html\"": "href=\"/services/ecommerce.html\"",
+    "href=\"/en/services.html\"": "href=\"/en/services/ecommerce.html\"",
+    "href=\"/en/legal.html\"": "href=\"/en/legal/privacy.html\"",
+    "href=\"/automatisations.html\"": "href=\"/automations.html\"",
+    "href=\"/a-propos\"": "href=\"/a-propos.html\"",
+    "href=\"/contact\"": "href=\"/contact.html\"",
+    "href=\"/cas-clients\"": "href=\"/cas-clients.html\"",
+    "href=\"/services/ecommerce\"": "href=\"/services/ecommerce.html\"",
+    "href=\"/legal/mentions-legales\"": "href=\"/legal/mentions-legales.html\"",
+    "href=\"/legal/politique-confidentialite\"": "href=\"/legal/politique-confidentialite.html\"",
+    "href=\"/en/about\"": "href=\"/en/about.html\"",
+    "href=\"/en/contact\"": "href=\"/en/contact.html\"",
+    "href=\"/en/case-studies\"": "href=\"/en/case-studies.html\"",
+    "href=\"/en/services/ecommerce\"": "href=\"/en/services/ecommerce.html\"",
+    "href=\"/en/legal/privacy\"": "href=\"/en/legal/privacy.html\"",
+    "href=\"/en/legal/terms\"": "href=\"/en/legal/terms.html\"",
+    "href=\"/en/blog/marketing-automation-pour-startups-2026-guide-complet.html\"": "href=\"/en/blog/ecommerce-automation-2026.html\""
+  }
+}
