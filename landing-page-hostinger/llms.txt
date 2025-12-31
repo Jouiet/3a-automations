@@ -21,7 +21,7 @@
 ### Automatisation E-commerce
 - 86 automatisations testees et documentees
 - Shopify, WooCommerce, Klaviyo, GA4
-- ROI moyen email marketing: 42 EUR pour 1 EUR investi
+- ROI moyen email marketing: 36-42 EUR pour 1 EUR investi (Litmus/DMA 2025)
 - Recuperation paniers abandonnes: +10-15%
 
 ### Services PME & B2B
@@ -47,7 +47,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 ## Resultats Clients
 
-- ROI email marketing: 42:1 (source Klaviyo 2025)
+- ROI email marketing: 36:1 a 42:1 (Litmus/DMA 2025)
 - Paniers abandonnes recuperes: +10-15%
 - Temps qualification leads: -60%
 - Lifetime Value clients: +30% avec segmentation VIP

@@ -1,21 +1,66 @@
 # 3A Automation - Project Status
 
-## Current State (Session 117ter - 31/12/2025)
+## Current State (Session 117quater - 31/12/2025)
 
 | Metric | Value |
 |--------|-------|
 | Site | https://3a-automation.com LIVE |
 | Dashboard | https://dashboard.3a-automation.com LIVE |
-| Pages | **61** (31 FR + 30 EN incl. Academy) |
+| Pages | **67** accessible (0 errors) |
 | Automations | **86** (Registry v2.1.0) |
 | Scripts résilients | **8 fichiers (core/)** - All P0-P1 secured |
 | n8n Workflows | **1 restant** (Twilio blocked) |
-| SEO Score | **96%** (+1) |
-| AEO Score | **95%** (+3) |
-| FAQPage Schema | **27/61 pages** (+7 blog) |
+| SEO Score | **96%** |
+| AEO Score | **95%** |
+| FAQPage Schema | **27/61 pages** |
 | Footer | **Enterprise-class (4 colonnes)** |
 | SSL | **Let's Encrypt (77 days) + HSTS** |
 | Infrastructure | 4 Docker containers RUNNING |
+| **INVESTOR-READY** | ✅ VERIFIED |
+
+## SESSION 117quater - INVESTOR-READY VERIFICATION (31/12/2025)
+
+### 404 Audit: ZERO ERRORS
+
+| Metric | Value |
+|--------|-------|
+| Total URLs tested | 67 |
+| Accessible | 67 (100%) |
+| 404 Errors | 0 |
+| Redirects | 0 |
+| Slow Pages | 0 |
+
+### URL Fixes Applied
+
+| Issue | Files Fixed | URLs Patched |
+|-------|-------------|--------------|
+| og:url missing .html | 10 | 31 |
+| hreflang missing .html | 10 | 31 |
+
+### ROI Claims Updated (Verified 2025 Data)
+
+| File | Old Claim | New Claim |
+|------|-----------|-----------|
+| Blog FR | "42:1 (DMA 2024)" | "36:1 à 42:1 (Litmus/DMA 2025)" |
+| Blog EN | "42:1 (DMA 2024)" | "36:1 to 42:1 (Litmus/DMA 2025)" |
+| llms.txt | "42:1" | "36-42:1 (Litmus/DMA 2025)" |
+| knowledge-base.js | "42:1" | "36-42:1 (Litmus 2025)" |
+
+**Source:** Litmus "State of Email" 2025 + DMA Industry Reports
+
+### Visual Verification (Playwright)
+
+| Page | Status | Screenshot |
+|------|--------|------------|
+| Homepage | ✅ Professional | homepage-investor-check.png |
+| Pricing | ✅ All sections OK | pricing-investor-check.png |
+
+### Investor Types Targeted
+
+1. **VC Partner** - Scalable automation platform
+2. **Angel Investor** - Solo consultant with proven ROI
+3. **Strategic Partner (App CEO)** - Integration opportunity
+4. **Acquisition Investor (PE)** - Complete operation buyout
 
 ## SESSION 117ter - P2 FIXES COMPLETE (31/12/2025)
 

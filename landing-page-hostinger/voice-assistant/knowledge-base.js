@@ -67,7 +67,7 @@ const KNOWLEDGE_BASE = {
         'Segmentation RFM automatique',
         'Dashboard performance temps réel'
       ],
-      roi: 'ROI moyen: 42€ pour 1€ investi en email marketing'
+      roi: 'ROI moyen: 36-42€ pour 1€ investi en email marketing (Litmus 2025)'
     },
     b2b: {
       keywords: ['b2b', 'btob', 'entreprise', 'professionnel', 'corporate', 'industrie', 'services'],
@@ -165,12 +165,12 @@ const KNOWLEDGE_BASE = {
     engagement: 'Les packs Setup sont one-time, pas d\'engagement. Les abonnements sont au mois, résiliables à tout moment.',
     taille: 'Je travaille avec des PME de €10k à €500k/mois de CA. En dessous, l\'audit gratuit peut déjà beaucoup aider.',
     secteur: 'Je travaille tous secteurs: e-commerce, B2B, SaaS, services, BTP, retail... L\'automation s\'adapte.',
-    resultats: 'Exemples: +15% récupération paniers abandonnés, 42:1 ROI email, -60% temps qualification leads.'
+    resultats: 'Exemples: +15% récupération paniers abandonnés, 36-42:1 ROI email (Litmus 2025), -60% temps qualification leads.'
   },
 
   // === OBJECTIONS COURANTES ===
   objections: {
-    tropCher: 'Les prix peuvent sembler élevés mais le ROI est rapide. L\'email marketing génère en moyenne 42€ pour 1€ investi. Commencez par l\'audit gratuit pour voir le potentiel.',
+    tropCher: 'Les prix peuvent sembler élevés mais le ROI est rapide. L\'email marketing génère en moyenne 36-42€ pour 1€ investi. Commencez par l\'audit gratuit pour voir le potentiel.',
     pasTech: 'Vous n\'avez rien à faire de technique. Je gère tout et je vous livre une documentation claire. Vous gardez le contrôle sans les maux de tête.',
     pasTemps: 'Justement ! L\'objectif est de vous faire gagner du temps. Les automatisations tournent 24/7 sans vous.',
     dejaTeste: 'Beaucoup ont essayé seuls ou avec des outils basiques. La différence c\'est l\'expertise et la stratégie derrière les outils.',
