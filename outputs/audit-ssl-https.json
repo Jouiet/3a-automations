@@ -1,0 +1,53 @@
+{
+  "timestamp": "2025-12-31T12:07:04.229Z",
+  "domain": "3a-automation.com",
+  "checks": [
+    {
+      "name": "HTTP → HTTPS Redirect",
+      "passed": true,
+      "details": "Status: 308, Location: https://3a-automation.com/"
+    },
+    {
+      "name": "SSL Certificate Valid",
+      "passed": true,
+      "details": "Expires: Mar 18 22:00:20 2026 GMT (77 days left)"
+    },
+    {
+      "name": "SSL Certificate Not Expiring Soon",
+      "passed": true,
+      "details": "OK"
+    },
+    {
+      "name": "SSL Issuer",
+      "passed": true,
+      "details": "Let's Encrypt"
+    },
+    {
+      "name": "X-Content-Type-Options Header",
+      "passed": true,
+      "details": "nosniff"
+    },
+    {
+      "name": "HSTS Header",
+      "passed": false,
+      "details": "Not set"
+    },
+    {
+      "name": "HTTP/2 Support",
+      "passed": true,
+      "details": "Protocol: h2"
+    },
+    {
+      "name": "All Canonical URLs use HTTPS",
+      "passed": true,
+      "details": "OK"
+    },
+    {
+      "name": "No Mixed Content (HTTP resources)",
+      "passed": true,
+      "details": "OK"
+    }
+  ],
+  "passed": 8,
+  "failed": 1
+}

@@ -1,0 +1,71 @@
+{
+  "filesScanned": 84,
+  "issuesFound": [
+    {
+      "file": "landing-page-hostinger/en/index.html",
+      "line": 319,
+      "match": ">78<",
+      "context": "HTML content >78<",
+      "lineContent": "<div class=\"stat-number-ultra\" data-count=\"86\">78</div>"
+    },
+    {
+      "file": "landing-page-hostinger/en/services/flywheel-360.html",
+      "line": 253,
+      "match": ">78<",
+      "context": "HTML content >78<",
+      "lineContent": "<div class=\"stat-value\">78</div>"
+    },
+    {
+      "file": "landing-page-hostinger/index.html",
+      "line": 316,
+      "match": ">78<",
+      "context": "HTML content >78<",
+      "lineContent": "<div class=\"stat-number-ultra\" data-count=\"86\">78</div>"
+    },
+    {
+      "file": "landing-page-hostinger/services/flywheel-360.html",
+      "line": 253,
+      "match": ">78<",
+      "context": "HTML content >78<",
+      "lineContent": "<div class=\"stat-value\">78</div>"
+    }
+  ],
+  "fileDetails": {
+    "landing-page-hostinger/en/index.html": [
+      {
+        "file": "landing-page-hostinger/en/index.html",
+        "line": 319,
+        "match": ">78<",
+        "context": "HTML content >78<",
+        "lineContent": "<div class=\"stat-number-ultra\" data-count=\"86\">78</div>"
+      }
+    ],
+    "landing-page-hostinger/en/services/flywheel-360.html": [
+      {
+        "file": "landing-page-hostinger/en/services/flywheel-360.html",
+        "line": 253,
+        "match": ">78<",
+        "context": "HTML content >78<",
+        "lineContent": "<div class=\"stat-value\">78</div>"
+      }
+    ],
+    "landing-page-hostinger/index.html": [
+      {
+        "file": "landing-page-hostinger/index.html",
+        "line": 316,
+        "match": ">78<",
+        "context": "HTML content >78<",
+        "lineContent": "<div class=\"stat-number-ultra\" data-count=\"86\">78</div>"
+      }
+    ],
+    "landing-page-hostinger/services/flywheel-360.html": [
+      {
+        "file": "landing-page-hostinger/services/flywheel-360.html",
+        "line": 253,
+        "match": ">78<",
+        "context": "HTML content >78<",
+        "lineContent": "<div class=\"stat-value\">78</div>"
+      }
+    ]
+  }
+}

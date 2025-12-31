@@ -1,0 +1,194 @@
+{
+  "htmlFiles": [
+    {
+      "file": "/a-propos.html",
+      "urlPath": "/a-propos"
+    },
+    {
+      "file": "/automations.html",
+      "urlPath": "/automations"
+    },
+    {
+      "file": "/blog/assistant-vocal-ia-pme-2026.html",
+      "urlPath": "/blog/assistant-vocal-ia-pme-2026"
+    },
+    {
+      "file": "/blog/automatisation-ecommerce-2026.html",
+      "urlPath": "/blog/automatisation-ecommerce-2026"
+    },
+    {
+      "file": "/blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+      "urlPath": "/blog/comment-automatiser-votre-service-client-avec-l-ia"
+    },
+    {
+      "file": "/blog/index.html",
+      "urlPath": "/blog/"
+    },
+    {
+      "file": "/blog/marketing-automation-pour-startups-2026-guide-complet.html",
+      "urlPath": "/blog/marketing-automation-pour-startups-2026-guide-complet"
+    },
+    {
+      "file": "/booking.html",
+      "urlPath": "/booking"
+    },
+    {
+      "file": "/cas-clients.html",
+      "urlPath": "/cas-clients"
+    },
+    {
+      "file": "/contact.html",
+      "urlPath": "/contact"
+    },
+    {
+      "file": "/en/about.html",
+      "urlPath": "/en/about"
+    },
+    {
+      "file": "/en/automations.html",
+      "urlPath": "/en/automations"
+    },
+    {
+      "file": "/en/blog/ecommerce-automation-2026.html",
+      "urlPath": "/en/blog/ecommerce-automation-2026"
+    },
+    {
+      "file": "/en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+      "urlPath": "/en/blog/how-to-automate-customer-service-with-ai-effectively"
+    },
+    {
+      "file": "/en/blog/index.html",
+      "urlPath": "/en/blog/"
+    },
+    {
+      "file": "/en/blog/voice-ai-assistant-sme-2026.html",
+      "urlPath": "/en/blog/voice-ai-assistant-sme-2026"
+    },
+    {
+      "file": "/en/booking.html",
+      "urlPath": "/en/booking"
+    },
+    {
+      "file": "/en/case-studies.html",
+      "urlPath": "/en/case-studies"
+    },
+    {
+      "file": "/en/contact.html",
+      "urlPath": "/en/contact"
+    },
+    {
+      "file": "/en/index.html",
+      "urlPath": "/en/"
+    },
+    {
+      "file": "/en/legal/privacy.html",
+      "urlPath": "/en/legal/privacy"
+    },
+    {
+      "file": "/en/legal/terms.html",
+      "urlPath": "/en/legal/terms"
+    },
+    {
+      "file": "/en/pricing.html",
+      "urlPath": "/en/pricing"
+    },
+    {
+      "file": "/en/services/ecommerce.html",
+      "urlPath": "/en/services/ecommerce"
+    },
+    {
+      "file": "/en/services/flywheel-360.html",
+      "urlPath": "/en/services/flywheel-360"
+    },
+    {
+      "file": "/en/services/free-audit.html",
+      "urlPath": "/en/services/free-audit"
+    },
+    {
+      "file": "/en/services/smb.html",
+      "urlPath": "/en/services/smb"
+    },
+    {
+      "file": "/en/services/voice-ai.html",
+      "urlPath": "/en/services/voice-ai"
+    },
+    {
+      "file": "/index.html",
+      "urlPath": "/"
+    },
+    {
+      "file": "/legal/mentions-legales.html",
+      "urlPath": "/legal/mentions-legales"
+    },
+    {
+      "file": "/legal/politique-confidentialite.html",
+      "urlPath": "/legal/politique-confidentialite"
+    },
+    {
+      "file": "/pricing.html",
+      "urlPath": "/pricing"
+    },
+    {
+      "file": "/services/audit-gratuit.html",
+      "urlPath": "/services/audit-gratuit"
+    },
+    {
+      "file": "/services/ecommerce.html",
+      "urlPath": "/services/ecommerce"
+    },
+    {
+      "file": "/services/flywheel-360.html",
+      "urlPath": "/services/flywheel-360"
+    },
+    {
+      "file": "/services/pme.html",
+      "urlPath": "/services/pme"
+    },
+    {
+      "file": "/services/voice-ai.html",
+      "urlPath": "/services/voice-ai"
+    }
+  ],
+  "sitemapUrls": [
+    "/",
+    "/services/ecommerce.html",
+    "/services/pme.html",
+    "/services/flywheel-360.html",
+    "/services/voice-ai.html",
+    "/services/audit-gratuit.html",
+    "/automations.html",
+    "/pricing.html",
+    "/contact.html",
+    "/a-propos.html",
+    "/cas-clients.html",
+    "/legal/mentions-legales.html",
+    "/legal/politique-confidentialite.html",
+    "/booking.html",
+    "/en/",
+    "/en/services/ecommerce.html",
+    "/en/services/smb.html",
+    "/en/services/flywheel-360.html",
+    "/en/services/voice-ai.html",
+    "/en/services/free-audit.html",
+    "/en/automations.html",
+    "/en/pricing.html",
+    "/en/contact.html",
+    "/en/about.html",
+    "/en/case-studies.html",
+    "/en/legal/terms.html",
+    "/en/legal/privacy.html",
+    "/en/booking.html",
+    "/blog/",
+    "/en/blog/",
+    "/blog/automatisation-ecommerce-2026.html",
+    "/en/blog/ecommerce-automation-2026.html",
+    "/blog/assistant-vocal-ia-pme-2026.html",
+    "/en/blog/voice-ai-assistant-sme-2026.html",
+    "/blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+    "/en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+    "/blog/marketing-automation-pour-startups-2026-guide-complet.html"
+  ],
+  "missingFromSitemap": [],
+  "inSitemapNotFound": [],
+  "success": true
+}
