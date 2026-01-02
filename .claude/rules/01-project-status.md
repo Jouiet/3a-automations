@@ -12,8 +12,8 @@
 | Scripts résilients | **8 fichiers (core/)** - All P0-P1-P2 secured |
 | n8n Workflows | **0 restant** (all replaced by native scripts) |
 | SEO Score | **100%** (all meta tags, OG, Twitter) |
-| AEO Score | **95%** |
-| FAQPage Schema | **31/41 indexable (76%)** |
+| AEO Score | **100%** |
+| FAQPage Schema | **35/35 indexable (100%)** |
 | Security Headers | **CONFIGURED** (HSTS, CSP, X-Frame-Options) |
 | Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
 | SSL | **Let's Encrypt + HSTS preload** |
@@ -41,6 +41,7 @@
 | Twitter cards | ✅ 100% | Academy pages fixed (97% → 100%) |
 | hreflang x-default | ✅ 100% | Academy pages fixed |
 | FAQPage booking | ✅ DONE | FR + EN booking pages |
+| FAQPage all indexable | ✅ 100% | 35/35 pages (cas-clients, blog indexes, case-studies) |
 
 ### Audit Results After Fixes
 
@@ -49,6 +50,7 @@
 | metaRobots | 78% | **100%** |
 | ogImage | 97% | **100%** |
 | twitterCard | 97% | **100%** |
+| FAQPage | 76% | **100%** |
 | Passed checks | 41 | **47** |
 
 ### Commit
