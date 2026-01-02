@@ -1,5 +1,7 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Décembre 2025 (màj Session 114)
+## Document Exécutable - Décembre 2025 (màj Session 119)
+
+> **⚠️ NOTE (Session 119):** Tous les workflows n8n mentionnés dans ce document ont été migrés vers des scripts natifs Node.js dans `automations/agency/core/`. Voir `.claude/rules/07-native-scripts.md` pour la liste complète.
 ## Phase: PRÉ-INCORPORATION (en attente ICE marocain)
 
 ---

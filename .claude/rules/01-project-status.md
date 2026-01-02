@@ -335,9 +335,9 @@ All P2 items completed Session 117ter.
 | product-photos-resilient.cjs | v1.0 | Gemini→fal.ai→Replicate | 3005 |
 | email-personalization-resilient.cjs | v1.0 | Grok→Gemini→Claude | 3006 |
 
-## n8n WORKFLOWS
+## n8n → NATIVE SCRIPTS (MIGRATION COMPLETE)
 
-| Avant Session 115 | Après Session 115 |
+| Avant Session 115 | Après Session 119 |
 |-------------------|-------------------|
 | Blog Generator ✅ | SUPPRIMÉ → blog-generator-resilient.cjs |
 | Product Photos ✅ | SUPPRIMÉ → product-photos-resilient.cjs |

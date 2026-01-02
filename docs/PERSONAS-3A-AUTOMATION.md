@@ -243,11 +243,11 @@ Consultant solo, petite agence ou startup SaaS cherchant des leads B2B. Fait de 
 #### P0 - Essentielles
 | Automation | Benefice | Status |
 |------------|----------|--------|
-| LinkedIn Lead Scraper | +400 leads/jour | Workflow n8n OK |
-| Email Outreach Sequence | 3 emails personnalises | Workflow n8n OK |
+| LinkedIn Lead Scraper | +400 leads/jour | Script natif ✅ |
+| Email Outreach Sequence | 3 emails personnalises | Script natif ✅ |
 | Google Maps Sourcing | Leads locaux cibles | Script OK |
 | Google Apps Script Booking | RDV automatise | Script OK |
-| Lead Scoring | Focus leads chauds | Workflow n8n |
+| Lead Scoring | Focus leads chauds | Script natif ⏳ |
 
 #### P1 - Importantes
 | Automation | Benefice | Status |
@@ -328,9 +328,9 @@ Commerce ou service local avec clientele de proximite. Le telephone sonne consta
 #### P0 - Essentielles
 | Automation | Benefice | Status |
 |------------|----------|--------|
-| WhatsApp Booking Confirmation | 98% open rate | Workflow n8n OK |
-| WhatsApp Reminders 24h + 1h | -30% no-shows | Workflow n8n OK |
-| Grok Voice Telephony | 24/7 booking AI | Workflow n8n OK |
+| WhatsApp Booking Confirmation | 98% open rate | Script natif ✅ |
+| WhatsApp Reminders 24h + 1h | -30% no-shows | Script natif ✅ |
+| Grok Voice Telephony | 24/7 booking AI | Script natif ✅ |
 | Google Apps Script Booking | Cancel + reschedule | Script OK |
 
 #### P1 - Importantes
@@ -412,14 +412,14 @@ Agence marketing gerant plusieurs clients e-commerce ou B2B. Sous pression pour 
 | CinematicAds Director | Video AI cinema-quality | Script OK |
 | Competitor Clone AI | Analyse + recreation ads | Script OK |
 | E-commerce Ads Factory | Multi-ratio exports | Script OK |
-| AI Avatar Generator | Avatars consistants | Workflow n8n OK |
-| AI Talking Video | Lip-sync AI | Workflow n8n OK |
+| AI Avatar Generator | Avatars consistants | Script natif ✅ |
+| AI Talking Video | Lip-sync AI | Script natif ✅ |
 
 #### P1 - Importantes
 | Automation | Benefice | Status |
 |------------|----------|--------|
 | Asset Factory (Dual AI) | Vertex + xAI | Script OK |
-| Auto Blog Article | Contenu SEO | Workflow n8n OK |
+| Auto Blog Article | Contenu SEO | Script natif ✅ |
 | Promo Video Generator | Social content | Script OK |
 
 ### Pack Recommande
