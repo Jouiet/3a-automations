@@ -201,7 +201,7 @@ node automations/agency/core/voice-widget-templates.cjs --list
 | 88 documented workflows | Recurring revenue |
 | 10 resilient automations | Active paying clients |
 | Voice AI Widget (FR/EN) | Team beyond founder |
-| 69-page bilingual website | Financial track record |
+| 63-page bilingual website | Financial track record |
 | Docker infrastructure | Previous funding |
 
 ### 4 Investor Types

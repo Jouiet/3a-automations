@@ -131,7 +131,7 @@ BACKEND:
 
 AUTOMATION:
 ├── Node.js (scripts custom .cjs) - PRODUCTION
-├── 8 scripts résilients multi-AI
+├── 10 scripts résilients multi-AI
 └── n8n Infrastructure only (0 workflows - all migrated)
 
 AI PROVIDERS (Fallback Chain):

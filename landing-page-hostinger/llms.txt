@@ -145,7 +145,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 - 88 workflows documentes et testes
 - 10 automations resilientes (multi-fallback AI)
 - Voice AI Widget fonctionnel (FR/EN)
-- Site web 69 pages bilingue
+- Site web 63 pages bilingue
 - Infrastructure Docker (Hostinger VPS)
 - Stack: Shopify, Klaviyo, GA4, Claude/Gemini/Grok
 
