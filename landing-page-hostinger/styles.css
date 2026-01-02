@@ -6449,3 +6449,17 @@ a.clickable-card:hover .card-cta { color: var(--accent); }
     font-size: 2rem;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTION REVEAL ANIMATIONS - Preloaded to prevent CLS
+   ═══════════════════════════════════════════════════════════════════════════ */
+.section-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
