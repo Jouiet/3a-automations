@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 26.0 | Date: 2026-01-02 | Session: 119 (n8n→SCRIPTS COMPLETE)
+## Version: 27.0 | Date: 2026-01-02 | Session: 120 (FRONTEND CRM COMPLETE)
 
 ---
 
@@ -11,13 +11,49 @@
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
 | Automations | `automations/automations-registry.json` (88, v2.2.0) |
-| History | `HISTORY.md` (Sessions 0-119) |
+| History | `HISTORY.md` (Sessions 0-120) |
 | Scripts résilients | `automations/agency/core/` (10 scripts, P0-P1-P2 secured) |
 | Pages | 63 (FR/EN + Academy + Investors) |
 | SEO Score | **96%** |
 | AEO Score | **95%** |
 | Docker Projects | 4 running (3a-website, cinematicads, root, wordpress) |
 | CRM Scripts | HubSpot v1.1.0 + Omnisend v1.1.0 |
+
+## Session 120 - FRONTEND CRM + HEALTH CHECKS (02/01/2026)
+
+### HubSpot + Omnisend Cards Added
+
+CRM integrations were in registry but NOT displayed on frontend.
+
+| Fix | Files |
+|-----|-------|
+| HubSpot B2B CRM card | automations.html (FR) line 478 |
+| Omnisend E-commerce card | automations.html (EN) line 486 |
+
+**Commit:** `5c80645` feat(automations): Add HubSpot B2B + Omnisend E-commerce cards
+
+### Health Checks (9/10)
+
+| Script | Status | Providers |
+|--------|--------|-----------|
+| HubSpot B2B CRM | ✅ Ready (test mode) | Batch + backoff |
+| Omnisend B2C | ✅ Ready (test mode) | Events + carts |
+| Voice API | ✅ Operational | 4 (Grok→Gemini→Claude→Local) |
+| Blog Generator | ✅ Operational | 3 AI + WordPress |
+| Product Photos | ✅ Operational | 5 providers |
+| Email Personalization | ✅ Operational | 4 providers |
+| Grok Voice Realtime | ✅ **FULLY RESILIENT** | 2 (WebSocket + Gemini TTS) |
+| Uptime Monitor | ✅ **5/5 HEALTHY** | All critical services |
+| Voice Telephony | ⏳ Awaiting | Twilio credentials |
+
+### Klaviyo Status
+
+| Resource | Count |
+|----------|-------|
+| Lists | 10 (LinkedIn, Google Maps, B2B, Welcome...) |
+| Flows | 0 (using native scripts instead) |
+
+---
 
 ## Session 119 - CRM SCRIPTS v1.1.0 (02/01/2026)
 
