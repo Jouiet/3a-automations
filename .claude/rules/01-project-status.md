@@ -69,7 +69,7 @@
 | xAI/Grok API | ✅ | 385ms, 11 models |
 | Google SA | ✅ | a-automation-agency project |
 | Apify API | ✅ | STARTER $39/mo ACTIVE (MCP bug, API works) |
-| MCPs | 11/16 | 2 MCP package bugs (API works direct) |
+| MCPs | 11/14 | 2 MCP package bugs (API works direct), 1 not configured |
 | Docker Projects | 4 | 6 containers RUNNING |
 | VPS 1168256 | ✅ | Ubuntu 24.04, 8GB RAM |
 | Automations Registry | v2.2.0 | 88=88=88 ✅ |
