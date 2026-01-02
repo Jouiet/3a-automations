@@ -11,6 +11,17 @@ services:
       - traefik.http.routers.dashboard.entrypoints=web,websecure
       - traefik.http.routers.dashboard.tls.certresolver=mytlschallenge
       - traefik.http.services.dashboard.loadbalancer.server.port=3000
+      # Security Headers Middleware
+      - traefik.http.routers.dashboard.middlewares=dashboard-security@docker
+      - traefik.http.middlewares.dashboard-security.headers.stsSeconds=31536000
+      - traefik.http.middlewares.dashboard-security.headers.stsIncludeSubdomains=true
+      - traefik.http.middlewares.dashboard-security.headers.stsPreload=true
+      - traefik.http.middlewares.dashboard-security.headers.frameDeny=true
+      - traefik.http.middlewares.dashboard-security.headers.contentTypeNosniff=true
+      - traefik.http.middlewares.dashboard-security.headers.browserXssFilter=true
+      - traefik.http.middlewares.dashboard-security.headers.referrerPolicy=strict-origin-when-cross-origin
+      - traefik.http.middlewares.dashboard-security.headers.permissionsPolicy=camera=(), microphone=(self), geolocation=(), payment=()
+      - traefik.http.middlewares.dashboard-security.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://n8n.srv1168256.hstgr.cloud https://www.google-analytics.com
     networks:
       - root_default
     environment:

@@ -1,0 +1,353 @@
+{
+  "timestamp": "2026-01-02T08:20:02.054Z",
+  "summary": {
+    "totalPages": 63,
+    "criticalIssues": 1,
+    "highIssues": 2,
+    "mediumIssues": 4,
+    "lowIssues": 3,
+    "passed": 47
+  },
+  "sections": {
+    "security": {
+      "checks": [
+        {
+          "check": "HSTS",
+          "status": "CRITICAL",
+          "details": "MISSING - Header not present"
+        },
+        {
+          "check": "CSP",
+          "status": "HIGH",
+          "details": "MISSING - Header not present"
+        },
+        {
+          "check": "X-Frame-Options",
+          "status": "HIGH",
+          "details": "MISSING - Header not present"
+        },
+        {
+          "check": "X-Content-Type-Options",
+          "status": "MEDIUM",
+          "details": "MISSING - Header not present"
+        },
+        {
+          "check": "X-XSS-Protection (deprecated)",
+          "status": "LOW",
+          "details": "Not present (optional)"
+        },
+        {
+          "check": "Referrer-Policy",
+          "status": "MEDIUM",
+          "details": "MISSING - Header not present"
+        },
+        {
+          "check": "Permissions-Policy",
+          "status": "LOW",
+          "details": "Not present (optional)"
+        },
+        {
+          "check": "SSL/TLS",
+          "status": "PASS",
+          "details": "HTTPS connection successful"
+        }
+      ],
+      "passed": 1,
+      "failed": 7
+    },
+    "seo": {
+      "checks": [
+        {
+          "check": "metaDescription",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "metaRobots",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "canonical",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "ogTitle",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "ogDescription",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "ogImage",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "ogUrl",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "twitterCard",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "twitterTitle",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "twitterDescription",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "twitterImage",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "hreflangFr",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "hreflangEn",
+          "status": "LOW",
+          "details": "62/63 (98%) - Missing: blog/marketing-automation-pour-startups-2026-guide-complet.html"
+        },
+        {
+          "check": "hreflangDefault",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "titleTag",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "h1Tag",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        },
+        {
+          "check": "langAttribute",
+          "status": "PASS",
+          "details": "63/63 (100%)"
+        }
+      ],
+      "passed": 16,
+      "failed": 1
+    },
+    "aeo": {
+      "checks": [
+        {
+          "check": "robots.txt - GPTBot",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - ClaudeBot",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - PerplexityBot",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - Google-Extended",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - Bingbot",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - Sitemap reference",
+          "status": "PASS",
+          "details": "Sitemap URL present"
+        },
+        {
+          "check": "llms.txt presence",
+          "status": "PASS",
+          "details": "Present (6188 bytes)"
+        },
+        {
+          "check": "llms.txt - H1 heading",
+          "status": "PASS",
+          "details": "Starts with H1"
+        },
+        {
+          "check": "llms.txt - Sections",
+          "status": "PASS",
+          "details": "Has H2 sections"
+        },
+        {
+          "check": "FAQPage Schema",
+          "status": "MEDIUM",
+          "details": "31/41 (76%) - Missing: 404.html, blog/index.html, cas-clients.html, en/404.html, en/blog/index.html"
+        },
+        {
+          "check": "Schema.org Organization",
+          "status": "PASS",
+          "details": "Found in 39 pages"
+        },
+        {
+          "check": "Schema.org BreadcrumbList",
+          "status": "PASS",
+          "details": "Found in 29 pages"
+        },
+        {
+          "check": "Schema.org SoftwareApplication",
+          "status": "PASS",
+          "details": "Found in 4 pages"
+        },
+        {
+          "check": "Schema.org Service",
+          "status": "PASS",
+          "details": "Found in 12 pages"
+        },
+        {
+          "check": "Schema.org BlogPosting",
+          "status": "PASS",
+          "details": "Found in 2 pages"
+        },
+        {
+          "check": "Schema.org WebPage",
+          "status": "PASS",
+          "details": "Found in 17 pages"
+        }
+      ],
+      "passed": 15,
+      "failed": 1
+    },
+    "sitemap": {
+      "checks": [
+        {
+          "check": "Presence",
+          "status": "PASS",
+          "details": "sitemap.xml accessible"
+        },
+        {
+          "check": "Coverage",
+          "status": "PASS",
+          "details": "39 URLs (39 files)"
+        },
+        {
+          "check": "Freshness",
+          "status": "PASS",
+          "details": "All lastmod dates are recent (2025-2026)"
+        },
+        {
+          "check": "hreflang links",
+          "status": "PASS",
+          "details": "Contains xhtml:link hreflang"
+        }
+      ],
+      "passed": 4,
+      "failed": 0
+    },
+    "accessibility": {
+      "checks": [
+        {
+          "check": "Skip Links",
+          "status": "PASS",
+          "details": "63/63"
+        },
+        {
+          "check": "Image Alt Text",
+          "status": "PASS",
+          "details": "224 images all have alt"
+        },
+        {
+          "check": "ARIA Labels",
+          "status": "PASS",
+          "details": "219 aria-label attributes found"
+        },
+        {
+          "check": "Single H1 per page",
+          "status": "PASS",
+          "details": "All pages have single H1"
+        }
+      ],
+      "passed": 4,
+      "failed": 0
+    },
+    "links": {
+      "checks": [
+        {
+          "check": "Internal Links",
+          "status": "PASS",
+          "details": "Checked 30 - all OK"
+        },
+        {
+          "check": "Total Links Count",
+          "status": "PASS",
+          "details": "105 internal, 18 external"
+        }
+      ],
+      "passed": 2,
+      "failed": 0
+    },
+    "images": {
+      "checks": [
+        {
+          "check": "Favicon",
+          "status": "PASS",
+          "details": "favicon.ico exists"
+        },
+        {
+          "check": "OG Image",
+          "status": "PASS",
+          "details": "og-image.webp (24KB)"
+        },
+        {
+          "check": "Logo",
+          "status": "PASS",
+          "details": "logo.webp exists"
+        },
+        {
+          "check": "Integration Logos",
+          "status": "PASS",
+          "details": "27 SVG logos"
+        }
+      ],
+      "passed": 4,
+      "failed": 0
+    },
+    "i18n": {
+      "checks": [
+        {
+          "check": "Language Parity",
+          "status": "MEDIUM",
+          "details": "4 pages FR only: blog/assistant-vocal-ia-pme-2026.html, blog/automatisation-ecommerce-2026.html, blog/comment-automatiser-votre-service-client-avec-l-ia.html"
+        },
+        {
+          "check": "Geo-locale Script",
+          "status": "PASS",
+          "details": "geo-locale.min.js present"
+        }
+      ],
+      "passed": 1,
+      "failed": 1
+    }
+  },
+  "scores": {
+    "security": 13,
+    "seo": 94,
+    "aeo": 94,
+    "accessibility": 100,
+    "overall": 75
+  }
+}

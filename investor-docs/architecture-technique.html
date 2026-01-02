@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3A Automation - Architecture Technique</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --border: #222222;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --accent: #4FBAF1;
+            --green: #10B981;
+            --purple: #8B5CF6;
+            --orange: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .diagram-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stack-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .stack-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stack-card ul {
+            list-style: none;
+        }
+
+        .stack-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stack-card li:last-child {
+            border-bottom: none;
+        }
+
+        .tech-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(79, 186, 241, 0.1);
+            color: var(--accent);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .metric {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+
+        .flow-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .flow-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(79, 186, 241, 0.05);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-step-num {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 12px;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .security-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .security-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        /* Print Styles - Optimized for PDF */
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 1cm !important;
+                font-size: 10pt !important;
+            }
+
+            .container { max-width: 100% !important; }
+
+            header {
+                margin-bottom: 1.5rem !important;
+                padding-bottom: 1rem !important;
+                page-break-after: avoid !important;
+            }
+            h1 { font-size: 1.5rem !important; }
+            .badge { background: #2563eb !important; color: white !important; }
+
+            .section {
+                margin-bottom: 1.5rem !important;
+                page-break-inside: avoid !important;
+            }
+            .section-title { font-size: 1.1rem !important; margin-bottom: 0.75rem !important; }
+
+            .metrics-grid {
+                gap: 0.5rem !important;
+                margin-bottom: 1.5rem !important;
+                page-break-inside: avoid !important;
+            }
+            .metric {
+                padding: 0.75rem !important;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+            }
+            .metric-value {
+                font-size: 1.5rem !important;
+                color: #2563eb !important;
+                -webkit-text-fill-color: #2563eb !important;
+            }
+            .metric-label { font-size: 0.7rem !important; }
+
+            .diagram-container {
+                padding: 1rem !important;
+                margin-bottom: 1rem !important;
+                background: #fafafa !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid !important;
+            }
+            .mermaid { transform: scale(0.85) !important; transform-origin: center !important; }
+
+            .flow-section {
+                padding: 1rem !important;
+                margin-bottom: 1rem !important;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid !important;
+            }
+            .flow-step { padding: 0.5rem !important; min-width: 100px !important; }
+            .flow-step-num { width: 24px !important; height: 24px !important; font-size: 0.8rem !important; }
+
+            .stack-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0.5rem !important;
+            }
+            .stack-card {
+                padding: 0.75rem !important;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid !important;
+            }
+            .stack-card h3 { font-size: 0.85rem !important; margin-bottom: 0.5rem !important; }
+            .stack-card li { padding: 0.25rem 0 !important; font-size: 0.75rem !important; }
+            .tech-badge { font-size: 0.6rem !important; background: #e5e7eb !important; color: #374151 !important; }
+
+            .security-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 0.5rem !important;
+            }
+            .security-item {
+                padding: 0.75rem !important;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid !important;
+            }
+            .security-icon { width: 32px !important; height: 32px !important; margin-bottom: 0.5rem !important; }
+            .security-item h4 { font-size: 0.8rem !important; }
+            .security-item p { font-size: 0.65rem !important; }
+
+            footer {
+                padding-top: 1rem !important;
+                margin-top: 1rem !important;
+                page-break-before: avoid !important;
+            }
+
+            /* Page breaks */
+            .section:nth-of-type(3) { page-break-before: always !important; }
+            .section:nth-of-type(5) { page-break-before: always !important; }
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+            }
+
+            .flow-step::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>Architecture Technique</h1>
+                    <p class="subtitle">Infrastructure & Stack Technologique</p>
+                </div>
+            </div>
+            <span class="badge">Document Investisseur - Décembre 2025</span>
+        </header>
+
+        <!-- Metrics Overview -->
+        <div class="metrics-grid">
+            <div class="metric">
+                <div class="metric-value">99.9%</div>
+                <div class="metric-label">Uptime SLA</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">3</div>
+                <div class="metric-label">Containers Docker</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">86</div>
+                <div class="metric-label">Automations</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">12+</div>
+                <div class="metric-label">MCPs Intégrés</div>
+            </div>
+        </div>
+
+        <!-- Main Architecture Diagram -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"/>
+                    <rect x="14" y="3" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/>
+                    <rect x="3" y="14" width="7" height="7"/>
+                </svg>
+                Architecture Globale
+            </h2>
+
+            <div class="diagram-container">
+                <pre class="mermaid">
+flowchart TB
+    subgraph CLIENTS["Clients & Channels"]
+        WEB[("🌐 Site Web")]
+        VOICE[("🎤 Voice Widget")]
+        WHATSAPP[("💬 WhatsApp")]
+        EMAIL[("📧 Email")]
+    end
+
+    subgraph GATEWAY["API Gateway & Routing"]
+        TRAEFIK["Traefik\nReverse Proxy + SSL"]
+    end
+
+    subgraph CORE["Core Services"]
+        NGINX["Nginx\nStatic Hosting"]
+        N8N["n8n\nWorkflow Engine"]
+        SCRIPTS["Node.js Scripts\nResilients (8)"]
+    end
+
+    subgraph AI["AI Providers (Fallback Chain)"]
+        GROK["xAI Grok 3"]
+        GEMINI["Google Gemini 2.5"]
+        CLAUDE["Anthropic Claude"]
+    end
+
+    subgraph INTEGRATIONS["Business Integrations"]
+        KLAVIYO["Klaviyo\nEmail Marketing"]
+        SHOPIFY["Shopify\nE-commerce"]
+        APIFY["Apify\nWeb Scraping"]
+    end
+
+    subgraph STORAGE["Data & Analytics"]
+        GA4["Google Analytics 4"]
+        GSC["Search Console"]
+    end
+
+    WEB --> TRAEFIK
+    VOICE --> TRAEFIK
+    WHATSAPP --> SCRIPTS
+    EMAIL --> KLAVIYO
+
+    TRAEFIK --> NGINX
+    TRAEFIK --> N8N
+    TRAEFIK --> SCRIPTS
+
+    SCRIPTS --> GROK
+    GROK -.->|fallback| GEMINI
+    GEMINI -.->|fallback| CLAUDE
+
+    N8N --> KLAVIYO
+    N8N --> SHOPIFY
+    SCRIPTS --> APIFY
+
+    NGINX --> GA4
+    NGINX --> GSC
+
+    style CLIENTS fill:#1a1a2e,stroke:#4FBAF1
+    style GATEWAY fill:#1a1a2e,stroke:#8B5CF6
+    style CORE fill:#1a1a2e,stroke:#10B981
+    style AI fill:#1a1a2e,stroke:#F59E0B
+    style INTEGRATIONS fill:#1a1a2e,stroke:#EC4899
+    style STORAGE fill:#1a1a2e,stroke:#6366F1
+                </pre>
+            </div>
+        </section>
+
+        <!-- Deployment Flow -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                Flux de Déploiement CI/CD
+            </h2>
+
+            <div class="flow-section">
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="flow-step-num">1</div>
+                        <strong>Git Push</strong>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Commit sur main</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-num">2</div>
+                        <strong>GitHub Actions</strong>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Tests & Validation</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-num">3</div>
+                        <strong>Hostinger API</strong>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Trigger Deploy</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-num">4</div>
+                        <strong>Docker Restart</strong>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Container Update</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-step-num">5</div>
+                        <strong>Live</strong>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">~60 secondes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Fallback Chain -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2">
+                    <path d="M12 2a10 10 0 1 0 10 10"/>
+                    <path d="M12 12L12 6"/>
+                    <path d="M12 12L16 14"/>
+                </svg>
+                Chaîne de Fallback AI (Résilience)
+            </h2>
+
+            <div class="diagram-container">
+                <pre class="mermaid">
+flowchart LR
+    subgraph REQUEST["Requête Client"]
+        REQ["API Request"]
+    end
+
+    subgraph CHAIN["Fallback Chain (3 niveaux)"]
+        L1["Niveau 1\nxAI Grok 3"]
+        L2["Niveau 2\nGemini 2.5 Flash"]
+        L3["Niveau 3\nClaude Sonnet 4"]
+    end
+
+    subgraph FALLBACK["Fallback Local"]
+        LOCAL["Patterns Statiques\n(Zéro Dépendance)"]
+    end
+
+    subgraph RESPONSE["Réponse"]
+        RES["Client Response\n< 500ms SLA"]
+    end
+
+    REQ --> L1
+    L1 -->|"✓ Success"| RES
+    L1 -->|"✗ Fail/Timeout"| L2
+    L2 -->|"✓ Success"| RES
+    L2 -->|"✗ Fail/Timeout"| L3
+    L3 -->|"✓ Success"| RES
+    L3 -->|"✗ Fail/Timeout"| LOCAL
+    LOCAL --> RES
+
+    style L1 fill:#1a1a2e,stroke:#10B981
+    style L2 fill:#1a1a2e,stroke:#F59E0B
+    style L3 fill:#1a1a2e,stroke:#EC4899
+    style LOCAL fill:#1a1a2e,stroke:#6366F1
+                </pre>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+                Stack Technologique
+            </h2>
+
+            <div class="stack-grid">
+                <div class="stack-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                        Frontend
+                    </h3>
+                    <ul>
+                        <li>HTML5 / CSS3 <span class="tech-badge">Vanilla</span></li>
+                        <li>JavaScript ES6+ <span class="tech-badge">No Framework</span></li>
+                        <li>Voice Widget <span class="tech-badge">37KB</span></li>
+                        <li>Critical CSS <span class="tech-badge">Inline</span></li>
+                    </ul>
+                </div>
+
+                <div class="stack-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                            <line x1="6" y1="6" x2="6.01" y2="6"/>
+                            <line x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                        Infrastructure
+                    </h3>
+                    <ul>
+                        <li>Hostinger VPS <span class="tech-badge">Ubuntu</span></li>
+                        <li>Docker <span class="tech-badge">3 Containers</span></li>
+                        <li>Traefik <span class="tech-badge">SSL/Proxy</span></li>
+                        <li>Nginx <span class="tech-badge">Static</span></li>
+                    </ul>
+                </div>
+
+                <div class="stack-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                        Backend
+                    </h3>
+                    <ul>
+                        <li>Node.js 20 LTS <span class="tech-badge">CommonJS</span></li>
+                        <li>n8n Workflows <span class="tech-badge">1 Active</span></li>
+                        <li>Scripts Résilients <span class="tech-badge">8 .cjs</span></li>
+                        <li>REST APIs <span class="tech-badge">JSON</span></li>
+                    </ul>
+                </div>
+
+                <div class="stack-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                        AI & ML
+                    </h3>
+                    <ul>
+                        <li>xAI Grok 3 <span class="tech-badge">Primary</span></li>
+                        <li>Google Gemini 2.5 <span class="tech-badge">Fallback</span></li>
+                        <li>Anthropic Claude <span class="tech-badge">Fallback</span></li>
+                        <li>Web Speech API <span class="tech-badge">Free TTS</span></li>
+                    </ul>
+                </div>
+
+                <div class="stack-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EC4899" stroke-width="2">
+                            <path d="M18 20V10"/>
+                            <path d="M12 20V4"/>
+                            <path d="M6 20v-6"/>
+                        </svg>
+                        Analytics
+                    </h3>
+                    <ul>
+                        <li>Google Analytics 4 <span class="tech-badge">Events</span></li>
+                        <li>Search Console <span class="tech-badge">SEO</span></li>
+                        <li>Custom Events <span class="tech-badge">Voice</span></li>
+                        <li>Conversion Tracking <span class="tech-badge">GA4</span></li>
+                    </ul>
+                </div>
+
+                <div class="stack-card">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <line x1="20" y1="8" x2="20" y2="14"/>
+                            <line x1="23" y1="11" x2="17" y2="11"/>
+                        </svg>
+                        Integrations
+                    </h3>
+                    <ul>
+                        <li>Klaviyo <span class="tech-badge">Email</span></li>
+                        <li>Shopify <span class="tech-badge">E-comm</span></li>
+                        <li>Apify <span class="tech-badge">Scraping</span></li>
+                        <li>Meta WhatsApp <span class="tech-badge">Chat</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Sécurité & Conformité
+            </h2>
+
+            <div class="security-grid">
+                <div class="security-item">
+                    <div class="security-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h4>SSL/TLS</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Certificats Let's Encrypt auto-renouvelés via Traefik</p>
+                </div>
+
+                <div class="security-item">
+                    <div class="security-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <polyline points="9 12 11 14 15 10"/>
+                        </svg>
+                    </div>
+                    <h4>Rate Limiting</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Protection DDoS sur tous les endpoints API</p>
+                </div>
+
+                <div class="security-item">
+                    <div class="security-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h4>CORS Whitelist</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Domaines autorisés explicitement listés</p>
+                </div>
+
+                <div class="security-item">
+                    <div class="security-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                        </svg>
+                    </div>
+                    <h4>Env Variables</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Credentials via process.env uniquement</p>
+                </div>
+
+                <div class="security-item">
+                    <div class="security-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h4>Health Checks</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Monitoring 24/7 sur 5 endpoints critiques</p>
+                </div>
+
+                <div class="security-item">
+                    <div class="security-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h4>RGPD Ready</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Cookie consent, politique de confidentialité</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>3A Automation - Architecture Technique v1.0</p>
+            <p style="margin-top: 8px;">Document généré le 31 Décembre 2025</p>
+            <p style="margin-top: 16px; font-size: 0.85rem;">
+                <a href="https://3a-automation.com" style="color: var(--accent); text-decoration: none;">3a-automation.com</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#4FBAF1',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#4FBAF1',
+                lineColor: '#888888',
+                secondaryColor: '#8B5CF6',
+                tertiaryColor: '#1a1a2e'
+            }
+        });
+    </script>
+</body>
+</html>

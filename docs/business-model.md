@@ -1,18 +1,6 @@
-# BUSINESS MODEL FACTUEL JO-AAA
-## Version 4.4 - Mise à jour 29 Décembre 2025 (Session 114: Lead Gen Pipelines)
-## Phase: PRÉ-INCORPORATION (en attente ICE marocain)
-
----
-
-## ⚠️ STATUT LÉGAL
-
-```
-PHASE: Pré-incorporation
-BLOCKER: Dénomination sociale + ICE marocain NON FOURNIS
-IMPACT: Pas de facturation, pas de contrats clients possibles
-
-→ Démarrage commercial au jour de réception ICE marocain
-```
+# 3A AUTOMATION - BUSINESS MODEL
+## Version 5.0 - Modèle MAROC Optimisé - Janvier 2026
+## Phase: SEED ROUND (150K EUR)
 
 ---
 
@@ -20,510 +8,455 @@ IMPACT: Pas de facturation, pas de contrats clients possibles
 
 ```
 CE DOCUMENT CONTIENT UNIQUEMENT DES FAITS VÉRIFIÉS.
-Aucun wishful thinking. Aucune projection non fondée.
-Mis à jour avec les données confirmées le 29/12/2025.
+Méthodologie: Bottom-up factuelle (JAMAIS circulaire).
+Source salaires: Glassdoor Maroc 2025.
+Dernière mise à jour: 01/01/2026 (Session 117).
 
-SESSION 114 COMPLETE (29/12/2025):
-✅ Lead Gen: 31 marchés configurés (config/markets.cjs)
-✅ Phase 1: 14 pays actifs (MENA + Europe)
-✅ Devises: 3 (MAD/EUR/USD uniquement)
-✅ Klaviyo: 15 listes créées via API
-✅ GitHub Actions: Cron lead-generation.yml
-✅ Scheduler: lead-gen-scheduler.cjs centralisé
-⛔ BLOCKER: Apify crédits $0.01 (LinkedIn + GMaps bloqués)
-
-ÉTAT n8n (5 workflows):
-├── 2 FONCTIONNENT: Blog Generator, Product Photos
-└── 3 BLOQUÉS: Grok Voice (Twilio), WhatsApp x2 (Meta)
-
-ÉTAT Lead Gen Scripts:
-├── 2 PRÊTS: Newsletter, Email Automation
-└── 2 BLOQUÉS: LinkedIn, Google Maps (Apify)
+INFRASTRUCTURE OBLIGATOIRE:
+├── Backend: Supabase + Google Cloud Platform
+├── Vercel: INTERDIT (politique interne)
+└── Stack AI: Grok → Gemini → Claude (3 providers fallback)
 ```
 
 ---
 
-## 1. SITUATION ACTUELLE - FAITS CONFIRMÉS
+## 1. IDENTITÉ & POSITIONNEMENT
 
-### 1.1 Profil Opérateur
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    PROFIL JO-AAA - DÉCEMBRE 2025                            │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│   STRUCTURE:        Consultant solo (1 personne)                            │
-│   TEMPS DISPONIBLE: 20h/semaine (part-time)                                 │
-│   CASH FLOW ACTUEL: €0                                                      │
-│   BUDGET SETUP:     €50                                                     │
-│   CLIENTS ACTUELS:  0 actifs (3 en pause, restart 25/01/2026)              │
-│                                                                              │
-│   STATUT:           Phase de redémarrage                                    │
-│   URGENCE:          HAUTE (€0 revenus pendant 5 semaines)                   │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
-### 1.2 Assets Vérifiés
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    ASSETS RÉELS - VÉRIFIÉS                                  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  EXPERTISE DÉMONTRÉE (prouvée par 3 projets livrés)                        │
-│  ════════════════════════════════════════════════════════════════════════   │
-│  ✅ Shopify Admin API (GraphQL + REST)                                      │
-│  ✅ Klaviyo API (flows, campaigns, templates)                               │
-│  ✅ Facebook/Meta Marketing API                                             │
-│  ✅ Google Sheets API                                                       │
-│  ✅ Apify (scraping, monitoring)                                            │
-│  ✅ n8n workflow automation                                                 │
-│  ✅ Claude Code + MCP architecture                                          │
-│                                                                              │
-│  CLIENTS HISTORIQUES (terminés, restart 25/01/2026)                        │
-│  ════════════════════════════════════════════════════════════════════════   │
-│  1. MyDealz - E-commerce B2C                                                │
-│  2. Henderson Shop - E-commerce                                             │
-│  3. Alpha Medical - Healthcare automation                                   │
-│                                                                              │
-│  SCRIPTS DISPONIBLES                                                        │
-│  ════════════════════════════════════════════════════════════════════════   │
-│  Total: 78 automations client-facing (vérifié 26/12/2025 Session 96)        │
-│        (Registry v1.8.0 - synced across HTML + llms.txt + Knowledge Base)   │
-│  ├── Lead Gen: 20 | Shopify: 13 | SEO: 9 | Email: 9                         │
-│  ├── Analytics: 9 | Content: 10 | AI Avatar: 2                              │
-│  ├── CinematicAds: 4 (EXTERNAL → cinematicads.studio)                       │
-│  ├── WhatsApp: 2 | Voice AI: 2 (Web Widget + Phone)                         │
-│  └── 23 outils internes EXCLUS (test-, verify-, check-)                     │
-│                                                                              │
-│  CINEMATICADS AI PROMPTS (Session 83 - Optimisés 2025)                      │
-│  ════════════════════════════════════════════════════════════════════════   │
-│  ✅ Gemini 3 Pro: thinking_level, temperature=1.0 (obligatoire), XML tags   │
-│  ✅ Imagen 4: Descriptions narratives, specs objectif 85mm f/2.8            │
-│  ✅ Veo 3: 100-200 mots, structure subject+action+setting+specs+style       │
-│  Sources: ai.google.dev/gemini-api/docs, deepmind.google/models/veo/        │
-│                                                                              │
-│  MCPs CONFIGURÉS (Session 96 - 26/12/2025 - VÉRIFIÉ PAR API)               │
-│  ════════════════════════════════════════════════════════════════════════   │
-│  ✅ n8n - API key + 10/10 workflows ACTIFS (100%)                              │
-│  ✅ xAI/Grok - Crédits ACTIFS, 11 modèles (grok-4, grok-3, vision)         │
-│  ✅ Klaviyo - 3 listes (API testé)                                          │
-│  ✅ Google Analytics - 30 users, 90 sessions (7j)                           │
-│  ✅ Google Sheets - "3A Automation - Leads & CRM"                           │
-│  ✅ Hostinger - VPS 1168256 running                                         │
-│  ✅ GitHub - Token configuré                                                │
-│  ✅ Gemini - API active                                                     │
-│  ✅ Apify - Token vérifié                                                   │
-│  ✅ Playwright - NPX standard                                               │
-│  ✅ Chrome DevTools - NPX standard                                          │
-│  ❌ Shopify - Dev store à créer                                             │
-│  ❌ Twilio - MANQUANT (bloque Grok Voice Telephony)                        │
-│  TOTAL: 12/13 fonctionnels (92%) - Session 102                              │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
-### 1.3 Gaps Critiques
-
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    GAPS À COMBLER AVANT NOUVEAUX CLIENTS                    │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  TECHNIQUE (màj Session 96 - 26/12/2025)                                    │
-│  ├── ✅ Dashboard PRODUCTION: https://dashboard.3a-automation.com          │
-│  ├── ✅ Recharts: Visualisation workflows (success vs error)               │
-│  ├── ✅ PM2 + Node.js 20 (NO Docker) sur Hostinger VPS                     │
-│  ├── ✅ Google Sheets DB: Users, Leads, Automations, Activities, Metrics   │
-│  ├── ✅ Auth: JWT + bcrypt + Role-based (ADMIN/CLIENT/VIEWER)              │
-│  ├── ✅ xAI API: Crédits ACTIFS, testé grok-3-mini OK                      │
-│  ├── ✅ Apps Script v2 (v4): Form → n8n webhook → Klaviyo LIVE             │
-│  ├── ✅ Voice Widget Web: Web Speech API (gratuit, 33 keywords)            │
-│  └── ❌ Grok Voice Telephony: Twilio credentials manquants                 │
-│                                                                              │
-│  COMMERCIAL (bloquant)                                                      │
-│  ├── ✅ Page de présentation: LIVE (3a-automation.com)                      │
-│  ├── ✅ Formulaires: 3 connectés (Google Apps Script v2)                    │
-│  ├── ✅ Leads: Google Sheets auto-créé                                      │
-│  ├── ✅ Notifications: Email vers contact@3a-automation.com                 │
-│  ├── ✅ Claims marketing: CORRIGÉ (77 auto, 9 MCPs, 10+ APIs)               │
-│  ├── ✅ Branding: 3A-BRANDING-GUIDE.md (couleurs exactes du logo)          │
-│  ├── ✅ GitHub: github.com/Jouiet/3a-automations connecté                   │
-│  ├── ✅ Système de booking: Voice AI + Google Calendar (Session 60-61)     │
-│  ├── ❌ Testimonials/Case studies publics                                   │
-│  └── ❌ Pipeline prospects                                                  │
-│                                                                              │
-│  RÉVISÉ (18/12/2025 - Voice Scope Clarifié)                                │
-│  ├── ✅ Knowledge Base RAG: PHASE 1 COMPLÈTE (273 chunks, BM25)            │
-│  ├── ⚠️ Voice AI: SCOPE CLARIFIÉ - Dual Purpose:                           │
-│  │   ├── Use Case 1: AI Shopping Assistant                                 │
-│  │   ├── Use Case 2: Support Client                                        │
-│  │   ├── Stack: xAI Grok Voice ($0.05/min)                                 │
-│  │   ├── Effort estimé: 116-172 heures                                     │
-│  │   └── Coût opérationnel: ~$0.32/appel                                   │
-│  ├── ❌ Domaine custom - €10-15/an possible                                │
-│  └── ❌ Outils premium                                                      │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 2. CONTRAINTES ABSOLUES
-
-### 2.1 Budget €50
-
-```
-CE QUI EST POSSIBLE:
-├── Google Service Account: €0 (gratuit)
-├── Apify Free Tier: €0 (5 runs/jour)
-├── Notion public page: €0
-├── Calendly basic: €0
-├── Carrd (si nécessaire): €19/an
-├── Domaine .com: €10-12/an
-└── Buffer urgences: €20-30
-
-CE QUI EST IMPOSSIBLE:
-├── Vapi.ai Voice AI: Variable (risqué à €0 cash)
-├── Outils premium: Non
-├── Paid ads: Non
-└── Sous-traitance: Non
-```
-
-### 2.2 Temps 20h/semaine
-
-```
-CAPACITÉ RÉELLE:
-├── 20h/semaine = 80h/mois
-├── Max clients simultanés: 4-5
-├── Temps par client: 4-5h/semaine
-├── Temps admin/prospection: 4-5h/semaine
-
-IMPLICATION:
-├── Croissance limitée par le temps
-├── Qualité > Quantité obligatoire
-├── Sélection rigoureuse des clients
-└── Process efficaces essentiels
-```
-
----
-
-## 3. IDENTITÉ CLARIFIÉE
-
-### 3.1 Positionnement Factuel
+### 1.1 Qui Sommes-Nous
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
 ║                    3A AUTOMATION - IDENTITÉ FACTUELLE                         ║
 ╠═══════════════════════════════════════════════════════════════════════════════╣
 ║                                                                               ║
-║   QUI:     Agence d'Automatisation AI                                        ║
-║            3A = Automation, Analytics, AI                                    ║
+║   NOM:      3A Automation                                                    ║
+║   SIGNIFICATION: Automation, Analytics, AI                                   ║
 ║                                                                               ║
-║   QUOI:    Automatisation E-commerce & PME B2B                               ║
-║            • Email Marketing Automation (Klaviyo, HubSpot)                   ║
-║            • Lead Generation & Nurturing                                     ║
-║            • Intégrations API & Data Sync                                    ║
-║            • SEO Technique & Analytics                                       ║
+║   QUOI:     Automatisation AI clé-en-main pour PME                          ║
+║             • 86 automations prêtes à l'emploi                               ║
+║             • Déploiement en 48-72 heures                                    ║
+║             • Prix à partir de 390 EUR                                       ║
 ║                                                                               ║
-║   POUR:    • Boutiques e-commerce €10k-500k/mois                            ║
-║            • PME B2B cherchant à automatiser leurs processus                ║
+║   POUR:     • Boutiques e-commerce €10k-500k/mois                           ║
+║             • PME B2B cherchant à automatiser                                ║
+║             • Startups early-stage                                           ║
 ║                                                                               ║
-║   PREUVE:  3 clients e-commerce livrés (MyDealz, Henderson, Alpha Medical)  ║
-║            78 automations disponibles                                        ║
-║            12/13 MCPs fonctionnels (92%)                                     ║
+║   OÙ:       Phase 1: Maroc + France + Belgique + Suisse                      ║
+║             Hub opérationnel: Maroc (coûts -35%)                             ║
 ║                                                                               ║
-║   USP:     • Approche technique (code/APIs, pas de no-code limité)          ║
-║            • Focus résultats mesurables (ROI, temps gagné)                   ║
-║            • Stack moderne: n8n, Apify, Claude, Gemini                       ║
+║   USP:      • Déploiement 48-72h (vs 3-6 mois agences)                       ║
+║             • Multi-AI résilient (3 providers fallback)                       ║
+║             • Support trilingue: FR, EN, AR                                  ║
+║             • Structure Maroc = marge 74% EBITDA                              ║
 ║                                                                               ║
-║   PAS:     ❌ Plateforme SaaS                                                 ║
-║            ❌ Solution plug-and-play                                          ║
-║            ❌ Agence généraliste (spécialisée automation)                     ║
+║   PAS:      ❌ Plateforme SaaS                                                ║
+║             ❌ Solution plug-and-play                                         ║
+║             ❌ Agence généraliste                                             ║
+║                                                                               ║
+║   RÈGLE:    NOUS, jamais "je"                                                ║
 ║                                                                               ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
-### 3.2 Messages Clés
+### 1.2 Tagline & Messages
 
 ```
-RÈGLE ABSOLUE: NOUS, jamais "je"
-✅ "Nous automatisons..."
-❌ "J'automatise..."
-
-ONE-LINER:
-"Nous automatisons les boutiques e-commerce et PME B2B pour
-éliminer les tâches répétitives et maximiser le ROI."
-
-ELEVATOR PITCH (30 sec):
-"3A Automation est une agence spécialisée en automatisation AI
-pour l'e-commerce et les PME B2B. Nous connectons vos outils,
-automatisons vos emails, et synchronisons vos données. Nos clients
-récupèrent 10-20h/semaine et augmentent leur revenue email de 25%+."
-
 TAGLINE:
 "Automation. Analytics. AI."
+
+ONE-LINER:
+"L'automatisation AI n'est plus réservée aux grands groupes.
+3A Automation la rend accessible à toutes les PME."
+
+ELEVATOR PITCH (30 sec):
+"3A Automation propose 86 automations AI prêtes à l'emploi,
+déployables en 48-72h à des prix PME-friendly. Grâce à notre
+structure Maroc, nous offrons une marge de 74% tout en étant
+35% moins chers que les agences traditionnelles."
 ```
 
 ---
 
-## 4. OFFRE DE SERVICES
+## 2. OFFRE DE SERVICES
 
-### 4.1 Services Proposés (Validés)
+### 2.1 Packs Setup (One-Time)
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    CATALOGUE SERVICES JO-AAA                                │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  SERVICE 1: AUDIT E-COMMERCE (Lead Magnet)                                  │
-│  ═══════════════════════════════════════════════════════════════════════    │
-│  Prix: GRATUIT (pour acquisition)                                           │
-│  Livrable: Rapport PDF 5-10 pages                                           │
-│  Contenu:                                                                    │
-│  ├── Analyse Shopify (produits, orders, conversion)                         │
-│  ├── Analyse email marketing                                                │
-│  ├── 3-5 quick wins identifiés                                              │
-│  └── ROI estimé                                                             │
-│  Script: forensic_flywheel_analysis_complete.cjs                            │
-│  Temps: 2-3h                                                                 │
-│                                                                              │
-│  SERVICE 2: EMAIL MACHINE MINI                                              │
-│  ═══════════════════════════════════════════════════════════════════════    │
-│  Prix: €500 setup + €200/mois                                               │
-│  Livrable: 1 flow Klaviyo configuré                                         │
-│  Options:                                                                    │
-│  ├── Welcome Series (5 emails)                                              │
-│  ├── Cart Abandonment (3 emails)                                            │
-│  └── Post-Purchase (3 emails)                                               │
-│  Délai: 1 semaine                                                           │
-│                                                                              │
-│  SERVICE 3: SEO QUICK FIX                                                   │
-│  ═══════════════════════════════════════════════════════════════════════    │
-│  Prix: €300-500 one-time                                                    │
-│  Livrable:                                                                   │
-│  ├── Alt text batch (tous produits)                                         │
-│  ├── Metafields SEO                                                         │
-│  └── Image sitemap                                                          │
-│  Délai: 3-5 jours                                                           │
-│                                                                              │
-│  SERVICE 4: LEAD SYNC                                                       │
-│  ═══════════════════════════════════════════════════════════════════════    │
-│  Prix: €400 setup + €150/mois                                               │
-│  Livrable: Meta Leads → Shopify automatique                                 │
-│  Délai: 1 semaine                                                           │
-│                                                                              │
-│  SERVICE 5: MAINTENANCE MENSUELLE                                           │
-│  ═══════════════════════════════════════════════════════════════════════    │
-│  Prix: €300-800/mois selon scope                                            │
-│  Inclus:                                                                     │
-│  ├── Monitoring automations                                                 │
-│  ├── Optimisations mensuelles                                               │
-│  ├── Support email                                                          │
-│  └── 1 call stratégique/mois                                                │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+| Pack | EUR | USD | MAD | Contenu |
+|------|-----|-----|-----|---------|
+| Quick Win | 390 | $450 | 3.990 DH | 1-2 automations, setup 48h |
+| Essentials | 790 | $920 | 7.990 DH | 3-5 automations, intégrations |
+| Growth | 1.399 | $1,690 | 14.990 DH | 8-12 automations, système complet |
 
-### 4.2 Pricing Summary (MÀJ Session 40 - Bottom-Up ~90€/h)
+### 2.2 Retainers Mensuels (MRR)
 
-**PACKS SETUP (ONE-TIME):**
-| Pack | Prix | Temps | Contenu |
-|------|------|-------|---------|
-| Quick Win | 390€ | ~3-4h | Audit express + 1 flow + Doc PDF |
-| Essentials | 790€ | ~7-9h | Audit + 3 flows + A/B + Support 30j |
-| Growth | 1490€ | ~14-18h | 5 flows + RFM + Dashboard + Support 60j |
+| Plan | EUR/mo | USD/mo | MAD/mo | Services |
+|------|--------|--------|--------|----------|
+| Maintenance | 290 | $330 | 2.900 DH | Support, monitoring, updates |
+| Optimization | 490 | $550 | 5.200 DH | + Optimisations, nouveaux workflows |
 
-**RETAINERS MENSUELS:**
-| Plan | Prix/mois | Heures | Contenu |
-|------|-----------|--------|---------|
-| Maintenance | 290€ | 3h | Monitoring + fixes + rapport |
-| Optimization | 490€ | 5h | + A/B tests + optimisation |
-| Growth | 890€ | 10h | + nouveaux flows + stratégie |
+**Annuel = 10 mois pour 12 (2 mois offerts)**
 
-**PROCESSUS SANS APPELS:**
-1. Formulaire diagnostic (5-10 min)
-2. Rapport PDF (24-48h)
-3. Proposition Google Docs
-4. Livraison + Documentation
+### 2.3 Métriques Unitaires
 
-**LEGACY (ancienne grille - à remplacer progressivement):**
-| Service | Setup | Mensuel | Temps Requis |
-|---------|-------|---------|--------------|
-| Audit (gratuit) | €0 | - | 2-3h |
-| Email Machine Mini | €500 | €200 | 8-10h |
-| SEO Quick Fix | €300-500 | - | 4-6h |
-| Lead Sync | €400 | €150 | 6-8h |
-| Maintenance | - | €300-800 | 4-8h/mois |
+| Métrique | Valeur | Notes |
+|----------|--------|-------|
+| Taux horaire implicite | 80-130 EUR/h | vs 150-250 EUR agences |
+| Marge brute cible | 70-75% | |
+| LTV cible | 2.500-5.000 EUR | |
+| CAC cible | 200-350 EUR | 100% digital |
+| LTV/CAC | 12x-20x | |
 
 ---
 
-## 5. PROJECTIONS FINANCIÈRES
+## 3. CATALOGUE PRODUIT
 
-### 5.1 Court Terme (Janvier-Mars 2026)
+### 3.1 86 Automations Réparties en 6 Catégories
 
-```
-JANVIER 2026:
-├── Semaine 1-3: Outreach + audits gratuits
-├── Semaine 4: 1 nouveau client converti
-├── 25 janvier: Restart 3 clients existants
-│
-├── Revenue nouveau client: €400-500
-├── Revenue clients existants: €900-2,400 (€300-800 × 3)
-└── TOTAL JANVIER: €1,300-2,900
+| Catégorie | Nombre | Exemples |
+|-----------|--------|----------|
+| E-commerce | 24 | Abandon panier, sync inventaire, reviews |
+| Marketing | 18 | Email sequences, social media, lead scoring |
+| Opérations | 15 | Invoicing, CRM sync, reporting automatique |
+| AI Assistants | 12 | Chatbots, Voice AI, FAQ automation |
+| Analytics | 10 | Dashboards, KPI tracking, alerting |
+| Intégrations | 7 | Shopify, Klaviyo, HubSpot, WhatsApp |
 
-FÉVRIER 2026:
-├── 3 clients existants: €900-2,400
-├── 1-2 nouveaux clients: €400-1,000
-└── TOTAL FÉVRIER: €1,300-3,400
-
-MARS 2026:
-├── 4-5 clients actifs: €1,500-4,000
-└── TOTAL MARS: €1,500-4,000
-```
-
-### 5.2 Année 2026 (Projection Conservatrice)
+### 3.2 Stack Technologique
 
 ```
-HYPOTHÈSES CONSERVATRICES:
-├── 20h/semaine constant
-├── Max 5 clients simultanés
-├── Pas de Voice AI
-├── Croissance organique uniquement
+BACKEND:
+├── Supabase (Database + Auth)
+├── Google Cloud Platform (Compute + Storage)
+└── Vercel: INTERDIT
 
-PROJECTION:
-├── Q1 2026: €4,000-10,000
-├── Q2 2026: €5,000-12,000
-├── Q3 2026: €6,000-15,000
-├── Q4 2026: €7,000-18,000
-└── TOTAL 2026: €22,000-55,000
+AUTOMATION:
+├── n8n (workflow automation)
+├── Node.js (scripts custom .cjs)
+└── 8 scripts résilients multi-AI
 
-SCÉNARIO MÉDIAN: ~€35,000-40,000
-├── Net après coûts (~€2,000): €33,000-38,000
-├── Équivalent mensuel: €2,750-3,200/mois
-```
+AI PROVIDERS (Fallback Chain):
+├── Primary: xAI Grok 3
+├── Secondary: Google Gemini 2.5
+└── Tertiary: Anthropic Claude
 
-### 5.3 Facteurs de Risque
-
-```
-RISQUES IDENTIFIÉS:
-├── Les 3 clients ne reviennent pas → Impact: -€900-2,400/mois
-├── Warm network ne convertit pas → Impact: Pas de croissance
-├── Capacité 20h dépassée → Impact: Burnout, qualité
-└── Scripts ne fonctionnent pas → Impact: Impossible de livrer
-
-MITIGATIONS:
-├── Confirmer restart avec 3 clients IMMÉDIATEMENT
-├── Diversifier canaux (groupes LinkedIn/Facebook)
-├── Limiter à 5 clients max, dire non au-delà
-└── Tester chaque script avant utilisation client
+INTÉGRATIONS:
+├── Shopify, Klaviyo, HubSpot
+├── WhatsApp, Meta, LinkedIn
+├── Google Analytics, Sheets
+└── Apify (scraping)
 ```
 
 ---
 
-## 6. PLAN D'ACTION MVP
+## 4. MARCHÉ
 
-### 6.1 Semaine 1: Fondation (17-23 Déc)
+### 4.1 Taille du Marché
+
+| Niveau | Valeur | Description |
+|--------|--------|-------------|
+| TAM | 890B USD | Marché global Automation PME (2026) |
+| SAM | 45B USD | MENA + Europe francophone |
+| SOM | 780K EUR | Part de marché réaliste Y3 (bottom-up) |
+
+### 4.2 Marchés Cibles Phase 1
+
+| Marché | Rôle | Notes |
+|--------|------|-------|
+| Maroc | Hub opérationnel | Coûts -35%, talent technique |
+| France | Marché clients mature | PME €10K-500K CA |
+| Belgique | Francophone, proximité | |
+| Suisse | High-value | Prix premium acceptés |
+
+### 4.3 Segments Prioritaires
+
+- E-commerce: 10K-500K EUR CA mensuel
+- PME B2B: 5-50 employés
+- Startups early-stage (pre-series A)
+
+---
+
+## 5. PROJECTIONS FINANCIÈRES (BOTTOM-UP MAROC)
+
+### 5.1 Trajectoire Revenue 3 Ans
+
+| Année | Revenue | Clients | ARPU/mois | Churn |
+|-------|---------|---------|-----------|-------|
+| 2026 (Y1) | 108K EUR | 60 | 300 EUR | 8% |
+| 2027 (Y2) | 512K EUR | 280 | 380 EUR | 5% |
+| 2028 (Y3) | 780K EUR | 500 | 450 EUR | 3% |
+
+### 5.2 Évolution EBITDA (Modèle MAROC)
+
+| Année | Revenue | Coûts | EBITDA | Marge |
+|-------|---------|-------|--------|-------|
+| 2026 | 108K EUR | 83K EUR | 25K EUR | 23% |
+| 2027 | 512K EUR | 166K EUR | 346K EUR | 68% |
+| 2028 | 780K EUR | 205K EUR | **576K EUR** | **74%** |
+
+### 5.3 Croissance
+
+| Période | Croissance |
+|---------|------------|
+| Y1→Y2 | +374% (4.7x) |
+| Y2→Y3 | +52% (1.5x) |
+| CAGR 3 ans | 168% |
+
+### 5.4 KPIs Clés
+
+| KPI | Y1 | Y2 | Y3 |
+|-----|----|----|-----|
+| LTV | 1.800 EUR | 3.200 EUR | 5.000 EUR |
+| CAC | 350 EUR | 300 EUR | 250 EUR |
+| LTV/CAC | 5x | 11x | 20x |
+| Payback | 3 mois | 2 mois | 1.5 mois |
+
+---
+
+## 6. SCÉNARIOS
+
+### 6.1 Modélisation Y3 (2028)
+
+| Scénario | Revenue | EBITDA | Clients | Hypothèses |
+|----------|---------|--------|---------|------------|
+| Conservatif | 550K EUR | 350K EUR | ~350 | Croissance modérée, churn 5% |
+| **Base** | **780K EUR** | **576K EUR** | **500** | Croissance stable, churn 3% |
+| Optimiste | 1.1M EUR | 850K EUR | ~700 | Croissance rapide, churn 2% |
+
+### 6.2 Sensibilité
+
+| Variable | Impact |
+|----------|--------|
+| +1 point de churn évité | +40K EUR ARR |
+| +10 clients/mois | +200K EUR ARR |
+| Migration Europe → Maroc | +22 points de marge |
+
+---
+
+## 7. ÉQUIPE (MODÈLE MAROC - 0 COMMERCIAL)
+
+### 7.1 Structure Actuelle & Prévue
+
+| Poste | Localisation | Salaire/mois | Recrutement |
+|-------|--------------|--------------|-------------|
+| Fondateur & CEO | Remote | 5.200€ brut → 4.000€ NET | Actuel |
+| Junior E-Marketing | Casablanca | 900€ (~10K MAD) | Q3 2026 |
+| Junior Dev | Casablanca | 900€ (~10K MAD) | Q3 2026 |
+| Senior Dev | Casablanca | 2.000€ (~22K MAD) | Q1 2027 |
+
+**Total équipe Y3: 4 personnes (0 Commercial)**
+
+### 7.2 Stratégie 0 Commercial
 
 ```
-□ JOUR 1 (4h):
-  ├── Confirmer restart 3 clients par email
-  ├── Créer Google Service Account
-  └── Créer fichier .env
+ACQUISITION 100% DIGITALE:
+├── SEO/AEO (Score actuel: 92%/89%)
+├── Content Marketing (Blog, Guides)
+├── Google Ads + Meta Ads
+├── Funnels automatisés (n8n + Klaviyo)
+└── Voice Widget inbound
 
-□ JOUR 2-3 (8h):
-  ├── Refactorer forensic_flywheel_analysis_complete.cjs
-  ├── Refactorer audit-klaviyo-flows.cjs
-  └── Tester les 2 scripts
+RESPONSABILITÉ E-MARKETING JUNIOR:
+├── Gestion campagnes SEO/Ads
+├── Création contenu
+├── Suivi analytics
+├── Optimisation funnels
+└── Support community
 
-□ JOUR 4-5 (8h):
-  ├── Créer page Notion de présentation
-  ├── Configurer Calendly gratuit
-  └── Lister 20 contacts warm network
+ÉCONOMIE vs COMMERCIAL:
+├── Commercial senior Maroc: ~3.500€/mois
+├── Junior E-Marketing: 900€/mois
+└── Économie: 40K EUR/an
 ```
 
-### 6.2 Semaine 2-3: Outreach (24 Déc - 6 Jan)
+### 7.3 Rémunération Fondateur Y3
 
 ```
-□ Contacter 10-15 personnes warm network
-□ Proposer audits gratuits
-□ Livrer 1-2 audits
-□ Convertir 1 client payant
-□ Continuer refactoring scripts
-```
+SALAIRE MENSUEL NET: 4.000€
+SALAIRE ANNUEL NET: 48.000€
 
-### 6.3 Semaine 4-5: Consolidation (7-24 Jan)
+DIVIDENDES (sur 576K EBITDA):
+├── Base imposable: ~520K€ (après réserves)
+├── Distribution: 50% = 260K€
+├── Retenue source Maroc: 15% = 39K€
+├── Dividendes NET: 221K€/an
 
-```
-□ Livrer service au premier client
-□ Préparer onboarding 3 clients existants
-□ Collecter premier testimonial
-□ Prêt pour restart 25 janvier
+TOTAL NET FONDATEUR Y3:
+├── Salaire: 48K€
+├── Dividendes: 221K€ (après 15% WHT)
+└── TOTAL: 269K€/an = 22.4K€/mois
+
+COMPARAISON FRANCE (si 30% PFU):
+├── Dividendes BRUT: 260K€
+├── PFU France: 78K€
+├── Dividendes NET France: 182K€
+└── Économie Maroc: +39K€/an
 ```
 
 ---
 
-## 7. MÉTRIQUES DE SUCCÈS
+## 8. AVANTAGE COMPÉTITIF
 
-### 7.1 KPIs à Suivre
+### 8.1 Comparaison Concurrentielle
 
-| Métrique | Objectif Semaine 4 | Objectif Mois 3 |
-|----------|-------------------|-----------------|
-| Audits livrés | 2-3 | 8-10 |
-| Clients payants | 1 | 4-5 |
-| Revenue mensuel | €500+ | €2,000+ |
-| Testimonials | 1 | 3 |
-| Scripts refactorés | 10 | 25 |
+| Critère | Agences | SaaS DIY | 3A Automation |
+|---------|---------|----------|---------------|
+| Prix | 15-50K EUR | 100-500 EUR/mois | 390-1.400 EUR |
+| Délai | 3-6 mois | DIY | 48-72h |
+| Personnalisation | Haute | Faible | Moyenne-Haute |
+| Support | Variable | Self-service | High-touch |
+| Focus PME | Non | Partiel | 100% |
+| MENA | Non | Non | Oui |
+| **Coûts ops** | Élevés | Moyens | **-35% (Maroc)** |
 
-### 7.2 Definition of Done - MVP
+### 8.2 Barrières à l'Entrée (Moat)
+
+1. **Catalogue propriétaire** - 86 automations testées et documentées
+2. **Expertise AI multi-provider** - 3 fallbacks (Grok→Gemini→Claude)
+3. **Structure Maroc** - Économie 35% sur coûts opérationnels
+4. **Processus industrialisé** - Déploiement 48-72h reproductible
+5. **Stack optimisée** - Coûts serveur <100 EUR/mois
+
+---
+
+## 9. UTILISATION DES FONDS (SEED 150K EUR)
+
+### 9.1 Allocation
+
+| Poste | Montant | % | Objectif |
+|-------|---------|---|----------|
+| Recrutement E-Marketing + Dev | 70K EUR | 47% | 2 Juniors Maroc |
+| Marketing & Ads | 40K EUR | 27% | SEO, Content, Google/Meta Ads |
+| Développement produit | 20K EUR | 13% | Nouvelles automations, platform |
+| Infrastructure & Ops | 15K EUR | 10% | Supabase+GCP, outils, legal |
+| Buffer | 5K EUR | 3% | Imprévus |
+
+### 9.2 Milestones (12 mois)
+
+- 60 clients actifs
+- 108K EUR ARR
+- Équipe de 3 personnes (Maroc)
+- Présence dans 4 pays
+- Breakeven opérationnel
+
+**Runway: 12+ mois (mode conservatif)**
+
+---
+
+## 10. ROADMAP
+
+### 10.1 2026 - Année 1: Foundation
+
+| Trimestre | Objectif | Clients | Actions |
+|-----------|----------|---------|---------|
+| Q1 | Seed round, 1ers clients | 15 | Lancement commercial |
+| Q2 | Scale acquisition | 30 | Ads, Content |
+| Q3 | Recrutement | 45 | 2 Juniors Maroc |
+| Q4 | Breakeven | 60 | Optimisation |
+
+### 10.2 2027 - Année 2: Scale
+
+- Équipe de 4 personnes (Maroc)
+- 280 clients actifs
+- +1 Senior Dev Maroc
+- Expansion: Belgique, Suisse
+
+### 10.3 2028 - Année 3: Consolidation
+
+- Équipe stabilisée (4 personnes)
+- 500 clients actifs
+- Leader MENA/Francophone
+- Fondateur: 22.4K€ NET/mois
+- Préparation Series A si >1M EUR ARR
+
+---
+
+## 11. L'ASK
+
+### 11.1 Levée de Fonds
 
 ```
-MVP VALIDÉ QUAND:
-├── ✅ 1 client payant (hors 3 existants)
-├── ✅ 1 testimonial collecté
-├── ✅ €500+ revenue généré
-├── ✅ Process documenté et répétable
-└── ✅ 10+ scripts fonctionnels testés
+MONTANT: 150K EUR
+VALORISATION PRE-MONEY: 600K EUR
+EQUITY: 20%
+STRUCTURE: SAFE ou actions ordinaires
+```
+
+### 11.2 Profil Investisseur Recherché
+
+- Angels avec réseau MENA ou E-commerce
+- Smart money: introductions + expertise
+- Tickets: 10-50K EUR
+
+### 11.3 Prochaines Étapes
+
+1. Call découverte (30 min)
+2. Due diligence légère
+3. Term sheet
+4. Closing Q1 2026
+
+---
+
+## 12. ASSETS TECHNIQUES (Vérifiés Session 117)
+
+### 12.1 Code & Infrastructure
+
+| Asset | Valeur | Notes |
+|-------|--------|-------|
+| Lignes de code | 8.945 | Production-ready |
+| Scripts core/ | 19 fichiers | Résilients multi-AI |
+| Pages web | 63 | FR/EN + Academy |
+| Automations registry | 86 | v2.1.0 |
+
+### 12.2 MCPs Fonctionnels
+
+| MCP | Status |
+|-----|--------|
+| n8n | ✅ |
+| Klaviyo | ✅ |
+| Shopify | ✅ |
+| xAI/Grok | ✅ |
+| Gemini | ✅ |
+| Hostinger | ✅ |
+| GitHub | ✅ |
+| Apify | ✅ |
+| Google Analytics | ✅ |
+| Playwright | ✅ |
+| Chrome DevTools | ✅ |
+
+**Total: 12/13 fonctionnels (92%)**
+
+### 12.3 SEO/AEO Scores
+
+| Critère | Score |
+|---------|-------|
+| SEO Technique | 92% |
+| AEO (Answer Engine) | 89% |
+| FAQPage Schema | 16/63 pages |
+| AI Crawlers | 100% allowed |
+
+---
+
+## 13. CONTACT
+
+```
+Site: https://3a-automation.com
+Email: contact@3a-automation.com
+LinkedIn: /company/3a-automation
+Booking: https://3a-automation.com/booking.html
 ```
 
 ---
 
-## 8. CONCLUSION
+## MÉTHODOLOGIE
 
-### Ce qui est VRAI
-
-```
-✅ Expertise technique prouvée (3 clients livrés)
-✅ Marché existant (e-commerce Shopify)
-✅ Bibliothèque de scripts à refactorer
-✅ Architecture MCP comprise et utilisée
-✅ Plan d'action clair et exécutable
-```
-
-### Ce qui reste à faire
-
-```
-⏳ 30-40h de travail technique (refactoring, config)
-⏳ Outreach warm network
-⏳ Premier client hors existants
-⏳ Validation du process
-```
-
-### La vérité finale
-
-```
-"JO-AAA est un consultant solo compétent en phase de redémarrage.
-Avec 30-40h de travail ciblé, le MVP est atteignable.
-Revenus réalistes 2026: €35-40k (part-time).
-Pas une agence, pas un SaaS - un consultant technique efficace."
-```
-
----
-
-**Document mis à jour:** 27 Décembre 2025
-**Version:** 4.3
-**Principe:** Faits uniquement, zéro bullshit
+| Élément | Valeur |
+|---------|--------|
+| Approche | Bottom-up factuelle (JAMAIS circulaire) |
+| Source salaires | Glassdoor Maroc 2025 |
+| Équipe Y3 | 4 personnes Maroc (0 Commercial) |
+| Marge Y3 | 74% EBITDA |
+| Fondateur NET Y3 | 269K€/an (22.4K€/mois) |
+| Infrastructure | Supabase + GCP (Vercel INTERDIT) |
 
 ---
 
@@ -531,32 +464,13 @@ Pas une agence, pas un SaaS - un consultant technique efficace."
 
 | Version | Date | Modifications |
 |---------|------|---------------|
-| 4.3 | 27 Déc 2025 | Session 102: MCPs 12/13 (92%), BreadcrumbList Schema, SMB pages complete rewrite, documentation sync |
-| 3.8 | 26 Déc 2025 | Session 96: 78 automations, Voice AI Product, Schema.org SoftwareApplication, llms.txt v4.0 |
-| 3.7 | 23 Déc 2025 | Session 83: Ultra Forensic Audit (133 issues fixed), 9 MCPs vérifiés fonctionnels, logo paths normalisés |
-| 3.6 | 23 Déc 2025 | Session 82: 77 automations vérifiées, llms.txt v3.2 |
-| 3.2 | 20 Déc 2025 | Session 53: 50 scripts réels, Performance 24%, Token Shopify exposé |
-| 3.1 | 20 Déc 2025 | Session 50: Automations count vérifié |
-| 2.3 | 18 Déc 2025 | Knowledge Base RAG Phase 1 complète, Voice Agent scope clarifié (Shopping + Support), effort 116-172h |
-| 2.2 | 17 Déc 2025 | Découverte Grok Voice Agent API ($0.05/min) - Voice AI devient possible |
-| 2.1 | 17 Déc 2025 | Session 4: xAI API configurée, GitHub connecté, branding extrait, prompts landing page |
-| 2.0 | 17 Déc 2025 | Mise à jour avec données confirmées (solo, €0, €50 budget, restart 25/01) |
-| 1.0 | 16 Déc 2025 | Version initiale basée sur audit forensique |
+| 5.0 | 01 Jan 2026 | Réécriture complète modèle Maroc, bottom-up factuel, 74% EBITDA |
+| 4.4 | 29 Déc 2025 | Session 114: Lead Gen Pipelines |
+| 4.3 | 27 Déc 2025 | Session 102: MCPs 12/13 |
+| 3.8 | 26 Déc 2025 | Session 96: 78 automations |
 
 ---
 
-## SESSION 50 UPDATE (20/12/2025)
-
-### Métriques Corrigées
-
-| Métrique | Avant (non vérifié) | Après (vérifié) | Méthode |
-|----------|---------------------|-----------------|---------|
-| Automations | 56 | **50** | Comptage réel scripts /automations |
-| B2B automations | Présentes | **Retirées** | Hors cible PME e-commerce |
-| B2C automations | - | **+9 ajoutées** | Geo-Segmentation, VIP Program... |
-
-### Assets Techniques Session 50
-
-- `scripts/test-orbital-forensic.cjs` - 48 tests CSS breakpoints
-- `scripts/test-session-50-fixes.cjs` - Validation automations + orbital
-- CSS: 5 breakpoints orbital avec calculs mathématiques
+*Document mis à jour: 01 Janvier 2026*
+*Modèle Bottom-Up MAROC - v5.0*
+*Principe: Faits uniquement, zéro bullshit*

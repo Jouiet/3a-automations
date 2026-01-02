@@ -232,7 +232,7 @@ node automations/agency/core/voice-widget-templates.cjs --list
 | Blog Articles (FR) | ✅ | 4/4 (NEW) |
 | Blog Articles (EN) | ✅ | 3/3 (NEW) |
 | Academy | ❌ N/A | noindex pages |
-| **TOTAL** | | **27/61 (44%)** |
+| **TOTAL** | | **27/63 (43%)** |
 
 ## SESSION 117bis - FORENSIC AUDIT COMPLETE (31/12/2025)
 

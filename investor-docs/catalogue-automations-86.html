@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue des 86 Automations | 3A Automation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f1419;
+      color: #e5e5e5;
+      line-height: 1.6;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(79, 186, 241, 0.2);
+      margin-bottom: 3rem;
+    }
+    .logo { font-size: 2.5rem; font-weight: 700; color: #4FBAF1; margin-bottom: 0.5rem; }
+    .subtitle { font-size: 1.2rem; color: #888; }
+    .version { font-size: 0.9rem; color: #666; margin-top: 1rem; }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, rgba(79, 186, 241, 0.1), rgba(139, 92, 246, 0.05));
+      border: 1px solid rgba(79, 186, 241, 0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-number { font-size: 2.5rem; font-weight: 700; color: #4FBAF1; }
+    .stat-label { font-size: 0.9rem; color: #888; margin-top: 0.5rem; }
+
+    /* Category Section */
+    .category {
+      margin-bottom: 3rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .category-title { font-size: 1.5rem; font-weight: 600; }
+    .category-count {
+      margin-left: auto;
+      background: rgba(79, 186, 241, 0.2);
+      color: #4FBAF1;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* Automation Cards */
+    .automations-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .automation-card {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: all 0.2s ease;
+    }
+    .automation-card:hover {
+      border-color: rgba(79, 186, 241, 0.3);
+      transform: translateY(-2px);
+    }
+    .automation-name {
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .automation-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+    .automation-benefit {
+      color: #10B981;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .automation-type {
+      display: inline-block;
+      background: rgba(139, 92, 246, 0.2);
+      color: #8B5CF6;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      margin-top: 0.5rem;
+    }
+
+    /* External Badge */
+    .external-badge {
+      background: rgba(245, 158, 11, 0.2);
+      color: #F59E0B;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      margin-left: 0.5rem;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 3rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .footer a { color: #4FBAF1; text-decoration: none; }
+
+    /* Print Styles - Optimized for PDF Export */
+    @media print {
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 9pt !important;
+        line-height: 1.3 !important;
+      }
+
+      .container {
+        max-width: 100% !important;
+        padding: 0.5cm !important;
+      }
+
+      .header {
+        padding: 1rem 0 !important;
+        margin-bottom: 1rem !important;
+        page-break-after: avoid !important;
+      }
+      .logo { font-size: 1.5rem !important; }
+      .subtitle { font-size: 0.9rem !important; }
+      .version { font-size: 0.75rem !important; }
+
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 0.5rem !important;
+        margin-bottom: 1rem !important;
+        page-break-inside: avoid !important;
+      }
+      .stat-card {
+        padding: 0.5rem !important;
+        border: 1px solid #ccc !important;
+        background: #f9f9f9 !important;
+      }
+      .stat-number {
+        font-size: 1.5rem !important;
+        color: #2563eb !important;
+      }
+      .stat-label { font-size: 0.7rem !important; }
+
+      .category {
+        margin-bottom: 1rem !important;
+        padding: 0.75rem !important;
+        border: 1px solid #ddd !important;
+        background: #fafafa !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .category-header {
+        margin-bottom: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+      }
+      .category-icon {
+        width: 28px !important;
+        height: 28px !important;
+      }
+      .category-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+      .category-title {
+        font-size: 1rem !important;
+        color: #000 !important;
+      }
+      .category-count {
+        font-size: 0.7rem !important;
+        padding: 0.15rem 0.5rem !important;
+        background: #e5e7eb !important;
+        color: #374151 !important;
+      }
+
+      .automations-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.4rem !important;
+      }
+      .automation-card {
+        padding: 0.5rem !important;
+        border: 1px solid #e5e7eb !important;
+        background: #fff !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .automation-name {
+        font-size: 0.75rem !important;
+        margin-bottom: 0.2rem !important;
+        color: #000 !important;
+      }
+      .automation-meta {
+        font-size: 0.65rem !important;
+        margin-bottom: 0.2rem !important;
+        gap: 0.5rem !important;
+      }
+      .automation-benefit {
+        font-size: 0.65rem !important;
+        color: #059669 !important;
+      }
+      .automation-type {
+        font-size: 0.55rem !important;
+        padding: 0.1rem 0.3rem !important;
+        margin-top: 0.2rem !important;
+        background: #e5e7eb !important;
+        color: #4b5563 !important;
+      }
+      .external-badge {
+        font-size: 0.55rem !important;
+        padding: 0.1rem 0.3rem !important;
+        background: #fef3c7 !important;
+        color: #92400e !important;
+      }
+
+      .footer {
+        padding: 0.75rem 0 !important;
+        margin-top: 1rem !important;
+        font-size: 0.7rem !important;
+        page-break-before: avoid !important;
+      }
+
+      /* Force page breaks between large categories */
+      .category:nth-child(4) { page-break-before: always !important; }
+      .category:nth-child(7) { page-break-before: always !important; }
+      .category:nth-child(10) { page-break-before: always !important; }
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .automations-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">3A Automation</div>
+      <p class="subtitle">Catalogue des Automations Marketing</p>
+      <p class="version">Version 2.1.1 | 86 Automations | Mise a jour: 31 Decembre 2025</p>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">86</div>
+        <div class="stat-label">Automations</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Categories</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">55</div>
+        <div class="stat-label">Scripts Prets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Scripts Resilients</div>
+      </div>
+    </div>
+
+    <!-- Lead Generation -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #4FBAF1, #2B6685);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <h2 class="category-title">Lead Generation & Acquisition</h2>
+        <span class="category-count">23 automations</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Sync Meta Leads &rarr; Shopify</div>
+          <div class="automation-meta"><span>Toutes les heures</span></div>
+          <div class="automation-benefit">+15% leads captures</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Sync Google Ads &rarr; Shopify</div>
+          <div class="automation-meta"><span>Toutes les heures</span></div>
+          <div class="automation-benefit">Zero perte de leads</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Sync TikTok Leads &rarr; Shopify</div>
+          <div class="automation-meta"><span>Toutes les heures</span></div>
+          <div class="automation-benefit">Nouvelle audience captee</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Qualification & Scoring</div>
+          <div class="automation-meta"><span>Automatique</span></div>
+          <div class="automation-benefit">Focus sur leads chauds</div>
+          <span class="automation-type">n8n-workflow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Segmentation HOT/WARM/COLD</div>
+          <div class="automation-meta"><span>Temps reel</span></div>
+          <div class="automation-benefit">Meilleur taux conversion</div>
+          <span class="automation-type">klaviyo-segment</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Enrichissement Donnees</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Leads B2B qualifies</div>
+          <span class="automation-type">apollo-integration</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Geo-Segmentation</div>
+          <div class="automation-meta"><span>Automatique</span></div>
+          <div class="automation-benefit">Messages localises</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Google Forms &rarr; CRM</div>
+          <div class="automation-meta"><span>Temps reel</span></div>
+          <div class="automation-benefit">Capture formulaires</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Typeform &rarr; Klaviyo</div>
+          <div class="automation-meta"><span>Temps reel</span></div>
+          <div class="automation-benefit">Quiz &rarr; Email list</div>
+          <span class="automation-type">n8n-workflow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Sourcing Google Maps</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Leads locaux cibles</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Sourcing LinkedIn</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Base prospects B2B</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Veille Recrutement</div>
+          <div class="automation-meta"><span>Hebdomadaire</span></div>
+          <div class="automation-benefit">Timing parfait</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Google Apps Script Booking</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Booking + annulation + report automatise</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Google Calendar Booking</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">LinkedIn Lead Automation</div>
+          <div class="automation-meta"><span>Toutes les 6 heures</span></div>
+          <div class="automation-benefit">+400 leads/jour avec scoring AI</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Pipeline LinkedIn &rarr; Klaviyo (B2B)</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Leads LinkedIn qualifies par segment</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Pipeline Google Maps &rarr; Klaviyo</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Leads locaux qualifies par categorie</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Module Templates Email B2B</div>
+          <div class="automation-meta"><span>Module partage</span></div>
+          <div class="automation-benefit">6 segments, branding 100% valide</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Email Outreach Sequence</div>
+          <div class="automation-meta"><span>Declenche</span></div>
+          <div class="automation-benefit">Sequence 3 emails personnalisee</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Geo Segment Generic</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Import Facebook Lead Ads</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Segment Leads</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Enable Apify Schedulers</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Email Marketing -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #10B981, #059669);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h2 class="category-title">Email Marketing (CRM)</h2>
+        <span class="category-count">9 automations</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Welcome Series</div>
+          <div class="automation-meta"><span>5 emails</span></div>
+          <div class="automation-benefit">Open: 40-50%</div>
+          <span class="automation-type">klaviyo-flow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Abandoned Cart</div>
+          <div class="automation-meta"><span>3 emails</span></div>
+          <div class="automation-benefit">Recovery: 10-15%</div>
+          <span class="automation-type">klaviyo-flow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Browse Abandonment</div>
+          <div class="automation-meta"><span>2 emails</span></div>
+          <div class="automation-benefit">+5% conversions</div>
+          <span class="automation-type">klaviyo-flow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Post-Achat</div>
+          <div class="automation-meta"><span>5 emails</span></div>
+          <div class="automation-benefit">Repeat: 25-35%</div>
+          <span class="automation-type">klaviyo-flow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Win-Back</div>
+          <div class="automation-meta"><span>3 emails</span></div>
+          <div class="automation-benefit">Reactivation: 5-10%</div>
+          <span class="automation-type">klaviyo-flow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">VIP Tiers</div>
+          <div class="automation-meta"><span>4 segments</span></div>
+          <div class="automation-benefit">LTV +30%</div>
+          <span class="automation-type">klaviyo-segment</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Audit Flows Complet</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Diagnostic email</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Rotation A/B Sender</div>
+          <div class="automation-meta"><span>Automatique</span></div>
+          <div class="automation-benefit">+5-10% opens</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Audit Klaviyo Flows V2</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shopify -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #95BF47, #5E8E3E);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h2 class="category-title">Shopify Admin</h2>
+        <span class="category-count">13 automations</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Enrichissement Produits</div>
+          <div class="automation-meta"><span>50 produits/batch</span></div>
+          <div class="automation-benefit">Meilleur SEO produits</div>
+          <span class="automation-type">ai-process</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Google Shopping Attributes</div>
+          <div class="automation-meta"><span>100 produits/batch</span></div>
+          <div class="automation-benefit">Approbation GMC</div>
+          <span class="automation-type">shopify-metafield</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Gestion Collections</div>
+          <div class="automation-meta"><span>250 produits/batch</span></div>
+          <div class="automation-benefit">Organisation auto</div>
+          <span class="automation-type">shopify-flow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Pages Legales</div>
+          <div class="automation-meta"><span>Une fois</span></div>
+          <div class="automation-benefit">Conformite legale</div>
+          <span class="automation-type">template</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Installation GTM</div>
+          <div class="automation-meta"><span>Une fois</span></div>
+          <div class="automation-benefit">Tracking complet</div>
+          <span class="automation-type">manual-setup</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Webhooks Loyalty</div>
+          <div class="automation-meta"><span>Temps reel</span></div>
+          <div class="automation-benefit">Fidelisation auto</div>
+          <span class="automation-type">shopify-webhook</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Audit Store Complet</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Diagnostic complet</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Export &rarr; Facebook Audiences</div>
+          <div class="automation-meta"><span>Hebdomadaire</span></div>
+          <div class="automation-benefit">Retargeting precis</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Import Taxonomie Google</div>
+          <div class="automation-meta"><span>Une fois</span></div>
+          <div class="automation-benefit">GMC compliant</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Audit Shopify Store</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Create Warehouse Metafield</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Import Taxonomy Metafield</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Parse Warehouse CSV</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+        </div>
+        <h2 class="category-title">SEO & Contenu</h2>
+        <span class="category-count">9 automations</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Correction Alt Text Images</div>
+          <div class="automation-meta"><span>Batch</span></div>
+          <div class="automation-benefit">+20% trafic image Google</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Meta Tags Automatiques</div>
+          <div class="automation-meta"><span>Batch</span></div>
+          <div class="automation-benefit">Meilleur CTR Google</div>
+          <span class="automation-type">shopify-flow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Sitemap Images</div>
+          <div class="automation-meta"><span>Hebdomadaire</span></div>
+          <div class="automation-benefit">Indexation complete</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Schema.org Produits</div>
+          <div class="automation-meta"><span>Batch</span></div>
+          <div class="automation-benefit">Meilleure visibilite SERP</div>
+          <span class="automation-type">shopify-theme</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Internal Linking</div>
+          <div class="automation-meta"><span>Batch</span></div>
+          <div class="automation-benefit">Meilleur maillage SEO</div>
+          <span class="automation-type">manual-process</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">llms.txt (AEO)</div>
+          <div class="automation-meta"><span>Une fois</span></div>
+          <div class="automation-benefit">Visibilite IA</div>
+          <span class="automation-type">manual-file</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Generate Tags CSV</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Import Alt Text API</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Upload llms.txt</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Analytics -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #8B5CF6, #6D28D9);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+        </div>
+        <h2 class="category-title">Analytics & Reporting</h2>
+        <span class="category-count">9 automations</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Dashboard Looker Studio</div>
+          <div class="automation-meta"><span>Temps reel</span></div>
+          <div class="automation-benefit">Vision 360 degrees business</div>
+          <span class="automation-type">looker-template</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Rapport Sources GA4</div>
+          <div class="automation-meta"><span>Hebdomadaire</span></div>
+          <div class="automation-benefit">Optimisation budget ads</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Audit Systeme Complet</div>
+          <div class="automation-meta"><span>Mensuel</span></div>
+          <div class="automation-benefit">Identification gaps</div>
+          <span class="automation-type">multi-tool</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Alerte Stock Bas</div>
+          <div class="automation-meta"><span>Temps reel</span></div>
+          <div class="automation-benefit">Zero rupture stock</div>
+          <span class="automation-type">shopify-flow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Projections Marges</div>
+          <div class="automation-meta"><span>Mensuel</span></div>
+          <div class="automation-benefit">Vraie rentabilite</div>
+          <span class="automation-type">sheets-template</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Analyse Inventaire</div>
+          <div class="automation-meta"><span>Hebdomadaire</span></div>
+          <div class="automation-benefit">Cash flow optimise</div>
+          <span class="automation-type">sheets-template</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Suivi BNPL Performance</div>
+          <div class="automation-meta"><span>Hebdomadaire</span></div>
+          <div class="automation-benefit">Optimisation checkout</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Verification Pixels</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Tracking fiable</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Analyze GA4 Conversion Source</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content & Video -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #EC4899, #BE185D);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <h2 class="category-title">Contenu & Video</h2>
+        <span class="category-count">9 automations</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Video Promo Produit</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Contenu social ready</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Video Cart Recovery</div>
+          <div class="automation-meta"><span>Automatique</span></div>
+          <div class="automation-benefit">+5% recovery rate</div>
+          <span class="automation-type">video-template</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Video Format Portrait</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Multi-plateforme</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Feed Google Shopping</div>
+          <div class="automation-meta"><span>Quotidien</span></div>
+          <div class="automation-benefit">Produits toujours a jour</div>
+          <span class="automation-type">shopify-app</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Diagnostic GMC</div>
+          <div class="automation-meta"><span>Hebdomadaire</span></div>
+          <div class="automation-benefit">Approbation produits</div>
+          <span class="automation-type">manual-audit</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Article Blog + Distribution Multi-Canal</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">SEO + Social en 1 clic</div>
+          <span class="automation-type">n8n-workflow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Workflow n8n Complet</div>
+          <div class="automation-meta"><span>Personnalise</span></div>
+          <div class="automation-benefit">Automation sur-mesure</div>
+          <span class="automation-type">n8n-workflow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Generate All Promo Videos</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Automatisation efficace</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Blog Generator Resilient (3 AI + 3 Social)</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Fallback Anthropic, Grok, Gemini + FB/LinkedIn/X</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Voice AI -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #06B6D4, #0891B2);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <h2 class="category-title">Voice AI & Telephonie</h2>
+        <span class="category-count">4 automations</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Assistant Vocal IA Web</div>
+          <div class="automation-meta"><span>24/7 disponible</span></div>
+          <div class="automation-benefit">Qualification leads + RDV auto par la voix</div>
+          <span class="automation-type">web-component</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Assistant Telephonique IA</div>
+          <div class="automation-meta"><span>Appels entrants</span></div>
+          <div class="automation-benefit">Reservation par telephone automatique</div>
+          <span class="automation-type">n8n-workflow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Templates Voice Widget (8 industries)</div>
+          <div class="automation-meta"><span>Deploiement client</span></div>
+          <div class="automation-benefit">Deploiement 4h &rarr; 30min</div>
+          <span class="automation-type">script</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Grok Voice Realtime (WebSocket + TTS)</div>
+          <div class="automation-meta"><span>Temps reel</span></div>
+          <div class="automation-benefit">Audio natif $0.05/min + fallback Gemini TTS</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WhatsApp -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h2 class="category-title">WhatsApp Business</h2>
+        <span class="category-count">3 automations</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Confirmation WhatsApp RDV</div>
+          <div class="automation-meta"><span>A chaque reservation</span></div>
+          <div class="automation-benefit">98% taux d'ouverture vs 20% SMS</div>
+          <span class="automation-type">n8n-workflow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Rappels WhatsApp 24h + 1h</div>
+          <div class="automation-meta"><span>Automatique</span></div>
+          <div class="automation-benefit">-30% no-shows</div>
+          <span class="automation-type">n8n-workflow</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">WhatsApp Booking Notifications</div>
+          <div class="automation-meta"><span>Automatique</span></div>
+          <div class="automation-benefit">Confirmation + rappels 24h/1h</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CinematicAds -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #EF4444, #DC2626);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+        </div>
+        <h2 class="category-title">CinematicAds AI</h2>
+        <span class="category-count">4 automations</span>
+        <span class="external-badge">Partenaire</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">CinematicAds Director</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Videos cinematiques AI (Gemini 3 Pro + Imagen 4 + Veo 3.1)</div>
+          <span class="automation-type">external-service</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Competitor Clone AI</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Clone pubs concurrents</div>
+          <span class="automation-type">external-service</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">E-commerce Ads Factory</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Ads multi-ratio (Google, Social, TikTok)</div>
+          <span class="automation-type">external-service</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">Asset Factory (Dual AI)</div>
+          <div class="automation-meta"><span>Core engine</span></div>
+          <div class="automation-benefit">Vertex AI + xAI Grok</div>
+          <span class="automation-type">external-service</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Avatar -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #A855F7, #7C3AED);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h2 class="category-title">AI Avatar & Influencer</h2>
+        <span class="category-count">2 automations</span>
+        <span class="external-badge">Partenaire</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">AI Avatar Generator</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Avatar IA consistent multi-scenes</div>
+          <span class="automation-type">external-service</span>
+        </div>
+        <div class="automation-card">
+          <div class="automation-name">AI Talking Video</div>
+          <div class="automation-meta"><span>Sur demande</span></div>
+          <div class="automation-benefit">Video lip-sync IA (ElevenLabs + fal.ai)</div>
+          <span class="automation-type">external-service</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marketing -->
+    <section class="category">
+      <div class="category-header">
+        <div class="category-icon" style="background: linear-gradient(135deg, #F472B6, #EC4899);">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h2 class="category-title">Marketing Automation</h2>
+        <span class="category-count">1 automation</span>
+      </div>
+      <div class="automations-grid">
+        <div class="automation-card">
+          <div class="automation-name">Newsletter Automation</div>
+          <div class="automation-meta"><span>Bi-mensuel</span></div>
+          <div class="automation-benefit">Newsletter AI generee automatiquement</div>
+          <span class="automation-type">script</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p><strong>3A Automation</strong> | Automation, Analytics, AI</p>
+      <p style="margin-top: 0.5rem;">
+        <a href="https://3a-automation.com">3a-automation.com</a> |
+        <a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a>
+      </p>
+      <p style="margin-top: 1rem; font-size: 0.8rem;">
+        Document confidentiel - Investisseurs uniquement<br>
+        Version 2.1.1 | Decembre 2025
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

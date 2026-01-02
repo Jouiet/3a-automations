@@ -1,4 +1,4 @@
-# n8n Workflows - Session 117
+# n8n Workflows - Session 119
 
 ## Architecture
 
@@ -85,13 +85,21 @@ Solution: Scripts natifs (.cjs) avec process.env + multi-provider fallback
 | WhatsApp Confirmation | 6 nodes | whatsapp-booking-notifications.cjs | +CLI, +text fallback |
 | WhatsApp Reminders | 7 nodes | whatsapp-booking-notifications.cjs | +deduplication Set() |
 
-### Workflows n8n RESTANTS (1)
+### Workflows n8n RESTANTS (0) - Session 119
 
 | Workflow | n8n Status | Script Natif | Status Final |
 |----------|------------|--------------|--------------|
-| Grok Voice Telephony | ⛔ BLOQUÉ | grok-voice-realtime.cjs (2 providers) | ⛔ Twilio credentials externes |
+| Grok Voice Telephony | ⛔ REMPLACÉ | **voice-telephony-bridge.cjs** (port 3009) | ✅ Script natif SUPÉRIEUR |
 
-**Résultat: 0/1 n8n fonctionnel - Bloqué par credentials externes**
+**Résultat: 0/5 n8n restants - TOUS remplacés par scripts natifs**
+
+### SESSION 119 - Dernier workflow n8n remplacé (01/01/2026)
+
+| Ancien (n8n) | Nouveau (Script) | Amélioration |
+|--------------|------------------|--------------|
+| Grok Voice Telephony (10 nodes) | voice-telephony-bridge.cjs | Latence 4x meilleure (WebSocket direct), rate limiting, session management, graceful shutdown |
+
+**Comparaison détaillée:** `outputs/COMPARISON-N8N-VS-NATIVE-2026-01-01.md`
 
 ### Scripts Natifs RÉSILIENTS (Multi-Provider Fallback) - Vérifié Dec 2025
 
@@ -104,6 +112,7 @@ Solution: Scripts natifs (.cjs) avec process.env + multi-provider fallback
 | email-personalization-resilient.cjs | TEXT | Grok 3 Mini→Gemini 2.5 Flash→Claude Sonnet 4→Static | 3006 |
 | grok-voice-realtime.cjs | AUDIO WebSocket | Grok Realtime→Gemini 2.5 Flash TTS | 3007 |
 | whatsapp-booking-notifications.cjs | WHATSAPP | WhatsApp Cloud API (Meta) | 3008 |
+| voice-telephony-bridge.cjs | TELEPHONY | Twilio PSTN ↔ Grok WebSocket | 3009 |
 
 **NOTE:** voice-api-resilient.cjs génère du TEXTE. L'audio robotic par Web Speech API.
 **NOTE:** grok-voice-realtime.cjs utilise WebSocket pour audio NATIF ($0.05/min) avec fallback Gemini TTS.
@@ -180,6 +189,11 @@ node automations/agency/core/whatsapp-booking-notifications.cjs --confirm --phon
 node automations/agency/core/whatsapp-booking-notifications.cjs --remind --phone=+33612345678 --type=24h
 node automations/agency/core/whatsapp-booking-notifications.cjs --server --port=3008
 
+# Voice Telephony Bridge (Twilio PSTN ↔ Grok WebSocket) - NEW Session 119
+node automations/agency/core/voice-telephony-bridge.cjs --health
+node automations/agency/core/voice-telephony-bridge.cjs --test-grok
+node automations/agency/core/voice-telephony-bridge.cjs --server --port=3009
+
 # === SCRIPTS PRODUCTION ===
 
 # Uptime Monitor
@@ -207,7 +221,8 @@ node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
 
 | Type | Blocker | Action | Priorité |
 |------|---------|--------|----------|
-| n8n | Twilio | Créer compte | P2 |
+| ~~n8n~~ | ~~Twilio~~ | ~~Créer compte~~ | ~~P2~~ RÉSOLU (script natif) |
+| Script | Twilio | Fournir TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN | P1 |
 | Script | WhatsApp/Meta | Fournir credentials | P1 |
 
 ## URLs
@@ -223,7 +238,7 @@ node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
 |---------|-------|-------|
 | AI Crawler Access | 10/10 | robots.txt: GPTBot, ClaudeBot, PerplexityBot, Google-Extended ✅ |
 | llms.txt | 10/10 | 4620 bytes, comprehensive (spec llmstxt.org) ✅ |
-| FAQPage Schema | 7/10 | 12/61 pages (service pages OK, homepage missing) |
+| FAQPage Schema | 7/10 | 12/63 pages (service pages OK, homepage missing) |
 | Freshness Signals | 9/10 | Blog titles: "2026", dates: Dec 2025 ✅ |
 | Content Structure | 8/10 | Headings, listicles, workflow diagrams ✅ |
 | Schema.org Depth | 8/10 | Organization, SoftwareApplication, Blog, Offer, Service ✅ |
@@ -232,11 +247,11 @@ node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
 
 | Élément | Status | Pages |
 |---------|--------|-------|
-| Meta Descriptions | ✅ | 61/61 |
-| Open Graph Tags | ✅ | 61/61 |
-| Twitter Cards | ✅ | 61/61 |
-| hreflang (FR/EN) | ✅ | 61/61 |
-| Canonical URLs | ✅ | 61/61 |
+| Meta Descriptions | ✅ | 63/63 |
+| Open Graph Tags | ✅ | 63/63 |
+| Twitter Cards | ✅ | 63/63 |
+| hreflang (FR/EN) | ✅ | 63/63 |
+| Canonical URLs | ✅ | 63/63 |
 | BreadcrumbList Schema | ✅ | Service pages |
 | Blog Schema | ✅ | BlogPosting with dates |
 | ItemList Schema | ✅ | automations.html |

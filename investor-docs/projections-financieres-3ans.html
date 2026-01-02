@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3A Automation - Projections Financieres 2026-2028 (Modele MAROC)</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --border: #222222;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --accent: #4FBAF1;
+            --green: #10B981;
+            --purple: #8B5CF6;
+            --orange: #F59E0B;
+            --red: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .badge-morocco {
+            background: linear-gradient(135deg, #c1272d, #006233);
+            color: white;
+            margin-left: 10px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Summary Cards */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .summary-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: right;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: rgba(79, 186, 241, 0.1);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .row-header {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .row-total {
+            background: rgba(16, 185, 129, 0.1);
+            font-weight: 700;
+        }
+
+        .row-total td {
+            border-top: 2px solid var(--green);
+        }
+
+        .positive {
+            color: var(--green);
+        }
+
+        .negative {
+            color: var(--red);
+        }
+
+        .year-highlight {
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        /* Assumptions */
+        .assumptions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .assumption-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .assumption-card h4 {
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .assumption-card ul {
+            list-style: none;
+        }
+
+        .assumption-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .assumption-card li:last-child {
+            border-bottom: none;
+        }
+
+        .assumption-value {
+            font-weight: 600;
+            color: var(--green);
+        }
+
+        /* KPI Section */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .kpi-title {
+            font-weight: 600;
+        }
+
+        .kpi-trend {
+            font-size: 0.85rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .kpi-trend.up {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green);
+        }
+
+        .kpi-values {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .kpi-year {
+            text-align: center;
+        }
+
+        .kpi-year-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .kpi-year-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* Scenarios */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .scenario-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .scenario-card.conservative {
+            border-color: var(--orange);
+        }
+
+        .scenario-card.base {
+            border-color: var(--green);
+        }
+
+        .scenario-card.optimistic {
+            border-color: var(--purple);
+        }
+
+        .scenario-header {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .scenario-card.conservative .scenario-header {
+            color: var(--orange);
+        }
+
+        .scenario-card.base .scenario-header {
+            color: var(--green);
+        }
+
+        .scenario-card.optimistic .scenario-header {
+            color: var(--purple);
+        }
+
+        .scenario-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .scenario-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Morocco Badge */
+        .morocco-highlight {
+            background: linear-gradient(135deg, rgba(193, 39, 45, 0.1), rgba(0, 98, 51, 0.1));
+            border: 1px solid rgba(0, 98, 51, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .morocco-highlight .flag {
+            font-size: 1.5rem;
+        }
+
+        .morocco-highlight .text {
+            flex: 1;
+        }
+
+        .morocco-highlight .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        /* Notes */
+        .notes {
+            background: rgba(79, 186, 241, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 40px;
+        }
+
+        .notes h4 {
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .notes ul {
+            color: var(--text-muted);
+            padding-left: 20px;
+        }
+
+        .notes li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            margin-top: 60px;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 1.5cm;
+            }
+
+            body {
+                background: white !important;
+                color: #111 !important;
+                padding: 0 !important;
+                font-size: 9pt !important;
+                line-height: 1.3 !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+            }
+
+            header {
+                margin-bottom: 20px !important;
+                padding-bottom: 15px !important;
+            }
+
+            h1 {
+                font-size: 18pt !important;
+            }
+
+            .subtitle {
+                font-size: 10pt !important;
+            }
+
+            .badge {
+                font-size: 8pt !important;
+                padding: 2px 8px !important;
+            }
+
+            .section {
+                margin-bottom: 25px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .section-title {
+                font-size: 12pt !important;
+                margin-bottom: 12px !important;
+            }
+
+            .section-title svg {
+                width: 18px !important;
+                height: 18px !important;
+            }
+
+            /* Summary Cards */
+            .summary-grid {
+                gap: 10px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .summary-card {
+                background: #f5f5f5 !important;
+                border: 1px solid #ddd !important;
+                padding: 12px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .summary-value {
+                font-size: 14pt !important;
+            }
+
+            .summary-label {
+                font-size: 8pt !important;
+            }
+
+            /* Tables */
+            table {
+                background: #fff !important;
+                border: 1px solid #ccc !important;
+                margin-bottom: 15px !important;
+                font-size: 8pt !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            th, td {
+                padding: 6px 8px !important;
+                border-bottom: 1px solid #ddd !important;
+            }
+
+            th {
+                background: #e8f4fc !important;
+                font-size: 7pt !important;
+            }
+
+            .row-total {
+                background: #e8f8f0 !important;
+            }
+
+            .year-highlight {
+                background: #f5f0ff !important;
+            }
+
+            /* KPIs Grid */
+            .kpi-grid {
+                gap: 10px !important;
+            }
+
+            .kpi-card {
+                background: #f5f5f5 !important;
+                border: 1px solid #ddd !important;
+                padding: 12px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .kpi-title {
+                font-size: 9pt !important;
+            }
+
+            .kpi-year-value {
+                font-size: 10pt !important;
+            }
+
+            .kpi-year-label {
+                font-size: 7pt !important;
+            }
+
+            .kpi-trend {
+                font-size: 7pt !important;
+            }
+
+            /* Scenarios */
+            .scenarios-grid {
+                gap: 10px !important;
+            }
+
+            .scenario-card {
+                background: #f5f5f5 !important;
+                padding: 12px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .scenario-header {
+                font-size: 8pt !important;
+            }
+
+            .scenario-value {
+                font-size: 14pt !important;
+            }
+
+            .scenario-desc {
+                font-size: 8pt !important;
+            }
+
+            /* Assumptions */
+            .assumptions-grid {
+                gap: 10px !important;
+            }
+
+            .assumption-card {
+                background: #f5f5f5 !important;
+                border: 1px solid #ddd !important;
+                padding: 12px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .assumption-card h4 {
+                font-size: 9pt !important;
+                margin-bottom: 8px !important;
+            }
+
+            .assumption-card li {
+                padding: 4px 0 !important;
+                font-size: 8pt !important;
+            }
+
+            /* Notes */
+            .notes {
+                background: #f8fbff !important;
+                border: 1px solid #ddd !important;
+                padding: 12px !important;
+                margin-top: 20px !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .notes h4 {
+                font-size: 10pt !important;
+                margin-bottom: 8px !important;
+            }
+
+            .notes li {
+                font-size: 8pt !important;
+                margin-bottom: 4px !important;
+            }
+
+            /* Strategic page breaks */
+            .section:nth-of-type(3) {
+                page-break-before: always !important;
+            }
+            .section:nth-of-type(5) {
+                page-break-before: always !important;
+            }
+            .section:nth-of-type(7) {
+                page-break-before: always !important;
+            }
+
+            footer {
+                margin-top: 20px !important;
+                padding-top: 15px !important;
+                font-size: 8pt !important;
+            }
+
+            footer a {
+                color: #333 !important;
+            }
+
+            /* Preserve colors */
+            .positive {
+                color: #059669 !important;
+            }
+
+            .negative {
+                color: #dc2626 !important;
+            }
+
+            .morocco-highlight {
+                background: #f0f8f0 !important;
+                border: 1px solid #006233 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid, .kpi-grid, .scenarios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .assumptions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1>Projections Financieres</h1>
+                    <p class="subtitle">Plan 3 ans (2026-2028) - Modele Bottom-Up MAROC</p>
+                </div>
+            </div>
+            <span class="badge">Document Investisseur - Janvier 2026</span>
+            <span class="badge badge-morocco">Modele Maroc v2.0</span>
+        </header>
+
+        <!-- Morocco Advantage Banner -->
+        <div class="morocco-highlight">
+            <span class="flag">🇲🇦</span>
+            <div class="text">
+                <strong>Avantage Structure Maroc</strong><br>
+                <span style="color: var(--text-muted); font-size: 0.9rem;">Couts operationnels -35% vs Europe, marge EBITDA Y3 de 74%</span>
+            </div>
+            <span class="value">74% EBITDA</span>
+        </div>
+
+        <!-- Executive Summary -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                    <path d="M18 20V10"/>
+                    <path d="M12 20V4"/>
+                    <path d="M6 20v-6"/>
+                </svg>
+                Resume Executif (Bottom-Up Maroc)
+            </h2>
+
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="summary-value" style="color: var(--accent);">780K EUR</div>
+                    <div class="summary-label">Revenue Y3 (2028)</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" style="color: var(--green);">500</div>
+                    <div class="summary-label">Clients Y3</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" style="color: var(--purple);">74%</div>
+                    <div class="summary-label">Marge EBITDA Y3</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-value" style="color: var(--orange);">20x</div>
+                    <div class="summary-label">LTV/CAC Ratio Y3</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Revenue Projections -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+                Projections de Revenue (Bottom-Up)
+            </h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categorie</th>
+                        <th>Q1 2026</th>
+                        <th>Q2 2026</th>
+                        <th>Q3 2026</th>
+                        <th>Q4 2026</th>
+                        <th class="year-highlight">Total 2026</th>
+                        <th>2027</th>
+                        <th>2028</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="row-header">Packs Setup (One-time)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="year-highlight"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Quick Win (390 EUR)</td>
+                        <td>780</td>
+                        <td>1.170</td>
+                        <td>1.560</td>
+                        <td>1.950</td>
+                        <td class="year-highlight">5.460</td>
+                        <td>23.400</td>
+                        <td>39.000</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Essentials (790 EUR)</td>
+                        <td>2.370</td>
+                        <td>3.950</td>
+                        <td>5.530</td>
+                        <td>7.110</td>
+                        <td class="year-highlight">18.960</td>
+                        <td>94.800</td>
+                        <td>158.000</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Growth (1.399 EUR)</td>
+                        <td>1.399</td>
+                        <td>2.798</td>
+                        <td>4.197</td>
+                        <td>5.596</td>
+                        <td class="year-highlight">13.990</td>
+                        <td>83.940</td>
+                        <td>139.900</td>
+                    </tr>
+                    <tr>
+                        <td class="row-header">Retainers Mensuels (MRR)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="year-highlight"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Maintenance (290 EUR/mo)</td>
+                        <td>1.740</td>
+                        <td>4.350</td>
+                        <td>8.700</td>
+                        <td>13.050</td>
+                        <td class="year-highlight">27.840</td>
+                        <td>139.200</td>
+                        <td>208.800</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Optimisation (490 EUR/mo)</td>
+                        <td>980</td>
+                        <td>2.940</td>
+                        <td>5.880</td>
+                        <td>9.800</td>
+                        <td class="year-highlight">19.600</td>
+                        <td>117.600</td>
+                        <td>176.400</td>
+                    </tr>
+                    <tr>
+                        <td class="row-header">Projets Custom & Upsells</td>
+                        <td>0</td>
+                        <td>2.000</td>
+                        <td>5.000</td>
+                        <td>8.000</td>
+                        <td class="year-highlight">15.000</td>
+                        <td>45.000</td>
+                        <td>55.000</td>
+                    </tr>
+                    <tr class="row-total">
+                        <td><strong>TOTAL REVENUE</strong></td>
+                        <td><strong>7.269</strong></td>
+                        <td><strong>17.208</strong></td>
+                        <td><strong>30.867</strong></td>
+                        <td><strong>45.506</strong></td>
+                        <td class="year-highlight"><strong class="positive">108.000</strong></td>
+                        <td><strong class="positive">512.000</strong></td>
+                        <td><strong class="positive">780.000</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Clients Projections -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                Evolution Clients
+            </h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrique</th>
+                        <th>Q1 2026</th>
+                        <th>Q2 2026</th>
+                        <th>Q3 2026</th>
+                        <th>Q4 2026</th>
+                        <th class="year-highlight">Fin 2026</th>
+                        <th>Fin 2027</th>
+                        <th>Fin 2028</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nouveaux clients (periode)</td>
+                        <td>10</td>
+                        <td>15</td>
+                        <td>18</td>
+                        <td>22</td>
+                        <td class="year-highlight">60</td>
+                        <td>240</td>
+                        <td>260</td>
+                    </tr>
+                    <tr>
+                        <td>Churn annuel</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td class="year-highlight">8%</td>
+                        <td>5%</td>
+                        <td>3%</td>
+                    </tr>
+                    <tr class="row-total">
+                        <td><strong>Clients Actifs (fin periode)</strong></td>
+                        <td><strong>10</strong></td>
+                        <td><strong>24</strong></td>
+                        <td><strong>40</strong></td>
+                        <td><strong>60</strong></td>
+                        <td class="year-highlight"><strong class="positive">60</strong></td>
+                        <td><strong class="positive">280</strong></td>
+                        <td><strong class="positive">500</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Clients sur retainer (%)</td>
+                        <td>60%</td>
+                        <td>65%</td>
+                        <td>70%</td>
+                        <td>75%</td>
+                        <td class="year-highlight">75%</td>
+                        <td>80%</td>
+                        <td>85%</td>
+                    </tr>
+                    <tr>
+                        <td>ARPU Mensuel</td>
+                        <td>250</td>
+                        <td>275</td>
+                        <td>290</td>
+                        <td>300</td>
+                        <td class="year-highlight">300 EUR</td>
+                        <td>380 EUR</td>
+                        <td>450 EUR</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Costs Structure (MOROCCO MODEL) -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                    <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+                Structure des Couts (Modele MAROC)
+            </h2>
+
+            <div class="morocco-highlight" style="margin-bottom: 24px;">
+                <span class="flag">🇲🇦</span>
+                <div class="text">
+                    <strong>Strategie 0 Commercial</strong><br>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">Acquisition 100% digitale (SEO, Ads, Funnels) - Economie 40K EUR/an vs modele commercial</span>
+                </div>
+                <span class="value">-35% Couts</span>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Poste</th>
+                        <th class="year-highlight">2026</th>
+                        <th>2027</th>
+                        <th>2028</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="row-header">Salaires (Equipe MAROC)</td>
+                        <td class="year-highlight"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Fondateur (5.200 EUR brut/mo)</td>
+                        <td class="year-highlight">62.400</td>
+                        <td>62.400</td>
+                        <td>62.400</td>
+                        <td>4.000 EUR NET/mois</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Junior E-Marketing (900 EUR/mo)</td>
+                        <td class="year-highlight">5.400</td>
+                        <td>10.800</td>
+                        <td>10.800</td>
+                        <td>Casablanca, Q3 2026</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Junior Dev (900 EUR/mo)</td>
+                        <td class="year-highlight">5.400</td>
+                        <td>10.800</td>
+                        <td>10.800</td>
+                        <td>Casablanca, Q3 2026</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Senior Dev (2.000 EUR/mo)</td>
+                        <td class="year-highlight">0</td>
+                        <td>24.000</td>
+                        <td>24.000</td>
+                        <td>Casablanca, Q1 2027</td>
+                    </tr>
+                    <tr>
+                        <td class="row-header">Couts Fixes</td>
+                        <td class="year-highlight"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Infrastructure (Supabase + GCP)</td>
+                        <td class="year-highlight">1.200</td>
+                        <td>3.600</td>
+                        <td>6.000</td>
+                        <td>Multi-cloud + APIs AI</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Outils SaaS</td>
+                        <td class="year-highlight">1.800</td>
+                        <td>4.800</td>
+                        <td>7.200</td>
+                        <td>n8n, Apify, Analytics</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Legal & Compta</td>
+                        <td class="year-highlight">2.400</td>
+                        <td>4.800</td>
+                        <td>6.000</td>
+                        <td>RGPD, Juridique, Audit</td>
+                    </tr>
+                    <tr>
+                        <td class="row-header">Couts Variables</td>
+                        <td class="year-highlight"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Marketing & Acquisition (100% digital)</td>
+                        <td class="year-highlight">2.400</td>
+                        <td>36.000</td>
+                        <td>60.000</td>
+                        <td>SEO, Content, Google/Meta Ads</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;Divers & Buffer (5%)</td>
+                        <td class="year-highlight">2.000</td>
+                        <td>8.800</td>
+                        <td>17.800</td>
+                        <td>Imprevu prudence</td>
+                    </tr>
+                    <tr class="row-total">
+                        <td><strong>TOTAL COUTS</strong></td>
+                        <td class="year-highlight"><strong class="negative">83.000</strong></td>
+                        <td><strong class="negative">166.000</strong></td>
+                        <td><strong class="negative">205.000</strong></td>
+                        <td><strong>Equipe: 4 pers. max</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Profitability -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                    <polyline points="16 7 22 7 22 13"/>
+                </svg>
+                Rentabilite (Modele MAROC)
+            </h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metrique</th>
+                        <th class="year-highlight">2026</th>
+                        <th>2027</th>
+                        <th>2028</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Revenue Total</td>
+                        <td class="year-highlight positive">108.000</td>
+                        <td class="positive">512.000</td>
+                        <td class="positive">780.000</td>
+                    </tr>
+                    <tr>
+                        <td>Couts Totaux</td>
+                        <td class="year-highlight negative">(83.000)</td>
+                        <td class="negative">(166.000)</td>
+                        <td class="negative">(205.000)</td>
+                    </tr>
+                    <tr class="row-total">
+                        <td><strong>EBITDA</strong></td>
+                        <td class="year-highlight"><strong class="positive">25.000</strong></td>
+                        <td><strong class="positive">346.000</strong></td>
+                        <td><strong class="positive">576.000</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Marge EBITDA</td>
+                        <td class="year-highlight">23%</td>
+                        <td>68%</td>
+                        <td><strong style="color: var(--green);">74%</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Croissance YoY</td>
+                        <td class="year-highlight">-</td>
+                        <td class="positive">+374% (4.7x)</td>
+                        <td class="positive">+52% (1.5x)</td>
+                    </tr>
+                    <tr>
+                        <td>CAGR 3 ans</td>
+                        <td class="year-highlight" colspan="3" style="text-align: center;"><strong class="positive">168%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Founder Compensation -->
+            <div class="morocco-highlight">
+                <span class="flag">💰</span>
+                <div class="text">
+                    <strong>Remuneration Fondateur Y3</strong><br>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">Salaire NET 48K + Dividendes 260K (apres 15% WHT Maroc) = 308K EUR/an</span>
+                </div>
+                <span class="value">25.7K EUR/mois</span>
+            </div>
+        </section>
+
+        <!-- KPIs -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                KPIs Cles (Bottom-Up Verifie)
+            </h2>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">LTV Client</span>
+                        <span class="kpi-trend up">+178% Y1-Y3</span>
+                    </div>
+                    <div class="kpi-values">
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2026</div>
+                            <div class="kpi-year-value" style="color: var(--accent);">1.800 EUR</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2027</div>
+                            <div class="kpi-year-value" style="color: var(--green);">3.200 EUR</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2028</div>
+                            <div class="kpi-year-value" style="color: var(--purple);">5.000 EUR</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">CAC (100% Digital)</span>
+                        <span class="kpi-trend up">Optimise</span>
+                    </div>
+                    <div class="kpi-values">
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2026</div>
+                            <div class="kpi-year-value" style="color: var(--accent);">350 EUR</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2027</div>
+                            <div class="kpi-year-value" style="color: var(--green);">300 EUR</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2028</div>
+                            <div class="kpi-year-value" style="color: var(--purple);">250 EUR</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">LTV/CAC Ratio</span>
+                        <span class="kpi-trend up">+300% Y1-Y3</span>
+                    </div>
+                    <div class="kpi-values">
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2026</div>
+                            <div class="kpi-year-value" style="color: var(--accent);">5x</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2027</div>
+                            <div class="kpi-year-value" style="color: var(--green);">11x</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2028</div>
+                            <div class="kpi-year-value" style="color: var(--purple);">20x</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Churn Annuel</span>
+                        <span class="kpi-trend up">Reduction</span>
+                    </div>
+                    <div class="kpi-values">
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2026</div>
+                            <div class="kpi-year-value" style="color: var(--accent);">8%</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2027</div>
+                            <div class="kpi-year-value" style="color: var(--green);">5%</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2028</div>
+                            <div class="kpi-year-value" style="color: var(--purple);">3%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">ARPU Mensuel</span>
+                        <span class="kpi-trend up">+50% Y1-Y3</span>
+                    </div>
+                    <div class="kpi-values">
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2026</div>
+                            <div class="kpi-year-value" style="color: var(--accent);">300 EUR</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2027</div>
+                            <div class="kpi-year-value" style="color: var(--green);">380 EUR</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2028</div>
+                            <div class="kpi-year-value" style="color: var(--purple);">450 EUR</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Payback Period</span>
+                        <span class="kpi-trend up">Amelioration</span>
+                    </div>
+                    <div class="kpi-values">
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2026</div>
+                            <div class="kpi-year-value" style="color: var(--accent);">3 mois</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2027</div>
+                            <div class="kpi-year-value" style="color: var(--green);">2 mois</div>
+                        </div>
+                        <div class="kpi-year">
+                            <div class="kpi-year-label">2028</div>
+                            <div class="kpi-year-value" style="color: var(--purple);">1.5 mois</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scenarios -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2">
+                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+                    <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                </svg>
+                Scenarios Revenue Y3 (2028)
+            </h2>
+
+            <div class="scenarios-grid">
+                <div class="scenario-card conservative">
+                    <div class="scenario-header">Conservateur</div>
+                    <div class="scenario-value" style="color: var(--orange);">550K EUR</div>
+                    <p class="scenario-desc">~350 clients, croissance moderee, churn 5%</p>
+                    <p class="scenario-desc" style="margin-top: 8px;">EBITDA: 350K EUR (64%)</p>
+                </div>
+                <div class="scenario-card base">
+                    <div class="scenario-header">Base Case (Cible)</div>
+                    <div class="scenario-value" style="color: var(--green);">780K EUR</div>
+                    <p class="scenario-desc">500 clients, croissance stable, churn 3%</p>
+                    <p class="scenario-desc" style="margin-top: 8px;">EBITDA: 576K EUR (74%)</p>
+                </div>
+                <div class="scenario-card optimistic">
+                    <div class="scenario-header">Optimiste</div>
+                    <div class="scenario-value" style="color: var(--purple);">1.1M EUR</div>
+                    <p class="scenario-desc">~700 clients, croissance rapide, churn 2%</p>
+                    <p class="scenario-desc" style="margin-top: 8px;">EBITDA: 850K EUR (77%)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assumptions -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                Hypotheses Cles (Bottom-Up)
+            </h2>
+
+            <div class="assumptions-grid">
+                <div class="assumption-card">
+                    <h4>Acquisition (0 Commercial)</h4>
+                    <ul>
+                        <li>
+                            <span>CAC cible</span>
+                            <span class="assumption-value">250-350 EUR</span>
+                        </li>
+                        <li>
+                            <span>Canaux</span>
+                            <span class="assumption-value">SEO + Ads 100%</span>
+                        </li>
+                        <li>
+                            <span>Conversion site</span>
+                            <span class="assumption-value">3-5%</span>
+                        </li>
+                        <li>
+                            <span>Cycle de vente</span>
+                            <span class="assumption-value">1-2 semaines</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="assumption-card">
+                    <h4>Retention</h4>
+                    <ul>
+                        <li>
+                            <span>Duree moyenne client</span>
+                            <span class="assumption-value">24 mois</span>
+                        </li>
+                        <li>
+                            <span>Churn annuel cible</span>
+                            <span class="assumption-value">&lt; 5%</span>
+                        </li>
+                        <li>
+                            <span>Upsell rate</span>
+                            <span class="assumption-value">25%</span>
+                        </li>
+                        <li>
+                            <span>NPS cible</span>
+                            <span class="assumption-value">&gt; 50</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="assumption-card">
+                    <h4>Pricing</h4>
+                    <ul>
+                        <li>
+                            <span>Pack moyen</span>
+                            <span class="assumption-value">790 EUR</span>
+                        </li>
+                        <li>
+                            <span>Retainer moyen</span>
+                            <span class="assumption-value">380 EUR/mo</span>
+                        </li>
+                        <li>
+                            <span>Taux retainer</span>
+                            <span class="assumption-value">75-85%</span>
+                        </li>
+                        <li>
+                            <span>Taux horaire implicite</span>
+                            <span class="assumption-value">80-130 EUR/h</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="assumption-card">
+                    <h4>Marche (SOM Bottom-Up)</h4>
+                    <ul>
+                        <li>
+                            <span>TAM PME Automation</span>
+                            <span class="assumption-value">$890B</span>
+                        </li>
+                        <li>
+                            <span>SAM MENA+Europe FR</span>
+                            <span class="assumption-value">$45B</span>
+                        </li>
+                        <li>
+                            <span>SOM realiste Y3</span>
+                            <span class="assumption-value">780K EUR</span>
+                        </li>
+                        <li>
+                            <span>Approche</span>
+                            <span class="assumption-value">Bottom-up factuel</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use of Funds -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+                Utilisation des Fonds (Seed 150K EUR - Strategie 0 Commercial)
+            </h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Poste</th>
+                        <th>Montant</th>
+                        <th>%</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Recrutement E-Marketing + Dev</td>
+                        <td class="positive">70.000 EUR</td>
+                        <td>47%</td>
+                        <td>2 Juniors Maroc (Casablanca)</td>
+                    </tr>
+                    <tr>
+                        <td>Marketing & Ads (100% digital)</td>
+                        <td class="positive">40.000 EUR</td>
+                        <td>27%</td>
+                        <td>SEO, Content, Google Ads, Meta Ads</td>
+                    </tr>
+                    <tr>
+                        <td>Developpement Produit</td>
+                        <td class="positive">20.000 EUR</td>
+                        <td>13%</td>
+                        <td>Nouvelles automations, platform</td>
+                    </tr>
+                    <tr>
+                        <td>Infrastructure & Ops</td>
+                        <td class="positive">15.000 EUR</td>
+                        <td>10%</td>
+                        <td>Supabase + GCP, outils, legal</td>
+                    </tr>
+                    <tr>
+                        <td>Buffer</td>
+                        <td class="positive">5.000 EUR</td>
+                        <td>3%</td>
+                        <td>Imprevu</td>
+                    </tr>
+                    <tr class="row-total">
+                        <td><strong>TOTAL</strong></td>
+                        <td><strong>150.000 EUR</strong></td>
+                        <td><strong>100%</strong></td>
+                        <td><strong>Runway: 12+ mois</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Team Structure Y3 -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                Structure Equipe Y3 (Modele MAROC)
+            </h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Poste</th>
+                        <th>Localisation</th>
+                        <th>Salaire/mois</th>
+                        <th>Recrutement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Fondateur & CEO</strong></td>
+                        <td>Remote</td>
+                        <td>5.200 EUR brut (4.000 EUR NET)</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Junior E-Marketing</td>
+                        <td>Casablanca</td>
+                        <td>900 EUR (~10K MAD)</td>
+                        <td>Q3 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Junior Dev</td>
+                        <td>Casablanca</td>
+                        <td>900 EUR (~10K MAD)</td>
+                        <td>Q3 2026</td>
+                    </tr>
+                    <tr>
+                        <td>Senior Dev</td>
+                        <td>Casablanca</td>
+                        <td>2.000 EUR (~22K MAD)</td>
+                        <td>Q1 2027</td>
+                    </tr>
+                    <tr class="row-total">
+                        <td colspan="2"><strong>TOTAL EQUIPE Y3</strong></td>
+                        <td colspan="2"><strong>4 personnes - 0 Commercial</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="morocco-highlight">
+                <span class="flag">💡</span>
+                <div class="text">
+                    <strong>Source salaires: Glassdoor Maroc 2025</strong><br>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">Junior Developer: 8-12K MAD/mois | Senior Developer: 18-25K MAD/mois | E-Marketing: 8-12K MAD/mois</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes -->
+        <div class="notes">
+            <h4>Notes et Methodologie</h4>
+            <ul>
+                <li><strong>Approche Bottom-Up:</strong> Projections basees sur clients/ARPU, jamais circulaires.</li>
+                <li><strong>Modele MAROC:</strong> Couts operationnels -35% vs Europe grace a la structure Casablanca.</li>
+                <li><strong>0 Commercial:</strong> Acquisition 100% digitale (SEO, Ads, Funnels) - Economie 40K EUR/an.</li>
+                <li><strong>Infrastructure:</strong> Supabase + Google Cloud Platform (Vercel INTERDIT).</li>
+                <li><strong>Salaires source:</strong> Glassdoor Maroc 2025 (verifies empiriquement).</li>
+                <li><strong>Dividendes Maroc:</strong> 15% retenue source vs 30% PFU France = optimisation fiscale legale.</li>
+                <li>Taux de change EUR/MAD: 11.0 (moyenne 2026).</li>
+                <li>Ces projections sont des estimations factuelles basees sur des hypotheses raisonnables.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>3A Automation - Projections Financieres v2.0 (Modele MAROC Bottom-Up)</p>
+            <p style="margin-top: 8px;">Document genere le 1er Janvier 2026</p>
+            <p style="margin-top: 16px; font-size: 0.85rem;">
+                <a href="https://3a-automation.com" style="color: var(--accent); text-decoration: none;">3a-automation.com</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
