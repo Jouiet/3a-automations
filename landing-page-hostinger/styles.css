@@ -1309,6 +1309,7 @@ body.lite {
 .tech-pill.ai img { filter: brightness(0) saturate(100%) invert(42%) sepia(76%) saturate(2155%) hue-rotate(235deg) brightness(94%) contrast(93%); }
 .tech-pill.automation img { filter: brightness(0) saturate(100%) invert(51%) sepia(54%) saturate(2424%) hue-rotate(307deg) brightness(98%) contrast(93%); }
 .tech-pill.infra img { filter: brightness(0) saturate(100%) invert(41%) sepia(76%) saturate(2048%) hue-rotate(224deg) brightness(93%) contrast(93%); }
+.tech-pill.crm img { filter: brightness(0) saturate(100%) invert(55%) sepia(89%) saturate(1095%) hue-rotate(336deg) brightness(99%) contrast(101%); }
 
 .tech-pill:hover {
   border-color: var(--primary);
@@ -1345,6 +1346,11 @@ body.lite {
 .tech-pill.infra {
   border-color: rgba(99, 102, 241, 0.3);
   color: #6366F1;
+}
+
+.tech-pill.crm {
+  border-color: rgba(255, 122, 89, 0.3);
+  color: #FF7A59;
 }
 
 .tech-pill.featured {
