@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 119 - 02/01/2026)
+## Current State (Session 120 - 02/01/2026)
 
 | Metric | Value |
 |--------|-------|
@@ -21,6 +21,42 @@
 | llms.txt | **v5.1.0** with CRM section |
 | Voice Widget Templates | **8 industries** (4h→30min deployment) |
 | **INVESTOR-READY** | ✅ VERIFIED |
+
+## SESSION 120 - FRONTEND CRM + HEALTH CHECKS (02/01/2026)
+
+### CRM Cards Added to Frontend
+
+| Card | Page | Line |
+|------|------|------|
+| HubSpot B2B CRM | automations.html (FR) | 478 |
+| Omnisend E-commerce | automations.html (EN) | 486 |
+
+**Issue:** CRM integrations were in registry v2.2.0 but NOT displayed on frontend.
+**Fix:** Added 2 highlight-cards to Lead Generation section (FR + EN).
+**Commit:** `5c80645`
+
+### Health Checks (9/10)
+
+| Script | Status | Providers |
+|--------|--------|-----------|
+| HubSpot B2B CRM | ✅ Ready | Batch + backoff |
+| Omnisend B2C | ✅ Ready | Events + carts |
+| Voice API | ✅ Operational | Grok→Gemini→Claude→Local |
+| Blog Generator | ✅ Operational | 3 AI + WordPress |
+| Product Photos | ✅ Operational | 5 providers |
+| Email Personalization | ✅ Operational | 4 providers |
+| Grok Voice Realtime | ✅ RESILIENT | Grok WebSocket + Gemini TTS |
+| Uptime Monitor | ✅ 5/5 HEALTHY | All critical services |
+| Voice Telephony | ⏳ Awaiting | Twilio credentials |
+
+### Klaviyo Status
+
+| Resource | Count | Notes |
+|----------|-------|-------|
+| Lists | 10 | LinkedIn, Google Maps, B2B, Welcome... |
+| Flows | 0 | Native scripts preferred over Klaviyo flows |
+
+---
 
 ## SESSION 119 - FORENSIC AUDIT COMPLETE (02/01/2026)
 
