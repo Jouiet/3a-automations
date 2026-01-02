@@ -17,12 +17,22 @@
 | Security Headers | **CONFIGURED** (HSTS, CSP, X-Frame-Options) |
 | Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
 | SSL | **Let's Encrypt + HSTS preload** |
-| Infrastructure | 4 Docker containers RUNNING |
+| Infrastructure | 4 Docker projects, 6 containers RUNNING |
 | llms.txt | **v5.0** with investor section |
 | Voice Widget Templates | **8 industries** (4h→30min deployment) |
 | **INVESTOR-READY** | ✅ VERIFIED |
 
 ## SESSION 119 - FORENSIC AUDIT COMPLETE (02/01/2026)
+
+### API/Backend Verification (02/01/2026)
+
+| Component | Tests | Result |
+|-----------|-------|--------|
+| APIs (forensic-api-test.cjs) | 5 endpoints | 4/5 OK (n8n needs header) |
+| MCPs | 8 tested | 7/8 OK (Apify token invalid) |
+| Docker Projects | 4 | 6 containers RUNNING |
+| VPS 1168256 | Health check | ✅ Ubuntu 24.04, 8GB RAM |
+| Automations Registry | v2.1.1 | 86=86=86 ✅ |
 
 ### P0 Security Fixes (CRITICAL)
 
@@ -357,18 +367,43 @@ All P2 items completed Session 117ter.
 | X/Twitter | X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET | developer.x.com |
 | Twilio | TWILIO_* | twilio.com |
 
-## APIs Health
+## APIs Health (Verified 02/01/2026)
 
-| API | Status | Notes |
+| API | Status | Latency | Notes |
+|-----|--------|---------|-------|
+| Shopify | ✅ | 744ms | guqsu3-yj.myshopify.com, basic plan |
+| Klaviyo | ✅ | 448ms | 10 lists verified |
+| xAI/Grok | ✅ | 385ms | 11 models (grok-4-0709, grok-3, etc.) |
+| Google SA | ✅ | - | a-automation-agency project |
+| n8n | ⚠️ | 366ms | Requires X-N8N-API-KEY header |
+| Gemini | ✅ | - | TTS fallback testé |
+| Apify | ✅ | - | STARTER $39/mo |
+| GitHub | ✅ | - | OK |
+| Hostinger | ✅ | - | VPS 1168256 running |
+| Meta/WhatsApp | ⏳ | - | Awaiting credentials |
+
+## MCPs Health (Verified 02/01/2026)
+
+| MCP | Status | Notes |
 |-----|--------|-------|
-| n8n | ✅ | Infrastructure only (0 workflows) |
-| Klaviyo | ✅ | 15 listes |
-| Shopify | ✅ | Dev store |
-| xAI/Grok | ✅ | 11 models |
-| Gemini | ✅ | TTS fallback testé |
-| Apify | ✅ | STARTER $39/mo |
-| GitHub | ✅ | OK |
-| Hostinger | ✅ | Running |
+| Hostinger | ✅ | VPS management OK |
+| Gemini | ✅ | 6 models available |
+| GitHub | ✅ | Repo access OK |
+| Memory | ✅ | Knowledge graph OK |
+| Chrome DevTools | ✅ | Browser automation OK |
+| Playwright | ✅ | Browser tabs OK |
+| Filesystem | ✅ | File operations OK |
+| Apify | ❌ | Token needs reconfiguration |
+
+## Docker Infrastructure (Verified 02/01/2026)
+
+| Project | Containers | Status | Uptime |
+|---------|------------|--------|--------|
+| 3a-website | 1 (nginx:alpine) | ✅ RUNNING | Active |
+| cinematicads | 1 (webapp:latest) | ✅ RUNNING | 13h+ |
+| root | 2 (n8n + traefik) | ✅ RUNNING | 4 days |
+| wordpress | 2 (wp + mariadb) | ✅ RUNNING | 3 days |
+| **TOTAL** | **6 containers** | **4 projects** | - |
 
 ## Source of Truth
 
