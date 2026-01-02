@@ -59,7 +59,7 @@ const CONFIG = {
   // Grok Voice
   grok: {
     apiKey: process.env.XAI_API_KEY,
-    model: 'grok-2-audio-preview',
+    model: 'grok-4', // FRONTIER audio model (powered by Grok-4 family per xAI docs Jan 2026)
     voice: process.env.GROK_VOICE || 'Sal',
     realtimeUrl: 'wss://api.x.ai/v1/realtime'
   },

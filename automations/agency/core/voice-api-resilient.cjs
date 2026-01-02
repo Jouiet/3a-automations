@@ -58,10 +58,10 @@ const ENV = loadEnv();
 // Fallback order: Grok → OpenAI → Gemini → Anthropic → Local patterns
 const PROVIDERS = {
   grok: {
-    name: 'Grok 3 Mini',
-    // grok-3-mini: fast, cost-effective text generation (Dec 2025)
+    name: 'Grok 4.1 Fast Reasoning',
+    // grok-4-1-fast-reasoning: FRONTIER model with reasoning (Jan 2026)
     url: 'https://api.x.ai/v1/chat/completions',
-    model: 'grok-3-mini',
+    model: 'grok-4-1-fast-reasoning',
     apiKey: ENV.XAI_API_KEY,
     enabled: !!ENV.XAI_API_KEY,
   },

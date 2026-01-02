@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 28.0 | Date: 2026-01-02 | Session: 121 (PODCAST GENERATOR)
+## Version: 30.0 | Date: 2026-01-02 | Session: 123 (FRONTIER MODELS UPDATE)
 
 ---
 
@@ -11,14 +11,109 @@
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
 | Automations | `automations/automations-registry.json` (89, v2.3.0) |
-| History | `HISTORY.md` (Sessions 0-121) |
+| History | `HISTORY.md` (Sessions 0-122) |
 | Scripts résilients | `automations/agency/core/` (11 scripts, P0-P1-P2 secured) |
 | Pages | 63 (FR/EN + Academy + Investors) |
 | SEO Score | **96%** |
 | AEO Score | **95%** |
+| **Overall Audit Score** | **89%** |
+| **Security Backend** | **45%** - 🚨 CRITICAL |
 | Docker Projects | 4 running (3a-website, cinematicads, root, wordpress) |
 | CRM Scripts | HubSpot v1.1.0 + Omnisend v1.1.0 |
 | Podcast Generator | v1.0.0 (> NotebookLM) |
+
+---
+
+## Session 123 - FRONTIER MODELS UPDATE (02/01/2026)
+
+### ALL Scripts Updated to FRONTIER Models
+
+| Script | Old Model | New Model (FRONTIER) |
+|--------|-----------|----------------------|
+| voice-api-resilient.cjs | grok-3-mini | **grok-4-1-fast-reasoning** |
+| email-personalization-resilient.cjs | grok-3-mini | **grok-4-1-fast-reasoning** |
+| blog-generator-resilient.cjs | grok-3-mini | **grok-4-1-fast-reasoning** |
+| podcast-generator-resilient.cjs | grok-3-mini | **grok-4-1-fast-reasoning** |
+| grok-client.cjs | grok-2-latest | **grok-4-1-fast-reasoning** |
+| grok-client.py | grok-2-latest | **grok-4-1-fast-reasoning** |
+| grok-voice-realtime.cjs | grok-2-public | **grok-4** (realtime) |
+| voice-telephony-bridge.cjs | grok-2-audio-preview | **grok-4** (audio) |
+
+### xAI Model Status (Verified Jan 2026)
+
+| Type | FRONTIER Model | Notes |
+|------|----------------|-------|
+| TEXT | `grok-4-1-fast-reasoning` | ✅ Latest (Nov 2025) |
+| VISION | `grok-2-vision-1212` | ✅ Latest (no grok-4-vision exists) |
+| IMAGE | `grok-2-image-1212` | ✅ Latest (no grok-4-image exists) |
+| REALTIME/AUDIO | `grok-4` | ✅ Powered by Grok-4 family |
+| CODE | `grok-code-fast-1` | NEW! Available |
+
+### Health Check Results
+
+```
+voice-api-resilient:        Grok 4.1 Fast Reasoning [OK]
+email-personalization:      Grok 4.1 Fast Reasoning [OK]
+blog-generator-resilient:   Grok 4.1 Fast Reasoning [OK]
+podcast-generator:          xAI Grok [OK] + Gemini TTS [OK]
+grok-voice-realtime:        WebSocket [OK] + Gemini TTS fallback [OK]
+```
+
+**Sources:** [xAI API Models](https://docs.x.ai/docs/models), [Grok Voice Agent API](https://docs.x.ai/docs/guides/voice/agent)
+
+---
+
+## 🚨 Session 122 - FORENSIC AUDIT + CRITICAL SECURITY (02/01/2026)
+
+### CRITICAL VULNERABILITY DISCOVERED (CVSS 9.8)
+
+**File:** `dashboard/docker-compose.production.yml` - **PUBLIC GitHub repo!**
+
+| Secret Exposed | Line | Severity |
+|----------------|------|----------|
+| JWT_SECRET | 32 | 🚨 CRITICAL - Session hijacking |
+| N8N_API_KEY | 35 | 🚨 CRITICAL - Full n8n control |
+| GOOGLE_SHEETS_ID | 30 | HIGH - Data exposure |
+
+**Code is SECURE** (auth.ts validates JWT_SECRET). Problem: SECRET VALUE in public repo.
+
+### IMMEDIATE HUMAN ACTIONS REQUIRED
+
+1. ❌ **ROTATE JWT_SECRET** on VPS `/root/dashboard/.env`
+2. ❌ **REVOKE N8N_API_KEY** and regenerate at n8n.srv1168256.hstgr.cloud
+3. ❌ **Move secrets to Docker secrets** (not compose file)
+4. ❌ **git filter-branch** to purge from Git history
+
+### Forensic Audit Scores
+
+| Category | Score | Notes |
+|----------|-------|-------|
+| SEO Technical | 96% | All meta, OG, hreflang OK |
+| AEO/GEO | 95% | llms.txt, FAQPage, freshness |
+| Security Frontend | 92% | HSTS, CSP, headers OK |
+| **Security Backend** | **45%** | 🚨 Secrets in public repo |
+| Marketing Claims | 88% | ROI sources verified |
+| i18n/l10n | 94% | FR/EN, 3 currencies |
+| Accessibility | 85% | Skip links, contrast OK |
+| Design/UX | 91% | Consistent, professional |
+| **OVERALL** | **89%** | Backend security critical |
+
+### Session 122 Fixes Applied
+
+| Fix | Status |
+|-----|--------|
+| EN investor page 86→88 | ✅ 6 instances |
+| SWOT analysis | ✅ outputs/FORENSIC-AUDIT-SWOT-2026-01-02.md |
+| Security audit | ✅ Identified CVSS 9.8 |
+
+### SWOT Summary
+
+**Strengths:** SEO/AEO excellent, multi-provider fallbacks, bilingual
+**Weaknesses:** Backend security 45%, no real clients/revenue yet
+**Opportunities:** AI automation demand, MENA expansion
+**Threats:** Exposed secrets (IMMEDIATE), competitor commoditization
+
+---
 
 ## Session 121 - PODCAST GENERATOR RESILIENT (02/01/2026)
 

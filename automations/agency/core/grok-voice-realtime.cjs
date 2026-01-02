@@ -66,7 +66,7 @@ const CONFIG = {
   // Default settings
   defaults: {
     voice: 'ara',
-    model: 'grok-2-public', // Realtime model
+    model: 'grok-4', // FRONTIER realtime model (powered by Grok-4 family per xAI docs Jan 2026)
     language: 'auto',       // Auto-detect
   },
 

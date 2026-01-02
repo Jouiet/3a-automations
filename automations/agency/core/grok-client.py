@@ -157,7 +157,7 @@ def chat_completion(client, user_message: str, system_prompt: str = None) -> str
 
     try:
         response = client.chat.completions.create(
-            model="grok-2-latest",
+            model="grok-4-1-fast-reasoning",  # FRONTIER model (Jan 2026)
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message}
