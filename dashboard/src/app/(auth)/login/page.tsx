@@ -27,6 +27,7 @@ export default function LoginPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+        credentials: "include", // Include cookies in request/response
       });
 
       const data = await response.json();
@@ -35,8 +36,8 @@ export default function LoginPage() {
         throw new Error(data.error || "Erreur de connexion");
       }
 
-      // Store token in localStorage
-      localStorage.setItem("auth_token", data.token);
+      // Token is now stored in httpOnly cookie (not accessible via JS)
+      // Only store user data for UI purposes
       localStorage.setItem("user", JSON.stringify(data.user));
 
       // Redirect based on role

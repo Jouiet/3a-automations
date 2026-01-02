@@ -67,18 +67,9 @@ export default function SettingsPage() {
   const fetchSettings = useCallback(async () => {
     try {
       setError(null);
-      const token = localStorage.getItem("auth_token");
-
-      if (!token) {
-        setError("Session expiree. Veuillez vous reconnecter.");
-        setIsLoading(false);
-        return;
-      }
 
       const response = await fetch("/api/users/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        credentials: "include", // Use httpOnly cookie
       });
 
       if (!response.ok) {
@@ -124,19 +115,12 @@ export default function SettingsPage() {
     setSaveSuccess(false);
 
     try {
-      const token = localStorage.getItem("auth_token");
-
-      if (!token) {
-        setError("Session expiree. Veuillez vous reconnecter.");
-        return;
-      }
-
       const response = await fetch("/api/users/me", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
         },
+        credentials: "include", // Use httpOnly cookie
         body: JSON.stringify({
           name: settings.name,
           company: settings.company,

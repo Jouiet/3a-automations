@@ -75,8 +75,17 @@ export function AdminSidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem("auth_token");
+  const handleLogout = async () => {
+    try {
+      // Call logout API to clear httpOnly cookie
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch {
+      // Continue with client cleanup even if API fails
+    }
+    // Clear client-side user data
     localStorage.removeItem("user");
     window.location.href = "/login";
   };
