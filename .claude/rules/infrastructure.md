@@ -15,12 +15,13 @@
 |-----------|-------|------|--------|
 | 3a-website | nginx:alpine | 80 | RUNNING |
 | root-traefik-1 | traefik | 80/443 | RUNNING |
-| root-n8n-1 | n8n | 5678 | RUNNING |
+| root-n8n-1 | n8n | 5678 | RUNNING (Infrastructure only - 0 workflows) |
 
 ## Architecture
 
 ```
-Internet → Traefik (reverse proxy + SSL) → nginx (site) / n8n (workflows)
+Internet → Traefik (reverse proxy + SSL) → nginx (site)
+Note: n8n container runs but has 0 active workflows (all migrated to native scripts)
 ```
 
 ## Déploiement Automatique
