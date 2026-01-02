@@ -21,7 +21,7 @@
 |-----|-------|------------|-----|
 | apify | MCP package bug | Token WORKS via API (STARTER $39/mo ACTIVE), MCP fails | Use direct API calls (Apify tools available) |
 | google-analytics | Permissions | SA not added as user to GA4 property 471058655 | Add `id-a-automation-service@a-automation-agency.iam.gserviceaccount.com` to GA4 |
-| google-sheets | Permissions | Sheets not shared with SA | Share specific sheets with SA email |
+| google-sheets | MCP package bug | API WORKS (Sheet accessible: "3A-Dashboard-Database", 5 sheets), MCP fails with "Dynamic require of fs" error | Use direct googleapis calls in scripts |
 
 ## Not Configured (1)
 
