@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUserByEmail, updateUserLastLogin } from "@/lib/google-sheets";
 import { comparePassword, generateToken, setAuthCookie } from "@/lib/auth";
+import { checkRateLimit, getClientIP, RateLimitPresets } from "@/lib/rate-limit";
 
 // Fallback admin user for when Google Sheets is not configured
 // Password: Admin3A2025 (bcrypt hash)
@@ -15,6 +16,26 @@ const FALLBACK_ADMIN = {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting: 5 login attempts per minute per IP
+    const clientIP = getClientIP(request);
+    const rateLimit = checkRateLimit(clientIP, RateLimitPresets.login);
+
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        {
+          error: "Trop de tentatives. Reessayez dans " + rateLimit.retryAfter + " secondes.",
+        },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(rateLimit.retryAfter),
+            "X-RateLimit-Remaining": "0",
+            "X-RateLimit-Reset": String(rateLimit.resetAt),
+          },
+        }
+      );
+    }
+
     const { email, password } = await request.json();
 
     if (!email || !password) {

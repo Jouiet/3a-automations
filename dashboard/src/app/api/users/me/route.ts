@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthUser, getAuthUserFromCookie } from "@/lib/auth";
 import { getUserByEmail } from "@/lib/google-sheets";
+import { checkRateLimit, getClientIP, RateLimitPresets } from "@/lib/rate-limit";
 
 // Fallback admin user data (matches login route)
 const FALLBACK_ADMIN = {
@@ -23,6 +24,23 @@ const FALLBACK_ADMIN = {
 
 export async function GET(request: NextRequest) {
   try {
+    // Rate limiting: 60 requests per minute per IP
+    const clientIP = getClientIP(request);
+    const rateLimit = checkRateLimit(clientIP, RateLimitPresets.api);
+
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        { error: "Trop de requetes. Reessayez plus tard." },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(rateLimit.retryAfter),
+            "X-RateLimit-Remaining": "0",
+          },
+        }
+      );
+    }
+
     // Try cookie auth first (preferred), then header (backwards compatibility)
     let authUser = await getAuthUserFromCookie();
     if (!authUser) {
@@ -86,6 +104,23 @@ export async function GET(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   try {
+    // Rate limiting: 60 requests per minute per IP
+    const clientIP = getClientIP(request);
+    const rateLimit = checkRateLimit(clientIP, RateLimitPresets.api);
+
+    if (!rateLimit.success) {
+      return NextResponse.json(
+        { error: "Trop de requetes. Reessayez plus tard." },
+        {
+          status: 429,
+          headers: {
+            "Retry-After": String(rateLimit.retryAfter),
+            "X-RateLimit-Remaining": "0",
+          },
+        }
+      );
+    }
+
     // Try cookie auth first (preferred), then header (backwards compatibility)
     let authUser = await getAuthUserFromCookie();
     if (!authUser) {
