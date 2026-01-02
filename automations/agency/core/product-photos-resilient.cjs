@@ -66,7 +66,7 @@ const PROVIDERS = {
   },
   grok: {
     name: 'Grok Image',
-    // grok-2-image-1212 supports image generation (verified Dec 2025)
+    // grok-2-image-1212 is FRONTIER for image generation (no grok-4-image exists, verified Jan 2026)
     url: 'https://api.x.ai/v1/images/generations',
     model: 'grok-2-image-1212',
     apiKey: ENV.XAI_API_KEY,
@@ -110,7 +110,7 @@ const VISION_PROVIDERS = {
   },
   grok: {
     name: 'Grok 2 Vision',
-    // grok-2-vision-1212 has vision capability (Dec 2025)
+    // grok-2-vision-1212 is FRONTIER for vision (no grok-4-vision exists, verified Jan 2026)
     url: 'https://api.x.ai/v1/chat/completions',
     model: 'grok-2-vision-1212',
     apiKey: ENV.XAI_API_KEY,
