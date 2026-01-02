@@ -317,24 +317,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, observerOptions);
 
-  // Observe various elements for fade-in animation (grouped by section for faster perceived load)
-  const animatedGroups = [
-    '.service-card-ultra',
-    '.flywheel-stage',
-    '.process-step-ultra',
-    '.tech-item',
-    '.feature-card',
-    '.flow-card'
-  ];
-
-  animatedGroups.forEach(selector => {
-    document.querySelectorAll(selector).forEach((el, index) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = `opacity 0.5s ease ${index * 0.08}s, transform 0.5s ease ${index * 0.08}s`;
-      fadeInObserver.observe(el);
-    });
-  });
+  // ───────────────────────────────────────────────────────────────────────────
+  // FADE-IN ANIMATION - DISABLED to fix CLS=1.0
+  // This code was setting opacity:0 and transform on elements AFTER they render,
+  // causing Cumulative Layout Shift. Lighthouse measures initial visible → hidden as CLS.
+  // To re-enable: add opacity:0 and transform to elements in CSS (before paint).
+  // ───────────────────────────────────────────────────────────────────────────
 
   // ───────────────────────────────────────────────────────────────────────────
   // STAT COUNTER ANIMATION
