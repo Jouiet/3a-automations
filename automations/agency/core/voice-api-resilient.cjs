@@ -65,9 +65,9 @@ const PROVIDERS = {
     enabled: !!ENV.XAI_API_KEY,
   },
   gemini: {
-    name: 'Gemini 2.5 Flash',
-    // gemini-2.5-flash: best price/performance for text (Dec 2025)
-    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
+    name: 'Gemini 3 Flash',
+    // gemini-3-flash-preview: latest frontier model (Jan 2026)
+    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
     apiKey: ENV.GEMINI_API_KEY,
     enabled: !!ENV.GEMINI_API_KEY,
   },

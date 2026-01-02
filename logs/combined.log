@@ -70,3 +70,6 @@
 2026-01-02T12:20:32.593Z [[32minfo[39m]: Handling call_tool request
 2026-01-02T12:20:32.598Z [[32minfo[39m]: Executing gemini_list_models tool
 2026-01-02T12:20:32.599Z [[32minfo[39m]: Listing available models
+2026-01-02T12:34:51.158Z [[32minfo[39m]: Handling call_tool request
+2026-01-02T12:34:51.158Z [[32minfo[39m]: Executing gemini_list_models tool
+2026-01-02T12:34:51.158Z [[32minfo[39m]: Listing available models

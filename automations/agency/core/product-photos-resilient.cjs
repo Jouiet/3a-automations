@@ -89,13 +89,13 @@ const PROVIDERS = {
   }
 };
 
-// VISION ANALYSIS PROVIDERS - Verified December 2025
+// VISION ANALYSIS PROVIDERS - Verified January 2026
 // All models below have verified vision/image understanding capabilities
 const VISION_PROVIDERS = {
   gemini: {
-    name: 'Gemini 2.5 Flash Vision',
-    // gemini-2.5-flash has vision capability (Dec 2025)
-    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
+    name: 'Gemini 3 Flash Vision',
+    // gemini-3-flash-preview has vision capability (Jan 2026)
+    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
     apiKey: ENV.GEMINI_API_KEY,
     enabled: !!ENV.GEMINI_API_KEY
   },
