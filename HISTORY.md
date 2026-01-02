@@ -1,5 +1,29 @@
 # HISTORY - Changelog 3A Automation
 
+## Session 122 (02/01/2026) - FORENSIC AUDIT + CRITICAL SECURITY
+
+| Session | Modifications |
+|---------|---------------|
+| **122** | **🚨 CRITICAL SECURITY VULNERABILITY DISCOVERED**: `dashboard/docker-compose.production.yml` exposes secrets in PUBLIC GitHub repo. **CVSS 9.8**: JWT_SECRET (line 32), N8N_API_KEY (line 35), GOOGLE_SHEETS_ID (line 30). **IMPACT**: Session hijacking, authentication bypass, n8n workflow control, data exposure. **CODE IS SECURE**: auth.ts correctly validates JWT_SECRET at runtime - problem is SECRET VALUE in public repo. **FORENSIC AUDIT SCORES**: SEO Technical 96%, AEO/GEO 95%, Security Frontend 92%, **Security Backend 45% (CRITICAL)**, Marketing Claims 88%, i18n 94%, Accessibility 85%, Design/UX 91%, **OVERALL 89%**. **FIXES APPLIED**: EN investor page 86→88 (6 instances), SWOT analysis generated (outputs/FORENSIC-AUDIT-SWOT-2026-01-02.md). **IMMEDIATE HUMAN ACTIONS REQUIRED**: (1) Rotate JWT_SECRET on VPS, (2) Revoke N8N_API_KEY, (3) Move secrets to Docker secrets, (4) git filter-branch to purge history. **DOCUMENTATION UPDATED**: CLAUDE.md v29.0, 01-project-status.md, SESSION-104-DEEP-AUDIT-FINAL.md, HISTORY.md. |
+
+## Session 121 (02/01/2026) - PODCAST GENERATOR RESILIENT
+
+| Session | Modifications |
+|---------|---------------|
+| **121** | **PODCAST GENERATOR v1.0.0**: `podcast-generator-resilient.cjs` created (~800 lines). **SUPERIOR TO NOTEBOOKLM**: Customizable voices (ElevenLabs/Gemini/fal.ai vs 2 generic), REST+CLI API (vs none), unlimited duration (vs 30min), editable JSON script (vs none), client branding (vs none), multi-provider fallback (vs none). **FALLBACK CHAINS**: Script gen: Anthropic→OpenAI→Grok→Gemini. Audio TTS: ElevenLabs→Gemini TTS→fal.ai MiniMax. **REGISTRY v2.3.0**: 89 automations (+1), 6 resilient scripts (+1), content category 10 (+1). |
+
+## Session 120 (02/01/2026) - OPENAI FALLBACK + FRONTEND CRM
+
+| Session | Modifications |
+|---------|---------------|
+| **120** | **OPENAI GPT-5.2 ADDED**: All 6 resilient scripts now have 4 AI providers (Anthropic→OpenAI→Grok→Gemini). Market leader integration (68-82% share). **n8n CLEANUP**: 8 workflow JSONs + 5 scripts archived. n8n container = backup only, 0 active workflows. **CRM CARDS ADDED**: HubSpot B2B + Omnisend E-commerce cards added to automations.html (FR+EN) - were in registry but NOT displayed on frontend. **GA4 VERIFIED**: Property 516832662 working (37 users/7d). Commit `5c80645`. |
+
+## Session 119 (02/01/2026) - CRM SCRIPTS v1.1.0
+
+| Session | Modifications |
+|---------|---------------|
+| **119** | **HUBSPOT B2B CRM v1.1.0**: Batch operations (100/call), exponential backoff (5 retries), rate limit monitoring, jitter (500ms). Contacts/Companies/Deals CRUD + batch. **OMNISEND B2C v1.1.0**: Event deduplication (eventID+eventTime), Carts API (abandoned cart), backoff, jitter. Contacts/Events/Products/Carts CRUD. **REGISTRY v2.2.0**: 88 automations (+2), llms.txt v5.1.0 with CRM section. **LAST n8n WORKFLOW REPLACED**: voice-telephony-bridge.cjs now handles Twilio↔Grok WebSocket directly. **FINAL n8n STATUS**: 0 workflows (all 5 replaced by native scripts). MCP n8n SUPPRIMÉ. |
+
 ## Session 118 (31/12/2025) - SYSTEM VERIFICATION
 
 | Session | Modifications |
