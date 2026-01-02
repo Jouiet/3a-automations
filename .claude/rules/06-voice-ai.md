@@ -22,8 +22,8 @@ VOICE WIDGET v2.0 (UNIFIED):
 │ AUTO-FALLBACK: Premium → Free if proxy unavailable              │
 └─────────────────────────────────────────────────────────────────┘
 
-GROK VOICE TELEPHONY (BLOCKED - Twilio required)
-   └── LiveKit/Dial.Plus integration
+GROK VOICE TELEPHONY (Script: voice-telephony-bridge.cjs port 3009)
+   └── Twilio PSTN ↔ Grok WebSocket (awaiting Twilio credentials)
 ```
 
 ## grok-voice-realtime.cjs v2.0 - RESILIENT (Session 115)
@@ -125,13 +125,13 @@ Text Generation: Grok 3 Mini → Gemini 2.5 Flash → Claude Sonnet 4 → Local 
 Audio Output: Browser Web Speech API (free)
 ```
 
-## Grok Voice Telephony (BLOCKED)
+## Grok Voice Telephony (Script Native)
 
-- **Blocker:** Twilio credentials missing
-- **n8n workflow:** Deployed but non-functional
+- **Script:** voice-telephony-bridge.cjs (port 3009)
+- **Status:** Awaiting Twilio credentials (TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 - **xAI API:** Tested OK
 - **Dial.Plus:** +1 775 254 7428 (internal use only)
-- **LiveKit:** Requires LiveKit Cloud setup
+- **Architecture:** Twilio PSTN ↔ WebSocket ↔ Grok Realtime
 
 ## TTS Fallback Options
 
@@ -146,7 +146,8 @@ Audio Output: Browser Web Speech API (free)
 ```
 automations/agency/core/
 ├── grok-voice-realtime.cjs     # WebSocket proxy server (port 3007)
-└── voice-api-resilient.cjs     # Text generation fallback (port 3004)
+├── voice-api-resilient.cjs     # Text generation fallback (port 3004)
+└── voice-telephony-bridge.cjs  # Twilio PSTN ↔ Grok (port 3009)
 
 landing-page-hostinger/voice-assistant/
 ├── voice-widget.js             # Widget v2.0 avec Realtime intégré

@@ -551,9 +551,9 @@
       "description_en": "Generates SEO article via Claude AI and publishes simultaneously to website + Facebook + LinkedIn"
     },
     {
-      "id": "n8n-workflow",
-      "name_fr": "Workflow n8n Complet",
-      "name_en": "Complete n8n Workflow",
+      "id": "nodejs-script",
+      "name_fr": "Script Node.js Complet",
+      "name_en": "Complete Node.js script",
       "category": "content",
       "frequency_fr": "Personnalisé",
       "frequency_en": "Custom",

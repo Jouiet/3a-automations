@@ -15,7 +15,7 @@ const KNOWLEDGE_BASE = {
   identity: {
     name: '3A Automation',
     meaning: 'Automation, Analytics, AI',
-    expertise: ['Email Marketing Klaviyo', 'E-commerce Shopify', 'Analytics GA4', 'Workflows n8n'],
+    expertise: ['Email Marketing Klaviyo', 'E-commerce Shopify', 'Analytics GA4', 'Automatisations Node.js'],
     target: 'PME et e-commerce (€10k-500k/mois CA)',
     differentiator: 'Agence spécialisée automation - relation directe avec experts, prix justes'
   },
@@ -160,7 +160,7 @@ const KNOWLEDGE_BASE = {
   faq: {
     delai: 'Les packs Setup sont livrés en 1-3 semaines selon complexité. L\'audit gratuit est envoyé sous 24-48h.',
     garantie: 'Si les automatisations ne fonctionnent pas comme prévu, nous corrigeons jusqu\'à satisfaction. Pas de limite de révisions.',
-    outils: 'Nous travaillons principalement avec Klaviyo, Shopify, GA4, n8n, Google Sheets. Nous nous adaptons à vos outils existants.',
+    outils: 'Nous travaillons principalement avec Klaviyo, Shopify, GA4, Google Sheets. Nous nous adaptons à vos outils existants.',
     difference: 'Équipe spécialisée = pas de commercial, pas de junior, vous travaillez directement avec les experts. Prix justes, transparents.',
     engagement: 'Les packs Setup sont one-time, pas d\'engagement. Les abonnements sont au mois, résiliables à tout moment.',
     taille: 'Nous travaillons avec des PME de €10k à €500k/mois de CA. En dessous, l\'audit gratuit peut déjà beaucoup aider.',
