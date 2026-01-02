@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 25.0 | Date: 2025-12-31 | Session: 118 (DEPLOYED)
+## Version: 26.0 | Date: 2026-01-02 | Session: 119 (n8n→SCRIPTS COMPLETE)
 
 ---
 
@@ -204,7 +204,7 @@ scripts/
 
 | Métrique | Valeur | Changement |
 |----------|--------|------------|
-| n8n Workflows | **1 restant** | -4 (remplacés par scripts supérieurs) |
+| n8n Workflows | **0** | -5 (TOUS remplacés par scripts natifs) |
 | Scripts résilients | **8 fichiers** | +2 nouveaux |
 | Social Distribution | **3 plateformes** | +1 (X/Twitter OAuth 1.0a) |
 | WhatsApp | Script natif avec fallback | Awaiting credentials |
@@ -231,23 +231,23 @@ AVANTAGES FACTUELS vs n8n:
 - Health checks standardisés
 ```
 
-### n8n ÉTAT FINAL
+### n8n ÉTAT FINAL (Session 119)
 
-| Avant Session 115 | Après Session 115 |
+| Avant Session 115 | Après Session 119 |
 |-------------------|-------------------|
-| 5 workflows | **1 workflow** |
-| 2 fonctionnels | 0 fonctionnel |
-| 3 bloqués | 1 bloqué (Twilio) |
+| 5 workflows | **0 workflows** |
+| 2 fonctionnels | N/A |
+| 3 bloqués | N/A |
 
 ```
-SUPPRIMÉS (scripts natifs SUPÉRIEURS):
+TOUS REMPLACÉS PAR SCRIPTS NATIFS:
 - Blog Article Generator → blog-generator-resilient.cjs (+2 AI providers)
 - Enhance Product Photos → product-photos-resilient.cjs (+fallback chain)
 - WhatsApp Confirmation → whatsapp-booking-notifications.cjs (+CLI)
 - WhatsApp Reminders → whatsapp-booking-notifications.cjs (+dedup)
+- Grok Voice Telephony → voice-telephony-bridge.cjs (WebSocket direct)
 
-RESTANT:
-- Grok Voice Telephony (⛔ Twilio - credentials externes)
+MCP n8n: SUPPRIMÉ (Session 119)
 ```
 
 ### SOCIAL DISTRIBUTION (3 plateformes)
@@ -281,7 +281,7 @@ Modular rules in `.claude/rules/`:
 |------|---------|
 | `01-project-status.md` | État actuel, blockers |
 | `02-pricing.md` | MAD/EUR/USD |
-| `07-n8n-workflows.md` | 1 workflow restant |
+| `07-native-scripts.md` | 8 scripts résilients (0 n8n) |
 | `code-standards.md` | CommonJS (.cjs) |
 | `factuality.md` | Vérification empirique |
 

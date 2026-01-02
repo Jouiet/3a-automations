@@ -98,11 +98,11 @@ Alternatives Compatibles:
 ├── SignalWire (programmabilité profonde)
 └── Bandwidth (carrier ownership, 911)
 
-Workflow n8n Prêt:
-├── Fichier: automations/agency/n8n-workflows/grok-voice-telephony.json
-├── Webhooks: /voice/inbound, /voice/stream, /voice/booking-complete
+Script Natif Prêt (Session 119):
+├── Fichier: automations/agency/core/voice-telephony-bridge.cjs
+├── Endpoints: /voice/inbound, /voice/stream, /voice/booking-complete
 ├── Intégration: Google Calendar + WhatsApp confirmation
-└── Status: Non déployé (carrier manquant)
+└── Status: Ready (awaiting Twilio credentials)
 ```
 
 ---
@@ -182,7 +182,7 @@ Option A: Setup Dial.Plus (No-Code)
 
 Option B: Grok Voice + Telnyx (Full Control)
 ├── Acheter numéro Telnyx pour le client
-├── Déployer workflow n8n grok-voice-telephony.json
+├── Déployer script natif voice-telephony-bridge.cjs
 ├── Knowledge base sur-mesure
 ├── White-label complet
 ├── Prix suggéré: Pack Growth (1399€)
@@ -198,7 +198,7 @@ Option B: Grok Voice + Telnyx (Full Control)
 | 1 | Uploader knowledge base sur Dial.Plus | P0 | ✅ FAIT |
 | 2 | Tester appels entrants Dial.Plus | P0 | 🔄 À TESTER |
 | 3 | Créer compte Telnyx (alternative Twilio) | P1 | ⏳ Pending |
-| 4 | Configurer workflow n8n avec Telnyx | P1 | ⏳ Pending |
+| 4 | Configurer script natif avec Telnyx | P1 | ✅ FAIT (voice-telephony-bridge.cjs) |
 | 5 | Tester appel Grok Voice end-to-end | P1 | ⏳ Pending |
 | 6 | Documenter procédure setup client | P2 | ⏳ Pending |
 

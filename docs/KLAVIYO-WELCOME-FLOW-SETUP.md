@@ -8,7 +8,9 @@
 
 ## Contexte
 
-Le workflow n8n `Klaviyo Welcome Series` crée des profils et déclenche l'événement `welcome_series_started` dans Klaviyo. Cependant, **aucun flow Klaviyo n'existe** pour réagir à cet événement et envoyer les emails.
+Le script natif `email-personalization-resilient.cjs` crée des profils et déclenche l'événement `welcome_series_started` dans Klaviyo. Cependant, **aucun flow Klaviyo n'existe** pour réagir à cet événement et envoyer les emails.
+
+> **NOTE (Session 119):** Les workflows n8n ont été migrés vers des scripts natifs dans `automations/agency/core/`.
 
 Ce guide explique comment créer ce flow manuellement.
 
@@ -246,13 +248,23 @@ L'équipe 3A Automation
 ## Étape 7: Tester
 
 ```bash
-# Déclencher un test via n8n webhook
-curl -X POST "https://n8n.srv1168256.hstgr.cloud/webhook/subscribe/new" \
+# Option 1: Via script natif (recommandé)
+node automations/agency/core/email-personalization-resilient.cjs \
+  --test --email="test-flow@votreemail.com" --name="TestFlow"
+
+# Option 2: Via API directe Klaviyo
+curl -X POST "https://a.klaviyo.com/api/events/" \
+  -H "Authorization: Klaviyo-API-Key $KLAVIYO_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "test-flow@votreemail.com",
-    "first_name": "TestFlow",
-    "source": "klaviyo-test"
+    "data": {
+      "type": "event",
+      "attributes": {
+        "properties": {},
+        "metric": {"data": {"type": "metric", "attributes": {"name": "welcome_series_started"}}},
+        "profile": {"data": {"type": "profile", "attributes": {"email": "test-flow@votreemail.com", "first_name": "TestFlow"}}}
+      }
+    }
   }'
 ```
 
@@ -276,8 +288,9 @@ Puis vérifier:
 - Vérifier la configuration DKIM/SPF du domaine
 
 ### L'event n'apparaît pas
-- Vérifier la réponse du webhook n8n (doit inclure `event_triggered: true`)
-- Vérifier les logs n8n pour erreurs API Klaviyo
+- Vérifier la réponse du script natif (doit inclure `success: true`)
+- Vérifier les logs du script (`--verbose` flag pour debug)
+- Vérifier la clé API Klaviyo dans `.env`
 
 ---
 

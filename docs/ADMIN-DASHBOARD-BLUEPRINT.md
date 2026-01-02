@@ -26,7 +26,7 @@ BACKEND:
 └── Storage: Cloudflare R2
 
 INTEGRATIONS:
-├── n8n: Workflow orchestration
+├── Native Scripts: 8 resilient automations (automations/agency/core/)
 ├── Apify: Web scraping
 ├── Klaviyo: Email marketing
 ├── GA4: Analytics
@@ -73,7 +73,7 @@ FONCTIONNALITES:
 
 STATUTS:
 ├── New → Contacted → Qualified → Proposal → Won/Lost
-└── Auto-progression via n8n workflows
+└── Auto-progression via native scripts (automations/agency/core/)
 
 DATA MODEL:
 Lead {
@@ -153,7 +153,7 @@ CLIENT ACCESS:
         └─────────────────────┼─────────────────────┘
                               ▼
                     ┌─────────────────────┐
-                    │   n8n ENRICHMENT    │
+                    │  NATIVE ENRICHMENT  │
                     │   + AI SCORING      │
                     └─────────────────────┘
                               │
@@ -223,7 +223,10 @@ Day 14: Final follow-up
 
 ---
 
-## IMPLEMENTATION STATUS (Updated Session 102 - 27/12/2025)
+## IMPLEMENTATION STATUS (Updated Session 119 - 02/01/2026)
+
+> **NOTE:** n8n workflows mentioned below have ALL been migrated to native Node.js scripts in Session 115-119.
+> See `automations/agency/core/` for the 8 resilient scripts that replaced n8n.
 
 ### Phase 1: MVP ✅ COMPLETE (Session 86-88)
 ```
@@ -260,7 +263,7 @@ ORIGINAL PLAN → ACTUAL IMPLEMENTATION
 ├── Vercel → Hostinger VPS (PM2)
 ├── Supabase → Google Sheets (Apps Script CRUD)
 ├── NextAuth → JWT + bcrypt (simple auth)
-└── Apify direct → n8n orchestration
+└── Apify direct → Native scripts (8 resilient .cjs)
 ```
 
 ---
@@ -269,9 +272,9 @@ ORIGINAL PLAN → ACTUAL IMPLEMENTATION
 
 | Service | Plan | Cout/mois |
 |---------|------|-----------|
-| Hostinger VPS | KVM1 | ~$5 (inclus site + n8n + dashboard) |
+| Hostinger VPS | KVM1 | ~$5 (inclus site + scripts + dashboard) |
 | Google Sheets | Free | $0 |
-| n8n (self-hosted) | Free | $0 |
+| Native Scripts | Self-hosted | $0 |
 | Klaviyo | Starter | $45 |
 | Apify | Starter | $49 |
 | **TOTAL** | | **~$99/mois** |
