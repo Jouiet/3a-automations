@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 118 - 31/12/2025)
+## Current State (Session 119 - 02/01/2026)
 
 | Metric | Value |
 |--------|-------|
@@ -10,16 +10,53 @@
 | Investor Pages | ✅ Created (FR + EN) with FAQPage + BreadcrumbList |
 | Automations | **86** (Registry v2.1.1 - counts fixed) |
 | Scripts résilients | **8 fichiers (core/)** - All P0-P1-P2 secured |
-| n8n Workflows | **1 restant** (Twilio blocked) |
-| SEO Score | **96%** |
+| n8n Workflows | **0 restant** (all replaced by native scripts) |
+| SEO Score | **100%** (all meta tags, OG, Twitter) |
 | AEO Score | **95%** |
-| FAQPage Schema | **29/35 indexable (83%)** |
+| FAQPage Schema | **31/41 indexable (76%)** |
+| Security Headers | **CONFIGURED** (HSTS, CSP, X-Frame-Options) |
 | Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
-| SSL | **Let's Encrypt (77 days) + HSTS** |
+| SSL | **Let's Encrypt + HSTS preload** |
 | Infrastructure | 4 Docker containers RUNNING |
 | llms.txt | **v5.0** with investor section |
 | Voice Widget Templates | **8 industries** (4h→30min deployment) |
 | **INVESTOR-READY** | ✅ VERIFIED |
+
+## SESSION 119 - FORENSIC AUDIT COMPLETE (02/01/2026)
+
+### P0 Security Fixes (CRITICAL)
+
+| Fix | Status | Details |
+|-----|--------|---------|
+| Traefik Security Headers | ✅ DONE | HSTS 31536000s, frameDeny, contentTypeNosniff |
+| JWT Secret Hardcode | ✅ FIXED | auth.ts now throws if JWT_SECRET not set |
+| CSP Dashboard | ✅ DONE | Full CSP with allowed origins |
+
+### P1 SEO/AEO Fixes
+
+| Fix | Status | Details |
+|-----|--------|---------|
+| Meta robots | ✅ 100% | 14 pages fixed (78% → 100%) |
+| og:image | ✅ 100% | Academy pages fixed (97% → 100%) |
+| Twitter cards | ✅ 100% | Academy pages fixed (97% → 100%) |
+| hreflang x-default | ✅ 100% | Academy pages fixed |
+| FAQPage booking | ✅ DONE | FR + EN booking pages |
+
+### Audit Results After Fixes
+
+| Metric | Before | After |
+|--------|--------|-------|
+| metaRobots | 78% | **100%** |
+| ogImage | 97% | **100%** |
+| twitterCard | 97% | **100%** |
+| Passed checks | 41 | **47** |
+
+### Commit
+```
+5d534f7 fix(forensic-audit): Complete security + SEO fixes for 100% compliance
+```
+
+---
 
 ## SESSION 118 - FOOTER + SOCIAL ICONS (31/12/2025)
 
