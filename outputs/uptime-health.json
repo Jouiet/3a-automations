@@ -39,11 +39,21 @@
         "unhealthy": 0,
         "critical": 0
       }
+    },
+    {
+      "timestamp": "2026-01-02T12:31:11.019Z",
+      "overall": true,
+      "summary": {
+        "total": 5,
+        "healthy": 5,
+        "unhealthy": 0,
+        "critical": 0
+      }
     }
   ],
-  "lastUpdate": "2026-01-02T12:19:06.182Z",
+  "lastUpdate": "2026-01-02T12:31:11.019Z",
   "lastResults": {
-    "timestamp": "2026-01-02T12:19:06.182Z",
+    "timestamp": "2026-01-02T12:31:11.019Z",
     "overall": true,
     "criticalHealthy": true,
     "endpoints": [
@@ -54,9 +64,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 361,
+        "responseTime": 447,
         "critical": true,
-        "timestamp": "2026-01-02T12:19:05.372Z",
+        "timestamp": "2026-01-02T12:31:10.840Z",
         "error": null
       },
       {
@@ -66,9 +76,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 297,
+        "responseTime": 256,
         "critical": true,
-        "timestamp": "2026-01-02T12:19:05.389Z",
+        "timestamp": "2026-01-02T12:31:10.738Z",
         "error": null
       },
       {
@@ -78,9 +88,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 296,
+        "responseTime": 258,
         "critical": true,
-        "timestamp": "2026-01-02T12:19:05.389Z",
+        "timestamp": "2026-01-02T12:31:10.742Z",
         "error": null
       },
       {
@@ -93,9 +103,9 @@
           200,
           504
         ],
-        "responseTime": 1087,
+        "responseTime": 532,
         "critical": false,
-        "timestamp": "2026-01-02T12:19:06.182Z",
+        "timestamp": "2026-01-02T12:31:11.018Z",
         "error": null
       },
       {
@@ -108,9 +118,9 @@
           302,
           404
         ],
-        "responseTime": 383,
+        "responseTime": 470,
         "critical": false,
-        "timestamp": "2026-01-02T12:19:05.480Z",
+        "timestamp": "2026-01-02T12:31:10.960Z",
         "error": null
       }
     ],

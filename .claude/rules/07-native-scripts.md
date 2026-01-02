@@ -109,15 +109,15 @@ ACTUEL (EN PRODUCTION):
 
 **Comparaison détaillée:** `outputs/COMPARISON-N8N-VS-NATIVE-2026-01-01.md`
 
-### Scripts Natifs RÉSILIENTS (Multi-Provider Fallback) - Vérifié Dec 2025
+### Scripts Natifs RÉSILIENTS (Multi-Provider Fallback) - Vérifié Jan 2026
 
 | Script | Usage | Fallback Chain (modèles vérifiés) | Port |
 |--------|-------|-----------------------------------|------|
-| blog-generator-resilient.cjs | TEXT + SOCIAL | Anthropic→Grok 3→Gemini 2.5 + FB/LinkedIn/X | 3003 |
-| voice-api-resilient.cjs | TEXT (pas audio!) | Grok 3 Mini→Gemini 2.5 Flash→Claude Sonnet 4→Local | 3004 |
+| blog-generator-resilient.cjs | TEXT + SOCIAL | Anthropic→Grok 3→Gemini 3 + FB/LinkedIn/X | 3003 |
+| voice-api-resilient.cjs | TEXT (pas audio!) | Grok 3 Mini→Gemini 3 Flash→Claude Sonnet 4→Local | 3004 |
 | product-photos-resilient.cjs | IMAGE GEN | Gemini 2.5 Flash Image→Grok Image→fal.ai→Replicate | 3005 |
-| product-photos-resilient.cjs | VISION | Gemini 2.5 Flash→Grok 2 Vision→Claude Sonnet 4 | 3005 |
-| email-personalization-resilient.cjs | TEXT | Grok 3 Mini→Gemini 2.5 Flash→Claude Sonnet 4→Static | 3006 |
+| product-photos-resilient.cjs | VISION | Gemini 3 Flash→Grok 2 Vision→Claude Sonnet 4 | 3005 |
+| email-personalization-resilient.cjs | TEXT | Grok 3 Mini→Gemini 3 Flash→Claude Sonnet 4→Static | 3006 |
 | grok-voice-realtime.cjs | AUDIO WebSocket | Grok Realtime→Gemini 2.5 Flash TTS | 3007 |
 | whatsapp-booking-notifications.cjs | WHATSAPP | WhatsApp Cloud API (Meta) | 3008 |
 | voice-telephony-bridge.cjs | TELEPHONY | Twilio PSTN ↔ Grok WebSocket | 3009 |
