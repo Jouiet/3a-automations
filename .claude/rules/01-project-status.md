@@ -28,11 +28,18 @@
 
 | Component | Tests | Result |
 |-----------|-------|--------|
-| APIs (forensic-api-test.cjs) | 5 endpoints | 4/5 OK (n8n needs header) |
-| MCPs | 8 tested | 7/8 OK (Apify token invalid) |
+| Shopify API | ✅ | 744ms, guqsu3-yj.myshopify.com |
+| Klaviyo API | ✅ | 448ms, 10 lists |
+| xAI/Grok API | ✅ | 385ms, 11 models |
+| Google SA | ✅ | a-automation-agency project |
+| Apify API | ✅ | STARTER $39/mo ACTIVE (MCP bug, API works) |
+| MCPs | 10/13 | 3 need permissions config |
 | Docker Projects | 4 | 6 containers RUNNING |
-| VPS 1168256 | Health check | ✅ Ubuntu 24.04, 8GB RAM |
+| VPS 1168256 | ✅ | Ubuntu 24.04, 8GB RAM |
 | Automations Registry | v2.1.1 | 86=86=86 ✅ |
+| Native Scripts | 8 core/ | ALL with fallback chains |
+
+**Note:** n8n server runs as infrastructure only. 0 workflows - ALL replaced by native scripts.
 
 ### P0 Security Fixes (CRITICAL)
 
@@ -375,12 +382,13 @@ All P2 items completed Session 117ter.
 | Klaviyo | ✅ | 448ms | 10 lists verified |
 | xAI/Grok | ✅ | 385ms | 11 models (grok-4-0709, grok-3, etc.) |
 | Google SA | ✅ | - | a-automation-agency project |
-| n8n | ⚠️ | 366ms | Requires X-N8N-API-KEY header |
 | Gemini | ✅ | - | TTS fallback testé |
-| Apify | ✅ | - | STARTER $39/mo |
+| Apify | ✅ | - | STARTER $39/mo ACTIVE |
 | GitHub | ✅ | - | OK |
 | Hostinger | ✅ | - | VPS 1168256 running |
 | Meta/WhatsApp | ⏳ | - | Awaiting credentials |
+
+**n8n note:** Server running as infrastructure (Traefik reverse proxy uses it). 0 workflows - all replaced by native scripts.
 
 ## MCPs Health (Verified 02/01/2026)
 
@@ -393,7 +401,10 @@ All P2 items completed Session 117ter.
 | Chrome DevTools | ✅ | Browser automation OK |
 | Playwright | ✅ | Browser tabs OK |
 | Filesystem | ✅ | File operations OK |
-| Apify | ❌ | Token needs reconfiguration |
+| Shopify-Dev | ✅ | Schema introspection OK |
+| Apify | ⚠️ | MCP package bug (API works, STARTER $39/mo ACTIVE) |
+| Google Analytics | ⚠️ | SA needs GA4 property access |
+| Google Sheets | ⚠️ | SA needs sheet sharing |
 
 ## Docker Infrastructure (Verified 02/01/2026)
 

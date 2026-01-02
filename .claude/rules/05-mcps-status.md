@@ -15,13 +15,13 @@
 | claude-mcp | ✅ OK | built-in |
 | shopify | ✅ OK | guqsu3-yj.myshopify.com |
 
-## Needs Configuration (3)
+## Needs Configuration (3) - ROOT CAUSE VERIFIED 02/01/2026
 
-| MCP | Issue | Fix |
-|-----|-------|-----|
-| google-analytics | SA not added | Add to GA4 property |
-| google-sheets | Not shared | Share with SA |
-| apify | ❌ Token invalid | Regenerate token at apify.com |
+| MCP | Issue | Root Cause | Fix |
+|-----|-------|------------|-----|
+| apify | MCP package bug | Token WORKS via API (STARTER $39/mo ACTIVE), MCP fails | Use direct API calls (Apify tools available) |
+| google-analytics | Permissions | SA not added as user to GA4 property 471058655 | Add `id-a-automation-service@a-automation-agency.iam.gserviceaccount.com` to GA4 |
+| google-sheets | Permissions | Sheets not shared with SA | Share specific sheets with SA email |
 
 ## Not Configured (1)
 
