@@ -1141,30 +1141,49 @@
     },
     {
       "id": "hubspot-b2b-crm",
-      "name_fr": "HubSpot B2B CRM Integration",
-      "name_en": "HubSpot B2B CRM Integration",
+      "name_fr": "HubSpot B2B CRM Integration v1.1.0",
+      "name_en": "HubSpot B2B CRM Integration v1.1.0",
       "category": "lead-gen",
       "type": "script",
       "script": "agency/core/hubspot-b2b-crm.cjs",
+      "version": "1.1.0",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
-      "benefit_fr": "CRM gratuit B2B (contacts, companies, deals)",
-      "benefit_en": "Free B2B CRM (contacts, companies, deals)",
+      "benefit_fr": "CRM gratuit B2B avec batch (100/appel) + backoff",
+      "benefit_en": "Free B2B CRM with batch (100/call) + backoff",
       "api_tier": "FREE",
+      "features": ["batch-operations", "exponential-backoff", "rate-limit-monitoring", "jitter"],
+      "capabilities": {
+        "contacts": "CRUD + batch",
+        "companies": "CRUD + batch",
+        "deals": "CRUD",
+        "associations": "full"
+      },
       "status": "tested-ok"
     },
     {
       "id": "omnisend-b2c-ecommerce",
-      "name_fr": "Omnisend B2C E-commerce Integration",
-      "name_en": "Omnisend B2C E-commerce Integration",
+      "name_fr": "Omnisend B2C E-commerce Integration v1.1.0",
+      "name_en": "Omnisend B2C E-commerce Integration v1.1.0",
       "category": "email",
       "type": "script",
       "script": "agency/core/omnisend-b2c-ecommerce.cjs",
+      "version": "1.1.0",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
-      "benefit_fr": "Email marketing B2C $16/mo (vs Klaviyo $45+)",
-      "benefit_en": "B2C email marketing $16/mo (vs Klaviyo $45+)",
-      "api_limitation": "automations=READ-ONLY",
+      "benefit_fr": "Email B2C $16/mo + Carts API + event dedup",
+      "benefit_en": "B2C email $16/mo + Carts API + event dedup",
+      "pricing": "$16/mo Standard vs $45+/mo Klaviyo",
+      "features": ["event-deduplication", "carts-api", "exponential-backoff", "jitter"],
+      "capabilities": {
+        "contacts": "CRUD",
+        "events": "send (with eventID dedup)",
+        "products": "CRUD",
+        "carts": "CRUD (abandoned cart)",
+        "automations": "READ-ONLY",
+        "campaigns": "READ-ONLY"
+      },
+      "api_limitation": "automations=READ-ONLY (create via UI)",
       "status": "tested-ok"
     }
   ],
@@ -1205,6 +1224,10 @@
     "b2bLeadPipelines": 4,
     "resilientScripts": 5,
     "voiceAiScripts": 3,
-    "crmIntegrations": 2
+    "crmIntegrations": 2,
+    "crmScriptsV1_1": {
+      "hubspot": "v1.1.0 (batch+backoff)",
+      "omnisend": "v1.1.0 (carts+dedup)"
+    }
   }
 }

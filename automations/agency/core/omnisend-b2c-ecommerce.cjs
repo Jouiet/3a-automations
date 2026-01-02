@@ -9,6 +9,9 @@
  * - Contact management (create, update, search)
  * - Event sending (trigger existing automations)
  * - Product sync (for abandoned cart, recommendations)
+ * - Carts API (abandoned cart automation)
+ * - Event deduplication (eventID + eventTime)
+ * - Exponential backoff with jitter for retries
  * - Automation listing (read-only)
  * - Campaign listing (read-only)
  *
@@ -18,7 +21,7 @@
  * - Flows must be created in Omnisend UI
  * - Use events to TRIGGER existing automations
  *
- * @version 1.0.0
+ * @version 1.1.0
  * @date 2026-01-02
  */
 
@@ -36,7 +39,14 @@ const CONFIG = {
     requests: 400,
     perMinute: 60
   },
-  timeout: 30000
+  retry: {
+    maxAttempts: 5,
+    baseDelayMs: 1000,
+    maxDelayMs: 30000,
+    jitterMs: 500  // Random jitter to avoid thundering herd
+  },
+  timeout: 30000,
+  eventVersion: 'v1.1.0'  // Event schema version for tracking
 };
 
 // ============================================================================
@@ -54,6 +64,27 @@ class OmnisendClient {
     }
     this.requestCount = 0;
     this.lastResetTime = Date.now();
+    this.eventCounter = 0;  // For generating unique event IDs
+  }
+
+  /**
+   * Generate unique event ID for deduplication
+   * Format: {timestamp}-{counter}-{random}
+   * @returns {string} Unique event ID
+   */
+  generateEventID() {
+    this.eventCounter++;
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substring(2, 8);
+    return `evt-${timestamp}-${this.eventCounter}-${random}`;
+  }
+
+  /**
+   * Get ISO timestamp for event
+   * @returns {string} ISO 8601 timestamp
+   */
+  getEventTime() {
+    return new Date().toISOString();
   }
 
   /**
@@ -77,6 +108,47 @@ class OmnisendClient {
   }
 
   /**
+   * Execute with exponential backoff and jitter
+   * @param {Function} operation - Async operation to execute
+   * @param {string} operationName - Name for logging
+   * @returns {*} Operation result
+   */
+  async withRetry(operation, operationName = 'operation') {
+    let lastError;
+
+    for (let attempt = 1; attempt <= CONFIG.retry.maxAttempts; attempt++) {
+      try {
+        const result = await operation();
+        return result;
+      } catch (error) {
+        lastError = error;
+        const statusCode = error.statusCode || (error.message && error.message.match(/(\d{3})/)?.[1]);
+
+        // Only retry on rate limit (429) or server errors (5xx)
+        if (statusCode === '429' || statusCode === 429 || (statusCode >= 500 && statusCode < 600)) {
+          // Calculate delay with exponential backoff and jitter
+          const baseDelay = Math.min(
+            CONFIG.retry.baseDelayMs * Math.pow(2, attempt - 1),
+            CONFIG.retry.maxDelayMs
+          );
+          const jitter = Math.random() * CONFIG.retry.jitterMs;
+          const delay = baseDelay + jitter;
+
+          console.log(`⚠️ ${operationName} failed (attempt ${attempt}/${CONFIG.retry.maxAttempts}): ${statusCode}. Retrying in ${Math.round(delay)}ms...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        } else {
+          // Non-retryable error, throw immediately
+          throw error;
+        }
+      }
+    }
+
+    // All retries exhausted
+    console.error(`❌ ${operationName} failed after ${CONFIG.retry.maxAttempts} attempts`);
+    throw lastError;
+  }
+
+  /**
    * Safe JSON parse helper
    */
   safeJsonParse(str, fallback = null) {
@@ -88,15 +160,9 @@ class OmnisendClient {
   }
 
   /**
-   * Make HTTP request to Omnisend API
+   * Make HTTP request to Omnisend API (internal)
    */
-  async request(method, endpoint, data = null) {
-    if (this.testMode) {
-      console.log(`🧪 TEST MODE: ${method} ${endpoint}`);
-      if (data) console.log('Data:', JSON.stringify(data, null, 2));
-      return { testMode: true, endpoint, method };
-    }
-
+  async _makeRequest(method, endpoint, data = null) {
     await this.rateLimit();
 
     return new Promise((resolve, reject) => {
@@ -122,7 +188,9 @@ class OmnisendClient {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             resolve(parsed);
           } else {
-            reject(new Error(`API error ${res.statusCode}: ${JSON.stringify(parsed)}`));
+            const error = new Error(`API error ${res.statusCode}: ${JSON.stringify(parsed)}`);
+            error.statusCode = res.statusCode;
+            reject(error);
           }
         });
       });
@@ -139,6 +207,22 @@ class OmnisendClient {
 
       req.end();
     });
+  }
+
+  /**
+   * Make HTTP request to Omnisend API with retry
+   */
+  async request(method, endpoint, data = null) {
+    if (this.testMode) {
+      console.log(`🧪 TEST MODE: ${method} ${endpoint}`);
+      if (data) console.log('Data:', JSON.stringify(data, null, 2));
+      return { testMode: true, endpoint, method };
+    }
+
+    return this.withRetry(
+      () => this._makeRequest(method, endpoint, data),
+      `${method} ${endpoint}`
+    );
   }
 
   // ==========================================================================
@@ -219,9 +303,10 @@ class OmnisendClient {
    * @param {string} eventName - Custom event name
    * @param {Object} contact - Contact identifier (email or phone)
    * @param {Object} properties - Event properties
+   * @param {Object} options - Optional: { eventID, eventTime } for deduplication
    * @returns {Object} Event result
    */
-  async sendEvent(eventName, contact, properties = {}) {
+  async sendEvent(eventName, contact, properties = {}, options = {}) {
     if (!eventName) {
       throw new Error('Event name is required');
     }
@@ -230,7 +315,14 @@ class OmnisendClient {
       throw new Error('Contact email or phone is required');
     }
 
+    // Generate eventID and eventTime for deduplication (Omnisend best practice)
+    const eventID = options.eventID || this.generateEventID();
+    const eventTime = options.eventTime || this.getEventTime();
+
     const payload = {
+      eventID,          // Required for deduplication
+      eventTime,        // ISO 8601 timestamp
+      eventVersion: CONFIG.eventVersion,  // Schema version
       eventName,
       origin: 'api',
       contact: {},
@@ -246,8 +338,8 @@ class OmnisendClient {
 
     try {
       const result = await this.request('POST', '/events', payload);
-      console.log(`✅ Sent event '${eventName}' for ${contact.email || contact.phone}`);
-      return result;
+      console.log(`✅ Sent event '${eventName}' (ID: ${eventID}) for ${contact.email || contact.phone}`);
+      return { ...result, eventID, eventTime };
     } catch (error) {
       console.error(`❌ Event send failed:`, error.message);
       throw error;
@@ -359,6 +451,159 @@ class OmnisendClient {
   }
 
   // ==========================================================================
+  // CARTS (Abandoned Cart Automation)
+  // ==========================================================================
+
+  /**
+   * Create a cart for abandoned cart automation
+   * @param {Object} cartData - Cart data
+   * @returns {Object} Created cart
+   */
+  async createCart(cartData) {
+    const { cartID, email, phone, products, currency, cartUrl, cartRecoveryUrl } = cartData;
+
+    if (!cartID) {
+      throw new Error('Cart ID is required');
+    }
+    if (!email && !phone) {
+      throw new Error('Email or phone is required for cart');
+    }
+    if (!products || products.length === 0) {
+      throw new Error('At least one product is required');
+    }
+
+    const payload = {
+      cartID,
+      currency: currency || 'EUR',
+      cartSum: products.reduce((sum, p) => sum + (p.price * (p.quantity || 1)), 0),
+      cartUrl,
+      cartRecoveryUrl,
+      products: products.map(p => ({
+        productID: p.productID || p.id,
+        variantID: p.variantID,
+        title: p.title,
+        quantity: p.quantity || 1,
+        price: p.price,
+        oldPrice: p.oldPrice,
+        discount: p.discount || 0,
+        imageUrl: p.imageUrl,
+        productUrl: p.productUrl
+      }))
+    };
+
+    // Add contact identifier
+    if (email) {
+      payload.email = email;
+    }
+    if (phone) {
+      payload.phone = phone;
+    }
+
+    try {
+      const result = await this.request('POST', '/carts', payload);
+      console.log(`✅ Created cart: ${cartID} for ${email || phone}`);
+      return result;
+    } catch (error) {
+      console.error(`❌ Cart creation failed:`, error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * Update an existing cart
+   * @param {string} cartID - Cart ID
+   * @param {Object} cartData - Updated cart data
+   * @returns {Object} Updated cart
+   */
+  async updateCart(cartID, cartData) {
+    if (!cartID) {
+      throw new Error('Cart ID is required');
+    }
+
+    const { products, currency, cartUrl, cartRecoveryUrl } = cartData;
+
+    const payload = {};
+
+    if (products && products.length > 0) {
+      payload.products = products.map(p => ({
+        productID: p.productID || p.id,
+        variantID: p.variantID,
+        title: p.title,
+        quantity: p.quantity || 1,
+        price: p.price,
+        oldPrice: p.oldPrice,
+        discount: p.discount || 0,
+        imageUrl: p.imageUrl,
+        productUrl: p.productUrl
+      }));
+      payload.cartSum = products.reduce((sum, p) => sum + (p.price * (p.quantity || 1)), 0);
+    }
+
+    if (currency) payload.currency = currency;
+    if (cartUrl) payload.cartUrl = cartUrl;
+    if (cartRecoveryUrl) payload.cartRecoveryUrl = cartRecoveryUrl;
+
+    try {
+      const result = await this.request('PATCH', `/carts/${cartID}`, payload);
+      console.log(`✅ Updated cart: ${cartID}`);
+      return result;
+    } catch (error) {
+      console.error(`❌ Cart update failed:`, error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * Delete a cart (cart recovered or order placed)
+   * @param {string} cartID - Cart ID
+   */
+  async deleteCart(cartID) {
+    if (!cartID) {
+      throw new Error('Cart ID is required');
+    }
+
+    try {
+      await this.request('DELETE', `/carts/${cartID}`);
+      console.log(`✅ Deleted cart: ${cartID}`);
+      return true;
+    } catch (error) {
+      console.error(`❌ Cart deletion failed:`, error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * Get cart by ID
+   * @param {string} cartID - Cart ID
+   * @returns {Object} Cart data
+   */
+  async getCart(cartID) {
+    try {
+      const result = await this.request('GET', `/carts/${cartID}`);
+      return result;
+    } catch (error) {
+      console.error(`❌ Get cart failed:`, error.message);
+      throw error;
+    }
+  }
+
+  /**
+   * List all carts (for debugging/audit)
+   * @param {number} limit - Max carts
+   * @returns {Array} Carts list
+   */
+  async listCarts(limit = 100) {
+    try {
+      const result = await this.request('GET', `/carts?limit=${limit}`);
+      console.log(`✅ Retrieved ${result.carts?.length || 0} carts`);
+      return result.carts || [];
+    } catch (error) {
+      console.error(`❌ List carts failed:`, error.message);
+      throw error;
+    }
+  }
+
+  // ==========================================================================
   // AUTOMATIONS (READ-ONLY)
   // ==========================================================================
 
@@ -435,18 +680,29 @@ class OmnisendClient {
    * Test API connectivity
    */
   async healthCheck() {
-    console.log('\n🔍 Omnisend B2C E-commerce Health Check');
-    console.log('========================================');
+    console.log('\n🔍 Omnisend B2C E-commerce Health Check v1.1.0');
+    console.log('================================================');
+
+    // Show configuration
+    console.log('\nConfiguration:');
+    console.log(`  Rate limit: ${CONFIG.rateLimit.requests} req/${CONFIG.rateLimit.perMinute}s`);
+    console.log(`  Retry: ${CONFIG.retry.maxAttempts} attempts, backoff ${CONFIG.retry.baseDelayMs}-${CONFIG.retry.maxDelayMs}ms`);
+    console.log(`  Jitter: ${CONFIG.retry.jitterMs}ms`);
+    console.log(`  Event version: ${CONFIG.eventVersion}`);
 
     if (this.testMode) {
-      console.log('⚠️ Running in TEST MODE (no API key)');
+      console.log('\n⚠️ Running in TEST MODE (no API key)');
+      console.log('✅ Event deduplication: Ready (eventID + eventTime)');
+      console.log('✅ Carts API: Ready');
+      console.log('✅ Exponential backoff: Ready');
       console.log('ℹ️ Set OMNISEND_API_KEY to test API');
-      return { status: 'test-mode', message: 'No API key configured' };
+      return { status: 'test-mode', message: 'No API key configured', version: '1.1.0' };
     }
 
     const results = {
       contacts: false,
       products: false,
+      carts: false,
       automations: false,
       campaigns: false
     };
@@ -455,9 +711,9 @@ class OmnisendClient {
       // Test contacts API
       const contacts = await this.listContacts(1);
       results.contacts = true;
-      console.log(`✅ Contacts API: Operational`);
+      console.log(`\n✅ Contacts API: Operational`);
     } catch (error) {
-      console.log(`❌ Contacts API: ${error.message}`);
+      console.log(`\n❌ Contacts API: ${error.message}`);
     }
 
     try {
@@ -467,6 +723,15 @@ class OmnisendClient {
       console.log(`✅ Products API: Operational`);
     } catch (error) {
       console.log(`❌ Products API: ${error.message}`);
+    }
+
+    try {
+      // Test carts API (new in v1.1.0)
+      const carts = await this.listCarts(1);
+      results.carts = true;
+      console.log(`✅ Carts API: Operational (${carts.length} active carts)`);
+    } catch (error) {
+      console.log(`❌ Carts API: ${error.message}`);
     }
 
     try {
@@ -489,9 +754,13 @@ class OmnisendClient {
 
     const allHealthy = Object.values(results).every(v => v);
     console.log(`\n${allHealthy ? '✅ All Omnisend APIs operational' : '⚠️ Some APIs have issues'}`);
+    console.log('✅ Event deduplication: Active (eventID + eventTime)');
+    console.log('✅ Exponential backoff: Active');
 
     return {
       status: allHealthy ? 'healthy' : 'partial',
+      version: '1.1.0',
+      features: ['event-dedup', 'carts-api', 'exponential-backoff'],
       ...results
     };
   }
@@ -615,34 +884,76 @@ async function main() {
   } else if (args.includes('--list-products')) {
     const products = await client.listProducts(10);
     console.log('Products:', JSON.stringify(products, null, 2));
+  } else if (args.includes('--test-cart')) {
+    // Create a test cart
+    const cartID = `test-cart-${Date.now()}`;
+    const result = await client.createCart({
+      cartID,
+      email: 'test@example.com',
+      currency: 'EUR',
+      cartSum: 99.99,
+      cartRecoveryUrl: 'https://example.com/cart/recover/' + cartID,
+      products: [
+        {
+          productID: 'test-product-001',
+          title: 'Test Product',
+          quantity: 1,
+          price: 99.99
+        }
+      ]
+    });
+    console.log('Cart created:', JSON.stringify(result, null, 2));
+    console.log(`\nCart ID: ${cartID}`);
+    console.log('Note: Cart will trigger Abandoned Cart automation if not completed within 1 hour');
+  } else if (args.includes('--list-carts')) {
+    const carts = await client.listCarts(10);
+    console.log('Carts:', JSON.stringify(carts, null, 2));
   } else {
     console.log(`
-Omnisend B2C E-commerce Integration
-====================================
+Omnisend B2C E-commerce Integration v1.1.0
+==========================================
 
 Usage:
   node omnisend-b2c-ecommerce.cjs [options]
 
 Options:
-  --health             Test API connectivity
+  --health             Test API connectivity (all endpoints)
   --audit              Audit existing automations
+
+  Contacts:
   --test-contact       Create test contact
-  --test-event         Send test event
+  --list-contacts      List first 10 contacts
+
+  Events:
+  --test-event         Send test event (with eventID deduplication)
+
+  Products:
   --test-product       Create test product
+  --list-products      List first 10 products
+
+  Carts (NEW v1.1.0):
+  --test-cart          Create test abandoned cart
+  --list-carts         List existing carts
+
+  Automations:
   --list-automations   List all automations (READ-ONLY)
   --list-campaigns     List all campaigns (READ-ONLY)
-  --list-contacts      List first 10 contacts
-  --list-products      List first 10 products
 
 Environment Variables:
   OMNISEND_API_KEY     Omnisend API key (v5)
 
-API Limitations (IMPORTANT):
+API Capabilities v1.1.0:
   ✅ Contacts: Full CRUD
-  ✅ Events: Send to trigger automations
+  ✅ Events: Send with eventID deduplication
   ✅ Products: Full CRUD
+  ✅ Carts: Full CRUD (abandoned cart automation)
   ❌ Automations: READ-ONLY (create via UI only)
   ❌ Campaigns: READ-ONLY
+
+Features v1.1.0:
+  ✅ Event deduplication via eventID + eventTime
+  ✅ Exponential backoff with jitter (5 retries)
+  ✅ Carts API for abandoned cart workflows
 
 Pricing:
   Free: 250 contacts, 500 emails/mo

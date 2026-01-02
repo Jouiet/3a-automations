@@ -19,7 +19,7 @@
 - Disponible aussi pour vos clients (setup inclus dans packs)
 
 ### Automatisation E-commerce
-- 86 automatisations testees et documentees
+- 88 automatisations testees et documentees
 - Shopify, WooCommerce, Klaviyo, GA4
 - ROI moyen email marketing: 36-42 EUR pour 1 EUR investi (Litmus/DMA 2025)
 - Recuperation paniers abandonnes: +10-15%
@@ -57,18 +57,20 @@ Annuel: 2 mois gratuits (10 pour 12)
 ### Voice AI & Telephonie (1)
 - Assistant Vocal IA 24/7
 
-### Lead Generation (20)
+### Lead Generation (21)
 - Sync Meta/Google/TikTok Leads
 - LinkedIn scraping B2B
 - Google Maps sourcing local
 - Lead scoring automatique
+- HubSpot B2B CRM Integration (FREE tier)
 
-### Email Marketing CRM (9)
+### Email Marketing CRM (10)
 - Welcome series (40-50% ouverture)
 - Abandoned cart (+10-15% recuperation)
 - Post-purchase flows
 - Win-back campaigns
 - VIP Tiers
+- Omnisend B2C Integration ($16/mo vs Klaviyo $45+)
 
 ### Shopify Admin (13)
 - Enrichissement produits automatique
@@ -106,7 +108,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 - E-commerce: Shopify, WooCommerce
 - CRM: HubSpot, Pipedrive, Salesforce, Zoho
-- Email: Klaviyo, Mailchimp
+- Email: Klaviyo, Omnisend, Mailchimp
 - Publicite: Meta Ads, Google Ads, TikTok Ads
 - Analytics: Google Analytics 4
 - Messagerie: WhatsApp Business, SMS
@@ -115,7 +117,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 - [Accueil](https://3a-automation.com/): Proposition de valeur
 - [Tarifs](https://3a-automation.com/pricing.html): Packages detailles
-- [Automatisations](https://3a-automation.com/automations.html): 86 automatisations
+- [Automatisations](https://3a-automation.com/automations.html): 88 automatisations
 - [Cas Clients](https://3a-automation.com/cas-clients.html): Etudes de cas
 - [Contact](https://3a-automation.com/contact.html): Formulaire + Voice AI
 - [Reservation](https://3a-automation.com/booking.html): Prendre RDV
@@ -140,8 +142,8 @@ Annuel: 2 mois gratuits (10 pour 12)
 - **Marche secondaire**: France/Europe (4.2M PME, source INSEE)
 
 ### Ce que nous AVONS
-- 86 workflows documentes et testes
-- 8 automations resilientes (multi-fallback AI)
+- 88 workflows documentes et testes
+- 10 automations resilientes (multi-fallback AI)
 - Voice AI Widget fonctionnel (FR/EN)
 - Site web 69 pages bilingue
 - Infrastructure Docker (Hostinger VPS)
@@ -162,7 +164,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 ### Documents Disponibles (sur demande)
 - Pitch Deck (12 slides)
 - Projections Financieres (3 ans)
-- Catalogue Workflows (86 fiches)
+- Catalogue Workflows (88 fiches)
 - Architecture Technique
 - Data Room (apres NDA)
 
@@ -187,5 +189,5 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 ---
 
-Version: 5.0 | Last Updated: 2025-12-31
+Version: 5.1.0 | Last Updated: 2026-01-02
 Spec: https://llmstxt.org/

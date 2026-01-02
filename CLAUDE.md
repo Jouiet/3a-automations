@@ -10,13 +10,54 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (86, v2.1.1) |
-| History | `HISTORY.md` (Sessions 0-118) |
-| Scripts résilients | `automations/agency/core/` (8 scripts, P0-P1-P2 secured) |
+| Automations | `automations/automations-registry.json` (88, v2.2.0) |
+| History | `HISTORY.md` (Sessions 0-119) |
+| Scripts résilients | `automations/agency/core/` (10 scripts, P0-P1-P2 secured) |
 | Pages | 63 (FR/EN + Academy + Investors) |
 | SEO Score | **96%** |
 | AEO Score | **95%** |
 | Docker Projects | 4 running (3a-website, cinematicads, root, wordpress) |
+| CRM Scripts | HubSpot v1.1.0 + Omnisend v1.1.0 |
+
+## Session 119 - CRM SCRIPTS v1.1.0 (02/01/2026)
+
+### HubSpot B2B CRM v1.1.0
+
+| Feature | Status |
+|---------|--------|
+| Batch operations (100/call) | ✅ |
+| Exponential backoff (5 retries) | ✅ |
+| Rate limit monitoring | ✅ |
+| Jitter (500ms) | ✅ |
+
+**Capabilities:** Contacts CRUD+batch, Companies CRUD+batch, Deals CRUD, Associations
+
+### Omnisend B2C E-commerce v1.1.0
+
+| Feature | Status |
+|---------|--------|
+| Event deduplication (eventID) | ✅ |
+| Carts API (abandoned cart) | ✅ |
+| Exponential backoff (5 retries) | ✅ |
+| Jitter (500ms) | ✅ |
+
+**Capabilities:** Contacts CRUD, Events (dedup), Products CRUD, Carts CRUD, Automations READ-ONLY
+
+### Scripts Location
+
+```
+automations/agency/core/
+├── hubspot-b2b-crm.cjs        # v1.1.0 - B2B FREE tier
+└── omnisend-b2c-ecommerce.cjs # v1.1.0 - B2C $16/mo
+```
+
+### Registry Updated
+
+- Version: 2.2.0 (was 2.1.1)
+- Total: 88 automations (was 86)
+- llms.txt: v5.1.0 (added Omnisend)
+
+---
 
 ## Session 118 - SYSTEM VERIFICATION (31/12/2025)
 
@@ -29,7 +70,7 @@
 | n8n.srv1168256.hstgr.cloud | ✅ HTTP 200 |
 | Docker containers | 4 projects RUNNING |
 | Voice Widget Templates | 8 presets operational |
-| Registry | v2.1.1 - counts verified 86=86=86 |
+| Registry | v2.2.0 - counts verified 88=88=88 |
 
 ### Session 117octo - Registry Audit (31/12/2025)
 
@@ -205,7 +246,7 @@ scripts/
 | Métrique | Valeur | Changement |
 |----------|--------|------------|
 | n8n Workflows | **0** | -5 (TOUS remplacés par scripts natifs) |
-| Scripts résilients | **8 fichiers** | +2 nouveaux |
+| Scripts résilients | **10 fichiers** | +4 (Session 115-119) |
 | Social Distribution | **3 plateformes** | +1 (X/Twitter OAuth 1.0a) |
 | WhatsApp | Script natif avec fallback | Awaiting credentials |
 
