@@ -95,7 +95,7 @@ automations/agency/core/
 | We HAVE | We DON'T HAVE |
 |---------|---------------|
 | 86 documented workflows | Recurring revenue |
-| 8 resilient automations | Active paying clients |
+| 10 resilient automations | Active paying clients |
 | Voice AI Widget (FR/EN) | Team beyond founder |
 | 63-page bilingual website | Proven retention metrics |
 | Docker infrastructure | Previous funding round |
@@ -322,7 +322,7 @@ Modular rules in `.claude/rules/`:
 |------|---------|
 | `01-project-status.md` | État actuel, blockers |
 | `02-pricing.md` | MAD/EUR/USD |
-| `07-native-scripts.md` | 8 scripts résilients (0 n8n) |
+| `07-native-scripts.md` | 10 scripts résilients (0 n8n) |
 | `code-standards.md` | CommonJS (.cjs) |
 | `factuality.md` | Vérification empirique |
 

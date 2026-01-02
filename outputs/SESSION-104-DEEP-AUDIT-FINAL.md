@@ -11,7 +11,7 @@
 ║                    CORRECTIONS SESSION 119                            ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║ n8n Workflows:  0/5 (TOUS remplacés par scripts natifs)              ║
-║ Scripts Natifs: 8 automations résilientes (multi-provider fallback)  ║
+║ Scripts Natifs: 10 automations résilientes (multi-provider fallback)  ║
 ║ Gemini:         ✅ Upgraded to Gemini 3 Flash (Jan 2026)             ║
 ║ Sécurité:       ✅ HSTS, X-Frame-Options, CSP déployés               ║
 ║ JWT:            ✅ Pas de hardcode, httpOnly cookies                  ║

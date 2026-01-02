@@ -26,7 +26,7 @@ Nous sommes une agence spécialisée dans l'automatisation e-commerce. Notre mis
 ### Expertise
 
 - **10+ ans** d'expérience en développement web et automation
-- **86 automatisations** prêtes à l'emploi testées et documentées
+- **88 automatisations** prêtes à l'emploi testées et documentées
 - Partenaire certifié des principales plateformes e-commerce
 
 ---
@@ -88,7 +88,7 @@ Le Flywheel 360° automatise chaque étape du parcours client pour créer une cr
 
 ---
 
-## Catalogue des 86 automatisations
+## Catalogue des 88 automatisations
 
 ### Lead Generation (20 automatisations)
 - Ads Lead Sync → CRM
@@ -256,7 +256,7 @@ Oui, chaque pack inclut un niveau de support. Le pack Growth inclut un support p
 - [Flywheel 360°](https://3a-automation.com/services/flywheel-360.html): Méthodologie complète
 
 ### Pages Catalogue
-- [Automatisations](https://3a-automation.com/automations.html): 86 automatisations disponibles
+- [Automatisations](https://3a-automation.com/automations.html): 88 automatisations disponibles
 - [Tarifs](https://3a-automation.com/pricing.html): Packages et prix
 - [Cas Clients](https://3a-automation.com/cas-clients.html): Études de cas
 

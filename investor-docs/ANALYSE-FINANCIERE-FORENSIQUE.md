@@ -19,7 +19,7 @@
 
 | Actif | Quantité | Vérification |
 |-------|----------|--------------|
-| Automations documentées | **86** | automations-registry.json v2.1.1 |
+| Automations documentées | **86** | automations-registry.json v2.2.0 |
 | Scripts production (core/) | **19 fichiers** | 8,945 lignes de code |
 | Templates réutilisables | **30+ fichiers** | templates/ |
 | APIs configurées | **55+ majeures** | .env (332 lignes) |
@@ -749,4 +749,4 @@ Le **Modèle Maroc Optimisé** est SUPÉRIEUR au modèle Europe:
 
 *Document généré le: Janvier 2026*
 *Méthodologie: Bottom-up factuelle exclusive*
-*Dernière vérification: automations-registry.json v2.1.1 (86 automations)*
+*Dernière vérification: automations-registry.json v2.2.0 (86 automations)*

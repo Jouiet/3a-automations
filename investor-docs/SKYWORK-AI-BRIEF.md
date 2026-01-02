@@ -149,7 +149,7 @@ Catalogue de 86 automations prêtes à l'emploi, déployables en 48-72h, à des 
 - Dashboard client opérationnel
 - 86 automations documentées et testées
 - Infrastructure cloud déployée (VPS, n8n, Docker)
-- 8 scripts résilients multi-AI (Grok→Gemini→Claude)
+- 10 scripts résilients multi-AI (Grok→Gemini→Claude)
 
 **Assets développés:**
 - 8.945 lignes de code production

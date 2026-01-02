@@ -26,7 +26,7 @@ BACKEND:
 └── Storage: Cloudflare R2
 
 INTEGRATIONS:
-├── Native Scripts: 8 resilient automations (automations/agency/core/)
+├── Native Scripts: 10 resilient automations (automations/agency/core/)
 ├── Apify: Web scraping
 ├── Klaviyo: Email marketing
 ├── GA4: Analytics
@@ -226,7 +226,7 @@ Day 14: Final follow-up
 ## IMPLEMENTATION STATUS (Updated Session 119 - 02/01/2026)
 
 > **NOTE:** n8n workflows mentioned below have ALL been migrated to native Node.js scripts in Session 115-119.
-> See `automations/agency/core/` for the 8 resilient scripts that replaced n8n.
+> See `automations/agency/core/` for the 10 resilient scripts that replaced n8n.
 
 ### Phase 1: MVP ✅ COMPLETE (Session 86-88)
 ```
@@ -263,7 +263,7 @@ ORIGINAL PLAN → ACTUAL IMPLEMENTATION
 ├── Vercel → Hostinger VPS (PM2)
 ├── Supabase → Google Sheets (Apps Script CRUD)
 ├── NextAuth → JWT + bcrypt (simple auth)
-└── Apify direct → Native scripts (8 resilient .cjs)
+└── Apify direct → Native scripts (10 resilient .cjs)
 ```
 
 ---
