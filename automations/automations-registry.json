@@ -1,14 +1,14 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.1.1",
-  "lastUpdated": "2025-12-31",
-  "totalCount": 86,
+  "version": "2.2.0",
+  "lastUpdated": "2026-01-02",
+  "totalCount": 88,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
       "name_fr": "Lead Generation & Acquisition",
       "name_en": "Lead Generation & Acquisition",
-      "count": 23
+      "count": 24
     },
     "seo": {
       "name_fr": "SEO & Contenu",
@@ -18,7 +18,7 @@
     "email": {
       "name_fr": "Email Marketing (CRM)",
       "name_en": "Email Marketing (CRM)",
-      "count": 9
+      "count": 10
     },
     "shopify": {
       "name_fr": "Shopify Admin",
@@ -1138,6 +1138,34 @@
       "port": 3008,
       "replaces": "n8n-workflow:WhatsApp Confirmation + WhatsApp Reminders",
       "status": "awaiting-credentials"
+    },
+    {
+      "id": "hubspot-b2b-crm",
+      "name_fr": "HubSpot B2B CRM Integration",
+      "name_en": "HubSpot B2B CRM Integration",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/core/hubspot-b2b-crm.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "CRM gratuit B2B (contacts, companies, deals)",
+      "benefit_en": "Free B2B CRM (contacts, companies, deals)",
+      "api_tier": "FREE",
+      "status": "tested-ok"
+    },
+    {
+      "id": "omnisend-b2c-ecommerce",
+      "name_fr": "Omnisend B2C E-commerce Integration",
+      "name_en": "Omnisend B2C E-commerce Integration",
+      "category": "email",
+      "type": "script",
+      "script": "agency/core/omnisend-b2c-ecommerce.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Email marketing B2C $16/mo (vs Klaviyo $45+)",
+      "benefit_en": "B2C email marketing $16/mo (vs Klaviyo $45+)",
+      "api_limitation": "automations=READ-ONLY",
+      "status": "tested-ok"
     }
   ],
   "types": {
@@ -1164,7 +1192,7 @@
     "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
-    "withScript": 55,
+    "withScript": 57,
     "withoutScript": 31,
     "klaviyoTemplates": 7,
     "n8nWorkflows": 8,
@@ -1174,8 +1202,9 @@
     "thirdPartyIntegrations": 3,
     "externalServices": 4,
     "aiAvatarWorkflows": 2,
-    "b2bLeadPipelines": 3,
+    "b2bLeadPipelines": 4,
     "resilientScripts": 5,
-    "voiceAiScripts": 3
+    "voiceAiScripts": 3,
+    "crmIntegrations": 2
   }
 }

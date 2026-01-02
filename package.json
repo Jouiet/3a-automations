@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@google-analytics/data": "^5.2.1",
+    "@hubspot/api-client": "^13.4.0",
     "dotenv": "^16.3.1",
     "googleapis": "^169.0.0"
   },
