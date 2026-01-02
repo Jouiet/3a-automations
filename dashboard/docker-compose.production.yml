@@ -24,15 +24,17 @@ services:
       - traefik.http.middlewares.dashboard-security.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://n8n.srv1168256.hstgr.cloud https://www.google-analytics.com
     networks:
       - root_default
+    env_file:
+      - .env.production
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - GOOGLE_SHEETS_ID=1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w
-      - GOOGLE_SHEETS_API_URL=https://script.google.com/macros/s/AKfycbzFP751mwK04FguPrIISQlMHHUULw5-e-n_Pn63h-SXEBOUvD-wpM7wmbGDPauGdzIZ/exec
-      - JWT_SECRET=3a_automation_jwt_secret_production_2025_secure
+      - GOOGLE_SHEETS_ID=${GOOGLE_SHEETS_ID}
+      - GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}
+      - JWT_SECRET=${JWT_SECRET}
       - NEXT_PUBLIC_SITE_URL=https://dashboard.3a-automation.com
       - N8N_HOST=https://n8n.srv1168256.hstgr.cloud
-      - N8N_API_KEY=***N8N_KEY_REMOVED***
+      - N8N_API_KEY=${N8N_API_KEY}
     command: >
       sh -c '
         apk add --no-cache git &&

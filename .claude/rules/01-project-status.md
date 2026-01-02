@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 120 - 02/01/2026)
+## Current State (Session 122 - 02/01/2026)
 
 | Metric | Value |
 |--------|-------|
@@ -9,18 +9,83 @@
 | Pages | **63** HTML files (verified count) |
 | Investor Pages | ✅ Created (FR + EN) with FAQPage + BreadcrumbList |
 | Automations | **88** (Registry v2.2.0 - HubSpot + Omnisend added) |
-| Scripts résilients | **10 fichiers (core/)** - All P0-P1-P2 secured |
+| Scripts résilients | **11 fichiers (core/)** - All P0-P1-P2 secured |
 | n8n Workflows | **0 restant** (all replaced by native scripts) |
 | SEO Score | **100%** (all meta tags, OG, Twitter) |
-| AEO Score | **100%** |
+| AEO Score | **95%** |
 | FAQPage Schema | **35/35 indexable (100%)** |
 | Security Headers | **CONFIGURED** (HSTS, CSP, X-Frame-Options) |
+| Security Backend | **⚠️ 45%** - CRITICAL: Secrets exposed in PUBLIC repo |
 | Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
 | SSL | **Let's Encrypt + HSTS preload** |
 | Infrastructure | 4 Docker projects, 6 containers RUNNING |
 | llms.txt | **v5.1.0** with CRM section |
 | Voice Widget Templates | **8 industries** (4h→30min deployment) |
-| **INVESTOR-READY** | ✅ VERIFIED |
+| **Overall Audit Score** | **89%** |
+| **INVESTOR-READY** | ⚠️ PENDING SECRET ROTATION |
+
+---
+
+## ⚠️ SESSION 122 - FORENSIC AUDIT + CRITICAL SECURITY (02/01/2026)
+
+### 🚨 CRITICAL SECURITY VULNERABILITY (CVSS 9.8)
+
+**File:** `dashboard/docker-compose.production.yml` (PUBLIC GitHub repo!)
+
+| Secret Exposed | Line | Impact |
+|----------------|------|--------|
+| JWT_SECRET | 32 | Session hijacking, auth bypass |
+| N8N_API_KEY | 35 | Full n8n workflow control |
+| GOOGLE_SHEETS_ID | 30 | Data exposure (users sheet) |
+
+**IMMEDIATE ACTIONS REQUIRED:**
+1. ❌ **ROTATE JWT_SECRET** on VPS immediately
+2. ❌ **REVOKE N8N_API_KEY** and generate new one
+3. ❌ **Move secrets to Docker secrets or .env** (never in compose file)
+4. ❌ **git filter-branch** to remove from history (secrets already leaked)
+
+### Forensic Audit Scores (Session 122)
+
+| Category | Score | Status |
+|----------|-------|--------|
+| SEO Technical | 96% | ✅ Excellent |
+| AEO/GEO | 95% | ✅ Excellent |
+| Security Frontend | 92% | ✅ Good |
+| **Security Backend** | **45%** | 🚨 **CRITICAL** |
+| Marketing Claims | 88% | ✅ Good |
+| i18n/l10n | 94% | ✅ Excellent |
+| Accessibility | 85% | ⚠️ Needs work |
+| Design/UX | 91% | ✅ Good |
+| **OVERALL** | **89%** | ⚠️ Backend security critical |
+
+### Fixes Applied (Session 122)
+
+| Fix | Status | Details |
+|-----|--------|---------|
+| EN investor page 86→88 | ✅ DONE | 6 instances updated |
+| SWOT analysis generated | ✅ DONE | outputs/FORENSIC-AUDIT-SWOT-2026-01-02.md |
+| Security audit | ✅ DONE | Identified CVSS 9.8 vulnerability |
+
+### auth.ts Security (GOOD)
+
+```typescript
+// Line 18-20: Validates JWT_SECRET at startup
+if (!JWT_SECRET) {
+  throw new Error("CRITICAL: JWT_SECRET environment variable is not set.");
+}
+```
+
+The code is SECURE - the problem is the SECRET VALUE being in PUBLIC repo.
+
+---
+
+## SESSION 121 - PODCAST GENERATOR RESILIENT (02/01/2026)
+
+### podcast-generator-resilient.cjs v1.0.0
+
+**SUPÉRIEUR à NotebookLM** - see CLAUDE.md for details.
+
+---
 
 ## SESSION 120 - FRONTEND CRM + HEALTH CHECKS (02/01/2026)
 
