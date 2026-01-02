@@ -238,9 +238,30 @@ function getDashboardStats() {
   const activeAutomations = automations.filter(a => a.status === 'ACTIVE').length;
   const automationErrors = automations.filter(a => a.status === 'ERROR').length;
 
-  // Calculate revenue (mock for now, could be from metrics)
+  // Calculate revenue from metrics
   const metrics = listRecords(SHEETS.METRICS, { category: 'revenue' });
-  const revenueThisMonth = metrics.reduce((sum, m) => sum + (parseFloat(m.value) || 0), 0);
+  const now = new Date();
+  const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
+
+  // Filter metrics by month
+  const thisMonthMetrics = metrics.filter(m => {
+    const date = new Date(m.date || m.createdAt);
+    return date >= thisMonthStart;
+  });
+  const lastMonthMetrics = metrics.filter(m => {
+    const date = new Date(m.date || m.createdAt);
+    return date >= lastMonthStart && date <= lastMonthEnd;
+  });
+
+  const revenueThisMonth = thisMonthMetrics.reduce((sum, m) => sum + (parseFloat(m.value) || 0), 0);
+  const revenueLastMonth = lastMonthMetrics.reduce((sum, m) => sum + (parseFloat(m.value) || 0), 0);
+
+  // Calculate growth percentage (0 if no previous month data)
+  const revenueGrowth = revenueLastMonth > 0
+    ? Math.round(((revenueThisMonth - revenueLastMonth) / revenueLastMonth) * 1000) / 10
+    : 0;
 
   return {
     totalLeads: leads.length,
@@ -250,7 +271,7 @@ function getDashboardStats() {
     activeAutomations,
     automationErrors,
     revenueThisMonth,
-    revenueGrowth: 12.5 // Mock value
+    revenueGrowth
   };
 }
 

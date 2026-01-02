@@ -1,18 +1,14 @@
 #!/usr/bin/env node
 /**
- * FIX GTM LAZY LOADING
- * Remplace le chargement synchrone GTM/GA4 par lazy loading
+ * FIX GTM LAZY LOADING v2
+ * Version plus robuste avec remplacement par sections
  * Date: 2025-12-20
- * Version: 1.0
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const SITE_DIR = path.join(__dirname, '../landing-page-hostinger');
-
-// Old GTM pattern (synchrone)
-const OLD_GTM_PATTERN = /<!-- Google Tag Manager -->\s*<script>\(function\(w,d,s,l,i\)\{w\[l\]=w\[l\]\|\|\[\];w\[l\]\.push\(\{'gtm\.start':\s*new Date\(\)\.getTime\(\),event:'gtm\.js'\}\);var f=d\.getElementsByTagName\(s\)\[0\],\s*j=d\.createElement\(s\),dl=l!='dataLayer'\?'&l='\+l:'';j\.async=true;j\.src=\s*'https:\/\/www\.googletagmanager\.com\/gtm\.js\?id='\+i\+dl;f\.parentNode\.insertBefore\(j,f\);\s*\}\)\(window,document,'script','dataLayer','GTM-WLVJQC3M'\);<\/script>\s*<!-- End Google Tag Manager -->\s*<!-- Google Analytics 4 -->\s*<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-87F6FDJG45"><\/script>\s*<script>\s*window\.dataLayer = window\.dataLayer \|\| \[\];\s*function gtag\(\)\{dataLayer\.push\(arguments\);\}\s*gtag\('js', new Date\(\)\);\s*gtag\('config', 'G-87F6FDJG45', \{\s*'anonymize_ip': true,\s*'cookie_flags': 'SameSite=None;Secure'\s*\}\);\s*<\/script>/gs;
 
 // New GTM lazy loading code
 const NEW_GTM_CODE = `<!-- Google Tag Manager + GA4 - Lazy Loaded for Performance -->
@@ -56,7 +52,6 @@ const NEW_GTM_CODE = `<!-- Google Tag Manager + GA4 - Lazy Loaded for Performanc
     })();
   </script>`;
 
-// Find all HTML files
 function findHtmlFiles(dir) {
   const files = [];
   const items = fs.readdirSync(dir, { withFileTypes: true });
@@ -71,49 +66,83 @@ function findHtmlFiles(dir) {
   return files;
 }
 
-// Main
-console.log('=== FIX GTM LAZY LOADING ===\n');
+console.log('=== FIX GTM LAZY LOADING v2 ===\n');
 
 const htmlFiles = findHtmlFiles(SITE_DIR);
 let fixed = 0;
 let alreadyFixed = 0;
 let noGtm = 0;
+let errors = 0;
 
 for (const file of htmlFiles) {
-  const content = fs.readFileSync(file, 'utf8');
+  let content = fs.readFileSync(file, 'utf8');
   const relativePath = path.relative(SITE_DIR, file);
 
-  // Check if already has lazy loading
+  // Already lazy loaded
   if (content.includes('Lazy Loaded for Performance')) {
-    console.log(`✅ ${relativePath} - already lazy loaded`);
+    console.log(`✅ ${relativePath} - already done`);
     alreadyFixed++;
     continue;
   }
 
-  // Check if has old GTM pattern
+  // No GTM
   if (!content.includes('googletagmanager.com/gtm.js')) {
     console.log(`⬜ ${relativePath} - no GTM`);
     noGtm++;
     continue;
   }
 
-  // Replace old with new
-  const newContent = content.replace(OLD_GTM_PATTERN, NEW_GTM_CODE);
+  try {
+    // Find and remove GTM block
+    const gtmStart = content.indexOf('<!-- Google Tag Manager -->');
+    const gtmScriptEnd = content.indexOf('</script>', gtmStart) + '</script>'.length;
 
-  if (newContent !== content) {
-    fs.writeFileSync(file, newContent);
+    // Find and remove GA4 block (look for it after GTM)
+    const ga4Start = content.indexOf('<!-- Google Analytics 4 -->', gtmScriptEnd);
+    let ga4End;
+
+    if (ga4Start !== -1) {
+      // Find the closing </script> of the config block
+      const ga4ScriptStart = content.indexOf('<script>', ga4Start);
+      const configScriptStart = content.indexOf('<script>', ga4ScriptStart + 1);
+      ga4End = content.indexOf('</script>', configScriptStart) + '</script>'.length;
+    } else {
+      // GA4 not found separately, just remove GTM
+      ga4End = gtmScriptEnd;
+    }
+
+    // Also check for End Google Tag Manager comment
+    const endComment = content.indexOf('<!-- End Google Tag Manager -->', gtmStart);
+    if (endComment !== -1 && endComment < ga4Start) {
+      // Update gtmScriptEnd to include the comment
+    }
+
+    // Extract what's before and after the GTM/GA4 blocks
+    const before = content.substring(0, gtmStart);
+    const after = content.substring(ga4End);
+
+    // Rebuild content
+    content = before + NEW_GTM_CODE + after;
+
+    // Clean up any double newlines
+    content = content.replace(/\n{3,}/g, '\n\n');
+
+    fs.writeFileSync(file, content);
     console.log(`🔧 ${relativePath} - FIXED`);
     fixed++;
-  } else {
-    // Pattern didn't match exactly, try simpler approach
-    console.log(`⚠️  ${relativePath} - pattern mismatch, needs manual review`);
+  } catch (e) {
+    console.log(`❌ ${relativePath} - ERROR: ${e.message}`);
+    errors++;
   }
 }
 
 console.log('\n=== SUMMARY ===');
 console.log(`Fixed: ${fixed}`);
-console.log(`Already lazy: ${alreadyFixed}`);
+console.log(`Already done: ${alreadyFixed}`);
 console.log(`No GTM: ${noGtm}`);
+console.log(`Errors: ${errors}`);
 console.log(`Total: ${htmlFiles.length}`);
 
-process.exit(fixed > 0 || alreadyFixed > 0 ? 0 : 1);
+if (errors > 0) {
+  process.exit(1);
+}

@@ -988,12 +988,14 @@
       "name_fr": "Assistant Telephonique IA",
       "name_en": "AI Phone Assistant",
       "category": "voice-ai",
-      "type": "n8n-workflow",
-      "script": "agency/n8n-workflows/grok-voice-telephony.json",
+      "type": "script",
+      "script": "agency/core/voice-telephony-bridge.cjs",
       "frequency_fr": "Appels entrants",
       "frequency_en": "Inbound calls",
       "benefit_fr": "Reservation par telephone automatique",
-      "benefit_en": "Automatic phone booking"
+      "benefit_en": "Automatic phone booking",
+      "replaces": "n8n-workflow:Grok Voice Telephony (latence 4x meilleure)",
+      "port": 3009
     },
     {
       "id": "linkedin-lead-scraper",

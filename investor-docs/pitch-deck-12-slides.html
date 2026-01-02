@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3A Automation - Pitch Deck Investisseur</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-slide: #111111;
+            --border: #222222;
+            --text: #ffffff;
+            --text-muted: #888888;
+            --accent: #4FBAF1;
+            --green: #10B981;
+            --purple: #8B5CF6;
+            --orange: #F59E0B;
+            --pink: #EC4899;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .slide-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .slide-nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .slide-nav-dot.active {
+            background: var(--accent);
+        }
+
+        /* Slide 1 - Title */
+        .slide-title {
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-dark), #1a1a2e);
+        }
+
+        .logo-large {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 40px;
+        }
+
+        .title-main {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-tagline {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .title-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Content Slides */
+        .slide-header {
+            margin-bottom: 48px;
+        }
+
+        .slide-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1200px;
+        }
+
+        .content-grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .content-card {
+            background: var(--bg-slide);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .content-card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .content-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .content-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .stat-large {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(79, 186, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid var(--accent);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 32px auto 0;
+        }
+
+        .highlight-stat {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-table {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            align-items: center;
+        }
+
+        .pricing-row:first-child {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-name {
+            font-weight: 600;
+        }
+
+        .pricing-price {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin-top: 40px;
+        }
+
+        .timeline-item {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-dot {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 900px;
+        }
+
+        .team-member {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .team-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .team-info p {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .team-info span {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .ask-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            max-width: 1000px;
+        }
+
+        .ask-amount {
+            text-align: center;
+        }
+
+        .ask-value {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ask-label {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .use-of-funds {
+            list-style: none;
+        }
+
+        .use-of-funds li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .use-of-funds li:last-child {
+            border-bottom: none;
+        }
+
+        .fund-percent {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .contact-info {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 16px 0;
+        }
+
+        .contact-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            color: white;
+            padding: 16px 48px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 32px;
+        }
+
+        /* Competitive Matrix */
+        .matrix-table {
+            width: 100%;
+            max-width: 1000px;
+            border-collapse: collapse;
+        }
+
+        .matrix-table th, .matrix-table td {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .matrix-table th {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .matrix-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .check {
+            color: var(--green);
+            font-size: 1.2rem;
+        }
+
+        .cross {
+            color: #ef4444;
+            font-size: 1.2rem;
+        }
+
+        .partial {
+            color: var(--orange);
+            font-size: 1.2rem;
+        }
+
+        /* Morocco Highlight */
+        .morocco-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--green), var(--accent));
+            color: var(--bg-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-top: 12px;
+        }
+
+        /* Print Styles - 12 Pages PDF (1 slide = 1 page) */
+        @media print {
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+            @page { size: A4 landscape; margin: 1cm; }
+
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 10pt !important;
+            }
+
+            .slide {
+                page-break-after: always !important;
+                min-height: auto !important;
+                height: auto !important;
+                padding: 1.5cm !important;
+                border: none !important;
+            }
+            .slide:last-child { page-break-after: avoid !important; }
+
+            .slide-number { top: 1cm !important; right: 1cm !important; font-size: 0.75rem !important; color: #666 !important; }
+            .slide-nav { display: none !important; }
+
+            /* Title slide */
+            .slide-title { background: white !important; }
+            .logo-large {
+                width: 80px !important;
+                height: 80px !important;
+                background: #2563eb !important;
+                margin-bottom: 1.5rem !important;
+            }
+            .title-main {
+                font-size: 2.5rem !important;
+                color: #2563eb !important;
+                -webkit-text-fill-color: #2563eb !important;
+            }
+            .title-tagline { font-size: 1.2rem !important; color: #666 !important; }
+
+            /* Slide headers */
+            .slide-header { margin-bottom: 1.5rem !important; }
+            .slide-label { font-size: 0.7rem !important; color: #2563eb !important; }
+            h2 { font-size: 1.5rem !important; }
+
+            /* Content grids */
+            .content-grid {
+                gap: 1rem !important;
+            }
+            .content-card {
+                padding: 1rem !important;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+            }
+            .content-card-icon {
+                width: 36px !important;
+                height: 36px !important;
+                margin-bottom: 0.75rem !important;
+            }
+            .content-card h3 { font-size: 0.9rem !important; margin-bottom: 0.5rem !important; }
+            .content-card p { font-size: 0.75rem !important; }
+
+            /* Stats */
+            .stat-large {
+                font-size: 2rem !important;
+                color: #2563eb !important;
+                -webkit-text-fill-color: #2563eb !important;
+            }
+            .stat-label { font-size: 0.7rem !important; }
+
+            .highlight-box {
+                padding: 1.5rem !important;
+                background: #f0f9ff !important;
+                border: 1px solid #2563eb !important;
+            }
+            .highlight-stat {
+                font-size: 2.5rem !important;
+                color: #2563eb !important;
+                -webkit-text-fill-color: #2563eb !important;
+            }
+
+            /* Pricing */
+            .pricing-table { font-size: 0.85rem !important; }
+            .pricing-row { padding: 0.75rem 0 !important; }
+            .pricing-price { color: #2563eb !important; }
+
+            /* Timeline */
+            .timeline { margin-top: 1.5rem !important; }
+            .timeline-dot {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 0.8rem !important;
+                background: #2563eb !important;
+            }
+            .timeline-date { font-size: 0.8rem !important; }
+            .timeline-desc { font-size: 0.7rem !important; }
+
+            /* Team */
+            .team-grid { gap: 1.5rem !important; }
+            .team-avatar {
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 1rem !important;
+            }
+            .team-info h4 { font-size: 0.9rem !important; }
+            .team-info p { font-size: 0.75rem !important; }
+            .team-info span { font-size: 0.7rem !important; }
+
+            /* Competition matrix */
+            .matrix-table { font-size: 0.8rem !important; }
+            .matrix-table th, .matrix-table td { padding: 0.5rem !important; }
+
+            /* Ask */
+            .ask-value {
+                font-size: 3rem !important;
+                color: #2563eb !important;
+                -webkit-text-fill-color: #2563eb !important;
+            }
+            .ask-label { font-size: 1rem !important; }
+            .use-of-funds li { padding: 0.5rem 0 !important; font-size: 0.85rem !important; }
+            .fund-percent { color: #2563eb !important; }
+
+            /* Contact */
+            .contact-link { font-size: 1.1rem !important; color: #2563eb !important; }
+            .contact-cta { background: #2563eb !important; font-size: 0.9rem !important; padding: 0.75rem 2rem !important; }
+
+            /* Scenarios */
+            .scenarios-grid { gap: 1rem !important; }
+            .scenario-card { padding: 1rem !important; }
+            .scenario-value { font-size: 1.5rem !important; }
+            .scenario-desc { font-size: 0.7rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <section class="slide slide-title">
+        <div class="slide-number">01 / 12</div>
+        <div class="logo-large">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+            </svg>
+        </div>
+        <h1 class="title-main">3A Automation</h1>
+        <p class="title-tagline">Automation - Analytics - AI</p>
+        <p class="title-meta">
+            Pitch Deck Investisseur | Seed Round<br>
+            Janvier 2026
+        </p>
+        <div class="morocco-badge">Modele Maroc - Marge 74%</div>
+    </section>
+
+    <!-- Slide 2: Problem -->
+    <section class="slide">
+        <div class="slide-number">02 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Le Probleme</p>
+            <h2>Les PME perdent 30% de leur temps sur des taches repetitives</h2>
+        </div>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(239, 68, 68, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <h3>Temps Perdu</h3>
+                <p>20-30h/semaine sur des emails, rapports et saisies manuelles qui pourraient etre automatisees</p>
+            </div>
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(239, 68, 68, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                    </svg>
+                </div>
+                <h3>Expertise Manquante</h3>
+                <p>Pas de competences techniques internes pour implementer des solutions d'automatisation AI</p>
+            </div>
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(239, 68, 68, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+                        <line x1="12" y1="1" x2="12" y2="23"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <h3>Cout Prohibitif</h3>
+                <p>Agences traditionnelles: 15.000-50.000 EUR pour un projet, hors budget PME</p>
+            </div>
+        </div>
+        <div class="highlight-box">
+            <div class="highlight-stat">78%</div>
+            <p style="color: var(--text-muted); margin-top: 12px;">des PME n'ont aucune automatisation en place (McKinsey 2025)</p>
+        </div>
+    </section>
+
+    <!-- Slide 3: Solution -->
+    <section class="slide">
+        <div class="slide-number">03 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Notre Solution</p>
+            <h2>Automatisation AI cle-en-main pour PME</h2>
+        </div>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(79, 186, 241, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <h3>Deploiement Rapide</h3>
+                <p>Setup en 48-72h au lieu de 3-6 mois. Packs pre-configures prets a l'emploi.</p>
+            </div>
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(16, 185, 129, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                </div>
+                <h3>86 Automations</h3>
+                <p>Catalogue complet: E-commerce, Marketing, Operations, AI Assistants, Analytics.</p>
+            </div>
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(139, 92, 246, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <h3>AI Resilient</h3>
+                <p>Multi-provider fallback (Grok, Gemini, Claude). Zero downtime garanti.</p>
+            </div>
+        </div>
+        <div class="highlight-box">
+            <p style="font-size: 1.3rem; font-weight: 600;">ROI moyen: 5-10x en 6 mois</p>
+            <p style="color: var(--text-muted); margin-top: 8px;">Economies de temps + Reduction d'erreurs + Croissance acceleree</p>
+        </div>
+    </section>
+
+    <!-- Slide 4: Market -->
+    <section class="slide">
+        <div class="slide-number">04 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Opportunite de Marche</p>
+            <h2>Un marche massif et sous-penetre</h2>
+        </div>
+        <div class="content-grid content-grid-2" style="max-width: 900px;">
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--accent);">$890B</div>
+                <p class="stat-label">TAM - Marche Automation PME Global (2026)</p>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--green);">$45B</div>
+                <p class="stat-label">SAM - MENA + Europe Francophone</p>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--purple);">780K EUR</div>
+                <p class="stat-label">SOM - Cible Y3 (Bottom-Up)</p>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--orange);">168%</div>
+                <p class="stat-label">CAGR 3 ans projete</p>
+            </div>
+        </div>
+        <div style="margin-top: 48px; max-width: 800px;">
+            <h3 style="margin-bottom: 24px;">Marches Cibles (Phase 1)</h3>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <span style="background: rgba(16, 185, 129, 0.2); padding: 8px 16px; border-radius: 20px; color: var(--green); border: 1px solid var(--green);">Maroc (Hub Ops)</span>
+                <span style="background: rgba(79, 186, 241, 0.1); padding: 8px 16px; border-radius: 20px; color: var(--accent);">France</span>
+                <span style="background: rgba(79, 186, 241, 0.1); padding: 8px 16px; border-radius: 20px; color: var(--accent);">Belgique</span>
+                <span style="background: rgba(79, 186, 241, 0.1); padding: 8px 16px; border-radius: 20px; color: var(--accent);">Suisse</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Business Model -->
+    <section class="slide">
+        <div class="slide-number">05 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Business Model</p>
+            <h2>Revenue recurrent + Setup one-time</h2>
+        </div>
+        <div class="pricing-table">
+            <div class="pricing-row">
+                <div>Pack</div>
+                <div>EUR</div>
+                <div>USD</div>
+                <div>MAD</div>
+            </div>
+            <div class="pricing-row">
+                <div class="pricing-name">Quick Win (1-2 automations)</div>
+                <div class="pricing-price">390 EUR</div>
+                <div>$450</div>
+                <div>3.990 DH</div>
+            </div>
+            <div class="pricing-row">
+                <div class="pricing-name">Essentials (3-5 automations)</div>
+                <div class="pricing-price">790 EUR</div>
+                <div>$920</div>
+                <div>7.990 DH</div>
+            </div>
+            <div class="pricing-row">
+                <div class="pricing-name">Growth (8-12 automations)</div>
+                <div class="pricing-price">1.399 EUR</div>
+                <div>$1,690</div>
+                <div>14.990 DH</div>
+            </div>
+        </div>
+        <div style="margin-top: 48px;">
+            <h3 style="margin-bottom: 24px;">Retainers Mensuels (MRR)</h3>
+            <div class="content-grid content-grid-2" style="max-width: 600px;">
+                <div class="content-card" style="text-align: center;">
+                    <div class="stat-large" style="font-size: 2.5rem; color: var(--accent);">290 EUR</div>
+                    <p class="stat-label">Maintenance / mois</p>
+                </div>
+                <div class="content-card" style="text-align: center;">
+                    <div class="stat-large" style="font-size: 2.5rem; color: var(--green);">490 EUR</div>
+                    <p class="stat-label">Optimisation / mois</p>
+                </div>
+            </div>
+        </div>
+        <p style="color: var(--text-muted); margin-top: 24px;">Annuel = 10 mois pour 12 (2 mois offerts) | Marge brute 70-75%</p>
+    </section>
+
+    <!-- Slide 6: Traction -->
+    <section class="slide">
+        <div class="slide-number">06 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Traction</p>
+            <h2>MVP valide, pret au lancement commercial</h2>
+        </div>
+        <div class="content-grid" style="margin-bottom: 48px;">
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--accent);">86</div>
+                <p class="stat-label">Automations Catalogue</p>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--green);">61</div>
+                <p class="stat-label">Pages Site (FR/EN)</p>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--purple);">92%</div>
+                <p class="stat-label">Score SEO Technique</p>
+            </div>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot">Q4</div>
+                <div class="timeline-date">Oct-Dec 2025</div>
+                <div class="timeline-desc">MVP + Site Launch<br>86 automations ready</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">Q1</div>
+                <div class="timeline-date">Jan-Mar 2026</div>
+                <div class="timeline-desc">Seed + Premiers clients<br>Target: 15 clients</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">Q2</div>
+                <div class="timeline-date">Apr-Jun 2026</div>
+                <div class="timeline-desc">Scale digital<br>Target: 30 clients</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">Q3</div>
+                <div class="timeline-date">Jul-Sep 2026</div>
+                <div class="timeline-desc">Team Maroc +2<br>Target: 45 clients</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Technology -->
+    <section class="slide">
+        <div class="slide-number">07 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Technologie</p>
+            <h2>Stack resilient et scalable</h2>
+        </div>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(79, 186, 241, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h3>Multi-AI Fallback</h3>
+                <p>Grok 3 - Gemini 2.5 - Claude. Zero single point of failure.</p>
+            </div>
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(16, 185, 129, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                        <line x1="6" y1="6" x2="6.01" y2="6"/>
+                        <line x1="6" y1="18" x2="6.01" y2="18"/>
+                    </svg>
+                </div>
+                <h3>Supabase + GCP</h3>
+                <p>Infrastructure cloud resiliente. Docker + auto-deploy. 99.9% uptime.</p>
+            </div>
+            <div class="content-card">
+                <div class="content-card-icon" style="background: rgba(139, 92, 246, 0.1);">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <h3>Security First</h3>
+                <p>Rate limiting, CORS whitelist, SSL/TLS, RGPD compliant.</p>
+            </div>
+        </div>
+        <div style="margin-top: 48px;">
+            <h3 style="margin-bottom: 24px;">Integrations Pre-Construites</h3>
+            <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                <div style="background: var(--bg-slide); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border);">Shopify</div>
+                <div style="background: var(--bg-slide); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border);">Klaviyo</div>
+                <div style="background: var(--bg-slide); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border);">WhatsApp</div>
+                <div style="background: var(--bg-slide); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border);">n8n</div>
+                <div style="background: var(--bg-slide); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border);">Google Analytics</div>
+                <div style="background: var(--bg-slide); padding: 16px 24px; border-radius: 12px; border: 1px solid var(--border);">Apify</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Competition -->
+    <section class="slide">
+        <div class="slide-number">08 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Concurrence</p>
+            <h2>Positionnement unique + Avantage Maroc</h2>
+        </div>
+        <table class="matrix-table">
+            <thead>
+                <tr>
+                    <th style="text-align: left;">Critere</th>
+                    <th>3A Automation</th>
+                    <th>Agences Trad.</th>
+                    <th>DIY (Zapier)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Prix PME-friendly</td>
+                    <td><span class="check">&#10003;</span></td>
+                    <td><span class="cross">&#10007;</span></td>
+                    <td><span class="check">&#10003;</span></td>
+                </tr>
+                <tr>
+                    <td>Setup rapide (48-72h)</td>
+                    <td><span class="check">&#10003;</span></td>
+                    <td><span class="cross">&#10007;</span></td>
+                    <td><span class="partial">~</span></td>
+                </tr>
+                <tr>
+                    <td>AI Integration (3 providers)</td>
+                    <td><span class="check">&#10003;</span></td>
+                    <td><span class="partial">~</span></td>
+                    <td><span class="cross">&#10007;</span></td>
+                </tr>
+                <tr>
+                    <td>Support dedie high-touch</td>
+                    <td><span class="check">&#10003;</span></td>
+                    <td><span class="check">&#10003;</span></td>
+                    <td><span class="cross">&#10007;</span></td>
+                </tr>
+                <tr>
+                    <td>Multi-langue (FR/EN/AR)</td>
+                    <td><span class="check">&#10003;</span></td>
+                    <td><span class="partial">~</span></td>
+                    <td><span class="cross">&#10007;</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700; color: var(--green);">Couts Ops -35% (Maroc)</td>
+                    <td><span class="check" style="font-size: 1.5rem;">&#10003;</span></td>
+                    <td><span class="cross">&#10007;</span></td>
+                    <td><span class="cross">&#10007;</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="highlight-box" style="margin-top: 48px;">
+            <p style="font-size: 1.2rem;">Moat: <strong style="color: var(--accent);">Expertise AI + Prix PME + Structure Maroc = 74% EBITDA</strong></p>
+        </div>
+    </section>
+
+    <!-- Slide 9: Team -->
+    <section class="slide">
+        <div class="slide-number">09 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Equipe</p>
+            <h2>Fondateur + Team Maroc (0 Commercial)</h2>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-avatar">JO</div>
+                <div class="team-info">
+                    <h4>Fondateur / CEO</h4>
+                    <p>Expert Automation & AI</p>
+                    <span>10+ ans experience tech. Trilingue FR/EN/AR. Expertise Shopify, Klaviyo, n8n, AI.</span>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-avatar" style="background: linear-gradient(135deg, var(--green), var(--accent));">EM</div>
+                <div class="team-info">
+                    <h4>Junior E-Marketing</h4>
+                    <p>Casablanca - Q3 2026</p>
+                    <span>SEO, Content, Google Ads, Meta Ads. 900 EUR/mois (~10K MAD).</span>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-avatar" style="background: linear-gradient(135deg, var(--orange), var(--pink));">JD</div>
+                <div class="team-info">
+                    <h4>Junior Dev</h4>
+                    <p>Casablanca - Q3 2026</p>
+                    <span>Node.js, integrations, support technique. 900 EUR/mois (~10K MAD).</span>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-avatar" style="background: linear-gradient(135deg, var(--purple), var(--accent));">SD</div>
+                <div class="team-info">
+                    <h4>Senior Dev</h4>
+                    <p>Casablanca - Q1 2027</p>
+                    <span>Architecture, AI, scaling. 2.000 EUR/mois (~22K MAD).</span>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 48px; color: var(--text-muted);">
+            <p><strong style="color: var(--green);">Strategie 0 Commercial:</strong> Acquisition 100% digitale (SEO, Ads, Funnels). Economie 40K EUR/an.</p>
+        </div>
+    </section>
+
+    <!-- Slide 10: Financials (MOROCCO MODEL) -->
+    <section class="slide">
+        <div class="slide-number">10 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Projections Financieres</p>
+            <h2>Plan 3 ans - Modele MAROC (Bottom-Up)</h2>
+        </div>
+        <div class="content-grid">
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--accent);">108K EUR</div>
+                <p class="stat-label">Revenue Y1 (2026)</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">60 clients | 23% marge</p>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--green);">512K EUR</div>
+                <p class="stat-label">Revenue Y2 (2027)</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">280 clients | 68% marge</p>
+            </div>
+            <div class="content-card" style="text-align: center;">
+                <div class="stat-large" style="color: var(--purple);">780K EUR</div>
+                <p class="stat-label">Revenue Y3 (2028)</p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">500 clients | <strong>74% marge</strong></p>
+            </div>
+        </div>
+        <div style="margin-top: 48px;">
+            <h3 style="margin-bottom: 24px;">Metriques Cles (Bottom-Up)</h3>
+            <div class="content-grid content-grid-2" style="max-width: 700px;">
+                <div class="content-card">
+                    <p style="color: var(--text-muted); margin-bottom: 8px;">LTV moyenne Y3</p>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">5.000 EUR</div>
+                </div>
+                <div class="content-card">
+                    <p style="color: var(--text-muted); margin-bottom: 8px;">CAC cible Y3</p>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--green);">250 EUR</div>
+                </div>
+                <div class="content-card">
+                    <p style="color: var(--text-muted); margin-bottom: 8px;">Ratio LTV/CAC Y3</p>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--purple);">20x</div>
+                </div>
+                <div class="content-card">
+                    <p style="color: var(--text-muted); margin-bottom: 8px;">EBITDA Y3</p>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: var(--orange);">576K EUR</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Ask -->
+    <section class="slide">
+        <div class="slide-number">11 / 12</div>
+        <div class="slide-header">
+            <p class="slide-label">Levee de Fonds</p>
+            <h2>Seed Round - Strategie 0 Commercial</h2>
+        </div>
+        <div class="ask-grid">
+            <div class="ask-amount">
+                <div class="ask-value">150K</div>
+                <p class="ask-label">EUR Recherches</p>
+                <p style="color: var(--text-muted); margin-top: 16px;">Valorisation pre-money: 600K EUR<br>Equity: 20%</p>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 24px;">Utilisation des Fonds</h3>
+                <ul class="use-of-funds">
+                    <li>
+                        <span>Recrutement Maroc (E-Marketing + Dev)</span>
+                        <span class="fund-percent">47%</span>
+                    </li>
+                    <li>
+                        <span>Marketing & Acquisition Digitale</span>
+                        <span class="fund-percent">27%</span>
+                    </li>
+                    <li>
+                        <span>Developpement Produit</span>
+                        <span class="fund-percent">13%</span>
+                    </li>
+                    <li>
+                        <span>Infrastructure (Supabase+GCP) & Ops</span>
+                        <span class="fund-percent">13%</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="highlight-box" style="margin-top: 48px;">
+            <p style="font-size: 1.1rem;">Runway: <strong style="color: var(--accent);">12+ mois</strong> | Breakeven: <strong style="color: var(--green);">Q4 2026</strong></p>
+        </div>
+    </section>
+
+    <!-- Slide 12: Contact -->
+    <section class="slide slide-title">
+        <div class="slide-number">12 / 12</div>
+        <div class="logo-large">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+            </svg>
+        </div>
+        <div class="contact-info">
+            <h2 style="margin-bottom: 24px;">Merci</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 32px;">Prets a discuter de l'automatisation AI pour PME?</p>
+            <a href="https://3a-automation.com" class="contact-link">3a-automation.com</a><br>
+            <a href="mailto:contact@3a-automation.com" class="contact-link">contact@3a-automation.com</a>
+            <br>
+            <a href="https://3a-automation.com/booking.html" class="contact-cta">Reserver un Appel</a>
+        </div>
+        <div class="morocco-badge" style="margin-top: 32px;">Modele Bottom-Up Maroc v2.0 - Janvier 2026</div>
+    </section>
+
+</body>
+</html>

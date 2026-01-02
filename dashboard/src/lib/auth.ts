@@ -7,7 +7,11 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "3a-automation-secret-key-2025";
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  throw new Error("CRITICAL: JWT_SECRET environment variable is not set. Cannot start application.");
+}
 const JWT_EXPIRES_IN = "7d";
 
 export type UserRole = "ADMIN" | "CLIENT" | "VIEWER";
