@@ -1,22 +1,24 @@
-# Session 104-115 - AUDIT APPROFONDI
-## Dernière màj: Session 115 (29/12/2025)
+# Session 104-119 - AUDIT APPROFONDI
+## Dernière màj: Session 119 (02/01/2026)
 **Statut légal:** PRÉ-INCORPORATION (en attente ICE marocain)
 
 ---
 
-## SESSION 115 UPDATE (29/12/2025)
+## SESSION 119 UPDATE (02/01/2026)
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════╗
-║                    CORRECTIONS SESSION 115                            ║
+║                    CORRECTIONS SESSION 119                            ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║ Shopify:        ✅ OPÉRATIONNEL (guqsu3-yj.myshopify.com)            ║
-║ Apify:          ✅ STARTER $39/mo (PAS $0.01)                        ║
-║ WordPress MCP:  ✅ CONFIGURÉ (wp.3a-automation.com)                  ║
-║ n8n:            6/9 workflows fonctionnels (67%)                     ║
-║ MCPs:           12+ fonctionnels (Shopify, WordPress ajoutés)        ║
+║ n8n Workflows:  0/5 (TOUS remplacés par scripts natifs)              ║
+║ Scripts Natifs: 8 automations résilientes (multi-provider fallback)  ║
+║ Gemini:         ✅ Upgraded to Gemini 3 Flash (Jan 2026)             ║
+║ Sécurité:       ✅ HSTS, X-Frame-Options, CSP déployés               ║
+║ JWT:            ✅ Pas de hardcode, httpOnly cookies                  ║
+║ MCPs:           10/13 fonctionnels (3 bugs packages NPM)             ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║ ANCIENS BLOCKERS RÉSOLUS - SYSTÈME 85%+ OPÉRATIONNEL                 ║
+║ ARCHITECTURE: Scripts natifs > n8n (supérieurs sur 6/8 critères)     ║
+║ SCORE GLOBAL: 92%+ OPÉRATIONNEL                                      ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -125,26 +127,29 @@ voice-widget.js (source) → voice-widget.min.js (32KB minifié)
 
 ---
 
-## III. WORKFLOWS N8N - ANALYSE DÉTAILLÉE
+## III. ARCHITECTURE NATIVE - SCRIPTS RÉSILIENTS (Session 119)
 
-### Workflows sur n8n.srv1168256.hstgr.cloud (9 total)
+### OBSOLÈTE: n8n Workflows → Remplacés par Scripts Natifs
 
-| Workflow | Nodes | Triggers | Blockers | Status |
-|----------|-------|----------|----------|--------|
-| AI Avatar Generator | 11 | webhook | - | ✅ |
-| AI Talking Video | 13 | webhook | - | ✅ |
-| Blog Generator Multi-Channel | 13 | schedule + webhook | - | ✅ |
-| Email Outreach Sequence | 7 | webhook | - | ✅ |
-| Grok Voice Telephony | 10 | 3 webhooks | WhatsApp, Twilio | ⚠️ |
-| Klaviyo Welcome Series | 8 | webhook | - | ✅ |
-| LinkedIn Lead Scraper | 12 | schedule | - | ✅ |
-| WhatsApp Booking Confirm | 6 | webhook | WhatsApp API | ❌ |
-| WhatsApp Booking Reminders | 7 | schedule | WhatsApp API | ❌ |
+**Tous les 5 workflows n8n ont été remplacés par 8 scripts natifs supérieurs:**
 
-**Résumé:**
-- ✅ 6/9 workflows entièrement fonctionnels
-- ⚠️ 1/9 partiellement bloqué (Voice: xAI OK, Twilio manquant)
-- ❌ 2/9 bloqués (WhatsApp Business API)
+| Script Natif | Remplace | Port | Fallback Chain |
+|--------------|----------|------|----------------|
+| blog-generator-resilient.cjs | Blog Generator Multi-Channel | 3003 | Anthropic→Grok 3→Gemini 3 |
+| voice-api-resilient.cjs | - | 3004 | Grok 3→Gemini 3→Claude→Local |
+| product-photos-resilient.cjs | Enhance Product Photos | 3005 | Gemini 3→fal.ai→Replicate |
+| email-personalization-resilient.cjs | Email Outreach Sequence | 3006 | Grok 3→Gemini 3→Claude |
+| grok-voice-realtime.cjs | Grok Voice Telephony | 3007 | Grok Realtime→Gemini TTS |
+| whatsapp-booking-notifications.cjs | WhatsApp Confirm + Reminders | 3008 | WhatsApp Cloud API |
+| voice-telephony-bridge.cjs | Grok Voice Telephony (n8n) | 3009 | Twilio↔Grok WebSocket |
+| uptime-monitor.cjs | - | 3002 | Health checks 5 endpoints |
+
+**Avantages Scripts Natifs vs n8n:**
+- ✅ 3+ AI providers avec fallback (vs 1 single point of failure)
+- ✅ 0% dépendance $env (n8n Community bloqué)
+- ✅ CLI/Testing intégré (15+ flags)
+- ✅ Rate limiting et security headers
+- ✅ Graceful shutdown
 
 ### Workflow Email Outreach (Fonctionnel)
 
