@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAuthUser } from "@/lib/auth";
+import { getAuthUser, getAuthUserFromCookie } from "@/lib/auth";
 import { getUserByEmail } from "@/lib/google-sheets";
 
 // Fallback admin user data (matches login route)
@@ -23,8 +23,12 @@ const FALLBACK_ADMIN = {
 
 export async function GET(request: NextRequest) {
   try {
-    const authHeader = request.headers.get("authorization");
-    const authUser = await getAuthUser(authHeader);
+    // Try cookie auth first (preferred), then header (backwards compatibility)
+    let authUser = await getAuthUserFromCookie();
+    if (!authUser) {
+      const authHeader = request.headers.get("authorization");
+      authUser = await getAuthUser(authHeader);
+    }
 
     if (!authUser) {
       return NextResponse.json(
@@ -82,8 +86,12 @@ export async function GET(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   try {
-    const authHeader = request.headers.get("authorization");
-    const authUser = await getAuthUser(authHeader);
+    // Try cookie auth first (preferred), then header (backwards compatibility)
+    let authUser = await getAuthUserFromCookie();
+    if (!authUser) {
+      const authHeader = request.headers.get("authorization");
+      authUser = await getAuthUser(authHeader);
+    }
 
     if (!authUser) {
       return NextResponse.json(

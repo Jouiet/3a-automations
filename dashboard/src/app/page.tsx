@@ -7,24 +7,37 @@ export default function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("auth_token");
-    const userData = localStorage.getItem("user");
+    const checkAuth = async () => {
+      try {
+        // Verify auth via API (uses httpOnly cookie)
+        const response = await fetch("/api/users/me", {
+          credentials: "include",
+        });
 
-    if (!token || !userData) {
-      router.push("/login");
-      return;
-    }
+        if (!response.ok) {
+          localStorage.removeItem("user");
+          router.push("/login");
+          return;
+        }
 
-    try {
-      const user = JSON.parse(userData);
-      if (user.role === "ADMIN") {
-        router.push("/admin");
-      } else {
-        router.push("/client");
+        const data = await response.json();
+        const user = data.data;
+
+        // Update localStorage with fresh user data
+        localStorage.setItem("user", JSON.stringify(user));
+
+        if (user.role === "ADMIN") {
+          router.push("/admin");
+        } else {
+          router.push("/client");
+        }
+      } catch {
+        localStorage.removeItem("user");
+        router.push("/login");
       }
-    } catch {
-      router.push("/login");
-    }
+    };
+
+    checkAuth();
   }, [router]);
 
   return (

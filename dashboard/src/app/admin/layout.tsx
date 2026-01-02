@@ -15,23 +15,32 @@ export default function AdminLayout({
   const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem("auth_token");
-      const userData = localStorage.getItem("user");
-
-      if (!token || !userData) {
-        router.push("/login");
-        return;
-      }
-
+    const checkAuth = async () => {
       try {
-        const user = JSON.parse(userData);
+        // Verify auth via API (uses httpOnly cookie)
+        const response = await fetch("/api/users/me", {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          localStorage.removeItem("user");
+          router.push("/login");
+          return;
+        }
+
+        const data = await response.json();
+        const user = data.data;
+
         if (user.role !== "ADMIN") {
           router.push("/client");
           return;
         }
+
+        // Update localStorage with fresh user data
+        localStorage.setItem("user", JSON.stringify(user));
         setIsAuthorized(true);
       } catch {
+        localStorage.removeItem("user");
         router.push("/login");
       } finally {
         setIsLoading(false);

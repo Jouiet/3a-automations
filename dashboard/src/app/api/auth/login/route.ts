@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUserByEmail, updateUserLastLogin } from "@/lib/google-sheets";
-import { comparePassword, generateToken } from "@/lib/auth";
+import { comparePassword, generateToken, setAuthCookie } from "@/lib/auth";
 
 // Fallback admin user for when Google Sheets is not configured
 // Password: Admin3A2025 (bcrypt hash)
@@ -63,11 +63,16 @@ export async function POST(request: NextRequest) {
     // Return user data (without password)
     const { password: _, ...userWithoutPassword } = user;
 
-    return NextResponse.json({
+    // Create response with httpOnly cookie
+    const response = NextResponse.json({
       success: true,
-      token,
       user: userWithoutPassword,
     });
+
+    // Set JWT as httpOnly cookie (secure in production)
+    setAuthCookie(response, token);
+
+    return response;
   } catch (error) {
     console.error("Login error:", error);
     return NextResponse.json(
