@@ -138,7 +138,7 @@ const KNOWLEDGE_BASE = {
 
   // === AUTOMATISATIONS DISPONIBLES ===
   automations: {
-    total: 78,
+    total: 88,
     categories: {
       leadGen: ['Sync Meta/Google/TikTok Leads', 'LinkedIn scraping', 'Google Maps sourcing', 'Lead scoring', 'Geo-Segmentation'],
       email: ['Welcome series', 'Abandon panier', 'Post-achat', 'Winback', 'Browse abandonment', 'VIP Tiers'],
@@ -146,8 +146,9 @@ const KNOWLEDGE_BASE = {
       analytics: ['Dashboard Looker', 'Rapport GA4', 'Alertes Stock', 'Pixels vérification', 'Projections'],
       seo: ['Alt text auto', 'Meta tags', 'Schema.org', 'Sitemap images', 'llms.txt AEO'],
       content: ['Vidéo Promo Produit', 'Cart Recovery Video', 'Feed Google Shopping', 'Article Blog Auto'],
-      whatsapp: ['WhatsApp Booking Confirmation', 'WhatsApp Reminders'],
-      voiceAI: ['Assistant Vocal IA Web (24/7)', 'Assistant Telephonique IA']
+      whatsapp: ['WhatsApp Booking Confirmation', 'WhatsApp Reminders', 'WhatsApp Order Updates'],
+      voiceAI: ['Assistant Vocal IA Web (24/7)', 'Assistant Telephonique IA', 'Grok Voice Realtime', 'Voice Telephony Bridge'],
+      crm: ['HubSpot B2B Integration', 'Omnisend B2C Integration']
     },
     voiceAIProduct: {
       description: 'Assistant vocal IA deployable pour vos clients',
