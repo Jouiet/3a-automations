@@ -1280,19 +1280,19 @@
   const topicResponses = {
     processus: {
       keywords: ['processus', 'comment ça marche', 'fonctionnement', 'étapes', 'déroulement', 'explique'],
-      response: `Voici comment ça se passe :\n\n1️⃣ **Formulaire diagnostic** (5 min)\nVous nous décrivez votre activité et vos objectifs\n\n2️⃣ **Rapport personnalisé** (24-48h)\nNous vous envoyons 3 recommandations prioritaires\n\n3️⃣ **Proposition sur mesure** \nSi ça vous intéresse, devis détaillé adapté à vos besoins\n\n4️⃣ **Implémentation clé en main**\nNous configurons tout, vous n'avez rien à faire de technique\n\n✅ Pas d'appel obligatoire, tout par écrit si vous préférez !`
+      response: `Voici comment ça se passe :\n\n1. **Formulaire diagnostic** (5 min)\nVous nous décrivez votre activité et vos objectifs\n\n2. **Rapport personnalisé** (24-48h)\nNous vous envoyons 3 recommandations prioritaires\n\n3. **Proposition sur mesure** \nSi ça vous intéresse, devis détaillé adapté à vos besoins\n\n4. **Implémentation clé en main**\nNous configurons tout, vous n'avez rien à faire de technique\n\nPas d'appel obligatoire, tout par écrit si vous préférez !`
     },
     pricing: {
       keywords: ['prix', 'tarif', 'combien', 'coût', 'budget', 'devis', 'cher'],
-      response: `Nos tarifs sont forfaitaires, sans surprise :\n\n**PACKS ONE-TIME:**\nDu projet ponctuel au déploiement complet\n\n**RETAINERS MENSUELS:**\nMaintenance et optimisation continue\n\n💡 L'audit est GRATUIT et vous aide à choisir le pack adapté à vos besoins.\n\n👉 Consultez nos tarifs sur /pricing.html ou demandez un devis personnalisé !`
+      response: `Nos tarifs sont forfaitaires, sans surprise :\n\n**PACKS ONE-TIME:**\nDu projet ponctuel au déploiement complet\n\n**RETAINERS MENSUELS:**\nMaintenance et optimisation continue\n\nL'audit est GRATUIT et vous aide à choisir le pack adapté à vos besoins.\n\nConsultez nos tarifs sur /pricing.html ou demandez un devis personnalisé !`
     },
     audit: {
       keywords: ['audit', 'gratuit', 'diagnostic', 'analyse'],
-      response: `L'audit est 100% gratuit !\n\n📋 **Ce que vous recevez:**\n• Analyse de vos processus actuels\n• Opportunités d'automatisation identifiées\n• Estimation du ROI potentiel\n• Recommandations personnalisées\n\n⏱️ **Délai:** 24-48h après le formulaire\n\n👉 Voulez-vous que je vous envoie le lien du formulaire ?`
+      response: `L'audit est 100% gratuit !\n\n**Ce que vous recevez:**\n• Analyse de vos processus actuels\n• Opportunités d'automatisation identifiées\n• Estimation du ROI potentiel\n• Recommandations personnalisées\n\n**Délai:** 24-48h après le formulaire\n\nVoulez-vous que je vous envoie le lien du formulaire ?`
     },
     automatisations: {
       keywords: ['automatisation', 'automatisations', 'workflow', 'flows', 'quoi automatiser'],
-      response: `Nous proposons un large catalogue d'automatisations :\n\n📧 **Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alertes, Rapports automatiques\n\n🛒 **E-commerce:**\nSync produits, Alertes stock, Reviews\n\n🤖 **AI & Video:**\nVidéos marketing, Avatar IA, Voix IA\n\nQuel type vous intéresse le plus ?`
+      response: `Nous proposons un large catalogue d'automatisations :\n\n**Email Marketing:**\nWelcome, Abandon panier, Post-achat, Winback\n\n**Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n**Analytics:**\nDashboards, Alertes, Rapports automatiques\n\n**E-commerce:**\nSync produits, Alertes stock, Reviews\n\n**AI & Video:**\nVidéos marketing, Avatar IA, Voix IA\n\nQuel type vous intéresse le plus ?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'client', 'acquisition', 'trouver des clients'],
@@ -1300,15 +1300,15 @@
     },
     difference: {
       keywords: ['différence', 'pourquoi vous', 'agence', 'freelance', 'avantage'],
-      response: `Ce qui nous différencie :\n\n✅ **Équipe spécialisée**\nVous travaillez directement avec les experts, pas des commerciaux\n\n✅ **Prix justes**\nTransparents et compétitifs\n\n✅ **Spécialisation**\nExperts automation marketing - pas généralistes\n\n✅ **Résultats mesurables**\nROI prouvé sur chaque projet\n\n✅ **Flexibilité**\nPas d'engagement long terme obligatoire`
+      response: `Ce qui nous différencie :\n\n• **Équipe spécialisée**\nVous travaillez directement avec les experts, pas des commerciaux\n\n• **Prix justes**\nTransparents et compétitifs\n\n• **Spécialisation**\nExperts automation marketing - pas généralistes\n\n• **Résultats mesurables**\nROI prouvé sur chaque projet\n\n• **Flexibilité**\nPas d'engagement long terme obligatoire`
     },
     garantie: {
       keywords: ['garantie', 'risque', 'marche pas', 'satisfait'],
-      response: `Notre garantie est simple :\n\n🔒 **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, nous corrigeons jusqu'à satisfaction.\n\n📝 **Documentation complète**\nVous gardez le contrôle en toute autonomie.\n\n🚪 **Pas d'engagement**\nLes packs sont one-time. Les abonnements sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
+      response: `Notre garantie est simple :\n\n• **Satisfait ou on itère**\nSi les automatisations ne fonctionnent pas comme prévu, nous corrigeons jusqu'à satisfaction.\n\n• **Documentation complète**\nVous gardez le contrôle en toute autonomie.\n\n• **Pas d'engagement**\nLes packs sont one-time. Les abonnements sont résiliables à tout moment.\n\nVoulez-vous commencer par l'audit gratuit pour voir le potentiel ?`
     },
     delai: {
       keywords: ['délai', 'temps', 'quand', 'combien de temps', 'durée'],
-      response: `Les délais varient selon le projet :\n\n⚡ **Projet simple:** 48-72h\n📦 **Projet standard:** 5-7 jours\n🚀 **Projet complet:** 10-14 jours\n\n📋 **Audit gratuit:** 24-48h\n\nCes délais incluent les révisions. Possibilité d'accélérer si urgence.`
+      response: `Les délais varient selon le projet :\n\n• **Projet simple:** 48-72h\n• **Projet standard:** 5-7 jours\n• **Projet complet:** 10-14 jours\n• **Audit gratuit:** 24-48h\n\nCes délais incluent les révisions. Possibilité d'accélérer si urgence.`
     },
     oui: {
       keywords: ['oui', 'd\'accord', 'ok', 'allons-y', 'intéressé', 'je veux'],
@@ -1316,15 +1316,15 @@
     },
     non: {
       keywords: ['non', 'pas maintenant', 'plus tard', 'je réfléchis'],
-      response: `Pas de problème ! Prenez votre temps. \n\nSi vous changez d'avis, l'audit gratuit reste disponible. Vous pouvez aussi m'envoyer un email à contact@3a-automation.com.\n\n📌 Et n'hésitez pas à revenir ici si vous avez d'autres questions !`
+      response: `Pas de problème ! Prenez votre temps. \n\nSi vous changez d'avis, l'audit gratuit reste disponible. Vous pouvez aussi m'envoyer un email à contact@3a-automation.com.\n\nN'hésitez pas à revenir ici si vous avez d'autres questions !`
     },
     salutations: {
       keywords: ['bonjour', 'salut', 'hello', 'hi', 'coucou', 'bonsoir'],
-      response: `Bonjour ! 👋 Je suis l'assistant 3A Automation.\n\nJe peux vous aider à :\n• Automatiser votre marketing (emails, leads)\n• Comprendre nos services\n• Obtenir un audit gratuit\n\nQuel est votre secteur d'activité ?`
+      response: `Bonjour ! Je suis l'assistant 3A Automation.\n\nJe peux vous aider à :\n• Automatiser votre marketing (emails, leads)\n• Comprendre nos services\n• Obtenir un audit gratuit\n\nQuel est votre secteur d'activité ?`
     },
     remerciements: {
       keywords: ['merci', 'super', 'génial', 'parfait', 'excellent'],
-      response: `Avec plaisir ! 😊\n\nSi vous êtes prêt à passer à l'action, je vous recommande de demander l'audit gratuit - c'est le meilleur moyen de voir concrètement ce qu'on peut faire pour vous.\n\n📧 Autre question ? Je suis là !`
+      response: `Avec plaisir !\n\nSi vous êtes prêt à passer à l'action, je vous recommande de demander l'audit gratuit — c'est le meilleur moyen de voir concrètement ce qu'on peut faire pour vous.\n\nAutre question ? Je suis là !`
     }
   };
 
@@ -1399,12 +1399,12 @@
     if (topicResponses.oui.keywords.some(kw => lower.includes(kw))) {
       // Répondre en fonction du dernier sujet
       if (conversationContext.lastTopic === 'processus') {
-        return `Parfait ! Pour démarrer, rendez-vous sur notre page contact :\n👉 /contact.html\n\nRemplissez le formulaire (5 min) et je vous envoie le rapport sous 24-48h.\n\nDes questions avant de commencer ?`;
+        return `Parfait ! Pour démarrer, rendez-vous sur notre page contact :\n/contact.html\n\nRemplissez le formulaire (5 min) et je vous envoie le rapport sous 24-48h.\n\nDes questions avant de commencer ?`;
       }
       if (conversationContext.lastTopic === 'audit') {
-        return `Super ! Pour votre audit gratuit :\n👉 Rendez-vous sur /contact.html\n\nJe vous envoie le rapport avec 3 recommandations sous 24-48h.\n\n📧 Ou envoyez-moi directement un email à contact@3a-automation.com avec le lien de votre site !`;
+        return `Super ! Pour votre audit gratuit :\nRendez-vous sur /contact.html\n\nJe vous envoie le rapport avec 3 recommandations sous 24-48h.\n\nOu envoyez-moi directement un email à contact@3a-automation.com avec le lien de votre site !`;
       }
-      return `Excellent ! La prochaine étape c'est l'audit gratuit.\n\n👉 Remplissez le formulaire sur /contact.html\n📧 Ou email: contact@3a-automation.com\n\nJe vous réponds sous 24h !`;
+      return `Excellent ! La prochaine étape c'est l'audit gratuit.\n\nRemplissez le formulaire sur /contact.html\nOu email: contact@3a-automation.com\n\nJe vous réponds sous 24h !`;
     }
 
     // Vérifier les topics enrichis
@@ -1450,7 +1450,7 @@
 
     // Réponse par défaut intelligente basée sur le contexte
     if (conversationContext.industry) {
-      return `Pour votre activité ${conversationContext.industry.toUpperCase()}, nous pouvons vous proposer plusieurs solutions.\n\nCommençons par l'audit gratuit : nous vous envoyons un rapport personnalisé avec 3 recommandations prioritaires sous 24-48h.\n\n👉 Ça vous intéresse ?`;
+      return `Pour votre activité ${conversationContext.industry.toUpperCase()}, nous pouvons vous proposer plusieurs solutions.\n\nCommençons par l'audit gratuit : nous vous envoyons un rapport personnalisé avec 3 recommandations prioritaires sous 24-48h.\n\nÇa vous intéresse ?`;
     }
 
     // === TRY AI API WITH MULTI-PROVIDER FALLBACK ===

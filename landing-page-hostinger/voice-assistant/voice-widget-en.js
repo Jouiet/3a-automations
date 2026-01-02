@@ -791,19 +791,19 @@
   const topicResponses = {
     process: {
       keywords: ['process', 'how does it work', 'steps', 'explain', 'how do you'],
-      response: `Here's how it works:\n\n1️⃣ **Diagnostic form** (5 min)\nDescribe your business and goals\n\n2️⃣ **Personalized Report** (24-48h)\nWe send you 3 priority recommendations\n\n3️⃣ **Custom Proposal**\nIf interested, we send a detailed quote tailored to your needs\n\n4️⃣ **Turnkey Implementation**\nWe configure everything - no technical skills needed\n\n✅ No mandatory calls - all written if you prefer!`
+      response: `Here's how it works:\n\n1. **Diagnostic form** (5 min)\nDescribe your business and goals\n\n2. **Personalized Report** (24-48h)\nWe send you 3 priority recommendations\n\n3. **Custom Proposal**\nIf interested, we send a detailed quote tailored to your needs\n\n4. **Turnkey Implementation**\nWe configure everything - no technical skills needed\n\nNo mandatory calls - all written if you prefer!`
     },
     pricing: {
       keywords: ['price', 'cost', 'budget', 'quote', 'how much', 'pricing'],
-      response: `Our pricing is fixed and transparent:\n\n**ONE-TIME PACKS:**\nFrom simple projects to complete deployments\n\n**MONTHLY RETAINERS:**\nOngoing maintenance and optimization\n\n💡 The audit is FREE and helps you choose the right package.\n\n👉 See our pricing at /en/pricing.html or request a custom quote!`
+      response: `Our pricing is fixed and transparent:\n\n**ONE-TIME PACKS:**\nFrom simple projects to complete deployments\n\n**MONTHLY RETAINERS:**\nOngoing maintenance and optimization\n\nThe audit is FREE and helps you choose the right package.\n\nSee our pricing at /en/pricing.html or request a custom quote!`
     },
     audit: {
       keywords: ['audit', 'free', 'diagnostic', 'analysis'],
-      response: `The audit is 100% free!\n\n📋 **What you get:**\n• Analysis of your current processes\n• Automation opportunities identified\n• Estimated ROI potential\n• Personalized recommendations\n\n⏱️ **Timeframe:** 24-48h after the form\n\n👉 Would you like me to send you the form link?`
+      response: `The audit is 100% free!\n\n**What you get:**\n• Analysis of your current processes\n• Automation opportunities identified\n• Estimated ROI potential\n• Personalized recommendations\n\n**Timeframe:** 24-48h after the form\n\nWould you like me to send you the form link?`
     },
     automations: {
       keywords: ['automation', 'automations', 'workflow', 'flows', 'what can you'],
-      response: `We offer a comprehensive automation catalog:\n\n📧 **Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n🎯 **Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n📊 **Analytics:**\nDashboards, Alerts, Automated reports\n\n🛒 **E-commerce:**\nProduct sync, Stock alerts, Reviews\n\n🤖 **AI & Video:**\nMarketing videos, AI Avatar, Voice AI\n\nWhich type interests you most?`
+      response: `We offer a comprehensive automation catalog:\n\n**Email Marketing:**\nWelcome, Abandoned cart, Post-purchase, Winback\n\n**Lead Generation:**\nCapture, Scoring, Qualification, Nurturing\n\n**Analytics:**\nDashboards, Alerts, Automated reports\n\n**E-commerce:**\nProduct sync, Stock alerts, Reviews\n\n**AI & Video:**\nMarketing videos, AI Avatar, Voice AI\n\nWhich type interests you most?`
     },
     leads: {
       keywords: ['lead', 'prospect', 'customer', 'acquisition', 'find customers'],
@@ -811,15 +811,15 @@
     },
     difference: {
       keywords: ['difference', 'why you', 'agency', 'advantage', 'unique'],
-      response: `What makes us different:\n\n✅ **Specialized agency**\nYou work directly with experts, not salespeople\n\n✅ **Fair pricing**\nTransparent, competitive rates\n\n✅ **Specialization**\nMarketing automation experts - not generalists\n\n✅ **Measurable results**\nProven ROI on every project\n\n✅ **Flexibility**\nNo long-term commitment required`
+      response: `What makes us different:\n\n• **Specialized agency**\nYou work directly with experts, not salespeople\n\n• **Fair pricing**\nTransparent, competitive rates\n\n• **Specialization**\nMarketing automation experts - not generalists\n\n• **Measurable results**\nProven ROI on every project\n\n• **Flexibility**\nNo long-term commitment required`
     },
     guarantee: {
       keywords: ['guarantee', 'risk', 'not work', 'satisfied'],
-      response: `Our guarantee is simple:\n\n🔒 **Satisfied or we iterate**\nIf automations don't work as expected, we fix until you're satisfied.\n\n📝 **Complete documentation**\nYou keep control, even without us.\n\n🚪 **No commitment**\nPacks are one-time. Retainers cancelable anytime.\n\nWant to start with the free audit?`
+      response: `Our guarantee is simple:\n\n• **Satisfied or we iterate**\nIf automations don't work as expected, we fix until you're satisfied.\n\n• **Complete documentation**\nYou keep control, even without us.\n\n• **No commitment**\nPacks are one-time. Retainers cancelable anytime.\n\nWant to start with the free audit?`
     },
     timeline: {
       keywords: ['timeline', 'when', 'how long', 'duration', 'time'],
-      response: `Timelines vary by project:\n\n⚡ **Simple project:** 48-72h\n📦 **Standard project:** 5-7 days\n🚀 **Complete project:** 10-14 days\n\n📋 **Free audit:** 24-48h\n\nThese include revisions. Rush available if needed.`
+      response: `Timelines vary by project:\n\n• **Simple project:** 48-72h\n• **Standard project:** 5-7 days\n• **Complete project:** 10-14 days\n• **Free audit:** 24-48h\n\nThese include revisions. Rush available if needed.`
     },
     yes: {
       keywords: ['yes', 'sure', 'ok', 'let\'s go', 'interested', 'i want'],
@@ -827,15 +827,15 @@
     },
     no: {
       keywords: ['no', 'not now', 'later', 'thinking'],
-      response: `No problem! Take your time.\n\nThe free audit is always available. You can also email us at contact@3a-automation.com.\n\n📌 Feel free to come back if you have questions!`
+      response: `No problem! Take your time.\n\nThe free audit is always available. You can also email us at contact@3a-automation.com.\n\nFeel free to come back if you have questions!`
     },
     greetings: {
       keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon'],
-      response: `Hello! 👋 I'm the 3A Automation assistant.\n\nI can help you:\n• Automate your marketing (emails, leads)\n• Understand our services\n• Get a free audit\n\nWhat industry are you in?`
+      response: `Hello! I'm the 3A Automation assistant.\n\nI can help you:\n• Automate your marketing (emails, leads)\n• Understand our services\n• Get a free audit\n\nWhat industry are you in?`
     },
     thanks: {
       keywords: ['thanks', 'thank you', 'great', 'perfect', 'awesome'],
-      response: `You're welcome! 😊\n\nIf you're ready to take action, we recommend the free audit - it's the best way to see what we can do for you.\n\n📧 More questions? We're here!`
+      response: `You're welcome!\n\nIf you're ready to take action, we recommend the free audit — it's the best way to see what we can do for you.\n\nMore questions? We're here!`
     }
   };
 
@@ -872,12 +872,12 @@
     // Check for confirmation ("yes")
     if (topicResponses.yes.keywords.some(kw => lower.includes(kw))) {
       if (conversationContext.lastTopic === 'process') {
-        return `Perfect! To get started:\n👉 Go to /en/contact.html\n\nFill out the form (5 min) and we'll send the report in 24-48h.\n\nAny questions before starting?`;
+        return `Perfect! To get started:\n• Go to /en/contact.html\n\nFill out the form (5 min) and we'll send the report in 24-48h.\n\nAny questions before starting?`;
       }
       if (conversationContext.lastTopic === 'audit') {
-        return `Great! For your free audit:\n👉 Go to /en/contact.html\n\nWe'll send the report with 3 recommendations in 24-48h.\n\n📧 Or email us directly at contact@3a-automation.com with your website link!`;
+        return `Great! For your free audit:\n• Go to /en/contact.html\n\nWe'll send the report with 3 recommendations in 24-48h.\n\nOr email us directly at contact@3a-automation.com with your website link!`;
       }
-      return `Excellent! Next step is the free audit.\n\n👉 Fill out the form at /en/contact.html\n📧 Or email: contact@3a-automation.com\n\nWe'll respond within 24h!`;
+      return `Excellent! Next step is the free audit.\n\n• Fill out the form at /en/contact.html\n• Or email: contact@3a-automation.com\n\nWe'll respond within 24h!`;
     }
 
     // Check enriched topics
@@ -919,7 +919,7 @@
 
     // Smart default based on context
     if (conversationContext.industry) {
-      return `For your ${conversationContext.industry.toUpperCase()} business, we can offer several solutions.\n\nLet's start with the free audit: we'll send you a personalized report with 3 priority recommendations in 24-48h.\n\n👉 Interested?`;
+      return `For your ${conversationContext.industry.toUpperCase()} business, we can offer several solutions.\n\nLet's start with the free audit: we'll send you a personalized report with 3 priority recommendations in 24-48h.\n\nInterested?`;
     }
 
     // True default - qualification question
