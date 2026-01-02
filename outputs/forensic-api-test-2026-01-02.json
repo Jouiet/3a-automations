@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-01-02T12:19:51.898Z",
+  "tests": [
+    {
+      "name": "Shopify API",
+      "status": "OK",
+      "details": {
+        "httpStatus": 200,
+        "latency": 744,
+        "storeName": "My Store",
+        "domain": "guqsu3-yj.myshopify.com",
+        "plan": "basic",
+        "email": "jouiet.hat@gmail.com"
+      }
+    },
+    {
+      "name": "Klaviyo API",
+      "status": "OK",
+      "details": {
+        "httpStatus": 200,
+        "latency": 448,
+        "listCount": 10,
+        "lists": [
+          "LinkedIn - Other",
+          "LinkedIn - Decision Makers",
+          "Google Maps - Local Business",
+          "B2B Outreach",
+          "Welcome Series",
+          "Google Maps - Tech",
+          "Prévisualiser la liste",
+          "Liste de SMS",
+          "Google Maps - HR",
+          "Google Maps - Marketing"
+        ]
+      }
+    },
+    {
+      "name": "n8n API",
+      "status": "FAILED",
+      "details": {
+        "httpStatus": 401,
+        "latency": 366,
+        "error": "{\"message\":\"'X-N8N-API-KEY' header required\"}"
+      }
+    },
+    {
+      "name": "xAI/Grok API",
+      "status": "OK",
+      "details": {
+        "httpStatus": 200,
+        "latency": 385,
+        "modelCount": 11,
+        "models": [
+          "grok-2-1212",
+          "grok-2-vision-1212",
+          "grok-3",
+          "grok-3-mini",
+          "grok-4-0709",
+          "grok-4-1-fast-non-reasoning",
+          "grok-4-1-fast-reasoning",
+          "grok-4-fast-non-reasoning",
+          "grok-4-fast-reasoning",
+          "grok-code-fast-1",
+          "grok-2-image-1212"
+        ]
+      }
+    },
+    {
+      "name": "Google Service Account",
+      "status": "OK",
+      "details": {
+        "projectId": "a-automation-agency",
+        "clientEmail": "id-a-automation-service@a-automation-agency.iam.gserviceaccount.com"
+      }
+    }
+  ]
+}

@@ -1,28 +1,27 @@
-# MCPs Status (Tested 27/12/2025)
+# MCPs Status (Verified 02/01/2026)
 
-## Working MCPs (10/17)
+## Working MCPs (10/16)
 
 | MCP | Status | Notes |
 |-----|--------|-------|
 | chrome-devtools | ✅ OK | list_pages |
 | playwright | ✅ OK | browser_tabs |
 | gemini | ✅ OK | 6 models |
-| hostinger | ✅ OK | VPS 1168256 |
-| ~~n8n~~ | ❌ REMOVED | MCP supprimé (0 workflows - all replaced by scripts) |
-| klaviyo | ✅ OK | 3 lists |
-| grok | ✅ OK | 11 models |
+| hostinger | ✅ OK | VPS 1168256, 4 Docker projects |
+| klaviyo | ✅ OK | 10 lists (verified) |
+| github | ✅ OK | Repo access working |
 | filesystem | ✅ OK | built-in |
 | memory | ✅ OK | built-in |
 | claude-mcp | ✅ OK | built-in |
+| shopify | ✅ OK | guqsu3-yj.myshopify.com |
 
-## Needs Configuration (4)
+## Needs Configuration (3)
 
 | MCP | Issue | Fix |
 |-----|-------|-----|
-| github | Resource not found | Check repo name |
 | google-analytics | SA not added | Add to GA4 property |
 | google-sheets | Not shared | Share with SA |
-| apify | Token issue | MCP package bug |
+| apify | ❌ Token invalid | Regenerate token at apify.com |
 
 ## Not Configured (1)
 
@@ -30,17 +29,12 @@
 |-----|--------|
 | powerbi-remote | Entra ID required |
 
-## Configured (Session 115)
+## Removed (Session 119)
 
-| MCP | Status | Notes |
-|-----|--------|-------|
-| wordpress | ✅ OK | wp.3a-automation.com |
-
-## Configured (Session 114)
-
-| MCP | Status | Notes |
-|-----|--------|-------|
-| shopify | ✅ OK | guqsu3-yj.myshopify.com |
+| MCP | Reason |
+|-----|--------|
+| n8n | All 5 workflows replaced by native scripts |
+| grok | Replaced by direct API calls in scripts |
 
 ## Service Account
 
