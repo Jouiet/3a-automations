@@ -375,7 +375,7 @@ All P2 items completed Session 117ter.
 - **Automations:** `automations/automations-registry.json`
 - **Scripts:** `automations/agency/core/`
 - **Sessions:** `HISTORY.md`
-- **n8n:** `.claude/rules/07-n8n-workflows.md`
+- **Scripts natifs:** `.claude/rules/07-native-scripts.md`
 
 ## URLs
 

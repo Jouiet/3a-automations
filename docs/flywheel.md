@@ -1,23 +1,25 @@
 # FLYWHEEL E-COMMERCE BLUEPRINT 2025
 ## AI Agency Automation (AAA) - Architecture Optimale
-### Mis à jour: Session 103 (28/12/2025) - Automation Rate 35.9% (28/78 schedulables)
+### Mis à jour: Session 119 (02/01/2026) - Native Scripts (0 n8n workflows)
 
 ---
 
-## SESSION 103 UPDATE (28/12/2025)
+## SESSION 119 UPDATE (02/01/2026)
 
 ```
+MIGRATION COMPLETE: n8n → Native Node.js Scripts
+├── n8n workflows: 0 (all migrated to native scripts)
+├── Native scripts: 8 résilients (automations/agency/core/)
+├── Fallback chains: 3+ AI providers per script
+└── See: .claude/rules/07-native-scripts.md
+
 AUTOMATION RATE FACTUEL:
-├── Schedulables: 28/78 (35.9%) - TOUS AUTOMATISÉS
-│   ├── Master-scheduler + n8n: 17 automations
+├── Schedulables: 28/86 - TOUS AUTOMATISÉS via scripts natifs
+│   ├── Master-scheduler + scripts .cjs: 17 automations
 │   └── Plateforme (Klaviyo/Shopify): 11 automations
-├── Non-schedulables: 50/78 (64.1%)
+├── Non-schedulables: 58/86
 │   └── On-demand, templates, external, one-time, conceptual
 └── CONCLUSION: 100% de ce qui PEUT être automatisé EST automatisé
-
-n8n WORKFLOW UPDATES:
-├── blog-article-multi-channel.json: Weekly Schedule trigger (Monday 9AM)
-└── linkedin-lead-scraper.json: Email outreach connection ajoutée
 ```
 
 ---
@@ -695,7 +697,7 @@ APIFY_TOKEN=apify_api_xxx
 | `configure_klaviyo.py` | Initial Setup | Once |
 | `upload_templates_to_klaviyo.py` | Email Templates | On-demand |
 | `complete_all_shopify_policies.py` | Legal Pages | Once |
-| `activate_n8n_workflow_simple.py` | Workflow Activation | On-demand |
+| `start-native-script.sh` | Script Activation | On-demand |
 | `setup_google_sheet.py` | Dashboard Setup | Once |
 
 ---

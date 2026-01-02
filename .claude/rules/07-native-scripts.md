@@ -1,11 +1,19 @@
-# n8n Workflows - Session 119
+# Native Automation Scripts - Session 119
+
+> **STATUS: 0 n8n workflows remaining. ALL replaced by native Node.js scripts.**
+> This file documents the migration from n8n to native scripts and the current architecture.
 
 ## Architecture
 
 ```
-n8n Community Edition: NE SUPPORTE PAS $env variables
-n8n Code Node: Problèmes avec JS complexe (fetch non supporté)
-Solution: Scripts natifs (.cjs) avec process.env + multi-provider fallback
+ANCIEN (ABANDONNÉ):
+  n8n Community Edition: NE SUPPORTE PAS $env variables
+  n8n Code Node: Problèmes avec JS complexe (fetch non supporté)
+
+ACTUEL (EN PRODUCTION):
+  Scripts natifs (.cjs) avec process.env + multi-provider fallback
+  Location: automations/agency/core/
+  Count: 8 scripts résilients
 ```
 
 ## ANALYSE COMPARATIVE FACTUELLE (30/12/2025)

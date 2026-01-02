@@ -13,7 +13,7 @@
 | google-analytics | `mcp-server-google-analytics` | Service Account JSON |
 | google-sheets | `mcp-gsheets` | Service Account JSON |
 | shopify | `shopify-mcp` | guqsu3-yj.myshopify.com ✅ |
-| n8n | SSE remote | n8n.srv1168256.hstgr.cloud ✅ |
+| n8n | SSE remote | n8n.srv1168256.hstgr.cloud ✅ (Infrastructure only - 0 workflows) |
 | wordpress | `claudeus-wp-mcp` | wp.3a-automation.com ✅ |
 
 ## MCPs à Configurer

@@ -130,9 +130,9 @@ BACKEND:
 └── Vercel: INTERDIT
 
 AUTOMATION:
-├── n8n (workflow automation)
-├── Node.js (scripts custom .cjs)
-└── 8 scripts résilients multi-AI
+├── Node.js (scripts custom .cjs) - PRODUCTION
+├── 8 scripts résilients multi-AI
+└── n8n Infrastructure only (0 workflows - all migrated)
 
 AI PROVIDERS (Fallback Chain):
 ├── Primary: xAI Grok 3
@@ -252,7 +252,7 @@ ACQUISITION 100% DIGITALE:
 ├── SEO/AEO (Score actuel: 92%/89%)
 ├── Content Marketing (Blog, Guides)
 ├── Google Ads + Meta Ads
-├── Funnels automatisés (n8n + Klaviyo)
+├── Funnels automatisés (Node.js scripts + Klaviyo)
 └── Voice Widget inbound
 
 RESPONSABILITÉ E-MARKETING JUNIOR:
@@ -411,7 +411,7 @@ STRUCTURE: SAFE ou actions ordinaires
 
 | MCP | Status |
 |-----|--------|
-| n8n | ✅ |
+| n8n | ✅ (Infrastructure only - 0 workflows) |
 | Klaviyo | ✅ |
 | Shopify | ✅ |
 | xAI/Grok | ✅ |
