@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "lastUpdated": "2026-01-02",
-  "totalCount": 88,
+  "totalCount": 89,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -31,9 +31,9 @@
       "count": 9
     },
     "content": {
-      "name_fr": "Contenu & Vidéo",
-      "name_en": "Content & Video",
-      "count": 9
+      "name_fr": "Contenu & Vidéo & Podcast",
+      "name_en": "Content & Video & Podcast",
+      "count": 10
     },
     "ai-avatar": {
       "name_fr": "AI Avatar & Influencer",
@@ -1111,6 +1111,27 @@
       "status": "tested-ok"
     },
     {
+      "id": "podcast-generator-resilient",
+      "name_fr": "Podcast Generator (Blog → Audio)",
+      "name_en": "Podcast Generator (Blog → Audio)",
+      "category": "content",
+      "type": "script",
+      "script": "agency/core/podcast-generator-resilient.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Blog → Podcast 2 voix personnalisables (> NotebookLM)",
+      "benefit_en": "Blog → Podcast 2 customizable voices (> NotebookLM)",
+      "port": 3010,
+      "features": ["multi-ai-fallback", "multi-tts-fallback", "customizable-voices", "client-ready"],
+      "providers": {
+        "ai": "Anthropic→Grok→Gemini",
+        "tts": "ElevenLabs→Gemini TTS→fal.ai MiniMax"
+      },
+      "superiority": "NotebookLM: 2 generic voices, no API, max 30min. This: unlimited, API, customizable",
+      "status": "tested-ok"
+    },
+    {
       "id": "grok-voice-realtime",
       "name_fr": "Grok Voice Realtime (WebSocket + TTS)",
       "name_en": "Grok Voice Realtime (WebSocket + TTS)",
@@ -1222,7 +1243,7 @@
     "externalServices": 4,
     "aiAvatarWorkflows": 2,
     "b2bLeadPipelines": 4,
-    "resilientScripts": 5,
+    "resilientScripts": 6,
     "voiceAiScripts": 3,
     "crmIntegrations": 2,
     "crmScriptsV1_1": {
