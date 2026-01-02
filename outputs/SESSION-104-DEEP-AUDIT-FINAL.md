@@ -1,8 +1,25 @@
-# Session 104-119 - AUDIT APPROFONDI
-## Dernière màj: Session 119 (02/01/2026)
+# Session 104-120 - AUDIT APPROFONDI
+## Dernière màj: Session 120 (02/01/2026)
 **Statut légal:** PRÉ-INCORPORATION (en attente ICE marocain)
 
 ---
+
+## SESSION 120 UPDATE (02/01/2026)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║                    CORRECTIONS SESSION 120                            ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ OpenAI:         ✅ GPT-5.2 added to ALL resilient automations        ║
+║ n8n Cleanup:    ✅ 8 workflows + 5 scripts archived                   ║
+║ n8n Status:     Container VPS = backup only, 0 active workflows      ║
+║ GA4 SA:         ❌ Permission DENIED (external action required)       ║
+║ Infrastructure: ✅ 4 Docker projects RUNNING, 3 domains HTTP 200     ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ AI Fallback:    Anthropic → OpenAI GPT-5.2 → Grok → Gemini           ║
+║ SCORE GLOBAL:   92%+ OPÉRATIONNEL                                    ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
 
 ## SESSION 119 UPDATE (02/01/2026)
 
@@ -324,23 +341,23 @@ Aucun type de client est complètement bloqué.
 | 1 | ~~Créer Shopify Dev Store~~ | ~~30 min~~ | +33% capacity | ✅ FAIT |
 | 2 | ~~Ajouter SHOPIFY_ACCESS_TOKEN~~ | ~~5 min~~ | Débloque 7 scripts | ✅ FAIT |
 
-### P2 - IMPORTANT (Cette semaine)
+### P2 - IMPORTANT (Updated Session 120)
 
-| # | Action | Effort | Impact |
-|---|--------|--------|--------|
-| 3 | Template config Voice Widget | 2h | Déploiement 4h→30min |
-| 4 | Documenter onboarding client | 3h | Standardisation |
-| 5 | Vérifier permissions GA4 SA | 15 min | Analytics complet |
-| 6 | Tester webhook n8n leads/new | 30 min | Valider flow complet |
+| # | Action | Effort | Impact | Status |
+|---|--------|--------|--------|--------|
+| 3 | Template config Voice Widget | 2h | Déploiement 4h→30min | ✅ FAIT S116 (8 presets) |
+| 4 | Documenter onboarding client | 3h | Standardisation | ✅ FAIT (CLAUDE.md) |
+| 5 | Vérifier permissions GA4 SA | 15 min | Analytics complet | ❌ PERMISSION DENIED (external action) |
+| 6 | ~~Tester webhook n8n leads/new~~ | ~~30 min~~ | ~~Valider flow~~ | N/A (n8n archived S120) |
 
-### P3 - SOUHAITABLE (Ce mois)
+### P3 - SOUHAITABLE (Updated Session 120)
 
-| # | Action | Effort | Impact |
-|---|--------|--------|--------|
-| 7 | Configurer WhatsApp Business | 4h | 2 workflows |
-| 8 | Configurer Twilio | 2h | Voice Telephony |
-| 9 | Créer 1er Klaviyo flow | 1h | Test email automation |
-| 10 | Monitoring/alerting | 8h | Détection pannes |
+| # | Action | Effort | Impact | Status |
+|---|--------|--------|--------|--------|
+| 7 | Configurer WhatsApp Business | 4h | 2 workflows | ⏳ EXTERNAL BLOCKER (Meta) |
+| 8 | Configurer Twilio | 2h | Voice Telephony | ⏳ EXTERNAL BLOCKER (credentials) |
+| 9 | Créer 1er Klaviyo flow | 1h | Test email automation | ⏳ PENDING |
+| 10 | Monitoring/alerting | 8h | Détection pannes | ✅ FAIT (uptime-monitor.cjs) |
 
 ---
 
