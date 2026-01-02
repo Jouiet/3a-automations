@@ -100,9 +100,10 @@ Alternatives Compatibles:
 
 Script Natif Prêt (Session 119):
 ├── Fichier: automations/agency/core/voice-telephony-bridge.cjs
+├── Carrier: Twilio (config existante)
 ├── Endpoints: /voice/inbound, /voice/stream, /voice/booking-complete
 ├── Intégration: Google Calendar + WhatsApp confirmation
-└── Status: Ready (awaiting Twilio credentials)
+└── Status: Ready (awaiting Twilio credentials in .env)
 ```
 
 ---
@@ -197,8 +198,8 @@ Option B: Grok Voice + Telnyx (Full Control)
 |---|--------|----------|--------|
 | 1 | Uploader knowledge base sur Dial.Plus | P0 | ✅ FAIT |
 | 2 | Tester appels entrants Dial.Plus | P0 | 🔄 À TESTER |
-| 3 | Créer compte Telnyx (alternative Twilio) | P1 | ⏳ Pending |
-| 4 | Configurer script natif avec Telnyx | P1 | ✅ FAIT (voice-telephony-bridge.cjs) |
+| 3 | ~~Créer compte Telnyx~~ | N/A | ❌ Skipped (config existante Twilio suffit) |
+| 4 | Configurer script natif avec Twilio | P1 | ✅ FAIT (voice-telephony-bridge.cjs) |
 | 5 | Tester appel Grok Voice end-to-end | P1 | ⏳ Pending |
 | 6 | Documenter procédure setup client | P2 | ⏳ Pending |
 
