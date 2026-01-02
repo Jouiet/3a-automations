@@ -32,7 +32,7 @@ Avant de faire des claims, consulter:
 1. ✅ "Expertise démontrée sur 3 projets clients"
 2. ✅ "~25 scripts génériques testés"
 3. ✅ "Consultant automation Shopify/Klaviyo"
-4. ✅ "3 MCPs fonctionnels (Klaviyo, Shopify, n8n)"
+4. ✅ "3 MCPs fonctionnels (Klaviyo, Shopify, Hostinger)"
 
 ## Workflow de Vérification
 
@@ -50,7 +50,7 @@ CLAIM → VÉRIFICATION → PREUVE → DOCUMENTATION
 | Automations registry | 82 | automations-registry.json |
 | security-utils.cjs | 31 exports | Test empirique |
 | MCPs fonctionnels | 12+ | 05-mcps-status.md |
-| APIs opérationnelles | Shopify ✅, n8n ✅, Klaviyo ✅, Apify ✅ | Test API |
+| APIs opérationnelles | Shopify ✅, Klaviyo ✅, Apify ✅, Hostinger ✅ | Test API |
 | Fichier .env | ✅ Complet | Vérifié |
 
 **Source de vérité:** `.claude/rules/01-project-status.md`

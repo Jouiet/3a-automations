@@ -343,9 +343,9 @@ All P2 items completed Session 117ter.
 | Product Photos ✅ | SUPPRIMÉ → product-photos-resilient.cjs |
 | WhatsApp Confirm ⛔ | SUPPRIMÉ → whatsapp-booking-notifications.cjs |
 | WhatsApp Remind ⛔ | SUPPRIMÉ → whatsapp-booking-notifications.cjs |
-| Grok Voice ⛔ | RESTANT (Twilio blocked) |
+| Grok Voice ⛔ | SUPPRIMÉ → voice-telephony-bridge.cjs |
 
-**Résultat: 5 → 1 workflow. Scripts natifs = 0 dépendance n8n.**
+**Résultat: 5 → 0 workflows. ALL replaced by native scripts.**
 
 ## CREDENTIALS AWAITING
 
@@ -361,7 +361,7 @@ All P2 items completed Session 117ter.
 
 | API | Status | Notes |
 |-----|--------|-------|
-| n8n | ✅ | 1 workflow |
+| n8n | ✅ | Infrastructure only (0 workflows) |
 | Klaviyo | ✅ | 15 listes |
 | Shopify | ✅ | Dev store |
 | xAI/Grok | ✅ | 11 models |

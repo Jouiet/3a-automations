@@ -145,7 +145,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 - Voice AI Widget fonctionnel (FR/EN)
 - Site web 69 pages bilingue
 - Infrastructure Docker (Hostinger VPS)
-- Stack: Shopify, Klaviyo, GA4, n8n, Claude/Gemini/Grok
+- Stack: Shopify, Klaviyo, GA4, Claude/Gemini/Grok
 
 ### Ce que nous N'AVONS PAS encore
 - Revenue recurrent
@@ -156,7 +156,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 ### 4 Types d'Investisseurs Cibles
 1. **Venture Capital**: €300K-1M (Series A target, horizon 24 mois)
 2. **Angel Investors**: €10K-50K (Seed stage, valorisation pre-traction)
-3. **Partenaires Strategiques**: Agences Shopify, integrateurs n8n, ESN
+3. **Partenaires Strategiques**: Agences Shopify, integrateurs, ESN
 4. **Acquereurs Potentiels**: M&A horizon 3-5 ans post-traction
 
 ### Documents Disponibles (sur demande)

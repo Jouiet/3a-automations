@@ -8,7 +8,7 @@
 | playwright | ✅ OK | browser_tabs |
 | gemini | ✅ OK | 6 models |
 | hostinger | ✅ OK | VPS 1168256 |
-| n8n | ✅ OK | 10 workflows |
+| n8n | ✅ OK | Infrastructure only (0 workflows - all replaced by scripts) |
 | klaviyo | ✅ OK | 3 lists |
 | grok | ✅ OK | 11 models |
 | filesystem | ✅ OK | built-in |
