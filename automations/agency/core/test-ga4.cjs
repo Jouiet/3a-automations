@@ -7,7 +7,8 @@
 
 const { BetaAnalyticsDataClient } = require('@google-analytics/data');
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+// Load .env from project root (3 levels up from agency/core/)
+require('dotenv').config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID;
 const SA_PATH = process.env.GOOGLE_APPLICATION_CREDENTIALS;

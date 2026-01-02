@@ -13,13 +13,24 @@
 ║ OpenAI:         ✅ GPT-5.2 added to ALL resilient automations        ║
 ║ n8n Cleanup:    ✅ 8 workflows + 5 scripts archived                   ║
 ║ n8n Status:     Container VPS = backup only, 0 active workflows      ║
-║ GA4 SA:         ❌ Permission DENIED (external action required)       ║
+║ GA4 SA:         ✅ WORKING! Property 516832662, 37 users/7d          ║
 ║ Infrastructure: ✅ 4 Docker projects RUNNING, 3 domains HTTP 200     ║
+║ test-ga4.cjs:   ✅ Path issue fixed, script operational              ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║ AI Fallback:    Anthropic → OpenAI GPT-5.2 → Grok → Gemini           ║
-║ SCORE GLOBAL:   92%+ OPÉRATIONNEL                                    ║
+║ MCPs:           11/16 functional (GA4 now working)                   ║
+║ SCORE GLOBAL:   95%+ OPÉRATIONNEL                                    ║
 ╚═══════════════════════════════════════════════════════════════════════╝
 ```
+
+### GA4 Verification (Session 120 - Rigorous Factual Check)
+
+| Property ID | Status | Metrics (7d) |
+|-------------|--------|--------------|
+| 516832662 (.env) | ✅ WORKS | 37 users, 78 sessions, 295 pageviews |
+| 471058655 (old docs) | ❌ DENIED | Incorrect property ID |
+
+**Root cause:** Documentation had wrong property ID. Fixed in 05-mcps-status.md.
 
 ## SESSION 119 UPDATE (02/01/2026)
 
