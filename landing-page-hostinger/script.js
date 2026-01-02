@@ -919,54 +919,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ───────────────────────────────────────────────────────────────────────────
-  // SMOOTH SECTION REVEAL
+  // SMOOTH SECTION REVEAL - DISABLED to fix CLS=1.0
+  // The animation was causing Cumulative Layout Shift by adding .section-hidden
+  // to sections after initial render. CSS animations already in styles.css.
+  // To re-enable: uncomment and add .section-hidden to HTML sections directly.
   // ───────────────────────────────────────────────────────────────────────────
-  const sections = document.querySelectorAll('section');
-
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('section-visible');
-      }
-    });
-  }, {
-    threshold: 0.05,  // Lower threshold for earlier reveal
-    rootMargin: '100px 0px -50px 0px'  // Trigger 100px before entering viewport
-  });
-
-  sections.forEach((section, index) => {
-    // Do not apply the hidden effect to the first section (hero)
-    if (index === 0) {
-      section.classList.add('section-visible');
-      return;
-    }
-    section.classList.add('section-hidden');
-    sectionObserver.observe(section);
-  });
-
-  // Fallback: reveal all sections after 3 seconds (for slow/headless browsers)
-  setTimeout(() => {
-    sections.forEach(section => {
-      if (!section.classList.contains('section-visible')) {
-        section.classList.add('section-visible');
-      }
-    });
-  }, 3000);
-
-  // Add CSS for section animations
-  const sectionStyle = document.createElement('style');
-  sectionStyle.textContent = `
-    .section-hidden {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .section-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  `;
-  document.head.appendChild(sectionStyle);
 
   // ───────────────────────────────────────────────────────────────────────────
   // INITIALIZE
