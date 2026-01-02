@@ -1,6 +1,6 @@
 # MCPs Status (Verified 02/01/2026)
 
-## Working MCPs (11/16)
+## Working MCPs (11/14)
 
 | MCP | Status | Notes |
 |-----|--------|-------|
