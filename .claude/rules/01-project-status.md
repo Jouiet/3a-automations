@@ -69,7 +69,7 @@
 | xAI/Grok API | ✅ | 385ms, 11 models |
 | Google SA | ✅ | a-automation-agency project |
 | Apify API | ✅ | STARTER $39/mo ACTIVE (MCP bug, API works) |
-| MCPs | 10/13 | 3 need permissions config |
+| MCPs | 11/16 | 2 MCP package bugs (API works direct) |
 | Docker Projects | 4 | 6 containers RUNNING |
 | VPS 1168256 | ✅ | Ubuntu 24.04, 8GB RAM |
 | Automations Registry | v2.2.0 | 88=88=88 ✅ |
@@ -468,7 +468,7 @@ All P2 items completed Session 117ter.
 | Filesystem | ✅ | File operations OK |
 | Shopify-Dev | ✅ | Schema introspection OK |
 | Apify | ⚠️ | MCP package bug (API works, STARTER $39/mo ACTIVE) |
-| Google Analytics | ⚠️ | SA needs GA4 property access |
+| Google Analytics | ✅ | Property 516832662 (37 users/7d, Session 120 verified) |
 | Google Sheets | ⚠️ | SA needs sheet sharing |
 
 ## Docker Infrastructure (Verified 02/01/2026)
