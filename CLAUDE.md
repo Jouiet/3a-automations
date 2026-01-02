@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 27.0 | Date: 2026-01-02 | Session: 120 (FRONTEND CRM COMPLETE)
+## Version: 28.0 | Date: 2026-01-02 | Session: 121 (PODCAST GENERATOR)
 
 ---
 
@@ -10,16 +10,93 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (88, v2.2.0) |
-| History | `HISTORY.md` (Sessions 0-120) |
-| Scripts résilients | `automations/agency/core/` (10 scripts, P0-P1-P2 secured) |
+| Automations | `automations/automations-registry.json` (89, v2.3.0) |
+| History | `HISTORY.md` (Sessions 0-121) |
+| Scripts résilients | `automations/agency/core/` (11 scripts, P0-P1-P2 secured) |
 | Pages | 63 (FR/EN + Academy + Investors) |
 | SEO Score | **96%** |
 | AEO Score | **95%** |
 | Docker Projects | 4 running (3a-website, cinematicads, root, wordpress) |
 | CRM Scripts | HubSpot v1.1.0 + Omnisend v1.1.0 |
+| Podcast Generator | v1.0.0 (> NotebookLM) |
 
-## Session 120 - FRONTEND CRM + HEALTH CHECKS (02/01/2026)
+## Session 121 - PODCAST GENERATOR RESILIENT (02/01/2026)
+
+### podcast-generator-resilient.cjs v1.0.0
+
+**SUPÉRIEUR à NotebookLM:**
+
+| Feature | NotebookLM | 3A Podcast Generator |
+|---------|------------|---------------------|
+| Voix | 2 génériques fixes | Personnalisables (ElevenLabs, Gemini, fal.ai) |
+| API | ❌ Aucune | ✅ REST + CLI |
+| Durée max | 30 min | Illimitée |
+| Édition script | ❌ Non | ✅ JSON modifiable |
+| Client-ready | ❌ Non | ✅ Branding configurable |
+| Fallback | ❌ Aucun | ✅ Multi-provider |
+
+### Fallback Chains (Session 120: OpenAI Added)
+
+| Purpose | Chain (4 AI providers) |
+|---------|------------------------|
+| Script Generation | Anthropic → **OpenAI GPT-5.2** → Grok → Gemini |
+| Audio TTS | ElevenLabs → Gemini TTS → fal.ai MiniMax |
+
+### Health Check
+
+```
+AI Providers: ✅ Anthropic, ✅ Grok, ✅ Gemini
+TTS Providers: ⚠️ ElevenLabs (needs key), ✅ Gemini TTS, ⚠️ fal.ai (needs key)
+Overall: ✅ OPERATIONAL
+```
+
+### Usage
+
+```bash
+# Health check
+node automations/agency/core/podcast-generator-resilient.cjs --health
+
+# Generate from topic
+node automations/agency/core/podcast-generator-resilient.cjs --topic="E-commerce 2026" --language=fr
+
+# Generate from blog file
+node automations/agency/core/podcast-generator-resilient.cjs --blog="path/to/article.md"
+
+# Server mode (port 3010)
+node automations/agency/core/podcast-generator-resilient.cjs --server --port=3010
+```
+
+### Registry Updated
+
+- Version: 2.3.0 (was 2.2.0)
+- Total: 89 automations (was 88)
+- Resilient scripts: 6 (was 5)
+- Content category: 10 (was 9)
+
+---
+
+## Session 120 - OPENAI FALLBACK + FRONTEND CRM (02/01/2026)
+
+### OpenAI GPT-5.2 Added to ALL Resilient Scripts
+
+Market leader integration (68-82% market share). All 6 resilient scripts now have 4 AI providers.
+
+| Script | Fallback Chain (Session 120) |
+|--------|------------------------------|
+| blog-generator-resilient.cjs | Anthropic → **OpenAI** → Grok → Gemini |
+| voice-api-resilient.cjs | Grok → **OpenAI GPT-5.2** → Gemini → Claude → Local |
+| email-personalization-resilient.cjs | Grok → **OpenAI GPT-5.2** → Gemini → Claude → Static |
+| product-photos-resilient.cjs (VISION) | Gemini → **OpenAI GPT-5.2 Vision** → Grok → Claude |
+| podcast-generator-resilient.cjs | Anthropic → **OpenAI GPT-5.2** → Grok → Gemini |
+
+**Note:** OpenAI GPT-5.2 configuré et opérationnel (.env updated Session 120).
+
+### n8n Cleanup (Session 120)
+
+- n8n workflow JSONs archived to `n8n-workflows-ARCHIVED-Session120/` (8 files)
+- n8n-related scripts archived to `scripts/archived-n8n/` (5 files)
+- n8n container on VPS: backup only, no active workflows
+- **All automations are now native Node.js scripts**
 
 ### HubSpot + Omnisend Cards Added
 
@@ -38,10 +115,10 @@ CRM integrations were in registry but NOT displayed on frontend.
 |--------|--------|-----------|
 | HubSpot B2B CRM | ✅ Ready (test mode) | Batch + backoff |
 | Omnisend B2C | ✅ Ready (test mode) | Events + carts |
-| Voice API | ✅ Operational | 4 (Grok→Gemini→Claude→Local) |
-| Blog Generator | ✅ Operational | 3 AI + WordPress |
-| Product Photos | ✅ Operational | 5 providers |
-| Email Personalization | ✅ Operational | 4 providers |
+| Voice API | ✅ Operational | 4 (Grok→**OpenAI**→Gemini→Claude→Local) |
+| Blog Generator | ✅ Operational | 4 AI (Anthropic→**OpenAI**→Grok→Gemini) + WordPress |
+| Product Photos | ✅ Operational | 6 providers (Vision: +OpenAI) |
+| Email Personalization | ✅ Operational | 5 providers (+OpenAI) |
 | Grok Voice Realtime | ✅ **FULLY RESILIENT** | 2 (WebSocket + Gemini TTS) |
 | Uptime Monitor | ✅ **5/5 HEALTHY** | All critical services |
 | Voice Telephony | ⏳ Awaiting | Twilio credentials |

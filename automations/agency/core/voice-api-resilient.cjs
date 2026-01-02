@@ -52,9 +52,10 @@ function loadEnv() {
 
 const ENV = loadEnv();
 
-// TEXT GENERATION PROVIDERS - Verified December 2025
+// TEXT GENERATION PROVIDERS - Verified January 2026
 // Purpose: Generate TEXT responses for voice assistant (NOT audio generation)
 // Audio is handled by browser Web Speech API (free, built-in)
+// Fallback order: Grok → OpenAI → Gemini → Anthropic → Local patterns
 const PROVIDERS = {
   grok: {
     name: 'Grok 3 Mini',
@@ -63,6 +64,14 @@ const PROVIDERS = {
     model: 'grok-3-mini',
     apiKey: ENV.XAI_API_KEY,
     enabled: !!ENV.XAI_API_KEY,
+  },
+  openai: {
+    name: 'OpenAI GPT-5.2',
+    // gpt-5.2: market leader 68-82% share (Jan 2026)
+    url: 'https://api.openai.com/v1/chat/completions',
+    model: 'gpt-5.2',
+    apiKey: ENV.OPENAI_API_KEY,
+    enabled: !!ENV.OPENAI_API_KEY,
   },
   gemini: {
     name: 'Gemini 3 Flash',
@@ -206,6 +215,37 @@ async function callGrok(userMessage, conversationHistory = []) {
   return parsed.data.choices[0].message.content;
 }
 
+async function callOpenAI(userMessage, conversationHistory = []) {
+  if (!PROVIDERS.openai.enabled) {
+    throw new Error('OpenAI API key not configured');
+  }
+
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...conversationHistory.map(m => ({ role: m.role, content: m.content })),
+    { role: 'user', content: userMessage }
+  ];
+
+  const body = JSON.stringify({
+    model: PROVIDERS.openai.model,
+    messages,
+    max_tokens: 500,
+    temperature: 0.7,
+  });
+
+  const response = await httpRequest(PROVIDERS.openai.url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${PROVIDERS.openai.apiKey}`,
+    }
+  }, body);
+
+  const parsed = safeJsonParse(response.data, 'OpenAI voice response');
+  if (!parsed.success) throw new Error(`OpenAI JSON parse failed: ${parsed.error}`);
+  return parsed.data.choices[0].message.content;
+}
+
 async function callGemini(userMessage, conversationHistory = []) {
   if (!PROVIDERS.gemini.enabled) {
     throw new Error('Gemini API key not configured');
@@ -318,7 +358,8 @@ function getLocalResponse(userMessage) {
 // ─────────────────────────────────────────────────────────────────────────────
 async function getResilisentResponse(userMessage, conversationHistory = []) {
   const errors = [];
-  const providerOrder = ['grok', 'gemini', 'anthropic'];
+  // Fallback order: Grok → OpenAI → Gemini → Anthropic → Local
+  const providerOrder = ['grok', 'openai', 'gemini', 'anthropic'];
 
   for (const providerKey of providerOrder) {
     const provider = PROVIDERS[providerKey];
@@ -331,6 +372,7 @@ async function getResilisentResponse(userMessage, conversationHistory = []) {
       let response;
       switch (providerKey) {
         case 'grok': response = await callGrok(userMessage, conversationHistory); break;
+        case 'openai': response = await callOpenAI(userMessage, conversationHistory); break;
         case 'gemini': response = await callGemini(userMessage, conversationHistory); break;
         case 'anthropic': response = await callAnthropic(userMessage, conversationHistory); break;
       }
@@ -466,16 +508,16 @@ function startServer(port = 3004) {
   });
 
   server.listen(port, () => {
-    console.log(`\n🎙️  Voice API Server running on http://localhost:${port}`);
+    console.log(`\n[Server] Voice API running on http://localhost:${port}`);
     console.log('\nEndpoints:');
     console.log('  POST /respond  - Get AI response with fallback');
     console.log('  GET  /health   - Provider status');
     console.log('\nProviders (fallback order):');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
-      const status = provider.enabled ? '✅' : '❌';
+      const status = provider.enabled ? '[OK]' : '[--]';
       console.log(`  ${status} ${provider.name}`);
     }
-    console.log('  ✅ Local fallback (always available)');
+    console.log('  [OK] Local fallback (always available)');
   });
 }
 
@@ -502,7 +544,7 @@ async function main() {
   }
 
   if (args.test) {
-    console.log(`\n🎙️  Testing voice response: "${args.test}"\n`);
+    console.log(`\n[Test] Voice response: "${args.test}"\n`);
     const result = await getResilisentResponse(args.test);
     console.log('Provider:', result.provider);
     console.log('Fallbacks used:', result.fallbacksUsed);
@@ -517,15 +559,15 @@ async function main() {
   if (args.health) {
     console.log('\n=== PROVIDER STATUS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
-      const status = provider.enabled ? '✅ Configured' : '❌ Not configured';
+      const status = provider.enabled ? '[OK] Configured' : '[--] Not configured';
       console.log(`${provider.name}: ${status}`);
     }
-    console.log('Local fallback: ✅ Always available');
+    console.log('Local fallback: [OK] Always available');
     return;
   }
 
   console.log(`
-🎙️  Resilient Voice API - 3A Automation
+[Voice] Resilient Voice API - 3A Automation
 
 Usage:
   node voice-api-resilient.cjs --server [--port=3004]
@@ -533,7 +575,7 @@ Usage:
   node voice-api-resilient.cjs --health
 
 Fallback chain:
-  Grok → Gemini → Claude → Local patterns
+  Grok → OpenAI → Gemini → Claude → Local patterns
 `);
 }
 

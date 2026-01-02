@@ -54,8 +54,9 @@ function loadEnv() {
 
 const ENV = loadEnv();
 
-// TEXT GENERATION PROVIDERS - Verified December 2025
+// TEXT GENERATION PROVIDERS - Verified January 2026
 // Purpose: Generate personalized email content
+// Fallback order: Grok → OpenAI → Gemini → Anthropic → Static templates
 const PROVIDERS = {
   grok: {
     name: 'Grok 3 Mini',
@@ -64,6 +65,14 @@ const PROVIDERS = {
     model: 'grok-3-mini',
     apiKey: ENV.XAI_API_KEY,
     enabled: !!ENV.XAI_API_KEY,
+  },
+  openai: {
+    name: 'OpenAI GPT-5.2',
+    // gpt-5.2: market leader 68-82% share (Jan 2026)
+    url: 'https://api.openai.com/v1/chat/completions',
+    model: 'gpt-5.2',
+    apiKey: ENV.OPENAI_API_KEY,
+    enabled: !!ENV.OPENAI_API_KEY,
   },
   gemini: {
     name: 'Gemini 3 Flash',
@@ -205,6 +214,34 @@ async function callGrok(systemPrompt, userPrompt) {
   return parsed.data.choices[0].message.content;
 }
 
+async function callOpenAI(systemPrompt, userPrompt) {
+  if (!PROVIDERS.openai.enabled) {
+    throw new Error('OpenAI API key not configured');
+  }
+
+  const body = JSON.stringify({
+    model: PROVIDERS.openai.model,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt }
+    ],
+    max_tokens: 1000,
+    temperature: 0.7,
+  });
+
+  const response = await httpRequest(PROVIDERS.openai.url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${PROVIDERS.openai.apiKey}`,
+    }
+  }, body);
+
+  const parsed = safeJsonParse(response.data, 'OpenAI email response');
+  if (!parsed.success) throw new Error(`OpenAI JSON parse failed: ${parsed.error}`);
+  return parsed.data.choices[0].message.content;
+}
+
 async function callGemini(systemPrompt, userPrompt) {
   if (!PROVIDERS.gemini.enabled) {
     throw new Error('Gemini API key not configured');
@@ -336,7 +373,8 @@ function getStaticTemplate(segment, leadData) {
 // ─────────────────────────────────────────────────────────────────────────────
 async function personalizeEmail(leadData, segment = 'other') {
   const errors = [];
-  const providerOrder = ['grok', 'gemini', 'anthropic'];
+  // Fallback order: Grok → OpenAI → Gemini → Anthropic → Static
+  const providerOrder = ['grok', 'openai', 'gemini', 'anthropic'];
 
   const userPrompt = `Personnalise un email pour:
 - Prénom: ${leadData.firstName || 'Non spécifié'}
@@ -360,6 +398,7 @@ Contexte: Email de prospection B2B initial.`;
       let response;
       switch (providerKey) {
         case 'grok': response = await callGrok(PERSONALIZATION_PROMPT, userPrompt); break;
+        case 'openai': response = await callOpenAI(PERSONALIZATION_PROMPT, userPrompt); break;
         case 'gemini': response = await callGemini(PERSONALIZATION_PROMPT, userPrompt); break;
         case 'anthropic': response = await callAnthropic(PERSONALIZATION_PROMPT, userPrompt); break;
       }
@@ -409,7 +448,8 @@ Contexte: Email de prospection B2B initial.`;
 
 async function generateSubjectLine(context) {
   const errors = [];
-  const providerOrder = ['grok', 'gemini', 'anthropic'];
+  // Fallback order: Grok → OpenAI → Gemini → Anthropic → Static
+  const providerOrder = ['grok', 'openai', 'gemini', 'anthropic'];
 
   const userPrompt = `Génère un objet d'email pour:
 - Topic: ${context.topic || 'automatisation'}
@@ -428,6 +468,7 @@ async function generateSubjectLine(context) {
       let response;
       switch (providerKey) {
         case 'grok': response = await callGrok(SUBJECT_PROMPT, userPrompt); break;
+        case 'openai': response = await callOpenAI(SUBJECT_PROMPT, userPrompt); break;
         case 'gemini': response = await callGemini(SUBJECT_PROMPT, userPrompt); break;
         case 'anthropic': response = await callAnthropic(SUBJECT_PROMPT, userPrompt); break;
       }
@@ -599,17 +640,17 @@ function startServer(port = 3006) {
   });
 
   server.listen(port, () => {
-    console.log(`\n📧 Email Personalization API running on http://localhost:${port}`);
+    console.log(`\n[Server] Email Personalization API running on http://localhost:${port}`);
     console.log('\nEndpoints:');
     console.log('  POST /personalize - Personalize email for lead');
     console.log('  POST /subject     - Generate subject line');
     console.log('  GET  /health      - Provider status');
     console.log('\nProviders (fallback order):');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
-      const status = provider.enabled ? '✅' : '❌';
+      const status = provider.enabled ? '[OK]' : '[--]';
       console.log(`  ${status} ${provider.name}`);
     }
-    console.log('  ✅ Static templates (always available)');
+    console.log('  [OK] Static templates (always available)');
   });
 }
 
@@ -638,10 +679,10 @@ async function main() {
   if (args.health) {
     console.log('\n=== PROVIDER STATUS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
-      const status = provider.enabled ? '✅ Configured' : '❌ Not configured';
+      const status = provider.enabled ? '[OK] Configured' : '[--] Not configured';
       console.log(`${provider.name}: ${status}`);
     }
-    console.log('Static fallback: ✅ Always available');
+    console.log('Static fallback: [OK] Always available');
     return;
   }
 
@@ -652,7 +693,7 @@ async function main() {
       process.exit(1);
     }
     const lead = leadParsed.data;
-    console.log(`\n📧 Personalizing email for: ${lead.email}\n`);
+    console.log(`\n[Email] Personalizing for: ${lead.email}\n`);
     try {
 
       const result = await personalizeEmail(lead, args.segment || 'other');
@@ -675,7 +716,7 @@ async function main() {
       process.exit(1);
     }
     const context = contextParsed.data;
-    console.log(`\n📝 Generating subject line\n`);
+    console.log(`\n[Subject] Generating subject line\n`);
     try {
 
       const result = await generateSubjectLine(context);
@@ -689,7 +730,7 @@ async function main() {
   }
 
   console.log(`
-📧 Resilient Email Personalization - 3A Automation
+[Email] Resilient Email Personalization - 3A Automation
 
 Usage:
   node email-personalization-resilient.cjs --server [--port=3006]
@@ -698,7 +739,7 @@ Usage:
   node email-personalization-resilient.cjs --health
 
 Fallback chain:
-  Grok → Gemini → Claude → Static templates
+  Grok → OpenAI → Gemini → Claude → Static templates
 `);
 }
 

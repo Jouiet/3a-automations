@@ -1,7 +1,15 @@
-# Native Automation Scripts - Session 119
+# Native Automation Scripts - Session 120
 
-> **STATUS: 0 n8n workflows remaining. ALL replaced by native Node.js scripts.**
-> This file documents the migration from n8n to native scripts and the current architecture.
+> **STATUS: 0 n8n workflows. ALL automations are native Node.js scripts.**
+> n8n workflows archived to `automations/agency/n8n-workflows-ARCHIVED-Session120/`
+> n8n container runs on VPS (backup only) - no active workflows.
+
+## Session 120 Updates (02/01/2026)
+
+- OpenAI GPT-5.2 added to ALL resilient automations (was GPT-4o)
+- n8n workflow JSONs archived (8 files)
+- n8n-related scripts archived to `scripts/archived-n8n/` (5 files)
+- API key configured in .env
 
 ## Architecture
 
@@ -22,7 +30,7 @@ ACTUEL (EN PRODUCTION):
 
 | Critère | n8n Workflows | Scripts Natifs | Verdict |
 |---------|---------------|----------------|---------|
-| AI Providers | 1 (single point of failure) | 3+ avec fallback | **Script SUPÉRIEUR** |
+| AI Providers | 1 (single point of failure) | **4+ avec fallback (Session 120)** | **Script SUPÉRIEUR** |
 | Blocage $env | 100% bloqués (Community) | 0% (process.env) | **Script SUPÉRIEUR** |
 | Social platforms | 2 (FB, LinkedIn) | 3 (+ X/Twitter OAuth 1.0a) | **Script SUPÉRIEUR** |
 | Fallback chains | 0 | 3+ par script | **Script SUPÉRIEUR** |
@@ -109,15 +117,16 @@ ACTUEL (EN PRODUCTION):
 
 **Comparaison détaillée:** `outputs/COMPARISON-N8N-VS-NATIVE-2026-01-01.md`
 
-### Scripts Natifs RÉSILIENTS (Multi-Provider Fallback) - Vérifié Jan 2026
+### Scripts Natifs RÉSILIENTS (Multi-Provider Fallback) - Vérifié Jan 2026 (Session 120)
 
-| Script | Usage | Fallback Chain (modèles vérifiés) | Port |
-|--------|-------|-----------------------------------|------|
-| blog-generator-resilient.cjs | TEXT + SOCIAL | Anthropic→Grok 3→Gemini 3 + FB/LinkedIn/X | 3003 |
-| voice-api-resilient.cjs | TEXT (pas audio!) | Grok 3 Mini→Gemini 3 Flash→Claude Sonnet 4→Local | 3004 |
+| Script | Usage | Fallback Chain (4 AI providers) | Port |
+|--------|-------|----------------------------------|------|
+| blog-generator-resilient.cjs | TEXT + SOCIAL | Anthropic→**OpenAI**→Grok 3→Gemini 3 + FB/LinkedIn/X | 3003 |
+| voice-api-resilient.cjs | TEXT (pas audio!) | Grok 3 Mini→**OpenAI GPT-5.2**→Gemini 3 Flash→Claude Sonnet 4→Local | 3004 |
 | product-photos-resilient.cjs | IMAGE GEN | Gemini 2.5 Flash Image→Grok Image→fal.ai→Replicate | 3005 |
-| product-photos-resilient.cjs | VISION | Gemini 3 Flash→Grok 2 Vision→Claude Sonnet 4 | 3005 |
-| email-personalization-resilient.cjs | TEXT | Grok 3 Mini→Gemini 3 Flash→Claude Sonnet 4→Static | 3006 |
+| product-photos-resilient.cjs | VISION | Gemini 3 Flash→**OpenAI GPT-5.2 Vision**→Grok 2 Vision→Claude Sonnet 4 | 3005 |
+| email-personalization-resilient.cjs | TEXT | Grok 3 Mini→**OpenAI GPT-5.2**→Gemini 3 Flash→Claude Sonnet 4→Static | 3006 |
+| podcast-generator-resilient.cjs | TEXT (script) | Anthropic→**OpenAI GPT-5.2**→Grok 3→Gemini 3 | - |
 | grok-voice-realtime.cjs | AUDIO WebSocket | Grok Realtime→Gemini 2.5 Flash TTS | 3007 |
 | whatsapp-booking-notifications.cjs | WHATSAPP | WhatsApp Cloud API (Meta) | 3008 |
 | voice-telephony-bridge.cjs | TELEPHONY | Twilio PSTN ↔ Grok WebSocket | 3009 |

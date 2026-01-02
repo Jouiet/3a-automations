@@ -4,7 +4,7 @@
  * 3A Automation - Session 115
  *
  * FEATURES:
- *   - AI Generation: Anthropic → Grok → Gemini (fallback chain)
+ *   - AI Generation: Anthropic → OpenAI → Grok → Gemini (fallback chain)
  *   - WordPress Publishing (optional)
  *   - Facebook Page Distribution (optional)
  *   - LinkedIn Distribution (optional)
@@ -79,6 +79,13 @@ const PROVIDERS = {
     model: 'claude-sonnet-4-20250514',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY,
+  },
+  openai: {
+    name: 'OpenAI GPT-5.2',
+    url: 'https://api.openai.com/v1/chat/completions',
+    model: 'gpt-5.2',
+    apiKey: ENV.OPENAI_API_KEY,
+    enabled: !!ENV.OPENAI_API_KEY,
   },
   grok: {
     name: 'xAI Grok',
@@ -253,6 +260,30 @@ async function callAnthropic(prompt) {
   return result.content[0].text;
 }
 
+async function callOpenAI(prompt) {
+  if (!PROVIDERS.openai.enabled) {
+    throw new Error('OpenAI API key not configured');
+  }
+
+  const body = JSON.stringify({
+    model: PROVIDERS.openai.model,
+    messages: [{ role: 'user', content: prompt }],
+    max_tokens: 4096,
+    temperature: 0.7,
+  });
+
+  const response = await httpRequest(PROVIDERS.openai.url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${PROVIDERS.openai.apiKey}`,
+    }
+  }, body);
+
+  const result = JSON.parse(response.data);
+  return result.choices[0].message.content;
+}
+
 async function callGrok(prompt) {
   if (!PROVIDERS.grok.enabled) {
     throw new Error('Grok API key not configured');
@@ -308,7 +339,7 @@ async function callGemini(prompt) {
 async function generateWithFallback(topic, language, keywords) {
   const prompt = buildPrompt(topic, language, keywords);
   const errors = [];
-  const providerOrder = ['anthropic', 'grok', 'gemini'];
+  const providerOrder = ['anthropic', 'openai', 'grok', 'gemini'];
 
   for (const providerKey of providerOrder) {
     const provider = PROVIDERS[providerKey];
@@ -317,12 +348,13 @@ async function generateWithFallback(topic, language, keywords) {
       continue;
     }
 
-    console.log(`🔄 Trying ${provider.name}...`);
+    console.log(`[Trying] ${provider.name}...`);
 
     try {
       let rawContent;
       switch (providerKey) {
         case 'anthropic': rawContent = await callAnthropic(prompt); break;
+        case 'openai': rawContent = await callOpenAI(prompt); break;
         case 'grok': rawContent = await callGrok(prompt); break;
         case 'gemini': rawContent = await callGemini(prompt); break;
       }
@@ -368,7 +400,7 @@ async function generateWithFallback(topic, language, keywords) {
         throw new Error('Failed to parse JSON from AI response');
       }
 
-      console.log(`✅ Success with ${provider.name}`);
+      console.log(`[OK] Success with ${provider.name}`);
       return {
         success: true,
         provider: provider.name,
@@ -376,7 +408,7 @@ async function generateWithFallback(topic, language, keywords) {
         errors,
       };
     } catch (err) {
-      console.error(`❌ ${provider.name} failed:`, err.message);
+      console.error(`[ERROR] ${provider.name} failed:`, err.message);
       errors.push({ provider: provider.name, error: err.message });
     }
   }
@@ -441,7 +473,7 @@ async function postToFacebook(article, articleUrl) {
   }
 
   const hashtags = (article.hashtags || []).map(h => `#${h.replace('#', '')}`).join(' ');
-  const message = `${article.excerpt}\n\n${hashtags}\n\n👉 Lire l'article complet: ${articleUrl}`;
+  const message = `${article.excerpt}\n\n${hashtags}\n\n>> Lire l'article complet: ${articleUrl}`;
 
   const url = `${FACEBOOK.baseUrl}/${FACEBOOK.apiVersion}/${FACEBOOK.pageId}/feed`;
 
@@ -458,14 +490,14 @@ async function postToFacebook(article, articleUrl) {
     }));
 
     const result = JSON.parse(response.data);
-    console.log(`✅ Facebook: Posted successfully (ID: ${result.id})`);
+    console.log(`[OK] Facebook: Posted successfully (ID: ${result.id})`);
     return {
       success: true,
       postId: result.id,
       platform: 'facebook',
     };
   } catch (error) {
-    console.error(`❌ Facebook posting failed: ${error.message}`);
+    console.error(`[ERROR] Facebook posting failed: ${error.message}`);
     return { success: false, error: error.message, platform: 'facebook' };
   }
 }
@@ -520,14 +552,14 @@ async function postToLinkedIn(article, articleUrl) {
     // LinkedIn returns 201 with post ID in x-restli-id header
     // For our httpRequest wrapper, we parse the response
     const result = JSON.parse(response.data || '{}');
-    console.log(`✅ LinkedIn: Posted successfully`);
+    console.log(`[OK] LinkedIn: Posted successfully`);
     return {
       success: true,
       postId: result.id || 'created',
       platform: 'linkedin',
     };
   } catch (error) {
-    console.error(`❌ LinkedIn posting failed: ${error.message}`);
+    console.error(`[ERROR] LinkedIn posting failed: ${error.message}`);
     return { success: false, error: error.message, platform: 'linkedin' };
   }
 }
@@ -620,7 +652,7 @@ async function postToX(article, articleUrl) {
     excerpt = excerpt.substring(0, maxTextLength - 3) + '...';
   }
 
-  const tweetText = `${excerpt}\n\n${hashtags}\n\n👉 ${articleUrl}`;
+  const tweetText = `${excerpt}\n\n${hashtags}\n\n>> ${articleUrl}`;
 
   try {
     const authHeader = generateOAuthHeader('POST', XTWITTER.baseUrl);
@@ -636,7 +668,7 @@ async function postToX(article, articleUrl) {
     const result = JSON.parse(response.data);
 
     if (result.data && result.data.id) {
-      console.log(`✅ X/Twitter: Posted successfully (ID: ${result.data.id})`);
+      console.log(`[OK] X/Twitter: Posted successfully (ID: ${result.data.id})`);
       return {
         success: true,
         postId: result.data.id,
@@ -647,7 +679,7 @@ async function postToX(article, articleUrl) {
       throw new Error(result.detail || result.title || 'Unknown error');
     }
   } catch (error) {
-    console.error(`❌ X/Twitter posting failed: ${error.message}`);
+    console.error(`[ERROR] X/Twitter posting failed: ${error.message}`);
     return { success: false, error: error.message, platform: 'x' };
   }
 }
@@ -664,7 +696,7 @@ async function distributeToSocial(article, articleUrl) {
     failCount: 0,
   };
 
-  console.log('\n📤 Distributing to social platforms...');
+  console.log('\n[Social] Distributing to platforms...');
 
   // Facebook
   if (FACEBOOK.enabled) {
@@ -672,7 +704,7 @@ async function distributeToSocial(article, articleUrl) {
     if (results.facebook.success) results.successCount++;
     else results.failCount++;
   } else {
-    console.log('⚠️ Facebook: Not configured (skipped)');
+    console.log('[WARN] Facebook: Not configured (skipped)');
   }
 
   // LinkedIn
@@ -681,7 +713,7 @@ async function distributeToSocial(article, articleUrl) {
     if (results.linkedin.success) results.successCount++;
     else results.failCount++;
   } else {
-    console.log('⚠️ LinkedIn: Not configured (skipped)');
+    console.log('[WARN] LinkedIn: Not configured (skipped)');
   }
 
   // X/Twitter
@@ -690,10 +722,10 @@ async function distributeToSocial(article, articleUrl) {
     if (results.x.success) results.successCount++;
     else results.failCount++;
   } else {
-    console.log('⚠️ X/Twitter: Not configured (skipped)');
+    console.log('[WARN] X/Twitter: Not configured (skipped)');
   }
 
-  console.log(`\n📊 Distribution: ${results.successCount} success, ${results.failCount} failed`);
+  console.log(`\n[Stats] Distribution: ${results.successCount} success, ${results.failCount} failed`);
   return results;
 }
 
@@ -774,7 +806,7 @@ function startServer(port = 3003) {
             return;
           }
 
-          console.log(`\n📝 Generating article: "${topic}" (${language})`);
+          console.log(`\n[Blog] Generating article: "${topic}" (${language})`);
           const result = await generateWithFallback(topic, language, keywords);
 
           if (!result.success) {
@@ -792,7 +824,7 @@ function startServer(port = 3003) {
           if (publish) {
             try {
               wpResult = await publishToWordPress(result.article, language);
-              console.log(`📤 Published to WordPress: ${wpResult.url}`);
+              console.log(`[Publish] WordPress: ${wpResult.url}`);
               articleUrl = wpResult.url;
             } catch (wpErr) {
               console.error('WordPress publish failed:', wpErr.message);
@@ -860,19 +892,19 @@ function startServer(port = 3003) {
   });
 
   server.listen(port, () => {
-    console.log(`\n🚀 Blog Generator Server v2.0 running on http://localhost:${port}`);
+    console.log(`\n[Server] Blog Generator v2.0 running on http://localhost:${port}`);
     console.log('\nEndpoints:');
     console.log('  POST /generate  - Generate + publish + distribute');
     console.log('  GET  /health    - All provider/platform status');
     console.log('\n=== AI PROVIDERS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
-      const status = provider.enabled ? '✅' : '❌';
+      const status = provider.enabled ? '[OK]' : '[--]';
       console.log(`  ${status} ${provider.name}`);
     }
     console.log('\n=== SOCIAL DISTRIBUTION ===');
-    console.log(`  ${FACEBOOK.enabled ? '✅' : '❌'} Facebook Page`);
-    console.log(`  ${LINKEDIN.enabled ? '✅' : '❌'} LinkedIn`);
-    console.log(`  ${XTWITTER.enabled ? '✅' : '❌'} X/Twitter`);
+    console.log(`  ${FACEBOOK.enabled ? '[OK]' : '[--]'} Facebook Page`);
+    console.log(`  ${LINKEDIN.enabled ? '[OK]' : '[--]'} LinkedIn`);
+    console.log(`  ${XTWITTER.enabled ? '[OK]' : '[--]'} X/Twitter`);
   });
 }
 
@@ -903,17 +935,17 @@ async function main() {
   if (args.health) {
     console.log('\n=== AI PROVIDERS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
-      const status = provider.enabled ? '✅ Configured' : '❌ Not configured';
+      const status = provider.enabled ? '[OK] Configured' : '[--] Not configured';
       console.log(`${provider.name}: ${status}`);
     }
 
     console.log('\n=== PUBLISHING ===');
-    console.log(`WordPress: ${WORDPRESS.appPassword ? '✅ Configured' : '❌ Not configured'}`);
+    console.log(`WordPress: ${WORDPRESS.appPassword ? '[OK] Configured' : '[--] Not configured'}`);
 
     console.log('\n=== SOCIAL DISTRIBUTION ===');
-    console.log(`Facebook: ${FACEBOOK.enabled ? '✅ Configured' : '❌ Not configured (need FACEBOOK_PAGE_ID + FACEBOOK_ACCESS_TOKEN)'}`);
-    console.log(`LinkedIn: ${LINKEDIN.enabled ? '✅ Configured' : '❌ Not configured (need LINKEDIN_ACCESS_TOKEN + LINKEDIN_ORGANIZATION_ID)'}`);
-    console.log(`X/Twitter: ${XTWITTER.enabled ? '✅ Configured (OAuth 1.0a)' : '❌ Not configured (need X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET)'}`);
+    console.log(`Facebook: ${FACEBOOK.enabled ? '[OK] Configured' : '[--] Not configured (need FACEBOOK_PAGE_ID + FACEBOOK_ACCESS_TOKEN)'}`);
+    console.log(`LinkedIn: ${LINKEDIN.enabled ? '[OK] Configured' : '[--] Not configured (need LINKEDIN_ACCESS_TOKEN + LINKEDIN_ORGANIZATION_ID)'}`);
+    console.log(`X/Twitter: ${XTWITTER.enabled ? '[OK] Configured (OAuth 1.0a)' : '[--] Not configured (need X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET)'}`);
 
     // Summary
     const aiCount = Object.values(PROVIDERS).filter(p => p.enabled).length;
@@ -921,13 +953,13 @@ async function main() {
     console.log(`\n=== SUMMARY ===`);
     console.log(`AI Providers: ${aiCount}/3 configured`);
     console.log(`Social Platforms: ${socialCount}/3 configured`);
-    console.log(`WordPress: ${WORDPRESS.appPassword ? '✅' : '❌'}`);
+    console.log(`WordPress: ${WORDPRESS.appPassword ? '[OK]' : '[--]'}`);
     return;
   }
 
   // Generate article
   if (args.topic) {
-    console.log(`\n📝 Generating article: "${args.topic}"`);
+    console.log(`\n[Blog] Generating article: "${args.topic}"`);
     console.log(`Language: ${args.language || 'fr'}`);
     console.log('─'.repeat(50));
 
@@ -938,12 +970,12 @@ async function main() {
     );
 
     if (!result.success) {
-      console.error('\n❌ All providers failed:');
+      console.error('\n[ERROR] All providers failed:');
       result.errors.forEach(e => console.error(`  - ${e.provider}: ${e.error}`));
       process.exit(1);
     }
 
-    console.log('\n✅ Article generated successfully!');
+    console.log('\n[OK] Article generated successfully!');
     console.log(`Provider used: ${result.provider}`);
     console.log(`Title: ${result.article.title}`);
     console.log(`Excerpt: ${result.article.excerpt}`);
@@ -954,11 +986,11 @@ async function main() {
     if (args.publish) {
       try {
         const wpResult = await publishToWordPress(result.article, args.language || 'fr');
-        console.log(`\n📤 Published to WordPress!`);
+        console.log(`\n[Publish] WordPress complete!`);
         console.log(`URL: ${wpResult.url}`);
         articleUrl = wpResult.url;
       } catch (err) {
-        console.error(`\n❌ WordPress publish failed: ${err.message}`);
+        console.error(`\n[ERROR] WordPress publish failed: ${err.message}`);
         // Use fallback URL for social distribution
         articleUrl = `${WORDPRESS.url}/?p=draft-${Date.now()}`;
       }
@@ -969,7 +1001,7 @@ async function main() {
       if (!articleUrl) {
         // If not published, use 3A main site as URL
         articleUrl = 'https://3a-automation.com/blog';
-        console.log(`\n⚠️ No article URL (not published), using: ${articleUrl}`);
+        console.log(`\n[WARN] No article URL (not published), using: ${articleUrl}`);
       }
 
       const socialResult = await distributeToSocial(result.article, articleUrl);
@@ -979,20 +1011,20 @@ async function main() {
     // Save to file
     const outputPath = path.join(__dirname, '../../../outputs', `blog-${Date.now()}.json`);
     fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
-    console.log(`\n📁 Saved to: ${outputPath}`);
+    console.log(`\n[Saved] ${outputPath}`);
     return;
   }
 
   // Help
   console.log(`
-📝 Resilient Blog Generator v2.1 - 3A Automation
+[Blog] Resilient Blog Generator v2.1 - 3A Automation
 
 FEATURES:
-  ✅ AI Generation with multi-provider fallback
-  ✅ WordPress publishing
-  ✅ Facebook Page distribution
-  ✅ LinkedIn distribution
-  ✅ X/Twitter distribution
+  [+] AI Generation with multi-provider fallback
+  [+] WordPress publishing
+  [+] Facebook Page distribution
+  [+] LinkedIn distribution
+  [+] X/Twitter distribution
 
 Usage:
   node blog-generator-resilient.cjs --topic="Your topic" [options]

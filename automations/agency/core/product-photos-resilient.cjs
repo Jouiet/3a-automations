@@ -91,6 +91,7 @@ const PROVIDERS = {
 
 // VISION ANALYSIS PROVIDERS - Verified January 2026
 // All models below have verified vision/image understanding capabilities
+// Fallback order: Gemini → OpenAI → Grok → Anthropic
 const VISION_PROVIDERS = {
   gemini: {
     name: 'Gemini 3 Flash Vision',
@@ -98,6 +99,14 @@ const VISION_PROVIDERS = {
     url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
     apiKey: ENV.GEMINI_API_KEY,
     enabled: !!ENV.GEMINI_API_KEY
+  },
+  openai: {
+    name: 'OpenAI GPT-5.2 Vision',
+    // gpt-5.2 has vision capability, market leader (Jan 2026)
+    url: 'https://api.openai.com/v1/chat/completions',
+    model: 'gpt-5.2',
+    apiKey: ENV.OPENAI_API_KEY,
+    enabled: !!ENV.OPENAI_API_KEY
   },
   grok: {
     name: 'Grok 2 Vision',
@@ -414,7 +423,8 @@ async function callReplicate(imageBase64, prompt, mimeType) {
 // ─────────────────────────────────────────────────────────────────────────────
 async function analyzeWithVision(imageBase64, prompt, mimeType) {
   const errors = [];
-  const providerOrder = ['gemini', 'grok', 'anthropic'];
+  // Fallback order: Gemini → OpenAI → Grok → Anthropic
+  const providerOrder = ['gemini', 'openai', 'grok', 'anthropic'];
 
   for (const providerKey of providerOrder) {
     const provider = VISION_PROVIDERS[providerKey];
@@ -446,6 +456,33 @@ async function analyzeWithVision(imageBase64, prompt, mimeType) {
         if (!parsed.success) throw new Error(`Gemini Vision JSON parse failed: ${parsed.error}`);
         const data = parsed.data;
         response = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      }
+
+      if (providerKey === 'openai') {
+        const body = JSON.stringify({
+          model: provider.model,
+          messages: [{
+            role: 'user',
+            content: [
+              { type: 'image_url', image_url: { url: `data:${mimeType};base64,${imageBase64}` } },
+              { type: 'text', text: prompt }
+            ]
+          }],
+          max_tokens: 1024
+        });
+
+        const result = await httpRequest(provider.url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${provider.apiKey}`
+          }
+        }, body);
+
+        const parsed = safeJsonParse(result.data, 'OpenAI Vision response');
+        if (!parsed.success) throw new Error(`OpenAI Vision JSON parse failed: ${parsed.error}`);
+        const data = parsed.data;
+        response = data.choices?.[0]?.message?.content;
       }
 
       if (providerKey === 'grok') {
@@ -766,19 +803,19 @@ function startServer(port = 3005) {
   });
 
   server.listen(port, () => {
-    console.log(`\n📸 Product Photos API running on http://localhost:${port}`);
+    console.log(`\n[Server] Product Photos API running on http://localhost:${port}`);
     console.log('\nEndpoints:');
     console.log('  POST /enhance  - Enhance product image with fallback');
     console.log('  POST /analyze  - Analyze image with vision (fallback)');
     console.log('  GET  /health   - Provider status');
     console.log('\nImage Providers (fallback order):');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
-      const status = provider.enabled ? '✅' : '❌';
+      const status = provider.enabled ? '[OK]' : '[--]';
       console.log(`  ${status} ${provider.name}`);
     }
     console.log('\nVision Providers (fallback order):');
     for (const [key, provider] of Object.entries(VISION_PROVIDERS)) {
-      const status = provider.enabled ? '✅' : '❌';
+      const status = provider.enabled ? '[OK]' : '[--]';
       console.log(`  ${status} ${provider.name}`);
     }
   });
@@ -809,19 +846,19 @@ async function main() {
   if (args.health) {
     console.log('\n=== IMAGE GENERATION PROVIDERS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
-      const status = provider.enabled ? '✅ Configured' : '❌ Not configured';
+      const status = provider.enabled ? '[OK] Configured' : '[--] Not configured';
       console.log(`${provider.name}: ${status}`);
     }
     console.log('\n=== VISION ANALYSIS PROVIDERS ===');
     for (const [key, provider] of Object.entries(VISION_PROVIDERS)) {
-      const status = provider.enabled ? '✅ Configured' : '❌ Not configured';
+      const status = provider.enabled ? '[OK] Configured' : '[--] Not configured';
       console.log(`${provider.name}: ${status}`);
     }
     return;
   }
 
   if (args.image && args.prompt) {
-    console.log(`\n📸 Enhancing image: ${args.image}`);
+    console.log(`\n[Image] Enhancing: ${args.image}`);
     console.log(`   Prompt: ${args.prompt}\n`);
 
     const result = await enhanceProductPhoto(args.image, args.prompt);
@@ -844,7 +881,7 @@ async function main() {
   }
 
   if (args.analyze && args.prompt) {
-    console.log(`\n🔍 Analyzing image: ${args.analyze}`);
+    console.log(`\n[Vision] Analyzing: ${args.analyze}`);
 
     const imageBase64 = imageToBase64(args.analyze);
     const mimeType = getMimeType(args.analyze);
@@ -862,7 +899,7 @@ async function main() {
   }
 
   console.log(`
-📸 Resilient Product Photos API - 3A Automation
+[Photos] Resilient Product Photos API - 3A Automation
 
 Usage:
   node product-photos-resilient.cjs --server [--port=3005]
@@ -871,10 +908,10 @@ Usage:
   node product-photos-resilient.cjs --health
 
 Image Generation Fallback:
-  Gemini Imagen → fal.ai Flux → Replicate SDXL
+  Gemini Imagen → Grok Image → fal.ai Flux → Replicate SDXL
 
 Vision Analysis Fallback:
-  Gemini Vision → Grok Vision → Claude Vision
+  Gemini Vision → OpenAI Vision → Grok Vision → Claude Vision
 `);
 }
 
