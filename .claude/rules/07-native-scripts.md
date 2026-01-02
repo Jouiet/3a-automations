@@ -13,7 +13,7 @@ ANCIEN (ABANDONNÉ):
 ACTUEL (EN PRODUCTION):
   Scripts natifs (.cjs) avec process.env + multi-provider fallback
   Location: automations/agency/core/
-  Count: 8 scripts résilients
+  Count: 10 scripts résilients (8 original + 2 CRM v1.1.0)
 ```
 
 ## ANALYSE COMPARATIVE FACTUELLE (30/12/2025)
@@ -121,6 +121,8 @@ ACTUEL (EN PRODUCTION):
 | grok-voice-realtime.cjs | AUDIO WebSocket | Grok Realtime→Gemini 2.5 Flash TTS | 3007 |
 | whatsapp-booking-notifications.cjs | WHATSAPP | WhatsApp Cloud API (Meta) | 3008 |
 | voice-telephony-bridge.cjs | TELEPHONY | Twilio PSTN ↔ Grok WebSocket | 3009 |
+| hubspot-b2b-crm.cjs | CRM B2B | HubSpot FREE API (batch+backoff) | - |
+| omnisend-b2c-ecommerce.cjs | CRM B2C | Omnisend v5 API (dedup+carts) | - |
 
 **NOTE:** voice-api-resilient.cjs génère du TEXTE. L'audio robotic par Web Speech API.
 **NOTE:** grok-voice-realtime.cjs utilise WebSocket pour audio NATIF ($0.05/min) avec fallback Gemini TTS.
@@ -201,6 +203,21 @@ node automations/agency/core/whatsapp-booking-notifications.cjs --server --port=
 node automations/agency/core/voice-telephony-bridge.cjs --health
 node automations/agency/core/voice-telephony-bridge.cjs --test-grok
 node automations/agency/core/voice-telephony-bridge.cjs --server --port=3009
+
+# === CRM SCRIPTS v1.1.0 (Session 119) ===
+
+# HubSpot B2B CRM v1.1.0 (batch+backoff+jitter)
+node automations/agency/core/hubspot-b2b-crm.cjs --health
+node automations/agency/core/hubspot-b2b-crm.cjs --test-contact
+node automations/agency/core/hubspot-b2b-crm.cjs --test-batch
+node automations/agency/core/hubspot-b2b-crm.cjs --list-contacts
+
+# Omnisend B2C E-commerce v1.1.0 (dedup+carts+backoff)
+node automations/agency/core/omnisend-b2c-ecommerce.cjs --health
+node automations/agency/core/omnisend-b2c-ecommerce.cjs --test-contact
+node automations/agency/core/omnisend-b2c-ecommerce.cjs --test-cart
+node automations/agency/core/omnisend-b2c-ecommerce.cjs --list-carts
+node automations/agency/core/omnisend-b2c-ecommerce.cjs --audit
 
 # === SCRIPTS PRODUCTION ===
 

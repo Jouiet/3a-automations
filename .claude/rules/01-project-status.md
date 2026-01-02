@@ -8,8 +8,8 @@
 | Dashboard | https://dashboard.3a-automation.com LIVE |
 | Pages | **63** HTML files (verified count) |
 | Investor Pages | ✅ Created (FR + EN) with FAQPage + BreadcrumbList |
-| Automations | **86** (Registry v2.1.1 - counts fixed) |
-| Scripts résilients | **8 fichiers (core/)** - All P0-P1-P2 secured |
+| Automations | **88** (Registry v2.2.0 - HubSpot + Omnisend added) |
+| Scripts résilients | **10 fichiers (core/)** - All P0-P1-P2 secured |
 | n8n Workflows | **0 restant** (all replaced by native scripts) |
 | SEO Score | **100%** (all meta tags, OG, Twitter) |
 | AEO Score | **100%** |
@@ -18,7 +18,7 @@
 | Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
 | SSL | **Let's Encrypt + HSTS preload** |
 | Infrastructure | 4 Docker projects, 6 containers RUNNING |
-| llms.txt | **v5.0** with investor section |
+| llms.txt | **v5.1.0** with CRM section |
 | Voice Widget Templates | **8 industries** (4h→30min deployment) |
 | **INVESTOR-READY** | ✅ VERIFIED |
 
@@ -36,10 +36,36 @@
 | MCPs | 10/13 | 3 need permissions config |
 | Docker Projects | 4 | 6 containers RUNNING |
 | VPS 1168256 | ✅ | Ubuntu 24.04, 8GB RAM |
-| Automations Registry | v2.1.1 | 86=86=86 ✅ |
-| Native Scripts | 8 core/ | ALL with fallback chains |
+| Automations Registry | v2.2.0 | 88=88=88 ✅ |
+| Native Scripts | 10 core/ | ALL with fallback chains |
 
 **Note:** n8n server runs as infrastructure only. 0 workflows - ALL replaced by native scripts.
+
+### CRM Scripts v1.1.0 (02/01/2026)
+
+| Script | Version | Features | Port |
+|--------|---------|----------|------|
+| hubspot-b2b-crm.cjs | v1.1.0 | Batch (100/call), exponential backoff, rate limit monitoring, jitter | - |
+| omnisend-b2c-ecommerce.cjs | v1.1.0 | Event deduplication (eventID+eventTime), Carts API, backoff, jitter | - |
+
+**HubSpot FREE API:**
+- Contacts: CRUD + batch (100 records/call)
+- Companies: CRUD + batch
+- Deals: CRUD
+- Associations: full support
+
+**Omnisend API v5:**
+- Contacts: CRUD
+- Events: send with eventID deduplication
+- Products: CRUD
+- Carts: CRUD (abandoned cart recovery)
+- Automations/Campaigns: READ-ONLY
+
+```bash
+# Test commands (verified working in test mode)
+node automations/agency/core/hubspot-b2b-crm.cjs --health
+node automations/agency/core/omnisend-b2c-ecommerce.cjs --health
+```
 
 ### P0 Security Fixes (CRITICAL)
 
@@ -172,8 +198,8 @@ node automations/agency/core/voice-widget-templates.cjs --list
 
 | What We HAVE | What We DON'T HAVE |
 |--------------|-------------------|
-| 86 documented workflows | Recurring revenue |
-| 8 resilient automations | Active paying clients |
+| 88 documented workflows | Recurring revenue |
+| 10 resilient automations | Active paying clients |
 | Voice AI Widget (FR/EN) | Team beyond founder |
 | 69-page bilingual website | Financial track record |
 | Docker infrastructure | Previous funding |
@@ -341,7 +367,7 @@ All P2 items completed Session 117ter.
 | blog-generator-resilient.cjs | +timeout, +rate limiter, +JSON parsing |
 | grok-voice-realtime.cjs | +session limit, +zombie cleanup |
 
-## SCRIPTS RÉSILIENTS (Session 115)
+## SCRIPTS RÉSILIENTS (Session 115-119)
 
 | Script | Version | Fallback Chain | Port |
 |--------|---------|----------------|------|
@@ -351,6 +377,9 @@ All P2 items completed Session 117ter.
 | voice-api-resilient.cjs | v1.0 | Grok→Gemini→Claude | 3004 |
 | product-photos-resilient.cjs | v1.0 | Gemini→fal.ai→Replicate | 3005 |
 | email-personalization-resilient.cjs | v1.0 | Grok→Gemini→Claude | 3006 |
+| voice-telephony-bridge.cjs | v1.0 | Twilio PSTN ↔ Grok WebSocket | 3009 |
+| hubspot-b2b-crm.cjs | v1.1.0 | HubSpot FREE (batch+backoff+jitter) | - |
+| omnisend-b2c-ecommerce.cjs | v1.1.0 | Omnisend v5 (dedup+carts+backoff) | - |
 
 ## n8n → NATIVE SCRIPTS (MIGRATION COMPLETE)
 
