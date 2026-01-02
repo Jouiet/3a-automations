@@ -43,7 +43,7 @@
 ║ Gemini:         ✅ Upgraded to Gemini 3 Flash (Jan 2026)             ║
 ║ Sécurité:       ✅ HSTS, X-Frame-Options, CSP déployés               ║
 ║ JWT:            ✅ Pas de hardcode, httpOnly cookies                  ║
-║ MCPs:           10/13 fonctionnels (3 bugs packages NPM)             ║
+║ MCPs:           11/16 fonctionnels (2 MCP package bugs)             ║
 ╠═══════════════════════════════════════════════════════════════════════╣
 ║ ARCHITECTURE: Scripts natifs > n8n (supérieurs sur 6/8 critères)     ║
 ║ SCORE GLOBAL: 92%+ OPÉRATIONNEL                                      ║
@@ -209,7 +209,7 @@ Webhook (leads/new)
 | n8n | → | WhatsApp | ❌ | API non configurée |
 | n8n | → | Twilio | ❌ | Credentials manquantes |
 | Scripts | → | Apify | ✅ | STARTER $39/mo |
-| Scripts | → | GA4 | ⚠️ | SA configuré, permissions ? |
+| Scripts | → | GA4 | ✅ | Property 516832662 (37 users/7d) |
 | WordPress | → | REST API | ✅ | wp.3a-automation.com S115 |
 
 ### Flux de Données Client
@@ -358,7 +358,7 @@ Aucun type de client est complètement bloqué.
 |---|--------|--------|--------|--------|
 | 3 | Template config Voice Widget | 2h | Déploiement 4h→30min | ✅ FAIT S116 (8 presets) |
 | 4 | Documenter onboarding client | 3h | Standardisation | ✅ FAIT (CLAUDE.md) |
-| 5 | Vérifier permissions GA4 SA | 15 min | Analytics complet | ❌ PERMISSION DENIED (external action) |
+| 5 | Vérifier permissions GA4 SA | 15 min | Analytics complet | ✅ FAIT S120 (property 516832662) |
 | 6 | ~~Tester webhook n8n leads/new~~ | ~~30 min~~ | ~~Valider flow~~ | N/A (n8n archived S120) |
 
 ### P3 - SOUHAITABLE (Updated Session 120)
