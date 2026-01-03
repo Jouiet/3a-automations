@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 128 - 03/01/2026)
+## Current State (Session 129 - 03/01/2026)
 
 | Metric | Value |
 |--------|-------|
@@ -10,8 +10,10 @@
 | Investor Pages | ✅ Created (FR + EN) with FAQPage + BreadcrumbList |
 | Automations | **96** (Registry v2.6.1 - verified) |
 | Scripts with path | **61/61 (100%)** - ALL paths validated |
-| Scripts OPERATIONAL | **14** (verified Session 128 via --health) |
-| Scripts Awaiting Credentials | **7** (WhatsApp, Social, Twilio, etc.) |
+| Automations OPERATIONAL | **12** (Session 128bis --health verified) |
+| Automations PARTIAL | **1** (grok-voice-realtime - Gemini quota 429) |
+| Automations TEST MODE | **2** (hubspot, omnisend - no API keys) |
+| Automations BLOCKED | **3** (whatsapp, voice-telephony, sms) |
 | API Rate Limits | Gemini 429, Claude 400, xAI 502 (intermittent) |
 | n8n Workflows | **0 restant** (all replaced by native scripts) |
 | SEO Score | **100%** (all meta tags, OG, Twitter) |
