@@ -22,7 +22,7 @@ const article = {
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Chez 3A Automation, nous avons analysé plus de 78 workflows d'automatisation déployés chez nos clients. Voici les 5 qui génèrent le plus de ROI, avec des chiffres vérifiés.</p>
+<p>Chez 3A Automation, nous avons analysé plus de 89 workflows d'automatisation déployés chez nos clients. Voici les 5 qui génèrent le plus de ROI, avec des chiffres vérifiés.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->

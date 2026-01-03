@@ -102,7 +102,7 @@ IDENTITÉ:
 - Plateformes: TOUTES (Shopify, WooCommerce, Magento, PrestaShop, BigCommerce, Klaviyo, Mailchimp, HubSpot, etc.)
 - Site: https://3a-automation.com
 - Contact: contact@3a-automation.com
-- 88 automatisations disponibles
+- 89 automatisations disponibles
 
 SERVICES PRINCIPAUX:
 - Automatisation email marketing (TOUTES plateformes: Klaviyo, Mailchimp, Omnisend, HubSpot, etc.)

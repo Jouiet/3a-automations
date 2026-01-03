@@ -20,7 +20,7 @@ const KNOWLEDGE_BASE = {
     expertise: ['Automatisation E-commerce (TOUTES plateformes)', 'Email Marketing (Klaviyo, Mailchimp, Omnisend, HubSpot)', 'Analytics GA4', 'Scripts natifs Node.js/Python'],
     platforms: ['Shopify', 'WooCommerce', 'Magento', 'PrestaShop', 'BigCommerce', 'Klaviyo', 'Mailchimp', 'HubSpot', 'Omnisend'],
     target: 'PME et e-commerce (€10k-500k/mois CA)',
-    automations: 88,
+    automations: 89,
     differentiator: 'AAA - AI Automation Agency - Scripts natifs (pas no-code), relation directe avec experts, prix justes'
   },
 

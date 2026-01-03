@@ -65,7 +65,7 @@ const FAQPAGE_DATA = {
   'automations.html': {
     lang: 'fr',
     questions: [
-      { q: "Combien d'automations proposez-vous ?", a: "Nous avons developpe plus de 86 automations couvrant l'e-commerce, le marketing, le CRM, la voix IA, et bien plus." },
+      { q: "Combien d'automations proposez-vous ?", a: "Nous avons developpe plus de 89 automations couvrant l'e-commerce, le marketing, le CRM, la voix IA, et bien plus." },
       { q: "Quels outils integrez-vous ?", a: "Nous integrons Shopify, Klaviyo, Make, n8n, Zapier, OpenAI, et plus de 50 autres plateformes." },
       { q: "Pouvez-vous creer des automations sur mesure ?", a: "Oui, nous developpons des automations personnalisees adaptees a vos processus metier specifiques." }
     ]
@@ -73,7 +73,7 @@ const FAQPAGE_DATA = {
   'en/automations.html': {
     lang: 'en',
     questions: [
-      { q: "How many automations do you offer?", a: "We have developed over 86 automations covering e-commerce, marketing, CRM, voice AI, and more." },
+      { q: "How many automations do you offer?", a: "We have developed over 89 automations covering e-commerce, marketing, CRM, voice AI, and more." },
       { q: "What tools do you integrate with?", a: "We integrate with Shopify, Klaviyo, Make, n8n, Zapier, OpenAI, and 50+ other platforms." },
       { q: "Can you create custom automations?", a: "Yes, we develop personalized automations tailored to your specific business processes." }
     ]

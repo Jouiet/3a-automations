@@ -14,7 +14,7 @@
 **Fondateur**: Jonathan, Expert technique automation AI
 **Marches**: Maroc, MENA, France, Europe, Worldwide
 **Langues**: Francais, English, Arabe
-**Automations**: 88 testees et documentees
+**Automations**: 89 testees et documentees
 
 ## Produits & Services
 
@@ -27,7 +27,7 @@
 - Disponible aussi pour vos clients (setup inclus dans packs)
 
 ### Automatisation E-commerce
-- 88 automatisations testees et documentees
+- 89 automatisations testees et documentees
 - Shopify, WooCommerce, Klaviyo, GA4
 - ROI moyen email marketing: 36-42 EUR pour 1 EUR investi (Litmus/DMA 2025)
 - Recuperation paniers abandonnes: +10-15%
@@ -125,7 +125,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 - [Accueil](https://3a-automation.com/): Proposition de valeur
 - [Tarifs](https://3a-automation.com/pricing.html): Packages detailles
-- [Automatisations](https://3a-automation.com/automations.html): 88 automatisations
+- [Automatisations](https://3a-automation.com/automations.html): 89 automatisations
 - [Cas Clients](https://3a-automation.com/cas-clients.html): Etudes de cas
 - [Contact](https://3a-automation.com/contact.html): Formulaire + Voice AI
 - [Reservation](https://3a-automation.com/booking.html): Prendre RDV
@@ -150,7 +150,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 - **Marche secondaire**: France/Europe (4.2M PME, source INSEE)
 
 ### Ce que nous AVONS
-- 88 workflows documentes et testes
+- 89 workflows documentes et testes
 - 10 automations resilientes (multi-fallback AI)
 - Voice AI Widget fonctionnel (FR/EN)
 - Site web 63 pages bilingue
