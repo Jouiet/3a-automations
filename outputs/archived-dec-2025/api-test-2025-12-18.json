@@ -1,0 +1,40 @@
+{
+  "timestamp": "2025-12-18T17:58:59.778Z",
+  "summary": {
+    "ok": 0,
+    "missing": 7,
+    "errors": 0,
+    "total": 7
+  },
+  "results": [
+    {
+      "name": "Shopify",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "Klaviyo",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "n8n",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "xAI (Grok)",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "Google Analytics",
+      "status": "MISSING_CREDENTIALS",
+      "detail": "GA4_PROPERTY_ID manquant"
+    },
+    {
+      "name": "Meta (Facebook)",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "Apify",
+      "status": "MISSING_CREDENTIALS"
+    }
+  ]
+}

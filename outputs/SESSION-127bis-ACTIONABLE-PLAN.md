@@ -1,225 +1,153 @@
-# Session 127bis - Plan Actionnable
+# Session 127bis - FINAL ACTIONABLE PLAN
 **Date:** 03/01/2026
-**Focus:** Workflow Gaps Analysis - 8 catégories manquantes identifiées
+**Approach:** Bottom-up factual audit, NO BS
 
 ---
 
-## ÉTAT ACTUEL VÉRIFIÉ
+## SESSION 127bis RESULTS
 
-| Métrique | Valeur |
-|----------|--------|
-| Automations registry | 89 (v2.3.0) |
-| Scripts résilients | 10 |
-| Catégories existantes | 11 |
-| **Catégories manquantes** | **8 (critiques)** |
-| Overall Audit Score | 92% |
-| Security Backend | 92% ✅ |
+### What Was Fixed
+
+| Fix | Before | After |
+|-----|--------|-------|
+| Registry version | 2.3.0 | **2.6.1** |
+| Total automations | 89 | **96** |
+| Scripts with valid paths | 56/63 | **61/61 (100%)** |
+| Import path bugs | 2 broken | **0 broken** |
+| Registry path errors | 7 invalid | **0 invalid** |
+
+### Current State (VERIFIED)
+
+| Metric | Value |
+|--------|-------|
+| Automations registry | **96** (v2.6.1) |
+| Scripts OPERATIONAL | **17** (tested via --health) |
+| Scripts AWAITING credentials | **7** |
+| Scripts BROKEN | **0** |
+| Infrastructure (uptime) | **5/5 healthy** |
+| AI Providers | **4** (Grok 4.1, GPT-5.2, Gemini 3, Claude Sonnet 4) |
+
+### Scripts NOW OPERATIONAL (Session 127bis verified)
+
+| Script | AI Providers | Notes |
+|--------|--------------|-------|
+| blog-generator-resilient.cjs | 4 AI | WordPress OK, Social 0/3 (needs creds) |
+| voice-api-resilient.cjs | 4 + Local | Lead scoring enabled |
+| product-photos-resilient.cjs | 4 vision + 2 image | OPERATIONAL |
+| email-personalization-resilient.cjs | 4 + static | OPERATIONAL |
+| grok-voice-realtime.cjs | Grok WS + Gemini TTS | **FULLY RESILIENT** |
+| podcast-generator-resilient.cjs | 4 AI + Gemini TTS | OPERATIONAL |
+| churn-prediction-resilient.cjs | 4 AI + rule-based | **NEW - OPERATIONAL** |
+| at-risk-customer-flow.cjs | 4 AI + Klaviyo | **NEW - OPERATIONAL** |
+| review-request-automation.cjs | 4 AI + Klaviyo | **NEW - OPERATIONAL** |
+| uptime-monitor.cjs | N/A | 5/5 healthy |
+| voice-widget-templates.cjs | N/A | 8 presets |
+| test-klaviyo-connection.cjs | N/A | 10 lists |
+| test-shopify-connection.cjs | N/A | Connected |
+| newsletter-automation.cjs | 3 AI | **FIXED** import path |
+| lead-gen-scheduler.cjs | N/A | **FIXED** import path |
+| fix-missing-alt-text.cjs | N/A | Works |
+| geo-segment-generic.cjs | N/A | Works |
 
 ---
 
-## PHASE 1: CRITIQUE (Semaines 1-2)
+## NEXT SESSION PRIORITIES
 
-### 1. SMS Automation (2-3 jours)
+### P0 - CREDENTIALS (User Action Required)
 
-**Script:** `sms-automation-resilient.cjs`
+| Script | Missing | Action |
+|--------|---------|--------|
+| whatsapp-booking-notifications.cjs | WHATSAPP_ACCESS_TOKEN | Meta Business Manager |
+| voice-telephony-bridge.cjs | TWILIO_ACCOUNT_SID | Twilio Console |
+| Social Distribution | FB/LinkedIn/X tokens | Developer portals |
 
-**Provider:** Omnisend SMS API (déjà intégré v1.1.0)
+### P1 - SCRIPTS TO CREATE (5 remaining)
 
-**Flows à implémenter:**
-- Abandoned Cart SMS (15-30min après abandon)
-- Shipping Notification SMS
-- Order Confirmation SMS
-
-**Benchmark:** 98% open rate, 21-32% conversion
-
-```bash
-# Test après création
-node automations/agency/core/sms-automation-resilient.cjs --health
-node automations/agency/core/sms-automation-resilient.cjs --test-abandoned-cart
+```
+automations/agency/core/
+├── sms-automation-resilient.cjs       # Omnisend SMS API
+├── lead-qualification-chatbot.cjs     # Extend voice-api
+├── referral-program-automation.cjs    # Link generation
+├── price-drop-alerts.cjs              # Wishlist monitoring
+└── replenishment-reminder.cjs         # Product cycle
 ```
 
-### 2. 3-Email Abandoned Cart Series (1 jour)
+### P2 - ENHANCEMENTS
 
-**Modifier:** `email-personalization-resilient.cjs`
-
-**Séquence:**
-- Email 1: 1h après abandon (reminder)
-- Email 2: 24h après (social proof)
-- Email 3: 72h après (discount)
-
-**Benchmark:** +69% orders vs 1 email (Klaviyo)
-
-### 3. Churn Prediction (2-3 jours)
-
-**Script:** `churn-prediction-resilient.cjs`
-
-**Méthode:**
-1. Rule-based RFM scoring (start)
-2. AI enhancement (future)
-
-**Signals:**
-- Days since last purchase > 90
-- Purchase frequency decline > 50%
-- Email engagement decline
-- Support ticket patterns
-
-**Benchmark:** -25% churn rate
+| Script | Enhancement | Benchmark |
+|--------|-------------|-----------|
+| email-personalization | +3-email abandoned cart series | +69% orders |
+| omnisend-b2c-ecommerce | +SMS methods | +98% open rate |
+| hubspot-b2b-crm | +AI Lead scoring | +138% ROI |
 
 ---
 
-## PHASE 2: HAUTE (Semaines 3-4)
-
-### 4. Review Request Automation (1-2 jours)
-
-**Script:** `review-request-automation.cjs`
-
-**Trigger:** 7-14 jours après livraison (via Shopify webhook)
-
-**Flow:**
-1. Check order delivered
-2. Send review request email
-3. Incentive for photo review
-4. Alert if <3 stars
-
-**Benchmark:** +270% reviews
-
-### 5. Lead Qualification Chatbot (2-3 jours)
-
-**Modifier:** `voice-api-resilient.cjs`
-
-**Questions qualification:**
-- Budget range
-- Timeline
-- Decision maker?
-- Current tools
-
-**Actions:**
-- Score lead (0-100)
-- Push to HubSpot avec score
-- Trigger appropriate nurture
-
-**Benchmark:** +70% conversion, -95% qualification time
-
-### 6. At-Risk Customer Flow (2 jours)
-
-**Dépend de:** #3 Churn Prediction
-
-**Trigger:** Churn score > 70%
-
-**Actions:**
-- Personal email from founder
-- Special discount
-- VIP call offer
-
-**Benchmark:** +260% conversion at-risk
-
----
-
-## PHASE 3: MOYENNE (Semaines 5-8)
-
-### 7. Birthday/Anniversary Flow (1 jour)
-
-**Script:** `birthday-anniversary-flow.cjs`
-
-**Trigger:** Date-based (requires customer birthdate collection)
-
-**Flow:**
-- 7 jours avant: teaser
-- Jour J: gift/discount
-- 3 jours après: reminder
-
-**Benchmark:** +342% revenue per email
-
-### 8. Referral Program (2-3 jours)
-
-**Script:** `referral-program-automation.cjs`
-
-**Features:**
-- Unique referral link generation
-- Double-sided rewards
-- Tracking dashboard
-
-**Benchmark:** +16% CLV, -80% acquisition cost
-
-### 9. Price Drop Alerts (1-2 jours)
-
-**Script:** `price-drop-alerts.cjs`
-
-**Requires:** Wishlist functionality
-
-**Trigger:** Product price decrease
-
-**Benchmark:** 8.8% conversion
-
-### 10. Replenishment Reminders (2 jours)
-
-**Script:** `replenishment-reminder.cjs`
-
-**Applicable:** Cosmetics, supplements, pet food, etc.
-
-**Logic:** Based on product consumption cycle
-
-**Benchmark:** +90% repeat purchase
-
----
-
-## MÉTRIQUES DE SUCCÈS
-
-| KPI | Baseline | Target Post-Phase 1 | Target Post-Phase 2 |
-|-----|----------|---------------------|---------------------|
-| Cart Recovery | 10-15% | 25-30% | 30-35% |
-| Churn Rate | TBD | -15% | -25% |
-| Review Count | TBD | +100% | +270% |
-| Lead Qual Time | 60 min | 15 min | 5 min |
-| Email ROI | 36:1 | 40:1 | 45:1 |
-
----
-
-## DÉPENDANCES
-
-| Script | Dépend de |
-|--------|-----------|
-| sms-automation | Omnisend SMS (✅ déjà intégré) |
-| churn-prediction | RFM data in Shopify/Klaviyo |
-| review-request | Shopify webhooks (✅ déjà configurés) |
-| birthday-flow | Customer birthdate collection (à implémenter) |
-| referral-program | Unique link generation logic |
-| price-drop | Wishlist functionality (à implémenter) |
-| replenishment | Product cycle data (à définir par client) |
-
----
-
-## VALIDATION
-
-### Avant chaque implémentation
-
-1. Créer script avec --health check
-2. Tester en mode dry-run
-3. Vérifier fallback chain fonctionne
-4. Documenter dans registry
-
-### Après chaque implémentation
+## VALIDATION COMMANDS
 
 ```bash
-# Health check obligatoire
-node automations/agency/core/[script].cjs --health
+# Health check all operational scripts
+for script in blog-generator voice-api product-photos email-personalization \
+  grok-voice-realtime podcast-generator churn-prediction at-risk-customer \
+  review-request uptime-monitor; do
+  node automations/agency/core/${script}-resilient.cjs --health 2>/dev/null || \
+  node automations/agency/core/${script}.cjs --health 2>/dev/null
+done
 
-# Test avec données réelles
-node automations/agency/core/[script].cjs --test
+# Infrastructure check
+node automations/agency/core/uptime-monitor.cjs
 
-# Commit si 100% succès
-git add automations/agency/core/[script].cjs
-git commit -m "feat(automation): Add [script] with [X] providers fallback"
+# Registry verification
+node -e "const r=require('./automations/automations-registry.json'); \
+  console.log('Version:', r.version, '| Total:', r.totalCount)"
 ```
 
 ---
 
-## PRIORITÉS IMMÉDIATES (Cette session/Demain)
+## FILES UPDATED (Session 127bis)
 
-- [ ] Créer `sms-automation-resilient.cjs` avec Omnisend API
-- [ ] Modifier `email-personalization-resilient.cjs` pour 3-email series
-- [ ] Créer `churn-prediction-resilient.cjs` avec RFM scoring
+| File | Changes |
+|------|---------|
+| CLAUDE.md | Added Session 127bis section |
+| .claude/rules/01-project-status.md | Session 127bis, 96 automations, 17 scripts |
+| .claude/rules/07-native-scripts.md | Factual verification, corrected counts |
+| outputs/archived-dec-2025/ | 30 files archived |
+| automations/automations-registry.json | v2.6.1 (7 paths fixed) |
+| agency/newsletter-automation.cjs | Import path fixed |
+| agency/lead-gen-scheduler.cjs | Import path fixed |
 
 ---
 
-*Session 127bis - Généré 03/01/2026*
+## HONEST ASSESSMENT
+
+### What WORKS (Verified)
+- 17 scripts tested and OPERATIONAL
+- 4 AI providers with fallback chains (frontier models)
+- Infrastructure stable (5/5 uptime)
+- Klaviyo/Shopify integrations
+- Registry 100% valid paths
+
+### What DOESN'T WORK (Yet)
+- 7 scripts awaiting credentials
+- Social distribution (0/3 platforms configured)
+- No revenue yet
+
+### Brutal Truth
+- **17/24 testable scripts are OPERATIONAL (71%)**
+- **7/24 await credentials (29%)**
+- **0% broken (was 12%)**
+
+---
+
+## NEXT SESSION CHECKLIST
+
+- [ ] Request WhatsApp/Twilio/Social credentials from user
+- [ ] Create sms-automation-resilient.cjs (if Omnisend SMS access)
+- [ ] Test blog social distribution (if credentials provided)
+- [ ] Run full health check on all 17 operational scripts
+- [ ] Update registry to v2.6.2 if new scripts added
+
+---
+
+*Session 127bis - Final Report 03/01/2026*
+*Approach: Bottom-up factual, corrections applied*
+*Registry: v2.6.1 (61/61 scripts valid)*

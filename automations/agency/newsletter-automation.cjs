@@ -41,7 +41,7 @@ const {
   fetchWithTimeout,
   retryWithExponentialBackoff,
   sanitizeInput,
-} = require('./lib/security-utils.cjs');
+} = require('../lib/security-utils.cjs');
 
 // ============================================================================
 // CONFIGURATION
