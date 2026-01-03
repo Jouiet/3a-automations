@@ -1,12 +1,20 @@
-# 3A Automation
+# 3A Automation (AAA - AI Automation Agency)
 
-> Agence Automation, Analytics & AI pour PME. Automatisation e-commerce, marketing et Voice AI pour Small/Mid Business de tous secteurs.
+> Triple A: Agence d'Automatisation AI specialisee E-commerce (B2C) et PME (B2B). TOUTES plateformes supportees.
 
-3A Automation aide les PME (10k-500k EUR CA mensuel) a automatiser leurs processus marketing et operationnels. Expertise Shopify, Klaviyo, GA4, Voice AI. Approche code/APIs (pas no-code limite). Focus resultats mesurables.
+## Identite
+- **Nom**: 3A Automation (AAA)
+- **Signification**: AI Automation Agency / Automation, Analytics, AI
+- **Type**: Agence d'Automatisation AI (Triple A, AAAA)
+- **Specialisation**: E-commerce (B2C) et Workflows PME (B2B)
+- **Plateformes**: TOUTES - Shopify, WooCommerce, Magento, PrestaShop, BigCommerce, Klaviyo, Mailchimp, HubSpot, Omnisend, etc.
 
-**Fondateur**: Jonathan, Expert technique automation
+3A Automation (AAA) aide les PME (10k-500k EUR CA mensuel) a automatiser leurs processus marketing et operationnels. Expertise TOUTES plateformes e-commerce et CRM. Approche scripts natifs Node.js/Python (pas no-code limite). Focus resultats mesurables.
+
+**Fondateur**: Jonathan, Expert technique automation AI
 **Marches**: Maroc, MENA, France, Europe, Worldwide
 **Langues**: Francais, English, Arabe
+**Automations**: 88 testees et documentees
 
 ## Produits & Services
 

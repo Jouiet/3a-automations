@@ -14,10 +14,14 @@ const KNOWLEDGE_BASE = {
   // === IDENTITÉ ===
   identity: {
     name: '3A Automation',
-    meaning: 'Automation, Analytics, AI',
-    expertise: ['Email Marketing Klaviyo', 'E-commerce Shopify', 'Analytics GA4', 'Automatisations Node.js'],
+    meaning: 'AAA - AI Automation Agency',
+    type: 'Agence d\'Automatisation AI',
+    specialization: 'E-commerce (B2C) et PME (B2B) - TOUTES plateformes',
+    expertise: ['Automatisation E-commerce (TOUTES plateformes)', 'Email Marketing (Klaviyo, Mailchimp, Omnisend, HubSpot)', 'Analytics GA4', 'Scripts natifs Node.js/Python'],
+    platforms: ['Shopify', 'WooCommerce', 'Magento', 'PrestaShop', 'BigCommerce', 'Klaviyo', 'Mailchimp', 'HubSpot', 'Omnisend'],
     target: 'PME et e-commerce (€10k-500k/mois CA)',
-    differentiator: 'Agence spécialisée automation - relation directe avec experts, prix justes'
+    automations: 88,
+    differentiator: 'AAA - AI Automation Agency - Scripts natifs (pas no-code), relation directe avec experts, prix justes'
   },
 
   // === TARIFICATION COMPLÈTE ===

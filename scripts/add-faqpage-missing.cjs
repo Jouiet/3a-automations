@@ -17,11 +17,11 @@ const PAGES_FAQ = {
     faqs: [
       {
         q: "Qui est derrière 3A Automation ?",
-        a: "3A Automation est dirigé par un consultant senior en automatisation avec plus de 10 ans d'expérience dans l'e-commerce et les PME B2B. Notre expertise couvre Shopify, Klaviyo, n8n et les technologies AI."
+        a: "3A Automation (AAA - AI Automation Agency) est une agence d'automatisation AI avec plus de 10 ans d'expérience dans l'e-commerce (B2C) et les PME (B2B). Notre expertise couvre TOUTES les plateformes e-commerce et CRM, avec intégrations AI avancées."
       },
       {
         q: "Quelle est la mission de 3A Automation ?",
-        a: "Notre mission est de rendre l'automatisation accessible aux PME et e-commerces. Nous proposons 86 automatisations testées et éprouvées, avec un accompagnement humain personnalisé."
+        a: "Notre mission est de rendre l'automatisation accessible aux PME et e-commerces. Nous proposons 88 automatisations testées et éprouvées, avec un accompagnement humain personnalisé."
       },
       {
         q: "Travaillez-vous avec des entreprises internationales ?",
@@ -38,11 +38,11 @@ const PAGES_FAQ = {
     faqs: [
       {
         q: "Who is behind 3A Automation?",
-        a: "3A Automation is led by a senior automation consultant with over 10 years of experience in e-commerce and B2B SMEs. Our expertise covers Shopify, Klaviyo, n8n and AI technologies."
+        a: "3A Automation (AAA - AI Automation Agency) is an AI automation agency with over 10 years of experience in e-commerce (B2C) and SMEs (B2B). Our expertise covers ALL e-commerce and CRM platforms, with advanced AI integrations."
       },
       {
         q: "What is 3A Automation's mission?",
-        a: "Our mission is to make automation accessible to SMEs and e-commerce businesses. We offer 86 tested and proven automations, with personalized human support."
+        a: "Our mission is to make automation accessible to SMEs and e-commerce businesses. We offer 88 tested and proven automations, with personalized human support."
       },
       {
         q: "Do you work with international companies?",

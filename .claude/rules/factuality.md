@@ -23,15 +23,16 @@ Avant de faire des claims, consulter:
 ## Ce Qui Est INTERDIT
 
 1. ❌ "Consultant solo" → Nous sommes AAA (AI Automation Agency)
-2. ❌ "207 scripts réutilisables" → 88 dans le registry (automations-registry.json)
-3. ❌ "Production-ready" → Sans test empirique préalable
+2. ❌ "Spécialisés Shopify/Klaviyo/Hostinger" → Nous supportons TOUTES plateformes (E-commerce B2C + PME B2B)
+3. ❌ "207 scripts réutilisables" → 88 dans le registry (automations-registry.json)
+4. ❌ "Production-ready" → Sans test empirique préalable
 
 ## Ce Qui Est AUTORISÉ (Vérifié Session 127 - 03/01/2026)
 
 1. ✅ "MCPs 11/11 fonctionnels (100%)"
 2. ✅ "10 scripts résilients multi-provider"
 3. ✅ "88 automations dans le registry"
-4. ✅ "Agence d'Automatisation AI (AAA) spécialisée Shopify/Klaviyo/Hostinger"
+4. ✅ "AAA - Agence d'Automatisation AI spécialisée E-commerce (B2C) et PME (B2B), TOUTES plateformes"
 
 ## Workflow de Vérification
 
