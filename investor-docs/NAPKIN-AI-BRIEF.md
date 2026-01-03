@@ -36,7 +36,7 @@ Statistiques clés:
 3A = Automation + Analytics + AI
 
 Notre proposition:
-- 86 automations prêtes à l'emploi
+- 89 automations prêtes à l'emploi
 - Déploiement en 48-72 heures
 - Prix à partir de 390 EUR
 - Support FR, EN, AR
@@ -49,7 +49,7 @@ Comparaison délais:
 
 ## SLIDE 4: CATALOGUE PRODUIT
 
-86 Automations réparties en 6 catégories:
+89 automations réparties en 6 catégories:
 
 E-commerce: 24 automations
 - Abandon panier
@@ -131,7 +131,7 @@ Milestones atteints (Décembre 2025):
 
 ✓ Site web live: 3a-automation.com
 ✓ Dashboard client opérationnel
-✓ 86 automations documentées
+✓ 89 automations documentées
 ✓ Infrastructure cloud déployée
 ✓ 10 scripts résilients multi-AI (Grok→Gemini→Claude)
 
@@ -258,7 +258,7 @@ Comparaison concurrentielle (tableau):
 | Coûts ops | Élevés | Moyens | **-35% (Maroc)** |
 
 5 Barrières à l'entrée:
-1. Catalogue propriétaire 86 automations
+1. Catalogue propriétaire 89 automations
 2. Expertise AI multi-provider (3 fallbacks)
 3. Structure Maroc (coûts -35%)
 4. Processus industrialisé (48-72h)
@@ -343,7 +343,7 @@ Booking: 3a-automation.com/booking.html
 
 Documents disponibles:
 - Analyse financière forensique (bottom-up)
-- Catalogue 86 automations
+- Catalogue 89 automations
 - Architecture technique
 - Références clients
 

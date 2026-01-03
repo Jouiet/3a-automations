@@ -48,7 +48,7 @@ BLOCKER:
 
 ### Session 103 Livrables = 100% COMPLETE
 ```
-AUDIT FACTUEL - 78 AUTOMATIONS SCHEDULABILITY:
+AUDIT FACTUEL - 89 automations SCHEDULABILITY:
 ├── [x] Script audit créé: /tmp/audit-schedulability.cjs
 ├── [x] Analyse bottom-up de chaque automation
 ├── [x] Classification: schedulable vs non-schedulable

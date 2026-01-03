@@ -460,7 +460,7 @@ automations/agency/core/
 ### Registry Updated
 
 - Version: 2.2.0 (was 2.1.1)
-- Total: 88 automations (was 86)
+- Total: 89 automations (was 86)
 - llms.txt: v5.1.0 (added Omnisend)
 
 ---
