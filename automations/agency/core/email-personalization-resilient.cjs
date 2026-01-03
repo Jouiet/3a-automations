@@ -1,16 +1,26 @@
 #!/usr/bin/env node
 /**
  * Resilient Email Personalization - Multi-Provider Fallback
- * 3A Automation - Session 115
+ * 3A Automation - Session 127bis
  *
  * AI-powered email personalization with automatic failover
- * Fallback chain: Grok → Gemini → Claude → Static templates
+ * Fallback chain: Grok → OpenAI → Gemini → Claude → Static templates
+ *
+ * NEW Session 127bis:
+ * - 3-Email Abandoned Cart Series (+69% orders vs single email - Klaviyo)
+ *   Email 1: 1h after abandon (reminder)
+ *   Email 2: 24h after (social proof)
+ *   Email 3: 72h after (discount)
  *
  * Usage:
  *   node email-personalization-resilient.cjs --personalize --lead='{"email":"...","company":"..."}'
  *   node email-personalization-resilient.cjs --subject --context='{"topic":"...","segment":"..."}'
+ *   node email-personalization-resilient.cjs --abandoned-cart-series --cart='{"email":"...","firstName":"...","products":[...]}'
  *   node email-personalization-resilient.cjs --server --port=3006
  *   node email-personalization-resilient.cjs --health
+ *
+ * @version 1.1.0
+ * @date 2026-01-03
  */
 
 const http = require('http');
@@ -96,6 +106,26 @@ const BRAND = {
   tagline: 'Automation, Analytics, AI',
   url: 'https://3a-automation.com',
   signature: "L'équipe 3A Automation"
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ABANDONED CART EMAIL SERIES CONFIGURATION (Session 127bis)
+// Benchmark: +69% orders vs single email (Klaviyo 2025)
+// ─────────────────────────────────────────────────────────────────────────────
+const ABANDONED_CART_CONFIG = {
+  // Timing delays after cart abandonment
+  delays: {
+    email1: 1 * 60 * 60 * 1000,      // 1 hour - reminder
+    email2: 24 * 60 * 60 * 1000,     // 24 hours - social proof
+    email3: 72 * 60 * 60 * 1000      // 72 hours - discount
+  },
+  // Industry benchmarks (Klaviyo 2025)
+  benchmarks: {
+    openRate: 0.45,           // 45% open rate
+    clickRate: 0.21,          // 21% click rate
+    conversionRate: 0.10,     // 10% recovery rate per email
+    totalRecovery: 0.30       // 30% with full series
+  }
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -369,6 +399,154 @@ function getStaticTemplate(segment, leadData) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// ABANDONED CART EMAIL TEMPLATES (Session 127bis)
+// 3-email series: reminder (1h), social proof (24h), discount (72h)
+// ─────────────────────────────────────────────────────────────────────────────
+const ABANDONED_CART_TEMPLATES = {
+  email1_reminder: {
+    subject: "Vous avez oublié quelque chose, {firstName} 🛒",
+    preheader: "Votre panier vous attend - finalisez votre commande",
+    greeting: "Bonjour {firstName},",
+    intro: "Nous avons remarqué que vous avez laissé des articles dans votre panier.",
+    body: "Bonne nouvelle : vos articles sont toujours disponibles ! Finalisez votre commande maintenant avant qu'ils ne s'épuisent.",
+    productList: "{productList}",
+    cartTotal: "{cartTotal}",
+    cta: "Finaliser ma commande",
+    ctaUrl: "{cartUrl}",
+    signature: BRAND.signature
+  },
+  email2_socialproof: {
+    subject: "{firstName}, vos articles sont très demandés ⭐",
+    preheader: "Nos clients adorent ces produits - ne les manquez pas",
+    greeting: "Bonjour {firstName},",
+    intro: "Votre panier est toujours là, mais ces articles partent vite !",
+    body: "Ces produits sont parmi nos best-sellers avec d'excellents avis clients. Plus de {reviewCount}+ clients satisfaits. Ne passez pas à côté.",
+    productList: "{productList}",
+    testimonial: "« {testimonialText} » - {testimonialAuthor}",
+    cta: "Voir mon panier",
+    ctaUrl: "{cartUrl}",
+    signature: BRAND.signature
+  },
+  email3_discount: {
+    subject: "Dernière chance : {discountPercent}% de réduction sur votre panier 🎁",
+    preheader: "Code exclusif pour finaliser votre commande aujourd'hui",
+    greeting: "Bonjour {firstName},",
+    intro: "Nous ne voulons vraiment pas que vous passiez à côté de vos articles préférés.",
+    body: "En tant que remerciement spécial, voici une réduction exclusive de {discountPercent}% sur votre panier. Cette offre expire dans 24h.",
+    productList: "{productList}",
+    discountCode: "{discountCode}",
+    originalTotal: "{originalTotal}",
+    discountedTotal: "{discountedTotal}",
+    cta: "Utiliser mon code -{discountPercent}%",
+    ctaUrl: "{cartUrl}?discount={discountCode}",
+    urgency: "⏰ Offre valable 24h uniquement",
+    signature: BRAND.signature
+  }
+};
+
+const ABANDONED_CART_PROMPT = `Tu es un expert en email marketing e-commerce spécialisé dans la récupération de paniers abandonnés.
+
+CONTEXTE:
+- Marque: ${BRAND.name}
+- Objectif: Récupérer un panier abandonné avec une série de 3 emails
+- Benchmark: +69% de commandes vs 1 seul email (Klaviyo 2025)
+
+SÉRIE DE 3 EMAILS:
+1. Email 1 (1h après): Rappel simple et bienveillant, pas de pression
+2. Email 2 (24h après): Social proof, avis clients, popularité des produits
+3. Email 3 (72h après): Offre de réduction exclusive, urgence
+
+RÈGLES STRICTES:
+- Langue: Français
+- Ton: Bienveillant mais incitatif
+- Tutoiement OU vouvoiement selon le contexte client
+- Personnalisation avec le prénom
+- Mentionner les produits du panier
+- Pas de spam words (GRATUIT, URGENT en majuscules, etc.)
+- CTA clair et unique par email
+
+FORMAT DE RÉPONSE (JSON array de 3 emails):
+[
+  {
+    "emailNumber": 1,
+    "timing": "1h après abandon",
+    "subject": "...",
+    "preheader": "...",
+    "greeting": "...",
+    "intro": "...",
+    "body": "...",
+    "cta": "...",
+    "signature": "${BRAND.signature}"
+  },
+  { "emailNumber": 2, ... },
+  { "emailNumber": 3, ... }
+]`;
+
+function getAbandonedCartStaticSeries(cartData) {
+  const firstName = cartData.firstName || 'là';
+  const cartUrl = cartData.cartUrl || 'https://shop.example.com/cart';
+  const discountPercent = cartData.discountPercent || 10;
+  const discountCode = cartData.discountCode || 'COMEBACK10';
+
+  // Format product list
+  const products = cartData.products || [];
+  const productList = products.length > 0
+    ? products.map(p => `• ${p.name} - ${p.price}€`).join('\n')
+    : '• Vos articles sélectionnés';
+
+  const cartTotal = cartData.cartTotal || products.reduce((sum, p) => sum + (p.price || 0), 0);
+  const originalTotal = `${cartTotal.toFixed(2)}€`;
+  const discountedTotal = `${(cartTotal * (1 - discountPercent/100)).toFixed(2)}€`;
+  const reviewCount = cartData.reviewCount || 500;
+  const testimonialText = cartData.testimonialText || "Livraison rapide et produits de qualité !";
+  const testimonialAuthor = cartData.testimonialAuthor || "Marie L.";
+
+  const fillTemplate = (template) => {
+    const filled = {};
+    for (const [key, value] of Object.entries(template)) {
+      if (typeof value === 'string') {
+        filled[key] = value
+          .replace(/{firstName}/g, firstName)
+          .replace(/{productList}/g, productList)
+          .replace(/{cartTotal}/g, originalTotal)
+          .replace(/{cartUrl}/g, cartUrl)
+          .replace(/{discountPercent}/g, discountPercent)
+          .replace(/{discountCode}/g, discountCode)
+          .replace(/{originalTotal}/g, originalTotal)
+          .replace(/{discountedTotal}/g, discountedTotal)
+          .replace(/{reviewCount}/g, reviewCount)
+          .replace(/{testimonialText}/g, testimonialText)
+          .replace(/{testimonialAuthor}/g, testimonialAuthor);
+      } else {
+        filled[key] = value;
+      }
+    }
+    return filled;
+  };
+
+  return [
+    {
+      emailNumber: 1,
+      timing: '1h après abandon',
+      sendDelay: ABANDONED_CART_CONFIG.delays.email1,
+      ...fillTemplate(ABANDONED_CART_TEMPLATES.email1_reminder)
+    },
+    {
+      emailNumber: 2,
+      timing: '24h après abandon',
+      sendDelay: ABANDONED_CART_CONFIG.delays.email2,
+      ...fillTemplate(ABANDONED_CART_TEMPLATES.email2_socialproof)
+    },
+    {
+      emailNumber: 3,
+      timing: '72h après abandon',
+      sendDelay: ABANDONED_CART_CONFIG.delays.email3,
+      ...fillTemplate(ABANDONED_CART_TEMPLATES.email3_discount)
+    }
+  ];
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // RESILIENT PERSONALIZATION
 // ─────────────────────────────────────────────────────────────────────────────
 async function personalizeEmail(leadData, segment = 'other') {
@@ -502,6 +680,111 @@ async function generateSubjectLine(context) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// ABANDONED CART SERIES GENERATION (Session 127bis)
+// +69% orders vs single email (Klaviyo benchmark)
+// ─────────────────────────────────────────────────────────────────────────────
+async function generateAbandonedCartSeries(cartData) {
+  const errors = [];
+  // Fallback order: Grok → OpenAI → Gemini → Anthropic → Static
+  const providerOrder = ['grok', 'openai', 'gemini', 'anthropic'];
+
+  // Build context for AI
+  const products = cartData.products || [];
+  const productListText = products.length > 0
+    ? products.map(p => `${p.name} (${p.price}€)`).join(', ')
+    : 'Articles divers';
+
+  const userPrompt = `Génère une série de 3 emails pour récupérer ce panier abandonné:
+
+CLIENT:
+- Prénom: ${cartData.firstName || 'Client'}
+- Email: ${cartData.email}
+
+PANIER:
+- Produits: ${productListText}
+- Total: ${cartData.cartTotal || 'Non spécifié'}€
+- URL panier: ${cartData.cartUrl || 'https://shop.example.com/cart'}
+
+REMISE (pour email 3):
+- Code: ${cartData.discountCode || 'COMEBACK10'}
+- Réduction: ${cartData.discountPercent || 10}%
+
+AVIS CLIENTS (pour email 2):
+- Nombre d'avis: ${cartData.reviewCount || 500}+
+- Témoignage: "${cartData.testimonialText || 'Excellent service !'}" - ${cartData.testimonialAuthor || 'Client satisfait'}`;
+
+  for (const providerKey of providerOrder) {
+    const provider = PROVIDERS[providerKey];
+    if (!provider.enabled) {
+      errors.push({ provider: provider.name, error: 'Not configured' });
+      continue;
+    }
+
+    try {
+      let response;
+      switch (providerKey) {
+        case 'grok': response = await callGrok(ABANDONED_CART_PROMPT, userPrompt); break;
+        case 'openai': response = await callOpenAI(ABANDONED_CART_PROMPT, userPrompt); break;
+        case 'gemini': response = await callGemini(ABANDONED_CART_PROMPT, userPrompt); break;
+        case 'anthropic': response = await callAnthropic(ABANDONED_CART_PROMPT, userPrompt); break;
+      }
+
+      // Parse JSON from response (with robust extraction)
+      let jsonContent = response;
+      const fenceMatch = response.match(/```(?:json)?\s*([\s\S]*?)```/);
+      if (fenceMatch) jsonContent = fenceMatch[1].trim();
+
+      const jsonStart = jsonContent.indexOf('[');
+      const jsonEnd = jsonContent.lastIndexOf(']');
+      if (jsonStart !== -1 && jsonEnd !== -1) {
+        jsonContent = jsonContent.substring(jsonStart, jsonEnd + 1);
+      }
+
+      const seriesParsed = safeJsonParse(jsonContent, 'Abandoned cart series');
+      if (!seriesParsed.success) throw new Error(`Series JSON parse failed: ${seriesParsed.error}`);
+      const emails = seriesParsed.data;
+
+      // Validate we got 3 emails
+      if (!Array.isArray(emails) || emails.length !== 3) {
+        throw new Error(`Expected 3 emails, got ${Array.isArray(emails) ? emails.length : 'non-array'}`);
+      }
+
+      // Add timing delays
+      emails[0].sendDelay = ABANDONED_CART_CONFIG.delays.email1;
+      emails[1].sendDelay = ABANDONED_CART_CONFIG.delays.email2;
+      emails[2].sendDelay = ABANDONED_CART_CONFIG.delays.email3;
+
+      return {
+        success: true,
+        emails,
+        provider: provider.name,
+        fallbacksUsed: errors.length,
+        errors,
+        aiGenerated: true,
+        benchmarks: ABANDONED_CART_CONFIG.benchmarks
+      };
+    } catch (err) {
+      errors.push({ provider: provider.name, error: err.message });
+      console.log(`[AbandonedCart] ${provider.name} failed:`, err.message);
+    }
+  }
+
+  // All AI providers failed - use static templates
+  console.log('[AbandonedCart] All providers failed, using static templates');
+  const staticEmails = getAbandonedCartStaticSeries(cartData);
+
+  return {
+    success: true,
+    emails: staticEmails,
+    provider: 'static',
+    fallbacksUsed: errors.length,
+    errors,
+    aiGenerated: false,
+    benchmarks: ABANDONED_CART_CONFIG.benchmarks
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // HTTP SERVER
 // ─────────────────────────────────────────────────────────────────────────────
 function startServer(port = 3006) {
@@ -597,6 +880,50 @@ function startServer(port = 3006) {
       return;
     }
 
+    // Abandoned Cart Series endpoint (Session 127bis)
+    if (req.url === '/abandoned-cart-series' && req.method === 'POST') {
+      let body = '';
+      let bodySize = 0;
+      req.on('data', chunk => {
+        bodySize += chunk.length;
+        if (bodySize > MAX_BODY_SIZE) {
+          req.destroy();
+          res.writeHead(413, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Request body too large. Max 1MB.' }));
+          return;
+        }
+        body += chunk;
+      });
+      req.on('end', async () => {
+        try {
+          const bodyParsed = safeJsonParse(body, '/abandoned-cart-series request body');
+          if (!bodyParsed.success) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: `Invalid JSON: ${bodyParsed.error}` }));
+            return;
+          }
+          const cartData = bodyParsed.data;
+
+          if (!cartData.email) {
+            res.writeHead(400, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Cart data with email is required' }));
+            return;
+          }
+
+          console.log(`[AbandonedCart] Generating 3-email series for: ${cartData.email}`);
+          const result = await generateAbandonedCartSeries(cartData);
+
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify(result));
+        } catch (err) {
+          console.error('[AbandonedCart] Error:', err.message);
+          res.writeHead(500, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message }));
+        }
+      });
+      return;
+    }
+
     // Subject endpoint
     if (req.url === '/subject' && req.method === 'POST') {
       let body = '';
@@ -642,15 +969,17 @@ function startServer(port = 3006) {
   server.listen(port, () => {
     console.log(`\n[Server] Email Personalization API running on http://localhost:${port}`);
     console.log('\nEndpoints:');
-    console.log('  POST /personalize - Personalize email for lead');
-    console.log('  POST /subject     - Generate subject line');
-    console.log('  GET  /health      - Provider status');
+    console.log('  POST /personalize          - Personalize email for lead');
+    console.log('  POST /subject              - Generate subject line');
+    console.log('  POST /abandoned-cart-series - Generate 3-email cart recovery series');
+    console.log('  GET  /health               - Provider status');
     console.log('\nProviders (fallback order):');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
       const status = provider.enabled ? '[OK]' : '[--]';
       console.log(`  ${status} ${provider.name}`);
     }
     console.log('  [OK] Static templates (always available)');
+    console.log('\n[Session 127bis] 3-Email Abandoned Cart Series (+69% orders - Klaviyo)');
   });
 }
 
@@ -660,7 +989,8 @@ function startServer(port = 3006) {
 function parseArgs() {
   const args = {};
   process.argv.slice(2).forEach(arg => {
-    const match = arg.match(/^--(\w+)(?:=(.+))?$/);
+    // [\w-]+ to support hyphenated args like --abandoned-cart-series
+    const match = arg.match(/^--([\w-]+)(?:=(.+))?$/);
     if (match) {
       args[match[1]] = match[2] || true;
     }
@@ -729,17 +1059,53 @@ async function main() {
     return;
   }
 
+  // Session 127bis: 3-Email Abandoned Cart Series
+  if (args['abandoned-cart-series'] && args.cart) {
+    const cartParsed = safeJsonParse(args.cart, 'CLI --cart argument');
+    if (!cartParsed.success) {
+      console.error('Error parsing cart JSON:', cartParsed.error);
+      process.exit(1);
+    }
+    const cartData = cartParsed.data;
+    console.log(`\n[AbandonedCart] Generating 3-email series for: ${cartData.email}\n`);
+    try {
+      const result = await generateAbandonedCartSeries(cartData);
+
+      console.log('Provider:', result.provider);
+      console.log('AI Generated:', result.aiGenerated);
+      console.log('Fallbacks used:', result.fallbacksUsed);
+      console.log('Benchmarks:', JSON.stringify(result.benchmarks, null, 2));
+      console.log('\n3-Email Series:');
+      result.emails.forEach((email, i) => {
+        console.log(`\n--- Email ${i + 1} (${email.timing}) ---`);
+        console.log(`Subject: ${email.subject}`);
+        console.log(`CTA: ${email.cta}`);
+        console.log(`Send delay: ${email.sendDelay / (1000 * 60 * 60)}h`);
+      });
+    } catch (err) {
+      console.error('Error generating abandoned cart series:', err.message);
+    }
+    return;
+  }
+
   console.log(`
-[Email] Resilient Email Personalization - 3A Automation
+[Email] Resilient Email Personalization - 3A Automation v1.1.0
 
 Usage:
   node email-personalization-resilient.cjs --server [--port=3006]
   node email-personalization-resilient.cjs --personalize --lead='{"email":"...","company":"..."}'
   node email-personalization-resilient.cjs --subject --context='{"topic":"...","segment":"..."}'
+  node email-personalization-resilient.cjs --abandoned-cart-series --cart='{"email":"...","firstName":"...","products":[...]}'
   node email-personalization-resilient.cjs --health
 
 Fallback chain:
   Grok → OpenAI → Gemini → Claude → Static templates
+
+Session 127bis Features:
+  - 3-Email Abandoned Cart Series (+69% orders vs single email - Klaviyo)
+    Email 1: 1h after abandon (reminder)
+    Email 2: 24h after (social proof)
+    Email 3: 72h after (discount)
 `);
 }
 
