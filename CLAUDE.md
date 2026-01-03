@@ -82,7 +82,11 @@ TTS: Gemini 2.5 Flash (rate limited after 4 segments)
 | Lists | 10 (LinkedIn, Google Maps, B2B, Welcome...) |
 | Flows | 0 (requires UI creation) |
 | API | ✅ Working (direct calls) |
-| MCP | ⚠️ SSL issue (use direct API) |
+| MCP | ❌ REMOVED - SSL bug in Python SDK ([#870](https://github.com/modelcontextprotocol/python-sdk/issues/870)) |
+
+### MCPs Updated (11/11)
+
+Klaviyo MCP supprimé → API directe utilisée. Voir `.claude/rules/05-mcps-status.md`.
 
 ### External Blockers Remaining
 

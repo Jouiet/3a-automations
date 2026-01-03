@@ -1,6 +1,6 @@
-# MCPs Status (Verified 02/01/2026)
+# MCPs Status (Verified 03/01/2026)
 
-## Working MCPs (12/12) - 100%
+## Working MCPs (11/11) - 100%
 
 | MCP | Status | Notes |
 |-----|--------|-------|
@@ -8,7 +8,6 @@
 | playwright | ✅ OK | browser_tabs, automation |
 | gemini | ✅ OK | 6 models, chat |
 | hostinger | ✅ OK | VPS 1168256, 4 Docker projects |
-| klaviyo | ✅ OK | 10 lists (verified) |
 | github | ✅ OK | Repo access working |
 | wordpress | ✅ OK | wp.3a-automation.com |
 | shopify | ✅ OK | guqsu3-yj.myshopify.com |
@@ -17,14 +16,15 @@
 | memory | ✅ OK | built-in |
 | claude-mcp | ✅ OK | built-in |
 
-## Removed (Session 120) - APIs Used Directly
+## Removed - APIs Used Directly
 
-| MCP | Reason | Alternative |
-|-----|--------|-------------|
-| apify | Package bug | Direct API calls (STARTER $39/mo ACTIVE) |
-| google-sheets | Package bug "Dynamic require of fs" | Direct googleapis in scripts |
-| grok | Redundant | Direct xAI API in resilient scripts |
-| powerbi-remote | Not needed | Entra ID not configured |
+| MCP | Session | Reason | Alternative |
+|-----|---------|--------|-------------|
+| klaviyo | 126 | SSL cert bug in MCP Python SDK ([#870](https://github.com/modelcontextprotocol/python-sdk/issues/870)) | Direct API (10 lists verified) |
+| apify | 120 | Package bug | Direct API calls (STARTER $39/mo) |
+| google-sheets | 120 | "Dynamic require of fs" | Direct googleapis in scripts |
+| grok | 120 | Redundant | Direct xAI API in resilient scripts |
+| powerbi-remote | 120 | Not needed | Entra ID not configured |
 
 ## Service Account
 
