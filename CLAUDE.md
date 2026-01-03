@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 31.0 | Date: 2026-01-02 | Session: 124 (SECURITY FIXES)
+## Version: 32.0 | Date: 2026-01-03 | Session: 126 (DASHBOARD LIVE + HEALTH CHECKS)
 
 ---
 
@@ -8,10 +8,10 @@
 | Resource | Location |
 |----------|----------|
 | Site | https://3a-automation.com |
-| Dashboard | https://dashboard.3a-automation.com |
+| Dashboard | https://dashboard.3a-automation.com ✅ LIVE |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
 | Automations | `automations/automations-registry.json` (89, v2.3.0) |
-| History | `HISTORY.md` (Sessions 0-123) |
+| History | `HISTORY.md` (Sessions 0-126) |
 | Scripts résilients | `automations/agency/core/` (11 scripts, P0-P1-P2 secured) |
 | Pages | 63 (FR/EN + Academy + Investors) |
 | SEO Score | **96%** |
@@ -20,7 +20,78 @@
 | **Security Backend** | **75%** - ⚠️ Code fixed, rotation pending |
 | Docker Projects | 4 running (3a-website, cinematicads, root, wordpress) |
 | CRM Scripts | HubSpot v1.1.0 + Omnisend v1.1.0 |
-| Podcast Generator | v1.0.0 (> NotebookLM) |
+| Podcast Generator | v1.0.0 (> NotebookLM) ✅ VERIFIED |
+| Klaviyo | 10 lists, 0 flows (UI creation required) |
+
+---
+
+## Session 126 - DASHBOARD LIVE + HEALTH CHECKS (03/01/2026)
+
+### Dashboard Deployment COMPLETE
+
+| Action | Status | Details |
+|--------|--------|---------|
+| TypeScript JWT fix | ✅ DONE | Type-safe `getJwtSecret()` function |
+| Build successful | ✅ DONE | 37/37 static pages compiled |
+| HTTP 200 verified | ✅ DONE | dashboard.3a-automation.com LIVE |
+| Commit pushed | ✅ DONE | `837504b` - fix(auth) |
+
+### Resilient Scripts Health (8/10 Operational)
+
+| Script | Status | AI Providers |
+|--------|--------|--------------|
+| blog-generator-resilient.cjs | ✅ OK | 4 AI (Anthropic→OpenAI→Grok→Gemini) |
+| voice-api-resilient.cjs | ✅ OK | 4 AI + Local fallback |
+| product-photos-resilient.cjs | ✅ OK | 4 Image + 4 Vision |
+| email-personalization-resilient.cjs | ✅ OK | 4 AI + Static fallback |
+| grok-voice-realtime.cjs | ✅ OK | Grok WebSocket + Gemini TTS |
+| podcast-generator-resilient.cjs | ✅ OK | 4 AI + Gemini TTS |
+| hubspot-b2b-crm.cjs | ⏳ Test mode | Awaiting HUBSPOT_API_KEY |
+| omnisend-b2c-ecommerce.cjs | ⏳ Test mode | Awaiting OMNISEND_API_KEY |
+
+### Uptime Monitor Results
+
+```
+╔══════════════════════════════════════════════════════════════════╗
+║           3A AUTOMATION - UPTIME MONITOR                        ║
+╠══════════════════════════════════════════════════════════════════╣
+║  ✅ 3A Automation Site [CRITICAL]     486ms                      ║
+║  ✅ 3A Dashboard [CRITICAL]           419ms                      ║
+║  ✅ n8n Workflows [CRITICAL]          950ms                      ║
+║  ✅ WordPress Blog                    1258ms                     ║
+║  ✅ Booking API (GAS)                 681ms                      ║
+╠══════════════════════════════════════════════════════════════════╣
+║  Summary: 5/5 healthy, 0 critical issues                         ║
+╚══════════════════════════════════════════════════════════════════╝
+```
+
+### Podcast Generator VERIFIED
+
+```
+Topic: "L'automatisation e-commerce en 2026"
+Script: 10 segments, 2 speakers (Sophie + Alexandre)
+Audio: 2.22 MB MP3 (4 segments before TTS rate limit)
+AI Chain: Anthropic failed → OpenAI failed → Grok SUCCESS
+TTS: Gemini 2.5 Flash (rate limited after 4 segments)
+```
+
+### Klaviyo Status
+
+| Metric | Value |
+|--------|-------|
+| Lists | 10 (LinkedIn, Google Maps, B2B, Welcome...) |
+| Flows | 0 (requires UI creation) |
+| API | ✅ Working (direct calls) |
+| MCP | ⚠️ SSL issue (use direct API) |
+
+### External Blockers Remaining
+
+| Service | Blocker | Action |
+|---------|---------|--------|
+| WhatsApp | Meta approval | Submit business verification |
+| Twilio | Credentials | Purchase phone number |
+| HubSpot | API key | Create free account |
+| Omnisend | API key | Create account ($16/mo) |
 
 ---
 

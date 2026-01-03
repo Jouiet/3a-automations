@@ -1,0 +1,57 @@
+{
+  "title": "L'automatisation e-commerce en 2026 : Tendances et Opportunités",
+  "description": "Alexandre et Sophie explorent les tendances d'automatisation en e-commerce pour 2026, avec des exemples concrets et des conseils actionnables pour booster vos ventes.",
+  "segments": [
+    {
+      "speaker": "Sophie",
+      "text": "Bienvenue dans notre podcast sur l'innovation ! Aujourd'hui, avec Alexandre, expert en automatisation, on plonge dans l'automatisation e-commerce en 2026 : tendances et opportunités. Prêts à découvrir comment révolutionner votre boutique en ligne ?",
+      "emotion": "excited"
+    },
+    {
+      "speaker": "Alexandre",
+      "text": "Merci Sophie ! L'automatisation e-commerce, c'est utiliser l'IA et les outils no-code pour gérer stocks, commandes et marketing sans effort manuel. En 2026, ça deviendra indispensable pour scaler rapidement.",
+      "emotion": "excited"
+    },
+    {
+      "speaker": "Sophie",
+      "text": "Fascinant ! Quelles sont les grandes tendances pour 2026 ? J'imagine l'IA partout, mais dis-m'en plus.",
+      "emotion": "curious"
+    },
+    {
+      "speaker": "Alexandre",
+      "text": "Absolument : l'hyper-personnalisation via IA prédictive, comme recommander produits avant même l'achat, à la Netflix. Pensez à des outils comme Klaviyo boosté IA pour des emails ultra-ciblés, augmentant les conversions de 30%.",
+      "emotion": "thoughtful"
+    },
+    {
+      "speaker": "Sophie",
+      "text": "Incroyable pour les petites boutiques ! Et pour la gestion des stocks, qu'est-ce qui change ?",
+      "emotion": "curious"
+    },
+    {
+      "speaker": "Alexandre",
+      "text": "Les stocks intelligents avec IoT et blockchain : prédiction des ruptures en temps réel via des capteurs. Exemple : intégrez Zapier à Shopify pour auto-recommandations fournisseurs, évitant les surstocks de 40%. Action : testez un POC dès maintenant !",
+      "emotion": "excited"
+    },
+    {
+      "speaker": "Sophie",
+      "text": "Super actionable ! Les opportunités pour les PME, c'est scaler sans embaucher ?",
+      "emotion": "thoughtful"
+    },
+    {
+      "speaker": "Alexandre",
+      "text": "Exactement : chatbots IA 24/7 pour service client, comme Gorgias avec GPT-5, réduisant les tickets de 70%. Opportunité : automatisez le marketing via Make.com pour des campagnes cross-plateformes.",
+      "emotion": "neutral"
+    },
+    {
+      "speaker": "Sophie",
+      "text": "Merci pour ces insights ! Écouteurs, commencez par auditer vos processus et intégrez un outil gratuit comme Zapier. Abonnez-vous et commentez vos défis !",
+      "emotion": "excited"
+    },
+    {
+      "speaker": "Alexandre",
+      "text": "Parfait résumé Sophie. Rendez-vous au prochain épisode. À bientôt pour plus d'automatisation !",
+      "emotion": "neutral"
+    }
+  ],
+  "duration_estimate": "15 minutes"
+}

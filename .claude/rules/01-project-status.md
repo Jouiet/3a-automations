@@ -1,15 +1,15 @@
 # 3A Automation - Project Status
 
-## Current State (Session 124 - 03/01/2026)
+## Current State (Session 126 - 03/01/2026)
 
 | Metric | Value |
 |--------|-------|
 | Site | https://3a-automation.com LIVE |
-| Dashboard | https://dashboard.3a-automation.com LIVE |
+| Dashboard | https://dashboard.3a-automation.com ✅ LIVE (HTTP 200 verified) |
 | Pages | **63** HTML files (verified count) |
 | Investor Pages | ✅ Created (FR + EN) with FAQPage + BreadcrumbList |
 | Automations | **89** (Registry v2.3.0 - Podcast Generator added) |
-| Scripts résilients | **11 fichiers (core/)** - All P0-P1-P2 secured |
+| Scripts résilients | **11 fichiers (core/)** - 8/10 operational, 2 awaiting keys |
 | n8n Workflows | **0 restant** (all replaced by native scripts) |
 | SEO Score | **100%** (all meta tags, OG, Twitter) |
 | AEO Score | **95%** |
@@ -21,6 +21,8 @@
 | Infrastructure | 4 Docker projects, 6 containers RUNNING |
 | llms.txt | **v5.1.0** with CRM section |
 | Voice Widget Templates | **8 industries** (4h→30min deployment) |
+| Podcast Generator | ✅ VERIFIED - 10 segments, 2.2MB audio |
+| Klaviyo | 10 lists, 0 flows (UI creation required) |
 | **Overall Audit Score** | **91%** |
 | **INVESTOR-READY** | ⚠️ PENDING VPS SECRET ROTATION (code fixed) |
 

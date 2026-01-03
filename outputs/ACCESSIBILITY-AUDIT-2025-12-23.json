@@ -1,11 +1,369 @@
 {
-  "date": "2025-12-23T20:11:23.697Z",
+  "date": "2026-01-02T22:56:48.580Z",
   "summary": {
     "CRITICAL": 0,
     "HIGH": 0,
-    "MEDIUM": 0,
-    "LOW": 0
+    "MEDIUM": 35,
+    "LOW": 16
   },
-  "total": 0,
-  "issues": []
+  "total": 51,
+  "issues": [
+    {
+      "file": "academie/cours/analytics.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "academie/cours/contenu.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "academie/cours/demarrer.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H5",
+      "fix": "Use H2 instead of H5"
+    },
+    {
+      "file": "academie/cours/ecommerce.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "academie/cours/emails.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "academie/cours/leads.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H3",
+      "fix": "Use H2 instead of H3"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "academie/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "academie/parcours/e-commerce.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    },
+    {
+      "file": "academie/parcours/growth.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    },
+    {
+      "file": "academie/parcours/marketing-automation.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    },
+    {
+      "file": "academie.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    },
+    {
+      "file": "blog/assistant-vocal-ia-pme-2026.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    },
+    {
+      "file": "blog/assistant-vocal-ia-pme-2026.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "blog/automatisation-ecommerce-2026.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "blog/index.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "blog/marketing-automation-pour-startups-2026-guide-complet.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "en/academy/courses/analytics.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "en/academy/courses/content.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "en/academy/courses/ecommerce.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H5",
+      "fix": "Use H2 instead of H5"
+    },
+    {
+      "file": "en/academy/courses/emails.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "en/academy/courses/getting-started.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "en/academy/courses/leads.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H4",
+      "fix": "Use H2 instead of H4"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H3",
+      "fix": "Use H2 instead of H3"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "en/academy/guides.html",
+      "severity": "LOW",
+      "wcag": "2.1.1",
+      "message": "onclick handler - ensure element is keyboard accessible",
+      "fix": "Use <button> or add tabindex=\"0\" and keypress handler"
+    },
+    {
+      "file": "en/academy/paths/e-commerce.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H3",
+      "fix": "Use H2 instead of H3"
+    },
+    {
+      "file": "en/academy/paths/growth.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H3",
+      "fix": "Use H2 instead of H3"
+    },
+    {
+      "file": "en/academy/paths/marketing-automation.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H1 → H3",
+      "fix": "Use H2 instead of H3"
+    },
+    {
+      "file": "en/academy.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    },
+    {
+      "file": "en/blog/ecommerce-automation-2026.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "en/blog/index.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "en/blog/voice-ai-assistant-sme-2026.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    },
+    {
+      "file": "en/blog/voice-ai-assistant-sme-2026.html",
+      "severity": "MEDIUM",
+      "wcag": "1.3.1",
+      "message": "Missing <main> landmark",
+      "fix": "Wrap main content in <main> or add role=\"main\""
+    },
+    {
+      "file": "en/investors.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    },
+    {
+      "file": "investisseurs.html",
+      "severity": "MEDIUM",
+      "wcag": "2.4.6",
+      "message": "Heading level skipped: H2 → H4",
+      "fix": "Use H3 instead of H4"
+    }
+  ]
 }

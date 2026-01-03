@@ -1,6 +1,84 @@
-# Session 104-120 - AUDIT APPROFONDI
-## Dernière màj: Session 120 (02/01/2026)
+# Session 104-122 - AUDIT APPROFONDI
+## Dernière màj: Session 122 (02/01/2026)
 **Statut légal:** PRÉ-INCORPORATION (en attente ICE marocain)
+
+---
+
+## 🚨 SESSION 122 UPDATE - CRITICAL SECURITY (02/01/2026)
+
+```
+╔═══════════════════════════════════════════════════════════════════════╗
+║                 🚨 CRITICAL SECURITY VULNERABILITY 🚨                  ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ File:           dashboard/docker-compose.production.yml               ║
+║ Repository:     PUBLIC GitHub (https://github.com/Jouiet/3a-automations)║
+║ CVSS Score:     9.8 (CRITICAL)                                        ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ SECRETS EXPOSED IN PUBLIC REPO:                                       ║
+║   Line 32: JWT_SECRET=3a_automation_jwt_secret_production_2025_secure ║
+║   Line 35: N8N_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...       ║
+║   Line 30: GOOGLE_SHEETS_ID=1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ IMPACT:                                                               ║
+║   - JWT_SECRET: Session hijacking, authentication bypass              ║
+║   - N8N_API_KEY: Full control of n8n workflows                       ║
+║   - SHEETS_ID: Data exposure (user database)                          ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ IMMEDIATE ACTIONS REQUIRED (HUMAN):                                   ║
+║   1. ❌ ROTATE JWT_SECRET on VPS /root/dashboard/.env                 ║
+║   2. ❌ REVOKE N8N_API_KEY at n8n admin panel                        ║
+║   3. ❌ Move secrets to Docker secrets (not compose file)            ║
+║   4. ❌ git filter-branch to purge from Git history                   ║
+╠═══════════════════════════════════════════════════════════════════════╣
+║ CODE SECURITY: auth.ts correctly validates JWT_SECRET at runtime     ║
+║ PROBLEM: Secret VALUE is in PUBLIC repo (not code vulnerability)     ║
+╚═══════════════════════════════════════════════════════════════════════╝
+```
+
+### Forensic Audit Scores (Session 122)
+
+| Category | Score | Status |
+|----------|-------|--------|
+| SEO Technical | 96% | ✅ Excellent |
+| AEO/GEO | 95% | ✅ Excellent |
+| Security Frontend | 92% | ✅ Good |
+| **Security Backend** | **45%** | 🚨 **CRITICAL** |
+| Marketing Claims | 88% | ✅ Good |
+| i18n/l10n | 94% | ✅ Excellent |
+| Accessibility | 85% | ⚠️ Needs work |
+| Design/UX | 91% | ✅ Good |
+| **OVERALL** | **89%** | ⚠️ Backend security critical |
+
+### Fixes Applied (Session 122)
+
+| Fix | Status | Details |
+|-----|--------|---------|
+| EN investor page 86→88 | ✅ DONE | 6 instances fixed |
+| SWOT analysis | ✅ DONE | outputs/FORENSIC-AUDIT-SWOT-2026-01-02.md |
+| Security audit | ✅ DONE | Identified CVSS 9.8 vulnerability |
+
+### SWOT Summary
+
+**Strengths:**
+- SEO/AEO scores 95%+ (excellent AI chatbot visibility)
+- Multi-provider AI fallbacks (4 providers per script)
+- Bilingual site with 3 currency support
+- 11 resilient native scripts (0 n8n dependency)
+
+**Weaknesses:**
+- Backend security 45% (CRITICAL: secrets exposed)
+- No real clients or revenue yet
+- Accessibility 85% (needs WCAG improvements)
+
+**Opportunities:**
+- AI automation market growing (MENA underserved)
+- Voice AI differentiator
+- Multi-currency ready for international expansion
+
+**Threats:**
+- IMMEDIATE: Exposed secrets in public repo
+- Competitor commoditization (n8n, Zapier)
+- No track record for investor credibility
 
 ---
 
