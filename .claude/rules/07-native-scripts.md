@@ -1,18 +1,20 @@
-# Native Automation Scripts - Session 127bis
+# Native Automation Scripts - Session 129
 
 > **STATUS: 0 n8n workflows. ALL automations are native Node.js scripts.**
 > n8n workflows archived to `automations/agency/n8n-workflows-ARCHIVED-Session120/`
 > n8n container runs on VPS (backup only) - no active workflows.
 
-## Session 127bis - FACTUAL VERIFICATION (03/01/2026)
+## Session 129 - FACTUAL STATUS (03/01/2026)
 
-### Scripts Status (Verified via --health)
+### Automations Status (Verified via --health - Session 128bis)
 
-| Category | Count | Status |
-|----------|-------|--------|
-| OPERATIONAL | **17** | Tested, working |
-| Awaiting Credentials | **7** | Code ready, needs API keys |
-| BROKEN | **0** | All fixed |
+| Category | Count | Details |
+|----------|-------|---------|
+| OPERATIONAL | **12** | Tested, fully working |
+| PARTIAL | **1** | grok-voice-realtime (Gemini TTS quota 429) |
+| TEST MODE | **2** | hubspot, omnisend (no API keys) |
+| BLOCKED | **3** | whatsapp, voice-telephony, sms (credentials) |
+| **TOTAL** | **18** | 31 .cjs files in core/, 18 with --health |
 
 ### P0 Fixes Applied (Session 127bis)
 
@@ -30,28 +32,31 @@
 | at-risk-customer-flow.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo integration |
 | review-request-automation.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo integration |
 
-### Scripts Still Pending
+### Scripts Status Detail (Session 128bis Verified)
 
-```
-automations/agency/core/
-├── sms-automation-resilient.cjs       # P0 - Omnisend SMS API (to create)
-├── lead-qualification-chatbot.cjs     # P1 - Extend voice-api (to create)
-├── referral-program-automation.cjs    # P2 - Link generation (to create)
-├── price-drop-alerts.cjs              # P2 - Wishlist monitoring (to create)
-└── replenishment-reminder.cjs         # P2 - Product cycle (to create)
-```
+| Script | Exists | Status | Issue |
+|--------|--------|--------|-------|
+| sms-automation-resilient.cjs | ✅ | BLOCKED | No SMS provider configured |
+| referral-program-automation.cjs | ✅ | OPERATIONAL | 4 AI + Klaviyo |
+| price-drop-alerts.cjs | ✅ | OPERATIONAL | 4 AI + Shopify |
+| replenishment-reminder.cjs | ✅ | OPERATIONAL | 4 AI + Klaviyo |
+| birthday-anniversary-flow.cjs | ✅ | OPERATIONAL | 4 AI + Klaviyo |
+| lead-qualification-chatbot.cjs | ❌ | NOT CREATED | P1 - Extend voice-api |
 
-### Scripts Awaiting Credentials
+**Only 1 script truly missing: lead-qualification-chatbot.cjs**
 
-| Script | Missing Credentials |
-|--------|---------------------|
-| whatsapp-booking-notifications.cjs | WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID |
-| voice-telephony-bridge.cjs | TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN |
-| hubspot-b2b-crm.cjs | HUBSPOT_API_KEY (test mode OK) |
-| omnisend-b2c-ecommerce.cjs | OMNISEND_API_KEY (test mode OK) |
-| google-calendar-booking.cjs | Google OAuth setup needed |
-| birthday-anniversary-flow.cjs | Full credentials chain |
-| Social Distribution (blog-generator) | FACEBOOK_*, LINKEDIN_*, X_* |
+### Scripts Awaiting Credentials / Blocked
+
+| Script | Status | Missing |
+|--------|--------|---------|
+| whatsapp-booking-notifications.cjs | BLOCKED | WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID |
+| voice-telephony-bridge.cjs | BLOCKED | TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN |
+| sms-automation-resilient.cjs | BLOCKED | No SMS provider (Twilio/Omnisend) |
+| hubspot-b2b-crm.cjs | TEST MODE | HUBSPOT_API_KEY |
+| omnisend-b2c-ecommerce.cjs | TEST MODE | OMNISEND_API_KEY |
+| Social Distribution (blog-generator) | OPTIONAL | FACEBOOK_*, LINKEDIN_*, X_* |
+
+**Note:** birthday-anniversary-flow.cjs is OPERATIONAL (health check verified)
 
 ### Frontier AI Providers (Verified Jan 2026)
 
@@ -82,10 +87,10 @@ ANCIEN (ABANDONNÉ):
   n8n Community Edition: NE SUPPORTE PAS $env variables
   n8n Code Node: Problèmes avec JS complexe (fetch non supporté)
 
-ACTUEL (EN PRODUCTION - Verified Session 127bis):
+ACTUEL (EN PRODUCTION - Verified Session 129):
   Scripts natifs (.cjs) avec process.env + multi-provider fallback
   Location: automations/agency/core/
-  Count: 17 scripts OPERATIONAL + 7 awaiting credentials
+  Count: 12 OPERATIONAL + 1 PARTIAL + 2 TEST MODE + 3 BLOCKED
   Registry: v2.6.1 (96 automations, 61/61 script paths valid)
 ```
 
