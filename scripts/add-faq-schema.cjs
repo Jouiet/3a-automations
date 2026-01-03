@@ -44,7 +44,7 @@ const FAQ_CONTENT_FR = {
   'services/ecommerce.html': [
     {
       question: "Quelles plateformes e-commerce supportez-vous ?",
-      answer: "Nous sommes spécialisés Shopify avec intégration Klaviyo, GA4, Meta Ads, et TikTok Ads. 70 automatisations prêtes à l'emploi."
+      answer: "Nous supportons TOUTES les plateformes e-commerce: Shopify, WooCommerce, Magento, PrestaShop, BigCommerce, etc. Intégrations Klaviyo, GA4, Meta Ads, TikTok Ads. 88 automatisations prêtes à l'emploi."
     },
     {
       question: "Comment fonctionne l'automatisation des emails ?",
