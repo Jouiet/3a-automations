@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 34.0 | Date: 2026-01-03 | Session: 127bis (WORKFLOW GAPS ANALYSIS)
+## Version: 35.0 | Date: 2026-01-03 | Session: 127bis (PHASE 1-2-3 COMPLETE)
 
 ---
 
@@ -10,18 +10,80 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com ✅ LIVE |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (89, v2.3.0) |
-| History | `HISTORY.md` (Sessions 0-127) |
-| Scripts résilients | `automations/agency/core/` (10 scripts, P0-P1-P2 secured) |
+| Automations | `automations/automations-registry.json` (**96**, v2.6.0) |
+| History | `HISTORY.md` (Sessions 0-127bis) |
+| Scripts résilients | `automations/agency/core/` (**20 main scripts**, 31 total) |
 | Pages | 63 (FR/EN + Academy + Investors) |
 | SEO Score | **96%** |
 | AEO Score | **95%** |
-| **Overall Audit Score** | **92%** ✅ (was 91%) |
-| **Security Backend** | **92%** ✅ FIXED (was 75%) |
+| **Overall Audit Score** | **92%** ✅ |
+| **Security Backend** | **92%** ✅ FIXED |
 | Docker (3A only) | **3 containers** (3a-website, dashboard, wordpress) + 2 shared (traefik, n8n) |
 | CRM Scripts | HubSpot v1.1.0 + Omnisend v1.1.0 |
 | Podcast Generator | v1.0.0 (> NotebookLM) ✅ VERIFIED |
-| Klaviyo | 10 lists, 0 flows (UI creation required) |
+| Klaviyo | 10 lists, 0 flows (native scripts used) |
+| **Frontier Models** | Grok 4.1, GPT-5.2, Gemini 3, Claude Sonnet 4 |
+
+---
+
+## Session 127bis - PHASE 1-2-3 COMPLETE (03/01/2026)
+
+### Audit Exhaustif: 20/20 Main Scripts Verified
+
+| Script | Status | AI Providers | Email |
+|--------|--------|--------------|-------|
+| blog-generator-resilient.cjs | ✅ OPERATIONAL | 4 (Anthropic→OpenAI→Grok→Gemini) | WordPress |
+| voice-api-resilient.cjs | ✅ OPERATIONAL | 4 + Local fallback | - |
+| product-photos-resilient.cjs | ✅ OPERATIONAL | 4 Vision + 2 Image Gen | - |
+| email-personalization-resilient.cjs | ✅ OPERATIONAL | 4 + Static | - |
+| grok-voice-realtime.cjs | ✅ OPERATIONAL | WebSocket + Gemini TTS | - |
+| podcast-generator-resilient.cjs | ✅ OPERATIONAL | 4 AI + Gemini TTS | - |
+| review-request-automation.cjs | ✅ OPERATIONAL | 4 AI | Klaviyo ✅ |
+| at-risk-customer-flow.cjs | ✅ OPERATIONAL | 4 AI | Klaviyo ✅ |
+| churn-prediction-resilient.cjs | ✅ OPERATIONAL | 4 AI | Klaviyo ✅ |
+| birthday-anniversary-flow.cjs | ✅ OPERATIONAL | 4 AI | Klaviyo ✅ |
+| referral-program-automation.cjs | ✅ OPERATIONAL | 4 AI | Klaviyo ✅ |
+| price-drop-alerts.cjs | ✅ OPERATIONAL | 4 AI | Klaviyo ✅ |
+| replenishment-reminder.cjs | ✅ OPERATIONAL | 4 AI | Klaviyo ✅ |
+| uptime-monitor.cjs | ✅ 5/5 HEALTHY | - | - |
+| voice-widget-templates.cjs | ✅ 8 PRESETS | - | - |
+| hubspot-b2b-crm.cjs | ✅ TEST MODE | - | Awaiting API key |
+| omnisend-b2c-ecommerce.cjs | ✅ TEST MODE | - | Awaiting API key |
+| whatsapp-booking-notifications.cjs | ⏳ AWAITING | - | Meta credentials |
+| voice-telephony-bridge.cjs | ⏳ AWAITING | - | Twilio credentials |
+| sms-automation-resilient.cjs | ⏳ AWAITING | - | Omnisend/Twilio |
+
+**Result: 17/20 OPERATIONAL, 3 awaiting external credentials**
+
+### Registry v2.6.0 (Updated)
+
+| Metric | v2.5.0 | v2.6.0 |
+|--------|--------|--------|
+| totalCount | 94 | **96** |
+| retention | 2 | **4** (+price-drop-alerts, +replenishment-reminder) |
+| resilientScripts | 17 | **19** |
+
+### Frontier Models (MANDATORY)
+
+| Provider | Model ID | Status |
+|----------|----------|--------|
+| xAI/Grok | `grok-4-1-fast-reasoning` | ✅ TESTED |
+| OpenAI | `gpt-5.2` | ✅ CONFIGURED |
+| Google | `gemini-3-flash-preview` | ✅ CONFIGURED |
+| Anthropic | `claude-sonnet-4-20250514` | ✅ CONFIGURED |
+
+### New Scripts Created (Session 127bis)
+
+| Script | Port | Features |
+|--------|------|----------|
+| price-drop-alerts.cjs | 3017 | Wishlist monitoring, 5%/20%/30% thresholds, AI emails |
+| replenishment-reminder.cjs | 3018 | Consumption tracking, depletion prediction |
+
+### Commits
+
+| Commit | Description |
+|--------|-------------|
+| d53ade1 | feat(retention): Add price-drop-alerts + replenishment-reminder + registry v2.6.0 |
 
 ---
 
