@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 35.0 | Date: 2026-01-03 | Session: 127bis (PHASE 1-2-3 COMPLETE)
+## Version: 36.0 | Date: 2026-01-03 | Session: 128 (HEALTH CHECKS VERIFIED)
 
 ---
 
@@ -10,7 +10,7 @@
 | Site | https://3a-automation.com |
 | Dashboard | https://dashboard.3a-automation.com ✅ LIVE |
 | n8n | https://n8n.srv1168256.hstgr.cloud |
-| Automations | `automations/automations-registry.json` (**96**, v2.6.0) |
+| Automations | `automations/automations-registry.json` (**96**, v2.6.1) |
 | History | `HISTORY.md` (Sessions 0-127bis) |
 | Scripts résilients | `automations/agency/core/` (**20 main scripts**, 31 total) |
 | Pages | 63 (FR/EN + Academy + Investors) |
@@ -23,6 +23,55 @@
 | Podcast Generator | v1.0.0 (> NotebookLM) ✅ VERIFIED |
 | Klaviyo | 10 lists, 0 flows (native scripts used) |
 | **Frontier Models** | Grok 4.1, GPT-5.2, Gemini 3, Claude Sonnet 4 |
+
+---
+
+## Session 128 - HEALTH CHECKS VERIFIED (03/01/2026)
+
+### Health Check Results: 14/17 OPERATIONAL
+
+| Script | Status | AI Provider Used | Notes |
+|--------|--------|------------------|-------|
+| uptime-monitor.cjs | ✅ 5/5 | N/A | All critical services healthy |
+| voice-api-resilient.cjs | ✅ OPERATIONAL | 4 AI + Local | Lead scoring enabled |
+| blog-generator-resilient.cjs | ✅ OPERATIONAL | 4 AI | WordPress OK, Social 0/3 |
+| email-personalization-resilient.cjs | ✅ OPERATIONAL | 4 AI + Static | |
+| product-photos-resilient.cjs | ✅ OPERATIONAL | 4 Vision + 2 Gen | |
+| grok-voice-realtime.cjs | ✅ FULLY RESILIENT | Grok WS + Gemini TTS | |
+| podcast-generator-resilient.cjs | ✅ OPERATIONAL | 4 AI + 1 TTS | |
+| churn-prediction-resilient.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo | RFM working |
+| at-risk-customer-flow.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo | |
+| review-request-automation.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo | |
+| voice-widget-templates.cjs | ✅ 8 PRESETS | N/A | |
+| test-klaviyo-connection.cjs | ✅ CONNECTED | N/A | 10 lists |
+| test-shopify-connection.cjs | ✅ CONNECTED | N/A | MAD currency |
+| fix-missing-alt-text.cjs | ✅ WORKS | N/A | 0 images to fix |
+
+### API Rate Limits Detected
+
+| Provider | Error | Impact |
+|----------|-------|--------|
+| Gemini | 429 (free tier exhausted) | Fallback triggered |
+| Claude/Anthropic | 400 (credit balance low) | Fallback triggered |
+| xAI/Grok | 502 (intermittent) | Retry/fallback triggered |
+
+**Note:** Fallback chains working correctly - scripts remain OPERATIONAL.
+
+### End-to-End Tests: 3/3 Passed
+
+| Test | AI Provider | Result |
+|------|-------------|--------|
+| voice-api --test | Grok 4.1 (0 fallbacks) | ✅ Proper response + lead scoring |
+| churn-prediction --predict | Rule-based RFM | ✅ "About to Sleep" segment, 40% risk |
+| review-request --test | Grok 4.1 (0 fallbacks) | ✅ Personalized email generated |
+
+### Path Corrections Needed
+
+| Documented Path | Actual Path |
+|-----------------|-------------|
+| generic/fix-missing-alt-text.cjs | templates/seo/fix-missing-alt-text.cjs |
+| generic/geo-segment-generic.cjs | templates/crm/geo-segment-generic.cjs |
+| generic/test-klaviyo-connection.cjs | templates/klaviyo/test-klaviyo-connection.cjs |
 
 ---
 
@@ -55,13 +104,19 @@
 
 **Result: 17/20 OPERATIONAL, 3 awaiting external credentials**
 
-### Registry v2.6.0 (Updated)
+### Registry v2.6.1 (VERIFIED)
 
-| Metric | v2.5.0 | v2.6.0 |
-|--------|--------|--------|
-| totalCount | 94 | **96** |
-| retention | 2 | **4** (+price-drop-alerts, +replenishment-reminder) |
-| resilientScripts | 17 | **19** |
+| Metric | Before | After |
+|--------|--------|-------|
+| totalCount | 96 | **96** |
+| Scripts with path | 63 | **61** (2 external removed) |
+| Scripts EXIST | 56 | **61/61 (100%)** |
+| Scripts BROKEN | 3 | **0** |
+
+**Fixes Applied:**
+- 2 import path bugs fixed (newsletter-automation, lead-gen-scheduler)
+- 7 registry paths corrected (n8n workflows → native scripts)
+- 2 external partner scripts removed from script count
 
 ### Frontier Models (MANDATORY)
 

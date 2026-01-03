@@ -31,7 +31,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Security utilities
-const { secureRandomElement } = require('./lib/security-utils.cjs');
+const { secureRandomElement } = require('../lib/security-utils.cjs');
 
 // Import market configuration
 const { MARKETS, MARKET_GROUPS, getMarketsByPriority } = require('./config/markets.cjs');

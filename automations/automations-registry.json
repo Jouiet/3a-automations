@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "lastUpdated": "2026-01-03",
   "totalCount": 96,
   "description": "Single source of truth for all 3A Automation services",
@@ -660,7 +660,7 @@
       "name_en": "Auto Blog + Multi-Channel Distribution",
       "category": "content",
       "type": "n8n-workflow",
-      "script": "agency/n8n-workflows/blog-article-multi-channel.json",
+      "script": "agency/core/blog-generator-resilient.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "SEO + Social en 1 clic",
@@ -739,7 +739,7 @@
       "name_en": "Audit Klaviyo Flows V2",
       "category": "email",
       "type": "script",
-      "script": "templates/klaviyo/audit-klaviyo-flows-v2.cjs",
+      "script": "templates/klaviyo/audit-klaviyo-flows.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
@@ -935,7 +935,6 @@
       "name_en": "AI Avatar Generator",
       "category": "ai-avatar",
       "type": "external-service",
-      "script": "agency/n8n-workflows/ai-avatar-generator.json",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Avatar IA consistent multi-scenes (Imagen 3 + Gemini API)",
@@ -949,7 +948,6 @@
       "name_en": "AI Talking Video",
       "category": "ai-avatar",
       "type": "external-service",
-      "script": "agency/n8n-workflows/ai-talking-video.json",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Video lip-sync IA (ElevenLabs + fal.ai Kling)",
@@ -963,7 +961,7 @@
       "name_en": "WhatsApp Booking Confirmation",
       "category": "whatsapp",
       "type": "n8n-workflow",
-      "script": "agency/n8n-workflows/whatsapp-booking-confirmation.json",
+      "script": "agency/core/whatsapp-booking-notifications.cjs",
       "frequency_fr": "À chaque réservation",
       "frequency_en": "On each booking",
       "benefit_fr": "98% taux d'ouverture vs 20% SMS",
@@ -975,7 +973,7 @@
       "name_en": "WhatsApp Reminders 24h + 1h",
       "category": "whatsapp",
       "type": "n8n-workflow",
-      "script": "agency/n8n-workflows/whatsapp-booking-reminders.json",
+      "script": "agency/core/whatsapp-booking-notifications.cjs",
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
       "benefit_fr": "-30% no-shows",
@@ -987,7 +985,7 @@
       "name_en": "AI Voice Web Assistant",
       "category": "voice-ai",
       "type": "web-component",
-      "script": "shared-components/voice-widget/voice-widget.js",
+      "script": "agency/core/voice-widget-templates.cjs",
       "frequency_fr": "24/7 disponible",
       "frequency_en": "24/7 available",
       "benefit_fr": "Qualification leads + RDV auto par la voix",
@@ -1060,7 +1058,14 @@
       "frequency_en": "On demand",
       "benefit_fr": "Leads LinkedIn qualifiés par segment",
       "benefit_en": "LinkedIn leads qualified by segment",
-      "segments": ["decision_maker", "marketing", "sales", "tech", "hr", "other"],
+      "segments": [
+        "decision_maker",
+        "marketing",
+        "sales",
+        "tech",
+        "hr",
+        "other"
+      ],
       "status": "tested-ok"
     },
     {
@@ -1074,7 +1079,14 @@
       "frequency_en": "On demand",
       "benefit_fr": "Leads locaux qualifiés par catégorie",
       "benefit_en": "Local leads qualified by category",
-      "segments": ["decision_maker", "marketing", "sales", "tech", "hr", "other"],
+      "segments": [
+        "decision_maker",
+        "marketing",
+        "sales",
+        "tech",
+        "hr",
+        "other"
+      ],
       "status": "tested-ok"
     },
     {
@@ -1088,7 +1100,13 @@
       "frequency_en": "Shared module",
       "benefit_fr": "6 segments, branding 100% validé",
       "benefit_en": "6 segments, 100% branding validated",
-      "exports": ["EMAIL_TEMPLATES", "WELCOME_TEMPLATES", "SEGMENT_KEYWORDS", "validateBranding", "personalizeEmail"],
+      "exports": [
+        "EMAIL_TEMPLATES",
+        "WELCOME_TEMPLATES",
+        "SEGMENT_KEYWORDS",
+        "validateBranding",
+        "personalizeEmail"
+      ],
       "status": "tested-ok"
     },
     {
@@ -1102,7 +1120,16 @@
       "frequency_en": "Client deployment",
       "benefit_fr": "Déploiement 4h → 30min",
       "benefit_en": "Deployment 4h → 30min",
-      "presets": ["ecommerce", "b2b", "agency", "restaurant", "retail", "saas", "healthcare", "realestate"],
+      "presets": [
+        "ecommerce",
+        "b2b",
+        "agency",
+        "restaurant",
+        "retail",
+        "saas",
+        "healthcare",
+        "realestate"
+      ],
       "status": "tested-ok"
     },
     {
@@ -1133,7 +1160,12 @@
       "benefit_fr": "Blog → Podcast 2 voix personnalisables (> NotebookLM)",
       "benefit_en": "Blog → Podcast 2 customizable voices (> NotebookLM)",
       "port": 3010,
-      "features": ["multi-ai-fallback", "multi-tts-fallback", "customizable-voices", "client-ready"],
+      "features": [
+        "multi-ai-fallback",
+        "multi-tts-fallback",
+        "customizable-voices",
+        "client-ready"
+      ],
       "providers": {
         "ai": "Anthropic→Grok→Gemini",
         "tts": "ElevenLabs→Gemini TTS→fal.ai MiniMax"
@@ -1183,7 +1215,12 @@
       "benefit_fr": "CRM gratuit B2B avec batch (100/appel) + backoff",
       "benefit_en": "Free B2B CRM with batch (100/call) + backoff",
       "api_tier": "FREE",
-      "features": ["batch-operations", "exponential-backoff", "rate-limit-monitoring", "jitter"],
+      "features": [
+        "batch-operations",
+        "exponential-backoff",
+        "rate-limit-monitoring",
+        "jitter"
+      ],
       "capabilities": {
         "contacts": "CRUD + batch",
         "companies": "CRUD + batch",
@@ -1205,7 +1242,12 @@
       "benefit_fr": "Email B2C $16/mo + Carts API + event dedup",
       "benefit_en": "B2C email $16/mo + Carts API + event dedup",
       "pricing": "$16/mo Standard vs $45+/mo Klaviyo",
-      "features": ["event-deduplication", "carts-api", "exponential-backoff", "jitter"],
+      "features": [
+        "event-deduplication",
+        "carts-api",
+        "exponential-backoff",
+        "jitter"
+      ],
       "capabilities": {
         "contacts": "CRUD",
         "events": "send (with eventID dedup)",
@@ -1230,7 +1272,11 @@
       "benefit_fr": "+69% orders vs 1 email (série 1h/24h/72h)",
       "benefit_en": "+69% orders vs 1 email (1h/24h/72h series)",
       "port": 3006,
-      "features": ["3-email-abandoned-cart", "multi-ai-fallback", "personalization"],
+      "features": [
+        "3-email-abandoned-cart",
+        "multi-ai-fallback",
+        "personalization"
+      ],
       "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Static",
       "benchmark": "+69% orders vs single email (Klaviyo)",
       "status": "tested-ok"
@@ -1248,9 +1294,22 @@
       "benefit_fr": "98% open rate, 21-32% conversion",
       "benefit_en": "98% open rate, 21-32% conversion",
       "port": 3011,
-      "features": ["abandoned-cart-sms", "shipping-notifications", "order-confirmation", "review-requests"],
+      "features": [
+        "abandoned-cart-sms",
+        "shipping-notifications",
+        "order-confirmation",
+        "review-requests"
+      ],
       "providers": "Omnisend Events → Twilio Direct",
-      "event_types": ["sms_abandoned_cart", "sms_order_confirmed", "sms_shipping_update", "sms_delivery_confirmed", "sms_review_request", "sms_flash_sale", "sms_back_in_stock"],
+      "event_types": [
+        "sms_abandoned_cart",
+        "sms_order_confirmed",
+        "sms_shipping_update",
+        "sms_delivery_confirmed",
+        "sms_review_request",
+        "sms_flash_sale",
+        "sms_back_in_stock"
+      ],
       "benchmark": "98% open rate, +15-25% cart recovery",
       "status": "awaiting-credentials"
     },
@@ -1267,9 +1326,26 @@
       "benefit_fr": "-25% churn rate, +260% conversion at-risk",
       "benefit_en": "-25% churn rate, +260% at-risk conversion",
       "port": 3012,
-      "features": ["rfm-scoring", "ai-enhanced-analysis", "klaviyo-sync", "batch-processing"],
+      "features": [
+        "rfm-scoring",
+        "ai-enhanced-analysis",
+        "klaviyo-sync",
+        "batch-processing"
+      ],
       "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Rule-based",
-      "rfm_segments": ["Champions", "Loyal", "Potential Loyalist", "Recent", "Promising", "Need Attention", "About to Sleep", "At Risk", "Can't Lose", "Hibernating", "Lost"],
+      "rfm_segments": [
+        "Champions",
+        "Loyal",
+        "Potential Loyalist",
+        "Recent",
+        "Promising",
+        "Need Attention",
+        "About to Sleep",
+        "At Risk",
+        "Can't Lose",
+        "Hibernating",
+        "Lost"
+      ],
       "benchmark": "-25% churn rate, 5x retention ROI",
       "status": "tested-ok"
     },
@@ -1286,7 +1362,13 @@
       "benefit_fr": "+270% reviews, incentives photo",
       "benefit_en": "+270% reviews, photo incentives",
       "port": 3013,
-      "features": ["shopify-webhook", "fulfillment-tracking", "incentive-tiers", "klaviyo-sync", "photo-review-bonus"],
+      "features": [
+        "shopify-webhook",
+        "fulfillment-tracking",
+        "incentive-tiers",
+        "klaviyo-sync",
+        "photo-review-bonus"
+      ],
       "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Template",
       "incentive_tiers": {
         "text_review": "10% discount",
@@ -1310,13 +1392,31 @@
       "benefit_fr": "+260% conversion clients at-risk",
       "benefit_en": "+260% at-risk customer conversion",
       "port": 3014,
-      "features": ["3-email-intervention", "vip-call-offer", "escalating-discounts", "founder-personal-touch", "klaviyo-sync"],
+      "features": [
+        "3-email-intervention",
+        "vip-call-offer",
+        "escalating-discounts",
+        "founder-personal-touch",
+        "klaviyo-sync"
+      ],
       "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Template",
       "email_providers": "Klaviyo→Omnisend",
       "intervention_sequence": {
-        "email1": {"delay": "0", "type": "founder_personal", "discount": "15%"},
-        "email2": {"delay": "3 days", "type": "value_reminder", "discount": "20%"},
-        "email3": {"delay": "7 days", "type": "last_chance", "discount": "25%"}
+        "email1": {
+          "delay": "0",
+          "type": "founder_personal",
+          "discount": "15%"
+        },
+        "email2": {
+          "delay": "3 days",
+          "type": "value_reminder",
+          "discount": "20%"
+        },
+        "email3": {
+          "delay": "7 days",
+          "type": "last_chance",
+          "discount": "25%"
+        }
       },
       "trigger_threshold": "churnScore >= 70%",
       "vip_call_threshold": "churnScore >= 80%",
@@ -1337,7 +1437,12 @@
       "benefit_fr": "8.8% taux conversion",
       "benefit_en": "8.8% conversion rate",
       "port": 3017,
-      "features": ["wishlist-monitoring", "price-threshold-detection", "ai-generated-alerts", "multi-channel-notifications"],
+      "features": [
+        "wishlist-monitoring",
+        "price-threshold-detection",
+        "ai-generated-alerts",
+        "multi-channel-notifications"
+      ],
       "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Template",
       "email_providers": "Klaviyo→Omnisend",
       "thresholds": {
@@ -1361,7 +1466,12 @@
       "benefit_fr": "+90% repeat purchase",
       "benefit_en": "+90% repeat purchase",
       "port": 3018,
-      "features": ["consumption-tracking", "depletion-prediction", "ai-personalized-emails", "multi-channel-notifications"],
+      "features": [
+        "consumption-tracking",
+        "depletion-prediction",
+        "ai-personalized-emails",
+        "multi-channel-notifications"
+      ],
       "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Template",
       "email_providers": "Klaviyo→Omnisend",
       "timing": {
@@ -1403,33 +1513,7 @@
     "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
-    "withScript": 57,
-    "withoutScript": 31,
-    "klaviyoTemplates": 7,
-    "n8nWorkflows": 8,
-    "shopifyNative": 6,
-    "manualProcesses": 5,
-    "aiAssisted": 2,
-    "thirdPartyIntegrations": 3,
-    "externalServices": 4,
-    "aiAvatarWorkflows": 2,
-    "b2bLeadPipelines": 4,
-    "resilientScripts": 11,
-    "voiceAiScripts": 3,
-    "crmIntegrations": 3,
-    "session127bisPhase1": {
-      "sms-automation": "v1.0.0 (Omnisend+Twilio)",
-      "email-personalization": "v2.0.0 (3-email cart series)",
-      "churn-prediction": "v1.0.0 (RFM+AI)"
-    },
-    "session127bisPhase2": {
-      "review-request-automation": "v1.0.0 (+270% reviews)",
-      "voice-api-lead-qualification": "integrated (+70% conversion)",
-      "at-risk-customer-flow": "v1.0.0 (+260% at-risk conversion)"
-    },
-    "crmScriptsV1_1": {
-      "hubspot": "v1.1.0 (batch+backoff)",
-      "omnisend": "v1.1.0 (carts+dedup)"
-    }
+    "withScript": 61,
+    "withoutScript": 35
   }
 }

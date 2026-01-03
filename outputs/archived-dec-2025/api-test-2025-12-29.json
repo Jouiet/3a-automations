@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-12-29T09:53:18.976Z",
+  "summary": {
+    "ok": 5,
+    "missing": 2,
+    "errors": 0,
+    "total": 7
+  },
+  "results": [
+    {
+      "name": "Shopify",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "Klaviyo",
+      "status": "OK",
+      "httpCode": 200
+    },
+    {
+      "name": "n8n",
+      "status": "OK",
+      "httpCode": 200
+    },
+    {
+      "name": "xAI (Grok)",
+      "status": "OK",
+      "httpCode": 200
+    },
+    {
+      "name": "Google Analytics",
+      "status": "OK",
+      "detail": "Credentials présentes (test API nécessite implémentation OAuth)"
+    },
+    {
+      "name": "Meta (Facebook)",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "Apify",
+      "status": "OK",
+      "httpCode": 200
+    }
+  ]
+}

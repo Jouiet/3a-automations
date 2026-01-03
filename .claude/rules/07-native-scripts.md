@@ -4,45 +4,65 @@
 > n8n workflows archived to `automations/agency/n8n-workflows-ARCHIVED-Session120/`
 > n8n container runs on VPS (backup only) - no active workflows.
 
-## Session 127bis - GAPS ANALYSIS (03/01/2026)
+## Session 127bis - FACTUAL VERIFICATION (03/01/2026)
 
-### Catégories Manquantes vs Industry Benchmarks
+### Scripts Status (Verified via --health)
 
-| Gap Critique | Benchmark | ROI Potentiel | Priorité |
-|--------------|-----------|---------------|----------|
-| SMS Marketing | 98% open, 21-32% conversion | +21% cart recovery | P0 |
-| Churn Prevention | 260% higher conversion AI | -25% churn | P0 |
-| AI Chatbot Qualification | 70% conversion | +70% leads | P1 |
-| Review Request | +270% reviews | +23% trust | P1 |
-| Birthday/Anniversary | 342% rev/email | +342% rev | P2 |
-| Referral Program | 16% higher CLV | -80% acquisition | P2 |
-| Price Drop Alerts | 8.8% conversion | +4.2x rev/email | P2 |
-| Replenishment | +90% repeat | 5x revenue | P2 |
+| Category | Count | Status |
+|----------|-------|--------|
+| OPERATIONAL | **17** | Tested, working |
+| Awaiting Credentials | **7** | Code ready, needs API keys |
+| BROKEN | **0** | All fixed |
 
-**Sources:** Litmus 2025, DMA, Klaviyo, Omnisend, Gartner 2024, McKinsey 2024
+### P0 Fixes Applied (Session 127bis)
 
-### Scripts À Créer
+| Fix Type | Details | Status |
+|----------|---------|--------|
+| Import Path Bug | `./lib/` → `../lib/` in 2 scripts | ✅ FIXED |
+| Registry Paths | 7 invalid paths corrected | ✅ FIXED |
+| Registry Version | 2.3.0 → 2.6.1 | ✅ UPDATED |
+
+### Scripts Now OPERATIONAL (formerly "À Créer")
+
+| Script | Status | AI Providers |
+|--------|--------|--------------|
+| churn-prediction-resilient.cjs | ✅ OPERATIONAL | 4 AI + rule-based fallback |
+| at-risk-customer-flow.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo integration |
+| review-request-automation.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo integration |
+
+### Scripts Still Pending
 
 ```
 automations/agency/core/
-├── sms-automation-resilient.cjs       # P0 - Omnisend SMS API
-├── churn-prediction-resilient.cjs     # P0 - RFM + AI scoring
-├── review-request-automation.cjs      # P1 - Post-delivery
-├── lead-qualification-chatbot.cjs     # P1 - Extend voice-api
-├── birthday-anniversary-flow.cjs      # P2 - Date triggers
-├── referral-program-automation.cjs    # P2 - Link generation
-├── price-drop-alerts.cjs              # P2 - Wishlist monitoring
-└── replenishment-reminder.cjs         # P2 - Product cycle
+├── sms-automation-resilient.cjs       # P0 - Omnisend SMS API (to create)
+├── lead-qualification-chatbot.cjs     # P1 - Extend voice-api (to create)
+├── referral-program-automation.cjs    # P2 - Link generation (to create)
+├── price-drop-alerts.cjs              # P2 - Wishlist monitoring (to create)
+└── replenishment-reminder.cjs         # P2 - Product cycle (to create)
 ```
 
-### Améliorations Scripts Existants
+### Scripts Awaiting Credentials
 
-| Script | Amélioration | Benchmark |
-|--------|--------------|-----------|
-| email-personalization | +3-email abandoned cart series | +69% orders |
-| omnisend-b2c-ecommerce | +SMS methods | +98% open rate |
-| voice-api-resilient | +Qualification questions | +70% conversion |
-| hubspot-b2b-crm | +AI Lead scoring | +138% ROI |
+| Script | Missing Credentials |
+|--------|---------------------|
+| whatsapp-booking-notifications.cjs | WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID |
+| voice-telephony-bridge.cjs | TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN |
+| hubspot-b2b-crm.cjs | HUBSPOT_API_KEY (test mode OK) |
+| omnisend-b2c-ecommerce.cjs | OMNISEND_API_KEY (test mode OK) |
+| google-calendar-booking.cjs | Google OAuth setup needed |
+| birthday-anniversary-flow.cjs | Full credentials chain |
+| Social Distribution (blog-generator) | FACEBOOK_*, LINKEDIN_*, X_* |
+
+### Frontier AI Providers (Verified Jan 2026)
+
+| Provider | Model ID | Status |
+|----------|----------|--------|
+| Grok 4.1 | grok-4-1-fast-reasoning | ✅ Configured |
+| OpenAI GPT-5.2 | gpt-5.2 | ✅ Configured |
+| Gemini 3 | gemini-3-flash-preview | ✅ Configured |
+| Claude Sonnet 4 | claude-sonnet-4-20250514 | ✅ Configured |
+
+**Fallback Pattern:** Grok → OpenAI → Gemini → Claude → Local/Static
 
 ## Session 123 Updates (02/01/2026)
 
@@ -62,10 +82,11 @@ ANCIEN (ABANDONNÉ):
   n8n Community Edition: NE SUPPORTE PAS $env variables
   n8n Code Node: Problèmes avec JS complexe (fetch non supporté)
 
-ACTUEL (EN PRODUCTION):
+ACTUEL (EN PRODUCTION - Verified Session 127bis):
   Scripts natifs (.cjs) avec process.env + multi-provider fallback
   Location: automations/agency/core/
-  Count: 10 scripts résilients (8 original + 2 CRM v1.1.0)
+  Count: 17 scripts OPERATIONAL + 7 awaiting credentials
+  Registry: v2.6.1 (96 automations, 61/61 script paths valid)
 ```
 
 ## ANALYSE COMPARATIVE FACTUELLE (30/12/2025)

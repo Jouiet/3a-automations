@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-12-28T22:57:13.274Z",
+  "summary": {
+    "ok": 4,
+    "missing": 2,
+    "errors": 1,
+    "total": 7
+  },
+  "results": [
+    {
+      "name": "Shopify",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "Klaviyo",
+      "status": "OK",
+      "httpCode": 200
+    },
+    {
+      "name": "n8n",
+      "status": "UNAUTHORIZED",
+      "httpCode": 401,
+      "detail": "Token invalide ou expiré"
+    },
+    {
+      "name": "xAI (Grok)",
+      "status": "OK",
+      "httpCode": 200
+    },
+    {
+      "name": "Google Analytics",
+      "status": "OK",
+      "detail": "Credentials présentes (test API nécessite implémentation OAuth)"
+    },
+    {
+      "name": "Meta (Facebook)",
+      "status": "MISSING_CREDENTIALS"
+    },
+    {
+      "name": "Apify",
+      "status": "OK",
+      "httpCode": 200
+    }
+  ]
+}
