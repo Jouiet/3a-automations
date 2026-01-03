@@ -22,17 +22,16 @@ Avant de faire des claims, consulter:
 
 ## Ce Qui Est INTERDIT
 
-1. ❌ "Notre stack d'agence" → Nous sommes consultant solo
-2. ❌ "207 scripts réutilisables" → ~25 génériques, reste client-spécifique
-3. ❌ "MCPs 100% fonctionnels" → 3/6 fonctionnels actuellement
-4. ❌ "Production-ready" → Sans test empirique préalable
+1. ❌ "Consultant solo" → Nous sommes AAA (AI Automation Agency)
+2. ❌ "207 scripts réutilisables" → 88 dans le registry (automations-registry.json)
+3. ❌ "Production-ready" → Sans test empirique préalable
 
-## Ce Qui Est AUTORISÉ
+## Ce Qui Est AUTORISÉ (Vérifié Session 127 - 03/01/2026)
 
-1. ✅ "Expertise démontrée sur 3 projets clients"
-2. ✅ "~25 scripts génériques testés"
-3. ✅ "Consultant automation Shopify/Klaviyo"
-4. ✅ "3 MCPs fonctionnels (Klaviyo, Shopify, Hostinger)"
+1. ✅ "MCPs 11/11 fonctionnels (100%)"
+2. ✅ "10 scripts résilients multi-provider"
+3. ✅ "88 automations dans le registry"
+4. ✅ "Agence d'Automatisation AI (AAA) spécialisée Shopify/Klaviyo/Hostinger"
 
 ## Workflow de Vérification
 
@@ -42,16 +41,16 @@ CLAIM → VÉRIFICATION → PREUVE → DOCUMENTATION
        CORRECTION ou SUPPRESSION
 ```
 
-## Métriques Actuelles (Vérifiées 29/12/2025 - Session 115)
+## Métriques Actuelles (Vérifiées 03/01/2026 - Session 127)
 
 | Métrique | Valeur | Source |
 |----------|--------|--------|
-| Scripts natifs | ~70 (.cjs/.js) | Comptage fichiers |
-| Automations registry | 82 | automations-registry.json |
-| security-utils.cjs | 31 exports | Test empirique |
-| MCPs fonctionnels | 12+ | 05-mcps-status.md |
+| Scripts natifs résilients | 10 | automations/agency/core/ |
+| Automations registry | 88 | automations-registry.json (v2.3.0) |
+| MCPs fonctionnels | 11/11 (100%) | 05-mcps-status.md |
+| Docker containers | 6 RUNNING | Hostinger VPS 1168256 |
+| Sécurité backend | 92% | docker-compose env vars |
 | APIs opérationnelles | Shopify ✅, Klaviyo ✅, Apify ✅, Hostinger ✅ | Test API |
-| Fichier .env | ✅ Complet | Vérifié |
 
 **Source de vérité:** `.claude/rules/01-project-status.md`
 

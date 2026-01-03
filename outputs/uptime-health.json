@@ -99,11 +99,21 @@
         "unhealthy": 0,
         "critical": 0
       }
+    },
+    {
+      "timestamp": "2026-01-03T11:11:14.690Z",
+      "overall": true,
+      "summary": {
+        "total": 5,
+        "healthy": 5,
+        "unhealthy": 0,
+        "critical": 0
+      }
     }
   ],
-  "lastUpdate": "2026-01-03T10:46:10.230Z",
+  "lastUpdate": "2026-01-03T11:11:14.690Z",
   "lastResults": {
-    "timestamp": "2026-01-03T10:46:10.230Z",
+    "timestamp": "2026-01-03T11:11:14.690Z",
     "overall": true,
     "criticalHealthy": true,
     "endpoints": [
@@ -114,9 +124,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 425,
+        "responseTime": 426,
         "critical": true,
-        "timestamp": "2026-01-03T10:46:09.784Z",
+        "timestamp": "2026-01-03T11:11:14.481Z",
         "error": null
       },
       {
@@ -126,9 +136,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 706,
+        "responseTime": 308,
         "critical": true,
-        "timestamp": "2026-01-03T10:46:10.167Z",
+        "timestamp": "2026-01-03T11:11:14.454Z",
         "error": null
       },
       {
@@ -138,9 +148,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 439,
+        "responseTime": 297,
         "critical": true,
-        "timestamp": "2026-01-03T10:46:09.902Z",
+        "timestamp": "2026-01-03T11:11:14.444Z",
         "error": null
       },
       {
@@ -153,9 +163,9 @@
           200,
           504
         ],
-        "responseTime": 765,
+        "responseTime": 541,
         "critical": false,
-        "timestamp": "2026-01-03T10:46:10.230Z",
+        "timestamp": "2026-01-03T11:11:14.690Z",
         "error": null
       },
       {
@@ -168,9 +178,9 @@
           302,
           404
         ],
-        "responseTime": 622,
+        "responseTime": 489,
         "critical": false,
-        "timestamp": "2026-01-03T10:46:10.090Z",
+        "timestamp": "2026-01-03T11:11:14.644Z",
         "error": null
       }
     ],
