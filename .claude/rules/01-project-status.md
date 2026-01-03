@@ -18,7 +18,7 @@
 | Security Backend | **75%** - Code fixed, secrets use ${VAR} refs |
 | Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
 | SSL | **Let's Encrypt + HSTS preload** |
-| Infrastructure | 4 Docker projects, 6 containers RUNNING |
+| Infrastructure | 4 containers 3A + 2 shared (VPS 1168256) |
 | llms.txt | **v5.1.0** with CRM section |
 | Voice Widget Templates | **8 industries** (4h→30min deployment) |
 | Podcast Generator | ✅ VERIFIED - 10 segments, 2.2MB audio |
@@ -178,8 +178,8 @@ The code is SECURE - the problem is the SECRET VALUE being in PUBLIC repo.
 | xAI/Grok API | ✅ | 385ms, 11 models |
 | Google SA | ✅ | a-automation-agency project |
 | Apify API | ✅ | STARTER $39/mo ACTIVE (MCP bug, API works) |
-| MCPs | 12/12 | 100% - buggy MCPs removed, APIs used directly |
-| Docker Projects | 4 | 6 containers RUNNING |
+| MCPs | 11/11 | 100% - Klaviyo removed (SSL bug), APIs used directly |
+| Docker (3A only) | 4 containers | + 2 shared (traefik, n8n) |
 | VPS 1168256 | ✅ | Ubuntu 24.04, 8GB RAM |
 | Automations Registry | v2.2.0 | 88=88=88 ✅ |
 | Native Scripts | 10 core/ | ALL with fallback chains |
@@ -275,7 +275,7 @@ node automations/agency/core/omnisend-b2c-ecommerce.cjs --health
 | 3a-automation.com | ✅ HTTP 200 |
 | dashboard.3a-automation.com | ✅ HTTP 200 |
 | n8n.srv1168256.hstgr.cloud | ✅ HTTP 200 |
-| Docker containers | 4 projects RUNNING |
+| Docker (3A) | 4 containers + 2 shared |
 | Voice Widget Templates | 8 presets operational |
 | CSS Design | ULTRA FUTURISTIC v3.0 |
 
@@ -580,15 +580,18 @@ All P2 items completed Session 117ter.
 | Google Analytics | ✅ | Property 516832662 (37 users/7d, Session 120 verified) |
 | Google Sheets | ⚠️ | SA needs sheet sharing |
 
-## Docker Infrastructure (Verified 02/01/2026)
+## Docker Infrastructure (VPS 1168256 - Verified 03/01/2026)
 
-| Project | Containers | Status | Uptime |
-|---------|------------|--------|--------|
-| 3a-website | 1 (nginx:alpine) | ✅ RUNNING | Active |
-| cinematicads | 1 (webapp:latest) | ✅ RUNNING | 13h+ |
-| root | 2 (n8n + traefik) | ✅ RUNNING | 4 days |
-| wordpress | 2 (wp + mariadb) | ✅ RUNNING | 3 days |
-| **TOTAL** | **6 containers** | **4 projects** | - |
+**Note:** VPS shared between projects. 3A Automation uses 4 containers + 2 shared.
+
+| Project | Containers | Appartenance | Status |
+|---------|------------|--------------|--------|
+| 3a-website | 1 (nginx:alpine) | ✅ 3A Automation | RUNNING |
+| dashboard | 1 (node:20-alpine) | ✅ 3A Automation | RUNNING (NEW) |
+| wordpress | 2 (wp + mariadb) | ✅ 3A Automation | RUNNING |
+| root | 2 (n8n + traefik) | ⚠️ Infrastructure partagée | RUNNING |
+| cinematicads | 1 (webapp:latest) | ❌ Autre projet | RUNNING |
+| **3A Total** | **4 containers** | **+ 2 partagés** | - |
 
 ## Source of Truth
 
