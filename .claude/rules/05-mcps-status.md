@@ -7,7 +7,7 @@
 | chrome-devtools | ✅ OK | list_pages, screenshots, console |
 | playwright | ✅ OK | browser_tabs, automation |
 | gemini | ✅ OK | 6 models, chat |
-| hostinger | ✅ OK | VPS 1168256, 4 Docker projects |
+| hostinger | ✅ OK | VPS 1168256, 5 Docker projects, 7 containers |
 | github | ✅ OK | Repo access working |
 | wordpress | ✅ OK | wp.3a-automation.com |
 | shopify | ✅ OK | guqsu3-yj.myshopify.com |
