@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "lastUpdated": "2026-01-03",
-  "totalCount": 94,
+  "totalCount": 96,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -28,7 +28,7 @@
     "retention": {
       "name_fr": "Rétention & Prédiction Churn",
       "name_en": "Retention & Churn Prediction",
-      "count": 2
+      "count": 4
     },
     "shopify": {
       "name_fr": "Shopify Admin",
@@ -1322,6 +1322,60 @@
       "vip_call_threshold": "churnScore >= 80%",
       "depends_on": "churn-prediction-resilient",
       "benchmark": "+260% conversion at-risk (industry)",
+      "status": "tested-ok"
+    },
+    {
+      "id": "price-drop-alerts",
+      "name_fr": "Alertes Price Drop (Wishlist)",
+      "name_en": "Price Drop Alerts (Wishlist)",
+      "category": "retention",
+      "type": "script",
+      "script": "agency/core/price-drop-alerts.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Webhook temps réel",
+      "frequency_en": "Real-time webhook",
+      "benefit_fr": "8.8% taux conversion",
+      "benefit_en": "8.8% conversion rate",
+      "port": 3017,
+      "features": ["wishlist-monitoring", "price-threshold-detection", "ai-generated-alerts", "multi-channel-notifications"],
+      "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Template",
+      "email_providers": "Klaviyo→Omnisend",
+      "thresholds": {
+        "minDropPercent": 5,
+        "urgentDropPercent": 20,
+        "flashSalePercent": 30
+      },
+      "benchmark": "8.8% conversion (Barilliance 2024)",
+      "status": "tested-ok"
+    },
+    {
+      "id": "replenishment-reminder",
+      "name_fr": "Rappel Réapprovisionnement",
+      "name_en": "Replenishment Reminder",
+      "category": "retention",
+      "type": "script",
+      "script": "agency/core/replenishment-reminder.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Automatique selon consommation",
+      "frequency_en": "Automatic based on consumption",
+      "benefit_fr": "+90% repeat purchase",
+      "benefit_en": "+90% repeat purchase",
+      "port": 3018,
+      "features": ["consumption-tracking", "depletion-prediction", "ai-personalized-emails", "multi-channel-notifications"],
+      "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Template",
+      "email_providers": "Klaviyo→Omnisend",
+      "timing": {
+        "earlyReminderDays": 14,
+        "urgentReminderDays": 7,
+        "lastChanceDays": 3
+      },
+      "consumptionRates": {
+        "skincare": 30,
+        "supplements": 30,
+        "coffee": 14,
+        "petfood": 21
+      },
+      "benchmark": "+90% repeat purchase (Shopify 2024)",
       "status": "tested-ok"
     }
   ],
