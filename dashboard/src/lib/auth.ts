@@ -11,13 +11,19 @@ import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-const JWT_SECRET = process.env.JWT_SECRET;
 const AUTH_COOKIE_NAME = "auth_token";
 const COOKIE_MAX_AGE = 7 * 24 * 60 * 60; // 7 days in seconds
 
-if (!JWT_SECRET) {
-  throw new Error("CRITICAL: JWT_SECRET environment variable is not set. Cannot start application.");
+// Type-safe JWT secret check
+function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error("CRITICAL: JWT_SECRET environment variable is not set. Cannot start application.");
+  }
+  return secret;
 }
+
+const JWT_SECRET = getJwtSecret();
 const JWT_EXPIRES_IN = "7d";
 
 export type UserRole = "ADMIN" | "CLIENT" | "VIEWER";
