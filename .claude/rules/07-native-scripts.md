@@ -1,8 +1,48 @@
-# Native Automation Scripts - Session 123
+# Native Automation Scripts - Session 127bis
 
 > **STATUS: 0 n8n workflows. ALL automations are native Node.js scripts.**
 > n8n workflows archived to `automations/agency/n8n-workflows-ARCHIVED-Session120/`
 > n8n container runs on VPS (backup only) - no active workflows.
+
+## Session 127bis - GAPS ANALYSIS (03/01/2026)
+
+### Catégories Manquantes vs Industry Benchmarks
+
+| Gap Critique | Benchmark | ROI Potentiel | Priorité |
+|--------------|-----------|---------------|----------|
+| SMS Marketing | 98% open, 21-32% conversion | +21% cart recovery | P0 |
+| Churn Prevention | 260% higher conversion AI | -25% churn | P0 |
+| AI Chatbot Qualification | 70% conversion | +70% leads | P1 |
+| Review Request | +270% reviews | +23% trust | P1 |
+| Birthday/Anniversary | 342% rev/email | +342% rev | P2 |
+| Referral Program | 16% higher CLV | -80% acquisition | P2 |
+| Price Drop Alerts | 8.8% conversion | +4.2x rev/email | P2 |
+| Replenishment | +90% repeat | 5x revenue | P2 |
+
+**Sources:** Litmus 2025, DMA, Klaviyo, Omnisend, Gartner 2024, McKinsey 2024
+
+### Scripts À Créer
+
+```
+automations/agency/core/
+├── sms-automation-resilient.cjs       # P0 - Omnisend SMS API
+├── churn-prediction-resilient.cjs     # P0 - RFM + AI scoring
+├── review-request-automation.cjs      # P1 - Post-delivery
+├── lead-qualification-chatbot.cjs     # P1 - Extend voice-api
+├── birthday-anniversary-flow.cjs      # P2 - Date triggers
+├── referral-program-automation.cjs    # P2 - Link generation
+├── price-drop-alerts.cjs              # P2 - Wishlist monitoring
+└── replenishment-reminder.cjs         # P2 - Product cycle
+```
+
+### Améliorations Scripts Existants
+
+| Script | Amélioration | Benchmark |
+|--------|--------------|-----------|
+| email-personalization | +3-email abandoned cart series | +69% orders |
+| omnisend-b2c-ecommerce | +SMS methods | +98% open rate |
+| voice-api-resilient | +Qualification questions | +70% conversion |
+| hubspot-b2b-crm | +AI Lead scoring | +138% ROI |
 
 ## Session 123 Updates (02/01/2026)
 

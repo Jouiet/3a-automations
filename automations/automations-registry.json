@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.3.0",
-  "lastUpdated": "2026-01-02",
-  "totalCount": 89,
+  "version": "2.5.0",
+  "lastUpdated": "2026-01-03",
+  "totalCount": 94,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -18,12 +18,22 @@
     "email": {
       "name_fr": "Email Marketing (CRM)",
       "name_en": "Email Marketing (CRM)",
-      "count": 10
+      "count": 11
+    },
+    "sms": {
+      "name_fr": "SMS Marketing",
+      "name_en": "SMS Marketing",
+      "count": 1
+    },
+    "retention": {
+      "name_fr": "Rétention & Prédiction Churn",
+      "name_en": "Retention & Churn Prediction",
+      "count": 2
     },
     "shopify": {
       "name_fr": "Shopify Admin",
       "name_en": "Shopify Admin",
-      "count": 13
+      "count": 14
     },
     "analytics": {
       "name_fr": "Analytics & Reporting",
@@ -1206,6 +1216,113 @@
       },
       "api_limitation": "automations=READ-ONLY (create via UI)",
       "status": "tested-ok"
+    },
+    {
+      "id": "email-personalization-resilient",
+      "name_fr": "Email Personalization Résilient (4 AI + 3-Email Cart Series)",
+      "name_en": "Resilient Email Personalization (4 AI + 3-Email Cart Series)",
+      "category": "email",
+      "type": "script",
+      "script": "agency/core/email-personalization-resilient.cjs",
+      "version": "2.0.0",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "+69% orders vs 1 email (série 1h/24h/72h)",
+      "benefit_en": "+69% orders vs 1 email (1h/24h/72h series)",
+      "port": 3006,
+      "features": ["3-email-abandoned-cart", "multi-ai-fallback", "personalization"],
+      "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Static",
+      "benchmark": "+69% orders vs single email (Klaviyo)",
+      "status": "tested-ok"
+    },
+    {
+      "id": "sms-automation-resilient",
+      "name_fr": "SMS Automation Résilient (Omnisend + Twilio)",
+      "name_en": "Resilient SMS Automation (Omnisend + Twilio)",
+      "category": "sms",
+      "type": "script",
+      "script": "agency/core/sms-automation-resilient.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "98% open rate, 21-32% conversion",
+      "benefit_en": "98% open rate, 21-32% conversion",
+      "port": 3011,
+      "features": ["abandoned-cart-sms", "shipping-notifications", "order-confirmation", "review-requests"],
+      "providers": "Omnisend Events → Twilio Direct",
+      "event_types": ["sms_abandoned_cart", "sms_order_confirmed", "sms_shipping_update", "sms_delivery_confirmed", "sms_review_request", "sms_flash_sale", "sms_back_in_stock"],
+      "benchmark": "98% open rate, +15-25% cart recovery",
+      "status": "awaiting-credentials"
+    },
+    {
+      "id": "churn-prediction-resilient",
+      "name_fr": "Prédiction Churn Résilient (RFM + AI)",
+      "name_en": "Resilient Churn Prediction (RFM + AI)",
+      "category": "retention",
+      "type": "script",
+      "script": "agency/core/churn-prediction-resilient.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Sur demande / Batch",
+      "frequency_en": "On demand / Batch",
+      "benefit_fr": "-25% churn rate, +260% conversion at-risk",
+      "benefit_en": "-25% churn rate, +260% at-risk conversion",
+      "port": 3012,
+      "features": ["rfm-scoring", "ai-enhanced-analysis", "klaviyo-sync", "batch-processing"],
+      "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Rule-based",
+      "rfm_segments": ["Champions", "Loyal", "Potential Loyalist", "Recent", "Promising", "Need Attention", "About to Sleep", "At Risk", "Can't Lose", "Hibernating", "Lost"],
+      "benchmark": "-25% churn rate, 5x retention ROI",
+      "status": "tested-ok"
+    },
+    {
+      "id": "review-request-automation",
+      "name_fr": "Demande d'Avis Automatisée (Shopify → Klaviyo)",
+      "name_en": "Automated Review Request (Shopify → Klaviyo)",
+      "category": "shopify",
+      "type": "script",
+      "script": "agency/core/review-request-automation.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "7-14 jours après livraison",
+      "frequency_en": "7-14 days after delivery",
+      "benefit_fr": "+270% reviews, incentives photo",
+      "benefit_en": "+270% reviews, photo incentives",
+      "port": 3013,
+      "features": ["shopify-webhook", "fulfillment-tracking", "incentive-tiers", "klaviyo-sync", "photo-review-bonus"],
+      "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Template",
+      "incentive_tiers": {
+        "text_review": "10% discount",
+        "photo_review": "15% discount",
+        "video_review": "20% discount"
+      },
+      "alert_threshold": "3 stars (escalate to support)",
+      "benchmark": "+270% reviews (Yotpo benchmark)",
+      "status": "tested-ok"
+    },
+    {
+      "id": "at-risk-customer-flow",
+      "name_fr": "Flow Client At-Risk (Intervention Anti-Churn)",
+      "name_en": "At-Risk Customer Flow (Anti-Churn Intervention)",
+      "category": "retention",
+      "type": "script",
+      "script": "agency/core/at-risk-customer-flow.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Déclenché par churn-prediction",
+      "frequency_en": "Triggered by churn-prediction",
+      "benefit_fr": "+260% conversion clients at-risk",
+      "benefit_en": "+260% at-risk customer conversion",
+      "port": 3014,
+      "features": ["3-email-intervention", "vip-call-offer", "escalating-discounts", "founder-personal-touch", "klaviyo-sync"],
+      "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Template",
+      "email_providers": "Klaviyo→Omnisend",
+      "intervention_sequence": {
+        "email1": {"delay": "0", "type": "founder_personal", "discount": "15%"},
+        "email2": {"delay": "3 days", "type": "value_reminder", "discount": "20%"},
+        "email3": {"delay": "7 days", "type": "last_chance", "discount": "25%"}
+      },
+      "trigger_threshold": "churnScore >= 70%",
+      "vip_call_threshold": "churnScore >= 80%",
+      "depends_on": "churn-prediction-resilient",
+      "benchmark": "+260% conversion at-risk (industry)",
+      "status": "tested-ok"
     }
   ],
   "types": {
@@ -1243,9 +1360,19 @@
     "externalServices": 4,
     "aiAvatarWorkflows": 2,
     "b2bLeadPipelines": 4,
-    "resilientScripts": 6,
+    "resilientScripts": 11,
     "voiceAiScripts": 3,
-    "crmIntegrations": 2,
+    "crmIntegrations": 3,
+    "session127bisPhase1": {
+      "sms-automation": "v1.0.0 (Omnisend+Twilio)",
+      "email-personalization": "v2.0.0 (3-email cart series)",
+      "churn-prediction": "v1.0.0 (RFM+AI)"
+    },
+    "session127bisPhase2": {
+      "review-request-automation": "v1.0.0 (+270% reviews)",
+      "voice-api-lead-qualification": "integrated (+70% conversion)",
+      "at-risk-customer-flow": "v1.0.0 (+260% at-risk conversion)"
+    },
     "crmScriptsV1_1": {
       "hubspot": "v1.1.0 (batch+backoff)",
       "omnisend": "v1.1.0 (carts+dedup)"

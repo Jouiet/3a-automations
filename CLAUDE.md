@@ -1,5 +1,5 @@
 # 3A Automation - Claude Code Memory
-## Version: 33.0 | Date: 2026-01-03 | Session: 127 (SECURITY FIX VERIFIED + VPS ANALYSIS)
+## Version: 34.0 | Date: 2026-01-03 | Session: 127bis (WORKFLOW GAPS ANALYSIS)
 
 ---
 
@@ -22,6 +22,65 @@
 | CRM Scripts | HubSpot v1.1.0 + Omnisend v1.1.0 |
 | Podcast Generator | v1.0.0 (> NotebookLM) ✅ VERIFIED |
 | Klaviyo | 10 lists, 0 flows (UI creation required) |
+
+---
+
+## Session 127bis - WORKFLOW GAPS ANALYSIS (03/01/2026)
+
+### Audit Automatisations: 89 vs Industry Benchmarks
+
+**Méthode:** Recherche web exhaustive (Litmus 2025, DMA, Klaviyo, Omnisend, Gartner, McKinsey, Salesforce)
+
+### GAPS CRITIQUES IDENTIFIÉS (0 automations)
+
+| Gap | Benchmark Industrie | ROI Potentiel |
+|-----|---------------------|---------------|
+| SMS Marketing | 98% open rate, 21-32% conversion | +21% cart recovery |
+| Churn Prevention | 260% higher conversion avec AI | -25% churn |
+| AI Chatbot Qualification | 70% conversion (2.4x forms) | +70% conversion |
+| Review Request | +270% reviews avec automation | +23% trust |
+| Birthday/Anniversary | 342% higher revenue/email | +342% rev/email |
+| Referral Program | 16% higher CLV | -80% acquisition cost |
+| Price Drop Alerts | 8.8% conversion | +4.2x rev/email |
+| Replenishment | +90% repeat, 5x revenue | +90% repeat |
+
+### Améliorations Automations Existantes
+
+| Actuel | Amélioration | Source |
+|--------|--------------|--------|
+| Abandoned Cart (1 email) | **Série 3 emails** | +69% orders (Klaviyo) |
+| Welcome Series | **+SMS combo** | +50% engagement |
+| VIP Tiers | **+Predictive CLV** | +25% accuracy |
+| Lead Scoring basic | **AI-powered** | +138% ROI (Gartner) |
+
+### Scripts À Créer (Priorité)
+
+```
+Phase 1 - CRITIQUE (6-9 jours):
+├── sms-automation-resilient.cjs       # Omnisend SMS API
+├── churn-prediction-resilient.cjs     # RFM + AI scoring
+└── 3-email abandoned cart             # Extend email-personalization
+
+Phase 2 - HAUTE (5-7 jours):
+├── review-request-automation.cjs      # Post-delivery trigger
+├── lead-qualification-chatbot.cjs     # Extend voice-api
+└── at-risk-customer-flow.cjs          # Churn intervention
+
+Phase 3 - MOYENNE (6-8 jours):
+├── birthday-anniversary-flow.cjs      # Date-based triggers
+├── referral-program-automation.cjs    # Link generation
+├── price-drop-alerts.cjs              # Wishlist monitoring
+└── replenishment-reminder.cjs         # Product cycle
+```
+
+### ROI Estimé Phase 1-2
+
+| Métrique | Improvement |
+|----------|-------------|
+| Cart Recovery | +25-30% (from 10-15%) |
+| Churn Rate | -25% |
+| Reviews | +270% |
+| Lead Qualification Time | -95% (60min → 5min) |
 
 ---
 
