@@ -1,4 +1,4 @@
-# Native Automation Scripts - Session 129
+# Native Automation Scripts - Session 130
 
 > **STATUS: 0 n8n workflows. ALL automations are native Node.js scripts.**
 > n8n workflows archived to `automations/agency/n8n-workflows-ARCHIVED-Session120/`
@@ -10,11 +10,11 @@
 
 | Category | Count | Details |
 |----------|-------|---------|
-| OPERATIONAL | **12** | Tested, fully working |
+| OPERATIONAL | **13** | Tested, fully working (Session 130 verified) |
 | PARTIAL | **1** | grok-voice-realtime (Gemini TTS quota 429) |
 | TEST MODE | **2** | hubspot, omnisend (no API keys) |
 | BLOCKED | **3** | whatsapp, voice-telephony, sms (credentials) |
-| **TOTAL** | **18** | 31 .cjs files in core/, 18 with --health |
+| **TOTAL** | **19** | 32 .cjs files in core/, 19 with --health |
 
 ### P0 Fixes Applied (Session 127bis)
 
@@ -41,9 +41,9 @@
 | price-drop-alerts.cjs | ✅ | OPERATIONAL | 4 AI + Shopify |
 | replenishment-reminder.cjs | ✅ | OPERATIONAL | 4 AI + Klaviyo |
 | birthday-anniversary-flow.cjs | ✅ | OPERATIONAL | 4 AI + Klaviyo |
-| lead-qualification-chatbot.cjs | ❌ | NOT CREATED | P1 - Extend voice-api |
+| lead-qualification-chatbot.cjs | ✅ | OPERATIONAL | 4 AI + BANT + Klaviyo (Session 129) |
 
-**Only 1 script truly missing: lead-qualification-chatbot.cjs**
+**All P1 scripts now exist - 0 missing**
 
 ### Scripts Awaiting Credentials / Blocked
 
@@ -87,10 +87,10 @@ ANCIEN (ABANDONNÉ):
   n8n Community Edition: NE SUPPORTE PAS $env variables
   n8n Code Node: Problèmes avec JS complexe (fetch non supporté)
 
-ACTUEL (EN PRODUCTION - Verified Session 129):
+ACTUEL (EN PRODUCTION - Verified Session 130):
   Scripts natifs (.cjs) avec process.env + multi-provider fallback
   Location: automations/agency/core/
-  Count: 12 OPERATIONAL + 1 PARTIAL + 2 TEST MODE + 3 BLOCKED
+  Count: 13 OPERATIONAL + 1 PARTIAL + 2 TEST MODE + 3 BLOCKED
   Registry: v2.6.1 (96 automations, 61/61 script paths valid)
 ```
 

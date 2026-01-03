@@ -179,11 +179,31 @@
         "unhealthy": 0,
         "critical": 0
       }
+    },
+    {
+      "timestamp": "2026-01-03T19:10:46.052Z",
+      "overall": true,
+      "summary": {
+        "total": 5,
+        "healthy": 5,
+        "unhealthy": 0,
+        "critical": 0
+      }
+    },
+    {
+      "timestamp": "2026-01-03T19:18:05.858Z",
+      "overall": true,
+      "summary": {
+        "total": 5,
+        "healthy": 5,
+        "unhealthy": 0,
+        "critical": 0
+      }
     }
   ],
-  "lastUpdate": "2026-01-03T18:39:15.125Z",
+  "lastUpdate": "2026-01-03T19:18:05.858Z",
   "lastResults": {
-    "timestamp": "2026-01-03T18:39:15.125Z",
+    "timestamp": "2026-01-03T19:18:05.858Z",
     "overall": true,
     "criticalHealthy": true,
     "endpoints": [
@@ -194,9 +214,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 416,
+        "responseTime": 407,
         "critical": true,
-        "timestamp": "2026-01-03T18:39:14.802Z",
+        "timestamp": "2026-01-03T19:18:05.664Z",
         "error": null
       },
       {
@@ -206,9 +226,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 405,
+        "responseTime": 269,
         "critical": true,
-        "timestamp": "2026-01-03T18:39:14.852Z",
+        "timestamp": "2026-01-03T19:18:05.588Z",
         "error": null
       },
       {
@@ -218,9 +238,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 448,
+        "responseTime": 254,
         "critical": true,
-        "timestamp": "2026-01-03T18:39:14.896Z",
+        "timestamp": "2026-01-03T19:18:05.575Z",
         "error": null
       },
       {
@@ -233,9 +253,9 @@
           200,
           504
         ],
-        "responseTime": 676,
+        "responseTime": 536,
         "critical": false,
-        "timestamp": "2026-01-03T18:39:15.125Z",
+        "timestamp": "2026-01-03T19:18:05.858Z",
         "error": null
       },
       {
@@ -248,9 +268,9 @@
           302,
           404
         ],
-        "responseTime": 593,
+        "responseTime": 491,
         "critical": false,
-        "timestamp": "2026-01-03T18:39:15.044Z",
+        "timestamp": "2026-01-03T19:18:05.815Z",
         "error": null
       }
     ],
