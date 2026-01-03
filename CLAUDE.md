@@ -18,7 +18,7 @@
 | AEO Score | **95%** |
 | **Overall Audit Score** | **91%** |
 | **Security Backend** | **75%** - ⚠️ Code fixed, rotation pending |
-| Docker Projects | **5 running, 7 containers** (3a-website, cinematicads, dashboard, root, wordpress) |
+| Docker (3A only) | **3 containers** (3a-website, dashboard, wordpress) + 2 shared (traefik, n8n) |
 | CRM Scripts | HubSpot v1.1.0 + Omnisend v1.1.0 |
 | Podcast Generator | v1.0.0 (> NotebookLM) ✅ VERIFIED |
 | Klaviyo | 10 lists, 0 flows (UI creation required) |
@@ -88,15 +88,19 @@ TTS: Gemini 2.5 Flash (rate limited after 4 segments)
 
 Klaviyo MCP supprimé → API directe utilisée. Voir `.claude/rules/05-mcps-status.md`.
 
-### Docker Infrastructure (5 projects, 7 containers)
+### Docker Infrastructure (VPS 1168256)
 
-| Projet | Containers | Image | Uptime |
-|--------|------------|-------|--------|
-| 3a-website | 1 | nginx:alpine | 12h |
-| cinematicads | 1 | cinematicads-webapp:latest | 14h |
-| **dashboard** | 1 | node:20-alpine | **2h (NEW)** |
-| root | 2 | n8n + traefik | 5 jours |
-| wordpress | 2 | wordpress + mariadb | 4 jours |
+**Note:** Le VPS héberge plusieurs projets. Seuls 3 containers sont dédiés à 3A Automation.
+
+| Projet | Containers | Appartenance | Image |
+|--------|------------|--------------|-------|
+| 3a-website | 1 | ✅ 3A Automation | nginx:alpine |
+| dashboard | 1 | ✅ 3A Automation | node:20-alpine |
+| wordpress | 2 | ✅ 3A Automation | wordpress + mariadb |
+| root | 2 | ⚠️ Infrastructure partagée | traefik + n8n |
+| cinematicads | 1 | ❌ Autre projet (CinematicAds) | webapp:latest |
+
+**Total 3A:** 4 containers (site + dashboard + wp + mariadb) + 2 partagés (traefik + n8n)
 
 ### External Blockers Remaining
 
