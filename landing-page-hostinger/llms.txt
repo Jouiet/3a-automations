@@ -14,7 +14,7 @@
 **Fondateur**: Jonathan, Expert technique automation AI
 **Marches**: Maroc, MENA, France, Europe, Worldwide
 **Langues**: Francais, English, Arabe
-**Automations**: 89 testees et documentees
+**Automations**: 96 testees et documentees
 
 ## Produits & Services
 
@@ -27,8 +27,8 @@
 - Disponible aussi pour vos clients (setup inclus dans packs)
 
 ### Automatisation E-commerce
-- 99 automatisations testees et documentees
-- Shopify, WooCommerce, Klaviyo, GA4
+- 96 automatisations testees et documentees
+- Shopify, WooCommerce, CJDropshipping, BigBuy, Dsers, Klaviyo, GA4
 - ROI moyen email marketing: 36-42 EUR pour 1 EUR investi (Litmus/DMA 2025)
 - Recuperation paniers abandonnes: +10-15%
 
@@ -114,18 +114,20 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 ## Integrations Supportees
 
-- E-commerce: Shopify, WooCommerce
+- E-commerce: Shopify, WooCommerce, CJDropshipping, BigBuy, DSers, AutoDS
 - CRM: HubSpot, Pipedrive, Salesforce, Zoho
 - Email: Klaviyo, Omnisend, Mailchimp
 - Publicite: Meta Ads, Google Ads, TikTok Ads
 - Analytics: Google Analytics 4
-- Messagerie: WhatsApp Business, SMS
+- AI/ML: OpenAI GPT-5.2, Claude Sonnet 4, Gemini 3, Grok 4.1, ElevenLabs, fal.ai
+- Messagerie: WhatsApp Business, Twilio, SMS
+- Infrastructure: Node.js, Docker, GitHub Actions
 
 ## Pages Cles
 
 - [Accueil](https://3a-automation.com/): Proposition de valeur
 - [Tarifs](https://3a-automation.com/pricing.html): Packages detailles
-- [Automatisations](https://3a-automation.com/automations.html): 99 automatisations
+- [Automatisations](https://3a-automation.com/automations.html): 96 automatisations
 - [Cas Clients](https://3a-automation.com/cas-clients.html): Etudes de cas
 - [Contact](https://3a-automation.com/contact.html): Formulaire + Voice AI
 - [Reservation](https://3a-automation.com/booking.html): Prendre RDV
@@ -150,12 +152,12 @@ Annuel: 2 mois gratuits (10 pour 12)
 - **Marche secondaire**: France/Europe (4.2M PME, source INSEE)
 
 ### Ce que nous AVONS
-- 89 workflows documentes et testes
-- 10 automations resilientes (multi-fallback AI)
+- 96 workflows documentes et testes
+- 20 automations resilientes (multi-fallback AI)
 - Voice AI Widget fonctionnel (FR/EN)
 - Site web 63 pages bilingue
 - Infrastructure Docker (Hostinger VPS)
-- Stack: Shopify, Klaviyo, GA4, Claude/Gemini/Grok
+- Stack: Shopify, Klaviyo, GA4, OpenAI GPT-5.2, Claude, Gemini, Grok 4.1, ElevenLabs, fal.ai, Node.js, Docker
 
 ### Ce que nous N'AVONS PAS encore
 - Revenue recurrent
@@ -172,7 +174,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 ### Documents Disponibles (sur demande)
 - Pitch Deck (12 slides)
 - Projections Financieres (3 ans)
-- Catalogue Workflows (88 fiches)
+- Catalogue Workflows (96 fiches)
 - Architecture Technique
 - Data Room (apres NDA)
 
@@ -197,5 +199,5 @@ Annuel: 2 mois gratuits (10 pour 12)
 
 ---
 
-Version: 5.1.0 | Last Updated: 2026-01-02
+Version: 5.2.0 | Last Updated: 2026-01-04
 Spec: https://llmstxt.org/
