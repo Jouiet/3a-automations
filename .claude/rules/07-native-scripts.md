@@ -2,553 +2,69 @@
 
 > **STATUS: 0 n8n workflows. ALL automations are native Node.js scripts.**
 > n8n workflows archived to `automations/agency/n8n-workflows-ARCHIVED-Session120/`
-> n8n container runs on VPS (backup only) - no active workflows.
 
-## Session 133 - DROPSHIPPING P0 FIXES COMPLETE ✅ (04/01/2026)
+## Current Status (04/01/2026)
 
-### 3 Dropshipping Scripts - Production Ready
+| Category | Count | Notes |
+|----------|-------|-------|
+| OPERATIONAL | **16** | + 3 dropshipping |
+| TEST MODE | **2** | hubspot, omnisend (no API keys) |
+| BLOCKED | **3** | whatsapp, voice-telephony, sms (credentials) |
+| **Registry** | **v2.7.0** | 99 automations, 64/64 valid |
 
-| Script | Lines | Functions | Production-Ready | Port |
-|--------|-------|-----------|-----------------|------|
-| cjdropshipping-automation.cjs | 726 | 15 REAL | **90%** ✅ | 3020 |
-| bigbuy-supplier-sync.cjs | 929 | 17 REAL | **85%** | 3021 |
-| dropshipping-order-flow.cjs | 1087 | 13 REAL | **95%** ✅ | 3022 |
+## Session 133 - DROPSHIPPING P0 FIXES COMPLETE ✅
 
-**Total: 2,742 lines, 45 functions verified**
+| Script | Lines | Production-Ready | Port |
+|--------|-------|-----------------|------|
+| cjdropshipping-automation.cjs | 726 | **90%** ✅ | 3020 |
+| bigbuy-supplier-sync.cjs | 929 | **85%** | 3021 |
+| dropshipping-order-flow.cjs | 1087 | **95%** ✅ | 3022 |
 
-### P0 BLOCKING Issues - ALL FIXED ✅
-
-| Issue | Script | Fix Applied | Status |
-|-------|--------|-------------|--------|
-| `updateStorefrontTracking()` PLACEHOLDER | flow | Real Shopify Admin API 2024-01 + WooCommerce REST | ✅ FIXED |
-| In-memory Map() (no persistence) | flow | File-based JSON with atomic writes (`data/dropshipping/`) | ✅ FIXED |
-| CORS `*` wildcard | ALL 3 | CORS_WHITELIST (3a-automation.com, dashboard, storefronts) | ✅ FIXED |
-| `searchProducts()` empty | bigbuy | API limitation (not code issue) - documents as known | ⚠️ KNOWN |
-
-**Commit:** `6a8c934` - feat(dropshipping): P0 BLOCKING fixes - production-ready
-
-### cjdropshipping-automation.cjs (85%)
-
-**REAL Functions (15):**
-- `authenticate()` - OAuth token (15-day expiry)
-- `getProductDetails()`, `searchProducts()`, `getProductVariants()`
-- `createOrder()`, `confirmOrder()`, `getOrderStatus()`
-- `getShippingMethods()`, `calculateShipping()`
-- `syncInventory()`, `getCategories()`, `getProductImages()`
-- Rate limiting: 1 auth/5min, 100ms general requests
-- Timeout: 30s, Retries: 3 with exponential backoff
-
-**FIXED (Session 133):**
-- ✅ CORS whitelist added (line 626-641)
-- Body size/input validation: P1 backlog
-
-### bigbuy-supplier-sync.cjs (85%)
-
-**REAL Functions (17):**
-- `getCategories()`, `getCategory()`, `getCategoryProducts()`
-- `getProduct()`, `getProductInfo()`, `getProductStock()`
-- `getShippingRates()`, `getShippingCarriers()`
-- `createOrder()`, `getOrder()`, `getOrderTracking()`
-- Cache TTL: categories 24h, products 1h, stock 5min, prices 15min
-- Production/Sandbox URL toggle
-
-**FAKE Function (1):**
-```javascript
-// lines 331-349 - NOT a real API search
-async function searchProducts(query, categoryId = null) {
-  if (!categoryId) return [];  // ❌ RETURNS EMPTY - BigBuy has no search API
-}
-```
-
-**FIXED (Session 133):**
-- ✅ CORS whitelist added (line 804-819)
-- Cache unbounded: P2 backlog (LRU limit)
-
-### dropshipping-order-flow.cjs (95% ✅)
-
-**REAL Functions (12):**
-- `routeOrderToSupplier()` - SKU routing (CJ-*, BB-*)
-- `verifyWebhookSignature()` - HMAC-SHA256 for Shopify/Woo
-- `processShopifyOrder()`, `processWooCommerceOrder()`
-- `submitToCJDropshipping()`, `submitToBigBuy()`
-- `pollOrderStatus()`, `trackShipment()`
-
-**PLACEHOLDER Function (1) - BLOCKING:**
-```javascript
-// lines 482-500 - DOES NOTHING
-async function updateStorefrontTracking(orderRecord, supplierOrder, tracking) {
-  // TODO: Implement storefront-specific tracking updates
-  switch (orderRecord.source) {
-    case 'shopify':
-      // await updateShopifyFulfillment(...);  // ❌ COMMENTED OUT
-      console.log(`→ Shopify fulfillment update...`);  // ❌ ONLY LOGS
-      break;
-  }
-  return true;  // ❌ ALWAYS TRUE WITHOUT DOING ANYTHING
-}
-```
-
-**CRITICAL GAPS:**
-- `orderStore = new Map()` at line 106 → DATA LOST on restart
-- `pendingTracking = new Map()` at line 108 → DATA LOST on restart
-- CORS `*` at line 915 → needs whitelist
-
-### Registry Updated: v2.7.0 (99 automations)
-
-| Metric | v2.6.1 | v2.7.0 | Delta |
-|--------|--------|--------|-------|
-| Total automations | 96 | **99** | +3 |
-| Dropshipping category | 0 | **3** | NEW |
-
-### Commands
-
-```bash
-# CJDropshipping (85% ready)
-node automations/agency/core/cjdropshipping-automation.cjs --health
-node automations/agency/core/cjdropshipping-automation.cjs --server --port=3020
-
-# BigBuy (80% ready)
-node automations/agency/core/bigbuy-supplier-sync.cjs --health
-node automations/agency/core/bigbuy-supplier-sync.cjs --server --port=3021
-
-# Dropshipping Flow (❌ 60% - NOT production-ready)
-node automations/agency/core/dropshipping-order-flow.cjs --health
-node automations/agency/core/dropshipping-order-flow.cjs --server --port=3022
-```
-
-### P0 Action Plan (Before Production)
-
-| # | Action | Script | Effort | Blocker |
-|---|--------|--------|--------|---------|
-| 1 | Implement `updateStorefrontTracking()` with real Shopify/WooCommerce API | flow | 2-4h | **YES** |
-| 2 | Add persistence layer (Redis/DB) for orderStore | flow | 4-8h | **YES** |
-| 3 | Replace CORS `*` with whitelist | ALL 3 | 30min | Security |
-| 4 | Add body size limits to servers | ALL 3 | 15min | Security |
+**Commit:** `6a8c934` - feat(dropshipping): P0 BLOCKING fixes
 
 ---
 
-## Session 131 - VERIFICATION COMPLETE (03/01/2026)
+## Scripts Natifs RÉSILIENTS (14 scripts)
 
-### All P1 Scripts Health Checked
+| Script | Usage | Fallback Chain | Port |
+|--------|-------|----------------|------|
+| blog-generator-resilient.cjs | TEXT + SOCIAL | Anthropic→OpenAI→Grok 4.1→Gemini 3 | 3003 |
+| voice-api-resilient.cjs | TEXT | Grok 4.1→OpenAI GPT-5.2→Gemini→Claude→Local | 3004 |
+| product-photos-resilient.cjs | IMAGE/VISION | Gemini→Grok→fal.ai→Replicate | 3005 |
+| email-personalization-resilient.cjs | TEXT | Grok 4.1→OpenAI→Gemini→Claude→Static | 3006 |
+| grok-voice-realtime.cjs | AUDIO | Grok 4 Realtime→Gemini TTS | 3007 |
+| whatsapp-booking-notifications.cjs | WHATSAPP | WhatsApp Cloud API | 3008 |
+| voice-telephony-bridge.cjs | TELEPHONY | Twilio↔Grok WebSocket | 3009 |
+| hubspot-b2b-crm.cjs | CRM B2B | HubSpot FREE API | - |
+| omnisend-b2c-ecommerce.cjs | CRM B2C | Omnisend v5 API | - |
+| podcast-generator-resilient.cjs | TEXT | Anthropic→OpenAI→Grok→Gemini | 3010 |
+| churn-prediction-resilient.cjs | ANALYTICS | 4 AI + rule-based | - |
+| cjdropshipping-automation.cjs | DROPSHIP | CJ API + Shopify/Woo | 3020 |
+| bigbuy-supplier-sync.cjs | DROPSHIP | BigBuy API | 3021 |
+| dropshipping-order-flow.cjs | DROPSHIP | Multi-supplier orchestration | 3022 |
 
-| Script | Status | AI Providers | Notes |
-|--------|--------|--------------|-------|
-| referral-program-automation.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo | Reward tiers configured |
-| price-drop-alerts.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo | Wishlist monitoring |
-| replenishment-reminder.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo | Product cycles |
-| birthday-anniversary-flow.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo | 7-day teaser, 3-day reminder |
-| lead-qualification-chatbot.cjs | ✅ OPERATIONAL | 4 AI + BANT | Hot≥75, Warm 50-74 |
-| sms-automation-resilient.cjs | ❌ BLOCKED | - | Needs OMNISEND_API_KEY or TWILIO_* |
-
-### Uptime Status (03/01/2026 19:28)
-
-All 5 critical endpoints HEALTHY:
-- 3A Automation Site: 200 (391ms)
-- 3A Dashboard: 200 (246ms)
-- n8n Workflows: 200 (259ms)
-- WordPress Blog: 200 (475ms)
-- Booking API: 404 (expected - 437ms)
-
-## Session 129 - FACTUAL STATUS (03/01/2026)
-
-### Automations Status (Verified via --health - Session 128bis)
-
-| Category | Count | Details |
-|----------|-------|---------|
-| OPERATIONAL | **13** | Tested, fully working (Session 130 verified) |
-| PARTIAL | **1** | grok-voice-realtime (Gemini TTS quota 429) |
-| TEST MODE | **2** | hubspot, omnisend (no API keys) |
-| BLOCKED | **3** | whatsapp, voice-telephony, sms (credentials) |
-| **TOTAL** | **19** | 32 .cjs files in core/, 19 with --health |
-
-### P0 Fixes Applied (Session 127bis)
-
-| Fix Type | Details | Status |
-|----------|---------|--------|
-| Import Path Bug | `./lib/` → `../lib/` in 2 scripts | ✅ FIXED |
-| Registry Paths | 7 invalid paths corrected | ✅ FIXED |
-| Registry Version | 2.3.0 → 2.6.1 | ✅ UPDATED |
-
-### Scripts Now OPERATIONAL (formerly "À Créer")
-
-| Script | Status | AI Providers |
-|--------|--------|--------------|
-| churn-prediction-resilient.cjs | ✅ OPERATIONAL | 4 AI + rule-based fallback |
-| at-risk-customer-flow.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo integration |
-| review-request-automation.cjs | ✅ OPERATIONAL | 4 AI + Klaviyo integration |
-
-### Scripts Status Detail (Session 128bis Verified)
-
-| Script | Exists | Status | Issue |
-|--------|--------|--------|-------|
-| sms-automation-resilient.cjs | ✅ | BLOCKED | No SMS provider configured |
-| referral-program-automation.cjs | ✅ | OPERATIONAL | 4 AI + Klaviyo |
-| price-drop-alerts.cjs | ✅ | OPERATIONAL | 4 AI + Shopify |
-| replenishment-reminder.cjs | ✅ | OPERATIONAL | 4 AI + Klaviyo |
-| birthday-anniversary-flow.cjs | ✅ | OPERATIONAL | 4 AI + Klaviyo |
-| lead-qualification-chatbot.cjs | ✅ | OPERATIONAL | 4 AI + BANT + Klaviyo (Session 129) |
-
-**All P1 scripts now exist - 0 missing**
-
-### Scripts Awaiting Credentials / Blocked
-
-| Script | Status | Missing |
-|--------|--------|---------|
-| whatsapp-booking-notifications.cjs | BLOCKED | WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID |
-| voice-telephony-bridge.cjs | BLOCKED | TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN |
-| sms-automation-resilient.cjs | BLOCKED | No SMS provider (Twilio/Omnisend) |
-| hubspot-b2b-crm.cjs | TEST MODE | HUBSPOT_API_KEY |
-| omnisend-b2c-ecommerce.cjs | TEST MODE | OMNISEND_API_KEY |
-| Social Distribution (blog-generator) | OPTIONAL | FACEBOOK_*, LINKEDIN_*, X_* |
-
-**Note:** birthday-anniversary-flow.cjs is OPERATIONAL (health check verified)
-
-### Frontier AI Providers (Verified Jan 2026)
-
-| Provider | Model ID | Status |
-|----------|----------|--------|
-| Grok 4.1 | grok-4-1-fast-reasoning | ✅ Configured |
-| OpenAI GPT-5.2 | gpt-5.2 | ✅ Configured |
-| Gemini 3 | gemini-3-flash-preview | ✅ Configured |
-| Claude Sonnet 4 | claude-sonnet-4-20250514 | ✅ Configured |
-
-**Fallback Pattern:** Grok → OpenAI → Gemini → Claude → Local/Static
-
-## Session 123 Updates (02/01/2026)
-
-- **ALL scripts updated to FRONTIER Grok 4.1 models** (was Grok 2/3)
-- xAI FRONTIER models verified (Jan 2026):
-  - TEXT: `grok-4-1-fast-reasoning`
-  - VISION: `grok-2-vision-1212` (FRONTIER - no grok-4-vision exists)
-  - IMAGE: `grok-2-image-1212` (FRONTIER - no grok-4-image exists)
-  - REALTIME/AUDIO: `grok-4` (powered by Grok-4 family)
-- OpenAI GPT-5.2 in all fallback chains (Session 120)
-- n8n workflow JSONs archived (8 files)
-
-## Architecture
-
-```
-ANCIEN (ABANDONNÉ):
-  n8n Community Edition: NE SUPPORTE PAS $env variables
-  n8n Code Node: Problèmes avec JS complexe (fetch non supporté)
-
-ACTUEL (EN PRODUCTION - Verified Session 130):
-  Scripts natifs (.cjs) avec process.env + multi-provider fallback
-  Location: automations/agency/core/
-  Count: 13 OPERATIONAL + 1 PARTIAL + 2 TEST MODE + 3 BLOCKED
-  Registry: v2.6.1 (96 automations, 61/61 script paths valid)
-```
-
-## ANALYSE COMPARATIVE FACTUELLE (30/12/2025)
-
-### Scripts Natifs vs n8n - Verdict Objectif
-
-| Critère | n8n Workflows | Scripts Natifs | Verdict |
-|---------|---------------|----------------|---------|
-| AI Providers | 1 (single point of failure) | **4+ avec fallback (Session 120)** | **Script SUPÉRIEUR** |
-| Blocage $env | 100% bloqués (Community) | 0% (process.env) | **Script SUPÉRIEUR** |
-| Social platforms | 2 (FB, LinkedIn) | 3 (+ X/Twitter OAuth 1.0a) | **Script SUPÉRIEUR** |
-| Fallback chains | 0 | 3+ par script | **Script SUPÉRIEUR** |
-| CLI/Testing | 0 modes | 15+ flags | **Script SUPÉRIEUR** |
-| Health checks | 0 intégrés | 3 intégrés | **Script SUPÉRIEUR** |
-| Lignes de code | ~1,076 JSON | ~2,735 .cjs | n8n moins |
-| Visual debugging | UI n8n | Console only | n8n mieux |
-
-**VERDICT GLOBAL: Scripts natifs SUPÉRIEURS sur 6/8 critères**
-
-### AUDIT FAIBLESSES - Scripts Natifs (Session 115)
-
-| Sévérité | Pattern | Scripts | Lignes |
-|----------|---------|---------|--------|
-| CRITIQUE | Pas de timeout HTTP complet | 3/3 | whatsapp:278, blog:157, grok:141 |
-| CRITIQUE | Mémoire non bornée (Set/Map) | 2/3 | whatsapp:356, grok:619 |
-| CRITIQUE | Pas de limite body size | 3/3 | whatsapp:570, blog:649, grok:657 |
-| HIGH | Pas de retry exponential | 3/3 | Fallback only, 1 try/provider |
-| HIGH | JSON parsing fragile | 1/3 | blog:288-302 |
-| HIGH | Validation input insuffisante | 2/3 | whatsapp:260, grok:657 |
-| MEDIUM | Session ID collision | 1/3 | grok:629 (Date.now()) |
-| MEDIUM | CORS trop permissif (*) | 2/3 | whatsapp:460, blog:695 |
-| MEDIUM | API key en query string | 1/3 | blog:245 (Gemini) |
-| LOW | Graceful shutdown manquant | 2/3 | whatsapp, blog |
-| LOW | Logging non structuré | 3/3 | console.log basique |
-| LOW | Pas de metrics | 3/3 | Aucune observabilité |
-| LOW | Pas de rate limiting outbound | 3/3 | Risque ban API |
-
-**Total: 13 patterns à améliorer, ~9h effort estimé**
-
-### CORRECTIONS IMPLÉMENTÉES (Session 116)
-
-| Script | Fixes Appliqués |
-|--------|-----------------|
-| whatsapp-booking-notifications.cjs | P0: timeout, body size, security headers. P1: rate limiter, bounded memory. P2: CORS whitelist. P3: graceful shutdown |
-| blog-generator-resilient.cjs | P0: timeout, body size, response limit. P1: rate limiter. P2: CORS whitelist, improved JSON parsing, env regex. P3: graceful shutdown |
-| grok-voice-realtime.cjs | P0: fetch timeout, message size limit. P1: rate limiter, session pool limit, zombie cleanup. P2: secure session ID, input validation, CORS whitelist |
-
-**STATUS: 13/13 patterns corrigés (100%)**
-
-### SESSION 117 - Security P1 Fixes (30/12/2025)
-
-| Script | Fixes Ajoutés |
-|--------|---------------|
-| product-photos-resilient.cjs | P1: Rate limiter (5/min), CORS whitelist strict, Body size limit (10MB) |
-| email-personalization-resilient.cjs | P1: Rate limiter (30/min), CORS whitelist strict, Body size limit (1MB) |
-| voice-api-resilient.cjs | P1: Rate limiter (60/min), CORS whitelist strict, Body size limit (1MB) |
-
-**STATUS: 6/6 resilient scripts sécurisés (P0-P1 100%)**
-
-### P2 COMPLETE - JSON.parse try/catch (Session 117septimo - 31/12/2025)
-
-| Script | Occurrences | Status |
-|--------|-------------|--------|
-| product-photos-resilient.cjs | 12 | ✅ DONE (safeJsonParse helper) |
-| email-personalization-resilient.cjs | 10 | ✅ DONE (safeJsonParse helper) |
-| voice-api-resilient.cjs | 4 | ✅ DONE (safeJsonParse helper) |
-| blog-generator-resilient.cjs | Already had try/catch | ✅ |
-
-**ALL P2 JSON PARSING FIXED (4/4 scripts)**
-
-### Workflows SUPPRIMÉS (Session 115)
-
-| Workflow | n8n Nodes | Script | Amélioration Factuelle |
-|----------|-----------|--------|------------------------|
-| Blog Article Generator | 14 nodes, 1 AI | blog-generator-resilient.cjs v2.1 | +2 AI providers, +1 social platform |
-| Enhance Product Photos | 6 nodes | product-photos-resilient.cjs | +fallback chain 4 providers |
-| WhatsApp Confirmation | 6 nodes | whatsapp-booking-notifications.cjs | +CLI, +text fallback |
-| WhatsApp Reminders | 7 nodes | whatsapp-booking-notifications.cjs | +deduplication Set() |
-
-### Workflows n8n RESTANTS (0) - Session 119
-
-| Workflow | n8n Status | Script Natif | Status Final |
-|----------|------------|--------------|--------------|
-| Grok Voice Telephony | ⛔ REMPLACÉ | **voice-telephony-bridge.cjs** (port 3009) | ✅ Script natif SUPÉRIEUR |
-
-**Résultat: 0/5 n8n restants - TOUS remplacés par scripts natifs**
-
-### SESSION 119 - Dernier workflow n8n remplacé (01/01/2026)
-
-| Ancien (n8n) | Nouveau (Script) | Amélioration |
-|--------------|------------------|--------------|
-| Grok Voice Telephony (10 nodes) | voice-telephony-bridge.cjs | Latence 4x meilleure (WebSocket direct), rate limiting, session management, graceful shutdown |
-
-**Comparaison détaillée:** `outputs/COMPARISON-N8N-VS-NATIVE-2026-01-01.md`
-
-### Scripts Natifs RÉSILIENTS (Multi-Provider Fallback) - Vérifié Jan 2026 (Session 123)
-
-| Script | Usage | Fallback Chain (4 AI providers) | Port |
-|--------|-------|----------------------------------|------|
-| blog-generator-resilient.cjs | TEXT + SOCIAL | Anthropic→**OpenAI**→**Grok 4.1**→Gemini 3 + FB/LinkedIn/X | 3003 |
-| voice-api-resilient.cjs | TEXT (pas audio!) | **Grok 4.1**→**OpenAI GPT-5.2**→Gemini 3 Flash→Claude Sonnet 4→Local | 3004 |
-| product-photos-resilient.cjs | IMAGE GEN | Gemini 2.5 Flash Image→**Grok Image (FRONTIER)**→fal.ai→Replicate | 3005 |
-| product-photos-resilient.cjs | VISION | Gemini 3 Flash→**OpenAI GPT-5.2 Vision**→**Grok 2 Vision (FRONTIER)**→Claude Sonnet 4 | 3005 |
-| email-personalization-resilient.cjs | TEXT | **Grok 4.1**→**OpenAI GPT-5.2**→Gemini 3 Flash→Claude Sonnet 4→Static | 3006 |
-| podcast-generator-resilient.cjs | TEXT (script) | Anthropic→**OpenAI GPT-5.2**→**Grok 4.1**→Gemini 3 | - |
-| grok-voice-realtime.cjs | AUDIO WebSocket | **Grok 4 Realtime (FRONTIER)**→Gemini 2.5 Flash TTS | 3007 |
-| whatsapp-booking-notifications.cjs | WHATSAPP | WhatsApp Cloud API (Meta) | 3008 |
-| voice-telephony-bridge.cjs | TELEPHONY | Twilio PSTN ↔ **Grok 4 WebSocket (FRONTIER)** | 3009 |
-| hubspot-b2b-crm.cjs | CRM B2B | HubSpot FREE API (batch+backoff) | - |
-| omnisend-b2c-ecommerce.cjs | CRM B2C | Omnisend v5 API (dedup+carts) | - |
-| cjdropshipping-automation.cjs | DROPSHIP | CJ API + Shopify/WooCommerce | 3020 |
-| bigbuy-supplier-sync.cjs | DROPSHIP | BigBuy API + Shopify/WooCommerce | 3021 |
-| dropshipping-order-flow.cjs | DROPSHIP | Multi-supplier orchestration, file persistence | 3022 |
-
-**NOTE:** voice-api-resilient.cjs génère du TEXTE. L'audio robotic par Web Speech API.
-**NOTE:** grok-voice-realtime.cjs utilise WebSocket pour audio NATIF ($0.05/min) avec fallback Gemini TTS.
-**NOTE:** Claude NE GÉNÈRE PAS d'images, seulement vision (analyse).
-**NOTE:** whatsapp-booking-notifications.cjs prêt, awaiting WHATSAPP_ACCESS_TOKEN + WHATSAPP_PHONE_NUMBER_ID.
-**NOTE (Session 123):** grok-2-image-1212 et grok-2-vision-1212 SONT les modèles FRONTIER (pas de grok-4-image/vision).
-
-### Scripts Natifs (Production)
-
-| Script | Status | Notes |
-|--------|--------|-------|
-| newsletter-automation.cjs | ✅ | **Fallback: Grok→Gemini→Claude** |
-| linkedin-lead-automation.cjs | ✅ | Apify STARTER OK |
-| google-maps-to-klaviyo-pipeline.cjs | ✅ | Apify STARTER OK |
-| email-automation-unified.cjs | ✅ | Testé OK |
-| lead-gen-scheduler.cjs | ✅ | Cron ready |
-| uptime-monitor.cjs | ✅ | 5 endpoints, alerting |
-| voice-widget-templates.cjs | ✅ | 8 presets industrie, deploy 30min |
-| whatsapp-booking-notifications.cjs | ⏳ | Awaiting Meta credentials |
-
-## Lead Generation System (Session 114-115)
-
-```
-ARCHITECTURE:
-├── config/markets.cjs           # 31 marchés, 3 devises
-├── lead-gen-scheduler.cjs       # Scheduler centralisé
-├── linkedin-lead-automation.cjs # Apify → Klaviyo
-├── google-maps-to-klaviyo-pipeline.cjs
-├── newsletter-automation.cjs    # xAI/Grok primary
-└── email-automation-unified.cjs # Welcome + Outreach
-
-GITHUB ACTIONS:
-└── .github/workflows/lead-generation.yml
-
-CRON SCHEDULE:
-  6AM UTC: LinkedIn (rotating markets)
-  8AM UTC: Google Maps (rotating cities)
-  10AM 1st/15th: Newsletter
-```
-
-## Commandes
+## Quick Commands
 
 ```bash
-# === SCRIPTS RÉSILIENTS (Multi-Provider Fallback) ===
-
-# Blog Generator v2.1 (Anthropic→Grok→Gemini + FB/LinkedIn/X distribution)
-node automations/agency/core/blog-generator-resilient.cjs --health
-node automations/agency/core/blog-generator-resilient.cjs --topic="E-commerce 2026" --language=fr
-node automations/agency/core/blog-generator-resilient.cjs --topic="AI Marketing" --publish --distribute
-node automations/agency/core/blog-generator-resilient.cjs --server --port=3003
-
-# Voice API (Grok→Gemini→Claude→Local)
-node automations/agency/core/voice-api-resilient.cjs --health
-node automations/agency/core/voice-api-resilient.cjs --test="Quels sont vos services ?"
-node automations/agency/core/voice-api-resilient.cjs --server --port=3004
-
-# Product Photos (Gemini→fal.ai→Replicate)
-node automations/agency/core/product-photos-resilient.cjs --health
-node automations/agency/core/product-photos-resilient.cjs --image="img.jpg" --prompt="Remove background"
-node automations/agency/core/product-photos-resilient.cjs --server --port=3005
-
-# Email Personalization (Grok→Gemini→Claude→Static)
-node automations/agency/core/email-personalization-resilient.cjs --health
-node automations/agency/core/email-personalization-resilient.cjs --personalize --lead='{"email":"test@test.com"}'
-node automations/agency/core/email-personalization-resilient.cjs --server --port=3006
-
-# Grok Voice Realtime (WebSocket native audio → Gemini TTS fallback)
-node automations/agency/core/grok-voice-realtime.cjs --health
-node automations/agency/core/grok-voice-realtime.cjs --test="Bonjour, comment puis-je aider?"
-node automations/agency/core/grok-voice-realtime.cjs --server --port=3007
-
-# WhatsApp Booking Notifications (Confirmation + Reminders)
-node automations/agency/core/whatsapp-booking-notifications.cjs --health
-node automations/agency/core/whatsapp-booking-notifications.cjs --confirm --phone=+33612345678 --name="Jean"
-node automations/agency/core/whatsapp-booking-notifications.cjs --remind --phone=+33612345678 --type=24h
-node automations/agency/core/whatsapp-booking-notifications.cjs --server --port=3008
-
-# Voice Telephony Bridge (Twilio PSTN ↔ Grok WebSocket) - NEW Session 119
-node automations/agency/core/voice-telephony-bridge.cjs --health
-node automations/agency/core/voice-telephony-bridge.cjs --test-grok
-node automations/agency/core/voice-telephony-bridge.cjs --server --port=3009
-
-# === CRM SCRIPTS v1.1.0 (Session 119) ===
-
-# HubSpot B2B CRM v1.1.0 (batch+backoff+jitter)
-node automations/agency/core/hubspot-b2b-crm.cjs --health
-node automations/agency/core/hubspot-b2b-crm.cjs --test-contact
-node automations/agency/core/hubspot-b2b-crm.cjs --test-batch
-node automations/agency/core/hubspot-b2b-crm.cjs --list-contacts
-
-# Omnisend B2C E-commerce v1.1.0 (dedup+carts+backoff)
-node automations/agency/core/omnisend-b2c-ecommerce.cjs --health
-node automations/agency/core/omnisend-b2c-ecommerce.cjs --test-contact
-node automations/agency/core/omnisend-b2c-ecommerce.cjs --test-cart
-node automations/agency/core/omnisend-b2c-ecommerce.cjs --list-carts
-node automations/agency/core/omnisend-b2c-ecommerce.cjs --audit
-
-# === SCRIPTS PRODUCTION ===
-
-# Uptime Monitor
+# Health checks
 node automations/agency/core/uptime-monitor.cjs
-node automations/agency/core/uptime-monitor.cjs --server --port=3002
+node automations/agency/core/voice-api-resilient.cjs --health
+node automations/agency/core/blog-generator-resilient.cjs --health
 
-# Voice Widget Templates (8 presets industrie)
-node automations/agency/core/voice-widget-templates.cjs --list
-node automations/agency/core/voice-widget-templates.cjs --preset=ecommerce --client="Name" --domain="domain.com"
-node automations/agency/core/voice-widget-templates.cjs --preset=b2b --client="Acme" --domain="acme.com" --deploy
-
-# Scheduler
-node automations/agency/lead-gen-scheduler.cjs --status
-node automations/agency/lead-gen-scheduler.cjs --pipeline=linkedin --market=morocco
-
-# Email Unified
-node automations/agency/email-automation-unified.cjs --mode=welcome --email=test@example.com
-node automations/agency/email-automation-unified.cjs --server --port=3001
-
-# Newsletter (already has Grok→Gemini→Claude fallback)
-node automations/agency/newsletter-automation.cjs --preview --topic="Sujet"
+# Dropshipping
+node automations/agency/core/cjdropshipping-automation.cjs --health
+node automations/agency/core/bigbuy-supplier-sync.cjs --health
+node automations/agency/core/dropshipping-order-flow.cjs --health
 ```
 
-## BLOCKERS
+## Blockers
 
-| Type | Blocker | Action | Priorité |
-|------|---------|--------|----------|
-| ~~n8n~~ | ~~Twilio~~ | ~~Créer compte~~ | ~~P2~~ RÉSOLU (script natif) |
-| Script | Twilio | Fournir TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN | P1 |
-| Script | WhatsApp/Meta | Fournir credentials | P1 |
+| Script | Missing Credentials |
+|--------|---------------------|
+| whatsapp-booking-notifications.cjs | WHATSAPP_ACCESS_TOKEN |
+| voice-telephony-bridge.cjs | TWILIO_ACCOUNT_SID |
+| sms-automation-resilient.cjs | OMNISEND_API_KEY or TWILIO_* |
 
-## URLs
+---
 
-- n8n: https://n8n.srv1168256.hstgr.cloud
-- Apify: https://console.apify.com (STARTER $39/mo ✅)
-
-## SESSION 117 - FRONTEND SEO/AEO FORENSIC AUDIT (30/12/2025)
-
-### AEO (Answer Engine Optimization) Score: 87%
-
-| Critère | Score | Notes |
-|---------|-------|-------|
-| AI Crawler Access | 10/10 | robots.txt: GPTBot, ClaudeBot, PerplexityBot, Google-Extended ✅ |
-| llms.txt | 10/10 | 4620 bytes, comprehensive (spec llmstxt.org) ✅ |
-| FAQPage Schema | 7/10 | 12/63 pages (service pages OK, homepage missing) |
-| Freshness Signals | 9/10 | Blog titles: "2026", dates: Dec 2025 ✅ |
-| Content Structure | 8/10 | Headings, listicles, workflow diagrams ✅ |
-| Schema.org Depth | 8/10 | Organization, SoftwareApplication, Blog, Offer, Service ✅ |
-
-### SEO Technical Score: 92%
-
-| Élément | Status | Pages |
-|---------|--------|-------|
-| Meta Descriptions | ✅ | 63/63 |
-| Open Graph Tags | ✅ | 63/63 |
-| Twitter Cards | ✅ | 63/63 |
-| hreflang (FR/EN) | ✅ | 63/63 |
-| Canonical URLs | ✅ | 63/63 |
-| BreadcrumbList Schema | ✅ | Service pages |
-| Blog Schema | ✅ | BlogPosting with dates |
-| ItemList Schema | ✅ | automations.html |
-
-### FAQPage Coverage (AEO Critical) - Updated Session 117
-
-| Page Type | Has FAQPage | Count |
-|-----------|-------------|-------|
-| Service Pages (FR) | ✅ | 6/6 |
-| Service Pages (EN) | ✅ | 6/6 |
-| Pricing (FR/EN) | ✅ | 2/2 |
-| Homepage (FR/EN) | ✅ | 2/2 (ADDED Session 117) |
-| Contact (FR/EN) | ✅ | 2/2 (ADDED Session 117) |
-| About (FR/EN) | ✅ | 2/2 |
-| Blog Articles | ✅ | 7/7 |
-| Academy | ❌ N/A | noindex pages |
-
-**TOTAL FAQPage: 29/35 indexable pages (83%) - Blog articles included**
-
-### Multi-Currency (3 Markets)
-
-| Market | Currency | Status |
-|--------|----------|--------|
-| Morocco | MAD | ✅ geo-locale.min.js |
-| Europe | EUR | ✅ default |
-| International | USD | ✅ selector |
-
-### GAPS IDENTIFIED (Priority) - Updated Session 117
-
-1. ~~**P1**: Add FAQPage to homepage (FR/EN)~~ ✅ DONE
-2. ~~**P1**: Add FAQPage to contact page~~ ✅ DONE
-3. ~~**P2**: Add HowTo schema to academy/tutorial pages~~ N/A (noindex)
-4. ~~**P2**: Add FAQPage to blog articles~~ ✅ DONE (7/7)
-5. ~~**P2**: Add FAQPage to About pages~~ ✅ DONE (2/2)
-6. **P3**: Add VideoObject schema if video content added
-
-### STRENGTHS CONFIRMED
-
-- ✅ All AI crawlers explicitly allowed (robots.txt)
-- ✅ llms.txt present and comprehensive
-- ✅ Freshness signals in blog (2025-2026 dates)
-- ✅ Multi-language (FR/EN) with proper hreflang
-- ✅ Multi-currency (EUR/MAD/USD) with geo-detection
-- ✅ Lazy loading GTM/GA4 for performance
-- ✅ Critical CSS inline for FCP
-- ✅ Skip links for accessibility
-- ✅ Cookie consent banner
+**Session History:** See `docs/session-history/` for Sessions 115-132

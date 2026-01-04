@@ -52,16 +52,16 @@
     .lesson-title{font-weight:600;flex:1}
     .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
     .lesson-content{padding:1.5rem}
-    .lesson-content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
-    .lesson-content h4:first-child{margin-top:0}
+    .lesson-content h2{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
+    .lesson-content h2:first-child{margin-top:0}
     .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
     .lesson-content ul{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
     .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
     .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step-box h3{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
     .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
     .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip-box h3{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
     .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
     .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
     .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
@@ -97,7 +97,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" role="main">
     <div class="container">
       <div class="breadcrumb">
         <a href="/academie.html">Académie</a> / <a href="/academie.html#courses">Cours</a> / E-commerce
@@ -133,7 +133,7 @@
         <div class="lesson-content">
           <p>La synchronisation entre votre boutique et Klaviyo est le socle de toutes vos automations e-commerce.</p>
 
-          <h4>Données synchronisées</h4>
+          <h2>Données synchronisées</h2>
           <ul>
             <li><strong>Clients</strong> : Email, nom, historique d'achat</li>
             <li><strong>Commandes</strong> : Montant, produits, date</li>
@@ -142,7 +142,7 @@
           </ul>
 
           <div class="step-box">
-            <h5>Vérification</h5>
+            <h3>Vérification</h3>
             <p>Dans Intégrations > Shopify, vérifiez que le statut est "Connecté" et que la dernière sync date de moins de 24h.</p>
           </div>
         </div>
@@ -158,7 +158,7 @@
         <div class="lesson-content">
           <p>Ne perdez plus de ventes à cause de ruptures de stock. Recevez des alertes avant qu'il ne soit trop tard.</p>
 
-          <h4>Configuration</h4>
+          <h2>Configuration</h2>
           <ul>
             <li><strong>Seuil d'alerte</strong> : Définissez le stock minimum (ex: 5 unités)</li>
             <li><strong>Notification</strong> : Email ou Slack quand le seuil est atteint</li>
@@ -166,7 +166,7 @@
           </ul>
 
           <div class="step-box">
-            <h5>Email "Retour en stock"</h5>
+            <h3>Email "Retour en stock"</h3>
             <p>Les clients ayant visité un produit en rupture reçoivent automatiquement un email quand il revient. Taux de conversion moyen : 20-30%.</p>
           </div>
         </div>
@@ -182,14 +182,14 @@
         <div class="lesson-content">
           <p>Au-delà des paniers abandonnés, ciblez aussi les visiteurs qui ont regardé des produits sans ajouter au panier.</p>
 
-          <h4>Séquence type</h4>
+          <h2>Séquence type</h2>
           <ul>
             <li><strong>Email 1 (2h)</strong> : "Ce produit vous intéresse ?" avec image et lien</li>
             <li><strong>Email 2 (24h)</strong> : Avis clients sur le produit consulté</li>
           </ul>
 
           <div class="tip-box">
-            <h5>Conseil</h5>
+            <h3>Conseil</h3>
             <p>Ne déclenchez cette séquence que pour les visiteurs ayant passé plus de 30 secondes sur la page produit. Évitez de spammer les curieux passagers.</p>
           </div>
         </div>
@@ -203,7 +203,7 @@
           <span class="lesson-duration">10 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Types de recommandations</h4>
+          <h2>Types de recommandations</h2>
           <ul>
             <li><strong>Cross-sell</strong> : Produits complémentaires (coque → film écran)</li>
             <li><strong>Upsell</strong> : Produit supérieur (iPhone 128Go → 256Go)</li>
@@ -212,7 +212,7 @@
           </ul>
 
           <div class="step-box">
-            <h5>Intégration dans les emails</h5>
+            <h3>Intégration dans les emails</h3>
             <p>Utilisez les blocs dynamiques Klaviyo pour insérer des recommandations personnalisées basées sur l'historique de chaque client.</p>
           </div>
         </div>
@@ -226,7 +226,7 @@
           <span class="lesson-duration">10 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Segments clés</h4>
+          <h2>Segments clés</h2>
           <ul>
             <li><strong>Premier achat</strong> : Nouveaux clients à fidéliser</li>
             <li><strong>Récurrents</strong> : 2+ commandes, vos meilleurs clients</li>
@@ -247,7 +247,7 @@
           <span class="lesson-duration">8 min</span>
         </div>
         <div class="lesson-content">
-          <h4>KPIs à suivre</h4>
+          <h2>KPIs à suivre</h2>
           <ul>
             <li><strong>Revenu attribué</strong> : CA généré par les automations</li>
             <li><strong>Taux de récupération panier</strong> : Objectif 10-15%</li>
@@ -257,7 +257,7 @@
           </ul>
 
           <div class="tip-box">
-            <h5>Focus LTV</h5>
+            <h3>Focus LTV</h3>
             <p>Un client fidèle vaut 5-10x un nouveau client. Investissez dans la fidélisation autant que dans l'acquisition.</p>
           </div>
         </div>

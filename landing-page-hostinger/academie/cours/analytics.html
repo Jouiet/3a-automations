@@ -52,16 +52,16 @@
     .lesson-title{font-weight:600;flex:1}
     .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
     .lesson-content{padding:1.5rem}
-    .lesson-content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
-    .lesson-content h4:first-child{margin-top:0}
+    .lesson-content h2{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
+    .lesson-content h2:first-child{margin-top:0}
     .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
     .lesson-content ul{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
     .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
     .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step-box h3{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
     .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
     .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip-box h3{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
     .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
     .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
     .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
@@ -97,7 +97,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" role="main">
     <div class="container">
       <div class="breadcrumb">
         <a href="/academie.html">Académie</a> / <a href="/academie.html#courses">Cours</a> / Analytics
@@ -131,10 +131,10 @@
           <span class="lesson-duration">8 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Page d'accueil Analytics</h4>
+          <h2>Page d'accueil Analytics</h2>
           <p>Le tableau de bord affiche un résumé des 7 derniers jours par défaut. Vous pouvez ajuster la période en haut à droite.</p>
 
-          <h4>Widgets principaux</h4>
+          <h2>Widgets principaux</h2>
           <ul>
             <li><strong>Revenus générés</strong> : Chiffre d'affaires attribué aux automations</li>
             <li><strong>Emails envoyés</strong> : Volume total avec taux d'ouverture moyen</li>
@@ -143,7 +143,7 @@
           </ul>
 
           <div class="step-box">
-            <h5>Navigation</h5>
+            <h3>Navigation</h3>
             <p>Cliquez sur n'importe quel widget pour accéder au rapport détaillé correspondant.</p>
           </div>
         </div>
@@ -157,7 +157,7 @@
           <span class="lesson-duration">10 min</span>
         </div>
         <div class="lesson-content">
-          <h4>KPIs à surveiller</h4>
+          <h2>KPIs à surveiller</h2>
           <ul>
             <li><strong>Taux d'ouverture</strong> : % d'emails ouverts. Objectif : > 20%</li>
             <li><strong>Taux de clic (CTR)</strong> : % de clics sur liens. Objectif : > 2%</li>
@@ -167,7 +167,7 @@
           </ul>
 
           <div class="tip-box">
-            <h5>Attention aux ouvertures</h5>
+            <h3>Attention aux ouvertures</h3>
             <p>Depuis iOS 15, les taux d'ouverture sont moins fiables (Apple Mail Privacy). Privilégiez le CTR et le revenu comme indicateurs principaux.</p>
           </div>
         </div>
@@ -181,7 +181,7 @@
           <span class="lesson-duration">10 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Rapport par automation</h4>
+          <h2>Rapport par automation</h2>
           <p>Dans Analytics > Automations, comparez la performance de chaque flux :</p>
           <ul>
             <li><strong>Bienvenue</strong> : Objectif 30%+ de conversion en acheteur</li>
@@ -190,7 +190,7 @@
           </ul>
 
           <div class="step-box">
-            <h5>Identifier les problèmes</h5>
+            <h3>Identifier les problèmes</h3>
             <p>Si le taux d'ouverture est bon mais le CTR faible, le contenu n'est pas convaincant. Si l'ouverture est faible, l'objet doit être amélioré.</p>
           </div>
         </div>
@@ -204,7 +204,7 @@
           <span class="lesson-duration">8 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Entonnoir de conversion</h4>
+          <h2>Entonnoir de conversion</h2>
           <p>Le rapport Leads affiche le parcours complet :</p>
           <ul>
             <li><strong>Sources</strong> : D'où viennent vos leads (LinkedIn, Google Maps, formulaires)</li>
@@ -225,7 +225,7 @@
           <span class="lesson-duration">9 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Options d'export</h4>
+          <h2>Options d'export</h2>
           <ul>
             <li><strong>PDF</strong> : Rapport visuel pour présentation</li>
             <li><strong>CSV</strong> : Données brutes pour analyse avancée</li>
@@ -233,12 +233,12 @@
           </ul>
 
           <div class="step-box">
-            <h5>Configurer le rapport automatique</h5>
+            <h3>Configurer le rapport automatique</h3>
             <p>Dans Paramètres > Rapports, activez l'envoi hebdomadaire. Ajoutez les destinataires (vous, votre équipe).</p>
           </div>
 
           <div class="tip-box">
-            <h5>Conseil</h5>
+            <h3>Conseil</h3>
             <p>Partagez les résultats avec votre équipe. La transparence sur les données motive tout le monde à améliorer les performances.</p>
           </div>
         </div>

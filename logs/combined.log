@@ -84,3 +84,27 @@
 2026-01-03T10:45:14.343Z [[32minfo[39m]: Handling call_tool request
 2026-01-03T10:45:14.347Z [[32minfo[39m]: Executing gemini_list_models tool
 2026-01-03T10:45:14.348Z [[32minfo[39m]: Listing available models
+2026-01-03T19:45:29.569Z [[32minfo[39m]: Starting Gemini MCP Server via CLI...
+2026-01-03T19:45:29.572Z [[32minfo[39m]: Gemini service initialized
+2026-01-03T19:45:29.579Z [[32minfo[39m]: Tools initialized
+2026-01-03T19:45:29.579Z [[32minfo[39m]: Gemini MCP Server initialized
+2026-01-03T19:45:48.528Z [[32minfo[39m]: Gemini API key validation successful
+2026-01-03T19:45:48.529Z [[32minfo[39m]: Starting Gemini MCP Server...
+2026-01-03T19:45:48.529Z [[32minfo[39m]: Gemini MCP Server started successfully
+2026-01-03T19:45:48.540Z [[32minfo[39m]: Handling list_tools request
+2026-01-03T21:18:13.495Z [[32minfo[39m]: Starting Gemini MCP Server via CLI...
+2026-01-03T21:18:13.499Z [[32minfo[39m]: Gemini service initialized
+2026-01-03T21:18:13.506Z [[32minfo[39m]: Tools initialized
+2026-01-03T21:18:13.508Z [[32minfo[39m]: Gemini MCP Server initialized
+2026-01-03T21:18:30.050Z [[32minfo[39m]: Gemini API key validation successful
+2026-01-03T21:18:30.050Z [[32minfo[39m]: Starting Gemini MCP Server...
+2026-01-03T21:18:30.051Z [[32minfo[39m]: Gemini MCP Server started successfully
+2026-01-03T21:18:30.063Z [[32minfo[39m]: Handling list_tools request
+2026-01-04T09:43:41.862Z [[32minfo[39m]: Starting Gemini MCP Server via CLI...
+2026-01-04T09:43:41.872Z [[32minfo[39m]: Gemini service initialized
+2026-01-04T09:43:41.879Z [[32minfo[39m]: Tools initialized
+2026-01-04T09:43:41.880Z [[32minfo[39m]: Gemini MCP Server initialized
+2026-01-04T09:44:00.325Z [[32minfo[39m]: Gemini API key validation successful
+2026-01-04T09:44:00.326Z [[32minfo[39m]: Starting Gemini MCP Server...
+2026-01-04T09:44:00.326Z [[32minfo[39m]: Gemini MCP Server started successfully
+2026-01-04T09:44:00.337Z [[32minfo[39m]: Handling list_tools request

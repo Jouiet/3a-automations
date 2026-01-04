@@ -55,15 +55,15 @@
     .lesson-title{font-weight:600;flex:1}
     .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
     .lesson-content{padding:1.5rem}
-    .lesson-content h4{font-size:1rem;font-weight:600;margin-bottom:1rem;color:var(--text-light)}
+    .lesson-content h2{font-size:1rem;font-weight:600;margin-bottom:1rem;color:var(--text-light)}
     .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
     .lesson-content ul{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
     .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
     .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step-box h3{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
     .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
     .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip-box h3{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
     .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
     .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
     .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
@@ -103,7 +103,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" role="main">
     <div class="container">
       <div class="breadcrumb">
         <a href="/academie.html">Académie</a> / <a href="/academie.html#courses">Cours</a> / Démarrer
@@ -140,17 +140,17 @@
           <p>Après votre souscription à un pack 3A Automation, vous recevez un email avec vos identifiants de connexion.</p>
 
           <div class="step-box">
-            <h5>Étape 1 : Connexion</h5>
+            <h3>Étape 1 : Connexion</h3>
             <p>Rendez-vous sur dashboard.3a-automation.com et entrez votre email et mot de passe temporaire.</p>
           </div>
 
           <div class="step-box">
-            <h5>Étape 2 : Changez votre mot de passe</h5>
+            <h3>Étape 2 : Changez votre mot de passe</h3>
             <p>Pour des raisons de sécurité, modifiez immédiatement votre mot de passe dans les paramètres du compte.</p>
           </div>
 
           <div class="tip-box">
-            <h5>Conseil</h5>
+            <h3>Conseil</h3>
             <p>Utilisez un mot de passe fort avec au moins 12 caractères, incluant lettres, chiffres et symboles.</p>
           </div>
         </div>
@@ -167,22 +167,22 @@
           <p>Klaviyo est votre plateforme d'email marketing. La connexion permet de synchroniser vos contacts et d'envoyer des emails automatisés.</p>
 
           <div class="step-box">
-            <h5>Étape 1 : Obtenir votre clé API</h5>
+            <h3>Étape 1 : Obtenir votre clé API</h3>
             <p>Dans Klaviyo, allez dans Account > Settings > API Keys. Créez une nouvelle clé privée avec les permissions "Full Access".</p>
           </div>
 
           <div class="step-box">
-            <h5>Étape 2 : Ajouter dans 3A Automation</h5>
+            <h3>Étape 2 : Ajouter dans 3A Automation</h3>
             <p>Dans votre tableau de bord 3A, allez dans Intégrations > Klaviyo. Collez votre clé API et cliquez sur "Connecter".</p>
           </div>
 
           <div class="step-box">
-            <h5>Étape 3 : Vérifier la synchronisation</h5>
+            <h3>Étape 3 : Vérifier la synchronisation</h3>
             <p>Un message de confirmation apparaît. Vos listes Klaviyo sont maintenant visibles dans l'interface.</p>
           </div>
 
           <div class="tip-box">
-            <h5>Conseil</h5>
+            <h3>Conseil</h3>
             <p>Ne partagez jamais votre clé API. Elle donne accès complet à votre compte Klaviyo.</p>
           </div>
         </div>
@@ -199,17 +199,17 @@
           <p>La connexion Shopify permet de synchroniser vos produits, commandes et clients pour des automations e-commerce.</p>
 
           <div class="step-box">
-            <h5>Étape 1 : Installer l'app</h5>
+            <h3>Étape 1 : Installer l'app</h3>
             <p>Dans votre admin Shopify, allez dans Apps. Recherchez "3A Automation" ou utilisez le lien d'installation fourni dans votre email de bienvenue.</p>
           </div>
 
           <div class="step-box">
-            <h5>Étape 2 : Autoriser l'accès</h5>
+            <h3>Étape 2 : Autoriser l'accès</h3>
             <p>Shopify affiche les permissions demandées (produits, commandes, clients). Cliquez sur "Installer l'app".</p>
           </div>
 
           <div class="step-box">
-            <h5>Étape 3 : Synchronisation initiale</h5>
+            <h3>Étape 3 : Synchronisation initiale</h3>
             <p>La première synchronisation peut prendre quelques minutes selon la taille de votre catalogue.</p>
           </div>
         </div>
@@ -223,10 +223,10 @@
           <span class="lesson-duration">9 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Vue d'ensemble</h4>
+          <h2>Vue d'ensemble</h2>
           <p>Le tableau de bord affiche vos métriques clés : emails envoyés, taux d'ouverture, revenus générés.</p>
 
-          <h4>Sections principales</h4>
+          <h2>Sections principales</h2>
           <ul>
             <li><strong>Accueil</strong> : Résumé des performances des 7 derniers jours</li>
             <li><strong>Automations</strong> : Liste de vos flux automatisés actifs</li>
@@ -235,7 +235,7 @@
             <li><strong>Intégrations</strong> : Connexion de vos outils externes</li>
           </ul>
 
-          <h4>Prochaines étapes</h4>
+          <h2>Prochaines étapes</h2>
           <p>Maintenant que tout est connecté, explorez les autres cours pour :</p>
           <ul>
             <li>Créer votre première séquence de bienvenue</li>

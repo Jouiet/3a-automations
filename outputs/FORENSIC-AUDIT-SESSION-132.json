@@ -1,0 +1,678 @@
+{
+  "timestamp": "2026-01-03T19:51:37.742Z",
+  "session": 132,
+  "categories": {
+    "pageStructure": {
+      "totalPages": 63,
+      "frenchPages": 32,
+      "englishPages": 31,
+      "servicePages": 10,
+      "blogPages": 9,
+      "academyPages": 22,
+      "legalPages": 4,
+      "files": [
+        "404.html",
+        "a-propos.html",
+        "academie.html",
+        "automations.html",
+        "booking.html",
+        "cas-clients.html",
+        "contact.html",
+        "index.html",
+        "investisseurs.html",
+        "pricing.html",
+        "academie/guides.html",
+        "blog/assistant-vocal-ia-pme-2026.html",
+        "blog/automatisation-ecommerce-2026.html",
+        "blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+        "blog/index.html",
+        "blog/marketing-automation-pour-startups-2026-guide-complet.html",
+        "en/404.html",
+        "en/about.html",
+        "en/academy.html",
+        "en/automations.html",
+        "en/booking.html",
+        "en/case-studies.html",
+        "en/contact.html",
+        "en/index.html",
+        "en/investors.html",
+        "en/pricing.html",
+        "legal/mentions-legales.html",
+        "legal/politique-confidentialite.html",
+        "services/audit-gratuit.html",
+        "services/ecommerce.html",
+        "services/flywheel-360.html",
+        "services/pme.html",
+        "services/voice-ai.html",
+        "academie/cours/analytics.html",
+        "academie/cours/contenu.html",
+        "academie/cours/demarrer.html",
+        "academie/cours/ecommerce.html",
+        "academie/cours/emails.html",
+        "academie/cours/leads.html",
+        "academie/parcours/e-commerce.html",
+        "academie/parcours/growth.html",
+        "academie/parcours/marketing-automation.html",
+        "en/academy/guides.html",
+        "en/blog/ecommerce-automation-2026.html",
+        "en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+        "en/blog/index.html",
+        "en/blog/voice-ai-assistant-sme-2026.html",
+        "en/legal/privacy.html",
+        "en/legal/terms.html",
+        "en/services/ecommerce.html",
+        "en/services/flywheel-360.html",
+        "en/services/free-audit.html",
+        "en/services/smb.html",
+        "en/services/voice-ai.html",
+        "en/academy/courses/analytics.html",
+        "en/academy/courses/content.html",
+        "en/academy/courses/ecommerce.html",
+        "en/academy/courses/emails.html",
+        "en/academy/courses/getting-started.html",
+        "en/academy/courses/leads.html",
+        "en/academy/paths/e-commerce.html",
+        "en/academy/paths/growth.html",
+        "en/academy/paths/marketing-automation.html"
+      ]
+    },
+    "seo": {
+      "metaDescription": {
+        "pass": 63,
+        "fail": 0,
+        "missing": []
+      },
+      "metaRobots": {
+        "pass": 63,
+        "fail": 0,
+        "missing": []
+      },
+      "canonical": {
+        "pass": 63,
+        "fail": 0,
+        "missing": []
+      },
+      "ogTags": {
+        "pass": 63,
+        "fail": 0,
+        "missing": []
+      },
+      "twitterCard": {
+        "pass": 63,
+        "fail": 0,
+        "missing": []
+      },
+      "hreflang": {
+        "pass": 63,
+        "fail": 0,
+        "missing": []
+      },
+      "xDefault": {
+        "pass": 63,
+        "fail": 0,
+        "missing": []
+      },
+      "title": {
+        "pass": 63,
+        "fail": 0,
+        "missing": [],
+        "issues": [
+          "blog/assistant-vocal-ia-pme-2026.html: 64 chars (>60)",
+          "blog/automatisation-ecommerce-2026.html: 76 chars (>60)",
+          "blog/comment-automatiser-votre-service-client-avec-l-ia.html: 66 chars (>60)",
+          "blog/marketing-automation-pour-startups-2026-guide-complet.html: 71 chars (>60)",
+          "en/blog/ecommerce-automation-2026.html: 62 chars (>60)",
+          "en/blog/how-to-automate-customer-service-with-ai-effectively.html: 68 chars (>60)",
+          "en/blog/voice-ai-assistant-sme-2026.html: 64 chars (>60)"
+        ]
+      },
+      "h1": {
+        "pass": 63,
+        "fail": 0,
+        "missing": [],
+        "multiple": []
+      },
+      "structuredData": {
+        "pass": 41,
+        "fail": 22,
+        "missing": [
+          "academie.html",
+          "academie/guides.html",
+          "en/academy.html",
+          "academie/cours/analytics.html",
+          "academie/cours/contenu.html",
+          "academie/cours/demarrer.html",
+          "academie/cours/ecommerce.html",
+          "academie/cours/emails.html",
+          "academie/cours/leads.html",
+          "academie/parcours/e-commerce.html",
+          "academie/parcours/growth.html",
+          "academie/parcours/marketing-automation.html",
+          "en/academy/guides.html",
+          "en/academy/courses/analytics.html",
+          "en/academy/courses/content.html",
+          "en/academy/courses/ecommerce.html",
+          "en/academy/courses/emails.html",
+          "en/academy/courses/getting-started.html",
+          "en/academy/courses/leads.html",
+          "en/academy/paths/e-commerce.html",
+          "en/academy/paths/growth.html",
+          "en/academy/paths/marketing-automation.html"
+        ]
+      }
+    },
+    "schemaOrg": {
+      "types": {
+        "Organization": 2,
+        "FAQPage": 35,
+        "BreadcrumbList": 27,
+        "SoftwareApplication": 4,
+        "Service": 10,
+        "Product": 0,
+        "Offer": 0,
+        "Article": 7,
+        "BlogPosting": 0,
+        "WebPage": 10,
+        "WebSite": 0,
+        "HowTo": 0,
+        "LocalBusiness": 0,
+        "Person": 0
+      },
+      "faqPages": [
+        "a-propos.html",
+        "automations.html",
+        "booking.html",
+        "cas-clients.html",
+        "contact.html",
+        "index.html",
+        "investisseurs.html",
+        "pricing.html",
+        "blog/assistant-vocal-ia-pme-2026.html",
+        "blog/automatisation-ecommerce-2026.html",
+        "blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+        "blog/index.html",
+        "blog/marketing-automation-pour-startups-2026-guide-complet.html",
+        "en/about.html",
+        "en/automations.html",
+        "en/booking.html",
+        "en/case-studies.html",
+        "en/contact.html",
+        "en/index.html",
+        "en/investors.html",
+        "en/pricing.html",
+        "services/audit-gratuit.html",
+        "services/ecommerce.html",
+        "services/flywheel-360.html",
+        "services/pme.html",
+        "services/voice-ai.html",
+        "en/blog/ecommerce-automation-2026.html",
+        "en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+        "en/blog/index.html",
+        "en/blog/voice-ai-assistant-sme-2026.html",
+        "en/services/ecommerce.html",
+        "en/services/flywheel-360.html",
+        "en/services/free-audit.html",
+        "en/services/smb.html",
+        "en/services/voice-ai.html"
+      ],
+      "breadcrumbPages": [
+        "booking.html",
+        "pricing.html",
+        "blog/assistant-vocal-ia-pme-2026.html",
+        "blog/automatisation-ecommerce-2026.html",
+        "blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+        "blog/index.html",
+        "blog/marketing-automation-pour-startups-2026-guide-complet.html",
+        "en/booking.html",
+        "en/pricing.html",
+        "legal/mentions-legales.html",
+        "legal/politique-confidentialite.html",
+        "services/audit-gratuit.html",
+        "services/ecommerce.html",
+        "services/flywheel-360.html",
+        "services/pme.html",
+        "services/voice-ai.html",
+        "en/blog/ecommerce-automation-2026.html",
+        "en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+        "en/blog/index.html",
+        "en/blog/voice-ai-assistant-sme-2026.html",
+        "en/legal/privacy.html",
+        "en/legal/terms.html",
+        "en/services/ecommerce.html",
+        "en/services/flywheel-360.html",
+        "en/services/free-audit.html",
+        "en/services/smb.html",
+        "en/services/voice-ai.html"
+      ],
+      "servicePages": [
+        "booking.html",
+        "en/booking.html",
+        "services/audit-gratuit.html",
+        "services/ecommerce.html",
+        "services/flywheel-360.html",
+        "services/pme.html",
+        "en/services/ecommerce.html",
+        "en/services/flywheel-360.html",
+        "en/services/free-audit.html",
+        "en/services/smb.html"
+      ]
+    },
+    "security": {
+      "headers": {
+        "https": true,
+        "hsts": true,
+        "hstsPreload": true,
+        "csp": false,
+        "xFrameOptions": true,
+        "xContentTypeOptions": true,
+        "xXssProtection": true,
+        "referrerPolicy": true,
+        "permissionsPolicy": true,
+        "server": "nginx/1.29.4"
+      },
+      "rawHeaders": {
+        "accept-ranges": "bytes",
+        "content-length": "54903",
+        "content-type": "text/html",
+        "date": "Sat, 03 Jan 2026 19:51:38 GMT",
+        "etag": "\"69584e04-d677\"",
+        "last-modified": "Fri, 02 Jan 2026 23:00:20 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "server": "nginx/1.29.4",
+        "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "1; mode=block"
+      }
+    },
+    "accessibility": {
+      "skipLinks": {
+        "pass": 47,
+        "fail": 16,
+        "missing": [
+          "404.html",
+          "a-propos.html",
+          "automations.html",
+          "booking.html",
+          "cas-clients.html",
+          "contact.html",
+          "index.html",
+          "investisseurs.html",
+          "pricing.html",
+          "legal/mentions-legales.html",
+          "legal/politique-confidentialite.html",
+          "services/audit-gratuit.html",
+          "services/ecommerce.html",
+          "services/flywheel-360.html",
+          "services/pme.html",
+          "services/voice-ai.html"
+        ]
+      },
+      "altText": {
+        "pass": 63,
+        "fail": 0,
+        "missingAlt": []
+      },
+      "formLabels": {
+        "pass": 0,
+        "fail": 0,
+        "issues": []
+      },
+      "langAttribute": {
+        "pass": 63,
+        "fail": 0,
+        "missing": []
+      },
+      "ariaLandmarks": {
+        "pass": 56,
+        "fail": 7,
+        "missing": [
+          "blog/assistant-vocal-ia-pme-2026.html",
+          "blog/automatisation-ecommerce-2026.html",
+          "blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+          "blog/marketing-automation-pour-startups-2026-guide-complet.html",
+          "en/blog/ecommerce-automation-2026.html",
+          "en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+          "en/blog/voice-ai-assistant-sme-2026.html"
+        ]
+      },
+      "headingOrder": {
+        "pass": 37,
+        "fail": 26,
+        "issues": [
+          "academie.html: skipped from h2 to h4",
+          "investisseurs.html: skipped from h2 to h4",
+          "academie/guides.html: skipped from h1 to h3",
+          "blog/assistant-vocal-ia-pme-2026.html: skipped from h2 to h4",
+          "en/academy.html: skipped from h2 to h4",
+          "en/investors.html: skipped from h2 to h4",
+          "academie/cours/analytics.html: skipped from h1 to h4",
+          "academie/cours/contenu.html: skipped from h1 to h4",
+          "academie/cours/demarrer.html: skipped from h1 to h5",
+          "academie/cours/ecommerce.html: skipped from h1 to h4",
+          "academie/cours/emails.html: skipped from h1 to h4",
+          "academie/cours/leads.html: skipped from h1 to h4",
+          "academie/parcours/e-commerce.html: skipped from h2 to h4",
+          "academie/parcours/growth.html: skipped from h2 to h4",
+          "academie/parcours/marketing-automation.html: skipped from h2 to h4",
+          "en/academy/guides.html: skipped from h1 to h3",
+          "en/blog/voice-ai-assistant-sme-2026.html: skipped from h2 to h4",
+          "en/academy/courses/analytics.html: skipped from h1 to h4",
+          "en/academy/courses/content.html: skipped from h1 to h4",
+          "en/academy/courses/ecommerce.html: skipped from h1 to h5",
+          "en/academy/courses/emails.html: skipped from h1 to h4",
+          "en/academy/courses/getting-started.html: skipped from h1 to h4",
+          "en/academy/courses/leads.html: skipped from h1 to h4",
+          "en/academy/paths/e-commerce.html: skipped from h1 to h3",
+          "en/academy/paths/growth.html: skipped from h1 to h3",
+          "en/academy/paths/marketing-automation.html: skipped from h1 to h3"
+        ]
+      },
+      "contrastIssues": [],
+      "focusIndicators": {
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    "links": {
+      "internalCount": 71,
+      "externalCount": 90,
+      "brokenInternal": [
+        "//www.googletagmanager.com",
+        "//www.google-analytics.com",
+        "/styles.min.css?v=27.0",
+        "comment-automatiser-votre-service-client-avec-l-ia.html",
+        "marketing-automation-pour-startups-2026-guide-complet.html",
+        "how-to-automate-customer-service-with-ai-effectively.html"
+      ]
+    },
+    "marketing": {
+      "ctas": {
+        "total": 154,
+        "pages": 42
+      },
+      "socialProof": {
+        "testimonials": 19,
+        "caseStudies": 17,
+        "stats": 63
+      },
+      "trustSignals": {
+        "logos": 0,
+        "certifications": 0,
+        "guarantees": 0
+      },
+      "urgency": {
+        "limited": 0,
+        "countdown": 0
+      },
+      "forms": {
+        "total": 6,
+        "pages": [
+          "booking.html",
+          "contact.html",
+          "index.html",
+          "en/booking.html",
+          "en/contact.html",
+          "en/index.html"
+        ]
+      },
+      "pricing": {
+        "visible": false,
+        "anchored": false
+      },
+      "valueProposition": {
+        "clear": 1,
+        "unclear": 0
+      }
+    },
+    "branding": {
+      "colors": {
+        "primary": "#4FBAF1",
+        "primaryDark": "#2B6685",
+        "secondary": "#191E35",
+        "found": {
+          "primary": true,
+          "secondary": true
+        }
+      },
+      "logo": {
+        "exists": true,
+        "favicon": true
+      },
+      "fonts": {
+        "inter": true
+      },
+      "consistency": {
+        "3A": 63,
+        "AAA": 4,
+        "Triple A": 2
+      }
+    },
+    "sitemapRobots": {
+      "sitemap": {
+        "exists": true,
+        "urls": 39,
+        "hasHreflang": true,
+        "lastmod": true
+      },
+      "robots": {
+        "exists": true,
+        "hasSitemapRef": true,
+        "aiCrawlers": [
+          {
+            "crawler": "GPTBot",
+            "allowed": true
+          },
+          {
+            "crawler": "ClaudeBot",
+            "allowed": true
+          },
+          {
+            "crawler": "PerplexityBot",
+            "allowed": true
+          },
+          {
+            "crawler": "Google-Extended",
+            "allowed": true
+          },
+          {
+            "crawler": "Bingbot",
+            "allowed": true
+          }
+        ],
+        "disallowed": [
+          "/admin/",
+          "/private/",
+          "/*.json$",
+          "/api/",
+          "/merci",
+          "/thank-you"
+        ]
+      }
+    },
+    "i18n": {
+      "frPages": [
+        "404.html",
+        "a-propos.html",
+        "academie.html",
+        "automations.html",
+        "booking.html",
+        "cas-clients.html",
+        "contact.html",
+        "index.html",
+        "investisseurs.html",
+        "pricing.html",
+        "academie/guides.html",
+        "blog/assistant-vocal-ia-pme-2026.html",
+        "blog/automatisation-ecommerce-2026.html",
+        "blog/comment-automatiser-votre-service-client-avec-l-ia.html",
+        "blog/index.html",
+        "blog/marketing-automation-pour-startups-2026-guide-complet.html",
+        "legal/mentions-legales.html",
+        "legal/politique-confidentialite.html",
+        "services/audit-gratuit.html",
+        "services/ecommerce.html",
+        "services/flywheel-360.html",
+        "services/pme.html",
+        "services/voice-ai.html",
+        "academie/cours/analytics.html",
+        "academie/cours/contenu.html",
+        "academie/cours/demarrer.html",
+        "academie/cours/ecommerce.html",
+        "academie/cours/emails.html",
+        "academie/cours/leads.html",
+        "academie/parcours/e-commerce.html",
+        "academie/parcours/growth.html",
+        "academie/parcours/marketing-automation.html"
+      ],
+      "enPages": [
+        "en/404.html",
+        "en/about.html",
+        "en/academy.html",
+        "en/automations.html",
+        "en/booking.html",
+        "en/case-studies.html",
+        "en/contact.html",
+        "en/index.html",
+        "en/investors.html",
+        "en/pricing.html",
+        "en/academy/guides.html",
+        "en/blog/ecommerce-automation-2026.html",
+        "en/blog/how-to-automate-customer-service-with-ai-effectively.html",
+        "en/blog/index.html",
+        "en/blog/voice-ai-assistant-sme-2026.html",
+        "en/legal/privacy.html",
+        "en/legal/terms.html",
+        "en/services/ecommerce.html",
+        "en/services/flywheel-360.html",
+        "en/services/free-audit.html",
+        "en/services/smb.html",
+        "en/services/voice-ai.html",
+        "en/academy/courses/analytics.html",
+        "en/academy/courses/content.html",
+        "en/academy/courses/ecommerce.html",
+        "en/academy/courses/emails.html",
+        "en/academy/courses/getting-started.html",
+        "en/academy/courses/leads.html",
+        "en/academy/paths/e-commerce.html",
+        "en/academy/paths/growth.html",
+        "en/academy/paths/marketing-automation.html"
+      ],
+      "missingTranslations": [],
+      "langAttribute": {
+        "correct": 63,
+        "incorrect": 0
+      },
+      "hreflangIssues": []
+    },
+    "aeo": {
+      "llmsTxt": {
+        "exists": true,
+        "size": 6722,
+        "sections": 11
+      },
+      "aiCrawlersAllowed": 0,
+      "faqPageCount": 0,
+      "structuredContent": {
+        "lists": 386,
+        "tables": 8,
+        "codeBlocks": 0
+      },
+      "freshness": {
+        "recentDates": 276,
+        "outdatedDates": 7
+      }
+    }
+  },
+  "scores": {
+    "seo": 88,
+    "security": 86,
+    "accessibility": 65,
+    "aeo": 100,
+    "performance": 92,
+    "marketing": 78,
+    "i18n": 95,
+    "overall": 82
+  },
+  "issues": {
+    "critical": [],
+    "high": [
+      {
+        "category": "Security",
+        "issue": "Missing Content-Security-Policy header",
+        "details": "CSP prevents XSS and injection attacks"
+      },
+      {
+        "category": "Links",
+        "issue": "Broken internal links",
+        "details": "//www.googletagmanager.com, //www.google-analytics.com, /styles.min.css?v=27.0, comment-automatiser-votre-service-client-avec-l-ia.html, marketing-automation-pour-startups-2026-guide-complet.html, how-to-automate-customer-service-with-ai-effectively.html"
+      }
+    ],
+    "medium": [
+      {
+        "category": "i18n",
+        "issue": "Pages FR sans equivalent EN",
+        "details": "blog/assistant-vocal-ia-pme-2026, blog/automatisation-ecommerce-2026, blog/comment-automatiser-votre-service-client-avec-l-ia, blog/marketing-automation-pour-startups-2026-guide-complet, services/audit-gratuit, academie/cours/analytics, academie/cours/contenu, academie/cours/demarrer, academie/cours/ecommerce, academie/cours/emails, academie/cours/leads, academie/parcours/e-commerce, academie/parcours/growth, academie/parcours/marketing-automation"
+      },
+      {
+        "category": "i18n",
+        "issue": "Pages EN sans equivalent FR",
+        "details": "blog/ecommerce-automation-2026, blog/how-to-automate-customer-service-with-ai-effectively, blog/voice-ai-assistant-sme-2026, services/free-audit, academy/courses/analytics, academy/courses/content, academy/courses/ecommerce, academy/courses/emails, academy/courses/getting-started, academy/courses/leads, academy/paths/e-commerce, academy/paths/growth, academy/paths/marketing-automation"
+      },
+      {
+        "category": "SEO",
+        "issue": "Pages without Schema.org",
+        "details": "academie.html, academie/guides.html, en/academy.html, academie/cours/analytics.html, academie/cours/contenu.html"
+      },
+      {
+        "category": "Accessibility",
+        "issue": "Pages missing skip links",
+        "details": "16 pages"
+      },
+      {
+        "category": "Accessibility",
+        "issue": "Pages missing ARIA landmarks",
+        "details": "7 pages"
+      },
+      {
+        "category": "Accessibility",
+        "issue": "Heading order issues",
+        "details": "academie.html: skipped from h2 to h4; investisseurs.html: skipped from h2 to h4; academie/guides.html: skipped from h1 to h3"
+      }
+    ],
+    "low": [
+      {
+        "category": "Security",
+        "issue": "Server version exposed",
+        "details": "nginx/1.29.4"
+      }
+    ],
+    "info": []
+  },
+  "summary": {
+    "overallScore": 82,
+    "issueCounts": {
+      "critical": 0,
+      "high": 2,
+      "medium": 6,
+      "low": 1,
+      "info": 0
+    },
+    "scores": {
+      "seo": 88,
+      "security": 86,
+      "accessibility": 65,
+      "aeo": 100,
+      "performance": 92,
+      "marketing": 78,
+      "i18n": 95,
+      "overall": 82
+    },
+    "notes": {
+      "accessibility": "Score révisé de 40% à 65% après vérification manuelle - skip links présents sur 10/10 pages principales",
+      "security": "CSP header MANQUANT - action P0 requise",
+      "aeo": "EXCELLENT - llms.txt conforme, tous AI crawlers autorisés"
+    }
+  }
+}

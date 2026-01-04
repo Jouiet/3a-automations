@@ -53,16 +53,16 @@
     .lesson-title{font-weight:600;flex:1}
     .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
     .lesson-content{padding:1.5rem}
-    .lesson-content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
-    .lesson-content h4:first-child{margin-top:0}
+    .lesson-content h2{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
+    .lesson-content h2:first-child{margin-top:0}
     .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
     .lesson-content ul,.lesson-content ol{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
     .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
     .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
+    .step-box h3{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
     .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
     .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
+    .tip-box h3{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
     .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
     .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
     .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
@@ -101,7 +101,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" role="main">
     <div class="container">
       <div class="breadcrumb">
         <a href="/academie.html">Académie</a> / <a href="/academie.html#courses">Cours</a> / Emails
@@ -135,7 +135,7 @@
           <span class="lesson-duration">10 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Les 5 éléments clés</h4>
+          <h2>Les 5 éléments clés</h2>
           <ul>
             <li><strong>Objet</strong> : Court (40-50 caractères), crée curiosité ou urgence</li>
             <li><strong>Préheader</strong> : Complète l'objet, visible dans l'aperçu</li>
@@ -145,7 +145,7 @@
           </ul>
 
           <div class="tip-box">
-            <h5>Règle d'or</h5>
+            <h3>Règle d'or</h3>
             <p>Un email = un objectif. Ne demandez pas plusieurs actions dans le même email.</p>
           </div>
         </div>
@@ -161,7 +161,7 @@
         <div class="lesson-content">
           <p>C'est la séquence la plus importante : les nouveaux inscrits sont au pic d'intérêt.</p>
 
-          <h4>Structure recommandée (5 emails)</h4>
+          <h2>Structure recommandée (5 emails)</h2>
           <ol>
             <li><strong>Email 1 (immédiat)</strong> : Bienvenue + livraison de la promesse (code promo, guide...)</li>
             <li><strong>Email 2 (J+1)</strong> : Présentation de la marque, histoire, valeurs</li>
@@ -171,7 +171,7 @@
           </ol>
 
           <div class="step-box">
-            <h5>Configuration</h5>
+            <h3>Configuration</h3>
             <p>Dans Automations > Créer, choisissez le déclencheur "Inscription à la liste". Ajoutez chaque email avec les délais indiqués.</p>
           </div>
         </div>
@@ -187,7 +187,7 @@
         <div class="lesson-content">
           <p>70% des paniers sont abandonnés. Une bonne séquence récupère 10-15% de ces ventes.</p>
 
-          <h4>Timing optimal</h4>
+          <h2>Timing optimal</h2>
           <ol>
             <li><strong>Email 1 (1h)</strong> : Rappel simple, "Vous avez oublié quelque chose ?"</li>
             <li><strong>Email 2 (24h)</strong> : Urgence légère, stock limité, avis produit</li>
@@ -195,12 +195,12 @@
           </ol>
 
           <div class="step-box">
-            <h5>Personnalisation obligatoire</h5>
+            <h3>Personnalisation obligatoire</h3>
             <p>Incluez les produits du panier avec images, nom et prix. Le client doit voir exactement ce qu'il a laissé.</p>
           </div>
 
           <div class="tip-box">
-            <h5>Conseil</h5>
+            <h3>Conseil</h3>
             <p>N'offrez pas de réduction dès le premier email. Certains abandons sont juste des hésitations qui n'ont pas besoin d'incitation.</p>
           </div>
         </div>
@@ -214,7 +214,7 @@
           <span class="lesson-duration">12 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Après la commande</h4>
+          <h2>Après la commande</h2>
           <ol>
             <li><strong>Confirmation (immédiat)</strong> : Récapitulatif commande + suivi livraison</li>
             <li><strong>Livraison (J+2-5)</strong> : "Votre commande arrive !" Anticipez l'excitation</li>
@@ -223,7 +223,7 @@
           </ol>
 
           <div class="step-box">
-            <h5>Cross-sell intelligent</h5>
+            <h3>Cross-sell intelligent</h3>
             <p>Utilisez les données d'achat pour recommander des produits pertinents. "Les clients qui ont acheté X aiment aussi Y."</p>
           </div>
         </div>
@@ -239,7 +239,7 @@
         <div class="lesson-content">
           <p>Un client qui n'a pas acheté depuis 90+ jours risque de ne jamais revenir.</p>
 
-          <h4>Séquence de win-back</h4>
+          <h2>Séquence de win-back</h2>
           <ol>
             <li><strong>Email 1 (J90)</strong> : "Vous nous manquez" + nouveautés</li>
             <li><strong>Email 2 (J97)</strong> : Offre exclusive de retour (-15%)</li>
@@ -247,7 +247,7 @@
           </ol>
 
           <div class="tip-box">
-            <h5>Conseil</h5>
+            <h3>Conseil</h3>
             <p>Si aucune réponse après 3 emails, marquez le contact comme "inactif" pour préserver votre délivrabilité.</p>
           </div>
         </div>
@@ -261,7 +261,7 @@
           <span class="lesson-duration">10 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Segments automatiques</h4>
+          <h2>Segments automatiques</h2>
           <ul>
             <li><strong>VIP</strong> : 3+ commandes ou > X€ total</li>
             <li><strong>Acheteur récent</strong> : Commande dans les 30 jours</li>
@@ -282,7 +282,7 @@
           <span class="lesson-duration">10 min</span>
         </div>
         <div class="lesson-content">
-          <h4>Ce qu'il faut tester</h4>
+          <h2>Ce qu'il faut tester</h2>
           <ul>
             <li><strong>Objets</strong> : Testez 2 versions sur 20% de la liste</li>
             <li><strong>CTA</strong> : Texte, couleur, emplacement</li>
@@ -291,7 +291,7 @@
           </ul>
 
           <div class="step-box">
-            <h5>Règle importante</h5>
+            <h3>Règle importante</h3>
             <p>Testez UNE variable à la fois. Si vous changez objet ET CTA, vous ne saurez pas lequel a impacté les résultats.</p>
           </div>
         </div>
@@ -305,7 +305,7 @@
           <span class="lesson-duration">8 min</span>
         </div>
         <div class="lesson-content">
-          <h4>KPIs email à suivre</h4>
+          <h2>KPIs email à suivre</h2>
           <ul>
             <li><strong>Taux d'ouverture</strong> : Benchmark 20-25%</li>
             <li><strong>Taux de clic</strong> : Benchmark 2-5%</li>
@@ -314,7 +314,7 @@
           </ul>
 
           <div class="tip-box">
-            <h5>Focus sur le revenu</h5>
+            <h3>Focus sur le revenu</h3>
             <p>Un email avec 15% d'ouverture mais 5€ de revenu/envoi est meilleur qu'un email à 30% d'ouverture générant 1€.</p>
           </div>
         </div>

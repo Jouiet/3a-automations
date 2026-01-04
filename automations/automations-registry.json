@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.6.1",
-  "lastUpdated": "2026-01-03",
-  "totalCount": 96,
+  "version": "2.7.0",
+  "lastUpdated": "2026-01-04",
+  "totalCount": 99,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -75,6 +75,11 @@
       "name_fr": "Marketing Automation",
       "name_en": "Marketing Automation",
       "count": 1
+    },
+    "dropshipping": {
+      "name_fr": "Dropshipping & Fournisseurs",
+      "name_en": "Dropshipping & Suppliers",
+      "count": 3
     }
   },
   "automations": [
@@ -1487,6 +1492,80 @@
       },
       "benchmark": "+90% repeat purchase (Shopify 2024)",
       "status": "tested-ok"
+    },
+    {
+      "id": "cjdropshipping-automation",
+      "name_fr": "CJDropshipping - Automatisation Fournisseur",
+      "name_en": "CJDropshipping - Supplier Automation",
+      "category": "dropshipping",
+      "type": "script",
+      "script": "agency/core/cjdropshipping-automation.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Temps réel (webhooks)",
+      "frequency_en": "Real-time (webhooks)",
+      "benefit_fr": "100% automatisation commandes",
+      "benefit_en": "100% order automation",
+      "port": 3020,
+      "features": [
+        "product-catalog-sync",
+        "real-time-inventory",
+        "order-creation",
+        "tracking-sync",
+        "freight-calculation"
+      ],
+      "providers": "CJDropshipping API v2.0",
+      "requirements": ["CJ_API_KEY", "CJ_EMAIL"],
+      "status": "tested-ok"
+    },
+    {
+      "id": "bigbuy-supplier-sync",
+      "name_fr": "BigBuy - Synchronisation Fournisseur",
+      "name_en": "BigBuy - Supplier Sync",
+      "category": "dropshipping",
+      "type": "script",
+      "script": "agency/core/bigbuy-supplier-sync.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Temps réel + sync quotidienne",
+      "frequency_en": "Real-time + daily sync",
+      "benefit_fr": "100% automatisation catalogue EU",
+      "benefit_en": "100% EU catalog automation",
+      "port": 3021,
+      "features": [
+        "catalog-sync",
+        "multi-shipping-orders",
+        "real-time-stock",
+        "batch-tracking",
+        "sandbox-mode"
+      ],
+      "providers": "BigBuy REST API",
+      "requirements": ["BIGBUY_API_KEY"],
+      "status": "tested-ok"
+    },
+    {
+      "id": "dropshipping-order-flow",
+      "name_fr": "Dropshipping - Orchestration Multi-Fournisseurs",
+      "name_en": "Dropshipping - Multi-Supplier Orchestration",
+      "category": "dropshipping",
+      "type": "script",
+      "script": "agency/core/dropshipping-order-flow.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Temps réel (webhooks)",
+      "frequency_en": "Real-time (webhooks)",
+      "benefit_fr": "Automatisation complète dropshipping",
+      "benefit_en": "Full dropshipping automation",
+      "port": 3022,
+      "features": [
+        "multi-supplier-routing",
+        "sku-based-routing",
+        "shopify-webhook",
+        "woocommerce-webhook",
+        "tracking-sync",
+        "order-splitting"
+      ],
+      "providers": "CJDropshipping + BigBuy",
+      "storefronts": ["Shopify", "WooCommerce"],
+      "requirements": ["CJ_API_KEY", "BIGBUY_API_KEY", "SHOPIFY_ACCESS_TOKEN"],
+      "status": "tested-ok"
     }
   ],
   "types": {
@@ -1513,7 +1592,7 @@
     "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
-    "withScript": 61,
+    "withScript": 64,
     "withoutScript": 35
   }
 }
