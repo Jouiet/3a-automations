@@ -50,7 +50,7 @@ Le formulaire utilise [Formspree](https://formspree.io/) (gratuit jusqu'à 50 so
 
 - **Couleurs**: Modifier les variables CSS dans `:root` (styles.css)
 - **Textes**: Modifier directement dans index.html
-- **Email**: Remplacer `contact@aaa-agency.com` dans le footer
+- **Email**: Remplacer par votre email (contact@3a-automation.com)
 
 ## Checklist avant déploiement
 
