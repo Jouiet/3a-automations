@@ -274,7 +274,7 @@ Return: Video URL
 
 ### Phase 4: Integration Registry ✅ COMPLETE (Session 90)
 - [x] Ajouter workflows au registry (automations-registry.json v1.8.0)
-- [x] Mettre a jour site web (78 automations synced)
+- [x] Mettre a jour site web (99 automations synced)
 - [x] Documentation (FORENSIC-AUDIT updated)
 
 ### n8n Deployment Status

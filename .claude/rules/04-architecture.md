@@ -4,12 +4,12 @@
 
 ```
 /Users/mac/Desktop/JO-AAA/           <- AGENCY (public Git repo)
-├── automations/                     <- 79 automations
+├── automations/                     <- 99 automations
 │   ├── automations-registry.json    <- SOURCE OF TRUTH
 │   ├── agency/core/                 <- Internal agency tools
 │   ├── templates/                   <- Reusable client templates
 │   └── generic/                     <- Shared utilities
-├── landing-page-hostinger/          <- Site 39 pages
+├── landing-page-hostinger/          <- Site 63 pages (FR/EN)
 ├── dashboard/                       <- Next.js 14 admin
 ├── scripts/                         <- Session tools
 ├── docs/                            <- Documentation

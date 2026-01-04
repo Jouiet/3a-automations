@@ -680,7 +680,7 @@ Exemple: Dev à 3.000 EUR brut = ~4.500 EUR coût total/mois
 ## SECTION 11: CONCLUSION - MODÈLE MAROC OPTIMISÉ
 
 ### Ce qui est RÉEL et PROUVÉ:
-- 89 automations documentées et fonctionnelles
+- 99 automations documentées et fonctionnelles
 - Infrastructure opérationnelle (<15 EUR/mois actuel)
 - Stack technique robuste (8,945 lignes de code production)
 - Pricing compétitif (-40% vs agences)
@@ -749,4 +749,4 @@ Le **Modèle Maroc Optimisé** est SUPÉRIEUR au modèle Europe:
 
 *Document généré le: Janvier 2026*
 *Méthodologie: Bottom-up factuelle exclusive*
-*Dernière vérification: automations-registry.json v2.2.0 (89 automations)*
+*Dernière vérification: automations-registry.json v2.2.0 (99 automations)*

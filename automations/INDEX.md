@@ -33,7 +33,7 @@ automations/
 └── external/
     └── cinematicads/          # CinematicAds AI (4) → cinematicads.studio
 
-TOTAL: 89 automatisations client-facing (Registry v1.8.0)
+TOTAL: 99 automatisations client-facing (Registry v1.8.0)
 ```
 
 ---
@@ -326,7 +326,7 @@ main().catch(err => {
 
 | Date | Version | Modification |
 |------|---------|--------------|
-| 2025-12-27 | 4.0 | **Session 99**: Sync avec registry v1.8.0, 89 automations, 10 catégories |
+| 2025-12-27 | 4.0 | **Session 99**: Sync avec registry v1.8.0, 99 automations, 10 catégories |
 | 2025-12-26 | 3.2 | Voice AI Widget + Phone ajoutés, WhatsApp workflows |
 | 2025-12-25 | 3.1 | CinematicAds marqué EXTERNAL (→ cinematicads.studio) |
 | 2025-12-19 | 3.0 | Consolidation Session 23: Total 56 automatisations |

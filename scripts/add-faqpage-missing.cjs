@@ -21,7 +21,7 @@ const PAGES_FAQ = {
       },
       {
         q: "Quelle est la mission de 3A Automation ?",
-        a: "Notre mission est de rendre l'automatisation accessible aux PME et e-commerces. Nous proposons 89 automatisations testées et éprouvées, avec un accompagnement humain personnalisé."
+        a: "Notre mission est de rendre l'automatisation accessible aux PME et e-commerces. Nous proposons 99 automatisations testées et éprouvées, avec un accompagnement humain personnalisé."
       },
       {
         q: "Travaillez-vous avec des entreprises internationales ?",
@@ -59,7 +59,7 @@ const PAGES_FAQ = {
     faqs: [
       {
         q: "Combien d'automatisations proposez-vous ?",
-        a: "Notre catalogue contient 89 automatisations testées, couvrant le lead generation, l'email marketing, l'e-commerce Shopify, et la voix IA."
+        a: "Notre catalogue contient 99 automatisations testées, couvrant le lead generation, l'email marketing, l'e-commerce Shopify, et la voix IA."
       },
       {
         q: "Puis-je personnaliser les automatisations ?",

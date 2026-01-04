@@ -323,7 +323,7 @@ async function analyzeSWOT() {
       `Booking API opérationnel (${results.apis['Booking API (Google Apps Script)']?.slotsAvailable || 0} slots)`,
       `n8n: ${results.apis['n8n API']?.activeWorkflows || 0} workflows actifs`,
       'Voice Widget déployé sur le site',
-      'Registry 89 automations documentées',
+      'Registry 99 automations documentées',
       'Stack IA complète (Grok + Gemini)'
     ],
     weaknesses: [

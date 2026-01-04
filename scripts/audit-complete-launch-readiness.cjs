@@ -73,7 +73,7 @@ for (const file of htmlFiles) {
   // Check automation counts
   const match77 = content.match(/77\s*(automations?|automatisations?)/gi);
   const match78 = content.match(/78\s*(automations?|automatisations?)/gi);
-  if (match78) page.warnings.push('Outdated: 89 automations (should be 77)');
+  if (match78) page.warnings.push('Outdated: 99 automations (should be 77)');
 
   // Check for broken internal links (ignore external/protocol-relative URLs)
   const internalLinks = content.match(/href=["']\/[^"']+["']/g) || [];

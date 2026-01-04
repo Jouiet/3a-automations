@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * FIX: 78 → 86 Complete - All patterns
- * Fixes ALL occurrences of 78 automations to 86
+ * Fixes ALL occurrences of 99 automations to 86
  * Date: 2025-12-31
  * Version: 2.0
  */
@@ -13,26 +13,26 @@ const LANDING_DIR = path.join(__dirname, '..', 'landing-page-hostinger');
 
 const PATTERNS = [
   // Meta descriptions and titles
-  { find: /78 automations?/gi, replace: '86 automations' },
+  { find: /99 automations?/gi, replace: '99 automations' },
   { find: /78 automatisations?/gi, replace: '86 automatisations' },
   { find: /Catalogue 78/gi, replace: 'Catalogue 86' },
   { find: /catalog of 78/gi, replace: 'catalog of 86' },
 
   // Specific badge patterns
-  { find: /<span>78 automations<\/span>/gi, replace: '<span>86 automations</span>' },
+  { find: /<span>99 automations<\/span>/gi, replace: '<span>99 automations</span>' },
   { find: /<span>78 automatisations<\/span>/gi, replace: '<span>86 automatisations</span>' },
 
   // Card badges
-  { find: /card-badge">78 automations/gi, replace: 'card-badge">86 automations' },
+  { find: /card-badge">99 automations/gi, replace: 'card-badge">99 automations' },
   { find: /card-badge">78 automatisations/gi, replace: 'card-badge">86 automatisations' },
 
   // Schema.org
-  { find: /"78 automations/gi, replace: '"86 automations' },
+  { find: /"99 automations/gi, replace: '"99 automations' },
   { find: /"78 automatisations/gi, replace: '"86 automatisations' },
   { find: /"78 marketing and operational/gi, replace: '"86 marketing and operational' },
 
   // Content text
-  { find: />78 automations/gi, replace: '>86 automations' },
+  { find: />99 automations/gi, replace: '>99 automations' },
   { find: />78 automatisations/gi, replace: '>86 automatisations' },
 ];
 
@@ -108,7 +108,7 @@ const remaining = require('child_process').execSync(
 ).trim();
 
 if (remaining === '0') {
-  console.log('✅ Aucune occurrence de "78 automations" restante!');
+  console.log('✅ Aucune occurrence de "99 automations" restante!');
 } else {
   console.log(`⚠️  ${remaining} occurrences restantes`);
 }

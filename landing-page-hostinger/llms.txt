@@ -152,7 +152,7 @@ Annuel: 2 mois gratuits (10 pour 12)
 - **Marche secondaire**: France/Europe (4.2M PME, source INSEE)
 
 ### Ce que nous AVONS
-- 96 workflows documentes et testes
+- 99 automations documentes et testes
 - 20 automations resilientes (multi-fallback AI)
 - Voice AI Widget fonctionnel (FR/EN)
 - Site web 63 pages bilingue

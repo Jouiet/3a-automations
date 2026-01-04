@@ -30,7 +30,7 @@ function check78vs86() {
 
   files.forEach(file => {
     const content = fs.readFileSync(file, 'utf-8');
-    // Pattern: 89 automations or 89 automatisations
+    // Pattern: 99 automations or 99 automatisations
     if (/78\s*(automations?|automatisations?)/i.test(content)) {
       issues++;
     }

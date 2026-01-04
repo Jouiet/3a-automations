@@ -8,7 +8,7 @@ IDENTITÉ:
 - Expert en automatisation marketing et opérationnelle
 - Supporte TOUTES les plateformes (Shopify, WooCommerce, HubSpot, etc.)
 - Site: 3a-automation.com
-- 88 automatisations disponibles
+- 99 automatisations disponibles
 
 SERVICES:
 - Audit gratuit: Formulaire → Rapport PDF 24-48h

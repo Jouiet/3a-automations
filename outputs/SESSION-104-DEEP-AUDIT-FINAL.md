@@ -86,7 +86,7 @@
 ╔═══════════════════════════════════════════════════════════════════════╗
 ║              SESSION 127bis - FACTUAL VERIFICATION COMPLETE           ║
 ╠═══════════════════════════════════════════════════════════════════════╣
-║ Registry:        v2.6.1 (was 2.3.0) - 96 automations                 ║
+║ Registry:        v2.6.1 (was 2.3.0) - 99 automations                 ║
 ║ Script Paths:    61/61 VALID (100%) - was 56/63 (7 broken fixed)     ║
 ║ Scripts OPERATIONAL: 17 (tested via --health)                        ║
 ║ Scripts AWAITING:    7 (credentials needed)                          ║
@@ -304,7 +304,7 @@ voice-widget.js (source) → voice-widget.min.js (32KB minifié)
 ├── Knowledge Base (knowledge-base.js)
 │   ├── Pricing complet (3 packs + 2 retainers)
 │   ├── 6 industries (e-commerce, b2b, btp, saas, retail, services)
-│   ├── 78 automations cataloguées
+│   ├── 99 automations cataloguées
 │   └── FAQ et objections
 ├── Booking Integration
 │   ├── Endpoint: Google Apps Script

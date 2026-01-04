@@ -7,7 +7,7 @@
 **Status:** ✅ **100% CORE COMPLETE** (28/12/2025) - Blog & Docs = Q1 2026 backlog
 
 ### Session 103 Complete (28/12/2025)
-- ✅ **Schedulability Audit**: 78 automations analyzed bottom-up
+- ✅ **Schedulability Audit**: 99 automations analyzed bottom-up
 - ✅ **Automation Rate**: 35.9% RÉEL (28/78 schedulables)
 - ✅ **100% Automated**: 28/28 schedulables = fully automated
 - ✅ **50 Non-schedulables**: On-demand, templates, external (by design)
@@ -21,7 +21,7 @@
 - ✅ **Results Section**: 29 automations, -80% manual, 24/7 visibility
 - ✅ **CTA Section Added** (was missing - conversion killer fixed)
 - ✅ **Outcome-focused copy**: "WHAT + WHY, not HOW" applied throughout
-- ✅ **Footer fixed**: 78 automations (was 78 inconsistency)
+- ✅ **Footer fixed**: 99 automations (was 78 inconsistency)
 
 ### Session 97 Complete (26/12/2025)
 - ✅ **Lead Tracking intégré**: Landing Page → Dashboard CRM automatique
@@ -34,7 +34,7 @@
 - ✅ llms.txt v4.0: Voice AI Product en section primaire
 - ✅ Schema.org SoftwareApplication markup (pricing removed)
 - ✅ Blueprint protection: $0.05/min, Web Speech API → PRIVATE
-- ✅ 78 automations (nouveau: voice-ai-web-widget)
+- ✅ 99 automations (nouveau: voice-ai-web-widget)
 
 ---
 
@@ -66,7 +66,7 @@
 | Information Exposée | Où | Impact Concurrentiel |
 |---------------------|-----|----------------------|
 | ~~Taux horaire ~90€/h~~ | ~~pricing.html~~ | ~~Undercut immédiat possible~~ ✅ RETIRÉ |
-| 78 automations nommées | automations.html | Catalogue copiable (mais outcomes, pas méthodes) |
+| 99 automations nommées | automations.html | Catalogue copiable (mais outcomes, pas méthodes) |
 | Stack technique complet | llms-full.txt | Roadmap révélée |
 | 9 MCPs listés | Footer toutes pages | Architecture exposée |
 | System prompts voice | voice-widget.js | UX copiable |
@@ -421,7 +421,7 @@ Certains éléments techniques DOIVENT rester pour la crédibilité:
 |---------|------|-------------|
 | 2.3 | 26/12/2025 | Session 98: SMB/PME pages complete rewrite (EN+FR) |
 | 2.2 | 26/12/2025 | Session 97: Lead tracking + Invoice system + Conversion verified |
-| 2.1 | 26/12/2025 | Voice AI Product, 78 automations, llms.txt v4.0 |
+| 2.1 | 26/12/2025 | Voice AI Product, 99 automations, llms.txt v4.0 |
 | 2.0 | 26/12/2025 | Implementation complete Session 96 |
 | 1.0 | 25/12/2025 | Document initial Session 94 |
 

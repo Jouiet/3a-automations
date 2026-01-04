@@ -33,7 +33,7 @@ INFRASTRUCTURE OBLIGATOIRE:
 ║   SIGNIFICATION: Automation, Analytics, AI                                   ║
 ║                                                                               ║
 ║   QUOI:     Automatisation AI clé-en-main pour PME                          ║
-║             • 89 automations prêtes à l'emploi                               ║
+║             • 99 automations prêtes à l'emploi                               ║
 ║             • Déploiement en 48-72 heures                                    ║
 ║             • Prix à partir de 390 EUR                                       ║
 ║                                                                               ║
@@ -69,7 +69,7 @@ ONE-LINER:
 3A Automation la rend accessible à toutes les PME."
 
 ELEVATOR PITCH (30 sec):
-"3A Automation propose 89 automations AI prêtes à l'emploi,
+"3A Automation propose 99 automations AI prêtes à l'emploi,
 déployables en 48-72h à des prix PME-friendly. Grâce à notre
 structure Maroc, nous offrons une marge de 74% tout en étant
 35% moins chers que les agences traditionnelles."
@@ -110,7 +110,7 @@ structure Maroc, nous offrons une marge de 74% tout en étant
 
 ## 3. CATALOGUE PRODUIT
 
-### 3.1 89 automations Réparties en 6 Catégories
+### 3.1 99 automations Réparties en 6 Catégories
 
 | Catégorie | Nombre | Exemples |
 |-----------|--------|----------|
@@ -131,7 +131,7 @@ BACKEND:
 
 AUTOMATION:
 ├── Node.js (scripts custom .cjs) - PRODUCTION
-├── 10 scripts résilients multi-AI
+├── 20 scripts résilients multi-AI
 └── n8n Infrastructure only (0 workflows - all migrated)
 
 AI PROVIDERS (Fallback Chain):
@@ -310,7 +310,7 @@ COMPARAISON FRANCE (si 30% PFU):
 
 ### 8.2 Barrières à l'Entrée (Moat)
 
-1. **Catalogue propriétaire** - 89 automations testées et documentées
+1. **Catalogue propriétaire** - 99 automations testées et documentées
 2. **Expertise AI multi-provider** - 3 fallbacks (Grok→Gemini→Claude)
 3. **Structure Maroc** - Économie 35% sur coûts opérationnels
 4. **Processus industrialisé** - Déploiement 48-72h reproductible
@@ -405,7 +405,7 @@ STRUCTURE: SAFE ou actions ordinaires
 | Lignes de code | 8.945 | Production-ready |
 | Scripts core/ | 19 fichiers | Résilients multi-AI |
 | Pages web | 63 | FR/EN + Academy |
-| Automations registry | 86 | v2.1.0 |
+| Automations registry | 99 | v2.7.0 |
 
 ### 12.2 MCPs Fonctionnels
 
@@ -467,7 +467,7 @@ Booking: https://3a-automation.com/booking.html
 | 5.0 | 01 Jan 2026 | Réécriture complète modèle Maroc, bottom-up factuel, 74% EBITDA |
 | 4.4 | 29 Déc 2025 | Session 114: Lead Gen Pipelines |
 | 4.3 | 27 Déc 2025 | Session 102: MCPs 12/13 |
-| 3.8 | 26 Déc 2025 | Session 96: 89 automations |
+| 3.8 | 26 Déc 2025 | Session 96: 99 automations |
 
 ---
 

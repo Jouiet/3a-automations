@@ -74,7 +74,7 @@ n8n STATUS (inchangé):
 
 ### Résultat Final Session 110
 ```
-Registry v1.9.0:    78 automations cataloguées
+Registry v1.9.0:    99 automations cataloguées
 HTML Pages:         39 RÉELLES (pas 32)
 n8n Workflows:      9 déployés, 2 fonctionnels (22%)
 Email Automation:   ✅ FONCTIONNEL (script natif)
@@ -175,7 +175,7 @@ CONVERSION TRACKING VÉRIFIÉ:
 └── Leads automatiquement sync avec Dashboard
 ```
 
-### Catégories (78 automations - Registry v1.8.0)
+### Catégories (99 automations - Registry v1.8.0)
 ```
 Lead Generation & Acquisition:  20 (+2: LinkedIn scraper, Email outreach)
 Shopify Admin:                  13
@@ -235,7 +235,7 @@ Commits Session 83:
 ### AEO Status (Answer Engine Optimization - Session 97)
 ```
 ✅ robots.txt:    AI crawlers allowed (GPTBot, ClaudeBot, PerplexityBot, Googlebot)
-✅ llms.txt:      v4.0 updated (78 automations, Voice AI Product)
+✅ llms.txt:      v4.0 updated (99 automations, Voice AI Product)
 ✅ sitemap.xml:   36 URLs with hreflang alternates (+4 blog articles)
 ✅ Schema.org:    JSON-LD on all pages (counts fixed)
 ✅ FAQPage:       On pricing + service pages
@@ -4481,7 +4481,7 @@ DASHBOARD:
 └── Conversion tracking: ✅ DONE (Google Sheets API vérifié Session 97)
 
 DOCS:
-└── 78 automations synced: ✅ DONE (Session 96)
+└── 99 automations synced: ✅ DONE (Session 96)
 
 INVOICING:
 ├── Template HTML: ✅ DONE (automations/invoicing/invoice-template.html)

@@ -16,54 +16,54 @@ const BASE_DIR = path.join(__dirname, '..');
 // Patterns to fix
 const PATTERNS = [
   // 88 → 89
-  { find: /88 automations?/gi, replace: '89 automations' },
-  { find: /88 automatisations?/gi, replace: '89 automatisations' },
+  { find: /99 automations?/gi, replace: '99 automations' },
+  { find: /99 automatisations?/gi, replace: '99 automatisations' },
   { find: /88 workflows?/gi, replace: '89 workflows' },
 
   // 86 → 89
-  { find: /86 automations?/gi, replace: '89 automations' },
-  { find: /86 automatisations?/gi, replace: '89 automatisations' },
+  { find: /99 automations?/gi, replace: '99 automations' },
+  { find: /86 automatisations?/gi, replace: '99 automatisations' },
   { find: /86 workflows?/gi, replace: '89 workflows' },
 
   // 78 → 89
-  { find: /78 automations?/gi, replace: '89 automations' },
-  { find: /78 automatisations?/gi, replace: '89 automatisations' },
+  { find: /99 automations?/gi, replace: '99 automations' },
+  { find: /78 automatisations?/gi, replace: '99 automatisations' },
   { find: /78 workflows?/gi, replace: '89 workflows' },
 
   // 82 → 89
-  { find: /82 automations?/gi, replace: '89 automations' },
-  { find: /82 automatisations?/gi, replace: '89 automatisations' },
+  { find: /82 automations?/gi, replace: '99 automations' },
+  { find: /82 automatisations?/gi, replace: '99 automatisations' },
   { find: /82 workflows?/gi, replace: '89 workflows' },
 
   // Specific patterns
-  { find: /<span>88 automations<\/span>/gi, replace: '<span>89 automations</span>' },
-  { find: /<span>88 automatisations<\/span>/gi, replace: '<span>89 automatisations</span>' },
-  { find: /<span>86 automations<\/span>/gi, replace: '<span>89 automations</span>' },
-  { find: /<span>86 automatisations<\/span>/gi, replace: '<span>89 automatisations</span>' },
-  { find: /<span>78 automations<\/span>/gi, replace: '<span>89 automations</span>' },
-  { find: /<span>78 automatisations<\/span>/gi, replace: '<span>89 automatisations</span>' },
+  { find: /<span>99 automations<\/span>/gi, replace: '<span>99 automations</span>' },
+  { find: /<span>99 automatisations<\/span>/gi, replace: '<span>99 automatisations</span>' },
+  { find: /<span>99 automations<\/span>/gi, replace: '<span>99 automations</span>' },
+  { find: /<span>86 automatisations<\/span>/gi, replace: '<span>99 automatisations</span>' },
+  { find: /<span>99 automations<\/span>/gi, replace: '<span>99 automations</span>' },
+  { find: /<span>78 automatisations<\/span>/gi, replace: '<span>99 automatisations</span>' },
 
   // Card badges
-  { find: /card-badge">88 automations/gi, replace: 'card-badge">89 automations' },
-  { find: /card-badge">88 automatisations/gi, replace: 'card-badge">89 automatisations' },
-  { find: /card-badge">86 automations/gi, replace: 'card-badge">89 automations' },
-  { find: /card-badge">86 automatisations/gi, replace: 'card-badge">89 automatisations' },
+  { find: /card-badge">99 automations/gi, replace: 'card-badge">99 automations' },
+  { find: /card-badge">99 automatisations/gi, replace: 'card-badge">99 automatisations' },
+  { find: /card-badge">99 automations/gi, replace: 'card-badge">99 automations' },
+  { find: /card-badge">86 automatisations/gi, replace: 'card-badge">99 automatisations' },
 
   // Quoted patterns
-  { find: /"88 automations/gi, replace: '"89 automations' },
-  { find: /"88 automatisations/gi, replace: '"89 automatisations' },
-  { find: /"86 automations/gi, replace: '"89 automations' },
-  { find: /"86 automatisations/gi, replace: '"89 automatisations' },
-  { find: /"78 automations/gi, replace: '"89 automations' },
-  { find: /"78 automatisations/gi, replace: '"89 automatisations' },
+  { find: /"99 automations/gi, replace: '"99 automations' },
+  { find: /"99 automatisations/gi, replace: '"99 automatisations' },
+  { find: /"99 automations/gi, replace: '"99 automations' },
+  { find: /"86 automatisations/gi, replace: '"99 automatisations' },
+  { find: /"99 automations/gi, replace: '"99 automations' },
+  { find: /"78 automatisations/gi, replace: '"99 automatisations' },
 
   // Dotted patterns
-  { find: /\. 88 automations/gi, replace: '. 89 automations' },
-  { find: /\. 88 automatisations/gi, replace: '. 89 automatisations' },
-  { find: /\. 86 automations/gi, replace: '. 89 automations' },
-  { find: /\. 86 automatisations/gi, replace: '. 89 automatisations' },
-  { find: /\. 78 automations/gi, replace: '. 89 automations' },
-  { find: /\. 78 automatisations/gi, replace: '. 89 automatisations' },
+  { find: /\. 99 automations/gi, replace: '. 99 automations' },
+  { find: /\. 99 automatisations/gi, replace: '. 99 automatisations' },
+  { find: /\. 99 automations/gi, replace: '. 99 automations' },
+  { find: /\. 86 automatisations/gi, replace: '. 99 automatisations' },
+  { find: /\. 99 automations/gi, replace: '. 99 automations' },
+  { find: /\. 78 automatisations/gi, replace: '. 99 automatisations' },
 ];
 
 // Files/directories to skip

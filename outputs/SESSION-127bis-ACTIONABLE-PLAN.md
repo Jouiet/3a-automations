@@ -137,7 +137,7 @@ node -e "const r=require('./automations/automations-registry.json'); \
 | File | Changes |
 |------|---------|
 | CLAUDE.md | Added Session 127bis section |
-| .claude/rules/01-project-status.md | Session 127bis, 96 automations, 17 scripts |
+| .claude/rules/01-project-status.md | Session 127bis, 99 automations, 17 scripts |
 | .claude/rules/07-native-scripts.md | Factual verification, corrected counts |
 | outputs/archived-dec-2025/ | 30 files archived |
 | automations/automations-registry.json | v2.6.1 (7 paths fixed) |
