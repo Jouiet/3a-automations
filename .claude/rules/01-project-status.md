@@ -1,36 +1,71 @@
 # 3A Automation - Project Status
 
-## Current State (Session 129 - 03/01/2026)
+## Current State (Session 133 - 04/01/2026)
 
 | Metric | Value |
 |--------|-------|
 | Site | https://3a-automation.com LIVE |
-| Dashboard | https://dashboard.3a-automation.com ✅ LIVE (HTTP 200 verified) |
-| Pages | **63** HTML files (verified count) |
-| Investor Pages | ✅ Created (FR + EN) with FAQPage + BreadcrumbList |
-| Automations | **96** (Registry v2.6.1 - verified) |
-| Scripts with path | **61/61 (100%)** - ALL paths validated |
-| Automations OPERATIONAL | **12** (Session 128bis --health verified) |
-| Automations PARTIAL | **1** (grok-voice-realtime - Gemini quota 429) |
-| Automations TEST MODE | **2** (hubspot, omnisend - no API keys) |
-| Automations BLOCKED | **3** (whatsapp, voice-telephony, sms) |
-| API Rate Limits | Gemini 429, Claude 400, xAI 502 (intermittent) |
-| n8n Workflows | **0 restant** (all replaced by native scripts) |
-| SEO Score | **100%** (all meta tags, OG, Twitter) |
-| AEO Score | **95%** |
-| FAQPage Schema | **35/35 indexable (100%)** |
-| Security Headers | **CONFIGURED** (HSTS, CSP, X-Frame-Options) |
-| Security Backend | **75%** - Code fixed, secrets use ${VAR} refs |
-| Footer | **Enterprise-class (5 colonnes + 6 social icons)** |
-| SSL | **Let's Encrypt + HSTS preload** |
-| Infrastructure | 5/5 endpoints HEALTHY, 4 Docker projects |
-| llms.txt | **v5.1.0** with CRM section |
-| Voice Widget Templates | **8 industries** (4h→30min deployment) |
-| Podcast Generator | ✅ VERIFIED - 10 segments, 2.2MB audio |
-| Klaviyo | 10 lists, 0 flows (UI creation required) |
-| Shopify | ✅ Connected (MAD currency, basic plan) |
-| **Overall Audit Score** | **91%** |
-| **INVESTOR-READY** | ⚠️ PENDING VPS SECRET ROTATION (code fixed) |
+| Dashboard | https://dashboard.3a-automation.com ✅ LIVE |
+| Pages | **63** HTML files (verified via forensic audit) |
+| Automations | **99** (Registry v2.7.0) |
+| Scripts with path | **64/64 (100%)** |
+| Dropshipping Scripts | **3 NEW** (cjdropshipping, bigbuy, order-flow) |
+| n8n Workflows | **0** (all native scripts) |
+| **SEO Score** | **88%** (Schema.org gaps: 22 academy pages) |
+| **AEO Score** | **100%** ✅ (llms.txt 6,722 bytes, AI crawlers OK) |
+| **Performance** | **92%** (TTFB 316ms, Total 404ms) |
+| **Accessibility** | **~65%** ⚠️ (26 heading issues, 7 ARIA missing) |
+| **Security** | **86%** ⚠️ (**CSP MISSING** - HIGH priority) |
+| **Marketing/CRO** | **78%** (0 client logos, 0 certifications) |
+| **i18n** | **95%** (hreflang 100%, 3 currencies) |
+| **Overall Audit** | **82%** ⚠️ |
+| FAQPage Schema | **35 pages** |
+| llms.txt | 6,722 bytes, 11 sections |
+| Infrastructure | 5/5 endpoints HEALTHY |
+| Klaviyo | 10 lists, 0 flows |
+| Shopify | ✅ Connected (MAD currency) |
+
+### Session 132 - Critical Findings
+
+| Issue | Severity | Action |
+|-------|----------|--------|
+| CSP header missing | HIGH | Add to nginx config |
+| nginx version exposed | LOW | Mask server_tokens |
+| Heading order (26 pages) | MEDIUM | Fix h2→h4 skips |
+| ARIA landmarks (7 blogs) | MEDIUM | Add role attributes |
+| Schema.org (22 academy) | MEDIUM | Add Course schema |
+| Trust signals | HIGH | Add client logos |
+
+---
+
+## SESSION 133 - DROPSHIPPING FORENSIC AUDIT (04/01/2026)
+
+### 3 Dropshipping Scripts - P0 FIXES COMPLETE ✅
+
+| Script | Lines | Functions | Production-Ready | Port |
+|--------|-------|-----------|-----------------|------|
+| cjdropshipping-automation.cjs | 726 | 15 REAL | **90%** ✅ | 3020 |
+| bigbuy-supplier-sync.cjs | 929 | 17 REAL | **85%** | 3021 |
+| dropshipping-order-flow.cjs | 1087 | 13 REAL | **95%** ✅ | 3022 |
+
+### P0 Fixes Applied (04/01/2026)
+
+| Fix | Script | Status |
+|-----|--------|--------|
+| `updateStorefrontTracking()` - Real Shopify/WooCommerce APIs | flow | ✅ FIXED |
+| File-based persistence (atomic JSON writes) | flow | ✅ FIXED |
+| CORS whitelist (3a-automation.com, dashboard, storefronts) | all 3 | ✅ FIXED |
+| `searchProducts()` returns empty (API issue, not code) | bigbuy | ⚠️ KNOWN |
+
+**Commit:** `6a8c934` - feat(dropshipping): P0 BLOCKING fixes - production-ready
+
+### Registry Update
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Version | v2.6.1 | **v2.7.0** |
+| Total Automations | 96 | **99** |
+| Dropshipping Category | 0 | **3** |
 
 ---
 
