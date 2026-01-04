@@ -1,6 +1,6 @@
 # 3A Automation - Project Status
 
-## Current State (Session 133 - 04/01/2026)
+## Current State (Session 133bis - 04/01/2026)
 
 | Metric | Value |
 |--------|-------|
@@ -24,6 +24,43 @@
 | Infrastructure | 5/5 endpoints HEALTHY |
 | Klaviyo | 10 lists, 0 flows |
 | Shopify | ✅ Connected (MAD currency) |
+| **Scripts with --health** | **22** (empirically verified) |
+| **Total core/ scripts** | **35** .cjs files |
+
+---
+
+## SESSION 133bis - CONSISTENCY AUDIT COMPLETE (04/01/2026)
+
+### Codebase-Wide Consistency Fix
+
+**71 files corrected** - All old automation counts eliminated:
+
+| Pattern Fixed | Replacement | Status |
+|---------------|-------------|--------|
+| "96 automations" | "99 automations" | ✅ 0 matches remaining |
+| "96 workflows" | "99 automations" | ✅ 0 matches remaining |
+| "10 scripts résilients" | "20 scripts résilients" | ✅ Fixed |
+| "78/86/88 automations" | "99 automations" | ✅ Fixed |
+
+### Empirical Script Verification (04/01/2026)
+
+```bash
+ls -la core/*.cjs | wc -l  → 35 files
+grep -l "\-\-health" core/*.cjs | wc -l  → 22 scripts
+```
+
+| Category | Count | Notes |
+|----------|-------|-------|
+| Scripts with --health | **22** | Full CLI support |
+| Total in core/ | **35** | .cjs files |
+| OPERATIONAL | 16 | + 3 dropshipping = 19 |
+| TEST MODE | 2 | hubspot, omnisend (no API keys) |
+| BLOCKED | 3 | whatsapp, voice-telephony, sms |
+| Registry | **v2.7.0** | 99 automations, 64/64 valid |
+
+**Commit:** `041d9fe` - fix(forensic-audit): Session 133bis consistency fixes
+
+---
 
 ### Session 132 - Critical Findings
 

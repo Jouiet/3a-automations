@@ -29,14 +29,15 @@ Avant de faire des claims, consulter:
 5. ❌ "100% secure" → CSP header MANQUANT (Session 132)
 6. ❌ "SEO parfait" → 22 academy pages sans Schema.org
 
-## Ce Qui Est AUTORISÉ (Vérifié Session 132 - 03/01/2026)
+## Ce Qui Est AUTORISÉ (Vérifié Session 133bis - 04/01/2026)
 
 1. ✅ "MCPs 11/11 fonctionnels (100%)"
-2. ✅ "23 scripts résilients multi-provider" (20 + 3 dropshipping)
-3. ✅ "99 automations dans le registry v2.7.0"
-4. ✅ "AAA - Agence d'Automatisation AI spécialisée E-commerce (B2C) et PME (B2B), TOUTES plateformes"
-5. ✅ "AEO 100% - llms.txt conforme, AI crawlers autorisés"
-6. ✅ "Performance 92% - TTFB 316ms"
+2. ✅ "22 scripts avec --health" (empiriquement vérifié)
+3. ✅ "35 scripts .cjs dans core/"
+4. ✅ "99 automations dans le registry v2.7.0"
+5. ✅ "AAA - Agence d'Automatisation AI spécialisée E-commerce (B2C) et PME (B2B), TOUTES plateformes"
+6. ✅ "AEO 100% - llms.txt conforme, AI crawlers autorisés"
+7. ✅ "Performance 92% - TTFB 316ms"
 
 ## Workflow de Vérification
 
@@ -46,20 +47,21 @@ CLAIM → VÉRIFICATION → PREUVE → DOCUMENTATION
        CORRECTION ou SUPPRESSION
 ```
 
-## Métriques Actuelles (04/01/2026 - Session 133)
+## Métriques Actuelles (04/01/2026 - Session 133bis VERIFIED)
 
-| Métrique | Valeur | Source |
-|----------|--------|--------|
-| Scripts résilients | **23** (20 + 3 dropshipping) | automations/agency/core/ |
-| Automations registry | **99** | v2.7.0 |
-| MCPs | 11/11 (100%) | 05-mcps-status.md |
-| SEO | **88%** | Schema.org gaps |
-| AEO | **100%** ✅ | llms.txt |
-| Performance | **92%** | TTFB 316ms |
-| Security | **86%** ⚠️ | CSP MISSING |
-| **Overall** | **82%** | Session 132 |
+| Métrique | Valeur | Source | Vérification |
+|----------|--------|--------|--------------|
+| Scripts avec --health | **22** | core/*.cjs | `grep -l "\-\-health"` |
+| Scripts .cjs total | **35** | core/ | `ls -la | wc -l` |
+| Automations registry | **99** | v2.7.0 | 64/64 valid |
+| MCPs | 11/11 (100%) | 05-mcps-status.md | Tested |
+| SEO | **88%** | Schema.org gaps | Audit |
+| AEO | **100%** ✅ | llms.txt | Verified |
+| Performance | **92%** | TTFB 316ms | curl |
+| Security | **86%** ⚠️ | CSP MISSING | Headers |
+| **Overall** | **82%** | Session 132 | Audit |
 
-**Source de vérité:** `CLAUDE.md` + `.claude/rules/01-project-status.md`
+**Source de vérité:** `automations-registry.json` v2.7.0 + `.claude/rules/01-project-status.md`
 
 ---
 
