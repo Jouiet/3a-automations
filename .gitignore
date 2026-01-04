@@ -57,3 +57,7 @@ logs/
 
 # Dropshipping data
 data/dropshipping/
+
+# Claude Code local config
+CLAUDE.local.md
+.claude/CLAUDE.local.md
