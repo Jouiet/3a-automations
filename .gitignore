@@ -54,3 +54,6 @@ mcp.json
 # Generated invoices
 automations/invoicing/generated/
 logs/
+
+# Dropshipping data
+data/dropshipping/
