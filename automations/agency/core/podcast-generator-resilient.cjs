@@ -108,8 +108,9 @@ const AI_PROVIDERS = {
     enabled: !!ENV.XAI_API_KEY,
   },
   gemini: {
-    name: 'Google Gemini',
-    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+    name: 'Google Gemini 3',
+    // gemini-3-flash-preview: latest frontier model (Jan 2026)
+    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
     apiKey: ENV.GEMINI_API_KEY,
     enabled: !!ENV.GEMINI_API_KEY,
   },
