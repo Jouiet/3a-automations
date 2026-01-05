@@ -54,18 +54,18 @@ interface RecentActivity {
   time: string;
 }
 
-interface N8nWorkflow {
+interface NativeScript {
   id: string;
   name: string;
   active: boolean;
   updatedAt: string;
-  nodes: number;
+  category: string;
 }
 
-interface N8nExecution {
+interface ScriptExecution {
   id: string;
-  workflowId: string;
-  workflowName: string;
+  scriptId: string;
+  scriptName: string;
   status: string;
   startedAt: string;
 }
@@ -169,11 +169,10 @@ export default function AdminDashboardPage() {
       setError(null);
 
       // Fetch all data in parallel
-      const [statsRes, activitiesRes, workflowsRes, executionsRes] = await Promise.all([
+      const [statsRes, activitiesRes, automationsRes] = await Promise.all([
         fetch("/api/stats"),
         fetch("/api/stats?type=activities&limit=5"),
-        fetch("/api/n8n/workflows"),
-        fetch("/api/n8n/executions?limit=50"),
+        fetch("/api/automations"),
       ]);
 
       // Process stats
@@ -200,58 +199,51 @@ export default function AdminDashboardPage() {
         }
       }
 
-      // Process n8n workflows
-      if (workflowsRes.ok) {
-        const workflowsData = await workflowsRes.json();
-        if (workflowsData.success && workflowsData.data) {
-          setWorkflows(workflowsData.data);
+      // Process native automations
+      if (automationsRes.ok) {
+        const automationsData = await automationsRes.json();
+        if (automationsData.success && automationsData.data) {
+          const scripts = automationsData.data.map((a: any) => ({
+            id: a.id,
+            name: a.name,
+            active: a.status === 'ACTIVE',
+            updatedAt: a.lastRunAt || new Date().toISOString(),
+            category: a.category || 'general'
+          }));
+          setWorkflows(scripts);
 
-          // Update automation count from real n8n data
-          const activeCount = workflowsData.data.filter((w: N8nWorkflow) => w.active).length;
-          const inactiveCount = workflowsData.data.filter((w: N8nWorkflow) => !w.active).length;
+          // Update automation count from registry data
+          const activeCount = scripts.filter((s: NativeScript) => s.active).length;
+          const inactiveCount = scripts.filter((s: NativeScript) => !s.active).length;
+          const errorCount = automationsData.data.filter((a: any) => a.status === 'ERROR').length;
 
           setStats(prev => ({
             ...prev,
             activeAutomations: activeCount,
+            automationErrors: errorCount,
           }));
 
-          // Create workflow status pie chart data
+          // Create automation status pie chart data
           setWorkflowStatusData([
             { name: "Actifs", value: activeCount, color: CHART_COLORS.success },
             { name: "Inactifs", value: inactiveCount, color: CHART_COLORS.inactive },
           ]);
-        }
-      }
 
-      // Process n8n executions
-      if (executionsRes.ok) {
-        const executionsData = await executionsRes.json();
-        if (executionsData.success && executionsData.data) {
-          setExecutions(executionsData.data);
-
-          // Update error count from execution stats
-          if (executionsData.stats) {
-            setStats(prev => ({
-              ...prev,
-              automationErrors: executionsData.stats.error || 0,
-            }));
-          }
-
-          // Generate execution chart data grouped by workflow
-          const workflowStats: { [key: string]: { success: number; error: number } } = {};
-          (executionsData.data || []).forEach((exec: N8nExecution) => {
-            const name = exec.workflowName?.split(" - ")[0] || "Unknown";
-            if (!workflowStats[name]) {
-              workflowStats[name] = { success: 0, error: 0 };
+          // Generate chart data by category
+          const categoryStats: { [key: string]: { success: number; error: number } } = {};
+          automationsData.data.forEach((auto: any) => {
+            const cat = auto.category || 'general';
+            if (!categoryStats[cat]) {
+              categoryStats[cat] = { success: 0, error: 0 };
             }
-            if (exec.status === "success") {
-              workflowStats[name].success++;
-            } else if (exec.status === "error") {
-              workflowStats[name].error++;
+            if (auto.status === 'ACTIVE') {
+              categoryStats[cat].success++;
+            } else if (auto.status === 'ERROR') {
+              categoryStats[cat].error++;
             }
           });
 
-          const chartData = Object.entries(workflowStats)
+          const chartData = Object.entries(categoryStats)
             .map(([name, data]) => ({
               name: name.length > 12 ? name.substring(0, 10) + "..." : name,
               success: data.success,
@@ -259,21 +251,6 @@ export default function AdminDashboardPage() {
             }))
             .slice(0, 8);
           setExecutionChartData(chartData);
-
-          // Also add executions to activities
-          const execActivities: RecentActivity[] = (executionsData.data || [])
-            .slice(0, 3)
-            .map((exec: N8nExecution) => ({
-              id: exec.id,
-              type: "automation" as const,
-              message: `${exec.workflowName} - ${exec.status === "success" ? "Succes" : "Erreur"}`,
-              time: formatTimeAgo(exec.startedAt),
-            }));
-
-          setActivities(prev => {
-            const combined = [...execActivities, ...prev];
-            return combined.slice(0, 6);
-          });
         }
       }
 
@@ -393,14 +370,14 @@ export default function AdminDashboardPage() {
 
       {/* Charts and Activity */}
       <div className="grid gap-6 lg:grid-cols-7">
-        {/* Execution Chart - Real n8n data */}
+        {/* Execution Chart - Real automation data */}
         <Card className="lg:col-span-4 border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-primary" />
               Executions par Workflow
             </CardTitle>
-            <CardDescription>Performance des automations n8n (succes vs erreurs)</CardDescription>
+            <CardDescription>Performance des automations natives (succes vs erreurs)</CardDescription>
           </CardHeader>
           <CardContent>
             {executionChartData.length > 0 ? (
@@ -506,7 +483,7 @@ export default function AdminDashboardPage() {
             </div>
             <div>
               <h3 className="font-semibold">Nouvelle Automation</h3>
-              <p className="text-sm text-muted-foreground">Creer un workflow n8n</p>
+              <p className="text-sm text-muted-foreground">Configurer une automation native</p>
             </div>
           </CardContent>
         </Card>
@@ -526,22 +503,22 @@ export default function AdminDashboardPage() {
 
       {/* Workflows List + Status Pie */}
       <div className="grid gap-6 lg:grid-cols-3">
-        {/* n8n Workflows List */}
+        {/* Native Automations List */}
         <Card className="lg:col-span-2 border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Zap className="h-5 w-5 text-amber-400" />
-              Workflows n8n
+              Automations Natives
             </CardTitle>
             <CardDescription>
-              {workflows.length} workflows configures - {workflows.filter(w => w.active).length} actifs
+              {workflows.length} automations configurees - {workflows.filter(w => w.active).length} actives
             </CardDescription>
           </CardHeader>
           <CardContent>
             {workflows.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 <Zap className="h-10 w-10 mx-auto mb-2 opacity-50" />
-                <p>Aucun workflow configure</p>
+                <p>Aucune automation configuree</p>
               </div>
             ) : (
               <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2">
@@ -561,7 +538,7 @@ export default function AdminDashboardPage() {
                       <div>
                         <p className="font-medium text-sm">{workflow.name}</p>
                         <p className="text-xs text-muted-foreground">
-                          {workflow.nodes} nodes
+                          {(workflow as any).category || 'general'}
                         </p>
                       </div>
                     </div>

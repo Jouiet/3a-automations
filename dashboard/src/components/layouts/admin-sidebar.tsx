@@ -12,7 +12,6 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
-  Bot,
   Mail,
   Calendar,
   FileText,
@@ -35,11 +34,6 @@ const navigation = [
     name: "Automations",
     href: "/admin/automations",
     icon: Zap,
-  },
-  {
-    name: "Workflows n8n",
-    href: "/admin/workflows",
-    icon: Bot,
   },
   {
     name: "Campagnes Email",

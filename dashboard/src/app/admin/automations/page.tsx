@@ -41,7 +41,7 @@ interface Automation {
   description: string;
   category: string;
   status: "ACTIVE" | "PAUSED" | "ERROR" | "DISABLED";
-  n8nWorkflowId?: string;
+  scriptPath?: string;
   trigger: string;
   lastRunAt?: string;
   nextRunAt?: string;
@@ -219,7 +219,7 @@ export default function AutomationsPage() {
         <div>
           <h1 className="text-3xl font-bold">Automations</h1>
           <p className="text-muted-foreground">
-            Gerez vos workflows et automations n8n
+            Gerez vos automations natives (99 disponibles)
             <span className="text-xs ml-2 opacity-50">
               Maj: {formatDate(lastRefresh.toISOString())}
             </span>
@@ -230,15 +230,15 @@ export default function AutomationsPage() {
             <RefreshCw className="h-4 w-4" />
           </Button>
           <Button variant="outline" size="sm" asChild>
-            <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank" rel="noopener noreferrer">
+            <a href="https://3a-automation.com/automations.html" target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4 mr-2" />
-              Ouvrir n8n
+              Catalogue
             </a>
           </Button>
           <Button size="sm" asChild>
-            <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank">
+            <a href="https://3a-automation.com/booking.html" target="_blank">
               <Plus className="h-4 w-4 mr-2" />
-              Nouvelle Automation
+              Demander Automation
             </a>
           </Button>
         </div>
@@ -330,12 +330,12 @@ export default function AutomationsPage() {
                       <Zap className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
                       <h3 className="font-semibold text-lg">Aucune automation</h3>
                       <p className="text-sm text-muted-foreground mt-1">
-                        {searchTerm ? "Aucun resultat pour cette recherche" : "Creez votre premiere automation dans n8n"}
+                        {searchTerm ? "Aucun resultat pour cette recherche" : "Consultez notre catalogue de 99 automations"}
                       </p>
                       <Button className="mt-4" asChild>
-                        <a href="https://n8n.srv1168256.hstgr.cloud" target="_blank">
+                        <a href="https://3a-automation.com/automations.html" target="_blank" rel="noopener noreferrer">
                           <ExternalLink className="h-4 w-4 mr-2" />
-                          Ouvrir n8n
+                          Voir le catalogue
                         </a>
                       </Button>
                     </CardContent>
@@ -410,14 +410,12 @@ export default function AutomationsPage() {
                                     <Play className="h-4 w-4 mr-2" />
                                     Executer maintenant
                                   </DropdownMenuItem>
-                                  {automation.n8nWorkflowId && (
-                                    <DropdownMenuItem asChild>
-                                      <a href={`https://n8n.srv1168256.hstgr.cloud/workflow/${automation.n8nWorkflowId}`} target="_blank">
-                                        <ExternalLink className="h-4 w-4 mr-2" />
-                                        Voir dans n8n
-                                      </a>
-                                    </DropdownMenuItem>
-                                  )}
+                                  <DropdownMenuItem asChild>
+                                    <a href="https://3a-automation.com/automations.html" target="_blank" rel="noopener noreferrer">
+                                      <ExternalLink className="h-4 w-4 mr-2" />
+                                      Documentation
+                                    </a>
+                                  </DropdownMenuItem>
                                   <DropdownMenuItem>Voir logs</DropdownMenuItem>
                                   <DropdownMenuSeparator />
                                   <DropdownMenuItem className="text-destructive">

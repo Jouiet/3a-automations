@@ -201,7 +201,7 @@ export default function ReportsPage() {
         <div>
           <h1 className="text-3xl font-bold">Rapports</h1>
           <p className="text-muted-foreground">
-            Rapports de performance en temps reel - Donnees n8n
+            Rapports de performance en temps reel - Automations natives
           </p>
         </div>
         <div className="flex gap-2">

@@ -33,8 +33,8 @@ interface Integration {
 
 const integrations: Integration[] = [
   {
-    name: "n8n Workflows",
-    description: "Orchestration des automations",
+    name: "Scripts Natifs",
+    description: "99 automations natives disponibles",
     status: "connected",
     icon: Zap,
     lastSync: "Il y a 5 min",

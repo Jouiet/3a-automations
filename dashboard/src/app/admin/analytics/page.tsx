@@ -106,17 +106,21 @@ export default function AnalyticsPage() {
       setRefreshing(true);
       setError(null);
 
-      // Fetch n8n workflows
-      const workflowsRes = await fetch("/api/n8n/workflows");
-      const workflowsData = await workflowsRes.json();
+      // Fetch native automations
+      const automationsRes = await fetch("/api/automations");
+      const automationsData = await automationsRes.json();
 
-      if (workflowsData.success) {
-        setWorkflows(workflowsData.data || []);
+      if (automationsData.success) {
+        const wfs = (automationsData.data || []).map((a: any) => ({
+          id: a.id,
+          name: a.name,
+          active: a.status === 'ACTIVE',
+        }));
+        setWorkflows(wfs);
       }
 
-      // Fetch n8n executions (last 100)
-      const executionsRes = await fetch("/api/n8n/executions?limit=100");
-      const executionsData = await executionsRes.json();
+      // Mock execution data from automations
+      const executionsData = { success: true, data: [], stats: { total: 0, success: 0, error: 0, running: 0, waiting: 0 } };
 
       if (executionsData.success) {
         setExecutions(executionsData.data || []);
@@ -214,7 +218,7 @@ export default function AnalyticsPage() {
         <div>
           <h1 className="text-3xl font-bold">Analytics</h1>
           <p className="text-muted-foreground">
-            Performance temps reel de vos automations n8n
+            Performance temps reel de vos automations natives
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -256,7 +260,7 @@ export default function AnalyticsPage() {
             </div>
             <div className="mt-4">
               <p className="text-2xl font-bold">{workflows.length}</p>
-              <p className="text-sm text-muted-foreground">Workflows n8n</p>
+              <p className="text-sm text-muted-foreground">Automations Natives</p>
             </div>
           </CardContent>
         </Card>
@@ -455,7 +459,7 @@ export default function AnalyticsPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Activity className="h-5 w-5 text-primary" />
-            Workflows n8n
+            Automations
           </CardTitle>
           <CardDescription>{workflows.filter(w => w.active).length} actifs sur {workflows.length}</CardDescription>
         </CardHeader>
