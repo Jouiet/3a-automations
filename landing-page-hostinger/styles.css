@@ -5172,6 +5172,21 @@ html:not([data-period]) .price-period.period-monthly { display: inline !importan
 }
 .pricing-features li svg { flex-shrink: 0; margin-top: 2px; }
 
+/* Sub-items for B2C/B2B track alternatives */
+.pricing-features li.sub-item {
+  padding-left: 1.5rem;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  border-left: 2px solid rgba(79, 186, 241, 0.3);
+  margin-left: 0.5rem;
+}
+.pricing-features li.sub-item .track-label {
+  font-weight: 600;
+  color: var(--primary);
+  min-width: 2.5rem;
+  display: inline-block;
+}
+
 .pricing-delivery {
   background: rgba(79, 186, 241, 0.1);
   padding: var(--spacing-xs) var(--spacing-sm);
