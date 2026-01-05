@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 43.1 | 04/01/2026 | Optimized Memory
+> Version: 44.0 | 05/01/2026 | Session 135
 
 ## Identité
 - **Type**: AI Automation Agency (E-commerce B2C + PME B2B)
@@ -9,6 +9,7 @@
 | Élément | Valeur |
 |---------|--------|
 | Automations | 99 (Registry v2.7.0) |
+| Cartes affichées | 94 (5 internes/doublons exclus) |
 | Scripts --health | 22 |
 | MCPs | 11/11 |
 | SEO/AEO | 88%/100% |
