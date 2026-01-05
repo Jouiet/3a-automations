@@ -40,18 +40,18 @@ interface ClientStats {
   errorCount: number;
 }
 
-interface N8nWorkflow {
+interface NativeAutomation {
   id: string;
   name: string;
   active: boolean;
   updatedAt: string;
-  nodes: number;
+  category: string;
 }
 
-interface N8nExecution {
+interface AutomationExecution {
   id: string;
-  workflowId: string;
-  workflowName: string;
+  automationId: string;
+  automationName: string;
   status: string;
   startedAt: string;
   stoppedAt: string;
@@ -84,8 +84,8 @@ export default function ClientDashboardPage() {
     successRate: 0,
     errorCount: 0,
   });
-  const [workflows, setWorkflows] = useState<N8nWorkflow[]>([]);
-  const [executions, setExecutions] = useState<N8nExecution[]>([]);
+  const [automations, setAutomations] = useState<NativeAutomation[]>([]);
+  const [executions, setExecutions] = useState<AutomationExecution[]>([]);
   const [activities, setActivities] = useState<RecentActivity[]>([]);
   const [executionChartData, setExecutionChartData] = useState<ExecutionChartData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -96,76 +96,73 @@ export default function ClientDashboardPage() {
     try {
       setError(null);
 
-      // Fetch n8n workflows and executions in parallel
-      const [workflowsRes, executionsRes] = await Promise.all([
-        fetch("/api/n8n/workflows"),
-        fetch("/api/n8n/executions?limit=10"),
+      // Fetch native automations and stats
+      const [automationsRes, statsRes] = await Promise.all([
+        fetch("/api/automations"),
+        fetch("/api/stats"),
       ]);
 
-      // Process workflows
-      if (workflowsRes.ok) {
-        const workflowsData = await workflowsRes.json();
-        if (workflowsData.success && workflowsData.data) {
-          setWorkflows(workflowsData.data);
+      // Process automations
+      if (automationsRes.ok) {
+        const automationsData = await automationsRes.json();
+        if (automationsData.success && automationsData.data) {
+          setAutomations(automationsData.data);
 
-          // Calculate stats from workflows
-          const activeCount = workflowsData.data.filter((w: N8nWorkflow) => w.active).length;
+          // Calculate stats from automations
+          const activeCount = automationsData.data.filter((a: NativeAutomation) => a.active).length;
           setStats(prev => ({ ...prev, activeAutomations: activeCount }));
         }
       }
 
-      // Process executions
-      if (executionsRes.ok) {
-        const executionsData = await executionsRes.json();
-        if (executionsData.success) {
-          setExecutions(executionsData.data || []);
+      // Process stats
+      if (statsRes.ok) {
+        const statsData = await statsRes.json();
+        if (statsData.success && statsData.data) {
+          const { totalExecutions, successRate, errorCount, recentExecutions } = statsData.data;
+          setStats(prev => ({
+            ...prev,
+            totalExecutions: totalExecutions || 0,
+            successRate: successRate || 0,
+            errorCount: errorCount || 0,
+          }));
 
-          // Update stats from execution data
-          if (executionsData.stats) {
-            const { total, success, error } = executionsData.stats;
-            setStats(prev => ({
-              ...prev,
-              totalExecutions: total,
-              successRate: total > 0 ? Math.round((success / total) * 100) : 0,
-              errorCount: error,
-            }));
+          // Convert recent executions to activities
+          if (recentExecutions && recentExecutions.length > 0) {
+            const recentActivities: RecentActivity[] = recentExecutions
+              .slice(0, 5)
+              .map((exec: AutomationExecution) => ({
+                id: exec.id,
+                message: `Automation "${exec.automationName}" - ${exec.status}`,
+                time: formatTimeAgo(exec.startedAt),
+                type: "automation" as const,
+                status: exec.status === "success" ? "success" as const :
+                        exec.status === "error" ? "error" as const : "pending" as const,
+              }));
+            setActivities(recentActivities);
+
+            // Generate chart data from executions grouped by automation
+            const automationStats: { [key: string]: { success: number; error: number } } = {};
+            recentExecutions.forEach((exec: AutomationExecution) => {
+              const name = exec.automationName?.split(" - ")[0] || "Unknown";
+              if (!automationStats[name]) {
+                automationStats[name] = { success: 0, error: 0 };
+              }
+              if (exec.status === "success") {
+                automationStats[name].success++;
+              } else if (exec.status === "error") {
+                automationStats[name].error++;
+              }
+            });
+
+            const chartData = Object.entries(automationStats)
+              .map(([name, data]) => ({
+                name: name.length > 15 ? name.substring(0, 12) + "..." : name,
+                success: data.success,
+                error: data.error,
+              }))
+              .slice(0, 6);
+            setExecutionChartData(chartData);
           }
-
-          // Convert executions to activities
-          const recentActivities: RecentActivity[] = (executionsData.data || [])
-            .slice(0, 5)
-            .map((exec: N8nExecution) => ({
-              id: exec.id,
-              message: `Workflow "${exec.workflowName}" - ${exec.status}`,
-              time: formatTimeAgo(exec.startedAt),
-              type: "automation" as const,
-              status: exec.status === "success" ? "success" as const :
-                      exec.status === "error" ? "error" as const : "pending" as const,
-            }));
-          setActivities(recentActivities);
-
-          // Generate chart data from executions grouped by workflow
-          const workflowStats: { [key: string]: { success: number; error: number } } = {};
-          (executionsData.data || []).forEach((exec: N8nExecution) => {
-            const name = exec.workflowName?.split(" - ")[0] || "Unknown";
-            if (!workflowStats[name]) {
-              workflowStats[name] = { success: 0, error: 0 };
-            }
-            if (exec.status === "success") {
-              workflowStats[name].success++;
-            } else if (exec.status === "error") {
-              workflowStats[name].error++;
-            }
-          });
-
-          const chartData = Object.entries(workflowStats)
-            .map(([name, data]) => ({
-              name: name.length > 15 ? name.substring(0, 12) + "..." : name,
-              success: data.success,
-              error: data.error,
-            }))
-            .slice(0, 6);
-          setExecutionChartData(chartData);
         }
       }
 
@@ -322,7 +319,7 @@ export default function ClientDashboardPage() {
 
       {/* Main Content */}
       <div className="grid gap-6 lg:grid-cols-3">
-        {/* Workflows List */}
+        {/* Automations List */}
         <Card className="lg:col-span-2 border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -330,35 +327,35 @@ export default function ClientDashboardPage() {
               Mes Automations
             </CardTitle>
             <CardDescription>
-              {workflows.length} workflows configures
+              {automations.length} automations configurees
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {workflows.length === 0 ? (
+            {automations.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 <Zap className="h-10 w-10 mx-auto mb-2 opacity-50" />
                 <p>Aucune automation configuree</p>
               </div>
             ) : (
               <div className="space-y-3">
-                {workflows.slice(0, 6).map((workflow) => (
+                {automations.slice(0, 6).map((automation) => (
                   <div
-                    key={workflow.id}
+                    key={automation.id}
                     className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${workflow.active ? "bg-emerald-500/10" : "bg-muted"}`}>
-                        <Zap className={`h-4 w-4 ${workflow.active ? "text-emerald-400" : "text-muted-foreground"}`} />
+                      <div className={`p-2 rounded-lg ${automation.active ? "bg-emerald-500/10" : "bg-muted"}`}>
+                        <Zap className={`h-4 w-4 ${automation.active ? "text-emerald-400" : "text-muted-foreground"}`} />
                       </div>
                       <div>
-                        <p className="font-medium text-sm">{workflow.name}</p>
+                        <p className="font-medium text-sm">{automation.name}</p>
                         <p className="text-xs text-muted-foreground">
-                          {workflow.nodes} nodes
+                          {automation.category}
                         </p>
                       </div>
                     </div>
-                    <Badge variant={workflow.active ? "default" : "secondary"}>
-                      {workflow.active ? "Actif" : "Inactif"}
+                    <Badge variant={automation.active ? "default" : "secondary"}>
+                      {automation.active ? "Actif" : "Inactif"}
                     </Badge>
                   </div>
                 ))}
@@ -415,10 +412,10 @@ export default function ClientDashboardPage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-primary" />
-              Executions par Workflow
+              Executions par Automation
             </CardTitle>
             <CardDescription>
-              Performance des workflows (succes vs erreurs)
+              Performance des automations (succes vs erreurs)
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -484,7 +481,7 @@ export default function ClientDashboardPage() {
                 <Zap className="h-5 w-5 mr-3" />
                 <div className="text-left">
                   <p className="font-medium">Automations</p>
-                  <p className="text-xs text-muted-foreground">Gerer mes workflows</p>
+                  <p className="text-xs text-muted-foreground">Gerer mes automations</p>
                 </div>
               </a>
             </Button>

@@ -193,7 +193,7 @@ export interface Automation {
   description?: string;
   type: string;
   status: "ACTIVE" | "PAUSED" | "ERROR" | "DISABLED";
-  n8nWorkflowId?: string;
+  scriptPath?: string;
   schedule?: string;
   lastRunAt?: string;
   nextRunAt?: string;
