@@ -102,6 +102,48 @@
     }
   }
   </script>
+
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quelles sont les principales metriques email a surveiller ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les KPIs essentiels sont le taux d'ouverture (objectif > 20%), le taux de clic (objectif > 2%), le taux de conversion, le revenu par email et le taux de desinscription (a garder < 0.5%)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment analyser la performance des automations ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dans Analytics > Automations, comparez chaque flux : la sequence Bienvenue vise 30%+ de conversion, le panier abandonne 10-15% de recuperation, et le post-achat 20%+ de rachat."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quelles sont les options d'export des rapports ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Trois options sont disponibles : PDF pour les presentations visuelles, CSV pour l'analyse avancee de donnees brutes, et l'envoi automatique par email chaque lundi configurable dans Parametres > Rapports."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment suivre l'entonnoir de conversion des leads ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le rapport Leads affiche le parcours complet : sources d'acquisition (LinkedIn, Google Maps, formulaires), pourcentage de leads qualifies, contacts et clients convertis. Comparez les sources pour identifier le meilleur ratio."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
@@ -167,6 +209,7 @@
             <li><strong>Conversion</strong> : Taux de passage lead → client</li>
           </ul>
 
+          <h2>Conseils pratiques</h2>
           <div class="step-box">
             <h3>Navigation</h3>
             <p>Cliquez sur n'importe quel widget pour accéder au rapport détaillé correspondant.</p>
@@ -214,6 +257,7 @@
             <li><strong>Post-achat</strong> : Objectif 20%+ de rachat</li>
           </ul>
 
+          <h2>Conseils pratiques</h2>
           <div class="step-box">
             <h3>Identifier les problèmes</h3>
             <p>Si le taux d'ouverture est bon mais le CTR faible, le contenu n'est pas convaincant. Si l'ouverture est faible, l'objet doit être amélioré.</p>
@@ -257,6 +301,7 @@
             <li><strong>Email automatique</strong> : Rapport hebdomadaire envoyé chaque lundi</li>
           </ul>
 
+          <h2>Mise en place</h2>
           <div class="step-box">
             <h3>Configurer le rapport automatique</h3>
             <p>Dans Paramètres > Rapports, activez l'envoi hebdomadaire. Ajoutez les destinataires (vous, votre équipe).</p>

@@ -102,6 +102,56 @@
     }
   }
   </script>
+
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quelles donnees sont synchronisees entre Shopify et Klaviyo ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La synchronisation inclut les clients (email, nom, historique d'achat), les commandes (montant, produits, date), le catalogue produits avec images, et les evenements comportementaux (Viewed Product, Added to Cart, Checkout Started)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment fonctionnent les alertes de stock intelligent ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Definissez un seuil d'alerte (ex: 5 unites). Recevez une notification par email ou Slack quand le seuil est atteint. Les clients ayant visite un produit en rupture recoivent automatiquement un email de retour en stock avec un taux de conversion moyen de 20-30%."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qu'est-ce que le Browse Abandonment ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "C'est une sequence ciblant les visiteurs ayant consulte des produits sans ajouter au panier. Email 1 a 2h : Ce produit vous interesse ? Email 2 a 24h : Avis clients. Declenchez uniquement pour les visiteurs ayant passe plus de 30 secondes sur la page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels sont les segments e-commerce essentiels ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les segments cles sont : Premier achat (nouveaux clients a fideliser), Recurrents (2+ commandes), VIP (top 10% par CA), Dormants (pas d'achat depuis 90 jours), et Panier eleve (panier moyen superieur a un seuil defini)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels KPIs e-commerce suivre ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les metriques essentielles sont : revenu attribue aux automations, taux de recuperation panier (objectif 10-15%), AOV (panier moyen), LTV (valeur client sur la duree), et taux de reachat. Un client fidele vaut 5-10x un nouveau client."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
@@ -166,6 +216,7 @@
             <li><strong>Événements</strong> : Viewed Product, Added to Cart, Checkout Started</li>
           </ul>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Vérification</h3>
             <p>Dans Intégrations > Shopify, vérifiez que le statut est "Connecté" et que la dernière sync date de moins de 24h.</p>
@@ -190,6 +241,7 @@
             <li><strong>Retour en stock</strong> : Notification client automatique</li>
           </ul>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Email "Retour en stock"</h3>
             <p>Les clients ayant visité un produit en rupture reçoivent automatiquement un email quand il revient. Taux de conversion moyen : 20-30%.</p>
@@ -236,6 +288,7 @@
             <li><strong>Bought together</strong> : "Fréquemment achetés ensemble"</li>
           </ul>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Intégration dans les emails</h3>
             <p>Utilisez les blocs dynamiques Klaviyo pour insérer des recommandations personnalisées basées sur l'historique de chaque client.</p>

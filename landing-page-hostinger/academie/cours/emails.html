@@ -105,6 +105,56 @@
     }
   }
   </script>
+
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quels sont les 5 elements cles d'un email efficace ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les 5 elements sont : l'objet (40-50 caracteres, cree curiosite), le preheader (complete l'objet), l'accroche (premiere phrase engageante), le corps (message clair, un seul objectif), et le CTA (bouton d'action visible et convaincant)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment structurer une sequence de bienvenue ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La sequence recommandee en 5 emails : Email 1 immediat (bienvenue + promesse), Email 2 a J+1 (presentation marque), Email 3 a J+3 (best-sellers), Email 4 a J+5 (temoignages clients), Email 5 a J+7 (offre premiere commande)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quel est le timing optimal pour la recuperation de panier abandonne ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "3 emails avec timing optimal : Email 1 a 1h (rappel simple), Email 2 a 24h (urgence legere, avis produit), Email 3 a 72h (derniere chance + incitation comme livraison gratuite ou -10%). Cette sequence peut recuperer 10-15% des paniers abandonnes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment fonctionne la segmentation comportementale ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les segments automatiques incluent : VIP (3+ commandes ou CA eleve), Acheteur recent (commande dans les 30 jours), A risque (pas d'achat depuis 60-90 jours), Inactif (pas d'ouverture depuis 90 jours), Nouveau (inscrit dans les 7 jours)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels KPIs email sont les plus importants ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les KPIs essentiels sont : taux d'ouverture (benchmark 20-25%), taux de clic (benchmark 2-5%), revenu par email (le plus important), et taux de desinscription (garder < 0.5%). Privilegiez le revenu sur le taux d'ouverture pour evaluer la performance."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
@@ -195,6 +245,7 @@
             <li><strong>Email 5 (J+7)</strong> : Offre spéciale première commande</li>
           </ol>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Configuration</h3>
             <p>Dans Automations > Créer, choisissez le déclencheur "Inscription à la liste". Ajoutez chaque email avec les délais indiqués.</p>
@@ -219,6 +270,7 @@
             <li><strong>Email 3 (72h)</strong> : Dernière chance + incitation (livraison gratuite, -10%)</li>
           </ol>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Personnalisation obligatoire</h3>
             <p>Incluez les produits du panier avec images, nom et prix. Le client doit voir exactement ce qu'il a laissé.</p>
@@ -247,6 +299,7 @@
             <li><strong>Recommandations (J+21)</strong> : Produits complémentaires personnalisés</li>
           </ol>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Cross-sell intelligent</h3>
             <p>Utilisez les données d'achat pour recommander des produits pertinents. "Les clients qui ont acheté X aiment aussi Y."</p>
@@ -315,6 +368,7 @@
             <li><strong>Contenu</strong> : Long vs court, avec ou sans images</li>
           </ul>
 
+          <h2>Bonnes pratiques</h2>
           <div class="step-box">
             <h3>Règle importante</h3>
             <p>Testez UNE variable à la fois. Si vous changez objet ET CTA, vous ne saurez pas lequel a impacté les résultats.</p>

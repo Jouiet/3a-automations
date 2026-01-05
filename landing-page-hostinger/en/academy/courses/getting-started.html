@@ -77,6 +77,56 @@
   <link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/courses/demarrer.html">
   <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/getting-started.html">
   <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/en/academy/courses/getting-started.html">
+
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I access the 3A Automation dashboard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After subscribing to a pack, you'll receive login credentials by email. Go to dashboard.3a-automation.com to log in. The dashboard includes Overview (7-day summary), Automations (your workflows), Contacts (database with segments), Analytics (detailed reports), and Settings (integrations)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which integrations should I connect first?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with one integration at a time to simplify troubleshooting. Priority integrations are Klaviyo (email marketing - use API key setup) and Shopify (e-commerce - app installation). Go to Settings > Integrations and follow the instructions for each tool."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I create my first automation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Go to Automations > Create > Name it (e.g., 'Welcome - Newsletter'). Choose trigger 'Added to List' and select your list. Click '+ Add step' > 'Email' and write your message. Click 'Activate' to launch. The automation will run for every new subscriber."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should I test my automation before launching?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Add yourself to your list with a test email, verify the email arrives in your inbox, and check that the automation appears in the activity history. Use a separate test email address (e.g., yourname+test@gmail.com) to avoid polluting your stats."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the dashboard Overview section show?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Overview section provides a summary of the last 7 days including: emails sent, revenue generated, active leads, and key performance metrics. This gives you a quick snapshot of your automation performance at a glance."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
@@ -139,6 +189,7 @@
             <li><strong>Analytics</strong> - Detailed reports</li>
             <li><strong>Settings</strong> - Integrations and configuration</li>
           </ul>
+          <h2>Getting Familiar</h2>
           <div class="step-box">
             <h3>Action</h3>
             <p>Take 5 minutes to explore each section. Click on a few elements to familiarize yourself with navigation.</p>
@@ -160,6 +211,7 @@
             <li><strong>Klaviyo</strong> - Email marketing (see Quick Guide for API key setup)</li>
             <li><strong>Shopify</strong> - E-commerce (app installation)</li>
           </ul>
+          <h2>Connection Process</h2>
           <div class="step-box">
             <h3>In the Dashboard</h3>
             <p>Go to Settings > Integrations. Click on the tool you want to connect and follow the instructions.</p>
@@ -180,6 +232,7 @@
         </div>
         <div class="lesson-content">
           <p>Let's create a simple automation together: a welcome email for new newsletter subscribers.</p>
+          <h2>Creating Your First Automation</h2>
           <div class="step-box">
             <h3>Step 1: Create a new automation</h3>
             <p>Automations > Create > Give it a name (e.g., "Welcome - Newsletter").</p>

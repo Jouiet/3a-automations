@@ -105,6 +105,56 @@
     }
   }
   </script>
+
+  <!-- Schema.org FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Qu'est-ce qu'un ICP (Ideal Customer Profile) ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "L'ICP decrit les caracteristiques de vos meilleurs clients : taille d'entreprise, secteur d'activite, decideur cible et problemes resolus par vos solutions. Analysez vos 5 meilleurs clients actuels pour identifier leurs points communs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quelles sources de leads sont disponibles ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "4 sources principales : LinkedIn (profils selon criteres ICP), Google Maps (entreprises locales par secteur/zone), formulaires web (integration landing pages), et import manuel (fichiers CSV). Chaque source peut etre configuree avec des criteres de recherche specifiques."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment fonctionne le lead scoring ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le scoring attribue des points selon 3 criteres : demographiques (correspond a l'ICP +20pts), comportementaux (ouvre email +5pts, clique +10pts, visite pricing +15pts), et engagement (repond +30pts, demande demo +50pts). Seuils : 0-30 froid, 31-60 tiede, 61+ chaud."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment structurer une sequence de nurturing ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sequence type en 5 emails : J0 introduction et proposition de valeur, J3 cas d'usage/temoignage, J7 contenu educatif, J14 offre decouverte ou demo, J21 derniere relance avec urgence. Arretez la sequence des qu'un lead repond pour passer au commercial."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels KPIs de generation de leads suivre ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les 4 KPIs essentiels sont : volume (nombre de leads par source), qualite (% de leads qualifies avec score > 60), conversion (% de leads devenus clients), et cout (CAC - Cout d'Acquisition Client). Concentrez vos efforts sur les canaux les plus rentables."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
@@ -170,6 +220,7 @@
             <li>Quels problèmes résolvent vos solutions ?</li>
           </ul>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Exercice</h3>
             <p>Analysez vos 5 meilleurs clients actuels. Quels points communs ont-ils ? C'est votre ICP.</p>
@@ -195,6 +246,7 @@
             <li><strong>Import manuel</strong> : Fichiers CSV de prospects</li>
           </ul>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Configuration LinkedIn</h3>
             <p>Dans Intégrations > LinkedIn, définissez vos critères de recherche : titre, secteur, localisation. Le système recherche automatiquement les profils correspondants.</p>
@@ -252,6 +304,7 @@
             <li><strong>Engagement</strong> : Répond à email (+30pts), demande démo (+50pts)</li>
           </ul>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Seuils de qualification</h3>
             <p>0-30 : Lead froid (nurturing). 31-60 : Lead tiède (relance). 61+ : Lead chaud (contact commercial).</p>
@@ -301,6 +354,7 @@
             <li><strong>Coût</strong> : CAC (Coût d'Acquisition Client)</li>
           </ul>
 
+          <h2>Mise en pratique</h2>
           <div class="step-box">
             <h3>Tableau de bord</h3>
             <p>Dans Analytics > Leads, visualisez l'entonnoir complet : sources → contacts → qualifiés → convertis.</p>
