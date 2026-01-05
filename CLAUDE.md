@@ -1,8 +1,8 @@
 # 3A Automation
-> Version: 45.0 | 05/01/2026 | Session 136
+> Version: 46.0 | 05/01/2026 | Session 137
 
 ## Identité
-- **Type**: AI Automation Agency (E-commerce B2C + PME B2B)
+- **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com | dashboard.3a-automation.com
 
 ## Métriques
@@ -14,12 +14,14 @@
 | MCPs | 11/11 |
 | SEO/AEO | 88%/100% |
 | Security | 100% (CSP + all headers) |
+| GitHub Actions | ✅ Deploy auto fonctionnel |
 
 ## Règles Strictes
 1. **Factuality**: Vérifier AVANT d'affirmer
 2. **Source**: `automations-registry.json`
 3. **Code**: Complet uniquement (0 TODO/placeholder)
 4. **Format**: CommonJS (.cjs), process.env
+5. **B2C/B2B**: Un client est B2C **OU** B2B, jamais les deux
 
 ## AI Fallback
 Grok 4.1 → GPT-5.2 → Gemini 3 → Claude Sonnet 4 → Local
@@ -27,7 +29,7 @@ Grok 4.1 → GPT-5.2 → Gemini 3 → Claude Sonnet 4 → Local
 ## Commandes
 ```bash
 node scripts/forensic-audit-complete.cjs  # Audit
-git push origin main                       # Deploy
+git push origin main                       # Deploy auto
 ```
 
 ## Références (charger via @)
