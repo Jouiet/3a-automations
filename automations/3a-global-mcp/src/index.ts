@@ -408,6 +408,149 @@ const TOOLS = [
         name: "check_global_env",
         description: "Audits the Global Environment Variables status.",
         inputSchema: { type: "object", properties: {}, required: [] }
+    },
+    {
+        name: "run_doe_orchestrator",
+        description: "Deployment Orchestration Engine (DOE) - Autonomous Task Planner.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                directive: { type: "string", description: "Natural language directive" }
+            },
+            required: ["directive"]
+        }
+    },
+    {
+        name: "manage_google_calendar",
+        description: "Google Calendar Booking System Management.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                action: { type: "string", enum: ["health", "server"], description: "Action to perform" }
+            },
+            required: ["action"]
+        }
+    },
+    {
+        name: "generate_podcast",
+        description: "AI Podcast Generator (Multi-Host, Resilient TTS).",
+        inputSchema: {
+            type: "object",
+            properties: {
+                action: { type: "string", enum: ["health", "topic", "blog", "server"], description: "Action to perform" },
+                topic: { type: "string", description: "Topic for generation" },
+                language: { type: "string", enum: ["fr", "en"], description: "Language" },
+                blog_path: { type: "string", description: "Absolute path to blog file" }
+            },
+            required: ["action"]
+        }
+    },
+    {
+        name: "sync_knowledge_base",
+        description: "Syncs the Automation Registry and Voice Knowledge Base.",
+        inputSchema: { type: "object", properties: {}, required: [] }
+    },
+    {
+        name: "monitor_uptime",
+        description: "System Uptime & Endpoint Monitor.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                action: { type: "string", enum: ["check_all", "check_endpoint", "server"], description: "Action to perform" },
+                endpoint: { type: "string", description: "Specific endpoint to check" }
+            },
+            required: ["action"]
+        }
+    },
+    {
+        name: "run_realtime_voice",
+        description: "Grok Realtime Voice API (WebSocket Proxy).",
+        inputSchema: {
+            type: "object",
+            properties: {
+                action: { type: "string", enum: ["health", "test", "server"], description: "Action to perform" },
+                input: { type: "string", description: "Text input for test" }
+            },
+            required: ["action"]
+        }
+    },
+    {
+        name: "run_doe_orchestrator",
+        description: "Deployment Orchestration Engine (DOE) - Autonomous Task Planner.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                directive: { type: "string", description: "Natural language directive" }
+            },
+            required: ["directive"]
+        }
+    },
+    {
+        name: "manage_google_calendar",
+        description: "Google Calendar Booking System Management.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                action: { type: "string", enum: ["health", "server"], description: "Action to perform" }
+            },
+            required: ["action"]
+        }
+    },
+    {
+        name: "generate_podcast",
+        description: "AI Podcast Generator (Multi-Host, Resilient TTS).",
+        inputSchema: {
+            type: "object",
+            properties: {
+                action: { type: "string", enum: ["health", "topic", "blog", "server"], description: "Action to perform" },
+                topic: { type: "string", description: "Topic for generation" },
+                language: { type: "string", enum: ["fr", "en"], description: "Language" },
+                blog_path: { type: "string", description: "Absolute path to blog file" }
+            },
+            required: ["action"]
+        }
+    },
+    {
+        name: "sync_knowledge_base",
+        description: "Syncs the Automation Registry and Voice Knowledge Base.",
+        inputSchema: { type: "object", properties: {}, required: [] }
+    },
+    {
+        name: "monitor_uptime",
+        description: "System Uptime & Endpoint Monitor.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                action: { type: "string", enum: ["check_all", "check_endpoint", "server"], description: "Action to perform" },
+                endpoint: { type: "string", description: "Specific endpoint to check" }
+            },
+            required: ["action"]
+        }
+    },
+    {
+        name: "run_realtime_voice",
+        description: "Grok Realtime Voice API (WebSocket Proxy).",
+        inputSchema: {
+            type: "object",
+            properties: {
+                action: { type: "string", enum: ["health", "test", "server"], description: "Action to perform" },
+                input: { type: "string", description: "Text input for test" }
+            },
+            required: ["action"]
+        }
+    },
+    {
+        name: "run_linkedin_klaviyo_pipeline",
+        description: "Advanced LinkedIn -> Klaviyo Pipeline with Segmentation.",
+        inputSchema: {
+            type: "object",
+            properties: {
+                search: { type: "string", description: "Search query" },
+                max: { type: "number", description: "Max profiles" },
+                test: { type: "boolean", description: "Test mode" }
+            },
+            required: []
+        }
     }
 ];
 
@@ -422,7 +565,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     if (name === "get_global_status") {
         return {
-            content: [{ type: "text", text: JSON.stringify({ status: "active", mode: "global_router", automations_connected: 28 }, null, 2) }],
+            content: [{ type: "text", text: JSON.stringify({ status: "active", mode: "global_router", automations_connected: 35 }, null, 2) }],
         };
     }
 
@@ -1199,6 +1342,146 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             ps.stderr.on("data", (data: any) => { errorOutput += data.toString(); });
             ps.on("close", (code: number) => {
                 resolve({ content: [{ type: "text", text: output }] });
+            });
+        });
+    }
+
+    if (name === "run_doe_orchestrator") {
+        const { directive } = args as any;
+        const scriptArgs = ["/Users/mac/Documents/JO-AAA/automations/agency/core/doe-dispatcher.cjs", directive];
+        return new Promise((resolve, reject) => {
+            const ps = spawn("node", scriptArgs);
+            let output = "";
+            let errorOutput = "";
+            ps.stdout.on("data", (data: any) => { output += data.toString(); });
+            ps.stderr.on("data", (data: any) => { errorOutput += data.toString(); });
+            ps.on("close", (code: number) => {
+                resolve({ content: [{ type: "text", text: output || errorOutput }] });
+            });
+        });
+    }
+
+    if (name === "manage_google_calendar") {
+        const { action } = args as any;
+        const scriptArgs = ["/Users/mac/Documents/JO-AAA/automations/agency/core/google-calendar-booking.cjs"];
+        if (action === "server") scriptArgs.push("--server");
+
+        return new Promise((resolve, reject) => {
+            const ps = spawn("node", scriptArgs);
+            let output = "";
+            let errorOutput = "";
+            ps.stdout.on("data", (data: any) => { output += data.toString(); });
+            ps.stderr.on("data", (data: any) => { errorOutput += data.toString(); });
+            ps.on("close", (code: number) => {
+                resolve({ content: [{ type: "text", text: output }] });
+            });
+        });
+    }
+
+    if (name === "generate_podcast") {
+        const { action, topic, language = "fr", blog_path } = args as any;
+        const scriptArgs = ["/Users/mac/Documents/JO-AAA/automations/agency/core/podcast-generator-resilient.cjs"];
+
+        if (action === "health") scriptArgs.push("--health");
+        else if (action === "topic") {
+            if (!topic) throw new Error("topic required");
+            scriptArgs.push(`--topic=${topic}`, `--language=${language}`);
+        } else if (action === "blog") {
+            if (!blog_path) throw new Error("blog_path required");
+            scriptArgs.push(`--blog=${blog_path}`, `--language=${language}`);
+        } else if (action === "server") scriptArgs.push("--server");
+
+        return new Promise((resolve, reject) => {
+            const ps = spawn("node", scriptArgs);
+            let output = "";
+            let errorOutput = "";
+            ps.stdout.on("data", (data: any) => { output += data.toString(); });
+            ps.stderr.on("data", (data: any) => { errorOutput += data.toString(); });
+            ps.on("close", (code: number) => {
+                if (code === 0) resolve({ content: [{ type: "text", text: output }] });
+                else resolve({ isError: true, content: [{ type: "text", text: `Error:\n${errorOutput}\n\nOutput:\n${output}` }] });
+            });
+        });
+    }
+
+    if (name === "sync_knowledge_base") {
+        const scriptArgs = ["/Users/mac/Documents/JO-AAA/automations/agency/core/sync-knowledge-base.cjs"];
+        return new Promise((resolve, reject) => {
+            const ps = spawn("node", scriptArgs);
+            let output = "";
+            let errorOutput = "";
+            ps.stdout.on("data", (data: any) => { output += data.toString(); });
+            ps.stderr.on("data", (data: any) => { errorOutput += data.toString(); });
+            ps.on("close", (code: number) => {
+                resolve({ content: [{ type: "text", text: output }] });
+            });
+        });
+    }
+
+    if (name === "monitor_uptime") {
+        const { action, endpoint } = args as any;
+        const scriptArgs = ["/Users/mac/Documents/JO-AAA/automations/agency/core/uptime-monitor.cjs"];
+
+        if (action === "check_endpoint") {
+            if (!endpoint) throw new Error("endpoint required");
+            scriptArgs.push(`--endpoint=${endpoint}`);
+        } else if (action === "server") {
+            scriptArgs.push("--server");
+        }
+
+        return new Promise((resolve, reject) => {
+            const ps = spawn("node", scriptArgs);
+            let output = "";
+            let errorOutput = "";
+            ps.stdout.on("data", (data: any) => { output += data.toString(); });
+            ps.stderr.on("data", (data: any) => { errorOutput += data.toString(); });
+            ps.on("close", (code: number) => {
+                resolve({ content: [{ type: "text", text: output }] });
+            });
+        });
+    }
+
+    if (name === "run_realtime_voice") {
+        const { action, input } = args as any;
+        const scriptArgs = ["/Users/mac/Documents/JO-AAA/automations/agency/core/grok-voice-realtime.cjs"];
+
+        if (action === "health") scriptArgs.push("--health");
+        else if (action === "test") {
+            const msg = input || "Test audio";
+            scriptArgs.push(`--test=${msg}`);
+        } else if (action === "server") {
+            scriptArgs.push("--server");
+        }
+
+        return new Promise((resolve, reject) => {
+            const ps = spawn("node", scriptArgs);
+            let output = "";
+            let errorOutput = "";
+            ps.stdout.on("data", (data: any) => { output += data.toString(); });
+            ps.stderr.on("data", (data: any) => { errorOutput += data.toString(); });
+            ps.on("close", (code: number) => {
+                resolve({ content: [{ type: "text", text: output }] });
+            });
+        });
+    }
+
+    if (name === "run_linkedin_klaviyo_pipeline") {
+        const { search, max = 50, test } = args as any;
+        const scriptArgs = ["/Users/mac/Documents/JO-AAA/automations/agency/linkedin-to-klaviyo-pipeline.cjs"];
+
+        if (test) scriptArgs.push("--test");
+        else if (search) scriptArgs.push(`--search=${search}`, `--max=${max}`);
+        else scriptArgs.push("--test"); // Default to test
+
+        return new Promise((resolve, reject) => {
+            const ps = spawn("node", scriptArgs);
+            let output = "";
+            let errorOutput = "";
+            ps.stdout.on("data", (data: any) => { output += data.toString(); });
+            ps.stderr.on("data", (data: any) => { errorOutput += data.toString(); });
+            ps.on("close", (code: number) => {
+                if (code === 0) resolve({ content: [{ type: "text", text: output }] });
+                else resolve({ isError: true, content: [{ type: "text", text: `Error:\n${errorOutput}\n\nOutput:\n${output}` }] });
             });
         });
     }

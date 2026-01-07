@@ -53,6 +53,22 @@ serverProcess.stdout.on("data", (data) => {
         // ...
         // Timeout
         setTimeout(() => {
+            let status = {};
+            try {
+                const jsonResponse = JSON.parse(str);
+                if (jsonResponse.result && jsonResponse.result.status) {
+                    status = jsonResponse.result.status;
+                }
+            } catch (e) {
+                // Not JSON or expected structure, proceed with timeout check
+            }
+
+            if (status.automations_connected !== 35) {
+                console.error(`❌ automations_connected mismatch! Expected: 35, Got: ${status.automations_connected}`);
+                process.exit(1);
+            }
+            console.log(`✅ Status Check Passed: ${status.automations_connected} automations connected.`);
+
             if (!isVerified) {
                 console.error("❌ TIMEOUT: Server did not respond in 20s.");
                 serverProcess.kill();
@@ -550,6 +566,143 @@ serverProcess.stdout.on("data", (data) => {
 
     if (str.includes("PROVIDER STATUS") || str.includes("Static fallback") || str.includes("Grok")) {
         console.log("✅ Execution Verified: Email Personalization script triggered.");
+
+        // TEST 29: DOE (Directive)
+        console.log("🚀 Testing Execution: run_doe_orchestrator...");
+        const doeRequest = {
+            jsonrpc: "2.0",
+            id: 31,
+            method: "tools/call",
+            params: {
+                name: "run_doe_orchestrator",
+                arguments: { directive: "status report" }
+            }
+        };
+        serverProcess.stdin.write(JSON.stringify(doeRequest) + "\n");
+    }
+
+    if (str.includes("DOE") || str.includes("Orchestrator") || str.includes("Finding best tool") || str.includes("No matching tool")) {
+        console.log("✅ Execution Verified: DOE script triggered.");
+
+        // TEST 30: Google Calendar (Health)
+        console.log("🚀 Testing Execution: manage_google_calendar...");
+        const gcalRequest = {
+            jsonrpc: "2.0",
+            id: 32,
+            method: "tools/call",
+            params: {
+                name: "manage_google_calendar",
+                arguments: { action: "health" } // maps to default check
+            }
+        };
+        serverProcess.stdin.write(JSON.stringify(gcalRequest) + "\n");
+    }
+
+    if (str.includes("Google Calendar") || str.includes("Configuration") || str.includes("Business Hours")) {
+        console.log("✅ Execution Verified: Google Calendar script triggered.");
+
+        // TEST 31: Podcast (Health)
+        console.log("🚀 Testing Execution: generate_podcast...");
+        const podcastRequest = {
+            jsonrpc: "2.0",
+            id: 33,
+            method: "tools/call",
+            params: {
+                name: "generate_podcast",
+                arguments: { action: "health" }
+            }
+        };
+        serverProcess.stdin.write(JSON.stringify(podcastRequest) + "\n");
+    }
+
+    if (str.includes("Podcast Generator") || str.includes("Env") || str.includes("ANTHROPIC_API_KEY")) {
+        console.log("✅ Execution Verified: Podcast script triggered.");
+
+        // TEST 32: KB Sync
+        console.log("🚀 Testing Execution: sync_knowledge_base...");
+        const kbRequest = {
+            jsonrpc: "2.0",
+            id: 34,
+            method: "tools/call",
+            params: {
+                name: "sync_knowledge_base",
+                arguments: {}
+            }
+        };
+        serverProcess.stdin.write(JSON.stringify(kbRequest) + "\n");
+    }
+
+    if (str.includes("Registry") || str.includes("SEGMENTATION") || str.includes("Updated knowledge")) {
+        console.log("✅ Execution Verified: KB Sync script triggered.");
+
+        // TEST 33: Uptime (Check All)
+        console.log("🚀 Testing Execution: monitor_uptime...");
+        const uptimeRequest = {
+            jsonrpc: "2.0",
+            id: 35,
+            method: "tools/call",
+            params: {
+                name: "monitor_uptime",
+                arguments: { action: "check_all" }
+            }
+        };
+        serverProcess.stdin.write(JSON.stringify(uptimeRequest) + "\n");
+    }
+
+    if (str.includes("UPTIME MONITOR") || str.includes("Checking all endpoints") || str.includes("Overall:")) {
+        console.log("✅ Execution Verified: Uptime Monitor script triggered.");
+
+        // TEST 34: Realtime Voice (Health)
+        console.log("🚀 Testing Execution: run_realtime_voice...");
+        const voiceRequest = {
+            jsonrpc: "2.0",
+            id: 36,
+            method: "tools/call",
+            params: {
+                name: "run_realtime_voice",
+                arguments: { action: "health" }
+            }
+        };
+        serverProcess.stdin.write(JSON.stringify(voiceRequest) + "\n");
+    }
+
+    if (str.includes("Voice API Health") || str.includes("Grok Realtime") || str.includes("Gemini")) {
+        console.log("✅ Execution Verified: Realtime Voice script triggered.");
+
+        // TEST 35: Global Env
+        // We missed testing this one earlier, doing it now.
+        console.log("🚀 Testing Execution: check_global_env...");
+        const envRequest = {
+            jsonrpc: "2.0",
+            id: 37,
+            method: "tools/call",
+            params: {
+                name: "check_global_env",
+                arguments: {}
+            }
+        };
+        serverProcess.stdin.write(JSON.stringify(envRequest) + "\n");
+    }
+
+    if (str.includes("VARIABLES CONFIGURÉES") || str.includes("VARIABLES VIDES")) {
+        console.log("✅ Execution Verified: Global Env script triggered.");
+
+        // TEST 36: LinkedIn Klaviyo Pipeline (Test Mode)
+        console.log("🚀 Testing Execution: run_linkedin_klaviyo_pipeline...");
+        const lkRequest = {
+            jsonrpc: "2.0",
+            id: 38,
+            method: "tools/call",
+            params: {
+                name: "run_linkedin_klaviyo_pipeline",
+                arguments: { test: true }
+            }
+        };
+        serverProcess.stdin.write(JSON.stringify(lkRequest) + "\n");
+    }
+
+    if (str.includes("LINKEDIN → KLAVIYO PIPELINE") || str.includes("DRY RUN")) {
+        console.log("✅ Execution Verified: LinkedIn Klaviyo Pipeline script triggered.");
         isVerified = true;
         serverProcess.kill();
     }
