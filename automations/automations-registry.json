@@ -93,7 +93,8 @@
       "frequency_fr": "Toutes les heures",
       "frequency_en": "Every hour",
       "benefit_fr": "+15% leads capturés",
-      "benefit_en": "+15% leads captured"
+      "benefit_en": "+15% leads captured",
+      "semantic_description": "Synchronizes lead data from Meta Ads (Facebook/Instagram) lead forms directly into Shopify customer records. Use this for Meta-based acquisition workflows."
     },
     {
       "id": "google-ads-sync",
@@ -201,7 +202,8 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Leads locaux ciblés",
-      "benefit_en": "Targeted local leads"
+      "benefit_en": "Targeted local leads",
+      "semantic_description": "Scrapes local business data from Google Maps based on query and location. Use this for local B2B lead generation or competitive research in a specific area."
     },
     {
       "id": "sourcing-linkedin",
@@ -213,7 +215,8 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Base prospects B2B",
-      "benefit_en": "B2B prospect database"
+      "benefit_en": "B2B prospect database",
+      "semantic_description": "Extracts professional profiles from LinkedIn based on search criteria. Essential for B2B outreach and hiring intelligence."
     },
     {
       "id": "veille-recrutement",
@@ -1514,7 +1517,10 @@
         "freight-calculation"
       ],
       "providers": "CJDropshipping API v2.0",
-      "requirements": ["CJ_API_KEY", "CJ_EMAIL"],
+      "requirements": [
+        "CJ_API_KEY",
+        "CJ_EMAIL"
+      ],
       "status": "tested-ok"
     },
     {
@@ -1538,7 +1544,9 @@
         "sandbox-mode"
       ],
       "providers": "BigBuy REST API",
-      "requirements": ["BIGBUY_API_KEY"],
+      "requirements": [
+        "BIGBUY_API_KEY"
+      ],
       "status": "tested-ok"
     },
     {
@@ -1563,9 +1571,36 @@
         "order-splitting"
       ],
       "providers": "CJDropshipping + BigBuy",
-      "storefronts": ["Shopify", "WooCommerce"],
-      "requirements": ["CJ_API_KEY", "BIGBUY_API_KEY", "SHOPIFY_ACCESS_TOKEN"],
+      "storefronts": [
+        "Shopify",
+        "WooCommerce"
+      ],
+      "requirements": [
+        "CJ_API_KEY",
+        "BIGBUY_API_KEY",
+        "SHOPIFY_ACCESS_TOKEN"
+      ],
       "status": "tested-ok"
+    },
+    {
+      "id": "agency-env-check",
+      "name_en": "Environment Health Check",
+      "category": "agency-ops",
+      "type": "internal",
+      "script": "agency/core/check-env-status.cjs",
+      "frequency": "daily",
+      "benefit": "Ensures all agency APIs and keys are valid",
+      "semantic_description": "Checks the status of environment variables and core infrastructure connectivity."
+    },
+    {
+      "id": "agency-api-test",
+      "name_en": "API Connectivity Tester",
+      "category": "agency-ops",
+      "type": "internal",
+      "script": "generic/test-all-apis.cjs",
+      "frequency": "manual",
+      "benefit": "Deep diagnostic of all external integrations",
+      "semantic_description": "Performs a full connectivity test across Shopify, Klaviyo, Apify, and Meta APIs."
     }
   ],
   "types": {

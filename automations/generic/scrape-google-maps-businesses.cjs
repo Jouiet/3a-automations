@@ -54,11 +54,11 @@ const CONFIG = {
   // Actor IDs (from Apify Store)
   ACTORS: {
     // Primary: Most reliable, full data
-    GOOGLE_PLACES: 'compass/crawler-google-places',
+    GOOGLE_PLACES: 'compass~crawler-google-places',
     // Alternative: Cheaper, good for volume
-    GOOGLE_MAPS_ALT: 'nwua/google-maps-scraper',
+    GOOGLE_MAPS_ALT: 'nwua~google-maps-scraper',
     // Specialized: Reviews focus
-    GOOGLE_REVIEWS: 'compass/google-maps-reviews-scraper',
+    GOOGLE_REVIEWS: 'compass~google-maps-reviews-scraper',
   },
 
   // Output

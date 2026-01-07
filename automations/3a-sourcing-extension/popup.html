@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3A Smart Sourcing</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-light: #1e293b;
+            --brand-blue: #3b82f6;
+            --text-main: #f1f5f9;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            width: 350px;
+            min-height: 400px;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            height: 32px;
+            width: auto;
+        }
+
+        h1 {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(90deg, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-card {
+            background: var(--card-light);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .data-value {
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .image-preview {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            background: #000;
+            object-fit: cover;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-dim);
+            padding-top: 10px;
+        }
+
+        /* Config Section */
+        .config-area {
+            margin-top: 10px;
+        }
+
+        input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 8px;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+    </style>
+    <script src="popup.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="icons/icon48.png" alt="Logo" class="logo">
+            <h1>3A Smart Sourcing</h1>
+        </header>
+
+        <div class="status-card">
+            <div class="label">Product Detected</div>
+            <div id="productName" class="data-value">Scanning...</div>
+            <img id="productImage" class="image-preview" src="">
+        </div>
+
+        <div class="status-card">
+            <div class="label">Target Price</div>
+            <div id="productPrice" class="data-value">--</div>
+        </div>
+
+        <div class="config-area">
+            <div class="label">Destination URL (Your Workflow Endpoint)</div>
+            <input type="text" id="webhookUrl" placeholder="https://your-internal-system.com/api/receive">
+        </div>
+
+        <button id="sendBtn" class="btn-primary">🚀 Send to Agency</button>
+
+        <div class="footer">
+            Powered by Ultrathink Intelligence
+        </div>
+    </div>
+</body>
+
+</html>

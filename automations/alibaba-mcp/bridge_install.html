@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3A Automation | Intelligent Sourcing Bridge</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --text-light: #f8fafc;
+            --brand-blue: #3b82f6;
+            --brand-glow: rgba(59, 130, 246, 0.5);
+            --success-green: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .card {
+            background: var(--card-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient Glow */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            height: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .bookmark-container {
+            margin: 40px 0;
+            padding: 40px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 16px;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .bookmark-label {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-dark);
+            padding: 0 15px;
+            color: #64748b;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bookmarklet {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: grab;
+            box-shadow: 0 10px 20px -5px var(--brand-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .bookmarklet:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px var(--brand-glow);
+        }
+
+        .bookmarklet:active {
+            transform: scale(0.98);
+            cursor: grabbing;
+        }
+
+        .instructions {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .instruction-item {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 24px;
+            border-radius: 12px;
+        }
+
+        .instruction-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: var(--brand-blue);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .instruction-text {
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo-container">
+                <!-- Assuming logo.png is in the same folder -->
+                <img src="logo.png" alt="3A Automation" class="logo-img">
+            </div>
+
+            <h1>Intelligent Sourcing Bridge</h1>
+            <p class="subtitle">Connect Accio.ai intelligence directly to your AI Agent.</p>
+
+            <div class="bookmark-container">
+                <span class="bookmark-label">Drag this button to your Bookmarks Bar</span>
+
+                <a class="bookmarklet" href="javascript:(function(){
+                    /* 3A AUTOMATION - V2.1 SMART SCRAPER */
+                    function getData() {
+                        var data = { name: '', image: '', desc: '', price: 'Best available', cur: 'USD', brand: '' };
+                        try {
+                            /* 1. JSON-LD Extraction */
+                            var scripts = document.querySelectorAll('script[type=\'application/ld+json\']');
+                            scripts.forEach(s => {
+                                try {
+                                    var json = JSON.parse(s.innerText);
+                                    var items = Array.isArray(json) ? json : (json['@graph'] || [json]);
+                                    var product = items.find(x => x['@type'] === 'Product' || x['@type'] === 'ItemPage');
+                                    
+                                    if (product) {
+                                        data.name = product.name || data.name;
+                                        data.image = product.image || (Array.isArray(product.image) ? product.image[0] : '') || data.image;
+                                        data.desc = product.description || data.desc;
+                                        data.brand = product.brand ? (product.brand.name || product.brand) : data.brand;
+                                        if(product.offers) {
+                                            var offer = Array.isArray(product.offers) ? product.offers[0] : product.offers;
+                                            data.price = offer.price || data.price;
+                                            data.cur = offer.priceCurrency || data.cur;
+                                        }
+                                    }
+                                } catch(e){}
+                            });
+                            
+                            /* 2. OpenGraph Fallback */
+                            if(!data.name) data.name = document.querySelector('meta[property=\'og:title\']')?.content || document.title;
+                            if(!data.image) data.image = document.querySelector('meta[property=\'og:image\']')?.content || '';
+                        } catch(e) {}
+                        
+                        /* 3. Sanitization */
+                        data.name = data.name.replace(/\|.*/,'').replace(/Amazon\..*/,'').trim();
+                        return data;
+                    }
+
+                    var d = getData();
+                    var url = window.location.href;
+                    var sel = window.getSelection().toString();
+                    var query = sel || d.name;
+
+                    var prompt = 'Use alibaba-sourcing to find suppliers for:\n' +
+                                 '```json\n' +
+                                 JSON.stringify({
+                                    product_name: query,
+                                    reference_image: d.image,
+                                    target_price: d.price + ' ' + d.cur,
+                                    brand_context: d.brand,
+                                    source_url: url
+                                 }, null, 2) +
+                                 '\n```\n' +
+                                 'Fetch MOQ, Price, and Shipping to France.';
+
+                    navigator.clipboard.writeText(prompt).then(function() {
+                        alert('✅ [3A Automation] Data Extracted.\n\nProduct: ' + query.substring(0,30) + '...');
+                    }, function() {
+                        var ta=document.createElement('textarea'); ta.value=prompt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+                        alert('✅ [3A Automation] Data Copied.');
+                    });
+                })();">
+                    <span>3A SMART BRIDGE</span>
+                </a>
+            </div>
+
+            <div class="instructions">
+                <div class="instruction-item">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-text">
+                        <strong>Install</strong><br>
+                        Drag the blue button above to your browser's favorites/bookmarks bar.
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-text">
+                        <strong>Capture</strong><br>
+                        Go to any product page (Accio, Amazon) and click the <strong>3A Smart Bridge</strong> button.
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-text">
+                        <strong>Automate</strong><br>
+                        Paste (Cmd+V) the structured data into your Claude Agent to begin sourcing.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

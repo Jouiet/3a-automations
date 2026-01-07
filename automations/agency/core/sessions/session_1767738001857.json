@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-01-06T22:20:01.857Z",
+  "plan": {
+    "toolId": "sourcing-google-maps",
+    "toolName": "Google Maps Sourcing",
+    "script": "generic/scrape-google-maps-businesses.cjs",
+    "params": [
+      "--location=maroc",
+      "--query=\"saas\""
+    ],
+    "reasoning": "Selected sourcing-google-maps because directive contains keywords matching 'Scrapes local business data from Google Maps based on query and location. Use this for local B2B lead generation or competitive research in a specific area.'."
+  },
+  "result": {
+    "success": false,
+    "error": "Command failed: node /Users/mac/Documents/JO-AAA/automations/generic/scrape-google-maps-businesses.cjs --dry-run --location=maroc --query=\"saas\"\n\n❌ ERROR: Failed to start actor: 404 - {\n  \"error\": {\n    \"type\": \"page-not-found\",\n    \"message\": \"We have bad news: there is no API endpoint at this URL. Did you specify it correctly?\"\n  }\n}\n"
+  }
+}
