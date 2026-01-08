@@ -926,8 +926,133 @@ const TOOLS = [
         name: "check_system_readiness",
         description: "Runs a comprehensive Python-based system readiness audit.",
         inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "lead_scoring_agentic",
+        description: "Lead Scoring - Agentic (Level 3): AI critique of scoring accuracy",
+        inputSchema: {
+            type: "object",
+            properties: {
+                input: { type: "string" },
+                historical: { type: "string" },
+                agentic: { type: "boolean" }
+            },
+            required: ["input"]
+        }
+    },
+    {
+        name: "flows_audit_agentic",
+        description: "Flows Audit - Agentic (Level 3): AI-prioritized fix list with revenue impact",
+        inputSchema: {
+            type: "object",
+            properties: {
+                platform: { type: "string", enum: ["klaviyo", "shopify"] },
+                api_key: { type: "string" },
+                agentic: { type: "boolean" }
+            },
+            required: ["platform"]
+        }
+    },
+    {
+        name: "product_enrichment_agentic",
+        description: "Product Enrichment - Agentic (Level 3): SEO quality scoring with auto-publish",
+        inputSchema: {
+            type: "object",
+            properties: {
+                product: { type: "string" },
+                agentic: { type: "boolean" },
+                auto_publish: { type: "boolean" }
+            },
+            required: ["product"]
+        }
+    },
+    {
+        name: "ga4_budget_optimizer_agentic",
+        description: "GA4 Budget Optimizer - Agentic (Level 3): AI budget reallocation based on ROI",
+        inputSchema: {
+            type: "object",
+            properties: {
+                property_id: { type: "string" },
+                agentic: { type: "boolean" }
+            },
+            required: ["property_id"]
+        }
+    },
+    {
+        name: "store_audit_agentic",
+        description: "Store Audit - Agentic (Level 3): Conversion impact prediction with A/B simulation",
+        inputSchema: {
+            type: "object",
+            properties: {
+                shop: { type: "string" },
+                token: { type: "string" },
+                agentic: { type: "boolean" }
+            },
+            required: ["shop", "token"]
+        }
+    },
+    {
+        name: "abandoned_cart",
+        description: "Abandoned Cart Recovery Flow",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "browse_abandonment",
+        description: "Browse Abandonment Flow",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "cart_recovery_video",
+        description: "Cart Recovery Video Generator",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "hot_warm_cold",
+        description: "Hot/Warm/Cold Lead Segmentation",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "low_stock_alert",
+        description: "Low Stock Alert System",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "loyalty_webhooks",
+        description: "Loyalty Program Webhooks",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "post_purchase",
+        description: "Post-Purchase Flow",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "vip_tiers",
+        description: "VIP Tiers Management",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "welcome_series",
+        description: "Welcome Series Flow",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "win_back",
+        description: "Win-Back Campaign Flow",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "margin_projections",
+        description: "Margin Projections Calculator",
+        inputSchema: { type: "object", properties: {} }
+    },
+    {
+        name: "inventory_analysis",
+        description: "Inventory Analysis Tool",
+        inputSchema: { type: "object", properties: {} }
     }
 ];
+
 
 // List Tools Handler
 server.setRequestHandler(ListToolsRequestSchema, async () => {
