@@ -23,7 +23,7 @@
 ## 2. POSITIONNEMENT
 
 - **Cible:** PME et e-commerce avec CA mensuel de 10k EUR a 500k EUR
-- **Differenciateur #1:** MCP Router proprietaire (99+ outils connectes aux IA)
+- **Differenciateur #1:** MCP Router proprietaire (112+ outils connectes aux IA)
 - **Differenciateur #2:** IA Agentique Niveau 4 (appels autonomes, auto-critique)
 - **Differenciateur #3:** Agence boutique - relation directe avec le fondateur, expertise senior, prix transparents
 - **Proposition de valeur:** Automatiser les taches repetitives pour liberer votre temps strategique
@@ -89,7 +89,7 @@
 
 ---
 
-## 5. CATALOGUE D'AUTOMATISATIONS (99 total)
+## 5. CATALOGUE D'AUTOMATISATIONS (112 total)
 
 ### Lead Generation & Acquisition (20)
 - Sync Meta/Google/TikTok Leads
