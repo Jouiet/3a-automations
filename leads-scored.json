@@ -1,0 +1,61 @@
+{
+  "scores": [
+    {
+      "id": "lead_001",
+      "email": "test1@example.com",
+      "activity_score": 50,
+      "last_seen": "2026-01-05",
+      "tags": [
+        "retail",
+        "shopify"
+      ],
+      "score": 0,
+      "scoring_weights": {
+        "email_opens": 0.02,
+        "email_clicks": 0.08,
+        "website_visits": 0.1,
+        "form_submissions": 0.2,
+        "demo_requests": 0.6
+      },
+      "scored_at": "2026-01-08T19:33:38.294Z"
+    },
+    {
+      "id": "lead_002",
+      "email": "test2@example.com",
+      "activity_score": 10,
+      "last_seen": "2025-12-01",
+      "tags": [
+        "magento"
+      ],
+      "score": 0,
+      "scoring_weights": {
+        "email_opens": 0.02,
+        "email_clicks": 0.08,
+        "website_visits": 0.1,
+        "form_submissions": 0.2,
+        "demo_requests": 0.6
+      },
+      "scored_at": "2026-01-08T19:33:38.294Z"
+    }
+  ],
+  "quality": {
+    "score": 3,
+    "feedback": "The scoring logic is overly linear and fails to differentiate between passive engagement and high-intent signals. Weighting 'Demo Requests' (bottom-of-funnel) the same as generic 'Form Submissions' (often top-of-funnel) dilutes lead quality. Furthermore, 'Email Opens' are weighted too heavily given their unreliability due to privacy protections (MPP). There is a critical lack of time-decay logic; lead_002 is over 30 days old but carries no penalty. Finally, the provided sample leads show a 'score' of 0 despite an 'activity_score' being present, suggesting a failure in the calculation engine or a lack of granular event data mapping.",
+    "suggested_adjustments": {
+      "email_opens": 0.05,
+      "email_clicks": 0.15,
+      "website_visits": 0.1,
+      "form_submissions": 0.2,
+      "demo_requests": 0.5
+    },
+    "provider": "google"
+  },
+  "refined": true,
+  "weights": {
+    "email_opens": 0.02,
+    "email_clicks": 0.08,
+    "website_visits": 0.1,
+    "form_submissions": 0.2,
+    "demo_requests": 0.6
+  }
+}

@@ -59,7 +59,7 @@ IDENTITE:
 - Agence automation pour PME et e-commerce (tous secteurs)
 - Experts Klaviyo, Shopify, GA4/GTM, Voice AI, MCP Router
 - Site: 3a-automation.com
-- 112 automatisations disponibles dans 10 categories
+- 118 automatisations vérifiées (Level 4 Autonomous)
 - MCP Router propriétaire (Type-Safe, multi-modèles)
 
 CATEGORIES D'AUTOMATISATIONS (112 total):
@@ -106,7 +106,7 @@ IDENTITY:
 - Automation agency for SMBs and e-commerce (all sectors)
 - Experts in Klaviyo, Shopify, GA4/GTM, Voice AI, MCP Router
 - Website: 3a-automation.com
-- 112 automations available in 10 categories
+- 118 verified automations (Level 4 Autonomous)
 - Proprietary MCP Router (Type-Safe, multi-model)
 
 AUTOMATION CATEGORIES (112 total):

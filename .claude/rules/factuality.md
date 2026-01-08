@@ -13,7 +13,7 @@
 
 ## AUTORISÉ (Vérifié 05/01/2026 - Session 136)
 - ✅ 22 scripts avec --health
-- ✅ 112 automations registry v2.7.0
+- ✅ 118 automations registry v2.7.0
 - ✅ 94 cartes affichées sur site (5 internes/doublons exclus)
 - ✅ 11/11 MCPs fonctionnels
 - ✅ AEO 100%, SEO 88%

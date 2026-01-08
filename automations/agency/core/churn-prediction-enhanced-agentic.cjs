@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+const path = require('path');
+// Load environment variables from project root
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 /**
  * Churn Prediction - Enhanced Agentic (Level 3)
  * 
@@ -13,7 +16,8 @@ const CONFIG = {
     QUALITY_THRESHOLD: 8,
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
-        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GOOGLE_API_KEY }
+        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
+        { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ]
 };
 
@@ -47,19 +51,71 @@ function assessChurnRisk(customers) {
     });
 }
 
-async function generateRetentionStrategy(customer) {
-    const strategies = {
-        high: ['Urgent: Personal call from account manager', 'Exclusive VIP discount 30%', 'Free premium upgrade 3 months'],
-        medium: ['Email: "We miss you" + 15% discount', 'Product recommendation based on past purchases', 'Loyalty points bonus'],
-        low: ['Standard newsletter', 'New product announcement', 'Seasonal promotion']
-    };
+async function callAI(provider, prompt, systemPrompt = '') {
+    if (!provider.apiKey) throw new Error(`API key missing for ${provider.name}`);
 
+    try {
+        let response;
+        if (provider.name === 'anthropic') {
+            response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-api-key': provider.apiKey, 'anthropic-version': '2023-06-01' },
+                body: JSON.stringify({ model: provider.model, max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content: prompt }] })
+            });
+        } else if (provider.name === 'google') {
+            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${provider.model}:generateContent?key=${provider.apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: `${systemPrompt}\n\n${prompt}` }] }] })
+            });
+        } else if (provider.name === 'xai') {
+            response = await fetch('https://api.x.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${provider.apiKey}` },
+                body: JSON.stringify({ model: provider.model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }] })
+            });
+        }
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        const text = provider.name === 'anthropic' ? data.content[0].text :
+            provider.name === 'google' ? data.candidates[0].content.parts[0].text :
+                data.choices[0].message.content;
+
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) throw new Error('No JSON found');
+        return JSON.parse(jsonMatch[0]);
+    } catch (e) {
+        console.warn(`  ⚠️ AI call failed: ${e.message}`);
+        throw e;
+    }
+}
+
+async function generateRetentionStrategy(customer) {
+    const prompt = `Generate a personalized retention strategy for this high-risk customer:
+${JSON.stringify(customer, null, 2)}
+
+Task:
+1. Craft a high-conversion offer or message to prevent churn.
+2. Select the best communication channel (email, SMS, phone).
+
+Output JSON: { "customer": "${customer.email}", "risk": "${customer.churnRisk}", "score": ${customer.churnScore}, "strategy": "...", "channel": "..." }`;
+
+    for (const provider of CONFIG.AI_PROVIDERS) {
+        try {
+            return await callAI(provider, prompt, 'You are a Customer Retention Specialist.');
+        } catch (e) {
+            continue;
+        }
+    }
+
+    // Fallback if AI fails
     return {
         customer: customer.email,
         risk: customer.churnRisk,
         score: customer.churnScore,
-        strategy: strategies[customer.churnRisk][0],
-        channel: customer.churnRisk === 'high' ? 'voice' : 'email'
+        strategy: 'Urgent: Loyalty discount offer 20%',
+        channel: 'email'
     };
 }
 

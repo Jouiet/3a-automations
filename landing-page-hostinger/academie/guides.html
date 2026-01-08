@@ -124,6 +124,29 @@
     </div>
   </header>
 
+  <!-- Agentic Status Banner (Live Data) -->
+  <div class="agentic-status-banner" id="agentic-status-banner">
+    <div class="container">
+      <div class="status-content">
+        <div class="status-left">
+          <span class="pulse-indicator online"></span>
+          <span class="status-text">AGENTIC BACKEND: <strong id="system-status-text">OPERATIONAL</strong></span>
+          <span class="status-divider">|</span>
+          <span class="status-metric">ENV CONFIG: <strong id="config-rate-text">100%</strong></span>
+          <span class="status-divider">|</span>
+          <span class="status-metric">AGENCY: <strong id="agentic-count-text">18 Agentic Workflows</strong></span>
+        </div>
+        <div class="status-right" id="verified-apis-scroll">
+          <span class="api-tag ok">Shopify</span>
+          <span class="api-tag ok">Klaviyo</span>
+          <span class="api-tag ok">xAI</span>
+          <span class="api-tag ok">Google</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <main>
     <div class="container">
       <div class="breadcrumb">
@@ -533,5 +556,7 @@
       guide.classList.toggle('open');
     }
   </script>
+  <script src="../geo-locale.js"></script>
+  <script src="../agentic-transparency.js"></script>
 </body>
 </html>

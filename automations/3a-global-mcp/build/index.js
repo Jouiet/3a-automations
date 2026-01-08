@@ -3,6 +3,27 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema, } from "@modelcontextprotocol/sdk/types.js";
 import { spawn } from "child_process";
+// Observability Logger
+const logger = {
+    info: (message, data) => {
+        const entry = {
+            timestamp: new Date().toISOString(),
+            level: "INFO",
+            message,
+            ...data
+        };
+        console.error(JSON.stringify(entry)); // MCP uses stdout for protocol, stderr for logs
+    },
+    error: (message, error) => {
+        const entry = {
+            timestamp: new Date().toISOString(),
+            level: "ERROR",
+            message,
+            error: error?.message || error
+        };
+        console.error(JSON.stringify(entry));
+    }
+};
 // Define the server
 const server = new Server({
     name: "3a-global-mcp",
@@ -1082,6 +1103,7 @@ async function executeScript(scriptPath, args = [], options = {}) {
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { name, arguments: rawArgs } = request.params;
     const args = (rawArgs || {});
+    logger.info(`Invoking tool: ${name}`, { args });
     switch (name) {
         case "get_global_status": {
             return {

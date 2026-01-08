@@ -8,10 +8,10 @@
  * - Europe: French + EUR
  * - International: English + USD
  *
- * @version 3.0.0
- * @date 2025-12-20
+ * @version 5.0.0
+ * @date 2026-01-08
  */
-(function() {
+(function () {
   'use strict';
 
   const GeoLocale = {
@@ -60,8 +60,8 @@
       // UK → English + USD
       'GB': { lang: 'en', currency: 'USD', region: 'international' },
 
-      // Canada → French or English + USD
-      'CA': { lang: 'fr', currency: 'USD', region: 'international' },
+      // Canada → English + USD
+      'CA': { lang: 'en', currency: 'USD', region: 'international' },
 
       // Default: International → English + USD
       'US': { lang: 'en', currency: 'USD', region: 'international' },
@@ -214,9 +214,20 @@
     /**
      * Redirect to English version if needed
      */
-    redirectIfNeeded(locale, enPath) {
-      if (this.shouldShowEnglish(locale) && !window.location.pathname.includes('/en/')) {
-        window.location.href = enPath;
+    redirectIfNeeded(locale) {
+      const isEnPage = window.location.pathname.includes('/en/');
+      const shouldBeEn = this.shouldShowEnglish(locale);
+
+      if (shouldBeEn && !isEnPage) {
+        // Redirect to English version
+        const currentPath = window.location.pathname;
+        const enPath = currentPath.startsWith('/') ? `/en${currentPath}` : `/en/${currentPath}`;
+        window.location.href = enPath.replace(/\/+/g, '/');
+      } else if (!shouldBeEn && isEnPage) {
+        // Redirect back to French version if user is in FR region but on /en/ page
+        const currentPath = window.location.pathname;
+        const frPath = currentPath.replace('/en/', '/');
+        window.location.href = frPath || '/';
       }
     }
   };
@@ -229,6 +240,10 @@
     GeoLocale.init().then(locale => {
       document.documentElement.setAttribute('data-locale', JSON.stringify(locale));
       document.documentElement.setAttribute('data-currency', locale.currency);
+
+      // Perform redirection if needed
+      GeoLocale.redirectIfNeeded(locale);
+
       document.dispatchEvent(new CustomEvent('geo-locale-ready', { detail: locale }));
     });
   }

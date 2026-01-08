@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Dashboard | 3A Automation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --cyber-blue: #00f2ff;
+            --cyber-purple: #bc13fe;
+            --cyber-dark: #0a0e17;
+            --cyber-card: #151b27;
+            --cyber-text: #e0e6ed;
+            --cyber-success: #00ff9d;
+        }
+
+        body.dashboard-mode {
+            background: var(--cyber-dark);
+            color: var(--cyber-text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #dashboard-header {
+            padding: 20px 40px;
+            background: rgba(10, 14, 23, 0.8);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .dashboard-main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 350px 1fr 400px;
+            gap: 20px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .cyber-panel {
+            background: var(--cyber-card);
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .cyber-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyber-blue), transparent);
+        }
+
+        .panel-header {
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .log-container {
+            flex: 1;
+            padding: 15px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .log-entry {
+            border-left: 2px solid var(--cyber-blue);
+            padding-left: 10px;
+            margin-bottom: 5px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .log-entry.success {
+            border-left-color: var(--cyber-success);
+        }
+
+        .log-entry.agent {
+            border-left-color: var(--cyber-purple);
+        }
+
+        .log-time {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+        }
+
+        .log-agent {
+            color: var(--cyber-purple);
+            font-weight: bold;
+        }
+
+        .log-action {
+            color: var(--cyber-blue);
+        }
+
+        .viz-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .core-node {
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--cyber-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 50px rgba(0, 242, 255, 0.5);
+            }
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            background: rgba(0, 255, 157, 0.2);
+            color: var(--cyber-success);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 242, 255, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="dashboard-mode">
+    <header id="dashboard-header">
+        <div class="logo">
+            <img src="logo.png" alt="3A Logo" style="height: 30px;">
+        </div>
+        <div class="system-integrity">
+            <span style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.5);">INTEGRITY CORE:</span>
+            <span id="integrity-value"
+                style="color: var(--cyber-blue); font-weight: bold; margin-left: 10px;">98.2%</span>
+        </div>
+        <div class="timestamp" id="live-clock">20:41:00</div>
+    </header>
+
+    <main class="dashboard-main">
+        <!-- System Health -->
+        <section class="cyber-panel">
+            <div class="panel-header">
+                <span>Infrastructure Health</span>
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="log-container" id="health-metrics">
+                <div class="log-entry">
+                    <span class="log-action">MCP Router</span>: <span class="status-badge">ONLINE</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-action">n8n Engine</span>: <span class="status-badge">ACTIVE</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-action">Cloud VPS</span>: <span class="status-badge">OPTIMAL</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-action">API Latency</span>: <span style="color: var(--cyber-success);">42ms</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Reasoning -->
+        <section class="cyber-panel">
+            <div class="panel-header">
+                <span>Live Agentic Reasoning</span>
+                <div class="status-badge" style="background: rgba(188, 19, 254, 0.2); color: var(--cyber-purple);">
+                    STREAMING</div>
+            </div>
+            <div class="viz-container">
+                <div class="core-node">
+                    <i class="fas fa-brain" style="font-size: 3rem; color: var(--cyber-blue);"></i>
+                </div>
+            </div>
+            <div class="log-container" id="reasoning-stream" style="height: 200px; background: rgba(0,0,0,0.3);">
+                <div class="log-entry agent">
+                    <span class="log-time">[20:40:12]</span> <span class="log-agent">ContentAnalyst</span>: Critiquing
+                    generated blog post... SEO Score: 7.2. Re-generating H2 tags for better keyword density.
+                </div>
+            </div>
+        </section>
+
+        <!-- Tool Invocations -->
+        <section class="cyber-panel">
+            <div class="panel-header">
+                <span>Real-time Tool Invocations</span>
+                <i class="fas fa-microchip"></i>
+            </div>
+            <div class="log-container" id="tool-logs">
+                <div class="log-entry">
+                    <span class="log-time">[20:41:02]</span> <span class="log-action">BUDGET_UPDATE</span>: google_ads
+                    (+44%)
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="agentic-transparency.js"></script>
+    <script>
+        // Live Clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('live-clock').textContent = now.toLocaleTimeString();
+        }, 1000);
+
+        // Dashboard specific log updates
+        async function updateDashboardLogs() {
+            try {
+                const response = await fetch('data/mcp-logs.json');
+                const logs = await response.json();
+                const container = document.getElementById('tool-logs');
+
+                if (container) {
+                    container.innerHTML = logs.map(log => `
+                        <div class="log-entry ${log.status === 'SUCCESS' ? 'success' : ''}">
+                            <span class="log-time">[${new Date(log.timestamp).toLocaleTimeString()}]</span>
+                            <span class="log-agent">${log.agent}</span>: 
+                            <span class="log-action">${log.action}</span>
+                            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.5);">${JSON.stringify(log.details)}</div>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) { console.error("Dashboard update failed", e); }
+        }
+
+        setInterval(updateDashboardLogs, 3000);
+        updateDashboardLogs();
+    </script>
+</body>
+
+</html>

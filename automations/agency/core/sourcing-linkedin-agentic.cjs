@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+const path = require('path');
+// Load environment variables from project root
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 /**
  * LinkedIn Sourcing - Agentic (Level 3)
  * 
@@ -17,9 +20,50 @@ const CONFIG = {
     QUALITY_THRESHOLD: 7,
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
-        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GOOGLE_API_KEY }
+        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
+        { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ]
 };
+
+async function callAI(provider, prompt, systemPrompt = '') {
+    if (!provider.apiKey) throw new Error(`API key missing for ${provider.name}`);
+
+    try {
+        let response;
+        if (provider.name === 'anthropic') {
+            response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-api-key': provider.apiKey, 'anthropic-version': '2023-06-01' },
+                body: JSON.stringify({ model: provider.model, max_tokens: 1500, system: systemPrompt, messages: [{ role: 'user', content: prompt }] })
+            });
+        } else if (provider.name === 'google') {
+            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${provider.model}:generateContent?key=${provider.apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: `${systemPrompt}\n\n${prompt}` }] }] })
+            });
+        } else if (provider.name === 'xai') {
+            response = await fetch('https://api.x.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${provider.apiKey}` },
+                body: JSON.stringify({ model: provider.model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }] })
+            });
+        }
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        const text = provider.name === 'anthropic' ? data.content[0].text :
+            provider.name === 'google' ? data.candidates[0].content.parts[0].text :
+                data.choices[0].message.content;
+
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) throw new Error('No JSON found');
+        return JSON.parse(jsonMatch[0]);
+    } catch (e) {
+        console.warn(`  ⚠️ AI call failed: ${e.message}`);
+        throw e;
+    }
+}
 
 async function scrapeLinkedIn(search, max = 50) {
     // Mock profiles
@@ -88,29 +132,41 @@ async function agenticLinkedInSourcing(search, max) {
     const draftProfiles = await scrapeLinkedIn(search, max);
     console.log(`✅ Found ${draftProfiles.length} profiles`);
 
-    console.log('\n🔍 CRITIQUE: Detecting hiring signals...');
-    const scoredProfiles = detectHiringSignals(draftProfiles);
+    console.log('\n🔍 CRITIQUE: Detecting hiring signals using AI...');
+
+    const prompt = `Filter these LinkedIn profiles to find the best sales leads based on "hiring signals" (e.g., "Hiring", new role, company growth).
+Profiles: ${JSON.stringify(scoredProfiles, null, 2)}
+
+Task:
+1. Re-evaluate hiring scores (0-10).
+2. Filter for high-signal profiles only.
+3. Provide a quality assessment of the lead batch.
+
+Output JSON: { "quality_score": <number>, "filtered_profiles": [...], "feedback": "..." }`;
+
+    let aiResult = null;
+    for (const provider of CONFIG.AI_PROVIDERS) {
+        try {
+            aiResult = await callAI(provider, prompt, 'You are a Senior Headhunter.');
+            break;
+        } catch (e) {
+            continue;
+        }
+    }
+
+    if (aiResult) {
+        console.log(`\n📊 Quality Score: ${aiResult.quality_score}/10`);
+        console.log(`📝 Feedback: ${aiResult.feedback}`);
+        return { profiles: aiResult.filtered_profiles, quality: { score: aiResult.quality_score, feedback: aiResult.feedback }, filtered: true };
+    }
+
+    // Fallback if AI fails
     const quality = assessQuality(scoredProfiles);
-
-    console.log(`\n📊 Quality Score: ${quality.score}/10`);
-    console.log(`📝 Feedback: ${quality.feedback}`);
-    console.log(`   Profiles with signals: ${quality.withSignals}/${draftProfiles.length}`);
-    console.log(`   Avg hiring score: ${quality.avgScore}/10`);
-
-    if (!CONFIG.AGENTIC_MODE) {
-        console.log('⚠️  Agentic mode disabled. Returning all profiles.');
-        return { profiles: scoredProfiles, quality: null, filtered: false };
-    }
-
+    console.log(`\n📊 Quality Score: ${quality.score}/10 (Fallback)`);
     if (quality.score < CONFIG.QUALITY_THRESHOLD) {
-        console.log(`\n🔧 REFINE: Filtering to high-signal profiles only (score ≥5)...`);
-        const filtered = scoredProfiles.filter(p => p.hiringScore >= 5);
-        return { profiles: filtered, quality, filtered: true };
+        return { profiles: scoredProfiles.filter(p => p.hiringScore >= 5), quality, filtered: true };
     }
-
-    console.log('\n✅ Quality acceptable. Returning top 50% by hiring score.');
-    const topHalf = scoredProfiles.slice(0, Math.ceil(scoredProfiles.length / 2));
-    return { profiles: topHalf, quality, filtered: true };
+    return { profiles: scoredProfiles.slice(0, Math.ceil(scoredProfiles.length / 2)), quality, filtered: true };
 }
 
 async function main() {

@@ -1,0 +1,21 @@
+[
+    {
+        "id": "lead_001",
+        "email": "test1@example.com",
+        "activity_score": 50,
+        "last_seen": "2026-01-05",
+        "tags": [
+            "retail",
+            "shopify"
+        ]
+    },
+    {
+        "id": "lead_002",
+        "email": "test2@example.com",
+        "activity_score": 10,
+        "last_seen": "2025-12-01",
+        "tags": [
+            "magento"
+        ]
+    }
+]

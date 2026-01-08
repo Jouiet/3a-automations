@@ -8,6 +8,28 @@ import {
 import { z } from "zod";
 import { spawn } from "child_process";
 
+// Observability Logger
+const logger = {
+    info: (message: string, data?: any) => {
+        const entry = {
+            timestamp: new Date().toISOString(),
+            level: "INFO",
+            message,
+            ...data
+        };
+        console.error(JSON.stringify(entry)); // MCP uses stdout for protocol, stderr for logs
+    },
+    error: (message: string, error?: any) => {
+        const entry = {
+            timestamp: new Date().toISOString(),
+            level: "ERROR",
+            message,
+            error: error?.message || error
+        };
+        console.error(JSON.stringify(entry));
+    }
+};
+
 // Define the server
 const server = new Server(
     {
@@ -17,6 +39,8 @@ const server = new Server(
     {
         capabilities: {
             tools: {},
+            logging: {},
+            prompt_caching: {} // Signal prompt caching capability
         },
     }
 );
@@ -778,12 +802,14 @@ const TOOLS = [
     {
         name: "check_pixel_status",
         description: "Bulk health check for all store tracking pixels.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "audit_tiktok_pixel",
         description: "Technical configuration audit for TikTok Pixel.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "upload_llms",
@@ -798,17 +824,20 @@ const TOOLS = [
     {
         name: "geo_segment_generic",
         description: "Universal geographical segmentation logic.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "run_api_connectivity_test",
         description: "Global diagnostic tool for all integrated APIs.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "generate_all_promo_videos",
         description: "Triggers batch generation of marketing promo videos.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "run_shopify_logic",
@@ -834,17 +863,20 @@ const TOOLS = [
     {
         name: "run_gas_booking",
         description: "Google Apps Script Booking Bridge.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "import_facebook_leads",
         description: "Import leads from Facebook Lead Ads JS hook.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "segment_leads_advanced",
         description: "Advanced lead segmentation logic.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "generate_promo_video",
@@ -859,27 +891,32 @@ const TOOLS = [
     {
         name: "validate_registry",
         description: "Validates the automation registry against the filesystem.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "check_market_config",
         description: "Reads and validates international market configurations.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "get_b2b_templates",
         description: "Retrieves B2B email templates.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "run_alibaba_mcp",
         description: "Internal wrapper for Alibaba Sourcing MCP.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "verify_alibaba_connectivity",
         description: "Health check for Alibaba Open API.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "search_alibaba_products",
@@ -895,37 +932,44 @@ const TOOLS = [
     {
         name: "load_env_lib",
         description: "Internal library check for Environment Loader.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "check_security_utils",
         description: "Internal security utility audit.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "voice_widget_config_3a",
         description: "3A-specific Voice Widget configuration.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "voice_widget_config_cinematic",
         description: "CinematicAds Voice Widget configuration.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "voice_widget_config_example",
         description: "Example Voice Widget configuration template.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "run_lead_gen_scheduler_v2",
         description: "Enhanced Global Lead Generation Scheduler.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "check_system_readiness",
         description: "Runs a comprehensive Python-based system readiness audit.",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "lead_scoring_agentic",
@@ -994,57 +1038,68 @@ const TOOLS = [
     {
         name: "abandoned_cart",
         description: "Abandoned Cart Recovery Flow",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "browse_abandonment",
         description: "Browse Abandonment Flow",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "cart_recovery_video",
         description: "Cart Recovery Video Generator",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "hot_warm_cold",
         description: "Hot/Warm/Cold Lead Segmentation",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "low_stock_alert",
         description: "Low Stock Alert System",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "loyalty_webhooks",
         description: "Loyalty Program Webhooks",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "post_purchase",
         description: "Post-Purchase Flow",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "vip_tiers",
         description: "VIP Tiers Management",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "welcome_series",
         description: "Welcome Series Flow",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "win_back",
         description: "Win-Back Campaign Flow",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "margin_projections",
         description: "Margin Projections Calculator",
-        inputSchema: { type: "object", properties: {} }
+        inputSchema: { type: "object", properties: {}, required: [] },
+        prompt_caching: true
     },
     {
         name: "inventory_analysis",
@@ -1098,6 +1153,8 @@ async function executeScript(scriptPath: string, args: string[] = [], options: a
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { name, arguments: rawArgs } = request.params;
     const args = (rawArgs || {}) as any;
+
+    logger.info(`Invoking tool: ${name}`, { args });
 
     switch (name) {
         case "get_global_status": {

@@ -19,6 +19,10 @@
  */
 
 const fs = require('fs');
+const path = require('path');
+// Load environment variables from project root
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+
 
 const CONFIG = {
     AGENTIC_MODE: process.argv.includes('--agentic'),
@@ -26,10 +30,50 @@ const CONFIG = {
 
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
-        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GOOGLE_API_KEY },
+        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
         { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ]
 };
+
+async function callAI(provider, prompt, systemPrompt = '') {
+    if (!provider.apiKey) throw new Error(`API key missing for ${provider.name}`);
+
+    try {
+        let response;
+        if (provider.name === 'anthropic') {
+            response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-api-key': provider.apiKey, 'anthropic-version': '2023-06-01' },
+                body: JSON.stringify({ model: provider.model, max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content: prompt }] })
+            });
+        } else if (provider.name === 'google') {
+            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${provider.model}:generateContent?key=${provider.apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: `${systemPrompt}\n\n${prompt}` }] }] })
+            });
+        } else if (provider.name === 'xai') {
+            response = await fetch('https://api.x.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${provider.apiKey}` },
+                body: JSON.stringify({ model: provider.model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }] })
+            });
+        }
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        const text = provider.name === 'anthropic' ? data.content[0].text :
+            provider.name === 'google' ? data.candidates[0].content.parts[0].text :
+                data.choices[0].message.content;
+
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) throw new Error('No JSON found');
+        return JSON.parse(jsonMatch[0]);
+    } catch (e) {
+        console.warn(`  ⚠️ AI call failed: ${e.message}`);
+        throw e;
+    }
+}
 
 async function auditStore(shop) {
     // Mock audit (would use Shopify API + Lighthouse in production)
@@ -71,27 +115,27 @@ async function auditStore(shop) {
 }
 
 async function critiqueAudit(issues) {
-    let score = 10;
-    let feedback = [];
+    const prompt = `Critique these Shopify store issues and their estimated CVR (Conversion Rate) lifts:
+${JSON.stringify(issues, null, 2)}
 
-    const totalLift = issues.reduce((sum, i) => sum + i.estimated_cvr_lift, 0);
+Task:
+1. Validate if lift estimates (e.g., 8% for trust badges) are realistic based on e-commerce benchmarks.
+2. Provide a quality score (0-10).
+3. Suggest adjusted estimates if the current ones are over/under-estimated.
 
-    if (totalLift > 0.50) {
-        score -= 3;
-        feedback.push('Total CVR lift estimate too optimistic (>50%)');
+Output JSON: { "score": <0-10>, "feedback": "...", "adjusted_estimates": [{ "issue": "...", "new_lift": <number> }] }`;
+
+    for (const provider of CONFIG.AI_PROVIDERS) {
+        try {
+            console.log(`  Trying ${provider.name}...`);
+            const critique = await callAI(provider, prompt, 'You are a Conversion Rate Optimization (CRO) analyst.');
+            critique.provider = provider.name;
+            return critique;
+        } catch (e) {
+            continue;
+        }
     }
-
-    const criticalIssues = issues.filter(i => i.severity === 'critical');
-    if (criticalIssues.length > 0 && criticalIssues[0].estimated_cvr_lift < 0.05) {
-        score -= 2;
-        feedback.push('Critical issues should have higher impact estimates');
-    }
-
-    return {
-        score: Math.max(0, score),
-        feedback: feedback.join('. ') || 'Impact estimates look reasonable',
-        provider: 'internal'
-    };
+    throw new Error('All AI providers failed');
 }
 
 async function agenticStoreAudit(shop) {
@@ -113,11 +157,14 @@ async function agenticStoreAudit(shop) {
     console.log(`📝 Feedback: ${critique.feedback}`);
 
     if (critique.score < CONFIG.QUALITY_THRESHOLD) {
-        console.log(`\n🔧 REFINE: Adjusting impact estimates...`);
-        const refinedIssues = draftIssues.map(issue => ({
-            ...issue,
-            estimated_cvr_lift: issue.estimated_cvr_lift * 0.7 // More conservative
-        })).sort((a, b) => b.estimated_cvr_lift - a.estimated_cvr_lift);
+        console.log(`\n🔧 REFINE: Adjusting impact estimates based on AI feedback...`);
+        const refinedIssues = draftIssues.map(issue => {
+            const adjustment = critique.adjusted_estimates?.find(a => a.issue === issue.issue);
+            return {
+                ...issue,
+                estimated_cvr_lift: adjustment ? adjustment.new_lift : issue.estimated_cvr_lift
+            };
+        }).sort((a, b) => b.estimated_cvr_lift - a.estimated_cvr_lift);
 
         return { issues: refinedIssues, quality: critique, refined: true };
     }

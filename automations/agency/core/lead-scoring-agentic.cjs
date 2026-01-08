@@ -21,6 +21,9 @@
 const fs = require('fs');
 const path = require('path');
 
+// Load environment variables from project root
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+
 // ============================================================================
 // CONFIGURATION
 // ============================================================================
@@ -32,7 +35,7 @@ const CONFIG = {
     // Multi-provider fallback
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
-        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GOOGLE_API_KEY },
+        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
         { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ],
 

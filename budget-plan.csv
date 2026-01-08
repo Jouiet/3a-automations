@@ -1,0 +1,5 @@
+Source,Current Budget,Recommended Budget,Change %,ROI,ROAS,Rationale
+organic,0,0,0%,Infinity,Infinity,undefined
+google_ads,500,720,44%,4.00,5.00,Increase (high ROI)
+tiktok_ads,300,252,-16%,2.33,3.33,Decrease (low ROI)
+facebook_ads,400,288,-28%,2.00,3.00,Decrease (low ROI)

@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+const path = require('path');
+// Load environment variables from project root
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 /**
  * System Audit - Agentic (Level 4)
  * 
@@ -17,9 +20,51 @@ const CONFIG = {
     AUTO_FIX: process.argv.includes('--auto-fix'),
     QUALITY_THRESHOLD: 8,
     AI_PROVIDERS: [
-        { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY }
+        { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
+        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
+        { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ]
 };
+
+async function callAI(provider, prompt, systemPrompt = '') {
+    if (!provider.apiKey) throw new Error(`API key missing for ${provider.name}`);
+
+    try {
+        let response;
+        if (provider.name === 'anthropic') {
+            response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-api-key': provider.apiKey, 'anthropic-version': '2023-06-01' },
+                body: JSON.stringify({ model: provider.model, max_tokens: 1500, system: systemPrompt, messages: [{ role: 'user', content: prompt }] })
+            });
+        } else if (provider.name === 'google') {
+            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${provider.model}:generateContent?key=${provider.apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: `${systemPrompt}\n\n${prompt}` }] }] })
+            });
+        } else if (provider.name === 'xai') {
+            response = await fetch('https://api.x.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${provider.apiKey}` },
+                body: JSON.stringify({ model: provider.model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }] })
+            });
+        }
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        const text = provider.name === 'anthropic' ? data.content[0].text :
+            provider.name === 'google' ? data.candidates[0].content.parts[0].text :
+                data.choices[0].message.content;
+
+        const jsonMatch = text.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) throw new Error('No JSON found');
+        return JSON.parse(jsonMatch[0]);
+    } catch (e) {
+        console.warn(`  ⚠️ AI call failed: ${e.message}`);
+        throw e;
+    }
+}
 
 async function auditSystem() {
     // Mock system audit
@@ -31,52 +76,64 @@ async function auditSystem() {
     };
 }
 
-function prioritizeIssues(audit) {
-    const allIssues = [];
+async function prioritizeIssuesAI(audit) {
+    const prompt = `Review this system audit and prioritize issues based on revenue impact and conversion friction.
+Audit Data: ${JSON.stringify(audit, null, 2)}
 
+Task:
+1. Assign priority (critical, high, medium, low) to each issue.
+2. Estimate a 1-10 impact score.
+3. Sort by impact.
+
+Output JSON: { "prioritized": [{ "platform": "...", "issue": "...", "priority": "...", "impact": <number> }] }`;
+
+    for (const provider of CONFIG.AI_PROVIDERS) {
+        try {
+            const result = await callAI(provider, prompt, 'You are a Senior Systems Architect.');
+            return result.prioritized;
+        } catch (e) {
+            continue;
+        }
+    }
+
+    // Fallback if AI fails (previous logic)
+    const allIssues = [];
     Object.entries(audit).forEach(([platform, data]) => {
         data.issues.forEach(issue => {
             let priority = 'low';
             let impact = 1;
-
-            if (issue.includes('checkout') || issue.includes('conversion')) {
-                priority = 'critical';
-                impact = 10;
-            } else if (issue.includes('tracking') || issue.includes('pixel')) {
-                priority = 'high';
-                impact = 7;
-            } else if (issue.includes('meta') || issue.includes('slow')) {
-                priority = 'medium';
-                impact = 5;
-            }
-
+            if (issue.includes('checkout') || issue.includes('conversion')) { priority = 'critical'; impact = 10; }
+            else if (issue.includes('tracking') || issue.includes('pixel')) { priority = 'high'; impact = 7; }
             allIssues.push({ platform, issue, priority, impact });
         });
     });
-
     return allIssues.sort((a, b) => b.impact - a.impact);
 }
 
-async function orchestrateFixes(issues) {
-    console.log(`\n🤖 ORCHESTRATE: Planning fixes for ${issues.length} issues...`);
+async function orchestrateFixesAI(issues) {
+    console.log(`\n🤖 ORCHESTRATE: Planning fixes for ${issues.length} issues using AI...`);
 
-    const plan = issues.map(issue => {
-        let action = null;
+    const prompt = `Map these system issues to the best automation tools available.
+Issues: ${JSON.stringify(issues, null, 2)}
 
-        if (issue.issue.includes('meta descriptions')) {
-            action = { tool: 'product_enrichment_agentic', params: { agentic: true, auto_publish: true } };
-        } else if (issue.issue.includes('pixel')) {
-            action = { tool: 'verify_facebook_pixel', params: {} };
-        } else if (issue.issue.includes('conversion tracking')) {
-            action = { tool: 'analyze_ga4_conversions', params: {} };
-        } else if (issue.issue.includes('slow checkout')) {
-            action = { tool: 'store_audit_agentic', params: { agentic: true } };
+Available Tools:
+- product_enrichment_agentic: For SEO/Meta issues.
+- store_audit_agentic: For CVR/Checkout/Speed issues.
+- verify_facebook_pixel: For tracking/pixel issues.
+- analyze_ga4_conversions: For GA4/Tracking issues.
+
+Task: Generate a plan mapping issues to tools with parameters.
+Output JSON: { "plan": [{ "issue": "...", "action": { "tool": "...", "params": {...} } }] }`;
+
+    for (const provider of CONFIG.AI_PROVIDERS) {
+        try {
+            const result = await callAI(provider, prompt, 'You are a Technical Orchestrator.');
+            return result.plan;
+        } catch (e) {
+            continue;
         }
-
-        return { ...issue, action };
-    });
-
-    return plan.filter(p => p.action !== null);
+    }
+    return []; // Fallback
 }
 
 async function agenticSystemAudit() {
@@ -86,8 +143,8 @@ async function agenticSystemAudit() {
     const audit = await auditSystem();
     console.log(`✅ Audited ${Object.keys(audit).length} platforms`);
 
-    console.log('\n🔍 CRITIQUE: Prioritizing issues by impact...');
-    const prioritized = prioritizeIssues(audit);
+    console.log('\n🔍 CRITIQUE: Prioritizing issues by impact using AI...');
+    const prioritized = await prioritizeIssuesAI(audit);
     console.log(`📊 Found ${prioritized.length} issues`);
 
     if (!CONFIG.AGENTIC_MODE) {
@@ -95,8 +152,8 @@ async function agenticSystemAudit() {
         return { audit, issues: prioritized, plan: null, executed: false };
     }
 
-    console.log('\n🎯 ORCHESTRATE: Generating fix plan...');
-    const plan = await orchestrateFixes(prioritized);
+    console.log('\n🎯 ORCHESTRATE: Generating fix plan using AI...');
+    const plan = await orchestrateFixesAI(prioritized);
     console.log(`✅ Generated plan for ${plan.length} fixable issues`);
 
     if (CONFIG.AUTO_FIX) {

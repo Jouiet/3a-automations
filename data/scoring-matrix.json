@@ -1,0 +1,1059 @@
+[
+  {
+    "id": "grok-voice-telephony",
+    "name": "AI Phone Assistant",
+    "category": "voice-ai",
+    "type": "script",
+    "current_level": 4,
+    "potential_score": 23,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "voice-widget-templates",
+    "name": "Voice Widget Templates (8 industries)",
+    "category": "voice-ai",
+    "type": "script",
+    "current_level": 4,
+    "potential_score": 23,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "grok-voice-realtime",
+    "name": "Grok Voice Realtime (WebSocket + TTS)",
+    "category": "voice-ai",
+    "type": "script",
+    "current_level": 4,
+    "potential_score": 23,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "invoice-generator",
+    "name": "Invoice Generator",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 4,
+    "potential_score": 23,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "content-strategist-agentic",
+    "name": "AI Content Strategist",
+    "category": "seo",
+    "type": "script",
+    "current_level": 4,
+    "potential_score": 23,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "sourcing-google-maps",
+    "name": "Google Maps Sourcing",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 22,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "sourcing-linkedin",
+    "name": "LinkedIn Sourcing",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 22,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "system-audit",
+    "name": "Complete Flywheel Audit",
+    "category": "analytics",
+    "type": "multi-tool",
+    "current_level": 4,
+    "potential_score": 22,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "portrait-video",
+    "name": "Portrait Video Format",
+    "category": "content",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 21,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "email-outreach-sequence",
+    "name": "Email Outreach Sequence",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 21,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "b2b-email-templates-module",
+    "name": "B2B Email Templates Module",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 21,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "blog-generator-resilient",
+    "name": "Resilient Blog Generator (3 AI + 3 Social)",
+    "category": "content",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 21,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "podcast-generator-resilient",
+    "name": "Podcast Generator (Blog → Audio)",
+    "category": "content",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 21,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "email-personalization-resilient",
+    "name": "Resilient Email Personalization (4 AI + 3-Email Cart Series)",
+    "category": "email",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 21,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "churn-prediction-resilient",
+    "name": "Resilient Churn Prediction (RFM + AI)",
+    "category": "retention",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 21,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "product-enrichment",
+    "name": "Product Enrichment",
+    "category": "shopify",
+    "type": "ai-process",
+    "current_level": 3,
+    "potential_score": 20,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "flows-audit",
+    "name": "Complete Flows Audit",
+    "category": "email",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 19,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "voice-ai-web-widget",
+    "name": "AI Voice Web Assistant",
+    "category": "voice-ai",
+    "type": "web-component",
+    "current_level": 4,
+    "potential_score": 19,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "ga4-budget-optimizer-agentic",
+    "category": "Analytics & Reporting",
+    "type": "script",
+    "current_level": 4,
+    "potential_score": 19,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "store-audit",
+    "name": "Complete Store Audit",
+    "category": "shopify",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 17,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "ga4-source-report",
+    "name": "GA4 Source Report",
+    "category": "analytics",
+    "type": "script",
+    "current_level": 3,
+    "potential_score": 17,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "competitor-clone",
+    "name": "Competitor Clone AI",
+    "category": "cinematicads",
+    "type": "external-service",
+    "current_level": 3,
+    "potential_score": 17,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "asset-factory",
+    "name": "Asset Factory (Dual AI)",
+    "category": "cinematicads",
+    "type": "external-service",
+    "current_level": 3,
+    "potential_score": 17,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "ai-avatar-generator",
+    "name": "AI Avatar Generator",
+    "category": "ai-avatar",
+    "type": "external-service",
+    "current_level": 3,
+    "potential_score": 17,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "ai-talking-video",
+    "name": "AI Talking Video",
+    "category": "ai-avatar",
+    "type": "external-service",
+    "current_level": 3,
+    "potential_score": 17,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "lead-scoring",
+    "name": "Lead Qualification & Scoring",
+    "category": "lead-gen",
+    "type": "manual-process",
+    "current_level": 3,
+    "potential_score": 14,
+    "upgrade_path": "Full Autonomy Orchestration"
+  },
+  {
+    "id": "ab-sender-rotation",
+    "name": "A/B Sender Rotation",
+    "category": "email",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "audit-klaviyo-flows-v2",
+    "name": "Audit Klaviyo Flows V2",
+    "category": "email",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "linkedin-lead-scraper",
+    "name": "LinkedIn Lead Automation",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "newsletter-automation",
+    "name": "Newsletter Automation",
+    "category": "marketing",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "omnisend-b2c-ecommerce",
+    "name": "Omnisend B2C E-commerce Integration v1.1.0",
+    "category": "email",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "sms-automation-resilient",
+    "name": "Resilient SMS Automation (Omnisend + Twilio)",
+    "category": "sms",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "review-request-automation",
+    "name": "Automated Review Request (Shopify → Klaviyo)",
+    "category": "shopify",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "cjdropshipping-automation",
+    "name": "CJDropshipping - Supplier Automation",
+    "category": "dropshipping",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "config-3a-automation",
+    "name": "Config 3a Automation",
+    "category": "content",
+    "type": "script",
+    "current_level": 2,
+    "potential_score": 14,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "meta-leads-sync",
+    "name": "Meta Leads → Shopify Sync",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 12,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "welcome-series",
+    "name": "Welcome Series",
+    "category": "email",
+    "type": "klaviyo-flow",
+    "current_level": 2,
+    "potential_score": 12,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "abandoned-cart",
+    "name": "Abandoned Cart",
+    "category": "email",
+    "type": "klaviyo-flow",
+    "current_level": 2,
+    "potential_score": 12,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "browse-abandonment",
+    "name": "Browse Abandonment",
+    "category": "email",
+    "type": "klaviyo-flow",
+    "current_level": 2,
+    "potential_score": 12,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "post-purchase",
+    "name": "Post-Purchase",
+    "category": "email",
+    "type": "klaviyo-flow",
+    "current_level": 2,
+    "potential_score": 12,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "win-back",
+    "name": "Win-Back",
+    "category": "email",
+    "type": "klaviyo-flow",
+    "current_level": 2,
+    "potential_score": 12,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "vip-tiers",
+    "name": "VIP Tiers",
+    "category": "email",
+    "type": "klaviyo-segment",
+    "current_level": 2,
+    "potential_score": 10,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "cart-recovery-video",
+    "name": "Cart Recovery Video",
+    "category": "content",
+    "type": "video-template",
+    "current_level": 2,
+    "potential_score": 10,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "agency-env-check",
+    "name": "Environment Health Check",
+    "category": "agency-ops",
+    "type": "internal",
+    "current_level": 1,
+    "potential_score": 8,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "agency-api-test",
+    "name": "API Connectivity Tester",
+    "category": "agency-ops",
+    "type": "internal",
+    "current_level": 1,
+    "potential_score": 8,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "google-ads-sync",
+    "name": "Google Ads → Shopify Sync",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "tiktok-leads-sync",
+    "name": "TikTok Leads → Shopify Sync",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "geo-segmentation",
+    "name": "Geo-Segmentation",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "google-forms-crm",
+    "name": "Google Forms → CRM",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "veille-recrutement",
+    "name": "Hiring Intelligence",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "alt-text-fix",
+    "name": "Image Alt Text Correction",
+    "category": "seo",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "image-sitemap",
+    "name": "Image Sitemap",
+    "category": "seo",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "facebook-audiences",
+    "name": "Export → Facebook Audiences",
+    "category": "shopify",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "google-taxonomy",
+    "name": "Google Taxonomy Import",
+    "category": "shopify",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "bnpl-tracking",
+    "name": "BNPL Performance Tracking",
+    "category": "analytics",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "pixel-verification",
+    "name": "Pixel Verification",
+    "category": "analytics",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "promo-video",
+    "name": "Product Promo Video",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "auto-blog",
+    "name": "Auto Blog + Multi-Channel Distribution",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "google-apps-script-booking",
+    "name": "Google Apps Script Booking",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "google-calendar-booking",
+    "name": "Google Calendar Booking",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "analyze-ga4-conversion-source",
+    "name": "Analyze Ga4 Conversion Source",
+    "category": "analytics",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "geo-segment-generic",
+    "name": "Geo Segment Generic",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "import-facebook-lead-ads",
+    "name": "Import Facebook Lead Ads",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "segment-leads",
+    "name": "Segment Leads",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "generate-tags-csv",
+    "name": "Generate Tags Csv",
+    "category": "seo",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "import-alt-text-api",
+    "name": "Import Alt Text Api",
+    "category": "seo",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "upload-llms",
+    "name": "Upload Llms",
+    "category": "seo",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "audit-shopify-store",
+    "name": "Audit Shopify Store",
+    "category": "shopify",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "create-warehouse-metafield",
+    "name": "Create Warehouse Metafield",
+    "category": "shopify",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "import-taxonomy-metafield",
+    "name": "Import Taxonomy Metafield",
+    "category": "shopify",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "parse-warehouse-csv",
+    "name": "Parse Warehouse Csv",
+    "category": "shopify",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "enable-apify-schedulers",
+    "name": "Enable Apify Schedulers",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "generate-all-promo-videos",
+    "name": "Generate All Promo Videos",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "whatsapp-booking-confirmation",
+    "name": "WhatsApp Booking Confirmation",
+    "category": "whatsapp",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "whatsapp-booking-reminders",
+    "name": "WhatsApp Reminders 24h + 1h",
+    "category": "whatsapp",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "linkedin-to-klaviyo-pipeline",
+    "name": "LinkedIn → Klaviyo Pipeline (B2B)",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "google-maps-to-klaviyo-pipeline",
+    "name": "Google Maps → Klaviyo Pipeline (Local B2B)",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "whatsapp-booking-notifications",
+    "name": "WhatsApp Booking Notifications",
+    "category": "whatsapp",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "hubspot-b2b-crm",
+    "name": "HubSpot B2B CRM Integration v1.1.0",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "at-risk-customer-flow",
+    "name": "At-Risk Customer Flow (Anti-Churn Intervention)",
+    "category": "retention",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "price-drop-alerts",
+    "name": "Price Drop Alerts (Wishlist)",
+    "category": "retention",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "replenishment-reminder",
+    "name": "Replenishment Reminder",
+    "category": "retention",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "bigbuy-supplier-sync",
+    "name": "BigBuy - Supplier Sync",
+    "category": "dropshipping",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "dropshipping-order-flow",
+    "name": "Dropshipping - Multi-Supplier Orchestration",
+    "category": "dropshipping",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "index",
+    "name": "Index",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "content",
+    "name": "Content",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "popup",
+    "name": "Popup",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "markets",
+    "name": "Markets",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "lead-gen-scheduler",
+    "name": "Lead Gen Scheduler",
+    "category": "lead-gen",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "index-1",
+    "name": "Index",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "search",
+    "name": "Search",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "config-cinematicads",
+    "name": "Config Cinematicads",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "config.example",
+    "name": "Config.Example",
+    "category": "content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "lead-scoring-agentic",
+    "category": "Lead Generation & Acquisition",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "flows-audit-agentic",
+    "category": "Email Marketing & Klaviyo",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "product-enrichment-agentic",
+    "category": "SEO & Content",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "store-audit-agentic",
+    "category": "Shopify Admin & Operations",
+    "type": "script",
+    "current_level": 1,
+    "potential_score": 7,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "auto-meta-tags",
+    "name": "Automatic Meta Tags",
+    "category": "seo",
+    "type": "shopify-flow",
+    "current_level": 1,
+    "potential_score": 5,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "collection-management",
+    "name": "Collection Management",
+    "category": "shopify",
+    "type": "shopify-flow",
+    "current_level": 1,
+    "potential_score": 5,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "low-stock-alert",
+    "name": "Low Stock Alert",
+    "category": "analytics",
+    "type": "shopify-flow",
+    "current_level": 1,
+    "potential_score": 5,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "typeform-klaviyo",
+    "name": "Typeform → Klaviyo",
+    "category": "lead-gen",
+    "type": "manual-process",
+    "current_level": 1,
+    "potential_score": 4,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "internal-linking",
+    "name": "Internal Linking",
+    "category": "seo",
+    "type": "manual-process",
+    "current_level": 1,
+    "potential_score": 4,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "hot-warm-cold",
+    "name": "HOT/WARM/COLD Segmentation",
+    "category": "lead-gen",
+    "type": "klaviyo-segment",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "data-enrichment",
+    "name": "Data Enrichment",
+    "category": "lead-gen",
+    "type": "apollo-integration",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "schema-products",
+    "name": "Schema.org Products",
+    "category": "seo",
+    "type": "shopify-theme",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "llms-txt",
+    "name": "llms.txt (AEO)",
+    "category": "seo",
+    "type": "manual-file",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "shopping-attributes",
+    "name": "Google Shopping Attributes",
+    "category": "shopify",
+    "type": "shopify-metafield",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "legal-pages",
+    "name": "Legal Pages",
+    "category": "shopify",
+    "type": "template",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "gtm-installation",
+    "name": "GTM Installation",
+    "category": "shopify",
+    "type": "manual-setup",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "loyalty-webhooks",
+    "name": "Loyalty Webhooks",
+    "category": "shopify",
+    "type": "shopify-webhook",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "looker-dashboard",
+    "name": "Looker Studio Dashboard",
+    "category": "analytics",
+    "type": "looker-template",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "margin-projections",
+    "name": "Margin Projections",
+    "category": "analytics",
+    "type": "sheets-template",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "inventory-analysis",
+    "name": "Inventory Analysis",
+    "category": "analytics",
+    "type": "sheets-template",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "shopping-feed",
+    "name": "Google Shopping Feed",
+    "category": "content",
+    "type": "shopify-app",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "gmc-diagnostic",
+    "name": "GMC Diagnostic",
+    "category": "content",
+    "type": "manual-audit",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "custom-workflow-deprecated",
+    "name": "Custom Workflow (Deprecated)",
+    "category": "content",
+    "type": "deprecated",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "cinematic-director",
+    "name": "CinematicAds Director",
+    "category": "cinematicads",
+    "type": "external-service",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  },
+  {
+    "id": "ecommerce-factory",
+    "name": "E-commerce Ads Factory",
+    "category": "cinematicads",
+    "type": "external-service",
+    "current_level": 1,
+    "potential_score": 3,
+    "upgrade_path": "Add Reflection Loop"
+  }
+]

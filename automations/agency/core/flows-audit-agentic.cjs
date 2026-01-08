@@ -19,6 +19,10 @@
  */
 
 const fs = require('fs');
+const path = require('path');
+// Load environment variables from project root
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+
 const https = require('https');
 
 // ============================================================================
@@ -31,7 +35,7 @@ const CONFIG = {
 
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
-        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GOOGLE_API_KEY },
+        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
         { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ],
 
@@ -185,9 +189,39 @@ function auditFlows(flows, platform) {
 // ============================================================================
 
 async function callAI(provider, prompt, systemPrompt = '') {
-    // Same implementation as lead-scoring-agentic.cjs
-    // (Reuse callClaude, callGemini, callGrok functions)
-    throw new Error('AI provider not implemented yet - placeholder');
+    if (!provider.apiKey) throw new Error(`API key missing for ${provider.name}`);
+
+    try {
+        let response;
+        if (provider.name === 'anthropic') {
+            response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-api-key': provider.apiKey, 'anthropic-version': '2023-06-01' },
+                body: JSON.stringify({ model: provider.model, max_tokens: 1000, system: systemPrompt, messages: [{ role: 'user', content: prompt }] })
+            });
+        } else if (provider.name === 'google') {
+            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${provider.model}:generateContent?key=${provider.apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: `${systemPrompt}\n\n${prompt}` }] }] })
+            });
+        } else if (provider.name === 'xai') {
+            response = await fetch('https://api.x.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${provider.apiKey}` },
+                body: JSON.stringify({ model: provider.model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }] })
+            });
+        }
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        return provider.name === 'anthropic' ? data.content[0].text :
+            provider.name === 'google' ? data.candidates[0].content.parts[0].text :
+                data.choices[0].message.content;
+    } catch (e) {
+        console.warn(`  ⚠️ AI call failed: ${e.message}`);
+        throw e;
+    }
 }
 
 async function critiqueAudit(issues) {

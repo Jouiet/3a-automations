@@ -1,0 +1,118 @@
+ID,Name,Type,Current Level (DOE),Agentic Potential (0-10),Business Impact (ROI),Complexity to Agentize,Upgrade Path
+meta-leads-sync,"Sync Meta Leads → Shopify",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+google-ads-sync,"Sync Google Ads → Shopify",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+tiktok-leads-sync,"Sync TikTok Leads → Shopify",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+lead-scoring,"Qualification & Scoring",manual-process,Level 1,3,HIGH,Medium (platform limits),UPGRADE TO LEVEL 3
+hot-warm-cold,"Segmentation HOT/WARM/COLD",klaviyo-segment,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+data-enrichment,"Enrichissement Données",apollo-integration,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+geo-segmentation,"Geo-Segmentation",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+google-forms-crm,"Google Forms → CRM",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+typeform-klaviyo,"Typeform → Klaviyo",manual-process,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+sourcing-google-maps,"Sourcing Google Maps",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+sourcing-linkedin,"Sourcing LinkedIn",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+veille-recrutement,"Veille Recrutement",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+alt-text-fix,"Correction Alt Text Images",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+auto-meta-tags,"Meta Tags Automatiques",shopify-flow,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+image-sitemap,"Sitemap Images",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+schema-products,"Schema.org Produits",shopify-theme,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+internal-linking,"Internal Linking",manual-process,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+llms-txt,"llms.txt (AEO)",manual-file,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+welcome-series,"Welcome Series",klaviyo-flow,Level 2,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+abandoned-cart,"Abandoned Cart",klaviyo-flow,Level 2,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+browse-abandonment,"Browse Abandonment",klaviyo-flow,Level 2,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+post-purchase,"Post-Achat",klaviyo-flow,Level 2,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+win-back,"Win-Back",klaviyo-flow,Level 2,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+vip-tiers,"VIP Tiers",klaviyo-segment,Level 2,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+flows-audit,"Audit Flows Complet",script,Level 2,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+ab-sender-rotation,"Rotation A/B Sender",script,Level 2,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+product-enrichment,"Enrichissement Produits",ai-process,Level 1,10,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+shopping-attributes,"Google Shopping Attributes",shopify-metafield,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+collection-management,"Gestion Collections",shopify-flow,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+legal-pages,"Pages Légales",template,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+gtm-installation,"Installation GTM",manual-setup,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+loyalty-webhooks,"Webhooks Loyalty",shopify-webhook,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+store-audit,"Audit Store Complet",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+facebook-audiences,"Export → Facebook Audiences",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+google-taxonomy,"Import Taxonomie Google",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+looker-dashboard,"Dashboard Looker Studio",looker-template,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+ga4-source-report,"Rapport Sources GA4",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+system-audit,"Audit Système Complet",multi-tool,Level 1,3,HIGH,Medium (platform limits),UPGRADE TO LEVEL 3
+low-stock-alert,"Alerte Stock Bas",shopify-flow,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+margin-projections,"Projections Marges",sheets-template,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+inventory-analysis,"Analyse Inventaire",sheets-template,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+bnpl-tracking,"Suivi BNPL Performance",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+pixel-verification,"Vérification Pixels",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+promo-video,"Vidéo Promo Produit",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+cart-recovery-video,"Vidéo Cart Recovery",video-template,Level 2,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+portrait-video,"Vidéo Format Portrait",script,Level 3,9,MEDIUM,Low (add reflection),MAINTAIN / OPTIMIZE
+shopping-feed,"Feed Google Shopping",shopify-app,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+gmc-diagnostic,"Diagnostic GMC",manual-audit,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+auto-blog,"Article Blog + Distribution Multi-Canal",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+custom-workflow-deprecated,"Workflow Personnalisé (Obsolète)",deprecated,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+google-apps-script-booking,"Google Apps Script Booking",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+google-calendar-booking,"Google Calendar Booking",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+analyze-ga4-conversion-source,"Analyze Ga4 Conversion Source",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+geo-segment-generic,"Geo Segment Generic",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+audit-klaviyo-flows-v2,"Audit Klaviyo Flows V2",script,Level 2,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+import-facebook-lead-ads,"Import Facebook Lead Ads",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+segment-leads,"Segment Leads",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+generate-tags-csv,"Generate Tags Csv",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+import-alt-text-api,"Import Alt Text Api",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+upload-llms,"Upload Llms",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+audit-shopify-store,"Audit Shopify Store",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+create-warehouse-metafield,"Create Warehouse Metafield",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+import-taxonomy-metafield,"Import Taxonomy Metafield",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+parse-warehouse-csv,"Parse Warehouse Csv",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+enable-apify-schedulers,"Enable Apify Schedulers",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+generate-all-promo-videos,"Generate All Promo Videos",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+cinematic-director,"CinematicAds Director",external-service,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+competitor-clone,"Competitor Clone AI",external-service,Level 3,10,MEDIUM,Medium (platform limits),MAINTAIN / OPTIMIZE
+ecommerce-factory,"E-commerce Ads Factory",external-service,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+asset-factory,"Asset Factory (Dual AI)",external-service,Level 3,10,MEDIUM,Medium (platform limits),MAINTAIN / OPTIMIZE
+ai-avatar-generator,"AI Avatar Generator",external-service,Level 3,10,MEDIUM,Medium (platform limits),MAINTAIN / OPTIMIZE
+ai-talking-video,"AI Talking Video",external-service,Level 3,10,MEDIUM,Medium (platform limits),MAINTAIN / OPTIMIZE
+whatsapp-booking-confirmation,"Confirmation WhatsApp RDV",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+whatsapp-booking-reminders,"Rappels WhatsApp 24h + 1h",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+voice-ai-web-widget,"Assistant Vocal IA Web",web-component,Level 4,10,HIGH,Medium (platform limits),MAINTAIN / OPTIMIZE
+grok-voice-telephony,"Assistant Telephonique IA",script,Level 4,9,HIGH,Low (add reflection),MAINTAIN / OPTIMIZE
+linkedin-lead-scraper,"LinkedIn Lead Automation",script,Level 2,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+newsletter-automation,"Newsletter Automation",script,Level 2,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+email-outreach-sequence,"Email Outreach Sequence",script,Level 3,9,MEDIUM,Low (add reflection),MAINTAIN / OPTIMIZE
+linkedin-to-klaviyo-pipeline,"Pipeline LinkedIn → Klaviyo (B2B)",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+google-maps-to-klaviyo-pipeline,"Pipeline Google Maps → Klaviyo (Local B2B)",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+b2b-email-templates-module,"Module Templates Email B2B",script,Level 3,9,MEDIUM,Low (add reflection),MAINTAIN / OPTIMIZE
+voice-widget-templates,"Templates Voice Widget (8 industries)",script,Level 4,9,HIGH,Low (add reflection),MAINTAIN / OPTIMIZE
+blog-generator-resilient,"Blog Generator Résilient (3 AI + 3 Social)",script,Level 3,9,MEDIUM,Low (add reflection),MAINTAIN / OPTIMIZE
+podcast-generator-resilient,"Podcast Generator (Blog → Audio)",script,Level 3,9,MEDIUM,Low (add reflection),MAINTAIN / OPTIMIZE
+grok-voice-realtime,"Grok Voice Realtime (WebSocket + TTS)",script,Level 4,9,HIGH,Low (add reflection),MAINTAIN / OPTIMIZE
+whatsapp-booking-notifications,"WhatsApp Booking Notifications",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+hubspot-b2b-crm,"HubSpot B2B CRM Integration v1.1.0",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+omnisend-b2c-ecommerce,"Omnisend B2C E-commerce Integration v1.1.0",script,Level 2,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+email-personalization-resilient,"Email Personalization Résilient (4 AI + 3-Email Cart Series)",script,Level 3,9,MEDIUM,Low (add reflection),MAINTAIN / OPTIMIZE
+sms-automation-resilient,"SMS Automation Résilient (Omnisend + Twilio)",script,Level 2,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+churn-prediction-resilient,"Prédiction Churn Résilient (RFM + AI)",script,Level 3,9,HIGH,Low (add reflection),MAINTAIN / OPTIMIZE
+review-request-automation,"Demande d'Avis Automatisée (Shopify → Klaviyo)",script,Level 2,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+at-risk-customer-flow,"Flow Client At-Risk (Intervention Anti-Churn)",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+price-drop-alerts,"Alertes Price Drop (Wishlist)",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+replenishment-reminder,"Rappel Réapprovisionnement",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+cjdropshipping-automation,"CJDropshipping - Automatisation Fournisseur",script,Level 2,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+bigbuy-supplier-sync,"BigBuy - Synchronisation Fournisseur",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+dropshipping-order-flow,"Dropshipping - Orchestration Multi-Fournisseurs",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+agency-env-check,"Environment Health Check",internal,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+agency-api-test,"API Connectivity Tester",internal,Level 1,3,MEDIUM,Medium (platform limits),UPGRADE TO LEVEL 3
+index,"Index",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+content,"Content",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+popup,"Popup",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+markets,"Markets",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+lead-gen-scheduler,"Lead Gen Scheduler",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+index-1,"Index",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+search,"Search",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+invoice-generator,"Invoice Generator",script,Level 4,9,HIGH,Low (add reflection),MAINTAIN / OPTIMIZE
+config-3a-automation,"Config 3a Automation",script,Level 2,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+config-cinematicads,"Config Cinematicads",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+config.example,"Config.Example",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+lead-scoring-agentic,"undefined",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+flows-audit-agentic,"undefined",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3
+product-enrichment-agentic,"undefined",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+ga4-budget-optimizer-agentic,"undefined",script,Level 1,9,MEDIUM,Low (add reflection),UPGRADE TO LEVEL 3
+store-audit-agentic,"undefined",script,Level 1,9,HIGH,Low (add reflection),UPGRADE TO LEVEL 3

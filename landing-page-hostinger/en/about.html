@@ -198,6 +198,29 @@
     </div>
   </header>
 
+  <!-- Agentic Status Banner (Live Data) -->
+  <div class="agentic-status-banner" id="agentic-status-banner">
+    <div class="container">
+      <div class="status-content">
+        <div class="status-left">
+          <span class="pulse-indicator online"></span>
+          <span class="status-text">AGENTIC BACKEND: <strong id="system-status-text">OPERATIONAL</strong></span>
+          <span class="status-divider">|</span>
+          <span class="status-metric">ENV CONFIG: <strong id="config-rate-text">100%</strong></span>
+          <span class="status-divider">|</span>
+          <span class="status-metric">AGENCY: <strong id="agentic-count-text">18 Agentic Workflows</strong></span>
+        </div>
+        <div class="status-right" id="verified-apis-scroll">
+          <span class="api-tag ok">Shopify</span>
+          <span class="api-tag ok">Klaviyo</span>
+          <span class="api-tag ok">xAI</span>
+          <span class="api-tag ok">Google</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- About Hero - Premium -->
   <main role="main">
   <section class="about-hero" id="main-content">
@@ -223,7 +246,7 @@
         <div class="hero-trust-bar">
           <div class="trust-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span>112 automations</span>
+            <span>118 automations</span>
           </div>
           <div class="trust-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -291,7 +314,7 @@
             <span class="pillar-letter">A</span>
             <h3>Automation</h3>
           </div>
-          <p>112 automations validated on client projects. Shopify Flow, Klaviyo, webhooks - everything automated.</p>
+          <p>118 automations validated on client projects. Shopify Flow, Klaviyo, webhooks - everything automated.</p>
           <ul class="pillar-features">
             <li>Email flows (Welcome, Cart, Post-Purchase)</li>
             <li>Real-time multi-channel sync</li>
@@ -457,7 +480,7 @@
         </div>
         <div class="status-item">
           <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
-          <span>112 automations</span>
+          <span>118 automations</span>
         </div>
         <div class="status-item">
           <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v10M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m6 0h10M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg></span>
@@ -688,5 +711,7 @@
     });
   })();
   </script>
+  <script src="../geo-locale.js"></script>
+  <script src="../agentic-transparency.js"></script>
 </body>
 </html>

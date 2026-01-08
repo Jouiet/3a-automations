@@ -326,7 +326,7 @@ function generateHTML(article, slug, category, language, altSlug) {
       ctaTitle: 'Ready to automate?',
       ctaText: 'Request a free automation audit. PDF report with 3 quick wins in 24-48h.',
       ctaButton: 'Request free audit',
-      footerText: 'Automation, Analytics & AI for SMEs and E-commerce. 112 automations.',
+      footerText: 'Automation, Analytics & AI for SMEs and E-commerce. 118 tools / 18 agents.',
       rights: 'All rights reserved.',
       basePath: '/en',
       blogPath: '/en/blog/',
