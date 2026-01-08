@@ -131,6 +131,17 @@ Transforming from **Automation** to **Agentic** offers distinct competitive adva
     3.  **Verification:** All production files now reflect factual count of 112 automations.
     4.  **Impact:** Eliminated confusion, ensured factual accuracy across all customer-facing materials.
 
+#### Phase 9: Agentic Workflows Upgrade - Phase 1 (COMPLETED 2026-01-08)
+- [x] **Goal:** Transform 5 high-impact workflows from Level 1-2 to Level 3 (agentic with Draft→Critique→Refine loops).
+- [x] **Implementation:**
+    1.  **lead-scoring-agentic.cjs:** AI critique of scoring accuracy, multi-provider fallback (Claude/Gemini/Grok).
+    2.  **flows-audit-agentic.cjs:** AI-prioritized fix list with revenue impact estimates (€/month).
+    3.  **product-enrichment-agentic.cjs:** SEO quality scoring (0-10), auto-publish if ≥8.
+    4.  **ga4-budget-optimizer-agentic.cjs:** AI budget reallocation based on ROI analysis.
+    5.  **store-audit-agentic.cjs:** Conversion impact prediction with A/B test simulation.
+- [x] **Metrics:** ~1800 lines of code, all workflows executable with --help, --agentic flags.
+- [x] **Impact:** 5 workflows upgraded to Level 3, establishing pattern for remaining 25-35 workflows (Q1-Q2 2026 roadmap).
+
 ## Operational Commands
 ### Verify System Integrity
 ```bash
