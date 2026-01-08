@@ -1,0 +1,89 @@
+[
+    {
+        "name": "run_google_sheets_audit",
+        "description": "Verifies Google Sheets connectivity and Service Account access.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "required": []
+        }
+    },
+    {
+        "name": "import_leads_to_sheet",
+        "description": "Universal lead importer from CSV/JSON/XLSX to Google Sheets.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "Path to input file"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "Lead source (e.g. facebook_ads)"
+                }
+            },
+            "required": [
+                "file_path"
+            ]
+        }
+    },
+    {
+        "name": "sync_typeform_leads",
+        "description": "Syncs Typeform responses to Google Sheets.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "required": []
+        }
+    },
+    {
+        "name": "generate_google_merchant_feed",
+        "description": "Generates Google Merchant Center XML feed from Shopify products.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "required": []
+        }
+    },
+    {
+        "name": "run_newsletter_automation",
+        "description": "AI-powered newsletter generation and Klaviyo content sync.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "topic": {
+                    "type": "string",
+                    "description": "Override topic"
+                },
+                "preview": {
+                    "type": "boolean",
+                    "description": "Preview mode"
+                }
+            },
+            "required": []
+        }
+    },
+    {
+        "name": "run_lead_gen_scheduler",
+        "description": "Centralized scheduler for LinkedIn, G-Maps and Newsletter pipelines.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "pipeline": {
+                    "type": "string",
+                    "description": "Specific pipeline to run"
+                },
+                "market": {
+                    "type": "string",
+                    "description": "Market focus (MA, FR, US)"
+                },
+                "status": {
+                    "type": "boolean",
+                    "description": "Check status only"
+                }
+            },
+            "required": []
+        }
+    }
+]

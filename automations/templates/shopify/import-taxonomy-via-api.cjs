@@ -4,7 +4,7 @@
  * Reads products_taxonomy_import.csv and updates each product
  */
 
-require('dotenv').config({ path: '.env' });
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
 const https = require('https');
 const fs = require('fs');
 
@@ -198,7 +198,7 @@ async function main() {
   console.log(`✅ Updated: ${results.updated}`);
   console.log(`❌ Failed: ${results.failed}`);
   console.log(`⚠️  Not found: ${results.notFound}`);
-  console.log(`Success rate: ${(results.updated/results.total*100).toFixed(1)}%`);
+  console.log(`Success rate: ${(results.updated / results.total * 100).toFixed(1)}%`);
 
   // Save results
   fs.writeFileSync('import-taxonomy-results.json', JSON.stringify(results, null, 2));
@@ -207,7 +207,7 @@ async function main() {
   if (results.updated === results.total) {
     console.log(`\n🎉 P0.2: 100% COMPLETE!`);
   } else {
-    console.log(`\n⚠️  P0.2: ${(results.updated/results.total*100).toFixed(1)}% complete`);
+    console.log(`\n⚠️  P0.2: ${(results.updated / results.total * 100).toFixed(1)}% complete`);
     console.log(`   ${results.failed + results.notFound} products need attention`);
   }
 }

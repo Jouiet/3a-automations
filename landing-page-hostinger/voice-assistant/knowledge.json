@@ -1,43 +1,178 @@
 {
-  "version": "2025-12-26",
-  "generated": "2025-12-26T00:00:00.000Z",
-  "summary": "3A Automation - Expert en automatisation marketing pour PME et e-commerce.",
-  "categories": [
-    "Lead Generation",
-    "Email Marketing",
-    "E-commerce",
-    "Analytics",
-    "SEO & Contenu",
-    "AI & Video",
-    "WhatsApp Business",
-    "Voice AI"
-  ],
-  "services": {
-    "audit": {
-      "description": "Analyse gratuite de vos processus",
-      "deliverable": "Rapport PDF avec recommandations",
-      "delay": "24-48h"
+  "version": "2026-01-08",
+  "generated": "2026-01-08T09:57:49.334Z",
+  "totalAutomations": 112,
+  "categories": 15,
+  "summary": "3A Automation dispose de 112 automatisations dans 15 catégories.",
+  "automationsByCategory": {
+    "Lead Generation & Acquisition": [
+      "Sync Meta Leads → Shopify",
+      "Sync Google Ads → Shopify",
+      "Sync TikTok Leads → Shopify",
+      "Qualification & Scoring",
+      "Segmentation HOT/WARM/COLD",
+      "Enrichissement Données",
+      "Geo-Segmentation",
+      "Google Forms → CRM",
+      "Typeform → Klaviyo",
+      "Sourcing Google Maps",
+      "Sourcing LinkedIn",
+      "Veille Recrutement",
+      "Google Apps Script Booking",
+      "Google Calendar Booking",
+      "Geo Segment Generic",
+      "Import Facebook Lead Ads",
+      "Segment Leads",
+      "Enable Apify Schedulers",
+      "LinkedIn Lead Automation",
+      "Email Outreach Sequence",
+      "Pipeline LinkedIn → Klaviyo (B2B)",
+      "Pipeline Google Maps → Klaviyo (Local B2B)",
+      "Module Templates Email B2B",
+      "HubSpot B2B CRM Integration v1.1.0",
+      "Lead Gen Scheduler",
+      "Invoice Generator"
+    ],
+    "SEO & Contenu": [
+      "Correction Alt Text Images",
+      "Meta Tags Automatiques",
+      "Sitemap Images",
+      "Schema.org Produits",
+      "Internal Linking",
+      "llms.txt (AEO)",
+      "Generate Tags Csv",
+      "Import Alt Text Api",
+      "Upload Llms"
+    ],
+    "Email Marketing (CRM)": [
+      "Welcome Series",
+      "Abandoned Cart",
+      "Browse Abandonment",
+      "Post-Achat",
+      "Win-Back",
+      "VIP Tiers",
+      "Audit Flows Complet",
+      "Rotation A/B Sender",
+      "Audit Klaviyo Flows V2",
+      "Omnisend B2C E-commerce Integration v1.1.0",
+      "Email Personalization Résilient (4 AI + 3-Email Cart Series)"
+    ],
+    "Shopify Admin": [
+      "Enrichissement Produits",
+      "Google Shopping Attributes",
+      "Gestion Collections",
+      "Pages Légales",
+      "Installation GTM",
+      "Webhooks Loyalty",
+      "Audit Store Complet",
+      "Export → Facebook Audiences",
+      "Import Taxonomie Google",
+      "Audit Shopify Store",
+      "Create Warehouse Metafield",
+      "Import Taxonomy Metafield",
+      "Parse Warehouse Csv",
+      "Demande d'Avis Automatisée (Shopify → Klaviyo)"
+    ],
+    "Analytics & Reporting": [
+      "Dashboard Looker Studio",
+      "Rapport Sources GA4",
+      "Audit Système Complet",
+      "Alerte Stock Bas",
+      "Projections Marges",
+      "Analyse Inventaire",
+      "Suivi BNPL Performance",
+      "Vérification Pixels",
+      "Analyze Ga4 Conversion Source"
+    ],
+    "Contenu & Vidéo & Podcast": [
+      "Vidéo Promo Produit",
+      "Vidéo Cart Recovery",
+      "Vidéo Format Portrait",
+      "Feed Google Shopping",
+      "Diagnostic GMC",
+      "Article Blog + Distribution Multi-Canal",
+      "Workflow n8n Complet",
+      "Generate All Promo Videos",
+      "Blog Generator Résilient (3 AI + 3 Social)",
+      "Podcast Generator (Blog → Audio)",
+      "Index",
+      "Content",
+      "Popup",
+      "Markets",
+      "Index",
+      "Search",
+      "Config 3a Automation",
+      "Config Cinematicads",
+      "Config.Example"
+    ],
+    "CinematicAds AI": [
+      "CinematicAds Director",
+      "Competitor Clone AI",
+      "E-commerce Ads Factory",
+      "Asset Factory (Dual AI)"
+    ],
+    "AI Avatar & Influencer": [
+      "AI Avatar Generator",
+      "AI Talking Video"
+    ],
+    "WhatsApp Business": [
+      "Confirmation WhatsApp RDV",
+      "Rappels WhatsApp 24h + 1h",
+      "WhatsApp Booking Notifications"
+    ],
+    "Voice AI & Téléphonie": [
+      "Assistant Vocal IA Web",
+      "Assistant Telephonique IA",
+      "Templates Voice Widget (8 industries)",
+      "Grok Voice Realtime (WebSocket + TTS)"
+    ],
+    "Marketing Automation": [
+      "Newsletter Automation"
+    ],
+    "SMS Marketing": [
+      "SMS Automation Résilient (Omnisend + Twilio)"
+    ],
+    "Rétention & Prédiction Churn": [
+      "Prédiction Churn Résilient (RFM + AI)",
+      "Flow Client At-Risk (Intervention Anti-Churn)",
+      "Alertes Price Drop (Wishlist)",
+      "Rappel Réapprovisionnement"
+    ],
+    "Dropshipping & Fournisseurs": [
+      "CJDropshipping - Automatisation Fournisseur",
+      "BigBuy - Synchronisation Fournisseur",
+      "Dropshipping - Orchestration Multi-Fournisseurs"
+    ],
+    "Général": [
+      null,
+      null
+    ]
+  },
+  "packs": {
+    "quickWin": {
+      "price": "390€",
+      "automations": "1 flow optimisé",
+      "bonus": "Voice AI + Booking"
     },
-    "packs": {
-      "description": "Du projet ponctuel au déploiement complet",
-      "type": "Forfait one-time"
+    "essentials": {
+      "price": "790€",
+      "automations": "3 flows + A/B tests",
+      "bonus": "Voice AI + Booking + WhatsApp"
     },
-    "abonnements": {
-      "description": "Maintenance et optimisation continue",
-      "type": "Abonnement mensuel"
+    "growth": {
+      "price": "1399€",
+      "automations": "5 flows + dashboard",
+      "bonus": "Voice AI + Booking + WhatsApp + Rappels"
     }
   },
-  "sectors": [
-    "E-commerce / Shopify",
-    "BTP / Construction",
-    "Services B2B",
-    "SaaS",
-    "Prestataires de services"
-  ],
-  "contact": {
-    "email": "contact@3a-automation.com",
-    "website": "3a-automation.com",
-    "pricing": "/pricing.html",
-    "booking": "/booking.html"
+  "retainers": {
+    "maintenance": {
+      "price": "290€/mois",
+      "hours": "3h"
+    },
+    "optimization": {
+      "price": "490€/mois",
+      "hours": "5h"
+    }
   }
 }

@@ -2,13 +2,13 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "version": "2.7.0",
   "lastUpdated": "2026-01-04",
-  "totalCount": 99,
+  "totalCount": 112,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
       "name_fr": "Lead Generation & Acquisition",
       "name_en": "Lead Generation & Acquisition",
-      "count": 24
+      "count": 26
     },
     "seo": {
       "name_fr": "SEO & Contenu",
@@ -43,7 +43,7 @@
     "content": {
       "name_fr": "Contenu & Vidéo & Podcast",
       "name_en": "Content & Video & Podcast",
-      "count": 10
+      "count": 19
     },
     "ai-avatar": {
       "name_fr": "AI Avatar & Influencer",
@@ -1601,6 +1601,138 @@
       "frequency": "manual",
       "benefit": "Deep diagnostic of all external integrations",
       "semantic_description": "Performs a full connectivity test across Shopify, Klaviyo, Apify, and Meta APIs."
+    },
+    {
+      "id": "index",
+      "name_fr": "Index",
+      "name_en": "Index",
+      "category": "content",
+      "type": "script",
+      "script": "3a-global-mcp/build/index.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "content",
+      "name_fr": "Content",
+      "name_en": "Content",
+      "category": "content",
+      "type": "script",
+      "script": "3a-sourcing-extension/content.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "popup",
+      "name_fr": "Popup",
+      "name_en": "Popup",
+      "category": "content",
+      "type": "script",
+      "script": "3a-sourcing-extension/popup.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "markets",
+      "name_fr": "Markets",
+      "name_en": "Markets",
+      "category": "content",
+      "type": "script",
+      "script": "agency/config/markets.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "lead-gen-scheduler",
+      "name_fr": "Lead Gen Scheduler",
+      "name_en": "Lead Gen Scheduler",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "agency/lead-gen-scheduler.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "index-1",
+      "name_fr": "Index",
+      "name_en": "Index",
+      "category": "content",
+      "type": "script",
+      "script": "alibaba-mcp/index.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "search",
+      "name_fr": "Search",
+      "name_en": "Search",
+      "category": "content",
+      "type": "script",
+      "script": "alibaba-mcp/search.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "invoice-generator",
+      "name_fr": "Invoice Generator",
+      "name_en": "Invoice Generator",
+      "category": "lead-gen",
+      "type": "script",
+      "script": "invoicing/invoice-generator.cjs",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "config-3a-automation",
+      "name_fr": "Config 3a Automation",
+      "name_en": "Config 3a Automation",
+      "category": "content",
+      "type": "script",
+      "script": "shared-components/voice-widget/config-3a-automation.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "config-cinematicads",
+      "name_fr": "Config Cinematicads",
+      "name_en": "Config Cinematicads",
+      "category": "content",
+      "type": "script",
+      "script": "shared-components/voice-widget/config-cinematicads.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "config.example",
+      "name_fr": "Config.Example",
+      "name_en": "Config.Example",
+      "category": "content",
+      "type": "script",
+      "script": "shared-components/voice-widget/config.example.js",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
     }
   ],
   "types": {
@@ -1627,7 +1759,7 @@
     "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
-    "withScript": 64,
+    "withScript": 77,
     "withoutScript": 35
   }
 }

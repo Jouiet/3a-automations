@@ -12,7 +12,7 @@
  * Version: 1.0
  */
 
-require('dotenv').config({ path: '/Users/mac/Desktop/clients/' + (process.env.CLIENT_NAME || 'default') + '/.env' });
+require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '..', '.env') });
 
 const CONFIG = {
   apiKey: process.env.KLAVIYO_API_KEY,
