@@ -125,12 +125,13 @@
       "name_fr": "Qualification & Scoring",
       "name_en": "Lead Qualification & Scoring",
       "category": "lead-gen",
-      "type": "n8n-workflow",
+      "type": "manual-process",
       "script": null,
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
       "benefit_fr": "Focus sur leads chauds",
-      "benefit_en": "Focus on hot leads"
+      "benefit_en": "Focus on hot leads",
+      "note": "Previously planned as n8n workflow, now manual CRM process"
     },
     {
       "id": "hot-warm-cold",
@@ -185,12 +186,13 @@
       "name_fr": "Typeform → Klaviyo",
       "name_en": "Typeform → Klaviyo",
       "category": "lead-gen",
-      "type": "n8n-workflow",
+      "type": "manual-process",
       "script": null,
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
       "benefit_fr": "Quiz → Email list",
-      "benefit_en": "Quiz → Email list"
+      "benefit_en": "Quiz → Email list",
+      "note": "Previously planned as n8n workflow, now manual integration"
     },
     {
       "id": "sourcing-google-maps",
@@ -667,7 +669,7 @@
       "name_fr": "Article Blog + Distribution Multi-Canal",
       "name_en": "Auto Blog + Multi-Channel Distribution",
       "category": "content",
-      "type": "n8n-workflow",
+      "type": "script",
       "script": "agency/core/blog-generator-resilient.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
@@ -682,16 +684,17 @@
       "description_en": "Generates SEO article via Claude AI and publishes simultaneously to website + Facebook + LinkedIn"
     },
     {
-      "id": "n8n-workflow",
-      "name_fr": "Workflow n8n Complet",
-      "name_en": "Complete n8n Workflow",
+      "id": "custom-workflow-deprecated",
+      "name_fr": "Workflow Personnalisé (Obsolète)",
+      "name_en": "Custom Workflow (Deprecated)",
       "category": "content",
-      "type": "n8n-workflow",
+      "type": "deprecated",
       "script": null,
-      "frequency_fr": "Personnalisé",
-      "frequency_en": "Custom",
-      "benefit_fr": "Automation sur-mesure",
-      "benefit_en": "Tailor-made automation"
+      "frequency_fr": "N/A",
+      "frequency_en": "N/A",
+      "benefit_fr": "Remplacé par scripts natifs",
+      "benefit_en": "Replaced by native scripts",
+      "note": "n8n workflows replaced by native Node.js scripts"
     },
     {
       "id": "google-apps-script-booking",
@@ -968,7 +971,7 @@
       "name_fr": "Confirmation WhatsApp RDV",
       "name_en": "WhatsApp Booking Confirmation",
       "category": "whatsapp",
-      "type": "n8n-workflow",
+      "type": "script",
       "script": "agency/core/whatsapp-booking-notifications.cjs",
       "frequency_fr": "À chaque réservation",
       "frequency_en": "On each booking",
@@ -980,7 +983,7 @@
       "name_fr": "Rappels WhatsApp 24h + 1h",
       "name_en": "WhatsApp Reminders 24h + 1h",
       "category": "whatsapp",
-      "type": "n8n-workflow",
+      "type": "script",
       "script": "agency/core/whatsapp-booking-notifications.cjs",
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
