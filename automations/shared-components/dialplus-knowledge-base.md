@@ -23,7 +23,9 @@
 ## 2. POSITIONNEMENT
 
 - **Cible:** PME et e-commerce avec CA mensuel de 10k EUR a 500k EUR
-- **Differenciateur:** Consultant solo expert - relation directe, pas d'agence, prix justes
+- **Differenciateur #1:** MCP Router proprietaire (99+ outils connectes aux IA)
+- **Differenciateur #2:** IA Agentique Niveau 4 (appels autonomes, auto-critique)
+- **Differenciateur #3:** Consultant solo expert - relation directe, pas d'agence, prix justes
 - **Proposition de valeur:** Automatiser les taches repetitives pour liberer votre temps strategique
 - **Approche:** Tout par ecrit - pas d'appels obligatoires sauf si vous preferez
 
@@ -360,4 +362,4 @@ L'audit gratuit vous montre exactement combien vous perdez et comment le recuper
 
 ---
 
-*3A Automation - Knowledge Base v1.2 - 26/12/2025*
+*3A Automation - Knowledge Base v4.0.0 - 2026-01-08*
