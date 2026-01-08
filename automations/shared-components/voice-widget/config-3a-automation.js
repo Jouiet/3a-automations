@@ -57,22 +57,22 @@ const VOICE_WIDGET_CONFIG = {
 
 IDENTITE:
 - Agence automation pour PME et e-commerce (tous secteurs)
-- Experts Klaviyo, Shopify, GA4/GTM, n8n, Voice AI
+- Experts Klaviyo, Shopify, GA4/GTM, Voice AI, MCP Router
 - Site: 3a-automation.com
-- 77 automatisations disponibles dans 10 categories
-- 9 MCPs fonctionnels (Model Context Protocol)
+- 112 automatisations disponibles dans 10 categories
+- MCP Router propriétaire (Type-Safe, multi-modèles)
 
-CATEGORIES D'AUTOMATISATIONS (77 total):
-- Lead Generation & Acquisition (20): Meta/Google/TikTok Leads, LinkedIn, Google Maps
-- Email Marketing Klaviyo (9): Welcome, Abandon panier, Post-achat, Winback, VIP
-- Shopify Admin (13): Produits, Collections, Webhooks, Audit Store
+CATEGORIES D'AUTOMATISATIONS (112 total):
+- Lead Generation & Acquisition (26): Meta/Google/TikTok Leads, LinkedIn, Google Maps
+- Email Marketing Klaviyo (11): Welcome, Abandon panier, Post-achat, Winback, VIP
+- Shopify Admin (14): Produits, Collections, Webhooks, Audit Store
 - Analytics & Reporting (9): GA4, Looker Studio, Alertes, Pixels
 - SEO & Contenu (9): Alt text, Meta tags, Schema.org, llms.txt AEO
-- Contenu & Video (10): Promo produit, Cart recovery, Article blog
+- Contenu & Video & Podcast (19): Promo produit, Cart recovery, Article blog, Podcast
 - AI Avatar & Influencer (2): Consistent avatar multi-scenes
 - CinematicAds AI (4): Gemini 3 Pro + Imagen 4 + Veo 3.1
-- WhatsApp Business (2): Confirmations, Rappels RDV
-- Voice AI Grok (1): Telephonie vocale IA
+- WhatsApp Business (3): Confirmations, Rappels RDV
+- Voice AI & Téléphonie (4): Grok Voice Realtime, Twilio Bridge
 
 SERVICES (nouveaux prix):
 - Audit gratuit: Formulaire -> Rapport PDF 24-48h
@@ -104,22 +104,22 @@ OBJECTIF:
 
 IDENTITY:
 - Automation agency for SMBs and e-commerce (all sectors)
-- Experts in Klaviyo, Shopify, GA4/GTM, n8n, Voice AI
+- Experts in Klaviyo, Shopify, GA4/GTM, Voice AI, MCP Router
 - Website: 3a-automation.com
-- 99 automations available in 10 categories
-- 9 functional MCPs (Model Context Protocol)
+- 112 automations available in 10 categories
+- Proprietary MCP Router (Type-Safe, multi-model)
 
-AUTOMATION CATEGORIES (77 total):
-- Lead Generation & Acquisition (20): Meta/Google/TikTok Leads, LinkedIn, Google Maps
-- Klaviyo Email Marketing (9): Welcome, Cart abandonment, Post-purchase, Winback, VIP
-- Shopify Admin (13): Products, Collections, Webhooks, Store Audit
+AUTOMATION CATEGORIES (112 total):
+- Lead Generation & Acquisition (26): Meta/Google/TikTok Leads, LinkedIn, Google Maps
+- Klaviyo Email Marketing (11): Welcome, Cart abandonment, Post-purchase, Winback, VIP
+- Shopify Admin (14): Products, Collections, Webhooks, Store Audit
 - Analytics & Reporting (9): GA4, Looker Studio, Alerts, Pixels
 - SEO & Content (9): Alt text, Meta tags, Schema.org, llms.txt AEO
-- Content & Video (10): Product promo, Cart recovery, Blog article
+- Content & Video & Podcast (19): Product promo, Cart recovery, Blog article, Podcast
 - AI Avatar & Influencer (2): Consistent multi-scene avatar
 - CinematicAds AI (4): Gemini 3 Pro + Imagen 4 + Veo 3.1
-- WhatsApp Business (2): Confirmations, Appointment reminders
-- Grok Voice AI (1): AI voice telephony
+- WhatsApp Business (3): Confirmations, Appointment reminders
+- Voice AI & Telephony (4): Grok Voice Realtime, Twilio Bridge
 
 SERVICES (new pricing):
 - Free audit: Form -> PDF Report 24-48h
@@ -148,7 +148,7 @@ OBJECTIVE:
 
   // === KNOWLEDGE BASE ===
   KNOWLEDGE: {
-    totalAutomations: 77,
+    totalAutomations: 112,
     categories: [
       'Lead Generation & Acquisition',
       'Email Marketing Klaviyo',
