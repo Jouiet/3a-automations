@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "2.7.0",
-  "lastUpdated": "2026-01-04",
-  "totalCount": 112,
+  "version": "2.8.0",
+  "lastUpdated": "2026-01-08T15:15:00Z",
+  "totalCount": 117,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -1736,6 +1736,100 @@
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
       "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "lead-scoring-agentic",
+      "name": "Lead Scoring - Agentic (Level 3)",
+      "category": "Lead Generation & Acquisition",
+      "type": "script",
+      "scriptPath": "automations/agency/core/lead-scoring-agentic.cjs",
+      "frequency": "on-demand",
+      "benefits": [
+        "AI critique of scoring accuracy",
+        "Multi-provider fallback",
+        "+10% lead quality"
+      ],
+      "platforms": [
+        "Klaviyo",
+        "HubSpot"
+      ],
+      "agentic": true,
+      "agenticLevel": 3
+    },
+    {
+      "id": "flows-audit-agentic",
+      "name": "Flows Audit - Agentic (Level 3)",
+      "category": "Email Marketing & Klaviyo",
+      "type": "script",
+      "scriptPath": "automations/agency/core/flows-audit-agentic.cjs",
+      "frequency": "weekly",
+      "benefits": [
+        "AI-prioritized fix list",
+        "Revenue impact estimates",
+        "-50% audit time"
+      ],
+      "platforms": [
+        "Klaviyo",
+        "Shopify"
+      ],
+      "agentic": true,
+      "agenticLevel": 3
+    },
+    {
+      "id": "product-enrichment-agentic",
+      "name": "Product Enrichment - Agentic (Level 3)",
+      "category": "SEO & Content",
+      "type": "script",
+      "scriptPath": "automations/agency/core/product-enrichment-agentic.cjs",
+      "frequency": "daily",
+      "benefits": [
+        "SEO quality scoring (0-10)",
+        "Auto-publish if ≥8",
+        "+20% organic traffic"
+      ],
+      "platforms": [
+        "Shopify"
+      ],
+      "agentic": true,
+      "agenticLevel": 3
+    },
+    {
+      "id": "ga4-budget-optimizer-agentic",
+      "name": "GA4 Budget Optimizer - Agentic (Level 3)",
+      "category": "Analytics & Reporting",
+      "type": "script",
+      "scriptPath": "automations/agency/core/ga4-budget-optimizer-agentic.cjs",
+      "frequency": "weekly",
+      "benefits": [
+        "AI budget reallocation",
+        "ROI analysis per source",
+        "+15% ROAS"
+      ],
+      "platforms": [
+        "GA4",
+        "Google Ads",
+        "Meta Ads"
+      ],
+      "agentic": true,
+      "agenticLevel": 3
+    },
+    {
+      "id": "store-audit-agentic",
+      "name": "Store Audit - Agentic (Level 3)",
+      "category": "Shopify Admin & Operations",
+      "type": "script",
+      "scriptPath": "automations/agency/core/store-audit-agentic.cjs",
+      "frequency": "monthly",
+      "benefits": [
+        "Conversion impact prediction",
+        "A/B test simulation",
+        "+10% CVR"
+      ],
+      "platforms": [
+        "Shopify"
+      ],
+      "agentic": true,
+      "agenticLevel": 3
     }
   ],
   "types": {
