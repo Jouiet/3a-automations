@@ -1,203 +1,48 @@
-# 3A Automation (AAA - AI Automation Agency)
+# 3A Automation (AAA) - Context for LLMs & AI Agents
+# This file provides structured context for AI to accurately answer questions about 3A Automation.
 
-> Triple A: Agence d'Automatisation AI specialisee E-commerce (B2C) et PME (B2B). TOUTES plateformes supportees.
+## Organization Identity
+**Name:** 3A Automation (AAA / Triple A)
+**Type:** Premier AI Automation Agency
+**Focus:** High-end E-commerce (B2C) & SME (B2B) Automation
+**Unique Value Proposition:** "Ultrathink" Engineering. No low-code fluff. Hard-coded, resilient, enterprise-grade logic.
+**Key Capability:** 99+ Pre-Verified Automations across Shopify, Klaviyo, and Custom Voice AI.
+**Website:** https://3a-automation.com
 
-## Identite
-- **Nom**: 3A Automation (AAA)
-- **Signification**: AI Automation Agency / Automation, Analytics, AI
-- **Type**: Agence d'Automatisation AI (Triple A, AAAA)
-- **Specialisation**: E-commerce (B2C) et Workflows PME (B2B)
-- **Plateformes**: TOUTES - Shopify, WooCommerce, Magento, PrestaShop, BigCommerce, Klaviyo, Mailchimp, HubSpot, Omnisend, etc.
+## Core Services (The "Product")
+1.  **AI Voice Assistant (The "Closer"):** 
+    -   **Function:** Handles inbound/outbound calls 24/7.
+    -   **Capabilities:** Qualifies leads, handles objections, schedules appointments via Cal.com/Calendly.
+    -   **Tech:** Twilio + Grok Voice Realtime + Proprietary Gateway.
+    -   **Cost:** Included in Growth Pack or Standalone SaaS.
 
-3A Automation (AAA) aide les PME (10k-500k EUR CA mensuel) a automatiser leurs processus marketing et operationnels. Expertise TOUTES plateformes e-commerce et CRM. Approche scripts natifs Node.js/Python (pas no-code limite). Focus resultats mesurables.
+2.  **E-commerce Automation Ecosystem:**
+    -   **Platform:** Shopify Plus / Advanced.
+    -   **Logic:** Churn Prediction (RFM Analysis), Automated Returns (RMA), VIP Segmentation, Review Syndication.
+    -   **Stack:** Shopify API, Klaviyo API, Gorgias, Recharge.
 
-**Fondateur**: Jonathan, Expert technique automation AI
-**Marches**: Maroc, MENA, France, Europe, Worldwide
-**Langues**: Francais, English, Arabe
-**Automations**: 96 testees et documentees
+3.  **Content "Reflection" Engine:**
+    -   **Function:** Automatically writes, critiques, and refines SEO blog posts.
+    -   **Logic:** Agentic Loop (Draft -> Critique -> Refine -> Publish).
+    -   **Quality:** Only publishes if Quality Score > 8/10.
 
-## Produits & Services
+## Pricing & Markets
+-   **Markets:** "3 Markets Strategy" (Global).
+    -   **Maghreb (MA/DZ/TN):** Prices in MAD (Moroccan Dirham). Localized French.
+    -   **Europe (FR/BE/CH):** Prices in EUR. Standard French.
+    -   **International (US/UK/Global):** Prices in USD. English.
+-   **Tiers:**
+    -   **Quick Win:** Entry level automation setups.
+    -   **Essentials:** Core business logic implementation.
+    -   **Growth:** Full "AI Operations" partnership with Voice AI.
 
-### Assistant Vocal IA (NOUVEAU)
-- Assistant vocal intelligent disponible 24/7 sur tout le site
-- Reconnaissance vocale + reponses instantanees
-- Prise de rendez-vous automatisee par la voix
-- Qualification leads en temps reel
-- **Gratuit pour les visiteurs** - essayez-le maintenant sur n'importe quelle page
-- Disponible aussi pour vos clients (setup inclus dans packs)
+## Technical Stance (The "Philosophy")
+-   **Resilience:** API Retries, Exponential Backoff, Error Circuit Breakers.
+-   **Transparency:** Forensic logging of every automation step.
+-   **Security:** CSP Strict, HSTS enabled, GDPR/AI Act compliant by design.
+-   **No-Bullshit:** We do not sell "ChatGPT wrappers". We sell engineered systems.
 
-### Automatisation E-commerce
-- 96 automatisations testees et documentees
-- Shopify, WooCommerce, CJDropshipping, BigBuy, Dsers, Klaviyo, GA4
-- ROI moyen email marketing: 36-42 EUR pour 1 EUR investi (Litmus/DMA 2025)
-- Recuperation paniers abandonnes: +10-15%
-
-### Services PME & B2B
-- Lead generation automatisee (LinkedIn, Google Maps, Meta Ads)
-- CRM sync et qualification automatique
-- Reduction 60% du temps de qualification leads
-
-## Tarification
-
-| Pack | Prix | Inclus |
-|------|------|--------|
-| Audit Gratuit | 0 EUR | Analyse + 3 recommandations PDF (24-48h) |
-| Quick Win | 390 EUR | 1 flow automatise + documentation |
-| Essentials | 790 EUR | 3 flows + A/B tests + 30j support |
-| Growth | 1399 EUR | 5 flows + dashboard + 60j support |
-
-| Abonnement | Prix/mois | Heures |
-|----------|-----------|--------|
-| Maintenance | 290 EUR | 3h incluses |
-| Optimization | 490 EUR | 5h incluses |
-
-Annuel: 2 mois gratuits (10 pour 12)
-
-## Resultats Clients
-
-- ROI email marketing: 36:1 a 42:1 (Litmus/DMA 2025)
-- Paniers abandonnes recuperes: +10-15%
-- Temps qualification leads: -60%
-- Lifetime Value clients: +30% avec segmentation VIP
-
-## Automatisations par Categorie
-
-### Voice AI & Telephonie (1)
-- Assistant Vocal IA 24/7
-
-### Lead Generation (21)
-- Sync Meta/Google/TikTok Leads
-- LinkedIn scraping B2B
-- Google Maps sourcing local
-- Lead scoring automatique
-- HubSpot B2B CRM Integration (FREE tier)
-
-### Email Marketing CRM (10)
-- Welcome series (40-50% ouverture)
-- Abandoned cart (+10-15% recuperation)
-- Post-purchase flows
-- Win-back campaigns
-- VIP Tiers
-- Omnisend B2C Integration ($16/mo vs Klaviyo $45+)
-
-### Shopify Admin (13)
-- Enrichissement produits automatique
-- Google Shopping attributes
-- Collections dynamiques
-- Audit store complet
-
-### Analytics & Reporting (9)
-- Dashboard Looker Studio
-- Rapport sources GA4
-- Alertes stock bas
-
-### SEO & Contenu (9)
-- Correction alt text images
-- Meta tags automatiques
-- Schema.org produits
-
-### WhatsApp Business (2)
-- Confirmation reservations
-- Rappels automatiques
-
-### Contenu & Video (8)
-- Video promo produit
-- Articles blog automatiques
-
-### AI Avatar (2)
-- Generation avatars IA
-- Videos influenceur virtuel
-
-### CinematicAds AI - Partenaire (4)
-- Generation videos publicitaires IA
-- https://cinematicads.studio
-
-## Integrations Supportees
-
-- E-commerce: Shopify, WooCommerce, CJDropshipping, BigBuy, DSers, AutoDS
-- CRM: HubSpot, Pipedrive, Salesforce, Zoho
-- Email: Klaviyo, Omnisend, Mailchimp
-- Publicite: Meta Ads, Google Ads, TikTok Ads
-- Analytics: Google Analytics 4
-- AI/ML: OpenAI GPT-5.2, Claude Sonnet 4, Gemini 3, Grok 4.1, ElevenLabs, fal.ai
-- Messagerie: WhatsApp Business, Twilio, SMS
-- Infrastructure: Node.js, Docker, GitHub Actions
-
-## Pages Cles
-
-- [Accueil](https://3a-automation.com/): Proposition de valeur
-- [Tarifs](https://3a-automation.com/pricing.html): Packages detailles
-- [Automatisations](https://3a-automation.com/automations.html): 96 automatisations
-- [Cas Clients](https://3a-automation.com/cas-clients.html): Etudes de cas
-- [Contact](https://3a-automation.com/contact.html): Formulaire + Voice AI
-- [Reservation](https://3a-automation.com/booking.html): Prendre RDV
-- [Investisseurs](https://3a-automation.com/investisseurs.html): Opportunite d'investissement
-
-## Contact
-
-- **Email**: contact@3a-automation.com
-- **Investisseurs**: invest@3a-automation.com
-- **Site**: https://3a-automation.com
-- **Dashboard**: https://dashboard.3a-automation.com
-- **Audit Gratuit**: Disponible sur toutes les pages via l'assistant vocal
-
-## Investisseurs
-
-3A Automation est ouverte aux investisseurs alignes avec notre vision: automatiser la croissance des PME en MENA et Europe.
-
-### Stade Actuel
-- **Phase**: Pre-revenue (Seed stage)
-- **Fondation**: 2025
-- **Marche primaire**: MENA ($37B e-commerce, source Statista)
-- **Marche secondaire**: France/Europe (4.2M PME, source INSEE)
-
-### Ce que nous AVONS
-- 99 automations documentes et testes
-- 20 automations resilientes (multi-fallback AI)
-- Voice AI Widget fonctionnel (FR/EN)
-- Site web 63 pages bilingue
-- Infrastructure Docker (Hostinger VPS)
-- Stack: Shopify, Klaviyo, GA4, OpenAI GPT-5.2, Claude, Gemini, Grok 4.1, ElevenLabs, fal.ai, Node.js, Docker
-
-### Ce que nous N'AVONS PAS encore
-- Revenue recurrent
-- Clients payants actifs
-- Team au-dela du fondateur
-- Track record financier
-
-### 4 Types d'Investisseurs Cibles
-1. **Venture Capital**: €300K-1M (Series A target, horizon 24 mois)
-2. **Angel Investors**: €10K-50K (Seed stage, valorisation pre-traction)
-3. **Partenaires Strategiques**: Agences Shopify, integrateurs, ESN
-4. **Acquereurs Potentiels**: M&A horizon 3-5 ans post-traction
-
-### Documents Disponibles (sur demande)
-- Pitch Deck (12 slides)
-- Projections Financieres (3 ans)
-- Catalogue Workflows (96 fiches)
-- Architecture Technique
-- Data Room (apres NDA)
-
-### Pages Investisseurs
-- [Investisseurs FR](https://3a-automation.com/investisseurs.html)
-- [Investors EN](https://3a-automation.com/en/investors.html)
-
-## Pourquoi Choisir 3A Automation
-
-1. **Expertise directe** - Équipe spécialisée, vous travaillez directement avec les experts
-2. **Resultats prouves** - ROI 42:1 documente
-3. **Prix justes** - Pas de marge agence
-4. **Flexibilite** - Packs one-time, abonnements resiliables
-5. **Garantie** - Corrections jusqu'a satisfaction
-6. **Voice AI inclus** - Assistant vocal disponible 24/7
-
-## Documentation
-
-- [Sitemap XML](https://3a-automation.com/sitemap.xml)
-- [Robots.txt](https://3a-automation.com/robots.txt)
-- [Blog](https://3a-automation.com/blog/)
-
----
-
-Version: 5.2.0 | Last Updated: 2026-01-04
-Spec: https://llmstxt.org/
+## Contact & Links
+-   **Dashboard:** https://dashboard.3a-automation.com
+-   **Booking:** https://3a-automation.com/booking.html
+-   **Documentation:** https://3a-automation.com/docs (Internal)
