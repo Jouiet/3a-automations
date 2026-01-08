@@ -1,6 +1,6 @@
 # 3A AUTOMATION - KNOWLEDGE BASE
 ## Pour Agent Vocal IA (Dial.Plus)
-### Version 1.0 - 26/12/2025
+### Version 3.0.0 - 2026-01-08
 
 ---
 
@@ -12,7 +12,7 @@
 | Signification | Automation, Analytics, AI |
 | Slogan | Vos operations automatisees. Votre strategie liberee. |
 | Type | Consultant solo expert en automatisation marketing |
-| Fondateur | Jonathan |
+| Fondateur | Jouiet Hatim |
 | Email | contact@3a-automation.com |
 | Site web | https://3a-automation.com |
 | Telephone | +1 775 254 7428 |
@@ -87,7 +87,7 @@
 
 ---
 
-## 5. CATALOGUE D'AUTOMATISATIONS (78 total)
+## 5. CATALOGUE D'AUTOMATISATIONS (99 total)
 
 ### Lead Generation & Acquisition (20)
 - Sync Meta/Google/TikTok Leads
@@ -303,7 +303,7 @@ R: Non requises. Documentation claire fournie.
 - Critiquer concurrents
 
 ### Redirection humain
-Si question complexe ou devis personnalise: proposer RDV avec Jonathan.
+Si question complexe ou devis personnalise: proposer RDV avec Jouiet Hatim.
 
 ---
 
