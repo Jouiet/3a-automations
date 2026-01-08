@@ -18,7 +18,7 @@
 ## 2. UNIQUE DIFFERENTIATOR: Proprietary MCP Router
 
 ### What is MCP?
-**MCP (Model Context Protocol)** is an open standard by Anthropic for connecting AI models to external tools and data sources. We have built `3a-global-mcp`, a **Type-Safe Router** that exposes **99+ automation tools** to any AI agent.
+**MCP (Model Context Protocol)** is an open standard by Anthropic for connecting AI models to external tools and data sources. We have built `3a-global-mcp`, a **Type-Safe Router** that exposes **112+ automation tools** to any AI agent.
 
 ### Why This Matters
 - **Competitors:** Use Zapier, Make.com, or n8n (visual builders with limited logic).
@@ -26,7 +26,7 @@
 
 ### Technical Stack
 - **Core:** Node.js + TypeScript (Type-safe tool definitions)
-- **Orchestration:** `3a-global-mcp` (99+ tools: Shopify, Klaviyo, Twilio, Google Apps Script, WhatsApp, etc.)
+- **Orchestration:** `3a-global-mcp` (112+ tools: Shopify, Klaviyo, Twilio, Google Apps Script, WhatsApp, etc.)
 - **AI Models:**
   - **Voice:** Grok Voice Realtime (Low-latency WebSocket Bridge)
   - **Logic:** Claude 4.5 Sonnet (Reasoning), Gemini 3 Pro (Multimodal)
@@ -57,7 +57,7 @@ We have moved beyond simple "triggers". Our agents **Reflect** and **Act Autonom
 - **Result:** AI makes outbound sales calls without human approval.
 
 ### C. The "MCP Router" (Infrastructure)
-- **Function:** Exposes 99+ tools to any AI agent (Claude Desktop, Custom Agents, etc.).
+- **Function:** Exposes 112+ tools to any AI agent (Claude Desktop, Custom Agents, etc.).
 - **Examples:**
   - `shopify_get_orders`: Fetch recent orders.
   - `klaviyo_send_campaign`: Trigger email campaign.
@@ -101,7 +101,7 @@ We are natively global. Our system adapts automatically:
 
 ---
 
-## 6. The 99 Automations (By Category)
+## 6. The 112 Automations (By Category)
 
 ### Lead Generation (20)
 - Ads Lead Sync → CRM
@@ -150,7 +150,7 @@ We are natively global. Our system adapts automatically:
 - Confirmation de réservation
 - Rappels automatiques (24h + 1h)
 
-**Total: 99 Automations**
+**Total: 112 Automations**
 
 ---
 
@@ -195,7 +195,7 @@ We are natively global. Our system adapts automatically:
 A: AI that can reflect on its own work (Level 3) or take autonomous actions like making phone calls (Level 4). 3A has both.
 
 **Q: What is MCP?**
-A: Model Context Protocol. An open standard by Anthropic. 3A built a proprietary router (`3a-global-mcp`) with 99+ tools.
+A: Model Context Protocol. An open standard by Anthropic. 3A built a proprietary router (`3a-global-mcp`) with 112+ tools.
 
 **Q: Can I integrate with my existing tools?**
 A: Yes. We support Shopify, Klaviyo, HubSpot, Salesforce, GA4, Meta Ads, TikTok Ads, and 10+ other platforms.
