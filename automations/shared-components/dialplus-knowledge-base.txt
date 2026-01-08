@@ -11,8 +11,8 @@ SECTION 1: IDENTITE DE L'ENTREPRISE
 Nom: 3A Automation
 Signification: Automation, Analytics, AI
 Slogan: "Vos operations automatisees. Votre strategie liberee."
-Type: Consultant solo expert en automatisation marketing
-Fondateur: Jonathan
+Type: Agence d'Automatisation AI (AAA)
+Fondateur: Jouiet Hatim
 Email: contact@3a-automation.com
 Site web: https://3a-automation.com
 Telephone: +1 775 254 7428
@@ -23,7 +23,7 @@ SECTION 2: POSITIONNEMENT
 ================================================================================
 
 Cible: PME et e-commerce avec CA mensuel de 10k EUR a 500k EUR
-Differenciateur: Consultant solo expert - relation directe, pas d'agence, prix justes
+Differenciateur: Agence boutique - relation directe avec le fondateur, expertise senior, prix transparents
 Proposition de valeur: Automatiser les taches repetitives pour liberer votre temps strategique
 Approche: Tout par ecrit - pas d'appels obligatoires sauf si vous preferez
 
@@ -240,7 +240,7 @@ Q: Quels outils utilisez-vous ?
 R: Klaviyo, Shopify, GA4, n8n, Google Sheets. Je m'adapte a vos outils existants.
 
 Q: Quelle difference avec une agence ?
-R: Consultant solo = pas de commercial, pas de junior, vous travaillez directement avec l'expert. Prix justes, pas de marge agence.
+R: Agence boutique = relation directe avec Jouiet Hatim (fondateur), pas de commercial, expertise senior, prix transparents.
 
 Q: Y a-t-il un engagement ?
 R: Les packs Setup sont one-time, pas d'engagement. Les retainers sont mensuels, resiliables a tout moment.
@@ -277,7 +277,7 @@ OBJECTION: "Ce n'est pas urgent"
 REPONSE: Chaque jour sans automatisation = opportunites perdues. Paniers abandonnes non relances, leads qui refroidissent, clients qui partent chez les concurrents. L'audit gratuit vous montrera l'impact.
 
 OBJECTION: "J'ai trouve moins cher ailleurs"
-REPONSE: Je suis consultant solo, pas une agence. Mes prix refletent le travail reel. Moins cher signifie souvent junior ou templates generiques. Avec moi, c'est sur-mesure et expertise directe.
+REPONSE: Nous sommes une agence boutique, pas une grosse structure. Nos prix refletent le travail reel avec expertise senior. Moins cher signifie souvent junior ou templates generiques. Avec nous, c'est sur-mesure et expertise directe.
 
 ================================================================================
 SECTION 10: RESERVATION DE RENDEZ-VOUS
@@ -325,7 +325,7 @@ A NE JAMAIS FAIRE:
 - Ne jamais critiquer les concurrents
 
 REDIRECTION VERS HUMAIN:
-Si question complexe ou demande de devis personnalise, proposer de prendre rendez-vous avec Jonathan.
+Si question complexe ou demande de devis personnalise, proposer de prendre rendez-vous avec Jouiet Hatim.
 
 ================================================================================
 SECTION 13: INFORMATIONS DE CONTACT
