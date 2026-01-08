@@ -3759,11 +3759,31 @@
         "unhealthy": 2,
         "critical": 2
       }
+    },
+    {
+      "timestamp": "2026-01-08T10:27:58.850Z",
+      "overall": false,
+      "summary": {
+        "total": 5,
+        "healthy": 3,
+        "unhealthy": 2,
+        "critical": 2
+      }
+    },
+    {
+      "timestamp": "2026-01-08T10:28:51.744Z",
+      "overall": false,
+      "summary": {
+        "total": 5,
+        "healthy": 3,
+        "unhealthy": 2,
+        "critical": 2
+      }
     }
   ],
-  "lastUpdate": "2026-01-08T09:57:50.211Z",
+  "lastUpdate": "2026-01-08T10:28:51.744Z",
   "lastResults": {
-    "timestamp": "2026-01-08T09:57:50.211Z",
+    "timestamp": "2026-01-08T10:28:51.744Z",
     "overall": false,
     "criticalHealthy": false,
     "endpoints": [
@@ -3774,9 +3794,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 388,
+        "responseTime": 250,
         "critical": true,
-        "timestamp": "2026-01-08T09:57:49.972Z",
+        "timestamp": "2026-01-08T10:28:51.538Z",
         "error": null
       },
       {
@@ -3785,9 +3805,9 @@
         "url": "https://dashboard.3a-automation.com",
         "status": 502,
         "expectedStatus": 200,
-        "responseTime": 185,
+        "responseTime": 186,
         "critical": true,
-        "timestamp": "2026-01-08T09:57:49.887Z",
+        "timestamp": "2026-01-08T10:28:51.544Z",
         "error": "Expected 200, got 502"
       },
       {
@@ -3796,9 +3816,9 @@
         "url": "https://n8n.srv1168256.hstgr.cloud",
         "status": 404,
         "expectedStatus": 200,
-        "responseTime": 185,
+        "responseTime": 187,
         "critical": true,
-        "timestamp": "2026-01-08T09:57:49.889Z",
+        "timestamp": "2026-01-08T10:28:51.546Z",
         "error": "Expected 200, got 404"
       },
       {
@@ -3811,9 +3831,9 @@
           200,
           504
         ],
-        "responseTime": 504,
+        "responseTime": 384,
         "critical": false,
-        "timestamp": "2026-01-08T09:57:50.211Z",
+        "timestamp": "2026-01-08T10:28:51.744Z",
         "error": null
       },
       {
@@ -3826,9 +3846,9 @@
           302,
           404
         ],
-        "responseTime": 319,
+        "responseTime": 278,
         "critical": false,
-        "timestamp": "2026-01-08T09:57:50.032Z",
+        "timestamp": "2026-01-08T10:28:51.641Z",
         "error": null
       }
     ],

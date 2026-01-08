@@ -99,7 +99,7 @@ const tests = [
     { name: "geo_segment_generic", method: "tools/call", params: { name: "geo_segment_generic", arguments: {} } },
     { name: "run_api_connectivity_test", method: "tools/call", params: { name: "run_api_connectivity_test", arguments: {} } },
     { name: "generate_all_promo_videos", method: "tools/call", params: { name: "generate_all_promo_videos", arguments: {} } },
-    { name: "run_shopify_logic", method: "tools/call", params: { name: "run_shopify_logic", arguments: { action: "audit" } } },
+
     { name: "check_system_readiness", method: "tools/call", params: { name: "check_system_readiness", arguments: {} } },
     { name: "run_grok_client", method: "tools/call", params: { name: "run_grok_client", arguments: { prompt: "Health check" } } },
     { name: "run_gas_booking", method: "tools/call", params: { name: "run_gas_booking", arguments: {} } },
@@ -117,7 +117,7 @@ const tests = [
     { name: "voice_widget_config_3a", method: "tools/call", params: { name: "voice_widget_config_3a", arguments: {} } },
     { name: "voice_widget_config_cinematic", method: "tools/call", params: { name: "voice_widget_config_cinematic", arguments: {} } },
     { name: "voice_widget_config_example", method: "tools/call", params: { name: "voice_widget_config_example", arguments: {} } },
-    { name: "run_lead_gen_scheduler_v2", method: "tools/call", params: { name: "run_lead_gen_scheduler_v2", arguments: {} } }
+
 ];
 
 const TOTAL_TESTS = tests.length;

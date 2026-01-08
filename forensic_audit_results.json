@@ -1,0 +1,688 @@
+[
+  {
+    "name": "get_global_status",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/blog-generator-resilient.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI,Loop"
+  },
+  {
+    "name": "check_blog_health",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/blog-generator-resilient.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI,Loop"
+  },
+  {
+    "name": "run_email_automation",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/email-automation-unified.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_linkedin_pipeline",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/linkedin-lead-automation.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "run_bigbuy_sync",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/bigbuy-supplier-sync.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "run_google_maps_pipeline",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/google-maps-to-klaviyo-pipeline.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_newsletter_automation",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/newsletter-automation.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI,Loop"
+  },
+  {
+    "name": "run_whatsapp_booking",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/whatsapp-booking-notifications.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_voice_api",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/voice-api-resilient.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "check_telephony_bridge",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/voice-telephony-bridge.cjs",
+    "status": "OK",
+    "doeLevel": 4,
+    "markers": "AI,Functions"
+  },
+  {
+    "name": "run_chatbot_qualifier",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/lead-qualification-chatbot.cjs",
+    "status": "OK",
+    "doeLevel": 3,
+    "markers": "AI,Reflection"
+  },
+  {
+    "name": "run_churn_prediction",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/churn-prediction-resilient.cjs",
+    "status": "OK",
+    "doeLevel": 3,
+    "markers": "AI"
+  },
+  {
+    "name": "run_review_automation",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/review-request-automation.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "manage_prompt_tracker",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/prompt-feedback-tracker.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_product_photo_generator",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/product-photos-resilient.cjs",
+    "status": "OK",
+    "doeLevel": 3,
+    "markers": "AI"
+  },
+  {
+    "name": "run_price_drop_monitor",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/price-drop-alerts.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "run_cjdropshipping_api",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/cjdropshipping-automation.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "manage_dropshipping_orders",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/dropshipping-order-flow.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "run_birthday_anniversary_flow",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/birthday-anniversary-flow.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "manage_referral_program",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/referral-program-automation.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI,Loop"
+  },
+  {
+    "name": "run_replenishment_reminder",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/replenishment-reminder.cjs",
+    "status": "OK",
+    "doeLevel": 3,
+    "markers": "AI"
+  },
+  {
+    "name": "run_sms_automation",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/sms-automation-resilient.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "run_at_risk_customer_flow",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/at-risk-customer-flow.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "manage_lead_gen_scheduler",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/lead-gen-scheduler.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "manage_voice_widget_templates",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/voice-widget-templates.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "run_email_personalization",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/email-personalization-resilient.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "run_hubspot_crm",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/hubspot-b2b-crm.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "run_omnisend_ecommerce",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/omnisend-b2c-ecommerce.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "check_global_env",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/check-env-status.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_doe_orchestrator",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/doe-dispatcher.cjs",
+    "status": "OK",
+    "doeLevel": 3,
+    "markers": "Reflection"
+  },
+  {
+    "name": "manage_google_calendar",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/google-calendar-booking.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "generate_podcast",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/podcast-generator-resilient.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "sync_knowledge_base",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/sync-knowledge-base.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI,Loop"
+  },
+  {
+    "name": "monitor_uptime",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/uptime-monitor.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_realtime_voice",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/grok-voice-realtime.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "AI"
+  },
+  {
+    "name": "run_linkedin_klaviyo_pipeline",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/linkedin-to-klaviyo-pipeline.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_meta_lead_sync",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/leads/sync-meta-leads-to-shopify.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_google_ads_lead_sync",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/leads/sync-google-ads-leads-to-shopify.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_tiktok_lead_sync",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/leads/sync-tiktok-ads-leads-to-shopify.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_seo_alt_text_fixer",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/seo/fix-missing-alt-text.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "run_ga4_analysis",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/analytics/analyze-ga4-source.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "generate_invoice",
+    "path": "/Users/mac/Documents/JO-AAA/automations/invoicing/invoice-generator.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "scrape_google_maps",
+    "path": "/Users/mac/Documents/JO-AAA/automations/generic/scrape-google-maps-businesses.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "scrape_hiring_companies",
+    "path": "/Users/mac/Documents/JO-AAA/automations/generic/scrape-hiring-companies.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "scrape_linkedin_profiles",
+    "path": "/Users/mac/Documents/JO-AAA/automations/generic/scrape-linkedin-profiles.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "sync_google_forms",
+    "path": "/Users/mac/Documents/JO-AAA/automations/generic/sync-google-forms-to-klaviyo.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "get_geo_market_info",
+    "path": "/Users/mac/Documents/JO-AAA/automations/generic/geo-markets.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_global_validation",
+    "path": "/Users/mac/Documents/JO-AAA/automations/generic/validate-all-automations.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_shopify_audit",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/shopify/audit-shopify-complete.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_warehouse_setup",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/shopify/create-warehouse-metafield.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_facebook_audience_export",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/shopify/export-shopify-customers-facebook.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "run_taxonomy_import",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/shopify/import-taxonomy-via-api.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_google_sheets_audit",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/test-google-sheets.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "import_leads_to_sheet",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/leads/import_leads_to_sheet.py",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "sync_typeform_leads",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/leads/sync_typeform_to_sheet.py",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "generate_google_merchant_feed",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/google-merchant/generate_merchant_center_feed.py",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "generate_image_sitemap",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/seo/generate_image_sitemap.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "generate_tags_csv",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/seo/generate-tags-csv.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "import_alt_text_api",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/seo/import-alt-text-api.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "convert_video_portrait",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/video/convert-video-portrait.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "audit_klaviyo_flows",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/klaviyo/audit-klaviyo-flows.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "geo_segment_profiles",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/klaviyo/geo-segment-profiles.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_rotation_email",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/klaviyo/rotation_email.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "import_taxonomy_metafield",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/shopify/import-taxonomy-metafield.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "parse_warehouse_csv",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/shopify/parse-warehouse-csv.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "audit_shopify_store",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/shopify/audit-shopify-store.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "enable_apify_schedulers",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/social/enable-apify-schedulers.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "apify_verify_connection",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/social/apify-verify-connection.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "apify_inspect_raw_data",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/social/apify-inspect-raw-data.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "verify_hubspot_status",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/social/verify-hubspot-status.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "track_bnpl_performance",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/analytics/track-bnpl-performance.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "verify_facebook_pixel",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/analytics/verify-facebook-pixel-native.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "analyze_ga4_conversions",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/analytics/analyze-ga4-conversion-source.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "check_pixel_status",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/analytics/check-pixel-status.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "audit_tiktok_pixel",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/analytics/audit-tiktok-pixel-config.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "upload_llms",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/seo/upload-llms.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "geo_segment_generic",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/crm/geo-segment-generic.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_api_connectivity_test",
+    "path": "/Users/mac/Documents/JO-AAA/automations/generic/test-all-apis.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "generate_all_promo_videos",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/video/generate-all-promo-videos.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_lead_gen_scheduler_v2",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/leads/run_lead_gen_scheduler_v2.js",
+    "status": "MISSING",
+    "doeLevel": 0,
+    "markers": ""
+  },
+  {
+    "name": "run_shopify_logic",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/shopify/run-shopify-logic.cjs",
+    "status": "MISSING",
+    "doeLevel": 0,
+    "markers": ""
+  },
+  {
+    "name": "check_system_readiness",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/test_system_readiness.py",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_grok_client",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/grok-client.cjs",
+    "status": "OK",
+    "doeLevel": 3,
+    "markers": "AI,Loop,Reflection"
+  },
+  {
+    "name": "run_gas_booking",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/core/google-apps-script-booking.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "import_facebook_leads",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/leads/import-facebook-lead-ads.js",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "segment_leads_advanced",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/leads/segment-leads.js",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "generate_promo_video",
+    "path": "/Users/mac/Documents/JO-AAA/automations/templates/video/generate-promo-video.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "validate_registry",
+    "path": "/Users/mac/Documents/JO-AAA/automations/validate-automations-registry.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "check_market_config",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/config/markets.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "get_b2b_templates",
+    "path": "/Users/mac/Documents/JO-AAA/automations/agency/templates/b2b-email-templates.cjs",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "run_alibaba_mcp",
+    "path": "/Users/mac/Documents/JO-AAA/automations/alibaba-mcp/index.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "verify_alibaba_connectivity",
+    "path": "/Users/mac/Documents/JO-AAA/automations/alibaba-mcp/verify-alibaba.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "search_alibaba_products",
+    "path": "/Users/mac/Documents/JO-AAA/automations/alibaba-mcp/search.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "load_env_lib",
+    "path": "/Users/mac/Documents/JO-AAA/automations/lib/env-loader.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "check_security_utils",
+    "path": "/Users/mac/Documents/JO-AAA/automations/lib/security-utils.cjs",
+    "status": "OK",
+    "doeLevel": 2,
+    "markers": "Loop"
+  },
+  {
+    "name": "voice_widget_config_3a",
+    "path": "/Users/mac/Documents/JO-AAA/automations/shared-components/voice-widget/config-3a-automation.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "voice_widget_config_cinematic",
+    "path": "/Users/mac/Documents/JO-AAA/automations/shared-components/voice-widget/config-cinematicads.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  },
+  {
+    "name": "voice_widget_config_example",
+    "path": "/Users/mac/Documents/JO-AAA/automations/shared-components/voice-widget/config.example.js",
+    "status": "OK",
+    "doeLevel": 1,
+    "markers": ""
+  }
+]

@@ -14,10 +14,11 @@
  *   node blog-generator-resilient.cjs --topic="Sujet" --language=fr
  *   node blog-generator-resilient.cjs --topic="Topic" --language=en --publish
  *   node blog-generator-resilient.cjs --topic="Topic" --publish --distribute
+ *   node blog-generator-resilient.cjs --topic="Topic" --agentic
  *   node blog-generator-resilient.cjs --server --port=3003
  *   node blog-generator-resilient.cjs --health
  *
- * Version: 2.1.0 (with X/Twitter distribution)
+ * Version: 3.0.0 (Agentic Reflection Loop)
  */
 
 const https = require('https');
@@ -43,6 +44,7 @@ const REQUEST_TIMEOUT_MS = 120000; // 2 minutes for AI generation
 /**
  * Load environment variables from .env file
  * P2 FIX: Improved regex to handle quotes and special characters
+ * P3 UPGRADE: Agentic Reflection Loop
  */
 function loadEnv() {
   try {
@@ -58,7 +60,7 @@ function loadEnv() {
         let value = match[2].trim();
         // Remove trailing quotes if present
         if ((value.startsWith('"') && value.endsWith('"')) ||
-            (value.startsWith("'") && value.endsWith("'"))) {
+          (value.startsWith("'") && value.endsWith("'"))) {
           value = value.slice(1, -1);
         }
         vars[match[1]] = value;
@@ -337,8 +339,149 @@ async function callGemini(prompt) {
 // ─────────────────────────────────────────────────────────────────────────────
 // RESILIENT GENERATION WITH FALLBACK
 // ─────────────────────────────────────────────────────────────────────────────
-async function generateWithFallback(topic, language, keywords) {
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AGENTIC REFLECTION LOOP (LEVEL 3/4)
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function critiqueArticle(article, topic, language) {
+  const lang = language === 'fr' ? 'French' : 'English';
+  const prompt = `Act as a strict Editor-in-Chief. Critique the following blog article based on these criteria: 
+1. SEO optimization (keywords usage)
+2. Engagement & Tone (professional but accessible)
+3. Formatting (H2/H3 usage)
+4. Actionable Value (tips, examples)
+5. Brand Alignment (mentioning 3A Automation)
+
+Topic: ${topic}
+Language: ${lang}
+
+Article to Critique:
+Title: ${article.title}
+Excerpt: ${article.excerpt}
+Content Sample (First 500 chars): ${article.content.substring(0, 500)}...
+
+Output format: Valid JSON only:
+{
+  "score": number (0-10),
+  "issues": ["list", "of", "critical", "issues"],
+  "critique": "Overall summary of what needs to be fixed."
+
+}`;
+
+  console.log(`[Agentic] Critique Prompt (Length: ${prompt.length})`);
+
+  // Use fallback chain for critique
+  const result = await executeGenerationChain(prompt);
+
+  if (result.success) {
+    return result.article;
+  }
+
+  console.error(`[Critique Failed] All providers failed.`);
+  return { score: 5, issues: ["Critique failed - Provider Error"], critique: "Critique process failed. Review logs or retry." };
+}
+
+async function refineArticle(article, critique, topic, language) {
+  const lang = language === 'fr' ? 'French' : 'English';
+  const prompt = `Act as a Senior Copywriter. Improve the following article based on the Editor's critique.
+
+Topic: ${topic}
+Language: ${lang}
+
+Original Article: ${JSON.stringify(article)}
+
+Editor's Critique:
+Score: ${critique.score}/10
+Issues: ${JSON.stringify(critique.issues)}
+Feedback: ${critique.critique}
+
+Task: Rewrite the article to address ALL issues and improve the score to 10/10. Keep the JSON format.
+
+Output format: Valid JSON only:
+{
+  "title": "Improved Title",
+  "excerpt": "Improved Excerpt",
+  "content": "Improved Full HTML Content",
+  "hashtags": ["improved", "hashtags"],
+  "category": "automation|ecommerce|ai|marketing"
+
+}`;
+
+  // Use fallback chain for refinement
+  const result = await executeGenerationChain(prompt);
+
+  if (result.success) {
+    return result.article;
+  }
+
+  console.error(`[Refine Failed] All providers failed.`);
+  console.warn(`[Agentic] Refinement failed. Returning original draft.`);
+  return article; // Return original if refinement fails
+}
+
+// Helper to extract JSON from AI response (De-markdown)
+function extractJson(text) {
+  const match = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (match) return match[1].trim();
+  const jsonStart = text.indexOf('{');
+  const jsonEnd = text.lastIndexOf('}');
+  if (jsonStart !== -1 && jsonEnd !== -1) return text.substring(jsonStart, jsonEnd + 1);
+  return text;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ORCHESTRATOR
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function generateWithFallback(topic, language, keywords, agenticMode = false) {
+  // 1. DRAFTING PHASE
+  console.log(`[Drafting] Generating initial version...`);
   const prompt = buildPrompt(topic, language, keywords);
+  let result = await executeGenerationChain(prompt);
+
+  if (!result.success || !agenticMode) {
+    return result;
+  }
+
+  // 2. AGENTIC REFLECTION LOOP
+  const MAX_RETRIES = 2;
+  let currentArticle = result.article;
+  let loopCount = 0;
+  let score = 0;
+
+  console.log(`[Agentic] Entered Reflection Loop (Target Score: 8/10)`);
+
+  while (loopCount < MAX_RETRIES) {
+    loopCount++;
+
+    // Critique
+    console.log(`[Agentic] Critiquing (Round ${loopCount})...`);
+    const critique = await critiqueArticle(currentArticle, topic, language);
+    score = critique.score;
+    console.log(`[Agentic] Score: ${score}/10. Issues: ${critique.issues.length}`);
+
+    if (score >= 8) {
+      console.log(`[Agentic] Quality Threshold Met. Finalizing.`);
+      break;
+    }
+
+    // Refine
+    console.log(`[Agentic] Refining (Round ${loopCount})...`);
+    const refined = await refineArticle(currentArticle, critique, topic, language);
+    currentArticle = refined;
+  }
+
+  return {
+    success: true,
+    provider: result.provider + " + Agentic Loop",
+    article: currentArticle,
+    errors: result.errors
+  };
+}
+
+async function executeGenerationChain(prompt) {
   const errors = [];
   const providerOrder = ['anthropic', 'openai', 'grok', 'gemini'];
 
@@ -360,67 +503,18 @@ async function generateWithFallback(topic, language, keywords) {
         case 'gemini': rawContent = await callGemini(prompt); break;
       }
 
-      // P2 FIX: Improved JSON parsing with multiple fallback strategies
-      let jsonContent = rawContent;
-      let article = null;
-
-      // Strategy 1: Try parsing raw content directly
-      try {
-        article = JSON.parse(jsonContent);
-      } catch (e) {
-        // Strategy 2: Extract from markdown fences
-        const jsonMatch = rawContent.match(/```(?:json)?\s*([\s\S]*?)```/);
-        if (jsonMatch) {
-          jsonContent = jsonMatch[1].trim();
-          try {
-            article = JSON.parse(jsonContent);
-          } catch (e2) {
-            // Strategy 3: Find first complete JSON object
-            const jsonStart = jsonContent.indexOf('{');
-            if (jsonStart !== -1) {
-              let depth = 0;
-              let jsonEnd = -1;
-              for (let i = jsonStart; i < jsonContent.length; i++) {
-                if (jsonContent[i] === '{') depth++;
-                if (jsonContent[i] === '}') depth--;
-                if (depth === 0) {
-                  jsonEnd = i;
-                  break;
-                }
-              }
-              if (jsonEnd !== -1) {
-                jsonContent = jsonContent.substring(jsonStart, jsonEnd + 1);
-                article = JSON.parse(jsonContent);
-              }
-            }
-          }
-        }
-      }
-
-      if (!article) {
-        throw new Error('Failed to parse JSON from AI response');
-      }
+      const article = JSON.parse(extractJson(rawContent));
+      if (!article) throw new Error('Failed to parse JSON');
 
       console.log(`[OK] Success with ${provider.name}`);
-      return {
-        success: true,
-        provider: provider.name,
-        article,
-        errors,
-      };
+      return { success: true, provider: provider.name, article, errors };
     } catch (err) {
       console.error(`[ERROR] ${provider.name} failed:`, err.message);
       errors.push({ provider: provider.name, error: err.message });
     }
   }
 
-  // All providers failed
-  return {
-    success: false,
-    provider: null,
-    article: null,
-    errors,
-  };
+  return { success: false, provider: null, article: null, errors };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -959,15 +1053,24 @@ async function main() {
   }
 
   // Generate article
-  if (args.topic) {
-    console.log(`\n[Blog] Generating article: "${args.topic}"`);
-    console.log(`Language: ${args.language || 'fr'}`);
+  const topic = args.topic || 'Automation trends 2026';
+  const language = args.language || 'fr';
+  const publish = !!args.publish;
+  const distribute = !!args.distribute;
+  const agentic = !!args.agentic;
+
+  // Generate article
+  if (topic) {
+    console.log(`\n[Blog] Generating article: "${topic}"`);
+    console.log(`Language: ${language}`);
+    if (agentic) console.log(`[Mode] AGENTIC ENABLED (Reflection Loop Active)`);
     console.log('─'.repeat(50));
 
     const result = await generateWithFallback(
-      args.topic,
-      args.language || 'fr',
-      args.keywords || ''
+      topic,
+      language,
+      args.keywords || '',
+      agentic
     );
 
     if (!result.success) {
@@ -1035,7 +1138,9 @@ Options:
   --language    Language: fr or en (default: fr)
   --keywords    SEO keywords (comma-separated)
   --publish     Publish to WordPress after generation
+
   --distribute  Post to Facebook + LinkedIn + X after publishing
+  --agentic     Enable AI Reflection Loop (Draft -> Critique -> Refine)
   --server      Run as HTTP server
   --port        Server port (default: 3003)
   --health      Show all provider/platform status
@@ -1054,6 +1159,8 @@ Examples:
   node blog-generator-resilient.cjs --topic="E-commerce 2026" --language=fr
   node blog-generator-resilient.cjs --topic="AI marketing" --publish
   node blog-generator-resilient.cjs --topic="Automation" --publish --distribute
+
+  node blog-generator-resilient.cjs --topic="Agentic AI" --agentic
   node blog-generator-resilient.cjs --server --port=3003
 `);
 }

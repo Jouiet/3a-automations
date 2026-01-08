@@ -1060,6 +1060,116 @@ async function handleInboundCall(req, res, body) {
   }
 }
 
+// ============================================
+// OUTBOUND CALL HANDLERS (Agentic "Act")
+// ============================================
+
+async function handleOutboundTrigger(req, res, body) {
+  if (!CONFIG.twilio.accountSid || !CONFIG.twilio.authToken || !CONFIG.twilio.phoneNumber) {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Twilio credentials not configured' }));
+    return;
+  }
+
+  // Basic validation
+  if (!body.phone) {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Phone number required' }));
+    return;
+  }
+
+  if (!twilio) {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Twilio SDK not installed' }));
+    return;
+  }
+
+  const client = twilio(CONFIG.twilio.accountSid, CONFIG.twilio.authToken);
+  const host = req.headers.host || `localhost:${CONFIG.port}`;
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const callbackUrl = `${protocol}://${host}/voice/outbound-twiml`;
+
+  console.log(`[Outbound] Triggering call to ${body.phone}...`);
+
+  try {
+    const call = await client.calls.create({
+      url: callbackUrl,
+      to: body.phone,
+      from: CONFIG.twilio.phoneNumber,
+      statusCallback: `${protocol}://${host}/voice/status`,
+      statusCallbackMethod: 'POST',
+      statusCallbackEvent: ['initiated', 'ringing', 'answered', 'completed']
+    });
+
+    console.log(`[Outbound] Call initiated: ${call.sid}`);
+
+    // Create pre-session to track this outbound call
+    // Note: The actual websocket session will be created when TwiML connects
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      success: true,
+      callSid: call.sid,
+      status: call.status
+    }));
+
+  } catch (error) {
+    console.error(`[Outbound] Failed to initiate call: ${error.message}`);
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: error.message }));
+  }
+}
+
+async function handleOutboundTwiML(req, res, body) {
+  const callSid = body.CallSid;
+  const to = body.To;
+
+  console.log(`[Outbound] Connecting call ${callSid} to Grok Stream`);
+
+  // Create session for outbound call
+  const callInfo = {
+    callSid: callSid,
+    from: to, // For outbound, "from" is the person we called (the user)
+    to: body.From, // Our number
+    direction: 'outbound',
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    const session = await createGrokSession(callInfo);
+
+    // Generate stream URL
+    const host = req.headers.host || `localhost:${CONFIG.port}`;
+    const streamUrl = `wss://${host}/stream/${session.id}`;
+
+    // TwiML for outbound: Say hello, then connect stream
+    const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="alice" language="fr-FR">Bonjour, ici 3A Automation. Je vous passe mon collègue IA.</Say>
+  <Connect>
+    <Stream url="${streamUrl}">
+      <Parameter name="codec" value="mulaw"/>
+    </Stream>
+  </Connect>
+</Response>`;
+
+    res.writeHead(200, {
+      'Content-Type': 'text/xml',
+      'Cache-Control': 'no-cache'
+    });
+    res.end(twiml);
+
+  } catch (error) {
+    console.error(`[Outbound] Error generating TwiML: ${error.message}`);
+    const errorTwiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="alice" language="fr-FR">Une erreur est survenue lors de la connexion.</Say>
+  <Hangup/>
+</Response>`;
+    res.writeHead(200, { 'Content-Type': 'text/xml' });
+    res.end(errorTwiml);
+  }
+}
+
 function handleTwilioStream(ws, sessionId) {
   const session = activeSessions.get(sessionId);
 
@@ -1086,7 +1196,7 @@ function handleTwilioStream(ws, sessionId) {
     // Warn after 15 seconds of silence
     if (silenceDuration > INACTIVITY_THRESHOLD && !inactivityWarned) {
       inactivityWarned = true;
-      console.log(`[Abandon] Inactivity detected: ${Math.round(silenceDuration/1000)}s for ${sessionId}`);
+      console.log(`[Abandon] Inactivity detected: ${Math.round(silenceDuration / 1000)}s for ${sessionId}`);
 
       // Track abandonment signal
       session.analytics.events.push({
@@ -1528,6 +1638,20 @@ const server = http.createServer(async (req, res) => {
       console.log(`[Twilio] Call status: ${body.CallStatus} for ${body.CallSid}`);
       res.writeHead(200);
       res.end();
+      return;
+    }
+
+    // Outbound call trigger (Agentic Action)
+    if (pathname === '/voice/outbound' && req.method === 'POST') {
+      const body = await parseBody(req);
+      await handleOutboundTrigger(req, res, body);
+      return;
+    }
+
+    // Outbound TwiML handler
+    if (pathname === '/voice/outbound-twiml' && req.method === 'POST') {
+      const body = await parseBody(req); // To get CallSid if needed
+      await handleOutboundTwiML(req, res, body);
       return;
     }
 

@@ -982,11 +982,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         }
 
         case "generate_blog_post": {
-            const { topic, language = "fr", keywords, publish, distribute } = args;
+            const { topic, language = "fr", keywords, publish, distribute, agentic } = args;
             const blogArgs = [`--topic=${topic}`, `--language=${language}`];
             if (keywords) blogArgs.push(`--keywords=${keywords}`);
             if (publish) blogArgs.push("--publish");
             if (distribute) blogArgs.push("--distribute");
+            if (agentic) blogArgs.push("--agentic");
             return executeScript("/Users/mac/Documents/JO-AAA/automations/agency/core/blog-generator-resilient.cjs", blogArgs);
         }
 
@@ -1061,8 +1062,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         }
 
         case "run_churn_prediction": {
-            const { action: chAction, email: chEmail } = args;
-            const chArgs = chAction === "predict" ? ["--predict", `--customer={"email":"${chEmail}"}`] : ["--health"];
+            const { action: chAction, email: chEmail, customer_json } = args;
+            const chArgs = [];
+            if (chAction === "predict") {
+                chArgs.push("--predict");
+                if (customer_json) {
+                    chArgs.push(`--customer=${customer_json}`);
+                } else {
+                    chArgs.push(`--customer={"email":"${chEmail}"}`);
+                }
+            } else {
+                chArgs.push("--health");
+            }
             return executeScript("/Users/mac/Documents/JO-AAA/automations/agency/core/churn-prediction-resilient.cjs", chArgs);
         }
 
@@ -1338,13 +1349,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             return executeScript("/Users/mac/Documents/JO-AAA/automations/templates/video/generate-all-promo-videos.cjs");
         }
 
-        case "run_lead_gen_scheduler_v2": {
-            return executeScript("/Users/mac/Documents/JO-AAA/automations/templates/leads/run_lead_gen_scheduler_v2.js");
-        }
 
-        case "run_shopify_logic": {
-            return executeScript("/Users/mac/Documents/JO-AAA/automations/templates/shopify/run-shopify-logic.cjs", [args.action || "audit"]);
-        }
 
         case "check_system_readiness": {
             return executeScript("/Users/mac/Documents/JO-AAA/automations/agency/core/test_system_readiness.py", [], { shell: true });

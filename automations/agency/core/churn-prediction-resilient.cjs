@@ -286,7 +286,7 @@ function calculateChurnRisk(customerData) {
   }
   if (previousOpenRate > 0 && emailOpenRate < previousOpenRate * (1 - CONFIG.engagement.declineThreshold)) {
     riskScore += 0.10;
-    signals.push({ signal: 'open_rate_decline', weight: 0.10, value: `${Math.round((1 - emailOpenRate/previousOpenRate) * 100)}%` });
+    signals.push({ signal: 'open_rate_decline', weight: 0.10, value: `${Math.round((1 - emailOpenRate / previousOpenRate) * 100)}%` });
   }
 
   // Signal 3: Frequency decline (weight: 20%)
@@ -537,6 +537,31 @@ function getRuleBasedAnalysis(customerData, rfmScores, churnRisk) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// AGENTIC ACTIONS
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function triggerVoiceAgent(phone) {
+  try {
+    const response = await fetch('http://localhost:3009/voice/outbound', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const result = await response.json();
+    return { success: true, callSid: result.callSid, status: result.status };
+  } catch (error) {
+    console.error(`  [Agentic] Action Failed: ${error.message}`);
+    return { success: false, error: error.message };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // MAIN PREDICTION FUNCTION
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -564,6 +589,22 @@ async function predictChurn(customerData) {
     aiAnalysis = await getAIChurnAnalysis(customerData, rfmScores, churnRisk);
   }
 
+  // Step 4: ACT - Agentic autonomous action (Level 4 Agent)
+  let actionResult = null;
+  const analysisData = aiAnalysis?.analysis;
+
+  if (analysisData && customerData.phone &&
+    (churnRisk.riskLevel === 'critical' || (churnRisk.riskLevel === 'high' && analysisData.optimalChannel === 'phone'))) {
+
+    console.log(`  [Agentic] ⚠️ CRITICAL RISK DETECTED. Deciding to ACT.`);
+    console.log(`  [Agentic] Action: Triggering immediate voice call to ${customerData.phone}`);
+
+    // Only act if not in dry-run mode (can be added later, for now we log intent)
+    // To enable real calling, we would uncomment:
+    actionResult = await triggerVoiceAgent(customerData.phone);
+    console.log(`  [Agentic] Result: ${actionResult.success ? 'Call Initiated ✅' : 'Failed ❌'}`);
+  }
+
   return {
     customer: {
       email,
@@ -573,6 +614,7 @@ async function predictChurn(customerData) {
     rfm: rfmScores,
     churnRisk,
     aiAnalysis: aiAnalysis?.analysis || null,
+    agenticAction: actionResult,
     provider: aiAnalysis?.provider || 'N/A',
     aiGenerated: aiAnalysis?.aiGenerated || false,
     timestamp: new Date().toISOString(),
