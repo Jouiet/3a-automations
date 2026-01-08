@@ -13,7 +13,7 @@
     "fullName": "3A Automation Agency",
     "meaning": "Automation, Analytics, AI",
     "tagline": "Vos opérations automatisées. Votre stratégie libérée.",
-    "type": "Consultant solo expert en automatisation marketing",
+    "type": "Agence d'Automatisation AI (AAA)",
     "founder": "Jouiet Hatim",
     "email": "contact@3a-automation.com",
     "website": "https://3a-automation.com",
@@ -24,7 +24,7 @@
     "target": "PME et e-commerce avec CA mensuel de 10k€ à 500k€",
     "differentiator_1": "MCP Router propriétaire (99+ outils connectés aux IA)",
     "differentiator_2": "IA Agentique Niveau 4 (appels autonomes, auto-critique)",
-    "differentiator_3": "Consultant solo expert - relation directe, pas d'agence, prix justes",
+    "differentiator_3": "Agence boutique - relation directe avec le fondateur, expertise senior, prix transparents",
     "value_proposition": "Automatiser les tâches répétitives pour libérer votre temps stratégique",
     "approach": "Tout par écrit - pas d'appels obligatoires sauf si vous préférez"
   },
@@ -334,7 +334,7 @@
     },
     "difference": {
       "question": "Quelle différence avec une agence ?",
-      "answer": "Consultant solo = pas de commercial, pas de junior, vous travaillez directement avec l'expert. Prix justes, pas de marge agence."
+      "answer": "Agence boutique = relation directe avec Jouiet Hatim (fondateur), pas de commercial, expertise senior, prix transparents."
     },
     "engagement": {
       "question": "Y a-t-il un engagement ?",
@@ -380,7 +380,7 @@
     },
     "concurrent_moins_cher": {
       "objection": "J'ai trouvé moins cher ailleurs",
-      "response": "Je suis consultant solo, pas une agence. Mes prix reflètent le travail réel. Moins cher signifie souvent junior ou templates génériques. Avec moi, c'est sur-mesure et expertise directe."
+      "response": "Nous sommes une agence boutique, pas une grosse structure. Nos prix reflètent le travail réel avec expertise senior. Moins cher signifie souvent junior ou templates génériques. Avec nous, c'est sur-mesure et expertise directe."
     }
   },
   "booking": {
