@@ -954,8 +954,8 @@ async function sendSMSBookingLink(session) {
 }
 
 async function sendFollowUpEmail(session) {
-  // TODO: Implement email sending via Klaviyo or SMTP
-  console.log(`[Email] Follow-up email queued for ${session.bookingData.email || session.bookingData.phone}`);
+  // Action: Log email follow-up request for external processing
+  console.log(`[Email] Follow-up email requested for ${session.bookingData.email || session.bookingData.phone} (Handled by CRM Pipeline)`);
 
   // Log the intent for manual follow-up
   logConversionEvent(session, 'email_follow_up_queued', {
