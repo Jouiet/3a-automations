@@ -88,6 +88,17 @@ Transforming from **Automation** to **Agentic** offers distinct competitive adva
     3.  **Act:** Trigger `voice-telephony-bridge` to call the client *immediately*.
     4.  **Verify:** Track if they renewed.
 
+#### Phase 4: Global Market Localization (COMPLETED 2026-01-08)
+- [x] **Goal:** "3 Markets" Strategy (Maroc, Europe, International).
+- [x] **Implementation:**
+    1.  **Detection:** `geo-locale.js` identifies user IP/Region.
+    2.  **Logic:**
+        *   **Maghreb:** French + MAD.
+        *   **Europe:** French + EUR.
+        *   **International:** English + USD.
+    3.  **Display:** CSS `[data-currency]` attribute toggles pricing tables.
+    4.  **Verification:** Validated logic in `geo-locale.js` and `styles.css`.
+
 ## Operational Commands
 ### Verify System Integrity
 ```bash
