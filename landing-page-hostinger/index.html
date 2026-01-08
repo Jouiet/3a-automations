@@ -629,6 +629,68 @@
   }
   </script>
 
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "https://3a-automation.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://3a-automation.com/services/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Service Schema: Voice AI -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://3a-automation.com/#voice-ai-service",
+    "name": "Voice AI Assistant (The Closer)",
+    "description": "Assistant vocal IA autonome (Niveau 4) capable d'appels sortants pour rescue de churn, qualification de leads, et prise de RDV automatique via Twilio et Grok Voice Realtime.",
+    "provider": {
+      "@id": "https://3a-automation.com/#organization"
+    },
+    "serviceType": "AI Voice Automation",
+    "areaServed": "Worldwide",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://3a-automation.com/services/voice-ai.html"
+    }
+  }
+  </script>
+
+  <!-- Service Schema: Flywheel 360 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://3a-automation.com/#flywheel-360-service",
+    "name": "Flywheel 360° - Système d'Automatisation Holistique",
+    "description": "Méthodologie complète d'automatisation couvrant Acquisition, Conversion, Rétention et Advocacy. Intègre 99+ automations via MCP Router propriétaire pour créer une croissance exponentielle.",
+    "provider": {
+      "@id": "https://3a-automation.com/#organization"
+    },
+    "serviceType": "Marketing Automation",
+    "areaServed": "Worldwide",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://3a-automation.com/services/flywheel-360.html"
+    }
+  }
+  </script>
+
   <!-- Google Tag Manager + GA4 - Lazy Loaded for Performance -->
   <script>
     window.dataLayer = window.dataLayer || [];
