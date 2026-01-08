@@ -8,7 +8,6 @@
         "Apify": "OK",
         "xAI_Grok": "OK",
         "Google_Analytics": "OK",
-        "n8n": "ERROR (404)",
         "Meta": "OFFLINE (Missing Token)",
         "Alibaba": "OK"
     },

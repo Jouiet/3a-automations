@@ -53,28 +53,7 @@ const APIS = [
       });
     }
   },
-  {
-    name: 'n8n',
-    envVars: ['N8N_HOST', 'N8N_API_KEY'],
-    test: async () => {
-      const host = process.env.N8N_HOST;
-      const apiKey = process.env.N8N_API_KEY;
 
-      if (!host || !apiKey) return { status: 'MISSING_CREDENTIALS' };
-
-      const url = new URL(host);
-      return httpRequest({
-        hostname: url.hostname,
-        port: url.port || (url.protocol === 'https:' ? 443 : 80),
-        path: '/api/v1/workflows',
-        protocol: url.protocol,
-        headers: {
-          'X-N8N-API-KEY': apiKey,
-          'Accept': 'application/json'
-        }
-      });
-    }
-  },
   {
     name: 'xAI (Grok)',
     envVars: ['XAI_API_KEY'],
