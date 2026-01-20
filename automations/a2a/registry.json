@@ -1,0 +1,40 @@
+{
+    "registry_version": "1.0",
+    "dht_node_id": "3a-automation-core-node",
+    "peers": [
+        {
+            "agent_id": "agency-sales-bot",
+            "skill_ref": "agency/SKILL.md",
+            "capabilities": [
+                "qualify_lead",
+                "book_audit"
+            ],
+            "protocol": "json-rpc-2.0",
+            "endpoint": "http://localhost:3000/agent/rpc/agency"
+        },
+        {
+            "agent_id": "contractor-sales-bot",
+            "skill_ref": "contractor/SKILL.md",
+            "capabilities": [
+                "estimate_roofing",
+                "estimate_solar"
+            ],
+            "protocol": "json-rpc-2.0",
+            "endpoint": "http://localhost:3000/agent/rpc/contractor"
+        },
+        {
+            "agent_id": "finance-collector-bot",
+            "skill_ref": "collector/SKILL.md",
+            "capabilities": [
+                "collect_debt",
+                "negotiate_plan"
+            ],
+            "protocol": "json-rpc-2.0",
+            "endpoint": "http://localhost:3000/agent/rpc/collector"
+        }
+    ],
+    "handshake_protocol": {
+        "auth_type": "bearer_token",
+        "timeout_ms": 5000
+    }
+}

@@ -86,6 +86,13 @@ const PROVIDERS = {
     apiKey: ENV.REPLICATE_API_TOKEN,
     enabled: !!ENV.REPLICATE_API_TOKEN,
     type: 'generation'
+  },
+  leonardo: {
+    name: 'Leonardo.ai',
+    url: 'https://cloud.leonardo.ai/api/rest/v1/generations',
+    apiKey: ENV.LEONARDO_API_KEY,
+    enabled: !!ENV.LEONARDO_API_KEY,
+    type: 'generation'
   }
 };
 
@@ -418,6 +425,42 @@ async function callReplicate(imageBase64, prompt, mimeType) {
   throw new Error('No result from Replicate');
 }
 
+async function callLeonardoAI(imageBase64, prompt) {
+  if (!PROVIDERS.leonardo.enabled) {
+    throw new Error('Leonardo.ai API key not configured');
+  }
+
+  const body = JSON.stringify({
+    prompt: prompt,
+    modelId: "6b645e3a-7d9a-4e2a-9e62-6c09468f37ab", // Vision XL or similar
+    width: 1024,
+    height: 1024,
+    num_images: 1,
+    init_image_id: null // Would require separate upload for real img2img
+  });
+
+  const response = await httpRequest(PROVIDERS.leonardo.url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${PROVIDERS.leonardo.apiKey}`
+    }
+  }, body);
+
+  const parsed = safeJsonParse(response.data, 'Leonardo.ai response');
+  if (!parsed.success) throw new Error(`Leonardo JSON parse failed: ${parsed.error}`);
+
+  if (parsed.data.sdGenerationJob?.generationId) {
+    // Wait for webhook or poll
+    return {
+      success: true,
+      generationId: parsed.data.sdGenerationJob.generationId,
+      provider: 'Leonardo.ai (Queued)'
+    };
+  }
+  throw new Error('Leonardo.ai generation failed to start');
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // VISION ANALYSIS (for descriptions, not editing)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -565,8 +608,8 @@ async function analyzeWithVision(imageBase64, prompt, mimeType) {
 // ─────────────────────────────────────────────────────────────────────────────
 async function enhanceProductPhoto(imagePath, prompt) {
   const errors = [];
-  // Fallback order: Gemini 2.5 Flash Image → Grok Image → fal.ai Flux → Replicate SDXL
-  const providerOrder = ['gemini', 'grok', 'falai', 'replicate'];
+  // Fallback order: Gemini 2.5 Flash Image → Grok Image → Leonardo.ai → fal.ai Flux → Replicate SDXL
+  const providerOrder = ['gemini', 'grok', 'leonardo', 'falai', 'replicate'];
 
   // Load image
   let imageBase64, mimeType;
@@ -596,6 +639,9 @@ async function enhanceProductPhoto(imagePath, prompt) {
           break;
         case 'grok':
           result = await callGrokImage(imageBase64, prompt, mimeType);
+          break;
+        case 'leonardo':
+          result = await callLeonardoAI(imageBase64, prompt);
           break;
         case 'falai':
           result = await callFalAI(imageBase64, prompt, mimeType);

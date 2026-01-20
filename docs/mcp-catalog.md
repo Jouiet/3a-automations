@@ -1,6 +1,4 @@
-# 3A Global MCP: Tool Catalog
-
-This catalog lists all **118** proprietary tools exposed via the 3A Global MCP Router. Each tool is designed for high-performance agentic orchestration.
+# 3A Global MCP: Tool Catalog (174 Units) catalog lists all **174** proprietary tools exposed via the 3A Global MCP Router. Each tool is designed for high-performance agentic orchestration
 
 ## Lead Generation & Acquisition (26 Tools)
 
@@ -182,4 +180,3 @@ This catalog lists all **118** proprietary tools exposed via the 3A Global MCP R
 | `cjdropshipping-automation` | CJDropshipping - Supplier Automation | script | 2 | CJDropshipping - Supplier Automation |
 | `bigbuy-supplier-sync` | BigBuy - Supplier Sync | script | 1 | BigBuy - Supplier Sync |
 | `dropshipping-order-flow` | Dropshipping - Multi-Supplier Orchestration | script | 1 | Dropshipping - Multi-Supplier Orchestration |
-

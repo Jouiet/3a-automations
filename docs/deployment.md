@@ -1,11 +1,12 @@
 # 3A Automation - Guide de Déploiement
-## Version: 1.0 | Date: 19/12/2025
+
+## Version: 1.1 | Date: 08/01/2026
 
 ---
 
 ## ARCHITECTURE DE DÉPLOIEMENT
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    FLUX DE DÉPLOIEMENT AUTOMATIQUE                          │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -32,10 +33,12 @@
 ## MÉTHODE 1: DÉPLOIEMENT AUTOMATIQUE (Recommandée)
 
 ### Prérequis
+
 - Repo GitHub: `Jouiet/3a-automations` (PUBLIC)
 - Secrets configurés dans GitHub Actions
 
 ### Processus
+
 ```bash
 # 1. Modifier des fichiers dans landing-page-hostinger/
 # Exemple: éditer index.html, styles.css, etc.
@@ -50,11 +53,14 @@ git push origin main
 ```
 
 ### Déclencheurs
+
 Le workflow se déclenche quand:
+
 - Push sur `main` affectant `landing-page-hostinger/**`
 - Trigger manuel via GitHub Actions UI
 
 ### Vérification
+
 ```bash
 # Vérifier le statut
 curl -sI https://3a-automation.com | head -3
@@ -87,17 +93,20 @@ curl -s -X POST "https://developers.hostinger.com/api/vps/v1/virtual-machines/11
 ## CONFIGURATION
 
 ### GitHub Secrets (déjà configurés)
+
 | Secret | Valeur | Source |
-|--------|--------|--------|
+|---|---|---|
 | `HOSTINGER_API_KEY` | *** | hpanel.hostinger.com → API |
 
 ### GitHub Variables (déjà configurés)
+
 | Variable | Valeur | Description |
-|----------|--------|-------------|
+|---|---|---|
 | `HOSTINGER_VM_ID` | 1168256 | ID du VPS Hostinger |
 
 ### Fichiers Clés
-```
+
+```text
 .github/workflows/deploy-website.yml  → Workflow automatique
 landing-page-hostinger/               → Fichiers du site
 .env                                  → Credentials locales (HOSTINGER_API_TOKEN)
@@ -108,25 +117,31 @@ landing-page-hostinger/               → Fichiers du site
 ## TROUBLESHOOTING
 
 ### Site affiche "Welcome to nginx!"
+
 **Cause**: Le git clone a échoué ou le contenu n'a pas été copié.
 
 **Solution**:
+
 1. Vérifier que le repo est PUBLIC
 2. Déclencher un redéploiement manuel
 3. Vérifier les logs GitHub Actions
 
 ### HTTP 403 ou 404
+
 **Cause**: Container en démarrage ou fichiers manquants.
 
 **Solution**:
+
 1. Attendre 60 secondes
 2. Vérifier le statut container:
+
 ```bash
 curl -s "https://developers.hostinger.com/api/vps/v1/virtual-machines/1168256/docker" \
   -H "Authorization: Bearer $HOSTINGER_API_TOKEN"
 ```
 
 ### Container en restart loop
+
 **Cause**: Erreur dans la commande de démarrage.
 
 **Solution**: Redéployer avec la commande exacte documentée ci-dessus.
@@ -136,7 +151,7 @@ curl -s "https://developers.hostinger.com/api/vps/v1/virtual-machines/1168256/do
 ## HISTORIQUE DES PROBLÈMES RÉSOLUS
 
 | Date | Problème | Cause | Solution |
-|------|----------|-------|----------|
+|---|---|---|---|
 | 2025-12-19 | **404/502 intermittent** | **2 workflows en conflit (race condition)** | **Supprimé deploy.yml, gardé deploy-website.yml** |
 | 2025-12-19 | Container exit code 128 | Repo PRIVATE | Rendu PUBLIC |
 | 2025-12-19 | Default nginx page | docker-compose avec volume vide | Supprimé docker-compose.yml, utiliser commande inline |
@@ -146,14 +161,18 @@ curl -s "https://developers.hostinger.com/api/vps/v1/virtual-machines/1168256/do
 ## ANALYSE FORENSIQUE: RACE CONDITION (19/12/2025)
 
 ### Symptôme
+
 Site retourne 404 ou 502 de façon intermittente après chaque push.
 
 ### Cause Racine
+
 **DEUX workflows** se déclenchaient simultanément:
+
 1. `deploy.yml` → "Deploy to Hostinger VPS" (utilisait hostinger/deploy-on-vps@v2)
 2. `deploy-website.yml` → "Deploy Website" (appel API direct)
 
 Les deux avaient le même trigger:
+
 ```yaml
 on:
   push:
@@ -163,17 +182,20 @@ on:
 ```
 
 ### Problèmes
+
 1. **Race condition**: Les deux workflows appelaient l'API Hostinger en même temps
 2. **Fichier manquant**: deploy.yml référençait `docker/docker-compose.yml` (inexistant)
 3. **Conflits Docker**: Deux containers différents essayaient de démarrer
 
 ### Solution Appliquée
+
 ```bash
 rm .github/workflows/deploy.yml  # Supprimé le workflow cassé
 # Gardé uniquement deploy-website.yml
 ```
 
-### Vérification
+### Vérification de la Correction
+
 ```bash
 # Après un push, UN SEUL workflow doit apparaître
 gh run list --limit 3
@@ -185,10 +207,10 @@ gh run list --limit 3
 ## CONTACTS & RESSOURCES
 
 - **VPS**: srv1168256.hstgr.cloud (148.230.113.163)
-- **Site**: https://3a-automation.com
-- **GitHub**: https://github.com/Jouiet/3a-automations
-- **API Docs**: https://developers.hostinger.com/
+- **Site**: <https://3a-automation.com>
+- **GitHub**: <https://github.com/Jouiet/3a-automations>
+- **API Docs**: <https://developers.hostinger.com/>
 
 ---
 
-**Dernière mise à jour**: 19/12/2025 - Session 22 (Race condition fix)
+**Dernière mise à jour**: 08/01/2026 - Session 130 (Mission Complete)

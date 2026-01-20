@@ -1,7 +1,27 @@
 #!/usr/bin/env node
 const path = require('path');
-// Load environment variables from project root
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+const { logTelemetry } = require('../utils/telemetry.cjs');
+const fs = require('fs');
+const { ApifyClient } = require('apify-client');
+
+// Portability Patch: Resilient .env loading
+const envPaths = [
+    path.join(__dirname, '.env'),
+    path.join(__dirname, '../../../.env'),
+    path.join(process.cwd(), '.env')
+];
+let envFound = false;
+for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+        require('dotenv').config({ path: envPath });
+        console.log(`[Telemetry] Configuration loaded from: ${envPath}`);
+        envFound = true;
+        break;
+    }
+}
+if (!envFound) {
+    console.warn('[Telemetry] No .env file found in search paths. Using existing environment variables.');
+}
 /**
  * Google Maps Sourcing - Agentic (Level 3)
  * 
@@ -17,7 +37,9 @@ require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 
 const CONFIG = {
     AGENTIC_MODE: process.argv.includes('--agentic'),
+    FORCE_MODE: process.argv.includes('--force'), // Bypass GPM pressure
     QUALITY_THRESHOLD: 8,
+    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
         { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
@@ -25,16 +47,72 @@ const CONFIG = {
     ]
 };
 
+/**
+ * Log action to global MCP observability log
+ */
+function logToMcp(action, details) {
+    const logPath = path.join(__dirname, '../../../landing-page-hostinger/data/mcp-logs.json');
+    let logs = [];
+    try {
+        if (fs.existsSync(logPath)) {
+            logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
+        }
+    } catch (e) { logs = []; }
+
+    logs.unshift({
+        timestamp: new Date().toISOString(),
+        agent: 'GMapsSourcing-L4',
+        action,
+        details,
+        status: 'SUCCESS'
+    });
+
+    // Keep last 50 logs
+    if (logs.length > 50) logs = logs.slice(0, 50);
+    fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
+}
+
 async function scrapeGoogleMaps(query, location, max = 20) {
-    // Mock results (would use Apify in production)
-    return Array.from({ length: Math.min(max, 15) }, (_, i) => ({
-        name: `Business ${i + 1}`,
-        address: `${i + 1} Rue Example, ${location}`,
-        phone: `+33 1 23 45 67 ${String(i).padStart(2, '0')}`,
-        rating: (3 + Math.random() * 2).toFixed(1),
-        reviews: Math.floor(Math.random() * 500),
-        category: query.split(' ')[0]
-    }));
+    if (!process.env.APIFY_API_KEY) {
+        console.warn('⚠️  APIFY_API_KEY missing. Cannot source real data.');
+        throw new Error('APIFY_API_KEY required for Level 4 Real Sourcing');
+    }
+
+    const client = new ApifyClient({
+        token: process.env.APIFY_API_KEY,
+    });
+
+    // Actor: compass/crawler-google-places
+    console.log(`📡 Connecting to Apify (Actor: compass/crawler-google-places)...`);
+
+    // Construct search string: "marketing agencies in Paris"
+    const searchString = `${query} ${location}`;
+
+    const input = {
+        searchStringsArray: [searchString],
+        maxCrawledPlacesPerSearch: max,
+        language: "fr", // Default to FR per requirements
+    };
+
+    try {
+        const run = await client.actor("compass/crawler-google-places").call(input);
+        console.log(`   Actor run finished. Fetching dataset ${run.defaultDatasetId}...`);
+        const { items } = await client.dataset(run.defaultDatasetId).listItems();
+
+        return items.map(item => ({
+            name: item.title,
+            rating: item.totalScore,
+            reviews: item.reviewsCount,
+            address: item.address,
+            phone: item.phone,
+            website: item.website,
+            category: item.categoryName,
+            status: item.isClosed ? 'Closed' : 'Open'
+        }));
+    } catch (error) {
+        console.error('❌ Apify Sourcing Failed:', error.message);
+        throw error;
+    }
 }
 
 function assessQuality(results) {
@@ -129,6 +207,19 @@ Output JSON: { "refined_query": "..." }`;
 async function agenticGoogleMapsSourcing(query, location, max) {
     console.log('\n🤖 AGENTIC MODE: Draft → Critique → Refine\n');
 
+    // SITUATIONAL PRESSURE CHECK (Hybrid Decoupling Year 1)
+    if (!CONFIG.FORCE_MODE && fs.existsSync(CONFIG.GPM_PATH)) {
+        const gpm = JSON.parse(fs.readFileSync(CONFIG.GPM_PATH, 'utf8'));
+        const pressure = gpm.sectors.sales.lead_velocity.pressure;
+        const threshold = gpm.thresholds.high;
+
+        if (pressure < threshold) {
+            console.log(`[Equilibrium] Sales Pressure (${pressure}) below threshold (${threshold}). No AI sourcing required.`);
+            return { results: [], quality: { score: 10, feedback: "System in Equilibrium" }, refined: false, status: "EQUILIBRIUM" };
+        }
+        console.log(`[Sluice Gate Open] High Sales Pressure detected (${pressure}). Activating AI Lead Sourcing...`);
+    }
+
     console.log('📝 DRAFT: Scraping Google Maps...');
     const draftResults = await scrapeGoogleMaps(query, location, max);
     console.log(`✅ Found ${draftResults.length} businesses`);
@@ -199,6 +290,11 @@ OPTIONS:
     console.log(`   Results: ${result.results.length}`);
     console.log(`   Quality: ${result.quality ? result.quality.score + '/10' : 'N/A'}`);
     console.log(`   Refined: ${result.refined ? 'Yes' : 'No'}`);
+
+    // Log to Telemetry & MCP Dashboard
+    logTelemetry('GMapsSourcing-L4', 'Source Gmaps', { query, results: result.results.length }, 'SUCCESS');
+    logToMcp('SOURCE_GMAPS', { query, found: result.results.length, quality: result.quality ? result.quality.score : 'N/A' });
+
     console.log(`   Duration: ${duration}ms`);
 }
 

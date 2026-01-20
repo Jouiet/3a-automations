@@ -1,0 +1,29 @@
+{
+    "metadata": {
+        "target": "https://pme-conseil-expert.fr",
+        "analyzedAt": "2026-01-13T17:00:00Z"
+    },
+    "results": {
+        "security": {
+            "headers": {
+                "Referrer-Policy": "MISSING",
+                "Content-Security-Policy": "MISSING",
+                "Strict-Transport-Security": "OK"
+            }
+        },
+        "aeo": {
+            "llms_txt": "MISSING",
+            "robots_txt": {
+                "gptbot": "ALLOWED",
+                "bingbot": "NOT_CONFIGURED"
+            }
+        },
+        "behavioral": {
+            "widgets": []
+        },
+        "seo": {
+            "hreflang": "MISSING",
+            "sitemap": "OK"
+        }
+    }
+}

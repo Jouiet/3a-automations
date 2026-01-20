@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https:; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://ipapi.co https://script.google.com https://www.google-analytics.com; frame-src 'self' https://www.googletagmanager.com;">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Course: Data-Driven Decisions - Learn to read and interpret your analytics dashboards.">
@@ -21,58 +23,7 @@
   <meta name="twitter:title" content="Data-Driven Decisions | Academy 3A Automation">
   <meta name="twitter:description" content="Course: Data-Driven Decisions - Learn to read and interpret your analytics dashboards.">
   <meta name="twitter:image" content="https://3a-automation.com/og-image.webp">
-  <style>
-    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
-    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
-    html{scroll-behavior:smooth}
-    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
-    .container{max-width:800px;margin:0 auto;padding:0 1.5rem}
-    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
-    .header .container{display:flex;align-items:center;justify-content:space-between;max-width:1200px}
-    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
-    .logo img{width:40px;height:40px}
-    .logo-text{font-weight:700;font-size:1.25rem}
-    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
-    .nav{display:flex;gap:2rem}
-    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
-    @media(max-width:768px){.nav{display:none}}
-    main{padding-top:100px;min-height:100vh;padding-bottom:4rem}
-    .breadcrumb{padding:1rem 0;font-size:0.875rem;color:var(--text-secondary)}
-    .breadcrumb a{color:var(--primary);text-decoration:none}
-    .course-hero{padding:2rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
-    .course-category{color:var(--primary);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
-    .course-hero h1{font-size:2rem;font-weight:800;margin-bottom:1rem}
-    .course-meta{display:flex;gap:2rem;margin:1rem 0;flex-wrap:wrap}
-    .course-meta-item{display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary);font-size:0.875rem}
-    .course-meta-item svg{color:var(--primary)}
-    .course-description{color:var(--text-secondary);font-size:1rem;line-height:1.7}
-    .lesson{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;margin-bottom:1.5rem;margin-top:2rem;overflow:hidden}
-    .lesson-header{padding:1.25rem;background:rgba(79,186,241,0.05);display:flex;align-items:center;gap:1rem}
-    .lesson-number{background:var(--primary);color:var(--secondary);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8125rem;flex-shrink:0}
-    .lesson-title{font-weight:600;flex:1}
-    .lesson-duration{color:var(--text-secondary);font-size:0.8125rem}
-    .lesson-content{padding:1.5rem}
-    .lesson-content h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
-    .lesson-content h4:first-child{margin-top:0}
-    .lesson-content p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
-    .lesson-content ul{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
-    .lesson-content li{margin-bottom:0.5rem;font-size:0.9375rem}
-    .step-box{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .step-box h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
-    .step-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
-    .tip-box{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .tip-box h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
-    .tip-box p{color:var(--text-secondary);font-size:0.875rem;margin:0}
-    .nav-buttons{display:flex;justify-content:space-between;padding-top:2rem;border-top:1px solid rgba(79,186,241,0.1);margin-top:2rem}
-    .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.25rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.875rem;transition:all 0.2s}
-    .nav-btn-prev{background:rgba(79,186,241,0.1);color:var(--text-light)}
-    .nav-btn-next{background:var(--primary);color:var(--secondary)}
-    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:2rem 0}
-    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
-    .footer-text{color:var(--text-secondary);font-size:0.875rem}
-    .footer-links{display:flex;gap:1.5rem}
-    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
-  </style>
+  
 
   <link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/courses/analytics.html">
   <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/analytics.html">
@@ -89,7 +40,7 @@
         "name": "What key metrics should I track in my analytics dashboard?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Focus on four key sections: Overview (high-level KPIs), Revenue (sales, AOV, conversion rates), Engagement (email opens, clicks, website visits), and Growth (new subscribers, customer acquisition). For email, track open rate (target >20%), click rate (target >2%), and unsubscribe rate (keep under 0.5%)."
+          "text": "Focus on four key sections: Overview (high-level KPIs), Revenue (sales, AOV, conversion rates), Engagement (email opens, clicks, website visits), and Growth (new subscribers, customer acquisition). For email, track open rate (target>20%), click rate (target>2%), and unsubscribe rate (keep under 0.5%)."
         }
       },
       {
@@ -121,12 +72,13 @@
         "name": "How do I create custom analytics reports?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "In your dashboard, go to Analytics > Reports > Create Custom. Select your metrics (what you want to measure), dimensions (how you want to segment the data), and date range. This allows you to build reports that answer your specific business questions."
+          "text": "In your dashboard, go to Analytics> Reports> Create Custom. Select your metrics (what you want to measure), dimensions (how you want to segment the data), and date range. This allows you to build reports that answer your specific business questions."
         }
       }
     ]
   }
   </script>
+  <link rel="stylesheet" href="../../../css/critical.css">
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
@@ -141,7 +93,7 @@
       </a>
       <nav class="nav">
         <a href="/en/">Home</a>
-        <a href="/en/academy.html" style="color:var(--primary)">Academy</a>
+        <a href="/en/academy.html">Academy</a>
         <a href="/en/contact.html">Contact</a>
       </nav>
     </div>
@@ -157,7 +109,7 @@
           <span class="status-divider">|</span>
           <span class="status-metric">ENV CONFIG: <strong id="config-rate-text">100%</strong></span>
           <span class="status-divider">|</span>
-          <span class="status-metric">AGENCY: <strong id="agentic-count-text">18 Agentic Workflows</strong></span>
+          <span class="status-metric">AGENCY: <strong id="agentic-count-text">18 Hardened Agents</strong></span>
         </div>
         <div class="status-right" id="verified-apis-scroll">
           <span class="api-tag ok">Shopify</span>
@@ -295,7 +247,7 @@
           <h2>Creating Your Report</h2>
           <div class="step-box">
             <h3>In the Dashboard</h3>
-            <p>Go to Analytics > Reports > Create Custom. Select your metrics, dimensions, and date range.</p>
+            <p>Go to Analytics> Reports> Create Custom. Select your metrics, dimensions, and date range.</p>
           </div>
         </div>
       </div>
@@ -325,5 +277,8 @@
   </footer>
   <script src="../../../geo-locale.js"></script>
   <script src="../../../agentic-transparency.js"></script>
+  <script src="../../../config.js?v=26.1"></script>
+  <script src="../../../js/ui-init.js"></script>
+  <script src="../../../js/telemetry.js"></script>
 </body>
 </html>

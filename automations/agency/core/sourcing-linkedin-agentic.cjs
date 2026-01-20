@@ -1,7 +1,22 @@
 #!/usr/bin/env node
+const fs = require('fs');
 const path = require('path');
-// Load environment variables from project root
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+const { logTelemetry } = require('../utils/telemetry.cjs');
+const { ApifyClient } = require('apify-client');
+// Load environment variables (Check local dir, then project root)
+const envPaths = [path.join(__dirname, '.env'), path.join(__dirname, '../../../.env'), path.join(process.cwd(), '.env')];
+let envFound = false;
+for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+        require('dotenv').config({ path: envPath });
+        console.log(`[Telemetry] Configuration loaded from: ${envPath}`);
+        envFound = true;
+        break;
+    }
+}
+if (!envFound) {
+    console.warn('[Telemetry] No .env file found in search paths. Using existing environment variables.');
+}
 /**
  * LinkedIn Sourcing - Agentic (Level 3)
  * 
@@ -17,13 +32,40 @@ require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 
 const CONFIG = {
     AGENTIC_MODE: process.argv.includes('--agentic'),
+    FORCE_MODE: process.argv.includes('--force'), // Bypass GPM pressure
     QUALITY_THRESHOLD: 7,
+    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
         { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
         { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ]
 };
+
+/**
+ * Log action to global MCP observability log
+ */
+function logToMcp(action, details) {
+    const logPath = path.join(__dirname, '../../../landing-page-hostinger/data/mcp-logs.json');
+    let logs = [];
+    try {
+        if (fs.existsSync(logPath)) {
+            logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
+        }
+    } catch (e) { logs = []; }
+
+    logs.unshift({
+        timestamp: new Date().toISOString(),
+        agent: 'LinkedInSourcing-L4',
+        action,
+        details,
+        status: 'SUCCESS'
+    });
+
+    // Keep last 50 logs
+    if (logs.length > 50) logs = logs.slice(0, 50);
+    fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
+}
 
 async function callAI(provider, prompt, systemPrompt = '') {
     if (!provider.apiKey) throw new Error(`API key missing for ${provider.name}`);
@@ -66,16 +108,45 @@ async function callAI(provider, prompt, systemPrompt = '') {
 }
 
 async function scrapeLinkedIn(search, max = 50) {
-    // Mock profiles
-    return Array.from({ length: Math.min(max, 30) }, (_, i) => ({
-        name: `Profile ${i + 1}`,
-        title: search,
-        company: `Company ${i + 1}`,
-        location: ['Paris', 'London', 'Berlin'][i % 3],
-        recentPost: i % 3 === 0 ? 'Hiring for new role!' : null,
-        profileUpdated: i % 5 === 0,
-        connections: 500 + Math.floor(Math.random() * 1000)
-    }));
+    if (!process.env.APIFY_API_KEY) {
+        console.warn('⚠️  APIFY_API_KEY missing. Cannot source real data.');
+        throw new Error('APIFY_API_KEY required for Level 4 Real Sourcing');
+    }
+
+    const client = new ApifyClient({
+        token: process.env.APIFY_API_KEY,
+    });
+
+    console.log(`📡 Connecting to Apify (Actor: curtis/linkedin-people-scraper)...`);
+
+    // Input for standard LinkedIn People Scraper
+    // Note: This often requires a session cookie or a specialized actor. 
+    // We use a standard schema here.
+    const input = {
+        keywords: search,
+        count: max,
+    };
+
+    try {
+        // Using a reliable public actor for people search
+        const run = await client.actor("curtis/linkedin-people-scraper").call(input);
+        console.log(`   Actor run finished. Fetching dataset ${run.defaultDatasetId}...`);
+        const { items } = await client.dataset(run.defaultDatasetId).listItems();
+
+        return items.map(item => ({
+            name: item.fullName || item.name || 'Unknown',
+            title: item.title || item.occupation || search,
+            company: item.company || 'Unknown',
+            location: item.location || 'Unknown',
+            recentPost: item.summary || null, // Mapping summary to check for signals
+            profileUpdated: true, // Assumed if scraped fresh
+            connections: item.connectionsCount || 0,
+            profileUrl: item.publicIdentifier ? `https://linkedin.com/in/${item.publicIdentifier}` : null
+        }));
+    } catch (error) {
+        console.error('❌ Apify Sourcing Failed:', error.message);
+        throw error;
+    }
 }
 
 function detectHiringSignals(profiles) {
@@ -127,6 +198,19 @@ function assessQuality(profiles) {
 
 async function agenticLinkedInSourcing(search, max) {
     console.log('\n🤖 AGENTIC MODE: Draft → Critique → Refine\n');
+
+    // SITUATIONAL PRESSURE CHECK (Hybrid Decoupling Year 1)
+    if (!CONFIG.FORCE_MODE && fs.existsSync(CONFIG.GPM_PATH)) {
+        const gpm = JSON.parse(fs.readFileSync(CONFIG.GPM_PATH, 'utf8'));
+        const pressure = gpm.sectors.sales.lead_velocity.pressure;
+        const threshold = gpm.thresholds.high;
+
+        if (pressure < threshold) {
+            console.log(`[Equilibrium] Sales Pressure (${pressure}) below threshold (${threshold}). No AI sourcing required.`);
+            return { profiles: [], quality: { score: 10, feedback: "System in Equilibrium" }, filtered: false, status: "EQUILIBRIUM" };
+        }
+        console.log(`[Sluice Gate Open] High Sales Pressure detected (${pressure}). Activating AI LinkedIn Sourcing...`);
+    }
 
     console.log('📝 DRAFT: Scraping LinkedIn profiles...');
     const draftProfiles = await scrapeLinkedIn(search, max);
@@ -207,6 +291,8 @@ OPTIONS:
     console.log(`   Profiles: ${result.profiles.length}`);
     console.log(`   Quality: ${result.quality ? result.quality.score + '/10' : 'N/A'}`);
     console.log(`   Filtered: ${result.filtered ? 'Yes' : 'No'}`);
+    logTelemetry('LinkedInSourcing-L4', 'Source LinkedIn', { results: result.profiles.length }, 'SUCCESS');
+    logToMcp('SOURCE_LINKEDIN', { query: search, profiles: result.profiles.length, quality: result.quality ? result.quality.score : 'N/A' });
     console.log(`   Duration: ${duration}ms`);
 }
 

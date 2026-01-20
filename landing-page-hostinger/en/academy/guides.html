@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https:; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://ipapi.co https://script.google.com https://www.google-analytics.com; frame-src 'self' https://www.googletagmanager.com;">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Quick Guides 3A Automation - 8 practical guides to master your automations in 15 minutes or less.">
@@ -21,68 +23,12 @@
   <meta name="twitter:title" content="Quick Guides | Academy 3A Automation">
   <meta name="twitter:description" content="Quick Guides 3A Automation - 8 practical guides to master your automations in 15 minutes or less.">
   <meta name="twitter:image" content="https://3a-automation.com/og-image.webp">
-  <style>
-    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
-    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
-    html{scroll-behavior:smooth}
-    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
-    .container{max-width:900px;margin:0 auto;padding:0 1.5rem}
-    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
-    .header .container{display:flex;align-items:center;justify-content:space-between;max-width:1200px}
-    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
-    .logo img{width:40px;height:40px}
-    .logo-text{font-weight:700;font-size:1.25rem}
-    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
-    .nav{display:flex;gap:2rem}
-    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
-    .nav a:hover{color:var(--primary)}
-    @media(max-width:768px){.nav{display:none}}
-    main{padding-top:100px;min-height:100vh;padding-bottom:4rem}
-    .breadcrumb{padding:1rem 0;font-size:0.875rem;color:var(--text-secondary)}
-    .breadcrumb a{color:var(--primary);text-decoration:none}
-    .page-hero{padding:2rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
-    .page-hero h1{font-size:2.25rem;font-weight:800;margin-bottom:0.5rem}
-    .page-hero h1 span{color:var(--primary)}
-    .page-description{color:var(--text-secondary);font-size:1.0625rem;line-height:1.7;max-width:700px}
-
-    .guide{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;margin:2rem 0;overflow:hidden}
-    .guide-header{padding:1.25rem 1.5rem;background:rgba(79,186,241,0.05);display:flex;align-items:center;gap:1rem;cursor:pointer;transition:background 0.2s}
-    .guide-header:hover{background:rgba(79,186,241,0.1)}
-    .guide-icon{width:40px;height:40px;background:rgba(79,186,241,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .guide-icon svg{width:20px;height:20px;color:var(--primary)}
-    .guide-info{flex:1}
-    .guide-title{font-weight:600;font-size:1.0625rem}
-    .guide-time{color:var(--text-secondary);font-size:0.8125rem;margin-top:0.25rem}
-    .guide-toggle{color:var(--primary);transition:transform 0.2s}
-    .guide.open .guide-toggle{transform:rotate(180deg)}
-    .guide-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease}
-    .guide.open .guide-content{max-height:2000px}
-    .guide-body{padding:1.5rem}
-    .guide-body h4{font-size:1rem;font-weight:600;margin:1.5rem 0 0.75rem;color:var(--text-light)}
-    .guide-body h4:first-child{margin-top:0}
-    .guide-body p{color:var(--text-secondary);margin-bottom:1rem;font-size:0.9375rem}
-    .guide-body ul,.guide-body ol{margin:1rem 0 1rem 1.5rem;color:var(--text-secondary)}
-    .guide-body li{margin-bottom:0.5rem;font-size:0.9375rem}
-    .step{background:rgba(79,186,241,0.08);border-left:3px solid var(--primary);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .step h5{font-size:0.875rem;font-weight:600;color:var(--primary);margin-bottom:0.5rem}
-    .step p{color:var(--text-secondary);font-size:0.875rem;margin:0}
-    .tip{background:rgba(16,185,129,0.08);border-left:3px solid var(--success);padding:1rem 1.25rem;margin:1rem 0;border-radius:0 8px 8px 0}
-    .tip h5{font-size:0.875rem;font-weight:600;color:var(--success);margin-bottom:0.5rem}
-    .tip p{color:var(--text-secondary);font-size:0.875rem;margin:0}
-
-    .back-link{display:inline-flex;align-items:center;gap:0.5rem;color:var(--primary);text-decoration:none;font-size:0.875rem;margin-top:2rem}
-    .back-link:hover{text-decoration:underline}
-
-    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:2rem 0}
-    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
-    .footer-text{color:var(--text-secondary);font-size:0.875rem}
-    .footer-links{display:flex;gap:1.5rem}
-    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
-  </style>
+  
 
   <link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/guides.html">
   <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/guides.html">
   <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/en/academy/guides.html">
+  <link rel="stylesheet" href="../../css/critical.css">
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
@@ -98,7 +44,7 @@
       <nav class="nav">
         <a href="/en/">Home</a>
         <a href="/en/services/ecommerce.html">Services</a>
-        <a href="/en/academy.html" style="color:var(--primary)">Academy</a>
+        <a href="/en/academy.html">Academy</a>
         <a href="/en/contact.html">Contact</a>
       </nav>
     </div>
@@ -114,7 +60,7 @@
           <span class="status-divider">|</span>
           <span class="status-metric">ENV CONFIG: <strong id="config-rate-text">100%</strong></span>
           <span class="status-divider">|</span>
-          <span class="status-metric">AGENCY: <strong id="agentic-count-text">18 Agentic Workflows</strong></span>
+          <span class="status-metric">AGENCY: <strong id="agentic-count-text">18 Hardened Agents</strong></span>
         </div>
         <div class="status-right" id="verified-apis-scroll">
           <span class="api-tag ok">Shopify</span>
@@ -165,7 +111,7 @@
             <h4>Steps</h4>
             <div class="step">
               <h5>1. Get your Klaviyo API key</h5>
-              <p>In Klaviyo, go to Account > Settings > API Keys. Click "Create Private API Key". Name it "3A Automation" and select "Full Access".</p>
+              <p>In Klaviyo, go to Account> Settings> API Keys. Click "Create Private API Key". Name it "3A Automation" and select "Full Access".</p>
             </div>
 
             <div class="step">
@@ -175,7 +121,7 @@
 
             <div class="step">
               <h5>3. Add in 3A Automation</h5>
-              <p>In your 3A dashboard, go to Integrations > Klaviyo. Paste the API key and click "Connect".</p>
+              <p>In your 3A dashboard, go to Integrations> Klaviyo. Paste the API key and click "Connect".</p>
             </div>
 
             <div class="step">
@@ -225,7 +171,7 @@
 
             <div class="step">
               <h5>4. Verification</h5>
-              <p>In 3A > Integrations > Shopify, the status should indicate "Connected" with the last sync date.</p>
+              <p>In 3A> Integrations> Shopify, the status should indicate "Connected" with the last sync date.</p>
             </div>
           </div>
         </div>
@@ -250,7 +196,7 @@
             <h4>Steps</h4>
             <div class="step">
               <h5>1. Create a new automation</h5>
-              <p>Automations > Create. Give it a descriptive name (e.g., "Welcome new subscribers").</p>
+              <p>Automations> Create. Give it a descriptive name (e.g., "Welcome new subscribers").</p>
             </div>
 
             <div class="step">
@@ -260,12 +206,12 @@
 
             <div class="step">
               <h5>3. Add the first email</h5>
-              <p>Click "+ Add step" > "Email". Write the subject and content. The first email is sent immediately after the trigger.</p>
+              <p>Click "+ Add step"> "Email". Write the subject and content. The first email is sent immediately after the trigger.</p>
             </div>
 
             <div class="step">
               <h5>4. Add a delay</h5>
-              <p>Click "+ Add step" > "Delay". Set the time before the next email (e.g., 1 day, 3 days).</p>
+              <p>Click "+ Add step"> "Delay". Set the time before the next email (e.g., 1 day, 3 days).</p>
             </div>
 
             <div class="step">
@@ -304,8 +250,8 @@
 
             <h4>Main metrics</h4>
             <ul>
-              <li><strong>Open rate</strong>: % of recipients who opened the email. Target: > 20%</li>
-              <li><strong>Click rate (CTR)</strong>: % of opens that clicked. Target: > 2%</li>
+              <li><strong>Open rate</strong>: % of recipients who opened the email. Target:> 20%</li>
+              <li><strong>Click rate (CTR)</strong>: % of opens that clicked. Target:> 2%</li>
               <li><strong>Attributed revenue</strong>: Sales generated by your automations</li>
               <li><strong>Conversion</strong>: % of leads who became customers</li>
             </ul>
@@ -344,12 +290,12 @@
             <h4>Steps</h4>
             <div class="step">
               <h5>1. Access segments</h5>
-              <p>Contacts > Segments > Create a segment.</p>
+              <p>Contacts> Segments> Create a segment.</p>
             </div>
 
             <div class="step">
               <h5>2. Define conditions</h5>
-              <p>Add rules: "Purchased in last 30 days", "Average cart > $100", "Hasn't opened email in 90 days".</p>
+              <p>Add rules: "Purchased in last 30 days", "Average cart> $100", "Hasn't opened email in 90 days".</p>
             </div>
 
             <div class="step">
@@ -364,7 +310,7 @@
 
             <h4>Recommended segments</h4>
             <ul>
-              <li><strong>VIP</strong>: 3+ orders OR total revenue > $500</li>
+              <li><strong>VIP</strong>: 3+ orders OR total revenue> $500</li>
               <li><strong>At risk</strong>: Purchased 60-90 days ago AND hasn't opened email in 30 days</li>
               <li><strong>New</strong>: Subscribed in the last 7 days</li>
             </ul>
@@ -446,7 +392,7 @@
             <h4>Steps</h4>
             <div class="step">
               <h5>1. Access design settings</h5>
-              <p>Settings > Branding > Email templates.</p>
+              <p>Settings> Branding> Email templates.</p>
             </div>
 
             <div class="step">
@@ -501,7 +447,7 @@
 
             <div class="step">
               <h5>Configuration</h5>
-              <p>Settings > Notifications. Enable/disable each type. For Slack, add your webhook URL.</p>
+              <p>Settings> Notifications. Enable/disable each type. For Slack, add your webhook URL.</p>
             </div>
 
             <div class="tip">
@@ -538,5 +484,8 @@
   </script>
   <script src="../../geo-locale.js"></script>
   <script src="../../agentic-transparency.js"></script>
+  <script src="../../config.js?v=26.1"></script>
+  <script src="../../js/ui-init.js"></script>
+  <script src="../../js/telemetry.js"></script>
 </body>
 </html>

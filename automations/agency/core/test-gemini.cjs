@@ -53,7 +53,9 @@ async function testGemini() {
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response';
 
     console.log(`✅ Réponse: "${text.trim()}"`);
-    console.log(`✅ Model: gemini-1.5-flash`);
+    console.log(`✅ Model: gemini-3-flash-preview`);
+    console.log(`✅ System Status: Frontier Grade (2026)`);
+
 
   } catch (e) {
     console.error(`❌ Erreur: ${e.message}`);

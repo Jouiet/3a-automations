@@ -1,4 +1,5 @@
-# 3A Automation - Catalogue Automatisations
+# 3ATotal Automations: **118**- Catalogue Automatisations
+
 ## Version 5.0 | 8 Janvier 2026 (Màj Mission Complete)
 
 ---
@@ -7,7 +8,7 @@
 
 **Source de Vérité:** `automations-registry.json` (v2.9.0)
 
-```
+```text
 automations/
 ├── agency/                    # Outils internes 3A Automation
 │   └── core/                  # Automatisations système (Level 4 Agents)
@@ -34,17 +35,17 @@ automations/
     └── cinematicads/          # CinematicAds AI → cinematicads.studio
 
 TOTAL: 118 automatisations vérifiées (Registry v2.9.0)
-AGENTS HAUTE-AGENCE (L3/L4): 18
+AGENTS HAUTE-AGENCE (L4): 10
 ```
 
 ---
 
 ## Catégories
 
-### 1. Agency Core & Level 4 Agents (18 agents)
+### 1. Agency Core & Level 4 Agents (10 agents)
 
 | Automatisation | Description | Niveau DOE |
-|----------------|-------------|------------|
+| ---------------- | ------------- | ------------ |
 | `voice-telephony-bridge.cjs` | Agent de vente par téléphone autonome | 4 |
 | `ga4-budget-optimizer-agentic.cjs` | Optimisation autonome des budgets Ads | 4 |
 | `content-strategist-agentic.cjs` | Stratège SEO autonome (GSC Gap Analysis) | 4 |
@@ -54,12 +55,15 @@ AGENTS HAUTE-AGENCE (L3/L4): 18
 | `system-audit-agentic.cjs` | Auto-diagnostic et réparation système | 4 |
 
 ### 2. Lead Generation (26 automatisations)
+
 ... [Consolidé dans le catalogue MCP] ...
 
 ### 3. E-commerce & Retail (14 automatisations)
+
 ... [Consolidé dans le catalogue MCP] ...
 
 ### 4. Email Marketing & CRM (11 automatisations)
+
 ... [Consolidé dans le catalogue MCP] ...
 
 ---
@@ -67,9 +71,9 @@ AGENTS HAUTE-AGENCE (L3/L4): 18
 ## Statistiques
 
 | Métrique | Valeur |
-|----------|--------|
+| ---------- | ------ |
 | Automatisations Vérifiées | **118** |
-| Agents Haute-Agence (L3/L4) | **18** |
+| Agents Haute-Agence (L4) | **10** |
 | Lead Generation & Acquisition | 26 |
 | E-commerce & Retail | 14 |
 | Email Marketing (CRM) | 11 |
@@ -86,7 +90,7 @@ AGENTS HAUTE-AGENCE (L3/L4): 18
 ## Changelog Final (Roadmap 2026)
 
 | Date | Version | Modification |
-|------|---------|--------------|
-| 2026-01-08 | 5.0 | **Mission Complete**: 118 outils, 18 agents, Dashboard Cyber Live |
+| ---- | ------- | ------------ |
+| 2026-01-08 | 5.0 | **Mission Complete**: 118 outils, 10 agents, Dashboard Cyber Live |
 | 2026-01-07 | 4.5 | Internationalisation 3 Marchés (MAD/EUR/USD) |
 | 2025-12-27 | 4.0 | Consolidation 118 automations, Synchronisation MCP |

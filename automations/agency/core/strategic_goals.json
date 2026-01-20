@@ -1,0 +1,42 @@
+{
+    "version": "1.0.0",
+    "last_updated": "2026-01-11T00:00:00Z",
+    "goals": [
+        {
+            "id": "goal_lead_maintainence",
+            "description": "Maintain a healthy pipeline of active leads",
+            "target_metric": "active_leads_24h",
+            "target_value": 50,
+            "operator": "gte",
+            "priority": "high",
+            "associated_directive": "Find fresh B2B leads in France and Morocco"
+        },
+        {
+            "id": "goal_roas_protection",
+            "description": "Ensure Return on Ad Spend describes profitability",
+            "target_metric": "global_roas",
+            "target_value": 4.0,
+            "operator": "gte",
+            "priority": "critical",
+            "associated_directive": "Analyze ad spend and optimize budget allocation"
+        },
+        {
+            "id": "goal_retention_maintenance",
+            "description": "Ensure churn risk remains below threshold",
+            "target_metric": "retention_pressure",
+            "target_value": 70,
+            "operator": "lte",
+            "priority": "high",
+            "associated_directive": "Trigger Churn Rescue Voice AI workflows"
+        },
+        {
+            "id": "goal_lead_velocity_acceleration",
+            "description": "Maintain lead injection speed",
+            "target_metric": "lead_velocity",
+            "target_value": 30,
+            "operator": "gte",
+            "priority": "normal",
+            "associated_directive": "Trigger B2B Sourcing workflows"
+        }
+    ]
+}

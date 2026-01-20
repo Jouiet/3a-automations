@@ -1,32 +1,16 @@
-#!/usr/bin/env node
-/**
- * Store Audit - Agentic (Level 3)
- * 
- * Shopify store audit with AI-predicted conversion impact
- * 
- * ARCHITECTURE:
- * - Draft: Scan store (products, checkout, speed, SEO)
- * - Critique: Predict conversion impact per issue (A/B test simulation)
- * - Refine: Re-rank if impact estimates unrealistic
- * 
- * USAGE:
- *   node store-audit-agentic.cjs --shop myshop.myshopify.com --token XXX
- *   node store-audit-agentic.cjs --shop myshop.myshopify.com --token XXX --agentic
- *   node store-audit-agentic.cjs --help
- * 
- * @version 1.0.0
- * @date 2026-01-08
- */
-
 const fs = require('fs');
 const path = require('path');
+const { logTelemetry } = require('../utils/telemetry.cjs');
+const MarketingScience = require('./marketing-science-core.cjs');
 // Load environment variables from project root
 require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 
 
 const CONFIG = {
     AGENTIC_MODE: process.argv.includes('--agentic'),
+    FORCE_MODE: process.argv.includes('--force'), // Bypass GPM pressure
     QUALITY_THRESHOLD: 8,
+    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
 
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
@@ -34,6 +18,31 @@ const CONFIG = {
         { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ]
 };
+
+/**
+ * Log action to global MCP observability log
+ */
+function logToMcp(action, details) {
+    const logPath = path.join(__dirname, '../../../landing-page-hostinger/data/mcp-logs.json');
+    let logs = [];
+    try {
+        if (fs.existsSync(logPath)) {
+            logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
+        }
+    } catch (e) { logs = []; }
+
+    logs.unshift({
+        timestamp: new Date().toISOString(),
+        agent: 'StoreAuditor-L4',
+        action,
+        details,
+        status: 'SUCCESS'
+    });
+
+    // Keep last 50 logs
+    if (logs.length > 50) logs = logs.slice(0, 50);
+    fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
+}
 
 async function callAI(provider, prompt, systemPrompt = '') {
     if (!provider.apiKey) throw new Error(`API key missing for ${provider.name}`);
@@ -76,46 +85,84 @@ async function callAI(provider, prompt, systemPrompt = '') {
 }
 
 async function auditStore(shop) {
-    // Mock audit (would use Shopify API + Lighthouse in production)
     const issues = [];
+    const url = shop.startsWith('http') ? shop : `https://${shop}`;
 
-    issues.push({
-        category: 'checkout',
-        severity: 'critical',
-        issue: 'No trust badges on checkout page',
-        recommendation: 'Add security badges (SSL, payment icons)',
-        estimated_cvr_lift: 0.08 // 8% lift
-    });
+    console.log(`📡 Connecting to ${url}...`);
+    const start = Date.now();
+    let html = '';
+    let response;
 
-    issues.push({
-        category: 'product_pages',
-        severity: 'high',
-        issue: 'Missing product reviews',
-        recommendation: 'Install review app (Judge.me, Loox)',
-        estimated_cvr_lift: 0.12 // 12% lift
-    });
+    try {
+        response = await fetch(url);
+        html = await response.text();
+    } catch (e) {
+        console.error(`❌ Connection failed: ${e.message}`);
+        // Return a critical connection issue effectively
+        return [{
+            category: 'connection',
+            severity: 'critical',
+            issue: 'Store unreachable',
+            recommendation: 'Check domain DNS and Shopify status',
+            estimated_cvr_lift: 1.0
+        }];
+    }
+    const ttfb = Date.now() - start;
 
-    issues.push({
-        category: 'speed',
-        severity: 'high',
-        issue: 'Page load time >3s',
-        recommendation: 'Optimize images, enable lazy loading',
-        estimated_cvr_lift: 0.10 // 10% lift
-    });
+    // 1. PERFORMANCE (TTFB)
+    if (ttfb > 1200) {
+        issues.push({
+            category: 'speed',
+            severity: 'high',
+            issue: `Slow Server Response (TTFB: ${ttfb}ms)`,
+            recommendation: 'Optimize Liquid code or remove heavy apps',
+            estimated_cvr_lift: 0.15
+        });
+    }
 
-    issues.push({
-        category: 'seo',
-        severity: 'medium',
-        issue: 'Missing meta descriptions on 20% of products',
-        recommendation: 'Generate meta descriptions with AI',
-        estimated_cvr_lift: 0.03 // 3% lift (indirect via SEO)
-    });
+    // 2. TRUST BADGES
+    const trustKeywords = /ssl|secure|payment|visa|mastercard|paypal|stripe|guarantee/i;
+    if (!trustKeywords.test(html)) {
+        issues.push({
+            category: 'checkout',
+            severity: 'critical',
+            issue: 'Missing trust badges/icons',
+            recommendation: 'Add payment icons and SSL seal to footer/cart',
+            estimated_cvr_lift: 0.08
+        });
+    }
 
+    // 3. REVIEWS
+    const reviewApps = /judge\.me|loox|yotpo|stamped\.io|trustpilot|reviews-widget/i;
+    if (!reviewApps.test(html)) {
+        issues.push({
+            category: 'product_pages',
+            severity: 'high',
+            issue: 'No visual review widget detected',
+            recommendation: 'Install Judge.me or Loox for social proof',
+            estimated_cvr_lift: 0.12
+        });
+    }
+
+    // 4. SEO (Meta Description)
+    const metaDescRegex = /<meta[^>]*name=["']description["'][^>]*content=["']([^"']*)["']/i;
+    const match = html.match(metaDescRegex);
+    if (!match || match[1].length < 50) {
+        issues.push({
+            category: 'seo',
+            severity: 'medium',
+            issue: 'Meta description missing or too short',
+            recommendation: 'Add compelling meta description for CTR',
+            estimated_cvr_lift: 0.03
+        });
+    }
+
+    // Sort by impact
     return issues.sort((a, b) => b.estimated_cvr_lift - a.estimated_cvr_lift);
 }
 
 async function critiqueAudit(issues) {
-    const prompt = `Critique these Shopify store issues and their estimated CVR (Conversion Rate) lifts:
+    const basePrompt = `Critique these Shopify store issues and their estimated CVR (Conversion Rate) lifts:
 ${JSON.stringify(issues, null, 2)}
 
 Task:
@@ -124,6 +171,8 @@ Task:
 3. Suggest adjusted estimates if the current ones are over/under-estimated.
 
 Output JSON: { "score": <0-10>, "feedback": "...", "adjusted_estimates": [{ "issue": "...", "new_lift": <number> }] }`;
+
+    const prompt = MarketingScience.inject('UVP', basePrompt);
 
     for (const provider of CONFIG.AI_PROVIDERS) {
         try {
@@ -140,6 +189,20 @@ Output JSON: { "score": <0-10>, "feedback": "...", "adjusted_estimates": [{ "iss
 
 async function agenticStoreAudit(shop) {
     console.log('\n🤖 AGENTIC MODE: Draft → Critique → Refine\n');
+
+    // SITUATIONAL PRESSURE CHECK (Hybrid Decoupling Year 1)
+    if (!CONFIG.FORCE_MODE && fs.existsSync(CONFIG.GPM_PATH)) {
+        const gpm = JSON.parse(fs.readFileSync(CONFIG.GPM_PATH, 'utf8'));
+        // Store Audit falls under System Integrity in this system
+        const pressure = (gpm.sectors.system && gpm.sectors.system.audit) ? gpm.sectors.system.audit.pressure : 0;
+        const threshold = gpm.thresholds.high || 70;
+
+        if (pressure < threshold) {
+            console.log(`[Equilibrium] Store Pressure (${pressure}) below threshold (${threshold}). No AI reasoning required.`);
+            return { issues: [], quality: null, refined: false, status: "EQUILIBRIUM" };
+        }
+        console.log(`[Sluice Gate Open] High Store Pressure detected (${pressure}). Activating AI Audit...`);
+    }
 
     console.log('📝 DRAFT: Auditing store...');
     const draftIssues = await auditStore(shop);
@@ -216,6 +279,8 @@ OPTIONS:
     console.log(`   Total CVR lift potential: ${(result.issues.reduce((sum, i) => sum + i.estimated_cvr_lift, 0) * 100).toFixed(1)}%`);
     console.log(`   Duration: ${duration}ms`);
     console.log(`   Output: ${outputFile}`);
+
+    logToMcp('AUDIT_STORE', { shop, issues: result.issues.length, total_lift: (result.issues.reduce((sum, i) => sum + i.estimated_cvr_lift, 0) * 100).toFixed(1) + '%' });
 }
 
 if (require.main === module) {

@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-2020-12/schema",
+    "$id": "https://a2a.proto/schemas/agent-card.v1.json",
+    "title": "Agent Card",
+    "description": "A2A Protocol: Agent Capability Description",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Reverse domain notation unique ID (e.g. com.3a.agency)",
+            "pattern": "^[a-z0-9.]+$"
+        },
+        "name": {
+            "type": "string",
+            "description": "Display name of the agent"
+        },
+        "description": {
+            "type": "string",
+            "description": "Natural language description of capabilities"
+        },
+        "version": {
+            "type": "string",
+            "default": "1.0.0"
+        },
+        "rpc_endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "The HTTP(S) endpoint where the agent accepts JSON-RPC calls"
+        },
+        "capabilities": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "input_schema": {
+                        "type": "object"
+                    },
+                    "output_schema": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "name"
+                ]
+            }
+        },
+        "security": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "bearer",
+                        "mtls"
+                    ]
+                }
+            }
+        }
+    },
+    "required": [
+        "id",
+        "name",
+        "rpc_endpoint",
+        "capabilities"
+    ]
+}

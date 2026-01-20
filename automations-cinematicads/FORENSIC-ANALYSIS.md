@@ -101,7 +101,7 @@ automations-cinematicads/
 Le dossier ne contient aucun fichier `package.json`, rendant impossible:
 - L'installation des dépendances via `npm install`
 - Le versioning des packages
-- Les scripts npm
+- Les workflows npm
 
 ---
 

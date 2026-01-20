@@ -1,7 +1,22 @@
 #!/usr/bin/env node
+const fs = require('fs');
 const path = require('path');
-// Load environment variables from project root
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+const os = require('os');
+const { logTelemetry } = require('../utils/telemetry.cjs');
+// Load environment variables (Check local dir, then project root)
+const envPaths = [path.join(__dirname, '.env'), path.join(__dirname, '../../../.env'), path.join(process.cwd(), '.env')];
+let envFound = false;
+for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+        require('dotenv').config({ path: envPath });
+        console.log(`[Telemetry] Configuration loaded from: ${envPath}`);
+        envFound = true;
+        break;
+    }
+}
+if (!envFound) {
+    console.warn('[Telemetry] No .env file found in search paths. Using existing environment variables.');
+}
 /**
  * System Audit - Agentic (Level 4)
  * 
@@ -18,7 +33,9 @@ require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 const CONFIG = {
     AGENTIC_MODE: process.argv.includes('--agentic'),
     AUTO_FIX: process.argv.includes('--auto-fix'),
+    FORCE_MODE: process.argv.includes('--force'), // Bypass GPM pressure
     QUALITY_THRESHOLD: 8,
+    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
         { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
@@ -67,13 +84,55 @@ async function callAI(provider, prompt, systemPrompt = '') {
 }
 
 async function auditSystem() {
-    // Mock system audit
-    return {
-        shopify: { status: 'degraded', issues: ['Missing meta descriptions on 20 products', 'Slow checkout (3.2s)'] },
-        klaviyo: { status: 'healthy', issues: [] },
-        ga4: { status: 'warning', issues: ['Conversion tracking misconfigured'] },
-        meta_pixel: { status: 'error', issues: ['Pixel not firing on checkout'] }
-    };
+    const audit = {};
+
+    // 1. System Resources (Real)
+    const freeMem = os.freemem() / 1024 / 1024; // MB
+    const totalMem = os.totalmem() / 1024 / 1024; // MB
+    const memUsage = ((totalMem - freeMem) / totalMem) * 100;
+    const load = os.loadavg()[0]; // 1 min load avg
+
+    if (memUsage > 90 || load > 5) {
+        audit.system = { status: 'degraded', issues: [`High Load: CPU ${load.toFixed(1)}, Mem ${memUsage.toFixed(0)}%`] };
+    } else {
+        audit.system = { status: 'healthy', issues: [] };
+    }
+
+    // 2. Shopify Connectivity (Real)
+    const shop = process.env.SHOPIFY_SHOP || 'hostinger-demo.myshopify.com';
+    try {
+        const start = Date.now();
+        const res = await fetch(`https://${shop}`);
+        const ttfb = Date.now() - start;
+
+        if (!res.ok) {
+            audit.shopify = { status: 'error', issues: [`Store unreachable (HTTP ${res.status})`] };
+        } else if (ttfb > 1500) {
+            audit.shopify = { status: 'degraded', issues: [`Slow response (TTFB ${ttfb}ms)`] };
+        } else {
+            audit.shopify = { status: 'healthy', issues: [] };
+        }
+    } catch (e) {
+        audit.shopify = { status: 'error', issues: [`Connection failed: ${e.message}`] };
+    }
+
+    // 3. Integration Config Check (Real)
+    const integrations = [
+        { name: 'klaviyo', key: 'KLAVIYO_API_KEY' },
+        { name: 'ga4', key: 'GA4_PROPERTY_ID' },
+        { name: 'meta', key: 'META_ACCESS_TOKEN' }
+    ];
+
+    integrations.forEach(integ => {
+        if (!process.env[integ.key]) {
+            audit[integ.name] = { status: 'error', issues: [`Missing environment variable: ${integ.key}`] };
+        } else {
+            // Assume healthy if key exists (deep check would require API call)
+            audit[integ.name] = { status: 'healthy', issues: [] };
+        }
+    });
+
+    return audit;
 }
 
 async function prioritizeIssuesAI(audit) {
@@ -139,6 +198,19 @@ Output JSON: { "plan": [{ "issue": "...", "action": { "tool": "...", "params": {
 async function agenticSystemAudit() {
     console.log('\n🤖 AGENTIC MODE (Level 4): Draft → Critique → Orchestrate → Execute\n');
 
+    // SITUATIONAL PRESSURE CHECK (Hybrid Decoupling Year 1)
+    if (!CONFIG.FORCE_MODE && fs.existsSync(CONFIG.GPM_PATH)) {
+        const gpm = JSON.parse(fs.readFileSync(CONFIG.GPM_PATH, 'utf8'));
+        const pressure = (gpm.sectors.system && gpm.sectors.system.audit) ? gpm.sectors.system.audit.pressure : 0;
+        const threshold = gpm.thresholds.high || 70;
+
+        if (pressure < threshold) {
+            console.log(`[Equilibrium] System Pressure (${pressure}) below threshold (${threshold}). No AI reasoning required.`);
+            return { audit: {}, issues: [], plan: null, executed: false, status: "EQUILIBRIUM" };
+        }
+        console.log(`[Sluice Gate Open] High System Pressure detected (${pressure}). Activating AI Diagnostic...`);
+    }
+
     console.log('📝 DRAFT: Auditing all platforms...');
     const audit = await auditSystem();
     console.log(`✅ Audited ${Object.keys(audit).length} platforms`);
@@ -193,6 +265,7 @@ OPTIONS:
     console.log(`   Issues found: ${result.issues.length}`);
     console.log(`   Fixable: ${result.plan ? result.plan.length : 0}`);
     console.log(`   Executed: ${result.executed ? 'Yes' : 'No'}`);
+    logTelemetry('SystemAuditor-L4', 'System Audit', { issues: result.issues.length }, 'SUCCESS');
     console.log(`   Duration: ${duration}ms`);
 }
 

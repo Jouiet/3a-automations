@@ -1,0 +1,70 @@
+{
+  "metadata": {
+    "target": "https://3a-automation.com",
+    "domain": "3a-automation.com",
+    "analyzedAt": "2026-01-13T17:27:13.855Z"
+  },
+  "summary": {
+    "totalPages": 0,
+    "criticalIssues": 0,
+    "highIssues": 1,
+    "mediumIssues": 0,
+    "lowIssues": 0,
+    "passed": 7
+  },
+  "sections": {
+    "security": {
+      "checks": [
+        {
+          "check": "HSTS",
+          "status": "PASS",
+          "details": "Present: max-age=31536000; includeSubDomains; preload..."
+        },
+        {
+          "check": "CSP",
+          "status": "HIGH",
+          "details": "MISSING - Header not present"
+        },
+        {
+          "check": "X-Frame-Options",
+          "status": "PASS",
+          "details": "Present: DENY..."
+        },
+        {
+          "check": "X-Content-Type-Options",
+          "status": "PASS",
+          "details": "Present: nosniff..."
+        },
+        {
+          "check": "X-XSS-Protection (deprecated)",
+          "status": "PASS",
+          "details": "Present: 1; mode=block..."
+        },
+        {
+          "check": "Referrer-Policy",
+          "status": "PASS",
+          "details": "Present: strict-origin-when-cross-origin..."
+        },
+        {
+          "check": "Permissions-Policy",
+          "status": "PASS",
+          "details": "Present: camera=(), microphone=(), geolocation=(), payment=..."
+        },
+        {
+          "check": "SSL/TLS",
+          "status": "PASS",
+          "details": "HTTPS connection successful"
+        }
+      ],
+      "passed": 7,
+      "failed": 1
+    }
+  },
+  "scores": {
+    "security": 88,
+    "seo": 0,
+    "aeo": 0,
+    "accessibility": 0,
+    "overall": 22
+  }
+}

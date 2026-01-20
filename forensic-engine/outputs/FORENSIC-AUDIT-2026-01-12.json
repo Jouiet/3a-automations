@@ -1,0 +1,160 @@
+{
+  "timestamp": "2026-01-12T23:49:09.049Z",
+  "summary": {
+    "totalPages": 1,
+    "criticalIssues": 0,
+    "highIssues": 1,
+    "mediumIssues": 3,
+    "lowIssues": 1,
+    "passed": 17
+  },
+  "sections": {
+    "security": {
+      "checks": [
+        {
+          "check": "HSTS",
+          "status": "PASS",
+          "details": "Present: max-age=7889238..."
+        },
+        {
+          "check": "CSP",
+          "status": "PASS",
+          "details": "Present: block-all-mixed-content; frame-ancestors 'none'; u..."
+        },
+        {
+          "check": "X-Frame-Options",
+          "status": "PASS",
+          "details": "Present: DENY..."
+        },
+        {
+          "check": "X-Content-Type-Options",
+          "status": "PASS",
+          "details": "Present: nosniff..."
+        },
+        {
+          "check": "X-XSS-Protection (deprecated)",
+          "status": "PASS",
+          "details": "Present: 1; mode=block..."
+        },
+        {
+          "check": "Referrer-Policy",
+          "status": "MEDIUM",
+          "details": "MISSING - Header not present"
+        },
+        {
+          "check": "Permissions-Policy",
+          "status": "LOW",
+          "details": "Not present (optional)"
+        },
+        {
+          "check": "SSL/TLS",
+          "status": "PASS",
+          "details": "HTTPS connection successful"
+        }
+      ],
+      "passed": 6,
+      "failed": 2
+    },
+    "fingerprint": {
+      "checks": [
+        {
+          "check": "Site Title",
+          "status": "PASS",
+          "details": "Medical Equipment | FDA-Compliant | Alpha Medical Care"
+        },
+        {
+          "check": "Meta Description",
+          "status": "PASS",
+          "details": "Shop FDA-compliant orthopedic braces, posture corr..."
+        },
+        {
+          "check": "Asset Density",
+          "status": "PASS",
+          "details": "Scripts: 101 | Images: 66"
+        }
+      ],
+      "passed": 3,
+      "failed": 0
+    },
+    "aeo": {
+      "checks": [
+        {
+          "check": "robots.txt - GPTBot",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - ClaudeBot",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - PerplexityBot",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - Google-Extended",
+          "status": "PASS",
+          "details": "Explicitly allowed"
+        },
+        {
+          "check": "robots.txt - Bingbot",
+          "status": "MEDIUM",
+          "details": "Not explicitly allowed"
+        },
+        {
+          "check": "robots.txt - Sitemap reference",
+          "status": "PASS",
+          "details": "Sitemap URL present"
+        },
+        {
+          "check": "llms.txt presence",
+          "status": "HIGH",
+          "details": "HTTP 404"
+        }
+      ],
+      "passed": 5,
+      "failed": 2
+    },
+    "sitemap": {
+      "checks": [
+        {
+          "check": "Presence",
+          "status": "PASS",
+          "details": "sitemap.xml accessible"
+        },
+        {
+          "check": "Coverage",
+          "status": "PASS",
+          "details": "4 URLs detected in sitemap"
+        },
+        {
+          "check": "hreflang links",
+          "status": "MEDIUM",
+          "details": "No xhtml:link hreflang found"
+        }
+      ],
+      "passed": 2,
+      "failed": 1
+    },
+    "accessibility": {
+      "checks": [
+        {
+          "check": "External Note",
+          "status": "PASS",
+          "details": "External scan limited to public DOM elements (WIP)."
+        }
+      ],
+      "passed": 1,
+      "failed": 0
+    }
+  },
+  "scores": {
+    "security": 75,
+    "seo": 0,
+    "aeo": 71,
+    "accessibility": 100,
+    "overall": 62
+  }
+}

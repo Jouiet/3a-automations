@@ -34,6 +34,9 @@ const {
   setSecurityHeaders
 } = require('../../lib/security-utils.cjs');
 
+// Import Marketing Science Core
+const MarketingScience = require('./marketing-science-core.cjs');
+
 // Security constants
 const MAX_BODY_SIZE = 1024 * 1024; // 1MB limit
 const CORS_WHITELIST = [
@@ -496,7 +499,7 @@ function getAbandonedCartStaticSeries(cartData) {
 
   const cartTotal = cartData.cartTotal || products.reduce((sum, p) => sum + (p.price || 0), 0);
   const originalTotal = `${cartTotal.toFixed(2)}€`;
-  const discountedTotal = `${(cartTotal * (1 - discountPercent/100)).toFixed(2)}€`;
+  const discountedTotal = `${(cartTotal * (1 - discountPercent / 100)).toFixed(2)}€`;
   const reviewCount = cartData.reviewCount || 500;
   const testimonialText = cartData.testimonialText || "Livraison rapide et produits de qualité !";
   const testimonialAuthor = cartData.testimonialAuthor || "Marie L.";
@@ -565,6 +568,10 @@ async function personalizeEmail(leadData, segment = 'other') {
 
 Contexte: Email de prospection B2B initial.`;
 
+  // INJECT STORYBRAND (SB7)
+  // We want the customer to be the Hero, not us.
+  const optimizedPrompt = MarketingScience.inject('SB7', userPrompt);
+
   for (const providerKey of providerOrder) {
     const provider = PROVIDERS[providerKey];
     if (!provider.enabled) {
@@ -575,10 +582,10 @@ Contexte: Email de prospection B2B initial.`;
     try {
       let response;
       switch (providerKey) {
-        case 'grok': response = await callGrok(PERSONALIZATION_PROMPT, userPrompt); break;
-        case 'openai': response = await callOpenAI(PERSONALIZATION_PROMPT, userPrompt); break;
-        case 'gemini': response = await callGemini(PERSONALIZATION_PROMPT, userPrompt); break;
-        case 'anthropic': response = await callAnthropic(PERSONALIZATION_PROMPT, userPrompt); break;
+        case 'grok': response = await callGrok(PERSONALIZATION_PROMPT, optimizedPrompt); break;
+        case 'openai': response = await callOpenAI(PERSONALIZATION_PROMPT, optimizedPrompt); break;
+        case 'gemini': response = await callGemini(PERSONALIZATION_PROMPT, optimizedPrompt); break;
+        case 'anthropic': response = await callAnthropic(PERSONALIZATION_PROMPT, optimizedPrompt); break;
       }
 
       // Parse JSON from response (with robust extraction)

@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const MarketingScience = require('./marketing-science-core.cjs');
+const { logTelemetry } = require('../utils/telemetry.cjs');
+
 /**
  * Flows Audit - Agentic (Level 3)
  * 
@@ -18,10 +23,24 @@
  * @date 2026-01-08
  */
 
-const fs = require('fs');
-const path = require('path');
-// Load environment variables from project root
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+// Portability Patch: Resilient .env loading
+const envPaths = [
+    path.join(__dirname, '.env'),
+    path.join(__dirname, '../../../.env'),
+    path.join(process.cwd(), '.env')
+];
+let envFound = false;
+for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+        require('dotenv').config({ path: envPath });
+        console.log(`[Telemetry] Configuration loaded from: ${envPath}`);
+        envFound = true;
+        break;
+    }
+}
+if (!envFound) {
+    console.warn('[Telemetry] No .env file found in search paths. Using existing environment variables.');
+}
 
 const https = require('https');
 
@@ -31,7 +50,9 @@ const https = require('https');
 
 const CONFIG = {
     AGENTIC_MODE: process.argv.includes('--agentic'),
+    FORCE_MODE: process.argv.includes('--force'), // Bypass GPM pressure
     QUALITY_THRESHOLD: 8,
+    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
 
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
@@ -47,6 +68,31 @@ const CONFIG = {
         low: 0.2          // Minor improvements
     }
 };
+
+/**
+ * Log action to global MCP observability log
+ */
+function logToMcp(action, details) {
+    const logPath = path.join(__dirname, '../../../landing-page-hostinger/data/mcp-logs.json');
+    let logs = [];
+    try {
+        if (fs.existsSync(logPath)) {
+            logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
+        }
+    } catch (e) { logs = []; }
+
+    logs.unshift({
+        timestamp: new Date().toISOString(),
+        agent: 'FlowsAuditor-L4',
+        action,
+        details,
+        status: 'SUCCESS'
+    });
+
+    // Keep last 50 logs
+    if (logs.length > 50) logs = logs.slice(0, 50);
+    fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
+}
 
 // ============================================================================
 // PLATFORM CLIENTS
@@ -225,7 +271,7 @@ async function callAI(provider, prompt, systemPrompt = '') {
 }
 
 async function critiqueAudit(issues) {
-    const prompt = `You are a marketing automation expert. Review this flow audit and critique the revenue impact estimates.
+    const basePrompt = `You are a marketing automation expert. Review this flow audit and critique the revenue impact estimates.
 
 AUDIT ISSUES:
 ${JSON.stringify(issues.slice(0, 10), null, 2)}
@@ -244,6 +290,8 @@ RESPONSE FORMAT (JSON):
     { "flow_id": "<id>", "issue": "<issue>", "new_impact_eur": <number> }
   ]
 }`;
+
+    const prompt = MarketingScience.inject('AIDA', basePrompt);
 
     const systemPrompt = 'You are a Klaviyo/Shopify expert with 10+ years experience. Provide data-driven revenue estimates.';
 
@@ -285,6 +333,19 @@ async function refineAudit(issues, critique) {
 
 async function agenticFlowsAudit(flows, platform) {
     console.log('\n🤖 AGENTIC MODE: Draft → Critique → Refine\n');
+
+    // SITUATIONAL PRESSURE CHECK (Hybrid Decoupling Year 1)
+    if (!CONFIG.FORCE_MODE && fs.existsSync(CONFIG.GPM_PATH)) {
+        const gpm = JSON.parse(fs.readFileSync(CONFIG.GPM_PATH, 'utf8'));
+        const pressure = (gpm.sectors.system && gpm.sectors.system.flows) ? gpm.sectors.system.flows.pressure : 0;
+        const threshold = gpm.thresholds.high || 70;
+
+        if (pressure < threshold) {
+            console.log(`[Equilibrium] Flows Pressure (${pressure}) below threshold (${threshold}). No AI reasoning required.`);
+            return { issues: [], quality: null, refined: false, status: "EQUILIBRIUM" };
+        }
+        console.log(`[Sluice Gate Open] High Flows Pressure detected (${pressure}). Activating AI Audit...`);
+    }
 
     // STEP 1: DRAFT
     console.log('📝 DRAFT: Auditing flows...');
@@ -399,6 +460,8 @@ OPTIONS:
     console.log(`   Refined: ${result.refined ? 'Yes' : 'No'}`);
     console.log(`   Duration: ${duration}ms`);
     console.log(`   Output: ${outputFile}`);
+
+    logToMcp('AUDIT_FLOWS', { platform, issues: result.issues.length, potential_impact: (result.issues.reduce((sum, i) => sum + (i.estimated_impact_eur || 0), 0)) + ' EUR' });
 }
 
 if (require.main === module) {

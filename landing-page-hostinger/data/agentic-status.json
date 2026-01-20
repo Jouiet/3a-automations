@@ -4,8 +4,8 @@
     "config_rate": "100%",
     "agentic_metrics": {
         "total_automations": 118,
-        "level_3_4_agents": 18,
-        "mcp_tools_active": 118
+        "level_3_4_agents": 10,
+        "mcp_tools_active": 119
     },
     "verified_apis": {
         "Shopify": "OK",

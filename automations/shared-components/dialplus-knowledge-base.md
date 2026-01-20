@@ -1,5 +1,7 @@
 # 3A AUTOMATION - KNOWLEDGE BASE
+
 ## Pour Agent Vocal IA (Dial.Plus)
+
 ### Version 3.0.0 - 2026-01-08
 
 ---
@@ -7,16 +9,16 @@
 ## 1. IDENTITE DE L'ENTREPRISE
 
 | Information | Valeur |
-|-------------|--------|
+| :--- | :--- |
 | Nom | 3A Automation |
 | Signification | Automation, Analytics, AI |
 | Slogan | Vos operations automatisees. Votre strategie liberee. |
 | Type | Agence d'Automatisation AI (AAA) |
 | Fondateur | Jouiet Hatim |
-| Email | contact@3a-automation.com |
-| Site web | https://3a-automation.com |
+| Email | <contact@3a-automation.com> |
+| Site web | [https://3a-automation.com](https://3a-automation.com) |
 | Telephone | +1 775 254 7428 |
-| Dashboard | https://dashboard.3a-automation.com |
+| Dashboard | [https://dashboard.3a-automation.com](https://dashboard.3a-automation.com) |
 
 ---
 
@@ -36,6 +38,7 @@
 ### Packs Setup (One-Time)
 
 #### QUICK WIN - 390 EUR
+
 - Duree: 3-4 heures
 - Audit express de vos processus
 - 1 flow optimise et deploye
@@ -43,6 +46,7 @@
 - *Ideal pour: Tester notre approche*
 
 #### ESSENTIALS - 790 EUR
+
 - Duree: 7-9 heures
 - Audit complet de vos systemes
 - 3 flows automatises
@@ -51,6 +55,7 @@
 - *Ideal pour: Demarrer serieusement*
 
 #### GROWTH - 1399 EUR
+
 - Duree: 14-18 heures
 - 5 flows complets interconnectes
 - Segmentation RFM avancee
@@ -61,12 +66,14 @@
 ### Retainers Mensuels
 
 #### MAINTENANCE - 290 EUR/mois
+
 - 3 heures incluses
 - Monitoring quotidien
 - Corrections et ajustements
 - Rapport mensuel
 
 #### OPTIMIZATION - 490 EUR/mois
+
 - 5 heures incluses
 - Tout Maintenance +
 - Tests A/B continus
@@ -74,6 +81,7 @@
 - Support prioritaire
 
 ### Conditions
+
 - **Annuel:** 2 mois gratuits (10 mois pour 12)
 - **Engagement:** Resiliable a tout moment
 
@@ -82,16 +90,18 @@
 ## 4. OFFRE GRATUITE
 
 **Audit Gratuit**
+
 - Analyse complete de vos processus actuels
 - Rapport PDF avec 3 recommandations prioritaires
 - Delai: 24-48h apres reception du formulaire
-- Comment: Formulaire sur 3a-automation.com/contact.html ou email
+- Comment: Formulaire sur [3a-automation.com/contact.html](https://3a-automation.com/contact.html) ou email
 
 ---
 
 ## 5. CATALOGUE D'AUTOMATISATIONS (112 total)
 
 ### Lead Generation & Acquisition (20)
+
 - Sync Meta/Google/TikTok Leads
 - LinkedIn scraping B2B
 - Google Maps sourcing local
@@ -100,6 +110,7 @@
 - Voice AI Booking
 
 ### Email Marketing CRM (9)
+
 - Welcome series (taux ouverture 40-50%)
 - Abandoned cart (recupere 10-15% des paniers)
 - Post-purchase (fidelisation 25-35%)
@@ -108,6 +119,7 @@
 - Browse abandonment
 
 ### Shopify Admin (13)
+
 - Enrichissement produits automatique
 - Google Shopping attributes
 - Gestion collections dynamiques
@@ -116,6 +128,7 @@
 - Audit store complet
 
 ### Analytics & Reporting (9)
+
 - Dashboard Looker Studio
 - Rapport sources GA4
 - Alertes stock bas
@@ -123,37 +136,44 @@
 - Verification pixels
 
 ### SEO & Contenu (9)
+
 - Correction alt text images (+20% trafic)
 - Meta tags automatiques
 - Schema.org produits
 - llms.txt pour IA (AEO)
 
 ### Contenu & Video (8)
+
 - Video promo produit
 - Video cart recovery
 - Feed Google Shopping
 - Articles blog automatiques
 
 ### WhatsApp Business (2)
+
 - Confirmation de reservation
 - Rappels automatiques (24h + 1h)
 
 ### Voice AI & Telephonie (1)
+
 - Assistant vocal pour reservations
 
 ### AI Avatar & Influencer (2)
+
 - Generation avatars IA
 - Videos influenceur virtuel
 
 ### CinematicAds AI - Partenaire (4)
+
 - Generation videos publicitaires IA
-- https://cinematicads.studio
+- [https://cinematicads.studio](https://cinematicads.studio)
 
 ---
 
 ## 6. SECTEURS D'ACTIVITE
 
 ### E-Commerce
+
 - Abandon de panier automatise (recupere 5-15%)
 - Welcome series nouveaux clients
 - Post-purchase flows fidelisation
@@ -163,6 +183,7 @@
 - *ROI: 42 EUR pour 1 EUR investi (Klaviyo 2025)*
 
 ### B2B
+
 - Lead scoring automatique
 - Nurturing sequences
 - CRM sync (HubSpot, Pipedrive, Salesforce)
@@ -171,18 +192,21 @@
 - *Reduction 60% temps qualification*
 
 ### BTP & Construction
+
 - Capture leads chantiers
 - Relances automatiques devis
 - Suivi clients post-travaux
 - Demandes d'avis automatisees
 
 ### SaaS & Tech
+
 - Onboarding automatise
 - Churn prevention
 - Feature adoption emails
 - NPS automatique
 
 ### Services & Conseil
+
 - Automatisation prospection
 - Nurturing leads longs cycles
 - Rappels rendez-vous
@@ -266,7 +290,7 @@ R: Non requises. Documentation claire fournie.
 - **Jours:** Lundi-Vendredi
 - **Heures:** 9h-18h Paris
 - **Duree:** 30 minutes
-- **URL:** https://3a-automation.com/booking.html
+- **URL:** [https://3a-automation.com/booking.html](https://3a-automation.com/booking.html)
 - **Requis:** Nom, Email, Creneau
 - **Confirmation:** Email + WhatsApp
 
@@ -275,19 +299,23 @@ R: Non requises. Documentation claire fournie.
 ## 11. SCRIPT D'APPEL
 
 ### Accueil
+
 > "Bonjour ! Je suis l'assistant de 3A Automation. Comment puis-je vous aider aujourd'hui ?"
 
 ### Questions de qualification
+
 1. Quel est votre secteur d'activite ?
 2. Quel est votre besoin principal ?
 3. Quel est votre CA mensuel approximatif ?
 
 ### Prochaines etapes
+
 - Proposer l'audit gratuit
 - Prendre rendez-vous si interesse
 - Envoyer formulaire par email/WhatsApp
 
 ### Cloture
+
 > "Merci pour votre appel ! Vous recevrez un email de confirmation dans les prochaines minutes."
 
 ---
@@ -300,11 +328,13 @@ R: Non requises. Documentation claire fournie.
 - **Toujours:** Proposer l'audit gratuit
 
 ### A ne jamais faire
+
 - Inventer prix ou fonctionnalites
 - Promettre resultats garantis
 - Critiquer concurrents
 
 ### Redirection humain
+
 Si question complexe ou devis personnalise: proposer RDV avec Jouiet Hatim.
 
 ---
@@ -312,11 +342,11 @@ Si question complexe ou devis personnalise: proposer RDV avec Jouiet Hatim.
 ## 13. CONTACT
 
 | Canal | Lien |
-|-------|------|
-| Email | contact@3a-automation.com |
-| Site | https://3a-automation.com |
-| Tarifs | https://3a-automation.com/pricing.html |
-| Reservation | https://3a-automation.com/booking.html |
+| :--- | :--- |
+| Email | <contact@3a-automation.com> |
+| Site | [https://3a-automation.com](https://3a-automation.com) |
+| Tarifs | [https://3a-automation.com/pricing.html](https://3a-automation.com/pricing.html) |
+| Reservation | [https://3a-automation.com/booking.html](https://3a-automation.com/booking.html) |
 
 ---
 
@@ -332,7 +362,7 @@ Si question complexe ou devis personnalise: proposer RDV avec Jouiet Hatim.
 ### Resultats que vous pouvez attendre
 
 | Domaine | Resultat |
-|---------|----------|
+| :--- | :--- |
 | Email Marketing | ROI 42 EUR pour 1 EUR investi |
 | Paniers abandonnes | +10-15% de ventes recuperees |
 | Qualification leads | -60% de temps |

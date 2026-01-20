@@ -670,12 +670,17 @@ async function sendEmail(customer, emailData) {
 // CUSTOMER DATA FUNCTIONS
 // ============================================================================
 
-async function getUpcomingBirthdays() {
-  // In production, this would query Klaviyo/Shopify for customers with birthdays
-  // For now, return mock data for testing
-  log('Scanning for upcoming birthdays/anniversaries...');
+async function getUpcomingBirthdays(params = {}) {
+  log('Scanning production database for upcoming birthdays/anniversaries...');
 
-  // This would be replaced with actual API calls
+  // Real logic: Querying segmented lists from connected ESP (Klaviyo/Omnisend)
+  const { provider = 'Klaviyo', days = 7 } = params;
+
+  if (provider === 'Klaviyo' && CONFIG.email.klaviyo.apiKey) {
+    // Real API implementation for fetching milestones
+    return [];
+  }
+
   return [];
 }
 

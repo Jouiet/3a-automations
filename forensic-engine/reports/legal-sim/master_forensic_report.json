@@ -1,0 +1,22 @@
+{
+    "metadata": {
+        "target": "https://avocat-associes-casa.ma",
+        "analyzedAt": "2026-01-13T18:00:00Z"
+    },
+    "results": {
+        "security": {
+            "headers": {
+                "Referrer-Policy": "OK",
+                "CSP": "MISSING"
+            }
+        },
+        "aeo": {
+            "llms_txt": "MISSING"
+        },
+        "behavioral": {
+            "widgets": [
+                "WhatsApp Button"
+            ]
+        }
+    }
+}

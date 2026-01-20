@@ -9,10 +9,12 @@ async function initAgenticTransparency() {
     // Initial Load
     await updateAgenticStatus();
     await updateMcpLogs();
+    await updateMarketIntelligence();
 
-    // Periodic Polling (every 5 seconds)
+    // Periodic Polling
     setInterval(updateAgenticStatus, 5000);
     setInterval(updateMcpLogs, 3000);
+    setInterval(updateMarketIntelligence, 10000);
 }
 
 async function updateAgenticStatus() {
@@ -32,6 +34,15 @@ async function updateAgenticStatus() {
         const agenticCountText = document.getElementById('agentic-count-text');
         if (agenticCountText && data.agentic_metrics) {
             agenticCountText.textContent = `${data.agentic_metrics.level_3_4_agents} Agentic Workflows`;
+        }
+
+        // WOW Factor: Pulse high-pressure state
+        if (data.system_status === 'ACTIVE' || data.system_status === 'BUSY') {
+            document.querySelectorAll('.pulse-indicator').forEach(el => el.classList.add('cortex-active'));
+            document.querySelector('.hero-logo-center')?.classList.add('cortex-thinking');
+        } else {
+            document.querySelectorAll('.pulse-indicator').forEach(el => el.classList.remove('cortex-active'));
+            document.querySelector('.hero-logo-center')?.classList.remove('cortex-thinking');
         }
 
         // Update API tags dynamically
@@ -69,10 +80,10 @@ async function updateMcpLogs() {
             renderLogs(toolLogsContainer, logs, true);
         }
 
-        // Global Mini-log (if exists on other pages)
-        const miniLog = document.getElementById('mini-mcp-log');
-        if (miniLog) {
-            renderLogs(miniLog, logs.slice(0, 3), false);
+        // Reasoning Terminal (Real Data)
+        const terminal = document.getElementById('reasoning-terminal');
+        if (terminal) {
+            renderReasoning(terminal, logs);
         }
 
     } catch (e) {
@@ -82,16 +93,102 @@ async function updateMcpLogs() {
 
 function renderLogs(container, logs, fullDetail) {
     const content = logs.map(log => `
-        <div class="log-entry ${log.status === 'SUCCESS' ? 'success' : ''}">
-            <span class="log-time">[${new Date(log.timestamp).toLocaleTimeString()}]</span>
-            <span class="log-agent">${log.agent}</span>: 
-            <span class="log-action">${log.action}</span>
-            ${fullDetail ? `<div class="log-details" style="font-size: 0.75rem; opacity: 0.6;">${JSON.stringify(log.details)}</div>` : ''}
+        <div class="log-item">
+            <div class="log-header">
+                <span class="log-timestamp">[${new Date(log.timestamp).toLocaleTimeString()}]</span>
+                <span class="log-status ${log.status === 'SUCCESS' ? 'SUCCESS' : 'ERROR'}">${log.status}</span>
+            </div>
+            <div class="log-body">
+                <span class="action-highlight">${log.agent}</span>: ${log.action}
+                ${fullDetail && log.details ? `<div style="font-size: 0.8em; opacity: 0.7; margin-top: 4px;">${JSON.stringify(log.details)}</div>` : ''}
+            </div>
         </div>
     `).join('');
 
     if (container.innerHTML !== content) {
         container.innerHTML = content;
+    }
+}
+
+function renderReasoning(container, logs) {
+    // Take the last 5 logs as "Recent Thoughts"
+    const recentLogs = logs.slice(0, 5).reverse();
+
+    // Check if we need to update to avoid DOM thrashing
+    const currentHtml = container.innerHTML;
+    // Simple heuristic: if the first log timestamp differs, update.
+    // Or just rebuild. Rebuilding 5 lines is cheap.
+
+    const content = recentLogs.map(log => `
+        <div class="terminal-line">
+            <span class="agent-name">${log.agent}:</span>
+            <span class="action-text">${log.action}... [${log.status}]</span>
+        </div>
+    `).join('');
+
+    // Ensure we always have the system line at the top if needed, or just replace.
+    // Dashboard HTML has a hardcoded "Initializing..." line initially.
+
+    // We'll append a "Live" indicator line if we want.
+    // For now, just show the logs.
+
+    if (container.innerHTML !== content) {
+        container.innerHTML = content;
+    }
+}
+
+async function updateMarketIntelligence() {
+    try {
+        const response = await fetch('data/pressure-matrix.json');
+        if (!response.ok) return;
+        const gpm = await response.json();
+
+        const market = gpm.sectors.marketing.market_demand;
+        if (!market) return;
+
+        const trendsEl = document.getElementById('trends-pulse');
+        const adsVolEl = document.getElementById('ads-volume');
+        const apifyStatusEl = document.getElementById('apify-status');
+        const googleAdsStatusEl = document.getElementById('google-ads-status');
+        const bigqueryStatusEl = document.getElementById('bigquery-status');
+        const metaAdsStatusEl = document.getElementById('meta-ads-status');
+
+        if (trendsEl) {
+            trendsEl.textContent = (100 - market.pressure);
+            trendsEl.className = `metric-badge ${market.pressure > 70 ? 'badge-error' : (market.pressure < 30 ? 'badge-success' : 'badge-active')}`;
+        }
+
+        if (adsVolEl) {
+            adsVolEl.textContent = market.ads_volume ? `${(market.ads_volume / 1000).toFixed(1)}k/mo` : '0';
+        }
+
+        // Mapping sensor statuses (Real-time from GPM)
+        if (apifyStatusEl) {
+            const status = gpm.sensors?.apify?.status || 'UNKNOWN';
+            apifyStatusEl.textContent = status;
+            apifyStatusEl.className = `metric-badge ${status === 'ACTIVE' ? 'badge-success' : 'badge-warning'}`;
+        }
+
+        if (googleAdsStatusEl) {
+            const status = gpm.sensors?.google_ads?.status || 'UNKNOWN';
+            googleAdsStatusEl.textContent = status;
+            googleAdsStatusEl.className = `metric-badge ${status === 'ACTIVE' ? 'badge-success' : 'badge-error'}`;
+        }
+
+        if (bigqueryStatusEl) {
+            const status = gpm.sensors?.bigquery?.status || 'UNKNOWN';
+            bigqueryStatusEl.textContent = status;
+            bigqueryStatusEl.className = `metric-badge ${status === 'ACTIVE' ? 'badge-success' : 'badge-warning'}`;
+        }
+
+        if (metaAdsStatusEl) {
+            const status = gpm.sensors?.meta_ads?.status || 'UNKNOWN';
+            metaAdsStatusEl.textContent = status;
+            metaAdsStatusEl.className = `metric-badge ${status === 'ACTIVE' ? 'badge-success' : 'badge-error'}`;
+        }
+
+    } catch (e) {
+        console.warn("Market Intelligence Update Failed", e);
     }
 }
 

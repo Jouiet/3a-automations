@@ -1,0 +1,58 @@
+{
+    "clients": {
+        "agency_internal": {
+            "name": "3A Automation",
+            "sector": "AGENCY",
+            "currency": "EUR",
+            "language": "fr",
+            "knowledge_base_id": "agency_v2",
+            "payment_method": "WISE",
+            "phone": "+33123456789",
+            "address": "123 Tech Avenue, Paris"
+        },
+        "client_dental_01": {
+            "name": "Cabinet Dentaire Lumière",
+            "sector": "DENTAL",
+            "currency": "EUR",
+            "language": "fr",
+            "knowledge_base_id": "dental_intake_v1",
+            "payment_method": "STRIPE_LINK",
+            "payment_details": "https://buy.stripe.com/dental_deposit_99",
+            "phone": "+33198765432",
+            "address": "45 Rue de la Santé, Lyon"
+        },
+        "client_hoa_01": {
+            "name": "Sunnyvale HOA",
+            "sector": "HOA",
+            "currency": "USD",
+            "language": "en",
+            "knowledge_base_id": "hoa_support_v1",
+            "payment_method": "BANK_TRANSFER",
+            "payment_details": "Account: 123456789 (Chase Bank)",
+            "phone": "+15550199",
+            "address": "88 Sunnyvale Dr, CA"
+        },
+        "ecom_nike_01": {
+            "name": "Nike Reseller Paris",
+            "sector": "UNIVERSAL_ECOMMERCE",
+            "currency": "EUR",
+            "language": "fr",
+            "knowledge_base_id": "universal_ecom_v1",
+            "payment_method": "SHOPIFY_CHECKOUT",
+            "payment_details": "https://nike-reseller-paris.com/checkout",
+            "phone": "+33700000001",
+            "address": " Champs Elysées, Paris"
+        },
+        "sme_baker_02": {
+            "name": "Boulangerie Patissier",
+            "sector": "UNIVERSAL_SME",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "universal_sme_v1",
+            "payment_method": "CASH_ON_DELIVERY",
+            "payment_details": "Paiement à la livraison ou en boutique",
+            "phone": "+212600000000",
+            "address": "Quartier Agdal, Rabat"
+        }
+    }
+}

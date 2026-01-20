@@ -33,10 +33,14 @@ const {
   setSecurityHeaders,
   retryWithExponentialBackoff
 } = require('../../lib/security-utils.cjs');
+const { logTelemetry } = require('../utils/telemetry.cjs');
 
 // Security constants
 const MAX_BODY_SIZE = 1024 * 1024; // 1MB
 const REQUEST_TIMEOUT_MS = 120000; // 2 minutes for AI generation
+
+// Import Marketing Science Core (Persuasion Psychology)
+const MarketingScience = require('./marketing-science-core.cjs');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIGURATION
@@ -47,29 +51,38 @@ const REQUEST_TIMEOUT_MS = 120000; // 2 minutes for AI generation
  * P3 UPGRADE: Agentic Reflection Loop
  */
 function loadEnv() {
-  try {
-    const envPath = path.join(__dirname, '../../../.env');
-    const env = fs.readFileSync(envPath, 'utf8');
-    const vars = {};
-    env.split('\n').forEach(line => {
-      // Skip comments and empty lines
-      if (!line || line.startsWith('#')) return;
-      // Match KEY=value (with optional quotes)
-      const match = line.match(/^([A-Z_][A-Z0-9_]*)=["']?(.*)["']?$/);
-      if (match) {
-        let value = match[2].trim();
-        // Remove trailing quotes if present
-        if ((value.startsWith('"') && value.endsWith('"')) ||
-          (value.startsWith("'") && value.endsWith("'"))) {
-          value = value.slice(1, -1);
-        }
-        vars[match[1]] = value;
+  const envPaths = [path.join(__dirname, '.env'), path.join(__dirname, '../../../.env'), path.join(process.cwd(), '.env')];
+  let envFound = false;
+  let vars = { ...process.env };
+
+  for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+      try {
+        const envContent = fs.readFileSync(envPath, 'utf8');
+        envContent.split('\n').forEach(line => {
+          if (!line || line.startsWith('#')) return;
+          const match = line.match(/^([A-Z_][A-Z0-9_]*)=["']?(.*)["']?$/);
+          if (match) {
+            let value = match[2].trim();
+            if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+              value = value.slice(1, -1);
+            }
+            vars[match[1]] = value;
+          }
+        });
+        console.log(`[Telemetry] Configuration loaded from: ${envPath}`);
+        envFound = true;
+        break;
+      } catch (e) {
+        console.warn(`[Telemetry] Failed to read ${envPath}: ${e.message}`);
       }
-    });
-    return vars;
-  } catch (e) {
-    return process.env;
+    }
   }
+
+  if (!envFound) {
+    console.warn('[Telemetry] No .env file found in search paths. Using process environment.');
+  }
+  return vars;
 }
 
 const ENV = loadEnv();
@@ -153,11 +166,24 @@ const XTWITTER = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// CINEMATIC ADS CONFIG - Internal Video Factory via Webhook
+// ─────────────────────────────────────────────────────────────────────────────
+const CINEMATIC_ADS = {
+  webhookUrl: ENV.CINEMATIC_ADS_WEBHOOK_URL || 'https://n8n.3a-automation.com/webhook/cinematicads/blog/generate',
+  enabled: true // Always enabled as internal microservice
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // PROMPT TEMPLATE
 // ─────────────────────────────────────────────────────────────────────────────
-function buildPrompt(topic, language, keywords = '') {
+// ─────────────────────────────────────────────────────────────────────────────
+// PROMPT TEMPLATE - INJECTED VIA MARKETING SCIENCE CORE
+// ─────────────────────────────────────────────────────────────────────────────
+function buildPrompt(topic, language, keywords = '', framework = 'PAS') {
   const lang = language === 'fr' ? 'French' : 'English';
-  return `Write a comprehensive blog article about: ${topic}
+
+  // Base Context
+  const baseContext = `Write a comprehensive blog article about: ${topic}
 
 Language: ${lang}
 Target Keywords: ${keywords || topic}
@@ -185,6 +211,9 @@ Output format: Valid JSON only, no markdown fences, no explanations:
   "hashtags": ["relevant", "hashtags"],
   "category": "automation|ecommerce|ai|marketing"
 }`;
+
+  // Inject Psychology Framework (PAS, AIDA, SB7, CIALDINI)
+  return MarketingScience.inject(framework || 'PAS', baseContext);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -435,10 +464,10 @@ function extractJson(text) {
 // ORCHESTRATOR
 // ─────────────────────────────────────────────────────────────────────────────
 
-async function generateWithFallback(topic, language, keywords, agenticMode = false) {
+async function generateWithFallback(topic, language, keywords, agenticMode = false, framework = '') {
   // 1. DRAFTING PHASE
   console.log(`[Drafting] Generating initial version...`);
-  const prompt = buildPrompt(topic, language, keywords);
+  const prompt = buildPrompt(topic, language, keywords, framework);
   let result = await executeGenerationChain(prompt);
 
   if (!result.success || !agenticMode) {
@@ -771,11 +800,52 @@ async function postToX(article, articleUrl) {
         platform: 'x',
       };
     } else {
-      throw new Error(result.detail || result.title || 'Unknown error');
+      throw new Error(`X API Error: ${JSON.stringify(result)}`);
     }
   } catch (error) {
     console.error(`[ERROR] X/Twitter posting failed: ${error.message}`);
     return { success: false, error: error.message, platform: 'x' };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CINEMATIC ADS VIDEO GENERATION (INTERNAL FACTORY)
+// ─────────────────────────────────────────────────────────────────────────────
+async function triggerCinematicVideo(article, articleUrl) {
+  if (!CINEMATIC_ADS.enabled) {
+    return { success: false, error: 'CinematicAds disabled' };
+  }
+
+  console.log(`[CinematicAds] Triggering internal video factory...`);
+
+  // Prepare payload for the Asset Factory
+  const payload = {
+    topic: article.title,
+    language: 'en', // Video engine native is EN
+    keywords: (article.hashtags || []).join(', '),
+    brandTone: 'innovative',
+    publishToFacebook: true,
+    publishToLinkedIn: true,
+    sourceUrl: articleUrl,
+    excerpt: article.excerpt
+  };
+
+  try {
+    const response = await httpRequest(CINEMATIC_ADS.webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    }, JSON.stringify(payload));
+
+    console.log(`[OK] CinematicAds: Video production started.`);
+    return {
+      success: true,
+      platform: 'cinematic_ads',
+      status: 'production_started'
+    };
+  } catch (error) {
+    console.error(`[ERROR] CinematicAds trigger failed: ${error.message}`);
+    // Non-blocking error
+    return { success: false, error: error.message, platform: 'cinematic_ads' };
   }
 }
 
@@ -1057,12 +1127,15 @@ async function main() {
   const language = args.language || 'fr';
   const publish = !!args.publish;
   const distribute = !!args.distribute;
-  const agentic = !!args.agentic;
+  const video = !!args.video || !!args.distribute; // Auto-generate video for distribution
+  const agentic = !!args.agentic; // Enable reflection loop
+  const framework = args.framework || 'PAS'; // Default to PAS for high conversion
 
   // Generate article
   if (topic) {
     console.log(`\n[Blog] Generating article: "${topic}"`);
     console.log(`Language: ${language}`);
+    if (framework) console.log(`[Framework] ${framework} (Persuasion Mode Active)`);
     if (agentic) console.log(`[Mode] AGENTIC ENABLED (Reflection Loop Active)`);
     console.log('─'.repeat(50));
 
@@ -1070,7 +1143,8 @@ async function main() {
       topic,
       language,
       args.keywords || '',
-      agentic
+      agentic,
+      framework
     );
 
     if (!result.success) {
@@ -1112,6 +1186,16 @@ async function main() {
       result.social = socialResult;
     }
 
+    // Generate Video Ad (CinematicAds)
+    if (video) {
+      if (!articleUrl) {
+        articleUrl = 'https://3a-automation.com/blog';
+      }
+      const videoResult = await triggerCinematicVideo(result.article, articleUrl);
+      result.video = videoResult;
+      console.log(`[Video] CinematicAds Status: ${videoResult.status}`);
+    }
+
     // Save to file
     const outputPath = path.join(__dirname, '../../../outputs', `blog-${Date.now()}.json`);
     fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
@@ -1129,6 +1213,8 @@ FEATURES:
   [+] Facebook Page distribution
   [+] LinkedIn distribution
   [+] X/Twitter distribution
+  [+] CinematicAds Video Generation (Auto-trigger with --distribute)
+
 
 Usage:
   node blog-generator-resilient.cjs --topic="Your topic" [options]
@@ -1137,6 +1223,7 @@ Options:
   --topic       Article topic (required for generation)
   --language    Language: fr or en (default: fr)
   --keywords    SEO keywords (comma-separated)
+  --framework   Marketing Framework: "PAS" or "AIDA" (default: none)
   --publish     Publish to WordPress after generation
 
   --distribute  Post to Facebook + LinkedIn + X after publishing

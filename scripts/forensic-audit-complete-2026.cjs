@@ -678,17 +678,17 @@ async function auditi18n() {
   // Check language parity
   const frOnlyPages = frFiles.filter(f => {
     const enEquivalent = f.replace('academie', 'academy')
-                          .replace('a-propos', 'about')
-                          .replace('cas-clients', 'case-studies')
-                          .replace('investisseurs', 'investors')
-                          .replace('pme', 'smb')
-                          .replace('audit-gratuit', 'free-audit')
-                          .replace('mentions-legales', 'terms')
-                          .replace('politique-confidentialite', 'privacy')
-                          .replace('parcours', 'paths')
-                          .replace('cours', 'courses')
-                          .replace('demarrer', 'getting-started')
-                          .replace('contenu', 'content');
+      .replace('a-propos', 'about')
+      .replace('cas-clients', 'case-studies')
+      .replace('investisseurs', 'investors')
+      .replace('pme', 'smb')
+      .replace('audit-gratuit', 'free-audit')
+      .replace('mentions-legales', 'terms')
+      .replace('politique-confidentialite', 'privacy')
+      .replace('parcours', 'paths')
+      .replace('cours', 'courses')
+      .replace('demarrer', 'getting-started')
+      .replace('contenu', 'content');
     return !enFiles.some(e => e === enEquivalent || e === f);
   });
 

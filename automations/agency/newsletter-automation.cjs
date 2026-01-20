@@ -117,7 +117,10 @@ function validateBranding(content) {
 async function generateNewsletterContent(topic, options = {}) {
   const { language = 'fr', sections = 4 } = options;
 
-  const prompt = `Tu es un expert en marketing automation et e-commerce.
+  const MarketingScience = require('./core/marketing-science-core.cjs');
+
+  // INJECT STORYBRAND (SB7) - Newsletters are about the READER (Hero), not the BRAND.
+  const basePrompt = `Tu es un expert en marketing automation et e-commerce.
 Génère une newsletter professionnelle pour ${CONFIG.BRAND_NAME} sur le thème: "${topic}"
 
 STRUCTURE (${language === 'fr' ? 'en français' : 'in English'}):
@@ -145,6 +148,8 @@ FORMAT DE SORTIE (JSON):
   ],
   "cta": { "text": "...", "url": "${CONFIG.BRAND_URL}/contact" }
 }`;
+
+  const prompt = MarketingScience.inject('SB7', basePrompt);
 
   // Try xAI/Grok first (cheapest, fast)
   if (CONFIG.XAI_API_KEY) {

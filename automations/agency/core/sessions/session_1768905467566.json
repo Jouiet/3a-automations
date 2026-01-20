@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-01-20T10:37:47.566Z",
+  "plan": {
+    "toolId": "meta-leads-sync",
+    "toolName": "Meta Leads → Shopify Sync",
+    "script": "templates/leads/sync-meta-leads-to-shopify.cjs",
+    "params": [],
+    "reasoning": "Selected meta-leads-sync because directive contains keywords matching 'Synchronizes lead data from Meta Ads (Facebook/Instagram) lead forms directly into Shopify customer records. Use this for Meta-based acquisition workflows.'."
+  },
+  "result": {
+    "success": false,
+    "error": "Command failed: node /Users/mac/Documents/JO-AAA/automations/templates/leads/sync-meta-leads-to-shopify.cjs --dry-run \n❌ Missing Meta credentials in .env\n\nSETUP REQUIRED:\n1. Create Meta App: https://developers.facebook.com/apps\n2. Add app to Business Manager\n3. Get Page Access Token with leads_retrieval permission\n4. Get Lead Form ID from Ads Manager\n5. Add to .env:\n   META_PAGE_ACCESS_TOKEN=your_token\n   META_PAGE_ID=your_page_id\n   META_LEAD_FORM_ID=your_form_id\n"
+  }
+}

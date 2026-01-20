@@ -20,8 +20,8 @@
     locales: {
       // Maghreb → French + MAD
       'MA': { lang: 'fr', currency: 'MAD', region: 'maghreb' },
-      'DZ': { lang: 'fr', currency: 'MAD', region: 'maghreb' },
-      'TN': { lang: 'fr', currency: 'MAD', region: 'maghreb' },
+      'DZ': { lang: 'fr', currency: 'EUR', region: 'maghreb' },
+      'TN': { lang: 'fr', currency: 'EUR', region: 'maghreb' },
 
       // French-speaking Europe → French + EUR
       'FR': { lang: 'fr', currency: 'EUR', region: 'europe' },

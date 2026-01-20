@@ -1,11 +1,13 @@
 # PERSONAS CIBLES - 3A AUTOMATION
-## Version: 1.0.0 | Date: 2025-12-23 | Source: Session 84 Audit
+
+## Version: 1.1.0 | Date: 08/01/2026 | Source: Session 130 Mission Complete
 
 ---
 
 ## METHODOLOGIE
 
 Ce document definit les **5 personas clients** de 3A Automation bases sur:
+
 - Analyse factuelle des 77 automations (automations-registry.json)
 - Mapping automations → besoins clients
 - Validation pricing vs valeur delivree
@@ -18,7 +20,7 @@ Ce document definit les **5 personas clients** de 3A Automation bases sur:
 ## VUE D'ENSEMBLE
 
 | # | Persona | CA Typique | Budget | Pack Recommande | Automations |
-|---|---------|------------|--------|-----------------|-------------|
+| --- | --- | --- | --- | --- | --- |
 | 1 | E-commerce Dropshipper | 5k-50k€/mois | €390-790 | Quick Win | 40 |
 | 2 | E-commerce Scaler | 50k-500k€/mois | €790-1399 | Growth | 43 |
 | 3 | B2B Lead Hunter | 10k-100k€/mois | €790-1399 | Essentials | 29 |
@@ -29,8 +31,9 @@ Ce document definit les **5 personas clients** de 3A Automation bases sur:
 
 ## PERSONA 1: E-COMMERCE DROPSHIPPER
 
-### Profil
-```
+### Profil (P1 Dropshipper)
+
+```text
 Secteur:        E-commerce / Dropshipping
 Plateforme:     Shopify (principalement)
 CA Mensuel:     5k - 50k€
@@ -39,38 +42,42 @@ Niveau Tech:    Debutant a intermediaire
 Maturite:       0-2 ans d'activite
 ```
 
-### Description
+### Description (P1 Dropshipper)
+
 Entrepreneur solo ou petite equipe gerant une boutique Shopify en dropshipping. Utilise DSers/CJ Dropshipping pour le fulfillment. Fait des ads Meta/TikTok. Connait les bases mais manque de temps et d'expertise pour optimiser.
 
-### Pain Points Critiques
+### Pain Points Critiques (P1 Dropshipper)
 
 | Pain Point | Impact Business | Urgence |
-|------------|-----------------|---------|
+| --- | --- | --- |
 | Paniers abandonnes non recuperes | -15-25% CA potentiel | HAUTE |
 | Emails manuels chronophages | 5-10h/semaine perdues | HAUTE |
 | SEO produits inexistant | 0 trafic organique | MOYENNE |
 | Pas de vision metrics | Decisions a l'aveugle | MOYENNE |
 | Tracking pixels mal configure | Attribution faussee | HAUTE |
 
-### Objections Frequentes
+### Objections Frequentes (P1 Dropshipper)
+
 - "Je n'ai pas le budget pour une agence"
 - "C'est trop technique pour moi"
 - "Je peux le faire moi-meme plus tard"
 - "Est-ce que ca marche vraiment?"
 
-### Reponses aux Objections
+### Reponses aux Objections (P1 Dropshipper)
+
 | Objection | Reponse |
-|-----------|---------|
+| --- | --- |
 | Budget | Quick Win a 390€ = 1 vente moyenne recuperee |
 | Technique | On gere tout, documentation incluse |
 | DIY | Chaque jour perdu = revenus perdus |
 | Proof | ROI email 42:1 (Klaviyo 2025) |
 
-### Automations Pertinentes (40 total, 19 implementees)
+### Automations Pertinentes (P1 Dropshipper)
 
 #### P0 - Essentielles (ROI immediat)
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | Abandoned Cart Flow | Recovery 10-15% | Template Klaviyo |
 | Welcome Series | Open 40-50% | Template Klaviyo |
 | Alt Text Fix | +20% trafic image | Script OK |
@@ -78,15 +85,17 @@ Entrepreneur solo ou petite equipe gerant une boutique Shopify en dropshipping. 
 | Pixel Verification | Tracking fiable | Script OK |
 
 #### P1 - Importantes
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | Post-Purchase Flow | Repeat 25-35% | Template Klaviyo |
 | Image Sitemap | Indexation complete | Script OK |
 | GA4 Source Report | Optimisation budget | Script OK |
 | Facebook Audiences Export | Retargeting precis | Script OK |
 
-### Pack Recommande
-```
+### Pack Recommande (P1 Dropshipper)
+
+```text
 QUICK WIN (€390)
 ├── Audit express Shopify
 ├── 1 flow au choix (Abandoned Cart recommande)
@@ -98,12 +107,14 @@ ROI ATTENDU: +€500-1500/mois (recovery cart seul)
 PAYBACK: < 1 mois
 ```
 
-### Canaux d'Acquisition
+### Canaux d'Acquisition (P1 Dropshipper)
+
 - LinkedIn: "Shopify store owner", "Dropshipping entrepreneur"
 - Google Maps: N/A
 - Inbound: Articles blog "automatisation dropshipping 2026"
 
-### Messages Cles
+### Messages Cles (P1 Dropshipper)
+
 - "Recuperez 10-15% de vos paniers abandonnes automatiquement"
 - "Setup en 48-72h, pas de competences techniques requises"
 - "390€ = 1 vente moyenne recuperee, ROI des le 1er mois"
@@ -112,8 +123,9 @@ PAYBACK: < 1 mois
 
 ## PERSONA 2: E-COMMERCE SCALER
 
-### Profil
-```
+### Profil (P2 Scaler)
+
+```text
 Secteur:        E-commerce etabli
 Plateforme:     Shopify Plus / WooCommerce
 CA Mensuel:     50k - 500k€
@@ -122,38 +134,42 @@ Niveau Tech:    Intermediaire a avance
 Maturite:       2-5+ ans d'activite
 ```
 
-### Description
+### Description (P2 Scaler)
+
 Marque e-commerce en phase de scaling agressif. A deja une stack marketing (Klaviyo, Meta Ads, Google Ads). Budget ads consequent mais ROAS en baisse avec l'echelle. Besoin de segmentation avancee et contenu video pour ads.
 
-### Pain Points Critiques
+### Pain Points Critiques (P2 Scaler)
 
 | Pain Point | Impact Business | Urgence |
-|------------|-----------------|---------|
+| --- | --- | --- |
 | ROAS en baisse avec scale | -20-40% profitabilite | CRITIQUE |
 | Segmentation client basique | Messages generiques | HAUTE |
 | Production video lente | Bottleneck creative | HAUTE |
 | Dashboard fragmente | Pas de vision unifiee | MOYENNE |
 | LTV non optimisee | Focus acquisition only | HAUTE |
 
-### Objections Frequentes
+### Objections Frequentes (P2 Scaler)
+
 - "On a deja une agence/equipe interne"
 - "Notre stack fonctionne deja"
 - "Le prix est eleve pour du consulting"
 - "On manque de temps pour implementer"
 
-### Reponses aux Objections
+### Reponses aux Objections (P2 Scaler)
+
 | Objection | Reponse |
-|-----------|---------|
+| --- | --- |
 | Agence existante | Complementaire, expertise automation specifique |
 | Stack OK | Audit gratuit revele toujours des gaps |
 | Prix | ROI 3x en 90 jours ou ajustement |
 | Temps | Livraison cle en main, 0 effort votre cote |
 
-### Automations Pertinentes (43 total, 22 implementees)
+### Automations Pertinentes (P2 Scaler)
 
 #### P0 - Essentielles
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | RFM Segmentation | LTV +30% | Script OK |
 | CinematicAds Director | Video AI 10x faster | Script OK |
 | Competitor Clone AI | Clone ads concurrents | Script OK |
@@ -161,15 +177,17 @@ Marque e-commerce en phase de scaling agressif. A deja une stack marketing (Klav
 | Win-Back Flow | Reactivation 5-10% | Template Klaviyo |
 
 #### P1 - Importantes
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | E-commerce Ads Factory | Multi-ratio ads | Script OK |
 | Browse Abandonment | +5% conversions | Template Klaviyo |
 | Looker Dashboard | Vision 360° | Template |
 | A/B Sender Rotation | +5-10% opens | Script OK |
 
-### Pack Recommande
-```
+### Pack Recommande (P2 Scaler)
+
+```text
 GROWTH (€1399)
 ├── Audit complet avec rapport
 ├── 5 flows (Welcome + Cart + Post + Win-Back + Browse)
@@ -187,12 +205,14 @@ ROI ATTENDU: +15-25% LTV, -20% CAC
 PAYBACK: 60-90 jours
 ```
 
-### Canaux d'Acquisition
+### Canaux d'Acquisition (P2 Scaler)
+
 - LinkedIn: "E-commerce Director", "DTC Brand Founder", "Growth Manager"
 - Inbound: "scaling e-commerce automation", "Shopify Plus optimization"
 - Referral: Via Persona 1 qui scale
 
-### Messages Cles
+### Messages Cles (P2 Scaler)
+
 - "Scalez sans perdre en ROAS grace a la segmentation AI"
 - "10x votre production video avec CinematicAds"
 - "Dashboard unifie: Meta + Google + Klaviyo + Shopify"
@@ -201,8 +221,9 @@ PAYBACK: 60-90 jours
 
 ## PERSONA 3: B2B LEAD HUNTER
 
-### Profil
-```
+### Profil (P3 Hunter)
+
+```text
 Secteur:        Services B2B / Consulting / SaaS
 Activite:       Agence, consultant, startup SaaS
 CA Mensuel:     10k - 100k€
@@ -211,38 +232,42 @@ Niveau Tech:    Variable (souvent non-tech)
 Maturite:       1-5 ans
 ```
 
-### Description
+### Description (P3 Hunter)
+
 Consultant solo, petite agence ou startup SaaS cherchant des leads B2B. Fait de la prospection manuelle chronophage (LinkedIn, cold email). Besoin d'automatiser l'acquisition tout en gardant la personnalisation.
 
-### Pain Points Critiques
+### Pain Points Critiques (P3 Hunter)
 
 | Pain Point | Impact Business | Urgence |
-|------------|-----------------|---------|
+| --- | --- | --- |
 | Prospection manuelle trop lente | 10-20h/semaine | CRITIQUE |
 | Leads non qualifies | 80% temps perdu | HAUTE |
 | Outreach generique | <1% reply rate | HAUTE |
 | Pas de CRM structure | Leads perdus | MOYENNE |
 | Follow-up oublie | Opportunites ratees | HAUTE |
 
-### Objections Frequentes
+### Objections Frequentes (P3 Hunter)
+
 - "Le scraping est-il legal?"
 - "Ca va spammer mes prospects"
 - "J'ai deja essaye des outils, ca ne marche pas"
 - "Mon business est trop specifique"
 
-### Reponses aux Objections
+### Reponses aux Objections (P3 Hunter)
+
 | Objection | Reponse |
-|-----------|---------|
+| --- | --- |
 | Legal | Donnees publiques, RGPD compliant |
 | Spam | Sequences personnalisees, pas de mass mailing |
 | Outils testes | Setup + strategie, pas juste un outil |
 | Specifique | Targeting hyper-cible par secteur |
 
-### Automations Pertinentes (29 total, 19 implementees)
+### Automations Pertinentes (P3 Hunter)
 
 #### P0 - Essentielles
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | LinkedIn Lead Scraper | +400 leads/jour | Script natif ✅ |
 | Email Outreach Sequence | 3 emails personnalises | Script natif ✅ |
 | Google Maps Sourcing | Leads locaux cibles | Script OK |
@@ -250,15 +275,17 @@ Consultant solo, petite agence ou startup SaaS cherchant des leads B2B. Fait de 
 | Lead Scoring | Focus leads chauds | Script natif ⏳ |
 
 #### P1 - Importantes
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | Data Enrichment | Emails verifies | Integration Apollo |
 | Geo Segmentation | Messages localises | Script OK |
 | Hiring Intelligence | Timing parfait | Script OK |
 | Welcome Series | Nurturing inbound | Template Klaviyo |
 
-### Pack Recommande
-```
+### Pack Recommande (P3 Hunter)
+
+```text
 ESSENTIALS (€790)
 ├── Audit pipeline actuel
 ├── LinkedIn Lead Scraper configure
@@ -272,12 +299,14 @@ ROI ATTENDU: +400 leads/jour, 3% reply rate
 PAYBACK: 2-4 semaines (1 deal = ROI)
 ```
 
-### Canaux d'Acquisition
+### Canaux d'Acquisition (P3 Hunter)
+
 - LinkedIn: "Founder", "CEO", "Business Developer", "Consultant"
 - Inbound: "automatisation prospection LinkedIn", "cold email automation"
 - Referral: Ecosysteme startup/consulting
 
-### Messages Cles
+### Messages Cles (P3 Hunter)
+
 - "400 leads qualifies par jour, sans effort manuel"
 - "De 1% a 3% reply rate grace a la personnalisation AI"
 - "Un deal ferme = ROI du pack"
@@ -286,8 +315,9 @@ PAYBACK: 2-4 semaines (1 deal = ROI)
 
 ## PERSONA 4: COMMERCE LOCAL / SERVICE
 
-### Profil
-```
+### Profil (P4 Local)
+
+```text
 Secteur:        Services locaux
 Activite:       Restaurant, salon, garage, cabinet medical
 CA Mensuel:     5k - 30k€
@@ -296,52 +326,58 @@ Niveau Tech:    Debutant
 Maturite:       Variable (souvent etabli)
 ```
 
-### Description
+### Description (P4 Local)
+
 Commerce ou service local avec clientele de proximite. Le telephone sonne constamment, les no-shows coutent cher, la presence en ligne est negligee. Besoin de solutions simples qui fonctionnent sans effort.
 
-### Pain Points Critiques
+### Pain Points Critiques (P4 Local)
 
 | Pain Point | Impact Business | Urgence |
-|------------|-----------------|---------|
+| --- | --- | --- |
 | No-shows frequents | -10-20% CA | CRITIQUE |
 | Telephone permanent | Interruptions constantes | HAUTE |
 | Pas de rappels automatises | Oublis clients | HAUTE |
 | Presence Google negligee | Visibilite faible | MOYENNE |
 | SMS couteux | €0.05-0.10/SMS | MOYENNE |
 
-### Objections Frequentes
+### Objections Frequentes (P4 Local)
+
 - "Je n'ai pas le temps pour ca"
 - "Mes clients sont ages, ils n'utilisent pas WhatsApp"
 - "C'est trop moderne pour mon business"
 - "Je me debrouille avec mon cahier"
 
-### Reponses aux Objections
+### Reponses aux Objections (P4 Local)
+
 | Objection | Reponse |
-|-----------|---------|
+| --- | --- |
 | Temps | Setup une fois, fonctionne seul ensuite |
 | Clients ages | 70%+ des 50-70 ans utilisent WhatsApp |
 | Trop moderne | Interface simple, pas de formation |
 | Cahier | Et les no-shows? Et les oublis? |
 
-### Automations Pertinentes (23 total, 19 implementees)
+### Automations Pertinentes (P4 Local)
 
 #### P0 - Essentielles
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | WhatsApp Booking Confirmation | 98% open rate | Script natif ✅ |
 | WhatsApp Reminders 24h + 1h | -30% no-shows | Script natif ✅ |
 | Grok Voice Telephony | 24/7 booking AI | Script natif ✅ |
 | Google Apps Script Booking | Cancel + reschedule | Script OK |
 
 #### P1 - Importantes
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | Google Maps Sourcing | Leads locaux | Script OK |
 | Geo Segmentation | Messages localises | Script OK |
 | Meta Leads Sync | Capture formulaires | Script OK |
 
-### Pack Recommande
-```
+### Pack Recommande (P4 Local)
+
+```text
 QUICK WIN (€390)
 ├── Voice AI Booking configure
 ├── WhatsApp confirmations + rappels
@@ -353,12 +389,14 @@ ROI ATTENDU: -30% no-shows = +€500-2000/mois
 PAYBACK: < 1 mois
 ```
 
-### Canaux d'Acquisition
+### Canaux d'Acquisition (P4 Local)
+
 - Google Maps: Restaurants, salons, garages, cliniques
 - LinkedIn: Gerants, proprietaires commerce
 - Local: Bouche a oreille, partenariats locaux
 
-### Messages Cles
+### Messages Cles (P4 Local)
+
 - "-30% de no-shows avec rappels WhatsApp automatiques"
 - "Votre telephone peut prendre des RDV 24h/24"
 - "WhatsApp = 98% lu vs 20% SMS, et c'est gratuit"
@@ -367,8 +405,9 @@ PAYBACK: < 1 mois
 
 ## PERSONA 5: MARKETING AGENCY
 
-### Profil
-```
+### Profil (P5 Agency)
+
+```text
 Secteur:        Marketing digital / Performance
 Activite:       Agence creative, performance, social
 CA Mensuel:     20k - 200k€
@@ -377,38 +416,42 @@ Niveau Tech:    Avance
 Maturite:       3-10+ ans
 ```
 
-### Description
+### Description (P5 Agency)
+
 Agence marketing gerant plusieurs clients e-commerce ou B2B. Sous pression pour produire plus de contenu, plus vite, moins cher. Les clients demandent toujours plus de creatives video mais la production est un bottleneck.
 
-### Pain Points Critiques
+### Pain Points Critiques (P5 Agency)
 
 | Pain Point | Impact Business | Urgence |
-|------------|-----------------|---------|
+| --- | --- | --- |
 | Production video lente | Bottleneck clients | CRITIQUE |
 | Cout production eleve | Marges compressees | HAUTE |
 | Clients demandent + de contenu | Capacite limitee | HAUTE |
 | Analyse concurrence manuelle | Temps R&D important | MOYENNE |
 | Avatars/UGC couteux | €500-2000/video | HAUTE |
 
-### Objections Frequentes
+### Objections Frequentes (P5 Agency)
+
 - "On a notre propre stack"
 - "Nos clients veulent du sur-mesure"
 - "L'AI ne remplace pas la creativite"
 - "Le prix est eleve pour un outil"
 
-### Reponses aux Objections
+### Reponses aux Objections (P5 Agency)
+
 | Objection | Reponse |
-|-----------|---------|
+| --- | --- |
 | Stack propre | Complementaire, acceleration production |
 | Sur-mesure | AI = draft rapide, humain = finition |
 | Creativite | AI amplifie, ne remplace pas |
 | Prix | ROI: 1 video AI = €50 vs €500 traditionnel |
 
-### Automations Pertinentes (14 total, 10 implementees)
+### Automations Pertinentes (P5 Agency)
 
 #### P0 - Essentielles
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | CinematicAds Director | Video AI cinema-quality | Script OK |
 | Competitor Clone AI | Analyse + recreation ads | Script OK |
 | E-commerce Ads Factory | Multi-ratio exports | Script OK |
@@ -416,14 +459,16 @@ Agence marketing gerant plusieurs clients e-commerce ou B2B. Sous pression pour 
 | AI Talking Video | Lip-sync AI | Script natif ✅ |
 
 #### P1 - Importantes
+
 | Automation | Benefice | Status |
-|------------|----------|--------|
+| --- | --- | --- |
 | Asset Factory (Dual AI) | Vertex + xAI | Script OK |
 | Auto Blog Article | Contenu SEO | Script natif ✅ |
 | Promo Video Generator | Social content | Script OK |
 
-### Pack Recommande
-```
+### Pack Recommande (P5 Agency)
+
+```text
 GROWTH + CUSTOM (€1399 + sur devis)
 ├── Pack Growth complet
 ├── CinematicAds onboarding
@@ -442,12 +487,14 @@ ROI ATTENDU: 10x vitesse production, -80% cout/video
 PAYBACK: 1-2 mois (volume clients)
 ```
 
-### Canaux d'Acquisition
+### Canaux d'Acquisition (P5 Agency)
+
 - LinkedIn: "Agency Owner", "Creative Director", "Head of Production"
 - Inbound: "AI video production agency", "scale creative production"
 - Partnerships: Outils complementaires (Shopify Partners, Klaviyo Partners)
 
-### Messages Cles
+### Messages Cles (P5 Agency)
+
 - "10x votre capacite de production video sans embaucher"
 - "De €500/video a €50/video avec la meme qualite"
 - "Clonez les meilleures ads de vos concurrents en 10 minutes"
@@ -457,8 +504,9 @@ PAYBACK: 1-2 mois (volume clients)
 ## MATRICE DE PRIORISATION
 
 ### Par Volume Potentiel
+
 | Rang | Persona | Volume Marche | Facilite Conversion |
-|------|---------|---------------|---------------------|
+| --- | --- | --- | --- |
 | 1 | E-commerce Dropshipper | Tres eleve | Facile |
 | 2 | Commerce Local | Eleve | Moyen |
 | 3 | B2B Lead Hunter | Moyen | Facile |
@@ -466,8 +514,9 @@ PAYBACK: 1-2 mois (volume clients)
 | 5 | Marketing Agency | Faible | Difficile |
 
 ### Par Valeur Client (LTV)
+
 | Rang | Persona | Deal Initial | Potentiel Retainer | LTV 12 mois |
-|------|---------|--------------|--------------------| ------------|
+| --- | --- | --- | --- | --- |
 | 1 | Marketing Agency | €2000-5000 | €490/mois | €8000-11000 |
 | 2 | E-commerce Scaler | €1399 | €490/mois | €7300 |
 | 3 | B2B Lead Hunter | €790 | €290/mois | €4270 |
@@ -475,7 +524,8 @@ PAYBACK: 1-2 mois (volume clients)
 | 5 | E-commerce Dropshipper | €390 | €290/mois | €3870 |
 
 ### Strategie Recommandee
-```
+
+```text
 PHASE 1 (Mois 1-2): Volume + Quick Wins
 ├── Focus: E-commerce Dropshipper + Commerce Local
 ├── Canaux: LinkedIn scraping + Google Maps
@@ -497,7 +547,8 @@ PHASE 3 (Mois 5-6): Premium + Retainers
 ## TEMPLATES OUTREACH PAR PERSONA
 
 ### E-commerce Dropshipper
-```
+
+```text
 Sujet: Vos paniers abandonnes recuperent combien?
 
 [Prenom],
@@ -518,7 +569,8 @@ Interesse par un diagnostic en 24h?
 ```
 
 ### B2B Lead Hunter
-```
+
+```text
 Sujet: 400 leads/jour sans prospection manuelle
 
 [Prenom],
@@ -539,7 +591,8 @@ Ca vous interesse de voir comment?
 ```
 
 ### Commerce Local
-```
+
+```text
 Sujet: -30% de no-shows pour [NOM_COMMERCE]
 
 [Prenom],
@@ -566,7 +619,7 @@ On en parle 10 minutes?
 ### BANT par Persona
 
 | Persona | Budget | Authority | Need | Timeline |
-|---------|--------|-----------|------|----------|
+| --- | --- | --- | --- | --- |
 | Dropshipper | €300-800 | Owner = decideur | Recovery CA | Immediat |
 | Scaler | €1000-2000 | CMO/CEO | Scale profitably | 30-60 jours |
 | B2B Hunter | €500-1500 | Owner/BizDev | Leads volume | Immediat |
@@ -574,8 +627,9 @@ On en parle 10 minutes?
 | Agency | €2000-5000 | Agency Owner | Production speed | 30-90 jours |
 
 ### Signaux d'Achat
+
 | Persona | Signaux Positifs | Red Flags |
-|---------|------------------|-----------|
+| --- | --- | --- |
 | Dropshipper | Ads actives, reviews recentes | 0 traffic, store abandonne |
 | Scaler | Hiring, funding, press | ROAS >5 (pas de probleme) |
 | B2B Hunter | Posts LinkedIn reguliers | "Je vais y reflechir" x3 |
@@ -589,7 +643,7 @@ On en parle 10 minutes?
 ### Mapping Complet
 
 | Automation ID | Dropshipper | Scaler | B2B Hunter | Local | Agency |
-|---------------|-------------|--------|------------|-------|--------|
+| --- | --- | --- | --- | --- | --- |
 | abandoned-cart | X | X | | | |
 | welcome-series | X | X | X | | |
 | post-purchase | X | X | | | |
@@ -605,6 +659,6 @@ On en parle 10 minutes?
 
 ---
 
-*Document genere le 2025-12-23*
-*Source: Session 84 Forensic Audit*
+*Dernière mise à jour: 08/01/2026 (Mission Complete)*
+*Source: Session 130 Forensic Audit*
 *Maintenu par: 3A Automation*

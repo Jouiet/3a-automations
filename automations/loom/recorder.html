@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Loom Automation Recorder</title>
+    <!-- Official Loom SDK (Simulated CDN for Architecture) -->
+    <script type="module">
+        import { setup } from "https://esm.sh/@loomhq/record-sdk";
+
+        const API_KEY = "YOUR_PUBLIC_APP_ID"; // In production, injected via ENV
+
+        async function init() {
+            const { supported, error } = await setup({
+                publicAppId: API_KEY,
+            });
+
+            if (!supported) {
+                console.error("Loom not supported:", error);
+                document.body.innerHTML = `<h1>Error: ${error}</h1>`;
+                return;
+            }
+
+            const button = document.getElementById('record-btn');
+            button.disabled = false;
+
+            button.addEventListener('click', async () => {
+                // This triggers the Loom Interface
+                console.log("Starting Loom Recording...");
+                // Note: The SDK typically requires user interaction to start
+            });
+        }
+
+        init();
+    </script>
+</head>
+
+<body>
+    <h1>Agentic Video Recorder</h1>
+    <p>Status: <span id="status">Ready</span></p>
+    <button id="record-btn" disabled>Start Recording (Agent Trigger)</button>
+</body>
+
+</html>

@@ -8,7 +8,7 @@
 
 ## MISSION COMPLETE (08/01/2026)
 
-```
+```text
 MIGRATION COMPLETE: n8n → Native Node.js Scripts
 ├── n8n workflows: 0 (all migrated to native scripts)
 ├── Native scripts: 8 résilients (automations/agency/core/)
@@ -19,14 +19,14 @@ AUTOMATION RATE FACTUEL:
 ├── SYSTEM STATE: Level 4 Autonomous Agentic Engine (AEO Ready)
 │   ├── Master-scheduler + scripts .cjs: 17 automations
 │   └── Plateforme (Klaviyo/Shopify): 11 automations
-├── TOTAL Tool Stack: 118 Verified Tools
+├── TOTAL Tool Stack: 174 Verified Tools
 │   └── On-demand, templates, external, one-time, conceptual
 └── CONCLUSION: 100% de ce qui PEUT être automatisé EST automatisé
 ```
 
 ---
 
-```
+```text
                     ╔═══════════════════════════════════════════════════════════════╗
                     ║          FLYWHEEL E-COMMERCE AUTOMATION SYSTEM                ║
                     ║     Acquisition → Conversion → Retention → Advocacy           ║
@@ -57,7 +57,7 @@ AUTOMATION RATE FACTUEL:
 
 ## TABLE DES MATIERES
 
-1. [KPIs & Benchmarks 2025](#1-kpis--benchmarks-2025)
+1. [KPIs & Benchmarks 2026](#1-kpis--benchmarks-2026)
 2. [Phase 1: ACQUISITION](#2-phase-1-acquisition)
 3. [Phase 2: CONVERSION](#3-phase-2-conversion)
 4. [Phase 3: RETENTION](#4-phase-3-retention)
@@ -75,7 +75,7 @@ AUTOMATION RATE FACTUEL:
 ### Benchmarks Industrie E-commerce
 
 | Metric | Mauvais | Moyen | Bon | Excellent |
-|--------|---------|-------|-----|-----------|
+| --- | --- | --- | --- | --- |
 | **Conversion Rate** | <1.5% | 2-3% | 3-4% | >4% |
 | **Cart Abandonment** | >80% | 70-80% | 60-70% | <60% |
 | **Email Open Rate** | <15% | 15-25% | 25-35% | >35% |
@@ -87,7 +87,7 @@ AUTOMATION RATE FACTUEL:
 ### ROAS Benchmarks par Plateforme 2025
 
 | Plateforme | ROAS Moyen | ROAS Objectif | CPM Moyen |
-|------------|------------|---------------|-----------|
+| --- | --- | --- | --- |
 | **Google Ads (PMax)** | 4.5x | >5x | $15-25 |
 | **Meta Ads** | 2.2x | >3x | $8-15 |
 | **TikTok Ads** | 1.4x | >2x | $7-10 |
@@ -95,7 +95,7 @@ AUTOMATION RATE FACTUEL:
 
 ### Revenue Attribution Target
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    REVENUE MIX OPTIMAL                       │
 ├─────────────────────────────────────────────────────────────┤
@@ -114,7 +114,7 @@ AUTOMATION RATE FACTUEL:
 
 ### 2.1 Architecture Paid Ads Multi-Canal
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         ACQUISITION FUNNEL                                   │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -171,7 +171,7 @@ const CUSTOMER_PARAMS = {
 
 **Advantage+ Campaign Structure:**
 
-```
+```yaml
 ADVANTAGE+ SHOPPING
 ├── Budget: $200-500/day minimum
 ├── Optimization: Purchase (Value)
@@ -185,7 +185,7 @@ ADVANTAGE+ SHOPPING
 
 ### 2.3 Google Ads PMax Structure
 
-```
+```yaml
 PERFORMANCE MAX CAMPAIGN
 ├── Asset Groups (par catégorie produit)
 │   ├── Headlines: 15 (min 5)
@@ -209,7 +209,7 @@ PERFORMANCE MAX CAMPAIGN
 
 ### 2.4 TikTok Smart+ Configuration
 
-```
+```text
 TIKTOK SMART+ CATALOG
 ├── Optimization: Value (not Volume)
 ├── Creative Format: Spark Ads + UGC
@@ -284,7 +284,7 @@ const APIFY_ACTORS = {
 
 ### 3.1 Shopify Flow - Customer Journey Automation
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    SHOPIFY FLOW AUTOMATION MAP                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -332,7 +332,7 @@ const APIFY_ACTORS = {
 
 **Cart Recovery Stack:**
 
-```
+```text
 ABANDONED CART SEQUENCE
 │
 ├─► T+1h: Shopify Email (native, free)
@@ -389,7 +389,7 @@ const BUNDLE_RULES = {
 
 ### 4.1 Klaviyo Flow Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         KLAVIYO FLOW MATRIX                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -448,7 +448,7 @@ const BUNDLE_RULES = {
 
 ### 4.2 SMS Marketing (Klaviyo)
 
-```
+```text
 SMS AUTOMATION RULES
 │
 ├─► Abandoned Cart (T+1h after email)
@@ -495,7 +495,7 @@ const REPLENISHMENT_CONFIG = {
 
 ### 5.1 Review Collection Automation
 
-```
+```text
 REVIEW COLLECTION FLOW
 │
 ├─► Shopify Flow: Order Fulfilled
@@ -520,7 +520,7 @@ REVIEW COLLECTION FLOW
 
 ### 5.2 Referral Program
 
-```
+```text
 REFERRAL STRUCTURE
 │
 ├─► Referrer Reward: $15 store credit
@@ -535,7 +535,7 @@ REFERRAL STRUCTURE
 
 ### 5.3 UGC Pipeline
 
-```
+```text
 UGC AUTOMATION
 │
 ├─► Apify: Instagram Hashtag Scraper
@@ -561,7 +561,7 @@ UGC AUTOMATION
 
 ### 6.1 Architecture Diagram
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        FULL STACK ARCHITECTURE                               │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -687,7 +687,7 @@ APIFY_TOKEN=apify_api_xxx
 ### 7.1 Scripts Disponibles (agency-scripts-Q1-GOLD)
 
 | Script | Fonction | Frequency |
-|--------|----------|-----------|
+| :--- | :--- | :--- |
 | `sync-meta-leads-to-shopify.cjs` | Lead Ads → Customers | Hourly |
 | `sync-google-ads-leads-to-shopify.cjs` | Google Leads → Customers | Hourly |
 | `sync-tiktok-ads-leads-to-shopify.cjs` | TikTok Leads → Customers | Hourly |
@@ -700,7 +700,7 @@ APIFY_TOKEN=apify_api_xxx
 ### 7.2 Scripts Python (alpha-medical-python-agency)
 
 | Script | Fonction | Frequency |
-|--------|----------|-----------|
+| :--- | :--- | :--- |
 | `configure_klaviyo.py` | Initial Setup | Once |
 | `upload_templates_to_klaviyo.py` | Email Templates | On-demand |
 | `complete_all_shopify_policies.py` | Legal Pages | Once |
@@ -841,7 +841,7 @@ jobs:
 
 ### 9.1 Investment vs Returns
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         ROI PROJECTION (12 MONTHS)                           │
 │                      SHOPIFY GROW - STACK PROFESSIONNEL                      │
@@ -894,7 +894,7 @@ jobs:
 
 ### 9.2 Implementation Timeline
 
-```
+```text
 WEEK 1-2: FOUNDATION
 ├─► Shopify Flow setup (loyalty tiers, tagging)
 ├─► Klaviyo integration + core flows
@@ -928,7 +928,7 @@ ONGOING: OPTIMIZATION
 
 ### 9.3 Success Metrics Dashboard
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         WEEKLY KPI DASHBOARD                                 │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -956,7 +956,7 @@ ONGOING: OPTIMIZATION
 
 ### 10.1 Double Pilier Business Model
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    DUAL AGENCY MODEL: AAA + MARKETING                        │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -996,7 +996,7 @@ ONGOING: OPTIMIZATION
 
 ### 10.2 Stack Recommandé pour Agence AAA
 
-```
+```text
 STACK OPTIMAL (MCP-Ready)
 ├── Email/SMS: KLAVIYO (MCP disponible, 20% partner rev share)
 │   └─► Predictive analytics, AI subject lines
@@ -1023,7 +1023,7 @@ STACK OPTIMAL (MCP-Ready)
 
 ### 10.3 Revenus Réalistes Année 1
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    PROJECTIONS RÉALISTES ANNÉE 1                             │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -1072,7 +1072,7 @@ STACK OPTIMAL (MCP-Ready)
 
 ### 11.1 Position dans le Flywheel
 
-```
+```text
                          VOICE AI BOOKING INTEGRATION
                          ════════════════════════════
 
@@ -1085,7 +1085,7 @@ STACK OPTIMAL (MCP-Ready)
                     ┌─────────────────────────────────────┐
                     │      🎤 VOICE AI ASSISTANT          │
                     │  - Web Speech API (gratuit)         │
-                    │  - 118 automations catalog           │
+                    │  - 174 automations catalog           │
                     │  - Sector-specific responses        │
                     │  - Fallback text for Firefox        │
                     └───────────────┬─────────────────────┘
@@ -1153,8 +1153,8 @@ const VOICE_BOOKING_INTEGRATION = {
 
 ### 11.3 Sector Templates (Booking Config)
 
-| Sector | Hours | Blocked | Duration | Buffer |
-|--------|-------|---------|----------|--------|
+| Sector | Hours | Étape | Action | Outil |
+| :--- | :--- | :--- | :--- | :--- |
 | **Consultant** | Lun-Ven 9h-18h | 12h-14h | 30min | 0min |
 | **Restaurant** | Mar-Dim 11h-23h | 15h-18h | 60min | 15min |
 | **Medical** | Lun-Sam 8h-20h | 12h-14h | 20min | 10min |
@@ -1165,7 +1165,7 @@ const VOICE_BOOKING_INTEGRATION = {
 ### 11.4 GA4 Events Tracked
 
 | Event | Trigger | Parameters |
-|-------|---------|------------|
+| :--- | :--- | :--- |
 | `voice_booking_started` | User initiates booking | step, industry |
 | `voice_booking_slot_selected` | Slot chosen | slot_date, slot_time |
 | `voice_booking_completed` | Booking confirmed | service, datetime |
@@ -1174,7 +1174,7 @@ const VOICE_BOOKING_INTEGRATION = {
 
 ### 11.5 WhatsApp Business API Integration (FREE)
 
-```
+```text
 WHATSAPP REMINDERS (POST-BOOKING)
 │
 ├─► T-24h: Service conversation (FREE)
@@ -1216,11 +1216,11 @@ node automations/agency/core/sync-knowledge-base.cjs
 ## CHANGELOG
 
 | Version | Date | Modifications |
-|---------|------|---------------|
+| :--- | :--- | :--- |
 | 2.8 | 27/12/2025 | Session 100: MCP empirical verification (11/14 = 79%), Voice AI section +15% height, "appels inclus" text |
 | 2.7 | 26/12/2025 | Session 97: Lead Tracking (Landing→Dashboard CRM), Invoice multi-currency, Conversion tracking VERIFIED |
-| 5.0 | 08/01/2026 | Session 128: 118 tools, Level 4 Agentic Engine, 18 agents, Full Sync |
-| 2.6 | 26/12/2025 | Session 96: 118 automations, Voice AI Product (Schema.org SoftwareApplication), blueprint protection |
+| 5.0 | 08/01/2026 | Session 128: 174 tools, Level 4 Agentic Engine, 18 agents, Full Sync |
+| 2.6 | 26/12/2025 | Session 96: 174 automations, Voice AI Product (Schema.org SoftwareApplication), blueprint protection |
 | 2.5 | 23/12/2025 | Session 83: Ultra Forensic 20 categories, 133 issues fixed (0 CRITICAL), 9 MCPs fonctionnels vérifiés, logo paths normalisés |
 | 2.4 | 23/12/2025 | Session 82: Forensic frontend audit, AEO optimization, 77 automations |
 | 2.3 | 20/12/2025 | Session 61: Voice AI + Booking integration, 72 automations (segmentation v4.0) |

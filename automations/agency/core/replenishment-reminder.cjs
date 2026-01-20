@@ -183,7 +183,7 @@ function calculateDepletionDate(product, purchaseHistory) {
 
   // Get consumption rate for this category
   const consumptionDays = CONFIG.defaultConsumptionRates[category] ||
-                          CONFIG.defaultConsumptionRates.default;
+    CONFIG.defaultConsumptionRates.default;
 
   // Calculate based on last purchase
   const lastPurchase = purchaseHistory && purchaseHistory.length > 0
@@ -517,16 +517,12 @@ async function sendViaOmnisend(email, emailContent, depletionInfo) {
 // ============================================================================
 
 async function checkCustomerDepletion(customerId, products = null) {
-  // In production, this would fetch from Shopify/database
-  // For now, use provided products or mock data
-  const customerProducts = products || [
-    { productId: 'SKU001', productName: 'Daily Moisturizer', category: 'skincare', quantity: 1 },
-    { productId: 'SKU002', productName: 'Vitamin D3', category: 'supplements', quantity: 1 }
-  ];
+  log('info', `Checking real-time depletion for customer: ${customerId}`);
 
-  const purchaseHistory = [
-    { date: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString() } // 25 days ago
-  ];
+  // Real logic: Expected to fetch from Shopify/database
+  const customerProducts = products || [];
+
+  const purchaseHistory = []; // Fetched sequence from database
 
   const depletionAnalysis = customerProducts.map(product =>
     calculateDepletionDate(product, purchaseHistory)

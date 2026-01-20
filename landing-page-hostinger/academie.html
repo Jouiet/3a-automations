@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https:; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://ipapi.co https://script.google.com https://www.google-analytics.com; frame-src 'self' https://www.googletagmanager.com;">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Académie 3A Automation - Apprenez à automatiser votre marketing et générer des leads qualifiés. Parcours d'apprentissage, cours et guides pratiques pour clients abonnés.">
@@ -77,136 +79,8 @@
   }
   </script>
 
-  <style>
-    *,::after,::before{box-sizing:border-box;margin:0;padding:0}
-    :root{--primary:#4FBAF1;--primary-dark:#2B6685;--secondary:#191E35;--text-light:#E4F4FC;--text-secondary:#8BA3B9;--success:#10B981;--warning:#F59E0B;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
-    html{scroll-behavior:smooth}
-    body{font-family:var(--font-sans);font-size:16px;line-height:1.6;color:var(--text-light);background:var(--secondary);-webkit-font-smoothing:antialiased}
-    .container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
-
-    /* Header */
-    .header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 0;background:rgba(25,30,53,.98);border-bottom:1px solid rgba(79,186,241,0.1)}
-    .header .container{display:flex;align-items:center;justify-content:space-between}
-    .logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;color:var(--text-light)}
-    .logo img{width:40px;height:40px}
-    .logo-text{font-weight:700;font-size:1.25rem}
-    .logo-sub{font-size:0.625rem;color:var(--primary);letter-spacing:0.1em}
-    .nav{display:flex;gap:2rem}
-    .nav a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem;transition:color 0.2s}
-    .nav a:hover{color:var(--primary)}
-    @media(max-width:768px){.nav{display:none}}
-
-    /* Main */
-    main{padding-top:100px;min-height:100vh}
-
-    /* Hero */
-    .hero-academy{padding:4rem 0 3rem;border-bottom:1px solid rgba(79,186,241,0.1)}
-    .hero-academy h1{font-size:2.5rem;font-weight:800;margin-bottom:1rem}
-    .hero-academy h1 span{color:var(--primary)}
-    .hero-subtitle{color:var(--text-secondary);font-size:1.125rem;margin-bottom:2rem;max-width:700px}
-    .hero-features{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem}
-    .hero-feature{display:flex;align-items:center;gap:0.5rem;color:var(--text-secondary);font-size:0.875rem}
-    .hero-feature svg{color:var(--success)}
-
-    /* Access Banner */
-    .access-banner{background:rgba(79,186,241,0.08);border:1px solid rgba(79,186,241,0.2);border-radius:8px;padding:1.25rem 1.5rem;margin:2rem 0;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-    .access-banner svg{color:var(--primary);flex-shrink:0}
-    .access-banner p{margin:0;flex:1}
-    .access-banner strong{color:var(--text-light)}
-    .access-banner a{color:var(--primary)}
-
-    /* Sections */
-    .section{padding:4rem 0}
-    .section-title{font-size:1.75rem;font-weight:700;margin-bottom:0.5rem}
-    .section-subtitle{color:var(--text-secondary);margin-bottom:2rem}
-
-    /* Navigation Tabs */
-    .nav-tabs{display:flex;gap:0.5rem;border-bottom:1px solid rgba(79,186,241,0.2);margin-bottom:2rem;overflow-x:auto;padding-bottom:0.5rem}
-    .nav-tab{padding:0.75rem 1.5rem;background:transparent;border:none;color:var(--text-secondary);cursor:pointer;font-size:0.875rem;font-weight:500;border-radius:6px 6px 0 0;white-space:nowrap;transition:all 0.2s}
-    .nav-tab:hover{color:var(--text-light);background:rgba(79,186,241,0.05)}
-    .nav-tab.active{color:var(--primary);background:rgba(79,186,241,0.1);border-bottom:2px solid var(--primary)}
-
-    /* Tab Content */
-    .tab-content{display:none}
-    .tab-content.active{display:block}
-
-    /* Cards Grid */
-    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-    @media(max-width:480px){.cards-grid{grid-template-columns:1fr}}
-
-    /* Learning Path Card */
-    .path-card{background:linear-gradient(135deg,rgba(79,186,241,0.08) 0%,rgba(25,30,53,0.9) 100%);border:1px solid rgba(79,186,241,0.2);border-radius:16px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden}
-    .path-card:hover{border-color:rgba(79,186,241,0.5);transform:translateY(-4px)}
-    .path-badge{position:absolute;top:1rem;right:1rem;background:var(--primary);color:var(--secondary);padding:0.25rem 0.75rem;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase}
-    .path-icon{width:64px;height:64px;background:rgba(79,186,241,0.15);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem}
-    .path-icon svg{width:32px;height:32px;color:var(--primary)}
-    .path-title{font-size:1.25rem;font-weight:700;margin-bottom:0.5rem}
-    .path-role{color:var(--primary);font-size:0.875rem;margin-bottom:1rem}
-    .path-description{color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.5rem;line-height:1.6}
-    .path-modules{margin-bottom:1.5rem}
-    .path-modules-title{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;margin-bottom:0.75rem;letter-spacing:0.05em}
-    .path-modules-list{display:flex;flex-direction:column;gap:0.5rem}
-    .path-module{display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--text-light)}
-    .path-module svg{color:var(--success);width:16px;height:16px;flex-shrink:0}
-    .path-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid rgba(79,186,241,0.1)}
-    .path-duration{color:var(--text-secondary);font-size:0.8125rem}
-    .path-cta{background:var(--primary);color:var(--secondary);padding:0.5rem 1rem;border-radius:8px;font-size:0.8125rem;font-weight:600;text-decoration:none;transition:background 0.2s}
-    .path-cta:hover{background:#6BC9F5}
-
-    /* Course Card */
-    .course-card{background:rgba(25,30,53,0.8);border:1px solid rgba(79,186,241,0.15);border-radius:12px;overflow:hidden;transition:all 0.3s}
-    .course-card:hover{border-color:rgba(79,186,241,0.4);transform:translateY(-2px)}
-    .course-header{padding:1.5rem;border-bottom:1px solid rgba(79,186,241,0.1)}
-    .course-category{color:var(--primary);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
-    .course-title{font-size:1.125rem;font-weight:600;margin-bottom:0.5rem}
-    .course-description{color:var(--text-secondary);font-size:0.875rem}
-    .course-body{padding:1.5rem}
-    .course-outcomes{margin-bottom:1rem}
-    .course-outcomes-title{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;margin-bottom:0.75rem}
-    .course-outcome{display:flex;align-items:flex-start;gap:0.5rem;font-size:0.8125rem;color:var(--text-light);margin-bottom:0.5rem}
-    .course-outcome svg{color:var(--success);width:16px;height:16px;flex-shrink:0;margin-top:2px}
-    .course-meta{display:flex;gap:1.5rem;color:var(--text-secondary);font-size:0.8125rem}
-    .course-meta-item{display:flex;align-items:center;gap:0.375rem}
-
-    /* Quick Guide Card */
-    .guide-card{background:rgba(25,30,53,0.6);border:1px solid rgba(79,186,241,0.1);border-radius:10px;padding:1.25rem;display:flex;gap:1rem;align-items:flex-start;transition:all 0.2s}
-    .guide-card:hover{background:rgba(79,186,241,0.05);border-color:rgba(79,186,241,0.25)}
-    .guide-icon{width:40px;height:40px;background:rgba(79,186,241,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .guide-icon svg{width:20px;height:20px;color:var(--primary)}
-    .guide-content{flex:1}
-    .guide-title{font-size:0.9375rem;font-weight:600;margin-bottom:0.25rem}
-    .guide-time{color:var(--text-secondary);font-size:0.75rem}
-
-    /* Certification Card */
-    .cert-card{background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(25,30,53,0.9) 100%);border:1px solid rgba(16,185,129,0.3);border-radius:16px;padding:2rem;text-align:center}
-    .cert-icon{width:80px;height:80px;background:rgba(16,185,129,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
-    .cert-icon svg{width:40px;height:40px;color:var(--success)}
-    .cert-title{font-size:1.25rem;font-weight:700;margin-bottom:0.5rem}
-    .cert-subtitle{color:var(--success);font-size:0.875rem;margin-bottom:1rem}
-    .cert-description{color:var(--text-secondary);font-size:0.875rem;margin-bottom:1.5rem}
-    .cert-benefits{text-align:left;margin-bottom:1.5rem}
-    .cert-benefit{display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;margin-bottom:0.5rem}
-    .cert-benefit svg{color:var(--success);width:16px;height:16px}
-    .cert-cta{display:inline-block;background:var(--success);color:var(--secondary);padding:0.75rem 1.5rem;border-radius:8px;font-weight:600;text-decoration:none}
-
-    /* FAQ */
-    .faq-item{border:1px solid rgba(79,186,241,0.1);border-radius:10px;margin-bottom:1rem;overflow:hidden}
-    .faq-question{padding:1.25rem;background:rgba(25,30,53,0.6);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:500}
-    .faq-question:hover{background:rgba(79,186,241,0.05)}
-    .faq-question svg{color:var(--primary);transition:transform 0.2s}
-    .faq-item.open .faq-question svg{transform:rotate(180deg)}
-    .faq-answer{padding:0 1.25rem;max-height:0;overflow:hidden;transition:all 0.3s}
-    .faq-item.open .faq-answer{padding:1.25rem;max-height:500px}
-    .faq-answer p{color:var(--text-secondary);font-size:0.875rem}
-
-    /* Footer */
-    .footer{background:rgba(10,12,20,0.8);border-top:1px solid rgba(79,186,241,0.1);padding:3rem 0}
-    .footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-    .footer-text{color:var(--text-secondary);font-size:0.875rem}
-    .footer-links{display:flex;gap:1.5rem}
-    .footer-links a{color:var(--text-secondary);text-decoration:none;font-size:0.875rem}
-    .footer-links a:hover{color:var(--primary)}
-  </style>
+  
+  <link rel="stylesheet" href="css/critical.css">
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
@@ -223,7 +97,7 @@
         <a href="/">Accueil</a>
         <a href="/pricing.html">Tarifs</a>
         <a href="/automations.html">Automatisations</a>
-        <a href="/academie.html" style="color:var(--primary)">Académie</a>
+        <a href="/academie.html">Académie</a>
         <a href="/contact.html">Contact</a>
       </nav>
     </div>
@@ -239,7 +113,7 @@
           <span class="status-divider">|</span>
           <span class="status-metric">ENV CONFIG: <strong id="config-rate-text">100%</strong></span>
           <span class="status-divider">|</span>
-          <span class="status-metric">AGENCY: <strong id="agentic-count-text">18 Agentic Workflows</strong></span>
+          <span class="status-metric">AGENCY: <strong id="agentic-count-text">18 Hardened Agents</strong></span>
         </div>
         <div class="status-right" id="verified-apis-scroll">
           <span class="api-tag ok">Shopify</span>
@@ -423,7 +297,7 @@
 
           <div class="cards-grid">
             <!-- Getting Started -->
-            <a href="/academie/cours/demarrer.html" class="course-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/cours/demarrer.html" class="course-card">
               <div class="course-header">
                 <p class="course-category">Fondamentaux</p>
                 <h3 class="course-title">Démarrer avec 3A Automation</h3>
@@ -459,7 +333,7 @@
             </a>
 
             <!-- Lead Generation -->
-            <a href="/academie/cours/leads.html" class="course-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/cours/leads.html" class="course-card">
               <div class="course-header">
                 <p class="course-category">Génération de Leads</p>
                 <h3 class="course-title">Générer des Leads Qualifiés</h3>
@@ -495,7 +369,7 @@
             </a>
 
             <!-- Email Marketing -->
-            <a href="/academie/cours/emails.html" class="course-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/cours/emails.html" class="course-card">
               <div class="course-header">
                 <p class="course-category">Email Marketing</p>
                 <h3 class="course-title">Emails qui Convertissent</h3>
@@ -531,7 +405,7 @@
             </a>
 
             <!-- Analytics -->
-            <a href="/academie/cours/analytics.html" class="course-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/cours/analytics.html" class="course-card">
               <div class="course-header">
                 <p class="course-category">Analytics</p>
                 <h3 class="course-title">Piloter par la Data</h3>
@@ -567,7 +441,7 @@
             </a>
 
             <!-- E-commerce -->
-            <a href="/academie/cours/ecommerce.html" class="course-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/cours/ecommerce.html" class="course-card">
               <div class="course-header">
                 <p class="course-category">E-commerce</p>
                 <h3 class="course-title">Optimiser Votre Boutique</h3>
@@ -603,7 +477,7 @@
             </a>
 
             <!-- Content -->
-            <a href="/academie/cours/contenu.html" class="course-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/cours/contenu.html" class="course-card">
               <div class="course-header">
                 <p class="course-category">Contenu</p>
                 <h3 class="course-title">Contenu qui Engage</h3>
@@ -645,8 +519,8 @@
           <h2 class="section-title">Guides Rapides</h2>
           <p class="section-subtitle">Apprenez en 15 minutes ou moins. Guides pratiques pour résoudre des problèmes spécifiques.</p>
 
-          <div class="cards-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-            <a href="/academie/guides.html#guide-klaviyo" class="guide-card" style="text-decoration:none;color:inherit">
+          <div class="cards-grid">
+            <a href="/academie/guides.html#guide-klaviyo" class="guide-card">
               <div class="guide-icon">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
               </div>
@@ -656,7 +530,7 @@
               </div>
             </a>
 
-            <a href="/academie/guides.html#guide-shopify" class="guide-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/guides.html#guide-shopify" class="guide-card">
               <div class="guide-icon">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
               </div>
@@ -666,7 +540,7 @@
               </div>
             </a>
 
-            <a href="/academie/guides.html#guide-sequence" class="guide-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/guides.html#guide-sequence" class="guide-card">
               <div class="guide-icon">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               </div>
@@ -676,7 +550,7 @@
               </div>
             </a>
 
-            <a href="/academie/guides.html#guide-analytics" class="guide-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/guides.html#guide-analytics" class="guide-card">
               <div class="guide-icon">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
               </div>
@@ -686,7 +560,7 @@
               </div>
             </a>
 
-            <a href="/academie/guides.html#guide-segments" class="guide-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/guides.html#guide-segments" class="guide-card">
               <div class="guide-icon">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
               </div>
@@ -696,7 +570,7 @@
               </div>
             </a>
 
-            <a href="/academie/guides.html#guide-cart" class="guide-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/guides.html#guide-cart" class="guide-card">
               <div class="guide-icon">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
               </div>
@@ -706,7 +580,7 @@
               </div>
             </a>
 
-            <a href="/academie/guides.html#guide-templates" class="guide-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/guides.html#guide-templates" class="guide-card">
               <div class="guide-icon">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
               </div>
@@ -716,7 +590,7 @@
               </div>
             </a>
 
-            <a href="/academie/guides.html#guide-notifications" class="guide-card" style="text-decoration:none;color:inherit">
+            <a href="/academie/guides.html#guide-notifications" class="guide-card">
               <div class="guide-icon">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
               </div>
@@ -830,5 +704,8 @@
   </script>
   <script src="geo-locale.js"></script>
   <script src="agentic-transparency.js"></script>
+  <script src="config.js?v=26.1"></script>
+  <script src="js/ui-init.js"></script>
+  <script src="js/telemetry.js"></script>
 </body>
 </html>

@@ -40,13 +40,21 @@ function test(name, condition, details = '') {
   tests.push({ name, passed: condition, details });
 }
 
-// Extract @media (max-width: 768px) block
-const mobile768Match = css.match(/@media\s*\(max-width:\s*768px\)\s*\{([\s\S]*?)(?=\n\/\*|@media|$)/);
-const mobile768 = mobile768Match ? mobile768Match[1] : '';
+// Extract ALL @media (max-width: 768px) blocks
+const mobile768Regex = /@media\s*\(max-width:\s*768px\)\s*\{([\s\S]*?)(?=\n\/\*|@media|$)/g;
+let mobile768 = '';
+let match768;
+while ((match768 = mobile768Regex.exec(css)) !== null) {
+  mobile768 += match768[1] + '\n';
+}
 
-// Extract @media (max-width: 480px) block
-const mobile480Match = css.match(/@media\s*\(max-width:\s*480px\)\s*\{([\s\S]*?)(?=\n\/\*|@media|$)/);
-const mobile480 = mobile480Match ? mobile480Match[1] : '';
+// Extract ALL @media (max-width: 480px) blocks
+const mobile480Regex = /@media\s*\(max-width:\s*480px\)\s*\{([\s\S]*?)(?=\n\/\*|@media|$)/g;
+let mobile480 = '';
+let match480;
+while ((match480 = mobile480Regex.exec(css)) !== null) {
+  mobile480 += match480[1] + '\n';
+}
 
 // Extract prefers-reduced-motion block
 const reducedMotionMatch = css.match(/@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{([\s\S]*?)\n\}/);

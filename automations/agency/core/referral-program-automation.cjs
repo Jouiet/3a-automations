@@ -37,8 +37,9 @@ const crypto = require('crypto');
 // ============================================================================
 
 const CONFIG = {
-  version: '1.0.0',
+  version: '2.0.0 (Agentic)',
   port: parseInt(process.env.REFERRAL_PROGRAM_PORT || '3016', 10),
+  agenticMode: process.argv.includes('--agentic'),
 
   // AI Providers - FRONTIER MODELS (Session 120+)
   ai: {
@@ -420,6 +421,58 @@ async function generateWithClaude(prompt, systemPrompt) {
   };
 }
 
+async function critiqueReferralEmail(emailData, type) {
+  const prompt = `Act as a Senior Copywriter. Critique this referral email (${type}).
+Subject: ${emailData.subject}
+Body: ${emailData.body}
+
+Criteria:
+1. Persuasion: Does it motivate sharing?
+2. Clarity: Are the rewards clear?
+3. Tone: Is it exciting but professional?
+4. Formatting: Is the HTML clean?
+
+Output JSON: { "score": <0-10>, "feedback": "concise critique", "issues": ["list"] }`;
+
+  const systemPrompt = "You are a strict copy editor focused on conversion optimization.";
+
+  // Use fastest reasoning model (Grok)
+  try {
+    const result = await generateWithGrok(prompt, systemPrompt);
+    const jsonMatch = result.content.match(/\{[\s\S]*\}/);
+    if (jsonMatch) return safeJsonParse(jsonMatch[0], { score: 5, feedback: "Parse error", issues: [] });
+  } catch (e) {
+    // Fallback to minimal pass
+    return { score: 7, feedback: "Critique skipped (API error)", issues: [] };
+  }
+  return { score: 5, feedback: "Critique failed", issues: [] };
+}
+
+async function refineReferralEmail(emailData, critique, type) {
+  const prompt = `Improve this email based on the critique.
+Original Subject: ${emailData.subject}
+Critique: ${critique.feedback} (Score: ${critique.score}/10)
+Issues: ${critique.issues.join(', ')}
+
+Task: Rewrite to handle all issues and maximize conversion.
+Output JSON: { "subject", "preview", "body", "socialShare" }`;
+
+  const systemPrompt = "You are a world-class copywriter. Improve this email.";
+
+  // Use best creative model (Claude or OpenAI)
+  try {
+    const result = await generateWithClaude(prompt, systemPrompt); // Claude is best for writing
+    const jsonMatch = result.content.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      const refined = safeJsonParse(jsonMatch[0]);
+      if (refined?.subject && refined?.body) return { ...refined, provider: result.provider + ' (Refined)' };
+    }
+  } catch (e) {
+    // Fallback
+  }
+  return emailData; // Return original if refinement fails
+}
+
 async function generateReferralEmail(customer, type, data) {
   const systemPrompt = `You are an expert email copywriter for referral programs.
 Write engaging, shareable emails that motivate customers to refer friends.
@@ -460,37 +513,46 @@ Celebrate their achievement!`
     generateWithClaude
   ];
 
-  let lastError = null;
+  let draftEmail = null;
 
+  // 1. DRAFT
   for (const provider of providers) {
     try {
       const result = await provider(prompt, systemPrompt);
-      log(`Email generated with ${result.provider}`);
+      log(`Draft generated with ${result.provider}`);
 
       const jsonMatch = result.content.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
         const emailData = safeJsonParse(jsonMatch[0]);
         if (emailData?.subject && emailData?.body) {
-          return { ...emailData, provider: result.provider };
+          draftEmail = { ...emailData, provider: result.provider };
+          break;
         }
       }
-
-      return {
-        subject: `🎁 ${customer.firstName}, your referral program is ready!`,
-        preview: 'Share and earn rewards',
-        body: result.content,
-        socialShare: {},
-        provider: result.provider
-      };
-
     } catch (error) {
       log(`Provider failed: ${error.message}`, 'warn');
-      lastError = error;
     }
   }
 
-  log('All AI providers failed, using template', 'warn');
-  return getTemplateEmail(customer, type, data);
+  if (!draftEmail) {
+    log('All AI providers failed for draft, using template', 'warn');
+    return getTemplateEmail(customer, type, data);
+  }
+
+  // 2. AGENTIC REFLECTION LOOP
+  if (CONFIG.agenticMode) {
+    log('🤖 Entering Agentic Reflection Loop...');
+    const critique = await critiqueReferralEmail(draftEmail, type);
+    log(`📊 Critique Score: ${critique.score}/10. Feedback: ${critique.feedback}`);
+
+    if (critique.score < 8) {
+      log('🔧 Refining email...');
+      const refinedEmail = await refineReferralEmail(draftEmail, critique, type);
+      return refinedEmail;
+    }
+  }
+
+  return draftEmail;
 }
 
 function getTemplateEmail(customer, type, data) {
@@ -728,13 +790,18 @@ async function processReferral(referralCode, referee) {
   const newTier = getCurrentTier(referrerData.totalReferrals);
   const tierUpgrade = newTier && (!prevTier || prevTier.tier !== newTier.tier);
 
-  // Get referrer info (in production, fetch from database)
-  const referrer = {
+  // Resolve referrer details from provided context or database
+  const referrer = referee.referrerContext || {
     id: codeData.customerId,
-    email: `${codeData.customerId}@example.com`, // Mock
-    firstName: 'Referrer',
-    language: 'French'
+    email: referee.referrerEmail, // Expecting email to be passed in referee context
+    firstName: referee.referrerName || 'Ambassadeur',
+    language: referee.referrerLanguage || 'French'
   };
+
+  if (!referrer.email) {
+    log(`Referrer email missing for customer ${codeData.customerId}`, 'error');
+    return { status: 'missing_referrer_email', error: 'Could not contact promoter' };
+  }
 
   // Send success email to referrer
   const emailData = await generateReferralEmail(referrer, 'success', {

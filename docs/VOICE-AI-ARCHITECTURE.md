@@ -1,14 +1,15 @@
 # Voice AI Architecture - 3A Automation
-## Version: 1.0.0 | Date: 2025-12-26 | Session: 96
+
+## Version: 1.1.0 | Date: 08/01/2026 | Session: 130
 
 ---
 
 ## RÉSUMÉ EXÉCUTIF
 
-### État Actuel (Vérifié 26/12/2025)
+### État Actuel (Vérifié 08/01/2026)
 
 | Composant | Status | Notes |
-|-----------|--------|-------|
+| --- | --- | --- |
 | Voice Widget Web | ✅ OPÉRATIONNEL | Web Speech API, 33 keywords, booking flow |
 | Dial.Plus Agent | ✅ OPÉRATIONNEL | +1 775 254 7428, knowledge base uploadée |
 | Grok Voice Phone | ❌ BLOQUÉ | xAI API OK, carrier manquant |
@@ -20,7 +21,7 @@
 
 ### 1. Voice Widget Web (Browser-Based)
 
-```
+```text
 TECHNOLOGIE: Web Speech API (natif browser, GRATUIT)
 STATUS: LIVE sur 28 pages
 
@@ -46,7 +47,7 @@ Limitations:
 
 ### 2. Dial.Plus Agent (Usage Interne)
 
-```
+```text
 PLATEFORME: https://app.dial.plus
 PHONE: +1 775 254 7428
 PRICING: $19-99/mois selon plan
@@ -71,7 +72,7 @@ Usage:
 
 ### 3. Grok Voice Phone (Pour Clients - À DÉPLOYER)
 
-```
+```text
 STATUS: BLOQUÉ - Carrier téléphonique manquant
 
 xAI Grok Voice Agent API:
@@ -113,7 +114,7 @@ Script Natif Prêt (Session 119):
 Source: [Twilio Alternatives 2025](https://textellent.com/blog/twilio-alternatives/)
 
 | Carrier | Prix/min | Avantage Principal | Idéal Pour |
-|---------|----------|-------------------|------------|
+| --- | --- | --- | --- |
 | **Telnyx** | $0.005 | Réseau propre, -25-45% | IVR complexe, haute qualité |
 | **Plivo** | -35% vs Twilio | Simple, HIPAA ready | Startups, volumes modérés |
 | **SignalWire** | Variable | Programmabilité profonde | Équipes dev avancées |
@@ -129,14 +130,14 @@ Source: [Twilio Alternatives 2025](https://textellent.com/blog/twilio-alternativ
 
 ### Fichier Créé
 
-```
+```text
 automations/shared-components/dialplus-knowledge-base.json
 ```
 
 ### Contenu
 
 | Section | Description |
-|---------|-------------|
+| --- | --- |
 | identity | Nom, email, site, téléphone |
 | positioning | Cible, différenciateur, proposition de valeur |
 | pricing | 3 packs setup + 2 retainers + conditions |
@@ -151,7 +152,7 @@ automations/shared-components/dialplus-knowledge-base.json
 
 ### Comment Uploader sur Dial.Plus
 
-1. Aller sur https://app.dial.plus
+1. Aller sur <https://app.dial.plus>
 2. Sélectionner l'agent 3A Automation
 3. Section "Knowledge Base" ou "Documents"
 4. Uploader `dialplus-knowledge-base.json`
@@ -163,7 +164,7 @@ automations/shared-components/dialplus-knowledge-base.json
 
 ### Usage Interne 3A
 
-```
+```text
 Dial.Plus (+1 775 254 7428)
 ├── Qualifier les leads entrants
 ├── Prendre des RDV
@@ -173,7 +174,7 @@ Dial.Plus (+1 775 254 7428)
 
 ### Produit à Vendre aux Clients
 
-```
+```text
 Option A: Setup Dial.Plus (No-Code)
 ├── Configurer un agent Dial.Plus pour le client
 ├── Uploader leur knowledge base personnalisée
@@ -195,7 +196,7 @@ Option B: Grok Voice + Telnyx (Full Control)
 ## ACTIONS REQUISES
 
 | # | Action | Priorité | Status |
-|---|--------|----------|--------|
+| --- | --- | --- | --- |
 | 1 | Uploader knowledge base sur Dial.Plus | P0 | ✅ FAIT |
 | 2 | Tester appels entrants Dial.Plus | P0 | 🔄 À TESTER |
 | 3 | ~~Créer compte Telnyx~~ | N/A | ❌ Skipped (config existante Twilio suffit) |

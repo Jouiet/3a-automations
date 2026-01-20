@@ -46,8 +46,8 @@ class DOEOrchestrator {
             throw new Error("No suitable tool found for this directive.");
         }
 
-        // 2. Parameter Extraction (Simulating LLM extraction from directive)
-        const params = this.extractParams(directive, tool);
+        // 2. Parameter Extraction (Real LLM extraction)
+        const params = await this.extractParams(directive, tool);
 
         const plan = {
             toolId: tool.id,
@@ -132,19 +132,49 @@ class DOEOrchestrator {
     /**
      * Utilities
      */
-    extractParams(directive, tool) {
+    async extractParams(directive, tool) {
+        // --- REAL LLM EXTRACTION (Level 5 Sovereign) ---
+        // Using Global LLM Gateway for precise parameter extraction
+        const LLMGateway = require('./gateways/llm-global-gateway.cjs');
+
+        const systemPrompt = `You are the DOE Parameter Extractor.
+Directive: "${directive}"
+Tool: ${tool.name_en} (${tool.id})
+Script: ${tool.script}
+
+Task: Extract all necessary CLI parameters for this script based on the directive.
+Available Common Parameters: --location, --query, --limit, --keywords, --language, --publish, --distribute.
+
+Output format: Return ONLY a JSON array of strings, e.g., ["--location=Paris", "--query=Bakeries"].
+No explanations.`;
+
+        try {
+            const rawOutput = await LLMGateway.generate('gemini', systemPrompt);
+            // Clean output in case LLM adds markdown
+            let cleaned = rawOutput.replace(/```json/g, '').replace(/```/g, '').trim();
+
+            // Robust Array Extraction
+            const arrayMatch = cleaned.match(/\[[\s\S]*\]/);
+            if (arrayMatch) cleaned = arrayMatch[0];
+
+            const params = JSON.parse(cleaned);
+            if (Array.isArray(params)) {
+                return params;
+            }
+        } catch (e) {
+            console.warn(c.yellow(`[DOE] LLM extraction failed, using heuristic fallback: ${e.message}`));
+        }
+
         const lowerDirective = directive.toLowerCase();
         const params = [];
 
-        // Simple heuristic extraction (would be LLM in production)
+        // Simple heuristic fallback
         if (tool.id.includes('maps') || tool.id.includes('linkedin')) {
-            // Check for location
             const locations = ['maroc', 'france', 'dubai', 'usa', 'paris', 'casablanca'];
             locations.forEach(loc => {
                 if (lowerDirective.includes(loc)) params.push(`--location=${loc}`);
             });
 
-            // Check for query
             if (lowerDirective.includes('leads')) {
                 const words = lowerDirective.split(' ');
                 const leadsIndex = words.indexOf('leads');
@@ -157,18 +187,22 @@ class DOEOrchestrator {
         return params;
     }
 
+
     findBestTool(directive) {
         const lowerDirective = directive.toLowerCase();
+        if (!this.registry.automations) return null;
+
         const matches = this.registry.automations
             .map(a => {
                 let score = 0;
-                const nameParts = a.name_en.toLowerCase().split(' ');
+                const name = a.name_en || "";
+                const nameParts = name.toLowerCase().split(' ');
                 const semanticDesc = a.semantic_description ? a.semantic_description.toLowerCase() : "";
 
                 if (lowerDirective.includes('maps') && a.id.includes('maps')) score += 10;
                 if (lowerDirective.includes('linkedin') && a.id.includes('linkedin')) score += 10;
                 if (semanticDesc && semanticDesc.includes(lowerDirective)) score += 8;
-                if (nameParts.some(word => lowerDirective.includes(word))) score += 5;
+                if (nameParts.some(word => word && lowerDirective.includes(word))) score += 5;
 
                 return { tool: a, score };
             })

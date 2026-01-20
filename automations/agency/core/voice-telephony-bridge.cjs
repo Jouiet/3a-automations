@@ -17,11 +17,38 @@
  *   - Intégration native avec modules existants
  */
 
-require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+
+// Portability Patch: Resilient .env loading
+const envPaths = [
+  path.join(__dirname, '.env'),
+  path.join(__dirname, '../../../.env'),
+  path.join(process.cwd(), '.env')
+];
+let envFound = false;
+for (const envPath of envPaths) {
+  if (fs.existsSync(envPath)) {
+    require('dotenv').config({ path: envPath });
+    console.log(`[Telemetry] Configuration loaded from: ${envPath}`);
+    envFound = true;
+    break;
+  }
+}
+if (!envFound) {
+  console.warn('[Telemetry] No .env file found in search paths. Using existing environment variables.');
+}
 const http = require('http');
 const https = require('https');
 const { URL } = require('url');
 const crypto = require('crypto');
+
+// Marketing Science Core
+const MarketingScience = require('./marketing-science-core.cjs');
+// Voice Persona Injector (The Director)
+const { VoicePersonaInjector } = require('./voice-persona-injector.cjs');
+// RAG Knowledge Base
+const KNOWLEDGE_BASE = require('./knowledge_base.json');
 
 // Dependency check
 let WebSocket;
@@ -264,128 +291,9 @@ async function createGrokSession(callInfo) {
             prefix_padding_ms: 300,
             silence_duration_ms: 700 // Slightly longer for natural pauses
           },
-          instructions: `Tu es l'assistant commercial IA de 3A Automation, agence spécialisée en automatisation IA pour e-commerce et PME.
-
-OBJECTIF PRINCIPAL: Qualifier le prospect avec BANT, traiter les objections, et closer un RDV découverte.
-
-═══════════════════════════════════════════════════════════════
-PHASE 1 - OUVERTURE & PERMISSION (15 sec max)
-═══════════════════════════════════════════════════════════════
-"Bonjour ! Je suis l'assistant IA de 3A Automation. Merci de nous appeler !
-Avez-vous 2 minutes pour que je comprenne comment nous pouvons vous aider ?"
-
-SI "non" ou "occupé":
-→ "Je comprends parfaitement. Quand puis-je vous rappeler ? Demain matin ou après-midi ?"
-→ Utilise schedule_callback avec le créneau proposé
-
-SI "oui" ou acceptation:
-→ Passer à Phase 2
-
-═══════════════════════════════════════════════════════════════
-PHASE 2 - QUALIFICATION BANT (60-90 sec)
-═══════════════════════════════════════════════════════════════
-Poser ces questions naturellement dans la conversation:
-
-NEED (Besoin):
-"Qu'est-ce qui vous amène à nous contacter aujourd'hui ?"
-"Quel défi cherchez-vous à résoudre avec l'automatisation ?"
-
-TIMELINE (Urgence):
-"D'ici combien de temps souhaitez-vous mettre ça en place ?"
-"C'est un projet prioritaire pour ce trimestre ?"
-
-BUDGET (indirectement):
-"Avez-vous déjà une idée du type d'investissement envisagé ?"
-"C'est un projet avec un budget défini ou exploratoire ?"
-
-AUTHORITY (Décisionnaire):
-"Êtes-vous la personne qui valide ce type de projet ?"
-"D'autres personnes participent à la décision ?"
-
-→ Après les réponses, utilise qualify_lead pour scorer le prospect
-
-═══════════════════════════════════════════════════════════════
-PHASE 3 - PROPOSITION DE VALEUR (adaptatif)
-═══════════════════════════════════════════════════════════════
-Selon le besoin détecté:
-
-SI e-commerce mentionné:
-"Nos clients e-commerce récupèrent 15-30% de paniers abandonnés grâce à nos automatisations.
-En moyenne, c'est 2000€ à 5000€ de revenus supplémentaires par mois."
-
-SI PME/efficacité mentionné:
-"Nous aidons les PME à économiser 10-20 heures par semaine sur les tâches répétitives.
-Ça libère du temps pour ce qui compte vraiment: développer l'activité."
-
-SI marketing/leads mentionné:
-"Nos automatisations génèrent 3x plus de leads qualifiés et réduisent le coût d'acquisition de 40%."
-
-SI général:
-"En moyenne, nos clients voient un ROI de 300% en moins de 3 mois."
-
-═══════════════════════════════════════════════════════════════
-PHASE 4 - GESTION DES OBJECTIONS
-═══════════════════════════════════════════════════════════════
-Utilise handle_objection pour logger l'objection, puis réponds:
-
-"C'est trop cher / On n'a pas le budget":
-→ "Je comprends. La question est: combien vous coûte de NE PAS automatiser ?
-   Nos clients récupèrent leur investissement en 2-3 mois. Voyons ensemble si ça fait sens pour vous."
-
-"Je vais réfléchir / Plus tard":
-→ "Bien sûr. Puis-je vous demander ce qui vous fait hésiter ?
-   Si c'est une question de timing, on peut bloquer un créneau et confirmer plus tard."
-
-"On travaille déjà avec quelqu'un":
-→ "Parfait ! C'est bon signe que vous investissez dans l'automatisation.
-   On propose un audit comparatif gratuit de 30 minutes. Ça vous permettra de voir si on peut apporter plus."
-
-"Envoyez-moi un email d'abord":
-→ "Avec plaisir. Pour vous envoyer quelque chose de vraiment pertinent,
-   pouvez-vous me dire en une phrase votre plus gros défi actuel ?"
-
-"Je n'ai pas le temps maintenant":
-→ "Pas de souci. Demain 10h ou 14h, qu'est-ce qui vous arrange le mieux ?
-   Ce sera un appel de 20 minutes maximum."
-
-═══════════════════════════════════════════════════════════════
-PHASE 5 - CLOSING
-═══════════════════════════════════════════════════════════════
-ASSUMPTIF (après qualification positive):
-"Parfait [Nom], on est alignés. Pour cet appel découverte de 30 minutes,
-vous préférez mardi 10h ou jeudi 14h ?"
-
-URGENCE (si score BANT élevé):
-"Cette semaine, il nous reste seulement 3 créneaux disponibles.
-Voulez-vous qu'on en bloque un maintenant ?"
-
-SUMMARY (récapituler avant demander):
-"Donc, vous cherchez à [besoin], d'ici [timeline], pour [objectif].
-C'est exactement ce qu'on fait. On fixe les 30 minutes ensemble ?"
-
-→ Dès que nom, email, créneau obtenus: create_booking
-
-═══════════════════════════════════════════════════════════════
-PHASE 6 - RÉCUPÉRATION ABANDON
-═══════════════════════════════════════════════════════════════
-SI silence prolongé (>10 sec) ou hésitation:
-"Vous êtes toujours là ? Pas de souci si vous devez y aller.
-Puis-je vous rappeler ou vous envoyer un SMS avec le lien de réservation ?"
-
-SI l'appel se termine sans RDV:
-→ Utilise schedule_callback avec next_action = "send_sms_booking_link"
-"Très bien. Je vous envoie le lien par SMS, vous pourrez réserver en 30 secondes quand ça vous arrange."
-
-═══════════════════════════════════════════════════════════════
-RÈGLES STRICTES
-═══════════════════════════════════════════════════════════════
-- Maximum 3 phrases par réponse (concision = efficacité)
-- Toujours qualifier AVANT de proposer un RDV
-- Ne JAMAIS laisser partir sans au moins: callback OU email OU SMS
-- Ton: professionnel, chaleureux, pas pushy
-- Parler en français, naturel
-- Utiliser le prénom du client dès qu'obtenu
-- Si question technique complexe: "Excellente question. Notre consultant technique pourra y répondre en détail lors du RDV."`,
+          // PHASE 1: THE DIRECTOR - Dynamic Persona Injection
+          // Default instruction placeholder (will be overridden by Injector)
+          instructions: '',
           // FUNCTION TOOLS - Sales Assistant (v2.0)
           tools: [
             {
@@ -542,12 +450,87 @@ RÈGLES STRICTES
                 },
                 required: ['event', 'stage']
               }
+            },
+            {
+              type: 'function',
+              name: 'search_knowledge_base',
+              description: 'Rechercher des informations spécifiques (Horaires, Politiques, Services) dans la base de connaissances du client.',
+              parameters: {
+                type: 'object',
+                properties: {
+                  query: {
+                    type: 'string',
+                    description: 'La question ou le sujet recherché (ex: "return policy", "opening hours", "emergency")',
+                  },
+                  category: {
+                    type: 'string',
+                    description: 'Catégorie optionnelle pour affiner (shipping, returns, pricing, general)'
+                  }
+                },
+                required: ['query']
+              }
+            },
+            {
+              type: 'function',
+              name: 'send_payment_details',
+              description: 'Envoyer les coordonnées bancaires (RIB/IBAN/Wise) ou un lien de paiement selon la configuration du client.',
+              parameters: {
+                type: 'object',
+                properties: {
+                  amount: {
+                    type: 'number',
+                    description: 'Montant à payer (ex: 50, 100)'
+                  },
+                  description: {
+                    type: 'string',
+                    description: 'Motif du paiement (ex: Acompte, Solde)'
+                  },
+                  method_override: {
+                    type: 'string',
+                    enum: ['BANK_TRANSFER', 'LINK', 'CASH'],
+                    description: 'Forcer une méthode si besoin'
+                  }
+                },
+                required: ['amount', 'description']
+              }
+            },
+            {
+              type: 'function',
+              name: 'transfer_call',
+              description: 'Transférer l\'appel à un agent humain (Urgence, Demande complexe, Handoff).',
+              parameters: {
+                type: 'object',
+                properties: {
+                  reason: {
+                    type: 'string',
+                    description: 'Raison du transfert (ex: "Client en colère", "Demande hors scope", "Urgence médicale")'
+                  },
+                  phone_number: {
+                    type: 'string',
+                    description: 'Numéro de destination optionnel (sinon utilise le numéro du client)'
+                  }
+                },
+                required: ['reason']
+              }
             }
           ]
         }
       };
 
-      ws.send(JSON.stringify(sessionConfig));
+      // Determine Persona based on Call Context
+      const persona = VoicePersonaInjector.getPersona(
+        callInfo.from,    // Caller ID
+        callInfo.to,      // Called Number (maps to Vertical)
+        callInfo.clientId // Multi-tenancy ID (optional)
+      );
+
+      console.log(`[The Director] Injecting Persona: ${persona.name} (${persona.id}) for Vertical: ${callInfo.to}`);
+
+      // Inject Persona (Instructions + Voice)
+      // This overwrites the default 'voice' and 'instructions' in sessionConfig
+      const finalConfig = VoicePersonaInjector.inject(sessionConfig, persona);
+
+      ws.send(JSON.stringify(finalConfig));
 
       const session = {
         id: sessionId,
@@ -555,6 +538,7 @@ RÈGLES STRICTES
         from: callInfo.from,
         grokWs: ws,
         twilioWs: null,
+        metadata: finalConfig.session_config?.metadata || finalConfig.metadata || {}, // Store injected persona metadata
         createdAt: Date.now(),
         lastActivityAt: Date.now(),
         // Booking data
@@ -754,6 +738,18 @@ async function handleFunctionCall(session, item) {
       await handleTrackConversion(session, args);
       break;
 
+    case 'search_knowledge_base':
+      await handleSearchKnowledgeBase(session, args);
+      break;
+
+    case 'transfer_call':
+      await handleTransferCall(session, args);
+      break;
+
+    case 'send_payment_details':
+      await handleSendPaymentDetails(session, args);
+      break;
+
     default:
       console.log(`[Function] Unknown function: ${item.name}`);
   }
@@ -901,25 +897,136 @@ async function handleTrackConversion(session, args) {
   console.log(`[Analytics] ${args.event} at ${args.stage} - ${args.outcome || 'pending'}`);
 }
 
+async function handleSearchKnowledgeBase(session, args) {
+  // Use knowledge_base_id from metadata (injected by VoicePersonaInjector), fallback to persona_id or 'agency_v2'
+  const kbId = session.metadata?.knowledge_base_id || session.metadata?.persona_id || 'agency_v2';
+  const query = args.query.toLowerCase();
+
+  console.log(`[RAG] Searching KB for ${kbId}: "${query}"`);
+
+  // Simple In-Memory RAG
+  const kbData = KNOWLEDGE_BASE[kbId];
+
+  if (!kbData) {
+    console.log(`[RAG] No KB found for ID: ${kbId}`);
+    return { found: false, result: "Je n'ai pas accès à cette information spécifique pour le moment." };
+  }
+
+  // Keyword search simulation (Naive logic -> Semantic ID ideally)
+  // In production: Use vector database (Pinecone/Weaviate)
+  let bestMatch = null;
+  let maxScore = 0;
+
+  for (const [key, value] of Object.entries(kbData)) {
+    let score = 0;
+    const keyWords = key.split('_');
+    keyWords.forEach(kw => {
+      // Improved match: check both ways for partials (e.g., service vs services)
+      if (query.includes(kw) || kw.includes(query)) score += 3;
+    });
+
+    // Check value content
+    if (value.toLowerCase().includes(query)) score += 2;
+
+    // Direct match tweaks
+    if (query.includes('hour') || query.includes('horaire')) score += 5;
+    if (query.includes('return') || query.includes('retour')) score += 5;
+    if (query.includes('pay') || query.includes('paiement')) score += 5;
+    if (query.includes('ship') || query.includes('livraison')) score += 5;
+    if (query.includes('emergency') || query.includes('urgence')) score += 5;
+
+    if (score > maxScore) {
+      maxScore = score;
+      bestMatch = value;
+    }
+  }
+
+  // Fallback to searching all values if no key match
+  if (!bestMatch) {
+    const allText = Object.values(kbData).join(' ').toLowerCase();
+    if (allText.includes(query)) {
+      // Return the specific entry containing the text
+      for (const value of Object.values(kbData)) {
+        if (value.toLowerCase().includes(query)) {
+          bestMatch = value;
+          break;
+        }
+      }
+    }
+  }
+
+  if (bestMatch) {
+    console.log(`[RAG] Found answer: "${bestMatch.substring(0, 50)}..."`);
+    // Send info back to Grok (via Function Result or System Injection)
+    // For Grok Realtime, we essentially "feed" this back.
+    // NOTE: In current WebSocket API, the function return value is automatically sent back as "function_response".
+    return { found: true, result: bestMatch };
+  } else {
+    console.log(`[RAG] No answer found.`);
+    return { found: false, result: "Désolé, je ne trouve pas cette information dans mes documents." };
+  }
+}
+
+async function handleTransferCall(session, args) {
+  console.log(`[Handoff] Transfer requested. Reason: ${args.reason}`);
+
+  if (!twilio) {
+    console.error('[Handoff] Twilio SDK not available');
+    return { success: false, error: "twilio_not_configured" };
+  }
+
+  // Instantiate Client
+  const client = twilio(CONFIG.twilio.accountSid, CONFIG.twilio.authToken);
+  const callSid = session.callSid;
+
+  // Determine target phone
+  // 1. Explicit arg
+  // 2. Business Info from Metadata (Injected by Director)
+  // 3. Fallback to Agency Default (defined in env or config)
+  let targetPhone = args.phone_number || session.metadata?.business_info?.phone || CONFIG.twilio.phoneNumber;
+
+  if (!targetPhone) {
+    console.error('[Handoff] No target phone number available');
+    return { success: false, error: "no_target_phone" };
+  }
+
+  console.log(`[Handoff] Executing transfer for Call ${callSid} to ${targetPhone}`);
+
+  // TwiML to execute the transfer
+  const twiml = `
+<Response>
+  <Say language="fr-FR">Je vous transfère vers un conseiller humain. Veuillez patienter un instant.</Say>
+  <Dial>${targetPhone}</Dial>
+</Response>`;
+
+  try {
+    // Update the live call with new TwiML
+    await client.calls(callSid).update({ twiml: twiml });
+
+    // Log conversion event
+    logConversionEvent(session, 'call_transfer', {
+      reason: args.reason,
+      target: targetPhone
+    });
+
+    return { success: true, status: "transfer_initiated" };
+  } catch (error) {
+    console.error(`[Handoff] Twilio Error: ${error.message}`);
+    return { success: false, error: error.message };
+  }
+}
+
 // ============================================
-// FOLLOW-UP ACTIONS
+// FOLLOW-UP & MESSAGING ACTIONS
 // ============================================
 
-async function sendSMSBookingLink(session) {
+async function sendGenericSMS(to, body) {
   if (!CONFIG.whatsapp.accessToken || !CONFIG.whatsapp.phoneNumberId) {
     console.log('[SMS] WhatsApp credentials not configured, skipping SMS');
-    return;
+    return false;
   }
 
-  const bookingLink = 'https://3a-automation.com/reserver';
-  const phone = session.bookingData.phone?.replace(/\D/g, '');
-
-  if (!phone) {
-    console.log('[SMS] No phone number available');
-    return;
-  }
-
-  console.log(`[SMS] Sending booking link to ${phone}`);
+  console.log(`[SMS] Sending to ${to}: "${body.substring(0, 50)}..."`);
 
   try {
     const response = await fetch(
@@ -932,11 +1039,9 @@ async function sendSMSBookingLink(session) {
         },
         body: JSON.stringify({
           messaging_product: 'whatsapp',
-          to: phone,
+          to: to,
           type: 'text',
-          text: {
-            body: `Bonjour ! Voici le lien pour réserver votre appel découverte avec 3A Automation: ${bookingLink}\n\nÀ très vite !`
-          }
+          text: { body }
         }),
         signal: AbortSignal.timeout(10000)
       }
@@ -944,12 +1049,76 @@ async function sendSMSBookingLink(session) {
 
     const result = await response.json();
     if (result.messages) {
-      console.log('[SMS] Booking link sent successfully');
+      console.log('[SMS] Message sent successfully');
+      return true;
     } else {
       console.error('[SMS] Error:', JSON.stringify(result));
+      return false;
     }
   } catch (error) {
     console.error(`[SMS] Error: ${error.message}`);
+    return false;
+  }
+}
+
+async function sendSMSBookingLink(session) {
+  const bookingLink = 'https://3a-automation.com/reserver';
+  const phone = session.bookingData.phone?.replace(/\D/g, '');
+
+  if (!phone) {
+    console.log('[SMS] No phone number available for booking link');
+    return;
+  }
+
+  const body = `Bonjour ! Voici le lien pour réserver votre appel découverte avec 3A Automation: ${bookingLink}\n\nÀ très vite !`;
+  await sendGenericSMS(phone, body);
+}
+
+async function handleSendPaymentDetails(session, args) {
+  const amount = args.amount;
+  const description = args.description;
+  const config = session.metadata?.payment_config;
+
+  if (!config) {
+    console.error('[Payment] No payment config found in session metadata');
+    return { success: false, error: "no_payment_config" };
+  }
+
+  const method = args.method_override || config.method;
+  const details = config.details;
+  const currency = config.currency || 'EUR';
+
+  console.log(`[Payment] Sending ${amount} ${currency} via ${method} for ${description}`);
+
+  let message = "";
+  if (method === 'BANK_TRANSFER') {
+    message = `Voici les coordonnées pour le règlement de ${amount}${currency} (${description}):\n\n${details}\n\nMerci de nous envoyer une preuve de virement.`;
+  } else if (method === 'LINK') {
+    message = `Voici votre lien de paiement de ${amount}${currency} (${description}): ${details}`;
+  } else {
+    message = `Pour le règlement de ${amount}${currency} (${description}), les modalités sont: ${details}`;
+  }
+
+  try {
+    const phone = session.bookingData.phone?.replace(/\D/g, '');
+    if (!phone) throw new Error("No phone number available");
+
+    const sent = await sendGenericSMS(phone, message);
+
+    if (sent) {
+      logConversionEvent(session, 'payment_details_sent', {
+        amount,
+        currency,
+        method,
+        description
+      });
+      return { success: true, message: "Les détails ont été envoyés par SMS." };
+    } else {
+      return { success: false, error: "sms_failed" };
+    }
+  } catch (error) {
+    console.error(`[Payment] Error: ${error.message}`);
+    return { success: false, error: error.message };
   }
 }
 
@@ -1857,3 +2026,17 @@ async function main() {
 }
 
 main().catch(console.error);
+
+// Module Exports for Verification/External Integration
+if (typeof module !== 'undefined') {
+  module.exports = {
+    handleSearchKnowledgeBase,
+    handleTransferCall,
+    handleSendPaymentDetails,
+    handleQualifyLead,
+    handleObjection,
+    handleScheduleCallback,
+    handleCreateBooking,
+    handleTrackConversion
+  };
+}

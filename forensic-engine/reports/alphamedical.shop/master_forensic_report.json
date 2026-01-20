@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "target": "https://alphamedical.shop",
+    "timestamp": "2026-01-12T23:49:27.537Z",
+    "engine_version": "3.0.0-isolated"
+  },
+  "layers": [
+    {
+      "layer": 1,
+      "status": "SUCCESS",
+      "output": "\u001b[36m========================================\u001b[0m\n\u001b[36m  3A AUTOMATION - FORENSIC AUDIT\u001b[0m\n\u001b[36m  Date: 2026-01-12T23:48:46.923Z\u001b[0m\n\u001b[36m========================================\u001b[0m\n\u001b[0m[INFO]\u001b[0m \n========== SECURITY HEADERS AUDIT ==========\n\u001b[32m[PASS]\u001b[0m HSTS: ✓ max-age=7889238\n\u001b[32m[PASS]\u001b[0m CSP: ✓ block-all-mixed-content; frame-ancestors 'none'; u\n\u001b[32m[PASS]\u001b[0m X-Frame-Options: ✓ DENY\n\u001b[32m[PASS]\u001b[0m X-Content-Type-Options: ✓ nosniff\n\u001b[32m[PASS]\u001b[0m X-XSS-Protection (deprecated): ✓ 1; mode=block\n\u001b[31m[CRITICAL]\u001b[0m Referrer-Policy: ✗ MISSING\n\u001b[36m[LOW]\u001b[0m Permissions-Policy: Not present (optional)\n\u001b[32m[PASS]\u001b[0m SSL/TLS: ✓ HTTPS enabled\n\u001b[0m[INFO]\u001b[0m \n========== METADATA FINGERPRINT (Live Probe) ==========\n\u001b[32m[PASS]\u001b[0m Title Signature: Medical Equipment | FDA-Compliant | Alpha Medical ...\n\u001b[32m[PASS]\u001b[0m Description Signature: Shop FDA-compliant orthopedic braces, posture corr...\n\u001b[32m[PASS]\u001b[0m Density: 101 scripts, 66 images detected.\n\u001b[0m[INFO]\u001b[0m \n========== SEO TECHNICAL AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping local file scan for external domain. Relying on live HTTP probes.\n\u001b[0m[INFO]\u001b[0m \n========== AEO (Answer Engine Optimization) AUDIT ==========\n\u001b[32m[PASS]\u001b[0m GPTBot: ✓ Allowed in robots.txt\n\u001b[32m[PASS]\u001b[0m ClaudeBot: ✓ Allowed in robots.txt\n\u001b[32m[PASS]\u001b[0m PerplexityBot: ✓ Allowed in robots.txt\n\u001b[32m[PASS]\u001b[0m Google-Extended: ✓ Allowed in robots.txt\n\u001b[33m[MEDIUM]\u001b[0m Bingbot: Not explicitly configured\n\u001b[32m[PASS]\u001b[0m Sitemap reference: ✓ Present\n\u001b[31m[HIGH]\u001b[0m llms.txt: ✗ HTTP 404\n\u001b[0m[INFO]\u001b[0m Skipping deep schema scan on external domain.\n\u001b[0m[INFO]\u001b[0m \n========== SITEMAP AUDIT ==========\n\u001b[32m[PASS]\u001b[0m Coverage: ✓ 4 URLs (External scan)\n\u001b[33m[MEDIUM]\u001b[0m hreflang: Missing in sitemap\n\u001b[0m[INFO]\u001b[0m \n========== ACCESSIBILITY (WCAG) AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping deep accessibility scan on external domain.\n\u001b[0m[INFO]\u001b[0m \n========== BROKEN LINKS AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping broken links scan on external domain source.\n\u001b[0m[INFO]\u001b[0m \n========== IMAGES & ASSETS AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping deep assets scan on external domain source.\n\u001b[0m[INFO]\u001b[0m \n========== INTERNATIONALIZATION (i18n) AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping language parity scan on external domain source.\n\u001b[0m[INFO]\u001b[0m \n========== FINAL REPORT ==========\n\n============================================================\n\u001b[36mFORENSIC AUDIT SUMMARY\u001b[0m\n============================================================\nTotal Pages Analyzed: 1\n\u001b[31mCritical Issues: 0\u001b[0m\n\u001b[31mHigh Issues: 1\u001b[0m\n\u001b[33mMedium Issues: 3\u001b[0m\n\u001b[36mLow Issues: 1\u001b[0m\n\u001b[32mPassed Checks: 17\u001b[0m\n============================================================\n\nReport saved to: /Users/mac/Documents/JO-AAA/forensic-engine/outputs/FORENSIC-AUDIT-2026-01-12.json\n"
+    },
+    {
+      "layer": 1.5,
+      "status": "SUCCESS",
+      "output": "\n🔍 GSC FORENSIC - Target: https://alphamedical.shop\n"
+    },
+    {
+      "layer": 2,
+      "status": "SUCCESS",
+      "output": "\n🤖 BEHAVIORAL FORENSIC - Target: https://alphamedical.shop\n🔍 Scanning for Conversational AI widgets...\nℹ️  No known chatbot widgets detected in public DOM.\n\n✅ Behavioral Audit Complete\n"
+    },
+    {
+      "layer": 4,
+      "status": "FAILED",
+      "output": ""
+    },
+    {
+      "layer": 5,
+      "status": "SUCCESS",
+      "output": "\n🕵️ MARKETING ATTRIBUTION - Target: https://alphamedical.shop\n🔍 Checking Pixel Configuration Status...\n\n❌ Infinite Pixels App: NOT DETECTED in metafields\n\n🔍 Checking Native Facebook & Instagram App...\n✅ Shop data retrieved\n\nℹ️  Native app pixel config requires UI access or specific app API\n\n======================================================================\n💡 RECOMMENDATION\n======================================================================\nIf TikTok Pixel is missing:\n1. Get TikTok Pixel ID from TikTok Ads Manager\n   URL: https://ads.tiktok.com/i18n/events_manager\n2. Configure in Infinite Pixels app or native TikTok integration\n3. Expected format: Starts with \"C...\" (e.g., CXXXXXXXXXXXXXXXXX)\n4. Revenue impact: $15k-25k/year from retargeting\n======================================================================\n"
+    },
+    {
+      "layer": 6,
+      "status": "FAILED",
+      "output": "\n══════════════════════════════════════════════════════════════════════\n🔬 AUDIT SHOPIFY STORE - JO-AAA\n══════════════════════════════════════════════════════════════════════\n\n📍 Store: alphamedical.shop\n📅 Date: 2026-01-12T23:49:08.326Z\n──────────────────────────────────────────────────────────────────────\n\n📥 EXTRACTION DES DONNÉES:\n\n  🔐 Testing connection...\n"
+    },
+    {
+      "layer": 7,
+      "status": "SUCCESS",
+      "output": "\u001b[36m========================================\u001b[0m\n\u001b[36m  3A AUTOMATION - FORENSIC AUDIT\u001b[0m\n\u001b[36m  Date: 2026-01-12T23:49:09.664Z\u001b[0m\n\u001b[36m========================================\u001b[0m\n\u001b[0m[INFO]\u001b[0m \n========== SECURITY HEADERS AUDIT ==========\n\u001b[32m[PASS]\u001b[0m HSTS: ✓ max-age=7889238\n\u001b[32m[PASS]\u001b[0m CSP: ✓ block-all-mixed-content; frame-ancestors 'none'; u\n\u001b[32m[PASS]\u001b[0m X-Frame-Options: ✓ DENY\n\u001b[32m[PASS]\u001b[0m X-Content-Type-Options: ✓ nosniff\n\u001b[32m[PASS]\u001b[0m X-XSS-Protection (deprecated): ✓ 1; mode=block\n\u001b[31m[CRITICAL]\u001b[0m Referrer-Policy: ✗ MISSING\n\u001b[36m[LOW]\u001b[0m Permissions-Policy: Not present (optional)\n\u001b[32m[PASS]\u001b[0m SSL/TLS: ✓ HTTPS enabled\n\u001b[0m[INFO]\u001b[0m \n========== METADATA FINGERPRINT (Live Probe) ==========\n\u001b[32m[PASS]\u001b[0m Title Signature: Medical Equipment | FDA-Compliant | Alpha Medical ...\n\u001b[32m[PASS]\u001b[0m Description Signature: Shop FDA-compliant orthopedic braces, posture corr...\n\u001b[32m[PASS]\u001b[0m Density: 101 scripts, 66 images detected.\n\u001b[0m[INFO]\u001b[0m \n========== SEO TECHNICAL AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping local file scan for external domain. Relying on live HTTP probes.\n\u001b[0m[INFO]\u001b[0m \n========== AEO (Answer Engine Optimization) AUDIT ==========\n\u001b[32m[PASS]\u001b[0m GPTBot: ✓ Allowed in robots.txt\n\u001b[32m[PASS]\u001b[0m ClaudeBot: ✓ Allowed in robots.txt\n\u001b[32m[PASS]\u001b[0m PerplexityBot: ✓ Allowed in robots.txt\n\u001b[32m[PASS]\u001b[0m Google-Extended: ✓ Allowed in robots.txt\n\u001b[33m[MEDIUM]\u001b[0m Bingbot: Not explicitly configured\n\u001b[32m[PASS]\u001b[0m Sitemap reference: ✓ Present\n\u001b[31m[HIGH]\u001b[0m llms.txt: ✗ HTTP 404\n\u001b[0m[INFO]\u001b[0m Skipping deep schema scan on external domain.\n\u001b[0m[INFO]\u001b[0m \n========== SITEMAP AUDIT ==========\n\u001b[32m[PASS]\u001b[0m Coverage: ✓ 4 URLs (External scan)\n\u001b[33m[MEDIUM]\u001b[0m hreflang: Missing in sitemap\n\u001b[0m[INFO]\u001b[0m \n========== ACCESSIBILITY (WCAG) AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping deep accessibility scan on external domain.\n\u001b[0m[INFO]\u001b[0m \n========== BROKEN LINKS AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping broken links scan on external domain source.\n\u001b[0m[INFO]\u001b[0m \n========== IMAGES & ASSETS AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping deep assets scan on external domain source.\n\u001b[0m[INFO]\u001b[0m \n========== INTERNATIONALIZATION (i18n) AUDIT ==========\n\u001b[0m[INFO]\u001b[0m Skipping language parity scan on external domain source.\n\u001b[0m[INFO]\u001b[0m \n========== FINAL REPORT ==========\n\n============================================================\n\u001b[36mFORENSIC AUDIT SUMMARY\u001b[0m\n============================================================\nTotal Pages Analyzed: 1\n\u001b[31mCritical Issues: 0\u001b[0m\n\u001b[31mHigh Issues: 1\u001b[0m\n\u001b[33mMedium Issues: 3\u001b[0m\n\u001b[36mLow Issues: 1\u001b[0m\n\u001b[32mPassed Checks: 17\u001b[0m\n============================================================\n\nReport saved to: /Users/mac/Documents/JO-AAA/forensic-engine/outputs/FORENSIC-AUDIT-2026-01-12.json\n"
+    },
+    {
+      "layer": 8,
+      "status": "SUCCESS",
+      "output": "MCP Tool run_doe_orchestrator executed successfully."
+    }
+  ]
+}

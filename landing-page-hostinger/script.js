@@ -8,7 +8,7 @@
 // PERFORMANCE: Lite mode for slow connections & reduced motion preference
 // Pauses CPU-intensive animations until user interaction
 // ───────────────────────────────────────────────────────────────────────────
-(function() {
+(function () {
   // Check for slow connection or reduced motion preference
   const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   const isSlowConnection = connection && (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g' || connection.saveData === true);
@@ -30,7 +30,7 @@
   }
 })();
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
   // ───────────────────────────────────────────────────────────────────────────
   // MOBILE NAVIGATION TOGGLE
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // SMOOTH SCROLL
   // ───────────────────────────────────────────────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
@@ -111,12 +111,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const formSuccess = document.getElementById('form-success');
   const formError = document.getElementById('form-error');
 
-  // Configuration - AGENCE 3A AUTOMATION (pas de credentials clients!)
-  // Pour activer: créer Google Apps Script Web App → remplacer YOUR_SCRIPT_ID
-  // Guide: https://developers.google.com/apps-script/guides/web
+  // Configuration - AGENCE 3A AUTOMATION
+  // Loaded from config.js
   const FORM_CONFIG = {
-    googleScriptUrl: 'https://script.google.com/macros/s/AKfycbyzIHwTDfQpm57LBloFJ53BMkSvsSDd3zCXE41mMSFPMa1m6xOuji3ICKQJA1oiHb-4/exec', // Google Apps Script
-    dashboardApiUrl: 'https://script.google.com/macros/s/AKfycbzFP751mwK04FguPrIISQlMHHUULw5-e-n_Pn63h-SXEBOUvD-wpM7wmbGDPauGdzIZ/exec', // Dashboard CRM
+    googleScriptUrl: window.CONFIG ? window.CONFIG.GOOGLE_SCRIPT_URL : '',
+    dashboardApiUrl: window.CONFIG ? window.CONFIG.DASHBOARD_API_URL : '',
     fallbackEmail: 'contact@3a-automation.com',
     timeout: 5000 // 5 seconds
   };
@@ -128,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
       timestampField.value = new Date().toISOString();
     }
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
 
       const submitBtn = form.querySelector('button[type="submit"]');

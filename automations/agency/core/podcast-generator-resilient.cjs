@@ -64,7 +64,7 @@ function loadEnv() {
       if (match) {
         let value = match[2].trim();
         if ((value.startsWith('"') && value.endsWith('"')) ||
-            (value.startsWith("'") && value.endsWith("'"))) {
+          (value.startsWith("'") && value.endsWith("'"))) {
           value = value.slice(1, -1);
         }
         vars[match[1]] = value;
@@ -652,8 +652,11 @@ async function synthesizeSegment(text, speaker, config, language) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function concatenateAudioBuffers(buffers) {
-  // For now, simple concatenation (works with PCM data)
-  // Production: Use FFmpeg for proper MP3 merging
+  /**
+   * Concatenates raw audio buffers (PCM/WAV).
+   * For production-grade MP3/AAC bitstream merging, 
+   * use fluent-ffmpeg or a native binding.
+   */
   const totalLength = buffers.reduce((acc, buf) => acc + buf.length, 0);
   const result = Buffer.alloc(totalLength);
 

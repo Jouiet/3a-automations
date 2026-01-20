@@ -1,4 +1,9 @@
 #!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const { logTelemetry } = require('../utils/telemetry.cjs');
+const MarketingScience = require('./marketing-science-core.cjs');
+
 /**
  * Product Enrichment - Agentic (Level 3)
  * 
@@ -18,16 +23,32 @@
  * @date 2026-01-08
  */
 
-const fs = require('fs');
-const path = require('path');
-// Load environment variables from project root
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+// Portability Patch: Resilient .env loading
+const envPaths = [
+    path.join(__dirname, '.env'),
+    path.join(__dirname, '../../../.env'),
+    path.join(process.cwd(), '.env')
+];
+let envFound = false;
+for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+        require('dotenv').config({ path: envPath });
+        console.log(`[Telemetry] Configuration loaded from: ${envPath}`);
+        envFound = true;
+        break;
+    }
+}
+if (!envFound) {
+    console.warn('[Telemetry] No .env file found in search paths. Using existing environment variables.');
+}
 
 
 const CONFIG = {
     AGENTIC_MODE: process.argv.includes('--agentic'),
     AUTO_PUBLISH: process.argv.includes('--auto-publish'),
+    FORCE_MODE: process.argv.includes('--force'), // Bypass GPM pressure
     QUALITY_THRESHOLD: 8,
+    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
 
     AI_PROVIDERS: [
         { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
@@ -35,6 +56,31 @@ const CONFIG = {
         { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ]
 };
+
+/**
+ * Log action to global MCP observability log
+ */
+function logToMcp(action, details) {
+    const logPath = path.join(__dirname, '../../../landing-page-hostinger/data/mcp-logs.json');
+    let logs = [];
+    try {
+        if (fs.existsSync(logPath)) {
+            logs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
+        }
+    } catch (e) { logs = []; }
+
+    logs.unshift({
+        timestamp: new Date().toISOString(),
+        agent: 'ProductEnrichment-L4',
+        action,
+        details,
+        status: 'SUCCESS'
+    });
+
+    // Keep last 50 logs
+    if (logs.length > 50) logs = logs.slice(0, 50);
+    fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
+}
 
 /**
  * AI PROVIDER ORCHESTRATOR
@@ -82,7 +128,7 @@ async function callAI(prompt, systemPrompt = 'You are an SEO expert.') {
 }
 
 async function generateProductMeta(product) {
-    const prompt = `Generate SEO meta-data for this product:
+    const basePrompt = `Generate SEO meta-data for this product:
 ${JSON.stringify(product, null, 2)}
 
 Requirements:
@@ -90,7 +136,43 @@ Requirements:
 - Languages: FR (default) or EN
 - Output JSON: { "seo_title": "...", "meta_description": "...", "image_alt_text": "..." }`;
 
+    const prompt = MarketingScience.inject('PAS', basePrompt);
+
     return await callAI(prompt, 'You are a senior E-commerce SEO specialist.');
+}
+
+async function publishToShopify(productId, meta) {
+    const shop = process.env.SHOPIFY_SHOP;
+    const token = process.env.SHOPIFY_ACCESS_TOKEN;
+
+    if (!shop || !token) {
+        throw new Error('Real Shopify Credentials Required (SHOPIFY_SHOP, SHOPIFY_ACCESS_TOKEN)');
+    }
+
+    const url = `https://${shop}/admin/api/2024-01/products/${productId}.json`;
+    console.log(`📡 Publishing enrichment for Product ${productId} to ${shop}...`);
+
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'X-Shopify-Access-Token': token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            product: {
+                id: productId,
+                title: meta.seo_title,
+                body_html: meta.meta_description // Or update meta-fields if used
+            }
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Shopify API Error: ${response.status} ${response.statusText}`);
+    }
+
+    logToMcp('SHOPIFY_PUBLISH', { product_id: productId, status: 'SUCCESS' });
+    return true;
 }
 
 async function critiqueMeta(product, meta) {
@@ -109,6 +191,19 @@ Output JSON: { "score": 0-10, "feedback": "...", "provider": "AI" }`;
 
 async function agenticProductEnrichment(product) {
     console.log('\n🤖 AGENTIC MODE: Draft → Critique → Refine\n');
+
+    // SITUATIONAL PRESSURE CHECK (Hybrid Decoupling Year 1)
+    if (!CONFIG.FORCE_MODE && fs.existsSync(CONFIG.GPM_PATH)) {
+        const gpm = JSON.parse(fs.readFileSync(CONFIG.GPM_PATH, 'utf8'));
+        const pressure = (gpm.sectors.seo && gpm.sectors.seo.product_enrichment) ? gpm.sectors.seo.product_enrichment.pressure : 0;
+        const threshold = gpm.thresholds.high || 70;
+
+        if (pressure < threshold) {
+            console.log(`[Equilibrium] Product Pressure (${pressure}) below threshold (${threshold}). No AI reasoning required.`);
+            return { meta: {}, quality: null, refined: false, status: "EQUILIBRIUM" };
+        }
+        console.log(`[Sluice Gate Open] High Product Pressure detected (${pressure}). Activating AI Enrichment...`);
+    }
 
     console.log('📝 DRAFT: Generating SEO meta...');
     const draftMeta = await generateProductMeta(product);
@@ -141,7 +236,7 @@ Output JSON: { "seo_title": "...", "meta_description": "...", "image_alt_text": 
 
     if (CONFIG.AUTO_PUBLISH && critique.score >= CONFIG.QUALITY_THRESHOLD) {
         console.log('🚀 AUTO-PUBLISH: Quality ≥8, publishing to Shopify...');
-        // Would publish to Shopify here
+        await publishToShopify(product.id, result.meta);
     }
 
     return { meta: draftMeta, quality: critique, refined: false };
@@ -193,6 +288,8 @@ OPTIONS:
     console.log(`   Refined: ${result.refined ? 'Yes' : 'No'}`);
     console.log(`   Duration: ${duration}ms`);
     console.log(`   Output: ${outputFile}`);
+
+    logToMcp('ENRICH_PRODUCT', { product: product.title, quality: result.quality ? result.quality.score : 'N/A' });
 }
 
 if (require.main === module) {

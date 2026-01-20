@@ -1,0 +1,48 @@
+{
+    "protocol_version": "1.0",
+    "merchant": {
+        "name": "3A Automation Agency",
+        "id": "3a-automation-global"
+    },
+    "capabilities": {
+        "discovery": {
+            "endpoint": "/api/ucp/products",
+            "methods": [
+                "GET"
+            ]
+        },
+        "cart": {
+            "endpoint": "/api/ucp/cart",
+            "methods": [
+                "POST",
+                "PATCH",
+                "GET"
+            ]
+        },
+        "checkout": {
+            "endpoint": "/api/ucp/checkout",
+            "methods": [
+                "POST"
+            ],
+            "states": [
+                "incomplete",
+                "ready_for_complete",
+                "complete"
+            ]
+        },
+        "order_management": {
+            "endpoint": "/api/ucp/orders",
+            "methods": [
+                "GET"
+            ]
+        }
+    },
+    "transports": [
+        "REST",
+        "JSON-RPC"
+    ],
+    "auth": {
+        "type": "OAuth2",
+        "discovery_url": "/.well-known/openid-configuration"
+    }
+}

@@ -678,7 +678,7 @@ async function sendPriceDropAlerts() {
 }
 
 async function simulatePriceDrop(productId, dropPercent, customer) {
-  // Create mock product
+  log(`Entering price drop simulation for ${productId}`);
   const originalPrice = 100;
   const newPrice = originalPrice * (1 - dropPercent / 100);
 

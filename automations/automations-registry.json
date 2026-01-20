@@ -1,8 +1,7 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "version": "2.9.0",
-  "lastUpdated": "2026-01-08T20:50:00Z",
-  "totalCount": 118,
+  "lastUpdated": "2026-01-12T10:22:00Z",
+  "totalCount": 119,
   "description": "Single source of truth for all 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -137,13 +136,12 @@
       "name_fr": "Qualification & Scoring",
       "name_en": "Lead Qualification & Scoring",
       "category": "lead-gen",
-      "type": "manual-process",
-      "script": null,
+      "type": "agentic-workflow",
+      "script": "agency/core/lead-scoring-agentic.cjs",
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
       "benefit_fr": "Focus sur leads chauds",
       "benefit_en": "Focus on hot leads",
-      "note": "Previously planned as n8n workflow, now manual CRM process",
       "agentic_level": 3,
       "capabilities": [
         "Data Interoperability"
@@ -218,8 +216,8 @@
       "name_fr": "Typeform → Klaviyo",
       "name_en": "Typeform → Klaviyo",
       "category": "lead-gen",
-      "type": "manual-process",
-      "script": null,
+      "type": "agentic-workflow",
+      "script": "agency/core/lead-scoring-agentic.cjs",
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
       "benefit_fr": "Quiz → Email list",
@@ -613,8 +611,8 @@
       "name_fr": "Audit Store Complet",
       "name_en": "Complete Store Audit",
       "category": "shopify",
-      "type": "script",
-      "script": "templates/shopify/audit-shopify-complete.cjs",
+      "type": "agentic-workflow",
+      "script": "agency/core/store-audit-agentic.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Diagnostic complet",
@@ -1073,8 +1071,8 @@
       "name_fr": "Audit Shopify Store",
       "name_en": "Audit Shopify Store",
       "category": "shopify",
-      "type": "script",
-      "script": "templates/shopify/audit-shopify-store.cjs",
+      "type": "agentic-workflow",
+      "script": "agency/core/store-audit-agentic.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
@@ -2230,7 +2228,7 @@
       "name": "Lead Scoring - Agentic (Level 3)",
       "category": "Lead Generation & Acquisition",
       "type": "script",
-      "scriptPath": "automations/agency/core/lead-scoring-agentic.cjs",
+      "scriptPath": "agency/core/lead-scoring-agentic.cjs",
       "frequency": "on-demand",
       "benefits": [
         "AI critique of scoring accuracy",
@@ -2253,7 +2251,7 @@
       "name": "Flows Audit - Agentic (Level 3)",
       "category": "Email Marketing & Klaviyo",
       "type": "script",
-      "scriptPath": "automations/agency/core/flows-audit-agentic.cjs",
+      "scriptPath": "agency/core/flows-audit-agentic.cjs",
       "frequency": "weekly",
       "benefits": [
         "AI-prioritized fix list",
@@ -2276,7 +2274,7 @@
       "name": "Product Enrichment - Agentic (Level 3)",
       "category": "SEO & Content",
       "type": "script",
-      "scriptPath": "automations/agency/core/product-enrichment-agentic.cjs",
+      "scriptPath": "agency/core/product-enrichment-agentic.cjs",
       "frequency": "daily",
       "benefits": [
         "SEO quality scoring (0-10)",
@@ -2298,7 +2296,7 @@
       "name": "GA4 Budget Optimizer - Agentic (Level 4)",
       "category": "Analytics & Reporting",
       "type": "script",
-      "scriptPath": "automations/agency/core/ga4-budget-optimizer-agentic.cjs",
+      "scriptPath": "agency/core/ga4-budget-optimizer-agentic.cjs",
       "frequency": "weekly",
       "benefits": [
         "AI budget reallocation",
@@ -2322,7 +2320,7 @@
       "name": "Store Audit - Agentic (Level 3)",
       "category": "Shopify Admin & Operations",
       "type": "script",
-      "scriptPath": "automations/agency/core/store-audit-agentic.cjs",
+      "scriptPath": "agency/core/store-audit-agentic.cjs",
       "frequency": "monthly",
       "benefits": [
         "Conversion impact prediction",
@@ -2345,7 +2343,7 @@
       "name_en": "AI Content Strategist",
       "category": "seo",
       "type": "script",
-      "script": "automations/agency/core/content-strategist-agentic.cjs",
+      "script": "agency/core/content-strategist-agentic.cjs",
       "frequency_fr": "Hebdo",
       "frequency_en": "Weekly",
       "benefit_fr": "Identification des opportunités SEO",
@@ -2357,6 +2355,22 @@
         "Reasoning",
         "Agent Orchestration",
         "Autonomous Execution"
+      ]
+    },
+    {
+      "id": "harvest-market-trends",
+      "name_fr": "Récolte Tendances Marché (RSS)",
+      "name_en": "Market Trends Harvesting (RSS)",
+      "category": "marketing",
+      "type": "script",
+      "script": "agency/core/trends-discovery-rss.cjs",
+      "frequency_fr": "Quotidien",
+      "frequency_en": "Daily",
+      "benefit_fr": "Discovery trends sans blocage",
+      "benefit_en": "Unblocked trends discovery",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability"
       ]
     }
   ],
@@ -2384,7 +2398,7 @@
     "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
-    "withScript": 77,
+    "withScript": 78,
     "withoutScript": 35
   },
   "lastAudit": "2026-01-08T19:25:27.250Z",

@@ -1,0 +1,139 @@
+/* ultra-legal.css - Centralized styles for legal pages */
+
+.legal-section {
+    padding: 8rem 0 4rem;
+    position: relative;
+    min-height: 80vh;
+}
+
+.legal-content {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--secondary);
+    padding: 3rem;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border-radius: 2rem;
+    border: 1px solid rgba(79, 186, 241, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.legal-content h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.legal-updated {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legal-block {
+    margin-bottom: 3rem;
+}
+
+.legal-block h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.legal-block p {
+    margin-bottom: 1.2rem;
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+.legal-block ul {
+    margin-bottom: 1.5rem;
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+.legal-block li {
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.legal-block li::before {
+    content: "•";
+    color: var(--primary);
+    position: absolute;
+    left: -1.5rem;
+}
+
+.legal-block strong {
+    color: #fff;
+}
+
+.morph-blob-legal {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: -1;
+    animation: morph-ultra 20s infinite alternate;
+}
+
+.blob-1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(79, 186, 241, 0.08);
+    top: 30%;
+    right: 15%;
+}
+
+.blob-2 {
+    width: 250px;
+    height: 250px;
+    background: rgba(139, 92, 246, 0.06);
+    bottom: 40%;
+    left: 10%;
+    animation-delay: -7s;
+}
+
+@keyframes morph-ultra {
+    0% {
+        border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+    }
+
+    100% {
+        border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    .legal-content {
+        padding: 1.5rem;
+        border-radius: 1rem;
+    }
+}
+
+.icon-inline {
+    vertical-align: -2px;
+    margin-right: 4px;
+}
+
+.cookie-banner-hidden {
+    display: none;
+}

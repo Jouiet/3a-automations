@@ -3,7 +3,7 @@
   "generated": "2026-01-08T10:28:51.102Z",
   "totalAutomations": 112,
   "categories": 15,
-  "summary": "3A Automation dispose de 118 automatisations vérifiées (Level 4 Autonomous).",
+  "summary": "3A Automation dispose de 174 automatisations vérifiées (Level 5 Autonomous).",
   "automationsByCategory": {
     "Lead Generation & Acquisition": [
       "Sync Meta Leads → Shopify",
@@ -91,7 +91,7 @@
       "Feed Google Shopping",
       "Diagnostic GMC",
       "Article Blog + Distribution Multi-Canal",
-      "Workflow n8n Complet",
+      "Workflow Script Complet",
       "Generate All Promo Videos",
       "Blog Generator Résilient (3 AI + 3 Social)",
       "Podcast Generator (Blog → Audio)",

@@ -20,9 +20,26 @@
 
 const fs = require('fs');
 const path = require('path');
+const { logTelemetry } = require('../utils/telemetry.cjs');
 
-// Load environment variables from project root
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+// Portability Patch: Resilient .env loading
+const envPaths = [
+    path.join(__dirname, '.env'),
+    path.join(__dirname, '../../../.env'),
+    path.join(process.cwd(), '.env')
+];
+let envFound = false;
+for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+        require('dotenv').config({ path: envPath });
+        console.log(`[Telemetry] Configuration loaded from: ${envPath}`);
+        envFound = true;
+        break;
+    }
+}
+if (!envFound) {
+    console.warn('[Telemetry] No .env file found in search paths. Using existing environment variables.');
+}
 
 // ============================================================================
 // CONFIGURATION
@@ -30,7 +47,9 @@ require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 
 const CONFIG = {
     AGENTIC_MODE: process.argv.includes('--agentic'),
+    FORCE_MODE: process.argv.includes('--force'), // Bypass GPM pressure
     QUALITY_THRESHOLD: 8, // 0-10 scale
+    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
 
     // Multi-provider fallback
     AI_PROVIDERS: [
@@ -179,6 +198,19 @@ function scoreLeads(leads, weights = CONFIG.WEIGHTS) {
 
 async function agenticLeadScoring(leads, historicalData = []) {
     console.log('\n🤖 AGENTIC MODE: Draft → Critique → Refine\n');
+
+    // SITUATIONAL PRESSURE CHECK (Hybrid Decoupling Year 1)
+    if (!CONFIG.FORCE_MODE && fs.existsSync(CONFIG.GPM_PATH)) {
+        const gpm = JSON.parse(fs.readFileSync(CONFIG.GPM_PATH, 'utf8'));
+        const pressure = (gpm.sectors.sales && gpm.sectors.sales.lead_scoring) ? gpm.sectors.sales.lead_scoring.pressure : 0;
+        const threshold = gpm.thresholds.high || 70;
+
+        if (pressure < threshold) {
+            console.log(`[Equilibrium] Lead Scoring Pressure (${pressure}) below threshold (${threshold}). No AI reasoning required.`);
+            return { scores: [], quality: null, refined: false, status: "EQUILIBRIUM" };
+        }
+        console.log(`[Sluice Gate Open] High Lead Scoring Pressure detected (${pressure}). Activating AI Scoring...`);
+    }
 
     // STEP 1: DRAFT
     console.log('📝 DRAFT: Generating initial lead scores...');
@@ -381,6 +413,7 @@ EXAMPLE:
     // Save results
     fs.writeFileSync(outputFile, JSON.stringify(result, null, 2));
 
+    logTelemetry('LeadScorer-L4', 'Score Leads', { count: result.scores.length, quality: result.quality ? result.quality.score : 0 }, 'SUCCESS');
     console.log(`\n✅ COMPLETE`);
     console.log(`   Leads scored: ${result.scores.length}`);
     console.log(`   Quality: ${result.quality ? result.quality.score + '/10' : 'N/A'}`);
