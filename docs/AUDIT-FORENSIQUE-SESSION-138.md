@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE - 3A AUTOMATION
-## Session 138 | 22 Janvier 2026
+## Session 138 | 22 Janvier 2026 | MISE A JOUR POST-VERIFICATION
 
 ---
 
@@ -9,30 +9,31 @@
 |-------|--------|
 | **Dossier de travail** | `/Users/mac/Desktop/JO-AAA` |
 | **Repository GitHub** | https://github.com/Jouiet/3a-automations.git |
-| **Dernier commit** | `559db69` - fix(counter): Remove duplicate + from HTML text content |
+| **Dernier commit** | `df967a2` - fix(deploy): Use Next.js standalone mode for PM2 |
 | **Branch** | `main` |
 | **Date audit** | 22 janvier 2026 |
-| **Méthode** | Bottom-up factuelle (vérification empirique) |
+| **Methode** | Bottom-up factuelle (verification empirique) |
 
 ---
 
-## RÉSUMÉ EXÉCUTIF
+## RESUME EXECUTIF
 
 ```
-╔═════════════════════════════════════════════════════════════════════╗
-║  STATUT: MVP TECHNIQUE CONSOLIDÉ                                   ║
-║  MATURITÉ: Infrastructure + 174 automations, pré-revenu            ║
-║  MERGE: Documents/JO-AAA → Desktop/JO-AAA ✅ COMPLÉTÉ              ║
-╚═════════════════════════════════════════════════════════════════════╝
++=====================================================================+
+|  STATUT: MVP TECHNIQUE CONSOLIDE                                    |
+|  MATURITE: Infrastructure + 119 automations, pre-revenu             |
+|  MERGE: Documents/JO-AAA -> Desktop/JO-AAA COMPLETE                 |
+|  DASHBOARD: FIXE (502 -> 200)                                       |
++=====================================================================+
 ```
 
-| Catégorie | Score | Détail |
+| Categorie | Score | Detail |
 |-----------|-------|--------|
-| Infrastructure | 90% | VPS running, 5 containers Docker |
-| Scripts | 95% | 73 scripts, 22 --health, agentic workflows |
-| Documentation | 90% | Registry v3.0.0 synchronisé |
-| Intégrations | 60% | AI OK, CRM partiels, SMS bloqué |
-| Revenus | 0% | Aucun client payant vérifié |
+| Infrastructure | 95% | VPS running, 6 containers Docker, Dashboard OK |
+| Scripts | 95% | 73 scripts, 22 --health, 11 agentic, 12 sensors |
+| Documentation | 75% | Registry v3.0.0 (119 automations - PAS 174!) |
+| Integrations | 60% | AI OK, CRM partiels, SMS/WhatsApp bloques |
+| Revenus | 0% | Aucun client payant verifie |
 
 ---
 
@@ -40,7 +41,7 @@
 
 ### 1.1 Serveur Hostinger
 
-| Paramètre | Valeur |
+| Parametre | Valeur |
 |-----------|--------|
 | ID | 1168256 |
 | Hostname | srv1168256.hstgr.cloud |
@@ -51,271 +52,88 @@
 | vCPU | 2 |
 | RAM | 8 GB |
 | Disk | 100 GB |
-| État | **RUNNING** |
-| Créé | 1 décembre 2025 |
+| Etat | **RUNNING** |
+| Cree | 1 decembre 2025 |
 
-### 1.2 Containers Docker (5 projets)
+### 1.2 Containers Docker (6 projets)
 
-| Projet | Container | Image | État | Port |
+| Projet | Container | Image | Etat | Port |
 |--------|-----------|-------|------|------|
 | 3a-website | 3a-website-website-1 | nginx:alpine | RUNNING | 80 |
 | root | root-traefik-1 | traefik | RUNNING | 80, 443 |
-| dashboard | 3a-dashboard | node:20-alpine | RUNNING | - |
+| dashboard | 3a-dashboard | node:20-alpine | RUNNING | 3001 |
 | wordpress | wordpress-wordpress-1 | wordpress:latest | RUNNING | 80 |
 | wordpress | wordpress-db-1 | mariadb:10.11 | RUNNING | 3306 |
 | cinematicads | cinematicads-webapp | cinematicads-webapp:latest | RUNNING | 3000 |
 
-### 1.3 Coût Infrastructure
+### 1.3 Cout Infrastructure
 
-| Composant | Coût/mois |
+| Composant | Cout/mois |
 |-----------|-----------|
 | VPS Hostinger KVM2 | ~12 EUR |
-| Domaine 3a-automation.com | ~1 EUR (annualisé) |
+| Domaine 3a-automation.com | ~1 EUR (annualise) |
 | **TOTAL** | **~13 EUR/mois** |
 
 ---
 
 ## 2. AUTOMATIONS & SCRIPTS
 
-### 2.1 Registry (Source of Truth) - POST-MERGE
+### 2.1 Registry (Source of Truth) - VERIFIE 22/01/2026
 
-| Métrique | Valeur | Source |
+| Metrique | Valeur | Source |
 |----------|--------|--------|
 | Version | **3.0.0** | automations-registry.json |
-| Total automations | **174** | automations-registry.json |
-| Dernière MAJ | 20 janvier 2026 | automations-registry.json |
+| Total automations | **119** | automations-registry.json (VERIFIE) |
+| Derniere MAJ | 20 janvier 2026 | automations-registry.json |
 
-### 2.2 Répartition par Type
+**ATTENTION:** Documents anterieurs indiquaient 174 automations - INCORRECT. Le compte reel verifie est **119**.
+
+### 2.2 Repartition par Type (Verifie)
 
 | Type | Count |
 |------|-------|
-| script | 60 |
+| script | 79 |
 | external-service | 6 |
-| n8n-workflow | 6 |
 | klaviyo-flow | 5 |
+| agentic-workflow | 4 |
 | shopify-flow | 3 |
+| internal | 2 |
 | klaviyo-segment | 2 |
 | sheets-template | 2 |
-| Autres (10 types) | 15 |
+| Autres | 16 |
 
-### 2.3 Répartition par Catégorie
+### 2.3 Repartition par Categorie (Verifie)
 
-| Catégorie | Count |
+| Categorie | Count |
 |-----------|-------|
-| lead-gen | 24 |
+| lead-gen | 26 |
+| content | 19 |
 | shopify | 14 |
 | email | 11 |
-| content | 10 |
-| seo | 9 |
+| seo | 10 |
 | analytics | 9 |
+| cinematicads | 4 |
 | retention | 4 |
 | voice-ai | 4 |
-| cinematicads | 4 |
 | dropshipping | 3 |
 | whatsapp | 3 |
+| agency-ops | 2 |
 | ai-avatar | 2 |
+| marketing | 2 |
 | sms | 1 |
-| marketing | 1 |
+| Autres | 5 |
 
-### 2.4 Scripts Core (agency/core/) - POST-MERGE
+### 2.4 Scripts Core (agency/core/) - VERIFIE 22/01/2026
 
-| Métrique | Valeur |
+| Metrique | Valeur |
 |----------|--------|
 | Fichiers .cjs | **73** |
 | Taille totale | ~2.5 MB |
 | Scripts avec --health | **22** |
-| Scripts agentic | **12** |
-| Sensors | **11** |
+| Scripts agentic | **11** |
+| Sensors | **12** |
 
-#### Liste des 22 scripts avec --health
-
-```
-at-risk-customer-flow.cjs
-bigbuy-supplier-sync.cjs
-birthday-anniversary-flow.cjs
-blog-generator-resilient.cjs
-churn-prediction-resilient.cjs
-cjdropshipping-automation.cjs
-dropshipping-order-flow.cjs
-email-personalization-resilient.cjs
-grok-voice-realtime.cjs
-hubspot-b2b-crm.cjs
-lead-qualification-chatbot.cjs
-omnisend-b2c-ecommerce.cjs
-podcast-generator-resilient.cjs
-price-drop-alerts.cjs
-product-photos-resilient.cjs
-referral-program-automation.cjs
-replenishment-reminder.cjs
-review-request-automation.cjs
-sms-automation-resilient.cjs
-voice-api-resilient.cjs
-voice-telephony-bridge.cjs
-whatsapp-booking-notifications.cjs
-```
-
-### 2.5 Résultats Health Check (Vérifié)
-
-| Script | Status | Détails |
-|--------|--------|---------|
-| blog-generator-resilient | ✅ OK | 4 AI providers, WordPress OK |
-| churn-prediction-resilient | ✅ OK | Klaviyo connected, 4 AI providers |
-| email-personalization-resilient | ✅ OK | 4 AI providers + static fallback |
-| voice-api-resilient | ✅ OK | Grok + Gemini operational |
-| grok-voice-realtime | ✅ OK | WebSocket connected, voice=ara |
-| uptime-monitor | ⚠️ DEGRADED | 2/5 endpoints healthy |
-| hubspot-b2b-crm | ⚠️ TEST MODE | HUBSPOT_API_KEY manquant |
-| omnisend-b2c-ecommerce | ⚠️ TEST MODE | OMNISEND_API_KEY manquant |
-| sms-automation-resilient | ❌ NO PROVIDERS | Twilio + Omnisend manquants |
-| cjdropshipping-automation | ⚠️ TEST MODE | CJ_API_KEY manquant |
-
----
-
-## 3. CREDENTIALS & INTÉGRATIONS
-
-### 3.1 Fichier .env
-
-| Métrique | Valeur |
-|----------|--------|
-| Lignes totales | 332 |
-| Variables définies | ~95 |
-| Protégé par .gitignore | ✅ Oui |
-
-### 3.2 État des Intégrations
-
-#### AI Providers (4/4 Configurés)
-
-| Provider | Variable | Status |
-|----------|----------|--------|
-| OpenAI (GPT-5.2) | OPENAI_API_KEY | ✅ Configuré |
-| Anthropic (Claude) | ANTHROPIC_API_KEY | ✅ Configuré |
-| xAI (Grok 4.1) | XAI_API_KEY | ✅ Configuré |
-| Google (Gemini 3) | GEMINI_API_KEY | ✅ Configuré |
-
-#### E-commerce
-
-| Service | Variables | Status |
-|---------|-----------|--------|
-| Shopify | SHOPIFY_ACCESS_TOKEN, SHOPIFY_STORE | ✅ Configuré |
-| Klaviyo | KLAVIYO_API_KEY, KLAVIYO_PRIVATE_KEY | ✅ Configuré |
-
-#### CRM/Marketing
-
-| Service | Variables | Status |
-|---------|-----------|--------|
-| HubSpot | HUBSPOT_API_KEY | ❌ **MANQUANT** |
-| Omnisend | OMNISEND_API_KEY | ❌ **MANQUANT** |
-
-#### Communications
-
-| Service | Variables | Status |
-|---------|-----------|--------|
-| Twilio | TWILIO_ACCOUNT_SID, AUTH_TOKEN, PHONE | ❌ **MANQUANT** |
-| Telnyx | - | ❌ **MANQUANT** |
-| WhatsApp | WHATSAPP_ACCESS_TOKEN, etc. | ⚠️ Partiel |
-
-#### Ads/Social
-
-| Service | Variables | Status |
-|---------|-----------|--------|
-| Meta/Facebook | FACEBOOK_ACCESS_TOKEN, PAGE_ID | ⚠️ Partiel |
-| Google Ads | GOOGLE_ADS_* | ⚠️ Partiel |
-| TikTok | TIKTOK_ACCESS_TOKEN | ⚠️ Partiel |
-| LinkedIn | LINKEDIN_ACCESS_TOKEN | ⚠️ Partiel |
-
-#### Dropshipping
-
-| Service | Variables | Status |
-|---------|-----------|--------|
-| CJ Dropshipping | CJ_API_KEY | ❌ **MANQUANT** |
-| BigBuy | BIGBUY_API_KEY | ❌ **MANQUANT** |
-
-#### Infrastructure
-
-| Service | Variables | Status |
-|---------|-----------|--------|
-| Hostinger | HOSTINGER_API_TOKEN | ✅ Configuré |
-| GitHub | GITHUB_TOKEN | ✅ Configuré |
-| Google Cloud | GOOGLE_APPLICATION_CREDENTIALS | ✅ Configuré |
-| WordPress | WP_SITE_URL, WP_APP_PASSWORD | ✅ Configuré |
-| Apify | APIFY_API_TOKEN | ✅ Configuré |
-
----
-
-## 4. MCPs (Model Context Protocol Servers)
-
-### 4.1 Niveau Global (~/.claude/settings.json)
-
-| MCP | Type | Status |
-|-----|------|--------|
-| fal | URL remote | ✅ Actif |
-| grok-search-mcp | npx | ✅ Actif |
-| grok2-image | npx | ✅ Actif |
-| n8n-mcp | npx | ✅ Actif |
-
-### 4.2 Niveau Projet (.mcp.json)
-
-| MCP | Status |
-|-----|--------|
-| apify | ✅ Configuré |
-| chrome-devtools | ✅ Configuré |
-| google-analytics | ✅ Configuré |
-| google-sheets | ✅ Configuré |
-| klaviyo | ✅ Configuré |
-| meta-ads | ✅ Configuré |
-| powerbi-remote | ✅ Configuré |
-| shopify-admin | ✅ Configuré |
-| shopify-dev | ✅ Configuré |
-
-**Total MCPs: 13** (4 global + 9 projet)
-
----
-
-## 5. SITE WEB & SERVICES
-
-### 5.1 URLs et État
-
-| Service | URL | Status | Code |
-|---------|-----|--------|------|
-| Site principal | https://3a-automation.com | ✅ UP | 200 |
-| Dashboard | https://dashboard.3a-automation.com | ❌ DOWN | 502 |
-| n8n | https://n8n.srv1168256.hstgr.cloud | ❌ DOWN | 404 |
-| WordPress | https://blog.3a-automation.com | ❌ TIMEOUT | - |
-
-### 5.2 Sécurité Web (Vérifié)
-
-| Header | Status |
-|--------|--------|
-| Content-Security-Policy | ✅ Présent |
-| Strict-Transport-Security | ✅ Présent |
-| X-Frame-Options | ✅ DENY |
-| X-Content-Type-Options | ✅ nosniff |
-| Referrer-Policy | ✅ strict-origin-when-cross-origin |
-
----
-
-## 6. MERGE CONSOLIDATION ✅ COMPLÉTÉ
-
-### 6.1 Résumé du Merge
-
-| Avant | Après |
-|-------|-------|
-| Desktop: 99 automations | Desktop: **174 automations** |
-| Desktop: 35 scripts | Desktop: **73 scripts** |
-| Registry v2.7.0 | Registry **v3.0.0** |
-| package.json: 4 deps | package.json: **15 deps** |
-
-### 6.2 Fichiers Mergés
-
-- ✅ 38 nouveaux scripts agentic/sensors copiés
-- ✅ automations-registry.json v3.0.0
-- ✅ CLAUDE.md (Session 138, v47.2)
-- ✅ .mcp.json (10 MCPs)
-- ✅ package.json (15 dépendances)
-- ✅ utils/telemetry.cjs
-- ✅ gateways/llm-global-gateway.cjs
-
-### 6.3 Scripts Agentic Ajoutés
+#### Liste des 11 scripts agentic
 
 ```
 churn-prediction-enhanced-agentic.cjs
@@ -331,7 +149,7 @@ store-audit-agentic.cjs
 system-audit-agentic.cjs
 ```
 
-### 6.4 Sensors Ajoutés
+#### Liste des 12 sensors
 
 ```
 apify-trends-sensor.cjs
@@ -348,161 +166,314 @@ retention-sensor.cjs
 tiktok-ads-sensor.cjs
 ```
 
+### 2.5 Resultats Health Check (Verifie 22/01/2026)
+
+| Script | Status | Details |
+|--------|--------|---------|
+| blog-generator-resilient | OK | 4 AI providers, WordPress OK |
+| churn-prediction-resilient | OK | Klaviyo connected, 4 AI providers |
+| email-personalization-resilient | OK | 4 AI providers + static fallback |
+| voice-api-resilient | OK | 5 providers (Grok, OpenAI, Gemini, Claude, Local) |
+| grok-voice-realtime | OK | WebSocket ready |
+| uptime-monitor | DEGRADED | 4/5 endpoints healthy |
+| hubspot-b2b-crm | TEST MODE | HUBSPOT_API_KEY vide |
+| omnisend-b2c-ecommerce | TEST MODE | OMNISEND_API_KEY manquant |
+| sms-automation-resilient | NO PROVIDERS | Twilio + Omnisend manquants |
+
+---
+
+## 3. CREDENTIALS & INTEGRATIONS
+
+### 3.1 Fichier .env
+
+| Metrique | Valeur |
+|----------|--------|
+| Lignes totales | 332 |
+| Variables definies | 98 |
+| Protege par .gitignore | Oui |
+
+### 3.2 Etat des Integrations
+
+#### AI Providers (4/4 Configures)
+
+| Provider | Variable | Status |
+|----------|----------|--------|
+| OpenAI (GPT-5.2) | OPENAI_API_KEY | Configured |
+| Anthropic (Claude) | ANTHROPIC_API_KEY | Configured |
+| xAI (Grok 4.1) | XAI_API_KEY | Configured |
+| Google (Gemini 3) | GEMINI_API_KEY | Configured |
+
+#### E-commerce
+
+| Service | Variables | Status |
+|---------|-----------|--------|
+| Shopify | SHOPIFY_ACCESS_TOKEN, SHOPIFY_STORE | Configured |
+| Klaviyo | KLAVIYO_API_KEY, KLAVIYO_PRIVATE_KEY | Configured |
+
+#### CRM/Marketing
+
+| Service | Variables | Status |
+|---------|-----------|--------|
+| HubSpot | HUBSPOT_API_KEY | **VIDE** |
+| Omnisend | OMNISEND_API_KEY | **MANQUANT** |
+
+#### Communications
+
+| Service | Variables | Status |
+|---------|-----------|--------|
+| Twilio | TWILIO_ACCOUNT_SID, AUTH_TOKEN, PHONE | **MANQUANT** |
+| Telnyx | - | **MANQUANT** |
+| WhatsApp | WHATSAPP_ACCESS_TOKEN, etc. | Partiel |
+
+#### Dropshipping
+
+| Service | Variables | Status |
+|---------|-----------|--------|
+| CJ Dropshipping | CJ_API_KEY | **MANQUANT** |
+| BigBuy | BIGBUY_API_KEY | **MANQUANT** |
+
+#### Infrastructure
+
+| Service | Variables | Status |
+|---------|-----------|--------|
+| Hostinger | HOSTINGER_API_TOKEN | Configured |
+| GitHub | GITHUB_TOKEN | Configured |
+| Google Cloud | GOOGLE_APPLICATION_CREDENTIALS | Configured |
+| WordPress | WP_SITE_URL, WP_APP_PASSWORD | Configured |
+| Apify | APIFY_API_TOKEN | Configured |
+
+---
+
+## 4. MCPs (Model Context Protocol Servers)
+
+### 4.1 Niveau Global (~/.claude/settings.json)
+
+| MCP | Type | Status |
+|-----|------|--------|
+| fal | URL remote | Actif |
+| grok-search-mcp | npx | Actif |
+| grok2-image | npx | Actif |
+| n8n-mcp | npx | Actif |
+
+### 4.2 Niveau Projet (.mcp.json)
+
+| MCP | Status |
+|-----|--------|
+| apify | Configured |
+| chrome-devtools | Configured |
+| google-analytics | Configured |
+| google-sheets | Configured |
+| klaviyo | Configured |
+| meta-ads | Configured |
+| powerbi-remote | Configured |
+| shopify-admin | Configured |
+| shopify-dev | Configured |
+| stitch | Configured |
+
+**Total MCPs: 14** (4 global + 10 projet)
+
+---
+
+## 5. SITE WEB & SERVICES
+
+### 5.1 URLs et Etat (VERIFIE 22/01/2026 11:12)
+
+| Service | URL | Status | Code |
+|---------|-----|--------|------|
+| Site principal | https://3a-automation.com | UP | 200 |
+| Dashboard | https://dashboard.3a-automation.com | **UP** | **200** |
+| WordPress Blog | https://blog.3a-automation.com | UP | 200 |
+| n8n | https://n8n.srv1168256.hstgr.cloud | DOWN | 404 |
+
+### 5.2 Securite Web (Verifie)
+
+| Header | Status |
+|--------|--------|
+| Content-Security-Policy | Present |
+| Strict-Transport-Security | Present |
+| X-Frame-Options | SAMEORIGIN |
+| X-Content-Type-Options | nosniff |
+| Referrer-Policy | strict-origin-when-cross-origin |
+
+---
+
+## 6. MERGE CONSOLIDATION - COMPLETE
+
+### 6.1 Resume du Merge
+
+| Avant | Apres |
+|-------|-------|
+| Desktop: 99 automations | Desktop: **119 automations** |
+| Desktop: 35 scripts | Desktop: **73 scripts** |
+| Registry v2.7.0 | Registry **v3.0.0** |
+| package.json: 4 deps | package.json: **15 deps** |
+
+### 6.2 Fichiers Merges
+
+- 38 nouveaux scripts agentic/sensors copies
+- automations-registry.json v3.0.0
+- CLAUDE.md (Session 138, v47.2)
+- .mcp.json (10 MCPs)
+- package.json (15 dependances)
+- utils/telemetry.cjs
+- gateways/llm-global-gateway.cjs
+
 ---
 
 ## 7. CLIENTS & REVENUS
 
-### 7.1 État Actuel
+### 7.1 Etat Actuel
 
-| Métrique | Valeur | Preuve |
+| Metrique | Valeur | Preuve |
 |----------|--------|--------|
-| Clients payants | **0 vérifié** | Aucune facture/contrat trouvé |
+| Clients payants | **0 verifie** | Aucune facture/contrat trouve |
 | MRR | **0 EUR** | Pas de preuve de revenu |
-| Stade | **Pré-revenu** | MVP technique |
-
-### 7.2 Projections (Documents Investisseurs)
-
-| Année | Clients | Revenue | EBITDA | Note |
-|-------|---------|---------|--------|------|
-| Y1 (2026) | 60 | 108K EUR | 25K EUR | Hypothèse |
-| Y2 (2027) | 280 | 512K EUR | 346K EUR | Hypothèse |
-| Y3 (2028) | 500 | 780K EUR | 576K EUR | Hypothèse |
-
-**AVERTISSEMENT:** Ces projections sont des hypothèses business, pas des faits vérifiés.
+| Stade | **Pre-revenu** | MVP technique |
 
 ---
 
-## 8. GITIGNORE & SÉCURITÉ
+## 8. CORRECTIONS APPLIQUEES SESSION 138
 
-### 8.1 Fichiers Protégés
+| # | Correction | Avant | Apres |
+|---|------------|-------|-------|
+| 1 | Dashboard 502 | BUILD ERROR | **200 OK** |
+| 2 | JWT_SECRET | Top-level check | Lazy-load |
+| 3 | PM2 standalone | npm start | node server.js |
+| 4 | Git conflicts | Rejected | **Resolved + Pushed** |
+
+### Commits Pushes
 
 ```
-# Credentials (dans .gitignore)
-.env
-.env.local
-.env.production
-*.pem
-*.key
-service-account.json
-google-services.json
-*-credentials.json
-.claude/settings.local.json
+df967a2 fix(deploy): Use Next.js standalone mode for PM2
+9d941c0 fix(dashboard): Lazy-load JWT_SECRET to fix build-time error
+e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
 ```
-
-### 8.2 Vérification
-
-| Check | Status |
-|-------|--------|
-| .env dans .gitignore | ✅ Oui |
-| Credentials dans .gitignore | ✅ Oui |
-| node_modules dans .gitignore | ✅ Oui |
-| Secrets dans les commits | ✅ Non détecté |
 
 ---
 
 ## 9. PLAN D'ACTIONS
 
-### 9.1 Priorité CRITIQUE (Blocker)
+### 9.1 Priorite CRITIQUE (Blocker)
 
-| # | Action | Responsable | Impact | Status |
-|---|--------|-------------|--------|--------|
-| 1 | **Fixer Dashboard 502** | Ops | Service client inaccessible | ⏳ TypeScript fix pushed |
-| 2 | **Fixer WordPress timeout** | Ops | Blog/SEO bloqué | ⏳ Pending |
-| 3 | ~~Sync site avec source~~ | Dev | ~~174 vs 99 automations~~ | ✅ **MERGE COMPLÉTÉ** |
+| # | Action | Impact | Status |
+|---|--------|--------|--------|
+| 1 | ~~Fixer Dashboard 502~~ | Service client | **COMPLETE** |
+| 2 | ~~Fixer WordPress timeout~~ | Blog/SEO | **COMPLETE** (200 OK) |
+| 3 | ~~Sync site avec source~~ | 174 vs 99 | **MERGE COMPLETE** |
 
-### 9.2 Priorité HAUTE (Cette semaine)
+### 9.2 Priorite HAUTE (Cette semaine)
 
-| # | Action | Responsable | Impact | Status |
-|---|--------|-------------|--------|--------|
-| 4 | Configurer HUBSPOT_API_KEY | Config | B2B CRM activé | ⏳ Pending |
-| 5 | Configurer OMNISEND_API_KEY | Config | E-commerce B2C activé | ⏳ Pending |
-| 6 | Configurer Twilio | Config | SMS opérationnel | ⏳ Pending |
-| 7 | ~~Audit Documents/JO-AAA vs Desktop/JO-AAA~~ | Dev | ~~Merge optimal~~ | ✅ **COMPLÉTÉ** |
+| # | Action | Impact | Status |
+|---|--------|--------|--------|
+| 4 | Configurer HUBSPOT_API_KEY | B2B CRM active | Pending |
+| 5 | Configurer OMNISEND_API_KEY | E-commerce B2C active | Pending |
+| 6 | Configurer Twilio | SMS operationnel | Pending |
+| 7 | ~~Audit Documents vs Desktop~~ | Merge optimal | **COMPLETE** |
+| 8 | Corriger site: 174 -> 119 automations | Honnetete marketing | **CRITIQUE** |
 
-### 9.3 Priorité MOYENNE (Ce mois)
+### 9.3 Priorite MOYENNE (Ce mois)
 
-| # | Action | Responsable | Impact |
-|---|--------|-------------|--------|
-| 8 | Configurer CJ Dropshipping | Config | Dropshipping activé |
-| 9 | Configurer BigBuy | Config | Dropshipping EU activé |
-| 10 | Mettre à jour CLAUDE.md | Doc | Cohérence (13 MCPs, pas 11) |
-| 11 | Documenter tous credentials | Doc | Onboarding facilité |
+| # | Action | Impact |
+|---|--------|--------|
+| 9 | Configurer CJ Dropshipping | Dropshipping active |
+| 10 | Configurer BigBuy | Dropshipping EU active |
+| 11 | Mettre a jour CLAUDE.md | Coherence (14 MCPs) |
+| 12 | Documenter tous credentials | Onboarding facilite |
+| 13 | Creer sensors manquants (email, content, voice) | Couverture reelle |
 
-### 9.4 Priorité BASSE (Backlog)
+### 9.4 Priorite BASSE (Backlog)
 
-| # | Action | Responsable | Impact |
-|---|--------|-------------|--------|
-| 12 | Tests end-to-end scripts | QA | Fiabilité |
-| 13 | Monitoring alerting | Ops | Proactivité |
-| 14 | CI/CD tests automatiques | Dev | Qualité code |
+| # | Action | Impact |
+|---|--------|--------|
+| 14 | Tests end-to-end scripts | Fiabilite |
+| 15 | Monitoring alerting | Proactivite |
+| 16 | CI/CD tests automatiques | Qualite code |
 
 ---
 
-## 10. COMMANDES UTILES
+## 10. DISCREPANCES DOCUMENTEES
 
-### 10.1 Health Checks
+### Site vs Realite
+
+| Element | Affiche sur Site | Realite Verifiee | Action |
+|---------|------------------|------------------|--------|
+| Automations | 174 | **119** | CORRIGER SITE |
+| MCPs | 41 | **14** | Clarifier (disponibles vs actifs) |
+| Level | "L5 Sovereign" | L2-3 (sensors insuffisants) | Clarifier |
+
+### DOE v2 vs Realite
+
+| Element | DOE v2 | SESSION-138 Corrige |
+|---------|--------|---------------------|
+| Dashboard | 502 DOWN | **200 OK** |
+| Blog | Non specifie | **200 OK** |
+| Automations | 174 | **119** |
+| Sensors actifs | 4 | **~8-10** (a verifier) |
+
+---
+
+## 11. COMMANDES UTILES
+
+### 11.1 Health Checks
 
 ```bash
-# Tous les scripts avec --health
-for script in $(grep -l "\-\-health" automations/agency/core/*.cjs); do
-  echo "=== $(basename $script) ==="
-  node "$script" --health
-done
-
 # Script individuel
 node automations/agency/core/blog-generator-resilient.cjs --health
 node automations/agency/core/churn-prediction-resilient.cjs --health
 node automations/agency/core/voice-api-resilient.cjs --health
+node automations/agency/core/uptime-monitor.cjs --health
 ```
 
-### 10.2 Infrastructure
+### 11.2 Verifications
 
 ```bash
-# Status VPS via API Hostinger
-curl -s "https://developers.hostinger.com/api/vps/v1/virtual-machines/1168256" \
-  -H "Authorization: Bearer $HOSTINGER_API_TOKEN" | jq '.state'
+# Compter automations (realite)
+jq '.automations | length' automations/automations-registry.json
 
-# Liste containers Docker
-curl -s "https://developers.hostinger.com/api/vps/v1/virtual-machines/1168256/docker" \
-  -H "Authorization: Bearer $HOSTINGER_API_TOKEN" | jq '.[].name'
+# Compter scripts
+ls automations/agency/core/*.cjs | wc -l
+
+# Status services
+curl -sI https://dashboard.3a-automation.com | head -3
+curl -sI https://3a-automation.com | head -3
 ```
 
-### 10.3 Déploiement
+### 11.3 Deploiement
 
 ```bash
 # Deploy via GitHub Actions (auto sur push main)
 git push origin main
 
-# Vérifier site
+# Verifier site
 curl -s -o /dev/null -w "%{http_code}" https://3a-automation.com
 ```
 
 ---
 
-## 11. ANNEXES
+## 12. ANNEXES
 
-### A. Arborescence Clé (POST-MERGE)
+### A. Arborescence Cle
 
 ```
 /Users/mac/Desktop/JO-AAA/
-├── automations/
-│   ├── automations-registry.json    # Source of truth (174 automations)
-│   ├── agency/
-│   │   ├── core/                    # 73 scripts .cjs
-│   │   │   ├── gateways/            # LLM global gateway
-│   │   │   ├── *-agentic.cjs        # 12 agentic workflows
-│   │   │   ├── *-sensor.cjs         # 11 sensors
-│   │   │   └── *-resilient.cjs      # Resilient scripts with fallback
-│   │   └── utils/                   # telemetry.cjs
-│   ├── generic/                     # Utilitaires
-│   └── templates/                   # Templates réutilisables
-├── landing-page-hostinger/          # Site web source
-├── investor-docs/                   # Documents investisseurs
-├── docs/                            # Documentation
-├── .env                             # Credentials (gitignored)
-├── .mcp.json                        # 10 MCPs projet
-├── CLAUDE.md                        # Instructions Claude Code v47.2
-└── .gitignore                       # Protection credentials
++-- automations/
+|   +-- automations-registry.json    # Source of truth (119 automations)
+|   +-- agency/
+|   |   +-- core/                    # 73 scripts .cjs
+|   |   |   +-- gateways/            # LLM global gateway
+|   |   |   +-- *-agentic.cjs        # 11 agentic workflows
+|   |   |   +-- *-sensor.cjs         # 12 sensors
+|   |   |   +-- *-resilient.cjs      # Resilient scripts with fallback
+|   |   +-- utils/                   # telemetry.cjs
+|   +-- generic/                     # Utilitaires
+|   +-- templates/                   # Templates reutilisables
++-- landing-page-hostinger/          # Site web source
++-- investor-docs/                   # Documents investisseurs
++-- docs/                            # Documentation
++-- .env                             # Credentials (gitignored)
++-- .mcp.json                        # 10 MCPs projet
++-- CLAUDE.md                        # Instructions Claude Code v47.2
++-- .gitignore                       # Protection credentials
 ```
 
 ### B. Versions Logicielles
@@ -515,24 +486,17 @@ curl -s -o /dev/null -w "%{http_code}" https://3a-automation.com
 | Ubuntu (VPS) | 24.04 |
 | CLAUDE.md | v47.2 (Session 138) |
 
-### C. Contacts & Support
-
-| Ressource | Lien |
-|-----------|------|
-| GitHub Issues | https://github.com/Jouiet/3a-automations/issues |
-| Site | https://3a-automation.com |
-| Email | contact@3a-automation.com |
-
 ---
 
 ## SIGNATURES
 
-| Rôle | Date | Validation |
+| Role | Date | Validation |
 |------|------|------------|
-| Audit Claude Code (Opus 4.5) | 22/01/2026 | ✅ Complet |
+| Audit Claude Code (Opus 4.5) | 22/01/2026 | COMPLET + CORRIGE |
 | Review Owner | - | En attente |
 
 ---
 
-*Document généré automatiquement par Claude Code - Session 138*
-*Méthode: Audit forensique bottom-up factuel*
+*Document mis a jour: 22/01/2026 11:15 UTC*
+*Methode: Audit forensique bottom-up factuel avec verification empirique*
+*Session 138 - Post-correction Dashboard + Merge*
