@@ -946,6 +946,99 @@ body.lite {
   position: relative;
   width: 400px;
   height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Orbital Container - Rotating rings */
+.orbital-container {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(79, 186, 241, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#orbital-outer {
+  width: 100%;
+  height: 100%;
+  animation: orbitSpin 25s linear infinite;
+  animation-play-state: var(--anim-state, running);
+}
+
+#orbital-mid {
+  width: 70%;
+  height: 70%;
+  animation: orbitSpin 18s linear infinite reverse;
+  animation-play-state: var(--anim-state, running);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+#orbital-inner {
+  width: 45%;
+  height: 45%;
+  animation: orbitSpin 12s linear infinite;
+  animation-play-state: var(--anim-state, running);
+  border-color: rgba(79, 186, 241, 0.4);
+}
+
+/* Orbital Particles - Glowing dots */
+.orbital-particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--primary, #4FBAF1);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--primary, #4FBAF1), 0 0 30px rgba(79, 186, 241, 0.5);
+}
+
+.particle-top {
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.particle-bottom {
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.particle-left {
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.particle-right {
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Hero Logo Center */
+.hero-logo-center {
+  position: relative;
+  z-index: 10;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(79, 186, 241, 0.4);
+}
+
+.hero-logo-center.pulse-glow {
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(79, 186, 241, 0.4);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(79, 186, 241, 0.7), 0 0 80px rgba(16, 185, 129, 0.3);
+    filter: brightness(1.1);
+  }
 }
 
 .orbital-ring {

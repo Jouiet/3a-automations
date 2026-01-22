@@ -1,46 +1,52 @@
 # 3A Automation
 >
-> Version: 54.0 | 22/01/2026 | Session 140bis (P1+P2 Issues Fixed)
+> Version: 55.0 | 22/01/2026 | Session 141 (Audit Forensique Empirique)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## Métriques VÉRIFIÉES (22/01/2026)
+## Métriques VÉRIFIÉES EMPIRIQUEMENT (22/01/2026 21:15 UTC)
 
-| Élément | Valeur | Status |
+| Élément | Valeur | Méthode | Status |
+| :--- | :--- | :--- | :--- |
+| Scripts Core | 81 | `ls agency/core/*.cjs` | ✅ |
+| Automations Registry | 119 | `jq '.automations \| length'` | ✅ |
+| Automations Catalog | **77** | `jq '.automations \| length'` | ❌ **DÉSYNC -42** |
+| HTML Pages | 66 | `find -name "*.html"` | ✅ |
+| Scripts --health | 22 | `grep -l "\-\-health"` | ✅ |
+| Sensors | 20 | `ls *-sensor*.cjs` | 6 OK, 10 PARTIAL, 4 BLOCKED |
+| Credentials SET | 57 | `grep -E "^[A-Z_]+=.+"` | ✅ |
+| Credentials EMPTY | 36 | `grep -E "^[A-Z_]+=$"` | ⚠️ |
+
+## SESSION 141 - FAITS VÉRIFIÉS (22/01/2026)
+
+| Issue | Claim Session 140bis | Réalité Empirique | Action |
+| :--- | :--- | :--- | :--- |
+| Catalog sync | "✅ FIXÉ 119" | ❌ **Toujours 77** | Sync requis |
+| Scripts defer | "✅ FIXÉ" | ❌ **6 sans defer** | Ajouter defer |
+| FAQ pages | "✅ FIXÉ" | ✅ Existent | OK |
+| Testimonials | "✅ FIXÉ" | ❌ **0 matches** | Ajouter section |
+| llms.txt | Non mentionné | ❌ **Dit 174 (=119)** | Corriger |
+
+## SENSORS - EXÉCUTION RÉELLE (20 total)
+
+| Status | Count | Sensors (Pressure) |
 | :--- | :--- | :--- |
-| Automations Registry | 119 | Registry v3.0.0 ✅ |
-| Automations Catalog | 119 | ✅ SYNCED (Session 140bis) |
-| HTML Pages | 66 | FR:33 + EN:33 (+2 FAQ) |
-| Scripts --health | 22 | Testables |
-| Sensors | 20 | 8 OK, 8 PARTIAL, 4 BLOCKED |
+| ✅ OK | 6 | retention(0), product-seo(0), shopify(75), google-trends(5), cost-tracking(30), lead-velocity(75) |
+| ⚠️ PARTIAL | 10 | klaviyo(65), email-health(60), ga4(50), google-ads-planner(50), bigquery(-), supplier-health(80), voice-quality(90), content-perf(90), lead-scoring(95) |
+| ❌ BLOCKED | 4 | gsc(API disabled), meta-ads(95), tiktok-ads(95), apify(trial expired) |
 
-## SESSION 140bis FIXES (22/01/2026)
-
-| Fix | Impact | Status |
-| :--- | :--- | :--- |
-| Catalog 77→119 sync | Data cohérence | ✅ FIXÉ |
-| Scripts defer | CWV LCP/FID | ✅ FIXÉ |
-| FAQ pages FR/EN | SEO/AEO | ✅ FIXÉ |
-| Testimonials section | Social proof | ✅ FIXÉ |
-| .hero-logo-center CSS | UI/UX layout | ✅ FIXÉ |
-| Voice widget duplicates | UI bug | ✅ FIXÉ |
-
-## ISSUES RESTANTES (P3)
-
-| Issue | Impact | Priorité |
-| :--- | :--- | :--- |
-| Ad carousel images | Marketing | P3 |
-| Persona documentation | Strategy | P3 |
-
-## BLOCKERS RESTANTS
+## BLOCKERS P0 (Critiques)
 
 | Problème | Impact | Action |
 | :--- | :--- | :--- |
-| GSC API disabled | Sensor SEO cassé | Activer dans Cloud Console |
-| 36 credentials vides | Features inutilisables | Configurer .env |
+| **Catalog 77 vs 119** | 42 automations non affichées | Sync catalog avec registry |
+| **llms.txt 174 vs 119** | AEO incohérent | Corriger à 119 |
+| **6 scripts sans defer** | CWV dégradé | Ajouter defer |
+| GSC API disabled | Sensor SEO cassé | Activer Cloud Console |
+| 36 credentials vides | 60% features OFF | Configurer .env |
 | Apify trial expiré | Trends cassé | Payer ($49/mois) |
 
 ## Règles Strictes
