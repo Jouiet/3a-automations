@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <!-- ═══════════════════════════════════════════════════════════════════════
        FRENCH PAGES (Primary)
@@ -11,7 +11,7 @@
     <loc>https://3a-automation.com/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -29,7 +29,7 @@
     <loc>https://3a-automation.com/services/ecommerce.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/ecommerce.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/ecommerce.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -39,7 +39,7 @@
     <loc>https://3a-automation.com/services/pme.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/pme.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/smb.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -49,7 +49,7 @@
     <loc>https://3a-automation.com/services/flywheel-360.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/flywheel-360.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/flywheel-360.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -59,7 +59,7 @@
     <loc>https://3a-automation.com/services/voice-ai.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/voice-ai.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/voice-ai.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -69,7 +69,7 @@
     <loc>https://3a-automation.com/services/audit-gratuit.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/audit-gratuit.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/free-audit.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -79,19 +79,9 @@
     <loc>https://3a-automation.com/automations.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/automations.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/automations.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- FAQ FR -->
-  <url>
-    <loc>https://3a-automation.com/faq.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/faq.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Pricing FR -->
@@ -99,7 +89,7 @@
     <loc>https://3a-automation.com/pricing.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/pricing.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/pricing.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -109,7 +99,7 @@
     <loc>https://3a-automation.com/contact.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/contact.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/contact.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -119,7 +109,7 @@
     <loc>https://3a-automation.com/a-propos.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/a-propos.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/about.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -129,7 +119,7 @@
     <loc>https://3a-automation.com/investisseurs.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/investisseurs.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/investors.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -139,7 +129,7 @@
     <loc>https://3a-automation.com/cas-clients.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/cas-clients.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/case-studies.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -149,7 +139,7 @@
     <loc>https://3a-automation.com/legal/mentions-legales.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/legal/mentions-legales.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/legal/terms.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -159,7 +149,7 @@
     <loc>https://3a-automation.com/legal/politique-confidentialite.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/legal/politique-confidentialite.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/legal/privacy.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -169,131 +159,9 @@
     <loc>https://3a-automation.com/booking.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/booking.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/booking.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- Dashboard FR -->
-  <url>
-    <loc>https://3a-automation.com/dashboard.html</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       ACADEMY PAGES (French)
-       ═══════════════════════════════════════════════════════════════════════ -->
-
-  <!-- Academy Index FR -->
-  <url>
-    <loc>https://3a-automation.com/academie.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Academy Guides FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/guides.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/guides.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/guides.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Academy Course - Demarrer FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/cours/demarrer.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/demarrer.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/getting-started.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - E-commerce FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/cours/ecommerce.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/ecommerce.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/ecommerce.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - Emails FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/cours/emails.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/emails.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/emails.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - Leads FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/cours/leads.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/leads.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/leads.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - Contenu FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/cours/contenu.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/contenu.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/content.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - Analytics FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/cours/analytics.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/analytics.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/analytics.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Path - E-commerce FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/parcours/e-commerce.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/e-commerce.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/e-commerce.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Path - Growth FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/parcours/growth.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/growth.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/growth.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Path - Marketing Automation FR -->
-  <url>
-    <loc>https://3a-automation.com/academie/parcours/marketing-automation.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/marketing-automation.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/marketing-automation.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 
   <!-- ═══════════════════════════════════════════════════════════════════════
@@ -305,7 +173,7 @@
     <loc>https://3a-automation.com/en/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -315,7 +183,7 @@
     <loc>https://3a-automation.com/en/services/ecommerce.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/ecommerce.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/ecommerce.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -325,7 +193,7 @@
     <loc>https://3a-automation.com/en/services/smb.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/pme.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/smb.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -335,7 +203,7 @@
     <loc>https://3a-automation.com/en/services/flywheel-360.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/flywheel-360.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/flywheel-360.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -345,7 +213,7 @@
     <loc>https://3a-automation.com/en/services/voice-ai.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/voice-ai.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/voice-ai.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -355,7 +223,7 @@
     <loc>https://3a-automation.com/en/services/free-audit.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/audit-gratuit.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/free-audit.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
@@ -365,19 +233,9 @@
     <loc>https://3a-automation.com/en/automations.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/automations.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/automations.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- FAQ EN -->
-  <url>
-    <loc>https://3a-automation.com/en/faq.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/faq.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Pricing EN -->
@@ -385,7 +243,7 @@
     <loc>https://3a-automation.com/en/pricing.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/pricing.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/pricing.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -395,7 +253,7 @@
     <loc>https://3a-automation.com/en/contact.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/contact.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/contact.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -405,7 +263,7 @@
     <loc>https://3a-automation.com/en/about.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/a-propos.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/about.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -415,7 +273,7 @@
     <loc>https://3a-automation.com/en/investors.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/investisseurs.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/investors.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -425,7 +283,7 @@
     <loc>https://3a-automation.com/en/case-studies.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/cas-clients.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/case-studies.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -435,7 +293,7 @@
     <loc>https://3a-automation.com/en/legal/terms.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/legal/mentions-legales.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/legal/terms.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -445,7 +303,7 @@
     <loc>https://3a-automation.com/en/legal/privacy.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/legal/politique-confidentialite.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/legal/privacy.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -455,123 +313,9 @@
     <loc>https://3a-automation.com/en/booking.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/booking.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/booking.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       ACADEMY PAGES (English)
-       ═══════════════════════════════════════════════════════════════════════ -->
-
-  <!-- Academy Index EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Academy Guides EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/guides.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/guides.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/guides.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Academy Course - Getting Started EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/courses/getting-started.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/demarrer.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/getting-started.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - E-commerce EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/courses/ecommerce.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/ecommerce.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/ecommerce.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - Emails EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/courses/emails.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/emails.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/emails.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - Leads EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/courses/leads.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/leads.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/leads.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - Content EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/courses/content.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/contenu.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/content.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Course - Analytics EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/courses/analytics.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/analytics.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/analytics.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Path - E-commerce EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/paths/e-commerce.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/e-commerce.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/e-commerce.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Path - Growth EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/paths/growth.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/growth.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/growth.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Academy Path - Marketing Automation EN -->
-  <url>
-    <loc>https://3a-automation.com/en/academy/paths/marketing-automation.html</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/marketing-automation.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/marketing-automation.html"/>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
 
   <!-- ═══════════════════════════════════════════════════════════════════════
@@ -583,7 +327,7 @@
     <loc>https://3a-automation.com/blog/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -593,7 +337,7 @@
     <loc>https://3a-automation.com/en/blog/</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -603,7 +347,7 @@
     <loc>https://3a-automation.com/blog/automatisation-ecommerce-2026.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/automatisation-ecommerce-2026.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/ecommerce-automation-2026.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -613,7 +357,7 @@
     <loc>https://3a-automation.com/en/blog/ecommerce-automation-2026.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/automatisation-ecommerce-2026.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/ecommerce-automation-2026.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -623,7 +367,7 @@
     <loc>https://3a-automation.com/blog/assistant-vocal-ia-pme-2026.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/assistant-vocal-ia-pme-2026.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/voice-ai-assistant-sme-2026.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -633,7 +377,7 @@
     <loc>https://3a-automation.com/en/blog/voice-ai-assistant-sme-2026.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/assistant-vocal-ia-pme-2026.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/voice-ai-assistant-sme-2026.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -644,7 +388,7 @@
     <loc>https://3a-automation.com/blog/comment-automatiser-votre-service-client-avec-l-ia.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/comment-automatiser-votre-service-client-avec-l-ia.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/how-to-automate-customer-service-with-ai-effectively.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -654,7 +398,7 @@
     <loc>https://3a-automation.com/en/blog/how-to-automate-customer-service-with-ai-effectively.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/comment-automatiser-votre-service-client-avec-l-ia.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/how-to-automate-customer-service-with-ai-effectively.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -663,7 +407,7 @@
   <url>
     <loc>https://3a-automation.com/blog/marketing-automation-pour-startups-2026-guide-complet.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/marketing-automation-pour-startups-2026-guide-complet.html"/>
-    <lastmod>2026-01-20</lastmod>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

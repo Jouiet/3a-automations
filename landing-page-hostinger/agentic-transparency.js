@@ -63,6 +63,22 @@ async function updateAgenticStatus() {
             }
         }
 
+        // Hardcoded config for now, will come from data.json later
+        const config = {
+            toolCount: 174,
+            agentCount: 18,
+            autonomyLevel: "L5 (Sovereign)",
+            updateInterval: 5000
+        };
+
+        // Update tool count and autonomy level
+        const toolCountEl = document.getElementById('tool-count');
+        if (toolCountEl) toolCountEl.textContent = config.toolCount;
+
+        const autonomyLevelEl = document.getElementById('autonomy-level');
+        if (autonomyLevelEl) autonomyLevelEl.textContent = config.autonomyLevel;
+
+
     } catch (e) {
         console.warn("Failed to update agentic status.", e);
     }

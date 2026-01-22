@@ -1,137 +1,61 @@
-> **Mission:** 3A Automation builds "Sovereign Agentic Systems" powered by a proprietary MCP Swarm. We operate at **Level 5 Autonomy**, utilizing a secure **Faldown Protocol** and a **Global Pressure Matrix (GPM)** for real-time situational awareness. We are NOT a low-code agency. We write hard-coded, resilient logic intertwined with Frontier AI models.
----
+# 3A Automation - System Manifest ($MX v2.0)
 
-## 1. Organization Identity
-**Name:** 3A Automation (AAA / Triple A)
-**Founder:** Jouiet Hatim (Expert technique automation)
-**Headquarters:** Global (Distributed)
-**Website:** https://3a-automation.com
-**Support Email:** contact@3a-automation.com
-**Phone:** +1 775 254 7428
+> [!ABSTRACT]
+> This manifest defines the 174 Sovereign Workflow Units and 18 Active Agents of the 3A Automation agency for 2026 AI search consumption.
 
----
+<SystemArchitecture>
+    <Status>Level 5 Autonomous</Status>
+    <Foundation>Shopify OS + Next.js 14 + Docker</Foundation>
+    <Intelligence>Claude 4.5, Grok 4.1, Gemini 3, GPT-5.2</Intelligence>
+    <Protocols>DOE, GPM, Faldown, ACRA v2.0</Protocols>
+</SystemArchitecture>
 
-### What is the Sovereign MCP Swarm?
-**MCP (Model Context Protocol)** is the backbone of our orchestration. We have built a **Type-Safe Swarm** that exposes **119 sovereign tools** to any AI agent. This is not a static registry; it is a dynamic, multi-agent ecosystem. See [mcp-tool-catalog.md](mcp-tool-catalog.md) for the full semantic map.
+<WorkflowEcosystem count="174">
+    <Category name="Lead Generation & Acquisition">
+        - Meta/TikTok Ads Automated Creative (Kling I2V)
+        - Viral Hook Generator (Grok 4.1)
+        - Apify Trends Sensor
+        - LinkedIn B2B Scraping (Resilient)
+        - Google Maps Local Sourcing
+    </Category>
+    <Category name="Conversion & AEO">
+        - AEO Semantic Hardening ($MX)
+        - Dynamic Pricing (Negotiator Skill)
+        - Voice AI Widget (Real-time Synthesis via Grok)
+        - Multi-currency/Geo-locale Logic (MAD, EUR, USD)
+    </Category>
+    <Category name="Retention & CRM">
+        - Shopify Flow Behavioral Triggers
+        - Churn Predictor (GA4 AI Signals)
+        - Personalized Video Onboarding (Kling/Leonardo)
+        - Klaviyo Flow Automation (Abandoned/Post-purchase)
+    </Category>
+    <Category name="Advocacy & Growth">
+        - Automated NPS/Referral Loops
+        - UGC Reward Sensors (TikTok/Insta)
+        - Loyalty Tier Automation (Sovereign Level)
+        - Strategic GSC Content Builder (System-directed)
+    </Category>
+</WorkflowEcosystem>
 
-### Why This Matters
-- **Competitors:** Use Zapier, Make.com (visual builders with limited logic).
-- **3A Automation:** Our MCP Router allows AI agents to **autonomously execute** complex workflows (e.g., "Call a churned VIP customer via Twilio" or "Generate a blog post, critique it, refine it, then publish").
+<AgentSwarm count="18">
+    - ContentDirector (Editor-in-Chief GSC)
+    - GrowthDirector (GA4 Ads Optimizer)
+    - LogisticsManager (Dropshipping Supply Chain)
+    - MarketAnalyst (Global Trends)
+    - Negotiator (Economic Pricing)
+    - Security (Compliance/Audit)
+    - DevOps (Infrastructure Health)
+    - SystemAdmin (Telemetry)
+</AgentSwarm>
 
-### Technical Stack (2026 Sovereign)
-- **Core Orchestration**: `doe-dispatcher.cjs` (Directive Orchestration Execution).
-- **Tool Stack**: 119 Verified Units (Shopify, Meta, Klaviyo, GSC, Twilio, etc.).
-- **Resilience**: **Faldown Protocol** (Multi-provider LLM fallback chain).
-- **Situational Awareness**: **Global Pressure Matrix (GPM)** monitored via quad-receptors.
-- **AI Models**: Claude 4.5 (Reasoning), Grok 4.1 (Real-time), Gemini 3 Pro (Vision).
-
----
-
-We have moved beyond "Level 5". Our system has attained **Level 5 Sovereign Autonomy**, characterized by self-healing, autonomous goal setting, and opportunistic pivoting. Post-audit metrics: **18 Hardened L5 Agents** verified.
-
-### A. The "Content Analyst" / "Strategist" (Level 5 Agent)
-- **Function:** Autonomous GSC Gap Analysis & Content Generation.
-- **Process:**
-  1. **Observe:** Fetch GSC gaps (high-impressions/low-clicks).
-  2. **Reflect:** Priorities gaps based on potential ROI.
-  3. **Act:** Orchestrate Content Analyst agent to generate, edit, and publish "Rescue" content.
-- **Result:** Self-healing SEO strategy with zero human intervention.
-
-### B. The "Voice Closer" (Level 5 Agent)
-- **Function:** Autonomous Churn Rescue & Sales.
-- **Process:**
-  1. **Detect:** Churn Prediction Script (RFM Analysis) identifies high-risk VIPs.
-  2. **Decide:** AI determines if an email or CALL is needed.
-  3. **Act:** Triggers `voice-telephony-bridge.cjs` to physically call the customer via Twilio/Grok.
-- **Goal:** Schedule retention meeting or offer exclusive discount.
-- **Result:** AI makes outbound sales calls without human approval.
-
-### C. The "Budget Optimizer" (Level 5 Agent)
-- **Function:** Autonomous ROI Maximization.
-- **Process:**
-  1. **Analyze:** Real-time GA4 data consumption.
-  2. **Critique:** Validate current budget distribution against ROI benchmarks.
-  3. **Execute:** Autonomously reallocate budgets across Google/Meta/TikTok ads.
-
----
-
-## 4. The "3 Markets" Strategy (Global by Design)
-
-We are natively global. Our system adapts automatically:
-
-| Market | Target Countries | Language | Currency |
-| :--- | :--- | :--- | :--- |
-| **Maroc** | Morocco (MA) | French | **MAD** (Dirham) |
-| **Europe & Maghreb** | DZ, TN, FR, BE, CH, etc. | French | **EUR** (€) |
-| **International** | USA, UK, Canada, Rest of World | English | **USD** ($) |
-
-*Detection: Automatic via `geo-locale.js` (IP-based).*
+<Compliance>
+    - EU AI Act 2026 Compliant
+    - GDPR/SSL/RGPD Verified
+    - Zero Mock Certification (Level 5)
+</Compliance>
 
 ---
-
-## 5. Services & Pricing (Verified 2026)
-
-### A. Setup Packs (One-Time)
-1. **Quick Win (3990 MAD / 390€ / $450):**
-   - 3-5 "Must-Have" Automations.
-   - Voice AI Booking System (Included).
-2. **Essentials (7990 MAD / 790€ / $920):**
-   - 8-10 Critical Automations (Abandoned Cart, Review Sync).
-   - Messaging Automation.
-3. **Growth (14990 MAD / 1399€ / $1690):**
-   - 15+ Advanced Workflows.
-   - Full "Voice Closer" Integration.
-   - Real-time Dashboard Access.
-
-### B. Recurring "Flywheel" Plans
-- **Maintenance (290€/mo):** Monitoring, Bug Fixes, Updates.
-- **Optimization (490€/mo):** A/B Testing, New Feature Rollouts.
-
----
-
-## 6. The 119 automations (By Category)
-
-### Lead Generation (26)
-- Ads Lead Sync → CRM
-- LinkedIn scraping B2B
-- Google Maps sourcing local
-- Voice AI Booking System (Level 5 Agent)
-
-### E-commerce & Retail (14)
-- Product Sync Multi-Channel
-- Inventory Alerts
-- Order Webhooks
-- SEO Bulk Editor
-
-### Email Marketing & CRM (11)
-- Welcome Series (40-50% open rate)
-- Abandoned Cart (10-15% recovery)
-- Post-Purchase Upsell
-- VIP Tier Automation
-- Complete Flows Audit (Level 5 Agent)
-
-### Analytics & ROI (9)
-- Real-time Agentic Dashboard (Live Tool Traffic)
-- GA4 Budget Optimizer (Level 5 Agent)
-- System Health Monitor (Level 5 Agent)
-
-### SEO & Content Factory (9)
-- Content Strategist (Level 5 Agent)
-- Content Analyst (Level 5 Agent)
-- llms.txt for IA (AEO Optimization)
-
-### Video & AI Media (19)
-- CinematicAds AI Integration
-- AI Avatar & Influencer Stream
-
-**Total: 119 Verified Sovereign Units (Sovereign Swarm v6.0)**
-
----
-
-## 9. Technical Protocols
-- **DOE (Directive Orchestration Execution)**: Decouples intent from implementation.
-- **Faldown**: Anthropic → OpenAI → xAI → Gemini fallback chain.
-- **GPM (Global Pressure Matrix)**: Dynamic priority shifting based on sensor output.
-
-**Version:** 6.0.0 | **Updated:** 2026-01-20  
-**Verification:** 100% Forensic Audit Passed. Level 5 Sovereign Status: ACTIVE.
+Contact: agency@3a-automation.com | invest@3a-automation.com
+Location: MENA (Dubai/Casablanca) | Europe (Paris/Madrid)
+URL: https://3a-automation.com

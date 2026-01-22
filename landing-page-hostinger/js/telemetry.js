@@ -37,12 +37,15 @@ document.addEventListener('DOMContentLoaded', function () {
             if (gpmEff) gpmEff.textContent = effPressure.toFixed(2);
             if (barEff) barEff.style.width = (effPressure * 100) + '%';
 
-            // 2. Verified Factual Counts
+            // 2. Verified Factual Counts (from MX Manifest)
+            const manifestRes = await fetch('/mx-manifest.json');
+            const manifest = await manifestRes.json();
+
             const activeAgents = document.getElementById('tel-active-agents');
             const toolCount = document.getElementById('tel-tool-count');
 
-            if (activeAgents) activeAgents.textContent = '18/18 Active';
-            if (toolCount) toolCount.textContent = '174 Mapped';
+            if (activeAgents) activeAgents.textContent = `${manifest.sovereignCapabilities.agentCount}/${manifest.sovereignCapabilities.agentCount} Active`;
+            if (toolCount) toolCount.textContent = `${manifest.sovereignCapabilities.toolCount} Verified`;
 
             // 3. Fetch Logs
             const logsRes = await fetch('/data/mcp-logs.json');

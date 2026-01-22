@@ -55,12 +55,6 @@
   const needsTextFallback = !hasSpeechRecognition || isFirefox || isSafari;
 
   function createWidget() {
-    // Prevent duplicate widget creation
-    if (document.getElementById('voice-assistant-widget')) {
-      console.log('[3A Voice] Widget already exists, skipping duplicate creation');
-      return;
-    }
-
     const widget = document.createElement('div');
     widget.id = 'voice-assistant-widget';
     widget.innerHTML = `
