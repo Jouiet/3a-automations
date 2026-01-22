@@ -147,13 +147,15 @@ MAX_THINKING_TOKENS=1024  # Pour tâches simples
 
 ---
 
-## ÉCONOMIES VÉRIFIÉES (Session 138)
+## ÉCONOMIES THÉORIQUES (Non Testées)
 
-| Métrique | Avant | Après | Économie |
-|----------|-------|-------|----------|
-| Exploration 3 agents | 276k tokens | 5k tokens | **98%** |
-| Coût/session | ~$25 | ~$0.50 | **98%** |
-| Mensuel (10/jour) | $7,500 | $150 | **$7,350** |
+| Métrique | Problème Observé | Théorique Si Règles Suivies |
+|----------|------------------|----------------------------|
+| Exploration 3 agents | 276k tokens | ~5k tokens (À VÉRIFIER) |
+| Coût/session | ~$25 | ~$0.50 (À VÉRIFIER) |
+
+**⚠️ ATTENTION**: Ces économies sont THÉORIQUES basées sur Anthropic Engineering.
+Elles n'ont PAS été vérifiées empiriquement dans ce projet.
 
 ---
 
