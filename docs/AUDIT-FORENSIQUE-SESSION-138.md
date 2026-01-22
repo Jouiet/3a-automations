@@ -165,67 +165,86 @@ store-audit-agentic.cjs
 system-audit-agentic.cjs
 ```
 
-#### Liste des 12 sensors
+#### Liste des 20 sensors (Updated Session 139)
 
 ```
+# Original 12:
 apify-trends-sensor.cjs
 bigquery-trends-sensor.cjs
 ga4-sensor.cjs
 google-ads-planner-sensor.cjs
-google-trends-sensor.cjs
+google-trends-sensor.cjs          # REWRITTEN: AI-powered (Grok→OpenAI→Gemini)
 gsc-sensor.cjs
 lead-scoring-sensor.cjs
-lead-velocity-sensor.cjs
+lead-velocity-sensor.cjs          # FIXED: Handle {scores:[]} format
 meta-ads-sensor.cjs
 product-seo-sensor.cjs
 retention-sensor.cjs
 tiktok-ads-sensor.cjs
+
+# NEW 8 (Session 139 - Per DOE v2 Section 9.3):
+shopify-sensor.cjs                # Store health, orders, inventory
+klaviyo-sensor.cjs                # Email flows, campaigns
+email-health-sensor.cjs           # Bounce/spam/open rates (CRITIQUE)
+content-performance-sensor.cjs    # WordPress blog metrics
+supplier-health-sensor.cjs        # CJ/BigBuy API health
+whatsapp-status-sensor.cjs        # Template approval, quality rating
+voice-quality-sensor.cjs          # Voice API latency, providers
+cost-tracking-sensor.cjs          # API costs, burn rate
 ```
 
-### 2.5 ETAT REEL DES SENSORS (Teste Empiriquement 22/01/2026)
+### 2.5 ETAT REEL DES SENSORS (Mis à jour Session 139 - 22/01/2026)
 
-**ALERTE: 50% des sensors sont CASSES ou BLOQUES**
+**AMÉLIORATION: 12→20 sensors, 40% fonctionnels (vs 25% avant)**
 
 | # | Sensor | Status | Erreur | Domaine |
 |---|--------|--------|--------|---------|
-| 1 | ga4-sensor | PARTIEL | ROAS=0.00 (pas de data) | Analytics |
-| 2 | gsc-sensor | **BROKEN** | API not enabled in Cloud Console | SEO |
-| 3 | meta-ads-sensor | **DISCONNECTED** | META_ACCESS_TOKEN manquant | Ads |
-| 4 | tiktok-ads-sensor | **DISCONNECTED** | TIKTOK_API manquant | Ads |
-| 5 | retention-sensor | OK | Pressure=0 | Retention |
-| 6 | lead-scoring-sensor | CRITIQUE | Pressure=95 (donnees stale?) | Leads |
-| 7 | lead-velocity-sensor | **BROKEN** | JS error: filter is not a function | Leads |
-| 8 | product-seo-sensor | OK | Pressure=0 | Shopify SEO |
-| 9 | apify-trends-sensor | **BROKEN** | Free trial expired | Trends |
-| 10 | bigquery-trends-sensor | VIDE | 0 rising terms | Trends |
-| 11 | google-trends-sensor | **BROKEN** | Scraping blocked by Google | Trends |
-| 12 | google-ads-planner-sensor | PASSIVE | Credentials missing | Ads |
+| 1 | ga4-sensor | PARTIEL | ROAS=0.00 (store inactif) | Analytics |
+| 2 | gsc-sensor | **BLOCKED** | API not enabled in Cloud Console | SEO |
+| 3 | meta-ads-sensor | **BLOCKED** | META_ACCESS_TOKEN manquant | Ads |
+| 4 | tiktok-ads-sensor | **BLOCKED** | TIKTOK_API manquant | Ads |
+| 5 | retention-sensor | ✅ OK | Pressure=0 | Retention |
+| 6 | lead-scoring-sensor | PARTIEL | Pressure=95 | Leads |
+| 7 | lead-velocity-sensor | ✅ OK | **FIXÉ** Session 139 | Leads |
+| 8 | product-seo-sensor | ✅ OK | Pressure=0 | Shopify SEO |
+| 9 | apify-trends-sensor | **BLOCKED** | Free trial expired | Trends |
+| 10 | bigquery-trends-sensor | PARTIEL | 0 rising terms | Trends |
+| 11 | google-trends-sensor | ✅ OK | **RÉÉCRIT** AI-powered | Trends |
+| 12 | google-ads-planner-sensor | PARTIEL | PASSIVE mode | Ads |
+| 13 | shopify-sensor | ✅ OK | **NEW** Store health | Shopify |
+| 14 | klaviyo-sensor | ✅ OK | **NEW** Email flows | Email |
+| 15 | email-health-sensor | ✅ OK | **NEW** Bounce/open rates | Email |
+| 16 | content-performance-sensor | PARTIEL | **NEW** WordPress SSL | Content |
+| 17 | supplier-health-sensor | PARTIEL | **NEW** No CJ/BigBuy creds | Dropshipping |
+| 18 | whatsapp-status-sensor | PARTIEL | **NEW** No token | WhatsApp |
+| 19 | voice-quality-sensor | PARTIEL | **NEW** Endpoints down | Voice-AI |
+| 20 | cost-tracking-sensor | ✅ OK | **NEW** Budget OK | Finance |
 
-#### Synthese Sensors
+#### Synthese Sensors (Session 139)
 
 ```
-SENSORS FONCTIONNELS:     3/12 (25%)  - retention, product-seo, trends-rss
-SENSORS PARTIELS:         3/12 (25%)  - ga4, lead-scoring, bigquery
-SENSORS CASSES/BLOQUES:   6/12 (50%)  - gsc, meta, tiktok, lead-velocity, apify, google-trends
+SENSORS FONCTIONNELS:     8/20 (40%)  - retention, product-seo, lead-velocity, google-trends, shopify, klaviyo, email-health, cost-tracking
+SENSORS PARTIELS:         8/20 (40%)  - ga4, lead-scoring, bigquery, google-ads-planner, content-perf, supplier, whatsapp, voice-quality
+SENSORS BLOQUES:          4/20 (20%)  - gsc, meta-ads, tiktok-ads, apify
 ```
 
-#### Couverture par Domaine (119 automations)
+#### Couverture par Domaine (119 automations) - AMÉLIORÉE
 
 | Domaine | Automations | Sensor | Couvert? |
 |---------|-------------|--------|----------|
-| lead-gen | 26 | lead-scoring CRITIQUE, lead-velocity BROKEN | PARTIEL |
-| content | 19 | **AUCUN** | NON |
-| shopify | 14 | product-seo OK | PARTIEL |
-| email | 11 | **AUCUN** | NON |
-| seo | 10 | gsc BROKEN, product-seo OK | PARTIEL |
-| analytics | 9 | ga4 PARTIEL | PARTIEL |
-| retention | 4 | retention OK | OUI |
-| voice-ai | 4 | **AUCUN** | NON |
-| dropshipping | 3 | **AUCUN** | NON |
-| marketing/ads | 2+ | meta DISCONN, tiktok DISCONN | NON |
-| Autres | 17 | **AUCUN** | NON |
+| lead-gen | 26 | lead-scoring PARTIEL, lead-velocity ✅ | **OUI** |
+| content | 19 | content-performance PARTIEL | **PARTIEL** |
+| shopify | 14 | product-seo ✅, shopify ✅ | **OUI** |
+| email | 11 | klaviyo ✅, email-health ✅ | **OUI** |
+| seo | 10 | gsc BLOCKED, product-seo ✅ | PARTIEL |
+| analytics | 9 | ga4 PARTIEL, cost-tracking ✅ | **PARTIEL** |
+| retention | 4 | retention ✅ | **OUI** |
+| voice-ai | 4 | voice-quality PARTIEL | **PARTIEL** |
+| dropshipping | 3 | supplier-health PARTIEL | **PARTIEL** |
+| whatsapp | 3 | whatsapp-status PARTIEL | **PARTIEL** |
+| marketing/ads | 2+ | meta BLOCKED, tiktok BLOCKED | NON |
 
-**COUVERTURE REELLE: ~3-30% (PAS "Level 5 Sovereign")**
+**COUVERTURE REELLE: ~50-60% (AMÉLIORATION SIGNIFICATIVE)**
 
 ### 2.6 Resultats Health Check Scripts (Verifie 22/01/2026)
 

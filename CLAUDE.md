@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 49.0 | 22/01/2026 | Session 139
+> Version: 50.0 | 22/01/2026 | Session 139
 
 ## Identité
 
@@ -12,11 +12,11 @@
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
 | Automations | 119 | Registry v3.0.0 |
-| Scripts core | 73 | Vérifiés |
+| Scripts core | 81 | Vérifiés |
 | Scripts --health | 22 | Testables |
 | Skills | 41 | Dossiers |
 | MCPs | 10 | Configurés |
-| Sensors | 14 | **10 OK, 2 CREDS MISSING, 2 BLOCKED** |
+| Sensors | **20** | 8 OK, 8 PARTIAL, 4 BLOCKED |
 | Credentials | 57 set / 36 vides | ⚠️ BLOQUEUR |
 
 ## BLOCKERS CRITIQUES
@@ -26,6 +26,7 @@
 | ~~Dashboard 502~~ | ~~Pas de démo possible~~ | ✅ FIXÉ (port 3001→3000) |
 | GSC API disabled | Sensor cassé | Activer dans Cloud Console |
 | ~~lead-velocity BUG~~ | ~~Sensor cassé~~ | ✅ FIXÉ (.filter() sur scores) |
+| ~~google-trends blocked~~ | ~~Trends cassé~~ | ✅ FIXÉ (AI-powered rewrite) |
 | 36 credentials vides | Features inutilisables | Configurer .env |
 | Apify trial expiré | Trends cassé | Payer ou alternative |
 

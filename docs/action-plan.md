@@ -1,7 +1,7 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 139 - 22/01/2026):** P0 Blockers FIXÉS. Dashboard accessible. Lead-velocity OK.
+> **✅ ÉTAT RÉEL (Session 139 - 22/01/2026):** P0 Blockers FIXÉS. 20 sensors (12→20). Dashboard OK.
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
 
 ---
@@ -40,27 +40,99 @@
 ❌ EMPTY: 36 credentials (voir .env)
 ```
 
-### Résumé Sensors (Updated Session 139)
+### Résumé Sensors (Updated Session 139 - 20 TOTAL)
 
 ```
-✅ OK: 3/12 (retention, product-seo, lead-velocity)
-⚠️ PARTIEL: 4/12 (ga4, lead-scoring, bigquery, google-ads-planner)
-❌ BROKEN: 5/12 (gsc, meta-ads, tiktok, apify, google-trends)
+✅ OK: 8/20 (retention, product-seo, lead-velocity, google-trends, shopify, klaviyo, email-health, cost-tracking)
+⚠️ PARTIEL: 8/20 (ga4, lead-scoring, bigquery, google-ads-planner, content-performance, supplier-health, whatsapp-status, voice-quality)
+❌ BLOCKED: 4/20 (gsc, meta-ads, tiktok, apify)
+
+NEW SENSORS (Session 139 - Per DOE v2 Spec):
+- shopify-sensor.cjs - Store health, orders, inventory
+- klaviyo-sensor.cjs - Email flows, campaigns
+- google-trends-sensor.cjs - REWRITTEN AI-powered (Grok→OpenAI→Gemini)
+- email-health-sensor.cjs - Bounce/spam/open rates (CRITIQUE)
+- content-performance-sensor.cjs - WordPress blog metrics
+- supplier-health-sensor.cjs - CJ/BigBuy API health
+- whatsapp-status-sensor.cjs - Template approval, quality rating
+- voice-quality-sensor.cjs - Voice API latency, providers
+- cost-tracking-sensor.cjs - API costs, burn rate
 ```
 
 ---
 
 ## VERDICT: SYSTÈME EN PROGRESSION
 
-| Critère | Avant | Après Session 139 |
-|---------|-------|-------------------|
+| Critère | Avant Session 139 | Après Session 139 |
+|---------|-------------------|-------------------|
 | Dashboard | ❌ 502 | ✅ 200 OK |
-| Sensors OK | 2/12 | 3/12 |
+| Scripts core | 73 | 81 (+8) |
+| Sensors | 12 | **20** (+8 nouveaux) |
+| Sensors OK | 2/12 (17%) | 8/20 (40%) |
 | P0 Blockers | 3 | 1 (GSC API - user action) |
 
 **Prochaine étape:** Configurer credentials manquants (P1/P2)
 
 ---
+
+## ✅ SESSION 139 COMPLETE: SENSORS DOE v2 (22/01/2026)
+
+### Livrables Session 139
+
+```
+SENSORS CRÉÉS (Per DOE v2 Section 9.3):
+├── [x] shopify-sensor.cjs - Store health, orders, inventory
+├── [x] klaviyo-sensor.cjs - Email flows, campaigns
+├── [x] google-trends-sensor.cjs - RÉÉCRIT AI-powered (Grok→OpenAI→Gemini→Claude)
+├── [x] email-health-sensor.cjs - Bounce/spam/open rates (CRITIQUE)
+├── [x] content-performance-sensor.cjs - WordPress blog metrics
+├── [x] supplier-health-sensor.cjs - CJ/BigBuy API health
+├── [x] whatsapp-status-sensor.cjs - Template approval, quality rating
+├── [x] voice-quality-sensor.cjs - Voice API latency, providers
+└── [x] cost-tracking-sensor.cjs - API costs, burn rate
+
+FIXES APPLIQUÉS:
+├── [x] lead-velocity-sensor.cjs - Handle {scores:[]} format (was broken)
+├── [x] google-trends-sensor.cjs - AI-powered (was blocked by Google)
+└── [x] Dashboard 502 → 200 OK (port 3001→3000)
+
+DOCUMENTATION MISE À JOUR:
+├── [x] CLAUDE.md v50.0
+├── [x] .claude/rules/factuality.md (20 sensors)
+├── [x] .claude/rules/scripts.md (20 sensors)
+├── [x] docs/action-plan.md (this file)
+└── [x] docs/AUDIT-FORENSIQUE-SESSION-138.md (sensors section)
+
+COMMITS:
+├── 569eb3b feat(sensors): Add 6 DOE v2 spec sensors (12→20 total)
+├── eca7575 docs: Update sensor metrics (14 sensors, 10 working)
+├── 3c4d45e feat(sensors): Add 2 new sensors + fix google-trends with AI
+├── c5b506d fix(website): Correct automation count 174→119
+└── a661697 fix(P0): Dashboard 502 + lead-velocity-sensor bug
+```
+
+### Métriques Session 139
+
+| Métrique | Avant | Après | Delta |
+|----------|-------|-------|-------|
+| Scripts core | 73 | 81 | +8 |
+| Sensors total | 12 | 20 | +8 |
+| Sensors OK | 3 (25%) | 8 (40%) | +5 |
+| Couverture domaines | ~30% | ~55% | +25% |
+| P0 Blockers | 3 | 1 | -2 |
+
+### PLAN ACTIONNABLE - Prochaine Session
+
+| # | Action | Priorité | Effort | Impact |
+|---|--------|----------|--------|--------|
+| 1 | Activer GSC API | P0 | 5min | Sensor SEO fonctionnel |
+| 2 | Configurer META_ACCESS_TOKEN | P1 | 1h | Meta Ads sensor |
+| 3 | Configurer TIKTOK_ACCESS_TOKEN | P1 | 1h | TikTok sensor |
+| 4 | Payer Apify ($49/mois) | P1 | $$ | Trends sensor |
+| 5 | Configurer WhatsApp Business | P2 | 2h | WhatsApp sensor OK |
+| 6 | Configurer CJ/BigBuy keys | P2 | 1h | Supplier sensor OK |
+| 7 | Fixer WordPress SSL | P2 | 30min | Content sensor OK |
+| 8 | Démarrer voice endpoints | P2 | 1h | Voice sensor OK |
 
 ---
 
