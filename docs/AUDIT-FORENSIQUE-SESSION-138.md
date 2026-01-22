@@ -20,20 +20,36 @@
 
 ```
 +=====================================================================+
-|  STATUT: MVP TECHNIQUE CONSOLIDE                                    |
-|  MATURITE: Infrastructure + 119 automations, pre-revenu             |
-|  MERGE: Documents/JO-AAA -> Desktop/JO-AAA COMPLETE                 |
+|  STATUT: MVP TECHNIQUE - INVENTAIRE COMPLET REALISE                 |
+|  MATURITE: 82 scripts, 14 MCPs, 119 automations, pre-revenu         |
+|  ALERTE: Site affiche 174, realite = 119 (~70 fichiers a corriger)  |
 |  DASHBOARD: FIXE (502 -> 200)                                       |
 +=====================================================================+
 ```
 
+**DOCUMENT COMPLEMENTAIRE:** `docs/INVENTAIRE-SYSTEME-COMPLET.md`
+
+| Categorie | Count | Status |
+|-----------|-------|--------|
+| Scripts Core | 73 | 22 avec --health |
+| Scripts Generic | 8 | Utilitaires |
+| Gateways | 3 | LLM, Stripe, Payzone |
+| MCPs | 14 | 4 global + 10 projet |
+| Agents Agentic | 11 | Non testes |
+| Sensors | 12 | **50% broken** |
+| Automations Registry | 119 | 96 non testees |
+| Revenus | €0 | 0 clients |
+
+### Scores par Domaine
+
 | Categorie | Score | Detail |
 |-----------|-------|--------|
-| Infrastructure | 95% | VPS running, 6 containers Docker, Dashboard OK |
-| Scripts | 95% | 73 scripts, 22 --health, 11 agentic, 12 sensors |
-| Documentation | 75% | Registry v3.0.0 (119 automations - PAS 174!) |
-| Integrations | 60% | AI OK, CRM partiels, SMS/WhatsApp bloques |
-| Revenus | 0% | Aucun client payant verifie |
+| Infrastructure | 95% | VPS running, Dashboard OK |
+| Scripts | 70% | 22 testables, beaucoup non testes |
+| Sensors | 25% | 3/12 OK, 6 broken, 3 partiels |
+| Documentation | 50% | 174 vs 119 non corrige |
+| Integrations | 60% | AI OK, CRM/SMS bloques |
+| Revenus | 0% | Pre-revenu, 0 clients |
 
 ---
 
