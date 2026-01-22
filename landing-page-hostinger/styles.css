@@ -120,21 +120,6 @@ textarea,
   --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   --glass-backdrop: blur(20px);
 
-  /* Kinetic Typography Keyframes */
-  @keyframes kineticReveal {
-    0% {
-      transform: translateY(100%) skewY(10deg);
-      opacity: 0;
-      filter: blur(10px);
-    }
-
-    100% {
-      transform: translateY(0) skewY(0);
-      opacity: 1;
-      filter: blur(0);
-    }
-  }
-
   /* Border radius */
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
@@ -145,6 +130,21 @@ textarea,
 
   /* Animation Control - Toggle via body.lite class */
   --anim-state: running;
+}
+
+/* Kinetic Typography Keyframes - MUST be outside :root */
+@keyframes kineticReveal {
+  0% {
+    transform: translateY(100%) skewY(10deg);
+    opacity: 0;
+    filter: blur(10px);
+  }
+
+  100% {
+    transform: translateY(0) skewY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
 html {
