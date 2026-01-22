@@ -987,3 +987,23 @@ GATE STATUS: [x] 14/15 PASSED | [ ] G4.3 BLOCKED (pressure 60 > 50)
 **Document généré**: 22/01/2026 23:45 UTC
 **Session**: 141
 **Tokens utilisés**: Optimisé (pas d'agents, outils directs)
+
+---
+
+## SESSION 142 UPDATES (23/01/2026)
+
+### Fixes Applied
+| Issue | Before | After | Status |
+|-------|--------|-------|--------|
+| "174 automations" everywhere | 50+ files | 0 files | ✅ FIXED |
+| Scripts without defer | 19+ | 0 | ✅ FIXED |
+| Testimonials FR | 0 | 26 refs | ✅ ADDED |
+| Testimonials EN | 0 | 26 refs | ✅ ADDED |
+| Catalog sync | 77 | 119 | ✅ SYNCED |
+
+### Gate 3A Status: 14/15 PASSED
+- G4.3 still blocked (pressure 60 > 50) - requires credentials
+
+### Commits
+- `588de2c` - feat(protocols): A2A, UCP, AG-UI implementation
+- `4c7a913` - fix(website): Complete 174→119 sync + defer + testimonials

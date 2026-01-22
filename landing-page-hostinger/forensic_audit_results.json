@@ -25,7 +25,7 @@
         "content_marketing": {
             "status": "WARN",
             "details": [
-                "Claim '174 automations' contradicts registry count '118'.",
+                "Claim '119 automations' contradicts registry count '118'.",
                 "Claim '20 automations résilientes' contradicts registry scan (only 5 explicit 'resilient' tools).",
                 "Transparency in 'investisseurs.html' is Exemplary (admits pre-revenue).",
                 "Marketing copy is strong and futuristic."
