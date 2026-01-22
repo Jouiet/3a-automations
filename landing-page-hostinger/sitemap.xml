@@ -84,6 +84,16 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- FAQ FR -->
+  <url>
+    <loc>https://3a-automation.com/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/faq.html"/>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Pricing FR -->
   <url>
     <loc>https://3a-automation.com/pricing.html</loc>
@@ -358,6 +368,16 @@
     <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- FAQ EN -->
+  <url>
+    <loc>https://3a-automation.com/en/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/faq.html"/>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- Pricing EN -->

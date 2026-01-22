@@ -1,6 +1,6 @@
 {
-  "version": "1.7.0",
-  "lastUpdated": "2026-01-21",
+  "version": "2.0.0",
+  "lastUpdated": "2026-01-22",
   "totalCount": 119,
   "description": "3A Automation - Catalog of marketing automation solutions",
   "categories": {
@@ -546,19 +546,17 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "SEO + Social en 1 clic",
-      "benefit_en": "SEO + Social in 1 click",
-      "description_fr": "Génère article SEO via Claude AI et publie simultanément sur site web + Facebook + LinkedIn",
-      "description_en": "Generates SEO article via Claude AI and publishes simultaneously to website + Facebook + LinkedIn"
+      "benefit_en": "SEO + Social in 1 click"
     },
     {
-      "id": "nodejs-script",
-      "name_fr": "Script Node.js Complet",
-      "name_en": "Complete Node.js script",
+      "id": "custom-workflow-deprecated",
+      "name_fr": "Workflow Personnalisé (Obsolète)",
+      "name_en": "Custom Workflow (Deprecated)",
       "category": "content",
-      "frequency_fr": "Personnalisé",
-      "frequency_en": "Custom",
-      "benefit_fr": "Automation sur-mesure",
-      "benefit_en": "Tailor-made automation"
+      "frequency_fr": "N/A",
+      "frequency_en": "N/A",
+      "benefit_fr": "Remplacé par scripts natifs",
+      "benefit_en": "Replaced by native scripts"
     },
     {
       "id": "google-apps-script-booking",
@@ -728,9 +726,7 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Vidéos cinématiques AI (Gemini 3 Pro + Imagen 4 + Veo 3.1)",
-      "benefit_en": "AI cinematic videos (Gemini 3 Pro + Imagen 4 + Veo 3.1)",
-      "external": true,
-      "url": "https://cinematicads.studio"
+      "benefit_en": "AI cinematic videos (Gemini 3 Pro + Imagen 4 + Veo 3.1)"
     },
     {
       "id": "competitor-clone",
@@ -740,9 +736,7 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Clone pubs concurrents (analyse + script + production multi-scènes)",
-      "benefit_en": "Clone competitor ads (analysis + script + multi-scene production)",
-      "external": true,
-      "url": "https://cinematicads.studio"
+      "benefit_en": "Clone competitor ads (analysis + script + multi-scene production)"
     },
     {
       "id": "ecommerce-factory",
@@ -752,9 +746,7 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Ads multi-ratio (Google Ads 1.91:1, Social 1:1, TikTok 9:16)",
-      "benefit_en": "Multi-ratio ads (Google Ads 1.91:1, Social 1:1, TikTok 9:16)",
-      "external": true,
-      "url": "https://cinematicads.studio"
+      "benefit_en": "Multi-ratio ads (Google Ads 1.91:1, Social 1:1, TikTok 9:16)"
     },
     {
       "id": "asset-factory",
@@ -764,9 +756,7 @@
       "frequency_fr": "Core engine",
       "frequency_en": "Core engine",
       "benefit_fr": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
-      "benefit_en": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
-      "external": true,
-      "url": "https://cinematicads.studio"
+      "benefit_en": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1"
     },
     {
       "id": "ai-avatar-generator",
@@ -809,24 +799,44 @@
       "benefit_en": "-30% no-shows"
     },
     {
-      "id": "voice-ai-assistant",
-      "name_fr": "Assistant Vocal IA",
-      "name_en": "AI Voice Assistant",
+      "id": "voice-ai-web-widget",
+      "name_fr": "Assistant Vocal IA Web",
+      "name_en": "AI Voice Web Assistant",
       "category": "voice-ai",
       "frequency_fr": "24/7 disponible",
       "frequency_en": "24/7 available",
-      "benefit_fr": "Réservation et qualification par voix",
-      "benefit_en": "Voice booking and qualification"
+      "benefit_fr": "Qualification leads + RDV auto par la voix",
+      "benefit_en": "Lead qualification + auto booking by voice"
+    },
+    {
+      "id": "grok-voice-telephony",
+      "name_fr": "Assistant Telephonique IA",
+      "name_en": "AI Phone Assistant",
+      "category": "voice-ai",
+      "frequency_fr": "Appels entrants",
+      "frequency_en": "Inbound calls",
+      "benefit_fr": "Reservation par telephone automatique",
+      "benefit_en": "Automatic phone booking"
     },
     {
       "id": "linkedin-lead-scraper",
-      "name_fr": "LinkedIn Lead Scraper",
-      "name_en": "LinkedIn Lead Scraper",
+      "name_fr": "LinkedIn Lead Automation",
+      "name_en": "LinkedIn Lead Automation",
       "category": "lead-gen",
       "frequency_fr": "Toutes les 6 heures",
       "frequency_en": "Every 6 hours",
       "benefit_fr": "+400 leads/jour avec scoring AI",
       "benefit_en": "+400 leads/day with AI scoring"
+    },
+    {
+      "id": "newsletter-automation",
+      "name_fr": "Newsletter Automation",
+      "name_en": "Newsletter Automation",
+      "category": "marketing",
+      "frequency_fr": "Bi-mensuel",
+      "frequency_en": "Bi-monthly",
+      "benefit_fr": "Newsletter AI générée automatiquement",
+      "benefit_en": "AI-generated newsletter automatically"
     },
     {
       "id": "email-outreach-sequence",
@@ -837,6 +847,366 @@
       "frequency_en": "Triggered",
       "benefit_fr": "Séquence 3 emails personnalisée",
       "benefit_en": "3-email personalized sequence"
+    },
+    {
+      "id": "linkedin-to-klaviyo-pipeline",
+      "name_fr": "Pipeline LinkedIn → Klaviyo (B2B)",
+      "name_en": "LinkedIn → Klaviyo Pipeline (B2B)",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Leads LinkedIn qualifiés par segment",
+      "benefit_en": "LinkedIn leads qualified by segment"
+    },
+    {
+      "id": "google-maps-to-klaviyo-pipeline",
+      "name_fr": "Pipeline Google Maps → Klaviyo (Local B2B)",
+      "name_en": "Google Maps → Klaviyo Pipeline (Local B2B)",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Leads locaux qualifiés par catégorie",
+      "benefit_en": "Local leads qualified by category"
+    },
+    {
+      "id": "b2b-email-templates-module",
+      "name_fr": "Module Templates Email B2B",
+      "name_en": "B2B Email Templates Module",
+      "category": "lead-gen",
+      "frequency_fr": "Module partagé",
+      "frequency_en": "Shared module",
+      "benefit_fr": "6 segments, branding 100% validé",
+      "benefit_en": "6 segments, 100% branding validated"
+    },
+    {
+      "id": "voice-widget-templates",
+      "name_fr": "Templates Voice Widget (8 industries)",
+      "name_en": "Voice Widget Templates (8 industries)",
+      "category": "voice-ai",
+      "frequency_fr": "Déploiement client",
+      "frequency_en": "Client deployment",
+      "benefit_fr": "Déploiement 4h → 30min",
+      "benefit_en": "Deployment 4h → 30min"
+    },
+    {
+      "id": "blog-generator-resilient",
+      "name_fr": "Blog Generator Résilient (3 AI + 3 Social)",
+      "name_en": "Resilient Blog Generator (3 AI + 3 Social)",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X",
+      "benefit_en": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X"
+    },
+    {
+      "id": "podcast-generator-resilient",
+      "name_fr": "Podcast Generator (Blog → Audio)",
+      "name_en": "Podcast Generator (Blog → Audio)",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Blog → Podcast 2 voix personnalisables (> NotebookLM)",
+      "benefit_en": "Blog → Podcast 2 customizable voices (> NotebookLM)"
+    },
+    {
+      "id": "grok-voice-realtime",
+      "name_fr": "Grok Voice Realtime (WebSocket + TTS)",
+      "name_en": "Grok Voice Realtime (WebSocket + TTS)",
+      "category": "voice-ai",
+      "frequency_fr": "Temps réel",
+      "frequency_en": "Real-time",
+      "benefit_fr": "Audio natif $0.05/min + fallback Gemini TTS",
+      "benefit_en": "Native audio $0.05/min + Gemini TTS fallback"
+    },
+    {
+      "id": "whatsapp-booking-notifications",
+      "name_fr": "WhatsApp Booking Notifications",
+      "name_en": "WhatsApp Booking Notifications",
+      "category": "whatsapp",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "Confirmation + rappels 24h/1h",
+      "benefit_en": "Confirmation + 24h/1h reminders"
+    },
+    {
+      "id": "hubspot-b2b-crm",
+      "name_fr": "HubSpot B2B CRM Integration v1.1.0",
+      "name_en": "HubSpot B2B CRM Integration v1.1.0",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "CRM gratuit B2B avec batch (100/appel) + backoff",
+      "benefit_en": "Free B2B CRM with batch (100/call) + backoff"
+    },
+    {
+      "id": "omnisend-b2c-ecommerce",
+      "name_fr": "Omnisend B2C E-commerce Integration v1.1.0",
+      "name_en": "Omnisend B2C E-commerce Integration v1.1.0",
+      "category": "email",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Email B2C $16/mo + Carts API + event dedup",
+      "benefit_en": "B2C email $16/mo + Carts API + event dedup"
+    },
+    {
+      "id": "email-personalization-resilient",
+      "name_fr": "Email Personalization Résilient (4 AI + 3-Email Cart Series)",
+      "name_en": "Resilient Email Personalization (4 AI + 3-Email Cart Series)",
+      "category": "email",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "+69% orders vs 1 email (série 1h/24h/72h)",
+      "benefit_en": "+69% orders vs 1 email (1h/24h/72h series)"
+    },
+    {
+      "id": "sms-automation-resilient",
+      "name_fr": "SMS Automation Résilient (Omnisend + Twilio)",
+      "name_en": "Resilient SMS Automation (Omnisend + Twilio)",
+      "category": "sms",
+      "frequency_fr": "Automatique",
+      "frequency_en": "Automatic",
+      "benefit_fr": "98% open rate, 21-32% conversion",
+      "benefit_en": "98% open rate, 21-32% conversion"
+    },
+    {
+      "id": "churn-prediction-resilient",
+      "name_fr": "Prédiction Churn Résilient (RFM + AI)",
+      "name_en": "Resilient Churn Prediction (RFM + AI)",
+      "category": "retention",
+      "frequency_fr": "Sur demande / Batch",
+      "frequency_en": "On demand / Batch",
+      "benefit_fr": "-25% churn rate, +260% conversion at-risk",
+      "benefit_en": "-25% churn rate, +260% at-risk conversion"
+    },
+    {
+      "id": "review-request-automation",
+      "name_fr": "Demande d'Avis Automatisée (Shopify → Klaviyo)",
+      "name_en": "Automated Review Request (Shopify → Klaviyo)",
+      "category": "shopify",
+      "frequency_fr": "7-14 jours après livraison",
+      "frequency_en": "7-14 days after delivery",
+      "benefit_fr": "+270% reviews, incentives photo",
+      "benefit_en": "+270% reviews, photo incentives"
+    },
+    {
+      "id": "at-risk-customer-flow",
+      "name_fr": "Flow Client At-Risk (Intervention Anti-Churn)",
+      "name_en": "At-Risk Customer Flow (Anti-Churn Intervention)",
+      "category": "retention",
+      "frequency_fr": "Déclenché par churn-prediction",
+      "frequency_en": "Triggered by churn-prediction",
+      "benefit_fr": "+260% conversion clients at-risk",
+      "benefit_en": "+260% at-risk customer conversion"
+    },
+    {
+      "id": "price-drop-alerts",
+      "name_fr": "Alertes Price Drop (Wishlist)",
+      "name_en": "Price Drop Alerts (Wishlist)",
+      "category": "retention",
+      "frequency_fr": "Webhook temps réel",
+      "frequency_en": "Real-time webhook",
+      "benefit_fr": "8.8% taux conversion",
+      "benefit_en": "8.8% conversion rate"
+    },
+    {
+      "id": "replenishment-reminder",
+      "name_fr": "Rappel Réapprovisionnement",
+      "name_en": "Replenishment Reminder",
+      "category": "retention",
+      "frequency_fr": "Automatique selon consommation",
+      "frequency_en": "Automatic based on consumption",
+      "benefit_fr": "+90% repeat purchase",
+      "benefit_en": "+90% repeat purchase"
+    },
+    {
+      "id": "cjdropshipping-automation",
+      "name_fr": "CJDropshipping - Automatisation Fournisseur",
+      "name_en": "CJDropshipping - Supplier Automation",
+      "category": "dropshipping",
+      "frequency_fr": "Temps réel (webhooks)",
+      "frequency_en": "Real-time (webhooks)",
+      "benefit_fr": "100% automatisation commandes",
+      "benefit_en": "100% order automation"
+    },
+    {
+      "id": "bigbuy-supplier-sync",
+      "name_fr": "BigBuy - Synchronisation Fournisseur",
+      "name_en": "BigBuy - Supplier Sync",
+      "category": "dropshipping",
+      "frequency_fr": "Temps réel + sync quotidienne",
+      "frequency_en": "Real-time + daily sync",
+      "benefit_fr": "100% automatisation catalogue EU",
+      "benefit_en": "100% EU catalog automation"
+    },
+    {
+      "id": "dropshipping-order-flow",
+      "name_fr": "Dropshipping - Orchestration Multi-Fournisseurs",
+      "name_en": "Dropshipping - Multi-Supplier Orchestration",
+      "category": "dropshipping",
+      "frequency_fr": "Temps réel (webhooks)",
+      "frequency_en": "Real-time (webhooks)",
+      "benefit_fr": "Automatisation complète dropshipping",
+      "benefit_en": "Full dropshipping automation"
+    },
+    {
+      "id": "agency-env-check",
+      "name_en": "Environment Health Check",
+      "category": "agency-ops"
+    },
+    {
+      "id": "agency-api-test",
+      "name_en": "API Connectivity Tester",
+      "category": "agency-ops"
+    },
+    {
+      "id": "index",
+      "name_fr": "Index",
+      "name_en": "Index",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "content",
+      "name_fr": "Content",
+      "name_en": "Content",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "popup",
+      "name_fr": "Popup",
+      "name_en": "Popup",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "markets",
+      "name_fr": "Markets",
+      "name_en": "Markets",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "lead-gen-scheduler",
+      "name_fr": "Lead Gen Scheduler",
+      "name_en": "Lead Gen Scheduler",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "index-1",
+      "name_fr": "Index",
+      "name_en": "Index",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "search",
+      "name_fr": "Search",
+      "name_en": "Search",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "invoice-generator",
+      "name_fr": "Invoice Generator",
+      "name_en": "Invoice Generator",
+      "category": "lead-gen",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "config-3a-automation",
+      "name_fr": "Config 3a Automation",
+      "name_en": "Config 3a Automation",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "config-cinematicads",
+      "name_fr": "Config Cinematicads",
+      "name_en": "Config Cinematicads",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "config.example",
+      "name_fr": "Config.Example",
+      "name_en": "Config.Example",
+      "category": "content",
+      "frequency_fr": "Sur demande",
+      "frequency_en": "On demand",
+      "benefit_fr": "Automatisation efficace",
+      "benefit_en": "Efficient automation"
+    },
+    {
+      "id": "lead-scoring-agentic",
+      "category": "Lead Generation & Acquisition"
+    },
+    {
+      "id": "flows-audit-agentic",
+      "category": "Email Marketing & Klaviyo"
+    },
+    {
+      "id": "product-enrichment-agentic",
+      "category": "SEO & Content"
+    },
+    {
+      "id": "ga4-budget-optimizer-agentic",
+      "category": "Analytics & Reporting"
+    },
+    {
+      "id": "store-audit-agentic",
+      "category": "Shopify Admin & Operations"
+    },
+    {
+      "id": "content-strategist-agentic",
+      "name_fr": "Stratège de Contenu IA",
+      "name_en": "AI Content Strategist",
+      "category": "seo",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Identification des opportunités SEO",
+      "benefit_en": "SEO opportunity identification"
+    },
+    {
+      "id": "harvest-market-trends",
+      "name_fr": "Récolte Tendances Marché (RSS)",
+      "name_en": "Market Trends Harvesting (RSS)",
+      "category": "marketing",
+      "frequency_fr": "Quotidien",
+      "frequency_en": "Daily",
+      "benefit_fr": "Discovery trends sans blocage",
+      "benefit_en": "Unblocked trends discovery"
     }
   ],
   "summary": {
