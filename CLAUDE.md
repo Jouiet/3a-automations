@@ -11,7 +11,7 @@
 
 | Élément | Valeur |
 | :--- | :--- |
-| Automations | 174 (Registry v3.0.0) |
+| Automations | 119 (Registry v3.0.0 - corrected) |
 | SFAP v5.0 | ✅ Level 5 Sovereign (Weaponized) |
 | Agents | 18 (Cortex Swarm) |
 | MCPs | 41/41 (Active Hub) |
