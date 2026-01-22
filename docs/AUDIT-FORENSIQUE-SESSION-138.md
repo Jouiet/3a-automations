@@ -353,7 +353,7 @@ SENSORS CASSES/BLOQUES:   6/12 (50%)  - gsc, meta, tiktok, lead-velocity, apify,
 | Registry v2.7.0 | Registry **v3.0.0** |
 | package.json: 4 deps | package.json: **15 deps** |
 
-### 6.2 Fichiers Merges
+### 6.2 Fichiers Merges (Phase 1 - 22/01 matin)
 
 - 38 nouveaux scripts agentic/sensors copies
 - automations-registry.json v3.0.0
@@ -362,6 +362,38 @@ SENSORS CASSES/BLOQUES:   6/12 (50%)  - gsc, meta, tiktok, lead-velocity, apify,
 - package.json (15 dependances)
 - utils/telemetry.cjs
 - gateways/llm-global-gateway.cjs
+
+### 6.3 Fichiers Merges (Phase 2 - 22/01 apres-midi)
+
+| Fichier | Action | Impact |
+|---------|--------|--------|
+| product-photos-resilient.cjs | UPDATE | 967→1001 lignes, Claude Sonnet 4.5 |
+| sync-catalog-to-registry.cjs | NEW | Utilitaire sync catalog |
+| automations-catalog.json | UPDATE | 77→119 automations |
+| pmf-surveys.json | NEW | Survey data |
+| mx-manifest.json | NEW | MX manifest (119 tools) |
+
+### 6.4 Fichiers NON Merges (Raison Factuelle)
+
+| Fichier | Raison | Documents | Desktop (garde) |
+|---------|--------|-----------|-----------------|
+| pressure-matrix.json | Data non verifiee | 174 units, $12840 rev | 119 units, $0 rev |
+| AUDIT-FORENSIQUE-DOE-*.md | Docs fork, pas working dir | DOE v2 analysis | N/A |
+
+### 6.5 Verification Finale (10/10 MATCH)
+
+```
+✅ agency/core:    73 scripts
+✅ generic:        8 scripts
+✅ gateways:       3 gateways
+✅ registry:       v3.0.0 (119 automations)
+✅ catalog:        119 tools
+✅ mx-manifest:    119 tools
+✅ .mcp.json:      10 MCPs
+✅ .claude/rules:  5 rules
+✅ package.json:   15 deps
+✅ CLAUDE.md:      v47.2
+```
 
 ---
 
@@ -385,10 +417,18 @@ SENSORS CASSES/BLOQUES:   6/12 (50%)  - gsc, meta, tiktok, lead-velocity, apify,
 | 2 | JWT_SECRET | Top-level check | Lazy-load |
 | 3 | PM2 standalone | npm start | node server.js |
 | 4 | Git conflicts | Rejected | **Resolved + Pushed** |
+| 5 | Catalog automations | 77 | **119** |
+| 6 | mx-manifest.json | MISSING | **ADDED (119 tools)** |
+| 7 | product-photos script | 967 lines | **1001 lines (Sonnet 4.5)** |
+| 8 | sync-catalog script | MISSING | **ADDED** |
 
 ### Commits Pushes
 
 ```
+d8d9f6a fix(merge): Complete sync Documents → Desktop
+a6fc649 docs(audit): FACTUAL sensor evaluation - 7 create, 1 redundant, 2 extend
+3687dda docs(audit): Correct sensor list to match EXACT DOE v2 spec
+6fbd0d1 docs(audit): Add EMPIRICAL sensor verification - 50% BROKEN
 df967a2 fix(deploy): Use Next.js standalone mode for PM2
 9d941c0 fix(dashboard): Lazy-load JWT_SECRET to fix build-time error
 e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
@@ -619,6 +659,7 @@ curl -s -o /dev/null -w "%{http_code}" https://3a-automation.com
 
 ---
 
-*Document mis a jour: 22/01/2026 12:30 UTC*
+*Document mis a jour: 22/01/2026 13:15 UTC*
 *Methode: Audit forensique bottom-up factuel avec verification empirique*
-*Session 138 - Post-correction Dashboard + Merge + Evaluation Factuelle Sensors DOE v2*
+*Session 138 - COMPLETE: Dashboard fix + Full Merge + Sensor Evaluation*
+*Merge 100% verifie: 10/10 composants synchronises*
