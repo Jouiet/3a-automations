@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 48.0 | 22/01/2026 | Session 139
+> Version: 49.0 | 22/01/2026 | Session 139
 
 ## Identité
 
@@ -16,7 +16,7 @@
 | Scripts --health | 22 | Testables |
 | Skills | 41 | Dossiers |
 | MCPs | 10 | Configurés |
-| Sensors | 12 | **2 OK, 5 BROKEN, 5 PARTIEL** |
+| Sensors | 14 | **10 OK, 2 CREDS MISSING, 2 BLOCKED** |
 | Credentials | 57 set / 36 vides | ⚠️ BLOQUEUR |
 
 ## BLOCKERS CRITIQUES

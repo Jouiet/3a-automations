@@ -15,22 +15,27 @@ paths:
 | Avec --health | 22 | Testables |
 | Resilient | 7 | Multi-AI fallback |
 
-### Sensors (12 total)
+### Sensors (14 total - Session 139)
 | Status | Count | Sensors |
 |--------|-------|---------|
-| ✅ OK | 3 | retention, product-seo, lead-velocity |
-| ⚠️ PARTIEL | 4 | ga4, lead-scoring, bigquery, google-ads-planner |
-| ❌ BROKEN | 5 | gsc, meta-ads, tiktok, apify, google-trends |
+| ✅ OK | 10 | ga4, retention, product-seo, lead-scoring, lead-velocity, bigquery, google-ads-planner, **shopify**, **klaviyo**, **google-trends** |
+| ⚠️ CREDS | 2 | meta-ads, tiktok-ads |
+| ❌ BLOCKED | 2 | gsc (API disabled), apify (trial expired) |
+
+### New Sensors (Session 139)
+| Sensor | Description |
+|--------|-------------|
+| shopify-sensor | Store health, orders, inventory |
+| klaviyo-sensor | Email flows, campaigns |
+| google-trends (REWRITTEN) | AI-powered market analysis (Grok→OpenAI→Gemini) |
 
 ### Blockers Sensors
 | Sensor | Problème | Fix |
 |--------|----------|-----|
-| gsc-sensor | API non activée | Activer dans Cloud Console |
-| ~~lead-velocity~~ | ~~BUG: leads.filter~~ | ✅ FIXÉ |
-| meta-ads | Credentials vides | Configurer .env |
-| tiktok-ads | Credentials vides | Configurer .env |
-| apify-trends | Trial expiré | Payer |
-| google-trends | Detection blocked | Stealth ou API |
+| gsc-sensor | API non activée | [Activer](https://console.developers.google.com/apis/api/searchconsole.googleapis.com) |
+| meta-ads | Credentials vides | Configurer META_ACCESS_TOKEN |
+| tiktok-ads | Credentials vides | Configurer TIKTOK_ACCESS_TOKEN |
+| apify-trends | Trial expiré | [Payer](https://console.apify.com/billing) |
 
 ## Key Scripts
 | Script | Usage | Port |

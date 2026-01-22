@@ -16,12 +16,12 @@
 ### Métriques Core
 | Métrique | Valeur | Méthode Vérification |
 |----------|--------|----------------------|
-| Scripts core | 73 | `ls agency/core/*.cjs` |
+| Scripts core | 75 | `ls agency/core/*.cjs` |
 | Scripts --health | 22 | `grep -l "\-\-health"` |
 | Automations registry | 119 | `jq '.automations \| length'` |
 | Skills | 41 | `ls -d .agent/skills/*/` |
 | MCPs configurés | 10 | `jq '.mcpServers \| keys'` |
-| Sensors | 12 | `ls *-sensor*.cjs` |
+| Sensors | 14 | `ls *-sensor*.cjs` (10 OK, 4 blocked) |
 
 ### Status Sensors (TESTÉ 22/01/2026)
 | Sensor | Status | Problème |
