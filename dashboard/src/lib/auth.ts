@@ -14,16 +14,19 @@ import { cookies } from "next/headers";
 const AUTH_COOKIE_NAME = "auth_token";
 const COOKIE_MAX_AGE = 7 * 24 * 60 * 60; // 7 days in seconds
 
-// Type-safe JWT secret check
+// Lazy-loaded JWT secret to avoid build-time errors
+let _cachedJwtSecret: string | null = null;
+
 function getJwtSecret(): string {
+  if (_cachedJwtSecret) return _cachedJwtSecret;
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    throw new Error("CRITICAL: JWT_SECRET environment variable is not set. Cannot start application.");
+    throw new Error("CRITICAL: JWT_SECRET environment variable is not set.");
   }
+  _cachedJwtSecret = secret;
   return secret;
 }
 
-const JWT_SECRET = getJwtSecret();
 const JWT_EXPIRES_IN = "7d";
 
 export type UserRole = "ADMIN" | "CLIENT" | "VIEWER";
@@ -63,7 +66,7 @@ export async function comparePassword(
  * Generate a JWT token
  */
 export function generateToken(payload: TokenPayload): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+  return jwt.sign(payload, getJwtSecret(), { expiresIn: JWT_EXPIRES_IN });
 }
 
 /**
@@ -71,7 +74,7 @@ export function generateToken(payload: TokenPayload): string {
  */
 export function verifyToken(token: string): TokenPayload | null {
   try {
-    return jwt.verify(token, JWT_SECRET) as TokenPayload;
+    return jwt.verify(token, getJwtSecret()) as TokenPayload;
   } catch {
     return null;
   }
