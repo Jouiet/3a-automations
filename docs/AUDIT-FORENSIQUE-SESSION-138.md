@@ -1,5 +1,5 @@
 # AUDIT FORENSIQUE - 3A AUTOMATION
-## Session 138 | 22 Janvier 2026 | MISE A JOUR POST-VERIFICATION
+## Session 141 | 22 Janvier 2026 21:15 UTC | VÉRIFICATION 100% EMPIRIQUE
 
 ---
 
@@ -9,10 +9,10 @@
 |-------|--------|
 | **Dossier de travail** | `/Users/mac/Desktop/JO-AAA` |
 | **Repository GitHub** | https://github.com/Jouiet/3a-automations.git |
-| **Dernier commit** | `df967a2` - fix(deploy): Use Next.js standalone mode for PM2 |
+| **Dernier commit** | `08c45b8` - fix(critical): Add CSS !important rules |
 | **Branch** | `main` |
-| **Date audit** | 22 janvier 2026 |
-| **Methode** | Bottom-up factuelle (verification empirique) |
+| **Date audit** | 22 janvier 2026 21:15 UTC |
+| **Methode** | Bottom-up factuelle (execution réelle de chaque composant) |
 
 ---
 
@@ -20,36 +20,44 @@
 
 ```
 +=====================================================================+
-|  STATUT: MVP TECHNIQUE - INVENTAIRE COMPLET REALISE                 |
-|  MATURITE: 82 scripts, 14 MCPs, 119 automations, pre-revenu         |
-|  ALERTE: Site affiche 174, realite = 119 (~70 fichiers a corriger)  |
-|  DASHBOARD: FIXE (502 -> 200)                                       |
+|  STATUT: MVP TECHNIQUE - FIXES SESSION 140bis NON APPLIQUÉS         |
+|  MATURITE: 81 scripts, 10 MCPs, 119 automations, pre-revenu         |
+|  ALERTE CRITIQUE:                                                    |
+|    - Catalog: 77 (devrait être 119) - 42 automations manquantes     |
+|    - llms.txt: dit 174 (devrait être 119)                           |
+|    - 6 scripts sans defer (performance CWV dégradée)                |
+|    - Testimonials: absents (0 matches)                              |
+|  DASHBOARD: ✅ 200 OK                                                |
+|  SITE: ✅ 200 OK                                                     |
 +=====================================================================+
 ```
 
 **DOCUMENT COMPLEMENTAIRE:** `docs/INVENTAIRE-SYSTEME-COMPLET.md`
 
-| Categorie | Count | Status |
-|-----------|-------|--------|
-| Scripts Core | 73 | 22 avec --health |
-| Scripts Generic | 8 | Utilitaires |
-| Gateways | 3 | LLM, Stripe, Payzone |
-| MCPs | 14 | 4 global + 10 projet |
-| Agents Agentic | 11 | Non testes |
-| Sensors | 12 | **50% broken** |
-| Automations Registry | 119 | 96 non testees |
+| Categorie | Count | Status (Vérifié Empiriquement) |
+|-----------|-------|--------------------------------|
+| Scripts Core | **81** | `ls agency/core/*.cjs \| wc -l` |
+| Scripts --health | 22 | Testables |
+| Scripts Resilient | 7 | 5/5 testés OK |
+| Agents Agentic | 11 | Non testés |
+| Sensors | **20** | 6 OK, 10 PARTIAL, 4 BLOCKED |
+| Automations Registry | 119 | `jq '.automations \| length'` |
+| Automations Catalog | **77** | ❌ DÉSYNC (-42) |
+| Credentials SET | 57 | Opérationnels |
+| Credentials EMPTY | 36 | Bloquants |
 | Revenus | €0 | 0 clients |
 
-### Scores par Domaine
+### Scores par Domaine (Session 141)
 
 | Categorie | Score | Detail |
 |-----------|-------|--------|
-| Infrastructure | 95% | VPS running, Dashboard OK |
-| Scripts | 70% | 22 testables, beaucoup non testes |
-| Sensors | 25% | 3/12 OK, 6 broken, 3 partiels |
-| Documentation | 50% | 174 vs 119 non corrige |
-| Integrations | 60% | AI OK, CRM/SMS bloques |
-| Revenus | 0% | Pre-revenu, 0 clients |
+| Infrastructure | **95%** | VPS running, Dashboard OK, Site OK |
+| Scripts Resilient | **100%** | 5/5 testés avec 4 AI providers |
+| Sensors | **30%** | 6/20 OK, 10 partial, 4 blocked |
+| Documentation | **40%** | Catalog désync, llms.txt faux |
+| Integrations AI | **100%** | Grok + GPT + Gemini + Claude OK |
+| Integrations Autres | **40%** | 36 credentials vides |
+| Revenus | **0%** | Pre-revenu, 0 clients |
 
 ---
 
@@ -139,15 +147,15 @@
 | sms | 1 |
 | Autres | 5 |
 
-### 2.4 Scripts Core (agency/core/) - VERIFIE 22/01/2026
+### 2.4 Scripts Core (agency/core/) - VÉRIFIÉ Session 141
 
-| Metrique | Valeur |
-|----------|--------|
-| Fichiers .cjs | **73** |
-| Taille totale | ~2.5 MB |
-| Scripts avec --health | **22** |
-| Scripts agentic | **11** |
-| Sensors | **12** |
+| Metrique | Valeur | Commande |
+|----------|--------|----------|
+| Fichiers .cjs | **81** | `ls agency/core/*.cjs \| wc -l` |
+| Scripts avec --health | **22** | `grep -l "\-\-health"` |
+| Scripts agentic | **11** | `ls *-agentic*.cjs` |
+| Sensors | **20** | `ls *-sensor*.cjs` |
+| Scripts resilient | **7** | `ls *-resilient*.cjs` |
 
 #### Liste des 11 scripts agentic
 
@@ -193,39 +201,42 @@ voice-quality-sensor.cjs          # Voice API latency, providers
 cost-tracking-sensor.cjs          # API costs, burn rate
 ```
 
-### 2.5 ETAT REEL DES SENSORS (Mis à jour Session 139 - 22/01/2026)
+### 2.5 ETAT REEL DES SENSORS (VÉRIFIÉ Session 141 - 22/01/2026 21:15 UTC)
 
-**AMÉLIORATION: 12→20 sensors, 40% fonctionnels (vs 25% avant)**
+**Exécution `node sensor.cjs --health` sur chacun des 20 sensors:**
 
-| # | Sensor | Status | Erreur | Domaine |
-|---|--------|--------|--------|---------|
-| 1 | ga4-sensor | PARTIEL | ROAS=0.00 (store inactif) | Analytics |
-| 2 | gsc-sensor | **BLOCKED** | API not enabled in Cloud Console | SEO |
-| 3 | meta-ads-sensor | **BLOCKED** | META_ACCESS_TOKEN manquant | Ads |
-| 4 | tiktok-ads-sensor | **BLOCKED** | TIKTOK_API manquant | Ads |
-| 5 | retention-sensor | ✅ OK | Pressure=0 | Retention |
-| 6 | lead-scoring-sensor | PARTIEL | Pressure=95 | Leads |
-| 7 | lead-velocity-sensor | ✅ OK | **FIXÉ** Session 139 | Leads |
-| 8 | product-seo-sensor | ✅ OK | Pressure=0 | Shopify SEO |
-| 9 | apify-trends-sensor | **BLOCKED** | Free trial expired | Trends |
-| 10 | bigquery-trends-sensor | PARTIEL | 0 rising terms | Trends |
-| 11 | google-trends-sensor | ✅ OK | **RÉÉCRIT** AI-powered | Trends |
-| 12 | google-ads-planner-sensor | PARTIEL | PASSIVE mode | Ads |
-| 13 | shopify-sensor | ✅ OK | **NEW** Store health | Shopify |
-| 14 | klaviyo-sensor | ✅ OK | **NEW** Email flows | Email |
-| 15 | email-health-sensor | ✅ OK | **NEW** Bounce/open rates | Email |
-| 16 | content-performance-sensor | PARTIEL | **NEW** WordPress SSL | Content |
-| 17 | supplier-health-sensor | PARTIEL | **NEW** No CJ/BigBuy creds | Dropshipping |
-| 18 | whatsapp-status-sensor | PARTIEL | **NEW** No token | WhatsApp |
-| 19 | voice-quality-sensor | PARTIEL | **NEW** Endpoints down | Voice-AI |
-| 20 | cost-tracking-sensor | ✅ OK | **NEW** Budget OK | Finance |
+| # | Sensor | Status | Pressure | Erreur/Détail |
+|---|--------|--------|----------|---------------|
+| 1 | retention-sensor | ✅ OK | **0** | Fonctionne |
+| 2 | product-seo-sensor | ✅ OK | **0** | Fonctionne |
+| 3 | shopify-sensor | ✅ OK | **75** | 0 products, 0 orders |
+| 4 | google-trends-sensor | ✅ OK | **5** | AI-powered (Grok) |
+| 5 | cost-tracking-sensor | ✅ OK | **30** | Budget $0.00 OK |
+| 6 | lead-velocity-sensor | ✅ OK | **75** | 2 leads |
+| 7 | klaviyo-sensor | ⚠️ PARTIAL | **65** | API Error 400, 10 lists |
+| 8 | email-health-sensor | ⚠️ PARTIAL | **60** | API Error 400 |
+| 9 | ga4-sensor | ⚠️ PARTIAL | **50** | ROAS=0.00 (store inactif) |
+| 10 | google-ads-planner-sensor | ⚠️ PARTIAL | **50** | PASSIVE mode, no creds |
+| 11 | bigquery-trends-sensor | ⚠️ PARTIAL | **-** | 0 rising terms |
+| 12 | supplier-health-sensor | ⚠️ PARTIAL | **80** | No CJ/BigBuy creds |
+| 13 | voice-quality-sensor | ⚠️ PARTIAL | **90** | Local endpoints DOWN |
+| 14 | content-performance-sensor | ⚠️ PARTIAL | **90** | WordPress SSL error |
+| 15 | lead-scoring-sensor | ⚠️ PARTIAL | **95** | Pressure critique |
+| 16 | whatsapp-status-sensor | ❌ BLOCKED | **90** | No token |
+| 17 | meta-ads-sensor | ❌ BLOCKED | **95** | No credentials |
+| 18 | tiktok-ads-sensor | ❌ BLOCKED | **95** | No credentials |
+| 19 | gsc-sensor | ❌ BLOCKED | **-** | API not enabled |
+| 20 | apify-trends-sensor | ❌ BLOCKED | **-** | Trial expired |
 
-#### Synthese Sensors (Session 139)
+#### Synthese Sensors (Session 141 - VÉRIFIÉ EMPIRIQUEMENT)
 
 ```
-SENSORS FONCTIONNELS:     8/20 (40%)  - retention, product-seo, lead-velocity, google-trends, shopify, klaviyo, email-health, cost-tracking
-SENSORS PARTIELS:         8/20 (40%)  - ga4, lead-scoring, bigquery, google-ads-planner, content-perf, supplier, whatsapp, voice-quality
-SENSORS BLOQUES:          4/20 (20%)  - gsc, meta-ads, tiktok-ads, apify
+SENSORS FONCTIONNELS:     6/20 (30%)  - retention(0), product-seo(0), shopify(75), google-trends(5), cost-tracking(30), lead-velocity(75)
+SENSORS PARTIELS:        10/20 (50%)  - klaviyo(65), email-health(60), ga4(50), google-ads-planner(50), bigquery(-), supplier(80), voice-quality(90), content-perf(90), lead-scoring(95)
+SENSORS BLOQUES:          4/20 (20%)  - gsc, meta-ads, tiktok-ads, apify, whatsapp
+
+⚠️ CORRECTION: Session 139 disait "8 OK" mais vérification Session 141 = 6 OK
+   klaviyo et email-health retournent API Error 400 → reclassés PARTIAL
 ```
 
 #### Couverture par Domaine (119 automations) - AMÉLIORÉE

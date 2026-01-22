@@ -11,7 +11,7 @@
 - ❌ Claims sans test empirique
 - ❌ Wishful thinking
 
-## VÉRIFIÉ EMPIRIQUEMENT (22/01/2026 - Session 139)
+## VÉRIFIÉ EMPIRIQUEMENT (Session 141 - 22/01/2026 21:15 UTC)
 
 ### Métriques Core
 | Métrique | Valeur | Méthode Vérification |
@@ -19,41 +19,49 @@
 | Scripts core | 81 | `ls agency/core/*.cjs` |
 | Scripts --health | 22 | `grep -l "\-\-health"` |
 | Automations registry | 119 | `jq '.automations \| length'` |
+| **Automations catalog** | **77** | ⚠️ **DÉSYNC -42** |
 | Skills | 41 | `ls -d .agent/skills/*/` |
-| MCPs configurés | 10 | `jq '.mcpServers \| keys'` |
-| Sensors | **20** | `ls *-sensor*.cjs` |
+| Sensors | 20 | `ls *-sensor*.cjs` |
+| Credentials SET | 57 | `grep -E "^[A-Z_]+=.+"` |
+| Credentials EMPTY | 36 | `grep -E "^[A-Z_]+=$"` |
 
-### Status Sensors (TESTÉ 22/01/2026)
-| Sensor | Status | Problème |
-|--------|--------|----------|
-| ga4-sensor | ⚠️ | ROAS 0.00 (store inactif) |
-| gsc-sensor | ❌ | API non activée |
-| meta-ads-sensor | ❌ | Credentials vides |
-| tiktok-ads-sensor | ❌ | Credentials vides |
-| retention-sensor | ✅ | Fonctionne |
-| product-seo-sensor | ✅ | Fonctionne |
-| lead-scoring-sensor | ⚠️ | Pressure 95 |
-| lead-velocity-sensor | ✅ | **FIXÉ** (handle {scores:[]} format) |
-| apify-trends-sensor | ❌ | Trial expiré |
-| google-trends-sensor | ✅ | **RÉÉCRIT** AI-powered (Grok→OpenAI→Gemini) |
-| bigquery-trends-sensor | ⚠️ | 0 results |
-| google-ads-planner-sensor | ⚠️ | PASSIVE mode |
-| shopify-sensor | ✅ | **NEW** Store health |
-| klaviyo-sensor | ✅ | **NEW** Email flows |
-| email-health-sensor | ✅ | **NEW** Bounce/open rates |
-| content-performance-sensor | ⚠️ | **NEW** WordPress SSL issue |
-| supplier-health-sensor | ⚠️ | **NEW** No CJ/BigBuy creds |
-| whatsapp-status-sensor | ⚠️ | **NEW** No token |
-| voice-quality-sensor | ⚠️ | **NEW** Endpoints down |
-| cost-tracking-sensor | ✅ | **NEW** Budget OK |
+### Status Sensors (EXÉCUTION RÉELLE 22/01/2026 21:15)
+| Sensor | Status | Pressure | Problème |
+|--------|--------|----------|----------|
+| retention-sensor | ✅ | 0 | OK |
+| product-seo-sensor | ✅ | 0 | OK |
+| shopify-sensor | ✅ | 75 | 0 products |
+| google-trends-sensor | ✅ | 5 | AI-powered OK |
+| cost-tracking-sensor | ✅ | 30 | Budget OK |
+| lead-velocity-sensor | ✅ | 75 | 2 leads |
+| klaviyo-sensor | ⚠️ | 65 | API Error 400 |
+| email-health-sensor | ⚠️ | 60 | API Error 400 |
+| ga4-sensor | ⚠️ | 50 | ROAS 0.00 |
+| google-ads-planner-sensor | ⚠️ | 50 | PASSIVE |
+| bigquery-trends-sensor | ⚠️ | - | 0 terms |
+| supplier-health-sensor | ⚠️ | 80 | No creds |
+| voice-quality-sensor | ⚠️ | 90 | Endpoints DOWN |
+| content-performance-sensor | ⚠️ | 90 | WordPress SSL |
+| lead-scoring-sensor | ⚠️ | 95 | Critique |
+| whatsapp-status-sensor | ❌ | 90 | No token |
+| meta-ads-sensor | ❌ | 95 | No credentials |
+| tiktok-ads-sensor | ❌ | 95 | No credentials |
+| gsc-sensor | ❌ | - | API disabled |
+| apify-trends-sensor | ❌ | - | Trial expired |
 
-### Credentials .env
-- SET: 57 credentials
-- EMPTY: 36 credentials (Meta, TikTok, Google Ads, WhatsApp, LinkedIn, etc.)
+**Synthèse: 6 OK (30%), 10 PARTIAL (50%), 4 BLOCKED (20%)**
+
+### DISCORDANCES CRITIQUES (Session 141)
+| Issue | Réalité | Impact |
+|-------|---------|--------|
+| Catalog 77 vs Registry 119 | 42 automations manquantes | Frontend incomplet |
+| llms.txt dit 174 | Devrait être 119 | AEO incohérent |
+| 6 scripts sans defer | CWV dégradé | Performance |
+| Testimonials: 0 | Section absente | Social proof |
 
 ### Infrastructure
 - Site principal: ✅ 200 OK
-- Dashboard: ✅ 200 OK (**FIXÉ** - port 3001→3000)
+- Dashboard: ✅ 200 OK
 
 ## Source de Vérité
 `automations-registry.json` v3.0.0 (totalCount: 119)
