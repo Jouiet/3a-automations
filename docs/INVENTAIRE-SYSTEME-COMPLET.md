@@ -5,16 +5,33 @@
 
 ## RÉSUMÉ EXÉCUTIF
 
+### Composants Principaux
 | Catégorie | Count | Status |
 |-----------|-------|--------|
-| **Scripts Core** | 73 | Vérification en cours |
+| **Scripts Core** | 73 | 22 avec --health |
 | **Scripts Generic** | 8 | Utils |
 | **MCPs** | 14 | 4 global + 10 projet |
 | **Automations Registry** | 119 | 96 non testées |
-| **Sensors** | 12 | 50% broken (vérifié) |
+| **Sensors** | 12 | 50% broken |
 | **Agents Agentic** | 11 | Non testés |
 | **Gateways** | 3 | LLM, Stripe, Payzone |
-| **Templates** | 10 catégories | Non inventoriés |
+| **Templates** | 10 catégories | |
+
+### Composants MANQUÉS (Ajoutés)
+| Catégorie | Count | Status |
+|-----------|-------|--------|
+| **Skills (.agent/skills)** | 41 | Skill folders |
+| **Skills (automations/skills)** | 8 | JS modules |
+| **A2A Protocol** | 3 peers | Agent-to-Agent |
+| **UCP Protocol** | 4 endpoints | Unified Commerce |
+| **Documents Externes** | 11 | Guides/Protocols |
+| **Investor Docs** | 8 | Pitch materials |
+| **Forensic Engine** | 27 files | Audit system |
+| **Knowledge Base** | 273 chunks | RAG data |
+| **Dashboard** | 55 .tsx files | Next.js app |
+| **Landing Page** | 64 HTML | Site statique |
+| **DOE Framework** | 3 files | Dispatcher system |
+| **Brain Manifest** | 1 | Architecture doc |
 
 ---
 
@@ -294,22 +311,205 @@ whatsapp-booking-notifications
 
 ---
 
-## 8. MÉTRIQUES FACTUELLES
+## 8. COMPOSANTS MANQUÉS (AJOUTÉS)
 
-| Métrique | Valeur | Source |
-|----------|--------|--------|
-| Scripts total | 82 | ls count |
-| Scripts --health | 22 | grep count |
-| MCPs total | 14 | json parse |
-| Automations registry | 119 | json parse |
-| Automations testées OK | 20 | registry status |
-| Sensors fonctionnels | 3/12 | test empirique |
-| Agents testés | 0/11 | - |
-| Revenue | €0 | Aucune facture |
-| Clients payants | 0 | Aucun contrat |
+### 8.1 SKILLS (.agent/skills) - 41 Folders
+Chaque skill = un dossier avec SKILL.md définissant capacités.
+
+| Skill | Domaine | Usage Potentiel |
+|-------|---------|-----------------|
+| accountant | Finance | Comptabilité client |
+| agency | Vente | Sales bot 3A |
+| architect | Tech | Design système |
+| bridge_slack | Comm | Intégration Slack |
+| bridge_voice | Voice | Pont téléphonie |
+| cleaner | Ops | Nettoyage data |
+| collector | Finance | Recouvrement |
+| concierge | Service | Support client |
+| content_director | Content | Direction éditoriale |
+| contractor | Construction | Devis travaux |
+| counselor | Support | Conseil client |
+| dental | Santé | Cabinet dentaire |
+| devops | Tech | Infrastructure |
+| dispatcher | Ops | Routing tasks |
+| ecommerce_b2c | E-com | Shopify client |
+| funeral | Service | Pompes funèbres |
+| gemini_skill_creator | Dev | Création skills |
+| governor | Ops | Gouvernance |
+| growth | Marketing | Growth hacking |
+| gym | Fitness | Salle de sport |
+| healer | Santé | Praticien |
+| hoa | Immobilier | Syndic copro |
+| insurer | Finance | Assurance |
+| logistician | Ops | Logistique |
+| logistics | Ops | Transport |
+| market_analyst | Analytics | Analyse marché |
+| mechanic | Auto | Garage |
+| negotiator | Sales | Négociation |
+| pharmacist | Santé | Pharmacie |
+| planner | Ops | Planning |
+| producer | Media | Production |
+| property | Immobilier | Gestion bien |
+| recruiter | RH | Recrutement |
+| renter | Immobilier | Location |
+| school | Éducation | École |
+| security | Tech | Cybersécurité |
+| sme_b2b | B2B | PME client |
+| stylist | Mode | Stylisme |
+| surveyor | Immobilier | Expertise |
+| sysadmin | Tech | Admin système |
+| trainer | Fitness | Coach |
+
+### 8.2 SKILLS (automations/skills) - 8 Modules JS
+| Module | Fonction |
+|--------|----------|
+| ContentDirector.js | Stratégie contenu |
+| DevOps.js | Infrastructure |
+| Growth.js | Croissance |
+| Logistics.js | Logistique |
+| MarketAnalyst.js | Analyse marché |
+| Negotiator.js | Négociation auto |
+| Security.js | Sécurité |
+| SystemAdmin.js | Administration |
+
+### 8.3 A2A PROTOCOL (Agent-to-Agent)
+**Fichiers:** `automations/a2a/`
+- registry.json (3 peers)
+- agent-card.schema.json
+- rpc-server.js
+- server.js
+
+**Peers enregistrés:**
+| Agent ID | Capabilities | Endpoint |
+|----------|--------------|----------|
+| agency-sales-bot | qualify_lead, book_audit | localhost:3000/agent/rpc/agency |
+| contractor-sales-bot | estimate_roofing, estimate_solar | localhost:3000/agent/rpc/contractor |
+| finance-collector-bot | collect_debt, negotiate_plan | localhost:3000/agent/rpc/collector |
+
+### 8.4 UCP PROTOCOL (Unified Commerce)
+**Fichier:** `automations/ucp-manifest.json`
+
+| Endpoint | Methods | Fonction |
+|----------|---------|----------|
+| /api/ucp/products | GET | Discovery produits |
+| /api/ucp/cart | POST, PATCH, GET | Panier |
+| /api/ucp/checkout | POST | Paiement |
+| /api/ucp/orders | GET | Commandes |
+
+**Auth:** OAuth2 avec discovery URL
+
+### 8.5 DOE FRAMEWORK (Degree of Engagement)
+| Fichier | Fonction |
+|---------|----------|
+| doe-dispatcher.cjs | Routing selon niveau |
+| forensic_audit_doe.md | Documentation |
+| update-registry-doe.js | Mise à jour registry |
+
+**Niveaux DOE:**
+- L1: Deterministic (data sync)
+- L2: Conditional (triggers)
+- L3: Reasoning (LLM analysis)
+- L4: Autonomous (self-correcting)
+- L5: Sovereign (full autonomy)
+
+### 8.6 FORENSIC ENGINE (27 files)
+**Path:** `forensic-engine/`
+
+| Composant | Fichiers |
+|-----------|----------|
+| core/ | SFAP_master_orchestrator.cjs, audit-*.cjs |
+| engine/ | Scripts d'exécution |
+| reports/ | Outputs |
+| GAP_ANALYSIS_V3.md | Documentation |
+
+### 8.7 DOCUMENTS EXTERNES (11 guides)
+| Document | Sujet |
+|----------|-------|
+| Antigravity Development Protocol | Framework 3-tier agents |
+| Understanding Agentic Commerce & UCP | Google UCP spec |
+| Google Antigravity Interface | UI essentials |
+| Mastering Antigravity Skills | Automation skills |
+| Mastering First Skill Folder | Beginner guide |
+| Operational Optimization Guide | MCP workflows |
+| Practical Sales Manual | Pricing & copy |
+| Specification Protocol Skills | skill.md standard |
+| The Antigravity Implementation | AI → Autonomous |
+| Understanding Agent Skills | AI superpowers |
+
+### 8.8 INVESTOR DOCS (8 files)
+| Document | Format |
+|----------|--------|
+| ANALYSE-FINANCIERE-FORENSIQUE.md | Markdown |
+| COHERENCE-REPORT-2026-01-01.md | Markdown |
+| NAPKIN-AI-BRIEF.md | Brief |
+| SKYWORK-AI-BRIEF.md | Brief |
+| architecture-technique.html | HTML |
+| catalogue-automations-86.html | HTML |
+| pitch-deck-12-slides.html | HTML |
+| projections-financieres-3ans.html | HTML |
+
+### 8.9 KNOWLEDGE BASE
+| Composant | Valeur |
+|-----------|--------|
+| Chunks | 273 |
+| Catalog | catalog.json |
+| Index stats | index-stats.json |
+| Embeddings | embeddings/ |
+
+### 8.10 BRAIN MANIFEST
+**Fichier:** `3A_BRAIN_MANIFEST.md`
+
+Architecture documentée:
+- THE CORE: marketing-science-core.cjs
+- THE CORTEX: autonomy-daemon.cjs + doe-dispatcher.cjs
+- THE BODY: automations-registry.json
+- THE MEDIA ENGINE: CinematicAds
 
 ---
 
-*Document généré: 22/01/2026 14:30 UTC*
-*Méthode: Inventaire bottom-up factuel*
-*Session 138 - Audit système complet*
+## 9. MÉTRIQUES FACTUELLES COMPLÈTES
+
+| Métrique | Valeur | Source |
+|----------|--------|--------|
+| Scripts Core | 73 | ls count |
+| Scripts Generic | 8 | ls count |
+| Scripts Utils | 1 | ls count |
+| **TOTAL SCRIPTS** | **82** | |
+| Scripts --health | 22 | grep |
+| | | |
+| Skills (.agent) | 41 | ls count |
+| Skills (automations) | 8 | ls count |
+| **TOTAL SKILLS** | **49** | |
+| | | |
+| MCPs Global | 4 | json |
+| MCPs Projet | 10 | json |
+| **TOTAL MCPs** | **14** | |
+| | | |
+| A2A Peers | 3 | json |
+| UCP Endpoints | 4 | json |
+| | | |
+| Automations Registry | 119 | json |
+| Automations testées | 20 | registry |
+| Sensors | 12 | ls count |
+| Sensors OK | 3 | test |
+| | | |
+| Agents Agentic | 11 | ls count |
+| Gateways | 3 | ls count |
+| Templates | 10 | ls count |
+| | | |
+| Documents Externes | 11 | ls count |
+| Investor Docs | 8 | ls count |
+| Forensic Engine files | 27 | find count |
+| Knowledge Base chunks | 273 | json |
+| Dashboard .tsx | 55 | find count |
+| Landing HTML | 64 | find count |
+| | | |
+| Revenue | €0 | - |
+| Clients payants | 0 | - |
+
+---
+
+*Document généré: 22/01/2026 15:00 UTC*
+*Méthode: Inventaire bottom-up factuel EXHAUSTIF*
+*Session 138 - Audit système complet + A2A, UCP, Skills, DOE, Forensic Engine*
+*TOTAL: 82 scripts + 49 skills + 14 MCPs + 119 automations + 27 forensic files*
