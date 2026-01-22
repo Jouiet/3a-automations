@@ -18,15 +18,15 @@ paths:
 ### Sensors (12 total)
 | Status | Count | Sensors |
 |--------|-------|---------|
-| ✅ OK | 2 | retention, product-seo |
-| ⚠️ PARTIEL | 5 | ga4, lead-scoring, bigquery, google-ads-planner |
-| ❌ BROKEN | 5 | gsc, meta-ads, tiktok, lead-velocity, apify, google-trends |
+| ✅ OK | 3 | retention, product-seo, lead-velocity |
+| ⚠️ PARTIEL | 4 | ga4, lead-scoring, bigquery, google-ads-planner |
+| ❌ BROKEN | 5 | gsc, meta-ads, tiktok, apify, google-trends |
 
 ### Blockers Sensors
 | Sensor | Problème | Fix |
 |--------|----------|-----|
 | gsc-sensor | API non activée | Activer dans Cloud Console |
-| lead-velocity | BUG: leads.filter | Fix code |
+| ~~lead-velocity~~ | ~~BUG: leads.filter~~ | ✅ FIXÉ |
 | meta-ads | Credentials vides | Configurer .env |
 | tiktok-ads | Credentials vides | Configurer .env |
 | apify-trends | Trial expiré | Payer |

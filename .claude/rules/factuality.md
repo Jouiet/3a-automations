@@ -11,7 +11,7 @@
 - ❌ Claims sans test empirique
 - ❌ Wishful thinking
 
-## VÉRIFIÉ EMPIRIQUEMENT (22/01/2026 - Session 138)
+## VÉRIFIÉ EMPIRIQUEMENT (22/01/2026 - Session 139)
 
 ### Métriques Core
 | Métrique | Valeur | Méthode Vérification |
@@ -33,7 +33,7 @@
 | retention-sensor | ✅ | Fonctionne |
 | product-seo-sensor | ✅ | Fonctionne |
 | lead-scoring-sensor | ⚠️ | Pressure 95 |
-| lead-velocity-sensor | ❌ | BUG: leads.filter |
+| lead-velocity-sensor | ✅ | **FIXÉ** (handle {scores:[]} format) |
 | apify-trends-sensor | ❌ | Trial expiré |
 | google-trends-sensor | ❌ | Blocked |
 | bigquery-trends-sensor | ⚠️ | 0 results |
@@ -45,7 +45,7 @@
 
 ### Infrastructure
 - Site principal: ✅ 200 OK
-- Dashboard: ❌ 502 Bad Gateway
+- Dashboard: ✅ 200 OK (**FIXÉ** - port 3001→3000)
 
 ## Source de Vérité
 `automations-registry.json` v3.0.0 (totalCount: 119)

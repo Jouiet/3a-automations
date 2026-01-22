@@ -1,11 +1,11 @@
 # 3A Automation
 >
-> Version: 47.3 | 22/01/2026 | Session 138
+> Version: 48.0 | 22/01/2026 | Session 139
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
-- **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (❌ 502)
+- **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
 ## Métriques VÉRIFIÉES (22/01/2026)
 
@@ -23,9 +23,9 @@
 
 | Problème | Impact | Action |
 | :--- | :--- | :--- |
-| Dashboard 502 | Pas de démo possible | Diagnostiquer VPS |
+| ~~Dashboard 502~~ | ~~Pas de démo possible~~ | ✅ FIXÉ (port 3001→3000) |
 | GSC API disabled | Sensor cassé | Activer dans Cloud Console |
-| lead-velocity BUG | Sensor cassé | Fix .filter() |
+| ~~lead-velocity BUG~~ | ~~Sensor cassé~~ | ✅ FIXÉ (.filter() sur scores) |
 | 36 credentials vides | Features inutilisables | Configurer .env |
 | Apify trial expiré | Trends cassé | Payer ou alternative |
 
@@ -39,8 +39,12 @@
 
 ## AI Fallback (Faldown Protocol)
 
-1. **Protocol**: Secure fallback chain for LLM calls.
-2. **Chain**: Anthropic (Claude 4.5) → OpenAI (GPT-5) → xAI (Grok 4.1) → Gemini (Gemini 3 Pro).
+1. **Protocol**: Secure fallback chain for FRONTIER LLM calls.
+2. **Models**:
+   - Grok: `grok-4-1-fast-reasoning`
+   - OpenAI: `gpt-5.2`
+   - Gemini: `gemini-3-flash-preview`
+   - Claude: `claude-sonnet-4-20250514` / `claude-opus-4-5-20251101`
 3. **Trigger**: Latency > 15s OR Status != 200.
 
 ## Commandes
