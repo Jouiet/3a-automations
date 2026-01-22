@@ -2,6 +2,7 @@
 name: Gym Sales Skill
 description: Membership sales and trial booking for fitness centers.
 triggers:
+provider: gemini
   - "prix abonnement salle"
   - "séance essai"
   - "inscription gym"

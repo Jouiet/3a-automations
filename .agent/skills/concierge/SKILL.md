@@ -2,6 +2,7 @@
 name: Concierge Booking Skill
 description: Guest services and booking assistant for hotels and restaurants.
 triggers:
+provider: gemini
   - "réserver chambre"
   - "table restaurant"
   - "room service"

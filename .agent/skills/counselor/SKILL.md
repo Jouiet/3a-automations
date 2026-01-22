@@ -2,6 +2,7 @@
 name: Legal Counselor Skill
 description: Intake assistant for legal firms to filter and qualify cases.
 triggers:
+provider: claude
   - "besoin avocat"
   - "question juridique"
   - "problème divorce"

@@ -2,6 +2,7 @@
 name: Collector Payment Skill
 description: Payment reminder assistant handling debt collection with firmness and tact.
 triggers:
+provider: gemini
   - "retard paiement"
   - "dette impayée"
   - "recouvrement"

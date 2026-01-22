@@ -2,6 +2,7 @@
 name: Event Planner Skill
 description: Assistant for gathering requirements for weddings and corporate events.
 triggers:
+provider: gemini
   - "organiser un mariage"
   - "planifier soirée"
   - "séminaire entreprise"

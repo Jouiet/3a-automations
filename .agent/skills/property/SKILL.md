@@ -1,6 +1,11 @@
 ---
 name: Property Maintenance Skill
 description: Specialized instructions for property managers handling tenant maintenance requests and emergency triage.
+triggers:
+  - "maintenance request"
+  - "repair needed"
+  - "emergency plumbing"
+provider: gemini
 ---
 
 # Property Maintenance Skill

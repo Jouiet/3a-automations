@@ -2,6 +2,7 @@
 name: Security
 description: Guardian agent that performs forensic API scans and audits system integrity.
 triggers:
+provider: claude
   - "security audit"
   - "scan apis"
   - "verify integrity"

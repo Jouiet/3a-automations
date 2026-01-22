@@ -2,6 +2,7 @@
 name: Agency Sales Skill
 description: Sales assistant for 3A Automation agency. Qualifies B2B prospects and books free system audits.
 triggers:
+provider: gemini
   - "besoin d'automatisation"
   - "audit gratuit"
   - "prix agence"

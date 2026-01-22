@@ -2,6 +2,7 @@
 name: Trainer Enrollment Skill
 description: Enrollment assistant for training centers and bootcamps.
 triggers:
+provider: gemini
   - "inscription formation"
   - "apprendre à coder"
   - "devenir data analyst"

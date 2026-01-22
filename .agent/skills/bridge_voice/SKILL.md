@@ -2,6 +2,7 @@
 name: Voice Bridge
 description: Infrastructure bridge for handling telephony and voice synthesis.
 triggers:
+provider: gemini
   - "voice call"
   - "synthesize speech"
 ---

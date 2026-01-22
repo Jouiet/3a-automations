@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-22T22:30:00Z",
+  "provider": {
+    "name": "3A Automation",
+    "url": "https://3a-automation.com",
+    "email": "contact@3a-automation.com"
+  },
+  "services": [
+    {
+      "id": "audit-free",
+      "name": "Audit E-commerce Gratuit",
+      "description": "Formulaire diagnostic + Rapport PDF + 3 quick wins",
+      "category": "audit",
+      "basePrice": 0,
+      "currency": "EUR",
+      "deliveryDays": 3,
+      "type": "one-shot"
+    },
+    {
+      "id": "pack-quickwin",
+      "name": "Pack Quick Win",
+      "description": "Audit express + 1 flow optimisé, livraison 48-72h",
+      "category": "setup",
+      "basePrice": 390,
+      "currency": "EUR",
+      "deliveryDays": 3,
+      "type": "one-shot"
+    },
+    {
+      "id": "pack-essentials",
+      "name": "Pack Essentials",
+      "description": "Audit complet + 3 flows + Tests A/B, livraison 5-7 jours",
+      "category": "setup",
+      "basePrice": 790,
+      "currency": "EUR",
+      "deliveryDays": 7,
+      "type": "one-shot"
+    },
+    {
+      "id": "pack-growth",
+      "name": "Pack Growth",
+      "description": "5 flows + RFM + Dashboard + Documentation, livraison 10-14 jours",
+      "category": "setup",
+      "basePrice": 1399,
+      "currency": "EUR",
+      "deliveryDays": 14,
+      "type": "one-shot"
+    },
+    {
+      "id": "sub-maintenance",
+      "name": "Abonnement Maintenance",
+      "description": "3h/mois - Monitoring + fixes + 1 rapport mensuel",
+      "category": "subscription",
+      "basePrice": 290,
+      "currency": "EUR",
+      "billingCycle": "monthly",
+      "hoursIncluded": 3,
+      "type": "subscription"
+    },
+    {
+      "id": "sub-growth",
+      "name": "Abonnement Optimization / Growth",
+      "description": "5h/mois - Maintenance + A/B tests + optimisation flows + support prioritaire",
+      "category": "subscription",
+      "basePrice": 490,
+      "currency": "EUR",
+      "billingCycle": "monthly",
+      "hoursIncluded": 5,
+      "type": "subscription"
+    }
+  ],
+  "localization": {
+    "MAD_RATE": 10.5,
+    "USD_RATE": 1.08,
+    "MAGHREB_COUNTRIES": ["MA", "DZ", "TN"],
+    "EURO_COUNTRIES": ["FR", "DE", "ES", "IT", "BE", "NL", "PT", "AT", "IE", "FI"]
+  }
+}

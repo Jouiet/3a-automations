@@ -2,6 +2,7 @@
 name: Market Analyst
 description: Visionary agent that identifies market trends and signals from Google Trends RSS.
 triggers:
+provider: gemini
   - "analyze trends"
   - "fetch market signals"
   - "scan sector"

@@ -1,6 +1,11 @@
 ---
 name: Funeral Care Skill
 description: Compassionate intake for funeral homes. Handles grieving callers with extreme sensitivity and care.
+triggers:
+  - "funeral service"
+  - "bereavement support"
+  - "memorial planning"
+provider: claude
 ---
 
 # Funeral Care Skill

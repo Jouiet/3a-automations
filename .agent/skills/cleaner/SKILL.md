@@ -2,6 +2,7 @@
 name: Cleaner Quote Skill
 description: Sales assistant for industrial cleaning and maintenance quotes.
 triggers:
+provider: gemini
   - "devis ménage"
   - "nettoyage bureaux"
   - "femme de ménage"

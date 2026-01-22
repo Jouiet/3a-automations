@@ -1,6 +1,11 @@
 ---
 name: School Absence Skill
 description: Attendance line for schools. Securely records student absences and verifies parent identity.
+triggers:
+  - "student absence"
+  - "attendance record"
+  - "absence report"
+provider: claude
 ---
 
 # School Absence Skill

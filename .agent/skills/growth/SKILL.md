@@ -2,6 +2,7 @@
 name: Growth Director
 description: Marketing agent responsible for auditing ad spend across GA4/Ads platforms and autonomously optimizing budgets using ROI data.
 triggers:
+provider: gemini
   - "optimize budget"
   - "analyze ad spend"
   - "audit marketing performance"

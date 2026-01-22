@@ -2,6 +2,7 @@
 name: Healer Intake Skill
 description: Specialized instructions for a multi-specialty clinic intake and triage.
 triggers:
+provider: gemini
   - "prendre rendez-vous médecin"
   - "consultation spécialiste"
   - "urgence médicale"

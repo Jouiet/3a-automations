@@ -2,6 +2,7 @@
 name: System Admin
 description: Engineering agent that monitors uptime and performs deep system audits.
 triggers:
+provider: gemini
   - "monitor uptime"
   - "audit system"
   - "health check"

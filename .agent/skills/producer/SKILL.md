@@ -2,6 +2,7 @@
 name: Producer Supply Skill
 description: Assistant for managing procurement and equipment inquiries in manufacturing/agri-food.
 triggers:
+provider: gemini
   - "achat machine industrielle"
   - "matière première"
   - "équipement usine"

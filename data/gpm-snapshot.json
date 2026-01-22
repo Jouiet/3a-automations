@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2026-01-22T22:40:00Z",
+  "source": "Manual aggregation from factuality.md Session 141",
+  "sensors": {
+    "retention-sensor": { "status": "ok", "pressure": 0 },
+    "product-seo-sensor": { "status": "ok", "pressure": 0 },
+    "shopify-sensor": { "status": "ok", "pressure": 75, "note": "0 products (store inactive)" },
+    "google-trends-sensor": { "status": "ok", "pressure": 5, "note": "AI-powered OK" },
+    "cost-tracking-sensor": { "status": "ok", "pressure": 30, "note": "Budget OK" },
+    "lead-velocity-sensor": { "status": "ok", "pressure": 75, "note": "2 leads only" },
+    "klaviyo-sensor": { "status": "partial", "pressure": 65, "note": "API Error 400" },
+    "email-health-sensor": { "status": "partial", "pressure": 60, "note": "API Error 400" },
+    "ga4-sensor": { "status": "partial", "pressure": 50, "note": "ROAS 0.00" },
+    "google-ads-planner-sensor": { "status": "partial", "pressure": 50, "note": "PASSIVE mode" },
+    "bigquery-trends-sensor": { "status": "partial", "pressure": 60, "note": "0 terms" },
+    "supplier-health-sensor": { "status": "partial", "pressure": 80, "note": "No credentials" },
+    "voice-quality-sensor": { "status": "partial", "pressure": 90, "note": "Endpoints DOWN" },
+    "content-performance-sensor": { "status": "partial", "pressure": 90, "note": "WordPress SSL" },
+    "lead-scoring-sensor": { "status": "partial", "pressure": 95, "note": "Critical" },
+    "whatsapp-status-sensor": { "status": "blocked", "pressure": 90, "note": "No token" },
+    "meta-ads-sensor": { "status": "blocked", "pressure": 95, "note": "No credentials" },
+    "tiktok-ads-sensor": { "status": "blocked", "pressure": 95, "note": "No credentials" },
+    "gsc-sensor": { "status": "blocked", "pressure": 95, "note": "API disabled" },
+    "apify-trends-sensor": { "status": "blocked", "pressure": 95, "note": "Trial expired" }
+  },
+  "summary": {
+    "total_sensors": 20,
+    "ok": 6,
+    "partial": 10,
+    "blocked": 4,
+    "overall_pressure": 60,
+    "pressure_formula": "weighted_average",
+    "note": "Pressure > 50 due to 4 blocked sensors + credentials issues"
+  }
+}

@@ -311,11 +311,211 @@ const executeTask = async (params) => {
     };
 };
 
+// Ping method for health testing
+const ping = () => {
+    return { pong: true, timestamp: new Date().toISOString() };
+};
+
+// List all registered agents
+const listAgents = () => {
+    const agents = [];
+    AGENT_REGISTRY.forEach((agent, id) => {
+        agents.push({
+            id: agent.id,
+            name: agent.name,
+            type: agent.type || 'core',
+            capabilities: agent.capabilities.map(c => c.name)
+        });
+    });
+    return { agents, total: agents.length };
+};
+
 const METHODS = {
+    'ping': ping,
+    'agent.list': listAgents,
     'agent.register': registerAgent,
     'agent.discover': discoverAgents,
     'agent.execute': executeTask
 };
+
+// --- HEALTH CHECK ---
+app.get('/a2a/v1/health', (req, res) => {
+    const skillCount = AGENT_REGISTRY.size;
+    const dynamicCount = dynamicSkills.length;
+    res.json({
+        status: 'ok',
+        version: '1.0.0',
+        protocol: 'A2A',
+        agents_registered: skillCount,
+        dynamic_skills: dynamicCount,
+        timestamp: new Date().toISOString()
+    });
+});
+
+// --- AGENT CARD (Discovery) ---
+app.get('/.well-known/agent.json', (req, res) => {
+    const capabilities = [];
+    AGENT_REGISTRY.forEach(agent => {
+        agent.capabilities.forEach(cap => {
+            if (!capabilities.find(c => c.name === cap.name)) {
+                capabilities.push(cap);
+            }
+        });
+    });
+
+    res.json({
+        name: '3A Automation Agency',
+        description: 'Level 5 Sovereign AI Automation Agency - E-commerce & SMB workflows',
+        url: 'https://3a-automation.com',
+        version: '1.0.0',
+        capabilities: capabilities.slice(0, 20), // Top 20 capabilities
+        authentication: {
+            type: 'bearer',
+            token_endpoint: '/oauth/token'
+        },
+        endpoints: {
+            rpc: '/a2a/v1/rpc',
+            health: '/a2a/v1/health',
+            stream: '/a2a/v1/stream'
+        },
+        protocols: ['A2A', 'UCP', 'MCP'],
+        contact: 'agency@3a-automation.com'
+    });
+});
+
+// --- SSE STREAM (Real-time Updates) ---
+const clients = new Set();
+
+app.get('/a2a/v1/stream', (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Send initial connection event
+    res.write(`data: ${JSON.stringify({ type: 'connected', timestamp: new Date().toISOString() })}\n\n`);
+
+    clients.add(res);
+    console.log(`[A2A] SSE Client connected. Total: ${clients.size}`);
+
+    req.on('close', () => {
+        clients.delete(res);
+        console.log(`[A2A] SSE Client disconnected. Total: ${clients.size}`);
+    });
+});
+
+// Broadcast function for events
+const broadcast = (event) => {
+    const data = JSON.stringify(event);
+    clients.forEach(client => {
+        client.write(`data: ${data}\n\n`);
+    });
+};
+
+// --- AG-UI GOVERNANCE ENDPOINTS ---
+
+// Action Queue (Human-in-the-Loop)
+const ACTION_QUEUE = [];
+
+// Add action to queue (for high-stakes operations)
+const queueAction = (action) => {
+    const item = {
+        id: uuidv4(),
+        action: action.type,
+        params: action.params,
+        agent: action.agent,
+        status: 'pending',
+        priority: action.priority || 'normal',
+        created_at: new Date().toISOString(),
+        expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24h expiry
+    };
+    ACTION_QUEUE.push(item);
+    broadcast({ type: 'action_queued', item });
+    return item;
+};
+
+// AG-UI Dashboard
+app.get('/ag-ui', (req, res) => {
+    const gpmPath = path.join(__dirname, '../../data/gpm-snapshot.json');
+    let gpm = { overall_pressure: 'N/A' };
+
+    if (fs.existsSync(gpmPath)) {
+        try {
+            gpm = JSON.parse(fs.readFileSync(gpmPath, 'utf8'));
+        } catch (e) {
+            console.error('[AG-UI] Failed to load GPM:', e.message);
+        }
+    }
+
+    res.json({
+        status: 'ok',
+        protocol: 'AG-UI/1.0',
+        governance: {
+            mode: 'human-in-the-loop',
+            auto_approve_threshold: 'low-risk',
+            escalation: 'slack-alert'
+        },
+        agents: {
+            total: AGENT_REGISTRY.size,
+            dynamic_skills: dynamicSkills.length,
+            core: AGENT_REGISTRY.size - dynamicSkills.length
+        },
+        pressure: {
+            overall: gpm.summary?.overall_pressure || 'N/A',
+            sensors_ok: gpm.summary?.ok || 0,
+            sensors_partial: gpm.summary?.partial || 0,
+            sensors_blocked: gpm.summary?.blocked || 0
+        },
+        queue: {
+            pending: ACTION_QUEUE.filter(a => a.status === 'pending').length,
+            total: ACTION_QUEUE.length
+        },
+        endpoints: {
+            dashboard: '/ag-ui',
+            queue: '/ag-ui/queue',
+            stream: '/a2a/v1/stream'
+        },
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Action Queue - List/Manage
+app.get('/ag-ui/queue', (req, res) => {
+    const pending = ACTION_QUEUE.filter(a => a.status === 'pending');
+    res.json({
+        protocol: 'AG-UI/1.0',
+        queue: pending,
+        stats: {
+            pending: pending.length,
+            approved: ACTION_QUEUE.filter(a => a.status === 'approved').length,
+            rejected: ACTION_QUEUE.filter(a => a.status === 'rejected').length,
+            expired: ACTION_QUEUE.filter(a => a.status === 'expired').length
+        }
+    });
+});
+
+// Approve/Reject Action
+app.post('/ag-ui/queue/:id', express.json(), (req, res) => {
+    const { id } = req.params;
+    const { decision } = req.body; // 'approve' or 'reject'
+
+    const item = ACTION_QUEUE.find(a => a.id === id);
+    if (!item) {
+        return res.status(404).json({ error: 'Action not found' });
+    }
+
+    if (item.status !== 'pending') {
+        return res.status(400).json({ error: `Action already ${item.status}` });
+    }
+
+    item.status = decision === 'approve' ? 'approved' : 'rejected';
+    item.decided_at = new Date().toISOString();
+    item.decided_by = req.headers['x-user-id'] || 'human';
+
+    broadcast({ type: 'action_decided', item });
+
+    res.json({ status: 'ok', item });
+});
 
 // --- JSON-RPC ENDPOINT ---
 app.post('/a2a/v1/rpc', async (req, res) => {
@@ -357,9 +557,25 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 if (require.main === module) {
+    // Handle --health CLI flag
+    if (process.argv.includes('--health')) {
+        console.log(JSON.stringify({
+            status: 'ok',
+            version: '1.0.0',
+            protocol: 'A2A',
+            agents_registered: AGENT_REGISTRY.size,
+            dynamic_skills: dynamicSkills.length,
+            methods: Object.keys(METHODS),
+            timestamp: new Date().toISOString()
+        }, null, 2));
+        process.exit(0);
+    }
+
     app.listen(PORT, () => {
         console.log(`[A2A] Unified Server running on port ${PORT}`);
-        console.log(`[A2A] Registry Active with Real Gateway (Anthropic/Google).`);
+        console.log(`[A2A] Registry: ${AGENT_REGISTRY.size} agents (${dynamicSkills.length} dynamic skills)`);
+        console.log(`[A2A] Methods: ${Object.keys(METHODS).join(', ')}`);
+        console.log(`[A2A] Endpoints: /a2a/v1/rpc, /a2a/v1/health, /a2a/v1/stream, /.well-known/agent.json`);
     });
 }
 

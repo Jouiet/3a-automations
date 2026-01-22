@@ -2,6 +2,7 @@
 name: Slack Bridge
 description: Infrastructure bridge for sending system alerts and notifications to Slack.
 triggers:
+provider: gemini
   - "send alert"
   - "notify slack"
 ---

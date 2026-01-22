@@ -2,6 +2,7 @@
 name: Universal SME Skill
 description: General receptionist and front-desk assistant for any local small business (SME). Filters calls and takes appointments.
 triggers:
+provider: gemini
   - "prendre rendez-vous"
   - "book appointment"
   - "heures d'ouverture"

@@ -1,6 +1,11 @@
 ---
 name: HOA Support Skill
 description: Support hotline for Homeowner Associations (HOA). Answers FAQs about rules/amenities and logs complaints.
+triggers:
+  - "HOA question"
+  - "complaint"
+  - "amenities info"
+provider: claude
 ---
 
 # HOA Support Skill

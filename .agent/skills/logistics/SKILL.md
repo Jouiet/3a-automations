@@ -2,6 +2,7 @@
 name: Logistics Manager
 description: Operational agent responsible for tracking dropshipping orders, managing supplier relationships, and syncing tracking numbers.
 triggers:
+provider: gemini
   - "check order status"
   - "track shipment"
   - "sync logistics"

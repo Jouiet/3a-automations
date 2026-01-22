@@ -2,6 +2,7 @@
 name: Recruiter Screening Skill
 description: HR assistant for initial candidate screening and interview scheduling.
 triggers:
+provider: gemini
   - "postuler offre d'emploi"
   - "dépôt candidature"
   - "ressources humaines"

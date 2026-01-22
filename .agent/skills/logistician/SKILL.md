@@ -2,6 +2,7 @@
 name: Logistician Order Skill
 description: B2B sales assistant for wholesale supply and distribution.
 triggers:
+provider: gemini
   - "commande en gros"
   - "livraison palette"
   - "fournisseur stock"

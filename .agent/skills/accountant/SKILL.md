@@ -2,6 +2,7 @@
 name: Accountant Intake Skill
 description: Intake assistant for accounting firms to qualify business leads.
 triggers:
+provider: claude
   - "chercher comptable"
   - "bilan annuel"
   - "création entreprise"

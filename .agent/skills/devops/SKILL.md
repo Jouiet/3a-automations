@@ -2,6 +2,7 @@
 name: DevOps
 description: Architect agent that checks environment status and infrastructure health.
 triggers:
+provider: gemini
   - "check env"
   - "check status"
   - "system check"

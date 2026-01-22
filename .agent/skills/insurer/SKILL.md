@@ -2,6 +2,7 @@
 name: Insurer Claims Skill
 description: Assistant for insurance claims intake and policy quotes.
 triggers:
+provider: claude
   - "déclarer sinistre"
   - "accident voiture"
   - "dégât des eaux"

@@ -2,6 +2,7 @@
 name: Pharmacist Assistant Skill
 description: Assistant for checking medication stock and handling prescription inquiries.
 triggers:
+provider: gemini
   - "a-t-on ce médicament"
   - "ordonnance en ligne"
   - "stock pharmacie"

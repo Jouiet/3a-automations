@@ -2,6 +2,7 @@
 name: Negotiator
 description: Diplomatic agent that handles pricing negotiations using scientific resistance points and margin protection.
 triggers:
+provider: claude
   - "negotiate price"
   - "evaluate offer"
   - "handle counter-offer"

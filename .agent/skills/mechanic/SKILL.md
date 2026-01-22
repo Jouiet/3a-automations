@@ -2,6 +2,7 @@
 name: Mechanic Service Skill
 description: Service assistant for automotive repair and maintenance booking.
 triggers:
+provider: gemini
   - "révision voiture"
   - "bruit moteur"
   - "changer pneus"

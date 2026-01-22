@@ -6,6 +6,7 @@ triggers:
   - "update skill"
   - "refactor skill"
   - "standardize skill"
+provider: gemini
 ---
 
 # Gemini Skill Creator
@@ -41,6 +42,7 @@ All `SKILL.md` files must start with this YAML Frontmatter:
 name: [Skill Name]
 description: [Concise high-density summary]
 triggers:
+provider: gemini
   - "[Trigger phrase 1]"
   - "[Trigger phrase 2]"
 ---

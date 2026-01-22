@@ -2,6 +2,7 @@
 name: Dental Intake Skill
 description: Specialized instructions for patients intake, triage, and scheduling in a dental practice. Use this when the agent is acting for a clinic or dental office.
 triggers:
+provider: gemini
   - "mal aux dents"
   - "rendez-vous dentiste"
   - "urgence dentaire"

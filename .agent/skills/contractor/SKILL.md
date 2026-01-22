@@ -2,6 +2,7 @@
 name: Contractor Sales Skill
 description: Sales qualification for contractors (Roofing, Solar, Construction). Scopes projects and books estimates.
 triggers:
+provider: claude
   - "devis toiture"
   - "prix panneaux solaires"
   - "fuite toit"

@@ -2,6 +2,7 @@
 name: Architect Inquiry Skill
 description: Sales qualification for architectural and design projects.
 triggers:
+provider: gemini
   - "plans maison"
   - "architecte intérieur"
   - "permis de construire"

@@ -2,6 +2,7 @@
 name: Governor Admin Skill
 description: Public administration assistant for guiding citizens through bureaucratic procedures.
 triggers:
+provider: claude
   - "papiers mairie"
   - "renouvellement passeport"
   - "état civil"

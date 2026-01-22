@@ -2,6 +2,7 @@
 name: Dispatcher Tracking Skill
 description: Logistics assistant for tracking packages and managing delivery issues.
 triggers:
+provider: gemini
   - "où est mon colis"
   - "retard livraison"
   - "problème livreur"

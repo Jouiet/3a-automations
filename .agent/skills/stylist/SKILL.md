@@ -2,6 +2,7 @@
 name: Stylist Booking Skill
 description: Appointment booking for beauty salons, spas, and stylists.
 triggers:
+provider: gemini
   - "coupe de cheveux"
   - "soin visage"
   - "massage relaxant"

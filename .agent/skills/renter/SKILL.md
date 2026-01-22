@@ -2,6 +2,7 @@
 name: Renter Booking Skill
 description: Reservation assistant for vehicle rental agencies.
 triggers:
+provider: gemini
   - "louer une voiture"
   - "location utilitaire"
   - "réserver véhicule"

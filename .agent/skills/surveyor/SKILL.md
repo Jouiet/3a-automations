@@ -2,6 +2,7 @@
 name: Surveyor Feedback Skill
 description: Customer satisfaction survey assistant (NPS/CSAT).
 triggers:
+provider: claude
   - "donner avis"
   - "satisfaction client"
   - "enquête qualité"

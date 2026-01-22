@@ -2,6 +2,7 @@
 name: Universal Ecommerce Skill
 description: Customer support and sales assistant for any online e-commerce store. Handles order tracking, product info, and returns.
 triggers:
+provider: gemini
   - "suivi de commande"
   - "track order"
   - "return product"

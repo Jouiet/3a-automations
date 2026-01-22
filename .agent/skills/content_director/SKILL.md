@@ -2,6 +2,7 @@
 name: Content Director
 description: Editor-in-Chief agent responsible for identifying content gaps via Google Search Console and orchestrating the production of SEO-optimized blog posts and videos.
 triggers:
+provider: gemini
   - "plan content"
   - "generate blog post"
   - "analyze content gaps"
