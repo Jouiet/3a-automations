@@ -11,22 +11,41 @@
 - ❌ Claims sans test empirique
 - ❌ Wishful thinking
 
-## AUTORISÉ (Vérifié 05/01/2026 - Session 136)
-- ✅ 22 scripts avec --health
-- ✅ 118 automations registry v2.7.0
-- ✅ 94 cartes affichées sur site (5 internes/doublons exclus)
-- ✅ 11/11 MCPs fonctionnels
-- ✅ AEO 100%, SEO 88%
-- ✅ Security 100% (CSP + all headers deployed)
+## VÉRIFIÉ EMPIRIQUEMENT (22/01/2026 - Session 138)
 
-## Écart Registry vs Affichées (5)
-| Automation | Raison exclusion |
-|------------|------------------|
-| Geo Segment Generic | Doublon Geo-Segmentation |
-| Enable Apify Schedulers | Script technique interne |
-| Audit Klaviyo Flows V2 | Doublon Audit Email |
-| Parse Warehouse Csv | Script technique interne |
-| Newsletter Automation | Catégorie marketing vide |
+### Métriques Core
+| Métrique | Valeur | Méthode Vérification |
+|----------|--------|----------------------|
+| Scripts core | 73 | `ls agency/core/*.cjs` |
+| Scripts --health | 22 | `grep -l "\-\-health"` |
+| Automations registry | 119 | `jq '.automations \| length'` |
+| Skills | 41 | `ls -d .agent/skills/*/` |
+| MCPs configurés | 10 | `jq '.mcpServers \| keys'` |
+| Sensors | 12 | `ls *-sensor*.cjs` |
+
+### Status Sensors (TESTÉ 22/01/2026)
+| Sensor | Status | Problème |
+|--------|--------|----------|
+| ga4-sensor | ⚠️ | ROAS 0.00 (store inactif) |
+| gsc-sensor | ❌ | API non activée |
+| meta-ads-sensor | ❌ | Credentials vides |
+| tiktok-ads-sensor | ❌ | Credentials vides |
+| retention-sensor | ✅ | Fonctionne |
+| product-seo-sensor | ✅ | Fonctionne |
+| lead-scoring-sensor | ⚠️ | Pressure 95 |
+| lead-velocity-sensor | ❌ | BUG: leads.filter |
+| apify-trends-sensor | ❌ | Trial expiré |
+| google-trends-sensor | ❌ | Blocked |
+| bigquery-trends-sensor | ⚠️ | 0 results |
+| google-ads-planner-sensor | ⚠️ | PASSIVE mode |
+
+### Credentials .env
+- SET: 57 credentials
+- EMPTY: 36 credentials (Meta, TikTok, Google Ads, WhatsApp, LinkedIn, etc.)
+
+### Infrastructure
+- Site principal: ✅ 200 OK
+- Dashboard: ❌ 502 Bad Gateway
 
 ## Source de Vérité
-`automations-registry.json` v2.7.0
+`automations-registry.json` v3.0.0 (totalCount: 119)

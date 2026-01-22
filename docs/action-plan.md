@@ -1,8 +1,63 @@
 # PLAN D'ACTION MVP - JO-AAA
-## Document Exécutable - Janvier 2026 (MISSION COMPLETE)
+## Document Exécutable - Janvier 2026
 
-> **⚠️ NOTE (Session 128):** ROADMAPS Q1 & Q2 COMPLÉTÉS À 100%. Le système est désormais autonome (Level 4 Agentic).
-## Phase: PRÉ-INCORPORATION (en attente ICE marocain)
+> **⚠️ ÉTAT RÉEL (Session 138 - 22/01/2026):** Système NON VENDABLE. Blockers critiques identifiés.
+## Phase: STABILISATION TECHNIQUE (avant commercialisation)
+
+---
+
+## 🚨 BLOCKERS VÉRIFIÉS EMPIRIQUEMENT (22/01/2026)
+
+### P0 - CRITIQUES (Bloquent la démo)
+
+| # | Blocker | Impact | Action | Effort |
+|---|---------|--------|--------|--------|
+| 1 | Dashboard 502 | Pas de démo client | Diagnostiquer VPS Hostinger | 2h |
+| 2 | GSC API disabled | Sensor SEO cassé | [Activer API](https://console.developers.google.com/apis/api/searchconsole.googleapis.com) | 5min |
+| 3 | lead-velocity BUG | Sensor broken | Fix ligne `.filter()` dans code | 30min |
+
+### P1 - HAUTE (Bloquent fonctionnalités)
+
+| # | Blocker | Impact | Action | Effort |
+|---|---------|--------|--------|--------|
+| 4 | META_ACCESS_TOKEN vide | Meta Ads non fonctionnel | Créer app Meta + token | 1h |
+| 5 | TIKTOK_ACCESS_TOKEN vide | TikTok Ads non fonctionnel | Créer app TikTok + token | 1h |
+| 6 | Apify trial expiré | Trends non fonctionnel | [Payer Apify](https://console.apify.com/billing) | $$ |
+| 7 | GOOGLE_ADS_* vides (5) | Google Ads non fonctionnel | Setup Google Ads API | 2h |
+
+### P2 - MOYENNE (Fonctionnalités secondaires)
+
+| # | Blocker | Impact | Action |
+|---|---------|--------|--------|
+| 8 | WHATSAPP_* vides (3) | WhatsApp non fonctionnel | Setup WhatsApp Business API |
+| 9 | LINKEDIN_* vides (3) | LinkedIn non fonctionnel | Setup LinkedIn API |
+| 10 | HUBSPOT_API_KEY vide | HubSpot non fonctionnel | Obtenir clé HubSpot |
+
+### Résumé Credentials
+
+```
+✅ SET: 57 credentials (Shopify, Klaviyo, Google SA, etc.)
+❌ EMPTY: 36 credentials (voir .env)
+```
+
+### Résumé Sensors
+
+```
+✅ OK: 2/12 (retention, product-seo)
+⚠️ PARTIEL: 5/12 (ga4, lead-scoring, bigquery, google-ads-planner, lead-scoring)
+❌ BROKEN: 5/12 (gsc, meta-ads, tiktok, lead-velocity, apify, google-trends)
+```
+
+---
+
+## VERDICT: SYSTÈME NON VENDABLE
+
+Le système ne peut PAS être vendu tant que:
+1. Dashboard accessible (actuellement 502)
+2. Au minimum 6/12 sensors fonctionnels (actuellement 2/12)
+3. Credentials critiques configurés
+
+---
 
 ---
 

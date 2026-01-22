@@ -112,20 +112,20 @@
 
 ## 2.1 Vue d'Ensemble
 
-| Sensor | Lignes | API | Métriques | Status |
-|--------|--------|-----|-----------|--------|
-| ga4-sensor.cjs | 100 | Google Analytics Data API | sessions, revenue, roas, conversion | ⚠️ PARTIEL |
-| gsc-sensor.cjs | 92 | Google Search Console API | clicks, impressions, ctr, position | ❌ BROKEN |
-| meta-ads-sensor.cjs | 86 | Facebook Graph API v19 | spend, clicks, ctr, conversions | ❌ DISCONNECTED |
-| tiktok-ads-sensor.cjs | 95 | TikTok Business API | spend, clicks, ctr, conversions | ❌ DISCONNECTED |
-| retention-sensor.cjs | 103 | Shopify Admin API | orders, repeat_rate, churn_risk | ✅ OK |
-| product-seo-sensor.cjs | 86 | Shopify Admin API | products, seo_score | ✅ OK |
-| lead-scoring-sensor.cjs | 57 | Internal | leads, scores | ⚠️ CRITIQUE |
-| lead-velocity-sensor.cjs | 72 | Internal | velocity, trend | ❌ BROKEN |
-| apify-trends-sensor.cjs | 112 | Apify API | trends, queries | ❌ BROKEN |
-| bigquery-trends-sensor.cjs | 77 | BigQuery | rising_terms | ⚠️ EMPTY |
-| google-trends-sensor.cjs | 142 | Google Trends (scraping) | trends, interest | ❌ BLOCKED |
-| google-ads-planner-sensor.cjs | 101 | Google Ads API | keywords, volume | ⚠️ PASSIVE |
+| Sensor | Lignes | API | Status VÉRIFIÉ (22/01/2026) | Problème |
+|--------|--------|-----|------------------------------|----------|
+| ga4-sensor.cjs | 100 | Google Analytics Data API | ⚠️ PARTIEL | ROAS: 0.00 (store inactif) |
+| gsc-sensor.cjs | 92 | Google Search Console API | ❌ BROKEN | API non activée Cloud Console |
+| meta-ads-sensor.cjs | 86 | Facebook Graph API v19 | ❌ CREDS | META_ACCESS_TOKEN vide |
+| tiktok-ads-sensor.cjs | 95 | TikTok Business API | ❌ CREDS | TIKTOK_ACCESS_TOKEN vide |
+| retention-sensor.cjs | 103 | Shopify Admin API | ✅ OK | Fonctionne (0 commandes) |
+| product-seo-sensor.cjs | 86 | Shopify Admin API | ✅ OK | Fonctionne |
+| lead-scoring-sensor.cjs | 57 | Internal | ⚠️ HIGH | Pressure 95 (critique) |
+| lead-velocity-sensor.cjs | 72 | Internal | ❌ BUG | leads.filter is not a function |
+| apify-trends-sensor.cjs | 112 | Apify API | ❌ PAID | Trial expiré - paiement requis |
+| bigquery-trends-sensor.cjs | 77 | BigQuery | ⚠️ EMPTY | 0 rising terms |
+| google-trends-sensor.cjs | 142 | Google Trends (scraping) | ❌ BLOCKED | Detection block stealth |
+| google-ads-planner-sensor.cjs | 101 | Google Ads API | ⚠️ PASSIVE | GOOGLE_ADS_* vides |
 
 ## 2.2 Détail par Sensor
 

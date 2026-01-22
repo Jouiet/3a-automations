@@ -1,23 +1,33 @@
 # 3A Automation
 >
-> Version: 47.2 | 20/01/2026 | Session 138
+> Version: 47.3 | 22/01/2026 | Session 138
 
 ## Identité
 
-- **Type**: AI Automation Agency (Holistic: E-commerce & Systems)
-- **Sites**: 3a-automation.com | dashboard.3a-automation.com
+- **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
+- **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (❌ 502)
 
-## Métriques (Vérifiées)
+## Métriques VÉRIFIÉES (22/01/2026)
 
-| Élément | Valeur |
-| :--- | :--- |
-| Automations | 119 (Registry v3.0.0 - corrected) |
-| SFAP v5.0 | ✅ Level 5 Sovereign (Weaponized) |
-| Agents | 18 (Cortex Swarm) |
-| MCPs | 10/10 (Projet) |
-| SEO/AEO | 100/100 (Deep Forensic) |
-| Security | ✅ SecOps Probe Active. |
-| Trio Audit | 100% (mydealz, henderson, alphamedical) |
+| Élément | Valeur | Status |
+| :--- | :--- | :--- |
+| Automations | 119 | Registry v3.0.0 |
+| Scripts core | 73 | Vérifiés |
+| Scripts --health | 22 | Testables |
+| Skills | 41 | Dossiers |
+| MCPs | 10 | Configurés |
+| Sensors | 12 | **2 OK, 5 BROKEN, 5 PARTIEL** |
+| Credentials | 57 set / 36 vides | ⚠️ BLOQUEUR |
+
+## BLOCKERS CRITIQUES
+
+| Problème | Impact | Action |
+| :--- | :--- | :--- |
+| Dashboard 502 | Pas de démo possible | Diagnostiquer VPS |
+| GSC API disabled | Sensor cassé | Activer dans Cloud Console |
+| lead-velocity BUG | Sensor cassé | Fix .filter() |
+| 36 credentials vides | Features inutilisables | Configurer .env |
+| Apify trial expiré | Trends cassé | Payer ou alternative |
 
 ## Règles Strictes
 
