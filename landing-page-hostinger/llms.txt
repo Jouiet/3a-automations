@@ -89,7 +89,7 @@ We are natively global. Our system adapts automatically:
 
 ---
 
-## 6. The 174 automations (By Category)
+## 6. The 119 automations (By Category)
 
 ### Lead Generation (26)
 - Ads Lead Sync → CRM
@@ -124,7 +124,7 @@ We are natively global. Our system adapts automatically:
 - CinematicAds AI Integration
 - AI Avatar & Influencer Stream
 
-**Total: 174 Verified Sovereign Units (Sovereign Swarm v6.0)**
+**Total: 119 Verified Sovereign Units (Sovereign Swarm v6.0)**
 
 ---
 
