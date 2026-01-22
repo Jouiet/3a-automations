@@ -1,0 +1,97 @@
+{
+  "$schema": "https://schema.org",
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "3A Automation - Sovereign Agentic Platform",
+  "alternateName": [
+    "AAA",
+    "Triple A",
+    "AI Automation Agency"
+  ],
+  "version": "5.0.0",
+  "dateModified": "2026-01-20",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Cloud-Native (Docker/Node.js)",
+  "description": {
+    "short": "Agence IA Agentique Niveau 5 (Self-Directed). 122 Automatisations + 22 Agents pour E-commerce et PME.",
+    "long": "3A Automation est une plateforme d'automatisation souveraine qui combine un MCP Router propriétaire avec des agents IA autonomes (Claude 4.5, Grok 4.1, Gemini 3, GPT-5.2). Le système gère l'acquisition, la conversion, la rétention et l'advocacy de manière entièrement autonome."
+  },
+  "sovereignCapabilities": {
+    "autonomyLevel": 5,
+    "toolCount": 119,
+    "agentCount": 22,
+    "orchestration": "MCP Router (Real Sequential Execution)",
+    "stateManagement": "SQLite Persistent",
+    "llmProviders": [
+      "Anthropic Claude 4.5",
+      "xAI Grok 4.1",
+      "Google Gemini 3",
+      "OpenAI GPT-5.2"
+    ],
+    "fallbackProtocol": "Frontier Faldown (Resilient Chain)",
+    "lastVerified": "2026-01-21T19:02:49.586Z"
+  },
+  "markets": {
+    "primary": [
+      {
+        "region": "Morocco",
+        "language": "fr",
+        "currency": "MAD"
+      },
+      {
+        "region": "Europe",
+        "language": "fr",
+        "currency": "EUR"
+      },
+      {
+        "region": "International",
+        "language": "en",
+        "currency": "USD"
+      }
+    ],
+    "geoDetection": "ipapi.co (Auto-locale)"
+  },
+  "services": [
+    {
+      "name": "The Closer",
+      "type": "Voice AI Assistant",
+      "description": "Assistant vocal IA 24/7 pour qualification de leads et prise de RDV automatique.",
+      "technology": "Twilio + Grok Realtime (<500ms latency)"
+    },
+    {
+      "name": "The Director",
+      "type": "CinematicAds Engine",
+      "description": "Studio vidéo 100% autonome pour création de publicités virales.",
+      "technology": "Kling AI + Leonardo + Grok Editing"
+    },
+    {
+      "name": "The Architect",
+      "type": "MCP Core System",
+      "description": "Orchestration Level 5 de 122 automatisations propriétaires.",
+      "technology": "MCP Router + DOE Framework"
+    }
+  ],
+  "compliance": {
+    "euAiAct": true,
+    "gdpr": true,
+    "ssl": true,
+    "zeroMock": true
+  },
+  "contact": {
+    "email": "contact@3a-automation.com",
+    "website": "https://3a-automation.com",
+    "locations": [
+      "Casablanca, Morocco",
+      "Paris, France"
+    ]
+  },
+  "verification": {
+    "lastAudit": "2026-01-20T14:45:00Z",
+    "auditType": "Forensic Phase 9",
+    "pmfScore": 66.7,
+    "pmfTarget": 40,
+    "pmfStatus": "Mature (n=3)",
+    "chainToolsStatus": "OPERATIONAL",
+    "sqlitePersistence": "DEPLOYED"
+  }
+}

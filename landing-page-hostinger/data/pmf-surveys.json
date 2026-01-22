@@ -1,0 +1,24 @@
+{
+  "surveys": [
+    {
+      "id": 1,
+      "type": "disappointment",
+      "score": "Very Disappointed",
+      "category": "Core ICP"
+    },
+    {
+      "id": 2,
+      "type": "disappointment",
+      "score": "Somewhat Disappointed",
+      "category": "Mixed"
+    },
+    {
+      "id": 3,
+      "type": "disappointment",
+      "score": "Very Disappointed",
+      "category": "Core ICP"
+    }
+  ],
+  "churn_rate": 0.02,
+  "experience_score": 9.2
+}

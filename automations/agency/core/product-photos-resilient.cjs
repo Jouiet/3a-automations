@@ -109,7 +109,7 @@ const VISION_PROVIDERS = {
   },
   openai: {
     name: 'OpenAI GPT-5.2 Vision',
-    // gpt-5.2 has vision capability, market leader (Jan 2026)
+    // gpt-5.2 is the market leader for vision (Jan 2026)
     url: 'https://api.openai.com/v1/chat/completions',
     model: 'gpt-5.2',
     apiKey: ENV.OPENAI_API_KEY,
@@ -124,10 +124,10 @@ const VISION_PROVIDERS = {
     enabled: !!ENV.XAI_API_KEY
   },
   anthropic: {
-    name: 'Claude Sonnet 4 Vision',
-    // claude-sonnet-4 has vision capability (Dec 2025)
+    name: 'Claude Sonnet 4.5 Vision',
+    // claude-sonnet-4.5 is the frontier for vision (Jan 2026)
     url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4.5-20260115',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY
   }
@@ -186,6 +186,26 @@ function httpRequest(url, options, body) {
 // ─────────────────────────────────────────────────────────────────────────────
 // IMAGE UTILITIES
 // ─────────────────────────────────────────────────────────────────────────────
+async function downloadImage(url, tempPath) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      if (res.statusCode !== 200) {
+        reject(new Error(`Failed to download image: ${res.statusCode}`));
+        return;
+      }
+      const filePath = fs.createWriteStream(tempPath);
+      res.pipe(filePath);
+      filePath.on('finish', () => {
+        filePath.close();
+        resolve(tempPath);
+      });
+    }).on('error', (err) => {
+      fs.unlink(tempPath, () => { }); // Cleanup
+      reject(err);
+    });
+  });
+}
+
 function imageToBase64(imagePath) {
   const buffer = fs.readFileSync(imagePath);
   return buffer.toString('base64');
@@ -606,7 +626,7 @@ async function analyzeWithVision(imageBase64, prompt, mimeType) {
 // ─────────────────────────────────────────────────────────────────────────────
 // RESILIENT IMAGE ENHANCEMENT
 // ─────────────────────────────────────────────────────────────────────────────
-async function enhanceProductPhoto(imagePath, prompt) {
+async function enhanceProductPhoto(imageSource, prompt) {
   const errors = [];
   // Fallback order: Gemini 2.5 Flash Image → Grok Image → Leonardo.ai → fal.ai Flux → Replicate SDXL
   const providerOrder = ['gemini', 'grok', 'leonardo', 'falai', 'replicate'];
@@ -614,12 +634,24 @@ async function enhanceProductPhoto(imagePath, prompt) {
   // Load image
   let imageBase64, mimeType;
   try {
-    imageBase64 = imageToBase64(imagePath);
-    mimeType = getMimeType(imagePath);
+    let localPath = imageSource;
+    // REMOTE URL SUPPORT (Session 138 Hardening)
+    if (imageSource.startsWith('http')) {
+      console.log(`[Product Photos] Remote image detected. Downloading...`);
+      localPath = path.join('/tmp', `temp_${Date.now()}${path.extname(new URL(imageSource).pathname) || '.jpg'}`);
+      await downloadImage(imageSource, localPath);
+    }
+
+    imageBase64 = imageToBase64(localPath);
+    mimeType = getMimeType(localPath);
+
+    // Cleanup temp file if downloaded
+    if (imageSource.startsWith('http')) fs.unlinkSync(localPath);
+
   } catch (err) {
     return {
       success: false,
-      error: `Failed to load image: ${err.message}`
+      error: `Failed to load image source: ${err.message}`
     };
   }
 
@@ -965,3 +997,5 @@ main().catch(err => {
   console.error('Fatal error:', err.message);
   process.exit(1);
 });
+
+module.exports = { enhanceProductPhoto, analyzeWithVision, startServer };
