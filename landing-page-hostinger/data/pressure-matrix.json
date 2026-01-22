@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-22T20:53:45.103Z",
+  "last_updated": "2026-01-22T21:09:02.064Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -10,7 +10,7 @@
       "meta_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-22T20:52:48.980Z",
+        "last_check": "2026-01-22T21:08:16.187Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "Meta API credentials missing in .env"
@@ -19,7 +19,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-22T20:52:01.548Z",
+        "last_check": "2026-01-22T21:07:02.738Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -29,7 +29,7 @@
         "label": "Market Demand",
         "pressure": 50,
         "trend": "rising",
-        "last_check": "2026-01-22T20:56:36.855Z",
+        "last_check": "2026-01-22T21:09:09.661Z",
         "sensor_data": {
           "method": "AI Analysis (Grok)",
           "keywords": [
@@ -38,9 +38,9 @@
             "shopify automation",
             "e-commerce automation"
           ],
-          "demand_score": 92,
+          "demand_score": 95,
           "market_trend": "rising",
-          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation remains very high as businesses prioritize efficiency and AI-driven scalability. Trends are rising sharply into 2026, fueled by e-commerce growth and advanced AI integrations.",
+          "assessment": "Demand for marketing, AI, Shopify, and e-commerce automation is surging in 2026, fueled by AI advancements enabling hyper-efficient operations and widespread adoption among SMBs scaling online businesses. Trends indicate continued growth as businesses prioritize cost-saving automations amid economic pressures.",
           "rising_context": []
         },
         "ads_volume": 0,
@@ -49,7 +49,7 @@
       "tiktok_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-22T20:53:41.724Z",
+        "last_check": "2026-01-22T21:08:18.477Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "TikTok API credentials missing in .env"
@@ -57,8 +57,8 @@
       },
       "klaviyo": {
         "pressure": 65,
-        "trend": "UP",
-        "last_check": "2026-01-22T20:52:23.989Z",
+        "trend": "DOWN",
+        "last_check": "2026-01-22T21:07:14.345Z",
         "sensor_data": {
           "lists_total": 10,
           "flows_total": 0,
@@ -70,7 +70,7 @@
         "label": "Email Health",
         "pressure": 60,
         "trend": "STABLE",
-        "last_check": "2026-01-22T20:52:52.612Z",
+        "last_check": "2026-01-22T21:07:42.182Z",
         "sensor_data": {
           "bounce_rate": 0,
           "spam_rate": 0,
@@ -84,8 +84,8 @@
       "content_performance": {
         "label": "Content Performance",
         "pressure": 90,
-        "trend": "UP",
-        "last_check": "2026-01-22T20:53:05.110Z",
+        "trend": "STABLE",
+        "last_check": "2026-01-22T21:08:42.256Z",
         "sensor_data": {
           "posts_total": 0,
           "posts_this_month": 0,
@@ -99,7 +99,7 @@
       "lead_velocity": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-22T20:52:54.963Z",
+        "last_check": "2026-01-22T21:07:46.633Z",
         "sensor_data": {
           "leads_last_24h": 2
         }
@@ -107,7 +107,7 @@
       "lead_scoring": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-22T20:53:43.038Z",
+        "last_check": "2026-01-22T21:08:36.130Z",
         "sensor_data": {
           "quality_score": 3,
           "days_stale": 14
@@ -123,7 +123,7 @@
       "product_enrichment": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-22T20:53:04.188Z",
+        "last_check": "2026-01-22T21:07:49.491Z",
         "sensor_data": {
           "product_count": 0,
           "poor_seo_ratio": "0.00"
@@ -145,8 +145,8 @@
     "operations": {
       "shopify": {
         "pressure": 75,
-        "trend": "UP",
-        "last_check": "2026-01-22T20:52:03.914Z",
+        "trend": "DOWN",
+        "last_check": "2026-01-22T21:07:07.839Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
@@ -158,8 +158,8 @@
       "supplier_health": {
         "label": "Supplier Health",
         "pressure": 80,
-        "trend": "UP",
-        "last_check": "2026-01-22T20:53:42.177Z",
+        "trend": "STABLE",
+        "last_check": "2026-01-22T21:08:54.168Z",
         "sensor_data": {
           "suppliers_checked": 2,
           "suppliers_healthy": 0,
@@ -185,8 +185,8 @@
       "api_costs": {
         "label": "API Costs",
         "pressure": 30,
-        "trend": "UP",
-        "last_check": "2026-01-22T20:52:53.501Z",
+        "trend": "STABLE",
+        "last_check": "2026-01-22T21:07:38.674Z",
         "sensor_data": {
           "current_month_usd": 0,
           "projected_month_usd": 0,
@@ -203,14 +203,14 @@
       "voice_quality": {
         "label": "Voice Quality",
         "pressure": 90,
-        "trend": "UP",
-        "last_check": "2026-01-22T20:52:54.518Z",
+        "trend": "STABLE",
+        "last_check": "2026-01-22T21:08:39.127Z",
         "sensor_data": {
           "endpoints_healthy": 0,
           "endpoints_total": 3,
           "providers_healthy": 0,
           "providers_configured": 1,
-          "avg_latency_ms": 491,
+          "avg_latency_ms": 428,
           "endpoint_details": [
             {
               "name": "Voice API",
@@ -237,7 +237,7 @@
             {
               "name": "OpenAI Whisper",
               "status": "ERROR",
-              "latency_ms": 491
+              "latency_ms": 428
             }
           ]
         }
@@ -247,8 +247,8 @@
       "whatsapp_status": {
         "label": "WhatsApp Status",
         "pressure": 90,
-        "trend": "UP",
-        "last_check": "2026-01-22T20:53:42.634Z",
+        "trend": "STABLE",
+        "last_check": "2026-01-22T21:08:57.586Z",
         "sensor_data": {
           "connected": false,
           "phone_verified": false,
