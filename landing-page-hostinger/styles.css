@@ -9763,7 +9763,13 @@ html[data-currency="USD"] .price-usd {
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
+  color: var(--primary);
 }
+
+/* Benefit icon color variants */
+.benefit-card:nth-child(1) .benefit-icon { color: var(--primary); }
+.benefit-card:nth-child(2) .benefit-icon { color: var(--accent); background: rgba(16, 185, 129, 0.1); }
+.benefit-card:nth-child(3) .benefit-icon { color: var(--accent-purple); background: rgba(139, 92, 246, 0.1); }
 
 .benefit-card h3 {
   color: var(--text-light);
