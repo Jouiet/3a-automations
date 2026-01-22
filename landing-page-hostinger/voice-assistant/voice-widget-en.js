@@ -62,6 +62,8 @@
     }
     const widget = document.createElement('div');
     widget.id = 'voice-assistant-widget';
+    // Critical: Set positioning inline to guarantee fixed position even if CSS fails
+    widget.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:99999;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;';
     widget.innerHTML = `
       <style>
         #voice-assistant-widget {
@@ -302,7 +304,7 @@
       </style>
 
       <button class="va-trigger" id="va-trigger" aria-label="Open voice assistant">
-        <img src="/logo.png" alt="3A" />
+        <img src="/logo.png" alt="3A" style="width:40px;height:40px;object-fit:contain;border-radius:8px;" />
       </button>
 
       <div class="va-panel" id="va-panel">
