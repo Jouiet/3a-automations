@@ -1,7 +1,7 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 140 - 22/01/2026):** UI/UX Forensic + Human In The Loop. Copie marketing corrigée.
+> **✅ ÉTAT RÉEL (Session 140bis - 22/01/2026):** UI/UX Forensic COMPLET. P1+P2 issues fixées.
 
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
 
@@ -18,36 +18,36 @@
 | Human In The Loop | index.html, en/index.html | "(100% Autonome)" → "(Vous Gardez le Contrôle)" |
 | "L'IA propose, vous décidez" | Hero FR/EN | Rassure décideurs |
 
-### Issues NON Traitées (À faire Session 141)
+### Issues Traitées (Session 140bis - 22/01/2026)
 
-| # | Issue | Impact | Priorité | Action |
+| # | Issue | Impact | Priorité | Status |
 |---|-------|--------|----------|--------|
-| 1 | **automations-catalog.json 77 vs 119** | Data désync | **P1** | Sync avec registry |
-| 2 | 5 scripts render-blocking | CWV LCP/FID | P2 | Ajouter defer |
-| 3 | Pas de FAQ page | SEO/UX | P2 | Créer faq.html FR/EN |
-| 4 | Pas de testimonials | Social proof | P2 | Ajouter section |
-| 5 | Footer logo bug | UI/UX | P2 | Debug voice-widget.js |
-| 6 | Ad carousel images | Marketing | P3 | Créer carousel |
-| 7 | Persona documentation | Strategy | P3 | Publier personas |
+| 1 | **automations-catalog.json 77 vs 119** | Data désync | **P1** | ✅ FIXÉ - Synced avec registry |
+| 2 | 5 scripts render-blocking | CWV LCP/FID | P2 | ✅ FIXÉ - defer ajouté |
+| 3 | Pas de FAQ page | SEO/UX | P2 | ✅ FIXÉ - faq.html FR/EN créés |
+| 4 | Pas de testimonials | Social proof | P2 | ✅ FIXÉ - Section ajoutée |
+| 5 | Footer logo bug | UI/UX | P2 | ✅ FIXÉ - Duplicate prevention |
+| 6 | Ad carousel images | Marketing | P3 | ⏳ À faire |
+| 7 | Persona documentation | Strategy | P3 | ⏳ À faire |
 
-### Scripts Render-Blocking (5/6)
+### Scripts Render-Blocking ✅ FIXÉ (Session 140bis)
 
 ```
-❌ config.js        - PAS de defer
-❌ ui-init.js       - PAS de defer
-❌ telemetry.js     - PAS de defer
-❌ geo-locale.js    - PAS de defer
-❌ agentic-transparency.js - PAS de defer
-✅ script.js        - defer (seul correct)
+✅ config.js        - defer ajouté
+✅ ui-init.js       - defer ajouté
+✅ telemetry.js     - defer ajouté
+✅ geo-locale.js    - defer ajouté
+✅ agentic-transparency.js - defer ajouté
+✅ script.js        - defer (déjà correct)
 ```
 
-### Catalog Désync
+### Catalog Désync ✅ FIXÉ (Session 140bis)
 
 ```json
 // landing-page-hostinger/data/automations-catalog.json
-"totalCount": 119  ← CLAIM
-"automations": [...] ← 77 items RÉELS
-// INCOHÉRENCE: 119 ≠ 77
+"totalCount": 119  ← VÉRIFIÉ
+"automations": [...] ← 119 items SYNCED avec registry
+// COHÉRENCE: 119 = 119 ✅
 ```
 
 ---

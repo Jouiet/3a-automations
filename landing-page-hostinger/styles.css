@@ -1059,6 +1059,19 @@ body.lite {
   box-shadow: var(--shadow-glow-strong);
 }
 
+/* Hero Logo Center - FIX Session 140bis */
+.hero-logo-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  z-index: 10;
+  filter: drop-shadow(0 0 20px rgba(79, 186, 241, 0.4));
+}
+
 .center-text {
   font-size: 1.5rem;
   font-weight: 800;
@@ -2509,6 +2522,11 @@ body.lite {
     height: 90px;
   }
 
+  .hero-logo-center {
+    width: 70px;
+    height: 70px;
+  }
+
   .orbital-center .center-text {
     font-size: 1.4rem;
   }
@@ -2668,6 +2686,11 @@ body.lite {
   .orbital-center {
     width: 80px;
     height: 80px;
+  }
+
+  .hero-logo-center {
+    width: 60px;
+    height: 60px;
   }
 
   .orbital-center .center-text {
@@ -3134,6 +3157,11 @@ body.lite {
   .orbital-center {
     width: 65px;
     height: 65px;
+  }
+
+  .hero-logo-center {
+    width: 50px;
+    height: 50px;
   }
 
   .orbital-center .center-text {
@@ -3770,6 +3798,11 @@ body.lite {
   .orbital-center {
     width: 55px;
     height: 55px;
+  }
+
+  .hero-logo-center {
+    width: 40px;
+    height: 40px;
   }
 
   .orbital-center .center-text {
