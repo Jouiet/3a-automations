@@ -11,7 +11,7 @@
 - ❌ Claims sans test empirique
 - ❌ Wishful thinking
 
-## VÉRIFIÉ EMPIRIQUEMENT (Session 141 - 22/01/2026 21:15 UTC)
+## VÉRIFIÉ EMPIRIQUEMENT (Session 142 - 23/01/2026 00:00 UTC)
 
 ### Métriques Core
 | Métrique | Valeur | Méthode Vérification |
@@ -19,8 +19,8 @@
 | Scripts core | 81 | `ls agency/core/*.cjs` |
 | Scripts --health | 22 | `grep -l "\-\-health"` |
 | Automations registry | 119 | `jq '.automations \| length'` |
-| **Automations catalog** | **77** | ⚠️ **DÉSYNC -42** |
-| Skills | 41 | `ls -d .agent/skills/*/` |
+| Automations catalog | 119 | ✅ **SYNCED** |
+| Skills | 41 | `ls -d .agent/skills/*/` (all tagged with provider) |
 | Sensors | 20 | `ls *-sensor*.cjs` |
 | Credentials SET | 57 | `grep -E "^[A-Z_]+=.+"` |
 | Credentials EMPTY | 36 | `grep -E "^[A-Z_]+=$"` |
