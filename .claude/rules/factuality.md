@@ -51,14 +51,22 @@
 
 **Synthèse: 6 OK (30%), 10 PARTIAL (50%), 4 BLOCKED (20%)**
 
-### FIXES APPLIQUÉS (Session 141 - 22/01/2026)
+### FIXES APPLIQUÉS (Session 142 - 23/01/2026)
 | Issue | Fix | Status |
 |-------|-----|--------|
-| "174" sur homepage | Remplacé par "119" (FR+EN) | ✅ FIXÉ |
-| "18 agents" sur homepage | Remplacé par "22" (FR+EN) | ✅ FIXÉ |
-| llms.txt dit 174 | Corrigé vers 119 + 22 agents | ✅ FIXÉ |
-| 6 scripts sans defer | defer ajouté à tous | ✅ FIXÉ |
-| Testimonials: 0 | Section absente | ⚠️ P3 |
+| "174" sur toutes pages | 60+ fichiers HTML + JSON corrigés | ✅ FIXÉ |
+| Scripts sans defer | defer ajouté à TOUS les scripts | ✅ FIXÉ |
+| Testimonials absents | Section ajoutée FR+EN | ✅ FIXÉ |
+| Booking success visible | CSS `.booking-success { display: none }` | ✅ FIXÉ |
+| Paths JS relatifs | Absolute paths `/data/...` | ✅ FIXÉ |
+| llms.txt incohérent | Corrigé 119 automations + 22 agents | ✅ FIXÉ |
+
+### ISSUES RESTANTES (Session 142)
+| Issue | Impact | Status |
+|-------|--------|--------|
+| CORS ipapi.co | Geo-location bloqué | ⚠️ P3 |
+| CSP inline handlers | Warning console | ⚠️ P3 |
+| Font preload warning | Performance minor | ⚠️ P3 |
 
 ### Infrastructure
 - Site principal: ✅ 200 OK
