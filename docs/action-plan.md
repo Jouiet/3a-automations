@@ -1,7 +1,7 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL (Session 138 - 22/01/2026):** Système NON VENDABLE. Blockers critiques identifiés.
+> **✅ ÉTAT RÉEL (Session 139 - 22/01/2026):** P0 Blockers FIXÉS. Dashboard accessible. Lead-velocity OK.
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
 
 ---
@@ -10,11 +10,11 @@
 
 ### P0 - CRITIQUES (Bloquent la démo)
 
-| # | Blocker | Impact | Action | Effort |
+| # | Blocker | Impact | Action | Status |
 |---|---------|--------|--------|--------|
-| 1 | Dashboard 502 | Pas de démo client | Diagnostiquer VPS Hostinger | 2h |
-| 2 | GSC API disabled | Sensor SEO cassé | [Activer API](https://console.developers.google.com/apis/api/searchconsole.googleapis.com) | 5min |
-| 3 | lead-velocity BUG | Sensor broken | Fix ligne `.filter()` dans code | 30min |
+| 1 | ~~Dashboard 502~~ | ~~Pas de démo client~~ | Port 3001→3000 | ✅ FIXÉ Session 139 |
+| 2 | GSC API disabled | Sensor SEO cassé | [Activer API](https://console.developers.google.com/apis/api/searchconsole.googleapis.com) | ⏳ USER ACTION |
+| 3 | ~~lead-velocity BUG~~ | ~~Sensor broken~~ | Handle {scores:[]} format | ✅ FIXÉ Session 139 |
 
 ### P1 - HAUTE (Bloquent fonctionnalités)
 
@@ -40,22 +40,25 @@
 ❌ EMPTY: 36 credentials (voir .env)
 ```
 
-### Résumé Sensors
+### Résumé Sensors (Updated Session 139)
 
 ```
-✅ OK: 2/12 (retention, product-seo)
-⚠️ PARTIEL: 5/12 (ga4, lead-scoring, bigquery, google-ads-planner, lead-scoring)
-❌ BROKEN: 5/12 (gsc, meta-ads, tiktok, lead-velocity, apify, google-trends)
+✅ OK: 3/12 (retention, product-seo, lead-velocity)
+⚠️ PARTIEL: 4/12 (ga4, lead-scoring, bigquery, google-ads-planner)
+❌ BROKEN: 5/12 (gsc, meta-ads, tiktok, apify, google-trends)
 ```
 
 ---
 
-## VERDICT: SYSTÈME NON VENDABLE
+## VERDICT: SYSTÈME EN PROGRESSION
 
-Le système ne peut PAS être vendu tant que:
-1. Dashboard accessible (actuellement 502)
-2. Au minimum 6/12 sensors fonctionnels (actuellement 2/12)
-3. Credentials critiques configurés
+| Critère | Avant | Après Session 139 |
+|---------|-------|-------------------|
+| Dashboard | ❌ 502 | ✅ 200 OK |
+| Sensors OK | 2/12 | 3/12 |
+| P0 Blockers | 3 | 1 (GSC API - user action) |
+
+**Prochaine étape:** Configurer credentials manquants (P1/P2)
 
 ---
 

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-20T09:41:41.664Z",
+  "last_updated": "2026-01-22T16:34:39.920Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -10,7 +10,7 @@
       "meta_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-20T09:41:41.663Z",
+        "last_check": "2026-01-22T12:56:15.925Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "Meta API credentials missing in .env"
@@ -19,7 +19,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-12T09:23:17.039Z",
+        "last_check": "2026-01-22T12:56:01.941Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -29,77 +29,71 @@
         "label": "Market Demand",
         "pressure": 50,
         "trend": "falling",
-        "last_check": "2026-01-12T09:23:25.479Z",
+        "last_check": "2026-01-22T12:56:34.987Z",
         "ads_volume": 0,
         "api_status": "BLOCKED_CREDENTIALS",
         "sensor_data": {
-          "rising_context": [
-            "algérie – nigeria",
-            "algérie – nigeria",
-            "cameroun maroc",
-            "cameroun maroc",
-            "algerie nigeria"
-          ],
+          "rising_context": [],
           "discovered_trends": [
             {
-              "title": "ticketmaster",
-              "traffic": "1000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 01:00:00 -0800"
-            },
-            {
-              "title": "gala des pieces jaunes 2026",
-              "traffic": "1000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:40:00 -0800"
-            },
-            {
-              "title": "abivax",
+              "title": "sikou niakaté",
               "traffic": "200+",
               "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:30:00 -0800"
+              "pubDate": "Thu, 22 Jan 2026 03:10:00 -0800"
             },
             {
-              "title": "delogu",
-              "traffic": "2000+",
+              "title": "jared kushner",
+              "traffic": "200+",
               "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:20:00 -0800"
+              "pubDate": "Thu, 22 Jan 2026 03:00:00 -0800"
             },
             {
-              "title": "la defense arena",
-              "traffic": "2000+",
+              "title": "rybakina",
+              "traffic": "500+",
               "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:20:00 -0800"
+              "pubDate": "Thu, 22 Jan 2026 02:50:00 -0800"
             },
             {
-              "title": "louis sarkozy",
+              "title": "gracheva",
+              "traffic": "200+",
+              "link": "https://trends.google.com/trending/rss?geo=FR",
+              "pubDate": "Thu, 22 Jan 2026 02:50:00 -0800"
+            },
+            {
+              "title": "thomas soliveres",
+              "traffic": "200+",
+              "link": "https://trends.google.com/trending/rss?geo=FR",
+              "pubDate": "Thu, 22 Jan 2026 02:50:00 -0800"
+            },
+            {
+              "title": "amélie de montchalin",
               "traffic": "1000+",
               "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:20:00 -0800"
+              "pubDate": "Thu, 22 Jan 2026 02:30:00 -0800"
             },
             {
-              "title": "harmattan ai",
+              "title": "board of peace",
+              "traffic": "500+",
+              "link": "https://trends.google.com/trending/rss?geo=FR",
+              "pubDate": "Thu, 22 Jan 2026 02:30:00 -0800"
+            },
+            {
+              "title": "bts world tour",
               "traffic": "200+",
               "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:20:00 -0800"
+              "pubDate": "Thu, 22 Jan 2026 01:50:00 -0800"
             },
             {
-              "title": "benoit jacquot",
-              "traffic": "2000+",
+              "title": "utmb",
+              "traffic": "500+",
               "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:10:00 -0800"
+              "pubDate": "Thu, 22 Jan 2026 01:40:00 -0800"
             },
             {
-              "title": "benoit payan",
-              "traffic": "200+",
+              "title": "sinner",
+              "traffic": "500+",
               "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Sun, 11 Jan 2026 23:50:00 -0800"
-            },
-            {
-              "title": "drive",
-              "traffic": "2000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Sun, 11 Jan 2026 23:40:00 -0800"
+              "pubDate": "Thu, 22 Jan 2026 01:40:00 -0800"
             }
           ]
         }
@@ -107,7 +101,7 @@
       "tiktok_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-20T09:41:41.467Z",
+        "last_check": "2026-01-22T12:56:16.339Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "TikTok API credentials missing in .env"
@@ -117,16 +111,19 @@
     "sales": {
       "lead_velocity": {
         "pressure": 75,
-        "trend": "UP",
-        "last_check": "2026-01-11T21:55:00Z"
+        "trend": "DOWN",
+        "last_check": "2026-01-22T16:34:39.918Z",
+        "sensor_data": {
+          "leads_last_24h": 2
+        }
       },
       "lead_scoring": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-12T09:23:17.259Z",
+        "last_check": "2026-01-22T12:56:16.726Z",
         "sensor_data": {
           "quality_score": 3,
-          "days_stale": 3
+          "days_stale": 13
         }
       }
     },
@@ -139,7 +136,7 @@
       "product_enrichment": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-12T09:23:17.980Z",
+        "last_check": "2026-01-22T12:56:31.488Z",
         "sensor_data": {
           "product_count": 0,
           "poor_seo_ratio": "0.00"
