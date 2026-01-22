@@ -454,11 +454,38 @@ e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
 | 5 | Configurer OMNISEND_API_KEY | E-commerce B2C active | Pending |
 | 6 | Configurer Twilio | SMS operationnel | Pending |
 | 7 | ~~Audit Documents vs Desktop~~ | Merge optimal | **COMPLETE** |
-| 8 | Corriger site: 174 -> 119 automations | Honnetete marketing | **CRITIQUE** |
+| 8 | **CORRIGER "174" → "119" PARTOUT** | Honnetete marketing | **BLOQUEUR** |
 | 9 | **FIXER gsc-sensor** | Enable GSC API in Cloud Console | **CRITIQUE** |
 | 10 | **FIXER lead-velocity-sensor** | Bug JS: filter is not a function | **CRITIQUE** |
 | 11 | **Configurer META_ACCESS_TOKEN** | Meta Ads sensor actif | **CRITIQUE** |
 | 12 | **Configurer TIKTOK_API** | TikTok Ads sensor actif | **CRITIQUE** |
+
+#### Detail Action #8: BLOQUEUR - Correction 174 → 119
+
+**Scope:** ~70 fichiers, 46+ occurrences dans HTML seul
+**Registre reel:** 119 automations (automations-registry.json v3.0.0)
+
+**Fichiers HTML a corriger (~35 pages):**
+```
+FR: index, 404, a-propos, pricing, contact, booking, cas-clients, investisseurs
+    + services/* (6) + blog/* (4) + legal/* (2)
+EN: index, 404, about, pricing, contact, booking, case-studies, investors
+    + services/* (6) + blog/* (4) + legal/* (2)
+```
+
+**JSON a corriger:**
+- voice-assistant/knowledge.json
+- forensic_audit_results.json
+
+**Docs MD a corriger:**
+- CLAUDE.md, HISTORY.md, 3A_BRAIN_MANIFEST.md
+- docs/business-model.md, action-plan.md, flywheel.md, mcp-catalog.md
+
+**Script de correction suggeree:**
+```bash
+# Remplacer 174 par 119 dans tous les HTML
+find landing-page-hostinger -name "*.html" -exec sed -i '' 's/174 automatis/119 automatis/g' {} \;
+```
 
 ### 9.3 EVALUATION FACTUELLE DES 13 SENSORS DOE v2
 
@@ -549,13 +576,44 @@ EVALUATION FACTUELLE:
 
 ## 10. DISCREPANCES DOCUMENTEES
 
-### Site vs Realite
+### 10.1 ALERTE CRITIQUE: "174 Automations" = FAUX
 
-| Element | Affiche sur Site | Realite Verifiee | Action |
-|---------|------------------|------------------|--------|
-| Automations | 174 | **119** | CORRIGER SITE |
-| MCPs | 41 | **14** | Clarifier (disponibles vs actifs) |
-| Level | "L5 Sovereign" | L2-3 (sensors insuffisants) | Clarifier |
+**FAIT VERIFIE:** Le registry automations-registry.json contient exactement **119** automations (v3.0.0).
+**PROBLEME:** Le site et ~70 fichiers affichent "174 automatisations" = **FAUSSE PUBLICITE**
+
+#### Fichiers Affectes (46 occurrences HTML + docs)
+
+| Type | Count | Exemples |
+|------|-------|----------|
+| HTML FR | ~20 | index.html, 404.html, a-propos.html, pricing.html, tous services/* |
+| HTML EN | ~15 | en/index.html, en/about.html, en/pricing.html, tous en/services/* |
+| Blog FR | 4 | Tous articles blog/ |
+| Blog EN | 4 | Tous articles en/blog/ |
+| JSON | 3 | knowledge.json, forensic_audit_results.json, pressure-matrix.json |
+| Docs MD | 8+ | CLAUDE.md, HISTORY.md, business-model.md, action-plan.md |
+
+#### Source du Probleme
+
+La Session 138 dans Documents/JO-AAA a execute un "MASSIVE SOVEREIGN SYNC" qui a:
+1. Remplace 118/119 par 174 PARTOUT
+2. Affrime "ZERO DISCREPANCY" alors que le registry a toujours 119
+3. Le forensic_audit_results.json lui-meme dit: *"Claim '174 automations' contradicts registry count '118'"*
+
+#### Impact
+
+- **Marketing:** Site affiche un nombre FAUX = tromperie potentielle
+- **Coherence:** Catalog JSON = 119, HTML = 174 = INCOHERENT
+- **Credibilite:** Si un prospect verifie, il trouvera la discrepance
+
+### 10.2 Site vs Realite (Resume)
+
+| Element | Affiche sur Site | Realite Verifiee | Ecart | Priorite |
+|---------|------------------|------------------|-------|----------|
+| Automations | **174** | **119** | **-55 (-32%)** | CRITIQUE |
+| MCPs | 41 | 14 | -27 | HAUTE |
+| Level | "L5 Sovereign" | L2-3 | -2 levels | HAUTE |
+| Revenue | "€75K" | €0 | -100% | CRITIQUE |
+| Clients | Non specifie | 0 verifie | N/A | INFO |
 
 ### DOE v2 vs Realite (VERIFIE EMPIRIQUEMENT)
 
@@ -659,7 +717,7 @@ curl -s -o /dev/null -w "%{http_code}" https://3a-automation.com
 
 ---
 
-*Document mis a jour: 22/01/2026 13:15 UTC*
+*Document mis a jour: 22/01/2026 14:00 UTC*
 *Methode: Audit forensique bottom-up factuel avec verification empirique*
-*Session 138 - COMPLETE: Dashboard fix + Full Merge + Sensor Evaluation*
-*Merge 100% verifie: 10/10 composants synchronises*
+*Session 138 - Dashboard fix + Full Merge + Sensor Evaluation + DATA INTEGRITY AUDIT*
+*ALERTE: Site affiche 174 automations, registre = 119. ~70 fichiers a corriger.*
