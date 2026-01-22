@@ -1,34 +1,40 @@
 # 3A Automation
 >
-> Version: 52.0 | 22/01/2026 | Session 139 (DOE Audit Exhaustif - 65 files fixed)
+> Version: 53.0 | 22/01/2026 | Session 140 (UI/UX Forensic + Human In The Loop)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## Métriques VÉRIFIÉES (22/01/2026 - Post DOE Audit)
+## Métriques VÉRIFIÉES (22/01/2026)
 
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
-| Automations | 119 | Registry v3.0.0 ✅ |
+| Automations Registry | 119 | Registry v3.0.0 ✅ |
+| Automations Catalog | **77** | ⚠️ DÉSYNC (devrait être 119) |
 | HTML Pages | 64 | FR:32 + EN:32 |
-| Sitemap URLs | 63 | +23 (Academy ajouté) |
-| Scripts core | 81 | Vérifiés |
 | Scripts --health | 22 | Testables |
-| Sensors | **20** | 8 OK, 8 PARTIAL, 4 BLOCKED |
-| SEO/AEO | 88%/100% | llms.txt présent |
-| Security | 100% | CSP + headers déployés |
+| Sensors | 20 | 8 OK, 8 PARTIAL, 4 BLOCKED |
 
-## DOE AUDIT FIXES (Session 139)
+## SESSION 140 FIXES (22/01/2026)
 
-| Fix | Fichier | Avant→Après |
+| Fix | Impact | Status |
 | :--- | :--- | :--- |
-| Automation count | en/404.html | 86→119 ✅ |
-| Tool count | llms.txt | 174→119 ✅ |
-| Total automations | knowledge.json | 112→119 ✅ |
-| Lang attribute | dashboard.html | en→fr ✅ |
-| Sitemap gaps | sitemap.xml | 40→63 URLs ✅ |
+| Jargon L5/MCP/Zapier | Copie accessible | ✅ FIXÉ |
+| Data 18→22 agents | Cohérence données | ✅ FIXÉ |
+| Human In The Loop | Rassure décideurs | ✅ FIXÉ |
+| "(100% Autonome)" → "(Vous Gardez le Contrôle)" | Hero FR/EN | ✅ FIXÉ |
+
+## ISSUES NON TRAITÉES (Session 140)
+
+| Issue | Impact | Priorité |
+| :--- | :--- | :--- |
+| automations-catalog.json 77 vs 119 | Data sync | **P1** |
+| 5 scripts render-blocking | CWV LCP/FID | P2 |
+| Pas de FAQ page | SEO/UX | P2 |
+| Pas de testimonials | Social proof | P2 |
+| Footer logo bug | UI/UX | P2 |
 
 ## BLOCKERS RESTANTS
 

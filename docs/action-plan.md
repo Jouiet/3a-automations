@@ -1,8 +1,54 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 139 - 22/01/2026):** P0 Blockers FIXÉS. 20 sensors (12→20). Dashboard OK.
+> **✅ ÉTAT RÉEL (Session 140 - 22/01/2026):** UI/UX Forensic + Human In The Loop. Copie marketing corrigée.
+
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
+
+---
+
+## 🔥 SESSION 140 - UI/UX FORENSIC (22/01/2026)
+
+### Fixes Appliqués
+
+| Fix | Fichiers | Détail |
+|-----|----------|--------|
+| Jargon L5/MCP/Zapier | index.html, en/index.html, pricing.html | Supprimé termes techniques |
+| Data 18→22 agents | index.html, en/index.html | Cohérence avec registry |
+| Human In The Loop | index.html, en/index.html | "(100% Autonome)" → "(Vous Gardez le Contrôle)" |
+| "L'IA propose, vous décidez" | Hero FR/EN | Rassure décideurs |
+
+### Issues NON Traitées (À faire Session 141)
+
+| # | Issue | Impact | Priorité | Action |
+|---|-------|--------|----------|--------|
+| 1 | **automations-catalog.json 77 vs 119** | Data désync | **P1** | Sync avec registry |
+| 2 | 5 scripts render-blocking | CWV LCP/FID | P2 | Ajouter defer |
+| 3 | Pas de FAQ page | SEO/UX | P2 | Créer faq.html FR/EN |
+| 4 | Pas de testimonials | Social proof | P2 | Ajouter section |
+| 5 | Footer logo bug | UI/UX | P2 | Debug voice-widget.js |
+| 6 | Ad carousel images | Marketing | P3 | Créer carousel |
+| 7 | Persona documentation | Strategy | P3 | Publier personas |
+
+### Scripts Render-Blocking (5/6)
+
+```
+❌ config.js        - PAS de defer
+❌ ui-init.js       - PAS de defer
+❌ telemetry.js     - PAS de defer
+❌ geo-locale.js    - PAS de defer
+❌ agentic-transparency.js - PAS de defer
+✅ script.js        - defer (seul correct)
+```
+
+### Catalog Désync
+
+```json
+// landing-page-hostinger/data/automations-catalog.json
+"totalCount": 119  ← CLAIM
+"automations": [...] ← 77 items RÉELS
+// INCOHÉRENCE: 119 ≠ 77
+```
 
 ---
 
