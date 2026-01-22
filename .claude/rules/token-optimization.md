@@ -1,162 +1,72 @@
-# Token Optimization Rules
-## Mise à jour: 22/01/2026 - Intégrant Best Practices Web-Verified
+# Token Optimization
 
-> Sources: [Anthropic Engineering](https://www.anthropic.com/engineering/code-execution-with-mcp), [Claude Code Docs](https://code.claude.com/docs/en/costs), [ClaudeLog](https://claudelog.com/faqs/how-to-optimize-claude-code-token-usage/)
+## PROBLÈME IDENTIFIÉ (Session 138 - 22/01/2026)
 
----
-
-## BENCHMARK: 98.7% Réduction Possible
-
-**Étude Anthropic Engineering (2025):**
-- Direct tool calls: **150,000 tokens**
-- Code execution pattern: **2,000 tokens**
-- Réduction: **98.7%**
+| Fait | Valeur | Vérification |
+|------|--------|--------------|
+| 3 Explore agents parallèles | 276,400 tokens | Observation directe |
+| Coût estimé | ~$25/session | 276k × $0.09/1k |
 
 ---
 
-## RÈGLE #1: Code Execution vs Direct Tools
+## RÈGLES D'OPTIMISATION
 
-### MAUVAIS (150k tokens):
-```javascript
-// L'agent appelle chaque outil directement
-// Chaque résultat passe dans le contexte
-Task(prompt: "Explore all files and list their purposes")
-→ Charge définitions outils + résultats dans contexte
+### 1. Outils directs vs Agents (THÉORIQUE - Non mesuré)
+```
+PRÉFÉRER:
+- Bash/grep -r "pattern"     → Recherche rapide
+- Read file_path             → Lecture ciblée
+- Glob "**/*.cjs"            → Listing fichiers
+
+ÉVITER:
+- Task(Explore) pour recherches simples
+- 3+ agents parallèles
 ```
 
-### BON (2k tokens):
-```javascript
-// L'agent écrit du code qui appelle les outils
-// Résultats filtrés AVANT retour au contexte
-Bash("find . -name '*.cjs' | head -10")  // Exécuté localement
-Grep("Purpose|Description")               // Filtré avant contexte
+**Source**: Anthropic Engineering Blog (non vérifié localement)
+
+### 2. Limiter lectures fichiers
+```
+Read(limit:100)  → Premières lignes seulement
+Read(offset:X)   → Section spécifique
 ```
 
----
-
-## RÈGLE #2: Model Selection (Coûts 2026)
-
-| Model | Input/M | Output/M | Quand Utiliser |
-|-------|---------|----------|----------------|
-| **Haiku 4.5** | $1 | $5 | Listing, comptage, recherche simple |
-| **Sonnet 4.5** | $3 | $15 | Génération code, analyse |
-| **Opus 4.5** | $5 | $25 | Raisonnement complexe uniquement |
-
-**Règle:** Utiliser Haiku par défaut, monter SEULEMENT si nécessaire.
-
----
-
-## RÈGLE #3: Prompt Caching (90% savings)
-
-**Comment ça marche:**
-- Contenu répété (system prompts, CLAUDE.md) = caché
-- Requêtes suivantes = 90% moins cher sur partie cachée
-
-**Maximiser le cache:**
-- Garder CLAUDE.md **sous 500 lignes**
-- Mettre instructions stables en premier
-- Instructions dynamiques en dernier
-
----
-
-## RÈGLE #4: Extended Thinking Budget
-
-| Tâche | Budget Recommandé |
-|-------|-------------------|
-| Simple (listing, search) | Désactivé ou 1,024 |
-| Modéré (analyse) | 8,000 |
-| Complexe (planning) | 16,000 |
-| Très complexe | 31,999 (max) |
-
-```bash
-# Override via env
-MAX_THINKING_TOKENS=1024  # Pour tâches simples
+### 3. Un agent séquentiel vs parallèles
+```
+1 agent séquentiel < 3 agents parallèles
+(théorique - économie exacte non mesurée)
 ```
 
 ---
 
-## RÈGLE #5: MCP Server Management
+## INDEX LÉGER CRÉÉ (VÉRIFIÉ)
 
-**Problème:** Chaque MCP activé ajoute définitions d'outils au contexte.
+| Fichier | Taille | Ratio |
+|---------|--------|-------|
+| `registry-index.json` | 1,358 bytes | - |
+| `registry.json` | 74,704 bytes | - |
+| **Ratio** | **55x** | ✅ Vérifié |
 
-**Solution:**
-- Désactiver MCPs non utilisés dans `.mcp.json`
-- Ne charger que les outils nécessaires dynamiquement
-
-**MCPs 3A à garder actifs:**
-- google-analytics (essentiel)
-- klaviyo (essentiel)
-- shopify-admin (essentiel)
-
-**MCPs à désactiver si non utilisés:**
-- powerbi-remote (rarement utilisé)
-- stitch (rarement utilisé)
-- meta-ads (credentials manquantes anyway)
+Emplacement: `automations/registry-index.json`
 
 ---
 
-## RÈGLE #6: Session Management
+## RÈGLES POUR CLAUDE CODE
 
-```
-/clear     → Après changement de tâche (évite contexte stale)
-/compact   → Quand contexte > 50k tokens
-/rename    → Avant /clear pour retrouver session
-```
-
-**Coût moyen Claude Code:**
-- Par jour: ~$6/dev (90% des users < $12/jour)
-- Par mois: ~$100-200/dev avec Sonnet 4.5
+1. **Recherche codebase**: Utiliser `grep -r` ou `find` avant Task(Explore)
+2. **Fichiers volumineux**: `Read(limit:100)` pour aperçu
+3. **Agents**: Maximum 1 agent parallèle sauf besoin explicite
+4. **Registry**: Lire `registry-index.json` (1.3KB) avant `registry.json` (75KB)
 
 ---
 
-## MATRICE DÉCISION COMPLÈTE
+## À VÉRIFIER (TODO)
 
-| Besoin | Outil | Tokens | Coût |
-|--------|-------|--------|------|
-| Lister fichiers | `ls`, `Glob` | ~50 | $0.00005 |
-| Chercher texte | `Grep` | ~100 | $0.0001 |
-| Lire header | `Read(limit:100)` | ~2k | $0.002 |
-| Stats fichiers | `wc`, `du` | ~30 | $0.00003 |
-| Question simple | `Task(haiku)` | ~5k | $0.01 |
-| Exploration | `Task(Explore, haiku)` | ~30k | $0.06 |
-| Raisonnement | `Task(opus)` | ~100k | $0.50 |
+- [ ] Mesurer tokens réels: Bash vs Task(Explore)
+- [ ] Mesurer tokens: Read() vs Read(limit:100)
+- [ ] Test A/B avant/après règles
+- [ ] Benchmark local des outils
 
 ---
 
-## INTERDIT - GASPILLAGE MASSIF
-
-```
-❌ Task(Explore) pour lister → ls/Glob (1840× moins cher)
-❌ Task(Explore) pour chercher → Grep (920× moins cher)
-❌ Read() sans limit → Read(limit:100)
-❌ 3 agents parallèles → 1 séquentiel
-❌ registry.json (75KB) → registry-index.json (1.3KB)
-❌ Tous MCPs activés → Désactiver non utilisés
-❌ Opus pour tâches simples → Haiku
-```
-
----
-
-## INDEX FICHIERS LÉGERS
-
-| Fichier | Taille | Tokens | Usage |
-|---------|--------|--------|-------|
-| `registry-index.json` | 1.3KB | 325 | Catégories, ports |
-| `registry.json` | 75KB | 18.7k | JAMAIS sauf besoin complet |
-| `CLAUDE.md` | <2KB | <500 | Instructions globales |
-
----
-
-## ÉCONOMIES THÉORIQUES (Non Testées)
-
-| Métrique | Problème Observé | Théorique Si Règles Suivies |
-|----------|------------------|----------------------------|
-| Exploration 3 agents | 276k tokens | ~5k tokens (À VÉRIFIER) |
-| Coût/session | ~$25 | ~$0.50 (À VÉRIFIER) |
-
-**⚠️ ATTENTION**: Ces économies sont THÉORIQUES basées sur Anthropic Engineering.
-Elles n'ont PAS été vérifiées empiriquement dans ce projet.
-
----
-
-*Sources vérifiées: Anthropic Engineering, Claude Code Docs, ClaudeLog - 22/01/2026*
+*Màj: 22/01/2026 - Informations théoriques restaurées avec labels*

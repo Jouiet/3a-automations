@@ -59,7 +59,9 @@ async function main() {
     try {
         let leads = [];
         if (fs.existsSync(LEADS_PATH)) {
-            leads = JSON.parse(fs.readFileSync(LEADS_PATH, 'utf8'));
+            const data = JSON.parse(fs.readFileSync(LEADS_PATH, 'utf8'));
+            // Handle both formats: direct array OR {scores: [...]}
+            leads = Array.isArray(data) ? data : (data.scores || []);
         }
 
         const pressure = calculatePressure(leads);
