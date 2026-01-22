@@ -36,7 +36,7 @@ jobs:
           N8N_API_KEY: ${{ secrets.N8N_API_KEY }}
         run: npm run build
 
-      - name: Deploy to Hostinger VPS (PM2)
+      - name: Deploy to Hostinger VPS (PM2 Standalone)
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
@@ -70,8 +70,14 @@ jobs:
             npm install --legacy-peer-deps
             npm run build
 
-            # Restart PM2 process
-            pm2 restart dashboard || pm2 start npm --name "dashboard" -- start
+            # Copy static files to standalone (required for standalone mode)
+            cp -r .next/static .next/standalone/.next/
+            cp -r public .next/standalone/ 2>/dev/null || true
+
+            # Restart PM2 with standalone server
+            pm2 delete dashboard 2>/dev/null || true
+            cd .next/standalone
+            PORT=3001 pm2 start server.js --name "dashboard"
             pm2 save
         env:
           N8N_HOST: ${{ secrets.N8N_HOST }}
