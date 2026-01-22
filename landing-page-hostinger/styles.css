@@ -5,6 +5,11 @@
    Brand Guide: /3A-BRANDING-GUIDE.md
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* GLOBAL: Hidden utility class */
+.hidden {
+  display: none !important;
+}
+
 /* FORENSIC FIX: Hide exposed telemetry panel */
 .footer-telemetry-panel {
   display: none !important;
@@ -7348,10 +7353,27 @@ a.clickable-card:hover .card-cta {
 
 .mcp-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: var(--spacing-md);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-xl);
   max-width: 900px;
   margin: 0 auto;
+  align-items: stretch;
+}
+
+.mcp-grid .mcp-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mcp-grid .mcp-card .mcp-text {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .mcp-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .mcp-card {

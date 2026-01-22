@@ -63,7 +63,7 @@
     const widget = document.createElement('div');
     widget.id = 'voice-assistant-widget';
     // Critical: Set positioning inline to guarantee fixed position even if CSS fails
-    widget.style.cssText = 'position:fixed;bottom:140px;right:20px;z-index:99999;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;';
+    widget.style.cssText = 'position:fixed;bottom:100px;right:20px;z-index:99999;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;';
     widget.innerHTML = `
       <style>
         #voice-assistant-widget {
@@ -73,7 +73,7 @@
           --va-dark: ${CONFIG.darkBg};
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
           position: fixed;
-          bottom: 140px;
+          bottom: 100px;
           right: 20px;
           z-index: 99999;
         }
