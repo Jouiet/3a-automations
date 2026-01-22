@@ -420,29 +420,71 @@ e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
 | 11 | **Configurer META_ACCESS_TOKEN** | Meta Ads sensor actif | **CRITIQUE** |
 | 12 | **Configurer TIKTOK_API** | TikTok Ads sensor actif | **CRITIQUE** |
 
-### 9.3 SENSORS A CREER (Liste EXACTE DOE v2)
+### 9.3 EVALUATION FACTUELLE DES 13 SENSORS DOE v2
 
-**Source:** Documents/JO-AAA/docs/AUDIT-FORENSIQUE-DOE-2026-01-22-v2.md (lignes 560-574)
+**Methode:** Analyse empirique de chaque sensor recommande par DOE v2
+**Date evaluation:** 22/01/2026
+**Criteres:** Necessite reelle, redondance, couverture existante
 
-#### Priorite CRITIQUE (13 sensors manquants selon DOE v2)
+---
 
-| # | Sensor Exact DOE v2 | Domaine | Automations | Priorite |
-|---|---------------------|---------|-------------|----------|
-| 1 | email-health-sensor.cjs | Email | 11 | CRITIQUE |
-| 2 | klaviyo-deliverability-sensor.cjs | Email | Bounces, spam | CRITIQUE |
-| 3 | content-performance-sensor.cjs | Content | 19+ | HAUTE |
-| 4 | voice-quality-sensor.cjs | Voice AI | 4 | HAUTE |
-| 5 | inventory-multi-channel-sensor.cjs | Shopify | 5+ | HAUTE |
-| 6 | api-aggregate-health-sensor.cjs | System | ALL | HAUTE |
-| 7 | error-rate-sensor.cjs | System | ALL | HAUTE |
-| 8 | supplier-health-sensor.cjs | Dropshipping | 3 | MOYENNE |
-| 9 | whatsapp-status-sensor.cjs | WhatsApp | 3 | MOYENNE |
-| 10 | social-engagement-sensor.cjs | Content | ~10 | MOYENNE |
-| 11 | payment-health-sensor.cjs | Shopify | ~3 | MOYENNE |
-| 12 | customer-satisfaction-sensor.cjs | Retention | ~5 | MOYENNE |
-| 13 | cost-tracking-sensor.cjs | Finance | ALL | BASSE |
+#### VERDICT FACTUEL: 7 A CREER / 1 REDONDANT / 2 ETENDRE EXISTANT / 3 A EVALUER
 
-**Verification:** Aucun de ces 13 sensors n'existe actuellement (verifie 22/01/2026)
+---
+
+#### A. SENSORS JUSTIFIES - A CREER (7)
+
+| # | Sensor | Justification Factuelle | Priorite |
+|---|--------|-------------------------|----------|
+| 1 | **email-health-sensor.cjs** | 11 automations email, 0 sensor actuel. Metriques: bounce rate, open rate, spam complaints. CRITIQUE car email = canal principal. | CRITIQUE |
+| 2 | **content-performance-sensor.cjs** | 19 automations content, 0 sensor actuel. Metriques: engagement blog, social reach, conversion. GAP MAJEUR. | HAUTE |
+| 3 | **inventory-multi-channel-sensor.cjs** | 14 automations Shopify, product-seo couvre SEO mais PAS stock. Metriques: stock levels, reorder alerts, multi-channel sync. | HAUTE |
+| 4 | **supplier-health-sensor.cjs** | 3 automations dropshipping (CJ, BigBuy, order-flow). Metriques: API status, delivery times, stock accuracy. Non couvert. | MOYENNE |
+| 5 | **whatsapp-status-sensor.cjs** | 3 automations WhatsApp. Metriques: template approval, rate limits, delivery status. Token existe mais pas de monitoring. | MOYENNE |
+| 6 | **voice-quality-sensor.cjs** | 4 automations voice-ai. Metriques: latency, transcription accuracy, session success rate. Scripts existent mais 0 sensor. | HAUTE |
+| 7 | **cost-tracking-sensor.cjs** | ALL automations utilisent des APIs payantes (AI, SMS, etc). Metriques: cout par provider, burn rate, ROI. Aucun tracking actuel. | MOYENNE |
+
+---
+
+#### B. SENSOR REDONDANT - NE PAS CREER (1)
+
+| Sensor DOE v2 | Raison Factuelle | Alternative |
+|---------------|------------------|-------------|
+| **klaviyo-deliverability-sensor.cjs** | IDENTIQUE a email-health-sensor. Les metriques (bounce, spam, deliverability) sont INCLUSES dans email-health. Creer les deux = duplication inutile. | Inclure dans email-health-sensor |
+
+---
+
+#### C. SENSORS PARTIELLEMENT COUVERTS - ETENDRE EXISTANT (2)
+
+| Sensor DOE v2 | Couverture Actuelle | Action Factuelle |
+|---------------|---------------------|------------------|
+| **api-aggregate-health-sensor.cjs** | uptime-monitor.cjs surveille DEJA 5 endpoints (site, dashboard, n8n, wordpress, booking). | ETENDRE uptime-monitor avec APIs internes (Klaviyo, Shopify, AI providers) |
+| **error-rate-sensor.cjs** | uptime-monitor.cjs retourne status codes et response times. | AJOUTER error rate tracking a uptime-monitor via telemetry.cjs existant |
+
+---
+
+#### D. SENSORS A EVALUER - NECESSITE INCERTAINE (3)
+
+| Sensor DOE v2 | Question Factuelle | Verdict |
+|---------------|-------------------|---------|
+| **social-engagement-sensor.cjs** | Quelles plateformes sociales actives? Aucun token social configure dans .env. Sans integration, sensor = inutile. | EVALUER apres configuration tokens |
+| **payment-health-sensor.cjs** | 0 automations payment actives. Shopify gere paiements en interne. Sensor = premature. | DIFFERER jusqu'a besoin reel |
+| **customer-satisfaction-sensor.cjs** | Metriques NPS/CSAT non collectees actuellement. Aucun formulaire feedback en place. | DIFFERER jusqu'a implementation feedback |
+
+---
+
+#### SYNTHESE FACTUELLE
+
+```
+DOE v2 RECOMMANDE:           13 sensors
+EVALUATION FACTUELLE:
+  - A CREER:                  7 (54%)
+  - REDONDANT:                1 (8%)  - klaviyo-deliverability
+  - ETENDRE EXISTANT:         2 (15%) - api-aggregate, error-rate
+  - A EVALUER/DIFFERER:       3 (23%) - social, payment, satisfaction
+```
+
+**Conclusion:** DOE v2 surestime le besoin de 6 sensors (46%). La recommandation factuelle est 7 nouveaux + 2 extensions = 9 actions reelles, pas 13.
 
 ### 9.4 Priorite MOYENNE (Ce mois - Autres)
 
@@ -481,11 +523,14 @@ e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
 |---------|--------|---------------------|
 | Dashboard | 502 DOWN | **200 OK** |
 | Blog | Non specifie | **200 OK** |
-| Automations | 174 | **119** |
+| Automations | 174 | **119** (ERREUR -55) |
+| Content automations | 39 | **19** (ERREUR -20) |
+| Voice-AI automations | 13 | **4** (ERREUR -9) |
 | Sensors actifs | 4 | **3 OK + 3 partiels** |
 | Sensors casses | Non precise | **6/12 (50%)** |
 | Level Autonomy | L5 Sovereign | **L2-3 (couverture 3-30%)** |
 | Couverture sensor | 2.3% (claim) | **~3-30% (verifie)** |
+| Sensors a creer | 13 | **7 nouveaux + 2 extensions** (ERREUR +4) |
 
 ---
 
@@ -574,6 +619,6 @@ curl -s -o /dev/null -w "%{http_code}" https://3a-automation.com
 
 ---
 
-*Document mis a jour: 22/01/2026 11:15 UTC*
+*Document mis a jour: 22/01/2026 12:30 UTC*
 *Methode: Audit forensique bottom-up factuel avec verification empirique*
-*Session 138 - Post-correction Dashboard + Merge*
+*Session 138 - Post-correction Dashboard + Merge + Evaluation Factuelle Sensors DOE v2*
