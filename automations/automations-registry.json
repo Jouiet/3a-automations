@@ -1,13 +1,13 @@
 {
-  "version": "2.9.0",
-  "lastUpdated": "2026-01-12T10:22:00Z",
-  "totalCount": 119,
-  "description": "Single source of truth for all 3A Automation services",
+  "version": "3.0.0",
+  "lastUpdated": "2026-01-20T12:20:00Z",
+  "totalCount": 174,
+  "description": "Sovereign single source of truth for all 174 3A Automation services",
   "categories": {
     "lead-gen": {
       "name_fr": "Lead Generation & Acquisition",
       "name_en": "Lead Generation & Acquisition",
-      "count": 26
+      "count": 41
     },
     "seo": {
       "name_fr": "SEO & Contenu",
@@ -32,17 +32,17 @@
     "shopify": {
       "name_fr": "Shopify Admin",
       "name_en": "Shopify Admin",
-      "count": 14
+      "count": 24
     },
     "analytics": {
       "name_fr": "Analytics & Reporting",
       "name_en": "Analytics & Reporting",
-      "count": 9
+      "count": 19
     },
     "content": {
       "name_fr": "Contenu & Vidéo & Podcast",
       "name_en": "Content & Video & Podcast",
-      "count": 19
+      "count": 39
     },
     "ai-avatar": {
       "name_fr": "AI Avatar & Influencer",
@@ -68,7 +68,7 @@
     "voice-ai": {
       "name_fr": "Voice AI & Téléphonie",
       "name_en": "Voice AI & Telephony",
-      "count": 4
+      "count": 13
     },
     "marketing": {
       "name_fr": "Marketing Automation",

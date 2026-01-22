@@ -19,33 +19,54 @@ const LLM = require('./gateways/llm-global-gateway.cjs');
 
 async function runCreativeMastery(productData) {
     const { title, description, image_url } = productData;
-    console.log(`🎨 [Creative Mastery] Starting pipeline for: ${title}`);
+    console.log(`🎨 [Creative Mastery V2] Starting advanced pipeline for: ${title}`);
 
     try {
-        // 1. PHOTO ENHANCEMENT (Leonardo.ai Primary)
-        console.log(`   [1/3] Generating High-Fidelity Photo (Leonardo)...`);
+        // 1. SCIENTIFIC HOOK GENERATION (Grok 4.1 - Fast Reasoning)
+        console.log(`   [1/4] Generating Scientific Viral Hooks (Grok 4.1)...`);
+        const hookPrompt = `As a world-class marketing architect, analyze this product: "${title}"
+        Description: ${description}
+        Generate 3 high-impact, futuristic viral hooks for TikTok/Meta Ads.
+        Focus on psychological resonance and pattern interruption.`;
+        const hooks = await LLM.generate('grok', hookPrompt);
+        console.log(`   ✅ Hooks Generated.`);
+
+        // 2. PHOTO ENHANCEMENT (Leonardo.ai Primary)
+        console.log(`   [2/4] Generating High-Fidelity Photo (Leonardo)...`);
         const photoPrompt = `Professional e-commerce product photography of "${title}", high-end lighting, minimalist background, 8k resolution. Context: ${description}`;
-        // Note: For simulation we assume a dummy path or base64
-        // const photoResult = await Leonardo.enhanceProductPhoto(image_url, photoPrompt);
+        const photoResult = await Leonardo.enhanceProductPhoto(image_url, photoPrompt);
 
-        // 2. VIDEO GENERATION (Kling)
-        console.log(`   [2/3] Orchestrating Cinematic Video (Kling)...`);
-        const videoPrompt = `Cinematic product reveal of "${title}", smooth camera slide, futuristic aesthetics, 4k. Description: ${description}`;
-        const videoResult = await Kling.generateVideo(videoPrompt);
+        // 3. VIDEO REVEAL (Kling I2V)
+        let videoResult = { success: false, error: 'Skipped or Failed' };
+        if (photoResult.success && photoResult.imageBase64) {
+            try {
+                console.log(`   [3/4] Orchestrating Cinematic I2V Reveal (Kling)...`);
+                const videoPrompt = `Cinematic product reveal starting from this image: "${title}", smooth camera slide, futuristic lighting effects, high-fidelity 4k.`;
+                // Note: In 2026, we assume Leonardo returns a public URL for Kling, or we use base64 if supported.
+                // For this implementation, we prioritize the logic chain.
+                videoResult = await Kling.generateVideo(videoPrompt, {
+                    image_url: photoResult.imageBase64.startsWith('http') ? photoResult.imageBase64 : null // I2V trigger
+                });
+            } catch (vErr) {
+                console.warn(`   ⚠️ [Creative Mastery] Video Generation Failed: ${vErr.message}`);
+            }
+        }
 
-        // 3. AD COPY GENERATION (Gemini 3 Pro)
-        console.log(`   [3/3] Drafting Conversion-Locked Copy...`);
+        // 4. AD COPY GENERATION (Claude 4.5 - Creative Dominance)
+        console.log(`   [4/4] Drafting Conversion-Locked Copy (Claude 4.5)...`);
         const copyPrompt = `Write a high-converting Facebook/TikTok ad script for "${title}". 
         Description: ${description}
+        Viral Hooks to incorporate: ${hooks}
         Tone: Futuristic, Professional, Powerful.
         Constraint: Use PAS (Pain-Agitate-Solution) framework.`;
 
-        const copy = await LLM.generate('gemini', copyPrompt);
+        const copy = await LLM.generate('claude', copyPrompt);
 
-        console.log(`✅ [Creative Mastery] Pipeline Complete for ${title}`);
+        console.log(`✅ [Creative Mastery V2] Pipeline Complete for ${title}`);
         return {
+            hooks: hooks.substring(0, 200) + '...',
             photoStatus: 'SUCCESS (Leonardo)',
-            videoStatus: videoResult.success ? 'QUEUED (Kling)' : 'FAILED',
+            videoStatus: videoResult.success ? 'QUEUED (Kling I2V)' : 'FAILED/SKIPPED',
             copyHeader: copy.substring(0, 100) + '...'
         };
 

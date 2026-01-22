@@ -156,8 +156,8 @@ const getActivityIcon = (type: RecentActivity["type"]) => {
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState<DashboardStats>(defaultStats);
   const [activities, setActivities] = useState<RecentActivity[]>([]);
-  const [workflows, setWorkflows] = useState<N8nWorkflow[]>([]);
-  const [executions, setExecutions] = useState<N8nExecution[]>([]);
+  const [workflows, setWorkflows] = useState<NativeScript[]>([]);
+  const [executions, setExecutions] = useState<ScriptExecution[]>([]);
   const [executionChartData, setExecutionChartData] = useState<ExecutionChartData[]>([]);
   const [workflowStatusData, setWorkflowStatusData] = useState<WorkflowStatusData[]>([]);
   const [isLoading, setIsLoading] = useState(true);

@@ -38,11 +38,17 @@ const server = http.createServer(async (req, res) => {
                 const data = JSON.parse(body);
                 console.log(`[Shopify Bridge] Received Flow Trigger: ${data.topic || 'Generic'}`);
 
-                // Topic Handling
+                // Topic Handling (Hardened ACRA v2.0)
                 if (data.topic === 'product_created') {
                     handleProductCreated(data.payload);
                 } else if (data.topic === 'order_paid') {
                     handleOrderPaid(data.payload);
+                } else if (data.topic === 'order_refunded') {
+                    handleOrderRefunded(data.payload);
+                } else if (data.topic === 'subscription_cancelled') {
+                    handleSubscriptionCancelled(data.payload);
+                } else if (data.topic === 'loyalty_tier_upgraded') {
+                    handleLoyaltyTierUpgraded(data.payload);
                 }
 
                 res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -72,15 +78,54 @@ function handleProductCreated(payload) {
     // In a real production scenario, we'd use the DOE Orchestrator API
     // Here we simulate the call to our dispatcher
     const scriptPath = path.join(__dirname, 'doe-dispatcher.cjs');
+    dispatchDirective(directive);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TOPIC HANDLERS (Hardened ACRA v2.0)
+// ─────────────────────────────────────────────────────────────────────────────
+
+function handleOrderRefunded(payload) {
+    const customerEmail = payload.customer?.email || 'unknown';
+    console.log(`[Shopify Bridge] Refund Detected for ${customerEmail}. Triggering Churn Rescue...`);
+
+    // Directive for the Sovereign Brain
+    const directive = `Analyze refund context for ${customerEmail}. Initiate high-priority "Win-Back" rescue sequence. Check GA4 for behavioral signals and trigger personalized Grok-4.1 offer if propensity is high.`;
+    dispatchDirective(directive);
+}
+
+function handleSubscriptionCancelled(payload) {
+    const customerEmail = payload.customer?.email || 'unknown';
+    console.log(`[Shopify Bridge] Subscription Cancelled by ${customerEmail}. Starting Exit Interview flow.`);
+
+    const directive = `Initialize "Exit Interview" Voice AI trigger for ${customerEmail}. Inquire about cancellation reason and offer "Pause" skip instead of cancel.`;
+    dispatchDirective(directive);
+}
+
+function handleLoyaltyTierUpgraded(payload) {
+    const customerEmail = payload.customer?.email || 'unknown';
+    const tier = payload.new_tier;
+    console.log(`[Shopify Bridge] Loyalty Upgrade: ${customerEmail} is now ${tier}. Triggering Advocacy loop.`);
+
+    const directive = `Customer ${customerEmail} reached ${tier} tier. Send "VIP Gift" notification and trigger "Referral Engine" invite. Initiate Leonard.ai to generate custom greeting card.`;
+    dispatchDirective(directive);
+}
+
+function handleOrderPaid(payload) {
+    const customerEmail = payload.customer?.email || 'unknown';
+    const orderNumber = payload.order_number;
+    console.log(`[Shopify Bridge] Order Paid: ${orderNumber}. Triggering Advanced Retention Workflow for ${customerEmail}.`);
+
+    const directive = `Initiate Retention & Advocacy workflow for order ${orderNumber} (Email: ${customerEmail}). Send NPS survey in 7 days and check for advocacy potential.`;
+    dispatchDirective(directive);
+}
+
+function dispatchDirective(directive) {
+    const scriptPath = path.resolve(__dirname, 'doe-dispatcher.cjs');
     exec(`node "${scriptPath}" "${directive}" --execute`, (err, stdout, stderr) => {
         if (err) console.error(`[Shopify Bridge] Orchestration Error: ${err.message}`);
         console.log(`[Shopify Bridge] Orchestration Output: ${stdout}`);
     });
-}
-
-function handleOrderPaid(payload) {
-    console.log(`[Shopify Bridge] Order Paid: ${payload.order_number}. Triggering Retention Flow.`);
-    // Trigger GPM pressure update or direct retention script
 }
 
 server.listen(PORT, () => {

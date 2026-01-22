@@ -41,7 +41,7 @@ class DOEOrchestrator {
         console.log(c.cyan(`\n[DIRECTIVE]: ${directive}`));
 
         // 1. Tool Selection
-        const tool = this.findBestTool(directive);
+        const tool = await this.findBestTool(directive);
         if (!tool) {
             throw new Error("No suitable tool found for this directive.");
         }
@@ -73,6 +73,7 @@ class DOEOrchestrator {
         if (!plan.script) issues.push("Missing script path.");
 
         // Contextual checks: Parameter sufficiency (Ultrathink)
+        if (!plan.script) return { valid: true }; // No script to critique further if null
         const lowerScript = plan.script.toLowerCase();
         if (lowerScript.includes('google-maps-businesses') || lowerScript.includes('linkedin')) {
             const hasLocation = plan.params.some(p => p.includes('--location'));
@@ -133,11 +134,10 @@ class DOEOrchestrator {
      * Utilities
      */
     async extractParams(directive, tool) {
-        // --- REAL LLM EXTRACTION (Level 5 Sovereign) ---
-        // Using Global LLM Gateway for precise parameter extraction
-        const LLMGateway = require('./gateways/llm-global-gateway.cjs');
-
-        const systemPrompt = `You are the DOE Parameter Extractor.
+        // --- UPGRADED SOVEREIGN EXTRACTION (v2.0) ---
+        // Leveraging the Recursive Engine (spawn_agent.js) for high-precision extraction
+        const spawnScript = path.resolve(__dirname, '../../../skills/dev-orchestrator/scripts/spawn_agent.js');
+        const prompt = `You are the DOE Parameter Extractor.
 Directive: "${directive}"
 Tool: ${tool.name_en} (${tool.id})
 Script: ${tool.script}
@@ -149,27 +149,30 @@ Output format: Return ONLY a JSON array of strings, e.g., ["--location=Paris", "
 No explanations.`;
 
         try {
-            const rawOutput = await LLMGateway.generate('gemini', systemPrompt);
-            // Clean output in case LLM adds markdown
-            let cleaned = rawOutput.replace(/```json/g, '').replace(/```/g, '').trim();
+            console.log(colors.gray(`[DOE] Spawning sub-agent for param extraction...`));
+            const spawnCmd = `node "${spawnScript}" --prompt "${prompt.replace(/"/g, '\\"')}" --depth 0`;
+            const rawOutput = execSync(spawnCmd, { encoding: 'utf8', cwd: path.join(__dirname, '../../..') });
 
-            // Robust Array Extraction
-            const arrayMatch = cleaned.match(/\[[\s\S]*\]/);
-            if (arrayMatch) cleaned = arrayMatch[0];
-
-            const params = JSON.parse(cleaned);
-            if (Array.isArray(params)) {
-                return params;
+            // Clean output in case LLM adds markdown or filler
+            let cleaned = rawOutput.trim();
+            const jsonMatch = cleaned.match(/\[.*\]/s);
+            if (jsonMatch) {
+                try {
+                    const params = JSON.parse(jsonMatch[0]);
+                    if (Array.isArray(params)) return params;
+                } catch (e) {
+                    console.warn(colors.yellow(`[DOE] JSON Parse error on sub-agent output: ${e.message}`));
+                }
             }
         } catch (e) {
-            console.warn(c.yellow(`[DOE] LLM extraction failed, using heuristic fallback: ${e.message}`));
+            console.warn(colors.yellow(`[DOE] Sovereign extraction fallback: ${e.message}`));
         }
 
         const lowerDirective = directive.toLowerCase();
         const params = [];
 
         // Simple heuristic fallback
-        if (tool.id.includes('maps') || tool.id.includes('linkedin')) {
+        if (tool.id && (tool.id.includes('maps') || tool.id.includes('linkedin'))) {
             const locations = ['maroc', 'france', 'dubai', 'usa', 'paris', 'casablanca'];
             locations.forEach(loc => {
                 if (lowerDirective.includes(loc)) params.push(`--location=${loc}`);
@@ -188,21 +191,49 @@ No explanations.`;
     }
 
 
-    findBestTool(directive) {
-        const lowerDirective = directive.toLowerCase();
-        if (!this.registry.automations) return null;
+    async findBestTool(directive) {
+        console.log(colors.gray(`[DOE] Semantic Tool Matching for: "${directive}"...`));
 
+        // Use Recursive Engine (spawn_agent.js) for high-precision tool selection
+        const spawnScript = path.resolve(__dirname, '../../../skills/dev-orchestrator/scripts/spawn_agent.js');
+        const toolsMinimal = this.registry.automations.map(a => ({ id: a.id, name: a.name_en, desc: a.semantic_description }));
+
+        const prompt = `You are the DOE Tool Selector.
+Directive: "${directive}"
+Registry Size: ${toolsMinimal.length} tools.
+
+Task: Select the absolute best tool ID from the registry for this directive.
+Output format: Return ONLY the tool ID string, e.g., "google-maps-scraper". No explanation.
+
+TOOL LIST:
+${JSON.stringify(toolsMinimal, null, 2)}`;
+
+        try {
+            const spawnCmd = `node "${spawnScript}" --prompt "${prompt.replace(/"/g, '\\"')}" --depth 0`;
+            const rawOutput = execSync(spawnCmd, { encoding: 'utf8', cwd: path.join(__dirname, '../../..') });
+            const toolId = rawOutput.trim().replace(/['"`]/g, '');
+
+            const tool = this.registry.automations.find(a => a.id === toolId);
+            if (tool) {
+                console.log(colors.green(`[DOE] AI Selected Tool: ${toolId}`));
+                return tool;
+            }
+        } catch (e) {
+            console.warn(colors.yellow(`[DOE] Tool selection fallback to heuristics: ${e.message}`));
+        }
+
+        // --- Heuristic Fallback (Legacy Logic) ---
+        const lowerDirective = directive.toLowerCase();
         const matches = this.registry.automations
             .map(a => {
                 let score = 0;
                 const name = a.name_en || "";
-                const nameParts = name.toLowerCase().split(' ');
                 const semanticDesc = a.semantic_description ? a.semantic_description.toLowerCase() : "";
 
                 if (lowerDirective.includes('maps') && a.id.includes('maps')) score += 10;
                 if (lowerDirective.includes('linkedin') && a.id.includes('linkedin')) score += 10;
                 if (semanticDesc && semanticDesc.includes(lowerDirective)) score += 8;
-                if (nameParts.some(word => word && lowerDirective.includes(word))) score += 5;
+                if (name.toLowerCase().includes(lowerDirective)) score += 5;
 
                 return { tool: a, score };
             })

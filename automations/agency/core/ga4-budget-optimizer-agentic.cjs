@@ -1,5 +1,5 @@
 /**
- * GA4 Budget Optimizer - Agentic (Level 4: Autonomous)
+ * GA4 Budget Optimizer - Agentic (Level 5: Sovereign)
  * 
  * AI-driven budget reallocation with autonomous API execution
  * 
@@ -18,6 +18,7 @@ const path = require('path');
 const { BetaAnalyticsDataClient } = require('@google-analytics/data');
 const { logTelemetry } = require('../utils/telemetry.cjs');
 const MarketingScience = require('./marketing-science-core.cjs');
+const LLM = require('./gateways/llm-global-gateway.cjs');
 
 // Load environment variables (Check local dir, then project root)
 const envPaths = [path.join(__dirname, '.env'), path.join(__dirname, '../../../.env'), path.join(process.cwd(), '.env')];
@@ -40,54 +41,10 @@ const CONFIG = {
     EXECUTE_MODE: process.argv.includes('--execute'),
     FORCE_MODE: process.argv.includes('--force'), // Bypass GPM pressure
     QUALITY_THRESHOLD: 8,
-    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
-
-    AI_PROVIDERS: [
-        { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
-        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
-        { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
-    ]
+    GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json')
 };
 
-async function callAI(provider, prompt, systemPrompt = '') {
-    if (!provider.apiKey) throw new Error(`API key missing for ${provider.name}`);
 
-    try {
-        let response;
-        if (provider.name === 'anthropic') {
-            response = await fetch('https://api.anthropic.com/v1/messages', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'x-api-key': provider.apiKey, 'anthropic-version': '2023-06-01' },
-                body: JSON.stringify({ model: provider.model, max_tokens: 1500, system: systemPrompt, messages: [{ role: 'user', content: prompt }] })
-            });
-        } else if (provider.name === 'google') {
-            response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${provider.model}:generateContent?key=${provider.apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: `${systemPrompt}\n\n${prompt}` }] }] })
-            });
-        } else if (provider.name === 'xai') {
-            response = await fetch('https://api.x.ai/v1/chat/completions', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${provider.apiKey}` },
-                body: JSON.stringify({ model: provider.model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }] })
-            });
-        }
-
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        const text = provider.name === 'anthropic' ? data.content[0].text :
-            provider.name === 'google' ? data.candidates[0].content.parts[0].text :
-                data.choices[0].message.content;
-
-        const jsonMatch = text.match(/\{[\s\S]*\}/);
-        if (!jsonMatch) throw new Error('No JSON found');
-        return JSON.parse(jsonMatch[0]);
-    } catch (e) {
-        console.warn(`  ⚠️ AI call failed: ${e.message}`);
-        throw e;
-    }
-}
 
 /**
  * Log action to global MCP observability log
@@ -103,7 +60,7 @@ function logToMcp(action, details) {
 
     logs.unshift({
         timestamp: new Date().toISOString(),
-        agent: 'BudgetOptimizer-L4',
+        agent: 'BudgetOptimizer-Sovereign',
         action,
         details,
         status: 'SUCCESS'
@@ -200,21 +157,19 @@ Output JSON: { "score": <0-10>, "feedback": "...", "refinements": [{ "source": "
 
     const prompt = MarketingScience.inject('SB7', basePrompt);
 
-    for (const provider of CONFIG.AI_PROVIDERS) {
-        try {
-            const result = await callAI(provider, prompt, 'You are a Senior Performance Marketing Auditor.');
-            return result;
-        } catch (e) {
-            continue;
-        }
+    try {
+        const response = await LLM.generateWithFallback(prompt);
+        const jsonMatch = response.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) throw new Error('No JSON found in AI response');
+        return JSON.parse(jsonMatch[0]);
+    } catch (e) {
+        console.warn(`  ⚠️ AI Critique failed: ${e.message}`);
+        return {
+            score: 6,
+            feedback: 'AI Critique failed, using fallback conservative logic.',
+            refinements: []
+        };
     }
-
-    // Fallback logic
-    return {
-        score: 6,
-        feedback: 'AI Critique failed, using fallback conservative logic.',
-        refinements: []
-    };
 }
 
 /**

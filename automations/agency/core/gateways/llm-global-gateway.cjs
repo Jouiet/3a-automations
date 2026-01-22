@@ -1,7 +1,24 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const complianceGuardian = require('../compliance-guardian.cjs');
 
 class LLMGateway {
     constructor() {
+        // Load env systematically
+        const fs = require('fs');
+        const path = require('path');
+        const envPaths = [
+            path.join(__dirname, '.env'),
+            path.join(__dirname, '../../../../.env'),
+            path.join(__dirname, '../../../../../.env'),
+            path.join(process.cwd(), '.env')
+        ];
+        for (const envPath of envPaths) {
+            if (fs.existsSync(envPath)) {
+                require('dotenv').config({ path: envPath });
+                break;
+            }
+        }
+
         this.geminiKey = process.env.GEMINI_API_KEY;
         this.anthropicKey = process.env.ANTHROPIC_API_KEY;
         this.xaiKey = process.env.XAI_API_KEY; // Grok
@@ -9,22 +26,35 @@ class LLMGateway {
 
         if (this.geminiKey) {
             this.genAI = new GoogleGenerativeAI(this.geminiKey);
+            // gemini-3-flash-preview is the verified 2026 frontier (Jan 2026)
             this.geminiModel = this.genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
         }
     }
 
     async generate(provider, prompt) {
-        console.log(`[LLM] Requesting: ${provider.toUpperCase()}...`);
+        console.error(`[LLM] Requesting: ${provider.toUpperCase()}...`);
+
+        // 🛡️ Compliance Check: PROMPT
+        const promptAudit = complianceGuardian.validate(prompt, 'PROMPT');
+        if (!promptAudit.valid) {
+            throw new Error(`[Compliance] Prompt Blocked: ${JSON.stringify(promptAudit.violations)}`);
+        }
+
+        let response;
         try {
             switch (provider.toLowerCase()) {
                 case 'gemini':
-                    return await this._generateGemini(prompt);
+                    response = await this._generateGemini(prompt);
+                    break;
                 case 'claude':
-                    return await this._fetchClaude(prompt);
+                    response = await this._fetchClaude(prompt);
+                    break;
                 case 'grok':
-                    return await this._fetchGrok(prompt);
+                    response = await this._fetchGrok(prompt);
+                    break;
                 case 'openai':
-                    return await this._fetchOpenAI(prompt);
+                    response = await this._fetchOpenAI(prompt);
+                    break;
                 default:
                     throw new Error(`Unknown Provider: ${provider}`);
             }
@@ -32,6 +62,16 @@ class LLMGateway {
             console.error(`[LLM] ${provider.toUpperCase()} ERROR: ${e.message}`);
             throw e;
         }
+
+        // 🛡️ Compliance Check: RESPONSE
+        const responseAudit = complianceGuardian.validate(response, 'RESPONSE');
+        if (!responseAudit.valid) {
+            console.warn(`[Compliance] Response Warning: ${JSON.stringify(responseAudit.violations)}`);
+            // We warn but allow for now, to avoid breaking flows unexpectedly. 
+            // In L5 Strict Mode, this would throw.
+        }
+
+        return response;
     }
 
     /**
@@ -46,7 +86,7 @@ class LLMGateway {
             try {
                 return await this.generate(provider, prompt);
             } catch (e) {
-                console.warn(`[LLM] FALDOWN: ${provider.toUpperCase()} failed. Trying next in chain...`);
+                console.error(`[LLM] FALDOWN: ${provider.toUpperCase()} failed. Trying next in chain...`);
                 lastError = e;
             }
         }
@@ -65,7 +105,7 @@ class LLMGateway {
             } catch (e) {
                 if (e.message.includes('503') || e.message.includes('overloaded')) {
                     attempt++;
-                    console.warn(`[LLM] Gemini Overloaded (Attempt ${attempt}/3). Retrying...`);
+                    console.error(`[LLM] Gemini Overloaded (Attempt ${attempt}/3). Retrying...`);
                     await new Promise(r => setTimeout(r, 1000 * attempt));
                     continue;
                 }
@@ -77,19 +117,31 @@ class LLMGateway {
 
     async _fetchClaude(prompt) {
         if (!this.anthropicKey) throw new Error("ANTHROPIC_API_KEY missing");
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
-            method: 'POST',
-            headers: {
-                'x-api-key': this.anthropicKey,
-                'anthropic-version': '2023-06-01',
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                model: "claude-sonnet-4.5",
-                max_tokens: 4096,
-                messages: [{ role: "user", content: prompt }]
-            })
-        });
+
+        const tryModel = async (model) => {
+            const res = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'x-api-key': this.anthropicKey,
+                    'anthropic-version': '2023-06-01',
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: model,
+                    max_tokens: 8192,
+                    messages: [{ role: "user", content: prompt }]
+                })
+            });
+            return res;
+        };
+
+        let res = await tryModel("claude-sonnet-4.5");
+
+        if (res.status === 400) {
+            console.warn("[LLM] Claude 4.5 not available (400). Falling back to Claude 3.5 Sonnet...");
+            res = await tryModel("claude-3-5-sonnet-20241022");
+        }
+
         return this._handleFetchResponse(res, 'Claude');
     }
 

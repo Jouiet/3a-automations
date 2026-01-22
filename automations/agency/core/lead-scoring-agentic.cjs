@@ -21,6 +21,7 @@
 const fs = require('fs');
 const path = require('path');
 const { logTelemetry } = require('../utils/telemetry.cjs');
+const llmGateway = require('./gateways/llm-global-gateway.cjs');
 
 // Portability Patch: Resilient .env loading
 const envPaths = [
@@ -53,9 +54,9 @@ const CONFIG = {
 
     // Multi-provider fallback
     AI_PROVIDERS: [
-        { name: 'anthropic', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
-        { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
-        { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
+        { name: 'claude', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
+        { name: 'gemini', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
+        { name: 'grok', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ],
 
     // Scoring weights (initial)
@@ -77,15 +78,11 @@ const CONFIG = {
 
 async function callAI(provider, prompt, systemPrompt = '') {
     const startTime = Date.now();
+    const fullPrompt = systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt;
 
     try {
-        if (provider.name === 'anthropic') {
-            return await callClaude(provider, prompt, systemPrompt);
-        } else if (provider.name === 'google') {
-            return await callGemini(provider, prompt, systemPrompt);
-        } else if (provider.name === 'xai') {
-            return await callGrok(provider, prompt, systemPrompt);
-        }
+        // Use the centralized Gateway
+        return await llmGateway.generate(provider.name, fullPrompt);
     } catch (error) {
         console.error(`[${provider.name}] Error:`, error.message);
         throw error;
@@ -93,79 +90,6 @@ async function callAI(provider, prompt, systemPrompt = '') {
         const duration = Date.now() - startTime;
         console.log(`[${provider.name}] Response time: ${duration}ms`);
     }
-}
-
-async function callClaude(provider, prompt, systemPrompt) {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': provider.apiKey,
-            'anthropic-version': '2023-06-01'
-        },
-        body: JSON.stringify({
-            model: provider.model,
-            max_tokens: 2000,
-            system: systemPrompt,
-            messages: [{ role: 'user', content: prompt }]
-        })
-    });
-
-    if (!response.ok) {
-        throw new Error(`Claude API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.content[0].text;
-}
-
-async function callGemini(provider, prompt, systemPrompt) {
-    const fullPrompt = systemPrompt ? `${systemPrompt}\n\n${prompt}` : prompt;
-
-    const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${provider.model}:generateContent?key=${provider.apiKey}`,
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: fullPrompt }] }],
-                generationConfig: { maxOutputTokens: 2000 }
-            })
-        }
-    );
-
-    if (!response.ok) {
-        throw new Error(`Gemini API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.candidates[0].content.parts[0].text;
-}
-
-async function callGrok(provider, prompt, systemPrompt) {
-    const messages = systemPrompt
-        ? [{ role: 'system', content: systemPrompt }, { role: 'user', content: prompt }]
-        : [{ role: 'user', content: prompt }];
-
-    const response = await fetch('https://api.x.ai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${provider.apiKey}`
-        },
-        body: JSON.stringify({
-            model: provider.model,
-            messages,
-            max_tokens: 2000
-        })
-    });
-
-    if (!response.ok) {
-        throw new Error(`Grok API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data.choices[0].message.content;
 }
 
 // ============================================================================
@@ -378,26 +302,45 @@ OPTIONS:
 
 EXAMPLE:
   node lead-scoring-agentic.cjs --input leads.json --agentic --historical conversions.json
+  node lead-scoring-agentic.cjs --sqlite --agentic (Uses production database)
     `);
         process.exit(0);
     }
 
+    const sqliteMode = args.includes('--sqlite');
     const inputIndex = args.indexOf('--input');
     const historicalIndex = args.indexOf('--historical');
     const outputIndex = args.indexOf('--output');
 
-    if (inputIndex === -1) {
-        console.error('❌ Error: --input required');
+    if (inputIndex === -1 && !sqliteMode) {
+        console.error('❌ Error: --input or --sqlite required');
         process.exit(1);
     }
 
-    const inputFile = args[inputIndex + 1];
+    let leads = [];
+
+    if (sqliteMode) {
+        // Load from DB
+        const leadsManager = require('./leads-manager.cjs');
+        console.log(`📂 Loading leads from SQLite Database...`);
+        const dbLeads = leadsManager.getAllLeads();
+        // Normalize for scoring
+        leads = dbLeads.map(l => ({ ...l, tags: l.tags || [] }));
+        console.log(`✅ Loaded ${leads.length} leads from DB.`);
+    } else {
+        const inputFile = args[inputIndex + 1];
+        console.log(`📂 Loading leads from ${inputFile}...`);
+        try {
+            const raw = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
+            leads = Array.isArray(raw) ? raw : (raw.leads || []);
+        } catch (e) {
+            console.error('Failed to read input file:', e.message);
+            process.exit(1);
+        }
+    }
+
     const historicalFile = historicalIndex !== -1 ? args[historicalIndex + 1] : null;
     const outputFile = outputIndex !== -1 ? args[outputIndex + 1] : 'scored-leads.json';
-
-    // Load data
-    console.log(`📂 Loading leads from ${inputFile}...`);
-    const leads = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
 
     let historicalData = [];
     if (historicalFile) {
@@ -411,7 +354,15 @@ EXAMPLE:
     const duration = Date.now() - startTime;
 
     // Save results
-    fs.writeFileSync(outputFile, JSON.stringify(result, null, 2));
+    if (sqliteMode) {
+        console.log('💾 Saving scores back to SQLite Database...');
+        const leadsManager = require('./leads-manager.cjs');
+        for (const lead of result.scores) {
+            leadsManager.updateScore(lead.id, lead.score, result.weights);
+        }
+    } else {
+        fs.writeFileSync(outputFile, JSON.stringify(result, null, 2));
+    }
 
     logTelemetry('LeadScorer-L4', 'Score Leads', { count: result.scores.length, quality: result.quality ? result.quality.score : 0 }, 'SUCCESS');
     console.log(`\n✅ COMPLETE`);
