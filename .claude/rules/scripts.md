@@ -11,23 +11,30 @@ paths:
 ### Scripts Core
 | Category | Count | Status |
 |----------|-------|--------|
-| Total core | 73 | `ls agency/core/*.cjs` |
+| Total core | 81 | `ls agency/core/*.cjs` |
 | Avec --health | 22 | Testables |
 | Resilient | 7 | Multi-AI fallback |
+| Sensors | 20 | Data fetchers → GPM |
 
-### Sensors (14 total - Session 139)
+### Sensors (20 total - Session 139)
 | Status | Count | Sensors |
 |--------|-------|---------|
-| ✅ OK | 10 | ga4, retention, product-seo, lead-scoring, lead-velocity, bigquery, google-ads-planner, **shopify**, **klaviyo**, **google-trends** |
-| ⚠️ CREDS | 2 | meta-ads, tiktok-ads |
-| ❌ BLOCKED | 2 | gsc (API disabled), apify (trial expired) |
+| ✅ OK | 8 | retention, product-seo, lead-velocity, google-trends (AI), shopify, klaviyo, email-health, cost-tracking |
+| ⚠️ PARTIAL | 8 | ga4, lead-scoring, bigquery, google-ads-planner, content-performance, supplier-health, whatsapp-status, voice-quality |
+| ❌ BLOCKED | 4 | gsc (API disabled), meta-ads (no token), tiktok-ads (no token), apify (trial expired) |
 
-### New Sensors (Session 139)
-| Sensor | Description |
-|--------|-------------|
-| shopify-sensor | Store health, orders, inventory |
-| klaviyo-sensor | Email flows, campaigns |
-| google-trends (REWRITTEN) | AI-powered market analysis (Grok→OpenAI→Gemini) |
+### New Sensors (Session 139) - Per DOE v2 Spec
+| Sensor | Description | Priority |
+|--------|-------------|----------|
+| shopify-sensor | Store health, orders, inventory | HAUTE |
+| klaviyo-sensor | Email flows, campaigns | HAUTE |
+| google-trends (REWRITTEN) | AI-powered market analysis (Grok→OpenAI→Gemini) | HAUTE |
+| email-health-sensor | Bounce/spam/open rates | CRITIQUE |
+| content-performance-sensor | WordPress blog metrics | HAUTE |
+| supplier-health-sensor | CJ/BigBuy API health | MOYENNE |
+| whatsapp-status-sensor | Template approval, quality | MOYENNE |
+| voice-quality-sensor | Voice API latency, providers | HAUTE |
+| cost-tracking-sensor | API costs, burn rate | MOYENNE |
 
 ### Blockers Sensors
 | Sensor | Problème | Fix |

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-22T16:55:54.488Z",
+  "last_updated": "2026-01-22T17:11:47.661Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -62,6 +62,34 @@
           "flows_active": 0,
           "campaigns_last_30d": 0
         }
+      },
+      "content_performance": {
+        "label": "Content Performance",
+        "pressure": 90,
+        "trend": "UP",
+        "last_check": "2026-01-22T17:08:16.826Z",
+        "sensor_data": {
+          "posts_total": 0,
+          "posts_this_month": 0,
+          "posts_draft": 0,
+          "comments_pending": 0,
+          "content_velocity": "STALE"
+        }
+      },
+      "email_health": {
+        "label": "Email Health",
+        "pressure": 60,
+        "trend": "STABLE",
+        "last_check": "2026-01-22T17:08:17.576Z",
+        "sensor_data": {
+          "bounce_rate": 0,
+          "spam_rate": 0,
+          "open_rate": 0,
+          "click_rate": 0,
+          "lists_total": 10,
+          "campaigns_sent_30d": 0,
+          "campaigns_delivered": 0
+        }
       }
     },
     "sales": {
@@ -122,6 +150,111 @@
           "orders_today": 0,
           "orders_unfulfilled": 0,
           "orders_pending": 0
+        }
+      },
+      "supplier_health": {
+        "label": "Supplier Health",
+        "pressure": 80,
+        "trend": "UP",
+        "last_check": "2026-01-22T17:08:16.506Z",
+        "sensor_data": {
+          "suppliers_checked": 2,
+          "suppliers_healthy": 0,
+          "suppliers_error": 0,
+          "details": [
+            {
+              "name": "CJ Dropshipping",
+              "status": "NO_CREDENTIALS",
+              "latency_ms": -1,
+              "error": "CJ_API_KEY not configured"
+            },
+            {
+              "name": "BigBuy",
+              "status": "NO_CREDENTIALS",
+              "latency_ms": -1,
+              "error": "BIGBUY_API_KEY not configured"
+            }
+          ]
+        }
+      }
+    },
+    "communications": {
+      "whatsapp_status": {
+        "label": "WhatsApp Status",
+        "pressure": 90,
+        "trend": "UP",
+        "last_check": "2026-01-22T17:11:45.920Z",
+        "sensor_data": {
+          "connected": false,
+          "phone_verified": false,
+          "quality_rating": "UNKNOWN",
+          "messaging_tier": "UNKNOWN",
+          "templates_total": 0,
+          "templates_approved": 0,
+          "templates_pending": 0,
+          "templates_rejected": 0
+        }
+      }
+    },
+    "finance": {
+      "api_costs": {
+        "label": "API Costs",
+        "pressure": 30,
+        "trend": "UP",
+        "last_check": "2026-01-22T17:11:47.098Z",
+        "sensor_data": {
+          "current_month_usd": 0,
+          "projected_month_usd": 0,
+          "daily_avg_usd": 0,
+          "budget_warning_usd": 100,
+          "budget_critical_usd": 250,
+          "budget_status": "OK",
+          "providers_tracked": 0,
+          "provider_details": []
+        }
+      }
+    },
+    "technology": {
+      "voice_quality": {
+        "label": "Voice Quality",
+        "pressure": 90,
+        "trend": "UP",
+        "last_check": "2026-01-22T17:11:47.660Z",
+        "sensor_data": {
+          "endpoints_healthy": 0,
+          "endpoints_total": 3,
+          "providers_healthy": 0,
+          "providers_configured": 1,
+          "avg_latency_ms": 1706,
+          "endpoint_details": [
+            {
+              "name": "Voice API",
+              "status": "DOWN",
+              "latency_ms": -1
+            },
+            {
+              "name": "Grok Realtime",
+              "status": "DOWN",
+              "latency_ms": -1
+            },
+            {
+              "name": "Telephony Bridge",
+              "status": "DOWN",
+              "latency_ms": -1
+            }
+          ],
+          "provider_details": [
+            {
+              "name": "ElevenLabs",
+              "status": "NO_CREDENTIALS",
+              "latency_ms": -1
+            },
+            {
+              "name": "OpenAI Whisper",
+              "status": "ERROR",
+              "latency_ms": 1706
+            }
+          ]
         }
       }
     }

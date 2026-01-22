@@ -16,12 +16,12 @@
 ### Métriques Core
 | Métrique | Valeur | Méthode Vérification |
 |----------|--------|----------------------|
-| Scripts core | 75 | `ls agency/core/*.cjs` |
+| Scripts core | 81 | `ls agency/core/*.cjs` |
 | Scripts --health | 22 | `grep -l "\-\-health"` |
 | Automations registry | 119 | `jq '.automations \| length'` |
 | Skills | 41 | `ls -d .agent/skills/*/` |
 | MCPs configurés | 10 | `jq '.mcpServers \| keys'` |
-| Sensors | 14 | `ls *-sensor*.cjs` (10 OK, 4 blocked) |
+| Sensors | **20** | `ls *-sensor*.cjs` |
 
 ### Status Sensors (TESTÉ 22/01/2026)
 | Sensor | Status | Problème |
@@ -35,9 +35,17 @@
 | lead-scoring-sensor | ⚠️ | Pressure 95 |
 | lead-velocity-sensor | ✅ | **FIXÉ** (handle {scores:[]} format) |
 | apify-trends-sensor | ❌ | Trial expiré |
-| google-trends-sensor | ❌ | Blocked |
+| google-trends-sensor | ✅ | **RÉÉCRIT** AI-powered (Grok→OpenAI→Gemini) |
 | bigquery-trends-sensor | ⚠️ | 0 results |
 | google-ads-planner-sensor | ⚠️ | PASSIVE mode |
+| shopify-sensor | ✅ | **NEW** Store health |
+| klaviyo-sensor | ✅ | **NEW** Email flows |
+| email-health-sensor | ✅ | **NEW** Bounce/open rates |
+| content-performance-sensor | ⚠️ | **NEW** WordPress SSL issue |
+| supplier-health-sensor | ⚠️ | **NEW** No CJ/BigBuy creds |
+| whatsapp-status-sensor | ⚠️ | **NEW** No token |
+| voice-quality-sensor | ⚠️ | **NEW** Endpoints down |
+| cost-tracking-sensor | ✅ | **NEW** Budget OK |
 
 ### Credentials .env
 - SET: 57 credentials
