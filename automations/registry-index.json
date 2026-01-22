@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-01-22T12:25:23.313Z",
+  "purpose": "Lightweight index to avoid reading full registry (75KB → 3KB)",
+  "totalCount": 119,
+  "categories": {
+    "lead-gen": 26,
+    "seo": 10,
+    "email": 11,
+    "shopify": 14,
+    "analytics": 9,
+    "content": 19,
+    "cinematicads": 4,
+    "ai-avatar": 2,
+    "whatsapp": 3,
+    "voice-ai": 4,
+    "marketing": 2,
+    "sms": 1,
+    "retention": 4,
+    "dropshipping": 3,
+    "agency-ops": 2,
+    "Lead Generation & Acquisition": 1,
+    "Email Marketing & Klaviyo": 1,
+    "SEO & Content": 1,
+    "Analytics & Reporting": 1,
+    "Shopify Admin & Operations": 1
+  },
+  "scriptsWithHealth": [
+    "blog-generator-resilient.cjs",
+    "voice-api-resilient.cjs",
+    "email-personalization-resilient.cjs",
+    "grok-voice-realtime.cjs",
+    "churn-prediction-resilient.cjs",
+    "cjdropshipping-automation.cjs",
+    "bigbuy-supplier-sync.cjs",
+    "dropshipping-order-flow.cjs",
+    "uptime-monitor.cjs"
+  ],
+  "scriptsByPort": {
+    "3003": "blog-generator-resilient.cjs",
+    "3004": "voice-api-resilient.cjs",
+    "3006": "email-personalization-resilient.cjs",
+    "3007": "grok-voice-realtime.cjs",
+    "3010": "churn-prediction-resilient.cjs",
+    "3020": "cjdropshipping-automation.cjs",
+    "3021": "bigbuy-supplier-sync.cjs",
+    "3022": "dropshipping-order-flow.cjs"
+  }
+}
