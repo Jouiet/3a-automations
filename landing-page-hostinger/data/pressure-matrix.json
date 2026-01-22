@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-22T12:29:22.373Z",
+  "last_updated": "2026-01-22T20:52:54.965Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -10,7 +10,7 @@
       "meta_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-22T12:24:27.832Z",
+        "last_check": "2026-01-22T20:52:48.980Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "Meta API credentials missing in .env"
@@ -19,7 +19,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-22T12:29:22.372Z",
+        "last_check": "2026-01-22T20:52:01.548Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -27,81 +27,20 @@
       },
       "market_demand": {
         "label": "Market Demand",
-        "pressure": 50,
-        "trend": "falling",
-        "last_check": "2026-01-12T09:23:25.479Z",
-        "ads_volume": 0,
-        "api_status": "BLOCKED_CREDENTIALS",
+        "pressure": 8,
+        "trend": "DOWN",
+        "last_check": "2026-01-22T20:52:30.726Z",
         "sensor_data": {
-          "rising_context": [
-            "algérie – nigeria",
-            "algérie – nigeria",
-            "cameroun maroc",
-            "cameroun maroc",
-            "algerie nigeria"
+          "method": "AI Analysis (Grok)",
+          "keywords": [
+            "marketing automation",
+            "ai automation agency",
+            "shopify automation",
+            "e-commerce automation"
           ],
-          "discovered_trends": [
-            {
-              "title": "ticketmaster",
-              "traffic": "1000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 01:00:00 -0800"
-            },
-            {
-              "title": "gala des pieces jaunes 2026",
-              "traffic": "1000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:40:00 -0800"
-            },
-            {
-              "title": "abivax",
-              "traffic": "200+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:30:00 -0800"
-            },
-            {
-              "title": "delogu",
-              "traffic": "2000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:20:00 -0800"
-            },
-            {
-              "title": "la defense arena",
-              "traffic": "2000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:20:00 -0800"
-            },
-            {
-              "title": "louis sarkozy",
-              "traffic": "1000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:20:00 -0800"
-            },
-            {
-              "title": "harmattan ai",
-              "traffic": "200+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:20:00 -0800"
-            },
-            {
-              "title": "benoit jacquot",
-              "traffic": "2000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Mon, 12 Jan 2026 00:10:00 -0800"
-            },
-            {
-              "title": "benoit payan",
-              "traffic": "200+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Sun, 11 Jan 2026 23:50:00 -0800"
-            },
-            {
-              "title": "drive",
-              "traffic": "2000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Sun, 11 Jan 2026 23:40:00 -0800"
-            }
-          ]
+          "demand_score": 92,
+          "market_trend": "rising",
+          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation remains very high as businesses prioritize efficiency and AI-driven scalability. Trends are rising sharply into 2026, fueled by e-commerce growth and advanced AI integrations."
         }
       },
       "tiktok_ads": {
@@ -112,13 +51,42 @@
           "error": "DISCONNECTED",
           "message": "TikTok API credentials missing in .env"
         }
+      },
+      "klaviyo": {
+        "pressure": 65,
+        "trend": "UP",
+        "last_check": "2026-01-22T20:52:23.989Z",
+        "sensor_data": {
+          "lists_total": 10,
+          "flows_total": 0,
+          "flows_active": 0,
+          "campaigns_last_30d": 0
+        }
+      },
+      "email_health": {
+        "label": "Email Health",
+        "pressure": 60,
+        "trend": "STABLE",
+        "last_check": "2026-01-22T20:52:52.612Z",
+        "sensor_data": {
+          "bounce_rate": 0,
+          "spam_rate": 0,
+          "open_rate": 0,
+          "click_rate": 0,
+          "lists_total": 10,
+          "campaigns_sent_30d": 0,
+          "campaigns_delivered": 0
+        }
       }
     },
     "sales": {
       "lead_velocity": {
         "pressure": 75,
-        "trend": "UP",
-        "last_check": "2026-01-11T21:55:00Z"
+        "trend": "DOWN",
+        "last_check": "2026-01-22T20:52:54.963Z",
+        "sensor_data": {
+          "leads_last_24h": 2
+        }
       },
       "lead_scoring": {
         "pressure": 95,
@@ -156,6 +124,82 @@
         "pressure": 0,
         "trend": "STABLE",
         "last_check": "2026-01-11T21:55:00Z"
+      }
+    },
+    "operations": {
+      "shopify": {
+        "pressure": 75,
+        "trend": "UP",
+        "last_check": "2026-01-22T20:52:03.914Z",
+        "sensor_data": {
+          "products_total": 0,
+          "products_active": 0,
+          "orders_today": 0,
+          "orders_unfulfilled": 0,
+          "orders_pending": 0
+        }
+      }
+    },
+    "finance": {
+      "api_costs": {
+        "label": "API Costs",
+        "pressure": 30,
+        "trend": "UP",
+        "last_check": "2026-01-22T20:52:53.501Z",
+        "sensor_data": {
+          "current_month_usd": 0,
+          "projected_month_usd": 0,
+          "daily_avg_usd": 0,
+          "budget_warning_usd": 100,
+          "budget_critical_usd": 250,
+          "budget_status": "OK",
+          "providers_tracked": 0,
+          "provider_details": []
+        }
+      }
+    },
+    "technology": {
+      "voice_quality": {
+        "label": "Voice Quality",
+        "pressure": 90,
+        "trend": "UP",
+        "last_check": "2026-01-22T20:52:54.518Z",
+        "sensor_data": {
+          "endpoints_healthy": 0,
+          "endpoints_total": 3,
+          "providers_healthy": 0,
+          "providers_configured": 1,
+          "avg_latency_ms": 491,
+          "endpoint_details": [
+            {
+              "name": "Voice API",
+              "status": "DOWN",
+              "latency_ms": -1
+            },
+            {
+              "name": "Grok Realtime",
+              "status": "DOWN",
+              "latency_ms": -1
+            },
+            {
+              "name": "Telephony Bridge",
+              "status": "DOWN",
+              "latency_ms": -1
+            }
+          ],
+          "provider_details": [
+            {
+              "name": "ElevenLabs",
+              "status": "NO_CREDENTIALS",
+              "latency_ms": -1
+            },
+            {
+              "name": "OpenAI Whisper",
+              "status": "ERROR",
+              "latency_ms": 491
+            }
+          ]
+        }
       }
     }
   },

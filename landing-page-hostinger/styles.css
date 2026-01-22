@@ -10,6 +10,28 @@
   display: none !important;
 }
 
+/* CRITICAL FIX: Constrain voice widget logo images - Session 140bis */
+#voice-assistant-widget img[src*="logo.png"] {
+  max-width: 60px !important;
+  max-height: 60px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+#voice-assistant-widget .va-trigger img {
+  width: 40px !important;
+  height: 40px !important;
+  max-width: 40px !important;
+  max-height: 40px !important;
+}
+
+#voice-assistant-widget .va-header-icon img {
+  width: 24px !important;
+  height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    RESET & BASE
    ───────────────────────────────────────────────────────────────────────────── */
