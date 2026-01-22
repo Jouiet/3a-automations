@@ -1,6 +1,11 @@
 # INTERCONNEXIONS SYSTÈME RÉELLES
 ## 3A Automation - Cartographie des Flux
-### Date: 22 Janvier 2026 | Session 138
+### Date: 22 Janvier 2026 | Session 138 | Chiffres Vérifiés
+
+> **FLUX BASÉS SUR COMPOSANTS VÉRIFIÉS (22/01/2026)**
+> - 12 sensors → pressure-matrix → autonomy-daemon → scripts
+> - 7 scripts resilient avec fallback AI (Grok→GPT→Gemini→Claude)
+> - 119 automations orchestrables via DOE dispatcher
 
 ---
 

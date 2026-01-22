@@ -14,7 +14,7 @@
 | Automations | 119 (Registry v3.0.0 - corrected) |
 | SFAP v5.0 | ✅ Level 5 Sovereign (Weaponized) |
 | Agents | 18 (Cortex Swarm) |
-| MCPs | 41/41 (Active Hub) |
+| MCPs | 10/10 (Projet) |
 | SEO/AEO | 100/100 (Deep Forensic) |
 | Security | ✅ SecOps Probe Active. |
 | Trio Audit | 100% (mydealz, henderson, alphamedical) |

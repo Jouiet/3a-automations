@@ -1,6 +1,17 @@
 # ARCHITECTURE SYSTÈME 3A AUTOMATION
 ## Documentation Technique Approfondie
-### Date: 22 Janvier 2026 | Session 138
+### Date: 22 Janvier 2026 | Session 138 | Chiffres Vérifiés
+
+> **CHIFFRES VÉRIFIÉS EMPIRIQUEMENT (22/01/2026)**
+> | Composant | Valeur | Méthode |
+> |-----------|--------|---------|
+> | Scripts Core | 73 | `ls agency/core/*.cjs \| wc -l` |
+> | Scripts Resilient | 7 | `ls *-resilient.cjs` |
+> | Scripts --health | 22 | `grep -l "\-\-health"` |
+> | Skills | 41 | `ls -d .agent/skills/*/` |
+> | Sensors | 12 | `ls *-sensor*.cjs` |
+> | MCPs | 10 | `jq '.mcpServers \| keys'` |
+> | Automations | 119 | `jq '.automations \| length'` |
 
 ---
 
@@ -31,13 +42,13 @@
 │                 (Routage AI, Paiements, APIs)                       │
 ├─────────────────────────────────────────────────────────────────────┤
 │                        COUCHE 8: MCPs                               │
-│              (14 serveurs: Klaviyo, Shopify, GA4...)                │
+│              (10 serveurs: Klaviyo, Shopify, GA4...)                │
 ├─────────────────────────────────────────────────────────────────────┤
 │                      COUCHE 7: PROTOCOLS                            │
 │                    (A2A, UCP, JSON-RPC 2.0)                         │
 ├─────────────────────────────────────────────────────────────────────┤
 │                       COUCHE 6: SKILLS                              │
-│                 (49 personas: agency, devops...)                    │
+│                 (41 personas: agency, devops...)                    │
 ├─────────────────────────────────────────────────────────────────────┤
 │                   COUCHE 5: SCRIPTS RESILIENT                       │
 │           (7 scripts avec fallback AI multi-provider)               │

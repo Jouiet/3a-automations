@@ -10,7 +10,7 @@
 |-----------|-------|--------|
 | **Scripts Core** | 73 | 22 avec --health |
 | **Scripts Generic** | 8 | Utils |
-| **MCPs** | 14 | 4 global + 10 projet |
+| **MCPs** | 10 | Projet configurés |
 | **Automations Registry** | 119 | 96 non testées |
 | **Sensors** | 12 | 50% broken |
 | **Agents Agentic** | 11 | Non testés |
@@ -512,4 +512,4 @@ Architecture documentée:
 *Document généré: 22/01/2026 15:00 UTC*
 *Méthode: Inventaire bottom-up factuel EXHAUSTIF*
 *Session 138 - Audit système complet + A2A, UCP, Skills, DOE, Forensic Engine*
-*TOTAL: 82 scripts + 49 skills + 14 MCPs + 119 automations + 27 forensic files*
+*TOTAL: 73 scripts core + 41 skills + 10 MCPs + 119 automations + 8 forensic files*

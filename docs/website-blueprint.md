@@ -41,7 +41,7 @@
 ```text
 /
 ├── index.html               # Homepage (Landing principale)
-├── automations.html         # Catalogue (174 tools listés)
+├── automations.html         # Catalogue (119 tools listés)
 ├── pricing.html             # Grille tarifaire (3 offres + Retainers)
 ├── booking.html             # Prise de RDV (Iframe Cal)
 ├── cas-clients.html         # Preuve sociale (Racine)
@@ -102,7 +102,7 @@
 
 ### 4.2 Preuve Sociale (Chiffres Vérifiés)
 
-- **Automations**: 174 (Sovereign Units v6.0)
+- **Automations**: 119 (Registry v3.0.0 corrected)
 - **Agents**: 18 (Hardened L5 Swarm)
 - **Partenaires**: 10+ (Logos présents dans `assets/logos/`).
 

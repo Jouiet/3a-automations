@@ -35,7 +35,7 @@ INFRASTRUCTURE OBLIGATOIRE:
 ║   SIGNIFICATION: Automation, Analytics, AI                                   ║
 ║                                                                               ║
 ║   QUOI:     Automatisation AI clé-en-main pour PME                          ║
-║             • 174 outils vérifiés (Level 5 Autonomous)                       ║
+║             • 119 outils vérifiés (Level 5 Autonomous)                       ║
 ║             • Déploiement en 48-72 heures                                    ║
 ║             • 18 agents haute-agence opérationnels                           ║
 ║                                                                               ║
@@ -71,7 +71,7 @@ ONE-LINER:
 3A Automation déploie des systèmes autonomes pour les PME."
 
 ELEVATOR PITCH (30 sec):
-"3A Automation déploie 174 outils AI autonomes en 48-72h.
+"3A Automation déploie 119 outils AI autonomes en 48-72h.
 Nous transformons les PME en organisations 'AI-First' avec
 18 agents haute-agence qui pilotent la croissance 24/7."
 ```
@@ -111,7 +111,7 @@ Nous transformons les PME en organisations 'AI-First' avec
 
 ## 3. CATALOGUE PRODUIT
 
-### 3.1 174 outils Réparties en 12 Catégories
+### 3.1 119 outils Réparties en 12 Catégories
 
 | Catégorie | Nombre | Exemples |
 |-----------|--------|----------|
@@ -311,7 +311,7 @@ COMPARAISON FRANCE (si 30% PFU):
 
 ### 8.2 Barrières à l'Entrée (Moat)
 
-1. **Catalogue propriétaire** - 174 outils vérifiés et documentés
+1. **Catalogue propriétaire** - 119 outils vérifiés et documentés
 2. **Expertise AI multi-provider** - 3 fallbacks (Grok→Gemini→Claude)
 3. **Structure Maroc** - Économie 35% sur coûts opérationnels
 4. **Processus industrialisé** - Déploiement 48-72h reproductible

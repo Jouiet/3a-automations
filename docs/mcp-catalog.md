@@ -1,4 +1,4 @@
-# 3A Global MCP: Tool Catalog (174 Units) catalog lists all **174** proprietary tools exposed via the 3A Global MCP Router. Each tool is designed for high-performance agentic orchestration
+# 3A Global MCP: Tool Catalog (119 Units) catalog lists all **119** proprietary tools exposed via the 3A Global MCP Router. Each tool is designed for high-performance agentic orchestration
 
 ## Lead Generation & Acquisition (26 Tools)
 
