@@ -420,27 +420,48 @@ e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
 | 11 | **Configurer META_ACCESS_TOKEN** | Meta Ads sensor actif | **CRITIQUE** |
 | 12 | **Configurer TIKTOK_API** | TikTok Ads sensor actif | **CRITIQUE** |
 
-### 9.3 Priorite MOYENNE (Ce mois)
+### 9.3 SENSORS A CREER (Liste EXACTE DOE v2)
+
+**Source:** Documents/JO-AAA/docs/AUDIT-FORENSIQUE-DOE-2026-01-22-v2.md (lignes 560-574)
+
+#### Priorite CRITIQUE (13 sensors manquants selon DOE v2)
+
+| # | Sensor Exact DOE v2 | Domaine | Automations | Priorite |
+|---|---------------------|---------|-------------|----------|
+| 1 | email-health-sensor.cjs | Email | 11 | CRITIQUE |
+| 2 | klaviyo-deliverability-sensor.cjs | Email | Bounces, spam | CRITIQUE |
+| 3 | content-performance-sensor.cjs | Content | 19+ | HAUTE |
+| 4 | voice-quality-sensor.cjs | Voice AI | 4 | HAUTE |
+| 5 | inventory-multi-channel-sensor.cjs | Shopify | 5+ | HAUTE |
+| 6 | api-aggregate-health-sensor.cjs | System | ALL | HAUTE |
+| 7 | error-rate-sensor.cjs | System | ALL | HAUTE |
+| 8 | supplier-health-sensor.cjs | Dropshipping | 3 | MOYENNE |
+| 9 | whatsapp-status-sensor.cjs | WhatsApp | 3 | MOYENNE |
+| 10 | social-engagement-sensor.cjs | Content | ~10 | MOYENNE |
+| 11 | payment-health-sensor.cjs | Shopify | ~3 | MOYENNE |
+| 12 | customer-satisfaction-sensor.cjs | Retention | ~5 | MOYENNE |
+| 13 | cost-tracking-sensor.cjs | Finance | ALL | BASSE |
+
+**Verification:** Aucun de ces 13 sensors n'existe actuellement (verifie 22/01/2026)
+
+### 9.4 Priorite MOYENNE (Ce mois - Autres)
 
 | # | Action | Impact |
 |---|--------|--------|
-| 13 | Configurer CJ Dropshipping | Dropshipping active |
-| 14 | Configurer BigBuy | Dropshipping EU active |
-| 15 | Mettre a jour CLAUDE.md | Coherence (14 MCPs) |
-| 16 | Documenter tous credentials | Onboarding facilite |
-| 17 | Payer Apify ou trouver alternative | apify-trends-sensor actif |
-| 18 | Refactorer google-trends-sensor | Contourner blocking Google |
-| 19 | CREER email-sensor.cjs | Couvrir 11 automations email |
-| 20 | CREER content-sensor.cjs | Couvrir 19 automations content |
-| 21 | CREER voice-quality-sensor.cjs | Couvrir 4 automations voice |
+| 14 | Configurer CJ Dropshipping | Dropshipping active |
+| 15 | Configurer BigBuy | Dropshipping EU active |
+| 16 | Mettre a jour CLAUDE.md | Coherence (14 MCPs) |
+| 17 | Documenter tous credentials | Onboarding facilite |
+| 18 | Payer Apify ou trouver alternative | apify-trends-sensor actif |
+| 19 | Refactorer google-trends-sensor | Contourner blocking Google |
 
-### 9.4 Priorite BASSE (Backlog)
+### 9.5 Priorite BASSE (Backlog)
 
 | # | Action | Impact |
 |---|--------|--------|
-| 14 | Tests end-to-end scripts | Fiabilite |
-| 15 | Monitoring alerting | Proactivite |
-| 16 | CI/CD tests automatiques | Qualite code |
+| 20 | Tests end-to-end scripts | Fiabilite |
+| 21 | Monitoring alerting | Proactivite |
+| 22 | CI/CD tests automatiques | Qualite code |
 
 ---
 
