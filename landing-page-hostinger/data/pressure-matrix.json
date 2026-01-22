@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-22T16:34:39.920Z",
+  "last_updated": "2026-01-22T16:55:54.488Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -10,7 +10,7 @@
       "meta_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-22T12:56:15.925Z",
+        "last_check": "2026-01-22T16:55:54.311Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "Meta API credentials missing in .env"
@@ -19,7 +19,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-22T12:56:01.941Z",
+        "last_check": "2026-01-22T16:55:28.465Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -27,84 +27,40 @@
       },
       "market_demand": {
         "label": "Market Demand",
-        "pressure": 50,
-        "trend": "falling",
-        "last_check": "2026-01-22T12:56:34.987Z",
-        "ads_volume": 0,
-        "api_status": "BLOCKED_CREDENTIALS",
+        "pressure": 8,
+        "trend": "DOWN",
+        "last_check": "2026-01-22T16:55:42.272Z",
         "sensor_data": {
-          "rising_context": [],
-          "discovered_trends": [
-            {
-              "title": "sikou niakaté",
-              "traffic": "200+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 03:10:00 -0800"
-            },
-            {
-              "title": "jared kushner",
-              "traffic": "200+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 03:00:00 -0800"
-            },
-            {
-              "title": "rybakina",
-              "traffic": "500+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 02:50:00 -0800"
-            },
-            {
-              "title": "gracheva",
-              "traffic": "200+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 02:50:00 -0800"
-            },
-            {
-              "title": "thomas soliveres",
-              "traffic": "200+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 02:50:00 -0800"
-            },
-            {
-              "title": "amélie de montchalin",
-              "traffic": "1000+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 02:30:00 -0800"
-            },
-            {
-              "title": "board of peace",
-              "traffic": "500+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 02:30:00 -0800"
-            },
-            {
-              "title": "bts world tour",
-              "traffic": "200+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 01:50:00 -0800"
-            },
-            {
-              "title": "utmb",
-              "traffic": "500+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 01:40:00 -0800"
-            },
-            {
-              "title": "sinner",
-              "traffic": "500+",
-              "link": "https://trends.google.com/trending/rss?geo=FR",
-              "pubDate": "Thu, 22 Jan 2026 01:40:00 -0800"
-            }
-          ]
+          "method": "AI Analysis (Grok)",
+          "keywords": [
+            "marketing automation",
+            "ai automation agency",
+            "shopify automation",
+            "e-commerce automation"
+          ],
+          "demand_score": 92,
+          "market_trend": "rising",
+          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation remains very high in January 2026, fueled by AI integration and booming online retail. Trends are strongly rising as businesses prioritize efficiency amid economic pressures and digital transformation."
         }
       },
       "tiktok_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-22T12:56:16.339Z",
+        "last_check": "2026-01-22T16:55:54.487Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "TikTok API credentials missing in .env"
+        }
+      },
+      "klaviyo": {
+        "pressure": 65,
+        "trend": "DOWN",
+        "last_check": "2026-01-22T16:55:36.378Z",
+        "sensor_data": {
+          "lists_total": 10,
+          "flows_total": 0,
+          "flows_active": 0,
+          "campaigns_last_30d": 0
         }
       }
     },
@@ -112,7 +68,7 @@
       "lead_velocity": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-22T16:34:39.918Z",
+        "last_check": "2026-01-22T16:55:29.653Z",
         "sensor_data": {
           "leads_last_24h": 2
         }
@@ -120,7 +76,7 @@
       "lead_scoring": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-22T12:56:16.726Z",
+        "last_check": "2026-01-22T16:55:29.488Z",
         "sensor_data": {
           "quality_score": 3,
           "days_stale": 13
@@ -136,7 +92,7 @@
       "product_enrichment": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-22T12:56:31.488Z",
+        "last_check": "2026-01-22T16:55:29.269Z",
         "sensor_data": {
           "product_count": 0,
           "poor_seo_ratio": "0.00"
@@ -153,6 +109,20 @@
         "pressure": 0,
         "trend": "STABLE",
         "last_check": "2026-01-11T21:55:00Z"
+      }
+    },
+    "operations": {
+      "shopify": {
+        "pressure": 75,
+        "trend": "DOWN",
+        "last_check": "2026-01-22T16:55:35.120Z",
+        "sensor_data": {
+          "products_total": 0,
+          "products_active": 0,
+          "orders_today": 0,
+          "orders_unfulfilled": 0,
+          "orders_pending": 0
+        }
       }
     }
   },
