@@ -51,13 +51,14 @@
 
 **Synthèse: 6 OK (30%), 10 PARTIAL (50%), 4 BLOCKED (20%)**
 
-### DISCORDANCES CRITIQUES (Session 141)
-| Issue | Réalité | Impact |
-|-------|---------|--------|
-| Catalog 77 vs Registry 119 | 42 automations manquantes | Frontend incomplet |
-| llms.txt dit 174 | Devrait être 119 | AEO incohérent |
-| 6 scripts sans defer | CWV dégradé | Performance |
-| Testimonials: 0 | Section absente | Social proof |
+### FIXES APPLIQUÉS (Session 141 - 22/01/2026)
+| Issue | Fix | Status |
+|-------|-----|--------|
+| "174" sur homepage | Remplacé par "119" (FR+EN) | ✅ FIXÉ |
+| "18 agents" sur homepage | Remplacé par "22" (FR+EN) | ✅ FIXÉ |
+| llms.txt dit 174 | Corrigé vers 119 + 22 agents | ✅ FIXÉ |
+| 6 scripts sans defer | defer ajouté à tous | ✅ FIXÉ |
+| Testimonials: 0 | Section absente | ⚠️ P3 |
 
 ### Infrastructure
 - Site principal: ✅ 200 OK

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-22T21:09:02.064Z",
+  "last_updated": "2026-01-22T22:55:08.458Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -19,7 +19,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-22T21:07:02.738Z",
+        "last_check": "2026-01-22T22:54:59.558Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -27,9 +27,9 @@
       },
       "market_demand": {
         "label": "Market Demand",
-        "pressure": 50,
-        "trend": "rising",
-        "last_check": "2026-01-22T21:09:09.661Z",
+        "pressure": 6,
+        "trend": "DOWN",
+        "last_check": "2026-01-22T22:55:07.807Z",
         "sensor_data": {
           "method": "AI Analysis (Grok)",
           "keywords": [
@@ -38,13 +38,10 @@
             "shopify automation",
             "e-commerce automation"
           ],
-          "demand_score": 95,
+          "demand_score": 94,
           "market_trend": "rising",
-          "assessment": "Demand for marketing, AI, Shopify, and e-commerce automation is surging in 2026, fueled by AI advancements enabling hyper-efficient operations and widespread adoption among SMBs scaling online businesses. Trends indicate continued growth as businesses prioritize cost-saving automations amid economic pressures.",
-          "rising_context": []
-        },
-        "ads_volume": 0,
-        "api_status": "BLOCKED_CREDENTIALS"
+          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation is surging due to AI integration and the expansion of online retail, with businesses seeking scalable efficiency tools. By January 2026, adoption rates continue to climb amid economic pressures favoring cost-saving automations."
+        }
       },
       "tiktok_ads": {
         "pressure": 95,
@@ -186,7 +183,7 @@
         "label": "API Costs",
         "pressure": 30,
         "trend": "STABLE",
-        "last_check": "2026-01-22T21:07:38.674Z",
+        "last_check": "2026-01-22T22:55:08.458Z",
         "sensor_data": {
           "current_month_usd": 0,
           "projected_month_usd": 0,
