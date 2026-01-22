@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 53.0 | 22/01/2026 | Session 140 (UI/UX Forensic + Human In The Loop)
+> Version: 54.0 | 22/01/2026 | Session 140bis (P1+P2 Issues Fixed)
 
 ## Identité
 
@@ -12,29 +12,28 @@
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
 | Automations Registry | 119 | Registry v3.0.0 ✅ |
-| Automations Catalog | **77** | ⚠️ DÉSYNC (devrait être 119) |
-| HTML Pages | 64 | FR:32 + EN:32 |
+| Automations Catalog | 119 | ✅ SYNCED (Session 140bis) |
+| HTML Pages | 66 | FR:33 + EN:33 (+2 FAQ) |
 | Scripts --health | 22 | Testables |
 | Sensors | 20 | 8 OK, 8 PARTIAL, 4 BLOCKED |
 
-## SESSION 140 FIXES (22/01/2026)
+## SESSION 140bis FIXES (22/01/2026)
 
 | Fix | Impact | Status |
 | :--- | :--- | :--- |
-| Jargon L5/MCP/Zapier | Copie accessible | ✅ FIXÉ |
-| Data 18→22 agents | Cohérence données | ✅ FIXÉ |
-| Human In The Loop | Rassure décideurs | ✅ FIXÉ |
-| "(100% Autonome)" → "(Vous Gardez le Contrôle)" | Hero FR/EN | ✅ FIXÉ |
+| Catalog 77→119 sync | Data cohérence | ✅ FIXÉ |
+| Scripts defer | CWV LCP/FID | ✅ FIXÉ |
+| FAQ pages FR/EN | SEO/AEO | ✅ FIXÉ |
+| Testimonials section | Social proof | ✅ FIXÉ |
+| .hero-logo-center CSS | UI/UX layout | ✅ FIXÉ |
+| Voice widget duplicates | UI bug | ✅ FIXÉ |
 
-## ISSUES NON TRAITÉES (Session 140)
+## ISSUES RESTANTES (P3)
 
 | Issue | Impact | Priorité |
 | :--- | :--- | :--- |
-| automations-catalog.json 77 vs 119 | Data sync | **P1** |
-| 5 scripts render-blocking | CWV LCP/FID | P2 |
-| Pas de FAQ page | SEO/UX | P2 |
-| Pas de testimonials | Social proof | P2 |
-| Footer logo bug | UI/UX | P2 |
+| Ad carousel images | Marketing | P3 |
+| Persona documentation | Strategy | P3 |
 
 ## BLOCKERS RESTANTS
 
