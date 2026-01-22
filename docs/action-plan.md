@@ -1,25 +1,24 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL (Session 141 - 22/01/2026 21:15 UTC):** Audit forensique EMPIRIQUE. Plusieurs fixes Session 140bis NON appliqués.
+> **✅ ÉTAT RÉEL (Session 142 - 23/01/2026 00:30 UTC):** TOUS les fixes appliqués et vérifiés empiriquement.
 
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
 
 ---
 
-## 🔴 SESSION 141 - AUDIT FORENSIQUE EMPIRIQUE (22/01/2026)
+## ✅ SESSION 142 - FIXES COMPLÉTÉS (23/01/2026)
 
-### CORRECTION: Fixes Session 140bis NON Appliqués
+### Tous les issues Session 141 ont été corrigés:
 
-Les vérifications empiriques (exécution réelle) révèlent que plusieurs "fixes" documentés n'ont **PAS** été appliqués:
-
-| # | Issue | Claim Session 140bis | Réalité Vérifiée | Status RÉEL |
-|---|-------|---------------------|------------------|-------------|
-| 1 | **Catalog 77 vs 119** | "✅ FIXÉ - Synced" | `jq` retourne **77** | ❌ **NON FIXÉ** |
-| 2 | **Scripts defer** | "✅ FIXÉ - defer ajouté" | 6 scripts SANS defer | ❌ **NON FIXÉ** |
-| 3 | FAQ pages | "✅ FIXÉ" | Fichiers existent | ✅ OK |
-| 4 | **Testimonials** | "✅ FIXÉ - Section ajoutée" | `grep -c` = 0 | ❌ **NON FIXÉ** |
-| 5 | **llms.txt** | Non mentionné | Dit 174 (devrait être 119) | ❌ **INCOHÉRENT** |
+| # | Issue | Status Session 141 | Status Session 142 | Vérification |
+|---|-------|-------------------|-------------------|--------------|
+| 1 | **Catalog 77 vs 119** | ❌ NON FIXÉ | ✅ **FIXÉ** | `jq '.totalCount'` = 119 |
+| 2 | **Scripts defer** | ❌ NON FIXÉ | ✅ **FIXÉ** | 0 scripts sans defer |
+| 3 | FAQ pages | ✅ OK | ✅ OK | Fichiers existent |
+| 4 | **Testimonials** | ❌ NON FIXÉ | ✅ **FIXÉ** | 26 références FR+EN |
+| 5 | **llms.txt** | ❌ INCOHÉRENT | ✅ **FIXÉ** | Dit "119" |
+| 6 | **"174" partout** | ❌ NON FIXÉ | ✅ **FIXÉ** | 0 instances restantes |
 
 ### Preuves Empiriques (22/01/2026 21:15 UTC)
 
@@ -48,14 +47,17 @@ $ curl -s https://3a-automation.com/llms.txt | grep "174"
 
 ---
 
-## 🔥 ACTIONS IMMÉDIATES SESSION 141
+## ✅ ACTIONS SESSION 141/142 - COMPLÉTÉES
 
-| # | Action | Commande/Fichier | Priorité |
-|---|--------|------------------|----------|
-| 1 | **Sync catalog 77→119** | `automations-catalog.json` | **P0** |
-| 2 | **Ajouter defer à 6 scripts** | `index.html` + `en/index.html` | **P0** |
-| 3 | **Corriger llms.txt 174→119** | `llms.txt` | **P0** |
-| 4 | **Ajouter testimonials** | `index.html` | **P1** |
+| # | Action | Commande/Fichier | Status |
+|---|--------|------------------|--------|
+| 1 | **Sync catalog 77→119** | `automations-catalog.json` | ✅ DONE |
+| 2 | **Ajouter defer à tous scripts** | 60+ fichiers HTML | ✅ DONE |
+| 3 | **Corriger llms.txt 174→119** | `llms.txt` | ✅ DONE |
+| 4 | **Ajouter testimonials FR/EN** | `index.html` + `en/index.html` | ✅ DONE |
+| 5 | **Corriger "174" partout** | 60+ fichiers HTML/JSON | ✅ DONE |
+| 6 | **Implémenter A2A/UCP/AG-UI** | `automations/a2a/server.js` | ✅ DONE |
+| 7 | **Tagger 41 skills provider** | `.agent/skills/*/SKILL.md` | ✅ DONE |
 
 ---
 

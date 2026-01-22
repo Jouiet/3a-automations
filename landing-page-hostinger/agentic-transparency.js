@@ -19,7 +19,7 @@ async function initAgenticTransparency() {
 
 async function updateAgenticStatus() {
     try {
-        const response = await fetch('data/agentic-status.json');
+        const response = await fetch('/data/agentic-status.json');
         if (!response.ok) return;
         const data = await response.json();
 
@@ -86,7 +86,7 @@ async function updateAgenticStatus() {
 
 async function updateMcpLogs() {
     try {
-        const response = await fetch('data/mcp-logs.json');
+        const response = await fetch('/data/mcp-logs.json');
         if (!response.ok) return;
         const logs = await response.json();
 
@@ -155,7 +155,7 @@ function renderReasoning(container, logs) {
 
 async function updateMarketIntelligence() {
     try {
-        const response = await fetch('data/pressure-matrix.json');
+        const response = await fetch('/data/pressure-matrix.json');
         if (!response.ok) return;
         const gpm = await response.json();
 
