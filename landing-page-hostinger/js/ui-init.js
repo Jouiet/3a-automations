@@ -8,7 +8,7 @@
         var s = document.createElement('script');
         // Determine language from HTML tag
         var lang = document.documentElement.lang || 'fr';
-        s.src = (lang === 'en') ? '/voice-assistant/voice-widget-en.min.js?v=20.1' : '/voice-assistant/voice-widget.min.js?v=20.1';
+        s.src = (lang === 'en') ? '/voice-assistant/voice-widget-en.js?v=21.0' : '/voice-assistant/voice-widget.js?v=21.0';
         s.defer = true;
         document.body.appendChild(s);
     }
