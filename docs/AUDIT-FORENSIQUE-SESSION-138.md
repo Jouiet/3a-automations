@@ -166,7 +166,52 @@ retention-sensor.cjs
 tiktok-ads-sensor.cjs
 ```
 
-### 2.5 Resultats Health Check (Verifie 22/01/2026)
+### 2.5 ETAT REEL DES SENSORS (Teste Empiriquement 22/01/2026)
+
+**ALERTE: 50% des sensors sont CASSES ou BLOQUES**
+
+| # | Sensor | Status | Erreur | Domaine |
+|---|--------|--------|--------|---------|
+| 1 | ga4-sensor | PARTIEL | ROAS=0.00 (pas de data) | Analytics |
+| 2 | gsc-sensor | **BROKEN** | API not enabled in Cloud Console | SEO |
+| 3 | meta-ads-sensor | **DISCONNECTED** | META_ACCESS_TOKEN manquant | Ads |
+| 4 | tiktok-ads-sensor | **DISCONNECTED** | TIKTOK_API manquant | Ads |
+| 5 | retention-sensor | OK | Pressure=0 | Retention |
+| 6 | lead-scoring-sensor | CRITIQUE | Pressure=95 (donnees stale?) | Leads |
+| 7 | lead-velocity-sensor | **BROKEN** | JS error: filter is not a function | Leads |
+| 8 | product-seo-sensor | OK | Pressure=0 | Shopify SEO |
+| 9 | apify-trends-sensor | **BROKEN** | Free trial expired | Trends |
+| 10 | bigquery-trends-sensor | VIDE | 0 rising terms | Trends |
+| 11 | google-trends-sensor | **BROKEN** | Scraping blocked by Google | Trends |
+| 12 | google-ads-planner-sensor | PASSIVE | Credentials missing | Ads |
+
+#### Synthese Sensors
+
+```
+SENSORS FONCTIONNELS:     3/12 (25%)  - retention, product-seo, trends-rss
+SENSORS PARTIELS:         3/12 (25%)  - ga4, lead-scoring, bigquery
+SENSORS CASSES/BLOQUES:   6/12 (50%)  - gsc, meta, tiktok, lead-velocity, apify, google-trends
+```
+
+#### Couverture par Domaine (119 automations)
+
+| Domaine | Automations | Sensor | Couvert? |
+|---------|-------------|--------|----------|
+| lead-gen | 26 | lead-scoring CRITIQUE, lead-velocity BROKEN | PARTIEL |
+| content | 19 | **AUCUN** | NON |
+| shopify | 14 | product-seo OK | PARTIEL |
+| email | 11 | **AUCUN** | NON |
+| seo | 10 | gsc BROKEN, product-seo OK | PARTIEL |
+| analytics | 9 | ga4 PARTIEL | PARTIEL |
+| retention | 4 | retention OK | OUI |
+| voice-ai | 4 | **AUCUN** | NON |
+| dropshipping | 3 | **AUCUN** | NON |
+| marketing/ads | 2+ | meta DISCONN, tiktok DISCONN | NON |
+| Autres | 17 | **AUCUN** | NON |
+
+**COUVERTURE REELLE: ~3-30% (PAS "Level 5 Sovereign")**
+
+### 2.6 Resultats Health Check Scripts (Verifie 22/01/2026)
 
 | Script | Status | Details |
 |--------|--------|---------|
@@ -370,16 +415,24 @@ e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
 | 6 | Configurer Twilio | SMS operationnel | Pending |
 | 7 | ~~Audit Documents vs Desktop~~ | Merge optimal | **COMPLETE** |
 | 8 | Corriger site: 174 -> 119 automations | Honnetete marketing | **CRITIQUE** |
+| 9 | **FIXER gsc-sensor** | Enable GSC API in Cloud Console | **CRITIQUE** |
+| 10 | **FIXER lead-velocity-sensor** | Bug JS: filter is not a function | **CRITIQUE** |
+| 11 | **Configurer META_ACCESS_TOKEN** | Meta Ads sensor actif | **CRITIQUE** |
+| 12 | **Configurer TIKTOK_API** | TikTok Ads sensor actif | **CRITIQUE** |
 
 ### 9.3 Priorite MOYENNE (Ce mois)
 
 | # | Action | Impact |
 |---|--------|--------|
-| 9 | Configurer CJ Dropshipping | Dropshipping active |
-| 10 | Configurer BigBuy | Dropshipping EU active |
-| 11 | Mettre a jour CLAUDE.md | Coherence (14 MCPs) |
-| 12 | Documenter tous credentials | Onboarding facilite |
-| 13 | Creer sensors manquants (email, content, voice) | Couverture reelle |
+| 13 | Configurer CJ Dropshipping | Dropshipping active |
+| 14 | Configurer BigBuy | Dropshipping EU active |
+| 15 | Mettre a jour CLAUDE.md | Coherence (14 MCPs) |
+| 16 | Documenter tous credentials | Onboarding facilite |
+| 17 | Payer Apify ou trouver alternative | apify-trends-sensor actif |
+| 18 | Refactorer google-trends-sensor | Contourner blocking Google |
+| 19 | CREER email-sensor.cjs | Couvrir 11 automations email |
+| 20 | CREER content-sensor.cjs | Couvrir 19 automations content |
+| 21 | CREER voice-quality-sensor.cjs | Couvrir 4 automations voice |
 
 ### 9.4 Priorite BASSE (Backlog)
 
@@ -401,14 +454,17 @@ e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
 | MCPs | 41 | **14** | Clarifier (disponibles vs actifs) |
 | Level | "L5 Sovereign" | L2-3 (sensors insuffisants) | Clarifier |
 
-### DOE v2 vs Realite
+### DOE v2 vs Realite (VERIFIE EMPIRIQUEMENT)
 
 | Element | DOE v2 | SESSION-138 Corrige |
 |---------|--------|---------------------|
 | Dashboard | 502 DOWN | **200 OK** |
 | Blog | Non specifie | **200 OK** |
 | Automations | 174 | **119** |
-| Sensors actifs | 4 | **~8-10** (a verifier) |
+| Sensors actifs | 4 | **3 OK + 3 partiels** |
+| Sensors casses | Non precise | **6/12 (50%)** |
+| Level Autonomy | L5 Sovereign | **L2-3 (couverture 3-30%)** |
+| Couverture sensor | 2.3% (claim) | **~3-30% (verifie)** |
 
 ---
 
