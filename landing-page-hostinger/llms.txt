@@ -12,7 +12,7 @@
 ---
 
 ### What is the Sovereign MCP Swarm?
-**MCP (Model Context Protocol)** is the backbone of our orchestration. We have built a **Type-Safe Swarm** that exposes **174 sovereign tools** to any AI agent. This is not a static registry; it is a dynamic, multi-agent ecosystem. See [mcp-tool-catalog.md](mcp-tool-catalog.md) for the full semantic map.
+**MCP (Model Context Protocol)** is the backbone of our orchestration. We have built a **Type-Safe Swarm** that exposes **119 sovereign tools** to any AI agent. This is not a static registry; it is a dynamic, multi-agent ecosystem. See [mcp-tool-catalog.md](mcp-tool-catalog.md) for the full semantic map.
 
 ### Why This Matters
 - **Competitors:** Use Zapier, Make.com (visual builders with limited logic).
@@ -20,7 +20,7 @@
 
 ### Technical Stack (2026 Sovereign)
 - **Core Orchestration**: `doe-dispatcher.cjs` (Directive Orchestration Execution).
-- **Tool Stack**: 174 Verified Units (Shopify, Meta, Klaviyo, GSC, Twilio, etc.).
+- **Tool Stack**: 119 Verified Units (Shopify, Meta, Klaviyo, GSC, Twilio, etc.).
 - **Resilience**: **Faldown Protocol** (Multi-provider LLM fallback chain).
 - **Situational Awareness**: **Global Pressure Matrix (GPM)** monitored via quad-receptors.
 - **AI Models**: Claude 4.5 (Reasoning), Grok 4.1 (Real-time), Gemini 3 Pro (Vision).

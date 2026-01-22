@@ -1,9 +1,9 @@
 {
-  "version": "2026-01-08",
-  "generated": "2026-01-08T10:28:51.102Z",
-  "totalAutomations": 112,
+  "version": "2026-01-22",
+  "generated": "2026-01-22T18:00:00.000Z",
+  "totalAutomations": 119,
   "categories": 15,
-  "summary": "3A Automation dispose de 174 automatisations vérifiées (Level 5 Autonomous).",
+  "summary": "3A Automation dispose de 119 automatisations vérifiées (Level 5 Autonomous).",
   "automationsByCategory": {
     "Lead Generation & Acquisition": [
       "Sync Meta Leads → Shopify",

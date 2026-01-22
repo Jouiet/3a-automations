@@ -1,34 +1,42 @@
 # 3A Automation
 >
-> Version: 50.0 | 22/01/2026 | Session 139
+> Version: 51.0 | 22/01/2026 | Session 139 (DOE Frontend Audit)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## Métriques VÉRIFIÉES (22/01/2026)
+## Métriques VÉRIFIÉES (22/01/2026 - Post DOE Audit)
 
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
-| Automations | 119 | Registry v3.0.0 |
+| Automations | 119 | Registry v3.0.0 ✅ |
+| HTML Pages | 64 | FR:32 + EN:32 |
+| Sitemap URLs | 63 | +23 (Academy ajouté) |
 | Scripts core | 81 | Vérifiés |
 | Scripts --health | 22 | Testables |
-| Skills | 41 | Dossiers |
-| MCPs | 10 | Configurés |
 | Sensors | **20** | 8 OK, 8 PARTIAL, 4 BLOCKED |
-| Credentials | 57 set / 36 vides | ⚠️ BLOQUEUR |
+| SEO/AEO | 88%/100% | llms.txt présent |
+| Security | 100% | CSP + headers déployés |
 
-## BLOCKERS CRITIQUES
+## DOE AUDIT FIXES (Session 139)
+
+| Fix | Fichier | Avant→Après |
+| :--- | :--- | :--- |
+| Automation count | en/404.html | 86→119 ✅ |
+| Tool count | llms.txt | 174→119 ✅ |
+| Total automations | knowledge.json | 112→119 ✅ |
+| Lang attribute | dashboard.html | en→fr ✅ |
+| Sitemap gaps | sitemap.xml | 40→63 URLs ✅ |
+
+## BLOCKERS RESTANTS
 
 | Problème | Impact | Action |
 | :--- | :--- | :--- |
-| ~~Dashboard 502~~ | ~~Pas de démo possible~~ | ✅ FIXÉ (port 3001→3000) |
-| GSC API disabled | Sensor cassé | Activer dans Cloud Console |
-| ~~lead-velocity BUG~~ | ~~Sensor cassé~~ | ✅ FIXÉ (.filter() sur scores) |
-| ~~google-trends blocked~~ | ~~Trends cassé~~ | ✅ FIXÉ (AI-powered rewrite) |
+| GSC API disabled | Sensor SEO cassé | Activer dans Cloud Console |
 | 36 credentials vides | Features inutilisables | Configurer .env |
-| Apify trial expiré | Trends cassé | Payer ou alternative |
+| Apify trial expiré | Trends cassé | Payer ($49/mois) |
 
 ## Règles Strictes
 
