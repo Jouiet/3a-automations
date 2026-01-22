@@ -79,7 +79,15 @@
 | google-trends-sensor.cjs | Trends | ❌ BROKEN (blocked) |
 | google-ads-planner-sensor.cjs | Ads | ⚠️ PASSIVE (no creds) |
 
-**BILAN SENSORS: 3 OK, 3 Partiels, 6 Broken = 50% non fonctionnels**
+**BILAN SENSORS VÉRIFIÉ (22/01/2026):**
+```
+Tests empiriques: node sensor.cjs
+✅ OK: 2/12 (retention-sensor, product-seo-sensor)
+⚠️ PARTIEL: 4/12 (ga4, lead-scoring, bigquery-trends, google-ads-planner)
+❌ BROKEN: 6/12 (gsc, meta-ads, tiktok-ads, lead-velocity, apify-trends, google-trends)
+
+Taux fonctionnel: 17% (2/12 fully OK)
+```
 
 ### 1.4 Scripts Voice AI (5)
 | Script | Port | Fonction | Status |

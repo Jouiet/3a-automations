@@ -219,11 +219,21 @@
         "unhealthy": 3,
         "critical": 2
       }
+    },
+    {
+      "timestamp": "2026-01-22T11:12:47.351Z",
+      "overall": false,
+      "summary": {
+        "total": 5,
+        "healthy": 4,
+        "unhealthy": 1,
+        "critical": 1
+      }
     }
   ],
-  "lastUpdate": "2026-01-22T09:02:41.031Z",
+  "lastUpdate": "2026-01-22T11:12:47.351Z",
   "lastResults": {
-    "timestamp": "2026-01-22T09:02:41.031Z",
+    "timestamp": "2026-01-22T11:12:47.351Z",
     "overall": false,
     "criticalHealthy": false,
     "endpoints": [
@@ -234,21 +244,22 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 303,
+        "responseTime": 234,
         "critical": true,
-        "timestamp": "2026-01-22T09:02:25.001Z",
+        "timestamp": "2026-01-22T11:12:46.378Z",
         "error": null
       },
       {
         "key": "dashboard",
         "name": "3A Dashboard",
         "url": "https://dashboard.3a-automation.com",
-        "status": 502,
+        "healthy": true,
+        "status": 200,
         "expectedStatus": 200,
-        "responseTime": 331,
+        "responseTime": 174,
         "critical": true,
-        "timestamp": "2026-01-22T09:02:25.091Z",
-        "error": "Expected 200, got 502"
+        "timestamp": "2026-01-22T11:12:46.380Z",
+        "error": null
       },
       {
         "key": "n8n",
@@ -256,25 +267,25 @@
         "url": "https://n8n.srv1168256.hstgr.cloud",
         "status": 404,
         "expectedStatus": 200,
-        "responseTime": 329,
+        "responseTime": 156,
         "critical": true,
-        "timestamp": "2026-01-22T09:02:25.090Z",
+        "timestamp": "2026-01-22T11:12:46.363Z",
         "error": "Expected 200, got 404"
       },
       {
         "key": "wordpress",
         "name": "WordPress Blog",
         "url": "https://wp.3a-automation.com/wp-json/",
-        "healthy": false,
-        "status": 0,
+        "healthy": true,
+        "status": 200,
         "expectedStatus": [
           200,
           504
         ],
-        "responseTime": 15000,
+        "responseTime": 1142,
         "critical": false,
-        "timestamp": "2026-01-22T09:02:41.031Z",
-        "error": "Timeout after 15000ms"
+        "timestamp": "2026-01-22T11:12:47.351Z",
+        "error": null
       },
       {
         "key": "bookingApi",
@@ -286,17 +297,17 @@
           302,
           404
         ],
-        "responseTime": 448,
+        "responseTime": 273,
         "critical": false,
-        "timestamp": "2026-01-22T09:02:25.213Z",
+        "timestamp": "2026-01-22T11:12:46.484Z",
         "error": null
       }
     ],
     "summary": {
       "total": 5,
-      "healthy": 2,
-      "unhealthy": 3,
-      "critical": 2
+      "healthy": 4,
+      "unhealthy": 1,
+      "critical": 1
     }
   }
 }
