@@ -450,8 +450,8 @@ function validateCSSVersionConsistency() {
     addPassed('CSS', `All files use consistent CSS version (v=${version})`);
   } else {
     addError('CSS', 'summary',
-      `Multiple CSS versions detected: ${[...versions.keys()].join(', ')} - run bump-css-version.cjs to fix`,
-      'node scripts/bump-css-version.cjs');
+      `Multiple CSS versions detected: ${[...versions.keys()].join(', ')} - run design-auto-fix.cjs to fix`,
+      'node scripts/design-auto-fix.cjs');
   }
 }
 

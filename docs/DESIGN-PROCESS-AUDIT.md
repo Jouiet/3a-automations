@@ -26,14 +26,14 @@
 | Problème | Cause Racine | Solution |
 |----------|--------------|----------|
 | Titres H1 sans gradient | CSS uniquement sur `.gradient-text`, pas sur `.highlight` | Ajout `.hero-title .highlight` global |
-| CSS non visible après changement | Cache browser, version non incrémentée | Script `bump-css-version.cjs` |
+| CSS non visible après changement | Cache browser, version non incrémentée | Script `design-auto-fix.cjs` |
 | Incohérence versions CSS | Fichiers academy avec path relatifs sans `?v=` | Toutes les références CSS normalisées |
 | Validation H1 manquante | Script ne vérifiait que H2 | Ajout `validateH1Consistency()` |
 
 ### Nouvelles Automatisations
 | Script | Usage | Trigger |
 |--------|-------|---------|
-| `bump-css-version.cjs` | Auto-incrément version CSS | Après modification styles.css |
+| `design-auto-fix.cjs` | Auto-incrément version CSS | Après modification styles.css |
 | `validateH1Consistency()` | Détecte H1 sans classes standard | Pre-commit hook |
 | `validateCSSVersionConsistency()` | Vérifie cohérence version | Pre-commit hook |
 | `validateCSSBaseClasses()` | Vérifie gradient dans classes de base | Pre-commit hook |
@@ -62,7 +62,7 @@
 - CSS version consistency: Vérifie que toutes les pages utilisent la même version CSS
 - CSS base class validation: Vérifie que les classes de titre ont le gradient
 
-### 1.2 bump-css-version.cjs (NEW)
+### 1.2 design-auto-fix.cjs (NEW)
 | Feature | Description |
 |---------|-------------|
 | Auto-detect | Détecte version actuelle dans tous les fichiers HTML |
@@ -71,9 +71,9 @@
 | CSS minification | Re-minifie automatiquement styles.min.css |
 
 **Commands**:
-- `node scripts/bump-css-version.cjs` - Incrémente version
-- `node scripts/bump-css-version.cjs --check` - Vérifie cohérence (CI)
-- `node scripts/bump-css-version.cjs --dry-run` - Mode preview
+- `node scripts/design-auto-fix.cjs` - Incrémente version
+- `node scripts/design-auto-fix.cjs --check` - Vérifie cohérence (CI)
+- `node scripts/design-auto-fix.cjs --dry-run` - Mode preview
 
 ### 1.2 Stylelint
 | Config | Status | Notes |
@@ -200,10 +200,10 @@
 npx stylelint "landing-page-hostinger/styles.css"
 
 # 2. Bumper la version CSS (CRITIQUE pour cache busting)
-node scripts/bump-css-version.cjs
+node scripts/design-auto-fix.cjs
 
 # 3. Vérifier cohérence
-node scripts/bump-css-version.cjs --check
+node scripts/design-auto-fix.cjs --check
 
 # 4. Commit et push
 git add -A && git commit -m "style: description" && git push
