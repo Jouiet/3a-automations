@@ -365,6 +365,144 @@ function validateH2Consistency() {
   }
 }
 
+function validateH1Consistency() {
+  console.log('\n📝 Validating H1 Title Consistency...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  // Pattern for h1 without class attribute
+  const bareH1Pattern = /<h1>([^<]+)<\/h1>/g;
+  // Pattern for h1 with old class
+  const oldClassH1Pattern = /<h1 class="([^"]*)">/g;
+
+  // Files to skip (legal, blog articles have different styling)
+  const skipPaths = ['/blog/', '/legal/', '404.html'];
+
+  // H1 should have one of these classes in section contexts
+  const allowedH1Classes = [
+    'hero-title-ultra',
+    'section-title-ultra',
+    'page-title',
+    'sr-only'  // Screen reader only is acceptable
+  ];
+
+  let totalBareH1 = 0;
+  let totalOldClassH1 = 0;
+
+  for (const file of htmlFiles) {
+    const filePath = relPath(file);
+    if (skipPaths.some(skip => filePath.includes(skip))) continue;
+
+    const content = fs.readFileSync(file, 'utf8');
+
+    // Check bare h1
+    let match;
+    while ((match = bareH1Pattern.exec(content)) !== null) {
+      const h1Text = match[1].trim();
+      // Skip if it's in a hero section (likely intentional)
+      const start = Math.max(0, match.index - 300);
+      const context = content.substring(start, match.index);
+
+      if (!context.includes('hero-')) {
+        totalBareH1++;
+        addWarning('H1', file, `Bare h1 "${h1Text.substring(0, 30)}..." - add hero-title-ultra or section-title-ultra`);
+      }
+    }
+
+    // Check h1 with non-standard classes
+    while ((match = oldClassH1Pattern.exec(content)) !== null) {
+      const classes = match[1].split(' ');
+      const hasAllowed = classes.some(c => allowedH1Classes.includes(c));
+      if (!hasAllowed && !classes.includes('')) {
+        totalOldClassH1++;
+        addWarning('H1', file, `H1 with non-standard class "${match[1]}" - use hero-title-ultra or section-title-ultra`);
+      }
+    }
+  }
+
+  if (totalBareH1 === 0 && totalOldClassH1 === 0) {
+    addPassed('H1', 'All H1 tags have proper classes');
+  }
+}
+
+function validateCSSVersionConsistency() {
+  console.log('\n🔄 Validating CSS Version Consistency...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+  const versions = new Map();
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const match = content.match(/styles\.css\?v=(\d+\.\d+)/);
+    if (match) {
+      const version = match[1];
+      if (!versions.has(version)) {
+        versions.set(version, []);
+      }
+      versions.get(version).push(relPath(file));
+    }
+  }
+
+  if (versions.size === 0) {
+    addWarning('CSS', 'summary', 'No CSS version parameters found - add ?v=X.X for cache busting');
+  } else if (versions.size === 1) {
+    const [version] = versions.keys();
+    addPassed('CSS', `All files use consistent CSS version (v=${version})`);
+  } else {
+    addError('CSS', 'summary',
+      `Multiple CSS versions detected: ${[...versions.keys()].join(', ')} - run bump-css-version.cjs to fix`,
+      'node scripts/bump-css-version.cjs');
+  }
+}
+
+function validateCSSBaseClasses() {
+  console.log('\n🎨 Validating CSS Base Class Definitions...');
+
+  const stylesPath = path.join(CONFIG.SITE_DIR, 'styles.css');
+  if (!fs.existsSync(stylesPath)) return;
+
+  const content = fs.readFileSync(stylesPath, 'utf8');
+
+  // Critical classes that MUST have gradient text effect
+  const gradientClasses = [
+    '.section-title-ultra',
+    '.hero-title-ultra'
+  ];
+
+  // Required properties for gradient text
+  const gradientProps = [
+    'background:',
+    '-webkit-background-clip:',
+    '-webkit-text-fill-color:'
+  ];
+
+  for (const className of gradientClasses) {
+    // Find the base class definition (not nested selectors)
+    const basePattern = new RegExp(`^${className.replace('.', '\\.')}\\s*\\{[^}]+\\}`, 'm');
+    const match = content.match(basePattern);
+
+    if (!match) {
+      addWarning('CSS', 'styles.css', `Base class ${className} not found - may only be in nested selectors`);
+      continue;
+    }
+
+    const classContent = match[0];
+
+    // Check for gradient properties
+    const hasGradient = gradientProps.every(prop =>
+      classContent.includes(prop) || classContent.includes(prop.replace(':', ''))
+    );
+
+    if (!hasGradient) {
+      addError('CSS', 'styles.css',
+        `${className} missing gradient text effect - must have background-clip: text`,
+        `Add gradient properties to base ${className} class`);
+    }
+  }
+
+  addPassed('CSS', 'Base class definitions validated');
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // MAIN
 // ════════════════════════════════════════════════════════════════════════════
@@ -380,7 +518,10 @@ validateAgentCount();
 validateForbiddenPatterns();
 validateSVGIcons();
 validateCSSVariables();
+validateH1Consistency();
 validateH2Consistency();
+validateCSSVersionConsistency();
+validateCSSBaseClasses();
 
 // ════════════════════════════════════════════════════════════════════════════
 // REPORT
