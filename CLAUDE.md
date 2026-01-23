@@ -1,11 +1,47 @@
 # 3A Automation
 >
-> Version: 68.0 | 23/01/2026 | Session 145bis (Academy CSS Fix + Validation Improvements)
+> Version: 69.0 | 23/01/2026 | Session 145ter (Complete Card CSS + SVG Safety)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 145ter - COMPLETE CARD CSS + SVG SAFETY (23/01/2026)
+
+### All Component Cards CSS Added (+500 lines)
+
+| Component | Classes Added | Usage |
+| :--- | :--- | :--- |
+| Blog Cards | `.blog-card`, `.related-card` | Blog index + articles |
+| Case Cards | `.case-card` | cas-clients.html |
+| Process Cards | `.process-card`, `.process-icon` | Methodology sections |
+| Security Cards | `.security-card`, `.security-icon` | Compliance sections |
+| Tech Cards | `.tech-card` | investisseurs.html |
+| Investor Cards | `.investor-card` | investisseurs.html |
+| KPI Cards | `.kpi-card` | flywheel-360.html |
+| Summary Cards | `.summary-card`, `.summary-icon` | Legal pages |
+| Generic Icons | `.brain-icon`, `.section-icon`, `.right-icon` | Various |
+
+### SVG Safety Net Added
+```css
+/* Global SVG constraint for inline icons */
+.card svg:not([width]),
+.icon svg:not([width]),
+[class*="-card"] svg:not([width]),
+[class*="-icon"] svg:not([width]) {
+  max-width: 48px;
+  max-height: 48px;
+}
+```
+
+### Metrics Session 145ter
+- CSS Lines: 10,498 → **10,998** (+500)
+- CSS Version: v=42.0 → **v=43.0**
+- Validator Errors: 15 → **0**
+- Validator Warnings: 20 → **5** (minor)
+
+---
 
 ## SESSION 145bis - ACADEMY CSS + VALIDATION (23/01/2026)
 
@@ -13,32 +49,15 @@
 
 | Issue | Root Cause | Fix |
 | :--- | :--- | :--- |
-| SVG icons 1152px instead of 28px | CSS truncated in production (10,010 vs 10,335 lines) | Synced CSS versions, triggered deployment |
-| Missing .course-card, .guide-card | 16 CSS classes used in HTML but never defined | Added ~100 lines of new CSS |
-| CI blocking deployments | CSS version mismatch (38.0 vs 40.0) | Synced to v=42.0 |
+| SVG icons 1152px instead of 28px | CSS truncated in production | Synced CSS versions |
+| Missing .course-card, .guide-card | 16 CSS classes undefined | Added ~100 lines CSS |
+| CI blocking deployments | CSS version mismatch | Synced to v=42.0 |
 
 ### Validation System Improvements
 
 **NEW VALIDATORS ADDED:**
 1. `validateHTMLClassesHaveCSS()` - Detects HTML classes without CSS
 2. `validateSVGSizeConstraints()` - Detects unconstrained inline SVGs
-
-**TECHNICAL DEBT IDENTIFIED:**
-- 15 component classes without CSS (.blog-card, .kpi-card, etc.)
-- 70 SVGs potentially missing size constraints
-- Set as warnings (not CI blockers) for gradual fix
-
-### Verified LIVE
-- ✅ Academy page: styles.css?v=42.0 loaded
-- ✅ .path-icon svg: width=28px, height=28px
-- ✅ .guide-icon svg: width=24px, height=24px
-- ✅ CSS file: 10,498 lines (complete)
-
-### Commits Session 145bis
-```
-a2f8521 fix(academy): Add missing CSS for course-card and guide-card + sync v=42.0
-9c4398f feat(validation): Add validators for missing CSS classes and unconstrained SVGs
-```
 
 ---
 
