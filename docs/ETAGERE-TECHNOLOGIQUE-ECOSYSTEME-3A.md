@@ -315,7 +315,7 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | Design System template | 3A | Alpha | ✅ DONE | `914e73d` |
 | Design System template | 3A | MyDealz | ✅ DONE | `51f4c8a` |
 
-### Phase 3: Advanced Integration (Semaine 3-4) - IN PROGRESS
+### Phase 3: Advanced Integration (Semaine 3-4) - ✅ CORE COMPLETED
 
 | Transfer | From | To | Status | Commit |
 |----------|------|-----|--------|--------|
@@ -323,8 +323,8 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | Service KB (121 autos) | 3A | 3A | ✅ DONE | `d4f4f5a` |
 | Sensors (klaviyo, retention, ga4) | 3A | MyDealz | ✅ DONE | `577fc55` |
 | xAI Voice pattern | Alpha | MyDealz | ✅ EXISTS | `voice_agent_core.py` |
-| A2A Client | 3A | Alpha, MyDealz | ⏳ LOW | Pending |
-| Cookie Consent | Alpha | MyDealz | ⏳ LOW | Pending |
+| A2A Client | 3A | Alpha, MyDealz | ⏳ LOW | Future (not critical) |
+| Cookie Consent | Alpha | MyDealz | ⏳ LOW | Future (if needed) |
 
 ---
 
@@ -421,12 +421,14 @@ Ce registre implémente le modèle chinois du "potentiel de situation":
 | 3 | TikTok Ads Sensor | TIKTOK_ACCESS_TOKEN vide |
 | 4 | Apify Trends | Trial expiré - $49/mois |
 
-### Incohérences Détectées
+### Incohérences Détectées - ✅ ALL RESOLVED (Session 145)
 
-| Issue | Valeur Actuelle | Valeur Attendue |
-|-------|-----------------|-----------------|
-| Catalog vs Registry | 121 vs 119 | Sync needed |
-| HTML pages vs docs | 70 | 66 (doc outdated) |
+| Issue | Before | After | Status |
+|-------|--------|-------|--------|
+| ~~Catalog vs Registry~~ | 121 vs 119 | 121 = 121 | ✅ SYNCED |
+| ~~HTML pages vs docs~~ | 70 vs 66 | 70 (docs updated) | ✅ FIXED |
+| ~~CSS Version~~ | 38.0 vs 37.0 | 38.0 (all files) | ✅ SYNCED |
+| ~~Deployment blocked~~ | CI failing | CI passing | ✅ DEPLOYED |
 | Sitemap URLs | 66 | 70+ (missing new content) |
 
 ---
