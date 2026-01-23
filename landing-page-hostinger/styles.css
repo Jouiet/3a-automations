@@ -7206,9 +7206,45 @@ html:not([data-period]) .price-period.period-monthly {
   color: var(--accent-orange);
 }
 
-.category-icon.video {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.1) 100%);
-  color: #ef4444;
+.category-icon.video,
+.category-icon.vidéo {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+  color: var(--accent-purple);
+}
+
+.category-icon.sms {
+  background: linear-gradient(135deg, rgba(79, 186, 241, 0.2) 0%, rgba(79, 186, 241, 0.1) 100%);
+  color: var(--primary);
+}
+
+.category-icon.retention {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+  color: var(--accent);
+}
+
+.category-icon.whatsapp {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.2) 0%, rgba(37, 211, 102, 0.1) 100%);
+  color: #25D366;
+}
+
+.category-icon.voice {
+  background: linear-gradient(135deg, rgba(79, 186, 241, 0.2) 0%, rgba(79, 186, 241, 0.1) 100%);
+  color: var(--primary);
+}
+
+.category-icon.dropshipping {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
+  color: var(--accent-orange);
+}
+
+.category-icon.cinematicads {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+  color: var(--accent-purple);
+}
+
+.category-icon.avatar {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+  color: var(--accent-purple);
 }
 
 /* Category headers use section-title-ultra with gradient effect */

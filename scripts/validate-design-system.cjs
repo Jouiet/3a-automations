@@ -503,6 +503,43 @@ function validateCSSBaseClasses() {
   addPassed('CSS', 'Base class definitions validated');
 }
 
+function validateCategoryIconConsistency() {
+  console.log('\n🎯 Validating Category Icon Consistency...');
+
+  const stylesPath = path.join(CONFIG.SITE_DIR, 'styles.css');
+  const cssContent = fs.readFileSync(stylesPath, 'utf8');
+
+  // Find all category-icon classes used in HTML
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+  const usedClasses = new Set();
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const matches = content.matchAll(/class="category-icon\s+([a-zA-Zéèà]+)"/g);
+    for (const match of matches) {
+      usedClasses.add(match[1]);
+    }
+  }
+
+  // Check each used class has CSS definition
+  const missingCSS = [];
+  for (const className of usedClasses) {
+    // Check for CSS definition (with or without accents)
+    const pattern = new RegExp(`\\.category-icon\\.${className}\\s*[,{]`);
+    if (!pattern.test(cssContent)) {
+      missingCSS.push(className);
+    }
+  }
+
+  if (missingCSS.length === 0) {
+    addPassed('Icons', `All ${usedClasses.size} category-icon classes have CSS definitions`);
+  } else {
+    addError('Icons', 'styles.css',
+      `Missing CSS for category-icon classes: ${missingCSS.join(', ')}`,
+      `Add .category-icon.${missingCSS[0]} { background: ...; color: ...; } to styles.css`);
+  }
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // MAIN
 // ════════════════════════════════════════════════════════════════════════════
@@ -522,6 +559,7 @@ validateH1Consistency();
 validateH2Consistency();
 validateCSSVersionConsistency();
 validateCSSBaseClasses();
+validateCategoryIconConsistency();
 
 // ════════════════════════════════════════════════════════════════════════════
 // REPORT
