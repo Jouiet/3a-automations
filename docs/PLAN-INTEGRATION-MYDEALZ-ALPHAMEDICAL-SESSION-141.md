@@ -1007,3 +1007,131 @@ GATE STATUS: [x] 14/15 PASSED | [ ] G4.3 BLOCKED (pressure 60 > 50)
 ### Commits
 - `588de2c` - feat(protocols): A2A, UCP, AG-UI implementation
 - `4c7a913` - fix(website): Complete 174→119 sync + defer + testimonials
+
+---
+
+## SESSION 142ter UPDATES (23/01/2026)
+
+### Question: Transfer Design Automation to Shopify Stores?
+
+**VERDICT: NON - Architectures Incompatibles**
+
+### Audit Factuel des Différences Architecturales
+
+| Aspect | 3A-Automation | Alpha-Medical / MyDealz |
+|--------|---------------|-------------------------|
+| **Stack** | Static HTML/CSS | Shopify Liquid Templates |
+| **Hosting** | Hostinger VPS (nginx) | Shopify CDN |
+| **CSS** | `styles.css` (notre fichier) | `base.css` + assets Shopify |
+| **Templates** | 66 fichiers HTML | 61+ fichiers .liquid |
+| **Déploiement** | Git push → GitHub Action → API Hostinger | Shopify Theme Kit / CLI |
+| **Accès fichiers** | Direct (fs.readFileSync) | Via API ou Theme Kit |
+| **Validation** | Pre-commit hook local | ❌ Non applicable |
+
+### Status Sites Vérifié Empiriquement (23/01/2026 02:54 UTC)
+
+| Site | HTTP Status | Verdict |
+|------|-------------|---------|
+| alphamedical.shop | 301 → www | ✅ LIVE (Shopify) |
+| www.alphamedical.shop | **200 OK** | ✅ Fonctionnel |
+| mydealz.shop | **402 Payment Required** | ❌ STORE SUSPENDU |
+
+**ALERTE CRITIQUE**: mydealz.shop a un problème de paiement Shopify. Le store est suspendu.
+
+### Scripts Design 3A - Analyse Dépendances
+
+| Script | Références `landing-page-hostinger` | Transférable? |
+|--------|-------------------------------------|---------------|
+| validate-design-system.cjs | 5 | ❌ NON |
+| validate-design-extended.cjs | 3 | ❌ NON |
+| design-auto-fix.cjs | 8 | ❌ NON |
+| visual-regression.cjs | 4 | ❌ NON |
+| **TOTAL** | **108 refs hardcodées** | ❌ |
+
+### Ce Qui PEUT Être Transféré (Conceptuellement)
+
+| Élément | Transférable | Effort | Notes |
+|---------|--------------|--------|-------|
+| Palette couleurs CSS | ✅ Oui | Faible | Variables CSS universelles |
+| Règles design (espacements, typo) | ✅ Oui | Faible | Documentation |
+| Logique validation | ⚠️ Partiel | **Élevé** | Réécriture parser Liquid |
+| Pre-commit hooks | ⚠️ Partiel | Moyen | Adapter pour .liquid |
+| CI/CD validation | ❌ Non | - | Architecture différente |
+
+### Ce Qui NE PEUT PAS Être Transféré
+
+| Élément | Raison |
+|---------|--------|
+| Scripts de validation | Parsent HTML, pas Liquid |
+| Auto-fix CSS version | Shopify gère ses propres assets |
+| Pre-commit hook actuel | Paths hardcodés |
+| GitHub Action deploy | API Hostinger ≠ Shopify |
+
+### Effort Réel pour Genericisation
+
+| Option | Effort | ROI | Verdict |
+|--------|--------|-----|---------|
+| **A. Réécrire scripts pour Shopify** | 2-3 semaines | Faible (1 client) | ❌ Non recommandé |
+| **B. Créer framework générique** | 4-6 semaines | Moyen (si 3+ clients) | ⚠️ Prématuré |
+| **C. Documenter principes uniquement** | 1-2 jours | Élevé | ✅ Recommandé |
+
+### Recommandation Finale
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    STRATÉGIE RECOMMANDÉE                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  1. NE PAS transférer les scripts actuels                      │
+│     → Ils sont spécifiques à l'architecture 3A                 │
+│                                                                 │
+│  2. DOCUMENTER les principes de design                         │
+│     → Palette couleurs, espacements, règles CSS                │
+│     → Transférable à TOUT framework                            │
+│                                                                 │
+│  3. CRÉER scripts spécifiques Shopify SI BESOIN                │
+│     → Seulement quand store Alpha-Medical est prioritaire      │
+│     → Utiliser Shopify Theme Check (outil natif)               │
+│                                                                 │
+│  4. GÉNÉRICISER seulement avec 3+ clients même stack           │
+│     → Actuellement: 1 site static (3A)                         │
+│     → 2 stores Shopify (1 suspendu)                            │
+│     → Pas assez de volume pour justifier l'effort              │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Outils Shopify Natifs (Alternative)
+
+| Outil | Usage | Équivalent 3A |
+|-------|-------|---------------|
+| `shopify theme check` | Linting Liquid | validate-design-system.cjs |
+| `shopify theme dev` | Preview local | Live server |
+| `shopify theme push` | Déploiement | GitHub Action |
+| Theme App Extensions | Customisation | design-auto-fix.cjs |
+
+**Source**: [Shopify Theme Check](https://shopify.dev/docs/themes/tools/theme-check)
+
+### Actions Immédiates
+
+| Priorité | Action | Status |
+|----------|--------|--------|
+| **P0** | Résoudre paiement mydealz.shop | ❌ À FAIRE |
+| **P1** | Documenter DESIGN-SYSTEM.md universel | ⚠️ Partiel |
+| **P2** | Explorer `shopify theme check` pour Alpha | À planifier |
+| **P3** | Évaluer genericisation (après 3+ clients) | Reporté |
+
+### Conclusion Session 142ter
+
+> **La question était**: "Doit-on transférer notre automatisation design vers les stores Shopify?"
+>
+> **La réponse factuelle**: NON, car:
+> 1. Architecture incompatible (HTML statique vs Liquid templates)
+> 2. 108 références hardcodées dans les scripts
+> 3. mydealz.shop est SUSPENDU (HTTP 402)
+> 4. ROI négatif pour 1-2 clients
+>
+> **Alternative**: Utiliser outils natifs Shopify + documentation principes
+
+### Commits Session 142ter
+- `72f33d0` - feat(validation): Add comprehensive design validation script
