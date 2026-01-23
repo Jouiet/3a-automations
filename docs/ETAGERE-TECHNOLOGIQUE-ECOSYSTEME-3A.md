@@ -1,7 +1,7 @@
 # ÉTAGÈRE TECHNOLOGIQUE - ÉCOSYSTÈME 3A
 ## Mutualisation des Technologies Selon le Modèle du "Potentiel de Situation"
 
-> **Version**: 2.4 | **Date**: 23/01/2026 | **Session**: 144bis (100% Tasks COMPLETED)
+> **Version**: 2.5 | **Date**: 23/01/2026 | **Session**: 145bis (Validation System Upgraded)
 > **Méthode**: Inspirée du modèle industriel chinois (François Jullien / Sun Tzu)
 > **Principe**: Coopération technique → Potentiel → Concurrence commerciale
 
@@ -52,6 +52,9 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | **Design System** | ✅ Production | `DESIGN-SYSTEM.md` | ✅ OUI |
 | **Stylelint Config** | ✅ 0 issues | `.stylelintrc.cjs` | ✅ OUI |
 | **Visual Regression** | ✅ 9 baselines | `visual-regression/*.png` | ✅ OUI |
+| **Design Validator** | ✅ 12 checks | `validate-design-system.cjs` | ✅ OUI |
+| **HTML→CSS Validator** | ✅ NEW S145 | Détecte classes sans CSS | ✅ OUI |
+| **SVG Size Validator** | ✅ NEW S145 | Détecte SVG sans contraintes | ✅ OUI |
 | **VPS Docker** | ✅ Production | `docker-compose.yml` | ⚠️ Spécifique |
 | **121 Automations** | ✅ Production | `automations-registry.json` | ✅ OUI |
 | **Voice Agent B2B** | ✅ Production | `agency/core/voice-agent-b2b.cjs` | ✅ OUI |

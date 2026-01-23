@@ -1,5 +1,8 @@
 # ANALYSE: Transfert Design Automation → Shopify
-## Alpha Medical & MyDealz | Session 143 | 23/01/2026
+## Alpha Medical & MyDealz | Session 143→145bis | 23/01/2026
+
+> **UPDATE SESSION 145bis:** Nouveaux validateurs ajoutés à 3A (HTML→CSS, SVG Size)
+> Ces validateurs auraient détecté le bug Academy AVANT déploiement.
 
 ---
 
@@ -140,10 +143,15 @@ shopify theme check
 
 | Script | Raison Non-Transferable |
 |--------|------------------------|
-| validate-design-system.cjs | Parse HTML, pas Liquid |
+| validate-design-system.cjs | Parse HTML, pas Liquid (12 validateurs dont 2 nouveaux S145) |
 | design-auto-fix.cjs | Regex pour HTML, cassera Liquid |
 | validate-design-extended.cjs | Même problème |
 | pre-commit hook | Workflow différent |
+
+**NOUVEAUX VALIDATEURS S145bis (3A seulement):**
+- `validateHTMLClassesHaveCSS()` - Détecte classes HTML sans CSS
+- `validateSVGSizeConstraints()` - Détecte SVG inline sans taille
+- Aurait empêché le bug Academy (icônes géantes 1152px)
 
 ### 4.2 Exemple Concret
 

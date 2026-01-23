@@ -1,9 +1,52 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 145 - 23/01/2026):** Content + Marketing + Étagère + Registry/Sitemap + **DEPLOYED LIVE** ✅
+> **✅ ÉTAT RÉEL (Session 145bis - 23/01/2026):** Academy CSS Fix + Validation System Improvements + **DEPLOYED LIVE** ✅
 
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
+
+---
+
+## ✅ SESSION 145bis - ACADEMY CSS + VALIDATION (23/01/2026)
+
+### 1. Bug Critique Corrigé: SVG Géants sur Academy
+
+| Problème | Cause Racine | Solution |
+|----------|--------------|----------|
+| Icônes SVG 1152px au lieu de 28px | CSS tronqué en production (10,010 vs 10,335 lignes) | Sync versions CSS, redéploiement |
+| 16 classes CSS manquantes | .course-card, .guide-card jamais définies | +100 lignes CSS ajoutées |
+| CI bloquant déploiements | Mismatch versions (38.0 vs 40.0) | Synced vers v=42.0 |
+
+### 2. Amélioration Système Validation
+
+**NOUVEAUX VALIDATEURS:**
+| Validateur | Détecte | Status |
+|------------|---------|--------|
+| `validateHTMLClassesHaveCSS()` | Classes HTML sans CSS correspondant | ✅ AJOUTÉ |
+| `validateSVGSizeConstraints()` | SVG inline sans contraintes de taille | ✅ AJOUTÉ |
+
+**DETTE TECHNIQUE IDENTIFIÉE:**
+- 15 classes critiques sans CSS (.blog-card, .kpi-card, .investor-card...)
+- 70 SVGs potentiellement sans contraintes
+- Définis comme **warnings** (pas bloquants CI)
+
+### 3. Métriques Vérifiées Fin Session 145bis
+
+| Métrique | Avant | Après | Vérification |
+|----------|-------|-------|--------------|
+| CSS Version | v=38.0 | **v=42.0** | `grep styles.css?v=` |
+| CSS Lines | 10,010 (tronqué!) | **10,498** | `curl \| wc -l` |
+| Academy styles | ❌ Manquants | ✅ Complets | `grep .course-card` |
+| Validateurs | 10 | **12** | Script count |
+| Warnings design | 0 | **20** | Dette identifiée |
+
+### 4. Commits Session 145bis
+```
+fc145b3 fix(deploy): Sync CSS versions to v=40.0 for deployment
+a2f8521 fix(academy): Add missing CSS for course-card and guide-card + sync v=42.0
+9c4398f feat(validation): Add validators for missing CSS classes and unconstrained SVGs
+7616fa9 docs: Update CLAUDE.md with Session 145bis summary
+```
 
 ---
 
@@ -74,11 +117,16 @@ c9f962e docs: Update session 144 docs with marketing + actionable plan
 | 2 | Alpha Medical: Vérifier Klaviyo key | Email metrics OFF | 15min |
 | 3 | GSC: Activer API | SEO sensor cassé | USER ACTION |
 
-#### P1 - HAUTE (Synchronisation) - ✅ COMPLÉTÉ
+#### P1 - HAUTE (Dette Technique Design) - EN COURS
 | # | Tâche | Impact | Status |
 |---|-------|--------|--------|
-| 1 | ~~Sync Registry 119 → 121~~ | ~~Incohérence docs~~ | ✅ DONE |
-| 2 | ~~Sitemap: +2 URLs academy~~ | ~~SEO incomplet~~ | ✅ DONE |
+| 1 | Ajouter CSS pour .blog-card | Blog page styling | ⏳ TODO |
+| 2 | Ajouter CSS pour .kpi-card | KPI display | ⏳ TODO |
+| 3 | Ajouter CSS pour .investor-card | Investors page | ⏳ TODO |
+| 4 | Contraindre SVGs sans taille | 70 SVGs identifiés | ⏳ TODO |
+| 5 | ~~Sync Registry 119 → 121~~ | ~~Incohérence docs~~ | ✅ DONE |
+| 6 | ~~Sitemap: +2 URLs academy~~ | ~~SEO incomplet~~ | ✅ DONE |
+| 7 | ~~Academy CSS manquant~~ | ~~SVGs géants~~ | ✅ DONE |
 
 #### P2 - MOYENNE (Credentials)
 | # | Tâche | Impact | Effort |

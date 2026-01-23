@@ -1,5 +1,12 @@
 # AUDIT FORENSIQUE - 3A AUTOMATION
-## Session 141 | 22 Janvier 2026 21:15 UTC | VÉRIFICATION 100% EMPIRIQUE
+## Session 141→145bis | 22-23 Janvier 2026 | VÉRIFICATION 100% EMPIRIQUE
+
+> **UPDATE SESSION 145bis (23/01/2026):**
+> - ✅ Catalog désync CORRIGÉ (121=121)
+> - ✅ llms.txt CORRIGÉ (119 automations)
+> - ✅ Scripts defer CORRIGÉ (0 sans defer)
+> - ✅ Academy CSS CORRIGÉ (v=42.0, 10,498 lignes)
+> - ⚠️ 20 warnings design identifiés (dette technique)
 
 ---
 
@@ -20,13 +27,15 @@
 
 ```
 +=====================================================================+
-|  STATUT: MVP TECHNIQUE - FIXES SESSION 140bis NON APPLIQUÉS         |
-|  MATURITE: 81 scripts, 10 MCPs, 119 automations, pre-revenu         |
-|  ALERTE CRITIQUE:                                                    |
-|    - Catalog: 77 (devrait être 119) - 42 automations manquantes     |
-|    - llms.txt: dit 174 (devrait être 119)                           |
-|    - 6 scripts sans defer (performance CWV dégradée)                |
-|    - Testimonials: absents (0 matches)                              |
+|  STATUT: MVP TECHNIQUE - ✅ ISSUES CRITIQUES CORRIGÉS (S145bis)     |
+|  MATURITE: 81 scripts, 10 MCPs, 121 automations, pre-revenu         |
+|  STATUS (23/01/2026):                                               |
+|    - ✅ Catalog: 121 (synced)                                        |
+|    - ✅ llms.txt: 119 automations (corrigé)                         |
+|    - ✅ Scripts defer: tous OK                                       |
+|    - ✅ Testimonials: ajoutés FR+EN                                  |
+|    - ✅ Academy CSS: v=42.0, 10,498 lignes                          |
+|    - ⚠️ 20 warnings design (dette technique)                        |
 |  DASHBOARD: ✅ 200 OK                                                |
 |  SITE: ✅ 200 OK                                                     |
 +=====================================================================+
