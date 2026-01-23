@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 61.0 | 23/01/2026 | Session 143 (Twin Sovereignty Architecture)
+> Version: 62.0 | 23/01/2026 | Session 143 (Agent Count Fix + Visual Verification)
 
 ## Identité
 
