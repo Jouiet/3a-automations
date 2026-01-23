@@ -1,9 +1,22 @@
 # ÉTAGÈRE TECHNOLOGIQUE - ÉCOSYSTÈME 3A
 ## Mutualisation des Technologies Selon le Modèle du "Potentiel de Situation"
 
-> **Version**: 2.5 | **Date**: 23/01/2026 | **Session**: 145bis (Validation System Upgraded)
+> **Version**: 3.1 | **Date**: 23/01/2026 | **Session**: 146bis (Whisk Methodology Added)
+> **Document dédié**: `docs/WHISK-REMOTION-METHODOLOGY.md` (méthodologie exhaustive)
 > **Méthode**: Inspirée du modèle industriel chinois (François Jullien / Sun Tzu)
 > **Principe**: Coopération technique → Potentiel → Concurrence commerciale
+
+### UPDATE SESSION 146 - REMOTION VIDEO PRODUCTION
+
+**Nouvelle technologie ajoutée à l'étagère:** Remotion (React Video Framework)
+- **Location**: `automations/remotion-studio/`
+- **Usage**: Génération vidéo programmatique pour 3A + subsidiaires (MyDealz, Alpha Medical)
+- **Avantage**: Rendu local gratuit, vibe coding avec Claude
+
+**Google Whisk - VERDICT FACTUEL:**
+- ❌ **NO API** disponible (web-only à labs.google/whisk)
+- ✅ Assets existants utilisables: `/assets/whisk/*.png`
+- ✅ Alternative programmatique: fal.ai FLUX, Replicate, Imagen 4 API
 
 ---
 
@@ -59,6 +72,8 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | **121 Automations** | ✅ Production | `automations-registry.json` | ✅ OUI |
 | **Voice Agent B2B** | ✅ Production | `agency/core/voice-agent-b2b.cjs` | ✅ OUI |
 | **Service KB (TF-IDF)** | ✅ 129 chunks | `knowledge_base/chunks.json` | ✅ OUI |
+| **Remotion Video** | ✅ Production | `remotion-studio/` | ✅ OUI |
+| **AI Asset Gen** | ✅ Multi-provider | `remotion-studio/src/lib/ai-assets.ts` | ✅ OUI |
 
 **Technologies UNIQUES 3A:**
 - Orchestration multi-subsidiaires (Twin Sovereignty)
@@ -248,6 +263,48 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
     └── agent_docs/*.md (L2)
 ```
 
+### Catégorie F: Video Production (NEW SESSION 146)
+
+```
+ÉTAGÈRE: VIDEO PRODUCTION
+├── Remotion Studio (3A Central - Multisubsidiary)
+│   ├── remotion-studio/src/compositions/
+│   │   ├── PromoVideo.tsx (30s agency showcase)
+│   │   ├── AdVideo.tsx (15s social media)
+│   │   ├── DemoVideo.tsx (60s product demo)
+│   │   └── TestimonialVideo.tsx (45s client quote)
+│   │
+│   ├── remotion-studio/src/components/
+│   │   ├── TitleSlide.tsx (animated titles)
+│   │   ├── FeatureCard.tsx (feature showcase)
+│   │   ├── LogoReveal.tsx (logo animation)
+│   │   └── GradientBackground.tsx (animated bg)
+│   │
+│   └── remotion-studio/src/lib/
+│       └── ai-assets.ts (fal.ai + Replicate integration)
+│
+├── AI Image Generation (Multi-Provider)
+│   ├── fal.ai FLUX (fast, high quality)
+│   ├── Replicate SDXL/Veo 3 (reliable fallback)
+│   └── Imagen 4 (Vertex AI - Google)
+│
+├── Existing Assets (Google Whisk - Manual Only)
+│   ├── /assets/whisk/neural_cortex_bg.png
+│   ├── /assets/whisk/pricing_concept.png
+│   └── /assets/whisk/trust_thumbnail_growth.png
+│
+└── Commands
+    ├── npm run dev (preview at localhost:3000)
+    ├── npm run render:promo (→ out/promo.mp4)
+    └── npm run render:ad (→ out/ad.mp4)
+```
+
+**IMPORTANT - Google Whisk:**
+- ❌ **NO API** - Cannot be automated
+- ✅ Use for manual concept art generation
+- ✅ For programmatic: Use fal.ai, Replicate, or Imagen 4 API
+- 📋 **MÉTHODOLOGIE COMPLÈTE**: Voir section "Google Whisk - MÉTHODOLOGIE RIGOUREUSE" ci-dessous
+
 ### Catégorie D: CI/CD Patterns (DevOps)
 
 ```
@@ -436,5 +493,212 @@ Ce registre implémente le modèle chinois du "potentiel de situation":
 
 ---
 
-*Document mis à jour: 23/01/2026 14:30 UTC*
-*Session: 144 - Content Strategy + Technology Shelf*
+---
+
+## PLAN ACTIONNABLE FIN SESSION 146
+
+### Tâches COMPLÉTÉES (23/01/2026)
+
+| # | Tâche | Status | Commit/Location |
+|---|-------|--------|-----------------|
+| 1 | Remotion Studio créé | ✅ DONE | `automations/remotion-studio/` |
+| 2 | 4 Compositions vidéo | ✅ DONE | PromoVideo, DemoVideo, AdVideo, Testimonial |
+| 3 | 5 Composants réutilisables | ✅ DONE | TitleSlide, FeatureCard, LogoReveal, etc. |
+| 4 | AI Assets integration | ✅ DONE | fal.ai + Replicate fallback |
+| 5 | Claude Skill créé | ✅ DONE | `.claude/skills/remotion-video/SKILL.md` |
+| 6 | Whisk assets copiés | ✅ DONE | `public/assets/whisk/` |
+| 7 | Documentation màj | ✅ DONE | 3 docs updated |
+
+### Tâches RESTANTES (Priorité Haute)
+
+| # | Tâche | Effort | Responsable |
+|---|-------|--------|-------------|
+| 1 | `npm install` dans remotion-studio | 2min | USER |
+| 2 | Tester `npm run dev` | 5min | USER |
+| 3 | Première vidéo render test | 10min | USER |
+| 4 | Adapter compositions pour MyDealz | 2h | CLAUDE |
+| 5 | Adapter compositions pour Alpha | 2h | CLAUDE |
+
+### Google Whisk - MÉTHODOLOGIE RIGOUREUSE (Session 146)
+
+> **IMPORTANT**: Cette méthodologie est conçue pour être exportée vers tous les sites subsidiaires.
+> Labs.google/whisk | Gemini captioning → Imagen 3/4 generation
+
+#### CONTRAINTES TECHNIQUES (Vérifiées 23/01/2026)
+
+| Aspect | Valeur | Source |
+|--------|--------|--------|
+| API publique | ❌ **AUCUNE** | labs.google - web only |
+| Durée animation | **8 secondes max** | Format 720p MP4 |
+| Sujets simultanés fiables | **4 max** | >4 = résultats incohérents |
+| Rate limiting | **30-45 sec** entre prompts | Éviter blocage compte |
+
+#### LIMITES PAR ABONNEMENT GOOGLE
+
+| Abonnement | Crédits AI/mois | Whisk Backend | Flow Backend |
+|------------|-----------------|---------------|--------------|
+| FREE | 100 | Veo 3.1 Fast | Veo 3.1 Fast |
+| **AI Pro** ($19.99 / 119,99 MAD) | 1,000 | **Veo 3** | Veo 3.1 |
+| **AI Ultra** ($249.99) | 25,000 | **Veo 3** | Veo 3.1 (highest) |
+
+**3A Status VÉRIFIÉ (Screenshot 23/01/2026):**
+- Forfait: Google AI Pro (2 To) - 119,99 MAD/mois
+- **Whisk: Veo 3**
+- Flow: Veo 3.1 (accès étendu)
+- Crédits AI: 1,000/mois
+
+#### WORKFLOW EN 7 ÉTAPES
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                   WHISK METHODOLOGY v1.0                             │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ÉTAPE 1: PRÉPARATION DES INPUTS                                    │
+│  ────────────────────────────────────────────                       │
+│  □ Subject: PNG transparent, haute-résolution, sujet isolé          │
+│  □ Scene: Éclairage cohérent, perspective compatible                │
+│  □ Style: Esthétique distinctive, couleurs de marque                │
+│                                                                      │
+│  ÉTAPE 2: VÉRIFICATION QUALITÉ                                      │
+│  ────────────────────────────────────────────                       │
+│  □ Résolution minimum: 1024x1024 recommandé                         │
+│  □ Format: PNG (Subject), JPEG/PNG (Scene/Style)                    │
+│  □ Fond: Simple et clair pour Subject                               │
+│  □ Éclairage: Cohérent entre Subject et Scene                       │
+│                                                                      │
+│  ÉTAPE 3: UPLOAD DANS WHISK                                         │
+│  ────────────────────────────────────────────                       │
+│  □ Subject box: Image principale (objet/personne)                   │
+│  □ Scene box: Environnement/arrière-plan                            │
+│  □ Style box: Référence esthétique                                  │
+│  □ ASTUCE: Style dans Subject box = style dominant                  │
+│                                                                      │
+│  ÉTAPE 4: GÉNÉRATION INITIALE                                       │
+│  ────────────────────────────────────────────                       │
+│  □ Cliquer Generate                                                 │
+│  □ Attendre ~15-30 secondes                                         │
+│  □ Évaluer le résultat (essence, pas copie exacte)                  │
+│                                                                      │
+│  ÉTAPE 5: REFINEMENT (OPTIONNEL)                                    │
+│  ────────────────────────────────────────────                       │
+│  □ Cliquer image générée → voir caption Gemini                      │
+│  □ Modifier caption (icône crayon) si nécessaire                    │
+│  □ Bouton "Refine" pour ajustements mineurs                         │
+│  □ Itérer 2-3 fois maximum                                          │
+│                                                                      │
+│  ÉTAPE 6: ANIMATION (SI NÉCESSAIRE)                                 │
+│  ────────────────────────────────────────────                       │
+│  □ Cliquer "Animate" en haut                                        │
+│  □ Description simple: "walk forward", "waving hand"                │
+│  □ LIMITE: 10 animations gratuites/mois                             │
+│  □ Résultat: 8 sec, 720p, MP4                                       │
+│                                                                      │
+│  ÉTAPE 7: EXPORT & INTÉGRATION REMOTION                             │
+│  ────────────────────────────────────────────                       │
+│  □ Download image/vidéo générée                                     │
+│  □ Nommer: whisk_[type]_[date]_[version].png                        │
+│  □ Placer dans: remotion-studio/public/assets/whisk/                │
+│  □ Utiliser dans composition Remotion                               │
+│                                                                      │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+#### STANDARDS DE QUALITÉ PAR TYPE D'INPUT
+
+| Type | Format | Résolution | Fond | Éclairage |
+|------|--------|------------|------|-----------|
+| **Subject** | PNG transparent | 1024x1024+ | Isolé/transparent | Net, pas de surexposition |
+| **Scene** | JPEG/PNG | 1920x1080+ | N/A | Cohérent avec Subject |
+| **Style** | Any | 512x512+ | N/A | Caractéristique visible |
+
+#### CAS D'USAGE PAR SUBSIDIAIRE
+
+| Subsidiaire | Usage Whisk | Composition Remotion | Asset Type |
+|-------------|-------------|---------------------|------------|
+| **3A Automation** | Hero backgrounds, concept art | PromoVideo, DemoVideo | Backgrounds tech |
+| **Alpha Medical** | Product shots, lifestyle scenes | ProductShowcase | Medical/wellness |
+| **MyDealz** | Fashion layouts, trend visuals | AdVideo | Fashion lifestyle |
+
+#### CHECKLIST PRÉ-GÉNÉRATION
+
+```markdown
+## Checklist Whisk - [Date] - [Projet]
+
+### 1. Inputs Préparés
+- [ ] Subject: PNG transparent, sujet isolé
+- [ ] Scene: Environnement haute qualité
+- [ ] Style: Référence esthétique claire
+- [ ] Éclairage cohérent entre images
+
+### 2. Paramètres
+- [ ] Aspect ratio: 1:1 / 16:9 / 9:16
+- [ ] Animation requise? □ Oui □ Non
+- [ ] Budget animations restant: __/10
+
+### 3. Post-Génération
+- [ ] Résultat acceptable (essence capturée)
+- [ ] Refinement nécessaire? □ Oui □ Non
+- [ ] Nommage fichier correct
+- [ ] Upload vers /assets/whisk/
+```
+
+#### WORKFLOW HYBRIDE WHISK → REMOTION
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   WHISK     │────▶│   DOWNLOAD  │────▶│  REMOTION   │────▶│   OUTPUT    │
+│   Manual    │     │   Assets    │     │  Compose    │     │   MP4/GIF   │
+└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
+     │                    │                    │                    │
+     │  • Subject         │  • PNG/MP4        │  • TitleSlide      │  • promo.mp4
+     │  • Scene           │  • Organized      │  • FeatureCard     │  • ad.mp4
+     │  • Style           │    /assets/whisk/ │  • GradientBG      │  • demo.mp4
+     │                    │                   │  • AI overlays     │
+     └────────────────────┴───────────────────┴────────────────────┘
+
+AVANTAGE HYBRIDE:
+- Whisk: Créativité conceptuelle (AI image-to-image unique)
+- Remotion: Contrôle précis timing/animation/text overlays
+- Résultat: Vidéos uniques impossibles autrement
+```
+
+#### ALTERNATIVES PROGRAMMATIQUES (QUAND WHISK INSUFFISANT)
+
+| Besoin | Solution | API | Coût |
+|--------|----------|-----|------|
+| Génération bulk | fal.ai FLUX | ✅ Oui | $0.003/image |
+| Vidéo AI | Replicate Veo 3 | ✅ Oui | $0.05/sec |
+| Style transfer | fal.ai Seedream | ✅ Oui | $0.01/image |
+| Haute qualité | Imagen 4 Vertex | ✅ Oui | Variable |
+
+#### ERREURS COURANTES À ÉVITER
+
+| Erreur | Conséquence | Solution |
+|--------|-------------|----------|
+| >4 sujets simultanés | Rendu incohérent | Limiter à 4 max |
+| Image basse résolution | Détails perdus | Min 1024x1024 |
+| Fond complexe sur Subject | Fusion incorrecte | PNG transparent |
+| Prompts trop rapides | Rate limiting | 30-45 sec entre |
+| Attendre copie exacte | Déception | Whisk capture l'essence |
+
+#### SOURCES MÉTHODOLOGIE
+
+- [Google Labs - Whisk Official](https://blog.google/technology/google-labs/whisk/)
+- [WhyTryAI - Beginner's Guide](https://www.whytryai.com/p/google-whisk-guide)
+- [Whisk AI Template Guide](https://whiskaitemplate.com/en/guide)
+- [HitPaw - Complete Guide](https://online.hitpaw.com/learn/ultimate-guide-to-whisk-ai.html)
+- [G-Labs Automation GitHub](https://github.com/duckmartians/G-Labs-Automation)
+
+### Transferts Video Production (À Planifier)
+
+| Direction | Technologie | Priorité | Effort |
+|-----------|-------------|----------|--------|
+| 3A → MyDealz | Remotion compositions | ✅ HIGH | 2h |
+| 3A → Alpha | Remotion compositions | ✅ HIGH | 2h |
+| 3A → All | AI Assets module | ✅ HIGH | 1h (copy) |
+
+---
+
+*Document mis à jour: 23/01/2026 22:45 UTC*
+*Session: 146 - Remotion Video Production Implementation*

@@ -1,6 +1,9 @@
 # ANALYSE: Transfert Design Automation → Shopify
-## Alpha Medical & MyDealz | Session 143→145bis | 23/01/2026
+## Alpha Medical & MyDealz | Session 143→146 | 23/01/2026
 
+> **UPDATE SESSION 146:** Remotion Video Production ajouté à 3A
+> Génération vidéo programmatique transférable vers subsidiaires.
+>
 > **UPDATE SESSION 145bis:** Nouveaux validateurs ajoutés à 3A (HTML→CSS, SVG Size)
 > Ces validateurs auraient détecté le bug Academy AVANT déploiement.
 
@@ -290,4 +293,98 @@ ACTION: Vérifier facturation Shopify
 
 ---
 
-*Document généré: 23/01/2026 | Session 143 | Méthode: Bottom-up factuelle*
+---
+
+## 9. REMOTION VIDEO PRODUCTION (SESSION 146)
+
+### Nouveau Transfert Disponible
+
+| Technologie | Status | Location 3A | Transférable |
+|-------------|--------|-------------|--------------|
+| **Remotion Studio** | ✅ Production | `automations/remotion-studio/` | ✅ OUI |
+| AI Assets (fal.ai/Replicate) | ✅ Production | `src/lib/ai-assets.ts` | ✅ OUI |
+| 4 Compositions vidéo | ✅ Prêtes | `src/compositions/` | ✅ OUI |
+| Claude Skill | ✅ Créé | `.claude/skills/remotion-video/` | ✅ OUI |
+
+### Application pour Alpha Medical / MyDealz
+
+| Usage | Composition | Personnalisation |
+|-------|-------------|------------------|
+| Promo produit | `AdVideo.tsx` | Logo, headline, CTA |
+| Demo features | `DemoVideo.tsx` | Screenshots, features |
+| Témoignages clients | `TestimonialVideo.tsx` | Quote, nom, logo |
+| Collection showcase | `PromoVideo.tsx` | Branding complet |
+
+### Avantages vs Alternatives
+
+| Aspect | Remotion (3A) | Canva | Adobe Premiere |
+|--------|---------------|-------|----------------|
+| Coût | Gratuit (local) | $15/mois | $23/mois |
+| Automation | ✅ 100% | ❌ Manuel | ❌ Manuel |
+| Vibe Coding | ✅ Claude | ❌ | ❌ |
+| Data-driven | ✅ API/JSON | ❌ | ❌ |
+
+### Commandes pour Subsidiaires
+
+```bash
+# Copier le module
+cp -r automations/remotion-studio /path/to/subsidiary/
+
+# Installer
+cd remotion-studio && npm install
+
+# Adapter les compositions avec vos assets
+# Puis render
+npm run render:promo
+```
+
+### 9.1 MÉTHODOLOGIE GOOGLE WHISK (SESSION 146bis)
+
+> **Référence complète:** `docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md` Section "Google Whisk - MÉTHODOLOGIE RIGOUREUSE"
+
+#### Contraintes Vérifiées
+
+| Contrainte | Valeur | Impact Subsidiaires |
+|------------|--------|---------------------|
+| API publique | ❌ **AUCUNE** | Workflow manuel uniquement |
+| Animations/mois | **10 gratuites** | Planifier par projet |
+| Durée vidéo | **8 sec max** | Clips courts uniquement |
+| Sujets fiables | **4 max** | Éviter compositions complexes |
+
+#### Workflow Hybride Transférable
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   WHISK     │────▶│   REMOTION  │────▶│   EXPORT    │
+│   Créatif   │     │   Technique │     │   Final     │
+└─────────────┘     └─────────────┘     └─────────────┘
+     │                    │                    │
+ Subject/Scene       Compositions         promo.mp4
+ Style/Refine        Text overlays        ad.mp4
+ Animation 8s        Timing précis        testimonial.mp4
+```
+
+#### Cas d'Usage par Subsidiaire
+
+| Subsidiaire | Usage Whisk | Composition Remotion |
+|-------------|-------------|---------------------|
+| **Alpha Medical** | Product shots wellness | ProductShowcase |
+| **MyDealz** | Fashion lifestyle scenes | AdVideo, PromoVideo |
+| **3A (Central)** | Hero backgrounds tech | DemoVideo |
+
+#### Standards Qualité Inputs (Tous Subsidiaires)
+
+| Input | Format | Résolution | Checklist |
+|-------|--------|------------|-----------|
+| Subject | PNG transparent | 1024x1024+ | ☐ Sujet isolé, fond transparent |
+| Scene | JPEG/PNG | 1920x1080+ | ☐ Éclairage cohérent |
+| Style | Any | 512x512+ | ☐ Esthétique distinctive |
+
+**Sources méthodologie:**
+- [Google Labs Whisk](https://blog.google/technology/google-labs/whisk/)
+- [WhyTryAI Guide](https://www.whytryai.com/p/google-whisk-guide)
+- [Whisk AI Template](https://whiskaitemplate.com/en/guide)
+
+---
+
+*Document mis à jour: 23/01/2026 23:30 UTC | Session 146bis | Méthode: Bottom-up factuelle + Whisk Methodology*

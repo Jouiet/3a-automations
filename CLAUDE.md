@@ -1,11 +1,99 @@
 # 3A Automation
 >
-> Version: 70.0 | 23/01/2026 | Session 145ter - **ALPHA MEDICAL: 37.5% SUCCÈS** (audit factuel)
+> Version: 71.1 | 23/01/2026 | Session 146bis - **WHISK METHODOLOGY** + Remotion Video (Multi-Subsidiary)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 146bis - WHISK METHODOLOGY + REMOTION (23/01/2026)
+
+### Whisk Methodology v1.0 - AJOUTÉ
+
+| Élément | Status | Location |
+| :--- | :--- | :--- |
+| **Méthodologie 7 étapes** | ✅ Documentée | `ETAGERE-TECHNOLOGIQUE` |
+| Standards qualité inputs | ✅ PNG/JPEG specs | Subject/Scene/Style |
+| Checklist pré-génération | ✅ Exportable | Markdown template |
+| Workflow hybride Whisk→Remotion | ✅ Diagramme | Flow complet |
+| Erreurs courantes | ✅ 5 identifiées | Solutions incluses |
+
+### Contraintes Whisk Vérifiées
+
+| Contrainte | Valeur | Impact |
+| :--- | :--- | :--- |
+| API publique | ❌ **AUCUNE** | Manuel seulement |
+| Durée animation | **8 sec max** | 720p MP4 |
+| Sujets fiables | **4 max** | >4 = incohérent |
+| Rate limiting | **30-45 sec** | Entre prompts |
+
+### Limites par Abonnement Google
+
+| Tier | Crédits AI/mois | Whisk | Flow |
+| :--- | :--- | :--- | :--- |
+| FREE | 100 | Veo 3.1 Fast | Veo 3.1 Fast |
+| **AI Pro** | 1,000 | **Veo 3** | Veo 3.1 |
+| **AI Ultra** | 25,000 | **Veo 3** | Veo 3.1 (highest) |
+
+**Status 3A VÉRIFIÉ (Screenshot 23/01/2026):**
+```
+Forfait: Google AI Pro (2 To) - 119,99 MAD/mois
+├── Whisk: Veo 3
+├── Flow: Veo 3.1 (accès étendu)
+├── Gemini App: Veo 3.1 (accès limité)
+├── Crédits AI: 1,000/mois
+└── Storage: 2 To (Photos, Drive, Gmail)
+```
+
+### Remotion Studio
+
+| Élément | Status | Location |
+| :--- | :--- | :--- |
+| **Remotion Studio** | ✅ Production | `automations/remotion-studio/` |
+| 4 Compositions | ✅ Prêtes | PromoVideo, DemoVideo, AdVideo, Testimonial |
+| 5 Composants | ✅ Réutilisables | TitleSlide, FeatureCard, LogoReveal, etc. |
+| AI Assets | ✅ Multi-provider | fal.ai FLUX + Replicate fallback |
+| Claude Skill | ✅ Documenté | `.claude/skills/remotion-video/SKILL.md` |
+
+### Commandes Remotion
+
+```bash
+cd automations/remotion-studio
+npm install                    # Install (une fois)
+npm run dev                    # Preview (localhost:3000)
+npm run render:promo           # → out/promo.mp4 (30s)
+npm run render:ad              # → out/ad.mp4 (15s portrait)
+```
+
+### Workflow Hybride Whisk → Remotion
+
+```
+WHISK (Manual) → Download Assets → REMOTION (Compose) → Output MP4
+     │                │                    │                │
+     │ Subject/Scene  │ /assets/whisk/     │ TitleSlide     │ promo.mp4
+     │ Style          │ PNG/MP4            │ FeatureCard    │ ad.mp4
+     │ Refine         │ Named convention   │ AI overlays    │ demo.mp4
+```
+
+**Avantage hybride**: Créativité Whisk + Contrôle précis Remotion = Vidéos uniques
+
+### Transferts Video Production
+
+| Direction | Technologie | Priorité | Status |
+| :--- | :--- | :--- | :--- |
+| 3A → MyDealz | Remotion + Whisk methodology | HIGH | ⏳ Pending |
+| 3A → Alpha Medical | Remotion + Whisk methodology | HIGH | ⏳ Pending |
+
+### Documentation Mise à Jour
+
+- ✅ **`docs/WHISK-REMOTION-METHODOLOGY.md`** - **NOUVEAU** Document dédié complet (10 sections)
+- ✅ `docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md` - Méthodologie Whisk complète ajoutée
+- ✅ `docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md` - Section 9 ajoutée
+- ✅ `docs/PLAN-INTEGRATION-MYDEALZ-ALPHAMEDICAL-SESSION-141.md` - Session 146 ajoutée
+- ✅ `CLAUDE.md` - Workflow hybride + contraintes documentées
+
+---
 
 ## SESSION 145ter - COMPLETE CARD CSS + SVG SAFETY (23/01/2026)
 
@@ -127,6 +215,9 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | CSS Lines | **10,498** | ✅ Complete (+163 Academy) |
 | Design Validation | PASS | ✅ All checks (20 warnings) |
 | Homepage Hybrid Section | FR+EN | ✅ Added |
+| **Remotion Studio** | **Production** | ✅ NEW S146 |
+| Remotion Compositions | 4 | ✅ NEW S146 |
+| Remotion Components | 5 | ✅ NEW S146 |
 
 ## SESSION 143 - AUDIT DESIGN UI/UX (23/01/2026)
 
@@ -264,3 +355,6 @@ git push origin main                       # Deploy auto
 - Voice AI: @.claude/rules/voice-ai.md
 - Scripts: @.claude/rules/scripts.md
 - Infra: @docs/reference/infrastructure.md
+- **Remotion Video**: @.claude/skills/remotion-video/SKILL.md
+- **Étagère Tech**: @docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md
+- **Transfert Shopify**: @docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md

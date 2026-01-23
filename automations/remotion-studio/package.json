@@ -1,0 +1,47 @@
+{
+  "name": "3a-remotion-studio",
+  "version": "1.0.0",
+  "description": "Programmatic video production for 3A Automation - Remotion + AI",
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion bundle",
+    "render": "remotion render",
+    "render:promo": "remotion render PromoVideo out/promo.mp4",
+    "render:demo": "remotion render DemoVideo out/demo.mp4",
+    "render:ad": "remotion render AdVideo out/ad.mp4",
+    "render:hero": "remotion render HeroArchitecture out/hero-architecture.mp4",
+    "render:hero-loop": "remotion render HeroArchitecture-Loop out/hero-architecture-loop.mp4",
+    "upgrade": "remotion upgrade",
+    "health": "node scripts/health-check.cjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/gif": "^4.0.0",
+    "@remotion/player": "^4.0.0",
+    "@remotion/transitions": "^4.0.0",
+    "@remotion/zod-types": "^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "dotenv": "^16.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "3A Automation",
+  "license": "MIT",
+  "remotion": {
+    "compositions": "./src/Root.tsx"
+  }
+}

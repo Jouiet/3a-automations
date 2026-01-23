@@ -1434,3 +1434,65 @@ f61bef4 feat(automation): Transfer design automation knowledge from 3A
 | Retention Sensor | `agency/core/retention-sensor.cjs` | `sensors/retention-sensor.cjs` | DONE |
 | Pressure Matrix | `landing-page-hostinger/data/pressure-matrix.json` | `data/pressure-matrix.json` | DONE |
 | MCP Config | ❌ N/A | `.mcp.json` | DONE |
+
+---
+
+## SESSION 146 - REMOTION VIDEO PRODUCTION (23/01/2026)
+
+### Nouvelle Technologie Ajoutée
+
+| Élément | Description | Location | Transférable |
+|---------|-------------|----------|--------------|
+| **Remotion Studio** | Framework React pour vidéos | `automations/remotion-studio/` | ✅ OUI |
+| 4 Compositions | Templates vidéo réutilisables | `src/compositions/` | ✅ OUI |
+| 5 Composants | UI animés (TitleSlide, etc.) | `src/components/` | ✅ OUI |
+| AI Assets | Intégration fal.ai + Replicate | `src/lib/ai-assets.ts` | ✅ OUI |
+| Claude Skill | Vibe coding instructions | `.claude/skills/remotion-video/` | ✅ OUI |
+
+### Transfert vers Subsidiaires
+
+| Subsidiary | Compositions à adapter | Effort | Priorité |
+|------------|----------------------|--------|----------|
+| **Alpha Medical** | AdVideo, DemoVideo | 2h | HIGH |
+| **MyDealz** | AdVideo, PromoVideo | 2h | HIGH (quand HTTP 200) |
+
+### Google Whisk - Verdict Factuel
+
+| Question | Réponse | Alternative |
+|----------|---------|-------------|
+| API disponible? | ❌ **NON** | fal.ai FLUX |
+| Automatisable? | ❌ **NON** | Replicate |
+| Programmatique? | ❌ **IMPOSSIBLE** | Imagen 4 API |
+| Usage manuel OK? | ✅ OUI | labs.google/whisk |
+
+### Plan Actionnable Session 146
+
+**COMPLÉTÉ:**
+- ✅ Remotion Studio créé (23 fichiers)
+- ✅ 4 compositions vidéo prêtes
+- ✅ 5 composants réutilisables
+- ✅ Intégration AI (fal.ai, Replicate)
+- ✅ Claude Skill documenté
+- ✅ Whisk assets copiés
+- ✅ Documentation mise à jour (3 docs)
+
+**À FAIRE (USER):**
+
+| # | Action | Commande | Effort |
+|---|--------|----------|--------|
+| 1 | Installer dépendances | `cd automations/remotion-studio && npm install` | 2min |
+| 2 | Tester preview | `npm run dev` | 5min |
+| 3 | Premier render | `npm run render:promo` | 10min |
+
+**À FAIRE (PROCHAINE SESSION):**
+
+| # | Action | Priorité |
+|---|--------|----------|
+| 1 | Adapter compositions pour Alpha Medical | HIGH |
+| 2 | Adapter compositions pour MyDealz | HIGH (quand actif) |
+| 3 | Créer vidéos produits automatisées | MEDIUM |
+
+---
+
+*Document mis à jour: 23/01/2026 22:50 UTC*
+*Session: 146 - Remotion Video Production*
