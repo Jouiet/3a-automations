@@ -71,6 +71,20 @@
 | Klaviyo Key 401 | Email metrics OFF | Vérifier clé API |
 | MyDealz HTTP 402 | Store suspendu | Payer Shopify |
 
+### Status des Phases (Mise à jour Session 143)
+
+| Phase | Description | Status | Notes |
+|-------|-------------|--------|-------|
+| **Phase 0** | Migration ACP → A2A | ✅ DONE | A2A production, ACP maintenu |
+| **Phase 1** | UCP Production | ✅ DONE | 3A UCP + Alpha proxy |
+| **Phase 2** | A2A Production | ✅ DONE | 43 agents (10 core + 41 skills) |
+| **Phase 3** | MCP Per-Store | ✅ DONE | Alpha Medical `.mcp.json` |
+| **Phase 4** | Skills Tagging | ✅ DONE | 41/41 skills tagged |
+| **Phase 5** | Sensors Deployment | ✅ DONE | Alpha: 3 sensors + sync |
+| **Phase 6** | Governance AG-UI | ✅ DONE | `/ag-ui`, `/ag-ui/queue` |
+| **Phase 7** | AEO llms.txt | ✅ DONE | UCP/A2A section added |
+| **MyDealz** | Full integration | ❌ BLOCKED | HTTP 402 Payment Required |
+
 ---
 
 ## TABLE DES MATIÈRES
