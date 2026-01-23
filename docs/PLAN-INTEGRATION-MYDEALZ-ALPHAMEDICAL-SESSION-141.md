@@ -1,8 +1,75 @@
 # PLAN D'INTÉGRATION TECHNOLOGIES 3A
 ## MyDealz + Alpha-Medical → Production-Ready
 
-> **Version**: 1.0 | **Date**: 22/01/2026 | **Session**: 141
+> **Version**: 2.0 | **Date**: 23/01/2026 | **Session**: 143
 > **Auteur**: Claude Opus 4.5 | **Méthode**: Audit Forensique Bottom-Up
+
+---
+
+## MISE À JOUR SESSION 143 (23/01/2026)
+
+### Corrections Factuelles
+
+| Claim Session 141 | Réalité Vérifiée | Preuve |
+|-------------------|------------------|--------|
+| "UCP = SQUELETTE" | ❌ FAUX - UCP est COMPLET | `/pages/api/ucp/products.js` charge depuis `data/ucp-services.json` |
+| "ACP = OBSOLÈTE" | ⚠️ PARTIEL - ACP reste utile | `/automations/acp/server.js` offre job queue async |
+| "Claude Cowork n'existe pas" | ❌ FAUX - AG-UI existe | `/automations/a2a/server.js:416-518` (AG-UI endpoints) |
+
+### Protocoles - Status VÉRIFIÉ
+
+| Protocole | Status | Fichier Principal | Endpoints |
+|-----------|--------|-------------------|-----------|
+| **A2A** | ✅ PRODUCTION | `automations/a2a/server.js` | `/a2a/v1/rpc`, `/.well-known/agent.json` |
+| **UCP** | ✅ PRODUCTION | `pages/api/ucp/products.js` | `/.well-known/ucp`, `/api/ucp/products` |
+| **ACP** | ✅ FONCTIONNEL | `automations/acp/server.js` | `/acp/v1/agent/submit`, `/acp/v1/stream` |
+| **GPM** | ✅ PRODUCTION | `landing-page-hostinger/data/pressure-matrix.json` | Central avec subsidiaries |
+
+### Implémentations Alpha Medical (Session 143)
+
+| Élément | Status | Fichier |
+|---------|--------|---------|
+| Shopify Sensor | ✅ Créé | `sensors/shopify-sensor.cjs` |
+| Klaviyo Sensor | ✅ Créé | `sensors/klaviyo-sensor.cjs` |
+| Retention Sensor | ✅ Créé | `sensors/retention-sensor.cjs` |
+| Sync to 3A | ✅ Créé | `sensors/sync-to-3a.cjs` |
+| GPM Local | ✅ Actif | `data/pressure-matrix.json` |
+| Theme Check | ✅ Workflow | `.github/workflows/theme-check.yml` |
+| Pre-commit Hook | ✅ Actif | `.husky/pre-commit` |
+| GitHub Action Sensors | ✅ Workflow | `.github/workflows/sensor-monitor.yml` |
+
+### Architecture Twin Sovereignty
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    3A-AUTOMATION (CENTRAL)                   │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌───────────────┐  │
+│  │   A2A   │  │   UCP   │  │   ACP   │  │  GPM Central  │  │
+│  │ Server  │  │  API    │  │ Queue   │  │ (Subsidiaries)│  │
+│  └─────────┘  └─────────┘  └─────────┘  └───────┬───────┘  │
+└────────────────────────────────────────────────│───────────┘
+                                                  │
+                    ┌────────────────────────────┼────────────┐
+                    │                            │            │
+            ┌───────▼───────┐            ┌───────▼───────┐    │
+            │ ALPHA-MEDICAL │            │   MYDEALZ     │    │
+            │   (Shopify)   │            │   (Shopify)   │    │
+            │ ┌───────────┐ │            │ ┌───────────┐ │    │
+            │ │  Sensors  │ │            │ │  Sensors  │ │    │
+            │ │ (3 actifs)│ │            │ │ (pending) │ │    │
+            │ └─────┬─────┘ │            │ └───────────┘ │    │
+            │       │       │            │    HTTP 402   │    │
+            │  GPM Local    │            │   SUSPENDU    │    │
+            └───────────────┘            └───────────────┘    │
+```
+
+### Blockers Restants
+
+| Blocker | Impact | Action Requise |
+|---------|--------|----------------|
+| Shopify Token 403 | Sensors inactifs | Régénérer token Admin API |
+| Klaviyo Key 401 | Email metrics OFF | Vérifier clé API |
+| MyDealz HTTP 402 | Store suspendu | Payer Shopify |
 
 ---
 
