@@ -205,7 +205,7 @@ COMMITS:
 | CSS Files | 10 | Optimisés |
 | JS Files | 16 | Minifiés |
 | Images | 52 | 9 PNG→WebP possible |
-| Sitemap URLs | 40→63 | +23 (Academy missing) |
+| Sitemap URLs | 40→64 | ✅ Academy+FAQ added (Session 144) |
 | hreflang | ✅ | Bidirectionnel correct |
 | robots.txt | ✅ | AI crawlers autorisés |
 | llms.txt (AEO) | ✅ | Présent |
@@ -245,16 +245,16 @@ COMMITS:
 | **22 scripts --health** | Tests automatisés | Fiabilité système |
 | **Dashboard live** | Monitoring temps réel | Transparence agentic |
 
-### WEAKNESSES (Faiblesses Identifiées)
+### WEAKNESSES (Faiblesses Identifiées) - UPDATED Session 144
 
-| Faiblesse | Impact | Action Recommandée |
-|-----------|--------|-------------------|
-| **automations-catalog.json** | 77 entries vs 119 registry | Sync avec registry |
-| **Pas de FAQ dédié** | Questions dispersées | Créer /faq.html FR/EN |
-| **Blog 5 articles seulement** | SEO limité | Objectif 20+ articles |
-| **Pas de page testimonials** | Social proof faible | Collecter témoignages |
-| **0 clients payants** | Pas de revenue proof | Priorité commerciale |
-| **Images PNG restantes** | 4 favicons/originals | Acceptable (sources) |
+| Faiblesse | Impact | Action Recommandée | Status |
+|-----------|--------|-------------------|--------|
+| ~~automations-catalog.json~~ | ~~77 entries vs 119~~ | ~~Sync avec registry~~ | ✅ FIXÉ (121) |
+| ~~Pas de FAQ dédié~~ | ~~Questions dispersées~~ | ~~Créer /faq.html FR/EN~~ | ✅ EXISTE |
+| **Blog 5 articles seulement** | SEO limité | Objectif 20+ articles | ⏳ P2 |
+| ~~Pas de page testimonials~~ | ~~Social proof faible~~ | ~~Ajouter section~~ | ✅ AJOUTÉ |
+| **0 clients payants** | Pas de revenue proof | Priorité commerciale | ⏳ BUSINESS |
+| **Images PNG restantes** | 4 favicons/originals | Acceptable (sources) | ✅ OK |
 
 ### OPPORTUNITIES (Opportunités)
 
@@ -289,15 +289,15 @@ COMMITS:
 | 2 | Activer GSC API | 5min | Sensor SEO OK | Dev |
 | 3 | Créer 1er client pilote | Variable | PMF proof | Business |
 
-### P1 - HAUTE (Améliorent l'offre)
+### P1 - HAUTE (Améliorent l'offre) - UPDATED Session 144
 
-| # | Action | Effort | Impact |
-|---|--------|--------|--------|
-| 4 | Sync automations-catalog.json | 30min | Data consistency |
-| 5 | Créer FAQ.html FR/EN | 2h | SEO + UX |
-| 6 | Configurer META_ACCESS_TOKEN | 1h | Meta Ads sensor |
-| 7 | Configurer TIKTOK_ACCESS_TOKEN | 1h | TikTok sensor |
-| 8 | Payer Apify ($49/mois) | $$ | Trends sensor |
+| # | Action | Effort | Impact | Status |
+|---|--------|--------|--------|--------|
+| ~~4~~ | ~~Sync automations-catalog.json~~ | ~~30min~~ | ~~Data consistency~~ | ✅ DONE (121) |
+| ~~5~~ | ~~Créer FAQ.html FR/EN~~ | ~~2h~~ | ~~SEO + UX~~ | ✅ EXISTS |
+| 6 | Configurer META_ACCESS_TOKEN | 1h | Meta Ads sensor | ⏳ USER |
+| 7 | Configurer TIKTOK_ACCESS_TOKEN | 1h | TikTok sensor | ⏳ USER |
+| 8 | Payer Apify ($49/mois) | $$ | Trends sensor | ⏳ USER |
 
 ### P2 - MOYENNE (Optimisations)
 
