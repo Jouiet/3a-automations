@@ -11,15 +11,15 @@
 - ❌ Claims sans test empirique
 - ❌ Wishful thinking
 
-## VÉRIFIÉ EMPIRIQUEMENT (Session 142 - 23/01/2026 00:00 UTC)
+## VÉRIFIÉ EMPIRIQUEMENT (Session 144bis - 23/01/2026 10:00 UTC)
 
 ### Métriques Core
 | Métrique | Valeur | Méthode Vérification |
 |----------|--------|----------------------|
 | Scripts core | 81 | `ls agency/core/*.cjs` |
 | Scripts --health | 22 | `grep -l "\-\-health"` |
-| Automations registry | 119 | `jq '.automations \| length'` |
-| Automations catalog | 119 | ✅ **SYNCED** |
+| Automations registry | **121** | `jq '.automations \| length'` (+voice-agent-b2b, kb-services) |
+| Automations catalog | **121** | ✅ **SYNCED** |
 | Skills | 41 | `ls -d .agent/skills/*/` (all tagged with provider) |
 | Sensors | 20 | `ls *-sensor*.cjs` |
 | Credentials SET | 57 | `grep -E "^[A-Z_]+=.+"` |

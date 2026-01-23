@@ -1,7 +1,7 @@
 {
   "version": "3.0.0",
-  "lastUpdated": "2026-01-20T12:20:00Z",
-  "totalCount": 119,
+  "lastUpdated": "2026-01-23T10:00:00Z",
+  "totalCount": 121,
   "description": "Sovereign single source of truth for all 119 3A Automation services",
   "categories": {
     "lead-gen": {
@@ -2369,6 +2369,57 @@
       "benefit_fr": "Discovery trends sans blocage",
       "benefit_en": "Unblocked trends discovery",
       "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability"
+      ]
+    },
+    {
+      "id": "voice-agent-b2b",
+      "name_fr": "Agent Vocal B2B (Sales + Support)",
+      "name_en": "B2B Voice Agent (Sales + Support)",
+      "category": "voice-ai",
+      "type": "script",
+      "script": "agency/core/voice-agent-b2b.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "24/7 disponible",
+      "frequency_en": "24/7 available",
+      "benefit_fr": "Ventes + Support automatisés pour agence B2B",
+      "benefit_en": "Automated Sales + Support for B2B agency",
+      "features": [
+        "RAG Knowledge Base (129 chunks)",
+        "TF-IDF search (598 terms)",
+        "Multi-AI fallback",
+        "Service pack recommendations"
+      ],
+      "status": "tested-ok",
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning",
+        "Interactive Autonomy"
+      ]
+    },
+    {
+      "id": "knowledge-base-services",
+      "name_fr": "Knowledge Base Services (TF-IDF)",
+      "name_en": "Service Knowledge Base (TF-IDF)",
+      "category": "voice-ai",
+      "type": "script",
+      "script": "agency/core/knowledge-base-services.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Build on demand",
+      "frequency_en": "Build on demand",
+      "benefit_fr": "Index 119 automations pour Voice AI",
+      "benefit_en": "Index 119 automations for Voice AI",
+      "features": [
+        "TF-IDF indexing",
+        "129 searchable chunks",
+        "598 vocabulary terms",
+        "Cosine similarity search"
+      ],
+      "status": "tested-ok",
+      "agentic_level": 1,
       "capabilities": [
         "Data Interoperability"
       ]

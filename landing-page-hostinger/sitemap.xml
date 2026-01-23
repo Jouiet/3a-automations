@@ -680,4 +680,24 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Academy Course: Hybrid Architecture FR -->
+  <url>
+    <loc>https://3a-automation.com/academy/courses/architecture-hybride.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/courses/architecture-hybride.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/hybrid-architecture.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Hybrid Architecture EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/courses/hybrid-architecture.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/courses/architecture-hybride.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/hybrid-architecture.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 65.0 | 23/01/2026 | Session 144 (Content + Marketing + Technology Shelf)
+> Version: 66.0 | 23/01/2026 | Session 144bis (Registry Sync + Sitemap Fix)
 
 ## Identité
 
@@ -42,12 +42,12 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
 | Scripts Core | 81 | ✅ |
-| Automations Registry | 119 | ✅ |
-| Automations Catalog | 121 | ⚠️ +2 (voice-agent-b2b, kb-services) |
+| Automations Registry | **121** | ✅ SYNCED (+2) |
+| Automations Catalog | **121** | ✅ SYNCED |
 | HTML Pages | **70** | ✅ (+4 blog/academy) |
 | Blog Articles FR | 5 | ✅ |
 | Academy Courses | 8 | ✅ (1 FR + 7 EN) |
-| Sitemap URLs | 66 | ⚠️ Needs +4 for new content |
+| Sitemap URLs | **68** | ✅ FIXED (+2 academy)
 | Scripts --health | 22 | ✅ |
 | Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
 | Sensors MyDealz | 5 | ✅ Transferred |
