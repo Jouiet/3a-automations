@@ -10307,6 +10307,169 @@ html[data-currency="USD"] .price-usd {
   color: var(--primary);
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   COURSE CARDS - Academy Course Catalog
+   ═══════════════════════════════════════════════════════════════════ */
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(79, 186, 241, 0.4);
+}
+
+.course-header {
+  padding: var(--spacing-lg);
+  background: rgba(79, 186, 241, 0.05);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.course-category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-xs);
+}
+
+.course-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-xs);
+}
+
+.course-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.course-body {
+  padding: var(--spacing-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-outcomes {
+  flex: 1;
+}
+
+.course-outcomes-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-sm);
+}
+
+.course-outcome {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.course-outcome svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.course-meta {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.course-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.course-meta-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   GUIDE CARDS - Academy Quick Guides
+   ═══════════════════════════════════════════════════════════════════ */
+
+.guide-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.guide-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(79, 186, 241, 0.4);
+}
+
+.guide-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(79, 186, 241, 0.1);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.guide-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--primary);
+}
+
+.guide-content {
+  flex: 1;
+}
+
+.guide-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 2px;
+}
+
+.guide-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
 /* Mobile Adjustments */
 @media (max-width: 768px) {
   .hero-features {
