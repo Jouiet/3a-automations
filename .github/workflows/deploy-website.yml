@@ -37,8 +37,13 @@ jobs:
 
       - name: Run Design System Validation
         run: |
+          echo "🔍 Running design-auto-fix checks..."
+          node scripts/design-auto-fix.cjs --check
+
+          echo "🎨 Running full design system validation..."
           node scripts/validate-design-system.cjs --ci
-          echo "✅ Design system validation passed"
+
+          echo "✅ All design validations passed"
 
   deploy:
     runs-on: ubuntu-latest
