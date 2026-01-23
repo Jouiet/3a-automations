@@ -96,29 +96,49 @@ async function checkSiteAvailable() {
 // ════════════════════════════════════════════════════════════════════════════
 
 /**
- * Take screenshot using puppeteer/playwright (fallback method)
- * For full integration, use chrome-devtools MCP directly
+ * Take screenshot using Playwright (preferred method)
+ * Falls back to puppeteer-screenshot if Playwright unavailable
+ *
+ * For MCP integration, use:
+ *   - chrome-devtools MCP: mcp__chrome-devtools__take_screenshot
+ *   - playwright MCP: mcp__playwright__browser_take_screenshot
  */
-async function takeScreenshotWithPuppeteer(page, outputPath) {
-  // This is a reference implementation
-  // In practice, use chrome-devtools MCP or playwright MCP
-
+async function takeScreenshotWithPlaywright(page, outputPath) {
   console.log(`  📸 Taking screenshot: ${page.name}`);
 
-  // Command to take screenshot using puppeteer CLI
   const url = `${CONFIG.BASE_URL}${page.path}`;
-  const cmd = `npx capture-website "${url}" --output="${outputPath}" --width=${page.viewport.width} --height=${page.viewport.height} --full-page --delay=2 2>/dev/null || echo "FAILED"`;
+
+  // Method 1: Try Playwright CLI (fastest, most reliable)
+  const playwrightCmd = `npx playwright screenshot "${url}" "${outputPath}" --viewport-size="${page.viewport.width},${page.viewport.height}" --wait-for-timeout=3000 --full-page 2>/dev/null`;
 
   try {
-    const result = execSync(cmd, { encoding: 'utf8', timeout: 60000 });
-    if (result.includes('FAILED')) {
-      throw new Error('Screenshot failed');
+    execSync(playwrightCmd, { encoding: 'utf8', timeout: 60000 });
+    if (fs.existsSync(outputPath)) {
+      return true;
     }
-    return true;
   } catch (e) {
-    console.log(`  ⚠️  Screenshot failed for ${page.name}: ${e.message}`);
-    return false;
+    // Playwright not available, try puppeteer
   }
+
+  // Method 2: Try puppeteer-screenshot
+  const puppeteerCmd = `npx puppeteer-screenshot --url="${url}" --output="${outputPath}" --width=${page.viewport.width} --height=${page.viewport.height} --full-page --timeout=30000 2>/dev/null`;
+
+  try {
+    execSync(puppeteerCmd, { encoding: 'utf8', timeout: 60000 });
+    if (fs.existsSync(outputPath)) {
+      return true;
+    }
+  } catch (e) {
+    // Puppeteer not available either
+  }
+
+  // Method 3: Manual instruction for MCP usage
+  console.log(`  ⚠️  Screenshot failed for ${page.name}`);
+  console.log(`      Use chrome-devtools MCP instead:`);
+  console.log(`      1. Open Chrome with --remote-debugging-port=9222`);
+  console.log(`      2. Navigate to: ${url}`);
+  console.log(`      3. Use mcp__chrome-devtools__take_screenshot`);
+  return false;
 }
 
 /**
@@ -170,7 +190,7 @@ async function createBaseline() {
 
   for (const page of CONFIG.PAGES) {
     const outputPath = path.join(CONFIG.BASELINE_DIR, `${page.name}.png`);
-    const result = await takeScreenshotWithPuppeteer(page, outputPath);
+    const result = await takeScreenshotWithPlaywright(page, outputPath);
 
     if (result) {
       console.log(`  ✅ ${page.name}`);
@@ -202,7 +222,7 @@ async function runComparison() {
     const diffPath = path.join(CONFIG.DIFF_DIR, `${page.name}-diff.png`);
 
     // Take current screenshot
-    await takeScreenshotWithPuppeteer(page, currentPath);
+    await takeScreenshotWithPlaywright(page, currentPath);
 
     // Compare with baseline
     const comparison = compareImages(baselinePath, currentPath, diffPath);

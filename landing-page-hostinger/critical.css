@@ -48,7 +48,7 @@ body {
   gap: 0.5rem;
   padding: 1rem 2rem;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: white;
+  color: var(--text-light);
   font-weight: 600;
   border-radius: 0.75rem;
   text-decoration: none;

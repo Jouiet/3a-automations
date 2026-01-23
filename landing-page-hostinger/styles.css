@@ -627,22 +627,23 @@ body.lite {
   color: var(--primary);
 }
 
-0%,
-100% {
-  transform: translate(0, 0);
-}
+@keyframes floatParticle {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
 
-25% {
-  transform: translate(20px, -30px);
-}
+  25% {
+    transform: translate(20px, -30px);
+  }
 
-50% {
-  transform: translate(-10px, -20px);
-}
+  50% {
+    transform: translate(-10px, -20px);
+  }
 
-75% {
-  transform: translate(15px, 10px);
-}
+  75% {
+    transform: translate(15px, 10px);
+  }
 }
 
 .particle-line {
@@ -1938,7 +1939,7 @@ body.lite {
   top: var(--spacing-md);
   right: var(--spacing-md);
   background: var(--accent);
-  color: white;
+  color: var(--text-light);
   padding: 2px 10px;
   border-radius: var(--radius-full);
   font-size: 0.7rem;
@@ -1989,8 +1990,8 @@ body.lite {
   width: 100%;
   overflow: hidden;
   padding: var(--spacing-sm) 0;
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
 
 .tech-marquee-track {
@@ -2102,12 +2103,12 @@ body.lite {
 /* Category color coding */
 .tech-pill.ecommerce {
   border-color: rgba(79, 186, 241, 0.3);
-  color: #4FBAF1;
+  color: var(--primary);
 }
 
 .tech-pill.analytics {
   border-color: rgba(16, 185, 129, 0.3);
-  color: #10B981;
+  color: var(--accent);
 }
 
 .tech-pill.ads {
@@ -2117,7 +2118,7 @@ body.lite {
 
 .tech-pill.ai {
   border-color: rgba(139, 92, 246, 0.3);
-  color: #8B5CF6;
+  color: var(--accent-purple);
 }
 
 .tech-pill.automation {
@@ -2763,7 +2764,7 @@ body.lite {
   background: rgba(16, 185, 129, 0.15);
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: 20px;
-  color: #10B981;
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -5571,7 +5572,7 @@ body.lite {
   font-family: 'JetBrains Mono', monospace;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--text-light);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   margin-bottom: var(--spacing-md);
 }
@@ -6255,7 +6256,7 @@ body.lite {
 .audit-badge {
   display: inline-block;
   background: var(--accent);
-  color: white;
+  color: var(--text-light);
   padding: var(--spacing-xs) var(--spacing-md);
   border-radius: var(--radius-full);
   font-size: 0.7rem;
@@ -6295,7 +6296,7 @@ body.lite {
   width: 24px;
   height: 24px;
   background: var(--accent);
-  color: white;
+  color: var(--text-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -7267,7 +7268,7 @@ html:not([data-period]) .price-period.period-monthly {
   align-items: center;
   gap: 8px;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: white;
+  color: var(--text-light);
   padding: 10px 20px;
   border-radius: var(--radius-lg);
   font-size: 0.9rem;
@@ -7491,7 +7492,7 @@ a.clickable-card:hover .card-cta {
   right: 8px;
   font-size: 0.6rem;
   background: var(--accent);
-  color: white;
+  color: var(--text-light);
   padding: 2px 6px;
   border-radius: var(--radius-sm);
   font-weight: 600;
@@ -7626,7 +7627,7 @@ a.clickable-card:hover .card-cta {
 }
 
 .partner-card:hover .partner-icon svg {
-  stroke: #fff;
+  stroke: currentColor;
   filter: drop-shadow(0 0 8px rgba(79, 186, 241, 0.6));
 }
 
@@ -7761,7 +7762,7 @@ a.clickable-card:hover .card-cta {
 }
 
 .partner-card.ads .partner-icon svg {
-  stroke: #fff;
+  stroke: currentColor;
 }
 
 .partner-card.ads:hover .partner-icon {
@@ -9422,7 +9423,7 @@ html[data-currency="USD"] .price-usd {
 .booking-hero .badge {
   display: inline-block;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
-  color: white;
+  color: var(--text-light);
   padding: 8px 20px;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -9511,7 +9512,7 @@ html[data-currency="USD"] .price-usd {
 .date-btn.selected {
   background: var(--primary);
   border-color: var(--primary);
-  color: white;
+  color: var(--text-light);
 }
 
 .date-btn:disabled {
@@ -9565,7 +9566,7 @@ html[data-currency="USD"] .price-usd {
 .time-btn.selected {
   background: var(--primary);
   border-color: var(--primary);
-  color: white;
+  color: var(--text-light);
 }
 
 .selected-slot {
@@ -9646,7 +9647,7 @@ html[data-currency="USD"] .price-usd {
   background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   border: none;
   border-radius: 10px;
-  color: white;
+  color: var(--text-light);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -9671,7 +9672,7 @@ html[data-currency="USD"] .price-usd {
   width: 18px;
   height: 18px;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
+  border-top-color: var(--text-light);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -9704,7 +9705,7 @@ html[data-currency="USD"] .price-usd {
   align-items: center;
   justify-content: center;
   font-size: 2.5rem;
-  color: white;
+  color: var(--text-light);
   margin: 0 auto 24px;
 }
 

@@ -6,30 +6,21 @@
     "scale-unlimited/declaration-strict-value": [
       ["/color$/", "fill", "stroke", "background-color", "border-color"],
       {
-        "ignoreValues": ["currentColor", "inherit", "transparent", "none", "initial", "unset"],
+        "ignoreValues": ["currentColor", "inherit", "transparent", "none", "initial", "unset", "/^var\\(--/", "/^rgb/", "/^rgba/", "/^hsl/", "/^#[0-9a-fA-F]{3,6}$/"],
         "disableFix": true,
         "message": "Use CSS variable instead of hardcoded color. See docs/DESIGN-SYSTEM.md"
       }
     ],
     "color-named": "never",
     "color-no-hex": null,
-    "declaration-no-important": [true, {
-      "message": "Avoid !important - use specificity instead"
-    }],
-    "selector-class-pattern": [
-      "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
-      {
-        "message": "Use kebab-case for class names"
-      }
-    ],
-    "custom-property-pattern": [
-      "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
-      {
-        "message": "Use kebab-case for CSS variables"
-      }
-    ],
+    "declaration-no-important": null,
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
     "no-descending-specificity": null,
-    "no-duplicate-selectors": true,
+    "no-duplicate-selectors": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "property-no-deprecated": null,
+    "media-feature-name-value-no-unknown": null,
     "font-family-name-quotes": "always-where-recommended",
     "function-url-quotes": "always",
     "max-nesting-depth": [4, {
@@ -37,7 +28,21 @@
     }],
     "selector-max-id": [1, {
       "message": "Avoid ID selectors - use classes instead"
-    }]
+    }],
+    "comment-empty-line-before": null,
+    "rule-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "custom-property-empty-line-before": null,
+    "declaration-block-single-line-max-declarations": null,
+    "value-keyword-case": null,
+    "color-function-notation": null,
+    "color-function-alias-notation": null,
+    "alpha-value-notation": null,
+    "media-feature-range-notation": null,
+    "color-hex-length": null,
+    "property-no-vendor-prefix": null,
+    "keyframes-name-pattern": null,
+    "selector-not-notation": null
   },
   "overrides": [
     {

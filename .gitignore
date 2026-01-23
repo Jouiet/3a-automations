@@ -61,3 +61,8 @@ data/dropshipping/
 # Claude Code local config
 CLAUDE.local.md
 .claude/CLAUDE.local.md
+
+# Visual regression baselines (too large for git)
+tests/visual-baseline/
+tests/visual-current/
+tests/visual-diff/
