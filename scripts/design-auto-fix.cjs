@@ -11,7 +11,9 @@
  * PROBLÈMES CORRIGÉS AUTOMATIQUEMENT:
  * 1. CSS version inconsistency → Auto-bump
  * 2. Missing category-icon CSS → Auto-generate
- * 3. Missing gradient on title classes → Auto-add
+ * 3. Missing gradient on title classes → Validate
+ * 4. SVG hardcoded colors → Auto-replace with currentColor
+ * 5. Bare H1/H2 tags → Auto-add classes
  *
  * Usage:
  *   node scripts/design-auto-fix.cjs           # Auto-fix all issues
@@ -330,6 +332,88 @@ function fixSVGColors() {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+// FIX 5: BARE TITLE TAGS (H1/H2 without classes)
+// ════════════════════════════════════════════════════════════════════════════
+
+function fixBareTitles() {
+  console.log('\n📝 [5/5] Checking Bare Title Tags...');
+
+  const htmlFiles = findFiles(SITE_DIR, '.html');
+
+  // Paths to skip (content pages where bare titles are acceptable)
+  const skipPaths = ['/blog/', '/legal/', '/academie/cours/', '/academy/courses/', '/academie/guides', '/academy/guides'];
+
+  let h1Fixed = 0;
+  let h2Fixed = 0;
+
+  for (const file of htmlFiles) {
+    const relPath = path.relative(SITE_DIR, file);
+
+    // Skip content pages
+    if (skipPaths.some(skip => relPath.includes(skip.replace(/^\//, '')))) continue;
+
+    let content = fs.readFileSync(file, 'utf8');
+    const original = content;
+
+    // Fix bare H1 tags: <h1>text</h1> → <h1 class="hero-title-ultra">text</h1>
+    const h1BarePattern = /<h1>([^]*?)<\/h1>/g;
+    let h1Match;
+    while ((h1Match = h1BarePattern.exec(original)) !== null) {
+      const fullMatch = h1Match[0];
+      const innerContent = h1Match[1];
+
+      // Check context for hero section
+      const start = Math.max(0, h1Match.index - 500);
+      const context = original.substring(start, h1Match.index);
+      const newClass = (context.includes('hero') || context.includes('Hero')) ? 'hero-title-ultra' : 'page-title-ultra';
+
+      content = content.replace(fullMatch, `<h1 class="${newClass}">${innerContent}</h1>`);
+      h1Fixed++;
+    }
+
+    // Fix bare H2 tags in section contexts
+    const h2BarePattern = /<h2>([^<]+)<\/h2>/g;
+    let h2Match;
+    while ((h2Match = h2BarePattern.exec(original)) !== null) {
+      const fullMatch = h2Match[0];
+      const text = h2Match[1].trim();
+
+      const start = Math.max(0, h2Match.index - 500);
+      const context = original.substring(start, h2Match.index);
+
+      let newClass = null;
+      if (context.includes('category-header') || context.includes('cta-section') ||
+          context.includes('cta-content') || context.includes('faq-section') ||
+          context.includes('section-header')) {
+        newClass = 'section-title-ultra';
+      } else if (context.includes('card') || context.includes('accordion')) {
+        newClass = 'card-title';
+      }
+
+      if (newClass) {
+        content = content.replace(fullMatch, `<h2 class="${newClass}">${text}</h2>`);
+        h2Fixed++;
+      }
+    }
+
+    if (content !== original && !CHECK_ONLY) {
+      fs.writeFileSync(file, content, 'utf8');
+    }
+  }
+
+  const total = h1Fixed + h2Fixed;
+  if (total === 0) {
+    console.log(`  ✅ No bare title tags found`);
+  } else if (CHECK_ONLY) {
+    console.log(`  ❌ ${total} bare titles found (${h1Fixed} H1, ${h2Fixed} H2)`);
+    errorCount++;
+  } else {
+    console.log(`  🔧 FIXED: ${total} bare titles (${h1Fixed} H1, ${h2Fixed} H2)`);
+    fixedCount++;
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // MAIN
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -337,6 +421,7 @@ fixCSSVersion();
 fixCategoryIcons();
 fixTitleGradients();
 fixSVGColors();
+fixBareTitles();
 
 // Final report
 console.log('\n' + '═'.repeat(70));
