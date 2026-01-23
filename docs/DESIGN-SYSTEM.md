@@ -214,7 +214,7 @@ These rules are enforced by `validate-design-system.cjs`:
 1. **No hardcoded hex colors in SVG stroke/fill** (except brand logos)
 2. **section-title-ultra** must be used, not section-title
 3. **All CSS variables** must match this document
-4. **Automations count** must be 119 (from registry)
+4. **Automations count** must be 121 (from registry)
 5. **Agents count** must be 22
 6. **H1 titles** must use `hero-title` or `hero-title-ultra` class
 7. **H2 section titles** must use `section-title-ultra` class

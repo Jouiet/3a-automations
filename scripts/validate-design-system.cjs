@@ -26,7 +26,7 @@ const path = require('path');
 
 const CONFIG = {
   SITE_DIR: path.join(__dirname, '..', 'landing-page-hostinger'),
-  EXPECTED_AUTOMATIONS: 119,
+  EXPECTED_AUTOMATIONS: 121,
   EXPECTED_AGENTS: 22,
 
   // Allowed hardcoded colors (brand logos, semantic red for errors)
