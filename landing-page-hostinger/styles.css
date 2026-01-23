@@ -7605,6 +7605,112 @@ a.clickable-card:hover .card-cta {
   margin-bottom: var(--spacing-md);
 }
 
+/* Hybrid Architecture Section - Session 144 */
+.hybrid-section {
+  padding: var(--spacing-4xl) 0;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.03) 0%, transparent 50%, rgba(79, 186, 241, 0.03) 100%);
+  position: relative;
+}
+
+.hybrid-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+}
+
+@media (max-width: 900px) {
+  .hybrid-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hybrid-card {
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.hybrid-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(79, 186, 241, 0.4);
+}
+
+.hybrid-card.featured {
+  background: linear-gradient(135deg, rgba(79, 186, 241, 0.12) 0%, rgba(16, 185, 129, 0.08) 50%, rgba(25, 30, 53, 0.9) 100%);
+  border-color: rgba(79, 186, 241, 0.4);
+  box-shadow: 0 0 40px rgba(79, 186, 241, 0.15);
+}
+
+.hybrid-icon {
+  color: var(--primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.hybrid-card h3 {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+}
+
+.hybrid-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.hybrid-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hybrid-list li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hybrid-list li:last-child {
+  border-bottom: none;
+}
+
+.hybrid-list li strong {
+  color: var(--primary);
+}
+
+.hybrid-stat {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.hybrid-stat .stat-value {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hybrid-stat .stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+.hybrid-cta {
+  text-align: center;
+  margin-top: var(--spacing-2xl);
+}
+
 /* Partners Section - Premium Cyber Branding */
 .partners-section {
   padding: 5rem 0;

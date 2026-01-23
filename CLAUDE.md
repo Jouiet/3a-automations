@@ -1,48 +1,41 @@
 # 3A Automation
 >
-> Version: 63.0 | 23/01/2026 | Session 144 (Forensic Audit + Technology Shelf)
+> Version: 64.0 | 23/01/2026 | Session 144 (Content Strategy + Technology Shelf)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## SESSION 144 - ÉTAGÈRE TECHNOLOGIQUE (23/01/2026)
+## SESSION 144 - CONTENU & ÉTAGÈRE TECHNOLOGIQUE (23/01/2026)
 
-### Audit Forensique Alpha Medical COMPLÉTÉ
+### Content Strategy (Leçons Salesforce)
+Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 
-| Document | Lignes | Status |
+| Type | FR | EN | Status |
+| :--- | :--- | :--- | :--- |
+| Blog Article | `automatisation-fiable-lecons-salesforce-2026.html` | `reliable-automation-salesforce-lessons-2026.html` | ✅ |
+| Academy Course | `academy/courses/architecture-hybride.html` | `en/academy/courses/hybrid-architecture.html` | ✅ |
+
+**Concepts documentés:** Déterministe vs Probabiliste, Piège 80/20, Architecture Hybride (3 couches)
+
+### Étagère Technologique - Transferts Session 144
+
+| Direction | Technologies | Status |
 | :--- | :--- | :--- |
-| `Alpha-Medical/docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md` | 500+ | ✅ CRÉÉ |
-| `docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md` | 600+ | ✅ CRÉÉ |
-| `PLAN-INTEGRATION...SESSION-141.md` | v3.0 | ✅ MÀJ |
+| 3A → MyDealz | omnisend-sensor, ga4-sensor, retention-sensor | ✅ |
+| 3A → Alpha | Multi-AI Fallback, Design System, GA4 Sensor | ✅ |
+| Alpha → 3A | Theme Check CI, Flywheel pattern (concepts) | ⏳ |
 
-### Inventaire Alpha Medical (Vérifié Empiriquement)
+### MyDealz Sensors (VÉRIFIÉ)
 
-| Métrique | Valeur |
-| :--- | :--- |
-| Scripts | 310 |
-| Liquid Files | 156 (79 snippets, 61 sections) |
-| Sensors | 4 (shopify, klaviyo, retention, sync-to-3a) |
-| GitHub Workflows | 15 |
-| Flywheel Coverage | 100% (zero duplication) |
-| Voice AI | xAI + LiveKit (awaiting credits) |
-
-### Module Resilient AI Créé
-
-**Fichier**: `automations/lib/resilient-ai-fallback.cjs`
-**Test**: ✅ PASS (Anthropic→Grok fallback 1614ms)
-**Transfert**: Copié vers Alpha Medical
-
-### Étagère Technologique - Modèle Chinois "Potentiel de Situation"
-
-| Direction | Technologies |
-| :--- | :--- |
-| 3A → Alpha | Multi-AI Fallback ✅, Design System, GA4 Sensor |
-| 3A → MyDealz | GPM Sync, Sensors pattern |
-| **Alpha → 3A** | **Theme Check CI, Flywheel pattern** |
-| **Alpha → MyDealz** | **4 Sensors Shopify, xAI Voice** |
-| **MyDealz → Alpha** | **RAG Knowledge Base, TF-IDF** |
+| Sensor | Fichier | Status |
+| :--- | :--- | :--- |
+| Shopify | `sensors/shopify-sensor.cjs` | ✅ |
+| Omnisend | `sensors/omnisend-sensor.cjs` | ✅ (pas Klaviyo!) |
+| GA4 | `sensors/ga4-sensor.cjs` | ✅ |
+| Retention | `sensors/retention-sensor.cjs` | ✅ |
+| Sync | `sensors/sync-to-3a.cjs` | ✅ |
 
 ## Métriques VÉRIFIÉES (23/01/2026 - Session 144)
 
@@ -50,14 +43,17 @@
 | :--- | :--- | :--- |
 | Scripts Core | 81 | ✅ |
 | Automations Registry | 119 | ✅ |
-| Automations Catalog | 119 | ✅ SYNCED |
-| HTML Pages | 66 | ✅ |
+| Automations Catalog | 121 | ⚠️ +2 (voice-agent-b2b, kb-services) |
+| HTML Pages | **70** | ✅ (+4 blog/academy) |
+| Blog Articles FR | 5 | ✅ |
+| Academy Courses | 8 | ✅ (1 FR + 7 EN) |
+| Sitemap URLs | 66 | ⚠️ Needs +4 for new content |
 | Scripts --health | 22 | ✅ |
-| Sensors | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
+| Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
+| Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
-| CSS Version | v=37.0 | ✅ Cohérent (66 fichiers) |
+| CSS Version | v=37.0 | ✅ Cohérent |
 | Design Validation | PASS | ✅ All checks |
-| Testimonials | 26 refs | ✅ |
 
 ## SESSION 143 - AUDIT DESIGN UI/UX (23/01/2026)
 

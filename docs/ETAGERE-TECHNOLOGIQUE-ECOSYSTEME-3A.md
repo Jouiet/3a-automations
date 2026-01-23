@@ -383,5 +383,48 @@ Ce registre implémente le modèle chinois du "potentiel de situation":
 
 ---
 
-*Document généré: 23/01/2026 12:00 UTC*
-*Session: 144 - Forensic Audit + Technology Shelf*
+## PLAN ACTIONNABLE FIN SESSION 144
+
+### Tâches COMPLÉTÉES (23/01/2026)
+
+| # | Tâche | Status |
+|---|-------|--------|
+| 1 | Blog FR: Leçons Salesforce | ✅ DONE |
+| 2 | Blog EN: Salesforce Lessons | ✅ DONE |
+| 3 | Academy FR: Architecture Hybride | ✅ DONE |
+| 4 | Academy EN: Hybrid Architecture | ✅ DONE |
+| 5 | MyDealz: 5 sensors transferred | ✅ DONE |
+| 6 | Sitemap: +2 URLs blog | ✅ DONE |
+| 7 | Blog index FR/EN: updated | ✅ DONE |
+
+### Tâches RESTANTES (Priorité Haute)
+
+| # | Tâche | Effort | Impact |
+|---|-------|--------|--------|
+| 1 | **Copie marketing homepage** - Intégrer message "Architecture Hybride" | 1h | HIGH |
+| 2 | **Sitemap** - Ajouter 4 URLs manquantes (academy) | 15min | MEDIUM |
+| 3 | **Registry sync** - 119 → 121 (voice-agent-b2b, kb-services) | 30min | LOW |
+| 4 | **Alpha Medical Shopify token** - Régénérer | 15min | CRITICAL |
+| 5 | **Alpha Medical Klaviyo key** - Vérifier | 15min | CRITICAL |
+
+### Tâches BLOQUÉES (User Action Required)
+
+| # | Tâche | Blocker |
+|---|-------|---------|
+| 1 | GSC Sensor | API disabled - [Activer](https://console.developers.google.com/apis/api/searchconsole.googleapis.com) |
+| 2 | Meta Ads Sensor | META_ACCESS_TOKEN vide |
+| 3 | TikTok Ads Sensor | TIKTOK_ACCESS_TOKEN vide |
+| 4 | Apify Trends | Trial expiré - $49/mois |
+
+### Incohérences Détectées
+
+| Issue | Valeur Actuelle | Valeur Attendue |
+|-------|-----------------|-----------------|
+| Catalog vs Registry | 121 vs 119 | Sync needed |
+| HTML pages vs docs | 70 | 66 (doc outdated) |
+| Sitemap URLs | 66 | 70+ (missing new content) |
+
+---
+
+*Document mis à jour: 23/01/2026 14:30 UTC*
+*Session: 144 - Content Strategy + Technology Shelf*
