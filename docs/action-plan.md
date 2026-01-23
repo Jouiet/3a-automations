@@ -1,7 +1,7 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 144 - 23/01/2026):** Content + Marketing + Étagère Technologique complétés.
+> **✅ ÉTAT RÉEL (Session 144bis - 23/01/2026):** Content + Marketing + Étagère + Registry/Sitemap Sync complétés.
 
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
 
@@ -43,23 +43,26 @@
 | ga4-sensor.cjs | 3A pattern | MyDealz | ✅ |
 | retention-sensor.cjs | 3A pattern | MyDealz | ✅ |
 
-### 6. Métriques Vérifiées Fin Session 144
+### 6. Métriques Vérifiées Fin Session 144bis
 | Métrique | Valeur | Vérification |
 |----------|--------|--------------|
 | HTML Pages | 70 | `find landing-page-hostinger -name "*.html" \| wc -l` |
 | Blog Articles FR | 5 | `ls blog/*.html` |
 | Academy Courses | 8 | `find -path "*/academy/courses/*.html"` |
-| Automations Registry | 119 | `jq '.automations \| length'` |
-| Automations Catalog | 121 | `jq '.totalCount'` (voice-agent, kb-services) |
+| Automations Registry | **121** | ✅ `jq '.automations \| length'` - SYNCED |
+| Automations Catalog | **121** | ✅ `jq '.totalCount'` - SYNCED |
+| Sitemap URLs | **68** | ✅ `grep -c "<url>" sitemap.xml` - SYNCED |
 | CSS Version | v=38.0 | Auto-bumped by pre-commit |
 | MyDealz Sensors | 5 | `ls sensors/*.cjs` |
 
-### 7. Commits Session 144
+### 7. Commits Session 144/144bis
 ```
 36446d7 feat(blog): Add Salesforce reliability lessons article FR+EN
 dc25569 feat(academy): Add Hybrid Architecture course FR+EN
 cee33c4 docs: Update action-plan with Session 144 progress
 e8a26d5 feat(marketing): Add Hybrid Architecture section to homepage FR+EN
+c9f962e docs: Update session 144 docs with marketing + actionable plan
+1624385 feat(registry): Sync registry with catalog (119→121)
 ```
 
 ### 8. PLAN ACTIONNABLE - Prochaines Sessions
@@ -71,11 +74,11 @@ e8a26d5 feat(marketing): Add Hybrid Architecture section to homepage FR+EN
 | 2 | Alpha Medical: Vérifier Klaviyo key | Email metrics OFF | 15min |
 | 3 | GSC: Activer API | SEO sensor cassé | USER ACTION |
 
-#### P1 - HAUTE (Synchronisation)
-| # | Tâche | Impact | Effort |
+#### P1 - HAUTE (Synchronisation) - ✅ COMPLÉTÉ
+| # | Tâche | Impact | Status |
 |---|-------|--------|--------|
-| 1 | Sync Registry 119 → 121 | Incohérence docs | 30min |
-| 2 | Sitemap: +4 URLs academy | SEO incomplet | 15min |
+| 1 | ~~Sync Registry 119 → 121~~ | ~~Incohérence docs~~ | ✅ DONE |
+| 2 | ~~Sitemap: +2 URLs academy~~ | ~~SEO incomplet~~ | ✅ DONE |
 
 #### P2 - MOYENNE (Credentials)
 | # | Tâche | Impact | Effort |
@@ -84,11 +87,11 @@ e8a26d5 feat(marketing): Add Hybrid Architecture section to homepage FR+EN
 | 2 | TIKTOK_ACCESS_TOKEN | TikTok Ads sensor | USER ACTION |
 | 3 | Apify: Payer abonnement | Trends sensor | $49/mois |
 
-#### Incohérences Détectées (À Corriger)
-| Issue | Actuel | Attendu |
-|-------|--------|---------|
-| Catalog vs Registry | 121 vs 119 | Sync needed |
-| Sitemap URLs | 66 | 70+ (missing academy) |
+#### Incohérences Détectées - ✅ TOUTES CORRIGÉES
+| Issue | Avant | Après | Status |
+|-------|-------|-------|--------|
+| ~~Catalog vs Registry~~ | ~~121 vs 119~~ | 121 = 121 | ✅ SYNCED |
+| ~~Sitemap URLs~~ | ~~66~~ | 68 (70-2 exclus: 404, dashboard) | ✅ SYNCED |
 
 ---
 
