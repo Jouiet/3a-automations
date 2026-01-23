@@ -542,6 +542,48 @@ app.post('/a2a/v1/rpc', async (req, res) => {
     }
 });
 
+// --- SUBSIDIARIES INTEGRATION ---
+// Load subsidiary store proxies for Twin Sovereignty architecture
+const subsidiariesDir = path.join(__dirname, '../subsidiaries');
+if (fs.existsSync(subsidiariesDir)) {
+    const proxyFiles = fs.readdirSync(subsidiariesDir).filter(f => f.endsWith('-proxy.cjs'));
+    for (const file of proxyFiles) {
+        try {
+            const proxy = require(path.join(subsidiariesDir, file));
+            if (proxy.createRouter && proxy.STORE_ID) {
+                app.use(`/api/subsidiaries/${proxy.STORE_ID}`, proxy.createRouter(express));
+                console.log(`[A2A] Loaded subsidiary: ${proxy.STORE_ID}`);
+            }
+        } catch (e) {
+            console.error(`[A2A] Failed to load subsidiary ${file}: ${e.message}`);
+        }
+    }
+}
+
+// Subsidiaries listing endpoint
+app.get('/api/subsidiaries', (req, res) => {
+    const subsidiaries = [];
+    if (fs.existsSync(subsidiariesDir)) {
+        const proxyFiles = fs.readdirSync(subsidiariesDir).filter(f => f.endsWith('-proxy.cjs'));
+        for (const file of proxyFiles) {
+            try {
+                const proxy = require(path.join(subsidiariesDir, file));
+                if (proxy.getManifest) {
+                    subsidiaries.push(proxy.getManifest());
+                }
+            } catch (e) {
+                // Skip failed proxies
+            }
+        }
+    }
+    res.json({
+        protocol: "UCP/1.0",
+        parent: "3a-automation.com",
+        subsidiaries,
+        total: subsidiaries.length
+    });
+});
+
 // --- SERVER START ---
 const PORT = process.env.A2A_PORT || 3000;
 

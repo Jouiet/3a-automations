@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 60.0 | 23/01/2026 | Session 143 (Alpha Medical Full Automation Transfer)
+> Version: 61.0 | 23/01/2026 | Session 143 (Twin Sovereignty Architecture)
 
 ## Identité
 
@@ -37,7 +37,7 @@
 
 **Audit complet**: `docs/DESIGN-AUDIT-SESSION-143.md`
 
-### Alpha Medical - Full Automation Transfer
+### Alpha Medical - Twin Sovereignty Architecture
 
 | Catégorie | Fichier | Status |
 | :--- | :--- | :--- |
@@ -45,12 +45,21 @@
 | CI/CD | `theme-check.yml`, `sensor-monitor.yml` | ✅ CRÉÉ |
 | MCP | `.mcp.json` | ✅ CRÉÉ |
 | Sensors | `shopify-sensor.cjs`, `klaviyo-sensor.cjs`, `retention-sensor.cjs` | ✅ CRÉÉ |
-| GPM | `data/pressure-matrix.json` | ✅ CRÉÉ |
+| GPM Local | `data/pressure-matrix.json` | ✅ CRÉÉ |
 | Pre-commit | `.husky/pre-commit` | ✅ CRÉÉ |
+| Sync-to-3A | `sensors/sync-to-3a.cjs` | ✅ CRÉÉ |
+| 3A Proxy | `automations/subsidiaries/alpha-medical-proxy.cjs` | ✅ CRÉÉ |
+
+**Architecture**: Alpha Medical GPM → 3A Central GPM (`subsidiaries.alpha-medical`)
+
+**Endpoints 3A**:
+- `/api/subsidiaries` - Liste toutes les subsidiaires
+- `/api/subsidiaries/alpha-medical/products` - UCP Product Discovery
+- `/api/subsidiaries/alpha-medical/health` - Health check
 
 **API Issues**: Shopify 403 (token expiré), Klaviyo 401 (clé invalide)
 
-**Commits**: `89c21c8`, `f61bef4`
+**Commits**: `89c21c8`, `f61bef4`, `9d00266`
 
 **Analyse**: `docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md`
 
@@ -73,6 +82,18 @@
 | Homepage "18 agents"→"22" | FR + EN + telemetry | ✅ FIXÉ |
 | llms.txt | 174→119, 18→22 | ✅ FIXÉ |
 | Scripts defer | 6 scripts | ✅ FIXÉ |
+
+## PROTOCOLES - VÉRIFIÉ SESSION 143
+
+| Protocole | Status | Fichier Principal | Endpoints |
+| :--- | :--- | :--- | :--- |
+| **A2A** | ✅ PRODUCTION | `automations/a2a/server.js` | `/a2a/v1/rpc`, `/.well-known/agent.json` |
+| **UCP** | ✅ PRODUCTION | `pages/api/ucp/products.js` | `/.well-known/ucp`, `/api/ucp/products` |
+| **ACP** | ✅ FONCTIONNEL | `automations/acp/server.js` | `/acp/v1/agent/submit`, `/acp/v1/stream` |
+| **GPM** | ✅ PRODUCTION | `landing-page-hostinger/data/pressure-matrix.json` | 20 sensors, 8 sectors |
+| **AG-UI** | ✅ PRODUCTION | `automations/a2a/server.js:416-518` | `/ag-ui`, `/ag-ui/queue` |
+
+**Agents enregistrés**: 43 (10 core + 41 dynamic skills)
 
 ## SENSORS - EXÉCUTION RÉELLE (20 total)
 
