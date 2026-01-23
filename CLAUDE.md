@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 69.0 | 23/01/2026 | Session 145ter (Complete Card CSS + SVG Safety)
+> Version: 70.0 | 23/01/2026 | Session 145ter - **ALPHA MEDICAL: 37.5% SUCCÈS** (audit factuel)
 
 ## Identité
 
@@ -90,11 +90,13 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 
 ### Étagère Technologique - Transferts Session 144
 
-| Direction | Technologies | Status |
-| :--- | :--- | :--- |
-| 3A → MyDealz | omnisend-sensor, ga4-sensor, retention-sensor | ✅ |
-| 3A → Alpha | Multi-AI Fallback, Design System, GA4 Sensor | ✅ |
-| Alpha → 3A | Theme Check CI, Flywheel pattern (concepts) | ⏳ |
+| Direction | Technologies | Status | Réalité |
+| :--- | :--- | :--- | :--- |
+| 3A → MyDealz | omnisend-sensor, ga4-sensor, retention-sensor | ✅ Créés | ⚠️ Non testés |
+| 3A → Alpha | Multi-AI Fallback | ❌ **0 usages** | Code mort |
+| 3A → Alpha | Design System | ⚠️ Template only | Pas de DESIGN-SYSTEM.md |
+| 3A → Alpha | GA4 Sensor | ✅ Créé | ⚠️ Non testé |
+| Alpha → 3A | Theme Check CI | ✅ | Fonctionne |
 
 ### MyDealz Sensors (VÉRIFIÉ)
 
@@ -141,31 +143,44 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 
 **Audit complet**: `docs/DESIGN-AUDIT-SESSION-143.md`
 
-### Alpha Medical - Twin Sovereignty Architecture
+### Alpha Medical - AUDIT FACTUEL (23/01/2026 19:00 UTC)
 
-| Catégorie | Fichier | Status |
-| :--- | :--- | :--- |
-| Theme Check | `.theme-check.yml` | ✅ CRÉÉ |
-| CI/CD | `theme-check.yml`, `sensor-monitor.yml` | ✅ CRÉÉ |
-| MCP | `.mcp.json` | ✅ CRÉÉ |
-| Sensors | `shopify-sensor.cjs`, `klaviyo-sensor.cjs`, `retention-sensor.cjs` | ✅ CRÉÉ |
-| GPM Local | `data/pressure-matrix.json` | ✅ CRÉÉ |
-| Pre-commit | `.husky/pre-commit` | ✅ CRÉÉ |
-| Sync-to-3A | `sensors/sync-to-3a.cjs` | ✅ CRÉÉ |
-| 3A Proxy | `automations/subsidiaries/alpha-medical-proxy.cjs` | ✅ CRÉÉ |
+**VERDICT: 37.5% SUCCÈS (6/16 implémentations fonctionnelles)**
 
-**Architecture**: Alpha Medical GPM → 3A Central GPM (`subsidiaries.alpha-medical`)
+| Catégorie | Fichier | Créé | Fonctionne | Preuve |
+| :--- | :--- | :--- | :--- | :--- |
+| Theme Check | `.theme-check.yml` | ✅ | ✅ | 1/3 runs SUCCESS |
+| CI/CD theme-check | `theme-check.yml` | ✅ | ✅ | GitHub Actions |
+| CI/CD sensor-monitor | `sensor-monitor.yml` | ✅ | ❌ **0 runs** | Jamais exécuté |
+| MCP | `.mcp.json` | ✅ | ✅ | JSON valide |
+| Shopify Sensor | `shopify-sensor.cjs` | ✅ | ❌ **401/403** | products=0 (réel=90) |
+| Klaviyo Sensor | `klaviyo-sensor.cjs` | ✅ | ❌ **401** | flows=0 (réel=5) |
+| Retention Sensor | `retention-sensor.cjs` | ✅ | ⚠️ Non testé | 0 runs |
+| GA4 Sensor | `ga4-sensor.cjs` | ✅ | ⚠️ Non testé | 0 runs |
+| Sync-to-3A | `sync-to-3a.cjs` | ✅ | ⚠️ Non testé | 0 runs |
+| GPM Local | `pressure-matrix.json` | ✅ | ❌ **Données fausses** | 0 products |
+| Pre-commit | `.husky/pre-commit` | ✅ | ✅ | Hook actif |
+| Resilient AI | `resilient-ai-fallback.cjs` | ✅ | ❌ **0 usages** | grep=0 imports |
+| RAG KB Builder | `knowledge_base_builder.py` | ✅ | ❌ **401** | Test exécution |
+| RAG KB Simple | `knowledge_base_simple.py` | ✅ | ❌ **401** | Test exécution |
 
-**Endpoints 3A**:
-- `/api/subsidiaries` - Liste toutes les subsidiaires
-- `/api/subsidiaries/alpha-medical/products` - UCP Product Discovery
-- `/api/subsidiaries/alpha-medical/health` - Health check
+**BLOCKERS CRITIQUES:**
+- `SHOPIFY_ADMIN_ACCESS_TOKEN` → **403 Forbidden** (6 workflows bloqués)
+- `KLAVIYO_PRIVATE_API_KEY` → **401 Unauthorized** (9 workflows bloqués)
 
-**API Issues**: Shopify 403 (token expiré), Klaviyo 401 (clé invalide)
+**GitHub Actions: 85% ÉCHEC (17/20 runs)**
 
-**Commits**: `89c21c8`, `f61bef4`, `9d00266`
+**CE QUI FONCTIONNE:**
+1. ✅ Theme Check CI (1 success)
+2. ✅ llms.txt auto-update (2 succès)
+3. ✅ Documentation (ANALYSE-TRANSFERT 15K)
 
-**Analyse**: `docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md`
+**CE QUI NE FONCTIONNE PAS:**
+- 5 sensors créés mais **0% fonctionnels**
+- 2 scripts RAG créés mais **échouent 401**
+- 1 resilient-ai-fallback **jamais utilisé (0 imports)**
+
+**Source**: Audit interne Alpha Medical 23/01/2026
 
 ## SESSION 142 - DESIGN SYSTEM (23/01/2026)
 

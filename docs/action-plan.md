@@ -1,9 +1,133 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 145bis - 23/01/2026):** Academy CSS Fix + Validation System Improvements + **DEPLOYED LIVE** ✅
+> **⚠️ ÉTAT RÉEL (Session 145ter - 23/01/2026 19:00 UTC):** 3A CSS OK, **ALPHA MEDICAL: 37.5% SUCCÈS**
 
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
+
+---
+
+## 🚨 ALPHA MEDICAL - AUDIT FACTUEL (23/01/2026 19:00 UTC)
+
+### VERDICT: 37.5% SUCCÈS (6/16 implémentations fonctionnelles)
+
+| Catégorie | Créé | Fonctionne | Taux |
+|-----------|------|------------|------|
+| Sensors | 5 | **0** | **0%** |
+| AI Scripts | 2 | **0** | **0%** |
+| Workflows | 2 | 1 | 50% |
+| Documentation | 2 | 2 | 100% |
+| Config | 4 | 3 | 75% |
+| Automation Lib | 1 | **0** | **0%** |
+| **TOTAL** | **16** | **6** | **37.5%** |
+
+### BLOCKERS CRITIQUES (Vérifiés par exécution)
+
+| Credential | Status | Impact | Preuve |
+|------------|--------|--------|--------|
+| `SHOPIFY_ADMIN_ACCESS_TOKEN` | ❌ 403 Forbidden | Sensors + 6 workflows | GitHub Actions logs |
+| `KLAVIYO_PRIVATE_API_KEY` | ❌ 401 Unauthorized | 9 workflows échouent | GitHub Actions logs |
+| `ANTHROPIC_API_KEY` | ⚠️ Exposé (risque) | Sécurité | Audit forensique |
+
+### SENSORS - TOUS ÉCHOUENT (0/5)
+
+| Sensor | Fichier | Status | Preuve |
+|--------|---------|--------|--------|
+| shopify-sensor | 6.4K | ❌ 401/403 | `products_total=0` (devrait=90) |
+| klaviyo-sensor | 5.5K | ❌ 401 | `flows_total=0` (devrait=5) |
+| retention-sensor | 5.2K | ⚠️ NON TESTÉ | 0 runs GitHub |
+| ga4-sensor | 6.5K | ⚠️ NON TESTÉ | 0 runs GitHub |
+| sync-to-3a | 3.1K | ⚠️ NON TESTÉ | 0 runs GitHub |
+
+**Données fausses dans `pressure-matrix.json`:**
+- Products: 0 (réel: 90) = **-100% écart**
+- Flows: 0 (réel: 5) = **-100% écart**
+
+### AI SCRIPTS - TOUS ÉCHOUENT (0/2)
+
+| Script | Taille | Status | Preuve |
+|--------|--------|--------|--------|
+| knowledge_base_builder.py | 19K | ❌ 401 | `python3 --build → Unauthorized` |
+| knowledge_base_simple.py | 15K | ❌ 401 | `ERROR: 401 Client Error` |
+
+### CODE MORT (0 usages)
+
+| Fichier | Taille | Usages | Preuve |
+|---------|--------|--------|--------|
+| resilient-ai-fallback.cjs | 16K | **0** | `grep -r = 0 imports` |
+
+### CE QUI FONCTIONNE RÉELLEMENT (6/16)
+
+| Item | Preuve Succès |
+|------|---------------|
+| ✅ Theme Check CI | 1/3 runs SUCCESS |
+| ✅ llms.txt auto-update | 2 runs SUCCESS |
+| ✅ Flywheel Feedback Loop | 1 run SUCCESS |
+| ✅ CodeQL Security | 1 run SUCCESS |
+| ✅ ANALYSE-TRANSFERT.md | 15K, lecture vérifiée |
+| ✅ DESIGN-SYSTEM-TEMPLATE.md | 2.8K, template créé |
+
+### GITHUB ACTIONS: 85% ÉCHEC (17/20 runs)
+
+```
+✅ SUCCESS: 3 runs (15%)
+   - Update llms.txt: 2
+   - Flywheel Monitor: 1
+   - Theme Check: 1 (après 2 échecs)
+
+❌ FAILURE: 17 runs (85%)
+   - Sync Klaviyo Leads: 9 (401 Unauthorized)
+   - Sync Shopify Forms: 6 (403 Forbidden)
+   - Sync Facebook Leads: 1 (credentials manquants)
+   - API Health Check: 1 (credentials)
+```
+
+### PLAN D'ACTION ALPHA MEDICAL - FACTUEL
+
+#### P0 - CRITIQUE (Sans ça, RIEN ne fonctionne)
+
+| # | Action | Responsable | Impact |
+|---|--------|-------------|--------|
+| 1 | **Régénérer SHOPIFY_ADMIN_ACCESS_TOKEN** | USER | Débloque 6 workflows + sensors |
+| 2 | **Régénérer KLAVIYO_PRIVATE_API_KEY** | USER | Débloque 9 workflows + sensors |
+| 3 | **Tester sensors après credentials** | CLAUDE | Valider 5 sensors |
+
+**Instructions Shopify Token:**
+```
+1. https://alpha-medical-store.myshopify.com/admin/settings/apps/development
+2. Créer/Éditer app "3A Sensors"
+3. Admin API access scopes: read_products, read_orders, read_inventory
+4. Copier token → .env.admin: SHOPIFY_ADMIN_ACCESS_TOKEN=shpat_xxx
+5. Commit + Push pour déclencher workflows
+```
+
+**Instructions Klaviyo Key:**
+```
+1. https://www.klaviyo.com/settings/account/api-keys
+2. Créer Private API Key avec scope: Read-only
+3. Copier → .env.admin: KLAVIYO_PRIVATE_API_KEY=pk_xxx
+4. Commit + Push pour déclencher workflows
+```
+
+#### P1 - HAUTE (Après credentials fixés)
+
+| # | Action | Effort |
+|---|--------|--------|
+| 1 | Exécuter `node sensors/shopify-sensor.cjs` | 5min |
+| 2 | Vérifier `pressure-matrix.json` montre 90 products | 2min |
+| 3 | Exécuter `node sensors/klaviyo-sensor.cjs` | 5min |
+| 4 | Vérifier `pressure-matrix.json` montre 5 flows | 2min |
+| 5 | Déclencher sensor-monitor.yml (premier run) | 5min |
+
+#### P2 - MOYENNE (Intégration)
+
+| # | Action | Effort |
+|---|--------|--------|
+| 1 | Intégrer `resilient-ai-fallback.cjs` (0 usages actuellement) | 2h |
+| 2 | Tester `knowledge_base_builder.py` avec credentials valides | 1h |
+| 3 | Créer DESIGN-SYSTEM.md réel (pas juste template) | 2h |
+
+---
 
 ---
 
