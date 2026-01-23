@@ -60,6 +60,8 @@
   --glass-highlight: rgba(255, 255, 255, 0.05);
   --glass-backdrop: blur(20px);
   --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --glass-ultra: blur(40px) saturate(180%);
+  --glass-reflection: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
 
   /* ═══════════════════════════════════════════════════════════════════════
      GRADIENTS

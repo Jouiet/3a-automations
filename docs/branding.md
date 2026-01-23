@@ -94,60 +94,20 @@ Fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
 
 ## 4. VARIABLES CSS
 
-```css
-:root {
-  /* Primary Colors */
-  --color-primary: #4FBAF1;
-  --color-primary-light: #ADD4F0;
-  --color-primary-dark: #2B6685;
+> ⚠️ **SECTION DÉPLACÉE**: Les variables CSS techniques sont maintenant dans:
+> **`docs/DESIGN-SYSTEM.md`** (Section 1. CSS VARIABLES)
+>
+> Ce document contient uniquement les guidelines visuels/marketing.
+> Pour l'implémentation CSS, consultez DESIGN-SYSTEM.md.
 
-  /* Background Colors */
-  --color-bg-dark: #191E35;
-  --color-bg-navy: #1B2F54;
-  --color-bg-teal: #254E70;
+### Quick Reference (voir DESIGN-SYSTEM.md pour détails complets)
 
-  /* Text Colors */
-  --color-text-light: #E4F4FC;
-  --color-text-secondary: #516C86;
-  --color-text-muted: #4E4962;
-
-  /* Semantic Colors */
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-error: #EF4444;
-
-  /* Gradients */
-  --gradient-primary: linear-gradient(180deg, #E4F4FC 0%, #ADD4F0 30%, #4FBAF1 100%);
-  --gradient-bg: linear-gradient(135deg, #191E35 0%, #1B2F54 50%, #254E70 100%);
-
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-size-base: 16px;
-  --line-height-base: 1.6;
-
-  /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
-
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-full: 9999px;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(25, 30, 53, 0.05);
-  --shadow-md: 0 4px 6px rgba(25, 30, 53, 0.1);
-  --shadow-lg: 0 10px 15px rgba(25, 30, 53, 0.15);
-  --shadow-xl: 0 20px 25px rgba(25, 30, 53, 0.2);
-}
-```
+| Variable | Valeur | Usage |
+|----------|--------|-------|
+| `--primary` | #4FBAF1 | CTAs, accents |
+| `--accent` | #10B981 | Success, validations |
+| `--bg-dark` | #191E35 | Fond principal |
+| `--text-light` | #E4F4FC | Texte sur fond sombre |
 
 ---
 
@@ -415,3 +375,4 @@ Note: Sur fond clair, utiliser version sombre du logo (a creer si necessaire)
 | Date | Version | Modification |
 |------|---------|--------------|
 | 2025-12-17 | 1.0 | Creation - Extraction couleurs du logo officiel |
+| 2026-01-23 | 1.2 | CSS variables moved to DESIGN-SYSTEM.md (Session 142) |
