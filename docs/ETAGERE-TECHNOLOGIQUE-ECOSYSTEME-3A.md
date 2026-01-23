@@ -1,7 +1,7 @@
 # ÉTAGÈRE TECHNOLOGIQUE - ÉCOSYSTÈME 3A
 ## Mutualisation des Technologies Selon le Modèle du "Potentiel de Situation"
 
-> **Version**: 2.2 | **Date**: 23/01/2026 | **Session**: 144 (Phase 1+2+Voice B2B COMPLETED)
+> **Version**: 2.3 | **Date**: 23/01/2026 | **Session**: 144 (Phase 1+2+3 Sensors COMPLETED)
 > **Méthode**: Inspirée du modèle industriel chinois (François Jullien / Sun Tzu)
 > **Principe**: Coopération technique → Potentiel → Concurrence commerciale
 
@@ -315,13 +315,16 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | Design System template | 3A | Alpha | ✅ DONE | `914e73d` |
 | Design System template | 3A | MyDealz | ✅ DONE | `51f4c8a` |
 
-### Phase 3: Advanced Integration (Semaine 3-4)
+### Phase 3: Advanced Integration (Semaine 3-4) - IN PROGRESS
 
-| Transfer | From | To | Effort |
-|----------|------|-----|--------|
-| A2A Client | 3A | Alpha, MyDealz | 4h each |
-| xAI Voice pattern | Alpha | MyDealz | 4h |
-| Cookie Consent | Alpha | MyDealz | 2h |
+| Transfer | From | To | Status | Commit |
+|----------|------|-----|--------|--------|
+| Voice Agent B2B | MyDealz | 3A | ✅ DONE | `d4f4f5a` |
+| Service KB (121 autos) | 3A | 3A | ✅ DONE | `d4f4f5a` |
+| Sensors (klaviyo, retention, ga4) | 3A | MyDealz | ✅ DONE | `577fc55` |
+| xAI Voice pattern | Alpha | MyDealz | ✅ EXISTS | `voice_agent_core.py` |
+| A2A Client | 3A | Alpha, MyDealz | ⏳ LOW | Pending |
+| Cookie Consent | Alpha | MyDealz | ⏳ LOW | Pending |
 
 ---
 
@@ -348,6 +351,11 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | V002 | Voice KB | Alpha | `scripts/ai-production/voice_knowledge_base.py` |
 | R001 | RAG KB Builder | MyDealz | `scripts/knowledge_base_builder.py` |
 | R002 | TF-IDF Simple | MyDealz | `scripts/knowledge_base_simple.py` |
+| S005 | Omnisend Sensor | MyDealz | `sensors/omnisend-sensor.cjs` |
+| S006 | Retention Sensor | MyDealz | `sensors/retention-sensor.cjs` |
+| S007 | GA4 Sensor | MyDealz | `sensors/ga4-sensor.cjs` |
+| B001 | Voice Agent B2B | 3A | `agency/core/voice-agent-b2b.cjs` |
+| B002 | Service KB | 3A | `agency/core/knowledge-base-services.cjs` |
 | A001 | Apify Config | MyDealz | `apify-automation/config.js` |
 | L001 | Lead Qualify | MyDealz | `apify-automation/qualify-leads.js` |
 
