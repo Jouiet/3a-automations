@@ -1183,5 +1183,69 @@ Alpha-Medical/
 ### Next Steps
 
 1. **MyDealz**: Résoudre problème paiement Shopify (HTTP 402)
-2. **Alpha Medical**: Run `shopify theme check` en production
-3. **3A Automation**: Fix remaining credentials (G4.3 pressure < 50)
+2. **Alpha Medical**: Régénérer Shopify API token (403 Access Disabled)
+3. **Alpha Medical**: Vérifier Klaviyo API key (401 Unauthorized)
+
+---
+
+## SESSION 143 PART 2 - AUTOMATION TRANSFER (23/01/2026)
+
+### Sensors Deployed to Alpha Medical
+
+| Sensor | Fichier | Status | Test |
+|--------|---------|--------|------|
+| shopify-sensor | `sensors/shopify-sensor.cjs` | ✅ CRÉÉ | ⚠️ 403 (token expiré) |
+| klaviyo-sensor | `sensors/klaviyo-sensor.cjs` | ✅ CRÉÉ | ⚠️ 401 (clé invalide) |
+| retention-sensor | `sensors/retention-sensor.cjs` | ✅ CRÉÉ | Dépend de Shopify |
+
+### Infrastructure Deployed
+
+| Élément | Description | Status |
+|---------|-------------|--------|
+| `data/pressure-matrix.json` | Global Pressure Matrix | ✅ CRÉÉ |
+| `sensor-monitor.yml` | GitHub Action (cron 6h) | ✅ CRÉÉ |
+| `package.json` | npm scripts for sensors | ✅ CRÉÉ |
+| `.husky/pre-commit` | Theme validation hook | ✅ CRÉÉ |
+
+### Files Created (Session 143 Part 2)
+
+```
+Alpha-Medical/
+├── sensors/
+│   ├── shopify-sensor.cjs      # Store health metrics
+│   ├── klaviyo-sensor.cjs      # Email marketing metrics
+│   └── retention-sensor.cjs    # Churn analysis
+├── data/
+│   └── pressure-matrix.json    # GPM for Alpha Medical
+├── .github/workflows/
+│   └── sensor-monitor.yml      # Automated sensor runs
+├── .husky/
+│   └── pre-commit              # Theme validation hook
+└── package.json                # npm scripts
+```
+
+### Commits Session 143 Part 2
+
+```
+89c21c8 fix(ci): Simplify theme-check workflow to avoid output parsing issues
+f61bef4 feat(automation): Transfer design automation knowledge from 3A
+```
+
+### API Issues Identified
+
+| Service | Error | Action Required |
+|---------|-------|-----------------|
+| Shopify Admin API | 403 - API Access Disabled | Régénérer token dans Shopify Admin |
+| Klaviyo API | 401 - Unauthorized | Vérifier/régénérer API key |
+
+### Knowledge Transfer Summary
+
+| Élément Transféré | Source (3A) | Destination (Alpha Medical) | Status |
+|-------------------|-------------|-----------------------------|---------|
+| Theme Check CI/CD | ❌ N/A | ✅ theme-check.yml | DONE |
+| Pre-commit hooks | `.git/hooks/pre-commit` | `.husky/pre-commit` | DONE |
+| Shopify Sensor | `agency/core/shopify-sensor.cjs` | `sensors/shopify-sensor.cjs` | DONE |
+| Klaviyo Sensor | `agency/core/klaviyo-sensor.cjs` | `sensors/klaviyo-sensor.cjs` | DONE |
+| Retention Sensor | `agency/core/retention-sensor.cjs` | `sensors/retention-sensor.cjs` | DONE |
+| Pressure Matrix | `landing-page-hostinger/data/pressure-matrix.json` | `data/pressure-matrix.json` | DONE |
+| MCP Config | ❌ N/A | `.mcp.json` | DONE |

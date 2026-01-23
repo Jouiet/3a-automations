@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 59.0 | 23/01/2026 | Session 143 (Alpha Medical Design Automation)
+> Version: 60.0 | 23/01/2026 | Session 143 (Alpha Medical Full Automation Transfer)
 
 ## Identité
 
@@ -37,14 +37,20 @@
 
 **Audit complet**: `docs/DESIGN-AUDIT-SESSION-143.md`
 
-### Alpha Medical - Design Automation Transfer
+### Alpha Medical - Full Automation Transfer
 
-| Fichier | Description | Status |
+| Catégorie | Fichier | Status |
 | :--- | :--- | :--- |
-| `.theme-check.yml` | Shopify Theme Check config | ✅ CRÉÉ |
-| `theme-check.yml` | GitHub Action CI/CD | ✅ CRÉÉ |
-| `.mcp.json` | MCP integration | ✅ CRÉÉ |
-| Commit | `98cd6b5` | ✅ PUSHED |
+| Theme Check | `.theme-check.yml` | ✅ CRÉÉ |
+| CI/CD | `theme-check.yml`, `sensor-monitor.yml` | ✅ CRÉÉ |
+| MCP | `.mcp.json` | ✅ CRÉÉ |
+| Sensors | `shopify-sensor.cjs`, `klaviyo-sensor.cjs`, `retention-sensor.cjs` | ✅ CRÉÉ |
+| GPM | `data/pressure-matrix.json` | ✅ CRÉÉ |
+| Pre-commit | `.husky/pre-commit` | ✅ CRÉÉ |
+
+**API Issues**: Shopify 403 (token expiré), Klaviyo 401 (clé invalide)
+
+**Commits**: `89c21c8`, `f61bef4`
 
 **Analyse**: `docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md`
 
