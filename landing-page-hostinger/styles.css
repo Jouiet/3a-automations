@@ -7194,11 +7194,17 @@ html:not([data-period]) .price-period.period-monthly {
   color: #ef4444;
 }
 
-/* Category headers use section-title-ultra with compact sizing */
+/* Category headers use section-title-ultra with gradient effect */
 .category-header .section-title-ultra {
   font-size: 1.5rem;
-  color: var(--text-light);
   margin-bottom: 0;
+  background: linear-gradient(135deg, #5EC8F7 0%, #A78BFA 50%, #34D399 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 5s ease infinite;
+  text-shadow: 0 0 30px rgba(79, 186, 241, 0.3);
 }
 
 .category-count {
