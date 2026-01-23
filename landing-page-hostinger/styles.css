@@ -1443,9 +1443,15 @@ body.lite {
 .section-title-ultra {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--text-light);
   margin-bottom: var(--spacing-md);
   letter-spacing: -0.02em;
+  /* Gradient text effect - applied to ALL section titles */
+  background: linear-gradient(135deg, #5EC8F7 0%, #A78BFA 50%, #34D399 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 5s ease infinite;
 }
 
 .section-desc-ultra {
