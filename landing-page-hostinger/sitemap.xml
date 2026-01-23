@@ -342,6 +342,26 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Article - Automatisation Fiable Salesforce 2026 FR -->
+  <url>
+    <loc>https://3a-automation.com/blog/automatisation-fiable-lecons-salesforce-2026.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/automatisation-fiable-lecons-salesforce-2026.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/reliable-automation-salesforce-lessons-2026.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Article - Reliable Automation Salesforce 2026 EN -->
+  <url>
+    <loc>https://3a-automation.com/en/blog/reliable-automation-salesforce-lessons-2026.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/automatisation-fiable-lecons-salesforce-2026.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/reliable-automation-salesforce-lessons-2026.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Blog Article - Automatisation E-commerce 2026 FR -->
   <url>
     <loc>https://3a-automation.com/blog/automatisation-ecommerce-2026.html</loc>
