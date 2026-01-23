@@ -1,5 +1,5 @@
 # 3A Automation - Auto Deploy Website to Hostinger VPS
-# Version: 3.0 | Date: 2026-01-23
+# Version: 4.0 | Date: 2026-01-23
 #
 # ARCHITECTURE:
 # - Trigger: Push to main affecting landing-page-hostinger/**
@@ -40,8 +40,11 @@ jobs:
           echo "🔍 Running design-auto-fix checks..."
           node scripts/design-auto-fix.cjs --check
 
-          echo "🎨 Running full design system validation..."
+          echo "🎨 Running core design system validation..."
           node scripts/validate-design-system.cjs --ci
+
+          echo "🔧 Running extended design validation (buttons, cards, a11y)..."
+          node scripts/validate-design-extended.cjs --ci
 
           echo "✅ All design validations passed"
 

@@ -1,5 +1,5 @@
 # DESIGN PROCESS FORENSIC AUDIT
-## Version: 1.2 | Date: 23/01/2026 | Session 142ter
+## Version: 1.3 | Date: 23/01/2026 | Session 142ter
 
 ---
 
@@ -17,6 +17,10 @@
 | **H1 Consistency** | **No** | **Yes** | **ADDED Session 142ter** |
 | **CSS Version Automation** | **No** | **Yes** | **ADDED Session 142ter** |
 | **Gradient Title Enforcement** | **No** | **Yes** | **ADDED Session 142ter** |
+| **Extended Validation** | **No** | **Yes** | **ADDED Session 142ter** |
+| Buttons/Cards/Typography | No | Yes | validate-design-extended.cjs |
+| Accessibility Checks | No | Yes | Alt text, ARIA, landmarks |
+| Responsive Validation | No | Yes | Media queries, viewport |
 
 ---
 
@@ -75,7 +79,27 @@
 - `node scripts/design-auto-fix.cjs --check` - Vérifie cohérence (CI)
 - `node scripts/design-auto-fix.cjs --dry-run` - Mode preview
 
-### 1.2 Stylelint
+### 1.3 validate-design-extended.cjs (NEW Session 142ter)
+| Check | Description | Status |
+|-------|-------------|--------|
+| Buttons | Standard classes (btn-cyber, cta-button-ultra) | WARN: 77 generic |
+| Cards | Glassmorphism, border-radius variables | PASS |
+| Typography | CSS variable usage for fonts | WARN: 310 hardcoded |
+| Spacing | CSS variable definitions | PASS |
+| Accessibility | Alt text, ARIA landmarks, lang attr | PASS |
+| Responsive | Media queries, viewport meta | PASS |
+
+**Commands**:
+- `node scripts/validate-design-extended.cjs` - Run all checks
+- `node scripts/validate-design-extended.cjs --ci` - CI mode (fails on errors)
+- `node scripts/validate-design-extended.cjs --verbose` - Detailed output
+
+**Sources**:
+- [stylelint-declaration-strict-value](https://github.com/AndyOGo/stylelint-declaration-strict-value)
+- [axe-core](https://github.com/dequelabs/axe-core)
+- [awesome-stylelint](https://stylelint.io/awesome-stylelint/)
+
+### 1.4 Stylelint
 | Config | Status | Notes |
 |--------|--------|-------|
 | stylelint-config-standard | Installed | v40.0.0 |
@@ -311,7 +335,7 @@ grep -rn "color: black" landing-page-hostinger/
 
 ## 5. CI/CD INTEGRATION
 
-### 5.1 GitHub Actions (.github/workflows/deploy-website.yml)
+### 5.1 GitHub Actions (.github/workflows/deploy-website.yml v4.0)
 ```yaml
 jobs:
   validate:
@@ -319,16 +343,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - run: npm ci
+      - run: node scripts/design-auto-fix.cjs --check
       - run: node scripts/validate-design-system.cjs --ci
-      - run: npx stylelint "landing-page-hostinger/**/*.css"
+      - run: node scripts/validate-design-extended.cjs --ci  # NEW
 
   deploy:
     needs: validate
     # ... deployment steps
 ```
 
-### 5.2 Pre-commit Hook Flow
+### 5.2 Pre-commit Hook Flow (v3.0)
 ```
 git commit
     │
@@ -339,13 +363,22 @@ pre-commit hook
     │       └── No → Skip validation
     │       └── Yes → Continue
     │
+    ├─► CSS modified? → Run design-auto-fix.cjs (auto-fix + re-stage)
+    │
     ▼
 validate-design-system.cjs --ci
     │
-    ├─► PASS → Commit proceeds
-    │
+    ├─► PASS → Continue
     └─► FAIL → Commit blocked
-              └── Message: Run --fix or --no-verify
+    │
+    ▼
+validate-design-extended.cjs --ci (warnings only)
+    │
+    ▼
+design-auto-fix.cjs --check (final verification)
+    │
+    ├─► PASS → Commit proceeds
+    └─► FAIL → Commit blocked
 ```
 
 ---
@@ -386,3 +419,6 @@ validate-design-system.cjs --ci
 | Date | Version | Change |
 |------|---------|--------|
 | 2026-01-23 | 1.0 | Initial forensic audit |
+| 2026-01-23 | 1.1 | Added H1 validation, CSS version automation |
+| 2026-01-23 | 1.2 | Added category icon consistency validation |
+| 2026-01-23 | 1.3 | Added validate-design-extended.cjs (buttons, cards, a11y, responsive) |
