@@ -113,23 +113,49 @@ c9f962e docs: Update session 144 docs with marketing + actionable plan
 
 ### 8. PLAN ACTIONNABLE - Prochaines Sessions
 
-#### P0 - CRITIQUE (Bloquants)
-| # | Tâche | Impact | Effort |
-|---|-------|--------|--------|
-| 1 | Alpha Medical: Régénérer Shopify token | Sensors OFF | 15min |
-| 2 | Alpha Medical: Vérifier Klaviyo key | Email metrics OFF | 15min |
-| 3 | GSC: Activer API | SEO sensor cassé | USER ACTION |
+#### P0 - CRITIQUE (Bloquants) - USER ACTIONS REQUISES
 
-#### P1 - HAUTE (Dette Technique Design) - EN COURS
 | # | Tâche | Impact | Status |
 |---|-------|--------|--------|
-| 1 | Ajouter CSS pour .blog-card | Blog page styling | ⏳ TODO |
-| 2 | Ajouter CSS pour .kpi-card | KPI display | ⏳ TODO |
-| 3 | Ajouter CSS pour .investor-card | Investors page | ⏳ TODO |
-| 4 | Contraindre SVGs sans taille | 70 SVGs identifiés | ⏳ TODO |
+| 1 | Alpha Medical: Shopify token | Sensors OFF (0 products) | ⏳ USER ACTION |
+| 2 | Alpha Medical: Klaviyo key | Email metrics OFF (0 lists) | ⏳ USER ACTION |
+| 3 | GSC: Activer API | SEO sensor cassé | ⏳ USER ACTION |
+
+**Instructions Alpha Medical Shopify Token:**
+1. Aller sur https://alpha-medical-store.myshopify.com/admin/settings/apps/development
+2. Sélectionner l'app existante ou créer "3A Sensors"
+3. Configuration > Admin API > Copier Access Token
+4. Créer `/Users/mac/Desktop/clients/alpha-medical/.env`:
+   ```
+   ALPHA_MEDICAL_SHOPIFY_TOKEN=shpat_xxxxx
+   ALPHA_MEDICAL_SHOPIFY_STORE=alpha-medical-store.myshopify.com
+   ```
+
+**Instructions Alpha Medical Klaviyo Key:**
+1. Aller sur https://www.klaviyo.com/settings/account/api-keys
+2. Créer une Private API Key avec scope "Read-only"
+3. Ajouter au `.env`:
+   ```
+   ALPHA_MEDICAL_KLAVIYO_API_KEY=pk_xxxxx
+   ```
+
+**Instructions GSC API:**
+1. Aller sur [Cloud Console](https://console.developers.google.com/apis/api/searchconsole.googleapis.com/overview?project=359870692708)
+2. Cliquer "Enable API"
+3. Le sensor GSC fonctionnera automatiquement après
+
+#### P1 - HAUTE (Dette Technique Design) - ✅ COMPLÉTÉE Session 145ter
+| # | Tâche | Impact | Status |
+|---|-------|--------|--------|
+| 1 | ~~Ajouter CSS pour .blog-card~~ | ~~Blog page styling~~ | ✅ DONE (+100 lines) |
+| 2 | ~~Ajouter CSS pour .kpi-card~~ | ~~KPI display~~ | ✅ DONE |
+| 3 | ~~Ajouter CSS pour .investor-card~~ | ~~Investors page~~ | ✅ DONE |
+| 4 | ~~Contraindre SVGs sans taille~~ | ~~70 SVGs identifiés~~ | ✅ DONE (global safety net) |
 | 5 | ~~Sync Registry 119 → 121~~ | ~~Incohérence docs~~ | ✅ DONE |
 | 6 | ~~Sitemap: +2 URLs academy~~ | ~~SEO incomplet~~ | ✅ DONE |
 | 7 | ~~Academy CSS manquant~~ | ~~SVGs géants~~ | ✅ DONE |
+
+**Session 145ter: +500 lignes CSS ajoutées** (.blog-card, .case-card, .process-card, .security-card, .tech-card, .investor-card, .kpi-card, .summary-card + icons)
 
 #### P2 - MOYENNE (Credentials)
 | # | Tâche | Impact | Effort |
