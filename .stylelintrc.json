@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json.schemastore.org/stylelintrc",
+  "extends": ["stylelint-config-standard"],
+  "plugins": ["stylelint-declaration-strict-value"],
+  "rules": {
+    "scale-unlimited/declaration-strict-value": [
+      ["/color$/", "fill", "stroke", "background-color", "border-color"],
+      {
+        "ignoreValues": ["currentColor", "inherit", "transparent", "none", "initial", "unset"],
+        "disableFix": true,
+        "message": "Use CSS variable instead of hardcoded color. See docs/DESIGN-SYSTEM.md"
+      }
+    ],
+    "color-named": "never",
+    "color-no-hex": null,
+    "declaration-no-important": [true, {
+      "message": "Avoid !important - use specificity instead"
+    }],
+    "selector-class-pattern": [
+      "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+      {
+        "message": "Use kebab-case for class names"
+      }
+    ],
+    "custom-property-pattern": [
+      "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+      {
+        "message": "Use kebab-case for CSS variables"
+      }
+    ],
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": true,
+    "font-family-name-quotes": "always-where-recommended",
+    "function-url-quotes": "always",
+    "max-nesting-depth": [4, {
+      "message": "Max nesting depth is 4 levels"
+    }],
+    "selector-max-id": [1, {
+      "message": "Avoid ID selectors - use classes instead"
+    }]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.html"],
+      "customSyntax": "postcss-html"
+    }
+  ],
+  "ignoreFiles": [
+    "node_modules/**",
+    "dashboard/**",
+    "**/*.min.css"
+  ]
+}

@@ -197,13 +197,69 @@ These rules are enforced by `validate-design-system.cjs`:
 
 ---
 
-## 6. TOOLS INTEGRATION
+## 6. IMAGE GENERATION WORKFLOW
 
-| Tool | Purpose | Config |
-|------|---------|--------|
-| **chrome-devtools MCP** | Visual testing | `.mcp.json` |
-| **playwright MCP** | E2E visual regression | To configure |
-| **validate-design-system.cjs** | CSS/HTML validation | CI/CD |
+### Google Whisk (Recommended)
+- **URL**: https://labs.google/fx/tools/whisk
+- **Technology**: Imagen 4 + Gemini + Veo 3
+- **Use Case**: Concept art, backgrounds, UI elements
+
+**Workflow**:
+1. Upload reference images (subject, scene, style)
+2. Whisk generates variations using Imagen 4
+3. Refine with text prompts if needed
+4. Export high-res PNG
+5. Optimize for web (WebP conversion)
+
+**Existing Whisk Assets**:
+```
+/assets/whisk/
+├── neural_cortex_bg.png      # Hero section (787KB)
+├── pricing_concept.png       # Pricing page (595KB)
+└── trust_thumbnail_growth.png # Trust section (757KB)
+```
+
+### Vertex AI Imagen 4 (Programmatic)
+For batch/automated generation:
+```javascript
+// See: automations/agency/core/product-photos-resilient.cjs
+const endpoint = 'us-central1-aiplatform.googleapis.com';
+const model = 'imagen-4.0-generate-001';
+```
+
+---
+
+## 7. TOOLS INTEGRATION
+
+| Tool | Purpose | Config | Status |
+|------|---------|--------|--------|
+| **chrome-devtools MCP** | Screenshots, debugging | `.mcp.json` | ✅ Active |
+| **playwright MCP** | E2E visual regression | `.mcp.json` | ✅ Configured |
+| **stitch MCP** | Design-to-code | `.mcp.json` | ✅ Configured |
+| **validate-design-system.cjs** | CSS/HTML validation | CI/CD | ✅ Active |
+| **visual-regression.cjs** | Screenshot comparison | Manual | ✅ Created |
+| **Stylelint** | CSS linting | `.stylelintrc.json` | ✅ Configured |
+| **Pre-commit hook** | Block bad commits | `.git/hooks/` | ✅ Installed |
+| **Google Whisk** | Image generation | Web UI | ✅ Documented |
+
+---
+
+## 8. VALIDATION COMMANDS
+
+```bash
+# Design system validation
+node scripts/validate-design-system.cjs         # Check
+node scripts/validate-design-system.cjs --fix   # Auto-fix
+node scripts/validate-design-system.cjs --ci    # CI mode (exit 1 on fail)
+
+# Visual regression
+node scripts/visual-regression.cjs --baseline   # Create baseline
+node scripts/visual-regression.cjs --compare    # Compare vs baseline
+node scripts/visual-regression.cjs --update     # Update baseline
+
+# CSS linting
+npx stylelint "landing-page-hostinger/**/*.css"
+```
 
 ---
 

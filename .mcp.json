@@ -103,6 +103,14 @@
         "APIFY_TOKEN": "${APIFY_TOKEN}"
       },
       "description": "Apify - Web scraping, Instagram, Facebook, Google Shopping"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anthropic/mcp-playwright@latest"
+      ],
+      "description": "Playwright - Browser automation, E2E testing, visual regression"
     }
   }
 }
