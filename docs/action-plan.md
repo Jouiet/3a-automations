@@ -86,7 +86,7 @@ a2f8521 fix(academy): Add missing CSS for course-card and guide-card + sync v=42
 | ga4-sensor.cjs | 3A pattern | MyDealz | ✅ |
 | retention-sensor.cjs | 3A pattern | MyDealz | ✅ |
 
-### 6. Métriques Vérifiées Fin Session 144bis
+### 6. Métriques Vérifiées Fin Session 145bis
 | Métrique | Valeur | Vérification |
 |----------|--------|--------------|
 | HTML Pages | 70 | `find landing-page-hostinger -name "*.html" \| wc -l` |
@@ -95,7 +95,10 @@ a2f8521 fix(academy): Add missing CSS for course-card and guide-card + sync v=42
 | Automations Registry | **121** | ✅ `jq '.automations \| length'` - SYNCED |
 | Automations Catalog | **121** | ✅ `jq '.totalCount'` - SYNCED |
 | Sitemap URLs | **68** | ✅ `grep -c "<url>" sitemap.xml` - SYNCED |
-| CSS Version | v=38.0 | Auto-bumped by pre-commit |
+| CSS Version | **v=42.0** | ✅ Auto-bumped by pre-commit |
+| CSS Lines | **10,498** | ✅ Complete (Academy styles added) |
+| Design Validators | **12** | ✅ +2 nouveaux (S145bis) |
+| Design Warnings | **20** | ⚠️ Dette technique identifiée |
 | MyDealz Sensors | 5 | `ls sensors/*.cjs` |
 
 ### 7. Commits Session 144/144bis
