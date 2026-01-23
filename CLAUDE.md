@@ -1,26 +1,54 @@
 # 3A Automation
 >
-> Version: 67.0 | 23/01/2026 | Session 145 (CSS Fix + Deployment Success)
+> Version: 68.0 | 23/01/2026 | Session 145bis (Academy CSS Fix + Validation Improvements)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## SESSION 145 - DEPLOYMENT FIX (23/01/2026)
+## SESSION 145bis - ACADEMY CSS + VALIDATION (23/01/2026)
 
-### CSS Version Sync Fix
-| Issue | Cause | Fix |
+### Critical Bug Fixed: Giant SVG Icons on Academy Page
+
+| Issue | Root Cause | Fix |
 | :--- | :--- | :--- |
-| CI Failing | 37 files with v=37.0 not committed | Committed all CSS version bumps |
-| Deployment blocked | Design validation failed | Fixed, deployment successful |
+| SVG icons 1152px instead of 28px | CSS truncated in production (10,010 vs 10,335 lines) | Synced CSS versions, triggered deployment |
+| Missing .course-card, .guide-card | 16 CSS classes used in HTML but never defined | Added ~100 lines of new CSS |
+| CI blocking deployments | CSS version mismatch (38.0 vs 40.0) | Synced to v=42.0 |
+
+### Validation System Improvements
+
+**NEW VALIDATORS ADDED:**
+1. `validateHTMLClassesHaveCSS()` - Detects HTML classes without CSS
+2. `validateSVGSizeConstraints()` - Detects unconstrained inline SVGs
+
+**TECHNICAL DEBT IDENTIFIED:**
+- 15 component classes without CSS (.blog-card, .kpi-card, etc.)
+- 70 SVGs potentially missing size constraints
+- Set as warnings (not CI blockers) for gradual fix
+
+### Verified LIVE
+- ✅ Academy page: styles.css?v=42.0 loaded
+- ✅ .path-icon svg: width=28px, height=28px
+- ✅ .guide-icon svg: width=24px, height=24px
+- ✅ CSS file: 10,498 lines (complete)
+
+### Commits Session 145bis
+```
+a2f8521 fix(academy): Add missing CSS for course-card and guide-card + sync v=42.0
+9c4398f feat(validation): Add validators for missing CSS classes and unconstrained SVGs
+```
+
+---
+
+## SESSION 145 - DEPLOYMENT FIX (23/01/2026)
 
 ### Verified LIVE on 3a-automation.com
 - ✅ Hybrid Architecture section deployed (FR+EN)
 - ✅ 3 glassmorphism cards visible
 - ✅ "AI proposes, code disposes" tagline
 - ✅ Salesforce 116-day pivot reference
-- ✅ "0 uncontrolled decisions" metric
 
 ### Commits Session 145
 ```
@@ -74,8 +102,9 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
 | Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
-| CSS Version | **v=38.0** | ✅ Auto-bumped |
-| Design Validation | PASS | ✅ All checks |
+| CSS Version | **v=42.0** | ✅ Auto-bumped |
+| CSS Lines | **10,498** | ✅ Complete (+163 Academy) |
+| Design Validation | PASS | ✅ All checks (20 warnings) |
 | Homepage Hybrid Section | FR+EN | ✅ Added |
 
 ## SESSION 143 - AUDIT DESIGN UI/UX (23/01/2026)
