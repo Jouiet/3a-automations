@@ -1,8 +1,9 @@
 # 3A Automation - Auto Deploy Website to Hostinger VPS
-# Version: 2.1 | Date: 2025-12-19
+# Version: 3.0 | Date: 2026-01-23
 #
 # ARCHITECTURE:
 # - Trigger: Push to main affecting landing-page-hostinger/**
+# - Validation: Design system check BEFORE deployment
 # - Method: Direct Hostinger API call with properly formatted JSON
 #
 # SETUP REQUIRED (one-time):
@@ -21,9 +22,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Design System
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Design System Validation
+        run: |
+          node scripts/validate-design-system.cjs --ci
+          echo "✅ Design system validation passed"
+
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to Hostinger VPS
+    needs: validate
 
     steps:
       - name: Deploy via Hostinger API

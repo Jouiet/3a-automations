@@ -1,6 +1,13 @@
 # 3A AUTOMATION - BRANDING GUIDE
-## Version: 1.0 | Created: 2025-12-17
+## Version: 1.1 | Updated: 2026-01-23 | Session 142
 ## Extracted from Official Logo
+
+> ⚠️ **IMPORTANT**: Ce document est maintenant COMPLÉMENTÉ par:
+> - **`docs/DESIGN-SYSTEM.md`** - Source de vérité technique (CSS variables, classes)
+> - **`scripts/validate-design-system.cjs`** - Validation automatique
+>
+> Ce fichier contient les guidelines visuels/marketing.
+> Pour l'implémentation technique, voir DESIGN-SYSTEM.md.
 
 ---
 
