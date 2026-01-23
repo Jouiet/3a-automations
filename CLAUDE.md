@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 58.0 | 23/01/2026 | Session 143 (Validation + Documentation)
+> Version: 59.0 | 23/01/2026 | Session 143 (Alpha Medical Design Automation)
 
 ## Identité
 
@@ -36,6 +36,17 @@
 | Pre-commit hook | Loop fixed | ✅ |
 
 **Audit complet**: `docs/DESIGN-AUDIT-SESSION-143.md`
+
+### Alpha Medical - Design Automation Transfer
+
+| Fichier | Description | Status |
+| :--- | :--- | :--- |
+| `.theme-check.yml` | Shopify Theme Check config | ✅ CRÉÉ |
+| `theme-check.yml` | GitHub Action CI/CD | ✅ CRÉÉ |
+| `.mcp.json` | MCP integration | ✅ CRÉÉ |
+| Commit | `98cd6b5` | ✅ PUSHED |
+
+**Analyse**: `docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md`
 
 ## SESSION 142 - DESIGN SYSTEM (23/01/2026)
 
