@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 64.0 | 23/01/2026 | Session 144 (Content Strategy + Technology Shelf)
+> Version: 65.0 | 23/01/2026 | Session 144 (Content + Marketing + Technology Shelf)
 
 ## Identité
 
@@ -52,8 +52,9 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
 | Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
-| CSS Version | v=37.0 | ✅ Cohérent |
+| CSS Version | **v=38.0** | ✅ Auto-bumped |
 | Design Validation | PASS | ✅ All checks |
+| Homepage Hybrid Section | FR+EN | ✅ Added |
 
 ## SESSION 143 - AUDIT DESIGN UI/UX (23/01/2026)
 

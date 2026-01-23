@@ -1,44 +1,94 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 144 - 23/01/2026):** Content strategy + Étagère Technologique complétée.
+> **✅ ÉTAT RÉEL (Session 144 - 23/01/2026):** Content + Marketing + Étagère Technologique complétés.
 
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
 
 ---
 
-## ✅ SESSION 144 - CONTENT & ÉTAGÈRE TECHNOLOGIQUE (23/01/2026)
+## ✅ SESSION 144 - CONTENT + MARKETING + ÉTAGÈRE (23/01/2026)
 
-### Analyse Stratégique: Leçons Salesforce (IA Fiable)
+### 1. Analyse Stratégique: Leçons Salesforce (IA Fiable)
 - Étude de 4 documents sur les risques IA et le pivot Salesforce 116 jours
 - Concepts clés: Déterministe vs Probabiliste, Piège 80/20, Hello World Fallacy
 - Architecture hybride documentée: Intent Layer (IA) + Action Layer (Code) + Override Layer (Humain)
 
-### Blog Articles Créés
+### 2. Blog Articles Créés
 | Article | FR | EN |
 |---------|----|----|
 | Automatisation Fiable: Leçons Salesforce | ✅ `blog/automatisation-fiable-lecons-salesforce-2026.html` | ✅ `en/blog/reliable-automation-salesforce-lessons-2026.html` |
 
-### Academy Courses Créés
+### 3. Academy Courses Créés
 | Cours | FR | EN |
 |-------|----|----|
 | Architecture Hybride (5 leçons, 45min) | ✅ `academy/courses/architecture-hybride.html` | ✅ `en/academy/courses/hybrid-architecture.html` |
 
-### Étagère Technologique - Transferts Session 144
+### 4. Copie Marketing Homepage - NOUVELLE SECTION
+| Page | Section Ajoutée | Status |
+|------|-----------------|--------|
+| `index.html` (FR) | "Architecture Hybride" - L'IA propose, le code dispose | ✅ |
+| `en/index.html` (EN) | "Hybrid Architecture" - AI proposes, code disposes | ✅ |
+
+**Contenu:**
+- Pourquoi pas 100% IA? (116 jours Salesforce)
+- Architecture 3 couches: Intent, Action, Override
+- Résultats prévisibles: 0 décisions non contrôlées
+- CTA vers l'étude de cas complète
+
+### 5. Étagère Technologique - Transferts Session 144
 | Composant | Source | Destination | Status |
 |-----------|--------|-------------|--------|
-| omnisend-sensor.cjs | N/A (adapté) | MyDealz | ✅ |
-| ga4-sensor.cjs | 3A | MyDealz | ✅ |
-| retention-sensor.cjs | 3A | MyDealz | ✅ |
+| omnisend-sensor.cjs | Adapté pour Omnisend | MyDealz | ✅ |
+| ga4-sensor.cjs | 3A pattern | MyDealz | ✅ |
+| retention-sensor.cjs | 3A pattern | MyDealz | ✅ |
 
-### SEO Updates
-- Sitemap: +2 URLs (blog articles)
-- Blog index FR/EN: Nouveau card + schema.org
-- Schema.org: Course + FAQPage sur tous les nouveaux contenus
+### 6. Métriques Vérifiées Fin Session 144
+| Métrique | Valeur | Vérification |
+|----------|--------|--------------|
+| HTML Pages | 70 | `find landing-page-hostinger -name "*.html" \| wc -l` |
+| Blog Articles FR | 5 | `ls blog/*.html` |
+| Academy Courses | 8 | `find -path "*/academy/courses/*.html"` |
+| Automations Registry | 119 | `jq '.automations \| length'` |
+| Automations Catalog | 121 | `jq '.totalCount'` (voice-agent, kb-services) |
+| CSS Version | v=38.0 | Auto-bumped by pre-commit |
+| MyDealz Sensors | 5 | `ls sensors/*.cjs` |
 
-### Commits
-- `36446d7` feat(blog): Add Salesforce reliability lessons article FR+EN
-- `dc25569` feat(academy): Add Hybrid Architecture course FR+EN
+### 7. Commits Session 144
+```
+36446d7 feat(blog): Add Salesforce reliability lessons article FR+EN
+dc25569 feat(academy): Add Hybrid Architecture course FR+EN
+cee33c4 docs: Update action-plan with Session 144 progress
+e8a26d5 feat(marketing): Add Hybrid Architecture section to homepage FR+EN
+```
+
+### 8. PLAN ACTIONNABLE - Prochaines Sessions
+
+#### P0 - CRITIQUE (Bloquants)
+| # | Tâche | Impact | Effort |
+|---|-------|--------|--------|
+| 1 | Alpha Medical: Régénérer Shopify token | Sensors OFF | 15min |
+| 2 | Alpha Medical: Vérifier Klaviyo key | Email metrics OFF | 15min |
+| 3 | GSC: Activer API | SEO sensor cassé | USER ACTION |
+
+#### P1 - HAUTE (Synchronisation)
+| # | Tâche | Impact | Effort |
+|---|-------|--------|--------|
+| 1 | Sync Registry 119 → 121 | Incohérence docs | 30min |
+| 2 | Sitemap: +4 URLs academy | SEO incomplet | 15min |
+
+#### P2 - MOYENNE (Credentials)
+| # | Tâche | Impact | Effort |
+|---|-------|--------|--------|
+| 1 | META_ACCESS_TOKEN | Meta Ads sensor | USER ACTION |
+| 2 | TIKTOK_ACCESS_TOKEN | TikTok Ads sensor | USER ACTION |
+| 3 | Apify: Payer abonnement | Trends sensor | $49/mois |
+
+#### Incohérences Détectées (À Corriger)
+| Issue | Actuel | Attendu |
+|-------|--------|---------|
+| Catalog vs Registry | 121 vs 119 | Sync needed |
+| Sitemap URLs | 66 | 70+ (missing academy) |
 
 ---
 
