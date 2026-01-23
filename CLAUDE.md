@@ -1,24 +1,36 @@
 # 3A Automation
 >
-> Version: 57.0 | 23/01/2026 | Session 142 (Design System + Stylelint)
+> Version: 58.0 | 23/01/2026 | Session 143 (Validation + Documentation)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## Métriques VÉRIFIÉES (23/01/2026)
+## Métriques VÉRIFIÉES (23/01/2026 - Session 143)
 
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
 | Scripts Core | 81 | ✅ |
 | Automations Registry | 119 | ✅ |
 | Automations Catalog | 119 | ✅ SYNCED |
-| HTML Pages | 68 | ✅ (+FAQ FR/EN) |
+| HTML Pages | 66 | ✅ |
 | Scripts --health | 22 | ✅ |
 | Sensors | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
-| Stylelint Issues | 0 | ✅ (was 55) |
-| Visual Baselines | 9 | ✅ Created |
+| Stylelint Issues | 0 | ✅ |
+| CSS Version | v=35.0 | ✅ Cohérent (66 fichiers) |
+| Design Validation | PASS | ✅ All checks |
+| Testimonials | 26 refs | ✅ |
+
+## SESSION 143 - VALIDATION (23/01/2026)
+
+| Vérification | Résultat | Status |
+| :--- | :--- | :--- |
+| validate-design-system.cjs | PASS (44 warnings H1) | ✅ |
+| design-auto-fix.cjs --check | ALL CHECKS PASSED | ✅ |
+| CSS version consistency | v=35.0 (66 fichiers) | ✅ |
+| Category icons CSS | 13/13 classes | ✅ |
+| SVG colors | currentColor | ✅ |
 
 ## SESSION 142 - DESIGN SYSTEM (23/01/2026)
 
@@ -48,14 +60,15 @@
 | ⚠️ PARTIAL | 10 | klaviyo(65), email-health(60), ga4(50), google-ads-planner(50), bigquery(-), supplier-health(80), voice-quality(90), content-perf(90), lead-scoring(95) |
 | ❌ BLOCKED | 4 | gsc(API disabled), meta-ads(95), tiktok-ads(95), apify(trial expired) |
 
-## BLOCKERS RESTANTS (P1-P3)
+## BLOCKERS RESTANTS (P1-P2) - USER ACTION REQUIRED
 
-| Problème | Impact | Priorité |
-| :--- | :--- | :--- |
-| GSC API disabled | Sensor SEO cassé | P1 - Activer Cloud Console |
-| 36 credentials vides | 60% features OFF | P1 - Configurer .env |
-| Apify trial expiré | Trends cassé | P2 - Payer ($49/mois) |
-| Testimonials section | Social proof absent | P3 |
+| Problème | Impact | Action | Lien |
+| :--- | :--- | :--- | :--- |
+| GSC API disabled | Sensor SEO cassé | Activer API | [Cloud Console](https://console.developers.google.com/apis/api/searchconsole.googleapis.com/overview?project=359870692708) |
+| META_ACCESS_TOKEN vide | Meta Ads cassé | Configurer token | Facebook Business |
+| TIKTOK_ACCESS_TOKEN vide | TikTok Ads cassé | Configurer token | TikTok Business |
+| Apify trial expiré | Trends cassé | Payer $49/mois | [Apify Billing](https://console.apify.com/billing) |
+| 36 credentials vides | 60% features OFF | Configurer .env | - |
 
 ## Règles Strictes
 

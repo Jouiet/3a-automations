@@ -375,15 +375,23 @@ function validateH1Consistency() {
   // Pattern for h1 with old class
   const oldClassH1Pattern = /<h1 class="([^"]*)">/g;
 
-  // Files to skip (legal, blog articles have different styling)
-  const skipPaths = ['/blog/', '/legal/', '404.html'];
+  // Files to skip (internal pages, legal, blog articles have different styling)
+  const skipPaths = [
+    'blog/',              // FR blog articles
+    'legal/',             // Legal pages
+    '404.html',
+    'academie/cours/',    // Internal course pages (noindex)
+    'academy/courses/',   // EN version of course pages
+    'en/blog/'            // EN blog articles
+  ];
 
   // H1 should have one of these classes in section contexts
   const allowedH1Classes = [
-    'hero-title-ultra',
-    'section-title-ultra',
-    'page-title',
-    'sr-only'  // Screen reader only is acceptable
+    'hero-title',          // Standard hero title class (CSS defined)
+    'hero-title-ultra',    // Ultra variant (alias)
+    'section-title-ultra', // Section headings
+    'page-title',          // Generic page title
+    'sr-only'              // Screen reader only is acceptable
   ];
 
   let totalBareH1 = 0;

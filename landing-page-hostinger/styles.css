@@ -485,6 +485,21 @@ body.lite {
   color: var(--text-light);
 }
 
+/* Ultra variant with built-in gradient (for standalone use) */
+.hero-title-ultra {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  font-weight: 800;
+  margin-bottom: var(--spacing-xl);
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #5EC8F7 0%, #A78BFA 50%, #34D399 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 5s ease infinite;
+}
+
 .hero-title.kinetic-type .title-line {
   display: block;
   opacity: 0;
@@ -505,6 +520,7 @@ body.lite {
 
 /* GLOBAL: Hero title highlights with gradient effect - Applied to ALL pages */
 .hero-title .highlight,
+.hero-title-ultra .highlight,
 h1 .highlight {
   background: linear-gradient(135deg, #5EC8F7 0%, #A78BFA 50%, #34D399 100%);
   background-size: 200% 200%;
