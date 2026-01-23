@@ -411,4 +411,253 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FAQ PAGES
+       ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- FAQ FR -->
+  <url>
+    <loc>https://3a-automation.com/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/faq.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- FAQ EN -->
+  <url>
+    <loc>https://3a-automation.com/en/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/faq.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ACADEMY PAGES
+       ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Academy Home FR -->
+  <url>
+    <loc>https://3a-automation.com/academie.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Academy Home EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Academy Guides FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/guides.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/guides.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Guides EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/guides.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/guides.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/guides.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Getting Started FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/cours/demarrer.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/demarrer.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/getting-started.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Getting Started EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/courses/getting-started.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/demarrer.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/getting-started.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: E-commerce FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/cours/ecommerce.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/ecommerce.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/ecommerce.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: E-commerce EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/courses/ecommerce.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/ecommerce.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/ecommerce.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Emails FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/cours/emails.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/emails.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/emails.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Emails EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/courses/emails.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/emails.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/emails.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Leads FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/cours/leads.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/leads.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/leads.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Leads EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/courses/leads.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/leads.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/leads.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Analytics FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/cours/analytics.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/analytics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/analytics.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Analytics EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/courses/analytics.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/analytics.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/analytics.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Content FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/cours/contenu.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/contenu.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/content.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Course: Content EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/courses/content.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/contenu.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/content.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Path: E-commerce FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/parcours/e-commerce.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/e-commerce.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/e-commerce.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Path: E-commerce EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/paths/e-commerce.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/e-commerce.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/e-commerce.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Path: Growth FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/parcours/growth.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/growth.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/growth.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Path: Growth EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/paths/growth.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/growth.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/growth.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Path: Marketing Automation FR -->
+  <url>
+    <loc>https://3a-automation.com/academie/parcours/marketing-automation.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/marketing-automation.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/marketing-automation.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Academy Path: Marketing Automation EN -->
+  <url>
+    <loc>https://3a-automation.com/en/academy/paths/marketing-automation.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/parcours/marketing-automation.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/paths/marketing-automation.html"/>
+    <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
