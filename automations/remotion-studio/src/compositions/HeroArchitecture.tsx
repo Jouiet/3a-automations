@@ -343,7 +343,7 @@ export const HeroArchitecture: React.FC<{
         <Sequence from={0} durationInFrames={durationInFrames}>
           <AbsoluteFill style={{ opacity: 0.5 }}>
             <KenBurnsImage
-              src={staticFile('assets/generated/background_neural.png')}
+              src={staticFile('assets/generated/neural_network_hero.png')}
               startScale={1}
               endScale={1.15}
               startX={0}
@@ -365,7 +365,7 @@ export const HeroArchitecture: React.FC<{
 
       {/* Layer 1: AI Proposes */}
       <CrossfadeImage
-        src={staticFile('assets/generated/layer1_ai_proposes.png')}
+        src={staticFile('assets/generated/ai_intelligence_core.png')}
         fadeInStart={TIMELINE.layer1Start}
         fadeInDuration={30}
         fadeOutStart={TIMELINE.layer1End - 30}
@@ -398,7 +398,7 @@ export const HeroArchitecture: React.FC<{
 
       {/* Layer 2: Code Limits */}
       <CrossfadeImage
-        src={staticFile('assets/generated/layer2_code_limits.png')}
+        src={staticFile('assets/generated/code_security_barrier.png')}
         fadeInStart={TIMELINE.layer2Start}
         fadeInDuration={30}
         fadeOutStart={TIMELINE.layer2End - 30}
@@ -431,7 +431,7 @@ export const HeroArchitecture: React.FC<{
 
       {/* Layer 3: Human Decides */}
       <CrossfadeImage
-        src={staticFile('assets/generated/layer3_human_decides.png')}
+        src={staticFile('assets/generated/human_control_interface.png')}
         fadeInStart={TIMELINE.layer3Start}
         fadeInDuration={30}
         fadeOutStart={TIMELINE.layer3End - 30}
