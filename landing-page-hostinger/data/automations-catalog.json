@@ -1,7 +1,7 @@
 {
   "version": "1.7.0",
   "lastUpdated": "2026-01-21",
-  "totalCount": 119,
+  "totalCount": 121,
   "description": "3A Automation - Catalog of marketing automation solutions",
   "categories": {
     "lead-gen": {
@@ -54,7 +54,7 @@
     "voice-ai": {
       "name_fr": "Voice AI & Téléphonie",
       "name_en": "Voice AI & Telephony",
-      "count": 1
+      "count": 6
     }
   },
   "automations": [
@@ -1556,6 +1556,57 @@
         "Conditional Execution",
         "LLM Reasoning",
         "Interactive Autonomy"
+      ]
+    },
+    {
+      "id": "voice-agent-b2b",
+      "name_fr": "Agent Vocal B2B (Sales + Support)",
+      "name_en": "B2B Voice Agent (Sales + Support)",
+      "category": "voice-ai",
+      "type": "script",
+      "script": "agency/core/voice-agent-b2b.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "24/7 disponible",
+      "frequency_en": "24/7 available",
+      "benefit_fr": "Ventes + Support automatisés pour agence B2B",
+      "benefit_en": "Automated Sales + Support for B2B agency",
+      "features": [
+        "RAG Knowledge Base (129 chunks)",
+        "TF-IDF search (598 terms)",
+        "Multi-AI fallback",
+        "Service pack recommendations"
+      ],
+      "status": "tested-ok",
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning",
+        "Interactive Autonomy"
+      ]
+    },
+    {
+      "id": "knowledge-base-services",
+      "name_fr": "Knowledge Base Services (TF-IDF)",
+      "name_en": "Service Knowledge Base (TF-IDF)",
+      "category": "voice-ai",
+      "type": "script",
+      "script": "agency/core/knowledge-base-services.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Build on demand",
+      "frequency_en": "Build on demand",
+      "benefit_fr": "Index 119 automations pour Voice AI",
+      "benefit_en": "Index 119 automations for Voice AI",
+      "features": [
+        "TF-IDF indexing",
+        "129 searchable chunks",
+        "598 vocabulary terms",
+        "Cosine similarity search"
+      ],
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
       ]
     },
     {

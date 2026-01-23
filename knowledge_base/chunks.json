@@ -1376,6 +1376,38 @@
     "text": "Grok Voice Realtime (WebSocket + TTS) Grok Voice Realtime (WebSocket + TTS) Native audio $0.05/min + Gemini TTS fallback Audio natif $0.05/min + fallback Gemini TTS Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy"
   },
   {
+    "id": "voice-agent-b2b",
+    "type": "automation",
+    "title": "B2B Voice Agent (Sales + Support)",
+    "title_fr": "Agent Vocal B2B (Sales + Support)",
+    "category": "voice-ai",
+    "category_name": "Voice AI & Telephony",
+    "category_name_fr": "Voice AI & Téléphonie",
+    "benefit_en": "Automated Sales + Support for B2B agency",
+    "benefit_fr": "Ventes + Support automatisés pour agence B2B",
+    "frequency_en": "24/7 available",
+    "frequency_fr": "24/7 disponible",
+    "agentic_level": 4,
+    "script": "agency/core/voice-agent-b2b.cjs",
+    "text": "B2B Voice Agent (Sales + Support) Agent Vocal B2B (Sales + Support) Automated Sales + Support for B2B agency Ventes + Support automatisés pour agence B2B Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy RAG Knowledge Base (129 chunks) TF-IDF search (598 terms) Multi-AI fallback Service pack recommendations"
+  },
+  {
+    "id": "knowledge-base-services",
+    "type": "automation",
+    "title": "Service Knowledge Base (TF-IDF)",
+    "title_fr": "Knowledge Base Services (TF-IDF)",
+    "category": "voice-ai",
+    "category_name": "Voice AI & Telephony",
+    "category_name_fr": "Voice AI & Téléphonie",
+    "benefit_en": "Index 119 automations for Voice AI",
+    "benefit_fr": "Index 119 automations pour Voice AI",
+    "frequency_en": "Build on demand",
+    "frequency_fr": "Build on demand",
+    "agentic_level": 1,
+    "script": "agency/core/knowledge-base-services.cjs",
+    "text": "Service Knowledge Base (TF-IDF) Knowledge Base Services (TF-IDF) Index 119 automations for Voice AI Index 119 automations pour Voice AI Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability TF-IDF indexing 129 searchable chunks 598 vocabulary terms Cosine similarity search"
+  },
+  {
     "id": "whatsapp-booking-notifications",
     "type": "automation",
     "title": "WhatsApp Booking Notifications",
@@ -1990,7 +2022,7 @@
     "title": "Voice AI & Telephony",
     "title_fr": "Voice AI & Téléphonie",
     "category": "voice-ai",
-    "automation_count": 1,
-    "text": "Voice AI & Telephony Voice AI & Téléphonie voice-ai 4 automations AI Voice Web Assistant AI Phone Assistant Voice Widget Templates (8 industries) Grok Voice Realtime (WebSocket + TTS)"
+    "automation_count": 6,
+    "text": "Voice AI & Telephony Voice AI & Téléphonie voice-ai 6 automations AI Voice Web Assistant AI Phone Assistant Voice Widget Templates (8 industries) Grok Voice Realtime (WebSocket + TTS) B2B Voice Agent (Sales + Support) Service Knowledge Base (TF-IDF)"
   }
 ]
