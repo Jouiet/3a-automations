@@ -297,6 +297,74 @@ function validateCSSVariables() {
   addPassed('CSS', 'Required CSS variables present');
 }
 
+function validateH2Consistency() {
+  console.log('\n📝 Validating H2 Title Consistency...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  // Patterns that indicate a section h2 that SHOULD have section-title-ultra
+  // but doesn't have any class attribute
+  const bareH2Pattern = /<h2>([^<]+)<\/h2>/g;
+
+  // Contexts where bare h2 is NOT acceptable
+  const sectionContexts = [
+    'category-header',  // Automation catalog categories
+    'cta-section',      // CTA sections
+    'cta-content',      // CTA content blocks
+    'faq-section',      // FAQ sections
+    'faq-category',     // FAQ categories
+    'faq-cta',          // FAQ CTA
+    'flywheel-cta',     // Flywheel CTA
+    'cta '              // Generic CTA class
+  ];
+
+  // Files/paths to SKIP (blog articles, legal pages, academy content)
+  const skipPaths = [
+    '/blog/',
+    '/legal/',
+    '/academie/cours/',
+    '/academy/courses/',
+    '404.html'
+  ];
+
+  let totalBareH2 = 0;
+
+  for (const file of htmlFiles) {
+    const filePath = relPath(file);
+
+    // Skip certain file types
+    if (skipPaths.some(skip => filePath.includes(skip))) {
+      continue;
+    }
+
+    const content = fs.readFileSync(file, 'utf8');
+
+    // Find bare h2 tags (no class attribute)
+    let match;
+    while ((match = bareH2Pattern.exec(content)) !== null) {
+      const h2Text = match[1].trim();
+
+      // Get surrounding context (200 chars before)
+      const start = Math.max(0, match.index - 200);
+      const context = content.substring(start, match.index);
+
+      // Check if this h2 is in a section context that requires styling
+      const isInSectionContext = sectionContexts.some(ctx => context.includes(ctx));
+
+      if (isInSectionContext) {
+        totalBareH2++;
+        addWarning('H2', file, `Bare h2 "${h2Text.substring(0, 30)}..." in section context - add section-title-ultra`);
+      }
+    }
+  }
+
+  if (totalBareH2 === 0) {
+    addPassed('H2', 'All section h2 tags have section-title-ultra class');
+  } else {
+    addWarning('H2', 'summary', `${totalBareH2} bare h2 tags found in section contexts - run --fix or add class manually`);
+  }
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // MAIN
 // ════════════════════════════════════════════════════════════════════════════
@@ -312,6 +380,7 @@ validateAgentCount();
 validateForbiddenPatterns();
 validateSVGIcons();
 validateCSSVariables();
+validateH2Consistency();
 
 // ════════════════════════════════════════════════════════════════════════════
 // REPORT

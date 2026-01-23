@@ -1,5 +1,5 @@
 # DESIGN PROCESS FORENSIC AUDIT
-## Version: 1.0 | Date: 23/01/2026 | Session 142
+## Version: 1.1 | Date: 23/01/2026 | Session 142bis
 
 ---
 
@@ -13,6 +13,7 @@
 | Visual Regression | No | Available | Tool Ready |
 | Design Documentation | Fragmented | Unified | DESIGN-SYSTEM.md |
 | Stylelint Coverage | 0 | Full | 55→0 issues (FIXED Session 142) |
+| **H2 Consistency** | **No** | **Yes** | **ADDED Session 142bis** |
 
 ---
 
@@ -26,8 +27,11 @@
 | Forbidden patterns | PASS | section-title-ultra enforced |
 | SVG colors | PASS | currentColor used |
 | CSS variables | PASS | All required vars present |
+| **H2 consistency** | **PASS** | **Bare h2 in sections detected (NEW)** |
 
 **Command**: `node scripts/validate-design-system.cjs [--fix] [--ci]`
+
+**NEW in v2.1:** The script now validates that all h2 tags in section contexts (CTA, FAQ, category headers) have the `section-title-ultra` class. Blog, legal, and academy content are excluded from this check.
 
 ### 1.2 Stylelint
 | Config | Status | Notes |

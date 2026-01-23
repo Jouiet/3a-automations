@@ -132,6 +132,20 @@
 .section-desc-ultra { }
 ```
 
+**H2 TITLE HIERARCHY:**
+
+| Context | Class Required | Example |
+|---------|----------------|---------|
+| Main page sections | `section-title-ultra` | "Questions fréquentes", "Prêt à automatiser?" |
+| Category headers (catalog) | `section-title-ultra` | "SMS Marketing", "Content & Video" (via `.category-header .section-title-ultra`) |
+| CTA sections | `section-title-ultra` | "Become Our Next Case Study" |
+| FAQ categories | `section-title-ultra` | "ROI & Résultats", "Technical" |
+| Feature boxes/cards | No class required | Styled by parent container |
+| Contact info cards | No class required | "Email", "Response Time" |
+| Blog/legal content | No class required | Article content h2s |
+
+**VALIDATION:** Le script `validate-design-system.cjs` détecte automatiquement les h2 sans classe dans les contextes de section.
+
 ### Cards
 ```css
 .glass-panel { /* Glassmorphism effect */ }

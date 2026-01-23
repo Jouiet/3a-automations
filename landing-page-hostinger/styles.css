@@ -7194,7 +7194,8 @@ html:not([data-period]) .price-period.period-monthly {
   color: #ef4444;
 }
 
-.category-header h2 {
+/* Category headers use section-title-ultra with compact sizing */
+.category-header .section-title-ultra {
   font-size: 1.5rem;
   color: var(--text-light);
   margin-bottom: 0;
