@@ -1,5 +1,5 @@
 # DESIGN PROCESS FORENSIC AUDIT
-## Version: 1.1 | Date: 23/01/2026 | Session 142bis
+## Version: 1.2 | Date: 23/01/2026 | Session 142ter
 
 ---
 
@@ -13,13 +13,36 @@
 | Visual Regression | No | Available | Tool Ready |
 | Design Documentation | Fragmented | Unified | DESIGN-SYSTEM.md |
 | Stylelint Coverage | 0 | Full | 55→0 issues (FIXED Session 142) |
-| **H2 Consistency** | **No** | **Yes** | **ADDED Session 142bis** |
+| H2 Consistency | No | Yes | ADDED Session 142bis |
+| **H1 Consistency** | **No** | **Yes** | **ADDED Session 142ter** |
+| **CSS Version Automation** | **No** | **Yes** | **ADDED Session 142ter** |
+| **Gradient Title Enforcement** | **No** | **Yes** | **ADDED Session 142ter** |
+
+---
+
+## SESSION 142ter - LESSONS LEARNED
+
+### Problèmes Identifiés
+| Problème | Cause Racine | Solution |
+|----------|--------------|----------|
+| Titres H1 sans gradient | CSS uniquement sur `.gradient-text`, pas sur `.highlight` | Ajout `.hero-title .highlight` global |
+| CSS non visible après changement | Cache browser, version non incrémentée | Script `bump-css-version.cjs` |
+| Incohérence versions CSS | Fichiers academy avec path relatifs sans `?v=` | Toutes les références CSS normalisées |
+| Validation H1 manquante | Script ne vérifiait que H2 | Ajout `validateH1Consistency()` |
+
+### Nouvelles Automatisations
+| Script | Usage | Trigger |
+|--------|-------|---------|
+| `bump-css-version.cjs` | Auto-incrément version CSS | Après modification styles.css |
+| `validateH1Consistency()` | Détecte H1 sans classes standard | Pre-commit hook |
+| `validateCSSVersionConsistency()` | Vérifie cohérence version | Pre-commit hook |
+| `validateCSSBaseClasses()` | Vérifie gradient dans classes de base | Pre-commit hook |
 
 ---
 
 ## 1. TOOLS AUDIT
 
-### 1.1 validate-design-system.cjs
+### 1.1 validate-design-system.cjs (v2.2)
 | Test | Result | Notes |
 |------|--------|-------|
 | Automation count (119) | PASS | No old "174" values found |
@@ -27,11 +50,30 @@
 | Forbidden patterns | PASS | section-title-ultra enforced |
 | SVG colors | PASS | currentColor used |
 | CSS variables | PASS | All required vars present |
-| **H2 consistency** | **PASS** | **Bare h2 in sections detected (NEW)** |
+| H2 consistency | PASS | Bare h2 in sections detected |
+| **H1 consistency** | **WARN** | **Bare h1 / non-standard classes detected** |
+| **CSS version** | **PASS** | **All files use v=33.0** |
+| **CSS base classes** | **PASS** | **Gradient properties present** |
 
 **Command**: `node scripts/validate-design-system.cjs [--fix] [--ci]`
 
-**NEW in v2.1:** The script now validates that all h2 tags in section contexts (CTA, FAQ, category headers) have the `section-title-ultra` class. Blog, legal, and academy content are excluded from this check.
+**NEW in v2.2:**
+- H1 validation: Détecte bare h1 et classes non-standard (doit utiliser `hero-title-ultra`)
+- CSS version consistency: Vérifie que toutes les pages utilisent la même version CSS
+- CSS base class validation: Vérifie que les classes de titre ont le gradient
+
+### 1.2 bump-css-version.cjs (NEW)
+| Feature | Description |
+|---------|-------------|
+| Auto-detect | Détecte version actuelle dans tous les fichiers HTML |
+| Version check | `--check` mode pour CI (échoue si incohérence) |
+| Dry run | `--dry-run` pour prévisualiser sans modifier |
+| CSS minification | Re-minifie automatiquement styles.min.css |
+
+**Commands**:
+- `node scripts/bump-css-version.cjs` - Incrémente version
+- `node scripts/bump-css-version.cjs --check` - Vérifie cohérence (CI)
+- `node scripts/bump-css-version.cjs --dry-run` - Mode preview
 
 ### 1.2 Stylelint
 | Config | Status | Notes |
@@ -119,9 +161,50 @@
 | `color: white` | `color: var(--text-light)` | stylelint |
 | `--color-primary` | `--primary` | Manual |
 
+### 2.4 Title Class Hierarchy
+| Context | Class Required | Gradient |
+|---------|----------------|----------|
+| Hero H1 | `hero-title` | Via `.highlight` spans |
+| Section H2 | `section-title-ultra` | Built-in |
+| Category H2 | `section-title-ultra` | Built-in |
+| FAQ H2 | `section-title-ultra` | Built-in |
+
+**CRITICAL**: Tous les `<span class="highlight">` dans un `.hero-title` ont automatiquement le gradient.
+
 ---
 
-## 3. IMAGE GENERATION WORKFLOW
+## 3. CSS CHANGE WORKFLOW (OBLIGATOIRE)
+
+### 3.1 Après Modification de styles.css
+```bash
+# 1. Valider les changements
+npx stylelint "landing-page-hostinger/styles.css"
+
+# 2. Bumper la version CSS (CRITIQUE pour cache busting)
+node scripts/bump-css-version.cjs
+
+# 3. Vérifier cohérence
+node scripts/bump-css-version.cjs --check
+
+# 4. Commit et push
+git add -A && git commit -m "style: description" && git push
+```
+
+### 3.2 Checklist Pré-Déploiement
+- [ ] `styles.css` modifié
+- [ ] `styles.min.css` régénéré (auto par bump-css-version)
+- [ ] Version CSS incrémentée dans TOUS les HTML
+- [ ] Validation design-system passée
+- [ ] Test visuel local effectué
+
+### 3.3 Vérification Post-Déploiement
+1. Hard refresh (Cmd+Shift+R) sur le site live
+2. Vérifier Network → styles.css montre la nouvelle version
+3. Vérifier visuellement les titres ont le gradient
+
+---
+
+## 4. IMAGE GENERATION WORKFLOW
 
 ### 3.1 Google Whisk (Recommended for Concepts)
 | Feature | Value |
