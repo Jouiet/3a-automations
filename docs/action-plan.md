@@ -1,9 +1,44 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 142 - 23/01/2026 00:30 UTC):** TOUS les fixes appliqués et vérifiés empiriquement.
+> **✅ ÉTAT RÉEL (Session 144 - 23/01/2026):** Content strategy + Étagère Technologique complétée.
 
 ## Phase: STABILISATION TECHNIQUE (avant commercialisation)
+
+---
+
+## ✅ SESSION 144 - CONTENT & ÉTAGÈRE TECHNOLOGIQUE (23/01/2026)
+
+### Analyse Stratégique: Leçons Salesforce (IA Fiable)
+- Étude de 4 documents sur les risques IA et le pivot Salesforce 116 jours
+- Concepts clés: Déterministe vs Probabiliste, Piège 80/20, Hello World Fallacy
+- Architecture hybride documentée: Intent Layer (IA) + Action Layer (Code) + Override Layer (Humain)
+
+### Blog Articles Créés
+| Article | FR | EN |
+|---------|----|----|
+| Automatisation Fiable: Leçons Salesforce | ✅ `blog/automatisation-fiable-lecons-salesforce-2026.html` | ✅ `en/blog/reliable-automation-salesforce-lessons-2026.html` |
+
+### Academy Courses Créés
+| Cours | FR | EN |
+|-------|----|----|
+| Architecture Hybride (5 leçons, 45min) | ✅ `academy/courses/architecture-hybride.html` | ✅ `en/academy/courses/hybrid-architecture.html` |
+
+### Étagère Technologique - Transferts Session 144
+| Composant | Source | Destination | Status |
+|-----------|--------|-------------|--------|
+| omnisend-sensor.cjs | N/A (adapté) | MyDealz | ✅ |
+| ga4-sensor.cjs | 3A | MyDealz | ✅ |
+| retention-sensor.cjs | 3A | MyDealz | ✅ |
+
+### SEO Updates
+- Sitemap: +2 URLs (blog articles)
+- Blog index FR/EN: Nouveau card + schema.org
+- Schema.org: Course + FAQPage sur tous les nouveaux contenus
+
+### Commits
+- `36446d7` feat(blog): Add Salesforce reliability lessons article FR+EN
+- `dc25569` feat(academy): Add Hybrid Architecture course FR+EN
 
 ---
 
