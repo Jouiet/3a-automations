@@ -171,6 +171,25 @@
 
 **CRITICAL**: Tous les `<span class="highlight">` dans un `.hero-title` ont automatiquement le gradient.
 
+### 2.5 Category Icon Standards (NOUVEAU Session 142ter)
+| Classe | Couleur | Background |
+|--------|---------|------------|
+| acquisition | `--primary` (cyan) | rgba(79, 186, 241, 0.2) |
+| seo | `--accent` (green) | rgba(16, 185, 129, 0.2) |
+| email | `--accent-purple` | rgba(139, 92, 246, 0.2) |
+| shopify | #95bf47 (brand) | rgba(149, 191, 71, 0.2) |
+| analytics | `--accent-orange` | rgba(245, 158, 11, 0.2) |
+| video/vidéo | `--accent-purple` | rgba(139, 92, 246, 0.2) |
+| sms | `--primary` | rgba(79, 186, 241, 0.2) |
+| retention | `--accent` | rgba(16, 185, 129, 0.2) |
+| whatsapp | #25D366 (brand) | rgba(37, 211, 102, 0.2) |
+| voice | `--primary` | rgba(79, 186, 241, 0.2) |
+| dropshipping | `--accent-orange` | rgba(245, 158, 11, 0.2) |
+| cinematicads | `--accent-purple` | rgba(139, 92, 246, 0.2) |
+| avatar | `--accent-purple` | rgba(139, 92, 246, 0.2) |
+
+**VALIDATION**: `validateCategoryIconConsistency()` vérifie que chaque classe `category-icon.*` utilisée dans le HTML a une définition CSS correspondante.
+
 ---
 
 ## 3. CSS CHANGE WORKFLOW (OBLIGATOIRE)

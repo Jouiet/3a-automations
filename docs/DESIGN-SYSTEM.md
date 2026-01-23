@@ -174,6 +174,26 @@
 .benefit-card:nth-child(3) .benefit-icon { color: var(--accent-purple); }
 ```
 
+### Category Icons (Automations Page)
+Chaque catégorie DOIT avoir une définition CSS `.category-icon.<name>`.
+
+| Class | Color | Usage |
+|-------|-------|-------|
+| acquisition | `--primary` | Lead Gen |
+| seo | `--accent` | SEO & Content |
+| email | `--accent-purple` | Email Marketing |
+| shopify | #95bf47 | Shopify Admin |
+| analytics | `--accent-orange` | Analytics |
+| video, vidéo | `--accent-purple` | Content & Video |
+| sms | `--primary` | SMS Marketing |
+| retention | `--accent` | Retention & Churn |
+| whatsapp | #25D366 | WhatsApp Business |
+| voice | `--primary` | Voice AI |
+| dropshipping | `--accent-orange` | Dropshipping |
+| cinematicads | `--accent-purple` | CinematicAds/Avatar |
+
+**RULE**: EVERY `.category-icon.<class>` used in HTML MUST have CSS definition with `background` and `color`.
+
 ---
 
 ## 3. FORBIDDEN PATTERNS
@@ -196,6 +216,10 @@ These rules are enforced by `validate-design-system.cjs`:
 3. **All CSS variables** must match this document
 4. **Automations count** must be 119 (from registry)
 5. **Agents count** must be 22
+6. **H1 titles** must use `hero-title` or `hero-title-ultra` class
+7. **H2 section titles** must use `section-title-ultra` class
+8. **CSS version** must be consistent across all HTML files
+9. **Category icons** - every `.category-icon.<class>` must have CSS definition
 
 ---
 
