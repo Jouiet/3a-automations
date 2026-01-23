@@ -7612,9 +7612,33 @@ a.clickable-card:hover .card-cta {
   position: relative;
 }
 
+.hybrid-intro {
+  max-width: 900px;
+  margin: var(--spacing-xl) auto;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  text-align: center;
+}
+
+.hybrid-intro-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.hybrid-intro-text strong {
+  color: var(--text-light);
+}
+
+.hybrid-intro-text em {
+  color: var(--primary);
+  font-style: normal;
+  font-weight: 600;
+}
+
 .hybrid-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-xl);
   margin-top: var(--spacing-2xl);
 }
@@ -7706,9 +7730,23 @@ a.clickable-card:hover .card-cta {
   margin-top: var(--spacing-xs);
 }
 
+.hybrid-tagline {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(79, 186, 241, 0.2);
+  font-style: italic;
+}
+
 .hybrid-cta {
   text-align: center;
   margin-top: var(--spacing-2xl);
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
 }
 
 /* Partners Section - Premium Cyber Branding */
