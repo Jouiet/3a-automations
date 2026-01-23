@@ -50,7 +50,7 @@
 
   <!-- Externalized CSS -->
   <link rel="stylesheet" href="css/critical.css">
-  <link rel="stylesheet" href="styles.css?v=45.0">
+  <link rel="stylesheet" href="styles.css?v=46.0">
   <link rel="stylesheet" href="css/ultra-investors.css">
 
   <!-- Preconnect for external resources -->
@@ -359,11 +359,13 @@
   <!-- Hero Ultra Futuriste -->
   <main role="main">
     <section class="hero-ultra scanline" id="main-content">
-      <!-- Hero Architecture Cinematic Background (Remotion) -->
-      <div class="hero-cinematic-bg">
-        <video autoplay muted loop playsinline class="cinematic-bg-video" poster="assets/whisk/neural_cortex_bg.png">
+      <!-- Hero Architecture Cinematic Background (Scroll-Based Animation) -->
+      <div class="hero-cinematic-bg hero-scroll-animation">
+        <!-- Canvas for frame-by-frame scroll animation (Apple-style) -->
+        <canvas id="hero-canvas" class="hero-scroll-canvas"></canvas>
+        <!-- Video fallback for no-JS or mobile -->
+        <video autoplay muted loop playsinline class="cinematic-bg-video hero-video-fallback" poster="assets/whisk/neural_cortex_bg.png">
           <source src="assets/video/hero-architecture-loop.mp4" type="video/mp4">
-          <!-- Fallback image if video not supported -->
           <img src="assets/whisk/neural_cortex_bg.png" alt="Neural Cortex AI" class="cinematic-bg-img">
         </video>
         <div class="cinematic-overlay"></div>
@@ -1326,6 +1328,11 @@
   <script src="geo-locale.js" defer></script>
   <script src="agentic-transparency.js" defer></script>
   <script src="script.js?v=26.1" defer></script>
+  
+  <!-- GSAP ScrollTrigger for scroll-based animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="scripts/scroll-animation.js" defer></script>
 </body>
 
 </html>
