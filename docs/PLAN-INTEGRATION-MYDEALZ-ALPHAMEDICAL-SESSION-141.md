@@ -23,7 +23,7 @@ Audit forensique TOTAL d'Alpha Medical couvrant:
 | **Scripts** | 310 | .cjs, .js, .py, .sh |
 | **Liquid Files** | 156 | 79 snippets + 61 sections + 16 templates |
 | **GitHub Workflows** | 15 | sensor-monitor, theme-check, health-check, etc |
-| **Sensors** | 4 | shopify, klaviyo, retention, sync-to-3a |
+| **Sensors** | 5 | shopify, klaviyo, retention, ga4, sync-to-3a |
 | **MCP Servers** | 5 | shopify, klaviyo, filesystem + 2 pending |
 | **Products** | 90 | 85 active, 5 draft |
 | **Bundles** | 9 | All at 999 inventory |
@@ -37,10 +37,10 @@ Audit forensique TOTAL d'Alpha Medical couvrant:
 | A2A Protocol | ✅ 43 agents | ❌ Via proxy | CRITICAL |
 | UCP Protocol | ✅ Production | ❌ Via proxy | HIGH |
 | GPM Central | ✅ Production | ✅ Sync | OK |
-| Sensors | ✅ 20 types | ⚠️ 4 types | MEDIUM |
+| Sensors | ✅ 20 types | ✅ 5 types | OK (Session 144) |
 | Hardened Agents | ✅ 22 L5 | ❌ 0 | HIGH |
-| Multi-AI Fallback | ✅ Resilient | ❌ Single | MEDIUM |
-| Design System | ✅ Document | ❌ Absent | MEDIUM |
+| Multi-AI Fallback | ✅ Resilient | ✅ Transferred | OK (Session 144) |
+| Design System | ✅ Document | ✅ Template | OK (Session 144) |
 | Stylelint | ✅ 0 issues | ❌ Absent | LOW |
 | Voice AI | ✅ Grok | ✅ xAI | OK |
 | Theme Check | ❌ Absent | ✅ Native | ALPHA WIN |
@@ -55,18 +55,21 @@ Audit forensique TOTAL d'Alpha Medical couvrant:
 | **Shopify Token 403** | Sensors OFF | Regenerate token |
 | **Klaviyo Key 401** | Email metrics OFF | Verify key |
 
-### Recommandations Transfert 3A → Alpha Medical
+### Transferts Réalisés Session 144 (Technology Shelf)
 
-**A TRANSFERER:**
-- A2A Client pattern (pour interop future)
-- Resilient multi-AI fallback pattern
-- GA4 Sensor template
-- Design System document template
+**COMPLÉTÉS:**
+- ✅ Resilient multi-AI fallback pattern → `automations/lib/resilient-ai-fallback.cjs`
+- ✅ GA4 Sensor template → `sensors/ga4-sensor.cjs`
+- ✅ Design System template → `docs/DESIGN-SYSTEM-TEMPLATE.md`
+- ✅ RAG Knowledge Base (from MyDealz) → `scripts/ai-production/knowledge_base_*.py`
+
+**RESTANT (Phase 3):**
+- ⏳ A2A Client pattern (pour interop future) - LOW priority
 
 **NE PAS TRANSFERER:**
 - Docker/VPS (Shopify-hosted)
 - n8n (GitHub Actions suffisant)
-- 20 sensors (4 suffisent)
+- 20 sensors (5 suffisent maintenant)
 - Forensic Engine (overkill)
 
 ### Documents Crees
