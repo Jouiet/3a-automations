@@ -1,7 +1,7 @@
 # ÉTAGÈRE TECHNOLOGIQUE - ÉCOSYSTÈME 3A
 ## Mutualisation des Technologies Selon le Modèle du "Potentiel de Situation"
 
-> **Version**: 2.1 | **Date**: 23/01/2026 | **Session**: 144 (Phase 1+2 100% COMPLETED)
+> **Version**: 2.2 | **Date**: 23/01/2026 | **Session**: 144 (Phase 1+2+Voice B2B COMPLETED)
 > **Méthode**: Inspirée du modèle industriel chinois (François Jullien / Sun Tzu)
 > **Principe**: Coopération technique → Potentiel → Concurrence commerciale
 
@@ -54,6 +54,8 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | **Visual Regression** | ✅ 9 baselines | `visual-regression/*.png` | ✅ OUI |
 | **VPS Docker** | ✅ Production | `docker-compose.yml` | ⚠️ Spécifique |
 | **119 Automations** | ✅ Production | `automations-registry.json` | ✅ OUI |
+| **Voice Agent B2B** | ✅ Production | `agency/core/voice-agent-b2b.cjs` | ✅ OUI |
+| **Service KB (TF-IDF)** | ✅ 129 chunks | `knowledge_base/chunks.json` | ✅ OUI |
 
 **Technologies UNIQUES 3A:**
 - Orchestration multi-subsidiaires (Twin Sovereignty)
@@ -231,8 +233,10 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 │   └── product_sync_pipeline.py
 │
 ├── Voice Agent
-│   ├── xai_voice_agent.py (LiveKit)
-│   ├── voice_knowledge_base.py (dynamic)
+│   ├── xai_voice_agent.py (LiveKit - Alpha Medical)
+│   ├── voice_agent_core.py (MyDealz e-commerce)
+│   ├── voice-agent-b2b.cjs (3A agency B2B)
+│   ├── knowledge-base-services.cjs (3A 119 automations)
 │   └── grok-voice-realtime.cjs (WebSocket)
 │
 └── Progressive Memory
