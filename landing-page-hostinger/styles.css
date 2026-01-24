@@ -921,11 +921,12 @@ h1 .highlight {
   width: 100%;
   height: 100%;
   border-radius: var(--radius-lg);
-  border: 1px solid transparent;
-  background: linear-gradient(var(--secondary), var(--secondary)) padding-box,
+  border: 2px solid transparent;
+  background: linear-gradient(transparent, transparent) padding-box,
     var(--gradient-cyber) border-box;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .btn-secondary-cyber:hover {
