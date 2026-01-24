@@ -1,11 +1,12 @@
-# MÉTHODOLOGIE HERO ANIMATION v3.3 "Tech on the Shelf"
+# MÉTHODOLOGIE HERO ANIMATION v4.0 "Simple Auto-Loop"
 
 ## 3A Automation - Standard de Production
 
-> **UPDATE v3.3 (24/01/2026):** Fix auto-loop + 16:9 aspect ratio.
-> **UPDATE v3.2 (24/01/2026):** Ajout incident CSP + piège #7.
-> **UPDATE v3.1 (24/01/2026):** Ajout étape OBLIGATOIRE de synchronisation CSS.
-> Sans ces étapes, le déploiement échoue ou l'animation ne fonctionne pas.
+> **UPDATE v4.0 (24/01/2026):** RÉÉCRITURE COMPLÈTE - NO SCROLL DEPENDENCY
+> - SUPPRIMÉ: GSAP ScrollTrigger (inutile)
+> - NOUVEAU: hero-animation.js (auto-loop simple à 30fps)
+> - Animation démarre IMMÉDIATEMENT, boucle continue
+> - ZÉRO relation avec le scroll
 
 ---
 
