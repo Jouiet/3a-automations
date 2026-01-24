@@ -1,6 +1,9 @@
-# MÉTHODOLOGIE HERO ANIMATION v3.0 "Tech on the Shelf"
+# MÉTHODOLOGIE HERO ANIMATION v3.1 "Tech on the Shelf"
 
 ## 3A Automation - Standard de Production
+
+> **UPDATE v3.1 (24/01/2026):** Ajout étape OBLIGATOIRE de synchronisation CSS.
+> Sans cette étape, le CI échoue avec "Multiple versions detected".
 
 ---
 
@@ -110,10 +113,22 @@ frameCount: 240,  // = durée × 30fps
 ```html
 <!-- Ligne ~369 -->
 <source src="assets/video/hero-v52-luminous.mp4" type="video/mp4">
-
-<!-- Ligne ~53 - Cache bust -->
-<link rel="stylesheet" href="styles.css?v=53.0">
 ```
+
+### Étape 3.5 : SYNCHRONISER VERSIONS CSS (OBLIGATOIRE)
+
+**⚠️ CRITIQUE:** Ne PAS incrémenter manuellement `?v=XX` dans index.html.
+Utiliser le script automatique qui synchronise TOUS les 70 fichiers HTML:
+
+```bash
+# Auto-fix: synchronise toutes les versions CSS
+node scripts/design-auto-fix.cjs
+
+# Vérifier que tout est cohérent
+node scripts/design-auto-fix.cjs --check
+```
+
+**POURQUOI:** Le CI vérifie la cohérence des versions. Si index.html a v=53 mais les autres fichiers v=52, le déploiement ÉCHOUE.
 
 ---
 
@@ -155,10 +170,19 @@ curl -s "https://3a-automation.com/scripts/scroll-animation.js" | grep frameCoun
 ## 🚀 5. DÉPLOIEMENT GIT
 
 ```bash
+# Vérifier derniers déploiements (doit être SUCCESS)
+gh run list --limit 3
+
+# Commit (SANS --no-verify pour que le pre-commit valide)
 git add .
-git commit -m "feat: v52 Hero Animation - [VIDEO_NAME]" --no-verify
+git commit -m "feat: vXX Hero Animation - [VIDEO_NAME]"
 git push origin main
+
+# Surveiller le déploiement
+gh run watch
 ```
+
+**⚠️ NE PAS UTILISER `--no-verify`** - Le pre-commit hook détecte les versions CSS inconsistantes.
 
 Le workflow GitHub Actions se déclenchera automatiquement sur push vers `landing-page-hostinger/**`.
 
@@ -167,10 +191,36 @@ Le workflow GitHub Actions se déclenchera automatiquement sur push vers `landin
 ## ⚠️ PIÈGES COURANTS
 
 1. **frameCount incorrect** : Doit être = durée × 30
-2. **Cache navigateur** : Toujours incrémenter `?v=XX.X`
+2. **Versions CSS inconsistantes** : TOUJOURS exécuter `design-auto-fix.cjs` avant commit
 3. **Workflow non déclenché** : Le commit doit modifier `landing-page-hostinger/**`
 4. **Anciennes vidéos** : Supprimer les fichiers v51, v50, etc.
+5. **`--no-verify` sur commit** : INTERDIT - bypass les validations critiques
+6. **Déploiements précédents en échec** : Vérifier `gh run list` AVANT de commiter
 
 ---
 
-**Status** : ✅ PRODUCTION READY | **Version** : 3.0 | **Date** : 2026-01-24
+## 📊 INCIDENT SESSION 147 (24/01/2026)
+
+**Symptôme:** Vidéo v52-luminous rendue mais site affiche ancienne version.
+
+**Diagnostic forensique:**
+```
+| Élément | Local | Live | Status |
+|---------|-------|------|--------|
+| CSS version | v=53.0 | v=52.0 | ❌ Desync |
+| Frames | 240 | 240 | ✅ |
+| frameCount | 240 | 240 | ✅ |
+```
+
+**Cause racine:** 3 derniers déploiements ÉCHOUÉS car:
+- `index.html` → v=53.0 (modifié manuellement)
+- 66 autres fichiers → v=52.0 (non synchronisés)
+- CI détecte: `❌ Multiple versions: 52.0, 53.0`
+
+**Fix:** `node scripts/design-auto-fix.cjs` → synchronise TOUS les fichiers à v=54.0
+
+**Leçon:** TOUJOURS utiliser le script auto-fix, JAMAIS modifier manuellement les versions CSS.
+
+---
+
+**Status** : ✅ PRODUCTION READY | **Version** : 3.1 | **Date** : 2026-01-24
