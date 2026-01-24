@@ -6,6 +6,7 @@
  * controlled by user scroll position.
  *
  * v2.0: Added auto-loop when user is not scrolling (24/01/2026)
+ * v2.1: Fixed auto-loop to work within hero section during idle (24/01/2026)
  */
 
 (function () {
@@ -73,6 +74,8 @@
         preloadImages().then(() => {
             setupScrollTrigger();
             isInitialized = true;
+            // Initialize lastScrollTime so idle checker waits 2s from page load
+            lastScrollTime = Date.now();
             console.log('[ScrollAnimation] Initialized with', CONFIG.frameCount, 'frames');
         });
     }
@@ -280,8 +283,9 @@
             const now = Date.now();
             const idleTime = now - lastScrollTime;
 
-            // If user hasn't scrolled for a while and we're not in scroll trigger zone
-            if (idleTime > CONFIG.autoLoopIdleDelay && !scrollTriggerActive && !isAutoLooping) {
+            // If user hasn't scrolled for a while, start auto-loop
+            // Works both inside and outside the hero section
+            if (idleTime > CONFIG.autoLoopIdleDelay && !isAutoLooping) {
                 startAutoLoop();
             }
         }, 500); // Check every 500ms
