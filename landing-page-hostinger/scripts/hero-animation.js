@@ -2,15 +2,17 @@
  * Hero Animation Controller
  * 3A Automation - Simple Auto-Loop Video Background
  *
+ * v5.0: TRUE edge-to-edge - aggressive crop from Veo source (24/01/2026)
+ *       - Frames 1920x1080 (full HD, no letterbox)
+ *       - Cropped from source: 1100x960 → scaled to 1920x1080
+ *       - 192 frames (6.4s at 30fps)
  * v4.1: Cache-buster for cropped frames (24/01/2026)
  * v4.0: Frames pre-cropped 1600x900 - true edge-to-edge (24/01/2026)
- * v3.1: TRUE edge-to-edge coverage fix (24/01/2026)
- * v3.0: Complete rewrite - NO scroll dependency (24/01/2026)
  *
  * Features:
  * - Auto-loop animation at 30fps
  * - TRUE edge-to-edge on ALL screen ratios
- * - Pre-cropped 1600x900 frames (no black bars)
+ * - Full HD 1920x1080 frames (no black bars)
  * - Starts immediately on page load
  * - NO GSAP, NO ScrollTrigger, NO scroll dependency
  */
@@ -20,11 +22,11 @@
 
     // Configuration
     const CONFIG = {
-        frameCount: 240,
+        frameCount: 192,
         fps: 30,
         canvasId: 'hero-canvas',
         // Cache-buster version for frames (increment when frames change)
-        frameVersion: '4.1',
+        frameVersion: '5.0',
         // Detect path depth (handles en/ subfolder)
         getAssetsPath: function () {
             const isSubfolder = window.location.pathname.includes('/en/') ||
