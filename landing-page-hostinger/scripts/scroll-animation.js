@@ -1,9 +1,11 @@
 /**
  * Scroll-Based Animation Controller
  * 3A Automation - Hero Animation
- * 
+ *
  * Uses GSAP ScrollTrigger for smooth frame-by-frame animation
  * controlled by user scroll position.
+ *
+ * v2.0: Added auto-loop when user is not scrolling (24/01/2026)
  */
 
 (function () {
@@ -26,7 +28,11 @@
         scrollEnd: '+=150%', // Overlapping span for smoother transition
         preloadBatch: 50,
         invalidateOnRefresh: true, // Handle responsive changes better
-        pinSpacing: true // Ensure content doesn't jump
+        pinSpacing: true, // Ensure content doesn't jump
+        // Auto-loop settings
+        autoLoopEnabled: true,
+        autoLoopFPS: 30, // 30fps for smooth playback
+        autoLoopIdleDelay: 2000 // Start auto-loop after 2s of no scroll
     };
 
     // State
@@ -34,6 +40,10 @@
     let canvas, context;
     let isInitialized = false;
     let currentFrame = 0;
+    let autoLoopAnimationId = null;
+    let lastScrollTime = 0;
+    let isAutoLooping = false;
+    let scrollTriggerActive = false;
 
     /**
      * Initialize the scroll animation
@@ -68,14 +78,28 @@
     }
 
     /**
-     * Resize canvas to maintain aspect ratio
+     * Resize canvas to maintain 16:9 aspect ratio and cover viewport
      */
     function resizeCanvas() {
-        const container = canvas.parentElement;
-        const aspectRatio = 1920 / 1080;
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const aspectRatio = 16 / 9;
 
-        canvas.width = container.offsetWidth;
-        canvas.height = container.offsetWidth / aspectRatio;
+        // Calculate dimensions to cover viewport while maintaining 16:9
+        let canvasWidth, canvasHeight;
+
+        if (viewportWidth / viewportHeight > aspectRatio) {
+            // Viewport is wider than 16:9 - fit to width
+            canvasWidth = viewportWidth;
+            canvasHeight = viewportWidth / aspectRatio;
+        } else {
+            // Viewport is taller than 16:9 - fit to height
+            canvasHeight = viewportHeight;
+            canvasWidth = viewportHeight * aspectRatio;
+        }
+
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
 
         // Redraw current frame after resize
         if (images[currentFrame] && images[currentFrame].complete) {
@@ -151,6 +175,10 @@
         // Check if GSAP is available
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
             console.warn('[ScrollAnimation] GSAP or ScrollTrigger not found');
+            // Fallback: start auto-loop immediately without scroll trigger
+            if (CONFIG.autoLoopEnabled) {
+                startAutoLoop();
+            }
             return;
         }
 
@@ -165,7 +193,28 @@
                 scrub: 0.5, // Smooth scrubbing
                 pin: true, // Pin the section during animation
                 anticipatePin: 1,
+                onEnter: function () {
+                    scrollTriggerActive = true;
+                    stopAutoLoop();
+                },
+                onLeave: function () {
+                    scrollTriggerActive = false;
+                    // Reset to first frame and start auto-loop when leaving
+                    if (CONFIG.autoLoopEnabled) {
+                        startAutoLoop();
+                    }
+                },
+                onEnterBack: function () {
+                    scrollTriggerActive = true;
+                    stopAutoLoop();
+                },
+                onLeaveBack: function () {
+                    scrollTriggerActive = false;
+                },
                 onUpdate: function (self) {
+                    lastScrollTime = Date.now();
+                    stopAutoLoop();
+
                     const frameIndex = Math.floor(self.progress * (CONFIG.frameCount - 1));
                     if (frameIndex !== currentFrame) {
                         drawFrame(frameIndex);
@@ -175,6 +224,67 @@
         });
 
         console.log('[ScrollAnimation] ScrollTrigger configured');
+
+        // Start auto-loop checker
+        if (CONFIG.autoLoopEnabled) {
+            startIdleChecker();
+        }
+    }
+
+    /**
+     * Start auto-loop animation
+     */
+    function startAutoLoop() {
+        if (isAutoLooping || scrollTriggerActive) return;
+
+        isAutoLooping = true;
+        let lastTime = performance.now();
+        const frameDuration = 1000 / CONFIG.autoLoopFPS;
+
+        function loop(currentTime) {
+            if (!isAutoLooping) return;
+
+            const deltaTime = currentTime - lastTime;
+
+            if (deltaTime >= frameDuration) {
+                currentFrame = (currentFrame + 1) % CONFIG.frameCount;
+                drawFrame(currentFrame);
+                lastTime = currentTime - (deltaTime % frameDuration);
+            }
+
+            autoLoopAnimationId = requestAnimationFrame(loop);
+        }
+
+        autoLoopAnimationId = requestAnimationFrame(loop);
+        console.log('[ScrollAnimation] Auto-loop started');
+    }
+
+    /**
+     * Stop auto-loop animation
+     */
+    function stopAutoLoop() {
+        if (!isAutoLooping) return;
+
+        isAutoLooping = false;
+        if (autoLoopAnimationId) {
+            cancelAnimationFrame(autoLoopAnimationId);
+            autoLoopAnimationId = null;
+        }
+    }
+
+    /**
+     * Check for idle state to start auto-loop
+     */
+    function startIdleChecker() {
+        setInterval(function () {
+            const now = Date.now();
+            const idleTime = now - lastScrollTime;
+
+            // If user hasn't scrolled for a while and we're not in scroll trigger zone
+            if (idleTime > CONFIG.autoLoopIdleDelay && !scrollTriggerActive && !isAutoLooping) {
+                startAutoLoop();
+            }
+        }, 500); // Check every 500ms
     }
 
     // Initialize when DOM is ready
