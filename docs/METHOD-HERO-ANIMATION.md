@@ -1,7 +1,13 @@
-# MÉTHODOLOGIE HERO ANIMATION v4.1 "Simple Auto-Loop"
+# MÉTHODOLOGIE HERO ANIMATION v4.2 "Pre-Cropped Frames"
 
 ## 3A Automation - Standard de Production
 
+> **UPDATE v4.2 (24/01/2026):** FRAMES PRÉ-CROPÉES + CLEANUP HOMEPAGE
+> - Frames source 1920x1080 avaient des bandes noires (letterbox)
+> - FIX: ffmpeg crop 1600x900 (supprime les barres)
+> - Commande: `ffmpeg -vf "crop=1600:900:160:90"`
+> - SUPPRIMÉ: Agentic Status Banner de la homepage (telemetry → dashboard only)
+>
 > **UPDATE v4.1 (24/01/2026):** FIX EDGE-TO-EDGE
 > - CSS: `left:50%; transform:translate(-50%,-50%); min-width:177.78vh`
 > - JS: canvas dimensionné pour couvrir TOUS les ratios d'écran
@@ -366,4 +372,62 @@ left: 0, right: 1792   // = viewport width
 
 ---
 
-**Status** : ✅ PRODUCTION READY | **Version** : 4.1 | **Date** : 2026-01-24
+## 📊 INCIDENT 6 - SOURCE FRAMES AVEC LETTERBOX (24/01/2026)
+
+**Symptôme:** Animation hero avec bandes noires sur les côtés malgré CSS edge-to-edge.
+
+**Diagnostic:**
+```
+| Élément | Avant | Après |
+|---------|-------|-------|
+| Frame source | 1920×1080 (letterbox) | 1600×900 (cropped) |
+| Bandes noires | Intégrées dans frames | Supprimées |
+| Méthode | Zoom factor hack | Crop ffmpeg propre |
+```
+
+**Cause racine:** Les frames source exportées de Remotion contenaient des bandes noires (letterbox) intégrées à l'image, pas un problème de CSS ou de canvas.
+
+**Fix:**
+```bash
+# Backup original frames
+mv landing-page-hostinger/assets/frames landing-page-hostinger/assets/frames-backup
+
+# Crop 240 frames to remove letterbox
+mkdir -p landing-page-hostinger/assets/frames
+for f in landing-page-hostinger/assets/frames-backup/*.jpg; do
+  ffmpeg -y -i "$f" -vf "crop=1600:900:160:90" -q:v 2 \
+    "landing-page-hostinger/assets/frames/$(basename "$f")"
+done
+```
+
+**Leçon:** Toujours vérifier les frames source AVANT d'appliquer des hacks CSS/JS. Si le problème est dans la source, corriger la source.
+
+---
+
+## 📊 INCIDENT 7 - TELEMETRY SUR HOMEPAGE (24/01/2026)
+
+**Symptôme:** Section "WORKFLOWS | 22 L5 AGENTS" avec badges API apparaissait sur la homepage au lieu de dashboard seulement.
+
+**Diagnostic:**
+```
+| Fichier | Contenu | Status |
+|---------|---------|--------|
+| index.html (FR) | agentic-status-banner + script | ❌ Présent |
+| en/index.html (EN) | agentic-status-banner + script | ❌ Présent |
+| dashboard.html | agentic-status-banner + script | ✅ Correct |
+```
+
+**Cause racine:** Le banner telemetry `#agentic-status-banner` et le script `agentic-transparency.js` avaient été ajoutés aux homepages par erreur lors d'une session précédente.
+
+**Fix:**
+- Supprimé la section `<!-- Agentic Status Banner (Live Data) -->` de index.html et en/index.html
+- Supprimé la référence au script `agentic-transparency.js` des deux homepages
+- Telemetry reste sur dashboard.html, investisseurs.html, academie.html (pages admin/avancées)
+
+**Commit:** `8e033ab - fix: remove telemetry banner from homepage`
+
+**Leçon:** Le telemetry est un outil de monitoring interne, pas une feature marketing. Garder sur admin dashboard uniquement.
+
+---
+
+**Status** : ✅ PRODUCTION READY | **Version** : 4.2 | **Date** : 2026-01-24
