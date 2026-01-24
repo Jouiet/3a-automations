@@ -1,7 +1,12 @@
-# MÉTHODOLOGIE HERO ANIMATION v4.0 "Simple Auto-Loop"
+# MÉTHODOLOGIE HERO ANIMATION v4.1 "Simple Auto-Loop"
 
 ## 3A Automation - Standard de Production
 
+> **UPDATE v4.1 (24/01/2026):** FIX EDGE-TO-EDGE
+> - CSS: `left:50%; transform:translate(-50%,-50%); min-width:177.78vh`
+> - JS: canvas dimensionné pour couvrir TOUS les ratios d'écran
+> - Animation couvre 100% horizontalement sur tous écrans
+>
 > **UPDATE v4.0 (24/01/2026):** RÉÉCRITURE COMPLÈTE - NO SCROLL DEPENDENCY
 > - SUPPRIMÉ: GSAP ScrollTrigger (inutile)
 > - NOUVEAU: hero-animation.js (auto-loop simple à 30fps)
@@ -317,4 +322,48 @@ Quand l'utilisateur était dans la section hero (viewport), `scrollTriggerActive
 
 ---
 
-**Status** : ✅ PRODUCTION READY | **Version** : 3.3 | **Date** : 2026-01-24
+## 📊 INCIDENT 5 - EDGE-TO-EDGE COVERAGE (24/01/2026)
+
+**Symptôme:** Animation ne couvre pas l'écran de bout en bout - bandes noires sur les côtés.
+
+**Diagnostic:**
+```
+| Élément | Avant | Après |
+|---------|-------|-------|
+| CSS left | 0 | 50% |
+| CSS transform | translateY(-50%) | translate(-50%, -50%) |
+| CSS min-width | (aucun) | 177.78vh (16:9 ratio) |
+| CSS min-height | 100vh | 56.25vw (16:9 ratio) |
+| JS canvas.width | viewportWidth | max(vw, vh*16/9) |
+```
+
+**Cause racine:** Le canvas était positionné `left: 0` avec une largeur fixe, sans garantie de couvrir les écrans larges. Pour les viewports plus larges que 16:9, le canvas ne couvrait pas toute la largeur.
+
+**Fix:** hero-animation.js v3.1 + styles.css:
+```css
+.hero-canvas {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 177.78vh; /* 100vh * 16/9 - covers wide screens */
+  min-height: 56.25vw; /* 100vw * 9/16 - covers tall screens */
+}
+```
+
+```javascript
+// Canvas dimensions = max of viewport OR 16:9 ratio requirement
+canvas.width = Math.max(viewportWidth, viewportHeight * 16 / 9);
+canvas.height = Math.max(viewportHeight, viewportWidth * 9 / 16);
+```
+
+**Résultat:** Animation couvre 100% de l'écran horizontalement sur TOUS les ratios d'écran.
+
+**Vérification:**
+```javascript
+// DevTools check
+coversFullWidth: true  // ✅
+left: 0, right: 1792   // = viewport width
+```
+
+---
+
+**Status** : ✅ PRODUCTION READY | **Version** : 4.1 | **Date** : 2026-01-24
