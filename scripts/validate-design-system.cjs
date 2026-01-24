@@ -714,6 +714,103 @@ function validateSVGSizeConstraints() {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+// VALIDATE LAYOUT STRUCTURE (NEW: Session 148 - Detect header/footer issues)
+// ════════════════════════════════════════════════════════════════════════════
+
+function validateLayoutStructure() {
+  console.log('\n🏗️ Validating Layout Structure (Header/Footer)...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  // Standard header components that MUST be present
+  const requiredHeaderComponents = [
+    { pattern: /class="logo-icon"/, name: 'logo-icon' },
+    { pattern: /class="logo-text-wrap"/, name: 'logo-text-wrap' },
+    { pattern: /class="nav"/, name: 'nav' },
+    { pattern: /class="nav-toggle"/, name: 'nav-toggle' },
+    { pattern: /class="lang-switch"/, name: 'lang-switch' }
+  ];
+
+  // Obsolete header patterns that should NOT be present
+  const obsoleteHeaderPatterns = [
+    { pattern: /class="header-inner"/, name: 'header-inner (obsolete)' },
+    { pattern: /class="nav-links"/, name: 'nav-links (obsolete - use direct nav links)' },
+    { pattern: /class="mobile-menu-btn"/, name: 'mobile-menu-btn (obsolete - use nav-toggle)' },
+    { pattern: /class="logo-link"/, name: 'logo-link (obsolete - use logo class)' }
+  ];
+
+  // Footer structure requirements
+  const footerUltraPattern = /class="footer-ultra"/;
+  const basicFooterPattern = /class="footer"[^-]/; // matches "footer" but not "footer-ultra"
+
+  let headerIssues = 0;
+  let footerIssues = 0;
+  let headerFilesWithIssues = [];
+  let footerFilesWithIssues = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    // Skip files that don't have header (like JSON or minimal HTML)
+    if (!content.includes('<header')) continue;
+
+    // Check for obsolete header patterns
+    for (const obs of obsoleteHeaderPatterns) {
+      if (obs.pattern.test(content)) {
+        headerIssues++;
+        if (!headerFilesWithIssues.includes(relFile)) {
+          headerFilesWithIssues.push(relFile);
+        }
+      }
+    }
+
+    // Check for missing required header components
+    const headerMatch = content.match(/<header[^>]*>([\s\S]*?)<\/header>/);
+    if (headerMatch) {
+      const headerContent = headerMatch[1];
+      for (const req of requiredHeaderComponents) {
+        if (!req.pattern.test(headerContent)) {
+          // Only report if header exists but component is missing
+          if (!headerFilesWithIssues.includes(relFile)) {
+            headerFilesWithIssues.push(relFile);
+          }
+        }
+      }
+    }
+
+    // Check footer structure - should be footer-ultra, not basic footer
+    if (content.includes('<footer')) {
+      if (basicFooterPattern.test(content) && !footerUltraPattern.test(content)) {
+        footerIssues++;
+        if (!footerFilesWithIssues.includes(relFile)) {
+          footerFilesWithIssues.push(relFile);
+        }
+      }
+    }
+  }
+
+  // Report results
+  if (headerFilesWithIssues.length === 0 && footerFilesWithIssues.length === 0) {
+    addPassed('Layout', 'All headers and footers use standard structure');
+  } else {
+    if (headerFilesWithIssues.length > 0) {
+      addWarning('Layout', 'summary',
+        `${headerFilesWithIssues.length} files have non-standard headers: ${headerFilesWithIssues.slice(0, 3).join(', ')}${headerFilesWithIssues.length > 3 ? '...' : ''}`);
+    }
+    if (footerFilesWithIssues.length > 0) {
+      addWarning('Layout', 'summary',
+        `${footerFilesWithIssues.length} files use basic footer instead of footer-ultra: ${footerFilesWithIssues.slice(0, 3).join(', ')}${footerFilesWithIssues.length > 3 ? '...' : ''}`);
+    }
+
+    // Pass with warnings if issues are minor
+    if (headerFilesWithIssues.length < 5 && footerFilesWithIssues.length < 5) {
+      addPassed('Layout', `Layout structure validated (${headerFilesWithIssues.length} header warnings, ${footerFilesWithIssues.length} footer warnings)`);
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // MAIN
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -735,6 +832,7 @@ validateCSSBaseClasses();
 validateCategoryIconConsistency();
 validateHTMLClassesHaveCSS();    // NEW: Session 145 - Detect HTML classes without CSS
 validateSVGSizeConstraints();    // NEW: Session 145 - Detect unconstrained SVGs
+validateLayoutStructure();       // NEW: Session 148 - Detect non-standard headers/footers
 
 // ════════════════════════════════════════════════════════════════════════════
 // REPORT

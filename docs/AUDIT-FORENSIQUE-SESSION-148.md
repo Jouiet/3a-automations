@@ -1,10 +1,10 @@
 # AUDIT FORENSIQUE - SESSION 148
 ## Date: 24/01/2026 23:30 UTC
-## Status: EN COURS - 30/47 PROBLÈMES RÉSOLUS (64%)
+## Status: EN COURS - 42/47 PROBLÈMES RÉSOLUS (89%)
 
 ---
 
-## PROGRESSION SESSION 148 (25/01/2026 00:30 UTC)
+## PROGRESSION SESSION 148 (25/01/2026 01:30 UTC)
 
 ### Phase 1: CRITIQUE - ✅ 100% COMPLÉTÉE
 | # | Action | Status | Commit |
@@ -24,16 +24,107 @@
 | 9 | Ajouter footers EN academy | ✅ DONE | 7 EN files |
 | 10 | Supprimer "X min de lecture" | ✅ DONE | academie/guides.html |
 | 11 | Fixer blog/index.html header | ✅ DONE | 47f48e3 |
-| 12 | Ajouter blog/index.html footer-ultra | ✅ DONE | Session 148b |
+| 12 | Ajouter blog/index.html footer-ultra | ✅ DONE | 4bfbe09 |
 
-### Phase 3: RESTANTE
+### Phase 3: BLOG ARTICLES - ✅ 100% COMPLÉTÉE
+| # | Action | Status | Commit |
+|---|--------|--------|--------|
+| 13 | EN blog/index.html header + footer-ultra | ✅ DONE | 88395bb |
+| 14 | EN blog articles (4 files) headers | ✅ DONE | 88395bb |
+| 15 | FR blog articles (5 files) headers | ✅ DONE | 88395bb |
+
+### Phase 4: RESTANTE
 | # | Action | Status | Priority |
 |---|--------|--------|----------|
-| 13 | EN blog pages header/footer | ⏳ PENDING | HAUTE |
-| 14 | FR blog articles header/footer | ⏳ PENDING | HAUTE |
-| 15 | academie.html header/footer | ⏳ PENDING | MOYENNE |
-| 16 | en/academy.html header/footer | ⏳ PENDING | MOYENNE |
-| 17 | Audit code mort complet | ⏳ PENDING | BASSE |
+| 16 | academie.html header/footer | ⏳ PENDING | MOYENNE |
+| 17 | en/academy.html header/footer | ⏳ PENDING | MOYENNE |
+| 18 | Audit code mort complet | ⏳ PENDING | BASSE |
+| 19 | Fix "174" in agentic-status.json | ⏳ PENDING | BASSE |
+| 20 | Ajouter validateLayoutStructure() | ✅ DONE | CRITIQUE |
+
+### Résultats du nouveau validateur (25/01/2026 01:45 UTC)
+
+```bash
+node scripts/validate-design-system.cjs
+
+🏗️ Validating Layout Structure (Header/Footer)...
+⚠️  WARNINGS (2):
+  [Layout] 24 files have non-standard headers
+  [Layout] 22 files use basic footer instead of footer-ultra
+```
+
+**Fichiers détectés avec problèmes (à corriger):**
+- 404.html
+- academie/parcours/*.html (3 files)
+- academie/guides.html
+- academie.html
+- en/academy.html
+- Et autres...
+
+---
+
+## 🔴 ANALYSE CRITIQUE: POURQUOI L'AUTOMATISATION N'A PAS DÉTECTÉ CES PROBLÈMES
+
+### Constat Factuel
+
+**18 validateurs existent mais AUCUN ne vérifie la structure HTML:**
+
+| Validateur | Ce qu'il vérifie | Détecte header/footer? |
+|------------|------------------|------------------------|
+| validateAutomationCount | "119" vs "121" | ❌ NON |
+| validateAgentCount | "18" vs "22" | ❌ NON |
+| validateForbiddenPatterns | Couleurs hardcodées | ❌ NON |
+| validateSVGIcons | currentColor | ❌ NON |
+| validateCSSVariables | var(--xxx) présent | ❌ NON |
+| validateH1Consistency | Classes H1 | ❌ NON |
+| validateH2Consistency | section-title-ultra | ❌ NON |
+| validateCSSVersionConsistency | ?v=XX.0 | ❌ NON |
+| validateCSSBaseClasses | Définitions CSS | ❌ NON |
+| validateCategoryIconConsistency | category-icon-* | ❌ NON |
+| validateHTMLClassesHaveCSS | Classes→CSS | ❌ NON |
+| validateSVGSizeConstraints | width/height SVG | ❌ NON |
+| validateButtons | btn-cyber usage | ❌ NON |
+| validateCards | glassmorphism | ❌ NON |
+| validateTypography | font-family var | ❌ NON |
+| validateSpacing | spacing vars | ❌ NON |
+| validateAccessibility | alt, aria-label | ❌ NON |
+| validateResponsive | media queries | ❌ NON |
+
+### Ce qui MANQUE (GAP CRITIQUE)
+
+```
+❌ validateHeaderStructure() - INEXISTANT
+   → Devrait vérifier: logo-icon, logo-text-wrap, nav, btn-nav, nav-toggle, lang-switch
+
+❌ validateFooterStructure() - INEXISTANT
+   → Devrait vérifier: footer-ultra, footer-status-bar, footer-grid-ultra, footer-bottom-ultra
+
+❌ validateNavigationConsistency() - INEXISTANT
+   → Devrait vérifier: liens cohérents entre toutes les pages
+```
+
+### Impact
+
+| Problème | Pages affectées | Détecté par automation? |
+|----------|-----------------|-------------------------|
+| Headers non-standard | 25+ pages | ❌ NON |
+| Footers basiques (pas ultra) | 20+ pages | ❌ NON |
+| nav-links au lieu de nav direct | 15+ pages | ❌ NON |
+| logo-link au lieu de logo | 15+ pages | ❌ NON |
+| mobile-menu-btn au lieu de nav-toggle | 15+ pages | ❌ NON |
+
+### Solution Requise
+
+**NOUVEAU VALIDATEUR À CRÉER:** `validateLayoutStructure()`
+
+```javascript
+// Checks requis:
+1. Header contient: .logo-icon, .logo-text-wrap, .nav, .btn-nav, .nav-toggle, .lang-switch
+2. Footer est: .footer-ultra (pas .footer)
+3. Footer contient: .footer-status-bar, .footer-grid-ultra, .footer-bottom-ultra
+4. Nav ne contient PAS: ul.nav-links (pattern obsolète)
+5. Header ne contient PAS: .header-inner, .mobile-menu-btn (patterns obsolètes)
+```
 
 ---
 ## ORIGINAL AUDIT BELOW
