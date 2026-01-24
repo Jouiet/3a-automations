@@ -133,8 +133,8 @@
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         // Scale to cover canvas while maintaining aspect ratio
-        // ZOOM_FACTOR: 1.25 = crops out the black bars from source video
-        const ZOOM_FACTOR = 1.25;
+        // ZOOM_FACTOR: 1.5 = crops out the black bars from source video
+        const ZOOM_FACTOR = 1.5;
         const scale = Math.max(
             canvas.width / img.naturalWidth,
             canvas.height / img.naturalHeight
