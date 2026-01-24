@@ -11,7 +11,7 @@
 
     // Configuration
     const CONFIG = {
-        frameCount: 600,
+        frameCount: 240,
         // Detect path depth (handles en/ index.html)
         getAssetsPath: function () {
             const isSubfolder = window.location.pathname.includes('/en/') ||
