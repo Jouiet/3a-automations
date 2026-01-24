@@ -1,11 +1,48 @@
 # 3A Automation
 >
-> Version: 71.1 | 23/01/2026 | Session 146bis - **WHISK METHODOLOGY** + Remotion Video (Multi-Subsidiary)
+> Version: 72.0 | 24/01/2026 | Session 147 - **HERO ANIMATION FIX** (CSS Sync + CSP)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 147 - HERO ANIMATION FIX (24/01/2026)
+
+### Problème Initial
+Video hero v52-luminous rendue mais site affichait ancienne version + animation bloquée sur frame 1.
+
+### Diagnostic Forensique
+
+| Problème | Cause Racine | Fix |
+| :--- | :--- | :--- |
+| **3 déploiements ÉCHOUÉS** | CSS versions inconsistantes (52.0 vs 53.0) | `design-auto-fix.cjs` → v=54.0 |
+| **Animation bloquée frame 1** | CSP bloquait GSAP (cdnjs.cloudflare.com) | Màj 53 fichiers HTML `<meta>` CSP |
+| **CSP dans mauvais fichier** | Modifié nginx.conf mais CSP est dans HTML | Corrigé dans `<meta>` tags |
+
+### Corrections Appliquées
+
+| Commit | Description | Fichiers |
+| :--- | :--- | :--- |
+| `ca525e3` | Sync CSS v=54.0 | 69 fichiers HTML |
+| `fedbedc` | Add cdnjs to CSP meta tags | 53 fichiers HTML |
+| `74285d6` | Doc METHOD-HERO-ANIMATION v3.2 | 1 fichier MD |
+
+### Validation Finale
+
+```bash
+# Console après fix:
+[ScrollAnimation] ScrollTrigger configured ✅
+[ScrollAnimation] Initialized with 240 frames ✅
+```
+
+### Documentation Mise à Jour
+
+- ✅ `docs/METHOD-HERO-ANIMATION.md` v3.2 - Incidents 1 & 2 documentés
+- ✅ Piège #7 ajouté: CSP dans HTML meta, pas nginx.conf
+- ✅ CSS version: v=54.0 (70 fichiers synchronisés)
+
+---
 
 ## SESSION 146bis - WHISK METHODOLOGY + REMOTION (23/01/2026)
 
@@ -125,7 +162,7 @@ WHISK (Manual) → Download Assets → REMOTION (Compose) → Output MP4
 
 ### Metrics Session 145ter
 - CSS Lines: 10,498 → **10,998** (+500)
-- CSS Version: v=42.0 → **v=43.0**
+- CSS Version: v=43.0 → **v=54.0** (Session 147)
 - Validator Errors: 15 → **0**
 - Validator Warnings: 20 → **5** (minor)
 
@@ -211,7 +248,7 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
 | Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
-| CSS Version | **v=42.0** | ✅ Auto-bumped |
+| CSS Version | **v=54.0** | ✅ Auto-bumped (Session 147) |
 | CSS Lines | **10,498** | ✅ Complete (+163 Academy) |
 | Design Validation | PASS | ✅ All checks (20 warnings) |
 | Homepage Hybrid Section | FR+EN | ✅ Added |
