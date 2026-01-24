@@ -49,25 +49,44 @@
   }
   </script>
   <link rel="stylesheet" href="../css/critical.css">
-  <link rel="stylesheet" href="../styles.css?v=64.0">
+  <link rel="stylesheet" href="../styles.css?v=65.0">
 </head>
 <body>
   <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
   <header class="header">
     <div class="container">
       <a href="/" class="logo">
-        <img src="/assets/images/logo.svg" alt="3A Automation">
-        <div>
-          <div class="logo-text">3A Automation</div>
-          <div class="logo-sub">AUTOMATION, ANALYTICS, AI</div>
+        <div class="logo-icon">
+          <img loading="eager" src="/logo.webp" alt="3A Automation Logo" width="40" height="40" />
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-text">3A</span>
+          <span class="logo-sub">AUTOMATION</span>
         </div>
       </a>
-      <nav class="nav">
-        <a href="/">Accueil</a>
-        <a href="/services/ecommerce.html">Services</a>
-        <a href="/academie.html">Académie</a>
-        <a href="/contact.html">Contact</a>
+      <nav class="nav" id="nav-menu">
+        <a href="/services/ecommerce.html">E-commerce</a>
+        <a href="/services/pme.html">PME</a>
+        <a href="/automations.html">Automations</a>
+        <a href="/pricing.html">Tarifs</a>
+        <a href="/booking.html">RDV</a>
+        <a href="/#contact" class="btn-nav">
+          <span>Contact</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="https://dashboard.3a-automation.com" class="btn-nav btn-dashboard" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="/en/academy/guides.html" class="lang-switch" title="Switch to English">EN</a>
       </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span class="hamburger"></span>
+      </button>
     </div>
   </header>
 
@@ -115,7 +134,7 @@
           </div>
           <div class="guide-info">
             <h3 class="guide-title">Connecter Klaviyo</h3>
-            <p class="guide-time">5 min de lecture</p>
+            
           </div>
           <svg width="20" height="20" class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -166,7 +185,7 @@
           </div>
           <div class="guide-info">
             <h3 class="guide-title">Connecter Shopify</h3>
-            <p class="guide-time">5 min de lecture</p>
+            
           </div>
           <svg width="20" height="20" class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -206,7 +225,7 @@
           </div>
           <div class="guide-info">
             <h3 class="guide-title">Créer une séquence email</h3>
-            <p class="guide-time">10 min de lecture</p>
+            
           </div>
           <svg width="20" height="20" class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -261,7 +280,7 @@
           </div>
           <div class="guide-info">
             <h3 class="guide-title">Lire vos rapports analytics</h3>
-            <p class="guide-time">8 min de lecture</p>
+            
           </div>
           <svg width="20" height="20" class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -300,7 +319,7 @@
           </div>
           <div class="guide-info">
             <h3 class="guide-title">Segmenter vos contacts</h3>
-            <p class="guide-time">12 min de lecture</p>
+            
           </div>
           <svg width="20" height="20" class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -347,7 +366,7 @@
           </div>
           <div class="guide-info">
             <h3 class="guide-title">Récupérer les paniers abandonnés</h3>
-            <p class="guide-time">15 min de lecture</p>
+            
           </div>
           <svg width="20" height="20" class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -394,7 +413,7 @@
           </div>
           <div class="guide-info">
             <h3 class="guide-title">Personnaliser vos templates</h3>
-            <p class="guide-time">10 min de lecture</p>
+            
           </div>
           <svg width="20" height="20" class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -442,7 +461,7 @@
           </div>
           <div class="guide-info">
             <h3 class="guide-title">Configurer les notifications</h3>
-            <p class="guide-time">5 min de lecture</p>
+            
           </div>
           <svg width="20" height="20" class="guide-toggle" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
         </div>
