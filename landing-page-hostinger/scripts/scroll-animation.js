@@ -15,7 +15,7 @@
         framePath: 'assets/frames/frame_',
         frameExtension: '.jpg',
         canvasId: 'hero-canvas',
-        triggerSelector: '.hero-section',
+        triggerSelector: '.hero-ultra',
         scrollStart: 'top top',
         scrollEnd: '+=200%', // Animation spans 2x viewport height
         preloadBatch: 50 // Preload frames in batches for performance
@@ -40,6 +40,12 @@
         }
 
         context = canvas.getContext('2d');
+
+        // Mark container as canvas-active (hides video fallback)
+        const container = canvas.closest('.hero-scroll-animation');
+        if (container) {
+            container.classList.add('canvas-active');
+        }
 
         // Set canvas dimensions
         resizeCanvas();
