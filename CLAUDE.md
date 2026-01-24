@@ -1,24 +1,22 @@
 # 3A Automation
 >
-> Version: 72.0 | 24/01/2026 | Session 147 - **HERO ANIMATION FIX** (CSS Sync + CSP)
+> Version: 73.0 | 24/01/2026 | Session 147 - **HERO ANIMATION COMPLETE** (CSS + CSP + 16:9 + Auto-Loop)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## SESSION 147 - HERO ANIMATION FIX (24/01/2026)
+## SESSION 147 - HERO ANIMATION FIX COMPLETE (24/01/2026)
 
-### Problème Initial
-Video hero v52-luminous rendue mais site affichait ancienne version + animation bloquée sur frame 1.
+### Problèmes Résolus
 
-### Diagnostic Forensique
-
-| Problème | Cause Racine | Fix |
-| :--- | :--- | :--- |
-| **3 déploiements ÉCHOUÉS** | CSS versions inconsistantes (52.0 vs 53.0) | `design-auto-fix.cjs` → v=54.0 |
-| **Animation bloquée frame 1** | CSP bloquait GSAP (cdnjs.cloudflare.com) | Màj 53 fichiers HTML `<meta>` CSP |
-| **CSP dans mauvais fichier** | Modifié nginx.conf mais CSP est dans HTML | Corrigé dans `<meta>` tags |
+| # | Problème | Cause Racine | Fix |
+| :--- | :--- | :--- | :--- |
+| 1 | **3 déploiements ÉCHOUÉS** | CSS versions inconsistantes (52.0 vs 53.0) | `design-auto-fix.cjs` → v=55.0 |
+| 2 | **Animation bloquée frame 1** | CSP bloquait GSAP (cdnjs.cloudflare.com) | Màj 53 fichiers HTML `<meta>` CSP |
+| 3 | **Décalage visuel grands écrans** | Canvas sans contrainte 16:9 | `min-width: 177.78vh` + centrage |
+| 4 | **Auto-loop ne démarre pas** | `scrollTriggerActive` bloquait idle | scroll-animation.js v2.2 |
 
 ### Corrections Appliquées
 
@@ -26,21 +24,33 @@ Video hero v52-luminous rendue mais site affichait ancienne version + animation 
 | :--- | :--- | :--- |
 | `ca525e3` | Sync CSS v=54.0 | 69 fichiers HTML |
 | `fedbedc` | Add cdnjs to CSP meta tags | 53 fichiers HTML |
-| `74285d6` | Doc METHOD-HERO-ANIMATION v3.2 | 1 fichier MD |
+| `699393e` | Hero 16:9 aspect ratio + auto-loop v2.0 | styles.css, scroll-animation.js |
+| `bb43ec6` | scroll-animation.js v2.2 (fix auto-loop) | 1 fichier JS |
+
+### scroll-animation.js v2.2
+
+```javascript
+// v2.0 (BLOQUÉ): Auto-loop ne démarre jamais dans hero section
+if (isAutoLooping || scrollTriggerActive) return;  // ❌
+
+// v2.2 (FIXÉ): Auto-loop fonctionne partout après 2s idle
+if (isAutoLooping) return;  // ✅
+```
 
 ### Validation Finale
 
 ```bash
-# Console après fix:
+# Console après fix v2.2:
 [ScrollAnimation] ScrollTrigger configured ✅
 [ScrollAnimation] Initialized with 240 frames ✅
+[ScrollAnimation] Auto-loop started ✅
 ```
 
 ### Documentation Mise à Jour
 
-- ✅ `docs/METHOD-HERO-ANIMATION.md` v3.2 - Incidents 1 & 2 documentés
-- ✅ Piège #7 ajouté: CSP dans HTML meta, pas nginx.conf
-- ✅ CSS version: v=54.0 (70 fichiers synchronisés)
+- ✅ `docs/METHOD-HERO-ANIMATION.md` v3.3 - Incidents 1-4 documentés
+- ✅ Piège #7: CSP dans HTML meta, pas nginx.conf
+- ✅ CSS version: v=55.0 (70 fichiers synchronisés)
 
 ---
 

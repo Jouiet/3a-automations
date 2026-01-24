@@ -1,7 +1,8 @@
-# MÉTHODOLOGIE HERO ANIMATION v3.2 "Tech on the Shelf"
+# MÉTHODOLOGIE HERO ANIMATION v3.3 "Tech on the Shelf"
 
 ## 3A Automation - Standard de Production
 
+> **UPDATE v3.3 (24/01/2026):** Fix auto-loop + 16:9 aspect ratio.
 > **UPDATE v3.2 (24/01/2026):** Ajout incident CSP + piège #7.
 > **UPDATE v3.1 (24/01/2026):** Ajout étape OBLIGATOIRE de synchronisation CSS.
 > Sans ces étapes, le déploiement échoue ou l'animation ne fonctionne pas.
@@ -254,4 +255,65 @@ Loading the script 'cdnjs.cloudflare.com/gsap.min.js' violates CSP
 
 ---
 
-**Status** : ✅ PRODUCTION READY | **Version** : 3.2 | **Date** : 2026-01-24
+## 📊 INCIDENT 3 - ASPECT RATIO 16:9 (24/01/2026)
+
+**Symptôme:** Décalage visuel sur grands écrans - animation ne couvre pas tout le viewport.
+
+**Diagnostic:**
+```
+| Élément | Avant | Après |
+|---------|-------|-------|
+| CSS canvas | height: 100vh | min-width: 177.78vh |
+| Positioning | non centré | left: 50%; transform: translateX(-50%) |
+```
+
+**Cause racine:** Le canvas utilisait `height: 100vh` sans contrainte de largeur minimum, causant des bandes noires sur écrans larges.
+
+**Fix:** Modification de `styles.css`:
+```css
+.hero-scroll-canvas {
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 177.78vh; /* 16:9 ratio garantit couverture */
+}
+```
+
+**Leçon:** Utiliser `min-width: 177.78vh` (100vh × 16/9) pour forcer le ratio 16:9 sur tous les écrans.
+
+---
+
+## 📊 INCIDENT 4 - AUTO-LOOP NE DÉMARRE PAS (24/01/2026)
+
+**Symptôme:** Animation s'arrête quand l'utilisateur cesse de scroller au lieu de boucler.
+
+**Diagnostic:**
+```
+| Version | Condition startAutoLoop | Comportement |
+|---------|------------------------|--------------|
+| v2.0 | if (isAutoLooping || scrollTriggerActive) | ❌ Bloqué dans hero |
+| v2.2 | if (isAutoLooping) | ✅ Fonctionne partout |
+```
+
+**Cause racine:** Le code v2.0 avait deux guards empêchant l'auto-loop:
+1. `startIdleChecker()` vérifiait `!scrollTriggerActive`
+2. `startAutoLoop()` vérifiait `scrollTriggerActive`
+
+Quand l'utilisateur était dans la section hero (viewport), `scrollTriggerActive = true` et l'auto-loop ne démarrait jamais.
+
+**Fix:** scroll-animation.js v2.2:
+- Retirer `!scrollTriggerActive` de `startIdleChecker()`
+- Retirer `scrollTriggerActive` de `startAutoLoop()`
+- Initialiser `lastScrollTime = Date.now()` au chargement
+
+**Résultat:** Auto-loop démarre après 2s d'inactivité, même dans la section hero.
+
+**Console de vérification:**
+```
+[ScrollAnimation] ScrollTrigger configured
+[ScrollAnimation] Initialized with 240 frames
+[ScrollAnimation] Auto-loop started  ✅
+```
+
+---
+
+**Status** : ✅ PRODUCTION READY | **Version** : 3.3 | **Date** : 2026-01-24
