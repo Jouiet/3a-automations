@@ -5,7 +5,7 @@
     "agentic_metrics": {
         "total_automations": 121,
         "level_3_4_agents": 22,
-        "mcp_tools_active": 124
+        "3a_global_mcp_tools": 124
     },
     "verified_apis": {
         "Shopify": "OK",
