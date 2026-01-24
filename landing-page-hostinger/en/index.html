@@ -268,11 +268,14 @@
   <!-- Hero Ultra Futuristic -->
   <main role="main">
     <section class="hero-ultra scanline" id="main-content">
-      <!-- Hero Architecture Cinematic Background (Remotion) -->
-      <div class="hero-cinematic-bg">
-        <video autoplay muted loop playsinline class="cinematic-bg-video" poster="../assets/whisk/neural_cortex_bg.png">
+      <!-- Hero Architecture Cinematic Background (Scroll-Based Animation) -->
+      <div class="hero-cinematic-bg hero-scroll-animation">
+        <!-- Canvas for frame-by-frame scroll animation (Apple-style) -->
+        <canvas id="hero-canvas" class="hero-scroll-canvas"></canvas>
+        <!-- Video fallback for no-JS or mobile -->
+        <video autoplay muted loop playsinline class="cinematic-bg-video hero-video-fallback"
+          poster="../assets/whisk/neural_cortex_bg.png">
           <source src="../assets/video/hero-architecture-loop.mp4" type="video/mp4">
-          <!-- Fallback image if video not supported -->
           <img src="../assets/whisk/neural_cortex_bg.png" alt="Neural Cortex AI" class="cinematic-bg-img">
         </video>
         <div class="cinematic-overlay"></div>
@@ -325,47 +328,47 @@
             </a>
           </div>
 
-        <!-- Tech Stack Orbital - 24 Technologies -->
-        <div class="hero-visual">
-          <div class="tech-orbital">
-            <!-- Ring 1: E-commerce & CRM (8 techs) -->
-            <div class="orbital-ring ring-1">
-              <div class="tech-icon ring-1-pos-0"><span>Shopify</span></div>
-              <div class="tech-icon ring-1-pos-1"><span>Klaviyo</span></div>
-              <div class="tech-icon ring-1-pos-2"><span>GA4</span></div>
-              <div class="tech-icon ring-1-pos-3"><span>GTM</span></div>
-              <div class="tech-icon ring-1-pos-4"><span>Dsers</span></div>
-              <div class="tech-icon ring-1-pos-5"><span>Flow</span></div>
-              <div class="tech-icon ring-1-pos-6"><span>GSC</span></div>
-              <div class="tech-icon ring-1-pos-7"><span>Apps Script</span></div>
-            </div>
-            <!-- Ring 2: Ads & AI (8 techs) -->
-            <div class="orbital-ring ring-2">
-              <div class="tech-icon ring-2-pos-0"><span>Claude</span></div>
-              <div class="tech-icon ring-2-pos-1"><span>Grok</span></div>
-              <div class="tech-icon ring-2-pos-2"><span>Meta</span></div>
-              <div class="tech-icon ring-2-pos-3"><span>TikTok</span></div>
-              <div class="tech-icon ring-2-pos-4"><span>LinkedIn</span></div>
-              <div class="tech-icon ring-2-pos-5"><span>Gemini</span></div>
-              <div class="tech-icon ring-2-pos-6"><span>Google Ads</span></div>
-            </div>
-            <!-- Ring 3: Tools & Infra (8 techs) -->
-            <div class="orbital-ring ring-3">
-              <div class="tech-icon ring-3-pos-0"><span>GitHub</span></div>
-              <div class="tech-icon ring-3-pos-1"><span>Leonardo</span></div>
-              <div class="tech-icon ring-3-pos-2"><span>Kling</span></div>
-              <div class="tech-icon ring-3-pos-3"><span>Playwright</span></div>
-              <div class="tech-icon ring-3-pos-4"><span>DevTools</span></div>
-              <div class="tech-icon ring-3-pos-5"><span>WordPress</span></div>
-              <div class="tech-icon ring-3-pos-6"><span>Hostinger</span></div>
-              <div class="tech-icon ring-3-pos-7"><span>Apps Script</span></div>
-            </div>
-            <div class="orbital-center">
-              <span class="center-text">3A</span>
-              <span class="center-pulse"></span>
+          <!-- Tech Stack Orbital - 24 Technologies -->
+          <div class="hero-visual">
+            <div class="tech-orbital">
+              <!-- Ring 1: E-commerce & CRM (8 techs) -->
+              <div class="orbital-ring ring-1">
+                <div class="tech-icon ring-1-pos-0"><span>Shopify</span></div>
+                <div class="tech-icon ring-1-pos-1"><span>Klaviyo</span></div>
+                <div class="tech-icon ring-1-pos-2"><span>GA4</span></div>
+                <div class="tech-icon ring-1-pos-3"><span>GTM</span></div>
+                <div class="tech-icon ring-1-pos-4"><span>Dsers</span></div>
+                <div class="tech-icon ring-1-pos-5"><span>Flow</span></div>
+                <div class="tech-icon ring-1-pos-6"><span>GSC</span></div>
+                <div class="tech-icon ring-1-pos-7"><span>Apps Script</span></div>
+              </div>
+              <!-- Ring 2: Ads & AI (8 techs) -->
+              <div class="orbital-ring ring-2">
+                <div class="tech-icon ring-2-pos-0"><span>Claude</span></div>
+                <div class="tech-icon ring-2-pos-1"><span>Grok</span></div>
+                <div class="tech-icon ring-2-pos-2"><span>Meta</span></div>
+                <div class="tech-icon ring-2-pos-3"><span>TikTok</span></div>
+                <div class="tech-icon ring-2-pos-4"><span>LinkedIn</span></div>
+                <div class="tech-icon ring-2-pos-5"><span>Gemini</span></div>
+                <div class="tech-icon ring-2-pos-6"><span>Google Ads</span></div>
+              </div>
+              <!-- Ring 3: Tools & Infra (8 techs) -->
+              <div class="orbital-ring ring-3">
+                <div class="tech-icon ring-3-pos-0"><span>GitHub</span></div>
+                <div class="tech-icon ring-3-pos-1"><span>Leonardo</span></div>
+                <div class="tech-icon ring-3-pos-2"><span>Kling</span></div>
+                <div class="tech-icon ring-3-pos-3"><span>Playwright</span></div>
+                <div class="tech-icon ring-3-pos-4"><span>DevTools</span></div>
+                <div class="tech-icon ring-3-pos-5"><span>WordPress</span></div>
+                <div class="tech-icon ring-3-pos-6"><span>Hostinger</span></div>
+                <div class="tech-icon ring-3-pos-7"><span>Apps Script</span></div>
+              </div>
+              <div class="orbital-center">
+                <span class="center-text">3A</span>
+                <span class="center-pulse"></span>
+              </div>
             </div>
           </div>
-        </div>
 
           <div class="hero-stats-ultra">
             <div class="stat-ultra">
@@ -870,13 +873,13 @@
           <div class="hybrid-card glass-panel">
             <div class="hybrid-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 16v-4M12 8h.01"/>
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4M12 8h.01" />
               </svg>
             </div>
             <h3>Why Not 100% Autonomous AI?</h3>
             <p><strong>Legal exposure.</strong> An AI granting a 50% discount contractually binds your company.
-            Financially impactful decisions require human validation — this is about compliance, not technology.</p>
+              Financially impactful decisions require human validation — this is about compliance, not technology.</p>
             <div class="hybrid-stat">
               <span class="stat-value">116</span>
               <span class="stat-label">days before Salesforce pivoted</span>
@@ -886,15 +889,15 @@
           <div class="hybrid-card glass-panel featured">
             <div class="hybrid-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="8" r="4"/>
-                <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
-                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" />
+                <circle cx="12" cy="12" r="10" />
               </svg>
             </div>
             <h3>Human-in-the-Loop</h3>
             <p><strong>Your team stays in control.</strong> AI handles 80% of repetitive tasks.
-            For the critical 20% — exceptional discounts, major claims, strategic decisions —
-            your team approves with one click via notification.</p>
+              For the critical 20% — exceptional discounts, major claims, strategic decisions —
+              your team approves with one click via notification.</p>
             <ul class="hybrid-list">
               <li><strong>Marketing:</strong> High-budget campaign approval</li>
               <li><strong>Sales:</strong> Discount approval >10%</li>
@@ -905,9 +908,9 @@
           <div class="hybrid-card glass-panel">
             <div class="hybrid-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                <path d="M2 17l10 5 10-5"/>
-                <path d="M2 12l10 5 10-5"/>
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
               </svg>
             </div>
             <h3>3-Layer Architecture</h3>
@@ -922,13 +925,13 @@
           <div class="hybrid-card glass-panel">
             <div class="hybrid-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
               </svg>
             </div>
             <h3>Measurable ROI, Controlled Risk</h3>
             <p><strong>For decision makers:</strong> Every business rule is hard-coded. Max 15% discount?
-            It's in the code, not an AI suggestion. Your auditors and CFO can sleep at night.</p>
+              It's in the code, not an AI suggestion. Your auditors and CFO can sleep at night.</p>
             <div class="hybrid-stat">
               <span class="stat-value">0</span>
               <span class="stat-label">uncontrolled decisions</span>
@@ -937,7 +940,8 @@
         </div>
 
         <div class="hybrid-cta">
-          <a href="/en/blog/reliable-automation-salesforce-lessons-2026.html" class="btn-secondary-cyber">Read the Salesforce case study</a>
+          <a href="/en/blog/reliable-automation-salesforce-lessons-2026.html" class="btn-secondary-cyber">Read the
+            Salesforce case study</a>
           <a href="/en/booking.html" class="btn-cyber">Free workflow audit</a>
         </div>
       </div>
@@ -953,7 +957,8 @@
         </div>
         <div class="testimonials-grid">
           <div class="testimonial-card glass-panel">
-            <div class="testimonial-quote">"In 3 weeks, our email conversion rate went from 1.2% to 4.8%. 380% ROI in the first quarter."</div>
+            <div class="testimonial-quote">"In 3 weeks, our email conversion rate went from 1.2% to 4.8%. 380% ROI in
+              the first quarter."</div>
             <div class="testimonial-author">
               <div class="testimonial-avatar">SM</div>
               <div class="testimonial-info">
@@ -967,7 +972,8 @@
             </div>
           </div>
           <div class="testimonial-card glass-panel">
-            <div class="testimonial-quote">"Automating our customer service reduced response time from 24h to 2 minutes. Our customers love it."</div>
+            <div class="testimonial-quote">"Automating our customer service reduced response time from 24h to 2 minutes.
+              Our customers love it."</div>
             <div class="testimonial-author">
               <div class="testimonial-avatar">KB</div>
               <div class="testimonial-info">
@@ -981,7 +987,8 @@
             </div>
           </div>
           <div class="testimonial-card glass-panel">
-            <div class="testimonial-quote">"Our CAC decreased by 40% thanks to campaign optimization. Better allocated marketing budget."</div>
+            <div class="testimonial-quote">"Our CAC decreased by 40% thanks to campaign optimization. Better allocated
+              marketing budget."</div>
             <div class="testimonial-author">
               <div class="testimonial-avatar">LA</div>
               <div class="testimonial-info">
@@ -1261,6 +1268,11 @@
   <script src="../geo-locale.js" defer></script>
   <script src="../agentic-transparency.js" defer></script>
   <script src="../script.js?v=26.1" defer></script>
+
+  <!-- GSAP ScrollTrigger for scroll-based animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="../scripts/scroll-animation.js" defer></script>
 </body>
 
 </html>
