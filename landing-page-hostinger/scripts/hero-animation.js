@@ -2,11 +2,12 @@
  * Hero Animation Controller
  * 3A Automation - Simple Auto-Loop Video Background
  *
+ * v3.1: TRUE edge-to-edge coverage fix (24/01/2026)
  * v3.0: Complete rewrite - NO scroll dependency (24/01/2026)
  *
  * Features:
  * - Auto-loop animation at 30fps
- * - 16:9 edge-to-edge horizontal
+ * - TRUE 16:9 edge-to-edge on ALL screen ratios
  * - Starts immediately on page load
  * - NO GSAP, NO ScrollTrigger, NO scroll dependency
  */
@@ -66,15 +67,22 @@
     }
 
     /**
-     * Resize canvas for 16:9 edge-to-edge horizontal
+     * Resize canvas for TRUE edge-to-edge coverage on ALL screen ratios
+     * Uses "cover" logic: canvas is always big enough to fill entire viewport
      */
     function resizeCanvas() {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
 
-        // Width = 100vw, Height = max(16:9 ratio, 100vh)
-        canvas.width = viewportWidth;
-        canvas.height = Math.max(viewportWidth * 9 / 16, viewportHeight);
+        // Calculate minimum dimensions for edge-to-edge coverage
+        // For wide screens: width must be at least 16:9 of height
+        // For tall screens: height must be at least 9:16 of width
+        const minWidthFor16x9 = viewportHeight * 16 / 9;
+        const minHeightFor16x9 = viewportWidth * 9 / 16;
+
+        // Canvas dimensions = max of viewport OR 16:9 ratio requirement
+        canvas.width = Math.max(viewportWidth, minWidthFor16x9);
+        canvas.height = Math.max(viewportHeight, minHeightFor16x9);
 
         // Redraw current frame after resize
         if (images[currentFrame] && images[currentFrame].complete) {
