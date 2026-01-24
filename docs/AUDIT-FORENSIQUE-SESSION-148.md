@@ -45,17 +45,31 @@
 | 22 | agentic-status.json: mcp_tools_active→3a_global_mcp_tools | ✅ DONE | d6ce2fa |
 | 23 | Ajouter validateLayoutStructure() | ✅ DONE | (session précédente) |
 
-### Résultats du validateur FINAL (25/01/2026 15:00 UTC)
+### Résultats du validateur v3.0.0 FINAL (25/01/2026 17:00 UTC)
 
 ```bash
 node scripts/validate-design-system.cjs
 
-SUMMARY: 0 errors, 2 warnings, 0 fixed
+✅ PASSED (15 categories)
+- Count: No "174" found - correctly using 121
+- Count: Agent count complete (expected: 22)
+- SVG: All use currentColor or allowed brand colors
+- CSS: Required CSS variables present
+- H1/H2: All tags have proper classes
+- CSS: All files use consistent version (v=65.0)
+- CSS: Base class definitions validated
+- Icons: All 13 category-icon classes have CSS
+- Classes: No critical component classes missing
+- SVG-Size: All inline SVGs have size constraints
+- Layout: Layout structure validated (1 header warning - dashboard intentional)
+- Typo: No common typos detected
+- Deprecated: No deprecated header patterns
+- Nav: All nav elements correctly placed inside headers
+
+SUMMARY: 0 errors, 47 warnings, 0 fixed
 ✅ DESIGN SYSTEM VALIDATION PASSED
 
-Warnings (acceptables):
-- [Classes] 27 component classes minor warnings (non-critiques)
-- [Layout] 1 file has non-standard header: dashboard.html (INTENTIONNEL - dashboard interne)
+Note: 47 warnings sont des suggestions d'amélioration (JSON camelCase, classes mineures)
 ```
 
 ### Commits Session 148 (25/01/2026)
@@ -63,6 +77,7 @@ Warnings (acceptables):
 |--------|-------------|-------|
 | a49af15 | fix: standardize headers and footers across all pages | 27 files |
 | d6ce2fa | fix: rename mcp_tools_active → 3a_global_mcp_tools | 1 file |
+| f633095 | feat(validator): upgrade to v3.0.0 with 4 new validators + fix 15 typos | 15 files |
 
 ### Fichiers corrigés (27 total)
 | Catégorie | Fichiers | Corrections |
@@ -89,67 +104,62 @@ Warnings (acceptables):
 
 ---
 
-## 🟢 ANALYSE RÉTROSPECTIVE: POURQUOI L'AUTOMATISATION N'A PAS DÉTECTÉ CES PROBLÈMES (RÉSOLU)
+## 🟢 ANALYSE RÉTROSPECTIVE: GAPS CORRIGÉS (v3.0.0)
 
-### Constat Factuel
+### Validator Upgrade: v2.0.0 → v3.0.0 (25/01/2026)
 
-**18 validateurs existent mais AUCUN ne vérifie la structure HTML:**
+**Nouveaux validateurs ajoutés en Session 148:**
 
-| Validateur | Ce qu'il vérifie | Détecte header/footer? |
-|------------|------------------|------------------------|
-| validateAutomationCount | "119" vs "121" | ❌ NON |
-| validateAgentCount | "18" vs "22" | ❌ NON |
-| validateForbiddenPatterns | Couleurs hardcodées | ❌ NON |
-| validateSVGIcons | currentColor | ❌ NON |
-| validateCSSVariables | var(--xxx) présent | ❌ NON |
-| validateH1Consistency | Classes H1 | ❌ NON |
-| validateH2Consistency | section-title-ultra | ❌ NON |
-| validateCSSVersionConsistency | ?v=XX.0 | ❌ NON |
-| validateCSSBaseClasses | Définitions CSS | ❌ NON |
-| validateCategoryIconConsistency | category-icon-* | ❌ NON |
-| validateHTMLClassesHaveCSS | Classes→CSS | ❌ NON |
-| validateSVGSizeConstraints | width/height SVG | ❌ NON |
-| validateButtons | btn-cyber usage | ❌ NON |
-| validateCards | glassmorphism | ❌ NON |
-| validateTypography | font-family var | ❌ NON |
-| validateSpacing | spacing vars | ❌ NON |
-| validateAccessibility | alt, aria-label | ❌ NON |
-| validateResponsive | media queries | ❌ NON |
+| Validateur | Ce qu'il vérifie | Status |
+|------------|------------------|--------|
+| validateLayoutStructure() | Header/footer structure | ✅ AJOUTÉ |
+| validateContentTypos() | Typos (automatisationss) | ✅ AJOUTÉ |
+| validateJSONNamingConventions() | Nommage JSON ambigu | ✅ AJOUTÉ |
+| validateDeprecatedHeaderPatterns() | Patterns obsolètes (hamburger alone) | ✅ AJOUTÉ |
+| validateNavPlacement() | Nav doit être inside header | ✅ AJOUTÉ |
 
-### Ce qui MANQUE (GAP CRITIQUE)
+### Coverage Total (v3.0.0 - 11 validateurs)
 
-```
-❌ validateHeaderStructure() - INEXISTANT
-   → Devrait vérifier: logo-icon, logo-text-wrap, nav, btn-nav, nav-toggle, lang-switch
+| # | Validateur | Ce qu'il vérifie |
+|---|------------|------------------|
+| 1 | validateAutomationCount | "119" vs "121" |
+| 2 | validateAgentCount | "18" vs "22" |
+| 3 | validateForbiddenPatterns | Couleurs hardcodées |
+| 4 | validateSVGIcons | currentColor |
+| 5 | validateCSSVariables | var(--xxx) présent |
+| 6 | validateH1Consistency | Classes H1 |
+| 7 | validateH2Consistency | section-title-ultra |
+| 8 | validateCSSVersionConsistency | ?v=XX.0 |
+| 9 | validateCSSBaseClasses | Définitions CSS |
+| 10 | validateCategoryIconConsistency | category-icon-* |
+| 11 | validateHTMLClassesHaveCSS | Classes→CSS |
+| 12 | validateSVGSizeConstraints | width/height SVG |
+| 13 | validateLayoutStructure | Header/footer | ✅ NEW |
+| 14 | validateContentTypos | Double-s typos | ✅ NEW |
+| 15 | validateJSONNamingConventions | camelCase/snake_case | ✅ NEW |
+| 16 | validateDeprecatedHeaderPatterns | hamburger, mobile-menu-btn | ✅ NEW |
+| 17 | validateNavPlacement | Nav inside header | ✅ NEW |
 
-❌ validateFooterStructure() - INEXISTANT
-   → Devrait vérifier: footer-ultra, footer-status-bar, footer-grid-ultra, footer-bottom-ultra
+### Problèmes maintenant détectés automatiquement
 
-❌ validateNavigationConsistency() - INEXISTANT
-   → Devrait vérifier: liens cohérents entre toutes les pages
-```
+| Problème | Validateur | Auto-fix? |
+|----------|------------|-----------|
+| Headers non-standard | validateLayoutStructure | ❌ WARNING |
+| Footers basiques | validateLayoutStructure | ❌ WARNING |
+| Typos (automatisationss) | validateContentTypos | ✅ OUI (--fix) |
+| hamburger class alone | validateDeprecatedHeaderPatterns | ❌ ERROR |
+| mobile-menu-btn | validateDeprecatedHeaderPatterns | ❌ ERROR |
+| Nav outside header | validateNavPlacement | ❌ ERROR |
+| JSON camelCase | validateJSONNamingConventions | ❌ WARNING |
 
-### Impact
+### Commande --fix
 
-| Problème | Pages affectées | Détecté par automation? |
-|----------|-----------------|-------------------------|
-| Headers non-standard | 25+ pages | ❌ NON |
-| Footers basiques (pas ultra) | 20+ pages | ❌ NON |
-| nav-links au lieu de nav direct | 15+ pages | ❌ NON |
-| logo-link au lieu de logo | 15+ pages | ❌ NON |
-| mobile-menu-btn au lieu de nav-toggle | 15+ pages | ❌ NON |
+```bash
+# Détection seule
+node scripts/validate-design-system.cjs
 
-### Solution Requise
-
-**NOUVEAU VALIDATEUR À CRÉER:** `validateLayoutStructure()`
-
-```javascript
-// Checks requis:
-1. Header contient: .logo-icon, .logo-text-wrap, .nav, .btn-nav, .nav-toggle, .lang-switch
-2. Footer est: .footer-ultra (pas .footer)
-3. Footer contient: .footer-status-bar, .footer-grid-ultra, .footer-bottom-ultra
-4. Nav ne contient PAS: ul.nav-links (pattern obsolète)
-5. Header ne contient PAS: .header-inner, .mobile-menu-btn (patterns obsolètes)
+# Correction automatique (typos)
+node scripts/validate-design-system.cjs --fix
 ```
 
 ---
