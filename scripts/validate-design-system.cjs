@@ -3,9 +3,9 @@
  * VALIDATE DESIGN SYSTEM - Automated Branding Enforcement
  * Source of Truth: docs/DESIGN-SYSTEM.md
  *
- * @version 2.0.0
- * @date 2026-01-23
- * @session 142
+ * @version 3.0.0
+ * @date 2026-01-25
+ * @session 148
  *
  * Usage:
  *   node scripts/validate-design-system.cjs [--fix] [--ci]
@@ -15,6 +15,13 @@
  * 2. Forbidden patterns (hardcoded colors, old classes)
  * 3. Automation/Agent counts
  * 4. SVG icon colors
+ * 5. HTML classes have CSS definitions (Session 145)
+ * 6. SVG size constraints (Session 145)
+ * 7. Layout structure - header/footer (Session 148)
+ * 8. Content typos (Session 148)
+ * 9. JSON naming conventions (Session 148)
+ * 10. Deprecated header patterns (Session 148)
+ * 11. Nav placement validation (Session 148)
  */
 
 const fs = require('fs');
@@ -714,6 +721,259 @@ function validateSVGSizeConstraints() {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+// VALIDATE TYPOS IN CONTENT (NEW: Session 148 - Detect common typos)
+// ════════════════════════════════════════════════════════════════════════════
+
+function validateContentTypos() {
+  console.log('\n📝 Validating Content for Typos...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+  const jsonFiles = findFiles(CONFIG.SITE_DIR, '.json');
+  const allFiles = [...htmlFiles, ...jsonFiles];
+
+  // Known typos discovered in Session 148
+  const typoPatterns = [
+    { pattern: /automatisationss/gi, fix: 'automatisations', reason: 'Double "s" typo' },
+    { pattern: /automationss/gi, fix: 'automations', reason: 'Double "s" typo' },
+    { pattern: /workflowss/gi, fix: 'workflows', reason: 'Double "s" typo' },
+    { pattern: /intégrationss/gi, fix: 'intégrations', reason: 'Double "s" typo' },
+    { pattern: /agentss/gi, fix: 'agents', reason: 'Double "s" typo' },
+    { pattern: /clientss/gi, fix: 'clients', reason: 'Double "s" typo' },
+    { pattern: /servicess/gi, fix: 'services', reason: 'Double "s" typo' },
+    // Common misspellings
+    { pattern: /recieve/gi, fix: 'receive', reason: 'Common misspelling' },
+    { pattern: /occured/gi, fix: 'occurred', reason: 'Missing "r"' },
+    { pattern: /seperate/gi, fix: 'separate', reason: 'Common misspelling' },
+  ];
+
+  let typoCount = 0;
+  const filesWithTypos = [];
+
+  for (const file of allFiles) {
+    let content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+    let modified = false;
+
+    for (const typo of typoPatterns) {
+      const matches = content.match(typo.pattern);
+      if (matches) {
+        if (FIX_MODE) {
+          content = content.replace(typo.pattern, typo.fix);
+          modified = true;
+          addFixed(file, `Fixed typo: "${matches[0]}" → "${typo.fix}"`);
+        } else {
+          typoCount += matches.length;
+          if (!filesWithTypos.includes(relFile)) {
+            filesWithTypos.push(relFile);
+          }
+          addError('Typo', file,
+            `Found "${matches[0]}" (${typo.reason}) - should be "${typo.fix}"`,
+            `Replace with "${typo.fix}"`);
+        }
+      }
+    }
+
+    if (modified && FIX_MODE) {
+      fs.writeFileSync(file, content, 'utf8');
+    }
+  }
+
+  if (typoCount === 0) {
+    addPassed('Typo', 'No common typos detected in content');
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// VALIDATE JSON NAMING CONVENTIONS (NEW: Session 148 - Detect ambiguous names)
+// ════════════════════════════════════════════════════════════════════════════
+
+function validateJSONNamingConventions() {
+  console.log('\n📋 Validating JSON Field Naming Conventions...');
+
+  const jsonFiles = findFiles(CONFIG.SITE_DIR, '.json');
+
+  // Ambiguous or non-descriptive field names to flag
+  const ambiguousPatterns = [
+    { pattern: /"mcp_tools_active"/g, suggestion: 'Use specific name like "3a_global_mcp_tools"' },
+    { pattern: /"tools_count"/g, suggestion: 'Specify which tools (e.g., "automation_tools_count")' },
+    { pattern: /"status"/g, suggestion: 'Consider more specific name (e.g., "system_status", "api_status")' },
+    { pattern: /"data"/g, suggestion: 'Use descriptive name instead of generic "data"' },
+    { pattern: /"items"/g, suggestion: 'Use descriptive name (e.g., "automation_items", "product_items")' },
+    { pattern: /"value"/g, suggestion: 'Consider context-specific name' },
+  ];
+
+  // Required naming conventions
+  const namingRules = {
+    // snake_case for JSON fields (not camelCase)
+    camelCasePattern: /"([a-z]+[A-Z][a-zA-Z]*)"\s*:/g,
+  };
+
+  let issueCount = 0;
+  const filesWithIssues = [];
+
+  for (const file of jsonFiles) {
+    // Skip node_modules and build artifacts
+    if (file.includes('node_modules') || file.includes('package-lock')) continue;
+
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    // Check for camelCase (should be snake_case)
+    const camelMatches = content.matchAll(namingRules.camelCasePattern);
+    for (const match of camelMatches) {
+      // Skip common exceptions
+      const fieldName = match[1];
+      const exceptions = ['totalCount', 'dateCreated', 'dateModified', 'isActive', 'jsonLd'];
+      if (!exceptions.includes(fieldName)) {
+        issueCount++;
+        if (!filesWithIssues.includes(relFile)) {
+          filesWithIssues.push(relFile);
+        }
+        addWarning('JSON', file,
+          `Field "${fieldName}" uses camelCase - prefer snake_case for JSON`);
+      }
+    }
+  }
+
+  if (issueCount === 0) {
+    addPassed('JSON', 'JSON field naming conventions OK');
+  } else {
+    addWarning('JSON', 'summary',
+      `${issueCount} JSON fields may need review in ${filesWithIssues.length} files`);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// VALIDATE DEPRECATED HEADER PATTERNS (NEW: Session 148 - Detailed checks)
+// ════════════════════════════════════════════════════════════════════════════
+
+function validateDeprecatedHeaderPatterns() {
+  console.log('\n🚨 Validating Deprecated Header Patterns...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  // Deprecated patterns from Session 148 discoveries
+  const deprecatedPatterns = [
+    {
+      pattern: /<button[^>]*class="hamburger"[^>]*>/g,
+      fix: '<button class="nav-toggle" id="nav-toggle"><span class="hamburger"></span></button>',
+      reason: 'hamburger class on button is deprecated - use nav-toggle with hamburger span inside'
+    },
+    {
+      pattern: /<button[^>]*class="mobile-menu-btn"[^>]*>/g,
+      fix: '<button class="nav-toggle" id="nav-toggle"><span class="hamburger"></span></button>',
+      reason: 'mobile-menu-btn is deprecated - use nav-toggle'
+    },
+    {
+      pattern: /<div class="nav-links">/g,
+      fix: 'Use <nav class="nav"> with direct <a> links',
+      reason: 'nav-links wrapper is deprecated - use nav class directly'
+    },
+    {
+      pattern: /<a[^>]*class="logo-link"[^>]*>/g,
+      fix: 'Use <a href="/" class="logo">',
+      reason: 'logo-link is deprecated - use logo class'
+    },
+    {
+      pattern: /<div class="header-inner">/g,
+      fix: 'Remove header-inner wrapper',
+      reason: 'header-inner is deprecated - header should contain components directly'
+    },
+  ];
+
+  let deprecatedCount = 0;
+  const filesWithDeprecated = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    // Skip dashboard (intentionally different)
+    if (relFile.includes('dashboard.html')) continue;
+
+    for (const dep of deprecatedPatterns) {
+      const matches = content.match(dep.pattern);
+      if (matches) {
+        deprecatedCount += matches.length;
+        if (!filesWithDeprecated.includes(relFile)) {
+          filesWithDeprecated.push(relFile);
+        }
+        addError('Deprecated', file,
+          `${dep.reason}`,
+          dep.fix);
+      }
+    }
+  }
+
+  if (deprecatedCount === 0) {
+    addPassed('Deprecated', 'No deprecated header patterns found');
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// VALIDATE NAV PLACEMENT (NEW: Session 148 - Nav must be inside header)
+// ════════════════════════════════════════════════════════════════════════════
+
+function validateNavPlacement() {
+  console.log('\n🧭 Validating Nav Placement (must be inside header)...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  let misplacedNavCount = 0;
+  const filesWithMisplacedNav = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    // Skip dashboard (intentionally different)
+    if (relFile.includes('dashboard.html')) continue;
+
+    // Find header tag
+    const headerMatch = content.match(/<header[^>]*>([\s\S]*?)<\/header>/);
+    if (!headerMatch) continue;
+
+    const headerContent = headerMatch[1];
+    const headerEnd = headerMatch.index + headerMatch[0].length;
+
+    // Check if nav exists AFTER header closing tag (misplaced)
+    const afterHeader = content.substring(headerEnd, headerEnd + 500);
+    const navAfterHeader = afterHeader.match(/<nav class="nav"/);
+
+    if (navAfterHeader) {
+      // Nav found after header - this is wrong
+      misplacedNavCount++;
+      if (!filesWithMisplacedNav.includes(relFile)) {
+        filesWithMisplacedNav.push(relFile);
+      }
+      addError('Nav', file,
+        'Nav element found OUTSIDE header - must be INSIDE <header>',
+        'Move <nav class="nav">...</nav> inside the <header> element');
+    }
+
+    // Also check if nav is missing from header
+    if (!/<nav class="nav"/.test(headerContent) && /<header/.test(content)) {
+      // Header exists but no nav inside
+      if (!/<nav/.test(headerContent)) {
+        // No nav at all in header - might be misplaced
+        const hasNavAnywhere = /<nav class="nav"/.test(content);
+        if (hasNavAnywhere && !filesWithMisplacedNav.includes(relFile)) {
+          misplacedNavCount++;
+          filesWithMisplacedNav.push(relFile);
+          addError('Nav', file,
+            'Nav element exists but not inside <header>',
+            'Move nav inside header');
+        }
+      }
+    }
+  }
+
+  if (misplacedNavCount === 0) {
+    addPassed('Nav', 'All nav elements correctly placed inside headers');
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // VALIDATE LAYOUT STRUCTURE (NEW: Session 148 - Detect header/footer issues)
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -830,9 +1090,13 @@ validateH2Consistency();
 validateCSSVersionConsistency();
 validateCSSBaseClasses();
 validateCategoryIconConsistency();
-validateHTMLClassesHaveCSS();    // NEW: Session 145 - Detect HTML classes without CSS
-validateSVGSizeConstraints();    // NEW: Session 145 - Detect unconstrained SVGs
-validateLayoutStructure();       // NEW: Session 148 - Detect non-standard headers/footers
+validateHTMLClassesHaveCSS();        // Session 145 - Detect HTML classes without CSS
+validateSVGSizeConstraints();        // Session 145 - Detect unconstrained SVGs
+validateLayoutStructure();           // Session 148 - Detect non-standard headers/footers
+validateContentTypos();              // Session 148 - Detect common typos (automatisationss)
+validateJSONNamingConventions();     // Session 148 - Detect ambiguous JSON field names
+validateDeprecatedHeaderPatterns();  // Session 148 - Detect deprecated patterns (hamburger alone)
+validateNavPlacement();              // Session 148 - Ensure nav is inside header
 
 // ════════════════════════════════════════════════════════════════════════════
 // REPORT
