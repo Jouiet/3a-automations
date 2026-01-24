@@ -152,25 +152,32 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <div class="header-inner">
-        <a href="/en/" class="logo-link">
-          <div class="logo-icon"><img src="/logo.webp" alt="3A" width="40" height="40"></div>
-          <span class="logo-text">3A Automation</span>
+      <a href="/en/" class="logo">
+        <div class="logo-icon">
+          <img loading="eager" src="/logo.webp" alt="3A Automation Logo" width="40" height="40" />
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-text">3A</span>
+          <span class="logo-sub">AUTOMATION</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav-menu">
+        <a href="/en/services/ecommerce.html">E-commerce</a>
+        <a href="/en/services/pme.html">SMB</a>
+        <a href="/en/automations.html">Automations</a>
+        <a href="/en/pricing.html">Pricing</a>
+        <a href="/en/blog/" class="active">Blog</a>
+        <a href="/en/contact.html" class="btn-nav">
+          <span>Contact</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
         </a>
-        <nav class="nav" id="nav-menu" role="navigation">
-          <ul class="nav-links">
-            <li><a href="/en/">Home</a></li>
-            <li><a href="/en/automations.html">Automations</a></li>
-            <li><a href="/en/pricing.html">Pricing</a></li>
-            <li><a href="/en/blog/" class="active">Blog</a></li>
-            <li><a href="/en/contact.html">Contact</a></li>
-            <li><a href="/blog/automatisation-fiable-lecons-salesforce-2026.html" class="lang-switch" title="Français">FR</a></li>
-          </ul>
-        </nav>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+        <a href="/blog/automatisation-fiable-lecons-salesforce-2026.html" class="lang-switch" title="Passer en francais">FR</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span class="hamburger"></span>
+      </button>
     </div>
   </header>
 

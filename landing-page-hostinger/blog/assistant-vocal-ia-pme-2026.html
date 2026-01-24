@@ -161,25 +161,32 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <div class="header-inner">
-        <a href="/" class="logo-link">
-          <div class="logo-icon"><img src="/logo.webp" alt="3A" width="40" height="40"></div>
-          <span class="logo-text">3A Automation</span>
+      <a href="/" class="logo">
+        <div class="logo-icon">
+          <img loading="eager" src="/logo.webp" alt="3A Automation Logo" width="40" height="40" />
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-text">3A</span>
+          <span class="logo-sub">AUTOMATION</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav-menu">
+        <a href="/services/ecommerce.html">E-commerce</a>
+        <a href="/services/pme.html">PME</a>
+        <a href="/automations.html">Automations</a>
+        <a href="/pricing.html">Tarifs</a>
+        <a href="/blog/" class="active">Blog</a>
+        <a href="/contact.html" class="btn-nav">
+          <span>Contact</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
         </a>
-        <nav class="nav" id="nav-menu" role="navigation">
-          <ul class="nav-links">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="/automations.html">Automatisations</a></li>
-            <li><a href="/pricing.html">Tarifs</a></li>
-            <li><a href="/blog/" class="active">Blog</a></li>
-            <li><a href="/contact.html">Contact</a></li>
-            <li><a href="/en/blog/voice-ai-assistant-sme-2026.html" class="lang-switch" title="English">EN</a></li>
-          </ul>
-        </nav>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+        <a href="/en/blog/voice-ai-assistant-sme-2026.html" class="lang-switch" title="Switch to English">EN</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span class="hamburger"></span>
+      </button>
     </div>
   </header>
 

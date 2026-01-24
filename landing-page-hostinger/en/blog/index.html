@@ -184,25 +184,32 @@
   <!-- Header -->
   <header class="header">
     <div class="container">
-      <div class="header-inner">
-        <a href="/en/" class="logo-link">
-          <div class="logo-icon"><img src="/logo.webp" alt="3A" width="40" height="40"></div>
-          <span class="logo-text">3A Automation</span>
+      <a href="/en/" class="logo">
+        <div class="logo-icon">
+          <img loading="eager" src="/logo.webp" alt="3A Automation Logo" width="40" height="40" />
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-text">3A</span>
+          <span class="logo-sub">AUTOMATION</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav-menu">
+        <a href="/en/services/ecommerce.html">E-commerce</a>
+        <a href="/en/services/pme.html">SMB</a>
+        <a href="/en/automations.html">Automations</a>
+        <a href="/en/pricing.html">Pricing</a>
+        <a href="/en/blog/" class="active">Blog</a>
+        <a href="/en/contact.html" class="btn-nav">
+          <span>Contact</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
         </a>
-        <nav class="nav" id="nav-menu">
-          <ul class="nav-links">
-            <li><a href="/en/">Home</a></li>
-            <li><a href="/en/automations.html">Automations</a></li>
-            <li><a href="/en/pricing.html">Pricing</a></li>
-            <li><a href="/en/blog/" class="active">Blog</a></li>
-            <li><a href="/en/contact.html">Contact</a></li>
-            <li><a href="/blog/" class="lang-switch" title="Francais">FR</a></li>
-          </ul>
-        </nav>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+        <a href="/blog/" class="lang-switch" title="Passer en francais">FR</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <span class="hamburger"></span>
+      </button>
     </div>
   </header>
 
@@ -341,39 +348,95 @@
     <!-- Footer -->
   </main>
 
-  <footer class="footer">
+  <footer class="footer-ultra">
     <div class="container">
-      <div>
-        <div>
-          <a href="/en/" class="logo-link">
-            <div class="logo-icon"><img src="/logo.webp" alt="3A" width="32" height="32"></div>
-            <span class="logo-text">3A Automation</span>
-          </a>
-          <p>Automation, Analytics & AI for SMBs
-            and E-commerce. 121 automationss.</p>
+      <div class="footer-status-bar">
+        <div class="status-item">
+          <span class="status-dot online"></span>
+          <span>System operational</span>
         </div>
-        <div>
-          <div class="footer-heading">Navigation</div>
-          <ul>
-            <li><a href="/en/automations.html"
-               >Automations</a></li>
-            <li><a href="/en/pricing.html"
-               >Pricing</a></li>
-            <li><a href="/en/blog/">Blog</a>
-            </li>
-            <li><a href="/en/contact.html"
-               >Contact</a></li>
-            <li><a href="/en/investors.html"
-               >Investors</a></li>
-          </ul>
+        <div class="status-item">
+          <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <span>121 automations</span>
         </div>
-        <div>
-          <div class="footer-heading">Contact</div>
-          <p>contact@3a-automation.com</p>
+        <div class="status-item">
+          <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v10M4.22 4.22l4.24 4.24m7.08 7.08l4.24 4.24M1 12h6m6 0h10M4.22 19.78l4.24-4.24m7.08-7.08l4.24-4.24"/></svg></span>
+          <span>10+ Partners integrated</span>
+        </div>
+        <div class="status-item">
+          <span class="status-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <span>24/7 Always active</span>
         </div>
       </div>
-      <div>
-        <p class="blog-card-footer">&copy; 2026 3A Automation. All rights reserved.</p>
+
+      <div class="footer-grid-ultra">
+        <div class="footer-brand-ultra">
+          <div class="logo">
+            <div class="logo-icon">
+              <img src="/logo.webp" alt="3A Automation Logo" width="40" height="40" loading="lazy">
+            </div>
+            <div class="logo-text-wrap">
+              <span class="logo-text">3A</span>
+              <span class="logo-sub">AUTOMATION</span>
+            </div>
+          </div>
+          <p class="footer-tagline">Automation - Analytics - AI</p>
+          <p class="footer-desc">Operations automated. Strategy liberated.</p>
+        </div>
+
+        <div class="footer-links-ultra">
+          <div class="footer-heading">Solutions</div>
+          <ul>
+            <li><a href="/en/services/ecommerce.html">E-commerce</a></li>
+            <li><a href="/en/services/pme.html">SMB & B2B</a></li>
+            <li><a href="/en/services/flywheel-360.html">360 System</a></li>
+            <li><a href="/en/services/voice-ai.html">Voice AI</a></li>
+            <li><a href="/en/automations.html">Automations</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-ultra">
+          <div class="footer-heading">Resources</div>
+          <ul>
+            <li><a href="/en/services/free-audit.html">Free Audit</a></li>
+            <li><a href="/en/blog/">Blog</a></li>
+            <li><a href="/en/case-studies.html">Case Studies</a></li>
+            <li><a href="/en/academy.html">Academy</a></li>
+            <li><a href="/en/pricing.html">Pricing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-ultra">
+          <div class="footer-heading">Company</div>
+          <ul>
+            <li><a href="/en/about.html">About</a></li>
+            <li><a href="/en/contact.html">Contact</a></li>
+            <li><a href="/en/booking.html">Book a call</a></li>
+            <li><a href="mailto:contact@3a-automation.com">contact@3a-automation.com</a></li>
+            <li><a href="/en/investors.html">Investors</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-ultra">
+          <div class="footer-heading">Legal & Security</div>
+          <ul>
+            <li><a href="/en/legal/terms.html">Terms of Service</a></li>
+            <li><a href="/en/legal/privacy.html">Privacy Policy</a></li>
+          </ul>
+          <div class="footer-trust-badges">
+            <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-v-align"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>GDPR</span>
+            <span class="trust-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-v-align"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>SSL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-ultra">
+        <p>&copy; 2026 3A Automation. All rights reserved.</p>
+        <div class="footer-tech">
+          <span>Powered by</span>
+          <span class="tech-badge">Anthropic</span>
+          <span class="tech-badge">Hostinger</span>
+        </div>
       </div>
     </div>
   </footer>
