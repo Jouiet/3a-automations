@@ -7,6 +7,7 @@
  *
  * v2.0: Added auto-loop when user is not scrolling (24/01/2026)
  * v2.1: Fixed auto-loop to work within hero section during idle (24/01/2026)
+ * v2.2: Removed scrollTriggerActive check from startAutoLoop (24/01/2026)
  */
 
 (function () {
@@ -238,7 +239,7 @@
      * Start auto-loop animation
      */
     function startAutoLoop() {
-        if (isAutoLooping || scrollTriggerActive) return;
+        if (isAutoLooping) return;
 
         isAutoLooping = true;
         let lastTime = performance.now();
