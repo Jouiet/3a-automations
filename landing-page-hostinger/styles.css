@@ -590,76 +590,64 @@ h1 .highlight {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   SCROLL-BASED ANIMATION (Apple-Style) - Session 147
+   HERO ANIMATION - Simple Auto-Loop Background (v3.0)
+   NO SCROLL DEPENDENCY - Session 147 Final Fix
    ───────────────────────────────────────────────────────────────────────────── */
 
-/* Scroll Animation Container */
-.hero-scroll-animation {
+/* Hero Animation Container - Fixed in hero, NO scroll pinning */
+.hero-animation {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw; /* Full viewport width edge-to-edge */
-  height: 200vh;
-  /* Extended for scroll pinning */
+  width: 100vw;
+  height: 100vh; /* Just viewport height */
   z-index: 0;
   overflow: hidden;
 }
 
-/* Canvas for frame-by-frame scroll animation */
-.hero-scroll-canvas {
+/* Canvas for frame-by-frame auto-loop animation */
+.hero-canvas {
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  /* TRUE 16:9 edge-to-edge horizontal */
   width: 100vw;
-  height: 56.25vw; /* 100vw × 9/16 = true 16:9 ratio */
-  min-height: 100vh; /* Cover viewport on tall/square screens */
+  height: 56.25vw; /* 16:9 ratio */
+  min-height: 100vh;
   object-fit: cover;
   opacity: 0.6;
   filter: contrast(1.2) saturate(1.1);
   z-index: 1;
 }
 
-/* Hide video fallback when canvas is active (controlled by JS) */
-.hero-scroll-animation.canvas-active .hero-video-fallback {
+/* Hide video fallback when canvas is active */
+.hero-animation.canvas-active .hero-video-fallback {
   display: none !important;
 }
 
-/* Show video fallback when canvas not available */
+/* Video fallback for no-JS or mobile */
 .hero-video-fallback {
   position: absolute;
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  /* TRUE 16:9 edge-to-edge horizontal - same as canvas */
   width: 100vw;
-  height: 56.25vw; /* 100vw × 9/16 = true 16:9 ratio */
-  min-height: 100vh; /* Cover viewport on tall/square screens */
+  height: 56.25vw;
+  min-height: 100vh;
   object-fit: cover;
   opacity: 0.6;
   filter: contrast(1.2) saturate(1.1);
   z-index: 0;
 }
 
-/* Pin content during scroll animation */
-.hero-ultra.pin-spacer-active {
-  position: relative;
-  z-index: 1;
-}
-
 /* Mobile: Use video instead of canvas for performance */
 @media (max-width: 768px) {
-  .hero-scroll-canvas {
+  .hero-canvas {
     display: none;
   }
 
   .hero-video-fallback {
     display: block !important;
-  }
-
-  .hero-scroll-animation {
-    height: 100vh;
   }
 }
 

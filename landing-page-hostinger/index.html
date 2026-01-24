@@ -50,7 +50,7 @@
 
   <!-- Externalized CSS -->
   <link rel="stylesheet" href="css/critical.css">
-  <link rel="stylesheet" href="styles.css?v=56.0">
+  <link rel="stylesheet" href="styles.css?v=57.0">
   <link rel="stylesheet" href="css/ultra-investors.css">
 
   <!-- Preconnect for external resources -->
@@ -359,10 +359,10 @@
   <!-- Hero Ultra Futuriste -->
   <main role="main">
     <section class="hero-ultra scanline" id="main-content">
-      <!-- Hero Architecture Cinematic Background (Scroll-Based Animation) -->
-      <div class="hero-cinematic-bg hero-scroll-animation">
-        <!-- Canvas for frame-by-frame scroll animation (Apple-style) -->
-        <canvas id="hero-canvas" class="hero-scroll-canvas"></canvas>
+      <!-- Hero Animation Background - Auto-loop, NO scroll dependency -->
+      <div class="hero-cinematic-bg hero-animation">
+        <!-- Canvas for frame-by-frame auto-loop animation -->
+        <canvas id="hero-canvas" class="hero-canvas"></canvas>
         <!-- Video fallback for no-JS or mobile -->
         <video autoplay muted loop playsinline class="cinematic-bg-video hero-video-fallback"
           poster="assets/whisk/act1_structure.png">
@@ -1338,10 +1338,8 @@
   <script src="agentic-transparency.js" defer></script>
   <script src="script.js?v=26.1" defer></script>
 
-  <!-- GSAP ScrollTrigger for scroll-based animation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="scripts/scroll-animation.js" defer></script>
+  <!-- Hero Animation - Auto-loop, NO scroll dependency -->
+  <script src="scripts/hero-animation.js" defer></script>
 </body>
 
 </html>
