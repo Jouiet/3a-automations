@@ -8,6 +8,7 @@
  * v2.0: Added auto-loop when user is not scrolling (24/01/2026)
  * v2.1: Fixed auto-loop to work within hero section during idle (24/01/2026)
  * v2.2: Removed scrollTriggerActive check from startAutoLoop (24/01/2026)
+ * v2.3: TRUE 16:9 edge-to-edge horizontal (24/01/2026)
  */
 
 (function () {
@@ -82,25 +83,17 @@
     }
 
     /**
-     * Resize canvas to maintain 16:9 aspect ratio and cover viewport
+     * Resize canvas for TRUE 16:9 edge-to-edge horizontal
+     * Width = full viewport, Height = width × 9/16 (min: viewport height)
      */
     function resizeCanvas() {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
-        const aspectRatio = 16 / 9;
 
-        // Calculate dimensions to cover viewport while maintaining 16:9
-        let canvasWidth, canvasHeight;
-
-        if (viewportWidth / viewportHeight > aspectRatio) {
-            // Viewport is wider than 16:9 - fit to width
-            canvasWidth = viewportWidth;
-            canvasHeight = viewportWidth / aspectRatio;
-        } else {
-            // Viewport is taller than 16:9 - fit to height
-            canvasHeight = viewportHeight;
-            canvasWidth = viewportHeight * aspectRatio;
-        }
+        // TRUE 16:9 edge-to-edge: width is always 100vw
+        const canvasWidth = viewportWidth;
+        // Height = width × 9/16, but minimum viewport height to cover screen
+        const canvasHeight = Math.max(viewportWidth * 9 / 16, viewportHeight);
 
         canvas.width = canvasWidth;
         canvas.height = canvasHeight;

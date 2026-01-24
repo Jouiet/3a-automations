@@ -598,27 +598,23 @@ h1 .highlight {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw; /* Full viewport width edge-to-edge */
   height: 200vh;
   /* Extended for scroll pinning */
   z-index: 0;
-  /* Center content for 16:9 aspect ratio */
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
   overflow: hidden;
 }
 
 /* Canvas for frame-by-frame scroll animation */
 .hero-scroll-canvas {
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  /* 16:9 aspect ratio constraints */
-  width: 100%;
-  min-width: 177.78vh; /* Ensure canvas covers height on wide screens */
-  height: 100vh;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  /* TRUE 16:9 edge-to-edge horizontal */
+  width: 100vw;
+  height: 56.25vw; /* 100vw × 9/16 = true 16:9 ratio */
+  min-height: 100vh; /* Cover viewport on tall/square screens */
   object-fit: cover;
   opacity: 0.6;
   filter: contrast(1.2) saturate(1.1);
@@ -633,13 +629,13 @@ h1 .highlight {
 /* Show video fallback when canvas not available */
 .hero-video-fallback {
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  /* 16:9 aspect ratio constraints - same as canvas */
-  width: 100%;
-  min-width: 177.78vh; /* Ensure video covers height on wide screens */
-  height: 100vh;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  /* TRUE 16:9 edge-to-edge horizontal - same as canvas */
+  width: 100vw;
+  height: 56.25vw; /* 100vw × 9/16 = true 16:9 ratio */
+  min-height: 100vh; /* Cover viewport on tall/square screens */
   object-fit: cover;
   opacity: 0.6;
   filter: contrast(1.2) saturate(1.1);
