@@ -104,19 +104,7 @@ export const Root: React.FC = () => {
       <Composition
         id="HeroArchitecture"
         component={HeroArchitecture}
-        durationInFrames={20 * 30} // 20 seconds at 30fps
-        fps={30}
-        {...PRESETS.landscape1080}
-        defaultProps={{
-          showWhiskBackground: true,
-        }}
-      />
-
-      {/* Hero Architecture - Loop Version (8s for seamless loop) */}
-      <Composition
-        id="HeroArchitecture-Loop"
-        component={HeroArchitecture}
-        durationInFrames={8 * 30} // 8 seconds loop
+        durationInFrames={240} // 8 seconds at 30fps
         fps={30}
         {...PRESETS.landscape1080}
         defaultProps={{
