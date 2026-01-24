@@ -1,9 +1,10 @@
-# MÉTHODOLOGIE HERO ANIMATION v3.1 "Tech on the Shelf"
+# MÉTHODOLOGIE HERO ANIMATION v3.2 "Tech on the Shelf"
 
 ## 3A Automation - Standard de Production
 
+> **UPDATE v3.2 (24/01/2026):** Ajout incident CSP + piège #7.
 > **UPDATE v3.1 (24/01/2026):** Ajout étape OBLIGATOIRE de synchronisation CSS.
-> Sans cette étape, le CI échoue avec "Multiple versions detected".
+> Sans ces étapes, le déploiement échoue ou l'animation ne fonctionne pas.
 
 ---
 
@@ -196,6 +197,7 @@ Le workflow GitHub Actions se déclenchera automatiquement sur push vers `landin
 4. **Anciennes vidéos** : Supprimer les fichiers v51, v50, etc.
 5. **`--no-verify` sur commit** : INTERDIT - bypass les validations critiques
 6. **Déploiements précédents en échec** : Vérifier `gh run list` AVANT de commiter
+7. **CSP bloque GSAP** : La CSP est dans les `<meta>` tags HTML, pas nginx.conf (voir Incident 2)
 
 ---
 
@@ -223,4 +225,33 @@ Le workflow GitHub Actions se déclenchera automatiquement sur push vers `landin
 
 ---
 
-**Status** : ✅ PRODUCTION READY | **Version** : 3.1 | **Date** : 2026-01-24
+## 📊 INCIDENT 2 - CSP BLOQUE GSAP (24/01/2026)
+
+**Symptôme:** Animation scroll bloquée sur frame 1, console affiche:
+```
+Loading the script 'cdnjs.cloudflare.com/gsap.min.js' violates CSP
+[ScrollAnimation] GSAP or ScrollTrigger not found
+```
+
+**Diagnostic:**
+```
+| Élément | Valeur | Status |
+|---------|--------|--------|
+| CSP source | <meta> tag HTML (pas nginx.conf) | ⚠️ |
+| script-src | manquait cdnjs.cloudflare.com | ❌ |
+| Fichiers affectés | 53 HTML | ❌ |
+```
+
+**Cause racine:** La CSP était définie via `<meta http-equiv="Content-Security-Policy">` dans les fichiers HTML (ligne ~44), pas dans nginx.conf. Le domaine `https://cdnjs.cloudflare.com` manquait dans `script-src`.
+
+**Fix:** Modification de 53 fichiers HTML:
+```diff
+- script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com;
++ script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://cdnjs.cloudflare.com;
+```
+
+**Leçon:** Lors de l'ajout de nouvelles librairies externes (CDN), vérifier la CSP dans les `<meta>` tags HTML, pas seulement nginx.conf.
+
+---
+
+**Status** : ✅ PRODUCTION READY | **Version** : 3.2 | **Date** : 2026-01-24
