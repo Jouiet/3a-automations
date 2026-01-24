@@ -2,12 +2,13 @@
  * Hero Animation Controller
  * 3A Automation - Simple Auto-Loop Video Background
  *
+ * v3.2: ZOOM 1.25x to crop black bars from source (24/01/2026)
  * v3.1: TRUE edge-to-edge coverage fix (24/01/2026)
  * v3.0: Complete rewrite - NO scroll dependency (24/01/2026)
  *
  * Features:
  * - Auto-loop animation at 30fps
- * - TRUE 16:9 edge-to-edge on ALL screen ratios
+ * - TRUE edge-to-edge with 1.25x zoom to crop source black bars
  * - Starts immediately on page load
  * - NO GSAP, NO ScrollTrigger, NO scroll dependency
  */
@@ -121,6 +122,7 @@
 
     /**
      * Draw a specific frame on canvas
+     * Note: Source frames have black bars on sides - we zoom 1.25x to crop them out
      */
     function drawFrame(frameIndex) {
         if (!context || !images[frameIndex]) return;
@@ -131,10 +133,12 @@
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         // Scale to cover canvas while maintaining aspect ratio
+        // ZOOM_FACTOR: 1.25 = crops out the black bars from source video
+        const ZOOM_FACTOR = 1.25;
         const scale = Math.max(
             canvas.width / img.naturalWidth,
             canvas.height / img.naturalHeight
-        );
+        ) * ZOOM_FACTOR;
 
         const x = (canvas.width - img.naturalWidth * scale) / 2;
         const y = (canvas.height - img.naturalHeight * scale) / 2;
