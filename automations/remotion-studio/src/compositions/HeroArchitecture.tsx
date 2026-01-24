@@ -54,36 +54,36 @@ const KenBurnsImage: React.FC<{
   startY = 0,
   endY = 0,
 }) => {
-  const frame = useCurrentFrame();
-  const { durationInFrames } = useVideoConfig();
+    const frame = useCurrentFrame();
+    const { durationInFrames } = useVideoConfig();
 
-  const scale = interpolate(frame, [0, durationInFrames], [startScale, endScale], {
-    extrapolateRight: 'clamp',
-    easing: Easing.inOut(Easing.ease),
-  });
+    const scale = interpolate(frame, [0, durationInFrames], [startScale, endScale], {
+      extrapolateRight: 'clamp',
+      easing: Easing.inOut(Easing.ease),
+    });
 
-  const x = interpolate(frame, [0, durationInFrames], [startX, endX], {
-    extrapolateRight: 'clamp',
-    easing: Easing.inOut(Easing.ease),
-  });
+    const x = interpolate(frame, [0, durationInFrames], [startX, endX], {
+      extrapolateRight: 'clamp',
+      easing: Easing.inOut(Easing.ease),
+    });
 
-  const y = interpolate(frame, [0, durationInFrames], [startY, endY], {
-    extrapolateRight: 'clamp',
-    easing: Easing.inOut(Easing.ease),
-  });
+    const y = interpolate(frame, [0, durationInFrames], [startY, endY], {
+      extrapolateRight: 'clamp',
+      easing: Easing.inOut(Easing.ease),
+    });
 
-  return (
-    <Img
-      src={src}
-      style={{
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        transform: `scale(${scale}) translate(${x}%, ${y}%)`,
-      }}
-    />
-  );
-};
+    return (
+      <Img
+        src={src}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transform: `scale(${scale}) translate(${x}%, ${y}%)`,
+        }}
+      />
+    );
+  };
 
 // Cinematic text reveal with glow
 const CinematicText: React.FC<{
@@ -103,46 +103,46 @@ const CinematicText: React.FC<{
   uppercase = false,
   letterSpacing = 0,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+    const frame = useCurrentFrame();
+    const { fps } = useVideoConfig();
 
-  const progress = spring({
-    frame: frame - startFrame,
-    fps,
-    config: { damping: 50, stiffness: 100 },
-  });
+    const progress = spring({
+      frame: frame - startFrame,
+      fps,
+      config: { damping: 50, stiffness: 100 },
+    });
 
-  const opacity = interpolate(frame - startFrame, [0, 20], [0, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+    const opacity = interpolate(frame - startFrame, [0, 20], [0, 1], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    });
 
-  const blur = interpolate(frame - startFrame, [0, 15], [10, 0], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+    const blur = interpolate(frame - startFrame, [0, 15], [10, 0], {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    });
 
-  const translateY = interpolate(progress, [0, 1], [40, 0]);
+    const translateY = interpolate(progress, [0, 1], [40, 0]);
 
-  return (
-    <div
-      style={{
-        fontSize,
-        fontWeight: 800,
-        color,
-        textShadow: `0 0 60px ${glowColor}, 0 0 120px ${glowColor}40`,
-        transform: `translateY(${translateY}px)`,
-        opacity,
-        filter: `blur(${blur}px)`,
-        textTransform: uppercase ? 'uppercase' : 'none',
-        letterSpacing: `${letterSpacing}px`,
-        fontFamily: 'Inter, system-ui, sans-serif',
-      }}
-    >
-      {text}
-    </div>
-  );
-};
+    return (
+      <div
+        style={{
+          fontSize,
+          fontWeight: 800,
+          color,
+          textShadow: `0 0 60px ${glowColor}, 0 0 120px ${glowColor}40`,
+          transform: `translateY(${translateY}px)`,
+          opacity,
+          filter: `blur(${blur}px)`,
+          textTransform: uppercase ? 'uppercase' : 'none',
+          letterSpacing: `${letterSpacing}px`,
+          fontFamily: 'Inter, system-ui, sans-serif',
+        }}
+      >
+        {text}
+      </div>
+    );
+  };
 
 // Subtitle text with subtle animation
 const SubtitleText: React.FC<{
@@ -372,30 +372,6 @@ export const HeroArchitecture: React.FC<{
         fadeOutDuration={30}
       />
 
-      <Sequence from={TIMELINE.layer1Start} durationInFrames={150}>
-        <AbsoluteFill
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 20,
-          }}
-        >
-          <CinematicText
-            text="L'IA propose"
-            startFrame={TIMELINE.layer1TextStart - TIMELINE.layer1Start}
-            fontSize={80}
-            glowColor={COLORS.primary}
-          />
-          <SubtitleText
-            text="Intent · Créativité · Suggestions"
-            startFrame={TIMELINE.layer1TextStart - TIMELINE.layer1Start + 20}
-            color={COLORS.primary}
-          />
-        </AbsoluteFill>
-      </Sequence>
-
       {/* Layer 2: Code Limits */}
       <CrossfadeImage
         src={staticFile('assets/generated/code_security_barrier.png')}
@@ -404,30 +380,6 @@ export const HeroArchitecture: React.FC<{
         fadeOutStart={TIMELINE.layer2End - 30}
         fadeOutDuration={30}
       />
-
-      <Sequence from={TIMELINE.layer2Start} durationInFrames={150}>
-        <AbsoluteFill
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 20,
-          }}
-        >
-          <CinematicText
-            text="Le code limite"
-            startFrame={TIMELINE.layer2TextStart - TIMELINE.layer2Start}
-            fontSize={80}
-            glowColor={COLORS.secondary}
-          />
-          <SubtitleText
-            text="Règles · Déterminisme · Contrôle"
-            startFrame={TIMELINE.layer2TextStart - TIMELINE.layer2Start + 20}
-            color={COLORS.secondary}
-          />
-        </AbsoluteFill>
-      </Sequence>
 
       {/* Layer 3: Human Decides */}
       <CrossfadeImage
@@ -438,90 +390,6 @@ export const HeroArchitecture: React.FC<{
         fadeOutDuration={30}
       />
 
-      <Sequence from={TIMELINE.layer3Start} durationInFrames={120}>
-        <AbsoluteFill
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 20,
-          }}
-        >
-          <CinematicText
-            text="L'humain décide"
-            startFrame={TIMELINE.layer3TextStart - TIMELINE.layer3Start}
-            fontSize={80}
-            glowColor={COLORS.accent}
-          />
-          <SubtitleText
-            text="Validation · Override · Souveraineté"
-            startFrame={TIMELINE.layer3TextStart - TIMELINE.layer3Start + 20}
-            color={COLORS.accent}
-          />
-        </AbsoluteFill>
-      </Sequence>
-
-      {/* Stats Reveal */}
-      <Sequence from={TIMELINE.statsStart} durationInFrames={90}>
-        <AbsoluteFill
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <GlassPanel
-            opacity={interpolate(
-              frame - TIMELINE.statsStart,
-              [0, 20],
-              [0, 1],
-              { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
-            )}
-          >
-            <div style={{ display: 'flex', gap: 80, alignItems: 'center' }}>
-              <StatCounter
-                value={121}
-                label="Workflows"
-                startFrame={TIMELINE.statsStart}
-              />
-              <div
-                style={{
-                  width: 2,
-                  height: 80,
-                  background: `linear-gradient(to bottom, transparent, ${COLORS.primary}, transparent)`,
-                }}
-              />
-              <StatCounter
-                value={22}
-                label="Agents L5"
-                startFrame={TIMELINE.statsStart + 10}
-              />
-              <div
-                style={{
-                  width: 2,
-                  height: 80,
-                  background: `linear-gradient(to bottom, transparent, ${COLORS.primary}, transparent)`,
-                }}
-              />
-              <StatCounter
-                value={100}
-                suffix="%"
-                label="Factuel"
-                startFrame={TIMELINE.statsStart + 20}
-              />
-            </div>
-          </GlassPanel>
-
-          <CinematicText
-            text="Architecture Hybride"
-            startFrame={TIMELINE.statsStart + 40 - TIMELINE.statsStart}
-            fontSize={32}
-            letterSpacing={4}
-          />
-        </AbsoluteFill>
-      </Sequence>
 
       {/* Vignette overlay */}
       <AbsoluteFill

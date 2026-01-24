@@ -212,9 +212,28 @@
     },
 
     /**
+     * Save locale preference manually (blocks auto-redirect)
+     */
+    saveManualLocale(lang) {
+      const locale = this.getSavedLocale() || { ...this.defaultLocale };
+      locale.lang = lang;
+      locale.source = 'manual';
+      // Force region consistency
+      locale.region = (lang === 'fr') ? 'europe' : 'international';
+      this.saveLocale(locale);
+      console.log(`[GeoLocale] Manual override saved: ${lang}`);
+    },
+
+    /**
      * Redirect to English version if needed
      */
     redirectIfNeeded(locale) {
+      // Priority 1: Do NOT redirect if manual override is set
+      if (locale.source === 'manual') {
+        console.log('[GeoLocale] Skipping redirect due to manual override');
+        return;
+      }
+
       const isEnPage = window.location.pathname.includes('/en/');
       const shouldBeEn = this.shouldShowEnglish(locale);
 

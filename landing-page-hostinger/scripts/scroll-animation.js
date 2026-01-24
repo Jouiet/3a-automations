@@ -12,13 +12,21 @@
     // Configuration
     const CONFIG = {
         frameCount: 600,
-        framePath: 'assets/frames/frame_',
+        // Detect path depth (handles en/ index.html)
+        getAssetsPath: function () {
+            const isSubfolder = window.location.pathname.includes('/en/') ||
+                window.location.pathname.split('/').length > 2 && !window.location.pathname.endsWith('/');
+            const prefix = isSubfolder ? '../' : '';
+            return prefix + 'assets/frames/frame_';
+        },
         frameExtension: '.jpg',
         canvasId: 'hero-canvas',
         triggerSelector: '.hero-ultra',
         scrollStart: 'top top',
-        scrollEnd: '+=200%', // Animation spans 2x viewport height
-        preloadBatch: 50 // Preload frames in batches for performance
+        scrollEnd: '+=150%', // Overlapping span for smoother transition
+        preloadBatch: 50,
+        invalidateOnRefresh: true, // Handle responsive changes better
+        pinSpacing: true // Ensure content doesn't jump
     };
 
     // State
@@ -80,11 +88,12 @@
      */
     async function preloadImages() {
         const promises = [];
+        const assetsPath = CONFIG.getAssetsPath();
 
         for (let i = 1; i <= CONFIG.frameCount; i++) {
             const img = new Image();
             const frameNumber = String(i).padStart(4, '0');
-            img.src = `${CONFIG.framePath}${frameNumber}${CONFIG.frameExtension}`;
+            img.src = `${assetsPath}${frameNumber}${CONFIG.frameExtension}`;
             images.push(img);
 
             // Create promise for this image

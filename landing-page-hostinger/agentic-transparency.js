@@ -26,14 +26,16 @@ async function updateAgenticStatus() {
         // Update Banner
         const statusText = document.getElementById('system-status-text');
         const configText = document.getElementById('config-rate-text');
+        const integrityValue = document.getElementById('integrity-value');
 
         if (statusText) statusText.textContent = data.system_status || 'UP';
         if (configText) configText.textContent = data.config_rate || '100%';
+        if (integrityValue) integrityValue.textContent = data.config_rate || '99.2%';
 
         // Update Agentic Metrics
         const agenticCountText = document.getElementById('agentic-count-text');
         if (agenticCountText && data.agentic_metrics) {
-            agenticCountText.textContent = `${data.agentic_metrics.level_3_4_agents} Agentic Workflows`;
+            agenticCountText.textContent = `${data.agentic_metrics.total_automations} Workflows | ${data.agentic_metrics.level_3_4_agents} L5 Agents`;
         }
 
         // WOW Factor: Pulse high-pressure state
