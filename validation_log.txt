@@ -1,0 +1,62 @@
+══════════════════════════════════════════════════════════════════════
+  DESIGN SYSTEM VALIDATION
+  Source: docs/DESIGN-SYSTEM.md
+  Mode: 🔍 CHECK (CI)
+══════════════════════════════════════════════════════════════════════
+
+📊 Validating Automation Count...
+
+🤖 Validating Agent Count...
+
+🚫 Validating Forbidden Patterns...
+
+🎨 Validating SVG Icons...
+
+🎨 Validating CSS Variables...
+
+📝 Validating H1 Title Consistency...
+
+📝 Validating H2 Title Consistency...
+
+🔄 Validating CSS Version Consistency...
+
+🎨 Validating CSS Base Class Definitions...
+
+🎯 Validating Category Icon Consistency...
+
+🔎 Validating HTML Classes Have CSS Definitions...
+
+📐 Validating SVG Size Constraints...
+
+══════════════════════════════════════════════════════════════════════
+  RESULTS
+══════════════════════════════════════════════════════════════════════
+
+❌ ERRORS (2)
+  [Count] data/agentic-status.json: Found hardcoded "174" in JSON
+  [CSS] ../summary: Multiple CSS versions detected: 49.0, 51.0 - run design-auto-fix.cjs to fix
+    → Fix: node scripts/design-auto-fix.cjs
+
+⚠️  WARNINGS (5)
+  [Classes] ../styles.css: 31 component classes may lack CSS: status-content, error-content, lesson-header, lesson-content, lesson-title...
+  [SVG-Size] ../summary: 70 inline SVGs may lack size constraints in 8 files. Add width/height attributes or .parent svg { width: Xpx; height: Xpx; } CSS rules.
+  [SVG-Size] ../academie/parcours/e-commerce.html: Contains SVGs without explicit size constraints
+  [SVG-Size] ../academie/parcours/growth.html: Contains SVGs without explicit size constraints
+  [SVG-Size] ../academie/parcours/marketing-automation.html: Contains SVGs without explicit size constraints
+
+✅ PASSED (9)
+  [Count] No "174" found - correctly using 121
+  [Count] Agent count validation complete (expected: 22)
+  [SVG] All SVG icons use currentColor or allowed brand colors
+  [CSS] Required CSS variables present
+  [H1] All H1 tags have proper classes
+  [H2] All section h2 tags have section-title-ultra class
+  [CSS] Base class definitions validated
+  [Icons] All 13 category-icon classes have CSS definitions
+  [Classes] No critical component classes missing (0 errors, 31 minor warnings)
+
+──────────────────────────────────────────────────────────────────────
+SUMMARY: 2 errors, 5 warnings, 0 fixed
+──────────────────────────────────────────────────────────────────────
+
+❌ CI FAILED - Fix errors before deploying
