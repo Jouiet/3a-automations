@@ -11,7 +11,7 @@
 | Scripts with --health (functional) | 24 |
 | Scripts eligible for add-ons | 16 |
 | TOP 10 add-ons selected | 10 |
-| Human In The Loop (HITL) coverage | **70% (7/10)** ✅ Updated S157 |
+| Human In The Loop (HITL) coverage | **80% (8/10)** ✅ Updated S160 |
 
 ---
 
