@@ -1,11 +1,51 @@
 # 3A Automation
 >
-> Version: 86.0 | 26/01/2026 | Session 161 - **Subsidiary Compositions** + Core Web Vitals
+> Version: 87.0 | 26/01/2026 | Session 161bis - **CSS Optimization** + clamp() Migration
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 161bis - CSS OPTIMIZATION (26/01/2026)
+
+### Responsive Typography (clamp() Migration)
+
+| Selector | Before | After |
+| :--- | :--- | :--- |
+| `.hero-title` | 4.5rem | clamp(2.5rem, 5vw + 1rem, 4.5rem) |
+| `.hero-title-ultra` | 4.5rem | clamp(2.5rem, 5vw + 1rem, 4.5rem) |
+| `.title-line` (2x) | 3.5rem | clamp(2rem, 4vw + 0.5rem, 3.5rem) |
+| `.section-title-ultra` | 2.5rem | clamp(1.75rem, 3vw + 0.5rem, 2.5rem) |
+| `.stat-big` | 3rem | clamp(2rem, 3vw + 0.5rem, 3rem) |
+| `.result-number` | 3rem | clamp(2rem, 3vw + 0.5rem, 3rem) |
+| `.stat-item .stat-value` | 2rem | clamp(1.5rem, 2.5vw + 0.5rem, 2rem) |
+
+**Total clamp() usages: 10 → 18 (+8)**
+
+### CSS Duplicate Consolidation
+
+| Change | Impact |
+| :--- | :--- |
+| Removed duplicate `.title-line` | Kept animated version |
+| Removed duplicate `.stream-1` to `.stream-4` | 100% identical |
+| CSS warnings | 83 → 78 (-5) |
+| Remaining duplicates | 25 (different values, need visual review) |
+
+### CSS Version
+
+| Metric | Value |
+| :--- | :--- |
+| CSS Version | **v=84.0** |
+| HTML Files Updated | 69 |
+| Validation | ✅ PASSED (78 warnings, 0 errors) |
+
+### Google Cloud SDK
+
+- ✅ Installed to `/tmp/google-cloud-sdk/`
+- ⏳ GSC API setup pending user credential configuration
+
+---
 
 ## SESSION 161 - REMOTION SUBSIDIARIES + CWV (26/01/2026)
 
@@ -27,21 +67,9 @@
 | **CLS** | 0.03 | < 0.1 | ✅ EXCELLENT |
 | **TTFB** | 58ms | < 800ms | ✅ EXCELLENT |
 
-### Files Modified
-
-| File | Change |
-| :--- | :--- |
-| `remotion-studio/src/compositions/AlphaMedicalAd.tsx` | ✅ Created |
-| `remotion-studio/src/compositions/MyDealzAd.tsx` | ✅ Created |
-| `remotion-studio/src/Root.tsx` | ✅ +5 compositions registered |
-| `remotion-studio/src/compositions/index.ts` | ✅ +2 exports |
-| `docs/DESIGN-AUDIT-SESSION-143.md` | ✅ CWV data added |
-| `docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md` | ✅ Video transfers complete |
-| `docs/PLAN-INTEGRATION-MYDEALZ-ALPHAMEDICAL-SESSION-141.md` | ✅ Tasks marked complete |
-
 ### Validation Results
 
-- Design System: ✅ PASSED (0 errors, 83 warnings)
+- Design System: ✅ PASSED (0 errors, 78 warnings)
 - Automation Registry: ✅ 121 automations
 - Sensors: 20 files
 - Resilient Scripts: 7 files
