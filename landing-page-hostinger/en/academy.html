@@ -5,7 +5,7 @@
     content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://ipapi.co https://script.google.com https://www.google-analytics.com; frame-src 'self' https://www.googletagmanager.com;">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="3A Automation Academy - Learn to automate your marketing and generate qualified leads. Personalized learning paths and practical courses for subscribed clients.">
+  <meta name="description" content="3A Automation Academy - Learn how automation works and master your marketing. Personalized learning paths and practical courses.">
   <title>Academy | 3A Automation - Master Your Automations</title>
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -27,7 +27,7 @@
 
   <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/en/academy.html">
 
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="index, follow">
 
   <!-- Schema.org FAQPage -->
   <script type="application/ld+json">
@@ -40,7 +40,7 @@
         "name": "How do I access the Academy?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Academy is reserved for clients with an active pack (Quick Win, Essentials or Growth). After subscribing, you'll receive your login credentials by email. If you're already a client and haven't received access, contact our support."
+          "text": "The Academy is freely accessible to all visitors. Explore our content to discover how automation can transform your business. For personalized support and implementation, contact our team."
         }
       },
       {
@@ -159,23 +159,74 @@
     </section>
 
     <div class="container">
-      <div class="access-banner">
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-        <p><strong>Client access only.</strong> Log in with your credentials or <a href="/en/contact.html">contact us</a> to subscribe to a pack.</p>
+      <div class="access-banner" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1)); border-color: var(--accent-blue);">
+        <svg width="24" height="24" fill="none" stroke="var(--accent-blue)" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <p><strong>Explore freely.</strong> Discover how automation can transform your business. <a href="/en/booking.html">Book a free audit</a> to get started.</p>
       </div>
     </div>
 
     <section class="section">
       <div class="container">
         <div class="nav-tabs">
-          <button class="nav-tab active" data-tab="paths">Learning Paths</button>
+          <button class="nav-tab active" data-tab="how-it-works">How it works</button>
+          <button class="nav-tab" data-tab="paths">Learning Paths</button>
           <button class="nav-tab" data-tab="courses">Courses</button>
           <button class="nav-tab" data-tab="guides">Quick Guides</button>
           <button class="nav-tab" data-tab="faq">FAQ</button>
         </div>
 
+        <!-- HOW IT WORKS -->
+        <div id="how-it-works" class="tab-content active">
+          <h2 class="section-title-ultra">How 3A Automation Works</h2>
+          <p class="section-subtitle">A simple 3-step process to automate your business and focus on what matters.</p>
+
+          <div class="cards-grid" style="margin-top: 2rem;">
+            <div class="process-card">
+              <div class="process-number">1</div>
+              <div class="process-icon">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+              </div>
+              <h3 class="process-title">Audit</h3>
+              <p class="process-description">We analyze your existing processes: emails, sales, customer service. We identify time-consuming tasks and automation opportunities.</p>
+            </div>
+
+            <div class="process-card">
+              <div class="process-number">2</div>
+              <div class="process-icon">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <h3 class="process-title">Deployment</h3>
+              <p class="process-description">We configure your automations: email flows, lead qualification, customer segmentation. Everything runs automatically in the background.</p>
+            </div>
+
+            <div class="process-card">
+              <div class="process-number">3</div>
+              <div class="process-icon">
+                <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <h3 class="process-title">Results</h3>
+              <p class="process-description">You save time, your customers receive personalized messages, and your revenue grows. We track KPIs and optimize continuously.</p>
+            </div>
+          </div>
+
+          <div style="margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+            <h3 style="color: var(--text-light); margin-bottom: 1rem; font-size: 1.25rem;">What is an automation?</h3>
+            <p style="color: var(--text-muted); line-height: 1.7;">An automation is a task that runs automatically when a condition is met. For example: <strong style="color: var(--text-light);">a customer abandons their cart</strong> → <strong style="color: var(--accent-blue);">an email is sent automatically</strong> 1 hour later to remind them. You no longer need to do it manually.</p>
+
+            <h3 style="color: var(--text-light); margin: 2rem 0 1rem; font-size: 1.25rem;">What is an AI agent?</h3>
+            <p style="color: var(--text-muted); line-height: 1.7;">An AI agent goes further than automation. It can <strong style="color: var(--text-light);">analyze, decide, and act</strong>. For example: analyze an incoming email, understand the customer's intent, and respond appropriately. 3A Automation uses 22 specialized agents that work together.</p>
+          </div>
+
+          <div style="margin-top: 2rem; text-align: center;">
+            <a href="/en/booking.html" class="btn-primary-ultra" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-size: 1rem;">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              Book your free audit
+            </a>
+          </div>
+        </div>
+
         <!-- LEARNING PATHS -->
-        <div id="paths" class="tab-content active">
+        <div id="paths" class="tab-content">
           <h2 class="section-title-ultra">Learning Paths</h2>
           <p class="section-subtitle">Choose the path that fits your role and goals. Each path is designed to make you autonomous.</p>
 
@@ -609,7 +660,7 @@
                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
               </div>
               <div class="faq-answer">
-                <p>The Academy is reserved for clients with an active pack (Quick Win, Essentials or Growth). After subscribing, you'll receive your login credentials by email. If you're already a client and haven't received access, contact our support.</p>
+                <p>The Academy is freely accessible to all visitors. Explore our content to discover how automation can transform your business. For personalized support and implementation, contact our team.</p>
               </div>
             </div>
 
