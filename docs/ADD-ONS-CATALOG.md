@@ -1,7 +1,7 @@
 # ADD-ONS CATALOG - 3A Automation
-> Version: 1.2 | Date: 25/01/2026 | Session: 160
+> Version: 1.3 | Date: 25/01/2026 | Session: 160+
 > Source: Analyse bottom-up des 83 scripts agency/core/
-> Updated: Session 160 - SMS HITL spend limit + contact form add-on selection
+> Updated: Session 160+ - Phase 3 Documentation Complete
 
 ## Executive Summary
 
@@ -313,10 +313,12 @@ Dependencies:
 - [x] Email Cart: Add `previewMode` option - Done S157
 - [x] SMS: Add daily spend limit alert - Done S160
 
-### Phase 3: Documentation (2h) - ⏳ PENDING
-- [ ] Create per-add-on setup guides
-- [ ] Document HITL configuration options
-- [ ] Add FAQ section
+### Phase 3: Documentation (2h) - ✅ COMPLETE
+- [x] Create per-add-on setup guides - Done Session 160+
+- [x] Document HITL configuration options - Done Session 160+
+- [x] Add FAQ section - Done Session 160+
+
+**Documentation:** `docs/ADD-ONS-SETUP-GUIDES.md`
 
 ---
 
