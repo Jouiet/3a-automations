@@ -8,11 +8,14 @@
 ### Objectif
 Combler la lacune marketing : expliquer le système 3A aux prospects (pas juste aux clients).
 
-### Commits Session 152 (3 total)
+### Commits Session 152 (5 total)
 
 ```
 e9d1f0f docs: add WebP conversion to Session 151 audit
 25f02b5 feat(academie): add "Comment ça marche" section + enable indexing
+5e97f40 docs: add Session 152 - Académie "Comment ça marche"
+2ded9f8 feat(academy-en): add "How it works" section + enable indexing + redirect
+af423b9 fix: add viewport meta to academie.html redirect
 ```
 
 ### Corrections Critiques
@@ -41,9 +44,11 @@ e9d1f0f docs: add WebP conversion to Session 151 audit
 | FAQ visible | Idem |
 | Footer badge | "Clients" badge supprimé (49 fichiers) |
 
-### Fichiers Modifiés (49 total)
+### Fichiers Modifiés (51 total)
 
-- `academie.html` - Page principale enrichie
+- `academie.html` - Page principale enrichie (FR)
+- `en/academy.html` - Version anglaise enrichie (EN)
+- `en/academie.html` - **NOUVEAU** Redirect vers academy.html
 - `academie/cours/*.html` - 6 fichiers (footer)
 - `academie/parcours/*.html` - 3 fichiers (footer)
 - `academie/guides.html` - footer
@@ -53,10 +58,12 @@ e9d1f0f docs: add WebP conversion to Session 151 audit
 
 | Métrique | Valeur |
 |----------|--------|
-| Fichiers modifiés | 49 |
-| Nouveau contenu | ~100 lignes HTML |
-| Onglets académie | 4 → 5 |
-| Pages indexées | +1 (academie.html) |
+| Fichiers modifiés | 51 |
+| Nouveau contenu FR | ~100 lignes HTML |
+| Nouveau contenu EN | ~70 lignes HTML |
+| Onglets académie | 4 → 5 (FR + EN) |
+| Pages indexées | +2 (academie.html, en/academy.html) |
+| Redirect créé | en/academie.html → en/academy.html |
 
 ### Impact Marketing
 
