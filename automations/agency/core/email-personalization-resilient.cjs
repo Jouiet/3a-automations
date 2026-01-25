@@ -27,12 +27,28 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 // Import security utilities
 const {
   RateLimiter,
   setSecurityHeaders
 } = require('../../lib/security-utils.cjs');
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HITL CONFIG - Session 157
+// Preview mode: Review AI-generated emails before sending to customers
+// ─────────────────────────────────────────────────────────────────────────────
+const HITL_CONFIG = {
+  previewDir: path.join(__dirname, '../../../outputs/email-previews'),
+  approvedDir: path.join(__dirname, '../../../outputs/email-approved'),
+  // Enable preview mode by default (safer)
+  previewModeDefault: true,
+  // Slack notification for new previews
+  slackWebhook: process.env.SLACK_WEBHOOK_URL || null,
+  // Admin email for preview notifications
+  adminEmail: process.env.HITL_ADMIN_EMAIL || null,
+};
 
 // Import Marketing Science Core
 const MarketingScience = require('./marketing-science-core.cjs');
@@ -687,10 +703,169 @@ async function generateSubjectLine(context) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// HITL: EMAIL PREVIEW SYSTEM (Session 157)
+// Review AI-generated emails before sending to prevent hallucination risks
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Ensure HITL directories exist
+ */
+function ensureHITLDirs() {
+  if (!fs.existsSync(HITL_CONFIG.previewDir)) {
+    fs.mkdirSync(HITL_CONFIG.previewDir, { recursive: true });
+  }
+  if (!fs.existsSync(HITL_CONFIG.approvedDir)) {
+    fs.mkdirSync(HITL_CONFIG.approvedDir, { recursive: true });
+  }
+}
+
+/**
+ * Generate unique preview ID
+ */
+function generatePreviewId() {
+  const timestamp = Date.now();
+  const random = crypto.randomBytes(4).toString('hex');
+  return `email-preview-${timestamp}-${random}`;
+}
+
+/**
+ * Save email series for preview/approval
+ */
+function saveEmailPreview(emails, metadata) {
+  ensureHITLDirs();
+
+  const previewId = generatePreviewId();
+  const preview = {
+    id: previewId,
+    status: 'pending_review',
+    createdAt: new Date().toISOString(),
+    type: metadata.type || 'personalization',
+    recipient: {
+      email: metadata.recipientEmail,
+      firstName: metadata.firstName,
+    },
+    emails: emails.map((e, i) => ({
+      sequence: i + 1,
+      subject: e.subject,
+      bodyPreview: e.body?.substring(0, 500) || e.content?.substring(0, 500) || '',
+      fullBody: e.body || e.content,
+      sendDelay: e.sendDelay || 0,
+    })),
+    metadata,
+    aiGenerated: metadata.aiGenerated,
+    provider: metadata.provider,
+    approveCmd: `node email-personalization-resilient.cjs --approve-preview=${previewId}`,
+    rejectCmd: `node email-personalization-resilient.cjs --reject-preview=${previewId}`,
+  };
+
+  const previewPath = path.join(HITL_CONFIG.previewDir, `${previewId}.json`);
+  fs.writeFileSync(previewPath, JSON.stringify(preview, null, 2));
+
+  console.log(`\n  [HITL] ⏸️  Email series saved for review`);
+  console.log(`    Preview ID: ${previewId}`);
+  console.log(`    Recipient: ${metadata.recipientEmail}`);
+  console.log(`    Emails: ${emails.length}`);
+  console.log(`\n    📋 NEXT STEPS:`);
+  console.log(`       Review: node email-personalization-resilient.cjs --view-preview=${previewId}`);
+  console.log(`       Approve: node email-personalization-resilient.cjs --approve-preview=${previewId}`);
+  console.log(`       Reject:  node email-personalization-resilient.cjs --reject-preview=${previewId}`);
+
+  return { id: previewId, path: previewPath, status: 'pending_review' };
+}
+
+/**
+ * List pending email previews
+ */
+function listEmailPreviews() {
+  ensureHITLDirs();
+  const previews = [];
+  const files = fs.readdirSync(HITL_CONFIG.previewDir);
+
+  for (const file of files) {
+    if (file.endsWith('.json')) {
+      try {
+        const data = JSON.parse(fs.readFileSync(path.join(HITL_CONFIG.previewDir, file), 'utf8'));
+        previews.push({
+          id: data.id,
+          recipient: data.recipient.email,
+          type: data.type,
+          emailCount: data.emails?.length || 0,
+          provider: data.provider,
+          createdAt: data.createdAt,
+          status: data.status,
+        });
+      } catch (e) {
+        console.warn(`[WARN] Could not parse preview: ${file}`);
+      }
+    }
+  }
+
+  return previews;
+}
+
+/**
+ * Get preview by ID
+ */
+function getEmailPreview(previewId) {
+  const previewPath = path.join(HITL_CONFIG.previewDir, `${previewId}.json`);
+  if (fs.existsSync(previewPath)) {
+    return JSON.parse(fs.readFileSync(previewPath, 'utf8'));
+  }
+  return null;
+}
+
+/**
+ * Approve email preview
+ */
+function approveEmailPreview(previewId) {
+  const preview = getEmailPreview(previewId);
+  if (!preview) {
+    return { success: false, error: `Preview not found: ${previewId}` };
+  }
+
+  preview.status = 'approved';
+  preview.approvedAt = new Date().toISOString();
+
+  // Move to approved folder
+  const approvedPath = path.join(HITL_CONFIG.approvedDir, `${previewId}.json`);
+  fs.writeFileSync(approvedPath, JSON.stringify(preview, null, 2));
+
+  // Remove from pending
+  const previewPath = path.join(HITL_CONFIG.previewDir, `${previewId}.json`);
+  fs.unlinkSync(previewPath);
+
+  console.log(`  [HITL] ✅ Email preview approved: ${previewId}`);
+  console.log(`    Ready to send to: ${preview.recipient.email}`);
+
+  return { success: true, preview, approvedPath };
+}
+
+/**
+ * Reject email preview
+ */
+function rejectEmailPreview(previewId, reason = '') {
+  const preview = getEmailPreview(previewId);
+  if (!preview) {
+    return { success: false, error: `Preview not found: ${previewId}` };
+  }
+
+  preview.status = 'rejected';
+  preview.rejectedAt = new Date().toISOString();
+  preview.rejectionReason = reason;
+
+  // Keep in preview folder with rejected status (audit trail)
+  const previewPath = path.join(HITL_CONFIG.previewDir, `${previewId}.json`);
+  fs.writeFileSync(previewPath, JSON.stringify(preview, null, 2));
+
+  console.log(`  [HITL] ❌ Email preview rejected: ${previewId}`);
+  return { success: true, preview };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // ABANDONED CART SERIES GENERATION (Session 127bis)
 // +69% orders vs single email (Klaviyo benchmark)
 // ─────────────────────────────────────────────────────────────────────────────
-async function generateAbandonedCartSeries(cartData) {
+async function generateAbandonedCartSeries(cartData, previewMode = HITL_CONFIG.previewModeDefault) {
   const errors = [];
   // Fallback order: Grok → OpenAI → Gemini → Anthropic → Static
   const providerOrder = ['grok', 'openai', 'gemini', 'anthropic'];
@@ -761,7 +936,7 @@ AVIS CLIENTS (pour email 2):
       emails[1].sendDelay = ABANDONED_CART_CONFIG.delays.email2;
       emails[2].sendDelay = ABANDONED_CART_CONFIG.delays.email3;
 
-      return {
+      const result = {
         success: true,
         emails,
         provider: provider.name,
@@ -770,6 +945,25 @@ AVIS CLIENTS (pour email 2):
         aiGenerated: true,
         benchmarks: ABANDONED_CART_CONFIG.benchmarks
       };
+
+      // HITL: Save for preview if previewMode is enabled
+      if (previewMode) {
+        const previewInfo = saveEmailPreview(emails, {
+          type: 'abandoned_cart_series',
+          recipientEmail: cartData.email,
+          firstName: cartData.firstName,
+          provider: provider.name,
+          aiGenerated: true,
+          cartTotal: cartData.cartTotal,
+          products: cartData.products,
+        });
+        result.hitl = previewInfo;
+        result.status = 'pending_review';
+        console.log(`\n  [HITL] ⚠️  PREVIEW MODE ACTIVE - Emails NOT sent`);
+        console.log(`    Approve to send: ${previewInfo.approveCmd}`);
+      }
+
+      return result;
     } catch (err) {
       errors.push({ provider: provider.name, error: err.message });
       console.log(`[AbandonedCart] ${provider.name} failed:`, err.message);
@@ -780,7 +974,7 @@ AVIS CLIENTS (pour email 2):
   console.log('[AbandonedCart] All providers failed, using static templates');
   const staticEmails = getAbandonedCartStaticSeries(cartData);
 
-  return {
+  const result = {
     success: true,
     emails: staticEmails,
     provider: 'static',
@@ -789,6 +983,24 @@ AVIS CLIENTS (pour email 2):
     aiGenerated: false,
     benchmarks: ABANDONED_CART_CONFIG.benchmarks
   };
+
+  // HITL: Save for preview if previewMode is enabled (even for static templates)
+  if (previewMode) {
+    const previewInfo = saveEmailPreview(staticEmails, {
+      type: 'abandoned_cart_series',
+      recipientEmail: cartData.email,
+      firstName: cartData.firstName,
+      provider: 'static',
+      aiGenerated: false,
+      cartTotal: cartData.cartTotal,
+      products: cartData.products,
+    });
+    result.hitl = previewInfo;
+    result.status = 'pending_review';
+    console.log(`\n  [HITL] ⚠️  PREVIEW MODE ACTIVE - Emails NOT sent`);
+  }
+
+  return result;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -830,10 +1042,18 @@ function startServer(port = 3006) {
 
     // Health check
     if (req.url === '/health' && req.method === 'GET') {
+      const pendingPreviews = listEmailPreviews();
       const status = {
         healthy: true,
+        version: '2.0.0 (Session 157 - HITL Edition)',
         providers: {},
-        staticFallback: true
+        staticFallback: true,
+        hitl: {
+          previewModeDefault: HITL_CONFIG.previewModeDefault,
+          previewDir: HITL_CONFIG.previewDir,
+          pendingPreviews: pendingPreviews.length,
+          slackNotifications: !!HITL_CONFIG.slackWebhook,
+        }
       };
       for (const [key, provider] of Object.entries(PROVIDERS)) {
         status.providers[key] = { name: provider.name, configured: provider.enabled };
@@ -917,8 +1137,11 @@ function startServer(port = 3006) {
             return;
           }
 
+          // HITL: previewMode can be set in request body (default: true for safety)
+          const previewMode = cartData.previewMode !== false; // Default true unless explicitly false
           console.log(`[AbandonedCart] Generating 3-email series for: ${cartData.email}`);
-          const result = await generateAbandonedCartSeries(cartData);
+          console.log(`[AbandonedCart] Preview mode: ${previewMode ? 'ON (review before send)' : 'OFF (direct send)'}`);
+          const result = await generateAbandonedCartSeries(cartData, previewMode);
 
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify(result));
@@ -1020,6 +1243,82 @@ async function main() {
       console.log(`${provider.name}: ${status}`);
     }
     console.log('Static fallback: [OK] Always available');
+
+    // HITL Status
+    console.log('\n=== HITL STATUS ===');
+    console.log(`Preview Mode Default: ${HITL_CONFIG.previewModeDefault ? '[ON] Safe' : '[OFF] Auto-send'}`);
+    console.log(`Slack Webhook: ${HITL_CONFIG.slackWebhook ? '[OK] Configured' : '[--] Not configured'}`);
+    const pendingPreviews = listEmailPreviews();
+    console.log(`Pending Previews: ${pendingPreviews.length}`);
+
+    console.log('\n✅ Email Personalization HITL: OPERATIONAL');
+    return;
+  }
+
+  // HITL CLI Commands - Session 157
+  if (args['list-previews'] || args.listpreviews) {
+    const previews = listEmailPreviews();
+    console.log('\n=== PENDING EMAIL PREVIEWS ===');
+    if (previews.length === 0) {
+      console.log('No pending previews.');
+    } else {
+      previews.forEach((p, i) => {
+        console.log(`\n[${i + 1}] ID: ${p.id}`);
+        console.log(`    Type: ${p.metadata?.type || 'unknown'}`);
+        console.log(`    Emails: ${p.emailCount}`);
+        console.log(`    Created: ${p.createdAt}`);
+      });
+    }
+    return;
+  }
+
+  if (args['view-preview'] || args.viewpreview) {
+    const previewId = args['view-preview'] || args.viewpreview;
+    const preview = getEmailPreview(previewId);
+    if (!preview) {
+      console.error(`❌ Preview not found: ${previewId}`);
+      process.exit(1);
+    }
+    console.log('\n=== EMAIL PREVIEW ===');
+    console.log(`ID: ${preview.id}`);
+    console.log(`Type: ${preview.metadata?.type || 'unknown'}`);
+    console.log(`Created: ${preview.createdAt}`);
+    console.log(`\n--- Emails ---`);
+    preview.emails.forEach((email, i) => {
+      console.log(`\n[Email ${i + 1}]`);
+      console.log(`Subject: ${email.subject}`);
+      console.log(`CTA: ${email.cta}`);
+      console.log(`Timing: ${email.timing || 'immediate'}`);
+      if (email.body) console.log(`Body preview: ${email.body.substring(0, 200)}...`);
+    });
+    return;
+  }
+
+  if (args['approve-preview'] || args.approvepreview) {
+    const previewId = args['approve-preview'] || args.approvepreview;
+    const result = approveEmailPreview(previewId);
+    if (result.success) {
+      console.log(`✅ Preview approved: ${previewId}`);
+      console.log(`   Moved to: ${result.approvedPath}`);
+      console.log(`   Ready for sending.`);
+    } else {
+      console.error(`❌ Failed to approve: ${result.error}`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (args['reject-preview'] || args.rejectpreview) {
+    const previewId = args['reject-preview'] || args.rejectpreview;
+    const reason = args.reason || 'Rejected by operator';
+    const result = rejectEmailPreview(previewId, reason);
+    if (result.success) {
+      console.log(`✅ Preview rejected: ${previewId}`);
+      console.log(`   Reason: ${reason}`);
+    } else {
+      console.error(`❌ Failed to reject: ${result.error}`);
+      process.exit(1);
+    }
     return;
   }
 
@@ -1096,7 +1395,7 @@ async function main() {
   }
 
   console.log(`
-[Email] Resilient Email Personalization - 3A Automation v1.1.0
+[Email] Resilient Email Personalization - 3A Automation v1.2.0
 
 Usage:
   node email-personalization-resilient.cjs --server [--port=3006]
@@ -1104,6 +1403,12 @@ Usage:
   node email-personalization-resilient.cjs --subject --context='{"topic":"...","segment":"..."}'
   node email-personalization-resilient.cjs --abandoned-cart-series --cart='{"email":"...","firstName":"...","products":[...]}'
   node email-personalization-resilient.cjs --health
+
+HITL Commands (Session 157):
+  node email-personalization-resilient.cjs --list-previews
+  node email-personalization-resilient.cjs --view-preview=<preview-id>
+  node email-personalization-resilient.cjs --approve-preview=<preview-id>
+  node email-personalization-resilient.cjs --reject-preview=<preview-id> [--reason="..."]
 
 Fallback chain:
   Grok → OpenAI → Gemini → Claude → Static templates
@@ -1113,6 +1418,11 @@ Session 127bis Features:
     Email 1: 1h after abandon (reminder)
     Email 2: 24h after (social proof)
     Email 3: 72h after (discount)
+
+Session 157 Features:
+  - HITL Preview Mode: AI-generated emails are saved for review before sending
+  - Default: previewMode=true (safer - requires approval)
+  - Use --force-send to bypass preview (not recommended for production)
 `);
 }
 
