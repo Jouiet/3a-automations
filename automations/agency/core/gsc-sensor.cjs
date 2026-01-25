@@ -21,6 +21,13 @@ for (const envPath of envPaths) {
 
 const GPM_PATH = path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json');
 
+// Helper: Get date in YYYY-MM-DD format
+function getDateString(daysAgo = 0) {
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    return date.toISOString().split('T')[0];
+}
+
 async function fetchGSCData(siteUrl) {
     if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
         throw new Error('GOOGLE_APPLICATION_CREDENTIALS missing');
@@ -31,11 +38,15 @@ async function fetchGSCData(siteUrl) {
     });
     const searchconsole = google.searchconsole({ version: 'v1', auth });
 
+    // GSC API requires YYYY-MM-DD format, data available with 3-day delay
+    const startDate = getDateString(30);  // 30 days ago
+    const endDate = getDateString(3);     // 3 days ago (GSC data delay)
+
     const res = await searchconsole.searchanalytics.query({
         siteUrl: siteUrl,
         requestBody: {
-            startDate: '28daysAgo',
-            endDate: 'yesterday',
+            startDate: startDate,
+            endDate: endDate,
             dimensions: ['query'],
             rowLimit: 10
         }

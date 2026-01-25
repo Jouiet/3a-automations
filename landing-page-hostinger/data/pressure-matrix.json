@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-25T21:31:10.388Z",
+  "last_updated": "2026-01-25T23:53:15.450Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -113,9 +113,13 @@
     },
     "seo": {
       "gsc_gaps": {
-        "pressure": 95,
-        "trend": "UP",
-        "last_check": "2026-01-11T21:55:00Z"
+        "pressure": 0,
+        "trend": "DOWN",
+        "last_check": "2026-01-25T23:53:15.450Z",
+        "sensor_data": {
+          "top_gap_potential": 0,
+          "target_query": "\"grok\" \"web speech api\""
+        }
       },
       "product_enrichment": {
         "pressure": 0,

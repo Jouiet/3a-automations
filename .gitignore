@@ -66,3 +66,4 @@ CLAUDE.local.md
 tests/visual-baseline/
 tests/visual-current/
 tests/visual-diff/
+.credentials/
