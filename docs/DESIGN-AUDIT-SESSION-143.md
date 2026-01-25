@@ -1,5 +1,109 @@
-# AUDIT DESIGN UI/UX - SESSION 143→149
+# AUDIT DESIGN UI/UX - SESSION 143→150
 ## Benchmark vs Tendances 2026 | Màj 25/01/2026
+
+---
+
+## SESSION 150 - AUDIT MANUEL: PROBLÈMES NON DÉTECTÉS PAR VALIDATOR (25/01/2026)
+
+### Constat Critique
+Le validateur v4.0 **NE DÉTECTE PAS** plusieurs problèmes majeurs sur les pages `academie/parcours/` et `academie/cours/`.
+
+### Problèmes Identifiés (Audit Manuel)
+
+#### P0 - CRITIQUE (Impact visuel immédiat)
+
+| Problème | Pages Affectées | Impact |
+|----------|-----------------|--------|
+| **H1 sans classe** | 6 cours (analytics, contenu, demarrer, ecommerce, emails, leads) | Titre sans style hero-title-ultra |
+| **H2 sans section-title-ultra** | 6 cours (0 instances vs 2 sur parcours) | Titres de sections sans style standard |
+| **main-content ID manquant** | 3 parcours (e-commerce, growth, marketing-automation) | Skip-link cassé (a11y) |
+
+#### P1 - HAUTE (Impact UX/Performance)
+
+| Problème | Pages Affectées | Impact |
+|----------|-----------------|--------|
+| **Font preload manquant** | 9/9 pages (100%) | LCP dégradé, FOUT possible |
+| **CTA section manquante** | 6 cours (100%) | Pas d'appel à l'action en fin de page |
+
+#### P2 - MOYENNE (Inconsistance)
+
+| Problème | Pages Affectées | Impact |
+|----------|-----------------|--------|
+| **Nav différent** | parcours vs cours | Incohérence (Accueil présent/absent, btn-nav vs lien simple) |
+| **btn-nav vs btn-cyber** | 6 cours | Style bouton non standard |
+
+### Détail par Type de Page
+
+#### academie/parcours/*.html (3 pages)
+```
+✅ H1 class="hero-title-ultra" - OK
+✅ H2 class="section-title-ultra" - 2 instances chacune
+❌ id="main-content" - MANQUANT sur <main>
+❌ Font preload - MANQUANT
+✅ CTA section - OK
+✅ Footer 4 status - OK
+```
+
+#### academie/cours/*.html (6 pages)
+```
+❌ H1 - PAS de classe (devrait être hero-title-ultra)
+❌ H2 - PAS de classe (0 section-title-ultra)
+✅ id="main-content" - OK
+❌ Font preload - MANQUANT
+❌ CTA section - MANQUANTE
+✅ Footer 4 status - OK
+```
+
+### Corrections Requises
+
+| # | Fichier | Corrections |
+|---|---------|-------------|
+| 1 | academie/cours/analytics.html | H1 class, H2 class, font preload, CTA |
+| 2 | academie/cours/contenu.html | H1 class, H2 class, font preload, CTA |
+| 3 | academie/cours/demarrer.html | H1 class, H2 class, font preload, CTA |
+| 4 | academie/cours/ecommerce.html | H1 class, H2 class, font preload, CTA |
+| 5 | academie/cours/emails.html | H1 class, H2 class, font preload, CTA |
+| 6 | academie/cours/leads.html | H1 class, H2 class, font preload, CTA |
+| 7 | academie/parcours/e-commerce.html | main-content ID, font preload |
+| 8 | academie/parcours/growth.html | main-content ID, font preload |
+| 9 | academie/parcours/marketing-automation.html | main-content ID, font preload |
+
+### Améliorations Validator v5.0 Requises
+
+Le validateur doit être amélioré pour détecter:
+
+| Nouvelle Vérification | Fonction |
+|-----------------------|----------|
+| H1 classe obligatoire | `validateH1HasClass()` |
+| H2 section-title-ultra dans `<section>` | `validateH2InSection()` |
+| Font preload présence | `validateFontPreload()` |
+| main-content ID sur `<main>` | `validateMainContentId()` |
+| CTA section présence | `validateCTASection()` |
+| Nav cohérence cross-pages | `validateNavConsistency()` |
+
+### Status Corrections Session 150
+
+| Correction | Status |
+|------------|--------|
+| Audit document màj | ✅ DONE |
+| Fix 6 cours H1 class | ✅ DONE |
+| Fix 9 pages font preload | ✅ DONE |
+| Fix 3 parcours main-content | ✅ DONE |
+| Fix cas-clients.html process-card CSS | ✅ DONE |
+| Fix 6 cours CTA | ⏳ PENDING |
+| Validator v5.0 | ⏳ PENDING |
+
+### Problème cas-clients.html (Screenshot 02.41.28)
+
+**Problème:** Section "Comment Nous Travaillons Avec Vous" - cartes mal alignées, texte qui déborde
+
+**Root Cause:** CSS dupliqué conflictuel
+- Ligne 11050: `.process-card { display: flex; }` (horizontal)
+- Ligne 12008: `.process-card { position: relative; }` (pas de override display)
+
+**Fix appliqué:**
+1. Ajout `display: block;` à ligne 12008 pour override explicite
+2. Suppression du bloc dupliqué lignes 11046-11083
 
 ---
 
@@ -420,19 +524,23 @@ Le hook avait une boucle infinie causée par:
 
 ## CONCLUSION
 
-Notre implémentation design est **EXCELLENTE (88/100)** après corrections Session 148-149:
+Notre implémentation design est **BONNE (78/100)** - révisé après audit manuel Session 150:
 
 **Forces:**
 - ✅ Glassmorphism moderne (28 instances)
 - ✅ CSS Variables extensif (1126 uses)
 - ✅ Automation design CI/CD (unique dans l'industrie)
-- ✅ Accessibilité WCAG 2.1 AA
 - ✅ Animations purposeful
 - ✅ **Validator v4.0** avec footer completeness detection
 - ✅ **70/70 pages** avec footers complets
-- ✅ **0 typos** accents détectés
 
-**À améliorer:**
+**Problèmes Critiques Découverts (Session 150):**
+- ❌ **6 cours pages**: H1 sans classe, H2 sans classe, pas de CTA
+- ❌ **3 parcours pages**: main-content ID manquant (a11y cassé)
+- ❌ **9/9 pages academie**: Font preload manquant (LCP dégradé)
+- ⚠️ Nav incohérent entre parcours et cours
+
+**À améliorer (hérité):**
 - ⚠️ 12 PNG → WebP
 - ⚠️ 397 hardcoded font-size vs 8 dynamic
 - ⚠️ 105 generic buttons (should use btn-cyber)
@@ -441,11 +549,17 @@ Notre implémentation design est **EXCELLENTE (88/100)** après corrections Sess
 **Corrections Complétées Session 148-149:**
 1. ✅ Validator v4.0 avec footer completeness
 2. ✅ 17 pages corrigées (footers + typos)
-3. ✅ Typos accents FR (Systeme → Système)
-4. ✅ 4 status items sur tous footers
-5. ✅ Social links sur tous footers
+3. ✅ CSS classes parcours/cours (+200 lignes)
+4. ✅ SVG flywheel-360 fix
+5. ✅ EN footers complets (academy, faq, investors)
 
-**Prochaines étapes:**
+**Prochaines étapes URGENTES (Session 150):**
+1. ❌ Fix 6 cours: H1 class, H2 class, CTA section
+2. ❌ Fix 3 parcours: main-content ID
+3. ❌ Fix 9 pages: Font preload
+4. ❌ Améliorer Validator v5.0 pour détecter ces problèmes
+
+**Prochaines étapes (moyen terme):**
 1. Convertir images PNG → WebP
 2. Migrer font-size vers clamp()
 3. Migrer boutons vers btn-cyber
@@ -453,4 +567,4 @@ Notre implémentation design est **EXCELLENTE (88/100)** après corrections Sess
 
 ---
 
-*Document màj: 25/01/2026 | Session 149 | Claude Opus 4.5*
+*Document màj: 25/01/2026 | Session 150 | Claude Opus 4.5*

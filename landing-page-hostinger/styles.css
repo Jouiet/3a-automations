@@ -11045,42 +11045,8 @@ html[data-currency="USD"] .price-usd {
 
 /* ═══════════════════════════════════════════════════════════════════
    PROCESS CARDS - Methodology/Process Display
+   NOTE: Main definitions moved to "PROCESS & SECURITY CARDS" section
    ═══════════════════════════════════════════════════════════════════ */
-
-.process-card {
-  display: flex;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-lg);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  transition: border-color 0.2s ease;
-}
-
-.process-card:hover {
-  border-color: rgba(79, 186, 241, 0.3);
-}
-
-.process-icon {
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(79, 186, 241, 0.1);
-  border-radius: var(--radius-md);
-  flex-shrink: 0;
-}
-
-.process-icon svg {
-  width: 28px;
-  height: 28px;
-  color: var(--primary);
-}
-
-.process-content {
-  flex: 1;
-}
 
 .process-title {
   font-size: 1.1rem;
@@ -12006,6 +11972,7 @@ html[data-currency="USD"] .price-usd {
 }
 
 .process-card {
+  display: block; /* Override conflicting flex from earlier duplicate definition */
   position: relative;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
