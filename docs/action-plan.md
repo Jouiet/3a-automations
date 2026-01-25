@@ -3173,35 +3173,23 @@ The "Truth Protocol" is active. We strictly distinguish between INTERNAL and EXT
 | 149 | v4.0 | 18 | 0 | 14 |
 | 154 | v5.0 | 24 | 8 | 17 |
 | **154bis** | **v5.3** | **26** | **0** | **20** |
+| **155** | **v5.4** | **26** | **0** | **20** |
 
-## PLAN ACTIONNABLE - Session 155+
+## PLAN ACTIONNABLE - Session 156+
 
-### P0 - IMMÉDIAT (Bloquants) - ✅ 100% DONE
+### P0/P1 - ✅ 100% DONE (Sessions 154-154bis)
 
-| # | Tâche | Status | Impact |
-|---|-------|--------|--------|
-| 1 | ~~case-studies.html CSS fix~~ | ✅ DONE | Page visible |
-| 2 | ~~Validator v5.3.0~~ | ✅ DONE | Détection bugs CSS + CTA |
-| 3 | ~~7 button classes~~ | ✅ DONE | Tous boutons stylisés |
-| 4 | ~~.annual-savings conflict~~ | ✅ DONE | Pricing toggle OK |
+Toutes les tâches P0 et P1 sont complétées.
 
-### P1 - HAUTE PRIORITÉ - ✅ 100% DONE
+### P2 - MOYENNE PRIORITÉ - Session 155 Progress
 
-| # | Tâche | Status | Impact |
-|---|-------|--------|--------|
-| 1 | ~~Ajouter id="main-content"~~ | ✅ DONE (23 files) | Accessibilité |
-| 2 | ~~CTA sections check~~ | ✅ DONE (already exist) | Validator fixed |
-| 3 | **51 CSS duplicates à consolider** | ⏳ P2 | Maintenance |
-| 4 | ~~en/academie.html check~~ | ✅ DONE (redirect file) | Non-issue |
-
-### P2 - MOYENNE PRIORITÉ (Ce mois)
-
-| # | Tâche | Effort | Impact |
-|---|-------|--------|--------|
-| 1 | JSON camelCase → snake_case (44 champs) | 2h | Standards |
-| 2 | 107 boutons génériques → btn-cyber | 4h | Cohérence design |
-| 3 | Font preload optimization (3 fichiers) | 1h | Performance |
-| 4 | Consolider CSS duplicates (51) | 8h | Fichier plus petit |
+| # | Tâche | Status | Détails |
+|---|-------|--------|---------|
+| 1 | JSON camelCase → snake_case | ⏳ SKIP | Intentionnel (JSON-LD schema.org) |
+| 2 | 107 boutons → btn-cyber | ⏳ PENDING | 4h effort |
+| 3 | ~~Font preload~~ | ✅ DONE | 2 fichiers academy corrigés |
+| 4 | ~~CSS duplicates detection~~ | ✅ IMPROVED | 51 → 30 (media queries exclus) |
+| 5 | CSS duplicates consolidation | ⏳ PARTIAL | 1 removed, 30 design variations |
 
 ### P3 - BASSE PRIORITÉ (Backlog)
 
@@ -3226,12 +3214,12 @@ The "Truth Protocol" is active. We strictly distinguish between INTERNAL and EXT
 | Type | Count | Raison Acceptable |
 |------|-------|-------------------|
 | JSON camelCase | 44 | Standards JSON-LD (schéma.org) |
-| CSS duplicates | 51 | Media queries intentionnelles |
+| CSS duplicates | 30 | Design variations intentionnelles |
 | MainContent ID | 1 | Dashboard only (intentionnel) |
-| Font preload | 3 | Google Fonts gère |
+| Font preload | 1 | Redirect file only |
 
 ---
 
-**Document màj:** 25/01/2026 - Session 154bis (FINAL)
-**Status:** P0 100% DONE, P1 100% DONE
-**Prochaine session:** P2 tasks (CSS duplicates, JSON naming, button migration)
+**Document màj:** 25/01/2026 - Session 155
+**Status:** P0 100%, P1 100%, P2 40% (font preload done, validator improved)
+**Prochaine session:** Button migration (107 → btn-cyber)

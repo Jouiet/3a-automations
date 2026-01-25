@@ -1,11 +1,49 @@
 # 3A Automation
 >
-> Version: 79.0 | 25/01/2026 | Session 154bis - **VALIDATOR v5.3.0** + Accessibility + Critical CSS Fix
+> Version: 80.0 | 25/01/2026 | Session 155 - **VALIDATOR v5.4.0** + Font Preload + CSS Cleanup
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 155 - VALIDATOR v5.4.0 + FONT PRELOAD + CSS CLEANUP (25/01/2026)
+
+### P2 Tasks Progress
+
+| Tâche | Status | Détails |
+| :--- | :--- | :--- |
+| Font preload optimization | ✅ DONE | 2 fichiers academy corrigés |
+| Validator CSS duplicate fix | ✅ DONE | Détecte ROOT-level seulement |
+| CSS duplicate cleanup | ⏳ PARTIAL | 1 duplicate removed, 30 remain |
+| JSON camelCase | ⏳ PENDING | 44 champs (intentionnels schema.org) |
+
+### Validator v5.3.0 → v5.4.0
+
+| Amélioration | Impact |
+| :--- | :--- |
+| ROOT-level duplicate detection | Media query overrides ignorés |
+| Accurate warning count | 51 → 30 duplicates |
+
+### Métriques
+
+| Métrique | Session 154bis | Session 155 |
+| :--- | :--- | :--- |
+| Warnings | 104 | **83** |
+| CSS duplicates | 51 (faux positifs) | **30** (vrais) |
+| Font preload warnings | 3 | **1** (redirect only) |
+| CSS Version | v=75.0 | **v=76.0** |
+
+### Clean Code Évaluation
+
+| Principe | Score | Status |
+| :--- | :--- | :--- |
+| DRY | 70% | 30 duplicates à consolider |
+| Single Responsibility | 90% | Classes spécifiques |
+| CSS Variables | 95% | 1126 usages |
+| Validation | 100% | 26 checks, 0 errors |
+
+---
 
 ## SESSION 154bis - CRITICAL CSS FIX + VALIDATOR v5.3.0 + ACCESSIBILITY (25/01/2026)
 
