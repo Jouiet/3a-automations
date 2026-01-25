@@ -33,13 +33,33 @@
 - Pricing MAD: 3 990 DH, 7 990 DH, 14 990 DH ✅
 - Pricing USD: $450, $890, $1,690 ✅
 
+### Add-on Pricing Fixed (Fixed Rates)
+
+| Conversion | Rate | Example |
+| :--- | :--- | :--- |
+| EUR → USD | ~1.15x | 180€ → $210 |
+| EUR → MAD | 10x | 180€ → 1,800 DH |
+
+**Changes:**
+- All add-on USD prices updated (was 1:1, now ~1.15x)
+- Changed "MAD" to "DH" in price displays (button stays MAD)
+- Fixed 10 add-ons + 4 bundles in FR + EN
+
 ### Right Tool Score
 
 | Domaine | S158 | S159 | Change |
 | :--- | :--- | :--- | :--- |
 | Geo-locale | N/A | **100%** | ✅ Complete |
 | Multi-currency | N/A | **100%** | ✅ Complete |
-| **Total Score** | 70/100 | **72/100** | +2 |
+| Pricing consistency | N/A | **100%** | ✅ Fixed |
+| **Total Score** | 70/100 | **75/100** | +5 |
+
+### Commits Session 159
+```
+3834ea9 docs: Session 159 - geo-locale + multi-currency verified
+371deb5 fix(pricing): align add-on prices with pack conversion rates
+5487712 chore(css): bump version to v=81.0 for pricing fix
+```
 
 ---
 
