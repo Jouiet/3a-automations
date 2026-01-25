@@ -46,7 +46,12 @@ Stitch MCP est l'exposition du service Google Stitch via le **Model Context Prot
 | Test de connexion | ❌ Échec | "Unable to connect" |
 | Outils chargés | ✅ 6 outils | Listés via ToolSearch |
 
-**VERDICT:** Configuration présente mais **NON FONCTIONNELLE** - authentification manquante.
+**VERDICT:** Configuration présente mais **AUTH MANQUANTE** - Google Cloud SDK requis (USER ACTION).
+
+**Agent Skills installés (S160):**
+- ✅ `stitch-design-md` - Génère DESIGN.md depuis Stitch
+- ✅ `stitch-react-components` - Convertit Stitch → React
+- ✅ `stitch-loop` - Boucle autonome de construction site
 
 ---
 
@@ -868,5 +873,6 @@ npx @_davideast/stitch-mcp init --client claude-code -y
 
 *Document généré le 25/01/2026 | Session 160 | Méthode: Bottom-up factuelle*
 *Sources: Web Research, GitHub, Tests empiriques*
-*Dernière vérification: 25/01/2026 - Stitch MCP NON FONCTIONNEL (auth manquante)*
-*Audit qualité: 25/01/2026 - Gemini 3 ✅, Galileo AI acquisition ✅, Agent Skills ✅ (google-labs-code/stitch-skills)*
+*Dernière vérification: 25/01/2026 - Stitch MCP config OK, AUTH manquante (gcloud requis)*
+*Audit qualité: 25/01/2026 - Gemini 3 ✅, Galileo AI acquisition ✅, Agent Skills ✅*
+*Implémentation: 25/01/2026 - 3 Agent Skills installés (design-md, react-components, stitch-loop)*

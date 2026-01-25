@@ -3,7 +3,7 @@
  * 3A Automation Video Studio
  */
 import React from 'react';
-import { Composition } from 'remotion';
+import { Composition, staticFile } from 'remotion';
 
 // Video Compositions
 import { PromoVideo } from './compositions/PromoVideo';
@@ -36,7 +36,7 @@ export const Root: React.FC = () => {
           subtitle: 'AI-Powered Business Automation',
           primaryColor: '#6366f1',
           accentColor: '#22c55e',
-          backgroundImage: '/assets/whisk/neural_cortex_bg.png',
+          backgroundImage: staticFile('assets/whisk/neural_cortex_bg.png'),
         }}
       />
 
@@ -68,7 +68,7 @@ export const Root: React.FC = () => {
         defaultProps={{
           headline: 'Automate Everything',
           cta: 'Start Free Trial',
-          logoSrc: '/logo.webp',
+          logoSrc: staticFile('logo.webp'),
         }}
       />
 
@@ -82,7 +82,7 @@ export const Root: React.FC = () => {
         defaultProps={{
           clientName: 'Alpha Medical',
           quote: 'We reduced manual work by 80% with 3A Automation',
-          clientLogo: '/assets/clients/alpha-medical.png',
+          clientLogo: staticFile('logo.webp'), // TODO: Add client logos to /assets/clients/
         }}
       />
 
@@ -96,7 +96,7 @@ export const Root: React.FC = () => {
         defaultProps={{
           headline: 'Automate Everything',
           cta: 'Start Free Trial',
-          logoSrc: '/logo.webp',
+          logoSrc: staticFile('logo.webp'),
         }}
       />
 
