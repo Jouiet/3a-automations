@@ -40,10 +40,21 @@
 | HTML Files Updated | 69 |
 | Validation | ✅ PASSED (78 warnings, 0 errors) |
 
-### Google Cloud SDK
+### Google Cloud SDK + GSC API
 
-- ✅ Installed to `/tmp/google-cloud-sdk/`
-- ⏳ GSC API setup pending user credential configuration
+| Step | Status |
+| :--- | :--- |
+| Google Cloud SDK | ✅ Installed |
+| Service Account | ✅ `gsc-sensor-3a@gen-lang-client-0843127575.iam.gserviceaccount.com` |
+| GSC API | ✅ Enabled |
+| JSON Key | ✅ `.credentials/gsc-service-account.json` |
+| Search Console Access | ✅ Full permission added |
+| **GSC Sensor** | ✅ **OPERATIONAL** |
+
+```bash
+# Test result
+📡 GPM Updated: SEO Pressure is 0 (Topic: "grok" "web speech api")
+```
 
 ---
 

@@ -46,10 +46,10 @@
 | whatsapp-status-sensor | ❌ | 90 | No token |
 | meta-ads-sensor | ❌ | 95 | No credentials |
 | tiktok-ads-sensor | ❌ | 95 | No credentials |
-| gsc-sensor | ❌ | - | API disabled |
+| gsc-sensor | ✅ | 0 | **FIXED S161bis** |
 | apify-trends-sensor | ❌ | - | Trial expired |
 
-**Synthèse: 6 OK (30%), 10 PARTIAL (50%), 4 BLOCKED (20%)**
+**Synthèse: 7 OK (35%), 10 PARTIAL (50%), 3 BLOCKED (15%)**
 
 ### FIXES APPLIQUÉS (Session 142 - 23/01/2026)
 | Issue | Fix | Status |
