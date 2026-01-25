@@ -510,13 +510,7 @@ body.lite {
   animation-delay: 0.2s;
 }
 
-.gradient-text {
-  background: var(--gradient-cyber);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: var(--text-kinetic-glow);
-}
+/* NOTE: .gradient-text is defined in Service Pages section (line ~4737) with animation */
 
 /* GLOBAL: Hero title highlights with gradient effect - Applied to ALL pages */
 .hero-title .highlight,
@@ -825,15 +819,6 @@ h1 .highlight {
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--text-light);
-}
-
-/* Base gradient-text - enhanced version defined later overrides this */
-.gradient-text {
-  background: linear-gradient(135deg, #5EC8F7 0%, #A78BFA 50%, #34D399 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
 }
 
 .hero-description {
@@ -4895,21 +4880,7 @@ h1 .highlight {
 /* ─────────────────────────────────────────────────────────────────────────────
    SERVICE PAGES - Preserved styles
    ───────────────────────────────────────────────────────────────────────────── */
-/* Breadcrumb */
-.breadcrumb {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-lg);
-}
-
-.breadcrumb a {
-  color: var(--text-secondary);
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  color: var(--primary);
-}
+/* NOTE: .breadcrumb is defined in Academy section (line ~10637) with enhanced styling */
 
 /* Service Hero */
 .service-hero {
@@ -10952,52 +10923,7 @@ html[data-currency="USD"] .price-usd {
   line-height: 1.6;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   SECURITY CARDS - Security/Compliance Display
-   ═══════════════════════════════════════════════════════════════════ */
-
-.security-card {
-  padding: var(--spacing-lg);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  text-align: center;
-  transition: border-color 0.2s ease;
-}
-
-.security-card:hover {
-  border-color: rgba(79, 186, 241, 0.3);
-}
-
-.security-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto var(--spacing-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(79, 186, 241, 0.1);
-  border-radius: var(--radius-lg);
-}
-
-.security-icon svg {
-  width: 32px;
-  height: 32px;
-  color: var(--primary);
-}
-
-.security-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: var(--spacing-sm);
-}
-
-.security-description {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
+/* NOTE: .security-card, .security-icon are defined in Legal sections (line ~11928) with glassmorphism */
 
 /* ═══════════════════════════════════════════════════════════════════
    TECH CARDS - Technology Stack Display
