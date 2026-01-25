@@ -1,5 +1,95 @@
-# AUDIT DESIGN UI/UX - SESSION 143→153
+# AUDIT DESIGN UI/UX - SESSION 143→154
 ## Benchmark vs Tendances 2026 | Màj 25/01/2026
+
+---
+
+## SESSION 154 - ACADEMY QUICK GUIDES + SOCIAL ICONS FIX (25/01/2026)
+
+### Problèmes Identifiés et Corrigés
+
+#### 1. Quick Guides - Texte Invisible (CRITIQUE)
+
+**Problème**: Les cartes Quick Guides n'affichaient que des icônes - aucun texte visible.
+
+**Cause racine**: Conflit CSS entre deux systèmes de guides:
+- Ligne 10801: `.guide-content { flex: 1; }` (Guide Cards)
+- Ligne 11299: `.guide-content { display: none; }` (Collapsible Guides)
+
+La seconde règle écrasait la première et cachait tout le contenu.
+
+**Solution**: Renommer les classes pour éviter le conflit:
+- `.guide-content` → `.guide-card-content`
+- `.guide-title` → `.guide-card-title`
+- `.guide-time` → `.guide-card-time`
+
+**Fichiers modifiés**:
+- `styles.css` (lignes 10801-10815)
+- `en/academy.html` (8 guides)
+- `academie.html` (8 guides)
+
+**Bonus**: Correction des balises HTML mal formées (`<h3>` fermées avec `</h4>`)
+
+#### 2. Social Icons Footer - Classe Manquante
+
+**Problème**: Les icônes sociales du footer apparaissaient comme des cercles gris.
+
+**Cause**: La classe `.social-icon-ultra` utilisée dans le HTML n'existait pas dans le CSS.
+
+**Solution**: Ajout des styles pour `.social-icon-ultra` (lignes 2783-2810):
+```css
+.social-icon-ultra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(79, 186, 241, 0.1);
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+```
+
+#### 3. Case Studies Link - VÉRIFIÉ OK
+
+**Audit**: Le lien "Case Studies" dans le footer pointe vers `/en/case-studies.html`.
+
+**Status**: ✅ Le fichier existe (34KB) et fonctionne correctement.
+
+### Analyse Stratégique - Nouveaux Concepts (Session 154)
+
+Analyse comparative des 6 documents stratégiques vs stratégies 3A existantes:
+
+| Concept | Compatibilité | Status |
+|---------|---------------|--------|
+| Hand-Raiser Framework | ✅ COMPLÉMENTAIRE | Aligné avec Flywheel (pull marketing) |
+| 5-Min Video Sales | ⚠️ ABSENT | Remotion prêt, 0 vidéo produite |
+| Zone 1/Zone 2 | ✅ PARTIEL | Appliqué implicitement, non documenté |
+| DRAG Framework | ✅ COMPLÉMENTAIRE | 121 automations = G+R+A |
+| PMF Validation | ❌ ABSENT | Risque: build sans validation |
+| SOP Library | ⚠️ PARTIEL | 52 docs ≠ SOPs exécutables |
+| Learn-it-all | ✅ PRÉSENT | Multi-AI (4 providers) prouve ouverture |
+
+**Verdict**: 85% complémentaire, 0% contradictoire, 15% absent
+
+**Gaps critiques identifiés**:
+1. PMF Validation - Aucun processus documenté
+2. Video Sales - Infrastructure prête (Remotion), exécution absente
+
+### Métriques Session 154
+
+| Métrique | Avant | Après |
+|----------|-------|-------|
+| CSS Version | v=72.0 | **v=73.0** |
+| Quick Guides | ❌ Texte invisible | ✅ Affiché |
+| Social Icons | ❌ Cercles gris | ✅ Icônes visibles |
+| HTML Errors (h3/h4) | 8 | 0 |
+
+### Commits Session 154
+
+```
+TBD - fix(academy): Quick Guides CSS conflict + Social Icons
+```
 
 ---
 

@@ -1,11 +1,65 @@
 # 3A Automation
 >
-> Version: 76.0 | 25/01/2026 | Session 153 - **VERIFICATION & STATUS** (100% 3A Tasks Complete)
+> Version: 77.0 | 25/01/2026 | Session 154 - **ACADEMY CSS FIXES** (Quick Guides + Social Icons)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 154 - ACADEMY CSS FIXES (25/01/2026)
+
+### Problèmes Résolus
+
+| Problème | Cause Racine | Fix Appliqué |
+| :--- | :--- | :--- |
+| Quick Guides texte invisible | Conflit CSS `.guide-content { display: none }` | Renommé classes → `.guide-card-*` |
+| Icônes sociales grises | Classe `.social-icon-ultra` absente | Ajouté CSS complet |
+| HTML tag mismatch FR | `<h3>` fermé avec `</h4>` | Corrigé → `<h4>...</h4>` |
+
+### Détails Techniques
+
+**Quick Guides CSS Conflict:**
+- Ligne 10801: `.guide-content { flex: 1; }` (Guide Cards)
+- Ligne 11299: `.guide-content { display: none; }` (Collapsible Guides)
+- Solution: Renommé en `.guide-card-content`, `.guide-card-title`, `.guide-card-time`
+
+**Social Icons Fix:**
+```css
+.social-icon-ultra {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(79, 186, 241, 0.1);
+  /* + hover states */
+}
+```
+
+### Fichiers Modifiés
+
+| Fichier | Modification |
+| :--- | :--- |
+| styles.css | +3 classes renamed, +15 lines social-icon-ultra |
+| en/academy.html | 8 guide cards class updates |
+| academie.html | 8 guide cards + HTML tag fixes |
+| 69 HTML files | CSS version v=72.0 → v=73.0 |
+
+### Analyse Stratégique (6 Documents)
+
+| Framework | Compatibilité | Notes |
+| :--- | :--- | :--- |
+| Hand-Raiser Framework | 85% | Stratégie 3A alignée |
+| 5-Min Video Sales | 0% ABSENT | À implémenter |
+| Zone 1/Zone 2 | 60% | Zone 2 = Sales, partiellement couvert |
+| DRAG Framework | 70% | Flywheel similaire |
+| PMF Validation | 0% ABSENT | Framework non existant |
+| Learn-it-all Culture | 85% | Academy pages = evidence |
+
+### Commits Session 154
+```
+fix(academy): Quick Guides CSS conflict + Social Icons fix
+```
+
+---
 
 ## SESSION 153 - VERIFICATION & STATUS UPDATE (25/01/2026)
 
@@ -353,7 +407,7 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
 | Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
-| CSS Version | **v=72.0** | ✅ Consistent (Session 151) |
+| CSS Version | **v=73.0** | ✅ Consistent (Session 154) |
 | Validator Version | **v4.0.0** | ✅ Footer completeness |
 | CSS Lines | ~257KB | ✅ Complete |
 | Design Validation | PASS | ✅ 0 errors, 49 warnings |
