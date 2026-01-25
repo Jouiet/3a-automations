@@ -20,15 +20,28 @@ for (const envPath of envPaths) {
 
 const GPM_PATH = path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json');
 
+// Latest Klaviyo API revision (January 2026)
+// Source: https://developers.klaviyo.com/en/reference/api_overview
+const KLAVIYO_API_REVISION = '2026-01-15';
+
 async function klaviyoRequest(endpoint, apiKey) {
-    const response = await fetch(`https://a.klaviyo.com/api/${endpoint}`, {
+    // Remove leading slash if present, ensure no double slashes
+    const cleanEndpoint = endpoint.replace(/^\//, '');
+    const url = `https://a.klaviyo.com/api/${cleanEndpoint}`;
+
+    const response = await fetch(url, {
         headers: {
             'Authorization': `Klaviyo-API-Key ${apiKey}`,
-            'revision': '2024-02-15',
-            'Accept': 'application/json'
+            'revision': KLAVIYO_API_REVISION,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         }
     });
-    if (!response.ok) throw new Error(`Klaviyo API Error: ${response.status}`);
+
+    if (!response.ok) {
+        const errorBody = await response.text().catch(() => 'No error body');
+        throw new Error(`Klaviyo API Error: ${response.status} - ${errorBody.substring(0, 200)}`);
+    }
     return response.json();
 }
 
@@ -41,18 +54,28 @@ async function getEmailMetrics(apiKey) {
 
     try {
         // Get lists
-        const listsData = await klaviyoRequest('lists/', apiKey);
+        const listsData = await klaviyoRequest('lists', apiKey);
         metrics.lists.total = listsData.data?.length || 0;
 
         // Get flows
-        const flowsData = await klaviyoRequest('flows/', apiKey);
+        const flowsData = await klaviyoRequest('flows', apiKey);
         metrics.flows.total = flowsData.data?.length || 0;
         metrics.flows.active = flowsData.data?.filter(f => f.attributes?.status === 'live').length || 0;
 
-        // Get recent campaigns (last 30 days)
-        const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-        const campaignsData = await klaviyoRequest(`campaigns/?filter=greater-or-equal(created_at,${thirtyDaysAgo})`, apiKey);
-        metrics.campaigns.recent = campaignsData.data?.length || 0;
+        // Get campaigns - requires channel filter (email or sms)
+        // Using filter=equals(messages.channel,'email') for email campaigns
+        try {
+            const campaignsData = await klaviyoRequest('campaigns?filter=equals(messages.channel,"email")', apiKey);
+            const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+            metrics.campaigns.recent = (campaignsData.data || []).filter(c => {
+                const createdAt = new Date(c.attributes?.created_at).getTime();
+                return createdAt >= thirtyDaysAgo;
+            }).length;
+        } catch (campaignError) {
+            // Campaigns API may have different permissions - continue without it
+            console.log('⚠️ Campaigns fetch skipped (may need additional permissions)');
+            metrics.campaigns.recent = 0;
+        }
 
     } catch (e) {
         console.error(`Klaviyo API Error: ${e.message}`);
@@ -107,7 +130,36 @@ function updateGPM(pressure, metrics) {
     console.log(`   Campaigns (30d): ${metrics.campaigns.recent}`);
 }
 
+async function healthCheck() {
+    console.log('\n📧 Klaviyo Email Sensor - Health Check\n');
+    console.log('═'.repeat(50));
+
+    const apiKey = process.env.KLAVIYO_API_KEY || process.env.KLAVIYO_PRIVATE_API_KEY;
+    console.log(`API Key: ${apiKey ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`API Revision: ${KLAVIYO_API_REVISION}`);
+    console.log(`GPM Path: ${GPM_PATH}`);
+    console.log(`GPM Exists: ${fs.existsSync(GPM_PATH) ? '✅ Yes' : '❌ No'}`);
+
+    if (apiKey) {
+        try {
+            console.log('\nTesting API connection...');
+            const listsData = await klaviyoRequest('lists', apiKey);
+            console.log(`✅ API Connection: SUCCESS (${listsData.data?.length || 0} lists)`);
+        } catch (e) {
+            console.log(`❌ API Connection: FAILED - ${e.message}`);
+        }
+    }
+
+    console.log('\n✅ Klaviyo Sensor: OPERATIONAL');
+}
+
 async function main() {
+    // Handle --health flag
+    if (process.argv.includes('--health')) {
+        await healthCheck();
+        return;
+    }
+
     const apiKey = process.env.KLAVIYO_API_KEY || process.env.KLAVIYO_PRIVATE_API_KEY;
 
     if (!apiKey) {

@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-23T17:54:46.089Z",
+  "last_updated": "2026-01-25T21:29:09.327Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -55,7 +55,7 @@
       "klaviyo": {
         "pressure": 65,
         "trend": "DOWN",
-        "last_check": "2026-01-23T11:34:09.326Z",
+        "last_check": "2026-01-25T21:28:21.778Z",
         "sensor_data": {
           "lists_total": 10,
           "flows_total": 0,
@@ -67,7 +67,7 @@
         "label": "Email Health",
         "pressure": 60,
         "trend": "STABLE",
-        "last_check": "2026-01-23T11:33:54.166Z",
+        "last_check": "2026-01-25T21:29:09.326Z",
         "sensor_data": {
           "bounce_rate": 0,
           "spam_rate": 0,

@@ -1,6 +1,7 @@
 # ADD-ONS CATALOG - 3A Automation
-> Version: 1.0 | Date: 25/01/2026 | Session: 156
+> Version: 1.1 | Date: 25/01/2026 | Session: 158
 > Source: Analyse bottom-up des 83 scripts agency/core/
+> Updated: Session 157 HITL implementation
 
 ## Executive Summary
 
@@ -10,7 +11,7 @@
 | Scripts with --health (functional) | 24 |
 | Scripts eligible for add-ons | 16 |
 | TOP 10 add-ons selected | 10 |
-| Human In The Loop (HITL) coverage | 30% (3/10) |
+| Human In The Loop (HITL) coverage | **70% (7/10)** ✅ Updated S157 |
 
 ---
 
@@ -28,10 +29,10 @@ What It Does:
   - RFM scoring (Recency, Frequency, Monetary)
   - AI churn prediction (4 provider fallback)
   - Auto-intervention flows
-HITL Status: ⚠️ PARTIAL
-  - Thresholds configurable (declineThreshold: 0.50)
-  - NO human approval before intervention
-  - RECOMMENDATION: Add approval workflow for high-value customers
+HITL Status: ✅ FULL (Session 157)
+  - LTV €500 threshold for approval
+  - High-value customers require human approval before voice call
+  - CLI: --list-interventions, --approve-intervention, --reject-intervention
 Dependencies:
   - Klaviyo API
   - Shopify API
@@ -89,9 +90,10 @@ What It Does:
   - 3-email cart recovery series (1h/24h/72h)
   - AI personalization (4 provider fallback)
   - Dynamic product recommendations
-HITL Status: ⚠️ PARTIAL
-  - No preview before send
-  - RECOMMENDATION: Add email preview approval option
+HITL Status: ✅ FULL (Session 157)
+  - Preview mode enabled by default
+  - AI-generated emails saved for review before sending
+  - CLI: --list-previews, --approve-preview, --reject-preview
 Dependencies:
   - Klaviyo API
   - AI providers (Anthropic/Grok/Gemini/OpenAI)
@@ -173,10 +175,10 @@ What It Does:
   - Automatic social distribution (Facebook, LinkedIn, X)
   - SEO optimization
   - Quality threshold system
-HITL Status: ⚠️ PARTIAL
-  - Quality threshold auto-check
-  - NO human review before publish
-  - CRITICAL RECOMMENDATION: Add mandatory review step before publish
+HITL Status: ✅ FULL (Session 157)
+  - Drafts saved for review by default
+  - Human approval required before WordPress publish
+  - CLI: --list-drafts, --view-draft, --approve, --reject
 Dependencies:
   - AI providers (Anthropic/Grok/Gemini)
   - Social APIs (Meta, LinkedIn, X)

@@ -30,15 +30,23 @@ const THRESHOLDS = {
     clickRate: { warning: 2, critical: 1 }        // percentage (lower = bad)
 };
 
+// Latest Klaviyo API revision (January 2026)
+const KLAVIYO_API_REVISION = '2026-01-15';
+
 async function klaviyoRequest(endpoint, apiKey) {
-    const response = await fetch(`https://a.klaviyo.com/api/${endpoint}`, {
+    const cleanEndpoint = endpoint.replace(/^\//, '').replace(/\/$/, '');
+    const response = await fetch(`https://a.klaviyo.com/api/${cleanEndpoint}`, {
         headers: {
             'Authorization': `Klaviyo-API-Key ${apiKey}`,
-            'revision': '2024-02-15',
-            'Accept': 'application/json'
+            'revision': KLAVIYO_API_REVISION,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         }
     });
-    if (!response.ok) throw new Error(`Klaviyo API Error: ${response.status}`);
+    if (!response.ok) {
+        const errorBody = await response.text().catch(() => '');
+        throw new Error(`Klaviyo API Error: ${response.status} - ${errorBody.substring(0, 100)}`);
+    }
     return response.json();
 }
 
@@ -68,17 +76,24 @@ async function getEmailHealthMetrics(apiKey) {
 
     try {
         // Get metrics aggregates from Klaviyo
-        const metricsData = await klaviyoRequest('metrics/', apiKey);
+        const metricsData = await klaviyoRequest('metrics', apiKey);
 
         // Get lists for subscriber health
-        const listsData = await klaviyoRequest('lists/', apiKey);
+        const listsData = await klaviyoRequest('lists', apiKey);
         metrics.lists.total = listsData.data?.length || 0;
 
-        // Get recent campaign performance (last 30 days)
-        const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-        const campaignsData = await klaviyoRequest(`campaigns/?filter=greater-or-equal(created_at,${thirtyDaysAgo})`, apiKey);
-
-        const campaigns = campaignsData.data || [];
+        // Get campaigns with required channel filter
+        let campaigns = [];
+        try {
+            const campaignsData = await klaviyoRequest('campaigns?filter=equals(messages.channel,"email")', apiKey);
+            const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+            campaigns = (campaignsData.data || []).filter(c => {
+                const createdAt = new Date(c.attributes?.created_at).getTime();
+                return createdAt >= thirtyDaysAgo;
+            });
+        } catch (e) {
+            console.log('⚠️ Campaigns fetch skipped');
+        }
         metrics.campaigns.sent = campaigns.length;
 
         // Calculate aggregate metrics from campaigns
