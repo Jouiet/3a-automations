@@ -1,11 +1,47 @@
 # 3A Automation
 >
-> Version: 83.0 | 25/01/2026 | Session 158 - **SENSORS FIXED** + CI/CD Add-ons
+> Version: 84.0 | 25/01/2026 | Session 159 - **GEO-LOCALE VERIFIED** + 3 Markets
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 159 - GEO-LOCALE + MULTI-CURRENCY (25/01/2026)
+
+### 3 Target Markets - VERIFIED WORKING
+
+| Market | Language | Currency | Auto-Detection |
+| :--- | :--- | :--- | :--- |
+| **Morocco** | Français | MAD (DH) | ✅ ipapi.co → MA |
+| **Europe** | Français | EUR (€) | ✅ FR, BE, CH, etc. |
+| **International** | English | USD ($) | ✅ US, GB, CA, etc. |
+
+### Geo-Locale Implementation
+
+| Feature | Status | File |
+| :--- | :--- | :--- |
+| Auto-detection | ✅ Working | `geo-locale.js` |
+| Currency switcher | ✅ Working | `pricing.html` |
+| Manual override | ✅ Working | EUR \| MAD \| USD buttons |
+| LocalStorage persistence | ✅ Working | `3a_locale` key |
+
+### Visual Verification (Chrome DevTools MCP)
+
+- Homepage: Futuristic design ✅
+- Pricing EUR: 390€, 790€, 1,490€ ✅
+- Pricing MAD: 3 990 DH, 7 990 DH, 14 990 DH ✅
+- Pricing USD: $450, $890, $1,690 ✅
+
+### Right Tool Score
+
+| Domaine | S158 | S159 | Change |
+| :--- | :--- | :--- | :--- |
+| Geo-locale | N/A | **100%** | ✅ Complete |
+| Multi-currency | N/A | **100%** | ✅ Complete |
+| **Total Score** | 70/100 | **72/100** | +2 |
+
+---
 
 ## SESSION 158 - SENSORS + CI/CD (25/01/2026)
 

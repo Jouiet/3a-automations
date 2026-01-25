@@ -3256,11 +3256,11 @@ The "Truth Protocol" is active. We strictly distinguish between INTERNAL and EXT
 | 1 | Fixer sensor Klaviyo (côté 3A) | ✅ DONE | 1518060 |
 | 2 | Documenter prérequis API par add-on | ✅ DONE | ADD-ONS-CATALOG.md |
 
-### P1 - REMAINING
+### P1 - Session 158 COMPLETED (CI/CD) ✅
 
-| # | Tâche | Impact | Effort |
+| # | Tâche | Status | Commit |
 |---|-------|--------|--------|
-| 1 | Tests automatiques add-ons | CI/CD | 4h |
+| 1 | Tests automatiques add-ons | ✅ DONE | 40e51e4 (addons-health-check.yml) |
 
 ### P2 - MOYENNE PRIORITÉ
 
