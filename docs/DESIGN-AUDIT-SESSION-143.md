@@ -1,5 +1,71 @@
-# AUDIT DESIGN UI/UX - SESSION 143→151
+# AUDIT DESIGN UI/UX - SESSION 143→152
 ## Benchmark vs Tendances 2026 | Màj 25/01/2026
+
+---
+
+## SESSION 152 - ACADÉMIE "COMMENT ÇA MARCHE" (25/01/2026)
+
+### Objectif
+Combler la lacune marketing : expliquer le système 3A aux prospects (pas juste aux clients).
+
+### Commits Session 152 (3 total)
+
+```
+e9d1f0f docs: add WebP conversion to Session 151 audit
+25f02b5 feat(academie): add "Comment ça marche" section + enable indexing
+```
+
+### Corrections Critiques
+
+#### 1. Académie - Nouvel onglet "Comment ça marche"
+
+**Contenu ajouté:**
+- **Processus 3 étapes**: Audit → Déploiement → Résultats (avec cards visuelles)
+- **Qu'est-ce qu'une automation**: Explication simplifiée + 4 catégories (E-commerce, Email, Lead Gen, Analytics)
+- **Qu'est-ce qu'un agent IA**: Différence avec automation simple, philosophie "L'IA propose, vous décidez"
+- **CTA vers booking**: Invitation à réserver un audit gratuit
+
+#### 2. Indexation SEO Activée
+
+| Changement | Avant | Après |
+|------------|-------|-------|
+| robots meta | `noindex, nofollow` | `index, follow` |
+| Meta description | "clients abonnés" | "pour tous les niveaux" |
+
+#### 3. Faux Claims "Clients Only" Supprimés
+
+| Élément | Correction |
+|---------|------------|
+| Banner d'accès | "Accès réservé" → "Explorez librement" |
+| FAQ Schema | "réservée aux clients" → "3 étapes simples" |
+| FAQ visible | Idem |
+| Footer badge | "Clients" badge supprimé (49 fichiers) |
+
+### Fichiers Modifiés (49 total)
+
+- `academie.html` - Page principale enrichie
+- `academie/cours/*.html` - 6 fichiers (footer)
+- `academie/parcours/*.html` - 3 fichiers (footer)
+- `academie/guides.html` - footer
+- Tous les autres fichiers avec footer (badge "Clients" supprimé)
+
+### Métriques Session 152
+
+| Métrique | Valeur |
+|----------|--------|
+| Fichiers modifiés | 49 |
+| Nouveau contenu | ~100 lignes HTML |
+| Onglets académie | 4 → 5 |
+| Pages indexées | +1 (academie.html) |
+
+### Impact Marketing
+
+| Avant | Après |
+|-------|-------|
+| Académie cachée (noindex) | Académie indexée |
+| "Clients only" messaging | Contenu ouvert à tous |
+| Pas d'explication système | Section "Comment ça marche" complète |
+| Prospects ne comprennent pas | Prospects peuvent s'auto-éduquer |
 
 ---
 
