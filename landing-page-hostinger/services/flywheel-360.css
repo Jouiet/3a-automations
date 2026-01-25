@@ -120,7 +120,7 @@
 
 .arrows {
     stroke: var(--flywheel-border);
-    animation: spin 60s linear infinite;
+    animation: spin 20s linear infinite;
     transform-origin: center;
 }
 
