@@ -140,17 +140,25 @@ async function healthCheck() {
     console.log(`GPM Path: ${GPM_PATH}`);
     console.log(`GPM Exists: ${fs.existsSync(GPM_PATH) ? '✅ Yes' : '❌ No'}`);
 
+    let apiOk = false;
     if (apiKey) {
         try {
             console.log('\nTesting API connection...');
             const listsData = await klaviyoRequest('lists', apiKey);
             console.log(`✅ API Connection: SUCCESS (${listsData.data?.length || 0} lists)`);
+            apiOk = true;
         } catch (e) {
             console.log(`❌ API Connection: FAILED - ${e.message}`);
         }
     }
 
-    console.log('\n✅ Klaviyo Sensor: OPERATIONAL');
+    if (!apiKey) {
+        console.log('\n⚠️ Klaviyo Sensor: DEGRADED (no API key)');
+    } else if (!apiOk) {
+        console.log('\n⚠️ Klaviyo Sensor: DEGRADED (API connection failed)');
+    } else {
+        console.log('\n✅ Klaviyo Sensor: OPERATIONAL');
+    }
 }
 
 async function main() {

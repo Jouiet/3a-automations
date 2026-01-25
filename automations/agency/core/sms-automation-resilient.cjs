@@ -42,6 +42,15 @@ const CONFIG = {
     authToken: process.env.TWILIO_AUTH_TOKEN,
     phoneNumber: process.env.TWILIO_PHONE_NUMBER
   },
+  // Daily spend limit (HITL safety feature)
+  spendLimit: {
+    enabled: process.env.SMS_DAILY_LIMIT_ENABLED !== 'false',
+    dailyMax: parseFloat(process.env.SMS_DAILY_MAX || '50'), // €50 default
+    costPerSMS: parseFloat(process.env.SMS_COST_PER_MSG || '0.05'), // €0.05 default
+    alertThreshold: parseFloat(process.env.SMS_ALERT_THRESHOLD || '0.8'), // 80% alert
+    alertWebhook: process.env.SMS_ALERT_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
+    blockOnExceed: process.env.SMS_BLOCK_ON_EXCEED !== 'false'
+  },
   // Retry configuration
   retry: {
     maxAttempts: 5,
@@ -74,6 +83,124 @@ class SMSAutomationClient {
     this.eventCounter = 0;
     this.rateLimitCount = 0;
     this.rateLimitReset = Date.now();
+    // Daily spend tracking
+    this.dailySpend = {
+      date: new Date().toDateString(),
+      count: 0,
+      cost: 0,
+      alertSent: false
+    };
+  }
+
+  /**
+   * Check and update daily spend limit
+   * @returns {boolean} true if within limit, false if blocked
+   */
+  async checkSpendLimit() {
+    if (!CONFIG.spendLimit.enabled) return true;
+
+    // Reset if new day
+    const today = new Date().toDateString();
+    if (this.dailySpend.date !== today) {
+      this.dailySpend = { date: today, count: 0, cost: 0, alertSent: false };
+    }
+
+    const projectedCost = this.dailySpend.cost + CONFIG.spendLimit.costPerSMS;
+    const percentUsed = projectedCost / CONFIG.spendLimit.dailyMax;
+
+    // Send alert at threshold
+    if (percentUsed >= CONFIG.spendLimit.alertThreshold && !this.dailySpend.alertSent) {
+      await this.sendSpendAlert(percentUsed);
+      this.dailySpend.alertSent = true;
+    }
+
+    // Block if exceed and blocking enabled
+    if (projectedCost > CONFIG.spendLimit.dailyMax && CONFIG.spendLimit.blockOnExceed) {
+      console.log(`🚫 Daily SMS spend limit reached (€${this.dailySpend.cost.toFixed(2)}/€${CONFIG.spendLimit.dailyMax})`);
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Record SMS sent for spend tracking
+   */
+  recordSMSSent() {
+    if (CONFIG.spendLimit.enabled) {
+      this.dailySpend.count++;
+      this.dailySpend.cost += CONFIG.spendLimit.costPerSMS;
+    }
+  }
+
+  /**
+   * Send spend limit alert via webhook
+   */
+  async sendSpendAlert(percentUsed) {
+    if (!CONFIG.spendLimit.alertWebhook) {
+      console.log(`⚠️ SMS spend at ${(percentUsed * 100).toFixed(0)}% - no webhook configured for alert`);
+      return;
+    }
+
+    const message = {
+      text: `⚠️ *SMS Daily Spend Alert*\n` +
+        `• Current: €${this.dailySpend.cost.toFixed(2)} / €${CONFIG.spendLimit.dailyMax}\n` +
+        `• Messages: ${this.dailySpend.count}\n` +
+        `• Usage: ${(percentUsed * 100).toFixed(0)}%\n` +
+        `• Status: ${percentUsed >= 1 ? '🚫 LIMIT REACHED' : '⚠️ APPROACHING LIMIT'}`
+    };
+
+    try {
+      const url = new URL(CONFIG.spendLimit.alertWebhook);
+      const postData = JSON.stringify(message);
+
+      await new Promise((resolve, reject) => {
+        const req = https.request({
+          hostname: url.hostname,
+          path: url.pathname,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(postData)
+          }
+        }, (res) => {
+          res.on('data', () => {});
+          res.on('end', resolve);
+        });
+        req.on('error', reject);
+        req.write(postData);
+        req.end();
+      });
+
+      console.log(`📢 Spend alert sent to webhook`);
+    } catch (error) {
+      console.error(`❌ Failed to send spend alert: ${error.message}`);
+    }
+  }
+
+  /**
+   * Get current spend status
+   */
+  getSpendStatus() {
+    if (!CONFIG.spendLimit.enabled) {
+      return { enabled: false };
+    }
+
+    const today = new Date().toDateString();
+    if (this.dailySpend.date !== today) {
+      this.dailySpend = { date: today, count: 0, cost: 0, alertSent: false };
+    }
+
+    return {
+      enabled: true,
+      date: this.dailySpend.date,
+      count: this.dailySpend.count,
+      cost: this.dailySpend.cost,
+      limit: CONFIG.spendLimit.dailyMax,
+      remaining: Math.max(0, CONFIG.spendLimit.dailyMax - this.dailySpend.cost),
+      percentUsed: (this.dailySpend.cost / CONFIG.spendLimit.dailyMax * 100).toFixed(1),
+      blocked: this.dailySpend.cost >= CONFIG.spendLimit.dailyMax && CONFIG.spendLimit.blockOnExceed
+    };
   }
 
   /**
@@ -361,6 +488,13 @@ class SMSAutomationClient {
       throw new Error('Contact phone or email required');
     }
 
+    // HITL: Check daily spend limit before sending
+    const withinLimit = await this.checkSpendLimit();
+    if (!withinLimit) {
+      const status = this.getSpendStatus();
+      throw new Error(`Daily SMS spend limit exceeded (€${status.cost.toFixed(2)}/€${status.limit}). SMS blocked.`);
+    }
+
     const eventID = this.generateEventID();
     const eventTime = new Date().toISOString();
 
@@ -390,6 +524,8 @@ class SMSAutomationClient {
         () => this.omnisendRequest('POST', '/events', payload),
         `sendSMSEvent:${eventType}`
       );
+      // Record spend after successful send
+      this.recordSMSSent();
       console.log(`✅ SMS event '${eventType}' sent (ID: ${eventID})`);
       return { ...result, eventID, eventTime };
     } catch (error) {
@@ -599,11 +735,22 @@ class SMSAutomationClient {
   async sendDirectSMS(phone, message) {
     const normalizedPhone = this.normalizePhone(phone);
 
-    // Try Omnisend first (via custom event)
+    // HITL: Check daily spend limit before sending
+    const withinLimit = await this.checkSpendLimit();
+    if (!withinLimit) {
+      const status = this.getSpendStatus();
+      throw new Error(`Daily SMS spend limit exceeded (€${status.cost.toFixed(2)}/€${status.limit}). SMS blocked.`);
+    }
+
+    // Try Omnisend first (via custom event) - spend recorded in sendSMSEvent
     if (this.omnisendAvailable) {
       try {
         return await this.sendSMSEvent(CONFIG.smsEventTypes.CUSTOM, { phone }, { message });
       } catch (error) {
+        // Don't retry Omnisend limit errors on Twilio
+        if (error.message.includes('spend limit exceeded')) {
+          throw error;
+        }
         console.log(`⚠️ Omnisend failed, trying Twilio: ${error.message}`);
       }
     }
@@ -615,6 +762,8 @@ class SMSAutomationClient {
           () => this.twilioSendSMS(normalizedPhone, message),
           'twilioSendSMS'
         );
+        // Record spend after successful Twilio send
+        this.recordSMSSent();
         console.log(`✅ SMS sent via Twilio to ${normalizedPhone}`);
         return result;
       } catch (error) {
@@ -674,6 +823,23 @@ class SMSAutomationClient {
       console.log(`  • ${key}: ${value}`);
     });
 
+    // Daily Spend Limit Status (HITL)
+    console.log('\n💰 Daily Spend Limit (HITL):');
+    const spendStatus = this.getSpendStatus();
+    if (spendStatus.enabled) {
+      console.log(`  ✅ Enabled`);
+      console.log(`  • Today: €${spendStatus.cost.toFixed(2)} / €${spendStatus.limit} (${spendStatus.percentUsed}%)`);
+      console.log(`  • Messages sent: ${spendStatus.count}`);
+      console.log(`  • Remaining: €${spendStatus.remaining.toFixed(2)}`);
+      console.log(`  • Alert threshold: ${CONFIG.spendLimit.alertThreshold * 100}%`);
+      console.log(`  • Block on exceed: ${CONFIG.spendLimit.blockOnExceed ? 'Yes' : 'No'}`);
+      if (spendStatus.blocked) {
+        console.log(`  🚫 STATUS: LIMIT REACHED - SMS BLOCKED`);
+      }
+    } else {
+      console.log(`  ⚠️ Disabled (SMS_DAILY_LIMIT_ENABLED=false)`);
+    }
+
     // Summary
     console.log('\n📊 Summary:');
     const operational = results.providers.length > 0;
@@ -694,6 +860,7 @@ class SMSAutomationClient {
     return {
       status: operational ? 'healthy' : 'unavailable',
       version: '1.0.0',
+      spendLimit: spendStatus,
       ...results
     };
   }
@@ -772,6 +939,14 @@ Environment Variables:
   TWILIO_ACCOUNT_SID      Twilio Account SID (fallback)
   TWILIO_AUTH_TOKEN       Twilio Auth Token (fallback)
   TWILIO_PHONE_NUMBER     Twilio Phone Number (fallback)
+
+  Daily Spend Limit (HITL Safety):
+  SMS_DAILY_LIMIT_ENABLED Set to 'false' to disable (default: true)
+  SMS_DAILY_MAX           Daily max spend in EUR (default: 50)
+  SMS_COST_PER_MSG        Cost per SMS in EUR (default: 0.05)
+  SMS_ALERT_THRESHOLD     Alert at % of limit (default: 0.8 = 80%)
+  SMS_ALERT_WEBHOOK       Webhook URL for alerts (default: SLACK_WEBHOOK_URL)
+  SMS_BLOCK_ON_EXCEED     Block SMS when limit hit (default: true)
 
 SMS Event Types:
   ${Object.entries(CONFIG.smsEventTypes).map(([k, v]) => `${k}: ${v}`).join('\n  ')}
