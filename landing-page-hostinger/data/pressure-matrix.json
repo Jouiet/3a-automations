@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-25T21:29:09.327Z",
+  "last_updated": "2026-01-25T21:31:10.388Z",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -19,7 +19,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-23T17:54:37.659Z",
+        "last_check": "2026-01-25T21:30:58.506Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -29,7 +29,7 @@
         "label": "Market Demand",
         "pressure": 8,
         "trend": "DOWN",
-        "last_check": "2026-01-23T17:54:46.088Z",
+        "last_check": "2026-01-25T21:31:09.041Z",
         "sensor_data": {
           "method": "AI Analysis (Grok)",
           "keywords": [
@@ -40,7 +40,7 @@
           ],
           "demand_score": 92,
           "market_trend": "rising",
-          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation remains very high as businesses seek efficiency amid AI proliferation and e-commerce expansion. Trends are strongly rising through January 2026, fueled by advanced AI tools and platform integrations reducing operational costs."
+          "assessment": "Demand for automation in marketing, AI agencies, Shopify, and e-commerce is surging in January 2026, driven by AI advancements, e-commerce expansion, and the need for efficient scaling amid economic recovery. These keywords reflect high search volumes and investment in tools that reduce manual labor and boost ROI."
         }
       },
       "tiktok_ads": {
@@ -67,7 +67,7 @@
         "label": "Email Health",
         "pressure": 60,
         "trend": "STABLE",
-        "last_check": "2026-01-25T21:29:09.326Z",
+        "last_check": "2026-01-25T21:30:54.905Z",
         "sensor_data": {
           "bounce_rate": 0,
           "spam_rate": 0,
@@ -96,7 +96,7 @@
       "lead_velocity": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-23T11:34:09.652Z",
+        "last_check": "2026-01-25T21:31:09.627Z",
         "sensor_data": {
           "leads_last_24h": 2
         }
@@ -120,7 +120,7 @@
       "product_enrichment": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-23T11:34:10.628Z",
+        "last_check": "2026-01-25T21:31:10.387Z",
         "sensor_data": {
           "product_count": 0,
           "poor_seo_ratio": "0.00"
@@ -143,7 +143,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-23T11:34:13.148Z",
+        "last_check": "2026-01-25T21:31:00.640Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
@@ -183,7 +183,7 @@
         "label": "API Costs",
         "pressure": 30,
         "trend": "STABLE",
-        "last_check": "2026-01-23T12:06:35.862Z",
+        "last_check": "2026-01-25T21:31:09.474Z",
         "sensor_data": {
           "current_month_usd": 0,
           "projected_month_usd": 0,
