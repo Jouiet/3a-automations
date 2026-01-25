@@ -10762,6 +10762,122 @@ html[data-currency="USD"] .price-usd {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
+   COURS NAVIGATION BUTTONS
+   ═══════════════════════════════════════════════════════════════════ */
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--glass-border);
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover {
+  background: rgba(79, 186, 241, 0.1);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.nav-btn svg {
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.nav-btn-prev {
+  margin-right: auto;
+}
+
+.nav-btn-next {
+  margin-left: auto;
+  flex-direction: row-reverse;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COURS CONTENT BOXES (Step, Tip)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.step-box {
+  background: rgba(79, 186, 241, 0.08);
+  border: 1px solid rgba(79, 186, 241, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
+}
+
+.step-box h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.step-box p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.tip-box {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
+}
+
+.tip-box h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.tip-box p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BADGES (Clients, etc.)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.badge-clients {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 4px 12px;
+  background: linear-gradient(135deg, rgba(79, 186, 241, 0.15), rgba(139, 92, 246, 0.15));
+  border: 1px solid rgba(79, 186, 241, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    GUIDE CARDS - Academy Quick Guides
    ═══════════════════════════════════════════════════════════════════ */
 
