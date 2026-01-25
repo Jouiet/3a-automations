@@ -65,9 +65,11 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | **Design System** | ✅ Production | `DESIGN-SYSTEM.md` | ✅ OUI |
 | **Stylelint Config** | ✅ 0 issues | `.stylelintrc.cjs` | ✅ OUI |
 | **Visual Regression** | ✅ 9 baselines | `visual-regression/*.png` | ✅ OUI |
-| **Design Validator** | ✅ 12 checks | `validate-design-system.cjs` | ✅ OUI |
-| **HTML→CSS Validator** | ✅ NEW S145 | Détecte classes sans CSS | ✅ OUI |
-| **SVG Size Validator** | ✅ NEW S145 | Détecte SVG sans contraintes | ✅ OUI |
+| **Design Validator** | ✅ **26 checks (v5.2.0)** | `validate-design-system.cjs` | ✅ OUI |
+| **HTML→CSS Validator** | ✅ S145 | Détecte classes sans CSS | ✅ OUI |
+| **SVG Size Validator** | ✅ S145 | Détecte SVG sans contraintes | ✅ OUI |
+| **CSS Link Validator** | ✅ **NEW S154bis** | Détecte balises CSS cassées | ✅ OUI |
+| **Button Class Validator** | ✅ **NEW S154bis** | Détecte btn-* sans CSS | ✅ OUI |
 | **VPS Docker** | ✅ Production | `docker-compose.yml` | ⚠️ Spécifique |
 | **121 Automations** | ✅ Production | `automations-registry.json` | ✅ OUI |
 | **Voice Agent B2B** | ✅ Production | `agency/core/voice-agent-b2b.cjs` | ✅ OUI |

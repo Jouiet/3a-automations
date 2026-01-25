@@ -1,11 +1,63 @@
 # 3A Automation
 >
-> Version: 77.0 | 25/01/2026 | Session 154 - **ACADEMY CSS FIXES** (Quick Guides + Social Icons)
+> Version: 78.0 | 25/01/2026 | Session 154bis - **VALIDATOR v5.2.0** + Critical CSS Fix
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 154bis - CRITICAL CSS FIX + VALIDATOR v5.2.0 (25/01/2026)
+
+### BUG CRITIQUE CORRIGÉ
+
+| Page | Problème | Cause | Fix |
+| :--- | :--- | :--- | :--- |
+| en/case-studies.html | Page 100% non-stylisée | `<href="...">` au lieu de `<link href="...">` | Balise CSS reconstruite |
+
+**Impact**: La page entière était en HTML brut (fond blanc, texte non-formaté, aucun style).
+
+### Validator v5.0.0 → v5.2.0 (+2 fonctions)
+
+| Nouvelle Fonction | Détecte | Aurait Capturé |
+| :--- | :--- | :--- |
+| `validateCSSLinkTags()` | Balises CSS cassées `<href="...">` | case-studies.html |
+| `validateButtonClassesExist()` | btn-* classes sans CSS | btn-primary-ultra |
+
+### 7 Classes Boutons Ajoutées
+
+| Classe | Usage |
+| :--- | :--- |
+| `.btn-text` | Texte inside btn-cyber |
+| `.btn-cyber-outline` | Variant outline |
+| `.btn-dashboard` | Dashboard specific |
+| `.btn-pulse` | Animation pulsation |
+| `.btn-wide` | Large button |
+| `.btn-lg` | Taille grande |
+| `.btn-small` | Taille petite |
+
+### Conflit CSS Résolu
+
+| Sélecteur | Problème | Fix |
+| :--- | :--- | :--- |
+| `.annual-savings` | `display: none` vs `display: block` (lignes 6655, 6863) | Consolidé en une définition |
+
+### Métriques Validator
+
+| Métrique | Session 154 | Session 154bis |
+| :--- | :--- | :--- |
+| Erreurs | 8 | **0** |
+| Checks passés | 17 | **19** |
+| Fonctions totales | 24 | **26** |
+| CSS Version | v=74.0 | **v=75.0** |
+
+### Commits Session 154bis
+```
+4e08ded fix(critical): case-studies broken CSS link + validator v5.2.0
+863134e fix(css): add 7 missing button classes + resolve annual-savings conflict
+```
+
+---
 
 ## SESSION 154 - ACADEMY CSS FIXES (25/01/2026)
 

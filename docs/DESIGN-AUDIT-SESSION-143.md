@@ -1,5 +1,91 @@
-# AUDIT DESIGN UI/UX - SESSION 143→154
+# AUDIT DESIGN UI/UX - SESSION 143→154bis
 ## Benchmark vs Tendances 2026 | Màj 25/01/2026
+
+---
+
+## SESSION 154bis - CRITICAL CSS FIX + VALIDATOR v5.2.0 (25/01/2026)
+
+### BUG CRITIQUE: Page Case-Studies Non-Stylisée
+
+**Problème**: La page `en/case-studies.html` s'affichait en HTML brut - aucun CSS appliqué.
+
+**Screenshot AVANT** (25/01/2026 15:30 UTC):
+- Fond blanc au lieu de thème sombre
+- Texte brut sans formatage
+- Aucune card glassmorphism
+- Navigation non-stylisée
+
+**Cause racine** (ligne 46):
+```html
+<!-- CASSÉ -->
+<href="../styles.css?v=74.0" as="style" onload="...">
+
+<!-- CORRECT -->
+<link rel="preload" href="../styles.css?v=75.0" as="style" onload="...">
+```
+
+Il manquait `<link rel="preload"` - la balise était invalide.
+
+**Solution**: Reconstruction complète de la balise CSS.
+
+### Validator v5.2.0 - 2 Nouvelles Fonctions
+
+| Fonction | Détection | Impact |
+|----------|-----------|--------|
+| `validateCSSLinkTags()` | Balises CSS malformées `<href="...">` | **CRITIQUE** - Aurait détecté case-studies |
+| `validateButtonClassesExist()` | btn-* classes utilisées sans définition CSS | Aurait détecté btn-primary-ultra |
+
+**Couverture validator**:
+- Session 143: 12 fonctions
+- Session 149: 18 fonctions
+- Session 154: 24 fonctions
+- **Session 154bis: 26 fonctions**
+
+### 7 Classes Boutons Manquantes Ajoutées
+
+| Classe | Définition | Usage |
+|--------|------------|-------|
+| `.btn-text` | `position: relative; z-index: 1;` | Texte dans btn-cyber |
+| `.btn-cyber-outline` | `background: transparent; border: 2px solid var(--primary);` | Bouton outline |
+| `.btn-dashboard` | `background: var(--glass-bg); backdrop-filter: var(--glass-blur);` | Dashboard |
+| `.btn-pulse` | `animation: btnPulse 2s infinite;` | Animation CTA |
+| `.btn-wide` | `padding-left/right: var(--spacing-3xl); min-width: 200px;` | Bouton large |
+| `.btn-lg` | `padding: var(--spacing-lg) var(--spacing-2xl); font-size: 1.125rem;` | Grande taille |
+| `.btn-small` | `padding: var(--spacing-xs) var(--spacing-md); font-size: 0.875rem;` | Petite taille |
+
+### Conflit CSS Résolu: `.annual-savings`
+
+| Ligne | Définition | Problème |
+|-------|------------|----------|
+| 6655 | `display: none !important;` | Logique toggle pricing |
+| 6863 | `display: block;` | Conflit avec toggle |
+
+**Solution**: Consolidé en une seule définition avec styles + toggle logic préservé.
+
+### Métriques Session 154bis
+
+| Métrique | Avant | Après | Delta |
+|----------|-------|-------|-------|
+| Erreurs validator | 8 | **0** | -100% |
+| Checks passés | 17 | **19** | +12% |
+| Fonctions validator | 24 | **26** | +2 |
+| CSS Version | v=74.0 | **v=75.0** | +1 |
+| Button classes définies | 13 | **20** | +7 |
+
+### Commits Session 154bis
+
+```
+4e08ded fix(critical): case-studies broken CSS link + validator v5.2.0
+863134e fix(css): add 7 missing button classes + resolve annual-savings conflict
+```
+
+### Screenshot APRÈS (25/01/2026 16:45 UTC)
+
+- ✅ Thème sombre appliqué
+- ✅ Header avec navigation
+- ✅ Titre gradient "Automations in Production"
+- ✅ Cards glassmorphism pour case studies
+- ✅ Footer complet
 
 ---
 

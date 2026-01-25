@@ -3135,3 +3135,102 @@ PRÉREQUIS:
 
 ## Strategic Update
 The "Truth Protocol" is active. We strictly distinguish between INTERNAL and EXTERNAL (Partner) agents to maintain forensic accuracy.
+
+---
+
+# SESSION 154bis ACTION PLAN (2026-01-25)
+
+## Accomplissements Session 154bis
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    SESSION 154bis - VALIDATOR v5.2.0                         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ✅ BUG CRITIQUE CORRIGÉ                                                   │
+│      • en/case-studies.html: Balise CSS cassée <href="...">                 │
+│      • Page 100% non-stylisée → maintenant correcte                         │
+│                                                                              │
+│   ✅ VALIDATOR AMÉLIORÉ                                                     │
+│      • v5.0.0 → v5.2.0 (+2 fonctions)                                       │
+│      • validateCSSLinkTags() - Détecte balises CSS malformées               │
+│      • validateButtonClassesExist() - Détecte btn-* sans CSS                │
+│                                                                              │
+│   ✅ CSS FIXES                                                              │
+│      • 7 classes boutons ajoutées                                           │
+│      • Conflit .annual-savings résolu                                       │
+│      • Erreurs: 8 → 0                                                       │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+## Métriques Validator (Évolution)
+
+| Session | Version | Fonctions | Erreurs | Checks Passés |
+|---------|---------|-----------|---------|---------------|
+| 143 | v1.0 | 12 | ? | 8 |
+| 145 | v2.0 | 14 | ? | 10 |
+| 149 | v4.0 | 18 | 0 | 14 |
+| 154 | v5.0 | 24 | 8 | 17 |
+| **154bis** | **v5.2** | **26** | **0** | **19** |
+
+## PLAN ACTIONNABLE - Session 155+
+
+### P0 - IMMÉDIAT (Bloquants)
+
+| # | Tâche | Status | Impact |
+|---|-------|--------|--------|
+| 1 | ~~case-studies.html CSS fix~~ | ✅ DONE | Page visible |
+| 2 | ~~Validator v5.2.0~~ | ✅ DONE | Détection bugs CSS |
+| 3 | ~~7 button classes~~ | ✅ DONE | Tous boutons stylisés |
+| 4 | ~~.annual-savings conflict~~ | ✅ DONE | Pricing toggle OK |
+
+### P1 - HAUTE PRIORITÉ (Cette semaine)
+
+| # | Tâche | Effort | Impact |
+|---|-------|--------|--------|
+| 1 | **Ajouter id="main-content" à 31 fichiers** | 2h | Accessibilité |
+| 2 | **CTA sections manquantes** (blog/index, contact) | 2h | Conversion |
+| 3 | **51 CSS duplicates à consolider** | 4h | Maintenance |
+| 4 | **en/academie.html CSS link check** | 30min | Erreur potentielle |
+
+### P2 - MOYENNE PRIORITÉ (Ce mois)
+
+| # | Tâche | Effort | Impact |
+|---|-------|--------|--------|
+| 1 | JSON camelCase → snake_case (44 champs) | 2h | Standards |
+| 2 | 107 boutons génériques → btn-cyber | 4h | Cohérence design |
+| 3 | Font preload optimization (3 fichiers) | 1h | Performance |
+| 4 | Consolider CSS duplicates | 8h | Fichier plus petit |
+
+### P3 - BASSE PRIORITÉ (Backlog)
+
+| # | Tâche | Notes |
+|---|-------|-------|
+| 1 | 403 hardcoded font-size → variables | Grande tâche |
+| 2 | Dashboard header standardization | Volontairement différent |
+| 3 | SVG size constraints (1 fichier) | flywheel-360.html |
+
+## Blockers USER ACTION Required
+
+| Blocker | Impact | Action Requise |
+|---------|--------|----------------|
+| Alpha Medical Shopify token | 6+ workflows | Régénérer dans admin Shopify |
+| Alpha Medical Klaviyo key | 9 workflows | Vérifier API key |
+| MyDealz HTTP 402 | Store inactif | Vérifier facturation |
+| GSC API disabled | SEO sensor | Activer dans Google Console |
+| Meta/TikTok tokens | Ads sensors | Configurer tokens |
+
+## Warnings Acceptés (Non-Bloquants)
+
+| Type | Count | Raison Acceptable |
+|------|-------|-------------------|
+| JSON camelCase | 44 | Standards JSON-LD (schéma.org) |
+| CSS duplicates | 51 | Media queries intentionnelles |
+| MainContent ID | 31 | À corriger mais non-critique |
+| Font preload | 3 | Google Fonts gère |
+
+---
+
+**Document màj:** 25/01/2026 - Session 154bis
+**Prochaine session:** Ajouter id="main-content" + CTA sections
