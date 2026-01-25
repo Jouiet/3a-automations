@@ -1,11 +1,52 @@
 # 3A Automation
 >
-> Version: 85.0 | 25/01/2026 | Session 160 - **HITL 100%** + Podcast Audio-Only
+> Version: 86.0 | 26/01/2026 | Session 161 - **Subsidiary Compositions** + Core Web Vitals
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 161 - REMOTION SUBSIDIARIES + CWV (26/01/2026)
+
+### Remotion Subsidiary Compositions Created
+
+| Composition | Type | Duration | Features |
+| :--- | :--- | :--- | :--- |
+| **AlphaMedicalAd** | Medical e-commerce | 15s | Trust badges, product showcase |
+| **AlphaMedicalAd-Square** | Medical (1:1) | 15s | Instagram format |
+| **MyDealzAd** | Fashion e-commerce | 15s | Dynamic animations |
+| **MyDealzAd-FlashSale** | Fashion promo | 15s | Discount badges, flash sale mode |
+| **MyDealzAd-Square** | Fashion (1:1) | 15s | Instagram format |
+
+### Core Web Vitals - Production Measurement
+
+| Metric | Value | Threshold | Status |
+| :--- | :--- | :--- | :--- |
+| **LCP** | 467ms | < 2500ms | ✅ EXCELLENT |
+| **CLS** | 0.03 | < 0.1 | ✅ EXCELLENT |
+| **TTFB** | 58ms | < 800ms | ✅ EXCELLENT |
+
+### Files Modified
+
+| File | Change |
+| :--- | :--- |
+| `remotion-studio/src/compositions/AlphaMedicalAd.tsx` | ✅ Created |
+| `remotion-studio/src/compositions/MyDealzAd.tsx` | ✅ Created |
+| `remotion-studio/src/Root.tsx` | ✅ +5 compositions registered |
+| `remotion-studio/src/compositions/index.ts` | ✅ +2 exports |
+| `docs/DESIGN-AUDIT-SESSION-143.md` | ✅ CWV data added |
+| `docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md` | ✅ Video transfers complete |
+| `docs/PLAN-INTEGRATION-MYDEALZ-ALPHAMEDICAL-SESSION-141.md` | ✅ Tasks marked complete |
+
+### Validation Results
+
+- Design System: ✅ PASSED (0 errors, 83 warnings)
+- Automation Registry: ✅ 121 automations
+- Sensors: 20 files
+- Resilient Scripts: 7 files
+
+---
 
 ## SESSION 160 - HITL COMPLETE + IMPLEMENTATIONS (25/01/2026)
 

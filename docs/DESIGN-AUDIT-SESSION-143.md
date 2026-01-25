@@ -1183,7 +1183,27 @@ Notre implémentation design est **EXCELLENTE (85/100)** - Session 151 100% COMP
 2. ✅ Convertir images PNG → WebP - FAIT (S151, vérifié S160+)
 3. ⏳ Migrer font-size vers clamp()
 4. ⏳ Migrer boutons vers btn-cyber
-5. ⏳ Mesurer Core Web Vitals en production
+5. ✅ Mesurer Core Web Vitals en production - FAIT (S160+)
+
+### Core Web Vitals - Mesure Production (26/01/2026)
+
+| Métrique | Valeur | Seuil "Good" | Status |
+|----------|--------|--------------|--------|
+| **LCP** | **467ms** | < 2500ms | ✅ EXCELLENT |
+| **CLS** | **0.03** | < 0.1 | ✅ EXCELLENT |
+| **TTFB** | **58ms** | < 800ms | ✅ EXCELLENT |
+
+**Détails LCP Breakdown:**
+- Time to First Byte: 58ms (12.4%)
+- Element Render Delay: 409ms (87.6%)
+- LCP Element: `P.hero-description.hero-desc-readable`
+
+**Render Blocking Resources:** 3 CSS files (critical.css, styles.css, ultra-investors.css)
+- Estimated savings: **0ms** - Already optimized
+- Cache: max-age=31536000 (1 year)
+- Compression: gzip enabled
+
+**Verdict:** Site performant, aucune optimisation urgente nécessaire
 
 ---
 
