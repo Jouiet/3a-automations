@@ -265,7 +265,7 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
     └── agent_docs/*.md (L2)
 ```
 
-### Catégorie F: Video Production (NEW SESSION 146)
+### Catégorie F: Video Production (UPDATED SESSION 160+)
 
 ```
 ÉTAGÈRE: VIDEO PRODUCTION
@@ -274,7 +274,10 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 │   │   ├── PromoVideo.tsx (30s agency showcase)
 │   │   ├── AdVideo.tsx (15s social media)
 │   │   ├── DemoVideo.tsx (60s product demo)
-│   │   └── TestimonialVideo.tsx (45s client quote)
+│   │   ├── TestimonialVideo.tsx (45s client quote)
+│   │   ├── HeroArchitecture.tsx (8s homepage hero)
+│   │   ├── **AlphaMedicalAd.tsx** (15s medical e-commerce) ✅ NEW
+│   │   └── **MyDealzAd.tsx** (15s fashion e-commerce) ✅ NEW
 │   │
 │   ├── remotion-studio/src/components/
 │   │   ├── TitleSlide.tsx (animated titles)
@@ -284,6 +287,17 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 │   │
 │   └── remotion-studio/src/lib/
 │       └── ai-assets.ts (fal.ai + Replicate integration)
+│
+├── Subsidiary Compositions (SESSION 160+)
+│   ├── AlphaMedicalAd - Medical equipment ads
+│   │   ├── Brand: #0ea5e9 (blue), #22c55e (green)
+│   │   ├── Features: Trust badges, product showcase
+│   │   └── Variants: Portrait, Square
+│   │
+│   └── MyDealzAd - Fashion e-commerce ads
+│       ├── Brand: #ec4899 (pink), #fbbf24 (gold)
+│       ├── Features: Flash sale mode, discount badges
+│       └── Note: Store HTTP 402 (pending payment)
 │
 ├── AI Image Generation (Multi-Provider)
 │   ├── fal.ai FLUX (fast, high quality)
@@ -692,15 +706,15 @@ AVANTAGE HYBRIDE:
 - [HitPaw - Complete Guide](https://online.hitpaw.com/learn/ultimate-guide-to-whisk-ai.html)
 - [G-Labs Automation GitHub](https://github.com/duckmartians/G-Labs-Automation)
 
-### Transferts Video Production (À Planifier)
+### Transferts Video Production (✅ COMPLÉTÉ SESSION 160+)
 
-| Direction | Technologie | Priorité | Effort |
-|-----------|-------------|----------|--------|
-| 3A → MyDealz | Remotion compositions | ✅ HIGH | 2h |
-| 3A → Alpha | Remotion compositions | ✅ HIGH | 2h |
-| 3A → All | AI Assets module | ✅ HIGH | 1h (copy) |
+| Direction | Technologie | Status | Files |
+|-----------|-------------|--------|-------|
+| 3A → MyDealz | MyDealzAd composition | ✅ DONE | `MyDealzAd.tsx` |
+| 3A → Alpha | AlphaMedicalAd composition | ✅ DONE | `AlphaMedicalAd.tsx` |
+| 3A → All | Root.tsx registration | ✅ DONE | 5 new compositions |
 
 ---
 
-*Document mis à jour: 23/01/2026 22:45 UTC*
-*Session: 146 - Remotion Video Production Implementation*
+*Document mis à jour: 25/01/2026 UTC*
+*Session: 160+ - Subsidiary Compositions Implementation*

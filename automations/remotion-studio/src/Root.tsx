@@ -12,6 +12,10 @@ import { AdVideo } from './compositions/AdVideo';
 import { TestimonialVideo } from './compositions/TestimonialVideo';
 import { HeroArchitecture } from './compositions/HeroArchitecture';
 
+// Subsidiary Compositions
+import { AlphaMedicalAd } from './compositions/AlphaMedicalAd';
+import { MyDealzAd } from './compositions/MyDealzAd';
+
 // Video Presets
 const PRESETS = {
   landscape1080: { width: 1920, height: 1080 },
@@ -109,6 +113,80 @@ export const Root: React.FC = () => {
         {...PRESETS.landscape1080}
         defaultProps={{
           showWhiskBackground: true,
+        }}
+      />
+
+      {/* Alpha Medical - Medical Equipment E-commerce */}
+      <Composition
+        id="AlphaMedicalAd"
+        component={AlphaMedicalAd}
+        durationInFrames={15 * 30} // 15 seconds
+        fps={30}
+        {...PRESETS.portrait}
+        defaultProps={{
+          headline: 'Équipement Médical Professionnel',
+          subheadline: 'Qualité certifiée pour les pros',
+          cta: 'Découvrir',
+          trustBadges: ['CE Certifié', 'Livraison 48h', 'SAV Expert'],
+        }}
+      />
+
+      {/* Alpha Medical - Square format */}
+      <Composition
+        id="AlphaMedicalAd-Square"
+        component={AlphaMedicalAd}
+        durationInFrames={15 * 30}
+        fps={30}
+        {...PRESETS.square}
+        defaultProps={{
+          headline: 'Équipement Médical Pro',
+          cta: 'Commander',
+          trustBadges: ['CE Certifié', 'Livraison 48h'],
+        }}
+      />
+
+      {/* MyDealz - Fashion E-commerce (NOTE: Store HTTP 402) */}
+      <Composition
+        id="MyDealzAd"
+        component={MyDealzAd}
+        durationInFrames={15 * 30} // 15 seconds
+        fps={30}
+        {...PRESETS.portrait}
+        defaultProps={{
+          headline: 'Nouvelles Tendances',
+          subheadline: 'Mode & Style',
+          cta: 'Shopper',
+          flashSale: false,
+        }}
+      />
+
+      {/* MyDealz - Flash Sale mode */}
+      <Composition
+        id="MyDealzAd-FlashSale"
+        component={MyDealzAd}
+        durationInFrames={15 * 30}
+        fps={30}
+        {...PRESETS.portrait}
+        defaultProps={{
+          headline: 'VENTE FLASH',
+          subheadline: 'Jusqu\'à -50%',
+          cta: 'Profiter',
+          discountBadge: '-50%',
+          flashSale: true,
+        }}
+      />
+
+      {/* MyDealz - Square format */}
+      <Composition
+        id="MyDealzAd-Square"
+        component={MyDealzAd}
+        durationInFrames={15 * 30}
+        fps={30}
+        {...PRESETS.square}
+        defaultProps={{
+          headline: 'Nouvelles Tendances',
+          cta: 'Shopper',
+          flashSale: false,
         }}
       />
     </>

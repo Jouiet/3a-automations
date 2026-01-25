@@ -1484,12 +1484,20 @@ f61bef4 feat(automation): Transfer design automation knowledge from 3A
 | 2 | Tester preview | `npm run dev` | 5min |
 | 3 | Premier render | `npm run render:promo` | 10min |
 
+**COMPLÉTÉ (SESSION 160+):**
+
+| # | Action | Status | Commit |
+|---|--------|--------|--------|
+| 1 | AlphaMedicalAd composition | ✅ DONE | `AlphaMedicalAd.tsx` |
+| 2 | MyDealzAd composition | ✅ DONE | `MyDealzAd.tsx` |
+| 3 | Root.tsx registration | ✅ DONE | 5 new compositions |
+
 **À FAIRE (PROCHAINE SESSION):**
 
 | # | Action | Priorité |
 |---|--------|----------|
-| 1 | Adapter compositions pour Alpha Medical | HIGH |
-| 2 | Adapter compositions pour MyDealz | HIGH (quand actif) |
+| 1 | Test render AlphaMedicalAd | HIGH |
+| 2 | Test render MyDealzAd | HIGH (quand HTTP 200) |
 | 3 | Créer vidéos produits automatisées | MEDIUM |
 
 ---
