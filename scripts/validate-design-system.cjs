@@ -1702,27 +1702,29 @@ function validateCTAPresence() {
   const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
 
   // Pages that MUST have a CTA section
+  // Note: contact.html excluded - it IS the CTA destination with form-ultra
   const pagesRequiringCTA = [
-    'index.html',           // Homepage
-    'automatisations.html', // Automations
-    'services.html',        // Services
-    'flywheel-360.html',    // Flywheel
-    'agence.html',          // Agency
-    'contact.html',         // Contact (should have booking CTA)
-    // EN equivalents
-    'en/index.html',
-    'en/automations.html',
-    'en/services.html'
+    '/index.html',           // Homepage (with leading / to avoid matching blog/index.html)
+    'automatisations.html',  // Automations
+    'automations.html',      // EN Automations
+    'services.html',         // Services
+    'flywheel-360.html',     // Flywheel
+    'agence.html',           // Agency
+    'about.html',            // About
+    'a-propos.html',         // About FR
   ];
 
-  // CTA patterns to look for
+  // CTA patterns to look for - multiple valid patterns
   const ctaPatterns = [
     /class="cta-section/,
     /class="cta-ultra/,
     /class="cta-content/,
     /class="cta /,
     /id="cta"/,
-    /section.*cta/i
+    /section.*cta/i,
+    /class="form-ultra/,       // Contact forms count as CTA
+    /class="blog-cta/,         // Blog CTA sections
+    /class="btn-cyber.*audit/i // Audit CTA buttons
   ];
 
   let missingCTACount = 0;
@@ -1733,7 +1735,15 @@ function validateCTAPresence() {
     const relFile = relPath(file);
 
     // Only check pages that require CTA
-    if (!pagesRequiringCTA.some(p => relFile.endsWith(p) || relFile === p)) {
+    // Special handling for /index.html to not match blog/index.html
+    const matchesCTAPage = pagesRequiringCTA.some(p => {
+      if (p === '/index.html') {
+        // Only match root index.html, not blog/index.html
+        return relFile === 'index.html' || relFile === 'en/index.html';
+      }
+      return relFile.endsWith(p);
+    });
+    if (!matchesCTAPage) {
       continue;
     }
 
