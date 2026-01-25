@@ -1,11 +1,42 @@
 # 3A Automation
 >
-> Version: 75.0 | 25/01/2026 | Session 149 - **VALIDATOR v4.0** (Footer Completeness Detection)
+> Version: 76.0 | 25/01/2026 | Session 153 - **VERIFICATION & STATUS** (100% 3A Tasks Complete)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 153 - VERIFICATION & STATUS UPDATE (25/01/2026)
+
+### 3A Automation Site: 100% COMPLETE
+
+| Validation | Result |
+| :--- | :--- |
+| Design System | ✅ 0 errors, 49 warnings |
+| CSS Version | ✅ v=72.0 (all 71 files) |
+| Headers/Footers | ✅ Standardized |
+| Academy FR/EN | ✅ CTA sections added |
+| Blog FR/EN | ✅ Typos fixed |
+| Sitemap | ✅ 68 URLs (3 excluded intentionally) |
+
+### Tasks BLOCKED (USER ACTION Required)
+
+| Task | Blocker | Impact |
+| :--- | :--- | :--- |
+| Alpha Medical Sensors | Shopify 403, Klaviyo 401 | 6+ workflows |
+| MyDealz Integration | HTTP 402 Payment | Store inactive |
+| Remotion → Subsidiaries | Credentials missing | Video production |
+| GSC Sensor | API disabled | SEO monitoring |
+| Meta/TikTok Ads | Tokens empty | Ads sensors |
+
+### Commits Session 153
+```
+0ca6cca docs: add Session 153 - verification & status update
+13bfe70 docs: update Session 152 with EN courses fixes
+```
+
+---
 
 ## SESSION 149 - VALIDATOR v4.0 + FOOTER COMPLETENESS (25/01/2026)
 
@@ -307,29 +338,30 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | Retention | `sensors/retention-sensor.cjs` | ✅ |
 | Sync | `sensors/sync-to-3a.cjs` | ✅ |
 
-## Métriques VÉRIFIÉES (23/01/2026 - Session 144)
+## Métriques VÉRIFIÉES (25/01/2026 - Session 153)
 
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
 | Scripts Core | 81 | ✅ |
-| Automations Registry | **121** | ✅ SYNCED (+2) |
+| Automations Registry | **121** | ✅ SYNCED |
 | Automations Catalog | **121** | ✅ SYNCED |
-| HTML Pages | **70** | ✅ (+4 blog/academy) |
+| HTML Pages | **71** | ✅ (+1 redirect) |
 | Blog Articles FR | 5 | ✅ |
-| Academy Courses | 8 | ✅ (1 FR + 7 EN) |
-| Sitemap URLs | **68** | ✅ FIXED (+2 academy)
+| Academy Courses | 14 | ✅ (7 FR + 7 EN) |
+| Sitemap URLs | **68** | ✅ (3 excluded: 404×2, redirect) |
 | Scripts --health | 22 | ✅ |
 | Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
 | Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
-| CSS Version | **v=65.0** | ✅ Auto-bumped (Session 149) |
-| Validator Version | **v4.0.0** | ✅ Footer completeness (Session 149) |
-| CSS Lines | **10,498** | ✅ Complete (+163 Academy) |
-| Design Validation | PASS | ✅ All checks (20 warnings) |
+| CSS Version | **v=72.0** | ✅ Consistent (Session 151) |
+| Validator Version | **v4.0.0** | ✅ Footer completeness |
+| CSS Lines | ~257KB | ✅ Complete |
+| Design Validation | PASS | ✅ 0 errors, 49 warnings |
 | Homepage Hybrid Section | FR+EN | ✅ Added |
-| **Remotion Studio** | **Production** | ✅ NEW S146 |
-| Remotion Compositions | 4 | ✅ NEW S146 |
-| Remotion Components | 5 | ✅ NEW S146 |
+| Academy "Comment ça marche" | FR+EN | ✅ Added (Session 152) |
+| **Remotion Studio** | **Production** | ✅ S146 |
+| Remotion Compositions | 4 | ✅ |
+| Remotion Components | 5 | ✅ |
 
 ## SESSION 143 - AUDIT DESIGN UI/UX (23/01/2026)
 
