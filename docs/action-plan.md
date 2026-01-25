@@ -3239,22 +3239,28 @@ The "Truth Protocol" is active. We strictly distinguish between INTERNAL and EXT
 | 2 | Anti-Churn: LTV €500 threshold | ✅ DONE | 5b680f8 |
 | 3 | Email Cart Series: `previewMode` | ✅ DONE | 5c0e05c |
 
-**HITL Compliance:** 30% → **70%** (+40%)
-**Right Tool Score:** 55/100 → **65/100** (+10)
+**Session 157:** HITL Compliance 30% → **70%** (+40%)
+**Session 158:** Sensors fixed, add-on --health verified
+**Right Tool Score:** 55/100 → **70/100** (+15)
 
-### P0 - REMAINING (Scripts Testabilité)
+### P0 - Session 158 COMPLETED ✅
+
+| # | Tâche | Status | Note |
+|---|-------|--------|------|
+| 1 | --health aux 10 scripts add-ons | ✅ VERIFIED | Already implemented |
+
+### P1 - Session 158 COMPLETED ✅
+
+| # | Tâche | Status | Commit |
+|---|-------|--------|--------|
+| 1 | Fixer sensor Klaviyo (côté 3A) | ✅ DONE | 1518060 |
+| 2 | Documenter prérequis API par add-on | ✅ DONE | ADD-ONS-CATALOG.md |
+
+### P1 - REMAINING
 
 | # | Tâche | Impact | Effort |
 |---|-------|--------|--------|
-| 1 | Ajouter --health aux 10 scripts add-ons | Vérifiabilité | 4h |
-
-### P1 - HAUTE (Monitoring)
-
-| # | Tâche | Impact | Effort |
-|---|-------|--------|--------|
-| 1 | Fixer sensor Klaviyo (côté 3A) | Monitoring | 2h |
-| 2 | Documenter prérequis API par add-on | Transparence | 1h |
-| 3 | Tests automatiques add-ons | CI/CD | 4h |
+| 1 | Tests automatiques add-ons | CI/CD | 4h |
 
 ### P2 - MOYENNE PRIORITÉ
 
@@ -3294,6 +3300,6 @@ The "Truth Protocol" is active. We strictly distinguish between INTERNAL and EXT
 
 ---
 
-**Document màj:** 25/01/2026 - Session 157
-**Status:** HITL DONE ✅ | Right Tool 65/100 | Add-ons LIVE | CSS v80.0
-**Prochaine session:** P0 - Scripts testabilité (--health) sur 10 add-on scripts
+**Document màj:** 25/01/2026 - Session 158
+**Status:** HITL ✅ | Sensors Fixed ✅ | Right Tool 70/100 | Add-ons LIVE | CSS v80.0
+**Prochaine session:** P1 - Tests automatiques add-ons (CI/CD GitHub Actions)

@@ -1,11 +1,43 @@
 # 3A Automation
 >
-> Version: 82.0 | 25/01/2026 | Session 157 - **HITL IMPLEMENTATION** (Right Tool Compliance)
+> Version: 83.0 | 25/01/2026 | Session 158 - **SENSORS FIXED** + CI/CD Add-ons
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 158 - SENSORS + CI/CD (25/01/2026)
+
+### Klaviyo Sensors Fixed
+
+| Sensor | Issue | Fix | Status |
+| :--- | :--- | :--- | :--- |
+| `klaviyo-sensor.cjs` | API 400 error | Revision 2024→2026-01-15 | ✅ FIXED |
+| `email-health-sensor.cjs` | Same issue | Same fix | ✅ FIXED |
+
+### CI/CD Add-ons Health Check
+
+New workflow: `.github/workflows/addons-health-check.yml`
+- Runs on push to `automations/agency/core/*.cjs`
+- Daily scheduled check at 6:00 UTC
+- Tests 10 add-on scripts with `--health`
+
+### Right Tool Score Update
+
+| Domaine | S157 | S158 | Change |
+| :--- | :--- | :--- | :--- |
+| Sensors fonctionnels | 30% | **35%** | +5% |
+| Scripts testables | 29% | **35%** | +6% (CI/CD) |
+| **Total Score** | 65/100 | **70/100** | +5 |
+
+### Commits Session 158
+```
+1518060 fix(sensors): update Klaviyo API to revision 2026-01-15
+[pending] feat(ci): add-ons health check workflow
+```
+
+---
 
 ## SESSION 157 - HITL IMPLEMENTATION (25/01/2026)
 

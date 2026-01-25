@@ -1,0 +1,86 @@
+name: Add-ons Health Check
+
+on:
+  push:
+    paths:
+      - 'automations/agency/core/*.cjs'
+  pull_request:
+    paths:
+      - 'automations/agency/core/*.cjs'
+  schedule:
+    # Run daily at 6:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create .env for testing
+        run: |
+          # Minimal .env for --health checks (no real API calls needed)
+          cat > .env << 'EOF'
+          XAI_API_KEY=${{ secrets.XAI_API_KEY }}
+          OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
+          KLAVIYO_API_KEY=${{ secrets.KLAVIYO_API_KEY }}
+          EOF
+
+      - name: Health Check - Blog Generator
+        run: node automations/agency/core/blog-generator-resilient.cjs --health
+
+      - name: Health Check - Email Personalization
+        run: node automations/agency/core/email-personalization-resilient.cjs --health
+
+      - name: Health Check - Churn Prediction
+        run: node automations/agency/core/churn-prediction-resilient.cjs --health
+
+      - name: Health Check - Review Request
+        run: node automations/agency/core/review-request-automation.cjs --health
+
+      - name: Health Check - Replenishment Reminder
+        run: node automations/agency/core/replenishment-reminder.cjs --health
+
+      - name: Health Check - SMS Automation
+        run: node automations/agency/core/sms-automation-resilient.cjs --health
+
+      - name: Health Check - Price Drop Alerts
+        run: node automations/agency/core/price-drop-alerts.cjs --health
+
+      - name: Health Check - WhatsApp Booking
+        run: node automations/agency/core/whatsapp-booking-notifications.cjs --health
+
+      - name: Health Check - CJ Dropshipping
+        run: node automations/agency/core/cjdropshipping-automation.cjs --health
+
+      - name: Health Check - Klaviyo Sensor
+        run: node automations/agency/core/klaviyo-sensor.cjs --health
+
+      - name: Summary
+        run: |
+          echo "✅ All add-on health checks passed!"
+          echo ""
+          echo "Add-ons verified:"
+          echo "  - Blog Generator (HITL: requireApproval)"
+          echo "  - Email Personalization (HITL: previewMode)"
+          echo "  - Churn Prediction (HITL: LTV €500 threshold)"
+          echo "  - Review Request Automation"
+          echo "  - Replenishment Reminder"
+          echo "  - SMS Automation"
+          echo "  - Price Drop Alerts"
+          echo "  - WhatsApp Booking"
+          echo "  - CJ Dropshipping"
+          echo "  - Klaviyo Sensor"
