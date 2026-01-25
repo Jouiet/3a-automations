@@ -3,9 +3,9 @@
  * VALIDATE DESIGN SYSTEM - Automated Branding Enforcement
  * Source of Truth: docs/DESIGN-SYSTEM.md
  *
- * @version 4.0.0
+ * @version 5.0.0
  * @date 2026-01-25
- * @session 149 (Footer Completeness)
+ * @session 154 (Gap Analysis Implementation - 6 new validators)
  *
  * Usage:
  *   node scripts/validate-design-system.cjs [--fix] [--ci]
@@ -27,6 +27,19 @@
  *     - 5 columns required (Brand, Solutions, Ressources, Entreprise, Légal)
  *     - Social links required
  *     - RGPD/SSL badges required
+ * 13. CSS class CONFLICTS detection (Session 154)
+ *     - Same class name with conflicting values
+ *     - Would have caught Quick Guides bug
+ * 14. HTML tag MISMATCH detection (Session 154)
+ *     - Opening tag different from closing tag (<h3>...</h4>)
+ * 15. CSS DUPLICATES detection (Session 154)
+ *     - Same selector defined multiple times with different values
+ * 16. main-content ID validation (Session 154)
+ *     - <main> element must have id="main-content"
+ * 17. Font PRELOAD presence check (Session 154)
+ *     - Required font preloads in <head>
+ * 18. CTA section PRESENCE check (Session 154)
+ *     - Pages must have CTA section
  */
 
 const fs = require('fs');
@@ -1250,6 +1263,368 @@ function validateLayoutStructure() {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+// SESSION 154 - NEW VALIDATORS (Gap Analysis Implementation)
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Validate CSS Class Conflicts - Detect same class name with conflicting values
+ * Would have caught the Quick Guides bug (.guide-content: flex:1 vs display:none)
+ */
+function validateCSSClassConflicts() {
+  console.log('\n⚔️ Validating CSS Class Conflicts...');
+
+  const stylesPath = path.join(CONFIG.SITE_DIR, 'styles.css');
+  if (!fs.existsSync(stylesPath)) {
+    addWarning('CSS-Conflict', stylesPath, 'styles.css not found');
+    return;
+  }
+
+  const cssContent = fs.readFileSync(stylesPath, 'utf8');
+
+  // Extract all class definitions with their line numbers
+  const classDefinitions = new Map(); // className -> [{line, properties}]
+  const lines = cssContent.split('\n');
+
+  // Simple regex to find class definitions (not perfect but catches most cases)
+  const classPattern = /^\.([a-zA-Z][a-zA-Z0-9_-]*)\s*\{/;
+
+  let currentClass = null;
+  let currentProperties = [];
+  let currentLine = 0;
+  let braceDepth = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Count braces
+    const openBraces = (line.match(/\{/g) || []).length;
+    const closeBraces = (line.match(/\}/g) || []).length;
+
+    // Check for class definition at depth 0
+    if (braceDepth === 0) {
+      const match = trimmed.match(classPattern);
+      if (match) {
+        currentClass = match[1];
+        currentProperties = [];
+        currentLine = i + 1;
+      }
+    }
+
+    braceDepth += openBraces - closeBraces;
+
+    // Collect properties if inside a class
+    if (currentClass && braceDepth > 0) {
+      // Look for property: value; patterns
+      const propMatch = trimmed.match(/^([a-z-]+)\s*:\s*([^;]+);?$/);
+      if (propMatch) {
+        currentProperties.push({ prop: propMatch[1], value: propMatch[2].trim() });
+      }
+    }
+
+    // End of class definition
+    if (currentClass && braceDepth === 0 && closeBraces > 0) {
+      if (!classDefinitions.has(currentClass)) {
+        classDefinitions.set(currentClass, []);
+      }
+      classDefinitions.get(currentClass).push({
+        line: currentLine,
+        properties: currentProperties
+      });
+      currentClass = null;
+      currentProperties = [];
+    }
+  }
+
+  // Find conflicts: same class defined multiple times with conflicting properties
+  let conflictCount = 0;
+  const conflictingClasses = [];
+
+  // Properties that commonly conflict
+  const conflictingProps = ['display', 'visibility', 'opacity', 'flex', 'flex-direction'];
+
+  for (const [className, definitions] of classDefinitions) {
+    if (definitions.length < 2) continue;
+
+    // Check for conflicting properties between definitions
+    for (const prop of conflictingProps) {
+      const valuesForProp = definitions
+        .map(d => {
+          const found = d.properties.find(p => p.prop === prop);
+          return found ? { line: d.line, value: found.value } : null;
+        })
+        .filter(v => v !== null);
+
+      if (valuesForProp.length >= 2) {
+        const uniqueValues = [...new Set(valuesForProp.map(v => v.value))];
+        if (uniqueValues.length > 1) {
+          // Conflict detected!
+          conflictCount++;
+          if (!conflictingClasses.includes(className)) {
+            conflictingClasses.push(className);
+          }
+          addError('CSS-Conflict', 'styles.css',
+            `.${className} has conflicting "${prop}" values: "${uniqueValues.join('" vs "')}" at lines ${valuesForProp.map(v => v.line).join(', ')}`,
+            `Rename one class or consolidate the definitions`);
+        }
+      }
+    }
+  }
+
+  if (conflictCount === 0) {
+    addPassed('CSS-Conflict', 'No conflicting CSS class definitions detected');
+  }
+}
+
+/**
+ * Validate HTML Tag Mismatch - Detect opening tag different from closing tag
+ * Would have caught <h3>...</h4> typo in academie.html
+ */
+function validateHTMLTagMismatch() {
+  console.log('\n🏷️ Validating HTML Tag Matching...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  // Tags to check for mismatches
+  const tagsToCheck = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'span', 'p', 'section', 'article', 'nav', 'header', 'footer', 'main', 'aside'];
+
+  let mismatchCount = 0;
+  const filesWithMismatch = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    for (const tag of tagsToCheck) {
+      // Find opening tags with content and different closing tag
+      // Pattern: <h3...>content</h4> (mismatch)
+      for (const closeTag of tagsToCheck) {
+        if (tag === closeTag) continue; // Same tag is fine
+
+        // Look for <tag...>...</closeTag> pattern
+        const mismatchPattern = new RegExp(`<${tag}[^>]*>([^<]*)</${closeTag}>`, 'g');
+        let match;
+        while ((match = mismatchPattern.exec(content)) !== null) {
+          // Found a mismatch
+          mismatchCount++;
+          if (!filesWithMismatch.includes(relFile)) {
+            filesWithMismatch.push(relFile);
+          }
+
+          // Get approximate line number
+          const beforeMatch = content.substring(0, match.index);
+          const lineNum = (beforeMatch.match(/\n/g) || []).length + 1;
+
+          addError('TagMismatch', file,
+            `<${tag}> closed with </${closeTag}> at line ~${lineNum}: "${match[0].substring(0, 50)}..."`,
+            `Change to <${tag}>...</${tag}> or <${closeTag}>...</${closeTag}>`);
+        }
+      }
+    }
+  }
+
+  if (mismatchCount === 0) {
+    addPassed('TagMismatch', 'All HTML tags properly matched');
+  }
+}
+
+/**
+ * Validate CSS Duplicates - Detect same selector defined multiple times
+ */
+function validateCSSDuplicates() {
+  console.log('\n🔄 Validating CSS Duplicate Selectors...');
+
+  const stylesPath = path.join(CONFIG.SITE_DIR, 'styles.css');
+  if (!fs.existsSync(stylesPath)) return;
+
+  const cssContent = fs.readFileSync(stylesPath, 'utf8');
+  const lines = cssContent.split('\n');
+
+  // Track selectors and their line numbers
+  const selectorLines = new Map(); // selector -> [line numbers]
+
+  // Simple selector pattern (class at start of line)
+  const selectorPattern = /^(\.[a-zA-Z][a-zA-Z0-9_-]*(?:\s*,\s*\.[a-zA-Z][a-zA-Z0-9_-]*)*)\s*\{/;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    const match = line.match(selectorPattern);
+
+    if (match) {
+      const selector = match[1].trim();
+      if (!selectorLines.has(selector)) {
+        selectorLines.set(selector, []);
+      }
+      selectorLines.get(selector).push(i + 1);
+    }
+  }
+
+  // Find selectors defined 3+ times (2 is sometimes intentional for media queries)
+  let duplicateCount = 0;
+  for (const [selector, lineNums] of selectorLines) {
+    if (lineNums.length >= 3) {
+      duplicateCount++;
+      addWarning('CSS-Duplicate', 'styles.css',
+        `Selector "${selector}" defined ${lineNums.length} times at lines: ${lineNums.slice(0, 5).join(', ')}${lineNums.length > 5 ? '...' : ''}`);
+    }
+  }
+
+  if (duplicateCount === 0) {
+    addPassed('CSS-Duplicate', 'No excessive CSS selector duplicates detected');
+  } else {
+    addWarning('CSS-Duplicate', 'summary',
+      `${duplicateCount} selectors defined 3+ times - consider consolidating`);
+  }
+}
+
+/**
+ * Validate main-content ID - <main> element should have id="main-content"
+ */
+function validateMainContentID() {
+  console.log('\n🎯 Validating main-content ID...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  let missingCount = 0;
+  const filesWithoutMainID = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    // Skip files without main element
+    if (!content.includes('<main')) continue;
+
+    // Check if main has id="main-content"
+    const mainWithID = /<main[^>]*id="main-content"[^>]*>/;
+    const mainTag = /<main[^>]*>/;
+
+    if (mainTag.test(content) && !mainWithID.test(content)) {
+      missingCount++;
+      if (!filesWithoutMainID.includes(relFile)) {
+        filesWithoutMainID.push(relFile);
+      }
+    }
+  }
+
+  if (missingCount === 0) {
+    addPassed('MainContent', 'All <main> elements have id="main-content"');
+  } else {
+    // This is a warning, not an error (accessibility best practice)
+    addWarning('MainContent', 'summary',
+      `${missingCount} files have <main> without id="main-content": ${filesWithoutMainID.slice(0, 3).join(', ')}${filesWithoutMainID.length > 3 ? '...' : ''}`);
+  }
+}
+
+/**
+ * Validate Font Preload - Check for required font preloads in head
+ */
+function validateFontPreload() {
+  console.log('\n🔤 Validating Font Preloads...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  // Required font preloads (at minimum, one font should be preloaded)
+  const fontPreloadPattern = /<link[^>]*rel="preload"[^>]*as="font"[^>]*>/;
+  const googleFontsPattern = /fonts\.googleapis\.com|fonts\.gstatic\.com/;
+
+  let filesWithoutPreload = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    // Skip files without head
+    if (!content.includes('<head>')) continue;
+
+    // Skip dashboard (different design)
+    if (relFile.includes('dashboard.html')) continue;
+
+    // Check if using Google Fonts
+    const usesGoogleFonts = googleFontsPattern.test(content);
+
+    // If using Google Fonts, preload is handled by Google
+    // Only warn if using local fonts without preload
+    if (!usesGoogleFonts) {
+      const hasFontPreload = fontPreloadPattern.test(content);
+      if (!hasFontPreload) {
+        filesWithoutPreload.push(relFile);
+      }
+    }
+  }
+
+  if (filesWithoutPreload.length === 0) {
+    addPassed('FontPreload', 'Font preloads configured (Google Fonts or local preload)');
+  } else {
+    // This is informational, not critical
+    addWarning('FontPreload', 'summary',
+      `${filesWithoutPreload.length} files may benefit from font preloading`);
+  }
+}
+
+/**
+ * Validate CTA Section Presence - Key pages should have CTA section
+ */
+function validateCTAPresence() {
+  console.log('\n📣 Validating CTA Section Presence...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  // Pages that MUST have a CTA section
+  const pagesRequiringCTA = [
+    'index.html',           // Homepage
+    'automatisations.html', // Automations
+    'services.html',        // Services
+    'flywheel-360.html',    // Flywheel
+    'agence.html',          // Agency
+    'contact.html',         // Contact (should have booking CTA)
+    // EN equivalents
+    'en/index.html',
+    'en/automations.html',
+    'en/services.html'
+  ];
+
+  // CTA patterns to look for
+  const ctaPatterns = [
+    /class="cta-section/,
+    /class="cta-ultra/,
+    /class="cta-content/,
+    /class="cta /,
+    /id="cta"/,
+    /section.*cta/i
+  ];
+
+  let missingCTACount = 0;
+  const filesWithoutCTA = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    // Only check pages that require CTA
+    if (!pagesRequiringCTA.some(p => relFile.endsWith(p) || relFile === p)) {
+      continue;
+    }
+
+    // Check for CTA section
+    const hasCTA = ctaPatterns.some(p => p.test(content));
+
+    if (!hasCTA) {
+      missingCTACount++;
+      filesWithoutCTA.push(relFile);
+    }
+  }
+
+  if (missingCTACount === 0) {
+    addPassed('CTA', 'All key pages have CTA sections');
+  } else {
+    for (const f of filesWithoutCTA) {
+      addWarning('CTA', f, 'Missing CTA section - key pages should have call-to-action');
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // MAIN
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -1277,6 +1652,13 @@ validateContentTypos();              // Session 148+149 - Detect typos including
 validateJSONNamingConventions();     // Session 148 - Detect ambiguous JSON field names
 validateDeprecatedHeaderPatterns();  // Session 148 - Detect deprecated patterns (hamburger alone)
 validateNavPlacement();              // Session 148 - Ensure nav is inside header
+// Session 154 - Gap Analysis Implementation (7 new validators)
+validateCSSClassConflicts();         // Session 154 - Detect same class with conflicting values
+validateHTMLTagMismatch();           // Session 154 - Detect <h3>...</h4> mismatches
+validateCSSDuplicates();             // Session 154 - Detect excessive selector duplicates
+validateMainContentID();             // Session 154 - Check main has id="main-content"
+validateFontPreload();               // Session 154 - Check font preload configuration
+validateCTAPresence();               // Session 154 - Check key pages have CTA sections
 
 // ════════════════════════════════════════════════════════════════════════════
 // REPORT

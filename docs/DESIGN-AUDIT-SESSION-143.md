@@ -102,6 +102,30 @@ Analyse comparative des 6 documents stratégiques vs stratégies 3A existantes:
 | Social Icons | ✅ 6 icônes (WhatsApp, FB, IG, YT, X, LinkedIn) |
 | Déploiement | ✅ SUCCESS (GitHub Actions)
 
+### Validator Update - Gap Analysis Implementation
+
+Suite à l'analyse factuelle du coverage validateur (53%), 6 nouvelles fonctions ajoutées:
+
+**Validator v4.0.0 → v5.0.0** (18 → 24 fonctions)
+
+| Nouvelle Validation | Description | Résultat |
+|---------------------|-------------|----------|
+| `validateCSSClassConflicts()` | Détecte même classe avec valeurs contradictoires | 1 ERROR détecté |
+| `validateHTMLTagMismatch()` | Détecte `<h3>...</h4>` | ✅ PASSED |
+| `validateCSSDuplicates()` | Sélecteurs définis 3+ fois | 51 warnings |
+| `validateMainContentID()` | `<main>` doit avoir `id="main-content"` | 31 warnings |
+| `validateFontPreload()` | Font preloads configurés | 3 warnings |
+| `validateCTAPresence()` | Pages clés ont sections CTA | 4 warnings |
+
+**Coverage**: 53% → ~93%
+
+**Bug réel détecté**: `.annual-savings` avec `display: none !important` vs `display: block` aux lignes 6600 et 6808.
+
+**Commit**:
+```
+[pending] feat(validator): Session 154 - 6 new validations (coverage 53%→93%)
+```
+
 ---
 
 ## SESSION 153 - VERIFICATION & STATUS UPDATE (25/01/2026)

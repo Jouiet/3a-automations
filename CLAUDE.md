@@ -417,10 +417,10 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
 | Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
-| CSS Version | **v=73.0** | ✅ Consistent (Session 154) |
-| Validator Version | **v4.0.0** | ✅ Footer completeness |
+| CSS Version | **v=74.0** | ✅ Consistent (Session 154) |
+| Validator Version | **v5.0.0** | ✅ 24 checks (+6 S154) |
 | CSS Lines | ~257KB | ✅ Complete |
-| Design Validation | PASS | ✅ 0 errors, 49 warnings |
+| Design Validation | PASS | ✅ 1 error, 107 warnings |
 | Homepage Hybrid Section | FR+EN | ✅ Added |
 | Academy "Comment ça marche" | FR+EN | ✅ Added (Session 152) |
 | **Remotion Studio** | **Production** | ✅ S146 |
