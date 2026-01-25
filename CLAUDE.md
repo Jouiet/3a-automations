@@ -1,11 +1,73 @@
 # 3A Automation
 >
-> Version: 80.0 | 25/01/2026 | Session 155 - **VALIDATOR v5.4.0** + Font Preload + CSS Cleanup
+> Version: 81.0 | 25/01/2026 | Session 156 - **ADD-ONS** + Right Tool Audit + FAQ Guarantee Fix
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 156 - ADD-ONS + RIGHT TOOL AUDIT (25/01/2026)
+
+### Add-Ons Implementation (TOP 10)
+
+| # | Add-On | Setup | Monthly | Script | HITL |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | Anti-Churn AI | €200 | €180 | churn-prediction-resilient.cjs | ⚠️ PARTIAL |
+| 2 | Review Booster | €100 | €80 | review-request-automation.cjs | ❌ NONE (OK) |
+| 3 | Replenishment Reminder | €120 | €100 | replenishment-reminder.cjs | ❌ NONE (OK) |
+| 4 | Email Cart Series AI | €150 | €150 | email-personalization-resilient.cjs | ⚠️ PARTIAL |
+| 5 | SMS Automation | €150 | €120 | sms-automation-resilient.cjs | ⚠️ PARTIAL |
+| 6 | Price Drop Alerts | €100 | €80 | price-drop-alerts.cjs | ⚠️ PARTIAL |
+| 7 | WhatsApp Booking | €80 | €60 | whatsapp-booking-notifications.cjs | ✅ IMPLICIT |
+| 8 | Blog Factory AI | €200 | €200 | blog-generator-resilient.cjs | 🔴 **CRITICAL** |
+| 9 | Podcast Generator | €120 | €100 | podcast-generator-resilient.cjs | ✅ YES |
+| 10 | Dropshipping Suite | €350 | €250 | cjdropshipping-automation.cjs | ✅ YES |
+
+### Bundles (17% discount)
+
+| Bundle | Add-Ons | Regular | Discounted |
+| :--- | :--- | :--- | :--- |
+| Retention Pro | #1 + #3 + #6 | €360/mo | €300/mo |
+| Engagement Pro | #2 + #4 + #5 | €350/mo | €290/mo |
+| Content Pro | #8 + #9 | €300/mo | €250/mo |
+| Full Stack | All 10 | €1,170/mo | €900/mo |
+
+### Right Tool Audit: 55/100 INSUFFISANT
+
+| Domaine | Score | Issue |
+| :--- | :--- | :--- |
+| Scripts testables | 29% (24/83) | 71% sans --health check |
+| Sensors fonctionnels | 30% (6/20) | 70% PARTIAL/BLOCKED |
+| Add-ons vendables | 80% | Dropshipping = NO_CREDS |
+| HITL compliance | 30% | Blog Factory publie sans review |
+| Transparence pricing | 75% | Disclaimer API keys ajouté |
+
+### Fixes Applied
+
+| Issue | Fix | Status |
+| :--- | :--- | :--- |
+| Pricing toggle bug | CSS `:not(.period-monthly):not(.period-annual)` | ✅ FIXED |
+| FAQ Guarantee EN "infinite loop" | "2 revision rounds included. Beyond: €50/h" | ✅ FIXED |
+| Dropshipping transparency | "*Your supplier API keys required" disclaimer | ✅ FIXED |
+| CSS version sync | v=77.0 → v=80.0 (all 71 files) | ✅ FIXED |
+
+### HITL Critical Actions (P0)
+
+| Add-On | Current Risk | Action Required |
+| :--- | :--- | :--- |
+| **Blog Factory AI** | 🔴 HIGH | Add `publishAfterApproval` flag |
+| Anti-Churn AI | 🟡 MEDIUM | Add LTV threshold for approval |
+| Email Cart Series | 🟡 MEDIUM | Add `previewMode` option |
+
+### Commits Session 156
+```
+0c86cfe fix(pricing): retainer period toggle bug - monthly/annual display
+8d9e9bf feat(pricing): add TOP 10 Add-Ons section + bundles FR+EN
+a17be2d fix(faq): EN guarantee infinite loop + Dropshipping disclaimer
+```
+
+---
 
 ## SESSION 155 - VALIDATOR v5.4.0 + FONT PRELOAD + CSS CLEANUP (25/01/2026)
 
@@ -506,25 +568,28 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 | Retention | `sensors/retention-sensor.cjs` | ✅ |
 | Sync | `sensors/sync-to-3a.cjs` | ✅ |
 
-## Métriques VÉRIFIÉES (25/01/2026 - Session 153)
+## Métriques VÉRIFIÉES (25/01/2026 - Session 156)
 
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
-| Scripts Core | 81 | ✅ |
+| Scripts Core | 83 | ✅ |
+| Scripts --health | 24 (29%) | ⚠️ 71% sans health check |
 | Automations Registry | **121** | ✅ SYNCED |
 | Automations Catalog | **121** | ✅ SYNCED |
 | HTML Pages | **71** | ✅ (+1 redirect) |
 | Blog Articles FR | 5 | ✅ |
 | Academy Courses | 14 | ✅ (7 FR + 7 EN) |
 | Sitemap URLs | **68** | ✅ (3 excluded: 404×2, redirect) |
-| Scripts --health | 22 | ✅ |
 | Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
 | Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
-| CSS Version | **v=74.0** | ✅ Consistent (Session 154) |
-| Validator Version | **v5.0.0** | ✅ 24 checks (+6 S154) |
-| CSS Lines | ~257KB | ✅ Complete |
-| Design Validation | PASS | ✅ 1 error, 107 warnings |
+| CSS Version | **v=80.0** | ✅ Session 156 |
+| Validator Version | **v5.4.0** | ✅ 26 checks |
+| CSS Lines | ~260KB | ✅ Complete (+230 addon CSS) |
+| Design Validation | PASS | ✅ 0 errors, 83 warnings |
+| **Add-Ons** | **10 implemented** | ✅ FR+EN |
+| **Bundles** | **4 implemented** | ✅ 17% discount |
+| Right Tool Score | **55/100** | ⚠️ INSUFFISANT |
 | Homepage Hybrid Section | FR+EN | ✅ Added |
 | Academy "Comment ça marche" | FR+EN | ✅ Added (Session 152) |
 | **Remotion Studio** | **Production** | ✅ S146 |

@@ -3175,27 +3175,85 @@ The "Truth Protocol" is active. We strictly distinguish between INTERNAL and EXT
 | **154bis** | **v5.3** | **26** | **0** | **20** |
 | **155** | **v5.4** | **26** | **0** | **20** |
 
-## PLAN ACTIONNABLE - Session 156+
+## SESSION 156 - COMPLÉTÉE (25/01/2026)
 
-### P0/P1 - ✅ 100% DONE (Sessions 154-154bis)
+### Réalisations Session 156
 
-Toutes les tâches P0 et P1 sont complétées.
+| # | Tâche | Status | Détails |
+|---|-------|--------|---------|
+| 1 | **Add-Ons Pricing Section** | ✅ DONE | 10 add-ons FR+EN + 4 bundles |
+| 2 | **Fix Retainers Toggle Bug** | ✅ DONE | CSS `:not(.period-*)` |
+| 3 | **Fix FAQ Guarantee Infinite Loop** | ✅ DONE | EN: 2 rounds cap |
+| 4 | **Dropshipping Disclaimer** | ✅ DONE | "*API keys required" |
+| 5 | **Right Tool Audit** | ✅ DONE | Score 55/100 |
+| 6 | **CSS v80.0 Deployed** | ✅ LIVE | +230 lignes addon CSS |
 
-### P2 - MOYENNE PRIORITÉ - Session 155-156 Progress
+### Add-Ons Implémentés (10 total)
+
+| Catégorie | Add-Ons | Prix/mois |
+|-----------|---------|-----------|
+| Rétention | Anti-Churn AI, Replenishment, Price Drop | €80-180 |
+| Engagement | Review Booster, Email Cart AI, SMS | €80-150 |
+| Contenu | Blog Factory AI, Podcast Generator | €100-200 |
+| Opérations | WhatsApp Booking, Dropshipping Suite | €60-250 |
+
+**Bundles (-17%):** Retention Pro €300, Engagement Pro €290, Content Pro €250, Full Stack €900
+
+### Fixes Critiques Appliqués
+
+1. **Retainers Pricing Bug** (CSS ligne ~9344)
+   - AVANT: `.price-usd { display: inline-block }` → affichait monthly ET annual
+   - APRÈS: `.price-usd:not(.period-monthly):not(.period-annual)` → toggle correct
+
+2. **FAQ Guarantee (EN)** - Supprimé responsabilité illimitée
+   - AVANT: "free corrections until approval" (∞ loop)
+   - APRÈS: "2 revision rounds included. Beyond: €50/h"
+
+3. **Dropshipping Transparency** - Ajouté prérequis
+   - FR: "*Vos clés API fournisseurs requises"
+   - EN: "*Your supplier API keys required"
+
+### Right Tool for Right Purpose - Audit
+
+| Domaine | Score | Issue |
+|---------|-------|-------|
+| Scripts testables | 29% (24/83) | 71% sans --health check |
+| Sensors fonctionnels | 30% (6/20) | 70% PARTIAL/BLOCKED |
+| Add-ons vendables | 80% | Dropshipping NO_CREDS |
+| HITL compliance | 30% | Blog Factory sans review |
+| **GLOBAL** | **55/100** | **INSUFFISANT** |
+
+### Live URLs
+- FR: https://3a-automation.com/pricing.html#addons
+- EN: https://3a-automation.com/en/pricing.html#addons
+
+---
+
+## PLAN ACTIONNABLE - Session 157+
+
+### P0 - CRITIQUE (Scripts Testabilité)
+
+| # | Tâche | Impact | Effort |
+|---|-------|--------|--------|
+| 1 | Ajouter --health aux 10 scripts add-ons | Vérifiabilité | 4h |
+| 2 | Blog Factory: flag `publishAfterApproval` | HITL critique | 2h |
+| 3 | Anti-Churn: LTV threshold pour approval | HITL | 1h |
+
+### P1 - HAUTE (Monitoring)
+
+| # | Tâche | Impact | Effort |
+|---|-------|--------|--------|
+| 1 | Fixer sensor Klaviyo (côté 3A) | Monitoring | 2h |
+| 2 | Documenter prérequis API par add-on | Transparence | 1h |
+| 3 | Tests automatiques add-ons | CI/CD | 4h |
+
+### P2 - MOYENNE PRIORITÉ
 
 | # | Tâche | Status | Détails |
 |---|-------|--------|---------|
 | 1 | JSON camelCase → snake_case | ⏳ SKIP | Intentionnel (JSON-LD schema.org) |
-| 2 | 57 boutons .btn → btn-cyber | ⏳ OPTIONAL | Vérifié: design OK, utilise --gradient-cyber |
-| 3 | ~~Font preload~~ | ✅ DONE | 2 fichiers academy corrigés |
-| 4 | ~~CSS duplicates detection~~ | ✅ IMPROVED | 51 → 30 (media queries exclus) |
-| 5 | CSS duplicates consolidation | ⏳ PARTIAL | 1 removed, 30 design variations |
-
-**Analyse boutons Session 156:**
-- `.btn .btn-primary/secondary` (57 usages) utilise déjà `var(--gradient-cyber)`
-- Visuellement correct (vérifié sur 3a-automation.com/pricing.html)
-- Différence avec `.btn-cyber`: effets hover avancés (glow animé)
-- **Verdict:** Amélioration esthétique optionnelle, pas un bug
+| 2 | 57 boutons .btn → btn-cyber | ⏳ OPTIONAL | Design OK, CSS vars cohérentes |
+| 3 | CSS duplicates consolidation | ⏳ PARTIAL | 30 design variations |
 
 ### P3 - BASSE PRIORITÉ (Backlog)
 
@@ -3227,6 +3285,6 @@ Toutes les tâches P0 et P1 sont complétées.
 
 ---
 
-**Document màj:** 25/01/2026 - Session 156
-**Status:** P0 100%, P1 100%, P2 60% (button analysis done - optionnel)
-**Prochaine session:** P3 - font-size variables ou autre
+**Document màj:** 25/01/2026 - Session 156bis
+**Status:** P0 100%, P1 100%, P2 60% | Add-ons LIVE | CSS v80.0
+**Prochaine session:** P0 - Scripts testabilité (--health) + HITL fixes

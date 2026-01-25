@@ -39,6 +39,18 @@ const { logTelemetry } = require('../utils/telemetry.cjs');
 const MAX_BODY_SIZE = 1024 * 1024; // 1MB
 const REQUEST_TIMEOUT_MS = 120000; // 2 minutes for AI generation
 
+// ─────────────────────────────────────────────────────────────────────────────
+// HITL (Human In The Loop) CONFIG - Session 157
+// CRITICAL: Blog content must be reviewed before publication
+// ─────────────────────────────────────────────────────────────────────────────
+const HITL_CONFIG = {
+  draftsDir: path.join(__dirname, '../../../outputs/drafts'),
+  approvedDir: path.join(__dirname, '../../../outputs/approved'),
+  slackWebhook: process.env.SLACK_WEBHOOK_URL || null,
+  notifyEmail: process.env.HITL_NOTIFY_EMAIL || null,
+  requireApproval: true, // DEFAULT: Always require human approval before publish
+};
+
 // Import Marketing Science Core (Persuasion Psychology)
 const MarketingScience = require('./marketing-science-core.cjs');
 
@@ -809,6 +821,198 @@ async function postToX(article, articleUrl) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// HITL: DRAFT MANAGEMENT SYSTEM (Session 157)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Ensure HITL directories exist
+ */
+function ensureHITLDirs() {
+  if (!fs.existsSync(HITL_CONFIG.draftsDir)) {
+    fs.mkdirSync(HITL_CONFIG.draftsDir, { recursive: true });
+  }
+  if (!fs.existsSync(HITL_CONFIG.approvedDir)) {
+    fs.mkdirSync(HITL_CONFIG.approvedDir, { recursive: true });
+  }
+}
+
+/**
+ * Generate unique draft ID
+ */
+function generateDraftId() {
+  const timestamp = Date.now();
+  const random = crypto.randomBytes(4).toString('hex');
+  return `draft-${timestamp}-${random}`;
+}
+
+/**
+ * Save article as draft for human review
+ * @param {Object} article - Generated article
+ * @param {Object} metadata - Generation metadata (provider, topic, language)
+ * @returns {Object} Draft info with ID and path
+ */
+function saveDraft(article, metadata) {
+  ensureHITLDirs();
+
+  const draftId = generateDraftId();
+  const draftData = {
+    id: draftId,
+    status: 'pending_review',
+    createdAt: new Date().toISOString(),
+    article,
+    metadata,
+    reviewUrl: `Review draft: node blog-generator-resilient.cjs --view-draft=${draftId}`,
+    approveCmd: `Approve: node blog-generator-resilient.cjs --approve=${draftId}`,
+    rejectCmd: `Reject: node blog-generator-resilient.cjs --reject=${draftId}`,
+  };
+
+  const draftPath = path.join(HITL_CONFIG.draftsDir, `${draftId}.json`);
+  fs.writeFileSync(draftPath, JSON.stringify(draftData, null, 2));
+
+  console.log(`\n[HITL] ⏸️  Draft saved for human review`);
+  console.log(`  Draft ID: ${draftId}`);
+  console.log(`  Path: ${draftPath}`);
+  console.log(`  Title: ${article.title}`);
+  console.log(`\n  📋 NEXT STEPS:`);
+  console.log(`     1. Review: node blog-generator-resilient.cjs --view-draft=${draftId}`);
+  console.log(`     2. Approve: node blog-generator-resilient.cjs --approve=${draftId}`);
+  console.log(`     3. Reject:  node blog-generator-resilient.cjs --reject=${draftId}`);
+
+  return { id: draftId, path: draftPath, status: 'pending_review' };
+}
+
+/**
+ * List all pending drafts
+ */
+function listDrafts() {
+  ensureHITLDirs();
+
+  const drafts = [];
+  const files = fs.readdirSync(HITL_CONFIG.draftsDir);
+
+  for (const file of files) {
+    if (file.endsWith('.json')) {
+      try {
+        const draftData = JSON.parse(fs.readFileSync(path.join(HITL_CONFIG.draftsDir, file), 'utf8'));
+        drafts.push({
+          id: draftData.id,
+          title: draftData.article?.title || 'Untitled',
+          status: draftData.status,
+          createdAt: draftData.createdAt,
+          provider: draftData.metadata?.provider,
+          language: draftData.metadata?.language,
+        });
+      } catch (e) {
+        console.warn(`[WARN] Could not parse draft: ${file}`);
+      }
+    }
+  }
+
+  return drafts;
+}
+
+/**
+ * Get draft by ID
+ */
+function getDraft(draftId) {
+  const draftPath = path.join(HITL_CONFIG.draftsDir, `${draftId}.json`);
+  if (!fs.existsSync(draftPath)) {
+    return null;
+  }
+  return JSON.parse(fs.readFileSync(draftPath, 'utf8'));
+}
+
+/**
+ * Approve draft and move to approved folder
+ */
+function approveDraft(draftId) {
+  const draft = getDraft(draftId);
+  if (!draft) {
+    return { success: false, error: `Draft not found: ${draftId}` };
+  }
+
+  draft.status = 'approved';
+  draft.approvedAt = new Date().toISOString();
+
+  // Move to approved folder
+  const approvedPath = path.join(HITL_CONFIG.approvedDir, `${draftId}.json`);
+  fs.writeFileSync(approvedPath, JSON.stringify(draft, null, 2));
+
+  // Remove from drafts
+  const draftPath = path.join(HITL_CONFIG.draftsDir, `${draftId}.json`);
+  fs.unlinkSync(draftPath);
+
+  console.log(`[HITL] ✅ Draft approved: ${draftId}`);
+  return { success: true, draft, approvedPath };
+}
+
+/**
+ * Reject draft
+ */
+function rejectDraft(draftId, reason = '') {
+  const draft = getDraft(draftId);
+  if (!draft) {
+    return { success: false, error: `Draft not found: ${draftId}` };
+  }
+
+  draft.status = 'rejected';
+  draft.rejectedAt = new Date().toISOString();
+  draft.rejectionReason = reason;
+
+  // Keep in drafts folder with rejected status (for audit trail)
+  const draftPath = path.join(HITL_CONFIG.draftsDir, `${draftId}.json`);
+  fs.writeFileSync(draftPath, JSON.stringify(draft, null, 2));
+
+  console.log(`[HITL] ❌ Draft rejected: ${draftId}`);
+  return { success: true, draft };
+}
+
+/**
+ * Send Slack notification for new draft (optional)
+ */
+async function notifySlack(draft) {
+  if (!HITL_CONFIG.slackWebhook) return { success: false, error: 'Slack not configured' };
+
+  const payload = {
+    text: `📝 New Blog Draft Pending Review`,
+    blocks: [
+      {
+        type: 'header',
+        text: { type: 'plain_text', text: '📝 New Blog Draft Pending Review' }
+      },
+      {
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*Title:*\n${draft.article.title}` },
+          { type: 'mrkdwn', text: `*Draft ID:*\n\`${draft.id}\`` },
+        ]
+      },
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `*Excerpt:*\n${draft.article.excerpt}` }
+      },
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `*Commands:*\n\`\`\`\nView: node blog-generator-resilient.cjs --view-draft=${draft.id}\nApprove: node blog-generator-resilient.cjs --approve=${draft.id} --publish\nReject: node blog-generator-resilient.cjs --reject=${draft.id}\n\`\`\`` }
+      }
+    ]
+  };
+
+  try {
+    await httpRequest(HITL_CONFIG.slackWebhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    }, JSON.stringify(payload));
+
+    console.log(`[HITL] 📤 Slack notification sent`);
+    return { success: true };
+  } catch (error) {
+    console.warn(`[HITL] Slack notification failed: ${error.message}`);
+    return { success: false, error: error.message };
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // CINEMATIC ADS VIDEO GENERATION (INTERNAL FACTORY)
 // ─────────────────────────────────────────────────────────────────────────────
 async function triggerCinematicVideo(article, articleUrl) {
@@ -1096,6 +1300,121 @@ async function main() {
     return;
   }
 
+  // ─────────────────────────────────────────────────────────────────────────
+  // HITL COMMANDS (Session 157)
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // List pending drafts
+  if (args['list-drafts'] || args.listdrafts) {
+    console.log('\n=== PENDING DRAFTS ===\n');
+    const drafts = listDrafts();
+
+    if (drafts.length === 0) {
+      console.log('No pending drafts.');
+      return;
+    }
+
+    drafts.forEach((d, i) => {
+      const statusIcon = d.status === 'pending_review' ? '⏸️' : d.status === 'approved' ? '✅' : '❌';
+      console.log(`${i + 1}. ${statusIcon} [${d.id}]`);
+      console.log(`   Title: ${d.title}`);
+      console.log(`   Created: ${d.createdAt}`);
+      console.log(`   Provider: ${d.provider || 'unknown'}`);
+      console.log('');
+    });
+
+    console.log(`Total: ${drafts.length} draft(s)`);
+    console.log('\nCommands:');
+    console.log('  --view-draft=<id>   View full draft content');
+    console.log('  --approve=<id>      Approve draft for publication');
+    console.log('  --reject=<id>       Reject draft');
+    return;
+  }
+
+  // View draft
+  if (args['view-draft'] || args.viewdraft) {
+    const draftId = args['view-draft'] || args.viewdraft;
+    const draft = getDraft(draftId);
+
+    if (!draft) {
+      console.error(`[ERROR] Draft not found: ${draftId}`);
+      process.exit(1);
+    }
+
+    console.log('\n' + '═'.repeat(60));
+    console.log(`DRAFT REVIEW: ${draft.id}`);
+    console.log('═'.repeat(60));
+    console.log(`Status: ${draft.status}`);
+    console.log(`Created: ${draft.createdAt}`);
+    console.log(`Provider: ${draft.metadata?.provider || 'unknown'}`);
+    console.log(`Language: ${draft.metadata?.language || 'unknown'}`);
+    console.log('─'.repeat(60));
+    console.log(`\nTITLE:\n${draft.article.title}\n`);
+    console.log(`EXCERPT:\n${draft.article.excerpt}\n`);
+    console.log(`HASHTAGS:\n${(draft.article.hashtags || []).join(', ')}\n`);
+    console.log('─'.repeat(60));
+    console.log('CONTENT PREVIEW (first 1000 chars):\n');
+    console.log(draft.article.content?.substring(0, 1000) + '...\n');
+    console.log('═'.repeat(60));
+    console.log('\nACTIONS:');
+    console.log(`  ✅ Approve: node blog-generator-resilient.cjs --approve=${draftId} --publish`);
+    console.log(`  ❌ Reject:  node blog-generator-resilient.cjs --reject=${draftId} --reason="Not aligned with brand"`);
+    return;
+  }
+
+  // Approve draft
+  if (args.approve) {
+    const draftId = args.approve;
+    console.log(`\n[HITL] Approving draft: ${draftId}`);
+
+    const result = approveDraft(draftId);
+    if (!result.success) {
+      console.error(`[ERROR] ${result.error}`);
+      process.exit(1);
+    }
+
+    // If --publish flag, also publish to WordPress + distribute
+    if (args.publish) {
+      console.log(`[HITL] Publishing approved draft...`);
+
+      let articleUrl = null;
+      try {
+        const wpResult = await publishToWordPress(result.draft.article, result.draft.metadata?.language || 'fr');
+        console.log(`[Publish] WordPress: ${wpResult.url}`);
+        articleUrl = wpResult.url;
+      } catch (err) {
+        console.error(`[ERROR] WordPress publish failed: ${err.message}`);
+        articleUrl = 'https://3a-automation.com/blog';
+      }
+
+      // Social distribution
+      if (args.distribute) {
+        const socialResult = await distributeToSocial(result.draft.article, articleUrl);
+        console.log(`[Social] Distributed to ${socialResult.successCount} platform(s)`);
+      }
+    }
+
+    console.log(`[HITL] ✅ Draft approved and processed.`);
+    return;
+  }
+
+  // Reject draft
+  if (args.reject) {
+    const draftId = args.reject;
+    const reason = args.reason || '';
+    console.log(`\n[HITL] Rejecting draft: ${draftId}`);
+
+    const result = rejectDraft(draftId, reason);
+    if (!result.success) {
+      console.error(`[ERROR] ${result.error}`);
+      process.exit(1);
+    }
+
+    console.log(`[HITL] ❌ Draft rejected.`);
+    if (reason) console.log(`   Reason: ${reason}`);
+    return;
+  }
+
   // Health check
   if (args.health) {
     console.log('\n=== AI PROVIDERS ===');
@@ -1112,19 +1431,32 @@ async function main() {
     console.log(`LinkedIn: ${LINKEDIN.enabled ? '[OK] Configured' : '[--] Not configured (need LINKEDIN_ACCESS_TOKEN + LINKEDIN_ORGANIZATION_ID)'}`);
     console.log(`X/Twitter: ${XTWITTER.enabled ? '[OK] Configured (OAuth 1.0a)' : '[--] Not configured (need X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET)'}`);
 
+    console.log('\n=== HITL (Human In The Loop) ===');
+    console.log(`Drafts Directory: ${HITL_CONFIG.draftsDir}`);
+    console.log(`Approved Directory: ${HITL_CONFIG.approvedDir}`);
+    console.log(`Require Approval: ${HITL_CONFIG.requireApproval ? '[ON] Drafts require human review' : '[OFF] Direct publish allowed'}`);
+    console.log(`Slack Notifications: ${HITL_CONFIG.slackWebhook ? '[OK] Configured' : '[--] Not configured'}`);
+
+    // Count pending drafts
+    const drafts = listDrafts();
+    const pending = drafts.filter(d => d.status === 'pending_review').length;
+    console.log(`Pending Drafts: ${pending}`);
+
     // Summary
     const aiCount = Object.values(PROVIDERS).filter(p => p.enabled).length;
     const socialCount = (FACEBOOK.enabled ? 1 : 0) + (LINKEDIN.enabled ? 1 : 0) + (XTWITTER.enabled ? 1 : 0);
     console.log(`\n=== SUMMARY ===`);
-    console.log(`AI Providers: ${aiCount}/3 configured`);
+    console.log(`AI Providers: ${aiCount}/4 configured`);
     console.log(`Social Platforms: ${socialCount}/3 configured`);
     console.log(`WordPress: ${WORDPRESS.appPassword ? '[OK]' : '[--]'}`);
+    console.log(`HITL Mode: ${HITL_CONFIG.requireApproval ? 'ENABLED (Safe)' : 'DISABLED (Risky)'}`);
     return;
   }
 
   // Generate article
-  const topic = args.topic || 'Automation trends 2026';
+  const topic = args.topic;
   const language = args.language || 'fr';
+  const forcePublish = !!args['force-publish'] || !!args.forcepublish; // Bypass HITL (dangerous)
   const publish = !!args.publish;
   const distribute = !!args.distribute;
   const video = !!args.video || !!args.distribute; // Auto-generate video for distribution
@@ -1158,12 +1490,45 @@ async function main() {
     console.log(`Title: ${result.article.title}`);
     console.log(`Excerpt: ${result.article.excerpt}`);
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // HITL FLOW: Save as draft for human review (DEFAULT BEHAVIOR)
+    // ─────────────────────────────────────────────────────────────────────────
+    if (HITL_CONFIG.requireApproval && !forcePublish) {
+      // Save as draft
+      const draftInfo = saveDraft(result.article, {
+        provider: result.provider,
+        topic,
+        language,
+        keywords: args.keywords || '',
+        framework,
+        agentic,
+        generatedAt: new Date().toISOString(),
+      });
+
+      // Send Slack notification (non-blocking)
+      if (HITL_CONFIG.slackWebhook) {
+        const draft = getDraft(draftInfo.id);
+        await notifySlack(draft);
+      }
+
+      console.log(`\n[HITL] ⚠️  PUBLICATION BLOCKED - Human review required`);
+      console.log(`       Use --force-publish to bypass (NOT RECOMMENDED)`);
+      return;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // DIRECT PUBLISH (only if HITL disabled or --force-publish)
+    // ─────────────────────────────────────────────────────────────────────────
+    if (forcePublish) {
+      console.log(`\n[HITL] ⚠️  WARNING: Bypassing human review (--force-publish)`);
+    }
+
     let articleUrl = null;
 
     // Publish if requested
-    if (args.publish) {
+    if (publish || forcePublish) {
       try {
-        const wpResult = await publishToWordPress(result.article, args.language || 'fr');
+        const wpResult = await publishToWordPress(result.article, language);
         console.log(`\n[Publish] WordPress complete!`);
         console.log(`URL: ${wpResult.url}`);
         articleUrl = wpResult.url;
@@ -1175,7 +1540,7 @@ async function main() {
     }
 
     // Distribute to social if requested
-    if (args.distribute) {
+    if (distribute) {
       if (!articleUrl) {
         // If not published, use 3A main site as URL
         articleUrl = 'https://3a-automation.com/blog';
@@ -1197,7 +1562,11 @@ async function main() {
     }
 
     // Save to file
-    const outputPath = path.join(__dirname, '../../../outputs', `blog-${Date.now()}.json`);
+    const outputDir = path.join(__dirname, '../../../outputs');
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+    const outputPath = path.join(outputDir, `blog-${Date.now()}.json`);
     fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
     console.log(`\n[Saved] ${outputPath}`);
     return;
@@ -1205,50 +1574,75 @@ async function main() {
 
   // Help
   console.log(`
-[Blog] Resilient Blog Generator v2.1 - 3A Automation
+[Blog] Resilient Blog Generator v3.0 - 3A Automation (HITL Edition)
 
 FEATURES:
-  [+] AI Generation with multi-provider fallback
-  [+] WordPress publishing
-  [+] Facebook Page distribution
-  [+] LinkedIn distribution
-  [+] X/Twitter distribution
-  [+] CinematicAds Video Generation (Auto-trigger with --distribute)
-
+  [+] AI Generation with multi-provider fallback (Claude → OpenAI → Grok → Gemini)
+  [+] HITL (Human In The Loop) - Draft review before publication
+  [+] WordPress publishing (after approval)
+  [+] Social distribution (Facebook, LinkedIn, X/Twitter)
+  [+] CinematicAds Video Generation
+  [+] Agentic Reflection Loop (Draft → Critique → Refine)
 
 Usage:
   node blog-generator-resilient.cjs --topic="Your topic" [options]
 
-Options:
-  --topic       Article topic (required for generation)
-  --language    Language: fr or en (default: fr)
-  --keywords    SEO keywords (comma-separated)
-  --framework   Marketing Framework: "PAS" or "AIDA" (default: none)
-  --publish     Publish to WordPress after generation
+HITL WORKFLOW (RECOMMENDED):
+  1. Generate:  node blog-generator-resilient.cjs --topic="Your topic"
+     → Saves draft for human review (NO auto-publish)
 
-  --distribute  Post to Facebook + LinkedIn + X after publishing
-  --agentic     Enable AI Reflection Loop (Draft -> Critique -> Refine)
-  --server      Run as HTTP server
-  --port        Server port (default: 3003)
-  --health      Show all provider/platform status
+  2. Review:    node blog-generator-resilient.cjs --list-drafts
+                node blog-generator-resilient.cjs --view-draft=<id>
+
+  3. Approve:   node blog-generator-resilient.cjs --approve=<id> --publish --distribute
+     → Publishes approved article
+
+  4. Reject:    node blog-generator-resilient.cjs --reject=<id> --reason="Not aligned"
+
+Generation Options:
+  --topic         Article topic (required)
+  --language      Language: fr or en (default: fr)
+  --keywords      SEO keywords (comma-separated)
+  --framework     Marketing Framework: "PAS" or "AIDA" (default: PAS)
+  --agentic       Enable AI Reflection Loop (improves quality)
+
+HITL Commands:
+  --list-drafts   List all pending drafts
+  --view-draft=ID View draft content for review
+  --approve=ID    Approve draft (add --publish to also publish)
+  --reject=ID     Reject draft (add --reason="..." for audit trail)
+
+Publishing Options:
+  --publish       Publish to WordPress (requires approval first)
+  --distribute    Post to Facebook + LinkedIn + X
+  --force-publish ⚠️ BYPASS HITL (NOT RECOMMENDED - brand risk)
+
+Server Mode:
+  --server        Run as HTTP server
+  --port          Server port (default: 3003)
+  --health        Show all provider/platform/HITL status
 
 AI Fallback Chain:
-  Anthropic Claude → xAI Grok → Google Gemini
+  Anthropic Claude → OpenAI GPT-5.2 → xAI Grok 4.1 → Google Gemini 3
 
-Social Distribution (requires credentials):
-  Facebook: FACEBOOK_PAGE_ID + FACEBOOK_ACCESS_TOKEN
-  LinkedIn: LINKEDIN_ACCESS_TOKEN + LINKEDIN_ORGANIZATION_ID
-  X/Twitter: X_API_KEY + X_API_SECRET + X_ACCESS_TOKEN + X_ACCESS_TOKEN_SECRET
-             (OAuth 1.0a - get from developer.x.com)
+Environment Variables:
+  SLACK_WEBHOOK_URL     Optional: Get Slack notifications for new drafts
+  HITL_NOTIFY_EMAIL     Optional: Email notifications (future)
 
 Examples:
-  node blog-generator-resilient.cjs --health
+  # Generate draft for review (RECOMMENDED)
   node blog-generator-resilient.cjs --topic="E-commerce 2026" --language=fr
-  node blog-generator-resilient.cjs --topic="AI marketing" --publish
-  node blog-generator-resilient.cjs --topic="Automation" --publish --distribute
 
-  node blog-generator-resilient.cjs --topic="Agentic AI" --agentic
+  # Review and approve
+  node blog-generator-resilient.cjs --list-drafts
+  node blog-generator-resilient.cjs --view-draft=draft-1737xxx-abc123
+  node blog-generator-resilient.cjs --approve=draft-1737xxx-abc123 --publish --distribute
+
+  # Server mode with HITL enabled
   node blog-generator-resilient.cjs --server --port=3003
+
+  # Health check (shows HITL status)
+  node blog-generator-resilient.cjs --health
 `);
 }
 

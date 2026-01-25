@@ -21,6 +21,26 @@ require('dotenv').config();
 // CONFIGURATION
 // ─────────────────────────────────────────────────────────────────────────────
 
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HITL CONFIG - Session 157
+// High-value customers require human approval before intervention
+// ─────────────────────────────────────────────────────────────────────────────
+const HITL_CONFIG = {
+  // LTV threshold for human approval (€500 = high-value customer)
+  ltvThresholdForApproval: parseFloat(process.env.CHURN_LTV_THRESHOLD) || 500,
+  // Directory for pending interventions
+  pendingDir: path.join(__dirname, '../../../outputs/churn-interventions/pending'),
+  approvedDir: path.join(__dirname, '../../../outputs/churn-interventions/approved'),
+  // Slack notification
+  slackWebhook: process.env.SLACK_WEBHOOK_URL || null,
+  // If true, high-LTV customers ALWAYS need approval
+  requireApprovalForHighLTV: true,
+};
+
 const CONFIG = {
   // RFM Thresholds
   rfm: {
@@ -537,6 +557,184 @@ function getRuleBasedAnalysis(customerData, rfmScores, churnRisk) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// HITL: INTERVENTION MANAGEMENT (Session 157)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Ensure HITL directories exist
+ */
+function ensureHITLDirs() {
+  if (!fs.existsSync(HITL_CONFIG.pendingDir)) {
+    fs.mkdirSync(HITL_CONFIG.pendingDir, { recursive: true });
+  }
+  if (!fs.existsSync(HITL_CONFIG.approvedDir)) {
+    fs.mkdirSync(HITL_CONFIG.approvedDir, { recursive: true });
+  }
+}
+
+/**
+ * Generate unique intervention ID
+ */
+function generateInterventionId() {
+  const timestamp = Date.now();
+  const random = crypto.randomBytes(4).toString('hex');
+  return `intervention-${timestamp}-${random}`;
+}
+
+/**
+ * Save intervention for human approval (high-LTV customers)
+ */
+function saveInterventionForApproval(customer, prediction, proposedAction) {
+  ensureHITLDirs();
+
+  const interventionId = generateInterventionId();
+  const intervention = {
+    id: interventionId,
+    status: 'pending_approval',
+    createdAt: new Date().toISOString(),
+    customer: {
+      email: customer.email,
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      phone: customer.phone,
+      totalSpent: customer.totalSpent,
+      ltv: customer.totalSpent || 0,
+    },
+    prediction: {
+      riskLevel: prediction.churnRisk.riskLevel,
+      riskScore: prediction.churnRisk.riskScore,
+      rfmSegment: prediction.rfm.segment,
+      signals: prediction.churnRisk.signals,
+    },
+    proposedAction: {
+      type: proposedAction.type,
+      channel: proposedAction.channel,
+      suggestedOffer: proposedAction.suggestedOffer,
+      urgency: proposedAction.urgency,
+    },
+    aiAnalysis: prediction.aiAnalysis,
+    approveCmd: `node churn-prediction-resilient.cjs --approve-intervention=${interventionId}`,
+    rejectCmd: `node churn-prediction-resilient.cjs --reject-intervention=${interventionId}`,
+  };
+
+  const interventionPath = path.join(HITL_CONFIG.pendingDir, `${interventionId}.json`);
+  fs.writeFileSync(interventionPath, JSON.stringify(intervention, null, 2));
+
+  console.log(`\n  [HITL] ⚠️  HIGH-VALUE CUSTOMER - Human approval required`);
+  console.log(`    LTV: €${customer.totalSpent} (threshold: €${HITL_CONFIG.ltvThresholdForApproval})`);
+  console.log(`    Intervention ID: ${interventionId}`);
+  console.log(`    Proposed Action: ${proposedAction.type} via ${proposedAction.channel}`);
+  console.log(`\n    📋 NEXT STEPS:`);
+  console.log(`       Review: node churn-prediction-resilient.cjs --view-intervention=${interventionId}`);
+  console.log(`       Approve: node churn-prediction-resilient.cjs --approve-intervention=${interventionId}`);
+  console.log(`       Reject:  node churn-prediction-resilient.cjs --reject-intervention=${interventionId}`);
+
+  return { id: interventionId, path: interventionPath, status: 'pending_approval' };
+}
+
+/**
+ * List pending interventions
+ */
+function listPendingInterventions() {
+  ensureHITLDirs();
+  const interventions = [];
+  const files = fs.readdirSync(HITL_CONFIG.pendingDir);
+
+  for (const file of files) {
+    if (file.endsWith('.json')) {
+      try {
+        const data = JSON.parse(fs.readFileSync(path.join(HITL_CONFIG.pendingDir, file), 'utf8'));
+        interventions.push({
+          id: data.id,
+          customer: data.customer.email,
+          ltv: data.customer.ltv,
+          riskLevel: data.prediction.riskLevel,
+          proposedAction: data.proposedAction.type,
+          createdAt: data.createdAt,
+          status: data.status,
+        });
+      } catch (e) {
+        console.warn(`[WARN] Could not parse intervention: ${file}`);
+      }
+    }
+  }
+
+  return interventions;
+}
+
+/**
+ * Get intervention by ID
+ */
+function getIntervention(interventionId) {
+  const pendingPath = path.join(HITL_CONFIG.pendingDir, `${interventionId}.json`);
+  if (fs.existsSync(pendingPath)) {
+    return JSON.parse(fs.readFileSync(pendingPath, 'utf8'));
+  }
+  return null;
+}
+
+/**
+ * Approve intervention and execute
+ */
+async function approveIntervention(interventionId) {
+  const intervention = getIntervention(interventionId);
+  if (!intervention) {
+    return { success: false, error: `Intervention not found: ${interventionId}` };
+  }
+
+  intervention.status = 'approved';
+  intervention.approvedAt = new Date().toISOString();
+
+  // Execute the approved action
+  let actionResult = { success: false, error: 'No action taken' };
+  if (intervention.proposedAction.channel === 'phone' && intervention.customer.phone) {
+    console.log(`  [HITL] Executing approved voice call to ${intervention.customer.phone}`);
+    actionResult = await triggerVoiceAgent(intervention.customer.phone);
+  }
+
+  intervention.actionResult = actionResult;
+
+  // Move to approved folder
+  const approvedPath = path.join(HITL_CONFIG.approvedDir, `${interventionId}.json`);
+  fs.writeFileSync(approvedPath, JSON.stringify(intervention, null, 2));
+
+  // Remove from pending
+  const pendingPath = path.join(HITL_CONFIG.pendingDir, `${interventionId}.json`);
+  fs.unlinkSync(pendingPath);
+
+  console.log(`  [HITL] ✅ Intervention approved and executed: ${interventionId}`);
+  return { success: true, intervention, actionResult };
+}
+
+/**
+ * Reject intervention
+ */
+function rejectIntervention(interventionId, reason = '') {
+  const intervention = getIntervention(interventionId);
+  if (!intervention) {
+    return { success: false, error: `Intervention not found: ${interventionId}` };
+  }
+
+  intervention.status = 'rejected';
+  intervention.rejectedAt = new Date().toISOString();
+  intervention.rejectionReason = reason;
+
+  // Keep in pending folder with rejected status (audit trail)
+  const pendingPath = path.join(HITL_CONFIG.pendingDir, `${interventionId}.json`);
+  fs.writeFileSync(pendingPath, JSON.stringify(intervention, null, 2));
+
+  console.log(`  [HITL] ❌ Intervention rejected: ${interventionId}`);
+  return { success: true, intervention };
+}
+
+/**
+ * Check if customer is high-LTV (requires approval)
+ */
+function isHighLTVCustomer(customerData) {
+  const ltv = customerData.totalSpent || 0;
+  return ltv >= HITL_CONFIG.ltvThresholdForApproval;
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // AGENTIC ACTIONS
 // ─────────────────────────────────────────────────────────────────────────────
@@ -590,31 +788,54 @@ async function predictChurn(customerData) {
   }
 
   // Step 4: ACT - Agentic autonomous action (Level 4 Agent)
+  // HITL: High-LTV customers require human approval before intervention
   let actionResult = null;
+  let hitlStatus = null;
   const analysisData = aiAnalysis?.analysis;
 
-  if (analysisData && customerData.phone &&
-    (churnRisk.riskLevel === 'critical' || (churnRisk.riskLevel === 'high' && analysisData.optimalChannel === 'phone'))) {
+  const shouldAct = analysisData && customerData.phone &&
+    (churnRisk.riskLevel === 'critical' || (churnRisk.riskLevel === 'high' && analysisData.optimalChannel === 'phone'));
 
-    console.log(`  [Agentic] ⚠️ CRITICAL RISK DETECTED. Deciding to ACT.`);
-    console.log(`  [Agentic] Action: Triggering immediate voice call to ${customerData.phone}`);
+  if (shouldAct) {
+    const proposedAction = {
+      type: 'voice_call',
+      channel: 'phone',
+      suggestedOffer: analysisData.suggestedOffer,
+      urgency: analysisData.urgency,
+    };
 
-    // Only act if not in dry-run mode (can be added later, for now we log intent)
-    // To enable real calling, we would uncomment:
-    actionResult = await triggerVoiceAgent(customerData.phone);
-    console.log(`  [Agentic] Result: ${actionResult.success ? 'Call Initiated ✅' : 'Failed ❌'}`);
+    // HITL CHECK: High-LTV customers require approval
+    if (HITL_CONFIG.requireApprovalForHighLTV && isHighLTVCustomer(customerData)) {
+      console.log(`  [Agentic] ⚠️ CRITICAL RISK DETECTED - HIGH-VALUE CUSTOMER`);
+      console.log(`  [Agentic] LTV: €${customerData.totalSpent} exceeds threshold €${HITL_CONFIG.ltvThresholdForApproval}`);
+      console.log(`  [Agentic] HITL: Saving intervention for human approval...`);
+
+      hitlStatus = saveInterventionForApproval(customerData, { churnRisk, rfm: rfmScores, aiAnalysis: analysisData }, proposedAction);
+      actionResult = { status: 'pending_approval', interventionId: hitlStatus.id };
+
+    } else {
+      // Low-LTV customers: Auto-execute (acceptable risk)
+      console.log(`  [Agentic] ⚠️ CRITICAL RISK DETECTED. Deciding to ACT.`);
+      console.log(`  [Agentic] LTV: €${customerData.totalSpent || 0} (below threshold - auto-approve)`);
+      console.log(`  [Agentic] Action: Triggering immediate voice call to ${customerData.phone}`);
+
+      actionResult = await triggerVoiceAgent(customerData.phone);
+      console.log(`  [Agentic] Result: ${actionResult.success ? 'Call Initiated ✅' : 'Failed ❌'}`);
+    }
   }
 
   return {
     customer: {
       email,
       firstName: customerData.firstName,
-      lastName: customerData.lastName
+      lastName: customerData.lastName,
+      ltv: customerData.totalSpent || 0,
     },
     rfm: rfmScores,
     churnRisk,
     aiAnalysis: aiAnalysis?.analysis || null,
     agenticAction: actionResult,
+    hitlStatus: hitlStatus || null,
     provider: aiAnalysis?.provider || 'N/A',
     aiGenerated: aiAnalysis?.aiGenerated || false,
     timestamp: new Date().toISOString(),
@@ -891,16 +1112,29 @@ function parseArgs() {
 
 function printUsage() {
   console.log(`
-Churn Prediction Resilient - 3A Automation
-Session 127bis - RFM + AI Analysis
+Churn Prediction Resilient v2.0 - 3A Automation (HITL Edition)
+Session 157 - RFM + AI Analysis + Human In The Loop
+
+FEATURES:
+  [+] RFM Scoring (Recency, Frequency, Monetary)
+  [+] AI-Enhanced Analysis (Grok → OpenAI → Gemini → Claude → Rule-based)
+  [+] HITL: High-LTV customers require human approval before voice calls
+  [+] Klaviyo Profile Integration
+  [+] Agentic Voice Outreach (with approval workflow)
 
 Usage:
   node churn-prediction-resilient.cjs --health
   node churn-prediction-resilient.cjs --predict --customer='{...}'
   node churn-prediction-resilient.cjs --server [--port=3010]
 
-Options:
-  --health          Check providers status
+HITL Commands (High-Value Customer Protection):
+  --list-interventions           List pending interventions
+  --view-intervention=ID         View intervention details
+  --approve-intervention=ID      Approve and execute intervention
+  --reject-intervention=ID       Reject intervention (add --reason="...")
+
+Prediction Options:
+  --health          Check providers and HITL status
   --predict         Predict churn for single customer
   --customer=JSON   Customer data (required for --predict)
   --update-klaviyo  Update Klaviyo profile with results
@@ -910,17 +1144,36 @@ Options:
 Customer data fields:
   email                 (required)
   firstName, lastName   (optional)
+  phone                 (for voice outreach)
   daysSinceLastPurchase (default: 365)
   totalOrders           (default: 0)
-  totalSpent            (default: 0)
+  totalSpent            (default: 0) ⚠️ LTV - triggers HITL if >= €${HITL_CONFIG.ltvThresholdForApproval}
   emailOpenRate         (0-1)
   emailClickRate        (0-1)
   previousOpenRate      (0-1, for decline detection)
   supportTickets        (count)
   negativeReviews       (count)
 
-Example:
-  node churn-prediction-resilient.cjs --predict --customer='{"email":"test@example.com","daysSinceLastPurchase":120,"totalOrders":3,"totalSpent":250,"emailOpenRate":0.08}'
+HITL Workflow:
+  1. Predict: Customer with LTV >= €${HITL_CONFIG.ltvThresholdForApproval} triggers intervention review
+  2. Review:  node churn-prediction-resilient.cjs --list-interventions
+  3. Approve: node churn-prediction-resilient.cjs --approve-intervention=<id>
+  4. Reject:  node churn-prediction-resilient.cjs --reject-intervention=<id> --reason="..."
+
+Environment Variables:
+  CHURN_LTV_THRESHOLD   LTV threshold for approval (default: €500)
+  SLACK_WEBHOOK_URL     Slack notifications for pending interventions
+
+Examples:
+  # Predict for low-LTV customer (auto-action)
+  node churn-prediction-resilient.cjs --predict --customer='{"email":"test@example.com","totalSpent":100,"daysSinceLastPurchase":120}'
+
+  # Predict for high-LTV customer (requires approval)
+  node churn-prediction-resilient.cjs --predict --customer='{"email":"vip@example.com","totalSpent":800,"phone":"+33612345678","daysSinceLastPurchase":90}'
+
+  # Review and approve intervention
+  node churn-prediction-resilient.cjs --list-interventions
+  node churn-prediction-resilient.cjs --approve-intervention=intervention-xxxx
 `);
 }
 
@@ -932,9 +1185,119 @@ async function main() {
     return;
   }
 
+  // ─────────────────────────────────────────────────────────────────────────
+  // HITL COMMANDS (Session 157)
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // List pending interventions
+  if (args['list-interventions'] || args.listinterventions) {
+    console.log('\n=== PENDING INTERVENTIONS ===\n');
+    const interventions = listPendingInterventions();
+
+    if (interventions.length === 0) {
+      console.log('No pending interventions.');
+      return;
+    }
+
+    interventions.forEach((i, idx) => {
+      const statusIcon = i.status === 'pending_approval' ? '⏸️' : i.status === 'approved' ? '✅' : '❌';
+      console.log(`${idx + 1}. ${statusIcon} [${i.id}]`);
+      console.log(`   Customer: ${i.customer}`);
+      console.log(`   LTV: €${i.ltv} | Risk: ${i.riskLevel.toUpperCase()}`);
+      console.log(`   Action: ${i.proposedAction}`);
+      console.log(`   Created: ${i.createdAt}`);
+      console.log('');
+    });
+
+    console.log(`Total: ${interventions.length} pending intervention(s)`);
+    console.log('\nCommands:');
+    console.log('  --view-intervention=<id>     View full details');
+    console.log('  --approve-intervention=<id>  Approve and execute');
+    console.log('  --reject-intervention=<id>   Reject intervention');
+    return;
+  }
+
+  // View intervention
+  if (args['view-intervention'] || args.viewintervention) {
+    const interventionId = args['view-intervention'] || args.viewintervention;
+    const intervention = getIntervention(interventionId);
+
+    if (!intervention) {
+      console.error(`[ERROR] Intervention not found: ${interventionId}`);
+      process.exit(1);
+    }
+
+    console.log('\n' + '═'.repeat(60));
+    console.log(`INTERVENTION REVIEW: ${intervention.id}`);
+    console.log('═'.repeat(60));
+    console.log(`Status: ${intervention.status}`);
+    console.log(`Created: ${intervention.createdAt}`);
+    console.log('─'.repeat(60));
+    console.log('\nCUSTOMER:');
+    console.log(`  Email: ${intervention.customer.email}`);
+    console.log(`  Name: ${intervention.customer.firstName} ${intervention.customer.lastName}`);
+    console.log(`  Phone: ${intervention.customer.phone}`);
+    console.log(`  LTV: €${intervention.customer.ltv}`);
+    console.log('\nRISK ASSESSMENT:');
+    console.log(`  Level: ${intervention.prediction.riskLevel.toUpperCase()}`);
+    console.log(`  Score: ${Math.round(intervention.prediction.riskScore * 100)}%`);
+    console.log(`  Segment: ${intervention.prediction.rfmSegment}`);
+    console.log('\nPROPOSED ACTION:');
+    console.log(`  Type: ${intervention.proposedAction.type}`);
+    console.log(`  Channel: ${intervention.proposedAction.channel}`);
+    console.log(`  Urgency: ${intervention.proposedAction.urgency}`);
+    console.log(`  Suggested Offer: ${intervention.proposedAction.suggestedOffer}`);
+    if (intervention.aiAnalysis) {
+      console.log('\nAI RECOMMENDATIONS:');
+      intervention.aiAnalysis.recommendations?.forEach((r, i) => {
+        console.log(`  ${i + 1}. ${r}`);
+      });
+    }
+    console.log('\n' + '═'.repeat(60));
+    console.log('\nACTIONS:');
+    console.log(`  ✅ Approve: node churn-prediction-resilient.cjs --approve-intervention=${interventionId}`);
+    console.log(`  ❌ Reject:  node churn-prediction-resilient.cjs --reject-intervention=${interventionId} --reason="..."`);
+    return;
+  }
+
+  // Approve intervention
+  if (args['approve-intervention'] || args.approveintervention) {
+    const interventionId = args['approve-intervention'] || args.approveintervention;
+    console.log(`\n[HITL] Approving intervention: ${interventionId}`);
+
+    const result = await approveIntervention(interventionId);
+    if (!result.success) {
+      console.error(`[ERROR] ${result.error}`);
+      process.exit(1);
+    }
+
+    console.log(`[HITL] ✅ Intervention approved and executed.`);
+    if (result.actionResult) {
+      console.log(`   Action result: ${result.actionResult.success ? 'Success' : 'Failed'}`);
+    }
+    return;
+  }
+
+  // Reject intervention
+  if (args['reject-intervention'] || args.rejectintervention) {
+    const interventionId = args['reject-intervention'] || args.rejectintervention;
+    const reason = args.reason || '';
+    console.log(`\n[HITL] Rejecting intervention: ${interventionId}`);
+
+    const result = rejectIntervention(interventionId, reason);
+    if (!result.success) {
+      console.error(`[ERROR] ${result.error}`);
+      process.exit(1);
+    }
+
+    console.log(`[HITL] ❌ Intervention rejected.`);
+    if (reason) console.log(`   Reason: ${reason}`);
+    return;
+  }
+
   if (args.health) {
     console.log('\n=== CHURN PREDICTION SERVICE ===');
-    console.log('Version: 1.0.0 (Session 127bis)');
+    console.log('Version: 2.0.0 (Session 157 - HITL Edition)');
     console.log('\n=== AI PROVIDERS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
       const status = provider.enabled ? '[OK] Configured' : '[--] Not configured';
@@ -943,6 +1306,12 @@ async function main() {
     console.log('Rule-based fallback: [OK] Always available');
     console.log('\n=== INTEGRATIONS ===');
     console.log(`Klaviyo: ${KLAVIYO.enabled ? '[OK] Configured' : '[--] Not configured'}`);
+    console.log('\n=== HITL (Human In The Loop) ===');
+    console.log(`LTV Threshold for Approval: €${HITL_CONFIG.ltvThresholdForApproval}`);
+    console.log(`High-LTV Approval Required: ${HITL_CONFIG.requireApprovalForHighLTV ? '[ON] Yes' : '[OFF] No'}`);
+    console.log(`Pending Directory: ${HITL_CONFIG.pendingDir}`);
+    const pendingInterventions = listPendingInterventions();
+    console.log(`Pending Interventions: ${pendingInterventions.length}`);
     console.log('\n=== BENCHMARKS ===');
     console.log(`Churn reduction: -${CONFIG.benchmarks.churnReduction * 100}%`);
     console.log(`At-risk conversion: +${CONFIG.benchmarks.atRiskConversion * 100}%`);
