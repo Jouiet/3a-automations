@@ -1161,7 +1161,7 @@ Notre implémentation design est **EXCELLENTE (85/100)** - Session 151 100% COMP
 - ✅ **Flywheel animation**: 60s → 20s (visible maintenant)
 
 **À améliorer (P2 - Moyen terme):**
-- ⚠️ 12 PNG → WebP (performance)
+- ✅ PNG → WebP - FAIT (12 WebP créés, S151)
 - ⚠️ 401 hardcoded font-size vs 10 dynamic (responsive)
 - ⚠️ 105 generic buttons (should use btn-cyber)
 - ⚠️ 49 JSON camelCase warnings (cosmétique)
@@ -1180,7 +1180,7 @@ Notre implémentation design est **EXCELLENTE (85/100)** - Session 151 100% COMP
 
 **Session 151 COMPLÈTE - Prochaines étapes (moyen terme):**
 1. ⏳ Améliorer Validator v5.0 pour détecter duplicates CSS
-2. ⏳ Convertir images PNG → WebP
+2. ✅ Convertir images PNG → WebP - FAIT (S151, vérifié S160+)
 3. ⏳ Migrer font-size vers clamp()
 4. ⏳ Migrer boutons vers btn-cyber
 5. ⏳ Mesurer Core Web Vitals en production
