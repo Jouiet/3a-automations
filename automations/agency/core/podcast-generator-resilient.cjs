@@ -970,8 +970,61 @@ async function main() {
     const script = JSON.parse(fs.readFileSync(scriptPath, 'utf8'));
 
     console.log('\n[Audio] Generating audio from existing script...');
-    // TODO: Implement audio-only generation from script
-    console.log('[WARN] Audio-only mode not yet implemented');
+    console.log(`   Script: "${script.title || 'Untitled'}"`);
+    console.log(`   Segments: ${script.segments?.length || 0}`);
+
+    if (!script.segments || script.segments.length === 0) {
+      console.error('[ERROR] Script has no segments');
+      process.exit(1);
+    }
+
+    // Extract config from script or use defaults
+    const language = script.language || 'fr';
+    const config = {
+      host1: script.host1 || PODCAST_CONFIG.host1,
+      host2: script.host2 || PODCAST_CONFIG.host2,
+    };
+
+    // Generate audio for each segment
+    const audioBuffers = [];
+    for (let i = 0; i < script.segments.length; i++) {
+      const segment = script.segments[i];
+      console.log(`   [${i + 1}/${script.segments.length}] ${segment.speaker}: "${segment.text.substring(0, 40)}..."`);
+
+      try {
+        const audio = await synthesizeSegment(segment.text, segment.speaker, config, language);
+        audioBuffers.push(audio);
+
+        // Add small pause between segments
+        const pauseBuffer = Buffer.alloc(4410); // ~100ms at 44.1kHz
+        audioBuffers.push(pauseBuffer);
+      } catch (e) {
+        console.error(`   [ERROR] Segment ${i + 1} failed: ${e.message}`);
+        // Continue with other segments
+      }
+    }
+
+    if (audioBuffers.length === 0) {
+      console.error('[ERROR] No audio segments generated');
+      process.exit(1);
+    }
+
+    // Concatenate and save
+    console.log('\n[Finalizing] Concatenating audio segments...');
+    const finalAudio = concatenateAudioBuffers(audioBuffers);
+
+    // Determine output path
+    const outputArg = args.find(a => a.startsWith('--output='));
+    const outputPath = outputArg
+      ? outputArg.split('=').slice(1).join('=')
+      : scriptPath.replace(/\.json$/, '.mp3');
+
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.writeFileSync(outputPath, finalAudio);
+
+    console.log(`\n[OK] AUDIO GENERATED FROM SCRIPT!`);
+    console.log(`   Input: ${scriptPath}`);
+    console.log(`   Output: ${outputPath} (${(finalAudio.length / 1024 / 1024).toFixed(2)} MB)`);
     return;
   }
 
