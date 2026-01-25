@@ -5,13 +5,15 @@
 
 ## SESSION 151 - CSS CLEANUP + BRANDING FIXES (25/01/2026)
 
-### Commits Session 151 (4 total)
+### Commits Session 151 (6 total)
 
 ```
 a91d984 fix(branding): standardize blog author boxes + speed up flywheel animation
 b3b2349 chore: sync CSS version to v=71.0 across all pages
 913b3d8 fix(css): remove 74 lines dead code duplicates
 0797fc5 chore(css): bump version v=71.0 → v=72.0 across all pages
+677202f docs: update DESIGN-AUDIT with Session 151 summary
+cc5cf3c perf(images): convert Whisk PNG to WebP (-85% size reduction)
 ```
 
 ### Corrections Critiques
@@ -53,6 +55,23 @@ b3b2349 chore: sync CSS version to v=71.0 across all pages
 
 **Bug trouvé:** `--text-kinetic-glow` référencé mais jamais défini (CSS cassé)
 
+#### 4. PNG to WebP Conversion (P2 Performance)
+
+| Fichier | PNG Size | WebP Size | Savings |
+|---------|----------|-----------|---------|
+| act1_structure | 619 KB | 65 KB | -89% |
+| act2_process | 955 KB | 209 KB | -78% |
+| act3_truth | 620 KB | 50 KB | -92% |
+| act4_sovereign | 686 KB | 83 KB | -88% |
+| neural_cortex_bg | 787 KB | 140 KB | -82% |
+| pricing_concept | 595 KB | 64 KB | -89% |
+| trust_thumbnail_growth | 757 KB | 114 KB | -85% |
+| **TOTAL** | **4,901 KB** | **708 KB** | **-85%** |
+
+**Modifications HTML:**
+- `index.html`: video poster + img fallback → `.webp`
+- `en/index.html`: video poster + img fallback → `.webp`
+
 ### Métriques Session 151
 
 | Métrique | Avant | Après | Delta |
@@ -61,6 +80,7 @@ b3b2349 chore: sync CSS version to v=71.0 across all pages
 | CSS Version | v=71.0 | v=72.0 | +1 |
 | Blog author boxes | Incohérents | Standardisés | ✅ 9 fichiers |
 | Flywheel animation | 60s (invisible) | 20s (visible) | ✅ |
+| Whisk images | 4,901 KB (PNG) | 708 KB (WebP) | -85% |
 
 ---
 
