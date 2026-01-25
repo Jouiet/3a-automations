@@ -80,16 +80,27 @@ Analyse comparative des 6 documents stratégiques vs stratégies 3A existantes:
 
 | Métrique | Avant | Après |
 |----------|-------|-------|
-| CSS Version | v=72.0 | **v=73.0** |
-| Quick Guides | ❌ Texte invisible | ✅ Affiché |
-| Social Icons | ❌ Cercles gris | ✅ Icônes visibles |
+| CSS Version | v=72.0 | **v=74.0** |
+| Quick Guides | ❌ Texte invisible | ✅ 8/8 affichés |
+| Social Icons | ❌ Cercles gris | ✅ 6 icônes visibles |
 | HTML Errors (h3/h4) | 8 | 0 |
+| Files Modified | - | 106 (73 + 33) |
 
 ### Commits Session 154
 
 ```
-TBD - fix(academy): Quick Guides CSS conflict + Social Icons
+651a1c5 fix(academy): Quick Guides CSS conflict + Social Icons fix - Session 154
+396aa41 fix(css): sync all files to v=74.0
 ```
+
+### Vérification Live (25/01/2026 14:15 UTC)
+
+| Test | Résultat |
+|------|----------|
+| CSS Version servie | ✅ v=74.0 |
+| Quick Guides texte | ✅ 8/8 cards avec titres visibles |
+| Social Icons | ✅ 6 icônes (WhatsApp, FB, IG, YT, X, LinkedIn) |
+| Déploiement | ✅ SUCCESS (GitHub Actions)
 
 ---
 
