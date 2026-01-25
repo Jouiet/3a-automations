@@ -1,11 +1,62 @@
 # 3A Automation
 >
-> Version: 81.0 | 25/01/2026 | Session 156 - **ADD-ONS** + Right Tool Audit + FAQ Guarantee Fix
+> Version: 82.0 | 25/01/2026 | Session 157 - **HITL IMPLEMENTATION** (Right Tool Compliance)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 157 - HITL IMPLEMENTATION (25/01/2026)
+
+### HITL (Human In The Loop) Compliance - 3 Scripts Updated
+
+| Script | HITL Feature | Default | Status |
+| :--- | :--- | :--- | :--- |
+| **blog-generator-resilient.cjs** | Draft approval before publish | `requireApproval: true` | ✅ DONE |
+| **churn-prediction-resilient.cjs** | LTV threshold (€500) for voice calls | `requireApprovalForHighLTV: true` | ✅ DONE |
+| **email-personalization-resilient.cjs** | Preview mode for cart emails | `previewModeDefault: true` | ✅ DONE |
+
+### CLI Commands Added (Per Script)
+
+**Blog Factory:**
+```bash
+node blog-generator-resilient.cjs --list-drafts
+node blog-generator-resilient.cjs --view-draft=<id>
+node blog-generator-resilient.cjs --approve=<id>
+node blog-generator-resilient.cjs --reject=<id>
+```
+
+**Anti-Churn AI:**
+```bash
+node churn-prediction-resilient.cjs --list-interventions
+node churn-prediction-resilient.cjs --view-intervention=<id>
+node churn-prediction-resilient.cjs --approve-intervention=<id>
+node churn-prediction-resilient.cjs --reject-intervention=<id>
+```
+
+**Email Cart Series:**
+```bash
+node email-personalization-resilient.cjs --list-previews
+node email-personalization-resilient.cjs --view-preview=<id>
+node email-personalization-resilient.cjs --approve-preview=<id>
+node email-personalization-resilient.cjs --reject-preview=<id>
+```
+
+### Right Tool Score Update
+
+| Domaine | Before (S156) | After (S157) | Change |
+| :--- | :--- | :--- | :--- |
+| HITL compliance | 30% | **70%** | +40% |
+| **Total Score** | 55/100 | **65/100** | +10 |
+
+### Commits Session 157
+```
+5b680f8 feat(hitl): implement Human In The Loop for Blog Factory + Anti-Churn AI
+5c0e05c feat(hitl): implement preview mode for Email Personalization
+```
+
+---
 
 ## SESSION 156 - ADD-ONS + RIGHT TOOL AUDIT (25/01/2026)
 
@@ -13,14 +64,14 @@
 
 | # | Add-On | Setup | Monthly | Script | HITL |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Anti-Churn AI | €200 | €180 | churn-prediction-resilient.cjs | ⚠️ PARTIAL |
+| 1 | Anti-Churn AI | €200 | €180 | churn-prediction-resilient.cjs | ✅ **S157** |
 | 2 | Review Booster | €100 | €80 | review-request-automation.cjs | ❌ NONE (OK) |
 | 3 | Replenishment Reminder | €120 | €100 | replenishment-reminder.cjs | ❌ NONE (OK) |
-| 4 | Email Cart Series AI | €150 | €150 | email-personalization-resilient.cjs | ⚠️ PARTIAL |
+| 4 | Email Cart Series AI | €150 | €150 | email-personalization-resilient.cjs | ✅ **S157** |
 | 5 | SMS Automation | €150 | €120 | sms-automation-resilient.cjs | ⚠️ PARTIAL |
 | 6 | Price Drop Alerts | €100 | €80 | price-drop-alerts.cjs | ⚠️ PARTIAL |
 | 7 | WhatsApp Booking | €80 | €60 | whatsapp-booking-notifications.cjs | ✅ IMPLICIT |
-| 8 | Blog Factory AI | €200 | €200 | blog-generator-resilient.cjs | 🔴 **CRITICAL** |
+| 8 | Blog Factory AI | €200 | €200 | blog-generator-resilient.cjs | ✅ **S157** |
 | 9 | Podcast Generator | €120 | €100 | podcast-generator-resilient.cjs | ✅ YES |
 | 10 | Dropshipping Suite | €350 | €250 | cjdropshipping-automation.cjs | ✅ YES |
 
@@ -52,13 +103,13 @@
 | Dropshipping transparency | "*Your supplier API keys required" disclaimer | ✅ FIXED |
 | CSS version sync | v=77.0 → v=80.0 (all 71 files) | ✅ FIXED |
 
-### HITL Critical Actions (P0)
+### HITL Critical Actions (P0) - ✅ ALL COMPLETED S157
 
-| Add-On | Current Risk | Action Required |
-| :--- | :--- | :--- |
-| **Blog Factory AI** | 🔴 HIGH | Add `publishAfterApproval` flag |
-| Anti-Churn AI | 🟡 MEDIUM | Add LTV threshold for approval |
-| Email Cart Series | 🟡 MEDIUM | Add `previewMode` option |
+| Add-On | Risk Before | Action | Status |
+| :--- | :--- | :--- | :--- |
+| **Blog Factory AI** | 🔴 HIGH | `requireApproval` flag | ✅ DONE |
+| Anti-Churn AI | 🟡 MEDIUM | LTV €500 threshold | ✅ DONE |
+| Email Cart Series | 🟡 MEDIUM | `previewMode` option | ✅ DONE |
 
 ### Commits Session 156
 ```
