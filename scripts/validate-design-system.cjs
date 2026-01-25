@@ -3,9 +3,9 @@
  * VALIDATE DESIGN SYSTEM - Automated Branding Enforcement
  * Source of Truth: docs/DESIGN-SYSTEM.md
  *
- * @version 3.0.0
+ * @version 4.0.0
  * @date 2026-01-25
- * @session 148
+ * @session 149 (Footer Completeness)
  *
  * Usage:
  *   node scripts/validate-design-system.cjs [--fix] [--ci]
@@ -18,10 +18,15 @@
  * 5. HTML classes have CSS definitions (Session 145)
  * 6. SVG size constraints (Session 145)
  * 7. Layout structure - header/footer (Session 148)
- * 8. Content typos (Session 148)
+ * 8. Content typos + missing accents (Session 148+149)
  * 9. JSON naming conventions (Session 148)
  * 10. Deprecated header patterns (Session 148)
  * 11. Nav placement validation (Session 148)
+ * 12. Footer COMPLETENESS validation (Session 149)
+ *     - 4 status items required
+ *     - 5 columns required (Brand, Solutions, Ressources, Entreprise, Légal)
+ *     - Social links required
+ *     - RGPD/SSL badges required
  */
 
 const fs = require('fs');
@@ -731,7 +736,7 @@ function validateContentTypos() {
   const jsonFiles = findFiles(CONFIG.SITE_DIR, '.json');
   const allFiles = [...htmlFiles, ...jsonFiles];
 
-  // Known typos discovered in Session 148
+  // Known typos discovered in Session 148 + Session 149 (accent issues)
   const typoPatterns = [
     { pattern: /automatisationss/gi, fix: 'automatisations', reason: 'Double "s" typo' },
     { pattern: /automationss/gi, fix: 'automations', reason: 'Double "s" typo' },
@@ -744,6 +749,14 @@ function validateContentTypos() {
     { pattern: /recieve/gi, fix: 'receive', reason: 'Common misspelling' },
     { pattern: /occured/gi, fix: 'occurred', reason: 'Missing "r"' },
     { pattern: /seperate/gi, fix: 'separate', reason: 'Common misspelling' },
+    // Session 149: Accent-related typos (footer issues) - FR pages only
+    { pattern: /Systeme operationnel/g, fix: 'Système opérationnel', reason: 'Missing accents (é)', frOnly: true },
+    { pattern: /operationnel(?!le)/g, fix: 'opérationnel', reason: 'Missing accent (é)', frOnly: true },
+    { pattern: /Systeme(?! d)/g, fix: 'Système', reason: 'Missing accent (è)', frOnly: true },
+    { pattern: /Tous droits reserves/g, fix: 'Tous droits réservés', reason: 'Missing accent (é)', frOnly: true },
+    { pattern: /reserves\./g, fix: 'réservés.', reason: 'Missing accent (é)', frOnly: true },
+    { pattern: /Securite/g, fix: 'Sécurité', reason: 'Missing accents (é)', frOnly: true },
+    // Note: "integrations" is valid in English - only check FR pages for this
   ];
 
   let typoCount = 0;
@@ -754,7 +767,13 @@ function validateContentTypos() {
     const relFile = relPath(file);
     let modified = false;
 
+    // Detect if this is an English page
+    const isEnglishPage = relFile.startsWith('en/') || relFile.includes('/en/');
+
     for (const typo of typoPatterns) {
+      // Skip FR-only typos on English pages
+      if (typo.frOnly && isEnglishPage) continue;
+
       const matches = content.match(typo.pattern);
       if (matches) {
         if (FIX_MODE) {
@@ -974,6 +993,166 @@ function validateNavPlacement() {
 }
 
 // ════════════════════════════════════════════════════════════════════════════
+// VALIDATE FOOTER COMPLETENESS (NEW: Session 149 - Detect incomplete footers)
+// ════════════════════════════════════════════════════════════════════════════
+
+function validateFooterCompleteness() {
+  console.log('\n🦶 Validating Footer Completeness...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  // Reference: index.html footer structure (lines 1119-1273)
+  // Required footer components:
+  const FOOTER_REQUIREMENTS = {
+    // Status bar must have 4 items
+    statusItems: {
+      min: 4,
+      patterns: [
+        /Système opérationnel/,      // Item 1: System status
+        /121 automatisations/,        // Item 2: Automation count
+        /10\+ Partenaires/,           // Item 3: Partners
+        /24\/7 Toujours actif/        // Item 4: 24/7 status
+      ]
+    },
+    // Footer grid must have 5 columns
+    columns: {
+      min: 5,
+      patterns: [
+        /footer-brand/,              // Column 1: Brand + Social
+        /Solutions/,                 // Column 2: Solutions
+        /Ressources/,                // Column 3: Resources
+        /Entreprise/,                // Column 4: Company
+        /Légal|Legal/                // Column 5: Legal
+      ]
+    },
+    // Social links required
+    social: {
+      patterns: [
+        /linkedin\.com/,
+        /twitter\.com|x\.com/,
+        /instagram\.com/,
+        /tiktok\.com/
+      ]
+    },
+    // Badges required
+    badges: {
+      patterns: [
+        /RGPD|GDPR/,
+        /SSL|Sécurisé|Secured/
+      ]
+    },
+    // Powered by section
+    poweredBy: {
+      pattern: /Powered by|Propulsé par/
+    }
+  };
+
+  let incompleteCount = 0;
+  const incompleteFiles = [];
+  const issues = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+
+    // Skip files without footer
+    if (!content.includes('<footer')) continue;
+
+    // Skip dashboard (different design intentionally)
+    if (relFile.includes('dashboard.html')) continue;
+
+    // Skip EN pages (different footer text)
+    if (relFile.startsWith('en/')) continue;
+
+    // Extract footer content
+    const footerMatch = content.match(/<footer[^>]*>([\s\S]*?)<\/footer>/);
+    if (!footerMatch) continue;
+
+    const footerContent = footerMatch[1];
+    const fileIssues = [];
+
+    // Check 1: Status items count
+    const statusBarMatch = footerContent.match(/footer-status-bar([\s\S]*?)footer-grid/);
+    if (statusBarMatch) {
+      const statusContent = statusBarMatch[1];
+      const statusItemCount = (statusContent.match(/status-item/g) || []).length;
+
+      if (statusItemCount < FOOTER_REQUIREMENTS.statusItems.min) {
+        fileIssues.push(`Only ${statusItemCount}/${FOOTER_REQUIREMENTS.statusItems.min} status items (missing: check index.html reference)`);
+      }
+    }
+
+    // Check 2: Column count (by counting footer-heading or footer-column)
+    // Reference: index.html uses class="footer-heading" for column titles
+    const hasGridUltra = /footer-grid-ultra/.test(footerContent);
+
+    if (hasGridUltra) {
+      // Count footer-heading divs (each column has one: Solutions, Ressources, Entreprise, Légal)
+      const headingCount = (footerContent.match(/footer-heading/g) || []).length;
+      // Alternative: count footer-column classes
+      const columnClassCount = (footerContent.match(/footer-column/g) || []).length;
+
+      // Use the higher count
+      const columnCount = Math.max(headingCount, columnClassCount);
+
+      // We expect at least 3-4 headings (Solutions, Ressources, Entreprise, Légal)
+      // Old incomplete footer only had 2-3
+      if (headingCount < 3 && columnClassCount < 3) {
+        fileIssues.push(`Only ${columnCount} footer columns detected (expected 4: Solutions, Ressources, Entreprise, Légal)`);
+      }
+
+      // Check for missing "Entreprise" column specifically (critical - was missing before)
+      if (!/Entreprise|Company/.test(footerContent)) {
+        fileIssues.push('Missing "Entreprise" column in footer');
+      }
+    } else {
+      // No footer-grid-ultra = definitely old footer structure
+      if (/footer-grid(?!-)/.test(footerContent)) {
+        fileIssues.push('Using old footer-grid class instead of footer-grid-ultra');
+      }
+    }
+
+    // Check 3: Social links
+    const hasSocialLinks = FOOTER_REQUIREMENTS.social.patterns.some(p => p.test(footerContent));
+    if (!hasSocialLinks && footerContent.includes('footer-brand')) {
+      fileIssues.push('Missing social links in footer');
+    }
+
+    // Check 4: Badges (RGPD/SSL)
+    const hasBadges = FOOTER_REQUIREMENTS.badges.patterns.some(p => p.test(footerContent));
+    if (!hasBadges) {
+      fileIssues.push('Missing RGPD/SSL badges in footer');
+    }
+
+    // Report issues for this file
+    if (fileIssues.length > 0) {
+      incompleteCount++;
+      if (!incompleteFiles.includes(relFile)) {
+        incompleteFiles.push(relFile);
+      }
+      for (const issue of fileIssues) {
+        issues.push({ file: relFile, issue });
+      }
+    }
+  }
+
+  // Report results
+  if (incompleteCount === 0) {
+    addPassed('Footer', 'All footers have complete structure (4 status, 5 columns, social, badges)');
+  } else {
+    // Show first 5 issues
+    for (const i of issues.slice(0, 5)) {
+      addError('Footer', i.file, i.issue, 'Copy footer from index.html (lines 1119-1273)');
+    }
+
+    if (issues.length > 5) {
+      addWarning('Footer', 'summary',
+        `${issues.length - 5} more footer issues in ${incompleteFiles.length} files`);
+    }
+  }
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // VALIDATE LAYOUT STRUCTURE (NEW: Session 148 - Detect header/footer issues)
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -1093,7 +1272,8 @@ validateCategoryIconConsistency();
 validateHTMLClassesHaveCSS();        // Session 145 - Detect HTML classes without CSS
 validateSVGSizeConstraints();        // Session 145 - Detect unconstrained SVGs
 validateLayoutStructure();           // Session 148 - Detect non-standard headers/footers
-validateContentTypos();              // Session 148 - Detect common typos (automatisationss)
+validateFooterCompleteness();        // Session 149 - Detect incomplete footers (columns, badges, social)
+validateContentTypos();              // Session 148+149 - Detect typos including missing accents
 validateJSONNamingConventions();     // Session 148 - Detect ambiguous JSON field names
 validateDeprecatedHeaderPatterns();  // Session 148 - Detect deprecated patterns (hamburger alone)
 validateNavPlacement();              // Session 148 - Ensure nav is inside header
