@@ -808,10 +808,6 @@ h1 .highlight {
   color: rgba(79, 186, 241, 0.3);
 }
 
-.hero-title {
-  margin-bottom: var(--spacing-xl);
-}
-
 .title-line {
   display: block;
   font-size: 3.5rem;

@@ -1446,40 +1446,46 @@ function validateCSSDuplicates() {
   const cssContent = fs.readFileSync(stylesPath, 'utf8');
   const lines = cssContent.split('\n');
 
-  // Track selectors and their line numbers
+  // Track ROOT-LEVEL selectors only (not inside media queries)
+  // Selectors inside media queries are intentional responsive overrides
   const selectorLines = new Map(); // selector -> [line numbers]
 
-  // Simple selector pattern (class at start of line)
-  const selectorPattern = /^(\.[a-zA-Z][a-zA-Z0-9_-]*(?:\s*,\s*\.[a-zA-Z][a-zA-Z0-9_-]*)*)\s*\{/;
+  // Simple selector pattern - only match selectors NOT indented (root level)
+  // Indented selectors are inside media queries
+  const rootSelectorPattern = /^(\.[a-zA-Z][a-zA-Z0-9_-]*(?:\s*,\s*\.[a-zA-Z][a-zA-Z0-9_-]*)*)\s*\{/;
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    const match = line.match(selectorPattern);
+    const line = lines[i];
 
-    if (match) {
-      const selector = match[1].trim();
-      if (!selectorLines.has(selector)) {
-        selectorLines.set(selector, []);
+    // Only match selectors that start at column 0 (not indented)
+    // This excludes selectors inside media queries which are always indented
+    if (line.charAt(0) === '.') {
+      const match = line.match(rootSelectorPattern);
+      if (match) {
+        const selector = match[1].trim();
+        if (!selectorLines.has(selector)) {
+          selectorLines.set(selector, []);
+        }
+        selectorLines.get(selector).push(i + 1);
       }
-      selectorLines.get(selector).push(i + 1);
     }
   }
 
-  // Find selectors defined 3+ times (2 is sometimes intentional for media queries)
+  // Find selectors defined 2+ times at ROOT level (these are actual duplicates)
   let duplicateCount = 0;
   for (const [selector, lineNums] of selectorLines) {
-    if (lineNums.length >= 3) {
+    if (lineNums.length >= 2) {
       duplicateCount++;
       addWarning('CSS-Duplicate', 'styles.css',
-        `Selector "${selector}" defined ${lineNums.length} times at lines: ${lineNums.slice(0, 5).join(', ')}${lineNums.length > 5 ? '...' : ''}`);
+        `Selector "${selector}" defined ${lineNums.length} times at ROOT level: lines ${lineNums.slice(0, 5).join(', ')}${lineNums.length > 5 ? '...' : ''}`);
     }
   }
 
   if (duplicateCount === 0) {
-    addPassed('CSS-Duplicate', 'No excessive CSS selector duplicates detected');
+    addPassed('CSS-Duplicate', 'No root-level CSS selector duplicates detected');
   } else {
     addWarning('CSS-Duplicate', 'summary',
-      `${duplicateCount} selectors defined 3+ times - consider consolidating`);
+      `${duplicateCount} root-level selectors defined 2+ times - consider consolidating`);
   }
 }
 
