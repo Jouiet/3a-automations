@@ -189,9 +189,9 @@ Ces outils sont disponibles via les packages npm communautaires:
 
 | Outil | Package | Description | Vérifié |
 |-------|---------|-------------|---------|
-| `extract_design_context` | stitch-mcp (Kargatharaakash) | Extrait "Design DNA" (couleurs Tailwind, fonts, structure) | ✅ Documenté |
-| `fetch_screen_code` | stitch-mcp (Kargatharaakash) | Télécharge HTML/React code | ✅ Documenté |
-| `fetch_screen_image` | stitch-mcp (Kargatharaakash) | Télécharge screenshot haute-résolution | ✅ Documenté |
+| `extract_design_context` | stitch-mcp (Kargatharaakash) | Extrait "Design DNA" (couleurs Tailwind, fonts, structure) | ✅ Documenté (non testé) |
+| `fetch_screen_code` | stitch-mcp (Kargatharaakash) | Télécharge HTML/React code | ✅ Documenté (non testé) |
+| `fetch_screen_image` | stitch-mcp (Kargatharaakash) | Télécharge screenshot haute-résolution | ✅ Documenté (non testé) |
 
 ### 4.4 extract_design_context - Détail Fonctionnel
 
@@ -643,26 +643,45 @@ Use the design context from our existing dashboard"
 | **Pas de version control** | Pas d'historique natif | Sauvegarder localement |
 | **Design tokens custom** | Doit extraire via extract_design_context | Workflow en 2 étapes |
 
-### 10.3 "Agent Skills" - ATTENTION
+### 10.3 Agent Skills - VÉRIFICATION FACTUELLE
 
 Les documents fournis par l'utilisateur mentionnent des "Agent Skills" (Design MD, React Components) installables via `add skill`.
 
-**VERDICT FACTUEL après recherche exhaustive:**
+**VERDICT FACTUEL (Vérifié 25/01/2026 via WebSearch + WebFetch):**
 
-| Claim | Recherche | Résultat |
-|-------|-----------|----------|
-| `add skill design-md` | GitHub, NPM, Web | ❌ **NON TROUVÉ** |
-| `add skill react-components` | GitHub, NPM, Web | ❌ **NON TROUVÉ** |
-| Agent Skills open-source | GitHub | ❌ **NON TROUVÉ** |
+| Skill | Repository | Status | Description |
+|-------|------------|--------|-------------|
+| `design-md` | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) | ✅ **EXISTE** | Analyzes Stitch projects and generates DESIGN.md files |
+| `react-components` | [google-labs-code/stitch-skills](https://github.com/google-labs-code/stitch-skills) | ✅ **EXISTE** | Converts Stitch screens to React component systems |
 
-**Conclusion:** Ces "Agent Skills" semblent être:
-1. Du contenu marketing/conceptuel
-2. Des features internes non publiées
-3. Des features futures non encore disponibles
+**Statistiques Repository (25/01/2026):**
 
-**Ce qui EXISTE réellement:**
-- ✅ `extract_design_context` (via stitch-mcp npm)
-- ✅ `generate_screen_from_text` (via API native)
+| Métrique | Valeur |
+|----------|--------|
+| Stars | 774 |
+| Contributors | 3 (David East, Dion Almaer, Jed Borovik) |
+| License | Apache-2.0 |
+| Releases officielles | ❌ Aucune (main branch uniquement) |
+| Status Google | **NON officiel** - Projet expérimental |
+
+**Commandes d'installation:**
+
+```bash
+# Lister les skills disponibles
+npx add-skill google-labs-code/stitch-skills --list
+
+# Installer design-md
+npx add-skill google-labs-code/stitch-skills --skill design-md --global
+
+# Installer react-components
+npx add-skill google-labs-code/stitch-skills --skill react:components --global
+```
+
+**Ce qui EXISTE (résumé complet):**
+- ✅ `design-md` (via google-labs-code/stitch-skills)
+- ✅ `react-components` (via google-labs-code/stitch-skills)
+- ✅ `extract_design_context` (via stitch-mcp npm - Kargatharaakash)
+- ✅ `generate_screen_from_text` (via API native Google)
 - ✅ Gemini CLI Extension pour Stitch
 
 ### 10.4 Contraintes de Sécurité
@@ -762,15 +781,16 @@ npx @_davideast/stitch-mcp init --client claude-code -y
 |--------|-----|---------|
 | Google Stitch Docs | https://stitch.withgoogle.com/docs/mcp/setup | ✅ |
 | Gemini CLI Extension | https://github.com/gemini-cli-extensions/stitch | ✅ |
-| Google ADK MCP Docs | https://google.github.io/adk-docs/mcp/ | ⚠️ ECONNREFUSED |
+| Google ADK MCP Docs | https://google.github.io/adk-docs/mcp/ | ⚠️ Timeout (25/01/2026) |
 
-### 13.2 Packages NPM
+### 13.2 Packages NPM et Agent Skills
 
-| Package | URL | Auteur | Vérifié |
-|---------|-----|--------|---------|
+| Package/Skill | URL | Auteur | Vérifié |
+|---------------|-----|--------|---------|
 | @_davideast/stitch-mcp | https://github.com/davideast/stitch-mcp | David East | ✅ |
 | stitch-mcp | https://github.com/Kargatharaakash/stitch-mcp | Kargatharaakash | ✅ |
 | stitch-mcp-auto | https://github.com/GreenSheep01201/stitch-mcp-auto | GreenSheep01201 | ✅ |
+| **stitch-skills** (Agent Skills) | https://github.com/google-labs-code/stitch-skills | David East, Dion Almaer, Jed Borovik | ✅ (774 stars) |
 
 ### 13.3 Articles et Guides
 
@@ -849,3 +869,4 @@ npx @_davideast/stitch-mcp init --client claude-code -y
 *Document généré le 25/01/2026 | Session 160 | Méthode: Bottom-up factuelle*
 *Sources: Web Research, GitHub, Tests empiriques*
 *Dernière vérification: 25/01/2026 - Stitch MCP NON FONCTIONNEL (auth manquante)*
+*Audit qualité: 25/01/2026 - Gemini 3 ✅, Galileo AI acquisition ✅, Agent Skills ✅ (google-labs-code/stitch-skills)*

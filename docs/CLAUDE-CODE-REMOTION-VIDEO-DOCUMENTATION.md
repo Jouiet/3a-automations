@@ -49,7 +49,7 @@ L'intégration permet à Claude Code de fonctionner comme un **"Motion Designer"
 | Custom Skill | ✅ Présent | `.claude/skills/remotion-video/SKILL.md` |
 | Official Skill | ❌ Non installé | `remotion-best-practices` absent |
 | node_modules | ✅ Installé | Dependencies présentes |
-| npm run dev | ⚠️ Non testé | Requires manual verification |
+| npm run dev | ⚠️ Non testé empiriquement | Requires manual verification |
 
 **VERDICT:** Implémentation fonctionnelle mais **skill officiel non installé**.
 
@@ -144,7 +144,7 @@ Languages (Repository):
 | 21 Janvier 2026 | Vercel lance skills.sh | [Medium](https://jpcaparas.medium.com/vercel-just-launched-skills-sh-and-it-already-has-20k-installs-c07e6da7e29e) |
 | 21 Janvier 2026 | Remotion annonce Agent Skills | [Remotion Docs](https://www.remotion.dev/docs/ai/skills) |
 | 21 Janvier 2026 (6h après) | 20,900 installs sur vercel-react-best-practices | Medium |
-| Janvier 2026 | Vidéo annonce Remotion: 147,000 views | [aibase.com](https://news.aibase.com/news/24827) |
+| Janvier 2026 | Vidéo annonce Remotion: 147,000 views (source: aibase.com, non vérifié sur YouTube) | [aibase.com](https://news.aibase.com/news/24827) |
 
 **Citation Guillermo Rauch (CEO Vercel):**
 > "One command, and your AI agent knows 10+ years of React and Next.js optimisation patterns."
@@ -180,10 +180,10 @@ Un Agent Skill est un **"instruction manual"** qui enseigne aux agents IA (Claud
 
 | Métrique | Valeur |
 |----------|--------|
-| **Weekly Installs** | 30,200+ |
+| **Weekly Installs** | 30,200+ (au 25/01/2026) |
 | **Total Rules** | 31 fichiers |
 | **Categories** | 8+ |
-| **Top Users** | claude-code (25.9K), cursor (20.6K), gemini-cli (19.6K) |
+| **Top Users** | claude-code (25.9K), cursor (20.6K), gemini-cli (19.6K) (au 25/01/2026) |
 
 **Catégories de Rules:**
 
@@ -214,7 +214,7 @@ npx add-skill remotion-dev/skills --list
 npx skills add remotion-dev/skills
 ```
 
-### 3.5 Agents Supportés (25+)
+### 3.5 Agents Supportés (Exemples)
 
 | Agent | CLI Flag | Project Path |
 |-------|----------|--------------|
@@ -441,10 +441,12 @@ automations/remotion-studio/
 | `CallToAction` | text, buttonText, url, primaryColor | Fade in |
 | `GradientBackground` | primaryColor, secondaryColor | Animated gradient |
 
-### 6.4 Exemple Code PromoVideo.tsx
+### 6.4 Exemple Code PromoVideo.tsx (Illustratif)
+
+> **Note:** Le code ci-dessous est un exemple illustratif simplifié. Le code réel dans le projet peut différer.
 
 ```typescript
-// src/compositions/PromoVideo.tsx (extrait)
+// src/compositions/PromoVideo.tsx (exemple illustratif, pas le code exact)
 import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig } from 'remotion';
 import { TitleSlide } from '../components/TitleSlide';
 import { FeatureCard } from '../components/FeatureCard';
@@ -987,3 +989,4 @@ npm run render:promo
 *Document généré le 25/01/2026 | Session 160 | Méthode: Bottom-up factuelle*
 *Sources: Web Research, GitHub, Tests empiriques*
 *Status: Implémentation FONCTIONNELLE, skill officiel NON INSTALLÉ*
+*Audit qualité: 25/01/2026 - Statistiques datées, code illustratif clarifié*
