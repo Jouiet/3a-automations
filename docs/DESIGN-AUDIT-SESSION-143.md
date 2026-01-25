@@ -173,15 +173,26 @@ Le validateur doit être amélioré pour détecter:
 
 ### Status Corrections Session 150
 
-| Correction | Status |
-|------------|--------|
-| Audit document màj | ✅ DONE |
-| Fix 6 cours H1 class | ✅ DONE |
-| Fix 9 pages font preload | ✅ DONE |
-| Fix 3 parcours main-content | ✅ DONE |
-| Fix cas-clients.html process-card CSS | ✅ DONE |
-| Fix 6 cours CTA | ⏳ PENDING |
-| Validator v5.0 | ⏳ PENDING |
+| Correction | Status | Commit |
+|------------|--------|--------|
+| Audit document màj | ✅ DONE | - |
+| Fix 6 cours H1 class | ✅ DONE | 8cb91eb |
+| Fix 9 pages font preload | ✅ DONE | 8cb91eb |
+| Fix 3 parcours main-content | ✅ DONE | 8cb91eb |
+| Fix cas-clients.html process-card CSS | ✅ DONE | 8cb91eb |
+| Remove 4x .lang-switch dead code | ✅ DONE | 9ccc75b |
+| Add 7 missing CSS classes (nav-btn, step-box, tip-box...) | ✅ DONE | ca85fda |
+| CSS duplicate audit complet | ✅ DONE | 9ccc75b |
+| Fix 6 cours CTA | ⏳ OPTIONNEL | - |
+| Validator v5.0 (detect duplicates) | ⏳ FUTURE | - |
+
+### Commits Session 150 (5 total)
+
+```
+632936c → 8cb91eb fix(design): Multiple critical fixes (H1, font preload, main-content, process-card)
+8cb91eb → 9ccc75b fix(css): Remove 69 lines dead code (.lang-switch 4x) + CSS duplicate audit
+9ccc75b → ca85fda fix(css): Add 7 missing CSS classes for cours pages
+```
 
 ### Problème cas-clients.html (Screenshot 02.41.28)
 
@@ -194,6 +205,27 @@ Le validateur doit être amélioré pour détecter:
 **Fix appliqué:**
 1. Ajout `display: block;` à ligne 12008 pour override explicite
 2. Suppression du bloc dupliqué lignes 11046-11083
+
+### 7 Classes Ajoutées (ca85fda)
+
+| Classe | Usage | Fichiers |
+|--------|-------|----------|
+| `.nav-buttons` | Container navigation cours | academie/cours/*.html |
+| `.nav-btn` | Bouton navigation cours | academie/cours/*.html |
+| `.nav-btn-prev` | Bouton cours précédent | academie/cours/*.html |
+| `.nav-btn-next` | Bouton cours suivant | academie/cours/*.html |
+| `.step-box` | Boîte étape (cyan) | academie/cours/*.html |
+| `.tip-box` | Boîte conseil (ambre) | academie/cours/*.html |
+| `.badge-clients` | Badge client | academie/cours/*.html |
+
+### Note: Faux Positif Validator
+
+Le validator signale 21 classes sans CSS, mais plusieurs sont dans `css/critical.css`:
+- `.agentic-status-banner` ✅ critical.css:96
+- `.status-content` ✅ critical.css:112
+- `.status-left`, `.status-right` ✅ critical.css
+
+Le validator ne vérifie que `styles.css`. Amélioration future: vérifier tous les fichiers CSS.
 
 ---
 
