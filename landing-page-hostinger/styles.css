@@ -9323,25 +9323,27 @@ html[data-currency="MAD"] .price-usd {
   display: none !important;
 }
 
-html[data-currency="MAD"] .price-mad {
+/* Show currency-specific prices ONLY for Setup Packs (no period class) */
+/* Retainer prices are controlled by the period toggle system (lines 6582-6648) */
+html[data-currency="MAD"] .price-mad:not(.period-monthly):not(.period-annual) {
   display: inline-block !important;
 }
 
-html[data-currency="EUR"] .price-mad,
-html[data-currency="EUR"] .price-usd {
+html[data-currency="EUR"] .price-mad:not(.period-monthly):not(.period-annual),
+html[data-currency="EUR"] .price-usd:not(.period-monthly):not(.period-annual) {
   display: none !important;
 }
 
-html[data-currency="EUR"] .price-eur {
+html[data-currency="EUR"] .price-eur:not(.period-monthly):not(.period-annual) {
   display: inline-block !important;
 }
 
-html[data-currency="USD"] .price-mad,
-html[data-currency="USD"] .price-eur {
+html[data-currency="USD"] .price-mad:not(.period-monthly):not(.period-annual),
+html[data-currency="USD"] .price-eur:not(.period-monthly):not(.period-annual) {
   display: none !important;
 }
 
-html[data-currency="USD"] .price-usd {
+html[data-currency="USD"] .price-usd:not(.period-monthly):not(.period-annual) {
   display: inline-block !important;
 }
 

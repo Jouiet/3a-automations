@@ -3181,15 +3181,21 @@ The "Truth Protocol" is active. We strictly distinguish between INTERNAL and EXT
 
 Toutes les tâches P0 et P1 sont complétées.
 
-### P2 - MOYENNE PRIORITÉ - Session 155 Progress
+### P2 - MOYENNE PRIORITÉ - Session 155-156 Progress
 
 | # | Tâche | Status | Détails |
 |---|-------|--------|---------|
 | 1 | JSON camelCase → snake_case | ⏳ SKIP | Intentionnel (JSON-LD schema.org) |
-| 2 | 107 boutons → btn-cyber | ⏳ PENDING | 4h effort |
+| 2 | 57 boutons .btn → btn-cyber | ⏳ OPTIONAL | Vérifié: design OK, utilise --gradient-cyber |
 | 3 | ~~Font preload~~ | ✅ DONE | 2 fichiers academy corrigés |
 | 4 | ~~CSS duplicates detection~~ | ✅ IMPROVED | 51 → 30 (media queries exclus) |
 | 5 | CSS duplicates consolidation | ⏳ PARTIAL | 1 removed, 30 design variations |
+
+**Analyse boutons Session 156:**
+- `.btn .btn-primary/secondary` (57 usages) utilise déjà `var(--gradient-cyber)`
+- Visuellement correct (vérifié sur 3a-automation.com/pricing.html)
+- Différence avec `.btn-cyber`: effets hover avancés (glow animé)
+- **Verdict:** Amélioration esthétique optionnelle, pas un bug
 
 ### P3 - BASSE PRIORITÉ (Backlog)
 
@@ -3217,9 +3223,10 @@ Toutes les tâches P0 et P1 sont complétées.
 | CSS duplicates | 30 | Design variations intentionnelles |
 | MainContent ID | 1 | Dashboard only (intentionnel) |
 | Font preload | 1 | Redirect file only |
+| Boutons .btn | 57 | Design correct, CSS vars cohérentes |
 
 ---
 
-**Document màj:** 25/01/2026 - Session 155
-**Status:** P0 100%, P1 100%, P2 40% (font preload done, validator improved)
-**Prochaine session:** Button migration (107 → btn-cyber)
+**Document màj:** 25/01/2026 - Session 156
+**Status:** P0 100%, P1 100%, P2 60% (button analysis done - optionnel)
+**Prochaine session:** P3 - font-size variables ou autre
