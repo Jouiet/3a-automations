@@ -316,13 +316,63 @@ Dependencies:
 
 ---
 
+## RIGHT TOOL FOR RIGHT PURPOSE - AUDIT (Session 156bis)
+
+### Score Global: 55/100 - INSUFFISANT
+
+| Domaine | Score | Issue |
+|---------|-------|-------|
+| Scripts testables | 29% (24/83) | 71% sans health check |
+| Sensors fonctionnels | 30% (6/20) | 70% PARTIAL/BLOCKED |
+| Add-ons vendables | 80% | Dropshipping = NO_CREDS |
+| HITL compliance | 30% | Blog Factory publie sans review |
+| Transparence pricing | 75% | Disclaimer API keys ajouté |
+
+### Corrections Appliquées (Session 156bis)
+
+1. **FAQ Guarantee (EN)**: Supprimé "infinite loop"
+   - AVANT: "free corrections until approval"
+   - APRÈS: "2 revision rounds included. Beyond: €50/h"
+
+2. **Dropshipping Suite**: Ajouté disclaimer
+   - "*Vos clés API fournisseurs requises" (FR)
+   - "*Your supplier API keys required" (EN)
+
+### Dépendances par Add-On
+
+| Add-On | Dépendances | Status Réel |
+|--------|-------------|-------------|
+| Anti-Churn AI | Klaviyo, Shopify | ⚠️ Klaviyo PARTIAL |
+| Review Booster | Klaviyo, Shopify | ⚠️ Klaviyo PARTIAL |
+| Replenishment | Klaviyo, Shopify | ⚠️ Klaviyo PARTIAL |
+| Email Cart AI | Klaviyo, AI | ⚠️ Klaviyo PARTIAL |
+| SMS Automation | Omnisend/Twilio | ❓ Non testé |
+| Price Drop | Klaviyo, Shopify | ⚠️ Klaviyo PARTIAL |
+| WhatsApp Booking | WhatsApp API | ⚠️ PARTIAL |
+| Blog Factory AI | AI, Socials | ✅ AI OK, Socials ❓ |
+| Podcast Generator | AI, TTS | ✅ AI OK, TTS ❓ |
+| Dropshipping Suite | CJ, BigBuy | ❌ NO_CREDENTIALS |
+
+### Prérequis Client (À Documenter)
+
+Chaque add-on nécessite que le CLIENT fournisse:
+- **Klaviyo**: Private API Key
+- **Shopify**: Admin Access Token
+- **CJDropshipping**: API Key + Secret
+- **BigBuy**: API Key
+- **WhatsApp**: Business API Token
+- **Omnisend/Twilio**: API Credentials
+
+---
+
 ## SOURCES
 
 - Scripts analyzed: `automations/agency/core/*.cjs`
 - ROI data: `landing-page-hostinger/data/automations-catalog.json`
 - Health check verification: `grep -l "\-\-health"` (24 scripts)
 - Session: 156 (25/01/2026)
+- Right Tool Audit: Session 156bis (25/01/2026)
 
 ---
 
-*Document created: 25/01/2026 | Last updated: 25/01/2026*
+*Document created: 25/01/2026 | Last updated: 25/01/2026 (Session 156bis)*
