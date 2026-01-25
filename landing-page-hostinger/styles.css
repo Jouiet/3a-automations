@@ -808,14 +808,7 @@ h1 .highlight {
   color: rgba(79, 186, 241, 0.3);
 }
 
-.title-line {
-  display: block;
-  font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  color: var(--text-light);
-}
+/* .title-line moved to line ~4770 (Enhanced with animation) */
 
 .hero-description {
   font-size: 1.25rem;
@@ -9600,24 +9593,7 @@ html[data-currency="USD"] .price-usd:not(.period-monthly):not(.period-annual) {
   animation-delay: -5s;
 }
 
-.stream-1 {
-  left: 5%;
-}
-
-.stream-2 {
-  left: 15%;
-  animation-delay: -1s;
-}
-
-.stream-3 {
-  left: 85%;
-  animation-delay: -2s;
-}
-
-.stream-4 {
-  left: 95%;
-  animation-delay: -0.5s;
-}
+/* .stream-1 to .stream-4 defined at ~line 9110 - duplicates removed */
 
 .bg-shape-3 {
   width: 400px;
