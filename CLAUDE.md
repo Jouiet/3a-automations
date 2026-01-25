@@ -1,13 +1,13 @@
 # 3A Automation
 >
-> Version: 78.0 | 25/01/2026 | Session 154bis - **VALIDATOR v5.2.0** + Critical CSS Fix
+> Version: 79.0 | 25/01/2026 | Session 154bis - **VALIDATOR v5.3.0** + Accessibility + Critical CSS Fix
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## SESSION 154bis - CRITICAL CSS FIX + VALIDATOR v5.2.0 (25/01/2026)
+## SESSION 154bis - CRITICAL CSS FIX + VALIDATOR v5.3.0 + ACCESSIBILITY (25/01/2026)
 
 ### BUG CRITIQUE CORRIGÉ
 
@@ -17,12 +17,23 @@
 
 **Impact**: La page entière était en HTML brut (fond blanc, texte non-formaté, aucun style).
 
-### Validator v5.0.0 → v5.2.0 (+2 fonctions)
+### Accessibility Fix: id="main-content"
 
-| Nouvelle Fonction | Détecte | Aurait Capturé |
+| Métrique | Avant | Après |
 | :--- | :--- | :--- |
-| `validateCSSLinkTags()` | Balises CSS cassées `<href="...">` | case-studies.html |
-| `validateButtonClassesExist()` | btn-* classes sans CSS | btn-primary-ultra |
+| Files with `id="main-content"` | 39 | **62** |
+| MainContent warnings | 24 | **1** (dashboard only) |
+| Skip-link navigation | Partial | **Complete** |
+
+**23 fichiers corrigés** pour accessibilité skip-link.
+
+### Validator v5.0.0 → v5.3.0 (+3 fonctions)
+
+| Fonction | Détecte | Session |
+| :--- | :--- | :--- |
+| `validateCSSLinkTags()` | Balises CSS cassées `<href="...">` | 154bis |
+| `validateButtonClassesExist()` | btn-* classes sans CSS | 154bis |
+| CTA validation (updated) | Logic améliorée pour patterns CTA | 154bis |
 
 ### 7 Classes Boutons Ajoutées
 
@@ -47,7 +58,8 @@
 | Métrique | Session 154 | Session 154bis |
 | :--- | :--- | :--- |
 | Erreurs | 8 | **0** |
-| Checks passés | 17 | **19** |
+| Checks passés | 17 | **20** |
+| Warnings | 108 | **104** |
 | Fonctions totales | 24 | **26** |
 | CSS Version | v=74.0 | **v=75.0** |
 
@@ -55,6 +67,8 @@
 ```
 4e08ded fix(critical): case-studies broken CSS link + validator v5.2.0
 863134e fix(css): add 7 missing button classes + resolve annual-savings conflict
+2751bdf docs: Session 154bis - Validator v5.2.0 + Documentation Updates
+455b412 fix(accessibility): add id='main-content' to 23 files + validator v5.3.0
 ```
 
 ---
