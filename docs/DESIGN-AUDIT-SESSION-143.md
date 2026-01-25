@@ -3,6 +3,96 @@
 
 ---
 
+## SESSION 150bis - AUDIT CSS DUPLICATAS (25/01/2026 02:50 UTC)
+
+### Constat CRITIQUE
+
+**628 lignes CSS impliquées dans des définitions dupliquées.**
+
+Analyse exhaustive de `styles.css` (12,128 lignes):
+- **42 sélecteurs** définis 2+ fois au niveau base
+- **4 copies identiques** de `.lang-switch` (code mort)
+- **Conflits de valeurs** sur plusieurs sélecteurs
+
+### Catégorie 1: COPIES IDENTIQUES (Code Mort - À SUPPRIMER)
+
+| Sélecteur | Lignes | Type | Action |
+|-----------|--------|------|--------|
+| `.lang-switch` | 8619, 8642, 8665, 8688 | **4x identique** | Garder 8619, supprimer 3 |
+
+### Catégorie 2: CONFLITS DE VALEURS (Risque Visuel)
+
+| Sélecteur | Ligne A | Ligne B | Différences | Gagnant |
+|-----------|---------|---------|-------------|---------|
+| `.breadcrumb` | 4899 | 10795 | font-size: 0.875rem vs 0.9rem, color différent | 10795 |
+| `.security-card` | 11068 | 12066 | padding, radius, backdrop-filter, hover color | 12066 |
+| `.gradient-text` | 513, 831 | 4737 | Version simple vs enhanced | 4737 |
+| `.hero-title` | 479 | 817 | Potentiel conflit | 817 |
+
+### Catégorie 3: DUPLICATAS POTENTIELS (À Vérifier)
+
+| Sélecteur | Lignes | Occurrences |
+|-----------|--------|-------------|
+| `.cta-section` | 7171, 10755 | 2 |
+| `.feature-card` | 5033, 11647 | 2 |
+| `.faq-item` | 5752, 7127 | 2 |
+| `.case-card` | 10981, 11804 | 2 |
+| `.process-grid` | 7036, 11956 | 2 |
+| `.cta` | 5185, 8170 | 2 |
+| `.cta-content` | 5190, 8174 | 2 |
+| `.audit-includes` | 5588, 6454 | 2 |
+| `.audit-process` | 5684, 6422 | 2 |
+| `.annual-savings` | 6677, 6885 | 2 |
+| `.features-grid` | 5021, 11641 | 2 |
+| `.feature-list` | 5059, 11673 | 2 |
+| `.guide-icon` | 10855, 11439 | 2 |
+| `.guide-content` | 10872, 11482 | 2 |
+| `.guide-title` | 10876, 11460 | 2 |
+| `.guide-time` | 10883, 11467 | 2 |
+| `.service-block` | 4964, 11595 | 2 |
+| `.service-block-header` | 4976, 11603 | 2 |
+| `.service-icon-large` | 4983, 11610 | 2 |
+| `.squad-card` | 1764, 1952 | 2 |
+| `.step-icon` | 5734, 8465 | 2 |
+| `.step-num` | 2380, 6436 | 2 |
+| `.section-badge` | 7513, 8533 | 2 |
+| `.price-amount` | 2030, 6561 | 2 |
+| `.result-label` | 8930, 11942 | 2 |
+| `.process-step` | 5697, 7044 | 2 |
+| `.particle-*` | 1128-1140, 9522-9533 | 2 |
+
+### Impact Potentiel
+
+1. **Performance**: ~500 lignes CSS inutiles (~4% du fichier)
+2. **Maintenance**: Modifications doivent être faites à 2+ endroits
+3. **Prévisibilité**: Cascade CSS fragile, résultat dépend de l'ordre
+4. **Debug**: Difficile de savoir quel style s'applique réellement
+
+### Recommandations
+
+| Priorité | Action | Effort |
+|----------|--------|--------|
+| P0 | Supprimer 3 copies `.lang-switch` | 5 min |
+| P1 | Consolider duplicatas conflictuels | 2h |
+| P2 | Auditer et fusionner tous les duplicatas | 4h |
+| P3 | Ajouter check duplicatas au validator | 2h |
+
+### Méthodologie de Nettoyage
+
+```bash
+# 1. Identifier tous les duplicatas
+grep -n "^\\.[a-zA-Z-]* {" styles.css | cut -d: -f2 | sort | uniq -d
+
+# 2. Pour chaque duplicata, comparer les définitions
+diff <(sed -n 'Xp,Yp' styles.css) <(sed -n 'Ap,Bp' styles.css)
+
+# 3. Garder la définition la plus complète (généralement la dernière)
+# 4. Supprimer les autres
+# 5. Tester visuellement les pages affectées
+```
+
+---
+
 ## SESSION 150 - AUDIT MANUEL: PROBLÈMES NON DÉTECTÉS PAR VALIDATOR (25/01/2026)
 
 ### Constat Critique
@@ -524,7 +614,7 @@ Le hook avait une boucle infinie causée par:
 
 ## CONCLUSION
 
-Notre implémentation design est **BONNE (78/100)** - révisé après audit manuel Session 150:
+Notre implémentation design est **BONNE (82/100)** - révisé après corrections Session 150:
 
 **Forces:**
 - ✅ Glassmorphism moderne (28 instances)
