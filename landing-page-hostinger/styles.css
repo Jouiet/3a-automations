@@ -5017,64 +5017,7 @@ h1 .highlight {
   color: var(--text-secondary);
 }
 
-/* Features Grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-xl);
-}
-
-@media (max-width: 768px) {
-  .features-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.feature-card {
-  background: rgba(25, 30, 53, 0.6);
-  border: 1px solid rgba(79, 186, 241, 0.1);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-xl);
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-  border-color: rgba(79, 186, 241, 0.3);
-  transform: translateY(-4px);
-}
-
-.feature-card h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-light);
-  margin-bottom: var(--spacing-sm);
-}
-
-.feature-card>p {
-  color: var(--text-secondary);
-  font-size: 0.9375rem;
-  margin-bottom: var(--spacing-lg);
-}
-
-.feature-list {
-  list-style: none;
-}
-
-.feature-list li {
-  position: relative;
-  padding-left: var(--spacing-lg);
-  margin-bottom: var(--spacing-sm);
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-}
-
-.feature-list li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: 600;
-}
+/* NOTE: .features-grid, .feature-card, .feature-list defined in Academie section (~line 11673) */
 
 /* Email Flow Cards */
 .flows-showcase {
@@ -5749,25 +5692,7 @@ h1 .highlight {
   margin-top: var(--spacing-3xl);
 }
 
-.faq-item {
-  background: rgba(25, 30, 53, 0.6);
-  border: 1px solid rgba(79, 186, 241, 0.1);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-}
-
-.faq-item h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--primary);
-  margin-bottom: var(--spacing-sm);
-}
-
-.faq-item p {
-  color: var(--text-secondary);
-  font-size: 0.9375rem;
-  line-height: 1.6;
-}
+/* NOTE: .faq-item defined in FAQ section (~line 7070) with faq-icon */
 
 /* Audit CTA */
 .audit-cta {
@@ -7168,21 +7093,7 @@ html:not([data-period]) .price-period.period-monthly {
   text-decoration: underline;
 }
 
-.cta-section {
-  padding: var(--spacing-4xl) 0;
-  text-align: center;
-}
-
-.cta-section h2 {
-  font-size: 2rem;
-  color: var(--text-light);
-  margin-bottom: var(--spacing-md);
-}
-
-.cta-section p {
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-xl);
-}
+/* NOTE: .cta-section is defined in Academy section (line ~10686) with glassmorphism */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    AUTOMATIONS CATALOG - Premium Card Design
@@ -11021,74 +10932,7 @@ html[data-currency="USD"] .price-usd {
   color: var(--text-muted);
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   CASE STUDY CARDS - Client Cases Page
-   ═══════════════════════════════════════════════════════════════════ */
-
-.case-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.case-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(79, 186, 241, 0.4);
-}
-
-.case-card-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-lg);
-}
-
-.case-card-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: var(--radius-md);
-  object-fit: contain;
-  background: rgba(255, 255, 255, 0.05);
-  padding: var(--spacing-sm);
-}
-
-.case-card-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-light);
-}
-
-.case-card-industry {
-  font-size: 0.85rem;
-  color: var(--primary);
-}
-
-.case-card-results {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
-}
-
-.case-card-stat {
-  text-align: center;
-  padding: var(--spacing-md);
-  background: rgba(79, 186, 241, 0.05);
-  border-radius: var(--radius-md);
-}
-
-.case-card-stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.case-card-stat-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
+/* NOTE: .case-card defined in Cas Clients section (~line 11762) */
 
 /* ═══════════════════════════════════════════════════════════════════
    PROCESS CARDS - Methodology/Process Display
