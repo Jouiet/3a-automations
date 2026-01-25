@@ -3,9 +3,9 @@
  * VALIDATE DESIGN SYSTEM - Automated Branding Enforcement
  * Source of Truth: docs/DESIGN-SYSTEM.md
  *
- * @version 5.0.0
+ * @version 5.2.0
  * @date 2026-01-25
- * @session 154 (Gap Analysis Implementation - 6 new validators)
+ * @session 154bis (CSS link validation + Button class check - 2 new validators)
  *
  * Usage:
  *   node scripts/validate-design-system.cjs [--fix] [--ci]
@@ -40,6 +40,12 @@
  *     - Required font preloads in <head>
  * 18. CTA section PRESENCE check (Session 154)
  *     - Pages must have CTA section
+ * 19. CSS LINK TAG validation (Session 154bis) - CRITICAL
+ *     - Detect broken CSS links like <href="..."> instead of <link>
+ *     - Would have caught case-studies.html unstyled page immediately
+ * 20. Button CLASS EXISTS check (Session 154bis)
+ *     - btn-* classes used in HTML must exist in CSS
+ *     - Would have caught btn-primary-ultra issue
  */
 
 const fs = require('fs');
@@ -1563,6 +1569,131 @@ function validateFontPreload() {
 }
 
 /**
+ * Validate CSS Link Tags - Session 154bis
+ * CRITICAL: Detect broken CSS links like <href="..."> instead of <link rel="..." href="...">
+ * Would have caught the case-studies.html bug immediately
+ */
+function validateCSSLinkTags() {
+  console.log('\n🔗 Validating CSS Link Tags...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+
+  let brokenLinkCount = 0;
+  const filesWithBrokenLinks = [];
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+    const relFile = relPath(file);
+    const lines = content.split('\n');
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const lineNum = i + 1;
+
+      // Pattern 1: CRITICAL - <href="..."> without <link (the case-studies bug)
+      if (/<href="[^"]*\.css[^"]*"/.test(line) && !/<link/.test(line)) {
+        brokenLinkCount++;
+        if (!filesWithBrokenLinks.includes(relFile)) {
+          filesWithBrokenLinks.push(relFile);
+        }
+        addError('CSSLink', file,
+          `Line ${lineNum}: BROKEN CSS tag - <href="..."> without <link element`,
+          'Change <href="..."> to <link rel="stylesheet" href="...">');
+      }
+
+      // Pattern 2: <link href="...css..."> without rel= anywhere in the tag
+      const linkHrefMatch = line.match(/<link\s+href="[^"]*\.css[^"]*"[^>]*>/);
+      if (linkHrefMatch && !linkHrefMatch[0].includes('rel=')) {
+        brokenLinkCount++;
+        if (!filesWithBrokenLinks.includes(relFile)) {
+          filesWithBrokenLinks.push(relFile);
+        }
+        addError('CSSLink', file,
+          `Line ${lineNum}: CSS link missing rel attribute - ${linkHrefMatch[0].substring(0, 60)}...`,
+          'Add rel="stylesheet" to the link tag');
+      }
+    }
+
+    // Also check for missing CSS link entirely (but only for main pages)
+    const isMainPage = !relFile.includes('/cours/') && !relFile.includes('/courses/') && !relFile.includes('/parcours/') && !relFile.includes('/paths/');
+    if (isMainPage && !content.includes('styles.css') && content.includes('<body')) {
+      // Skip files that legitimately don't need CSS
+      if (!content.includes('redirect') && !relFile.includes('dashboard')) {
+        addWarning('CSSLink', file, 'Page may be missing main CSS stylesheet link');
+      }
+    }
+  }
+
+  if (brokenLinkCount === 0) {
+    addPassed('CSSLink', 'All CSS link tags are properly formatted');
+  }
+}
+
+/**
+ * Validate Button Classes Exist in CSS - Session 154bis
+ * Would have caught btn-primary-ultra which doesn't exist
+ */
+function validateButtonClassesExist() {
+  console.log('\n🔘 Validating Button Classes Exist in CSS...');
+
+  const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
+  const stylesPath = path.join(CONFIG.SITE_DIR, 'styles.css');
+
+  if (!fs.existsSync(stylesPath)) {
+    addError('ButtonCSS', stylesPath, 'styles.css not found');
+    return;
+  }
+
+  const cssContent = fs.readFileSync(stylesPath, 'utf8');
+
+  // Extract all button classes from HTML files
+  const buttonClassPattern = /class="([^"]*\b(?:btn|button)[^"]*)"/g;
+  const usedButtonClasses = new Set();
+
+  for (const file of htmlFiles) {
+    const content = fs.readFileSync(file, 'utf8');
+
+    let match;
+    while ((match = buttonClassPattern.exec(content)) !== null) {
+      const classString = match[1];
+      const classes = classString.split(/\s+/);
+
+      for (const cls of classes) {
+        // Only track btn-* classes (not generic 'btn' or 'button')
+        if (cls.startsWith('btn-') && cls.length > 4) {
+          usedButtonClasses.add(cls);
+        }
+      }
+    }
+  }
+
+  // Check which button classes are missing from CSS
+  const missingClasses = [];
+
+  for (const className of usedButtonClasses) {
+    // Pattern 1: Direct definition .btn-class {
+    const directPattern = new RegExp(`\\.${className}[\\s,:{]`);
+    // Pattern 2: Combined selector .btn.btn-class {
+    const combinedPattern = new RegExp(`\\.btn\\.${className}[\\s,:{]`);
+
+    if (!directPattern.test(cssContent) && !combinedPattern.test(cssContent)) {
+      missingClasses.push(className);
+    }
+  }
+
+  if (missingClasses.length === 0) {
+    addPassed('ButtonCSS', `All ${usedButtonClasses.size} button classes have CSS definitions`);
+  } else {
+    // Report each missing class as an error
+    for (const className of missingClasses) {
+      addError('ButtonCSS', 'styles.css',
+        `Button class ".${className}" used in HTML but NOT DEFINED in CSS`,
+        `Add .${className} { ... } to styles.css or use existing class`);
+    }
+  }
+}
+
+/**
  * Validate CTA Section Presence - Key pages should have CTA section
  */
 function validateCTAPresence() {
@@ -1659,6 +1790,8 @@ validateCSSDuplicates();             // Session 154 - Detect excessive selector 
 validateMainContentID();             // Session 154 - Check main has id="main-content"
 validateFontPreload();               // Session 154 - Check font preload configuration
 validateCTAPresence();               // Session 154 - Check key pages have CTA sections
+validateCSSLinkTags();               // Session 154bis - CRITICAL: Detect broken CSS links
+validateButtonClassesExist();        // Session 154bis - Check button classes exist in CSS
 
 // ════════════════════════════════════════════════════════════════════════════
 // REPORT
