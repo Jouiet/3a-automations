@@ -8,7 +8,7 @@
 ### Objectif
 Combler la lacune marketing : expliquer le système 3A aux prospects (pas juste aux clients).
 
-### Commits Session 152 (5 total)
+### Commits Session 152 (7 total)
 
 ```
 e9d1f0f docs: add WebP conversion to Session 151 audit
@@ -16,6 +16,8 @@ e9d1f0f docs: add WebP conversion to Session 151 audit
 5e97f40 docs: add Session 152 - Académie "Comment ça marche"
 2ded9f8 feat(academy-en): add "How it works" section + enable indexing + redirect
 af423b9 fix: add viewport meta to academie.html redirect
+8dd9726 fix(academy-en): apply Session 150 fixes to 7 EN courses
+d9f8d1e docs: update Session 152 with EN courses fixes
 ```
 
 ### Corrections Critiques
@@ -58,12 +60,13 @@ af423b9 fix: add viewport meta to academie.html redirect
 
 | Métrique | Valeur |
 |----------|--------|
-| Fichiers modifiés | 51 |
+| Fichiers modifiés | 58 (51 + 7 cours EN) |
 | Nouveau contenu FR | ~100 lignes HTML |
-| Nouveau contenu EN | ~70 lignes HTML |
+| Nouveau contenu EN | ~70 lignes HTML + 7×CTA |
 | Onglets académie | 4 → 5 (FR + EN) |
 | Pages indexées | +2 (academie.html, en/academy.html) |
 | Redirect créé | en/academie.html → en/academy.html |
+| Cours EN corrigés | 7 (parité Session 150) |
 
 ### Impact Marketing
 
@@ -73,6 +76,39 @@ af423b9 fix: add viewport meta to academie.html redirect
 | "Clients only" messaging | Contenu ouvert à tous |
 | Pas d'explication système | Section "Comment ça marche" complète |
 | Prospects ne comprennent pas | Prospects peuvent s'auto-éduquer |
+
+### EN Academy Courses - Session 150 Parity (25/01/2026)
+
+**Problème identifié:** 7 cours EN manquaient les corrections appliquées en Session 150 aux cours FR.
+
+#### Corrections Appliquées
+
+| Fix | Description |
+|-----|-------------|
+| H1 Class | `<h1>` → `<h1 class="hero-title-ultra">` (styling cohérent) |
+| CTA Section | Ajout section CTA avant navigation (conversion) |
+
+#### Fichiers Corrigés (7 cours EN)
+
+| Fichier | H1 Fix | CTA Fix |
+|---------|--------|---------|
+| `en/academy/courses/getting-started.html` | ✅ | ✅ |
+| `en/academy/courses/leads.html` | ✅ | ✅ |
+| `en/academy/courses/emails.html` | ✅ | ✅ |
+| `en/academy/courses/analytics.html` | ✅ | ✅ |
+| `en/academy/courses/ecommerce.html` | ✅ | ✅ |
+| `en/academy/courses/content.html` | ✅ | ✅ |
+| `en/academy/courses/hybrid-architecture.html` | ✅ | ✅ |
+
+#### CTA Section Ajoutée
+
+```html
+<div class="cta-section">
+  <h3>Ready to [action specific au cours]?</h3>
+  <p>Access all our courses with your 3A Automation client subscription.</p>
+  <a href="/en/contact.html" class="cta-btn">Become a client</a>
+</div>
+```
 
 ---
 
