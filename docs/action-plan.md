@@ -4,7 +4,35 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168bis - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **Strategic Metadata: 90%** | **WCAG: 0 errors**
+> **✅ ÉTAT RÉEL (Session 168ter - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **Strategic Metadata: 90%** | **WCAG: 0 errors** | **MCP: 5/9 (56%)**
+
+---
+
+## SESSION 168ter - MCP VERIFICATION (26/01/2026)
+
+### MCP Server Status (11 configured)
+
+| MCP Server | Status | Notes |
+| :--- | :--- | :--- |
+| **Memory** | ✅ WORKING | 19 entities in knowledge graph |
+| **Chrome DevTools** | ✅ WORKING | Connected to browser |
+| **Hostinger** | ✅ WORKING | API responding |
+| **GitHub** | ✅ LOADED | Tools available |
+| **Shopify-dev** | ✅ LOADED | Tools available |
+| **Klaviyo** | ❌ SSL Error | Local certificate issue |
+| **Stitch** | ❌ Auth Error | Dynamic client registration not supported |
+| **Apify** | ❌ Auth Error | Token invalid/expired |
+| **Grok** | ❌ No API Key | GROK_API_KEY not set |
+| Filesystem | ⏳ Not tested | Likely working |
+| Claude-MCP | ⏳ Not tested | Likely working |
+
+**Result: 5/9 tested = 56% operational**
+
+### Commits
+
+| Hash | Description |
+| :--- | :--- |
+| `f28bad7` | docs: Session 168bis - WCAG compliance accomplishments |
 
 ---
 
