@@ -17,6 +17,10 @@
 | Remotion Compositions | 7 | **7** | 0% |
 | HTML Pages | 79 | **79** | 0% |
 | Credentials SET | 57/93 | **61%** | 36 empty |
+| **HITL Coverage** | 80% (claimed) | **33% (6/18)** | 🔴 **-47%** |
+| A2A Agents HITL | N/A | **0/3** | 🔴 DEAD |
+| MCP Servers HITL | N/A | **0/11** | 🔴 NONE |
+| AG-UI Queue | Exists | **0 callers** | 🔴 DEAD CODE |
 
 ---
 
@@ -686,6 +690,124 @@ ELSE
 | Loyalty points | No | N/A | ✅ |
 
 **Source:** [Shopify Flow Docs](https://help.shopify.com/en/manual/shopify-flow/reference/limitations)
+
+### 14.8 HITL COMPREHENSIVE AUDIT (Session 165bis)
+
+> **CRITICAL FINDING:** HITL coverage is 33% (6/18), NOT 80% as previously claimed.
+> The "80%" only counted Top 10 Add-Ons, ignoring agents, MCP, skills, and protocols.
+
+#### 14.8.1 COMPLETE INVENTORY
+
+| Facet | Total | With HITL | Coverage | Status |
+|-------|-------|-----------|----------|--------|
+| **Core Scripts** | 85 | 6 | 7% | ⚠️ PARTIAL |
+| **High-Risk Scripts** | 18 | 6 | 33% | 🔴 CRITICAL |
+| **A2A Agents** | 3 registered | 0 | 0% | 🔴 DEAD |
+| **AG-UI Queue** | 1 system | 0 callers | 0% | 🔴 DEAD CODE |
+| **MCP Servers** | 11 | 0 | 0% | 🔴 NO HITL |
+| **Skills** | 42 | 4 mention | ~10% | 🔴 DOC ONLY |
+| **Protocols (A2A/UCP/ACP)** | 3 | 0 | 0% | 🔴 NO HITL |
+| **GPM Sensors** | 20 | N/A | N/A | ✅ Read-only |
+
+#### 14.8.2 AG-UI GOVERNANCE - DEAD CODE
+
+```javascript
+// DEFINED in automations/a2a/server.js:418-434
+const ACTION_QUEUE = [];
+const queueAction = (action) => { ... }
+
+// NEVER CALLED from any script, agent, or workflow
+// grep result: 0 external callers
+```
+
+**Verdict:** AG-UI HITL system EXISTS but is 100% UNUSED.
+
+#### 14.8.3 HIGH-RISK SCRIPTS WITHOUT HITL
+
+| Script | Action | Risk | HITL Status |
+|--------|--------|------|-------------|
+| `at-risk-customer-flow.cjs` | Sends emails + discounts (15-20%) | 🔴 FINANCIAL | ❌ **NONE** |
+| `birthday-anniversary-flow.cjs` | Sends promo codes | 🔴 FINANCIAL | ❌ **NONE** |
+| `referral-program-automation.cjs` | Sends referral emails | 🟡 COMM | ❌ **NONE** |
+| `replenishment-reminder.cjs` | Sends reminder emails | 🟡 COMM | ❌ **NONE** |
+| `price-drop-alerts.cjs` | Sends price alerts | 🟡 COMM | ❌ **NONE** |
+| `review-request-automation.cjs` | Sends review requests | 🟡 COMM | ❌ **NONE** |
+| `omnisend-b2c-ecommerce.cjs` | Sends emails via Omnisend | 🟡 COMM | ❌ **NONE** |
+
+#### 14.8.4 MCP SERVERS - ZERO HITL
+
+| MCP Server | Can Modify Data? | HITL? |
+|------------|------------------|-------|
+| klaviyo | ✅ YES (emails, segments) | ❌ NONE |
+| shopify-admin | ✅ YES (products, orders) | ❌ NONE |
+| meta-ads | ✅ YES (campaigns) | ❌ NONE |
+| google-sheets | ✅ YES (data) | ❌ NONE |
+| stitch | ✅ YES (generates code) | ❌ NONE |
+| apify | ✅ YES (scraping jobs) | ❌ NONE |
+| chrome-devtools | ⚠️ Browser actions | ❌ NONE |
+| google-analytics | ❌ Read-only | N/A |
+| shopify-dev | ❌ Read-only | N/A |
+| powerbi-remote | ❌ Read-only | N/A |
+| playwright | ⚠️ Automation | ❌ NONE |
+
+#### 14.8.5 A2A AGENTS - NO HITL
+
+```json
+// automations/a2a/registry.json
+{
+  "peers": [
+    {"agent_id": "agency-sales-bot", "capabilities": ["qualify_lead", "book_audit"]},
+    {"agent_id": "contractor-sales-bot", "capabilities": ["estimate_roofing"]},
+    {"agent_id": "finance-collector-bot", "capabilities": ["collect_debt"]}
+  ]
+}
+// ZERO HITL on any agent
+```
+
+#### 14.8.6 SKILLS - DOCUMENTATION ONLY
+
+| Skill | Mentions HITL? | Implementation? |
+|-------|----------------|-----------------|
+| concierge | ✅ Yes | ❌ Doc only |
+| content_director | ✅ Yes | ❌ Doc only |
+| ecommerce_b2c | ✅ Yes ("escalade humain") | ❌ Doc only |
+| producer | ✅ Yes | ❌ Doc only |
+| Other 38 skills | ❌ No | ❌ None |
+
+#### 14.8.7 WHAT HAS HITL (6 scripts)
+
+| Script | HITL Implementation | Status |
+|--------|---------------------|--------|
+| `blog-generator-resilient.cjs` | `requireApproval: true` | ✅ WORKS |
+| `email-personalization-resilient.cjs` | `previewModeDefault: true` | ✅ WORKS |
+| `churn-prediction-resilient.cjs` | LTV €500 threshold | ✅ WORKS |
+| `sms-automation-resilient.cjs` | Daily €50 spend limit | ✅ WORKS |
+| `cjdropshipping-automation.cjs` | `confirmOrder()` | ✅ WORKS |
+| `podcast-generator-resilient.cjs` | Script review | ✅ WORKS |
+
+#### 14.8.8 PRIORITIZED ACTION PLAN
+
+**P0 - CRITICAL (Financial Risk):**
+| Script | Action | Effort |
+|--------|--------|--------|
+| `at-risk-customer-flow.cjs` | Add discount approval threshold | 2h |
+| `birthday-anniversary-flow.cjs` | Add promo code approval | 2h |
+
+**P1 - HIGH (Communication Risk):**
+| Script | Action | Effort |
+|--------|--------|--------|
+| `referral-program-automation.cjs` | Add email preview mode | 1h |
+| `replenishment-reminder.cjs` | Add frequency cap | 1h |
+| `price-drop-alerts.cjs` | Add batch approval | 1h |
+| `review-request-automation.cjs` | Add timing review | 1h |
+
+**P2 - MEDIUM (System Risk):**
+| Component | Action | Effort |
+|-----------|--------|--------|
+| AG-UI Queue | Wire queueAction() to scripts | 4h |
+| MCP Servers | Add confirmation prompts | 8h |
+
+**TOTAL EFFORT FOR 100% COVERAGE: ~22h**
 
 ---
 
