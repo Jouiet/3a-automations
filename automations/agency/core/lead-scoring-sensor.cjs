@@ -54,4 +54,21 @@ async function main() {
     }
 }
 
-main();
+// Handle --health check
+if (process.argv.includes('--health')) {
+    const health = {
+        status: fs.existsSync(SCORED_LEADS_PATH) ? 'ok' : 'warning',
+        sensor: 'lead-scoring-sensor',
+        version: '1.0.0',
+        data_path: SCORED_LEADS_PATH,
+        data_exists: fs.existsSync(SCORED_LEADS_PATH),
+        gpm_path: GPM_PATH,
+        gpm_exists: fs.existsSync(GPM_PATH),
+        metrics: ['quality_score', 'days_stale'],
+        timestamp: new Date().toISOString()
+    };
+    console.log(JSON.stringify(health, null, 2));
+    process.exit(0);
+} else {
+    main();
+}

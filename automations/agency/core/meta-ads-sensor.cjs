@@ -83,4 +83,24 @@ async function main() {
     }
 }
 
-main();
+// Handle --health check
+if (process.argv.includes('--health')) {
+    const token = process.env.META_PAGE_ACCESS_TOKEN;
+    const adAccountId = process.env.META_AD_ACCOUNT_ID;
+    const health = {
+        status: token && adAccountId ? 'ok' : 'error',
+        sensor: 'meta-ads-sensor',
+        version: '1.0.0',
+        credentials: {
+            META_PAGE_ACCESS_TOKEN: token ? 'set' : 'missing',
+            META_AD_ACCOUNT_ID: adAccountId ? 'set' : 'missing'
+        },
+        metrics: ['spend', 'impressions', 'clicks', 'conversions', 'cpc', 'ctr'],
+        api_version: 'v19.0',
+        timestamp: new Date().toISOString()
+    };
+    console.log(JSON.stringify(health, null, 2));
+    process.exit(health.status === 'ok' ? 0 : 1);
+} else {
+    main();
+}

@@ -164,6 +164,25 @@ function updateGPM(pressure, metrics) {
 }
 
 async function main() {
+    // Handle --health check
+    if (process.argv.includes('--health')) {
+        const wpSiteUrl = process.env.WP_SITE_URL || process.env.WORDPRESS_URL;
+        const wpAppPassword = process.env.WP_APP_PASSWORD || process.env.WORDPRESS_APP_PASSWORD;
+        const health = {
+            status: wpSiteUrl ? 'ok' : 'warning',
+            sensor: 'content-performance-sensor',
+            version: '1.0.0',
+            credentials: {
+                WP_SITE_URL: wpSiteUrl ? 'set' : 'missing',
+                WP_APP_PASSWORD: wpAppPassword ? 'set' : 'missing'
+            },
+            metrics: ['posts', 'pages', 'comments', 'media'],
+            timestamp: new Date().toISOString()
+        };
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(0);
+    }
+
     const wpSiteUrl = process.env.WP_SITE_URL || process.env.WORDPRESS_URL;
     const wpAppPassword = process.env.WP_APP_PASSWORD || process.env.WORDPRESS_APP_PASSWORD;
 

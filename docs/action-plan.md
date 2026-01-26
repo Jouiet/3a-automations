@@ -671,7 +671,7 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 | **Phase 4: LLM Darija (Mistral Saba)** | Voice | 22h | ⏳ OPTIONAL |
 | WCAG 2.2 Audit | Accessibility | 8h | ✅ **DONE** (S168decies) |
 | A2A v1.0 upgrade | Protocol | 8h | ✅ **DONE** (S168undecies) |
-| Server-side GTM | Analytics | 16h | ⏳ PENDING |
+| Server-side GTM | Analytics | 16h | ⏳ **REQUIRES GCP** (Cloud Run + domain setup needed) |
 
 ### P2 - Medium Priority (Next Quarter)
 

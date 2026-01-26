@@ -232,6 +232,21 @@ function updateGPM(pressure, endpoints, providers) {
 }
 
 async function main() {
+    // Handle --health check
+    if (process.argv.includes('--health')) {
+        const health = {
+            status: 'ok',
+            sensor: 'voice-quality-sensor',
+            version: '1.0.0',
+            checks: ['voice-api', 'tts-provider', 'stt-provider', 'llm-provider'],
+            endpoints: ['3003', '3004', '3006'],
+            providers: ['elevenlabs', 'openai', 'gemini', 'grok'],
+            timestamp: new Date().toISOString()
+        };
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(0);
+    }
+
     console.log('🎙️ Checking voice AI system quality...');
 
     const endpoints = await checkVoiceEndpoints();

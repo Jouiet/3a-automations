@@ -87,6 +87,28 @@ function updateGPM(sensorData) {
 }
 
 async function main() {
+    // Handle --health check
+    if (process.argv.includes('--health')) {
+        const propertyId = process.env.GA4_PROPERTY_ID || '467652758';
+        const credentials = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+        const health = {
+            status: credentials ? 'ok' : 'error',
+            sensor: 'ga4-sensor',
+            version: '1.0.0',
+            credentials: {
+                GA4_PROPERTY_ID: propertyId ? 'set' : 'missing',
+                GOOGLE_APPLICATION_CREDENTIALS: credentials ? 'set' : 'missing'
+            },
+            property_id: propertyId,
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            metrics: ['sessions', 'conversions', 'totalRevenue', 'advertiserAdCost'],
+            timestamp: new Date().toISOString()
+        };
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+    }
+
     const propertyId = process.env.GA4_PROPERTY_ID || '467652758';
     try {
         const data = await fetchGA4Data(propertyId);

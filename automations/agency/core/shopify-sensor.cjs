@@ -120,6 +120,27 @@ function updateGPM(pressure, metrics) {
 }
 
 async function main() {
+    // Handle --health check
+    if (process.argv.includes('--health')) {
+        const shop = process.env.SHOPIFY_STORE || process.env.SHOPIFY_STORE_DOMAIN;
+        const token = process.env.SHOPIFY_ACCESS_TOKEN || process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+        const health = {
+            status: shop && token ? 'ok' : 'error',
+            sensor: 'shopify-sensor',
+            version: '1.0.0',
+            credentials: {
+                SHOPIFY_STORE: shop ? 'set' : 'missing',
+                SHOPIFY_ACCESS_TOKEN: token ? 'set' : 'missing'
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            metrics: ['products', 'orders', 'inventory'],
+            timestamp: new Date().toISOString()
+        };
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+    }
+
     const shop = process.env.SHOPIFY_STORE || process.env.SHOPIFY_STORE_DOMAIN;
     const token = process.env.SHOPIFY_ACCESS_TOKEN || process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
 
