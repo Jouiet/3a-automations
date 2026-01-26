@@ -1,10 +1,39 @@
 # 3A Automation
-> Version: 106.0 | 26/01/2026 | Session 166ter - Darija Validation COMPLETE
+> Version: 107.0 | 26/01/2026 | Session 166sexies - Telephony Bridge Multilingue
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 166sexies - TELEPHONY BRIDGE MULTILINGUE (26/01/2026)
+
+### Audit Forensique Corrigé
+
+**Source:** `docs/VOICE-DARIJA-FORENSIC.md` (audit externe vérifié)
+
+| Faille | Status | Fix Appliqué |
+| :--- | :--- | :--- |
+| TwiML hardcodé fr-FR (5 instances) | ✅ CORRIGÉ | `TWIML_MESSAGES` multilingue |
+| Persona Injector fallback fr | ✅ CORRIGÉ | `VOICE_CONFIG.defaultLanguage` via ENV |
+| RAG keywords FR seulement | ✅ CORRIGÉ | +ES/AR/ARY keywords ajoutés |
+| WhatsApp template FR | ✅ CORRIGÉ | `WHATSAPP_LANG_CODES` mapping |
+| RAG fallback messages FR | ✅ CORRIGÉ | `RAG_MESSAGES` multilingue |
+
+### Fichiers Modifiés
+
+| Fichier | Lignes | Description |
+| :--- | :--- | :--- |
+| `voice-telephony-bridge.cjs` | +150 | Constantes TWIML_MESSAGES, RAG_MESSAGES, WHATSAPP_LANG_CODES |
+| `voice-persona-injector.cjs` | +6 | VOICE_CONFIG avec ENV support |
+
+### ENV Variable
+
+```bash
+VOICE_DEFAULT_LANGUAGE=fr    # fr | en | es | ar | ary
+```
 
 ---
 

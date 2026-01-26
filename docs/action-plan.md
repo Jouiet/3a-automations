@@ -1,7 +1,70 @@
 # PLAN D'ACTION MVP - JO-AAA
+
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 166quinquies - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice Core: OPTIMISÉ + 4 LANGUES**
+> **✅ ÉTAT RÉEL (Session 166sexies - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice: WIDGET + TELEPHONY MULTILINGUE**
+
+---
+
+## SESSION 166sexies - TELEPHONY BRIDGE MULTILINGUE (26/01/2026)
+
+### Audit Forensique Externe (Vérifié)
+
+**Document source:** `docs/VOICE-DARIJA-FORENSIC.md`
+
+| Claim Audit | Verdict | Preuve |
+|-------------|---------|--------|
+| TTS Darija fragile (Ghizlane) | ✅ VRAI | Voix communautaire ElevenLabs |
+| Telephony hardcodé fr-FR | ✅ VRAI | 5 instances corrigées |
+| Persona Injector hardcodé | ⚠️ PARTIAL | Fallback configurable via ENV |
+| RAG français uniquement | ⚠️ PARTIAL | EN+FR existants, ES/AR/ARY ajoutés |
+| Knowledge Base français | ✅ VRAI | Contenu 100% FR (à traduire) |
+
+### Corrections Appliquées
+
+| Fichier | Lignes Modifiées | Fix |
+|---------|------------------|-----|
+| `voice-telephony-bridge.cjs` | +120 lignes | TWIML_MESSAGES multilingue (5 langues) |
+| `voice-telephony-bridge.cjs` | 1494-1531 | `generateTwiML()` + `generateErrorTwiML()` |
+| `voice-telephony-bridge.cjs` | 1560, 1700 | Inbound/Outbound handlers multilingues |
+| `voice-telephony-bridge.cjs` | 1321 | Transfer to human multilingue |
+| `voice-telephony-bridge.cjs` | 1242-1260 | RAG keywords ES/AR/ARY ajoutés |
+| `voice-telephony-bridge.cjs` | 1873-1920 | WhatsApp multilingue |
+| `voice-persona-injector.cjs` | 20, 468 | VOICE_CONFIG + ENV fallback |
+
+### Nouvelles Constantes
+
+```javascript
+// TWIML_MESSAGES - 5 langues supportées
+const TWIML_MESSAGES = {
+  languageCodes: { 'fr': 'fr-FR', 'en': 'en-US', 'es': 'es-ES', 'ar': 'ar-XA', 'ary': 'ar-XA' },
+  connecting: { 'fr': '...', 'en': '...', 'es': '...', 'ar': '...', 'ary': '...' },
+  serviceUnavailable: { ... },
+  outboundGreeting: { ... },
+  connectionError: { ... },
+  transferToHuman: { ... }
+};
+
+// RAG_MESSAGES - Fallbacks multilingues
+const RAG_MESSAGES = {
+  noKnowledgeBase: { 'fr': '...', 'en': '...', 'es': '...', 'ar': '...', 'ary': '...' },
+  notFound: { ... }
+};
+```
+
+### ENV Variables Ajoutées
+
+```bash
+VOICE_DEFAULT_LANGUAGE=fr    # fr | en | es | ar | ary (default: fr)
+```
+
+### Gaps Restants (Phase 2)
+
+| Gap | Fichier | Action Requise |
+|-----|---------|----------------|
+| knowledge_base_ary.json | Nouveau fichier | Traduire 33 keywords en Darija authentique |
+| Client Darija configuré | client_registry.json | Ajouter client avec `"language": "ary"` |
+| TTS Darija stable | ElevenLabs/Sawtia | Évaluer voix custom ou partenariat |
 
 ---
 
@@ -114,7 +177,8 @@ s.src = '/voice-assistant/voice-widget-core.js?v=2.0.0';
 | `ELEVENLABS_API_KEY` | ✅ **CONFIGURÉ** (S166bis) | Phase 3 débloquée |
 | `TWILIO_*` vides | Telephony bloquée | Configurer credentials |
 | Traductions Darija | Knowledge base | Trouver traducteur natif |
-| **TTS Darija officiel** | ❌ NON EXISTANT | Voix "Ghizlane" = communautaire, à tester |
+| **TTS Darija officiel** | ❌ NON EXISTANT | Sawtia.ma = BENCHMARK CONCURRENT uniquement |
+| **Telephony Hardcoding** | ❌ **CRITIQUE** | `fr-FR` hardcodé dans `voice-telephony-bridge.cjs` |
 
 ### Correction Factuelle ElevenLabs (S166bis)
 
@@ -233,6 +297,7 @@ curl -X POST http://localhost:3000/ag-ui/queue/submit \
 | `KLAVIYO_PRIVATE_API_KEY` | ❌ 401 Unauthorized | 9 workflows |
 
 **Fix Instructions:**
+
 ```
 Shopify: https://alpha-medical-store.myshopify.com/admin/settings/apps/development
   → Create app "3A Sensors"
@@ -257,6 +322,8 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 | Configure ELEVENLABS_API_KEY | Credentials | 1h | ✅ **DONE** (S166bis) |
 | Configure TWILIO_* credentials | Credentials | 1h | ❌ MISSING |
 | Test voix "Ghizlane" (communautaire) | Validation | 2h | ✅ **DONE** - 1.3s latence |
+| Test Mistral Saba (24B) | Validation | 2h | ✅ **DONE** - 150+ t/s, Darija natif |
+| Test Sawtia.ma (Benchmark) | Validation | 2h | ⏳ PENDING - Analyse concurrentielle |
 | Test Grok-4 LLM Darija | Validation | 2h | ✅ **DONE** - Génère Darija authentique |
 | Test ElevenLabs Scribe STT Darija | Validation | 2h | ✅ **DONE** - 707ms, transcrit correctement |
 

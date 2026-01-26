@@ -17,6 +17,13 @@
 const CLIENT_REGISTRY = require('./client_registry.json');
 const FINANCIAL_CONFIG = require('./agency-financial-config.cjs');
 
+// Session 166sexies - Multilingual Support Configuration
+const VOICE_CONFIG = {
+    // Supported languages: FR, EN, ES, AR, ARY (Darija)
+    supportedLanguages: ['fr', 'en', 'es', 'ar', 'ary'],
+    defaultLanguage: process.env.VOICE_DEFAULT_LANGUAGE || 'fr'
+};
+
 const PERSONAS = {
     // 1. AGENCY (Original)
     AGENCY: {
@@ -462,7 +469,7 @@ class VoicePersonaInjector {
                 phone: clientConfig?.phone,
                 address: clientConfig?.address
             },
-            language: clientConfig?.language || 'fr'
+            language: clientConfig?.language || VOICE_CONFIG.defaultLanguage
         };
 
         console.log(`[Director] Selected: ${identity.name} (${archetypeKey}) for Client: ${clientId || 'Unknown'}`);

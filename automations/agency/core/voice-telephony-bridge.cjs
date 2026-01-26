@@ -76,6 +76,10 @@ try {
 const CONFIG = {
   port: parseInt(process.env.VOICE_TELEPHONY_PORT || '3009'),
 
+  // Supported Languages (limited to 5 per Session 166quinquies)
+  supportedLanguages: ['fr', 'en', 'es', 'ar', 'ary'],
+  defaultLanguage: process.env.VOICE_DEFAULT_LANGUAGE || 'fr',
+
   // Twilio
   twilio: {
     accountSid: process.env.TWILIO_ACCOUNT_SID,
@@ -116,6 +120,89 @@ const CONFIG = {
     maxRequests: 30
   }
 };
+
+// ============================================================================
+// TWIML MULTILINGUAL MESSAGES (Session 166sexies - Phase 1)
+// ============================================================================
+// Supported: FR, EN, ES, AR, ARY (Darija)
+// Twilio TTS language codes: https://www.twilio.com/docs/voice/twiml/say#attributes-language
+
+const TWIML_MESSAGES = {
+  // Language mapping: internal code → Twilio language code
+  languageCodes: {
+    'fr': 'fr-FR',
+    'en': 'en-US',
+    'es': 'es-ES',
+    'ar': 'ar-XA',  // Arabic (generic)
+    'ary': 'ar-XA'  // Darija uses Arabic TTS (ElevenLabs handles actual Darija)
+  },
+
+  // Connection message
+  connecting: {
+    'fr': 'Connexion à l\'assistant vocal.',
+    'en': 'Connecting to voice assistant.',
+    'es': 'Conectando con el asistente de voz.',
+    'ar': 'جارٍ الاتصال بالمساعد الصوتي.',
+    'ary': 'كنتصل بالمساعد الصوتي.'
+  },
+
+  // Service unavailable
+  serviceUnavailable: {
+    'fr': 'Désolé, le service est temporairement indisponible. Veuillez réessayer plus tard.',
+    'en': 'Sorry, the service is temporarily unavailable. Please try again later.',
+    'es': 'Lo sentimos, el servicio no está disponible temporalmente. Por favor, inténtelo más tarde.',
+    'ar': 'عذراً، الخدمة غير متاحة مؤقتاً. يرجى المحاولة لاحقاً.',
+    'ary': 'سمحلينا، الخدمة ماشي متوفرة دابا. عاود من بعد.'
+  },
+
+  // Outbound greeting
+  outboundGreeting: {
+    'fr': 'Bonjour, ici 3A Automation. Je vous passe mon collègue IA.',
+    'en': 'Hello, this is 3A Automation. I\'m connecting you to my AI colleague.',
+    'es': 'Hola, aquí 3A Automation. Le paso con mi colega de IA.',
+    'ar': 'مرحباً، هذا 3A Automation. سأحولك إلى زميلي الذكاء الاصطناعي.',
+    'ary': 'السلام، هنا 3A Automation. غادي نعطيك زميلي الذكاء الاصطناعي.'
+  },
+
+  // Connection error
+  connectionError: {
+    'fr': 'Une erreur est survenue lors de la connexion.',
+    'en': 'An error occurred while connecting.',
+    'es': 'Se produjo un error durante la conexión.',
+    'ar': 'حدث خطأ أثناء الاتصال.',
+    'ary': 'كاين مشكل فالاتصال.'
+  },
+
+  // Transfer to human
+  transferToHuman: {
+    'fr': 'Je vous transfère vers un conseiller humain. Veuillez patienter un instant.',
+    'en': 'I\'m transferring you to a human advisor. Please wait a moment.',
+    'es': 'Le transfiero a un asesor humano. Por favor, espere un momento.',
+    'ar': 'أقوم بتحويلك إلى مستشار بشري. يرجى الانتظار لحظة.',
+    'ary': 'غادي نحولك لواحد المستشار. تسنى شوية.'
+  }
+};
+
+/**
+ * Get TwiML language code from internal language code
+ * @param {string} lang - Internal language code (fr, en, es, ar, ary)
+ * @returns {string} Twilio language code
+ */
+function getTwiMLLanguage(lang) {
+  return TWIML_MESSAGES.languageCodes[lang] || TWIML_MESSAGES.languageCodes[CONFIG.defaultLanguage];
+}
+
+/**
+ * Get localized TwiML message
+ * @param {string} messageKey - Key in TWIML_MESSAGES
+ * @param {string} lang - Language code
+ * @returns {string} Localized message
+ */
+function getTwiMLMessage(messageKey, lang) {
+  const messages = TWIML_MESSAGES[messageKey];
+  if (!messages) return '';
+  return messages[lang] || messages[CONFIG.defaultLanguage] || messages['fr'];
+}
 
 // ============================================================================
 // HITL CONFIGURATION (Human In The Loop) - Session 165quater flexibility
@@ -1120,19 +1207,39 @@ async function handleTrackConversion(session, args) {
   console.log(`[Analytics] ${args.event} at ${args.stage} - ${args.outcome || 'pending'}`);
 }
 
+// RAG fallback messages - Multilingual (Session 166sexies)
+const RAG_MESSAGES = {
+  noKnowledgeBase: {
+    'fr': "Je n'ai pas accès à cette information spécifique pour le moment.",
+    'en': "I don't have access to that specific information right now.",
+    'es': "No tengo acceso a esa información específica en este momento.",
+    'ar': "ليس لدي إمكانية الوصول إلى هذه المعلومات المحددة في الوقت الحالي.",
+    'ary': "معنديش هاد المعلومة دابا."
+  },
+  notFound: {
+    'fr': "Désolé, je ne trouve pas cette information dans mes documents.",
+    'en': "Sorry, I couldn't find that information in my documents.",
+    'es': "Lo siento, no encuentro esa información en mis documentos.",
+    'ar': "عذراً، لا أجد هذه المعلومات في مستنداتي.",
+    'ary': "سمحلينا، ملقيتش هاد المعلومة."
+  }
+};
+
 async function handleSearchKnowledgeBase(session, args) {
   // Use knowledge_base_id from metadata (injected by VoicePersonaInjector), fallback to persona_id or 'agency_v2'
   const kbId = session.metadata?.knowledge_base_id || session.metadata?.persona_id || 'agency_v2';
+  const sessionLang = session.metadata?.language || CONFIG.defaultLanguage;
   const query = args.query.toLowerCase();
 
-  console.log(`[RAG] Searching KB for ${kbId}: "${query}"`);
+  console.log(`[RAG] Searching KB for ${kbId}: "${query}" (lang: ${sessionLang})`);
 
   // Simple In-Memory RAG
   const kbData = KNOWLEDGE_BASE[kbId];
 
   if (!kbData) {
     console.log(`[RAG] No KB found for ID: ${kbId}`);
-    return { found: false, result: "Je n'ai pas accès à cette information spécifique pour le moment." };
+    const msg = RAG_MESSAGES.noKnowledgeBase[sessionLang] || RAG_MESSAGES.noKnowledgeBase['fr'];
+    return { found: false, result: msg };
   }
 
   // Keyword search simulation (Naive logic -> Semantic ID ideally)
@@ -1151,12 +1258,29 @@ async function handleSearchKnowledgeBase(session, args) {
     // Check value content
     if (value.toLowerCase().includes(query)) score += 2;
 
-    // Direct match tweaks
-    if (query.includes('hour') || query.includes('horaire')) score += 5;
-    if (query.includes('return') || query.includes('retour')) score += 5;
-    if (query.includes('pay') || query.includes('paiement')) score += 5;
-    if (query.includes('ship') || query.includes('livraison')) score += 5;
-    if (query.includes('emergency') || query.includes('urgence')) score += 5;
+    // Direct match tweaks - Multilingual (Session 166sexies)
+    // EN | FR | ES | AR | ARY (Darija)
+    // Hours/Schedule
+    if (query.includes('hour') || query.includes('horaire') || query.includes('horario') ||
+        query.includes('ساعات') || query.includes('وقتاش') || query.includes('weqtach')) score += 5;
+    // Returns/Refunds
+    if (query.includes('return') || query.includes('retour') || query.includes('devolución') ||
+        query.includes('إرجاع') || query.includes('رد')) score += 5;
+    // Payment
+    if (query.includes('pay') || query.includes('paiement') || query.includes('pago') ||
+        query.includes('دفع') || query.includes('خلص') || query.includes('khlss')) score += 5;
+    // Shipping/Delivery
+    if (query.includes('ship') || query.includes('livraison') || query.includes('envío') ||
+        query.includes('توصيل') || query.includes('ليفريزون')) score += 5;
+    // Emergency/Urgent
+    if (query.includes('emergency') || query.includes('urgence') || query.includes('emergencia') ||
+        query.includes('طوارئ') || query.includes('ضروري') || query.includes('mustajil')) score += 5;
+    // Price/Cost
+    if (query.includes('price') || query.includes('prix') || query.includes('precio') ||
+        query.includes('سعر') || query.includes('بشحال') || query.includes('bchhal')) score += 5;
+    // Help/Support
+    if (query.includes('help') || query.includes('aide') || query.includes('ayuda') ||
+        query.includes('مساعدة') || query.includes('عاوني') || query.includes('3awni')) score += 5;
 
     if (score > maxScore) {
       maxScore = score;
@@ -1186,7 +1310,8 @@ async function handleSearchKnowledgeBase(session, args) {
     return { found: true, result: bestMatch };
   } else {
     console.log(`[RAG] No answer found.`);
-    return { found: false, result: "Désolé, je ne trouve pas cette information dans mes documents." };
+    const msg = RAG_MESSAGES.notFound[sessionLang] || RAG_MESSAGES.notFound['fr'];
+    return { found: false, result: msg };
   }
 }
 
@@ -1229,10 +1354,15 @@ async function handleTransferCallInternal(session, args) {
 
   console.log(`[Handoff] Executing transfer for Call ${callSid} to ${targetPhone}`);
 
+  // Get session language (multilingual - Session 166sexies)
+  const sessionLang = session.metadata?.language || CONFIG.defaultLanguage;
+  const twimlLang = getTwiMLLanguage(sessionLang);
+  const transferMessage = getTwiMLMessage('transferToHuman', sessionLang);
+
   // TwiML to execute the transfer
   const twiml = `
 <Response>
-  <Say language="fr-FR">Je vous transfère vers un conseiller humain. Veuillez patienter un instant.</Say>
+  <Say language="${twimlLang}">${transferMessage}</Say>
   <Dial>${targetPhone}</Dial>
 </Response>`;
 
@@ -1404,15 +1534,42 @@ function logConversionEvent(session, eventType, data) {
 // TWILIO WEBHOOKS
 // ============================================
 
-function generateTwiML(streamUrl) {
+/**
+ * Generate TwiML for incoming call connection
+ * @param {string} streamUrl - WebSocket stream URL
+ * @param {string} lang - Language code (fr, en, es, ar, ary)
+ * @returns {string} TwiML XML
+ */
+function generateTwiML(streamUrl, lang = CONFIG.defaultLanguage) {
+  const twimlLang = getTwiMLLanguage(lang);
+  const message = getTwiMLMessage('connecting', lang);
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say voice="alice" language="fr-FR">Connexion à l'assistant vocal.</Say>
+  <Say voice="alice" language="${twimlLang}">${message}</Say>
   <Connect>
     <Stream url="${streamUrl}">
       <Parameter name="codec" value="mulaw"/>
     </Stream>
   </Connect>
+</Response>`;
+}
+
+/**
+ * Generate error TwiML
+ * @param {string} messageKey - Key in TWIML_MESSAGES
+ * @param {string} lang - Language code
+ * @param {boolean} hangup - Whether to hangup after message
+ * @returns {string} TwiML XML
+ */
+function generateErrorTwiML(messageKey, lang = CONFIG.defaultLanguage, hangup = true) {
+  const twimlLang = getTwiMLLanguage(lang);
+  const message = getTwiMLMessage(messageKey, lang);
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="alice" language="${twimlLang}">${message}</Say>
+  ${hangup ? '<Hangup/>' : ''}
 </Response>`;
 }
 
@@ -1438,13 +1595,17 @@ async function handleInboundCall(req, res, body) {
   try {
     const session = await createGrokSession(callInfo);
 
+    // Get language from session metadata (injected by VoicePersonaInjector)
+    const sessionLang = session.metadata?.language || CONFIG.defaultLanguage;
+    console.log(`[Twilio] Session language: ${sessionLang}`);
+
     // Generate stream URL
     const host = req.headers.host || `localhost:${CONFIG.port}`;
     const protocol = req.headers['x-forwarded-proto'] || 'http';
     const streamUrl = `wss://${host}/stream/${session.id}`;
 
-    // Respond with TwiML
-    const twiml = generateTwiML(streamUrl);
+    // Respond with TwiML (multilingual - Session 166sexies)
+    const twiml = generateTwiML(streamUrl, sessionLang);
 
     res.writeHead(200, {
       'Content-Type': 'text/xml',
@@ -1455,11 +1616,8 @@ async function handleInboundCall(req, res, body) {
   } catch (error) {
     console.error(`[Twilio] Error handling call: ${error.message}`);
 
-    const errorTwiml = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say voice="alice" language="fr-FR">Désolé, le service est temporairement indisponible. Veuillez réessayer plus tard.</Say>
-  <Hangup/>
-</Response>`;
+    // Use default language for error (no session available)
+    const errorTwiml = generateErrorTwiML('serviceUnavailable', CONFIG.defaultLanguage, true);
 
     res.writeHead(200, { 'Content-Type': 'text/xml' });
     res.end(errorTwiml);
@@ -1525,6 +1683,27 @@ async function handleOutboundTrigger(req, res, body) {
   }
 }
 
+/**
+ * Generate outbound TwiML with greeting
+ * @param {string} streamUrl - WebSocket stream URL
+ * @param {string} lang - Language code
+ * @returns {string} TwiML XML
+ */
+function generateOutboundTwiML(streamUrl, lang = CONFIG.defaultLanguage) {
+  const twimlLang = getTwiMLLanguage(lang);
+  const message = getTwiMLMessage('outboundGreeting', lang);
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say voice="alice" language="${twimlLang}">${message}</Say>
+  <Connect>
+    <Stream url="${streamUrl}">
+      <Parameter name="codec" value="mulaw"/>
+    </Stream>
+  </Connect>
+</Response>`;
+}
+
 async function handleOutboundTwiML(req, res, body) {
   const callSid = body.CallSid;
   const to = body.To;
@@ -1543,20 +1722,16 @@ async function handleOutboundTwiML(req, res, body) {
   try {
     const session = await createGrokSession(callInfo);
 
+    // Get language from session metadata (injected by VoicePersonaInjector)
+    const sessionLang = session.metadata?.language || CONFIG.defaultLanguage;
+    console.log(`[Outbound] Session language: ${sessionLang}`);
+
     // Generate stream URL
     const host = req.headers.host || `localhost:${CONFIG.port}`;
     const streamUrl = `wss://${host}/stream/${session.id}`;
 
-    // TwiML for outbound: Say hello, then connect stream
-    const twiml = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say voice="alice" language="fr-FR">Bonjour, ici 3A Automation. Je vous passe mon collègue IA.</Say>
-  <Connect>
-    <Stream url="${streamUrl}">
-      <Parameter name="codec" value="mulaw"/>
-    </Stream>
-  </Connect>
-</Response>`;
+    // TwiML for outbound: Say hello, then connect stream (multilingual - Session 166sexies)
+    const twiml = generateOutboundTwiML(streamUrl, sessionLang);
 
     res.writeHead(200, {
       'Content-Type': 'text/xml',
@@ -1566,11 +1741,7 @@ async function handleOutboundTwiML(req, res, body) {
 
   } catch (error) {
     console.error(`[Outbound] Error generating TwiML: ${error.message}`);
-    const errorTwiml = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Say voice="alice" language="fr-FR">Une erreur est survenue lors de la connexion.</Say>
-  <Hangup/>
-</Response>`;
+    const errorTwiml = generateErrorTwiML('connectionError', CONFIG.defaultLanguage, true);
     res.writeHead(200, { 'Content-Type': 'text/xml' });
     res.end(errorTwiml);
   }
@@ -1729,21 +1900,36 @@ async function createBooking(session) {
     if (result.success) {
       console.log(`[Booking] Created successfully`);
 
-      // Send WhatsApp confirmation
-      await sendWhatsAppConfirmation(session.bookingData);
+      // Send WhatsApp confirmation (multilingual - Session 166sexies)
+      const sessionLang = session.metadata?.language || CONFIG.defaultLanguage;
+      await sendWhatsAppConfirmation(session.bookingData, sessionLang);
     }
   } catch (error) {
     console.error(`[Booking] Error: ${error.message}`);
   }
 }
 
-async function sendWhatsAppConfirmation(bookingData) {
+/**
+ * WhatsApp language codes mapping (ISO 639-1 to WhatsApp codes)
+ * Note: WhatsApp templates must exist for each language
+ */
+const WHATSAPP_LANG_CODES = {
+  'fr': 'fr',
+  'en': 'en',
+  'es': 'es',
+  'ar': 'ar',
+  'ary': 'ar'  // Darija uses Arabic template (no native WhatsApp support)
+};
+
+async function sendWhatsAppConfirmation(bookingData, lang = CONFIG.defaultLanguage) {
   if (!CONFIG.whatsapp.accessToken || !CONFIG.whatsapp.phoneNumberId) {
     console.log(`[WhatsApp] Credentials not configured, skipping`);
     return;
   }
 
-  console.log(`[WhatsApp] Sending confirmation to ${bookingData.phone}`);
+  // Get WhatsApp language code
+  const whatsappLang = WHATSAPP_LANG_CODES[lang] || 'fr';
+  console.log(`[WhatsApp] Sending confirmation to ${bookingData.phone} in language: ${whatsappLang}`);
 
   try {
     const response = await fetch(
@@ -1760,7 +1946,7 @@ async function sendWhatsAppConfirmation(bookingData) {
           type: 'template',
           template: {
             name: 'booking_confirmation',
-            language: { code: 'fr' },
+            language: { code: whatsappLang },
             components: [
               {
                 type: 'body',
