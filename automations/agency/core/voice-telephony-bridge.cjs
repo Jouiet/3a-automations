@@ -117,6 +117,190 @@ const CONFIG = {
   }
 };
 
+// ============================================================================
+// HITL CONFIGURATION (Human In The Loop)
+// ============================================================================
+
+const HITL_CONFIG = {
+  enabled: process.env.HITL_VOICE_ENABLED !== 'false',
+  approveHotBookings: process.env.HITL_APPROVE_HOT_BOOKINGS !== 'false',
+  approveTransfers: process.env.HITL_APPROVE_TRANSFERS !== 'false',
+  slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
+  notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
+};
+
+const DATA_DIR = process.env.VOICE_DATA_DIR || path.join(__dirname, '../../../data/voice');
+const HITL_PENDING_DIR = path.join(DATA_DIR, 'hitl-pending');
+const HITL_PENDING_FILE = path.join(HITL_PENDING_DIR, 'pending-actions.json');
+
+// Ensure directories exist
+function ensureHitlDir() {
+  if (!fs.existsSync(HITL_PENDING_DIR)) {
+    fs.mkdirSync(HITL_PENDING_DIR, { recursive: true });
+  }
+}
+ensureHitlDir();
+
+// HITL Functions
+function loadPendingActions() {
+  try {
+    if (fs.existsSync(HITL_PENDING_FILE)) {
+      return JSON.parse(fs.readFileSync(HITL_PENDING_FILE, 'utf8'));
+    }
+  } catch (error) {
+    console.warn(`⚠️ Could not load HITL pending actions: ${error.message}`);
+  }
+  return [];
+}
+
+function savePendingActions(actions) {
+  try {
+    const tempPath = `${HITL_PENDING_FILE}.tmp`;
+    fs.writeFileSync(tempPath, JSON.stringify(actions, null, 2));
+    fs.renameSync(tempPath, HITL_PENDING_FILE);
+  } catch (error) {
+    console.error(`❌ Failed to save HITL pending actions: ${error.message}`);
+  }
+}
+
+function queueActionForApproval(actionType, session, args, reason) {
+  const pending = loadPendingActions();
+  const pendingAction = {
+    id: `hitl_voice_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    actionType,
+    sessionId: session.sessionId,
+    callSid: session.callSid,
+    bookingData: session.bookingData,
+    args,
+    reason,
+    queuedAt: new Date().toISOString(),
+    status: 'pending'
+  };
+
+  pending.push(pendingAction);
+  savePendingActions(pending);
+
+  console.log(`🔒 Voice action "${actionType}" queued for HITL approval`);
+
+  // Slack notification
+  if (HITL_CONFIG.slackWebhook && HITL_CONFIG.notifyOnPending) {
+    sendHitlVoiceNotification(pendingAction).catch(e => console.error(`❌ Slack notification failed: ${e.message}`));
+  }
+
+  return pendingAction;
+}
+
+async function sendHitlVoiceNotification(pendingAction) {
+  if (!HITL_CONFIG.slackWebhook) return;
+
+  const message = {
+    text: `🔒 HITL Approval Required - Voice Action`,
+    blocks: [
+      {
+        type: 'header',
+        text: { type: 'plain_text', text: `🔒 HITL: ${pendingAction.actionType === 'transfer' ? 'Call Transfer' : 'Hot Booking'} Pending`, emoji: true }
+      },
+      {
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*Action:* ${pendingAction.actionType}` },
+          { type: 'mrkdwn', text: `*Call SID:* ${pendingAction.callSid || 'N/A'}` },
+          { type: 'mrkdwn', text: `*Customer:* ${pendingAction.bookingData?.name || pendingAction.bookingData?.email || 'N/A'}` },
+          { type: 'mrkdwn', text: `*Reason:* ${pendingAction.reason}` }
+        ]
+      },
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `\`\`\`node voice-telephony-bridge.cjs --approve=${pendingAction.id}\`\`\`` }
+      }
+    ]
+  };
+
+  await fetch(HITL_CONFIG.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message)
+  });
+}
+
+async function approveAction(hitlId) {
+  const pending = loadPendingActions();
+  const index = pending.findIndex(a => a.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL action ${hitlId} not found`);
+    return { success: false, error: 'Action not found' };
+  }
+
+  const action = pending[index];
+  action.status = 'approved';
+  action.approvedAt = new Date().toISOString();
+
+  pending.splice(index, 1);
+  savePendingActions(pending);
+
+  console.log(`✅ HITL action "${action.actionType}" approved`);
+
+  // Execute the action
+  const session = activeSessions.get(action.sessionId);
+  if (!session) {
+    return { success: true, action, warning: 'Session no longer active - action logged but not executed' };
+  }
+
+  if (action.actionType === 'transfer') {
+    const result = await handleTransferCallInternal(session, action.args);
+    return { success: true, action, result };
+  } else if (action.actionType === 'booking') {
+    const result = await handleCreateBookingInternal(session, action.args);
+    return { success: true, action, result };
+  }
+
+  return { success: true, action };
+}
+
+function rejectAction(hitlId, reason = 'Rejected by operator') {
+  const pending = loadPendingActions();
+  const index = pending.findIndex(a => a.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL action ${hitlId} not found`);
+    return { success: false, error: 'Action not found' };
+  }
+
+  const action = pending[index];
+  action.status = 'rejected';
+  action.rejectedAt = new Date().toISOString();
+  action.rejectionReason = reason;
+
+  pending.splice(index, 1);
+  savePendingActions(pending);
+
+  console.log(`❌ HITL action "${action.actionType}" rejected: ${reason}`);
+
+  return { success: true, action };
+}
+
+function listPendingActions() {
+  const pending = loadPendingActions();
+  console.log(`\n🔒 Pending HITL Voice Actions (${pending.length}):\n`);
+
+  if (pending.length === 0) {
+    console.log('  No pending actions');
+    return pending;
+  }
+
+  pending.forEach(a => {
+    console.log(`  • ${a.id}`);
+    console.log(`    Action: ${a.actionType}`);
+    console.log(`    Customer: ${a.bookingData?.name || a.bookingData?.email || 'N/A'}`);
+    console.log(`    Call SID: ${a.callSid || 'N/A'}`);
+    console.log(`    Queued: ${a.queuedAt}`);
+    console.log();
+  });
+
+  return pending;
+}
+
 // ============================================
 // ACTIVE SESSIONS MANAGEMENT
 // ============================================
@@ -861,6 +1045,21 @@ async function handleCreateBooking(session, args) {
     notes: args.notes || session.bookingData.notes
   };
 
+  // HITL Check: Hot bookings require approval
+  const isHotLead = session.bookingData.qualification_score === 'hot';
+  if (HITL_CONFIG.enabled && HITL_CONFIG.approveHotBookings && isHotLead) {
+    const pendingAction = queueActionForApproval('booking', session, args, 'Hot lead booking requires approval');
+    return {
+      status: 'pending_approval',
+      hitlId: pendingAction.id,
+      message: `Booking queued for HITL approval. Use --approve=${pendingAction.id} to proceed.`
+    };
+  }
+
+  return handleCreateBookingInternal(session, args);
+}
+
+async function handleCreateBookingInternal(session, args) {
   session.analytics.outcome = 'booked';
   session.analytics.funnel_stage = 'closing';
 
@@ -970,6 +1169,20 @@ async function handleSearchKnowledgeBase(session, args) {
 async function handleTransferCall(session, args) {
   console.log(`[Handoff] Transfer requested. Reason: ${args.reason}`);
 
+  // HITL Check: Call transfers require approval
+  if (HITL_CONFIG.enabled && HITL_CONFIG.approveTransfers) {
+    const pendingAction = queueActionForApproval('transfer', session, args, `Call transfer requested: ${args.reason}`);
+    return {
+      status: 'pending_approval',
+      hitlId: pendingAction.id,
+      message: `Transfer queued for HITL approval. Use --approve=${pendingAction.id} to proceed.`
+    };
+  }
+
+  return handleTransferCallInternal(session, args);
+}
+
+async function handleTransferCallInternal(session, args) {
   if (!twilio) {
     console.error('[Handoff] Twilio SDK not available');
     return { success: false, error: "twilio_not_configured" };
@@ -1868,7 +2081,17 @@ Options:
   --port=PORT       Server port (default: 3009)
   --health          Check system health
   --test-grok       Test Grok connection
+  --list-pending    List HITL pending voice actions
+  --approve=ID      Approve HITL pending action
+  --reject=ID       Reject HITL pending action
   --help            Show this help
+
+HITL (Human In The Loop):
+  Hot bookings and call transfers require approval.
+  ENV: HITL_APPROVE_HOT_BOOKINGS (default: true)
+  ENV: HITL_APPROVE_TRANSFERS (default: true)
+  ENV: HITL_SLACK_WEBHOOK (Slack notifications)
+  ENV: HITL_VOICE_ENABLED (default: true)
 
 Environment Variables:
   TWILIO_ACCOUNT_SID     Twilio Account SID
@@ -1962,6 +2185,30 @@ async function main() {
     return;
   }
 
+  // HITL Commands
+  if (args.includes('--list-pending')) {
+    listPendingActions();
+    return;
+  }
+
+  const approveArg = args.find(a => a.startsWith('--approve='));
+  if (approveArg) {
+    const hitlId = approveArg.split('=')[1];
+    const result = await approveAction(hitlId);
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
+  const rejectArg = args.find(a => a.startsWith('--reject='));
+  if (rejectArg) {
+    const hitlId = rejectArg.split('=')[1];
+    const reasonArg = args.find(a => a.startsWith('--reason='));
+    const reason = reasonArg ? reasonArg.split('=')[1] : 'Rejected by operator';
+    const result = rejectAction(hitlId, reason);
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
   if (args.includes('--health')) {
     await checkHealth();
     return;
@@ -2032,11 +2279,18 @@ if (typeof module !== 'undefined') {
   module.exports = {
     handleSearchKnowledgeBase,
     handleTransferCall,
+    handleTransferCallInternal,
     handleSendPaymentDetails,
     handleQualifyLead,
     handleObjection,
     handleScheduleCallback,
     handleCreateBooking,
-    handleTrackConversion
+    handleCreateBookingInternal,
+    handleTrackConversion,
+    // HITL
+    listPendingActions,
+    approveAction,
+    rejectAction,
+    HITL_CONFIG
   };
 }

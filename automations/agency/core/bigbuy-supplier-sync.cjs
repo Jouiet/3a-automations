@@ -56,6 +56,177 @@ const CONFIG = {
   port: parseInt(process.env.BIGBUY_PORT) || 3021
 };
 
+// ============================================================================
+// HITL CONFIGURATION (Human In The Loop)
+// ============================================================================
+
+const fs = require('fs');
+const path = require('path');
+
+const HITL_CONFIG = {
+  enabled: process.env.HITL_BIGBUY_ENABLED !== 'false',
+  batchThreshold: parseInt(process.env.HITL_BATCH_THRESHOLD) || 100, // products
+  slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
+  notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
+};
+
+const DATA_DIR = process.env.BIGBUY_DATA_DIR || path.join(__dirname, '../../../data/bigbuy');
+const HITL_PENDING_DIR = path.join(DATA_DIR, 'hitl-pending');
+const HITL_PENDING_FILE = path.join(HITL_PENDING_DIR, 'pending-syncs.json');
+
+// Ensure directories exist
+function ensureHitlDir() {
+  if (!fs.existsSync(HITL_PENDING_DIR)) {
+    fs.mkdirSync(HITL_PENDING_DIR, { recursive: true });
+  }
+}
+ensureHitlDir();
+
+// HITL Functions
+function loadPendingSyncs() {
+  try {
+    if (fs.existsSync(HITL_PENDING_FILE)) {
+      return JSON.parse(fs.readFileSync(HITL_PENDING_FILE, 'utf8'));
+    }
+  } catch (error) {
+    console.warn(`⚠️ Could not load HITL pending syncs: ${error.message}`);
+  }
+  return [];
+}
+
+function savePendingSyncs(syncs) {
+  try {
+    const tempPath = `${HITL_PENDING_FILE}.tmp`;
+    fs.writeFileSync(tempPath, JSON.stringify(syncs, null, 2));
+    fs.renameSync(tempPath, HITL_PENDING_FILE);
+  } catch (error) {
+    console.error(`❌ Failed to save HITL pending syncs: ${error.message}`);
+  }
+}
+
+function queueSyncForApproval(categoryIds, productCount, options = {}) {
+  const pending = loadPendingSyncs();
+  const pendingSync = {
+    id: `hitl_sync_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    categoryIds,
+    productCount,
+    options,
+    reason: `Batch sync ${productCount} products >= ${HITL_CONFIG.batchThreshold} threshold`,
+    queuedAt: new Date().toISOString(),
+    status: 'pending'
+  };
+
+  pending.push(pendingSync);
+  savePendingSyncs(pending);
+
+  console.log(`🔒 Sync queued for HITL approval (${productCount} products)`);
+
+  // Slack notification
+  if (HITL_CONFIG.slackWebhook && HITL_CONFIG.notifyOnPending) {
+    sendHitlNotification(pendingSync).catch(e => console.error(`❌ Slack notification failed: ${e.message}`));
+  }
+
+  return pendingSync;
+}
+
+async function sendHitlNotification(pendingSync) {
+  if (!HITL_CONFIG.slackWebhook) return;
+
+  const message = {
+    text: `🔒 HITL Approval Required - BigBuy Catalog Sync`,
+    blocks: [
+      {
+        type: 'header',
+        text: { type: 'plain_text', text: '🔒 HITL: Large Batch Sync Pending', emoji: true }
+      },
+      {
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*Products:* ${pendingSync.productCount}` },
+          { type: 'mrkdwn', text: `*Categories:* ${pendingSync.categoryIds.join(', ')}` },
+          { type: 'mrkdwn', text: `*Reason:* ${pendingSync.reason}` }
+        ]
+      },
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `\`\`\`node bigbuy-supplier-sync.cjs --approve=${pendingSync.id}\`\`\`` }
+      }
+    ]
+  };
+
+  await fetch(HITL_CONFIG.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message)
+  });
+}
+
+async function approveSync(hitlId) {
+  const pending = loadPendingSyncs();
+  const index = pending.findIndex(s => s.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL sync ${hitlId} not found`);
+    return { success: false, error: 'Sync not found' };
+  }
+
+  const sync = pending[index];
+  sync.status = 'approved';
+  sync.approvedAt = new Date().toISOString();
+
+  pending.splice(index, 1);
+  savePendingSyncs(pending);
+
+  console.log(`✅ HITL sync approved, processing ${sync.productCount} products...`);
+
+  // Execute sync
+  const result = await syncCatalogInternal(sync.categoryIds, sync.options);
+
+  return { success: true, sync, result };
+}
+
+function rejectSync(hitlId, reason = 'Rejected by operator') {
+  const pending = loadPendingSyncs();
+  const index = pending.findIndex(s => s.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL sync ${hitlId} not found`);
+    return { success: false, error: 'Sync not found' };
+  }
+
+  const sync = pending[index];
+  sync.status = 'rejected';
+  sync.rejectedAt = new Date().toISOString();
+  sync.rejectionReason = reason;
+
+  pending.splice(index, 1);
+  savePendingSyncs(pending);
+
+  console.log(`❌ HITL sync rejected: ${reason}`);
+
+  return { success: true, sync };
+}
+
+function listPendingSyncs() {
+  const pending = loadPendingSyncs();
+  console.log(`\n🔒 Pending HITL Syncs (${pending.length}):\n`);
+
+  if (pending.length === 0) {
+    console.log('  No pending syncs');
+    return pending;
+  }
+
+  pending.forEach(s => {
+    console.log(`  • ${s.id}`);
+    console.log(`    Products: ${s.productCount} | Categories: ${s.categoryIds.join(', ')}`);
+    console.log(`    Reason: ${s.reason}`);
+    console.log(`    Queued: ${s.queuedAt}`);
+    console.log();
+  });
+
+  return pending;
+}
+
 // Simple in-memory cache
 const cache = new Map();
 
@@ -521,10 +692,43 @@ async function getTrackingBatch(orderIds) {
 // ============================================================================
 
 /**
- * Sync products to external platform
+ * Sync products to external platform (with HITL check)
  * Returns products with prices and stock ready for import
  */
 async function syncCatalog(categoryIds = [], options = {}) {
+  // HITL Check: Large batch syncs require approval
+  if (HITL_CONFIG.enabled) {
+    // First, count total products without syncing
+    let totalProductCount = 0;
+    for (const categoryId of categoryIds) {
+      try {
+        const products = await getProducts({ categoryId, limit: options.limit || 100 });
+        totalProductCount += (products || []).length;
+      } catch (e) {
+        // Continue counting
+      }
+    }
+
+    if (totalProductCount >= HITL_CONFIG.batchThreshold) {
+      const pendingSync = queueSyncForApproval(categoryIds, totalProductCount, options);
+      return {
+        status: 'pending_approval',
+        hitlId: pendingSync.id,
+        productCount: totalProductCount,
+        categoryIds,
+        message: `Sync queued for HITL approval. Use --approve=${pendingSync.id} to process.`
+      };
+    }
+  }
+
+  // Process sync normally
+  return syncCatalogInternal(categoryIds, options);
+}
+
+/**
+ * Internal sync (bypasses HITL check)
+ */
+async function syncCatalogInternal(categoryIds = [], options = {}) {
   const results = {
     products: [],
     errors: [],
@@ -686,7 +890,16 @@ Options:
   --sync                Sync catalog (with --category)
   --server              Start HTTP server (port ${CONFIG.port})
   --sandbox             Use sandbox environment
+  --list-pending        List HITL pending syncs awaiting approval
+  --approve=ID          Approve HITL pending sync
+  --reject=ID           Reject HITL pending sync
   --help                Show this help
+
+HITL (Human In The Loop):
+  Syncs >= ${HITL_CONFIG.batchThreshold} products require manual approval.
+  ENV: HITL_BATCH_THRESHOLD (default: 100)
+  ENV: HITL_SLACK_WEBHOOK (Slack notifications)
+  ENV: HITL_BIGBUY_ENABLED (default: true)
 
 Environment:
   BIGBUY_API_KEY       Your BigBuy API key
@@ -707,6 +920,25 @@ Examples:
   if (args.includes('--sandbox')) {
     CONFIG.useSandbox = true;
     console.log('🧪 Using SANDBOX environment');
+  }
+
+  // HITL Commands
+  if (args.includes('--list-pending')) {
+    return listPendingSyncs();
+  }
+
+  const approveArg = args.find(a => a.startsWith('--approve='));
+  if (approveArg) {
+    const hitlId = approveArg.split('=')[1];
+    return approveSync(hitlId);
+  }
+
+  const rejectArg = args.find(a => a.startsWith('--reject='));
+  if (rejectArg) {
+    const hitlId = rejectArg.split('=')[1];
+    const reasonArg = args.find(a => a.startsWith('--reason='));
+    const reason = reasonArg ? reasonArg.split('=')[1] : 'Rejected by operator';
+    return rejectSync(hitlId, reason);
   }
 
   if (args.includes('--categories')) {

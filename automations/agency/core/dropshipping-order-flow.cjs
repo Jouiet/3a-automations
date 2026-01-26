@@ -49,6 +49,19 @@ const bigBuy = require('./bigbuy-supplier-sync.cjs');
 const DATA_DIR = process.env.DROPSHIP_DATA_DIR || path.join(__dirname, '../../../data/dropshipping');
 const ORDER_STORE_FILE = path.join(DATA_DIR, 'order-store.json');
 const PENDING_TRACKING_FILE = path.join(DATA_DIR, 'pending-tracking.json');
+const HITL_PENDING_DIR = path.join(DATA_DIR, 'hitl-pending');
+const HITL_PENDING_FILE = path.join(HITL_PENDING_DIR, 'pending-orders.json');
+
+// ============================================================================
+// HITL CONFIGURATION (Human In The Loop)
+// ============================================================================
+
+const HITL_CONFIG = {
+  enabled: process.env.HITL_DROPSHIP_ENABLED !== 'false',
+  orderValueThreshold: parseFloat(process.env.HITL_ORDER_VALUE_THRESHOLD) || 500, // EUR
+  slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
+  notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
+};
 
 // Ensure data directory exists
 function ensureDataDir() {
@@ -115,6 +128,196 @@ function createPersistentMap(filePath) {
 
 // Initialize persistence on startup
 ensureDataDir();
+
+// Ensure HITL directory exists
+function ensureHitlDir() {
+  if (!fs.existsSync(HITL_PENDING_DIR)) {
+    fs.mkdirSync(HITL_PENDING_DIR, { recursive: true });
+    console.log(`📁 Created HITL directory: ${HITL_PENDING_DIR}`);
+  }
+}
+ensureHitlDir();
+
+// ============================================================================
+// HITL FUNCTIONS (Human In The Loop)
+// ============================================================================
+
+/**
+ * Load pending HITL orders
+ */
+function loadPendingOrders() {
+  try {
+    if (fs.existsSync(HITL_PENDING_FILE)) {
+      return JSON.parse(fs.readFileSync(HITL_PENDING_FILE, 'utf8'));
+    }
+  } catch (error) {
+    console.warn(`⚠️ Could not load HITL pending orders: ${error.message}`);
+  }
+  return [];
+}
+
+/**
+ * Save pending HITL orders
+ */
+function savePendingOrders(orders) {
+  try {
+    const tempPath = `${HITL_PENDING_FILE}.tmp`;
+    fs.writeFileSync(tempPath, JSON.stringify(orders, null, 2));
+    fs.renameSync(tempPath, HITL_PENDING_FILE);
+  } catch (error) {
+    console.error(`❌ Failed to save HITL pending orders: ${error.message}`);
+  }
+}
+
+/**
+ * Queue order for HITL approval
+ */
+function queueOrderForApproval(order, reason) {
+  const pending = loadPendingOrders();
+  const pendingOrder = {
+    id: `hitl_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    orderId: order.orderId,
+    orderNumber: order.orderNumber,
+    source: order.source,
+    customer: order.customer,
+    shippingAddress: order.shippingAddress,
+    items: order.items,
+    totalValue: order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+    reason,
+    queuedAt: new Date().toISOString(),
+    status: 'pending'
+  };
+
+  pending.push(pendingOrder);
+  savePendingOrders(pending);
+
+  console.log(`🔒 Order #${order.orderNumber} queued for HITL approval (${reason})`);
+
+  // Send Slack notification if configured
+  if (HITL_CONFIG.slackWebhook && HITL_CONFIG.notifyOnPending) {
+    sendHitlNotification(pendingOrder).catch(e => console.error(`❌ Slack notification failed: ${e.message}`));
+  }
+
+  return pendingOrder;
+}
+
+/**
+ * Send Slack notification for pending HITL order
+ */
+async function sendHitlNotification(pendingOrder) {
+  if (!HITL_CONFIG.slackWebhook) return;
+
+  const message = {
+    text: `🔒 HITL Approval Required - Dropshipping Order`,
+    blocks: [
+      {
+        type: 'header',
+        text: { type: 'plain_text', text: '🔒 HITL: High-Value Order Pending', emoji: true }
+      },
+      {
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*Order:* #${pendingOrder.orderNumber}` },
+          { type: 'mrkdwn', text: `*Value:* €${pendingOrder.totalValue.toFixed(2)}` },
+          { type: 'mrkdwn', text: `*Customer:* ${pendingOrder.customer?.email || 'N/A'}` },
+          { type: 'mrkdwn', text: `*Reason:* ${pendingOrder.reason}` }
+        ]
+      },
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `\`\`\`node dropshipping-order-flow.cjs --approve=${pendingOrder.id}\`\`\`` }
+      }
+    ]
+  };
+
+  const response = await fetch(HITL_CONFIG.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Slack webhook failed: ${response.status}`);
+  }
+}
+
+/**
+ * Approve pending HITL order
+ */
+async function approveOrder(hitlId) {
+  const pending = loadPendingOrders();
+  const index = pending.findIndex(o => o.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL order ${hitlId} not found`);
+    return { success: false, error: 'Order not found' };
+  }
+
+  const order = pending[index];
+  order.status = 'approved';
+  order.approvedAt = new Date().toISOString();
+
+  // Remove from pending
+  pending.splice(index, 1);
+  savePendingOrders(pending);
+
+  console.log(`✅ HITL order #${order.orderNumber} approved, processing...`);
+
+  // Process the order
+  const result = await processOrderInternal(order);
+
+  return { success: true, order, result };
+}
+
+/**
+ * Reject pending HITL order
+ */
+function rejectOrder(hitlId, reason = 'Rejected by operator') {
+  const pending = loadPendingOrders();
+  const index = pending.findIndex(o => o.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL order ${hitlId} not found`);
+    return { success: false, error: 'Order not found' };
+  }
+
+  const order = pending[index];
+  order.status = 'rejected';
+  order.rejectedAt = new Date().toISOString();
+  order.rejectionReason = reason;
+
+  // Remove from pending (or keep in history file)
+  pending.splice(index, 1);
+  savePendingOrders(pending);
+
+  console.log(`❌ HITL order #${order.orderNumber} rejected: ${reason}`);
+
+  return { success: true, order };
+}
+
+/**
+ * List pending HITL orders
+ */
+function listPendingOrders() {
+  const pending = loadPendingOrders();
+  console.log(`\n🔒 Pending HITL Orders (${pending.length}):\n`);
+
+  if (pending.length === 0) {
+    console.log('  No pending orders');
+    return pending;
+  }
+
+  pending.forEach(o => {
+    console.log(`  • ${o.id}`);
+    console.log(`    Order: #${o.orderNumber} | Value: €${o.totalValue.toFixed(2)}`);
+    console.log(`    Customer: ${o.customer?.email || 'N/A'}`);
+    console.log(`    Reason: ${o.reason}`);
+    console.log(`    Queued: ${o.queuedAt}`);
+    console.log();
+  });
+
+  return pending;
+}
 
 // ============================================================================
 // CONFIGURATION
@@ -454,7 +657,7 @@ async function createBigBuyOrder(order, items) {
 // ============================================================================
 
 /**
- * Process incoming order
+ * Process incoming order (with HITL check)
  */
 async function processOrder(order) {
   console.log(`\n📋 Processing order #${order.orderNumber} from ${order.source}...`);
@@ -465,6 +668,30 @@ async function processOrder(order) {
     return { status: 'duplicate', orderId: order.orderId };
   }
 
+  // HITL Check: High-value orders require approval
+  if (HITL_CONFIG.enabled) {
+    const totalValue = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    if (totalValue >= HITL_CONFIG.orderValueThreshold) {
+      const pendingOrder = queueOrderForApproval(order, `Order value €${totalValue.toFixed(2)} >= €${HITL_CONFIG.orderValueThreshold} threshold`);
+      return {
+        status: 'pending_approval',
+        hitlId: pendingOrder.id,
+        orderId: order.orderId,
+        orderNumber: order.orderNumber,
+        totalValue,
+        message: `Order queued for HITL approval. Use --approve=${pendingOrder.id} to process.`
+      };
+    }
+  }
+
+  // Process order normally
+  return processOrderInternal(order);
+}
+
+/**
+ * Internal order processing (bypasses HITL check)
+ */
+async function processOrderInternal(order) {
   // Group items by supplier
   const supplierGroups = groupItemsBySupplier(order.items);
   const supplierNames = Object.keys(supplierGroups);
@@ -1158,7 +1385,16 @@ Options:
   --list-orders         List processed orders
   --order=ID            Get order details
   --test                Process a test order from stdin
+  --list-pending        List HITL pending orders awaiting approval
+  --approve=ID          Approve HITL pending order
+  --reject=ID           Reject HITL pending order
   --help                Show this help
+
+HITL (Human In The Loop):
+  Orders >= €${HITL_CONFIG.orderValueThreshold} require manual approval.
+  ENV: HITL_ORDER_VALUE_THRESHOLD (default: 500)
+  ENV: HITL_SLACK_WEBHOOK (Slack notifications)
+  ENV: HITL_DROPSHIP_ENABLED (default: true)
 
 Environment:
   # Storefronts
@@ -1197,6 +1433,25 @@ Examples:
 
   if (args.includes('--server')) {
     return startServer();
+  }
+
+  // HITL Commands
+  if (args.includes('--list-pending')) {
+    return listPendingOrders();
+  }
+
+  const approveArg = args.find(a => a.startsWith('--approve='));
+  if (approveArg) {
+    const hitlId = approveArg.split('=')[1];
+    return approveOrder(hitlId);
+  }
+
+  const rejectArg = args.find(a => a.startsWith('--reject='));
+  if (rejectArg) {
+    const hitlId = rejectArg.split('=')[1];
+    const reasonArg = args.find(a => a.startsWith('--reason='));
+    const reason = reasonArg ? reasonArg.split('=')[1] : 'Rejected by operator';
+    return rejectOrder(hitlId, reason);
   }
 
   if (args.includes('--sync-tracking')) {
@@ -1261,6 +1516,7 @@ Examples:
 module.exports = {
   // Order processing
   processOrder,
+  processOrderInternal,
   parseShopifyOrder,
   parseWooCommerceOrder,
 
@@ -1275,6 +1531,12 @@ module.exports = {
   // Tracking
   getSupplierTracking,
   syncPendingTracking,
+
+  // HITL
+  listPendingOrders,
+  approveOrder,
+  rejectOrder,
+  HITL_CONFIG,
 
   // Utilities
   healthCheck,

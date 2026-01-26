@@ -60,7 +60,197 @@ function loadEnv() {
 }
 
 const ENV = loadEnv();
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
+
+// ============================================================================
+// HITL CONFIGURATION (Human In The Loop)
+// ============================================================================
+
+const HITL_CONFIG = {
+  enabled: ENV.HITL_CHATBOT_ENABLED !== 'false',
+  hotLeadThreshold: parseInt(ENV.HITL_HOT_LEAD_THRESHOLD) || 80, // Score threshold
+  slackWebhook: ENV.HITL_SLACK_WEBHOOK || ENV.SLACK_WEBHOOK_URL,
+  notifyOnPending: ENV.HITL_NOTIFY_ON_PENDING !== 'false'
+};
+
+const DATA_DIR = ENV.CHATBOT_DATA_DIR || path.join(__dirname, '../../../data/chatbot');
+const HITL_PENDING_DIR = path.join(DATA_DIR, 'hitl-pending');
+const HITL_PENDING_FILE = path.join(HITL_PENDING_DIR, 'pending-leads.json');
+
+// Ensure directories exist
+function ensureHitlDir() {
+  if (!fs.existsSync(HITL_PENDING_DIR)) {
+    fs.mkdirSync(HITL_PENDING_DIR, { recursive: true });
+  }
+}
+ensureHitlDir();
+
+// HITL Functions
+function loadPendingLeads() {
+  try {
+    if (fs.existsSync(HITL_PENDING_FILE)) {
+      return JSON.parse(fs.readFileSync(HITL_PENDING_FILE, 'utf8'));
+    }
+  } catch (error) {
+    console.warn(`⚠️ Could not load HITL pending leads: ${error.message}`);
+  }
+  return [];
+}
+
+function savePendingLeads(leads) {
+  try {
+    const tempPath = `${HITL_PENDING_FILE}.tmp`;
+    fs.writeFileSync(tempPath, JSON.stringify(leads, null, 2));
+    fs.renameSync(tempPath, HITL_PENDING_FILE);
+  } catch (error) {
+    console.error(`❌ Failed to save HITL pending leads: ${error.message}`);
+  }
+}
+
+function queueLeadForApproval(session, reason) {
+  const pending = loadPendingLeads();
+  const pendingLead = {
+    id: `hitl_lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    sessionId: session.sessionId,
+    contact: session.contact,
+    score: session.totalScore,
+    status: getLeadStatus(session.totalScore),
+    bant: session.bant,
+    reason,
+    queuedAt: new Date().toISOString(),
+    approvalStatus: 'pending'
+  };
+
+  pending.push(pendingLead);
+  savePendingLeads(pending);
+
+  console.log(`🔒 Hot lead (${session.contact.email || 'N/A'}) queued for HITL approval`);
+
+  // Slack notification
+  if (HITL_CONFIG.slackWebhook && HITL_CONFIG.notifyOnPending) {
+    sendHitlLeadNotification(pendingLead).catch(e => console.error(`❌ Slack notification failed: ${e.message}`));
+  }
+
+  return pendingLead;
+}
+
+async function sendHitlLeadNotification(pendingLead) {
+  if (!HITL_CONFIG.slackWebhook) return;
+
+  const message = {
+    text: `🔒 HITL Approval Required - Hot Lead`,
+    blocks: [
+      {
+        type: 'header',
+        text: { type: 'plain_text', text: '🔥 HITL: Hot Lead Pending Review', emoji: true }
+      },
+      {
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*Email:* ${pendingLead.contact.email || 'N/A'}` },
+          { type: 'mrkdwn', text: `*Score:* ${pendingLead.score}/100` },
+          { type: 'mrkdwn', text: `*Status:* ${pendingLead.status.toUpperCase()}` },
+          { type: 'mrkdwn', text: `*Budget:* ${pendingLead.bant.budget.data || 'N/A'}` }
+        ]
+      },
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `\`\`\`node lead-qualification-chatbot.cjs --approve=${pendingLead.id}\`\`\`` }
+      }
+    ]
+  };
+
+  const response = await fetch(HITL_CONFIG.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Slack webhook failed: ${response.status}`);
+  }
+}
+
+async function approveLead(hitlId) {
+  const pending = loadPendingLeads();
+  const index = pending.findIndex(l => l.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL lead ${hitlId} not found`);
+    return { success: false, error: 'Lead not found' };
+  }
+
+  const lead = pending[index];
+  lead.approvalStatus = 'approved';
+  lead.approvedAt = new Date().toISOString();
+
+  // Get session if still exists
+  const session = sessions.get(lead.sessionId);
+
+  pending.splice(index, 1);
+  savePendingLeads(pending);
+
+  console.log(`✅ HITL lead (${lead.contact.email || 'N/A'}) approved, syncing to Klaviyo...`);
+
+  // Sync to Klaviyo
+  if (session) {
+    const result = await syncToKlaviyoInternal(session);
+    return { success: true, lead, result };
+  } else {
+    // Session expired, create minimal session for sync
+    const minimalSession = {
+      sessionId: lead.sessionId,
+      contact: lead.contact,
+      totalScore: lead.score,
+      bant: lead.bant
+    };
+    const result = await syncToKlaviyoInternal(minimalSession);
+    return { success: true, lead, result };
+  }
+}
+
+function rejectLead(hitlId, reason = 'Rejected by operator') {
+  const pending = loadPendingLeads();
+  const index = pending.findIndex(l => l.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL lead ${hitlId} not found`);
+    return { success: false, error: 'Lead not found' };
+  }
+
+  const lead = pending[index];
+  lead.approvalStatus = 'rejected';
+  lead.rejectedAt = new Date().toISOString();
+  lead.rejectionReason = reason;
+
+  pending.splice(index, 1);
+  savePendingLeads(pending);
+
+  console.log(`❌ HITL lead (${lead.contact.email || 'N/A'}) rejected: ${reason}`);
+
+  return { success: true, lead };
+}
+
+function listPendingLeads() {
+  const pending = loadPendingLeads();
+  console.log(`\n🔒 Pending HITL Leads (${pending.length}):\n`);
+
+  if (pending.length === 0) {
+    console.log('  No pending leads');
+    return pending;
+  }
+
+  pending.forEach(l => {
+    console.log(`  • ${l.id}`);
+    console.log(`    Email: ${l.contact.email || 'N/A'} | Score: ${l.score}/100`);
+    console.log(`    Status: ${l.status.toUpperCase()}`);
+    console.log(`    Budget: ${l.bant.budget.data || 'N/A'}`);
+    console.log(`    Queued: ${l.queuedAt}`);
+    console.log();
+  });
+
+  return pending;
+}
 
 // AI PROVIDERS - Frontier Models (Jan 2026)
 const PROVIDERS = {
@@ -632,6 +822,29 @@ async function syncToKlaviyo(session) {
     return { success: false, error: 'No email in session' };
   }
 
+  // HITL Check: Hot leads require approval before CRM sync
+  if (HITL_CONFIG.enabled && session.totalScore >= HITL_CONFIG.hotLeadThreshold) {
+    const pendingLead = queueLeadForApproval(session, `Lead score ${session.totalScore} >= ${HITL_CONFIG.hotLeadThreshold} threshold`);
+    return {
+      status: 'pending_approval',
+      hitlId: pendingLead.id,
+      score: session.totalScore,
+      email: session.contact.email,
+      message: `Hot lead queued for HITL approval. Use --approve=${pendingLead.id} to sync.`
+    };
+  }
+
+  return syncToKlaviyoInternal(session);
+}
+
+/**
+ * Internal Klaviyo sync (bypasses HITL check)
+ */
+async function syncToKlaviyoInternal(session) {
+  if (!ENV.KLAVIYO_API_KEY) {
+    return { success: false, error: 'Klaviyo not configured' };
+  }
+
   const status = getLeadStatus(session.totalScore);
   const listMap = {
     hot: ENV.KLAVIYO_HOT_LEADS_LIST || null,
@@ -872,6 +1085,29 @@ function healthCheck() {
 
 async function main() {
   const args = process.argv.slice(2);
+
+  // HITL Commands
+  if (args.includes('--list-pending')) {
+    return listPendingLeads();
+  }
+
+  const approveArg = args.find(a => a.startsWith('--approve='));
+  if (approveArg) {
+    const hitlId = approveArg.split('=')[1];
+    const result = await approveLead(hitlId);
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
+  const rejectArg = args.find(a => a.startsWith('--reject='));
+  if (rejectArg) {
+    const hitlId = rejectArg.split('=')[1];
+    const reasonArg = args.find(a => a.startsWith('--reason='));
+    const reason = reasonArg ? reasonArg.split('=')[1] : 'Rejected by operator';
+    const result = rejectLead(hitlId, reason);
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
 
   if (args.includes('--health')) {
     console.log('\n📊 Lead Qualification Chatbot - Health Check\n');

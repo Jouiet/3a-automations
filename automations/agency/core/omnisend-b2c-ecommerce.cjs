@@ -50,6 +50,179 @@ const CONFIG = {
 };
 
 // ============================================================================
+// HITL CONFIGURATION (Human In The Loop)
+// ============================================================================
+
+const fs = require('fs');
+const path = require('path');
+
+const HITL_CONFIG = {
+  enabled: process.env.HITL_OMNISEND_ENABLED !== 'false',
+  previewModeDefault: process.env.HITL_PREVIEW_MODE !== 'false',
+  marketingEvents: ['promotional', 'campaign', 'newsletter', 'bulk_send'],
+  slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
+  notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
+};
+
+const DATA_DIR = process.env.OMNISEND_DATA_DIR || path.join(__dirname, '../../../data/omnisend');
+const HITL_PENDING_DIR = path.join(DATA_DIR, 'hitl-pending');
+const HITL_PENDING_FILE = path.join(HITL_PENDING_DIR, 'pending-events.json');
+
+// Ensure directories exist
+function ensureHitlDir() {
+  if (!fs.existsSync(HITL_PENDING_DIR)) {
+    fs.mkdirSync(HITL_PENDING_DIR, { recursive: true });
+  }
+}
+ensureHitlDir();
+
+// HITL Functions
+function loadPendingEvents() {
+  try {
+    if (fs.existsSync(HITL_PENDING_FILE)) {
+      return JSON.parse(fs.readFileSync(HITL_PENDING_FILE, 'utf8'));
+    }
+  } catch (error) {
+    console.warn(`⚠️ Could not load HITL pending events: ${error.message}`);
+  }
+  return [];
+}
+
+function savePendingEvents(events) {
+  try {
+    const tempPath = `${HITL_PENDING_FILE}.tmp`;
+    fs.writeFileSync(tempPath, JSON.stringify(events, null, 2));
+    fs.renameSync(tempPath, HITL_PENDING_FILE);
+  } catch (error) {
+    console.error(`❌ Failed to save HITL pending events: ${error.message}`);
+  }
+}
+
+function queueEventForPreview(eventName, contact, properties, options = {}) {
+  const pending = loadPendingEvents();
+  const pendingEvent = {
+    id: `hitl_event_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    eventName,
+    contact,
+    properties,
+    options,
+    reason: 'Preview mode - marketing event requires approval',
+    queuedAt: new Date().toISOString(),
+    status: 'pending'
+  };
+
+  pending.push(pendingEvent);
+  savePendingEvents(pending);
+
+  console.log(`🔒 Event "${eventName}" queued for HITL preview`);
+
+  // Slack notification
+  if (HITL_CONFIG.slackWebhook && HITL_CONFIG.notifyOnPending) {
+    sendHitlEventNotification(pendingEvent).catch(e => console.error(`❌ Slack notification failed: ${e.message}`));
+  }
+
+  return pendingEvent;
+}
+
+async function sendHitlEventNotification(pendingEvent) {
+  if (!HITL_CONFIG.slackWebhook) return;
+
+  const message = {
+    text: `🔒 HITL Preview Required - Omnisend Event`,
+    blocks: [
+      {
+        type: 'header',
+        text: { type: 'plain_text', text: '🔒 HITL: Marketing Event Preview', emoji: true }
+      },
+      {
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*Event:* ${pendingEvent.eventName}` },
+          { type: 'mrkdwn', text: `*Contact:* ${pendingEvent.contact.email || pendingEvent.contact.phone || 'N/A'}` },
+          { type: 'mrkdwn', text: `*Properties:* ${Object.keys(pendingEvent.properties).length} fields` }
+        ]
+      },
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `\`\`\`node omnisend-b2c-ecommerce.cjs --approve=${pendingEvent.id}\`\`\`` }
+      }
+    ]
+  };
+
+  await fetch(HITL_CONFIG.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message)
+  });
+}
+
+async function approveEvent(hitlId, client) {
+  const pending = loadPendingEvents();
+  const index = pending.findIndex(e => e.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL event ${hitlId} not found`);
+    return { success: false, error: 'Event not found' };
+  }
+
+  const event = pending[index];
+  event.status = 'approved';
+  event.approvedAt = new Date().toISOString();
+
+  pending.splice(index, 1);
+  savePendingEvents(pending);
+
+  console.log(`✅ HITL event "${event.eventName}" approved, sending...`);
+
+  // Send the event
+  const result = await client.sendEventInternal(event.eventName, event.contact, event.properties, event.options);
+
+  return { success: true, event, result };
+}
+
+function rejectEvent(hitlId, reason = 'Rejected by operator') {
+  const pending = loadPendingEvents();
+  const index = pending.findIndex(e => e.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL event ${hitlId} not found`);
+    return { success: false, error: 'Event not found' };
+  }
+
+  const event = pending[index];
+  event.status = 'rejected';
+  event.rejectedAt = new Date().toISOString();
+  event.rejectionReason = reason;
+
+  pending.splice(index, 1);
+  savePendingEvents(pending);
+
+  console.log(`❌ HITL event "${event.eventName}" rejected: ${reason}`);
+
+  return { success: true, event };
+}
+
+function listPendingEvents() {
+  const pending = loadPendingEvents();
+  console.log(`\n🔒 Pending HITL Events (${pending.length}):\n`);
+
+  if (pending.length === 0) {
+    console.log('  No pending events');
+    return pending;
+  }
+
+  pending.forEach(e => {
+    console.log(`  • ${e.id}`);
+    console.log(`    Event: ${e.eventName}`);
+    console.log(`    Contact: ${e.contact.email || e.contact.phone || 'N/A'}`);
+    console.log(`    Queued: ${e.queuedAt}`);
+    console.log();
+  });
+
+  return pending;
+}
+
+// ============================================================================
 // HTTP CLIENT
 // ============================================================================
 
@@ -299,12 +472,12 @@ class OmnisendClient {
   // ==========================================================================
 
   /**
-   * Send custom event to trigger automation
+   * Send custom event to trigger automation (with HITL preview check)
    * @param {string} eventName - Custom event name
    * @param {Object} contact - Contact identifier (email or phone)
    * @param {Object} properties - Event properties
-   * @param {Object} options - Optional: { eventID, eventTime } for deduplication
-   * @returns {Object} Event result
+   * @param {Object} options - Optional: { eventID, eventTime, previewMode } for deduplication
+   * @returns {Object} Event result or pending approval
    */
   async sendEvent(eventName, contact, properties = {}, options = {}) {
     if (!eventName) {
@@ -315,6 +488,28 @@ class OmnisendClient {
       throw new Error('Contact email or phone is required');
     }
 
+    // HITL Check: Preview mode for marketing events
+    const previewMode = options.previewMode !== undefined ? options.previewMode : HITL_CONFIG.previewModeDefault;
+    const isMarketingEvent = HITL_CONFIG.marketingEvents.some(me => eventName.toLowerCase().includes(me));
+
+    if (HITL_CONFIG.enabled && previewMode && isMarketingEvent) {
+      const pendingEvent = queueEventForPreview(eventName, contact, properties, options);
+      return {
+        status: 'pending_preview',
+        hitlId: pendingEvent.id,
+        eventName,
+        contact: contact.email || contact.phone,
+        message: `Event queued for HITL preview. Use --approve=${pendingEvent.id} to send.`
+      };
+    }
+
+    return this.sendEventInternal(eventName, contact, properties, options);
+  }
+
+  /**
+   * Internal event sending (bypasses HITL check)
+   */
+  async sendEventInternal(eventName, contact, properties = {}, options = {}) {
     // Generate eventID and eventTime for deduplication (Omnisend best practice)
     const eventID = options.eventID || this.generateEventID();
     const eventTime = options.eventTime || this.getEventTime();
@@ -848,6 +1043,25 @@ async function main() {
   const args = process.argv.slice(2);
   const client = new OmnisendClient();
 
+  // HITL Commands
+  if (args.includes('--list-pending')) {
+    return listPendingEvents();
+  }
+
+  const approveArg = args.find(a => a.startsWith('--approve='));
+  if (approveArg) {
+    const hitlId = approveArg.split('=')[1];
+    return approveEvent(hitlId, client);
+  }
+
+  const rejectArg = args.find(a => a.startsWith('--reject='));
+  if (rejectArg) {
+    const hitlId = rejectArg.split('=')[1];
+    const reasonArg = args.find(a => a.startsWith('--reason='));
+    const reason = reasonArg ? reasonArg.split('=')[1] : 'Rejected by operator';
+    return rejectEvent(hitlId, reason);
+  }
+
   if (args.includes('--health')) {
     await client.healthCheck();
   } else if (args.includes('--audit')) {
@@ -938,6 +1152,17 @@ Options:
   Automations:
   --list-automations   List all automations (READ-ONLY)
   --list-campaigns     List all campaigns (READ-ONLY)
+
+HITL:
+  --list-pending       List HITL pending events awaiting approval
+  --approve=ID         Approve HITL pending event
+  --reject=ID          Reject HITL pending event
+
+HITL (Human In The Loop):
+  Marketing events require preview approval by default.
+  ENV: HITL_PREVIEW_MODE (default: true)
+  ENV: HITL_SLACK_WEBHOOK (Slack notifications)
+  ENV: HITL_OMNISEND_ENABLED (default: true)
 
 Environment Variables:
   OMNISEND_API_KEY     Omnisend API key (v5)

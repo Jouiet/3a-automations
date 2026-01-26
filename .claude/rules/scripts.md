@@ -72,7 +72,7 @@ providers: ['grok', 'openai', 'gemini', 'anthropic']
 // Auto-rotate on failure
 ```
 
-## HITL (Human In The Loop) - Session 165ter (12/18 = 67%)
+## HITL (Human In The Loop) - Session 165quater (18/18 = 100%) ✅
 | Script | HITL Type | Threshold |
 |--------|-----------|-----------|
 | blog-generator-resilient | Draft approval | requireApproval: true |
@@ -87,6 +87,12 @@ providers: ['grok', 'openai', 'gemini', 'anthropic']
 | **replenishment-reminder** | **Frequency cap** | **1 reminder/week/customer** |
 | **price-drop-alerts** | **Batch approval** | **>10 alerts in batch** |
 | **review-request-automation** | **VIP approval** | **€500+ orders** |
+| **dropshipping-order-flow** | **Order value** | **€500+ orders** |
+| **bigbuy-supplier-sync** | **Batch sync** | **>100 products** |
+| **hubspot-b2b-crm** | **Deal value** | **€2000+ deals** |
+| **omnisend-b2c-ecommerce** | **Preview mode** | **Marketing events** |
+| **lead-qualification-chatbot** | **Hot lead review** | **Score ≥80** |
+| **voice-telephony-bridge** | **Call actions** | **Transfers + hot bookings** |
 
 ### HITL Commands
 ```bash

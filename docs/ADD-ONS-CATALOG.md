@@ -1,7 +1,7 @@
 # ADD-ONS CATALOG - 3A Automation
-> Version: 1.7 | Date: 26/01/2026 | Session: 165ter
+> Version: 1.8 | Date: 26/01/2026 | Session: 165quater
 > Source: Analyse bottom-up des 85 scripts agency/core/
-> Updated: Session 165ter - HITL Coverage Complete ✅
+> Updated: Session 165quater - HITL Coverage 100% (18/18 scripts) ✅
 
 ## Executive Summary
 
@@ -11,7 +11,7 @@
 | Scripts with --health (functional) | **26** |
 | Scripts eligible for add-ons | 16 |
 | TOP 10 add-ons selected | 10 |
-| Human In The Loop (HITL) coverage | **100% (10/10)** ✅ Updated S165ter |
+| Human In The Loop (HITL) coverage | **100% (18/18)** ✅ Updated S165quater |
 | **Add-Ons OPERATIONAL (S165)** | **7/10 (70%)** ✅ Verified |
 | **Add-Ons PARTIAL** | **2/10 (20%)** ⚠️ SMS + Dropshipping |
 | **Add-Ons BLOCKED** | **1/10 (10%)** ❌ WhatsApp |
@@ -248,14 +248,14 @@ Dependencies:
 
 ## HITL ANALYSIS SUMMARY
 
-### Current State (Updated Session 160)
+### Current State (Updated Session 165quater)
 | Status | Count | Percentage |
 |--------|-------|------------|
-| ✅ Full HITL | 8 | 80% |
+| ✅ Full HITL | 18 | 100% |
 | ⚠️ Partial HITL | 0 | 0% |
-| ❌ No HITL | 2 | 20% |
+| ❌ No HITL | 0 | 0% |
 
-### HITL Gap Analysis (Updated Session 160)
+### HITL Gap Analysis (Updated Session 165quater)
 
 | Add-On | Current | Risk Level | Action Required |
 |--------|---------|------------|-----------------|
@@ -287,6 +287,36 @@ Dependencies:
 4. **SMS Automation** - ✅ DONE (S160)
    - Fix Applied: Daily spend limit with webhook alerts
    - ENV: SMS_DAILY_MAX, SMS_ALERT_THRESHOLD, SMS_BLOCK_ON_EXCEED
+
+5. **Dropshipping Order Flow** - ✅ DONE (S165quater)
+   - Fix Applied: Order value €500+ threshold for approval
+   - CLI: --list-pending, --approve=<id>, --reject=<id>
+   - ENV: HITL_ORDER_VALUE_THRESHOLD (default: 500)
+
+6. **BigBuy Supplier Sync** - ✅ DONE (S165quater)
+   - Fix Applied: Batch sync >100 products requires approval
+   - CLI: --list-pending, --approve=<id>, --reject=<id>
+   - ENV: HITL_BATCH_THRESHOLD (default: 100)
+
+7. **HubSpot B2B CRM** - ✅ DONE (S165quater)
+   - Fix Applied: Deal value €2000+ threshold for approval
+   - CLI: --list-pending, --approve=<id>, --reject=<id>
+   - ENV: HITL_DEAL_VALUE_THRESHOLD (default: 2000)
+
+8. **Omnisend B2C** - ✅ DONE (S165quater)
+   - Fix Applied: Preview mode for marketing events
+   - CLI: --list-pending, --approve=<id>, --reject=<id>
+   - ENV: HITL_PREVIEW_MODE (default: true)
+
+9. **Lead Qualification Chatbot** - ✅ DONE (S165quater)
+   - Fix Applied: Hot leads (score ≥80) require approval before CRM sync
+   - CLI: --list-pending, --approve=<id>, --reject=<id>
+   - ENV: HITL_HOT_LEAD_THRESHOLD (default: 80)
+
+10. **Voice Telephony Bridge** - ✅ DONE (S165quater)
+    - Fix Applied: Call transfers and hot bookings require approval
+    - CLI: --list-pending, --approve=<id>, --reject=<id>
+    - ENV: HITL_APPROVE_TRANSFERS, HITL_APPROVE_HOT_BOOKINGS
 
 ---
 
@@ -394,4 +424,4 @@ Chaque add-on nécessite que le CLIENT fournisse:
 
 ---
 
-*Document created: 25/01/2026 | Last updated: 26/01/2026 (Session 162 - Stitch API + Scripts 84)*
+*Document created: 25/01/2026 | Last updated: 26/01/2026 (Session 165quater - HITL 100% Coverage)*

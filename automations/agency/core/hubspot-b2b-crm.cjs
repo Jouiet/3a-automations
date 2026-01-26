@@ -58,6 +58,177 @@ const CONFIG = {
 };
 
 // ============================================================================
+// HITL CONFIGURATION (Human In The Loop)
+// ============================================================================
+
+const fs = require('fs');
+const path = require('path');
+
+const HITL_CONFIG = {
+  enabled: process.env.HITL_HUBSPOT_ENABLED !== 'false',
+  dealValueThreshold: parseFloat(process.env.HITL_DEAL_VALUE_THRESHOLD) || 2000, // EUR
+  slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
+  notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
+};
+
+const DATA_DIR = process.env.HUBSPOT_DATA_DIR || path.join(__dirname, '../../../data/hubspot');
+const HITL_PENDING_DIR = path.join(DATA_DIR, 'hitl-pending');
+const HITL_PENDING_FILE = path.join(HITL_PENDING_DIR, 'pending-deals.json');
+
+// Ensure directories exist
+function ensureHitlDir() {
+  if (!fs.existsSync(HITL_PENDING_DIR)) {
+    fs.mkdirSync(HITL_PENDING_DIR, { recursive: true });
+  }
+}
+ensureHitlDir();
+
+// HITL Functions
+function loadPendingDeals() {
+  try {
+    if (fs.existsSync(HITL_PENDING_FILE)) {
+      return JSON.parse(fs.readFileSync(HITL_PENDING_FILE, 'utf8'));
+    }
+  } catch (error) {
+    console.warn(`⚠️ Could not load HITL pending deals: ${error.message}`);
+  }
+  return [];
+}
+
+function savePendingDeals(deals) {
+  try {
+    const tempPath = `${HITL_PENDING_FILE}.tmp`;
+    fs.writeFileSync(tempPath, JSON.stringify(deals, null, 2));
+    fs.renameSync(tempPath, HITL_PENDING_FILE);
+  } catch (error) {
+    console.error(`❌ Failed to save HITL pending deals: ${error.message}`);
+  }
+}
+
+function queueDealForApproval(dealData, reason) {
+  const pending = loadPendingDeals();
+  const pendingDeal = {
+    id: `hitl_deal_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    dealData,
+    amount: dealData.amount || 0,
+    reason,
+    queuedAt: new Date().toISOString(),
+    status: 'pending'
+  };
+
+  pending.push(pendingDeal);
+  savePendingDeals(pending);
+
+  console.log(`🔒 Deal "${dealData.dealname}" queued for HITL approval (${reason})`);
+
+  // Slack notification
+  if (HITL_CONFIG.slackWebhook && HITL_CONFIG.notifyOnPending) {
+    sendHitlDealNotification(pendingDeal).catch(e => console.error(`❌ Slack notification failed: ${e.message}`));
+  }
+
+  return pendingDeal;
+}
+
+async function sendHitlDealNotification(pendingDeal) {
+  if (!HITL_CONFIG.slackWebhook) return;
+
+  const message = {
+    text: `🔒 HITL Approval Required - HubSpot Deal`,
+    blocks: [
+      {
+        type: 'header',
+        text: { type: 'plain_text', text: '🔒 HITL: High-Value Deal Pending', emoji: true }
+      },
+      {
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*Deal:* ${pendingDeal.dealData.dealname}` },
+          { type: 'mrkdwn', text: `*Amount:* €${pendingDeal.amount.toLocaleString()}` },
+          { type: 'mrkdwn', text: `*Pipeline:* ${pendingDeal.dealData.pipeline || 'default'}` },
+          { type: 'mrkdwn', text: `*Reason:* ${pendingDeal.reason}` }
+        ]
+      },
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `\`\`\`node hubspot-b2b-crm.cjs --approve=${pendingDeal.id}\`\`\`` }
+      }
+    ]
+  };
+
+  await fetch(HITL_CONFIG.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message)
+  });
+}
+
+async function approveDeal(hitlId, crm) {
+  const pending = loadPendingDeals();
+  const index = pending.findIndex(d => d.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL deal ${hitlId} not found`);
+    return { success: false, error: 'Deal not found' };
+  }
+
+  const deal = pending[index];
+  deal.status = 'approved';
+  deal.approvedAt = new Date().toISOString();
+
+  pending.splice(index, 1);
+  savePendingDeals(pending);
+
+  console.log(`✅ HITL deal "${deal.dealData.dealname}" approved, creating...`);
+
+  // Create the deal
+  const result = await crm.createDealInternal(deal.dealData);
+
+  return { success: true, deal, result };
+}
+
+function rejectDeal(hitlId, reason = 'Rejected by operator') {
+  const pending = loadPendingDeals();
+  const index = pending.findIndex(d => d.id === hitlId);
+
+  if (index === -1) {
+    console.log(`❌ HITL deal ${hitlId} not found`);
+    return { success: false, error: 'Deal not found' };
+  }
+
+  const deal = pending[index];
+  deal.status = 'rejected';
+  deal.rejectedAt = new Date().toISOString();
+  deal.rejectionReason = reason;
+
+  pending.splice(index, 1);
+  savePendingDeals(pending);
+
+  console.log(`❌ HITL deal "${deal.dealData.dealname}" rejected: ${reason}`);
+
+  return { success: true, deal };
+}
+
+function listPendingDeals() {
+  const pending = loadPendingDeals();
+  console.log(`\n🔒 Pending HITL Deals (${pending.length}):\n`);
+
+  if (pending.length === 0) {
+    console.log('  No pending deals');
+    return pending;
+  }
+
+  pending.forEach(d => {
+    console.log(`  • ${d.id}`);
+    console.log(`    Deal: ${d.dealData.dealname} | Amount: €${d.amount.toLocaleString()}`);
+    console.log(`    Reason: ${d.reason}`);
+    console.log(`    Queued: ${d.queuedAt}`);
+    console.log();
+  });
+
+  return pending;
+}
+
+// ============================================================================
 // HUBSPOT CLIENT
 // ============================================================================
 
@@ -639,9 +810,9 @@ class HubSpotB2BCRM {
   // ==========================================================================
 
   /**
-   * Create a deal
+   * Create a deal (with HITL check)
    * @param {Object} dealData - Deal properties
-   * @returns {Object} Created deal
+   * @returns {Object} Created deal or pending approval
    */
   async createDeal(dealData) {
     if (this.testMode) {
@@ -649,11 +820,32 @@ class HubSpotB2BCRM {
       return { id: 'test-deal-id', properties: dealData };
     }
 
-    await this.rateLimit();
-
     if (!dealData.dealname) {
       throw new Error('Deal name is required');
     }
+
+    // HITL Check: High-value deals require approval
+    if (HITL_CONFIG.enabled && dealData.amount >= HITL_CONFIG.dealValueThreshold) {
+      const pendingDeal = queueDealForApproval(dealData, `Deal amount €${dealData.amount.toLocaleString()} >= €${HITL_CONFIG.dealValueThreshold.toLocaleString()} threshold`);
+      return {
+        status: 'pending_approval',
+        hitlId: pendingDeal.id,
+        dealname: dealData.dealname,
+        amount: dealData.amount,
+        message: `Deal queued for HITL approval. Use --approve=${pendingDeal.id} to create.`
+      };
+    }
+
+    return this.createDealInternal(dealData);
+  }
+
+  /**
+   * Internal deal creation (bypasses HITL check)
+   * @param {Object} dealData - Deal properties
+   * @returns {Object} Created deal
+   */
+  async createDealInternal(dealData) {
+    await this.rateLimit();
 
     try {
       const response = await this.client.crm.deals.basicApi.create({
@@ -948,6 +1140,25 @@ async function main() {
   const args = process.argv.slice(2);
   const crm = new HubSpotB2BCRM();
 
+  // HITL Commands
+  if (args.includes('--list-pending')) {
+    return listPendingDeals();
+  }
+
+  const approveArg = args.find(a => a.startsWith('--approve='));
+  if (approveArg) {
+    const hitlId = approveArg.split('=')[1];
+    return approveDeal(hitlId, crm);
+  }
+
+  const rejectArg = args.find(a => a.startsWith('--reject='));
+  if (rejectArg) {
+    const hitlId = rejectArg.split('=')[1];
+    const reasonArg = args.find(a => a.startsWith('--reason='));
+    const reason = reasonArg ? reasonArg.split('=')[1] : 'Rejected by operator';
+    return rejectDeal(hitlId, reason);
+  }
+
   if (args.includes('--health')) {
     await crm.healthCheck();
   } else if (args.includes('--test-contact')) {
@@ -1006,6 +1217,15 @@ Options:
   --list-contacts   List first 10 contacts
   --list-companies  List first 10 companies
   --list-deals      List first 10 deals
+  --list-pending    List HITL pending deals awaiting approval
+  --approve=ID      Approve HITL pending deal
+  --reject=ID       Reject HITL pending deal
+
+HITL (Human In The Loop):
+  Deals >= €${HITL_CONFIG.dealValueThreshold.toLocaleString()} require manual approval.
+  ENV: HITL_DEAL_VALUE_THRESHOLD (default: 2000)
+  ENV: HITL_SLACK_WEBHOOK (Slack notifications)
+  ENV: HITL_HUBSPOT_ENABLED (default: true)
 
 Environment Variables:
   HUBSPOT_API_KEY        HubSpot Private App Access Token
