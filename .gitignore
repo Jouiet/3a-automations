@@ -67,3 +67,6 @@ tests/visual-baseline/
 tests/visual-current/
 tests/visual-diff/
 .credentials/
+
+# Remotion build output
+automations/remotion-studio/build/
