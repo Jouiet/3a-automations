@@ -41,16 +41,16 @@ Scripts modifiés:
 - birthday-anniversary, at-risk-customer, product-photos, llm-global-gateway
 - store-audit-agentic, flows-audit-agentic, sourcing-linkedin-agentic, etc.
 
-### P1 Complété: Messaging "Architectes Stratégiques" ✅
+### P1 Complété: Messaging Différencié ✅
 
-| Page | Avant | Après |
+| Page | Focus | Nouveau Message |
 | :--- | :--- | :--- |
-| **hero-ai-agency.html** | "Automate Everything" | "Strategic Architects" |
-| **services/pme.html** | "Automatisez votre croissance B2B" | "Architectes de croissance B2B" |
-| **services/ecommerce.html** | "Automatisez votre boutique" | "Architectes de votre croissance e-commerce" |
-| **en/services/smb.html** | "Automate your B2B growth" | "Strategic growth architects" |
+| **hero-ai-agency.html** | Brand anchor | "Strategic Architects" |
+| **services/pme.html** | B2B qualification | "Systèmes de qualification intelligents" |
+| **services/ecommerce.html** | Data-driven | "Pilotez votre croissance par les données" |
+| **en/services/smb.html** | Decision systems | "Smart qualification systems" |
 
-Messaging repositionné: **Judgment > Execution**
+Principe: **Pas de redondance** - chaque page a son angle unique
 
 ---
 
