@@ -1,6 +1,16 @@
 # AUDIT FORENSIQUE - 3A AUTOMATION
-## Session 141→162 | 22-26 Janvier 2026 | VÉRIFICATION 100% EMPIRIQUE
+## Session 141→166 | 22-26 Janvier 2026 | VÉRIFICATION 100% EMPIRIQUE
 
+> **UPDATE SESSION 166 (26/01/2026):**
+> - ✅ AG-UI Queue wired: `POST /ag-ui/queue/submit` endpoint
+> - ✅ MCP Servers: 5/6 credentials verified
+> - ✅ action-plan.md optimized: 3418→189 lines (-95%)
+> - ✅ HITL Coverage: **100% (18/18 scripts)**
+> - ✅ Geo-locale: 3 marchés (Maghreb/MAD, Europe/EUR, International/USD)
+> - ✅ Scripts Core: 84 → **85** (+stitch-to-3a-css.cjs)
+> - ✅ Scripts --health: 23 → **27** (+4 HITL workflows)
+> - ✅ CSS Version: v=84.0 → **v=86.0**
+>
 > **UPDATE SESSION 162 (26/01/2026):**
 > - ✅ Stitch MCP Wrapper CRÉÉ (`stitch-api.cjs`, 279 lignes)
 > - ✅ Screens générés (2 variants pricing page)
@@ -34,15 +44,16 @@
 
 ```
 +=====================================================================+
-|  STATUT: MVP TECHNIQUE - ✅ ISSUES CRITIQUES CORRIGÉS (S145bis)     |
-|  MATURITE: 81 scripts, 10 MCPs, 121 automations, pre-revenu         |
-|  STATUS (23/01/2026):                                               |
-|    - ✅ Catalog: 121 (synced)                                        |
-|    - ✅ llms.txt: 119 automations (corrigé)                         |
-|    - ✅ Scripts defer: tous OK                                       |
-|    - ✅ Testimonials: ajoutés FR+EN                                  |
-|    - ✅ Academy CSS: v=42.0, 10,498 lignes                          |
-|    - ⚠️ 20 warnings design (dette technique)                        |
+|  STATUT: MVP TECHNIQUE - ✅ HITL 100% COMPLETE (S166)               |
+|  MATURITE: 85 scripts, 11 MCPs, 121 automations, pre-revenu         |
+|  STATUS (26/01/2026 - Session 166):                                 |
+|    - ✅ HITL Coverage: 100% (18/18 high-risk scripts)               |
+|    - ✅ A2A Agents: 43 (41 dynamic skills)                          |
+|    - ✅ AG-UI Queue: Wired (POST endpoint)                          |
+|    - ✅ MCP Servers: 5/6 credentials verified                        |
+|    - ✅ Geo-locale: 3 marchés (MAD/EUR/USD)                         |
+|    - ✅ CSS Version: v=86.0                                         |
+|    - ⚠️ 4 sensors blocked (GA4, BigQuery, Apify, retention)        |
 |  DASHBOARD: ✅ 200 OK                                                |
 |  SITE: ✅ 200 OK                                                     |
 +=====================================================================+
@@ -50,17 +61,17 @@
 
 **DOCUMENT COMPLEMENTAIRE:** `docs/INVENTAIRE-SYSTEME-COMPLET.md`
 
-| Categorie | Count | Status (Vérifié Empiriquement) |
+| Categorie | Count | Status (Vérifié Session 166) |
 |-----------|-------|--------------------------------|
-| Scripts Core | **84** | `ls agency/core/*.cjs \| wc -l` (+3 S162) |
-| Scripts --health | **23** | Testables (+stitch-api.cjs) |
+| Scripts Core | **85** | `ls agency/core/*.cjs \| wc -l` (+stitch-to-3a-css.cjs) |
+| Scripts --health | **27** | Testables (32% coverage) |
 | Scripts Resilient | 7 | 5/5 testés OK |
-| Agents Agentic | 11 | Non testés |
-| Sensors | **20** | 6 OK, 10 PARTIAL, 4 BLOCKED |
-| Automations Registry | 119 | `jq '.automations \| length'` |
-| Automations Catalog | **77** | ❌ DÉSYNC (-42) |
-| Credentials SET | 57 | Opérationnels |
-| Credentials EMPTY | 36 | Bloquants |
+| A2A Agents | **43** | 41 dynamic skills |
+| Sensors | **20** | 15 OK (79%), 4 BLOCKED |
+| Automations Registry | **121** | `jq '.automations \| length'` |
+| HITL Coverage | **18/18** | ✅ 100% high-risk protected |
+| Credentials SET | **57** | 61% opérationnels |
+| Credentials EMPTY | 36 | Bloquants (USER ACTION) |
 | Revenus | €0 | 0 clients |
 
 ### Scores par Domaine (Session 141)

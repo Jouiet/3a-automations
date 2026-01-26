@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-26T13:02:29.742Z",
+  "last_updated": "2026-01-26T15:42:17.521Z",
   "session": "165",
   "sectors": {
     "marketing": {
@@ -28,20 +28,20 @@
       },
       "market_demand": {
         "label": "Market Demand",
-        "pressure": 50,
-        "trend": "STABLE",
-        "last_check": "2026-01-26T12:53:03.283Z",
+        "pressure": 8,
+        "trend": "DOWN",
+        "last_check": "2026-01-26T15:42:17.520Z",
         "sensor_data": {
-          "method": "AI Analysis (fallback)",
+          "method": "AI Analysis (Grok)",
           "keywords": [
             "marketing automation",
             "ai automation agency",
             "shopify automation",
             "e-commerce automation"
           ],
-          "demand_score": 50,
-          "market_trend": "stable",
-          "assessment": "Unable to analyze - using neutral baseline"
+          "demand_score": 92,
+          "market_trend": "rising",
+          "assessment": "Demand for automation solutions in marketing, AI agencies, Shopify, and e-commerce is surging due to AI integration and the push for operational efficiency amid growing online retail. Trends indicate continued expansion through 2026 as businesses prioritize scalable tech stacks."
         }
       },
       "tiktok_ads": {
@@ -148,7 +148,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T12:53:51.007Z",
+        "last_check": "2026-01-26T15:42:01.743Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
