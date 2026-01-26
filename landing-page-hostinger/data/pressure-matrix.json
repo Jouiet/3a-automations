@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-26T08:01:15.179Z",
+  "last_updated": "2026-01-26T10:13:35.439Z",
   "session": "165",
   "sectors": {
     "marketing": {
@@ -11,7 +11,7 @@
       "meta_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-26T06:45:53.518Z",
+        "last_check": "2026-01-26T10:13:30.587Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "Meta API credentials missing in .env"
@@ -30,7 +30,7 @@
         "label": "Market Demand",
         "pressure": 8,
         "trend": "DOWN",
-        "last_check": "2026-01-26T07:42:56.823Z",
+        "last_check": "2026-01-26T10:13:08.699Z",
         "sensor_data": {
           "method": "AI Analysis (Grok)",
           "keywords": [
@@ -41,13 +41,13 @@
           ],
           "demand_score": 92,
           "market_trend": "rising",
-          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation is surging in January 2026, fueled by AI integration, e-commerce boom, and SMB digital transformation. Trends show accelerating growth with rising search volumes and investment in no-code/low-code solutions."
+          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation remains very high in January 2026, fueled by AI advancements and the booming e-commerce sector. Trends indicate continued growth as businesses prioritize efficiency and personalization at scale."
         }
       },
       "tiktok_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-26T06:45:53.949Z",
+        "last_check": "2026-01-26T10:13:30.781Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "TikTok API credentials missing in .env"
@@ -56,7 +56,7 @@
       "klaviyo": {
         "pressure": 65,
         "trend": "DOWN",
-        "last_check": "2026-01-26T07:40:51.648Z",
+        "last_check": "2026-01-26T10:13:12.049Z",
         "sensor_data": {
           "lists_total": 10,
           "flows_total": 0,
@@ -68,7 +68,7 @@
         "label": "Email Health",
         "pressure": 60,
         "trend": "STABLE",
-        "last_check": "2026-01-26T08:01:14.228Z",
+        "last_check": "2026-01-26T10:13:13.089Z",
         "sensor_data": {
           "bounce_rate": 0,
           "spam_rate": 0,
@@ -83,7 +83,7 @@
         "label": "Content Performance",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-26T06:46:01.486Z",
+        "last_check": "2026-01-26T10:13:35.057Z",
         "sensor_data": {
           "posts_total": 0,
           "posts_this_month": 0,
@@ -97,7 +97,7 @@
       "lead_velocity": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T08:01:02.787Z",
+        "last_check": "2026-01-26T10:13:13.253Z",
         "sensor_data": {
           "leads_last_24h": 2
         }
@@ -105,7 +105,7 @@
       "lead_scoring": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-26T06:46:03.337Z",
+        "last_check": "2026-01-26T10:13:35.220Z",
         "sensor_data": {
           "quality_score": 3,
           "days_stale": 17
@@ -116,7 +116,7 @@
       "gsc_gaps": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T07:42:59.742Z",
+        "last_check": "2026-01-26T10:13:00.825Z",
         "sensor_data": {
           "top_gap_potential": 0,
           "target_query": "\"grok\" \"web speech api\""
@@ -125,7 +125,7 @@
       "product_enrichment": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T08:01:06.749Z",
+        "last_check": "2026-01-26T10:12:53.826Z",
         "sensor_data": {
           "product_count": 0,
           "poor_seo_ratio": "0.00"
@@ -148,7 +148,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T07:40:39.083Z",
+        "last_check": "2026-01-26T10:13:10.933Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
@@ -161,7 +161,7 @@
         "label": "Supplier Health",
         "pressure": 80,
         "trend": "STABLE",
-        "last_check": "2026-01-26T08:01:15.178Z",
+        "last_check": "2026-01-26T10:13:13.468Z",
         "sensor_data": {
           "suppliers_checked": 2,
           "suppliers_healthy": 0,
@@ -188,7 +188,7 @@
         "label": "API Costs",
         "pressure": 30,
         "trend": "STABLE",
-        "last_check": "2026-01-26T07:42:57.493Z",
+        "last_check": "2026-01-26T10:13:01.279Z",
         "sensor_data": {
           "current_month_usd": 0,
           "projected_month_usd": 0,
@@ -221,13 +221,13 @@
         "label": "Voice Quality",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-26T06:45:55.366Z",
+        "last_check": "2026-01-26T10:13:14.010Z",
         "sensor_data": {
           "endpoints_healthy": 0,
           "endpoints_total": 3,
           "providers_healthy": 0,
           "providers_configured": 1,
-          "avg_latency_ms": 517,
+          "avg_latency_ms": 320,
           "endpoint_details": [
             {
               "name": "Voice API",
@@ -254,7 +254,7 @@
             {
               "name": "OpenAI Whisper",
               "status": "ERROR",
-              "latency_ms": 517
+              "latency_ms": 320
             }
           ]
         }
@@ -265,7 +265,7 @@
         "label": "WhatsApp Status",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-26T06:46:01.928Z",
+        "last_check": "2026-01-26T10:13:35.438Z",
         "sensor_data": {
           "connected": false,
           "phone_verified": false,
