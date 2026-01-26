@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 96.0 | 26/01/2026 | Session 165bis - **EXHAUSTIVE Stack Optimization Research**
+> Version: 97.0 | 26/01/2026 | Session 165bis - **OpenAI Responses API + HITL P0 Complete**
 
 ## Identité
 
@@ -94,7 +94,7 @@
 | :--- | :--- | :--- | :--- |
 | **AI Models** | | | |
 | Gemini 3 | **thought_signatures REQUIRED** for function calling | ⚠️ Implement | **P1** |
-| GPT-5.2 | Responses API +4% Tau-Bench | ⚠️ Migrate | **P1** |
+| GPT-5.2 | Responses API +4% Tau-Bench (40-80% cost reduction) | ✅ DONE (73561b3) | **P1** |
 | OpenAI | **90% cost reduction** with cached inputs | ⏳ Implement | P1 |
 | **Voice AI** | | | |
 | ElevenLabs | Flash v2.5 = **75ms latency** (vs 300ms) | ⏳ Upgrade | P1 |

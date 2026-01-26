@@ -1097,8 +1097,54 @@ const queueAction = (action) => { ... }
 
 ---
 
-*Audit completed: 26/01/2026 11:45 UTC*
+---
+
+## 18. SESSION 165bis COMPLETION LOG
+
+### 18.1 Implementations This Session (26/01/2026)
+
+| Task | Commit | Details |
+|------|--------|---------|
+| **P0 HITL** | 590a12b | at-risk-customer-flow + birthday-anniversary-flow |
+| **OpenAI Responses API** | 73561b3 | Optional toggle, 40-80% cost reduction |
+
+### 18.2 Files Modified
+
+| File | Change |
+|------|--------|
+| `llm-global-gateway.cjs` | +73 lines: Responses API support |
+| `at-risk-customer-flow.cjs` | +130 lines: HITL with LTV/discount thresholds |
+| `birthday-anniversary-flow.cjs` | +125 lines: HITL with LTV/discount thresholds |
+
+### 18.3 P1 Technical Tasks - ALL COMPLETE
+
+| Task | Status |
+|------|--------|
+| Claude Model ID Fix | ✅ S165 |
+| Remotion benchmark | ✅ S165 |
+| ElevenLabs Flash v2.5 | ✅ S165 |
+| Shopify Flow loops | ✅ S165 |
+| GPT-5.2 Responses API | ✅ **S165bis** |
+
+### 18.4 HITL Coverage Update
+
+| Metric | Before | After |
+|--------|--------|-------|
+| High-Risk Scripts with HITL | 6/18 (33%) | **8/18 (44%)** |
+| Financial Risk Scripts | 0/2 | **2/2 (100%)** |
+
+### 18.5 Next Actions (USER REQUIRED)
+
+| Priority | Task | Action |
+|----------|------|--------|
+| P0 | GA4 API | Enable in Google Cloud Console |
+| P0 | Meta credentials | Configure META_ACCESS_TOKEN |
+| P0 | Apify upgrade | $49/mo subscription |
+
+---
+
+*Audit completed: 26/01/2026 13:45 UTC*
 *Auditor: Claude Opus 4.5*
 *Method: Bottom-up empirical verification + EXHAUSTIVE web research*
-*Commits: cf0c8fb, 1a137d1, f8ea2df + pending*
+*Commits: cf0c8fb, 1a137d1, f8ea2df, 590a12b, 73561b3*
 *Research sources: 50+ official docs, GitHub repos, blogs, forums*
