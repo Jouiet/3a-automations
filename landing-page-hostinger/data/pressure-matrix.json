@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-01-26T07:42:59.742Z",
-  "session": "163",
+  "last_updated": "2026-01-26T08:01:15.179Z",
+  "session": "165",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -20,7 +20,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T06:45:45.834Z",
+        "last_check": "2026-01-26T08:01:05.111Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -68,7 +68,7 @@
         "label": "Email Health",
         "pressure": 60,
         "trend": "STABLE",
-        "last_check": "2026-01-26T06:45:47.170Z",
+        "last_check": "2026-01-26T08:01:14.228Z",
         "sensor_data": {
           "bounce_rate": 0,
           "spam_rate": 0,
@@ -97,7 +97,7 @@
       "lead_velocity": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T06:45:44.913Z",
+        "last_check": "2026-01-26T08:01:02.787Z",
         "sensor_data": {
           "leads_last_24h": 2
         }
@@ -125,7 +125,7 @@
       "product_enrichment": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T06:46:02.867Z",
+        "last_check": "2026-01-26T08:01:06.749Z",
         "sensor_data": {
           "product_count": 0,
           "poor_seo_ratio": "0.00"
@@ -161,7 +161,7 @@
         "label": "Supplier Health",
         "pressure": 80,
         "trend": "STABLE",
-        "last_check": "2026-01-26T06:45:54.392Z",
+        "last_check": "2026-01-26T08:01:15.178Z",
         "sensor_data": {
           "suppliers_checked": 2,
           "suppliers_healthy": 0,

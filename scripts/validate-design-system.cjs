@@ -3,9 +3,9 @@
  * VALIDATE DESIGN SYSTEM - Automated Branding Enforcement
  * Source of Truth: docs/DESIGN-SYSTEM.md
  *
- * @version 5.2.0
- * @date 2026-01-25
- * @session 154bis (CSS link validation + Button class check - 2 new validators)
+ * @version 5.3.0
+ * @date 2026-01-26
+ * @session 165 (EXCLUDE_DIRS config - skip generated assets from validation)
  *
  * Usage:
  *   node scripts/validate-design-system.cjs [--fix] [--ci]
@@ -59,6 +59,11 @@ const CONFIG = {
   SITE_DIR: path.join(__dirname, '..', 'landing-page-hostinger'),
   EXPECTED_AUTOMATIONS: 121,
   EXPECTED_AGENTS: 22,
+
+  // Directories to exclude from validation (generated assets, not production)
+  EXCLUDE_DIRS: [
+    'assets/stitch',  // Google Stitch generated UI components (reference only)
+  ],
 
   // Allowed hardcoded colors (brand logos, semantic red for errors)
   ALLOWED_HARDCODED: [
@@ -116,6 +121,13 @@ function findFiles(dir, extension) {
     const items = fs.readdirSync(dir, { withFileTypes: true });
     for (const item of items) {
       const fullPath = path.join(dir, item.name);
+      // Check if this path should be excluded
+      const relativePath = path.relative(CONFIG.SITE_DIR, fullPath);
+      const isExcluded = CONFIG.EXCLUDE_DIRS.some(excluded =>
+        relativePath.startsWith(excluded) || relativePath === excluded
+      );
+      if (isExcluded) continue;
+
       if (item.isDirectory() && !item.name.startsWith('.') && item.name !== 'node_modules') {
         files.push(...findFiles(fullPath, extension));
       } else if (item.isFile() && item.name.endsWith(extension)) {
