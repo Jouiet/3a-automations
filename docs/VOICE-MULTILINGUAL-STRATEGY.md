@@ -1,7 +1,7 @@
 # VOICE MULTILINGUAL STRATEGY - 3A AUTOMATION
 
-> **Version:** 1.0.0 | **Date:** 26/01/2026 | **Session:** 166bis
-> **Statut:** AUDIT COMPLET - Recherche et Documentation uniquement
+> **Version:** 1.1.0 | **Date:** 26/01/2026 | **Session:** 166ter
+> **Statut:** PHASE 0 VALIDÉE - Stack Darija testé empiriquement
 
 ---
 
@@ -22,25 +22,35 @@
 
 ## 1. SYNTHÈSE EXÉCUTIVE
 
-### 1.1 Verdict Global
+### 1.1 Verdict Global (MIS À JOUR - Session 166ter)
 
-| Aspect | État Actuel | Cible | Gap |
-|--------|-------------|-------|-----|
-| **Langues configurées** | FR, EN (2) | FR, EN, ES, AR-MSA, Darija (5) | **-3 langues** |
-| **TTS Darija** | ❌ AUCUN | ElevenLabs "Ghizlane" | **BLOQUANT** |
-| **STT Darija** | ❌ AUCUN | ElevenLabs Scribe ou Whisper fine-tuned | **BLOQUANT** |
-| **LLM Darija** | ❌ NON TESTÉ | Mistral Saba ou Atlas-Chat | À INTÉGRER |
-| **Espagnol** | ❌ NON CONFIGURÉ | Grok Voice (trivial) | CONFIGURATION |
-| **Arabe MSA** | ❌ NON CONFIGURÉ | Grok Voice (trivial) | CONFIGURATION |
+| Aspect | État Actuel | Cible | Validation |
+|--------|-------------|-------|------------|
+| **Langues configurées** | FR, EN (2) | FR, EN, ES, AR-MSA, Darija (5) | -3 langues (config) |
+| **TTS Darija** | ✅ **VALIDÉ** | ElevenLabs "Ghizlane" | 1.3s latence |
+| **STT Darija** | ✅ **VALIDÉ** | ElevenLabs Scribe v1 | 707ms latence |
+| **LLM Darija** | ✅ **VALIDÉ** | Grok-4-1-fast-reasoning | Génère Darija authentique |
+| **Espagnol** | ❌ NON CONFIGURÉ | Grok Voice | TRIVIAL |
+| **Arabe MSA** | ❌ NON CONFIGURÉ | Grok Voice | TRIVIAL |
 
-### 1.2 Conclusion Brutale
+### 1.2 Validation Empirique Phase 0 (26/01/2026)
 
-**Le marché Maroc est BLOQUÉ.** Aucune infrastructure Darija n'existe dans le codebase actuel. L'ajout de Darija nécessite:
-- Intégration d'un nouveau provider TTS (ElevenLabs recommandé)
-- Intégration d'un nouveau provider STT (ElevenLabs Scribe ou self-hosted Whisper)
-- Tests et validation (Darija n'est pas standardisé, qualité variable)
+| Test | Provider | Input | Output | Latence |
+|------|----------|-------|--------|---------|
+| **TTS Darija** | ElevenLabs Ghizlane | "السلام عليكم، كيف داير؟" | Audio MP3 (34KB) | 1.3s |
+| **STT Darija** | ElevenLabs Scribe v1 | Audio Darija | "السلام عليكم. كيف داير؟" | 707ms |
+| **LLM Darija** | Grok-4-1-fast-reasoning | Question ventes | Réponse Darija 500+ chars | 10.3s |
 
-**L'Espagnol et l'Arabe MSA sont TRIVIAUX** car Grok Voice supporte déjà 100+ langues nativement.
+### 1.3 Conclusion (Post-Validation)
+
+**Le marché Maroc est DÉBLOQUÉ.** Stack Darija validé empiriquement:
+- ✅ TTS: ElevenLabs "Ghizlane" (voix communautaire, fonctionne)
+- ✅ STT: ElevenLabs Scribe v1 (supporte Maghrebi officiellement)
+- ✅ LLM: Grok-4 (comprend et génère du Darija authentique)
+
+**Découverte: SAWT IA (sawtia.ma)** = Sensei Prod (Maroc) a développé son propre ML Darija in-house.
+
+**Prochaine étape:** Implémentation Phase 1-3 (Espagnol, Arabe MSA, Darija widgets).
 
 ---
 

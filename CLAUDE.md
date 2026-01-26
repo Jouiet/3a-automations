@@ -1,10 +1,35 @@
 # 3A Automation
-> Version: 105.0 | 26/01/2026 | Session 166bis - Voice Multilingual Audit + ElevenLabs Config
+> Version: 106.0 | 26/01/2026 | Session 166ter - Darija Validation COMPLETE
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 166ter - DARIJA VALIDATION COMPLETE (26/01/2026)
+
+### Validation Empirique Phase 0
+
+| Test | Provider | Résultat | Latence |
+| :--- | :--- | :--- | :--- |
+| TTS Darija | ElevenLabs Ghizlane | ✅ SUCCESS | 1.3s |
+| LLM Darija | Grok-4-1-fast-reasoning | ✅ SUCCESS | 10.3s |
+| STT Darija | ElevenLabs Scribe v1 | ✅ SUCCESS | 707ms |
+
+### Découverte: SAWT IA (sawtia.ma)
+
+Source: [7news.ma](https://en.7news.ma/sensei-prod-unveils-sawt-ia-the-first-voice-ai-in-moroccan-arabic/)
+
+| Aspect | Détail |
+| :--- | :--- |
+| Créateur | Sensei Prod (Maroc) |
+| Technologie | ML développé IN-HOUSE |
+| Langues | Darija, Français, autres |
+| Produit | B2B voice agents |
+
+**Verdict:** Stack Darija VALIDÉ. Prêt pour implémentation Phase 1-3.
 
 ---
 

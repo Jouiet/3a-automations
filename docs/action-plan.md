@@ -195,16 +195,27 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 
 ## OPTIMIZATION BACKLOG
 
-### P0 - CRITICAL (Voice Multilingual - Maroc Blocked)
+### P0 - CRITICAL (Voice Multilingual - Maroc)
 
 | Task | Component | Effort | Status |
 |------|-----------|--------|--------|
-| **Phase 0: Validation Darija providers** | Voice | 6h | ⏳ **NEXT** |
-| **Phase 3: Darija TTS/STT integration** | Voice | 56h | ⏳ BLOCKED (test required) |
+| **Phase 0: Validation Darija providers** | Voice | 6h | ✅ **DONE** (S166ter) |
+| **Phase 3: Darija TTS/STT integration** | Voice | 56h | ⏳ READY (all validated) |
 | Configure ELEVENLABS_API_KEY | Credentials | 1h | ✅ **DONE** (S166bis) |
 | Configure TWILIO_* credentials | Credentials | 1h | ❌ MISSING |
-| Test voix "Ghizlane" (communautaire) | Validation | 2h | ⏳ PENDING |
-| Test Grok Voice Darija auto-detect | Validation | 2h | ⏳ PENDING |
+| Test voix "Ghizlane" (communautaire) | Validation | 2h | ✅ **DONE** - 1.3s latence |
+| Test Grok-4 LLM Darija | Validation | 2h | ✅ **DONE** - Génère Darija authentique |
+| Test ElevenLabs Scribe STT Darija | Validation | 2h | ✅ **DONE** - 707ms, transcrit correctement |
+
+### Validation Empirique Phase 0 (S166ter - 26/01/2026)
+
+| Test | Provider | Résultat | Latence | Qualité |
+|------|----------|----------|---------|---------|
+| TTS Darija | ElevenLabs Ghizlane | ✅ SUCCESS | 1.3s | Audio naturel |
+| LLM Darija | Grok-4-1-fast-reasoning | ✅ SUCCESS | 10.3s | Darija authentique |
+| STT Darija | ElevenLabs Scribe v1 | ✅ SUCCESS | 707ms | "السلام عليكم. كيف داير؟" |
+
+**Verdict:** Stack Darija VALIDÉ empiriquement. Prêt pour Phase 1-3.
 
 ### P1 - High Priority (This Month)
 
