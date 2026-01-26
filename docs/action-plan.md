@@ -1,7 +1,77 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 166 - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅
+> **✅ ÉTAT RÉEL (Session 166bis - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice Multilingual: AUDIT COMPLET**
+
+---
+
+## SESSION 166bis - VOICE MULTILINGUAL AUDIT (26/01/2026)
+
+### Audit Complet Réalisé
+
+**Document créé:** `docs/VOICE-MULTILINGUAL-STRATEGY.md` (650+ lignes)
+
+### État Voice Systems
+
+| Aspect | État Actuel | Cible | Gap |
+|--------|-------------|-------|-----|
+| Langues configurées | FR, EN (2) | FR, EN, ES, AR, Darija (5) | **-3 langues** |
+| TTS Darija | ❌ AUCUN | ElevenLabs "Ghizlane" | **BLOQUANT Maroc** |
+| STT Darija | ❌ AUCUN | ElevenLabs Scribe | **BLOQUANT Maroc** |
+| Espagnol | ❌ Config manquante | Grok Voice | TRIVIAL |
+| Arabe MSA | ❌ Config manquante | Grok Voice | TRIVIAL |
+
+### Marchés Cibles
+
+| Marché | Langue Site | Devise | Voice Requis |
+|--------|-------------|--------|--------------|
+| **Maroc** | FR | MAD | FR + **Darija** |
+| **Europe** | FR | EUR (€) | FR (+ ES optionnel) |
+| **International** | EN | USD ($) | EN + ES |
+
+### Options Darija Validées
+
+| Type | Recommandation | Alternative | Statut |
+|------|----------------|-------------|--------|
+| **TTS** | ElevenLabs "Ghizlane" | DarijaTTS self-hosted | Commercial prêt |
+| **STT** | ElevenLabs Scribe | Whisper fine-tuned | À tester |
+| **LLM** | Mistral Saba (24B) | Atlas-Chat-9B | API disponible |
+
+### Plan d'Action Voice
+
+| Phase | Scope | Effort | Priorité |
+|-------|-------|--------|----------|
+| **Phase 0** | Validation providers | 6h | **P0 - PRÉREQUIS** |
+| **Phase 1** | Espagnol | 16h | P1 - TRIVIAL |
+| **Phase 2** | Arabe MSA | 18h | P2 - TRIVIAL |
+| **Phase 3** | Darija | 56h | **P0 - BLOQUANT MAROC** |
+| **Phase 4** | LLM Darija | 22h | P3 - OPTIONNEL |
+
+### Coûts Estimés
+
+| Type | Montant |
+|------|---------|
+| Setup (one-time) | ~$400-800 |
+| Récurrent mensuel | ~$92-169/mo |
+
+### Blockers Critiques
+
+| Blocker | Impact | Action |
+|---------|--------|--------|
+| `ELEVENLABS_API_KEY` | ✅ **CONFIGURÉ** (S166bis) | Phase 3 débloquée |
+| `TWILIO_*` vides | Telephony bloquée | Configurer credentials |
+| Traductions Darija | Knowledge base | Trouver traducteur natif |
+| **TTS Darija officiel** | ❌ NON EXISTANT | Voix "Ghizlane" = communautaire, à tester |
+
+### Correction Factuelle ElevenLabs (S166bis)
+
+| Composant | Support Officiel | Réalité |
+|-----------|------------------|---------|
+| **TTS Darija** | ❌ **NON** | Voix "Ghizlane" (ID: OfGMGmhShO8iL9jCkXy8) = COMMUNAUTAIRE |
+| **STT Darija** | ✅ **OUI** | Scribe supporte Maghrebi (Moroccan, Algerian, Tunisian) |
+| **MCP Integration** | ✅ **OUI** | SSE + HTTP streamable, Zapier connecteur |
+
+**Référence complète:** `@docs/VOICE-MULTILINGUAL-STRATEGY.md`
 
 ---
 
@@ -125,14 +195,27 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 
 ## OPTIMIZATION BACKLOG
 
+### P0 - CRITICAL (Voice Multilingual - Maroc Blocked)
+
+| Task | Component | Effort | Status |
+|------|-----------|--------|--------|
+| **Phase 0: Validation Darija providers** | Voice | 6h | ⏳ **NEXT** |
+| **Phase 3: Darija TTS/STT integration** | Voice | 56h | ⏳ BLOCKED (test required) |
+| Configure ELEVENLABS_API_KEY | Credentials | 1h | ✅ **DONE** (S166bis) |
+| Configure TWILIO_* credentials | Credentials | 1h | ❌ MISSING |
+| Test voix "Ghizlane" (communautaire) | Validation | 2h | ⏳ PENDING |
+| Test Grok Voice Darija auto-detect | Validation | 2h | ⏳ PENDING |
+
 ### P1 - High Priority (This Month)
 
 | Task | Component | Effort | Status |
 |------|-----------|--------|--------|
+| **Phase 1: Espagnol voice** | Voice | 16h | ⏳ PENDING |
+| **Phase 2: Arabe MSA voice** | Voice | 18h | ⏳ PENDING |
+| **Phase 4: LLM Darija (Mistral Saba)** | Voice | 22h | ⏳ OPTIONAL |
 | WCAG 2.2 Audit | Accessibility | 8h | ⏳ PENDING |
 | A2A v0.3 upgrade | Protocol | 8h | ⏳ PENDING |
 | Server-side GTM | Analytics | 16h | ⏳ PENDING |
-| WebSocket voice | Voice | 8h | ⏳ PENDING |
 
 ### P2 - Medium Priority (Next Quarter)
 
@@ -184,6 +267,8 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-**Document màj:** 26/01/2026 - Session 166
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | MCP 5/6 ✅ | Right Tool 70/100 | CSS v86.0
+**Document màj:** 26/01/2026 - Session 166bis
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | MCP 5/6 ✅ | CSS v86.0 | **Voice: AUDIT DONE + ELEVENLABS CONFIGURED**
+**New doc:** `docs/VOICE-MULTILINGUAL-STRATEGY.md` (700+ lines, full benchmark, corrections factuelles)
+**Key finding:** TTS Darija = NON OFFICIEL (Ghizlane = communautaire) | STT Darija = OFFICIEL (Scribe Maghrebi)
 **Archive:** Sessions 141-165 archived in `docs/session-history/sessions-141-164.md`

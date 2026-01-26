@@ -1,10 +1,49 @@
 # 3A Automation
-> Version: 104.0 | 26/01/2026 | Session 166 - AG-UI Queue Wiring + MCP Verification
+> Version: 105.0 | 26/01/2026 | Session 166bis - Voice Multilingual Audit + ElevenLabs Config
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 166bis - VOICE MULTILINGUAL AUDIT (26/01/2026)
+
+### Audit Complet Réalisé
+
+**Document créé:** `docs/VOICE-MULTILINGUAL-STRATEGY.md` (700+ lignes)
+
+### État Voice Systems (FAITS VÉRIFIÉS)
+
+| Aspect | État Actuel | Cible | Gap |
+| :--- | :--- | :--- | :--- |
+| Langues configurées | FR, EN (2) | FR, EN, ES, AR, Darija (5) | **-3 langues** |
+| TTS Darija | ❌ **NON OFFICIEL** | Ghizlane = communautaire | À TESTER |
+| STT Darija | ✅ **SUPPORTÉ** | ElevenLabs Scribe (Maghrebi) | OK |
+| Espagnol | ❌ Config manquante | Grok Voice | TRIVIAL |
+
+### Corrections Factuelles ElevenLabs
+
+| Composant | Claim Précédent | Réalité Vérifiée |
+| :--- | :--- | :--- |
+| TTS Darija | "Supporté via Ghizlane" | ❌ Ghizlane = voix COMMUNAUTAIRE (pas officielle) |
+| STT Darija | Non vérifié | ✅ OFFICIEL: Scribe supporte Maghrebi |
+| MCP Integration | Non documenté | ✅ SSE + HTTP streamable |
+
+### Credentials Configurés (S166bis)
+
+| Credential | Status |
+| :--- | :--- |
+| ELEVENLABS_API_KEY | ✅ **CONFIGURÉ** |
+| Voice ID Ghizlane | `OfGMGmhShO8iL9jCkXy8` (communautaire) |
+
+### Documentation
+
+| Document | Lignes | Contenu |
+| :--- | :--- | :--- |
+| `docs/VOICE-MULTILINGUAL-STRATEGY.md` | 700+ | Benchmark complet, 25+ sources |
+| `docs/action-plan.md` | Updated | P0 Voice Multilingual added |
 
 ---
 
