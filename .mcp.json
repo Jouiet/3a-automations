@@ -1,29 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/.mcp.schema.json",
   "mcpServers": {
-    "google-analytics": {
-      "command": "pipx",
-      "args": [
-        "run",
-        "analytics-mcp"
-      ],
-      "env": {
-        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
-        "GOOGLE_PROJECT_ID": "${GOOGLE_PROJECT_ID}"
-      },
-      "description": "Google Analytics 4 - OFFICIAL Google Package (analytics-mcp)"
-    },
-    "powerbi-remote": {
-      "type": "http",
-      "url": "https://api.fabric.microsoft.com/v1/mcp/powerbi",
-      "description": "Power BI Remote MCP - Microsoft hosted endpoint (requires Entra ID)"
-    },
     "grok": {
       "command": "npx",
-      "args": [
-        "-y",
-        "grok-search-mcp@latest"
-      ],
+      "args": ["-y", "grok-search-mcp@latest"],
       "env": {
         "GROK_API_KEY": "${XAI_API_KEY}"
       },
@@ -31,10 +11,7 @@
     },
     "google-sheets": {
       "command": "npx",
-      "args": [
-        "-y",
-        "google-sheets-mcp"
-      ],
+      "args": ["-y", "google-sheets-mcp"],
       "env": {
         "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}"
       },
@@ -42,9 +19,7 @@
     },
     "klaviyo": {
       "command": "uvx",
-      "args": [
-        "klaviyo-mcp-server@latest"
-      ],
+      "args": ["klaviyo-mcp-server@latest"],
       "env": {
         "PRIVATE_API_KEY": "${KLAVIYO_API_KEY}",
         "READ_ONLY": "false",
@@ -52,67 +27,19 @@
       },
       "description": "Klaviyo - Email flows, campaigns, segments, lists"
     },
-    "chrome-devtools": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "chrome-devtools-mcp@latest"
-      ],
-      "description": "Chrome DevTools - Browser debugging, screenshots, network, console"
-    },
     "shopify-dev": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@shopify/dev-mcp@latest"
-      ],
+      "args": ["-y", "@shopify/dev-mcp@latest"],
       "description": "Shopify Dev - API docs, schema exploration, Functions"
     },
     "shopify-admin": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@ajackus/shopify-mcp-server"
-      ],
+      "args": ["-y", "@ajackus/shopify-mcp-server"],
       "env": {
         "SHOPIFY_STORE_DOMAIN": "${SHOPIFY_STORE}",
         "SHOPIFY_ACCESS_TOKEN": "${SHOPIFY_ACCESS_TOKEN}"
       },
       "description": "Shopify Admin - Products, orders, customers, inventory"
-    },
-    "meta-ads": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@smithery/cli",
-        "install",
-        "@gomarble-ai/facebook-ads-mcp-server",
-        "--client",
-        "claude"
-      ],
-      "env": {
-        "META_ACCESS_TOKEN": "${META_PAGE_ACCESS_TOKEN}"
-      },
-      "description": "Meta Ads - Facebook/Instagram campaigns, analytics"
-    },
-    "apify": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@apify/actors-mcp-server"
-      ],
-      "env": {
-        "APIFY_TOKEN": "${APIFY_TOKEN}"
-      },
-      "description": "Apify - Web scraping, Instagram, Facebook, Google Shopping"
-    },
-    "playwright": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@anthropic/mcp-playwright@latest"
-      ],
-      "description": "Playwright - Browser automation, E2E testing, visual regression"
     }
   }
 }
