@@ -18,14 +18,16 @@
       "url": "https://api.fabric.microsoft.com/v1/mcp/powerbi",
       "description": "Power BI Remote MCP - Microsoft hosted endpoint (requires Entra ID)"
     },
-    "stitch": {
-      "type": "http",
-      "url": "https://stitch.googleapis.com/mcp",
-      "headers": {
-        "Authorization": "Bearer ${STITCH_ACCESS_TOKEN}",
-        "X-Goog-User-Project": "${GOOGLE_CLOUD_PROJECT}"
+    "grok": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "grok-search-mcp@latest"
+      ],
+      "env": {
+        "GROK_API_KEY": "${XAI_API_KEY}"
       },
-      "description": "Google Stitch - UI Generation Service (Design-to-Code)"
+      "description": "Grok/xAI - Web search, content fetch, AI reasoning"
     },
     "google-sheets": {
       "command": "npx",
