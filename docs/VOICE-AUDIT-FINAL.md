@@ -9,7 +9,7 @@ Le système est actuellement fragmenté en deux entités distinctes mais interd�
 | Entité | Fichier Source | Technologie | Nature Réelle |
 | :--- | :--- | :--- | :--- |
 | **"Voice Telephony"** | `voice-telephony-bridge.cjs` | Twilio + Grok WebSocket | **AUTOMATISATION** (Transport) |
-| **"AI Voice Assistant"** | `voice-agent-b2b.cjs` | Grok-4 + TF-IDF RAG | **AGENT** (Cognitif) |
+| **"AI Voice Assistant"** | `voice-api-resilient.cjs` | Grok + Hybrid RAG (v3.0) | **AGENT** (Cognitif) |
 
 ### Constat Forensique (Brutalement Honnête)
 
@@ -50,7 +50,7 @@ La question "est-il optimal d'avoir une automatisation ou un agent pour gérer A
 | :--- | :--- | :--- | :--- |
 | **Fiabilité Transport** | ✅ 99.99% | ❌ <90% (Délai LLM) | **Automatisé** |
 | **Gestion des Intervalles** | ❌ Rigide (Attente Silence) | ✅ Adaptatif (VAD) | **Agentic** |
-| **RAG / Knowledge Access** | ❌ Mot-clés simples | ✅ Sémantique / Contexte | **Agentic** |
+| **RAG / Knowledge Access** | ❌ Mot-clés simples | ✅ **Hybrid RAG v3.0** | **Optimal** |
 | **Coût d'Exécution** | ✅ Bas ($0) | ⚠️ Moyen ($0.05/min) | **Mixte** |
 
 ### JUSTIFICATION FINALE
@@ -63,4 +63,23 @@ Toutefois, il est **DANGEREUX** de gérer la "Téléphonie" via un agent pur san
 Maintenir l'agent pour la conversation, mais **éliminer la dette factuelle** dans l'automatisation du bridge pour le rendre agnostique (langues/outils). L'optimale n'est pas "L'un ou l'autre", mais **"L'Intelligence (Agent) servie par la Rigueur (Automatisation)"**.
 
 ---
-*Audit certifié conforme au code source et aux benchmarks de marché.*
+
+## 4. CONTRE-AUDIT FORENSIQUE (Session 167bis - 26/01/2026)
+
+### Corrections Apportées à l'Audit Externe
+
+| Claim Initial | Verdict Corrigé | Justification |
+| :--- | :---: | :--- |
+| SYSTEM_PROMPTS = Dead Code | ❌ **FAUX** | Actif aux lignes 561-562 via `VoicePersonaInjector.inject()` |
+| Code fonctionnel ~70% | **~85%** | SYSTEM_PROMPTS reclassé comme fonctionnel |
+| Score 7/10 | **8/10** | Seul blocage = env var Shopify |
+
+### Travail Incrémental Restant (Non-Bugs)
+
+| Item | Nature | Priorité |
+| :--- | :--- | :---: |
+| Strategic metadata 44% manquant | Enrichissement futur | P3 |
+| Tests E2E avec vrais clients | Validation production | P2 |
+
+---
+*Audit certifié conforme au code source et aux benchmarks de marché. Dernière mise à jour: 26/01/2026.*

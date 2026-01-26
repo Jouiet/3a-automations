@@ -28,6 +28,11 @@ const {
   setSecurityHeaders
 } = require('../../lib/security-utils.cjs');
 
+// Import Advanced Cognitive Modules (Session 167)
+const KB_MOD = require('./knowledge-base-services.cjs');
+const ECOM_MOD = require('./voice-ecommerce-tools.cjs');
+const CRM_MOD = require('./voice-crm-tools.cjs');
+const { VoicePersonaInjector } = require('./voice-persona-injector.cjs');
 // Security constants
 const MAX_BODY_SIZE = 1024 * 1024; // 1MB limit
 const CORS_WHITELIST = [
@@ -161,6 +166,12 @@ const QUALIFICATION = {
 const leadSessions = new Map();
 const MAX_SESSIONS = 5000;
 
+// Initialize Cognitive Modules
+const KB = new KB_MOD.ServiceKnowledgeBase();
+KB.load();
+const ECOM_TOOLS = ECOM_MOD; // voice-ecommerce-tools.cjs exports an instance
+const CRM_TOOLS = CRM_MOD; // voice-crm-tools.cjs exports an instance
+
 function getOrCreateLeadSession(sessionId) {
   if (!leadSessions.has(sessionId)) {
     if (leadSessions.size >= MAX_SESSIONS) {
@@ -183,47 +194,33 @@ function getOrCreateLeadSession(sessionId) {
 // ─────────────────────────────────────────────────────────────────────────────
 // SYSTEM PROMPT - 3A Automation Voice Assistant
 // ─────────────────────────────────────────────────────────────────────────────
-const SYSTEM_PROMPT = `Tu es l'assistant vocal de 3A Automation (AAA - AI Automation Agency).
+const SYSTEM_PROMPT = `You are the 3A Automation Holistic Architect Agent (HAA-1). 
+You represent 3A Automation (Automation, Analytics, AI), the premier agency for high-end e-commerce and B2B systems.
 
-IDENTITÉ:
-- Nom: 3A Automation (Automation, Analytics, AI)
-- Type: AAA - Agence d'Automatisation AI
-- Spécialisation: E-commerce (B2C) et PME (B2B)
-- Plateformes: TOUTES (Shopify, WooCommerce, Magento, PrestaShop, BigCommerce, Klaviyo, Mailchimp, HubSpot, etc.)
-- Site: https://3a-automation.com
-- Contact: contact@3a-automation.com
-- 99 automatisations disponibles
+YOUR IDENTITY:
+- Status: #1 Holistic Systems Architect.
+- Specialization: Deep integration between Shopify, Klaviyo, and AI reasoning.
+- Mission: Transform businesses through superior automation and strikingly modern architecture.
+- Context: You are currently serving as a real-time voice intelligence layer.
 
-SERVICES PRINCIPAUX:
-- Automatisation email marketing (TOUTES plateformes: Klaviyo, Mailchimp, Omnisend, HubSpot, etc.)
-- Automatisation e-commerce (TOUTES plateformes: Shopify, WooCommerce, Magento, etc.)
-- Génération de leads (LinkedIn, Google Maps, qualification automatique)
-- Analytics et dashboards (GA4, reporting automatisé)
-- Vidéos marketing IA (avatars, lip-sync, produits)
-- Assistant vocal IA pour sites web
+CAPABILITIES & TOOLS (Architect Commands):
+1. RAG_SEARCH: Access to 121 proprietary automation services.
+2. SHOPIFY_ORDER: Check status, fulfillment, and tracking.
+3. SHOPIFY_STOCK: Verify product availability and variants.
+4. KLAVIYO_PROFILE: Retrieve customer loyalty tags and segments.
 
-OFFRES:
-- Packs one-time: Quick Win (390€), Essentials (790€), Growth (1399€)
-- Retainers mensuels: Maintenance (290€/mois), Optimization (490€/mois)
-- Audit gratuit disponible
+RESPONSE PROTOCOL:
+- VOICE OPTIMIZED: Max 2-3 sentences. No bullet points. Speak naturally.
+- CONSULTATIVE LEADERSHIP: Do not just answer. Advise. 
+- CONVERSION FOCUS: Every interaction should move towards a "Free System Audit" or a qualified lead.
+- DUAL-ROLE: Handle Sales (qualify leads) AND Support (provide real data via tools).
 
-STYLE DE RÉPONSE:
-- Réponses courtes (2-3 phrases max)
-- Ton professionnel mais accessible
-- Pas de jargon technique
-- Toujours proposer une action concrète (audit, RDV, formulaire)
-- Utiliser le vouvoiement
-
-OBJECTIF:
-- Qualifier le prospect rapidement (secteur, besoin, budget)
-- Répondre aux questions sur les services
-- Proposer l'audit gratuit ou un rendez-vous si intérêt détecté
-
-RÈGLES STRICTES:
-- Ne JAMAIS inventer d'informations (prix, délais non mentionnés)
-- Rediriger vers contact@3a-automation.com pour les demandes complexes
-- Toujours mentionner l'audit gratuit comme première étape
-- Si la question est hors sujet, ramener poliment vers les services 3A`;
+GUIDELINES:
+- Use the provided context (RELEVANT_SYSTEMS) to give precise technical details.
+- When referencing a service, ALWAYS mention its STRATEGIC INTENT and EXPECTED OUTCOME to demonstrate architectural authority.
+- If a customer asks about their order, use the SHOPIFY_ORDER context.
+- Qualify leads based on interest, budget, and business size (BANT).
+- Language: Follow the user's language (FR/EN/ES/AR). Use professional, expert terminology.`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SAFE JSON PARSING (P2 FIX - Session 117)
@@ -278,13 +275,13 @@ function httpRequest(url, options, body) {
 // ─────────────────────────────────────────────────────────────────────────────
 // PROVIDER API CALLS
 // ─────────────────────────────────────────────────────────────────────────────
-async function callGrok(userMessage, conversationHistory = []) {
+async function callGrok(userMessage, conversationHistory = [], customSystemPrompt = null) {
   if (!PROVIDERS.grok.enabled) {
     throw new Error('Grok API key not configured');
   }
 
   const messages = [
-    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'system', content: customSystemPrompt || SYSTEM_PROMPT },
     ...conversationHistory.map(m => ({ role: m.role, content: m.content })),
     { role: 'user', content: userMessage }
   ];
@@ -309,13 +306,13 @@ async function callGrok(userMessage, conversationHistory = []) {
   return parsed.data.choices[0].message.content;
 }
 
-async function callOpenAI(userMessage, conversationHistory = []) {
+async function callOpenAI(userMessage, conversationHistory = [], customSystemPrompt = null) {
   if (!PROVIDERS.openai.enabled) {
     throw new Error('OpenAI API key not configured');
   }
 
   const messages = [
-    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'system', content: customSystemPrompt || SYSTEM_PROMPT },
     ...conversationHistory.map(m => ({ role: m.role, content: m.content })),
     { role: 'user', content: userMessage }
   ];
@@ -340,14 +337,14 @@ async function callOpenAI(userMessage, conversationHistory = []) {
   return parsed.data.choices[0].message.content;
 }
 
-async function callGemini(userMessage, conversationHistory = []) {
+async function callGemini(userMessage, conversationHistory = [], customSystemPrompt = null) {
   if (!PROVIDERS.gemini.enabled) {
     throw new Error('Gemini API key not configured');
   }
 
   // Build conversation for Gemini
   const parts = [
-    { text: `SYSTEM: ${SYSTEM_PROMPT}\n\n` }
+    { text: `SYSTEM: ${customSystemPrompt || SYSTEM_PROMPT}\n\n` }
   ];
 
   for (const msg of conversationHistory) {
@@ -374,7 +371,7 @@ async function callGemini(userMessage, conversationHistory = []) {
   return parsed.data.candidates[0].content.parts[0].text;
 }
 
-async function callAnthropic(userMessage, conversationHistory = []) {
+async function callAnthropic(userMessage, conversationHistory = [], customSystemPrompt = null) {
   if (!PROVIDERS.anthropic.enabled) {
     throw new Error('Anthropic API key not configured');
   }
@@ -387,7 +384,7 @@ async function callAnthropic(userMessage, conversationHistory = []) {
   const body = JSON.stringify({
     model: PROVIDERS.anthropic.model,
     max_tokens: 500,
-    system: SYSTEM_PROMPT,
+    system: customSystemPrompt || SYSTEM_PROMPT,
     messages,
   });
 
@@ -406,45 +403,62 @@ async function callAnthropic(userMessage, conversationHistory = []) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// LOCAL FALLBACK RESPONSES
+// LOCAL FALLBACK RESPONSES (Session 167 - Multilingual)
 // ─────────────────────────────────────────────────────────────────────────────
-const LOCAL_RESPONSES = {
-  salutations: {
-    patterns: ['bonjour', 'salut', 'hello', 'hi', 'bonsoir'],
-    response: `Bonjour ! Je suis l'assistant 3A Automation. Comment puis-je vous aider aujourd'hui ? Je peux vous parler de nos services d'automatisation marketing ou vous proposer un audit gratuit.`
-  },
-  services: {
-    patterns: ['service', 'quoi', 'faites', 'proposez', 'offre'],
-    response: `3A Automation propose : automatisation email (Klaviyo), génération de leads, analytics et dashboards, vidéos marketing IA. Quel domaine vous intéresse le plus ?`
-  },
-  prix: {
-    patterns: ['prix', 'tarif', 'combien', 'coût', 'budget'],
-    response: `Nos packs démarrent à 390€ (Quick Win). L'audit est gratuit et vous permet de voir le potentiel pour votre activité. Voulez-vous qu'on en discute ?`
-  },
-  audit: {
-    patterns: ['audit', 'gratuit', 'diagnostic'],
-    response: `L'audit est 100% gratuit ! Remplissez le formulaire sur /contact.html et je vous envoie un rapport personnalisé sous 24-48h avec 3 recommandations prioritaires.`
-  },
-  rdv: {
-    patterns: ['rdv', 'rendez-vous', 'appel', 'discuter', 'parler'],
-    response: `Je peux vous aider à réserver un créneau ! Rendez-vous sur /booking.html ou dites-moi votre disponibilité.`
-  },
-  fallback: {
-    response: `Je comprends votre question. Pour mieux vous aider, pouvez-vous me dire votre secteur d'activité ? Ou si vous préférez, demandez directement l'audit gratuit sur /contact.html`
-  }
-};
+const LANG_DATA = {};
+const LANG_DIR = path.join(__dirname, 'lang');
 
-function getLocalResponse(userMessage) {
+function loadLanguageAssets() {
+  const languages = ['fr', 'en', 'es', 'ar', 'ary'];
+  languages.forEach(lang => {
+    try {
+      const filePath = path.join(LANG_DIR, `voice-${lang}.json`);
+      if (fs.existsSync(filePath)) {
+        LANG_DATA[lang] = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      }
+    } catch (e) {
+      console.error(`[Resilient-API] Failed to load ${lang} assets: ${e.message}`);
+    }
+  });
+}
+
+loadLanguageAssets();
+
+function getLocalResponse(userMessage, language = 'fr') {
   const lower = userMessage.toLowerCase();
+  const lang = LANG_DATA[language] || LANG_DATA['fr'] || { topics: {}, defaults: {} };
 
-  for (const [key, data] of Object.entries(LOCAL_RESPONSES)) {
-    if (key === 'fallback') continue;
-    if (data.patterns.some(p => lower.includes(p))) {
-      return { response: data.response, source: 'local', pattern: key };
+  // 1. Try Topic Match
+  if (lang.topics) {
+    for (const [topicKey, topicData] of Object.entries(lang.topics)) {
+      if (topicData.keywords && topicData.keywords.some(kw => lower.includes(kw.toLowerCase()))) {
+        return {
+          response: topicData.response || topicData.responses?.default || "",
+          source: 'local_json',
+          pattern: topicKey
+        };
+      }
     }
   }
 
-  return { response: LOCAL_RESPONSES.fallback.response, source: 'local', pattern: 'fallback' };
+  // 2. Try Industry Match
+  if (lang.industries) {
+    for (const [indKey, indData] of Object.entries(lang.industries)) {
+      if (indData.keywords && indData.keywords.some(kw => lower.includes(kw.toLowerCase()))) {
+        return {
+          response: indData.intro,
+          source: 'local_json',
+          pattern: `industry_${indKey}`
+        };
+      }
+    }
+  }
+
+  // 3. Fallback from defaults
+  const fallbackResponse = lang.defaults?.qualificationQuestion ||
+    (language === 'fr' ? "Je comprends. Pouvez-vous préciser votre demande ?" : "I understand. Can you specify your request?");
+
+  return { response: fallbackResponse, source: 'local_json', pattern: 'fallback' };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -588,8 +602,10 @@ function getLeadStatus(score) {
   return 'cold';
 }
 
-function processQualificationData(session, message) {
+function processQualificationData(session, message, language = 'fr') {
   const extracted = session.extractedData;
+  const lower = message.toLowerCase();
+  const lang = LANG_DATA[language] || LANG_DATA['fr'];
 
   // Extract new data from message
   const budget = extractBudget(message);
@@ -602,7 +618,21 @@ function processQualificationData(session, message) {
     extracted.timeline = timeline;
   }
 
+  // Cross-language decision maker patterns could be merged but for now we keep the logic
   const decisionMaker = extractDecisionMaker(message);
+  if (decisionMaker && !extracted.decisionMaker) {
+    extracted.decisionMaker = decisionMaker;
+  }
+
+  // Use localized industry keywords for fit
+  if (!extracted.industry && lang.industries) {
+    for (const [indKey, indData] of Object.entries(lang.industries)) {
+      if (indData.keywords && indData.keywords.some(kw => lower.includes(kw.toLowerCase()))) {
+        extracted.industry = { tier: indKey, score: 15 }; // Default high fit for matched industries
+        break;
+      }
+    }
+  }
   if (decisionMaker && !extracted.decisionMaker) {
     extracted.decisionMaker = decisionMaker;
   }
@@ -762,10 +792,62 @@ async function syncLeadToHubSpot(session) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// RESILIENT RESPONSE WITH FALLBACK
+// RESILIENT RESPONSE WITH FALLBACK & COGNITIVE CONTEXT
 // ─────────────────────────────────────────────────────────────────────────────
-async function getResilisentResponse(userMessage, conversationHistory = []) {
+async function getResilisentResponse(userMessage, conversationHistory = [], session = null, language = 'fr') {
   const errors = [];
+
+  // 1. Semantic RAG Context Retrieval (Hybrid Frontier v3.0 | RLS Shielding)
+  const tenantId = session?.metadata?.knowledge_base_id || 'agency_internal';
+  const ragresults = await KB.searchHybrid(userMessage, 3, { tenantId });
+  let ragContext = KB.formatForVoice(ragresults, language);
+
+  // 1.1 Relational Graph Context (GraphRAG)
+  const graphResults = KB.graphSearch(userMessage, { tenantId });
+  let graphContext = "";
+  if (graphResults.length > 0) {
+    graphContext = "\nRELATIONAL_KNOWLEDGE:\n" + graphResults.map(r => `- ${r.context}`).join('\n');
+  }
+
+  // 2. Dynamic Tool Execution (Contextual Awareness)
+  let toolContext = "";
+  const lower = userMessage.toLowerCase();
+
+  // 2.1 AGENTIC VERIFICATION LOOP (Phase 13)
+  // Logic: Check if RAG mention an order or price, and verify with live sensors
+  if (ragContext.toLowerCase().includes('order') || lower.includes('order') || lower.includes('commande')) {
+    if (session?.extractedData?.email) {
+      const order = await ECOM_TOOLS.getOrderStatus(session.extractedData.email);
+      if (order.found) {
+        toolContext += `\nVERIFIED_SENSOR_DATA (Shopify): Order ${order.orderId} status is officially "${order.status}".`;
+        ragContext = ragContext.replace(/Order status: [^.\n]+/i, `Order status: ${order.status} (Verified)`);
+      }
+    }
+  }
+
+  // 2.2 CRM RAG: Returning Customer Recognition (Phase 14)
+  let crmContext = "";
+  if (session?.extractedData?.email) {
+    const customer = await CRM_TOOLS.getCustomerContext(session.extractedData.email);
+    if (customer.found) {
+      crmContext = CRM_TOOLS.formatForVoice(customer);
+    }
+  }
+
+  if (ragContext.toLowerCase().includes('stock') || lower.includes('stock') || lower.includes('dispo') || lower.includes('prix')) {
+    // Extract potential product name from message or RAG
+    const productMatch = userMessage.match(/(?:stock|prix|dispo|about)\s+(?:de\s+|du\s+|d')?([a-z0-9\s]+)/i);
+    const query = productMatch ? productMatch[1].trim() : userMessage;
+    const stock = await ECOM_TOOLS.checkProductStock(query);
+    if (stock.found) {
+      const liveStock = stock.products.map(p => `${p.title}: ${p.inStock ? 'In Stock' : 'Out of Stock'} (${p.price}€)`).join(', ');
+      toolContext += `\nVERIFIED_SENSOR_DATA: Current stock and pricing: ${liveStock}. (Source: Shopify Real-time)`;
+    }
+  }
+
+  // 3. Dynamic Prompt Construction
+  const fullSystemPrompt = `${SYSTEM_PROMPT}\n\nRELEVANT_SYSTEMS (RLS Isolated):\n${ragContext}${graphContext}${toolContext}${crmContext}\n\nTENANT_ID: ${tenantId}`;
+
   // Fallback order: Grok → OpenAI → Gemini → Anthropic → Local
   const providerOrder = ['grok', 'openai', 'gemini', 'anthropic'];
 
@@ -778,11 +860,17 @@ async function getResilisentResponse(userMessage, conversationHistory = []) {
 
     try {
       let response;
+      // We pass the fullSystemPrompt instead of the static one
+      const historyWithSystem = [
+        { role: 'system', content: fullSystemPrompt },
+        ...conversationHistory
+      ];
+
       switch (providerKey) {
-        case 'grok': response = await callGrok(userMessage, conversationHistory); break;
-        case 'openai': response = await callOpenAI(userMessage, conversationHistory); break;
-        case 'gemini': response = await callGemini(userMessage, conversationHistory); break;
-        case 'anthropic': response = await callAnthropic(userMessage, conversationHistory); break;
+        case 'grok': response = await callGrok(userMessage, conversationHistory, fullSystemPrompt); break;
+        case 'openai': response = await callOpenAI(userMessage, conversationHistory, fullSystemPrompt); break;
+        case 'gemini': response = await callGemini(userMessage, conversationHistory, fullSystemPrompt); break;
+        case 'anthropic': response = await callAnthropic(userMessage, conversationHistory, fullSystemPrompt); break;
       }
 
       return {
@@ -799,8 +887,8 @@ async function getResilisentResponse(userMessage, conversationHistory = []) {
   }
 
   // All AI providers failed - use local fallback
-  console.log('[Voice API] All providers failed, using local fallback');
-  const localResult = getLocalResponse(userMessage);
+  console.log(`[Voice API] All providers failed, using local fallback (${language})`);
+  const localResult = getLocalResponse(userMessage, language);
 
   return {
     success: true, // Still successful because we have a response
@@ -896,7 +984,8 @@ function startServer(port = 3004) {
             res.end(JSON.stringify({ error: `Invalid JSON: ${bodyParsed.error}` }));
             return;
           }
-          const { message, history = [], sessionId } = bodyParsed.data;
+          const { message, history = [], sessionId, language: reqLanguage } = bodyParsed.data;
+          const language = reqLanguage || VOICE_CONFIG?.defaultLanguage || 'fr';
 
           if (!message) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -904,13 +993,18 @@ function startServer(port = 3004) {
             return;
           }
 
-          console.log(`[Voice API] Processing: "${message.substring(0, 50)}..."`);
-          const result = await getResilisentResponse(message, history);
+          console.log(`[Voice API] Processing (${language}): "${message.substring(0, 50)}..."`);
 
           // Lead qualification processing
           const leadSessionId = sessionId || `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
           const session = getOrCreateLeadSession(leadSessionId);
-          processQualificationData(session, message);
+          processQualificationData(session, message, language);
+
+          // Get Persona for metadata (RLS Context)
+          const { VoicePersonaInjector } = require('./voice-persona-injector.cjs');
+          const persona = VoicePersonaInjector.getPersona(null, null, sessionId); // We assume sessionId is the clientId here for RAG isolation
+
+          const result = await getResilisentResponse(message, history, { ...session, metadata: persona }, language);
 
           // Add AI response to session
           session.messages.push({ role: 'assistant', content: result.response, timestamp: Date.now() });

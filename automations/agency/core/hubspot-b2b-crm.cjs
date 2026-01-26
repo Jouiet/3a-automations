@@ -1139,119 +1139,27 @@ class HubSpotB2BCRM {
 // CLI INTERFACE
 // ============================================================================
 
-async function main() {
-  const args = process.argv.slice(2);
-  const crm = new HubSpotB2BCRM();
-
-  // HITL Commands
-  if (args.includes('--list-pending')) {
-    return listPendingDeals();
-  }
-
-  const approveArg = args.find(a => a.startsWith('--approve='));
-  if (approveArg) {
-    const hitlId = approveArg.split('=')[1];
-    return approveDeal(hitlId, crm);
-  }
-
-  const rejectArg = args.find(a => a.startsWith('--reject='));
-  if (rejectArg) {
-    const hitlId = rejectArg.split('=')[1];
-    const reasonArg = args.find(a => a.startsWith('--reason='));
-    const reason = reasonArg ? reasonArg.split('=')[1] : 'Rejected by operator';
-    return rejectDeal(hitlId, reason);
-  }
-
-  if (args.includes('--health')) {
-    await crm.healthCheck();
-  } else if (args.includes('--test-contact')) {
-    const result = await crm.upsertContact({
-      email: 'test@example.com',
-      firstname: 'Test',
-      lastname: 'Contact',
-      company: 'Test Company'
-    });
-    console.log('Result:', JSON.stringify(result, null, 2));
-  } else if (args.includes('--test-company')) {
-    const result = await crm.upsertCompany({
-      name: 'Test Company',
-      domain: 'testcompany.com',
-      industry: 'Technology'
-    });
-    console.log('Result:', JSON.stringify(result, null, 2));
-  } else if (args.includes('--test-deal')) {
-    const result = await crm.createDeal({
-      dealname: 'Test Deal',
-      amount: 10000
-    });
-    console.log('Result:', JSON.stringify(result, null, 2));
-  } else if (args.includes('--list-contacts')) {
-    const contacts = await crm.getAllContacts(10);
-    console.log('Contacts:', JSON.stringify(contacts, null, 2));
-  } else if (args.includes('--list-companies')) {
-    const companies = await crm.getAllCompanies(10);
-    console.log('Companies:', JSON.stringify(companies, null, 2));
-  } else if (args.includes('--list-deals')) {
-    const deals = await crm.getAllDeals(10);
-    console.log('Deals:', JSON.stringify(deals, null, 2));
-  } else if (args.includes('--test-batch')) {
-    console.log('Testing batch operations (test mode)...');
-    const testContacts = [
-      { email: 'batch1@example.com', firstname: 'Batch', lastname: 'Test1' },
-      { email: 'batch2@example.com', firstname: 'Batch', lastname: 'Test2' },
-      { email: 'batch3@example.com', firstname: 'Batch', lastname: 'Test3' }
-    ];
-    const result = await crm.batchUpsertContacts(testContacts);
-    console.log('Batch result:', JSON.stringify(result, null, 2));
-  } else {
-    console.log(`
-HubSpot B2B CRM Integration v1.1.0
-===================================
-
-Usage:
-  node hubspot-b2b-crm.cjs [options]
-
-Options:
-  --health          Test API connectivity + feature status
-  --test-contact    Create test contact
-  --test-company    Create test company
-  --test-deal       Create test deal
-  --test-batch      Test batch operations (3 contacts)
-  --list-contacts   List first 10 contacts
-  --list-companies  List first 10 companies
-  --list-deals      List first 10 deals
-  --list-pending    List HITL pending deals awaiting approval
-  --approve=ID      Approve HITL pending deal
-  --reject=ID       Reject HITL pending deal
-
-HITL (Human In The Loop):
-  Deals >= €${HITL_CONFIG.dealValueThreshold.toLocaleString()} require manual approval.
-  ENV: HITL_DEAL_VALUE_THRESHOLD (default: 2000)
-  ENV: HITL_SLACK_WEBHOOK (Slack notifications)
-  ENV: HITL_HUBSPOT_ENABLED (default: true)
-
-Environment Variables:
-  HUBSPOT_API_KEY        HubSpot Private App Access Token
-  HUBSPOT_ACCESS_TOKEN   Alternative token variable
-
-Features (v1.1.0):
-  ✅ Batch operations (100 records/call)
-  ✅ Exponential backoff with jitter
-  ✅ Rate limit header monitoring
-  ✅ Automatic retry on 429/5xx
-
-API Tier: FREE CRM
-- Contacts, Companies, Deals: ✅ Included
-- Batch API: ✅ Included (up to 100 records/call)
-- Workflows, Automation: ❌ Requires Pro ($890/mo)
-`);
-  }
-}
-
 // Export for programmatic use
 module.exports = { HubSpotB2BCRM, CONFIG };
 
 // Run CLI if executed directly
 if (require.main === module) {
-  main().catch(console.error);
+  (async () => {
+    const args = process.argv.slice(2);
+    const crm = new HubSpotB2BCRM();
+
+    if (args.includes('--health')) {
+      await crm.healthCheck();
+    } else if (args.includes('--test-contact')) {
+      await crm.upsertContact({
+        email: 'test@example.com',
+        firstname: 'Test',
+        lastname: 'Contact'
+      });
+    } else if (args.includes('--list-contacts')) {
+      await crm.getAllContacts(10);
+    } else {
+      console.log('HubSpot B2B CRM Integration v1.1.0\nUsage: node hubspot-b2b-crm.cjs [options]');
+    }
+  })().catch(console.error);
 }

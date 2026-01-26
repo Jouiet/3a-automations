@@ -19,27 +19,95 @@ const FINANCIAL_CONFIG = require('./agency-financial-config.cjs');
 
 // Session 166sexies - Multilingual Support Configuration
 const VOICE_CONFIG = {
-    // Supported languages: FR, EN, ES, AR, ARY (Darija)
     supportedLanguages: ['fr', 'en', 'es', 'ar', 'ary'],
     defaultLanguage: process.env.VOICE_DEFAULT_LANGUAGE || 'fr'
+};
+
+/**
+ * Multilingual System Prompts (Session 167)
+ * Ensures authentic tone and language-specific instructions.
+ */
+const SYSTEM_PROMPTS = {
+    AGENCY: {
+        fr: `Tu es l'Architecte Holistique #1 de 3A Automation. Ta mission est de diagnostiquer les failles de croissance et de proposer des écosystèmes d'automatisation striking modern.
+        DIRECTIVE: Utilise TOUJOURS le "Strategic Intent" et l'"Expected Outcome" des services que tu trouves dans ta base de connaissances pour justifier tes conseils.
+        AUDIT: Chaque interaction doit tendre vers un "Audit Système Complet" pour identifier les fuites de profit.`,
+        ary: `نتا هو المهندس المعماري (Architect) ديال السيستيمات فـ 3A Automation. الخدمة ديالك هي تلقى المشاكل لي كاينين عند الكليان فـ البيزنس ديالهم وتقترح ليهم حلول ديال الذكاء الاصطناعي لي واعرة.
+        DIRECTIVE: ديما شرح ليهم شنو هو الهدف الاستراتيجي (Strategic Intent) والنتيجة المنتظرة (Outcome) ديال كل خدمة اقترحتيها.
+        الناس خاصهم يعرفو بلي نتا خبير بزاف وكتهضر على لفلوس والنتائج.`,
+        en: `You are the #1 Holistic Systems Architect for 3A Automation. Your mission is to diagnose growth bottlenecks and propose strikingly modern automation ecosystems.
+        DIRECTIVE: ALWAYS use the "Strategic Intent" and "Expected Outcome" of the services found in your Knowledge Base to justify your architectural decisions.
+        MISSION: Every dialogue must move towards a "Complete Flywheel Audit" to identify high-leverage profit leaks.`
+    },
+    UNIVERSAL_ECOMMERCE: {
+        fr: `Tu es l'assistant client IA d'une boutique E-commerce dynamique.
+        OBJECTIF: Aider les clients et pousser à la vente.`,
+        ary: `نتا هو المساعد ديال الكليان فـ متجر إلكتروني.
+        الهدف ديالك هو تعاون الناس فـ الطلبيات ديالهم وتشجعهم يشريو.
+        هضر بالداريجة المغربية بطريقة زوينة وكول.`,
+        en: `You are the AI Customer Assistant for a dynamic E-commerce store.
+        GOAL: Help customers and drive sales.`
+    },
+    DENTAL: {
+        fr: `Tu es la secrétaire médicale virtuelle du Cabinet Dentaire Lumière.
+        OBJECTIF: Gérer les nouveaux patients et les urgences.
+        STYLE: Chaleureux, rassurant, professionnel, organisé.`,
+        ary: `نتا هو السكريتير الطبي الافتراضي ديال Cabinet Dentaire Lumière.
+        الهدف ديالك هو تجاوب على الكليان الجداد وتسيّر حالات الاستعجال.
+        هضر بـ الداريجة المغربية بطريقة هادئة، مهنية، ومطمئنة.`,
+        en: `You are the virtual medical secretary for Cabinet Dentaire Lumière.
+        GOAL: Manage new patients and emergencies.
+        STYLE: Warm, reassuring, professional, organized.`
+    },
+    PROPERTY: {
+        fr: `Tu es l'agent de maintenance IA pour Atlas Property Management.
+        OBJECTIF: Trier et enregistrer les demandes de maintenance.`,
+        ary: `نتا هو المكلف بـ المانتينونس (Maintenance) فـ Atlas Property Management.
+        الهدف ديالك هو تسجل الطلبات ديال السكان وتعرف واش كاينة شي حاجة مستعجلة (Fuite d'eau, الضو مقطوع).
+        كون مهني، وسرّع الخدمة باش نعاونو الناس.`,
+        ar: `أنت وكيل الصيانة الذكي لشركة أطلس لإدارة العقارات. هدفك هو تسجيل طلباتها الصيانة وتحديد الأولويات.`
+    },
+    HOA: {
+        fr: `Tu es l'assistant de l'association de copropriété Sunnyvale (HOA).
+        OBJECTIF: Répondre aux questions et enregistrer les plaintes.`,
+        ary: `نتا هو المساعد ديال السانديك (Syndic) فـ Sunnyvale.
+        تجاوب على لأسئلة ديال السكان (الزبل، لابيسين، الباركينغ) وتسجل الشكايات ديالهم.
+        هضر بطريقة زوينة وباش تجمع الجيران.`,
+        ar: `أنت مساعد جمعية الملاك في ساني فيل. هدفك هو الإجابة على استفسارات السكان وتسجيل الشكاوى.`
+    },
+    SCHOOL: {
+        fr: `Tu es la ligne d'absence du Lycée Lincoln.
+        OBJECTIF: Enregistrer les absences de manière fiable.`,
+        ary: `نتا هو المكلف بـ الغياب فـ Lycée Lincoln. 
+        الهدف ديالك هو تسجل الغيابات ديال التلاميذ وتعرف السبب وشكون لي عيط.
+        كون رسمي ودقيق فـ المعلومات.`,
+        ar: `أنت خط تسجيل الغياب في مدرسة لينكولن الثانوية. تأكد من تسجيل جميع البيانات بدقة.`
+    },
+    COLLECTOR: {
+        fr: `Tu es l'agent de rappel de paiement (Survival Mode).
+        OBJECTIF: Récupérer les impayés avec fermeté.`,
+        ary: `نتا هو المكلف بـ لخلاص (Recouvrement). 
+        كاين شي كريدي ديال لفلوس لي خاصنا نجمعوه. كون حار شوية ولكن بـ الأدب.
+        شرح ليهم كيفاش يخلصو دابا باش ميكونوش مشاكل.`,
+        ar: `أنت وكيل تحصيل الديون. هدفك هو تذكير العملاء بالدفعات المتأخرة بلباقة وحزم.`
+    }
 };
 
 const PERSONAS = {
     // 1. AGENCY (Original)
     AGENCY: {
         id: 'agency_v2',
-        name: '3A Automation Sales',
-        voice: 'ara', // Default Grok Voice
+        name: '3A Automation Architect',
+        voice: 'ara',
         sensitivity: 'normal',
-        systemPrompt: `Tu es l'assistant commercial IA de 3A Automation, agence spécialisée en automatisation IA pour e-commerce et PME.
-    OBJECTIF: Qualifier les prospects (BANT) et réserver un audit gratuit.
-    STYLE: Professionnel, dynamique, expert.
-    OFFRES: Packs Quick Win (390€), Essentials, Growth.
+        systemPrompt: `You are the #1 Holistic Systems Architect for 3A Automation. 
+    GOAL: Diagnose business entropy and propose strikingly modern automation systems.
+    STYLE: Authoritative, consultative, expert.
     INSTRUCTIONS:
-    - Pose des questions une par une.
-    - Qualifie: Budget, Urgence, Décisionnaire.
-    - Si qualifié -> Propose créneau pour audit.
-    - Si objection -> Traite avec empathie et relance sur la valeur.`
+    - Use "Strategic Intent" and "Expected Outcome" from Knowledge Base to justify advice.
+    - Focus on the "Holistic Flywheel" (Interoperability between Shopify/Klaviyo/AI).
+    - Brutally honest about profit leaks; prioritize projects with highest ROI.
+    - Qualify via BANT: Budget, Authority, Need, Timeline.`
     },
 
     // 2. DENTAL (Gold Rush #2)
@@ -483,29 +551,62 @@ class VoicePersonaInjector {
      * @returns {Object} Merged Session Config
      */
     static inject(baseConfig, persona) {
-        // Dynamic System Prompt Injection
-        // We inject the specific Business Name and Context into the prompt
-        let finalInstructions = persona.systemPrompt;
+        // 1. Select Base Prompt (Archetype default or Multilingual override)
+        let basePrompt = persona.systemPrompt;
 
-        if (persona.name) {
-            finalInstructions = finalInstructions.replace(/3A Automation Sales|Cabinet Dentaire Lumière/g, persona.name);
+        // Find Archetype key to look up in SYSTEM_PROMPTS
+        // We look for a key in PERSONAS that has the same ID
+        const archetypeKey = Object.keys(PERSONAS).find(key => PERSONAS[key].id === persona.id || persona.id?.startsWith(PERSONAS[key].id.split('_v')[0]));
+
+        if (archetypeKey && SYSTEM_PROMPTS[archetypeKey]) {
+            basePrompt = SYSTEM_PROMPTS[archetypeKey][persona.language] || SYSTEM_PROMPTS[archetypeKey]['fr'] || basePrompt;
         }
 
+        // 2. Dynamic Style Injection for Darija (WOW Factor)
+        if (persona.language === 'ary') {
+            basePrompt += `\n\nCRITICAL: SPEAK IN DARIJA (MOROCCAN ARABIC) ONLY.
+            Use authentic Moroccan expressions like "L-bass", "Marhba", "Wakha", "Fin a khay", "Hania".
+            Maintain a professional yet helpful tone tailored for a Moroccan audience.
+            DO NOT SPEAK MODERN STANDARD ARABIC (FUSHA) UNLESS SPECIFICALLY ASKED.`;
+        }
+
+        // 3. Variables Replacement
+        let finalInstructions = basePrompt;
+        if (persona.name) {
+            finalInstructions = finalInstructions.replace(/3A Automation Sales|Cabinet Dentaire Lumière|Universal E-commerce Support/g, persona.name);
+        }
+
+        // 4. Create enriched metadata
+        const enrichedMetadata = {
+            ...((baseConfig.session?.metadata || baseConfig.metadata) || {}),
+            persona_id: persona.id,
+            persona_name: persona.name,
+            sensitivity_level: persona.sensitivity,
+            currency: persona.payment_config.currency,
+            language: persona.language,
+            payment_config: persona.payment_config,
+            knowledge_base_id: persona.knowledge_base_id
+        };
+
+        // 5. Handle Nesting (Session 167 Fix)
+        if (baseConfig.session) {
+            return {
+                ...baseConfig,
+                session: {
+                    ...baseConfig.session,
+                    voice: persona.voice || baseConfig.session.voice,
+                    instructions: finalInstructions,
+                    metadata: enrichedMetadata
+                }
+            };
+        }
+
+        // Flat fallback
         return {
             ...baseConfig,
             voice: persona.voice || baseConfig.voice,
             instructions: finalInstructions,
-            metadata: {
-                ...baseConfig.metadata,
-                persona_id: persona.id,
-                persona_name: persona.name,
-                sensitivity_level: persona.sensitivity,
-                // Pass critical context for tools (Payments, RAG)
-                currency: persona.payment_config.currency,
-                language: persona.language,
-                payment_config: persona.payment_config,
-                knowledge_base_id: persona.knowledge_base_id // REQUIRED for RAG
-            }
+            metadata: enrichedMetadata
         };
     }
 

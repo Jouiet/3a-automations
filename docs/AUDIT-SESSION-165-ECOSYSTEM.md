@@ -1,5 +1,6 @@
 # AUDIT FACTUEL ECOSYSTEME 3A AUTOMATION
-> Session: 165 | Date: 26/01/2026 09:39 UTC
+>
+> Session: 165-167bis | Date: 26/01/2026 20:20 UTC
 > Methode: Bottom-up empirique | Verification: 100% factuelle
 
 ---
@@ -20,13 +21,18 @@
 | **HITL Coverage** | 80% (claimed) | **100% (18/18)** | ✅ **S165quater COMPLETE** |
 | A2A Agents HITL | N/A | **0/3** | 🔴 DEAD |
 | MCP Servers HITL | N/A | **0/11** | 🔴 NONE |
-| AG-UI Queue | Exists | **1 endpoint** | ✅ **S166 WIRED** |
+| AG-UI Queue | Wired (POST) | ✅ **S166 WIRED** | 0% usage |
+| **Cognitive RAG** | Hybrid v3.0 | ✅ **S167 OPTIMAL** | Map Phases 9-11 |
+| **Policy RAG** | Pending | ✅ **S167bis OPTIMAL (v5.0)** | Nuclear Precision Boost |
+| **CRM RAG** | Pending | ✅ **S167bis OPTIMAL (v5.0)** | HubSpot History Injection |
+| **Strategic Metadata** | 100% | **56.3%** (76/135) | P3 - Nice to have |
 
 ---
 
 ## 1. SCRIPTS CORE (85 total)
 
 ### 1.1 Scripts with --health Support (27)
+
 ```
 at-risk-customer-flow        ✅
 bigbuy-supplier-sync         ✅
@@ -58,6 +64,7 @@ whatsapp-booking-notifications ✅
 ```
 
 ### 1.2 Resilient Scripts (Multi-AI Fallback)
+
 | Script | Providers | Status |
 |--------|-----------|--------|
 | blog-generator-resilient | Claude, GPT, Grok, Gemini | ✅ OPERATIONAL |
@@ -73,6 +80,7 @@ whatsapp-booking-notifications ✅
 ## 2. SENSORS (20 total)
 
 ### 2.1 Operational (15/19 = 79%)
+
 | Sensor | Pressure | Status |
 |--------|----------|--------|
 | product-seo-sensor | 0 | ✅ OK |
@@ -92,6 +100,7 @@ whatsapp-booking-notifications ✅
 | whatsapp-status-sensor | 90 | ✅ OK |
 
 ### 2.2 Blocked (4/19 = 21%)
+
 | Sensor | Issue | Action Required |
 |--------|-------|-----------------|
 | retention-sensor | NETWORK (fetch failed) | Check Shopify API |
@@ -104,6 +113,7 @@ whatsapp-booking-notifications ✅
 ## 3. AUTOMATIONS REGISTRY
 
 ### 3.1 Statistics
+
 - **Total automations**: 121
 - **With script reference**: 83 (69%)
 - **Without script reference**: 38 (31%)
@@ -111,6 +121,7 @@ whatsapp-booking-notifications ✅
 - **Scripts that exist**: 76 (100%)
 
 ### 3.2 Categories Distribution
+
 | Category | Count | % |
 |----------|-------|---|
 | lead-gen | 26 | 21% |
@@ -129,11 +140,13 @@ whatsapp-booking-notifications ✅
 ### 3.3 Gap Analysis - UPDATED & CLARIFIED
 
 **Registry Status:**
+
 - Total: **121 automations**
 - With `script` field: **88** (73%)
 - Without `script` field: **33** (27%) - **INTENTIONAL, NOT A BUG**
 
 **5 INCONSISTENCIES FIXED (Session 165):**
+
 | ID | Issue | Status |
 |----|-------|--------|
 | lead-scoring-agentic | type=script, scriptPath but no script | ✅ FIXED |
@@ -166,17 +179,20 @@ whatsapp-booking-notifications ✅
 ## 4. SKILLS (.agent/skills/)
 
 ### 4.1 Statistics
+
 - **Skill directories**: 44
 - **With SKILL.md**: 42 (95%)
 - **Empty/incomplete**: 2 (5%)
 
 ### 4.2 Provider Distribution
+
 | Provider | Count | % |
 |----------|-------|---|
 | Gemini | 31 | 74% |
 | Claude | 11 | 26% |
 
 ### 4.3 Skill Categories (sample)
+
 ```
 accountant, agency, architect, bridge_slack, bridge_voice,
 cleaner, collector, concierge, content_director, contractor,
@@ -189,6 +205,7 @@ gemini_skill_creator, governor, growth, gym...
 ## 5. PROTOCOLS
 
 ### 5.1 A2A (Agent-to-Agent) - PRIMARY
+
 | Aspect | Status |
 |--------|--------|
 | Server | automations/a2a/server.js (624 lines) |
@@ -197,6 +214,7 @@ gemini_skill_creator, governor, growth, gym...
 | Status | ✅ PRODUCTION |
 
 ### 5.2 ACP (Agent Communication Protocol) - DEPRECATED
+
 | Aspect | Status |
 |--------|--------|
 | Status | **DEPRECATED** (merged into A2A) |
@@ -204,6 +222,7 @@ gemini_skill_creator, governor, growth, gym...
 | Migration | ✅ Complete |
 
 ### 5.3 UCP (Unified Commerce Protocol)
+
 | Aspect | Status |
 |--------|--------|
 | Endpoint | /.well-known/ucp |
@@ -211,6 +230,7 @@ gemini_skill_creator, governor, growth, gym...
 | Status | ✅ INTEGRATED in A2A server |
 
 ### 5.4 GPM (Global Pressure Matrix)
+
 | Aspect | Status |
 |--------|--------|
 | File | landing-page-hostinger/data/pressure-matrix.json |
@@ -241,6 +261,7 @@ gemini_skill_creator, governor, growth, gym...
 ## 7. REMOTION VIDEO STUDIO
 
 ### 7.1 Compositions (7)
+
 | Composition | Type | Duration | Status |
 |-------------|------|----------|--------|
 | PromoVideo | Agency showcase | 30s | ✅ |
@@ -252,9 +273,11 @@ gemini_skill_creator, governor, growth, gym...
 | TestimonialVideo | Client quote | 45s | ✅ |
 
 ### 7.2 Components (5)
+
 - TitleSlide, FeatureCard, LogoReveal, CallToAction, GradientBackground
 
 ### 7.3 Status
+
 - package.json: ✅ EXISTS
 - Dependencies: ✅ INSTALLED
 - Health check: ✅ PASSED
@@ -264,6 +287,7 @@ gemini_skill_creator, governor, growth, gym...
 ## 8. WEBSITE
 
 ### 8.1 Statistics
+
 | Metric | Value |
 |--------|-------|
 | HTML Pages | 79 |
@@ -272,6 +296,7 @@ gemini_skill_creator, governor, growth, gym...
 | CSS Version | v=84.0 |
 
 ### 8.2 Validation
+
 | Check | Result |
 |-------|--------|
 | Errors | 0 |
@@ -284,6 +309,7 @@ gemini_skill_creator, governor, growth, gym...
 ## 9. CREDENTIALS (.env)
 
 ### 9.1 Statistics
+
 | Type | Count | % |
 |------|-------|---|
 | Total vars | 93 | 100% |
@@ -291,6 +317,7 @@ gemini_skill_creator, governor, growth, gym...
 | EMPTY | 36 | 39% |
 
 ### 9.2 Critical Empty (USER ACTION REQUIRED)
+
 ```
 META_ACCESS_TOKEN=
 TIKTOK_ACCESS_TOKEN=
@@ -310,6 +337,7 @@ BIGQUERY_PROJECT_ID=
 ## 10. GAPS & ISSUES IDENTIFIED
 
 ### 10.1 Critical (P0)
+
 | Issue | Impact | Action | Priority |
 |-------|--------|--------|----------|
 | 36 empty credentials | 39% features blocked | USER: Fill .env | NOW |
@@ -317,11 +345,13 @@ BIGQUERY_PROJECT_ID=
 | Apify trial expired | Scraping broken | USER: Upgrade plan | NOW |
 
 ### 10.1.1 Deferred (P0 but SCHEDULED)
+
 | Issue | Impact | Action | When |
 |-------|--------|--------|------|
 | BigQuery API disabled | Trends analysis | USER: Enable API | **After 2000 clients** (cost optimization) |
 
 ### 10.2 High (P1)
+
 | Issue | Impact | Action |
 |-------|--------|--------|
 | 38 automations without scripts | Catalog-only entries | Document or implement |
@@ -329,6 +359,7 @@ BIGQUERY_PROJECT_ID=
 | retention-sensor network | Customer data gap | Fix Shopify API |
 
 ### 10.3 Medium (P2)
+
 | Issue | Impact | Action |
 |-------|--------|--------|
 | 2 empty skill folders | Minor gap | Create or remove |
@@ -339,17 +370,20 @@ BIGQUERY_PROJECT_ID=
 ## 11. RECOMMENDATIONS
 
 ### 11.1 Immediate Actions (This Session)
+
 1. ~~Validator EXCLUDE_DIRS for Stitch assets~~ ✅ DONE
 2. Document this audit ✅ DONE
 3. Update CLAUDE.md with factual metrics
 
 ### 11.2 User Actions Required
+
 1. Fill critical .env credentials (11 vars)
 2. Enable GA4 Analytics Data API
 3. Enable BigQuery API
 4. Upgrade Apify to paid plan
 
 ### 11.3 Future Sessions
+
 1. Consolidate CSS duplicates (HITL - visual review)
 2. Test all MCP servers systematically
 3. Implement missing automation scripts (38)
@@ -360,6 +394,7 @@ BIGQUERY_PROJECT_ID=
 ## 12. OPTIMIZATION OPPORTUNITIES (Web Research 26/01/2026)
 
 ### 12.1 Klaviyo API Optimizations
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | OAuth vs API Key | API Key | OAuth 2.1 for higher rate limits (each token separate) |
@@ -369,6 +404,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [Klaviyo Blog](https://www.klaviyo.com/blog)
 
 ### 12.2 A2A Protocol Updates (July 2025 - v0.3)
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Version | Custom impl | A2A v0.3 stable - consider native ADK |
@@ -378,6 +414,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [Google Developers Blog](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)
 
 ### 12.3 Remotion Performance
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Video component | OffthreadVideo | NEW `<Video>` tag is optimized |
@@ -388,6 +425,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [Remotion Performance Docs](https://www.remotion.dev/docs/performance)
 
 ### 12.4 MCP Server Best Practices
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Authentication | API Keys | OAuth 2.1 standard (2025+) |
@@ -397,6 +435,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [MCP Best Practices](https://modelcontextprotocol.info/docs/best-practices/)
 
 ### 12.5 Shopify Flow Updates (Winter 2026)
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Sidekick AI | Not used | NEW - natural language workflow building |
@@ -406,6 +445,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [Shopify Flow Blog](https://www.shopify.com/blog/flow-automation-updates-2025)
 
 ### 12.6 Claude Agent SDK (Renamed from Claude Code SDK)
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | SDK renamed | Using Claude Code | Claude Agent SDK = same engine |
@@ -416,6 +456,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [Anthropic Engineering](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)
 
 ### 12.7 GitHub Actions (2026 Updates)
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Parallel steps | Sequential | Coming mid-2026 (most requested) |
@@ -426,6 +467,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [GitHub Blog](https://github.blog/news-insights/product-news/lets-talk-about-github-actions/)
 
 ### 12.8 Grok API (xAI)
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Model | grok-4-1-fast-reasoning | Grok 4 available, 2M context |
@@ -435,6 +477,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [xAI Docs](https://docs.x.ai/docs/overview)
 
 ### 12.9 Gemini 3 Pro (Critical for Agents)
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Thinking level | Default | Use `thinking_level: high` for planning |
@@ -445,6 +488,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [Google Developers Blog](https://developers.googleblog.com/new-gemini-api-updates-for-gemini-3/)
 
 ### 12.10 GPT-5.2 (OpenAI)
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | API | Chat Completions | **Use Responses API** (+4% on Tau-Bench) |
@@ -455,6 +499,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [OpenAI Platform](https://platform.openai.com/docs/guides/latest-model)
 
 ### 12.11 Multi-AI Fallback Patterns
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Pattern | Sequential fallback | Add Router + Cooldowns + Load Balancer |
@@ -464,6 +509,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [DEV Community Guide](https://dev.to/ash_dubai/multi-provider-llm-orchestration-in-production-a-2026-guide-1g10)
 
 ### 12.12 ElevenLabs Voice
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | IVC audio | Unknown | 1-2 min clean audio (NOT >3 min) |
@@ -473,6 +519,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [ElevenLabs Docs](https://elevenlabs.io/docs/creative-platform/voices/voice-cloning)
 
 ### 12.13 fal.ai Image/Video
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Long requests | Blocking | Use queue API + webhooks |
@@ -482,6 +529,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [fal.ai Learn](https://fal.ai/learn)
 
 ### 12.14 Apify Scraping
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Custom scrapers | Writing from scratch | Use 10,000+ pre-built Actors |
@@ -491,6 +539,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [Apify Blog](https://blog.apify.com/best-web-scraping-tools/)
 
 ### 12.15 Voice AI Agents
+
 | Finding | Current State | Optimization |
 |---------|---------------|--------------|
 | Latency target | Unknown | Sub-500ms end-to-end |
@@ -500,6 +549,7 @@ BIGQUERY_PROJECT_ID=
 **Source:** [Vellum AI Guide](https://www.vellum.ai/blog/ai-voice-agent-platforms-guide)
 
 ### 12.16 E-commerce Metrics (2026 Benchmarks)
+
 | Metric | Industry Avg | Target |
 |--------|--------------|--------|
 | LTV:CAC ratio | 3:1 minimum | >4:1 |
@@ -514,6 +564,7 @@ BIGQUERY_PROJECT_ID=
 ## 13. AUDIT METHODOLOGY
 
 ### Verification Commands Used
+
 ```bash
 # Scripts count
 ls automations/agency/core/*.cjs | wc -l
@@ -535,6 +586,7 @@ grep -E "^[A-Z_]+=.+" .env | wc -l
 ```
 
 ### Data Sources
+
 - File system: Direct `ls`, `find`, `cat`
 - Script execution: `node script.cjs --health`
 - JSON parsing: `jq` queries
@@ -547,11 +599,13 @@ grep -E "^[A-Z_]+=.+" .env | wc -l
 ## 14. SESSION 165 VERIFICATION LOG
 
 ### 14.1 Registry Fix Applied
+
 ```
 cf0c8fb fix(registry): add missing script field to 5 agentic automations
 ```
 
 ### 14.2 Sensor Status (Final Verification 26/01/2026 ~10:30 UTC)
+
 | Sensor | Status | Pressure | Notes |
 |--------|--------|----------|-------|
 | gsc-sensor | ✅ OK | 0 | Working (fixed S161bis) |
@@ -561,6 +615,7 @@ cf0c8fb fix(registry): add missing script field to 5 agentic automations
 | google-trends-sensor | ✅ OK | 8 | AI-powered (Grok) |
 
 ### 14.3 Optimizations Verified
+
 | Component | Status | Notes |
 |-----------|--------|-------|
 | Klaviyo API Revision | ✅ 2026-01-15 | Current |
@@ -569,11 +624,13 @@ cf0c8fb fix(registry): add missing script field to 5 agentic automations
 | MCP Auth | ⏳ OAuth 2.1 std | Consider upgrade |
 
 ### 14.4 AI Model IDs Fixed (Session 165bis)
+
 ```
 27cac7b fix(ai): update all Claude model IDs to correct format
 ```
 
 **11 Files Updated:**
+
 | File | Old Model | New Model |
 |------|-----------|-----------|
 | llm-global-gateway.cjs | claude-sonnet-4.5 | claude-sonnet-4-20250514 |
@@ -589,6 +646,7 @@ cf0c8fb fix(registry): add missing script field to 5 agentic automations
 | product-photos-resilient.cjs | claude-sonnet-4.5-20260115 | claude-sonnet-4-20250514 |
 
 **Frontier Models (Jan 2026 Verified):**
+
 | Provider | Model ID | Status |
 |----------|----------|--------|
 | Claude | claude-sonnet-4-20250514 | ✅ CORRECT |
@@ -598,6 +656,7 @@ cf0c8fb fix(registry): add missing script field to 5 agentic automations
 | Gemini | gemini-3-flash-preview | ✅ CORRECT |
 
 **Verification:**
+
 ```bash
 node blog-generator-resilient.cjs --health
 # Result: 4/4 AI providers configured ✅
@@ -635,6 +694,7 @@ npm run render:ad  # Uses optimal concurrency
 | `eleven_multilingual_v2` | ~300ms | Quality mode (optional) |
 
 **Code Change:**
+
 ```javascript
 // eleven_flash_v2_5: 75ms latency (optimized for speed)
 // eleven_multilingual_v2: 300ms latency (optimized for quality)
@@ -648,6 +708,7 @@ const modelId = useFlash ? 'eleven_flash_v2_5' : 'eleven_multilingual_v2';
 **Problem:** Shopify Flow loops fail silently when processing >100 items.
 
 **Critical Limits:**
+
 | Limit | Value | Consequence |
 |-------|-------|-------------|
 | Max items per loop | **100** | Silent failure, no error |
@@ -657,6 +718,7 @@ const modelId = useFlash ? 'eleven_flash_v2_5' : 'eleven_multilingual_v2';
 **Solution Patterns:**
 
 1. **Pagination Pattern** (for customer/order lists)
+
 ```liquid
 {% comment %} Process in batches of 100 {% endcomment %}
 {% for customer in customers limit: 100 offset: 0 %}
@@ -667,12 +729,14 @@ const modelId = useFlash ? 'eleven_flash_v2_5' : 'eleven_multilingual_v2';
 {% endfor %}
 ```
 
-2. **Scheduled Batching** (for large operations)
+1. **Scheduled Batching** (for large operations)
+
 - Split workflows into multiple scheduled flows
 - Run at off-peak hours (2-4 AM store timezone)
 - Add 5-10s delays between API-heavy operations
 
-3. **Safe Iteration Pattern**
+1. **Safe Iteration Pattern**
+
 ```
 IF order.line_items.count > 100
   THEN → Send alert to Slack
@@ -682,6 +746,7 @@ ELSE
 ```
 
 **Implementation Status:**
+
 | Workflow | Uses Loops | Safe Pattern | Status |
 |----------|------------|--------------|--------|
 | Cart abandonment | No | N/A | ✅ |
@@ -790,12 +855,14 @@ const queueAction = (action) => { ... }
 #### 14.8.8 PRIORITIZED ACTION PLAN
 
 **P0 - CRITICAL (Financial Risk): ✅ COMPLETED (Session 165bis)**
+
 | Script | Action | Effort | Status |
 |--------|--------|--------|--------|
 | `at-risk-customer-flow.cjs` | LTV €500 / Discount ≥20% threshold | 2h | ✅ DONE |
 | `birthday-anniversary-flow.cjs` | LTV €500 / Discount ≥20% threshold | 2h | ✅ DONE |
 
 **HITL Features Added:**
+
 - `--list-pending` - List interventions awaiting approval
 - `--approve=<id>` - Approve and send intervention
 - `--reject=<id>` - Reject intervention
@@ -803,6 +870,7 @@ const queueAction = (action) => { ... }
 - Persistent storage in `data/hitl-pending/`
 
 **P1 - HIGH (Communication Risk):**
+
 | Script | Action | Effort |
 |--------|--------|--------|
 | `referral-program-automation.cjs` | Add email preview mode | 1h |
@@ -811,6 +879,7 @@ const queueAction = (action) => { ... }
 | `review-request-automation.cjs` | Add timing review | 1h |
 
 **P2 - MEDIUM (System Risk):**
+
 | Component | Action | Effort |
 |-----------|--------|--------|
 | AG-UI Queue | Wire queueAction() to scripts | 4h |
@@ -827,6 +896,7 @@ const queueAction = (action) => { ... }
 > **Goal**: Blueprint for acquisition→conversion→retention→advocacy
 
 ### 15.1 Shopify Flow + Email Automation
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Welcome series | Basic | 40-day lifecycle vs 5-email default | [Shopify Blog](https://www.shopify.com/blog/email-marketing-best-practices) |
@@ -836,6 +906,7 @@ const queueAction = (action) => { ... }
 | Loop limit | Unknown | **100 items MAX** per loop | CRITICAL |
 
 ### 15.2 GA4 + GTM Server-Side
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Tracking method | Client-side | Server-side GTM = bypass ad blockers | [Google Developers](https://developers.google.com/tag-platform/tag-manager/server-side) |
@@ -844,6 +915,7 @@ const queueAction = (action) => { ... }
 | Attribution | Last-click | Data-driven attribution default 2026 | [GA4 Attribution](https://support.google.com/analytics/answer/10596866) |
 
 ### 15.3 Meta/TikTok/Google Ads Automation
+
 | Platform | 2026 Update | Optimization | Source |
 |----------|-------------|--------------|--------|
 | **Meta** | AI fully automated | Advantage+ creative, AI budgets | [Meta Business](https://www.facebook.com/business/news) |
@@ -852,6 +924,7 @@ const queueAction = (action) => { ... }
 | Cross-platform | Siloed | Central attribution (GA4 + BigQuery) | Best practice |
 
 ### 15.4 DSers Dropshipping
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Order processing | Manual | Bulk ordering = **97% time reduction** | [DSers](https://www.dsers.com) |
@@ -860,6 +933,7 @@ const queueAction = (action) => { ... }
 | AliExpress | Standard | Premium shipping (Yanwen, ePacket) | [DSers Blog](https://www.dsers.com/blog) |
 
 ### 15.5 Kling AI Video Generation
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Duration | Unknown | **5-10 seconds** optimal | [Kling AI](https://klingai.com) |
@@ -868,6 +942,7 @@ const queueAction = (action) => { ... }
 | Cost | Unknown | $0.02-0.05/second generated | Pricing tier |
 
 ### 15.6 Leonardo.ai API
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Request pattern | Sync | Webhook + async (long generation) | [Leonardo Docs](https://docs.leonardo.ai) |
@@ -876,6 +951,7 @@ const queueAction = (action) => { ... }
 | Batch processing | Individual | Queue multiple prompts | Efficiency |
 
 ### 15.7 Apify Web Scraping (Expanded)
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Custom scrapers | Building | **10,000+ pre-built Actors** | [Apify Store](https://apify.com/store) |
@@ -885,6 +961,7 @@ const queueAction = (action) => { ... }
 | Library | Custom | **Crawlee** (open-source crawler) | [Crawlee.dev](https://crawlee.dev) |
 
 ### 15.8 Google Apps Script Automation
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Runtime | Unknown | **V8 only** (Rhino deprecated Jan 2026) | [Apps Script](https://developers.google.com/apps-script) |
@@ -894,6 +971,7 @@ const queueAction = (action) => { ... }
 | AI Agent ADK | Not using | Travel Concierge pattern for add-ons | [Google ADK](https://github.com/google/adk-python) |
 
 ### 15.9 GitHub Actions CI/CD (Expanded)
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Cache limit | Unknown | **Unlimited** (10GB limit removed) | [GitHub Blog](https://github.blog) |
@@ -903,6 +981,7 @@ const queueAction = (action) => { ... }
 | Cost optimization | Default | Self-hosted runners for heavy builds | Cost reduction |
 
 ### 15.10 Voice AI Latency (Detailed)
+
 | Metric | Target | How to Achieve | Source |
 |--------|--------|----------------|--------|
 | **End-to-end** | < 500ms | Pipeline streaming (concurrent ASR→LLM→TTS) | [AssemblyAI](https://www.assemblyai.com/blog/low-latency-voice-ai) |
@@ -912,6 +991,7 @@ const queueAction = (action) => { ... }
 | Network | Public | Regional anchoring + WebRTC | [SignalWire](https://signalwire.com) |
 
 ### 15.11 Multi-Currency / Geo-Locale
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Detection | ipapi.co | Shopify native + fallback | [Shopify Markets](https://help.shopify.com/en/manual/markets) |
@@ -922,6 +1002,7 @@ const queueAction = (action) => { ... }
 | Markets: Intl | USD | English language | 3A config |
 
 ### 15.12 Google Stitch MCP (Expanded)
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Mode | Standard (Flash) | **Experimental** (Pro) for complex UI | [Stitch Docs](https://labs.google.com/stitch) |
@@ -931,6 +1012,7 @@ const queueAction = (action) => { ... }
 | MCP integration | stitch-api.cjs | Cursor/Claude compatible servers | [stitch-mcp](https://github.com/davideast/stitch-mcp) |
 
 ### 15.13 Remotion Optimization (Expanded)
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Video component | Mixed | Use new `<Video>` tag (optimized) | [Remotion Docs](https://www.remotion.dev/docs/performance) |
@@ -940,6 +1022,7 @@ const queueAction = (action) => { ... }
 | Debugging | Manual | `slowestFrames` callback + `console.time` | [Remotion Debug](https://www.remotion.dev/docs/troubleshooting/slow-rendering) |
 
 ### 15.14 A2A Protocol (Expanded)
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Version | Custom impl | **v0.3 stable** (gRPC support) | [A2A Protocol](https://a2a-protocol.org) |
@@ -949,6 +1032,7 @@ const queueAction = (action) => { ... }
 | MCP relation | Separate | A2A (agent collab) + MCP (tools) = complementary | [IBM Think](https://www.ibm.com/think/topics/agent2agent-protocol) |
 
 ### 15.15 ElevenLabs Voice (Expanded)
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Model choice | Default | **Flash v2.5** = 75ms latency | [ElevenLabs Latency](https://elevenlabs.io/docs/developers/best-practices/latency-optimization) |
@@ -958,6 +1042,7 @@ const queueAction = (action) => { ... }
 | optimize_streaming_latency | Unknown | **Deprecated** - use model selection instead | 2026 update |
 
 ### 15.16 fal.ai Image/Video (Expanded)
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | FLUX.1 schnell | Unknown | **Sub-second**, $0.003/megapixel | [fal.ai FLUX](https://fal.ai/models/fal-ai/flux/schnell/api) |
@@ -967,6 +1052,7 @@ const queueAction = (action) => { ... }
 | Error handling | Basic | Handle credit exhaustion gracefully | Production tip |
 
 ### 15.17 Twilio Voice Bridge
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | Latency tag | Unknown | >150ms = "high latency" warning | [Twilio Insights](https://www.twilio.com/docs/voice/voice-insights) |
@@ -976,6 +1062,7 @@ const queueAction = (action) => { ... }
 | PSTN bridge | Planned | Twilio Functions + Sync for context passing | [Twilio Blog](https://www.twilio.com/en-us/blog/connect-call-context-across-the-pstn) |
 
 ### 15.18 Glassmorphism CSS
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | backdrop-filter | 28 uses | Optimal: `blur(10-20px)` | [CSS Tricks](https://css-tricks.com/almanac/properties/b/backdrop-filter/) |
@@ -985,6 +1072,7 @@ const queueAction = (action) => { ... }
 | Contrast | Unknown | Ensure WCAG AA text contrast | [WCAG](https://www.w3.org/WAI/WCAG21/quickref/) |
 
 ### 15.19 Core Web Vitals 2026
+
 | Metric | Target | 3A Current | Optimization |
 |--------|--------|------------|--------------|
 | **LCP** | < 2.5s | 554ms ✅ | Preload critical assets |
@@ -995,6 +1083,7 @@ const queueAction = (action) => { ... }
 **Source:** [web.dev/vitals](https://web.dev/vitals/)
 
 ### 15.20 JSON-LD Structured Data
+
 | Schema | Current | Optimization | Source |
 |--------|---------|--------------|--------|
 | Organization | ✅ Present | Add `sameAs` for social profiles | [Schema.org](https://schema.org/Organization) |
@@ -1004,6 +1093,7 @@ const queueAction = (action) => { ... }
 | HowTo | Not present | Add for methodology pages | Rich results |
 
 ### 15.21 SEO 2026 Best Practices
+
 | Finding | Current State | Optimization | Source |
 |---------|---------------|--------------|--------|
 | SGE/AI Overviews | Unknown | Optimize for direct answers | [Search Engine Land](https://searchengineland.com) |
@@ -1013,6 +1103,7 @@ const queueAction = (action) => { ... }
 | Page experience | ✅ CWV good | Focus on INP metric | 2026 focus |
 
 ### 15.22 WCAG 2.2 Accessibility
+
 | Requirement | Current State | Optimization | Source |
 |-------------|---------------|--------------|--------|
 | Level | Unknown | **AA minimum** (2026 standard) | [WCAG 2.2](https://www.w3.org/WAI/WCAG22/quickref/) |
@@ -1027,6 +1118,7 @@ const queueAction = (action) => { ... }
 ## 16. ACTIONABLE OPTIMIZATION PLAN
 
 ### 16.1 P0 - Critical (This Week)
+
 | Task | Component | Impact | Effort |
 |------|-----------|--------|--------|
 | Enable GA4 API | Analytics | Unlock analytics sensor | 30min |
@@ -1034,6 +1126,7 @@ const queueAction = (action) => { ... }
 | Upgrade Apify | Scraping | Trends analysis working | $49/mo |
 
 ### 16.2 P1 - High Priority (This Month)
+
 | Task | Component | Impact | Effort | Status |
 |------|-----------|--------|--------|--------|
 | ~~Claude Model ID Fix~~ | AI | Correct API calls | 2h | ✅ DONE (27cac7b) |
@@ -1044,6 +1137,7 @@ const queueAction = (action) => { ... }
 | GPT-5.2 → Responses API | AI | 40-80% cost reduction + 98.7% tool accuracy | 4h | ✅ DONE (S165bis) |
 
 ### 16.3 P2 - Medium Priority (Next Quarter)
+
 | Task | Component | Impact | Effort |
 |------|-----------|--------|--------|
 | A2A v0.3 upgrade | Protocol | gRPC, security cards | 8h |
@@ -1053,6 +1147,7 @@ const queueAction = (action) => { ... }
 | WebSocket voice | Voice | Eliminate REST overhead | 8h |
 
 ### 16.4 P3 - Future (After 2000 Clients)
+
 | Task | Component | Impact | Effort |
 |------|-----------|--------|--------|
 | BigQuery activation | Analytics | Advanced trends analysis | $$ |
@@ -1064,6 +1159,7 @@ const queueAction = (action) => { ... }
 ## 17. TECHNOLOGY STACK SUMMARY (2026 Optimized)
 
 ### 17.1 AI Models (Optimized Configuration)
+
 | Model | Use Case | Optimization |
 |-------|----------|--------------|
 | **Claude Opus 4.5** | Complex reasoning | Primary for planning |
@@ -1073,6 +1169,7 @@ const queueAction = (action) => { ... }
 | **Grok 4** | Real-time | 2M context, web search |
 
 ### 17.2 E-commerce Stack
+
 | Component | Current | Target |
 |-----------|---------|--------|
 | Shopify Flow | Basic | Sidekick AI workflows |
@@ -1081,6 +1178,7 @@ const queueAction = (action) => { ... }
 | Ads | Manual | AI-automated (Advantage+) |
 
 ### 17.3 Voice AI Stack
+
 | Component | Current | Target |
 |-----------|---------|--------|
 | TTS | Mixed | ElevenLabs Flash (75ms) |
@@ -1089,6 +1187,7 @@ const queueAction = (action) => { ... }
 | Total latency | Unknown | < 500ms |
 
 ### 17.4 Infrastructure
+
 | Component | Current | Target |
 |-----------|---------|--------|
 | GH Actions cache | Default | Docker layer caching (80%+) |

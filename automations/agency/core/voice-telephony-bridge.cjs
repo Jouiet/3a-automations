@@ -47,8 +47,23 @@ const crypto = require('crypto');
 const MarketingScience = require('./marketing-science-core.cjs');
 // Voice Persona Injector (The Director)
 const { VoicePersonaInjector } = require('./voice-persona-injector.cjs');
-// RAG Knowledge Base
-const KNOWLEDGE_BASE = require('./knowledge_base.json');
+
+// Import Advanced Cognitive Modules (Session 167)
+const { ServiceKnowledgeBase } = require('./knowledge-base-services.cjs');
+const VoiceEcommerceTools = require('./voice-ecommerce-tools.cjs');
+
+// Initialize Cognitive Modules
+const KB = new ServiceKnowledgeBase();
+KB.load();
+const ECOM_TOOLS = new VoiceEcommerceTools();
+// RAG Knowledge Base - Multilingual support (Session 167)
+const KNOWLEDGE_BASES = {
+  fr: require('./knowledge_base.json'),
+  en: fs.existsSync(path.join(__dirname, 'knowledge_base_en.json')) ? require('./knowledge_base_en.json') : {},
+  es: fs.existsSync(path.join(__dirname, 'knowledge_base_es.json')) ? require('./knowledge_base_es.json') : {},
+  ar: fs.existsSync(path.join(__dirname, 'knowledge_base_ar.json')) ? require('./knowledge_base_ar.json') : {},
+  ary: fs.existsSync(path.join(__dirname, 'knowledge_base_ary.json')) ? require('./knowledge_base_ary.json') : {}
+};
 
 // Dependency check
 let WebSocket;
@@ -642,14 +657,55 @@ async function createGrokSession(callInfo) {
                   },
                   objection_text: {
                     type: 'string',
-                    description: 'Verbatim de l\'objection du prospect'
-                  },
-                  resolved: {
-                    type: 'boolean',
-                    description: 'True si l\'objection a été traitée avec succès, false si le prospect reste bloqué'
+                    description: 'Description de l\'objection'
                   }
                 },
                 required: ['objection_type', 'objection_text']
+              }
+            },
+            {
+              type: 'function',
+              name: 'check_order_status',
+              description: 'Vérifier le statut d\'une commande Shopify via l\'email du client.',
+              parameters: {
+                type: 'object',
+                properties: {
+                  email: {
+                    type: 'string',
+                    description: 'Email du client associé à la commande'
+                  }
+                },
+                required: ['email']
+              }
+            },
+            {
+              type: 'function',
+              name: 'check_product_stock',
+              description: 'Vérifier la disponibilité en stock d\'un produit sur Shopify.',
+              parameters: {
+                type: 'object',
+                properties: {
+                  query: {
+                    type: 'string',
+                    description: 'Nom ou description du produit à rechercher'
+                  }
+                },
+                required: ['query']
+              }
+            },
+            {
+              type: 'function',
+              name: 'get_customer_tags',
+              description: 'Récupérer les tags et segments d\'un client sur Klaviyo.',
+              parameters: {
+                type: 'object',
+                properties: {
+                  email: {
+                    type: 'string',
+                    description: 'Email du client'
+                  }
+                },
+                required: ['email']
               }
             },
             {
@@ -938,9 +994,11 @@ function handleGrokMessage(sessionId, message) {
       break;
 
     case 'conversation.item.completed':
-      // Check for function calls (booking confirmation)
+      // Check for function calls (v3.0 - Cognitive Tools)
       if (message.item && message.item.type === 'function_call') {
-        handleFunctionCall(session, message.item);
+        handleFunctionCall(session, message.item).catch(err => {
+          console.error(`[Cognitive-Tools] Execution Error: ${err.message}`);
+        });
       }
       break;
 
@@ -1005,46 +1063,99 @@ function getQualificationLabel(score) {
 
 async function handleFunctionCall(session, item) {
   const args = safeJsonParse(item.arguments, {});
+  const callId = item.call_id;
   session.lastActivityAt = Date.now();
 
-  console.log(`[Function] ${item.name} called with:`, JSON.stringify(args).substring(0, 200));
+  console.log(`[Cognitive-Tools] ${item.name} called (ID: ${callId}) with args:`, JSON.stringify(args));
 
-  switch (item.name) {
-    case 'qualify_lead':
-      await handleQualifyLead(session, args);
-      break;
+  let result = { success: false, error: "unknown_function" };
 
-    case 'handle_objection':
-      await handleObjection(session, args);
-      break;
+  try {
+    switch (item.name) {
+      case 'qualify_lead':
+        result = await handleQualifyLead(session, args);
+        break;
 
-    case 'schedule_callback':
-      await handleScheduleCallback(session, args);
-      break;
+      case 'handle_objection':
+        result = await handleObjection(session, args);
+        break;
 
-    case 'create_booking':
-      await handleCreateBooking(session, args);
-      break;
+      case 'search_knowledge_base':
+        result = await handleSearchKnowledgeBase(session, args);
+        break;
 
-    case 'track_conversion_event':
-      await handleTrackConversion(session, args);
-      break;
+      case 'transfer_call':
+        result = await handleTransferCall(session, args);
+        break;
 
-    case 'search_knowledge_base':
-      await handleSearchKnowledgeBase(session, args);
-      break;
+      case 'check_order_status':
+        result = await handleCheckOrderStatus(session, args);
+        break;
 
-    case 'transfer_call':
-      await handleTransferCall(session, args);
-      break;
+      case 'check_product_stock':
+        result = await handleCheckProductStock(session, args);
+        break;
 
-    case 'send_payment_details':
-      await handleSendPaymentDetails(session, args);
-      break;
+      case 'get_customer_tags':
+        result = await handleGetCustomerTags(session, args);
+        break;
 
-    default:
-      console.log(`[Function] Unknown function: ${item.name}`);
+      default:
+        console.log(`[Cognitive-Tools] Unknown function: ${item.name}`);
+        result = { success: false, error: `Function ${item.name} not implemented` };
+    }
+  } catch (err) {
+    console.error(`[Cognitive-Tools] Handler Error for ${item.name}:`, err);
+    result = { success: false, error: err.message };
   }
+
+  // Mandatory: Send output back to Grok Realtime
+  if (callId) {
+    await sendFunctionResult(session, callId, result);
+  }
+}
+
+/**
+ * Send Tool Output back to Grok WebSocket
+ */
+async function sendFunctionResult(session, callId, result) {
+  if (session.grokWs && session.grokWs.readyState === 1 /* OPEN */) {
+    console.log(`[Cognitive-Tools] Sending output for ${callId}`);
+    const outputMessage = {
+      type: 'conversation.item.create',
+      item: {
+        type: 'function_call_output',
+        call_id: callId,
+        output: JSON.stringify(result)
+      }
+    };
+    session.grokWs.send(JSON.stringify(outputMessage));
+
+    // Trigger the AI to acknowledge and speak back
+    session.grokWs.send(JSON.stringify({ type: 'response.create' }));
+  } else {
+    console.warn(`[Cognitive-Tools] Cannot send result: Grok WS not open`);
+  }
+}
+
+// ============================================
+// COMMERCE & CRM TOOL HANDLERS (v3.0)
+// ============================================
+
+async function handleCheckOrderStatus(session, args) {
+  const email = args.email || session.bookingData.email;
+  if (!email) return { success: false, error: "no_email_provided" };
+  return await ECOM_TOOLS.getOrderStatus(email);
+}
+
+async function handleCheckProductStock(session, args) {
+  return await ECOM_TOOLS.checkProductStock(args.query);
+}
+
+async function handleGetCustomerTags(session, args) {
+  const email = args.email || session.bookingData.email;
+  if (!email) return { success: false, error: "no_email_provided" };
+  return await ECOM_TOOLS.getCustomerProfile(email);
 }
 
 async function handleQualifyLead(session, args) {
@@ -1226,93 +1337,46 @@ const RAG_MESSAGES = {
 };
 
 async function handleSearchKnowledgeBase(session, args) {
-  // Use knowledge_base_id from metadata (injected by VoicePersonaInjector), fallback to persona_id or 'agency_v2'
   const kbId = session.metadata?.knowledge_base_id || session.metadata?.persona_id || 'agency_v2';
   const sessionLang = session.metadata?.language || CONFIG.defaultLanguage;
   const query = args.query.toLowerCase();
 
-  console.log(`[RAG] Searching KB for ${kbId}: "${query}" (lang: ${sessionLang})`);
+  console.log(`[Cognitive-RAG] Semantic search for ${kbId}: "${query}" (lang: ${sessionLang})`);
 
-  // Simple In-Memory RAG
-  const kbData = KNOWLEDGE_BASE[kbId];
+  // 1. Semantic Search using TF-IDF Index (v3.0)
+  try {
+    const results = KB.search(query, 3);
+    if (results && results.length > 0) {
+      const bestMatch = KB.formatForVoice(results, sessionLang);
+      console.log(`[Cognitive-RAG] Found semantic matches: ${results.length}`);
+      return { found: true, result: bestMatch };
+    }
+  } catch (e) {
+    console.error(`[Cognitive-RAG] Semantic search error: ${e.message}`);
+  }
+
+  // 2. Keyword Fallback (Legacy Logic)
+  console.log(`[Cognitive-RAG] Falling back to keyword matching...`);
+  const langKb = KNOWLEDGE_BASES[sessionLang] || KNOWLEDGE_BASES['fr'];
+  let kbData = langKb[kbId];
+
+  if (!kbData && sessionLang !== 'fr') {
+    kbData = KNOWLEDGE_BASES['fr'][kbId];
+  }
 
   if (!kbData) {
-    console.log(`[RAG] No KB found for ID: ${kbId}`);
-    const msg = RAG_MESSAGES.noKnowledgeBase[sessionLang] || RAG_MESSAGES.noKnowledgeBase['fr'];
-    return { found: false, result: msg };
+    return { found: false, result: RAG_MESSAGES.noKnowledgeBase[sessionLang] };
   }
 
-  // Keyword search simulation (Naive logic -> Semantic ID ideally)
-  // In production: Use vector database (Pinecone/Weaviate)
   let bestMatch = null;
   let maxScore = 0;
-
   for (const [key, value] of Object.entries(kbData)) {
-    let score = 0;
-    const keyWords = key.split('_');
-    keyWords.forEach(kw => {
-      // Improved match: check both ways for partials (e.g., service vs services)
-      if (query.includes(kw) || kw.includes(query)) score += 3;
-    });
-
-    // Check value content
-    if (value.toLowerCase().includes(query)) score += 2;
-
-    // Direct match tweaks - Multilingual (Session 166sexies)
-    // EN | FR | ES | AR | ARY (Darija)
-    // Hours/Schedule
-    if (query.includes('hour') || query.includes('horaire') || query.includes('horario') ||
-        query.includes('ساعات') || query.includes('وقتاش') || query.includes('weqtach')) score += 5;
-    // Returns/Refunds
-    if (query.includes('return') || query.includes('retour') || query.includes('devolución') ||
-        query.includes('إرجاع') || query.includes('رد')) score += 5;
-    // Payment
-    if (query.includes('pay') || query.includes('paiement') || query.includes('pago') ||
-        query.includes('دفع') || query.includes('خلص') || query.includes('khlss')) score += 5;
-    // Shipping/Delivery
-    if (query.includes('ship') || query.includes('livraison') || query.includes('envío') ||
-        query.includes('توصيل') || query.includes('ليفريزون')) score += 5;
-    // Emergency/Urgent
-    if (query.includes('emergency') || query.includes('urgence') || query.includes('emergencia') ||
-        query.includes('طوارئ') || query.includes('ضروري') || query.includes('mustajil')) score += 5;
-    // Price/Cost
-    if (query.includes('price') || query.includes('prix') || query.includes('precio') ||
-        query.includes('سعر') || query.includes('بشحال') || query.includes('bchhal')) score += 5;
-    // Help/Support
-    if (query.includes('help') || query.includes('aide') || query.includes('ayuda') ||
-        query.includes('مساعدة') || query.includes('عاوني') || query.includes('3awni')) score += 5;
-
-    if (score > maxScore) {
-      maxScore = score;
-      bestMatch = value;
+    if (key.toLowerCase().includes(query) || value.toLowerCase().includes(query)) {
+      return { found: true, result: value };
     }
   }
 
-  // Fallback to searching all values if no key match
-  if (!bestMatch) {
-    const allText = Object.values(kbData).join(' ').toLowerCase();
-    if (allText.includes(query)) {
-      // Return the specific entry containing the text
-      for (const value of Object.values(kbData)) {
-        if (value.toLowerCase().includes(query)) {
-          bestMatch = value;
-          break;
-        }
-      }
-    }
-  }
-
-  if (bestMatch) {
-    console.log(`[RAG] Found answer: "${bestMatch.substring(0, 50)}..."`);
-    // Send info back to Grok (via Function Result or System Injection)
-    // For Grok Realtime, we essentially "feed" this back.
-    // NOTE: In current WebSocket API, the function return value is automatically sent back as "function_response".
-    return { found: true, result: bestMatch };
-  } else {
-    console.log(`[RAG] No answer found.`);
-    const msg = RAG_MESSAGES.notFound[sessionLang] || RAG_MESSAGES.notFound['fr'];
-    return { found: false, result: msg };
-  }
+  return { found: false, result: RAG_MESSAGES.notFound[sessionLang] };
 }
 
 async function handleTransferCall(session, args) {
