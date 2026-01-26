@@ -33,6 +33,7 @@ const KB_POLICY_FILE = path.join(KNOWLEDGE_BASE_DIR, 'knowledge_base_policies.js
  * This data provides the strategic "Why" and business "Outcome" behind products.
  */
 const STRATEGIC_META = {
+  // === CORE CATEGORIES ===
   'lead-gen': {
     intent: "Capture and disqualify noise to focus on high-LTV acquisition.",
     framework: "AIDA (Attention, Interest, Desire, Action)",
@@ -74,6 +75,106 @@ const STRATEGIC_META = {
     outcome: "-95% qualifying time and immediate response to high-intent signals.",
     truth: "AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice.",
     risk: "Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'."
+  },
+  // === SESSION 168 EXTENSION - 100% Coverage ===
+  'content': {
+    intent: "Create scalable content assets that compound organic reach over time.",
+    framework: "Content Flywheel (Create → Distribute → Repurpose)",
+    outcome: "Reduced content production cost by 60% through AI-assisted generation.",
+    truth: "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    risk: "AI-generated content without human review can damage brand credibility."
+  },
+  'cinematicads': {
+    intent: "Produce broadcast-quality video ads at startup speed and cost.",
+    framework: "Cinematic Storytelling (Hook → Problem → Solution → CTA)",
+    outcome: "3x higher engagement vs static ads, 40% lower CPM on video placements.",
+    truth: "The first 3 seconds determine 80% of ad performance; hook is everything.",
+    risk: "Over-polished ads can feel inauthentic; balance production with relatability."
+  },
+  'ai-avatar': {
+    intent: "Scale human-like video presence without recurring talent costs.",
+    framework: "Avatar Consistency (Voice + Face + Script alignment)",
+    outcome: "24/7 video content capability, 90% cost reduction vs traditional shoots.",
+    truth: "Avatars work best for educational/informational content, not emotional branding.",
+    risk: "Uncanny valley effect if avatar quality is subpar; invest in premium models."
+  },
+  'whatsapp': {
+    intent: "Meet customers on their preferred messaging platform with instant response.",
+    framework: "Conversational Commerce (Inquiry → Qualify → Convert)",
+    outcome: "98% open rate vs 20% email, 45% faster response-to-purchase cycle.",
+    truth: "WhatsApp is personal space; over-messaging leads to blocks, not sales.",
+    risk: "Meta's Business API rules can suspend accounts for policy violations."
+  },
+  'marketing': {
+    intent: "Orchestrate multi-channel campaigns with unified attribution.",
+    framework: "Full-Funnel Marketing (Awareness → Consideration → Decision)",
+    outcome: "Holistic view of customer journey across all touchpoints.",
+    truth: "Marketing without measurement is gambling; always close the attribution loop.",
+    risk: "Channel silos create blind spots; integration is non-negotiable."
+  },
+  'sms': {
+    intent: "Deliver time-sensitive messages with guaranteed visibility.",
+    framework: "Urgency Marketing (Scarcity + Deadline + Value)",
+    outcome: "98% open rate within 3 minutes, ideal for flash sales and reminders.",
+    truth: "SMS is premium real estate; abuse it once and you lose the customer forever.",
+    risk: "Carrier filtering can block promotional messages; compliance is critical."
+  },
+  'retention': {
+    intent: "Maximize Customer Lifetime Value through systematic re-engagement.",
+    framework: "RFM Segmentation (Recency, Frequency, Monetary)",
+    outcome: "20% increase in repeat purchase rate, 30% reduction in churn.",
+    truth: "Acquiring a new customer costs 5x more than retaining an existing one.",
+    risk: "Generic retention campaigns feel impersonal; personalization is mandatory."
+  },
+  'dropshipping': {
+    intent: "Enable zero-inventory e-commerce with automated fulfillment.",
+    framework: "Supplier-Customer Bridge (Order → Route → Track → Deliver)",
+    outcome: "Launch products with zero upfront inventory investment.",
+    truth: "Margins are thin; success requires volume or premium positioning.",
+    risk: "Supplier reliability directly impacts customer experience and reviews."
+  },
+  'agency-ops': {
+    intent: "Streamline internal agency operations for scalable service delivery.",
+    framework: "Operational Excellence (Standardize → Automate → Optimize)",
+    outcome: "50% reduction in manual tasks, improved client delivery timelines.",
+    truth: "Internal inefficiency leaks directly into client pricing and margins.",
+    risk: "Over-automation without human oversight can miss edge cases."
+  },
+  // === LEGACY CATEGORY ALIASES (For backward compatibility) ===
+  'Lead Generation & Acquisition': {
+    intent: "Capture and disqualify noise to focus on high-LTV acquisition.",
+    framework: "AIDA (Attention, Interest, Desire, Action)",
+    outcome: "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    truth: "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    risk: "High bounce rates if the landing page experience doesn't match the ad promise."
+  },
+  'Email Marketing & Klaviyo': {
+    intent: "Counteract Customer Entropy through automated retention loops.",
+    framework: "PAS (Pain-Agitate-Solution) for flows",
+    outcome: "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    truth: "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    risk: "Over-mailing leads to inbox fatigue and high unsubscribe spikes."
+  },
+  'SEO & Content': {
+    intent: "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    framework: "Authority Positioning",
+    outcome: "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    truth: "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    risk: "Algorithmic updates can penalize over-optimized or thin content."
+  },
+  'Analytics & Reporting': {
+    intent: "Holistic vision of the business thermodynamic matrix.",
+    framework: "Data-Driven Decision Making",
+    outcome: "Identification of profit gaps and resource misallocation.",
+    truth: "Reports are useless without an action plan; data without decision is just noise.",
+    risk: "Attribution bias can lead to false positives on channel performance."
+  },
+  'Shopify Admin & Operations': {
+    intent: "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    framework: "System Interoperability",
+    outcome: "Zero-latency synchronization between order data and marketing triggers.",
+    truth: "The system is only as good as the metafield structure; garbage in, garbage out.",
+    risk: "Plugin conflicts can break webhook reliability."
   }
 };
 

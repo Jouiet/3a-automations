@@ -7,7 +7,7 @@
  * Features: Auto-detection of speaker language (limited to 5 supported languages)
  */
 
-(function() {
+(function () {
   'use strict';
 
   // ============================================================
@@ -101,7 +101,7 @@
     // 3. Browser language (mapped to supported)
     const browserLang = navigator.language || navigator.userLanguage;
     const mappedLang = CONFIG.AUTO_DETECT_LANGUAGES[browserLang] ||
-                       CONFIG.AUTO_DETECT_LANGUAGES[browserLang?.split('-')[0]];
+      CONFIG.AUTO_DETECT_LANGUAGES[browserLang?.split('-')[0]];
     if (mappedLang && CONFIG.SUPPORTED_LANGS.includes(mappedLang)) {
       return mappedLang;
     }
@@ -114,12 +114,7 @@
    * Load language file
    */
   async function loadLanguage(langCode) {
-    // Darija not yet available, fallback to French
-    if (langCode === 'ary') {
-      console.log('[3A Voice] Darija not yet available, using French');
-      langCode = 'fr';
-    }
-
+    // Session 167 - Darija is now supported!
     const url = CONFIG.LANG_PATH.replace('{lang}', langCode);
 
     try {
@@ -559,7 +554,7 @@
   async function fetchAvailableSlots() {
     const now = Date.now();
     if (state.availableSlotsCache.slots.length > 0 &&
-        (now - state.availableSlotsCache.timestamp) < CONFIG.SLOT_CACHE_TTL) {
+      (now - state.availableSlotsCache.timestamp) < CONFIG.SLOT_CACHE_TTL) {
       return state.availableSlotsCache.slots;
     }
 

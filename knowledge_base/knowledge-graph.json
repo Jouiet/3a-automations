@@ -1,0 +1,61 @@
+{
+    "nodes": [
+        {
+            "id": "shopify-order",
+            "label": "Shopify Order Management",
+            "type": "operational"
+        },
+        {
+            "id": "klaviyo-retention",
+            "label": "Klaviyo Retention Marketing",
+            "type": "strategic"
+        },
+        {
+            "id": "email-automation",
+            "label": "Email Automation",
+            "type": "workflow"
+        },
+        {
+            "id": "abandoned-cart",
+            "label": "Abandoned Cart Recovery",
+            "type": "workflow"
+        },
+        {
+            "id": "lead-qualification",
+            "label": "AI Lead Qualification",
+            "type": "strategic"
+        },
+        {
+            "id": "voice-telephony",
+            "label": "AI Voice Telephony",
+            "type": "channel"
+        }
+    ],
+    "edges": [
+        {
+            "from": "shopify-order",
+            "to": "klaviyo-retention",
+            "relation": "feeds_data_to"
+        },
+        {
+            "from": "abandoned-cart",
+            "to": "shopify-order",
+            "relation": "triggers_on"
+        },
+        {
+            "from": "klaviyo-retention",
+            "to": "abandoned-cart",
+            "relation": "implements"
+        },
+        {
+            "from": "lead-qualification",
+            "to": "voice-telephony",
+            "relation": "automated_via"
+        },
+        {
+            "from": "voice-telephony",
+            "to": "shopify-order",
+            "relation": "queries_status"
+        }
+    ]
+}

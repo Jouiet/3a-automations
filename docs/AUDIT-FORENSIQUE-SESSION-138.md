@@ -1,17 +1,14 @@
 # AUDIT FORENSIQUE - 3A AUTOMATION
+
 ## Session 141→166 | 22-26 Janvier 2026 | VÉRIFICATION 100% EMPIRIQUE
 
-> **UPDATE SESSION 166 (26/01/2026):**
-> - ✅ AG-UI Queue wired: `POST /ag-ui/queue/submit` endpoint
-> - ✅ MCP Servers: 5/6 credentials verified
-> - ✅ action-plan.md optimized: 3418→189 lines (-95%)
-> - ✅ HITL Coverage: **100% (18/18 scripts)**
-> - ✅ Geo-locale: 3 marchés (Maghreb/MAD, Europe/EUR, International/USD)
-> - ✅ Scripts Core: 84 → **85** (+stitch-to-3a-css.cjs)
-> - ✅ Scripts --health: 23 → **27** (+4 HITL workflows)
-> - ✅ CSS Version: v=84.0 → **v=86.0**
+|  UPDATE SESSION 167 (26/01/2026):
+|  - ✅ RAG Optimization: **Hybrid v3.0 (Dense + Sparse)**
+|  - ✅ Cognitive Spine: Integrated in voice-api-resilient.cjs
+|  - ✅ Forensic Audit: RESOLVED (Phases 9-11 mapped)
 >
 > **UPDATE SESSION 162 (26/01/2026):**
+>
 > - ✅ Stitch MCP Wrapper CRÉÉ (`stitch-api.cjs`, 279 lignes)
 > - ✅ Screens générés (2 variants pricing page)
 > - ✅ Scripts Core: 81 → **84** (+3)
@@ -19,6 +16,7 @@
 > - ✅ CSS Version: v=84.0
 >
 > **UPDATE SESSION 145bis (23/01/2026):**
+>
 > - ✅ Catalog désync CORRIGÉ (121=121)
 > - ✅ llms.txt CORRIGÉ (119 automations)
 > - ✅ Scripts defer CORRIGÉ (0 sans defer)
@@ -32,7 +30,7 @@
 | Champ | Valeur |
 |-------|--------|
 | **Dossier de travail** | `/Users/mac/Desktop/JO-AAA` |
-| **Repository GitHub** | https://github.com/Jouiet/3a-automations.git |
+| **Repository GitHub** | <https://github.com/Jouiet/3a-automations.git> |
 | **Dernier commit** | `08c45b8` - fix(critical): Add CSS !important rules |
 | **Branch** | `main` |
 | **Date audit** | 22 janvier 2026 21:15 UTC |
@@ -398,10 +396,10 @@ SENSORS BLOQUES:          4/20 (20%)  - gsc, meta-ads, tiktok-ads, apify, whatsa
 
 | Service | URL | Status | Code |
 |---------|-----|--------|------|
-| Site principal | https://3a-automation.com | UP | 200 |
-| Dashboard | https://dashboard.3a-automation.com | **UP** | **200** |
-| WordPress Blog | https://blog.3a-automation.com | UP | 200 |
-| n8n | https://n8n.srv1168256.hstgr.cloud | DOWN | 404 |
+| Site principal | <https://3a-automation.com> | UP | 200 |
+| Dashboard | <https://dashboard.3a-automation.com> | **UP** | **200** |
+| WordPress Blog | <https://blog.3a-automation.com> | UP | 200 |
+| n8n | <https://n8n.srv1168256.hstgr.cloud> | DOWN | 404 |
 
 ### 5.2 Securite Web (Verifie)
 
@@ -539,6 +537,7 @@ e0e9934 feat(merge): Consolidate Documents/JO-AAA -> Desktop/JO-AAA
 **Registre reel:** 119 automations (automations-registry.json v3.0.0)
 
 **Fichiers HTML a corriger (~35 pages):**
+
 ```
 FR: index, 404, a-propos, pricing, contact, booking, cas-clients, investisseurs
     + services/* (6) + blog/* (4) + legal/* (2)
@@ -547,14 +546,17 @@ EN: index, 404, about, pricing, contact, booking, case-studies, investors
 ```
 
 **JSON a corriger:**
+
 - voice-assistant/knowledge.json
 - forensic_audit_results.json
 
 **Docs MD a corriger:**
+
 - CLAUDE.md, HISTORY.md, 3A_BRAIN_MANIFEST.md
 - docs/business-model.md, action-plan.md, flywheel.md, mcp-catalog.md
 
 **Script de correction suggeree:**
+
 ```bash
 # Remplacer 174 par 119 dans tous les HTML
 find landing-page-hostinger -name "*.html" -exec sed -i '' 's/174 automatis/119 automatis/g' {} \;
@@ -668,6 +670,7 @@ EVALUATION FACTUELLE:
 #### Source du Probleme
 
 La Session 138 dans Documents/JO-AAA a execute un "MASSIVE SOVEREIGN SYNC" qui a:
+
 1. Remplace 118/119 par 174 PARTOUT
 2. Affrime "ZERO DISCREPANCY" alors que le registry a toujours 119
 3. Le forensic_audit_results.json lui-meme dit: *"Claim '174 automations' contradicts registry count '118'"*

@@ -12,8 +12,14 @@
     "frequency_en": "Every hour",
     "frequency_fr": "Toutes les heures",
     "agentic_level": 1,
-    "script": "templates/leads/sync-meta-leads-to-shopify.cjs",
-    "text": "Meta Leads → Shopify Sync Sync Meta Leads → Shopify +15% leads captured +15% leads capturés Synchronizes lead data from Meta Ads (Facebook/Instagram) lead forms directly into Shopify customer records. Use this for Meta-based acquisition workflows. Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "sync-meta-leads-to-shopify.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Immediate sync eliminates lead decay (decay starts after 5 mins).",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Meta Leads → Shopify Sync Sync Meta Leads → Shopify +15% leads captured +15% leads capturés Synchronizes lead data from Meta Ads (Facebook/Instagram) lead forms directly into Shopify customer records. Use this for Meta-based acquisition workflows. Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Immediate sync eliminates lead decay (decay starts after 5 mins). Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "google-ads-sync",
@@ -28,8 +34,14 @@
     "frequency_en": "Every hour",
     "frequency_fr": "Toutes les heures",
     "agentic_level": 1,
-    "script": "templates/leads/sync-google-ads-leads-to-shopify.cjs",
-    "text": "Google Ads → Shopify Sync Sync Google Ads → Shopify Zero lead loss Zéro perte de leads Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "sync-google-ads-leads-to-shopify.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Google Ads → Shopify Sync Sync Google Ads → Shopify Zero lead loss Zéro perte de leads Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "tiktok-leads-sync",
@@ -44,8 +56,14 @@
     "frequency_en": "Every hour",
     "frequency_fr": "Toutes les heures",
     "agentic_level": 1,
-    "script": "templates/leads/sync-tiktok-ads-leads-to-shopify.cjs",
-    "text": "TikTok Leads → Shopify Sync Sync TikTok Leads → Shopify New audience captured Nouvelle audience captée Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "sync-tiktok-ads-leads-to-shopify.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "TikTok Leads → Shopify Sync Sync TikTok Leads → Shopify New audience captured Nouvelle audience captée Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "lead-scoring",
@@ -60,8 +78,14 @@
     "frequency_en": "Automatic",
     "frequency_fr": "Automatique",
     "agentic_level": 3,
-    "script": "agency/core/lead-scoring-agentic.cjs",
-    "text": "Lead Qualification & Scoring Qualification & Scoring Focus on hot leads Focus sur leads chauds Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "lead-scoring-agentic.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Lead Qualification & Scoring Qualification & Scoring Focus on hot leads Focus sur leads chauds Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "hot-warm-cold",
@@ -76,8 +100,14 @@
     "frequency_en": "Real-time",
     "frequency_fr": "Temps réel",
     "agentic_level": 1,
-    "script": null,
-    "text": "HOT/WARM/COLD Segmentation Segmentation HOT/WARM/COLD Better conversion rate Meilleur taux conversion Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "HOT/WARM/COLD Segmentation Segmentation HOT/WARM/COLD Better conversion rate Meilleur taux conversion Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "data-enrichment",
@@ -92,8 +122,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": null,
-    "text": "Data Enrichment Enrichissement Données Qualified B2B leads Leads B2B qualifiés Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Data Enrichment Enrichissement Données Qualified B2B leads Leads B2B qualifiés Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "geo-segmentation",
@@ -108,8 +144,14 @@
     "frequency_en": "Automatic",
     "frequency_fr": "Automatique",
     "agentic_level": 1,
-    "script": "templates/klaviyo/geo-segment-profiles.cjs",
-    "text": "Geo-Segmentation Geo-Segmentation Localized messages Messages localisés Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "geo-segment-profiles.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Geo-Segmentation Geo-Segmentation Localized messages Messages localisés Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "google-forms-crm",
@@ -124,8 +166,14 @@
     "frequency_en": "Real-time",
     "frequency_fr": "Temps réel",
     "agentic_level": 1,
-    "script": "generic/sync-google-forms-to-klaviyo.cjs",
-    "text": "Google Forms → CRM Google Forms → CRM Form capture Capture formulaires Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "sync-google-forms-to-klaviyo.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Google Forms → CRM Google Forms → CRM Form capture Capture formulaires Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "typeform-klaviyo",
@@ -140,8 +188,14 @@
     "frequency_en": "Real-time",
     "frequency_fr": "Temps réel",
     "agentic_level": 1,
-    "script": "agency/core/lead-scoring-agentic.cjs",
-    "text": "Typeform → Klaviyo Typeform → Klaviyo Quiz → Email list Quiz → Email list Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "lead-scoring-agentic.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Typeform → Klaviyo Typeform → Klaviyo Quiz → Email list Quiz → Email list Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "sourcing-google-maps",
@@ -156,8 +210,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": "generic/scrape-google-maps-businesses.cjs",
-    "text": "Google Maps Sourcing Sourcing Google Maps Targeted local leads Leads locaux ciblés Scrapes local business data from Google Maps based on query and location. Use this for local B2B lead generation or competitive research in a specific area. Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "scrape-google-maps-businesses.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Google Maps Sourcing Sourcing Google Maps Targeted local leads Leads locaux ciblés Scrapes local business data from Google Maps based on query and location. Use this for local B2B lead generation or competitive research in a specific area. Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "sourcing-linkedin",
@@ -172,8 +232,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": "generic/scrape-linkedin-profiles.cjs",
-    "text": "LinkedIn Sourcing Sourcing LinkedIn B2B prospect database Base prospects B2B Extracts professional profiles from LinkedIn based on search criteria. Essential for B2B outreach and hiring intelligence. Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "scrape-linkedin-profiles.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "LinkedIn Sourcing Sourcing LinkedIn B2B prospect database Base prospects B2B Extracts professional profiles from LinkedIn based on search criteria. Essential for B2B outreach and hiring intelligence. Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "veille-recrutement",
@@ -188,8 +254,14 @@
     "frequency_en": "Weekly",
     "frequency_fr": "Hebdo",
     "agentic_level": 1,
-    "script": "generic/scrape-hiring-companies.cjs",
-    "text": "Hiring Intelligence Veille Recrutement Perfect timing Timing parfait Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "scrape-hiring-companies.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Hiring Intelligence Veille Recrutement Perfect timing Timing parfait Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "alt-text-fix",
@@ -204,8 +276,14 @@
     "frequency_en": "Batch",
     "frequency_fr": "Batch",
     "agentic_level": 1,
-    "script": "templates/seo/fix-missing-alt-text.cjs",
-    "text": "Image Alt Text Correction Correction Alt Text Images +20% Google image traffic +20% trafic image Google SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": "fix-missing-alt-text.cjs",
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Image Alt Text Correction Correction Alt Text Images +20% Google image traffic +20% trafic image Google SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "auto-meta-tags",
@@ -220,8 +298,14 @@
     "frequency_en": "Batch",
     "frequency_fr": "Batch",
     "agentic_level": 1,
-    "script": null,
-    "text": "Automatic Meta Tags Meta Tags Automatiques Better Google CTR Meilleur CTR Google SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Automatic Meta Tags Meta Tags Automatiques Better Google CTR Meilleur CTR Google SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "image-sitemap",
@@ -236,8 +320,14 @@
     "frequency_en": "Weekly",
     "frequency_fr": "Hebdo",
     "agentic_level": 1,
-    "script": "templates/seo/generate_image_sitemap.cjs",
-    "text": "Image Sitemap Sitemap Images Full indexing Indexation complète SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": "generate_image_sitemap.cjs",
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Image Sitemap Sitemap Images Full indexing Indexation complète SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "schema-products",
@@ -252,8 +342,14 @@
     "frequency_en": "Batch",
     "frequency_fr": "Batch",
     "agentic_level": 1,
-    "script": null,
-    "text": "Schema.org Products Schema.org Produits Better SERP visibility Meilleure visibilité SERP SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Schema.org Products Schema.org Produits Better SERP visibility Meilleure visibilité SERP SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "internal-linking",
@@ -268,8 +364,14 @@
     "frequency_en": "Batch",
     "frequency_fr": "Batch",
     "agentic_level": 1,
-    "script": null,
-    "text": "Internal Linking Internal Linking Better SEO structure Meilleur maillage SEO SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Internal Linking Internal Linking Better SEO structure Meilleur maillage SEO SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "llms-txt",
@@ -284,8 +386,14 @@
     "frequency_en": "One-time",
     "frequency_fr": "Une fois",
     "agentic_level": 1,
-    "script": null,
-    "text": "llms.txt (AEO) llms.txt (AEO) AI visibility Visibilité IA SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "llms.txt (AEO) llms.txt (AEO) AI visibility Visibilité IA SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "welcome-series",
@@ -300,8 +408,14 @@
     "frequency_en": "5 emails",
     "frequency_fr": "5 emails",
     "agentic_level": 2,
-    "script": null,
-    "text": "Welcome Series Welcome Series Open: 40-50% Open: 40-50% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": null,
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Benchmark: 40-50% Open Rate on brand indoctrination.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Welcome Series Welcome Series Open: 40-50% Open: 40-50% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Benchmark: 40-50% Open Rate on brand indoctrination. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "abandoned-cart",
@@ -316,8 +430,14 @@
     "frequency_en": "3 emails",
     "frequency_fr": "3 emails",
     "agentic_level": 2,
-    "script": null,
-    "text": "Abandoned Cart Abandoned Cart Recovery: 10-15% Recovery: 10-15% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": null,
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Benchmark: 10-15% recovery on lost revenue.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Abandoned Cart Abandoned Cart Recovery: 10-15% Recovery: 10-15% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Benchmark: 10-15% recovery on lost revenue. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "browse-abandonment",
@@ -332,8 +452,14 @@
     "frequency_en": "2 emails",
     "frequency_fr": "2 emails",
     "agentic_level": 2,
-    "script": null,
-    "text": "Browse Abandonment Browse Abandonment +5% conversions +5% conversions Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": null,
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Browse Abandonment Browse Abandonment +5% conversions +5% conversions Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "post-purchase",
@@ -348,8 +474,14 @@
     "frequency_en": "5 emails",
     "frequency_fr": "5 emails",
     "agentic_level": 2,
-    "script": null,
-    "text": "Post-Purchase Post-Achat Repeat: 25-35% Repeat: 25-35% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": null,
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Post-Purchase Post-Achat Repeat: 25-35% Repeat: 25-35% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "win-back",
@@ -364,8 +496,14 @@
     "frequency_en": "3 emails",
     "frequency_fr": "3 emails",
     "agentic_level": 2,
-    "script": null,
-    "text": "Win-Back Win-Back Reactivation: 5-10% Réactivation: 5-10% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": null,
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Win-Back Win-Back Reactivation: 5-10% Réactivation: 5-10% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "vip-tiers",
@@ -380,8 +518,14 @@
     "frequency_en": "4 segments",
     "frequency_fr": "4 segments",
     "agentic_level": 2,
-    "script": null,
-    "text": "VIP Tiers VIP Tiers LTV +30% LTV +30% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": null,
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "VIP Tiers VIP Tiers LTV +30% LTV +30% Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "flows-audit",
@@ -396,8 +540,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": "templates/klaviyo/audit-klaviyo-flows.cjs",
-    "text": "Complete Flows Audit Audit Flows Complet Email diagnostic Diagnostic email Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": "audit-klaviyo-flows.cjs",
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Complete Flows Audit Audit Flows Complet Email diagnostic Diagnostic email Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "ab-sender-rotation",
@@ -412,8 +562,14 @@
     "frequency_en": "Automatic",
     "frequency_fr": "Automatique",
     "agentic_level": 2,
-    "script": "templates/klaviyo/rotation_email.cjs",
-    "text": "A/B Sender Rotation Rotation A/B Sender +5-10% opens +5-10% opens Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": "rotation_email.cjs",
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "A/B Sender Rotation Rotation A/B Sender +5-10% opens +5-10% opens Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "product-enrichment",
@@ -428,8 +584,14 @@
     "frequency_en": "50 products/batch",
     "frequency_fr": "50 produits/batch",
     "agentic_level": 3,
-    "script": null,
-    "text": "Product Enrichment Enrichissement Produits Better product SEO Meilleur SEO produits Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Product Enrichment Enrichissement Produits Better product SEO Meilleur SEO produits Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "shopping-attributes",
@@ -444,8 +606,14 @@
     "frequency_en": "100 products/batch",
     "frequency_fr": "100 produits/batch",
     "agentic_level": 1,
-    "script": null,
-    "text": "Google Shopping Attributes Google Shopping Attributes GMC approval Approbation GMC Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Google Shopping Attributes Google Shopping Attributes GMC approval Approbation GMC Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "collection-management",
@@ -460,8 +628,14 @@
     "frequency_en": "250 products/batch",
     "frequency_fr": "250 produits/batch",
     "agentic_level": 1,
-    "script": null,
-    "text": "Collection Management Gestion Collections Auto organization Organisation auto Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Collection Management Gestion Collections Auto organization Organisation auto Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "legal-pages",
@@ -476,8 +650,14 @@
     "frequency_en": "One-time",
     "frequency_fr": "Une fois",
     "agentic_level": 1,
-    "script": null,
-    "text": "Legal Pages Pages Légales Legal compliance Conformité légale Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Legal Pages Pages Légales Legal compliance Conformité légale Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "gtm-installation",
@@ -492,8 +672,14 @@
     "frequency_en": "One-time",
     "frequency_fr": "Une fois",
     "agentic_level": 1,
-    "script": null,
-    "text": "GTM Installation Installation GTM Complete tracking Tracking complet Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "GTM Installation Installation GTM Complete tracking Tracking complet Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "loyalty-webhooks",
@@ -508,8 +694,14 @@
     "frequency_en": "Real-time",
     "frequency_fr": "Temps réel",
     "agentic_level": 1,
-    "script": null,
-    "text": "Loyalty Webhooks Webhooks Loyalty Auto loyalty Fidélisation auto Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Loyalty Webhooks Webhooks Loyalty Auto loyalty Fidélisation auto Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "store-audit",
@@ -524,8 +716,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": "agency/core/store-audit-agentic.cjs",
-    "text": "Complete Store Audit Audit Store Complet Full diagnostic Diagnostic complet Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": "store-audit-agentic.cjs",
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Complete Store Audit Audit Store Complet Full diagnostic Diagnostic complet Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "facebook-audiences",
@@ -540,8 +738,14 @@
     "frequency_en": "Weekly",
     "frequency_fr": "Hebdo",
     "agentic_level": 1,
-    "script": "templates/shopify/export-shopify-customers-facebook.cjs",
-    "text": "Export → Facebook Audiences Export → Facebook Audiences Precise retargeting Retargeting précis Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": "export-shopify-customers-facebook.cjs",
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Export → Facebook Audiences Export → Facebook Audiences Precise retargeting Retargeting précis Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "google-taxonomy",
@@ -556,8 +760,14 @@
     "frequency_en": "One-time",
     "frequency_fr": "Une fois",
     "agentic_level": 1,
-    "script": "templates/shopify/import-taxonomy-via-api.cjs",
-    "text": "Google Taxonomy Import Import Taxonomie Google GMC compliant GMC compliant Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": "import-taxonomy-via-api.cjs",
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Google Taxonomy Import Import Taxonomie Google GMC compliant GMC compliant Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "looker-dashboard",
@@ -572,8 +782,14 @@
     "frequency_en": "Real-time",
     "frequency_fr": "Temps réel",
     "agentic_level": 1,
-    "script": null,
-    "text": "Looker Studio Dashboard Dashboard Looker Studio 360° business view Vision 360° business Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "Looker Studio Dashboard Dashboard Looker Studio 360° business view Vision 360° business Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: Structural Foundation"
   },
   {
     "id": "ga4-source-report",
@@ -588,8 +804,14 @@
     "frequency_en": "Weekly",
     "frequency_fr": "Hebdo",
     "agentic_level": 3,
-    "script": "templates/analytics/analyze-ga4-source.cjs",
-    "text": "GA4 Source Report Rapport Sources GA4 Ads budget optimization Optimisation budget ads Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": "analyze-ga4-source.cjs",
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "GA4 Source Report Rapport Sources GA4 Ads budget optimization Optimisation budget ads Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "system-audit",
@@ -604,8 +826,14 @@
     "frequency_en": "Monthly",
     "frequency_fr": "Mensuel",
     "agentic_level": 4,
-    "script": null,
-    "text": "Complete Flywheel Audit Audit Système Complet Gap identification Identification gaps Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Full gap analysis identifying at least 3 high-leverage profit leaks.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "Complete Flywheel Audit Audit Système Complet Gap identification Identification gaps Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Full gap analysis identifying at least 3 high-leverage profit leaks. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "low-stock-alert",
@@ -620,8 +848,14 @@
     "frequency_en": "Real-time",
     "frequency_fr": "Temps réel",
     "agentic_level": 1,
-    "script": null,
-    "text": "Low Stock Alert Alerte Stock Bas Zero stockouts Zéro rupture stock Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "Low Stock Alert Alerte Stock Bas Zero stockouts Zéro rupture stock Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: Structural Foundation"
   },
   {
     "id": "margin-projections",
@@ -636,8 +870,14 @@
     "frequency_en": "Monthly",
     "frequency_fr": "Mensuel",
     "agentic_level": 1,
-    "script": null,
-    "text": "Margin Projections Projections Marges True profitability Vraie rentabilité Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "Margin Projections Projections Marges True profitability Vraie rentabilité Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: Structural Foundation"
   },
   {
     "id": "inventory-analysis",
@@ -652,8 +892,14 @@
     "frequency_en": "Weekly",
     "frequency_fr": "Hebdo",
     "agentic_level": 1,
-    "script": null,
-    "text": "Inventory Analysis Analyse Inventaire Optimized cash flow Cash flow optimisé Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "Inventory Analysis Analyse Inventaire Optimized cash flow Cash flow optimisé Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: Structural Foundation"
   },
   {
     "id": "bnpl-tracking",
@@ -668,8 +914,14 @@
     "frequency_en": "Weekly",
     "frequency_fr": "Hebdo",
     "agentic_level": 1,
-    "script": "templates/analytics/track-bnpl-performance.cjs",
-    "text": "BNPL Performance Tracking Suivi BNPL Performance Checkout optimization Optimisation checkout Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": "track-bnpl-performance.cjs",
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "BNPL Performance Tracking Suivi BNPL Performance Checkout optimization Optimisation checkout Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: Structural Foundation"
   },
   {
     "id": "pixel-verification",
@@ -684,8 +936,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/analytics/audit-tiktok-pixel-config.cjs",
-    "text": "Pixel Verification Vérification Pixels Reliable tracking Tracking fiable Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": "audit-tiktok-pixel-config.cjs",
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "Pixel Verification Vérification Pixels Reliable tracking Tracking fiable Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: Structural Foundation"
   },
   {
     "id": "promo-video",
@@ -700,8 +958,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/video/generate-promo-video.cjs",
-    "text": "Product Promo Video Vidéo Promo Produit Social ready content Contenu social ready Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "generate-promo-video.cjs",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Product Promo Video Vidéo Promo Produit Social ready content Contenu social ready Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "cart-recovery-video",
@@ -716,8 +980,14 @@
     "frequency_en": "Automatic",
     "frequency_fr": "Automatique",
     "agentic_level": 2,
-    "script": null,
-    "text": "Cart Recovery Video Vidéo Cart Recovery +5% recovery rate +5% recovery rate Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution"
+    "script_ref": null,
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Cart Recovery Video Vidéo Cart Recovery +5% recovery rate +5% recovery rate Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "portrait-video",
@@ -732,8 +1002,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": "templates/video/convert-video-portrait.cjs",
-    "text": "Portrait Video Format Vidéo Format Portrait Multi-platform Multi-plateforme Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution LLM Reasoning"
+    "script_ref": "convert-video-portrait.cjs",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Portrait Video Format Vidéo Format Portrait Multi-platform Multi-plateforme Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution LLM Reasoning Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "shopping-feed",
@@ -748,8 +1024,14 @@
     "frequency_en": "Daily",
     "frequency_fr": "Quotidien",
     "agentic_level": 1,
-    "script": null,
-    "text": "Google Shopping Feed Feed Google Shopping Always up-to-date products Produits toujours à jour Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Google Shopping Feed Feed Google Shopping Always up-to-date products Produits toujours à jour Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "gmc-diagnostic",
@@ -764,8 +1046,14 @@
     "frequency_en": "Weekly",
     "frequency_fr": "Hebdo",
     "agentic_level": 1,
-    "script": null,
-    "text": "GMC Diagnostic Diagnostic GMC Product approval Approbation produits Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "GMC Diagnostic Diagnostic GMC Product approval Approbation produits Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "auto-blog",
@@ -780,8 +1068,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/core/blog-generator-resilient.cjs",
-    "text": "Auto Blog + Multi-Channel Distribution Article Blog + Distribution Multi-Canal SEO + Social in 1 click SEO + Social en 1 clic Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "blog-generator-resilient.cjs",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Auto Blog + Multi-Channel Distribution Article Blog + Distribution Multi-Canal SEO + Social in 1 click SEO + Social en 1 clic Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "custom-workflow-deprecated",
@@ -796,8 +1090,14 @@
     "frequency_en": "N/A",
     "frequency_fr": "N/A",
     "agentic_level": 1,
-    "script": null,
-    "text": "Custom Workflow (Deprecated) Workflow Personnalisé (Obsolète) Replaced by native scripts Remplacé par scripts natifs Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Custom Workflow (Deprecated) Workflow Personnalisé (Obsolète) Replaced by native scripts Remplacé par scripts natifs Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "google-apps-script-booking",
@@ -812,8 +1112,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/core/google-apps-script-booking.js",
-    "text": "Google Apps Script Booking Google Apps Script Booking Booking + cancel + reschedule automation Booking + annulation + report automatisé Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "google-apps-script-booking.js",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Google Apps Script Booking Google Apps Script Booking Booking + cancel + reschedule automation Booking + annulation + report automatisé Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "google-calendar-booking",
@@ -828,8 +1134,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/core/google-calendar-booking.cjs",
-    "text": "Google Calendar Booking Google Calendar Booking Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "google-calendar-booking.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Google Calendar Booking Google Calendar Booking Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "analyze-ga4-conversion-source",
@@ -844,8 +1156,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/analytics/analyze-ga4-conversion-source.cjs",
-    "text": "Analyze Ga4 Conversion Source Analyze Ga4 Conversion Source Efficient automation Automatisation efficace Analytics & Reporting Analytics & Reporting analytics Data Interoperability"
+    "script_ref": "analyze-ga4-conversion-source.cjs",
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "Analyze Ga4 Conversion Source Analyze Ga4 Conversion Source Efficient automation Automatisation efficace Analytics & Reporting Analytics & Reporting analytics Data Interoperability Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: Structural Foundation"
   },
   {
     "id": "geo-segment-generic",
@@ -860,8 +1178,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/crm/geo-segment-generic.cjs",
-    "text": "Geo Segment Generic Geo Segment Generic Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "geo-segment-generic.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Geo Segment Generic Geo Segment Generic Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "audit-klaviyo-flows-v2",
@@ -876,8 +1200,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 2,
-    "script": "templates/klaviyo/audit-klaviyo-flows.cjs",
-    "text": "Audit Klaviyo Flows V2 Audit Klaviyo Flows V2 Efficient automation Automatisation efficace Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution"
+    "script_ref": "audit-klaviyo-flows.cjs",
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Audit Klaviyo Flows V2 Audit Klaviyo Flows V2 Efficient automation Automatisation efficace Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "import-facebook-lead-ads",
@@ -892,8 +1222,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/leads/import-facebook-lead-ads.js",
-    "text": "Import Facebook Lead Ads Import Facebook Lead Ads Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "import-facebook-lead-ads.js",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Import Facebook Lead Ads Import Facebook Lead Ads Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "segment-leads",
@@ -908,8 +1244,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/leads/segment-leads.js",
-    "text": "Segment Leads Segment Leads Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "segment-leads.js",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Segment Leads Segment Leads Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "generate-tags-csv",
@@ -924,8 +1266,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/seo/generate-tags-csv.js",
-    "text": "Generate Tags Csv Generate Tags Csv Efficient automation Automatisation efficace SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": "generate-tags-csv.js",
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Generate Tags Csv Generate Tags Csv Efficient automation Automatisation efficace SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "import-alt-text-api",
@@ -940,8 +1288,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/seo/import-alt-text-api.js",
-    "text": "Import Alt Text Api Import Alt Text Api Efficient automation Automatisation efficace SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": "import-alt-text-api.js",
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Import Alt Text Api Import Alt Text Api Efficient automation Automatisation efficace SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "upload-llms",
@@ -956,8 +1310,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/seo/upload-llms.js",
-    "text": "Upload Llms Upload Llms Efficient automation Automatisation efficace SEO & Content SEO & Contenu seo Data Interoperability"
+    "script_ref": "upload-llms.js",
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Upload Llms Upload Llms Efficient automation Automatisation efficace SEO & Content SEO & Contenu seo Data Interoperability Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "audit-shopify-store",
@@ -972,8 +1332,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/core/store-audit-agentic.cjs",
-    "text": "Audit Shopify Store Audit Shopify Store Efficient automation Automatisation efficace Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": "store-audit-agentic.cjs",
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Audit Shopify Store Audit Shopify Store Efficient automation Automatisation efficace Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "create-warehouse-metafield",
@@ -988,8 +1354,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/shopify/create-warehouse-metafield.cjs",
-    "text": "Create Warehouse Metafield Create Warehouse Metafield Efficient automation Automatisation efficace Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": "create-warehouse-metafield.cjs",
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Create Warehouse Metafield Create Warehouse Metafield Efficient automation Automatisation efficace Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "import-taxonomy-metafield",
@@ -1004,8 +1376,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/shopify/import-taxonomy-metafield.cjs",
-    "text": "Import Taxonomy Metafield Import Taxonomy Metafield Efficient automation Automatisation efficace Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": "import-taxonomy-metafield.cjs",
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Import Taxonomy Metafield Import Taxonomy Metafield Efficient automation Automatisation efficace Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "parse-warehouse-csv",
@@ -1020,8 +1398,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/shopify/parse-warehouse-csv.cjs",
-    "text": "Parse Warehouse Csv Parse Warehouse Csv Efficient automation Automatisation efficace Shopify Admin Shopify Admin shopify Data Interoperability"
+    "script_ref": "parse-warehouse-csv.cjs",
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Parse Warehouse Csv Parse Warehouse Csv Efficient automation Automatisation efficace Shopify Admin Shopify Admin shopify Data Interoperability Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "enable-apify-schedulers",
@@ -1036,8 +1420,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/social/enable-apify-schedulers.js",
-    "text": "Enable Apify Schedulers Enable Apify Schedulers Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "enable-apify-schedulers.js",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Enable Apify Schedulers Enable Apify Schedulers Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "generate-all-promo-videos",
@@ -1052,8 +1442,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "templates/video/generate-all-promo-videos.cjs",
-    "text": "Generate All Promo Videos Generate All Promo Videos Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "generate-all-promo-videos.cjs",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Generate All Promo Videos Generate All Promo Videos Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "cinematic-director",
@@ -1068,8 +1464,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": null,
-    "text": "CinematicAds Director CinematicAds Director AI cinematic videos (Gemini 3 Pro + Imagen 4 + Veo 3.1) Vidéos cinématiques AI (Gemini 3 Pro + Imagen 4 + Veo 3.1) CinematicAds AI CinematicAds AI cinematicads Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Produce broadcast-quality video ads at startup speed and cost.",
+    "business_outcome": "3x higher engagement vs static ads, 40% lower CPM on video placements.",
+    "marketing_science": "Cinematic Storytelling (Hook → Problem → Solution → CTA)",
+    "diagnostic_truth": "The first 3 seconds determine 80% of ad performance; hook is everything.",
+    "systemic_risk": "Over-polished ads can feel inauthentic; balance production with relatability.",
+    "tenant_id": "agency_internal",
+    "text": "CinematicAds Director CinematicAds Director AI cinematic videos (Gemini 3 Pro + Imagen 4 + Veo 3.1) Vidéos cinématiques AI (Gemini 3 Pro + Imagen 4 + Veo 3.1) CinematicAds AI CinematicAds AI cinematicads Data Interoperability Produce broadcast-quality video ads at startup speed and cost. Cinematic Storytelling (Hook → Problem → Solution → CTA) 3x higher engagement vs static ads, 40% lower CPM on video placements. The first 3 seconds determine 80% of ad performance; hook is everything. Over-polished ads can feel inauthentic; balance production with relatability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "competitor-clone",
@@ -1084,8 +1486,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": null,
-    "text": "Competitor Clone AI Competitor Clone AI Clone competitor ads (analysis + script + multi-scene production) Clone pubs concurrents (analyse + script + production multi-scènes) CinematicAds AI CinematicAds AI cinematicads Data Interoperability Conditional Execution LLM Reasoning"
+    "script_ref": null,
+    "strategic_intent": "Produce broadcast-quality video ads at startup speed and cost.",
+    "business_outcome": "3x higher engagement vs static ads, 40% lower CPM on video placements.",
+    "marketing_science": "Cinematic Storytelling (Hook → Problem → Solution → CTA)",
+    "diagnostic_truth": "The first 3 seconds determine 80% of ad performance; hook is everything.",
+    "systemic_risk": "Over-polished ads can feel inauthentic; balance production with relatability.",
+    "tenant_id": "agency_internal",
+    "text": "Competitor Clone AI Competitor Clone AI Clone competitor ads (analysis + script + multi-scene production) Clone pubs concurrents (analyse + script + production multi-scènes) CinematicAds AI CinematicAds AI cinematicads Data Interoperability Conditional Execution LLM Reasoning Produce broadcast-quality video ads at startup speed and cost. Cinematic Storytelling (Hook → Problem → Solution → CTA) 3x higher engagement vs static ads, 40% lower CPM on video placements. The first 3 seconds determine 80% of ad performance; hook is everything. Over-polished ads can feel inauthentic; balance production with relatability. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "ecommerce-factory",
@@ -1100,8 +1508,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": null,
-    "text": "E-commerce Ads Factory E-commerce Ads Factory Multi-ratio ads (Google Ads 1.91:1, Social 1:1, TikTok 9:16) Ads multi-ratio (Google Ads 1.91:1, Social 1:1, TikTok 9:16) CinematicAds AI CinematicAds AI cinematicads Data Interoperability"
+    "script_ref": null,
+    "strategic_intent": "Produce broadcast-quality video ads at startup speed and cost.",
+    "business_outcome": "3x higher engagement vs static ads, 40% lower CPM on video placements.",
+    "marketing_science": "Cinematic Storytelling (Hook → Problem → Solution → CTA)",
+    "diagnostic_truth": "The first 3 seconds determine 80% of ad performance; hook is everything.",
+    "systemic_risk": "Over-polished ads can feel inauthentic; balance production with relatability.",
+    "tenant_id": "agency_internal",
+    "text": "E-commerce Ads Factory E-commerce Ads Factory Multi-ratio ads (Google Ads 1.91:1, Social 1:1, TikTok 9:16) Ads multi-ratio (Google Ads 1.91:1, Social 1:1, TikTok 9:16) CinematicAds AI CinematicAds AI cinematicads Data Interoperability Produce broadcast-quality video ads at startup speed and cost. Cinematic Storytelling (Hook → Problem → Solution → CTA) 3x higher engagement vs static ads, 40% lower CPM on video placements. The first 3 seconds determine 80% of ad performance; hook is everything. Over-polished ads can feel inauthentic; balance production with relatability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "asset-factory",
@@ -1116,8 +1530,14 @@
     "frequency_en": "Core engine",
     "frequency_fr": "Core engine",
     "agentic_level": 3,
-    "script": null,
-    "text": "Asset Factory (Dual AI) Asset Factory (Dual AI) Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1 Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1 CinematicAds AI CinematicAds AI cinematicads Data Interoperability Conditional Execution LLM Reasoning"
+    "script_ref": null,
+    "strategic_intent": "Produce broadcast-quality video ads at startup speed and cost.",
+    "business_outcome": "3x higher engagement vs static ads, 40% lower CPM on video placements.",
+    "marketing_science": "Cinematic Storytelling (Hook → Problem → Solution → CTA)",
+    "diagnostic_truth": "The first 3 seconds determine 80% of ad performance; hook is everything.",
+    "systemic_risk": "Over-polished ads can feel inauthentic; balance production with relatability.",
+    "tenant_id": "agency_internal",
+    "text": "Asset Factory (Dual AI) Asset Factory (Dual AI) Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1 Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1 CinematicAds AI CinematicAds AI cinematicads Data Interoperability Conditional Execution LLM Reasoning Produce broadcast-quality video ads at startup speed and cost. Cinematic Storytelling (Hook → Problem → Solution → CTA) 3x higher engagement vs static ads, 40% lower CPM on video placements. The first 3 seconds determine 80% of ad performance; hook is everything. Over-polished ads can feel inauthentic; balance production with relatability. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "ai-avatar-generator",
@@ -1132,8 +1552,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": null,
-    "text": "AI Avatar Generator AI Avatar Generator Consistent AI avatar multi-scenes (Imagen 3 + Gemini API) Avatar IA consistent multi-scenes (Imagen 3 + Gemini API) AI Avatar & Influencer AI Avatar & Influencer ai-avatar Data Interoperability Conditional Execution LLM Reasoning"
+    "script_ref": null,
+    "strategic_intent": "Scale human-like video presence without recurring talent costs.",
+    "business_outcome": "24/7 video content capability, 90% cost reduction vs traditional shoots.",
+    "marketing_science": "Avatar Consistency (Voice + Face + Script alignment)",
+    "diagnostic_truth": "Avatars work best for educational/informational content, not emotional branding.",
+    "systemic_risk": "Uncanny valley effect if avatar quality is subpar; invest in premium models.",
+    "tenant_id": "agency_internal",
+    "text": "AI Avatar Generator AI Avatar Generator Consistent AI avatar multi-scenes (Imagen 3 + Gemini API) Avatar IA consistent multi-scenes (Imagen 3 + Gemini API) AI Avatar & Influencer AI Avatar & Influencer ai-avatar Data Interoperability Conditional Execution LLM Reasoning Scale human-like video presence without recurring talent costs. Avatar Consistency (Voice + Face + Script alignment) 24/7 video content capability, 90% cost reduction vs traditional shoots. Avatars work best for educational/informational content, not emotional branding. Uncanny valley effect if avatar quality is subpar; invest in premium models. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "ai-talking-video",
@@ -1148,8 +1574,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": null,
-    "text": "AI Talking Video AI Talking Video AI lip-sync video (ElevenLabs + fal.ai Kling) Video lip-sync IA (ElevenLabs + fal.ai Kling) AI Avatar & Influencer AI Avatar & Influencer ai-avatar Data Interoperability Conditional Execution LLM Reasoning"
+    "script_ref": null,
+    "strategic_intent": "Scale human-like video presence without recurring talent costs.",
+    "business_outcome": "24/7 video content capability, 90% cost reduction vs traditional shoots.",
+    "marketing_science": "Avatar Consistency (Voice + Face + Script alignment)",
+    "diagnostic_truth": "Avatars work best for educational/informational content, not emotional branding.",
+    "systemic_risk": "Uncanny valley effect if avatar quality is subpar; invest in premium models.",
+    "tenant_id": "agency_internal",
+    "text": "AI Talking Video AI Talking Video AI lip-sync video (ElevenLabs + fal.ai Kling) Video lip-sync IA (ElevenLabs + fal.ai Kling) AI Avatar & Influencer AI Avatar & Influencer ai-avatar Data Interoperability Conditional Execution LLM Reasoning Scale human-like video presence without recurring talent costs. Avatar Consistency (Voice + Face + Script alignment) 24/7 video content capability, 90% cost reduction vs traditional shoots. Avatars work best for educational/informational content, not emotional branding. Uncanny valley effect if avatar quality is subpar; invest in premium models. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "whatsapp-booking-confirmation",
@@ -1164,8 +1596,14 @@
     "frequency_en": "On each booking",
     "frequency_fr": "À chaque réservation",
     "agentic_level": 1,
-    "script": "agency/core/whatsapp-booking-notifications.cjs",
-    "text": "WhatsApp Booking Confirmation Confirmation WhatsApp RDV 98% open rate vs 20% SMS 98% taux d'ouverture vs 20% SMS WhatsApp Business WhatsApp Business whatsapp Data Interoperability"
+    "script_ref": "whatsapp-booking-notifications.cjs",
+    "strategic_intent": "Meet customers on their preferred messaging platform with instant response.",
+    "business_outcome": "98% open rate vs 20% email, 45% faster response-to-purchase cycle.",
+    "marketing_science": "Conversational Commerce (Inquiry → Qualify → Convert)",
+    "diagnostic_truth": "WhatsApp is personal space; over-messaging leads to blocks, not sales.",
+    "systemic_risk": "Meta's Business API rules can suspend accounts for policy violations.",
+    "tenant_id": "agency_internal",
+    "text": "WhatsApp Booking Confirmation Confirmation WhatsApp RDV 98% open rate vs 20% SMS 98% taux d'ouverture vs 20% SMS WhatsApp Business WhatsApp Business whatsapp Data Interoperability Meet customers on their preferred messaging platform with instant response. Conversational Commerce (Inquiry → Qualify → Convert) 98% open rate vs 20% email, 45% faster response-to-purchase cycle. WhatsApp is personal space; over-messaging leads to blocks, not sales. Meta's Business API rules can suspend accounts for policy violations. Architectural Priority: Structural Foundation"
   },
   {
     "id": "whatsapp-booking-reminders",
@@ -1180,8 +1618,14 @@
     "frequency_en": "Automatic",
     "frequency_fr": "Automatique",
     "agentic_level": 1,
-    "script": "agency/core/whatsapp-booking-notifications.cjs",
-    "text": "WhatsApp Reminders 24h + 1h Rappels WhatsApp 24h + 1h -30% no-shows -30% no-shows WhatsApp Business WhatsApp Business whatsapp Data Interoperability"
+    "script_ref": "whatsapp-booking-notifications.cjs",
+    "strategic_intent": "Meet customers on their preferred messaging platform with instant response.",
+    "business_outcome": "98% open rate vs 20% email, 45% faster response-to-purchase cycle.",
+    "marketing_science": "Conversational Commerce (Inquiry → Qualify → Convert)",
+    "diagnostic_truth": "WhatsApp is personal space; over-messaging leads to blocks, not sales.",
+    "systemic_risk": "Meta's Business API rules can suspend accounts for policy violations.",
+    "tenant_id": "agency_internal",
+    "text": "WhatsApp Reminders 24h + 1h Rappels WhatsApp 24h + 1h -30% no-shows -30% no-shows WhatsApp Business WhatsApp Business whatsapp Data Interoperability Meet customers on their preferred messaging platform with instant response. Conversational Commerce (Inquiry → Qualify → Convert) 98% open rate vs 20% email, 45% faster response-to-purchase cycle. WhatsApp is personal space; over-messaging leads to blocks, not sales. Meta's Business API rules can suspend accounts for policy violations. Architectural Priority: Structural Foundation"
   },
   {
     "id": "voice-ai-web-widget",
@@ -1196,8 +1640,14 @@
     "frequency_en": "24/7 available",
     "frequency_fr": "24/7 disponible",
     "agentic_level": 4,
-    "script": "agency/core/voice-widget-templates.cjs",
-    "text": "AI Voice Web Assistant Assistant Vocal IA Web Lead qualification + auto booking by voice Qualification leads + RDV auto par la voix Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy"
+    "script_ref": "voice-widget-templates.cjs",
+    "strategic_intent": "Strike the balance between human-like empathy and algorithmic precision.",
+    "business_outcome": "-95% qualifying time and immediate response to high-intent signals.",
+    "marketing_science": "Conversational Closing (BANT)",
+    "diagnostic_truth": "AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice.",
+    "systemic_risk": "Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'.",
+    "tenant_id": "agency_internal",
+    "text": "AI Voice Web Assistant Assistant Vocal IA Web Lead qualification + auto booking by voice Qualification leads + RDV auto par la voix Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy Strike the balance between human-like empathy and algorithmic precision. Conversational Closing (BANT) -95% qualifying time and immediate response to high-intent signals. AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice. Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "grok-voice-telephony",
@@ -1212,8 +1662,14 @@
     "frequency_en": "Inbound calls",
     "frequency_fr": "Appels entrants",
     "agentic_level": 4,
-    "script": "agency/core/voice-telephony-bridge.cjs",
-    "text": "AI Phone Assistant Assistant Telephonique IA Automatic phone booking Reservation par telephone automatique Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy"
+    "script_ref": "voice-telephony-bridge.cjs",
+    "strategic_intent": "Strike the balance between human-like empathy and algorithmic precision.",
+    "business_outcome": "-95% qualifying time and immediate response to high-intent signals.",
+    "marketing_science": "Conversational Closing (BANT)",
+    "diagnostic_truth": "AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice.",
+    "systemic_risk": "Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'.",
+    "tenant_id": "agency_internal",
+    "text": "AI Phone Assistant Assistant Telephonique IA Automatic phone booking Reservation par telephone automatique Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy Strike the balance between human-like empathy and algorithmic precision. Conversational Closing (BANT) -95% qualifying time and immediate response to high-intent signals. AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice. Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "linkedin-lead-scraper",
@@ -1228,8 +1684,14 @@
     "frequency_en": "Every 6 hours",
     "frequency_fr": "Toutes les 6 heures",
     "agentic_level": 2,
-    "script": "agency/linkedin-lead-automation.cjs",
-    "text": "LinkedIn Lead Automation LinkedIn Lead Automation +400 leads/day with AI scoring +400 leads/jour avec scoring AI Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Conditional Execution"
+    "script_ref": "linkedin-lead-automation.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "LinkedIn Lead Automation LinkedIn Lead Automation +400 leads/day with AI scoring +400 leads/jour avec scoring AI Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Conditional Execution Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "newsletter-automation",
@@ -1244,8 +1706,14 @@
     "frequency_en": "Bi-monthly",
     "frequency_fr": "Bi-mensuel",
     "agentic_level": 2,
-    "script": "agency/newsletter-automation.cjs",
-    "text": "Newsletter Automation Newsletter Automation AI-generated newsletter automatically Newsletter AI générée automatiquement marketing Data Interoperability Conditional Execution"
+    "script_ref": "newsletter-automation.cjs",
+    "strategic_intent": "Orchestrate multi-channel campaigns with unified attribution.",
+    "business_outcome": "Holistic view of customer journey across all touchpoints.",
+    "marketing_science": "Full-Funnel Marketing (Awareness → Consideration → Decision)",
+    "diagnostic_truth": "Marketing without measurement is gambling; always close the attribution loop.",
+    "systemic_risk": "Channel silos create blind spots; integration is non-negotiable.",
+    "tenant_id": "agency_internal",
+    "text": "Newsletter Automation Newsletter Automation AI-generated newsletter automatically Newsletter AI générée automatiquement marketing Data Interoperability Conditional Execution Orchestrate multi-channel campaigns with unified attribution. Full-Funnel Marketing (Awareness → Consideration → Decision) Holistic view of customer journey across all touchpoints. Marketing without measurement is gambling; always close the attribution loop. Channel silos create blind spots; integration is non-negotiable. Architectural Priority: Structural Foundation"
   },
   {
     "id": "email-outreach-sequence",
@@ -1260,8 +1728,14 @@
     "frequency_en": "Triggered",
     "frequency_fr": "Déclenché",
     "agentic_level": 3,
-    "script": "agency/email-automation-unified.cjs",
-    "text": "Email Outreach Sequence Email Outreach Sequence 3-email personalized sequence Séquence 3 emails personnalisée Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Conditional Execution LLM Reasoning"
+    "script_ref": "email-automation-unified.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Email Outreach Sequence Email Outreach Sequence 3-email personalized sequence Séquence 3 emails personnalisée Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Conditional Execution LLM Reasoning Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "linkedin-to-klaviyo-pipeline",
@@ -1276,8 +1750,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/linkedin-to-klaviyo-pipeline.cjs",
-    "text": "LinkedIn → Klaviyo Pipeline (B2B) Pipeline LinkedIn → Klaviyo (B2B) LinkedIn leads qualified by segment Leads LinkedIn qualifiés par segment Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "linkedin-to-klaviyo-pipeline.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "LinkedIn → Klaviyo Pipeline (B2B) Pipeline LinkedIn → Klaviyo (B2B) LinkedIn leads qualified by segment Leads LinkedIn qualifiés par segment Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "google-maps-to-klaviyo-pipeline",
@@ -1292,8 +1772,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/google-maps-to-klaviyo-pipeline.cjs",
-    "text": "Google Maps → Klaviyo Pipeline (Local B2B) Pipeline Google Maps → Klaviyo (Local B2B) Local leads qualified by category Leads locaux qualifiés par catégorie Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "google-maps-to-klaviyo-pipeline.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Google Maps → Klaviyo Pipeline (Local B2B) Pipeline Google Maps → Klaviyo (Local B2B) Local leads qualified by category Leads locaux qualifiés par catégorie Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "b2b-email-templates-module",
@@ -1308,8 +1794,14 @@
     "frequency_en": "Shared module",
     "frequency_fr": "Module partagé",
     "agentic_level": 3,
-    "script": "agency/templates/b2b-email-templates.cjs",
-    "text": "B2B Email Templates Module Module Templates Email B2B 6 segments, 100% branding validated 6 segments, branding 100% validé Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Conditional Execution LLM Reasoning"
+    "script_ref": "b2b-email-templates.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "B2B Email Templates Module Module Templates Email B2B 6 segments, 100% branding validated 6 segments, branding 100% validé Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Conditional Execution LLM Reasoning Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "voice-widget-templates",
@@ -1324,8 +1816,14 @@
     "frequency_en": "Client deployment",
     "frequency_fr": "Déploiement client",
     "agentic_level": 4,
-    "script": "agency/core/voice-widget-templates.cjs",
-    "text": "Voice Widget Templates (8 industries) Templates Voice Widget (8 industries) Deployment 4h → 30min Déploiement 4h → 30min Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy"
+    "script_ref": "voice-widget-templates.cjs",
+    "strategic_intent": "Strike the balance between human-like empathy and algorithmic precision.",
+    "business_outcome": "-95% qualifying time and immediate response to high-intent signals.",
+    "marketing_science": "Conversational Closing (BANT)",
+    "diagnostic_truth": "AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice.",
+    "systemic_risk": "Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'.",
+    "tenant_id": "agency_internal",
+    "text": "Voice Widget Templates (8 industries) Templates Voice Widget (8 industries) Deployment 4h → 30min Déploiement 4h → 30min Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy Strike the balance between human-like empathy and algorithmic precision. Conversational Closing (BANT) -95% qualifying time and immediate response to high-intent signals. AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice. Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "blog-generator-resilient",
@@ -1340,8 +1838,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": "agency/core/blog-generator-resilient.cjs",
-    "text": "Resilient Blog Generator (3 AI + 3 Social) Blog Generator Résilient (3 AI + 3 Social) Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution LLM Reasoning"
+    "script_ref": "blog-generator-resilient.cjs",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Resilient Blog Generator (3 AI + 3 Social) Blog Generator Résilient (3 AI + 3 Social) Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution LLM Reasoning Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "podcast-generator-resilient",
@@ -1356,8 +1860,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": "agency/core/podcast-generator-resilient.cjs",
-    "text": "Podcast Generator (Blog → Audio) Podcast Generator (Blog → Audio) Blog → Podcast 2 customizable voices (> NotebookLM) Blog → Podcast 2 voix personnalisables (> NotebookLM) Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution LLM Reasoning multi-ai-fallback multi-tts-fallback customizable-voices client-ready"
+    "script_ref": "podcast-generator-resilient.cjs",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Podcast Generator (Blog → Audio) Podcast Generator (Blog → Audio) Blog → Podcast 2 customizable voices (> NotebookLM) Blog → Podcast 2 voix personnalisables (> NotebookLM) Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution LLM Reasoning multi-ai-fallback multi-tts-fallback customizable-voices client-ready Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "grok-voice-realtime",
@@ -1372,8 +1882,14 @@
     "frequency_en": "Real-time",
     "frequency_fr": "Temps réel",
     "agentic_level": 4,
-    "script": "agency/core/grok-voice-realtime.cjs",
-    "text": "Grok Voice Realtime (WebSocket + TTS) Grok Voice Realtime (WebSocket + TTS) Native audio $0.05/min + Gemini TTS fallback Audio natif $0.05/min + fallback Gemini TTS Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy"
+    "script_ref": "grok-voice-realtime.cjs",
+    "strategic_intent": "Strike the balance between human-like empathy and algorithmic precision.",
+    "business_outcome": "-95% qualifying time and immediate response to high-intent signals.",
+    "marketing_science": "Conversational Closing (BANT)",
+    "diagnostic_truth": "AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice.",
+    "systemic_risk": "Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'.",
+    "tenant_id": "agency_internal",
+    "text": "Grok Voice Realtime (WebSocket + TTS) Grok Voice Realtime (WebSocket + TTS) Native audio $0.05/min + Gemini TTS fallback Audio natif $0.05/min + fallback Gemini TTS Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy Strike the balance between human-like empathy and algorithmic precision. Conversational Closing (BANT) -95% qualifying time and immediate response to high-intent signals. AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice. Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "voice-agent-b2b",
@@ -1388,8 +1904,14 @@
     "frequency_en": "24/7 available",
     "frequency_fr": "24/7 disponible",
     "agentic_level": 4,
-    "script": "agency/core/voice-agent-b2b.cjs",
-    "text": "B2B Voice Agent (Sales + Support) Agent Vocal B2B (Sales + Support) Automated Sales + Support for B2B agency Ventes + Support automatisés pour agence B2B Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy RAG Knowledge Base (129 chunks) TF-IDF search (598 terms) Multi-AI fallback Service pack recommendations"
+    "script_ref": "voice-agent-b2b.cjs",
+    "strategic_intent": "Strike the balance between human-like empathy and algorithmic precision.",
+    "business_outcome": "-95% qualifying time and immediate response to high-intent signals.",
+    "marketing_science": "Conversational Closing (BANT)",
+    "diagnostic_truth": "AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice.",
+    "systemic_risk": "Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'.",
+    "tenant_id": "agency_internal",
+    "text": "B2B Voice Agent (Sales + Support) Agent Vocal B2B (Sales + Support) Automated Sales + Support for B2B agency Ventes + Support automatisés pour agence B2B Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy RAG Knowledge Base (129 chunks) TF-IDF search (598 terms) Multi-AI fallback Service pack recommendations Strike the balance between human-like empathy and algorithmic precision. Conversational Closing (BANT) -95% qualifying time and immediate response to high-intent signals. AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice. Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "knowledge-base-services",
@@ -1404,8 +1926,14 @@
     "frequency_en": "Build on demand",
     "frequency_fr": "Build on demand",
     "agentic_level": 1,
-    "script": "agency/core/knowledge-base-services.cjs",
-    "text": "Service Knowledge Base (TF-IDF) Knowledge Base Services (TF-IDF) Index 119 automations for Voice AI Index 119 automations pour Voice AI Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability TF-IDF indexing 129 searchable chunks 598 vocabulary terms Cosine similarity search"
+    "script_ref": "knowledge-base-services.cjs",
+    "strategic_intent": "Strike the balance between human-like empathy and algorithmic precision.",
+    "business_outcome": "-95% qualifying time and immediate response to high-intent signals.",
+    "marketing_science": "Conversational Closing (BANT)",
+    "diagnostic_truth": "AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice.",
+    "systemic_risk": "Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'.",
+    "tenant_id": "agency_internal",
+    "text": "Service Knowledge Base (TF-IDF) Knowledge Base Services (TF-IDF) Index 119 automations for Voice AI Index 119 automations pour Voice AI Voice AI & Telephony Voice AI & Téléphonie voice-ai Data Interoperability TF-IDF indexing 129 searchable chunks 598 vocabulary terms Cosine similarity search Strike the balance between human-like empathy and algorithmic precision. Conversational Closing (BANT) -95% qualifying time and immediate response to high-intent signals. AI Voice requires clear knowledge boundaries; it cannot improvise legal or medical advice. Latency in VAD (Voice Activity Detection) can lead to conversational 'step-overs'. Architectural Priority: Structural Foundation"
   },
   {
     "id": "whatsapp-booking-notifications",
@@ -1420,8 +1948,14 @@
     "frequency_en": "Automatic",
     "frequency_fr": "Automatique",
     "agentic_level": 1,
-    "script": "agency/core/whatsapp-booking-notifications.cjs",
-    "text": "WhatsApp Booking Notifications WhatsApp Booking Notifications Confirmation + 24h/1h reminders Confirmation + rappels 24h/1h WhatsApp Business WhatsApp Business whatsapp Data Interoperability"
+    "script_ref": "whatsapp-booking-notifications.cjs",
+    "strategic_intent": "Meet customers on their preferred messaging platform with instant response.",
+    "business_outcome": "98% open rate vs 20% email, 45% faster response-to-purchase cycle.",
+    "marketing_science": "Conversational Commerce (Inquiry → Qualify → Convert)",
+    "diagnostic_truth": "WhatsApp is personal space; over-messaging leads to blocks, not sales.",
+    "systemic_risk": "Meta's Business API rules can suspend accounts for policy violations.",
+    "tenant_id": "agency_internal",
+    "text": "WhatsApp Booking Notifications WhatsApp Booking Notifications Confirmation + 24h/1h reminders Confirmation + rappels 24h/1h WhatsApp Business WhatsApp Business whatsapp Data Interoperability Meet customers on their preferred messaging platform with instant response. Conversational Commerce (Inquiry → Qualify → Convert) 98% open rate vs 20% email, 45% faster response-to-purchase cycle. WhatsApp is personal space; over-messaging leads to blocks, not sales. Meta's Business API rules can suspend accounts for policy violations. Architectural Priority: Structural Foundation"
   },
   {
     "id": "hubspot-b2b-crm",
@@ -1436,8 +1970,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/core/hubspot-b2b-crm.cjs",
-    "text": "HubSpot B2B CRM Integration v1.1.0 HubSpot B2B CRM Integration v1.1.0 Free B2B CRM with batch (100/call) + backoff CRM gratuit B2B avec batch (100/appel) + backoff Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability batch-operations exponential-backoff rate-limit-monitoring jitter"
+    "script_ref": "hubspot-b2b-crm.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "HubSpot B2B CRM Integration v1.1.0 HubSpot B2B CRM Integration v1.1.0 Free B2B CRM with batch (100/call) + backoff CRM gratuit B2B avec batch (100/appel) + backoff Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability batch-operations exponential-backoff rate-limit-monitoring jitter Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "omnisend-b2c-ecommerce",
@@ -1452,8 +1992,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 2,
-    "script": "agency/core/omnisend-b2c-ecommerce.cjs",
-    "text": "Omnisend B2C E-commerce Integration v1.1.0 Omnisend B2C E-commerce Integration v1.1.0 B2C email $16/mo + Carts API + event dedup Email B2C $16/mo + Carts API + event dedup Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution event-deduplication carts-api exponential-backoff jitter"
+    "script_ref": "omnisend-b2c-ecommerce.cjs",
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Omnisend B2C E-commerce Integration v1.1.0 Omnisend B2C E-commerce Integration v1.1.0 B2C email $16/mo + Carts API + event dedup Email B2C $16/mo + Carts API + event dedup Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution event-deduplication carts-api exponential-backoff jitter Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "email-personalization-resilient",
@@ -1468,8 +2014,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 3,
-    "script": "agency/core/email-personalization-resilient.cjs",
-    "text": "Resilient Email Personalization (4 AI + 3-Email Cart Series) Email Personalization Résilient (4 AI + 3-Email Cart Series) +69% orders vs 1 email (1h/24h/72h series) +69% orders vs 1 email (série 1h/24h/72h) Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution LLM Reasoning 3-email-abandoned-cart multi-ai-fallback personalization"
+    "script_ref": "email-personalization-resilient.cjs",
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Resilient Email Personalization (4 AI + 3-Email Cart Series) Email Personalization Résilient (4 AI + 3-Email Cart Series) +69% orders vs 1 email (1h/24h/72h series) +69% orders vs 1 email (série 1h/24h/72h) Email Marketing (CRM) Email Marketing (CRM) email Data Interoperability Conditional Execution LLM Reasoning 3-email-abandoned-cart multi-ai-fallback personalization Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "sms-automation-resilient",
@@ -1484,8 +2036,14 @@
     "frequency_en": "Automatic",
     "frequency_fr": "Automatique",
     "agentic_level": 2,
-    "script": "agency/core/sms-automation-resilient.cjs",
-    "text": "Resilient SMS Automation (Omnisend + Twilio) SMS Automation Résilient (Omnisend + Twilio) 98% open rate, 21-32% conversion 98% open rate, 21-32% conversion sms Data Interoperability Conditional Execution abandoned-cart-sms shipping-notifications order-confirmation review-requests"
+    "script_ref": "sms-automation-resilient.cjs",
+    "strategic_intent": "Deliver time-sensitive messages with guaranteed visibility.",
+    "business_outcome": "98% open rate within 3 minutes, ideal for flash sales and reminders.",
+    "marketing_science": "Urgency Marketing (Scarcity + Deadline + Value)",
+    "diagnostic_truth": "SMS is premium real estate; abuse it once and you lose the customer forever.",
+    "systemic_risk": "Carrier filtering can block promotional messages; compliance is critical.",
+    "tenant_id": "agency_internal",
+    "text": "Resilient SMS Automation (Omnisend + Twilio) SMS Automation Résilient (Omnisend + Twilio) 98% open rate, 21-32% conversion 98% open rate, 21-32% conversion sms Data Interoperability Conditional Execution abandoned-cart-sms shipping-notifications order-confirmation review-requests Deliver time-sensitive messages with guaranteed visibility. Urgency Marketing (Scarcity + Deadline + Value) 98% open rate within 3 minutes, ideal for flash sales and reminders. SMS is premium real estate; abuse it once and you lose the customer forever. Carrier filtering can block promotional messages; compliance is critical. Architectural Priority: Structural Foundation"
   },
   {
     "id": "churn-prediction-resilient",
@@ -1500,8 +2058,14 @@
     "frequency_en": "On demand / Batch",
     "frequency_fr": "Sur demande / Batch",
     "agentic_level": 3,
-    "script": "agency/core/churn-prediction-resilient.cjs",
-    "text": "Resilient Churn Prediction (RFM + AI) Prédiction Churn Résilient (RFM + AI) -25% churn rate, +260% at-risk conversion -25% churn rate, +260% conversion at-risk retention Data Interoperability Conditional Execution LLM Reasoning rfm-scoring ai-enhanced-analysis klaviyo-sync batch-processing"
+    "script_ref": "churn-prediction-resilient.cjs",
+    "strategic_intent": "Maximize Customer Lifetime Value through systematic re-engagement.",
+    "business_outcome": "20% increase in repeat purchase rate, 30% reduction in churn.",
+    "marketing_science": "RFM Segmentation (Recency, Frequency, Monetary)",
+    "diagnostic_truth": "Acquiring a new customer costs 5x more than retaining an existing one.",
+    "systemic_risk": "Generic retention campaigns feel impersonal; personalization is mandatory.",
+    "tenant_id": "agency_internal",
+    "text": "Resilient Churn Prediction (RFM + AI) Prédiction Churn Résilient (RFM + AI) -25% churn rate, +260% at-risk conversion -25% churn rate, +260% conversion at-risk retention Data Interoperability Conditional Execution LLM Reasoning rfm-scoring ai-enhanced-analysis klaviyo-sync batch-processing Maximize Customer Lifetime Value through systematic re-engagement. RFM Segmentation (Recency, Frequency, Monetary) 20% increase in repeat purchase rate, 30% reduction in churn. Acquiring a new customer costs 5x more than retaining an existing one. Generic retention campaigns feel impersonal; personalization is mandatory. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "review-request-automation",
@@ -1516,8 +2080,14 @@
     "frequency_en": "7-14 days after delivery",
     "frequency_fr": "7-14 jours après livraison",
     "agentic_level": 2,
-    "script": "agency/core/review-request-automation.cjs",
-    "text": "Automated Review Request (Shopify → Klaviyo) Demande d'Avis Automatisée (Shopify → Klaviyo) +270% reviews, photo incentives +270% reviews, incentives photo Shopify Admin Shopify Admin shopify Data Interoperability Conditional Execution shopify-webhook fulfillment-tracking incentive-tiers klaviyo-sync photo-review-bonus"
+    "script_ref": "review-request-automation.cjs",
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Automated Review Request (Shopify → Klaviyo) Demande d'Avis Automatisée (Shopify → Klaviyo) +270% reviews, photo incentives +270% reviews, incentives photo Shopify Admin Shopify Admin shopify Data Interoperability Conditional Execution shopify-webhook fulfillment-tracking incentive-tiers klaviyo-sync photo-review-bonus Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "at-risk-customer-flow",
@@ -1532,8 +2102,14 @@
     "frequency_en": "Triggered by churn-prediction",
     "frequency_fr": "Déclenché par churn-prediction",
     "agentic_level": 1,
-    "script": "agency/core/at-risk-customer-flow.cjs",
-    "text": "At-Risk Customer Flow (Anti-Churn Intervention) Flow Client At-Risk (Intervention Anti-Churn) +260% at-risk customer conversion +260% conversion clients at-risk retention Data Interoperability 3-email-intervention vip-call-offer escalating-discounts founder-personal-touch klaviyo-sync"
+    "script_ref": "at-risk-customer-flow.cjs",
+    "strategic_intent": "Maximize Customer Lifetime Value through systematic re-engagement.",
+    "business_outcome": "20% increase in repeat purchase rate, 30% reduction in churn.",
+    "marketing_science": "RFM Segmentation (Recency, Frequency, Monetary)",
+    "diagnostic_truth": "Acquiring a new customer costs 5x more than retaining an existing one.",
+    "systemic_risk": "Generic retention campaigns feel impersonal; personalization is mandatory.",
+    "tenant_id": "agency_internal",
+    "text": "At-Risk Customer Flow (Anti-Churn Intervention) Flow Client At-Risk (Intervention Anti-Churn) +260% at-risk customer conversion +260% conversion clients at-risk retention Data Interoperability 3-email-intervention vip-call-offer escalating-discounts founder-personal-touch klaviyo-sync Maximize Customer Lifetime Value through systematic re-engagement. RFM Segmentation (Recency, Frequency, Monetary) 20% increase in repeat purchase rate, 30% reduction in churn. Acquiring a new customer costs 5x more than retaining an existing one. Generic retention campaigns feel impersonal; personalization is mandatory. Architectural Priority: Structural Foundation"
   },
   {
     "id": "price-drop-alerts",
@@ -1548,8 +2124,14 @@
     "frequency_en": "Real-time webhook",
     "frequency_fr": "Webhook temps réel",
     "agentic_level": 1,
-    "script": "agency/core/price-drop-alerts.cjs",
-    "text": "Price Drop Alerts (Wishlist) Alertes Price Drop (Wishlist) 8.8% conversion rate 8.8% taux conversion retention Data Interoperability wishlist-monitoring price-threshold-detection ai-generated-alerts multi-channel-notifications"
+    "script_ref": "price-drop-alerts.cjs",
+    "strategic_intent": "Maximize Customer Lifetime Value through systematic re-engagement.",
+    "business_outcome": "20% increase in repeat purchase rate, 30% reduction in churn.",
+    "marketing_science": "RFM Segmentation (Recency, Frequency, Monetary)",
+    "diagnostic_truth": "Acquiring a new customer costs 5x more than retaining an existing one.",
+    "systemic_risk": "Generic retention campaigns feel impersonal; personalization is mandatory.",
+    "tenant_id": "agency_internal",
+    "text": "Price Drop Alerts (Wishlist) Alertes Price Drop (Wishlist) 8.8% conversion rate 8.8% taux conversion retention Data Interoperability wishlist-monitoring price-threshold-detection ai-generated-alerts multi-channel-notifications Maximize Customer Lifetime Value through systematic re-engagement. RFM Segmentation (Recency, Frequency, Monetary) 20% increase in repeat purchase rate, 30% reduction in churn. Acquiring a new customer costs 5x more than retaining an existing one. Generic retention campaigns feel impersonal; personalization is mandatory. Architectural Priority: Structural Foundation"
   },
   {
     "id": "replenishment-reminder",
@@ -1564,8 +2146,14 @@
     "frequency_en": "Automatic based on consumption",
     "frequency_fr": "Automatique selon consommation",
     "agentic_level": 1,
-    "script": "agency/core/replenishment-reminder.cjs",
-    "text": "Replenishment Reminder Rappel Réapprovisionnement +90% repeat purchase +90% repeat purchase retention Data Interoperability consumption-tracking depletion-prediction ai-personalized-emails multi-channel-notifications"
+    "script_ref": "replenishment-reminder.cjs",
+    "strategic_intent": "Maximize Customer Lifetime Value through systematic re-engagement.",
+    "business_outcome": "20% increase in repeat purchase rate, 30% reduction in churn.",
+    "marketing_science": "RFM Segmentation (Recency, Frequency, Monetary)",
+    "diagnostic_truth": "Acquiring a new customer costs 5x more than retaining an existing one.",
+    "systemic_risk": "Generic retention campaigns feel impersonal; personalization is mandatory.",
+    "tenant_id": "agency_internal",
+    "text": "Replenishment Reminder Rappel Réapprovisionnement +90% repeat purchase +90% repeat purchase retention Data Interoperability consumption-tracking depletion-prediction ai-personalized-emails multi-channel-notifications Maximize Customer Lifetime Value through systematic re-engagement. RFM Segmentation (Recency, Frequency, Monetary) 20% increase in repeat purchase rate, 30% reduction in churn. Acquiring a new customer costs 5x more than retaining an existing one. Generic retention campaigns feel impersonal; personalization is mandatory. Architectural Priority: Structural Foundation"
   },
   {
     "id": "cjdropshipping-automation",
@@ -1580,8 +2168,14 @@
     "frequency_en": "Real-time (webhooks)",
     "frequency_fr": "Temps réel (webhooks)",
     "agentic_level": 2,
-    "script": "agency/core/cjdropshipping-automation.cjs",
-    "text": "CJDropshipping - Supplier Automation CJDropshipping - Automatisation Fournisseur 100% order automation 100% automatisation commandes dropshipping Data Interoperability Conditional Execution product-catalog-sync real-time-inventory order-creation tracking-sync freight-calculation"
+    "script_ref": "cjdropshipping-automation.cjs",
+    "strategic_intent": "Enable zero-inventory e-commerce with automated fulfillment.",
+    "business_outcome": "Launch products with zero upfront inventory investment.",
+    "marketing_science": "Supplier-Customer Bridge (Order → Route → Track → Deliver)",
+    "diagnostic_truth": "Margins are thin; success requires volume or premium positioning.",
+    "systemic_risk": "Supplier reliability directly impacts customer experience and reviews.",
+    "tenant_id": "agency_internal",
+    "text": "CJDropshipping - Supplier Automation CJDropshipping - Automatisation Fournisseur 100% order automation 100% automatisation commandes dropshipping Data Interoperability Conditional Execution product-catalog-sync real-time-inventory order-creation tracking-sync freight-calculation Enable zero-inventory e-commerce with automated fulfillment. Supplier-Customer Bridge (Order → Route → Track → Deliver) Launch products with zero upfront inventory investment. Margins are thin; success requires volume or premium positioning. Supplier reliability directly impacts customer experience and reviews. Architectural Priority: Structural Foundation"
   },
   {
     "id": "bigbuy-supplier-sync",
@@ -1596,8 +2190,14 @@
     "frequency_en": "Real-time + daily sync",
     "frequency_fr": "Temps réel + sync quotidienne",
     "agentic_level": 1,
-    "script": "agency/core/bigbuy-supplier-sync.cjs",
-    "text": "BigBuy - Supplier Sync BigBuy - Synchronisation Fournisseur 100% EU catalog automation 100% automatisation catalogue EU dropshipping Data Interoperability catalog-sync multi-shipping-orders real-time-stock batch-tracking sandbox-mode"
+    "script_ref": "bigbuy-supplier-sync.cjs",
+    "strategic_intent": "Enable zero-inventory e-commerce with automated fulfillment.",
+    "business_outcome": "Launch products with zero upfront inventory investment.",
+    "marketing_science": "Supplier-Customer Bridge (Order → Route → Track → Deliver)",
+    "diagnostic_truth": "Margins are thin; success requires volume or premium positioning.",
+    "systemic_risk": "Supplier reliability directly impacts customer experience and reviews.",
+    "tenant_id": "agency_internal",
+    "text": "BigBuy - Supplier Sync BigBuy - Synchronisation Fournisseur 100% EU catalog automation 100% automatisation catalogue EU dropshipping Data Interoperability catalog-sync multi-shipping-orders real-time-stock batch-tracking sandbox-mode Enable zero-inventory e-commerce with automated fulfillment. Supplier-Customer Bridge (Order → Route → Track → Deliver) Launch products with zero upfront inventory investment. Margins are thin; success requires volume or premium positioning. Supplier reliability directly impacts customer experience and reviews. Architectural Priority: Structural Foundation"
   },
   {
     "id": "dropshipping-order-flow",
@@ -1612,8 +2212,14 @@
     "frequency_en": "Real-time (webhooks)",
     "frequency_fr": "Temps réel (webhooks)",
     "agentic_level": 1,
-    "script": "agency/core/dropshipping-order-flow.cjs",
-    "text": "Dropshipping - Multi-Supplier Orchestration Dropshipping - Orchestration Multi-Fournisseurs Full dropshipping automation Automatisation complète dropshipping dropshipping Data Interoperability multi-supplier-routing sku-based-routing shopify-webhook woocommerce-webhook tracking-sync order-splitting"
+    "script_ref": "dropshipping-order-flow.cjs",
+    "strategic_intent": "Enable zero-inventory e-commerce with automated fulfillment.",
+    "business_outcome": "Launch products with zero upfront inventory investment.",
+    "marketing_science": "Supplier-Customer Bridge (Order → Route → Track → Deliver)",
+    "diagnostic_truth": "Margins are thin; success requires volume or premium positioning.",
+    "systemic_risk": "Supplier reliability directly impacts customer experience and reviews.",
+    "tenant_id": "agency_internal",
+    "text": "Dropshipping - Multi-Supplier Orchestration Dropshipping - Orchestration Multi-Fournisseurs Full dropshipping automation Automatisation complète dropshipping dropshipping Data Interoperability multi-supplier-routing sku-based-routing shopify-webhook woocommerce-webhook tracking-sync order-splitting Enable zero-inventory e-commerce with automated fulfillment. Supplier-Customer Bridge (Order → Route → Track → Deliver) Launch products with zero upfront inventory investment. Margins are thin; success requires volume or premium positioning. Supplier reliability directly impacts customer experience and reviews. Architectural Priority: Structural Foundation"
   },
   {
     "id": "agency-env-check",
@@ -1628,8 +2234,14 @@
     "frequency_en": "",
     "frequency_fr": "",
     "agentic_level": 1,
-    "script": "agency/core/check-env-status.cjs",
-    "text": "Environment Health Check Ensures all agency APIs and keys are valid Checks the status of environment variables and core infrastructure connectivity. agency-ops Data Interoperability"
+    "script_ref": "check-env-status.cjs",
+    "strategic_intent": "Streamline internal agency operations for scalable service delivery.",
+    "business_outcome": "50% reduction in manual tasks, improved client delivery timelines.",
+    "marketing_science": "Operational Excellence (Standardize → Automate → Optimize)",
+    "diagnostic_truth": "Internal inefficiency leaks directly into client pricing and margins.",
+    "systemic_risk": "Over-automation without human oversight can miss edge cases.",
+    "tenant_id": "agency_internal",
+    "text": "Environment Health Check Ensures all agency APIs and keys are valid Checks the status of environment variables and core infrastructure connectivity. agency-ops Data Interoperability Streamline internal agency operations for scalable service delivery. Operational Excellence (Standardize → Automate → Optimize) 50% reduction in manual tasks, improved client delivery timelines. Internal inefficiency leaks directly into client pricing and margins. Over-automation without human oversight can miss edge cases. Architectural Priority: Structural Foundation"
   },
   {
     "id": "agency-api-test",
@@ -1644,8 +2256,14 @@
     "frequency_en": "",
     "frequency_fr": "",
     "agentic_level": 1,
-    "script": "generic/test-all-apis.cjs",
-    "text": "API Connectivity Tester Deep diagnostic of all external integrations Performs a full connectivity test across Shopify, Klaviyo, Apify, and Meta APIs. agency-ops Data Interoperability"
+    "script_ref": "test-all-apis.cjs",
+    "strategic_intent": "Streamline internal agency operations for scalable service delivery.",
+    "business_outcome": "50% reduction in manual tasks, improved client delivery timelines.",
+    "marketing_science": "Operational Excellence (Standardize → Automate → Optimize)",
+    "diagnostic_truth": "Internal inefficiency leaks directly into client pricing and margins.",
+    "systemic_risk": "Over-automation without human oversight can miss edge cases.",
+    "tenant_id": "agency_internal",
+    "text": "API Connectivity Tester Deep diagnostic of all external integrations Performs a full connectivity test across Shopify, Klaviyo, Apify, and Meta APIs. agency-ops Data Interoperability Streamline internal agency operations for scalable service delivery. Operational Excellence (Standardize → Automate → Optimize) 50% reduction in manual tasks, improved client delivery timelines. Internal inefficiency leaks directly into client pricing and margins. Over-automation without human oversight can miss edge cases. Architectural Priority: Structural Foundation"
   },
   {
     "id": "index",
@@ -1660,8 +2278,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "3a-global-mcp/build/index.js",
-    "text": "Index Index Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "index.js",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Index Index Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "content",
@@ -1676,8 +2300,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "3a-sourcing-extension/content.js",
-    "text": "Content Content Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "content.js",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Content Content Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "popup",
@@ -1692,8 +2322,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "3a-sourcing-extension/popup.js",
-    "text": "Popup Popup Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "popup.js",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Popup Popup Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "markets",
@@ -1708,8 +2344,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/config/markets.cjs",
-    "text": "Markets Markets Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "markets.cjs",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Markets Markets Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "lead-gen-scheduler",
@@ -1724,8 +2366,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "agency/lead-gen-scheduler.cjs",
-    "text": "Lead Gen Scheduler Lead Gen Scheduler Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability"
+    "script_ref": "lead-gen-scheduler.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Lead Gen Scheduler Lead Gen Scheduler Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "index-1",
@@ -1740,8 +2388,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "alibaba-mcp/index.js",
-    "text": "Index Index Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "index.js",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Index Index Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "search",
@@ -1756,8 +2410,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "alibaba-mcp/search.js",
-    "text": "Search Search Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "search.js",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Search Search Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "invoice-generator",
@@ -1772,8 +2432,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 4,
-    "script": "invoicing/invoice-generator.cjs",
-    "text": "Invoice Generator Invoice Generator Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy"
+    "script_ref": "invoice-generator.cjs",
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Invoice Generator Invoice Generator Efficient automation Automatisation efficace Lead Generation & Acquisition Lead Generation & Acquisition lead-gen Data Interoperability Conditional Execution LLM Reasoning Interactive Autonomy Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "config-3a-automation",
@@ -1788,8 +2454,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 2,
-    "script": "shared-components/voice-widget/config-3a-automation.js",
-    "text": "Config 3a Automation Config 3a Automation Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution"
+    "script_ref": "config-3a-automation.js",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Config 3a Automation Config 3a Automation Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Conditional Execution Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "config-cinematicads",
@@ -1804,8 +2476,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "shared-components/voice-widget/config-cinematicads.js",
-    "text": "Config Cinematicads Config Cinematicads Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "config-cinematicads.js",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Config Cinematicads Config Cinematicads Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "config.example",
@@ -1820,8 +2498,14 @@
     "frequency_en": "On demand",
     "frequency_fr": "Sur demande",
     "agentic_level": 1,
-    "script": "shared-components/voice-widget/config.example.js",
-    "text": "Config.Example Config.Example Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability"
+    "script_ref": "config.example.js",
+    "strategic_intent": "Create scalable content assets that compound organic reach over time.",
+    "business_outcome": "Reduced content production cost by 60% through AI-assisted generation.",
+    "marketing_science": "Content Flywheel (Create → Distribute → Repurpose)",
+    "diagnostic_truth": "Quality trumps quantity; one viral piece beats 100 mediocre posts.",
+    "systemic_risk": "AI-generated content without human review can damage brand credibility.",
+    "tenant_id": "agency_internal",
+    "text": "Config.Example Config.Example Efficient automation Automatisation efficace Content & Video Contenu & Vidéo content Data Interoperability Create scalable content assets that compound organic reach over time. Content Flywheel (Create → Distribute → Repurpose) Reduced content production cost by 60% through AI-assisted generation. Quality trumps quantity; one viral piece beats 100 mediocre posts. AI-generated content without human review can damage brand credibility. Architectural Priority: Structural Foundation"
   },
   {
     "id": "lead-scoring-agentic",
@@ -1836,8 +2520,14 @@
     "frequency_en": "",
     "frequency_fr": "",
     "agentic_level": 1,
-    "script": null,
-    "text": "Lead Scoring - Agentic (Level 3) Lead Generation & Acquisition Data Interoperability Klaviyo HubSpot"
+    "script_ref": null,
+    "strategic_intent": "Capture and disqualify noise to focus on high-LTV acquisition.",
+    "business_outcome": "Conversion lift by filtering out low-intent traffic before manual touchpoints.",
+    "marketing_science": "AIDA (Attention, Interest, Desire, Action)",
+    "diagnostic_truth": "Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level.",
+    "systemic_risk": "High bounce rates if the landing page experience doesn't match the ad promise.",
+    "tenant_id": "agency_internal",
+    "text": "Lead Scoring - Agentic (Level 3) Lead Generation & Acquisition Data Interoperability Klaviyo HubSpot Capture and disqualify noise to focus on high-LTV acquisition. AIDA (Attention, Interest, Desire, Action) Conversion lift by filtering out low-intent traffic before manual touchpoints. Automation cannot fix a weak offer; traffic must be pre-qualified at the creative level. High bounce rates if the landing page experience doesn't match the ad promise. Architectural Priority: Structural Foundation"
   },
   {
     "id": "flows-audit-agentic",
@@ -1852,8 +2542,14 @@
     "frequency_en": "",
     "frequency_fr": "",
     "agentic_level": 1,
-    "script": null,
-    "text": "Flows Audit - Agentic (Level 3) Email Marketing & Klaviyo Data Interoperability Klaviyo Shopify"
+    "script_ref": null,
+    "strategic_intent": "Counteract Customer Entropy through automated retention loops.",
+    "business_outcome": "Retention pressure management, targeting 25-35% repeat purchase rate.",
+    "marketing_science": "PAS (Pain-Agitate-Solution) for flows",
+    "diagnostic_truth": "List hygiene is more important than list size; unengaged subscribers destroy deliverability.",
+    "systemic_risk": "Over-mailing leads to inbox fatigue and high unsubscribe spikes.",
+    "tenant_id": "agency_internal",
+    "text": "Flows Audit - Agentic (Level 3) Email Marketing & Klaviyo Data Interoperability Klaviyo Shopify Counteract Customer Entropy through automated retention loops. PAS (Pain-Agitate-Solution) for flows Retention pressure management, targeting 25-35% repeat purchase rate. List hygiene is more important than list size; unengaged subscribers destroy deliverability. Over-mailing leads to inbox fatigue and high unsubscribe spikes. Architectural Priority: Structural Foundation"
   },
   {
     "id": "product-enrichment-agentic",
@@ -1868,8 +2564,14 @@
     "frequency_en": "",
     "frequency_fr": "",
     "agentic_level": 1,
-    "script": null,
-    "text": "Product Enrichment - Agentic (Level 3) SEO & Content Data Interoperability Shopify"
+    "script_ref": null,
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "Product Enrichment - Agentic (Level 3) SEO & Content Data Interoperability Shopify Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: Structural Foundation"
   },
   {
     "id": "ga4-budget-optimizer-agentic",
@@ -1884,8 +2586,14 @@
     "frequency_en": "",
     "frequency_fr": "",
     "agentic_level": 4,
-    "script": null,
-    "text": "GA4 Budget Optimizer - Agentic (Level 4) Analytics & Reporting Data Interoperability Autonomous Execution GA4 Google Ads Meta Ads"
+    "script_ref": null,
+    "strategic_intent": "Holistic vision of the business thermodynamic matrix.",
+    "business_outcome": "Identification of profit gaps and resource misallocation.",
+    "marketing_science": "Data-Driven Decision Making",
+    "diagnostic_truth": "Reports are useless without an action plan; data without decision is just noise.",
+    "systemic_risk": "Attribution bias can lead to false positives on channel performance.",
+    "tenant_id": "agency_internal",
+    "text": "GA4 Budget Optimizer - Agentic (Level 4) Analytics & Reporting Data Interoperability Autonomous Execution GA4 Google Ads Meta Ads Holistic vision of the business thermodynamic matrix. Data-Driven Decision Making Identification of profit gaps and resource misallocation. Reports are useless without an action plan; data without decision is just noise. Attribution bias can lead to false positives on channel performance. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "store-audit-agentic",
@@ -1900,8 +2608,14 @@
     "frequency_en": "",
     "frequency_fr": "",
     "agentic_level": 1,
-    "script": null,
-    "text": "Store Audit - Agentic (Level 3) Shopify Admin & Operations Data Interoperability Shopify"
+    "script_ref": null,
+    "strategic_intent": "Maintain a Single Source of Truth (SSOT) across the architectural stack.",
+    "business_outcome": "Zero-latency synchronization between order data and marketing triggers.",
+    "marketing_science": "System Interoperability",
+    "diagnostic_truth": "The system is only as good as the metafield structure; garbage in, garbage out.",
+    "systemic_risk": "Plugin conflicts can break webhook reliability.",
+    "tenant_id": "agency_internal",
+    "text": "Store Audit - Agentic (Level 3) Shopify Admin & Operations Data Interoperability Shopify Maintain a Single Source of Truth (SSOT) across the architectural stack. System Interoperability Zero-latency synchronization between order data and marketing triggers. The system is only as good as the metafield structure; garbage in, garbage out. Plugin conflicts can break webhook reliability. Architectural Priority: Structural Foundation"
   },
   {
     "id": "content-strategist-agentic",
@@ -1916,8 +2630,14 @@
     "frequency_en": "Weekly",
     "frequency_fr": "Hebdo",
     "agentic_level": 4,
-    "script": "agency/core/content-strategist-agentic.cjs",
-    "text": "AI Content Strategist Stratège de Contenu IA SEO opportunity identification Identification des opportunités SEO SEO & Content SEO & Contenu seo Data Interoperability Reasoning Agent Orchestration Autonomous Execution"
+    "script_ref": "content-strategist-agentic.cjs",
+    "strategic_intent": "Build long-term organic leverage and AEO (AI Engine Optimization) visibility.",
+    "business_outcome": "Reduced CPA (Cost Per Acquisition) via compounding organic traffic.",
+    "marketing_science": "Authority Positioning",
+    "diagnostic_truth": "SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing.",
+    "systemic_risk": "Algorithmic updates can penalize over-optimized or thin content.",
+    "tenant_id": "agency_internal",
+    "text": "AI Content Strategist Stratège de Contenu IA SEO opportunity identification Identification des opportunités SEO SEO & Content SEO & Contenu seo Data Interoperability Reasoning Agent Orchestration Autonomous Execution Build long-term organic leverage and AEO (AI Engine Optimization) visibility. Authority Positioning Reduced CPA (Cost Per Acquisition) via compounding organic traffic. SEO is a momentum game, not a switch; results require at least 90-120 days of consistent indexing. Algorithmic updates can penalize over-optimized or thin content. Architectural Priority: High Systemic Impact"
   },
   {
     "id": "harvest-market-trends",
@@ -1932,8 +2652,14 @@
     "frequency_en": "Daily",
     "frequency_fr": "Quotidien",
     "agentic_level": 2,
-    "script": "agency/core/trends-discovery-rss.cjs",
-    "text": "Market Trends Harvesting (RSS) Récolte Tendances Marché (RSS) Unblocked trends discovery Discovery trends sans blocage marketing Data Interoperability"
+    "script_ref": "trends-discovery-rss.cjs",
+    "strategic_intent": "Orchestrate multi-channel campaigns with unified attribution.",
+    "business_outcome": "Holistic view of customer journey across all touchpoints.",
+    "marketing_science": "Full-Funnel Marketing (Awareness → Consideration → Decision)",
+    "diagnostic_truth": "Marketing without measurement is gambling; always close the attribution loop.",
+    "systemic_risk": "Channel silos create blind spots; integration is non-negotiable.",
+    "tenant_id": "agency_internal",
+    "text": "Market Trends Harvesting (RSS) Récolte Tendances Marché (RSS) Unblocked trends discovery Discovery trends sans blocage marketing Data Interoperability Orchestrate multi-channel campaigns with unified attribution. Full-Funnel Marketing (Awareness → Consideration → Decision) Holistic view of customer journey across all touchpoints. Marketing without measurement is gambling; always close the attribution loop. Channel silos create blind spots; integration is non-negotiable. Architectural Priority: Structural Foundation"
   },
   {
     "id": "category-lead-gen",
@@ -2024,5 +2750,45 @@
     "category": "voice-ai",
     "automation_count": 6,
     "text": "Voice AI & Telephony Voice AI & Téléphonie voice-ai 6 automations AI Voice Web Assistant AI Phone Assistant Voice Widget Templates (8 industries) Grok Voice Realtime (WebSocket + TTS) B2B Voice Agent (Sales + Support) Service Knowledge Base (TF-IDF)"
+  },
+  {
+    "id": "policy_refund_policy",
+    "title": "REFUND POLICY",
+    "text": "الرجوع فابور فـ 30 يوم إلا كانت السلعة فكرتونتها. الخلاص كايرجع فـ 5 أيام د الخدمة. remboursement retour reprendre ترجيع خلاص فلوس",
+    "tenant_id": "agency_internal",
+    "metadata": {
+      "type": "policy",
+      "key": "refund_policy"
+    }
+  },
+  {
+    "id": "policy_privacy_policy",
+    "title": "PRIVACY POLICY",
+    "text": "المعطيات ديالكم مأمنة وما كانبيعوهاش للغير. كانحتارمو الـ GDPR. privacy données sécurité خصوصية معطيات",
+    "tenant_id": "agency_internal",
+    "metadata": {
+      "type": "policy",
+      "key": "privacy_policy"
+    }
+  },
+  {
+    "id": "policy_sla_support",
+    "title": "SLA SUPPORT",
+    "text": "الجواب كيكون فـ أقل من 24 ساعة للطلبات العادية، و 4 سوايع للحالات المستعجلة. délai réponse sla support وقت جواب",
+    "tenant_id": "agency_internal",
+    "metadata": {
+      "type": "policy",
+      "key": "sla_support"
+    }
+  },
+  {
+    "id": "policy_warranty_policy",
+    "title": "WARRANTY POLICY",
+    "text": "كاع المنتوجات فيهم عام د الكارانتي على عيوب التصنيع. garantie panne réparation ضمانة خاسر",
+    "tenant_id": "agency_internal",
+    "metadata": {
+      "type": "policy",
+      "key": "warranty_policy"
+    }
   }
 ]

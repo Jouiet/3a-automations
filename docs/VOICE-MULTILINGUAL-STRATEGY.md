@@ -55,6 +55,7 @@ voice-assistant/
 ```
 
 **Avantages:**
+
 - Code unique = maintenabilité x4
 - Ajout langue = 1 fichier JSON (~300 lignes)
 - Auto-détection langue speaker (limitée FR/EN/ES/AR/Darija)
@@ -71,6 +72,7 @@ voice-assistant/
 ### 1.3 Conclusion (Post-Validation)
 
 **Le marché Maroc est DÉBLOQUÉ.** Stack Darija validé empiriquement:
+
 - ✅ TTS: ElevenLabs "Ghizlane" (voix communautaire, fonctionne)
 - ✅ STT: ElevenLabs Scribe v1 (supporte Maghrebi officiellement)
 - ✅ LLM: Grok-4 (comprend et génère du Darija authentique)
@@ -151,12 +153,9 @@ MULTI-TENANT DIRECTOR - Session 166sexies FIX
 
 | Fichier | Chemin | Langues | Statut |
 |---------|--------|---------|--------|
-| `knowledge.json` | `landing-page-hostinger/voice-assistant/` | FR (33) + EN (33) | ✅ |
-| `knowledge_base.json` | `automations/agency/core/` | FR (119 automations) | ✅ |
+| `knowledge_base.json` | `automations/agency/core/` | FR (119 automations) | ✅ **HYBRID V3.0** |
+| `knowledge_base_ary.json` | `automations/agency/core/` | ARY (Darija) | ✅ **HYBRID V3.0** |
 | `dialplus-knowledge-base.json` | `automations/shared-components/` | FR | ✅ |
-| `knowledge-es.json` | - | **N'EXISTE PAS** | ❌ |
-| `knowledge-ar.json` | - | **N'EXISTE PAS** | ❌ |
-| `knowledge-darija.json` | - | **N'EXISTE PAS** | ❌ |
 
 ### 2.5 Credentials Status (Voice-Related)
 
@@ -221,6 +220,7 @@ ELSE
 **ElevenLabs NE SUPPORTE PAS officiellement le Darija en TTS.**
 
 Documentation officielle vérifiée:
+
 - [ElevenLabs Models](https://elevenlabs.io/docs/overview/models): Liste Arabic (ara) générique + Arabic (Saudi Arabia, UAE)
 - **Aucune mention de ar-MA, Moroccan Arabic, ou Darija dans la doc officielle**
 
@@ -234,6 +234,7 @@ Documentation officielle vérifiée:
 | [sawtia.ma](https://sawtia.ma/) | Cloud | ❓ | ❓ Non testé | ❓ | À tester |
 
 **Voix Ghizlane - Détails Importants:**
+
 - Voice ID: `OfGMGmhShO8iL9jCkXy8`
 - Type: **Community Voice** (créée par utilisateur, PAS officielle ElevenLabs)
 - Description: "Natural, dynamic, expressive voice in Darija (Moroccan Arabic)"
@@ -284,6 +285,7 @@ Documentation officielle vérifiée:
 #### 4.2.3 Décision STT Darija
 
 **Choix: ElevenLabs Scribe**
+
 - ✅ Support Maghrebi OFFICIEL (Moroccan, Algerian, Tunisian)
 - Avantage: Même provider que TTS, billing unifié
 - Backup: Whisper fine-tuned self-hosted
@@ -597,60 +599,60 @@ const LANGUAGE_FALLBACKS = {
 
 | Provider | Lien | Dernière vérification |
 |----------|------|----------------------|
-| xAI Grok Voice | https://docs.x.ai/docs/guides/voice | 26/01/2026 |
-| ElevenLabs Languages | https://help.elevenlabs.io/hc/en-us/articles/13313366263441 | 26/01/2026 |
-| ElevenLabs Scribe | https://elevenlabs.io/speech-to-text/arabic | 26/01/2026 |
-| Mistral Saba | https://mistral.ai/news/mistral-saba | 26/01/2026 |
-| Google Cloud TTS | https://cloud.google.com/text-to-speech/docs/list-voices-and-types | 26/01/2026 |
-| Azure Speech | https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support | 26/01/2026 |
-| Meta SeamlessM4T | https://github.com/facebookresearch/seamless_communication | 26/01/2026 |
+| xAI Grok Voice | <https://docs.x.ai/docs/guides/voice> | 26/01/2026 |
+| ElevenLabs Languages | <https://help.elevenlabs.io/hc/en-us/articles/13313366263441> | 26/01/2026 |
+| ElevenLabs Scribe | <https://elevenlabs.io/speech-to-text/arabic> | 26/01/2026 |
+| Mistral Saba | <https://mistral.ai/news/mistral-saba> | 26/01/2026 |
+| Google Cloud TTS | <https://cloud.google.com/text-to-speech/docs/list-voices-and-types> | 26/01/2026 |
+| Azure Speech | <https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support> | 26/01/2026 |
+| Meta SeamlessM4T | <https://github.com/facebookresearch/seamless_communication> | 26/01/2026 |
 
 ### 10.2 Modèles Open-Source Darija
 
 | Modèle | Type | Lien HuggingFace |
 |--------|------|------------------|
-| DVoice Darija | STT | https://huggingface.co/speechbrain/asr-wav2vec2-dvoice-darija |
-| Whisper Large v3 Turbo Darija | STT | https://huggingface.co/anaszil/whisper-large-v3-turbo-darija |
-| Whisper Darija Finetuned | STT | https://huggingface.co/TaloCreations/whisper-darija-finetuned |
-| Seamless Darija-English | Translation | https://huggingface.co/AnasAber/seamless-darija-eng |
-| Atlas-Chat-2B | LLM | https://huggingface.co/MBZUAI-Paris/Atlas-Chat-2B |
-| DarijaBERT | NLU | https://huggingface.co/SI2M-Lab/DarijaBERT |
-| DarijaTTS-v0.1-500M | TTS | https://model.aibase.com/models/details/1915692888522121218 |
-| SpeechT5 Darija | TTS | https://huggingface.co/spaces/HAMMALE/speecht5-darija |
-| Moroccan Darija Wiki Audio | Dataset | https://huggingface.co/datasets/atlasia/Moroccan-Darija-Wiki-Audio-Dataset |
-| Moroccan Darija Datasets List | Datasets | https://github.com/nainiayoub/moroccan-darija-datasets |
+| DVoice Darija | STT | <https://huggingface.co/speechbrain/asr-wav2vec2-dvoice-darija> |
+| Whisper Large v3 Turbo Darija | STT | <https://huggingface.co/anaszil/whisper-large-v3-turbo-darija> |
+| Whisper Darija Finetuned | STT | <https://huggingface.co/TaloCreations/whisper-darija-finetuned> |
+| Seamless Darija-English | Translation | <https://huggingface.co/AnasAber/seamless-darija-eng> |
+| Atlas-Chat-2B | LLM | <https://huggingface.co/MBZUAI-Paris/Atlas-Chat-2B> |
+| DarijaBERT | NLU | <https://huggingface.co/SI2M-Lab/DarijaBERT> |
+| DarijaTTS-v0.1-500M | TTS | <https://model.aibase.com/models/details/1915692888522121218> |
+| SpeechT5 Darija | TTS | <https://huggingface.co/spaces/HAMMALE/speecht5-darija> |
+| Moroccan Darija Wiki Audio | Dataset | <https://huggingface.co/datasets/atlasia/Moroccan-Darija-Wiki-Audio-Dataset> |
+| Moroccan Darija Datasets List | Datasets | <https://github.com/nainiayoub/moroccan-darija-datasets> |
 
 ### 10.3 Recherche Académique
 
 | Paper | Année | Lien |
 |-------|-------|------|
-| Moroccan Darija TTS (FastSpeech 2) | 2025 | https://link.springer.com/chapter/10.1007/978-3-032-07718-9_11 |
-| DARIJA-C Corpus | 2023 | https://ieeexplore.ieee.org/document/10085164/ |
-| Darija ASR Survey | 2021 | https://ieeexplore.ieee.org/document/9520690/ |
-| SeamlessM4T | 2023 | https://arxiv.org/abs/2308.11596 |
-| Habibi: Arabic Dialect Speech Synthesis | 2025 | https://arxiv.org/html/2601.13802 |
-| Whisper Arabic N-Shot Benchmarking | 2023 | https://www.isca-archive.org/interspeech_2023/talafha23_interspeech.pdf |
-| Context-Aware Whisper Arabic | 2025 | https://arxiv.org/abs/2511.18774 |
-| Darija→Classical Arabic Speech Translation | 2025 | https://ieeexplore.ieee.org/document/11009145/ |
+| Moroccan Darija TTS (FastSpeech 2) | 2025 | <https://link.springer.com/chapter/10.1007/978-3-032-07718-9_11> |
+| DARIJA-C Corpus | 2023 | <https://ieeexplore.ieee.org/document/10085164/> |
+| Darija ASR Survey | 2021 | <https://ieeexplore.ieee.org/document/9520690/> |
+| SeamlessM4T | 2023 | <https://arxiv.org/abs/2308.11596> |
+| Habibi: Arabic Dialect Speech Synthesis | 2025 | <https://arxiv.org/html/2601.13802> |
+| Whisper Arabic N-Shot Benchmarking | 2023 | <https://www.isca-archive.org/interspeech_2023/talafha23_interspeech.pdf> |
+| Context-Aware Whisper Arabic | 2025 | <https://arxiv.org/abs/2511.18774> |
+| Darija→Classical Arabic Speech Translation | 2025 | <https://ieeexplore.ieee.org/document/11009145/> |
 
 ### 10.4 Actualités Partenariat Mistral × Maroc
 
 | Source | Date | Lien |
 |--------|------|------|
-| Morocco World News | Jan 2026 | https://www.moroccoworldnews.com/2026/01/274777/morocco-moves-toward-local-ai-with-darija-amazigh-language-models |
-| Ecofin Agency | Jan 2026 | https://www.ecofinagency.com/news-digital/1601-51978-ai-made-in-morocco-mistral-ai-partners-with-mtnra-on-cultural-linguistic-ai-models |
-| TechCrunch (Mistral Saba) | Feb 2025 | https://techcrunch.com/2025/02/17/mistral-releases-regional-model-focused-on-arabic-language-and-culture/ |
-| Medium (Darija SLMs) | Sep 2025 | https://medium.com/@ahmed.hafdi.contact/why-small-language-models-in-darija-are-the-future-of-moroccan-ai-fa8a433bb173 |
+| Morocco World News | Jan 2026 | <https://www.moroccoworldnews.com/2026/01/274777/morocco-moves-toward-local-ai-with-darija-amazigh-language-models> |
+| Ecofin Agency | Jan 2026 | <https://www.ecofinagency.com/news-digital/1601-51978-ai-made-in-morocco-mistral-ai-partners-with-mtnra-on-cultural-linguistic-ai-models> |
+| TechCrunch (Mistral Saba) | Feb 2025 | <https://techcrunch.com/2025/02/17/mistral-releases-regional-model-focused-on-arabic-language-and-culture/> |
+| Medium (Darija SLMs) | Sep 2025 | <https://medium.com/@ahmed.hafdi.contact/why-small-language-models-in-darija-are-the-future-of-moroccan-ai-fa8a433bb173> |
 
 ### 10.5 Services Commerciaux Darija
 
 | Service | Type | Lien |
 |---------|------|------|
-| ElevenLabs Ghizlane Voice | TTS | https://json2video.com/ai-voices/elevenlabs/voices/OfGMGmhShO8iL9jCkXy8/ |
-| SpeechGen ar-MA | TTS | https://speechgen.io/en/tts-arabic-morocco/ |
-| voices.ma | Human VO | https://voices.ma/ |
-| sawtia.ma | TTS (?) | https://sawtia.ma/ |
-| TranslatorDarija | Translation | https://translatordarija.com/ |
+| ElevenLabs Ghizlane Voice | TTS | <https://json2video.com/ai-voices/elevenlabs/voices/OfGMGmhShO8iL9jCkXy8/> |
+| SpeechGen ar-MA | TTS | <https://speechgen.io/en/tts-arabic-morocco/> |
+| voices.ma | Human VO | <https://voices.ma/> |
+| sawtia.ma | TTS (?) | <https://sawtia.ma/> |
+| TranslatorDarija | Translation | <https://translatordarija.com/> |
 
 ---
 

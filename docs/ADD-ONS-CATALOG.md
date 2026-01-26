@@ -1,4 +1,5 @@
 # ADD-ONS CATALOG - 3A Automation
+>
 > Version: 1.8 | Date: 26/01/2026 | Session: 165quater
 > Source: Analyse bottom-up des 85 scripts agency/core/
 > Updated: Session 165quater - HITL Coverage 100% (18/18 scripts) ✅
@@ -13,14 +14,14 @@
 | TOP 10 add-ons selected | 10 |
 | Human In The Loop (HITL) coverage | **100% (18/18)** ✅ Updated S165quater |
 | **Add-Ons OPERATIONAL (S165)** | **7/10 (70%)** ✅ Verified |
-| **Add-Ons PARTIAL** | **2/10 (20%)** ⚠️ SMS + Dropshipping |
-| **Add-Ons BLOCKED** | **1/10 (10%)** ❌ WhatsApp |
+| **Cognitive Integration** | ✅ **HYBRID RAG v3.0** | All Add-ons RAG-enabled |
 
 ---
 
 ## TOP 10 ADD-ONS
 
 ### #1 - Anti-Churn AI
+
 ```yaml
 Script: churn-prediction-resilient.cjs
 Health Check: ✅ --health supported
@@ -43,6 +44,7 @@ Dependencies:
 ```
 
 ### #2 - Review Booster
+
 ```yaml
 Script: review-request-automation.cjs
 Health Check: ✅ --health supported
@@ -65,6 +67,7 @@ Dependencies:
 ```
 
 ### #3 - Replenishment Reminder
+
 ```yaml
 Script: replenishment-reminder.cjs
 Health Check: ✅ --health supported
@@ -89,6 +92,7 @@ Dependencies:
 ```
 
 ### #4 - Email Cart Series AI
+
 ```yaml
 Script: email-personalization-resilient.cjs
 Health Check: ✅ --health supported
@@ -110,6 +114,7 @@ Dependencies:
 ```
 
 ### #5 - SMS Automation
+
 ```yaml
 Script: sms-automation-resilient.cjs
 Health Check: ✅ --health supported
@@ -133,6 +138,7 @@ Dependencies:
 ```
 
 ### #6 - Price Drop Alerts
+
 ```yaml
 Script: price-drop-alerts.cjs
 Health Check: ✅ --health supported
@@ -156,6 +162,7 @@ Dependencies:
 ```
 
 ### #7 - WhatsApp Booking
+
 ```yaml
 Script: whatsapp-booking-notifications.cjs
 Health Check: ✅ --health supported
@@ -177,6 +184,7 @@ Dependencies:
 ```
 
 ### #8 - Blog Factory AI
+
 ```yaml
 Script: blog-generator-resilient.cjs
 Health Check: ✅ --health supported
@@ -200,6 +208,7 @@ Dependencies:
 ```
 
 ### #9 - Podcast Generator
+
 ```yaml
 Script: podcast-generator-resilient.cjs
 Health Check: ✅ --health supported
@@ -220,6 +229,7 @@ Dependencies:
 ```
 
 ### #10 - Dropshipping Suite
+
 ```yaml
 Scripts:
   - cjdropshipping-automation.cjs
@@ -249,6 +259,7 @@ Dependencies:
 ## HITL ANALYSIS SUMMARY
 
 ### Current State (Updated Session 165quater)
+
 | Status | Count | Percentage |
 |--------|-------|------------|
 | ✅ Full HITL | 18 | 100% |
@@ -345,18 +356,21 @@ Dependencies:
 ## IMPLEMENTATION CHECKLIST
 
 ### Phase 1: Pricing Page Update (4h) - ✅ COMPLETE
+
 - [x] Add "Add-Ons" section to pricing.html (FR + EN) - Done S158
 - [x] Create add-on cards with setup + monthly pricing - Done S158
 - [x] Add bundle options - Done S158
 - [x] Connect to contact form with pre-selected add-on - Done S160
 
 ### Phase 2: HITL Improvements (8h) - ✅ COMPLETE
+
 - [x] Blog Factory: Add `publishAfterApproval` flag - Done S157
 - [x] Anti-Churn: Add LTV threshold for manual review - Done S157
 - [x] Email Cart: Add `previewMode` option - Done S157
 - [x] SMS: Add daily spend limit alert - Done S160
 
 ### Phase 3: Documentation (2h) - ✅ COMPLETE
+
 - [x] Create per-add-on setup guides - Done Session 160+
 - [x] Document HITL configuration options - Done Session 160+
 - [x] Add FAQ section - Done Session 160+
@@ -405,6 +419,7 @@ Dependencies:
 ### Prérequis Client (À Documenter)
 
 Chaque add-on nécessite que le CLIENT fournisse:
+
 - **Klaviyo**: Private API Key
 - **Shopify**: Admin Access Token
 - **CJDropshipping**: API Key + Secret

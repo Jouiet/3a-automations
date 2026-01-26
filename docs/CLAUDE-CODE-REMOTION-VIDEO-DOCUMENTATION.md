@@ -54,6 +54,8 @@ L'intégration permet à Claude Code de fonctionner comme un **"Motion Designer"
 
 **VERDICT:** Implémentation **100% FONCTIONNELLE** - 7 compositions, build vérifié (S166).
 
+- ✅ **`remotion-rag-scripting`** - Uses Hybrid RAG v3.0 to generate data-driven video scripts
+
 ---
 
 ## 2. REMOTION: LE FRAMEWORK
@@ -774,6 +776,7 @@ const { url } = await generateImage(
 ### 11.4 Skill Non Installé - Impact
 
 Sans `remotion-best-practices`, Claude peut générer:
+
 - ❌ Code buggy ou incorrect
 - ❌ Mauvaise utilisation de `interpolate()`
 - ❌ Oubli de `extrapolateLeft/Right: 'clamp'`
@@ -856,39 +859,39 @@ useEffect(() => {}); // NE FONCTIONNE PAS comme attendu
 
 | Source | URL | Vérifié |
 |--------|-----|---------|
-| Remotion Official | https://www.remotion.dev/ | ✅ |
-| Remotion Docs | https://www.remotion.dev/docs/ | ✅ |
-| Remotion GitHub | https://github.com/remotion-dev/remotion | ✅ |
-| Remotion AI Skills | https://www.remotion.dev/docs/ai/skills | ✅ |
-| Claude Code Guide | https://www.remotion.dev/docs/ai/claude-code | ✅ |
-| Remotion License | https://www.remotion.dev/docs/license | ✅ |
+| Remotion Official | <https://www.remotion.dev/> | ✅ |
+| Remotion Docs | <https://www.remotion.dev/docs/> | ✅ |
+| Remotion GitHub | <https://github.com/remotion-dev/remotion> | ✅ |
+| Remotion AI Skills | <https://www.remotion.dev/docs/ai/skills> | ✅ |
+| Claude Code Guide | <https://www.remotion.dev/docs/ai/claude-code> | ✅ |
+| Remotion License | <https://www.remotion.dev/docs/license> | ✅ |
 
 ### 13.2 Skills Ecosystem
 
 | Source | URL | Vérifié |
 |--------|-----|---------|
-| skills.sh | https://skills.sh/ | ✅ |
-| add-skill CLI | https://github.com/vercel-labs/add-skill | ✅ |
-| remotion-best-practices | https://skills.sh/remotion-dev/skills/remotion-best-practices | ✅ |
-| Vercel Agent Skills | https://github.com/vercel-labs/agent-skills | ✅ |
+| skills.sh | <https://skills.sh/> | ✅ |
+| add-skill CLI | <https://github.com/vercel-labs/add-skill> | ✅ |
+| remotion-best-practices | <https://skills.sh/remotion-dev/skills/remotion-best-practices> | ✅ |
+| Vercel Agent Skills | <https://github.com/vercel-labs/agent-skills> | ✅ |
 
 ### 13.3 Articles et Guides
 
 | Article | URL | Date |
 |---------|-----|------|
-| aibase.com - Remotion Skills | https://news.aibase.com/news/24827 | Jan 2026 |
-| Medium - Skills.sh Launch | https://jpcaparas.medium.com/ | Jan 2026 |
-| DEV Community - Claude+Remotion | https://dev.to/mayu2008/new-clauderemotion-to-create-amazing-videos-using-ai-37bp | 2026 |
-| Apidog - Claude Code Remotion | https://apidog.com/blog/claude-code-remotion/ | 2026 |
+| aibase.com - Remotion Skills | <https://news.aibase.com/news/24827> | Jan 2026 |
+| Medium - Skills.sh Launch | <https://jpcaparas.medium.com/> | Jan 2026 |
+| DEV Community - Claude+Remotion | <https://dev.to/mayu2008/new-clauderemotion-to-create-amazing-videos-using-ai-37bp> | 2026 |
+| Apidog - Claude Code Remotion | <https://apidog.com/blog/claude-code-remotion/> | 2026 |
 
 ### 13.4 Encoding & Technical
 
 | Source | URL |
 |--------|-----|
-| Encoding Guide | https://www.remotion.dev/docs/encoding |
-| Quality Guide | https://www.remotion.dev/docs/quality |
-| Hardware Acceleration | https://www.remotion.dev/docs/hardware-acceleration |
-| CLI Reference | https://www.remotion.dev/docs/cli/render |
+| Encoding Guide | <https://www.remotion.dev/docs/encoding> |
+| Quality Guide | <https://www.remotion.dev/docs/quality> |
+| Hardware Acceleration | <https://www.remotion.dev/docs/hardware-acceleration> |
+| CLI Reference | <https://www.remotion.dev/docs/cli/render> |
 
 ---
 

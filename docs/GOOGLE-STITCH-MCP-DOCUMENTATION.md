@@ -52,12 +52,14 @@ Stitch MCP est l'exposition du service Google Stitch via le **Model Context Prot
 **VERDICT:** ✅ **STITCH WORKFLOW END-TO-END VALIDÉ** (generate → download → commit)
 
 **Wrapper Script:** `automations/agency/core/stitch-api.cjs` (279 lignes)
-**Projet Actif:** `705686758968107418` (URL: https://stitch.withgoogle.com/projects/705686758968107418)
+**Projet Actif:** `705686758968107418` (URL: <https://stitch.withgoogle.com/projects/705686758968107418>)
 
 **Agent Skills installés (S160):**
+
 - ✅ `stitch-design-md` - Génère DESIGN.md depuis Stitch
 - ✅ `stitch-react-components` - Convertit Stitch → React
 - ✅ `stitch-loop` - Boucle autonome de construction site
+- ✅ **`stitch-rag-context`** - Retrieves brand facts from Hybrid RAG v3.0 for UI consistency
 
 ---
 
@@ -79,6 +81,7 @@ Stitch MCP est l'exposition du service Google Stitch via le **Model Context Prot
 > — **Steren Giannini**, Product Management Director, Google Cloud
 
 Services Google avec MCP (Décembre 2025):
+
 - Google Maps
 - Google BigQuery
 - Google Compute Engine
@@ -302,6 +305,7 @@ gcloud auth list
 ```
 
 **Problèmes identifiés:**
+
 1. ❌ `STITCH_ACCESS_TOKEN` non défini
 2. ❌ `GOOGLE_CLOUD_PROJECT` non défini
 3. ⚠️ Token HTTP direct expire (~1h) - pas de refresh automatique
@@ -324,6 +328,7 @@ gcloud auth list
 ```
 
 **Avantages du proxy:**
+
 - ✅ Token refresh automatique
 - ✅ Gestion OAuth flow complète
 - ✅ Debug logging disponible (`--debug`)
@@ -367,6 +372,7 @@ npx @_davideast/stitch-mcp init --client claude-code -y
 ```
 
 Cette commande effectue automatiquement:
+
 1. Détection/installation Google Cloud CLI
 2. Authentification OAuth interactive
 3. Setup Application Default Credentials
@@ -436,6 +442,7 @@ npx @_davideast/stitch-mcp doctor --verbose
 | Wrapper Script | ✅ Créé | `stitch-api.cjs --health` → OK |
 
 **Commandes disponibles:**
+
 ```bash
 node automations/agency/core/stitch-api.cjs --health          # Vérifier API
 node automations/agency/core/stitch-api.cjs list              # Lister projets
@@ -699,6 +706,7 @@ npx add-skill google-labs-code/stitch-skills --skill react:components --global
 ```
 
 **Ce qui EXISTE (résumé complet):**
+
 - ✅ `design-md` (via google-labs-code/stitch-skills)
 - ✅ `react-components` (via google-labs-code/stitch-skills)
 - ✅ `extract_design_context` (via stitch-mcp npm - Kargatharaakash)
@@ -800,33 +808,33 @@ npx @_davideast/stitch-mcp init --client claude-code -y
 
 | Source | URL | Vérifié |
 |--------|-----|---------|
-| Google Stitch Docs | https://stitch.withgoogle.com/docs/mcp/setup | ✅ |
-| Gemini CLI Extension | https://github.com/gemini-cli-extensions/stitch | ✅ |
-| Google ADK MCP Docs | https://google.github.io/adk-docs/mcp/ | ⚠️ Timeout (25/01/2026) |
+| Google Stitch Docs | <https://stitch.withgoogle.com/docs/mcp/setup> | ✅ |
+| Gemini CLI Extension | <https://github.com/gemini-cli-extensions/stitch> | ✅ |
+| Google ADK MCP Docs | <https://google.github.io/adk-docs/mcp/> | ⚠️ Timeout (25/01/2026) |
 
 ### 13.2 Packages NPM et Agent Skills
 
 | Package/Skill | URL | Auteur | Vérifié |
 |---------------|-----|--------|---------|
-| @_davideast/stitch-mcp | https://github.com/davideast/stitch-mcp | David East | ✅ |
-| stitch-mcp | https://github.com/Kargatharaakash/stitch-mcp | Kargatharaakash | ✅ |
-| stitch-mcp-auto | https://github.com/GreenSheep01201/stitch-mcp-auto | GreenSheep01201 | ✅ |
-| **stitch-skills** (Agent Skills) | https://github.com/google-labs-code/stitch-skills | David East, Dion Almaer, Jed Borovik | ✅ (774 stars) |
+| @_davideast/stitch-mcp | <https://github.com/davideast/stitch-mcp> | David East | ✅ |
+| stitch-mcp | <https://github.com/Kargatharaakash/stitch-mcp> | Kargatharaakash | ✅ |
+| stitch-mcp-auto | <https://github.com/GreenSheep01201/stitch-mcp-auto> | GreenSheep01201 | ✅ |
+| **stitch-skills** (Agent Skills) | <https://github.com/google-labs-code/stitch-skills> | David East, Dion Almaer, Jed Borovik | ✅ (774 stars) |
 
 ### 13.3 Articles et Guides
 
 | Article | URL | Date |
 |---------|-----|------|
-| TechCrunch - Google MCP Strategy | https://techcrunch.com/2025/12/10/google-is-going-all-in-on-mcp-servers-agent-ready-by-design/ | Dec 2025 |
-| DEV Community - Designer Flow | https://dev.to/kargatharaaakash/the-designer-flow-for-ai-why-i-built-a-bridge-to-google-stitch-423k | 2025 |
-| ALM Corp - Complete Guide | https://almcorp.com/blog/google-stitch-complete-guide-ai-ui-design-tool-2026/ | 2026 |
+| TechCrunch - Google MCP Strategy | <https://techcrunch.com/2025/12/10/google-is-going-all-in-on-mcp-servers-agent-ready-by-design/> | Dec 2025 |
+| DEV Community - Designer Flow | <https://dev.to/kargatharaaakash/the-designer-flow-for-ai-why-i-built-a-bridge-to-google-stitch-423k> | 2025 |
+| ALM Corp - Complete Guide | <https://almcorp.com/blog/google-stitch-complete-guide-ai-ui-design-tool-2026/> | 2026 |
 
 ### 13.4 Glama MCP Registry
 
 | Entry | URL |
 |-------|-----|
-| Stitch MCP Auto | https://glama.ai/mcp/servers/@GreenSheep01201/stitch-mcp-auto |
-| Auto Stitch MCP | https://glama.ai/mcp/servers/@GreenSheep01201/auto-stitch-mcp |
+| Stitch MCP Auto | <https://glama.ai/mcp/servers/@GreenSheep01201/stitch-mcp-auto> |
+| Auto Stitch MCP | <https://glama.ai/mcp/servers/@GreenSheep01201/auto-stitch-mcp> |
 
 ---
 
@@ -940,6 +948,7 @@ Typography: Bold headlines, clean body text
 ### 14.3 Optimized Prompts by Section Type
 
 #### HERO SECTION
+
 ```
 Design a hero section for 3A Automation, an AI Automation Agency.
 
@@ -958,6 +967,7 @@ subtle particle animations in background.
 ```
 
 #### SERVICES/FEATURES SECTION
+
 ```
 Design a services grid for 3A Automation showing 6 AI automation categories.
 
@@ -978,6 +988,7 @@ Grid: 3 columns desktop, 2 tablet, 1 mobile.
 ```
 
 #### PRICING SECTION
+
 ```
 Design a SaaS pricing page for 3A Automation with 3 tiers.
 
@@ -995,6 +1006,7 @@ annual toggle with 20% discount, CTA buttons with hover glow.
 ```
 
 #### TESTIMONIALS SECTION
+
 ```
 Design a testimonials carousel for 3A Automation.
 
@@ -1014,6 +1026,7 @@ smooth scroll snap, fade gradient on edges.
 ```
 
 #### FAQ SECTION
+
 ```
 Design an FAQ accordion for 3A Automation.
 
@@ -1036,6 +1049,7 @@ smooth expand animation, cyan accent on active item.
 ```
 
 #### CTA SECTION
+
 ```
 Design a call-to-action section for 3A Automation.
 
@@ -1076,6 +1090,7 @@ floating glassmorphism card containing CTAs.
 **Total generated:** 993 lines HTML, 4 components
 
 **Services Grid Validation (Session 162bis):**
+
 - ✅ Purple #8B5CF6 for Email Marketing
 - ✅ #95bf47 for Shopify
 - ✅ Green #10B981 for SEO & Retention
@@ -1111,6 +1126,7 @@ node automations/agency/core/stitch-to-3a-css.cjs --health
 ```
 
 **Converted Files (Session 163):**
+
 - `3a-hero-ai-agency.html`
 - `3a-pricing-dark-glassmorphism-1.html`
 - `3a-pricing-dark-glassmorphism-2.html`
@@ -1125,6 +1141,7 @@ node automations/agency/core/stitch-to-3a-css.cjs --health
 **Problème initial:** Claude Code MCP nécessite DCR (Dynamic Client Registration) mais Google OAuth ne le supporte pas.
 
 **Solution:** Wrapper script `stitch-api.cjs` qui:
+
 1. Utilise gcloud ADC pour obtenir un token d'accès
 2. Appelle directement l'endpoint MCP `stitch.googleapis.com/mcp`
 3. Envoie des requêtes JSON-RPC 2.0 avec le header `x-goog-user-project`
@@ -1168,6 +1185,7 @@ d4985ad feat(stitch): Add Stitch API wrapper using MCP protocol
 ### Plan Actionnable Session 162
 
 **COMPLÉTÉ:**
+
 - ✅ gcloud ADC configuré dans `~/.stitch-mcp/config/`
 - ✅ Wrapper script créé et testé
 - ✅ Screens générés avec succès

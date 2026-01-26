@@ -1,0 +1,48 @@
+{
+    "refund_policy": {
+        "text": "الرجوع فابور فـ 30 يوم إلا كانت السلعة فكرتونتها. الخلاص كايرجع فـ 5 أيام د الخدمة.",
+        "keywords": [
+            "remboursement",
+            "retour",
+            "reprendre",
+            "ترجيع",
+            "خلاص",
+            "فلوس"
+        ],
+        "tenant_id": "agency_internal"
+    },
+    "privacy_policy": {
+        "text": "المعطيات ديالكم مأمنة وما كانبيعوهاش للغير. كانحتارمو الـ GDPR.",
+        "keywords": [
+            "privacy",
+            "données",
+            "sécurité",
+            "خصوصية",
+            "معطيات"
+        ],
+        "tenant_id": "agency_internal"
+    },
+    "sla_support": {
+        "text": "الجواب كيكون فـ أقل من 24 ساعة للطلبات العادية، و 4 سوايع للحالات المستعجلة.",
+        "keywords": [
+            "délai",
+            "réponse",
+            "sla",
+            "support",
+            "وقت",
+            "جواب"
+        ],
+        "tenant_id": "agency_internal"
+    },
+    "warranty_policy": {
+        "text": "كاع المنتوجات فيهم عام د الكارانتي على عيوب التصنيع.",
+        "keywords": [
+            "garantie",
+            "panne",
+            "réparation",
+            "ضمانة",
+            "خاسر"
+        ],
+        "tenant_id": "agency_internal"
+    }
+}

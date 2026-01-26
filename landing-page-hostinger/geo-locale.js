@@ -18,19 +18,19 @@
 
     // Country to locale mapping
     locales: {
-      // Maghreb → French + MAD
+      // 1. Morocco -> French + MAD
       'MA': { lang: 'fr', currency: 'MAD', region: 'maghreb' },
+
+      // 2. Algeria, Tunisia, Europe -> French + EUR
       'DZ': { lang: 'fr', currency: 'EUR', region: 'maghreb' },
       'TN': { lang: 'fr', currency: 'EUR', region: 'maghreb' },
 
-      // French-speaking Europe → French + EUR
+      // Europe
       'FR': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'BE': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'CH': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'LU': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'MC': { lang: 'fr', currency: 'EUR', region: 'europe' },
-
-      // Other Europe → French + EUR
       'DE': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'AT': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'IT': { lang: 'fr', currency: 'EUR', region: 'europe' },
@@ -57,14 +57,23 @@
       'DK': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'NO': { lang: 'fr', currency: 'EUR', region: 'europe' },
 
-      // UK → English + USD
+      // 3. GCC/MENA -> Arabic + USD
+      'SA': { lang: 'ar', currency: 'USD', region: 'mena' }, // Saudi Arabia
+      'AE': { lang: 'ar', currency: 'USD', region: 'mena' }, // UAE
+      'QA': { lang: 'ar', currency: 'USD', region: 'mena' }, // Qatar
+      'KW': { lang: 'ar', currency: 'USD', region: 'mena' }, // Kuwait
+      'OM': { lang: 'ar', currency: 'USD', region: 'mena' }, // Oman
+      'BH': { lang: 'ar', currency: 'USD', region: 'mena' }, // Bahrain
+      'EG': { lang: 'ar', currency: 'USD', region: 'mena' }, // Egypt
+      'JO': { lang: 'ar', currency: 'USD', region: 'mena' }, // Jordan
+      'LB': { lang: 'ar', currency: 'USD', region: 'mena' }, // Lebanon
+
+      // 4. International -> English + USD
       'GB': { lang: 'en', currency: 'USD', region: 'international' },
-
-      // Canada → English + USD
       'CA': { lang: 'en', currency: 'USD', region: 'international' },
-
-      // Default: International → English + USD
       'US': { lang: 'en', currency: 'USD', region: 'international' },
+      'AU': { lang: 'en', currency: 'USD', region: 'international' },
+      'NZ': { lang: 'en', currency: 'USD', region: 'international' },
     },
 
     // Default locale for unknown countries
