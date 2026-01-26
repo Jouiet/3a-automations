@@ -1,1421 +1,132 @@
 # 3A Automation
->
-> Version: 99.0 | 26/01/2026 | Session 165quater - **CSS Consolidation + Validation**
+> Version: 101.0 | 26/01/2026 | Session 165quater - HITL 100% Coverage Complete
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## SESSION 165quater - CSS Consolidation (26/01/2026)
-
-### CSS Debt Reduction
-
-| Metric | Before | After | Change |
-| :--- | :--- | :--- | :--- |
-| Validator Warnings | 78 | **75** | -3 |
-| CSS Duplicates | 23 | **22** | -1 |
-| CSS Version | v=84.0 | **v=86.0** | ✅ (pre-commit auto-bump) |
-
-### Fixes Applied
-
-| Fix | Detail |
-| :--- | :--- |
-| `.telemetry-hub` duplicate | Removed first definition (lines 654-691), kept complete version |
-| CSS version sync | 69 HTML files updated to v=85.0 |
-
-### Telemetry Verification
-- ✅ CSS prepared for dashboards (styles.css)
-- ✅ JS prepared for dashboards (telemetry.js)
-- ✅ **NOT rendered on homepage** - element doesn't exist in any HTML
-- ✅ Will activate when `<div id="telemetry-hub">` added to dashboard
-
-### GA4 Sensor Status (Verified)
-```
-❌ Google Analytics Data API NOT ENABLED on project 932220171320
-Link: https://console.developers.google.com/apis/api/analyticsdata.googleapis.com/overview?project=932220171320
-```
-
 ---
 
-## SESSION 165ter - HITL P1 COMPLETE (26/01/2026)
+## SESSION 165 - CONSOLIDATED (26/01/2026)
 
-### HITL Coverage Update
+### Ecosystem Audit Results (VERIFIED)
 
-| Metric | S165bis | S165ter | Change |
-| :--- | :--- | :--- | :--- |
-| Scripts with HITL | 8/18 | **12/18** | +4 |
-| Coverage | 44% | **67%** | +23% |
-| Financial Risk | 100% | 100% | ✅ |
-| Communication Risk | 0% | **100%** | ✅ |
-
-### P1 Scripts Implemented (Session 165ter)
-
-| Script | HITL Type | Version |
+| Component | Reality | Status |
 | :--- | :--- | :--- |
-| `referral-program-automation` | Email preview mode | 2.1.0 |
-| `replenishment-reminder` | Frequency cap (1/week) | 1.1.0 |
-| `price-drop-alerts` | Batch approval (>10) | 1.1.0 |
-| `review-request-automation` | VIP approval (€500+) | 1.1.0 |
+| Scripts Core | **85** | ✅ (+stitch-to-3a-css.cjs) |
+| Scripts --health | **27** (32%) | ⚠️ 68% sans health check |
+| Automations Registry | **121** (88 w/ scripts) | ✅ 33 external configs |
+| Skills (SKILL.md) | **42** | ✅ 95% |
+| Sensors Working | **15/19 (79%)** | ⚠️ 4 blocked |
+| MCP Servers | **11** | ✅ |
+| Remotion Compositions | **7** | ✅ |
+| HTML Pages | **79** | ✅ |
+| Credentials SET | **61%** (57/93) | ⚠️ 36 empty |
 
-### HITL Features (All Scripts)
+### HITL Coverage: 100% (18/18 Scripts) ✅
 
-- ✅ `--list-pending` - List items awaiting approval
-- ✅ `--approve=<id>` - Approve and process
-- ✅ `--reject=<id>` - Reject with reason
-- ✅ Slack webhook notifications
-- ✅ Health check shows HITL status
+| Category | Scripts | HITL Type |
+| :--- | :--- | :--- |
+| **Financial (2)** | at-risk-customer-flow, birthday-anniversary-flow | LTV €500 / Discount ≥20% |
+| **Communication (5)** | referral-program, replenishment-reminder, price-drop-alerts, review-request, omnisend-b2c | Preview/Cap/Batch |
+| **Content (3)** | blog-generator, email-personalization, podcast-generator | Approval/Preview/Review |
+| **Operations (5)** | dropshipping-order-flow, bigbuy-supplier-sync, hubspot-b2b-crm, lead-qualification-chatbot, voice-telephony-bridge | Threshold approvals |
+| **Cost Control (2)** | sms-automation, churn-prediction | Daily limit / LTV threshold |
+| **Supply Chain (1)** | cjdropshipping-automation | confirmOrder() |
 
-### Commit: 456235d
+### CSS Status
+
+| Metric | Value |
+| :--- | :--- |
+| CSS Version | **v=86.0** |
+| Validator Errors | **0** |
+| Validator Warnings | **75** |
+| CSS Duplicates | **22** |
+
+### Protocols
+
+| Protocol | Status | Location |
+| :--- | :--- | :--- |
+| **A2A** | ✅ PRODUCTION | automations/a2a/server.js (624 lines, 12 endpoints) |
+| **ACP** | ❌ DEPRECATED | Merged into A2A (Jan 2026) |
+| **UCP** | ✅ INTEGRATED | In A2A server |
+| **GPM** | ✅ PRODUCTION | 20 sensors → pressure-matrix.json |
+
+### Optimization Backlog (P0-P1)
+
+| Stack | Finding | Priority |
+| :--- | :--- | :--- |
+| Shopify Flow | 100 items MAX per loop | **P0** |
+| Gemini 3 | thought_signatures REQUIRED for function calling | **P1** |
+| OpenAI | 90% cost reduction with cached inputs | P1 |
+| ElevenLabs | Flash v2.5 = 75ms latency (vs 300ms) | P1 |
+| GA4 | Consent Mode v2 MANDATORY EU | P1 |
+| WCAG 2.2 | Level AA April 2026 EU deadline | P1 |
 
 ---
 
-## SESSION 165 - ECOSYSTEM AUDIT (26/01/2026)
-
-### Audit Methodology
-- **Approach**: Bottom-up empirical verification
-- **Method**: Direct execution, file system inspection, jq queries
-- **Claims**: 0 unverified - ALL facts tested
-
-### Ecosystem Overview (VERIFIED)
-
-| Component | Claim | Reality | Status |
-| :--- | :--- | :--- | :--- |
-| Scripts Core | 85 | **85** | ✅ MATCH |
-| Scripts --health | 26 | **27** | ✅ +1 |
-| Automations Registry | 121 | **121** (88 w/ scripts) | ✅ 33 external configs |
-| Skills (SKILL.md) | 44 | **42** | ✅ 95% |
-| Sensors Working | 20 | **15/19 (79%)** | ⚠️ 4 blocked |
-| MCP Servers | 11 | **11** | ✅ Need testing |
-| Remotion Compositions | 7 | **7** | ✅ MATCH |
-| HTML Pages | 79 | **79** | ✅ MATCH |
-| Credentials SET | 57/93 | **61%** | ⚠️ 36 empty |
-
-### Sensors Reality (15/19 Operational)
+## SENSORS (20 total - Verified 26/01/2026)
 
 | Status | Count | Sensors |
 | :--- | :--- | :--- |
 | ✅ OK | 15 | product-seo(0), gsc(0), cost-tracking(30), google-trends(8), shopify(75), klaviyo(65), email-health(60), lead-velocity(75), supplier-health(80), voice-quality(90), meta-ads(95), tiktok-ads(95), content-perf(90), lead-scoring(95), whatsapp(90) |
 | ❌ BLOCKED | 4 | retention(NETWORK), ga4(API_DISABLED), bigquery(API_DISABLED), apify(PAID_REQUIRED) |
 
-### Protocols Status
+---
 
-| Protocol | Status | Location |
+## BLOCKERS (USER ACTION REQUIRED)
+
+| Problème | Impact | Action |
 | :--- | :--- | :--- |
-| **A2A** | ✅ PRODUCTION | automations/a2a/server.js (624 lines, 12 endpoints) |
-| **ACP** | ❌ **DEPRECATED** | Merged into A2A (Jan 2026) |
-| **UCP** | ✅ INTEGRATED | In A2A server |
-| **GPM** | ✅ PRODUCTION | 20 sensors → pressure-matrix.json |
-
-### Skills by Provider
-
-| Provider | Count | % |
-| :--- | :--- | :--- |
-| Gemini | 31 | 74% |
-| Claude | 11 | 26% |
-
-### Add-Ons Verification (10 Tested)
-
-| Status | Count | Add-Ons |
-| :--- | :--- | :--- |
-| ✅ OPERATIONAL | 7 | Anti-Churn, Review, Replenishment, Email Cart, Price Drop, Blog, Podcast |
-| ⚠️ PARTIAL | 2 | SMS (no providers), Dropshipping (no keys) |
-| ❌ BLOCKED | 1 | WhatsApp (no META tokens) |
-
-### Validator v5.3.0 (Updated This Session)
-
-| Change | Before | After |
-| :--- | :--- | :--- |
-| EXCLUDE_DIRS | None | assets/stitch/ |
-| Errors | 5 | **0** |
-| Warnings | 97 | **78** |
-
-### Critical Gaps (USER ACTION)
-
-| Gap | Impact | Action |
-| :--- | :--- | :--- |
-| 36 empty credentials | 39% features blocked | Fill .env |
-| GA4 API disabled | Analytics broken | Enable API |
-| BigQuery API disabled | Trends broken | Enable API |
-| Apify trial expired | Scraping broken | Upgrade plan |
-
-### Registry Fix (5 Entries Corrected)
-
-| ID | Fix |
-| :--- | :--- |
-| lead-scoring-agentic | Added `script` field |
-| flows-audit-agentic | Added `script` field |
-| product-enrichment-agentic | Added `script` field |
-| ga4-budget-optimizer-agentic | Added `script` field |
-| store-audit-agentic | Added `script` field |
-
-**Result**: 88/121 with script (was 83), 33 external configs (NOT bugs)
-
-### Optimization Opportunities (EXHAUSTIVE Web Research - 50+ Sources)
-
-| Stack | Finding | Status | Priority |
-| :--- | :--- | :--- | :--- |
-| **AI Models** | | | |
-| Gemini 3 | **thought_signatures REQUIRED** for function calling | ⚠️ Implement | **P1** |
-| GPT-5.2 | Responses API +4% Tau-Bench (40-80% cost reduction) | ✅ DONE (73561b3) | **P1** |
-| OpenAI | **90% cost reduction** with cached inputs | ⏳ Implement | P1 |
-| **Voice AI** | | | |
-| ElevenLabs | Flash v2.5 = **75ms latency** (vs 300ms) | ⏳ Upgrade | P1 |
-| Voice total | **<500ms target**: STT(150) + LLM(350) + TTS(75) | ⏳ Benchmark | P1 |
-| WebSocket | Persistent > REST (40-100ms saved) | ⏳ Migrate | P2 |
-| **E-commerce** | | | |
-| Shopify Flow | **100 items MAX per loop** | ⚠️ CRITICAL | P0 |
-| Shopify Flow | Sidekick AI for natural language workflows | ⏳ Available | P2 |
-| Cart recovery | 3-email series: 1h→24h→72h = **15-25% recovery** | ⏳ Implement | P1 |
-| Welcome series | 40-day lifecycle (vs 5-email default) | ⏳ Extend | P2 |
-| **Analytics** | | | |
-| GA4 | Server-side GTM = bypass ad blockers | ⏳ Implement | P2 |
-| GA4 | Consent Mode v2 **MANDATORY EU** | ⚠️ Verify | P1 |
-| Ads | AI fully automated (Advantage+) | ⏳ Enable | P2 |
-| **Infrastructure** | | | |
-| GH Actions | Docker `type=gha` = **80%+ faster builds** | ⏳ Enable | P2 |
-| GH Actions | Cache limit **REMOVED** (was 10GB) | ✅ Aware | - |
-| Remotion | `npx remotion benchmark` for optimal concurrency | ⏳ Run | P2 |
-| Remotion | Replace GPU CSS with precomputed images (cloud) | ⏳ Migrate | P2 |
-| fal.ai | Queue API + webhooks for long requests | ⏳ Implement | P2 |
-| **Protocols** | | | |
-| A2A | v0.3 stable + gRPC support | ⏳ Upgrade | P2 |
-| MCP | OAuth 2.1 standard | ⏳ Migrate | P2 |
-| Stitch | Experimental mode (Pro) for complex UI | ⏳ Enable | P3 |
-| **Accessibility** | | | |
-| WCAG 2.2 | Level AA **April 2026 EU deadline** | ⏳ Audit | P1 |
-| Touch targets | **24x24px minimum** (new in 2.2) | ⏳ Verify | P2 |
-| **Web Performance** | | | |
-| LCP | 554ms ✅ EXCELLENT (<2.5s) | ✅ Done | - |
-| CLS | 0.04 ✅ EXCELLENT (<0.1) | ✅ Done | - |
-| INP | Unknown - measure | ⏳ Benchmark | P2 |
-
-### BigQuery Scheduling
-
-| Action | When |
-| :--- | :--- |
-| Enable BigQuery API | **After 2000 clients** (cost optimization) |
-
-### API Modernization Backlog (P1)
-
-| Script Pattern | Current | Recommended | Impact |
-| :--- | :--- | :--- | :--- |
-| GPT-5.2 calls | Chat Completions API | **Responses API** | +4% Tau-Bench |
-| Gemini 3 calls | Basic generateContent | **Add thought_signatures** | Required for function calling |
-| OpenAI caching | Not used | **Cache input tokens** | 90% cost reduction |
-
-### Documentation Created
-
-- `docs/AUDIT-SESSION-165-ECOSYSTEM.md` - **EXHAUSTIVE audit report (700+ lines)**
-  - Sections 1-14: Empirical verification (scripts, sensors, protocols, credentials)
-  - Sections 15-17: **COMPREHENSIVE stack optimization** (22 technology domains)
-  - Sections 15.1-15.22: Detailed findings per stack component with sources
-  - Section 16: **Actionable optimization plan** (P0-P3 priorities)
-  - Section 17: **2026 optimized technology stack summary**
-
-### Research Sources (50+)
-- Official docs: Shopify, Klaviyo, GA4, Meta, TikTok, Google Ads, ElevenLabs, fal.ai, Apify, Remotion
-- Protocol specs: A2A (Linux Foundation), MCP, Google Stitch
-- AI platforms: OpenAI, Anthropic, Google AI, xAI (Grok)
-- Developer blogs: DEV Community, Medium, GitHub Blog
-- Industry benchmarks: E-commerce metrics, Core Web Vitals, WCAG 2.2
+| GA4 API disabled | Analytics broken | [Enable API](https://console.developers.google.com/apis/api/analyticsdata.googleapis.com/overview?project=932220171320) |
+| BigQuery API disabled | Trends broken | Enable BigQuery API |
+| META_ACCESS_TOKEN vide | Meta Ads cassé | Configurer token |
+| TIKTOK_ACCESS_TOKEN vide | TikTok Ads cassé | Configurer token |
+| Apify trial expiré | Scraping broken | [Payer $49/mois](https://console.apify.com/billing) |
+| 36 credentials vides | 39% features OFF | Configurer .env |
 
 ---
 
-## SESSION 164 - SYSTEM VERIFICATION + REMOTION (26/01/2026)
+## Add-Ons (TOP 10)
 
-### Accomplishments
-
-| Tâche | Status | Détail |
-| :--- | :--- | :--- |
-| **Remotion health check** | ✅ DONE | 7 compositions available |
-| **Core scripts verification** | ✅ DONE | blog-generator, stitch-api, voice-api OK |
-| **Design validation** | ✅ DONE | 0 errors, CSS v=84.0 |
-| **Sensor verification** | ✅ DONE | google-trends, cost-tracking OK |
-
-### Remotion Status (Verified)
-
-| Metric | Value |
-| :--- | :--- |
-| Compositions | 7 (PromoVideo, DemoVideo, AdVideo, AlphaMedicalAd, MyDealzAd, HeroArchitecture, Testimonial) |
-| Components | 5 (TitleSlide, FeatureCard, LogoReveal, CallToAction, GradientBackground) |
-| Dependencies | ✅ Installed |
-| Health Check | ✅ PASSED |
-
-### Core Automations Verified
-
-| Script | Status | AI Providers |
-| :--- | :--- | :--- |
-| blog-generator-resilient | ✅ OPERATIONAL | 4/4 (Claude, GPT, Grok, Gemini) |
-| stitch-api | ✅ OPERATIONAL | Token valid, quota project configured |
-| voice-api-resilient | ✅ OPERATIONAL | 4 AI providers + lead qualification |
-| email-personalization-resilient | ✅ OPERATIONAL | HITL enabled |
-| churn-prediction-resilient | ✅ OPERATIONAL | -25% churn, +260% conversion |
-
-### Metrics Session 164
-
-| Metric | Value |
-| :--- | :--- |
-| Scripts Core | 85 |
-| Sensors | 20 (9 OK, 5 PARTIAL, 6 BLOCKED) |
-| HTML Pages | 79 |
-| Sitemap URLs | 68 |
-| CSS Version | v=84.0 |
-| Validator Errors | 0 |
-
----
-
-## SESSION 163 - STITCH CSS CONVERSION + SENSOR VALIDATION (26/01/2026)
-
-### Accomplishments
-
-| Tâche | Status | Détail |
-| :--- | :--- | :--- |
-| **Create stitch-to-3a-css.cjs** | ✅ DONE | Conversion script (180 lines) |
-| **Batch convert Stitch assets** | ✅ DONE | 4/4 files → 3a-*.html |
-| **Run all 20 sensors** | ✅ DONE | Comprehensive health check |
-| **Update GPM** | ✅ DONE | Session 163, 4 screens converted |
-
-### Stitch CSS Conversion Script
-
-**New Script:** `automations/agency/core/stitch-to-3a-css.cjs`
-
-| Feature | Description |
-| :--- | :--- |
-| Color Conversion | 10 Tailwind colors → CSS variables |
-| Class Mapping | 19 Tailwind → 3A class mappings |
-| Component Mapping | glass-card → glass-panel, etc. |
-| Batch Mode | `--batch=assets/stitch/` processes all files |
-
-**Commands:**
-```bash
-node automations/agency/core/stitch-to-3a-css.cjs --health
-node automations/agency/core/stitch-to-3a-css.cjs input.html --output=output.html
-node automations/agency/core/stitch-to-3a-css.cjs --batch=landing-page-hostinger/assets/stitch/
-```
-
-**Converted Files:**
-- `3a-hero-ai-agency.html`
-- `3a-pricing-dark-glassmorphism-1.html`
-- `3a-pricing-dark-glassmorphism-2.html`
-- `3a-services-grid-3a.html`
-
-### Sensors Status (Verified 26/01/2026 - Session 163)
-
-| Status | Count | Sensors |
-| :--- | :--- | :--- |
-| ✅ OK | **9 (45%)** | gsc, google-trends, shopify, klaviyo, cost-tracking, lead-velocity, retention, email-health, product-seo |
-| ⚠️ PARTIAL | 5 (25%) | google-ads-planner, supplier-health, voice-quality, content-perf, lead-scoring |
-| ❌ BLOCKED | 6 (30%) | meta-ads, tiktok-ads, whatsapp, ga4, bigquery, apify |
-
-**Improvement from S162bis:** 6 OK → 9 OK (+50% improvement)
-
-**Blocked Sensors (USER ACTION REQUIRED):**
-| Sensor | Issue | Fix |
-| :--- | :--- | :--- |
-| ga4-sensor | API DISABLED | Enable Analytics Data API |
-| bigquery-sensor | API DISABLED | Enable BigQuery API |
-| apify-sensor | TRIAL EXPIRED | Upgrade to paid plan |
-| meta-ads | NO_CREDENTIALS | Configure META_ACCESS_TOKEN |
-| tiktok-ads | NO_CREDENTIALS | Configure TIKTOK_ACCESS_TOKEN |
-| whatsapp | NO_CREDENTIALS | Configure WHATSAPP_TOKEN |
-
-### Scripts Core Updated
-
-| Métrique | S162bis | S163 |
-| :--- | :--- | :--- |
-| Total scripts core | 84 | **85** (+stitch-to-3a-css.cjs) |
-| Scripts --health | 23 | **24** |
-| Sensors OK | 6 (30%) | **9 (45%)** |
-
----
-
-## SESSION 162bis - STITCH PROMPT OPTIMIZATION (26/01/2026)
-
-### Accomplishments
-
-| Tâche | Status | Détail |
-| :--- | :--- | :--- |
-| Download Stitch HTML | ✅ DONE | 4 fichiers (993 lines total) |
-| Test sensors health | ✅ DONE | 6 OK, 5 PARTIAL, 9 BLOCKED |
-| Update pressure-matrix | ✅ DONE | +stitch_api, sovereign_units=121 |
-| **Create Prompt Library** | ✅ **DONE** | 6 optimized prompts + design tokens |
-| **Test optimized prompts** | ✅ **DONE** | Services grid = PERFECT color match |
-
-### Stitch Prompt Engineering
-
-**Web Research Sources:**
-- Google Developers Blog - Introducing Stitch
-- UX Planet - Google Stitch for UI Design
-- Adosolve - Stitch Prompt Guide
-- AI Competence - Prompting For Interfaces
-
-**Key Learnings Applied:**
-1. **Design Token Seeding** - Include hex colors in every prompt
-2. **Zoom-Out-Zoom-In Framework** - Context → Details → Visual
-3. **Component-Specific Prompts** - One prompt per section type
-4. **Constraints Section** - Accessibility + responsive
-
-### Stitch Assets Generated
-
-| Fichier | Lines | Prompt Type | Color Match |
-| :--- | :--- | :--- | :--- |
-| `hero-ai-agency.html` | 231 | Basic | ✅ Good |
-| `pricing-dark-glassmorphism-1.html` | 268 | Basic | ✅ Good |
-| `pricing-dark-glassmorphism-2.html` | 305 | Basic | ✅ Good |
-| `services-grid-3a.html` | 189 | **Optimized** | ✅ **PERFECT** |
-
-**Validation services-grid-3a:** All 6 hex colors (#8B5CF6, #95bf47, #10B981, #4FBAF1, #F59E0B) exactly as specified.
-
-**Location:** `landing-page-hostinger/assets/stitch/`
-**Doc updated:** `docs/GOOGLE-STITCH-MCP-DOCUMENTATION.md` Section 14
-
----
-
-## SESSION 162 - STITCH API OPÉRATIONNEL (26/01/2026)
-
-### Stitch MCP - FONCTIONNEL
-
-| Élément | Status | Détail |
-| :--- | :--- | :--- |
-| **Wrapper Script** | ✅ Créé | `automations/agency/core/stitch-api.cjs` (279 lignes) |
-| **Protocole** | ✅ MCP JSON-RPC | `stitch.googleapis.com/mcp` |
-| **Authentification** | ✅ gcloud ADC | Bypass DCR via token direct |
-| **Quota Project** | ✅ Configuré | `gen-lang-client-0843127575` |
-| **Projet Stitch** | ✅ Actif | ID `705686758968107418` |
-| **Screens Générés** | ✅ **3 variants** | Pricing x2 + Hero |
-| **Commit** | ✅ Pushé | `d4985ad`, `d46f058` |
-
-### Commandes Stitch Disponibles
-
-```bash
-node automations/agency/core/stitch-api.cjs --health          # Vérifier API
-node automations/agency/core/stitch-api.cjs list              # Lister projets
-node automations/agency/core/stitch-api.cjs create "Title"    # Créer projet
-node automations/agency/core/stitch-api.cjs generate <id> "prompt"  # Générer screen
-node automations/agency/core/stitch-api.cjs screens <id>      # Lister screens
-```
-
-### Scripts Core Updated
-
-| Métrique | Avant | Après |
-| :--- | :--- | :--- |
-| Total scripts core | 83 | **84** (+stitch-api.cjs) |
-| Scripts --health | 22 | **23** |
-
----
-
-## SESSION 161bis - CSS OPTIMIZATION (26/01/2026)
-
-### Responsive Typography (clamp() Migration)
-
-| Selector | Before | After |
-| :--- | :--- | :--- |
-| `.hero-title` | 4.5rem | clamp(2.5rem, 5vw + 1rem, 4.5rem) |
-| `.hero-title-ultra` | 4.5rem | clamp(2.5rem, 5vw + 1rem, 4.5rem) |
-| `.title-line` (2x) | 3.5rem | clamp(2rem, 4vw + 0.5rem, 3.5rem) |
-| `.section-title-ultra` | 2.5rem | clamp(1.75rem, 3vw + 0.5rem, 2.5rem) |
-| `.stat-big` | 3rem | clamp(2rem, 3vw + 0.5rem, 3rem) |
-| `.result-number` | 3rem | clamp(2rem, 3vw + 0.5rem, 3rem) |
-| `.stat-item .stat-value` | 2rem | clamp(1.5rem, 2.5vw + 0.5rem, 2rem) |
-
-**Total clamp() usages: 10 → 18 (+8)**
-
-### CSS Duplicate Consolidation
-
-| Change | Impact |
-| :--- | :--- |
-| Removed duplicate `.title-line` | Kept animated version |
-| Removed duplicate `.stream-1` to `.stream-4` | 100% identical |
-| CSS warnings | 83 → 78 (-5) |
-| Remaining duplicates | 25 (different values, need visual review) |
-
-### CSS Version
-
-| Metric | Value |
-| :--- | :--- |
-| CSS Version | **v=84.0** |
-| HTML Files Updated | 69 |
-| Validation | ✅ PASSED (78 warnings, 0 errors) |
-
-### Google Cloud SDK + GSC API
-
-| Step | Status |
-| :--- | :--- |
-| Google Cloud SDK | ✅ Installed |
-| Service Account | ✅ `gsc-sensor-3a@gen-lang-client-0843127575.iam.gserviceaccount.com` |
-| GSC API | ✅ Enabled |
-| JSON Key | ✅ `.credentials/gsc-service-account.json` |
-| Search Console Access | ✅ Full permission added |
-| **GSC Sensor** | ✅ **OPERATIONAL** |
-
-```bash
-# Test result
-📡 GPM Updated: SEO Pressure is 0 (Topic: "grok" "web speech api")
-```
-
-### Sensors Status (Verified 26/01/2026)
-
-| Sensor | Status | Output |
-| :--- | :--- | :--- |
-| gsc-sensor | ✅ OK | Pressure 0 |
-| google-trends-sensor | ✅ OK | Demand 92/100, rising |
-| shopify-sensor | ✅ OK | Pressure 75 |
-| lead-velocity-sensor | ✅ OK | 2 leads |
-| cost-tracking-sensor | ✅ OK | Budget OK |
-
-**Synthèse: 7 OK (35%), 10 PARTIAL (50%), 3 BLOCKED (15%)**
-
-### Core Web Vitals (Production 26/01/2026)
-
-| Metric | Value | Status |
-| :--- | :--- | :--- |
-| LCP | 554ms | ✅ EXCELLENT |
-| CLS | 0.04 | ✅ EXCELLENT |
-| TTFB | 166ms | ✅ EXCELLENT |
-
-### Stitch MCP Status
-
-| Aspect | Status |
-| :--- | :--- |
-| Tools | ✅ 6 disponibles |
-| Auth | ✅ **OPÉRATIONNEL** (via wrapper stitch-api.cjs) |
-| Wrapper | ✅ `automations/agency/core/stitch-api.cjs` |
-
----
-
-## SESSION 161 - REMOTION SUBSIDIARIES + CWV (26/01/2026)
-
-### Remotion Subsidiary Compositions Created
-
-| Composition | Type | Duration | Features |
-| :--- | :--- | :--- | :--- |
-| **AlphaMedicalAd** | Medical e-commerce | 15s | Trust badges, product showcase |
-| **AlphaMedicalAd-Square** | Medical (1:1) | 15s | Instagram format |
-| **MyDealzAd** | Fashion e-commerce | 15s | Dynamic animations |
-| **MyDealzAd-FlashSale** | Fashion promo | 15s | Discount badges, flash sale mode |
-| **MyDealzAd-Square** | Fashion (1:1) | 15s | Instagram format |
-
-### Core Web Vitals - Production Measurement
-
-| Metric | Value | Threshold | Status |
-| :--- | :--- | :--- | :--- |
-| **LCP** | 467ms | < 2500ms | ✅ EXCELLENT |
-| **CLS** | 0.03 | < 0.1 | ✅ EXCELLENT |
-| **TTFB** | 58ms | < 800ms | ✅ EXCELLENT |
-
-### Validation Results
-
-- Design System: ✅ PASSED (0 errors, 78 warnings)
-- Automation Registry: ✅ 121 automations
-- Sensors: 20 files
-- Resilient Scripts: 7 files
-
----
-
-## SESSION 160 - HITL COMPLETE + IMPLEMENTATIONS (25/01/2026)
-
-### HITL Coverage - NOW 80% (8/10 Add-Ons)
-
-| Add-On | HITL Status | Method |
-| :--- | :--- | :--- |
-| Anti-Churn AI | ✅ Full | LTV €500 threshold (S157) |
-| Review Booster | ❌ N/A | Low risk |
-| Replenishment | ❌ N/A | Low risk |
-| Email Cart Series | ✅ Full | Preview mode (S157) |
-| **SMS Automation** | ✅ **Full** | **Daily spend limit (S160)** |
-| Price Drop | ⚠️ Partial | Threshold config |
-| WhatsApp Booking | ✅ Implicit | Meta templates |
-| Blog Factory | ✅ Full | Human review (S157) |
-| Podcast Generator | ✅ Full | Script review |
-| Dropshipping | ✅ Full | confirmOrder() |
-
-### Implementations This Session
-
-| Feature | Status | Details |
-| :--- | :--- | :--- |
-| SMS Daily Spend Limit | ✅ Done | €50/day default, 80% alert, Slack webhook |
-| Contact Form Add-on | ✅ Done | 10 add-ons + 4 bundles dropdown (FR+EN) |
-| Podcast Audio-Only Mode | ✅ Done | `--script=X --audio-only` now works |
-| Phone Placeholders | ✅ Fixed | +212 612... / +1 555... |
-| Klaviyo Health Fix | ✅ Done | Shows DEGRADED when API fails |
-
-### ENV Variables for SMS HITL
-
-```bash
-SMS_DAILY_LIMIT_ENABLED=true   # default
-SMS_DAILY_MAX=50               # €50/day
-SMS_COST_PER_MSG=0.05         # €0.05/SMS
-SMS_ALERT_THRESHOLD=0.8        # 80%
-SMS_ALERT_WEBHOOK=             # Slack URL
-SMS_BLOCK_ON_EXCEED=true       # Auto-block
-```
-
-### Right Tool Score Update
-
-| Domaine | S159 | S160 | Change |
-| :--- | :--- | :--- | :--- |
-| HITL compliance | 70% | **80%** | +10% |
-| TODOs remaining | 1 | **0** | ✅ Complete |
-| **Total Score** | 75/100 | **80/100** | +5 |
-
-### Commits Session 160
-```
-2925407 feat(HITL): SMS daily spend limit + contact form add-on selection
-6a6493e feat(podcast): implement audio-only mode + fix phone placeholders
-```
-
----
-
-## SESSION 159 - GEO-LOCALE + MULTI-CURRENCY (25/01/2026)
-
-### 3 Target Markets - VERIFIED WORKING
-
-| Market | Language | Currency | Auto-Detection |
-| :--- | :--- | :--- | :--- |
-| **Morocco** | Français | MAD (DH) | ✅ ipapi.co → MA |
-| **Europe** | Français | EUR (€) | ✅ FR, BE, CH, etc. |
-| **International** | English | USD ($) | ✅ US, GB, CA, etc. |
-
-### Geo-Locale Implementation
-
-| Feature | Status | File |
-| :--- | :--- | :--- |
-| Auto-detection | ✅ Working | `geo-locale.js` |
-| Currency switcher | ✅ Working | `pricing.html` |
-| Manual override | ✅ Working | EUR \| MAD \| USD buttons |
-| LocalStorage persistence | ✅ Working | `3a_locale` key |
-
-### Visual Verification (Chrome DevTools MCP)
-
-- Homepage: Futuristic design ✅
-- Pricing EUR: 390€, 790€, 1,490€ ✅
-- Pricing MAD: 3 990 DH, 7 990 DH, 14 990 DH ✅
-- Pricing USD: $450, $890, $1,690 ✅
-
-### Add-on Pricing Fixed (Fixed Rates)
-
-| Conversion | Rate | Example |
-| :--- | :--- | :--- |
-| EUR → USD | ~1.15x | 180€ → $210 |
-| EUR → MAD | 10x | 180€ → 1,800 DH |
-
-**Changes:**
-- All add-on USD prices updated (was 1:1, now ~1.15x)
-- Changed "MAD" to "DH" in price displays (button stays MAD)
-- Fixed 10 add-ons + 4 bundles in FR + EN
-
-### Right Tool Score
-
-| Domaine | S158 | S159 | Change |
-| :--- | :--- | :--- | :--- |
-| Geo-locale | N/A | **100%** | ✅ Complete |
-| Multi-currency | N/A | **100%** | ✅ Complete |
-| Pricing consistency | N/A | **100%** | ✅ Fixed |
-| **Total Score** | 70/100 | **75/100** | +5 |
-
-### Commits Session 159
-```
-3834ea9 docs: Session 159 - geo-locale + multi-currency verified
-371deb5 fix(pricing): align add-on prices with pack conversion rates
-5487712 chore(css): bump version to v=81.0 for pricing fix
-```
-
----
-
-## SESSION 158 - SENSORS + CI/CD (25/01/2026)
-
-### Klaviyo Sensors Fixed
-
-| Sensor | Issue | Fix | Status |
-| :--- | :--- | :--- | :--- |
-| `klaviyo-sensor.cjs` | API 400 error | Revision 2024→2026-01-15 | ✅ FIXED |
-| `email-health-sensor.cjs` | Same issue | Same fix | ✅ FIXED |
-
-### CI/CD Add-ons Health Check
-
-New workflow: `.github/workflows/addons-health-check.yml`
-- Runs on push to `automations/agency/core/*.cjs`
-- Daily scheduled check at 6:00 UTC
-- Tests 10 add-on scripts with `--health`
-
-### Right Tool Score Update
-
-| Domaine | S157 | S158 | Change |
-| :--- | :--- | :--- | :--- |
-| Sensors fonctionnels | 30% | **35%** | +5% |
-| Scripts testables | 29% | **35%** | +6% (CI/CD) |
-| **Total Score** | 65/100 | **70/100** | +5 |
-
-### Commits Session 158
-```
-1518060 fix(sensors): update Klaviyo API to revision 2026-01-15
-[pending] feat(ci): add-ons health check workflow
-```
-
----
-
-## SESSION 157 - HITL IMPLEMENTATION (25/01/2026)
-
-### HITL (Human In The Loop) Compliance - 3 Scripts Updated
-
-| Script | HITL Feature | Default | Status |
-| :--- | :--- | :--- | :--- |
-| **blog-generator-resilient.cjs** | Draft approval before publish | `requireApproval: true` | ✅ DONE |
-| **churn-prediction-resilient.cjs** | LTV threshold (€500) for voice calls | `requireApprovalForHighLTV: true` | ✅ DONE |
-| **email-personalization-resilient.cjs** | Preview mode for cart emails | `previewModeDefault: true` | ✅ DONE |
-
-### CLI Commands Added (Per Script)
-
-**Blog Factory:**
-```bash
-node blog-generator-resilient.cjs --list-drafts
-node blog-generator-resilient.cjs --view-draft=<id>
-node blog-generator-resilient.cjs --approve=<id>
-node blog-generator-resilient.cjs --reject=<id>
-```
-
-**Anti-Churn AI:**
-```bash
-node churn-prediction-resilient.cjs --list-interventions
-node churn-prediction-resilient.cjs --view-intervention=<id>
-node churn-prediction-resilient.cjs --approve-intervention=<id>
-node churn-prediction-resilient.cjs --reject-intervention=<id>
-```
-
-**Email Cart Series:**
-```bash
-node email-personalization-resilient.cjs --list-previews
-node email-personalization-resilient.cjs --view-preview=<id>
-node email-personalization-resilient.cjs --approve-preview=<id>
-node email-personalization-resilient.cjs --reject-preview=<id>
-```
-
-### Right Tool Score Update
-
-| Domaine | Before (S156) | After (S157) | Change |
-| :--- | :--- | :--- | :--- |
-| HITL compliance | 30% | **70%** | +40% |
-| **Total Score** | 55/100 | **65/100** | +10 |
-
-### Commits Session 157
-```
-5b680f8 feat(hitl): implement Human In The Loop for Blog Factory + Anti-Churn AI
-5c0e05c feat(hitl): implement preview mode for Email Personalization
-```
-
----
-
-## SESSION 156 - ADD-ONS + RIGHT TOOL AUDIT (25/01/2026)
-
-### Add-Ons Implementation (TOP 10)
-
-| # | Add-On | Setup | Monthly | Script | HITL |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Anti-Churn AI | €200 | €180 | churn-prediction-resilient.cjs | ✅ **S157** |
-| 2 | Review Booster | €100 | €80 | review-request-automation.cjs | ❌ NONE (OK) |
-| 3 | Replenishment Reminder | €120 | €100 | replenishment-reminder.cjs | ❌ NONE (OK) |
-| 4 | Email Cart Series AI | €150 | €150 | email-personalization-resilient.cjs | ✅ **S157** |
-| 5 | SMS Automation | €150 | €120 | sms-automation-resilient.cjs | ⚠️ PARTIAL |
-| 6 | Price Drop Alerts | €100 | €80 | price-drop-alerts.cjs | ⚠️ PARTIAL |
-| 7 | WhatsApp Booking | €80 | €60 | whatsapp-booking-notifications.cjs | ✅ IMPLICIT |
-| 8 | Blog Factory AI | €200 | €200 | blog-generator-resilient.cjs | ✅ **S157** |
-| 9 | Podcast Generator | €120 | €100 | podcast-generator-resilient.cjs | ✅ YES |
-| 10 | Dropshipping Suite | €350 | €250 | cjdropshipping-automation.cjs | ✅ YES |
-
-### Bundles (17% discount)
-
-| Bundle | Add-Ons | Regular | Discounted |
-| :--- | :--- | :--- | :--- |
-| Retention Pro | #1 + #3 + #6 | €360/mo | €300/mo |
-| Engagement Pro | #2 + #4 + #5 | €350/mo | €290/mo |
-| Content Pro | #8 + #9 | €300/mo | €250/mo |
-| Full Stack | All 10 | €1,170/mo | €900/mo |
-
-### Right Tool Audit: 55/100 INSUFFISANT
-
-| Domaine | Score | Issue |
-| :--- | :--- | :--- |
-| Scripts testables | 29% (24/83) | 71% sans --health check |
-| Sensors fonctionnels | 30% (6/20) | 70% PARTIAL/BLOCKED |
-| Add-ons vendables | 80% | Dropshipping = NO_CREDS |
-| HITL compliance | 30% | Blog Factory publie sans review |
-| Transparence pricing | 75% | Disclaimer API keys ajouté |
-
-### Fixes Applied
-
-| Issue | Fix | Status |
-| :--- | :--- | :--- |
-| Pricing toggle bug | CSS `:not(.period-monthly):not(.period-annual)` | ✅ FIXED |
-| FAQ Guarantee EN "infinite loop" | "2 revision rounds included. Beyond: €50/h" | ✅ FIXED |
-| Dropshipping transparency | "*Your supplier API keys required" disclaimer | ✅ FIXED |
-| CSS version sync | v=77.0 → v=80.0 (all 71 files) | ✅ FIXED |
-
-### HITL Critical Actions (P0) - ✅ ALL COMPLETED S157
-
-| Add-On | Risk Before | Action | Status |
-| :--- | :--- | :--- | :--- |
-| **Blog Factory AI** | 🔴 HIGH | `requireApproval` flag | ✅ DONE |
-| Anti-Churn AI | 🟡 MEDIUM | LTV €500 threshold | ✅ DONE |
-| Email Cart Series | 🟡 MEDIUM | `previewMode` option | ✅ DONE |
-
-### Commits Session 156
-```
-0c86cfe fix(pricing): retainer period toggle bug - monthly/annual display
-8d9e9bf feat(pricing): add TOP 10 Add-Ons section + bundles FR+EN
-a17be2d fix(faq): EN guarantee infinite loop + Dropshipping disclaimer
-```
-
----
-
-## SESSION 155 - VALIDATOR v5.4.0 + FONT PRELOAD + CSS CLEANUP (25/01/2026)
-
-### P2 Tasks Progress
-
-| Tâche | Status | Détails |
-| :--- | :--- | :--- |
-| Font preload optimization | ✅ DONE | 2 fichiers academy corrigés |
-| Validator CSS duplicate fix | ✅ DONE | Détecte ROOT-level seulement |
-| CSS duplicate cleanup | ⏳ PARTIAL | 1 duplicate removed, 30 remain |
-| JSON camelCase | ⏳ PENDING | 44 champs (intentionnels schema.org) |
-
-### Validator v5.3.0 → v5.4.0
-
-| Amélioration | Impact |
-| :--- | :--- |
-| ROOT-level duplicate detection | Media query overrides ignorés |
-| Accurate warning count | 51 → 30 duplicates |
-
-### Métriques
-
-| Métrique | Session 154bis | Session 155 |
-| :--- | :--- | :--- |
-| Warnings | 104 | **83** |
-| CSS duplicates | 51 (faux positifs) | **30** (vrais) |
-| Font preload warnings | 3 | **1** (redirect only) |
-| CSS Version | v=75.0 | **v=76.0** |
-
-### Clean Code Évaluation
-
-| Principe | Score | Status |
-| :--- | :--- | :--- |
-| DRY | 70% | 30 duplicates à consolider |
-| Single Responsibility | 90% | Classes spécifiques |
-| CSS Variables | 95% | 1126 usages |
-| Validation | 100% | 26 checks, 0 errors |
-
----
-
-## SESSION 154bis - CRITICAL CSS FIX + VALIDATOR v5.3.0 + ACCESSIBILITY (25/01/2026)
-
-### BUG CRITIQUE CORRIGÉ
-
-| Page | Problème | Cause | Fix |
-| :--- | :--- | :--- | :--- |
-| en/case-studies.html | Page 100% non-stylisée | `<href="...">` au lieu de `<link href="...">` | Balise CSS reconstruite |
-
-**Impact**: La page entière était en HTML brut (fond blanc, texte non-formaté, aucun style).
-
-### Accessibility Fix: id="main-content"
-
-| Métrique | Avant | Après |
-| :--- | :--- | :--- |
-| Files with `id="main-content"` | 39 | **62** |
-| MainContent warnings | 24 | **1** (dashboard only) |
-| Skip-link navigation | Partial | **Complete** |
-
-**23 fichiers corrigés** pour accessibilité skip-link.
-
-### Validator v5.0.0 → v5.3.0 (+3 fonctions)
-
-| Fonction | Détecte | Session |
-| :--- | :--- | :--- |
-| `validateCSSLinkTags()` | Balises CSS cassées `<href="...">` | 154bis |
-| `validateButtonClassesExist()` | btn-* classes sans CSS | 154bis |
-| CTA validation (updated) | Logic améliorée pour patterns CTA | 154bis |
-
-### 7 Classes Boutons Ajoutées
-
-| Classe | Usage |
-| :--- | :--- |
-| `.btn-text` | Texte inside btn-cyber |
-| `.btn-cyber-outline` | Variant outline |
-| `.btn-dashboard` | Dashboard specific |
-| `.btn-pulse` | Animation pulsation |
-| `.btn-wide` | Large button |
-| `.btn-lg` | Taille grande |
-| `.btn-small` | Taille petite |
-
-### Conflit CSS Résolu
-
-| Sélecteur | Problème | Fix |
-| :--- | :--- | :--- |
-| `.annual-savings` | `display: none` vs `display: block` (lignes 6655, 6863) | Consolidé en une définition |
-
-### Métriques Validator
-
-| Métrique | Session 154 | Session 154bis |
-| :--- | :--- | :--- |
-| Erreurs | 8 | **0** |
-| Checks passés | 17 | **20** |
-| Warnings | 108 | **104** |
-| Fonctions totales | 24 | **26** |
-| CSS Version | v=74.0 | **v=75.0** |
-
-### Commits Session 154bis
-```
-4e08ded fix(critical): case-studies broken CSS link + validator v5.2.0
-863134e fix(css): add 7 missing button classes + resolve annual-savings conflict
-2751bdf docs: Session 154bis - Validator v5.2.0 + Documentation Updates
-455b412 fix(accessibility): add id='main-content' to 23 files + validator v5.3.0
-```
-
----
-
-## SESSION 154 - ACADEMY CSS FIXES (25/01/2026)
-
-### Problèmes Résolus
-
-| Problème | Cause Racine | Fix Appliqué |
-| :--- | :--- | :--- |
-| Quick Guides texte invisible | Conflit CSS `.guide-content { display: none }` | Renommé classes → `.guide-card-*` |
-| Icônes sociales grises | Classe `.social-icon-ultra` absente | Ajouté CSS complet |
-| HTML tag mismatch FR | `<h3>` fermé avec `</h4>` | Corrigé → `<h4>...</h4>` |
-
-### Détails Techniques
-
-**Quick Guides CSS Conflict:**
-- Ligne 10801: `.guide-content { flex: 1; }` (Guide Cards)
-- Ligne 11299: `.guide-content { display: none; }` (Collapsible Guides)
-- Solution: Renommé en `.guide-card-content`, `.guide-card-title`, `.guide-card-time`
-
-**Social Icons Fix:**
-```css
-.social-icon-ultra {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: rgba(79, 186, 241, 0.1);
-  /* + hover states */
-}
-```
-
-### Fichiers Modifiés
-
-| Fichier | Modification |
-| :--- | :--- |
-| styles.css | +3 classes renamed, +15 lines social-icon-ultra |
-| en/academy.html | 8 guide cards class updates |
-| academie.html | 8 guide cards + HTML tag fixes |
-| 69 HTML files | CSS version v=72.0 → v=73.0 |
-
-### Analyse Stratégique (6 Documents)
-
-| Framework | Compatibilité | Notes |
-| :--- | :--- | :--- |
-| Hand-Raiser Framework | 85% | Stratégie 3A alignée |
-| 5-Min Video Sales | 0% ABSENT | À implémenter |
-| Zone 1/Zone 2 | 60% | Zone 2 = Sales, partiellement couvert |
-| DRAG Framework | 70% | Flywheel similaire |
-| PMF Validation | 0% ABSENT | Framework non existant |
-| Learn-it-all Culture | 85% | Academy pages = evidence |
-
-### Commits Session 154
-```
-651a1c5 fix(academy): Quick Guides CSS conflict + Social Icons fix - Session 154
-396aa41 fix(css): sync all files to v=74.0
-```
-
-### Validation Finale
-```
-✅ 0 errors, 49 warnings (JSON camelCase - cosmétique)
-✅ CSS v=74.0 (71 fichiers)
-✅ Quick Guides: 8/8 cards avec texte visible
-✅ Social Icons: 6 icônes fonctionnelles
-✅ Footers: 70/70 complets
-```
-
----
-
-## SESSION 153 - VERIFICATION & STATUS UPDATE (25/01/2026)
-
-### 3A Automation Site: 100% COMPLETE
-
-| Validation | Result |
-| :--- | :--- |
-| Design System | ✅ 0 errors, 49 warnings |
-| CSS Version | ✅ v=72.0 (all 71 files) |
-| Headers/Footers | ✅ Standardized |
-| Academy FR/EN | ✅ CTA sections added |
-| Blog FR/EN | ✅ Typos fixed |
-| Sitemap | ✅ 68 URLs (3 excluded intentionally) |
-
-### Tasks BLOCKED (USER ACTION Required)
-
-| Task | Blocker | Impact |
-| :--- | :--- | :--- |
-| Alpha Medical Sensors | Shopify 403, Klaviyo 401 | 6+ workflows |
-| MyDealz Integration | HTTP 402 Payment | Store inactive |
-| Remotion → Subsidiaries | Credentials missing | Video production |
-| GSC Sensor | API disabled | SEO monitoring |
-| Meta/TikTok Ads | Tokens empty | Ads sensors |
-
-### Commits Session 153
-```
-0ca6cca docs: add Session 153 - verification & status update
-13bfe70 docs: update Session 152 with EN courses fixes
-```
-
----
-
-## SESSION 149 - VALIDATOR v4.0 + FOOTER COMPLETENESS (25/01/2026)
-
-### Problème Initial
-Le validateur v3.x n'avait **RIEN DÉTECTÉ** concernant:
-- Footers incomplets (2-3 status items au lieu de 4)
-- Colonnes manquantes (pas de colonne Entreprise)
-- Liens sociaux absents
-- Typos d'accents (Systeme vs Système)
-
-### Solution: Validator v4.0.0 (+185 lignes)
-
-| Nouvelle Fonction | Détection | Status |
-| :--- | :--- | :--- |
-| `validateFooterCompleteness()` | 4 status items, 5 colonnes, social links, badges RGPD/SSL | ✅ NEW |
-| Typos accents (frOnly) | Systeme → Système, reserves → réservés | ✅ NEW |
-| Détection colonnes footer | `footer-heading` class (pas h4) | ✅ FIX |
-| Language EN/FR | Skip typos FR sur pages EN | ✅ FIX |
-
-### Fichiers Corrigés (12 total)
-
-| Fichier | Fix Appliqué |
-| :--- | :--- |
-| 5 blog/*.html | Footer complet (4 status + social links) |
-| faq.html | Footer complet |
-| investisseurs.html | 4ème status item + social links |
-| academie.html | Footer structure (session 148) |
-| services/flywheel-360.html | Typos accents |
-| services/voice-ai.html | Typos accents |
-
-### Validation Finale
-
-```
-✅ 0 erreurs
-⚠️ 47 warnings (JSON camelCase - mineur)
-✅ Footer: All footers have complete structure (4 status, 5 columns, social, badges)
-```
-
-### Commits Session 149
-```
-274e96c fix: blog typo "Automatisatio" + accent corrections
-12b361d fix(validator): v4.0.0 - footer completeness + accent typos detection
-```
-
----
-
-## SESSION 148 - FOOTER CORRECTIONS ACADÉMIE (25/01/2026)
-
-### Problème Détecté
-Les pages académie/cours avaient des footers **INCORRECTS/INCOMPLETS** vs le footer officiel de index.html:
-- Manquait colonne "Entreprise"
-- Seulement 2-3 status items au lieu de 4
-- Pas de liens sociaux
-- Pas de badges RGPD/SSL
-
-### Fichiers Corrigés (8 total)
-
-| Fichier | Status |
-| :--- | :--- |
-| academie/cours/*.html (6 files) | ✅ Footer complet |
-| academy/courses/architecture-hybride.html | ✅ Footer complet |
-| blog/index.html | ✅ Typo "Automatisatio" → "Automatisation" |
-
-### Commits Session 148
-```
-Multiple commits for footer corrections
-```
-
----
-
-## SESSION 147 - HERO ANIMATION RÉÉCRITURE COMPLÈTE (24/01/2026)
-
-### PROBLÈME INITIAL
-Animation hero était:
-1. En BAS au lieu du hero (causé par GSAP `pin: true`)
-2. Contrôlée par le SCROLL (causé par `scrub: 0.5`)
-3. `height: 200vh` pour scroll-pinning (architecture scroll-based)
-
-### CAUSE RACINE PROFONDE
-**Architecture entière basée sur GSAP ScrollTrigger** - concept "Apple-style scroll animation" où l'animation progresse avec le scroll. L'utilisateur voulait simplement une vidéo en boucle.
-
-### SOLUTION: RÉÉCRITURE COMPLÈTE
-
-| Élément | AVANT (scroll-based) | APRÈS (auto-loop) |
-| :--- | :--- | :--- |
-| Script | `scroll-animation.js` (294 lignes) | `hero-animation.js` (160 lignes) |
-| Librairies | GSAP + ScrollTrigger (2 CDN) | AUCUNE |
-| height CSS | `200vh` (scroll-pinning) | `100vh` (viewport) |
-| Animation | Synchronisée au scroll | Auto-loop 30fps |
-| Démarrage | Quand utilisateur scrolle | IMMÉDIAT |
-
-### Fichiers Modifiés
-
-| Action | Fichier |
-| :--- | :--- |
-| **NOUVEAU** | `scripts/hero-animation.js` |
-| **SUPPRIMÉ** | `scripts/scroll-animation.js` |
-| **SUPPRIMÉ** | GSAP CDN scripts (2 balises) |
-| **MODIFIÉ** | `styles.css` (.hero-animation) |
-| **MODIFIÉ** | `index.html` FR + EN |
-
-### Validation Finale
-
-```bash
-# Console v4.0:
-[HeroAnimation] Started with 240 frames at 30 fps ✅
-```
-
-### CSS Version: v=57.0 (70 fichiers synchronisés)
-
----
-
-## SESSION 146bis - WHISK METHODOLOGY + REMOTION (23/01/2026)
-
-### Whisk Methodology v1.0 - AJOUTÉ
-
-| Élément | Status | Location |
-| :--- | :--- | :--- |
-| **Méthodologie 7 étapes** | ✅ Documentée | `ETAGERE-TECHNOLOGIQUE` |
-| Standards qualité inputs | ✅ PNG/JPEG specs | Subject/Scene/Style |
-| Checklist pré-génération | ✅ Exportable | Markdown template |
-| Workflow hybride Whisk→Remotion | ✅ Diagramme | Flow complet |
-| Erreurs courantes | ✅ 5 identifiées | Solutions incluses |
-
-### Contraintes Whisk Vérifiées
-
-| Contrainte | Valeur | Impact |
-| :--- | :--- | :--- |
-| API publique | ❌ **AUCUNE** | Manuel seulement |
-| Durée animation | **8 sec max** | 720p MP4 |
-| Sujets fiables | **4 max** | >4 = incohérent |
-| Rate limiting | **30-45 sec** | Entre prompts |
-
-### Limites par Abonnement Google
-
-| Tier | Crédits AI/mois | Whisk | Flow |
-| :--- | :--- | :--- | :--- |
-| FREE | 100 | Veo 3.1 Fast | Veo 3.1 Fast |
-| **AI Pro** | 1,000 | **Veo 3** | Veo 3.1 |
-| **AI Ultra** | 25,000 | **Veo 3** | Veo 3.1 (highest) |
-
-**Status 3A VÉRIFIÉ (Screenshot 23/01/2026):**
-```
-Forfait: Google AI Pro (2 To) - 119,99 MAD/mois
-├── Whisk: Veo 3
-├── Flow: Veo 3.1 (accès étendu)
-├── Gemini App: Veo 3.1 (accès limité)
-├── Crédits AI: 1,000/mois
-└── Storage: 2 To (Photos, Drive, Gmail)
-```
-
-### Remotion Studio
-
-| Élément | Status | Location |
-| :--- | :--- | :--- |
-| **Remotion Studio** | ✅ Production | `automations/remotion-studio/` |
-| 4 Compositions | ✅ Prêtes | PromoVideo, DemoVideo, AdVideo, Testimonial |
-| 5 Composants | ✅ Réutilisables | TitleSlide, FeatureCard, LogoReveal, etc. |
-| AI Assets | ✅ Multi-provider | fal.ai FLUX + Replicate fallback |
-| Claude Skill | ✅ Documenté | `.claude/skills/remotion-video/SKILL.md` |
-
-### Commandes Remotion
-
-```bash
-cd automations/remotion-studio
-npm install                    # Install (une fois)
-npm run dev                    # Preview (localhost:3000)
-npm run render:promo           # → out/promo.mp4 (30s)
-npm run render:ad              # → out/ad.mp4 (15s portrait)
-```
-
-### Workflow Hybride Whisk → Remotion
-
-```
-WHISK (Manual) → Download Assets → REMOTION (Compose) → Output MP4
-     │                │                    │                │
-     │ Subject/Scene  │ /assets/whisk/     │ TitleSlide     │ promo.mp4
-     │ Style          │ PNG/MP4            │ FeatureCard    │ ad.mp4
-     │ Refine         │ Named convention   │ AI overlays    │ demo.mp4
-```
-
-**Avantage hybride**: Créativité Whisk + Contrôle précis Remotion = Vidéos uniques
-
-### Transferts Video Production
-
-| Direction | Technologie | Priorité | Status |
-| :--- | :--- | :--- | :--- |
-| 3A → MyDealz | Remotion + Whisk methodology | HIGH | ⏳ Pending |
-| 3A → Alpha Medical | Remotion + Whisk methodology | HIGH | ⏳ Pending |
-
-### Documentation Mise à Jour
-
-- ✅ **`docs/WHISK-REMOTION-METHODOLOGY.md`** - **NOUVEAU** Document dédié complet (10 sections)
-- ✅ `docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md` - Méthodologie Whisk complète ajoutée
-- ✅ `docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md` - Section 9 ajoutée
-- ✅ `docs/PLAN-INTEGRATION-MYDEALZ-ALPHAMEDICAL-SESSION-141.md` - Session 146 ajoutée
-- ✅ `CLAUDE.md` - Workflow hybride + contraintes documentées
-
----
-
-## SESSION 145ter - COMPLETE CARD CSS + SVG SAFETY (23/01/2026)
-
-### All Component Cards CSS Added (+500 lines)
-
-| Component | Classes Added | Usage |
-| :--- | :--- | :--- |
-| Blog Cards | `.blog-card`, `.related-card` | Blog index + articles |
-| Case Cards | `.case-card` | cas-clients.html |
-| Process Cards | `.process-card`, `.process-icon` | Methodology sections |
-| Security Cards | `.security-card`, `.security-icon` | Compliance sections |
-| Tech Cards | `.tech-card` | investisseurs.html |
-| Investor Cards | `.investor-card` | investisseurs.html |
-| KPI Cards | `.kpi-card` | flywheel-360.html |
-| Summary Cards | `.summary-card`, `.summary-icon` | Legal pages |
-| Generic Icons | `.brain-icon`, `.section-icon`, `.right-icon` | Various |
-
-### SVG Safety Net Added
-```css
-/* Global SVG constraint for inline icons */
-.card svg:not([width]),
-.icon svg:not([width]),
-[class*="-card"] svg:not([width]),
-[class*="-icon"] svg:not([width]) {
-  max-width: 48px;
-  max-height: 48px;
-}
-```
-
-### Metrics Session 145ter
-- CSS Lines: 10,498 → **10,998** (+500)
-- CSS Version: v=43.0 → **v=54.0** (Session 147)
-- Validator Errors: 15 → **0**
-- Validator Warnings: 20 → **5** (minor)
-
----
-
-## SESSION 145bis - ACADEMY CSS + VALIDATION (23/01/2026)
-
-### Critical Bug Fixed: Giant SVG Icons on Academy Page
-
-| Issue | Root Cause | Fix |
-| :--- | :--- | :--- |
-| SVG icons 1152px instead of 28px | CSS truncated in production | Synced CSS versions |
-| Missing .course-card, .guide-card | 16 CSS classes undefined | Added ~100 lines CSS |
-| CI blocking deployments | CSS version mismatch | Synced to v=42.0 |
-
-### Validation System Improvements
-
-**NEW VALIDATORS ADDED:**
-1. `validateHTMLClassesHaveCSS()` - Detects HTML classes without CSS
-2. `validateSVGSizeConstraints()` - Detects unconstrained inline SVGs
-
----
-
-## SESSION 145 - DEPLOYMENT FIX (23/01/2026)
-
-### Verified LIVE on 3a-automation.com
-- ✅ Hybrid Architecture section deployed (FR+EN)
-- ✅ 3 glassmorphism cards visible
-- ✅ "AI proposes, code disposes" tagline
-- ✅ Salesforce 116-day pivot reference
-
-### Commits Session 145
-```
-0cac3a1 fix(css): Sync CSS version to v=38.0 across all files
-```
-
----
-
-## SESSION 144 - CONTENU & ÉTAGÈRE TECHNOLOGIQUE (23/01/2026)
-
-### Content Strategy (Leçons Salesforce)
-Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
-
-| Type | FR | EN | Status |
-| :--- | :--- | :--- | :--- |
-| Blog Article | `automatisation-fiable-lecons-salesforce-2026.html` | `reliable-automation-salesforce-lessons-2026.html` | ✅ |
-| Academy Course | `academy/courses/architecture-hybride.html` | `en/academy/courses/hybrid-architecture.html` | ✅ |
-
-**Concepts documentés:** Déterministe vs Probabiliste, Piège 80/20, Architecture Hybride (3 couches)
-
-### Étagère Technologique - Transferts Session 144
-
-| Direction | Technologies | Status | Réalité |
-| :--- | :--- | :--- | :--- |
-| 3A → MyDealz | omnisend-sensor, ga4-sensor, retention-sensor | ✅ Créés | ⚠️ Non testés |
-| 3A → Alpha | Multi-AI Fallback | ❌ **0 usages** | Code mort |
-| 3A → Alpha | Design System | ⚠️ Template only | Pas de DESIGN-SYSTEM.md |
-| 3A → Alpha | GA4 Sensor | ✅ Créé | ⚠️ Non testé |
-| Alpha → 3A | Theme Check CI | ✅ | Fonctionne |
-
-### MyDealz Sensors (VÉRIFIÉ)
-
-| Sensor | Fichier | Status |
-| :--- | :--- | :--- |
-| Shopify | `sensors/shopify-sensor.cjs` | ✅ |
-| Omnisend | `sensors/omnisend-sensor.cjs` | ✅ (pas Klaviyo!) |
-| GA4 | `sensors/ga4-sensor.cjs` | ✅ |
-| Retention | `sensors/retention-sensor.cjs` | ✅ |
-| Sync | `sensors/sync-to-3a.cjs` | ✅ |
-
-## Métriques VÉRIFIÉES (25/01/2026 - Session 156)
-
-| Élément | Valeur | Status |
-| :--- | :--- | :--- |
-| Scripts Core | **85** | ✅ (+stitch-to-3a-css.cjs S163) |
-| Scripts --health | **26** (31%) | ⚠️ 69% sans health check |
-| Automations Registry | **121** | ✅ SYNCED |
-| Automations Catalog | **121** | ✅ SYNCED |
-| HTML Pages | **71** | ✅ (+1 redirect) |
-| Blog Articles FR | 5 | ✅ |
-| Academy Courses | 14 | ✅ (7 FR + 7 EN) |
-| Sitemap URLs | **68** | ✅ (3 excluded: 404×2, redirect) |
-| Sensors 3A | 20 | **9 OK (45%), 5 PARTIAL, 6 BLOCKED** |
-| Sensors MyDealz | 5 | ✅ Transferred |
-| Stylelint Issues | 0 | ✅ |
-| CSS Version | **v=80.0** | ✅ Session 156 |
-| Validator Version | **v5.4.0** | ✅ 26 checks |
-| CSS Lines | ~260KB | ✅ Complete (+230 addon CSS) |
-| Design Validation | PASS | ✅ 0 errors, 83 warnings |
-| **Add-Ons** | **10 implemented** | ✅ FR+EN |
-| **Bundles** | **4 implemented** | ✅ 17% discount |
-| Right Tool Score | **55/100** | ⚠️ INSUFFISANT |
-| Homepage Hybrid Section | FR+EN | ✅ Added |
-| Academy "Comment ça marche" | FR+EN | ✅ Added (Session 152) |
-| **Remotion Studio** | **Production** | ✅ S146 |
-| Remotion Compositions | 4 | ✅ |
-| Remotion Components | 5 | ✅ |
-
-## SESSION 143 - AUDIT DESIGN UI/UX (23/01/2026)
-
-| Vérification | Résultat | Status |
-| :--- | :--- | :--- |
-| validate-design-system.cjs | 0 errors, 0 warnings | ✅ |
-| design-auto-fix.cjs --check | ALL CHECKS PASSED | ✅ |
-| CSS version | v=37.0 (66 fichiers) | ✅ |
-| Design Score | 85/100 EXCELLENT | ✅ |
-| Glassmorphism | 28 instances | ✅ |
-| CSS Variables | 1126 uses | ✅ |
-| font-display: swap | Via Google Fonts | ✅ |
-| Pre-commit hook | Loop fixed | ✅ |
-
-**Audit complet**: `docs/DESIGN-AUDIT-SESSION-143.md`
-
-### Alpha Medical - AUDIT FACTUEL (23/01/2026 19:00 UTC)
-
-**VERDICT: 37.5% SUCCÈS (6/16 implémentations fonctionnelles)**
-
-| Catégorie | Fichier | Créé | Fonctionne | Preuve |
+| # | Add-On | Monthly | Script | HITL |
 | :--- | :--- | :--- | :--- | :--- |
-| Theme Check | `.theme-check.yml` | ✅ | ✅ | 1/3 runs SUCCESS |
-| CI/CD theme-check | `theme-check.yml` | ✅ | ✅ | GitHub Actions |
-| CI/CD sensor-monitor | `sensor-monitor.yml` | ✅ | ❌ **0 runs** | Jamais exécuté |
-| MCP | `.mcp.json` | ✅ | ✅ | JSON valide |
-| Shopify Sensor | `shopify-sensor.cjs` | ✅ | ❌ **401/403** | products=0 (réel=90) |
-| Klaviyo Sensor | `klaviyo-sensor.cjs` | ✅ | ❌ **401** | flows=0 (réel=5) |
-| Retention Sensor | `retention-sensor.cjs` | ✅ | ⚠️ Non testé | 0 runs |
-| GA4 Sensor | `ga4-sensor.cjs` | ✅ | ⚠️ Non testé | 0 runs |
-| Sync-to-3A | `sync-to-3a.cjs` | ✅ | ⚠️ Non testé | 0 runs |
-| GPM Local | `pressure-matrix.json` | ✅ | ❌ **Données fausses** | 0 products |
-| Pre-commit | `.husky/pre-commit` | ✅ | ✅ | Hook actif |
-| Resilient AI | `resilient-ai-fallback.cjs` | ✅ | ❌ **0 usages** | grep=0 imports |
-| RAG KB Builder | `knowledge_base_builder.py` | ✅ | ❌ **401** | Test exécution |
-| RAG KB Simple | `knowledge_base_simple.py` | ✅ | ❌ **401** | Test exécution |
+| 1 | Anti-Churn AI | €180 | churn-prediction-resilient.cjs | ✅ |
+| 2 | Review Booster | €80 | review-request-automation.cjs | ✅ |
+| 3 | Replenishment | €100 | replenishment-reminder.cjs | ✅ |
+| 4 | Email Cart Series | €150 | email-personalization-resilient.cjs | ✅ |
+| 5 | SMS Automation | €120 | sms-automation-resilient.cjs | ✅ |
+| 6 | Price Drop | €80 | price-drop-alerts.cjs | ✅ |
+| 7 | WhatsApp Booking | €60 | whatsapp-booking-notifications.cjs | ✅ |
+| 8 | Blog Factory | €200 | blog-generator-resilient.cjs | ✅ |
+| 9 | Podcast Generator | €100 | podcast-generator-resilient.cjs | ✅ |
+| 10 | Dropshipping | €250 | cjdropshipping-automation.cjs | ✅ |
 
-**BLOCKERS CRITIQUES:**
-- `SHOPIFY_ADMIN_ACCESS_TOKEN` → **403 Forbidden** (6 workflows bloqués)
-- `KLAVIYO_PRIVATE_API_KEY` → **401 Unauthorized** (9 workflows bloqués)
-
-**GitHub Actions: 85% ÉCHEC (17/20 runs)**
-
-**CE QUI FONCTIONNE:**
-1. ✅ Theme Check CI (1 success)
-2. ✅ llms.txt auto-update (2 succès)
-3. ✅ Documentation (ANALYSE-TRANSFERT 15K)
-
-**CE QUI NE FONCTIONNE PAS:**
-- 5 sensors créés mais **0% fonctionnels**
-- 2 scripts RAG créés mais **échouent 401**
-- 1 resilient-ai-fallback **jamais utilisé (0 imports)**
-
-**Source**: Audit interne Alpha Medical 23/01/2026
-
-## SESSION 142 - DESIGN SYSTEM (23/01/2026)
-
-| Fix | Details | Status |
-| :--- | :--- | :--- |
-| Stylelint issues | 55→0 (color: white → var(--text-light)) | ✅ FIXÉ |
-| Visual regression | 9 baseline screenshots created | ✅ DONE |
-| Pre-commit hook | Blocks invalid commits | ✅ ACTIVE |
-| CI/CD validation | deploy-website.yml v3.0 | ✅ CONFIGURED |
-| DESIGN-SYSTEM.md | Source of truth unified | ✅ CREATED |
-| Booking page CSS | .booking-success display:none | ✅ FIXÉ |
-
-## SESSION 141 - FIXES (22/01/2026)
-
-| Fix | Details | Status |
-| :--- | :--- | :--- |
-| Homepage "174"→"119" | FR + EN + meta + JSON-LD | ✅ FIXÉ |
-| Homepage "18 agents"→"22" | FR + EN + telemetry | ✅ FIXÉ |
-| llms.txt | 174→119, 18→22 | ✅ FIXÉ |
-| Scripts defer | 6 scripts | ✅ FIXÉ |
-
-## PROTOCOLES - VÉRIFIÉ SESSION 143
-
-| Protocole | Status | Fichier Principal | Endpoints |
-| :--- | :--- | :--- | :--- |
-| **A2A** | ✅ PRODUCTION | `automations/a2a/server.js` | `/a2a/v1/rpc`, `/.well-known/agent.json` |
-| **UCP** | ✅ PRODUCTION | `pages/api/ucp/products.js` | `/.well-known/ucp`, `/api/ucp/products` |
-| **ACP** | ✅ FONCTIONNEL | `automations/acp/server.js` | `/acp/v1/agent/submit`, `/acp/v1/stream` |
-| **GPM** | ✅ PRODUCTION | `landing-page-hostinger/data/pressure-matrix.json` | 20 sensors, 8 sectors |
-| **AG-UI** | ✅ PRODUCTION | `automations/a2a/server.js:416-518` | `/ag-ui`, `/ag-ui/queue` |
-
-**Agents enregistrés**: 43 (10 core + 41 dynamic skills)
-
-## SENSORS - EXÉCUTION RÉELLE (20 total)
-
-| Status | Count | Sensors (Pressure) |
-| :--- | :--- | :--- |
-| ✅ OK | 6 | retention(0), product-seo(0), shopify(75), google-trends(5), cost-tracking(30), lead-velocity(75) |
-| ⚠️ PARTIAL | 10 | klaviyo(65), email-health(60), ga4(50), google-ads-planner(50), bigquery(-), supplier-health(80), voice-quality(90), content-perf(90), lead-scoring(95) |
-| ❌ BLOCKED | 4 | gsc(API disabled), meta-ads(95), tiktok-ads(95), apify(trial expired) |
-
-## BLOCKERS RESTANTS (P1-P2) - USER ACTION REQUIRED
-
-| Problème | Impact | Action | Lien |
-| :--- | :--- | :--- | :--- |
-| ~~GSC API disabled~~ | ~~Sensor SEO cassé~~ | ✅ **FIXED S161bis** | - |
-| META_ACCESS_TOKEN vide | Meta Ads cassé | Configurer token | Facebook Business |
-| TIKTOK_ACCESS_TOKEN vide | TikTok Ads cassé | Configurer token | TikTok Business |
-| Apify trial expiré | Trends cassé | Payer $49/mois | [Apify Billing](https://console.apify.com/billing) |
-| 33 credentials vides | 55% features OFF | Configurer .env | - |
+---
 
 ## Règles Strictes
 
-1. **Factuality**: 100% (Probes empiriques vs Mocks).
-2. **Architecture**: Forensic Engine isolé (`/forensic-engine/`).
-3. **Zero Debt**: 0 TODO/placeholder dans le core forensic.
-4. **Source**: `SFAP_PROTOCOL_v3_LEVEL5.md.resolved` est la vérité.
-5. **Autonomy**: L5 (Sovereign DOE) gère l'orchestration finale.
+1. **Factuality**: 100% (Probes empiriques vs Mocks)
+2. **Architecture**: Forensic Engine isolé (`/forensic-engine/`)
+3. **Zero Debt**: 0 TODO/placeholder dans le core
+4. **Source**: `SFAP_PROTOCOL_v3_LEVEL5.md.resolved` est la vérité
+5. **Autonomy**: L5 (Sovereign DOE) gère l'orchestration finale
+
+---
 
 ## AI Fallback (Faldown Protocol)
 
-1. **Protocol**: Secure fallback chain for FRONTIER LLM calls.
-2. **Models**:
-   - Grok: `grok-4-1-fast-reasoning`
-   - OpenAI: `gpt-5.2`
-   - Gemini: `gemini-3-flash-preview`
-   - Claude: `claude-sonnet-4-20250514` / `claude-opus-4-5-20251101`
-3. **Trigger**: Latency > 15s OR Status != 200.
+| Provider | Model |
+| :--- | :--- |
+| Grok | grok-4-1-fast-reasoning |
+| OpenAI | gpt-5.2 |
+| Gemini | gemini-3-flash-preview |
+| Claude | claude-sonnet-4-20250514 / claude-opus-4-5-20251101 |
+
+**Trigger**: Latency > 15s OR Status != 200
+
+---
 
 ## Commandes
 
@@ -1424,13 +135,37 @@ node scripts/forensic-audit-complete.cjs  # Audit
 git push origin main                       # Deploy auto
 ```
 
+### Health Check Pattern
+```bash
+node automations/agency/core/SCRIPT.cjs --health
+```
+
+### HITL Commands
+```bash
+node SCRIPT.cjs --list-pending     # List pending approvals
+node SCRIPT.cjs --approve=<id>     # Approve
+node SCRIPT.cjs --reject=<id>      # Reject
+```
+
+### Stitch API
+```bash
+node automations/agency/core/stitch-api.cjs --health
+node automations/agency/core/stitch-api.cjs list
+node automations/agency/core/stitch-api.cjs generate <id> "prompt"
+```
+
+---
+
 ## Références (charger via @)
 
-- Détails projet: @docs/session-history/
-- External Workflows: @docs/external_workflows.md
-- Voice AI: @.claude/rules/voice-ai.md
-- Scripts: @.claude/rules/scripts.md
-- Infra: @docs/reference/infrastructure.md
-- **Remotion Video**: @.claude/skills/remotion-video/SKILL.md
-- **Étagère Tech**: @docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md
-- **Transfert Shopify**: @docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md
+| Topic | File |
+| :--- | :--- |
+| Session History | @docs/session-history/ |
+| External Workflows | @docs/external_workflows.md |
+| Voice AI | @.claude/rules/voice-ai.md |
+| Scripts | @.claude/rules/scripts.md |
+| Infra | @docs/reference/infrastructure.md |
+| Remotion Video | @.claude/skills/remotion-video/SKILL.md |
+| Étagère Tech | @docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md |
+| Transfert Shopify | @docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md |
+| Ecosystem Audit | @docs/AUDIT-SESSION-165-ECOSYSTEM.md |

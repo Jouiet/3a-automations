@@ -1,7 +1,36 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL (Session 164 - 26/01/2026):** System Verification ✅, Remotion ✅, Sensors 45% OK | **Scripts: 85**
+> **✅ ÉTAT RÉEL (Session 165quater - 26/01/2026):** HITL 100% (18/18) ✅, Remotion ✅, Sensors 79% OK | **Scripts: 85**
+
+## SESSION 165quater - HITL 100% COVERAGE (26/01/2026)
+
+### Accomplissements
+
+| Élément | Status | Détail |
+|---------|--------|--------|
+| HITL Implementation | ✅ DONE | 6 workflows: dropshipping, bigbuy, hubspot, omnisend, lead-chatbot, voice-bridge |
+| HITL Coverage | ✅ **100%** | 18/18 high-risk scripts protected |
+| Health Checks | ✅ DONE | All HITL workflows verified |
+| Documentation | ✅ DONE | ADD-ONS-CATALOG, scripts.md, AUDIT updated |
+
+### HITL Scripts Added (Session 165quater)
+
+| Script | HITL Type | Threshold |
+|--------|-----------|-----------|
+| dropshipping-order-flow | Order value | €500+ |
+| bigbuy-supplier-sync | Batch size | >100 products |
+| hubspot-b2b-crm | Deal value | €2000+ |
+| omnisend-b2c-ecommerce | Preview mode | Marketing events |
+| lead-qualification-chatbot | Hot leads | Score ≥80 |
+| voice-telephony-bridge | Call actions | Transfers + hot bookings |
+
+### Commit
+```
+537da33 feat(HITL): implement Human In The Loop for 6 remaining workflows (100% coverage)
+```
+
+---
 
 ## SESSION 164 - SYSTEM VERIFICATION + REMOTION (26/01/2026)
 
