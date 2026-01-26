@@ -4,7 +4,34 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168sexies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.1.0 (124 tools, chain_tools REAL, 37% SOTA)**
+> **✅ ÉTAT RÉEL (Session 168septies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.2.0 (124 tools, 3 resources, 3 prompts, SDK 1.25.3, 73% SOTA)**
+
+---
+
+## SESSION 168septies - SDK 1.25.3 + RESOURCES + PROMPTS (26/01/2026)
+
+### MCP Score SOTA: 37% → 73% (+36%)
+
+| Phase | Implementation | Status |
+| :--- | :--- | :--- |
+| **P0: SDK Upgrade** | 0.6.0 → 1.25.3 | ✅ DONE |
+| **P1: Resources** | 3 resources (registry, clients, sensors) | ✅ DONE |
+| **P2: Prompts** | 3 prompts (health_report, campaign, audit) | ✅ DONE |
+| **McpServer** | New high-level API with registerX methods | ✅ DONE |
+| **Zod Schemas** | Type-safe inputs for all tools | ✅ DONE |
+
+### New Capabilities
+
+| Type | Name | Description |
+| :--- | :--- | :--- |
+| Resource | `3a://registry/automations` | 121 automations catalog |
+| Resource | `3a://registry/clients` | Multi-tenant configurations |
+| Resource | `3a://sensors/pressure-matrix` | Real-time GPM health |
+| Prompt | `client_health_report` | Client analysis workflow |
+| Prompt | `campaign_analysis` | Marketing performance |
+| Prompt | `automation_audit` | System health audit |
+
+**Commit:** `ee42ec4` | **Tests:** 99/99 (100%) | **Score SOTA:** 73%
 
 ---
 
