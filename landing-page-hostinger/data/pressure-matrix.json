@@ -1,5 +1,6 @@
 {
-  "last_updated": "2026-01-26T00:19:57.017Z",
+  "last_updated": "2026-01-26T02:20:00.000Z",
+  "session": "162bis",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -10,7 +11,7 @@
       "meta_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-23T11:34:09.851Z",
+        "last_check": "2026-01-26T01:18:28.525Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "Meta API credentials missing in .env"
@@ -19,7 +20,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-25T21:30:58.506Z",
+        "last_check": "2026-01-26T01:18:33.178Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -27,26 +28,26 @@
       },
       "market_demand": {
         "label": "Market Demand",
-        "pressure": 50,
-        "trend": "STABLE",
-        "last_check": "2026-01-26T00:18:14.616Z",
+        "pressure": 6,
+        "trend": "DOWN",
+        "last_check": "2026-01-26T01:18:21.943Z",
         "sensor_data": {
-          "method": "AI Analysis (fallback)",
+          "method": "AI Analysis (Grok)",
           "keywords": [
             "marketing automation",
             "ai automation agency",
             "shopify automation",
             "e-commerce automation"
           ],
-          "demand_score": 50,
-          "market_trend": "stable",
-          "assessment": "Unable to analyze - using neutral baseline"
+          "demand_score": 94,
+          "market_trend": "rising",
+          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation is surging due to AI integration and e-commerce expansion. By January 2026, businesses prioritize efficiency tools amid economic recovery and digital transformation."
         }
       },
       "tiktok_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-23T11:34:13.535Z",
+        "last_check": "2026-01-26T01:18:35.535Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "TikTok API credentials missing in .env"
@@ -67,7 +68,7 @@
         "label": "Email Health",
         "pressure": 60,
         "trend": "STABLE",
-        "last_check": "2026-01-25T21:30:54.905Z",
+        "last_check": "2026-01-26T01:18:09.067Z",
         "sensor_data": {
           "bounce_rate": 0,
           "spam_rate": 0,
@@ -82,7 +83,7 @@
         "label": "Content Performance",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-23T11:33:52.776Z",
+        "last_check": "2026-01-26T01:18:07.527Z",
         "sensor_data": {
           "posts_total": 0,
           "posts_this_month": 0,
@@ -96,7 +97,7 @@
       "lead_velocity": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T00:18:00.939Z",
+        "last_check": "2026-01-26T01:18:28.324Z",
         "sensor_data": {
           "leads_last_24h": 2
         }
@@ -104,10 +105,10 @@
       "lead_scoring": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-23T11:34:09.483Z",
+        "last_check": "2026-01-26T01:18:28.151Z",
         "sensor_data": {
           "quality_score": 3,
-          "days_stale": 14
+          "days_stale": 17
         }
       }
     },
@@ -115,7 +116,7 @@
       "gsc_gaps": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T00:14:21.689Z",
+        "last_check": "2026-01-26T01:18:27.243Z",
         "sensor_data": {
           "top_gap_potential": 0,
           "target_query": "\"grok\" \"web speech api\""
@@ -124,7 +125,7 @@
       "product_enrichment": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-25T21:31:10.387Z",
+        "last_check": "2026-01-26T01:18:32.381Z",
         "sensor_data": {
           "product_count": 0,
           "poor_seo_ratio": "0.00"
@@ -147,7 +148,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T00:19:56.126Z",
+        "last_check": "2026-01-26T01:18:35.148Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
@@ -160,7 +161,7 @@
         "label": "Supplier Health",
         "pressure": 80,
         "trend": "STABLE",
-        "last_check": "2026-01-23T11:34:13.347Z",
+        "last_check": "2026-01-26T01:18:35.348Z",
         "sensor_data": {
           "suppliers_checked": 2,
           "suppliers_healthy": 0,
@@ -187,7 +188,7 @@
         "label": "API Costs",
         "pressure": 30,
         "trend": "STABLE",
-        "last_check": "2026-01-26T00:19:57.017Z",
+        "last_check": "2026-01-26T01:18:07.965Z",
         "sensor_data": {
           "current_month_usd": 0,
           "projected_month_usd": 0,
@@ -201,17 +202,30 @@
       }
     },
     "technology": {
+      "stitch_api": {
+        "label": "Stitch MCP API",
+        "pressure": 0,
+        "trend": "STABLE",
+        "last_check": "2026-01-26T02:20:00.000Z",
+        "sensor_data": {
+          "status": "OPERATIONAL",
+          "protocol": "MCP JSON-RPC 2.0",
+          "wrapper": "stitch-api.cjs",
+          "screens_generated": 2,
+          "project_id": "705686758968107418"
+        }
+      },
       "voice_quality": {
         "label": "Voice Quality",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-23T11:34:13.992Z",
+        "last_check": "2026-01-26T01:18:36.149Z",
         "sensor_data": {
           "endpoints_healthy": 0,
           "endpoints_total": 3,
           "providers_healthy": 0,
           "providers_configured": 1,
-          "avg_latency_ms": 238,
+          "avg_latency_ms": 394,
           "endpoint_details": [
             {
               "name": "Voice API",
@@ -238,7 +252,7 @@
             {
               "name": "OpenAI Whisper",
               "status": "ERROR",
-              "latency_ms": 238
+              "latency_ms": 394
             }
           ]
         }
@@ -249,7 +263,7 @@
         "label": "WhatsApp Status",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-23T11:34:14.190Z",
+        "last_check": "2026-01-26T01:18:36.348Z",
         "sensor_data": {
           "connected": false,
           "phone_verified": false,
@@ -271,7 +285,7 @@
   "metrics": {
     "global_roas": "0.00",
     "total_revenue_7d": "0.00",
-    "sovereign_units": 119,
+    "sovereign_units": 121,
     "autonomy_level": 5
   },
   "subsidiaries": {
