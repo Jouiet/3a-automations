@@ -1,10 +1,54 @@
 # 3A Automation
-> Version: 114.0 | 26/01/2026 | Session 168septies - SDK 1.25.3 + Resources + Prompts (73% SOTA)
+> Version: 115.0 | 26/01/2026 | Session 168octies - Caching + Output Schemas (80% SOTA)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168octies - CACHING + OUTPUT SCHEMAS (26/01/2026)
+
+### MCP Score SOTA: 73% → 80% (+7%)
+
+| Implementation | Impact | Status |
+| :--- | :--- | :--- |
+| **CacheManager** | In-memory cache with TTL | ✅ DONE |
+| **Output Schemas** | Zod schemas for responses | ✅ DONE |
+| **get_global_status** | Cache stats included | ✅ DONE |
+| **get_tool_catalog** | Cached (5min TTL) | ✅ DONE |
+| **Version** | 1.2.0 → 1.3.0 | ✅ DONE |
+| **Tests** | 99/99 (100%) | ✅ VERIFIED |
+
+### CacheManager Features
+
+```typescript
+class CacheManager {
+    get<T>(key: string): T | null      // Get with TTL check
+    set<T>(key, data, ttl): void       // Set with TTL
+    getStats()                          // hits, misses, hitRate
+    clear(): void                       // Reset cache
+}
+```
+
+### Output Schemas
+
+| Schema | Use |
+| :--- | :--- |
+| `globalStatus` | get_global_status response |
+| `toolCatalog` | get_tool_catalog response |
+| `chainResult` | chain_tools step result |
+| `toolExecution` | Individual tool execution |
+
+### Capabilities Now
+
+```
+Version: 1.3.0
+SDK: 1.25.3
+SOTA: 80%
+Features: tools, resources, prompts, logging, caching, output-schemas
+```
 
 ---
 

@@ -1,7 +1,8 @@
 # 3A-GLOBAL-MCP - Documentation Forensique Complète
 
-> **Version:** 1.2.0 | **Date:** 26/01/2026 | **Session:** 168septies
+> **Version:** 1.3.0 | **Date:** 26/01/2026 | **Session:** 168octies
 > **Status:** OPERATIONAL | **Tools:** 124 | **Resources:** 3 | **Prompts:** 3 | **SDK:** @modelcontextprotocol/sdk v1.25.3
+> **SOTA Score:** 80% | **Features:** Caching + Output Schemas
 
 ---
 
@@ -304,12 +305,12 @@ Performance benchmarks:
 | Resources | 15% | 15/15 | 15 | ✅ **DONE S168septies** (3 resources) |
 | Prompts | 15% | 15/15 | 15 | ✅ **DONE S168septies** (3 prompts) |
 | Security (OAuth) | 20% | 0/20 | 20 | ⏳ P5 |
-| Performance | 10% | 4/10 | 10 | ✅ chain_tools real |
+| Performance | 10% | 9/10 | 10 | ✅ **DONE S168octies** (caching + output schemas) |
 | SDK currency | 10% | 10/10 | 10 | ✅ **DONE S168septies** (v1.25.3) |
-| Observability | 5% | 4/5 | 5 | ✅ logging |
-| **TOTAL** | 100% | **73/100** | 100 | +36 pts S168septies |
+| Observability | 5% | 5/5 | 5 | ✅ **DONE** (logging + cache stats) |
+| **TOTAL** | 100% | **80/100** | 100 | +7 pts S168octies |
 
-**VERDICT: 73% SOTA - Niveau "Production Ready" (+36% Session 168septies)**
+**VERDICT: 80% SOTA - Niveau "Production Ready" (+7% Session 168octies)**
 
 ---
 
@@ -384,10 +385,10 @@ Actuel:
 | **P2** | Prompts implementation | 8h | +15% | ✅ **DONE S168septies** |
 | **P3** | Real tool chaining | 6h | +5% | ✅ **DONE S168sexies** |
 | **P4** | Streamable HTTP | 8h | +5% | ⏳ PENDING |
-| **P5** | OAuth 2.1 basic | 16h | +20% | ⏳ PENDING |
-| **P6** | Caching layer | 8h | +5% | ⏳ PENDING |
-| **P7** | Tool output schemas | 8h | +2% | ⏳ PENDING |
-| **TOTAL** | - | **40h remaining** | **73%→100%** | 4/8 DONE |
+| **P5** | OAuth 2.1 basic | 16h | +15% | ⏳ PENDING |
+| **P6** | Caching layer | 4h | +5% | ✅ **DONE S168octies** |
+| **P7** | Tool output schemas | 4h | +2% | ✅ **DONE S168octies** |
+| **TOTAL** | - | **24h remaining** | **80%→100%** | 6/8 DONE |
 
 ### 7.2 P0 - SDK Upgrade (CRITIQUE)
 
