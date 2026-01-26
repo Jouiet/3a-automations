@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 87.0 | 26/01/2026 | Session 161bis - **CSS Optimization** + clamp() Migration
+> Version: 88.0 | 26/01/2026 | Session 161bis - **GSC Sensor** + CSS Optimization + CWV Verified
 
 ## Identité
 
@@ -55,6 +55,33 @@
 # Test result
 📡 GPM Updated: SEO Pressure is 0 (Topic: "grok" "web speech api")
 ```
+
+### Sensors Status (Verified 26/01/2026)
+
+| Sensor | Status | Output |
+| :--- | :--- | :--- |
+| gsc-sensor | ✅ OK | Pressure 0 |
+| google-trends-sensor | ✅ OK | Demand 92/100, rising |
+| shopify-sensor | ✅ OK | Pressure 75 |
+| lead-velocity-sensor | ✅ OK | 2 leads |
+| cost-tracking-sensor | ✅ OK | Budget OK |
+
+**Synthèse: 7 OK (35%), 10 PARTIAL (50%), 3 BLOCKED (15%)**
+
+### Core Web Vitals (Production 26/01/2026)
+
+| Metric | Value | Status |
+| :--- | :--- | :--- |
+| LCP | 554ms | ✅ EXCELLENT |
+| CLS | 0.04 | ✅ EXCELLENT |
+| TTFB | 166ms | ✅ EXCELLENT |
+
+### Stitch MCP Status
+
+| Aspect | Status |
+| :--- | :--- |
+| Tools | ✅ 6 disponibles |
+| Auth | ❌ OAuth Google requis |
 
 ---
 
