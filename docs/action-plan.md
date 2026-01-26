@@ -1,7 +1,49 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 166bis - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice Multilingual: AUDIT COMPLET**
+> **✅ ÉTAT RÉEL (Session 166quater - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice Widgets: FR+EN+ES+AR ✅**
+
+---
+
+## SESSION 166quater - VOICE WIDGETS ES + AR (26/01/2026)
+
+### Widgets Créés
+
+| Widget | Fichier | Langues Speech API | RTL |
+|--------|---------|-------------------|-----|
+| Espagnol | `voice-widget-es.js` | es-ES | Non |
+| Arabe MSA | `voice-widget-ar.js` | ar-SA | **Oui** |
+
+### Intégration ui-init.js
+
+```javascript
+// Determine language from HTML tag (FR, EN, ES, AR supported)
+var lang = document.documentElement.lang || 'fr';
+var widgetMap = {
+  'en': '/voice-assistant/voice-widget-en.js?v=28.0',
+  'es': '/voice-assistant/voice-widget-es.js?v=28.0',
+  'ar': '/voice-assistant/voice-widget-ar.js?v=28.0'
+};
+s.src = widgetMap[lang] || '/voice-assistant/voice-widget.js?v=28.0';
+```
+
+### Fonctionnalités Incluses
+
+| Feature | ES | AR |
+|---------|----|----|
+| Booking flow complet | ✅ | ✅ |
+| Industry detection | ✅ | ✅ |
+| Topic responses | ✅ | ✅ |
+| GA4 tracking | ✅ | ✅ |
+| Web Speech API TTS | es-ES | ar-SA |
+| Web Speech API STT | es-ES | ar-SA |
+| RTL support | ❌ | ✅ |
+
+### Note Architecture
+
+L'implémentation actuelle utilise des widgets auto-contenus. Architecture optimale future:
+- `voice-widget-core.js` - logique commune
+- `lang/voice-{lang}.json` - traductions
 
 ---
 
@@ -15,11 +57,11 @@
 
 | Aspect | État Actuel | Cible | Gap |
 |--------|-------------|-------|-----|
-| Langues configurées | FR, EN (2) | FR, EN, ES, AR, Darija (5) | **-3 langues** |
+| Langues configurées | FR, EN, ES, AR (4) | FR, EN, ES, AR, Darija (5) | **-1 langue (Darija)** |
 | TTS Darija | ❌ AUCUN | ElevenLabs "Ghizlane" | **BLOQUANT Maroc** |
 | STT Darija | ❌ AUCUN | ElevenLabs Scribe | **BLOQUANT Maroc** |
-| Espagnol | ❌ Config manquante | Grok Voice | TRIVIAL |
-| Arabe MSA | ❌ Config manquante | Grok Voice | TRIVIAL |
+| Espagnol | ✅ **DONE** (S166quater) | Web Speech API | Widget créé |
+| Arabe MSA | ✅ **DONE** (S166quater) | Web Speech API | Widget créé (RTL) |
 
 ### Marchés Cibles
 
@@ -221,8 +263,8 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 
 | Task | Component | Effort | Status |
 |------|-----------|--------|--------|
-| **Phase 1: Espagnol voice** | Voice | 16h | ⏳ PENDING |
-| **Phase 2: Arabe MSA voice** | Voice | 18h | ⏳ PENDING |
+| **Phase 1: Espagnol voice widget** | Voice | 16h | ✅ **DONE** (S166quater) |
+| **Phase 2: Arabe MSA voice widget** | Voice | 18h | ✅ **DONE** (S166quater) |
 | **Phase 4: LLM Darija (Mistral Saba)** | Voice | 22h | ⏳ OPTIONAL |
 | WCAG 2.2 Audit | Accessibility | 8h | ⏳ PENDING |
 | A2A v0.3 upgrade | Protocol | 8h | ⏳ PENDING |
@@ -278,8 +320,8 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-**Document màj:** 26/01/2026 - Session 166bis
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | MCP 5/6 ✅ | CSS v86.0 | **Voice: AUDIT DONE + ELEVENLABS CONFIGURED**
-**New doc:** `docs/VOICE-MULTILINGUAL-STRATEGY.md` (700+ lines, full benchmark, corrections factuelles)
-**Key finding:** TTS Darija = NON OFFICIEL (Ghizlane = communautaire) | STT Darija = OFFICIEL (Scribe Maghrebi)
+**Document màj:** 26/01/2026 - Session 166quater
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | MCP 5/6 ✅ | CSS v86.0 | **Voice Widgets: FR+EN+ES+AR ✅**
+**New files:** `voice-widget-es.js`, `voice-widget-ar.js` (RTL), `ui-init.js` updated for multi-lang
+**Gap:** Darija widget only (TTS Ghizlane communautaire, STT Scribe officiel)
 **Archive:** Sessions 141-165 archived in `docs/session-history/sessions-141-164.md`

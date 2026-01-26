@@ -6,9 +6,14 @@
         if (voiceLoaded) return;
         voiceLoaded = true;
         var s = document.createElement('script');
-        // Determine language from HTML tag
+        // Determine language from HTML tag (FR, EN, ES, AR supported)
         var lang = document.documentElement.lang || 'fr';
-        s.src = (lang === 'en') ? '/voice-assistant/voice-widget-en.js?v=27.0' : '/voice-assistant/voice-widget.js?v=27.0';
+        var widgetMap = {
+            'en': '/voice-assistant/voice-widget-en.js?v=28.0',
+            'es': '/voice-assistant/voice-widget-es.js?v=28.0',
+            'ar': '/voice-assistant/voice-widget-ar.js?v=28.0'
+        };
+        s.src = widgetMap[lang] || '/voice-assistant/voice-widget.js?v=28.0';
         s.defer = true;
         document.body.appendChild(s);
     }
