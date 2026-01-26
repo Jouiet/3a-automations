@@ -1,6 +1,6 @@
 # 3A Automation
 >
-> Version: 95.0 | 26/01/2026 | Session 165 - **Ecosystem Audit + Registry Fix + Optimizations**
+> Version: 96.0 | 26/01/2026 | Session 165bis - **EXHAUSTIVE Stack Optimization Research**
 
 ## Identité
 
@@ -88,22 +88,44 @@
 
 **Result**: 88/121 with script (was 83), 33 external configs (NOT bugs)
 
-### Optimization Opportunities (Comprehensive Web Research)
+### Optimization Opportunities (EXHAUSTIVE Web Research - 50+ Sources)
 
 | Stack | Finding | Status | Priority |
 | :--- | :--- | :--- | :--- |
-| Klaviyo | API Revision 2026-01-15 | ✅ Current | - |
-| Remotion | New `<Video>` component | ✅ Using it | - |
-| A2A Protocol | v0.3 + InteractionsAPI | ⏳ Available | P2 |
-| MCP | OAuth 2.1 standard | ⏳ Available | P2 |
-| Shopify Flow | Sidekick AI | ⏳ Available | P3 |
-| **Gemini 3** | **Thought signatures REQUIRED** | ⚠️ Check | **P1** |
-| **GPT-5.2** | **Responses API +4% perf** | ⚠️ Check | **P1** |
-| GitHub Actions | Parallel steps mid-2026 | ⏳ Coming | P3 |
-| ElevenLabs | IVC: 1-2 min audio max | ✅ Documented | - |
-| fal.ai | Queue API + webhooks | ⏳ Available | P2 |
-| E-commerce | LTV:CAC >3:1 required | ✅ Aware | - |
-| Voice AI | Sub-500ms latency target | ⏳ Benchmark | P2 |
+| **AI Models** | | | |
+| Gemini 3 | **thought_signatures REQUIRED** for function calling | ⚠️ Implement | **P1** |
+| GPT-5.2 | Responses API +4% Tau-Bench | ⚠️ Migrate | **P1** |
+| OpenAI | **90% cost reduction** with cached inputs | ⏳ Implement | P1 |
+| **Voice AI** | | | |
+| ElevenLabs | Flash v2.5 = **75ms latency** (vs 300ms) | ⏳ Upgrade | P1 |
+| Voice total | **<500ms target**: STT(150) + LLM(350) + TTS(75) | ⏳ Benchmark | P1 |
+| WebSocket | Persistent > REST (40-100ms saved) | ⏳ Migrate | P2 |
+| **E-commerce** | | | |
+| Shopify Flow | **100 items MAX per loop** | ⚠️ CRITICAL | P0 |
+| Shopify Flow | Sidekick AI for natural language workflows | ⏳ Available | P2 |
+| Cart recovery | 3-email series: 1h→24h→72h = **15-25% recovery** | ⏳ Implement | P1 |
+| Welcome series | 40-day lifecycle (vs 5-email default) | ⏳ Extend | P2 |
+| **Analytics** | | | |
+| GA4 | Server-side GTM = bypass ad blockers | ⏳ Implement | P2 |
+| GA4 | Consent Mode v2 **MANDATORY EU** | ⚠️ Verify | P1 |
+| Ads | AI fully automated (Advantage+) | ⏳ Enable | P2 |
+| **Infrastructure** | | | |
+| GH Actions | Docker `type=gha` = **80%+ faster builds** | ⏳ Enable | P2 |
+| GH Actions | Cache limit **REMOVED** (was 10GB) | ✅ Aware | - |
+| Remotion | `npx remotion benchmark` for optimal concurrency | ⏳ Run | P2 |
+| Remotion | Replace GPU CSS with precomputed images (cloud) | ⏳ Migrate | P2 |
+| fal.ai | Queue API + webhooks for long requests | ⏳ Implement | P2 |
+| **Protocols** | | | |
+| A2A | v0.3 stable + gRPC support | ⏳ Upgrade | P2 |
+| MCP | OAuth 2.1 standard | ⏳ Migrate | P2 |
+| Stitch | Experimental mode (Pro) for complex UI | ⏳ Enable | P3 |
+| **Accessibility** | | | |
+| WCAG 2.2 | Level AA **April 2026 EU deadline** | ⏳ Audit | P1 |
+| Touch targets | **24x24px minimum** (new in 2.2) | ⏳ Verify | P2 |
+| **Web Performance** | | | |
+| LCP | 554ms ✅ EXCELLENT (<2.5s) | ✅ Done | - |
+| CLS | 0.04 ✅ EXCELLENT (<0.1) | ✅ Done | - |
+| INP | Unknown - measure | ⏳ Benchmark | P2 |
 
 ### BigQuery Scheduling
 
@@ -121,7 +143,19 @@
 
 ### Documentation Created
 
-- `docs/AUDIT-SESSION-165-ECOSYSTEM.md` - Full audit report (500+ lines)
+- `docs/AUDIT-SESSION-165-ECOSYSTEM.md` - **EXHAUSTIVE audit report (700+ lines)**
+  - Sections 1-14: Empirical verification (scripts, sensors, protocols, credentials)
+  - Sections 15-17: **COMPREHENSIVE stack optimization** (22 technology domains)
+  - Sections 15.1-15.22: Detailed findings per stack component with sources
+  - Section 16: **Actionable optimization plan** (P0-P3 priorities)
+  - Section 17: **2026 optimized technology stack summary**
+
+### Research Sources (50+)
+- Official docs: Shopify, Klaviyo, GA4, Meta, TikTok, Google Ads, ElevenLabs, fal.ai, Apify, Remotion
+- Protocol specs: A2A (Linux Foundation), MCP, Google Stitch
+- AI platforms: OpenAI, Anthropic, Google AI, xAI (Grok)
+- Developer blogs: DEV Community, Medium, GitHub Blog
+- Industry benchmarks: E-commerce metrics, Core Web Vitals, WCAG 2.2
 
 ---
 
