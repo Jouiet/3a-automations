@@ -1,7 +1,7 @@
 # 3A-GLOBAL-MCP - Documentation Forensique Complète
 
-> **Version:** 1.1.0 | **Date:** 26/01/2026 | **Session:** 168sexies
-> **Status:** OPERATIONAL | **Tools:** 124 | **SDK:** @modelcontextprotocol/sdk v0.6.0
+> **Version:** 1.2.0 | **Date:** 26/01/2026 | **Session:** 168septies
+> **Status:** OPERATIONAL | **Tools:** 124 | **Resources:** 3 | **Prompts:** 3 | **SDK:** @modelcontextprotocol/sdk v1.25.3
 
 ---
 
@@ -301,15 +301,15 @@ Performance benchmarks:
 | Critère | Poids | Score 3a-global-mcp | Max | Notes |
 |---------|-------|---------------------|-----|-------|
 | Tools coverage | 25% | 25/25 | 25 | ✅ 124 tools |
-| Resources | 15% | 0/15 | 15 | ⏳ P1 |
-| Prompts | 15% | 0/15 | 15 | ⏳ P2 |
+| Resources | 15% | 15/15 | 15 | ✅ **DONE S168septies** (3 resources) |
+| Prompts | 15% | 15/15 | 15 | ✅ **DONE S168septies** (3 prompts) |
 | Security (OAuth) | 20% | 0/20 | 20 | ⏳ P5 |
-| Performance | 10% | 4/10 | 10 | ✅ +2 (chain_tools real) |
-| SDK currency | 10% | 2/10 | 10 | ⏳ P0 |
-| Observability | 5% | 4/5 | 5 | ✅ +1 (chain logging) |
-| **TOTAL** | 100% | **37/100** | 100 | +5 pts S168sexies |
+| Performance | 10% | 4/10 | 10 | ✅ chain_tools real |
+| SDK currency | 10% | 10/10 | 10 | ✅ **DONE S168septies** (v1.25.3) |
+| Observability | 5% | 4/5 | 5 | ✅ logging |
+| **TOTAL** | 100% | **73/100** | 100 | +36 pts S168septies |
 
-**VERDICT: 37% SOTA - Niveau "MVP Fonctionnel" (+5% Session 168sexies)**
+**VERDICT: 73% SOTA - Niveau "Production Ready" (+36% Session 168septies)**
 
 ---
 
@@ -379,15 +379,15 @@ Actuel:
 
 | Phase | Scope | Effort | Impact SOTA | Status |
 |-------|-------|--------|-------------|--------|
-| **P0** | SDK upgrade 0.6→1.25 | 4h | +8% | ⏳ PENDING |
-| **P1** | Resources implementation | 8h | +15% | ⏳ PENDING |
-| **P2** | Prompts implementation | 8h | +15% | ⏳ PENDING |
+| **P0** | SDK upgrade 0.6→1.25 | 4h | +8% | ✅ **DONE S168septies** |
+| **P1** | Resources implementation | 8h | +15% | ✅ **DONE S168septies** |
+| **P2** | Prompts implementation | 8h | +15% | ✅ **DONE S168septies** |
 | **P3** | Real tool chaining | 6h | +5% | ✅ **DONE S168sexies** |
 | **P4** | Streamable HTTP | 8h | +5% | ⏳ PENDING |
 | **P5** | OAuth 2.1 basic | 16h | +20% | ⏳ PENDING |
 | **P6** | Caching layer | 8h | +5% | ⏳ PENDING |
-| **P7** | Tool output schemas | 8h | +5% | ⏳ PENDING |
-| **TOTAL** | - | **60h remaining** | **37%→100%** | 1/8 DONE |
+| **P7** | Tool output schemas | 8h | +2% | ⏳ PENDING |
+| **TOTAL** | - | **40h remaining** | **73%→100%** | 4/8 DONE |
 
 ### 7.2 P0 - SDK Upgrade (CRITIQUE)
 

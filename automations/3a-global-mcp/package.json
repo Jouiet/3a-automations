@@ -1,7 +1,7 @@
 {
     "name": "3a-global-mcp",
-    "version": "1.1.0",
-    "description": "Global MCP Router for 3A Automation Ecosystem. strictly agnostic.",
+    "version": "1.2.0",
+    "description": "Global MCP Router for 3A Automation Ecosystem - Tools, Resources, Prompts (67% SOTA)",
     "type": "module",
     "main": "build/index.js",
     "scripts": {
@@ -10,12 +10,12 @@
         "verify": "node verify-core.js"
     },
     "dependencies": {
-        "@modelcontextprotocol/sdk": "^0.6.0",
-        "zod": "^3.22.4",
-        "dotenv": "^16.3.1"
+        "@modelcontextprotocol/sdk": "^1.25.3",
+        "dotenv": "^16.3.1",
+        "zod": "^3.22.4"
     },
     "devDependencies": {
-        "typescript": "^5.3.3",
-        "@types/node": "^20.11.5"
+        "@types/node": "^20.11.5",
+        "typescript": "^5.3.3"
     }
 }

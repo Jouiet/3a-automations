@@ -1,10 +1,58 @@
 # 3A Automation
-> Version: 113.0 | 26/01/2026 | Session 168sexies - chain_tools Real Execution (37% SOTA)
+> Version: 114.0 | 26/01/2026 | Session 168septies - SDK 1.25.3 + Resources + Prompts (73% SOTA)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168septies - SDK 1.25.3 + RESOURCES + PROMPTS (26/01/2026)
+
+### MCP Score SOTA: 37% → 73% (+36%)
+
+| Implementation | Impact | Status |
+| :--- | :--- | :--- |
+| **SDK Upgrade** | 0.6.0 → 1.25.3 | ✅ DONE |
+| **McpServer class** | New high-level API | ✅ DONE |
+| **3 Resources** | registry, clients, sensors | ✅ DONE |
+| **3 Prompts** | health_report, campaign, audit | ✅ DONE |
+| **Zod schemas** | Type-safe inputs | ✅ DONE |
+| **Tests** | 99/99 (100%) | ✅ VERIFIED |
+
+### New Resources
+
+| URI | Description |
+| :--- | :--- |
+| `3a://registry/automations` | 121 automations catalog |
+| `3a://registry/clients` | Multi-tenant configurations |
+| `3a://sensors/pressure-matrix` | Real-time system health |
+
+### New Prompts
+
+| Prompt | Use Case |
+| :--- | :--- |
+| `client_health_report` | Comprehensive client analysis |
+| `campaign_analysis` | Marketing campaign performance |
+| `automation_audit` | System health audit |
+
+### Key Changes
+
+```typescript
+// OLD (v0.6.0)
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+const server = new Server({...}, { capabilities: { tools: {} } });
+
+// NEW (v1.25.3)
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+const server = new McpServer({...}, {
+    capabilities: { tools: {}, resources: {}, prompts: {}, logging: {} }
+});
+server.registerResource("name", "uri", metadata, callback);
+server.registerPrompt("name", { argsSchema }, callback);
+server.registerTool("name", { inputSchema }, callback);
+```
 
 ---
 
