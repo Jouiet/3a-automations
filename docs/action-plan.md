@@ -23,7 +23,7 @@
 
 | # | Action | Effort | Impact | Priorité |
 | :---: | :--- | :---: | :--- | :---: |
-| 1 | Ajouter `SHOPIFY_SHOP_NAME=guqsu3-yj` dans `.env` | 1 min | Débloque Shopify tools | **P1** |
+| 1 | ~~`SHOPIFY_SHOP_NAME`~~ | N/A | **NON-ISSUE** (Multi-tenant: chaque client a ses propres credentials) | ✅ **RÉSOLU** |
 | 2 | Étendre `STRATEGIC_META` à toutes catégories | 20 min | 100% coverage | **P3** |
 | 3 | Tests E2E avec vrais clients | Variable | Validation production | **P2** |
 
