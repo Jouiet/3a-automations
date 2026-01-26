@@ -6,22 +6,22 @@ paths:
 
 # Native Scripts
 
-## Status VÉRIFIÉ (26/01/2026 - Session 162)
+## Status VÉRIFIÉ (26/01/2026 - Session 162bis)
 
 ### Scripts Core
 | Category | Count | Status |
 |----------|-------|--------|
 | Total core | **84** | `ls agency/core/*.cjs` (+stitch-api.cjs S162) |
-| Avec --health | **23** | Testables (+stitch-api.cjs) |
+| Avec --health | **26** | Testables (verified S162bis) |
 | Resilient | 7 | Multi-AI fallback |
 | Sensors | 20 | Data fetchers → GPM |
 
-### Sensors (20 total - Session 139)
+### Sensors (20 total - Testé Session 162bis)
 | Status | Count | Sensors |
 |--------|-------|---------|
-| ✅ OK | 8 | retention, product-seo, lead-velocity, google-trends (AI), shopify, klaviyo, email-health, cost-tracking |
-| ⚠️ PARTIAL | 8 | ga4, lead-scoring, bigquery, google-ads-planner, content-performance, supplier-health, whatsapp-status, voice-quality |
-| ❌ BLOCKED | 4 | gsc (API disabled), meta-ads (no token), tiktok-ads (no token), apify (trial expired) |
+| ✅ OK (0-50) | 6 | retention(0), product-seo(0), gsc(0), cost-tracking(30), google-ads-planner(50), google-trends(6) |
+| ⚠️ PARTIAL (60-80) | 5 | email-health(60), shopify(75), lead-velocity(75), supplier-health(80) |
+| ❌ BLOCKED (90-95) | 9 | content-perf(90), voice-quality(90), whatsapp(90), lead-scoring(95), meta-ads(95), tiktok-ads(95), ga4(API disabled), bigquery(API disabled), apify(trial expired) |
 
 ### New Sensors (Session 139) - Per DOE v2 Spec
 | Sensor | Description | Priority |

@@ -1,9 +1,9 @@
 # GOOGLE STITCH MCP - Documentation Technique Complète
 
-> **Version:** 2.0 | **Date:** 26/01/2026 | **Session:** 162
+> **Version:** 2.1 | **Date:** 26/01/2026 | **Session:** 162bis
 > **Méthode:** Bottom-up factuelle (Web Research + GitHub + Tests empiriques)
 > **Auteur:** Claude Code pour 3A Automation
-> **UPDATE SESSION 162:** Stitch API OPÉRATIONNEL via wrapper MCP
+> **UPDATE SESSION 162bis:** Workflow end-to-end validé - 3 UI components générés et téléchargés
 
 ---
 
@@ -46,9 +46,10 @@ Stitch MCP est l'exposition du service Google Stitch via le **Model Context Prot
 | Quota Project | ✅ Configuré | `gen-lang-client-0843127575` |
 | Test de connexion | ✅ **OPÉRATIONNEL** | Wrapper `stitch-api.cjs` fonctionnel |
 | Outils chargés | ✅ 6 outils | list_projects, create_project, generate_screen_from_text, etc. |
-| Screens générés | ✅ 2 variants | Pricing page glassmorphism (Session 162) |
+| Screens générés | ✅ **3 variants** | Pricing x2 + Hero section (Session 162bis) |
+| HTML téléchargés | ✅ 804 lines | `assets/stitch/*.html` (3 fichiers) |
 
-**VERDICT:** ✅ **STITCH API OPÉRATIONNEL** via wrapper MCP (bypass DCR)
+**VERDICT:** ✅ **STITCH WORKFLOW END-TO-END VALIDÉ** (generate → download → commit)
 
 **Wrapper Script:** `automations/agency/core/stitch-api.cjs` (279 lignes)
 **Projet Actif:** `705686758968107418` (URL: https://stitch.withgoogle.com/projects/705686758968107418)
