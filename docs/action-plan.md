@@ -1,49 +1,60 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 166quater - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice Widgets: FR+EN+ES+AR ✅**
+> **✅ ÉTAT RÉEL (Session 166quinquies - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice Core: OPTIMISÉ + 4 LANGUES**
 
 ---
 
-## SESSION 166quater - VOICE WIDGETS ES + AR (26/01/2026)
+## SESSION 166quinquies - ARCHITECTURE VOICE OPTIMISÉE (26/01/2026)
 
-### Widgets Créés
+### Refactoring Complet Réalisé
 
-| Widget | Fichier | Langues Speech API | RTL |
-|--------|---------|-------------------|-----|
-| Espagnol | `voice-widget-es.js` | es-ES | Non |
-| Arabe MSA | `voice-widget-ar.js` | ar-SA | **Oui** |
+**Avant:** 4 widgets dupliqués (~3600 lignes total)
+**Après:** 1 widget core + 4 fichiers JSON (~1400 lignes total)
 
-### Intégration ui-init.js
+### Nouveaux Fichiers
+
+| Fichier | Lignes | Rôle |
+|---------|--------|------|
+| `voice-widget-core.js` | ~600 | Logique unique (booking, UI, analytics) |
+| `lang/voice-fr.json` | ~300 | Traductions françaises |
+| `lang/voice-en.json` | ~300 | Traductions anglaises |
+| `lang/voice-es.json` | ~300 | Traductions espagnoles |
+| `lang/voice-ar.json` | ~300 | Traductions arabes (RTL) |
+
+### Intégration ui-init.js (Simplifiée)
 
 ```javascript
-// Determine language from HTML tag (FR, EN, ES, AR supported)
-var lang = document.documentElement.lang || 'fr';
-var widgetMap = {
-  'en': '/voice-assistant/voice-widget-en.js?v=28.0',
-  'es': '/voice-assistant/voice-widget-es.js?v=28.0',
-  'ar': '/voice-assistant/voice-widget-ar.js?v=28.0'
-};
-s.src = widgetMap[lang] || '/voice-assistant/voice-widget.js?v=28.0';
+// Unified widget handles language detection internally
+s.src = '/voice-assistant/voice-widget-core.js?v=2.0.0';
 ```
 
-### Fonctionnalités Incluses
+### Auto-Détection Langue (Limitée à 5 langues)
 
-| Feature | ES | AR |
-|---------|----|----|
-| Booking flow complet | ✅ | ✅ |
-| Industry detection | ✅ | ✅ |
-| Topic responses | ✅ | ✅ |
-| GA4 tracking | ✅ | ✅ |
-| Web Speech API TTS | es-ES | ar-SA |
-| Web Speech API STT | es-ES | ar-SA |
-| RTL support | ❌ | ✅ |
+| Priorité | Source | Langues Supportées |
+|----------|--------|-------------------|
+| 1 | URL param `?lang=xx` | fr, en, es, ar, ary |
+| 2 | HTML `lang` attribute | fr, en, es, ar |
+| 3 | Browser `navigator.language` | fr-FR, en-US, es-ES, ar-SA |
+| 4 | Default | fr |
 
-### Note Architecture
+### Fonctionnalités Core Widget
 
-L'implémentation actuelle utilise des widgets auto-contenus. Architecture optimale future:
-- `voice-widget-core.js` - logique commune
-- `lang/voice-{lang}.json` - traductions
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Booking flow | ✅ | Tous les messages localisés |
+| Industry detection | ✅ | Keywords par langue |
+| Topic responses | ✅ | 12 topics × 4 langues |
+| GA4 tracking | ✅ | `language` param ajouté |
+| RTL auto | ✅ | Basé sur `meta.rtl` dans JSON |
+| Speech API | ✅ | Lang code depuis JSON |
+
+### Fichiers Legacy (À supprimer après test)
+
+- `voice-widget.js` (FR standalone)
+- `voice-widget-en.js` (EN standalone)
+- `voice-widget-es.js` (ES standalone)
+- `voice-widget-ar.js` (AR standalone)
 
 ---
 
@@ -320,8 +331,9 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-**Document màj:** 26/01/2026 - Session 166quater
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | MCP 5/6 ✅ | CSS v86.0 | **Voice Widgets: FR+EN+ES+AR ✅**
-**New files:** `voice-widget-es.js`, `voice-widget-ar.js` (RTL), `ui-init.js` updated for multi-lang
-**Gap:** Darija widget only (TTS Ghizlane communautaire, STT Scribe officiel)
+**Document màj:** 26/01/2026 - Session 166quinquies
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | MCP 5/6 ✅ | CSS v86.0 | **Voice: ARCHITECTURE OPTIMISÉE**
+**New files:** `voice-widget-core.js` (unified), `lang/voice-{fr,en,es,ar}.json`
+**Reduction:** 4 widgets (3600 lignes) → 1 core + 4 JSON (1400 lignes) = **-60%**
+**Gap:** Darija JSON only (`lang/voice-ary.json`)
 **Archive:** Sessions 141-165 archived in `docs/session-history/sessions-141-164.md`

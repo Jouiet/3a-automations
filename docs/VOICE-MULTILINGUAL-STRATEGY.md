@@ -1,7 +1,7 @@
 # VOICE MULTILINGUAL STRATEGY - 3A AUTOMATION
 
-> **Version:** 1.1.0 | **Date:** 26/01/2026 | **Session:** 166ter
-> **Statut:** PHASE 0 VALIDÉE - Stack Darija testé empiriquement
+> **Version:** 2.0.0 | **Date:** 26/01/2026 | **Session:** 166quinquies
+> **Statut:** ARCHITECTURE OPTIMISÉE - Widget Core + Lang Files
 
 ---
 
@@ -22,16 +22,41 @@
 
 ## 1. SYNTHÈSE EXÉCUTIVE
 
-### 1.1 Verdict Global (MIS À JOUR - Session 166ter)
+### 1.1 Verdict Global (MIS À JOUR - Session 166quinquies)
 
 | Aspect | État Actuel | Cible | Validation |
 |--------|-------------|-------|------------|
-| **Langues configurées** | FR, EN (2) | FR, EN, ES, AR-MSA, Darija (5) | -3 langues (config) |
+| **Architecture** | ✅ **OPTIMISÉE** | Core + Lang JSON | Maintenable |
+| **Langues configurées** | FR, EN, ES, AR (4) | FR, EN, ES, AR, Darija (5) | -1 langue (Darija) |
 | **TTS Darija** | ✅ **VALIDÉ** | ElevenLabs "Ghizlane" | 1.3s latence |
 | **STT Darija** | ✅ **VALIDÉ** | ElevenLabs Scribe v1 | 707ms latence |
 | **LLM Darija** | ✅ **VALIDÉ** | Grok-4-1-fast-reasoning | Génère Darija authentique |
-| **Espagnol** | ❌ NON CONFIGURÉ | Grok Voice | TRIVIAL |
-| **Arabe MSA** | ❌ NON CONFIGURÉ | Grok Voice | TRIVIAL |
+| **Espagnol** | ✅ **DONE** | Web Speech API | Widget + JSON |
+| **Arabe MSA** | ✅ **DONE** | Web Speech API (RTL) | Widget + JSON |
+
+### 1.1bis Nouvelle Architecture (Session 166quinquies)
+
+```
+voice-assistant/
+├── voice-widget-core.js    # Logique unique (600 lignes)
+├── lang/
+│   ├── voice-fr.json       # Traductions FR
+│   ├── voice-en.json       # Traductions EN
+│   ├── voice-es.json       # Traductions ES
+│   ├── voice-ar.json       # Traductions AR (RTL)
+│   └── voice-ary.json      # Traductions Darija (TODO)
+└── [LEGACY - à supprimer]
+    ├── voice-widget.js         # FR standalone
+    ├── voice-widget-en.js      # EN standalone
+    ├── voice-widget-es.js      # ES standalone
+    └── voice-widget-ar.js      # AR standalone
+```
+
+**Avantages:**
+- Code unique = maintenabilité x4
+- Ajout langue = 1 fichier JSON (~300 lignes)
+- Auto-détection langue speaker (limitée FR/EN/ES/AR/Darija)
+- RTL automatique pour AR
 
 ### 1.2 Validation Empirique Phase 0 (26/01/2026)
 
@@ -65,11 +90,13 @@
 └─────────────────────────────────────────────────────────────────────────┘
 
 BROWSER LAYER (Web Speech API - GRATUIT)
-├── voice-widget.js         [FR] → 28 pages PRODUCTION
-├── voice-widget-en.js      [EN] → PRODUCTION
-├── voice-widget-es.js      [ES] → N'EXISTE PAS ❌
-├── voice-widget-ar.js      [AR] → N'EXISTE PAS ❌
-└── voice-widget-darija.js  [Darija] → N'EXISTE PAS ❌
+├── voice-widget-core.js    [UNIFIED] → Charge lang/*.json
+│   ├── lang/voice-fr.json  [FR] ✅ PRODUCTION
+│   ├── lang/voice-en.json  [EN] ✅ PRODUCTION
+│   ├── lang/voice-es.json  [ES] ✅ PRODUCTION
+│   ├── lang/voice-ar.json  [AR] ✅ PRODUCTION (RTL)
+│   └── lang/voice-ary.json [Darija] ❌ TODO
+└── [LEGACY - voice-widget*.js] → À supprimer après migration
 
 TEXT GENERATION API
 └── voice-api-resilient.cjs (port 3004)

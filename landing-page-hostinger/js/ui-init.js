@@ -1,19 +1,14 @@
 // General UI Initialization & Lazy Loading
 (function () {
     // 1. Voice Assistant Lazy Loader
+    // Uses unified core widget that auto-detects language (FR, EN, ES, AR, Darija)
     var voiceLoaded = false;
     function loadVoiceWidget() {
         if (voiceLoaded) return;
         voiceLoaded = true;
         var s = document.createElement('script');
-        // Determine language from HTML tag (FR, EN, ES, AR supported)
-        var lang = document.documentElement.lang || 'fr';
-        var widgetMap = {
-            'en': '/voice-assistant/voice-widget-en.js?v=28.0',
-            'es': '/voice-assistant/voice-widget-es.js?v=28.0',
-            'ar': '/voice-assistant/voice-widget-ar.js?v=28.0'
-        };
-        s.src = widgetMap[lang] || '/voice-assistant/voice-widget.js?v=28.0';
+        // Unified widget handles language detection internally
+        s.src = '/voice-assistant/voice-widget-core.js?v=2.0.0';
         s.defer = true;
         document.body.appendChild(s);
     }

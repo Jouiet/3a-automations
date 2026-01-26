@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "code": "es",
+    "name": "Español",
+    "speechRecognition": "es-ES",
+    "speechSynthesis": "es-ES",
+    "rtl": false
+  },
+  "ui": {
+    "welcomeMessage": "¡Hola! Soy el asistente de 3A Automation. ¿En qué puedo ayudarte hoy?",
+    "welcomeMessageTextOnly": "¡Hola! Soy el asistente de 3A Automation. Escribe tu pregunta y te respondo al instante.",
+    "placeholder": "Haz tu pregunta...",
+    "headerTitle": "Asistente 3A",
+    "headerSubtitleVoice": "Habla o escribe",
+    "headerSubtitleText": "Escribe tu pregunta",
+    "ctaButton": "Solicita una auditoría gratuita",
+    "ctaLink": "/es/contact.html",
+    "notifTitle": "¿Necesitas ayuda?",
+    "notifSub": "Estoy aquí para ti",
+    "errorMessage": "Lo siento, ha ocurrido un error. Por favor, inténtalo de nuevo o usa el formulario de contacto.",
+    "ariaOpenAssistant": "Abrir asistente de voz",
+    "ariaClose": "Cerrar",
+    "ariaMic": "Activar micrófono",
+    "ariaSend": "Enviar"
+  },
+  "booking": {
+    "service": "Consulta",
+    "keywords": ["cita", "reservar", "reserva", "agendar", "llamada", "reunión", "hablar", "discutir"],
+    "cancelKeywords": ["cancelar", "no", "parar"],
+    "confirmKeywords": ["sí", "si", "ok", "confirmar"],
+    "slotKeywords": {
+      "1": ["1", "primer", "uno"],
+      "2": ["2", "segund", "dos"],
+      "3": ["3", "tercer", "tres"]
+    },
+    "messages": {
+      "start": "¡Genial! Te ayudo a reservar una cita.\n\nPrimero, ¿cuál es tu nombre?",
+      "cancelled": "Sin problema, reserva cancelada. ¿En qué más puedo ayudarte?",
+      "askName": "No he entendido tu nombre. ¿Podrías repetirlo?",
+      "askEmail": "¡Gracias {name}! ¿Cuál es tu correo electrónico para la confirmación?",
+      "invalidEmail": "Este correo no parece válido. ¿Puedes verificarlo? (formato: ejemplo@email.com)",
+      "noSlots": "Lo siento, no hay horarios disponibles esta semana. Puedes escribirnos a contact@3a-automation.com para agendar una reunión.",
+      "slotsIntro": "¡Perfecto! Aquí están los próximos horarios disponibles:\n\n",
+      "slotFormat": "{index}. {date} a las {time}",
+      "slotsOutro": "\n\nResponde con el número (1, 2 o 3).",
+      "slotNotUnderstood": "No he entendido. Responde 1, 2 o 3 para elegir un horario.",
+      "confirmIntro": "¡Genial! Aquí está el resumen:\n\n",
+      "confirmName": "Nombre: {name}",
+      "confirmEmail": "Correo: {email}",
+      "confirmDate": "Fecha: {date} a las {time}",
+      "confirmOutro": "\n\n¿Confirmas esta cita? (sí/no)",
+      "confirmPrompt": "Di 'sí' para confirmar o 'cancelar' para empezar de nuevo.",
+      "success": "¡Tu cita está confirmada! Recibirás un correo de confirmación en {email}.\n\n¡Hasta pronto!",
+      "failure": "Lo siento, ha habido un problema: {message}\n\nPuedes reservar directamente en /es/booking.html"
+    }
+  },
+  "industries": {
+    "construction": {
+      "keywords": ["construcción", "construccion", "edificio", "contratista", "renovación", "renovacion", "inmobiliaria", "obra"],
+      "intro": "Para construcción, ofrecemos soluciones específicas: captación de leads via Google Maps, seguimiento automático de presupuestos y solicitud de reseñas post-proyecto.",
+      "services": "Nuestras automatizaciones para construcción incluyen:\n• Scraping de Google Maps para nuevos proyectos\n• Monitoreo automático de licitaciones\n• Seguimiento programado de presupuestos\n• Emails de satisfacción post-proyecto\n• Solicitud automática de reseñas Google",
+      "leads": "Para leads de construcción, usamos scraping de Google Maps para identificar proyectos en curso y empresas contratando. También podemos monitorear licitaciones públicas automáticamente."
+    },
+    "ecommerce": {
+      "keywords": ["e-commerce", "ecommerce", "tienda online", "shopify", "woocommerce", "tienda en línea", "comercio electrónico"],
+      "intro": "Para e-commerce, somos expertos en Klaviyo y Shopify. Nuestros flujos automatizados recuperan 5-15% de carritos abandonados y generan un promedio de $42 por cada $1 invertido.",
+      "services": "Nuestras automatizaciones e-commerce incluyen:\n• Recuperación de carritos abandonados (3 emails)\n• Serie de bienvenida para nuevos clientes\n• Flujos post-compra para retención\n• Alertas automáticas de stock\n• Segmentación RFM\n• Winback para clientes dormidos",
+      "leads": "Para e-commerce, los \"leads\" son tus visitantes. Configuramos tracking completo, popups inteligentes y flujos de conversión para transformar visitantes en compradores."
+    },
+    "b2b": {
+      "keywords": ["b2b", "negocio", "profesional", "corporativo", "empresa", "saas"],
+      "intro": "Para B2B, nos enfocamos en cualificación automática de leads, lead scoring y secuencias de nurturing para convertir prospectos fríos en clientes.",
+      "services": "Nuestras automatizaciones B2B incluyen:\n• Lead scoring automático\n• Secuencias de nurturing (5-10 emails)\n• Sincronización CRM (HubSpot, Pipedrive)\n• Alertas de ventas en tiempo real\n• Cualificación automática de leads",
+      "leads": "Para generación de leads B2B, configuramos flujos de captación desde LinkedIn, formularios web, y cualificamos automáticamente según tus criterios. Los leads calientes disparan alertas instantáneas."
+    },
+    "saas": {
+      "keywords": ["saas", "software", "app", "aplicación", "startup", "tech", "tecnología"],
+      "intro": "Para SaaS, configuramos onboarding automatizado, prevención de churn y emails de adopción de funciones para maximizar la retención.",
+      "services": "Nuestras automatizaciones SaaS incluyen:\n• Onboarding secuenciado\n• Prevención de churn (usuarios en riesgo)\n• Emails de adopción de funciones\n• Encuestas NPS automáticas\n• Triggers de upsell inteligentes"
+    },
+    "services": {
+      "keywords": ["servicio", "agencia", "consultor", "freelance", "servicios profesionales"],
+      "intro": "Para proveedores de servicios, configuramos automatización de prospección, recordatorios de citas y solicitud de testimonios post-servicio.",
+      "services": "Nuestras automatizaciones de servicios incluyen:\n• Prospección automatizada\n• Nurturing de leads de ciclo largo\n• Recordatorios de citas\n• Solicitud de testimonios\n• Facturación automática"
+    }
+  },
+  "topics": {
+    "process": {
+      "keywords": ["proceso", "cómo funciona", "como funciona", "pasos", "explica", "cómo hacéis"],
+      "response": "Así es como funciona:\n\n1. **Formulario de diagnóstico** (5 min)\nDescribe tu negocio y objetivos\n\n2. **Informe personalizado** (24-48h)\nTe enviamos 3 recomendaciones prioritarias\n\n3. **Propuesta a medida**\nSi te interesa, enviamos presupuesto detallado\n\n4. **Implementación llave en mano**\nConfiguramos todo - no necesitas conocimientos técnicos\n\n¡Sin llamadas obligatorias - todo por escrito si prefieres!"
+    },
+    "pricing": {
+      "keywords": ["precio", "costo", "coste", "presupuesto", "tarifa", "cuánto cuesta", "cuanto cuesta"],
+      "response": "Nuestros precios son fijos y transparentes:\n\n**PACKS ÚNICOS:**\nDesde proyectos simples hasta despliegues completos\n\n**RETAINERS MENSUALES:**\nMantenimiento y optimización continua\n\nLa auditoría es GRATIS y te ayuda a elegir el pack adecuado.\n\n¡Consulta nuestros precios en /es/pricing.html o solicita un presupuesto personalizado!"
+    },
+    "audit": {
+      "keywords": ["auditoría", "auditoria", "gratis", "diagnóstico", "diagnostico", "análisis", "analisis"],
+      "response": "¡La auditoría es 100% gratis!\n\n**Lo que obtienes:**\n• Análisis de tus procesos actuales\n• Oportunidades de automatización identificadas\n• ROI potencial estimado\n• Recomendaciones personalizadas\n\n**Plazo:** 24-48h después del formulario\n\n¿Quieres que te envíe el enlace del formulario?"
+    },
+    "automations": {
+      "keywords": ["automatización", "automatizacion", "automatizaciones", "workflow", "flujos", "qué podéis"],
+      "response": "Ofrecemos un catálogo completo de automatizaciones:\n\n**Email Marketing:**\nBienvenida, Carrito abandonado, Post-compra, Winback\n\n**Generación de Leads:**\nCaptación, Scoring, Cualificación, Nurturing\n\n**Analytics:**\nDashboards, Alertas, Informes automatizados\n\n**E-commerce:**\nSincronización de productos, Alertas de stock, Reseñas\n\n**IA y Vídeo:**\nVídeos marketing, Avatar IA, Voz IA\n\n¿Qué tipo te interesa más?"
+    },
+    "difference": {
+      "keywords": ["diferencia", "por qué vosotros", "agencia", "ventaja", "único"],
+      "response": "Lo que nos diferencia:\n\n• **Agencia especializada**\nTrabajas directamente con expertos, no comerciales\n\n• **Precios justos**\nShefafes y competitivos\n\n• **Especialización**\nExpertos en automatización de marketing - no generalistas\n\n• **Resultados medibles**\nROI demostrado en cada proyecto\n\n• **Flexibilidad**\nSin compromiso a largo plazo obligatorio"
+    },
+    "guarantee": {
+      "keywords": ["garantía", "garantia", "riesgo", "no funciona", "satisfecho"],
+      "response": "Nuestra garantía es simple:\n\n• **Satisfecho o iteramos**\nSi las automatizaciones no funcionan como esperado, las arreglamos hasta que estés satisfecho.\n\n• **Documentación completa**\nMantienes el control, incluso sin nosotros.\n\n• **Sin compromiso**\nPacks únicos. Retainers cancelables en cualquier momento.\n\n¿Quieres empezar con la auditoría gratuita?"
+    },
+    "timeline": {
+      "keywords": ["plazo", "cuándo", "cuando", "cuánto tiempo", "cuanto tiempo", "duración", "duracion"],
+      "response": "Los plazos varían según el proyecto:\n\n• **Proyecto simple:** 48-72h\n• **Proyecto estándar:** 5-7 días\n• **Proyecto completo:** 10-14 días\n• **Auditoría gratuita:** 24-48h\n\nEstos incluyen revisiones. Servicio urgente disponible si lo necesitas."
+    },
+    "greetings": {
+      "keywords": ["hola", "buenas", "buenos días", "buenas tardes", "qué tal", "hey"],
+      "response": "¡Hola! Soy el asistente de 3A Automation.\n\nPuedo ayudarte a:\n• Automatizar tu marketing (emails, leads)\n• Entender nuestros servicios\n• Obtener una auditoría gratuita\n\n¿En qué sector trabajas?"
+    },
+    "thanks": {
+      "keywords": ["gracias", "genial", "perfecto", "estupendo", "muy bien"],
+      "response": "¡De nada!\n\nSi estás listo para actuar, te recomendamos la auditoría gratuita — es la mejor manera de ver lo que podemos hacer por ti.\n\n¿Más preguntas? ¡Aquí estamos!"
+    },
+    "yes": {
+      "keywords": ["sí", "si", "claro", "ok", "vale", "interesado", "quiero", "adelante"],
+      "responses": {
+        "process": "¡Perfecto! Para empezar:\n• Ve a /es/contact.html\n\nRellena el formulario (5 min) y te enviamos el informe en 24-48h.\n\n¿Alguna pregunta antes de empezar?",
+        "audit": "¡Genial! Para tu auditoría gratuita:\n• Ve a /es/contact.html\n\nTe enviamos el informe con 3 recomendaciones en 24-48h.\n\n¡O escríbenos directamente a contact@3a-automation.com con el enlace de tu web!",
+        "default": "¡Excelente! El siguiente paso es la auditoría gratuita.\n\n• Rellena el formulario en /es/contact.html\n• O email: contact@3a-automation.com\n\n¡Respondemos en 24h!"
+      }
+    },
+    "no": {
+      "keywords": ["no", "ahora no", "luego", "pensando", "después"],
+      "response": "¡Sin problema! Tómate tu tiempo.\n\nLa auditoría gratuita siempre está disponible. También puedes escribirnos a contact@3a-automation.com.\n\n¡No dudes en volver si tienes preguntas!"
+    }
+  },
+  "needs": {
+    "leads": ["lead", "prospecto", "cliente", "adquisición", "encontrar clientes", "captar clientes"],
+    "email": ["email", "newsletter", "klaviyo", "emailing", "marketing", "correo"],
+    "analytics": ["analytics", "analítica", "datos", "dashboard", "informe", "ga4", "estadísticas"],
+    "automation": ["automatizar", "automatización", "workflow", "ahorrar tiempo", "flujo"],
+    "quote": ["presupuesto", "precio", "costo", "coste", "tarifa", "cuánto cuesta"]
+  },
+  "defaults": {
+    "industryResponse": "Para tu negocio de {industry}, podemos ofrecer varias soluciones.\n\nEmpecemos con la auditoría gratuita: te enviamos un informe personalizado con 3 recomendaciones prioritarias en 24-48h.\n\n¿Te interesa?",
+    "qualificationQuestion": "Para ayudarte mejor, ¿podrías decirme:\n\n• ¿En qué sector trabajas?\n• ¿Cuál es tu necesidad principal? (leads, email, analytics...)\n\n¡O solicita directamente la auditoría gratuita y te respondemos con recomendaciones personalizadas!",
+    "leadsFollowup": "\n\n¿Quieres saber más sobre los precios?",
+    "servicesFollowup": "\n\n¿Qué te interesa más?",
+    "industryFollowup": "\n\n¿Cuál es tu necesidad principal?"
+  }
+}
