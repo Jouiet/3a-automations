@@ -478,11 +478,15 @@ async function generateScript(content, language, config) {
 // TTS AUDIO GENERATION (Multi-provider fallback)
 // ─────────────────────────────────────────────────────────────────────────────
 
-async function synthesizeElevenLabs(text, voiceId) {
+async function synthesizeElevenLabs(text, voiceId, useFlash = true) {
   const provider = TTS_PROVIDERS.elevenlabs;
   if (!provider.enabled) throw new Error('ElevenLabs not configured');
 
   const url = `${provider.url}/${voiceId}`;
+
+  // eleven_flash_v2_5: 75ms latency (optimized for speed)
+  // eleven_multilingual_v2: 300ms latency (optimized for quality)
+  const modelId = useFlash ? 'eleven_flash_v2_5' : 'eleven_multilingual_v2';
 
   const response = await fetchWithTimeout(url, {
     method: 'POST',
@@ -492,7 +496,7 @@ async function synthesizeElevenLabs(text, voiceId) {
     },
     body: JSON.stringify({
       text,
-      model_id: 'eleven_multilingual_v2',
+      model_id: modelId,
       voice_settings: {
         stability: 0.5,
         similarity_boost: 0.75,
