@@ -119,9 +119,76 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (name === "chain_tools") {
         const tasks = args.tasks || [];
         const results = [];
+        logger.info("Chain execution started", { task_count: tasks.length });
         for (const task of tasks) {
-            results.push({ task: task.tool, status: "simulated_exec", note: "Tool chaining engine initialized. Sequential execution in progress." });
+            const toolEntry = registry.automations.find((t) => t.id.replace(/-/g, "_") === task.tool);
+            if (!toolEntry) {
+                results.push({
+                    task: task.tool,
+                    status: "error",
+                    error: `Tool ${task.tool} not found in registry`
+                });
+                if (task.stopOnError !== false)
+                    continue;
+            }
+            else if (!toolEntry.script) {
+                results.push({
+                    task: task.tool,
+                    status: "skipped",
+                    error: "External tool (no script path)"
+                });
+            }
+            else {
+                const scriptPath = path.resolve(__dirname, "../../../automations", toolEntry.script);
+                const startTime = Date.now();
+                try {
+                    const result = await new Promise((resolve) => {
+                        const proc = spawn("node", [scriptPath, JSON.stringify(task.args || {})]);
+                        let output = "";
+                        let error = "";
+                        proc.stdout.on("data", (data) => { output += data.toString(); });
+                        proc.stderr.on("data", (data) => { error += data.toString(); });
+                        proc.on("close", (code) => {
+                            resolve({ success: code === 0, output, error });
+                        });
+                        // Timeout after 60 seconds
+                        setTimeout(() => {
+                            proc.kill();
+                            resolve({ success: false, output, error: "Timeout after 60s" });
+                        }, 60000);
+                    });
+                    const duration = Date.now() - startTime;
+                    results.push({
+                        task: task.tool,
+                        status: result.success ? "success" : "error",
+                        output: result.output.slice(0, 1000), // Truncate for safety
+                        error: result.error || undefined,
+                        duration_ms: duration
+                    });
+                    logger.info(`Tool ${task.tool} completed`, {
+                        success: result.success,
+                        duration_ms: duration
+                    });
+                    // Stop chain on error if requested
+                    if (!result.success && task.stopOnError === true) {
+                        logger.info("Chain stopped due to error", { failed_tool: task.tool });
+                        break;
+                    }
+                }
+                catch (e) {
+                    results.push({
+                        task: task.tool,
+                        status: "error",
+                        error: e.message || "Unknown execution error"
+                    });
+                }
+            }
         }
+        logger.info("Chain execution completed", {
+            total: tasks.length,
+            success: results.filter(r => r.status === "success").length,
+            errors: results.filter(r => r.status === "error").length
+        });
         return {
             content: [{ type: "text", text: JSON.stringify(results, null, 2) }],
         };
