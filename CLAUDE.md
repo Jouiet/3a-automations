@@ -1,10 +1,51 @@
 # 3A Automation
-> Version: 109.0 | 26/01/2026 | Session 168 - Strategic Metadata 100% + CSS v87
+> Version: 110.0 | 26/01/2026 | Session 168ter - MCP Verification + Health Checks
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168ter - MCP VERIFICATION (26/01/2026)
+
+### MCP Servers: 5/9 Tested = 56% Operational
+
+| Status | MCP Server | Notes |
+| :--- | :--- | :--- |
+| ✅ | Memory | 19 entities in knowledge graph |
+| ✅ | Chrome DevTools | Connected to browser |
+| ✅ | Hostinger | API responding |
+| ✅ | GitHub | Tools available |
+| ✅ | Shopify-dev | Tools available |
+| ❌ | Klaviyo | SSL certificate error (local) |
+| ❌ | Stitch | Auth server incompatible |
+| ❌ | Apify | Token invalid/expired |
+| ❌ | Grok | API key not set |
+
+### Health Checks Verified
+
+| Script | Status |
+| :--- | :--- |
+| shopify-sensor | ✅ OPERATIONAL |
+| klaviyo-sensor | ✅ OPERATIONAL (10 lists) |
+| knowledge-base-services | ✅ OPERATIONAL (135 chunks) |
+| voice-api-resilient | ✅ OPERATIONAL |
+| churn-prediction-resilient | ✅ OPERATIONAL |
+| blog-generator-resilient | ✅ OPERATIONAL |
+
+---
+
+## SESSION 168bis - WCAG COMPLIANCE (26/01/2026)
+
+### Accomplissements
+
+| Tâche | Impact |
+| :--- | :--- |
+| Duplicate ID fix | 14 pages corrigées (FR+EN) |
+| Dashboard WCAG | skip-link + main-content |
+| Design validation | 0 errors, 264 warnings |
 
 ---
 
