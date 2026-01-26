@@ -20,13 +20,13 @@
 | **GitHub** | ✅ LOADED | Tools available |
 | **Shopify-dev** | ✅ LOADED | Tools available |
 | **Klaviyo** | ❌ SSL Error | Local certificate issue |
-| **Stitch** | ❌ Auth Error | Dynamic client registration not supported |
+| **Stitch** | ⚠️ MCP Only | MCP auth issue - API works via stitch-api.cjs |
 | **Apify** | ❌ Auth Error | Token invalid/expired |
 | **Grok** | ❌ No API Key | GROK_API_KEY not set |
 | Filesystem | ⏳ Not tested | Likely working |
 | Claude-MCP | ⏳ Not tested | Likely working |
 
-**Result: 5/9 tested = 56% operational**
+**Result: 6/9 tested operational (Stitch via script, not MCP)**
 
 ### Commits
 

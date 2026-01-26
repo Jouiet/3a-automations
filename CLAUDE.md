@@ -20,7 +20,7 @@
 | ✅ | GitHub | Tools available |
 | ✅ | Shopify-dev | Tools available |
 | ❌ | Klaviyo | SSL certificate error (local) |
-| ❌ | Stitch | Auth server incompatible |
+| ⚠️ | Stitch | MCP auth issue - API works via stitch-api.cjs |
 | ❌ | Apify | Token invalid/expired |
 | ❌ | Grok | API key not set |
 
