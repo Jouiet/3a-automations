@@ -3,14 +3,18 @@
  * Birthday/Anniversary Flow - Multi-Provider Resilient Automation
  *
  * Session 127bis Phase 3 - 3A Automation Agency
- * Version: 1.0.0
- * Date: 2026-01-03
+ * Version: 1.1.0 (HITL added Session 165bis)
+ * Date: 2026-01-26
  *
  * Trigger: Date-based (customer birthdate/signup anniversary)
  * Flow:
  *   - 7 days before: Teaser email
  *   - Day of: Gift/discount email
  *   - 3 days after: Reminder email
+ *
+ * HITL (Session 165bis):
+ *   - Preview mode for high-value customers
+ *   - Batch approval for bulk sends
  *
  * Benchmark: +342% revenue per email (Experian)
  *
@@ -22,9 +26,13 @@
  *   node birthday-anniversary-flow.cjs --scan-upcoming
  *   node birthday-anniversary-flow.cjs --test --email=test@example.com
  *   node birthday-anniversary-flow.cjs --server --port=3015
+ *   node birthday-anniversary-flow.cjs --list-pending
+ *   node birthday-anniversary-flow.cjs --approve=<id>
  */
 
 require('dotenv').config();
+const path = require('path');
+const fs = require('fs');
 
 const http = require('http');
 const https = require('https');
@@ -34,8 +42,17 @@ const https = require('https');
 // ============================================================================
 
 const CONFIG = {
-  version: '1.0.0',
+  version: '1.1.0',
   port: parseInt(process.env.BIRTHDAY_FLOW_PORT || '3015', 10),
+
+  // HITL Configuration (Session 165bis)
+  hitl: {
+    enabled: process.env.BIRTHDAY_HITL_ENABLED !== 'false',  // Default: enabled
+    ltvThreshold: parseInt(process.env.BIRTHDAY_LTV_THRESHOLD || '500', 10),  // €500 LTV requires approval
+    discountThreshold: parseInt(process.env.BIRTHDAY_DISCOUNT_THRESHOLD || '20', 10),  // >20% discount requires approval
+    pendingDir: path.join(__dirname, '../../../data/hitl-pending'),
+    slackWebhook: process.env.HITL_SLACK_WEBHOOK || ''
+  },
 
   // AI Providers - FRONTIER MODELS (Session 120+)
   ai: {
@@ -247,6 +264,166 @@ function getEmailStage(daysUntil, type = 'birthday') {
   }
 
   return null;
+}
+
+// ============================================================================
+// HITL (Human In The Loop) - Session 165bis
+// ============================================================================
+
+function requiresHitlApproval(customer, discountStr) {
+  if (!CONFIG.hitl.enabled) return false;
+
+  const discountPercent = parseInt(discountStr.replace('%', ''), 10);
+  const customerLtv = customer.totalSpent || 0;
+
+  // High-value customers require approval
+  if (customerLtv >= CONFIG.hitl.ltvThreshold) {
+    log(`HITL: LTV €${customerLtv} >= €${CONFIG.hitl.ltvThreshold} - requires approval`);
+    return true;
+  }
+
+  // Large discounts require approval (dayOf is typically 25%)
+  if (discountPercent >= CONFIG.hitl.discountThreshold) {
+    log(`HITL: Discount ${discountPercent}% >= ${CONFIG.hitl.discountThreshold}% - requires approval`);
+    return true;
+  }
+
+  return false;
+}
+
+function savePendingPromo(customer, emailData, type, stage, couponCode, discount) {
+  const id = `promo_${Date.now()}_${customer.email.replace(/[@.]/g, '_')}`;
+
+  const pending = {
+    id,
+    type: `${type}-promo`,
+    createdAt: new Date().toISOString(),
+    customer: {
+      email: customer.email,
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      totalSpent: customer.totalSpent || 0
+    },
+    promo: {
+      type,
+      stage,
+      discount,
+      couponCode
+    },
+    emailContent: {
+      subject: emailData.subject,
+      preview: emailData.preview,
+      bodyPreview: emailData.body?.substring(0, 500) + '...',
+      provider: emailData.provider
+    },
+    status: 'pending'
+  };
+
+  // Save to disk
+  try {
+    if (!fs.existsSync(CONFIG.hitl.pendingDir)) {
+      fs.mkdirSync(CONFIG.hitl.pendingDir, { recursive: true });
+    }
+    fs.writeFileSync(
+      path.join(CONFIG.hitl.pendingDir, `${id}.json`),
+      JSON.stringify(pending, null, 2)
+    );
+  } catch (err) {
+    log(`HITL: Failed to save pending: ${err.message}`, 'error');
+  }
+
+  // Notify Slack if configured
+  if (CONFIG.hitl.slackWebhook) {
+    notifySlackPromo(pending).catch(err => log(`Slack failed: ${err.message}`, 'error'));
+  }
+
+  return id;
+}
+
+async function notifySlackPromo(pending) {
+  if (!CONFIG.hitl.slackWebhook) return;
+
+  const message = {
+    text: `🎂 HITL Approval: ${pending.promo.type} Promo`,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*${pending.promo.type.charAt(0).toUpperCase() + pending.promo.type.slice(1)} Promo Pending*\n\n*Customer:* ${pending.customer.email}\n*LTV:* €${pending.customer.totalSpent}\n*Stage:* ${pending.promo.stage}\n*Discount:* ${pending.promo.discount} (${pending.promo.couponCode})`
+        }
+      }
+    ]
+  };
+
+  await httpRequest(CONFIG.hitl.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  }, JSON.stringify(message));
+}
+
+function listPendingPromos() {
+  const pending = [];
+  try {
+    if (fs.existsSync(CONFIG.hitl.pendingDir)) {
+      const files = fs.readdirSync(CONFIG.hitl.pendingDir).filter(f => f.startsWith('promo_') && f.endsWith('.json'));
+      for (const file of files) {
+        const data = JSON.parse(fs.readFileSync(path.join(CONFIG.hitl.pendingDir, file), 'utf8'));
+        if (data.status === 'pending') {
+          pending.push(data);
+        }
+      }
+    }
+  } catch (err) {
+    log(`HITL: Failed to list: ${err.message}`, 'error');
+  }
+  return pending;
+}
+
+async function approvePromo(id) {
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${id}.json`);
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Promo ${id} not found`);
+  }
+
+  const pending = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  if (pending.status !== 'pending') {
+    throw new Error(`Promo ${id} already ${pending.status}`);
+  }
+
+  // Send the email
+  const emailData = {
+    ...pending.emailContent,
+    type: pending.promo.type,
+    stage: pending.promo.stage,
+    couponCode: pending.promo.couponCode,
+    discount: pending.promo.discount
+  };
+
+  const result = await sendEmail(pending.customer, emailData);
+
+  // Update status
+  pending.status = 'approved';
+  pending.approvedAt = new Date().toISOString();
+  pending.result = result;
+  fs.writeFileSync(filePath, JSON.stringify(pending, null, 2));
+
+  return { success: true, id, result };
+}
+
+async function rejectPromo(id, reason = '') {
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${id}.json`);
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Promo ${id} not found`);
+  }
+
+  const pending = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  pending.status = 'rejected';
+  pending.rejectedAt = new Date().toISOString();
+  pending.rejectionReason = reason;
+  fs.writeFileSync(filePath, JSON.stringify(pending, null, 2));
+
+  return { success: true, id, status: 'rejected' };
 }
 
 // ============================================================================
@@ -718,11 +895,32 @@ async function processBirthdayFlow(customer, type = 'birthday') {
   emailData.couponCode = couponCode;
   emailData.discount = stageInfo.discount;
 
-  // Send email
+  // HITL Check (Session 165bis) - Only for high-risk scenarios
+  if (requiresHitlApproval(customer, stageInfo.discount)) {
+    const pendingId = savePendingPromo(customer, emailData, type, stageInfo.stage, couponCode, stageInfo.discount);
+    log(`HITL: Promo queued for approval: ${pendingId}`);
+    return {
+      status: 'pending_approval',
+      hitlRequired: true,
+      pendingId,
+      type,
+      stage: stageInfo.stage,
+      discount: stageInfo.discount,
+      couponCode,
+      aiProvider: emailData.provider,
+      reason: (customer.totalSpent || 0) >= CONFIG.hitl.ltvThreshold
+        ? `LTV €${customer.totalSpent} >= €${CONFIG.hitl.ltvThreshold}`
+        : `Discount ${stageInfo.discount} >= ${CONFIG.hitl.discountThreshold}%`,
+      message: 'Promo pending human approval. Use --approve=<id> to send.'
+    };
+  }
+
+  // Send email (no HITL required)
   const sendResult = await sendEmail(customer, emailData);
 
   return {
     status: 'sent',
+    hitlRequired: false,
     type,
     stage: stageInfo.stage,
     discount: stageInfo.discount,
@@ -772,6 +970,16 @@ async function healthCheck() {
     reminderDaysAfter: CONFIG.flow.reminderDaysAfter,
     birthdayDiscounts: CONFIG.flow.discounts.birthday,
     anniversaryDiscounts: CONFIG.flow.discounts.anniversary
+  };
+
+  // HITL Status (Session 165bis)
+  const pendingCount = listPendingPromos().length;
+  results.hitl = {
+    enabled: CONFIG.hitl.enabled,
+    ltvThreshold: `€${CONFIG.hitl.ltvThreshold}`,
+    discountThreshold: `${CONFIG.hitl.discountThreshold}%`,
+    pendingApprovals: pendingCount,
+    slackNotifications: CONFIG.hitl.slackWebhook ? '✅ Configured' : '⚠️ Not configured'
   };
 
   return results;
@@ -875,10 +1083,65 @@ function startServer(port) {
 async function main() {
   const args = process.argv.slice(2);
 
+  // Parse named arguments
+  const getArg = (name) => {
+    const idx = args.findIndex(a => a.startsWith(`--${name}=`));
+    return idx !== -1 ? args[idx].split('=')[1] : null;
+  };
+
   if (args.includes('--health') || args.includes('-h')) {
     const health = await healthCheck();
     console.log('\n📊 Birthday/Anniversary Flow - Health Check\n');
     console.log(JSON.stringify(health, null, 2));
+    return;
+  }
+
+  // HITL CLI Commands (Session 165bis)
+  if (args.includes('--list-pending')) {
+    console.log('\n=== PENDING PROMOS (HITL) ===\n');
+    const pending = listPendingPromos();
+    if (pending.length === 0) {
+      console.log('No pending promos.');
+    } else {
+      for (const p of pending) {
+        console.log(`ID: ${p.id}`);
+        console.log(`  Customer: ${p.customer.email} (${p.customer.firstName})`);
+        console.log(`  LTV: €${p.customer.totalSpent || 0}`);
+        console.log(`  Type: ${p.promo.type} / ${p.promo.stage}`);
+        console.log(`  Discount: ${p.promo.discount} (${p.promo.couponCode})`);
+        console.log(`  Created: ${p.createdAt}`);
+        console.log('');
+      }
+    }
+    console.log(`Total: ${pending.length} pending`);
+    return;
+  }
+
+  const approveId = getArg('approve');
+  if (approveId) {
+    console.log(`\n[HITL] Approving promo: ${approveId}`);
+    try {
+      const result = await approvePromo(approveId);
+      console.log('✅ Promo approved and sent');
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      console.error(`❌ Approval failed: ${err.message}`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  const rejectId = getArg('reject');
+  if (rejectId) {
+    console.log(`\n[HITL] Rejecting promo: ${rejectId}`);
+    try {
+      const result = await rejectPromo(rejectId, getArg('reason') || '');
+      console.log('✅ Promo rejected');
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      console.error(`❌ Rejection failed: ${err.message}`);
+      process.exit(1);
+    }
     return;
   }
 
@@ -931,6 +1194,16 @@ Usage:
   --test --email=X      Test flow for specific email
   --test --type=Y       Test birthday or anniversary flow
   --server --port=3015  Start HTTP server
+
+HITL Commands (Human In The Loop):
+  --list-pending              List pending approvals
+  --approve=<id>              Approve and send promo
+  --reject=<id> [--reason=X]  Reject promo
+
+HITL Thresholds:
+  LTV >= €${CONFIG.hitl.ltvThreshold} → Requires approval
+  Discount >= ${CONFIG.hitl.discountThreshold}% → Requires approval
+  HITL Enabled: ${CONFIG.hitl.enabled ? 'Yes' : 'No'}
 
 Benchmark: +342% revenue per email (Experian)
   `);

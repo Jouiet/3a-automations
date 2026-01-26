@@ -36,6 +36,14 @@ const CONFIG = {
     critical: 0.85,     // Churn score >= 85% = critical
     vipCallEligible: 0.80  // Offer VIP call above 80%
   },
+  // HITL Configuration (Session 165bis)
+  hitl: {
+    enabled: process.env.AT_RISK_HITL_ENABLED !== 'false',  // Default: enabled
+    ltvThreshold: parseInt(process.env.AT_RISK_LTV_THRESHOLD || '500', 10),  // €500 LTV requires approval
+    discountThreshold: parseInt(process.env.AT_RISK_DISCOUNT_THRESHOLD || '20', 10),  // >20% discount requires approval
+    pendingDir: path.join(__dirname, '../../../data/hitl-pending'),
+    slackWebhook: process.env.HITL_SLACK_WEBHOOK || ''
+  },
   // Intervention strategy
   intervention: {
     email1: {
@@ -153,6 +161,183 @@ function recordProcessed(email, intervention) {
     intervention,
     stage: 1
   });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HITL (Human In The Loop) - Session 165bis
+// ─────────────────────────────────────────────────────────────────────────────
+
+const pendingInterventions = new Map();  // In-memory pending approvals
+
+function requiresHitlApproval(customer, discount) {
+  if (!CONFIG.hitl.enabled) return false;
+
+  const customerLtv = customer.totalSpent || 0;
+
+  // High-value customers require approval
+  if (customerLtv >= CONFIG.hitl.ltvThreshold) {
+    console.log(`[HITL] LTV €${customerLtv} >= €${CONFIG.hitl.ltvThreshold} - requires approval`);
+    return true;
+  }
+
+  // Large discounts require approval
+  if (discount >= CONFIG.hitl.discountThreshold) {
+    console.log(`[HITL] Discount ${discount}% >= ${CONFIG.hitl.discountThreshold}% - requires approval`);
+    return true;
+  }
+
+  return false;
+}
+
+function savePendingIntervention(customer, emailContent, emailType) {
+  const id = `atrisk_${Date.now()}_${customer.email.replace(/[@.]/g, '_')}`;
+
+  const pending = {
+    id,
+    type: 'at-risk-intervention',
+    createdAt: new Date().toISOString(),
+    customer: {
+      email: customer.email,
+      name: customer.name,
+      churnScore: customer.churnScore,
+      totalSpent: customer.totalSpent,
+      orderCount: customer.orderCount
+    },
+    intervention: {
+      emailType,
+      discount: CONFIG.intervention[emailType].discount,
+      discountCode: CONFIG.intervention[emailType].discountCode
+    },
+    emailContent: {
+      subject: emailContent.subject,
+      preview: emailContent.preview,
+      bodyPreview: emailContent.body?.substring(0, 500) + '...'
+    },
+    status: 'pending'
+  };
+
+  pendingInterventions.set(id, pending);
+
+  // Also save to disk for persistence
+  try {
+    if (!fs.existsSync(CONFIG.hitl.pendingDir)) {
+      fs.mkdirSync(CONFIG.hitl.pendingDir, { recursive: true });
+    }
+    fs.writeFileSync(
+      path.join(CONFIG.hitl.pendingDir, `${id}.json`),
+      JSON.stringify(pending, null, 2)
+    );
+  } catch (err) {
+    console.error('[HITL] Failed to save pending intervention:', err.message);
+  }
+
+  // Notify via Slack if configured
+  if (CONFIG.hitl.slackWebhook) {
+    notifySlack(pending).catch(err => console.error('[HITL] Slack notification failed:', err.message));
+  }
+
+  return id;
+}
+
+async function notifySlack(pending) {
+  if (!CONFIG.hitl.slackWebhook) return;
+
+  const message = {
+    text: `🚨 HITL Approval Required: At-Risk Intervention`,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*At-Risk Customer Intervention Pending Approval*\n\n*Customer:* ${pending.customer.email}\n*LTV:* €${pending.customer.totalSpent || 0}\n*Churn Score:* ${(pending.customer.churnScore * 100).toFixed(0)}%\n*Discount:* ${pending.intervention.discount}% (${pending.intervention.discountCode})`
+        }
+      },
+      {
+        type: 'actions',
+        elements: [
+          { type: 'button', text: { type: 'plain_text', text: '✅ Approve' }, style: 'primary', value: pending.id },
+          { type: 'button', text: { type: 'plain_text', text: '❌ Reject' }, style: 'danger', value: pending.id }
+        ]
+      }
+    ]
+  };
+
+  await httpRequest(CONFIG.hitl.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  }, JSON.stringify(message));
+}
+
+function listPendingInterventions() {
+  // Load from disk
+  const pending = [];
+  try {
+    if (fs.existsSync(CONFIG.hitl.pendingDir)) {
+      const files = fs.readdirSync(CONFIG.hitl.pendingDir).filter(f => f.endsWith('.json'));
+      for (const file of files) {
+        const data = JSON.parse(fs.readFileSync(path.join(CONFIG.hitl.pendingDir, file), 'utf8'));
+        if (data.status === 'pending') {
+          pending.push(data);
+        }
+      }
+    }
+  } catch (err) {
+    console.error('[HITL] Failed to list pending:', err.message);
+  }
+  return pending;
+}
+
+async function approveIntervention(id) {
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${id}.json`);
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Intervention ${id} not found`);
+  }
+
+  const pending = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  if (pending.status !== 'pending') {
+    throw new Error(`Intervention ${id} already ${pending.status}`);
+  }
+
+  // Execute the intervention
+  const result = await executeApprovedIntervention(pending);
+
+  // Update status
+  pending.status = 'approved';
+  pending.approvedAt = new Date().toISOString();
+  pending.result = result;
+  fs.writeFileSync(filePath, JSON.stringify(pending, null, 2));
+
+  return { success: true, id, result };
+}
+
+async function rejectIntervention(id, reason = '') {
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${id}.json`);
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Intervention ${id} not found`);
+  }
+
+  const pending = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  pending.status = 'rejected';
+  pending.rejectedAt = new Date().toISOString();
+  pending.rejectionReason = reason;
+  fs.writeFileSync(filePath, JSON.stringify(pending, null, 2));
+
+  return { success: true, id, status: 'rejected' };
+}
+
+async function executeApprovedIntervention(pending) {
+  // Send the email that was previously held
+  const customer = pending.customer;
+  const emailContent = {
+    ...pending.emailContent,
+    discountCode: pending.intervention.discountCode,
+    discount: pending.intervention.discount
+  };
+
+  const sendResult = await sendEmailResilient(customer, emailContent);
+  recordProcessed(customer.email, pending.intervention);
+
+  return sendResult;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -622,7 +807,34 @@ async function processAtRiskCustomer(customer) {
     discount: CONFIG.intervention[emailType].discount
   };
 
-  // Send via email provider
+  // HITL Check (Session 165bis) - Only for high-risk scenarios
+  const discountPercent = CONFIG.intervention[emailType].discount;
+  if (requiresHitlApproval(customer, discountPercent)) {
+    const pendingId = savePendingIntervention(customer, emailContent, emailType);
+    console.log(`[HITL] Intervention queued for approval: ${pendingId}`);
+    return {
+      success: true,
+      hitlRequired: true,
+      pendingId,
+      customer: customer.email,
+      riskLevel,
+      churnScore: customer.churnScore,
+      reason: customer.totalSpent >= CONFIG.hitl.ltvThreshold
+        ? `LTV €${customer.totalSpent} >= €${CONFIG.hitl.ltvThreshold}`
+        : `Discount ${discountPercent}% >= ${CONFIG.hitl.discountThreshold}%`,
+      emailGenerated: {
+        provider: emailResult.provider,
+        subject: emailContent.subject
+      },
+      discount: {
+        code: emailContent.discountCode,
+        percent: emailContent.discount
+      },
+      message: 'Intervention pending human approval. Use --approve=<id> to send.'
+    };
+  }
+
+  // Send via email provider (no HITL required)
   const sendResult = await sendEmailResilient(customer, emailContent);
 
   // Record processing
@@ -636,6 +848,7 @@ async function processAtRiskCustomer(customer) {
 
   return {
     success: sendResult.success,
+    hitlRequired: false,
     customer: customer.email,
     riskLevel,
     churnScore: customer.churnScore,
@@ -837,6 +1050,53 @@ async function main() {
     return;
   }
 
+  // HITL CLI Commands (Session 165bis)
+  if (args['list-pending']) {
+    console.log('\n=== PENDING INTERVENTIONS (HITL) ===\n');
+    const pending = listPendingInterventions();
+    if (pending.length === 0) {
+      console.log('No pending interventions.');
+    } else {
+      for (const p of pending) {
+        console.log(`ID: ${p.id}`);
+        console.log(`  Customer: ${p.customer.email}`);
+        console.log(`  LTV: €${p.customer.totalSpent || 0}`);
+        console.log(`  Churn Score: ${(p.customer.churnScore * 100).toFixed(0)}%`);
+        console.log(`  Discount: ${p.intervention.discount}% (${p.intervention.discountCode})`);
+        console.log(`  Created: ${p.createdAt}`);
+        console.log('');
+      }
+    }
+    console.log(`Total: ${pending.length} pending`);
+    return;
+  }
+
+  if (args.approve) {
+    console.log(`\n[HITL] Approving intervention: ${args.approve}`);
+    try {
+      const result = await approveIntervention(args.approve);
+      console.log('✅ Intervention approved and sent');
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      console.error(`❌ Approval failed: ${err.message}`);
+      process.exit(1);
+    }
+    return;
+  }
+
+  if (args.reject) {
+    console.log(`\n[HITL] Rejecting intervention: ${args.reject}`);
+    try {
+      const result = await rejectIntervention(args.reject, args.reason || '');
+      console.log('✅ Intervention rejected');
+      console.log(JSON.stringify(result, null, 2));
+    } catch (err) {
+      console.error(`❌ Rejection failed: ${err.message}`);
+      process.exit(1);
+    }
+    return;
+  }
+
   if (args.process) {
     const customerData = safeJsonParse(args.customer || '{}', 'CLI customer');
     if (!customerData.success || !customerData.data.email) {
@@ -872,6 +1132,13 @@ async function main() {
     console.log(`  Critical: ≥${CONFIG.thresholds.critical * 100}%`);
     console.log(`  VIP Call: ≥${CONFIG.thresholds.vipCallEligible * 100}%`);
 
+    console.log(`\nHITL (Human In The Loop):`);
+    console.log(`  ${CONFIG.hitl.enabled ? '✅ Enabled' : '⚠️ Disabled'}`);
+    console.log(`  LTV Threshold: €${CONFIG.hitl.ltvThreshold}`);
+    console.log(`  Discount Threshold: ${CONFIG.hitl.discountThreshold}%`);
+    const pendingCount = listPendingInterventions().length;
+    console.log(`  Pending Approvals: ${pendingCount}`);
+
     console.log(`\nOverall: ${aiCount >= 2 && emailCount >= 1 ? '✅ OPERATIONAL' : '⚠️ Limited'}`);
     console.log(`Benchmark: +260% conversion for at-risk customers`);
     return;
@@ -905,6 +1172,16 @@ Usage:
   node at-risk-customer-flow.cjs --process --customer='{"email":"x","churnScore":0.75}'
   node at-risk-customer-flow.cjs --test
   node at-risk-customer-flow.cjs --health
+
+HITL Commands (Human In The Loop):
+  node at-risk-customer-flow.cjs --list-pending              List pending approvals
+  node at-risk-customer-flow.cjs --approve=<id>              Approve and send intervention
+  node at-risk-customer-flow.cjs --reject=<id> [--reason=X]  Reject intervention
+
+HITL Thresholds:
+  LTV >= €${CONFIG.hitl.ltvThreshold} → Requires approval
+  Discount >= ${CONFIG.hitl.discountThreshold}% → Requires approval
+  HITL Enabled: ${CONFIG.hitl.enabled ? 'Yes' : 'No'}
 
 Integration:
   Triggered by churn-prediction-resilient.cjs when churnScore >= 70%

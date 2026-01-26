@@ -71,3 +71,22 @@ node automations/agency/core/SCRIPT.cjs --health
 providers: ['grok', 'openai', 'gemini', 'anthropic']
 // Auto-rotate on failure
 ```
+
+## HITL (Human In The Loop) - Session 165bis
+| Script | HITL Type | Threshold |
+|--------|-----------|-----------|
+| blog-generator-resilient | Draft approval | requireApproval: true |
+| email-personalization-resilient | Preview mode | previewModeDefault: true |
+| churn-prediction-resilient | LTV threshold | €500 |
+| sms-automation-resilient | Daily spend | €50/day |
+| cjdropshipping-automation | Order confirm | confirmOrder() |
+| podcast-generator-resilient | Script review | Required |
+| **at-risk-customer-flow** | **LTV/Discount** | **€500 or ≥20%** |
+| **birthday-anniversary-flow** | **LTV/Discount** | **€500 or ≥20%** |
+
+### HITL Commands
+```bash
+node SCRIPT.cjs --list-pending     # List pending approvals
+node SCRIPT.cjs --approve=<id>     # Approve intervention
+node SCRIPT.cjs --reject=<id>      # Reject intervention
+```

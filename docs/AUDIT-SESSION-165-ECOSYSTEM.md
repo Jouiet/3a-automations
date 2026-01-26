@@ -17,7 +17,7 @@
 | Remotion Compositions | 7 | **7** | 0% |
 | HTML Pages | 79 | **79** | 0% |
 | Credentials SET | 57/93 | **61%** | 36 empty |
-| **HITL Coverage** | 80% (claimed) | **33% (6/18)** | 🔴 **-47%** |
+| **HITL Coverage** | 80% (claimed) | **44% (8/18)** | 🟡 **-36%** (S165bis +2) |
 | A2A Agents HITL | N/A | **0/3** | 🔴 DEAD |
 | MCP Servers HITL | N/A | **0/11** | 🔴 NONE |
 | AG-UI Queue | Exists | **0 callers** | 🔴 DEAD CODE |
@@ -784,14 +784,23 @@ const queueAction = (action) => { ... }
 | `sms-automation-resilient.cjs` | Daily €50 spend limit | ✅ WORKS |
 | `cjdropshipping-automation.cjs` | `confirmOrder()` | ✅ WORKS |
 | `podcast-generator-resilient.cjs` | Script review | ✅ WORKS |
+| `at-risk-customer-flow.cjs` | LTV/Discount threshold (S165bis) | ✅ WORKS |
+| `birthday-anniversary-flow.cjs` | LTV/Discount threshold (S165bis) | ✅ WORKS |
 
 #### 14.8.8 PRIORITIZED ACTION PLAN
 
-**P0 - CRITICAL (Financial Risk):**
-| Script | Action | Effort |
-|--------|--------|--------|
-| `at-risk-customer-flow.cjs` | Add discount approval threshold | 2h |
-| `birthday-anniversary-flow.cjs` | Add promo code approval | 2h |
+**P0 - CRITICAL (Financial Risk): ✅ COMPLETED (Session 165bis)**
+| Script | Action | Effort | Status |
+|--------|--------|--------|--------|
+| `at-risk-customer-flow.cjs` | LTV €500 / Discount ≥20% threshold | 2h | ✅ DONE |
+| `birthday-anniversary-flow.cjs` | LTV €500 / Discount ≥20% threshold | 2h | ✅ DONE |
+
+**HITL Features Added:**
+- `--list-pending` - List interventions awaiting approval
+- `--approve=<id>` - Approve and send intervention
+- `--reject=<id>` - Reject intervention
+- Slack webhook notifications (optional)
+- Persistent storage in `data/hitl-pending/`
 
 **P1 - HIGH (Communication Risk):**
 | Script | Action | Effort |
