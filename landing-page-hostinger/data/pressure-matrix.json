@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-26T10:13:35.439Z",
+  "last_updated": "2026-01-26T11:16:28.119Z",
   "session": "165",
   "sectors": {
     "marketing": {
@@ -20,7 +20,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T08:01:05.111Z",
+        "last_check": "2026-01-26T11:16:24.835Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -30,7 +30,7 @@
         "label": "Market Demand",
         "pressure": 8,
         "trend": "DOWN",
-        "last_check": "2026-01-26T10:13:08.699Z",
+        "last_check": "2026-01-26T11:16:28.117Z",
         "sensor_data": {
           "method": "AI Analysis (Grok)",
           "keywords": [
@@ -41,7 +41,7 @@
           ],
           "demand_score": 92,
           "market_trend": "rising",
-          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation remains very high in January 2026, fueled by AI advancements and the booming e-commerce sector. Trends indicate continued growth as businesses prioritize efficiency and personalization at scale."
+          "assessment": "Demand for marketing, AI, Shopify, and e-commerce automation is surging due to AI advancements and e-commerce expansion as of January 2026. These keywords show high search volumes and investment in efficiency tools amid digital transformation."
         }
       },
       "tiktok_ads": {
@@ -56,7 +56,7 @@
       "klaviyo": {
         "pressure": 65,
         "trend": "DOWN",
-        "last_check": "2026-01-26T10:13:12.049Z",
+        "last_check": "2026-01-26T11:16:24.150Z",
         "sensor_data": {
           "lists_total": 10,
           "flows_total": 0,
@@ -116,7 +116,7 @@
       "gsc_gaps": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T10:13:00.825Z",
+        "last_check": "2026-01-26T11:16:20.967Z",
         "sensor_data": {
           "top_gap_potential": 0,
           "target_query": "\"grok\" \"web speech api\""
@@ -148,7 +148,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T10:13:10.933Z",
+        "last_check": "2026-01-26T11:16:23.118Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,

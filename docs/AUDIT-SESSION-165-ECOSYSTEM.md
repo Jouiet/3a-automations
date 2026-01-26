@@ -122,18 +122,40 @@ whatsapp-booking-notifications ✅
 | whatsapp | 3 | 2% |
 | other | 12 | 10% |
 
-### 3.3 Gap Analysis - UPDATED
-**Before fix:** 83 with script, 38 without
-**After fix:** 88 with script, 33 without
+### 3.3 Gap Analysis - UPDATED & CLARIFIED
 
-5 entries were INCONSISTENT (type="script" + scriptPath but no script field):
-- ✅ lead-scoring-agentic - FIXED
-- ✅ flows-audit-agentic - FIXED
-- ✅ product-enrichment-agentic - FIXED
-- ✅ ga4-budget-optimizer-agentic - FIXED
-- ✅ store-audit-agentic - FIXED
+**Registry Status:**
+- Total: **121 automations**
+- With `script` field: **88** (73%)
+- Without `script` field: **33** (27%) - **INTENTIONAL, NOT A BUG**
 
-33 remaining without script are: external services (6), klaviyo-flow (5), shopify-flow (3), etc.
+**5 INCONSISTENCIES FIXED (Session 165):**
+| ID | Issue | Status |
+|----|-------|--------|
+| lead-scoring-agentic | type=script, scriptPath but no script | ✅ FIXED |
+| flows-audit-agentic | type=script, scriptPath but no script | ✅ FIXED |
+| product-enrichment-agentic | type=script, scriptPath but no script | ✅ FIXED |
+| ga4-budget-optimizer-agentic | type=script, scriptPath but no script | ✅ FIXED |
+| store-audit-agentic | type=script, scriptPath but no script | ✅ FIXED |
+
+### 3.4 The 33 Entries Without Script - DETAILED BREAKDOWN
+
+**⚠️ IMPORTANT: These are INTENTIONALLY without script - they are external configurations, not bugs!**
+
+| Type | Count | IDs | Reason No Script |
+|------|-------|-----|------------------|
+| **external-service** | 6 | cinematic-director, competitor-clone, ecommerce-factory, asset-factory, ai-avatar-generator, ai-talking-video | Configured in external platforms (CinematicAds project) |
+| **klaviyo-flow** | 5 | welcome-series, abandoned-cart, browse-abandonment, post-purchase, win-back | Configured in Klaviyo UI |
+| **shopify-flow** | 3 | auto-meta-tags, collection-management, low-stock-alert | Configured in Shopify Flow |
+| **klaviyo-segment** | 2 | hot-warm-cold, vip-tiers | Segments created in Klaviyo |
+| **sheets-template** | 2 | margin-projections, inventory-analysis | Google Sheets templates |
+| **manual-process** | 4 | internal-linking, gtm-installation, gmc-diagnostic, llms-txt | Require human action |
+| **shopify-native** | 4 | shopping-feed (app), shopping-attributes (metafield), schema-products (theme), loyalty-webhooks (webhook) | Native Shopify features |
+| **templates** | 3 | looker-dashboard, legal-pages, cart-recovery-video | Template files, not executable |
+| **deprecated** | 1 | custom-workflow-deprecated | Marked for removal |
+| **integrations** | 3 | product-enrichment (ai-process), data-enrichment (apollo), system-audit (multi-tool) | Multi-tool orchestration |
+
+**Summary: 0% of the 33 are bugs. They are catalog entries for configurations that exist outside our codebase.**
 
 ---
 
@@ -284,12 +306,16 @@ BIGQUERY_PROJECT_ID=
 ## 10. GAPS & ISSUES IDENTIFIED
 
 ### 10.1 Critical (P0)
-| Issue | Impact | Action |
-|-------|--------|--------|
-| 36 empty credentials | 39% features blocked | USER: Fill .env |
-| GA4 API disabled | Analytics broken | USER: Enable API |
-| BigQuery API disabled | Trends broken | USER: Enable API |
-| Apify trial expired | Scraping broken | USER: Upgrade plan |
+| Issue | Impact | Action | Priority |
+|-------|--------|--------|----------|
+| 36 empty credentials | 39% features blocked | USER: Fill .env | NOW |
+| GA4 API disabled | Analytics broken | USER: Enable API | NOW |
+| Apify trial expired | Scraping broken | USER: Upgrade plan | NOW |
+
+### 10.1.1 Deferred (P0 but SCHEDULED)
+| Issue | Impact | Action | When |
+|-------|--------|--------|------|
+| BigQuery API disabled | Trends analysis | USER: Enable API | **After 2000 clients** (cost optimization) |
 
 ### 10.2 High (P1)
 | Issue | Impact | Action |
@@ -327,7 +353,57 @@ BIGQUERY_PROJECT_ID=
 
 ---
 
-## 12. AUDIT METHODOLOGY
+## 12. OPTIMIZATION OPPORTUNITIES (Web Research 26/01/2026)
+
+### 12.1 Klaviyo API Optimizations
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| OAuth vs API Key | API Key | OAuth 2.1 for higher rate limits (each token separate) |
+| API Revision | 2026-01-15 | Update every 12-18 months, current revision OK |
+| K:AI Marketing Agent | Not used | NEW - build flows via natural language |
+
+**Source:** [Klaviyo Blog](https://www.klaviyo.com/blog)
+
+### 12.2 A2A Protocol Updates (July 2025 - v0.3)
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Version | Custom impl | A2A v0.3 stable - consider native ADK |
+| Interactions API | Not used | NEW Dec 2025 - InteractionsApiTransport |
+| A2UI Protocol | Not impl | NEW Dec 2025 - declarative UI for agents |
+
+**Source:** [Google Developers Blog](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)
+
+### 12.3 Remotion Performance
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Video component | OffthreadVideo | NEW `<Video>` tag is optimized |
+| Concurrency | Default | Use `npx remotion benchmark` to find optimal |
+| GPU CSS | Used | Replace blur/shadow with precomputed images on cloud |
+| Remotion Skills | Not used | NEW Jan 2026 - MCP + Claude Code integration |
+
+**Source:** [Remotion Performance Docs](https://www.remotion.dev/docs/performance)
+
+### 12.4 MCP Server Best Practices
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Authentication | API Keys | OAuth 2.1 standard (2025+) |
+| Server purpose | Mixed | Single-purpose servers recommended |
+| User consent | Implicit | Explicit consent required before tool invocation |
+
+**Source:** [MCP Best Practices](https://modelcontextprotocol.info/docs/best-practices/)
+
+### 12.5 Shopify Flow Updates (Winter 2026)
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Sidekick AI | Not used | NEW - natural language workflow building |
+| Workflow preview | Not used | NEW - test before going live |
+| Loop limit | Unaware | **CRITICAL**: Max 100 items per loop |
+
+**Source:** [Shopify Flow Blog](https://www.shopify.com/blog/flow-automation-updates-2025)
+
+---
+
+## 13. AUDIT METHODOLOGY
 
 ### Verification Commands Used
 ```bash
@@ -358,6 +434,35 @@ grep -E "^[A-Z_]+=.+" .env | wc -l
 
 ---
 
-*Audit completed: 26/01/2026 09:55 UTC*
+---
+
+## 14. SESSION 165 VERIFICATION LOG
+
+### 14.1 Registry Fix Applied
+```
+cf0c8fb fix(registry): add missing script field to 5 agentic automations
+```
+
+### 14.2 Sensor Status (Final Verification 26/01/2026 ~10:30 UTC)
+| Sensor | Status | Pressure | Notes |
+|--------|--------|----------|-------|
+| gsc-sensor | ✅ OK | 0 | Working (fixed S161bis) |
+| shopify-sensor | ✅ OK | 75 | 0 products (store empty) |
+| klaviyo-sensor | ✅ OK | 65 | 10 lists, 0 flows |
+| retention-sensor | ✅ OK | 0 | No orders |
+| google-trends-sensor | ✅ OK | 8 | AI-powered (Grok) |
+
+### 14.3 Optimizations Verified
+| Component | Status | Notes |
+|-----------|--------|-------|
+| Klaviyo API Revision | ✅ 2026-01-15 | Current |
+| Remotion `<Video>` | ✅ Using new tag | Optimized |
+| A2A Protocol | ⏳ v0.3 available | Consider upgrade |
+| MCP Auth | ⏳ OAuth 2.1 std | Consider upgrade |
+
+---
+
+*Audit completed: 26/01/2026 10:35 UTC*
 *Auditor: Claude Opus 4.5*
 *Method: Bottom-up empirical verification*
+*Commit: cf0c8fb + pending*
