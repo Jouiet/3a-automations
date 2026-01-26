@@ -15,7 +15,7 @@
 | :--- | :--- | :--- | :--- |
 | Validator Warnings | 78 | **75** | -3 |
 | CSS Duplicates | 23 | **22** | -1 |
-| CSS Version | v=84.0 | **v=85.0** | ✅ |
+| CSS Version | v=84.0 | **v=86.0** | ✅ (pre-commit auto-bump) |
 
 ### Fixes Applied
 
