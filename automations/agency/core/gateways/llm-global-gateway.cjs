@@ -175,6 +175,79 @@ class LLMGateway {
 
     async _fetchOpenAI(prompt) {
         if (!this.openaiKey) throw new Error("OPENAI_API_KEY missing");
+
+        // Use Responses API if enabled (40-80% cost reduction via caching)
+        // Toggle: OPENAI_USE_RESPONSES_API=true in .env
+        const useResponsesAPI = process.env.OPENAI_USE_RESPONSES_API === 'true';
+
+        if (useResponsesAPI) {
+            return await this._fetchOpenAIResponses(prompt);
+        }
+
+        // Default: Chat Completions API (stable)
+        const res = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${this.openaiKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: "gpt-5.2",
+                messages: [{ role: "user", content: prompt }]
+            })
+        });
+        const data = await this._handleFetchResponse(res, 'OpenAI');
+        return data.choices[0].message.content;
+    }
+
+    /**
+     * OpenAI Responses API (Jan 2026)
+     * Benefits:
+     *   - 40-80% cost reduction via improved cache utilization
+     *   - 3% SWE-bench improvement
+     *   - 98.7% Tau2-bench tool accuracy
+     *   - Built-in tools (web search, MCP support)
+     *
+     * Migration guide: https://platform.openai.com/docs/guides/migrate-to-responses
+     */
+    async _fetchOpenAIResponses(prompt) {
+        const res = await fetch('https://api.openai.com/v1/responses', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${this.openaiKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: "gpt-5.2",
+                input: prompt,
+                // Responses API uses 'input' instead of 'messages' for simple text
+                // For multi-turn, use 'input' array with { role, content } items
+            })
+        });
+
+        if (!res.ok) {
+            const err = await res.text();
+            // Fallback to Chat Completions if Responses API fails
+            console.warn(`[LLM] OpenAI Responses API failed (${res.status}): ${err}. Falling back to Chat Completions...`);
+            return await this._fetchOpenAIChatCompletions(prompt);
+        }
+
+        const data = await res.json();
+        // Responses API returns output array instead of choices
+        if (data.output && data.output[0]) {
+            // Handle different output item types
+            const outputItem = data.output[0];
+            if (outputItem.type === 'message' && outputItem.content) {
+                return outputItem.content[0]?.text || outputItem.content;
+            }
+            return outputItem.content || outputItem.text || JSON.stringify(outputItem);
+        }
+
+        throw new Error('OpenAI Responses API: Unexpected response format');
+    }
+
+    // Keep original Chat Completions as fallback
+    async _fetchOpenAIChatCompletions(prompt) {
         const res = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {

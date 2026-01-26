@@ -1041,7 +1041,7 @@ const queueAction = (action) => { ... }
 | ~~Gemini thought_signatures~~ | AI | N/A (no function calling used) | - | ⚪ N/A |
 | ~~ElevenLabs Flash v2.5~~ | Voice | 75ms vs 300ms latency | 2h | ✅ DONE |
 | ~~Shopify Flow loops~~ | Automation | Documented >100 item limits | 1h | ✅ DONE |
-| GPT-5.2 → Responses API | AI | +4% Tau-Bench performance | 4h | ⏳ (needs research) |
+| GPT-5.2 → Responses API | AI | 40-80% cost reduction + 98.7% tool accuracy | 4h | ✅ DONE (S165bis) |
 
 ### 16.3 P2 - Medium Priority (Next Quarter)
 | Task | Component | Impact | Effort |
