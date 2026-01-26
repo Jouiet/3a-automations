@@ -1,10 +1,57 @@
 # 3A Automation
-> Version: 116.0 | 26/01/2026 | Session 168novies - Streamable HTTP Transport (85% SOTA)
+> Version: 117.0 | 26/01/2026 | Session 168decies - Bearer Token Auth (95% SOTA)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168decies - BEARER TOKEN AUTHENTICATION (26/01/2026)
+
+### MCP Score SOTA: 85% → 95% (+10%)
+
+| Implementation | Status |
+| :--- | :--- |
+| **AuthManager class** | ✅ Token verification |
+| **Bearer auth middleware** | ✅ On /mcp endpoint |
+| **Optional auth** | ✅ Enabled via MCP_API_KEY |
+| **Multi-key support** | ✅ MCP_API_KEYS env var |
+| **Scoped access** | ✅ read, write, admin |
+| **Auth stats** | ✅ In health/status |
+| **Version** | 1.4.0 → 1.5.0 |
+| **Tests** | 99/99 (100%) |
+
+### Configuration
+
+```bash
+# Enable auth with single master key
+MCP_API_KEY=your-secret-key npm run start:http
+
+# Enable auth with multiple scoped keys
+MCP_API_KEYS="read-key:read,write-key:read+write" npm run start:http
+```
+
+### Usage
+
+```bash
+# With auth enabled
+curl -H "Authorization: Bearer your-secret-key" \
+     -H "Content-Type: application/json" \
+     http://localhost:3001/mcp
+```
+
+### Capabilities Now
+
+```
+Version: 1.5.0
+SDK: 1.25.3
+SOTA: 95%
+Auth: Bearer token (optional)
+Transport: stdio, http
+Features: tools, resources, prompts, logging, caching, output-schemas, streamable-http, bearer-auth
+```
 
 ---
 

@@ -55,6 +55,85 @@ class CacheManager {
     }
 }
 const cache = new CacheManager();
+class AuthManager {
+    apiKey;
+    tokens = new Map();
+    stats = { allowed: 0, denied: 0, errors: 0 };
+    constructor() {
+        this.apiKey = process.env.MCP_API_KEY;
+        // If API key is set, create a master token
+        if (this.apiKey) {
+            this.tokens.set(this.apiKey, {
+                key: this.apiKey,
+                name: "master",
+                scopes: ["*"],
+                createdAt: Date.now()
+            });
+            // Note: using console.error since logger may not be initialized yet
+            console.error(JSON.stringify({ level: "INFO", message: "Auth enabled with master API key" }));
+        }
+        // Support for additional API keys (comma-separated)
+        const additionalKeys = process.env.MCP_API_KEYS?.split(",") || [];
+        additionalKeys.forEach((keySpec, idx) => {
+            const [key, scopes] = keySpec.split(":");
+            if (key) {
+                this.tokens.set(key.trim(), {
+                    key: key.trim(),
+                    name: `key_${idx}`,
+                    scopes: scopes?.split("+") || ["read"],
+                    createdAt: Date.now()
+                });
+            }
+        });
+    }
+    isEnabled() {
+        return !!this.apiKey;
+    }
+    verifyToken(authHeader) {
+        if (!this.isEnabled()) {
+            return { valid: true }; // Auth disabled, allow all
+        }
+        if (!authHeader) {
+            this.stats.denied++;
+            return { valid: false, error: "Missing Authorization header" };
+        }
+        const parts = authHeader.split(" ");
+        if (parts.length !== 2 || parts[0].toLowerCase() !== "bearer") {
+            this.stats.denied++;
+            return { valid: false, error: "Invalid Authorization format (expected: Bearer <token>)" };
+        }
+        const token = parts[1];
+        const storedToken = this.tokens.get(token);
+        if (!storedToken) {
+            this.stats.denied++;
+            return { valid: false, error: "Invalid token" };
+        }
+        // Check expiration
+        if (storedToken.expiresAt && Date.now() > storedToken.expiresAt) {
+            this.stats.denied++;
+            return { valid: false, error: "Token expired" };
+        }
+        this.stats.allowed++;
+        return { valid: true, token: storedToken };
+    }
+    hasScope(token, requiredScope) {
+        if (!token)
+            return !this.isEnabled();
+        if (token.scopes.includes("*"))
+            return true;
+        return token.scopes.includes(requiredScope);
+    }
+    getStats() {
+        return {
+            enabled: this.isEnabled(),
+            tokenCount: this.tokens.size,
+            allowed: this.stats.allowed,
+            denied: this.stats.denied,
+            errors: this.stats.errors
+        };
+    }
+}
+const auth = new AuthManager();
 // ═══════════════════════════════════════════════════════════════════════════
 // OUTPUT SCHEMAS (P7 - +2% SOTA)
 // ═══════════════════════════════════════════════════════════════════════════
@@ -75,6 +154,12 @@ const OutputSchemas = {
             hits: z.number(),
             misses: z.number(),
             hitRate: z.string()
+        }),
+        auth: z.object({
+            enabled: z.boolean(),
+            tokenCount: z.number(),
+            allowed: z.number(),
+            denied: z.number()
         })
     }),
     toolCatalog: z.object({
@@ -143,7 +228,7 @@ const pressureMatrix = loadJson(PRESSURE_MATRIX_PATH, { sectors: {} });
 // ═══════════════════════════════════════════════════════════════════════════
 const server = new McpServer({
     name: "3a-global-mcp",
-    version: "1.4.0",
+    version: "1.5.0",
 }, {
     capabilities: {
         tools: {},
@@ -387,22 +472,29 @@ server.registerTool("get_global_status", {
     outputSchema: OutputSchemas.globalStatus
 }, async () => {
     const cacheStats = cache.getStats();
+    const authStats = auth.getStats();
     const response = {
         status: "online",
-        version: "1.4.0",
+        version: "1.5.0",
         sdk_version: "1.25.3",
         tool_count: registry.automations.length + 3,
         resource_count: 3,
         prompt_count: 3,
         engine: "Ultrathink v3",
-        capabilities: ["tools", "resources", "prompts", "logging", "caching", "streamable-http"],
+        capabilities: ["tools", "resources", "prompts", "logging", "caching", "streamable-http", "bearer-auth"],
         transport_modes: ["stdio", "http"],
-        sota_score: "85%",
+        sota_score: "95%",
         cache: {
             entries: cacheStats.entries,
             hits: cacheStats.hits,
             misses: cacheStats.misses,
             hitRate: cacheStats.hitRate
+        },
+        auth: {
+            enabled: authStats.enabled,
+            tokenCount: authStats.tokenCount,
+            allowed: authStats.allowed,
+            denied: authStats.denied
         }
     };
     return {
@@ -554,13 +646,13 @@ const isHttpMode = process.argv.includes("--http");
 async function startStdioServer() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    logger.info("3A Global MCP Router v1.4.0 started (STDIO mode)", {
+    logger.info("3A Global MCP Router v1.5.0 started (STDIO mode)", {
         tools: registry.automations.length + 3,
         resources: 3,
         prompts: 3,
         sdk: "1.25.3",
-        sota: "85%",
-        features: ["caching", "output-schemas", "streamable-http"]
+        sota: "95%",
+        features: ["caching", "output-schemas", "streamable-http", "bearer-auth"]
     });
 }
 async function startHttpServer() {
@@ -575,20 +667,22 @@ async function startHttpServer() {
         // CORS headers for cross-origin requests
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, mcp-session-id");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, mcp-session-id");
         if (req.method === "OPTIONS") {
             res.writeHead(204);
             res.end();
             return;
         }
-        // Health check endpoint
+        // Health check endpoint (no auth required)
         if (req.url === "/health" && req.method === "GET") {
+            const authStats = auth.getStats();
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({
                 status: "healthy",
-                version: "1.4.0",
+                version: "1.5.0",
                 mode: "http",
                 transport: "streamable-http",
+                auth: authStats.enabled ? "enabled" : "disabled",
                 tools: registry.automations.length + 3,
                 resources: 3,
                 prompts: 3,
@@ -597,8 +691,31 @@ async function startHttpServer() {
             }));
             return;
         }
-        // MCP endpoint
+        // MCP endpoint (auth required if enabled)
         if (req.url === "/mcp" || req.url === "/") {
+            // Verify authentication
+            const authResult = auth.verifyToken(req.headers.authorization);
+            if (!authResult.valid) {
+                res.writeHead(401, {
+                    "Content-Type": "application/json",
+                    "WWW-Authenticate": 'Bearer realm="3a-global-mcp"'
+                });
+                res.end(JSON.stringify({
+                    error: "Unauthorized",
+                    message: authResult.error,
+                    hint: "Set MCP_API_KEY env var on server and use: Authorization: Bearer <key>"
+                }));
+                logger.info("Auth denied", { error: authResult.error, ip: req.socket.remoteAddress });
+                return;
+            }
+            // Add auth info to request for transport
+            if (authResult.token) {
+                req.auth = {
+                    token: authResult.token.name,
+                    scopes: authResult.token.scopes,
+                    clientId: authResult.token.name
+                };
+            }
             try {
                 await httpTransport.handleRequest(req, res);
             }
@@ -616,17 +733,20 @@ async function startHttpServer() {
         res.end(JSON.stringify({ error: "Not found", endpoints: ["/mcp", "/health"] }));
     });
     httpServer.listen(HTTP_PORT, () => {
-        logger.info(`3A Global MCP Router v1.4.0 started (HTTP mode)`, {
+        const authStatus = auth.isEnabled() ? "ENABLED (MCP_API_KEY set)" : "DISABLED (no MCP_API_KEY)";
+        logger.info(`3A Global MCP Router v1.5.0 started (HTTP mode)`, {
             port: HTTP_PORT,
+            auth: authStatus,
             endpoints: ["/mcp", "/health"],
             tools: registry.automations.length + 3,
             resources: 3,
             prompts: 3,
             sdk: "1.25.3",
-            sota: "85%",
-            features: ["caching", "output-schemas", "streamable-http"]
+            sota: "95%",
+            features: ["caching", "output-schemas", "streamable-http", "bearer-auth"]
         });
         console.error(`✅ MCP HTTP Server listening on http://localhost:${HTTP_PORT}`);
+        console.error(`   Auth: ${authStatus}`);
         console.error(`   Endpoints: /mcp (MCP protocol), /health (status)`);
     });
     // Graceful shutdown

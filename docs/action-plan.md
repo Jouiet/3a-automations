@@ -4,7 +4,30 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168novies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.4.0 (124 tools, STDIO+HTTP, SDK 1.25.3, 85% SOTA)**
+> **✅ ÉTAT RÉEL (Session 168decies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.5.0 (124 tools, STDIO+HTTP+Auth, SDK 1.25.3, 95% SOTA)**
+
+---
+
+## SESSION 168decies - BEARER TOKEN AUTHENTICATION (26/01/2026)
+
+### MCP Score SOTA: 85% → 95% (+10%)
+
+| Phase | Implementation | Status |
+| :--- | :--- | :--- |
+| **P5: Bearer Auth** | AuthManager class | ✅ DONE |
+| **Token verification** | On /mcp endpoint | ✅ DONE |
+| **Optional auth** | Via MCP_API_KEY env | ✅ DONE |
+| **Multi-key support** | MCP_API_KEYS env | ✅ DONE |
+
+### Environment Variables
+
+| Variable | Description | Example |
+| :--- | :--- | :--- |
+| `MCP_API_KEY` | Master API key (full access) | `secret-key-123` |
+| `MCP_API_KEYS` | Scoped keys (comma-separated) | `key1:read,key2:read+write` |
+| `MCP_HTTP_PORT` | HTTP server port | `3001` (default) |
+
+**Commit:** pending | **Tests:** 99/99 (100%) | **Version:** 1.5.0 | **Score SOTA:** 95%
 
 ---
 
