@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>3A Automation Services Grid</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+
+<style>
+
+/* 3A Design System Variables (injected) */
+:root {
+  --primary: #4FBAF1;
+  --secondary: #191E35;
+  --accent: #10B981;
+  --purple: #8B5CF6;
+  --orange: #F59E0B;
+  --shopify-green: #95bf47;
+  --bg-dark: #191022;
+  --secondary-light: #1B2F54;
+  --text-light: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-backdrop: blur(20px);
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+}
+
+
+/* 3A Glass Panel */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(79, 186, 241, 0.5);
+  box-shadow: 0 0 20px rgba(79, 186, 241, 0.2);
+  transform: translateY(-5px);
+}
+
+/* 3A Mesh Gradients */
+.mesh-gradient-purple {
+  background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(0,0,0,0) 70%);
+}
+
+.mesh-gradient-cyan {
+  background: radial-gradient(circle, rgba(79,186,241,0.15) 0%, rgba(0,0,0,0) 70%);
+}
+
+/* 3A Button Styles */
+.btn-cyber {
+  background: var(--primary);
+  color: var(--text-light);
+  font-weight: 700;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(79, 186, 241, 0.25);
+}
+
+.btn-cyber:hover {
+  background: rgba(79, 186, 241, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(79, 186, 241, 0.4);
+}
+
+/* 3A Section Badge */
+.section-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  background: rgba(79, 186, 241, 0.1);
+  border: 1px solid rgba(79, 186, 241, 0.2);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* 3A Service Icon */
+.service-icon-circle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-icon-circle.purple { background: var(--purple); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+.service-icon-circle.green { background: var(--accent); box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+.service-icon-circle.cyan { background: var(--primary); box-shadow: 0 0 20px rgba(79, 186, 241, 0.2); }
+.service-icon-circle.orange { background: var(--orange); box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+.service-icon-circle.shopify { background: var(--shopify-green); box-shadow: 0 0 20px rgba(149, 191, 71, 0.2); }
+
+</style>
+
+    <meta name="author" content="3A Automation">
+    <meta name="generator" content="Stitch-to-3A-CSS v1.0.0">
+    <meta name="stitch-converted" content="2026-01-26T06:45:04.622Z">
+  
+</head>
+<body class="bg-brand-dark min-h-screen text-white font-display overflow-x-hidden relative selection:bg-primary selection:text-white">
+<!-- Mesh Gradients Background -->
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] mesh-gradient-purple blur-[100px] rounded-full opacity-60"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] mesh-gradient-cyan blur-[120px] rounded-full opacity-50"></div>
+<div class="absolute top-[20%] right-[20%] w-[30vw] h-[30vw] bg-primary/10 blur-[90px] rounded-full"></div>
+</div>
+<!-- Navigation -->
+<header class="relative z-10 w-full border-b border-white/10 bg-[var(--bg-dark)]/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-white">3A Automation</h1>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="#">Services</a>
+<a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="#">Case Studies</a>
+<a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="#">About</a>
+<a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="#">Contact</a>
+</nav>
+<button class="bg-primary hover:bg-primary/90 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-colors shadow-lg shadow-primary/25">
+                Get Started
+            </button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="relative z-10 flex-grow py-20 px-6">
+<div class="max-w-7xl mx-auto flex flex-col items-center">
+<!-- Section Header -->
+<div class="text-center mb-16 max-w-2xl">
+<span class="inline-block py-1 px-3 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+                    Our Expertise
+                </span>
+<h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+                    AI-Driven Solutions for <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Scale &amp; Efficiency</span>
+</h2>
+<p class="text-lg text-white/60">
+                    We leverage cutting-edge artificial intelligence to automate your workflows, optimize your content, and retain your customers.
+                </p>
+</div>
+<!-- Services Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+<!-- Card 1: Email Marketing -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 group cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-[var(--purple)] flex items-center justify-center shrink-0 shadow-lg shadow-[var(--purple)]/20">
+<span class="material-symbols-outlined text-white text-3xl">mail</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-extrabold text-white tracking-tight group-hover:text-[var(--purple)] transition-colors">Email Marketing</h3>
+<p class="text-white/70 text-sm leading-relaxed">
+                            Automated sequences that convert leads into loyal customers through hyper-personalized messaging.
+                        </p>
+</div>
+</div>
+<!-- Card 2: Shopify Optimization -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 group cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-[var(--shopify-green)] flex items-center justify-center shrink-0 shadow-lg shadow-[var(--shopify-green)]/20">
+<span class="material-symbols-outlined text-white text-3xl">shopping_cart</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-extrabold text-white tracking-tight group-hover:text-[var(--shopify-green)] transition-colors">Shopify Optimization</h3>
+<p class="text-white/70 text-sm leading-relaxed">
+                            AI-enhanced store management for maximum efficiency, inventory forecasting, and dynamic pricing.
+                        </p>
+</div>
+</div>
+<!-- Card 3: SEO & Content -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 group cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-[var(--accent)] flex items-center justify-center shrink-0 shadow-lg shadow-[var(--accent)]/20">
+<span class="material-symbols-outlined text-white text-3xl">search</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-extrabold text-white tracking-tight group-hover:text-[var(--accent)] transition-colors">SEO &amp; Content</h3>
+<p class="text-white/70 text-sm leading-relaxed">
+                            Rank higher with generative AI content strategies that target high-intent keywords at scale.
+                        </p>
+</div>
+</div>
+<!-- Card 4: Voice AI Agents -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 group cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-[var(--primary)] flex items-center justify-center shrink-0 shadow-lg shadow-[var(--primary)]/20">
+<span class="material-symbols-outlined text-white text-3xl">mic</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-extrabold text-white tracking-tight group-hover:text-[var(--primary)] transition-colors">Voice AI Agents</h3>
+<p class="text-white/70 text-sm leading-relaxed">
+                            24/7 intelligent voice support for seamless communication, appointment booking, and customer service.
+                        </p>
+</div>
+</div>
+<!-- Card 5: Analytics -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 group cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-[var(--orange)] flex items-center justify-center shrink-0 shadow-lg shadow-[var(--orange)]/20">
+<span class="material-symbols-outlined text-white text-3xl">bar_chart</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-extrabold text-white tracking-tight group-hover:text-[var(--orange)] transition-colors">Analytics</h3>
+<p class="text-white/70 text-sm leading-relaxed">
+                            Deep data insights to drive smarter business decisions with real-time dashboards and predictive metrics.
+                        </p>
+</div>
+</div>
+<!-- Card 6: Retention -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 group cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-[var(--accent)] flex items-center justify-center shrink-0 shadow-lg shadow-[var(--accent)]/20">
+<span class="material-symbols-outlined text-white text-3xl">group</span>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-xl font-extrabold text-white tracking-tight group-hover:text-[var(--accent)] transition-colors">Retention</h3>
+<p class="text-white/70 text-sm leading-relaxed">
+                            Predictive modeling to reduce churn and boost LTV by identifying at-risk customers before they leave.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="relative z-10 w-full border-t border-white/10 bg-[var(--bg-dark)]/50 backdrop-blur-sm mt-auto">
+<div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+<p class="text-white/50 text-sm">© 2026 3A Automation. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-white/50 hover:text-white transition-colors text-sm" href="#">Privacy Policy</a>
+<a class="text-white/50 hover:text-white transition-colors text-sm" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

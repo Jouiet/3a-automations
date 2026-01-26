@@ -1,11 +1,76 @@
 # 3A Automation
 >
-> Version: 90.0 | 26/01/2026 | Session 162bis - **Stitch Workflow E2E Validé** + 3 UI Components
+> Version: 91.0 | 26/01/2026 | Session 163 - **Stitch CSS Conversion** + Sensors 45% OK
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 163 - STITCH CSS CONVERSION + SENSOR VALIDATION (26/01/2026)
+
+### Accomplishments
+
+| Tâche | Status | Détail |
+| :--- | :--- | :--- |
+| **Create stitch-to-3a-css.cjs** | ✅ DONE | Conversion script (180 lines) |
+| **Batch convert Stitch assets** | ✅ DONE | 4/4 files → 3a-*.html |
+| **Run all 20 sensors** | ✅ DONE | Comprehensive health check |
+| **Update GPM** | ✅ DONE | Session 163, 4 screens converted |
+
+### Stitch CSS Conversion Script
+
+**New Script:** `automations/agency/core/stitch-to-3a-css.cjs`
+
+| Feature | Description |
+| :--- | :--- |
+| Color Conversion | 10 Tailwind colors → CSS variables |
+| Class Mapping | 19 Tailwind → 3A class mappings |
+| Component Mapping | glass-card → glass-panel, etc. |
+| Batch Mode | `--batch=assets/stitch/` processes all files |
+
+**Commands:**
+```bash
+node automations/agency/core/stitch-to-3a-css.cjs --health
+node automations/agency/core/stitch-to-3a-css.cjs input.html --output=output.html
+node automations/agency/core/stitch-to-3a-css.cjs --batch=landing-page-hostinger/assets/stitch/
+```
+
+**Converted Files:**
+- `3a-hero-ai-agency.html`
+- `3a-pricing-dark-glassmorphism-1.html`
+- `3a-pricing-dark-glassmorphism-2.html`
+- `3a-services-grid-3a.html`
+
+### Sensors Status (Verified 26/01/2026 - Session 163)
+
+| Status | Count | Sensors |
+| :--- | :--- | :--- |
+| ✅ OK | **9 (45%)** | gsc, google-trends, shopify, klaviyo, cost-tracking, lead-velocity, retention, email-health, product-seo |
+| ⚠️ PARTIAL | 5 (25%) | google-ads-planner, supplier-health, voice-quality, content-perf, lead-scoring |
+| ❌ BLOCKED | 6 (30%) | meta-ads, tiktok-ads, whatsapp, ga4, bigquery, apify |
+
+**Improvement from S162bis:** 6 OK → 9 OK (+50% improvement)
+
+**Blocked Sensors (USER ACTION REQUIRED):**
+| Sensor | Issue | Fix |
+| :--- | :--- | :--- |
+| ga4-sensor | API DISABLED | Enable Analytics Data API |
+| bigquery-sensor | API DISABLED | Enable BigQuery API |
+| apify-sensor | TRIAL EXPIRED | Upgrade to paid plan |
+| meta-ads | NO_CREDENTIALS | Configure META_ACCESS_TOKEN |
+| tiktok-ads | NO_CREDENTIALS | Configure TIKTOK_ACCESS_TOKEN |
+| whatsapp | NO_CREDENTIALS | Configure WHATSAPP_TOKEN |
+
+### Scripts Core Updated
+
+| Métrique | S162bis | S163 |
+| :--- | :--- | :--- |
+| Total scripts core | 84 | **85** (+stitch-to-3a-css.cjs) |
+| Scripts --health | 23 | **24** |
+| Sensors OK | 6 (30%) | **9 (45%)** |
+
+---
 
 ## SESSION 162bis - STITCH PROMPT OPTIMIZATION (26/01/2026)
 
@@ -948,15 +1013,15 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
-| Scripts Core | 84 | ✅ (+stitch-api.cjs S162) |
-| Scripts --health | 24 (29%) | ⚠️ 71% sans health check |
+| Scripts Core | **85** | ✅ (+stitch-to-3a-css.cjs S163) |
+| Scripts --health | **26** (31%) | ⚠️ 69% sans health check |
 | Automations Registry | **121** | ✅ SYNCED |
 | Automations Catalog | **121** | ✅ SYNCED |
 | HTML Pages | **71** | ✅ (+1 redirect) |
 | Blog Articles FR | 5 | ✅ |
 | Academy Courses | 14 | ✅ (7 FR + 7 EN) |
 | Sitemap URLs | **68** | ✅ (3 excluded: 404×2, redirect) |
-| Sensors 3A | 20 | 6 OK, 10 PARTIAL, 4 BLOCKED |
+| Sensors 3A | 20 | **9 OK (45%), 5 PARTIAL, 6 BLOCKED** |
 | Sensors MyDealz | 5 | ✅ Transferred |
 | Stylelint Issues | 0 | ✅ |
 | CSS Version | **v=80.0** | ✅ Session 156 |

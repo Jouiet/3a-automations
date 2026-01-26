@@ -1,7 +1,38 @@
 # PLAN D'ACTION MVP - JO-AAA
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL (Session 162 - 26/01/2026):** 3A Stitch API ✅, GSC ✅, CSS v84 | **ALPHA MEDICAL: 37.5% SUCCÈS**
+> **⚠️ ÉTAT RÉEL (Session 163 - 26/01/2026):** Stitch CSS Conversion ✅, Sensors 45% OK | **Scripts: 85**
+
+## SESSION 163 - STITCH CSS CONVERSION + SENSORS (26/01/2026)
+
+### Accomplissements
+
+| Élément | Status | Détail |
+|---------|--------|--------|
+| Stitch-to-3A CSS Script | ✅ CRÉÉ | `stitch-to-3a-css.cjs` (180 lignes) |
+| Batch Conversion | ✅ DONE | 4/4 files converted |
+| Sensor Health Check | ✅ DONE | 20 sensors tested |
+| Scripts Core | **85** | +1 (stitch-to-3a-css.cjs) |
+| Sensors OK | **9 (45%)** | Up from 6 (30%) |
+
+### Commandes Nouvelles
+
+```bash
+# Conversion Stitch → 3A CSS
+node automations/agency/core/stitch-to-3a-css.cjs --health
+node automations/agency/core/stitch-to-3a-css.cjs input.html --output=out.html
+node automations/agency/core/stitch-to-3a-css.cjs --batch=landing-page-hostinger/assets/stitch/
+```
+
+### Sensor Status Update
+
+| Status | Count | Change |
+|--------|-------|--------|
+| ✅ OK | 9 | +3 from S162 |
+| ⚠️ PARTIAL | 5 | -5 from S162 |
+| ❌ BLOCKED | 6 | +2 from S162 |
+
+---
 
 ## SESSION 162 - STITCH API OPÉRATIONNEL (26/01/2026)
 

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Agency Hero Section</title>
+<!-- Google Fonts: Space Grotesk -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+
+<!-- Theme Config -->
+
+
+<style>
+
+/* 3A Design System Variables (injected) */
+:root {
+  --primary: #4FBAF1;
+  --secondary: #191E35;
+  --accent: #10B981;
+  --purple: #8B5CF6;
+  --orange: #F59E0B;
+  --shopify-green: #95bf47;
+  --bg-dark: #191022;
+  --secondary-light: #1B2F54;
+  --text-light: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-backdrop: blur(20px);
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+}
+
+
+/* 3A Glass Panel */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(79, 186, 241, 0.5);
+  box-shadow: 0 0 20px rgba(79, 186, 241, 0.2);
+  transform: translateY(-5px);
+}
+
+/* 3A Mesh Gradients */
+.mesh-gradient-purple {
+  background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(0,0,0,0) 70%);
+}
+
+.mesh-gradient-cyan {
+  background: radial-gradient(circle, rgba(79,186,241,0.15) 0%, rgba(0,0,0,0) 70%);
+}
+
+/* 3A Button Styles */
+.btn-cyber {
+  background: var(--primary);
+  color: var(--text-light);
+  font-weight: 700;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(79, 186, 241, 0.25);
+}
+
+.btn-cyber:hover {
+  background: rgba(79, 186, 241, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(79, 186, 241, 0.4);
+}
+
+/* 3A Section Badge */
+.section-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  background: rgba(79, 186, 241, 0.1);
+  border: 1px solid rgba(79, 186, 241, 0.2);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* 3A Service Icon */
+.service-icon-circle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-icon-circle.purple { background: var(--purple); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+.service-icon-circle.green { background: var(--accent); box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+.service-icon-circle.cyan { background: var(--primary); box-shadow: 0 0 20px rgba(79, 186, 241, 0.2); }
+.service-icon-circle.orange { background: var(--orange); box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+.service-icon-circle.shopify { background: var(--shopify-green); box-shadow: 0 0 20px rgba(149, 191, 71, 0.2); }
+
+</style>
+
+    <meta name="author" content="3A Automation">
+    <meta name="generator" content="Stitch-to-3A-CSS v1.0.0">
+    <meta name="stitch-converted" content="2026-01-26T06:45:04.600Z">
+  
+</head>
+<body class="bg-background-dark text-white font-display overflow-x-hidden min-h-screen flex flex-col relative selection:bg-primary selection:text-white">
+<!-- Ambient Background Mesh Gradients -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<!-- Purple Blob -->
+<div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] mix-blend-screen opacity-60"></div>
+<!-- Cyan Blob -->
+<div class="absolute bottom-[-10%] right-[10%] w-[600px] h-[600px] bg-secondary/15 rounded-full blur-[120px] mix-blend-screen opacity-50"></div>
+<!-- Center Deep Glow -->
+<div class="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[80px] mix-blend-overlay"></div>
+</div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Logo -->
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
+</div>
+<span class="text-xl font-bold tracking-tight">AI Agency</span>
+</div>
+<!-- Desktop Links -->
+<div class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Services</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Case Studies</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Pricing</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">About</a>
+</div>
+<!-- CTA -->
+<div class="hidden md:flex items-center gap-4">
+<a class="text-sm font-medium text-white hover:text-primary transition-colors" href="#">Login</a>
+<button class="px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/10 text-sm font-bold text-white transition-all backdrop-blur-md">
+                    Book Call
+                </button>
+</div>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Hero Section -->
+<main class="relative z-10 flex flex-col flex-grow items-center justify-center pt-32 pb-20 px-6">
+<!-- Abstract Floating UI Shapes (Decorative) -->
+<div class="absolute left-[5%] top-[25%] hidden lg:block animate-float pointer-events-none">
+<div class="glass-panel p-4 rounded-2xl w-48 rotate-[-6deg]">
+<div class="flex items-center gap-3 mb-3">
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
+</div>
+<div class="h-2 w-20 bg-white/10 rounded-full"></div>
+</div>
+<div class="space-y-2">
+<div class="h-1.5 w-full bg-white/5 rounded-full"></div>
+<div class="h-1.5 w-3/4 bg-white/5 rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="absolute right-[8%] top-[30%] hidden lg:block animate-float-delayed pointer-events-none">
+<div class="glass-panel p-4 rounded-2xl w-40 rotate-[12deg]">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs text-gray-400 font-mono">Efficiency</span>
+<span class="text-xs text-secondary font-bold">+420%</span>
+</div>
+<div class="h-24 w-full bg-gradient-to-t from-secondary/20 to-transparent rounded-lg relative overflow-hidden">
+<div class="absolute bottom-0 left-0 w-full h-full flex items-end justify-around px-2 pb-2">
+<div class="w-1.5 h-[40%] bg-secondary rounded-t-sm"></div>
+<div class="w-1.5 h-[60%] bg-secondary rounded-t-sm"></div>
+<div class="w-1.5 h-[30%] bg-secondary rounded-t-sm"></div>
+<div class="w-1.5 h-[80%] bg-secondary rounded-t-sm"></div>
+<div class="w-1.5 h-[55%] bg-secondary rounded-t-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<!-- Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/30 bg-primary/10 mb-8 backdrop-blur-sm">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="text-xs font-semibold tracking-wide text-primary uppercase">New Features 2.0</span>
+</div>
+<!-- Headline -->
+<h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[1.1] glow-text text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">
+                Automate <br/>Everything
+            </h1>
+<!-- Subheadline -->
+<p class="text-lg md:text-xl text-gray-400 font-body leading-relaxed max-w-2xl mx-auto mb-10">
+                119 AI-powered automations for your business. We build the systems that scale your operations while you sleep.
+            </p>
+<!-- CTA Buttons -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+<button class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg glow-button relative overflow-hidden group">
+<span class="relative z-10 flex items-center justify-center gap-2">
+                        Get Started Free
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</span>
+<!-- Shine Effect -->
+<div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+</button>
+<button class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel text-white font-bold text-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-gray-400">play_circle</span>
+                    View Demo
+                </button>
+</div>
+</div>
+</main>
+<!-- Social Proof / Footer Strip -->
+<div class="border-t border-white/5 bg-black/20 backdrop-blur-sm w-full py-8">
+<div class="max-w-7xl mx-auto px-6">
+<p class="text-center text-sm text-gray-500 mb-6 font-medium uppercase tracking-widest">Trusted by forward-thinking companies</p>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+<!-- Logos using SVG paths for generic company feel -->
+<div class="h-8 w-auto flex items-center gap-2" title="Company A">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+<span class="font-bold text-xl tracking-tighter">SecureAI</span>
+</div>
+<div class="h-8 w-auto flex items-center gap-2" title="Company B">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+<span class="font-bold text-xl tracking-tighter">FastScale</span>
+</div>
+<div class="h-8 w-auto flex items-center gap-2" title="Company C">
+<span class="material-symbols-outlined text-3xl">hub</span>
+<span class="font-bold text-xl tracking-tighter">NexusTech</span>
+</div>
+<div class="h-8 w-auto flex items-center gap-2" title="Company D">
+<span class="material-symbols-outlined text-3xl">language</span>
+<span class="font-bold text-xl tracking-tighter">GlobalNet</span>
+</div>
+<div class="h-8 w-auto flex items-center gap-2" title="Company E">
+<span class="material-symbols-outlined text-3xl">layers</span>
+<span class="font-bold text-xl tracking-tighter">StackFlow</span>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SaaS Pricing - Dark Glassmorphism</title>
+<!-- Tailwind CSS -->
+
+<!-- Theme Configuration -->
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<style>
+
+/* 3A Design System Variables (injected) */
+:root {
+  --primary: #4FBAF1;
+  --secondary: #191E35;
+  --accent: #10B981;
+  --purple: #8B5CF6;
+  --orange: #F59E0B;
+  --shopify-green: #95bf47;
+  --bg-dark: #191022;
+  --secondary-light: #1B2F54;
+  --text-light: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-backdrop: blur(20px);
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+}
+
+
+/* 3A Glass Panel */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(79, 186, 241, 0.5);
+  box-shadow: 0 0 20px rgba(79, 186, 241, 0.2);
+  transform: translateY(-5px);
+}
+
+/* 3A Mesh Gradients */
+.mesh-gradient-purple {
+  background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(0,0,0,0) 70%);
+}
+
+.mesh-gradient-cyan {
+  background: radial-gradient(circle, rgba(79,186,241,0.15) 0%, rgba(0,0,0,0) 70%);
+}
+
+/* 3A Button Styles */
+.btn-cyber {
+  background: var(--primary);
+  color: var(--text-light);
+  font-weight: 700;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(79, 186, 241, 0.25);
+}
+
+.btn-cyber:hover {
+  background: rgba(79, 186, 241, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(79, 186, 241, 0.4);
+}
+
+/* 3A Section Badge */
+.section-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  background: rgba(79, 186, 241, 0.1);
+  border: 1px solid rgba(79, 186, 241, 0.2);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* 3A Service Icon */
+.service-icon-circle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-icon-circle.purple { background: var(--purple); box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+.service-icon-circle.green { background: var(--accent); box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
+.service-icon-circle.cyan { background: var(--primary); box-shadow: 0 0 20px rgba(79, 186, 241, 0.2); }
+.service-icon-circle.orange { background: var(--orange); box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+.service-icon-circle.shopify { background: var(--shopify-green); box-shadow: 0 0 20px rgba(149, 191, 71, 0.2); }
+
+</style>
+
+    <meta name="author" content="3A Automation">
+    <meta name="generator" content="Stitch-to-3A-CSS v1.0.0">
+    <meta name="stitch-converted" content="2026-01-26T06:45:04.618Z">
+  
+</head>
+<body class="bg-background-dark text-white min-h-screen relative overflow-x-hidden selection:bg-primary selection:text-background-dark">
+<!-- Decorative Mesh Gradients (Background) -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<!-- Purple Blob -->
+<div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-purple-900/20 rounded-full blur-[120px] mix-blend-screen opacity-60 animate-pulse" style="animation-duration: 8s;"></div>
+<!-- Cyan Blob -->
+<div class="absolute bottom-[10%] right-[-5%] w-[40vw] h-[40vw] bg-primary/10 rounded-full blur-[100px] mix-blend-screen opacity-50"></div>
+<!-- Center subtle glow -->
+<div class="absolute top-[20%] left-[30%] w-[30vw] h-[30vw] bg-indigo-900/20 rounded-full blur-[90px] opacity-40"></div>
+</div>
+<!-- Main Content Wrapper -->
+<div class="relative z-10 flex flex-col min-h-screen">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 w-full glass-nav">
+<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-4xl" style="font-size: 32px;">diamond</span>
+</div>
+<span class="text-xl font-bold tracking-tight">Prism<span class="text-primary">.ai</span></span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Product</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Solutions</a>
+<a class="text-sm font-medium text-gray-300 hover:text-white transition-colors" href="#">Resources</a>
+<a class="text-sm font-medium text-white transition-colors" href="#">Pricing</a>
+</nav>
+<div class="flex gap-3">
+<button class="hidden sm:flex px-4 py-2 text-sm font-medium text-white hover:text-primary transition-colors">Log In</button>
+<button class="px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/50 rounded-lg text-sm font-bold transition-all backdrop-blur-sm">
+                        Get Started
+                    </button>
+</div>
+</div>
+</header>
+<!-- Pricing Header Section -->
+<main class="flex-grow flex flex-col items-center justify-center py-20 px-4 sm:px-6">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h1 class="text-5xl md:text-6xl font-black tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">
+                    Simple, transparent pricing
+                </h1>
+<p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto font-light">
+                    Choose the plan that's right for your business. No hidden fees, cancel anytime.
+                </p>
+<!-- Billing Toggle -->
+<div class="flex items-center justify-center gap-4">
+<span class="text-sm font-medium text-white">Monthly</span>
+<button class="relative w-14 h-8 rounded-full bg-white/10 border border-white/5 transition-colors focus:outline-none">
+<div class="absolute left-1 top-1 w-6 h-6 bg-primary rounded-full shadow-lg transition-transform translate-x-6"></div>
+</button>
+<span class="text-sm font-medium text-gray-400">Yearly <span class="text-primary text-xs ml-1">(Save 20%)</span></span>
+</div>
+</div>
+<!-- Pricing Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl w-full px-4 items-start">
+<!-- Starter Card -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 relative group hover:-translate-y-2 transition-transform duration-300">
+<div>
+<h3 class="text-xl font-bold text-white mb-2">Starter</h3>
+<p class="text-sm text-gray-400 h-10">Perfect for individuals and side projects.</p>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-bold text-white">€29</span>
+<span class="text-gray-500 font-medium">/mo</span>
+</div>
+<button class="w-full py-3 rounded-xl border border-white/20 bg-transparent text-white font-semibold hover:bg-white/5 hover:border-white/40 transition-all">
+                        Get Started
+                    </button>
+<div class="space-y-4 pt-4 border-t border-white/5">
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            1 User Seat
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            5 Active Projects
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            Basic Analytics
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            Community Support
+                        </div>
+</div>
+</div>
+<!-- Pro Card (Highlighted) -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 relative transform md:-translate-y-4 border-purple-500/50 shadow-[0_0_40px_-10px_rgba(168,85,247,0.3)] bg-gradient-to-b from-white/5 to-transparent">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg tracking-wide uppercase">
+                        Most Popular
+                    </div>
+<div>
+<h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                            Pro
+                            <span class="material-symbols-outlined text-purple-400 filled" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</h3>
+<p class="text-sm text-gray-300 h-10">For growing teams that need more power.</p>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-5xl font-black text-white tracking-tight">€79</span>
+<span class="text-gray-400 font-medium">/mo</span>
+</div>
+<button class="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-cyan-400 text-background-dark font-bold shadow-lg hover:shadow-cyan-500/30 hover:scale-[1.02] transition-all">
+                        Upgrade to Pro
+                    </button>
+<div class="space-y-4 pt-4 border-t border-white/10">
+<div class="flex items-center gap-3 text-sm text-gray-200 font-medium">
+<span class="material-symbols-outlined text-primary text-[20px] font-bold">check</span>
+                            5 User Seats
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-200 font-medium">
+<span class="material-symbols-outlined text-primary text-[20px] font-bold">check</span>
+                            Unlimited Projects
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-200 font-medium">
+<span class="material-symbols-outlined text-primary text-[20px] font-bold">check</span>
+                            Advanced Analytics &amp; Reports
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-200 font-medium">
+<span class="material-symbols-outlined text-primary text-[20px] font-bold">check</span>
+                            Priority Email Support
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-200 font-medium">
+<span class="material-symbols-outlined text-primary text-[20px] font-bold">check</span>
+                            Custom Domains
+                        </div>
+</div>
+</div>
+<!-- Enterprise Card -->
+<div class="glass-panel rounded-2xl p-8 flex flex-col gap-6 relative group hover:-translate-y-2 transition-transform duration-300">
+<div>
+<h3 class="text-xl font-bold text-white mb-2">Enterprise</h3>
+<p class="text-sm text-gray-400 h-10">Advanced security and controls for large orgs.</p>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-bold text-white">Custom</span>
+</div>
+<button class="w-full py-3 rounded-xl border border-white/20 bg-transparent text-white font-semibold hover:bg-white/5 hover:border-white/40 transition-all">
+                        Contact Sales
+                    </button>
+<div class="space-y-4 pt-4 border-t border-white/5">
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            Unlimited Users
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            SSO &amp; SAML Integration
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            Dedicated Account Manager
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            24/7 Phone Support &amp; SLA
+                        </div>
+<div class="flex items-center gap-3 text-sm text-gray-300">
+<span class="material-symbols-outlined text-primary text-[20px]">check</span>
+                            On-premise Deployment
+                        </div>
+</div>
+</div>
+</div>
+<!-- FAQ Teaser / Trust Badges -->
+<div class="mt-20 flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<!-- Using text placeholders for logos as per instruction to not use external images unless abstract -->
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="font-bold text-lg">Acme Corp</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">public</span>
+<span class="font-bold text-lg">GlobalLink</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">cloud</span>
+<span class="font-bold text-lg">CloudNine</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">security</span>
+<span class="font-bold text-lg">SecureNet</span>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="glass-nav border-t border-white/5 mt-auto">
+<div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col md:flex-row items-center gap-8 text-sm text-gray-400">
+<span class="text-white font-semibold">© 2026 Prism Platform Inc.</span>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="flex gap-4">
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">code</span>
+</a>
+<a class="text-gray-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">rss_feed</span>
+</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

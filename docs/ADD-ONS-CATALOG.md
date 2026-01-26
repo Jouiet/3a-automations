@@ -1,14 +1,14 @@
 # ADD-ONS CATALOG - 3A Automation
-> Version: 1.4 | Date: 26/01/2026 | Session: 162
-> Source: Analyse bottom-up des 84 scripts agency/core/ (+stitch-api.cjs)
-> Updated: Session 162 - Stitch API Operational
+> Version: 1.5 | Date: 26/01/2026 | Session: 163
+> Source: Analyse bottom-up des 85 scripts agency/core/
+> Updated: Session 163 - Stitch CSS Conversion + Sensors 45% OK
 
 ## Executive Summary
 
 | Metric | Value |
 |--------|-------|
-| Total scripts agency/core | **84** (+stitch-api.cjs S162) |
-| Scripts with --health (functional) | **25** |
+| Total scripts agency/core | **85** (+stitch-to-3a-css.cjs S163) |
+| Scripts with --health (functional) | **26** |
 | Scripts eligible for add-ons | 16 |
 | TOP 10 add-ons selected | 10 |
 | Human In The Loop (HITL) coverage | **80% (8/10)** ✅ Updated S160 |

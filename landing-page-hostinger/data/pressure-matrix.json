@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-01-26T02:20:00.000Z",
-  "session": "162bis",
+  "last_updated": "2026-01-26T06:46:03.338Z",
+  "session": "163",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -11,7 +11,7 @@
       "meta_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:28.525Z",
+        "last_check": "2026-01-26T06:45:53.518Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "Meta API credentials missing in .env"
@@ -20,7 +20,7 @@
       "retention": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:33.178Z",
+        "last_check": "2026-01-26T06:45:45.834Z",
         "sensor_data": {
           "order_count": 0,
           "high_risk_indicator": 0
@@ -28,9 +28,9 @@
       },
       "market_demand": {
         "label": "Market Demand",
-        "pressure": 6,
-        "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:21.943Z",
+        "pressure": 50,
+        "trend": "rising",
+        "last_check": "2026-01-26T06:46:13.122Z",
         "sensor_data": {
           "method": "AI Analysis (Grok)",
           "keywords": [
@@ -39,15 +39,17 @@
             "shopify automation",
             "e-commerce automation"
           ],
-          "demand_score": 94,
+          "demand_score": 92,
           "market_trend": "rising",
-          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation is surging due to AI integration and e-commerce expansion. By January 2026, businesses prioritize efficiency tools amid economic recovery and digital transformation."
-        }
+          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation is surging in January 2026, fueled by AI integrations and e-commerce expansion. These keywords reflect high interest from businesses seeking efficiency and scalability."
+        },
+        "ads_volume": 0,
+        "api_status": "BLOCKED_CREDENTIALS"
       },
       "tiktok_ads": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:35.535Z",
+        "last_check": "2026-01-26T06:45:53.949Z",
         "sensor_data": {
           "error": "DISCONNECTED",
           "message": "TikTok API credentials missing in .env"
@@ -68,7 +70,7 @@
         "label": "Email Health",
         "pressure": 60,
         "trend": "STABLE",
-        "last_check": "2026-01-26T01:18:09.067Z",
+        "last_check": "2026-01-26T06:45:47.170Z",
         "sensor_data": {
           "bounce_rate": 0,
           "spam_rate": 0,
@@ -83,7 +85,7 @@
         "label": "Content Performance",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-26T01:18:07.527Z",
+        "last_check": "2026-01-26T06:46:01.486Z",
         "sensor_data": {
           "posts_total": 0,
           "posts_this_month": 0,
@@ -97,7 +99,7 @@
       "lead_velocity": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:28.324Z",
+        "last_check": "2026-01-26T06:45:44.913Z",
         "sensor_data": {
           "leads_last_24h": 2
         }
@@ -105,7 +107,7 @@
       "lead_scoring": {
         "pressure": 95,
         "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:28.151Z",
+        "last_check": "2026-01-26T06:46:03.337Z",
         "sensor_data": {
           "quality_score": 3,
           "days_stale": 17
@@ -116,7 +118,7 @@
       "gsc_gaps": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:27.243Z",
+        "last_check": "2026-01-26T06:45:29.541Z",
         "sensor_data": {
           "top_gap_potential": 0,
           "target_query": "\"grok\" \"web speech api\""
@@ -125,7 +127,7 @@
       "product_enrichment": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:32.381Z",
+        "last_check": "2026-01-26T06:46:02.867Z",
         "sensor_data": {
           "product_count": 0,
           "poor_seo_ratio": "0.00"
@@ -148,7 +150,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T01:18:35.148Z",
+        "last_check": "2026-01-26T06:45:34.929Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
@@ -161,7 +163,7 @@
         "label": "Supplier Health",
         "pressure": 80,
         "trend": "STABLE",
-        "last_check": "2026-01-26T01:18:35.348Z",
+        "last_check": "2026-01-26T06:45:54.392Z",
         "sensor_data": {
           "suppliers_checked": 2,
           "suppliers_healthy": 0,
@@ -188,7 +190,7 @@
         "label": "API Costs",
         "pressure": 30,
         "trend": "STABLE",
-        "last_check": "2026-01-26T01:18:07.965Z",
+        "last_check": "2026-01-26T06:45:44.523Z",
         "sensor_data": {
           "current_month_usd": 0,
           "projected_month_usd": 0,
@@ -206,12 +208,14 @@
         "label": "Stitch MCP API",
         "pressure": 0,
         "trend": "STABLE",
-        "last_check": "2026-01-26T02:20:00.000Z",
+        "last_check": "2026-01-26T07:00:00.000Z",
         "sensor_data": {
           "status": "OPERATIONAL",
           "protocol": "MCP JSON-RPC 2.0",
           "wrapper": "stitch-api.cjs",
-          "screens_generated": 2,
+          "conversion_script": "stitch-to-3a-css.cjs",
+          "screens_generated": 4,
+          "screens_converted": 4,
           "project_id": "705686758968107418"
         }
       },
@@ -219,13 +223,13 @@
         "label": "Voice Quality",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-26T01:18:36.149Z",
+        "last_check": "2026-01-26T06:45:55.366Z",
         "sensor_data": {
           "endpoints_healthy": 0,
           "endpoints_total": 3,
           "providers_healthy": 0,
           "providers_configured": 1,
-          "avg_latency_ms": 394,
+          "avg_latency_ms": 517,
           "endpoint_details": [
             {
               "name": "Voice API",
@@ -252,7 +256,7 @@
             {
               "name": "OpenAI Whisper",
               "status": "ERROR",
-              "latency_ms": 394
+              "latency_ms": 517
             }
           ]
         }
@@ -263,7 +267,7 @@
         "label": "WhatsApp Status",
         "pressure": 90,
         "trend": "STABLE",
-        "last_check": "2026-01-26T01:18:36.348Z",
+        "last_check": "2026-01-26T06:46:01.928Z",
         "sensor_data": {
           "connected": false,
           "phone_verified": false,
