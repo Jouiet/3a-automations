@@ -1,14 +1,14 @@
 # ADD-ONS CATALOG - 3A Automation
-> Version: 1.3 | Date: 25/01/2026 | Session: 160+
-> Source: Analyse bottom-up des 83 scripts agency/core/
-> Updated: Session 160+ - Phase 3 Documentation Complete
+> Version: 1.4 | Date: 26/01/2026 | Session: 162
+> Source: Analyse bottom-up des 84 scripts agency/core/ (+stitch-api.cjs)
+> Updated: Session 162 - Stitch API Operational
 
 ## Executive Summary
 
 | Metric | Value |
 |--------|-------|
-| Total scripts agency/core | 83 |
-| Scripts with --health (functional) | 24 |
+| Total scripts agency/core | **84** (+stitch-api.cjs S162) |
+| Scripts with --health (functional) | **25** |
 | Scripts eligible for add-ons | 16 |
 | TOP 10 add-ons selected | 10 |
 | Human In The Loop (HITL) coverage | **80% (8/10)** ✅ Updated S160 |
@@ -381,4 +381,4 @@ Chaque add-on nécessite que le CLIENT fournisse:
 
 ---
 
-*Document created: 25/01/2026 | Last updated: 25/01/2026 (Session 160 - HITL 100% Complete)*
+*Document created: 25/01/2026 | Last updated: 26/01/2026 (Session 162 - Stitch API + Scripts 84)*

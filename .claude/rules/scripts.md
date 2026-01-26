@@ -6,13 +6,13 @@ paths:
 
 # Native Scripts
 
-## Status VÉRIFIÉ (22/01/2026)
+## Status VÉRIFIÉ (26/01/2026 - Session 162)
 
 ### Scripts Core
 | Category | Count | Status |
 |----------|-------|--------|
-| Total core | 81 | `ls agency/core/*.cjs` |
-| Avec --health | 22 | Testables |
+| Total core | **84** | `ls agency/core/*.cjs` (+stitch-api.cjs S162) |
+| Avec --health | **23** | Testables (+stitch-api.cjs) |
 | Resilient | 7 | Multi-AI fallback |
 | Sensors | 20 | Data fetchers → GPM |
 
@@ -52,6 +52,7 @@ paths:
 | email-personalization-resilient.cjs | Emails | 3006 |
 | churn-prediction-resilient.cjs | Analytics | - |
 | uptime-monitor.cjs | Monitoring | - |
+| **stitch-api.cjs** | **UI Generation (MCP)** | - |
 
 ## Health Check Pattern
 ```bash

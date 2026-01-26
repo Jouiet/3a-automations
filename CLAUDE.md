@@ -1,11 +1,44 @@
 # 3A Automation
 >
-> Version: 88.0 | 26/01/2026 | Session 161bis - **GSC Sensor** + CSS Optimization + CWV Verified
+> Version: 89.0 | 26/01/2026 | Session 162 - **Stitch API OPÉRATIONNEL** + MCP Wrapper
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 162 - STITCH API OPÉRATIONNEL (26/01/2026)
+
+### Stitch MCP - FONCTIONNEL
+
+| Élément | Status | Détail |
+| :--- | :--- | :--- |
+| **Wrapper Script** | ✅ Créé | `automations/agency/core/stitch-api.cjs` (279 lignes) |
+| **Protocole** | ✅ MCP JSON-RPC | `stitch.googleapis.com/mcp` |
+| **Authentification** | ✅ gcloud ADC | Bypass DCR via token direct |
+| **Quota Project** | ✅ Configuré | `gen-lang-client-0843127575` |
+| **Projet Stitch** | ✅ Actif | ID `705686758968107418` |
+| **Screens Générés** | ✅ 2 variants | Pricing page glassmorphism |
+| **Commit** | ✅ Pushé | `d4985ad` |
+
+### Commandes Stitch Disponibles
+
+```bash
+node automations/agency/core/stitch-api.cjs --health          # Vérifier API
+node automations/agency/core/stitch-api.cjs list              # Lister projets
+node automations/agency/core/stitch-api.cjs create "Title"    # Créer projet
+node automations/agency/core/stitch-api.cjs generate <id> "prompt"  # Générer screen
+node automations/agency/core/stitch-api.cjs screens <id>      # Lister screens
+```
+
+### Scripts Core Updated
+
+| Métrique | Avant | Après |
+| :--- | :--- | :--- |
+| Total scripts core | 83 | **84** (+stitch-api.cjs) |
+| Scripts --health | 22 | **23** |
+
+---
 
 ## SESSION 161bis - CSS OPTIMIZATION (26/01/2026)
 
@@ -81,7 +114,8 @@
 | Aspect | Status |
 | :--- | :--- |
 | Tools | ✅ 6 disponibles |
-| Auth | ❌ OAuth Google requis |
+| Auth | ✅ **OPÉRATIONNEL** (via wrapper stitch-api.cjs) |
+| Wrapper | ✅ `automations/agency/core/stitch-api.cjs` |
 
 ---
 
@@ -872,7 +906,7 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 
 | Élément | Valeur | Status |
 | :--- | :--- | :--- |
-| Scripts Core | 83 | ✅ |
+| Scripts Core | 84 | ✅ (+stitch-api.cjs S162) |
 | Scripts --health | 24 (29%) | ⚠️ 71% sans health check |
 | Automations Registry | **121** | ✅ SYNCED |
 | Automations Catalog | **121** | ✅ SYNCED |

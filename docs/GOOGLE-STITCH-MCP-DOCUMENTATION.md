@@ -1,8 +1,9 @@
 # GOOGLE STITCH MCP - Documentation Technique Complète
 
-> **Version:** 1.0 | **Date:** 25/01/2026 | **Session:** 160
+> **Version:** 2.0 | **Date:** 26/01/2026 | **Session:** 162
 > **Méthode:** Bottom-up factuelle (Web Research + GitHub + Tests empiriques)
 > **Auteur:** Claude Code pour 3A Automation
+> **UPDATE SESSION 162:** Stitch API OPÉRATIONNEL via wrapper MCP
 
 ---
 
@@ -34,19 +35,23 @@ Google Stitch est un outil de design UI alimenté par l'IA, développé par Goog
 
 Stitch MCP est l'exposition du service Google Stitch via le **Model Context Protocol (MCP)**, un protocole standardisé permettant aux agents IA de communiquer avec des outils externes. Contrairement à la plupart des serveurs MCP qui sont locaux, Stitch utilise un **serveur MCP distant** hébergé dans le cloud Google.
 
-### Status 3A Automation (Vérifié 25/01/2026)
+### Status 3A Automation (Vérifié 26/01/2026 - Session 162)
 
 | Composant | Status | Détail |
 |-----------|--------|--------|
-| Configuration MCP | ✅ Présente | `.mcp.json` lignes 21-29 |
-| Type de connexion | HTTP Direct | `https://stitch.googleapis.com/mcp` |
-| Google Cloud SDK | ❌ Non installé | `gcloud NOT IN PATH` |
-| STITCH_ACCESS_TOKEN | ❌ Non configuré | Variable d'environnement absente |
-| GOOGLE_CLOUD_PROJECT | ❌ Non configuré | Variable d'environnement absente |
-| Test de connexion | ❌ Échec | "Unable to connect" |
-| Outils chargés | ✅ 6 outils | Listés via ToolSearch |
+| Configuration MCP | ✅ Présente | `~/.claude/settings.json` |
+| Type de connexion | ✅ MCP Protocol | `https://stitch.googleapis.com/mcp` |
+| Google Cloud SDK | ✅ Installé | `~/.stitch-mcp/google-cloud-sdk/` |
+| gcloud ADC | ✅ Configuré | `~/.stitch-mcp/config/application_default_credentials.json` |
+| Quota Project | ✅ Configuré | `gen-lang-client-0843127575` |
+| Test de connexion | ✅ **OPÉRATIONNEL** | Wrapper `stitch-api.cjs` fonctionnel |
+| Outils chargés | ✅ 6 outils | list_projects, create_project, generate_screen_from_text, etc. |
+| Screens générés | ✅ 2 variants | Pricing page glassmorphism (Session 162) |
 
-**VERDICT:** Configuration présente mais **AUTH MANQUANTE** - Google Cloud SDK requis (USER ACTION).
+**VERDICT:** ✅ **STITCH API OPÉRATIONNEL** via wrapper MCP (bypass DCR)
+
+**Wrapper Script:** `automations/agency/core/stitch-api.cjs` (279 lignes)
+**Projet Actif:** `705686758968107418` (URL: https://stitch.withgoogle.com/projects/705686758968107418)
 
 **Agent Skills installés (S160):**
 - ✅ `stitch-design-md` - Génère DESIGN.md depuis Stitch
@@ -417,16 +422,26 @@ npx @_davideast/stitch-mcp doctor --verbose
 # ✓ Stitch API accessible
 ```
 
-### 7.4 Status Actuel 3A Automation
+### 7.4 Status Actuel 3A Automation (Session 162 - OPÉRATIONNEL)
 
 | Étape | Status | Commande de vérification |
 |-------|--------|--------------------------|
-| Google Cloud SDK | ❌ Non installé | `which gcloud` → "not found" |
-| User Auth | ❌ Non fait | `gcloud auth list` → vide |
-| App Default Credentials | ❌ Non fait | - |
-| Project configuré | ❌ Non | - |
-| Stitch API enabled | ❌ Non | - |
-| MCP Config | ✅ Présente | `.mcp.json` existe |
+| Google Cloud SDK | ✅ Installé | `~/.stitch-mcp/google-cloud-sdk/bin/gcloud --version` |
+| User Auth | ✅ Fait | `gcloud auth list` → compte actif |
+| App Default Credentials | ✅ Configuré | `~/.stitch-mcp/config/application_default_credentials.json` |
+| Project configuré | ✅ `gen-lang-client-0843127575` | Quota project défini |
+| Stitch API enabled | ✅ Oui | Via Google AI Pro subscription |
+| MCP Config | ✅ Présente | `~/.claude/settings.json` |
+| Wrapper Script | ✅ Créé | `stitch-api.cjs --health` → OK |
+
+**Commandes disponibles:**
+```bash
+node automations/agency/core/stitch-api.cjs --health          # Vérifier API
+node automations/agency/core/stitch-api.cjs list              # Lister projets
+node automations/agency/core/stitch-api.cjs create "Title"    # Créer projet
+node automations/agency/core/stitch-api.cjs generate <id> "prompt"  # Générer screen
+node automations/agency/core/stitch-api.cjs screens <id>      # Lister screens
+```
 
 ---
 
@@ -871,8 +886,75 @@ npx @_davideast/stitch-mcp init --client claude-code -y
 
 ---
 
+---
+
+## SESSION 162 - STITCH API OPÉRATIONNEL (26/01/2026)
+
+### Problème Résolu: DCR Authentication
+
+**Problème initial:** Claude Code MCP nécessite DCR (Dynamic Client Registration) mais Google OAuth ne le supporte pas.
+
+**Solution:** Wrapper script `stitch-api.cjs` qui:
+1. Utilise gcloud ADC pour obtenir un token d'accès
+2. Appelle directement l'endpoint MCP `stitch.googleapis.com/mcp`
+3. Envoie des requêtes JSON-RPC 2.0 avec le header `x-goog-user-project`
+
+### Architecture Technique
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────────┐
+│  stitch-api.cjs │────▶│  gcloud ADC     │────▶│ stitch.googleapis.  │
+│  (Node.js)      │     │  (Token Auth)   │     │ com/mcp             │
+└─────────────────┘     └─────────────────┘     └─────────────────────┘
+        │                                                │
+        │ JSON-RPC 2.0                                   │ JSON-RPC 2.0
+        │ tools/call                                     │ Response
+        ▼                                                ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                         MCP Methods                                   │
+├─────────────────────────────────────────────────────────────────────┤
+│  list_projects | create_project | generate_screen_from_text         │
+│  list_screens  | get_screen     | get_project                       │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Résultats Session 162
+
+| Élément | Résultat |
+|---------|----------|
+| Wrapper créé | `automations/agency/core/stitch-api.cjs` (279 lignes) |
+| Health check | ✅ Token valide, endpoint accessible |
+| Projet créé | ID `705686758968107418` |
+| Screens générés | 2 variants "SaaS Pricing - Dark Glassmorphism" |
+| Screenshots | URLs générées (expiration 24h) |
+| HTML Code | URLs générées (téléchargeables) |
+
+### Commit
+
+```
+d4985ad feat(stitch): Add Stitch API wrapper using MCP protocol
+```
+
+### Plan Actionnable Session 162
+
+**COMPLÉTÉ:**
+- ✅ gcloud ADC configuré dans `~/.stitch-mcp/config/`
+- ✅ Wrapper script créé et testé
+- ✅ Screens générés avec succès
+- ✅ Documentation mise à jour
+
+**À FAIRE (Prochaine session):**
+
+| # | Action | Priorité |
+|---|--------|----------|
+| 1 | Télécharger HTML des screens générés | MEDIUM |
+| 2 | Intégrer dans workflow Remotion | MEDIUM |
+| 3 | Tester generate avec différents prompts | LOW |
+
+---
+
 *Document généré le 25/01/2026 | Session 160 | Méthode: Bottom-up factuelle*
 *Sources: Web Research, GitHub, Tests empiriques*
-*Dernière vérification: 25/01/2026 - Stitch MCP config OK, AUTH manquante (gcloud requis)*
+*Dernière mise à jour: 26/01/2026 - Session 162 - **STITCH API OPÉRATIONNEL***
 *Audit qualité: 25/01/2026 - Gemini 3 ✅, Galileo AI acquisition ✅, Agent Skills ✅*
-*Implémentation: 25/01/2026 - 3 Agent Skills installés (design-md, react-components, stitch-loop)*
+*Implémentation: 26/01/2026 - Wrapper MCP fonctionnel, 2 screens générés*
