@@ -52,9 +52,9 @@ const CONFIG = {
     QUALITY_THRESHOLD: 8, // 0-10 scale
     GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
 
-    // Multi-provider fallback
+    // Multi-provider fallback (Frontier Models Jan 2026)
     AI_PROVIDERS: [
-        { name: 'claude', model: 'claude-sonnet-4.5', apiKey: process.env.ANTHROPIC_API_KEY },
+        { name: 'claude', model: 'claude-sonnet-4-20250514', apiKey: process.env.ANTHROPIC_API_KEY },
         { name: 'gemini', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
         { name: 'grok', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ],
