@@ -20,7 +20,7 @@
 | **HITL Coverage** | 80% (claimed) | **100% (18/18)** | ✅ **S165quater COMPLETE** |
 | A2A Agents HITL | N/A | **0/3** | 🔴 DEAD |
 | MCP Servers HITL | N/A | **0/11** | 🔴 NONE |
-| AG-UI Queue | Exists | **0 callers** | 🔴 DEAD CODE |
+| AG-UI Queue | Exists | **1 endpoint** | ✅ **S166 WIRED** |
 
 ---
 
@@ -1178,8 +1178,8 @@ const queueAction = (action) => { ... }
 
 | Task | Impact | Effort | Status |
 |------|--------|--------|--------|
-| AG-UI Queue wiring | System risk | 4h | ⏳ PENDING |
-| MCP Servers confirmation | System risk | 8h | ⏳ PENDING |
+| AG-UI Queue wiring | System risk | 4h | ✅ **S166** |
+| MCP Servers confirmation | System risk | 8h | ✅ **S166 CONFIG VERIFIED** (5/6 creds) |
 | omnisend-b2c-ecommerce HITL | Communication | 1h | ⏳ OPTIONAL |
 
 ### 19.5 Scripts.md Updated

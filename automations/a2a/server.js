@@ -424,6 +424,7 @@ const queueAction = (action) => {
         action: action.type,
         params: action.params,
         agent: action.agent,
+        reason: action.reason || null,
         status: 'pending',
         priority: action.priority || 'normal',
         created_at: new Date().toISOString(),
@@ -473,6 +474,7 @@ app.get('/ag-ui', (req, res) => {
         endpoints: {
             dashboard: '/ag-ui',
             queue: '/ag-ui/queue',
+            submit: '/ag-ui/queue/submit',
             stream: '/a2a/v1/stream'
         },
         timestamp: new Date().toISOString()
@@ -515,6 +517,36 @@ app.post('/ag-ui/queue/:id', express.json(), (req, res) => {
     broadcast({ type: 'action_decided', item });
 
     res.json({ status: 'ok', item });
+});
+
+// Submit Action to Queue (for external scripts)
+app.post('/ag-ui/queue/submit', express.json(), (req, res) => {
+    const { type, params, agent, priority, reason } = req.body;
+
+    if (!type) {
+        return res.status(400).json({ error: 'Missing required field: type' });
+    }
+
+    if (!agent) {
+        return res.status(400).json({ error: 'Missing required field: agent' });
+    }
+
+    const item = queueAction({
+        type,
+        params: params || {},
+        agent,
+        priority: priority || 'normal',
+        reason: reason || 'No reason provided'
+    });
+
+    console.log(`[AG-UI] Action queued: ${type} by ${agent} (id: ${item.id})`);
+
+    res.status(201).json({
+        status: 'queued',
+        item,
+        approve_url: `/ag-ui/queue/${item.id}`,
+        instructions: 'POST to approve_url with { "decision": "approve" } or { "decision": "reject" }'
+    });
 });
 
 // --- JSON-RPC ENDPOINT ---

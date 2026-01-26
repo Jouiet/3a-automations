@@ -1,10 +1,49 @@
 # 3A Automation
-> Version: 103.0 | 26/01/2026 | Session 165sexies - COMPLETE System Flexibility
+> Version: 104.0 | 26/01/2026 | Session 166 - AG-UI Queue Wiring + MCP Verification
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 166 - DEAD CODE FIX + MCP VERIFICATION (26/01/2026)
+
+### AG-UI Queue Wired (Previously DEAD CODE)
+
+**Issue:** `queueAction()` in a2a/server.js was internal-only with 0 external callers.
+
+**Fix Applied:**
+- Added `POST /ag-ui/queue/submit` endpoint for external scripts
+- Updated `queueAction()` to include `reason` field
+- Updated `/ag-ui` dashboard to document new endpoint
+
+**New API:**
+```bash
+curl -X POST http://localhost:3000/ag-ui/queue/submit \
+  -H "Content-Type: application/json" \
+  -d '{"type":"high_value_order","agent":"shopify-bot","params":{"order_id":"123"},"priority":"high","reason":"Order > €500"}'
+```
+
+### MCP Servers Verification
+
+| Credential | Status |
+| :--- | :--- |
+| KLAVIYO_API_KEY | ✅ Set |
+| SHOPIFY_ACCESS_TOKEN | ✅ Set |
+| APIFY_TOKEN | ✅ Set |
+| GOOGLE_APPLICATION_CREDENTIALS | ✅ Set |
+| META_PAGE_ACCESS_TOKEN | ❌ Missing |
+
+**Config:** 11 MCP servers configured, 5/6 credentials verified.
+
+### Audit Document Updated
+
+| Task | Status |
+| :--- | :--- |
+| AG-UI Queue wiring | ✅ S166 COMPLETED |
+| MCP Servers confirmation | ✅ S166 CONFIG VERIFIED |
 
 ---
 
@@ -229,16 +268,20 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-## Références (charger via @)
+## Références
 
-| Topic | File |
-| :--- | :--- |
-| Session History | @docs/session-history/ |
-| External Workflows | @docs/external_workflows.md |
-| Voice AI | @.claude/rules/voice-ai.md |
-| Scripts | @.claude/rules/scripts.md |
-| Infra | @docs/reference/infrastructure.md |
-| Remotion Video | @.claude/skills/remotion-video/SKILL.md |
-| Étagère Tech | @docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md |
-| Transfert Shopify | @docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md |
-| Ecosystem Audit | @docs/AUDIT-SESSION-165-ECOSYSTEM.md |
+**Index complet:** `@docs/DOCS-INDEX.md`
+
+### Chargés automatiquement (petits fichiers)
+- `docs/external_workflows.md` (0.6K)
+- `docs/reference/infrastructure.md` (1.3K)
+
+### À charger manuellement (gros fichiers - NE PAS auto-load)
+```bash
+# Utiliser @ quand nécessaire:
+@docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md   # 34K - Tech stack complet
+@docs/AUDIT-SESSION-165-ECOSYSTEM.md            # 15K - Audit écosystème
+@docs/ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md  # 13K - Transfert Shopify
+@.claude/skills/remotion-video/SKILL.md         # 4K - Remotion skills
+@.claude/rules/scripts.md                       # 10K - Scripts reference
+```
