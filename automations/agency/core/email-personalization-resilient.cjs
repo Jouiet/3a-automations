@@ -128,16 +128,34 @@ const BRAND = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ABANDONED CART EMAIL SERIES CONFIGURATION (Session 127bis)
+// ABANDONED CART EMAIL SERIES CONFIGURATION (Session 127bis + 165sexies Flexibility)
 // Benchmark: +69% orders vs single email (Klaviyo 2025)
+// All timing delays are now configurable via ENV variables
 // ─────────────────────────────────────────────────────────────────────────────
 const ABANDONED_CART_CONFIG = {
-  // Timing delays after cart abandonment
+  // Timing delays after cart abandonment - FULLY CONFIGURABLE (Session 165sexies)
+  // All values in hours for easier configuration
   delays: {
-    email1: 1 * 60 * 60 * 1000,      // 1 hour - reminder
-    email2: 24 * 60 * 60 * 1000,     // 24 hours - social proof
-    email3: 72 * 60 * 60 * 1000      // 72 hours - discount
+    // Email 1: Quick reminder (default: 1 hour)
+    // ENV: CART_EMAIL1_HOURS=1 (options: 0.5, 1, 2, 4)
+    email1: (parseFloat(ENV.CART_EMAIL1_HOURS) || 1) * 60 * 60 * 1000,
+    // Email 2: Social proof (default: 24 hours)
+    // ENV: CART_EMAIL2_HOURS=24 (options: 12, 24, 36, 48)
+    email2: (parseFloat(ENV.CART_EMAIL2_HOURS) || 24) * 60 * 60 * 1000,
+    // Email 3: Final discount (default: 72 hours)
+    // ENV: CART_EMAIL3_HOURS=72 (options: 48, 72, 96, 120, 168)
+    email3: (parseFloat(ENV.CART_EMAIL3_HOURS) || 72) * 60 * 60 * 1000
   },
+  // Delay options for UI/configuration (in hours)
+  delayOptions: {
+    email1: [0.5, 1, 2, 4],          // 30min, 1h, 2h, 4h
+    email2: [12, 24, 36, 48],         // 12h, 24h, 36h, 48h
+    email3: [48, 72, 96, 120, 168]    // 48h, 72h, 96h, 120h, 168h (1 week)
+  },
+  // Discount for email 3 - CONFIGURABLE (Session 165sexies)
+  // ENV: CART_EMAIL3_DISCOUNT=10 (options: 5, 10, 15, 20)
+  email3Discount: parseInt(ENV.CART_EMAIL3_DISCOUNT) || 10,
+  email3DiscountOptions: [5, 10, 15, 20],
   // Industry benchmarks (Klaviyo 2025)
   benchmarks: {
     openRate: 0.45,           // 45% open rate
@@ -1237,6 +1255,9 @@ async function main() {
   }
 
   if (args.health) {
+    console.log('\n=== EMAIL PERSONALIZATION SERVICE ===');
+    console.log('Version: 1.3.0 (Session 165sexies - Full Flexibility Edition)');
+
     console.log('\n=== PROVIDER STATUS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
       const status = provider.enabled ? '[OK] Configured' : '[--] Not configured';
@@ -1250,6 +1271,17 @@ async function main() {
     console.log(`Slack Webhook: ${HITL_CONFIG.slackWebhook ? '[OK] Configured' : '[--] Not configured'}`);
     const pendingPreviews = listEmailPreviews();
     console.log(`Pending Previews: ${pendingPreviews.length}`);
+
+    // Abandoned Cart Configuration (Session 165sexies)
+    console.log('\n=== ABANDONED CART SERIES (Configurable) ===');
+    console.log(`Email 1 (Reminder): ${ABANDONED_CART_CONFIG.delays.email1 / (1000 * 60 * 60)}h (options: ${ABANDONED_CART_CONFIG.delayOptions.email1.join(', ')}h)`);
+    console.log(`Email 2 (Social Proof): ${ABANDONED_CART_CONFIG.delays.email2 / (1000 * 60 * 60)}h (options: ${ABANDONED_CART_CONFIG.delayOptions.email2.join(', ')}h)`);
+    console.log(`Email 3 (Discount): ${ABANDONED_CART_CONFIG.delays.email3 / (1000 * 60 * 60)}h (options: ${ABANDONED_CART_CONFIG.delayOptions.email3.join(', ')}h)`);
+    console.log(`Email 3 Discount: ${ABANDONED_CART_CONFIG.email3Discount}% (options: ${ABANDONED_CART_CONFIG.email3DiscountOptions.join(', ')}%)`);
+    console.log('\nBenchmarks (Klaviyo 2025):');
+    console.log(`  Open Rate: ${ABANDONED_CART_CONFIG.benchmarks.openRate * 100}%`);
+    console.log(`  Click Rate: ${ABANDONED_CART_CONFIG.benchmarks.clickRate * 100}%`);
+    console.log(`  Total Recovery: ${ABANDONED_CART_CONFIG.benchmarks.totalRecovery * 100}%`);
 
     console.log('\n✅ Email Personalization HITL: OPERATIONAL');
     return;

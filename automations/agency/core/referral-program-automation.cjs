@@ -87,28 +87,90 @@ const CONFIG = {
     }
   },
 
-  // Referral Configuration
+  // ─────────────────────────────────────────────────────────────────────────
+  // REFERRAL CONFIGURATION - Session 165sexies (Full Flexibility)
+  // All reward tiers and discounts are configurable via ENV variables
+  // ─────────────────────────────────────────────────────────────────────────
   referral: {
-    // Reward tiers
+    // Reward tiers - FULLY CONFIGURABLE
     rewards: {
       referrer: {
-        tier1: { minReferrals: 1, discount: '10%', type: 'percentage' },
-        tier2: { minReferrals: 5, discount: '15%', type: 'percentage' },
-        tier3: { minReferrals: 10, discount: '20%', type: 'percentage' },
-        tier4: { minReferrals: 25, discount: '25%', type: 'percentage', bonus: '€50 credit' }
+        // Tier 1: First successful referral
+        // ENV: REFERRAL_TIER1_MIN=1 (options: 1, 2, 3)
+        // ENV: REFERRAL_TIER1_DISCOUNT=10 (options: 5, 10, 12, 15)
+        tier1: {
+          minReferrals: parseInt(process.env.REFERRAL_TIER1_MIN) || 1,
+          discount: `${parseInt(process.env.REFERRAL_TIER1_DISCOUNT) || 10}%`,
+          type: 'percentage'
+        },
+        // Tier 2: Growing ambassador
+        // ENV: REFERRAL_TIER2_MIN=5 (options: 3, 5, 7, 10)
+        // ENV: REFERRAL_TIER2_DISCOUNT=15 (options: 10, 12, 15, 18, 20)
+        tier2: {
+          minReferrals: parseInt(process.env.REFERRAL_TIER2_MIN) || 5,
+          discount: `${parseInt(process.env.REFERRAL_TIER2_DISCOUNT) || 15}%`,
+          type: 'percentage'
+        },
+        // Tier 3: Power referrer
+        // ENV: REFERRAL_TIER3_MIN=10 (options: 8, 10, 15, 20)
+        // ENV: REFERRAL_TIER3_DISCOUNT=20 (options: 15, 18, 20, 22, 25)
+        tier3: {
+          minReferrals: parseInt(process.env.REFERRAL_TIER3_MIN) || 10,
+          discount: `${parseInt(process.env.REFERRAL_TIER3_DISCOUNT) || 20}%`,
+          type: 'percentage'
+        },
+        // Tier 4: Champion ambassador
+        // ENV: REFERRAL_TIER4_MIN=25 (options: 20, 25, 30, 50)
+        // ENV: REFERRAL_TIER4_DISCOUNT=25 (options: 20, 25, 30, 35)
+        // ENV: REFERRAL_TIER4_BONUS=50 (options: 25, 50, 75, 100)
+        tier4: {
+          minReferrals: parseInt(process.env.REFERRAL_TIER4_MIN) || 25,
+          discount: `${parseInt(process.env.REFERRAL_TIER4_DISCOUNT) || 25}%`,
+          type: 'percentage',
+          bonus: `€${parseInt(process.env.REFERRAL_TIER4_BONUS) || 50} credit`
+        }
       },
+      // Referee (new customer) discount - FLEXIBLE
+      // ENV: REFERRAL_REFEREE_DISCOUNT=15 (options: 10, 12, 15, 20, 25)
       referee: {
-        firstPurchase: { discount: '15%', type: 'percentage' }
+        firstPurchase: {
+          discount: `${parseInt(process.env.REFERRAL_REFEREE_DISCOUNT) || 15}%`,
+          type: 'percentage'
+        }
+      },
+      // Options for UI/configuration display
+      options: {
+        tier1MinOptions: [1, 2, 3],
+        tier1DiscountOptions: [5, 10, 12, 15],
+        tier2MinOptions: [3, 5, 7, 10],
+        tier2DiscountOptions: [10, 12, 15, 18, 20],
+        tier3MinOptions: [8, 10, 15, 20],
+        tier3DiscountOptions: [15, 18, 20, 22, 25],
+        tier4MinOptions: [20, 25, 30, 50],
+        tier4DiscountOptions: [20, 25, 30, 35],
+        tier4BonusOptions: [25, 50, 75, 100],
+        refereeDiscountOptions: [10, 12, 15, 20, 25]
       }
     },
     // Link settings
     linkPrefix: 'ref',
     codeLength: 8,
     baseUrl: process.env.STORE_URL || 'https://store.example.com',
-    // Expiry
-    codeExpiryDays: 365,
-    rewardExpiryDays: 30
+    // Expiry - FLEXIBLE
+    // ENV: REFERRAL_CODE_EXPIRY_DAYS=365 (options: 90, 180, 365, 730)
+    // ENV: REFERRAL_REWARD_EXPIRY_DAYS=30 (options: 14, 30, 60, 90)
+    codeExpiryDays: parseInt(process.env.REFERRAL_CODE_EXPIRY_DAYS) || 365,
+    rewardExpiryDays: parseInt(process.env.REFERRAL_REWARD_EXPIRY_DAYS) || 30,
+    expiryOptions: {
+      codeExpiry: [90, 180, 365, 730],
+      rewardExpiry: [14, 30, 60, 90]
+    }
   },
+
+  // Agentic Reflection Loop - FLEXIBLE (Session 165sexies)
+  // ENV: REFERRAL_AGENTIC_QUALITY_THRESHOLD=8 (options: 6, 7, 8, 9)
+  agenticQualityThreshold: parseInt(process.env.REFERRAL_AGENTIC_QUALITY_THRESHOLD) || 8,
+  agenticQualityOptions: [6, 7, 8, 9],
 
   // Timeouts
   httpTimeout: 15000,
@@ -702,8 +764,8 @@ Celebrate their achievement!`
     const critique = await critiqueReferralEmail(draftEmail, type);
     log(`📊 Critique Score: ${critique.score}/10. Feedback: ${critique.feedback}`);
 
-    if (critique.score < 8) {
-      log('🔧 Refining email...');
+    if (critique.score < CONFIG.agenticQualityThreshold) {
+      log(`🔧 Refining email (score ${critique.score} < threshold ${CONFIG.agenticQualityThreshold})...`);
       const refinedEmail = await refineReferralEmail(draftEmail, critique, type);
       return refinedEmail;
     }
@@ -1085,8 +1147,30 @@ async function healthCheck() {
   const emailReady = Object.values(results.email).some(v => v.includes('✅'));
 
   results.status = aiReady && emailReady ? 'OPERATIONAL' : 'DEGRADED';
-  results.rewardTiers = CONFIG.referral.rewards.referrer;
+
+  // Reward configuration (Session 165sexies - Full Flexibility)
+  results.rewardTiers = {
+    tier1: CONFIG.referral.rewards.referrer.tier1,
+    tier2: CONFIG.referral.rewards.referrer.tier2,
+    tier3: CONFIG.referral.rewards.referrer.tier3,
+    tier4: CONFIG.referral.rewards.referrer.tier4,
+    options: CONFIG.referral.rewards.options
+  };
   results.refereeReward = CONFIG.referral.rewards.referee.firstPurchase;
+  results.refereeOptions = CONFIG.referral.rewards.options.refereeDiscountOptions;
+
+  // Expiry settings
+  results.expiry = {
+    codeExpiryDays: CONFIG.referral.codeExpiryDays,
+    rewardExpiryDays: CONFIG.referral.rewardExpiryDays,
+    options: CONFIG.referral.expiryOptions
+  };
+
+  // Agentic settings
+  results.agentic = {
+    qualityThreshold: CONFIG.agenticQualityThreshold,
+    options: CONFIG.agenticQualityOptions
+  };
 
   // HITL status (Session 165ter)
   const pendingEmails = listPendingEmails();

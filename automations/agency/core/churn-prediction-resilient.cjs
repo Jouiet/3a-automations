@@ -26,58 +26,134 @@ const path = require('path');
 const crypto = require('crypto');
 
 // ─────────────────────────────────────────────────────────────────────────────
-// HITL CONFIG - Session 157
+// HITL CONFIG - Session 157 + Session 165sexies (Full Flexibility)
 // High-value customers require human approval before intervention
 // ─────────────────────────────────────────────────────────────────────────────
 const HITL_CONFIG = {
-  // LTV threshold for human approval (€500 = high-value customer)
-  ltvThresholdForApproval: parseFloat(process.env.CHURN_LTV_THRESHOLD) || 500,
+  // LTV threshold for human approval - FLEXIBLE (Session 165sexies)
+  // ENV: CHURN_LTV_THRESHOLD=300 (options: 250, 300, 400, 500, 750, 1000)
+  ltvThresholdForApproval: parseFloat(process.env.CHURN_LTV_THRESHOLD) || 300,
+  ltvThresholdOptions: [250, 300, 400, 500, 750, 1000],  // Recommended options for UI
   // Directory for pending interventions
   pendingDir: path.join(__dirname, '../../../outputs/churn-interventions/pending'),
   approvedDir: path.join(__dirname, '../../../outputs/churn-interventions/approved'),
   // Slack notification
   slackWebhook: process.env.SLACK_WEBHOOK_URL || null,
   // If true, high-LTV customers ALWAYS need approval
-  requireApprovalForHighLTV: true,
+  requireApprovalForHighLTV: process.env.CHURN_REQUIRE_APPROVAL !== 'false',  // Default: true
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RFM THRESHOLDS CONFIG - Session 165sexies (Full Flexibility)
+// All thresholds configurable via ENV variables with documented options
+// ─────────────────────────────────────────────────────────────────────────────
+const RFM_CONFIG = {
+  // Recency thresholds (days since last purchase) - FLEXIBLE
+  // ENV: RFM_RECENCY_EXCELLENT=30 (options: 14, 21, 30, 45, 60)
+  recency: {
+    excellent: parseInt(process.env.RFM_RECENCY_EXCELLENT) || 30,
+    good: parseInt(process.env.RFM_RECENCY_GOOD) || 60,
+    average: parseInt(process.env.RFM_RECENCY_AVERAGE) || 90,
+    poor: parseInt(process.env.RFM_RECENCY_POOR) || 180,
+    critical: parseInt(process.env.RFM_RECENCY_CRITICAL) || 365,
+  },
+  recencyOptions: {
+    excellent: [14, 21, 30, 45, 60],
+    good: [30, 45, 60, 90, 120],
+    average: [60, 90, 120, 150, 180],
+    poor: [90, 120, 180, 270, 365],
+    critical: [180, 270, 365, 545, 730],
+  },
+  // Frequency thresholds (total orders) - FLEXIBLE
+  // ENV: RFM_FREQUENCY_EXCELLENT=10 (options: 5, 8, 10, 15, 20)
+  frequency: {
+    excellent: parseInt(process.env.RFM_FREQUENCY_EXCELLENT) || 10,
+    good: parseInt(process.env.RFM_FREQUENCY_GOOD) || 6,
+    average: parseInt(process.env.RFM_FREQUENCY_AVERAGE) || 3,
+    poor: parseInt(process.env.RFM_FREQUENCY_POOR) || 2,
+    critical: parseInt(process.env.RFM_FREQUENCY_CRITICAL) || 1,
+  },
+  frequencyOptions: {
+    excellent: [5, 8, 10, 15, 20],
+    good: [3, 4, 6, 8, 10],
+    average: [2, 3, 4, 5, 6],
+    poor: [1, 2, 3],
+    critical: [1],
+  },
+  // Monetary thresholds (total spent in €) - FLEXIBLE
+  // ENV: RFM_MONETARY_EXCELLENT=1000 (options: 500, 750, 1000, 1500, 2000)
+  monetary: {
+    excellent: parseFloat(process.env.RFM_MONETARY_EXCELLENT) || 1000,
+    good: parseFloat(process.env.RFM_MONETARY_GOOD) || 500,
+    average: parseFloat(process.env.RFM_MONETARY_AVERAGE) || 200,
+    poor: parseFloat(process.env.RFM_MONETARY_POOR) || 100,
+    critical: parseFloat(process.env.RFM_MONETARY_CRITICAL) || 0,
+  },
+  monetaryOptions: {
+    excellent: [500, 750, 1000, 1500, 2000, 3000],
+    good: [250, 400, 500, 750, 1000],
+    average: [100, 150, 200, 300, 400],
+    poor: [50, 75, 100, 150, 200],
+    critical: [0],
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CHURN RISK THRESHOLDS - Session 165sexies (Full Flexibility)
+// ─────────────────────────────────────────────────────────────────────────────
+const CHURN_RISK_CONFIG = {
+  // Risk level thresholds (0-1 scale) - FLEXIBLE
+  // ENV: CHURN_RISK_LOW=0.3 (options: 0.2, 0.25, 0.3, 0.35, 0.4)
+  low: parseFloat(process.env.CHURN_RISK_LOW) || 0.3,
+  medium: parseFloat(process.env.CHURN_RISK_MEDIUM) || 0.5,
+  high: parseFloat(process.env.CHURN_RISK_HIGH) || 0.7,
+  critical: parseFloat(process.env.CHURN_RISK_CRITICAL) || 0.85,
+  // Options for UI/configuration
+  options: {
+    low: [0.2, 0.25, 0.3, 0.35, 0.4],
+    medium: [0.4, 0.45, 0.5, 0.55, 0.6],
+    high: [0.6, 0.65, 0.7, 0.75, 0.8],
+    critical: [0.75, 0.8, 0.85, 0.9, 0.95],
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ENGAGEMENT THRESHOLDS - Session 165sexies (Full Flexibility)
+// ─────────────────────────────────────────────────────────────────────────────
+const ENGAGEMENT_CONFIG = {
+  // Low open rate threshold - FLEXIBLE
+  // ENV: ENGAGEMENT_LOW_OPEN_RATE=0.10 (options: 0.05, 0.08, 0.10, 0.12, 0.15)
+  lowOpenRate: parseFloat(process.env.ENGAGEMENT_LOW_OPEN_RATE) || 0.10,
+  lowOpenRateOptions: [0.05, 0.08, 0.10, 0.12, 0.15],
+  // Low click rate threshold - FLEXIBLE
+  // ENV: ENGAGEMENT_LOW_CLICK_RATE=0.02 (options: 0.01, 0.015, 0.02, 0.025, 0.03)
+  lowClickRate: parseFloat(process.env.ENGAGEMENT_LOW_CLICK_RATE) || 0.02,
+  lowClickRateOptions: [0.01, 0.015, 0.02, 0.025, 0.03],
+  // Decline threshold (% drop from baseline) - FLEXIBLE
+  // ENV: ENGAGEMENT_DECLINE_THRESHOLD=0.50 (options: 0.3, 0.4, 0.5, 0.6, 0.7)
+  declineThreshold: parseFloat(process.env.ENGAGEMENT_DECLINE_THRESHOLD) || 0.50,
+  declineThresholdOptions: [0.3, 0.4, 0.5, 0.6, 0.7],
 };
 
 const CONFIG = {
-  // RFM Thresholds
+  // RFM Thresholds - Now uses flexible RFM_CONFIG
   rfm: {
-    recency: {
-      excellent: 30,    // < 30 days = score 5
-      good: 60,         // 30-60 days = score 4
-      average: 90,      // 60-90 days = score 3
-      poor: 180,        // 90-180 days = score 2
-      critical: 365     // > 180 days = score 1
-    },
-    frequency: {
-      excellent: 10,    // > 10 orders = score 5
-      good: 6,          // 6-10 orders = score 4
-      average: 3,       // 3-5 orders = score 3
-      poor: 2,          // 2 orders = score 2
-      critical: 1       // 1 order = score 1
-    },
-    monetary: {
-      excellent: 1000,  // > 1000€ = score 5
-      good: 500,        // 500-1000€ = score 4
-      average: 200,     // 200-500€ = score 3
-      poor: 100,        // 100-200€ = score 2
-      critical: 0       // < 100€ = score 1
-    }
+    recency: RFM_CONFIG.recency,
+    frequency: RFM_CONFIG.frequency,
+    monetary: RFM_CONFIG.monetary,
   },
-  // Churn Risk Thresholds
+  // Churn Risk Thresholds - Now uses flexible CHURN_RISK_CONFIG
   churnRisk: {
-    low: 0.3,           // < 30% = low risk
-    medium: 0.5,        // 30-50% = medium risk
-    high: 0.7,          // 50-70% = high risk
-    critical: 0.85      // > 85% = critical risk
+    low: CHURN_RISK_CONFIG.low,
+    medium: CHURN_RISK_CONFIG.medium,
+    high: CHURN_RISK_CONFIG.high,
+    critical: CHURN_RISK_CONFIG.critical,
   },
-  // Engagement thresholds
+  // Engagement thresholds - Now uses flexible ENGAGEMENT_CONFIG
   engagement: {
-    lowOpenRate: 0.10,      // < 10% open rate = concerning
-    lowClickRate: 0.02,     // < 2% click rate = concerning
-    declineThreshold: 0.50  // 50% decline from baseline = alarming
+    lowOpenRate: ENGAGEMENT_CONFIG.lowOpenRate,
+    lowClickRate: ENGAGEMENT_CONFIG.lowClickRate,
+    declineThreshold: ENGAGEMENT_CONFIG.declineThreshold,
   },
   // AI request timeout
   timeout: 30000,
@@ -1297,7 +1373,7 @@ async function main() {
 
   if (args.health) {
     console.log('\n=== CHURN PREDICTION SERVICE ===');
-    console.log('Version: 2.0.0 (Session 157 - HITL Edition)');
+    console.log('Version: 3.0.0 (Session 165sexies - Full Flexibility Edition)');
     console.log('\n=== AI PROVIDERS ===');
     for (const [key, provider] of Object.entries(PROVIDERS)) {
       const status = provider.enabled ? '[OK] Configured' : '[--] Not configured';
@@ -1307,11 +1383,31 @@ async function main() {
     console.log('\n=== INTEGRATIONS ===');
     console.log(`Klaviyo: ${KLAVIYO.enabled ? '[OK] Configured' : '[--] Not configured'}`);
     console.log('\n=== HITL (Human In The Loop) ===');
-    console.log(`LTV Threshold for Approval: €${HITL_CONFIG.ltvThresholdForApproval}`);
+    console.log(`LTV Threshold for Approval: €${HITL_CONFIG.ltvThresholdForApproval} (options: ${HITL_CONFIG.ltvThresholdOptions.join(', ')})`);
     console.log(`High-LTV Approval Required: ${HITL_CONFIG.requireApprovalForHighLTV ? '[ON] Yes' : '[OFF] No'}`);
     console.log(`Pending Directory: ${HITL_CONFIG.pendingDir}`);
     const pendingInterventions = listPendingInterventions();
     console.log(`Pending Interventions: ${pendingInterventions.length}`);
+    console.log('\n=== RFM THRESHOLDS (Configurable) ===');
+    console.log('Recency (days):');
+    console.log(`  Excellent: ${CONFIG.rfm.recency.excellent} (options: ${RFM_CONFIG.recencyOptions.excellent.join(', ')})`);
+    console.log(`  Good: ${CONFIG.rfm.recency.good} (options: ${RFM_CONFIG.recencyOptions.good.join(', ')})`);
+    console.log(`  Average: ${CONFIG.rfm.recency.average} (options: ${RFM_CONFIG.recencyOptions.average.join(', ')})`);
+    console.log('Frequency (orders):');
+    console.log(`  Excellent: ${CONFIG.rfm.frequency.excellent} (options: ${RFM_CONFIG.frequencyOptions.excellent.join(', ')})`);
+    console.log(`  Good: ${CONFIG.rfm.frequency.good} (options: ${RFM_CONFIG.frequencyOptions.good.join(', ')})`);
+    console.log('Monetary (€):');
+    console.log(`  Excellent: €${CONFIG.rfm.monetary.excellent} (options: ${RFM_CONFIG.monetaryOptions.excellent.join(', ')})`);
+    console.log(`  Good: €${CONFIG.rfm.monetary.good} (options: ${RFM_CONFIG.monetaryOptions.good.join(', ')})`);
+    console.log('\n=== CHURN RISK THRESHOLDS (Configurable) ===');
+    console.log(`Low: ${CHURN_RISK_CONFIG.low} (options: ${CHURN_RISK_CONFIG.options.low.join(', ')})`);
+    console.log(`Medium: ${CHURN_RISK_CONFIG.medium} (options: ${CHURN_RISK_CONFIG.options.medium.join(', ')})`);
+    console.log(`High: ${CHURN_RISK_CONFIG.high} (options: ${CHURN_RISK_CONFIG.options.high.join(', ')})`);
+    console.log(`Critical: ${CHURN_RISK_CONFIG.critical} (options: ${CHURN_RISK_CONFIG.options.critical.join(', ')})`);
+    console.log('\n=== ENGAGEMENT THRESHOLDS (Configurable) ===');
+    console.log(`Low Open Rate: ${ENGAGEMENT_CONFIG.lowOpenRate * 100}% (options: ${ENGAGEMENT_CONFIG.lowOpenRateOptions.map(v => v * 100 + '%').join(', ')})`);
+    console.log(`Low Click Rate: ${ENGAGEMENT_CONFIG.lowClickRate * 100}% (options: ${ENGAGEMENT_CONFIG.lowClickRateOptions.map(v => v * 100 + '%').join(', ')})`);
+    console.log(`Decline Threshold: ${ENGAGEMENT_CONFIG.declineThreshold * 100}% (options: ${ENGAGEMENT_CONFIG.declineThresholdOptions.map(v => v * 100 + '%').join(', ')})`);
     console.log('\n=== BENCHMARKS ===');
     console.log(`Churn reduction: -${CONFIG.benchmarks.churnReduction * 100}%`);
     console.log(`At-risk conversion: +${CONFIG.benchmarks.atRiskConversion * 100}%`);

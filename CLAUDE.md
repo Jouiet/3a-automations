@@ -1,10 +1,56 @@
 # 3A Automation
-> Version: 102.0 | 26/01/2026 | Session 165quinquies - HITL Flexible Thresholds
+> Version: 103.0 | 26/01/2026 | Session 165sexies - COMPLETE System Flexibility
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 165sexies - COMPLETE SYSTEM FLEXIBILITY (26/01/2026)
+
+### Deep Flexibility Implementation
+
+**Objective:** User demanded "100% flexibility - ALL system capabilities must be configurable"
+
+4 core scripts updated with **comprehensive configurability**:
+
+| Script | New Configurable Parameters | ENV Variables |
+| :--- | :--- | :--- |
+| **churn-prediction-resilient** | RFM thresholds (R/F/M), Churn risk levels, Engagement thresholds | 15+ ENV vars |
+| **referral-program-automation** | All 4 reward tiers (min/discount), Referee discount, Expiry, Agentic quality | 12+ ENV vars |
+| **email-personalization-resilient** | Abandoned cart delays (1h/24h/72h), Email3 discount | 4 ENV vars |
+| **blog-generator-resilient** | Agentic quality threshold, Max reflection retries, Verbose mode | 3 ENV vars |
+
+### Key Additions (Session 165sexies)
+
+**Churn Prediction - Full RFM Flexibility:**
+- RFM Recency: `RFM_RECENCY_EXCELLENT=30` (options: 14, 21, 30, 45, 60)
+- RFM Frequency: `RFM_FREQUENCY_EXCELLENT=10` (options: 5, 8, 10, 15, 20)
+- RFM Monetary: `RFM_MONETARY_EXCELLENT=1000` (options: 500-3000)
+- Churn Risk: `CHURN_RISK_LOW=0.3` through `CHURN_RISK_CRITICAL=0.85`
+- Engagement: `ENGAGEMENT_LOW_OPEN_RATE=0.10`, `ENGAGEMENT_DECLINE_THRESHOLD=0.50`
+
+**Referral Program - Full Tier Flexibility:**
+- Tier 1-4: Min referrals + discounts all configurable
+- Bonus: `REFERRAL_TIER4_BONUS=50` (€25, 50, 75, 100)
+- Referee: `REFERRAL_REFEREE_DISCOUNT=15` (10-25%)
+- Expiry: Code and reward expiry configurable
+
+**Email Cart Series - Timing Flexibility:**
+- `CART_EMAIL1_HOURS=1` (0.5, 1, 2, 4)
+- `CART_EMAIL2_HOURS=24` (12, 24, 36, 48)
+- `CART_EMAIL3_HOURS=72` (48, 72, 96, 120, 168)
+- `CART_EMAIL3_DISCOUNT=10` (5, 10, 15, 20%)
+
+**Blog Generator - Agentic Flexibility:**
+- `BLOG_AGENTIC_QUALITY_THRESHOLD=8` (6, 7, 8, 9)
+- `BLOG_AGENTIC_MAX_RETRIES=2` (1, 2, 3, 4)
+
+### Documentation Updated
+- `.claude/rules/scripts.md` - Complete ENV reference (60+ variables)
+- All `--health` outputs show configurable options
 
 ---
 

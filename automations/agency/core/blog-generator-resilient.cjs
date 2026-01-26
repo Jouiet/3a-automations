@@ -51,6 +51,24 @@ const HITL_CONFIG = {
   requireApproval: true, // DEFAULT: Always require human approval before publish
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// AGENTIC REFLECTION LOOP CONFIG - Session 165sexies (Full Flexibility)
+// Controls the AI self-improvement loop quality thresholds
+// ─────────────────────────────────────────────────────────────────────────────
+const AGENTIC_CONFIG = {
+  // Quality threshold for content approval (1-10 scale)
+  // ENV: BLOG_AGENTIC_QUALITY_THRESHOLD=8 (options: 6, 7, 8, 9)
+  qualityThreshold: parseInt(process.env.BLOG_AGENTIC_QUALITY_THRESHOLD) || 8,
+  qualityThresholdOptions: [6, 7, 8, 9],
+  // Maximum reflection loop iterations
+  // ENV: BLOG_AGENTIC_MAX_RETRIES=2 (options: 1, 2, 3, 4)
+  maxRetries: parseInt(process.env.BLOG_AGENTIC_MAX_RETRIES) || 2,
+  maxRetriesOptions: [1, 2, 3, 4],
+  // Enable detailed logging
+  // ENV: BLOG_AGENTIC_VERBOSE=false
+  verbose: process.env.BLOG_AGENTIC_VERBOSE === 'true',
+};
+
 // Import Marketing Science Core (Persuasion Psychology)
 const MarketingScience = require('./marketing-science-core.cjs');
 
@@ -486,13 +504,14 @@ async function generateWithFallback(topic, language, keywords, agenticMode = fal
     return result;
   }
 
-  // 2. AGENTIC REFLECTION LOOP
-  const MAX_RETRIES = 2;
+  // 2. AGENTIC REFLECTION LOOP (Session 165sexies - Configurable)
+  const MAX_RETRIES = AGENTIC_CONFIG.maxRetries;
+  const QUALITY_THRESHOLD = AGENTIC_CONFIG.qualityThreshold;
   let currentArticle = result.article;
   let loopCount = 0;
   let score = 0;
 
-  console.log(`[Agentic] Entered Reflection Loop (Target Score: 8/10)`);
+  console.log(`[Agentic] Entered Reflection Loop (Target Score: ${QUALITY_THRESHOLD}/10, Max Retries: ${MAX_RETRIES})`);
 
   while (loopCount < MAX_RETRIES) {
     loopCount++;
@@ -503,8 +522,8 @@ async function generateWithFallback(topic, language, keywords, agenticMode = fal
     score = critique.score;
     console.log(`[Agentic] Score: ${score}/10. Issues: ${critique.issues.length}`);
 
-    if (score >= 8) {
-      console.log(`[Agentic] Quality Threshold Met. Finalizing.`);
+    if (score >= QUALITY_THRESHOLD) {
+      console.log(`[Agentic] Quality Threshold Met (${score} >= ${QUALITY_THRESHOLD}). Finalizing.`);
       break;
     }
 
@@ -1442,10 +1461,17 @@ async function main() {
     const pending = drafts.filter(d => d.status === 'pending_review').length;
     console.log(`Pending Drafts: ${pending}`);
 
+    // Agentic Reflection Loop (Session 165sexies)
+    console.log('\n=== AGENTIC REFLECTION LOOP (Configurable) ===');
+    console.log(`Quality Threshold: ${AGENTIC_CONFIG.qualityThreshold}/10 (options: ${AGENTIC_CONFIG.qualityThresholdOptions.join(', ')})`);
+    console.log(`Max Retries: ${AGENTIC_CONFIG.maxRetries} (options: ${AGENTIC_CONFIG.maxRetriesOptions.join(', ')})`);
+    console.log(`Verbose Mode: ${AGENTIC_CONFIG.verbose ? '[ON]' : '[OFF]'}`);
+
     // Summary
     const aiCount = Object.values(PROVIDERS).filter(p => p.enabled).length;
     const socialCount = (FACEBOOK.enabled ? 1 : 0) + (LINKEDIN.enabled ? 1 : 0) + (XTWITTER.enabled ? 1 : 0);
     console.log(`\n=== SUMMARY ===`);
+    console.log(`Version: 3.1.0 (Session 165sexies - Full Flexibility Edition)`);
     console.log(`AI Providers: ${aiCount}/4 configured`);
     console.log(`Social Platforms: ${socialCount}/3 configured`);
     console.log(`WordPress: ${WORDPRESS.appPassword ? '[OK]' : '[--]'}`);

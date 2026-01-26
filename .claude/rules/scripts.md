@@ -72,18 +72,18 @@ providers: ['grok', 'openai', 'gemini', 'anthropic']
 // Auto-rotate on failure
 ```
 
-## HITL (Human In The Loop) - Session 165quinquies (18/18 = 100%) ✅ FLEXIBLE
+## HITL (Human In The Loop) - Session 165sexies (18/18 = 100%) ✅ FULL FLEXIBILITY
 | Script | HITL Type | Default | Options (configurable) |
 |--------|-----------|---------|------------------------|
-| blog-generator-resilient | Draft approval | true | true \| false |
-| email-personalization-resilient | Preview mode | true | true \| false |
-| churn-prediction-resilient | LTV threshold | €300 | €250, €300, €400, €500 |
+| blog-generator-resilient | Draft approval + Agentic | true, 8/10 | true \| false, 6-9/10 |
+| email-personalization-resilient | Preview mode + Cart delays | true, 1/24/72h | true \| false, custom hours |
+| churn-prediction-resilient | LTV + RFM + Churn Risk | €300 | Full RFM config, risk thresholds |
 | sms-automation-resilient | Daily spend | €50/day | €25, €50, €75, €100 |
 | cjdropshipping-automation | Order confirm | required | confirmOrder() |
 | podcast-generator-resilient | Script review | required | required |
 | **at-risk-customer-flow** | LTV/Discount | €300 / 15% | €250-500 / 10-20% |
 | **birthday-anniversary-flow** | LTV/Discount | €300 / 15% | €250-500 / 10-20% |
-| referral-program-automation | Email preview | true | true \| false |
+| referral-program-automation | Rewards + Tiers | All flexible | Full tier config |
 | **replenishment-reminder** | Frequency cap | 1/week | 1, 2, 3 reminders/week |
 | **price-drop-alerts** | Batch approval | 10 | 5, 10, 15, 20, 25 |
 | **review-request-automation** | VIP threshold | €300 | €250, €300, €400, €500 |
@@ -94,8 +94,73 @@ providers: ['grok', 'openai', 'gemini', 'anthropic']
 | **lead-qualification-chatbot** | Hot lead score | 70 | 60, 70, 80, 90 |
 | **voice-telephony-bridge** | BANT score | 70 | 60, 70, 80, 90 |
 
-### HITL ENV Variables (Session 165quinquies - Full Flexibility)
+### HITL ENV Variables (Session 165sexies - Complete Flexibility)
 ```bash
+# ═══════════════════════════════════════════════════════════════
+# CHURN PREDICTION - Full RFM + Risk Flexibility (Session 165sexies)
+# ═══════════════════════════════════════════════════════════════
+CHURN_LTV_THRESHOLD=300            # €250|300|400|500|750|1000
+CHURN_REQUIRE_APPROVAL=true        # true|false
+
+# RFM Recency Thresholds (days)
+RFM_RECENCY_EXCELLENT=30           # 14|21|30|45|60
+RFM_RECENCY_GOOD=60                # 30|45|60|90|120
+RFM_RECENCY_AVERAGE=90             # 60|90|120|150|180
+
+# RFM Frequency Thresholds (orders)
+RFM_FREQUENCY_EXCELLENT=10         # 5|8|10|15|20
+RFM_FREQUENCY_GOOD=6               # 3|4|6|8|10
+
+# RFM Monetary Thresholds (€)
+RFM_MONETARY_EXCELLENT=1000        # 500|750|1000|1500|2000|3000
+RFM_MONETARY_GOOD=500              # 250|400|500|750|1000
+
+# Churn Risk Thresholds (0-1 scale)
+CHURN_RISK_LOW=0.3                 # 0.2|0.25|0.3|0.35|0.4
+CHURN_RISK_MEDIUM=0.5              # 0.4|0.45|0.5|0.55|0.6
+CHURN_RISK_HIGH=0.7                # 0.6|0.65|0.7|0.75|0.8
+CHURN_RISK_CRITICAL=0.85           # 0.75|0.8|0.85|0.9|0.95
+
+# Engagement Thresholds
+ENGAGEMENT_LOW_OPEN_RATE=0.10      # 0.05|0.08|0.10|0.12|0.15
+ENGAGEMENT_LOW_CLICK_RATE=0.02     # 0.01|0.015|0.02|0.025|0.03
+ENGAGEMENT_DECLINE_THRESHOLD=0.50  # 0.3|0.4|0.5|0.6|0.7
+
+# ═══════════════════════════════════════════════════════════════
+# REFERRAL PROGRAM - Full Tier Flexibility (Session 165sexies)
+# ═══════════════════════════════════════════════════════════════
+REFERRAL_TIER1_MIN=1               # 1|2|3
+REFERRAL_TIER1_DISCOUNT=10         # 5|10|12|15
+REFERRAL_TIER2_MIN=5               # 3|5|7|10
+REFERRAL_TIER2_DISCOUNT=15         # 10|12|15|18|20
+REFERRAL_TIER3_MIN=10              # 8|10|15|20
+REFERRAL_TIER3_DISCOUNT=20         # 15|18|20|22|25
+REFERRAL_TIER4_MIN=25              # 20|25|30|50
+REFERRAL_TIER4_DISCOUNT=25         # 20|25|30|35
+REFERRAL_TIER4_BONUS=50            # €25|50|75|100 credit
+REFERRAL_REFEREE_DISCOUNT=15       # 10|12|15|20|25
+REFERRAL_CODE_EXPIRY_DAYS=365      # 90|180|365|730
+REFERRAL_REWARD_EXPIRY_DAYS=30     # 14|30|60|90
+REFERRAL_AGENTIC_QUALITY_THRESHOLD=8  # 6|7|8|9
+
+# ═══════════════════════════════════════════════════════════════
+# EMAIL CART SERIES - Timing Flexibility (Session 165sexies)
+# ═══════════════════════════════════════════════════════════════
+CART_EMAIL1_HOURS=1                # 0.5|1|2|4
+CART_EMAIL2_HOURS=24               # 12|24|36|48
+CART_EMAIL3_HOURS=72               # 48|72|96|120|168
+CART_EMAIL3_DISCOUNT=10            # 5|10|15|20
+
+# ═══════════════════════════════════════════════════════════════
+# BLOG GENERATOR - Agentic Loop Flexibility (Session 165sexies)
+# ═══════════════════════════════════════════════════════════════
+BLOG_AGENTIC_QUALITY_THRESHOLD=8   # 6|7|8|9
+BLOG_AGENTIC_MAX_RETRIES=2         # 1|2|3|4
+BLOG_AGENTIC_VERBOSE=false         # true|false
+
+# ═══════════════════════════════════════════════════════════════
+# EXISTING THRESHOLDS (Session 165quinquies)
+# ═══════════════════════════════════════════════════════════════
 # LTV/Discount thresholds
 AT_RISK_LTV_THRESHOLD=300          # €250|300|400|500
 AT_RISK_DISCOUNT_THRESHOLD=15      # 10%|15%|20%
@@ -110,7 +175,6 @@ REVIEW_VIP_THRESHOLD=300           # €250|300|400|500
 # Batch thresholds
 HITL_BATCH_THRESHOLD=75            # 50|75|100|150|200 (BigBuy)
 PRICE_DROP_BATCH_THRESHOLD=10      # 5|10|15|20|25
-HITL_BATCH_THRESHOLD=10            # 5|10|25|50|100 (Omnisend)
 
 # Score thresholds
 HITL_HOT_LEAD_THRESHOLD=70         # 60|70|80|90
