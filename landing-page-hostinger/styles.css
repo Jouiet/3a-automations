@@ -650,45 +650,7 @@ h1 .highlight {
 }
 
 
-/* Telemetry Hub - Glassmorphism 2.0 */
-.telemetry-hub {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 350px;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-ultra);
-  -webkit-backdrop-filter: var(--glass-ultra);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  z-index: 2000;
-  box-shadow: var(--shadow-xl), var(--shadow-glow);
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.telemetry-hub.collapsed {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--radius-full);
-}
-
-.telemetry-header {
-  padding: var(--spacing-md);
-  background: rgba(79, 186, 241, 0.1);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.telemetry-title {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--primary);
-}
+/* Telemetry Hub - See LIVE AGENTIC TELEMETRY HUB section (line ~9280) for full definition */
 
 @keyframes floatParticle {
 

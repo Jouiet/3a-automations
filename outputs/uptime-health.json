@@ -259,11 +259,21 @@
         "unhealthy": 1,
         "critical": 1
       }
+    },
+    {
+      "timestamp": "2026-01-26T09:58:04.872Z",
+      "overall": false,
+      "summary": {
+        "total": 5,
+        "healthy": 4,
+        "unhealthy": 1,
+        "critical": 1
+      }
     }
   ],
-  "lastUpdate": "2026-01-23T11:10:44.168Z",
+  "lastUpdate": "2026-01-26T09:58:04.872Z",
   "lastResults": {
-    "timestamp": "2026-01-23T11:10:44.168Z",
+    "timestamp": "2026-01-26T09:58:04.872Z",
     "overall": false,
     "criticalHealthy": false,
     "endpoints": [
@@ -274,9 +284,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 223,
+        "responseTime": 341,
         "critical": true,
-        "timestamp": "2026-01-23T11:10:44.074Z",
+        "timestamp": "2026-01-26T09:58:04.012Z",
         "error": null
       },
       {
@@ -286,9 +296,9 @@
         "healthy": true,
         "status": 200,
         "expectedStatus": 200,
-        "responseTime": 158,
+        "responseTime": 522,
         "critical": true,
-        "timestamp": "2026-01-23T11:10:44.071Z",
+        "timestamp": "2026-01-26T09:58:04.254Z",
         "error": null
       },
       {
@@ -297,9 +307,9 @@
         "url": "https://n8n.srv1168256.hstgr.cloud",
         "status": 404,
         "expectedStatus": 200,
-        "responseTime": 159,
+        "responseTime": 466,
         "critical": true,
-        "timestamp": "2026-01-23T11:10:44.073Z",
+        "timestamp": "2026-01-26T09:58:04.199Z",
         "error": "Expected 200, got 404"
       },
       {
@@ -312,9 +322,9 @@
           200,
           504
         ],
-        "responseTime": 212,
+        "responseTime": 1137,
         "critical": false,
-        "timestamp": "2026-01-23T11:10:44.127Z",
+        "timestamp": "2026-01-26T09:58:04.872Z",
         "error": null
       },
       {
@@ -327,9 +337,9 @@
           302,
           404
         ],
-        "responseTime": 250,
+        "responseTime": 547,
         "critical": false,
-        "timestamp": "2026-01-23T11:10:44.168Z",
+        "timestamp": "2026-01-26T09:58:04.284Z",
         "error": null
       }
     ],
