@@ -1,11 +1,48 @@
 # 3A Automation
 >
-> Version: 92.0 | 26/01/2026 | Session 164 - **System Verification** + Remotion ✅
+> Version: 93.0 | 26/01/2026 | Session 165 - **Add-Ons Empirical Verification** ✅
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 165 - ADD-ONS EMPIRICAL VERIFICATION (26/01/2026)
+
+### Add-Ons Health Check (TOP 10 - All Tested)
+
+| # | Add-On | Script | Status | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | Anti-Churn AI | churn-prediction-resilient.cjs | ✅ OPERATIONAL | 4 AI, HITL --list-interventions |
+| 2 | Review Booster | review-request-automation.cjs | ✅ OPERATIONAL | 4 AI, Klaviyo OK |
+| 3 | Replenishment Reminder | replenishment-reminder.cjs | ✅ OPERATIONAL | 4 AI, Klaviyo OK |
+| 4 | Email Cart Series | email-personalization-resilient.cjs | ✅ OPERATIONAL | 4 AI, HITL preview mode |
+| 5 | SMS Automation | sms-automation-resilient.cjs | ⚠️ NO PROVIDERS | Omnisend+Twilio missing |
+| 6 | Price Drop Alerts | price-drop-alerts.cjs | ✅ OPERATIONAL | 4 AI, Klaviyo OK |
+| 7 | WhatsApp Booking | whatsapp-booking-notifications.cjs | ❌ BLOCKED | META tokens missing |
+| 8 | Blog Factory AI | blog-generator-resilient.cjs | ✅ OPERATIONAL | 4 AI, HITL drafts mode |
+| 9 | Podcast Generator | podcast-generator-resilient.cjs | ✅ OPERATIONAL | 4 AI, Gemini TTS |
+| 10 | Dropshipping Suite | cjdropshipping + bigbuy | ⚠️ TEST MODE | CJ+BigBuy API keys missing |
+
+### Summary Session 165
+
+| Metric | Value |
+| :--- | :--- |
+| Add-Ons OPERATIONAL | **7/10 (70%)** |
+| Add-Ons PARTIAL | **2/10 (20%)** - SMS, Dropshipping |
+| Add-Ons BLOCKED | **1/10 (10%)** - WhatsApp |
+| Sensors OK | 9/20 (45%) |
+| HITL Commands Verified | 3 (--list-drafts, --list-previews, --list-interventions) |
+
+### USER ACTION Required
+
+| Add-On | Missing | Action |
+| :--- | :--- | :--- |
+| SMS Automation | OMNISEND_API_KEY, TWILIO_* | Configure SMS provider |
+| WhatsApp Booking | WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID | [Facebook Apps](https://developers.facebook.com/apps/) |
+| Dropshipping | CJ_API_KEY, BIGBUY_API_KEY | Configure supplier APIs |
+
+---
 
 ## SESSION 164 - SYSTEM VERIFICATION + REMOTION (26/01/2026)
 

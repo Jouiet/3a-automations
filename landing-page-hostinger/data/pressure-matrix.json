@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-26T07:35:31.527Z",
+  "last_updated": "2026-01-26T07:42:59.742Z",
   "session": "163",
   "sectors": {
     "marketing": {
@@ -30,7 +30,7 @@
         "label": "Market Demand",
         "pressure": 8,
         "trend": "DOWN",
-        "last_check": "2026-01-26T07:35:30.541Z",
+        "last_check": "2026-01-26T07:42:56.823Z",
         "sensor_data": {
           "method": "AI Analysis (Grok)",
           "keywords": [
@@ -41,7 +41,7 @@
           ],
           "demand_score": 92,
           "market_trend": "rising",
-          "assessment": "The automation sector, particularly in marketing, AI agencies, Shopify, and e-commerce, shows surging demand in January 2026 fueled by AI integrations and e-commerce expansion. Trends indicate continued growth as businesses seek efficiency amid economic pressures."
+          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation is surging in January 2026, fueled by AI integration, e-commerce boom, and SMB digital transformation. Trends show accelerating growth with rising search volumes and investment in no-code/low-code solutions."
         }
       },
       "tiktok_ads": {
@@ -56,7 +56,7 @@
       "klaviyo": {
         "pressure": 65,
         "trend": "DOWN",
-        "last_check": "2026-01-25T21:28:21.778Z",
+        "last_check": "2026-01-26T07:40:51.648Z",
         "sensor_data": {
           "lists_total": 10,
           "flows_total": 0,
@@ -116,7 +116,7 @@
       "gsc_gaps": {
         "pressure": 0,
         "trend": "DOWN",
-        "last_check": "2026-01-26T06:45:29.541Z",
+        "last_check": "2026-01-26T07:42:59.742Z",
         "sensor_data": {
           "top_gap_potential": 0,
           "target_query": "\"grok\" \"web speech api\""
@@ -148,7 +148,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T06:45:34.929Z",
+        "last_check": "2026-01-26T07:40:39.083Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
@@ -188,7 +188,7 @@
         "label": "API Costs",
         "pressure": 30,
         "trend": "STABLE",
-        "last_check": "2026-01-26T07:35:31.527Z",
+        "last_check": "2026-01-26T07:42:57.493Z",
         "sensor_data": {
           "current_month_usd": 0,
           "projected_month_usd": 0,

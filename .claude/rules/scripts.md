@@ -6,17 +6,24 @@ paths:
 
 # Native Scripts
 
-## Status VÉRIFIÉ (26/01/2026 - Session 164)
+## Status VÉRIFIÉ (26/01/2026 - Session 165)
 
 ### Scripts Core
 | Category | Count | Status |
 |----------|-------|--------|
 | Total core | **85** | `ls agency/core/*.cjs` (+stitch-to-3a-css.cjs S163) |
-| Avec --health | **26** | Testables (verified S164) |
+| Avec --health | **26** | Testables (verified S165) |
 | Resilient | 7 | Multi-AI fallback |
 | Sensors | 20 | Data fetchers → GPM |
 
-### Sensors (20 total - Testé Session 164)
+### Add-Ons Health (TOP 10 - Verified Session 165)
+| Status | Count | Add-Ons |
+|--------|-------|---------|
+| ✅ OPERATIONAL | 7 | Anti-Churn, Review Booster, Replenishment, Email Cart, Price Drop, Blog Factory, Podcast |
+| ⚠️ PARTIAL | 2 | SMS Automation (no providers), Dropshipping Suite (no API keys) |
+| ❌ BLOCKED | 1 | WhatsApp Booking (no META tokens) |
+
+### Sensors (20 total - Testé Session 165)
 | Status | Count | Sensors |
 |--------|-------|---------|
 | ✅ OK (0-50) | 9 | retention(0), product-seo(0), gsc(0), cost-tracking(30), google-ads-planner(50), google-trends(8), klaviyo, shopify, email-health |

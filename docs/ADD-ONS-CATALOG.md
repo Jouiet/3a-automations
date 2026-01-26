@@ -1,7 +1,7 @@
 # ADD-ONS CATALOG - 3A Automation
-> Version: 1.5 | Date: 26/01/2026 | Session: 163
+> Version: 1.6 | Date: 26/01/2026 | Session: 165
 > Source: Analyse bottom-up des 85 scripts agency/core/
-> Updated: Session 163 - Stitch CSS Conversion + Sensors 45% OK
+> Updated: Session 165 - Add-Ons Health Verification ✅
 
 ## Executive Summary
 
@@ -12,6 +12,9 @@
 | Scripts eligible for add-ons | 16 |
 | TOP 10 add-ons selected | 10 |
 | Human In The Loop (HITL) coverage | **80% (8/10)** ✅ Updated S160 |
+| **Add-Ons OPERATIONAL (S165)** | **7/10 (70%)** ✅ Verified |
+| **Add-Ons PARTIAL** | **2/10 (20%)** ⚠️ SMS + Dropshipping |
+| **Add-Ons BLOCKED** | **1/10 (10%)** ❌ WhatsApp |
 
 ---
 
