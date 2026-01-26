@@ -41,6 +41,17 @@ Scripts modifiés:
 - birthday-anniversary, at-risk-customer, product-photos, llm-global-gateway
 - store-audit-agentic, flows-audit-agentic, sourcing-linkedin-agentic, etc.
 
+### P1 Complété: Messaging "Architectes Stratégiques" ✅
+
+| Page | Avant | Après |
+| :--- | :--- | :--- |
+| **hero-ai-agency.html** | "Automate Everything" | "Strategic Architects" |
+| **services/pme.html** | "Automatisez votre croissance B2B" | "Architectes de croissance B2B" |
+| **services/ecommerce.html** | "Automatisez votre boutique" | "Architectes de votre croissance e-commerce" |
+| **en/services/smb.html** | "Automate your B2B growth" | "Strategic growth architects" |
+
+Messaging repositionné: **Judgment > Execution**
+
 ---
 
 ## SESSION 168duodecies - AI PROVIDER STRATEGY (26/01/2026)
@@ -110,7 +121,7 @@ CRÉATIF (itération, exploration):
 | :--- | :--- | :--- |
 | P0 | Documenter stratégie AI | ✅ DONE |
 | P1 | Inverser fallback scripts critiques | ✅ DONE (S168terdecies) |
-| P1 | Update messaging "Architectes" | ⏳ BACKLOG |
+| P1 | Update messaging "Architectes" | ✅ DONE (S168terdecies) |
 | P2 | Case study Small Team ROI | ⏳ BACKLOG |
 
 ---
