@@ -1,10 +1,82 @@
 # 3A Automation
-> Version: 118.0 | 26/01/2026 | Session 168undecies - A2A v1.0 Protocol Upgrade
+> Version: 119.0 | 26/01/2026 | Session 168duodecies - AI Provider Strategy Alignment
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168duodecies - AI PROVIDER STRATEGY (26/01/2026)
+
+### Analyse Stratégique: Horizontal vs Vertical AI
+
+**Source**: Documents "The Great AI Divide" + "Strategic Divergence" (analyses marché Jan 2026)
+
+| Concept | Implication 3A | Alignement |
+| :--- | :--- | :--- |
+| **Vertical = Warship** | Claude pour tâches critiques | ✅ ADOPTÉ |
+| **Horizontal = Cruise Ship** | OpenAI pour exploration only | ⚠️ AJUSTÉ |
+| **Cargo = Infrastructure** | Gemini pour volume | ✅ CORRECT |
+| **Small Team Golden Age** | 3A exemplifie (1-3 dev = output 50) | ✅ VALIDÉ |
+| **Judgment > Execution** | Repositionnement "Architectes stratégiques" | 🔄 EN COURS |
+
+### Principe: "Right Tool for Right Purpose"
+
+La stratégie n'est PAS "Claude pour tout" mais une **réconciliation rigoureuse**:
+
+```
+CRITIQUE (coût erreur élevé, irréversible):
+  Claude → Grok → Gemini → Rules
+  Ex: churn VIP, lead scoring, payment
+
+VOLUME (révisable, coût sensible):
+  Gemini → Grok → Claude
+  Ex: blog, emails batch, traductions
+
+REAL-TIME (latence < 300ms):
+  Grok → ElevenLabs → Gemini Live
+  Ex: voice, streaming
+
+CRÉATIF (itération, exploration):
+  Gemini → Claude → GPT-4o
+  Ex: UI generation, prototyping
+```
+
+### Forces Spécifiques (Factuelles)
+
+| Provider | Force | Use Case Optimal |
+| :--- | :--- | :--- |
+| **Claude** | Raisonnement multi-step, code | Décisions complexes |
+| **Grok** | Real-time, contexte 128k | Voice, conversations longues |
+| **Gemini** | Coût bas, multimodal, vitesse | Volume, images |
+| **OpenAI** | Ecosystem mature | Prototypage |
+
+### Alignement Business Model
+
+| Aspect Document | 3A Status | Verdict |
+| :--- | :--- | :--- |
+| "Paid/Client-aligned" | 100% payant | ✅ PARFAIT |
+| "Avoid gratuitous trap" | Pas de freemium | ✅ PARFAIT |
+| "Vertical precision" | 121 automations spécialisées | ✅ PARFAIT |
+| "Firefighter model" | HITL 18/18 scripts | ✅ IMPLÉMENTÉ |
+
+### Documentation Créée
+
+| Fichier | Contenu |
+| :--- | :--- |
+| `docs/AI-PROVIDER-STRATEGY.md` | Stratégie complète AI providers |
+| `docs/business-model.md` | Section AI mise à jour |
+
+### Actions Priorisées
+
+| Priorité | Action | Status |
+| :--- | :--- | :--- |
+| P0 | Documenter stratégie AI | ✅ DONE |
+| P1 | Inverser fallback scripts critiques | ⏳ BACKLOG |
+| P1 | Update messaging "Architectes" | ⏳ BACKLOG |
+| P2 | Case study Small Team ROI | ⏳ BACKLOG |
 
 ---
 
@@ -699,7 +771,35 @@ All 11 HITL workflows now have **user-configurable thresholds** via ENV variable
 
 ---
 
-## AI Fallback (Faldown Protocol)
+## AI Fallback (Segmenté - S168duodecies)
+
+### Tâches CRITIQUES (churn, scoring, decisions)
+| Ordre | Provider | Model | Justification |
+| :--- | :--- | :--- | :--- |
+| 1 | **Claude** | claude-opus-4-5 / sonnet-4 | Raisonnement fiable |
+| 2 | Grok | grok-4-1-fast-reasoning | Fallback rapide |
+| 3 | Gemini | gemini-3-flash | Dernier recours |
+| 4 | Rules | rule-based-fallback | Ultimate safety |
+
+### Tâches VOLUME (content, emails)
+| Ordre | Provider | Model | Justification |
+| :--- | :--- | :--- | :--- |
+| 1 | **Gemini** | gemini-3-flash | Coût optimisé |
+| 2 | Grok | grok-4-1-fast-reasoning | Fallback |
+| 3 | Claude | claude-haiku | Si nécessaire |
+
+### Tâches REAL-TIME (voice)
+| Ordre | Provider | Model | Justification |
+| :--- | :--- | :--- | :--- |
+| 1 | **Grok** | grok-4-1-fast-reasoning | Latence optimale |
+| 2 | ElevenLabs | eleven-multilingual-v2 | TTS/STT |
+
+**Trigger**: Latency > 15s OR Status != 200
+**Référence**: `docs/AI-PROVIDER-STRATEGY.md`
+
+---
+
+## AI Models (Legacy Reference)
 
 | Provider | Model |
 | :--- | :--- |

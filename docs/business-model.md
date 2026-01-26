@@ -135,10 +135,24 @@ AUTOMATION:
 ├── 20 scripts résilients multi-AI
 └── n8n Infrastructure only (0 workflows - all migrated)
 
-AI PROVIDERS (Fallback Chain):
-├── Primary: xAI Grok 3
-├── Secondary: Google Gemini 2.5
-└── Tertiary: Anthropic Claude
+AI PROVIDERS (Segmenté par criticité - S168duodecies):
+
+TÂCHES CRITIQUES (décisions, scoring, interventions):
+├── Primary: Anthropic Claude (Opus 4.5 / Sonnet 4)
+├── Secondary: xAI Grok 4
+└── Tertiary: Google Gemini 3
+
+TÂCHES VOLUME (content, emails, traductions):
+├── Primary: Google Gemini 3 Flash
+├── Secondary: xAI Grok
+└── Tertiary: Anthropic Claude Haiku
+
+TÂCHES REAL-TIME (voice, streaming):
+├── Primary: xAI Grok (spécialisé real-time)
+├── Secondary: ElevenLabs
+└── Tertiary: Gemini Live
+
+Référence complète: docs/AI-PROVIDER-STRATEGY.md
 
 INTÉGRATIONS:
 ├── Shopify, Klaviyo, HubSpot

@@ -4,7 +4,46 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168undecies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.5.0 (95% SOTA)** | **A2A: v1.1.0 (spec v1.0 compliant)**
+> **✅ ÉTAT RÉEL (Session 168duodecies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0 (95% SOTA)** | **A2A: v1.1.0** | **AI Strategy: Segmenté par criticité**
+
+---
+
+## SESSION 168duodecies - AI PROVIDER STRATEGY ALIGNMENT (26/01/2026)
+
+### Analyse Stratégique Complète
+
+**Documents analysés**: "The Great AI Divide" + "Strategic Divergence" (analyses marché Jan 2026)
+
+| Conclusion | Application 3A | Status |
+| :--- | :--- | :--- |
+| Marché AI bifurqué (Vertical vs Horizontal) | Adopter vertical (Claude) pour critique | ✅ DOCUMENTÉ |
+| "Golden Age of Small Teams" | 3A exemplifie: 1-3 dev = output 50 | ✅ VALIDÉ |
+| "Judgment > Execution" | Repositionnement messaging | ⏳ P1 |
+| "Avoid gratuitous trap" | Business model déjà correct | ✅ ALIGNÉ |
+
+### Nouvelle Segmentation AI Providers
+
+| Type Tâche | Primary | Fallback | Justification |
+| :--- | :--- | :--- | :--- |
+| **CRITIQUE** (churn, scoring) | Claude | Grok → Gemini | Coût erreur > coût API |
+| **VOLUME** (content, emails) | Gemini | Grok → Claude | Optimisation coûts |
+| **REAL-TIME** (voice) | Grok | ElevenLabs | Spécialisation |
+
+### Documentation Créée
+
+| Document | Lignes | Contenu |
+| :--- | :--- | :--- |
+| `docs/AI-PROVIDER-STRATEGY.md` | ~350 | Stratégie complète, matrice task→provider |
+| `docs/business-model.md` | màj | Section AI segmenté |
+
+### Alignement Vérifié (9/10)
+
+- ✅ Business model payant (pas ad-supported)
+- ✅ Focus vertical (121 automations spécialisées)
+- ✅ Small team leverage (Claude Code)
+- ✅ HITL = Firefighter model
+- ⚠️ Fallback chain à inverser pour scripts critiques
+- ⚠️ Messaging à repositionner "Architectes stratégiques"
 
 ---
 

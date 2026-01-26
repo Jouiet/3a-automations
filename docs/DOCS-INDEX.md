@@ -7,6 +7,12 @@
 | `external_workflows.md` | 0.6K | CinematicAds integration |
 | `reference/infrastructure.md` | 1.3K | VPS, Docker, Deploy |
 
+## Strategic Documentation
+| Doc | Size | Content | Command |
+|-----|------|---------|---------|
+| `AI-PROVIDER-STRATEGY.md` | 12K | AI segmentation, fallback chains, task→provider matrix | `@docs/AI-PROVIDER-STRATEGY.md` |
+| `business-model.md` | 8K | Pricing, projections, market | `@docs/business-model.md` |
+
 ## Deep Documentation (Load on demand)
 | Doc | Size | Content | Command |
 |-----|------|---------|---------|
