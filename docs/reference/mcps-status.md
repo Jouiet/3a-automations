@@ -1,6 +1,6 @@
-# MCPs Status (Verified 26/01/2026 - Session 168quater)
+# MCPs Status (Verified 26/01/2026 - Session 168quinquies)
 
-## Stack MCP Optimisée (13 serveurs)
+## Stack MCP (14 serveurs)
 
 ### Global (8) - `~/.config/claude-code/mcp.json`
 
@@ -15,10 +15,11 @@
 | google-analytics | ⚠️ API | GA4 API disabled in console |
 | gmail | ⚠️ OAuth | Needs local auth |
 
-### Projet (5) - `.mcp.json`
+### Projet (6) - `.mcp.json`
 
 | MCP | Status | Notes |
 |-----|--------|-------|
+| **3a-global-mcp** | ✅ OK | **124 tools (121 automations + 3 meta)** |
 | grok | ✅ OK | XAI_API_KEY configured |
 | google-sheets | ✅ OK | Service account |
 | klaviyo | ⚠️ SSL | Local cert issue, API works direct |
@@ -44,18 +45,28 @@
 | slack | Empty credentials |
 | stitch | Auth incompatible (use stitch-api.cjs) |
 
-## 3A-MCP Custom Server
+## 3A-MCP Custom Servers
 
-**VERDICT: NON REQUIS**
+### 3a-global-mcp ✅ OPERATIONAL
 
-| Critère | Analyse |
-|---------|---------|
-| Nécessité | ❌ Scripts fonctionnent via Bash |
-| Effort | ~40-80h dev + 20h/an maintenance |
-| Bénéfice | Marginal (wrapper sur existant) |
-| Recommandation | Continuer appels directs |
+| Aspect | Valeur |
+|--------|--------|
+| Location | `automations/3a-global-mcp/` |
+| Version | 1.1.0 |
+| Tools | **124** (121 automations + 3 meta) |
+| Meta Tools | `get_global_status`, `get_tool_catalog`, `chain_tools` |
+| Engine | Ultrathink v3 |
+| Registry | `automations-registry.json` |
 
-## Scripts sans MCP (13/88)
+### alibaba-mcp ⚠️ NEEDS CREDENTIALS
+
+| Aspect | Valeur |
+|--------|--------|
+| Location | `automations/alibaba-mcp/` |
+| Tools | `search_products` (AliExpress) |
+| Requires | `ALIBABA_APP_KEY`, `ALIBABA_APP_SECRET` |
+
+## Scripts Direct API (sans MCP communautaire)
 
 ```
 tiktok-ads-sensor, omnisend-b2c-ecommerce, bigbuy-supplier-sync,
@@ -65,7 +76,7 @@ replenishment-reminder, review-request-automation, sms-automation-resilient,
 ga4-budget-optimizer-agentic
 ```
 
-**Alternative:** Direct API calls (déjà implémentés, fonctionnels)
+**Note:** Ces scripts sont exposés via 3a-global-mcp (124 tools)
 
 ## Service Account
 

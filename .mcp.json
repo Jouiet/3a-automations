@@ -1,6 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/.mcp.schema.json",
   "mcpServers": {
+    "3a-global-mcp": {
+      "command": "node",
+      "args": ["automations/3a-global-mcp/build/index.js"],
+      "description": "3A Global MCP Router - 121 proprietary automations as MCP tools"
+    },
     "grok": {
       "command": "npx",
       "args": ["-y", "grok-search-mcp@latest"],

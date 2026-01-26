@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 111.0 | 26/01/2026 | Session 168quater - MCP Stack Optimized (13 servers)
+> Version: 112.0 | 26/01/2026 | Session 168quinquies - 3A-Global-MCP Operational (14 servers)
 
 ## Identité
 
@@ -8,35 +8,38 @@
 
 ---
 
-## SESSION 168quater - MCP STACK OPTIMIZATION (26/01/2026)
+## SESSION 168quinquies - 3A-GLOBAL-MCP DISCOVERED + FIXED (26/01/2026)
 
-### 3A-MCP Custom Server: NON REQUIS
+### 3A-MCP Custom Server: EXISTE ET OPÉRATIONNEL ✅
 
-| Question | Réponse |
-| :--- | :--- |
-| Faut-il un `@3a-automation/mcp-server`? | ❌ NON |
-| Pourquoi? | Scripts fonctionnent via Bash, MCP = overhead inutile |
-| Effort évité | ~40-80h dev + ~20h/an maintenance |
+| Aspect | Statut | Détail |
+| :--- | :--- | :--- |
+| **3a-global-mcp** | ✅ OPERATIONAL | 121 automations + 3 meta tools = 124 tools |
+| **alibaba-mcp** | ⚠️ EXISTS | Needs ALIBABA_APP_KEY credentials |
+| Bug Fix | ✅ FIXED | Registry path `../../../` → `../../` |
+| Config | ✅ ADDED | Added to `.mcp.json` |
 
-### MCP Stack Optimisée (13 serveurs)
+### Correction Session 168quater
+
+Mon analyse précédente "3A-MCP NON REQUIS" était **ERRONÉE** car:
+1. Recherche trop restrictive (`3a-mcp` au lieu de `3a.*mcp`)
+2. 30 fichiers trouvés mais MCP ignorés
+3. Le 3a-global-mcp existe depuis Session 154
+
+### MCP Stack Finale (14 serveurs)
 
 **Global (8):** chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail
 
-**Projet (5):** grok, google-sheets, klaviyo, shopify-dev, shopify-admin
+**Projet (6):** **3a-global-mcp**, grok, google-sheets, klaviyo, shopify-dev, shopify-admin
 
-### Serveurs Supprimés (8)
+### 3a-global-mcp Capabilities
 
-| Server | Raison |
-| :--- | :--- |
-| powerbi-remote | Entra ID non configuré |
-| meta-ads | Token vide |
-| apify | Token invalide |
-| stitch | Auth incompatible (use stitch-api.cjs) |
-| shopify (global) | Credentials vides |
-| slack | Credentials vides |
-| + 2 duplicates | chrome-devtools, playwright en double |
-
-**Résultat:** 21 → 13 serveurs (**-38%**)
+```
+Tools: 124 (121 automations + 3 meta)
+Meta: get_global_status, get_tool_catalog, chain_tools
+Engine: Ultrathink v3
+Registry: automations-registry.json
+```
 
 ---
 
@@ -325,7 +328,7 @@ All 11 HITL workflows now have **user-configurable thresholds** via ENV variable
 | Automations Registry | **121** (88 w/ scripts) | ✅ 33 external configs |
 | Skills (SKILL.md) | **42** | ✅ 95% |
 | Sensors Working | **15/19 (79%)** | ⚠️ 4 blocked |
-| MCP Servers | **13** | ✅ |
+| MCP Servers | **14** | ✅ |
 | Remotion Compositions | **7** | ✅ |
 | HTML Pages | **79** | ✅ |
 | Credentials SET | **61%** (57/93) | ⚠️ 36 empty |

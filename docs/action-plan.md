@@ -4,44 +4,46 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168quater - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 13 servers (8 global + 5 projet)** | **3A-MCP Custom: NON REQUIS**
+> **✅ ÉTAT RÉEL (Session 168quinquies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: OPÉRATIONNEL (124 tools)**
 
 ---
 
-## SESSION 168quater - MCP AUDIT COMPLET (26/01/2026)
+## SESSION 168quinquies - 3A-GLOBAL-MCP DISCOVERED (26/01/2026)
 
-### VERDICT: 3A-MCP Custom = NON OPTIMAL
+### CORRECTION: 3A-MCP Custom EXISTE ET FONCTIONNE ✅
 
-| Question | Réponse Factuelle |
-| :--- | :--- |
-| Faut-il un `@3a-automation/mcp-server`? | ❌ **NON** |
-| Pourquoi? | Scripts fonctionnent via Bash, MCP = overhead inutile |
-| Effort évité | ~40-80h dev + ~20h/an maintenance |
-| Alternative | `node script.cjs --health` via Bash tool |
+| Aspect | Statut | Détail |
+| :--- | :--- | :--- |
+| **3a-global-mcp** | ✅ OPERATIONAL | 124 tools (121 automations + 3 meta) |
+| **alibaba-mcp** | ⚠️ EXISTS | Needs credentials |
+| Bug Fixed | ✅ | Registry path corrected |
+| Config | ✅ | Added to `.mcp.json` |
 
-### MCP Stack Optimisée (13 serveurs)
+**Erreur Session 168quater:** J'ai dit "NON REQUIS" mais le MCP existait déjà. Cause: recherche trop restrictive.
+
+### MCP Stack Finale (14 serveurs)
 
 **Global (8):** chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail
 
-**Projet (5):** grok, google-sheets, klaviyo, shopify-dev, shopify-admin
+**Projet (6):** **3a-global-mcp**, grok, google-sheets, klaviyo, shopify-dev, shopify-admin
 
-### Scripts sans couverture MCP (13/88 = 15%)
+---
 
-| Script | API | Status |
-| :--- | :--- | :--- |
-| tiktok-ads-sensor | TikTok Ads | Direct API ✅ |
-| omnisend-b2c-ecommerce | Omnisend | Direct API ✅ |
-| bigbuy-supplier-sync | BigBuy | Direct API ✅ |
-| + 10 autres | Various | Direct API ✅ |
+## SESSION 168quater - MCP Stack Optimization (26/01/2026)
 
-**Conclusion:** APIs sans MCP communautaire → utiliser appels directs (déjà implémentés)
+### Serveurs supprimés (8 dead code)
 
-### Commits
-
-| Hash | Description |
+| Server | Raison |
 | :--- | :--- |
-| `5a7e370` | docs: update tech stack v3.4 - MCP optimization |
-| `6147fbd` | refactor(mcp): optimize stack - remove 6 dead/duplicate |
+| powerbi-remote | Entra ID non configuré |
+| meta-ads | Token vide |
+| apify | Token invalide |
+| stitch | Auth incompatible (use stitch-api.cjs) |
+| shopify (global) | Credentials vides |
+| slack | Credentials vides |
+| + 2 duplicates | chrome-devtools, playwright en double |
+
+**Résultat:** 21 → 14 serveurs actifs
 
 ---
 
