@@ -4,7 +4,29 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168quinquies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: OPÉRATIONNEL (124 tools)**
+> **✅ ÉTAT RÉEL (Session 168sexies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.1.0 (124 tools, chain_tools REAL, 37% SOTA)**
+
+---
+
+## SESSION 168sexies - chain_tools REAL EXECUTION (26/01/2026)
+
+### MCP Optimization: 32% → 37% SOTA
+
+| Task | Before | After | Status |
+| :--- | :--- | :--- | :--- |
+| chain_tools | simulated_exec | Real script execution | ✅ DONE |
+| Version sync | 1.0.0/1.1.0 mismatch | 1.1.0 unified | ✅ DONE |
+| Tests | N/A | 99/99 (100%) | ✅ VERIFIED |
+
+### chain_tools New Features
+
+- ✅ Sequential real script execution
+- ✅ 60s timeout per tool
+- ✅ `stopOnError` parameter support
+- ✅ Structured JSON logging
+- ✅ Output truncation (1000 chars)
+
+**Commit:** `7e01357` | **Score SOTA:** 37% (+5%)
 
 ---
 

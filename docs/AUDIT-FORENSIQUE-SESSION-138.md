@@ -2,13 +2,15 @@
 
 ## Session 141→168quater | 22-26 Janvier 2026 | VÉRIFICATION 100% EMPIRIQUE
 
-> **UPDATE SESSION 168quater (26/01/2026):**
+> **UPDATE SESSION 168sexies (26/01/2026):**
 >
-> - ✅ MCP Stack Optimisée: **13 serveurs** (8 global + 5 projet)
-> - ❌ 3A-MCP Custom: **NON REQUIS** (scripts fonctionnent via Bash)
-> - ✅ Dead code supprimé: 8 serveurs MCP inutiles (-38%)
-> - ✅ Scripts sans MCP: 13/88 (15%) - utilisent API directs
-> - ✅ Verdict: Maintenir stack tierce, pas de MCP custom
+> - ✅ MCP Stack: **14 serveurs** (8 global + 6 projet)
+> - ✅ **3A-MCP Custom: OPÉRATIONNEL** (124 tools, chain_tools REAL)
+> - ✅ Score SOTA: 32% → **37%** (chain_tools fix)
+> - ✅ Version sync: 1.1.0 unified
+> - ✅ Tests: 99/99 (100% stability)
+>
+> **CORRECTION Session 168quater:** L'analyse "NON REQUIS" était ERRONÉE - le 3a-global-mcp existait depuis Session 154 mais n'avait pas été trouvé (recherche trop restrictive).
 
 |  UPDATE SESSION 167 (26/01/2026):
 |  - ✅ RAG Optimization: **Hybrid v3.0 (Dense + Sparse)**
