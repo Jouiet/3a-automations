@@ -1,9 +1,9 @@
 # GOOGLE STITCH MCP - Documentation Technique Complète
 
-> **Version:** 2.1 | **Date:** 26/01/2026 | **Session:** 162bis
+> **Version:** 3.0 | **Date:** 26/01/2026 | **Session:** 162bis
 > **Méthode:** Bottom-up factuelle (Web Research + GitHub + Tests empiriques)
 > **Auteur:** Claude Code pour 3A Automation
-> **UPDATE SESSION 162bis:** Workflow end-to-end validé - 3 UI components générés et téléchargés
+> **UPDATE SESSION 162bis:** Prompt Library + 4 UI components (993 lines) + Design Token Seeding
 
 ---
 
@@ -886,6 +886,218 @@ npx @_davideast/stitch-mcp init --client claude-code -y
 | **Two-Tier Auth** | Authentification à deux niveaux (user + application) |
 
 ---
+
+---
+
+## 14. 3A AUTOMATION PROMPT LIBRARY (Session 162bis)
+
+> **Méthode:** Web research (Stitch prompt engineering) + 3A Design System tokens
+> **Vérifié:** 26/01/2026 - Prompts testés avec stitch-api.cjs
+
+### 14.1 Design Token Seeding (Obligatoire)
+
+Inclure ces tokens dans CHAQUE prompt pour assurer la cohérence visuelle:
+
+```
+DESIGN TOKENS 3A:
+- Primary: #4FBAF1 (cyan), Accent: #10B981 (green), Purple: #8B5CF6
+- Background: #191E35 (navy dark), Secondary: #1B2F54
+- Font: Inter (sans-serif), Weight: 800 for bold
+- Glassmorphism: rgba(255,255,255,0.03) bg, rgba(255,255,255,0.1) border, blur(20px)
+- Radius: 1rem cards, 0.5rem buttons
+- Shadows: glow effect with rgba(79, 186, 241, 0.3)
+```
+
+### 14.2 Prompt Framework 3A
+
+```
+[CONTEXT]
+Design a [platform: web/mobile] [component type] for 3A Automation,
+an AI Automation Agency targeting E-commerce and B2B companies.
+
+[3A DESIGN TOKENS]
+8-pt grid, radius 1rem, font Inter weight 800,
+primary #4FBAF1 cyan, accent #10B981 green, purple #8B5CF6,
+dark background #191E35 navy, glassmorphism with blur(20px).
+
+[SCREEN DETAILS]
+Screen: [type]
+Goal: [user objective]
+Layout: [structure]
+Components: [list]
+
+[VISUAL DIRECTION]
+Theme: Dark futuristic with cyan/purple gradients
+Style: Glassmorphism cards, glowing CTAs, mesh gradient background
+Typography: Bold headlines, clean body text
+
+[CONSTRAINTS]
+- Desktop first, responsive
+- WCAG 2.1 AA accessible
+- Production-ready HTML/Tailwind
+```
+
+### 14.3 Optimized Prompts by Section Type
+
+#### HERO SECTION
+```
+Design a hero section for 3A Automation, an AI Automation Agency.
+
+DESIGN TOKENS: 8-pt grid, font Inter 800, primary #4FBAF1 cyan,
+dark background #191E35, glassmorphism blur(20px), glow shadows.
+
+COMPONENTS:
+- Bold headline "Automate Everything" with gradient text white to gray
+- Subheadline "121 AI-powered automations for E-commerce & B2B"
+- Two CTAs: "Book Demo" (primary cyan glow), "See Automations" (ghost)
+- Animated mesh gradient background with purple/cyan blobs
+- Trust badges row: "22 AI Agents", "121 Automations", "Zero Manual"
+
+STYLE: Dark futuristic, glassmorphism navbar, text glow effect,
+subtle particle animations in background.
+```
+
+#### SERVICES/FEATURES SECTION
+```
+Design a services grid for 3A Automation showing 6 AI automation categories.
+
+DESIGN TOKENS: font Inter, primary #4FBAF1, accent #10B981 green,
+purple #8B5CF6, background #191E35, glassmorphism cards.
+
+SERVICES (6 cards):
+1. Email Marketing Automation - icon: mail, color: purple
+2. Shopify Store Optimization - icon: shopping-cart, color: #95bf47
+3. SEO & Content Generation - icon: search, color: green
+4. Voice AI Agents - icon: mic, color: cyan
+5. Analytics & Reporting - icon: chart, color: orange #F59E0B
+6. Retention & Churn Prevention - icon: users, color: green
+
+CARD STYLE: Glassmorphism (rgba bg, blur, border glow on hover),
+icon top-left with category color, title bold, 2-line description.
+Grid: 3 columns desktop, 2 tablet, 1 mobile.
+```
+
+#### PRICING SECTION
+```
+Design a SaaS pricing page for 3A Automation with 3 tiers.
+
+DESIGN TOKENS: Inter font, primary #4FBAF1 cyan, accent #10B981,
+dark background #191E35 with mesh gradient, glassmorphism cards.
+
+TIERS:
+1. Starter - €1,490/month - "5 automations, 1 integration, Email support"
+2. Growth (Popular) - €3,990/month - "15 automations, 5 integrations, Priority support" - HIGHLIGHTED with cyan glow border
+3. Enterprise - Custom - "Unlimited, dedicated manager, SLA 99.9%"
+
+FEATURES PER TIER: Check icons in green, X icons in muted gray.
+STYLE: Glass cards, popular tier larger with "Most Popular" badge,
+annual toggle with 20% discount, CTA buttons with hover glow.
+```
+
+#### TESTIMONIALS SECTION
+```
+Design a testimonials carousel for 3A Automation.
+
+DESIGN TOKENS: Inter font, dark bg #191E35, glassmorphism cards,
+primary #4FBAF1 for accents, purple #8B5CF6 for quotes.
+
+COMPONENTS:
+- Section title "What Our Clients Say" with section badge
+- 3 testimonial cards in horizontal scroll
+- Each card: Quote icon purple, text italic, client name bold,
+  company name muted, small avatar circle with initials
+- Star ratings (5 stars in gold/yellow)
+- Navigation dots below
+
+STYLE: Glass cards with subtle border, quote marks decorative,
+smooth scroll snap, fade gradient on edges.
+```
+
+#### FAQ SECTION
+```
+Design an FAQ accordion for 3A Automation.
+
+DESIGN TOKENS: Inter font, dark bg #191E35, primary #4FBAF1,
+glassmorphism for expanded items.
+
+CATEGORIES:
+1. "Getting Started" - 4 questions
+2. "Pricing & ROI" - 3 questions
+3. "Technical" - 3 questions
+
+COMPONENTS:
+- Section title with badge "Frequently Asked Questions"
+- Accordion items: Question bold, chevron icon rotates on expand
+- Expanded state: glassmorphism background, answer text
+- Category tabs or grouped sections
+
+STYLE: Clean spacing, subtle hover effect on questions,
+smooth expand animation, cyan accent on active item.
+```
+
+#### CTA SECTION
+```
+Design a call-to-action section for 3A Automation.
+
+DESIGN TOKENS: Inter 800, primary #4FBAF1 cyan glow,
+gradient background purple to cyan to green.
+
+COMPONENTS:
+- Bold headline "Ready to Automate Your Business?"
+- Subtext "Join 50+ companies saving 40+ hours/week"
+- Primary CTA "Book a Free Demo" - large, cyan, glow effect
+- Secondary CTA "View Case Studies" - ghost button
+- Trust element: "No credit card required • 30-min call"
+
+STYLE: Full-width section, centered content, gradient mesh bg,
+floating glassmorphism card containing CTAs.
+```
+
+### 14.4 Prompt Optimization Tips for 3A
+
+| DO | DON'T |
+|-----|-------|
+| Include design tokens in every prompt | Use generic "blue/dark theme" |
+| Specify exact hex colors (#4FBAF1) | Hope Stitch guesses brand colors |
+| List components with details | Write vague "add some features" |
+| Include accessibility constraints | Ignore responsive/a11y |
+| Reference glassmorphism specifically | Say just "modern cards" |
+| Specify Inter font and weight 800 | Let Stitch pick random fonts |
+
+### 14.5 Tested Prompts Results (Session 162bis)
+
+| Prompt | Result | Lines | Quality |
+|--------|--------|-------|---------|
+| Hero AI Agency (with tokens) | `hero-ai-agency.html` | 231 | ✅ Excellent - matched brand |
+| Pricing Dark Glassmorphism v1 | `pricing-dark-glassmorphism-1.html` | 268 | ✅ Excellent - glass effect |
+| Pricing Dark Glassmorphism v2 | `pricing-dark-glassmorphism-2.html` | 305 | ✅ Excellent - variant |
+| **Services Grid (optimized)** | `services-grid-3a.html` | 189 | ✅ **PERFECT** - all 6 colors exact |
+
+**Total generated:** 993 lines HTML, 4 components
+
+**Services Grid Validation (Session 162bis):**
+- ✅ Purple #8B5CF6 for Email Marketing
+- ✅ #95bf47 for Shopify
+- ✅ Green #10B981 for SEO & Retention
+- ✅ Cyan #4FBAF1 for Voice AI
+- ✅ Orange #F59E0B for Analytics
+- ✅ Glassmorphism with exact specs (blur(20px), rgba bg, hover glow)
+- ✅ 3x2 grid layout as specified
+- ✅ Inter font extrabold for headings
+
+### 14.6 Post-Generation Integration
+
+After generating with Stitch, convert to 3A CSS:
+
+| Stitch Output | 3A Equivalent |
+|---------------|---------------|
+| `bg-[#191E35]` | `var(--secondary)` |
+| `text-[#4FBAF1]` | `var(--primary)` |
+| `text-[#10B981]` | `var(--accent)` |
+| `backdrop-blur-[20px]` | `var(--glass-backdrop)` |
+| Custom Tailwind classes | `.glass-panel`, `.cta-button-ultra` |
+
+**Conversion script planned:** `stitch-to-3a-css.cjs`
 
 ---
 

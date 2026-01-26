@@ -7,27 +7,45 @@
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
 
-## SESSION 162bis - STITCH WORKFLOW END-TO-END (26/01/2026)
+## SESSION 162bis - STITCH PROMPT OPTIMIZATION (26/01/2026)
 
 ### Accomplishments
 
 | Tâche | Status | Détail |
 | :--- | :--- | :--- |
-| Download Stitch HTML | ✅ DONE | 3 fichiers (804 lines total) |
+| Download Stitch HTML | ✅ DONE | 4 fichiers (993 lines total) |
 | Test sensors health | ✅ DONE | 6 OK, 5 PARTIAL, 9 BLOCKED |
 | Update pressure-matrix | ✅ DONE | +stitch_api, sovereign_units=121 |
-| Generate new screen | ✅ DONE | Hero AI Agency section |
+| **Create Prompt Library** | ✅ **DONE** | 6 optimized prompts + design tokens |
+| **Test optimized prompts** | ✅ **DONE** | Services grid = PERFECT color match |
 
-### Stitch Assets Downloaded
+### Stitch Prompt Engineering
 
-| Fichier | Lines | Type |
-| :--- | :--- | :--- |
-| `hero-ai-agency.html` | 231 | Hero section dark theme |
-| `pricing-dark-glassmorphism-1.html` | 268 | Pricing variant 1 |
-| `pricing-dark-glassmorphism-2.html` | 305 | Pricing variant 2 |
+**Web Research Sources:**
+- Google Developers Blog - Introducing Stitch
+- UX Planet - Google Stitch for UI Design
+- Adosolve - Stitch Prompt Guide
+- AI Competence - Prompting For Interfaces
+
+**Key Learnings Applied:**
+1. **Design Token Seeding** - Include hex colors in every prompt
+2. **Zoom-Out-Zoom-In Framework** - Context → Details → Visual
+3. **Component-Specific Prompts** - One prompt per section type
+4. **Constraints Section** - Accessibility + responsive
+
+### Stitch Assets Generated
+
+| Fichier | Lines | Prompt Type | Color Match |
+| :--- | :--- | :--- | :--- |
+| `hero-ai-agency.html` | 231 | Basic | ✅ Good |
+| `pricing-dark-glassmorphism-1.html` | 268 | Basic | ✅ Good |
+| `pricing-dark-glassmorphism-2.html` | 305 | Basic | ✅ Good |
+| `services-grid-3a.html` | 189 | **Optimized** | ✅ **PERFECT** |
+
+**Validation services-grid-3a:** All 6 hex colors (#8B5CF6, #95bf47, #10B981, #4FBAF1, #F59E0B) exactly as specified.
 
 **Location:** `landing-page-hostinger/assets/stitch/`
-**Commit:** `d46f058` (pushé)
+**Doc updated:** `docs/GOOGLE-STITCH-MCP-DOCUMENTATION.md` Section 14
 
 ---
 
