@@ -53,6 +53,17 @@
             "payment_details": "Paiement à la livraison ou en boutique",
             "phone": "+212600000000",
             "address": "Quartier Agdal, Rabat"
+        },
+        "ecom_darija_01": {
+            "name": "متجر درب غلف",
+            "sector": "UNIVERSAL_ECOMMERCE",
+            "currency": "MAD",
+            "language": "ary",
+            "knowledge_base_id": "universal_ecom_v1",
+            "payment_method": "COD_MOROCCO",
+            "payment_details": "الدفع عند التسليم / Cash on Delivery",
+            "phone": "+212661234567",
+            "address": "درب غلف، الدار البيضاء"
         }
     }
 }

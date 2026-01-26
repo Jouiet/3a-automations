@@ -2,7 +2,38 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 166sexies - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice: WIDGET + TELEPHONY MULTILINGUE**
+> **✅ ÉTAT RÉEL (Session 166septies - 26/01/2026):** HITL 100% (18/18) ✅ | Remotion ✅ | Sensors 79% OK | **Scripts: 85** | AG-UI Wired ✅ | **Voice: 5/5 LANGUES COMPLET**
+
+---
+
+## SESSION 166septies - DARIJA WIDGET COMPLET (26/01/2026)
+
+### Widget Voice Darija (Phase 3)
+
+| Fichier | Lignes | Statut |
+|---------|--------|--------|
+| `lang/voice-ary.json` | ~280 | ✅ CRÉÉ - Contenu Darija authentique |
+| `client_registry.json` | +10 | ✅ MÀJ - Client "متجر درب غلف" (ary) |
+| `VOICE-MULTILINGUAL-STRATEGY.md` | màj | ✅ Version 3.0.0 |
+
+### Contenu voice-ary.json
+
+- **Meta**: code=ary, rtl=true, speechRecognition=ar-MA
+- **UI**: 13 strings Darija (السلام عليكم, كتب سؤالك...)
+- **Booking**: Flow complet en Darija (موعد, حجز, كرينو...)
+- **Industries**: 5 secteurs traduits (بناء, إي كوميرس, بي تو بي...)
+- **Topics**: 12 topics traduits (كيفاش, السوم, أوديت...)
+- **Keywords**: Mélange Darija script + translitération
+
+### Client Test Darija
+
+```json
+"ecom_darija_01": {
+  "name": "متجر درب غلف",
+  "language": "ary",
+  "currency": "MAD"
+}
+```
 
 ---
 
@@ -313,19 +344,21 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 
 ## OPTIMIZATION BACKLOG
 
-### P0 - CRITICAL (Voice Multilingual - Maroc)
+### P0 - CRITICAL (Voice Multilingual - Maroc) ✅ COMPLET
 
 | Task | Component | Effort | Status |
 |------|-----------|--------|--------|
 | **Phase 0: Validation Darija providers** | Voice | 6h | ✅ **DONE** (S166ter) |
-| **Phase 3: Darija TTS/STT integration** | Voice | 56h | ⏳ READY (all validated) |
+| **Phase 3: Darija Widget + Telephony** | Voice | 56h | ✅ **DONE** (S166septies) |
 | Configure ELEVENLABS_API_KEY | Credentials | 1h | ✅ **DONE** (S166bis) |
-| Configure TWILIO_* credentials | Credentials | 1h | ❌ MISSING |
+| Configure TWILIO_* credentials | Credentials | 1h | ❌ MISSING (User action) |
 | Test voix "Ghizlane" (communautaire) | Validation | 2h | ✅ **DONE** - 1.3s latence |
 | Test Mistral Saba (24B) | Validation | 2h | ✅ **DONE** - 150+ t/s, Darija natif |
 | Test Sawtia.ma (Benchmark) | Validation | 2h | ⏳ PENDING - Analyse concurrentielle |
 | Test Grok-4 LLM Darija | Validation | 2h | ✅ **DONE** - Génère Darija authentique |
 | Test ElevenLabs Scribe STT Darija | Validation | 2h | ✅ **DONE** - 707ms, transcrit correctement |
+| **voice-ary.json créé** | Widget | 2h | ✅ **DONE** (S166septies) |
+| **Client Darija (client_registry)** | Config | 0.5h | ✅ **DONE** (S166septies) |
 
 ### Validation Empirique Phase 0 (S166ter - 26/01/2026)
 

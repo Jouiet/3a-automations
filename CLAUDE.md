@@ -1,10 +1,31 @@
 # 3A Automation
-> Version: 107.0 | 26/01/2026 | Session 166sexies - Telephony Bridge Multilingue
+> Version: 108.0 | 26/01/2026 | Session 166septies - Voice Multilingue 100% Complet
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 166septies - DARIJA WIDGET COMPLET (26/01/2026)
+
+### Voice Multilingue: 5/5 Langues ✅ COMPLET
+
+| Langue | Widget | Telephony | Client Test |
+| :--- | :--- | :--- | :--- |
+| FR | ✅ voice-fr.json | ✅ TWIML | ✅ agency_internal |
+| EN | ✅ voice-en.json | ✅ TWIML | ✅ client_hoa_01 |
+| ES | ✅ voice-es.json | ✅ TWIML | - |
+| AR | ✅ voice-ar.json (RTL) | ✅ TWIML | - |
+| **ARY** | ✅ **voice-ary.json (RTL)** | ✅ **TWIML** | ✅ **ecom_darija_01** |
+
+### Fichiers Créés
+
+| Fichier | Lignes | Description |
+| :--- | :--- | :--- |
+| `lang/voice-ary.json` | ~280 | Contenu Darija authentique (UI, booking, topics) |
+| `client_registry.json` | +10 | Client "متجر درب غلف" avec language: "ary" |
 
 ---
 

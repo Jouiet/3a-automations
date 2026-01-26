@@ -1,7 +1,7 @@
 # VOICE MULTILINGUAL STRATEGY - 3A AUTOMATION
 
-> **Version:** 2.0.0 | **Date:** 26/01/2026 | **Session:** 166quinquies
-> **Statut:** ARCHITECTURE OPTIMISÉE - Widget Core + Lang Files
+> **Version:** 3.0.0 | **Date:** 26/01/2026 | **Session:** 166septies
+> **Statut:** COMPLET - Widget 5 Langues + Telephony Multilingue
 
 ---
 
@@ -22,17 +22,19 @@
 
 ## 1. SYNTHÈSE EXÉCUTIVE
 
-### 1.1 Verdict Global (MIS À JOUR - Session 166quinquies)
+### 1.1 Verdict Global (MIS À JOUR - Session 166septies)
 
 | Aspect | État Actuel | Cible | Validation |
 |--------|-------------|-------|------------|
 | **Architecture** | ✅ **OPTIMISÉE** | Core + Lang JSON | Maintenable |
-| **Langues configurées** | FR, EN, ES, AR (4) | FR, EN, ES, AR, Darija (5) | -1 langue (Darija) |
+| **Langues Web Widget** | ✅ **FR, EN, ES, AR, ARY (5)** | 5 langues | **100% COMPLET** |
+| **Langues Telephony** | ✅ **FR, EN, ES, AR, ARY (5)** | 5 langues | **100% COMPLET** |
 | **TTS Darija** | ✅ **VALIDÉ** | ElevenLabs "Ghizlane" | 1.3s latence |
 | **STT Darija** | ✅ **VALIDÉ** | ElevenLabs Scribe v1 | 707ms latence |
 | **LLM Darija** | ✅ **VALIDÉ** | Grok-4-1-fast-reasoning | Génère Darija authentique |
 | **Espagnol** | ✅ **DONE** | Web Speech API | Widget + JSON |
 | **Arabe MSA** | ✅ **DONE** | Web Speech API (RTL) | Widget + JSON |
+| **Darija (ARY)** | ✅ **DONE** | voice-ary.json | Widget + JSON (RTL) |
 
 ### 1.1bis Nouvelle Architecture (Session 166quinquies)
 
@@ -40,11 +42,11 @@
 voice-assistant/
 ├── voice-widget-core.js    # Logique unique (600 lignes)
 ├── lang/
-│   ├── voice-fr.json       # Traductions FR
-│   ├── voice-en.json       # Traductions EN
-│   ├── voice-es.json       # Traductions ES
-│   ├── voice-ar.json       # Traductions AR (RTL)
-│   └── voice-ary.json      # Traductions Darija (TODO)
+│   ├── voice-fr.json       # ✅ Traductions FR
+│   ├── voice-en.json       # ✅ Traductions EN
+│   ├── voice-es.json       # ✅ Traductions ES
+│   ├── voice-ar.json       # ✅ Traductions AR (RTL)
+│   └── voice-ary.json      # ✅ Traductions Darija (RTL) - Session 166septies
 └── [LEGACY - à supprimer]
     ├── voice-widget.js         # FR standalone
     ├── voice-widget-en.js      # EN standalone
@@ -95,7 +97,7 @@ BROWSER LAYER (Web Speech API - GRATUIT)
 │   ├── lang/voice-en.json  [EN] ✅ PRODUCTION
 │   ├── lang/voice-es.json  [ES] ✅ PRODUCTION
 │   ├── lang/voice-ar.json  [AR] ✅ PRODUCTION (RTL)
-│   └── lang/voice-ary.json [Darija] ❌ TODO
+│   └── lang/voice-ary.json [Darija] ✅ PRODUCTION (RTL) - S166septies
 └── [LEGACY - voice-widget*.js] → À supprimer après migration
 
 TEXT GENERATION API
@@ -109,16 +111,18 @@ REALTIME VOICE BRIDGE
     ├── Config: language: 'auto' (auto-detect)
     └── Fallback: Gemini TTS (FR/EN principalement)
 
-TELEPHONY BRIDGE (PSTN)
+TELEPHONY BRIDGE (PSTN) - Session 166sexies FIX
 └── voice-telephony-bridge.cjs (port 3009)
     ├── Provider: Twilio (CREDENTIALS VIDES)
-    ├── TwiML: language="fr-FR" HARDCODÉ
-    └── Status: ⚠️ PSTN NON FONCTIONNEL
+    ├── TwiML: ✅ MULTILINGUAL (5 langues) - TWIML_MESSAGES
+    ├── RAG: ✅ MULTILINGUAL keywords (ES/AR/ARY ajoutés)
+    └── Status: ⚠️ CREDENTIALS TWILIO MANQUANTS
 
-MULTI-TENANT DIRECTOR
+MULTI-TENANT DIRECTOR - Session 166sexies FIX
 └── voice-persona-injector.cjs
     ├── 7 Personas configurés
-    └── Langue par défaut: 'fr'
+    ├── Langue par défaut: VOICE_CONFIG.defaultLanguage
+    └── ENV: VOICE_DEFAULT_LANGUAGE configurable
 ```
 
 ### 2.2 Scripts Voice Inventoriés (7 fichiers - 5,809 lignes)
