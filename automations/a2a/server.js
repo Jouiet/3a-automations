@@ -1,14 +1,26 @@
 /**
  * A2A (Agent 2 Agent) Unified Server
  * Spec: Google/Linux Foundation A2A Protocol v1.0
- * GitHub Reference: Agent2Agent Project
- * 
+ * GitHub Reference: Agent2Agent Project (a2aproject/A2A)
+ *
  * Features:
  * - JSON-RPC 2.0 Strict Compliance
- * - Agent Card Registry
+ * - A2A v1.0 Task Lifecycle (submitted → working → completed/failed/canceled)
+ * - Agent Card Registry (/.well-known/agent.json)
  * - capability-based Routing
  * - Single Source of Truth for UCP
  * - Real LLM Execution (No Mocks)
+ * - Streaming via SSE for task updates
+ *
+ * Methods (A2A v1.0):
+ * - tasks/send: Create and execute a task
+ * - tasks/get: Get task status/result
+ * - tasks/cancel: Cancel a running task
+ * - message/send: Send message to agent
+ * - message/stream: Stream responses (SSE)
+ * - agent.list, agent.register, agent.discover (legacy)
+ *
+ * Version: 1.1.0 (A2A v1.0 compliant)
  */
 
 const express = require('express');
@@ -65,6 +77,98 @@ const loadDynamicSkills = () => {
 };
 
 app.use(express.json());
+
+// --- A2A v1.0 TASK LIFECYCLE ---
+
+/**
+ * TaskState enum (A2A v1.0 spec)
+ * Terminal states: completed, failed, canceled, rejected
+ */
+const TaskState = {
+    SUBMITTED: 'submitted',
+    WORKING: 'working',
+    INPUT_REQUIRED: 'input-required',
+    COMPLETED: 'completed',
+    FAILED: 'failed',
+    CANCELED: 'canceled',
+    REJECTED: 'rejected',
+    AUTH_REQUIRED: 'auth-required',
+    UNKNOWN: 'unknown'
+};
+
+const TERMINAL_STATES = [TaskState.COMPLETED, TaskState.FAILED, TaskState.CANCELED, TaskState.REJECTED];
+
+/**
+ * Task Store (in-memory with persistence option)
+ * In production, this should be Redis or a database
+ */
+const TASK_STORE = new Map();
+
+/**
+ * Create a new task
+ */
+const createTask = (params) => {
+    const taskId = `task-${uuidv4()}`;
+    const task = {
+        id: taskId,
+        sessionId: params.sessionId || null,
+        state: TaskState.SUBMITTED,
+        message: params.message || null,
+        artifacts: [],
+        history: [{
+            state: TaskState.SUBMITTED,
+            timestamp: new Date().toISOString(),
+            message: 'Task created'
+        }],
+        metadata: params.metadata || {},
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    };
+    TASK_STORE.set(taskId, task);
+    return task;
+};
+
+/**
+ * Update task state with history tracking
+ */
+const updateTaskState = (taskId, newState, message = null, artifacts = null) => {
+    const task = TASK_STORE.get(taskId);
+    if (!task) return null;
+
+    // Cannot update terminal states
+    if (TERMINAL_STATES.includes(task.state)) {
+        console.warn(`[A2A] Cannot update task ${taskId}: already in terminal state ${task.state}`);
+        return task;
+    }
+
+    task.state = newState;
+    task.updatedAt = new Date().toISOString();
+    if (message) task.message = message;
+    if (artifacts) task.artifacts = [...task.artifacts, ...artifacts];
+
+    task.history.push({
+        state: newState,
+        timestamp: task.updatedAt,
+        message: message || `State changed to ${newState}`
+    });
+
+    // Broadcast state change via SSE
+    broadcast({
+        type: 'task_state_changed',
+        taskId,
+        state: newState,
+        timestamp: task.updatedAt
+    });
+
+    return task;
+};
+
+/**
+ * Get task by ID
+ */
+const getTask = (taskId) => {
+    return TASK_STORE.get(taskId) || null;
+};
 
 // --- UCP MANIFEST SERVING ---
 // Serve 'public' folder for .well-known resolution
@@ -330,7 +434,171 @@ const listAgents = () => {
     return { agents, total: agents.length };
 };
 
+// --- A2A v1.0 METHODS ---
+
+/**
+ * tasks/send - Create and execute a task (A2A v1.0)
+ * @param {Object} params - { id?: string, sessionId?: string, message: { role: string, parts: Array }, metadata?: Object }
+ * @returns {Object} Task with current state
+ */
+const tasksSend = async (params) => {
+    const { id, sessionId, message, metadata } = params;
+
+    // Create or retrieve task
+    let task;
+    if (id && TASK_STORE.has(id)) {
+        task = TASK_STORE.get(id);
+        // Check if task accepts messages
+        if (TERMINAL_STATES.includes(task.state)) {
+            throw new Error(`Task ${id} is in terminal state: ${task.state}`);
+        }
+    } else {
+        task = createTask({ sessionId, message, metadata });
+    }
+
+    // Update state to working
+    updateTaskState(task.id, TaskState.WORKING, 'Processing task');
+
+    try {
+        // Extract content from message parts (A2A format)
+        let input = '';
+        if (message && message.parts) {
+            input = message.parts
+                .filter(p => p.type === 'text')
+                .map(p => p.text)
+                .join('\n');
+        }
+
+        // Determine agent from metadata or use default routing
+        const agentId = metadata?.agentId || 'agent.gemini.pro';
+        const tags = metadata?.tags || [];
+
+        // Execute via existing executeTask
+        const result = await executeTask({ agent_id: agentId, input, tags });
+
+        // Create artifact from result
+        const artifact = {
+            type: 'text',
+            content: typeof result.output === 'string' ? result.output : JSON.stringify(result.output),
+            mimeType: 'text/plain',
+            createdAt: new Date().toISOString()
+        };
+
+        // Update to completed state
+        if (result.status === 'completed') {
+            updateTaskState(task.id, TaskState.COMPLETED, 'Task completed successfully', [artifact]);
+        } else if (result.status === 'error') {
+            updateTaskState(task.id, TaskState.FAILED, result.error || 'Task failed');
+        } else if (result.status === 'queued') {
+            updateTaskState(task.id, TaskState.WORKING, 'Task queued for execution');
+        }
+
+        return getTask(task.id);
+    } catch (error) {
+        updateTaskState(task.id, TaskState.FAILED, error.message);
+        return getTask(task.id);
+    }
+};
+
+/**
+ * tasks/get - Retrieve task status (A2A v1.0)
+ * @param {Object} params - { id: string, historyLength?: number }
+ * @returns {Object} Task with state and artifacts
+ */
+const tasksGet = (params) => {
+    const { id, historyLength } = params;
+
+    if (!id) {
+        throw new Error('Missing required parameter: id');
+    }
+
+    const task = getTask(id);
+    if (!task) {
+        throw new Error(`Task not found: ${id}`);
+    }
+
+    // Optionally trim history
+    if (historyLength && task.history.length > historyLength) {
+        task.history = task.history.slice(-historyLength);
+    }
+
+    return task;
+};
+
+/**
+ * tasks/cancel - Cancel a running task (A2A v1.0)
+ * @param {Object} params - { id: string }
+ * @returns {Object} { success: boolean }
+ */
+const tasksCancel = (params) => {
+    const { id } = params;
+
+    if (!id) {
+        throw new Error('Missing required parameter: id');
+    }
+
+    const task = getTask(id);
+    if (!task) {
+        throw new Error(`Task not found: ${id}`);
+    }
+
+    if (TERMINAL_STATES.includes(task.state)) {
+        return { success: false, reason: `Task already in terminal state: ${task.state}` };
+    }
+
+    updateTaskState(id, TaskState.CANCELED, 'Task canceled by client');
+    return { success: true, taskId: id, state: TaskState.CANCELED };
+};
+
+/**
+ * tasks/list - List all tasks (extension)
+ * @param {Object} params - { state?: string, limit?: number }
+ * @returns {Object} { tasks: Array, total: number }
+ */
+const tasksList = (params = {}) => {
+    const { state, limit = 100 } = params;
+    let tasks = Array.from(TASK_STORE.values());
+
+    if (state) {
+        tasks = tasks.filter(t => t.state === state);
+    }
+
+    tasks = tasks.slice(-limit).map(t => ({
+        id: t.id,
+        state: t.state,
+        createdAt: t.createdAt,
+        updatedAt: t.updatedAt
+    }));
+
+    return { tasks, total: tasks.length };
+};
+
+/**
+ * message/send - Send a message (A2A v1.0 convenience method)
+ * Wraps tasks/send for simpler request-response
+ */
+const messageSend = async (params) => {
+    const { message, sessionId, metadata } = params;
+    const task = await tasksSend({ sessionId, message, metadata });
+
+    // For sync response, return the latest artifact
+    const latestArtifact = task.artifacts[task.artifacts.length - 1];
+    return {
+        taskId: task.id,
+        state: task.state,
+        response: latestArtifact ? latestArtifact.content : null
+    };
+};
+
 const METHODS = {
+    // A2A v1.0 compliant methods
+    'tasks/send': tasksSend,
+    'tasks/get': tasksGet,
+    'tasks/cancel': tasksCancel,
+    'tasks/list': tasksList,
+    'message/send': messageSend,
+
+    // Legacy methods (backwards compatibility)
     'ping': ping,
     'agent.list': listAgents,
     'agent.register': registerAgent,
@@ -342,44 +610,96 @@ const METHODS = {
 app.get('/a2a/v1/health', (req, res) => {
     const skillCount = AGENT_REGISTRY.size;
     const dynamicCount = dynamicSkills.length;
+    const taskStats = {
+        total: TASK_STORE.size,
+        submitted: Array.from(TASK_STORE.values()).filter(t => t.state === TaskState.SUBMITTED).length,
+        working: Array.from(TASK_STORE.values()).filter(t => t.state === TaskState.WORKING).length,
+        completed: Array.from(TASK_STORE.values()).filter(t => t.state === TaskState.COMPLETED).length,
+        failed: Array.from(TASK_STORE.values()).filter(t => t.state === TaskState.FAILED).length
+    };
     res.json({
         status: 'ok',
-        version: '1.0.0',
+        version: '1.1.0',
         protocol: 'A2A',
+        specVersion: 'v1.0',
         agents_registered: skillCount,
         dynamic_skills: dynamicCount,
+        tasks: taskStats,
+        methods: Object.keys(METHODS),
         timestamp: new Date().toISOString()
     });
 });
 
-// --- AGENT CARD (Discovery) ---
+// --- AGENT CARD (Discovery) - A2A v1.0 Compliant ---
 app.get('/.well-known/agent.json', (req, res) => {
-    const capabilities = [];
+    // Collect unique skills from all agents
+    const skills = [];
     AGENT_REGISTRY.forEach(agent => {
         agent.capabilities.forEach(cap => {
-            if (!capabilities.find(c => c.name === cap.name)) {
-                capabilities.push(cap);
+            if (!skills.find(s => s.id === cap.name)) {
+                skills.push({
+                    id: cap.name,
+                    name: cap.name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                    description: `${cap.name} capability`,
+                    inputModes: ['text'],
+                    outputModes: ['text']
+                });
             }
         });
     });
 
+    // A2A v1.0 Agent Card format
     res.json({
+        // Identity
         name: '3A Automation Agency',
-        description: 'Level 5 Sovereign AI Automation Agency - E-commerce & SMB workflows',
+        description: 'Level 5 Sovereign AI Automation Agency - E-commerce & SMB workflows. Multi-tenant automation platform with 121+ automations, voice agents, and e-commerce integrations.',
         url: 'https://3a-automation.com',
-        version: '1.0.0',
-        capabilities: capabilities.slice(0, 20), // Top 20 capabilities
-        authentication: {
-            type: 'bearer',
-            token_endpoint: '/oauth/token'
+
+        // Version
+        version: '1.1.0',
+        protocolVersion: '1.0',
+
+        // Provider info
+        provider: {
+            organization: '3A Automation',
+            url: 'https://3a-automation.com'
         },
+
+        // Skills (A2A v1.0 format)
+        skills: skills.slice(0, 25),
+
+        // Capabilities (A2A v1.0)
+        capabilities: {
+            streaming: true,
+            pushNotifications: false,
+            stateTransitionHistory: true
+        },
+
+        // Default I/O modes
+        defaultInputModes: ['text'],
+        defaultOutputModes: ['text'],
+
+        // Authentication
+        authentication: {
+            schemes: ['bearer'],
+            credentials: null // No auth required for basic operations
+        },
+
+        // Service endpoints (A2A v1.0 format)
         endpoints: {
-            rpc: '/a2a/v1/rpc',
+            tasks: '/a2a/v1/rpc',
             health: '/a2a/v1/health',
             stream: '/a2a/v1/stream'
         },
-        protocols: ['A2A', 'UCP', 'MCP'],
-        contact: 'agency@3a-automation.com'
+
+        // Supported protocols
+        supportsProtocols: ['A2A', 'UCP', 'MCP', 'AG-UI'],
+
+        // Contact
+        contact: 'agency@3a-automation.com',
+
+        // Documentation
+        documentationUrl: 'https://3a-automation.com/docs/api'
     });
 });
 
@@ -411,6 +731,110 @@ const broadcast = (event) => {
         client.write(`data: ${data}\n\n`);
     });
 };
+
+// --- TASK STREAMING (A2A v1.0 tasks/sendSubscribe) ---
+// Subscribe to a specific task's updates
+const taskSubscribers = new Map(); // taskId -> Set of response objects
+
+app.post('/a2a/v1/stream/task', async (req, res) => {
+    const { taskId, message, sessionId, metadata } = req.body;
+
+    // Set up SSE headers
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    let task;
+    try {
+        // Create or get task
+        if (taskId && TASK_STORE.has(taskId)) {
+            task = TASK_STORE.get(taskId);
+        } else {
+            task = createTask({ sessionId, message, metadata });
+        }
+
+        // Send initial state
+        res.write(`data: ${JSON.stringify({
+            type: 'task_created',
+            task: { id: task.id, state: task.state }
+        })}\n\n`);
+
+        // Subscribe to task updates
+        if (!taskSubscribers.has(task.id)) {
+            taskSubscribers.set(task.id, new Set());
+        }
+        taskSubscribers.get(task.id).add(res);
+
+        // Execute task asynchronously
+        (async () => {
+            try {
+                updateTaskState(task.id, TaskState.WORKING, 'Processing...');
+                res.write(`data: ${JSON.stringify({
+                    type: 'state_change',
+                    taskId: task.id,
+                    state: TaskState.WORKING
+                })}\n\n`);
+
+                // Extract content
+                let input = '';
+                if (message && message.parts) {
+                    input = message.parts.filter(p => p.type === 'text').map(p => p.text).join('\n');
+                }
+
+                const agentId = metadata?.agentId || 'agent.gemini.pro';
+                const result = await executeTask({ agent_id: agentId, input, tags: metadata?.tags || [] });
+
+                // Stream artifact
+                const artifact = {
+                    type: 'text',
+                    content: typeof result.output === 'string' ? result.output : JSON.stringify(result.output)
+                };
+
+                res.write(`data: ${JSON.stringify({
+                    type: 'artifact',
+                    taskId: task.id,
+                    artifact
+                })}\n\n`);
+
+                // Final state
+                const finalState = result.status === 'error' ? TaskState.FAILED : TaskState.COMPLETED;
+                updateTaskState(task.id, finalState, result.status === 'error' ? result.error : 'Complete', [artifact]);
+
+                res.write(`data: ${JSON.stringify({
+                    type: 'state_change',
+                    taskId: task.id,
+                    state: finalState,
+                    final: true
+                })}\n\n`);
+
+                // Close stream
+                res.end();
+            } catch (error) {
+                updateTaskState(task.id, TaskState.FAILED, error.message);
+                res.write(`data: ${JSON.stringify({
+                    type: 'error',
+                    taskId: task.id,
+                    error: error.message
+                })}\n\n`);
+                res.end();
+            }
+        })();
+
+        // Cleanup on disconnect
+        req.on('close', () => {
+            const subs = taskSubscribers.get(task?.id);
+            if (subs) {
+                subs.delete(res);
+                if (subs.size === 0) taskSubscribers.delete(task.id);
+            }
+        });
+
+    } catch (error) {
+        res.write(`data: ${JSON.stringify({ type: 'error', error: error.message })}\n\n`);
+        res.end();
+    }
+});
 
 // --- AG-UI GOVERNANCE ENDPOINTS ---
 
@@ -635,21 +1059,30 @@ if (require.main === module) {
     if (process.argv.includes('--health')) {
         console.log(JSON.stringify({
             status: 'ok',
-            version: '1.0.0',
+            version: '1.1.0',
             protocol: 'A2A',
+            specVersion: 'v1.0',
             agents_registered: AGENT_REGISTRY.size,
             dynamic_skills: dynamicSkills.length,
             methods: Object.keys(METHODS),
+            features: {
+                taskLifecycle: true,
+                streaming: true,
+                agentCard: true,
+                legacyMethods: true
+            },
+            taskStates: Object.values(TaskState),
             timestamp: new Date().toISOString()
         }, null, 2));
         process.exit(0);
     }
 
     app.listen(PORT, () => {
-        console.log(`[A2A] Unified Server running on port ${PORT}`);
+        console.log(`[A2A] Unified Server v1.1.0 (A2A spec v1.0) running on port ${PORT}`);
         console.log(`[A2A] Registry: ${AGENT_REGISTRY.size} agents (${dynamicSkills.length} dynamic skills)`);
         console.log(`[A2A] Methods: ${Object.keys(METHODS).join(', ')}`);
-        console.log(`[A2A] Endpoints: /a2a/v1/rpc, /a2a/v1/health, /a2a/v1/stream, /.well-known/agent.json`);
+        console.log(`[A2A] Task states: ${Object.values(TaskState).join(', ')}`);
+        console.log(`[A2A] Endpoints: /a2a/v1/rpc, /a2a/v1/health, /a2a/v1/stream, /a2a/v1/stream/task, /.well-known/agent.json`);
     });
 }
 

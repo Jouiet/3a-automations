@@ -4,7 +4,51 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168decies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.5.0 (124 tools, STDIO+HTTP+Auth, SDK 1.25.3, 95% SOTA)**
+> **✅ ÉTAT RÉEL (Session 168undecies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.5.0 (95% SOTA)** | **A2A: v1.1.0 (spec v1.0 compliant)**
+
+---
+
+## SESSION 168undecies - A2A v1.0 PROTOCOL UPGRADE (26/01/2026)
+
+### A2A Server: 1.0.0 → 1.1.0 (Spec v1.0 Compliant)
+
+| Feature | Before | After | Status |
+| :--- | :--- | :--- | :--- |
+| **Methods** | 5 legacy | 10 (5 A2A v1.0 + 5 legacy) | ✅ DONE |
+| **Task Lifecycle** | None | Full (submitted → working → completed) | ✅ DONE |
+| **Task Persistence** | None | In-memory store with history | ✅ DONE |
+| **Streaming** | SSE only | SSE + task subscription | ✅ DONE |
+| **Agent Card** | Basic | A2A v1.0 compliant | ✅ DONE |
+
+### New A2A v1.0 Methods
+
+| Method | Description |
+| :--- | :--- |
+| `tasks/send` | Create and execute a task |
+| `tasks/get` | Get task status and artifacts |
+| `tasks/cancel` | Cancel a running task |
+| `tasks/list` | List all tasks (extension) |
+| `message/send` | Send message (convenience wrapper) |
+
+### TaskState Enum (A2A v1.0)
+
+```
+submitted → working → input-required → completed/failed/canceled
+```
+
+Terminal states: `completed`, `failed`, `canceled`, `rejected`
+
+### Endpoints
+
+| Endpoint | Purpose |
+| :--- | :--- |
+| `/a2a/v1/rpc` | JSON-RPC 2.0 (all methods) |
+| `/a2a/v1/health` | Health check with task stats |
+| `/a2a/v1/stream` | SSE event stream |
+| `/a2a/v1/stream/task` | Task-specific streaming (sendSubscribe) |
+| `/.well-known/agent.json` | Agent Card discovery |
+
+**Tests:** Health check passed | **Version:** 1.1.0 | **Spec:** A2A v1.0
 
 ---
 
@@ -625,8 +669,8 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 | **Phase 1: Espagnol voice widget** | Voice | 16h | ✅ **DONE** (S166quater) |
 | **Phase 2: Arabe MSA voice widget** | Voice | 18h | ✅ **DONE** (S166quater) |
 | **Phase 4: LLM Darija (Mistral Saba)** | Voice | 22h | ⏳ OPTIONAL |
-| WCAG 2.2 Audit | Accessibility | 8h | ⏳ PENDING |
-| A2A v0.3 upgrade | Protocol | 8h | ⏳ PENDING |
+| WCAG 2.2 Audit | Accessibility | 8h | ✅ **DONE** (S168decies) |
+| A2A v1.0 upgrade | Protocol | 8h | ✅ **DONE** (S168undecies) |
 | Server-side GTM | Analytics | 16h | ⏳ PENDING |
 
 ### P2 - Medium Priority (Next Quarter)

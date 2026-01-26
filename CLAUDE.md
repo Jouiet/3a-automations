@@ -1,10 +1,57 @@
 # 3A Automation
-> Version: 117.0 | 26/01/2026 | Session 168decies - Bearer Token Auth (95% SOTA)
+> Version: 118.0 | 26/01/2026 | Session 168undecies - A2A v1.0 Protocol Upgrade
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168undecies - A2A v1.0 PROTOCOL UPGRADE (26/01/2026)
+
+### A2A Server: 1.0.0 → 1.1.0 (Spec v1.0 Compliant)
+
+| Feature | Implementation | Status |
+| :--- | :--- | :--- |
+| **A2A v1.0 Methods** | tasks/send, tasks/get, tasks/cancel, message/send | ✅ DONE |
+| **Task Lifecycle** | submitted → working → completed/failed/canceled | ✅ DONE |
+| **Task Persistence** | In-memory store with history tracking | ✅ DONE |
+| **Task Streaming** | SSE endpoint for task subscriptions | ✅ DONE |
+| **Agent Card v1.0** | Skills, capabilities, provider fields | ✅ DONE |
+| **Legacy Methods** | agent.list, agent.execute preserved | ✅ DONE |
+
+### TaskState Enum
+
+```
+submitted → working → input-required → completed/failed/canceled
+Terminal: completed, failed, canceled, rejected
+```
+
+### Methods (10 total)
+
+| Method | Description |
+| :--- | :--- |
+| `tasks/send` | Create and execute task |
+| `tasks/get` | Get task status/artifacts |
+| `tasks/cancel` | Cancel running task |
+| `tasks/list` | List all tasks |
+| `message/send` | Convenience message wrapper |
+| `ping` | Health ping |
+| `agent.list` | List all agents |
+| `agent.register` | Register new agent |
+| `agent.discover` | Find by capability |
+| `agent.execute` | Execute task (legacy) |
+
+### Endpoints
+
+| Endpoint | Purpose |
+| :--- | :--- |
+| `/a2a/v1/rpc` | JSON-RPC 2.0 |
+| `/a2a/v1/health` | Health + task stats |
+| `/a2a/v1/stream` | SSE broadcast |
+| `/a2a/v1/stream/task` | Task-specific SSE |
+| `/.well-known/agent.json` | Agent Card |
 
 ---
 
