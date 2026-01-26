@@ -6,7 +6,8 @@
  * Provides AI responses for the voice widget with automatic failover
  * + Lead qualification with scoring and CRM sync
  *
- * Fallback chain: Grok → OpenAI → Gemini → Claude → Local patterns
+ * Fallback chain: Grok → Gemini → Claude → Local patterns
+ * Strategy: REAL-TIME task - Grok first for low latency (Session 168terdecies)
  * Lead scoring: 0-100 based on budget, timeline, decision maker, fit
  *
  * Benchmark: +70% conversion, -95% qualification time
@@ -63,10 +64,11 @@ function loadEnv() {
 
 const ENV = loadEnv();
 
-// TEXT GENERATION PROVIDERS - Verified January 2026
+// TEXT GENERATION PROVIDERS - Session 168terdecies: REAL-TIME TASK (Grok first)
 // Purpose: Generate TEXT responses for voice assistant (NOT audio generation)
 // Audio is handled by browser Web Speech API (free, built-in)
-// Fallback order: Grok → OpenAI → Gemini → Anthropic → Local patterns
+// Strategy: Voice responses require low latency → Grok optimized for real-time
+// Fallback order: Grok → Gemini → Claude → Local patterns
 const PROVIDERS = {
   grok: {
     name: 'Grok 4.1 Fast Reasoning',
@@ -76,14 +78,6 @@ const PROVIDERS = {
     apiKey: ENV.XAI_API_KEY,
     enabled: !!ENV.XAI_API_KEY,
   },
-  openai: {
-    name: 'OpenAI GPT-5.2',
-    // gpt-5.2: market leader 68-82% share (Jan 2026)
-    url: 'https://api.openai.com/v1/chat/completions',
-    model: 'gpt-5.2',
-    apiKey: ENV.OPENAI_API_KEY,
-    enabled: !!ENV.OPENAI_API_KEY,
-  },
   gemini: {
     name: 'Gemini 3 Flash',
     // gemini-3-flash-preview: latest frontier model (Jan 2026)
@@ -92,10 +86,10 @@ const PROVIDERS = {
     enabled: !!ENV.GEMINI_API_KEY,
   },
   anthropic: {
-    name: 'Claude Sonnet 4',
-    // claude-sonnet-4: high-quality text generation (Dec 2025)
+    name: 'Claude Opus 4.5',
+    // claude-opus-4-5: best quality for fallback (Nov 2025)
     url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-opus-4-5-20251101',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY,
   },
@@ -1288,7 +1282,7 @@ Usage:
   node voice-api-resilient.cjs --health
 
 Fallback chain:
-  Grok 4.1 → OpenAI GPT-5.2 → Gemini 3 → Claude Sonnet 4 → Local patterns
+  Grok 4.1 → Gemini 3 → Claude Opus 4.5 → Local patterns
 
 Lead Qualification:
   - Auto-extracts: budget, timeline, decision maker, industry, contact info

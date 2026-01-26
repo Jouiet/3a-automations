@@ -4,7 +4,7 @@
  * 3A Automation - Session 115
  *
  * FEATURES:
- *   - AI Generation: Anthropic → OpenAI → Grok → Gemini (fallback chain)
+ *   - AI Generation: Gemini → Grok → Claude (VOLUME task - Session 168terdecies)
  *   - WordPress Publishing (optional)
  *   - Facebook Page Distribution (optional)
  *   - LinkedIn Distribution (optional)
@@ -117,20 +117,16 @@ function loadEnv() {
 
 const ENV = loadEnv();
 
+// AI PROVIDERS - Session 168terdecies: VOLUME TASK (Gemini first for cost optimization)
+// Strategy: Content generation = high volume → optimize cost, quality fallback
+// Fallback: Gemini → Grok → Claude
 const PROVIDERS = {
-  anthropic: {
-    name: 'Anthropic Claude',
-    url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-sonnet-4-20250514',
-    apiKey: ENV.ANTHROPIC_API_KEY,
-    enabled: !!ENV.ANTHROPIC_API_KEY,
-  },
-  openai: {
-    name: 'OpenAI GPT-5.2',
-    url: 'https://api.openai.com/v1/chat/completions',
-    model: 'gpt-5.2',
-    apiKey: ENV.OPENAI_API_KEY,
-    enabled: !!ENV.OPENAI_API_KEY,
+  gemini: {
+    name: 'Google Gemini 3',
+    // gemini-3-flash-preview: latest frontier model (Jan 2026)
+    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
+    apiKey: ENV.GEMINI_API_KEY,
+    enabled: !!ENV.GEMINI_API_KEY,
   },
   grok: {
     name: 'Grok 4.1 Fast Reasoning',
@@ -139,12 +135,12 @@ const PROVIDERS = {
     apiKey: ENV.XAI_API_KEY,
     enabled: !!ENV.XAI_API_KEY,
   },
-  gemini: {
-    name: 'Google Gemini 3',
-    // gemini-3-flash-preview: latest frontier model (Jan 2026)
-    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
-    apiKey: ENV.GEMINI_API_KEY,
-    enabled: !!ENV.GEMINI_API_KEY,
+  anthropic: {
+    name: 'Claude Opus 4.5',
+    url: 'https://api.anthropic.com/v1/messages',
+    model: 'claude-opus-4-5-20251101',
+    apiKey: ENV.ANTHROPIC_API_KEY,
+    enabled: !!ENV.ANTHROPIC_API_KEY,
   },
 };
 

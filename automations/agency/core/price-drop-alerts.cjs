@@ -70,7 +70,7 @@ const CONFIG = {
     claude: {
       apiKey: process.env.ANTHROPIC_API_KEY,
       endpoint: 'https://api.anthropic.com/v1/messages',
-      model: 'claude-sonnet-4-20250514' // FRONTIER MODEL
+      model: 'claude-opus-4-5-20251101' // FRONTIER MODEL
     }
   },
 
@@ -502,7 +502,7 @@ async function generateWithClaude(prompt, systemPrompt) {
 
   return {
     content: data.content[0].text,
-    provider: 'Claude Sonnet 4'
+    provider: 'Claude Opus 4.5'
   };
 }
 
@@ -929,7 +929,7 @@ async function healthCheck() {
       'Grok 4.1': CONFIG.ai.grok.apiKey ? '✅ Configured' : '❌ Missing',
       'OpenAI GPT-5.2': CONFIG.ai.openai.apiKey ? '✅ Configured' : '❌ Missing',
       'Gemini 3': CONFIG.ai.gemini.apiKey ? '✅ Configured' : '❌ Missing',
-      'Claude Sonnet 4': CONFIG.ai.claude.apiKey ? '✅ Configured' : '❌ Missing'
+      'Claude Opus 4.5': CONFIG.ai.claude.apiKey ? '✅ Configured' : '❌ Missing'
     },
     email: {
       'Klaviyo': CONFIG.email.klaviyo.apiKey ? '✅ Configured' : '⚠️ Not configured',

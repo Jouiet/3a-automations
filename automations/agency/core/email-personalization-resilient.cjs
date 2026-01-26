@@ -83,10 +83,18 @@ function loadEnv() {
 
 const ENV = loadEnv();
 
-// TEXT GENERATION PROVIDERS - Verified January 2026
+// TEXT GENERATION PROVIDERS - Session 168terdecies: VOLUME TASK (Gemini first)
 // Purpose: Generate personalized email content
-// Fallback order: Grok → OpenAI → Gemini → Anthropic → Static templates
+// Strategy: Email generation = high volume → optimize cost, quality fallback
+// Fallback order: Gemini → Grok → Claude → Static templates
 const PROVIDERS = {
+  gemini: {
+    name: 'Gemini 3 Flash',
+    // gemini-3-flash-preview: latest frontier model (Jan 2026)
+    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
+    apiKey: ENV.GEMINI_API_KEY,
+    enabled: !!ENV.GEMINI_API_KEY,
+  },
   grok: {
     name: 'Grok 4.1 Fast Reasoning',
     // grok-4-1-fast-reasoning: FRONTIER model with reasoning (Jan 2026)
@@ -95,26 +103,11 @@ const PROVIDERS = {
     apiKey: ENV.XAI_API_KEY,
     enabled: !!ENV.XAI_API_KEY,
   },
-  openai: {
-    name: 'OpenAI GPT-5.2',
-    // gpt-5.2: market leader 68-82% share (Jan 2026)
-    url: 'https://api.openai.com/v1/chat/completions',
-    model: 'gpt-5.2',
-    apiKey: ENV.OPENAI_API_KEY,
-    enabled: !!ENV.OPENAI_API_KEY,
-  },
-  gemini: {
-    name: 'Gemini 3 Flash',
-    // gemini-3-flash-preview: latest frontier model (Jan 2026)
-    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
-    apiKey: ENV.GEMINI_API_KEY,
-    enabled: !!ENV.GEMINI_API_KEY,
-  },
   anthropic: {
-    name: 'Claude Sonnet 4',
-    // claude-sonnet-4: high-quality text generation (Dec 2025)
+    name: 'Claude Opus 4.5',
+    // claude-opus-4-5: best quality for fallback (Nov 2025)
     url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-opus-4-5-20251101',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY,
   },

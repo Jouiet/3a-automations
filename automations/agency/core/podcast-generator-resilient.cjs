@@ -82,23 +82,16 @@ const ENV = loadEnv();
 // AI PROVIDERS FOR SCRIPT GENERATION
 // ─────────────────────────────────────────────────────────────────────────────
 
-// AI PROVIDERS - Verified January 2026
-// Fallback order: Anthropic → OpenAI → Grok → Gemini
+// AI PROVIDERS - Session 168terdecies: VOLUME TASK (Gemini first for cost optimization)
+// Strategy: Podcast script generation = content volume → optimize cost, quality fallback
+// Fallback order: Gemini → Grok → Claude
 const AI_PROVIDERS = {
-  anthropic: {
-    name: 'Anthropic Claude',
-    url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-sonnet-4-20250514',
-    apiKey: ENV.ANTHROPIC_API_KEY,
-    enabled: !!ENV.ANTHROPIC_API_KEY,
-  },
-  openai: {
-    name: 'OpenAI GPT-5.2',
-    // gpt-5.2: market leader 68-82% share (Jan 2026)
-    url: 'https://api.openai.com/v1/chat/completions',
-    model: 'gpt-5.2',
-    apiKey: ENV.OPENAI_API_KEY,
-    enabled: !!ENV.OPENAI_API_KEY,
+  gemini: {
+    name: 'Google Gemini 3',
+    // gemini-3-flash-preview: latest frontier model (Jan 2026)
+    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
+    apiKey: ENV.GEMINI_API_KEY,
+    enabled: !!ENV.GEMINI_API_KEY,
   },
   grok: {
     name: 'xAI Grok',
@@ -107,12 +100,12 @@ const AI_PROVIDERS = {
     apiKey: ENV.XAI_API_KEY,
     enabled: !!ENV.XAI_API_KEY,
   },
-  gemini: {
-    name: 'Google Gemini 3',
-    // gemini-3-flash-preview: latest frontier model (Jan 2026)
-    url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent',
-    apiKey: ENV.GEMINI_API_KEY,
-    enabled: !!ENV.GEMINI_API_KEY,
+  anthropic: {
+    name: 'Claude Opus 4.5',
+    url: 'https://api.anthropic.com/v1/messages',
+    model: 'claude-opus-4-5-20251101',
+    apiKey: ENV.ANTHROPIC_API_KEY,
+    enabled: !!ENV.ANTHROPIC_API_KEY,
   },
 };
 

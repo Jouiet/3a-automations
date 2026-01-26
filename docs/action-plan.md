@@ -4,7 +4,28 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168duodecies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0 (95% SOTA)** | **A2A: v1.1.0** | **AI Strategy: Segmenté par criticité**
+> **✅ ÉTAT RÉEL (Session 168terdecies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0 (95% SOTA)** | **A2A: v1.1.0** | **AI Strategy: Fallback chains DONE**
+
+---
+
+## SESSION 168terdecies - FALLBACK CHAINS IMPLEMENTATION (26/01/2026)
+
+### P1 DONE: Fallback Chains Inversés ✅
+
+| Script | Type | Nouveau Primary | Fallback |
+| :--- | :--- | :--- | :--- |
+| **churn-prediction** | CRITICAL | Claude Opus 4.5 | Grok → Gemini |
+| **blog-generator** | VOLUME | Gemini Flash | Grok → Claude |
+| **email-personalization** | VOLUME | Gemini Flash | Grok → Claude |
+| **podcast-generator** | VOLUME | Gemini Flash | Grok → Claude |
+| **voice-api** | REAL-TIME | Grok | Gemini → Claude |
+
+### Logique Opus 4.5 pour Churn
+
+Utilisation de `claude-opus-4-5-20251101` pour churn prediction car:
+- Décision financière critique (LTV €300+ en jeu)
+- Coût erreur >> Coût API
+- Meilleur modèle = moins de faux positifs
 
 ---
 
@@ -25,9 +46,9 @@
 
 | Type Tâche | Primary | Fallback | Justification |
 | :--- | :--- | :--- | :--- |
-| **CRITIQUE** (churn, scoring) | Claude | Grok → Gemini | Coût erreur > coût API |
+| **CRITIQUE** (churn, scoring) | Claude Opus 4.5 | Grok → Gemini | Coût erreur > coût API |
 | **VOLUME** (content, emails) | Gemini | Grok → Claude | Optimisation coûts |
-| **REAL-TIME** (voice) | Grok | ElevenLabs | Spécialisation |
+| **REAL-TIME** (voice) | Grok | Gemini → Claude | Latence < 300ms |
 
 ### Documentation Créée
 
@@ -36,13 +57,13 @@
 | `docs/AI-PROVIDER-STRATEGY.md` | ~350 | Stratégie complète, matrice task→provider |
 | `docs/business-model.md` | màj | Section AI segmenté |
 
-### Alignement Vérifié (9/10)
+### Alignement Vérifié (10/10)
 
 - ✅ Business model payant (pas ad-supported)
 - ✅ Focus vertical (121 automations spécialisées)
 - ✅ Small team leverage (Claude Code)
 - ✅ HITL = Firefighter model
-- ⚠️ Fallback chain à inverser pour scripts critiques
+- ✅ Fallback chains inversés (S168terdecies)
 - ⚠️ Messaging à repositionner "Architectes stratégiques"
 
 ---

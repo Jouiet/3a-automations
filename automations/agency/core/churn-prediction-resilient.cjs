@@ -4,7 +4,8 @@
  * Session 127bis - 03/01/2026
  *
  * RFM-based churn prediction with AI enhancement
- * Multi-provider fallback: Grok → OpenAI → Gemini → Claude → Rule-based
+ * Multi-provider fallback: Claude → Grok → Gemini (CRITICAL task - Session 168duodecies)
+ * Strategy: Cost of error > Cost of API for financial decisions
  *
  * Benchmark: -25% churn rate (industry standard)
  *
@@ -166,10 +167,20 @@ const CONFIG = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// AI PROVIDERS (Session 120: OpenAI GPT-5.2 added)
+// AI PROVIDERS - Session 168terdecies: CRITICAL TASK (Claude first)
+// Strategy: Churn prediction = financial decision → cost of error > cost of API
+// Fallback: Claude → Grok → Gemini
 // ─────────────────────────────────────────────────────────────────────────────
 
 const PROVIDERS = {
+  anthropic: {
+    name: 'Claude Opus 4.5',
+    // CRITICAL TASK: Use best model - cost of wrong churn prediction > API cost
+    enabled: !!process.env.ANTHROPIC_API_KEY,
+    model: 'claude-opus-4-5-20251101',
+    endpoint: 'https://api.anthropic.com/v1/messages',
+    apiKey: process.env.ANTHROPIC_API_KEY
+  },
   grok: {
     name: 'Grok 4.1 Fast Reasoning',
     enabled: !!process.env.XAI_API_KEY,
@@ -177,26 +188,12 @@ const PROVIDERS = {
     endpoint: 'https://api.x.ai/v1/chat/completions',
     apiKey: process.env.XAI_API_KEY
   },
-  openai: {
-    name: 'OpenAI GPT-5.2',
-    enabled: !!process.env.OPENAI_API_KEY,
-    model: 'gpt-5.2',
-    endpoint: 'https://api.openai.com/v1/chat/completions',
-    apiKey: process.env.OPENAI_API_KEY
-  },
   gemini: {
     name: 'Gemini 3 Flash',
     enabled: !!process.env.GEMINI_API_KEY,
     model: 'gemini-3-flash-preview',
     endpoint: `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${process.env.GEMINI_API_KEY}`,
     apiKey: process.env.GEMINI_API_KEY
-  },
-  anthropic: {
-    name: 'Claude Sonnet 4',
-    enabled: !!process.env.ANTHROPIC_API_KEY,
-    model: 'claude-sonnet-4-20250514',
-    endpoint: 'https://api.anthropic.com/v1/messages',
-    apiKey: process.env.ANTHROPIC_API_KEY
   }
 };
 

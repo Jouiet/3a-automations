@@ -76,8 +76,8 @@ class LLMGateway {
 
     /**
      * FRONTIER FALDOWN PROTOCOL (Resilient Chain) - Updated 26/01/2026
-     * Models: Claude Sonnet 4 -> GPT-5.2 -> Grok 4.1 -> Gemini 3 Flash
-     * IDs: claude-sonnet-4-20250514, gpt-5.2, grok-4-1-fast-reasoning, gemini-3-flash-preview
+     * Models: Claude Opus 4.5 -> GPT-5.2 -> Grok 4.1 -> Gemini 3 Flash
+     * IDs: claude-opus-4-5-20251101, gpt-5.2, grok-4-1-fast-reasoning, gemini-3-flash-preview
      * Fallbacks: Claude Opus 4.5 -> Claude 3.5 Sonnet (within Claude chain)
      */
     async generateWithFallback(prompt) {
@@ -139,12 +139,12 @@ class LLMGateway {
 
         // Frontier Claude Models (Jan 2026):
         // 1. claude-opus-4-5-20251101 - Most capable (expensive)
-        // 2. claude-sonnet-4-20250514 - Fast & capable (balanced)
+        // 2. claude-opus-4-5-20251101 - Fast & capable (balanced)
         // 3. claude-3-5-sonnet-20241022 - Fallback
-        let res = await tryModel("claude-sonnet-4-20250514");
+        let res = await tryModel("claude-opus-4-5-20251101");
 
         if (res.status === 400 || res.status === 404) {
-            console.warn("[LLM] Claude Sonnet 4 not available. Trying Claude Opus 4.5...");
+            console.warn("[LLM] Claude Opus 4.5 not available. Trying Claude Opus 4.5...");
             res = await tryModel("claude-opus-4-5-20251101");
         }
 

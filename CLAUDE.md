@@ -1,10 +1,45 @@
 # 3A Automation
-> Version: 119.0 | 26/01/2026 | Session 168duodecies - AI Provider Strategy Alignment
+> Version: 120.0 | 26/01/2026 | Session 168terdecies - Fallback Chains Implemented
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168terdecies - FALLBACK CHAINS IMPLEMENTATION (26/01/2026)
+
+### P1 Complété: Inverser Fallback Chain Scripts Critiques ✅
+
+| Script | Type | Avant | Après |
+| :--- | :--- | :--- | :--- |
+| **churn-prediction** | CRITICAL | Grok → OpenAI → Gemini → Claude | **Claude Opus 4.5** → Grok → Gemini |
+| **blog-generator** | VOLUME | Anthropic → OpenAI → Grok → Gemini | **Gemini** → Grok → Claude |
+| **email-personalization** | VOLUME | Grok → OpenAI → Gemini → Anthropic | **Gemini** → Grok → Claude |
+| **podcast-generator** | VOLUME | Anthropic → OpenAI → Grok → Gemini | **Gemini** → Grok → Claude |
+| **voice-api** | REAL-TIME | Grok (correct) | **Grok** → Gemini → Claude ✓ |
+
+### Logique Appliquée
+
+| Type Tâche | Primary | Justification |
+| :--- | :--- | :--- |
+| **CRITICAL** | Claude Opus 4.5 | Coût erreur >> Coût API (décisions irréversibles) |
+| **VOLUME** | Gemini Flash | Optimisation coût (content révisable) |
+| **REAL-TIME** | Grok | Latence < 300ms (voice responses) |
+
+### Modèle Opus 4.5 Standard
+
+**TOUJOURS Claude Opus 4.5** (`claude-opus-4-5-20251101`) pour TOUS les scripts:
+- Meilleur modèle = moins d'erreurs
+- Coût erreur >> Coût API (toujours vrai pour business decisions)
+- 22 scripts mis à jour (resilient + agentic + flows)
+
+Scripts modifiés:
+- churn-prediction-resilient, blog-generator, email-personalization, podcast-generator, voice-api
+- referral-program, lead-qualification, replenishment, price-drop, review-request
+- birthday-anniversary, at-risk-customer, product-photos, llm-global-gateway
+- store-audit-agentic, flows-audit-agentic, sourcing-linkedin-agentic, etc.
 
 ---
 
@@ -74,7 +109,7 @@ CRÉATIF (itération, exploration):
 | Priorité | Action | Status |
 | :--- | :--- | :--- |
 | P0 | Documenter stratégie AI | ✅ DONE |
-| P1 | Inverser fallback scripts critiques | ⏳ BACKLOG |
+| P1 | Inverser fallback scripts critiques | ✅ DONE (S168terdecies) |
 | P1 | Update messaging "Architectes" | ⏳ BACKLOG |
 | P2 | Case study Small Team ROI | ⏳ BACKLOG |
 

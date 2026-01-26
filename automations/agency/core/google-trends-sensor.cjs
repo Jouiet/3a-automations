@@ -49,7 +49,7 @@ const PROVIDERS = {
     anthropic: {
         name: 'Anthropic',
         url: 'https://api.anthropic.com/v1/messages',
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-opus-4-5-20251101',
         apiKey: process.env.ANTHROPIC_API_KEY,
         enabled: !!process.env.ANTHROPIC_API_KEY
     }
