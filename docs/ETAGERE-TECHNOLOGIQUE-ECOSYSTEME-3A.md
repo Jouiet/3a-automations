@@ -1,10 +1,33 @@
 # ÉTAGÈRE TECHNOLOGIQUE - ÉCOSYSTÈME 3A
 ## Mutualisation des Technologies Selon le Modèle du "Potentiel de Situation"
 
-> **Version**: 3.3 | **Date**: 26/01/2026 | **Session**: 165quater (HITL 100% Coverage)
+> **Version**: 3.4 | **Date**: 26/01/2026 | **Session**: 168ter (MCP Stack Optimization)
 > **Document dédié**: `docs/WHISK-REMOTION-METHODOLOGY.md` (méthodologie exhaustive)
 > **Méthode**: Inspirée du modèle industriel chinois (François Jullien / Sun Tzu)
 > **Principe**: Coopération technique → Potentiel → Concurrence commerciale
+
+### UPDATE SESSION 168ter - MCP STACK OPTIMISÉ (26/01/2026)
+
+**Audit forensique complet - 38% réduction des serveurs MCP**
+
+| Couche | Serveurs | Status |
+|:---|:---|:---|
+| **Global** | 8 | chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail |
+| **Projet** | 5 | grok, google-sheets, klaviyo, shopify-dev, shopify-admin |
+| **Total** | **13** | (vs 21 avant - 38% reduction) |
+
+**Supprimés (dead code):**
+- ❌ powerbi-remote (Entra ID non configuré)
+- ❌ meta-ads (META_PAGE_ACCESS_TOKEN vide)
+- ❌ apify (token invalide)
+- ❌ shopify global (credentials vides)
+- ❌ slack (credentials vides)
+- ❌ 3 duplicates (chrome-devtools, google-analytics, playwright)
+
+**API locale (bypass MCP):**
+- Stitch: `node stitch-api.cjs list` (MCP auth incompatible, script fonctionne)
+
+---
 
 ### UPDATE SESSION 162 - STITCH API OPÉRATIONNEL (26/01/2026)
 
