@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-26T06:46:03.338Z",
+  "last_updated": "2026-01-26T07:35:31.527Z",
   "session": "163",
   "sectors": {
     "marketing": {
@@ -28,9 +28,9 @@
       },
       "market_demand": {
         "label": "Market Demand",
-        "pressure": 50,
-        "trend": "rising",
-        "last_check": "2026-01-26T06:46:13.122Z",
+        "pressure": 8,
+        "trend": "DOWN",
+        "last_check": "2026-01-26T07:35:30.541Z",
         "sensor_data": {
           "method": "AI Analysis (Grok)",
           "keywords": [
@@ -41,10 +41,8 @@
           ],
           "demand_score": 92,
           "market_trend": "rising",
-          "assessment": "Demand for marketing automation, AI automation agencies, Shopify automation, and e-commerce automation is surging in January 2026, fueled by AI integrations and e-commerce expansion. These keywords reflect high interest from businesses seeking efficiency and scalability."
-        },
-        "ads_volume": 0,
-        "api_status": "BLOCKED_CREDENTIALS"
+          "assessment": "The automation sector, particularly in marketing, AI agencies, Shopify, and e-commerce, shows surging demand in January 2026 fueled by AI integrations and e-commerce expansion. Trends indicate continued growth as businesses seek efficiency amid economic pressures."
+        }
       },
       "tiktok_ads": {
         "pressure": 95,
@@ -190,7 +188,7 @@
         "label": "API Costs",
         "pressure": 30,
         "trend": "STABLE",
-        "last_check": "2026-01-26T06:45:44.523Z",
+        "last_check": "2026-01-26T07:35:31.527Z",
         "sensor_data": {
           "current_month_usd": 0,
           "projected_month_usd": 0,

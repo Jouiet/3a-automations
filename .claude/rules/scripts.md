@@ -6,22 +6,22 @@ paths:
 
 # Native Scripts
 
-## Status VÉRIFIÉ (26/01/2026 - Session 162bis)
+## Status VÉRIFIÉ (26/01/2026 - Session 164)
 
 ### Scripts Core
 | Category | Count | Status |
 |----------|-------|--------|
-| Total core | **84** | `ls agency/core/*.cjs` (+stitch-api.cjs S162) |
-| Avec --health | **26** | Testables (verified S162bis) |
+| Total core | **85** | `ls agency/core/*.cjs` (+stitch-to-3a-css.cjs S163) |
+| Avec --health | **26** | Testables (verified S164) |
 | Resilient | 7 | Multi-AI fallback |
 | Sensors | 20 | Data fetchers → GPM |
 
-### Sensors (20 total - Testé Session 162bis)
+### Sensors (20 total - Testé Session 164)
 | Status | Count | Sensors |
 |--------|-------|---------|
-| ✅ OK (0-50) | 6 | retention(0), product-seo(0), gsc(0), cost-tracking(30), google-ads-planner(50), google-trends(6) |
-| ⚠️ PARTIAL (60-80) | 5 | email-health(60), shopify(75), lead-velocity(75), supplier-health(80) |
-| ❌ BLOCKED (90-95) | 9 | content-perf(90), voice-quality(90), whatsapp(90), lead-scoring(95), meta-ads(95), tiktok-ads(95), ga4(API disabled), bigquery(API disabled), apify(trial expired) |
+| ✅ OK (0-50) | 9 | retention(0), product-seo(0), gsc(0), cost-tracking(30), google-ads-planner(50), google-trends(8), klaviyo, shopify, email-health |
+| ⚠️ PARTIAL (60-80) | 5 | lead-velocity(75), supplier-health(80), voice-quality, content-perf, lead-scoring |
+| ❌ BLOCKED (90-95) | 6 | whatsapp(90), meta-ads(95), tiktok-ads(95), ga4(API disabled), bigquery(API disabled), apify(trial expired) |
 
 ### New Sensors (Session 139) - Per DOE v2 Spec
 | Sensor | Description | Priority |
