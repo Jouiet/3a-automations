@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-26T15:42:17.521Z",
+  "last_updated": "2026-01-26T20:39:19.708Z",
   "session": "165",
   "sectors": {
     "marketing": {
@@ -148,7 +148,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T15:42:01.743Z",
+        "last_check": "2026-01-26T20:39:19.708Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,

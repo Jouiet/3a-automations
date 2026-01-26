@@ -4,7 +4,27 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168 - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **Strategic Metadata: 90% (100% automations)**
+> **✅ ÉTAT RÉEL (Session 168bis - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **Strategic Metadata: 90%** | **WCAG: 0 errors**
+
+---
+
+## SESSION 168bis - WCAG COMPLIANCE + HTML FIX (26/01/2026)
+
+### Accomplissements
+
+| Tâche | Status | Impact |
+| :--- | :--- | :--- |
+| **Duplicate ID fix** | ✅ | 14 pages corrigées (FR+EN) |
+| **Dashboard WCAG** | ✅ | skip-link + main-content ajoutés |
+| **Design validation** | ✅ | 0 errors, 264 warnings |
+| **Sensors verified** | ✅ | Shopify + Klaviyo OK |
+
+### Commits
+
+| Hash | Description |
+| :--- | :--- |
+| `9ed24a2` | fix(wcag): dashboard skip-link + main-content |
+| `2ce65cd` | fix(html): remove duplicate IDs (14 pages) |
 
 ---
 
