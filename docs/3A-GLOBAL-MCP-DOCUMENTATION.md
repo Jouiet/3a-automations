@@ -55,7 +55,7 @@ Build size:        5.7 KB
 
 | Composant | Version | Status |
 |-----------|---------|--------|
-| @modelcontextprotocol/sdk | **0.6.0** | ❌ OBSOLÈTE (current: 1.25.3) |
+| @modelcontextprotocol/sdk | **1.25.3** | ✅ CURRENT (S168septies) |
 | TypeScript | 5.3.3 | ✅ OK |
 | Node.js | ES2022 | ✅ OK |
 | Zod | 3.22.4 | ✅ OK (peer dep) |

@@ -8,7 +8,7 @@
 
 ---
 
-## SESSION 168terdecies - FALLBACK CHAINS IMPLEMENTATION (26/01/2026)
+## SESSION 168terdecies - FALLBACK + MCP + MESSAGING (26/01/2026)
 
 ### P1 DONE: Fallback Chains Inversés ✅
 
@@ -26,6 +26,24 @@ Utilisation de `claude-opus-4-5-20251101` pour churn prediction car:
 - Décision financière critique (LTV €300+ en jeu)
 - Coût erreur >> Coût API
 - Meilleur modèle = moins de faux positifs
+
+### P2 DONE: Test MCP Servers ✅
+
+| Server | Status | Notes |
+| :--- | :--- | :--- |
+| **3a-global-mcp** | ✅ 99/99 tests | SDK 1.25.3, 124 tools |
+| **shopify-dev** | ✅ Operational | Schema, docs, validation |
+| **klaviyo** | ⚠️ SSL Error | Local cert issue (non-blocking) |
+| **grok** | ✅ Operational | Web search, reasoning |
+| **google-sheets** | ✅ Operational | Read/write |
+
+### P1 DONE: Messaging Différencié ✅
+
+| Page | FR | EN |
+| :--- | :--- | :--- |
+| **Hero** | "Strategic Architects" | "Strategic Architects" |
+| **PME/SMB** | "Systèmes de qualification intelligents" | "Smart qualification systems" |
+| **E-commerce** | "Pilotez votre croissance par les données" | "Drive growth with customer intelligence" |
 
 ---
 
@@ -740,7 +758,7 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 | CSS duplicates consolidation | Design | 4h | ✅ **DONE** - 0 errors, v=86.0 |
 | Legacy voice widget cleanup | Voice | 0.5h | ✅ **DONE** (S166septies) -280KB |
 | Health checks for remaining 58 scripts | QA | 16h | ⏳ PENDING |
-| Test all MCP servers | Integration | 8h | ⏳ PENDING |
+| Test all MCP servers | Integration | 8h | ✅ **DONE** (S168terdecies) |
 
 ### P3 - Future (After 2000 Clients)
 
