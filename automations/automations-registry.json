@@ -2228,6 +2228,7 @@
       "name": "Lead Scoring - Agentic (Level 3)",
       "category": "Lead Generation & Acquisition",
       "type": "script",
+      "script": "agency/core/lead-scoring-agentic.cjs",
       "scriptPath": "agency/core/lead-scoring-agentic.cjs",
       "frequency": "on-demand",
       "benefits": [
@@ -2251,6 +2252,7 @@
       "name": "Flows Audit - Agentic (Level 3)",
       "category": "Email Marketing & Klaviyo",
       "type": "script",
+      "script": "agency/core/flows-audit-agentic.cjs",
       "scriptPath": "agency/core/flows-audit-agentic.cjs",
       "frequency": "weekly",
       "benefits": [
@@ -2274,6 +2276,7 @@
       "name": "Product Enrichment - Agentic (Level 3)",
       "category": "SEO & Content",
       "type": "script",
+      "script": "agency/core/product-enrichment-agentic.cjs",
       "scriptPath": "agency/core/product-enrichment-agentic.cjs",
       "frequency": "daily",
       "benefits": [
@@ -2296,6 +2299,7 @@
       "name": "GA4 Budget Optimizer - Agentic (Level 4)",
       "category": "Analytics & Reporting",
       "type": "script",
+      "script": "agency/core/ga4-budget-optimizer-agentic.cjs",
       "scriptPath": "agency/core/ga4-budget-optimizer-agentic.cjs",
       "frequency": "weekly",
       "benefits": [
@@ -2320,6 +2324,7 @@
       "name": "Store Audit - Agentic (Level 3)",
       "category": "Shopify Admin & Operations",
       "type": "script",
+      "script": "agency/core/store-audit-agentic.cjs",
       "scriptPath": "agency/core/store-audit-agentic.cjs",
       "frequency": "monthly",
       "benefits": [

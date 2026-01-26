@@ -10,7 +10,7 @@
 |---------|-------|---------|-----|
 | Scripts Core | 85 | **85** | 0% |
 | Scripts --health | 26 | **27** | +1 |
-| Automations Registry | 121 | **121** (76 with scripts) | 45 without scripts |
+| Automations Registry | 121 | **121** (88 with scripts) | 33 without scripts |
 | Skills | 44 dirs | **42 SKILL.md** | 2 empty |
 | Sensors Working | 20 | **15/19** (79%) | 4 blocked |
 | MCP Servers | 11 | **11** configured | Need testing |
@@ -122,9 +122,18 @@ whatsapp-booking-notifications ✅
 | whatsapp | 3 | 2% |
 | other | 12 | 10% |
 
-### 3.3 Gap Analysis
-38 automations (31%) are **catalog entries only** - no backing script.
-These are: marketing concepts, workflow descriptions, or planned features.
+### 3.3 Gap Analysis - UPDATED
+**Before fix:** 83 with script, 38 without
+**After fix:** 88 with script, 33 without
+
+5 entries were INCONSISTENT (type="script" + scriptPath but no script field):
+- ✅ lead-scoring-agentic - FIXED
+- ✅ flows-audit-agentic - FIXED
+- ✅ product-enrichment-agentic - FIXED
+- ✅ ga4-budget-optimizer-agentic - FIXED
+- ✅ store-audit-agentic - FIXED
+
+33 remaining without script are: external services (6), klaviyo-flow (5), shopify-flow (3), etc.
 
 ---
 
