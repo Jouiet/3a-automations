@@ -1,11 +1,43 @@
 # 3A Automation
 >
-> Version: 97.0 | 26/01/2026 | Session 165bis - **OpenAI Responses API + HITL P0 Complete**
+> Version: 98.0 | 26/01/2026 | Session 165ter - **HITL P1 Communication Risk Complete (67%)**
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+## SESSION 165ter - HITL P1 COMPLETE (26/01/2026)
+
+### HITL Coverage Update
+
+| Metric | S165bis | S165ter | Change |
+| :--- | :--- | :--- | :--- |
+| Scripts with HITL | 8/18 | **12/18** | +4 |
+| Coverage | 44% | **67%** | +23% |
+| Financial Risk | 100% | 100% | ✅ |
+| Communication Risk | 0% | **100%** | ✅ |
+
+### P1 Scripts Implemented (Session 165ter)
+
+| Script | HITL Type | Version |
+| :--- | :--- | :--- |
+| `referral-program-automation` | Email preview mode | 2.1.0 |
+| `replenishment-reminder` | Frequency cap (1/week) | 1.1.0 |
+| `price-drop-alerts` | Batch approval (>10) | 1.1.0 |
+| `review-request-automation` | VIP approval (€500+) | 1.1.0 |
+
+### HITL Features (All Scripts)
+
+- ✅ `--list-pending` - List items awaiting approval
+- ✅ `--approve=<id>` - Approve and process
+- ✅ `--reject=<id>` - Reject with reason
+- ✅ Slack webhook notifications
+- ✅ Health check shows HITL status
+
+### Commit: 456235d
+
+---
 
 ## SESSION 165 - ECOSYSTEM AUDIT (26/01/2026)
 

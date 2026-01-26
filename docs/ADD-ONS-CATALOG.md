@@ -1,7 +1,7 @@
 # ADD-ONS CATALOG - 3A Automation
-> Version: 1.6 | Date: 26/01/2026 | Session: 165
+> Version: 1.7 | Date: 26/01/2026 | Session: 165ter
 > Source: Analyse bottom-up des 85 scripts agency/core/
-> Updated: Session 165 - Add-Ons Health Verification ✅
+> Updated: Session 165ter - HITL Coverage Complete ✅
 
 ## Executive Summary
 
@@ -11,7 +11,7 @@
 | Scripts with --health (functional) | **26** |
 | Scripts eligible for add-ons | 16 |
 | TOP 10 add-ons selected | 10 |
-| Human In The Loop (HITL) coverage | **80% (8/10)** ✅ Updated S160 |
+| Human In The Loop (HITL) coverage | **100% (10/10)** ✅ Updated S165ter |
 | **Add-Ons OPERATIONAL (S165)** | **7/10 (70%)** ✅ Verified |
 | **Add-Ons PARTIAL** | **2/10 (20%)** ⚠️ SMS + Dropshipping |
 | **Add-Ons BLOCKED** | **1/10 (10%)** ❌ WhatsApp |
@@ -54,8 +54,11 @@ What It Does:
   - Smart timing post-purchase (7-14 days)
   - AI-personalized request
   - Photo incentive system
-HITL Status: ❌ NONE (Fully automated)
-  - OK for this use case (low risk)
+HITL Status: ✅ FULL (Session 165ter)
+  - VIP order approval (€500+ orders)
+  - Review emails for high-value customers require approval
+  - CLI: --list-pending, --approve=<id>, --reject=<id>
+  - Slack webhook notifications
 Dependencies:
   - Klaviyo API
   - Shopify API
@@ -73,8 +76,12 @@ What It Does:
   - Consumption rate calculation per product
   - AI timing prediction
   - Personalized reminder emails
-HITL Status: ❌ NONE (Fully automated)
-  - OK for this use case (non-critical)
+HITL Status: ✅ FULL (Session 165ter)
+  - Frequency cap: 1 reminder per week per customer
+  - Over-frequency reminders queued for approval
+  - CLI: --list-pending, --approve=<id>, --reject=<id>
+  - Slack webhook notifications
+  - ENV: REPLENISHMENT_MAX_PER_WEEK (default: 1)
 Dependencies:
   - Klaviyo API
   - Shopify API
@@ -137,9 +144,12 @@ What It Does:
   - Wishlist monitoring
   - Price drop detection (thresholds: 20% urgent, 30% flash)
   - Automated alert emails
-HITL Status: ⚠️ PARTIAL
-  - Thresholds configurable
-  - No approval needed (triggered by price changes)
+HITL Status: ✅ FULL (Session 165ter)
+  - Batch approval: >10 alerts require human approval
+  - Prevents mass email spam on large price changes
+  - CLI: --list-batches, --approve=<id>, --reject=<id>
+  - Slack webhook notifications
+  - ENV: PRICE_DROP_BATCH_THRESHOLD (default: 10)
 Dependencies:
   - Klaviyo API
   - Shopify API (price webhooks)

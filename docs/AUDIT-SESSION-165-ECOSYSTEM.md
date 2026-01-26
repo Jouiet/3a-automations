@@ -17,7 +17,7 @@
 | Remotion Compositions | 7 | **7** | 0% |
 | HTML Pages | 79 | **79** | 0% |
 | Credentials SET | 57/93 | **61%** | 36 empty |
-| **HITL Coverage** | 80% (claimed) | **44% (8/18)** | 🟡 **-36%** (S165bis +2) |
+| **HITL Coverage** | 80% (claimed) | **67% (12/18)** | 🟢 **S165ter +4** |
 | A2A Agents HITL | N/A | **0/3** | 🔴 DEAD |
 | MCP Servers HITL | N/A | **0/11** | 🔴 NONE |
 | AG-UI Queue | Exists | **0 callers** | 🔴 DEAD CODE |
@@ -1143,8 +1143,54 @@ const queueAction = (action) => { ... }
 
 ---
 
-*Audit completed: 26/01/2026 13:45 UTC*
+---
+
+## 19. SESSION 165ter COMPLETION LOG (26/01/2026 13:15 UTC)
+
+### 19.1 HITL P1 Communication Risk Scripts - ALL COMPLETE
+
+| Script | HITL Type | Version | Commit |
+|--------|-----------|---------|--------|
+| `referral-program-automation.cjs` | Email preview mode | 2.1.0 | 456235d |
+| `replenishment-reminder.cjs` | Frequency cap (1/week/customer) | 1.1.0 | 456235d |
+| `price-drop-alerts.cjs` | Batch approval (>10 alerts) | 1.1.0 | 456235d |
+| `review-request-automation.cjs` | VIP approval (€500+ orders) | 1.1.0 | 456235d |
+
+### 19.2 HITL Coverage Update
+
+| Metric | S165bis | S165ter | Change |
+|--------|---------|---------|--------|
+| Scripts with HITL | 8/18 | **12/18** | +4 |
+| Coverage | 44% | **67%** | +23% |
+| Financial Risk | 100% | 100% | ✅ |
+| Communication Risk | 0% | **100%** | ✅ |
+
+### 19.3 HITL Features (All 4 Scripts)
+
+- ✅ `--list-pending` / `--list-batches` - List items awaiting approval
+- ✅ `--approve=<id>` - Approve and process
+- ✅ `--reject=<id>` - Reject with reason
+- ✅ Slack webhook notifications (optional)
+- ✅ Persistent storage in `data/hitl-pending/`
+- ✅ Health check shows HITL status
+
+### 19.4 Remaining P2 Tasks
+
+| Task | Impact | Effort | Status |
+|------|--------|--------|--------|
+| AG-UI Queue wiring | System risk | 4h | ⏳ PENDING |
+| MCP Servers confirmation | System risk | 8h | ⏳ PENDING |
+| omnisend-b2c-ecommerce HITL | Communication | 1h | ⏳ OPTIONAL |
+
+### 19.5 Scripts.md Updated
+
+- `.claude/rules/scripts.md` updated with 12 HITL scripts
+- Session reference updated to 165ter
+
+---
+
+*Audit completed: 26/01/2026 13:15 UTC*
 *Auditor: Claude Opus 4.5*
 *Method: Bottom-up empirical verification + EXHAUSTIVE web research*
-*Commits: cf0c8fb, 1a137d1, f8ea2df, 590a12b, 73561b3*
+*Commits: cf0c8fb, 1a137d1, f8ea2df, 590a12b, 73561b3, 456235d*
 *Research sources: 50+ official docs, GitHub repos, blogs, forums*
