@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-01-26T20:44:06.871Z",
-  "session": "165",
+  "last_updated": "2026-01-26T23:26:40.467Z",
+  "session": "168terdecies",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -56,7 +56,7 @@
       "klaviyo": {
         "pressure": 65,
         "trend": "DOWN",
-        "last_check": "2026-01-26T11:16:24.150Z",
+        "last_check": "2026-01-26T23:26:40.466Z",
         "sensor_data": {
           "lists_total": 10,
           "flows_total": 0,
@@ -148,7 +148,7 @@
       "shopify": {
         "pressure": 75,
         "trend": "DOWN",
-        "last_check": "2026-01-26T20:44:06.871Z",
+        "last_check": "2026-01-26T23:26:19.275Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
