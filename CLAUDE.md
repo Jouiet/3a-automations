@@ -1,10 +1,37 @@
 # 3A Automation
-> Version: 101.0 | 26/01/2026 | Session 165quater - HITL 100% Coverage Complete
+> Version: 102.0 | 26/01/2026 | Session 165quinquies - HITL Flexible Thresholds
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 165quinquies - HITL FLEXIBILITY (26/01/2026)
+
+### HITL Flexible Thresholds Implementation
+
+All 11 HITL workflows now have **user-configurable thresholds** via ENV variables:
+
+| Workflow | Default | Options | ENV Variable |
+| :--- | :--- | :--- | :--- |
+| at-risk-customer-flow | €300 / 15% | €250-500 / 10-20% | `AT_RISK_LTV_THRESHOLD` |
+| birthday-anniversary-flow | €300 / 15% | €250-500 / 10-20% | `BIRTHDAY_LTV_THRESHOLD` |
+| dropshipping-order-flow | €300 | €200-500 | `HITL_ORDER_VALUE_THRESHOLD` |
+| hubspot-b2b-crm | €1500 | €1000-5000 | `HITL_DEAL_VALUE_THRESHOLD` |
+| bigbuy-supplier-sync | 75 items | 50-200 | `HITL_BATCH_THRESHOLD` |
+| review-request-automation | €300 | €250-500 | `REVIEW_VIP_THRESHOLD` |
+| price-drop-alerts | 10 batch | 5-25 | `PRICE_DROP_BATCH_THRESHOLD` |
+| replenishment-reminder | 1/week | 1-3 | `REPLENISHMENT_MAX_PER_WEEK` |
+| lead-qualification-chatbot | Score 70 | 60-90 | `HITL_HOT_LEAD_THRESHOLD` |
+| voice-telephony-bridge | Score 70 | 60-90 | `HITL_BOOKING_SCORE_THRESHOLD` |
+| omnisend-b2c-ecommerce | 10 batch | 5-100 | `HITL_BATCH_THRESHOLD` |
+
+### Commits Session 165quinquies
+```
+0517b77 feat(hitl): implement flexible configurable thresholds for all 11 workflows
+```
 
 ---
 
@@ -24,15 +51,15 @@
 | HTML Pages | **79** | ✅ |
 | Credentials SET | **61%** (57/93) | ⚠️ 36 empty |
 
-### HITL Coverage: 100% (18/18 Scripts) ✅
+### HITL Coverage: 100% (18/18 Scripts) ✅ FLEXIBLE
 
-| Category | Scripts | HITL Type |
+| Category | Scripts | HITL Type (Flexible) |
 | :--- | :--- | :--- |
-| **Financial (2)** | at-risk-customer-flow, birthday-anniversary-flow | LTV €500 / Discount ≥20% |
-| **Communication (5)** | referral-program, replenishment-reminder, price-drop-alerts, review-request, omnisend-b2c | Preview/Cap/Batch |
+| **Financial (2)** | at-risk-customer-flow, birthday-anniversary-flow | LTV €250-500 / Discount 10-20% |
+| **Communication (5)** | referral-program, replenishment-reminder, price-drop-alerts, review-request, omnisend-b2c | Preview/Cap 1-3/Batch 5-25 |
 | **Content (3)** | blog-generator, email-personalization, podcast-generator | Approval/Preview/Review |
-| **Operations (5)** | dropshipping-order-flow, bigbuy-supplier-sync, hubspot-b2b-crm, lead-qualification-chatbot, voice-telephony-bridge | Threshold approvals |
-| **Cost Control (2)** | sms-automation, churn-prediction | Daily limit / LTV threshold |
+| **Operations (5)** | dropshipping-order-flow, bigbuy-supplier-sync, hubspot-b2b-crm, lead-qualification-chatbot, voice-telephony-bridge | Threshold 60-90 / €200-5000 |
+| **Cost Control (2)** | sms-automation, churn-prediction | Daily €25-100 / LTV threshold |
 | **Supply Chain (1)** | cjdropshipping-automation | confirmOrder() |
 
 ### CSS Status
