@@ -1,30 +1,71 @@
-# MCPs Status (Verified 03/01/2026)
+# MCPs Status (Verified 26/01/2026 - Session 168quater)
 
-## Working MCPs (11/11) - 100%
+## Stack MCP Optimisée (13 serveurs)
+
+### Global (8) - `~/.config/claude-code/mcp.json`
 
 | MCP | Status | Notes |
 |-----|--------|-------|
 | chrome-devtools | ✅ OK | list_pages, screenshots, console |
 | playwright | ✅ OK | browser_tabs, automation |
-| gemini | ✅ OK | 6 models, chat |
-| hostinger | ✅ OK | VPS 1168256, 3 containers 3A + 2 shared + 2 other |
+| gemini | ✅ OK | gemini-2.5-pro-latest |
+| hostinger | ✅ OK | VPS 1168256 |
 | github | ✅ OK | Repo access working |
-| wordpress | ✅ OK | wp.3a-automation.com |
-| shopify | ✅ OK | guqsu3-yj.myshopify.com |
-| google-analytics | ✅ OK | Property 516832662, 37 users/7d |
-| filesystem | ✅ OK | built-in |
-| memory | ✅ OK | built-in |
-| claude-mcp | ✅ OK | built-in |
+| wordpress | ⚠️ Config | Needs wp-sites.json |
+| google-analytics | ⚠️ API | GA4 API disabled in console |
+| gmail | ⚠️ OAuth | Needs local auth |
 
-## Removed - APIs Used Directly
+### Projet (5) - `.mcp.json`
 
-| MCP | Session | Reason | Alternative |
-|-----|---------|--------|-------------|
-| klaviyo | 126 | SSL cert bug in MCP Python SDK ([#870](https://github.com/modelcontextprotocol/python-sdk/issues/870)) | Direct API (10 lists verified) |
-| apify | 120 | Package bug | Direct API calls (STARTER $39/mo) |
-| google-sheets | 120 | "Dynamic require of fs" | Direct googleapis in scripts |
-| grok | 120 | Redundant | Direct xAI API in resilient scripts |
-| powerbi-remote | 120 | Not needed | Entra ID not configured |
+| MCP | Status | Notes |
+|-----|--------|-------|
+| grok | ✅ OK | XAI_API_KEY configured |
+| google-sheets | ✅ OK | Service account |
+| klaviyo | ⚠️ SSL | Local cert issue, API works direct |
+| shopify-dev | ✅ OK | API docs, no auth needed |
+| shopify-admin | ✅ OK | Store management |
+
+### Built-in (3)
+
+| MCP | Status |
+|-----|--------|
+| filesystem | ✅ OK |
+| memory | ✅ OK |
+| claude-mcp | ✅ OK |
+
+## Removed - Session 168ter
+
+| MCP | Reason |
+|-----|--------|
+| powerbi-remote | Entra ID not configured |
+| meta-ads | META_PAGE_ACCESS_TOKEN empty |
+| apify | Token invalid/expired |
+| shopify (global) | Empty credentials |
+| slack | Empty credentials |
+| stitch | Auth incompatible (use stitch-api.cjs) |
+
+## 3A-MCP Custom Server
+
+**VERDICT: NON REQUIS**
+
+| Critère | Analyse |
+|---------|---------|
+| Nécessité | ❌ Scripts fonctionnent via Bash |
+| Effort | ~40-80h dev + 20h/an maintenance |
+| Bénéfice | Marginal (wrapper sur existant) |
+| Recommandation | Continuer appels directs |
+
+## Scripts sans MCP (13/88)
+
+```
+tiktok-ads-sensor, omnisend-b2c-ecommerce, bigbuy-supplier-sync,
+supplier-health-sensor, dropshipping-order-flow, at-risk-customer-flow,
+birthday-anniversary-flow, price-drop-alerts, referral-program-automation,
+replenishment-reminder, review-request-automation, sms-automation-resilient,
+ga4-budget-optimizer-agentic
+```
+
+**Alternative:** Direct API calls (déjà implémentés, fonctionnels)
 
 ## Service Account
 
@@ -32,5 +73,5 @@
 id-a-automation-service@a-automation-agency.iam.gserviceaccount.com
 ```
 
-GA4 Property: 516832662 (VERIFIED - 37 users/7d)
+GA4 Property: 516832662
 Sheets ID: 1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w

@@ -4,35 +4,75 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168ter - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **Strategic Metadata: 90%** | **WCAG: 0 errors** | **MCP: 5/9 (56%)**
+> **✅ ÉTAT RÉEL (Session 168quater - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 13 servers (8 global + 5 projet)** | **3A-MCP Custom: NON REQUIS**
 
 ---
 
-## SESSION 168ter - MCP VERIFICATION (26/01/2026)
+## SESSION 168quater - MCP AUDIT COMPLET (26/01/2026)
 
-### MCP Server Status (11 configured)
+### VERDICT: 3A-MCP Custom = NON OPTIMAL
 
-| MCP Server | Status | Notes |
+| Question | Réponse Factuelle |
+| :--- | :--- |
+| Faut-il un `@3a-automation/mcp-server`? | ❌ **NON** |
+| Pourquoi? | Scripts fonctionnent via Bash, MCP = overhead inutile |
+| Effort évité | ~40-80h dev + ~20h/an maintenance |
+| Alternative | `node script.cjs --health` via Bash tool |
+
+### MCP Stack Optimisée (13 serveurs)
+
+**Global (8):** chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail
+
+**Projet (5):** grok, google-sheets, klaviyo, shopify-dev, shopify-admin
+
+### Scripts sans couverture MCP (13/88 = 15%)
+
+| Script | API | Status |
 | :--- | :--- | :--- |
-| **Memory** | ✅ WORKING | 19 entities in knowledge graph |
-| **Chrome DevTools** | ✅ WORKING | Connected to browser |
-| **Hostinger** | ✅ WORKING | API responding |
-| **GitHub** | ✅ LOADED | Tools available |
-| **Shopify-dev** | ✅ LOADED | Tools available |
-| **Klaviyo** | ❌ SSL Error | Local certificate issue |
-| **Stitch** | ⚠️ MCP Only | MCP auth issue - API works via stitch-api.cjs |
-| **Apify** | ❌ Auth Error | Token invalid/expired |
-| **Grok** | ❌ No API Key | GROK_API_KEY not set |
-| Filesystem | ⏳ Not tested | Likely working |
-| Claude-MCP | ⏳ Not tested | Likely working |
+| tiktok-ads-sensor | TikTok Ads | Direct API ✅ |
+| omnisend-b2c-ecommerce | Omnisend | Direct API ✅ |
+| bigbuy-supplier-sync | BigBuy | Direct API ✅ |
+| + 10 autres | Various | Direct API ✅ |
 
-**Result: 6/9 tested operational (Stitch via script, not MCP)**
+**Conclusion:** APIs sans MCP communautaire → utiliser appels directs (déjà implémentés)
 
 ### Commits
 
 | Hash | Description |
 | :--- | :--- |
-| `f28bad7` | docs: Session 168bis - WCAG compliance accomplishments |
+| `5a7e370` | docs: update tech stack v3.4 - MCP optimization |
+| `6147fbd` | refactor(mcp): optimize stack - remove 6 dead/duplicate |
+
+---
+
+## SESSION 168ter - MCP OPTIMIZATION (26/01/2026)
+
+### Supprimés (8 serveurs dead code)
+
+| Server | Raison |
+| :--- | :--- |
+| powerbi-remote | Entra ID non configuré |
+| meta-ads | META_PAGE_ACCESS_TOKEN vide |
+| apify | Token invalide |
+| shopify global | Credentials vides |
+| slack | Credentials vides |
+| chrome-devtools (proj) | Duplicate global |
+| google-analytics (proj) | Duplicate global |
+| playwright (proj) | Duplicate global |
+
+**Résultat:** 21 → 13 serveurs (**-38%**)
+
+---
+
+## SESSION 168bis - WCAG COMPLIANCE (26/01/2026)
+
+### Accomplissements
+
+| Tâche | Status | Impact |
+| :--- | :--- | :--- |
+| **Duplicate ID fix** | ✅ | 14 pages corrigées (FR+EN) |
+| **Dashboard WCAG** | ✅ | skip-link + main-content ajoutés |
+| **Design validation** | ✅ | 0 errors, 264 warnings |
 
 ---
 
