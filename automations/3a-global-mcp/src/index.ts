@@ -1,17 +1,20 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
 import { spawn } from "child_process";
+import { createServer, IncomingMessage, ServerResponse } from "http";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from 'url';
+import { randomUUID } from "crypto";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 3A GLOBAL MCP SERVER v1.3.0
-// Score SOTA: 73% → 80% (+ Caching + Output Schemas)
+// 3A GLOBAL MCP SERVER v1.4.0
+// Score SOTA: 80% → 85% (+ Streamable HTTP Transport)
 // ═══════════════════════════════════════════════════════════════════════════
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -90,6 +93,7 @@ const OutputSchemas = {
         prompt_count: z.number(),
         engine: z.string(),
         capabilities: z.array(z.string()),
+        transport_modes: z.array(z.string()),
         sota_score: z.string(),
         cache: z.object({
             entries: z.number(),
@@ -170,7 +174,7 @@ const pressureMatrix = loadJson(PRESSURE_MATRIX_PATH, { sectors: {} });
 const server = new McpServer(
     {
         name: "3a-global-mcp",
-        version: "1.3.0",
+        version: "1.4.0",
     },
     {
         capabilities: {
@@ -458,14 +462,15 @@ server.registerTool(
         const cacheStats = cache.getStats();
         const response = {
             status: "online" as const,
-            version: "1.3.0",
+            version: "1.4.0",
             sdk_version: "1.25.3",
             tool_count: registry.automations.length + 3,
             resource_count: 3,
             prompt_count: 3,
             engine: "Ultrathink v3",
-            capabilities: ["tools", "resources", "prompts", "logging", "caching"],
-            sota_score: "80%",
+            capabilities: ["tools", "resources", "prompts", "logging", "caching", "streamable-http"],
+            transport_modes: ["stdio", "http"],
+            sota_score: "85%",
             cache: {
                 entries: cacheStats.entries,
                 hits: cacheStats.hits,
@@ -643,20 +648,113 @@ for (const automation of registry.automations) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// SERVER START
+// SERVER START (Dual-mode: STDIO or HTTP)
 // ═══════════════════════════════════════════════════════════════════════════
 
-async function main() {
+const HTTP_PORT = parseInt(process.env.MCP_HTTP_PORT || "3001");
+const isHttpMode = process.argv.includes("--http");
+
+async function startStdioServer() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    logger.info("3A Global MCP Router v1.3.0 started", {
+    logger.info("3A Global MCP Router v1.4.0 started (STDIO mode)", {
         tools: registry.automations.length + 3,
         resources: 3,
         prompts: 3,
         sdk: "1.25.3",
-        sota: "80%",
-        features: ["caching", "output-schemas"]
+        sota: "85%",
+        features: ["caching", "output-schemas", "streamable-http"]
     });
+}
+
+async function startHttpServer() {
+    // Create stateful transport with session management
+    const httpTransport = new StreamableHTTPServerTransport({
+        sessionIdGenerator: () => randomUUID(),
+    });
+
+    // Connect MCP server to HTTP transport
+    await server.connect(httpTransport);
+
+    // Create HTTP server
+    const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse) => {
+        // CORS headers for cross-origin requests
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, mcp-session-id");
+
+        if (req.method === "OPTIONS") {
+            res.writeHead(204);
+            res.end();
+            return;
+        }
+
+        // Health check endpoint
+        if (req.url === "/health" && req.method === "GET") {
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({
+                status: "healthy",
+                version: "1.4.0",
+                mode: "http",
+                transport: "streamable-http",
+                tools: registry.automations.length + 3,
+                resources: 3,
+                prompts: 3,
+                cache: cache.getStats(),
+                uptime: process.uptime()
+            }));
+            return;
+        }
+
+        // MCP endpoint
+        if (req.url === "/mcp" || req.url === "/") {
+            try {
+                await httpTransport.handleRequest(req, res);
+            } catch (error: any) {
+                logger.error("HTTP request error", error);
+                if (!res.headersSent) {
+                    res.writeHead(500, { "Content-Type": "application/json" });
+                    res.end(JSON.stringify({ error: "Internal server error" }));
+                }
+            }
+            return;
+        }
+
+        // 404 for unknown routes
+        res.writeHead(404, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Not found", endpoints: ["/mcp", "/health"] }));
+    });
+
+    httpServer.listen(HTTP_PORT, () => {
+        logger.info(`3A Global MCP Router v1.4.0 started (HTTP mode)`, {
+            port: HTTP_PORT,
+            endpoints: ["/mcp", "/health"],
+            tools: registry.automations.length + 3,
+            resources: 3,
+            prompts: 3,
+            sdk: "1.25.3",
+            sota: "85%",
+            features: ["caching", "output-schemas", "streamable-http"]
+        });
+        console.error(`✅ MCP HTTP Server listening on http://localhost:${HTTP_PORT}`);
+        console.error(`   Endpoints: /mcp (MCP protocol), /health (status)`);
+    });
+
+    // Graceful shutdown
+    process.on("SIGINT", async () => {
+        logger.info("Shutting down HTTP server...");
+        await httpTransport.close();
+        httpServer.close();
+        process.exit(0);
+    });
+}
+
+async function main() {
+    if (isHttpMode) {
+        await startHttpServer();
+    } else {
+        await startStdioServer();
+    }
 }
 
 main().catch((error) => {

@@ -1,12 +1,13 @@
 {
     "name": "3a-global-mcp",
-    "version": "1.3.0",
-    "description": "Global MCP Router for 3A Automation Ecosystem - Tools, Resources, Prompts, Caching (80% SOTA)",
+    "version": "1.4.0",
+    "description": "Global MCP Router for 3A Automation Ecosystem - STDIO + HTTP Transport (85% SOTA)",
     "type": "module",
     "main": "build/index.js",
     "scripts": {
         "build": "tsc",
         "start": "node build/index.js",
+        "start:http": "node build/index.js --http",
         "verify": "node verify-core.js"
     },
     "dependencies": {

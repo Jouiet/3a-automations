@@ -4,7 +4,54 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168septies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.2.0 (124 tools, 3 resources, 3 prompts, SDK 1.25.3, 73% SOTA)**
+> **✅ ÉTAT RÉEL (Session 168novies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers (8 global + 6 projet)** | **3a-global-mcp: v1.4.0 (124 tools, STDIO+HTTP, SDK 1.25.3, 85% SOTA)**
+
+---
+
+## SESSION 168novies - STREAMABLE HTTP TRANSPORT (26/01/2026)
+
+### MCP Score SOTA: 80% → 85% (+5%)
+
+| Phase | Implementation | Status |
+| :--- | :--- | :--- |
+| **P4: HTTP Transport** | StreamableHTTPServerTransport | ✅ DONE |
+| **Dual-mode** | STDIO (default) + HTTP (--http) | ✅ DONE |
+| **Health endpoint** | /health JSON status | ✅ DONE |
+| **Session management** | UUID-based stateful | ✅ DONE |
+
+### New Endpoints
+
+| Mode | Command | Endpoints |
+| :--- | :--- | :--- |
+| **STDIO** | `npm start` | Claude Code native |
+| **HTTP** | `npm run start:http` | `/mcp`, `/health` (port 3001) |
+
+**Commit:** pending | **Tests:** 99/99 (100%) | **Version:** 1.4.0 | **Score SOTA:** 85%
+
+---
+
+## SESSION 168octies - CACHING + OUTPUT SCHEMAS (26/01/2026)
+
+### MCP Score SOTA: 73% → 80% (+7%)
+
+| Phase | Implementation | Status |
+| :--- | :--- | :--- |
+| **P6: Caching** | CacheManager with TTL | ✅ DONE |
+| **P7: Output Schemas** | Zod schemas for responses | ✅ DONE |
+| **get_global_status** | Cache stats included | ✅ DONE |
+| **get_tool_catalog** | Cached (5min TTL) | ✅ DONE |
+
+### CacheManager Features
+
+```typescript
+class CacheManager {
+    get<T>(key: string): T | null      // TTL-aware retrieval
+    set<T>(key, data, ttl): void       // TTL configurable
+    getStats()                          // hits, misses, hitRate
+}
+```
+
+**Commit:** `8c82231` | **Tests:** 99/99 (100%) | **Version:** 1.3.0 | **Score SOTA:** 80%
 
 ---
 

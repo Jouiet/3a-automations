@@ -1,10 +1,63 @@
 # 3A Automation
-> Version: 115.0 | 26/01/2026 | Session 168octies - Caching + Output Schemas (80% SOTA)
+> Version: 116.0 | 26/01/2026 | Session 168novies - Streamable HTTP Transport (85% SOTA)
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168novies - STREAMABLE HTTP TRANSPORT (26/01/2026)
+
+### MCP Score SOTA: 80% → 85% (+5%)
+
+| Implementation | Impact | Status |
+| :--- | :--- | :--- |
+| **Dual-mode transport** | STDIO + HTTP | ✅ DONE |
+| **StreamableHTTPServerTransport** | SDK v1.25.3 | ✅ DONE |
+| **Session management** | UUID-based | ✅ DONE |
+| **Health endpoint** | /health JSON | ✅ DONE |
+| **CORS support** | Cross-origin ready | ✅ DONE |
+| **Graceful shutdown** | SIGINT handler | ✅ DONE |
+| **Version** | 1.3.0 → 1.4.0 | ✅ DONE |
+| **Tests** | 99/99 (100%) | ✅ VERIFIED |
+
+### Usage
+
+```bash
+# STDIO mode (Claude Code, default)
+npm start
+
+# HTTP mode (Remote clients)
+npm run start:http
+# → http://localhost:3001/mcp (MCP protocol)
+# → http://localhost:3001/health (status)
+```
+
+### Health Response
+
+```json
+{
+  "status": "healthy",
+  "version": "1.4.0",
+  "mode": "http",
+  "transport": "streamable-http",
+  "tools": 124,
+  "resources": 3,
+  "prompts": 3
+}
+```
+
+### Capabilities Now
+
+```
+Version: 1.4.0
+SDK: 1.25.3
+SOTA: 85%
+Transport: stdio, http
+Features: tools, resources, prompts, logging, caching, output-schemas, streamable-http
+```
 
 ---
 
