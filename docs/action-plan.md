@@ -383,11 +383,12 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 
 ### P2 - Medium Priority (Next Quarter)
 
-| Task | Component | Effort |
-|------|-----------|--------|
-| CSS duplicates consolidation | Design | 4h |
-| Health checks for remaining 58 scripts | QA | 16h |
-| Test all MCP servers | Integration | 8h |
+| Task | Component | Effort | Status |
+|------|-----------|--------|--------|
+| CSS duplicates consolidation | Design | 4h | ✅ **DONE** - 0 errors, v=86.0 |
+| Legacy voice widget cleanup | Voice | 0.5h | ✅ **DONE** (S166septies) -280KB |
+| Health checks for remaining 58 scripts | QA | 16h | ⏳ PENDING |
+| Test all MCP servers | Integration | 8h | ⏳ PENDING |
 
 ### P3 - Future (After 2000 Clients)
 
@@ -431,9 +432,11 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-**Document màj:** 26/01/2026 - Session 166quinquies
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | MCP 5/6 ✅ | CSS v86.0 | **Voice: ARCHITECTURE OPTIMISÉE**
-**New files:** `voice-widget-core.js` (unified), `lang/voice-{fr,en,es,ar}.json`
-**Reduction:** 4 widgets (3600 lignes) → 1 core + 4 JSON (1400 lignes) = **-60%**
-**Gap:** Darija JSON only (`lang/voice-ary.json`)
+**Document màj:** 26/01/2026 - Session 166septies
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | MCP 5/6 ✅ | CSS v86.0 | **Voice: 5/5 LANGUES COMPLET**
+**Voice Architecture:**
+- Widget: `voice-widget-core.js` + `lang/voice-{fr,en,es,ar,ary}.json`
+- Telephony: `TWIML_MESSAGES` multilingue (FR/EN/ES/AR/ARY)
+- Reduction: 6 widgets legacy → 1 core + 5 JSON = **-85%** (-280KB)
+**Gaps:** TWILIO_* credentials (User action)
 **Archive:** Sessions 141-165 archived in `docs/session-history/sessions-141-164.md`
