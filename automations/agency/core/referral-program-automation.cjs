@@ -31,15 +31,25 @@ require('dotenv').config();
 const http = require('http');
 const https = require('https');
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 
 // ============================================================================
 // CONFIGURATION - FRONTIER MODELS ONLY
 // ============================================================================
 
 const CONFIG = {
-  version: '2.0.0 (Agentic)',
+  version: '2.1.0 (HITL)',
   port: parseInt(process.env.REFERRAL_PROGRAM_PORT || '3016', 10),
   agenticMode: process.argv.includes('--agentic'),
+
+  // HITL: Email Preview Mode (Session 165ter)
+  hitl: {
+    previewMode: process.env.REFERRAL_PREVIEW_MODE !== 'false', // Default: ON
+    pendingDir: './data/hitl-pending/referral/',
+    slackWebhook: process.env.REFERRAL_SLACK_WEBHOOK || null,
+    autoApproveWelcome: process.env.REFERRAL_AUTO_APPROVE_WELCOME === 'true' // Welcome emails can auto-send
+  },
 
   // AI Providers - FRONTIER MODELS (Session 120+)
   ai: {
@@ -161,6 +171,153 @@ class RateLimiter {
 }
 
 const rateLimiter = new RateLimiter(CONFIG.rateLimit.maxRequests, CONFIG.rateLimit.windowMs);
+
+// ============================================================================
+// HITL (Human In The Loop) - Email Preview Mode (Session 165ter)
+// ============================================================================
+
+function ensurePendingDir() {
+  const dir = path.resolve(CONFIG.hitl.pendingDir);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  return dir;
+}
+
+function generatePendingId() {
+  return `ref_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
+}
+
+function queuePendingEmail(customer, emailData, eventType) {
+  const dir = ensurePendingDir();
+  const id = generatePendingId();
+  const pendingFile = path.join(dir, `${id}.json`);
+
+  const pending = {
+    id,
+    createdAt: new Date().toISOString(),
+    status: 'pending',
+    type: eventType,
+    customer: {
+      id: customer.id,
+      email: customer.email,
+      firstName: customer.firstName,
+      lastName: customer.lastName
+    },
+    email: {
+      subject: emailData.subject,
+      preview: emailData.preview,
+      body: emailData.body,
+      provider: emailData.provider
+    }
+  };
+
+  fs.writeFileSync(pendingFile, JSON.stringify(pending, null, 2));
+  log(`📋 Email queued for approval: ${id} (${eventType})`);
+
+  // Notify via Slack if configured
+  if (CONFIG.hitl.slackWebhook) {
+    notifySlackPending(pending).catch(e => log(`Slack notification failed: ${e.message}`, 'warn'));
+  }
+
+  return pending;
+}
+
+function listPendingEmails() {
+  const dir = ensurePendingDir();
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
+
+  return files.map(f => {
+    const content = fs.readFileSync(path.join(dir, f), 'utf8');
+    return JSON.parse(content);
+  }).filter(p => p.status === 'pending');
+}
+
+async function approvePendingEmail(pendingId) {
+  const dir = ensurePendingDir();
+  const pendingFile = path.join(dir, `${pendingId}.json`);
+
+  if (!fs.existsSync(pendingFile)) {
+    throw new Error(`Pending email not found: ${pendingId}`);
+  }
+
+  const pending = JSON.parse(fs.readFileSync(pendingFile, 'utf8'));
+
+  if (pending.status !== 'pending') {
+    throw new Error(`Email already ${pending.status}`);
+  }
+
+  // Actually send the email
+  const customer = pending.customer;
+  const emailData = pending.email;
+  const result = await sendEmailDirect(customer, emailData, pending.type);
+
+  // Update status
+  pending.status = 'approved';
+  pending.approvedAt = new Date().toISOString();
+  pending.sendResult = result;
+  fs.writeFileSync(pendingFile, JSON.stringify(pending, null, 2));
+
+  log(`✅ Email approved and sent: ${pendingId}`);
+  return { status: 'approved', sendResult: result };
+}
+
+function rejectPendingEmail(pendingId, reason = 'Rejected by operator') {
+  const dir = ensurePendingDir();
+  const pendingFile = path.join(dir, `${pendingId}.json`);
+
+  if (!fs.existsSync(pendingFile)) {
+    throw new Error(`Pending email not found: ${pendingId}`);
+  }
+
+  const pending = JSON.parse(fs.readFileSync(pendingFile, 'utf8'));
+
+  if (pending.status !== 'pending') {
+    throw new Error(`Email already ${pending.status}`);
+  }
+
+  pending.status = 'rejected';
+  pending.rejectedAt = new Date().toISOString();
+  pending.rejectionReason = reason;
+  fs.writeFileSync(pendingFile, JSON.stringify(pending, null, 2));
+
+  log(`❌ Email rejected: ${pendingId} - ${reason}`);
+  return { status: 'rejected', reason };
+}
+
+async function notifySlackPending(pending) {
+  if (!CONFIG.hitl.slackWebhook) return;
+
+  const message = {
+    text: `🔔 *Referral Email Pending Approval*`,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*New referral email requires approval*\n\n` +
+            `• *ID:* \`${pending.id}\`\n` +
+            `• *Type:* ${pending.type}\n` +
+            `• *To:* ${pending.customer.email}\n` +
+            `• *Subject:* ${pending.email.subject}`
+        }
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Commands:*\n\`node referral-program-automation.cjs --approve=${pending.id}\`\n` +
+            `\`node referral-program-automation.cjs --reject=${pending.id}\``
+        }
+      }
+    ]
+  };
+
+  await httpRequest(CONFIG.hitl.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  }, message);
+}
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -692,7 +849,8 @@ async function sendViaOmnisend(customer, emailData, eventType) {
   return { provider: 'Omnisend', status: 'sent', eventId: `omnisend_${Date.now()}` };
 }
 
-async function sendEmail(customer, emailData, eventType) {
+// Direct send (bypasses HITL - used after approval)
+async function sendEmailDirect(customer, emailData, eventType) {
   const providers = [
     { name: 'Klaviyo', fn: (c, e) => sendViaKlaviyo(c, e, eventType) },
     { name: 'Omnisend', fn: (c, e) => sendViaOmnisend(c, e, eventType) }
@@ -712,6 +870,30 @@ async function sendEmail(customer, emailData, eventType) {
   }
 
   throw lastError || new Error('All email providers failed');
+}
+
+// HITL-aware send (queues for approval unless auto-approve conditions met)
+async function sendEmail(customer, emailData, eventType) {
+  // Check if HITL preview mode is enabled
+  if (CONFIG.hitl.previewMode) {
+    // Auto-approve welcome emails if configured
+    if (eventType === 'welcome' && CONFIG.hitl.autoApproveWelcome) {
+      log(`🚀 Auto-approving welcome email (REFERRAL_AUTO_APPROVE_WELCOME=true)`);
+      return sendEmailDirect(customer, emailData, eventType);
+    }
+
+    // Queue for approval
+    const pending = queuePendingEmail(customer, emailData, eventType);
+    return {
+      provider: 'HITL Queued',
+      status: 'pending_approval',
+      pendingId: pending.id,
+      message: `Email queued for approval. Use --approve=${pending.id} to send.`
+    };
+  }
+
+  // Preview mode disabled - send directly
+  return sendEmailDirect(customer, emailData, eventType);
 }
 
 // ============================================================================
@@ -906,6 +1088,15 @@ async function healthCheck() {
   results.rewardTiers = CONFIG.referral.rewards.referrer;
   results.refereeReward = CONFIG.referral.rewards.referee.firstPurchase;
 
+  // HITL status (Session 165ter)
+  const pendingEmails = listPendingEmails();
+  results.hitl = {
+    enabled: CONFIG.hitl.previewMode,
+    autoApproveWelcome: CONFIG.hitl.autoApproveWelcome,
+    pendingApprovals: pendingEmails.length,
+    slackNotifications: CONFIG.hitl.slackWebhook ? '✅ Configured' : '⚠️ Not configured'
+  };
+
   return results;
 }
 
@@ -1040,6 +1231,54 @@ async function main() {
     return;
   }
 
+  // HITL Commands (Session 165ter)
+  if (args.includes('--list-pending')) {
+    const pending = listPendingEmails();
+    console.log('\n📋 Pending Referral Emails (HITL)\n');
+    if (pending.length === 0) {
+      console.log('No pending emails.');
+    } else {
+      pending.forEach(p => {
+        console.log(`  ${p.id}`);
+        console.log(`    Type: ${p.type}`);
+        console.log(`    To: ${p.customer.email}`);
+        console.log(`    Subject: ${p.email.subject}`);
+        console.log(`    Created: ${p.createdAt}`);
+        console.log('');
+      });
+      console.log(`Total: ${pending.length} pending`);
+    }
+    return;
+  }
+
+  const approveArg = args.find(a => a.startsWith('--approve='));
+  if (approveArg) {
+    const pendingId = approveArg.split('=')[1];
+    console.log(`\n✅ Approving referral email: ${pendingId}\n`);
+    try {
+      const result = await approvePendingEmail(pendingId);
+      console.log('Result:', JSON.stringify(result, null, 2));
+    } catch (error) {
+      console.log(`❌ Error: ${error.message}`);
+    }
+    return;
+  }
+
+  const rejectArg = args.find(a => a.startsWith('--reject='));
+  if (rejectArg) {
+    const pendingId = rejectArg.split('=')[1];
+    const reasonIndex = args.indexOf('--reason');
+    const reason = reasonIndex !== -1 ? args[reasonIndex + 1] : 'Rejected by operator';
+    console.log(`\n❌ Rejecting referral email: ${pendingId}\n`);
+    try {
+      const result = rejectPendingEmail(pendingId, reason);
+      console.log('Result:', JSON.stringify(result, null, 2));
+    } catch (error) {
+      console.log(`❌ Error: ${error.message}`);
+    }
+    return;
+  }
+
   if (args.includes('--generate')) {
     const idIndex = args.indexOf('--customer-id');
     const customerId = idIndex !== -1 ? args[idIndex + 1] : 'test_' + Date.now();
@@ -1114,6 +1353,16 @@ Usage:
   --leaderboard                         Show top referrers
   --stats                               Show program statistics
   --server --port=3016                  Start HTTP server
+
+HITL Commands (Email Preview Mode):
+  --list-pending                        List pending email approvals
+  --approve=<id>                        Approve and send email
+  --reject=<id> [--reason "text"]       Reject email
+
+Environment:
+  REFERRAL_PREVIEW_MODE=true            Enable email preview (default: true)
+  REFERRAL_AUTO_APPROVE_WELCOME=true    Auto-approve welcome emails
+  REFERRAL_SLACK_WEBHOOK=<url>          Notify Slack on pending emails
 
 Benchmark: +16% CLV, -80% acquisition cost
   `);

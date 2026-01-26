@@ -29,6 +29,9 @@ require('dotenv').config();
 
 const https = require('https');
 const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
 const { URL } = require('url');
 
 // ============================================================================
@@ -36,9 +39,18 @@ const { URL } = require('url');
 // ============================================================================
 
 const CONFIG = {
-  version: '1.0.0',
+  version: '1.1.0 (HITL)',
   port: parseInt(process.env.REPLENISHMENT_PORT) || 3018,
   httpTimeout: 15000,
+
+  // HITL: Frequency Cap (Session 165ter)
+  hitl: {
+    enabled: process.env.REPLENISHMENT_HITL !== 'false', // Default: ON
+    maxRemindersPerWeek: parseInt(process.env.REPLENISHMENT_MAX_PER_WEEK) || 1,
+    pendingDir: './data/hitl-pending/replenishment/',
+    historyFile: './data/hitl-pending/replenishment/history.json',
+    slackWebhook: process.env.REPLENISHMENT_SLACK_WEBHOOK || null
+  },
 
   // AI Providers - Frontier models ONLY (mandatory per user rules)
   ai: {
@@ -125,6 +137,191 @@ function safeJsonParse(str, fallback = null) {
   } catch (e) {
     return fallback;
   }
+}
+
+// ============================================================================
+// HITL: Frequency Cap (Session 165ter)
+// ============================================================================
+
+function ensureHitlDir() {
+  const dir = path.resolve(CONFIG.hitl.pendingDir);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  return dir;
+}
+
+function loadHistory() {
+  ensureHitlDir();
+  const historyPath = path.resolve(CONFIG.hitl.historyFile);
+  if (!fs.existsSync(historyPath)) {
+    return {};
+  }
+  return safeJsonParse(fs.readFileSync(historyPath, 'utf8'), {});
+}
+
+function saveHistory(history) {
+  ensureHitlDir();
+  const historyPath = path.resolve(CONFIG.hitl.historyFile);
+  fs.writeFileSync(historyPath, JSON.stringify(history, null, 2));
+}
+
+function recordReminderSent(customerId, email) {
+  const history = loadHistory();
+  const key = `${customerId}_${email}`;
+  if (!history[key]) {
+    history[key] = [];
+  }
+  history[key].push(new Date().toISOString());
+  // Keep only last 30 days
+  const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+  history[key] = history[key].filter(d => new Date(d).getTime() > thirtyDaysAgo);
+  saveHistory(history);
+}
+
+function checkFrequencyCap(customerId, email) {
+  const history = loadHistory();
+  const key = `${customerId}_${email}`;
+  const reminders = history[key] || [];
+
+  // Count reminders in the last 7 days
+  const oneWeekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+  const recentReminders = reminders.filter(d => new Date(d).getTime() > oneWeekAgo);
+
+  return {
+    allowed: recentReminders.length < CONFIG.hitl.maxRemindersPerWeek,
+    currentCount: recentReminders.length,
+    maxAllowed: CONFIG.hitl.maxRemindersPerWeek,
+    lastReminder: reminders.length > 0 ? reminders[reminders.length - 1] : null
+  };
+}
+
+function generatePendingId() {
+  return `repl_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
+}
+
+function queuePendingReminder(customerId, email, depletionInfo, emailContent, reason) {
+  const dir = ensureHitlDir();
+  const id = generatePendingId();
+  const pendingFile = path.join(dir, `${id}.json`);
+
+  const pending = {
+    id,
+    createdAt: new Date().toISOString(),
+    status: 'pending',
+    reason,
+    customerId,
+    email,
+    depletionInfo,
+    emailContent
+  };
+
+  fs.writeFileSync(pendingFile, JSON.stringify(pending, null, 2));
+  log('info', `📋 Reminder queued for approval: ${id} (${reason})`);
+
+  // Notify Slack
+  if (CONFIG.hitl.slackWebhook) {
+    notifySlackPending(pending).catch(e => log('error', `Slack failed: ${e.message}`));
+  }
+
+  return pending;
+}
+
+function listPendingReminders() {
+  const dir = ensureHitlDir();
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'history.json');
+
+  return files.map(f => {
+    const content = fs.readFileSync(path.join(dir, f), 'utf8');
+    return safeJsonParse(content, null);
+  }).filter(p => p && p.status === 'pending');
+}
+
+async function approvePendingReminder(pendingId) {
+  const dir = ensureHitlDir();
+  const pendingFile = path.join(dir, `${pendingId}.json`);
+
+  if (!fs.existsSync(pendingFile)) {
+    throw new Error(`Pending reminder not found: ${pendingId}`);
+  }
+
+  const pending = safeJsonParse(fs.readFileSync(pendingFile, 'utf8'));
+  if (pending.status !== 'pending') {
+    throw new Error(`Reminder already ${pending.status}`);
+  }
+
+  // Send the email
+  const result = await sendReminderEmailDirect(pending.email, pending.emailContent, pending.depletionInfo);
+
+  // Record in history
+  recordReminderSent(pending.customerId, pending.email);
+
+  // Update status
+  pending.status = 'approved';
+  pending.approvedAt = new Date().toISOString();
+  pending.sendResult = result;
+  fs.writeFileSync(pendingFile, JSON.stringify(pending, null, 2));
+
+  log('info', `✅ Reminder approved and sent: ${pendingId}`);
+  return { status: 'approved', sendResult: result };
+}
+
+function rejectPendingReminder(pendingId, reason = 'Rejected by operator') {
+  const dir = ensureHitlDir();
+  const pendingFile = path.join(dir, `${pendingId}.json`);
+
+  if (!fs.existsSync(pendingFile)) {
+    throw new Error(`Pending reminder not found: ${pendingId}`);
+  }
+
+  const pending = safeJsonParse(fs.readFileSync(pendingFile, 'utf8'));
+  if (pending.status !== 'pending') {
+    throw new Error(`Reminder already ${pending.status}`);
+  }
+
+  pending.status = 'rejected';
+  pending.rejectedAt = new Date().toISOString();
+  pending.rejectionReason = reason;
+  fs.writeFileSync(pendingFile, JSON.stringify(pending, null, 2));
+
+  log('info', `❌ Reminder rejected: ${pendingId}`);
+  return { status: 'rejected', reason };
+}
+
+async function notifySlackPending(pending) {
+  if (!CONFIG.hitl.slackWebhook) return;
+
+  const message = {
+    text: `🔔 *Replenishment Reminder Pending*`,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Replenishment reminder needs approval*\n\n` +
+            `• *ID:* \`${pending.id}\`\n` +
+            `• *Reason:* ${pending.reason}\n` +
+            `• *Customer:* ${pending.email}\n` +
+            `• *Product:* ${pending.depletionInfo?.productName || 'N/A'}\n` +
+            `• *Days until depletion:* ${pending.depletionInfo?.daysUntilDepletion || 'N/A'}`
+        }
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Commands:*\n\`node replenishment-reminder.cjs --approve=${pending.id}\`\n` +
+            `\`node replenishment-reminder.cjs --reject=${pending.id}\``
+        }
+      }
+    ]
+  };
+
+  await httpRequest(CONFIG.hitl.slackWebhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message)
+  });
 }
 
 // ============================================================================
@@ -398,7 +595,8 @@ function getTemplateEmail(customerData, depletionInfo) {
 // EMAIL SENDING - FALLBACK CHAIN
 // ============================================================================
 
-async function sendReminderEmail(email, emailContent, depletionInfo) {
+// Direct send (bypasses HITL - used after approval)
+async function sendReminderEmailDirect(email, emailContent, depletionInfo) {
   // Try Klaviyo first
   if (CONFIG.email.klaviyo.apiKey) {
     try {
@@ -426,6 +624,45 @@ async function sendReminderEmail(email, emailContent, depletionInfo) {
   }
 
   return { success: false, error: 'All email providers failed' };
+}
+
+// HITL-aware send (checks frequency cap)
+async function sendReminderEmail(customerId, email, emailContent, depletionInfo) {
+  // Check frequency cap if HITL enabled
+  if (CONFIG.hitl.enabled) {
+    const freqCheck = checkFrequencyCap(customerId, email);
+
+    if (!freqCheck.allowed) {
+      log('info', `⚠️ Frequency cap exceeded for ${email} (${freqCheck.currentCount}/${freqCheck.maxAllowed} this week)`);
+
+      // Queue for approval
+      const pending = queuePendingReminder(
+        customerId,
+        email,
+        depletionInfo,
+        emailContent,
+        `Frequency cap exceeded (${freqCheck.currentCount}/${freqCheck.maxAllowed} reminders this week)`
+      );
+
+      return {
+        success: false,
+        status: 'pending_approval',
+        pendingId: pending.id,
+        reason: 'Frequency cap exceeded',
+        message: `Use --approve=${pending.id} to send anyway`
+      };
+    }
+  }
+
+  // Send directly
+  const result = await sendReminderEmailDirect(email, emailContent, depletionInfo);
+
+  // Record in history if successful
+  if (result.success) {
+    recordReminderSent(customerId, email);
+  }
+
+  return result;
 }
 
 async function sendViaKlaviyo(email, emailContent, depletionInfo) {
@@ -567,8 +804,22 @@ async function sendReplenishmentReminder(customerId, email, products = null, dry
     };
   }
 
-  // Send email
-  const sendResult = await sendReminderEmail(email, emailContent, urgentProduct);
+  // Send email (with HITL frequency cap check)
+  const sendResult = await sendReminderEmail(customerId, email, emailContent, urgentProduct);
+
+  // Handle pending approval case
+  if (sendResult.status === 'pending_approval') {
+    return {
+      status: 'pending_approval',
+      customerId,
+      email,
+      depletionInfo: urgentProduct,
+      pendingId: sendResult.pendingId,
+      reason: sendResult.reason,
+      message: sendResult.message,
+      aiProvider: emailContent.provider
+    };
+  }
 
   return {
     status: sendResult.success ? 'sent' : 'failed',
@@ -616,6 +867,15 @@ async function healthCheck() {
     if (!hasAI) status.warnings.push('No AI provider configured');
     if (!hasEmail) status.warnings.push('No email provider configured');
   }
+
+  // HITL status (Session 165ter)
+  const pendingReminders = listPendingReminders();
+  status.hitl = {
+    enabled: CONFIG.hitl.enabled,
+    maxRemindersPerWeek: CONFIG.hitl.maxRemindersPerWeek,
+    pendingApprovals: pendingReminders.length,
+    slackNotifications: CONFIG.hitl.slackWebhook ? '✅ Configured' : '⚠️ Not configured'
+  };
 
   return status;
 }
@@ -762,6 +1022,51 @@ async function main() {
     return;
   }
 
+  // HITL Commands (Session 165ter)
+  if (hasFlag('list-pending')) {
+    const pending = listPendingReminders();
+    console.log('\n📋 Pending Replenishment Reminders (HITL)\n');
+    if (pending.length === 0) {
+      console.log('No pending reminders.');
+    } else {
+      pending.forEach(p => {
+        console.log(`  ${p.id}`);
+        console.log(`    Reason: ${p.reason}`);
+        console.log(`    Email: ${p.email}`);
+        console.log(`    Product: ${p.depletionInfo?.productName || 'N/A'}`);
+        console.log(`    Created: ${p.createdAt}`);
+        console.log('');
+      });
+      console.log(`Total: ${pending.length} pending`);
+    }
+    return;
+  }
+
+  const approveId = getArg('approve');
+  if (approveId) {
+    console.log(`\n✅ Approving reminder: ${approveId}\n`);
+    try {
+      const result = await approvePendingReminder(approveId);
+      console.log('Result:', JSON.stringify(result, null, 2));
+    } catch (error) {
+      console.log(`❌ Error: ${error.message}`);
+    }
+    return;
+  }
+
+  const rejectId = getArg('reject');
+  if (rejectId) {
+    const reason = getArg('reason') || 'Rejected by operator';
+    console.log(`\n❌ Rejecting reminder: ${rejectId}\n`);
+    try {
+      const result = rejectPendingReminder(rejectId, reason);
+      console.log('Result:', JSON.stringify(result, null, 2));
+    } catch (error) {
+      console.log(`❌ Error: ${error.message}`);
+    }
+    return;
+  }
+
   // Check depletion
   if (hasFlag('check')) {
     const customerId = getArg('customer-id') || 'CUST001';
@@ -808,6 +1113,16 @@ Usage:
   --remind --customer-id=X --email=Y    Send reminder for depleting products
   --simulate --customer-id=X --email=Y  Simulate reminder without sending
   --server --port=${CONFIG.port}                 Start HTTP server
+
+HITL Commands (Frequency Cap):
+  --list-pending                        List pending reminder approvals
+  --approve=<id>                        Approve and send reminder
+  --reject=<id> [--reason="text"]       Reject reminder
+
+Environment:
+  REPLENISHMENT_HITL=true               Enable frequency cap (default: true)
+  REPLENISHMENT_MAX_PER_WEEK=1          Max reminders per customer per week
+  REPLENISHMENT_SLACK_WEBHOOK=<url>     Slack notification URL
 
 Benchmark: ${CONFIG.benchmark.repeatPurchaseRate} repeat purchase (${CONFIG.benchmark.source})
   `);

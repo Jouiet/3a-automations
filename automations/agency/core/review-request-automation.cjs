@@ -19,12 +19,25 @@
 require('dotenv').config();
 const http = require('http');
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIGURATION
 // ─────────────────────────────────────────────────────────────────────────────
 
 const CONFIG = {
+  version: '1.1.0 (HITL)',
+
+  // HITL: Timing Review (Session 165ter)
+  hitl: {
+    enabled: process.env.REVIEW_REQUEST_HITL !== 'false', // Default: ON
+    requireApprovalForVIP: process.env.REVIEW_VIP_APPROVAL !== 'false', // VIP customers require approval
+    vipOrderThreshold: parseFloat(process.env.REVIEW_VIP_THRESHOLD) || 500, // €500+ orders are VIP
+    pendingDir: './data/hitl-pending/review-requests/',
+    slackWebhook: process.env.REVIEW_REQUEST_SLACK_WEBHOOK || null
+  },
+
   // Timing configuration
   timing: {
     minDaysAfterDelivery: 7,    // Wait at least 7 days
@@ -169,6 +182,174 @@ function addPendingReview(orderId, data) {
     pendingReviews.delete(firstKey);
   }
   pendingReviews.set(orderId, { ...data, addedAt: Date.now() });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HITL: VIP APPROVAL FUNCTIONS (Session 165ter)
+// ─────────────────────────────────────────────────────────────────────────────
+
+function ensurePendingDir() {
+  const dir = CONFIG.hitl.pendingDir;
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
+function isVIPOrder(order) {
+  const total = parseFloat(order.total_price || order.subtotal_price || 0);
+  return total >= CONFIG.hitl.vipOrderThreshold;
+}
+
+function queueForApproval(order, emailContent, customer, products) {
+  ensurePendingDir();
+  const requestId = `review_${order.id}_${Date.now()}`;
+  const requestData = {
+    id: requestId,
+    createdAt: new Date().toISOString(),
+    status: 'pending',
+    order: {
+      id: order.id,
+      name: order.name,
+      totalPrice: order.total_price,
+      email: order.email,
+      deliveredAt: order.fulfilled_at
+    },
+    customer: {
+      email: customer.email,
+      firstName: customer.firstName,
+      lastName: customer.lastName
+    },
+    products: products.map(p => ({ id: p.id, title: p.title })),
+    emailContent: emailContent,
+    isVIP: isVIPOrder(order),
+    reason: isVIPOrder(order) ? `VIP order (€${order.total_price})` : 'Manual review'
+  };
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${requestId}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(requestData, null, 2));
+  log('info', `Review request ${requestId} queued for approval`);
+  notifySlackRequest(requestData);
+  return requestId;
+}
+
+function listPendingRequests() {
+  ensurePendingDir();
+  const files = fs.readdirSync(CONFIG.hitl.pendingDir).filter(f => f.endsWith('.json'));
+  return files.map(f => {
+    try {
+      const data = JSON.parse(fs.readFileSync(path.join(CONFIG.hitl.pendingDir, f)));
+      return {
+        id: data.id,
+        createdAt: data.createdAt,
+        status: data.status,
+        orderName: data.order.name,
+        customerEmail: data.customer.email,
+        isVIP: data.isVIP
+      };
+    } catch (e) {
+      return null;
+    }
+  }).filter(r => r && r.status === 'pending');
+}
+
+function getRequestById(requestId) {
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${requestId}.json`);
+  if (!fs.existsSync(filePath)) return null;
+  return JSON.parse(fs.readFileSync(filePath));
+}
+
+async function approveRequest(requestId) {
+  const request = getRequestById(requestId);
+  if (!request) {
+    log('error', `Request ${requestId} not found`);
+    return { success: false, error: 'Request not found' };
+  }
+  if (request.status !== 'pending') {
+    log('warning', `Request ${requestId} already ${request.status}`);
+    return { success: false, error: `Request already ${request.status}` };
+  }
+
+  try {
+    // Send the review request email
+    const result = await sendReviewRequestEmail(
+      request.customer,
+      request.order,
+      request.emailContent
+    );
+
+    // Update request status
+    request.status = 'approved';
+    request.approvedAt = new Date().toISOString();
+    request.sendResult = result;
+    const filePath = path.join(CONFIG.hitl.pendingDir, `${requestId}.json`);
+    fs.writeFileSync(filePath, JSON.stringify(request, null, 2));
+
+    log('success', `Request ${requestId} approved and sent`);
+    return { success: true, provider: result.provider };
+  } catch (error) {
+    log('error', `Failed to send approved request: ${error.message}`);
+    return { success: false, error: error.message };
+  }
+}
+
+function rejectRequest(requestId, reason = 'Rejected by operator') {
+  const request = getRequestById(requestId);
+  if (!request) {
+    log('error', `Request ${requestId} not found`);
+    return { success: false, error: 'Request not found' };
+  }
+  if (request.status !== 'pending') {
+    log('warning', `Request ${requestId} already ${request.status}`);
+    return { success: false, error: `Request already ${request.status}` };
+  }
+
+  request.status = 'rejected';
+  request.rejectedAt = new Date().toISOString();
+  request.rejectReason = reason;
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${requestId}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(request, null, 2));
+
+  log('info', `Request ${requestId} rejected: ${reason}`);
+  return { success: true };
+}
+
+async function notifySlackRequest(request) {
+  if (!CONFIG.hitl.slackWebhook) return;
+  try {
+    const message = {
+      text: `🔔 Review Request Pending Approval`,
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Review Request Pending Approval*\n\n` +
+              `📦 *Order:* ${request.order.name}\n` +
+              `👤 *Customer:* ${request.customer.firstName} (${request.customer.email})\n` +
+              `💰 *Order Value:* €${request.order.totalPrice}\n` +
+              `${request.isVIP ? '⭐ *VIP Customer*' : ''}\n\n` +
+              `📧 *Subject:* ${request.emailContent.subject}`
+          }
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Commands:*\n` +
+              `\`node review-request-automation.cjs --approve=${request.id}\`\n` +
+              `\`node review-request-automation.cjs --reject=${request.id}\``
+          }
+        }
+      ]
+    };
+    await fetchWithTimeout(CONFIG.hitl.slackWebhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(message)
+    });
+    log('info', 'Slack notification sent for review request');
+  } catch (error) {
+    log('warning', `Slack notification failed: ${error.message}`);
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -699,6 +880,13 @@ async function processDeliveredOrder(order) {
     // Generate personalized email
     const emailContent = await generatePersonalizedEmail(customer, order, products, language);
 
+    // HITL: Queue VIP orders for approval
+    if (CONFIG.hitl.enabled && CONFIG.hitl.requireApprovalForVIP && isVIPOrder(order)) {
+      const requestId = queueForApproval(order, emailContent, customer, products);
+      log('info', `VIP order queued for approval`, { orderId: order.id, requestId });
+      return { success: true, status: 'queued_for_approval', requestId, isVIP: true };
+    }
+
     // Send email
     const result = await sendReviewRequestEmail(customer, order, emailContent);
 
@@ -941,8 +1129,15 @@ async function processPendingReviews() {
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function healthCheck() {
+  // Count pending requests
+  let pendingRequests = 0;
+  try {
+    pendingRequests = listPendingRequests().length;
+  } catch (e) { /* ignore */ }
+
   console.log('\n📊 Review Request Automation - Health Check\n');
   console.log('═'.repeat(60));
+  console.log(`\n📋 Version: ${CONFIG.version}`);
 
   // AI Providers
   console.log('\n🤖 AI Providers:');
@@ -968,6 +1163,14 @@ async function healthCheck() {
   console.log(`  ⚠️ Alert threshold: < ${CONFIG.alerts.lowRatingThreshold} stars`);
   console.log(`  📧 Alert email: ${CONFIG.alerts.alertEmail || 'Not configured'}`);
 
+  // HITL Status
+  console.log('\n🔒 HITL (Human In The Loop):');
+  console.log(`  ${CONFIG.hitl.enabled ? '✅' : '⚠️'} Enabled: ${CONFIG.hitl.enabled}`);
+  console.log(`  ${CONFIG.hitl.requireApprovalForVIP ? '✅' : '⚠️'} VIP Approval: ${CONFIG.hitl.requireApprovalForVIP ? 'Required' : 'Disabled'}`);
+  console.log(`  💰 VIP Threshold: €${CONFIG.hitl.vipOrderThreshold}`);
+  console.log(`  📋 Pending Approvals: ${pendingRequests}`);
+  console.log(`  ${CONFIG.hitl.slackWebhook ? '✅' : '⚠️'} Slack Notifications: ${CONFIG.hitl.slackWebhook ? 'Configured' : 'Not configured'}`);
+
   // Summary
   const aiCount = Object.values(PROVIDERS).filter(p => p.enabled).length;
   const emailCount = [EXTERNAL_APIS.klaviyo.enabled, EXTERNAL_APIS.omnisend.enabled].filter(Boolean).length;
@@ -988,7 +1191,7 @@ async function healthCheck() {
     console.log('❌ Status: NOT OPERATIONAL\n');
   }
 
-  return { aiCount, emailCount, isOperational, hasEmailProvider };
+  return { aiCount, emailCount, isOperational, hasEmailProvider, pendingRequests };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1061,10 +1264,63 @@ async function main() {
     return;
   }
 
+  // HITL: List pending requests
+  if (args.includes('--list-pending')) {
+    const requests = listPendingRequests();
+    console.log('\n📋 Pending Review Requests\n');
+    if (requests.length === 0) {
+      console.log('No pending requests.');
+    } else {
+      requests.forEach(r => {
+        console.log(`  📧 ${r.id}`);
+        console.log(`     Order: ${r.orderName}`);
+        console.log(`     Customer: ${r.customerEmail}`);
+        console.log(`     VIP: ${r.isVIP ? '⭐ Yes' : 'No'}`);
+        console.log(`     Created: ${r.createdAt}`);
+        console.log('');
+      });
+    }
+    return;
+  }
+
+  // HITL: View request details
+  const viewArg = args.find(a => a.startsWith('--view='));
+  if (viewArg) {
+    const requestId = viewArg.split('=')[1];
+    const request = getRequestById(requestId);
+    if (!request) {
+      console.log(`\n❌ Request ${requestId} not found\n`);
+      return;
+    }
+    console.log('\n📧 Request Details\n');
+    console.log(JSON.stringify(request, null, 2));
+    return;
+  }
+
+  // HITL: Approve request
+  const approveArg = args.find(a => a.startsWith('--approve='));
+  if (approveArg) {
+    const requestId = approveArg.split('=')[1];
+    console.log(`\n✅ Approving request ${requestId}...\n`);
+    const result = await approveRequest(requestId);
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
+  // HITL: Reject request
+  const rejectArg = args.find(a => a.startsWith('--reject='));
+  if (rejectArg) {
+    const requestId = rejectArg.split('=')[1];
+    console.log(`\n❌ Rejecting request ${requestId}...\n`);
+    const result = rejectRequest(requestId);
+    console.log(JSON.stringify(result, null, 2));
+    return;
+  }
+
   // Show help
   console.log(`
-📧 Review Request Automation - 3A Automation
-═══════════════════════════════════════════════════
+📧 Review Request Automation v${CONFIG.version} - 3A Automation
+═══════════════════════════════════════════════════════════════
 
 Usage:
   node review-request-automation.cjs --health          Check configuration
@@ -1072,6 +1328,12 @@ Usage:
   node review-request-automation.cjs --server          Start webhook server (port 3011)
   node review-request-automation.cjs --server --port=3012
   node review-request-automation.cjs --process-pending Process scheduled requests
+
+HITL Commands:
+  --list-pending                        List pending VIP review requests
+  --view=<id>                           View request details
+  --approve=<id>                        Approve and send request
+  --reject=<id>                         Reject request
 
 Shopify Webhook Setup:
   URL: https://your-domain.com/webhook/shopify/fulfilled
@@ -1081,6 +1343,7 @@ Environment Variables:
   SHOPIFY_STORE_URL, SHOPIFY_ACCESS_TOKEN, SHOPIFY_WEBHOOK_SECRET
   KLAVIYO_API_KEY or OMNISEND_API_KEY
   XAI_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, ANTHROPIC_API_KEY
+  REVIEW_REQUEST_HITL, REVIEW_VIP_THRESHOLD, REVIEW_REQUEST_SLACK_WEBHOOK
 
 Benchmark: +270% reviews with automated requests
 `);

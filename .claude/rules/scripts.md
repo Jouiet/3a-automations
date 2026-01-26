@@ -6,7 +6,7 @@ paths:
 
 # Native Scripts
 
-## Status VÉRIFIÉ (26/01/2026 - Session 165)
+## Status VÉRIFIÉ (26/01/2026 - Session 165ter)
 
 ### Scripts Core
 | Category | Count | Status |
@@ -72,7 +72,7 @@ providers: ['grok', 'openai', 'gemini', 'anthropic']
 // Auto-rotate on failure
 ```
 
-## HITL (Human In The Loop) - Session 165bis
+## HITL (Human In The Loop) - Session 165ter (12/18 = 67%)
 | Script | HITL Type | Threshold |
 |--------|-----------|-----------|
 | blog-generator-resilient | Draft approval | requireApproval: true |
@@ -81,12 +81,20 @@ providers: ['grok', 'openai', 'gemini', 'anthropic']
 | sms-automation-resilient | Daily spend | €50/day |
 | cjdropshipping-automation | Order confirm | confirmOrder() |
 | podcast-generator-resilient | Script review | Required |
-| **at-risk-customer-flow** | **LTV/Discount** | **€500 or ≥20%** |
-| **birthday-anniversary-flow** | **LTV/Discount** | **€500 or ≥20%** |
+| at-risk-customer-flow | LTV/Discount | €500 or ≥20% |
+| birthday-anniversary-flow | LTV/Discount | €500 or ≥20% |
+| **referral-program-automation** | **Email preview** | **Preview mode default ON** |
+| **replenishment-reminder** | **Frequency cap** | **1 reminder/week/customer** |
+| **price-drop-alerts** | **Batch approval** | **>10 alerts in batch** |
+| **review-request-automation** | **VIP approval** | **€500+ orders** |
 
 ### HITL Commands
 ```bash
 node SCRIPT.cjs --list-pending     # List pending approvals
 node SCRIPT.cjs --approve=<id>     # Approve intervention
 node SCRIPT.cjs --reject=<id>      # Reject intervention
+
+# Script-specific
+node price-drop-alerts.cjs --list-batches   # List pending batches
+node price-drop-alerts.cjs --approve=<id>   # Approve batch
 ```

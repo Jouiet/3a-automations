@@ -30,10 +30,22 @@ const crypto = require('crypto');
 // CONFIGURATION - FRONTIER MODELS ONLY (MANDATORY)
 // ============================================================================
 
+const fs = require('fs');
+const path = require('path');
+
 const CONFIG = {
-  version: '1.0.0',
+  version: '1.1.0 (HITL)',
   port: parseInt(process.env.PRICE_DROP_PORT) || 3017,
   httpTimeout: 15000,
+
+  // HITL: Batch Approval (Session 165ter)
+  hitl: {
+    enabled: process.env.PRICE_DROP_HITL !== 'false', // Default: ON
+    batchThreshold: parseInt(process.env.PRICE_DROP_BATCH_THRESHOLD) || 10, // Require approval if >10 alerts
+    pendingDir: './data/hitl-pending/price-drop/',
+    slackWebhook: process.env.PRICE_DROP_SLACK_WEBHOOK || null,
+    maxPendingAge: 24 * 60 * 60 * 1000 // 24 hours max
+  },
 
   // AI Providers - FRONTIER MODELS (Session 127bis requirement)
   ai: {
@@ -179,6 +191,172 @@ const priceStore = {
   alerts: new Map(),        // alertId -> { customerId, productId, sentAt }
   priceHistory: new Map()   // productId -> [{ price, timestamp }]
 };
+
+// ============================================================================
+// HITL: BATCH APPROVAL FUNCTIONS (Session 165ter)
+// ============================================================================
+
+function ensurePendingDir() {
+  const dir = CONFIG.hitl.pendingDir;
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
+function queueBatchForApproval(alerts) {
+  ensurePendingDir();
+  const batchId = `batch_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  const batchData = {
+    id: batchId,
+    createdAt: new Date().toISOString(),
+    status: 'pending',
+    alertCount: alerts.length,
+    alerts: alerts.map(a => ({
+      customerId: a.customerId,
+      productId: a.productId,
+      originalPrice: a.originalPrice,
+      newPrice: a.newPrice,
+      dropPercent: a.dropPercent,
+      alertType: a.alertType
+    }))
+  };
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${batchId}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(batchData, null, 2));
+  log(`Batch ${batchId} queued for approval (${alerts.length} alerts)`);
+  notifySlackBatch(batchData);
+  return batchId;
+}
+
+function listPendingBatches() {
+  ensurePendingDir();
+  const files = fs.readdirSync(CONFIG.hitl.pendingDir).filter(f => f.endsWith('.json'));
+  return files.map(f => {
+    const data = JSON.parse(fs.readFileSync(path.join(CONFIG.hitl.pendingDir, f)));
+    return {
+      id: data.id,
+      createdAt: data.createdAt,
+      status: data.status,
+      alertCount: data.alertCount
+    };
+  }).filter(b => b.status === 'pending');
+}
+
+function getBatchById(batchId) {
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${batchId}.json`);
+  if (!fs.existsSync(filePath)) return null;
+  return JSON.parse(fs.readFileSync(filePath));
+}
+
+async function approveBatch(batchId) {
+  const batch = getBatchById(batchId);
+  if (!batch) {
+    log(`Batch ${batchId} not found`, 'error');
+    return { success: false, error: 'Batch not found' };
+  }
+  if (batch.status !== 'pending') {
+    log(`Batch ${batchId} already ${batch.status}`, 'warn');
+    return { success: false, error: `Batch already ${batch.status}` };
+  }
+
+  // Send all alerts in the batch
+  const results = [];
+  for (const alert of batch.alerts) {
+    try {
+      const customer = {
+        id: alert.customerId,
+        email: `${alert.customerId}@example.com`, // In production, fetch from DB
+        firstName: 'Customer',
+        language: 'French'
+      };
+      const product = priceStore.products.get(alert.productId) || {
+        id: alert.productId,
+        name: 'Product',
+        price: alert.newPrice
+      };
+      const priceData = {
+        originalPrice: alert.originalPrice,
+        newPrice: alert.newPrice,
+        dropPercent: alert.dropPercent
+      };
+
+      const emailData = await generatePriceDropEmail(customer, product, priceData);
+      const sendResult = await sendAlert(customer, emailData, { ...product, ...priceData });
+
+      results.push({ status: 'sent', customerId: alert.customerId, productId: alert.productId });
+    } catch (error) {
+      results.push({ status: 'error', customerId: alert.customerId, error: error.message });
+    }
+  }
+
+  // Update batch status
+  batch.status = 'approved';
+  batch.approvedAt = new Date().toISOString();
+  batch.results = results;
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${batchId}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(batch, null, 2));
+
+  log(`Batch ${batchId} approved and processed (${results.filter(r => r.status === 'sent').length}/${results.length} sent)`);
+  return { success: true, sent: results.filter(r => r.status === 'sent').length, total: results.length };
+}
+
+function rejectBatch(batchId, reason = 'Rejected by operator') {
+  const batch = getBatchById(batchId);
+  if (!batch) {
+    log(`Batch ${batchId} not found`, 'error');
+    return { success: false, error: 'Batch not found' };
+  }
+  if (batch.status !== 'pending') {
+    log(`Batch ${batchId} already ${batch.status}`, 'warn');
+    return { success: false, error: `Batch already ${batch.status}` };
+  }
+
+  batch.status = 'rejected';
+  batch.rejectedAt = new Date().toISOString();
+  batch.rejectReason = reason;
+  const filePath = path.join(CONFIG.hitl.pendingDir, `${batchId}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(batch, null, 2));
+
+  log(`Batch ${batchId} rejected: ${reason}`);
+  return { success: true };
+}
+
+async function notifySlackBatch(batch) {
+  if (!CONFIG.hitl.slackWebhook) return;
+  try {
+    const message = {
+      text: `🔔 Price Drop Alert Batch Pending Approval`,
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Price Drop Alert Batch*\n\n` +
+              `📦 *Batch ID:* \`${batch.id}\`\n` +
+              `📊 *Alert Count:* ${batch.alertCount}\n` +
+              `⏰ *Created:* ${batch.createdAt}\n\n` +
+              `_Alerts queued because batch size exceeds threshold (${CONFIG.hitl.batchThreshold})_`
+          }
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `*Commands:*\n` +
+              `\`node price-drop-alerts.cjs --approve=${batch.id}\`\n` +
+              `\`node price-drop-alerts.cjs --reject=${batch.id}\``
+          }
+        }
+      ]
+    };
+    await httpRequest(CONFIG.hitl.slackWebhook, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    }, JSON.stringify(message));
+    log('Slack notification sent for batch');
+  } catch (error) {
+    log(`Slack notification failed: ${error.message}`, 'warn');
+  }
+}
 
 // ============================================================================
 // AI CONTENT GENERATION - MULTI-PROVIDER FALLBACK
@@ -621,6 +799,18 @@ async function checkPriceDrops() {
 
 async function sendPriceDropAlerts() {
   const pendingAlerts = await checkPriceDrops();
+
+  // HITL: If batch exceeds threshold, queue for approval
+  if (CONFIG.hitl.enabled && pendingAlerts.length > CONFIG.hitl.batchThreshold) {
+    const batchId = queueBatchForApproval(pendingAlerts);
+    return [{
+      status: 'queued_for_approval',
+      batchId,
+      alertCount: pendingAlerts.length,
+      reason: `Batch size (${pendingAlerts.length}) exceeds threshold (${CONFIG.hitl.batchThreshold})`
+    }];
+  }
+
   const results = [];
 
   for (const alert of pendingAlerts) {
@@ -722,6 +912,12 @@ async function simulatePriceDrop(productId, dropPercent, customer) {
 // ============================================================================
 
 async function healthCheck() {
+  // Count pending batches
+  let pendingBatches = 0;
+  try {
+    pendingBatches = listPendingBatches().length;
+  } catch (e) { /* ignore */ }
+
   const status = {
     timestamp: new Date().toISOString(),
     version: CONFIG.version,
@@ -737,7 +933,13 @@ async function healthCheck() {
       'Omnisend': CONFIG.email.omnisend.apiKey ? '✅ Configured' : '⚠️ Not configured'
     },
     thresholds: CONFIG.thresholds,
-    benchmark: CONFIG.benchmark
+    benchmark: CONFIG.benchmark,
+    hitl: {
+      enabled: CONFIG.hitl.enabled,
+      batchThreshold: CONFIG.hitl.batchThreshold,
+      pendingBatches: pendingBatches,
+      slackNotifications: CONFIG.hitl.slackWebhook ? '✅ Configured' : '⚠️ Not configured'
+    }
   };
 
   // Check if at least one AI provider is configured
@@ -896,6 +1098,12 @@ Usage:
   --simulate --product-id=X --drop=Y    Simulate price drop
   --server --port=${CONFIG.port}                  Start HTTP server
 
+HITL Commands:
+  --list-batches                        List pending alert batches
+  --view-batch=<id>                     View batch details
+  --approve=<id>                        Approve and send batch
+  --reject=<id>                         Reject batch
+
 Benchmark: ${CONFIG.benchmark.conversionRate} conversion rate
   `);
     process.exit(0);
@@ -957,7 +1165,58 @@ Benchmark: ${CONFIG.benchmark.conversionRate} conversion rate
       return;
     }
 
-    console.log('Unknown command. Use --health, --check-prices, --simulate, or --server');
+    // HITL: List pending batches
+    if (args.includes('--list-batches')) {
+      const batches = listPendingBatches();
+      console.log('\n📋 Pending Alert Batches\n');
+      if (batches.length === 0) {
+        console.log('No pending batches.');
+      } else {
+        batches.forEach(b => {
+          console.log(`  📦 ${b.id}`);
+          console.log(`     Alerts: ${b.alertCount}`);
+          console.log(`     Created: ${b.createdAt}`);
+          console.log('');
+        });
+      }
+      return;
+    }
+
+    // HITL: View batch details
+    const viewBatchArg = args.find(a => a.startsWith('--view-batch='));
+    if (viewBatchArg) {
+      const batchId = viewBatchArg.split('=')[1];
+      const batch = getBatchById(batchId);
+      if (!batch) {
+        console.log(`\n❌ Batch ${batchId} not found\n`);
+        return;
+      }
+      console.log('\n📦 Batch Details\n');
+      console.log(JSON.stringify(batch, null, 2));
+      return;
+    }
+
+    // HITL: Approve batch
+    const approveArg = args.find(a => a.startsWith('--approve='));
+    if (approveArg) {
+      const batchId = approveArg.split('=')[1];
+      console.log(`\n✅ Approving batch ${batchId}...\n`);
+      const result = await approveBatch(batchId);
+      console.log(JSON.stringify(result, null, 2));
+      return;
+    }
+
+    // HITL: Reject batch
+    const rejectArg = args.find(a => a.startsWith('--reject='));
+    if (rejectArg) {
+      const batchId = rejectArg.split('=')[1];
+      console.log(`\n❌ Rejecting batch ${batchId}...\n`);
+      const result = rejectBatch(batchId);
+      console.log(JSON.stringify(result, null, 2));
+      return;
+    }
+
+    console.log('Unknown command. Use --health, --check-prices, --simulate, --server, or HITL commands');
   })().catch(err => {
     console.error('Error:', err.message);
     process.exit(1);
