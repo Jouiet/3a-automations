@@ -994,11 +994,11 @@ Analyse de 4 documents sur fiabilité IA → Contenu marketing créé:
 
 | Problème | Impact | Action | Lien |
 | :--- | :--- | :--- | :--- |
-| GSC API disabled | Sensor SEO cassé | Activer API | [Cloud Console](https://console.developers.google.com/apis/api/searchconsole.googleapis.com/overview?project=359870692708) |
+| ~~GSC API disabled~~ | ~~Sensor SEO cassé~~ | ✅ **FIXED S161bis** | - |
 | META_ACCESS_TOKEN vide | Meta Ads cassé | Configurer token | Facebook Business |
 | TIKTOK_ACCESS_TOKEN vide | TikTok Ads cassé | Configurer token | TikTok Business |
 | Apify trial expiré | Trends cassé | Payer $49/mois | [Apify Billing](https://console.apify.com/billing) |
-| 36 credentials vides | 60% features OFF | Configurer .env | - |
+| 33 credentials vides | 55% features OFF | Configurer .env | - |
 
 ## Règles Strictes
 
