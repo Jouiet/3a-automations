@@ -401,6 +401,110 @@ BIGQUERY_PROJECT_ID=
 
 **Source:** [Shopify Flow Blog](https://www.shopify.com/blog/flow-automation-updates-2025)
 
+### 12.6 Claude Agent SDK (Renamed from Claude Code SDK)
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| SDK renamed | Using Claude Code | Claude Agent SDK = same engine |
+| Context compaction | Manual | Automatic with `compact` feature |
+| Subagents | Basic skills | Project subagents in `.claude/agents/` |
+| Long-running | N/A | Use `claude-progress.txt` + git history |
+
+**Source:** [Anthropic Engineering](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)
+
+### 12.7 GitHub Actions (2026 Updates)
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Parallel steps | Sequential | Coming mid-2026 (most requested) |
+| Cache limit | 10GB | Removed - unlimited now |
+| Agentic workflows | YAML | **NEW**: `.md` files with natural language |
+| Large workflows | <300 jobs | Lazy loading for >300 jobs |
+
+**Source:** [GitHub Blog](https://github.blog/news-insights/product-news/lets-talk-about-github-actions/)
+
+### 12.8 Grok API (xAI)
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Model | grok-4-1-fast-reasoning | Grok 4 available, 2M context |
+| Tools | Manual | Responses API: web_search, x_search, code_execution |
+| Error handling | Basic | Exponential backoff for 429 |
+
+**Source:** [xAI Docs](https://docs.x.ai/docs/overview)
+
+### 12.9 Gemini 3 Pro (Critical for Agents)
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Thinking level | Default | Use `thinking_level: high` for planning |
+| **Thought signatures** | Not used | **REQUIRED** for function calling (400 error otherwise) |
+| Temperature | Variable | **Keep at 1.0** - optimized for this |
+| Search pricing | Flat | $14/1k queries (Jan 5, 2026) |
+
+**Source:** [Google Developers Blog](https://developers.googleblog.com/new-gemini-api-updates-for-gemini-3/)
+
+### 12.10 GPT-5.2 (OpenAI)
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| API | Chat Completions | **Use Responses API** (+4% on Tau-Bench) |
+| Reasoning effort | Default (medium) | Scale by task complexity |
+| Prompting | Conversational | CTCO Framework (Context→Task→Constraints→Output) |
+| Cached inputs | Not using | 90% discount on cached inputs |
+
+**Source:** [OpenAI Platform](https://platform.openai.com/docs/guides/latest-model)
+
+### 12.11 Multi-AI Fallback Patterns
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Pattern | Sequential fallback | Add Router + Cooldowns + Load Balancer |
+| LLM Gateway | DIY | Consider Portkey, LiteLLM, Statsig |
+| Model fleets | Single LLM | Specialist models for planning/extraction |
+
+**Source:** [DEV Community Guide](https://dev.to/ash_dubai/multi-provider-llm-orchestration-in-production-a-2026-guide-1g10)
+
+### 12.12 ElevenLabs Voice
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| IVC audio | Unknown | 1-2 min clean audio (NOT >3 min) |
+| PVC audio | Unknown | 30 min minimum, 2-3h optimal |
+| Stability | Default | Adjust per use case (low=expressive) |
+
+**Source:** [ElevenLabs Docs](https://elevenlabs.io/docs/creative-platform/voices/voice-cloning)
+
+### 12.13 fal.ai Image/Video
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Long requests | Blocking | Use queue API + webhooks |
+| Resolution | Max | Preview at 1080p, final at 4K (4x cost diff) |
+| Caching | None | Cache by image hash + prompt |
+
+**Source:** [fal.ai Learn](https://fal.ai/learn)
+
+### 12.14 Apify Scraping
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Custom scrapers | Writing from scratch | Use 10,000+ pre-built Actors |
+| Anti-blocking | Manual | Built-in proxy rotation + anti-bot |
+| Library | Custom | Consider Crawlee (open-source) |
+
+**Source:** [Apify Blog](https://blog.apify.com/best-web-scraping-tools/)
+
+### 12.15 Voice AI Agents
+| Finding | Current State | Optimization |
+|---------|---------------|--------------|
+| Latency target | Unknown | Sub-500ms end-to-end |
+| Model | Hybrid | AI first line + human escalation |
+| Compliance | Basic | TCPA, GDPR, HIPAA if applicable |
+
+**Source:** [Vellum AI Guide](https://www.vellum.ai/blog/ai-voice-agent-platforms-guide)
+
+### 12.16 E-commerce Metrics (2026 Benchmarks)
+| Metric | Industry Avg | Target |
+|--------|--------------|--------|
+| LTV:CAC ratio | 3:1 minimum | >4:1 |
+| Conversion rate | 2-4% | 3-5% with AI |
+| Retention ROI | 5x cheaper than acquisition | Focus on retention |
+| AI adoption impact | +25-30% conversion | Integrate AI |
+
+**Source:** [Yotpo E-commerce Benchmarks](https://www.yotpo.com/blog/ecommerce-benchmarks-2026/)
+
 ---
 
 ## 13. AUDIT METHODOLOGY

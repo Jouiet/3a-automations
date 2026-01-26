@@ -88,21 +88,36 @@
 
 **Result**: 88/121 with script (was 83), 33 external configs (NOT bugs)
 
-### Optimization Opportunities (Web Research)
+### Optimization Opportunities (Comprehensive Web Research)
 
-| Stack | Finding | Status |
-| :--- | :--- | :--- |
-| Klaviyo | API Revision 2026-01-15 | ✅ Current |
-| A2A Protocol | v0.3 available (July 2025) | ⏳ Upgrade path |
-| Remotion | New `<Video>` component | ✅ Using it |
-| MCP | OAuth 2.1 standard | ⏳ Upgrade path |
-| Shopify Flow | Sidekick AI integration | ⏳ Available |
+| Stack | Finding | Status | Priority |
+| :--- | :--- | :--- | :--- |
+| Klaviyo | API Revision 2026-01-15 | ✅ Current | - |
+| Remotion | New `<Video>` component | ✅ Using it | - |
+| A2A Protocol | v0.3 + InteractionsAPI | ⏳ Available | P2 |
+| MCP | OAuth 2.1 standard | ⏳ Available | P2 |
+| Shopify Flow | Sidekick AI | ⏳ Available | P3 |
+| **Gemini 3** | **Thought signatures REQUIRED** | ⚠️ Check | **P1** |
+| **GPT-5.2** | **Responses API +4% perf** | ⚠️ Check | **P1** |
+| GitHub Actions | Parallel steps mid-2026 | ⏳ Coming | P3 |
+| ElevenLabs | IVC: 1-2 min audio max | ✅ Documented | - |
+| fal.ai | Queue API + webhooks | ⏳ Available | P2 |
+| E-commerce | LTV:CAC >3:1 required | ✅ Aware | - |
+| Voice AI | Sub-500ms latency target | ⏳ Benchmark | P2 |
 
 ### BigQuery Scheduling
 
 | Action | When |
 | :--- | :--- |
 | Enable BigQuery API | **After 2000 clients** (cost optimization) |
+
+### API Modernization Backlog (P1)
+
+| Script Pattern | Current | Recommended | Impact |
+| :--- | :--- | :--- | :--- |
+| GPT-5.2 calls | Chat Completions API | **Responses API** | +4% Tau-Bench |
+| Gemini 3 calls | Basic generateContent | **Add thought_signatures** | Required for function calling |
+| OpenAI caching | Not used | **Cache input tokens** | 90% cost reduction |
 
 ### Documentation Created
 
