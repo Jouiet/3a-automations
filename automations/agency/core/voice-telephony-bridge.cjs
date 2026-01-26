@@ -118,13 +118,34 @@ const CONFIG = {
 };
 
 // ============================================================================
-// HITL CONFIGURATION (Human In The Loop)
+// HITL CONFIGURATION (Human In The Loop) - Session 165quater flexibility
 // ============================================================================
+// User configurable options via ENV variables:
+//
+//   HITL_VOICE_ENABLED: true | false (default: true)
+//     - Master switch for all voice HITL checks
+//
+//   HITL_APPROVE_HOT_BOOKINGS: true | false (default: true)
+//     - Require approval for bookings from hot leads (high BANT score)
+//     - true = safer (review before confirming)
+//     - false = faster (auto-confirm all bookings)
+//
+//   HITL_APPROVE_TRANSFERS: true | false (default: true)
+//     - Require approval before transferring calls to human agents
+//     - true = safer (prevent unnecessary transfers)
+//     - false = faster (allow immediate transfers)
+//
+//   HITL_BOOKING_SCORE_THRESHOLD: 60 | 70 | 80 | 90 | custom (default: 70)
+//     - BANT score threshold above which bookings require approval
+//     - Lower = more bookings need approval (conservative)
+//     - Higher = fewer bookings need approval (aggressive)
 
 const HITL_CONFIG = {
   enabled: process.env.HITL_VOICE_ENABLED !== 'false',
   approveHotBookings: process.env.HITL_APPROVE_HOT_BOOKINGS !== 'false',
   approveTransfers: process.env.HITL_APPROVE_TRANSFERS !== 'false',
+  bookingScoreThreshold: parseInt(process.env.HITL_BOOKING_SCORE_THRESHOLD) || 70,  // 60 | 70 | 80 | 90
+  bookingScoreThresholdOptions: [60, 70, 80, 90],  // Recommended options
   slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
   notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
 };
@@ -1045,14 +1066,17 @@ async function handleCreateBooking(session, args) {
     notes: args.notes || session.bookingData.notes
   };
 
-  // HITL Check: Hot bookings require approval
-  const isHotLead = session.bookingData.qualification_score === 'hot';
-  if (HITL_CONFIG.enabled && HITL_CONFIG.approveHotBookings && isHotLead) {
-    const pendingAction = queueActionForApproval('booking', session, args, 'Hot lead booking requires approval');
+  // HITL Check: High-score bookings require approval (Session 165quater - flexible threshold)
+  const bantScore = session.qualification?.score || 0;
+  const meetsThreshold = bantScore >= HITL_CONFIG.bookingScoreThreshold;
+  if (HITL_CONFIG.enabled && HITL_CONFIG.approveHotBookings && meetsThreshold) {
+    const pendingAction = queueActionForApproval('booking', session, args, `Lead BANT score ${bantScore} >= ${HITL_CONFIG.bookingScoreThreshold} threshold`);
     return {
       status: 'pending_approval',
       hitlId: pendingAction.id,
-      message: `Booking queued for HITL approval. Use --approve=${pendingAction.id} to proceed.`
+      bantScore,
+      threshold: HITL_CONFIG.bookingScoreThreshold,
+      message: `Booking queued for HITL approval (score ${bantScore}). Use --approve=${pendingAction.id} to proceed.`
     };
   }
 

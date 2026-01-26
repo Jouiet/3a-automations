@@ -72,27 +72,53 @@ providers: ['grok', 'openai', 'gemini', 'anthropic']
 // Auto-rotate on failure
 ```
 
-## HITL (Human In The Loop) - Session 165quater (18/18 = 100%) ✅
-| Script | HITL Type | Threshold |
-|--------|-----------|-----------|
-| blog-generator-resilient | Draft approval | requireApproval: true |
-| email-personalization-resilient | Preview mode | previewModeDefault: true |
-| churn-prediction-resilient | LTV threshold | €500 |
-| sms-automation-resilient | Daily spend | €50/day |
-| cjdropshipping-automation | Order confirm | confirmOrder() |
-| podcast-generator-resilient | Script review | Required |
-| at-risk-customer-flow | LTV/Discount | €500 or ≥20% |
-| birthday-anniversary-flow | LTV/Discount | €500 or ≥20% |
-| **referral-program-automation** | **Email preview** | **Preview mode default ON** |
-| **replenishment-reminder** | **Frequency cap** | **1 reminder/week/customer** |
-| **price-drop-alerts** | **Batch approval** | **>10 alerts in batch** |
-| **review-request-automation** | **VIP approval** | **€500+ orders** |
-| **dropshipping-order-flow** | **Order value** | **€500+ orders** |
-| **bigbuy-supplier-sync** | **Batch sync** | **>100 products** |
-| **hubspot-b2b-crm** | **Deal value** | **€2000+ deals** |
-| **omnisend-b2c-ecommerce** | **Preview mode** | **Marketing events** |
-| **lead-qualification-chatbot** | **Hot lead review** | **Score ≥80** |
-| **voice-telephony-bridge** | **Call actions** | **Transfers + hot bookings** |
+## HITL (Human In The Loop) - Session 165quinquies (18/18 = 100%) ✅ FLEXIBLE
+| Script | HITL Type | Default | Options (configurable) |
+|--------|-----------|---------|------------------------|
+| blog-generator-resilient | Draft approval | true | true \| false |
+| email-personalization-resilient | Preview mode | true | true \| false |
+| churn-prediction-resilient | LTV threshold | €300 | €250, €300, €400, €500 |
+| sms-automation-resilient | Daily spend | €50/day | €25, €50, €75, €100 |
+| cjdropshipping-automation | Order confirm | required | confirmOrder() |
+| podcast-generator-resilient | Script review | required | required |
+| **at-risk-customer-flow** | LTV/Discount | €300 / 15% | €250-500 / 10-20% |
+| **birthday-anniversary-flow** | LTV/Discount | €300 / 15% | €250-500 / 10-20% |
+| referral-program-automation | Email preview | true | true \| false |
+| **replenishment-reminder** | Frequency cap | 1/week | 1, 2, 3 reminders/week |
+| **price-drop-alerts** | Batch approval | 10 | 5, 10, 15, 20, 25 |
+| **review-request-automation** | VIP threshold | €300 | €250, €300, €400, €500 |
+| **dropshipping-order-flow** | Order value | €300 | €200, €300, €400, €500 |
+| **bigbuy-supplier-sync** | Batch sync | 75 | 50, 75, 100, 150, 200 |
+| **hubspot-b2b-crm** | Deal value | €1500 | €1000-5000 |
+| **omnisend-b2c-ecommerce** | Preview + Batch | 10 | 5, 10, 25, 50, 100 |
+| **lead-qualification-chatbot** | Hot lead score | 70 | 60, 70, 80, 90 |
+| **voice-telephony-bridge** | BANT score | 70 | 60, 70, 80, 90 |
+
+### HITL ENV Variables (Session 165quinquies - Full Flexibility)
+```bash
+# LTV/Discount thresholds
+AT_RISK_LTV_THRESHOLD=300          # €250|300|400|500
+AT_RISK_DISCOUNT_THRESHOLD=15      # 10%|15%|20%
+BIRTHDAY_LTV_THRESHOLD=300         # €250|300|400|500
+BIRTHDAY_DISCOUNT_THRESHOLD=15     # 10%|15%|20%
+
+# Order/Deal thresholds
+HITL_ORDER_VALUE_THRESHOLD=300     # €200|300|400|500
+HITL_DEAL_VALUE_THRESHOLD=1500     # €1000|1500|2000|3000|5000
+REVIEW_VIP_THRESHOLD=300           # €250|300|400|500
+
+# Batch thresholds
+HITL_BATCH_THRESHOLD=75            # 50|75|100|150|200 (BigBuy)
+PRICE_DROP_BATCH_THRESHOLD=10      # 5|10|15|20|25
+HITL_BATCH_THRESHOLD=10            # 5|10|25|50|100 (Omnisend)
+
+# Score thresholds
+HITL_HOT_LEAD_THRESHOLD=70         # 60|70|80|90
+HITL_BOOKING_SCORE_THRESHOLD=70    # 60|70|80|90
+
+# Frequency caps
+REPLENISHMENT_MAX_PER_WEEK=1       # 1|2|3
+```
 
 ### HITL Commands
 ```bash

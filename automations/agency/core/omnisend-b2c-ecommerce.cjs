@@ -50,16 +50,49 @@ const CONFIG = {
 };
 
 // ============================================================================
-// HITL CONFIGURATION (Human In The Loop)
+// HITL CONFIGURATION (Human In The Loop) - Session 165quater flexibility
 // ============================================================================
+// User configurable options via ENV variables:
+//
+//   HITL_OMNISEND_ENABLED: true | false (default: true)
+//     - Master switch for Omnisend HITL preview mode
+//
+//   HITL_PREVIEW_MODE: true | false (default: true)
+//     - Preview marketing events before sending
+//     - true = safer (review each marketing event)
+//     - false = faster (auto-send all events)
+//
+//   HITL_MARKETING_EVENTS: comma-separated list (default: promotional,campaign,newsletter,bulk_send)
+//     - Event types that require preview approval
+//     - Options: promotional | campaign | newsletter | bulk_send | all | none
+//     - Example: "promotional,campaign" (only promo and campaign events need approval)
+//     - "all" = all events require approval
+//     - "none" = no events require approval (preview mode still applies)
+//
+//   HITL_BATCH_THRESHOLD: 5 | 10 | 25 | 50 | 100 | custom (default: 10)
+//     - Number of recipients above which batch sends require approval
+//     - Lower = more batches need approval (conservative)
+//     - Higher = fewer batches need approval (aggressive)
 
 const fs = require('fs');
 const path = require('path');
 
+// Parse marketing events from ENV or use defaults
+function parseMarketingEvents() {
+  const envValue = process.env.HITL_MARKETING_EVENTS;
+  if (!envValue) return ['promotional', 'campaign', 'newsletter', 'bulk_send'];
+  if (envValue.toLowerCase() === 'all') return ['promotional', 'campaign', 'newsletter', 'bulk_send', 'transactional'];
+  if (envValue.toLowerCase() === 'none') return [];
+  return envValue.split(',').map(e => e.trim().toLowerCase());
+}
+
 const HITL_CONFIG = {
   enabled: process.env.HITL_OMNISEND_ENABLED !== 'false',
   previewModeDefault: process.env.HITL_PREVIEW_MODE !== 'false',
-  marketingEvents: ['promotional', 'campaign', 'newsletter', 'bulk_send'],
+  marketingEvents: parseMarketingEvents(),
+  marketingEventsOptions: ['promotional', 'campaign', 'newsletter', 'bulk_send', 'all', 'none'],  // Available options
+  batchThreshold: parseInt(process.env.HITL_BATCH_THRESHOLD) || 10,  // 5 | 10 | 25 | 50 | 100
+  batchThresholdOptions: [5, 10, 25, 50, 100],  // Recommended options
   slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
   notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
 };

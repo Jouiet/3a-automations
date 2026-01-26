@@ -63,9 +63,12 @@ const CONFIG = {
 const fs = require('fs');
 const path = require('path');
 
+// User configurable thresholds via ENV variables:
+//   HITL_BATCH_THRESHOLD: 50 | 75 | 100 | 150 | 200 | custom (default: 75)
 const HITL_CONFIG = {
   enabled: process.env.HITL_BIGBUY_ENABLED !== 'false',
-  batchThreshold: parseInt(process.env.HITL_BATCH_THRESHOLD) || 100, // products
+  batchThreshold: parseInt(process.env.HITL_BATCH_THRESHOLD) || 75, // 50, 75, 100, 150, 200 produits ou valeur custom
+  batchThresholdOptions: [50, 75, 100, 150, 200],  // Recommended options
   slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
   notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
 };

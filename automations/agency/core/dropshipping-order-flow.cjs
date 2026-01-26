@@ -54,11 +54,14 @@ const HITL_PENDING_FILE = path.join(HITL_PENDING_DIR, 'pending-orders.json');
 
 // ============================================================================
 // HITL CONFIGURATION (Human In The Loop)
+// User configurable thresholds via ENV variables:
+//   HITL_ORDER_VALUE_THRESHOLD: 200 | 300 | 400 | 500 | custom (default: 300)
 // ============================================================================
 
 const HITL_CONFIG = {
   enabled: process.env.HITL_DROPSHIP_ENABLED !== 'false',
-  orderValueThreshold: parseFloat(process.env.HITL_ORDER_VALUE_THRESHOLD) || 500, // EUR
+  orderValueThreshold: parseFloat(process.env.HITL_ORDER_VALUE_THRESHOLD) || 300, // €200, €300, €400, €500 ou valeur custom
+  orderValueOptions: [200, 300, 400, 500],  // Recommended options
   slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
   notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
 };

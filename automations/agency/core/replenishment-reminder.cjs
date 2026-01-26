@@ -43,10 +43,13 @@ const CONFIG = {
   port: parseInt(process.env.REPLENISHMENT_PORT) || 3018,
   httpTimeout: 15000,
 
-  // HITL: Frequency Cap (Session 165ter)
+  // HITL: Frequency Cap (Session 165ter + 165quater flexibility)
+  // User configurable thresholds via ENV variables:
+  //   REPLENISHMENT_MAX_PER_WEEK: 1 | 2 | 3 | custom (default: 1)
   hitl: {
     enabled: process.env.REPLENISHMENT_HITL !== 'false', // Default: ON
-    maxRemindersPerWeek: parseInt(process.env.REPLENISHMENT_MAX_PER_WEEK) || 1,
+    maxRemindersPerWeek: parseInt(process.env.REPLENISHMENT_MAX_PER_WEEK) || 1, // 1, 2, 3 rappels/semaine ou valeur custom
+    maxRemindersOptions: [1, 2, 3],  // Recommended options
     pendingDir: './data/hitl-pending/replenishment/',
     historyFile: './data/hitl-pending/replenishment/history.json',
     slackWebhook: process.env.REPLENISHMENT_SLACK_WEBHOOK || null

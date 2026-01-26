@@ -29,11 +29,14 @@ const path = require('path');
 const CONFIG = {
   version: '1.1.0 (HITL)',
 
-  // HITL: Timing Review (Session 165ter)
+  // HITL: Timing Review (Session 165ter + 165quater flexibility)
+  // User configurable thresholds via ENV variables:
+  //   REVIEW_VIP_THRESHOLD: 250 | 300 | 400 | 500 | custom (default: 300)
   hitl: {
     enabled: process.env.REVIEW_REQUEST_HITL !== 'false', // Default: ON
     requireApprovalForVIP: process.env.REVIEW_VIP_APPROVAL !== 'false', // VIP customers require approval
-    vipOrderThreshold: parseFloat(process.env.REVIEW_VIP_THRESHOLD) || 500, // €500+ orders are VIP
+    vipOrderThreshold: parseFloat(process.env.REVIEW_VIP_THRESHOLD) || 300, // €250, €300, €400, €500 ou valeur custom
+    vipOrderThresholdOptions: [250, 300, 400, 500],  // Recommended options
     pendingDir: './data/hitl-pending/review-requests/',
     slackWebhook: process.env.REVIEW_REQUEST_SLACK_WEBHOOK || null
   },

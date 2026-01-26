@@ -36,11 +36,16 @@ const CONFIG = {
     critical: 0.85,     // Churn score >= 85% = critical
     vipCallEligible: 0.80  // Offer VIP call above 80%
   },
-  // HITL Configuration (Session 165bis)
+  // HITL Configuration (Session 165bis + 165quater flexibility)
+  // User configurable thresholds via ENV variables:
+  //   AT_RISK_LTV_THRESHOLD: 250 | 300 | 400 | 500 | custom (default: 300)
+  //   AT_RISK_DISCOUNT_THRESHOLD: 10 | 15 | 20 | custom (default: 15)
   hitl: {
     enabled: process.env.AT_RISK_HITL_ENABLED !== 'false',  // Default: enabled
-    ltvThreshold: parseInt(process.env.AT_RISK_LTV_THRESHOLD || '500', 10),  // €500 LTV requires approval
-    discountThreshold: parseInt(process.env.AT_RISK_DISCOUNT_THRESHOLD || '20', 10),  // >20% discount requires approval
+    ltvThreshold: parseInt(process.env.AT_RISK_LTV_THRESHOLD || '300', 10),  // €250, €300, €400, €500 ou valeur custom
+    discountThreshold: parseInt(process.env.AT_RISK_DISCOUNT_THRESHOLD || '15', 10),  // 10%, 15%, 20% ou valeur custom
+    ltvOptions: [250, 300, 400, 500],  // Recommended options
+    discountOptions: [10, 15, 20],  // Recommended options
     pendingDir: path.join(__dirname, '../../../data/hitl-pending'),
     slackWebhook: process.env.HITL_SLACK_WEBHOOK || ''
   },

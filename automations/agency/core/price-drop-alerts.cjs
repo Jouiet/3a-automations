@@ -38,10 +38,13 @@ const CONFIG = {
   port: parseInt(process.env.PRICE_DROP_PORT) || 3017,
   httpTimeout: 15000,
 
-  // HITL: Batch Approval (Session 165ter)
+  // HITL: Batch Approval (Session 165ter + 165quater flexibility)
+  // User configurable thresholds via ENV variables:
+  //   PRICE_DROP_BATCH_THRESHOLD: 5 | 10 | 15 | 20 | 25 | custom (default: 10)
   hitl: {
     enabled: process.env.PRICE_DROP_HITL !== 'false', // Default: ON
-    batchThreshold: parseInt(process.env.PRICE_DROP_BATCH_THRESHOLD) || 10, // Require approval if >10 alerts
+    batchThreshold: parseInt(process.env.PRICE_DROP_BATCH_THRESHOLD) || 10, // 5, 10, 15, 20, 25 alertes ou valeur custom
+    batchThresholdOptions: [5, 10, 15, 20, 25],  // Recommended options
     pendingDir: './data/hitl-pending/price-drop/',
     slackWebhook: process.env.PRICE_DROP_SLACK_WEBHOOK || null,
     maxPendingAge: 24 * 60 * 60 * 1000 // 24 hours max

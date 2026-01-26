@@ -64,9 +64,12 @@ const CONFIG = {
 const fs = require('fs');
 const path = require('path');
 
+// User configurable thresholds via ENV variables:
+//   HITL_DEAL_VALUE_THRESHOLD: 1000 | 1500 | 2000 | 3000 | 5000 | custom (default: 1500)
 const HITL_CONFIG = {
   enabled: process.env.HITL_HUBSPOT_ENABLED !== 'false',
-  dealValueThreshold: parseFloat(process.env.HITL_DEAL_VALUE_THRESHOLD) || 2000, // EUR
+  dealValueThreshold: parseFloat(process.env.HITL_DEAL_VALUE_THRESHOLD) || 1500, // €1000, €1500, €2000, €3000, €5000 ou valeur custom
+  dealValueOptions: [1000, 1500, 2000, 3000, 5000],  // Recommended options
   slackWebhook: process.env.HITL_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL,
   notifyOnPending: process.env.HITL_NOTIFY_ON_PENDING !== 'false'
 };

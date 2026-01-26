@@ -63,12 +63,24 @@ const ENV = loadEnv();
 const VERSION = '1.1.0';
 
 // ============================================================================
-// HITL CONFIGURATION (Human In The Loop)
+// HITL CONFIGURATION (Human In The Loop) - Session 165quater flexibility
 // ============================================================================
+// User configurable thresholds via ENV variables:
+//   HITL_HOT_LEAD_THRESHOLD: 60 | 70 | 80 | 90 | custom (default: 70)
+//
+// Lower threshold = more leads require approval (safer but slower)
+// Higher threshold = fewer leads require approval (faster but riskier)
+//
+// Recommended:
+//   60 = Conservative (review most promising leads)
+//   70 = Balanced (default - review hot leads only)
+//   80 = Aggressive (minimal review)
+//   90 = Very aggressive (almost no review)
 
 const HITL_CONFIG = {
   enabled: ENV.HITL_CHATBOT_ENABLED !== 'false',
-  hotLeadThreshold: parseInt(ENV.HITL_HOT_LEAD_THRESHOLD) || 80, // Score threshold
+  hotLeadThreshold: parseInt(ENV.HITL_HOT_LEAD_THRESHOLD) || 70,  // 60 | 70 | 80 | 90 ou valeur custom
+  hotLeadThresholdOptions: [60, 70, 80, 90],  // Recommended options for UI
   slackWebhook: ENV.HITL_SLACK_WEBHOOK || ENV.SLACK_WEBHOOK_URL,
   notifyOnPending: ENV.HITL_NOTIFY_ON_PENDING !== 'false'
 };
