@@ -1,5 +1,5 @@
 # Analyse Stratégique: Plateforme Voice AI MENA
-> Version: 5.1.0 | 27/01/2026 | DÉCISION: ✅ **GO** - Webapp Production-Ready
+> Version: 5.2.0 | 27/01/2026 | DÉCISION: ✅ **GO** - Webapp Production-Ready (WebRTC-First Strategy)
 
 ## Executive Summary
 
@@ -844,6 +844,106 @@
 | WhatsApp/Skype | ✅ Débloqué (Nov 2016) | [Freedom House](https://freedomhouse.org/country/morocco/freedom-net/2024) |
 | Licence requise | ⚠️ Pour opérateurs uniquement | Loi 121-12 |
 
+##### 6.3.1.B TELEPHONY MENA COMPLÈTE (Audit 27/01/2026)
+
+> **Méthodologie:** Analyse exhaustive de TOUS les pays cibles MENA - Opérateurs locaux + Providers internationaux + Réglementation VoIP.
+
+**MATRICE SYNTHÈSE PAR PAYS:**
+
+| Pays | VoIP Légal | Twilio Inbound | DIDWW Local | Opérateur Local SIP | DIDs Intl | WebRTC |
+|------|------------|----------------|-------------|---------------------|-----------|--------|
+| 🇲🇦 **Maroc** | ✅ (2016) | ❌ N/A | ❌ Intl only | ❌ Pas d'API | ✅ AVOXI/CommPeak | ✅ |
+| 🇦🇪 **UAE** | ⚠️ Licencié | ✅ $0.25/min | ❌ Non | ✅ Etisalat/du | ✅ | ⚠️ Restreint |
+| 🇸🇦 **Arabie Saoudite** | ⚠️ Restreint | ❌ Pas de DID | ❌ Non | ✅ STC (B2B) | ✅ CommPeak | ⚠️ Restreint |
+| 🇪🇬 **Égypte** | ✅ | ❌ Pas de DID | ⚠️ Intl | ✅ Telecom Egypt | ✅ | ✅ |
+| 🇶🇦 **Qatar** | ⚠️ Licencié | ❌ Pas de DID | ⚠️ Non listé | ✅ Ooredoo/Vodafone | ✅ | ⚠️ Restreint |
+| 🇰🇼 **Kuwait** | ⚠️ Licencié | ❌ | ❌ | ✅ Ooredoo | ✅ CommPeak | ⚠️ |
+| 🇧🇭 **Bahrain** | ✅ | ❌ | ❌ | ✅ Batelco | ✅ CommPeak | ✅ |
+| 🇴🇲 **Oman** | ⚠️ Licencié | ❌ | ❌ | ✅ Omantel | ⚠️ | ⚠️ |
+| 🇯🇴 **Jordanie** | ✅ | ❌ | ⚠️ | ⚠️ | ✅ DID Logic | ✅ |
+| 🇹🇳 **Tunisie** | ✅ B2B | ❌ | ⚠️ | ⚠️ Ooredoo/Orange | ⚠️ | ✅ |
+| 🇩🇿 **Algérie** | ⚠️ Restreint | ❌ | ✅ | ❌ Algérie Télécom | ⚠️ | ⚠️ |
+
+**DÉTAIL PAR PAYS:**
+
+**🇦🇪 UAE (Émirats Arabes Unis):**
+
+| Aspect | Status | Détail | Source |
+|--------|--------|--------|--------|
+| VoIP Légal | ⚠️ **LICENCIÉ UNIQUEMENT** | Etisalat, du, BOTIM autorisés | [TDRA](https://tdra.gov.ae/) |
+| WhatsApp/Skype Voice | ❌ **BLOQUÉ** | Amende jusqu'à 500,000 AED | [UAE VPN Law](https://dealal.com/vpn-alert-uaes-cybercrime-law-carries-a-dh2-million-fine-for-misuse/3817/) |
+| Twilio UAE | ✅ Inbound $0.25/min | Outbound $0.24/min | [Twilio](https://www.twilio.com/en-us/sip-trunking/pricing/ae) |
+| Etisalat SIP | ✅ B2B | CPaaS disponible, pas d'API self-service | [Etisalat](https://www.etisalat.ae/en/enterprise-and-government/enterprise-solutions/unified-communications.html) |
+| du SIP Trunk | ✅ B2B | 10-100 canaux, VoIP = tarifs normaux | [du](https://www.du.ae/siptrunk) |
+| WebRTC | ⚠️ | Fonctionne mais instable parfois | - |
+
+**🇸🇦 Arabie Saoudite (KSA):**
+
+| Aspect | Status | Détail | Source |
+|--------|--------|--------|--------|
+| VoIP Légal | ⚠️ **EN LIBÉRALISATION** | Restrictions assouplies récemment | [IstiZada](https://istizada.com/blog/telecommunication-voip-challenges-in-the-middle-east/) |
+| WhatsApp Voice | ❌ **BLOQUÉ** | Texte OK, appels bloqués | [CloudWards](https://www.cloudwards.net/countries-where-whatsapp-is-banned/) |
+| Twilio KSA | ⚠️ Pas de DID local | Outbound: $0.15 fixe, $0.25 mobile | [Twilio](https://www.twilio.com/en-us/sip-trunking/pricing/sa) |
+| STC SIP | ✅ B2B | Jusqu'à 100k extensions, IP-based auth | [STC](https://www.stc.com.sa/content/stc/sa/en/business/connect/fixed-voice/sip-extension.html) |
+| CommPeak DIDs | ✅ | DIDs KSA disponibles | [CommPeak](https://www.commpeak.com/local-presence/did-gcc/) |
+
+**🇪🇬 Égypte:**
+
+| Aspect | Status | Détail | Source |
+|--------|--------|--------|--------|
+| VoIP Légal | ✅ **AUTORISÉ** | Moins restrictif que GCC | - |
+| Twilio Egypt | ⚠️ Pas de DID local | Outbound: $0.17-0.18/min | [Twilio](https://www.twilio.com/en-us/sip-trunking/pricing/eg) |
+| Telecom Egypt | ✅ SIP Trunk | 30 canaux, 100 numéros inclus | [TE](https://www.te.eg/wps/portal/te/Business/Voice-Services/SIP-Trunk-Service) |
+| DIDWW Egypt | ⚠️ Intl VoIP | Local SIP non confirmé | [DIDWW](https://www.didww.com/voice/global-sip-trunking/Egypt) |
+
+**🇶🇦 Qatar:**
+
+| Aspect | Status | Détail | Source |
+|--------|--------|--------|--------|
+| VoIP Légal | ⚠️ **LICENCIÉ** | Ooredoo + Vodafone uniquement | [VoIP-Info](https://www.voip-info.org/sip-phone-service-providers-in-qatar/) |
+| WhatsApp Voice | ❌ **BLOQUÉ** | VPN non criminalisé | [CloudWards](https://www.cloudwards.net/countries-where-whatsapp-is-banned/) |
+| Twilio Qatar | ⚠️ Pas de DID local | Outbound: $0.25-0.31/min | [Twilio](https://www.twilio.com/en-us/sip-trunking/pricing/qa) |
+| Ooredoo SIP-T | ✅ B2B | ~QR 1000/mois/10 canaux | [Ooredoo](https://www.ooredoo.qa/web/en/business/sip-t/) |
+| Vodafone Qatar | ✅ B2B | SIP-T disponible | [Vodafone](https://www.vodafone.qa/en/business/services/fixed/sip-t/) |
+
+**🇰🇼 Kuwait / 🇧🇭 Bahrain / 🇴🇲 Oman:**
+
+| Pays | Opérateur Principal | SIP B2B | DIDs Intl | VoIP Status |
+|------|---------------------|---------|-----------|-------------|
+| Kuwait | Ooredoo, Zain | ✅ | ✅ CommPeak | ⚠️ Licencié |
+| Bahrain | Batelco, Zain, STC | ✅ | ✅ CommPeak | ✅ Plus ouvert |
+| Oman | Omantel, Ooredoo | ✅ | ⚠️ Limité | ⚠️ Licencié |
+
+**🇹🇳 Tunisie / 🇩🇿 Algérie:**
+
+| Pays | Opérateurs | SIP B2B | VoIP Status | Notes |
+|------|------------|---------|-------------|-------|
+| Tunisie | Ooredoo, Orange, Tunisie Telecom | ⚠️ | ✅ B2B légal | Call centers offshore |
+| Algérie | Algérie Télécom (monopole), Ooredoo, Djezzy | ❌ | ⚠️ Restreint | Encryption = autorisation ARPT |
+
+**PROVIDERS INTERNATIONAUX - COUVERTURE MENA:**
+
+| Provider | UAE | KSA | Egypt | Qatar | Kuwait | Bahrain | Coverage | Pricing |
+|----------|-----|-----|-------|-------|--------|---------|----------|---------|
+| **Twilio** | ✅ Inbound | ❌ No DID | ❌ No DID | ❌ No DID | ❌ | ❌ | 1/6 | Variable |
+| **DIDWW** | ❌ No local | ❌ No local | ⚠️ Intl | ❌ | ❌ | ❌ | 0/6 local | - |
+| **Telnyx** | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | Variable | ~$0.01/min |
+| **CommPeak** | ✅ DID | ✅ DID | ⚠️ | ⚠️ | ✅ DID | ✅ DID | 4/6 | Sur devis |
+| **AVOXI** | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | 150+ pays | Sur devis |
+| **DID Logic** | ✅ | ✅ | ⚠️ | ✅ | ✅ | ⚠️ | GCC focus | <$0.01/min |
+| **Plivo** | ✅ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | ⚠️ | 190 pays | Variable |
+
+**VERDICT TELEPHONY MENA:**
+
+| Stratégie | Pays Prioritaires | Viabilité | Recommandation |
+|-----------|-------------------|-----------|----------------|
+| **WebRTC Widget** | TOUS | ✅ 100% | **PRIORITÉ #1** - Contourne restrictions VoIP |
+| **PSTN via Opérateurs Locaux** | UAE, Qatar, KSA | ⚠️ B2B only | Partenariat requis, pas d'API self-service |
+| **PSTN via Providers Intl** | UAE (Twilio), GCC (CommPeak) | ⚠️ Limité | CommPeak meilleure couverture GCC |
+| **WhatsApp Business API** | Maroc, Tunisie, Égypte | ✅ | Utiliser pour pays où VoIP bloqué |
+
+> ⚠️ **CONCLUSION CRITIQUE:** La stratégie **WebRTC-first** est la SEULE qui fonctionne uniformément sur TOUTE la région MENA. Le PSTN est fragmenté et nécessite des partenariats locaux pays par pays.
+
 #### 6.3.2 SCÉNARIOS COGS DÉTAILLÉS (6 Configurations)
 
 **SCÉNARIO A: Budget Maximum (Open Source) - COGS MINIMAL**
@@ -1397,6 +1497,43 @@ Raisons:
 | Deepgram | [deepgram.com/pricing](https://deepgram.com/pricing) |
 | DVoice | [huggingface.co/speechbrain/asr-wav2vec2-dvoice-darija](https://huggingface.co/speechbrain/asr-wav2vec2-dvoice-darija) |
 | Daily.co | [daily.co/pricing](https://www.daily.co/pricing/) |
+
+### Sources MENA Telephony v5.2 (27/01/2026)
+
+| Pays/Provider | Source |
+|---------------|--------|
+| **UAE Twilio** | [twilio.com/en-us/sip-trunking/pricing/ae](https://www.twilio.com/en-us/sip-trunking/pricing/ae) |
+| **KSA Twilio** | [twilio.com/en-us/sip-trunking/pricing/sa](https://www.twilio.com/en-us/sip-trunking/pricing/sa) |
+| **Qatar Twilio** | [twilio.com/en-us/sip-trunking/pricing/qa](https://www.twilio.com/en-us/sip-trunking/pricing/qa) |
+| **Egypt Twilio** | [twilio.com/en-us/sip-trunking/pricing/eg](https://www.twilio.com/en-us/sip-trunking/pricing/eg) |
+| **DIDWW Coverage** | [didww.com/coverage-and-prices/coverage](https://www.didww.com/coverage-and-prices/coverage) |
+| **DIDWW KSA** | [didww.com/voice/global-sip-trunking/Saudi_Arabia](https://www.didww.com/voice/global-sip-trunking/Saudi_Arabia) |
+| **DIDWW Egypt** | [didww.com/voice/global-sip-trunking/Egypt](https://www.didww.com/voice/global-sip-trunking/Egypt) |
+| **DIDWW Algeria** | [didww.com/voice/global-sip-trunking/Algeria](https://www.didww.com/voice/global-sip-trunking/Algeria) |
+| **CommPeak GCC** | [commpeak.com/local-presence/did-gcc](https://www.commpeak.com/local-presence/did-gcc/) |
+| **Etisalat UAE** | [etisalat.ae/en/enterprise-and-government/enterprise-solutions/unified-communications.html](https://www.etisalat.ae/en/enterprise-and-government/enterprise-solutions/unified-communications.html) |
+| **du SIP Trunk** | [du.ae/siptrunk](https://www.du.ae/siptrunk) |
+| **STC KSA SIP** | [stc.com.sa/content/stc/sa/en/business/connect/fixed-voice/sip-extension.html](https://www.stc.com.sa/content/stc/sa/en/business/connect/fixed-voice/sip-extension.html) |
+| **Ooredoo Qatar** | [ooredoo.qa/web/en/business/sip-t](https://www.ooredoo.qa/web/en/business/sip-t/) |
+| **Vodafone Qatar** | [vodafone.qa/en/business/services/fixed/sip-t](https://www.vodafone.qa/en/business/services/fixed/sip-t/) |
+| **Ooredoo Kuwait** | [ooredoo.com.kw/portal/en/b2bOffConnSIPTrunkServices](https://www.ooredoo.com.kw/portal/en/b2bOffConnSIPTrunkServices) |
+| **Telecom Egypt** | [te.eg/wps/portal/te/Business/Voice-Services/SIP-Trunk-Service](https://www.te.eg/wps/portal/te/Business/Voice-Services/SIP-Trunk-Service) |
+| **UAE VoIP Law** | [frejun.com/are-voip-calls-allowed-in-uae](https://frejun.com/are-voip-calls-allowed-in-uae/) |
+| **MENA VoIP Challenges** | [istizada.com/blog/telecommunication-voip-challenges-in-the-middle-east](https://istizada.com/blog/telecommunication-voip-challenges-in-the-middle-east/) |
+| **WhatsApp Bans** | [cloudwards.net/countries-where-whatsapp-is-banned](https://www.cloudwards.net/countries-where-whatsapp-is-banned/) |
+| **Omantel SIP** | [tmcnet.com/channels/virtual-pbx/articles/415335](https://www.tmcnet.com/channels/virtual-pbx/articles/415335-omantel-launches-sip-trunking-large-enterprises.htm) |
+| **DID Logic GCC** | [didlogic.com](https://didlogic.com/) |
+| **Plivo UAE** | [plivo.com/sip-trunking/coverage/ae](https://www.plivo.com/sip-trunking/coverage/ae/) |
+| **Telnyx Global** | [telnyx.com/global-coverage](https://telnyx.com/global-coverage) |
+
+#### v5.2 (27/01/2026) - Analyse MENA Complète
+| Ajout | Contenu | Impact |
+|-------|---------|--------|
+| **11 pays MENA** | UAE, KSA, Egypt, Qatar, Kuwait, Bahrain, Oman, Jordan, Tunisia, Algeria, Morocco | Couverture exhaustive |
+| **Opérateurs locaux** | Etisalat, du, STC, Ooredoo, Vodafone, Batelco, Omantel, Telecom Egypt | B2B SIP |
+| **Providers intl** | Twilio, DIDWW, Telnyx, CommPeak, AVOXI, DID Logic, Plivo | Couverture comparée |
+| **Réglementation VoIP** | UAE/KSA/Qatar restrictif, Maroc/Tunisie/Bahrain ouvert | Impact stratégique |
+| **Conclusion** | WebRTC-first = seule stratégie uniformément viable MENA | Priorité confirmée |
 | Retell AI | [retellai.com/pricing](https://www.retellai.com/pricing) |
 | Vapi | [vapi.ai/pricing](https://vapi.ai/pricing) |
 | Bland AI | [docs.bland.ai/platform/billing](https://docs.bland.ai/platform/billing) |
