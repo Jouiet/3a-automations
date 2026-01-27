@@ -899,7 +899,7 @@ async function getResilisentResponse(userMessage, conversationHistory = [], sess
 // ─────────────────────────────────────────────────────────────────────────────
 function startServer(port = 3004) {
   // P1 FIX: Rate limiter (60 req/min per IP for voice responses)
-  const rateLimiter = new RateLimiter(60, 60000);
+  const rateLimiter = new RateLimiter({ maxRequests: 60, windowMs: 60000 });
 
   const server = http.createServer(async (req, res) => {
     // P1 FIX: CORS whitelist (no wildcard fallback)
@@ -925,9 +925,10 @@ function startServer(port = 3004) {
 
     // P1 FIX: Rate limiting
     const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    if (!rateLimiter.tryAcquire(clientIp)) {
+    const rateCheck = rateLimiter.check(clientIp);
+    if (!rateCheck.allowed) {
       res.writeHead(429, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Too many requests. Max 60/min.' }));
+      res.end(JSON.stringify({ error: 'Too many requests. Max 60/min.', remaining: rateCheck.remaining }));
       return;
     }
 
