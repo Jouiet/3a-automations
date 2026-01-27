@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 119.3 | 27/01/2026 | Session 176ter | Optimized Memory
+> Version: 119.4 | 27/01/2026 | Session 176quater | Factuality Fix
 
 ## Identité
 
@@ -21,7 +21,7 @@ Transport: stdio, http | Auth: Bearer token (optional)
 ### Voice MENA Stack
 ```
 Primary:     Grok-4-1-fast (testé OK)
-Fallback 1:  Atlas-Chat-9B (✅ Featherless AI + Contexte 3A Darija)
+Fallback 1:  Atlas-Chat-9B (✅ Featherless AI + Contexte FACTUEL)
 Fallback 2:  Atlas-Chat-27B (offline analytics)
 TTS:         ElevenLabs Ghizlane
 STT:         ElevenLabs Scribe Maghrebi
