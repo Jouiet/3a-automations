@@ -121,7 +121,13 @@ class MarketingScience {
             return baseContext;
         }
 
+        // Session 177: Self-Healing injection
+        const ErrorScience = require('./ErrorScience.cjs');
+        const learnedInstructions = ErrorScience.getLearnedInstructions();
+        const healingHeader = learnedInstructions ? `\n--- START LEARNED RULES (SELF-HEALING) ---\n${learnedInstructions}\n--- END LEARNED RULES ---\n` : "";
+
         return `
+${healingHeader}
 ${baseContext}
 
 ==================================================
@@ -135,6 +141,14 @@ MANDATORY EXECUTION:
 You MUST follow the structure above strictly. Do not deviate.
 Use the psychology defined in the framework to maximize persuasion.
 `;
+    }
+
+    /**
+     * Trigger a Self-Healing analysis cycle
+     */
+    static async heal() {
+        const ErrorScience = require('./ErrorScience.cjs');
+        return await ErrorScience.analyzeFailures();
     }
 
     /**
@@ -179,29 +193,98 @@ Output JSON: { "score": <0-10>, "feedback": "concise critique", "issues": ["list
 
     /**
      * Track a conversion event (Blueprint Analytics)
-     * @param {string} event Event name (e.g., 'call_started', 'booking_created')
-     * @param {object} data Event properties
+     * SOTA: Multi-Sector GA4 Measurement Protocol + JSONL Persistence + Meta CAPI
+     * @param {string} event Event name
+     * @param {object} data Event properties { sector, clientId, value, ... }
      */
-    static trackV2(event, data) {
+    static async trackV2(event, data) {
+        const sector = (data.sector || 'GENERAL').toUpperCase();
         const logEntry = {
             timestamp: new Date().toISOString(),
             event: event,
+            sector: sector,
             ...data
         };
 
-        console.log(`[MarketingScience] TRACK: ${event}`, JSON.stringify(data));
+        console.log(`[MarketingScience][${sector}] TRACK: ${event}`, JSON.stringify(data));
 
-        // SOTA: Persist to structured log for dashboard ingestion
+        // 1. JSONL Persistence (Universal Data Warehouse)
         try {
             const fs = require('fs');
             const path = require('path');
-            const logDir = process.env.ANALYTICS_LOG_DIR || '/tmp';
+            const logDir = process.env.ANALYTICS_LOG_DIR || path.join(__dirname, '../../../data/analytics');
             if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
 
             const logFile = path.join(logDir, 'marketing_events.jsonl');
             fs.appendFileSync(logFile, JSON.stringify(logEntry) + '\n');
         } catch (e) {
-            console.error(`[MarketingScience] Track error: ${e.message}`);
+            console.error(`[MarketingScience] Track persistence error: ${e.message}`);
+        }
+
+        // 2. GA4 Measurement Protocol (Zero-Gap Universal Analytics)
+        if (process.env.GA4_MEASUREMENT_ID && process.env.GA4_API_SECRET) {
+            try {
+                const clientId = data.clientId || data.sessionId || 'anonymous';
+                const url = `https://www.google-analytics.com/mp/collect?measurement_id=${process.env.GA4_MEASUREMENT_ID}&api_secret=${process.env.GA4_API_SECRET}`;
+
+                const payload = {
+                    client_id: clientId,
+                    events: [{
+                        name: event,
+                        params: {
+                            ...data,
+                            sector: sector,
+                            engagement_time_msec: data.duration ? data.duration * 1000 : 100
+                        }
+                    }]
+                };
+
+                await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) {
+                console.warn(`[MarketingScience] GA4 Measurement Protocol failed: ${e.message}`);
+            }
+        }
+
+        // 3. Meta CAPI (Closed-Loop Attribution - Session 177)
+        // Only for conversion events with fbclid or when Lead/Purchase
+        if ((data.fbclid || event === 'lead_qualified' || event === 'purchase_completed') &&
+            (process.env.META_PIXEL_ID && process.env.META_ACCESS_TOKEN)) {
+            try {
+                const MetaCAPI = require('./gateways/meta-capi-gateway.cjs');
+
+                if (event === 'lead_qualified' || event === 'bant_complete') {
+                    await MetaCAPI.trackLead({
+                        email: data.email,
+                        phone: data.phone,
+                        fbclid: data.fbclid,
+                        leadScore: data.qualification_score || data.bant_score,
+                        estimatedLtv: data.estimated_ltv || data.value,
+                        sector: sector
+                    });
+                } else if (event === 'purchase_completed' || event === 'deal_won') {
+                    await MetaCAPI.trackPurchase({
+                        email: data.email,
+                        phone: data.phone,
+                        fbclid: data.fbclid,
+                        value: data.value || data.deal_value,
+                        orderId: data.order_id || data.invoice_id,
+                        sector: sector
+                    });
+                } else if (event === 'booking_initiated') {
+                    await MetaCAPI.trackInitiateCheckout({
+                        email: data.email,
+                        phone: data.phone,
+                        fbclid: data.fbclid,
+                        estimatedValue: data.estimated_value,
+                        sector: sector
+                    });
+                }
+            } catch (e) {
+                console.warn(`[MarketingScience] Meta CAPI failed: ${e.message}`);
+            }
         }
     }
 }
