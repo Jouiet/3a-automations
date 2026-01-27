@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 123.0 | 27/01/2026 | Session 178bis | Learning Queue API
+> Version: 124.0 | 27/01/2026 | Session 178ter | Engineering v3.0 Audit
 
 ## Identité
 
@@ -8,16 +8,20 @@
 
 ---
 
-## Engineering Scores (Session 178 - SOTA Optimization)
+## Engineering Scores (Session 178ter - ULTRATHINK AUDIT)
 
-| Discipline | Score | Progression |
-|:---|:---:|:---|
-| **RevEng** | 80/100 | +5 (Demand Curve + Idempotency) |
-| **MarEng** | 82/100 | +4 (Event Dedup + Retry Logic) |
-| **Flow** | 8/10 | (stable) |
-| **Cognitive** | 9/10 | +1 (Confidence Scoring + Trend Detection) |
-| **Financial** | 7/10 | +1 (Webhook Signature Verify) |
-| **GLOBAL** | **81/100** | +3.5 depuis Session 177 |
+| Discipline | Claimed | REAL | Gap | Blocker |
+|:---|:---:|:---:|:---:|:---|
+| **Voice Services** | 15/15 | **0/15** | -15 | Services non démarrés |
+| **Sensors** | 14/19 | **7/19** | -7 | Credentials manquants |
+| **Integrations** | 15/15 | **5/15** | -10 | META/TIKTOK vides |
+| **Data Pipeline** | 15/15 | **2/15** | -13 | 2 leads, 0 content |
+| **Architecture** | 10/10 | **8/10** | -2 | Scripts siloed |
+| **GLOBAL** | **81/100** | **62/100** | **-19** | Voir ENGINEERING-GAPS-V3.md |
+
+### Credential Score: 60% (6/9 modules valides)
+- ✅ Voice, E-commerce, Google
+- ❌ Telephony (TELNYX), Payments (STRIPE), Marketing (META)
 
 ---
 
@@ -33,6 +37,17 @@
 | stripe-global-gateway.cjs | 2.0 | 180 | Idempotency, webhook HMAC |
 
 **Total: 1385 lignes engineering (+775 SOTA)**
+
+### Engineering v3.0 Tools (Session 178ter)
+```bash
+# Credential Validation (pre-flight check)
+node credential-validator.cjs --check    # Score: 60%
+
+# Voice Services Management
+node startup-orchestrator.cjs --status   # 0/3 running
+node startup-orchestrator.cjs --start    # Auto-start all
+node startup-orchestrator.cjs --stop     # Stop all
+```
 
 ### Learning Queue API (Session 178bis)
 ```

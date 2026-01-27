@@ -4,7 +4,52 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 178 - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK (74%)** ✅ | **Voice SOTA: <1.5s** | **Site: ✅ 200** | **Dashboard: ✅ 200** | **Atlas-Chat Darija: ✅ FACTUEL** | **Agent Ops: 6 modules SOTA (1385 lignes)**
+> **⚠️ ÉTAT RÉEL (Session 178ter - 27/01/2026):** **Score RÉEL: 62/100** (pas 81) | **Credentials: 60% (6/9)** | **Voice: 0/3 DOWN** | **Sensors: 7/19 OK (37%)** | **P0 Blockers: TELNYX, STRIPE, META**
+
+---
+
+## SESSION 178ter - ULTRATHINK AUDIT (27/01/2026)
+
+### Score RÉEL vs Affiché
+
+| Métrique | Affiché | RÉEL | Écart |
+|:---------|:-------:|:----:|:-----:|
+| **Engineering Score** | 81/100 | **62/100** | -19 |
+| **Credentials** | N/A | **60%** (6/9) | - |
+| **Voice Services** | 3/3 HEALTHY | **0/3 DOWN** | -3 |
+| **Sensors OK** | 14/19 | **7/19** | -7 |
+
+### P0 BLOCKERS (User Action Required)
+
+| Credential | Impact | Action |
+|:-----------|:-------|:-------|
+| **TELNYX_API_KEY** | Telephony 100% DOWN | [portal.telnyx.com](https://portal.telnyx.com) |
+| **STRIPE_SECRET_KEY** | Payments 100% DOWN | [dashboard.stripe.com](https://dashboard.stripe.com) |
+| **META_PIXEL_ID** | Meta CAPI OFF | [business.facebook.com](https://business.facebook.com) |
+| **META_ACCESS_TOKEN** | Meta Ads OFF | Events Manager |
+
+### Engineering v3.0 Tools Créés
+
+| Fichier | Lignes | Fonction |
+|:--------|:------:|:---------|
+| `startup-orchestrator.cjs` | 250 | Auto-start voice services |
+| `credential-validator.cjs` | 280 | Pre-flight credential check |
+| `ENGINEERING-GAPS-V3.md` | 300 | Gap analysis factuel |
+
+### Commits Session 178ter
+
+| Hash | Description |
+|:-----|:------------|
+| `8582f9b` | feat(engineering): v3.0 infrastructure |
+
+### Roadmap 62% → 95%
+
+| Phase | Effort | Points | Description |
+|:------|:------:|:------:|:------------|
+| **Phase 1** | 6h | +20 | Credentials + démarrer services |
+| **Phase 2** | 13h | +8 | Event bus + auto-startup |
+| **Phase 3** | 24h | +5 | ML scoring + forecasting |
+| **TOTAL** | **43h** | **+33** | **95/100** |
 
 ---
 
