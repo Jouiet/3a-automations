@@ -5,7 +5,9 @@
 
 **Proposition:** Spin-off des capacités "AI Voice Assistant" et "AI Voice Telephony" en plateforme indépendante ciblant le Maroc, les pays Arabes, et la région MENA (E-commerce + B2B/PME).
 
-**Verdict:** ⚠️ **VIABLE SOUS CONDITIONS** - Le marché est réel et en croissance, mais la concurrence est établie et le timing est critique.
+**Verdict:** ✅ **GO - TECHNOLOGIE INTERNE** - Marché réel, stack technique prêt, cibles clients définies.
+
+**Décision:** Développement interne - PAS de partenariat. Technologie propriétaire.
 
 ---
 
@@ -353,20 +355,34 @@
 4. **Financement 6 mois runway** - ~$50-100K minimum
 5. **Différenciation claire** - E-commerce + Multi-tenant + Prix
 
-### 9.3 Alternative Recommandée
+### 9.3 DÉCISION: TECHNOLOGIE INTERNE
 
-**Option B: Partenariat plutôt que Spin-off**
+**PAS de partenariat** - Développement propriétaire pour:
+- Contrôle total de la roadmap
+- Marges maximisées
+- Différenciation technologique
+- Ownership IP complet
 
-Au lieu d'un spin-off complet, considérer:
-- Partenariat avec SAWT IA ou autre acteur local
-- Licence technologie voice à acteurs MENA
-- White-label voice pour BPO existants
+### 9.4 Cibles Clients Configurées (18 types)
 
-**Avantages:**
-- Pas besoin présence locale
-- Pas de compétition directe
-- Revenue immédiat (licence)
-- Risque réduit
+| Secteur | ID | Langue | Use Cases Voice |
+|---------|-----|--------|-----------------|
+| **Médecin Généraliste** | MEDICAL_GENERAL | fr/ary | RDV, rappels, résultats |
+| **Médecin Spécialiste** | MEDICAL_SPECIALIST | fr | RDV spécialisés, suivi |
+| **Dentiste** | DENTAL | fr/ary | RDV, urgences, devis |
+| **Agence de Voyage** | TRAVEL_AGENCY | fr | Réservations, infos |
+| **Location Voiture** | CAR_RENTAL | ary | Dispo, tarifs, RDV |
+| **Notaire** | NOTARY | fr | RDV, suivi dossiers |
+| **Agence Immobilière** | REAL_ESTATE | fr | Visites, qualification |
+| **Agence Événementiel** | EVENT_AGENCY | fr | Devis, disponibilités |
+| **Agence Commerciale** | SALES_AGENCY | fr | Qualification leads |
+| **Concessionnaire Auto** | CAR_DEALER | ary | Stock, essais, financement |
+| **Assurance** | INSURANCE | fr | Devis, sinistres, attestations |
+| **Hôtel** | HOTEL | fr/en | Réservations, concierge |
+| **E-commerce** | UNIVERSAL_ECOMMERCE | ary | Support, tracking |
+| **PME** | UNIVERSAL_SME | fr | Général |
+
+**Fichier config:** `automations/agency/core/client_registry.json` (18 clients, 16 secteurs)
 
 ---
 

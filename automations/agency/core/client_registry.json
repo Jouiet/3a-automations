@@ -41,7 +41,7 @@
             "payment_method": "SHOPIFY_CHECKOUT",
             "payment_details": "https://nike-reseller-paris.com/checkout",
             "phone": "+33700000001",
-            "address": " Champs Elysées, Paris"
+            "address": "Champs Elysées, Paris"
         },
         "sme_baker_02": {
             "name": "Boulangerie Patissier",
@@ -64,6 +64,292 @@
             "payment_details": "الدفع عند التسليم / Cash on Delivery",
             "phone": "+212661234567",
             "address": "درب غلف، الدار البيضاء"
+        },
+        "medecin_general_01": {
+            "name": "Cabinet Dr. Bennani",
+            "sector": "MEDICAL_GENERAL",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "medical_general_v1",
+            "payment_method": "CASH_OR_CARD",
+            "payment_details": "Paiement sur place - Consultation 200 MAD",
+            "phone": "+212522334455",
+            "address": "Bd Zerktouni, Casablanca",
+            "services": ["consultation", "certificat_medical", "ordonnance", "suivi_chronique"],
+            "horaires": "Lun-Ven 9h-18h, Sam 9h-13h"
+        },
+        "medecin_specialiste_01": {
+            "name": "Dr. El Amrani - Cardiologue",
+            "sector": "MEDICAL_SPECIALIST",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "medical_specialist_v1",
+            "payment_method": "CASH_OR_CARD",
+            "payment_details": "Consultation 500 MAD - ECG 300 MAD",
+            "phone": "+212537889900",
+            "address": "Clinique Atlas, Rabat",
+            "specialite": "cardiologie",
+            "services": ["consultation", "ecg", "echo_cardiaque", "holter"],
+            "horaires": "Lun-Ven 9h-17h sur RDV"
+        },
+        "dentiste_casa_01": {
+            "name": "Centre Dentaire Smile",
+            "sector": "DENTAL",
+            "currency": "MAD",
+            "language": "ary",
+            "knowledge_base_id": "dental_intake_v1",
+            "payment_method": "CASH_OR_CARD",
+            "payment_details": "Détartrage 400 MAD - Extraction 500 MAD - Implant sur devis",
+            "phone": "+212522667788",
+            "address": "Maarif, Casablanca",
+            "services": ["detartrage", "extraction", "implant", "orthodontie", "blanchiment"],
+            "horaires": "Lun-Sam 9h-19h"
+        },
+        "agence_voyage_01": {
+            "name": "Atlas Voyages",
+            "sector": "TRAVEL_AGENCY",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "travel_agency_v1",
+            "payment_method": "BANK_TRANSFER_OR_CARD",
+            "payment_details": "Acompte 30% - Solde 7j avant départ",
+            "phone": "+212522112233",
+            "address": "Av. Hassan II, Casablanca",
+            "services": ["billets_avion", "hotels", "circuits", "visa", "assurance_voyage"],
+            "destinations": ["europe", "turquie", "egypte", "dubai", "asie"]
+        },
+        "location_voiture_01": {
+            "name": "Maroc Cars Location",
+            "sector": "CAR_RENTAL",
+            "currency": "MAD",
+            "language": "ary",
+            "knowledge_base_id": "car_rental_v1",
+            "payment_method": "CARD_OR_CASH",
+            "payment_details": "Caution CB obligatoire - Tarifs à partir de 250 MAD/jour",
+            "phone": "+212661990088",
+            "address": "Aéroport Mohammed V, Casablanca",
+            "services": ["location_courte", "location_longue", "avec_chauffeur", "livraison_hotel"],
+            "vehicules": ["economique", "berline", "suv", "utilitaire", "luxe"]
+        },
+        "notaire_rabat_01": {
+            "name": "Maître Fassi-Fihri",
+            "sector": "NOTARY",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "notary_v1",
+            "payment_method": "BANK_TRANSFER",
+            "payment_details": "Honoraires selon barème officiel",
+            "phone": "+212537778899",
+            "address": "Agdal, Rabat",
+            "services": ["acte_vente", "succession", "donation", "societe", "hypotheque"],
+            "horaires": "Lun-Ven 9h-17h sur RDV"
+        },
+        "agence_immo_01": {
+            "name": "Immobilier Casa Pro",
+            "sector": "REAL_ESTATE",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "real_estate_v1",
+            "payment_method": "COMMISSION",
+            "payment_details": "Commission 2.5% vente - 1 mois location",
+            "phone": "+212522445566",
+            "address": "Bd Anfa, Casablanca",
+            "services": ["vente", "location", "estimation", "gestion_locative"],
+            "zones": ["casablanca", "mohammedia", "bouskoura", "dar_bouazza"]
+        },
+        "agence_event_01": {
+            "name": "Marrakech Events",
+            "sector": "EVENT_AGENCY",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "event_agency_v1",
+            "payment_method": "DEVIS_CUSTOM",
+            "payment_details": "Acompte 50% - Solde J-7",
+            "phone": "+212524889900",
+            "address": "Guéliz, Marrakech",
+            "services": ["mariage", "seminaire", "lancement_produit", "gala", "team_building"],
+            "capacite": "10 à 2000 personnes"
+        },
+        "agence_commerciale_01": {
+            "name": "Force Vente Maroc",
+            "sector": "SALES_AGENCY",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "sales_agency_v1",
+            "payment_method": "COMMISSION_VENTE",
+            "payment_details": "Commission 5-15% selon volume",
+            "phone": "+212522334455",
+            "address": "Sidi Maarouf, Casablanca",
+            "services": ["prospection", "negociation", "closing", "compte_cle"],
+            "secteurs_cibles": ["agroalimentaire", "cosmetique", "electronique", "b2b"]
+        },
+        "concessionnaire_auto_01": {
+            "name": "Auto Galaxy Maroc",
+            "sector": "CAR_DEALER",
+            "currency": "MAD",
+            "language": "ary",
+            "knowledge_base_id": "car_dealer_v1",
+            "payment_method": "CREDIT_OR_CASH",
+            "payment_details": "Crédit Wafasalaf disponible - Reprise ancien véhicule",
+            "phone": "+212522778899",
+            "address": "Route d'El Jadida, Casablanca",
+            "services": ["vente_neuf", "vente_occasion", "reprise", "financement", "apres_vente"],
+            "marques": ["toyota", "hyundai", "dacia", "renault", "peugeot"]
+        },
+        "assurance_01": {
+            "name": "Assurances Al Amane",
+            "sector": "INSURANCE",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "insurance_v1",
+            "payment_method": "PRELEVEMENT_OR_CASH",
+            "payment_details": "Paiement mensuel/annuel - Attestation immédiate",
+            "phone": "+212522556677",
+            "address": "Centre Ville, Casablanca",
+            "services": ["auto", "habitation", "sante", "vie", "entreprise", "voyage"],
+            "partenaires": ["wafa_assurance", "axa", "saham", "atlanta"]
+        },
+        "hotel_marrakech_01": {
+            "name": "Riad Jardin Secret",
+            "sector": "HOTEL",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "hotel_v1",
+            "payment_method": "CARD_OR_BOOKING",
+            "payment_details": "Réservation Booking.com ou direct -10%",
+            "phone": "+212524443322",
+            "address": "Médina, Marrakech",
+            "services": ["hebergement", "petit_dejeuner", "spa", "excursions", "transfert_aeroport"],
+            "chambres": 12,
+            "etoiles": 4
+        },
+        "hotel_agadir_01": {
+            "name": "Atlantic Beach Resort",
+            "sector": "HOTEL",
+            "currency": "MAD",
+            "language": "en",
+            "knowledge_base_id": "hotel_v1",
+            "payment_method": "CARD_OR_BOOKING",
+            "payment_details": "All-inclusive available - Beach front",
+            "phone": "+212528776655",
+            "address": "Bd 20 Août, Agadir",
+            "services": ["all_inclusive", "spa", "piscine", "restaurant", "animation"],
+            "chambres": 150,
+            "etoiles": 5
+        }
+    },
+    "sectors": {
+        "MEDICAL_GENERAL": {
+            "label": "Médecin Généraliste",
+            "label_ar": "طبيب عام",
+            "icon": "🩺",
+            "booking_required": true,
+            "typical_duration": 20
+        },
+        "MEDICAL_SPECIALIST": {
+            "label": "Médecin Spécialiste",
+            "label_ar": "طبيب متخصص",
+            "icon": "👨‍⚕️",
+            "booking_required": true,
+            "typical_duration": 30
+        },
+        "DENTAL": {
+            "label": "Dentiste",
+            "label_ar": "طبيب أسنان",
+            "icon": "🦷",
+            "booking_required": true,
+            "typical_duration": 45
+        },
+        "TRAVEL_AGENCY": {
+            "label": "Agence de Voyage",
+            "label_ar": "وكالة سفر",
+            "icon": "✈️",
+            "booking_required": false,
+            "typical_duration": 30
+        },
+        "CAR_RENTAL": {
+            "label": "Location de Voiture",
+            "label_ar": "كراء السيارات",
+            "icon": "🚗",
+            "booking_required": true,
+            "typical_duration": 15
+        },
+        "NOTARY": {
+            "label": "Notaire",
+            "label_ar": "موثق",
+            "icon": "📜",
+            "booking_required": true,
+            "typical_duration": 60
+        },
+        "REAL_ESTATE": {
+            "label": "Agence Immobilière",
+            "label_ar": "وكالة عقارية",
+            "icon": "🏠",
+            "booking_required": false,
+            "typical_duration": 45
+        },
+        "EVENT_AGENCY": {
+            "label": "Agence Événementiel",
+            "label_ar": "وكالة تنظيم الحفلات",
+            "icon": "🎉",
+            "booking_required": true,
+            "typical_duration": 60
+        },
+        "SALES_AGENCY": {
+            "label": "Agence Commerciale",
+            "label_ar": "وكالة تجارية",
+            "icon": "💼",
+            "booking_required": false,
+            "typical_duration": 30
+        },
+        "CAR_DEALER": {
+            "label": "Concessionnaire Auto",
+            "label_ar": "وكيل سيارات",
+            "icon": "🚙",
+            "booking_required": false,
+            "typical_duration": 60
+        },
+        "INSURANCE": {
+            "label": "Assurance",
+            "label_ar": "تأمين",
+            "icon": "🛡️",
+            "booking_required": false,
+            "typical_duration": 30
+        },
+        "HOTEL": {
+            "label": "Hôtel",
+            "label_ar": "فندق",
+            "icon": "🏨",
+            "booking_required": true,
+            "typical_duration": 10
+        },
+        "AGENCY": {
+            "label": "Agence",
+            "label_ar": "وكالة",
+            "icon": "🏢",
+            "booking_required": false,
+            "typical_duration": 30
+        },
+        "HOA": {
+            "label": "Syndic",
+            "label_ar": "نقابة",
+            "icon": "🏘️",
+            "booking_required": false,
+            "typical_duration": 15
+        },
+        "UNIVERSAL_ECOMMERCE": {
+            "label": "E-commerce",
+            "label_ar": "تجارة إلكترونية",
+            "icon": "🛒",
+            "booking_required": false,
+            "typical_duration": 10
+        },
+        "UNIVERSAL_SME": {
+            "label": "PME",
+            "label_ar": "مقاولة صغيرة",
+            "icon": "🏪",
+            "booking_required": false,
+            "typical_duration": 15
         }
     }
 }
