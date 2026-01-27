@@ -468,6 +468,64 @@ function loadLanguageAssets() {
 
 loadLanguageAssets();
 
+// ─────────────────────────────────────────────────────────────────────────────
+// LANGUAGE-SPECIFIC SYSTEM PROMPTS (Session 176ter)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Generate a culturally-adapted system prompt based on language
+ * For Darija (ary): Uses full 3A context from voice-ary.json
+ * Session 176ter: Fix for Atlas-Chat-9B Darija responses
+ */
+function getSystemPromptForLanguage(language = 'fr') {
+  // Non-Darija: use base English prompt (works well with all models)
+  if (language !== 'ary') {
+    return SYSTEM_PROMPT;
+  }
+
+  // Darija: Generate comprehensive Arabic-script prompt with 3A context
+  const lang = LANG_DATA['ary'] || {};
+  const industries = lang.industries || {};
+  const topics = lang.topics || {};
+
+  // Build services list from industries
+  const servicesContext = Object.entries(industries)
+    .map(([key, data]) => `- ${data.intro}`)
+    .join('\n');
+
+  // Build topics context
+  const topicsContext = Object.entries(topics)
+    .filter(([key]) => ['pricing', 'audit', 'automations', 'process'].includes(key))
+    .map(([key, data]) => data.response)
+    .join('\n\n');
+
+  return `أنت مساعد صوتي ذكي ديال 3A Automation (أوتوماسيون، أناليتيكس، ذكاء اصطناعي).
+
+هويتك:
+- أنت المستشار الرقمي رقم 1 فالمغرب للإي كوميرس والB2B
+- تخصصك: Shopify، Klaviyo، GA4، الذكاء الاصطناعي
+- مهمتك: تحويل البيزنيس ديال العملاء من خلال الأوتوماسيون المتقدمة
+
+الخدمات ديالنا:
+${servicesContext}
+
+معلومات مهمة:
+${topicsContext}
+
+قواعد الجواب:
+1. جاوب بالدارجة المغربية الأصيلة (ماشي فصحى)
+2. جاوب بجملتين-3 جمل فقط، بلا نقط ولا لوائح
+3. هضر بطريقة طبيعية كأنك كتهضر مع صاحبك
+4. ديما حاول توجه نحو "الأوديت المجاني" باش تقنع العميل
+5. إيلا سولك على الأسعار، قولو يمشي لـ /pricing.html ولا يطلب ديڤي مخصص
+6. كن واثق ومحترف - أنت خبير فهاد الميدان
+
+أمثلة ديال الجواب المزيان:
+- "واخا، حنا متخصصين فالإي كوميرس! الفلووات ديالنا كتجيب 42 درهم على كل درهم. بغيتي أوديت مجاني؟"
+- "للبيزنيس ديالك، نقدرو نكونفيغيريو سلسلة ترحيب + استرجاع السلال. هادشي كيزيد المبيعات ب15-25%."
+- "الأسعار ديالنا شفافين. شوفهم على pricing ولا صيفط سؤالك وغادي نجاوبوك ف24 ساعة."`;
+}
+
 function getLocalResponse(userMessage, language = 'fr') {
   const lower = userMessage.toLowerCase();
   const lang = LANG_DATA[language] || LANG_DATA['fr'] || { topics: {}, defaults: {} };
@@ -889,8 +947,9 @@ async function getResilisentResponse(userMessage, conversationHistory = [], sess
     }
   }
 
-  // 3. Dynamic Prompt Construction
-  const fullSystemPrompt = `${SYSTEM_PROMPT}\n\nRELEVANT_SYSTEMS (RLS Isolated):\n${ragContext}${graphContext}${toolContext}${crmContext}\n\nTENANT_ID: ${tenantId}`;
+  // 3. Dynamic Prompt Construction (Session 176ter: Language-aware prompts)
+  const basePrompt = getSystemPromptForLanguage(language);
+  const fullSystemPrompt = `${basePrompt}\n\nRELEVANT_SYSTEMS (RLS Isolated):\n${ragContext}${graphContext}${toolContext}${crmContext}\n\nTENANT_ID: ${tenantId}`;
 
   // Fallback order: Grok → [Atlas-Chat for Darija] → OpenAI → Gemini → Anthropic → Local
   // Session 170: Language-aware chain - Atlas-Chat-9B prioritized for Darija (ary)
