@@ -708,7 +708,7 @@ curl -X POST http://localhost:3000/ag-ui/queue/submit \
 | Scripts Core | **85** | ✅ |
 | Scripts --health | **33** (39%) | ⚠️ |
 | Sensors --health | **19/19** (100%) | ✅ |
-| Sensors OK | **11/19** (58%) | ⚠️ 8 en erreur |
+| Sensors OK | **12/19** (63%) | ⚠️ 7 en erreur (GA4 FIXED) |
 | Automations Registry | **121** (88 w/ scripts) | ✅ |
 | Skills (SKILL.md) | **42** | ✅ 95% |
 | MCP Servers | **14** | ✅ |
@@ -733,21 +733,21 @@ curl -X POST http://localhost:3000/ag-ui/queue/submit \
 
 | Status | Count | Sensors | Erreur Exacte |
 |--------|-------|---------|---------------|
-| ✅ OK | 10 | shopify, klaviyo, email-health, gsc, google-trends, apify, cost-tracking, lead-scoring, lead-velocity, product-seo, retention | - |
+| ✅ OK | 11 | **ga4**, shopify, klaviyo, email-health, gsc, google-trends, apify, cost-tracking, lead-scoring, lead-velocity, product-seo, retention | - |
 | ⚠️ WARNING | 1 | supplier-health | Credentials CJ/BigBuy manquants |
-| ❌ ERROR | 8 | ga4, content-perf, meta-ads, tiktok-ads, whatsapp, voice-quality, google-ads-planner | Voir détails |
+| ❌ ERROR | 7 | content-perf, meta-ads, tiktok-ads, whatsapp, voice-quality, google-ads-planner | Voir détails |
 
 ### Erreurs Spécifiques
 
-| Sensor | Erreur | Type |
-|--------|--------|------|
-| ga4 | `DNS resolution failed for analyticsdata.googleapis.com` | Réseau/DNS |
-| content-perf | `self-signed certificate` | SSL local |
-| meta-ads | `META_ACCESS_TOKEN not set` | Credential |
-| tiktok-ads | `TIKTOK_ACCESS_TOKEN not set` | Credential |
-| whatsapp | `WHATSAPP_ACCESS_TOKEN not set` | Credential |
-| voice-quality | `0/3 endpoints healthy` | Services down |
-| google-ads-planner | `5 credentials missing` | Credential |
+| Sensor | Erreur | Type | Fix |
+|--------|--------|------|-----|
+| ~~ga4~~ | ~~DNS resolution~~ | ~~Réseau~~ | ✅ **RÉSOLU** (temporaire) |
+| content-perf | `wp.3a-automation.com → HTTP 504` | Site down | Vérifier si WordPress existe |
+| meta-ads | `META_ACCESS_TOKEN not set` | Credential | Configurer token |
+| tiktok-ads | `TIKTOK_ACCESS_TOKEN not set` | Credential | Configurer token |
+| whatsapp | `WHATSAPP_ACCESS_TOKEN not set` | Credential | Configurer token |
+| voice-quality | `0/3 endpoints healthy` | Services locaux non démarrés | `node voice-*.cjs &` |
+| google-ads-planner | `5 credentials missing` | Credential | Configurer Google Ads API |
 
 ---
 
@@ -755,13 +755,13 @@ curl -X POST http://localhost:3000/ag-ui/queue/submit \
 
 | Blocker | Impact | Action Requise |
 |---------|--------|----------------|
-| **GA4 DNS Resolution** | Analytics sensor | Vérifier réseau/firewall pour `analyticsdata.googleapis.com` |
+| ~~GA4~~ | ~~Analytics~~ | ✅ **RÉSOLU** (27/01/2026) |
 | **META_ACCESS_TOKEN** | Meta Ads sensor | Configure token Facebook Business |
 | **TIKTOK_ACCESS_TOKEN** | TikTok Ads sensor | Configure token TikTok Ads |
 | **WHATSAPP_ACCESS_TOKEN** | WhatsApp sensor | Configure token Meta WhatsApp Business |
 | **GOOGLE_ADS_*** | Google Ads Planner | 5 credentials manquants |
-| **CJ_API_KEY + BIGBUY_API_KEY** | Supplier Health | Configure credentials fournisseurs |
-| **SSL Certificate** | Content Performance | Résoudre `self-signed certificate` local |
+| **wp.3a-automation.com** | Content Performance | Site HTTP 504 - Vérifier si existe |
+| **Voice Services** | Voice Quality | Démarrer services locaux (3004, 3007, 3009) |
 
 ---
 

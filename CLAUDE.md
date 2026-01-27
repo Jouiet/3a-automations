@@ -38,7 +38,7 @@
 | product-seo | ✅ ok | passed | 0 products |
 | retention | ✅ ok | passed | 0 orders |
 | supplier-health | ⚠️ warning | passed | CJ+BigBuy: NO_CREDENTIALS |
-| ga4 | ❌ error | failed | DNS resolution failed |
+| ga4 | ✅ ok | passed | 1 active user 24h, ROAS 0.00 |
 | content-perf | ❌ error | failed | self-signed certificate |
 | meta-ads | ❌ error | N/A | META_ACCESS_TOKEN not set |
 | tiktok-ads | ❌ error | N/A | TIKTOK_ACCESS_TOKEN not set |
