@@ -1,5 +1,5 @@
 # Analyse Stratégique: Plateforme Voice AI MENA
-> Version: 5.2.0 | 27/01/2026 | DÉCISION: ✅ **GO** - Webapp Production-Ready (WebRTC-First Strategy)
+> Version: 5.3.0 | 27/01/2026 | DÉCISION: ✅ **GO** - Webapp Production-Ready (WebRTC-First Strategy)
 
 ## Executive Summary
 
@@ -98,7 +98,7 @@
 |--------|-------------|--------------|
 | Darija Native | SAWT IA only | ✅ Testé OK |
 | **E-commerce Focus** | ❌ Aucun | ✅ Shopify, Klaviyo intégrés |
-| **Multi-secteur B2B** | Limité | ✅ 16 secteurs configurés |
+| **Multi-secteur B2B** | Limité | ✅ 20 secteurs configurés |
 | **Multi-tenant** | Variable | ✅ Architecture ready |
 | **Pricing PME** | Opaque | ✅ Transparent, compétitif |
 | **Lead Qualification** | ❌ | ✅ Scoring 0-100, CRM sync |
@@ -1276,7 +1276,7 @@ BLOCKERS:
 - ✅ Stack technique complet et testé (6,546 lignes)
 - ✅ Darija validé empiriquement (TTS 1.3s, STT 707ms)
 - ✅ Multi-tenant architecture opérationnelle
-- ✅ 16 secteurs B2B configurés
+- ✅ 20 secteurs B2B configurés
 - ✅ Intégrations E-commerce (Shopify, Klaviyo)
 - ✅ Lead qualification AI (scoring 0-100)
 - ✅ 5 langues supportées
@@ -1325,7 +1325,7 @@ BLOCKERS:
 | Opportunité marché | 9/10 | $1.3B+ marché, 22% CAGR |
 | Capacités techniques | 8/10 | Stack complet, Darija testé OK |
 | Différenciation | 8/10 | E-commerce + Multi-secteur unique |
-| **Viabilité économique** | ✅ **9/10** | **COGS $0.017/min, Marge 79-86%, LTV:CAC 4:1** |
+| **Viabilité économique** | ✅ **9/10** | **COGS $0.007/min, Marge 91%, LTV:CAC 4.5:1** |
 | Timing | 7/10 | SAWT IA actif mais focus différent |
 | Ressources | 8/10 | Stack existant, prêt pour production |
 | **SCORE GLOBAL** | **8.2/10** | ✅ **GO** |
@@ -1334,7 +1334,7 @@ BLOCKERS:
 
 | # | Prérequis | Status | Priorité |
 |---|-----------|--------|----------|
-| 1 | ~~Marges négatives~~ | ✅ **RÉSOLU** (COGS $0.017) | ~~P0~~ |
+| 1 | ~~Marges négatives~~ | ✅ **RÉSOLU** (COGS $0.007) | ~~P0~~ |
 | 2 | ~~Ratio LTV:CAC~~ | ✅ **RÉSOLU** (4:1 > 3:1) | ~~P0~~ |
 | 3 | **Déclaration CNDP** | ⏳ À soumettre | 🟡 P1 |
 | 4 | Web Speech API fallback | ⏳ À implémenter | 🟡 P1 |
@@ -1351,18 +1351,20 @@ Raisons:
 - Différenciation technologique
 - Agilité et vitesse d'exécution
 
-### 10.4 STACK PRODUCTION (Vérifié v4.0)
+### 10.4 STACK PRODUCTION (Vérifié v5.2 - Audit Code Source)
 
 | Composant | Production (Web Widget) | Premium (Optionnel) | COGS/min |
 |-----------|------------------------|---------------------|----------|
 | **LLM** | Grok 4.1 Fast | Grok 4.1 Fast | $0.002 |
-| **TTS** | Web Speech API (gratuit) | ElevenLabs Ghizlane | $0.00 / $0.086 |
-| **STT** | Whisper API ($0.006/min) | ElevenLabs Scribe | $0.006 / $0.007 |
-| **Transport** | WebRTC ($0.004/min) | SIP trunk local | $0.004 / $0.02 |
-| **Infra** | GCP e2-medium | GCP e2-medium | $0.005 |
-| **TOTAL** | - | - | **$0.017** / $0.120 |
+| **TTS** | Web Speech API (gratuit) | ElevenLabs Ghizlane | **$0.00** / $0.086 |
+| **STT** | Web Speech API (gratuit) | ElevenLabs Scribe | **$0.00** / $0.007 |
+| **Transport** | WebRTC P2P (gratuit) | SIP trunk local | **$0.00** / $0.02 |
+| **Infra** | Hostinger VPS | GCP e2-medium | $0.005 |
+| **TOTAL** | - | - | **$0.007** / $0.120 |
 
-**Marge avec stack Web Widget @ $0.10/min:** 83% ✅
+**Marge avec stack Web Widget @ $0.08/min:** 91% ✅
+
+> **Note v5.2:** Audit code source (`voice-api-resilient.cjs:69`) confirme que TTS/STT utilisent Web Speech API (gratuit, browser-native), pas Whisper API. Transport WebRTC = peer-to-peer gratuit.
 
 ### 10.5 Prochaines Étapes - WEBAPP PRODUCTION (PAS MVP)
 
