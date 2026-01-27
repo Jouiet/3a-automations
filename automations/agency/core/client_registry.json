@@ -236,6 +236,58 @@
             "services": ["all_inclusive", "spa", "piscine", "restaurant", "animation"],
             "chambres": 150,
             "etoiles": 5
+        },
+        "salon_coiffure_casa_01": {
+            "name": "Coiffure Prestige Casa",
+            "sector": "HAIR_SALON",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "hair_salon_v1",
+            "payment_method": "CASH_OR_CARD",
+            "payment_details": "Coupe Homme 80 MAD - Femme 150 MAD - Coloration 300 MAD",
+            "phone": "+212522334466",
+            "address": "Maarif, Casablanca",
+            "services": ["coupe", "coloration", "brushing", "soins_cheveux", "barbe"],
+            "horaires": "Mar-Sam 9h-20h"
+        },
+        "beauty_salon_rabat_01": {
+            "name": "Institut Beauté Royale",
+            "sector": "BEAUTY_SALON",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "beauty_salon_v1",
+            "payment_method": "CASH_OR_CARD",
+            "payment_details": "Soin visage 250 MAD - Épilation 150 MAD - Manucure 100 MAD",
+            "phone": "+212537889911",
+            "address": "Agdal, Rabat",
+            "services": ["soins_visage", "epilation", "manucure", "pedicure", "maquillage"],
+            "horaires": "Lun-Sam 10h-19h"
+        },
+        "spa_marrakech_01": {
+            "name": "Hammam & Spa Palmeraie",
+            "sector": "SPA",
+            "currency": "MAD",
+            "language": "fr",
+            "knowledge_base_id": "spa_v1",
+            "payment_method": "CARD_OR_BOOKING",
+            "payment_details": "Hammam 300 MAD - Massage 500 MAD - Package Journée 1200 MAD",
+            "phone": "+212524557788",
+            "address": "Palmeraie, Marrakech",
+            "services": ["hammam", "massage", "gommage", "soins_corps", "yoga"],
+            "horaires": "Tous les jours 10h-21h"
+        },
+        "fitness_casa_01": {
+            "name": "City Gym Casablanca",
+            "sector": "FITNESS_GYM",
+            "currency": "MAD",
+            "language": "ary",
+            "knowledge_base_id": "fitness_v1",
+            "payment_method": "CARD_OR_CASH",
+            "payment_details": "Abonnement mensuel 400 MAD - Annuel 3600 MAD - Personal training 300 MAD/h",
+            "phone": "+212522998877",
+            "address": "Ain Diab, Casablanca",
+            "services": ["musculation", "cardio", "cours_collectifs", "personal_training", "sauna"],
+            "horaires": "Lun-Sam 6h-23h, Dim 8h-20h"
         }
     },
     "sectors": {
@@ -348,6 +400,34 @@
             "label": "PME",
             "label_ar": "مقاولة صغيرة",
             "icon": "🏪",
+            "booking_required": false,
+            "typical_duration": 15
+        },
+        "HAIR_SALON": {
+            "label": "Salon de Coiffure",
+            "label_ar": "صالون حلاقة",
+            "icon": "💇",
+            "booking_required": true,
+            "typical_duration": 45
+        },
+        "BEAUTY_SALON": {
+            "label": "Institut de Beauté",
+            "label_ar": "صالون تجميل",
+            "icon": "💅",
+            "booking_required": true,
+            "typical_duration": 60
+        },
+        "SPA": {
+            "label": "SPA / Wellness",
+            "label_ar": "سبا",
+            "icon": "🧖",
+            "booking_required": true,
+            "typical_duration": 90
+        },
+        "FITNESS_GYM": {
+            "label": "Salle de Sport",
+            "label_ar": "قاعة رياضة",
+            "icon": "🏋️",
             "booking_required": false,
             "typical_duration": 15
         }
