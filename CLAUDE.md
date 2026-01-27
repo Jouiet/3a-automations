@@ -1,10 +1,10 @@
 # 3A Automation
-> Version: 118.0 | 27/01/2026 | Optimized Memory
+> Version: 119.0 | 27/01/2026 | Session 176 | Optimized Memory
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
-- **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+- **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (❌ DNS Timeout)
 
 ---
 
@@ -52,10 +52,12 @@ STT:         ElevenLabs Scribe Maghrebi
 
 | Problème | Impact | Action |
 |:---|:---|:---|
+| **dashboard.3a-automation.com** | DNS Timeout | Vérifier Hostinger DNS |
+| HUGGINGFACE_API_KEY vide | Atlas-Chat-9B OFF | [Créer token HF](https://huggingface.co/settings/tokens) |
+| TELNYX_API_KEY vide | Telephony MENA OFF | [Créer compte Telnyx](https://portal.telnyx.com) |
 | META_ACCESS_TOKEN vide | Meta Ads cassé | Configurer token |
 | TIKTOK_ACCESS_TOKEN vide | TikTok Ads cassé | Configurer token |
 | Apify trial expiré | Scraping broken | [Payer $49/mois](https://console.apify.com/billing) |
-| 36 credentials vides | 39% features OFF | Configurer .env |
 
 ---
 
