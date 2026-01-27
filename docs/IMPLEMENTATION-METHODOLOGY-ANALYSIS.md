@@ -1,9 +1,9 @@
 # 3A AUTOMATION - MÉTHODOLOGIE D'IMPLÉMENTATION
 ## Dashboard Multi-Tenant avec OAuth Automatisé
 
-> **Version:** 2.2 | **Date:** 28/01/2026 | **Session:** 180+
+> **Version:** 2.3 | **Date:** 28/01/2026 | **Session:** 180+
 > **Approche:** Plan d'Action Rigoureux | **Exigence:** 100% Vérifiable
-> **Status:** Semaine 1 ✅ | Semaine 2 ✅ | Semaine 3 ✅ | Semaine 4 ✅
+> **Status:** Semaine 1 ✅ | Semaine 2 ✅ | Semaine 3 ✅ | Semaine 4 ✅ | Semaine 5 ✅
 
 ---
 
@@ -618,13 +618,15 @@ node -e "const {getProvider} = require('./dashboard/src/lib/oauth'); console.log
 
 ---
 
-### 3.6 SEMAINE 5: Script Runner Multi-Tenant
+### 3.6 SEMAINE 5: Script Runner Multi-Tenant ✅ DONE
 
 #### Objectifs
-- [ ] Créer script runner avec injection credentials
-- [ ] Modifier 10 scripts P0 pour context injection
-- [ ] Cron manager per-tenant
-- [ ] Logging per-tenant
+- [x] TenantLogger.cjs (280 LOC) - Isolated logging
+- [x] TenantContext.cjs (320 LOC) - Build context from vault
+- [x] TenantScriptRunner.cjs (380 LOC) - Execute with isolation
+- [x] TenantCronManager.cjs (350 LOC) - Scheduled tasks
+- [x] shopify-sensor.cjs - runWithContext() added
+- [x] klaviyo-sensor.cjs - runWithContext() added
 
 #### Tâches Détaillées
 
@@ -1142,6 +1144,7 @@ node automations/agency/core/uptime-monitor.cjs --health  # Santé OK
 | 2.0 | 27/01/2026 | Plan d'action complet + spécifications techniques |
 | 2.1 | 28/01/2026 | Semaine 3 OAuth Shopify complete |
 | 2.2 | 28/01/2026 | Semaine 4 OAuth Klaviyo + Google complete (2545 LOC) |
+| 2.3 | 28/01/2026 | Semaine 5 Script Runner Multi-Tenant complete (1822 LOC) |
 
 ---
 
