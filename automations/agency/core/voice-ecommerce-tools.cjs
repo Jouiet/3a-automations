@@ -145,4 +145,5 @@ class VoiceEcommerceTools {
     }
 }
 
-module.exports = VoiceEcommerceTools;
+// Export singleton instance (aligned with voice-crm-tools.cjs pattern)
+module.exports = new VoiceEcommerceTools();

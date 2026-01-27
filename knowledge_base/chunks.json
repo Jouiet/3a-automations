@@ -2790,5 +2790,39 @@
       "type": "policy",
       "key": "warranty_policy"
     }
+  },
+  {
+    "id": "learned_LRN-1769548700930-z6jnez",
+    "type": "knowledge_gap_filled",
+    "title": "AI could not answer: \"Bonjour, quel est votre prix pour le pack anti-churn?\"",
+    "text": "AI could not answer: \"Bonjour, quel est votre prix pour le pack anti-churn?\" | User: Bonjour, quel est votre prix pour le pack anti-churn? | AI: Notre FLOW CLIENT AT-RISK maximise la valeur vie client, je ne sais pas le prix exact pour votre cas.",
+    "source": {
+      "type": "conversation_learning",
+      "sessionId": "voice-test-learning-e2e-003",
+      "pattern": "ai_limitation",
+      "timestamp": "2026-01-27T21:18:20.930Z"
+    },
+    "metadata": {
+      "confidence": 0.85,
+      "factType": "gap",
+      "learnedAt": "2026-01-27T21:33:03.169Z",
+      "reviewedBy": "test-admin",
+      "originalId": "LRN-1769548700930-z6jnez"
+    },
+    "tenant_id": "agency_internal",
+    "keywords": [
+      "could",
+      "not",
+      "answer",
+      "bonjour",
+      "quel",
+      "est",
+      "votre",
+      "prix",
+      "pour",
+      "pack",
+      "anti",
+      "churn"
+    ]
   }
 ]

@@ -1657,17 +1657,47 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | `34eb2a3` | docs: Session 179 complete - Agent Ops v3.0 all modules upgraded |
 | `d0e23d9` | feat(learning-loop): add EventBus integration to KBEnrichment & ConversationLearner |
 
-### Next Session Actions
+---
 
-| Priority | Task | Effort |
-|:---------|:-----|:-------|
-| **P0** | Configure META_ACCESS_TOKEN | User action |
-| **P0** | Configure TELNYX_API_KEY | User action |
-| **P0** | Configure STRIPE_SECRET_KEY | User action |
-| **P1** | Test Learning Loop E2E with real voice session | 2h |
-| **P2** | Voice MENA: Deploy Atlas-Chat-9B on RunPod | 4h |
+## SESSION 180 SUMMARY (27/01/2026)
+
+### Accomplishments
+
+| Task | Status | Details |
+|:-----|:------:|:--------|
+| **Voice Services Startup** | ✅ | 3/3 HEALTHY (3004, 3007, 3009) |
+| **Bug Fix: voice-ecommerce-tools.cjs** | ✅ | Export singleton instance instead of class |
+| **Bug Fix: Learning API Path** | ✅ | Added `..` prefix for project root access |
+| **Learning Loop E2E Test** | ✅ | Full pipeline verified (see below) |
+| **Landing Page Verification** | ✅ | Futuristic design confirmed |
+
+### Learning Loop E2E Test Results
+
+| Step | Status | Result |
+|:-----|:------:|:-------|
+| Voice Conversation | ✅ | 4 messages in ContextBox history |
+| Fact Extraction | ✅ | 3 facts extracted (2 gap, 1 correction) |
+| Learning Queue API | ✅ | Dashboard API returns 3 pending facts |
+| Human Review | ✅ | 1 fact approved via PATCH API |
+| KB Enrichment | ✅ | 136 chunks (+1 learned), version backup created |
+
+### Bug Fixes Applied
+
+| File | Issue | Fix |
+|:-----|:------|:----|
+| `voice-ecommerce-tools.cjs` | Exported class instead of instance | `module.exports = new VoiceEcommerceTools()` |
+| `dashboard/src/app/api/learning/*/route.ts` | Wrong path for queue file | Added `..` to reach project root |
+
+### Next Session Actions (P0 - User Required)
+
+| Priority | Credential | Impact | Setup Link |
+|:---------|:-----------|:-------|:-----------|
+| **P0** | META_ACCESS_TOKEN | Meta CAPI active | [Meta Business](https://business.facebook.com) |
+| **P0** | TELNYX_API_KEY | Telephony MENA | [Telnyx Portal](https://portal.telnyx.com) |
+| **P0** | STRIPE_SECRET_KEY | Payments active | [Stripe Dashboard](https://dashboard.stripe.com) |
+| **P2** | Atlas-Chat-9B Deploy | Voice MENA Darija | RunPod/Vast.ai |
 
 ---
 
-**Document màj:** 27/01/2026 - Session 179 (Learning Loop Complete)
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice MENA: v5.5.3** | **Agent Ops: SOTA v3.0** | **Learning Loop: ✅ COMPLETE**
+**Document màj:** 27/01/2026 - Session 180 (Learning Loop E2E Verified)
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice MENA: v5.5.3** | **Agent Ops: SOTA v3.0** | **Learning Loop: ✅ E2E VERIFIED**

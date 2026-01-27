@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 130.0 | 27/01/2026 | Session 179 | Engineering Score: 92/100 (Agent Ops v3.0 COMPLETE)
+> Version: 131.0 | 27/01/2026 | Session 180 | Engineering Score: 94/100 (Learning Loop E2E VERIFIED)
 
 ## Identité
 
@@ -33,6 +33,18 @@
 | **RevenueScience.cjs** | 3.0 | EventBus integration, pricing analytics, CLI --health |
 | **KBEnrichment.cjs** | 2.0 | KB versioning, rollback, audit trail, EventBus emit |
 | **ConversationLearner.cjs** | 2.0 | Pattern extraction, HITL queue, EventBus emit |
+
+### Session 180 - Learning Loop E2E VERIFIED ✅
+- ✅ Voice Services: 3/3 HEALTHY (voice-api:3004, grok-realtime:3007, telephony-bridge:3009)
+- ✅ Bug Fix: voice-ecommerce-tools.cjs - Export singleton instance (was class)
+- ✅ Bug Fix: Learning Queue API path - Added `..` for project root access
+- ✅ Learning Loop E2E Test:
+  - Voice Conversation → ContextBox history (4 messages)
+  - ConversationLearner → 3 facts extracted (gap, correction)
+  - Learning Queue API → Dashboard works (3 pending facts)
+  - Human Review → 1 fact approved via PATCH API
+  - KBEnrichment → 1 fact injected (136 chunks, +1 learned)
+- ✅ Landing Page verified: Futuristic design, 121 workflows, 22 agents displayed
 
 ### Session 179 - Complete Summary
 - ✅ Learning Queue Dashboard UI (`/admin/agent-ops/learning`)

@@ -33,7 +33,8 @@ interface LearningFact {
   modifiedFact?: string;
 }
 
-const QUEUE_PATH = path.join(process.cwd(), 'data', 'learning', 'learning_queue.jsonl');
+// Path goes up one directory from dashboard to project root
+const QUEUE_PATH = path.join(process.cwd(), '..', 'data', 'learning', 'learning_queue.jsonl');
 
 function readQueue(): LearningFact[] {
   if (!fs.existsSync(QUEUE_PATH)) {
