@@ -1597,5 +1597,39 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-**Document màj:** 27/01/2026 - Session 178 (SOTA Optimization + ConversationLearner)
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice MENA: v5.5.3** | **Agent Ops: SOTA v2.0** | **ConversationLearner: ✅ Backend**
+---
+
+## SESSION 179 SUMMARY (27/01/2026)
+
+### Accomplishments
+
+| Task | Status | Details |
+|:-----|:------:|:--------|
+| **Circular Dependency Fix** | ✅ | Lazy loading pattern for EventBus imports |
+| **Learning Queue Dashboard UI** | ✅ | `/admin/agent-ops/learning` with full HITL |
+| **KBEnrichment Module** | ✅ | 350 lines, versioning, rollback, audit trail |
+| **Sidebar Navigation** | ✅ | Agent Ops > Learning Queue added |
+
+### Commits Session 179
+
+| Hash | Description |
+|:-----|:------------|
+| `800844e` | fix(eventbus): resolve circular dependency with lazy loading |
+| `36cd1de` | feat(dashboard): add Learning Queue UI (Agent Ops v3.0) |
+| `29e8cb1` | feat(agent-ops): add KBEnrichment module (v3.0 Learning Loop) |
+| `23e3367` | docs: update CLAUDE.md for Session 179 |
+
+### Next Session Actions
+
+| Priority | Task | Effort |
+|:---------|:-----|:-------|
+| **P0** | Configure META_ACCESS_TOKEN | User action |
+| **P0** | Configure TELNYX_API_KEY | User action |
+| **P0** | Configure STRIPE_SECRET_KEY | User action |
+| **P1** | Test Learning Loop E2E | 2h |
+| **P2** | Upgrade remaining Agent Ops modules (ErrorScience, RevenueScience) to v3.0 | 4h |
+
+---
+
+**Document màj:** 27/01/2026 - Session 179 (Learning Loop Complete)
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice MENA: v5.5.3** | **Agent Ops: SOTA v3.0** | **Learning Loop: ✅ COMPLETE**
