@@ -1,12 +1,14 @@
 /**
  * RevenueScience.cjs - Yield Optimization & Financial Intelligence
- * 3A Automation - Session 177/178 (SOTA Optimization)
+ * 3A Automation - Session 179 (Agent Ops v3.0)
  *
- * SOTA Features (Session 178):
+ * SOTA Features (Session 178-179):
  * - Demand Curve Modeling: Capacity-based pricing elasticity
  * - Time-Based Urgency: Day-of-week and time-of-day factors
  * - Variable Cost Basis: Accurate API cost tracking
  * - Confidence Scoring: Price recommendation certainty
+ * - EventBus Integration: Event-driven pricing decisions (v3.0)
+ * - Pricing History: Track all pricing recommendations
  *
  * Handles:
  * 1. Dynamic Pricing (Yield Management - Multi-Sector)
@@ -212,7 +214,7 @@ class RevenueScience {
         const priceResult = this.calculateOptimalPrice(qualification, sector);
         const marginCheck = this.isMarginSafe(priceResult, sector);
 
-        return {
+        const recommendation = {
             recommendedPrice: priceResult / 100,
             priceInCents: priceResult,
             confidence: priceResult.confidence || 0.5,
@@ -221,7 +223,192 @@ class RevenueScience {
             sector,
             timestamp: new Date().toISOString()
         };
+
+        // v3.0: Track pricing history and emit event
+        this._trackPricingDecision(recommendation, qualification);
+
+        return recommendation;
+    }
+
+    /**
+     * v3.0: Track pricing decision for analytics
+     */
+    _trackPricingDecision(recommendation, qualification) {
+        const decision = {
+            timestamp: recommendation.timestamp,
+            sector: recommendation.sector,
+            priceEur: recommendation.recommendedPrice,
+            confidence: recommendation.confidence,
+            marginSafe: recommendation.marginSafe,
+            qualification: {
+                score: qualification.score || 0,
+                entityType: qualification.entity_type || 'unknown'
+            },
+            capacity: this.currentCapacity[recommendation.sector.toUpperCase()] || 0
+        };
+
+        this.pricingHistory.push(decision);
+
+        // Keep bounded history (last 1000 decisions)
+        if (this.pricingHistory.length > 1000) {
+            this.pricingHistory = this.pricingHistory.slice(-500);
+        }
+
+        // Emit event for analytics (lazy load to avoid circular dependency)
+        this._emitPricingEvent(decision);
+    }
+
+    /**
+     * v3.0: Emit pricing event to EventBus
+     */
+    async _emitPricingEvent(decision) {
+        try {
+            // Lazy require to avoid circular dependency
+            const eventBus = require('./AgencyEventBus.cjs');
+
+            await eventBus.publish('revenue_science.pricing_calculated', {
+                sector: decision.sector,
+                priceEur: decision.priceEur,
+                confidence: decision.confidence,
+                marginSafe: decision.marginSafe,
+                capacityUtilization: decision.capacity,
+                qualificationScore: decision.qualification.score
+            }, {
+                tenantId: 'system',
+                source: 'RevenueScience'
+            });
+        } catch (e) {
+            // EventBus not available - silent fail
+        }
+    }
+
+    /**
+     * v3.0: Handle capacity update from EventBus
+     * Can be called directly or via event subscription
+     *
+     * @param {Object} event - { payload: { sector, utilization } }
+     */
+    handleCapacityEvent(event) {
+        const { sector, utilization } = event.payload || event;
+        this.updateCapacity(sector, utilization);
+    }
+
+    /**
+     * v3.0: Get pricing analytics
+     */
+    getPricingAnalytics() {
+        if (this.pricingHistory.length === 0) {
+            return { decisions: 0, analytics: null };
+        }
+
+        const bySetor = {};
+        this.pricingHistory.forEach(d => {
+            if (!bySetor[d.sector]) {
+                bySetor[d.sector] = { count: 0, totalPrice: 0, marginSafeCount: 0 };
+            }
+            bySetor[d.sector].count++;
+            bySetor[d.sector].totalPrice += d.priceEur;
+            if (d.marginSafe) bySetor[d.sector].marginSafeCount++;
+        });
+
+        Object.keys(bySetor).forEach(sector => {
+            const s = bySetor[sector];
+            s.avgPrice = Math.round(s.totalPrice / s.count * 100) / 100;
+            s.marginSafeRate = Math.round(s.marginSafeCount / s.count * 100);
+        });
+
+        return {
+            decisions: this.pricingHistory.length,
+            bySector: bySetor,
+            lastDecision: this.pricingHistory[this.pricingHistory.length - 1]
+        };
+    }
+
+    /**
+     * v3.0: Health check with analytics
+     */
+    health() {
+        const analytics = this.getPricingAnalytics();
+
+        return {
+            status: 'ok',
+            service: 'RevenueScience',
+            version: '3.0.0',
+            capacity: this.currentCapacity,
+            analytics: {
+                totalDecisions: analytics.decisions,
+                bySector: analytics.bySector
+            },
+            models: Object.keys(this.models),
+            timestamp: new Date().toISOString()
+        };
     }
 }
 
-module.exports = new RevenueScience();
+// Create instance and initialize history
+const instance = new RevenueScience();
+instance.pricingHistory = [];
+
+// v3.0: Register for capacity events from EventBus
+const registerEventBusIntegration = () => {
+    try {
+        const eventBus = require('./AgencyEventBus.cjs');
+
+        // Subscribe to capacity update events
+        eventBus.subscribe('system.capacity_update', async (event) => {
+            instance.handleCapacityEvent(event);
+        }, { name: 'RevenueScience.capacityUpdate' });
+
+        console.log('[RevenueScience] v3.0 EventBus integration registered');
+    } catch (e) {
+        // EventBus not loaded yet - will work when called later
+    }
+};
+
+// Delay registration to avoid circular dependency at module load
+setImmediate(registerEventBusIntegration);
+
+// CLI
+if (require.main === module) {
+    const args = process.argv.slice(2);
+
+    if (args.includes('--health')) {
+        console.log(JSON.stringify(instance.health(), null, 2));
+    } else if (args.includes('--analytics')) {
+        console.log(JSON.stringify(instance.getPricingAnalytics(), null, 2));
+    } else if (args.includes('--test-price')) {
+        const pricing = instance.getPricingRecommendation(
+            { score: 75, entity_type: 'B2B' },
+            'VOICE_AI'
+        );
+        console.log(JSON.stringify(pricing, null, 2));
+    } else if (args.includes('--capacity')) {
+        console.log(JSON.stringify(instance.currentCapacity, null, 2));
+    } else {
+        console.log(`
+RevenueScience v3.0.0 - Yield Optimization & Financial Intelligence
+
+Usage:
+  node RevenueScience.cjs --health       Health check (JSON)
+  node RevenueScience.cjs --analytics    Get pricing analytics
+  node RevenueScience.cjs --test-price   Test pricing recommendation
+  node RevenueScience.cjs --capacity     Show current capacity
+
+Features:
+  - Demand Curve Modeling (capacity-based pricing)
+  - Time-Based Urgency (day-of-week factors)
+  - Variable Cost Basis (accurate API costs)
+  - Confidence Scoring (recommendation certainty)
+  - EventBus Integration (v3.0)
+  - Pricing History (analytics tracking)
+
+Sectors:
+  - VOICE_AI (floor: €500, target: €1200, max: €5000)
+  - SEO_AUTOMATION (floor: €300, target: €800, max: €2000)
+  - CONTENT_FACTORY (floor: €200, target: €1500, max: €6000)
+`);
+    }
+}
+
+module.exports = instance;
+module.exports.RevenueScience = RevenueScience;

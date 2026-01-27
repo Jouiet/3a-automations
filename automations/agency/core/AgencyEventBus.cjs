@@ -53,7 +53,14 @@ const EVENT_SCHEMAS = {
     'voice.qualification_updated': ['sessionId', 'score', 'delta'],
     'system.health_check': ['component', 'status', 'latencyMs'],
     'system.error': ['component', 'error', 'severity'],
-    'system.recovery': ['component', 'action', 'success']
+    'system.recovery': ['component', 'action', 'success'],
+    'system.capacity_update': ['sector', 'utilization'],
+    // v3.0: Agent Ops module events
+    'error_science.rules_updated': ['ruleCount', 'bySector', 'avgConfidence'],
+    'revenue_science.pricing_calculated': ['sector', 'priceEur', 'confidence'],
+    'kb.enrichment_completed': ['factsProcessed', 'totalChunks'],
+    'learning.fact_approved': ['factId', 'type', 'confidence'],
+    'learning.fact_rejected': ['factId', 'type', 'reason']
 };
 
 class AgencyEventBus extends EventEmitter {

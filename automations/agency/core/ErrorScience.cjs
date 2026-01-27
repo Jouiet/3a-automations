@@ -1,12 +1,14 @@
 /**
  * ErrorScience.cjs - Self-Healing Feedback Loop
- * 3A Automation - Session 177/178 (SOTA Optimization)
+ * 3A Automation - Session 179 (Agent Ops v3.0)
  *
- * SOTA Features (Session 178):
+ * SOTA Features (Session 178-179):
  * - Confidence Scoring: Statistical significance for rules
  * - Trend Detection: Sliding window analysis (7-day, 24h)
  * - Pattern Recognition: Enhanced failure categorization
  * - Rule Decay: Auto-expire stale rules
+ * - EventBus Integration: Event-driven error tracking (v3.0)
+ * - recordError() API: For cross-module error capture
  *
  * Analyzes conversion failures (abandonment, low qualification) from logs
  * and generates "Refinement Instructions" for the Cognitive Engine.
@@ -358,7 +360,163 @@ class ErrorScience {
             return { rules: [], count: 0, error: e.message };
         }
     }
+
+    /**
+     * v3.0: Record error from EventBus integration
+     * Called by AgencyEventBus on 'system.error' events
+     *
+     * @param {Object} errorData - { component, error, severity, tenantId }
+     */
+    recordError(errorData) {
+        const { component, error, severity, tenantId } = errorData;
+
+        // Append to marketing_events.jsonl for analysis
+        const event = {
+            timestamp: new Date().toISOString(),
+            event: 'system_error',
+            sector: this._mapComponentToSector(component),
+            component,
+            error: typeof error === 'string' ? error : error?.message || 'Unknown error',
+            severity: severity || 'medium',
+            tenantId: tenantId || 'agency_internal',
+            status: 'error',
+            pressure: severity === 'critical' ? 100 : severity === 'high' ? 85 : 70
+        };
+
+        try {
+            fs.appendFileSync(this.logFile, JSON.stringify(event) + '\n');
+            this.errorBuffer.push(event);
+
+            // Keep buffer bounded
+            if (this.errorBuffer.length > 1000) {
+                this.errorBuffer = this.errorBuffer.slice(-500);
+            }
+
+            console.log(`[ErrorScience] Recorded: ${component} - ${event.error} (${severity})`);
+
+            // Auto-analyze if buffer reaches threshold
+            if (this.errorBuffer.length >= CONFIDENCE_CONFIG.minSampleSize * 2) {
+                this._emitRuleGeneratedEvent();
+            }
+
+            return { recorded: true, eventId: `err_${Date.now()}` };
+        } catch (e) {
+            console.error(`[ErrorScience] Failed to record error: ${e.message}`);
+            return { recorded: false, error: e.message };
+        }
+    }
+
+    /**
+     * Map component name to sector
+     */
+    _mapComponentToSector(component) {
+        const componentMap = {
+            'VoiceAPI': 'voice',
+            'VoiceTelephony': 'voice',
+            'GrokRealtime': 'voice',
+            'SEOSensor': 'seo',
+            'ContentGenerator': 'seo',
+            'ShopifySensor': 'operations',
+            'KlaviyoSensor': 'operations',
+            'MetaAds': 'ads',
+            'TikTokAds': 'ads',
+            'GoogleAds': 'ads'
+        };
+        return componentMap[component] || 'operations';
+    }
+
+    /**
+     * v3.0: Emit event when new rule is generated
+     * Uses lazy loading to avoid circular dependency
+     */
+    async _emitRuleGeneratedEvent() {
+        try {
+            // Lazy require to avoid circular dependency
+            const eventBus = require('./AgencyEventBus.cjs');
+            const status = this.getRulesStatus();
+
+            await eventBus.publish('error_science.rules_updated', {
+                ruleCount: status.count,
+                bySector: status.by_sector,
+                avgConfidence: status.avg_confidence,
+                analysisTimestamp: new Date().toISOString()
+            }, {
+                tenantId: 'system',
+                source: 'ErrorScience'
+            });
+        } catch (e) {
+            // EventBus not available - silent fail
+            console.log(`[ErrorScience] EventBus emit skipped: ${e.message}`);
+        }
+    }
+
+    /**
+     * v3.0: Health check with EventBus metrics
+     */
+    health() {
+        const status = this.getRulesStatus();
+        return {
+            status: 'ok',
+            service: 'ErrorScience',
+            version: '3.0.0',
+            rules: {
+                active: status.count,
+                bySector: status.by_sector,
+                avgConfidence: Math.round(status.avg_confidence * 100) / 100
+            },
+            buffer: {
+                size: this.errorBuffer.length
+            },
+            timestamp: new Date().toISOString()
+        };
+    }
 }
 
 const instance = new ErrorScience();
+
+// Initialize error buffer
+instance.errorBuffer = [];
+
+// CLI
+if (require.main === module) {
+    const args = process.argv.slice(2);
+
+    if (args.includes('--health')) {
+        console.log(JSON.stringify(instance.health(), null, 2));
+    } else if (args.includes('--analyze')) {
+        instance.analyzeFailures().then(result => {
+            console.log(JSON.stringify(result, null, 2));
+        });
+    } else if (args.includes('--rules')) {
+        console.log(JSON.stringify(instance.getRulesStatus(), null, 2));
+    } else if (args.includes('--test-error')) {
+        const result = instance.recordError({
+            component: 'TestComponent',
+            error: 'Test error from CLI',
+            severity: 'medium',
+            tenantId: 'cli_test'
+        });
+        console.log(JSON.stringify(result, null, 2));
+    } else {
+        console.log(`
+ErrorScience v3.0.0 - Self-Healing Feedback Loop
+
+Usage:
+  node ErrorScience.cjs --health       Health check (JSON)
+  node ErrorScience.cjs --analyze      Analyze failures and generate rules
+  node ErrorScience.cjs --rules        Show active rules status
+  node ErrorScience.cjs --test-error   Record a test error
+
+Features:
+  - Confidence Scoring (statistical significance)
+  - Trend Detection (7-day, 24h windows)
+  - Pattern Recognition (voice, seo, ops, ads)
+  - Rule Decay (auto-expire stale rules)
+  - EventBus Integration (v3.0)
+  - recordError() API for cross-module error capture
+`);
+    }
+}
+
 module.exports = instance;
+module.exports.ErrorScience = ErrorScience;
