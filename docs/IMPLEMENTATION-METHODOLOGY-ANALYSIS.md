@@ -1,9 +1,9 @@
 # 3A AUTOMATION - MÉTHODOLOGIE D'IMPLÉMENTATION
 ## Dashboard Multi-Tenant avec OAuth Automatisé
 
-> **Version:** 2.1 | **Date:** 28/01/2026 | **Session:** 180+
+> **Version:** 2.2 | **Date:** 28/01/2026 | **Session:** 180+
 > **Approche:** Plan d'Action Rigoureux | **Exigence:** 100% Vérifiable
-> **Status:** Semaine 1 ✅ | Semaine 2 ✅ (code complete, deploy pending)
+> **Status:** Semaine 1 ✅ | Semaine 2 ✅ | Semaine 3 ✅ | Semaine 4 ✅
 
 ---
 
@@ -349,13 +349,14 @@ node scripts/create-client.cjs --name "OAuth Test" --vertical shopify
 
 ---
 
-### 3.4 SEMAINE 3: OAuth Shopify
+### 3.4 SEMAINE 3: OAuth Shopify ✅ DONE
 
 #### Objectifs
-- [ ] Créer Shopify App (Partner Dashboard)
-- [ ] Route authorize + callback
-- [ ] Token storage dans Infisical
-- [ ] UI "Connect Shopify"
+- [x] OAuth library avec Token Exchange (lib/oauth/shopify.ts)
+- [x] Route authorize + callback
+- [x] Token storage avec vault fallback
+- [x] UI ShopifyConnect component
+- [x] Webhook handler (app/uninstalled, GDPR)
 
 #### Tâches Détaillées
 
@@ -464,13 +465,15 @@ node -e "const v = require('./automations/agency/core/SecretVault.cjs'); v.getSe
 
 ---
 
-### 3.5 SEMAINE 4: OAuth Klaviyo + Google
+### 3.5 SEMAINE 4: OAuth Klaviyo + Google ✅ DONE
 
 #### Objectifs
-- [ ] Klaviyo OAuth avec PKCE
-- [ ] Google OAuth (GA4 + GSC)
-- [ ] Token refresh automatique
-- [ ] Provider factory pattern
+- [x] PKCE utilities (pkce.ts)
+- [x] Klaviyo OAuth avec PKCE (klaviyo.ts)
+- [x] Google OAuth multi-scope (google.ts)
+- [x] Token refresh job automatique (token-refresh-job.cjs)
+- [x] Provider factory avec 3 providers actifs
+- [x] UI KlaviyoConnect + GoogleConnect components
 
 #### Tâches Détaillées
 
@@ -1137,6 +1140,8 @@ node automations/agency/core/uptime-monitor.cjs --health  # Santé OK
 |:--------|:-----|:--------------|
 | 1.0 | 27/01/2026 | Document initial - Analyse |
 | 2.0 | 27/01/2026 | Plan d'action complet + spécifications techniques |
+| 2.1 | 28/01/2026 | Semaine 3 OAuth Shopify complete |
+| 2.2 | 28/01/2026 | Semaine 4 OAuth Klaviyo + Google complete (2545 LOC) |
 
 ---
 
