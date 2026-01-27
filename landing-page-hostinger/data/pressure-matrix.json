@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-01-27T00:48:57.263Z",
-  "session": "168quaterdecies",
+  "last_updated": "2026-01-27T18:46:57.767Z",
+  "session": "177bis",
   "sectors": {
     "marketing": {
       "google_ads": {
@@ -19,7 +19,7 @@
       },
       "retention": {
         "pressure": 0,
-        "trend": "DOWN",
+        "trend": "STABLE",
         "last_check": "2026-01-26T11:16:24.835Z",
         "sensor_data": {
           "order_count": 0,
@@ -54,8 +54,8 @@
         }
       },
       "klaviyo": {
-        "pressure": 65,
-        "trend": "DOWN",
+        "pressure": 30,
+        "trend": "UP",
         "last_check": "2026-01-26T23:26:40.466Z",
         "sensor_data": {
           "lists_total": 10,
@@ -146,15 +146,16 @@
     },
     "operations": {
       "shopify": {
-        "pressure": 75,
-        "trend": "DOWN",
+        "pressure": 25,
+        "trend": "STABLE",
         "last_check": "2026-01-26T23:26:19.275Z",
         "sensor_data": {
           "products_total": 0,
           "products_active": 0,
           "orders_today": 0,
           "orders_unfulfilled": 0,
-          "orders_pending": 0
+          "orders_pending": 0,
+          "api_status": "OPERATIONAL"
         }
       },
       "supplier_health": {
@@ -354,5 +355,5 @@
       "notes": "MyDealz GPM - Synced via Twin Sovereignty Architecture"
     }
   },
-  "overall_pressure": 63
+  "overall_pressure": 45
 }

@@ -63,16 +63,16 @@ STT:         ElevenLabs Scribe Maghrebi
 
 ---
 
-## Sensors (19 total - Session 177 Audit)
+## Sensors (19 total - Session 177bis Retest)
 
 | Status | Count | Sensors |
 |:---|:---|:---|
-| ✅ OK | 9 | ga4, email-health, google-trends, cost-tracking, lead-velocity, product-seo, apify-trends, content-perf, lead-scoring |
-| ⚠️ DEGRADED | 3 | klaviyo (API fail), voice-quality (local OFF), supplier-health (partial creds) |
+| ✅ OK | 12 | ga4, shopify, klaviyo, retention, email-health, google-trends, cost-tracking, lead-velocity, product-seo, apify-trends, content-perf, lead-scoring |
+| ⚠️ WARNING | 2 | supplier-health (partial creds), voice-quality (services OFF) |
 | ❌ NO CREDS | 4 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner |
-| ❌ ERROR | 3 | shopify (fetch fail), retention (fetch fail), gsc (DNS fail) |
+| ❌ DNS ERROR | 1 | gsc (network issue) |
 
-**Total Fonctionnels: 12/19 (63%)**
+**Total Fonctionnels: 14/19 (74%)**
 
 **Check:** `node automations/agency/core/SENSOR-NAME-sensor.cjs --health`
 

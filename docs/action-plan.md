@@ -4,7 +4,7 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 177 - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 12/19 OK (63%)** ✅ | **Voice SOTA: <1.5s** | **Site: ✅ 200** | **Dashboard: ✅ LIVE** | **Atlas-Chat Darija: ✅ FACTUEL** | **Agent Ops: 4 modules implémentés**
+> **✅ ÉTAT RÉEL (Session 177bis - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK (74%)** ✅ | **Voice SOTA: <1.5s** | **Site: ✅ 200** | **Dashboard: ✅ 200** | **Atlas-Chat Darija: ✅ FACTUEL** | **Agent Ops: 5 modules (610 lignes)**
 
 ---
 
