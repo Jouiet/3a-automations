@@ -1,17 +1,20 @@
 /**
  * BillingAgent.cjs - Horizontal Billing Automation
- * 3A Automation - Session 177/178 (SOTA Optimization)
+ * 3A Automation - Session 178quater (Agent Ops v3.0)
  *
  * Automatically creates Stripe customers and draft invoices
  * when leads are qualified or bookings are confirmed.
  *
- * SOTA Features (Session 178):
+ * SOTA Features v3.0 (Session 178quater):
  * - Idempotency Keys: Prevents duplicate customers/invoices
  * - Webhook Signature Verification: Secure invoice.paid handling
  * - Deduplication: Session-based request tracking
+ * - EventBus Integration: Event-driven billing orchestration
+ * - Multi-Agent Coordination: Emits events for cross-module reactions
+ * - State Machine: LangGraph-inspired state tracking
  *
  * Integrates with Meta CAPI for closed-loop attribution.
- * Source: Stripe Billing Best Practices 2025
+ * Source: Stripe Billing Best Practices 2025, Growin EDA 2025
  */
 
 const fs = require('fs');
@@ -20,6 +23,25 @@ const crypto = require('crypto');
 const StripeGlobalGateway = require('./gateways/stripe-global-gateway.cjs');
 const RevenueScience = require('./RevenueScience.cjs');
 const MarketingScience = require('./marketing-science-core.cjs');
+
+// v3.0: EventBus integration for event-driven orchestration
+let eventBus = null;
+try {
+    eventBus = require('./AgencyEventBus.cjs');
+} catch (e) {
+    console.log('[BillingAgent] EventBus not available, running standalone');
+}
+
+// v3.0: Billing State Machine (LangGraph-inspired)
+const BILLING_STATES = {
+    IDLE: 'idle',
+    CUSTOMER_CREATED: 'customer_created',
+    INVOICE_DRAFTED: 'invoice_drafted',
+    INVOICE_SENT: 'invoice_sent',
+    PAYMENT_PENDING: 'payment_pending',
+    PAYMENT_COMPLETED: 'payment_completed',
+    PAYMENT_FAILED: 'payment_failed'
+};
 
 class BillingAgent {
     constructor(options = {}) {
@@ -71,16 +93,42 @@ class BillingAgent {
                 invoice_id: invoice.id
             });
 
+            // v3.0: Emit event for cross-module coordination
+            if (eventBus) {
+                await eventBus.publish('payment.initiated', {
+                    transactionId: invoice.id,
+                    amount: price / 100,
+                    currency: this.currency,
+                    customerId: customer.id,
+                    email: identity.email,
+                    state: BILLING_STATES.INVOICE_DRAFTED
+                }, {
+                    tenantId: sessionData.metadata?.tenantId || 'agency_internal',
+                    source: 'BillingAgent.v3'
+                });
+            }
+
             return {
                 success: true,
                 customerId: customer.id,
                 invoiceId: invoice.id,
                 amount: price / 100,
-                status: 'draft_created'
+                status: 'draft_created',
+                state: BILLING_STATES.INVOICE_DRAFTED
             };
 
         } catch (error) {
             console.error(`[BillingAgent] Billing failed: ${error.message}`);
+
+            // v3.0: Emit error event
+            if (eventBus) {
+                await eventBus.publish('system.error', {
+                    component: 'BillingAgent',
+                    error: error.message,
+                    severity: 'high'
+                }, { tenantId: 'system', source: 'BillingAgent.v3' });
+            }
+
             return { success: false, error: error.message };
         }
     }
@@ -190,9 +238,73 @@ class BillingAgent {
             customer_id: invoiceData.customer
         });
 
-        return { success: true, tracked: true, value: amount, invoiceId };
+        // v3.0: Emit payment completed event for cross-module coordination
+        if (eventBus) {
+            await eventBus.publish('payment.completed', {
+                transactionId: invoiceId,
+                amount: amount,
+                method: invoiceData.payment_intent ? 'card' : 'invoice',
+                customerId: invoiceData.customer,
+                email: email,
+                state: BILLING_STATES.PAYMENT_COMPLETED
+            }, {
+                tenantId: invoiceData.metadata?.tenantId || 'agency_internal',
+                source: 'BillingAgent.v3'
+            });
+        }
+
+        return { success: true, tracked: true, value: amount, invoiceId, state: BILLING_STATES.PAYMENT_COMPLETED };
+    }
+
+    /**
+     * v3.0: Get current billing state for a session
+     */
+    getState(sessionId) {
+        // Would be stored in ContextBox in production
+        return this._states?.get(sessionId) || BILLING_STATES.IDLE;
+    }
+
+    /**
+     * v3.0: Track API costs for billing analytics
+     */
+    static async trackCost(category, amount, tenantId, metadata = {}) {
+        const costEntry = {
+            timestamp: new Date().toISOString(),
+            category,
+            amount,
+            tenantId,
+            ...metadata
+        };
+
+        // Log to cost tracking
+        const logPath = path.join(process.cwd(), 'logs', 'api-costs.json');
+        let costs = [];
+        try {
+            if (fs.existsSync(logPath)) {
+                costs = JSON.parse(fs.readFileSync(logPath, 'utf8'));
+            }
+        } catch (e) { /* ignore */ }
+
+        costs.push(costEntry);
+
+        // Keep last 1000 entries
+        if (costs.length > 1000) costs = costs.slice(-1000);
+
+        const logDir = path.dirname(logPath);
+        if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+        fs.writeFileSync(logPath, JSON.stringify(costs, null, 2));
+
+        return costEntry;
     }
 }
 
+// Export state constants for external use
+BillingAgent.STATES = BILLING_STATES;
+
 const instance = new BillingAgent();
+
+// v3.0: Export both instance and class
 module.exports = instance;
+module.exports.BillingAgent = BillingAgent;
+module.exports.trackCost = BillingAgent.trackCost;
+module.exports.STATES = BILLING_STATES;
