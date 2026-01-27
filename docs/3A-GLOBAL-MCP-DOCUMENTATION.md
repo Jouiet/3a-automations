@@ -323,7 +323,7 @@ Performance benchmarks:
 | Exécuter un script 3A | ✅ | `run_churn_prediction --health` |
 | Lister les automations | ✅ | `get_tool_catalog` |
 | Health check global | ✅ | `get_global_status` |
-| Exécution séquentielle | ⚠️ Simulé | `chain_tools` (ne fonctionne pas) |
+| Exécution séquentielle | ✅ | `chain_tools` (FIXED S168sexies) |
 
 ### 6.2 Use Cases NON Supportés (Manquants)
 
