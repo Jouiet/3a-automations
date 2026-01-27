@@ -4,7 +4,56 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168terdecies - 26/01/2026):** HITL 100% (18/18) ✅ | Policy RAG 100% ✅ | CRM RAG ✅ | **Voice: 5/5 LANGUES COMPLET** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0 (95% SOTA)** | **A2A: v1.1.0** | **AI Strategy: Fallback chains DONE**
+> **✅ ÉTAT RÉEL (Session 168quaterdecies - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 19/19 --health** ✅ | **Voice: 5/5 LANGUES** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0** | **A2A: v1.1.0** | **AI: Claude Opus 4.5 fallback**
+
+---
+
+## SESSION 168quaterdecies - FORENSIC SENSOR AUDIT (27/01/2026)
+
+### Audit Forensique des 19 Sensors
+
+**Objectif:** Vérifier si les sensors simulent des résultats ou font de vrais appels API.
+
+| Résultat | Conclusion |
+|----------|------------|
+| **Simulation détectée** | ❌ AUCUNE |
+| **Valeurs hardcodées** | ❌ AUCUNE |
+| **Fallbacks documentés** | ✅ OUI (avec status explicite) |
+| **Tests API réels** | ✅ 12/19 sensors |
+
+### Classification des Sensors
+
+| Type Test | Count | Sensors |
+|-----------|-------|---------|
+| **RÉEL API** | 12 | apify, content-perf, email-health, ga4, google-trends, gsc, klaviyo, product-seo, retention, shopify, voice-quality, supplier-health |
+| **FICHIER LOCAL** | 3 | cost-tracking, lead-scoring, lead-velocity |
+| **ENV CHECK** | 4 | google-ads-planner, meta-ads, tiktok-ads, whatsapp-status |
+
+### Exécution Réelle (27/01/2026 00:11 UTC)
+
+| Sensor | Résultat | Détail |
+|--------|----------|--------|
+| shopify | ✅ OK | `api_test: passed, 0 products` |
+| klaviyo | ✅ OK | `SUCCESS (10 lists)` |
+| email-health | ✅ OK | `api_test: passed` |
+| gsc | ✅ OK | `9 queries found` |
+| google-trends | ✅ OK | `Grok AI analysis` |
+| apify | ✅ OK | `plan: STARTER` |
+| ga4 | ❌ ERROR | `DNS resolution failed for analyticsdata.googleapis.com` |
+| content-perf | ❌ ERROR | `self-signed certificate` |
+| meta-ads | ❌ ERROR | `META_ACCESS_TOKEN not set` |
+| tiktok-ads | ❌ ERROR | `TIKTOK_ACCESS_TOKEN not set` |
+| whatsapp | ❌ ERROR | `WHATSAPP_ACCESS_TOKEN not set` |
+| voice-quality | ❌ ERROR | `0/3 endpoints healthy` |
+| google-ads-planner | ❌ ERROR | `5 credentials missing` |
+| supplier-health | ⚠️ WARNING | `CJ + BigBuy: NO_CREDENTIALS` |
+
+### Verdict
+
+**Les sensors NE SIMULENT PAS de résultats.** Ils retournent:
+1. Vraies données quand API fonctionne
+2. Erreur explicite quand API échoue
+3. Fallback documenté avec status (BLOCKED_CREDENTIALS, DISCONNECTED, ERROR)
 
 ---
 
@@ -652,29 +701,53 @@ curl -X POST http://localhost:3000/ag-ui/queue/submit \
 
 ---
 
-## ECOSYSTEM METRICS (Verified 26/01/2026)
+## ECOSYSTEM METRICS (Verified 27/01/2026 - Forensic Audit)
 
 | Metric | Value | Status |
 |--------|-------|--------|
 | Scripts Core | **85** | ✅ |
-| Scripts --health | **27** (32%) | ⚠️ |
+| Scripts --health | **33** (39%) | ⚠️ |
+| Sensors --health | **19/19** (100%) | ✅ |
+| Sensors OK | **11/19** (58%) | ⚠️ 8 en erreur |
 | Automations Registry | **121** (88 w/ scripts) | ✅ |
 | Skills (SKILL.md) | **42** | ✅ 95% |
-| Sensors Working | **15/19 (79%)** | ⚠️ 4 blocked |
-| MCP Servers | **11** | ✅ |
+| MCP Servers | **14** | ✅ |
 | Remotion Compositions | **7** | ✅ |
 | HTML Pages | **79** | ✅ |
 | Credentials SET | **61%** (57/93) | ⚠️ 36 empty |
-| CSS Version | **v=86.0** | ✅ |
+| CSS Version | **v=87.0** | ✅ |
 
 ---
 
-## SENSORS STATUS
+## SENSORS STATUS (FORENSIC AUDIT 27/01/2026)
 
-| Status | Count | Sensors |
-|--------|-------|---------|
-| ✅ OK | 15 | product-seo(0), gsc(0), cost-tracking(30), google-trends(8), shopify(75), klaviyo(65), email-health(60), lead-velocity(75), supplier-health(80), voice-quality(90), meta-ads(95), tiktok-ads(95), content-perf(90), lead-scoring(95), whatsapp(90) |
-| ❌ BLOCKED | 4 | retention(NETWORK), ga4(API_DISABLED), bigquery(API_DISABLED), apify(PAID_REQUIRED) |
+### 19/19 Sensors ont --health ✅
+
+| Type Test | Count | Sensors |
+|-----------|-------|---------|
+| **RÉEL API** | 12 | apify, content-perf, email-health, ga4, google-trends, gsc, klaviyo, product-seo, retention, shopify, voice-quality, supplier-health |
+| **FICHIER** | 3 | cost-tracking, lead-scoring, lead-velocity |
+| **ENV CHECK** | 4 | google-ads-planner, meta-ads, tiktok-ads, whatsapp-status |
+
+### Résultats Exécution Réelle
+
+| Status | Count | Sensors | Erreur Exacte |
+|--------|-------|---------|---------------|
+| ✅ OK | 10 | shopify, klaviyo, email-health, gsc, google-trends, apify, cost-tracking, lead-scoring, lead-velocity, product-seo, retention | - |
+| ⚠️ WARNING | 1 | supplier-health | Credentials CJ/BigBuy manquants |
+| ❌ ERROR | 8 | ga4, content-perf, meta-ads, tiktok-ads, whatsapp, voice-quality, google-ads-planner | Voir détails |
+
+### Erreurs Spécifiques
+
+| Sensor | Erreur | Type |
+|--------|--------|------|
+| ga4 | `DNS resolution failed for analyticsdata.googleapis.com` | Réseau/DNS |
+| content-perf | `self-signed certificate` | SSL local |
+| meta-ads | `META_ACCESS_TOKEN not set` | Credential |
+| tiktok-ads | `TIKTOK_ACCESS_TOKEN not set` | Credential |
+| whatsapp | `WHATSAPP_ACCESS_TOKEN not set` | Credential |
+| voice-quality | `0/3 endpoints healthy` | Services down |
+| google-ads-planner | `5 credentials missing` | Credential |
 
 ---
 
@@ -682,11 +755,13 @@ curl -X POST http://localhost:3000/ag-ui/queue/submit \
 
 | Blocker | Impact | Action Requise |
 |---------|--------|----------------|
-| GA4 API disabled | Analytics broken | [Enable API](https://console.developers.google.com/apis/api/analyticsdata.googleapis.com/overview) |
-| BigQuery API disabled | Trends broken | Enable BigQuery API |
-| META_PAGE_ACCESS_TOKEN empty | Meta Ads broken | Configure token |
-| TIKTOK_ACCESS_TOKEN empty | TikTok Ads broken | Configure token |
-| Apify trial expired | Scraping broken | [Upgrade $49/mo](https://console.apify.com/billing) |
+| **GA4 DNS Resolution** | Analytics sensor | Vérifier réseau/firewall pour `analyticsdata.googleapis.com` |
+| **META_ACCESS_TOKEN** | Meta Ads sensor | Configure token Facebook Business |
+| **TIKTOK_ACCESS_TOKEN** | TikTok Ads sensor | Configure token TikTok Ads |
+| **WHATSAPP_ACCESS_TOKEN** | WhatsApp sensor | Configure token Meta WhatsApp Business |
+| **GOOGLE_ADS_*** | Google Ads Planner | 5 credentials manquants |
+| **CJ_API_KEY + BIGBUY_API_KEY** | Supplier Health | Configure credentials fournisseurs |
+| **SSL Certificate** | Content Performance | Résoudre `self-signed certificate` local |
 
 ---
 

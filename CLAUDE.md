@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 122.0 | 27/01/2026 | Session 168quaterdecies - 19/19 Sensors REAL API Tests
+> Version: 113.0 | 27/01/2026 | Session 168quaterdecies - Forensic Sensor Audit COMPLET
 
 ## Identité
 
@@ -8,16 +8,49 @@
 
 ---
 
-## SESSION 168quaterdecies - REAL SENSOR API TESTS (27/01/2026)
+## SESSION 168quaterdecies - FORENSIC SENSOR AUDIT (27/01/2026)
 
-### Problème Identifié: 75% des --health MENTAIENT
+### Audit Forensique: Les Sensors Simulent-ils des Résultats?
 
-Audit forensique révèle:
-- Sensors --health ne faisaient que vérifier si ENV vars existaient
-- Aucun vrai test API → faux positifs "status: ok"
-- **voice-quality-sensor**: `status: 'ok'` était HARDCODÉ
+**VERDICT: NON** - Les sensors ne simulent rien.
 
-### Correction: 19/19 Sensors avec VRAIS Tests API ✅
+### Faits Vérifiés (Exécution 27/01/2026 00:11 UTC)
+
+| Type Test | Count | Comportement |
+| :--- | :--- | :--- |
+| **RÉEL API** | 12 | Vrais appels API (fetch, SDK calls) |
+| **FICHIER LOCAL** | 3 | Lecture de fichiers réels |
+| **ENV CHECK** | 4 | Vérification credentials + API si présent |
+
+### Résultats Exécution Réelle
+
+| Sensor | Status | api_test | Détail |
+| :--- | :--- | :--- | :--- |
+| shopify | ✅ ok | passed | 0 products, store connected |
+| klaviyo | ✅ ok | SUCCESS | 10 lists |
+| email-health | ✅ ok | passed | 10 lists |
+| gsc | ✅ ok | passed | 9 queries |
+| google-trends | ✅ ok | passed | Grok AI analysis |
+| apify | ✅ ok | passed | STARTER plan |
+| cost-tracking | ✅ ok | passed | $0 this month |
+| lead-scoring | ✅ ok | passed | 2 leads, 18d stale |
+| lead-velocity | ✅ ok | passed | 2 leads total |
+| product-seo | ✅ ok | passed | 0 products |
+| retention | ✅ ok | passed | 0 orders |
+| supplier-health | ⚠️ warning | passed | CJ+BigBuy: NO_CREDENTIALS |
+| ga4 | ❌ error | failed | DNS resolution failed |
+| content-perf | ❌ error | failed | self-signed certificate |
+| meta-ads | ❌ error | N/A | META_ACCESS_TOKEN not set |
+| tiktok-ads | ❌ error | N/A | TIKTOK_ACCESS_TOKEN not set |
+| whatsapp | ❌ error | N/A | WHATSAPP_ACCESS_TOKEN not set |
+| voice-quality | ❌ error | passed | 0/3 endpoints healthy |
+| google-ads-planner | ❌ error | skipped | 5 credentials missing |
+
+### Correction de l'Audit Précédent
+
+L'audit externe (trouvé par l'utilisateur) était **OBSOLÈTE**. Le code a été corrigé dans commit `2a5f283` (Session 168terdecies).
+
+### 19/19 Sensors avec --health ✅
 
 | Sensor | Version | API Test | Status |
 | :--- | :--- | :--- | :--- |
