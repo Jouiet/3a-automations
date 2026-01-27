@@ -4,7 +4,7 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 176 - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK** ✅ | **Voice SOTA: <1.5s** | **Site: ✅ 200** | **Dashboard: ❌ DNS Timeout**
+> **✅ ÉTAT RÉEL (Session 176bis - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK** ✅ | **Voice SOTA: <1.5s** | **Site: ✅ 200** | **Dashboard: ✅ LIVE**
 
 ---
 
@@ -15,7 +15,7 @@
 | Component | Status | Evidence |
 |-----------|--------|----------|
 | **3a-automation.com** | ✅ HTTP 200 | curl + chrome-devtools screenshot |
-| **dashboard.3a-automation.com** | ❌ DNS Timeout | curl + dig timeout |
+| **dashboard.3a-automation.com** | ✅ LIVE | chrome-devtools screenshot (login page) |
 | **Voice API** | ✅ OPERATIONAL | `--health` returns OK |
 | **FR/EN Switch** | ✅ Working | Visual verification |
 | **Voice Widget** | ✅ Present | DOM uid=1_470 |
@@ -29,7 +29,7 @@
 | OpenAI | OPENAI_API_KEY | ✅ |
 | Anthropic | ANTHROPIC_API_KEY | ✅ |
 | ElevenLabs | ELEVENLABS_API_KEY | ✅ |
-| HuggingFace | HUGGINGFACE_API_KEY | ❌ NOT SET |
+| HuggingFace | HUGGINGFACE_API_KEY | ✅ SET (needs Inference API permission) |
 | Telnyx | TELNYX_API_KEY | ❌ NOT SET |
 
 ### Commits Session 176
@@ -42,9 +42,9 @@
 
 | Blocker | Impact | Action |
 |---------|--------|--------|
-| **dashboard DNS** | Dashboard inaccessible | Vérifier Hostinger DNS config |
-| **HUGGINGFACE_API_KEY** | Atlas-Chat-9B Darija OFF | Créer token sur huggingface.co |
 | **TELNYX_API_KEY** | Telephony MENA bloquée | Créer compte Telnyx Portal |
+| **META_ACCESS_TOKEN** | Meta Ads sensor OFF | Configurer token Facebook |
+| **TIKTOK_ACCESS_TOKEN** | TikTok Ads sensor OFF | Configurer token TikTok |
 
 ---
 
