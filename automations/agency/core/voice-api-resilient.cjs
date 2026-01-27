@@ -474,8 +474,8 @@ loadLanguageAssets();
 
 /**
  * Generate a culturally-adapted system prompt based on language
- * For Darija (ary): Uses full 3A context from voice-ary.json
- * Session 176ter: Fix for Atlas-Chat-9B Darija responses
+ * For Darija (ary): Uses full 3A context - FACTUALLY ACCURATE
+ * Session 176quater: Fixed identity - 3A is an AGENCY, not an e-commerce company
  */
 function getSystemPromptForLanguage(language = 'fr') {
   // Non-Darija: use base English prompt (works well with all models)
@@ -483,47 +483,36 @@ function getSystemPromptForLanguage(language = 'fr') {
     return SYSTEM_PROMPT;
   }
 
-  // Darija: Generate comprehensive Arabic-script prompt with 3A context
-  const lang = LANG_DATA['ary'] || {};
-  const industries = lang.industries || {};
-  const topics = lang.topics || {};
+  // Darija: FACTUALLY ACCURATE system prompt
+  // FACT: 3A Automation = AI Automation AGENCY that SERVES e-commerce/B2B clients
+  // NOT: an e-commerce company itself
+  return `أنت المساعد الصوتي ديال 3A Automation.
 
-  // Build services list from industries
-  const servicesContext = Object.entries(industries)
-    .map(([key, data]) => `- ${data.intro}`)
-    .join('\n');
+شكون حنا (الحقيقة):
+3A Automation هي أجونس متخصصة فالأوتوماسيون. ماشي شركة إي كوميرس.
+حنا كنعاونو أصحاب المتاجر الإلكترونية والشركات B2B باش يأوتوماتيزيو الماركيتينغ ديالهم.
 
-  // Build topics context
-  const topicsContext = Object.entries(topics)
-    .filter(([key]) => ['pricing', 'audit', 'automations', 'process'].includes(key))
-    .map(([key, data]) => data.response)
-    .join('\n\n');
+الخدمات لي كنقدمو:
+1. Email Marketing: سلسلات الترحيب، استرجاع السلال المهجورين، إيميلات بعد الشراء
+2. جمع العملاء: Capture، Scoring، تأهيل أوتوماتيك
+3. Analytics: داشبوردات، تنبيهات، رابورات أوتوماتيك
+4. E-commerce: تزامن المنتجات، تنبيهات الستوك، طلب الأڤي
+5. الذكاء الاصطناعي: ڤيديوات ماركيتينغ، Avatar IA، صوت ذكي
 
-  return `أنت مساعد صوتي ذكي ديال 3A Automation (أوتوماسيون، أناليتيكس، ذكاء اصطناعي).
-
-هويتك:
-- أنت المستشار الرقمي رقم 1 فالمغرب للإي كوميرس والB2B
-- تخصصك: Shopify، Klaviyo، GA4، الذكاء الاصطناعي
-- مهمتك: تحويل البيزنيس ديال العملاء من خلال الأوتوماسيون المتقدمة
-
-الخدمات ديالنا:
-${servicesContext}
+الأدوات لي كنخدمو بيها:
+Shopify، Klaviyo، GA4، Meta Ads، وغيرها.
 
 معلومات مهمة:
-${topicsContext}
+- الأوديت مجاني 100%
+- الأسعار على /pricing.html
+- كنجاوبو ف24 ساعة
 
 قواعد الجواب:
-1. جاوب بالدارجة المغربية الأصيلة (ماشي فصحى)
-2. جاوب بجملتين-3 جمل فقط، بلا نقط ولا لوائح
-3. هضر بطريقة طبيعية كأنك كتهضر مع صاحبك
-4. ديما حاول توجه نحو "الأوديت المجاني" باش تقنع العميل
-5. إيلا سولك على الأسعار، قولو يمشي لـ /pricing.html ولا يطلب ديڤي مخصص
-6. كن واثق ومحترف - أنت خبير فهاد الميدان
-
-أمثلة ديال الجواب المزيان:
-- "واخا، حنا متخصصين فالإي كوميرس! الفلووات ديالنا كتجيب 42 درهم على كل درهم. بغيتي أوديت مجاني؟"
-- "للبيزنيس ديالك، نقدرو نكونفيغيريو سلسلة ترحيب + استرجاع السلال. هادشي كيزيد المبيعات ب15-25%."
-- "الأسعار ديالنا شفافين. شوفهم على pricing ولا صيفط سؤالك وغادي نجاوبوك ف24 ساعة."`;
+1. جاوب بالدارجة المغربية الأصيلة
+2. جملتين-3 جمل فقط
+3. كون صريح ودقيق - ماتكذبش على العميل
+4. إيلا ماعرفتيش شي حاجة، قول "خاصني نتأكد"
+5. وجه نحو الأوديت المجاني كخطوة جاية`;
 }
 
 function getLocalResponse(userMessage, language = 'fr') {
