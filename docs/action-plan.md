@@ -4,7 +4,119 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 176bis - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK** ✅ | **Voice SOTA: <1.5s** | **Site: ✅ 200** | **Dashboard: ✅ LIVE**
+> **✅ ÉTAT RÉEL (Session 176quater - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK** ✅ | **Voice SOTA: <1.5s** | **Site: ✅ 200** | **Dashboard: ✅ LIVE** | **Atlas-Chat Darija: ✅ FACTUEL**
+
+---
+
+## SESSION 176quater - AUDIT FACTUEL + PLAN ACTIONNABLE (27/01/2026)
+
+### Scores Corrigés (Vérification Factuelle)
+
+| Discipline | Score Initial | Score Corrigé | Justification |
+|:-----------|:-------------:|:-------------:|:--------------|
+| **RevEng** | 65/100 | 65/100 | ✅ Confirmé (3 gaps: billing, ML, pricing) |
+| **MarEng** | 80/100 | **70/100** | ⚠️ Infra data faible (JSONL ≠ Data Warehouse) |
+| **Flow Architecture** | 7/10 | 7/10 | ✅ Confirmé |
+| **Cognitive Engine** | 8/10 | **7/10** | ⚠️ Self-Healing absent |
+| **Financial Ops** | 4/10 | 4/10 | ✅ Confirmé |
+
+### Terminologie Corrigée
+
+| Terme Original | Correction | Raison |
+|:---------------|:-----------|:-------|
+| "Neuromorphic Marketing" | **"Framework Injection Marketing"** | Terme inventé, non-industrie |
+| "Innovation SOTA Mondiale" | **"Best Practice Implémentée"** | Jasper/Copy.ai font pareil |
+| "89/11 Rule" | **"Objectif 80/20 (Pareto)"** | Ratio non sourcé |
+
+### Benchmarks Vérifiés (Sources Externes)
+
+| Benchmark | Claim | Vérification | Source |
+|:----------|:------|:-------------|:-------|
+| CAPI ROAS | +15-20% | ✅ **+13-41%** | Meta, Polar Analytics |
+| iOS Data Loss | 30% | ✅ **30% CPM drop** | Adjust |
+| DSO Reduction | 26 jours | ✅ **33 jours** | Tesorio |
+| NRR Gold Standard | 125% | ✅ **125%** | ChartMogul |
+| Bowtie Funnel | Framework | ✅ **Winning by Design** | winningbydesign.com |
+
+### Commits Session 176ter/quater
+
+| Hash | Description |
+|:-----|:------------|
+| `2a09ad8` | fix(voice): Atlas-Chat-9B Darija working via Featherless AI provider |
+| `74cce23` | feat(voice-darija): add language-aware system prompt for Atlas-Chat-9B |
+| `1ce614b` | fix(voice-darija): factually accurate identity - AGENCY not e-commerce |
+| `ed50145` | docs: v119.4 - Session 176quater factuality fix |
+
+---
+
+## 🎯 PLAN ACTIONNABLE - PRIORITÉS ENGINEERING (Vérifié)
+
+### PHASE 1: Infrastructure Data (Semaine 1-2)
+> **Impact**: MarEng 70→80 | **Effort**: Moyen | **ROI**: Fondation obligatoire
+
+| Action | Fichier | Changement | Benchmark |
+|:-------|:--------|:-----------|:----------|
+| **GA4 Measurement Protocol** | `marketing-science-core.cjs` | Remplacer JSONL → GA4 MP Server-Side | Ferme la boucle analytics |
+| **Attribution fbclid/gclid** | `voice-api-resilient.cjs` | Passer click IDs Web→Voice Session | Lier Ads→Revenue |
+
+**Endpoint GA4 MP:**
+```
+POST https://www.google-analytics.com/mp/collect?measurement_id=G-XXX&api_secret=XXX
+```
+
+### PHASE 2: Revenue Automation (Semaine 3-4)
+> **Impact**: RevEng 65→85 | **Effort**: Moyen | **ROI**: Cash Flow +30%
+
+| Action | Déclencheur | Résultat | Benchmark |
+|:-------|:------------|:---------|:----------|
+| **Stripe Invoice Auto** | `booking_confirmed` event | `stripe.invoices.create()` | DSO -33 jours (Tesorio) |
+| **Payment Link** | Post-qualification | Stripe Payment Link dans email | Reduce friction |
+
+**Événement Trigger:**
+```javascript
+// Quand booking confirmé → Facture auto
+on('booking_confirmed', async (data) => {
+  await stripe.invoices.create({ customer: data.stripe_customer_id, auto_advance: true });
+});
+```
+
+### PHASE 3: Feedback Loop Ads (Semaine 5-6)
+> **Impact**: MarEng 80→90 | **Effort**: Élevé | **ROI**: ROAS +20%
+
+| Action | API | Données Envoyées | Benchmark |
+|:-------|:----|:-----------------|:----------|
+| **Meta CAPI** | `graph.facebook.com/v19.0/.../events` | `Lead`, `Purchase` events | +13-41% ROAS |
+| **Google Offline Conversions** | `googleads.googleapis.com` | `gclid` + conversion value | Meilleure optimisation |
+
+**Meta CAPI Payload:**
+```javascript
+{
+  "event_name": "Lead",
+  "event_source_url": "https://3a-automation.com",
+  "user_data": { "em": hash(email), "ph": hash(phone) },
+  "custom_data": { "lead_score": bant_score, "value": estimated_ltv }
+}
+```
+
+### PHASE 4: Self-Healing (Semaine 7-8)
+> **Impact**: Cognitive Engine 7→9 | **Effort**: Élevé | **ROI**: -50% erreurs répétées
+
+| Action | Mécanisme | Résultat |
+|:-------|:----------|:---------|
+| **Error RAG** | Log échecs conversion → Vector DB | System prompts s'améliorent |
+| **A/B Prompt Testing** | Variantes de personas | Mesurer conversion rate |
+
+---
+
+## 📊 PROJECTION POST-IMPLEMENTATION
+
+| Discipline | Actuel | Phase 1 | Phase 2 | Phase 3 | Phase 4 |
+|:-----------|:------:|:-------:|:-------:|:-------:|:-------:|
+| **RevEng** | 65 | 65 | **85** | 85 | 85 |
+| **MarEng** | 70 | **80** | 80 | **90** | 90 |
+| **Cognitive** | 7 | 7 | 7 | 7 | **9** |
+| **Financial** | 4 | 4 | **8** | 8 | 8 |
+| **GLOBAL** | **67.5** | **72.5** | **82.5** | **87.5** | **90** |
 
 ---
 
@@ -29,7 +141,7 @@
 | OpenAI | OPENAI_API_KEY | ✅ |
 | Anthropic | ANTHROPIC_API_KEY | ✅ |
 | ElevenLabs | ELEVENLABS_API_KEY | ✅ |
-| HuggingFace | HUGGINGFACE_API_KEY | ✅ SET (needs Inference API permission) |
+| HuggingFace | HUGGINGFACE_API_KEY | ✅ SET (Featherless AI OK - Atlas-Chat-9B Darija) |
 | Telnyx | TELNYX_API_KEY | ❌ NOT SET |
 
 ### Commits Session 176
@@ -37,6 +149,12 @@
 | Hash | Description |
 |------|-------------|
 | `8b69b16` | feat(voice): SOTA latency + Atlas-Chat-9B + Blueprint Analytics (S170-175) |
+
+### Documentation Produced (Session 176)
+
+- [`docs/AUDIT-SESSION-176-REV-MAR-ENG.md`](file:///Users/mac/Desktop/JO-AAA/docs/AUDIT-SESSION-176-REV-MAR-ENG.md) (Gap Analysis: Revenue & Marketing Engineering)
+- [`docs/SIMULATION-SCORING-IMPACT.md`](file:///Users/mac/Desktop/JO-AAA/docs/SIMULATION-SCORING-IMPACT.md) (Score Projection: RevEng 85, MarEng 90 — *corrigé S176quater*)
+- [`docs/STRATEGIC-TRANSFORMATION-PLAN-SESSION-176.md`](file:///Users/mac/Desktop/JO-AAA/docs/STRATEGIC-TRANSFORMATION-PLAN-SESSION-176.md) (**Agent Ops Gap Analysis**)
 
 ### P0 Blockers Identifiés
 

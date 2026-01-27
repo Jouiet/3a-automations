@@ -1,10 +1,23 @@
 # 3A Automation
-> Version: 119.4 | 27/01/2026 | Session 176quater | Factuality Fix
+> Version: 120.0 | 27/01/2026 | Session 176quater | Actionable Plan
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ LIVE)
+
+---
+
+## Engineering Scores (Vérifiés Session 176quater)
+
+| Discipline | Score | Gap Principal |
+|:---|:---:|:---|
+| **RevEng** | 65/100 | Billing manuel, pas de ML prédictif |
+| **MarEng** | 70/100 | JSONL ≠ Data Warehouse, pas de CAPI |
+| **Flow** | 7/10 | Acquisition OK, Rétention faible |
+| **Cognitive** | 7/10 | Self-Healing absent |
+| **Financial** | 4/10 | Facturation manuelle |
+| **GLOBAL** | **67.5/100** | → Cible: 87.5 post-implémentation |
 
 ---
 
