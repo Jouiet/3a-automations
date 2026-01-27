@@ -1,16 +1,37 @@
 #!/usr/bin/env node
 /**
  * CREATE CLIENT - Multi-Tenant Client Provisioning
- * 3A Automation - Session 180
+ * 3A Automation - Session 180+
  *
  * Usage:
  *   node scripts/create-client.cjs --name "Acme Corp" --vertical shopify --email contact@acme.com
  *   node scripts/create-client.cjs --help
  *   node scripts/create-client.cjs --list
+ *   node scripts/create-client.cjs --name "Test" --vertical shopify --email t@t.com --no-vault
+ *
+ * Features:
+ *   - Creates client directory structure
+ *   - Generates config.json from template
+ *   - Auto-creates Infisical vault project for credential isolation
+ *   - Sets vertical-specific defaults
  */
 
 const fs = require('fs');
 const path = require('path');
+
+// Lazy load vault to avoid startup errors
+let vault = null;
+function getVault() {
+  if (!vault) {
+    try {
+      vault = require('../automations/agency/core/SecretVault.cjs');
+    } catch (e) {
+      console.log('⚠️ SecretVault not available:', e.message);
+      return null;
+    }
+  }
+  return vault;
+}
 
 const CLIENTS_DIR = path.join(__dirname, '..', 'clients');
 const TEMPLATE_DIR = path.join(CLIENTS_DIR, '_template');
@@ -114,7 +135,7 @@ function createClientConfig(options) {
 }
 
 // Create client directory and files
-function createClient(tenantId, config) {
+async function createClient(tenantId, config, options = {}) {
   const clientDir = path.join(CLIENTS_DIR, tenantId);
 
   if (fs.existsSync(clientDir)) {
@@ -141,7 +162,21 @@ function createClient(tenantId, config) {
     created_at: new Date().toISOString()
   }, null, 2));
 
-  return clientDir;
+  // Create Infisical vault project (unless --no-vault flag)
+  let vaultProject = null;
+  if (!options.noVault) {
+    const v = getVault();
+    if (v) {
+      try {
+        vaultProject = await v.createProject(tenantId, config.name);
+        console.log(`   ✅ Vault project created: ${tenantId}`);
+      } catch (e) {
+        console.log(`   ⚠️ Vault project creation skipped: ${e.message}`);
+      }
+    }
+  }
+
+  return { clientDir, vaultProject };
 }
 
 // List all clients
@@ -195,6 +230,7 @@ OPTIONS:
   --id <string>         Custom tenant ID (auto-generated if not provided)
   --plan <string>       Service plan: quickwin | essentials | growth
   --contact <string>    Contact name (defaults to company name)
+  --no-vault            Skip creating Infisical vault project
   --help                Show this help message
   --list                List all existing clients
 
@@ -205,13 +241,16 @@ EXAMPLES:
   # Create B2B client with custom plan
   node scripts/create-client.cjs --name "Tech Startup" --vertical b2b --email cto@startup.com --plan growth
 
+  # Create without vault (for testing)
+  node scripts/create-client.cjs --name "Test Client" --vertical shopify --email test@test.com --no-vault
+
   # List all clients
   node scripts/create-client.cjs --list
 `);
 }
 
 // Main execution
-function main() {
+async function main() {
   const { flags, options } = parseArgs();
 
   // Handle help flag
@@ -264,26 +303,40 @@ function main() {
     // Create client config
     const { tenantId, config } = createClientConfig(options);
 
-    // Create client directory and files
-    const clientDir = createClient(tenantId, config);
+    console.log(`\nCreating client: ${config.name} (${tenantId})...\n`);
+
+    // Create client directory and files (with vault project)
+    const noVault = flags.includes('no-vault');
+    const { clientDir, vaultProject } = await createClient(tenantId, config, { noVault });
+
+    const vaultStatus = vaultProject ? `✅ ${vaultProject.projectId || tenantId}` :
+                        noVault ? '⏭️ Skipped (--no-vault)' : '⚠️ Not available';
 
     console.log(`
 ✅ Client created successfully!
 
-   Tenant ID:  ${tenantId}
-   Name:       ${config.name}
-   Vertical:   ${config.vertical}
-   Plan:       ${config.plan}
-   Status:     ${config.status}
-   Directory:  ${clientDir}
+   Tenant ID:    ${tenantId}
+   Name:         ${config.name}
+   Vertical:     ${config.vertical}
+   Plan:         ${config.plan}
+   Status:       ${config.status}
+   Directory:    ${clientDir}
+   Vault Project: ${vaultStatus}
 
 Next steps:
    1. Configure OAuth integrations at /client/onboarding
    2. Or manually add credentials to Infisical project: ${tenantId}
    3. Enable automations in config.json
 
-To view client config:
+Commands:
+   # View client config
    cat ${path.join(clientDir, 'config.json')}
+
+   # Add credentials to vault
+   node automations/agency/core/SecretVault.cjs --set ${tenantId} SHOPIFY_ACCESS_TOKEN "your_token"
+
+   # Validate client config
+   node scripts/validate-client.cjs --tenant ${tenantId}
 `);
 
     process.exit(0);
@@ -293,4 +346,7 @@ To view client config:
   }
 }
 
-main();
+main().catch(err => {
+  console.error(`\n❌ Fatal error: ${err.message}\n`);
+  process.exit(1);
+});

@@ -1,8 +1,9 @@
 # 3A AUTOMATION - MÉTHODOLOGIE D'IMPLÉMENTATION
 ## Dashboard Multi-Tenant avec OAuth Automatisé
 
-> **Version:** 2.0 | **Date:** 27/01/2026 | **Session:** 180+
+> **Version:** 2.1 | **Date:** 28/01/2026 | **Session:** 180+
 > **Approche:** Plan d'Action Rigoureux | **Exigence:** 100% Vérifiable
+> **Status:** Semaine 1 ✅ | Semaine 2 ✅ (code complete, deploy pending)
 
 ---
 
@@ -249,10 +250,13 @@ node scripts/validate-client.cjs --tenant test-corp
 ### 3.3 SEMAINE 2: Credential Vault (Infisical)
 
 #### Objectifs
-- [ ] Déployer Infisical self-hosted
-- [ ] Créer SDK wrapper
-- [ ] Migrer secrets agency
-- [ ] Intégrer avec create-client
+- [x] Docker Compose Infisical ✅ DONE (Session 180+)
+- [x] Créer SDK wrapper ✅ DONE (Session 180+) - SecretVault.cjs (620 LOC)
+- [x] Migration script ✅ DONE (Session 180+) - migrate-secrets-to-vault.cjs
+- [x] Intégrer avec create-client ✅ DONE (Session 180+)
+- [x] Credentials Dashboard ✅ DONE (Session 180+)
+- [x] Clients Dashboard ✅ DONE (Session 180+)
+- [ ] Deploy Infisical on VPS (requires user action)
 
 #### Tâches Détaillées
 

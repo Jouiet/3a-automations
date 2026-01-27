@@ -1,0 +1,119 @@
+# Infisical Self-Hosted - 3A Automation Credential Vault
+# Version: 1.0 | Created: 2026-01-28 | Session 180+
+#
+# Usage:
+#   docker-compose -f docker-compose.infisical.yml up -d
+#
+# Requirements:
+#   - Docker & Docker Compose
+#   - 2GB RAM minimum
+#   - Ports: 8080 (Infisical), 5432 (Postgres), 6379 (Redis)
+#
+# Post-install:
+#   1. Visit http://localhost:8080
+#   2. Create organization "3a-automation"
+#   3. Create Machine Identity for scripts
+#   4. Copy Client ID + Secret to .env
+
+version: '3.8'
+
+services:
+  # === INFISICAL BACKEND ===
+  infisical:
+    image: infisical/infisical:latest-postgres
+    container_name: 3a-infisical
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      # === Database ===
+      DB_CONNECTION_URI: postgres://infisical:${INFISICAL_DB_PASSWORD:-infisical_password}@db:5432/infisical
+
+      # === Redis ===
+      REDIS_URL: redis://redis:6379
+
+      # === Site Configuration ===
+      SITE_URL: ${INFISICAL_SITE_URL:-http://localhost:8080}
+
+      # === Encryption Keys (CHANGE IN PRODUCTION!) ===
+      ENCRYPTION_KEY: ${INFISICAL_ENCRYPTION_KEY:-0123456789abcdef0123456789abcdef}
+      AUTH_SECRET: ${INFISICAL_AUTH_SECRET:-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+
+      # === JWT Configuration ===
+      JWT_SIGNUP_SECRET: ${INFISICAL_JWT_SIGNUP:-signup_secret_change_me}
+      JWT_REFRESH_SECRET: ${INFISICAL_JWT_REFRESH:-refresh_secret_change_me}
+      JWT_AUTH_SECRET: ${INFISICAL_JWT_AUTH:-auth_secret_change_me}
+      JWT_MFA_SECRET: ${INFISICAL_JWT_MFA:-mfa_secret_change_me}
+      JWT_SERVICE_SECRET: ${INFISICAL_JWT_SERVICE:-service_secret_change_me}
+      JWT_PROVIDER_AUTH_SECRET: ${INFISICAL_JWT_PROVIDER:-provider_secret_change_me}
+
+      # === SMTP (Optional - for email notifications) ===
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_FROM_ADDRESS: ${SMTP_FROM:-noreply@3a-automation.com}
+      SMTP_FROM_NAME: ${SMTP_FROM_NAME:-3A Automation}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+
+      # === Telemetry (disabled) ===
+      TELEMETRY_ENABLED: "false"
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+    networks:
+      - 3a-network
+
+  # === POSTGRESQL DATABASE ===
+  db:
+    image: postgres:14-alpine
+    container_name: 3a-infisical-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: infisical
+      POSTGRES_PASSWORD: ${INFISICAL_DB_PASSWORD:-infisical_password}
+      POSTGRES_DB: infisical
+    volumes:
+      - infisical-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U infisical"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - 3a-network
+
+  # === REDIS CACHE ===
+  redis:
+    image: redis:7-alpine
+    container_name: 3a-infisical-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - infisical-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - 3a-network
+
+volumes:
+  infisical-postgres-data:
+    driver: local
+  infisical-redis-data:
+    driver: local
+
+networks:
+  3a-network:
+    driver: bridge
