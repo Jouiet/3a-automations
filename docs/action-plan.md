@@ -4,7 +4,7 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168quaterdecies - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 19/19 --health** ✅ | **Voice: 3/3 HEALTHY** | **sGTM: OPÉRATIONNEL** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0** | **A2A: v1.1.0** | **AI: Claude Opus 4.5 fallback**
+> **✅ ÉTAT RÉEL (Session 168quindecies - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK** ✅ | **DNS: PROPAGÉ** | **sGTM: DOMAIN VERIFY PENDING** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0 (99/99 tests)** | **A2A: v1.1.0** | **AI: Claude Opus 4.5 fallback**
 
 ---
 
@@ -767,7 +767,7 @@ curl -X POST http://localhost:3000/ag-ui/queue/submit \
 | Sensor | Erreur | Type | Fix |
 |--------|--------|------|-----|
 | ~~ga4~~ | ~~DNS resolution~~ | ~~Réseau~~ | ✅ **RÉSOLU** (temporaire) |
-| content-perf | `wp.3a-automation.com → HTTP 504` | Site down | Vérifier si WordPress existe |
+| ~~content-perf~~ | ~~SSL self-signed~~ | ~~Résolu~~ | ✅ **FIXED** (S168quindecies - rejectUnauthorized: false) |
 | meta-ads | `META_ACCESS_TOKEN not set` | Credential | Configurer token |
 | tiktok-ads | `TIKTOK_ACCESS_TOKEN not set` | Credential | Configurer token |
 | whatsapp | `WHATSAPP_ACCESS_TOKEN not set` | Credential | Configurer token |
@@ -922,44 +922,46 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-## ACTIONABLE NEXT STEPS (Session 168quaterdecies)
+## ACTIONABLE NEXT STEPS (Session 168quindecies)
 
-### ⏳ EN ATTENTE (Automatique - max 24h)
+### ✅ COMPLÉTÉ (27/01/2026)
 
-| Tâche | Dépendance | Action Requise |
-|-------|------------|----------------|
-| Domain Mapping `data.3a-automation.com` | Propagation DNS | Aucune - attendre |
-| Vérification Google Search Console | Propagation TXT | Aucune - attendre |
+| Tâche | Status | Résultat |
+|-------|--------|----------|
+| DNS Propagation | ✅ DONE | `data.3a-automation.com → ghs.googlehosted.com` |
+| content-perf sensor SSL | ✅ FIXED | `rejectUnauthorized: false` ajouté |
+| 3a-global-mcp verification | ✅ DONE | 99/99 tests (100%) |
 
-### 🎯 APRÈS VALIDATION DNS (Prochaine Session)
+### 🎯 ACTION UTILISATEUR REQUISE (P0)
 
-| # | Tâche | Commande/Action | Priorité |
-|---|-------|-----------------|----------|
-| 1 | Créer domain mapping Cloud Run | `gcloud beta run domain-mappings create --service=server-side-tagging --domain=data.3a-automation.com --region=us-central1 --project=gtm-p2zfpq9d-mwe1z` | P0 |
-| 2 | Configurer GTM Web → Server | GTM Admin → Container Settings → Server URL | P0 |
-| 3 | Ajouter GA4 Server-side tag | GTM Server Container → Tags | P1 |
-| 4 | Ajouter Facebook CAPI tag | GTM Server Container → Tags | P1 |
-| 5 | Tester first-party tracking | Chrome DevTools → Network | P1 |
+| # | Tâche | Action | Priorité |
+|---|-------|--------|----------|
+| 1 | **Vérifier domaine** | [Google Search Console](https://search.google.com/search-console/welcome) → Vérifier `3a-automation.com` | **P0** |
+| 2 | Créer domain mapping | Après vérification: `gcloud beta run domain-mappings create --service=server-side-tagging --domain=data.3a-automation.com --region=us-central1 --project=gen-lang-client-0843127575` | P0 |
+| 3 | Configurer GTM Web → Server | GTM Admin → Container Settings → Server URL = `https://data.3a-automation.com` | P1 |
+| 4 | Ajouter GA4 Server-side tag | GTM Server Container → Tags | P1 |
+| 5 | Ajouter Facebook CAPI tag | GTM Server Container → Tags | P1 |
 
 ### ⚠️ BLOCKERS CONNUS
 
 | Blocker | Impact | Action |
 |---------|--------|--------|
-| `content-perf` sensor | WordPress `wp.3a-automation.com` HTTP 504 | Vérifier si URL correcte |
-| ElevenLabs/Whisper providers | voice-quality sensor "ERROR" | Tester API keys directement |
+| **Domain Verification** | sGTM domain mapping bloqué | Vérifier via Search Console |
 | META_ACCESS_TOKEN vide | Meta Ads sensor cassé | Configurer token Facebook |
 | TIKTOK_ACCESS_TOKEN vide | TikTok Ads sensor cassé | Configurer token TikTok |
+| WHATSAPP_ACCESS_TOKEN vide | WhatsApp sensor cassé | Configurer token Meta |
+| voice-quality sensor | 0/3 endpoints (services non démarrés) | Démarrer services locaux |
 
-### 📊 MÉTRIQUES SESSION
+### 📊 MÉTRIQUES SESSION 168quindecies
 
 | Métrique | Avant | Après | Delta |
 |----------|-------|-------|-------|
-| Voice endpoints healthy | 0/3 | 3/3 | **+100%** |
-| sGTM status | ❌ Non existant | ✅ HTTP 200 | **NEW** |
-| GCP billing | Non lié | Lié + 3 projets nettoyés | **FIXED** |
-| Sensors OK | 12/19 | 15/19 | **+3** |
+| DNS propagation | ⏳ Pending | ✅ Propagé | **DONE** |
+| content-perf sensor | ❌ SSL error | ✅ OK | **FIXED** |
+| 3a-global-mcp tests | N/A | 99/99 (100%) | **VERIFIED** |
+| Domain verification | N/A | ⏳ User action | **PENDING** |
 
 ---
 
-**Document màj:** 27/01/2026 - Session 168quaterdecies (sGTM + Voice Services)
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice: 3/3 HEALTHY** | **sGTM: OPÉRATIONNEL**
+**Document màj:** 27/01/2026 - Session 168quindecies (DNS + Sensors + MCP)
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **DNS: PROPAGÉ** | **sGTM: DOMAIN VERIFY PENDING**

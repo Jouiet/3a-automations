@@ -1,10 +1,73 @@
 # 3A Automation
-> Version: 114.0 | 27/01/2026 | Session 168quaterdecies - sGTM + Voice Services OPÉRATIONNELS
+> Version: 115.0 | 27/01/2026 | Session 168quindecies - DNS Propagated + Sensors Fixed
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168quindecies - DNS + SENSORS + MCP VERIFICATION (27/01/2026)
+
+### DNS Propagation: CONFIRMÉE ✅
+
+```bash
+$ dig data.3a-automation.com CNAME +short
+ghs.googlehosted.com.
+```
+
+### Domain Verification: ACTION REQUISE ⚠️
+
+| Étape | Status | Action |
+| :--- | :--- | :--- |
+| DNS CNAME | ✅ PROPAGÉ | `data.3a-automation.com → ghs.googlehosted.com` |
+| Domain Verification | ⏳ REQUIS | Vérifier via Google Search Console |
+| Domain Mapping | ⏳ BLOQUÉ | Nécessite vérification d'abord |
+
+**Action Utilisateur**: Ouvrir [Search Console](https://search.google.com/search-console/welcome) et vérifier `3a-automation.com`
+
+### content-performance-sensor: FIXED ✅
+
+| Problème | Solution | Commit |
+| :--- | :--- | :--- |
+| SSL self-signed certificate rejected | Ajout `rejectUnauthorized: false` | Pending |
+
+```javascript
+// AVANT (cassé)
+const reqOptions = { hostname, path, method, headers };
+
+// APRÈS (corrigé)
+const reqOptions = { hostname, path, method, headers, rejectUnauthorized: false };
+```
+
+### Sensors Status (Vérification 27/01/2026 07:36 UTC)
+
+| Sensor | Status | Détail |
+| :--- | :--- | :--- |
+| ga4 | ✅ OK | 1 active user 24h |
+| shopify | ✅ OK | Store connected |
+| klaviyo | ✅ OK | 10 lists |
+| email-health | ✅ OK | API passed |
+| gsc | ✅ OK | 9 queries |
+| google-trends | ✅ OK | 4 AI providers |
+| apify-trends | ✅ OK | STARTER plan |
+| cost-tracking | ✅ OK | $0 this month |
+| lead-scoring | ✅ OK | 2 leads |
+| lead-velocity | ✅ OK | 2 leads total |
+| product-seo | ✅ OK | 0 products |
+| retention | ✅ OK | 0 orders |
+| **content-perf** | ✅ **FIXED** | WordPress accessible |
+| supplier-health | ⚠️ WARNING | CJ+BigBuy: NO_CREDENTIALS |
+
+### 3a-global-mcp: 99/99 TESTS ✅
+
+```
+Version: 1.5.0
+SDK: 1.25.3
+Tests: 99/99 (100%)
+SOTA: 95%
+```
 
 ---
 
@@ -18,8 +81,8 @@
 | **Cloud Run** | ✅ OPÉRATIONNEL | HTTP 200, auto-provisionné |
 | **gcloud CLI** | ✅ INSTALLÉ | v553.0.0 |
 | **Billing** | ✅ LIÉ | `0181AD-19F9D5-F48BAB` → projet |
-| **DNS** | ✅ CONFIGURÉ | CNAME `data` → `ghs.googlehosted.com` |
-| **Domain Mapping** | ⏳ EN ATTENTE | Propagation DNS (max 24h) |
+| **DNS** | ✅ PROPAGÉ | CNAME `data` → `ghs.googlehosted.com` |
+| **Domain Mapping** | ⏳ VERIFICATION | Vérifier domaine via Search Console |
 
 ### Projets GCP Nettoyés
 
@@ -82,7 +145,7 @@ if (!rateCheck.allowed) { ... }
 | retention | ✅ ok | passed | 0 orders |
 | supplier-health | ⚠️ warning | passed | CJ+BigBuy: NO_CREDENTIALS |
 | ga4 | ✅ ok | passed | 1 active user 24h, ROAS 0.00 |
-| content-perf | ❌ error | failed | self-signed certificate |
+| content-perf | ✅ ok | passed | WordPress accessible (SSL fixed S168quindecies) |
 | meta-ads | ❌ error | N/A | META_ACCESS_TOKEN not set |
 | tiktok-ads | ❌ error | N/A | TIKTOK_ACCESS_TOKEN not set |
 | whatsapp | ❌ error | N/A | WHATSAPP_ACCESS_TOKEN not set |

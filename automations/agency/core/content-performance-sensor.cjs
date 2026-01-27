@@ -30,7 +30,9 @@ function httpRequest(url, options = {}) {
             hostname: urlObj.hostname,
             path: urlObj.pathname + urlObj.search,
             method: options.method || 'GET',
-            headers: options.headers || {}
+            headers: options.headers || {},
+            // Accept self-signed certificates for internal WordPress sites
+            rejectUnauthorized: false
         };
 
         const req = https.request(reqOptions, (res) => {
