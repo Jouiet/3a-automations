@@ -1570,13 +1570,21 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 - Table with confidence bars, type badges
 - Responsive design with shadcn/ui components
 
-### P2 - MOYENNE (KB Enrichment)
+### P2 - MOYENNE (KB Enrichment) ✅ COMPLET
 
-| # | Action | Fichier | Effort |
-|:--|:-------|:--------|:-------|
-| 1 | Connect approved facts → KB | `knowledge-base-services.cjs` | 2h |
-| 2 | KB versioning | `kb_versions/` | 1h |
-| 3 | Audit trail | `learning_audit.jsonl` | 1h |
+| # | Action | Fichier | Effort | Status |
+|:--|:-------|:--------|:-------|:-------|
+| 1 | Connect approved facts → KB | `KBEnrichment.cjs` | 2h | ✅ **DONE** (S179) |
+| 2 | KB versioning | `kb_versions/` | 1h | ✅ **DONE** (S179) |
+| 3 | Audit trail | `kb_enrichment_audit.jsonl` | 1h | ✅ **DONE** (S179) |
+
+**KBEnrichment Features (S179):**
+- CLI: `--process`, `--stats`, `--versions`, `--rollback`, `--health`
+- Versioned KB backups (auto-cleanup old versions)
+- Duplicate detection (by original fact ID)
+- Audit trail logging
+- Rollback capability
+- Fact-to-chunk transformation (gap, correction, faq, insight, feature_request)
 
 ### Métriques Session 178
 
