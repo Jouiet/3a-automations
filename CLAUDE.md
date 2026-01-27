@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 128.0 | 27/01/2026 | Session 178quater | Engineering Score: 92/100 (Agent Ops v3.0)
+> Version: 129.0 | 27/01/2026 | Session 179 | Engineering Score: 92/100 (Agent Ops v3.0)
 
 ## Identité
 
@@ -32,7 +32,13 @@
 | **ErrorScience.cjs** | 2.0 | Confidence scoring, trend detection |
 | **RevenueScience.cjs** | 2.0 | Demand curve, urgency pricing |
 
-### Fixes This Session
+### Session 179 - Learning Loop Completion
+- ✅ Learning Queue Dashboard UI (`/admin/agent-ops/learning`)
+- ✅ KBEnrichment.cjs (350 lines) - KB versioning, rollback, audit trail
+- ✅ Circular dependency fix (EventBus lazy loading)
+- ✅ Sidebar navigation updated (Agent Ops > Learning Queue)
+
+### Session 178quater - Agent Ops v3.0
 - ✅ Voice API `/respond` bug fixed (VOICE_CONFIG import)
 - ✅ Telephony Bridge syntax error fixed (Session 178ter)
 - ✅ Agent Ops upgraded to v3.0 with EventBus
@@ -73,11 +79,13 @@ node startup-orchestrator.cjs --start    # Auto-start all
 node startup-orchestrator.cjs --stop     # Stop all
 ```
 
-### Learning Queue API (Session 178bis)
+### Learning Queue (Session 178-179) ✅ COMPLETE
 ```
 Backend:  ConversationLearner.cjs (458 lines)
 Storage:  data/learning/learning_queue.jsonl
 API:      dashboard/src/app/api/learning/
+UI:       /admin/agent-ops/learning (S179)
+KB Loop:  KBEnrichment.cjs (350 lines, S179)
 ```
 
 | Endpoint | Method | Function |
