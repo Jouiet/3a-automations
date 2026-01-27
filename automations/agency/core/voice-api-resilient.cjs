@@ -98,7 +98,7 @@ const PROVIDERS = {
     // Atlas-Chat-9B: Morocco's first Darija LLM (MBZUAI-Paris, Oct 2024)
     // Session 170: Added for Voice MENA Darija fallback
     // DarijaMMLU: 58.23% (+13% vs Jais-13B)
-    url: 'https://api-inference.huggingface.co/models/MBZUAI-Paris/Atlas-Chat-9B',
+    url: 'https://router.huggingface.co/hf-inference/models/MBZUAI-Paris/Atlas-Chat-9B',
     apiKey: ENV.HUGGINGFACE_API_KEY,
     enabled: !!ENV.HUGGINGFACE_API_KEY,
     darijaOnly: true, // Used as priority fallback for language='ary'

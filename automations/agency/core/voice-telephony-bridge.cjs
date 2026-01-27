@@ -114,7 +114,7 @@ const CONFIG = {
   atlasChat: {
     apiKey: process.env.HUGGINGFACE_API_KEY,
     model: 'MBZUAI-Paris/Atlas-Chat-9B',
-    url: 'https://api-inference.huggingface.co/models/MBZUAI-Paris/Atlas-Chat-9B',
+    url: 'https://router.huggingface.co/hf-inference/models/MBZUAI-Paris/Atlas-Chat-9B',
     enabled: !!process.env.HUGGINGFACE_API_KEY,
     darijaOnly: true  // Used only for 'ary' language fallback
   },
