@@ -4,7 +4,100 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168quindecies - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK** ✅ | **DNS: PROPAGÉ** | **sGTM: DOMAIN VERIFY PENDING** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0 (99/99 tests)** | **A2A: v1.1.0** | **AI: Claude Opus 4.5 fallback**
+> **✅ ÉTAT RÉEL (Session 169bis - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 14/19 OK** ✅ | **Voice MENA: v5.5.3** | **Atlas-Chat: 9B+27B GO** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0 (99/99 tests)** | **A2A: v1.1.0** | **AI: Claude Opus 4.5 fallback**
+
+---
+
+## SESSION 169bis - ATLAS-CHAT 27B BENCHMARK (27/01/2026)
+
+### Document: `docs/VOICE-MENA-PLATFORM-ANALYSIS.md` v5.5.3
+
+### Atlas-Chat 9B vs 27B - Benchmark Comparatif
+
+| Benchmark | Atlas-Chat-9B | Atlas-Chat-27B | Delta | Source |
+|-----------|---------------|----------------|-------|--------|
+| **DarijaMMLU** | 58.23% | **61.95%** | +3.72% | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B) |
+| **DarijaHellaSwag** | 43.65% | **48.37%** | +4.72% | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B) |
+| **vs Jais 13B** | +13% | +17% | - | [MarkTechPost](https://www.marktechpost.com/2024/11/07/mbzuai-researchers-release-atlas-chat-2b-9b-and-27b-a-family-of-open-models-instruction-tuned-for-darija-moroccan-arabic/) |
+
+### VRAM Requirements
+
+| Model | 4-bit Quantization | 8-bit Quantization | BF16 (Full) |
+|-------|--------------------|--------------------|-------------|
+| **Atlas-Chat-9B** | ~6GB | ~10GB | ~18GB |
+| **Atlas-Chat-27B** | ~14GB | ~27GB | ~54GB |
+
+### Hosting Costs
+
+| Model | Provider | GPU | Coût/mois | COGS/min |
+|-------|----------|-----|-----------|----------|
+| **9B (Recommandé)** | Vast.ai | RTX4090 24GB | ~$200 | ~$0.005 |
+| **9B** | RunPod | A100 40GB | ~$400 | ~$0.01 |
+| **27B** | RunPod | A100 80GB | ~$800 | ~$0.02 |
+
+### Verdict Partenariats LLM Darija
+
+| Option | Verdict | Use Case |
+|--------|---------|----------|
+| **Atlas-Chat-9B** | ✅ **GO** | Voice real-time (latence prioritaire) |
+| **Atlas-Chat-27B** | ✅ **GO** | Offline analytics (qualité prioritaire) |
+| **AtlasIA** | ❌ **BLOCKED** | CC BY-NC = non-commercial |
+| **Mistral via MoU** | ❌ **WISHFUL THINKING** | Government ≠ B2B |
+
+### Updates 2026
+
+⚠️ **FAIT:** Aucune release Atlas-Chat depuis **Oct 2024**. Recherche web confirme: AtlasIA/MBZUAI travaillaient sur versions 2025, mais **0 annonce publique 2026**.
+
+### Commits Session 169bis
+
+| Hash | Description |
+|------|-------------|
+| `15e9f30` | feat(voice-mena): add Atlas-Chat-27B benchmark + VRAM specs (v5.5.3) |
+| `c536bac` | docs: Session 169bis - Atlas-Chat 27B benchmark + VRAM specs |
+
+---
+
+## SESSION 169 - VOICE MENA COMPETITIVE ANALYSIS (27/01/2026)
+
+### Document: `docs/VOICE-MENA-PLATFORM-ANALYSIS.md` v5.5.0 → v5.5.2
+
+### Benchmark Concurrentiel
+
+| Concurrent | Latence | Darija | MENA DIDs | WhatsApp Voice | Pricing |
+|------------|---------|--------|-----------|----------------|---------|
+| **Vapi** | 500ms | ❌ | ❌ | ❌ | $0.07-0.33/min |
+| **Retell AI** | 700-800ms | ❌ | ❌ | ❌ | $0.13-0.31/min |
+| **Bland AI** | ~800ms | ❌ | ❌ | ❌ | $0.11-0.20/min |
+| **SAWT IA** | ? | ✅ (claim) | ? | ❌ | Sur devis |
+| **3A Voice** | 2.5s | ✅ (testé) | ✅ | ✅ **UNIQUE** | $0.08-0.12/min |
+
+### RED FLAGS SAWT IA (Concurrent Direct Maroc)
+
+| Indicateur | Observation | Implication |
+|------------|-------------|-------------|
+| **"ML in-house"** | 1 dev mentionné, background marketing 10 ans | Probable: GPT + ElevenLabs wrapper |
+| **Pricing** | Non public (sur devis) | Opacité intentionnelle |
+| **Documentation** | 0 pages techniques | Black box |
+| **API** | Non publique | Pas de self-service |
+
+### Architecture Solution 3A
+
+```
+CLIENT → 3A Platform (numéro INCLUS) → Providers (invisible)
+         ↓
+         DID Manager (Telnyx API)
+         Voice API (Grok + Atlas-Chat fallback)
+         TTS (ElevenLabs Ghizlane)
+         STT (ElevenLabs Scribe Maghrebi)
+```
+
+### Commits Session 169
+
+| Hash | Description |
+|------|-------------|
+| `72462a4` | feat(voice-mena): competitive analysis + solution architecture (v5.5) |
+| `ce93743` | feat(voice-mena): technical benchmark + SAWT IA red flags (v5.5.1) |
+| `66d8846` | feat(voice-mena): LLM Darija partnerships + action plan (v5.5.2) |
 
 ---
 
@@ -620,13 +713,14 @@ s.src = '/voice-assistant/voice-widget-core.js?v=2.0.0';
 | **Europe** | FR | EUR (€) | FR (+ ES optionnel) |
 | **International** | EN | USD ($) | EN + ES |
 
-### Options Darija Validées
+### Options Darija Validées (Session 169bis màj)
 
 | Type | Recommandation | Alternative | Statut |
 |------|----------------|-------------|--------|
-| **TTS** | ElevenLabs "Ghizlane" | DarijaTTS self-hosted | Commercial prêt |
-| **STT** | ElevenLabs Scribe | Whisper fine-tuned | À tester |
-| **LLM** | Mistral Saba (24B) | Atlas-Chat-9B | API disponible |
+| **TTS** | ElevenLabs "Ghizlane" | DarijaTTS self-hosted | ✅ Commercial prêt |
+| **STT** | ElevenLabs Scribe | Whisper fine-tuned | ✅ Testé OK |
+| **LLM Real-time** | Grok-4-1-fast | Atlas-Chat-9B (~$0.005/min) | ✅ **GO** |
+| **LLM Offline** | Atlas-Chat-27B (~$0.02/min) | Claude Opus 4.5 | ✅ **GO** (S169bis) |
 
 ### Plan d'Action Voice
 
@@ -846,7 +940,7 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 |------|-----------|--------|--------|
 | **Phase 1: Espagnol voice widget** | Voice | 16h | ✅ **DONE** (S166quater) |
 | **Phase 2: Arabe MSA voice widget** | Voice | 18h | ✅ **DONE** (S166quater) |
-| **Phase 4: LLM Darija (Mistral Saba)** | Voice | 22h | ⏳ OPTIONAL |
+| **Phase 4: LLM Darija (Atlas-Chat 9B/27B)** | Voice | 8h | ✅ **ANALYSÉ** (S169bis) - Deploy optional |
 | WCAG 2.2 Audit | Accessibility | 8h | ✅ **DONE** (S168decies) |
 | A2A v1.0 upgrade | Protocol | 8h | ✅ **DONE** (S168undecies) |
 | Server-side GTM | Analytics | 16h | ✅ **DEPLOYED** (S168quaterdecies) - Domain mapping pending |
@@ -922,7 +1016,7 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-## ACTIONABLE NEXT STEPS (Session 168quindecies)
+## ACTIONABLE NEXT STEPS (Session 169bis)
 
 ### ✅ COMPLÉTÉ (27/01/2026)
 
@@ -931,6 +1025,9 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | DNS Propagation | ✅ DONE | `data.3a-automation.com → ghs.googlehosted.com` |
 | content-perf sensor SSL | ✅ FIXED | `rejectUnauthorized: false` ajouté |
 | 3a-global-mcp verification | ✅ DONE | 99/99 tests (100%) |
+| Voice MENA Analysis | ✅ DONE | v5.5.3 (competitive + Atlas-Chat 27B) |
+| Atlas-Chat 27B Benchmark | ✅ DONE | +3.72% DarijaMMLU vs 9B |
+| LLM Darija Partnership Analysis | ✅ DONE | 9B=voice, 27B=offline |
 
 ### 🎯 ACTION UTILISATEUR REQUISE (P0)
 
@@ -961,7 +1058,25 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | 3a-global-mcp tests | N/A | 99/99 (100%) | **VERIFIED** |
 | Domain verification | N/A | ⏳ User action | **PENDING** |
 
+### 🎯 VOICE MENA - ACTIONS P1 (Suite Session 169bis)
+
+| # | Tâche | Effort | Priorité |
+|---|-------|--------|----------|
+| 1 | **Deploy Atlas-Chat-9B** sur Vast.ai RTX4090 | 4h | **P1** |
+| 2 | Intégrer 9B comme fallback dans `voice-api-resilient.cjs` | 2h | **P1** |
+| 3 | Benchmark latence 9B vs Grok en production | 2h | **P2** |
+| 4 | (Optionnel) Deploy 27B pour analytics offline | 4h | **P3** |
+
+### 📊 MÉTRIQUES SESSION 169bis
+
+| Métrique | Avant | Après | Delta |
+|----------|-------|-------|-------|
+| Voice MENA doc | v5.5.2 | **v5.5.3** | +27B benchmark |
+| Atlas-Chat analyzed | 9B only | **9B + 27B** | +1 model |
+| LLM Darija options | 2 | **4** | +2 (Atlas-Chat GO) |
+| Partnership verdicts | 2 | **5** | +3 analyzed |
+
 ---
 
-**Document màj:** 27/01/2026 - Session 168quindecies (DNS + Sensors + MCP)
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **DNS: PROPAGÉ** | **sGTM: DOMAIN VERIFY PENDING**
+**Document màj:** 27/01/2026 - Session 169bis (Voice MENA v5.5.3 + Atlas-Chat 27B)
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice MENA: v5.5.3** | **Atlas-Chat: 9B+27B GO**
