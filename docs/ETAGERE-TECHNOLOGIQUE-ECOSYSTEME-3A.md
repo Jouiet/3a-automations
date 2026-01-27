@@ -1,31 +1,75 @@
 # ÉTAGÈRE TECHNOLOGIQUE - ÉCOSYSTÈME 3A
 ## Mutualisation des Technologies Selon le Modèle du "Potentiel de Situation"
 
-> **Version**: 3.4 | **Date**: 26/01/2026 | **Session**: 168ter (MCP Stack Optimization)
+> **Version**: 4.0 | **Date**: 27/01/2026 | **Session**: 168quaterdecies (Forensic Audit COMPLET)
 > **Document dédié**: `docs/WHISK-REMOTION-METHODOLOGY.md` (méthodologie exhaustive)
 > **Méthode**: Inspirée du modèle industriel chinois (François Jullien / Sun Tzu)
 > **Principe**: Coopération technique → Potentiel → Concurrence commerciale
 
-### UPDATE SESSION 168ter - MCP STACK OPTIMISÉ (26/01/2026)
+---
 
-**Audit forensique complet - 38% réduction des serveurs MCP**
+## AUDIT FORENSIQUE - FAITS VÉRIFIÉS (27/01/2026 01:35 UTC)
 
-| Couche | Serveurs | Status |
+### Métriques Factuelles (Bottom-Up Verification)
+
+| Composant | Valeur | Source Vérification | Status |
+|:---|:---|:---|:---|
+| **MCP Servers (Projet)** | **6** | `jq '.mcpServers \| keys' .mcp.json` | ✅ VÉRIFIÉ |
+| **Scripts Core** | **87** | `ls automations/agency/core/*.cjs \| wc -l` | ✅ VÉRIFIÉ |
+| **Sensors** | **19** | `ls *sensor*.cjs \| wc -l` (bigquery supprimé S168quaterdecies) | ✅ VÉRIFIÉ |
+| **Automations Registry** | **121** | `jq '.automations \| length' registry.json` | ✅ VÉRIFIÉ |
+| **HTML Pages** | **79** | `find -name "*.html" \| wc -l` | ✅ VÉRIFIÉ |
+| **KB Chunks** | **135** | `jq 'length' chunks.json` | ✅ VÉRIFIÉ |
+| **CSS Version** | **87.0** | `grep styles.css *.html` | ✅ VÉRIFIÉ |
+| **HITL Scripts** | **17** | `grep -l HITL *.cjs \| wc -l` | ✅ VÉRIFIÉ |
+| **Remotion Compositions** | **7** | `ls compositions/*.tsx` | ✅ VÉRIFIÉ |
+
+### MCP Servers (FAIT: 6 projet, 8 global)
+
+| Couche | Count | Servers (Vérifiés .mcp.json) |
 |:---|:---|:---|
 | **Global** | 8 | chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail |
-| **Projet** | 5 | grok, google-sheets, klaviyo, shopify-dev, shopify-admin |
-| **Total** | **13** | (vs 21 avant - 38% reduction) |
+| **Projet** | **6** | 3a-global-mcp, grok, google-sheets, klaviyo, shopify-dev, shopify-admin |
+| **Total** | **14** | |
 
-**Supprimés (dead code):**
-- ❌ powerbi-remote (Entra ID non configuré)
-- ❌ meta-ads (META_PAGE_ACCESS_TOKEN vide)
-- ❌ apify (token invalide)
-- ❌ shopify global (credentials vides)
-- ❌ slack (credentials vides)
-- ❌ 3 duplicates (chrome-devtools, google-analytics, playwright)
+### 3A-Global-MCP (VÉRIFIÉ)
 
-**API locale (bypass MCP):**
-- Stitch: `node stitch-api.cjs list` (MCP auth incompatible, script fonctionne)
+| Aspect | Valeur | Source |
+|:---|:---|:---|
+| Version | **1.5.0** | package.json |
+| Location | `automations/3a-global-mcp/` | ls |
+| SDK | @modelcontextprotocol/sdk | dependencies |
+| Features | tools, resources, prompts, logging, caching, output-schemas, streamable-http, bearer-auth | SOTA 95% |
+
+### Sensors Status (19/19 avec REAL API Tests)
+
+**Session 168quaterdecies**: Tous sensors upgraded v1.1.0 avec vrais tests API
+
+| Status | Count | Sensors |
+|:---|:---|:---|
+| ✅ API OK | 10 | ga4, shopify, klaviyo, email-health, google-trends, cost-tracking, lead-velocity, product-seo, apify-trends, gsc |
+| ⚠️ NO CREDS | 6 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner, supplier-health, content-perf |
+| ❌ BLOCKED | 3 | retention(NETWORK), voice-quality(NO_PROVIDERS), lead-scoring(NO_DATA) |
+
+**Supprimé**: bigquery-trends-sensor (non nécessaire <3000 clients)
+
+### BLOCKERS - USER ACTION REQUIRED
+
+| Blocker | Impact | Action Requise |
+|:---|:---|:---|
+| META_ACCESS_TOKEN vide | meta-ads-sensor OFF | Configurer token Meta |
+| TIKTOK_ACCESS_TOKEN vide | tiktok-ads-sensor OFF | Configurer token TikTok |
+| WHATSAPP_ACCESS_TOKEN vide | whatsapp-status-sensor OFF | Configurer token WhatsApp Business |
+| 5 Google Ads creds missing | google-ads-planner-sensor OFF | CLIENT_ID, SECRET, DEVELOPER_TOKEN, CUSTOMER_ID, REFRESH_TOKEN |
+| CJ/BigBuy API keys vides | supplier-health-sensor partial | Configurer CJ_API_KEY, BIGBUY_API_KEY |
+| WordPress SSL issue | content-performance-sensor OFF | Vérifier certificat self-signed |
+
+### Commande de Vérification
+
+```bash
+# Vérifier status de TOUS les sensors
+for s in automations/agency/core/*sensor*.cjs; do echo "=== $(basename $s) ==="; node "$s" --health 2>&1 | head -5; done
+```
 
 ---
 
@@ -92,35 +136,29 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 
 ### 1. 3A-AUTOMATION (Central Orchestrator)
 
-| Technologie | Status | Fichier Principal | Prêt à Partager |
-|-------------|--------|-------------------|-----------------|
-| **A2A Protocol** | ✅ Production | `automations/a2a/server.js` | ✅ OUI |
-| **UCP Protocol** | ✅ Production | `pages/api/ucp/products.js` | ✅ OUI |
-| **ACP Protocol** | ✅ Fonctionnel | `automations/acp/server.js` | ✅ OUI |
-| **GPM Central** | ✅ Production | `data/pressure-matrix.json` | ✅ OUI |
-| **22 L5 Agents** | ✅ Production | `agency/core/*.cjs` | ✅ OUI |
-| **20 Sensors** | ✅ 6 OK, 10 Partial | `agency/core/*-sensor.cjs` | ✅ OUI |
-| **Multi-AI Fallback** | ✅ Production | `*-resilient.cjs` | ✅ OUI |
-| **Design System** | ✅ Production | `DESIGN-SYSTEM.md` | ✅ OUI |
-| **Stylelint Config** | ✅ 0 issues | `.stylelintrc.cjs` | ✅ OUI |
-| **Visual Regression** | ✅ 9 baselines | `visual-regression/*.png` | ✅ OUI |
-| **Design Validator** | ✅ **26 checks (v5.2.0)** | `validate-design-system.cjs` | ✅ OUI |
-| **HTML→CSS Validator** | ✅ S145 | Détecte classes sans CSS | ✅ OUI |
-| **SVG Size Validator** | ✅ S145 | Détecte SVG sans contraintes | ✅ OUI |
-| **CSS Link Validator** | ✅ **NEW S154bis** | Détecte balises CSS cassées | ✅ OUI |
-| **Button Class Validator** | ✅ **NEW S154bis** | Détecte btn-* sans CSS | ✅ OUI |
-| **VPS Docker** | ✅ Production | `docker-compose.yml` | ⚠️ Spécifique |
-| **121 Automations** | ✅ Production | `automations-registry.json` | ✅ OUI |
-| **Voice Agent B2B** | ✅ Production | `agency/core/voice-agent-b2b.cjs` | ✅ OUI |
-| **Service KB (TF-IDF)** | ✅ 129 chunks | `knowledge_base/chunks.json` | ✅ OUI |
-| **Remotion Video** | ✅ Production | `remotion-studio/` | ✅ OUI |
-| **AI Asset Gen** | ✅ Multi-provider | `remotion-studio/src/lib/ai-assets.ts` | ✅ OUI |
-| **Stitch MCP Wrapper** | ✅ **NEW S162** | `agency/core/stitch-api.cjs` | ✅ OUI |
+| Technologie | Status | Fichier Principal | Vérification | Prêt à Partager |
+|-------------|--------|-------------------|--------------|-----------------|
+| **A2A Protocol** | ✅ Production | `automations/a2a/server.js` | 1089 lines, v1.1.0 | ✅ OUI |
+| **UCP Protocol** | ✅ Production | `pages/api/ucp/products.js` | Exists | ✅ OUI |
+| **ACP Protocol** | ❌ **DEPRECATED** | `automations/acp/DEPRECATED.md` | Merged into A2A | ❌ NON |
+| **GPM Central** | ✅ Production | `landing-page-hostinger/data/pressure-matrix.json` | 8 sectors | ✅ OUI |
+| **87 Scripts Core** | ✅ Production | `agency/core/*.cjs` | `ls \| wc -l` = 87 | ✅ OUI |
+| **19 Sensors** | ✅ ALL v1.1.0 | `agency/core/*-sensor.cjs` | 10 OK, 6 NO_CREDS, 3 BLOCKED | ✅ OUI |
+| **7 Resilient Scripts** | ✅ Production | `*-resilient.cjs` | Multi-AI fallback | ✅ OUI |
+| **Stylelint Config** | ✅ Production | `.stylelintrc.json` | Exists | ✅ OUI |
+| **VPS Docker** | ✅ Production | `docker-compose.yml` | | ⚠️ Spécifique |
+| **121 Automations** | ✅ Production | `automations-registry.json` | `jq length` = 121 | ✅ OUI |
+| **Voice Agent B2B** | ✅ Production | `agency/core/voice-agent-b2b.cjs` | Exists | ✅ OUI |
+| **Service KB (TF-IDF)** | ✅ Production | `knowledge_base/chunks.json` | **135 chunks** | ✅ OUI |
+| **Remotion Video** | ✅ Production | `remotion-studio/` | **7 compositions** | ✅ OUI |
+| **AI Asset Gen** | ✅ Multi-provider | `remotion-studio/src/lib/ai-assets.ts` | fal.ai + Replicate | ✅ OUI |
+| **Stitch MCP Wrapper** | ✅ Production | `agency/core/stitch-api.cjs` | 279 lines, --health | ✅ OUI |
+| **3A-Global-MCP** | ✅ Production | `automations/3a-global-mcp/` | **v1.5.0**, SDK 1.25.3 | ✅ OUI |
 
 **Technologies UNIQUES 3A:**
-- Orchestration multi-subsidiaires (Twin Sovereignty)
-- AG-UI (Governance interface)
-- Forensic Engine (audit technique avancé)
+- A2A v1.0 Protocol (tasks/send, tasks/get, tasks/cancel)
+- 3A-Global-MCP SOTA 95% (bearer-auth, streamable-http)
+- GPM avec 19 sensors temps réel
 
 ---
 
@@ -244,65 +282,85 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 ### Catégorie A: Protocoles Standardisés (3A)
 
 ```
-ÉTAGÈRE: PROTOCOLES
-├── A2A Protocol v1.0 (Google/Linux Foundation)
-│   ├── server.js (43 agents)
-│   ├── client.cjs (pour subsidiaires)
-│   └── agent.json (manifest)
+ÉTAGÈRE: PROTOCOLES (Vérifié 27/01/2026)
+├── A2A Protocol v1.1.0 (1089 lines)
+│   ├── server.js (tasks/send, tasks/get, tasks/cancel)
+│   ├── TaskState: submitted → working → completed/failed
+│   └── /.well-known/agent.json (Agent Card v1.0)
 │
 ├── UCP Protocol v1.0 (Commerce)
 │   ├── products.js (JSON-LD)
-│   ├── services.json (catalog)
-│   └── manifest.json (discovery)
+│   └── pages/api/ucp/
 │
 ├── GPM (Global Pressure Matrix)
-│   ├── pressure-matrix.json (schema)
-│   ├── sync-to-3a.cjs (subsidiary sync)
-│   └── dashboard.html (visualization)
+│   ├── pressure-matrix.json (8 sectors)
+│   ├── 19 sensors → GPM updates
+│   └── Sectors: marketing, sales, seo, finance, technology, communications, operations, system
 │
-└── ACP Protocol (IBM async)
-    ├── server.js (job queue)
-    └── client.cjs (submission)
+└── ACP Protocol ❌ DEPRECATED
+    └── Merged into A2A (Session 168undecies)
 ```
 
-### Catégorie B: Sensors (Multi-Platform)
+### Catégorie B: Sensors (19 total - ALL v1.1.0)
 
 ```
-ÉTAGÈRE: SENSORS
-├── shopify-sensor.cjs (store health)
-├── klaviyo-sensor.cjs (email metrics)
-├── retention-sensor.cjs (churn analysis)
-├── ga4-sensor.cjs (analytics)
-├── content-performance-sensor.cjs (blog)
-├── voice-quality-sensor.cjs (AI voice)
-├── cost-tracking-sensor.cjs (API costs)
-└── sync-to-3a.cjs (central sync)
+ÉTAGÈRE: SENSORS (Vérifié 27/01/2026 - Session 168quaterdecies)
+├── ✅ API OK (10)
+│   ├── ga4-sensor.cjs (runReport API)
+│   ├── shopify-sensor.cjs (products/count)
+│   ├── klaviyo-sensor.cjs (lists API)
+│   ├── email-health-sensor.cjs (Klaviyo)
+│   ├── google-trends-sensor.cjs (AI providers)
+│   ├── gsc-sensor.cjs (SearchConsole)
+│   ├── cost-tracking-sensor.cjs (cost log)
+│   ├── lead-velocity-sensor.cjs (leads file)
+│   ├── product-seo-sensor.cjs (Shopify)
+│   └── apify-trends-sensor.cjs (user API)
+│
+├── ⚠️ NO CREDENTIALS (6)
+│   ├── meta-ads-sensor.cjs (META_ACCESS_TOKEN)
+│   ├── tiktok-ads-sensor.cjs (TIKTOK_ACCESS_TOKEN)
+│   ├── whatsapp-status-sensor.cjs (WHATSAPP_ACCESS_TOKEN)
+│   ├── google-ads-planner-sensor.cjs (5 creds missing)
+│   ├── supplier-health-sensor.cjs (CJ/BigBuy keys)
+│   └── content-performance-sensor.cjs (WordPress)
+│
+└── ❌ BLOCKED (3)
+    ├── retention-sensor.cjs (NETWORK)
+    ├── voice-quality-sensor.cjs (NO_PROVIDERS)
+    └── lead-scoring-sensor.cjs (NO_DATA)
 ```
 
 ### Catégorie C: AI Patterns (Reusable)
 
 ```
-ÉTAGÈRE: AI PATTERNS
-├── Multi-AI Fallback
-│   ├── resilient-template.cjs
-│   └── providers: [grok, openai, gemini, claude]
+ÉTAGÈRE: AI PATTERNS (Vérifié 27/01/2026)
+├── Multi-AI Fallback (7 scripts resilient)
+│   ├── blog-generator-resilient.cjs
+│   ├── churn-prediction-resilient.cjs
+│   ├── email-personalization-resilient.cjs
+│   ├── podcast-generator-resilient.cjs
+│   ├── product-photos-resilient.cjs
+│   ├── sms-automation-resilient.cjs
+│   └── voice-api-resilient.cjs
 │
-├── RAG Knowledge Base
-│   ├── knowledge_base_builder.py (FAISS)
-│   ├── knowledge_base_simple.py (TF-IDF)
-│   └── product_sync_pipeline.py
+├── Fallback Chains (Session 168terdecies)
+│   ├── CRITICAL: Claude Opus 4.5 → Grok → Gemini
+│   ├── VOLUME: Gemini → Grok → Claude
+│   └── REAL-TIME: Grok → ElevenLabs → Gemini Live
+│
+├── RAG Knowledge Base (135 chunks)
+│   ├── knowledge_base/chunks.json (135)
+│   ├── knowledge_base/tfidf_index.json
+│   └── knowledge_base/embeddings_cache.json
 │
 ├── Voice Agent
-│   ├── xai_voice_agent.py (LiveKit - Alpha Medical)
-│   ├── voice_agent_core.py (MyDealz e-commerce)
 │   ├── voice-agent-b2b.cjs (3A agency B2B)
-│   ├── knowledge-base-services.cjs (3A 119 automations)
+│   ├── knowledge-base-services.cjs (121 automations)
 │   └── grok-voice-realtime.cjs (WebSocket)
 │
-└── Progressive Memory
-    ├── 00-metadata.md (L1)
-    ├── 01-core-constraints.md (L1)
-    └── agent_docs/*.md (L2)
+└── HITL (Human In The Loop) - 17 scripts
+    └── --approve/--reject pattern
 ```
 
 ### Catégorie F: Video Production (UPDATED SESSION 160+)
@@ -756,6 +814,19 @@ AVANTAGE HYBRIDE:
 
 ---
 
-*Document mis à jour: 26/01/2026 UTC*
-*Session: 162 - Stitch MCP Wrapper Implementation*
-*Session: 160+ - Subsidiary Compositions Implementation*
+## CHANGELOG
+
+| Session | Date | Changes |
+|:---|:---|:---|
+| **168quaterdecies** | 27/01/2026 | Forensic audit COMPLET, 19 sensors v1.1.0 REAL API tests |
+| 168terdecies | 26/01/2026 | AI fallback chains inversées (Claude primary for CRITICAL) |
+| 168undecies | 26/01/2026 | A2A v1.1.0, ACP deprecated |
+| 168decies | 26/01/2026 | Bearer auth, MCP SOTA 95% |
+| 162 | 26/01/2026 | Stitch MCP Wrapper |
+| 160+ | 25/01/2026 | Subsidiary Compositions |
+
+---
+
+*Document mis à jour: 27/01/2026 01:45 UTC*
+*Session: 168quaterdecies - Forensic Sensor Audit*
+*Méthode: Bottom-up verification basée sur FAITS*
