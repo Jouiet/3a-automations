@@ -46,8 +46,15 @@
 | **ConversationLearner.cjs** | 458 | ✅ COMPLET |
 | **Learning Queue** (JSONL) | - | ✅ CRÉÉ |
 | **Pattern Extraction** (5 types) | - | ✅ FAIT |
-| **Human Validation API** | - | ⚠️ À CRÉER |
-| **Dashboard UI** | - | ⚠️ À CRÉER |
+| **Human Validation API** | 4 endpoints | ✅ **DONE** (S178) |
+| **Dashboard UI** | - | ⏳ PENDING |
+
+**API Endpoints Created (Session 178):**
+- `GET /api/learning/queue` - List pending facts (filter by status/type)
+- `GET /api/learning/queue/[id]` - Get single fact
+- `PATCH /api/learning/queue/[id]` - Approve/Reject/Modify
+- `POST /api/learning/batch` - Bulk approve/reject
+- `GET /api/learning/stats` - Dashboard statistics
 
 **Architecture: Conversation → Patterns → Queue → Human Review → KB**
 
@@ -1500,13 +1507,15 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | 2 | **STRIPE_WEBHOOK_SECRET** | Webhook verify ON | 15min |
 | 3 | **TELNYX_API_KEY** | Telephony MENA | 30min |
 
-### P1 - HAUTE (Dashboard API)
+### P1 - HAUTE (Dashboard API) ✅ API DONE
 
-| # | Action | Endpoint | Effort |
-|:--|:-------|:---------|:-------|
-| 1 | Learning Queue API | `GET /api/learning/queue` | 2h |
-| 2 | Approve/Reject API | `POST /api/learning/:id/approve` | 1h |
-| 3 | Dashboard UI | React component | 4h |
+| # | Action | Endpoint | Effort | Status |
+|:--|:-------|:---------|:-------|:-------|
+| 1 | Learning Queue API | `GET /api/learning/queue` | 2h | ✅ **DONE** |
+| 2 | Approve/Reject API | `PATCH /api/learning/queue/[id]` | 1h | ✅ **DONE** |
+| 3 | Batch API | `POST /api/learning/batch` | 1h | ✅ **DONE** |
+| 4 | Stats API | `GET /api/learning/stats` | 30min | ✅ **DONE** |
+| 5 | Dashboard UI | React component | 4h | ⏳ PENDING |
 
 ### P2 - MOYENNE (KB Enrichment)
 

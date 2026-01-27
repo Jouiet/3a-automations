@@ -129,8 +129,19 @@ L'analyse de l'écosystème 3A Automation révèle une **Excellence Opérationne
 | 177 | 75 (+10) | 78 (+8) | 77.5 (+10) |
 | **178** | **80 (+5)** | **82 (+4)** | **81 (+3.5)** |
 
-**Prochaine Étape**: Configurer META_PIXEL_ID, META_ACCESS_TOKEN et STRIPE_WEBHOOK_SECRET pour activer le CAPI et la vérification webhook en production.
+**UPDATE SESSION 178bis**: Learning Queue API (DOE Framework):
+- ✅ `GET /api/learning/queue` - List pending facts with filters
+- ✅ `PATCH /api/learning/queue/[id]` - Approve/Reject/Modify
+- ✅ `POST /api/learning/batch` - Bulk operations (100 max)
+- ✅ `GET /api/learning/stats` - Dashboard statistics
+
+**DOE Loop: Conversation → ConversationLearner → Queue → Human Review → KB Enrichment**
+
+**Prochaine Étape**:
+1. P0: Configurer META_PIXEL_ID, META_ACCESS_TOKEN, STRIPE_WEBHOOK_SECRET
+2. P1: Dashboard UI (React component) pour approve/reject
+3. P2: Connect approved facts to `knowledge-base-services.cjs`
 
 ---
 *Ce document est une analyse factuelle stricte.*
-*Session 176: Audit initial. Session 177: Implémentation. Session 178: SOTA Optimization.*
+*Session 176: Audit initial. Session 177: Implémentation. Session 178: SOTA Optimization. Session 178bis: Learning Queue API.*

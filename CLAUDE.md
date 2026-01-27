@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 122.0 | 27/01/2026 | Session 178 | SOTA Optimization
+> Version: 123.0 | 27/01/2026 | Session 178bis | Learning Queue API
 
 ## Identité
 
@@ -33,6 +33,21 @@
 | stripe-global-gateway.cjs | 2.0 | 180 | Idempotency, webhook HMAC |
 
 **Total: 1385 lignes engineering (+775 SOTA)**
+
+### Learning Queue API (Session 178bis)
+```
+Backend:  ConversationLearner.cjs (458 lines)
+Storage:  data/learning/learning_queue.jsonl
+API:      dashboard/src/app/api/learning/
+```
+
+| Endpoint | Method | Function |
+|:---|:---|:---|
+| `/api/learning/queue` | GET | List facts (filter: status, type) |
+| `/api/learning/queue/[id]` | GET | Single fact |
+| `/api/learning/queue/[id]` | PATCH | Approve/Reject/Modify |
+| `/api/learning/batch` | POST | Bulk operations |
+| `/api/learning/stats` | GET | Dashboard stats |
 
 ---
 
