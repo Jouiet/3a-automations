@@ -1,0 +1,64 @@
+{
+  "tenant_id": "{{TENANT_ID}}",
+  "name": "{{CLIENT_NAME}}",
+  "vertical": "shopify",
+  "plan": "essentials",
+  "status": "onboarding",
+  "created_at": "{{CREATED_AT}}",
+  "features": {
+    "voice_widget": false,
+    "voice_telephony": false,
+    "email_automation": false,
+    "sms_automation": false,
+    "churn_prediction": false,
+    "review_booster": false
+  },
+  "integrations": {
+    "shopify": {
+      "enabled": false,
+      "store_url": null,
+      "connected_at": null
+    },
+    "klaviyo": {
+      "enabled": false,
+      "connected_at": null
+    },
+    "hubspot": {
+      "enabled": false,
+      "connected_at": null
+    },
+    "google_analytics": {
+      "enabled": false,
+      "property_id": null,
+      "connected_at": null
+    },
+    "meta_ads": {
+      "enabled": false,
+      "connected_at": null
+    },
+    "tiktok_ads": {
+      "enabled": false,
+      "connected_at": null
+    }
+  },
+  "contacts": {
+    "primary": {
+      "name": "{{CONTACT_NAME}}",
+      "email": "{{CONTACT_EMAIL}}",
+      "phone": null
+    }
+  },
+  "voice_config": {
+    "persona": "UNIVERSAL_ECOMMERCE",
+    "language": "fr",
+    "theme": {
+      "primary_color": "#FF6B35",
+      "position": "bottom-right"
+    }
+  },
+  "billing": {
+    "stripe_customer_id": null,
+    "plan_started_at": null,
+    "monthly_revenue": 0
+  }
+}

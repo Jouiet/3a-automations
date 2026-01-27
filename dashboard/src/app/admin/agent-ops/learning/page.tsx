@@ -25,7 +25,7 @@ import {
   ChevronDown,
   BookOpen,
   Lightbulb,
-  MessageSquareQuestion,
+  HelpCircle,
   Bug,
   Sparkles,
   ArrowUpRight,
@@ -61,7 +61,7 @@ interface LearningStats {
 }
 
 const typeConfig = {
-  gap: { icon: MessageSquareQuestion, color: "text-amber-400", bg: "bg-amber-500/10", label: "Gap KB" },
+  gap: { icon: HelpCircle, color: "text-amber-400", bg: "bg-amber-500/10", label: "Gap KB" },
   correction: { icon: Bug, color: "text-red-400", bg: "bg-red-500/10", label: "Correction" },
   insight: { icon: Lightbulb, color: "text-emerald-400", bg: "bg-emerald-500/10", label: "Insight" },
   faq: { icon: BookOpen, color: "text-sky-400", bg: "bg-sky-500/10", label: "FAQ" },

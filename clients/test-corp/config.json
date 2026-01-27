@@ -1,0 +1,64 @@
+{
+  "tenant_id": "test-corp",
+  "name": "Test Corp",
+  "vertical": "shopify",
+  "plan": "essentials",
+  "status": "onboarding",
+  "created_at": "2026-01-27T22:56:34.646Z",
+  "features": {
+    "voice_widget": true,
+    "voice_telephony": false,
+    "email_automation": true,
+    "sms_automation": false,
+    "churn_prediction": true,
+    "review_booster": false
+  },
+  "integrations": {
+    "shopify": {
+      "enabled": true,
+      "store_url": null,
+      "connected_at": null
+    },
+    "klaviyo": {
+      "enabled": true,
+      "connected_at": null
+    },
+    "hubspot": {
+      "enabled": false,
+      "connected_at": null
+    },
+    "google_analytics": {
+      "enabled": false,
+      "property_id": null,
+      "connected_at": null
+    },
+    "meta_ads": {
+      "enabled": false,
+      "connected_at": null
+    },
+    "tiktok_ads": {
+      "enabled": false,
+      "connected_at": null
+    }
+  },
+  "contacts": {
+    "primary": {
+      "name": "Test Corp",
+      "email": "test@testcorp.com",
+      "phone": null
+    }
+  },
+  "voice_config": {
+    "persona": "UNIVERSAL_ECOMMERCE",
+    "language": "fr",
+    "theme": {
+      "primary_color": "#FF6B35",
+      "position": "bottom-right"
+    }
+  },
+  "billing": {
+    "stripe_customer_id": null,
+    "plan_started_at": null,
+    "monthly_revenue": 0
+  }
+}
