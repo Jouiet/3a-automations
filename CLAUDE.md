@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 116.0 | 27/01/2026 | Session 169 - Voice MENA v5.5.2 + LLM Darija Analysis
+> Version: 117.0 | 27/01/2026 | Session 169bis - Voice MENA v5.5.3 + Atlas-Chat 27B Benchmark
 
 ## Identité
 
@@ -8,11 +8,44 @@
 
 ---
 
-## SESSION 169 - VOICE MENA PLATFORM ANALYSIS v5.5.2 (27/01/2026)
+## SESSION 169bis - ATLAS-CHAT 27B BENCHMARK (27/01/2026)
 
-### Document: `docs/VOICE-MENA-PLATFORM-ANALYSIS.md` v5.5.2
+### Document: `docs/VOICE-MENA-PLATFORM-ANALYSIS.md` v5.5.3
 
-### Benchmark Concurrentiel Complet
+### Atlas-Chat 9B vs 27B Benchmark (Vérifié HuggingFace)
+
+| Benchmark | Atlas-Chat-9B | Atlas-Chat-27B | Delta |
+| :--- | :--- | :--- | :--- |
+| **DarijaMMLU** | 58.23% | **61.95%** | +3.72% |
+| **DarijaHellaSwag** | 43.65% | **48.37%** | +4.72% |
+| **vs Jais 13B** | +13% | +17% | - |
+
+### VRAM Requirements
+
+| Model | 4-bit | 8-bit | BF16 (Full) |
+| :--- | :--- | :--- | :--- |
+| **9B** | ~6GB | ~10GB | ~18GB |
+| **27B** | ~14GB | ~27GB | ~54GB |
+
+### Hosting Costs Comparatif
+
+| Model | Provider | COGS/min |
+| :--- | :--- | :--- |
+| **9B (Recommandé)** | Vast.ai RTX4090 | ~$0.005 |
+| **27B** | RunPod A100-80G | ~$0.02 |
+
+### Updates Status 2026
+
+⚠️ **FAIT:** Aucune release Atlas-Chat depuis Oct 2024. AtlasIA/MBZUAI travaillaient sur versions 2025, mais **0 annonce publique 2026**.
+
+### Recommandation
+
+- **Atlas-Chat-9B:** Voice real-time (latence prioritaire)
+- **Atlas-Chat-27B:** Tâches offline (résumés, analyses complexes)
+
+---
+
+### Benchmark Concurrentiel Complet (S169)
 
 | Concurrent | Latence | Darija | MENA DIDs | WhatsApp Voice | Pricing |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -31,30 +64,33 @@
 | **Documentation** | 0 pages techniques | Black box |
 | **API** | Non publique | Pas de self-service |
 
-### Analyse Partenariats LLM Darija
+### Analyse Partenariats LLM Darija (S169)
 
-| Option | Verdict | Raison |
-| :--- | :--- | :--- |
-| **Atlas-Chat-9B** | ✅ **GO** | Gemma license = commercial OK |
-| **AtlasIA** | ❌ **BLOCKED** | CC BY-NC = non-commercial only |
-| **Mistral via MoU Maroc** | ❌ **WISHFUL THINKING** | Government focus ≠ B2B PME |
-| **Mistral API standard** | ⚠️ **À TESTER** | Darija support non confirmé |
-
-### Stack LLM Darija Validé
-
-```
-Primary:   Grok-4-1-fast (testé OK)
-Fallback:  Atlas-Chat-9B (self-hosted, Gemma license)
-TTS:       ElevenLabs Ghizlane
-STT:       ElevenLabs Scribe Maghrebi
-```
-
-### Coût Hosting Atlas-Chat-9B
-
-| Provider | GPU | Coût/mois | COGS/min |
+| Option | Verdict | Raison | Use Case |
 | :--- | :--- | :--- | :--- |
-| RunPod | A100 40GB | ~$400 | ~$0.01 |
-| Vast.ai | RTX 4090 | ~$200 | ~$0.005 |
+| **Atlas-Chat-9B** | ✅ **GO** | Gemma license = commercial OK | Voice real-time |
+| **Atlas-Chat-27B** | ✅ **GO** | +3.72% DarijaMMLU vs 9B | Offline analytics |
+| **AtlasIA** | ❌ **BLOCKED** | CC BY-NC = non-commercial only | - |
+| **Mistral via MoU Maroc** | ❌ **WISHFUL THINKING** | Government focus ≠ B2B PME | - |
+| **Mistral API standard** | ⚠️ **À TESTER** | Darija support non confirmé | - |
+
+### Stack LLM Darija Validé (S169bis)
+
+```
+Primary:     Grok-4-1-fast (testé OK)
+Fallback 1:  Atlas-Chat-9B (voice real-time, Gemma license)
+Fallback 2:  Atlas-Chat-27B (offline analytics, +3.7% qualité)
+TTS:         ElevenLabs Ghizlane
+STT:         ElevenLabs Scribe Maghrebi
+```
+
+### Coût Hosting Atlas-Chat (S169bis)
+
+| Model | Provider | GPU | Coût/mois | COGS/min |
+| :--- | :--- | :--- | :--- | :--- |
+| **9B** | Vast.ai | RTX 4090 | ~$200 | ~$0.005 |
+| **9B** | RunPod | A100 40GB | ~$400 | ~$0.01 |
+| **27B** | RunPod | A100 80GB | ~$800 | ~$0.02 |
 
 ### Architecture Solution Complète 3A
 
