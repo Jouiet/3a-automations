@@ -24,13 +24,40 @@
 | **HITL Scripts** | **17** | `grep -l HITL *.cjs \| wc -l` | ✅ VÉRIFIÉ |
 | **Remotion Compositions** | **7** | `ls compositions/*.tsx` | ✅ VÉRIFIÉ |
 
-### MCP Servers (FAIT: 6 projet, 8 global)
+### MCP Servers (FAIT VÉRIFIÉ 27/01/2026)
 
-| Couche | Count | Servers (Vérifiés .mcp.json) |
+**Source Global:** `~/.claude/settings.json`
+**Source Projet:** `/Users/mac/Desktop/JO-AAA/.mcp.json`
+
+| Couche | Count | Servers | Source |
+|:---|:---|:---|:---|
+| **Global** | **5** | fal, n8n-mcp, grok-search-mcp, grok2-image, stitch | settings.json |
+| **Projet** | **6** | 3a-global-mcp, grok, google-sheets, klaviyo, shopify-dev, shopify-admin | .mcp.json |
+| **Overlap** | 1 | grok (présent dans les deux) | - |
+| **Total Unique** | **10** | | |
+
+**CORRECTION**: Le document affirmait 13 serveurs (8 global: chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail + 5 projet). Ces 8 serveurs globaux **N'EXISTENT PAS** dans les configs actuelles - ils ont probablement été supprimés ou jamais configurés.
+
+#### Détail Global (5 serveurs - ~/.claude/settings.json)
+
+| Server | Command | Description |
 |:---|:---|:---|
-| **Global** | 8 | chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail |
-| **Projet** | **6** | 3a-global-mcp, grok, google-sheets, klaviyo, shopify-dev, shopify-admin |
-| **Total** | **14** | |
+| **fal** | URL: docs.fal.ai/mcp | AI image/video generation |
+| **n8n-mcp** | npx n8n-mcp | Workflow automation (n8n.srv1168256.hstgr.cloud) |
+| **grok-search-mcp** | npx grok-search-mcp | Web search + AI reasoning |
+| **grok2-image** | npx grok2-image-mcp-server | Image generation via Grok |
+| **stitch** | npx @_davideast/stitch-mcp proxy | Google Stitch UI generation |
+
+#### Détail Projet (6 serveurs - .mcp.json)
+
+| Server | Command | Description |
+|:---|:---|:---|
+| **3a-global-mcp** | node automations/3a-global-mcp/build/index.js | 121 automations propriétaires, v1.5.0, SOTA 95% |
+| **grok** | npx grok-search-mcp@latest | Web search (duplicate global) |
+| **google-sheets** | npx google-sheets-mcp | Read/write spreadsheets |
+| **klaviyo** | uvx klaviyo-mcp-server@latest | Email flows, campaigns |
+| **shopify-dev** | npx @shopify/dev-mcp@latest | API docs, schema exploration |
+| **shopify-admin** | npx @ajackus/shopify-mcp-server | Products, orders, customers |
 
 ### 3A-Global-MCP (VÉRIFIÉ)
 
