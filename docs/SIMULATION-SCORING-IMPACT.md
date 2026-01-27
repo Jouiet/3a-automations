@@ -61,19 +61,23 @@ L'implémentation du "Closed Loop Attribution" (ClickID -> Voice Session -> CAPI
 
 ## 4. Scorecard Projetée (Avant vs Après)
 
-| Discipline | Score Actuel | Score Projeté | Delta | Impact Business |
-|:-----------|:------------:|:-------------:|:-----:|:----------------|
-| **RevEng** | 65/100 | **85/100** | 📈 +20 | Cash Flow +30% plus rapide. |
-| **MarEng** | 70/100 | **90/100** | 📈 +20 | ROAS +20% (Optimisation CAPI). |
-| **Global** | 67.5/100 | **87.5/100** | 🚀 HIGH | Statut "Production-Grade Stack". |
+| Discipline | Session 176 | Session 177 | Projeté Final | Impact Business |
+|:-----------|:------------:|:-------------:|:-------------:|:----------------|
+| **RevEng** | 65/100 | **75/100** | 85/100 | +10 réalisé, +10 restant |
+| **MarEng** | 70/100 | **78/100** | 90/100 | +8 réalisé, +12 restant |
+| **Global** | 67.5/100 | **77.5/100** | 87.5/100 | **+10 RÉALISÉ** |
 
-> **Correction Session 176quater:** Scores ajustés pour réalisme factuel. MarEng 80→70 (infra gap), projeté 95→90 (no multi-touch attribution).
+> **Session 177 (27/01/2026)**: Première implémentation. +10 points globaux.
+> **Ce qui manque pour 87.5**: Credentials META (CAPI actif), Stripe live, Multi-Touch Attribution.
 
 ---
 
 ## 5. Conclusion de la Simulation
 
-Si ces 3 points sont implémentés, **l'architecture technique dépasse le simple statut d'agence pour devenir une plateforme Technologique SOTA.**
+~~Si ces 3 points sont implémentés,~~ **2 des 3 points ont été implémentés (Session 177):**
+- ✅ Automated Billing: BillingAgent.cjs créé (draft invoices)
+- ✅ Attribution: fbclid/gclid passés dans voice-persona-injector
+- ⚠️ Feedback Loop Ads: Meta CAPI codé mais credentials manquants
 
 * **Le ROI est immédiat**: Réduire le DSO (Cash) et augmenter le ROAS (Marge) sont les deux leviers les plus puissants de la rentabilité.
 * **Recommendation**: C'est la priorité technique absolue après la stabilisation de la Latence Vocale.
