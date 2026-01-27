@@ -130,6 +130,78 @@ function updateGPM(pressure, metrics) {
     console.log(`   Campaigns (30d): ${metrics.campaigns.recent}`);
 }
 
+/**
+ * Multi-tenant execution with context injection
+ * @param {Object} context - Tenant execution context
+ * @returns {Promise<Object>} - Sensor result
+ */
+async function runWithContext(context) {
+    const { secrets, logger, tenantId } = context;
+
+    const apiKey = secrets.KLAVIYO_API_KEY || secrets.KLAVIYO_PRIVATE_API_KEY || secrets.KLAVIYO_ACCESS_TOKEN;
+
+    logger.info(`Running Klaviyo sensor for tenant ${tenantId}`);
+
+    if (!apiKey) {
+        logger.warn('Klaviyo API key missing');
+        return {
+            success: false,
+            error: 'Missing credentials',
+            metrics: null,
+            pressure: 95
+        };
+    }
+
+    try {
+        const metrics = await getEmailMetrics(apiKey);
+        const pressure = calculatePressure(metrics);
+
+        logger.info('Klaviyo health check complete', {
+            lists: metrics.lists.total,
+            flowsActive: metrics.flows.active,
+            campaigns: metrics.campaigns.recent,
+            pressure
+        });
+
+        return {
+            success: true,
+            tenantId,
+            metrics,
+            pressure,
+            timestamp: new Date().toISOString()
+        };
+    } catch (error) {
+        logger.error(`Klaviyo sensor failed: ${error.message}`);
+        return {
+            success: false,
+            error: error.message,
+            metrics: null,
+            pressure: 80
+        };
+    }
+}
+
+/**
+ * Legacy run function (backward compatibility)
+ */
+async function run(params = {}) {
+    const apiKey = process.env.KLAVIYO_API_KEY || process.env.KLAVIYO_PRIVATE_API_KEY;
+
+    if (!apiKey) {
+        return { success: false, error: 'Missing credentials' };
+    }
+
+    const metrics = await getEmailMetrics(apiKey);
+    const pressure = calculatePressure(metrics);
+
+    return {
+        success: true,
+        metrics,
+        pressure,
+        timestamp: new Date().toISOString()
+    };
+}
+
 async function healthCheck() {
     console.log('\n📧 Klaviyo Email Sensor - Health Check\n');
     console.log('═'.repeat(50));
@@ -187,4 +259,10 @@ async function main() {
     }
 }
 
-main();
+// Export for multi-tenant usage
+module.exports = { run, runWithContext };
+
+// CLI execution
+if (require.main === module) {
+    main();
+}

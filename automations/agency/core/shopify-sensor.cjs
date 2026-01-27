@@ -119,6 +119,81 @@ function updateGPM(pressure, metrics) {
     console.log(`   Orders Today: ${metrics.orders.today}, Unfulfilled: ${metrics.orders.unfulfilled}`);
 }
 
+/**
+ * Multi-tenant execution with context injection
+ * @param {Object} context - Tenant execution context
+ * @returns {Promise<Object>} - Sensor result
+ */
+async function runWithContext(context) {
+    const { secrets, logger, tenantId } = context;
+
+    const shop = secrets.SHOPIFY_STORE || secrets.SHOPIFY_STORE_DOMAIN;
+    const token = secrets.SHOPIFY_ACCESS_TOKEN || secrets.SHOPIFY_ADMIN_ACCESS_TOKEN;
+
+    logger.info(`Running Shopify sensor for tenant ${tenantId}`);
+
+    if (!shop || !token) {
+        logger.warn('Shopify credentials missing');
+        return {
+            success: false,
+            error: 'Missing credentials',
+            metrics: null,
+            pressure: 95
+        };
+    }
+
+    try {
+        const metrics = await getStoreHealth(shop, token);
+        const pressure = calculatePressure(metrics);
+
+        logger.info(`Shopify health check complete`, {
+            store: shop,
+            pressure,
+            products: metrics.products.active,
+            orders: metrics.orders.today
+        });
+
+        return {
+            success: true,
+            tenantId,
+            store: shop,
+            metrics,
+            pressure,
+            timestamp: new Date().toISOString()
+        };
+    } catch (error) {
+        logger.error(`Shopify sensor failed: ${error.message}`);
+        return {
+            success: false,
+            error: error.message,
+            metrics: null,
+            pressure: 80
+        };
+    }
+}
+
+/**
+ * Legacy run function (backward compatibility)
+ */
+async function run(params = {}) {
+    const shop = process.env.SHOPIFY_STORE || process.env.SHOPIFY_STORE_DOMAIN;
+    const token = process.env.SHOPIFY_ACCESS_TOKEN || process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+
+    if (!shop || !token) {
+        return { success: false, error: 'Missing credentials' };
+    }
+
+    const metrics = await getStoreHealth(shop, token);
+    const pressure = calculatePressure(metrics);
+
+    return {
+        success: true,
+        metrics,
+        pressure,
+        timestamp: new Date().toISOString()
+    };
+}
+
 async function main() {
     // Handle --health check - REAL API TEST (fixed Session 168quaterdecies)
     if (process.argv.includes('--health')) {
@@ -184,4 +259,10 @@ async function main() {
     }
 }
 
-main();
+// Export for multi-tenant usage
+module.exports = { run, runWithContext };
+
+// CLI execution
+if (require.main === module) {
+    main();
+}
