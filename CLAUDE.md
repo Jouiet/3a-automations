@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 125.0 | 27/01/2026 | Session 178quater | Engineering Score: 77/100
+> Version: 126.0 | 27/01/2026 | Session 178quater | Engineering Score: 65/100 (HONEST)
 
 ## Identité
 
@@ -8,21 +8,27 @@
 
 ---
 
-## Engineering Scores (Session 178quater - VERIFIED)
+## Engineering Scores (Session 178quater - BRUTALEMENT HONNÊTE)
 
-| Discipline | Previous | CURRENT | Change | Status |
+| Discipline | Max | Current | Gap | Blocker |
 |:---|:---:|:---:|:---:|:---|
-| **Voice Services** | 0/15 | **15/15** | +15 | ✅ 3/3 running |
-| **Sensors** | 7/19 | **14/19** | +7 | ✅ 74% operational |
-| **Integrations** | 5/15 | **5/15** | 0 | ⚠️ META/TIKTOK missing |
-| **Data Pipeline** | 2/15 | **2/15** | 0 | ⚠️ Low activity |
-| **Architecture** | 8/10 | **8/10** | 0 | ✅ Scripts operational |
-| **MCP Server** | 15/15 | **15/15** | 0 | ✅ 99/99 tests passed |
-| **GLOBAL** | **62/100** | **77/100** | **+15** | Voice services fixed |
+| **Voice Services** | 15 | **15** | 0 | ✅ 3/3 running, API FIXED |
+| **Sensors** | 20 | **15** | -5 | 14/19 OK, 4 need credentials |
+| **Integrations** | 15 | **5** | -10 | META/TIKTOK/STRIPE missing |
+| **Data Pipeline** | 15 | **2** | -13 | 0 produits, 0 commandes, 2 test leads |
+| **Architecture** | 10 | **8** | -2 | No event bus |
+| **Engineering** | 25 | **20** | -5 | MCP 99/99, HITL 18/18 |
+| **TOTAL** | **100** | **65** | **-35** | Credentials + Data = 0 |
 
-### Credential Score: 60% (6/9 modules valides)
-- ✅ Voice, E-commerce, Google, MCP, Communications (partial)
-- ❌ Telephony (TELNYX), Payments (STRIPE), Marketing (META)
+### Fixes This Session
+- ✅ Voice API `/respond` bug fixed (VOICE_CONFIG import)
+- ✅ Telephony Bridge syntax error fixed (Session 178ter)
+
+### What Code CAN'T Fix
+- ❌ 0 produits Shopify (business problem)
+- ❌ 0 commandes (business problem)
+- ❌ 0 flows Klaviyo (requires configuration)
+- ❌ Missing API keys (user action required)
 
 ---
 
