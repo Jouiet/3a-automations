@@ -39,6 +39,18 @@
 |:-----|:------------|
 | `732b0d3` | feat(agent-ops): SOTA optimization Session 178 |
 
+### ConversationLearner (KB Enrichment Loop)
+
+| Composant | Lignes | Statut |
+|:----------|:------:|:------:|
+| **ConversationLearner.cjs** | 458 | ✅ COMPLET |
+| **Learning Queue** (JSONL) | - | ✅ CRÉÉ |
+| **Pattern Extraction** (5 types) | - | ✅ FAIT |
+| **Human Validation API** | - | ⚠️ À CRÉER |
+| **Dashboard UI** | - | ⚠️ À CRÉER |
+
+**Architecture: Conversation → Patterns → Queue → Human Review → KB**
+
 ### Blockers Restants (Credentials)
 
 | Credential | Impact | Action Requise |
@@ -1476,5 +1488,44 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-**Document màj:** 27/01/2026 - Session 169bis (Voice MENA v5.5.3 + Atlas-Chat 27B)
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice MENA: v5.5.3** | **Atlas-Chat: 9B+27B GO**
+---
+
+## 🎯 PLAN ACTIONNABLE SESSION 179
+
+### P0 - CRITIQUE (Credentials)
+
+| # | Action | Impact | Effort |
+|:--|:-------|:-------|:-------|
+| 1 | **META_PIXEL_ID + META_ACCESS_TOKEN** | Meta CAPI actif | 30min |
+| 2 | **STRIPE_WEBHOOK_SECRET** | Webhook verify ON | 15min |
+| 3 | **TELNYX_API_KEY** | Telephony MENA | 30min |
+
+### P1 - HAUTE (Dashboard API)
+
+| # | Action | Endpoint | Effort |
+|:--|:-------|:---------|:-------|
+| 1 | Learning Queue API | `GET /api/learning/queue` | 2h |
+| 2 | Approve/Reject API | `POST /api/learning/:id/approve` | 1h |
+| 3 | Dashboard UI | React component | 4h |
+
+### P2 - MOYENNE (KB Enrichment)
+
+| # | Action | Fichier | Effort |
+|:--|:-------|:--------|:-------|
+| 1 | Connect approved facts → KB | `knowledge-base-services.cjs` | 2h |
+| 2 | KB versioning | `kb_versions/` | 1h |
+| 3 | Audit trail | `learning_audit.jsonl` | 1h |
+
+### Métriques Session 178
+
+| Métrique | Avant | Après | Delta |
+|:---------|:-----:|:-----:|:-----:|
+| Agent Ops modules | 5 | **6** | +1 |
+| Total lignes | 610 | **1385** | +775 |
+| Engineering Score | 77.5 | **81** | +3.5 |
+| SOTA features | 0 | **12** | +12 |
+
+---
+
+**Document màj:** 27/01/2026 - Session 178 (SOTA Optimization + ConversationLearner)
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice MENA: v5.5.3** | **Agent Ops: SOTA v2.0** | **ConversationLearner: ✅ Backend**
