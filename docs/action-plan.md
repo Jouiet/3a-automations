@@ -1552,7 +1552,7 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | 2 | **STRIPE_WEBHOOK_SECRET** | Webhook verify ON | 15min |
 | 3 | **TELNYX_API_KEY** | Telephony MENA | 30min |
 
-### P1 - HAUTE (Dashboard API) ✅ API DONE
+### P1 - HAUTE (Dashboard API) ✅ COMPLET
 
 | # | Action | Endpoint | Effort | Status |
 |:--|:-------|:---------|:-------|:-------|
@@ -1560,7 +1560,15 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | 2 | Approve/Reject API | `PATCH /api/learning/queue/[id]` | 1h | ✅ **DONE** |
 | 3 | Batch API | `POST /api/learning/batch` | 1h | ✅ **DONE** |
 | 4 | Stats API | `GET /api/learning/stats` | 30min | ✅ **DONE** |
-| 5 | Dashboard UI | React component | 4h | ⏳ PENDING |
+| 5 | Dashboard UI | React component | 4h | ✅ **DONE** (S179) |
+
+**Dashboard Features (S179):**
+- Page: `/admin/agent-ops/learning`
+- Stats cards (total, pending, approved, rejected, approval rate)
+- Filtres par status et type
+- Batch actions (approve/reject multiple)
+- Table with confidence bars, type badges
+- Responsive design with shadcn/ui components
 
 ### P2 - MOYENNE (KB Enrichment)
 

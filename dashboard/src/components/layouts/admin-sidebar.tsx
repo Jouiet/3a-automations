@@ -15,6 +15,11 @@ import {
   Mail,
   Calendar,
   FileText,
+  Cpu,
+  History,
+  ShieldCheck,
+  ChevronDown,
+  BrainCircuit,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -29,6 +34,17 @@ const navigation = [
     name: "Leads",
     href: "/admin/leads",
     icon: Users,
+  },
+  {
+    name: "Agent Ops",
+    href: "/admin/agent-ops",
+    icon: Cpu,
+    subItems: [
+      { name: "Telemetry", href: "/admin/agent-ops/telemetry", icon: Zap },
+      { name: "Context Box", href: "/admin/agent-ops/context", icon: History },
+      { name: "Error Science", href: "/admin/agent-ops/error-science", icon: ShieldCheck },
+      { name: "Learning Queue", href: "/admin/agent-ops/learning", icon: BrainCircuit },
+    ]
   },
   {
     name: "Automations",
@@ -68,6 +84,13 @@ const bottomNavigation = [
 export function AdminSidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<string[]>(["Agent Ops"]);
+
+  const toggleExpand = (name: string) => {
+    setExpandedItems(prev =>
+      prev.includes(name) ? prev.filter(i => i !== name) : [...prev, name]
+    );
+  };
 
   const handleLogout = async () => {
     try {
@@ -117,23 +140,70 @@ export function AdminSidebar() {
 
       {/* Navigation */}
       <nav className="flex flex-col h-[calc(100vh-4rem)] justify-between p-2">
-        <div className="space-y-1">
+        <div className="space-y-1 overflow-y-auto no-scrollbar">
           {navigation.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = pathname === item.href || (item.subItems?.some(s => pathname === s.href));
+            const isExpanded = expandedItems.includes(item.name);
+
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
-                  isActive
-                    ? "bg-primary/10 text-primary cyber-glow"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              <div key={item.name} className="space-y-1">
+                {item.subItems ? (
+                  <>
+                    <button
+                      onClick={() => !collapsed && toggleExpand(item.name)}
+                      className={cn(
+                        "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
+                        isActive
+                          ? "bg-primary/5 text-primary"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      )}
+                    >
+                      <div className="flex items-center gap-3">
+                        <item.icon className={cn("h-5 w-5 shrink-0", isActive && "text-primary")} />
+                        {!collapsed && <span>{item.name}</span>}
+                      </div>
+                      {!collapsed && (
+                        <ChevronDown className={cn("h-4 w-4 transition-transform", isExpanded && "rotate-180")} />
+                      )}
+                    </button>
+                    {!collapsed && isExpanded && (
+                      <div className="ml-4 space-y-1 border-l border-border/50 pl-2">
+                        {item.subItems.map((sub) => {
+                          const isSubActive = pathname === sub.href;
+                          return (
+                            <Link
+                              key={sub.name}
+                              href={sub.href}
+                              className={cn(
+                                "flex items-center gap-3 rounded-lg px-3 py-2 text-xs font-medium transition-all",
+                                isSubActive
+                                  ? "text-primary"
+                                  : "text-muted-foreground hover:text-foreground"
+                              )}
+                            >
+                              <sub.icon className={cn("h-4 w-4 shrink-0", isSubActive && "text-primary")} />
+                              <span>{sub.name}</span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
+                      isActive
+                        ? "bg-primary/10 text-primary cyber-glow"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    )}
+                  >
+                    <item.icon className={cn("h-5 w-5 shrink-0", isActive && "text-primary")} />
+                    {!collapsed && <span>{item.name}</span>}
+                  </Link>
                 )}
-              >
-                <item.icon className={cn("h-5 w-5 shrink-0", isActive && "text-primary")} />
-                {!collapsed && <span>{item.name}</span>}
-              </Link>
+              </div>
             );
           })}
         </div>
