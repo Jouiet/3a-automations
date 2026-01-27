@@ -471,10 +471,10 @@ const eventBus = new AgencyEventBus();
 
 // Pre-register standard Agent Ops integrations
 const registerAgentOpsIntegrations = () => {
-    // Integration with ContextBox
+    // Integration with ContextBox (lazy load to avoid circular dependency)
     try {
-        const ContextBox = require('./ContextBox.cjs');
         eventBus.subscribe('lead.qualified', async (event) => {
+            const ContextBox = require('./ContextBox.cjs');
             ContextBox.set(event.payload.sessionId, {
                 pillars: {
                     qualification: {
@@ -487,6 +487,7 @@ const registerAgentOpsIntegrations = () => {
         }, { name: 'ContextBox.leadQualified' });
 
         eventBus.subscribe('voice.session_end', async (event) => {
+            const ContextBox = require('./ContextBox.cjs');
             ContextBox.logEvent(event.payload.sessionId, 'VoiceAI', 'session_end', {
                 duration: event.payload.duration,
                 outcome: event.payload.outcome
@@ -496,14 +497,17 @@ const registerAgentOpsIntegrations = () => {
         console.log('[EventBus] ContextBox integration skipped:', e.message);
     }
 
-    // Integration with BillingAgent
+    // Integration with BillingAgent (lazy load to avoid circular dependency)
     try {
-        const { trackCost } = require('./BillingAgent.cjs');
         eventBus.subscribe('payment.completed', async (event) => {
-            await trackCost('revenue', event.payload.amount, event.tenantId, {
-                transactionId: event.payload.transactionId,
-                method: event.payload.method
-            });
+            // Lazy require to avoid circular dependency warning
+            const { trackCost } = require('./BillingAgent.cjs');
+            if (trackCost) {
+                await trackCost('revenue', event.payload.amount, event.tenantId, {
+                    transactionId: event.payload.transactionId,
+                    method: event.payload.method
+                });
+            }
         }, { name: 'BillingAgent.trackRevenue' });
     } catch (e) {
         console.log('[EventBus] BillingAgent integration skipped:', e.message);
