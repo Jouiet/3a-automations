@@ -70,3 +70,4 @@ tests/visual-diff/
 
 # Remotion build output
 automations/remotion-studio/build/
+.envrc

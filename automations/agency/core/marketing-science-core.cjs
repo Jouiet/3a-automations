@@ -176,6 +176,34 @@ Output JSON: { "score": <0-10>, "feedback": "concise critique", "issues": ["list
             return { score: 0, feedback: `Critique Failed: ${e.message}`, framework: framework.name };
         }
     }
+
+    /**
+     * Track a conversion event (Blueprint Analytics)
+     * @param {string} event Event name (e.g., 'call_started', 'booking_created')
+     * @param {object} data Event properties
+     */
+    static trackV2(event, data) {
+        const logEntry = {
+            timestamp: new Date().toISOString(),
+            event: event,
+            ...data
+        };
+
+        console.log(`[MarketingScience] TRACK: ${event}`, JSON.stringify(data));
+
+        // SOTA: Persist to structured log for dashboard ingestion
+        try {
+            const fs = require('fs');
+            const path = require('path');
+            const logDir = process.env.ANALYTICS_LOG_DIR || '/tmp';
+            if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+
+            const logFile = path.join(logDir, 'marketing_events.jsonl');
+            fs.appendFileSync(logFile, JSON.stringify(logEntry) + '\n');
+        } catch (e) {
+            console.error(`[MarketingScience] Track error: ${e.message}`);
+        }
+    }
 }
 
 module.exports = MarketingScience;

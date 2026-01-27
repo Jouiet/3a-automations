@@ -1,6 +1,6 @@
 # STRATÉGIE AI PROVIDERS - 3A AUTOMATION
 
-> **Version**: 1.1.0 | **Date**: 26/01/2026 | **Session**: 168duodecies
+> **Version**: 1.2.0 | **Date**: 27/01/2026 | **Session**: 170 (Atlas-Chat-9B Darija)
 > **Source**: Analyse comparative OpenAI vs Anthropic ecosystems + Audit interne
 > **Principe Fondamental**: "The Right Tool for the Right Purpose"
 
@@ -114,8 +114,9 @@ TÂCHES VOLUME (content, emails, traductions):
 
 TÂCHES REAL-TIME (voice, streaming):
 ├── Primary: xAI Grok (spécialisé real-time)
-├── Secondary: ElevenLabs
-└── Tertiary: Gemini Live
+├── Secondary: Atlas-Chat-9B (Darija ary only - Session 170)
+├── Tertiary: ElevenLabs
+└── Quaternary: Gemini Live
 
 DÉVELOPPEMENT (tooling, Claude Code):
 ├── Primary: Anthropic Claude Opus 4.5
@@ -385,11 +386,13 @@ Sous-message: "Exécution par systèmes AI autonomes"
 ## 8. RÉFÉRENCES
 
 ### Sources Externes
+
 - Menlo Ventures State of AI Report (Dec 2025)
 - a2aproject/A2A Protocol Specification v1.0
 - Anthropic Claude Code documentation
 
 ### Sources Internes
+
 - `docs/business-model.md` - Version 5.0
 - `docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md` - Version 3.4
 - `.claude/rules/scripts.md` - Fallback patterns

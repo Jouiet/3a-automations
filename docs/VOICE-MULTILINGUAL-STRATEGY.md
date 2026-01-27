@@ -1,7 +1,7 @@
 # VOICE MULTILINGUAL STRATEGY - 3A AUTOMATION
 
-> **Version:** 3.1.0 | **Date:** 27/01/2026 | **Session:** 168quaterdecies
-> **Statut:** COMPLET - Widget 5 Langues + Telephony Multilingue + **Services 3/3 HEALTHY**
+> **Version:** 3.2.0 | **Date:** 27/01/2026 | **Session:** 171 (Atlas-Chat-9B Integrated)
+> **Statut:** COMPLET - Widget 5 Langues + Telephony Multilingue + **Services 3/3 HEALTHY** + **Atlas-Chat-9B Fallback**
 
 ---
 
@@ -31,7 +31,7 @@
 | **Langues Telephony** | ✅ **FR, EN, ES, AR, ARY (5)** | 5 langues | **100% COMPLET** |
 | **TTS Darija** | ✅ **VALIDÉ** | ElevenLabs "Ghizlane" | 1.3s latence |
 | **STT Darija** | ✅ **VALIDÉ** | ElevenLabs Scribe v1 | 707ms latence |
-| **LLM Darija** | ✅ **VALIDÉ** | Grok-4-1-fast-reasoning | Génère Darija authentique |
+| **LLM Darija** | ✅ **VALIDÉ** | Grok-4-1 + **Atlas-Chat-9B fallback** | Génère Darija authentique (Session 170-171) |
 | **Espagnol** | ✅ **DONE** | Web Speech API | Widget + JSON |
 | **Arabe MSA** | ✅ **DONE** | Web Speech API (RTL) | Widget + JSON |
 | **Darija (ARY)** | ✅ **DONE** | voice-ary.json | Widget + JSON (RTL) |
@@ -88,6 +88,7 @@ voice-assistant/
 | Telephony Bridge | 3009 | ✅ HEALTHY | 3ms | - |
 
 **Commande de démarrage:**
+
 ```bash
 node automations/agency/core/voice-api-resilient.cjs &
 node automations/agency/core/grok-voice-realtime-proxy.cjs &
@@ -95,6 +96,7 @@ node automations/agency/core/voice-telephony-bridge.cjs &
 ```
 
 **Vérification santé:**
+
 ```bash
 node automations/agency/core/voice-quality-sensor.cjs --health
 ```
@@ -327,11 +329,11 @@ ElevenLabs supporte Model Context Protocol (MCP):
 
 | Modèle | Provider | Darija Support | Params | API | Recommandation |
 |--------|----------|----------------|--------|-----|----------------|
-| **[Mistral Saba](https://mistral.ai/news/mistral-saba)** | Mistral AI | ⭐⭐⭐⭐ Officiel | 24B | ✅ API | **RECOMMANDÉ** |
-| [Atlas-Chat-9B](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-2B) | MBZUAI | ⭐⭐⭐⭐ Spécialisé | 9B | ✅ HF | Alternative |
+| **[Mistral Saba](https://mistral.ai/news/mistral-saba)** | Mistral AI | ⭐⭐⭐⭐ Officiel | 24B | ✅ API | À tester |
+| **[Atlas-Chat-9B](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B)** | MBZUAI | ⭐⭐⭐⭐ Spécialisé | 9B | ✅ HF | **✅ INTÉGRÉ Session 170-171** |
 | [Atlas-Chat-2B](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-2B) | MBZUAI | ⭐⭐⭐ | 2B | ✅ HF | Edge/Mobile |
 | [DarijaBERT](https://huggingface.co/SI2M-Lab/DarijaBERT) | SI2M-Lab | ⭐⭐⭐ NLU | BERT | ✅ HF | Classification |
-| Grok-4 | xAI | ⭐⭐ Auto-detect | ❓ | ✅ API | Non testé Darija |
+| Grok-4 | xAI | ⭐⭐⭐ Testé | ❓ | ✅ API | **✅ PRIMARY + Atlas fallback** |
 | GPT-4o | OpenAI | ⭐⭐ Générique | ❓ | ✅ API | Non spécialisé |
 
 ### 4.4 Partenariat Mistral × Maroc (Annoncé Janvier 2026)

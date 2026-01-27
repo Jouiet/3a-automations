@@ -93,6 +93,16 @@ const PROVIDERS = {
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY,
   },
+  atlasChat: {
+    name: 'Atlas-Chat-9B (Darija)',
+    // Atlas-Chat-9B: Morocco's first Darija LLM (MBZUAI-Paris, Oct 2024)
+    // Session 170: Added for Voice MENA Darija fallback
+    // DarijaMMLU: 58.23% (+13% vs Jais-13B)
+    url: 'https://api-inference.huggingface.co/models/MBZUAI-Paris/Atlas-Chat-9B',
+    apiKey: ENV.HUGGINGFACE_API_KEY,
+    enabled: !!ENV.HUGGINGFACE_API_KEY,
+    darijaOnly: true, // Used as priority fallback for language='ary'
+  },
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -329,6 +339,44 @@ async function callOpenAI(userMessage, conversationHistory = [], customSystemPro
   const parsed = safeJsonParse(response.data, 'OpenAI voice response');
   if (!parsed.success) throw new Error(`OpenAI JSON parse failed: ${parsed.error}`);
   return parsed.data.choices[0].message.content;
+}
+
+// Session 170: Atlas-Chat-9B for Darija (Moroccan Arabic) - HuggingFace Inference API
+async function callAtlasChat(userMessage, conversationHistory = [], customSystemPrompt = null) {
+  if (!PROVIDERS.atlasChat?.enabled) {
+    throw new Error('HuggingFace API key not configured for Atlas-Chat');
+  }
+
+  // Build prompt in chat format for Atlas-Chat instruction-tuned model
+  const systemPrompt = customSystemPrompt || SYSTEM_PROMPT;
+  const contextMessages = conversationHistory.map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join('\n');
+  const fullPrompt = `<s>[INST] ${systemPrompt}\n\n${contextMessages ? contextMessages + '\n\n' : ''}User: ${userMessage} [/INST]`;
+
+  const body = JSON.stringify({
+    inputs: fullPrompt,
+    parameters: {
+      max_new_tokens: 500,
+      temperature: 0.7,
+      do_sample: true,
+      return_full_text: false
+    }
+  });
+
+  const response = await httpRequest(PROVIDERS.atlasChat.url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${PROVIDERS.atlasChat.apiKey}`,
+    }
+  }, body);
+
+  const parsed = safeJsonParse(response.data, 'Atlas-Chat Darija response');
+  if (!parsed.success) throw new Error(`Atlas-Chat JSON parse failed: ${parsed.error}`);
+
+  // HuggingFace Inference API returns array of generated texts
+  const result = Array.isArray(parsed.data) ? parsed.data[0]?.generated_text : parsed.data?.generated_text;
+  if (!result) throw new Error('Atlas-Chat returned empty response');
+  return result.trim();
 }
 
 async function callGemini(userMessage, conversationHistory = [], customSystemPrompt = null) {
@@ -842,8 +890,12 @@ async function getResilisentResponse(userMessage, conversationHistory = [], sess
   // 3. Dynamic Prompt Construction
   const fullSystemPrompt = `${SYSTEM_PROMPT}\n\nRELEVANT_SYSTEMS (RLS Isolated):\n${ragContext}${graphContext}${toolContext}${crmContext}\n\nTENANT_ID: ${tenantId}`;
 
-  // Fallback order: Grok → OpenAI → Gemini → Anthropic → Local
-  const providerOrder = ['grok', 'openai', 'gemini', 'anthropic'];
+  // Fallback order: Grok → [Atlas-Chat for Darija] → OpenAI → Gemini → Anthropic → Local
+  // Session 170: Language-aware chain - Atlas-Chat-9B prioritized for Darija (ary)
+  const baseOrder = ['grok', 'openai', 'gemini', 'anthropic'];
+  const providerOrder = language === 'ary' && PROVIDERS.atlasChat?.enabled
+    ? ['grok', 'atlasChat', 'openai', 'gemini', 'anthropic']
+    : baseOrder;
 
   for (const providerKey of providerOrder) {
     const provider = PROVIDERS[providerKey];
@@ -862,6 +914,7 @@ async function getResilisentResponse(userMessage, conversationHistory = [], sess
 
       switch (providerKey) {
         case 'grok': response = await callGrok(userMessage, conversationHistory, fullSystemPrompt); break;
+        case 'atlasChat': response = await callAtlasChat(userMessage, conversationHistory, fullSystemPrompt); break;
         case 'openai': response = await callOpenAI(userMessage, conversationHistory, fullSystemPrompt); break;
         case 'gemini': response = await callGemini(userMessage, conversationHistory, fullSystemPrompt); break;
         case 'anthropic': response = await callAnthropic(userMessage, conversationHistory, fullSystemPrompt); break;

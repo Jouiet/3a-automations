@@ -75,7 +75,7 @@ const CONFIG = {
     type: 'server_vad',
     threshold: 0.5,
     prefixPaddingMs: 300,
-    silenceDurationMs: 200,
+    silenceDurationMs: 400, // SOTA Optimization: 400ms (was 200ms - too aggressive)
   },
 };
 
@@ -181,24 +181,24 @@ class GeminiTTSFallback extends EventEmitter {
       clearTimeout(timeoutId);
       const data = await response.json();
 
-    if (data.error) {
-      throw new Error(`Gemini TTS error: ${data.error.message}`);
-    }
+      if (data.error) {
+        throw new Error(`Gemini TTS error: ${data.error.message}`);
+      }
 
-    const audioData = data.candidates?.[0]?.content?.parts?.[0]?.inlineData;
-    if (!audioData) {
-      throw new Error('Gemini TTS: No audio in response');
-    }
+      const audioData = data.candidates?.[0]?.content?.parts?.[0]?.inlineData;
+      if (!audioData) {
+        throw new Error('Gemini TTS: No audio in response');
+      }
 
-    // Update stats
-    this.stats.requestCount++;
-    this.stats.totalChars += text.length;
-    this.stats.totalAudioBytes += Buffer.from(audioData.data, 'base64').length;
+      // Update stats
+      this.stats.requestCount++;
+      this.stats.totalChars += text.length;
+      this.stats.totalAudioBytes += Buffer.from(audioData.data, 'base64').length;
 
-    return {
-      audio: audioData.data,           // Base64 PCM16 24kHz
-      mimeType: audioData.mimeType,    // audio/L16;codec=pcm;rate=24000
-    };
+      return {
+        audio: audioData.data,           // Base64 PCM16 24kHz
+        mimeType: audioData.mimeType,    // audio/L16;codec=pcm;rate=24000
+      };
     } catch (error) {
       clearTimeout(timeoutId);
       if (error.name === 'AbortError') {

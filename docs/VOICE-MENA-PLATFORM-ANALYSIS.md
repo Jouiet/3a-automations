@@ -1,5 +1,6 @@
 # Analyse Stratégique: Plateforme Voice AI MENA
-> Version: 5.5.3 | 27/01/2026 | DÉCISION: ✅ **GO** - Multi-Canal + Atlas-Chat 9B/27B + Plan d'Action
+>
+> Version: 5.5.6 | 27/01/2026 | DÉCISION: ✅ **GO** - Multi-Canal + SOTA LATENCY OPTIMIZED (Session 174)
 
 ## Executive Summary
 
@@ -31,6 +32,7 @@
 > **Audit providers v5.4:** Telephony MENA **POSSIBLE** via Telnyx ($1/mois DID), Freezvon ($90/mois mobile), WhatsApp Business Calling API (inbound GRATUIT).
 
 **Décision:** ✅ **GO MULTI-CANAL**
+
 - **Canal 1:** Web Widget (91% marge) - 11/11 pays MENA
 - **Canal 2:** WhatsApp Voice (84% marge) - Contourne blocage VoIP UAE/KSA/Qatar
 - **Canal 3:** PSTN Morocco (63% marge) - Appels téléphoniques traditionnels
@@ -99,12 +101,14 @@
 | **Documentation** | ❌ Minimale | ✅ Extensive | **3A** |
 
 **VERDICT SAWT IA:**
+
 - ✅ **Force:** Premier entrant Darija (Nov 2025), crédibilité locale, voix naturelles
 - ❌ **Faiblesse:** Pricing opaque, pas d'API publique, focus Enterprise (banques/admin), pas d'e-commerce
 - ⚠️ **Menace:** Peuvent signer les grands comptes (banques, administrations) avant nous
 - 🎯 **Notre stratégie:** Éviter confrontation directe sur Enterprise, dominer PME + E-commerce
 
 **Sources vérifiées:**
+
 - [7news.ma - Lancement SAWT IA](https://en.7news.ma/sensei-prod-unveils-sawt-ia-the-first-voice-ai-in-moroccan-arabic/)
 - [Le Matin - Assistant vocal Darija](https://lematin.ma/economie/sawt-ia-lassistant-vocal-marocain-en-darija-et-ia/316133)
 - [LNT - Technologie vocale marocaine](https://lnt.ma/casablanca-sensei-prod-devoile-sawt-ia-premiere-technologie-vocale-marocaine-maitrisant-la-darija-native/)
@@ -130,6 +134,7 @@
 | **HITL** | ❌ Non documenté | ✅ 18/18 scripts avec approval | **3A** |
 
 **RED FLAGS SAWT IA:**
+
 | Indicateur | Observation | Implication |
 |------------|-------------|-------------|
 | **Équipe ML** | 1 développeur mentionné (source: 7news) | Pas de capacité ML réelle |
@@ -140,6 +145,7 @@
 | **Claim "ML in-house"** | Aucune preuve | Marketing BS probable |
 
 **Stack PROBABLE SAWT IA (hypothèse réaliste):**
+
 ```
 LLM: GPT-4 ou Claude (API)
 TTS: ElevenLabs (voix custom/clonée pour Darija)
@@ -151,6 +157,7 @@ Différenciation: Prompts fine-tunés + voix Darija custom
 > 💡 **Notre avantage:** Stack 3A est **100% transparent et documenté**. SAWT IA est une **black box** avec claims non vérifiables.
 
 **Stack Technique 3A (Vérifié dans le code):**
+
 ```
 voice-api-resilient.cjs     (1,298 lignes) - API multi-provider
 voice-telephony-bridge.cjs  (2,570 lignes) - PSTN bridge
@@ -162,6 +169,7 @@ TOTAL: 6,546 lignes de code production
 ```
 
 **Latences Mesurées 3A (Session 166ter):**
+
 | Composant | Provider | Latence | Status |
 |-----------|----------|---------|--------|
 | TTS Darija | ElevenLabs Ghizlane | **1.3s** | ✅ Testé |
@@ -172,6 +180,7 @@ TOTAL: 6,546 lignes de code production
 **Latences SAWT IA:** ❌ Non documentées publiquement
 
 **Qualité Darija:**
+
 | Aspect | SAWT IA | 3A Voice |
 |--------|---------|----------|
 | Naturalité TTS | "Impossible à distinguer d'humain" (claim) | Ghizlane communautaire (testé OK) |
@@ -269,18 +278,21 @@ TOTAL: 6,546 lignes de code production
 #### 2.3.2 Analyse Détaillée par Concurrent
 
 **🇸🇦 Sawt (Arabie Saoudite) - Partnership Strategy**
+
 - **Approche:** Partenariat officiel avec STC (T2 - anciennement Solutions by stc)
 - **Avantage:** Numéros +966 natifs, intégration profonde call centers
 - **Limitation:** KSA uniquement, expansion lente
 - **Source:** [Sawt LinkedIn](https://www.linkedin.com/company/sawt-ai/)
 
 **🇦🇪 Maqsam (MENA) - Proprietary Infrastructure**
+
 - **Approche:** Infrastructure SIP propriétaire multi-pays
 - **Avantage:** Contrôle total, DIDs multi-pays
 - **Limitation:** Investissement capital élevé
 - **Source:** [Maqsam](https://maqsam.com/)
 
 **🇬🇧 Kalimna AI (UK → GCC) - Twilio-Based**
+
 - **Approche:** Stack basé Twilio pour outbound, WebRTC pour widget
 - **Avantage:** Time-to-market rapide, API mature
 - **Limitation:** Gap Maroc (pas de Twilio inbound), coûts élevés MENA
@@ -288,6 +300,7 @@ TOTAL: 6,546 lignes de code production
 - **Source:** [Kalimna AI](https://kalimna.ai/)
 
 **🇺🇸 Retell AI / Vapi / Bland AI - Global Platforms**
+
 - **Approche:** Providers internationaux (Twilio, Telnyx, Vonage)
 - **Avantage:** Déploiement global, documentation extensive
 - **Limitation:** Gaps MENA (pas de DIDs locaux Maroc, KSA), pas de support Darija
@@ -357,6 +370,7 @@ TOTAL: 6,546 lignes de code production
 | **Freezvon** | ⚠️ Portail | Manuel (bulk possible) | [Freezvon Portal](https://freezvon.com/) |
 
 **Exemple Telnyx Provisioning:**
+
 ```bash
 curl -X POST https://api.telnyx.com/v2/number_orders \
   -H "Authorization: Bearer $TELNYX_API_KEY" \
@@ -404,6 +418,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **UAE/KSA/Qatar** | Sawt (KSA only) | ❌ VoIP bloqué | ✅ **WhatsApp contourne** |
 
 > ✅ **AVANTAGE COMPÉTITIF MAJEUR:** 3A est le SEUL à offrir:
+>
 > 1. **WhatsApp Business Calling** pour UAE/KSA/Qatar (contourne blocages VoIP)
 > 2. **Numéro de téléphone INCLUS** dans l'offre (pas juste API)
 > 3. **Darija native** avec stack testé et validé
@@ -437,6 +452,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **Jais** | Jais-13B/30B | 13-30B | LLM arabe UAE | Gratuit (OSS) | 🟡 MSA surtout |
 
 **Recommandation LLM:**
+
 - Production: **Grok** (testé OK, latence optimale)
 - Fallback: **Mistral Saba** (natif arabe, coût bas)
 - Budget: **Atlas-Chat-9B** (gratuit, qualité à valider)
@@ -454,6 +470,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **Web Speech API** | Browser native | Arabe | 0.2s | Gratuit | 🟡 Qualité variable |
 
 **Recommandation TTS:**
+
 - Production: **ElevenLabs Ghizlane** (testé OK, naturel)
 - Open-source: **DarijaTTS** (HuggingFace, gratuit)
 - Fallback: **Web Speech API** (browser, gratuit)
@@ -470,6 +487,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **Web Speech API** | Browser native | Arabe | Real-time | ~20% | Gratuit | 🟡 Qualité variable |
 
 **Recommandation STT:**
+
 - Production: **ElevenLabs Scribe** (Maghrebi support, testé OK)
 - Open-source: **DVoice** (SpeechBrain, gratuit)
 - Fallback: **Whisper** (OpenAI, universel)
@@ -912,6 +930,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Patients (35-65 ans, classe moyenne+) |
 
 **Use cases Voice AI:**
+
 - Prise de RDV automatisée 24/7
 - Rappels de RDV (réduction no-show 40%)
 - Triage urgences vs non-urgences
@@ -929,6 +948,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Touristes (FR 30%, EU 25%, US 10%, Maroc 20%, Autres 15%) |
 
 **Use cases Voice AI:**
+
 - Réservations directes (économie OTA 15-25%)
 - Concierge 24/7 multilingue
 - Upsell services (spa, excursions)
@@ -946,6 +966,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Acheteurs (30-55 ans, classe moyenne-haute) |
 
 **Use cases Voice AI:**
+
 - Qualification leads 24/7 (budget, zone, type)
 - Prise de RDV visites
 - Suivi automatique prospects
@@ -963,6 +984,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Acheteurs (25-55 ans, 62% occasion, 38% neuf) |
 
 **Use cases Voice AI:**
+
 - Qualification (budget, modèle, financement)
 - RDV essais routiers
 - SAV (RDV entretien, rappels révision)
@@ -980,6 +1002,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Clients locaux + touristes |
 
 **Use cases Voice AI:**
+
 - Réservations tables
 - Commandes à emporter/livraison
 - Horaires et menu vocal
@@ -997,6 +1020,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Clients finaux des donneurs d'ordre (EU, US) |
 
 **Use cases Voice AI:**
+
 - Triage L0/L1 automatique (30-50% volume)
 - Augmentation agents humains
 - Qualification leads outbound
@@ -1014,6 +1038,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Consommateurs Maroc (80% COD) |
 
 **Use cases Voice AI:**
+
 - Statut commande/livraison
 - Retours et réclamations
 - Recommandations produits
@@ -1031,6 +1056,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Femmes 18-55 ans (70%), Hommes (30%) |
 
 **Use cases Voice AI:**
+
 - Prise de RDV 24/7
 - Rappels automatiques (réduction no-show 40-60%)
 - Upsell services (soins, produits)
@@ -1048,6 +1074,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | Touristes (60%), Locaux aisés (40%) |
 
 **Use cases Voice AI:**
+
 - Réservations multilingues (FR/EN/AR)
 - Packages et promotions
 - Upsell soins premium
@@ -1065,6 +1092,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **End-customers** | 18-45 ans, classe moyenne-haute urbaine |
 
 **Use cases Voice AI:**
+
 - Informations abonnements/tarifs
 - RDV personal training
 - Rappels renouvellement
@@ -1088,6 +1116,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 **Légende ICE:** Impact × Confiance × Effort (10=faible effort=mieux)
 
 **Justification Priorité P1 pour Salons:**
+
 - 23,000+ établissements = volume massif
 - Pain point clair = no-shows (15-25%)
 - Effort faible = intégration simple (agenda + rappels)
@@ -1103,6 +1132,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **SOM (Obtainable Y3)** | 1,000 clients × €350 ARPU × 12 | **€4.2M/an** |
 
 **Hypothèses:**
+
 - "Voice-ready" = entreprise avec >500 appels/mois + digitalisation moyenne
 - 50,000 = ~7% des 750,000 PME
 - Churn 5%/mois, NRR 105%
@@ -1518,6 +1548,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 #### 6.3.6 LTV/CAC Analysis (CORRIGÉ)
 
 **Hypothèses RÉVISÉES (audit code source v5.1):**
+
 - ARPU: 499 MAD/mois (~$50)
 - Churn mensuel SMB: 5% ([Benchmark 2025](https://www.vitally.io/post/saas-churn-benchmarks))
 - Durée vie client: 1/0.05 = 20 mois
@@ -1534,6 +1565,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 > ✅ **Ratio 4.5:1 > 3:1 benchmark.** Économie unitaire **EXCELLENTE** avec stack implémenté.
 
 **Scénario Premium (marge 40%):**
+
 - LTV net: $400
 - Ratio: $400 / $200 = **2:1** ⚠️ (marginal, nécessite optimisation)
 
@@ -1551,6 +1583,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **TOTAL Fixe** | **$1,060** | - |
 
 **Break-even (CORRIGÉ avec marge 91%):**
+
 - Marge contribution/client: $50 × 91% = **$45.50**
 - Clients break-even: $1,060 / $45.50 = **23 clients**
 - Timeline: **M3** si acquisition 10 clients/mois
@@ -1617,6 +1650,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 ##### Combinaison Optimale par Use Case
 
 **USE CASE 1: Widget Web PME (ACTUEL) - ✅ OPTIMAL**
+
 ```
 Stack: Grok + Web Speech + WebRTC
 COGS: $0.007/min | Marge: 91% @ $0.08
@@ -1624,6 +1658,7 @@ VERDICT: NE PAS CHANGER - déjà optimal
 ```
 
 **USE CASE 2: Premium Darija - À ACTIVER**
+
 ```
 Stack: Mistral Saba + ElevenLabs Ghizlane + Scribe + WebRTC
 COGS: $0.098/min | Marge: 51% @ $0.20
@@ -1631,6 +1666,7 @@ ACTION: 4h dev pour activer ElevenLabs (credential existe)
 ```
 
 **USE CASE 3: Telephony PSTN Maroc - À VALIDER**
+
 ```
 Stack: Grok + Grok Realtime + AVOXI/CommPeak/VoIPSense
 COGS: ~$0.050/min | Marge: 50% @ $0.10
@@ -1742,6 +1778,7 @@ BLOCKERS:
 ## 8. ANALYSE SWOT ACTUALISÉE
 
 ### Forces (Strengths)
+
 - ✅ Stack technique complet et testé (6,546 lignes)
 - ✅ Darija validé empiriquement (TTS 1.3s, STT 707ms)
 - ✅ Multi-tenant architecture opérationnelle
@@ -1752,11 +1789,13 @@ BLOCKERS:
 - ✅ Expérience CinematicAds (spin-off réussi)
 
 ### Faiblesses (Weaknesses)
+
 - 🟡 Pas de présence physique Maroc (solvable: remote)
 - 🟡 Pas de références clients locaux (solvable: beta)
 - 🟡 Compliance PDPL à valider (en cours)
 
 ### Opportunités (Opportunities)
+
 - 🚀 Marché CCaaS ME: 12.9% CAGR
 - 🚀 Digital Morocco 2030
 - 🚀 +130,000 jobs BPO d'ici 2030
@@ -1765,6 +1804,7 @@ BLOCKERS:
 - 🚀 99.4% PME au Maroc = marché massif
 
 ### Menaces (Threats)
+
 - ⚠️ SAWT IA actif au Maroc (mais focus différent)
 - ⚠️ Sawt Saudi bien financé (mais pas Maroc)
 - ⚠️ Grands players peuvent entrer (mais lents)
@@ -1814,6 +1854,7 @@ BLOCKERS:
 **100% INTERNE - PAS DE PARTENARIAT**
 
 Raisons:
+
 - Contrôle total roadmap produit
 - Marges maximisées (pas de revenue share)
 - IP propriétaire complète
@@ -1863,6 +1904,7 @@ Raisons:
 ## 11. SOURCES
 
 ### Marché
+
 - [Statista - Morocco E-commerce](https://www.statista.com/outlook/emo/ecommerce/morocco)
 - [Fortune Business Insights - ME CCaaS](https://www.fortunebusinessinsights.com/middle-east-contact-center-as-a-service-market-109039)
 - [Mordor Intelligence - Voice Recognition](https://www.globenewswire.com/news-release/2026/01/26/3225814/0/en/Voice-Recognition-Market-Growing-at-22-38-CAGR-to-2031)
@@ -1870,6 +1912,7 @@ Raisons:
 - [DataReportal - Digital Morocco](https://datareportal.com/digital-in-morocco)
 
 ### Concurrence
+
 - [7news.ma - SAWT IA Launch](https://en.7news.ma/sensei-prod-unveils-sawt-ia-the-first-voice-ai-in-moroccan-arabic/)
 - [Le Matin - SAWT IA](https://lematin.ma/economie/sawt-ia-lassistant-vocal-marocain-en-darija-et-ia/316133)
 - [MenaBytes - Sawt Funding](https://www.menabytes.com/sawt-pre-seed/)
@@ -1878,28 +1921,33 @@ Raisons:
 - [Qatar Business Digest - Kalimna AI](https://www.qatarbusinessdigest.com/article/863281556-first-arabic-native-ai-voice-platform-launches-across-gulf-region)
 
 ### BPO/Call Centers
+
 - [Outsource Accelerator - Morocco BPO](https://www.outsourceaccelerator.com/guide/bpo-companies-morocco/)
 - [TDS Global - Morocco Call Centers](https://www.tdsgs.com/call-center-outsourcing/morocco)
 - [Morocco Government - BPO Target](https://news.outsourceaccelerator.com/moroccos-new-offshoring-offer/)
 
 ### PME Maroc
+
 - [BIS IFC - Morocco MSME](https://www.bis.org/ifc/publ/ifcb47j.pdf)
 - [Bank Al-Maghrib - SME Observatory](https://www.bkam.ma/en/Press-releases/Press-releases/2021/The-moroccan-smes-observatory-publishes-its-annual-report)
 - [BusinessBeat24 - New Businesses 2025](https://businessbeat24.com/moroccos-entrepreneurial-momentum-thousands-of-new-firms-launched-in-2025/)
 
 ### Pricing Voice AI
+
 - [CloudTalk - Voice AI Cost](https://www.cloudtalk.io/blog/how-much-does-voice-ai-cost/)
 - [Aircall - AI Voice Agent Cost](https://aircall.io/blog/best-practices/ai-voice-agent-cost/)
 - [Synthflow - Voice AI Cost](https://synthflow.ai/blog/voice-ai-cost)
 - [Retell AI - Pricing Comparison](https://www.retellai.com/resources/voice-ai-platform-pricing-comparison-2025)
 
 ### Darija Technology
+
 - [IEEE - DARIJA-C Corpus](https://ieeexplore.ieee.org/document/10085164/)
 - [HuggingFace - DVoice Darija ASR](https://huggingface.co/speechbrain/asr-wav2vec2-dvoice-darija)
 - [HuggingFace - DarijaTTS](https://huggingface.co/spaces/medmac01/Darija-Arabic-TTS)
 - [Al Akhawayn University - Darija TTS](https://cdn.aui.ma/sse-capstone-repository/pdf/spring-2025/ahmedamarak99863_4312_3933594_Capstone_Final_Report_predefense_SIGNED.pdf)
 
 ### Unit Economics & Infrastructure (CORRIGÉ - Audit Forensique v4.0)
+
 - [Retell AI - Voice AI Platform Pricing Comparison 2025](https://www.retellai.com/resources/voice-ai-platform-pricing-comparison-2025)
 - [xAI - Grok Models and Pricing](https://docs.x.ai/docs/models)
 - [ElevenLabs - API Pricing](https://elevenlabs.io/pricing/api)
@@ -1912,6 +1960,7 @@ Raisons:
 - [DIDWW - Morocco SIP Trunking](https://www.didww.com/voice/global-sip-trunking/Morocco)
 
 ### Telephony Providers MENA (AJOUTÉ v5.4)
+
 - [Telnyx - Morocco Phone Numbers](https://telnyx.com/phone-numbers/morocco) - **$1/mois DID**
 - [Freezvon - Morocco Virtual Numbers](https://freezvon.com/virtual-number/morocco) - **$90/mois mobile, $0/min inbound**
 - [AVOXI - Morocco Virtual Phone Numbers](https://www.avoxi.com/morocco-virtual-phone-numbers/) - **~$8/mois local**
@@ -1920,31 +1969,35 @@ Raisons:
 - [DID Logic - UAE SIP](https://didlogic.com/international/emirates/) - **$0.15/min UAE**
 
 ### WhatsApp Business Calling API (AJOUTÉ v5.4)
+
 - [Respond.io - WhatsApp Business Calling API](https://respond.io/whatsapp-business-calling-api) - **Inbound GRATUIT, Global Juillet 2025**
 - [Twilio - WhatsApp Business Calling](https://www.twilio.com/en-us/voice/whatsapp-business-calling) - **Documentation intégration**
 - [Infobip - WhatsApp Business Calling Guide](https://www.infobip.com/blog/whatsapp-business-calling-api-guide) - **MENA supporté**
 - [WhatsApp Business Platform](https://business.whatsapp.com/products/business-platform) - **API officielle**
 
 ### SaaS Benchmarks
+
 - [Vitally - B2B SaaS Churn Benchmarks 2025](https://www.vitally.io/post/saas-churn-benchmarks)
 - [First Page Sage - B2B SaaS CAC Report 2025](https://firstpagesage.com/reports/b2b-saas-customer-acquisition-cost-2024-report/)
 - [Vena - SaaS Churn Rate Benchmarks](https://www.venasolutions.com/blog/saas-churn-rate)
 - [Pavilion - B2B SaaS Performance Benchmarks 2025](https://www.joinpavilion.com/resource/b2b-saas-performance-benchmarks)
 
 ### Compliance PDPL
+
 - [Chambers - Data Protection Morocco 2025](https://practiceguides.chambers.com/practice-guides/data-protection-privacy-2025/morocco)
 - [VOID.ma - CNDP Compliance Guide](https://void.ma/en/guides/conformite-cndp-donnees-personnelles/)
 - [DGSSI - Law 09-08](https://www.dgssi.gov.ma/en/loi-09-08-relative-la-protection-des-personnes-physiques-legard-du-traitement-des)
 
 ### Call Center Benchmarks
+
 - [Zendesk - Average Handle Time](https://www.zendesk.com/blog/average-handle-time/)
 - [Calabrio - AHT Best Practices](https://www.calabrio.com/wfo/quality-management/average-handle-time/)
 
 ---
 
 **Document créé:** 27/01/2026
-**Dernière màj:** 27/01/2026 - Analyse LLM Darija Partenariats v5.5.2
-**Version:** 5.5.2 (Multi-Canal + Atlas-Chat Fallback + Plan d'Action)
+**Dernière màj:** 27/01/2026 - Session 171: Atlas-Chat-9B Voice-API + Telephony v5.5.5
+**Version:** 5.5.5 (Multi-Canal + Atlas-Chat-9B Integrated in voice-api-resilient + voice-telephony-bridge)
 **Auteur:** Claude Opus 4.5 (3A Automation)
 **Classification:** Stratégie Business - Confidentiel
 **Décision:** ✅ **GO MULTI-CANAL + SOLUTION COMPLÈTE** - Web Widget (91%) + WhatsApp Voice (84%) + PSTN Morocco (63%)
@@ -1957,7 +2010,7 @@ Raisons:
 
 | # | Action | Owner | Deadline | Status |
 |---|--------|-------|----------|--------|
-| 1 | Deploy Atlas-Chat-9B sur RunPod/Vast.ai | Dev | J+3 | ⏳ TODO |
+| 1 | ~~Deploy Atlas-Chat-9B sur RunPod/Vast.ai~~ **Intégré via HuggingFace Inference API** | Dev | Session 170 | ✅ **DONE** |
 | 2 | Tester Mistral Saba API pour Darija | Dev | J+2 | ⏳ TODO |
 | 3 | Provisioning premier DID Telnyx +212 | Ops | J+1 | ⏳ TODO |
 | 4 | Intégrer WhatsApp Business Calling API | Dev | J+7 | ⏳ TODO |
@@ -2001,6 +2054,7 @@ Raisons:
 ### Historique des Corrections
 
 #### v5.5.2 (27/01/2026) - Analyse LLM Darija Partenariats + Plan d'Action
+
 | Ajout | Détail | Impact |
 |-------|--------|--------|
 | **Atlas-Chat-9B** | Fallback Darija validé (Gemma license) | Résilience stack |
@@ -2010,12 +2064,14 @@ Raisons:
 | **Plan d'action** | 10 actions priorisées P0/P1/P2 | Exécution |
 
 #### v5.5.1 (27/01/2026) - Benchmark Technique + RED FLAGS SAWT IA
+
 | Ajout | Détail | Impact |
 |-------|--------|--------|
 | **RED FLAGS SAWT IA** | "ML in-house" claim peu crédible | Réalisme concurrentiel |
 | **Benchmark Global** | Vapi 500ms, Retell 800ms, 3A 2.5s | Latence à optimiser |
 
 #### v5.5 (27/01/2026) - Analyse Concurrentielle + Architecture Solution Complète + Benchmark Technique
+
 | Ajout | Détail | Impact |
 |-------|--------|--------|
 | **Stratégies Telephony Concurrents** | Sawt (STC), Maqsam (propre), Kalimna (Twilio), Retell/Vapi (global) | Compréhension marché |
@@ -2030,6 +2086,7 @@ Raisons:
 | **Limitations MENA concurrents** | Pas Darija, pas DIDs, VoIP bloqué | Gap critique identifié |
 
 #### v5.4 (27/01/2026) - Solutions Telephony MENA VÉRIFIÉES
+
 | Découverte | Impact | Source Vérifiée |
 |------------|--------|-----------------|
 | **Telnyx Morocco DIDs** | $1/mois, inbound disponible | telnyx.com |
@@ -2039,6 +2096,7 @@ Raisons:
 | **PSTN Morocco VIABLE** | COGS $0.044/min, marge 63% | Calculé |
 
 #### v5.3 (27/01/2026) - Synchronisation incohérences
+
 | Correction | Lignes | Valeur |
 |------------|--------|--------|
 | COGS → $0.007 | 1328, 1337, 1363 | Était $0.017 |
@@ -2046,11 +2104,13 @@ Raisons:
 | Marge → 91% | 1365 | Était 83% |
 
 #### v5.2 (27/01/2026) - Analyse MENA complète
+
 | Pays analysés | Détail |
 |---------------|--------|
 | 11 pays MENA | Morocco, UAE, KSA, Egypt, Qatar, Kuwait, Bahrain, Oman, Jordan, Tunisia, Algeria |
 
 #### v5.0 (27/01/2026) - Audit Exhaustif
+
 | Ajout | Providers vérifiés | Source |
 |-------|-------------------|--------|
 | **LLM complet** | Grok, Claude, Mistral Saba, Atlas-Chat, Gemini | APIs officielles |
@@ -2060,6 +2120,7 @@ Raisons:
 | **Benchmark** | Retell AI, Vapi, Bland AI | Public pricing |
 
 #### v4.0 (27/01/2026) - Corrections initiales
+
 | Erreur v3.1 | Correction | Impact |
 |-------------|------------|--------|
 | STT $0.10/min | **$0.007/min** | 14x surestimé |
@@ -2113,6 +2174,7 @@ Raisons:
 | **Telnyx Global** | [telnyx.com/global-coverage](https://telnyx.com/global-coverage) |
 
 #### v5.2 (27/01/2026) - Analyse MENA Complète
+
 | Ajout | Contenu | Impact |
 |-------|---------|--------|
 | **11 pays MENA** | UAE, KSA, Egypt, Qatar, Kuwait, Bahrain, Oman, Jordan, Tunisia, Algeria, Morocco | Couverture exhaustive |

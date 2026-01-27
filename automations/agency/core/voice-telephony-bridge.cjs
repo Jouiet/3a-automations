@@ -110,6 +110,15 @@ const CONFIG = {
     realtimeUrl: 'wss://api.x.ai/v1/realtime'
   },
 
+  // Atlas-Chat-9B (Session 170: Darija LLM fallback via HuggingFace)
+  atlasChat: {
+    apiKey: process.env.HUGGINGFACE_API_KEY,
+    model: 'MBZUAI-Paris/Atlas-Chat-9B',
+    url: 'https://api-inference.huggingface.co/models/MBZUAI-Paris/Atlas-Chat-9B',
+    enabled: !!process.env.HUGGINGFACE_API_KEY,
+    darijaOnly: true  // Used only for 'ary' language fallback
+  },
+
   // Google Apps Script (booking)
   booking: {
     scriptUrl: process.env.GOOGLE_APPS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbw9JP0YCJV47HL5zahXHweJgjEfNsyiFYFKZXGFUTS9c3SKrmRZdJEg0tcWnvA-P2Jl/exec'
@@ -596,7 +605,7 @@ async function createGrokSession(callInfo) {
             type: 'server_vad',
             threshold: 0.5,
             prefix_padding_ms: 300,
-            silence_duration_ms: 700 // Slightly longer for natural pauses
+            silence_duration_ms: 400 // SOTA Optimization: 400ms for snappier conversational flow (was 700ms)
           },
           // PHASE 1: THE DIRECTOR - Dynamic Persona Injection
           // Default instruction placeholder (will be overridden by Injector)
@@ -1583,15 +1592,8 @@ function logConversionEvent(session, eventType, data) {
   // Log to console in structured format
   console.log(`[CONVERSION] ${JSON.stringify(logEntry)}`);
 
-  // In production, this would send to analytics service (Mixpanel, Amplitude, etc.)
-  // For now, we append to a log file
-  try {
-    const fs = require('fs');
-    const logFile = process.env.CONVERSION_LOG_FILE || '/tmp/voice-conversion-analytics.jsonl';
-    fs.appendFileSync(logFile, JSON.stringify(logEntry) + '\n');
-  } catch (e) {
-    // Ignore file write errors in non-production
-  }
+  // SOTA Optimization: Use Centralized Marketing Science Analytics
+  MarketingScience.trackV2(eventType, logEntry);
 }
 
 // ============================================
@@ -1610,7 +1612,8 @@ function generateTwiML(streamUrl, lang = CONFIG.defaultLanguage) {
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say voice="alice" language="${twimlLang}">${message}</Say>
+  <!-- SOTA Optimization: Instant Connect -->
+  <!-- <Say voice="alice" language="${twimlLang}">${message}</Say> -->
   <Connect>
     <Stream url="${streamUrl}">
       <Parameter name="codec" value="mulaw"/>
@@ -2445,6 +2448,53 @@ async function checkHealth() {
   }
 
   console.log('');
+}
+
+// ============================================
+// ATLAS-CHAT-9B DARIJA FALLBACK (Session 174)
+// ============================================
+
+async function callAtlasChat(messages) {
+  if (!CONFIG.atlasChat.enabled) return null;
+
+  console.log('[Atlas-Chat] Calling 9B model for Darija fallback...');
+  try {
+    const formattedInput = messages.map(m => {
+      // Format adaptation for Mistral/Atlas style [INST]
+      if (m.role === 'user') return `[INST] ${m.content} [/INST]`;
+      return m.content;
+    }).join('\n');
+
+    const response = await fetch(CONFIG.atlasChat.url, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${CONFIG.atlasChat.apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        inputs: formattedInput,
+        parameters: {
+          max_new_tokens: 150,
+          temperature: 0.7,
+          return_full_text: false
+        }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HuggingFace API error: ${response.status}`);
+    }
+
+    const result = await response.json();
+    // HuggingFace text-generation output is array
+    const text = Array.isArray(result) ? result[0].generated_text : result.generated_text;
+
+    console.log('[Atlas-Chat] Response received');
+    return text.trim();
+  } catch (error) {
+    console.error(`[Atlas-Chat] Error: ${error.message}`);
+    return null;
+  }
 }
 
 // ============================================

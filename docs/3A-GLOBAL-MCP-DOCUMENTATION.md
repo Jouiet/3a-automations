@@ -1,8 +1,8 @@
 # 3A-GLOBAL-MCP - Documentation Forensique Complète
 
-> **Version:** 1.5.0 | **Date:** 26/01/2026 | **Session:** 168decies
+> **Version:** 1.5.1 | **Date:** 27/01/2026 | **Session:** 173
 > **Status:** OPERATIONAL | **Tools:** 124 | **Resources:** 3 | **Prompts:** 3 | **SDK:** @modelcontextprotocol/sdk v1.25.3
-> **SOTA Score:** 95% | **Transport:** STDIO + HTTP | **Auth:** Bearer Token | **Features:** Full stack
+> **SOTA Score:** 95% | **Transport:** STDIO + HTTP | **Auth:** Bearer Token | **Features:** Full stack + Resources/Prompts Verified
 
 ---
 
@@ -171,13 +171,13 @@ const logger = {
 
 ### 4.1 Tableau Comparatif SOTA vs Actuel
 
-| Feature MCP | Spec 2025-06-18 | 3a-global-mcp | Gap |
-|-------------|-----------------|---------------|-----|
-| **Tools** | ✅ Required | ✅ 124 tools | ✅ OK |
-| **Resources** | ✅ Optional | ❌ NOT IMPL | 🔴 CRITIQUE |
-| **Prompts** | ✅ Optional | ❌ NOT IMPL | 🔴 CRITIQUE |
-| **Sampling** | ✅ Optional | ❌ NOT IMPL | 🟡 MEDIUM |
-| **Elicitation** | ✅ Optional | ❌ NOT IMPL | 🟡 MEDIUM |
+|Feature MCP|Spec 2025-06-18|3a-global-mcp|Gap|
+|---|---|---|---|
+|**Tools**|✅ Required|✅ 124 tools|✅ OK|
+|**Resources**|✅ Optional|✅ **IMPLÉMENTÉ** (3)|✅ OK (Session 173)|
+|**Prompts**|✅ Optional|✅ **IMPLÉMENTÉ** (3)|✅ OK (Session 173)|
+|**Sampling**|✅ Optional|❌ NOT IMPL|🟡 MEDIUM|
+|**Elicitation**|✅ Optional|❌ NOT IMPL|🟡 MEDIUM|
 | **Logging** | ✅ Optional | ⚠️ Partiel | 🟢 LOW |
 | **Progress** | ✅ Optional | ❌ NOT IMPL | 🟡 MEDIUM |
 | **Cancellation** | ✅ Optional | ❌ NOT IMPL | 🟡 MEDIUM |
@@ -188,27 +188,29 @@ const logger = {
 
 ### 4.2 Lacunes Critiques Détaillées
 
-#### 4.2.1 Resources - NON IMPLÉMENTÉ
+#### 4.2.1 Resources - ✅ IMPLÉMENTÉ (Session 173)
 
 **Définition MCP:** Context passif injecté dans le LLM.
 
-**Use Cases manquants:**
-- Injecter `client_registry.json` comme contexte
-- Exposer Knowledge Base chunks comme resources
-- Fournir documentation inline aux tools
+**Implémentation:**
 
-**Impact:** LLM ne peut pas accéder aux données sans appeler un tool.
+- `3a://registry/automations`: Catalogue complet (121 entrées)
+- `3a://registry/clients`: Configurations multi-tenant
+- `3a://sensors/pressure-matrix`: Données temps réel
 
-#### 4.2.2 Prompts - NON IMPLÉMENTÉ
+**Vérification:** `verify-resources.js` passed (6/6 tests).
+
+#### 4.2.2 Prompts - ✅ IMPLÉMENTÉ (Session 173)
 
 **Définition MCP:** Templates paramétrés pour interactions.
 
-**Use Cases manquants:**
-- Template "Analyse Churn Client X"
-- Template "Rapport Performance Campagne"
-- Workflows guidés multi-étapes
+**Implémentation:**
 
-**Impact:** Pas de prompts réutilisables = répétition manuelle.
+- `client_health_report`: Rapport client complet
+- `campaign_analysis`: Analyse performance marketing
+- `automation_audit`: Audit santé automations
+
+**Vérification:** `verify-resources.js` passed (6/6 tests).
 
 #### 4.2.3 OAuth 2.1 - NON IMPLÉMENTÉ
 
@@ -237,6 +239,7 @@ if (name === "chain_tools") {
 ```
 
 **Status:** `chain_tools` exécute réellement les scripts en séquence avec:
+
 - Timeout 60s par tool
 - Support `stopOnError` pour arrêter la chaîne
 - Output tronqué à 1000 chars pour sécurité
@@ -283,6 +286,7 @@ Source: [github/github-mcp-server](https://github.com/github/github-mcp-server)
 Source: [sparesparrow/mcp-prompts](https://github.com/sparesparrow/mcp-prompts)
 
 Features SOTA:
+
 - Multiple storage backends (memory, file, DynamoDB, S3)
 - Template system avec variables
 - Versioning des prompts
@@ -293,6 +297,7 @@ Features SOTA:
 Source: [ibproduct/ib-mcp-cache-server](https://mcp.so/server/ibproduct_ib-mcp-cache-server/MCP-Mirror)
 
 Performance benchmarks:
+
 - Cache hit: 15.71ms
 - API call: 648.84ms
 - **Speedup: 41.31x**
@@ -401,6 +406,7 @@ Actuel:
 ```
 
 **Breaking Changes à gérer:**
+
 - Import paths modifiés
 - Transport API changes
 - Capability negotiation updates
@@ -651,6 +657,13 @@ verify-core.js: 83 tests
 ├── Handshake: 1
 ├── List Tools: 1
 └── Tool Calls: 81
+
+verify-resources.js: 6 tests (Added Session 173)
+├── Handshake: 1
+├── List Resources: 1
+├── Read Resource: 2
+├── List Prompts: 1
+└── Get Prompt: 1
 ```
 
 ---

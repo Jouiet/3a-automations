@@ -16,6 +16,7 @@
 
 const CLIENT_REGISTRY = require('./client_registry.json');
 const FINANCIAL_CONFIG = require('./agency-financial-config.cjs');
+const MarketingScience = require('./marketing-science-core.cjs');
 
 // Session 166sexies - Multilingual Support Configuration
 const VOICE_CONFIG = {
@@ -574,6 +575,18 @@ class VoicePersonaInjector {
         let finalInstructions = basePrompt;
         if (persona.name) {
             finalInstructions = finalInstructions.replace(/3A Automation Sales|Cabinet Dentaire Lumière|Universal E-commerce Support/g, persona.name);
+        }
+
+        // 3b. SOTA BLUEPRINT: Marketing Psychology Injection
+        // Enhanced Acquisition & Conversion through Proven Frameworks
+        if (archetypeKey === 'AGENCY' || archetypeKey === 'CONTRACTOR' || archetypeKey === 'RECRUITER') {
+            finalInstructions = MarketingScience.inject('BANT', finalInstructions);
+        } else if (archetypeKey === 'COLLECTOR') {
+            finalInstructions = MarketingScience.inject('PAS', finalInstructions); // Pain-Agitate-Solution for debt
+        } else if (archetypeKey === 'HOA' || archetypeKey === 'GOVERNOR' || archetypeKey === 'HEALER') {
+            finalInstructions = MarketingScience.inject('CIALDINI', finalInstructions); // Authority & Liking
+        } else if (archetypeKey === 'UNIVERSAL_ECOMMERCE') {
+            finalInstructions = MarketingScience.inject('AIDA', finalInstructions); // Attention-Interest-Desire-Action
         }
 
         // 4. Create enriched metadata
