@@ -19,8 +19,9 @@ const FINANCIAL_CONFIG = require('./agency-financial-config.cjs');
 const MarketingScience = require('./marketing-science-core.cjs');
 
 // Session 166sexies - Multilingual Support Configuration
+// Session 178: Restored full 5-language support per Ultrathink audit
 const VOICE_CONFIG = {
-    supportedLanguages: ['fr', 'en', 'es', 'ar', 'ary'],
+    supportedLanguages: ['fr', 'en', 'es', 'ar', 'ary'], // FR, EN, ES, AR, Darija
     defaultLanguage: process.env.VOICE_DEFAULT_LANGUAGE || 'fr'
 };
 
@@ -577,6 +578,15 @@ class VoicePersonaInjector {
             finalInstructions = finalInstructions.replace(/3A Automation Sales|Cabinet Dentaire Lumière|Universal E-commerce Support/g, persona.name);
         }
 
+        // 3a. SOTA BLUEPRINT: Context Injection (Attribution + Session)
+        // Session 177: Passing marketing signals from ContextBox (if available)
+        const ContextBox = require('./ContextBox.cjs');
+        const context = ContextBox.get(persona.id);
+        if (context.pillars?.attribution) {
+            const attr = context.pillars.attribution;
+            finalInstructions += `\n\n--- MARKETING CONTEXT ---\n- Source: ${attr.utm_source || 'direct'}\n- Campaign: ${attr.utm_campaign || 'none'}\n- GCLID: ${attr.gclid || 'none'}\n- FBCLID: ${attr.fbclid || 'none'}\n------------------------\n`;
+        }
+        // Enhanced Acquisition & Conversion through Proven Frameworks
         // 3b. SOTA BLUEPRINT: Marketing Psychology Injection
         // Enhanced Acquisition & Conversion through Proven Frameworks
         if (archetypeKey === 'AGENCY' || archetypeKey === 'CONTRACTOR' || archetypeKey === 'RECRUITER') {
@@ -635,4 +645,4 @@ class VoicePersonaInjector {
     }
 }
 
-module.exports = { VoicePersonaInjector, PERSONAS };
+module.exports = { VoicePersonaInjector, PERSONAS, VOICE_CONFIG };

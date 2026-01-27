@@ -33,7 +33,9 @@ const {
 const KB_MOD = require('./knowledge-base-services.cjs');
 const ECOM_MOD = require('./voice-ecommerce-tools.cjs');
 const CRM_MOD = require('./voice-crm-tools.cjs');
-const { VoicePersonaInjector } = require('./voice-persona-injector.cjs');
+const { VoicePersonaInjector, VOICE_CONFIG } = require('./voice-persona-injector.cjs');
+// Session 178: SOTA - ContextBox integration for persistent session state
+const ContextBox = require('./ContextBox.cjs');
 // Security constants
 const MAX_BODY_SIZE = 1024 * 1024; // 1MB limit
 const CORS_WHITELIST = [
@@ -168,9 +170,18 @@ const QUALIFICATION = {
   }
 };
 
-// Lead session storage (bounded)
+// Lead session storage - Session 178: SOTA - ContextBox integration
+// Legacy in-memory map kept for hot cache, synced to ContextBox for persistence
 const leadSessions = new Map();
 const MAX_SESSIONS = 5000;
+
+// Session 178: Latency telemetry
+const latencyMetrics = {
+  lastProvider: null,
+  lastLatencyMs: 0,
+  avgLatencyMs: 0,
+  callCount: 0
+};
 
 // Initialize Cognitive Modules
 const KB = new KB_MOD.ServiceKnowledgeBase();
@@ -178,24 +189,112 @@ KB.load();
 const ECOM_TOOLS = ECOM_MOD; // voice-ecommerce-tools.cjs exports an instance
 const CRM_TOOLS = CRM_MOD; // voice-crm-tools.cjs exports an instance
 
+/**
+ * Session 178: SOTA - Get or create lead session with ContextBox persistence
+ * Hot path: Check in-memory first, fallback to ContextBox
+ */
 function getOrCreateLeadSession(sessionId) {
-  if (!leadSessions.has(sessionId)) {
-    if (leadSessions.size >= MAX_SESSIONS) {
-      // Remove oldest
-      const firstKey = leadSessions.keys().next().value;
-      leadSessions.delete(firstKey);
-    }
-    leadSessions.set(sessionId, {
+  // Hot cache check
+  if (leadSessions.has(sessionId)) {
+    return leadSessions.get(sessionId);
+  }
+
+  // Check ContextBox for persisted session
+  const contextId = `voice-${sessionId}`;
+  const context = ContextBox.get(contextId);
+
+  // If context exists and has voice data, restore it
+  if (context.pillars?.qualification?.voiceSession) {
+    const session = {
       id: sessionId,
-      createdAt: Date.now(),
-      messages: [],
-      extractedData: {},
-      score: 0,
-      qualificationComplete: false
+      createdAt: new Date(context.created_at).getTime(),
+      messages: context.pillars.history.filter(h => h.agent === 'VoiceAI').map(h => ({
+        role: h.role || 'user',
+        content: h.content || h.summary || ''
+      })),
+      extractedData: context.pillars.qualification,
+      score: context.pillars.qualification.score || 0,
+      qualificationComplete: context.pillars.qualification.complete || false
+    };
+    leadSessions.set(sessionId, session);
+    return session;
+  }
+
+  // Bounded cache management
+  if (leadSessions.size >= MAX_SESSIONS) {
+    const firstKey = leadSessions.keys().next().value;
+    leadSessions.delete(firstKey);
+  }
+
+  // Create new session
+  const session = {
+    id: sessionId,
+    createdAt: Date.now(),
+    messages: [],
+    extractedData: {},
+    score: 0,
+    qualificationComplete: false
+  };
+
+  leadSessions.set(sessionId, session);
+
+  // Persist to ContextBox
+  ContextBox.set(contextId, {
+    pillars: {
+      qualification: { voiceSession: true, score: 0, complete: false }
+    }
+  });
+
+  return session;
+}
+
+/**
+ * Session 178: SOTA - Persist lead session to ContextBox
+ * Called after significant updates (message received, score changed)
+ */
+function persistLeadSession(sessionId, session) {
+  const contextId = `voice-${sessionId}`;
+
+  ContextBox.set(contextId, {
+    pillars: {
+      qualification: {
+        voiceSession: true,
+        score: session.score,
+        complete: session.qualificationComplete,
+        ...session.extractedData
+      }
+    }
+  });
+
+  // Log voice message to history
+  if (session.messages.length > 0) {
+    const lastMsg = session.messages[session.messages.length - 1];
+    ContextBox.logEvent(contextId, 'VoiceAI', 'MESSAGE', {
+      role: lastMsg.role,
+      content: lastMsg.content?.substring(0, 200) // Truncate for storage
     });
   }
-  return leadSessions.get(sessionId);
 }
+
+/**
+ * Session 178: SOTA - Record latency metrics
+ */
+function recordLatency(provider, latencyMs) {
+  latencyMetrics.lastProvider = provider;
+  latencyMetrics.lastLatencyMs = latencyMs;
+  latencyMetrics.callCount++;
+  latencyMetrics.avgLatencyMs = Math.round(
+    (latencyMetrics.avgLatencyMs * (latencyMetrics.callCount - 1) + latencyMs) / latencyMetrics.callCount
+  );
+
+  // Log if latency exceeds threshold (800ms = SOTA target)
+  if (latencyMs > 800) {
+    console.warn(`[Voice][LATENCY] ${provider}: ${latencyMs}ms (exceeds 800ms target)`);
+  } else {
+    console.log(`[Voice][LATENCY] ${provider}: ${latencyMs}ms ✓`);
+  }
+}
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SYSTEM PROMPT - 3A Automation Voice Assistant
@@ -956,6 +1055,9 @@ async function getResilisentResponse(userMessage, conversationHistory = [], sess
 
     try {
       let response;
+      // Session 178: SOTA - Latency tracking
+      const startTime = Date.now();
+
       // We pass the fullSystemPrompt instead of the static one
       const historyWithSystem = [
         { role: 'system', content: fullSystemPrompt },
@@ -970,10 +1072,15 @@ async function getResilisentResponse(userMessage, conversationHistory = [], sess
         case 'anthropic': response = await callAnthropic(userMessage, conversationHistory, fullSystemPrompt); break;
       }
 
+      // Session 178: Record latency
+      const latencyMs = Date.now() - startTime;
+      recordLatency(provider.name, latencyMs);
+
       return {
         success: true,
         response,
         provider: provider.name,
+        latencyMs, // Session 178: SOTA - Include latency in response
         fallbacksUsed: errors.length,
         errors,
       };
