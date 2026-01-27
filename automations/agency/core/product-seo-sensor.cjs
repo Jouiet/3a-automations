@@ -66,6 +66,47 @@ function updateGPM(pressure, stats) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const shop = process.env.SHOPIFY_SHOP || process.env.SHOPIFY_STORE || process.env.SHOPIFY_STORE_DOMAIN;
+        const token = process.env.SHOPIFY_ACCESS_TOKEN || process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+
+        const health = {
+            status: 'checking',
+            sensor: 'product-seo-sensor',
+            version: '1.1.0',
+            credentials: {
+                SHOPIFY_STORE: shop ? 'set' : 'missing',
+                SHOPIFY_ACCESS_TOKEN: token ? 'set' : 'missing'
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            metrics: ['product_count', 'poor_seo_ratio'],
+            timestamp: new Date().toISOString()
+        };
+
+        if (!shop || !token) {
+            health.status = 'error';
+            health.error = !shop ? 'SHOPIFY_STORE not set' : 'SHOPIFY_ACCESS_TOKEN not set';
+        } else {
+            try {
+                const products = await fetchShopifyProducts(shop, token);
+                health.status = 'ok';
+                health.api_test = 'passed';
+                health.products_count = products.length;
+                health.store = shop;
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message.split('\n')[0];
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+        return;
+    }
+
     try {
         const shop = process.env.SHOPIFY_SHOP || process.env.SHOPIFY_STORE || process.env.SHOPIFY_STORE_DOMAIN;
         const token = process.env.SHOPIFY_ACCESS_TOKEN || process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;

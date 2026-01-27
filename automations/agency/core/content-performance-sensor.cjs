@@ -164,14 +164,15 @@ function updateGPM(pressure, metrics) {
 }
 
 async function main() {
-    // Handle --health check
+    // Handle --health check - REAL API TEST (fixed Session 168quaterdecies)
     if (process.argv.includes('--health')) {
         const wpSiteUrl = process.env.WP_SITE_URL || process.env.WORDPRESS_URL;
         const wpAppPassword = process.env.WP_APP_PASSWORD || process.env.WORDPRESS_APP_PASSWORD;
+
         const health = {
-            status: wpSiteUrl ? 'ok' : 'warning',
+            status: 'checking',
             sensor: 'content-performance-sensor',
-            version: '1.0.0',
+            version: '1.1.0',
             credentials: {
                 WP_SITE_URL: wpSiteUrl ? 'set' : 'missing',
                 WP_APP_PASSWORD: wpAppPassword ? 'set' : 'missing'
@@ -179,8 +180,39 @@ async function main() {
             metrics: ['posts', 'pages', 'comments', 'media'],
             timestamp: new Date().toISOString()
         };
+
+        // REAL API TEST
+        if (!wpSiteUrl) {
+            health.status = 'error';
+            health.error = 'WP_SITE_URL not set';
+        } else {
+            try {
+                const baseUrl = wpSiteUrl.replace(/\/$/, '');
+                const response = await httpRequest(`${baseUrl}/wp-json/wp/v2/posts?per_page=1`);
+
+                if (response.status === 200) {
+                    health.status = 'ok';
+                    health.api_test = 'passed';
+                    health.wordpress_accessible = true;
+                } else if (response.status === 401) {
+                    health.status = 'degraded';
+                    health.api_test = 'auth_required';
+                    health.wordpress_accessible = true;
+                    health.note = 'WordPress accessible but auth needed for full access';
+                } else {
+                    health.status = 'error';
+                    health.api_test = 'failed';
+                    health.http_status = response.status;
+                }
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message;
+            }
+        }
+
         console.log(JSON.stringify(health, null, 2));
-        process.exit(0);
+        process.exit(health.status === 'ok' ? 0 : (health.status === 'degraded' ? 0 : 1));
     }
 
     const wpSiteUrl = process.env.WP_SITE_URL || process.env.WORDPRESS_URL;

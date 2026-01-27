@@ -87,17 +87,19 @@ function updateGPM(sensorData) {
 }
 
 async function main() {
-    // Handle --health check
+    // Handle --health check - REAL API TEST (fixed Session 168quaterdecies)
     if (process.argv.includes('--health')) {
         const propertyId = process.env.GA4_PROPERTY_ID || '467652758';
         const credentials = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
         const health = {
-            status: credentials ? 'ok' : 'error',
+            status: 'checking',
             sensor: 'ga4-sensor',
-            version: '1.0.0',
+            version: '1.1.0',
             credentials: {
                 GA4_PROPERTY_ID: propertyId ? 'set' : 'missing',
-                GOOGLE_APPLICATION_CREDENTIALS: credentials ? 'set' : 'missing'
+                GOOGLE_APPLICATION_CREDENTIALS: credentials ? 'set' : 'missing',
+                credential_file_exists: credentials ? fs.existsSync(credentials) : false
             },
             property_id: propertyId,
             gpm_path: GPM_PATH,
@@ -105,6 +107,32 @@ async function main() {
             metrics: ['sessions', 'conversions', 'totalRevenue', 'advertiserAdCost'],
             timestamp: new Date().toISOString()
         };
+
+        // REAL API TEST - not just env var check
+        if (!credentials) {
+            health.status = 'error';
+            health.error = 'GOOGLE_APPLICATION_CREDENTIALS not set';
+        } else if (!fs.existsSync(credentials)) {
+            health.status = 'error';
+            health.error = `Credential file not found: ${credentials}`;
+        } else {
+            try {
+                const client = new BetaAnalyticsDataClient();
+                const [response] = await client.runReport({
+                    property: `properties/${propertyId}`,
+                    dateRanges: [{ startDate: '1daysAgo', endDate: 'today' }],
+                    metrics: [{ name: 'activeUsers' }]
+                });
+                health.status = 'ok';
+                health.api_test = 'passed';
+                health.active_users_24h = response.rows?.[0]?.metricValues?.[0]?.value || '0';
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message.split('\n')[0];
+            }
+        }
+
         console.log(JSON.stringify(health, null, 2));
         process.exit(health.status === 'ok' ? 0 : 1);
     }

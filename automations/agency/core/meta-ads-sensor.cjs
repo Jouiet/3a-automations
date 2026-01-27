@@ -83,24 +83,61 @@ async function main() {
     }
 }
 
-// Handle --health check
+// Handle --health check - REAL API TEST (fixed Session 168quaterdecies)
 if (process.argv.includes('--health')) {
-    const token = process.env.META_PAGE_ACCESS_TOKEN;
-    const adAccountId = process.env.META_AD_ACCOUNT_ID;
+    const token = process.env.META_ACCESS_TOKEN || process.env.FACEBOOK_ACCESS_TOKEN;
+    const adAccountId = process.env.META_AD_ACCOUNT_ID || process.env.FACEBOOK_AD_ACCOUNT_ID;
+
     const health = {
-        status: token && adAccountId ? 'ok' : 'error',
+        status: 'checking',
         sensor: 'meta-ads-sensor',
-        version: '1.0.0',
+        version: '1.1.0',
         credentials: {
-            META_PAGE_ACCESS_TOKEN: token ? 'set' : 'missing',
+            META_ACCESS_TOKEN: token ? 'set' : 'missing',
             META_AD_ACCOUNT_ID: adAccountId ? 'set' : 'missing'
         },
         metrics: ['spend', 'impressions', 'clicks', 'conversions', 'cpc', 'ctr'],
         api_version: 'v19.0',
         timestamp: new Date().toISOString()
     };
-    console.log(JSON.stringify(health, null, 2));
-    process.exit(health.status === 'ok' ? 0 : 1);
+
+    // REAL API TEST
+    if (!token) {
+        health.status = 'error';
+        health.error = 'META_ACCESS_TOKEN not set';
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(1);
+    } else if (!adAccountId || adAccountId === 'act_') {
+        health.status = 'error';
+        health.error = 'META_AD_ACCOUNT_ID not set or invalid';
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(1);
+    } else {
+        (async () => {
+            try {
+                const url = `https://graph.facebook.com/v19.0/${adAccountId}?fields=name,account_status&access_token=${token}`;
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.error) {
+                    health.status = 'error';
+                    health.api_test = 'failed';
+                    health.error = data.error.message;
+                } else {
+                    health.status = 'ok';
+                    health.api_test = 'passed';
+                    health.account_name = data.name;
+                    health.account_status = data.account_status;
+                }
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message;
+            }
+            console.log(JSON.stringify(health, null, 2));
+            process.exit(health.status === 'ok' ? 0 : 1);
+        })();
+    }
 } else {
     main();
 }

@@ -37,6 +37,61 @@ function updateGPM(pressure, stats) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const token = process.env.TIKTOK_ACCESS_TOKEN;
+        const advertiserId = process.env.TIKTOK_ADVERTISER_ID;
+
+        const health = {
+            status: 'checking',
+            sensor: 'tiktok-ads-sensor',
+            version: '1.1.0',
+            credentials: {
+                TIKTOK_ACCESS_TOKEN: token ? 'set' : 'missing',
+                TIKTOK_ADVERTISER_ID: advertiserId ? 'set' : 'missing'
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            metrics: ['spend', 'conversions', 'impressions', 'ctr'],
+            api_version: 'v1.3',
+            timestamp: new Date().toISOString()
+        };
+
+        if (!token) {
+            health.status = 'error';
+            health.error = 'TIKTOK_ACCESS_TOKEN not set';
+        } else if (!advertiserId) {
+            health.status = 'error';
+            health.error = 'TIKTOK_ADVERTISER_ID not set';
+        } else {
+            try {
+                const url = `https://business-api.tiktok.com/open_api/v1.3/advertiser/info/?advertiser_ids=["${advertiserId}"]`;
+                const response = await fetch(url, {
+                    headers: { 'Access-Token': token }
+                });
+                const data = await response.json();
+
+                if (data.code === 0) {
+                    health.status = 'ok';
+                    health.api_test = 'passed';
+                    health.advertiser_name = data.data?.list?.[0]?.name || 'unknown';
+                } else {
+                    health.status = 'error';
+                    health.api_test = 'failed';
+                    health.error = `${data.message} (Code: ${data.code})`;
+                }
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message;
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+        return;
+    }
+
     try {
         const token = process.env.TIKTOK_ACCESS_TOKEN;
         const advertiserId = process.env.TIKTOK_ADVERTISER_ID;

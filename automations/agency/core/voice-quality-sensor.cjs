@@ -232,19 +232,42 @@ function updateGPM(pressure, endpoints, providers) {
 }
 
 async function main() {
-    // Handle --health check
+    // Handle --health check - REAL API TEST (fixed Session 168quaterdecies)
     if (process.argv.includes('--health')) {
+        const endpoints = await checkVoiceEndpoints();
+        const providers = await checkAIProviders();
+
+        const healthyEndpoints = endpoints.filter(e => e.status === 'HEALTHY').length;
+        const healthyProviders = providers.filter(p => p.status === 'HEALTHY').length;
+        const configuredProviders = providers.filter(p => p.status !== 'NO_CREDENTIALS').length;
+
+        // Determine overall status
+        let status = 'ok';
+        if (healthyEndpoints === 0 && healthyProviders === 0) {
+            status = 'error';
+        } else if (healthyEndpoints < endpoints.length || healthyProviders < configuredProviders) {
+            status = 'degraded';
+        }
+
         const health = {
-            status: 'ok',
+            status,
             sensor: 'voice-quality-sensor',
-            version: '1.0.0',
-            checks: ['voice-api', 'tts-provider', 'stt-provider', 'llm-provider'],
-            endpoints: ['3003', '3004', '3006'],
-            providers: ['elevenlabs', 'openai', 'gemini', 'grok'],
+            version: '1.1.0',
+            api_test: 'passed',
+            endpoints: {
+                healthy: healthyEndpoints,
+                total: endpoints.length,
+                details: endpoints.map(e => ({ name: e.name, status: e.status, latency_ms: e.latency }))
+            },
+            providers: {
+                healthy: healthyProviders,
+                configured: configuredProviders,
+                details: providers.map(p => ({ name: p.name, status: p.status, latency_ms: p.latency }))
+            },
             timestamp: new Date().toISOString()
         };
         console.log(JSON.stringify(health, null, 2));
-        process.exit(0);
+        process.exit(status === 'error' ? 1 : 0);
     }
 
     console.log('🎙️ Checking voice AI system quality...');

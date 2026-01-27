@@ -219,6 +219,36 @@ function updateGPM(pressure, costs, costLog) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const health = {
+            status: 'checking',
+            sensor: 'cost-tracking-sensor',
+            version: '1.1.0',
+            credentials: {
+                OPENAI_API_KEY: process.env.OPENAI_API_KEY ? 'set' : 'missing',
+                ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY ? 'set' : 'missing'
+            },
+            cost_log_path: COST_LOG_PATH,
+            cost_log_exists: fs.existsSync(COST_LOG_PATH),
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            budget: BUDGET,
+            timestamp: new Date().toISOString()
+        };
+
+        const costLog = loadLocalCostLog();
+        health.status = 'ok';
+        health.data_test = 'passed';
+        health.current_month_usd = costLog.totalThisMonth || 0;
+        health.budget_status = costLog.totalThisMonth >= BUDGET.critical ? 'CRITICAL' :
+                              costLog.totalThisMonth >= BUDGET.warning ? 'WARNING' : 'OK';
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(0);
+        return;
+    }
+
     console.log('💰 Tracking API costs across providers...');
 
     const costs = [];

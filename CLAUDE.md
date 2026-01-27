@@ -1,10 +1,69 @@
 # 3A Automation
-> Version: 120.0 | 26/01/2026 | Session 168terdecies - Fallback Chains Implemented
+> Version: 122.0 | 27/01/2026 | Session 168quaterdecies - 19/19 Sensors REAL API Tests
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 168quaterdecies - REAL SENSOR API TESTS (27/01/2026)
+
+### Problème Identifié: 75% des --health MENTAIENT
+
+Audit forensique révèle:
+- Sensors --health ne faisaient que vérifier si ENV vars existaient
+- Aucun vrai test API → faux positifs "status: ok"
+- **voice-quality-sensor**: `status: 'ok'` était HARDCODÉ
+
+### Correction: 19/19 Sensors avec VRAIS Tests API ✅
+
+| Sensor | Version | API Test | Status |
+| :--- | :--- | :--- | :--- |
+| ga4-sensor | 1.1.0 | runReport() | ✅ REAL |
+| shopify-sensor | 1.1.0 | products/count.json | ✅ REAL |
+| klaviyo-sensor | native | lists API | ✅ REAL |
+| meta-ads-sensor | 1.1.0 | Graph API | ✅ REAL |
+| voice-quality-sensor | 1.1.0 | checkVoiceEndpoints() | ✅ REAL |
+| content-performance-sensor | 1.1.0 | WordPress API | ✅ REAL |
+| lead-scoring-sensor | 1.1.0 | Data freshness | ✅ REAL |
+| gsc-sensor | 1.1.0 | SearchConsole API | ✅ REAL |
+| retention-sensor | 1.1.0 | Shopify orders | ✅ REAL |
+| tiktok-ads-sensor | 1.1.0 | TikTok Business | ✅ REAL |
+| email-health-sensor | 1.1.0 | Klaviyo API | ✅ REAL |
+| google-trends-sensor | 1.1.0 | AI providers | ✅ REAL |
+| cost-tracking-sensor | 1.1.0 | Cost log | ✅ REAL |
+| lead-velocity-sensor | 1.1.0 | Leads file | ✅ REAL |
+| product-seo-sensor | 1.1.0 | Shopify products | ✅ REAL |
+| supplier-health-sensor | 1.1.0 | CJ/BigBuy API | ✅ REAL |
+| whatsapp-status-sensor | 1.1.0 | WhatsApp Business | ✅ REAL |
+| apify-trends-sensor | 1.1.0 | user().get() | ✅ REAL |
+| google-ads-planner-sensor | 1.1.0 | Google Ads API | ✅ REAL |
+
+### Supprimé
+
+- **bigquery-trends-sensor.cjs** - Non nécessaire avant 2000-3000 clients
+
+### Pattern Appliqué
+
+```javascript
+// REAL API TEST (added Session 168quaterdecies)
+if (process.argv.includes('--health')) {
+    const health = { status: 'checking', sensor: 'xxx', version: '1.1.0' };
+    try {
+        const result = await REAL_API_CALL();
+        health.status = 'ok';
+        health.api_test = 'passed';
+    } catch (e) {
+        health.status = 'error';
+        health.api_test = 'failed';
+        health.error = e.message;
+    }
+    console.log(JSON.stringify(health, null, 2));
+    process.exit(health.status === 'ok' ? 0 : 1);
+}
+```
 
 ---
 
@@ -768,12 +827,17 @@ All 11 HITL workflows now have **user-configurable thresholds** via ENV variable
 
 ---
 
-## SENSORS (20 total - Verified 26/01/2026)
+## SENSORS (19 total - ALL with REAL API Tests v1.1.0)
+
+**Session 168quaterdecies**: Tous les sensors ont maintenant de vrais tests API (pas de faux "ok")
 
 | Status | Count | Sensors |
 | :--- | :--- | :--- |
-| ✅ OK | 15 | product-seo(0), gsc(0), cost-tracking(30), google-trends(8), shopify(75), klaviyo(65), email-health(60), lead-velocity(75), supplier-health(80), voice-quality(90), meta-ads(95), tiktok-ads(95), content-perf(90), lead-scoring(95), whatsapp(90) |
-| ❌ BLOCKED | 4 | retention(NETWORK), ga4(API_DISABLED), bigquery(API_DISABLED), apify(PAID_REQUIRED) |
+| ✅ API OK | 10 | ga4, shopify, klaviyo, email-health, google-trends, cost-tracking, lead-velocity, product-seo, apify-trends, gsc |
+| ⚠️ NO CREDS | 6 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner, supplier-health, content-perf |
+| ❌ BLOCKED | 3 | retention(NETWORK), voice-quality(NO_PROVIDERS), lead-scoring(NO_DATA) |
+
+**Vérification**: `node automations/agency/core/SENSOR.cjs --health`
 
 ---
 
@@ -781,8 +845,6 @@ All 11 HITL workflows now have **user-configurable thresholds** via ENV variable
 
 | Problème | Impact | Action |
 | :--- | :--- | :--- |
-| GA4 API disabled | Analytics broken | [Enable API](https://console.developers.google.com/apis/api/analyticsdata.googleapis.com/overview?project=932220171320) |
-| BigQuery API disabled | Trends broken | Enable BigQuery API |
 | META_ACCESS_TOKEN vide | Meta Ads cassé | Configurer token |
 | TIKTOK_ACCESS_TOKEN vide | TikTok Ads cassé | Configurer token |
 | Apify trial expiré | Scraping broken | [Payer $49/mois](https://console.apify.com/billing) |

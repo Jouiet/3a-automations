@@ -205,6 +205,51 @@ function updateGPM(pressure, suppliers) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const health = {
+            status: 'checking',
+            sensor: 'supplier-health-sensor',
+            version: '1.1.0',
+            credentials: {
+                CJ_API_KEY: process.env.CJ_API_KEY ? 'set' : 'missing',
+                BIGBUY_API_KEY: process.env.BIGBUY_API_KEY ? 'set' : 'missing'
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            suppliers: Object.keys(SUPPLIERS),
+            timestamp: new Date().toISOString()
+        };
+
+        const results = [];
+        const cjResult = await checkSupplierHealth(SUPPLIERS.cj, process.env.CJ_API_KEY);
+        results.push(cjResult);
+        const bigbuyResult = await checkSupplierHealth(SUPPLIERS.bigbuy, process.env.BIGBUY_API_KEY);
+        results.push(bigbuyResult);
+
+        const healthyCount = results.filter(r => r.status === 'HEALTHY').length;
+        const configuredCount = results.filter(r => r.status !== 'NO_CREDENTIALS').length;
+
+        health.api_test = 'passed';
+        health.suppliers_healthy = healthyCount;
+        health.suppliers_configured = configuredCount;
+        health.details = results.map(r => ({ name: r.name, status: r.status, latency_ms: r.latency }));
+
+        if (configuredCount === 0) {
+            health.status = 'warning';
+            health.note = 'No supplier credentials configured';
+        } else if (healthyCount === 0) {
+            health.status = 'error';
+            health.error = 'All configured suppliers failed';
+        } else {
+            health.status = 'ok';
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'error' ? 1 : 0);
+        return;
+    }
+
     console.log('🏭 Checking supplier health...');
 
     const results = [];

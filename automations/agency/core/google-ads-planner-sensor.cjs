@@ -90,6 +90,77 @@ async function updateGPM(adsData) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const health = {
+            status: 'checking',
+            sensor: 'google-ads-planner-sensor',
+            version: '1.1.0',
+            credentials: {
+                GOOGLE_ADS_CLIENT_ID: process.env.GOOGLE_ADS_CLIENT_ID ? 'set' : 'missing',
+                GOOGLE_ADS_CLIENT_SECRET: process.env.GOOGLE_ADS_CLIENT_SECRET ? 'set' : 'missing',
+                GOOGLE_ADS_DEVELOPER_TOKEN: process.env.GOOGLE_ADS_DEVELOPER_TOKEN ? 'set' : 'missing',
+                GOOGLE_ADS_CUSTOMER_ID: process.env.GOOGLE_ADS_CUSTOMER_ID ? 'set' : 'missing',
+                GOOGLE_ADS_REFRESH_TOKEN: process.env.GOOGLE_ADS_REFRESH_TOKEN ? 'set' : 'missing'
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            keywords: KEYWORDS,
+            timestamp: new Date().toISOString()
+        };
+
+        const requiredCreds = [
+            'GOOGLE_ADS_CLIENT_ID',
+            'GOOGLE_ADS_CLIENT_SECRET',
+            'GOOGLE_ADS_DEVELOPER_TOKEN',
+            'GOOGLE_ADS_CUSTOMER_ID',
+            'GOOGLE_ADS_REFRESH_TOKEN'
+        ];
+
+        const missingCreds = requiredCreds.filter(c => !process.env[c]);
+
+        if (missingCreds.length > 0) {
+            health.status = 'error';
+            health.error = `Missing credentials: ${missingCreds.join(', ')}`;
+            health.api_test = 'skipped';
+        } else {
+            try {
+                // REAL API TEST: Try to initialize client and make a basic call
+                const { GoogleAdsApi } = require('google-ads-api');
+                const client = new GoogleAdsApi({
+                    client_id: process.env.GOOGLE_ADS_CLIENT_ID,
+                    client_secret: process.env.GOOGLE_ADS_CLIENT_SECRET,
+                    developer_token: process.env.GOOGLE_ADS_DEVELOPER_TOKEN,
+                });
+
+                const customer = client.Customer({
+                    customer_id: process.env.GOOGLE_ADS_CUSTOMER_ID,
+                    refresh_token: process.env.GOOGLE_ADS_REFRESH_TOKEN,
+                });
+
+                // Test with a simple accessible customers query
+                const accessibleCustomers = await customer.query(`
+                    SELECT customer.id, customer.descriptive_name
+                    FROM customer
+                    LIMIT 1
+                `);
+
+                health.status = 'ok';
+                health.api_test = 'passed';
+                health.customer_id = process.env.GOOGLE_ADS_CUSTOMER_ID;
+                health.customer_name = accessibleCustomers[0]?.customer?.descriptive_name || 'Unknown';
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message.split('\n')[0];
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+        return;
+    }
+
     const data = await getAdsMetrics();
     await updateGPM(data);
 }

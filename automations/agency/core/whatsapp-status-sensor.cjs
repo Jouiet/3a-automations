@@ -169,6 +169,47 @@ function updateGPM(pressure, metrics) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const accessToken = process.env.WHATSAPP_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN;
+        const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+
+        const health = {
+            status: 'checking',
+            sensor: 'whatsapp-status-sensor',
+            version: '1.1.0',
+            credentials: {
+                WHATSAPP_ACCESS_TOKEN: accessToken ? 'set' : 'missing',
+                WHATSAPP_PHONE_NUMBER_ID: phoneNumberId ? 'set' : 'missing'
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            metrics: ['templates', 'quality_rating', 'messaging_limit'],
+            timestamp: new Date().toISOString()
+        };
+
+        if (!accessToken) {
+            health.status = 'error';
+            health.error = 'WHATSAPP_ACCESS_TOKEN not set';
+        } else {
+            try {
+                const metrics = await getWhatsAppMetrics(accessToken, phoneNumberId);
+                health.status = 'ok';
+                health.api_test = 'passed';
+                health.connected = metrics.connected;
+                health.templates_count = metrics.templates?.total || 0;
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message.split('\n')[0];
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+        return;
+    }
+
     const accessToken = process.env.WHATSAPP_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN;
     const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
 

@@ -54,12 +54,12 @@ async function main() {
     }
 }
 
-// Handle --health check
+// Handle --health check - REAL DATA TEST (fixed Session 168quaterdecies)
 if (process.argv.includes('--health')) {
     const health = {
-        status: fs.existsSync(SCORED_LEADS_PATH) ? 'ok' : 'warning',
+        status: 'checking',
         sensor: 'lead-scoring-sensor',
-        version: '1.0.0',
+        version: '1.1.0',
         data_path: SCORED_LEADS_PATH,
         data_exists: fs.existsSync(SCORED_LEADS_PATH),
         gpm_path: GPM_PATH,
@@ -67,8 +67,37 @@ if (process.argv.includes('--health')) {
         metrics: ['quality_score', 'days_stale'],
         timestamp: new Date().toISOString()
     };
+
+    // REAL DATA TEST
+    if (!fs.existsSync(SCORED_LEADS_PATH)) {
+        health.status = 'warning';
+        health.data_test = 'no_data';
+        health.note = 'No scored leads file - sensor will create on first run';
+    } else {
+        try {
+            const data = JSON.parse(fs.readFileSync(SCORED_LEADS_PATH, 'utf8'));
+            const qualityScore = data.quality?.score || 0;
+            const leadsCount = data.scores?.length || 0;
+
+            // Check freshness
+            const lastScored = data.scores?.[0]?.scored_at ? new Date(data.scores[0].scored_at) : null;
+            const daysStale = lastScored ? Math.floor((Date.now() - lastScored) / (1000 * 60 * 60 * 24)) : -1;
+
+            health.status = 'ok';
+            health.data_test = 'passed';
+            health.quality_score = qualityScore;
+            health.leads_count = leadsCount;
+            health.days_stale = daysStale;
+            health.data_fresh = daysStale >= 0 && daysStale <= 7;
+        } catch (e) {
+            health.status = 'error';
+            health.data_test = 'failed';
+            health.error = `Invalid JSON: ${e.message}`;
+        }
+    }
+
     console.log(JSON.stringify(health, null, 2));
-    process.exit(0);
+    process.exit(health.status === 'error' ? 1 : 0);
 } else {
     main();
 }

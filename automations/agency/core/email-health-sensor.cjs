@@ -205,6 +205,45 @@ function updateGPM(pressure, metrics) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const apiKey = process.env.KLAVIYO_API_KEY || process.env.KLAVIYO_PRIVATE_API_KEY;
+
+        const health = {
+            status: 'checking',
+            sensor: 'email-health-sensor',
+            version: '1.1.0',
+            credentials: {
+                KLAVIYO_API_KEY: apiKey ? 'set' : 'missing'
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            metrics: ['bounce_rate', 'spam_rate', 'open_rate', 'click_rate'],
+            api_revision: KLAVIYO_API_REVISION,
+            timestamp: new Date().toISOString()
+        };
+
+        if (!apiKey) {
+            health.status = 'error';
+            health.error = 'KLAVIYO_API_KEY not set';
+        } else {
+            try {
+                const listsData = await klaviyoRequest('lists', apiKey);
+                health.status = 'ok';
+                health.api_test = 'passed';
+                health.lists_count = listsData.data?.length || 0;
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message.split('\n')[0];
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+        return;
+    }
+
     const apiKey = process.env.KLAVIYO_API_KEY || process.env.KLAVIYO_PRIVATE_API_KEY;
 
     if (!apiKey) {

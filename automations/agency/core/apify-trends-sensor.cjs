@@ -97,6 +97,51 @@ function updateGPM(pressure, items) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const health = {
+            status: 'checking',
+            sensor: 'apify-trends-sensor',
+            version: '1.1.0',
+            credentials: {
+                APIFY_TOKEN: APIFY_TOKEN ? 'set' : 'missing'
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            actor: 'apify/google-trends-scraper',
+            timestamp: new Date().toISOString()
+        };
+
+        if (!APIFY_TOKEN) {
+            health.status = 'error';
+            health.error = 'APIFY_TOKEN not set';
+        } else {
+            try {
+                const { ApifyClient } = require('apify-client');
+                const client = new ApifyClient({ token: APIFY_TOKEN });
+
+                // REAL API TEST: Get user info to verify token
+                const user = await client.user().get();
+                health.status = 'ok';
+                health.api_test = 'passed';
+                health.username = user.username;
+                health.plan = user.plan?.id || 'unknown';
+                health.usage = {
+                    datasetReads: user.limits?.datasetReads || 'N/A',
+                    actorMemoryMbytes: user.limits?.actorMemoryMbytes || 'N/A'
+                };
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message.split('\n')[0];
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+        return;
+    }
+
     try {
         const items = await fetchApifyTrends();
         const pressure = calculatePressure(items);

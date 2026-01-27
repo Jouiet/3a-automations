@@ -249,6 +249,52 @@ function updateGPM(trendsData) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const enabledProviders = Object.entries(PROVIDERS)
+            .filter(([_, p]) => p.enabled)
+            .map(([key, p]) => ({ key, name: p.name }));
+
+        const health = {
+            status: 'checking',
+            sensor: 'google-trends-sensor',
+            version: '1.1.0',
+            ai_providers: {
+                enabled: enabledProviders.map(p => p.name),
+                total_available: Object.keys(PROVIDERS).length,
+                grok: PROVIDERS.grok.enabled,
+                openai: PROVIDERS.openai.enabled,
+                gemini: PROVIDERS.gemini.enabled,
+                anthropic: PROVIDERS.anthropic.enabled
+            },
+            keywords: KEYWORDS,
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            timestamp: new Date().toISOString()
+        };
+
+        if (enabledProviders.length === 0) {
+            health.status = 'error';
+            health.error = 'No AI providers configured (need XAI_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, or ANTHROPIC_API_KEY)';
+        } else {
+            try {
+                const data = await getTrendsPressure();
+                health.status = 'ok';
+                health.api_test = 'passed';
+                health.provider_used = data.provider;
+                health.demand_score = data.demand_score;
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message.split('\n')[0];
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+        return;
+    }
+
     try {
         const data = await getTrendsPressure();
         updateGPM(data);

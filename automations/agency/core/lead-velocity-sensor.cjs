@@ -56,6 +56,43 @@ function updateGPM(pressure, count) {
 }
 
 async function main() {
+    // Handle --health check - REAL DATA TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const health = {
+            status: 'checking',
+            sensor: 'lead-velocity-sensor',
+            version: '1.1.0',
+            leads_path: LEADS_PATH,
+            leads_exists: fs.existsSync(LEADS_PATH),
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            metrics: ['leads_24h', 'total_leads', 'velocity'],
+            timestamp: new Date().toISOString()
+        };
+
+        if (!fs.existsSync(LEADS_PATH)) {
+            health.status = 'warning';
+            health.data_test = 'no_data';
+            health.note = 'No leads file - sensor will report high pressure';
+        } else {
+            try {
+                const data = JSON.parse(fs.readFileSync(LEADS_PATH, 'utf8'));
+                const leads = Array.isArray(data) ? data : (data.scores || []);
+                health.status = 'ok';
+                health.data_test = 'passed';
+                health.total_leads = leads.length;
+            } catch (e) {
+                health.status = 'error';
+                health.data_test = 'failed';
+                health.error = e.message;
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'error' ? 1 : 0);
+        return;
+    }
+
     try {
         let leads = [];
         if (fs.existsSync(LEADS_PATH)) {

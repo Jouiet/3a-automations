@@ -86,6 +86,51 @@ function updateGPM(pressure, topQuery) {
 }
 
 async function main() {
+    // Handle --health check - REAL API TEST (added Session 168quaterdecies)
+    if (process.argv.includes('--health')) {
+        const credentials = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+        const siteUrl = process.env.GSC_SITE_URL || 'https://3a-automation.com';
+
+        const health = {
+            status: 'checking',
+            sensor: 'gsc-sensor',
+            version: '1.1.0',
+            credentials: {
+                GOOGLE_APPLICATION_CREDENTIALS: credentials ? 'set' : 'missing',
+                credential_file_exists: credentials ? fs.existsSync(credentials) : false,
+                GSC_SITE_URL: siteUrl
+            },
+            gpm_path: GPM_PATH,
+            gpm_exists: fs.existsSync(GPM_PATH),
+            metrics: ['impressions', 'clicks', 'ctr', 'position'],
+            timestamp: new Date().toISOString()
+        };
+
+        if (!credentials) {
+            health.status = 'error';
+            health.error = 'GOOGLE_APPLICATION_CREDENTIALS not set';
+        } else if (!fs.existsSync(credentials)) {
+            health.status = 'error';
+            health.error = `Credential file not found: ${credentials}`;
+        } else {
+            try {
+                const rows = await fetchGSCData(siteUrl);
+                health.status = 'ok';
+                health.api_test = 'passed';
+                health.queries_found = rows.length;
+                health.top_query = rows.length > 0 ? rows[0].keys[0] : null;
+            } catch (e) {
+                health.status = 'error';
+                health.api_test = 'failed';
+                health.error = e.message.split('\n')[0];
+            }
+        }
+
+        console.log(JSON.stringify(health, null, 2));
+        process.exit(health.status === 'ok' ? 0 : 1);
+        return;
+    }
+
     const siteUrl = process.env.GSC_SITE_URL || 'https://3a-automation.com';
     try {
         const rows = await fetchGSCData(siteUrl);
