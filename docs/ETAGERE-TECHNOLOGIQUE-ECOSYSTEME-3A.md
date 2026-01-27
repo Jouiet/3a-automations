@@ -24,40 +24,68 @@
 | **HITL Scripts** | **17** | `grep -l HITL *.cjs \| wc -l` | ✅ VÉRIFIÉ |
 | **Remotion Compositions** | **7** | `ls compositions/*.tsx` | ✅ VÉRIFIÉ |
 
-### MCP Servers (FAIT VÉRIFIÉ 27/01/2026)
+### MCP Servers (CONFIGURÉ 27/01/2026 02:15 UTC)
 
 **Source Global:** `~/.claude/settings.json`
 **Source Projet:** `/Users/mac/Desktop/JO-AAA/.mcp.json`
 
 | Couche | Count | Servers | Source |
 |:---|:---|:---|:---|
-| **Global** | **5** | fal, n8n-mcp, grok-search-mcp, grok2-image, stitch | settings.json |
+| **Global** | **13** | chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail, fal, n8n-mcp, grok-search-mcp, grok2-image, stitch | settings.json |
 | **Projet** | **6** | 3a-global-mcp, grok, google-sheets, klaviyo, shopify-dev, shopify-admin | .mcp.json |
-| **Overlap** | 1 | grok (présent dans les deux) | - |
-| **Total Unique** | **10** | | |
+| **Total** | **19** | | |
 
-**CORRECTION**: Le document affirmait 13 serveurs (8 global: chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail + 5 projet). Ces 8 serveurs globaux **N'EXISTENT PAS** dans les configs actuelles - ils ont probablement été supprimés ou jamais configurés.
+#### Détail Global (13 serveurs - ~/.claude/settings.json)
 
-#### Détail Global (5 serveurs - ~/.claude/settings.json)
-
-| Server | Command | Description |
+| Server | Package | Description |
 |:---|:---|:---|
-| **fal** | URL: docs.fal.ai/mcp | AI image/video generation |
-| **n8n-mcp** | npx n8n-mcp | Workflow automation (n8n.srv1168256.hstgr.cloud) |
-| **grok-search-mcp** | npx grok-search-mcp | Web search + AI reasoning |
-| **grok2-image** | npx grok2-image-mcp-server | Image generation via Grok |
-| **stitch** | npx @_davideast/stitch-mcp proxy | Google Stitch UI generation |
+| **chrome-devtools** | playwright-devtools-mcp | DevTools access via Playwright |
+| **playwright** | @playwright/mcp | Microsoft official browser automation |
+| **gemini** | mcp-server-gemini | Google Gemini API |
+| **github** | @modelcontextprotocol/server-github | Repos, issues, PRs |
+| **hostinger** | hostinger-api-mcp | VPS, domains, WordPress |
+| **wordpress** | @instawp/mcp-wp | Posts, pages, plugins |
+| **google-analytics** | mcp-server-google-analytics | GA4 metrics |
+| **gmail** | @gongrzhe/server-gmail-autoauth-mcp | Email with auto-auth |
+| **fal** | URL: docs.fal.ai/mcp | AI image/video |
+| **n8n-mcp** | n8n-mcp | Workflow automation |
+| **grok-search-mcp** | grok-search-mcp | Web search + AI |
+| **grok2-image** | grok2-image-mcp-server | Image generation |
+| **stitch** | @_davideast/stitch-mcp | Google Stitch UI |
 
 #### Détail Projet (6 serveurs - .mcp.json)
 
 | Server | Command | Description |
 |:---|:---|:---|
 | **3a-global-mcp** | node automations/3a-global-mcp/build/index.js | 121 automations propriétaires, v1.5.0, SOTA 95% |
-| **grok** | npx grok-search-mcp@latest | Web search (duplicate global) |
+| **grok** | npx grok-search-mcp@latest | Web search (overlap global) |
 | **google-sheets** | npx google-sheets-mcp | Read/write spreadsheets |
 | **klaviyo** | uvx klaviyo-mcp-server@latest | Email flows, campaigns |
 | **shopify-dev** | npx @shopify/dev-mcp@latest | API docs, schema exploration |
 | **shopify-admin** | npx @ajackus/shopify-mcp-server | Products, orders, customers |
+
+#### ENV Variables Requises (pour activation complète)
+
+```bash
+# GitHub
+GITHUB_TOKEN=ghp_xxxxx
+
+# Hostinger
+HOSTINGER_API_TOKEN=xxxxx
+
+# WordPress
+WORDPRESS_URL=https://your-site.com
+WORDPRESS_USERNAME=admin
+WORDPRESS_PASSWORD=xxxxx
+
+# Google Analytics
+GA_PROPERTY_ID=123456789
+
+# Gemini
+GOOGLE_API_KEY=xxxxx
+
+# Gmail - auto-auth via browser (no env needed)
+```
 
 ### 3A-Global-MCP (VÉRIFIÉ)
 
