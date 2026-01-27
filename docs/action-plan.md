@@ -1632,8 +1632,8 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | **BillingAgent** | 3.0.0 | ✅ | ✅ | ✅ PRODUCTION |
 | **ErrorScience** | 3.0.0 | ✅ | ✅ | ✅ PRODUCTION |
 | **RevenueScience** | 3.0.0 | ✅ | ✅ | ✅ PRODUCTION |
-| **KBEnrichment** | 1.0.0 | ⏳ | ✅ | ✅ PRODUCTION |
-| **ConversationLearner** | 1.0.0 | ⏳ | ⏳ | ✅ PRODUCTION |
+| **KBEnrichment** | 2.0.0 | ✅ | ✅ | ✅ PRODUCTION |
+| **ConversationLearner** | 2.0.0 | ✅ | ✅ | ✅ PRODUCTION |
 
 ### New EventBus Event Types (Session 179)
 
@@ -1646,6 +1646,17 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | `learning.fact_approved` | Learning API | KBEnrichment |
 | `learning.fact_rejected` | Learning API | Analytics |
 
+### Session 179 Commits (Complete)
+
+| Hash | Description |
+|:-----|:------------|
+| `800844e` | fix(eventbus): resolve circular dependency with lazy loading |
+| `36cd1de` | feat(dashboard): add Learning Queue UI (Agent Ops v3.0) |
+| `29e8cb1` | feat(agent-ops): add KBEnrichment module (v3.0 Learning Loop) |
+| `255a886` | feat(agent-ops): upgrade ErrorScience & RevenueScience to v3.0 |
+| `34eb2a3` | docs: Session 179 complete - Agent Ops v3.0 all modules upgraded |
+| `d0e23d9` | feat(learning-loop): add EventBus integration to KBEnrichment & ConversationLearner |
+
 ### Next Session Actions
 
 | Priority | Task | Effort |
@@ -1653,8 +1664,8 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | **P0** | Configure META_ACCESS_TOKEN | User action |
 | **P0** | Configure TELNYX_API_KEY | User action |
 | **P0** | Configure STRIPE_SECRET_KEY | User action |
-| **P1** | Test Learning Loop E2E | 2h |
-| **P2** | Add EventBus to KBEnrichment & ConversationLearner | 2h |
+| **P1** | Test Learning Loop E2E with real voice session | 2h |
+| **P2** | Voice MENA: Deploy Atlas-Chat-9B on RunPod | 4h |
 
 ---
 

@@ -23,7 +23,7 @@
 | **Integrations** | 10 | **8** | Core OK, META/TIKTOK external creds missing |
 | **TOTAL** | **100** | **94** | **SOTA Multi-Agent Platform** |
 
-### Agent Ops v3.0 (Session 179 - ALL COMPLETE)
+### Agent Ops v3.0 (Session 179 - ALL COMPLETE ✅)
 | Module | Version | SOTA Features |
 |:---|:---:|:---|
 | **AgencyEventBus.cjs** | 3.0 | Event persistence, idempotency, DLQ, retry backoff, multi-tenant |
@@ -31,7 +31,8 @@
 | **BillingAgent.cjs** | 3.0 | Event emission, state machine, cost tracking |
 | **ErrorScience.cjs** | 3.0 | EventBus integration, recordError() API, CLI --health |
 | **RevenueScience.cjs** | 3.0 | EventBus integration, pricing analytics, CLI --health |
-| **KBEnrichment.cjs** | 1.0 | KB versioning, rollback, audit trail, CLI --health |
+| **KBEnrichment.cjs** | 2.0 | KB versioning, rollback, audit trail, EventBus emit |
+| **ConversationLearner.cjs** | 2.0 | Pattern extraction, HITL queue, EventBus emit |
 
 ### Session 179 - Complete Summary
 - ✅ Learning Queue Dashboard UI (`/admin/agent-ops/learning`)
