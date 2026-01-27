@@ -111,10 +111,11 @@ const CONFIG = {
   },
 
   // Atlas-Chat-9B (Session 170: Darija LLM fallback via HuggingFace)
+  // Session 176ter: Fixed - Use Featherless AI provider (OpenAI-compatible)
   atlasChat: {
     apiKey: process.env.HUGGINGFACE_API_KEY,
     model: 'MBZUAI-Paris/Atlas-Chat-9B',
-    url: 'https://router.huggingface.co/hf-inference/models/MBZUAI-Paris/Atlas-Chat-9B',
+    url: 'https://router.huggingface.co/featherless-ai/v1/chat/completions',
     enabled: !!process.env.HUGGINGFACE_API_KEY,
     darijaOnly: true  // Used only for 'ary' language fallback
   },
@@ -2457,14 +2458,9 @@ async function checkHealth() {
 async function callAtlasChat(messages) {
   if (!CONFIG.atlasChat.enabled) return null;
 
-  console.log('[Atlas-Chat] Calling 9B model for Darija fallback...');
+  console.log('[Atlas-Chat] Calling 9B model for Darija fallback via Featherless AI...');
   try {
-    const formattedInput = messages.map(m => {
-      // Format adaptation for Mistral/Atlas style [INST]
-      if (m.role === 'user') return `[INST] ${m.content} [/INST]`;
-      return m.content;
-    }).join('\n');
-
+    // Session 176ter: Use OpenAI-compatible format via Featherless AI provider
     const response = await fetch(CONFIG.atlasChat.url, {
       method: "POST",
       headers: {
@@ -2472,25 +2468,23 @@ async function callAtlasChat(messages) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        inputs: formattedInput,
-        parameters: {
-          max_new_tokens: 150,
-          temperature: 0.7,
-          return_full_text: false
-        }
+        model: CONFIG.atlasChat.model,
+        messages: messages,
+        max_tokens: 150,
+        temperature: 0.7
       })
     });
 
     if (!response.ok) {
-      throw new Error(`HuggingFace API error: ${response.status}`);
+      throw new Error(`Featherless AI error: ${response.status}`);
     }
 
     const result = await response.json();
-    // HuggingFace text-generation output is array
-    const text = Array.isArray(result) ? result[0].generated_text : result.generated_text;
+    // Featherless AI returns OpenAI-compatible response format
+    const text = result?.choices?.[0]?.message?.content;
 
     console.log('[Atlas-Chat] Response received');
-    return text.trim();
+    return text ? text.trim() : null;
   } catch (error) {
     console.error(`[Atlas-Chat] Error: ${error.message}`);
     return null;

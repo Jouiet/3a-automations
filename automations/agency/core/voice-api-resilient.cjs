@@ -97,8 +97,10 @@ const PROVIDERS = {
     name: 'Atlas-Chat-9B (Darija)',
     // Atlas-Chat-9B: Morocco's first Darija LLM (MBZUAI-Paris, Oct 2024)
     // Session 170: Added for Voice MENA Darija fallback
+    // Session 176ter: Fixed - Use Featherless AI provider (OpenAI-compatible)
     // DarijaMMLU: 58.23% (+13% vs Jais-13B)
-    url: 'https://router.huggingface.co/hf-inference/models/MBZUAI-Paris/Atlas-Chat-9B',
+    url: 'https://router.huggingface.co/featherless-ai/v1/chat/completions',
+    model: 'MBZUAI-Paris/Atlas-Chat-9B',
     apiKey: ENV.HUGGINGFACE_API_KEY,
     enabled: !!ENV.HUGGINGFACE_API_KEY,
     darijaOnly: true, // Used as priority fallback for language='ary'
@@ -347,19 +349,19 @@ async function callAtlasChat(userMessage, conversationHistory = [], customSystem
     throw new Error('HuggingFace API key not configured for Atlas-Chat');
   }
 
-  // Build prompt in chat format for Atlas-Chat instruction-tuned model
+  // Session 176ter: Use OpenAI-compatible format via Featherless AI provider
   const systemPrompt = customSystemPrompt || SYSTEM_PROMPT;
-  const contextMessages = conversationHistory.map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join('\n');
-  const fullPrompt = `<s>[INST] ${systemPrompt}\n\n${contextMessages ? contextMessages + '\n\n' : ''}User: ${userMessage} [/INST]`;
+  const messages = [
+    { role: 'system', content: systemPrompt },
+    ...conversationHistory.map(m => ({ role: m.role, content: m.content })),
+    { role: 'user', content: userMessage }
+  ];
 
   const body = JSON.stringify({
-    inputs: fullPrompt,
-    parameters: {
-      max_new_tokens: 500,
-      temperature: 0.7,
-      do_sample: true,
-      return_full_text: false
-    }
+    model: PROVIDERS.atlasChat.model,
+    messages: messages,
+    max_tokens: 500,
+    temperature: 0.7
   });
 
   const response = await httpRequest(PROVIDERS.atlasChat.url, {
@@ -373,8 +375,8 @@ async function callAtlasChat(userMessage, conversationHistory = [], customSystem
   const parsed = safeJsonParse(response.data, 'Atlas-Chat Darija response');
   if (!parsed.success) throw new Error(`Atlas-Chat JSON parse failed: ${parsed.error}`);
 
-  // HuggingFace Inference API returns array of generated texts
-  const result = Array.isArray(parsed.data) ? parsed.data[0]?.generated_text : parsed.data?.generated_text;
+  // Featherless AI returns OpenAI-compatible response format
+  const result = parsed.data?.choices?.[0]?.message?.content;
   if (!result) throw new Error('Atlas-Chat returned empty response');
   return result.trim();
 }
