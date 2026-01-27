@@ -1,15 +1,22 @@
 /**
  * BillingAgent.cjs - Horizontal Billing Automation
- * 3A Automation - Session 177 (Agent Ops Transformation)
+ * 3A Automation - Session 177/178 (SOTA Optimization)
  *
  * Automatically creates Stripe customers and draft invoices
  * when leads are qualified or bookings are confirmed.
  *
+ * SOTA Features (Session 178):
+ * - Idempotency Keys: Prevents duplicate customers/invoices
+ * - Webhook Signature Verification: Secure invoice.paid handling
+ * - Deduplication: Session-based request tracking
+ *
  * Integrates with Meta CAPI for closed-loop attribution.
+ * Source: Stripe Billing Best Practices 2025
  */
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const StripeGlobalGateway = require('./gateways/stripe-global-gateway.cjs');
 const RevenueScience = require('./RevenueScience.cjs');
 const MarketingScience = require('./marketing-science-core.cjs');
@@ -83,13 +90,23 @@ class BillingAgent {
             email: identity.email || '',
             name: identity.name || 'AI Lead',
             phone: identity.phone || '',
-            'metadata[agent_ops]': 'true'
+            'metadata[agent_ops]': 'true',
+            'metadata[source]': 'billing_agent_v2'
         });
 
-        return await this.gateway.request('/v1/customers', 'POST', payload.toString());
+        // SOTA: Idempotency key based on email/phone (prevents duplicate customers)
+        const idempotencyKey = this.gateway.generateIdempotencyKey(
+            'create_customer',
+            identity.email || identity.phone
+        );
+
+        return await this.gateway.request('/v1/customers', 'POST', payload.toString(), { idempotencyKey });
     }
 
-    async _createDraftInvoice(customerId, amountInCents, description = '') {
+    async _createDraftInvoice(customerId, amountInCents, description = '', sessionId = null) {
+        // SOTA: Generate session-scoped idempotency key
+        const sessionKey = sessionId || `${customerId}-${Date.now()}`;
+
         // 1. Create Invoice Item
         const itemPayload = new URLSearchParams({
             customer: customerId,
@@ -97,25 +114,68 @@ class BillingAgent {
             currency: this.currency,
             description: `3A Automation Service: ${description || 'Essentials Pack'}`
         });
-        await this.gateway.request('/v1/invoice_items', 'POST', itemPayload.toString());
+        const itemIdempotencyKey = this.gateway.generateIdempotencyKey('invoice_item', sessionKey);
+        await this.gateway.request('/v1/invoice_items', 'POST', itemPayload.toString(), { idempotencyKey: itemIdempotencyKey });
 
         // 2. Create Invoice
         const invoicePayload = new URLSearchParams({
             customer: customerId,
             auto_advance: 'false', // Keep as draft for 80/20 human review
             collection_method: 'send_invoice',
-            days_until_due: '7'
+            days_until_due: '7',
+            'metadata[session_id]': sessionKey,
+            'metadata[created_by]': 'billing_agent_v2'
         });
-        return await this.gateway.request('/v1/invoices', 'POST', invoicePayload.toString());
+        const invoiceIdempotencyKey = this.gateway.generateIdempotencyKey('invoice', sessionKey);
+        return await this.gateway.request('/v1/invoices', 'POST', invoicePayload.toString(), { idempotencyKey: invoiceIdempotencyKey });
     }
 
     /**
-     * Handle invoice.paid webhook (call from Stripe webhook handler)
+     * SOTA: Handle invoice.paid webhook with signature verification
+     * This triggers the actual Purchase conversion event for Meta CAPI
+     * @param {string} rawBody - Raw request body for signature verification
+     * @param {string} signature - Stripe-Signature header value
+     * @param {object} attribution - Attribution data (fbclid, phone)
+     */
+    async handleInvoicePaidWebhook(rawBody, signature, attribution = {}) {
+        // SOTA: Verify webhook signature first
+        const verification = this.gateway.verifyWebhookSignature(rawBody, signature);
+        if (!verification.valid) {
+            console.error(`[BillingAgent] ❌ Webhook signature invalid: ${verification.error}`);
+            return { success: false, error: 'invalid_signature' };
+        }
+
+        let invoiceData;
+        try {
+            const event = JSON.parse(rawBody);
+            if (event.type !== 'invoice.paid') {
+                return { success: false, error: 'wrong_event_type' };
+            }
+            invoiceData = event.data.object;
+        } catch (e) {
+            return { success: false, error: 'parse_error' };
+        }
+
+        return this.handleInvoicePaid(invoiceData, attribution);
+    }
+
+    /**
+     * Handle invoice.paid event (after signature verification)
      * This triggers the actual Purchase conversion event for Meta CAPI
      */
     async handleInvoicePaid(invoiceData, attribution = {}) {
         const amount = invoiceData.amount_paid / 100;
         const email = invoiceData.customer_email;
+        const invoiceId = invoiceData.id;
+
+        // SOTA: Deduplication check (avoid double-tracking)
+        const dedupKey = `invoice_paid_${invoiceId}`;
+        if (this._processedInvoices && this._processedInvoices.has(dedupKey)) {
+            console.log(`[BillingAgent] Invoice ${invoiceId} already processed, skipping`);
+            return { success: true, tracked: false, reason: 'already_processed' };
+        }
+        this._processedInvoices = this._processedInvoices || new Set();
+        this._processedInvoices.add(dedupKey);
 
         console.log(`[BillingAgent] Invoice paid: €${amount} - ${email}`);
 
@@ -126,11 +186,11 @@ class BillingAgent {
             phone: attribution.phone,
             fbclid: attribution.fbclid,
             value: amount,
-            invoice_id: invoiceData.id,
+            invoice_id: invoiceId,
             customer_id: invoiceData.customer
         });
 
-        return { success: true, tracked: true, value: amount };
+        return { success: true, tracked: true, value: amount, invoiceId };
     }
 }
 
