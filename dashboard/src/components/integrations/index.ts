@@ -5,6 +5,8 @@
  */
 
 export { ShopifyConnect } from "./ShopifyConnect";
+export { KlaviyoConnect } from "./KlaviyoConnect";
+export { GoogleConnect } from "./GoogleConnect";
 export {
   IntegrationStatus,
   IntegrationDot,
