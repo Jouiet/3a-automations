@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 124.0 | 27/01/2026 | Session 178ter | Engineering v3.0 Audit
+> Version: 125.0 | 27/01/2026 | Session 178quater | Engineering Score: 77/100
 
 ## Identité
 
@@ -8,19 +8,20 @@
 
 ---
 
-## Engineering Scores (Session 178ter - ULTRATHINK AUDIT)
+## Engineering Scores (Session 178quater - VERIFIED)
 
-| Discipline | Claimed | REAL | Gap | Blocker |
+| Discipline | Previous | CURRENT | Change | Status |
 |:---|:---:|:---:|:---:|:---|
-| **Voice Services** | 15/15 | **0/15** | -15 | Services non démarrés |
-| **Sensors** | 14/19 | **7/19** | -7 | Credentials manquants |
-| **Integrations** | 15/15 | **5/15** | -10 | META/TIKTOK vides |
-| **Data Pipeline** | 15/15 | **2/15** | -13 | 2 leads, 0 content |
-| **Architecture** | 10/10 | **8/10** | -2 | Scripts siloed |
-| **GLOBAL** | **81/100** | **62/100** | **-19** | Voir ENGINEERING-GAPS-V3.md |
+| **Voice Services** | 0/15 | **15/15** | +15 | ✅ 3/3 running |
+| **Sensors** | 7/19 | **14/19** | +7 | ✅ 74% operational |
+| **Integrations** | 5/15 | **5/15** | 0 | ⚠️ META/TIKTOK missing |
+| **Data Pipeline** | 2/15 | **2/15** | 0 | ⚠️ Low activity |
+| **Architecture** | 8/10 | **8/10** | 0 | ✅ Scripts operational |
+| **MCP Server** | 15/15 | **15/15** | 0 | ✅ 99/99 tests passed |
+| **GLOBAL** | **62/100** | **77/100** | **+15** | Voice services fixed |
 
 ### Credential Score: 60% (6/9 modules valides)
-- ✅ Voice, E-commerce, Google
+- ✅ Voice, E-commerce, Google, MCP, Communications (partial)
 - ❌ Telephony (TELNYX), Payments (STRIPE), Marketing (META)
 
 ---
@@ -68,13 +69,43 @@ API:      dashboard/src/app/api/learning/
 
 ## État Actuel (27/01/2026)
 
-### MCP Server
+### MCP Stack (14 servers - Verified 178quater)
+
+#### Global MCPs (~/.config/claude-code/mcp.json)
+| MCP | Status | Verification |
+|:---|:---|:---|
+| chrome-devtools | ✅ OK | list_pages, screenshots |
+| playwright | ✅ OK | browser_tabs, automation |
+| gemini | ✅ OK | gemini-2.5-pro-latest |
+| hostinger | ✅ OK | VPS 1168256 access |
+| github | ✅ OK | Repo operations work |
+| filesystem | ✅ OK | Built-in |
+| memory | ✅ OK | Built-in |
+
+#### Project MCPs (.mcp.json)
+| MCP | Status | Verification |
+|:---|:---|:---|
+| **3a-global-mcp** | ✅ **99/99 tests** | 124 tools (121 automations + 3 meta) |
+| grok | ✅ OK | XAI_API_KEY configured |
+| google-sheets | ✅ OK | Service account auth |
+| klaviyo | ✅ OK | API works (SSL local only) |
+| shopify-dev | ✅ OK | API docs, no auth needed |
+| shopify-admin | ✅ OK | Store management |
+| apify | ✅ OK | Actor execution |
+
+#### 3a-global-mcp Details
 ```
-Version: 1.5.0 | SDK: 1.25.3 | SOTA: 95%
-Tools: 124 (121 automations + 3 meta)
-Tests: 99/99 (100%)
-Transport: stdio, http | Auth: Bearer token (optional)
+Location:   automations/3a-global-mcp/
+Version:    1.5.0
+SDK:        @modelcontextprotocol/sdk 1.25.3
+Tools:      124 (121 automations + 3 meta)
+Tests:      99/99 (100%) - ALL PASSED
+Transport:  stdio, http
+Auth:       Bearer token (optional)
+Registry:   automations-registry.json (121 entries)
 ```
+
+**Verify MCP:** `node automations/3a-global-mcp/verify-core.js`
 
 ### Voice MENA Stack
 ```
@@ -94,30 +125,65 @@ STT:         ElevenLabs Scribe Maghrebi
 
 ---
 
-## Sensors (19 total - Session 177bis Retest)
+## Sensors (19 total - Session 178quater VERIFIED 27/01/2026 19:45 CET)
 
-| Status | Count | Sensors |
+### ✅ OPERATIONAL (14/19)
+| Sensor | Function | Credentials Used | Last Verified |
+|:---|:---|:---|:---|
+| shopify-sensor | Store health, products, orders | SHOPIFY_STORE, SHOPIFY_ACCESS_TOKEN | ✅ API passed |
+| klaviyo-sensor | Email lists, campaigns | KLAVIYO_API_KEY | ✅ 10 lists |
+| email-health-sensor | Bounce/spam/open rates | KLAVIYO_API_KEY | ✅ API passed |
+| cost-tracking-sensor | API costs, burn rate | OPENAI_API_KEY, ANTHROPIC_API_KEY | ✅ Budget OK |
+| lead-velocity-sensor | Lead count, velocity | File-based (leads-scored.json) | ✅ 2 leads |
+| ga4-sensor | Sessions, conversions, revenue | GA4_PROPERTY_ID, GOOGLE_APPLICATION_CREDENTIALS | ✅ API passed |
+| retention-sensor | Order count, churn rate | SHOPIFY_* | ✅ 0 orders |
+| gsc-sensor | Search impressions, clicks | GOOGLE_APPLICATION_CREDENTIALS, GSC_SITE_URL | ✅ API passed |
+| lead-scoring-sensor | Lead quality score | File-based | ✅ Score: 3 |
+| apify-trends-sensor | Market trends (via Apify) | APIFY_TOKEN | ✅ STARTER plan |
+| google-trends-sensor | AI market analysis | Multi-AI (Grok→OpenAI→Gemini) | ✅ 4 providers |
+| product-seo-sensor | Product SEO quality | SHOPIFY_* | ✅ API passed |
+| content-performance-sensor | WordPress metrics | WP_SITE_URL, WP_APP_PASSWORD | ✅ API passed |
+| voice-quality-sensor | Voice endpoints health | Internal | ✅ 3/3 healthy |
+
+### ⚠️ PARTIAL (1/19)
+| Sensor | Issue | Missing Credentials |
 |:---|:---|:---|
-| ✅ OK | 12 | ga4, shopify, klaviyo, retention, email-health, google-trends, cost-tracking, lead-velocity, product-seo, apify-trends, content-perf, lead-scoring |
-| ⚠️ WARNING | 2 | supplier-health (partial creds), voice-quality (services OFF) |
-| ❌ NO CREDS | 4 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner |
-| ❌ DNS ERROR | 1 | gsc (network issue) |
+| supplier-health-sensor | No supplier APIs configured | CJ_API_KEY, BIGBUY_API_KEY |
+
+### ❌ BLOCKED (4/19)
+| Sensor | Error | Missing Credentials | Setup Link |
+|:---|:---|:---|:---|
+| meta-ads-sensor | META_ACCESS_TOKEN not set | META_ACCESS_TOKEN | [Meta Business](https://business.facebook.com/settings/system-users) |
+| tiktok-ads-sensor | TIKTOK tokens not set | TIKTOK_ACCESS_TOKEN, TIKTOK_ADVERTISER_ID | [TikTok Business](https://ads.tiktok.com/marketing_api/docs) |
+| whatsapp-status-sensor | WHATSAPP tokens not set | WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID | [Meta WhatsApp](https://developers.facebook.com/docs/whatsapp/cloud-api) |
+| google-ads-planner-sensor | All Google Ads creds missing | GOOGLE_ADS_CLIENT_ID, GOOGLE_ADS_CLIENT_SECRET, GOOGLE_ADS_DEVELOPER_TOKEN, GOOGLE_ADS_CUSTOMER_ID, GOOGLE_ADS_REFRESH_TOKEN | [Google Ads API](https://developers.google.com/google-ads/api/docs) |
 
 **Total Fonctionnels: 14/19 (74%)**
 
-**Check:** `node automations/agency/core/SENSOR-NAME-sensor.cjs --health`
+### Verification Commands
+```bash
+# Single sensor
+node automations/agency/core/SENSOR-NAME-sensor.cjs --health
+
+# All sensors (batch)
+for s in shopify klaviyo ga4 retention gsc; do
+  echo "=== $s ===" && node automations/agency/core/${s}-sensor.cjs --health 2>&1 | head -5
+done
+```
 
 ---
 
-## BLOCKERS (Action Requise)
+## BLOCKERS (Action Requise - User Must Configure)
 
-| Problème | Impact | Action |
+| Credential | Impact | Action |
 |:---|:---|:---|
-| META_PIXEL_ID vide | Meta CAPI inactif | Configurer (Events Manager) |
-| META_ACCESS_TOKEN vide | Meta Ads + CAPI cassés | Configurer token |
-| TIKTOK_ACCESS_TOKEN vide | TikTok Ads cassé | Configurer token |
-| TELNYX_API_KEY vide | Telephony MENA OFF | [Créer compte Telnyx](https://portal.telnyx.com) |
-| Shopify/Klaviyo sensors | Fetch failed | Vérifier credentials/réseau |
+| META_ACCESS_TOKEN | Meta Ads sensor blocked | [Meta Business](https://business.facebook.com/settings/system-users) |
+| TIKTOK_ACCESS_TOKEN + ADVERTISER_ID | TikTok Ads sensor blocked | [TikTok Business](https://ads.tiktok.com/marketing_api/docs) |
+| WHATSAPP_ACCESS_TOKEN + PHONE_NUMBER_ID | WhatsApp sensor blocked | [Meta WhatsApp](https://developers.facebook.com/docs/whatsapp/cloud-api) |
+| GOOGLE_ADS_* (5 keys) | Google Ads Planner blocked | [Google Ads API](https://developers.google.com/google-ads/api/docs) |
+| TELNYX_API_KEY | Voice Telephony external calls | [Telnyx Portal](https://portal.telnyx.com) |
+| STRIPE_SECRET_KEY | Payments processing | [Stripe Dashboard](https://dashboard.stripe.com/apikeys) |
+| CJ_API_KEY, BIGBUY_API_KEY | Supplier sync (P3) | Contact suppliers |
 
 ---
 

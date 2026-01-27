@@ -1,4 +1,4 @@
-# MCPs Status (Verified 26/01/2026 - Session 168quinquies)
+# MCPs Status (Verified 27/01/2026 - Session 178quater)
 
 ## Stack MCP (14 serveurs)
 
@@ -47,15 +47,18 @@
 
 ## 3A-MCP Custom Servers
 
-### 3a-global-mcp ✅ OPERATIONAL
+### 3a-global-mcp ✅ OPERATIONAL (99/99 tests passed)
 
 | Aspect | Valeur |
 |--------|--------|
 | Location | `automations/3a-global-mcp/` |
-| Version | 1.1.0 |
+| Version | 1.5.0 |
+| SDK | @modelcontextprotocol/sdk 1.25.3 |
 | Tools | **124** (121 automations + 3 meta) |
+| Tests | **99/99 (100%)** - Verified 27/01/2026 |
 | Meta Tools | `get_global_status`, `get_tool_catalog`, `chain_tools` |
-| Engine | Ultrathink v3 |
+| Transport | stdio, http |
+| Auth | Bearer token (optional) |
 | Registry | `automations-registry.json` |
 
 ### alibaba-mcp ⚠️ NEEDS CREDENTIALS
