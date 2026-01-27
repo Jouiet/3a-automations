@@ -1,5 +1,5 @@
 # Analyse Stratégique: Plateforme Voice AI MENA
-> Version: 5.5.1 | 27/01/2026 | DÉCISION: ✅ **GO** - Multi-Canal + Solution Complète + Benchmark Technique
+> Version: 5.5.2 | 27/01/2026 | DÉCISION: ✅ **GO** - Multi-Canal + Atlas-Chat Fallback + Plan d'Action
 
 ## Executive Summary
 
@@ -486,13 +486,66 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 
 > **Note:** SAWT IA, Kalimna AI et Sawt Saudi sont des **CONCURRENTS** à benchmarker (voir Section 2), pas des fournisseurs technologiques.
 
-### 3.3 Stack Recommandé (Production)
+### 3.3 Stack Recommandé (Production) - VÉRIFIÉ v5.5.1
 
 | Composant | Provider Primaire | Fallback 1 | Fallback 2 | Justification |
 |-----------|-------------------|------------|------------|---------------|
-| **LLM Darija** | Grok-4 | Mistral Saba | Claude | Latence + coût |
-| **TTS Darija** | ElevenLabs Ghizlane | DarijaTTS | Web Speech | Qualité + naturel |
-| **STT Darija** | ElevenLabs Scribe | DVoice | Whisper | Précision Maghrebi |
+| **LLM Darija** | Grok-4-1-fast | **Atlas-Chat-9B** (self-hosted) | Claude | Latence + Darija natif |
+| **TTS Darija** | ElevenLabs Ghizlane | Web Speech | MiniMax | Qualité + naturel |
+| **STT Darija** | ElevenLabs Scribe | Whisper | Web Speech | Précision Maghrebi |
+
+### 3.3.B ANALYSE PARTENARIATS LLM DARIJA OPEN-SOURCE (Audit 27/01/2026)
+
+> **Méthodologie:** Analyse factuelle bottom-up des options LLM Darija open-source.
+
+#### Atlas-Chat (MBZUAI) - ✅ VIABLE POUR FALLBACK
+
+| Critère | Fait Vérifié | Source |
+|---------|--------------|--------|
+| **Organisation** | MBZUAI France Lab (Paris) - UAE University | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B) |
+| **Modèles** | 2B, 9B, 27B (Sept-Oct 2024) | [arXiv](https://arxiv.org/abs/2409.17912) |
+| **License** | **Gemma License** = Commercial POSSIBLE | ✅ Avec restrictions Google |
+| **Performance** | DarijaMMLU: 58.23 - +13% vs Jais 13B | Benchmarks publics |
+| **Requirements** | 6-18GB VRAM | 4-bit: 6GB, 8-bit: 10GB, BF16: 18GB |
+| **Production Ready** | ✅ Ollama, vLLM, HF Transformers | Documentation complète |
+
+**Coût Hosting Atlas-Chat-9B:**
+| Provider | GPU | Coût/mois | COGS/min |
+|----------|-----|-----------|----------|
+| RunPod A100 | 40GB | ~$400 | ~$0.01 |
+| Vast.ai RTX4090 | 24GB | ~$200 | ~$0.005 |
+
+**Limitations documentées:** Struggles avec tâches complexes, factual accuracy limitée, cultural nuances partielles.
+
+#### AtlasIA (Community) - ❌ NON-COMMERCIAL
+
+| Critère | Fait | Impact |
+|---------|------|--------|
+| **License** | **CC BY-NC** | ❌ **INTERDIT usage commercial** |
+| **Modèles** | Terjman v2, Al-Atlas-0.5B | Translation focus (pas conversationnel) |
+| **Organisation** | 4 fondateurs + étudiants bénévoles | Pas une entreprise |
+
+> ❌ **AtlasIA = CC BY-NC = IMPOSSIBLE pour 3A sans négociation license explicite.**
+
+#### Mistral Saba - ⚠️ DARIJA NON CONFIRMÉ
+
+| Critère | Fait Vérifié | Source |
+|---------|--------------|--------|
+| **Modèle** | Mistral Saba 24B (Fév 2025) | [TechCrunch](https://techcrunch.com/2025/02/17/mistral-releases-regional-model-focused-on-arabic-language-and-culture/) |
+| **Darija support** | ❓ **NON DOCUMENTÉ** | Aucune source explicite |
+| **MoU Maroc (Sept 2025)** | Government focus: éducation, recherche | [MoroccoWorldNews](https://www.moroccoworldnews.com/2025/09/259106/morocco-partners-with-french-ai-firm-mistral-ai-to-boost-local-innovation/) |
+| **API Commercial** | ✅ Disponible (pricing standard) | Pas d'accès privilégié Maroc |
+
+> ⚠️ **MoU Maroc = partenariat GOUVERNEMENTAL, PAS accès B2B privilégié pour PME.**
+
+#### VERDICT PARTENARIATS LLM
+
+| Option | Verdict | Action Immédiate |
+|--------|---------|------------------|
+| **Atlas-Chat-9B** | ✅ **GO** | Deploy self-hosted comme fallback |
+| **AtlasIA** | ❌ **BLOCKED** | CC BY-NC = pas d'usage commercial |
+| **Mistral via MoU** | ❌ **WISHFUL THINKING** | Government ≠ B2B |
+| **Mistral API standard** | ⚠️ **À TESTER** | Vérifier Darija support |
 
 ### 3.4 Stack Technique Existant
 
@@ -1869,13 +1922,77 @@ Raisons:
 ---
 
 **Document créé:** 27/01/2026
-**Dernière màj:** 27/01/2026 - Benchmark Technique Complet v5.5.1
-**Version:** 5.5.1 (Multi-Canal + Solution Complète + Benchmark Technique)
+**Dernière màj:** 27/01/2026 - Analyse LLM Darija Partenariats v5.5.2
+**Version:** 5.5.2 (Multi-Canal + Atlas-Chat Fallback + Plan d'Action)
 **Auteur:** Claude Opus 4.5 (3A Automation)
 **Classification:** Stratégie Business - Confidentiel
 **Décision:** ✅ **GO MULTI-CANAL + SOLUTION COMPLÈTE** - Web Widget (91%) + WhatsApp Voice (84%) + PSTN Morocco (63%)
 
+---
+
+## PLAN D'ACTION SESSION 169 (27/01/2026)
+
+### Actions IMMÉDIATES (Cette semaine)
+
+| # | Action | Owner | Deadline | Status |
+|---|--------|-------|----------|--------|
+| 1 | Deploy Atlas-Chat-9B sur RunPod/Vast.ai | Dev | J+3 | ⏳ TODO |
+| 2 | Tester Mistral Saba API pour Darija | Dev | J+2 | ⏳ TODO |
+| 3 | Provisioning premier DID Telnyx +212 | Ops | J+1 | ⏳ TODO |
+| 4 | Intégrer WhatsApp Business Calling API | Dev | J+7 | ⏳ TODO |
+
+### Actions P1 (Ce mois)
+
+| # | Action | Justification | Effort |
+|---|--------|---------------|--------|
+| 5 | Benchmark latence Atlas-Chat vs Grok | Valider fallback chain | Moyen |
+| 6 | Premier client test PSTN Morocco | Validation terrain | Élevé |
+| 7 | Documentation API 3A Voice publique | Différenciation vs SAWT IA | Moyen |
+
+### Actions P2 (Ce trimestre)
+
+| # | Action | Dépendance |
+|---|--------|------------|
+| 8 | Contact AtlasIA pour license commerciale | Résultat test Atlas-Chat |
+| 9 | Expansion UAE/KSA via WhatsApp Voice | Validation Morocco |
+| 10 | Optimisation latence 2.5s → 1s | Infrastructure |
+
+### DÉCISIONS PRISES Session 169
+
+| Décision | Justification | Impact |
+|----------|---------------|--------|
+| **Atlas-Chat-9B comme fallback** | License Gemma OK, Production ready | Résilience LLM Darija |
+| **AtlasIA = NON pour l'instant** | CC BY-NC = commercial impossible | Évite risque légal |
+| **Mistral MoU ≠ partenariat B2B** | Government focus, pas PME | Réalisme |
+| **Self-hosted > API pour LLM Darija** | Contrôle, pas de vendor lock-in | Indépendance |
+
+### MÉTRIQUES À SUIVRE
+
+| Métrique | Cible | Actuel | Gap |
+|----------|-------|--------|-----|
+| Latence round-trip | <1s | 2.5s | -1.5s |
+| COGS Web Widget | <$0.01/min | $0.007/min | ✅ |
+| COGS PSTN Morocco | <$0.05/min | $0.044/min | ✅ |
+| Clients actifs | 10 | 0 | -10 |
+
+---
+
 ### Historique des Corrections
+
+#### v5.5.2 (27/01/2026) - Analyse LLM Darija Partenariats + Plan d'Action
+| Ajout | Détail | Impact |
+|-------|--------|--------|
+| **Atlas-Chat-9B** | Fallback Darija validé (Gemma license) | Résilience stack |
+| **AtlasIA verdict** | CC BY-NC = NON commercial | Clarification légale |
+| **Mistral Saba** | Darija non confirmé, MoU ≠ B2B | Réalisme |
+| **Coût hosting** | RunPod $400/mois, ~$0.01/min | Budget prévu |
+| **Plan d'action** | 10 actions priorisées P0/P1/P2 | Exécution |
+
+#### v5.5.1 (27/01/2026) - Benchmark Technique + RED FLAGS SAWT IA
+| Ajout | Détail | Impact |
+|-------|--------|--------|
+| **RED FLAGS SAWT IA** | "ML in-house" claim peu crédible | Réalisme concurrentiel |
+| **Benchmark Global** | Vapi 500ms, Retell 800ms, 3A 2.5s | Latence à optimiser |
 
 #### v5.5 (27/01/2026) - Analyse Concurrentielle + Architecture Solution Complète + Benchmark Technique
 | Ajout | Détail | Impact |

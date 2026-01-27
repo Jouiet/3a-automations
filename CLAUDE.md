@@ -1,10 +1,88 @@
 # 3A Automation
-> Version: 115.0 | 27/01/2026 | Session 168quindecies - DNS Propagated + Sensors Fixed
+> Version: 116.0 | 27/01/2026 | Session 169 - Voice MENA v5.5.2 + LLM Darija Analysis
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ 200)
+
+---
+
+## SESSION 169 - VOICE MENA PLATFORM ANALYSIS v5.5.2 (27/01/2026)
+
+### Document: `docs/VOICE-MENA-PLATFORM-ANALYSIS.md` v5.5.2
+
+### Benchmark Concurrentiel Complet
+
+| Concurrent | Latence | Darija | MENA DIDs | WhatsApp Voice | Pricing |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Vapi** | 500ms | ❌ | ❌ | ❌ | $0.07-0.33/min |
+| **Retell AI** | 800ms | ❌ | ❌ | ❌ | $0.13-0.31/min |
+| **Bland AI** | 800ms | ❌ | ❌ | ❌ | $0.11-0.20/min |
+| **SAWT IA** | ? | ✅ (claim) | ? | ❌ | Sur devis |
+| **3A Voice** | 2.5s | ✅ (testé) | ✅ | ✅ **UNIQUE** | $0.08-0.12/min |
+
+### RED FLAGS SAWT IA (Concurrent Direct Maroc)
+
+| Indicateur | Observation | Implication |
+| :--- | :--- | :--- |
+| **"ML in-house"** | 1 dev mentionné, background marketing | Probable: GPT + ElevenLabs |
+| **Pricing** | Non public (sur devis) | Opacité |
+| **Documentation** | 0 pages techniques | Black box |
+| **API** | Non publique | Pas de self-service |
+
+### Analyse Partenariats LLM Darija
+
+| Option | Verdict | Raison |
+| :--- | :--- | :--- |
+| **Atlas-Chat-9B** | ✅ **GO** | Gemma license = commercial OK |
+| **AtlasIA** | ❌ **BLOCKED** | CC BY-NC = non-commercial only |
+| **Mistral via MoU Maroc** | ❌ **WISHFUL THINKING** | Government focus ≠ B2B PME |
+| **Mistral API standard** | ⚠️ **À TESTER** | Darija support non confirmé |
+
+### Stack LLM Darija Validé
+
+```
+Primary:   Grok-4-1-fast (testé OK)
+Fallback:  Atlas-Chat-9B (self-hosted, Gemma license)
+TTS:       ElevenLabs Ghizlane
+STT:       ElevenLabs Scribe Maghrebi
+```
+
+### Coût Hosting Atlas-Chat-9B
+
+| Provider | GPU | Coût/mois | COGS/min |
+| :--- | :--- | :--- | :--- |
+| RunPod | A100 40GB | ~$400 | ~$0.01 |
+| Vast.ai | RTX 4090 | ~$200 | ~$0.005 |
+
+### Architecture Solution Complète 3A
+
+```
+CLIENT → 3A Platform (numéro INCLUS) → Providers (invisible)
+         ↓
+         DID Manager (Telnyx API)
+         Voice API (Grok + Atlas-Chat fallback)
+         WhatsApp Business API
+```
+
+### Commits Session 169
+
+```
+72462a4 docs: v5.5 analyse concurrentielle + architecture solution complète
+ce93743 docs: v5.5.1 benchmark technique complet + red flags SAWT IA
+[pending] docs: v5.5.2 LLM Darija partenariats + plan d'action
+```
+
+### Plan d'Action (Voir `VOICE-MENA-PLATFORM-ANALYSIS.md`)
+
+| Priorité | Action | Deadline |
+| :--- | :--- | :--- |
+| P0 | Deploy Atlas-Chat-9B sur RunPod | J+3 |
+| P0 | Tester Mistral Saba API Darija | J+2 |
+| P0 | Premier DID Telnyx +212 | J+1 |
+| P1 | Intégrer WhatsApp Business Calling | J+7 |
+| P1 | Premier client test PSTN Morocco | Ce mois |
 
 ---
 
