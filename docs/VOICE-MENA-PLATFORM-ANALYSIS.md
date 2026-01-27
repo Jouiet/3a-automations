@@ -1,5 +1,5 @@
 # Analyse Stratégique: Plateforme Voice AI MENA
-> Version: 5.5.2 | 27/01/2026 | DÉCISION: ✅ **GO** - Multi-Canal + Atlas-Chat Fallback + Plan d'Action
+> Version: 5.5.3 | 27/01/2026 | DÉCISION: ✅ **GO** - Multi-Canal + Atlas-Chat 9B/27B + Plan d'Action
 
 ## Executive Summary
 
@@ -502,18 +502,37 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 
 | Critère | Fait Vérifié | Source |
 |---------|--------------|--------|
-| **Organisation** | MBZUAI France Lab (Paris) - UAE University | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B) |
+| **Organisation** | MBZUAI France Lab (Paris) - UAE University | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B) |
 | **Modèles** | 2B, 9B, 27B (Sept-Oct 2024) | [arXiv](https://arxiv.org/abs/2409.17912) |
 | **License** | **Gemma License** = Commercial POSSIBLE | ✅ Avec restrictions Google |
-| **Performance** | DarijaMMLU: 58.23 - +13% vs Jais 13B | Benchmarks publics |
-| **Requirements** | 6-18GB VRAM | 4-bit: 6GB, 8-bit: 10GB, BF16: 18GB |
 | **Production Ready** | ✅ Ollama, vLLM, HF Transformers | Documentation complète |
+| **Updates 2025-2026** | ⚠️ Aucune release publique | Dernière update: Oct 2024 |
 
-**Coût Hosting Atlas-Chat-9B:**
-| Provider | GPU | Coût/mois | COGS/min |
-|----------|-----|-----------|----------|
-| RunPod A100 | 40GB | ~$400 | ~$0.01 |
-| Vast.ai RTX4090 | 24GB | ~$200 | ~$0.005 |
+##### Benchmark Comparatif 9B vs 27B
+
+| Benchmark | Atlas-Chat-9B | Atlas-Chat-27B | Delta | Source |
+|-----------|---------------|----------------|-------|--------|
+| **DarijaMMLU** | 58.23% | **61.95%** | +3.72% | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B) |
+| **DarijaHellaSwag** | 43.65% | **48.37%** | +4.72% | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B) |
+| **vs Jais 13B** | +13% | +17% | - | [MarkTechPost](https://www.marktechpost.com/2024/11/07/mbzuai-researchers-release-atlas-chat-2b-9b-and-27b-a-family-of-open-models-instruction-tuned-for-darija-moroccan-arabic/) |
+
+##### Requirements VRAM
+
+| Model | 4-bit Quantization | 8-bit Quantization | BF16 (Full) |
+|-------|--------------------|--------------------|-------------|
+| **Atlas-Chat-9B** | ~6GB | ~10GB | ~18GB |
+| **Atlas-Chat-27B** | ~14GB | ~27GB | ~54GB |
+
+##### Coût Hosting Comparatif
+
+| Model | Provider | GPU | Coût/mois | COGS/min |
+|-------|----------|-----|-----------|----------|
+| **9B (Recommandé)** | Vast.ai RTX4090 | 24GB | ~$200 | ~$0.005 |
+| **9B** | RunPod A100 | 40GB | ~$400 | ~$0.01 |
+| **27B** | RunPod A100-80G | 80GB | ~$800 | ~$0.02 |
+| **27B** | Lambda Labs A100 | 80GB | ~$900 | ~$0.022 |
+
+> **Recommandation:** **Atlas-Chat-9B** pour voice (latence prioritaire). **Atlas-Chat-27B** pour tâches complexes offline (résumés, analyses).
 
 **Limitations documentées:** Struggles avec tâches complexes, factual accuracy limitée, cultural nuances partielles.
 
@@ -540,12 +559,13 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 
 #### VERDICT PARTENARIATS LLM
 
-| Option | Verdict | Action Immédiate |
-|--------|---------|------------------|
-| **Atlas-Chat-9B** | ✅ **GO** | Deploy self-hosted comme fallback |
-| **AtlasIA** | ❌ **BLOCKED** | CC BY-NC = pas d'usage commercial |
-| **Mistral via MoU** | ❌ **WISHFUL THINKING** | Government ≠ B2B |
-| **Mistral API standard** | ⚠️ **À TESTER** | Vérifier Darija support |
+| Option | Verdict | Action Immédiate | Use Case |
+|--------|---------|------------------|----------|
+| **Atlas-Chat-9B** | ✅ **GO** | Deploy self-hosted comme fallback | Voice real-time (latence) |
+| **Atlas-Chat-27B** | ✅ **GO** | Deploy pour tâches offline | Analyses, résumés (qualité) |
+| **AtlasIA** | ❌ **BLOCKED** | CC BY-NC = pas d'usage commercial | - |
+| **Mistral via MoU** | ❌ **WISHFUL THINKING** | Government ≠ B2B | - |
+| **Mistral API standard** | ⚠️ **À TESTER** | Vérifier Darija support | Fallback si Atlas down |
 
 ### 3.4 Stack Technique Existant
 
@@ -1127,9 +1147,10 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **Anthropic** | Opus 4.5 | $5.00 | $25.00 | 🟡 Bon | **$0.040** | [Claude](https://platform.claude.com/docs/en/about-claude/pricing) |
 | **Google** | Gemini 2.5 Flash | $0.15 | $0.60 | 🟡 Moyen | **$0.001** | [Google](https://ai.google.dev/gemini-api/docs/pricing) |
 | **Mistral** | Saba 24B | ~$0.02 | ~$0.10 | ✅ **Natif** | **$0.0002** | [Mistral](https://mistral.ai/news/mistral-saba) |
-| **MBZUAI** | Atlas-Chat 9B | GRATUIT | GRATUIT | ✅ **Darija** | **$0.00*** | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B) |
+| **MBZUAI** | Atlas-Chat 9B | GRATUIT | GRATUIT | ✅ **Darija** | **$0.005*** | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B) |
+| **MBZUAI** | Atlas-Chat 27B | GRATUIT | GRATUIT | ✅ **Darija+** | **$0.02*** | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B) |
 
-*Coût/min estimé: ~500 tokens input + 200 output × 3 échanges. **Self-hosted compute non inclus.
+*Coût/min estimé: ~500 tokens input + 200 output × 3 échanges. **Self-hosted compute inclus (Vast.ai 9B: $200/mois, RunPod 27B: $800/mois).
 
 ##### TTS - Text-to-Speech
 
@@ -2052,7 +2073,9 @@ Raisons:
 | Grok/xAI | [docs.x.ai/docs/models](https://docs.x.ai/docs/models) |
 | Claude | [platform.claude.com/docs/en/about-claude/pricing](https://platform.claude.com/docs/en/about-claude/pricing) |
 | Mistral Saba | [mistral.ai/news/mistral-saba](https://mistral.ai/news/mistral-saba) |
-| Atlas-Chat | [huggingface.co/MBZUAI-Paris/Atlas-Chat-9B](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B) |
+| Atlas-Chat 9B | [huggingface.co/MBZUAI-Paris/Atlas-Chat-9B](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B) |
+| Atlas-Chat 27B | [huggingface.co/MBZUAI-Paris/Atlas-Chat-27B](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-27B) |
+| Atlas-Chat Paper | [arxiv.org/abs/2409.17912](https://arxiv.org/abs/2409.17912) |
 | Gemini | [ai.google.dev/gemini-api/docs/pricing](https://ai.google.dev/gemini-api/docs/pricing) |
 | fal.ai MiniMax | [fal.ai/models/fal-ai/minimax/speech-2.6-turbo](https://fal.ai/models/fal-ai/minimax/speech-2.6-turbo) |
 | Amazon Polly | [aws.amazon.com/polly/pricing](https://aws.amazon.com/polly/pricing/) |
