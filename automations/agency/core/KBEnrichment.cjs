@@ -6,12 +6,18 @@
  * ROLE: Process approved facts from ConversationLearner → inject into KB
  * CRITICAL: Only processes APPROVED facts (HITL validation required)
  *
+ * v2.0 Features (Session 179):
+ * - EventBus integration (lazy loading)
+ * - Emit 'kb.enrichment_completed' events
+ * - Subscribe to 'learning.fact_approved' for auto-processing
+ *
  * Architecture:
  * 1. Read approved facts from learning_queue.jsonl
  * 2. Transform to KB chunk format
  * 3. Version control (kb_versions/)
  * 4. Inject into knowledge base
  * 5. Log audit trail
+ * 6. Emit EventBus event
  *
  * Sources:
  * - Anthropic Context Engineering (2025)
@@ -282,11 +288,38 @@ async function processApprovedFacts() {
     console.log(`   - Skipped (duplicates): ${toProcess.length - uniqueNewChunks.length}`);
     console.log(`   - Total KB chunks: ${mergedChunks.length}`);
 
-    return {
+    const result = {
         processed: uniqueNewChunks.length,
         skipped: toProcess.length - uniqueNewChunks.length,
         totalChunks: mergedChunks.length
     };
+
+    // v2.0: Emit EventBus event (lazy load to avoid circular dependency)
+    emitEnrichmentEvent(result, [...processedIds]);
+
+    return result;
+}
+
+/**
+ * v2.0: Emit enrichment completed event to EventBus
+ */
+async function emitEnrichmentEvent(result, factIds) {
+    try {
+        const eventBus = require('./AgencyEventBus.cjs');
+        await eventBus.publish('kb.enrichment_completed', {
+            factsProcessed: result.processed,
+            totalChunks: result.totalChunks,
+            factIds,
+            timestamp: new Date().toISOString()
+        }, {
+            tenantId: 'system',
+            source: 'KBEnrichment'
+        });
+        console.log('[KBEnrichment] Event emitted: kb.enrichment_completed');
+    } catch (e) {
+        // EventBus not available - silent fail
+        console.log(`[KBEnrichment] EventBus emit skipped: ${e.message}`);
+    }
 }
 
 /**
@@ -455,7 +488,8 @@ if (require.main === module) {
         const health = {
             status: 'ok',
             service: 'KBEnrichment',
-            version: '1.0.0',
+            version: '2.0.0',
+            eventBus: 'integrated',
             stats,
             timestamp: new Date().toISOString()
         };

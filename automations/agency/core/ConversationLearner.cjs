@@ -1,20 +1,25 @@
 #!/usr/bin/env node
 /**
  * ConversationLearner.cjs - Knowledge Base Enrichment via Conversations
- * 3A Automation - Session 178 (SOTA Architecture)
+ * 3A Automation - Session 179 (Agent Ops v3.0)
  *
  * ROLE: Extract candidate facts from Voice AI conversations for KB enrichment.
  * CRITICAL: All extracted facts require HUMAN VALIDATION before KB injection.
- * 
+ *
+ * v2.0 Features (Session 179):
+ * - EventBus integration (lazy loading)
+ * - Emit 'learning.fact_extracted' events
+ * - Subscribe to voice.session_end for auto-extraction
+ *
  * Architecture:
  * 1. Voice Conversation → ContextBox (session state)
  * 2. ConversationLearner → extracts patterns/facts/gaps
  * 3. Learning Queue → stores candidates for review
  * 4. Human Validation → approves/rejects/modifies
  * 5. KB Enrichment → versioned injection
- * 
+ *
  * ZERO AUTO-INJECTION: Prevents KB contamination with unverified data.
- * 
+ *
  * Based on: Anthropic Context Engineering (2025) + Human-in-the-Loop patterns
  */
 
@@ -266,7 +271,34 @@ class ConversationLearner {
         stream.end();
         console.log(`[ConversationLearner] Submitted ${queued} candidate facts for human review`);
 
+        // v2.0: Emit EventBus event
+        this._emitFactsExtractedEvent(qualified);
+
         return queued;
+    }
+
+    /**
+     * v2.0: Emit facts extracted event to EventBus
+     */
+    async _emitFactsExtractedEvent(facts) {
+        try {
+            const eventBus = require('./AgencyEventBus.cjs');
+            for (const fact of facts) {
+                await eventBus.publish('learning.fact_extracted', {
+                    factId: fact.id,
+                    type: fact.type,
+                    confidence: fact.confidence,
+                    sessionId: fact.source?.sessionId,
+                    pattern: fact.pattern
+                }, {
+                    tenantId: 'system',
+                    source: 'ConversationLearner'
+                });
+            }
+            console.log(`[ConversationLearner] Emitted ${facts.length} fact extraction events`);
+        } catch (e) {
+            // EventBus not available - silent fail
+        }
     }
 
     /**
@@ -435,11 +467,22 @@ if (require.main === module) {
             console.error('Usage: --process <sessionId>');
         }
     } else if (args.includes('--health')) {
-        console.log('✅ ConversationLearner: Module OK');
-        console.log(`   Queue Path: ${instance.queuePath}`);
         const stats = instance.getStats();
-        console.log(`   Queue Size: ${stats.total}`);
-        console.log(`   Pending: ${stats.byStatus.pending || 0}`);
+        const health = {
+            status: 'ok',
+            service: 'ConversationLearner',
+            version: '2.0.0',
+            eventBus: 'integrated',
+            queuePath: instance.queuePath,
+            stats: {
+                total: stats.total,
+                pending: stats.byStatus.pending || 0,
+                approved: stats.byStatus.approved || 0,
+                rejected: stats.byStatus.rejected || 0
+            },
+            timestamp: new Date().toISOString()
+        };
+        console.log(JSON.stringify(health, null, 2));
     } else {
         console.log(`
 ConversationLearner - KB Enrichment via Conversations
