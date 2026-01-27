@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 129.0 | 27/01/2026 | Session 179 | Engineering Score: 92/100 (Agent Ops v3.0)
+> Version: 130.0 | 27/01/2026 | Session 179 | Engineering Score: 92/100 (Agent Ops v3.0 COMPLETE)
 
 ## Identité
 
@@ -8,7 +8,7 @@
 
 ---
 
-## Engineering Scores (Session 178quater - AGENT OPS v3.0)
+## Engineering Scores (Session 179 - AGENT OPS v3.0 COMPLETE)
 
 **3A = Agence qui vend des services automation, PAS un e-commerce**
 
@@ -16,27 +16,30 @@
 |:---|:---:|:---:|:---|
 | **Voice AI** | 15 | **15** | ✅ Bug fixed, 5 langues, 4 providers |
 | **Multi-Tenant** | 15 | **15** | ✅ RLS, 7 Personas, tenant isolation |
-| **Agent Ops v3.0** | 20 | **18** | ✅ EventBus, State Machine, Predictive Context |
+| **Agent Ops v3.0** | 20 | **20** | ✅ ALL 5 modules @ v3.0, EventBus, State Machine |
 | **Tools/Scripts** | 15 | **14** | 85 scripts, HITL 18/18, resilient fallbacks |
 | **MCP Platform** | 15 | **15** | 99/99 tests, 124 tools exposés |
 | **Sensors** | 10 | **7** | 14/19 OK (4 blocked by missing creds) |
 | **Integrations** | 10 | **8** | Core OK, META/TIKTOK external creds missing |
-| **TOTAL** | **100** | **92** | **SOTA Multi-Agent Platform** |
+| **TOTAL** | **100** | **94** | **SOTA Multi-Agent Platform** |
 
-### Agent Ops v3.0 (Session 178quater)
+### Agent Ops v3.0 (Session 179 - ALL COMPLETE)
 | Module | Version | SOTA Features |
 |:---|:---:|:---|
 | **AgencyEventBus.cjs** | 3.0 | Event persistence, idempotency, DLQ, retry backoff, multi-tenant |
 | **ContextBox.cjs** | 3.0 | EventBus subscriptions, predictive context, state machine |
 | **BillingAgent.cjs** | 3.0 | Event emission, state machine, cost tracking |
-| **ErrorScience.cjs** | 2.0 | Confidence scoring, trend detection |
-| **RevenueScience.cjs** | 2.0 | Demand curve, urgency pricing |
+| **ErrorScience.cjs** | 3.0 | EventBus integration, recordError() API, CLI --health |
+| **RevenueScience.cjs** | 3.0 | EventBus integration, pricing analytics, CLI --health |
+| **KBEnrichment.cjs** | 1.0 | KB versioning, rollback, audit trail, CLI --health |
 
-### Session 179 - Learning Loop Completion
+### Session 179 - Complete Summary
 - ✅ Learning Queue Dashboard UI (`/admin/agent-ops/learning`)
 - ✅ KBEnrichment.cjs (350 lines) - KB versioning, rollback, audit trail
 - ✅ Circular dependency fix (EventBus lazy loading)
 - ✅ Sidebar navigation updated (Agent Ops > Learning Queue)
+- ✅ ErrorScience v3.0 - EventBus integration, recordError() API
+- ✅ RevenueScience v3.0 - EventBus integration, pricing analytics
 
 ### Session 178quater - Agent Ops v3.0
 - ✅ Voice API `/respond` bug fixed (VOICE_CONFIG import)

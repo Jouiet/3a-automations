@@ -1609,6 +1609,9 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | **Learning Queue Dashboard UI** | ✅ | `/admin/agent-ops/learning` with full HITL |
 | **KBEnrichment Module** | ✅ | 350 lines, versioning, rollback, audit trail |
 | **Sidebar Navigation** | ✅ | Agent Ops > Learning Queue added |
+| **ErrorScience v3.0** | ✅ | EventBus integration, recordError() API, CLI --health |
+| **RevenueScience v3.0** | ✅ | EventBus integration, pricing analytics, CLI --health |
+| **EventBus Schema Update** | ✅ | 5 new event types for Agent Ops modules |
 
 ### Commits Session 179
 
@@ -1618,6 +1621,30 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | `36cd1de` | feat(dashboard): add Learning Queue UI (Agent Ops v3.0) |
 | `29e8cb1` | feat(agent-ops): add KBEnrichment module (v3.0 Learning Loop) |
 | `23e3367` | docs: update CLAUDE.md for Session 179 |
+| `255a886` | feat(agent-ops): upgrade ErrorScience & RevenueScience to v3.0 |
+
+### Agent Ops v3.0 Complete Module Status
+
+| Module | Version | EventBus | CLI | Status |
+|:-------|:-------:|:--------:|:---:|:------:|
+| **AgencyEventBus** | 3.0.0 | Core | ✅ | ✅ PRODUCTION |
+| **ContextBox** | 3.0.0 | ✅ | ✅ | ✅ PRODUCTION |
+| **BillingAgent** | 3.0.0 | ✅ | ✅ | ✅ PRODUCTION |
+| **ErrorScience** | 3.0.0 | ✅ | ✅ | ✅ PRODUCTION |
+| **RevenueScience** | 3.0.0 | ✅ | ✅ | ✅ PRODUCTION |
+| **KBEnrichment** | 1.0.0 | ⏳ | ✅ | ✅ PRODUCTION |
+| **ConversationLearner** | 1.0.0 | ⏳ | ⏳ | ✅ PRODUCTION |
+
+### New EventBus Event Types (Session 179)
+
+| Event Type | Producer | Consumer |
+|:-----------|:---------|:---------|
+| `error_science.rules_updated` | ErrorScience | Dashboard |
+| `revenue_science.pricing_calculated` | RevenueScience | Analytics |
+| `system.capacity_update` | Monitoring | RevenueScience |
+| `kb.enrichment_completed` | KBEnrichment | Dashboard |
+| `learning.fact_approved` | Learning API | KBEnrichment |
+| `learning.fact_rejected` | Learning API | Analytics |
 
 ### Next Session Actions
 
@@ -1627,7 +1654,7 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 | **P0** | Configure TELNYX_API_KEY | User action |
 | **P0** | Configure STRIPE_SECRET_KEY | User action |
 | **P1** | Test Learning Loop E2E | 2h |
-| **P2** | Upgrade remaining Agent Ops modules (ErrorScience, RevenueScience) to v3.0 | 4h |
+| **P2** | Add EventBus to KBEnrichment & ConversationLearner | 2h |
 
 ---
 
