@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 113.0 | 27/01/2026 | Session 168quaterdecies - Forensic Sensor Audit COMPLET
+> Version: 114.0 | 27/01/2026 | Session 168quaterdecies - sGTM + Voice Services OPÉRATIONNELS
 
 ## Identité
 
@@ -8,7 +8,50 @@
 
 ---
 
-## SESSION 168quaterdecies - FORENSIC SENSOR AUDIT (27/01/2026)
+## SESSION 168quaterdecies - sGTM + VOICE + FORENSIC (27/01/2026)
+
+### Server-Side GTM: DÉPLOYÉ ✅
+
+| Composant | Status | Détail |
+| :--- | :--- | :--- |
+| **GTM Server Container** | ✅ CRÉÉ | `GTM-P2ZFPQ9D` |
+| **Cloud Run** | ✅ OPÉRATIONNEL | HTTP 200, auto-provisionné |
+| **gcloud CLI** | ✅ INSTALLÉ | v553.0.0 |
+| **Billing** | ✅ LIÉ | `0181AD-19F9D5-F48BAB` → projet |
+| **DNS** | ✅ CONFIGURÉ | CNAME `data` → `ghs.googlehosted.com` |
+| **Domain Mapping** | ⏳ EN ATTENTE | Propagation DNS (max 24h) |
+
+### Projets GCP Nettoyés
+
+| Projet | Action |
+| :--- | :--- |
+| `astute-quarter-476613-h3` | ✅ Délié billing |
+| `root-booking-479112-k9` | ✅ Délié billing |
+| `n8n-alpha-medical` | ✅ Délié billing |
+| `gen-lang-client-0843127575` | ✅ Billing activé |
+
+### Voice Services: 3/3 HEALTHY ✅
+
+| Service | Port | Status | Latence |
+| :--- | :--- | :--- | :--- |
+| Voice API | 3004 | ✅ HEALTHY | 23ms |
+| Grok Realtime | 3007 | ✅ HEALTHY | 2ms |
+| Telephony Bridge | 3009 | ✅ HEALTHY | 3ms |
+
+### Fix Appliqué: RateLimiter (Commit `1212695`)
+
+```javascript
+// AVANT (cassé)
+const rateLimiter = new RateLimiter(60, 60000);
+if (!rateLimiter.tryAcquire(clientIp)) { ... }
+
+// APRÈS (corrigé)
+const rateLimiter = new RateLimiter({ maxRequests: 60, windowMs: 60000 });
+const rateCheck = rateLimiter.check(clientIp);
+if (!rateCheck.allowed) { ... }
+```
+
+### Forensic Sensor Audit: COMPLET
 
 ### Audit Forensique: Les Sensors Simulent-ils des Résultats?
 

@@ -4,11 +4,36 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **✅ ÉTAT RÉEL (Session 168quaterdecies - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 19/19 --health** ✅ | **Voice: 5/5 LANGUES** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0** | **A2A: v1.1.0** | **AI: Claude Opus 4.5 fallback**
+> **✅ ÉTAT RÉEL (Session 168quaterdecies - 27/01/2026):** HITL 100% (18/18) ✅ | **Sensors: 19/19 --health** ✅ | **Voice: 3/3 HEALTHY** | **sGTM: OPÉRATIONNEL** | **MCP: 14 servers** | **3a-global-mcp: v1.5.0** | **A2A: v1.1.0** | **AI: Claude Opus 4.5 fallback**
 
 ---
 
-## SESSION 168quaterdecies - FORENSIC SENSOR AUDIT (27/01/2026)
+## SESSION 168quaterdecies - sGTM + VOICE + FORENSIC (27/01/2026)
+
+### Server-Side GTM Deployment ✅
+
+| Étape | Status | Détail |
+|-------|--------|--------|
+| gcloud CLI installé | ✅ DONE | v553.0.0 via brew |
+| Projets GCP nettoyés | ✅ DONE | 3 projets déliés du billing |
+| Billing lié | ✅ DONE | `gen-lang-client-0843127575` |
+| Cloud Run API | ✅ DONE | Activé |
+| GTM Server Container | ✅ DONE | `GTM-P2ZFPQ9D` |
+| sGTM Health | ✅ DONE | HTTP 200 |
+| DNS configuré | ✅ DONE | CNAME `data` → `ghs.googlehosted.com` |
+| Domain Mapping | ⏳ ATTENTE | Propagation DNS (max 24h) |
+
+### Voice Services Démarrés ✅
+
+| Service | Port | Status | Latence |
+|---------|------|--------|---------|
+| Voice API | 3004 | ✅ HEALTHY | 23ms |
+| Grok Realtime | 3007 | ✅ HEALTHY | 2ms |
+| Telephony Bridge | 3009 | ✅ HEALTHY | 3ms |
+
+**Fix appliqué**: RateLimiter bug dans `voice-api-resilient.cjs` (commit `1212695`)
+
+### Forensic Sensor Audit (début session)
 
 ### Audit Forensique des 19 Sensors
 
@@ -824,7 +849,7 @@ Klaviyo: https://www.klaviyo.com/settings/account/api-keys
 | **Phase 4: LLM Darija (Mistral Saba)** | Voice | 22h | ⏳ OPTIONAL |
 | WCAG 2.2 Audit | Accessibility | 8h | ✅ **DONE** (S168decies) |
 | A2A v1.0 upgrade | Protocol | 8h | ✅ **DONE** (S168undecies) |
-| Server-side GTM | Analytics | 16h | ⏳ **REQUIRES GCP** (Cloud Run + domain setup needed) |
+| Server-side GTM | Analytics | 16h | ✅ **DEPLOYED** (S168quaterdecies) - Domain mapping pending |
 
 ### P2 - Medium Priority (Next Quarter)
 
@@ -895,5 +920,46 @@ node automations/agency/core/stitch-api.cjs generate <id> "prompt"
 
 ---
 
-**Document màj:** 26/01/2026 - Session 167 (RAG Hardening)
-**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice: 5/5 LANGUES COMPLET**
+---
+
+## ACTIONABLE NEXT STEPS (Session 168quaterdecies)
+
+### ⏳ EN ATTENTE (Automatique - max 24h)
+
+| Tâche | Dépendance | Action Requise |
+|-------|------------|----------------|
+| Domain Mapping `data.3a-automation.com` | Propagation DNS | Aucune - attendre |
+| Vérification Google Search Console | Propagation TXT | Aucune - attendre |
+
+### 🎯 APRÈS VALIDATION DNS (Prochaine Session)
+
+| # | Tâche | Commande/Action | Priorité |
+|---|-------|-----------------|----------|
+| 1 | Créer domain mapping Cloud Run | `gcloud beta run domain-mappings create --service=server-side-tagging --domain=data.3a-automation.com --region=us-central1 --project=gtm-p2zfpq9d-mwe1z` | P0 |
+| 2 | Configurer GTM Web → Server | GTM Admin → Container Settings → Server URL | P0 |
+| 3 | Ajouter GA4 Server-side tag | GTM Server Container → Tags | P1 |
+| 4 | Ajouter Facebook CAPI tag | GTM Server Container → Tags | P1 |
+| 5 | Tester first-party tracking | Chrome DevTools → Network | P1 |
+
+### ⚠️ BLOCKERS CONNUS
+
+| Blocker | Impact | Action |
+|---------|--------|--------|
+| `content-perf` sensor | WordPress `wp.3a-automation.com` HTTP 504 | Vérifier si URL correcte |
+| ElevenLabs/Whisper providers | voice-quality sensor "ERROR" | Tester API keys directement |
+| META_ACCESS_TOKEN vide | Meta Ads sensor cassé | Configurer token Facebook |
+| TIKTOK_ACCESS_TOKEN vide | TikTok Ads sensor cassé | Configurer token TikTok |
+
+### 📊 MÉTRIQUES SESSION
+
+| Métrique | Avant | Après | Delta |
+|----------|-------|-------|-------|
+| Voice endpoints healthy | 0/3 | 3/3 | **+100%** |
+| sGTM status | ❌ Non existant | ✅ HTTP 200 | **NEW** |
+| GCP billing | Non lié | Lié + 3 projets nettoyés | **FIXED** |
+| Sensors OK | 12/19 | 15/19 | **+3** |
+
+---
+
+**Document màj:** 27/01/2026 - Session 168quaterdecies (sGTM + Voice Services)
+**Status:** HITL 100% ✅ | AG-UI Wired ✅ | **RAG v3.0 HYBRID ✅** | **Voice: 3/3 HEALTHY** | **sGTM: OPÉRATIONNEL**

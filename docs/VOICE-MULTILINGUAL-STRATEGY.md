@@ -1,7 +1,7 @@
 # VOICE MULTILINGUAL STRATEGY - 3A AUTOMATION
 
-> **Version:** 3.0.0 | **Date:** 26/01/2026 | **Session:** 166septies
-> **Statut:** COMPLET - Widget 5 Langues + Telephony Multilingue
+> **Version:** 3.1.0 | **Date:** 27/01/2026 | **Session:** 168quaterdecies
+> **Statut:** COMPLET - Widget 5 Langues + Telephony Multilingue + **Services 3/3 HEALTHY**
 
 ---
 
@@ -79,7 +79,25 @@ voice-assistant/
 
 **Découverte: SAWT IA (sawtia.ma)** = Sensei Prod (Maroc) a développé son propre ML Darija in-house.
 
-**Prochaine étape:** Implémentation Phase 1-3 (Espagnol, Arabe MSA, Darija widgets).
+### 1.4 Voice Services Status (Session 168quaterdecies - 27/01/2026)
+
+| Service | Port | Status | Latence | Fix Appliqué |
+|---------|------|--------|---------|--------------|
+| Voice API | 3004 | ✅ HEALTHY | 23ms | RateLimiter bug (commit `1212695`) |
+| Grok Realtime | 3007 | ✅ HEALTHY | 2ms | - |
+| Telephony Bridge | 3009 | ✅ HEALTHY | 3ms | - |
+
+**Commande de démarrage:**
+```bash
+node automations/agency/core/voice-api-resilient.cjs &
+node automations/agency/core/grok-voice-realtime-proxy.cjs &
+node automations/agency/core/voice-telephony-bridge.cjs &
+```
+
+**Vérification santé:**
+```bash
+node automations/agency/core/voice-quality-sensor.cjs --health
+```
 
 ---
 
