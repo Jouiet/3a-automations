@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // PRIVATE - System prompt NOT exposed to client
 const SYSTEM_PROMPT = `Tu es l'assistant vocal de 3A Automation (AAA - AI Automation Agency).
 

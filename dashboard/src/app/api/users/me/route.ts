@@ -3,6 +3,8 @@ import { getAuthUser, getAuthUserFromCookie } from "@/lib/auth";
 import { getUserByEmail } from "@/lib/google-sheets";
 import { checkRateLimit, getClientIP, RateLimitPresets } from "@/lib/rate-limit";
 
+export const dynamic = 'force-dynamic';
+
 // Fallback users data (matches login route)
 const FALLBACK_USERS = {
   "admin@3a-automation.com": {

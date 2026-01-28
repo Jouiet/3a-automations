@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import * as fs from 'fs';
 import * as path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Learning Queue Stats API - Session 178
  * GET /api/learning/stats - Get queue statistics for dashboard widgets

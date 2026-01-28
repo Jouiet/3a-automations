@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import * as fs from 'fs';
 import * as path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Learning Queue Batch API - Session 178
  * POST /api/learning/batch - Bulk approve/reject facts

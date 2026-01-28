@@ -3,6 +3,8 @@ import { getAuthUserFromCookie, AuthUser } from '@/lib/auth';
 import fs from 'fs';
 import path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 const CLIENTS_DIR = path.join(process.cwd(), '..', 'clients');
 
 interface ClientConfig {

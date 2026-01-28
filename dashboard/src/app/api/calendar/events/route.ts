@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { google } from "googleapis";
 import * as fs from "fs";
 
+export const dynamic = 'force-dynamic';
+
 interface CalendarEvent {
   id: string;
   title: string;

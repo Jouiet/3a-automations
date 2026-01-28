@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+export const dynamic = 'force-dynamic';
+
 interface IntegrationHealth {
   status: "healthy" | "degraded" | "unhealthy" | "disconnected";
   latency?: number;

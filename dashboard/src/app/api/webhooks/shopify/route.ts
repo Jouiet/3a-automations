@@ -3,6 +3,8 @@ import { getShopifyOAuth } from "@/lib/oauth/shopify";
 import fs from "fs";
 import path from "path";
 
+export const dynamic = 'force-dynamic';
+
 /**
  * POST /api/webhooks/shopify
  *

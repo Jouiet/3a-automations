@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 // Google Sheets API for client documents
 const APPS_SCRIPT_URL = process.env.GOOGLE_SHEETS_API_URL;
 

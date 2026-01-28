@@ -3,6 +3,8 @@ import { getUserByEmail, updateUserLastLogin } from "@/lib/google-sheets";
 import { comparePassword, generateToken, setAuthCookie } from "@/lib/auth";
 import { checkRateLimit, getClientIP, RateLimitPresets } from "@/lib/rate-limit";
 
+export const dynamic = 'force-dynamic';
+
 // Fallback users for guaranteed access (when Google Sheets is not configured)
 const FALLBACK_USERS = {
   // Admin user - Password: Admin3A2025

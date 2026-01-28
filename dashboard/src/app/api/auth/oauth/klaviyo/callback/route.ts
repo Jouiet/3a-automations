@@ -5,6 +5,8 @@ import { cookies } from "next/headers";
 import fs from "fs";
 import path from "path";
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/auth/oauth/klaviyo/callback
  *
