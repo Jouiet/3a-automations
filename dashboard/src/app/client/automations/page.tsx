@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -57,6 +58,7 @@ export default function ClientAutomationsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+  const router = useRouter();
 
   const fetchAutomations = useCallback(async () => {
     try {
@@ -229,7 +231,7 @@ export default function ClientAutomationsPage() {
               <p className="text-sm text-muted-foreground mt-1">
                 Contactez notre equipe pour configurer vos premieres automations
               </p>
-              <Button className="mt-4" variant="outline">
+              <Button className="mt-4" variant="outline" onClick={() => router.push("/client/support")}>
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Contacter le support
               </Button>
@@ -304,7 +306,7 @@ export default function ClientAutomationsPage() {
                         </div>
                       </div>
                     </div>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => router.push(`/client/support?subject=${encodeURIComponent("Details automation: " + automation.name)}`)}>
                       <Info className="h-4 w-4 mr-2" />
                       Details
                     </Button>
@@ -344,7 +346,7 @@ export default function ClientAutomationsPage() {
               <p className="text-muted-foreground mt-1">
                 Contactez notre equipe pour discuter de vos besoins et creer des workflows sur mesure.
               </p>
-              <Button className="mt-4" variant="outline">
+              <Button className="mt-4" variant="outline" onClick={() => router.push("/client/support")}>
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Contacter le support
               </Button>
