@@ -201,7 +201,7 @@
   </div>
 
   <!-- Header -->
-  <header class="header">
+  <header class="header" role="banner" aria-label="Main header">
     <div class="container">
       <a href="/en/" class="logo">
         <div class="logo-icon">
@@ -212,13 +212,16 @@
           <span class="logo-sub">AUTOMATION</span>
         </div>
       </a>
-      <nav class="nav" id="nav-menu">
+      <nav class="nav" id="nav-menu" role="navigation" aria-label="Main navigation">
         <a href="/en/services/ecommerce.html">E-commerce</a>
         <a href="/en/services/smb.html">SMB</a>
         <a href="/en/automations.html">Automations</a>
         <a href="/en/pricing.html">Pricing</a>
         <a href="/en/booking.html">Book</a>
-        <a href="/" class="lang-switch" title="Switch to French" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+        <div class="lang-nav">
+          <a href="/" class="lang-link" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/" class="lang-link active" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+        </div>
         <a href="..#contact" class="btn-nav">
           <span>Contact</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -245,15 +248,15 @@
 
   <!-- Hero Ultra Futuristic -->
   <main id="main-content" role="main">
-    <section class="hero-ultra scanline" id="hero-section">
+    <section class="hero-ultra scanline" id="hero-section" aria-label="Main presentation">
       <!-- Hero Animation Background - Auto-loop, NO scroll dependency -->
       <div class="hero-cinematic-bg hero-animation">
         <!-- Canvas for frame-by-frame auto-loop animation -->
         <canvas id="hero-canvas" class="hero-canvas"></canvas>
         <!-- Video fallback for no-JS or mobile -->
-        <video autoplay muted loop playsinline class="cinematic-bg-video hero-video-fallback"
+        <video autoplay muted loop playsinline class="cinematic-bg-video hero-video-fallback" aria-label="Futuristic background animation" aria-hidden="true"
           poster="../assets/whisk/act1_structure.webp">
-          <source src="../assets/video/hero-v52-luminous.mp4" type="video/mp4">
+          <source src="../assets/video/hero-optimized.mp4" type="video/mp4">
           <img src="../assets/whisk/act1_structure.webp" alt="3A Automation Agentic AI" class="cinematic-bg-img">
         </video>
         <div class="cinematic-overlay"></div>
@@ -994,7 +997,7 @@
     </section>
 
     <!-- CTA Ultra -->
-    <section id="contact" class="cta-ultra">
+    <section id="contact" class="cta-ultra" aria-label="Contact us">
       <div class="container">
         <div class="cta-card-ultra glass-panel">
           <div class="cta-glow"></div>
@@ -1080,7 +1083,7 @@
     <!-- Footer Ultra - Enhanced -->
   </main>
 
-  <footer class="footer-ultra">
+  <footer class="footer-ultra" role="contentinfo" aria-label="Footer">
     <div class="container">
       <!-- System Status Banner -->
       <div class="footer-status-bar">
