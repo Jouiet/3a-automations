@@ -231,7 +231,7 @@
   animation: slideIn 0.3s ease-out;
 }
 
-/* Cyber glow effect */
+/* Cyber glow effect - Dark mode */
 .cyber-glow {
   box-shadow: 0 0 20px rgba(79, 186, 241, 0.3);
 }
@@ -240,12 +240,38 @@
   box-shadow: 0 0 30px rgba(79, 186, 241, 0.5);
 }
 
-/* Glassmorphism utility */
+/* Cyber glow effect - Light mode (shadow-based depth) */
+.light .cyber-glow {
+  box-shadow:
+    0 4px 14px rgba(79, 186, 241, 0.25),
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.light .cyber-glow:hover {
+  box-shadow:
+    0 6px 20px rgba(79, 186, 241, 0.35),
+    0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Glassmorphism utility - Dark mode */
 .glass-morphism {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Glassmorphism utility - Light mode */
+.light .glass-morphism {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(79, 186, 241, 0.15);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 /* Pulse animation for live data */
@@ -265,4 +291,230 @@
 
 .animate-pulse-subtle {
   animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================
+   LIGHT MODE ENHANCEMENTS
+   Futuriste + Sobre + Puissant
+   ============================================ */
+
+/* Light mode body - subtle gradient background */
+.light body {
+  background: linear-gradient(
+    135deg,
+    hsl(210 40% 98%) 0%,
+    hsl(199 30% 96%) 50%,
+    hsl(210 40% 98%) 100%
+  );
+}
+
+/* Light mode cards - elevated with depth */
+.light [class*="bg-card"] {
+  background: linear-gradient(
+    180deg,
+    hsl(0 0% 100%) 0%,
+    hsl(210 20% 99%) 100%
+  );
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(79, 186, 241, 0.06);
+  border: 1px solid hsl(214 32% 93%);
+}
+
+.light [class*="bg-card"]:hover {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(79, 186, 241, 0.1);
+}
+
+/* Light mode sidebar - frosted glass effect */
+.light aside {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(248, 250, 252, 0.9) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(79, 186, 241, 0.12);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.03);
+}
+
+/* Light mode primary buttons - vibrant gradient */
+.light [class*="bg-primary"] {
+  background: linear-gradient(
+    135deg,
+    hsl(199 89% 52%) 0%,
+    hsl(199 89% 45%) 100%
+  );
+  box-shadow:
+    0 2px 8px rgba(79, 186, 241, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.light [class*="bg-primary"]:hover {
+  background: linear-gradient(
+    135deg,
+    hsl(199 89% 48%) 0%,
+    hsl(199 89% 40%) 100%
+  );
+  box-shadow:
+    0 4px 16px rgba(79, 186, 241, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Light mode nav items - subtle highlight */
+.light nav a:hover,
+.light nav button:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(79, 186, 241, 0.08) 0%,
+    rgba(79, 186, 241, 0.04) 100%
+  );
+}
+
+/* Light mode active nav - accent bar */
+.light nav a[class*="bg-primary/10"] {
+  background: linear-gradient(
+    90deg,
+    rgba(79, 186, 241, 0.12) 0%,
+    rgba(79, 186, 241, 0.06) 100%
+  );
+  border-left: 3px solid hsl(199 89% 52%);
+  margin-left: -3px;
+}
+
+/* Light mode stats cards - subtle cyan tint */
+.light .stat-card,
+.light [class*="rounded-lg"][class*="border"] {
+  background: linear-gradient(
+    145deg,
+    hsl(0 0% 100%) 0%,
+    hsl(199 20% 98%) 100%
+  );
+}
+
+/* Light mode input fields - crisp borders */
+.light input,
+.light select,
+.light textarea {
+  background: hsl(0 0% 100%);
+  border: 1px solid hsl(214 32% 88%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.light input:focus,
+.light select:focus,
+.light textarea:focus {
+  border-color: hsl(199 89% 52%);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.04),
+    0 0 0 3px rgba(79, 186, 241, 0.15);
+}
+
+/* Light mode badges - soft fill */
+.light [class*="bg-green"],
+.light [class*="bg-emerald"] {
+  background: linear-gradient(
+    135deg,
+    hsl(142 71% 92%) 0%,
+    hsl(142 71% 88%) 100%
+  );
+  color: hsl(142 71% 29%);
+  border: 1px solid hsl(142 71% 80%);
+}
+
+.light [class*="bg-red"],
+.light [class*="bg-destructive"] {
+  background: linear-gradient(
+    135deg,
+    hsl(0 85% 95%) 0%,
+    hsl(0 85% 91%) 100%
+  );
+  color: hsl(0 63% 40%);
+  border: 1px solid hsl(0 63% 85%);
+}
+
+.light [class*="bg-yellow"],
+.light [class*="bg-amber"] {
+  background: linear-gradient(
+    135deg,
+    hsl(48 96% 93%) 0%,
+    hsl(48 96% 88%) 100%
+  );
+  color: hsl(32 81% 32%);
+  border: 1px solid hsl(48 96% 78%);
+}
+
+/* Light mode tables - zebra stripes */
+.light table tbody tr:nth-child(even) {
+  background: hsl(210 40% 98%);
+}
+
+.light table tbody tr:hover {
+  background: hsl(199 30% 96%);
+}
+
+/* Light mode scrollbar */
+.light ::-webkit-scrollbar-track {
+  background: hsl(210 40% 96%);
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: hsl(199 40% 80%);
+  border: 2px solid hsl(210 40% 96%);
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: hsl(199 60% 65%);
+}
+
+/* Light mode charts - enhanced visibility */
+.light [class*="chart"],
+.light svg[class*="recharts"] {
+  filter: saturate(1.1) contrast(1.05);
+}
+
+/* Light mode dividers */
+.light hr,
+.light [class*="border-border"] {
+  border-color: hsl(214 32% 91%);
+}
+
+/* Light mode code blocks */
+.light pre,
+.light code {
+  background: hsl(210 40% 97%);
+  border: 1px solid hsl(214 32% 91%);
+}
+
+/* Light mode dropdown menus */
+.light [role="menu"],
+.light [class*="dropdown"] {
+  background: hsl(0 0% 100%);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+/* System preference support for light mode enhancements */
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) body {
+    background: linear-gradient(
+      135deg,
+      hsl(210 40% 98%) 0%,
+      hsl(199 30% 96%) 50%,
+      hsl(210 40% 98%) 100%
+    );
+  }
+
+  :root:not(.dark) aside {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(248, 250, 252, 0.9) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
 }
