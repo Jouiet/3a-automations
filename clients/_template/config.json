@@ -77,8 +77,7 @@
       "auto_distribute": false,
       "topics_source": "manual",
       "ai_provider_priority": ["gemini", "grok", "anthropic"],
-      "quality_threshold": 8,
-      "max_articles_per_month": 4
+      "quality_threshold": 8
     },
     "distribution": {
       "wordpress": false,
