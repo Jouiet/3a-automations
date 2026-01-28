@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import {
   ShoppingBag,
@@ -118,13 +119,20 @@ const STATUS_CONFIG = {
   },
 };
 
-// OAuth-enabled integrations
+// OAuth-enabled integrations (ids match API route ids with hyphens)
 const OAUTH_INTEGRATIONS: Record<string, string> = {
   shopify: "/api/auth/oauth/shopify/authorize",
   klaviyo: "/api/auth/oauth/klaviyo/authorize",
-  google_analytics: "/api/auth/oauth/google/authorize?scope=analytics",
-  google_search_console: "/api/auth/oauth/google/authorize?scope=webmasters",
+  "google-analytics": "/api/auth/oauth/google/authorize?scope=analytics",
+  "google-search-console": "/api/auth/oauth/google/authorize?scope=webmasters",
 };
+
+// Integrations configured via API key (redirect to support with instructions)
+const API_KEY_INTEGRATIONS = new Set([
+  "openai", "anthropic", "stripe", "meta-ads", "tiktok-ads",
+  "google-ads", "whatsapp", "telnyx", "elevenlabs", "grok",
+  "cjdropshipping", "bigbuy",
+]);
 
 export default function IntegrationsPage() {
   const router = useRouter();
@@ -133,6 +141,8 @@ export default function IntegrationsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
+  const [shopDialog, setShopDialog] = useState<{ open: boolean; integrationId: string }>({ open: false, integrationId: "" });
+  const [shopDomain, setShopDomain] = useState("");
 
   const fetchIntegrations = useCallback(async () => {
     try {
@@ -382,9 +392,13 @@ export default function IntegrationsPage() {
                             size="sm"
                             className="w-full"
                             onClick={() => {
-                              const oauthUrl = OAUTH_INTEGRATIONS[integration.id];
-                              if (oauthUrl) {
-                                window.location.href = oauthUrl;
+                              if (integration.id === "shopify") {
+                                setShopDomain("");
+                                setShopDialog({ open: true, integrationId: integration.id });
+                              } else if (OAUTH_INTEGRATIONS[integration.id]) {
+                                window.location.href = OAUTH_INTEGRATIONS[integration.id];
+                              } else if (API_KEY_INTEGRATIONS.has(integration.id)) {
+                                router.push("/client/support?subject=" + encodeURIComponent(`Configuration API ${integration.name} - Demande de connexion`));
                               } else {
                                 router.push("/client/support?subject=" + encodeURIComponent("Connexion " + integration.name));
                               }
@@ -470,6 +484,62 @@ export default function IntegrationsPage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Shopify Domain Dialog */}
+      {shopDialog.open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <Card className="w-full max-w-md mx-4 border-border">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <ShoppingBag className="h-5 w-5 text-green-400" />
+                Connecter Shopify
+              </CardTitle>
+              <CardDescription>
+                Entrez le domaine de votre boutique Shopify
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <label className="text-sm font-medium mb-2 block">Domaine Shopify</label>
+                <div className="flex items-center gap-2">
+                  <Input
+                    placeholder="ma-boutique"
+                    value={shopDomain}
+                    onChange={(e) => setShopDomain(e.target.value.replace(/\s/g, "").toLowerCase())}
+                    className="bg-background"
+                  />
+                  <span className="text-sm text-muted-foreground whitespace-nowrap">.myshopify.com</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Exemple: si votre boutique est ma-boutique.myshopify.com, entrez &quot;ma-boutique&quot;
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => setShopDialog({ open: false, integrationId: "" })}
+                >
+                  Annuler
+                </Button>
+                <Button
+                  className="flex-1"
+                  disabled={!shopDomain.trim()}
+                  onClick={() => {
+                    const domain = shopDomain.includes(".myshopify.com")
+                      ? shopDomain
+                      : `${shopDomain}.myshopify.com`;
+                    window.location.href = `/api/auth/oauth/shopify/authorize?shop=${encodeURIComponent(domain)}`;
+                  }}
+                >
+                  <ExternalLink className="h-4 w-4 mr-2" />
+                  Connecter
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
