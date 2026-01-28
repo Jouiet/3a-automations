@@ -92,7 +92,7 @@
 | **Learning Queue** (JSONL) | - | ✅ CRÉÉ |
 | **Pattern Extraction** (5 types) | - | ✅ FAIT |
 | **Human Validation API** | 4 endpoints | ✅ **DONE** (S178) |
-| **Dashboard UI** | - | ⏳ PENDING |
+| **Dashboard UI** | `/admin/agent-ops/learning` | ✅ **DONE** (S179) |
 
 **API Endpoints Created (Session 178):**
 - `GET /api/learning/queue` - List pending facts (filter by status/type)
