@@ -240,26 +240,291 @@ const CINEMATIC_ADS = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// PROMPT TEMPLATE
+// TOPIC DISCOVERY & RESEARCH ENGINE - Session 183bis
+// Sources: Google Trends, News APIs, WebSearch
 // ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Discover trending topics using AI + web search
+ * @param {string} vertical - Business vertical (ecommerce, marketing, ai, automation)
+ * @param {string} language - Target language
+ */
+async function discoverTopics(vertical = 'automation', language = 'fr') {
+  // DYNAMIC DATE - Never use hardcoded dates
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
+  const currentYear = today.getFullYear();
+  const currentMonth = today.toLocaleDateString('en-US', { month: 'long' });
+
+  // Calculate date range (last 30 days for freshness)
+  const thirtyDaysAgo = new Date(today);
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  const thirtyDaysAgoStr = thirtyDaysAgo.toISOString().split('T')[0];
+
+  console.log(`[TopicDiscovery] Searching trends for ${vertical} (${language})...`);
+  console.log(`[TopicDiscovery] Date range: ${thirtyDaysAgoStr} → ${todayStr}`);
+
+  const searchQueries = {
+    automation: `automation trends ${currentMonth} ${currentYear} business`,
+    ecommerce: `ecommerce trends ${currentMonth} ${currentYear} shopify`,
+    marketing: `marketing automation trends ${currentMonth} ${currentYear}`,
+    ai: `AI business automation ${currentMonth} ${currentYear} trends`,
+  };
+
+  const query = searchQueries[vertical] || searchQueries.automation;
+
+  // Use Grok for web-grounded research (has web access)
+  const researchPrompt = `TODAY'S DATE: ${todayStr}
+CRITICAL: Only search for information from the LAST 30 DAYS (${thirtyDaysAgoStr} to ${todayStr}).
+Do NOT use information older than 30 days - it's obsolete.
+
+You have access to current web information. Research the LATEST trends in ${vertical}.
+
+Search for: "${query}"
+Date filter: ONLY results from ${thirtyDaysAgoStr} to ${todayStr}
+
+Return 5 specific, timely blog topic ideas based on CURRENT trends and news from the last 30 days.
+Each topic should be:
+1. Specific and actionable (not generic)
+2. Based on RECENT events (last 30 days maximum)
+3. Relevant for business decision-makers
+4. Include the date/timeframe of the source
+
+REJECT any information from before ${thirtyDaysAgoStr}.
+
+Output format: JSON only
+{
+  "topics": [
+    {
+      "title": "Specific topic title",
+      "angle": "Unique angle or hook",
+      "keywords": ["keyword1", "keyword2"],
+      "source_hint": "What recent event/data supports this",
+      "source_date": "YYYY-MM-DD (must be within last 30 days)"
+    }
+  ],
+  "research_date": "${todayStr}",
+  "date_range": {
+    "from": "${thirtyDaysAgoStr}",
+    "to": "${todayStr}"
+  }
+}`;
+
+  try {
+    const result = await callGrok(researchPrompt);
+    const topics = JSON.parse(extractJson(result));
+    console.log(`[TopicDiscovery] Found ${topics.topics?.length || 0} topics`);
+    return topics;
+  } catch (e) {
+    console.error(`[TopicDiscovery] Failed: ${e.message}`);
+    return { topics: [], error: e.message };
+  }
+}
+
+/**
+ * Research a topic with real sources before writing
+ * @param {string} topic - Topic to research
+ * @param {string} language - Target language
+ */
+async function researchTopic(topic, language = 'fr') {
+  // DYNAMIC DATE - Critical for freshness
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0];
+  const currentYear = today.getFullYear();
+
+  // Data freshness windows
+  const ninetyDaysAgo = new Date(today);
+  ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
+  const ninetyDaysAgoStr = ninetyDaysAgo.toISOString().split('T')[0];
+
+  // For statistics, allow up to 12 months
+  const oneYearAgo = new Date(today);
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+  const oneYearAgoStr = oneYearAgo.toISOString().split('T')[0];
+
+  console.log(`[Research] Gathering sources for: "${topic}"...`);
+  console.log(`[Research] Date: ${todayStr} | Stats window: ${oneYearAgoStr} → ${todayStr}`);
+
+  const researchPrompt = `TODAY'S DATE: ${todayStr}
+
+CRITICAL FRESHNESS REQUIREMENTS:
+- News and trends: ONLY from last 90 days (${ninetyDaysAgoStr} to ${todayStr})
+- Statistics: ONLY from last 12 months (${oneYearAgoStr} to ${todayStr})
+- Case studies: Prefer from ${currentYear} or ${currentYear - 1}
+- REJECT all data older than these windows - it's OBSOLETE
+
+You have access to current web information. Research this topic thoroughly:
+
+Topic: "${topic}"
+
+Find and verify (ONLY RECENT DATA):
+1. Recent statistics and data from ${oneYearAgoStr} to ${todayStr} (with sources and publication date)
+2. Expert opinions or quotes from ${currentYear}
+3. Case studies from ${currentYear - 1} or ${currentYear}
+4. Current trends from last 90 days
+5. Competitor content from this quarter
+
+CRITICAL RULES:
+- Only include VERIFIED information with sources
+- Do NOT make up statistics or quotes
+- ALWAYS include the publication date of each source
+- REJECT data older than specified windows
+- Mark confidence as LOW (0.3-0.5) if data is older than preferred
+
+Output format: JSON only
+{
+  "statistics": [
+    {"stat": "85% of companies...", "source": "Gartner", "publication_date": "YYYY-MM-DD", "verified": true}
+  ],
+  "expert_quotes": [
+    {"quote": "...", "author": "Name", "title": "CEO of X", "source": "Forbes", "date": "YYYY-MM-DD"}
+  ],
+  "case_studies": [
+    {"company": "Company X", "result": "Achieved Y", "source": "url or publication", "year": ${currentYear}}
+  ],
+  "trends": [
+    {"trend": "Description", "evidence": "Based on...", "observed_date": "YYYY-MM-DD"}
+  ],
+  "key_points": ["Point 1", "Point 2"],
+  "sources_consulted": [
+    {"url": "source1.com", "access_date": "${todayStr}", "publication_date": "YYYY-MM-DD"}
+  ],
+  "research_date": "${todayStr}",
+  "data_freshness": {
+    "stats_from": "${oneYearAgoStr}",
+    "trends_from": "${ninetyDaysAgoStr}"
+  },
+  "confidence_score": 0.85
+}`;
+
+  try {
+    const result = await callGrok(researchPrompt);
+    const research = JSON.parse(extractJson(result));
+    console.log(`[Research] Found ${research.statistics?.length || 0} stats, ${research.case_studies?.length || 0} cases`);
+    console.log(`[Research] Confidence: ${(research.confidence_score * 100).toFixed(0)}%`);
+    return research;
+  } catch (e) {
+    console.error(`[Research] Failed: ${e.message}`);
+    return { statistics: [], expert_quotes: [], case_studies: [], error: e.message };
+  }
+}
+
+/**
+ * Fact-check generated content
+ * @param {Object} article - Generated article
+ */
+async function factCheckArticle(article) {
+  // DYNAMIC DATE for freshness validation
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0];
+  const currentYear = today.getFullYear();
+
+  console.log(`[FactCheck] Verifying claims in article (date: ${todayStr})...`);
+
+  const factCheckPrompt = `You are a fact-checker. TODAY'S DATE: ${todayStr}
+
+Analyze this article for accuracy AND FRESHNESS:
+
+Article Title: ${article.title}
+Content (first 2000 chars): ${article.content.substring(0, 2000)}
+
+Check for:
+1. Statistical claims - Are they accurate, sourced, AND recent (from ${currentYear - 1} or ${currentYear})?
+2. Dates and timelines - Are they correct? Flag anything referring to years before ${currentYear - 1} as OUTDATED
+3. Company/product claims - Are they verifiable AND current?
+4. Expert quotes - Are they attributed correctly AND from recent statements?
+5. General factual claims - Are they accurate AND not obsolete?
+
+FRESHNESS RULES:
+- Statistics older than 12 months: FLAG as "potentially outdated"
+- News/events older than 6 months: FLAG as "stale information"
+- Technology claims older than 12 months: FLAG as "may be outdated"
+- Any reference to "2023" or earlier without context: FLAG as "requires update"
+
+For each claim found, verify if possible AND check freshness.
+
+Output format: JSON only
+{
+  "claims_found": 5,
+  "verified_claims": 3,
+  "unverified_claims": 2,
+  "outdated_claims": 1,
+  "issues": [
+    {"claim": "The claim text", "issue": "Cannot verify source", "severity": "medium", "type": "unverified"},
+    {"claim": "In 2023, companies...", "issue": "Outdated reference, needs ${currentYear} data", "severity": "high", "type": "outdated"}
+  ],
+  "freshness_issues": [
+    {"claim": "Statistics from old report", "suggestion": "Find ${currentYear} data"}
+  ],
+  "suggestions": ["Add source for X", "Update Y with ${currentYear} data"],
+  "overall_score": 0.75,
+  "freshness_score": 0.80,
+  "safe_to_publish": true,
+  "needs_update": false,
+  "check_date": "${todayStr}"
+}`;
+
+  try {
+    const result = await callGrok(factCheckPrompt);
+    const factCheck = JSON.parse(extractJson(result));
+    console.log(`[FactCheck] Score: ${(factCheck.overall_score * 100).toFixed(0)}% | Claims: ${factCheck.verified_claims}/${factCheck.claims_found} verified`);
+
+    if (factCheck.issues?.length > 0) {
+      console.log(`[FactCheck] Issues found:`);
+      factCheck.issues.forEach(i => console.log(`  - ${i.severity.toUpperCase()}: ${i.claim.substring(0, 50)}...`));
+    }
+
+    return factCheck;
+  } catch (e) {
+    console.error(`[FactCheck] Failed: ${e.message}`);
+    return { overall_score: 0.5, safe_to_publish: false, error: e.message };
+  }
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
-// PROMPT TEMPLATE - INJECTED VIA MARKETING SCIENCE CORE
+// PROMPT TEMPLATE - NOW WITH RESEARCH INJECTION
 // ─────────────────────────────────────────────────────────────────────────────
-function buildPrompt(topic, language, keywords = '', framework = 'PAS') {
+
+function buildPrompt(topic, language, keywords = '', framework = 'PAS', research = null) {
   const langMap = { fr: 'French', en: 'English', es: 'Spanish' };
   const lang = langMap[language] || 'English';
+
+  // Build research context if available
+  let researchContext = '';
+  if (research && !research.error) {
+    researchContext = `
+
+VERIFIED RESEARCH DATA (USE THESE - DO NOT INVENT):
+${research.statistics?.length > 0 ? `
+Statistics:
+${research.statistics.map(s => `- ${s.stat} (Source: ${s.source})`).join('\n')}` : ''}
+${research.expert_quotes?.length > 0 ? `
+Expert Quotes:
+${research.expert_quotes.map(q => `- "${q.quote}" - ${q.author}, ${q.title}`).join('\n')}` : ''}
+${research.case_studies?.length > 0 ? `
+Case Studies:
+${research.case_studies.map(c => `- ${c.company}: ${c.result}`).join('\n')}` : ''}
+${research.trends?.length > 0 ? `
+Current Trends:
+${research.trends.map(t => `- ${t.trend}`).join('\n')}` : ''}
+
+CRITICAL: Only use the statistics and quotes provided above. Do NOT invent data.
+If you need additional data, clearly mark it as "industry estimate" or "general consensus".
+`;
+  }
 
   // Base Context
   const baseContext = `Write a comprehensive blog article about: ${topic}
 
 Language: ${lang}
 Target Keywords: ${keywords || topic}
-
+${researchContext}
 Requirements:
 - 1500-2000 words
 - Include H2 and H3 headings with proper HTML tags
 - Include actionable tips with concrete examples
-- Include statistics and data (cite sources when possible)
+- ONLY use statistics from the research data provided above
+- Always cite sources for data claims
 - SEO optimized for the target keywords
 - Professional but accessible tone
 - Focus on 2025-2026 trends and future outlook
@@ -276,7 +541,8 @@ Output format: Valid JSON only, no markdown fences, no explanations:
   "excerpt": "150 character summary for social media",
   "content": "Full HTML article content with proper tags",
   "hashtags": ["relevant", "hashtags"],
-  "category": "automation|ecommerce|ai|marketing"
+  "category": "automation|ecommerce|ai|marketing",
+  "sources_used": ["source1", "source2"]
 }`;
 
   // Inject Psychology Framework (PAS, AIDA, SB7, CIALDINI)
@@ -368,7 +634,9 @@ async function translateArticle(article, sourceLang, targetLang) {
  * @param {string} framework - Marketing framework
  * @param {Array} targetLanguages - Languages to translate to (default: all)
  */
-async function generateMultilingual(topic, sourceLang, keywords, agentic, framework, targetLanguages = null) {
+async function generateMultilingual(topic, sourceLang, keywords, agentic, framework, targetLanguages = null, options = {}) {
+  const { enableResearch = false, enableFactCheck = false } = options;
+
   // Use only ENABLED languages (configured via BLOG_LANGUAGES env)
   const enabledLangs = TRANSLATION_CONFIG.enabledCodes;
   const targets = targetLanguages
@@ -384,11 +652,13 @@ async function generateMultilingual(topic, sourceLang, keywords, agentic, framew
   }
 
   console.log(`\n[Multilingual] Source: ${sourceLang.toUpperCase()}, Targets: ${targets.map(l => l.toUpperCase()).join(', ')}`);
+  if (enableResearch) console.log(`[Multilingual] Research: ENABLED`);
+  if (enableFactCheck) console.log(`[Multilingual] Fact-Check: ENABLED`);
   console.log('─'.repeat(60));
 
-  // Step 1: Generate source article
+  // Step 1: Generate source article (research only on source, not translations)
   console.log(`\n[Step 1/2] Generating source article (${sourceLang.toUpperCase()})...`);
-  const sourceResult = await generateWithFallback(topic, sourceLang, keywords, agentic, framework);
+  const sourceResult = await generateWithFallback(topic, sourceLang, keywords, agentic, framework, { enableResearch, enableFactCheck });
 
   if (!sourceResult.success) {
     return {
@@ -725,10 +995,25 @@ function extractJson(text) {
 // ORCHESTRATOR
 // ─────────────────────────────────────────────────────────────────────────────
 
-async function generateWithFallback(topic, language, keywords, agenticMode = false, framework = '') {
+async function generateWithFallback(topic, language, keywords, agenticMode = false, framework = '', options = {}) {
+  const { enableResearch = false, enableFactCheck = false } = options;
+
+  // 0. RESEARCH PHASE (if enabled)
+  let research = null;
+  if (enableResearch) {
+    console.log(`\n[Pipeline] Phase 0: RESEARCH (date-aware)`);
+    research = await researchTopic(topic, language);
+    if (research.error) {
+      console.warn(`[Research] Failed but continuing: ${research.error}`);
+    } else {
+      console.log(`[Research] Data gathered: ${research.statistics?.length || 0} stats, ${research.case_studies?.length || 0} cases`);
+      console.log(`[Research] Freshness: ${research.data_freshness?.stats_from} → ${research.research_date}`);
+    }
+  }
+
   // 1. DRAFTING PHASE
-  console.log(`[Drafting] Generating initial version...`);
-  const prompt = buildPrompt(topic, language, keywords, framework);
+  console.log(`\n[Pipeline] Phase 1: DRAFTING`);
+  const prompt = buildPrompt(topic, language, keywords, framework, research);
   let result = await executeGenerationChain(prompt);
 
   if (!result.success || !agenticMode) {
@@ -764,10 +1049,39 @@ async function generateWithFallback(topic, language, keywords, agenticMode = fal
     currentArticle = refined;
   }
 
+  // 3. FACT-CHECK PHASE (if enabled)
+  if (enableFactCheck) {
+    console.log(`\n[Pipeline] Phase 3: FACT-CHECK (freshness validation)`);
+    const factCheck = await factCheckArticle(currentArticle);
+
+    if (!factCheck.safe_to_publish) {
+      console.warn(`[FactCheck] ⚠️  Article flagged as unsafe to publish`);
+      console.warn(`[FactCheck] Issues: ${factCheck.issues?.length || 0}`);
+      console.warn(`[FactCheck] Outdated claims: ${factCheck.outdated_claims || 0}`);
+    }
+
+    if (factCheck.needs_update) {
+      console.warn(`[FactCheck] ⚠️  Article contains outdated information`);
+      factCheck.freshness_issues?.forEach(fi => {
+        console.warn(`  - ${fi.claim}: ${fi.suggestion}`);
+      });
+    }
+
+    return {
+      success: true,
+      provider: result.provider + " + Agentic Loop + FactCheck",
+      article: currentArticle,
+      factCheck: factCheck,
+      research: research,
+      errors: result.errors
+    };
+  }
+
   return {
     success: true,
     provider: result.provider + " + Agentic Loop",
     article: currentArticle,
+    research: research,
     errors: result.errors
   };
 }
@@ -1709,15 +2023,24 @@ async function main() {
     console.log(`ENV Config: BLOG_LANGUAGES=${TRANSLATION_CONFIG.enabledCodes.join(',')}`);
     console.log(`Usage: --multilingual (all enabled) or --translate=en (specific)`);
 
+    // Research & Fact-Check (Session 183bis)
+    console.log('\n=== RESEARCH & FACT-CHECK (Date-Aware) ===');
+    console.log(`Topic Discovery: --discover --vertical=automation (finds fresh topics)`);
+    console.log(`Research Mode: --research (gathers verified sources from last 90 days)`);
+    console.log(`Fact-Check Mode: --fact-check (validates freshness & accuracy)`);
+    console.log(`Full Pipeline: --topic="..." --research --fact-check --agentic`);
+    console.log(`Date Filtering: Auto (stats=12mo, trends=90d, news=30d)`);
+
     // Summary
     const aiCount = Object.values(PROVIDERS).filter(p => p.enabled).length;
     const socialCount = (FACEBOOK.enabled ? 1 : 0) + (LINKEDIN.enabled ? 1 : 0) + (XTWITTER.enabled ? 1 : 0);
     console.log(`\n=== SUMMARY ===`);
-    console.log(`Version: 3.1.0 (Session 183bis - Multilingual Edition)`);
+    console.log(`Version: 3.2.0 (Session 183bis - Research & Fact-Check Edition)`);
     console.log(`AI Providers: ${aiCount}/4 configured`);
     console.log(`Social Platforms: ${socialCount}/3 configured`);
     console.log(`WordPress: ${WORDPRESS.appPassword ? '[OK]' : '[--]'}`);
     console.log(`HITL Mode: ${HITL_CONFIG.requireApproval ? 'ENABLED (Safe)' : 'DISABLED (Risky)'}`);
+    console.log(`Research Pipeline: ENABLED (date-aware)`);
     return;
   }
 
@@ -1732,11 +2055,51 @@ async function main() {
   const framework = args.framework || 'PAS'; // Default to PAS for high conversion
   const multilingual = !!args.multilingual; // Generate in all languages (FR↔EN↔ES)
   const translateTo = args.translate ? args.translate.split(',').map(l => l.trim().toLowerCase()) : null;
+  const enableResearch = !!args.research; // Enable date-aware research (NEW)
+  const enableFactCheck = !!args['fact-check'] || !!args.factcheck; // Enable fact-checking (NEW)
+  const discoverMode = !!args.discover; // Topic discovery mode (NEW)
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // TOPIC DISCOVERY MODE (NEW - Session 183bis)
+  // ─────────────────────────────────────────────────────────────────────────
+  if (discoverMode) {
+    const vertical = args.vertical || 'automation';
+    console.log(`\n[TopicDiscovery] Finding fresh topics for: ${vertical}`);
+    console.log(`[TopicDiscovery] Date: ${new Date().toISOString().split('T')[0]}`);
+    console.log('─'.repeat(60));
+
+    const topics = await discoverTopics(vertical, language);
+
+    if (topics.error) {
+      console.error(`[ERROR] Discovery failed: ${topics.error}`);
+      process.exit(1);
+    }
+
+    console.log('\n=== DISCOVERED TOPICS (Last 30 days) ===\n');
+    topics.topics?.forEach((t, i) => {
+      console.log(`${i + 1}. ${t.title}`);
+      console.log(`   Angle: ${t.angle}`);
+      console.log(`   Keywords: ${t.keywords?.join(', ')}`);
+      console.log(`   Source: ${t.source_hint}`);
+      if (t.source_date) console.log(`   Date: ${t.source_date}`);
+      console.log('');
+    });
+
+    console.log(`Research Date: ${topics.research_date}`);
+    if (topics.date_range) {
+      console.log(`Date Range: ${topics.date_range.from} → ${topics.date_range.to}`);
+    }
+    console.log('\nUsage: node blog-generator-resilient.cjs --topic="<topic>" --research --fact-check --agentic');
+    return;
+  }
 
   // Generate article
   if (topic) {
     console.log(`\n[Blog] Generating article: "${topic}"`);
     console.log(`Source Language: ${language.toUpperCase()}`);
+    console.log(`Date: ${new Date().toISOString().split('T')[0]}`);
+    if (enableResearch) console.log(`[Mode] RESEARCH ENABLED (date-aware sources)`);
+    if (enableFactCheck) console.log(`[Mode] FACT-CHECK ENABLED (freshness validation)`);
     if (multilingual) console.log(`[Mode] MULTILINGUAL (FR↔EN↔ES auto-translation)`);
     else if (translateTo) console.log(`[Mode] TRANSLATE to: ${translateTo.map(l => l.toUpperCase()).join(', ')}`);
     if (framework) console.log(`[Framework] ${framework} (Persuasion Mode Active)`);
@@ -1750,7 +2113,7 @@ async function main() {
     // ─────────────────────────────────────────────────────────────────────────
     if (multilingual || translateTo) {
       const targets = translateTo || Object.keys(TRANSLATION_CONFIG.languages).filter(l => l !== language);
-      result = await generateMultilingual(topic, language, args.keywords || '', agentic, framework, targets);
+      result = await generateMultilingual(topic, language, args.keywords || '', agentic, framework, targets, { enableResearch, enableFactCheck });
 
       if (result.success) {
         // Save multilingual results
@@ -1784,14 +2147,32 @@ async function main() {
     } else {
       // ─────────────────────────────────────────────────────────────────────────
       // SINGLE LANGUAGE MODE (original behavior)
+      // Session 183bis: Added research + fact-check options
       // ─────────────────────────────────────────────────────────────────────────
       result = await generateWithFallback(
         topic,
         language,
         args.keywords || '',
         agentic,
-        framework
+        framework,
+        { enableResearch, enableFactCheck }
       );
+
+      // Display research & fact-check results if available
+      if (result.research && !result.research.error) {
+        console.log(`\n[Research] ${result.research.statistics?.length || 0} stats, ${result.research.case_studies?.length || 0} cases`);
+        console.log(`[Research] Confidence: ${((result.research.confidence_score || 0) * 100).toFixed(0)}%`);
+      }
+      if (result.factCheck) {
+        console.log(`\n[FactCheck] Score: ${((result.factCheck.overall_score || 0) * 100).toFixed(0)}%`);
+        console.log(`[FactCheck] Freshness: ${((result.factCheck.freshness_score || 0) * 100).toFixed(0)}%`);
+        if (!result.factCheck.safe_to_publish) {
+          console.warn(`[FactCheck] ⚠️  NOT SAFE TO PUBLISH - Review required`);
+        }
+        if (result.factCheck.needs_update) {
+          console.warn(`[FactCheck] ⚠️  Contains outdated information`);
+        }
+      }
     }
 
     if (!result.success) {
