@@ -69,12 +69,10 @@ jobs:
               echo "=== Restored .env.local from backup ==="
             else
               echo "=== Creating .env.local with production values ==="
-              cat > .env.local << 'ENVEOF'
-NODE_ENV=production
-JWT_SECRET=3a_automation_jwt_secret_2024
-GOOGLE_SHEETS_ID=1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w
-GOOGLE_SHEETS_API_URL=https://script.google.com/macros/s/AKfycbzFP751mwK04FguPrIISQlMHHUULw5-e-n_Pn63h-SXEBOUvD-wpM7wmbGDPauGdzIZ/exec
-ENVEOF
+              echo "NODE_ENV=production" > .env.local
+              echo "JWT_SECRET=3a_automation_jwt_secret_2024" >> .env.local
+              echo "GOOGLE_SHEETS_ID=1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w" >> .env.local
+              echo "GOOGLE_SHEETS_API_URL=https://script.google.com/macros/s/AKfycbzFP751mwK04FguPrIISQlMHHUULw5-e-n_Pn63h-SXEBOUvD-wpM7wmbGDPauGdzIZ/exec" >> .env.local
             fi
             echo "=== .env.local contents (masked) ==="
             cat .env.local | sed 's/=.*/=***/'
