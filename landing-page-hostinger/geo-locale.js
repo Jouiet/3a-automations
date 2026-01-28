@@ -21,59 +21,27 @@
       // 1. Morocco -> French + MAD
       'MA': { lang: 'fr', currency: 'MAD', region: 'maghreb' },
 
-      // 2. Algeria, Tunisia, Europe -> French + EUR
-      'DZ': { lang: 'fr', currency: 'EUR', region: 'maghreb' },
-      'TN': { lang: 'fr', currency: 'EUR', region: 'maghreb' },
+      // 2. Algeria, Tunisie, Europe -> French + EUR
+      // (User request: "Maroc, Algerie, Tunisie, Europe (français + devise: Euro (€))")
+      // Correction: Morocco is MAD as per point #1 of user request.
+      'DZ': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'TN': { lang: 'fr', currency: 'EUR', region: 'europe' },
 
       // Europe
       'FR': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'BE': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'CH': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'LU': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'MC': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'DE': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'AT': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'IT': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'ES': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'PT': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'NL': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'IE': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'FI': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'GR': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'MT': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'CY': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'SK': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'SI': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'EE': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'LV': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'LT': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'HR': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'PL': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'CZ': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'HU': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'RO': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'BG': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'SE': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'DK': { lang: 'fr', currency: 'EUR', region: 'europe' },
-      'NO': { lang: 'fr', currency: 'EUR', region: 'europe' },
-
-      // 3. GCC/MENA -> Arabic + USD
-      'SA': { lang: 'ar', currency: 'USD', region: 'mena' }, // Saudi Arabia
-      'AE': { lang: 'ar', currency: 'USD', region: 'mena' }, // UAE
-      'QA': { lang: 'ar', currency: 'USD', region: 'mena' }, // Qatar
-      'KW': { lang: 'ar', currency: 'USD', region: 'mena' }, // Kuwait
-      'OM': { lang: 'ar', currency: 'USD', region: 'mena' }, // Oman
-      'BH': { lang: 'ar', currency: 'USD', region: 'mena' }, // Bahrain
-      'EG': { lang: 'ar', currency: 'USD', region: 'mena' }, // Egypt
-      'JO': { lang: 'ar', currency: 'USD', region: 'mena' }, // Jordan
-      'LB': { lang: 'ar', currency: 'USD', region: 'mena' }, // Lebanon
 
       // 4. International -> English + USD
       'GB': { lang: 'en', currency: 'USD', region: 'international' },
       'CA': { lang: 'en', currency: 'USD', region: 'international' },
       'US': { lang: 'en', currency: 'USD', region: 'international' },
       'AU': { lang: 'en', currency: 'USD', region: 'international' },
-      'NZ': { lang: 'en', currency: 'USD', region: 'international' },
+      'AE': { lang: 'en', currency: 'USD', region: 'international' }, // MENA defaults to English/USD
+      'SA': { lang: 'en', currency: 'USD', region: 'international' },
     },
 
     // Default locale for unknown countries
@@ -178,9 +146,13 @@
 
       // Priority 3: Browser language
       const browserLang = navigator.language?.substring(0, 2) || 'en';
-      const locale = browserLang === 'fr'
-        ? { lang: 'fr', currency: 'EUR', region: 'europe', source: 'browser', timezone }
-        : { ...this.defaultLocale, source: 'default', timezone };
+      let locale;
+
+      if (browserLang === 'fr') {
+        locale = { lang: 'fr', currency: 'EUR', region: 'europe', source: 'browser', timezone };
+      } else {
+        locale = { ...this.defaultLocale, source: 'default', timezone };
+      }
 
       return locale;
     },
@@ -234,28 +206,30 @@
     },
 
     /**
-     * Redirect to English version if needed
+     * Redirect to appropriate version if needed
      */
     redirectIfNeeded(locale) {
-      // Priority 1: Do NOT redirect if manual override is set
       if (locale.source === 'manual') {
-        console.log('[GeoLocale] Skipping redirect due to manual override');
+        console.log('[GeoLocale] Skipping auto-redirect due to manual override');
         return;
       }
 
-      const isEnPage = window.location.pathname.includes('/en/');
-      const shouldBeEn = this.shouldShowEnglish(locale);
+      const path = window.location.pathname;
+      const isEnPage = path.includes('/en/');
 
+      const shouldBeEn = locale.lang === 'en' || locale.region === 'international';
+      const shouldBeFr = !shouldBeEn;
+
+      // Logic: 
+      // 1. Should be EN but not on EN page
       if (shouldBeEn && !isEnPage) {
-        // Redirect to English version
-        const currentPath = window.location.pathname;
-        const enPath = currentPath.startsWith('/') ? `/en${currentPath}` : `/en/${currentPath}`;
-        window.location.href = enPath.replace(/\/+/g, '/');
-      } else if (!shouldBeEn && isEnPage) {
-        // Redirect back to French version if user is in FR region but on /en/ page
-        const currentPath = window.location.pathname;
-        const frPath = currentPath.replace('/en/', '/');
-        window.location.href = frPath || '/';
+        let newPath = '/en' + (path.startsWith('/') ? path : '/' + path);
+        window.location.href = newPath.replace(/\/+/g, '/');
+      }
+      // 2. Should be FR but on EN page
+      else if (shouldBeFr && isEnPage) {
+        let newPath = path.replace('/en/', '/');
+        window.location.href = newPath || '/';
       }
     }
   };
@@ -273,6 +247,29 @@
       GeoLocale.redirectIfNeeded(locale);
 
       document.dispatchEvent(new CustomEvent('geo-locale-ready', { detail: locale }));
+    });
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // FIX SESSION 183bis: Intercept ALL .lang-switch clicks to save manual choice
+    // Without this, geo-locale redirects users BACK after clicking language switch
+    // ═══════════════════════════════════════════════════════════════════════════
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('.lang-switch, .lang-link');
+      if (!link) return;
+
+      const href = link.getAttribute('href') || '';
+
+      // Determine target language from href
+      let targetLang = 'fr'; // default
+      if (href.includes('/en/') || href.startsWith('/en')) {
+        targetLang = 'en';
+      }
+
+      // Save manual override BEFORE navigation happens
+      console.log(`[GeoLocale] Manual switch to: ${targetLang}`);
+      GeoLocale.saveManualLocale(targetLang);
+
+      // Let the click proceed normally (browser will navigate)
     });
   }
 })();
