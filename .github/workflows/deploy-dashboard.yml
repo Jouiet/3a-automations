@@ -44,20 +44,13 @@ jobs:
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           envs: N8N_HOST,N8N_API_KEY,JWT_SECRET,GOOGLE_SHEETS_ID,GOOGLE_SHEETS_API_URL
           script: |
-            # Navigate to dashboard directory
-            cd /root/dashboard || mkdir -p /root/dashboard
-
-            # Pull latest code from GitHub (sparse checkout for dashboard only)
-            if [ ! -d ".git" ]; then
-              cd /root
-              rm -rf dashboard
-              git clone --depth 1 https://github.com/Jouiet/3a-automations.git temp-repo
-              mv temp-repo/dashboard /root/dashboard
-              rm -rf temp-repo
-              cd /root/dashboard
-            else
-              git pull origin main
-            fi
+            # Always fresh clone to ensure latest code
+            cd /root
+            rm -rf dashboard temp-repo
+            git clone --depth 1 https://github.com/Jouiet/3a-automations.git temp-repo
+            mv temp-repo/dashboard /root/dashboard
+            rm -rf temp-repo
+            cd /root/dashboard
 
             # Create .env.local with runtime environment variables
             echo "N8N_HOST=${N8N_HOST}" > .env.local
