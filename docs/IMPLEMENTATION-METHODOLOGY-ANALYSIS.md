@@ -1,9 +1,9 @@
 # 3A AUTOMATION - MÉTHODOLOGIE D'IMPLÉMENTATION
 ## Dashboard Multi-Tenant avec OAuth Automatisé
 
-> **Version:** 2.3 | **Date:** 28/01/2026 | **Session:** 180+
+> **Version:** 2.4 | **Date:** 28/01/2026 | **Session:** 180+
 > **Approche:** Plan d'Action Rigoureux | **Exigence:** 100% Vérifiable
-> **Status:** Semaine 1 ✅ | Semaine 2 ✅ | Semaine 3 ✅ | Semaine 4 ✅ | Semaine 5 ✅
+> **Status:** Semaine 1 ✅ | Semaine 2 ✅ | Semaine 3 ✅ | Semaine 4 ✅ | Semaine 5 ✅ | Semaine 6 ✅
 
 ---
 
@@ -800,13 +800,13 @@ node automations/agency/core/TenantCronManager.cjs --list --tenant client-test
 
 ---
 
-### 3.7 SEMAINE 6: Dashboard Client Onboarding
+### 3.7 SEMAINE 6: Dashboard Client Onboarding ✅ DONE
 
 #### Objectifs
-- [ ] Onboarding wizard multi-step
-- [ ] Page intégrations client
-- [ ] Feature toggles per-tenant
-- [ ] Status health checks
+- [x] Onboarding wizard multi-step (5 steps completables)
+- [x] Page intégrations client avec status grid
+- [x] Feature toggles per-tenant avec Switch UI
+- [x] Status health checks API (/api/health/[tenantId])
 
 #### Tâches Détaillées
 
@@ -1145,6 +1145,7 @@ node automations/agency/core/uptime-monitor.cjs --health  # Santé OK
 | 2.1 | 28/01/2026 | Semaine 3 OAuth Shopify complete |
 | 2.2 | 28/01/2026 | Semaine 4 OAuth Klaviyo + Google complete (2545 LOC) |
 | 2.3 | 28/01/2026 | Semaine 5 Script Runner Multi-Tenant complete (1822 LOC) |
+| 2.4 | 28/01/2026 | Semaine 6 Dashboard Client Onboarding complete (2251 LOC) |
 
 ---
 
