@@ -116,8 +116,12 @@ export async function POST(request: NextRequest) {
     return response;
   } catch (error) {
     console.error("Login error:", error);
+    // Return detailed error in development, generic in production
+    const errorMessage = process.env.NODE_ENV === 'development'
+      ? String(error)
+      : "Erreur serveur";
     return NextResponse.json(
-      { error: "Erreur serveur" },
+      { error: errorMessage, debug: process.env.NODE_ENV === 'development' ? { stack: (error as Error).stack } : undefined },
       { status: 500 }
     );
   }
