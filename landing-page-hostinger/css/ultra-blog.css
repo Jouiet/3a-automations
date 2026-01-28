@@ -39,6 +39,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
 }
 
 .blog-tags {
@@ -99,44 +101,51 @@
     transition: color 0.2s;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   CLICKABLE CARD FIX - Session 183bis
+   The ::after pseudo-element creates a full-card click area.
+   All other elements must NOT block the click (pointer-events: none)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 .blog-card-title a::after {
     content: '';
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 10;  /* Higher z-index to be on top */
 }
 
 .blog-card-title a:hover {
     color: var(--primary);
 }
 
-.blog-card-excerpt {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-    flex: 1;
+/* All elements inside card must NOT block clicks */
+.blog-tags,
+.blog-card-excerpt,
+.blog-card-footer,
+.blog-card-footer time {
+    pointer-events: none;  /* Let clicks pass through to ::after */
+    position: relative;
+    z-index: 5;  /* Below the ::after (z-index: 10) */
 }
 
-.blog-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
+/* BUT the read-more link should be clickable */
 .read-more {
     color: var(--primary);
     font-weight: 600;
     text-decoration: none;
     font-size: 0.9rem;
+    pointer-events: auto;  /* This link IS clickable */
+    position: relative;
+    z-index: 15;  /* Above the ::after */
 }
 
 .read-more:hover {
     text-decoration: underline;
+}
+
+/* Tags should also be visually there but not block clicks */
+.tag {
+    pointer-events: none;
 }
 
 @media (max-width: 768px) {
