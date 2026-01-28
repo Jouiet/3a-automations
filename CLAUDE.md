@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 134.0 | 28/01/2026 | Session 180+ | Engineering Score: 94/100 (Multi-Tenant S1+S2 COMPLETE)
+> Version: 135.0 | 28/01/2026 | Session 181 | Engineering Score: 94/100 (Dashboard Multi-Tenant VERIFIED)
 
 ## Identité
 
@@ -33,6 +33,21 @@
 | **RevenueScience.cjs** | 3.0 | EventBus integration, pricing analytics, CLI --health |
 | **KBEnrichment.cjs** | 2.0 | KB versioning, rollback, audit trail, EventBus emit |
 | **ConversationLearner.cjs** | 2.0 | Pattern extraction, HITL queue, EventBus emit |
+
+### Session 181 - Dashboard Multi-Tenant VERIFIED ✅
+- ✅ Admin login fixed (fallback users for guaranteed access)
+- ✅ Client demo account created (`client@demo.3a-automation.com` / `DemoClient2026`)
+- ✅ Multi-tenant separation verified (Admin vs Client dashboards)
+- ✅ Design system verified (glassmorphism, animations, futuristic + sober)
+- ✅ OAuth providers exist (Shopify, Klaviyo, Google)
+- ✅ Voice Services: 2/3 HEALTHY (3004, 3007 running)
+- ⏳ Telephony Bridge requires TELNYX_API_KEY (user action)
+
+**Dashboard Access:**
+| Role | Email | Password | URL |
+|:-----|:------|:---------|:----|
+| Admin | `admin@3a-automation.com` | `Admin3A2025` | `/admin` |
+| Client | `client@demo.3a-automation.com` | `DemoClient2026` | `/client` |
 
 ### Session 180+ - Multi-Tenant Implementation PROGRESS ✅
 

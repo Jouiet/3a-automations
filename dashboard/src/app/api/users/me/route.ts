@@ -3,22 +3,41 @@ import { getAuthUser, getAuthUserFromCookie } from "@/lib/auth";
 import { getUserByEmail } from "@/lib/google-sheets";
 import { checkRateLimit, getClientIP, RateLimitPresets } from "@/lib/rate-limit";
 
-// Fallback admin user data (matches login route)
-const FALLBACK_ADMIN = {
-  id: "user_admin",
-  email: "admin@3a-automation.com",
-  name: "Admin 3A",
-  role: "ADMIN" as const,
-  createdAt: "2025-12-25T00:00:00.000Z",
-  company: "3A Automation",
-  phone: "",
-  language: "fr",
-  timezone: "Europe/Paris",
-  notifications: {
-    email: true,
-    whatsapp: false,
-    reports: true,
-    marketing: false,
+// Fallback users data (matches login route)
+const FALLBACK_USERS = {
+  "admin@3a-automation.com": {
+    id: "user_admin",
+    email: "admin@3a-automation.com",
+    name: "Admin 3A",
+    role: "ADMIN" as const,
+    createdAt: "2025-12-25T00:00:00.000Z",
+    company: "3A Automation",
+    phone: "",
+    language: "fr",
+    timezone: "Europe/Paris",
+    notifications: {
+      email: true,
+      whatsapp: false,
+      reports: true,
+      marketing: false,
+    },
+  },
+  "client@demo.3a-automation.com": {
+    id: "user_client_demo",
+    email: "client@demo.3a-automation.com",
+    name: "Demo Client (Boutique Demo)",
+    role: "CLIENT" as const,
+    createdAt: "2026-01-28T00:00:00.000Z",
+    company: "Boutique Demo",
+    phone: "",
+    language: "fr",
+    timezone: "Europe/Paris",
+    notifications: {
+      email: true,
+      whatsapp: false,
+      reports: true,
+      marketing: false,
+    },
   },
 };
 
@@ -55,17 +74,18 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Try to get full user data from Google Sheets
-    let user = await getUserByEmail(authUser.email);
+    // Check fallback users first, then Google Sheets
+    const fallbackUser = FALLBACK_USERS[authUser.email as keyof typeof FALLBACK_USERS];
 
-    // Fallback for admin user
-    if (!user && authUser.email === FALLBACK_ADMIN.email) {
-      const { ...userWithoutPassword } = FALLBACK_ADMIN;
+    if (fallbackUser) {
       return NextResponse.json({
         success: true,
-        data: userWithoutPassword,
+        data: fallbackUser,
       });
     }
+
+    // Try to get full user data from Google Sheets
+    const user = await getUserByEmail(authUser.email);
 
     if (!user) {
       return NextResponse.json(

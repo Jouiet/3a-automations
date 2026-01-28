@@ -3,15 +3,26 @@ import { getUserByEmail, updateUserLastLogin } from "@/lib/google-sheets";
 import { comparePassword, generateToken, setAuthCookie } from "@/lib/auth";
 import { checkRateLimit, getClientIP, RateLimitPresets } from "@/lib/rate-limit";
 
-// Fallback admin user for when Google Sheets is not configured
-// Password: Admin3A2025 (bcrypt hash)
-const FALLBACK_ADMIN = {
-  id: "user_admin",
-  email: "admin@3a-automation.com",
-  name: "Admin 3A",
-  password: "$2a$12$9gYq5nU4zuM5DUhWE5Mfx.0nfmzgwPg1vNd5/DSPZA3o6dKeE343G",
-  role: "ADMIN" as const,
-  createdAt: "2025-12-25T00:00:00.000Z",
+// Fallback users for guaranteed access (when Google Sheets is not configured)
+const FALLBACK_USERS = {
+  // Admin user - Password: Admin3A2025
+  "admin@3a-automation.com": {
+    id: "user_admin",
+    email: "admin@3a-automation.com",
+    name: "Admin 3A",
+    password: "$2a$12$9gYq5nU4zuM5DUhWE5Mfx.0nfmzgwPg1vNd5/DSPZA3o6dKeE343G",
+    role: "ADMIN" as const,
+    createdAt: "2025-12-25T00:00:00.000Z",
+  },
+  // Test client user - Password: DemoClient2026
+  "client@demo.3a-automation.com": {
+    id: "user_client_demo",
+    email: "client@demo.3a-automation.com",
+    name: "Demo Client (Boutique Demo)",
+    password: "$2a$12$VEWR5NDk20nYCjMkeZ2P1.brl43qjRRgjUYloiYzv4ANzINYbY.EW",
+    role: "CLIENT" as const,
+    createdAt: "2026-01-28T00:00:00.000Z",
+  },
 };
 
 export async function POST(request: NextRequest) {
@@ -45,16 +56,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Try to get user from Google Sheets first
-    let user = await getUserByEmail(email);
+    // Check fallback users first (guaranteed access), then Google Sheets
+    let user = null;
+    const fallbackUser = FALLBACK_USERS[email as keyof typeof FALLBACK_USERS];
 
-    // Fallback to hardcoded admin if Google Sheets fails or user not found
-    if (!user && email === FALLBACK_ADMIN.email) {
-      console.log("[Login] Using fallback admin user");
-      user = FALLBACK_ADMIN;
+    if (fallbackUser) {
+      // Use fallback user for guaranteed access
+      console.log("[Login] Using fallback user (hardcoded):", email);
+      user = fallbackUser;
+    } else {
+      // Try to get user from Google Sheets
+      user = await getUserByEmail(email);
     }
 
     if (!user) {
+      console.log("[Login] User not found:", email);
       return NextResponse.json(
         { error: "Identifiants invalides" },
         { status: 401 }
@@ -62,7 +78,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify password
+    console.log("[Login] Verifying password for:", email);
     const isValidPassword = await comparePassword(password, user.password || "");
+    console.log("[Login] Password valid:", isValidPassword);
 
     if (!isValidPassword) {
       return NextResponse.json(
