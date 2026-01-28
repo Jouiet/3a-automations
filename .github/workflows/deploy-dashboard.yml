@@ -46,20 +46,38 @@ jobs:
             pm2 stop dashboard 2>/dev/null || true
             pm2 delete dashboard 2>/dev/null || true
 
-            # STEP 2: Complete cleanup - remove ALL old files
+            # STEP 2: BACKUP existing .env.local (contains production secrets!)
             cd /root
+            if [ -f dashboard/.env.local ]; then
+              cp dashboard/.env.local /tmp/dashboard-env-backup
+              echo "=== Backed up existing .env.local ==="
+            fi
+
+            # STEP 3: Complete cleanup - remove ALL old files
             rm -rf dashboard temp-repo
 
-            # STEP 3: Fresh clone from GitHub
+            # STEP 4: Fresh clone from GitHub
             git clone --depth 1 https://github.com/Jouiet/3a-automations.git temp-repo
             mv temp-repo/dashboard /root/dashboard
             rm -rf temp-repo
             cd /root/dashboard
 
-            # STEP 4: Create .env.local with runtime environment variables
-            echo "JWT_SECRET=${JWT_SECRET}" > .env.local
-            echo "GOOGLE_SHEETS_ID=${GOOGLE_SHEETS_ID}" >> .env.local
-            echo "GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}" >> .env.local
+            # STEP 5: RESTORE .env.local from backup OR create with known values
+            if [ -f /tmp/dashboard-env-backup ]; then
+              cp /tmp/dashboard-env-backup .env.local
+              rm /tmp/dashboard-env-backup
+              echo "=== Restored .env.local from backup ==="
+            else
+              echo "=== Creating .env.local with production values ==="
+              cat > .env.local << 'ENVEOF'
+NODE_ENV=production
+JWT_SECRET=3a_automation_jwt_secret_2024
+GOOGLE_SHEETS_ID=1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w
+GOOGLE_SHEETS_API_URL=https://script.google.com/macros/s/AKfycbzFP751mwK04FguPrIISQlMHHUULw5-e-n_Pn63h-SXEBOUvD-wpM7wmbGDPauGdzIZ/exec
+ENVEOF
+            fi
+            echo "=== .env.local contents (masked) ==="
+            cat .env.local | sed 's/=.*/=***/'
 
             # STEP 5: Clean install and build (no cache)
             rm -rf node_modules .next 2>/dev/null || true
