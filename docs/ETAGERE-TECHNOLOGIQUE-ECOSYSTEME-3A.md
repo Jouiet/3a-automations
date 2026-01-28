@@ -1,14 +1,123 @@
 # ÉTAGÈRE TECHNOLOGIQUE - ÉCOSYSTÈME 3A
 ## Mutualisation des Technologies Selon le Modèle du "Potentiel de Situation"
 
-> **Version**: 4.0 | **Date**: 27/01/2026 | **Session**: 168quaterdecies (Forensic Audit COMPLET)
+> **Version**: 6.0 | **Date**: 28/01/2026 | **Session**: 185 (3A-Shelf FUNCTIONAL)
+
+---
+
+## 🚀 3A-SHELF - SYSTÈME FONCTIONNEL (NOUVEAU)
+
+**Location:** `~/Desktop/3A-Shelf/`
+**Technology:** yalc (local npm package sharing)
+**Status:** ✅ OPERATIONAL
+
+### Packages Disponibles
+
+| Package | Version | Modules | Size | Status |
+|:--------|:--------|:--------|:-----|:-------|
+| @3a/agent-ops | 3.0.0 | EventBus, ContextBox, BillingAgent, ErrorScience, RevenueScience | 124KB | ✅ |
+| @3a/security | 1.0.0 | SecurityUtils (32 functions) | 36KB | ✅ |
+| @3a/sensors | 1.0.0 | VoiceQuality, CostTracking, LeadVelocity, Retention | 44KB | ✅ |
+| @3a/voice-core | 1.0.0 | VoiceAPI, GrokRealtime, PersonaInjector, WidgetTemplates | 312KB | ✅ |
+
+### Usage Rapide
+
+```bash
+# Publier les packages (depuis 3A-Shelf)
+./scripts/shelf-publish.sh
+
+# Ajouter à un projet (VocalIA, CinematicAds)
+yalc add @3a/agent-ops
+
+# Importer dans le code
+const { EventBus, ContextBox } = require('@3a/agent-ops');
+```
+
+### Avantages vs npm link
+
+| Feature | yalc | npm link |
+|:--------|:-----|:---------|
+| Symlink issues | ✅ None | ❌ Common |
+| Multiple consumers | ✅ Easy | ⚠️ Complex |
+| Versioning | ✅ Explicit | ❌ None |
+
+---
 > **Document dédié**: `docs/WHISK-REMOTION-METHODOLOGY.md` (méthodologie exhaustive)
 > **Méthode**: Inspirée du modèle industriel chinois (François Jullien / Sun Tzu)
 > **Principe**: Coopération technique → Potentiel → Concurrence commerciale
 
 ---
 
-## AUDIT FORENSIQUE - FAITS VÉRIFIÉS (27/01/2026 01:35 UTC)
+## STRUCTURE ENTREPRISE 3A AUTOMATION
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         3A AUTOMATION (Holding)                              │
+│                      https://3a-automation.com                               │
+│                                                                             │
+│    "AI Automation Agency - E-commerce B2C & PME B2B"                       │
+│                                                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌─────────────────────────────┐    ┌─────────────────────────────┐        │
+│  │      VocalIA.ma             │    │    CinematicAds.studio      │        │
+│  │    (Voice AI Platform)      │    │   (Video Production)        │        │
+│  │                             │    │                             │        │
+│  │  • Voice Widget (Browser)   │    │  • Remotion Framework       │        │
+│  │  • Voice Telephony (PSTN)   │    │  • AI Asset Generation      │        │
+│  │  • 30 Personas              │    │  • UGC Templates            │        │
+│  │  • Darija/Arabic Support    │    │  • Brand Videos             │        │
+│  │                             │    │                             │        │
+│  │  Location:                  │    │  Location:                  │        │
+│  │  ~/Desktop/VocalIA/         │    │  ~/Desktop/Ads-Automations/ │        │
+│  │                             │    │                             │        │
+│  │  Code: 8,098 lines          │    │  Compositions: 7            │        │
+│  └─────────────────────────────┘    └─────────────────────────────┘        │
+│                                                                             │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                    CLIENT IMPLEMENTATIONS                            │   │
+│  ├─────────────────────────────────────────────────────────────────────┤   │
+│  │  Alpha Medical  │  MyDealz  │  [Future Clients via Multi-Tenant]   │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Plateformes Subsidiaires
+
+| Plateforme | Domain | Type | Location | Lignes Code |
+|:-----------|:-------|:-----|:---------|:------------|
+| **VocalIA** | vocalia.ma | Voice AI SaaS | `~/Desktop/VocalIA/` | 8,098 |
+| **CinematicAds** | cinematicads.studio | Video Production | `~/Desktop/Ads-Automations/` | ~5,000 |
+
+### Technologies Partagées (Étagère) - VÉRIFIÉ 28/01/2026
+
+| Technologie | VocalIA | CinematicAds | 3A Internal | À Transférer |
+|:------------|:-------:|:------------:|:-----------:|:------------:|
+| Grok API | ✅ | ✅ | ✅ | - |
+| Gemini API | ✅ | ✅ | ✅ | - |
+| fal.ai | ❌ | ✅ | ✅ | Non requis |
+| Remotion | ❌ | ✅ | ✅ | Non requis |
+| MCP Protocol | ❌ **MISSING** | ⚠️ | ✅ | **P0** |
+| A2A Protocol | ❌ **MISSING** | ❌ | ✅ | P2 |
+| GPM Sensors | ❌ **MISSING** | ❌ | ✅ | **P1** |
+| .claude/rules/ | ❌ **MISSING** | ❌ | ✅ | **P0** |
+| Twilio | ✅ code | ❌ | ✅ | Creds only |
+| Shopify API | ✅ code | ❌ | ✅ | - |
+| Klaviyo API | ✅ code | ❌ | ✅ | - |
+| Session History | ❌ **MISSING** | ❌ | ✅ | **P0** |
+| automations-registry | ❌ **MISSING** | ❌ | ✅ | **P1** |
+
+**GAPS VocalIA (Audit 28/01/2026):**
+- ❌ Pas de `.claude/rules/` (6 fichiers dans 3A)
+- ❌ Pas de `.mcp.json` (7 servers dans 3A)
+- ❌ Pas de `automations-registry.json`
+- ❌ Pas de session history tracking
+- ❌ Pas de GPM sensors intégration
+
+---
+
+## AUDIT FORENSIQUE - FAITS VÉRIFIÉS (28/01/2026)
 
 ### Métriques Factuelles (Bottom-Up Verification)
 
@@ -203,11 +312,64 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | **Stylelint Config** | ✅ Production | `.stylelintrc.json` | Exists | ✅ OUI |
 | **VPS Docker** | ✅ Production | `docker-compose.yml` | | ⚠️ Spécifique |
 | **121 Automations** | ✅ Production | `automations-registry.json` | `jq length` = 121 | ✅ OUI |
-| **Voice Agent B2B** | ✅ Production | `agency/core/voice-agent-b2b.cjs` | Exists | ✅ OUI |
+| **Voice Agent B2B** | ➡️ VocalIA | `VocalIA/core/voice-agent-b2b.cjs` | Migré | ✅ OUI |
 | **Service KB (TF-IDF)** | ✅ Production | `knowledge_base/chunks.json` | **135 chunks** | ✅ OUI |
-| **Remotion Video** | ✅ Production | `remotion-studio/` | **7 compositions** | ✅ OUI |
-| **AI Asset Gen** | ✅ Multi-provider | `remotion-studio/src/lib/ai-assets.ts` | fal.ai + Replicate | ✅ OUI |
+| **Remotion Video** | ➡️ CinematicAds | `Ads-Automations/remotion-studio/` | **7 compositions** | ✅ OUI |
+| **AI Asset Gen** | ➡️ CinematicAds | `Ads-Automations/src/lib/ai-assets.ts` | fal.ai + Replicate | ✅ OUI |
 | **Stitch MCP Wrapper** | ✅ Production | `agency/core/stitch-api.cjs` | 279 lines, --health | ✅ OUI |
+
+**Technologies UNIQUES 3A:**
+- A2A v1.0 Protocol (tasks/send, tasks/get, tasks/cancel)
+- 3A-Global-MCP SOTA 95% (bearer-auth, streamable-http)
+- GPM avec 19 sensors temps réel
+- Multi-tenant client orchestration
+
+---
+
+### 1bis. VocalIA (Voice AI Platform - Subsidiary)
+
+**Location:** `~/Desktop/VocalIA/`
+**Domain:** vocalia.ma
+**Code Total:** 8,098 lignes
+
+| Technologie | Status | Fichier Principal | Lignes | Description |
+|-------------|--------|-------------------|--------|-------------|
+| **Voice API Resilient** | ✅ Production | `core/voice-api-resilient.cjs` | 1,508 | Multi-AI fallback (Grok→Gemini→Claude→Atlas) |
+| **Grok Voice Realtime** | ✅ Production | `core/grok-voice-realtime.cjs` | 1,112 | WebSocket audio PCM16/24kHz |
+| **Voice Telephony Bridge** | ✅ Production | `telephony/voice-telephony-bridge.cjs` | 2,658 | Twilio PSTN ↔ Grok WebSocket, 11 tools |
+| **Voice Widget Core** | ✅ Production | `widget/voice-widget-core.js` | 1,012 | Browser Web Speech API ($0) |
+| **Voice Widget Templates** | ✅ Production | `widget/voice-widget-templates.cjs` | 800 | Industry presets |
+| **Voice Persona Injector** | ✅ Production | `personas/voice-persona-injector.cjs` | 648 | 30 personas, 5 langues |
+| **Voice CRM Tools** | ✅ Production | `integrations/voice-crm-tools.cjs` | 104 | HubSpot integration |
+| **Voice E-commerce Tools** | ✅ Production | `integrations/voice-ecommerce-tools.cjs` | 149 | Shopify + Klaviyo |
+| **Voice Quality Sensor** | ✅ Production | `scripts/voice-quality-sensor.cjs` | 282 | Health monitoring |
+
+**Technologies UNIQUES VocalIA:**
+- Widget + Telephony combinés (rare sur le marché)
+- 30 personas multi-tenant avec marketing science (BANT/PAS/CIALDINI)
+- Darija natif via Atlas-Chat-9B
+- $0.06/min vs $0.13-0.33/min concurrents (Vapi, Retell)
+
+**Documentation:** `VocalIA/docs/VOICE-AI-PLATFORM-REFERENCE.md`
+
+---
+
+### 1ter. CINEMATICADS (Video Production - Subsidiary)
+
+**Location:** `~/Desktop/Ads-Automations/`
+**Domain:** cinematicads.studio
+
+| Technologie | Status | Fichier Principal | Description |
+|-------------|--------|-------------------|-------------|
+| **Remotion Studio** | ✅ Production | `remotion-studio/` | React video framework |
+| **AI Asset Generation** | ✅ Production | `src/lib/ai-assets.ts` | fal.ai + Replicate |
+| **7 Compositions** | ✅ Production | `compositions/*.tsx` | UGC, Brand, Promo templates |
+| **Whisk Assets** | ✅ Available | `/assets/whisk/*.png` | Pre-generated visuals |
+
+**Technologies UNIQUES CinematicAds:**
+- Rendu vidéo local gratuit (pas de cloud billing)
+- Vibe coding avec Claude
+- Multi-provider AI assets (fal.ai, Replicate, Imagen)
 | **3A-Global-MCP** | ✅ Production | `automations/3a-global-mcp/` | **v1.5.0**, SDK 1.25.3 | ✅ OUI |
 
 **Technologies UNIQUES 3A:**

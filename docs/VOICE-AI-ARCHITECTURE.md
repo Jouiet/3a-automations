@@ -1,19 +1,42 @@
-# Voice AI Architecture - 3A Automation
+# VocalIA - Voice AI Architecture
+> **Brand:** VocalIA | **Domain:** vocalia.ma | **Parent:** 3A Automation
 
-## Version: 1.1.0 | Date: 08/01/2026 | Session: 130
+## Version: 2.1.0 | Date: 28/01/2026 | Session: 184bis
+
+> **MASTER REFERENCE:** Voir `docs/VOICE-AI-PLATFORM-REFERENCE.md` pour documentation complète et à jour.
+>
+> **Session 184bis corrections:**
+> - Function Tools: 11 (pas 10) - ajout `send_payment_details`
+> - CRM Integrations: HubSpot + Klaviyo + Shopify (3, pas 1)
+> - Pricing concurrents vérifié: Vapi $0.15-0.33/min, Retell $0.13-0.31/min
+> - MENA competitors: SAWT IA, Sawt (STV/Google funded), NEVOX AI
+> - **Brand choisi:** VocalIA (vocalia.ma)
 
 ---
 
 ## RÉSUMÉ EXÉCUTIF
 
-### État Actuel (Vérifié 08/01/2026)
+### État Actuel (Vérifié 28/01/2026 17:56 CET)
 
-| Composant | Status | Notes |
-| --- | --- | --- |
-| Voice Widget Web | ✅ OPÉRATIONNEL | Web Speech API, 33 keywords, booking flow |
-| Dial.Plus Agent | ✅ OPÉRATIONNEL | +1 775 254 7428, knowledge base uploadée |
-| Grok Voice Phone | ❌ BLOQUÉ | xAI API OK, carrier manquant |
-| Knowledge Base | ✅ UPLOADÉ | dialplus-knowledge-base.txt sur Dial.Plus |
+| Composant | Lignes | Status Code | Status Runtime |
+|:----------|:------:|:-----------:|:--------------:|
+| Voice Widget Web | 1,012 | ✅ | ⚠️ Dépend backend |
+| Voice API (text gen) | 1,508 | ✅ | ❌ DOWN |
+| Grok Realtime (audio) | 1,112 | ✅ | ❌ DOWN |
+| Telephony Bridge (PSTN) | 2,658 | ✅ | ❌ TWILIO missing |
+| Voice Personas | 648 | ✅ | ✅ (30 personas) |
+| **TOTAL** | **8,992** | **✅** | **0/3 UP** |
+
+### Blocage Principal
+```
+TWILIO_ACCOUNT_SID=    # ❌ NOT SET
+TWILIO_AUTH_TOKEN=     # ❌ NOT SET
+TWILIO_PHONE_NUMBER=   # ❌ NOT SET
+```
+
+### Architecture 2 Produits
+1. **Voice Widget** (Browser) - Web Speech API gratuit - Concurrents: Drift, Intercom, Tidio
+2. **Voice Telephony AI** (PSTN) - Twilio→Grok WebSocket - Concurrents: Vapi, Retell, Synthflow
 
 ---
 
