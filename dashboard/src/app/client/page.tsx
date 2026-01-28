@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { GlassCard, GlassCardContent, GlassCardHeader } from "@/components/ui/glass-card";
+import { AnimatedNumber, PercentageRing } from "@/components/ui/animated-number";
+import { StatusPulse, StatusBadge } from "@/components/ui/status-pulse";
+import { StatSkeleton, CardSkeleton, ListItemSkeleton } from "@/components/ui/skeleton";
 import {
   Zap,
   TrendingUp,
@@ -19,6 +23,11 @@ import {
   AlertCircle,
   RefreshCw,
   BarChart3,
+  Shield,
+  Cpu,
+  Activity,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import {
   BarChart,
@@ -28,9 +37,8 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
+  AreaChart,
+  Area,
 } from "recharts";
 
 interface ClientStats {
@@ -38,6 +46,16 @@ interface ClientStats {
   totalExecutions: number;
   successRate: number;
   errorCount: number;
+  timeSavedHours: number;
+  revenueImpact: number;
+}
+
+interface Integration {
+  id: string;
+  name: string;
+  icon: string;
+  connected: boolean;
+  lastSync?: string;
 }
 
 interface NativeAutomation {
@@ -46,6 +64,7 @@ interface NativeAutomation {
   active: boolean;
   updatedAt: string;
   category: string;
+  lastRunStatus?: "success" | "error" | "pending";
 }
 
 interface AutomationExecution {
@@ -71,10 +90,12 @@ interface ExecutionChartData {
   error: number;
 }
 
-const CHART_COLORS = {
-  success: "#10B981",
-  error: "#EF4444",
-  primary: "#4FBAF1",
+// Platform capabilities (sourced from registry)
+const PLATFORM_STATS = {
+  totalAutomations: 121,
+  totalScripts: 85,
+  totalSensors: 19,
+  mcpServers: 14,
 };
 
 export default function ClientDashboardPage() {
@@ -83,9 +104,15 @@ export default function ClientDashboardPage() {
     totalExecutions: 0,
     successRate: 0,
     errorCount: 0,
+    timeSavedHours: 0,
+    revenueImpact: 0,
   });
+  const [integrations, setIntegrations] = useState<Integration[]>([
+    { id: "shopify", name: "Shopify", icon: "shopify", connected: false },
+    { id: "klaviyo", name: "Klaviyo", icon: "klaviyo", connected: false },
+    { id: "google", name: "Google", icon: "google", connected: false },
+  ]);
   const [automations, setAutomations] = useState<NativeAutomation[]>([]);
-  const [executions, setExecutions] = useState<AutomationExecution[]>([]);
   const [activities, setActivities] = useState<RecentActivity[]>([]);
   const [executionChartData, setExecutionChartData] = useState<ExecutionChartData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -96,10 +123,11 @@ export default function ClientDashboardPage() {
     try {
       setError(null);
 
-      // Fetch native automations and stats
-      const [automationsRes, statsRes] = await Promise.all([
+      // Fetch data in parallel
+      const [automationsRes, statsRes, healthRes] = await Promise.all([
         fetch("/api/automations"),
         fetch("/api/stats"),
+        fetch("/api/health/default").catch(() => null),
       ]);
 
       // Process automations
@@ -107,8 +135,6 @@ export default function ClientDashboardPage() {
         const automationsData = await automationsRes.json();
         if (automationsData.success && automationsData.data) {
           setAutomations(automationsData.data);
-
-          // Calculate stats from automations
           const activeCount = automationsData.data.filter((a: NativeAutomation) => a.active).length;
           setStats(prev => ({ ...prev, activeAutomations: activeCount }));
         }
@@ -119,20 +145,24 @@ export default function ClientDashboardPage() {
         const statsData = await statsRes.json();
         if (statsData.success && statsData.data) {
           const { totalExecutions, successRate, errorCount, recentExecutions } = statsData.data;
+
+          // Calculate estimated time saved (avg 2 min per automation run)
+          const timeSaved = Math.round((totalExecutions || 0) * 2 / 60);
+
           setStats(prev => ({
             ...prev,
             totalExecutions: totalExecutions || 0,
             successRate: successRate || 0,
             errorCount: errorCount || 0,
+            timeSavedHours: timeSaved,
           }));
 
-          // Convert recent executions to activities
           if (recentExecutions && recentExecutions.length > 0) {
             const recentActivities: RecentActivity[] = recentExecutions
               .slice(0, 5)
               .map((exec: AutomationExecution) => ({
                 id: exec.id,
-                message: `Automation "${exec.automationName}" - ${exec.status}`,
+                message: `${exec.automationName}`,
                 time: formatTimeAgo(exec.startedAt),
                 type: "automation" as const,
                 status: exec.status === "success" ? "success" as const :
@@ -140,29 +170,45 @@ export default function ClientDashboardPage() {
               }));
             setActivities(recentActivities);
 
-            // Generate chart data from executions grouped by automation
-            const automationStats: { [key: string]: { success: number; error: number } } = {};
+            // Generate chart data
+            const last7Days = Array.from({ length: 7 }, (_, i) => {
+              const date = new Date();
+              date.setDate(date.getDate() - (6 - i));
+              return {
+                name: date.toLocaleDateString("fr-FR", { weekday: "short" }),
+                success: 0,
+                error: 0,
+              };
+            });
+
             recentExecutions.forEach((exec: AutomationExecution) => {
-              const name = exec.automationName?.split(" - ")[0] || "Unknown";
-              if (!automationStats[name]) {
-                automationStats[name] = { success: 0, error: 0 };
-              }
-              if (exec.status === "success") {
-                automationStats[name].success++;
-              } else if (exec.status === "error") {
-                automationStats[name].error++;
+              const execDate = new Date(exec.startedAt);
+              const dayIndex = last7Days.findIndex(d =>
+                d.name === execDate.toLocaleDateString("fr-FR", { weekday: "short" })
+              );
+              if (dayIndex !== -1) {
+                if (exec.status === "success") {
+                  last7Days[dayIndex].success++;
+                } else if (exec.status === "error") {
+                  last7Days[dayIndex].error++;
+                }
               }
             });
 
-            const chartData = Object.entries(automationStats)
-              .map(([name, data]) => ({
-                name: name.length > 15 ? name.substring(0, 12) + "..." : name,
-                success: data.success,
-                error: data.error,
-              }))
-              .slice(0, 6);
-            setExecutionChartData(chartData);
+            setExecutionChartData(last7Days);
           }
+        }
+      }
+
+      // Process health/integrations
+      if (healthRes && healthRes.ok) {
+        const healthData = await healthRes.json();
+        if (healthData.integrations) {
+          setIntegrations(prev => prev.map(int => ({
+            ...int,
+            connected: healthData.integrations[int.id]?.connected || false,
+            lastSync: healthData.integrations[int.id]?.lastSync,
+          })));
         }
       }
 
@@ -177,8 +223,6 @@ export default function ClientDashboardPage() {
 
   useEffect(() => {
     fetchData();
-
-    // Auto-refresh every 30 seconds
     const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
   }, []);
@@ -201,6 +245,8 @@ export default function ClientDashboardPage() {
     fetchData();
   };
 
+  const connectedCount = integrations.filter(i => i.connected).length;
+
   if (isLoading) {
     return (
       <div className="space-y-6">
@@ -212,13 +258,12 @@ export default function ClientDashboardPage() {
         </div>
         <div className="grid gap-4 md:grid-cols-4">
           {[1, 2, 3, 4].map((i) => (
-            <Card key={i} className="animate-pulse">
-              <CardContent className="p-6">
-                <div className="h-8 w-16 bg-muted rounded mb-2" />
-                <div className="h-4 w-24 bg-muted rounded" />
-              </CardContent>
-            </Card>
+            <StatSkeleton key={i} />
           ))}
+        </div>
+        <div className="grid gap-6 lg:grid-cols-3">
+          <CardSkeleton className="lg:col-span-2" />
+          <CardSkeleton />
         </div>
       </div>
     );
@@ -226,17 +271,17 @@ export default function ClientDashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header with refresh */}
+      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Mon Dashboard</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Mon Dashboard</h1>
           <p className="text-muted-foreground">
             Vue d&apos;ensemble de vos automations
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <span className="text-xs text-muted-foreground">
-            Mise a jour: {lastRefresh.toLocaleTimeString("fr-FR")}
+            {lastRefresh.toLocaleTimeString("fr-FR")}
           </span>
           <Button variant="outline" size="sm" onClick={handleRefresh}>
             <RefreshCw className="h-4 w-4 mr-2" />
@@ -253,100 +298,154 @@ export default function ClientDashboardPage() {
         </div>
       )}
 
-      {/* Quick Stats */}
+      {/* Integration Status Bar - Sober, purposeful */}
+      <Card className="border-border/50">
+        <CardContent className="p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <StatusPulse status={connectedCount === integrations.length ? "healthy" : connectedCount > 0 ? "warning" : "error"} size="sm" />
+                <span className="text-sm font-medium">
+                  {connectedCount}/{integrations.length} integrations connectees
+                </span>
+              </div>
+              <div className="hidden md:flex items-center gap-4">
+                {integrations.map((int) => (
+                  <div key={int.id} className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full ${int.connected ? "bg-emerald-500" : "bg-slate-600"}`} />
+                    <span className={`text-xs ${int.connected ? "text-foreground" : "text-muted-foreground"}`}>
+                      {int.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <Button variant="ghost" size="sm" asChild>
+              <a href="/client/integrations">
+                Gerer <ArrowRight className="h-3 w-3 ml-1" />
+              </a>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Key Metrics - Clean, minimal with purposeful animation */}
       <div className="grid gap-4 md:grid-cols-4">
+        {/* Active Automations */}
         <Card className="border-border/50 hover:border-primary/30 transition-colors">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <Zap className="h-5 w-5 text-primary" />
-              <Badge variant={stats.activeAutomations > 0 ? "default" : "secondary"} className="gap-1">
-                {stats.activeAutomations > 0 ? (
-                  <>
-                    <ArrowUpRight className="h-3 w-3" />
-                    Actif
-                  </>
-                ) : (
-                  "Inactif"
-                )}
-              </Badge>
+              <StatusBadge
+                status={stats.activeAutomations > 0 ? "healthy" : "warning"}
+                label={stats.activeAutomations > 0 ? "Actif" : "Inactif"}
+              />
             </div>
             <div className="mt-4">
-              <p className="text-3xl font-bold">{stats.activeAutomations}</p>
+              <p className="text-3xl font-bold">
+                <AnimatedNumber value={stats.activeAutomations} />
+              </p>
               <p className="text-sm text-muted-foreground">Automations actives</p>
             </div>
           </CardContent>
         </Card>
 
+        {/* Success Rate - Purpose: show reliability */}
         <Card className="border-border/50 hover:border-primary/30 transition-colors">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
-              <TrendingUp className="h-5 w-5 text-emerald-400" />
+              <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+              <span className="text-xs text-muted-foreground">Fiabilite</span>
+            </div>
+            <div className="mt-4 flex items-end gap-3">
+              <p className="text-3xl font-bold">
+                <AnimatedNumber value={stats.successRate} suffix="%" />
+              </p>
+              <PercentageRing
+                value={stats.successRate}
+                size={32}
+                strokeWidth={3}
+                color={stats.successRate >= 95 ? "#10B981" : stats.successRate >= 80 ? "#F59E0B" : "#EF4444"}
+              />
+            </div>
+            <p className="text-sm text-muted-foreground">Taux de succes</p>
+          </CardContent>
+        </Card>
+
+        {/* Total Executions */}
+        <Card className="border-border/50 hover:border-primary/30 transition-colors">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <Activity className="h-5 w-5 text-sky-400" />
               <span className="text-xs text-muted-foreground">Total</span>
             </div>
             <div className="mt-4">
-              <p className="text-3xl font-bold">{stats.totalExecutions}</p>
+              <p className="text-3xl font-bold">
+                <AnimatedNumber value={stats.totalExecutions} />
+              </p>
               <p className="text-sm text-muted-foreground">Executions</p>
             </div>
           </CardContent>
         </Card>
 
+        {/* Time Saved - Show business value */}
         <Card className="border-border/50 hover:border-primary/30 transition-colors">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
-              <CheckCircle2 className="h-5 w-5 text-emerald-400" />
-              <span className="text-xs text-muted-foreground">Taux</span>
+              <Clock className="h-5 w-5 text-amber-400" />
+              <span className="text-xs text-muted-foreground">Valeur</span>
             </div>
             <div className="mt-4">
-              <p className="text-3xl font-bold">{stats.successRate}%</p>
-              <p className="text-sm text-muted-foreground">Taux de succes</p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="border-border/50 hover:border-primary/30 transition-colors">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <AlertCircle className="h-5 w-5 text-destructive" />
-              <span className="text-xs text-muted-foreground">Erreurs</span>
-            </div>
-            <div className="mt-4">
-              <p className="text-3xl font-bold">{stats.errorCount}</p>
-              <p className="text-sm text-muted-foreground">Erreurs recentes</p>
+              <p className="text-3xl font-bold">
+                <AnimatedNumber value={stats.timeSavedHours} suffix="h" />
+              </p>
+              <p className="text-sm text-muted-foreground">Temps economise</p>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Main Content */}
+      {/* Main Content Grid */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Automations List */}
         <Card className="lg:col-span-2 border-border/50">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-primary" />
-              Mes Automations
-            </CardTitle>
-            <CardDescription>
-              {automations.length} automations configurees
-            </CardDescription>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-primary" />
+                  Mes Automations
+                </CardTitle>
+                <CardDescription>
+                  {automations.length} configurees · {stats.activeAutomations} actives
+                </CardDescription>
+              </div>
+              <Button variant="outline" size="sm" asChild>
+                <a href="/client/automations">Voir tout</a>
+              </Button>
+            </div>
           </CardHeader>
           <CardContent>
             {automations.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 <Zap className="h-10 w-10 mx-auto mb-2 opacity-50" />
                 <p>Aucune automation configuree</p>
+                <Button variant="outline" size="sm" className="mt-4" asChild>
+                  <a href="/client/onboarding">Commencer la configuration</a>
+                </Button>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {automations.slice(0, 6).map((automation) => (
                   <div
                     key={automation.id}
                     className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${automation.active ? "bg-emerald-500/10" : "bg-muted"}`}>
-                        <Zap className={`h-4 w-4 ${automation.active ? "text-emerald-400" : "text-muted-foreground"}`} />
-                      </div>
+                      <StatusPulse
+                        status={automation.active ? "healthy" : "offline"}
+                        size="sm"
+                      />
                       <div>
                         <p className="font-medium text-sm">{automation.name}</p>
                         <p className="text-xs text-muted-foreground">
@@ -382,20 +481,12 @@ export default function ClientDashboardPage() {
               <div className="space-y-4">
                 {activities.map((activity) => (
                   <div key={activity.id} className="flex items-start gap-3">
-                    <div className={`p-2 rounded-lg ${
-                      activity.status === "success" ? "bg-emerald-500/10" :
-                      activity.status === "error" ? "bg-destructive/10" : "bg-muted/50"
-                    }`}>
-                      {activity.status === "success" ? (
-                        <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                      ) : activity.status === "error" ? (
-                        <AlertCircle className="h-4 w-4 text-destructive" />
-                      ) : (
-                        <Clock className="h-4 w-4 text-muted-foreground" />
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm">{activity.message}</p>
+                    <StatusPulse
+                      status={activity.status === "success" ? "healthy" : activity.status === "error" ? "error" : "warning"}
+                      size="sm"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm truncate">{activity.message}</p>
                       <p className="text-xs text-muted-foreground">{activity.time}</p>
                     </div>
                   </div>
@@ -406,106 +497,147 @@ export default function ClientDashboardPage() {
         </Card>
       </div>
 
-      {/* Execution Chart */}
+      {/* Execution Trend - Purposeful: show trajectory */}
       {executionChartData.length > 0 && (
         <Card className="border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-primary" />
-              Executions par Automation
+              Tendance des Executions
             </CardTitle>
             <CardDescription>
-              Performance des automations (succes vs erreurs)
+              Performance des 7 derniers jours
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-[300px] w-full">
+            <div className="h-[250px] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={executionChartData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                <AreaChart data={executionChartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="successGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#10B981" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
+                    </linearGradient>
+                    <linearGradient id="errorGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#EF4444" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#EF4444" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                   <XAxis
                     dataKey="name"
                     stroke="#94A3B8"
                     fontSize={11}
-                    angle={-45}
-                    textAnchor="end"
-                    height={60}
                     tick={{ fill: '#94A3B8' }}
                   />
-                  <YAxis stroke="#94A3B8" fontSize={12} tick={{ fill: '#94A3B8' }} />
+                  <YAxis
+                    stroke="#94A3B8"
+                    fontSize={11}
+                    tick={{ fill: '#94A3B8' }}
+                    allowDecimals={false}
+                  />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: '#1E293B',
                       border: '1px solid rgba(79, 186, 241, 0.2)',
                       borderRadius: '8px',
-                      color: '#fff'
+                      color: '#fff',
+                      fontSize: '12px',
                     }}
                   />
-                  <Bar dataKey="success" name="Succes" fill={CHART_COLORS.success} radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="error" name="Erreurs" fill={CHART_COLORS.error} radius={[4, 4, 0, 0]} />
-                </BarChart>
+                  <Area
+                    type="monotone"
+                    dataKey="success"
+                    name="Succes"
+                    stroke="#10B981"
+                    strokeWidth={2}
+                    fill="url(#successGradient)"
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="error"
+                    name="Erreurs"
+                    stroke="#EF4444"
+                    strokeWidth={2}
+                    fill="url(#errorGradient)"
+                  />
+                </AreaChart>
               </ResponsiveContainer>
-            </div>
-            <div className="flex justify-center gap-6 mt-4">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: CHART_COLORS.success }} />
-                <span className="text-sm text-muted-foreground">Succes</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: CHART_COLORS.error }} />
-                <span className="text-sm text-muted-foreground">Erreurs</span>
-              </div>
             </div>
           </CardContent>
         </Card>
       )}
 
-      {/* Quick Actions */}
-      <Card className="border-border/50">
-        <CardHeader>
-          <CardTitle>Actions Rapides</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-3 md:grid-cols-4">
-            <Button variant="outline" className="justify-start h-auto py-4" asChild>
-              <a href="/client/reports">
-                <FileText className="h-5 w-5 mr-3" />
-                <div className="text-left">
-                  <p className="font-medium">Rapports</p>
-                  <p className="text-xs text-muted-foreground">Voir mes statistiques</p>
-                </div>
-              </a>
-            </Button>
-            <Button variant="outline" className="justify-start h-auto py-4" asChild>
-              <a href="/client/automations">
-                <Zap className="h-5 w-5 mr-3" />
-                <div className="text-left">
-                  <p className="font-medium">Automations</p>
-                  <p className="text-xs text-muted-foreground">Gerer mes automations</p>
-                </div>
-              </a>
-            </Button>
-            <Button variant="outline" className="justify-start h-auto py-4" asChild>
-              <a href="https://calendly.com/3a-automation" target="_blank" rel="noopener noreferrer">
-                <Calendar className="h-5 w-5 mr-3" />
-                <div className="text-left">
-                  <p className="font-medium">Planifier un appel</p>
-                  <p className="text-xs text-muted-foreground">Reserver un RDV</p>
-                </div>
-              </a>
-            </Button>
-            <Button variant="outline" className="justify-start h-auto py-4" asChild>
-              <a href="mailto:contact@3a-automation.com">
-                <HelpCircle className="h-5 w-5 mr-3" />
-                <div className="text-left">
-                  <p className="font-medium">Support</p>
-                  <p className="text-xs text-muted-foreground">Contacter l&apos;equipe</p>
-                </div>
-              </a>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Platform Capabilities - Subtle showcase, not bragging */}
+      <div className="grid gap-4 md:grid-cols-2">
+        {/* Quick Actions */}
+        <Card className="border-border/50">
+          <CardHeader>
+            <CardTitle>Actions Rapides</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-3 grid-cols-2">
+              <Button variant="outline" className="justify-start h-auto py-3" asChild>
+                <a href="/client/reports">
+                  <FileText className="h-4 w-4 mr-2" />
+                  <span className="text-sm">Rapports</span>
+                </a>
+              </Button>
+              <Button variant="outline" className="justify-start h-auto py-3" asChild>
+                <a href="/client/automations">
+                  <Zap className="h-4 w-4 mr-2" />
+                  <span className="text-sm">Automations</span>
+                </a>
+              </Button>
+              <Button variant="outline" className="justify-start h-auto py-3" asChild>
+                <a href="https://calendly.com/3a-automation" target="_blank" rel="noopener noreferrer">
+                  <Calendar className="h-4 w-4 mr-2" />
+                  <span className="text-sm">Planifier un appel</span>
+                </a>
+              </Button>
+              <Button variant="outline" className="justify-start h-auto py-3" asChild>
+                <a href="mailto:contact@3a-automation.com">
+                  <HelpCircle className="h-4 w-4 mr-2" />
+                  <span className="text-sm">Support</span>
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Platform Info - Subtle, professional */}
+        <Card className="border-border/50 bg-muted/20">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg bg-primary/10">
+                <Shield className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <p className="font-medium">Plateforme 3A</p>
+                <p className="text-xs text-muted-foreground">Infrastructure enterprise-grade</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 text-center">
+              <div>
+                <p className="text-2xl font-bold">{PLATFORM_STATS.totalAutomations}</p>
+                <p className="text-xs text-muted-foreground">Automations</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{PLATFORM_STATS.totalScripts}</p>
+                <p className="text-xs text-muted-foreground">Scripts</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{PLATFORM_STATS.totalSensors}</p>
+                <p className="text-xs text-muted-foreground">Sensors</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{PLATFORM_STATS.mcpServers}</p>
+                <p className="text-xs text-muted-foreground">MCP Servers</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
