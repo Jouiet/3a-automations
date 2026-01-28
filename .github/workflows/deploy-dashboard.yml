@@ -68,6 +68,9 @@ jobs:
             cd .next/standalone
             PORT=3001 pm2 start server.js --name "dashboard"
             pm2 save
+
+            # Restart nginx to clear any proxy cache
+            sudo systemctl reload nginx 2>/dev/null || true
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
