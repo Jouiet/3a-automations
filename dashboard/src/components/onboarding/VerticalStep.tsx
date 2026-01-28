@@ -35,7 +35,7 @@ const VERTICALS: VerticalOption[] = [
       "Review automation",
       "Abandoned cart recovery",
     ],
-    recommended: true,
+    recommended: false,
   },
   {
     id: "b2b",
