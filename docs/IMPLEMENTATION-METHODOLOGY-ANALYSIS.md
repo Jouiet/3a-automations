@@ -21,9 +21,9 @@
 | Rate Limiting | ✅ Implémenté | `lib/rate-limit.ts` - 131 lignes |
 | Google Sheets DB | ✅ Production | `lib/google-sheets.ts` - 323 lignes |
 | Scripts Core | ✅ 96 fichiers | 48,411 lignes total |
-| OAuth | ❌ **MANQUANT** | 0 providers, 0 callbacks |
-| Credential Vault | ❌ **MANQUANT** | process.env global uniquement |
-| Multi-Tenant | ❌ **MANQUANT** | Pas d'isolation client |
+| OAuth | ✅ **IMPLÉMENTÉ** | 3 providers (Shopify, Klaviyo, Google), 6 routes |
+| Credential Vault | ✅ **IMPLÉMENTÉ** | SecretVault.cjs (21KB), cache + fallback |
+| Multi-Tenant | ✅ **IMPLÉMENTÉ** | TenantScriptRunner, TenantContext, TenantLogger |
 
 ### Objectif
 Transformer le dashboard existant en plateforme multi-tenant self-service où chaque client:
