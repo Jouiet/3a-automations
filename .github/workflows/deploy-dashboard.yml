@@ -42,34 +42,44 @@ jobs:
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
           envs: JWT_SECRET,GOOGLE_SHEETS_ID,GOOGLE_SHEETS_API_URL
           script: |
-            # Always fresh clone to ensure latest code
+            # STEP 1: Stop PM2 FIRST to release file handles
+            pm2 stop dashboard 2>/dev/null || true
+            pm2 delete dashboard 2>/dev/null || true
+
+            # STEP 2: Complete cleanup - remove ALL old files
             cd /root
             rm -rf dashboard temp-repo
+
+            # STEP 3: Fresh clone from GitHub
             git clone --depth 1 https://github.com/Jouiet/3a-automations.git temp-repo
             mv temp-repo/dashboard /root/dashboard
             rm -rf temp-repo
             cd /root/dashboard
 
-            # Create .env.local with runtime environment variables
+            # STEP 4: Create .env.local with runtime environment variables
             echo "JWT_SECRET=${JWT_SECRET}" > .env.local
             echo "GOOGLE_SHEETS_ID=${GOOGLE_SHEETS_ID}" >> .env.local
             echo "GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}" >> .env.local
 
-            # Install dependencies and build
+            # STEP 5: Clean install and build (no cache)
+            rm -rf node_modules .next 2>/dev/null || true
             npm install --legacy-peer-deps
             npm run build
 
-            # Copy static files to standalone (required for standalone mode)
+            # STEP 6: Verify buildId changed
+            echo "Build ID: $(cat .next/BUILD_ID)"
+
+            # STEP 7: Copy static files to standalone (required for standalone mode)
             cp -r .next/static .next/standalone/.next/
             cp -r public .next/standalone/ 2>/dev/null || true
 
-            # Restart PM2 with standalone server
-            pm2 delete dashboard 2>/dev/null || true
+            # STEP 8: Start PM2 with new build
             cd .next/standalone
             PORT=3001 pm2 start server.js --name "dashboard"
             pm2 save
 
-            # Restart nginx to clear any proxy cache
+            # STEP 9: Clear nginx cache and reload
+            sudo rm -rf /var/cache/nginx/* 2>/dev/null || true
             sudo systemctl reload nginx 2>/dev/null || true
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
