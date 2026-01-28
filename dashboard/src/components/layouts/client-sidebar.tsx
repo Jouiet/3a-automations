@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navigation = [
   {
@@ -159,6 +160,11 @@ export function ClientSidebar() {
               </Link>
             );
           })}
+          {/* Theme Toggle */}
+          <div className="flex items-center gap-3 px-3 py-2">
+            <ThemeToggle />
+            {!collapsed && <span className="text-sm text-muted-foreground">Theme</span>}
+          </div>
           <button
             onClick={handleLogout}
             className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-destructive hover:bg-destructive/10 transition-all"
