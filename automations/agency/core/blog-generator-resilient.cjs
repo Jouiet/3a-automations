@@ -5,6 +5,8 @@
  *
  * FEATURES:
  *   - AI Generation: Gemini → Grok → Claude (VOLUME task - Session 168terdecies)
+ *   - MULTILINGUAL: FR ↔ EN ↔ ES (3 languages, configurable per client)
+ *   - 3A Automation: FR + EN (default) | Clients can enable ES
  *   - WordPress Publishing (optional)
  *   - Facebook Page Distribution (optional)
  *   - LinkedIn Distribution (optional)
@@ -13,12 +15,14 @@
  * Usage:
  *   node blog-generator-resilient.cjs --topic="Sujet" --language=fr
  *   node blog-generator-resilient.cjs --topic="Topic" --language=en --publish
+ *   node blog-generator-resilient.cjs --topic="Topic" --multilingual    # FR↔EN↔ES
+ *   node blog-generator-resilient.cjs --topic="Topic" --translate=en,es # Specific langs
  *   node blog-generator-resilient.cjs --topic="Topic" --publish --distribute
  *   node blog-generator-resilient.cjs --topic="Topic" --agentic
  *   node blog-generator-resilient.cjs --server --port=3003
  *   node blog-generator-resilient.cjs --health
  *
- * Version: 3.0.0 (Agentic Reflection Loop)
+ * Version: 3.1.0 (Multilingual + Agentic)
  */
 
 const https = require('https');
@@ -67,6 +71,42 @@ const AGENTIC_CONFIG = {
   // Enable detailed logging
   // ENV: BLOG_AGENTIC_VERBOSE=false
   verbose: process.env.BLOG_AGENTIC_VERBOSE === 'true',
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MULTILINGUAL TRANSLATION CONFIG - Session 183bis
+// Supported: FR ↔ EN ↔ ES (3 languages only)
+// Configurable per client via BLOG_LANGUAGES env (default: fr,en for 3A)
+// ─────────────────────────────────────────────────────────────────────────────
+const ALL_LANGUAGES = {
+  fr: { name: 'French', native: 'Français', urlPrefix: '/blog/' },
+  en: { name: 'English', native: 'English', urlPrefix: '/en/blog/' },
+  es: { name: 'Spanish', native: 'Español', urlPrefix: '/es/blog/' },
+};
+
+// ENV: BLOG_LANGUAGES=fr,en (comma-separated)
+// 3A Automation: fr,en (default)
+// Other clients can add: fr,en,es
+const enabledLangCodes = (process.env.BLOG_LANGUAGES || 'fr,en')
+  .split(',')
+  .map(l => l.trim().toLowerCase())
+  .filter(l => ALL_LANGUAGES[l]); // Only allow valid codes
+
+const TRANSLATION_CONFIG = {
+  // All supported languages (FR, EN, ES only)
+  allLanguages: ALL_LANGUAGES,
+  // ENABLED languages for this client
+  languages: Object.fromEntries(
+    Object.entries(ALL_LANGUAGES).filter(([code]) => enabledLangCodes.includes(code))
+  ),
+  // Enabled language codes
+  enabledCodes: enabledLangCodes,
+  // Default source language (ENV: BLOG_SOURCE_LANGUAGE=fr)
+  defaultSource: process.env.BLOG_SOURCE_LANGUAGE || 'fr',
+  // Auto-translate to all enabled languages when --multilingual flag is used
+  autoTranslateAll: true,
+  // Output directory for translated articles
+  outputDir: path.join(__dirname, '../../../landing-page-hostinger'),
 };
 
 // Import Marketing Science Core (Persuasion Psychology)
@@ -206,7 +246,8 @@ const CINEMATIC_ADS = {
 // PROMPT TEMPLATE - INJECTED VIA MARKETING SCIENCE CORE
 // ─────────────────────────────────────────────────────────────────────────────
 function buildPrompt(topic, language, keywords = '', framework = 'PAS') {
-  const lang = language === 'fr' ? 'French' : 'English';
+  const langMap = { fr: 'French', en: 'English', es: 'Spanish' };
+  const lang = langMap[language] || 'English';
 
   // Base Context
   const baseContext = `Write a comprehensive blog article about: ${topic}
@@ -240,6 +281,200 @@ Output format: Valid JSON only, no markdown fences, no explanations:
 
   // Inject Psychology Framework (PAS, AIDA, SB7, CIALDINI)
   return MarketingScience.inject(framework || 'PAS', baseContext);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TRANSLATION FUNCTIONS - Session 183bis
+// Auto-translate articles FR↔EN↔ES
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Build translation prompt for AI
+ * @param {Object} article - Source article {title, excerpt, content, hashtags, category}
+ * @param {string} sourceLang - Source language code (fr, en, es)
+ * @param {string} targetLang - Target language code (fr, en, es)
+ */
+function buildTranslationPrompt(article, sourceLang, targetLang) {
+  const langNames = { fr: 'French', en: 'English', es: 'Spanish' };
+  const srcName = langNames[sourceLang] || sourceLang;
+  const tgtName = langNames[targetLang] || targetLang;
+
+  return `You are a professional translator specializing in marketing and technology content.
+
+TASK: Translate the following blog article from ${srcName} to ${tgtName}.
+
+CRITICAL REQUIREMENTS:
+1. Preserve ALL HTML tags exactly as they are (<h2>, <h3>, <p>, <ul>, <li>, etc.)
+2. Translate naturally - not word-for-word. Adapt idioms and expressions.
+3. Keep brand names unchanged: "3A Automation", "Shopify", "Klaviyo", etc.
+4. Preserve technical terms that are commonly used in ${tgtName}
+5. Maintain the same professional but accessible tone
+6. Keep URLs unchanged
+7. Translate hashtags to ${tgtName} equivalents
+
+SOURCE ARTICLE (${srcName}):
+Title: ${article.title}
+Excerpt: ${article.excerpt}
+Content: ${article.content}
+Hashtags: ${JSON.stringify(article.hashtags)}
+Category: ${article.category}
+
+OUTPUT FORMAT: Valid JSON only, no markdown fences:
+{
+  "title": "Translated title in ${tgtName}",
+  "excerpt": "Translated excerpt in ${tgtName}",
+  "content": "Translated HTML content in ${tgtName}",
+  "hashtags": ["translated", "hashtags", "in", "${targetLang}"],
+  "category": "${article.category}"
+}`;
+}
+
+/**
+ * Translate article to target language using AI fallback chain
+ * @param {Object} article - Source article
+ * @param {string} sourceLang - Source language code
+ * @param {string} targetLang - Target language code
+ */
+async function translateArticle(article, sourceLang, targetLang) {
+  console.log(`[Translation] ${sourceLang.toUpperCase()} → ${targetLang.toUpperCase()}...`);
+
+  const prompt = buildTranslationPrompt(article, sourceLang, targetLang);
+  const result = await executeGenerationChain(prompt);
+
+  if (result.success) {
+    console.log(`[Translation] ✅ ${targetLang.toUpperCase()} complete (via ${result.provider})`);
+    return {
+      success: true,
+      language: targetLang,
+      article: result.article,
+      provider: result.provider,
+    };
+  }
+
+  console.error(`[Translation] ❌ ${targetLang.toUpperCase()} failed`);
+  return {
+    success: false,
+    language: targetLang,
+    errors: result.errors,
+  };
+}
+
+/**
+ * Generate article in all languages (multilingual mode)
+ * @param {string} topic - Article topic
+ * @param {string} sourceLang - Source language to generate in
+ * @param {string} keywords - SEO keywords
+ * @param {boolean} agentic - Enable agentic mode
+ * @param {string} framework - Marketing framework
+ * @param {Array} targetLanguages - Languages to translate to (default: all)
+ */
+async function generateMultilingual(topic, sourceLang, keywords, agentic, framework, targetLanguages = null) {
+  // Use only ENABLED languages (configured via BLOG_LANGUAGES env)
+  const enabledLangs = TRANSLATION_CONFIG.enabledCodes;
+  const targets = targetLanguages
+    ? targetLanguages.filter(l => enabledLangs.includes(l)) // Filter to enabled only
+    : enabledLangs.filter(l => l !== sourceLang);
+
+  // Warn if trying to translate to non-enabled language
+  if (targetLanguages) {
+    const disabled = targetLanguages.filter(l => !enabledLangs.includes(l));
+    if (disabled.length > 0) {
+      console.log(`[WARN] Languages not enabled for this client: ${disabled.join(', ')} (set BLOG_LANGUAGES env)`);
+    }
+  }
+
+  console.log(`\n[Multilingual] Source: ${sourceLang.toUpperCase()}, Targets: ${targets.map(l => l.toUpperCase()).join(', ')}`);
+  console.log('─'.repeat(60));
+
+  // Step 1: Generate source article
+  console.log(`\n[Step 1/2] Generating source article (${sourceLang.toUpperCase()})...`);
+  const sourceResult = await generateWithFallback(topic, sourceLang, keywords, agentic, framework);
+
+  if (!sourceResult.success) {
+    return {
+      success: false,
+      source: sourceResult,
+      translations: {},
+    };
+  }
+
+  // Step 2: Translate to all target languages
+  console.log(`\n[Step 2/2] Translating to ${targets.length} language(s)...`);
+  const translations = {};
+
+  for (const targetLang of targets) {
+    const translation = await translateArticle(sourceResult.article, sourceLang, targetLang);
+    translations[targetLang] = translation;
+  }
+
+  // Summary
+  const successCount = Object.values(translations).filter(t => t.success).length;
+  console.log(`\n[Multilingual] ✅ Complete: ${successCount + 1}/${targets.length + 1} languages`);
+
+  return {
+    success: true,
+    source: {
+      language: sourceLang,
+      article: sourceResult.article,
+      provider: sourceResult.provider,
+    },
+    translations,
+    summary: {
+      total: targets.length + 1,
+      success: successCount + 1,
+      failed: targets.length - successCount,
+    },
+  };
+}
+
+/**
+ * Generate filename from title (URL-friendly slug)
+ */
+function slugify(title, lang) {
+  const slug = title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove accents
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .substring(0, 60);
+  return `${slug}.html`;
+}
+
+/**
+ * Save translated articles to filesystem
+ */
+function saveMultilingualArticles(result, topic) {
+  const saved = [];
+  const outputBase = TRANSLATION_CONFIG.outputDir;
+
+  // Save source
+  const sourceLang = result.source.language;
+  const sourceSlug = slugify(result.source.article.title, sourceLang);
+  const sourcePath = path.join(outputBase, TRANSLATION_CONFIG.languages[sourceLang].urlPrefix, sourceSlug);
+
+  // Note: Actual HTML template generation would go here
+  // For now, we save the JSON data
+  const jsonDir = path.join(__dirname, '../../../outputs/multilingual');
+  if (!fs.existsSync(jsonDir)) fs.mkdirSync(jsonDir, { recursive: true });
+
+  const timestamp = Date.now();
+  const outputPath = path.join(jsonDir, `blog-multilingual-${timestamp}.json`);
+  fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
+
+  console.log(`\n[Saved] Multilingual data: ${outputPath}`);
+
+  return {
+    jsonPath: outputPath,
+    articles: {
+      [sourceLang]: { slug: sourceSlug, title: result.source.article.title },
+      ...Object.fromEntries(
+        Object.entries(result.translations)
+          .filter(([_, t]) => t.success)
+          .map(([lang, t]) => [lang, { slug: slugify(t.article.title, lang), title: t.article.title }])
+      ),
+    },
+  };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1463,11 +1698,22 @@ async function main() {
     console.log(`Max Retries: ${AGENTIC_CONFIG.maxRetries} (options: ${AGENTIC_CONFIG.maxRetriesOptions.join(', ')})`);
     console.log(`Verbose Mode: ${AGENTIC_CONFIG.verbose ? '[ON]' : '[OFF]'}`);
 
+    // Multilingual (Session 183bis)
+    console.log('\n=== MULTILINGUAL TRANSLATION (FR ↔ EN ↔ ES) ===');
+    console.log(`ENABLED: ${Object.entries(TRANSLATION_CONFIG.languages).map(([code, l]) => `${code.toUpperCase()} (${l.native})`).join(', ')}`);
+    const notEnabled = Object.keys(ALL_LANGUAGES).filter(c => !TRANSLATION_CONFIG.enabledCodes.includes(c));
+    if (notEnabled.length > 0) {
+      console.log(`NOT ENABLED: ${notEnabled.map(c => c.toUpperCase()).join(', ')} (add to BLOG_LANGUAGES to enable)`);
+    }
+    console.log(`Default Source: ${TRANSLATION_CONFIG.defaultSource.toUpperCase()}`);
+    console.log(`ENV Config: BLOG_LANGUAGES=${TRANSLATION_CONFIG.enabledCodes.join(',')}`);
+    console.log(`Usage: --multilingual (all enabled) or --translate=en (specific)`);
+
     // Summary
     const aiCount = Object.values(PROVIDERS).filter(p => p.enabled).length;
     const socialCount = (FACEBOOK.enabled ? 1 : 0) + (LINKEDIN.enabled ? 1 : 0) + (XTWITTER.enabled ? 1 : 0);
     console.log(`\n=== SUMMARY ===`);
-    console.log(`Version: 3.1.0 (Session 165sexies - Full Flexibility Edition)`);
+    console.log(`Version: 3.1.0 (Session 183bis - Multilingual Edition)`);
     console.log(`AI Providers: ${aiCount}/4 configured`);
     console.log(`Social Platforms: ${socialCount}/3 configured`);
     console.log(`WordPress: ${WORDPRESS.appPassword ? '[OK]' : '[--]'}`);
@@ -1484,22 +1730,69 @@ async function main() {
   const video = !!args.video || !!args.distribute; // Auto-generate video for distribution
   const agentic = !!args.agentic; // Enable reflection loop
   const framework = args.framework || 'PAS'; // Default to PAS for high conversion
+  const multilingual = !!args.multilingual; // Generate in all languages (FR↔EN↔ES)
+  const translateTo = args.translate ? args.translate.split(',').map(l => l.trim().toLowerCase()) : null;
 
   // Generate article
   if (topic) {
     console.log(`\n[Blog] Generating article: "${topic}"`);
-    console.log(`Language: ${language}`);
+    console.log(`Source Language: ${language.toUpperCase()}`);
+    if (multilingual) console.log(`[Mode] MULTILINGUAL (FR↔EN↔ES auto-translation)`);
+    else if (translateTo) console.log(`[Mode] TRANSLATE to: ${translateTo.map(l => l.toUpperCase()).join(', ')}`);
     if (framework) console.log(`[Framework] ${framework} (Persuasion Mode Active)`);
     if (agentic) console.log(`[Mode] AGENTIC ENABLED (Reflection Loop Active)`);
-    console.log('─'.repeat(50));
+    console.log('─'.repeat(60));
 
-    const result = await generateWithFallback(
-      topic,
-      language,
-      args.keywords || '',
-      agentic,
-      framework
-    );
+    let result;
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // MULTILINGUAL MODE: Generate in source + auto-translate to all languages
+    // ─────────────────────────────────────────────────────────────────────────
+    if (multilingual || translateTo) {
+      const targets = translateTo || Object.keys(TRANSLATION_CONFIG.languages).filter(l => l !== language);
+      result = await generateMultilingual(topic, language, args.keywords || '', agentic, framework, targets);
+
+      if (result.success) {
+        // Save multilingual results
+        const saved = saveMultilingualArticles(result, topic);
+
+        console.log('\n' + '═'.repeat(60));
+        console.log('MULTILINGUAL GENERATION COMPLETE');
+        console.log('═'.repeat(60));
+        console.log(`\nSource (${result.source.language.toUpperCase()}): ${result.source.article.title}`);
+
+        for (const [lang, trans] of Object.entries(result.translations)) {
+          if (trans.success) {
+            console.log(`${lang.toUpperCase()}: ${trans.article.title}`);
+          } else {
+            console.log(`${lang.toUpperCase()}: ❌ FAILED`);
+          }
+        }
+
+        console.log(`\nSummary: ${result.summary.success}/${result.summary.total} languages`);
+        console.log(`Output: ${saved.jsonPath}`);
+
+        // Convert to standard result format for HITL
+        result = {
+          success: true,
+          provider: result.source.provider + ' (multilingual)',
+          article: result.source.article,
+          multilingual: result,
+          errors: [],
+        };
+      }
+    } else {
+      // ─────────────────────────────────────────────────────────────────────────
+      // SINGLE LANGUAGE MODE (original behavior)
+      // ─────────────────────────────────────────────────────────────────────────
+      result = await generateWithFallback(
+        topic,
+        language,
+        args.keywords || '',
+        agentic,
+        framework
+      );
+    }
 
     if (!result.success) {
       console.error('\n[ERROR] All providers failed:');
@@ -1600,6 +1893,7 @@ async function main() {
 
 FEATURES:
   [+] AI Generation with multi-provider fallback (Claude → OpenAI → Grok → Gemini)
+  [+] MULTILINGUAL: Auto-translate FR↔EN↔ES (Session 183bis)
   [+] HITL (Human In The Loop) - Draft review before publication
   [+] WordPress publishing (after approval)
   [+] Social distribution (Facebook, LinkedIn, X/Twitter)
@@ -1609,9 +1903,23 @@ FEATURES:
 Usage:
   node blog-generator-resilient.cjs --topic="Your topic" [options]
 
+MULTILINGUAL WORKFLOW (Configurable per Client):
+  # Generate in French + auto-translate to all ENABLED languages
+  # Default for 3A: FR + EN (set via BLOG_LANGUAGES=fr,en)
+  node blog-generator-resilient.cjs --topic="E-commerce 2026" --multilingual
+
+  # Generate in English + translate to French
+  node blog-generator-resilient.cjs --topic="AI Automation" --language=en --translate=fr
+
+  # Single language (original behavior)
+  node blog-generator-resilient.cjs --topic="Your topic" --language=fr
+
+  # Configure languages for other clients (via ENV):
+  BLOG_LANGUAGES=fr,en,es node blog-generator-resilient.cjs --topic="Topic" --multilingual
+
 HITL WORKFLOW (RECOMMENDED):
-  1. Generate:  node blog-generator-resilient.cjs --topic="Your topic"
-     → Saves draft for human review (NO auto-publish)
+  1. Generate:  node blog-generator-resilient.cjs --topic="Your topic" --multilingual
+     → Generates FR + EN + ES, saves draft for human review
 
   2. Review:    node blog-generator-resilient.cjs --list-drafts
                 node blog-generator-resilient.cjs --view-draft=<id>
@@ -1623,7 +1931,9 @@ HITL WORKFLOW (RECOMMENDED):
 
 Generation Options:
   --topic         Article topic (required)
-  --language      Language: fr or en (default: fr)
+  --language      Source language: fr, en, or es (default: fr)
+  --multilingual  Generate in ALL languages (FR↔EN↔ES) automatically
+  --translate=X   Translate to specific languages (comma-separated: en,es)
   --keywords      SEO keywords (comma-separated)
   --framework     Marketing Framework: "PAS" or "AIDA" (default: PAS)
   --agentic       Enable AI Reflection Loop (improves quality)
