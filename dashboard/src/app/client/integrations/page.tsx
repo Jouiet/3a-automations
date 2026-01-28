@@ -127,11 +127,11 @@ const OAUTH_INTEGRATIONS: Record<string, string> = {
   "google-search-console": "/api/auth/oauth/google/authorize?scope=webmasters",
 };
 
-// Integrations configured via API key (redirect to support with instructions)
+// Integrations that use API keys (show credential form)
 const API_KEY_INTEGRATIONS = new Set([
   "openai", "anthropic", "stripe", "meta-ads", "tiktok-ads",
   "google-ads", "whatsapp", "telnyx", "elevenlabs", "grok",
-  "cjdropshipping", "bigbuy",
+  "gemini", "apify", "cj-dropshipping", "bigbuy",
 ]);
 
 export default function IntegrationsPage() {
@@ -143,6 +143,11 @@ export default function IntegrationsPage() {
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
   const [shopDialog, setShopDialog] = useState<{ open: boolean; integrationId: string }>({ open: false, integrationId: "" });
   const [shopDomain, setShopDomain] = useState("");
+  const [apiKeyDialog, setApiKeyDialog] = useState<{ open: boolean; integrationId: string; integrationName: string }>({ open: false, integrationId: "", integrationName: "" });
+  const [credFields, setCredFields] = useState<{ key: string; label: string; placeholder: string; isSet: boolean }[]>([]);
+  const [credValues, setCredValues] = useState<Record<string, string>>({});
+  const [credSaving, setCredSaving] = useState(false);
+  const [credSuccess, setCredSuccess] = useState(false);
 
   const fetchIntegrations = useCallback(async () => {
     try {
@@ -391,14 +396,25 @@ export default function IntegrationsPage() {
                             variant="outline"
                             size="sm"
                             className="w-full"
-                            onClick={() => {
+                            onClick={async () => {
                               if (integration.id === "shopify") {
                                 setShopDomain("");
                                 setShopDialog({ open: true, integrationId: integration.id });
                               } else if (OAUTH_INTEGRATIONS[integration.id]) {
                                 window.location.href = OAUTH_INTEGRATIONS[integration.id];
                               } else if (API_KEY_INTEGRATIONS.has(integration.id)) {
-                                router.push("/client/support?subject=" + encodeURIComponent(`Configuration API ${integration.name} - Demande de connexion`));
+                                setCredSuccess(false);
+                                setCredValues({});
+                                setApiKeyDialog({ open: true, integrationId: integration.id, integrationName: integration.name });
+                                try {
+                                  const res = await fetch(`/api/integrations/credentials?id=${integration.id}`);
+                                  const data = await res.json();
+                                  if (data.success) {
+                                    setCredFields(data.data.fields);
+                                  }
+                                } catch {
+                                  setCredFields([]);
+                                }
                               } else {
                                 router.push("/client/support?subject=" + encodeURIComponent("Connexion " + integration.name));
                               }
@@ -535,6 +551,99 @@ export default function IntegrationsPage() {
                   <ExternalLink className="h-4 w-4 mr-2" />
                   Connecter
                 </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* API Key Dialog */}
+      {apiKeyDialog.open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <Card className="w-full max-w-md mx-4 border-border">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Zap className="h-5 w-5 text-primary" />
+                Connecter {apiKeyDialog.integrationName}
+              </CardTitle>
+              <CardDescription>
+                Entrez vos identifiants API pour activer cette integration
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {credSuccess ? (
+                <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                  <p className="text-sm text-emerald-400 flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4" />
+                    Credentials sauvegardees avec succes!
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {credFields.map((field) => (
+                    <div key={field.key}>
+                      <label className="text-sm font-medium mb-1 block">
+                        {field.label}
+                        {field.isSet && (
+                          <Badge className="ml-2 bg-emerald-500/20 text-emerald-400 text-xs">Deja configure</Badge>
+                        )}
+                      </label>
+                      <Input
+                        type="password"
+                        placeholder={field.placeholder}
+                        value={credValues[field.key] || ""}
+                        onChange={(e) => setCredValues({ ...credValues, [field.key]: e.target.value })}
+                        className="bg-background font-mono text-sm"
+                      />
+                    </div>
+                  ))}
+                </>
+              )}
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => {
+                    setApiKeyDialog({ open: false, integrationId: "", integrationName: "" });
+                    setCredFields([]);
+                    setCredValues({});
+                    setCredSuccess(false);
+                  }}
+                >
+                  {credSuccess ? "Fermer" : "Annuler"}
+                </Button>
+                {!credSuccess && (
+                  <Button
+                    className="flex-1"
+                    disabled={credSaving || Object.values(credValues).every(v => !v.trim())}
+                    onClick={async () => {
+                      setCredSaving(true);
+                      try {
+                        const res = await fetch("/api/integrations/credentials", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({
+                            integrationId: apiKeyDialog.integrationId,
+                            credentials: credValues,
+                          }),
+                        });
+                        const data = await res.json();
+                        if (data.success) {
+                          setCredSuccess(true);
+                          fetchIntegrations();
+                        } else {
+                          setError(data.error || "Erreur lors de la sauvegarde");
+                        }
+                      } catch {
+                        setError("Erreur de connexion");
+                      } finally {
+                        setCredSaving(false);
+                      }
+                    }}
+                  >
+                    {credSaving ? "Sauvegarde..." : "Sauvegarder"}
+                  </Button>
+                )}
               </div>
             </CardContent>
           </Card>
