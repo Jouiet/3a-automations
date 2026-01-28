@@ -32,8 +32,6 @@ jobs:
           GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
           GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          N8N_HOST: ${{ secrets.N8N_HOST }}
-          N8N_API_KEY: ${{ secrets.N8N_API_KEY }}
         run: npm run build
 
       - name: Deploy to Hostinger VPS (PM2 Standalone)
@@ -42,7 +40,7 @@ jobs:
           host: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USERNAME }}
           key: ${{ secrets.HOSTINGER_SSH_KEY }}
-          envs: N8N_HOST,N8N_API_KEY,JWT_SECRET,GOOGLE_SHEETS_ID,GOOGLE_SHEETS_API_URL
+          envs: JWT_SECRET,GOOGLE_SHEETS_ID,GOOGLE_SHEETS_API_URL
           script: |
             # Always fresh clone to ensure latest code
             cd /root
@@ -53,9 +51,7 @@ jobs:
             cd /root/dashboard
 
             # Create .env.local with runtime environment variables
-            echo "N8N_HOST=${N8N_HOST}" > .env.local
-            echo "N8N_API_KEY=${N8N_API_KEY}" >> .env.local
-            echo "JWT_SECRET=${JWT_SECRET}" >> .env.local
+            echo "JWT_SECRET=${JWT_SECRET}" > .env.local
             echo "GOOGLE_SHEETS_ID=${GOOGLE_SHEETS_ID}" >> .env.local
             echo "GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}" >> .env.local
 
@@ -73,8 +69,6 @@ jobs:
             PORT=3001 pm2 start server.js --name "dashboard"
             pm2 save
         env:
-          N8N_HOST: ${{ secrets.N8N_HOST }}
-          N8N_API_KEY: ${{ secrets.N8N_API_KEY }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
           GOOGLE_SHEETS_API_URL: ${{ secrets.GOOGLE_SHEETS_API_URL }}

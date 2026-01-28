@@ -142,10 +142,12 @@ export function AdminSidebar() {
       <div className="flex h-16 items-center justify-between px-4 border-b border-border/50">
         {!collapsed && (
           <Link href="/admin" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/60 rounded-lg flex items-center justify-center cyber-glow">
-              <Zap className="w-4 h-4 text-primary-foreground" />
-            </div>
-            <span className="font-bold text-lg">3A Admin</span>
+            <img
+              src="/logo.webp"
+              alt="3A Automation"
+              className="h-8 w-auto"
+            />
+            <span className="font-bold text-lg">Admin</span>
           </Link>
         )}
         <Button
