@@ -81,9 +81,24 @@ jobs:
             # STEP 8b: Show running process info for verification
             pm2 show dashboard | grep -E "(cwd|exec|status|pid)"
 
-            # STEP 9: Clear nginx cache and reload
+            # STEP 9: Clear ALL nginx caches and RESTART (not just reload)
+            echo "=== Clearing nginx cache ==="
             sudo rm -rf /var/cache/nginx/* 2>/dev/null || true
-            sudo systemctl reload nginx 2>/dev/null || true
+            sudo rm -rf /tmp/nginx* 2>/dev/null || true
+
+            # Show nginx config for debugging proxy_cache
+            echo "=== Nginx proxy_cache settings ==="
+            sudo grep -r "proxy_cache" /etc/nginx/ 2>/dev/null || echo "No proxy_cache found"
+
+            # RESTART nginx (not reload) to fully clear in-memory cache
+            sudo systemctl restart nginx 2>/dev/null || true
+
+            # Wait for nginx to restart
+            sleep 3
+
+            # Verify the deployment by calling localhost directly
+            echo "=== Testing localhost:3001 directly ==="
+            curl -s http://localhost:3001/api/health || echo "Localhost test failed"
         env:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
