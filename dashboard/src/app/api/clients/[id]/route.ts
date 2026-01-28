@@ -55,9 +55,17 @@ function canAccessClient(
   // Admin can access all clients
   if (user.role === 'ADMIN') return true;
 
-  // Client can only access their own tenant (tenantId would be in user.id or a custom field)
-  // For now, we allow clients to access only if they're admin
-  // TODO: Add tenantId to AuthUser when multi-tenant is fully implemented
+  // Client can access if:
+  // 1. Their user ID matches the tenant ID (direct ownership)
+  // 2. Their email matches the client's primary contact email
+  if (user.role === 'CLIENT') {
+    // Check if user ID matches tenant
+    if (user.id === tenantId) return true;
+
+    // Check if user email matches client contact
+    const client = loadClient(tenantId);
+    if (client?.contacts?.primary?.email === user.email) return true;
+  }
 
   return false;
 }

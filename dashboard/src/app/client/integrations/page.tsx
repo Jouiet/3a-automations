@@ -9,197 +9,215 @@ import {
   ShoppingBag,
   Mail,
   BarChart3,
-  Building2,
+  Search,
   Globe,
   RefreshCw,
   CheckCircle2,
   AlertCircle,
-  Clock,
+  XCircle,
   ExternalLink,
   Settings,
-  Plus,
   Zap,
+  CreditCard,
+  MessageCircle,
+  Mic,
+  Brain,
+  Cpu,
+  Phone,
+  Package,
+  Truck,
+  Video,
+  DollarSign,
+  Sparkles,
 } from "lucide-react";
-import { ShopifyConnect } from "@/components/integrations/ShopifyConnect";
-import { KlaviyoConnect } from "@/components/integrations/KlaviyoConnect";
-import { GoogleConnect } from "@/components/integrations/GoogleConnect";
 
 interface Integration {
   id: string;
   name: string;
-  description: string;
-  icon: typeof ShoppingBag;
-  color: string;
-  bgColor: string;
-  category: "ecommerce" | "marketing" | "analytics" | "crm";
-  available: boolean;
-  enabled?: boolean;
-  connected_at?: string;
-  status?: "connected" | "disconnected" | "error" | "pending";
-  errorMessage?: string;
+  icon: string;
+  category: string;
+  status: "connected" | "disconnected" | "partial" | "error";
+  message: string;
+  lastChecked: string;
 }
 
-const INTEGRATIONS: Integration[] = [
-  {
-    id: "shopify",
-    name: "Shopify",
-    description: "E-commerce platform connection",
-    icon: ShoppingBag,
-    color: "text-green-400",
-    bgColor: "bg-green-500/20",
-    category: "ecommerce",
-    available: true,
-  },
-  {
-    id: "klaviyo",
-    name: "Klaviyo",
-    description: "Email & SMS marketing",
-    icon: Mail,
-    color: "text-purple-400",
-    bgColor: "bg-purple-500/20",
-    category: "marketing",
-    available: true,
-  },
-  {
-    id: "google",
-    name: "Google",
-    description: "Analytics, Search Console, Calendar",
-    icon: BarChart3,
-    color: "text-blue-400",
-    bgColor: "bg-blue-500/20",
-    category: "analytics",
-    available: true,
-  },
-  {
-    id: "hubspot",
-    name: "HubSpot",
-    description: "CRM & Sales automation",
-    icon: Building2,
-    color: "text-orange-400",
-    bgColor: "bg-orange-500/20",
-    category: "crm",
-    available: false,
-  },
-  {
-    id: "meta",
-    name: "Meta",
-    description: "Facebook & Instagram Ads",
-    icon: Globe,
-    color: "text-blue-500",
-    bgColor: "bg-blue-600/20",
-    category: "marketing",
-    available: false,
-  },
-];
-
-interface ClientConfig {
-  tenant_id?: string;
-  integrations?: Record<string, {
-    enabled?: boolean;
-    connected_at?: string;
-    shop_domain?: string;
-    shop_name?: string;
-    scopes?: string[];
-    error?: string;
-  }>;
+interface IntegrationStats {
+  total: number;
+  connected: number;
+  partial: number;
+  disconnected: number;
+  connectionScore: number;
 }
+
+// Icon mapping
+const ICON_MAP: Record<string, React.ElementType> = {
+  "shopping-bag": ShoppingBag,
+  "mail": Mail,
+  "bar-chart": BarChart3,
+  "search": Search,
+  "facebook": Globe,
+  "video": Video,
+  "dollar-sign": DollarSign,
+  "credit-card": CreditCard,
+  "message-circle": MessageCircle,
+  "mic": Mic,
+  "brain": Brain,
+  "cpu": Cpu,
+  "zap": Zap,
+  "sparkles": Sparkles,
+  "globe": Globe,
+  "phone": Phone,
+  "package": Package,
+  "truck": Truck,
+};
+
+// Category labels and colors
+const CATEGORY_CONFIG: Record<string, { label: string; color: string; bgColor: string }> = {
+  ecommerce: { label: "E-Commerce", color: "text-green-400", bgColor: "bg-green-500/20" },
+  marketing: { label: "Marketing", color: "text-purple-400", bgColor: "bg-purple-500/20" },
+  analytics: { label: "Analytics", color: "text-blue-400", bgColor: "bg-blue-500/20" },
+  seo: { label: "SEO", color: "text-cyan-400", bgColor: "bg-cyan-500/20" },
+  advertising: { label: "Publicite", color: "text-orange-400", bgColor: "bg-orange-500/20" },
+  payments: { label: "Paiements", color: "text-emerald-400", bgColor: "bg-emerald-500/20" },
+  messaging: { label: "Messagerie", color: "text-green-500", bgColor: "bg-green-600/20" },
+  voice: { label: "Voice AI", color: "text-pink-400", bgColor: "bg-pink-500/20" },
+  ai: { label: "Intelligence Artificielle", color: "text-violet-400", bgColor: "bg-violet-500/20" },
+  automation: { label: "Automation", color: "text-amber-400", bgColor: "bg-amber-500/20" },
+  suppliers: { label: "Fournisseurs", color: "text-slate-400", bgColor: "bg-slate-500/20" },
+};
+
+const STATUS_CONFIG = {
+  connected: {
+    icon: CheckCircle2,
+    color: "text-emerald-400",
+    bgColor: "bg-emerald-500/10",
+    borderColor: "border-emerald-500/30",
+    label: "Connecte",
+  },
+  partial: {
+    icon: AlertCircle,
+    color: "text-amber-400",
+    bgColor: "bg-amber-500/10",
+    borderColor: "border-amber-500/30",
+    label: "Partiel",
+  },
+  disconnected: {
+    icon: XCircle,
+    color: "text-slate-400",
+    bgColor: "bg-slate-500/10",
+    borderColor: "border-slate-500/30",
+    label: "Non connecte",
+  },
+  error: {
+    icon: AlertCircle,
+    color: "text-red-400",
+    bgColor: "bg-red-500/10",
+    borderColor: "border-red-500/30",
+    label: "Erreur",
+  },
+};
 
 export default function IntegrationsPage() {
-  const [config, setConfig] = useState<ClientConfig | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [healthStatus, setHealthStatus] = useState<Record<string, {
-    status: string;
-    latency?: number;
-    lastCheck?: string;
-  }>>({});
+  const [integrations, setIntegrations] = useState<Integration[]>([]);
+  const [stats, setStats] = useState<IntegrationStats | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
 
-  const tenantId = config?.tenant_id || "agency";
-
-  const fetchConfig = useCallback(async () => {
+  const fetchIntegrations = useCallback(async () => {
     try {
-      const storedUser = localStorage.getItem("user");
-      let clientTenantId = "agency";
+      setError(null);
+      const response = await fetch("/api/integrations");
 
-      if (storedUser) {
-        const user = JSON.parse(storedUser);
-        clientTenantId = user.tenant_id || user.id || "agency";
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
       }
 
-      const response = await fetch(`/api/clients/${clientTenantId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setConfig(data);
+      const data = await response.json();
+
+      if (data.success && data.data) {
+        setIntegrations(data.data.integrations || []);
+        setStats(data.data.stats || null);
+        setLastRefresh(new Date());
+      } else {
+        throw new Error(data.error || "Failed to fetch integrations");
       }
-    } catch (error) {
-      console.error("Failed to fetch config:", error);
+    } catch (err) {
+      console.error("Error fetching integrations:", err);
+      setError(err instanceof Error ? err.message : "Erreur de connexion");
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, []);
 
-  const checkHealth = useCallback(async () => {
-    if (!tenantId) return;
-
-    try {
-      const response = await fetch(`/api/health/${tenantId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setHealthStatus(data.integrations || {});
-      }
-    } catch (error) {
-      console.error("Health check failed:", error);
-    }
-  }, [tenantId]);
-
   useEffect(() => {
-    fetchConfig();
-  }, [fetchConfig]);
+    fetchIntegrations();
 
-  useEffect(() => {
-    if (config?.tenant_id) {
-      checkHealth();
-    }
-  }, [config?.tenant_id, checkHealth]);
+    // Auto-refresh every 60 seconds
+    const interval = setInterval(fetchIntegrations, 60000);
+    return () => clearInterval(interval);
+  }, [fetchIntegrations]);
 
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    await Promise.all([fetchConfig(), checkHealth()]);
-    setRefreshing(false);
+  const handleRefresh = () => {
+    setIsLoading(true);
+    fetchIntegrations();
   };
 
-  const getIntegrationStatus = (integrationId: string) => {
-    const integration = config?.integrations?.[integrationId];
-    if (!integration) return "disconnected";
-    if (integration.error) return "error";
-    if (integration.enabled) return "connected";
-    return "disconnected";
-  };
+  // Group integrations by category
+  const groupedIntegrations = integrations.reduce((acc, int) => {
+    if (!acc[int.category]) acc[int.category] = [];
+    acc[int.category].push(int);
+    return acc;
+  }, {} as Record<string, Integration[]>);
 
-  const connectedCount = INTEGRATIONS.filter(
-    (i) => i.available && getIntegrationStatus(i.id) === "connected"
-  ).length;
+  // Priority categories for client view
+  const priorityCategories = ["ecommerce", "marketing", "analytics", "ai"];
+  const otherCategories = Object.keys(groupedIntegrations).filter(
+    (cat) => !priorityCategories.includes(cat)
+  );
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Integrations</h1>
-            <p className="text-muted-foreground">Loading...</p>
+            <h1 className="text-3xl font-bold">Mes Integrations</h1>
+            <p className="text-muted-foreground">Chargement...</p>
           </div>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3].map((i) => (
+        <div className="grid gap-4 md:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
             <Card key={i} className="animate-pulse">
-              <CardContent className="p-6">
-                <div className="h-12 w-12 bg-muted rounded-lg mb-4" />
-                <div className="h-5 w-24 bg-muted rounded mb-2" />
-                <div className="h-4 w-32 bg-muted rounded" />
+              <CardContent className="p-4">
+                <div className="h-8 w-16 bg-muted rounded mb-2" />
+                <div className="h-4 w-24 bg-muted rounded" />
               </CardContent>
             </Card>
           ))}
         </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Mes Integrations</h1>
+          <Button onClick={handleRefresh} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Reessayer
+          </Button>
+        </div>
+        <Card className="border-red-500/30 bg-red-500/5">
+          <CardContent className="p-6 flex items-center gap-4">
+            <AlertCircle className="h-8 w-8 text-red-400" />
+            <div>
+              <h3 className="font-semibold text-red-400">Erreur de connexion</h3>
+              <p className="text-sm text-muted-foreground">{error}</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -209,223 +227,227 @@ export default function IntegrationsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Integrations</h1>
+          <h1 className="text-3xl font-bold">Mes Integrations</h1>
           <p className="text-muted-foreground">
-            Connect your services to enable automations
+            Connectez vos services pour activer les automations
+            <span className="text-xs ml-2 opacity-50">
+              Maj: {lastRefresh.toLocaleTimeString("fr-FR")}
+            </span>
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Badge variant={connectedCount > 0 ? "default" : "secondary"}>
-            {connectedCount} connected
+          <Badge variant={stats && stats.connected > 0 ? "default" : "secondary"}>
+            {stats?.connected || 0} connectees
           </Badge>
-          <Button variant="outline" size="sm" onClick={handleRefresh} disabled={refreshing}>
-            <RefreshCw className={cn("h-4 w-4 mr-2", refreshing && "animate-spin")} />
-            Refresh
+          <Button variant="outline" size="sm" onClick={handleRefresh}>
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Actualiser
           </Button>
         </div>
       </div>
 
-      {/* Status Overview */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card className="border-border/50">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-green-500/20">
-                <CheckCircle2 className="h-5 w-5 text-green-400" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{connectedCount}</p>
-                <p className="text-xs text-muted-foreground">Connected</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="border-border/50">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-yellow-500/20">
-                <AlertCircle className="h-5 w-5 text-yellow-400" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {INTEGRATIONS.filter((i) => i.available && getIntegrationStatus(i.id) === "disconnected").length}
-                </p>
-                <p className="text-xs text-muted-foreground">Not Connected</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="border-border/50">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-red-500/20">
-                <AlertCircle className="h-5 w-5 text-red-400" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {INTEGRATIONS.filter((i) => i.available && getIntegrationStatus(i.id) === "error").length}
-                </p>
-                <p className="text-xs text-muted-foreground">Errors</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="border-border/50">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-muted/50">
-                <Clock className="h-5 w-5 text-muted-foreground" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {INTEGRATIONS.filter((i) => !i.available).length}
-                </p>
-                <p className="text-xs text-muted-foreground">Coming Soon</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Active Integrations */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <Zap className="h-5 w-5 text-primary" />
-          <h2 className="text-lg font-semibold">Available Integrations</h2>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-2">
-          {/* Shopify */}
-          <ShopifyConnect
-            tenantId={tenantId}
-            integration={config?.integrations?.shopify as {
-              enabled: boolean;
-              connected_at?: string;
-              shop_domain?: string;
-              shop_name?: string;
-              scopes?: string[];
-            }}
-            onRefresh={handleRefresh}
-          />
-
-          {/* Klaviyo */}
-          <KlaviyoConnect
-            tenantId={tenantId}
-            integration={config?.integrations?.klaviyo as {
-              enabled: boolean;
-              connected_at?: string;
-              account_id?: string;
-              account_name?: string;
-            }}
-            onRefresh={handleRefresh}
-          />
-
-          {/* Google */}
-          <GoogleConnect
-            tenantId={tenantId}
-            integration={config?.integrations?.google as {
-              enabled: boolean;
-              connected_at?: string;
-              email?: string;
-              scopes?: string[];
-            }}
-            onRefresh={handleRefresh}
-          />
-        </div>
-      </div>
-
-      {/* Coming Soon */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <Plus className="h-5 w-5 text-muted-foreground" />
-          <h2 className="text-lg font-semibold text-muted-foreground">Coming Soon</h2>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {INTEGRATIONS.filter((i) => !i.available).map((integration) => {
-            const Icon = integration.icon;
-
-            return (
-              <Card key={integration.id} className="border-border/30 bg-muted/20 opacity-60">
-                <CardHeader className="pb-2">
-                  <div className="flex items-center gap-3">
-                    <div className={cn("p-2 rounded-lg", integration.bgColor)}>
-                      <Icon className={cn("h-5 w-5", integration.color)} />
-                    </div>
-                    <div>
-                      <CardTitle className="text-base flex items-center gap-2">
-                        {integration.name}
-                        <Badge variant="outline" className="text-xs">
-                          Coming Soon
-                        </Badge>
-                      </CardTitle>
-                      <CardDescription className="text-sm">
-                        {integration.description}
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="ghost" size="sm" disabled className="w-full">
-                    Notify Me
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Health Status */}
-      {Object.keys(healthStatus).length > 0 && (
-        <Card className="border-border/50">
-          <CardHeader>
-            <CardTitle className="text-base flex items-center gap-2">
-              <Settings className="h-5 w-5 text-primary" />
-              Integration Health
-            </CardTitle>
-            <CardDescription>Real-time status of your connected services</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {Object.entries(healthStatus).map(([id, status]) => (
-                <div
-                  key={id}
-                  className="flex items-center justify-between p-3 rounded-lg bg-muted/30"
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={cn(
-                        "w-2 h-2 rounded-full",
-                        status.status === "healthy"
-                          ? "bg-green-400"
-                          : status.status === "degraded"
-                            ? "bg-yellow-400"
-                            : "bg-red-400"
-                      )}
-                    />
-                    <span className="font-medium capitalize">{id}</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    {status.latency && <span>{status.latency}ms</span>}
-                    {status.lastCheck && (
-                      <span>
-                        Last check: {new Date(status.lastCheck).toLocaleTimeString()}
-                      </span>
-                    )}
-                    <Badge
-                      variant={status.status === "healthy" ? "default" : "destructive"}
-                      className="capitalize"
-                    >
-                      {status.status}
-                    </Badge>
-                  </div>
+      {/* Stats Overview */}
+      {stats && (
+        <div className="grid gap-4 md:grid-cols-4">
+          <Card className="border-border/50">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/20">
+                  <Globe className="h-5 w-5 text-primary" />
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                <div>
+                  <p className="text-2xl font-bold">{stats.total}</p>
+                  <p className="text-xs text-muted-foreground">Integrations</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="border-border/50">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-emerald-500/20">
+                  <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-emerald-400">{stats.connected}</p>
+                  <p className="text-xs text-muted-foreground">Connectees</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="border-border/50">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-amber-500/20">
+                  <AlertCircle className="h-5 w-5 text-amber-400" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-amber-400">{stats.partial}</p>
+                  <p className="text-xs text-muted-foreground">Partielles</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="border-border/50 bg-primary/5">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/20">
+                  <Zap className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-primary">{stats.connectionScore}%</p>
+                  <p className="text-xs text-muted-foreground">Score connexion</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       )}
+
+      {/* Priority Integrations - E-commerce, Marketing, Analytics, AI */}
+      {priorityCategories.map((category) => {
+        const categoryIntegrations = groupedIntegrations[category];
+        if (!categoryIntegrations || categoryIntegrations.length === 0) return null;
+
+        const catConfig = CATEGORY_CONFIG[category] || {
+          label: category,
+          color: "text-primary",
+          bgColor: "bg-primary/20",
+        };
+
+        return (
+          <div key={category} className="space-y-4">
+            <div className="flex items-center gap-2">
+              <Zap className={`h-5 w-5 ${catConfig.color}`} />
+              <h2 className="text-lg font-semibold">{catConfig.label}</h2>
+              <Badge variant="secondary" className="text-xs">
+                {categoryIntegrations.filter((i) => i.status === "connected").length}/
+                {categoryIntegrations.length}
+              </Badge>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {categoryIntegrations.map((integration) => {
+                const statusConfig = STATUS_CONFIG[integration.status];
+                const IconComponent = ICON_MAP[integration.icon] || Globe;
+                const StatusIcon = statusConfig.icon;
+
+                return (
+                  <Card
+                    key={integration.id}
+                    className={cn(
+                      "border transition-all hover:border-primary/30",
+                      statusConfig.borderColor,
+                      integration.status === "connected" && "bg-emerald-500/5"
+                    )}
+                  >
+                    <CardContent className="p-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className={cn("p-2 rounded-lg", catConfig.bgColor)}>
+                            <IconComponent className={cn("h-5 w-5", catConfig.color)} />
+                          </div>
+                          <div>
+                            <p className="font-medium">{integration.name}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {integration.status === "connected" ? "Connecte" : integration.message}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <StatusIcon className={cn("h-4 w-4", statusConfig.color)} />
+                        </div>
+                      </div>
+
+                      {/* Action Button */}
+                      <div className="mt-4">
+                        {integration.status === "connected" ? (
+                          <Button variant="outline" size="sm" className="w-full" disabled>
+                            <CheckCircle2 className="h-4 w-4 mr-2 text-emerald-400" />
+                            Connecte
+                          </Button>
+                        ) : (
+                          <Button variant="outline" size="sm" className="w-full">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Connecter
+                          </Button>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Other Categories (collapsed view) */}
+      {otherCategories.length > 0 && (
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Settings className="h-5 w-5 text-muted-foreground" />
+            <h2 className="text-lg font-semibold text-muted-foreground">Autres Integrations</h2>
+          </div>
+
+          <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-4">
+            {otherCategories.flatMap((category) =>
+              groupedIntegrations[category].map((integration) => {
+                const statusConfig = STATUS_CONFIG[integration.status];
+                const IconComponent = ICON_MAP[integration.icon] || Globe;
+
+                return (
+                  <Card
+                    key={integration.id}
+                    className={cn(
+                      "border-border/30",
+                      integration.status !== "connected" && "opacity-60"
+                    )}
+                  >
+                    <CardContent className="p-3">
+                      <div className="flex items-center gap-3">
+                        <IconComponent className="h-4 w-4 text-muted-foreground" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium truncate">{integration.name}</p>
+                        </div>
+                        <div
+                          className={cn(
+                            "w-2 h-2 rounded-full",
+                            integration.status === "connected"
+                              ? "bg-emerald-500"
+                              : "bg-slate-500"
+                          )}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Help Card */}
+      <Card className="border-primary/30 bg-primary/5">
+        <CardContent className="p-6">
+          <div className="flex items-start gap-4">
+            <div className="p-3 rounded-xl bg-primary/10">
+              <Settings className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-semibold">Besoin d&apos;aide pour connecter un service?</h3>
+              <p className="text-muted-foreground mt-1">
+                Notre equipe peut vous accompagner dans la configuration de vos integrations.
+              </p>
+              <Button className="mt-4" variant="outline">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Contacter le support
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

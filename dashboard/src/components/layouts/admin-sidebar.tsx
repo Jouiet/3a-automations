@@ -22,6 +22,8 @@ import {
   BrainCircuit,
   KeyRound,
   Building2,
+  Radio,
+  Link2,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -52,6 +54,16 @@ const navigation = [
     name: "Automations",
     href: "/admin/automations",
     icon: Zap,
+  },
+  {
+    name: "Sensors GPM",
+    href: "/admin/sensors",
+    icon: Radio,
+  },
+  {
+    name: "Integrations",
+    href: "/admin/integrations",
+    icon: Link2,
   },
   {
     name: "Campagnes Email",

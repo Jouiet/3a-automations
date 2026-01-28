@@ -54,8 +54,10 @@ interface Integration {
   id: string;
   name: string;
   icon: string;
-  connected: boolean;
-  lastSync?: string;
+  category: string;
+  status: "connected" | "disconnected" | "partial" | "error";
+  message: string;
+  lastChecked: string;
 }
 
 interface NativeAutomation {
@@ -90,13 +92,13 @@ interface ExecutionChartData {
   error: number;
 }
 
-// Platform capabilities (sourced from registry)
-const PLATFORM_STATS = {
-  totalAutomations: 121,
-  totalScripts: 85,
-  totalSensors: 19,
-  mcpServers: 14,
-};
+// Platform stats will be fetched from real APIs
+interface PlatformStats {
+  totalAutomations: number;
+  totalScripts: number;
+  totalSensors: number;
+  mcpServers: number;
+}
 
 export default function ClientDashboardPage() {
   const [stats, setStats] = useState<ClientStats>({
@@ -107,14 +109,16 @@ export default function ClientDashboardPage() {
     timeSavedHours: 0,
     revenueImpact: 0,
   });
-  const [integrations, setIntegrations] = useState<Integration[]>([
-    { id: "shopify", name: "Shopify", icon: "shopify", connected: false },
-    { id: "klaviyo", name: "Klaviyo", icon: "klaviyo", connected: false },
-    { id: "google", name: "Google", icon: "google", connected: false },
-  ]);
+  const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [automations, setAutomations] = useState<NativeAutomation[]>([]);
   const [activities, setActivities] = useState<RecentActivity[]>([]);
   const [executionChartData, setExecutionChartData] = useState<ExecutionChartData[]>([]);
+  const [platformStats, setPlatformStats] = useState<PlatformStats>({
+    totalAutomations: 0,
+    totalScripts: 0,
+    totalSensors: 0,
+    mcpServers: 14,
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date>(new Date());
@@ -123,11 +127,14 @@ export default function ClientDashboardPage() {
     try {
       setError(null);
 
-      // Fetch data in parallel
-      const [automationsRes, statsRes, healthRes] = await Promise.all([
+      // Fetch data in parallel from REAL APIs
+      const [automationsRes, statsRes, integrationsRes, registryRes, scriptsRes, sensorsRes] = await Promise.all([
         fetch("/api/automations"),
         fetch("/api/stats"),
-        fetch("/api/health/default").catch(() => null),
+        fetch("/api/integrations"),
+        fetch("/api/registry"),
+        fetch("/api/scripts"),
+        fetch("/api/sensors?quick=true"),
       ]);
 
       // Process automations
@@ -200,17 +207,47 @@ export default function ClientDashboardPage() {
         }
       }
 
-      // Process health/integrations
-      if (healthRes && healthRes.ok) {
-        const healthData = await healthRes.json();
-        if (healthData.integrations) {
-          setIntegrations(prev => prev.map(int => ({
-            ...int,
-            connected: healthData.integrations[int.id]?.connected || false,
-            lastSync: healthData.integrations[int.id]?.lastSync,
-          })));
+      // Process REAL integrations data from API
+      if (integrationsRes.ok) {
+        const integrationsData = await integrationsRes.json();
+        if (integrationsData.success && integrationsData.data) {
+          const apiIntegrations = integrationsData.data.integrations || [];
+          setIntegrations(apiIntegrations);
         }
       }
+
+      // Fetch REAL platform stats
+      let totalAutomations = 0;
+      let totalScripts = 0;
+      let totalSensors = 0;
+
+      if (registryRes.ok) {
+        const registryData = await registryRes.json();
+        if (registryData.success && registryData.data) {
+          totalAutomations = registryData.data.total || 0;
+        }
+      }
+
+      if (scriptsRes.ok) {
+        const scriptsData = await scriptsRes.json();
+        if (scriptsData.success && scriptsData.data) {
+          totalScripts = scriptsData.data.stats?.total || 0;
+        }
+      }
+
+      if (sensorsRes.ok) {
+        const sensorsData = await sensorsRes.json();
+        if (sensorsData.success && sensorsData.data) {
+          totalSensors = sensorsData.data.total || 0;
+        }
+      }
+
+      setPlatformStats({
+        totalAutomations,
+        totalScripts,
+        totalSensors,
+        mcpServers: 14,
+      });
 
       setLastRefresh(new Date());
       setIsLoading(false);
@@ -245,7 +282,10 @@ export default function ClientDashboardPage() {
     fetchData();
   };
 
-  const connectedCount = integrations.filter(i => i.connected).length;
+  const connectedCount = integrations.filter(i => i.status === "connected").length;
+  const priorityIntegrations = integrations.filter(i =>
+    ["ecommerce", "marketing", "analytics", "ai"].includes(i.category)
+  ).slice(0, 6);
 
   if (isLoading) {
     return (
@@ -304,20 +344,28 @@ export default function ClientDashboardPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
-                <StatusPulse status={connectedCount === integrations.length ? "healthy" : connectedCount > 0 ? "warning" : "error"} size="sm" />
+                <StatusPulse status={connectedCount >= integrations.length * 0.7 ? "healthy" : connectedCount > 0 ? "warning" : "error"} size="sm" />
                 <span className="text-sm font-medium">
                   {connectedCount}/{integrations.length} integrations connectees
                 </span>
               </div>
               <div className="hidden md:flex items-center gap-4">
-                {integrations.map((int) => (
+                {priorityIntegrations.map((int) => (
                   <div key={int.id} className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${int.connected ? "bg-emerald-500" : "bg-slate-600"}`} />
-                    <span className={`text-xs ${int.connected ? "text-foreground" : "text-muted-foreground"}`}>
+                    <div className={`w-2 h-2 rounded-full ${
+                      int.status === "connected" ? "bg-emerald-500" :
+                      int.status === "partial" ? "bg-amber-500" : "bg-slate-600"
+                    }`} />
+                    <span className={`text-xs ${int.status === "connected" ? "text-foreground" : "text-muted-foreground"}`}>
                       {int.name}
                     </span>
                   </div>
                 ))}
+                {integrations.length > 6 && (
+                  <span className="text-xs text-muted-foreground">
+                    +{integrations.length - 6} autres
+                  </span>
+                )}
               </div>
             </div>
             <Button variant="ghost" size="sm" asChild>
@@ -605,34 +653,55 @@ export default function ClientDashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Platform Info - Subtle, professional */}
-        <Card className="border-border/50 bg-muted/20">
+        {/* Platform Info - REAL data from APIs - PROMINENT SHOWCASE */}
+        <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
           <CardContent className="p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Shield className="h-5 w-5 text-primary" />
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/10 animate-pulse-subtle">
+                  <Shield className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="font-medium">Plateforme 3A</p>
+                  <p className="text-xs text-muted-foreground">A votre service 24/7</p>
+                </div>
               </div>
-              <div>
-                <p className="font-medium">Plateforme 3A</p>
-                <p className="text-xs text-muted-foreground">Infrastructure enterprise-grade</p>
+              <div className="text-right">
+                <p className="text-xs text-muted-foreground uppercase font-bold">Puissance</p>
+                <p className="text-lg font-black text-primary">
+                  {platformStats.totalAutomations + platformStats.totalScripts}
+                  <span className="text-xs font-normal text-muted-foreground ml-1">outils</span>
+                </p>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 text-center">
-              <div>
-                <p className="text-2xl font-bold">{PLATFORM_STATS.totalAutomations}</p>
-                <p className="text-xs text-muted-foreground">Automations</p>
+            <div className="grid grid-cols-4 gap-3">
+              <div className="text-center p-3 rounded-lg bg-background/50 border border-border/30">
+                <Zap className="h-4 w-4 mx-auto mb-1 text-primary" />
+                <p className="text-xl font-bold">
+                  <AnimatedNumber value={platformStats.totalAutomations} />
+                </p>
+                <p className="text-[10px] text-muted-foreground">Automations</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold">{PLATFORM_STATS.totalScripts}</p>
-                <p className="text-xs text-muted-foreground">Scripts</p>
+              <div className="text-center p-3 rounded-lg bg-background/50 border border-border/30">
+                <Cpu className="h-4 w-4 mx-auto mb-1 text-emerald-400" />
+                <p className="text-xl font-bold">
+                  <AnimatedNumber value={platformStats.totalScripts} />
+                </p>
+                <p className="text-[10px] text-muted-foreground">Scripts</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold">{PLATFORM_STATS.totalSensors}</p>
-                <p className="text-xs text-muted-foreground">Sensors</p>
+              <div className="text-center p-3 rounded-lg bg-background/50 border border-border/30">
+                <Activity className="h-4 w-4 mx-auto mb-1 text-amber-400" />
+                <p className="text-xl font-bold">
+                  <AnimatedNumber value={platformStats.totalSensors} />
+                </p>
+                <p className="text-[10px] text-muted-foreground">Sensors</p>
               </div>
-              <div>
-                <p className="text-2xl font-bold">{PLATFORM_STATS.mcpServers}</p>
-                <p className="text-xs text-muted-foreground">MCP Servers</p>
+              <div className="text-center p-3 rounded-lg bg-background/50 border border-border/30">
+                <Shield className="h-4 w-4 mx-auto mb-1 text-sky-400" />
+                <p className="text-xl font-bold">
+                  <AnimatedNumber value={platformStats.mcpServers} />
+                </p>
+                <p className="text-[10px] text-muted-foreground">MCP</p>
               </div>
             </div>
           </CardContent>
