@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import http from "http";
 
+export const dynamic = 'force-dynamic';
+
 interface VoiceService {
   name: string;
   port: number;

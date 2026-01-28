@@ -3,6 +3,8 @@ import { getGoogleOAuth, GOOGLE_SCOPE_PRESETS, GoogleScopeKey } from "@/lib/oaut
 import { generateState, generateNonce } from "@/lib/oauth/pkce";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/auth/oauth/google/authorize
  *

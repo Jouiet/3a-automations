@@ -3,6 +3,8 @@ import { getAuthUserFromCookie } from "@/lib/auth";
 import fs from "fs";
 import path from "path";
 
+export const dynamic = 'force-dynamic';
+
 interface VaultProject {
   id: string;
   name: string;

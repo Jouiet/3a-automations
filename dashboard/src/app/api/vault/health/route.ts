@@ -3,6 +3,8 @@ import { getAuthUserFromCookie } from "@/lib/auth";
 import fs from "fs";
 import path from "path";
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/vault/health
  * Check vault status - returns info about Infisical availability and configuration

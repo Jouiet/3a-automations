@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic';
+
 // Fetch native automation data for exports
 async function fetchAutomationData() {
   try {

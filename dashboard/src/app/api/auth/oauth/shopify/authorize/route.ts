@@ -3,6 +3,8 @@ import { getAuthUserFromCookie } from "@/lib/auth";
 import { getShopifyOAuth } from "@/lib/oauth/shopify";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/auth/oauth/shopify/authorize
  *

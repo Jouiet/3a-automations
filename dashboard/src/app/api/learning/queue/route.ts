@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import * as fs from 'fs';
 import * as path from 'path';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Learning Queue API - Session 178
  * GET /api/learning/queue - List pending facts for human validation

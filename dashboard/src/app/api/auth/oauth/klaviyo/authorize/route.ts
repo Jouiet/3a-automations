@@ -3,6 +3,8 @@ import { getKlaviyoOAuth } from "@/lib/oauth/klaviyo";
 import { generateCodeVerifier, generateCodeChallenge, generateState, generateNonce } from "@/lib/oauth/pkce";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/auth/oauth/klaviyo/authorize
  *
