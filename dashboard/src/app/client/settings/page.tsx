@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,6 +58,7 @@ const defaultSettings: UserSettings = {
 };
 
 export default function SettingsPage() {
+  const router = useRouter();
   const [settings, setSettings] = useState<UserSettings>(defaultSettings);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -423,7 +425,7 @@ export default function SettingsPage() {
                 className="bg-background"
               />
             </div>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full" onClick={() => alert("Fonctionnalite bientot disponible. Contactez le support pour changer votre mot de passe.")}>
               Changer le mot de passe
             </Button>
           </CardContent>
@@ -452,7 +454,7 @@ export default function SettingsPage() {
               </p>
             </div>
             <div className="text-right">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={() => router.push("/client/support")}>
                 Contacter le support
               </Button>
             </div>

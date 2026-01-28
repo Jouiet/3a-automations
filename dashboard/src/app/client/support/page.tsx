@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -42,13 +43,17 @@ const priorityConfig = {
 };
 
 export default function SupportPage() {
+  const searchParams = useSearchParams();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [newTicket, setNewTicket] = useState({ subject: "", message: "" });
+  const [newTicket, setNewTicket] = useState({
+    subject: searchParams.get("subject") || "",
+    message: "",
+  });
 
   const fetchTickets = useCallback(async () => {
     try {

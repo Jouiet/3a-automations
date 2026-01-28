@@ -448,7 +448,7 @@ export default function CredentialsPage() {
 
                 {/* Add Secret Button */}
                 <div className="pt-4 border-t border-border/50">
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full" onClick={() => alert("Utilisez le CLI: infisical secrets set KEY=VALUE --projectId=" + selectedProject)}>
                     <Plus className="h-4 w-4 mr-2" />
                     Add Secret to {selectedProject}
                   </Button>

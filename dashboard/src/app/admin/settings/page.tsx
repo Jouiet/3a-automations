@@ -234,7 +234,7 @@ export default function SettingsPage() {
                           <StatusIcon className="h-3 w-3 mr-1" />
                           {statusConfig[integration.status].label}
                         </Badge>
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline" size="sm" onClick={() => window.location.href = "/admin/integrations"}>
                           {integration.status === "connected" ? "Configurer" : "Connecter"}
                         </Button>
                       </div>
@@ -254,7 +254,7 @@ export default function SettingsPage() {
                   <p className="text-sm text-muted-foreground">
                     Connectez d&apos;autres services a votre dashboard
                   </p>
-                  <Button variant="outline" className="mt-2">
+                  <Button variant="outline" className="mt-2" onClick={() => window.location.href = "/admin/integrations"}>
                     Parcourir les integrations
                   </Button>
                 </div>
@@ -284,7 +284,7 @@ export default function SettingsPage() {
                       Notification pour chaque nouveau lead
                     </p>
                   </div>
-                  <Button variant="outline" size="sm">Email + Push</Button>
+                  <Button variant="outline" size="sm" onClick={() => alert("Configuration notifications: en cours de developpement")}>Email + Push</Button>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
@@ -293,7 +293,7 @@ export default function SettingsPage() {
                       Alertes en cas d&apos;echec de workflow
                     </p>
                   </div>
-                  <Button variant="outline" size="sm">Email + SMS</Button>
+                  <Button variant="outline" size="sm" onClick={() => alert("Configuration notifications: en cours de developpement")}>Email + SMS</Button>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
@@ -302,7 +302,7 @@ export default function SettingsPage() {
                       Resume des KPIs chaque matin
                     </p>
                   </div>
-                  <Button variant="outline" size="sm">Email</Button>
+                  <Button variant="outline" size="sm" onClick={() => alert("Configuration notifications: en cours de developpement")}>Email</Button>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
@@ -311,7 +311,7 @@ export default function SettingsPage() {
                       Celebration des milestones
                     </p>
                   </div>
-                  <Button variant="outline" size="sm">Push</Button>
+                  <Button variant="outline" size="sm" onClick={() => alert("Configuration notifications: en cours de developpement")}>Push</Button>
                 </div>
               </div>
             </CardContent>
@@ -344,7 +344,7 @@ export default function SettingsPage() {
                   <label className="text-sm font-medium">Confirmer le nouveau mot de passe</label>
                   <Input type="password" placeholder="••••••••" />
                 </div>
-                <Button>Mettre a jour le mot de passe</Button>
+                <Button onClick={() => alert("Changement de mot de passe: en cours de developpement")}>Mettre a jour le mot de passe</Button>
               </CardContent>
             </Card>
 
@@ -378,7 +378,7 @@ export default function SettingsPage() {
                         <p className="text-sm text-muted-foreground">Paris, France - Il y a 2 jours</p>
                       </div>
                     </div>
-                    <Button variant="ghost" size="sm" className="text-destructive">
+                    <Button variant="ghost" size="sm" className="text-destructive" onClick={() => alert("Deconnexion de session: en cours de developpement")}>
                       Deconnecter
                     </Button>
                   </div>

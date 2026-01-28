@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getAuthUserFromCookie } from "@/lib/auth";
 import { getGoogleOAuth, GOOGLE_SCOPE_PRESETS, GoogleScopeKey } from "@/lib/oauth/google";
 import { generateState, generateNonce } from "@/lib/oauth/pkce";
 import { cookies } from "next/headers";
@@ -11,33 +12,23 @@ export const dynamic = 'force-dynamic';
  * Initiates Google OAuth flow
  *
  * Query params:
- *   - tenant_id: Required - The tenant initiating the connection
+ *   - tenant_id: Optional - defaults to authenticated user ID
  *   - scopes: Optional - Comma-separated scope preset or keys
- *     - Presets: "analytics", "searchConsole", "calendar", "ads", "full"
- *     - Custom: "analytics,webmasters,calendar"
  *   - login_hint: Optional - Email hint for Google
- *
- * Flow:
- *   1. Validate tenant_id
- *   2. Parse requested scopes
- *   3. Generate state parameter
- *   4. Store state in cookie
- *   5. Redirect to Google authorization URL
  */
 export async function GET(request: NextRequest) {
   try {
-    // Get tenant ID from query
-    const tenantId = request.nextUrl.searchParams.get("tenant_id");
-
-    if (!tenantId) {
+    // Authenticate user from JWT cookie
+    const user = await getAuthUserFromCookie();
+    if (!user) {
       return NextResponse.json(
-        { error: "tenant_id is required" },
-        { status: 400 }
+        { error: "Unauthorized. Please log in first." },
+        { status: 401 }
       );
     }
 
-    // Get current user from session
-    const userId = request.headers.get("x-user-id") || "system";
+    const tenantId = request.nextUrl.searchParams.get("tenant_id") || user.id;
+    const userId = user.id;
 
     // Parse scopes parameter
     const scopesParam = request.nextUrl.searchParams.get("scopes") || "analytics";

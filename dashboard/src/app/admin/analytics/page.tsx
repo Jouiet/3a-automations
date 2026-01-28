@@ -235,7 +235,7 @@ export default function AnalyticsPage() {
             )}
             <span className="ml-2">Actualiser</span>
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => alert("Export analytics: en cours de developpement")}>
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>

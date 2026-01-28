@@ -286,7 +286,7 @@ export default function CampaignsPage() {
                     </div>
                   )}
 
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" onClick={() => window.open("https://www.klaviyo.com/campaigns", "_blank")}>
                     {campaign.status === "draft" ? "Editer" : "Voir Details"}
                   </Button>
                 </div>

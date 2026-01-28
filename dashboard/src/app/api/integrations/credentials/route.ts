@@ -111,9 +111,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Only admins can set credentials
-    if (user.role !== "ADMIN" && user.role !== "admin") {
-      return NextResponse.json({ error: "Admin access required" }, { status: 403 });
+    // Admins and clients can set their own credentials
+    if (user.role !== "ADMIN" && user.role !== "CLIENT") {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 });
     }
 
     const body = await request.json();

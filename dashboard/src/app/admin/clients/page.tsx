@@ -129,7 +129,7 @@ export default function ClientsPage() {
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
           </Button>
-          <Button>
+          <Button onClick={() => alert("Fonctionnalite en cours de developpement")}>
             <Plus className="h-4 w-4 mr-2" />
             Add Client
           </Button>
@@ -278,7 +278,7 @@ export default function ClientsPage() {
               <Building2 className="h-12 w-12 mx-auto mb-4 opacity-50" />
               <p className="text-lg font-medium">No clients found</p>
               <p className="text-sm">Create your first client to get started</p>
-              <Button className="mt-4">
+              <Button className="mt-4" onClick={() => alert("Fonctionnalite en cours de developpement")}>
                 <Plus className="h-4 w-4 mr-2" />
                 Add Client
               </Button>
@@ -330,10 +330,10 @@ export default function ClientsPage() {
                             <KeyRound className="h-4 w-4" />
                           </Button>
                         </Link>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => alert(`Settings: ${client.name}`)}>
                           <Settings className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive">
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => alert(`Suppression non disponible via le dashboard`)}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>

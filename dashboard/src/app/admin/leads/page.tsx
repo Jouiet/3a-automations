@@ -177,15 +177,15 @@ export default function LeadsPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => alert("Import CSV: fonctionnalite en cours")}>
             <Upload className="h-4 w-4 mr-2" />
             Import CSV
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => alert("Export: fonctionnalite en cours")}>
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button size="sm">
+          <Button size="sm" onClick={() => alert("Ajouter Lead: fonctionnalite en cours")}>
             <Plus className="h-4 w-4 mr-2" />
             Ajouter Lead
           </Button>
