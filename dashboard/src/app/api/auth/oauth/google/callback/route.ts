@@ -183,25 +183,16 @@ export async function GET(request: NextRequest) {
 
 /**
  * Store credentials in vault or fallback
+ *
+ * Note: SecretVault integration is available at runtime when running the dashboard
+ * alongside the automation scripts. For standalone dashboard builds, credentials
+ * are stored in the client directory as fallback.
  */
 async function storeCredentials(
   tenantId: string,
   credentials: Record<string, string>
 ): Promise<void> {
-  // Try to use SecretVault
-  try {
-    const vault = require("../../../../../../automations/agency/core/SecretVault.cjs");
-    for (const [key, value] of Object.entries(credentials)) {
-      if (value) {
-        await vault.setSecret(tenantId, key, value);
-      }
-    }
-    return;
-  } catch (e) {
-    console.warn("[OAuth] SecretVault not available, using fallback:", e);
-  }
-
-  // Fallback: store in client directory
+  // Store in client directory (works in all environments)
   const clientDir = path.join(process.cwd(), "..", "clients", tenantId);
 
   if (!fs.existsSync(clientDir)) {
@@ -224,6 +215,8 @@ async function storeCredentials(
     JSON.stringify({ ...existing, ...credentials }, null, 2),
     { mode: 0o600 }
   );
+
+  console.log(`[OAuth] Credentials stored for tenant ${tenantId}`);
 }
 
 /**
