@@ -1,98 +1,48 @@
 {
-    "universal_ecom_v1": {
-        "envio": "El envío estándar tarda de 3 a 5 días hábiles (Gratis a partir de 50€). El envío exprés tarda de 1 a 2 días (15€).",
-        "devoluciones": "Ofrecemos una política de devolución de 30 días para artículos no utilizados en su embalaje original. Los gastos de devolución son gratuitos.",
-        "pagos": "Aceptamos Visa, Mastercard, Amex, PayPal y Apple Pay.",
-        "soporte": "correo electrónico de soporte: support@universalecom.com",
-        "horarios": "Lunes-Viernes 9h-17h"
-    },
-    "universal_sme_v1": {
-        "horarios": "Lunes-Viernes 8h-18h, Sábado 9h-13h.",
-        "servicios": "Ofrecemos consultas, reparaciones y servicios de mantenimiento.",
-        "precios": "Las consultas cuestan 50€ (se deducen de la factura final). La tarifa por hora es de 80€/hora.",
-        "direccion": "123 Calle Principal, Distrito de Negocios."
-    },
-    "dental_intake_v1": {
-        "urgencia_dental": "Para cualquier dolor intenso o traumatismo, ofrecemos citas de urgencia el mismo día entre las 11h-12h y las 15h-16h.",
-        "seguros": "Aceptamos los principales seguros privados y ofrecemos facilidades de pago.",
-        "oferta_nuevo_paciente": "El paquete 'Nuevo Paciente' por 99€ incluye examen, radiografías y limpieza.",
-        "dentista": "El Dr. Lumière es nuestro dentista principal, especialista en implantología y estética dental."
-    },
-    "hoa_support_v1": {
-        "basura": "La recogida de basura es el martes por la mañana. El reciclaje cada dos martes.",
-        "piscina": "La piscina comunitaria está abierta de 8h a 22h todos los días. Se requiere carnet.",
-        "estacionamiento": "El estacionamiento para invitados está limitado a 48 horas. Se requiere permiso para estancias más largas."
-    },
-    "agency_v2": {
-        "servicios": "3A Automation ofrece agentes de IA por voz, automatizaciones de comercio electrónico (Shopify) y sistemas de marketing agéntico de Nivel 5.",
-        "mision": "Nuestra misión es transformar agencias y tiendas en motores autónomos de alto rendimiento.",
-        "contacto": "Contáctenos a través de 3a-automation.com o por teléfono al +212 6 00 00 00 00.",
-        "experiencia": "Expertos en RAG, Grok, Gemini 3 Pro y despliegues holísticos."
-    },
-    "healer_v1": {
-        "especialidades": "Medicina General, Pediatría, Ginecología, Fisioterapia, Cardiología.",
-        "horarios": "Lunes-Viernes 8h-20h, Sábado 8h-12h.",
-        "urgencia": "Llame al 112 (o emergencias locales) para casos de riesgo vital. Para urgencias en la clínica, llame a la apertura a las 8h.",
-        "cita": "Se pueden concertar citas por teléfono o a través de nuestro portal del paciente."
-    },
-    "mechanic_v1": {
-        "servicios": "Revisión, frenos, neumáticos, batería, diagnóstico electrónico, inspección técnica.",
-        "horarios": "Lunes-Viernes 8:30h-18:00h, Sábado 9h-12h.",
-        "vehiculo_cortesia": "Ofrecemos un vehículo de cortesía previa reserva.",
-        "garantia": "Todas nuestras reparaciones están garantizadas por 1 año, piezas y mano de obra."
-    },
-    "counselor_v1": {
-        "areas": "Derecho Laboral, Derecho de Familia, Derecho Inmobiliario, Derecho de los Negocios.",
-        "honorarios": "La primera consulta de 30 minutos se factura a 80€ más IVA.",
-        "documentos": "Por favor, traiga cualquier contrato o correspondencia relacionada con su caso a la primera cita.",
-        "ubicacion": "Nuestras oficinas están ubicadas en el centro de la ciudad, estacionamiento disponible."
-    },
-    "concierge_v1": {
-        "desayuno": "Servido de 7h a 10:30h en el restaurante l'Horizon.",
-        "check_in_out": "Entrada a partir de las 15h, Salida hasta las 11h.",
-        "wifi": "Wifi gratuito de alta velocidad disponible en todo el establecimiento.",
-        "estacionamiento": "Estacionamiento privado vigilado disponible por 20€ por noche."
-    },
-    "stylist_v1": {
-        "tratamientos": "Peluquería, Masajes, Faciales, Manicura, Hammam.",
-        "horarios": "Martes-Sábado 10h-19h, Jueves hasta las 21h.",
-        "productos": "Utilizamos exclusivamente productos orgánicos y ecológicos.",
-        "cancelacion": "Las cancelaciones deben realizarse con 24h de antelación para evitar el cobro."
+    "agency_internal_v1": {
+        "identity": "3A Automation - Agencia de Automatización IA",
+        "services": "Automatizaciones e-commerce (Shopify, Klaviyo), Generación de leads, Email marketing, Analytics GA4, Scripts nativos Node.js",
+        "target": "PYMEs y e-commerce (€10k-500k/mes facturación)",
+        "contact": "Web: 3a-automation.com | Email: contact@3a-automation.com",
+        "horarios": "Lunes-Viernes 9h-18h (CET)",
+        "voice_ai_redirect": "Para servicios Voice AI (widget, telefonía), visite nuestra filial especializada: VocalIA.ma"
     },
     "recruiter_v1": {
-        "puestos": "Actualmente contratamos Desarrolladores de IA, Gerentes de Ventas y Especialistas en Automatización.",
-        "proceso": "1. Cribado telefónico, 2. Prueba técnica/caso práctico, 3. Entrevista con la dirección.",
+        "puestos": "Contratamos: Desarrolladores IA, Gerentes de Ventas, Especialistas en Automatización.",
+        "proceso": "1. Entrevista telefónica, 2. Prueba técnica/caso práctico, 3. Entrevista con dirección.",
         "valores": "Innovación, Autonomía, Excelencia Técnica.",
-        "postular": "Envíe su CV a jobs@3a-automation.com."
+        "postular": "CV a través del formulario en 3a-automation.com/careers"
     },
-    "dispatcher_v1": {
-        "seguimiento": "Use el enlace recibido por SMS para seguir su paquete en tiempo real.",
-        "zona_entrega": "Entregamos en todo el país en 24h a 48h.",
-        "problemas": "En caso de ausencia, el paquete se deja en el punto de recogida más cercano.",
-        "precios": "Envío estándar a partir de 5,90€."
+    "soporte_internal_v1": {
+        "soporte_cliente": "Soporte clientes existentes via dashboard.3a-automation.com",
+        "escalacion": "Problemas críticos: escalada inmediata al equipo técnico",
+        "sla": "Respuesta en 24h para solicitudes estándar, 4h para emergencias",
+        "documentacion": "Guías y tutoriales disponibles en el portal del cliente"
     },
-    "collector_v1": {
-        "pago_linea": "Pague sus facturas de forma segura a través del enlace enviado a su portal de cliente.",
-        "cuotas": "Se pueden conceder facilidades de pago tras revisar su expediente.",
-        "disputas": "Para cualquier disputa, envíe un correo electrónico a recovery@ethical-service.fr.",
-        "horarios": "Servicio disponible de lunes a viernes, de 9h a 17h."
+    "comercial_internal_v1": {
+        "cualificacion": "Leads cualificados via formulario de diagnóstico en el sitio",
+        "auditoria_gratis": "Auditoría e-commerce gratuita en 24-48h tras envío del formulario",
+        "packs": {
+            "quickWin": "390€ - 1 flow optimizado, auditoría express",
+            "essentials": "790€ - 3 flows + tests A/B + soporte 30 días",
+            "growth": "1399€ - 5 flows + segmentación RFM + dashboard + soporte 60 días"
+        },
+        "suscripciones": {
+            "maintenance": "290€/mes - 3h incluidas",
+            "optimization": "490€/mes - 5h incluidas"
+        }
     },
-    "surveyor_v1": {
-        "encuesta": "Realizamos encuestas NPS para medir la satisfacción general.",
-        "privacidad": "Todas sus respuestas son anónimas y se procesan de forma agregada.",
-        "recompensa": "Participe en nuestro sorteo mensual tras completar el cuestionario.",
-        "uso": "Sus comentarios nos ayudan a mejorar continuamente nuestros servicios."
+    "voice_ai_policy_v1": {
+        "uso_interno": "Voice AI (widget + telefonía) = uso interno 3A únicamente",
+        "servicios_cubiertos": "Marketing, Comercial, Soporte, Asistencia interna",
+        "clientes_externos": "Solicitudes Voice AI clientes → redirigir a VocalIA.ma",
+        "filial": "VocalIA.ma - Filial especializada Voice AI para clientes externos"
     },
-    "governor_v1": {
-        "estado_civil": "Las solicitudes de certificados de nacimiento, matrimonio o defunción son posibles en línea.",
-        "urbanismo": "Las solicitudes de permisos de construcción pueden presentarse solo los lunes y miércoles por la mañana.",
-        "residuos": "Recogida selectiva el miércoles por la noche, objetos voluminosos el primer viernes del mes.",
-        "contacto": "Recepción general abierta durante el horario laboral habitual."
-    },
-    "insurer_v1": {
-        "siniestro": "Declare su siniestro en un plazo de 5 días hábiles a través de la aplicación móvil o por teléfono.",
-        "presupuesto": "Obtenga un presupuesto gratuito en línea para su seguro de auto o hogar.",
-        "asistencia": "Asistencia 24/7 en el número gratuito que figura en el reverso de su carné de seguro.",
-        "red": "Más de 1500 talleres colaboradores para reparaciones sin pago por adelantado."
+    "_meta": {
+        "version": "3.0.0",
+        "updated": "2026-01-28",
+        "session": "189",
+        "language": "es",
+        "note": "KB limpia - uso interno agencia, Voice AI = interno, clientes Voice AI → VocalIA.ma"
     }
 }

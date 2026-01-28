@@ -1,9 +1,9 @@
 {
-  "version": "2026-01-08",
-  "generated": "2026-01-08T10:28:51.102Z",
-  "totalAutomations": 112,
+  "version": "2026-01-28",
+  "generated": "2026-01-28T21:30:00.000Z",
+  "totalAutomations": 121,
   "categories": 15,
-  "summary": "3A Automation dispose de 119 automatisations vérifiées (Level 5 Autonomous).",
+  "summary": "3A Automation dispose de 121 automatisations vérifiées pour e-commerce et PME.",
   "automationsByCategory": {
     "Lead Generation & Acquisition": [
       "Sync Meta Leads → Shopify",
@@ -29,7 +29,7 @@
       "Pipeline LinkedIn → Klaviyo (B2B)",
       "Pipeline Google Maps → Klaviyo (Local B2B)",
       "Module Templates Email B2B",
-      "HubSpot B2B CRM Integration v1.1.0",
+      "HubSpot B2B CRM Integration",
       "Lead Gen Scheduler",
       "Invoice Generator"
     ],
@@ -54,8 +54,8 @@
       "Audit Flows Complet",
       "Rotation A/B Sender",
       "Audit Klaviyo Flows V2",
-      "Omnisend B2C E-commerce Integration v1.1.0",
-      "Email Personalization Résilient (4 AI + 3-Email Cart Series)"
+      "Omnisend B2C E-commerce Integration",
+      "Email Personalization Résilient"
     ],
     "Shopify Admin": [
       "Enrichissement Produits",
@@ -71,7 +71,7 @@
       "Create Warehouse Metafield",
       "Import Taxonomy Metafield",
       "Parse Warehouse Csv",
-      "Demande d'Avis Automatisée (Shopify → Klaviyo)"
+      "Demande d'Avis Automatisée"
     ],
     "Analytics & Reporting": [
       "Dashboard Looker Studio",
@@ -91,25 +91,14 @@
       "Feed Google Shopping",
       "Diagnostic GMC",
       "Article Blog + Distribution Multi-Canal",
-      "Workflow Script Complet",
-      "Generate All Promo Videos",
-      "Blog Generator Résilient (3 AI + 3 Social)",
-      "Podcast Generator (Blog → Audio)",
-      "Index",
-      "Content",
-      "Popup",
-      "Markets",
-      "Index",
-      "Search",
-      "Config 3a Automation",
-      "Config Cinematicads",
-      "Config.Example"
+      "Blog Generator Résilient",
+      "Podcast Generator"
     ],
     "CinematicAds AI": [
       "CinematicAds Director",
       "Competitor Clone AI",
       "E-commerce Ads Factory",
-      "Asset Factory (Dual AI)"
+      "Asset Factory"
     ],
     "AI Avatar & Influencer": [
       "AI Avatar Generator",
@@ -120,49 +109,39 @@
       "Rappels WhatsApp 24h + 1h",
       "WhatsApp Booking Notifications"
     ],
-    "Voice AI & Téléphonie": [
-      "Assistant Vocal IA Web",
-      "Assistant Telephonique IA",
-      "Templates Voice Widget (8 industries)",
-      "Grok Voice Realtime (WebSocket + TTS)"
-    ],
     "Marketing Automation": [
       "Newsletter Automation"
     ],
     "SMS Marketing": [
-      "SMS Automation Résilient (Omnisend + Twilio)"
+      "SMS Automation Résilient"
     ],
     "Rétention & Prédiction Churn": [
-      "Prédiction Churn Résilient (RFM + AI)",
-      "Flow Client At-Risk (Intervention Anti-Churn)",
-      "Alertes Price Drop (Wishlist)",
+      "Prédiction Churn Résilient",
+      "Flow Client At-Risk",
+      "Alertes Price Drop",
       "Rappel Réapprovisionnement"
     ],
     "Dropshipping & Fournisseurs": [
-      "CJDropshipping - Automatisation Fournisseur",
-      "BigBuy - Synchronisation Fournisseur",
-      "Dropshipping - Orchestration Multi-Fournisseurs"
-    ],
-    "Général": [
-      null,
-      null
+      "CJDropshipping Automation",
+      "BigBuy Synchronisation",
+      "Dropshipping Orchestration"
     ]
   },
   "packs": {
     "quickWin": {
       "price": "390€",
       "automations": "1 flow optimisé",
-      "bonus": "Voice AI + Booking"
+      "includes": "Audit express + Documentation PDF"
     },
     "essentials": {
       "price": "790€",
       "automations": "3 flows + A/B tests",
-      "bonus": "Voice AI + Booking + WhatsApp"
+      "includes": "Audit complet + Support 30 jours"
     },
     "growth": {
       "price": "1399€",
       "automations": "5 flows + dashboard",
-      "bonus": "Voice AI + Booking + WhatsApp + Rappels"
+      "includes": "Segmentation RFM + Support 60 jours"
     }
   },
   "retainers": {
@@ -174,5 +153,16 @@
       "price": "490€/mois",
       "hours": "5h"
     }
+  },
+  "voiceAI": {
+    "note": "Services Voice AI disponibles via notre filiale spécialisée",
+    "redirect": "VocalIA.ma",
+    "services": "Widget vocal web, Téléphonie IA, Assistant 24/7"
+  },
+  "_meta": {
+    "version": "3.0.0",
+    "session": "189",
+    "updated": "2026-01-28",
+    "note": "Compteurs corrigés (121), Voice AI retiré des packs, redirection VocalIA.ma"
   }
 }

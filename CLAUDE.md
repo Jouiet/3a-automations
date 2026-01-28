@@ -1,10 +1,40 @@
 # 3A Automation
-> Version: 142.0 | 28/01/2026 | Session 189 | Engineering Score: 95/100 | Runtime: 4/4 Services ✅
+> Version: 143.0 | 28/01/2026 | Session 189bis | Engineering Score: 95/100 | Runtime: 4/4 Services ✅
 
 ## Identité
 
 - **Type**: AI Automation Agency (E-commerce B2C **OU** PME B2B)
 - **Sites**: 3a-automation.com (✅ 200) | dashboard.3a-automation.com (✅ LIVE)
+
+---
+
+## ⚠️ REVIREMENT STRATÉGIQUE (Session 189bis - 28/01/2026)
+
+### Voice AI - Nouveau Positionnement
+
+| Contexte | Usage |
+|:---------|:------|
+| **3A Voice AI** | Usage **INTERNE** uniquement (marketing, commercial, SAV agence) |
+| **Clients externes** | Redirection vers **VocalIA.ma** (filiale spécialisée Voice AI) |
+
+### Knowledge Bases - Audit & Corrections (Session 189bis)
+
+**Problèmes corrigés:**
+- ❌ 14 templates clients SUPPRIMÉS (dental, mechanic, etc.) → usage interne uniquement
+- ❌ Données FAUSSES corrigées (`+212 6 00 00 00 00`, `support@universalecom.com`, etc.)
+- ❌ Compteurs INCOHÉRENTS unifiés (88/89/112/119 → **121**)
+- ❌ Voice AI retiré des packs clients → redirection VocalIA.ma
+
+**Fichiers corrigés (7):**
+| Fichier | Status |
+|:--------|:------:|
+| `knowledge_base.json` | ✅ v3.0 |
+| `knowledge_base_en.json` | ✅ v3.0 |
+| `knowledge_base_es.json` | ✅ v3.0 |
+| `knowledge_base_ar.json` | ✅ v3.0 |
+| `knowledge_base_ary.json` | ✅ v3.0 |
+| `knowledge.json` (widget) | ✅ v3.0 |
+| `knowledge-base.js` (widget) | ✅ v3.0 |
 
 ---
 

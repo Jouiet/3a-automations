@@ -1,98 +1,48 @@
 {
-    "universal_ecom_v1": {
-        "shipping": "Standard shipping takes 3-5 business days (Free from €50). Express shipping takes 1-2 days (€15).",
-        "returns": "We offer a 30-day return policy for unused items in original packaging. Return shipping is free.",
-        "payments": "We accept Visa, Mastercard, Amex, PayPal and Apple Pay.",
-        "support": "email support: support@universalecom.com",
-        "hours": "Monday-Friday 9am-5pm"
-    },
-    "universal_sme_v1": {
-        "hours": "Monday-Friday 8am-6pm, Saturday 9am-1pm.",
-        "services": "We offer consultations, repairs, and maintenance services.",
-        "pricing": "Consultations are €50 (deducted from final invoice). Hourly rate is €80/hour.",
-        "address": "123 Main Street, Business District."
-    },
-    "dental_intake_v1": {
-        "emergency": "For intense pain or trauma, we offer same-day emergency slots between 11am-12pm and 3pm-4pm.",
-        "insurance": "We accept major private insurances and offer payment facilities.",
-        "new_patient_offer": "The 'New Patient' package at €99 includes exam, X-rays, and cleaning.",
-        "dentist": "Dr. Lumière is our lead dentist, specializing in implantology and dental aesthetics."
-    },
-    "hoa_support_v1": {
-        "trash": "Trash pickup is Tuesday morning. Recycling every other Tuesday.",
-        "pool": "The community pool is open from 8am to 10pm daily. Badge required.",
-        "parking": "Guest parking is limited to 48 hours. Permit required for longer stays."
-    },
-    "agency_v2": {
-        "services": "3A Automation provides AI voice agents, e-commerce automation (Shopify), and Level 5 agentic marketing systems.",
-        "mission": "Our mission is to transform agencies and stores into high-performance autonomous engines.",
-        "contact": "Contact us via 3a-automation.com or by phone at +212 6 00 00 00 00.",
-        "expertise": "Experts in RAG, Grok, Gemini 3 Pro, and holistic deployments."
-    },
-    "healer_v1": {
-        "specialties": "General Practitioner, Pediatrics, Gynecology, Physiotherapy, Cardiology.",
-        "hours": "Monday-Friday 8am-8pm, Saturday 8am-12pm.",
-        "emergency": "Call 911 (or local emergency) for life-threatening issues. For clinic emergencies, call at opening at 8am.",
-        "booking": "Appointments can be made by phone or via our patient portal."
-    },
-    "mechanic_v1": {
-        "services": "Service, brakes, tires, battery, electronic diagnostics, vehicle inspection.",
-        "hours": "Monday-Friday 8:30am-6:00pm, Saturday 9am-12pm.",
-        "courtesy_vehicle": "We provide a courtesy vehicle upon prior reservation.",
-        "warranty": "All our repairs are guaranteed for 1 year, parts and labor."
-    },
-    "counselor_v1": {
-        "areas": "Labor Law, Family Law, Real Estate Law, Business Law.",
-        "fees": "The first 30-minute consultation is billed at €80 plus tax.",
-        "documents": "Please bring any contracts or correspondence related to your case to the first appointment.",
-        "location": "Our offices are located downtown, parking available."
-    },
-    "concierge_v1": {
-        "breakfast": "Served from 7am to 10:30am at l'Horizon restaurant.",
-        "check_in_out": "Check-in from 3pm, Check-out until 11am.",
-        "wifi": "Free high-speed Wifi available throughout the establishment.",
-        "parking": "Private secured parking available for €20 per night."
-    },
-    "stylist_v1": {
-        "treatments": "Hairdressing, Massages, Facials, Manicure, Hammam.",
-        "hours": "Tuesday-Saturday 10am-7pm, Late night Thursday until 9pm.",
-        "products": "We exclusively use organic and eco-friendly products.",
-        "cancellation": "Cancellations must be made 24h in advance to avoid billing."
+    "agency_internal_v1": {
+        "identity": "3A Automation - AI Automation Agency",
+        "services": "E-commerce automations (Shopify, Klaviyo), Lead generation, Email marketing, GA4 Analytics, Native Node.js scripts",
+        "target": "SMBs and e-commerce (€10k-500k/month revenue)",
+        "contact": "Website: 3a-automation.com | Email: contact@3a-automation.com",
+        "hours": "Monday-Friday 9am-6pm (CET)",
+        "voice_ai_redirect": "For Voice AI services (widget, telephony), visit our specialized subsidiary: VocalIA.ma"
     },
     "recruiter_v1": {
-        "positions": "We are currently hiring AI Developers, Sales Managers, and Automation Specialists.",
-        "process": "1. Phone screening, 2. Technical test/case study, 3. Interview with management.",
+        "positions": "We're hiring: AI Developers, Sales Managers, Automation Specialists.",
+        "process": "1. Phone screening, 2. Technical test/case study, 3. Management interview.",
         "values": "Innovation, Autonomy, Technical Excellence.",
-        "apply": "Send your CV to jobs@3a-automation.com."
+        "apply": "Submit CV via form at 3a-automation.com/careers"
     },
-    "dispatcher_v1": {
-        "tracking": "Use the link received by SMS to track your package in real-time.",
-        "delivery_zone": "We deliver nationwide within 24h to 48h.",
-        "issues": "In case of absence, the package is left at the nearest relay point.",
-        "pricing": "Standard delivery starting from €5.90."
+    "support_internal_v1": {
+        "client_support": "Existing client support via dashboard.3a-automation.com",
+        "escalation": "Critical issues: immediate escalation to technical team",
+        "sla": "Response within 24h for standard requests, 4h for emergencies",
+        "documentation": "Guides and tutorials available in client portal"
     },
-    "collector_v1": {
-        "online_payment": "Pay your invoices securely via the link sent to your customer portal.",
-        "installments": "Payment facilities can be granted after reviewing your file.",
-        "disputes": "For any dispute, send an email to recovery@ethical-service.fr.",
-        "hours": "Service available Monday to Friday, 9am to 5pm."
+    "commercial_internal_v1": {
+        "qualification": "Leads qualified via diagnostic form on website",
+        "free_audit": "Free e-commerce audit within 24-48h after form submission",
+        "packs": {
+            "quickWin": "€390 - 1 optimized flow, express audit",
+            "essentials": "€790 - 3 flows + A/B tests + 30-day support",
+            "growth": "€1399 - 5 flows + RFM segmentation + dashboard + 60-day support"
+        },
+        "subscriptions": {
+            "maintenance": "€290/month - 3h included",
+            "optimization": "€490/month - 5h included"
+        }
     },
-    "surveyor_v1": {
-        "survey": "We conduct NPS surveys to measure overall satisfaction.",
-        "privacy": "All your responses are anonymous and processed in aggregate.",
-        "reward": "Participate in our monthly draw after completing the questionnaire.",
-        "usage": "Your feedback helps us continuously improve our services."
+    "voice_ai_policy_v1": {
+        "internal_use": "Voice AI (widget + telephony) = 3A internal use only",
+        "covered_services": "Marketing, Sales, Support, Internal assistance",
+        "external_clients": "Voice AI client requests → redirect to VocalIA.ma",
+        "subsidiary": "VocalIA.ma - Specialized Voice AI subsidiary for external clients"
     },
-    "governor_v1": {
-        "civil_status": "Birth, marriage, or death certificate requests are possible online.",
-        "urbanism": "Building permit applications can be filed on Monday and Wednesday mornings only.",
-        "waste": "Selective collection on Wednesday evening, bulk items on the first Friday of the month.",
-        "contact": "General reception open during regular business hours."
-    },
-    "insurer_v1": {
-        "claim": "Report your claim within 5 business days via the mobile app or by phone.",
-        "quote": "Get a free online quote for your auto or home insurance.",
-        "assistance": "24/7 assistance at the toll-free number on the back of your insurance card.",
-        "network": "Over 1500 partner garages for repairs without upfront payment."
+    "_meta": {
+        "version": "3.0.0",
+        "updated": "2026-01-28",
+        "session": "189",
+        "language": "en",
+        "note": "Cleaned KB - internal agency use only, Voice AI = internal, Voice AI clients → VocalIA.ma"
     }
 }

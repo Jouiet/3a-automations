@@ -1,12 +1,11 @@
 /**
  * 3A Automation - Knowledge Base pour Assistant IA
- * Version: 2.0
+ * Version: 3.0.0
+ * Updated: 2026-01-28 (Session 189)
  *
- * Base de connaissances enrichie avec:
- * - Contexte conversationnel
- * - Réponses multi-industries
- * - Qualification des leads
- * - Suggestions proactives
+ * Base de connaissances pour usage INTERNE agence:
+ * - Marketing, Commercial, SAV, Assistance
+ * - Voice AI clients → redirection VocalIA.ma
  */
 
 const KNOWLEDGE_BASE = {
@@ -20,7 +19,7 @@ const KNOWLEDGE_BASE = {
     expertise: ['Automatisation E-commerce (TOUTES plateformes)', 'Email Marketing (Klaviyo, Mailchimp, Omnisend, HubSpot)', 'Analytics GA4', 'Scripts natifs Node.js/Python'],
     platforms: ['Shopify', 'WooCommerce', 'Magento', 'PrestaShop', 'BigCommerce', 'Klaviyo', 'Mailchimp', 'HubSpot', 'Omnisend'],
     target: 'PME et e-commerce (€10k-500k/mois CA)',
-    automations: 89,
+    automations: 121,
     differentiator: 'AAA - AI Automation Agency - Scripts natifs (pas no-code), relation directe avec experts, prix justes'
   },
 
@@ -142,7 +141,7 @@ const KNOWLEDGE_BASE = {
 
   // === AUTOMATISATIONS DISPONIBLES ===
   automations: {
-    total: 88,
+    total: 121,
     categories: {
       leadGen: ['Sync Meta/Google/TikTok Leads', 'LinkedIn scraping', 'Google Maps sourcing', 'Lead scoring', 'Geo-Segmentation'],
       email: ['Welcome series', 'Abandon panier', 'Post-achat', 'Winback', 'Browse abandonment', 'VIP Tiers'],
@@ -151,14 +150,16 @@ const KNOWLEDGE_BASE = {
       seo: ['Alt text auto', 'Meta tags', 'Schema.org', 'Sitemap images', 'llms.txt AEO'],
       content: ['Vidéo Promo Produit', 'Cart Recovery Video', 'Feed Google Shopping', 'Article Blog Auto'],
       whatsapp: ['WhatsApp Booking Confirmation', 'WhatsApp Reminders', 'WhatsApp Order Updates'],
-      voiceAI: ['Assistant Vocal IA Web (24/7)', 'Assistant Telephonique IA', 'Grok Voice Realtime', 'Voice Telephony Bridge'],
       crm: ['HubSpot B2B Integration', 'Omnisend B2C Integration']
-    },
-    voiceAIProduct: {
-      description: 'Assistant vocal IA deployable pour vos clients',
-      features: ['Reconnaissance vocale', 'Reponses instantanees', 'Prise RDV auto', 'Qualification leads', 'Disponible 24/7'],
-      included: 'Setup inclus dans tous les packs clients'
     }
+  },
+
+  // === VOICE AI - REDIRECTION VOCALIA ===
+  voiceAI: {
+    status: 'Services Voice AI disponibles via filiale spécialisée',
+    redirect: 'VocalIA.ma',
+    note: 'Pour les assistants vocaux IA (widget web, téléphonie), contactez notre filiale VocalIA.ma',
+    internalOnly: 'Le Voice AI 3A est réservé à l\'usage interne de l\'agence (marketing, commercial, SAV)'
   },
 
   // === FAQ ENRICHIE ===
@@ -170,7 +171,8 @@ const KNOWLEDGE_BASE = {
     engagement: 'Les packs Setup sont one-time, pas d\'engagement. Les abonnements sont au mois, résiliables à tout moment.',
     taille: 'Nous travaillons avec des PME de €10k à €500k/mois de CA. En dessous, l\'audit gratuit peut déjà beaucoup aider.',
     secteur: 'Nous travaillons tous secteurs: e-commerce, B2B, SaaS, services, BTP, retail... L\'automation s\'adapte.',
-    resultats: 'Exemples: +15% récupération paniers abandonnés, 36-42:1 ROI email (Litmus 2025), -60% temps qualification leads.'
+    resultats: 'Exemples: +15% récupération paniers abandonnés, 36-42:1 ROI email (Litmus 2025), -60% temps qualification leads.',
+    voiceAI: 'Pour les services Voice AI (assistant vocal, téléphonie IA), consultez notre filiale spécialisée VocalIA.ma'
   },
 
   // === OBJECTIONS COURANTES ===
@@ -180,6 +182,14 @@ const KNOWLEDGE_BASE = {
     pasTemps: 'Justement ! L\'objectif est de vous faire gagner du temps. Les automatisations tournent 24/7 sans vous.',
     dejaTeste: 'Beaucoup ont essayé seuls ou avec des outils basiques. La différence c\'est l\'expertise et la stratégie derrière les outils.',
     pasUrgent: 'Chaque jour sans automatisation = opportunités perdues. Paniers abandonnés, leads non relancés, clients qui partent...'
+  },
+
+  // === META ===
+  _meta: {
+    version: '3.0.0',
+    updated: '2026-01-28',
+    session: '189',
+    note: 'KB nettoyée - compteurs corrigés (121), Voice AI = usage interne, clients Voice AI → VocalIA.ma'
   }
 };
 

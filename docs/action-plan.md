@@ -4,10 +4,52 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 189 - 28/01/2026 21:15 CET):**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 189bis - 28/01/2026 21:45 CET):**
 > - **Score: 95/100** | **Credentials: 101 vars** | **Critical: 7/13 (54%)**
 > - **Voice: 3/3 RUNTIME ✅** | **Dashboard: ✅ RUNNING** | **Integrations: 8/16 (53%)**
-> - **All APIs: 100% REAL DATA** | **0 TODO/placeholders** | **Build: ✅ SUCCESS**
+> - **KB Audit: 7 fichiers corrigés** | **Voice AI: INTERNE uniquement** | **Clients → VocalIA.ma**
+
+---
+
+## SESSION 189bis - KNOWLEDGE BASE AUDIT & STRATEGIC PIVOT (28/01/2026 21:45 CET)
+
+### Revirement Stratégique
+**Voice AI 3A = Usage INTERNE uniquement (marketing, commercial, SAV)**
+**Clients Voice AI externes → VocalIA.ma**
+
+### Audit Knowledge Bases - Problèmes Identifiés
+
+| Problème | Gravité | Fichiers |
+|:---------|:-------:|:---------|
+| Données FAUSSES (`+212 6 00 00 00 00`, emails fictifs) | CRITIQUE | 5 KB JSON |
+| Compteurs INCOHÉRENTS (88/89/112/119 ≠ 121) | CRITIQUE | 2 fichiers widget |
+| Templates clients dans KB interne | MAJEUR | 5 KB JSON |
+| Voice AI dans packs clients | MAJEUR | 2 fichiers widget |
+| Hallucinations (Dr. Lumière, adresses fictives) | CRITIQUE | 5 KB JSON |
+
+### Corrections Appliquées
+
+| Fichier | Avant | Après |
+|:--------|:------|:------|
+| `knowledge_base.json` | 16 sections (14 templates + 2 agence) | 5 sections (agence interne) |
+| `knowledge_base_en.json` | Idem | ✅ v3.0 |
+| `knowledge_base_es.json` | Idem | ✅ v3.0 |
+| `knowledge_base_ar.json` | Idem | ✅ v3.0 |
+| `knowledge_base_ary.json` | Idem | ✅ v3.0 |
+| `knowledge.json` | 112/119 automations | **121** automations, Voice AI → VocalIA.ma |
+| `knowledge-base.js` | 88/89 automations | **121** automations, Voice AI = interne |
+
+### Nouvelle Structure KB (v3.0)
+
+```
+knowledge_base*.json:
+├── agency_internal_v1     # Identité, services, contact
+├── recruiter_v1           # Recrutement (corrigé)
+├── sav_internal_v1        # SAV interne
+├── commercial_internal_v1 # Commercial + pricing
+├── voice_ai_policy_v1     # Voice AI = interne, redirect VocalIA.ma
+└── _meta                  # Version, date, session
+```
 
 ---
 
