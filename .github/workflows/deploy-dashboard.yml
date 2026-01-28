@@ -46,11 +46,11 @@ jobs:
             pm2 stop dashboard 2>/dev/null || true
             pm2 delete dashboard 2>/dev/null || true
 
-            # STEP 2: BACKUP existing .env.local (contains production secrets!)
+            # STEP 2: BACKUP ecosystem.config.js (contains production secrets!)
             cd /root
-            if [ -f dashboard/.env.local ]; then
-              cp dashboard/.env.local /tmp/dashboard-env-backup
-              echo "=== Backed up existing .env.local ==="
+            if [ -f dashboard/ecosystem.config.js ]; then
+              cp dashboard/ecosystem.config.js /tmp/ecosystem-backup.js
+              echo "=== Backed up existing ecosystem.config.js ==="
             fi
 
             # STEP 3: Complete cleanup - remove ALL old files
@@ -62,49 +62,40 @@ jobs:
             rm -rf temp-repo
             cd /root/dashboard
 
-            # STEP 5: RESTORE .env.local from backup OR create with known values
-            if [ -f /tmp/dashboard-env-backup ]; then
-              cp /tmp/dashboard-env-backup .env.local
-              rm /tmp/dashboard-env-backup
-              echo "=== Restored .env.local from backup ==="
+            # STEP 5: RESTORE ecosystem.config.js from backup (CRITICAL!)
+            if [ -f /tmp/ecosystem-backup.js ]; then
+              cp /tmp/ecosystem-backup.js ecosystem.config.js
+              rm /tmp/ecosystem-backup.js
+              echo "=== Restored ecosystem.config.js from backup ==="
             else
-              echo "=== No backup found - using GitHub secrets ==="
-              echo "NODE_ENV=production" > .env.local
-              echo "JWT_SECRET=$JWT_SECRET" >> .env.local
-              echo "GOOGLE_SHEETS_ID=$GOOGLE_SHEETS_ID" >> .env.local
-              echo "GOOGLE_SHEETS_API_URL=$GOOGLE_SHEETS_API_URL" >> .env.local
+              echo "=== ERROR: No ecosystem.config.js backup found! ==="
+              echo "=== Please create /root/dashboard/ecosystem.config.js manually ==="
+              exit 1
             fi
-            echo "=== .env.local contents (masked) ==="
-            cat .env.local | sed 's/=.*/=***/'
 
-            # STEP 5: Clean install and build (no cache)
+            # STEP 6: Clean install and build (no cache)
             rm -rf node_modules .next 2>/dev/null || true
             npm install --legacy-peer-deps
             npm run build
 
-            # STEP 6: Verify buildId changed
+            # STEP 7: Verify buildId changed
             echo "Build ID: $(cat .next/BUILD_ID)"
 
-            # STEP 7: Copy static files to standalone (required for standalone mode)
+            # STEP 8: Copy static files to standalone (required for standalone mode)
             cp -r .next/static .next/standalone/.next/
             cp -r public .next/standalone/ 2>/dev/null || true
 
-            # STEP 8: Start PM2 with new build using absolute paths
-            STANDALONE_DIR="/root/dashboard/.next/standalone"
-            PORT=3001 pm2 start "$STANDALONE_DIR/server.js" --name "dashboard" --cwd "$STANDALONE_DIR"
+            # STEP 9: Start PM2 using ecosystem config (has env vars)
+            pm2 start ecosystem.config.js
             pm2 save
 
-            # STEP 8b: Show running process info for verification
+            # STEP 9b: Show running process info for verification
             pm2 show dashboard | grep -E "(cwd|exec|status|pid)"
 
-            # STEP 9: Clear ALL nginx caches and RESTART (not just reload)
+            # STEP 10: Clear ALL nginx caches and RESTART (not just reload)
             echo "=== Clearing nginx cache ==="
             sudo rm -rf /var/cache/nginx/* 2>/dev/null || true
             sudo rm -rf /tmp/nginx* 2>/dev/null || true
-
-            # Show nginx config for debugging proxy_cache
-            echo "=== Nginx proxy_cache settings ==="
-            sudo grep -r "proxy_cache" /etc/nginx/ 2>/dev/null || echo "No proxy_cache found"
 
             # RESTART nginx (not reload) to fully clear in-memory cache
             sudo systemctl restart nginx 2>/dev/null || true
