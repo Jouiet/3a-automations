@@ -13,6 +13,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Settings,
+  Link2,
+  Rocket,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -29,6 +31,11 @@ const navigation = [
     icon: Zap,
   },
   {
+    name: "Integrations",
+    href: "/client/integrations",
+    icon: Link2,
+  },
+  {
     name: "Rapports",
     href: "/client/reports",
     icon: BarChart3,
@@ -37,6 +44,11 @@ const navigation = [
     name: "Documents",
     href: "/client/documents",
     icon: FileText,
+  },
+  {
+    name: "Onboarding",
+    href: "/client/onboarding",
+    icon: Rocket,
   },
 ];
 
