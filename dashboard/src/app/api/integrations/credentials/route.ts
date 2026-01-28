@@ -42,9 +42,6 @@ const CREDENTIAL_FIELDS: Record<string, { key: string; label: string; placeholde
     { key: "WHATSAPP_ACCESS_TOKEN", label: "Access Token", placeholder: "EAA..." },
     { key: "WHATSAPP_PHONE_NUMBER_ID", label: "Phone Number ID", placeholder: "..." },
   ],
-  elevenlabs: [
-    { key: "ELEVENLABS_API_KEY", label: "API Key", placeholder: "..." },
-  ],
   openai: [
     { key: "OPENAI_API_KEY", label: "API Key", placeholder: "sk-..." },
   ],
@@ -59,9 +56,6 @@ const CREDENTIAL_FIELDS: Record<string, { key: string; label: string; placeholde
   ],
   apify: [
     { key: "APIFY_TOKEN", label: "API Token", placeholder: "apify_api_..." },
-  ],
-  telnyx: [
-    { key: "TELNYX_API_KEY", label: "API Key", placeholder: "KEY..." },
   ],
   "cj-dropshipping": [
     { key: "CJ_API_KEY", label: "API Key", placeholder: "..." },

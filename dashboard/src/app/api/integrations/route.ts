@@ -85,13 +85,6 @@ const INTEGRATIONS_CONFIG = [
     credentialKeys: ["WHATSAPP_ACCESS_TOKEN", "WHATSAPP_PHONE_NUMBER_ID"],
   },
   {
-    id: "elevenlabs",
-    name: "ElevenLabs",
-    icon: "mic",
-    category: "voice",
-    credentialKeys: ["ELEVENLABS_API_KEY"],
-  },
-  {
     id: "openai",
     name: "OpenAI",
     icon: "brain",
@@ -125,13 +118,6 @@ const INTEGRATIONS_CONFIG = [
     icon: "globe",
     category: "automation",
     credentialKeys: ["APIFY_TOKEN"],
-  },
-  {
-    id: "telnyx",
-    name: "Telnyx",
-    icon: "phone",
-    category: "voice",
-    credentialKeys: ["TELNYX_API_KEY"],
   },
   {
     id: "cj-dropshipping",

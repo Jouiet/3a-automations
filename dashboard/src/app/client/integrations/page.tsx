@@ -128,9 +128,10 @@ const OAUTH_INTEGRATIONS: Record<string, string> = {
 };
 
 // Integrations that use API keys (show credential form)
+// API-key integrations visible au client (PAS telnyx/elevenlabs = geres par 3A)
 const API_KEY_INTEGRATIONS = new Set([
   "openai", "anthropic", "stripe", "meta-ads", "tiktok-ads",
-  "google-ads", "whatsapp", "telnyx", "elevenlabs", "grok",
+  "google-ads", "whatsapp", "grok",
   "gemini", "apify", "cj-dropshipping", "bigbuy",
 ]);
 
