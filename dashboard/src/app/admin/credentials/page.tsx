@@ -205,7 +205,13 @@ export default function CredentialsPage() {
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
           </Button>
-          <Button>
+          <Button onClick={() => {
+            const key = prompt("Secret key (e.g. SHOPIFY_ACCESS_TOKEN):");
+            if (!key) return;
+            const value = prompt(`Value for ${key}:`);
+            if (!value) return;
+            alert(`Use CLI to add secrets securely:\nnode automations/agency/core/SecretVault.cjs --set ${selectedProject || "agency"} ${key} <value>`);
+          }}>
             <Plus className="h-4 w-4 mr-2" />
             Add Secret
           </Button>
@@ -423,7 +429,9 @@ export default function CredentialsPage() {
                       <span className="text-xs text-muted-foreground">
                         {secret.lastUpdated === "-" ? "Not set" : secret.lastUpdated}
                       </span>
-                      <Button variant="ghost" size="icon" className="h-8 w-8">
+                      <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => {
+                        navigator.clipboard.writeText(secret.key);
+                      }} title="Copy key name">
                         <Copy className="h-4 w-4" />
                       </Button>
                     </div>

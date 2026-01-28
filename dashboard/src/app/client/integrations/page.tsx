@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -117,7 +118,16 @@ const STATUS_CONFIG = {
   },
 };
 
+// OAuth-enabled integrations
+const OAUTH_INTEGRATIONS: Record<string, string> = {
+  shopify: "/api/auth/oauth/shopify/authorize",
+  klaviyo: "/api/auth/oauth/klaviyo/authorize",
+  google_analytics: "/api/auth/oauth/google/authorize?scope=analytics",
+  google_search_console: "/api/auth/oauth/google/authorize?scope=webmasters",
+};
+
 export default function IntegrationsPage() {
+  const router = useRouter();
   const [integrations, setIntegrations] = useState<Integration[]>([]);
   const [stats, setStats] = useState<IntegrationStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -367,7 +377,19 @@ export default function IntegrationsPage() {
                             Connecte
                           </Button>
                         ) : (
-                          <Button variant="outline" size="sm" className="w-full">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full"
+                            onClick={() => {
+                              const oauthUrl = OAUTH_INTEGRATIONS[integration.id];
+                              if (oauthUrl) {
+                                window.location.href = oauthUrl;
+                              } else {
+                                router.push("/client/support?subject=" + encodeURIComponent("Connexion " + integration.name));
+                              }
+                            }}
+                          >
                             <ExternalLink className="h-4 w-4 mr-2" />
                             Connecter
                           </Button>
@@ -440,7 +462,7 @@ export default function IntegrationsPage() {
               <p className="text-muted-foreground mt-1">
                 Notre equipe peut vous accompagner dans la configuration de vos integrations.
               </p>
-              <Button className="mt-4" variant="outline">
+              <Button className="mt-4" variant="outline" onClick={() => router.push("/client/support")}>
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Contacter le support
               </Button>

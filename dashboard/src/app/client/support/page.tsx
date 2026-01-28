@@ -159,39 +159,45 @@ export default function SupportPage() {
 
       {/* Contact Cards */}
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer">
-          <CardContent className="p-6 flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-primary/10">
-              <Mail className="h-6 w-6 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-semibold">Email</h3>
-              <p className="text-sm text-muted-foreground">contact@3a-automation.com</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer">
-          <CardContent className="p-6 flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-emerald-500/10">
-              <Phone className="h-6 w-6 text-emerald-400" />
-            </div>
-            <div>
-              <h3 className="font-semibold">WhatsApp</h3>
-              <p className="text-sm text-muted-foreground">Reponse sous 24h</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer">
-          <CardContent className="p-6 flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-sky-500/10">
-              <HelpCircle className="h-6 w-6 text-sky-400" />
-            </div>
-            <div>
-              <h3 className="font-semibold">Documentation</h3>
-              <p className="text-sm text-muted-foreground">Guides & FAQ</p>
-            </div>
-          </CardContent>
-        </Card>
+        <a href="mailto:contact@3a-automation.com" className="block">
+          <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer h-full">
+            <CardContent className="p-6 flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-primary/10">
+                <Mail className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Email</h3>
+                <p className="text-sm text-muted-foreground">contact@3a-automation.com</p>
+              </div>
+            </CardContent>
+          </Card>
+        </a>
+        <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" className="block">
+          <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer h-full">
+            <CardContent className="p-6 flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-emerald-500/10">
+                <Phone className="h-6 w-6 text-emerald-400" />
+              </div>
+              <div>
+                <h3 className="font-semibold">WhatsApp</h3>
+                <p className="text-sm text-muted-foreground">Reponse sous 24h</p>
+              </div>
+            </CardContent>
+          </Card>
+        </a>
+        <a href="https://3a-automation.com/#services" target="_blank" rel="noopener noreferrer" className="block">
+          <Card className="border-border/50 hover:border-primary/30 transition-colors cursor-pointer h-full">
+            <CardContent className="p-6 flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-sky-500/10">
+                <HelpCircle className="h-6 w-6 text-sky-400" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Documentation</h3>
+                <p className="text-sm text-muted-foreground">Guides & FAQ</p>
+              </div>
+            </CardContent>
+          </Card>
+        </a>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
