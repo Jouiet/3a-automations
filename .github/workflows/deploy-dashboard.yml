@@ -73,10 +73,13 @@ jobs:
             cp -r .next/static .next/standalone/.next/
             cp -r public .next/standalone/ 2>/dev/null || true
 
-            # STEP 8: Start PM2 with new build
-            cd .next/standalone
-            PORT=3001 pm2 start server.js --name "dashboard"
+            # STEP 8: Start PM2 with new build using absolute paths
+            STANDALONE_DIR="/root/dashboard/.next/standalone"
+            PORT=3001 pm2 start "$STANDALONE_DIR/server.js" --name "dashboard" --cwd "$STANDALONE_DIR"
             pm2 save
+
+            # STEP 8b: Show running process info for verification
+            pm2 show dashboard | grep -E "(cwd|exec|status|pid)"
 
             # STEP 9: Clear nginx cache and reload
             sudo rm -rf /var/cache/nginx/* 2>/dev/null || true
