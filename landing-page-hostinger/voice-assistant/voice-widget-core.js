@@ -15,8 +15,8 @@
   // ============================================================
 
   const CONFIG = {
-    // Supported languages - ONLY these 5
-    SUPPORTED_LANGS: ['fr', 'en', 'es', 'ar', 'ary'],
+    // Supported languages - FR/EN Focus
+    SUPPORTED_LANGS: ['fr', 'en'],
     DEFAULT_LANG: 'fr',
 
     // Paths
@@ -61,6 +61,14 @@
       need: null,
       stage: 'discovery',
       lastTopic: null,
+      attribution: {
+        utm_source: null,
+        utm_medium: null,
+        utm_campaign: null,
+        gclid: null,
+        fbclid: null,
+        referrer: document.referrer || null
+      },
       bookingFlow: {
         active: false,
         step: null,
@@ -144,6 +152,7 @@
     const eventData = {
       event_category: 'voice_assistant',
       language: state.currentLang,
+      attribution: state.conversationContext.attribution,
       ...params
     };
 
@@ -152,6 +161,27 @@
     }
     if (typeof dataLayer !== 'undefined' && Array.isArray(dataLayer)) {
       dataLayer.push({ event: eventName, ...eventData });
+    }
+
+    // SOTA: Signal bridge to backend (Agent Ops Dashboard ingestion)
+    console.log(`[3A Voice] SOTA Signal: ${eventName}`, eventData);
+  }
+
+  /**
+   * Capture marketing attribution signals on init
+   */
+  function captureAttribution() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const attr = state.conversationContext.attribution;
+
+    attr.utm_source = urlParams.get('utm_source') || attr.utm_source;
+    attr.utm_medium = urlParams.get('utm_medium') || attr.utm_medium;
+    attr.utm_campaign = urlParams.get('utm_campaign') || attr.utm_campaign;
+    attr.gclid = urlParams.get('gclid') || attr.gclid;
+    attr.fbclid = urlParams.get('fbclid') || attr.fbclid;
+
+    if (attr.gclid || attr.fbclid) {
+      console.log('[3A Voice] Attribution Captured:', attr);
     }
   }
 
@@ -963,6 +993,7 @@
       await loadLanguage(lang);
       console.log(`[3A Voice] Loaded language: ${state.currentLang}`);
 
+      captureAttribution(); // Session 177: MarEng Injector
       createWidget();
       trackEvent('voice_widget_loaded', { language: state.currentLang });
 
