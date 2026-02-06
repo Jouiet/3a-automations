@@ -65,9 +65,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   </noscript>
 
-  <!-- Main CSS deferred -->
+  <!-- Critical CSS (render-blocking, 4KB) -->
   <link rel="stylesheet" href="../css/critical.css">
-  <link rel="stylesheet" href="../styles.css?v=89.0">
+  <!-- Non-critical CSS (async loaded) -->
+  <link rel="stylesheet" href="../styles.min.css?v=89.0" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../styles.min.css?v=89.0"></noscript>
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -185,6 +187,103 @@
           "text": "Our packages start at $450 (Quick Win), $920 (Essentials), and $1,690 (Growth). We also offer monthly retainers starting at $330/month. Pricing is adapted for Morocco (MAD) and Europe (EUR)."
         }
       }
+    ]
+  }
+  </script>
+
+  <!-- Service Schema: Voice AI -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://3a-automation.com/#voice-ai-service",
+    "name": "Voice AI Assistant (The Closer)",
+    "description": "Autonomous AI Voice Assistant (Level 5) capable of self-directed outbound calls for churn rescue, lead qualification, and automatic appointment booking via Twilio and Grok Voice Realtime.",
+    "provider": {"@id": "https://3a-automation.com/#organization"},
+    "serviceType": "AI Voice Automation",
+    "areaServed": "Worldwide",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://3a-automation.com/en/services/voice-ai.html"
+    }
+  }
+  </script>
+
+  <!-- Service Schema: Flywheel 360 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://3a-automation.com/#flywheel-360-service",
+    "name": "Flywheel 360° - Holistic Automation System",
+    "description": "Complete automation methodology covering Acquisition, Conversion, Retention and Advocacy. Integrates 121 workflows via proprietary MCP Router for exponential growth.",
+    "provider": {"@id": "https://3a-automation.com/#organization"},
+    "serviceType": "Marketing Automation",
+    "areaServed": "Worldwide",
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": "https://3a-automation.com/en/services/flywheel-360.html"
+    }
+  }
+  </script>
+
+  <!-- ProfessionalService Schema for AEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://3a-automation.com/#business",
+    "name": "3A Automation",
+    "alternateName": "AAA - AI Automation Agency",
+    "description": "AI automation agency specializing in E-commerce (B2C) and SMB workflows (B2B). 121 tested workflows powered by Claude 4.6, Grok 4.1, Gemini 3. Scientific Acquisition, Conversion, Retention.",
+    "url": "https://3a-automation.com",
+    "logo": "https://3a-automation.com/logo.webp",
+    "image": "https://3a-automation.com/og-image.webp",
+    "email": "contact@3a-automation.com",
+    "telephone": "+1 775 254 7428",
+    "priceRange": "$$",
+    "currenciesAccepted": "EUR, USD, MAD",
+    "paymentAccepted": "Bank Transfer, Stripe",
+    "areaServed": [
+      {"@type": "Country", "name": "France"},
+      {"@type": "Country", "name": "Morocco"},
+      {"@type": "Country", "name": "Belgium"},
+      {"@type": "Country", "name": "United States"},
+      {"@type": "Country", "name": "United Kingdom"},
+      {"@type": "Country", "name": "United Arab Emirates"}
+    ],
+    "knowsLanguage": ["fr", "en", "ar"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Automation Packages",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Quick Win",
+          "description": "1 optimized workflow + express audit",
+          "price": "450",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Essentials",
+          "description": "3 workflows + A/B tests + 30 days support",
+          "price": "920",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Growth",
+          "description": "5 workflows + dashboard + RFM segmentation + 60 days support",
+          "price": "1690",
+          "priceCurrency": "USD"
+        }
+      ]
+    },
+    "sameAs": [
+      "https://linkedin.com/company/3a-automation",
+      "https://x.com/3a_automation",
+      "https://github.com/Jouiet/3a-automations"
     ]
   }
   </script>

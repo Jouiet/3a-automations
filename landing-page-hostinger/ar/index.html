@@ -44,10 +44,15 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 
-    <!-- CSS -->
+    <!-- Critical CSS (render-blocking, 4KB) -->
     <link rel="stylesheet" href="../css/critical.css">
-    <link rel="stylesheet" href="../styles.css?v=89.0">
-    <link rel="stylesheet" href="../css/ultra-investors.css">
+    <!-- Non-critical CSS (async loaded) -->
+    <link rel="stylesheet" href="../styles.min.css?v=89.0" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../css/ultra-investors.css" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="../styles.min.css?v=89.0">
+      <link rel="stylesheet" href="../css/ultra-investors.css">
+    </noscript>
 
     <style>
         /* RTL Specific Overrides */
@@ -121,6 +126,57 @@
           }
         }
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://3a-automation.com/#business",
+      "name": "3A Automation",
+      "alternateName": "AAA - وكالة أتمتة الذكاء الاصطناعي",
+      "description": "وكالة أتمتة الذكاء الاصطناعي متخصصة في التجارة الإلكترونية (B2C) والشركات الصغيرة والمتوسطة (B2B). 121 سير عمل مختبر مدعوم بـ Claude 4.6 و Grok 4.1 و Gemini 3.",
+      "url": "https://3a-automation.com",
+      "logo": "https://3a-automation.com/logo.webp",
+      "image": "https://3a-automation.com/og-image.webp",
+      "email": "contact@3a-automation.com",
+      "telephone": "+1 775 254 7428",
+      "priceRange": "$$",
+      "currenciesAccepted": "EUR, USD, MAD",
+      "areaServed": [
+        {"@type": "Country", "name": "Morocco"},
+        {"@type": "Country", "name": "France"},
+        {"@type": "Country", "name": "United Arab Emirates"},
+        {"@type": "Country", "name": "Saudi Arabia"}
+      ],
+      "knowsLanguage": ["ar", "fr", "en"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "باقات الأتمتة",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Quick Win",
+            "description": "سير عمل واحد محسّن + تدقيق سريع",
+            "price": "3900",
+            "priceCurrency": "MAD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Essentials",
+            "description": "3 سير عمل + اختبارات A/B + دعم 30 يومًا",
+            "price": "7900",
+            "priceCurrency": "MAD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Growth",
+            "description": "5 سير عمل + لوحة تحكم + تقسيم RFM + دعم 60 يومًا",
+            "price": "13990",
+            "priceCurrency": "MAD"
+          }
+        ]
+      }
     }
     </script>
 </head>

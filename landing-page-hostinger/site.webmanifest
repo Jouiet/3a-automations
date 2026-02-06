@@ -1,21 +1,28 @@
 {
   "name": "3A Automation",
   "short_name": "3A",
-  "description": "Automation, Analytics & AI pour PME",
+  "description": "AI Automation Agency - E-commerce & SMB Workflows",
   "start_url": "/",
-  "display": "browser",
-  "background_color": "#191E35",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0D0F1A",
   "theme_color": "#4FBAF1",
+  "categories": ["business", "productivity"],
+  "lang": "fr",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

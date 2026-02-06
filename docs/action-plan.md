@@ -4,11 +4,52 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192bis - 06/02/2026 - SEO+CI+Registry Safety):**
-> - **Backend Score: 86/100** | **Frontend Score: 86/100** (+1) | **Credentials: 60%**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192ter - 06/02/2026 - PWA+AEO+CRP):**
+> - **Backend Score: 86/100** | **Frontend Score: 88/100** (+2) | **Credentials: 60%**
 > - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
 > - **Pages: 75 (+8 stitch)** | **Sensors: 12/19 OK** | **Dashboard: 8/8 APIs**
 > - **Agent Ops: 15/15 modules** | **--health: 57/57 respond** | **0 TODO/PLACEHOLDER**
+
+---
+
+## SESSION 192ter - PWA+AEO+CRP OPTIMIZATION (06/02/2026)
+
+### Tasks Completed (5/5)
+| # | Task | Files | Status |
+|:--|:---|:---:|:---:|
+| 1 | Visual verification (chrome-devtools screenshots) | 0 | ✅ |
+| 2 | ProfessionalService JSON-LD on FR/EN/AR homepages | 3 | ✅ |
+| 3 | ServiceWorker + PWA manifest upgrade | 3 | ✅ |
+| 4 | Critical rendering path (async CSS, minified) | 3+1 | ✅ |
+| 5 | Sitemap hreflang ar + x-default + lastmod update | 1 | ✅ |
+
+### AEO Improvements
+- ProfessionalService schema: 0 → 3 pages (FR/EN/AR homepages)
+- Service schemas on EN homepage: 0 → 2 (Voice AI + Flywheel 360)
+- OfferCatalog with pricing in EUR/USD/MAD per language
+- Schema types per homepage: FR=8, EN=6, AR=3
+
+### PWA Implementation
+- ServiceWorker with cache-first for assets, network-first for pages
+- Manifest upgraded: `display: standalone`, `scope: /`, categories
+- SW registration in analytics-init.js (all pages that include it)
+
+### Critical Rendering Path
+- Homepages now use async CSS: `media="print" onload="this.media='all'"`
+- Switched from styles.css (272KB) to styles.min.css (182KB) for homepages
+- Critical.css (4KB) remains render-blocking (above-fold styles)
+
+### Sitemap Improvements
+- Added `ar` hreflang to FR/EN homepage, pricing, contact entries
+- Added `x-default` to homepage entries
+- Updated all `lastmod` dates to 2026-02-06
+- 72 URLs, 9 AR hreflang entries, 3 x-default entries
+
+### Frontend Score Updated (88/100) (+2)
+| Category | Before | After |
+|:---------|:------:|:-----:|
+| SEO/AEO | 80 | **82** (+ProfessionalService, OfferCatalog, sitemap hreflang) |
+| Performance | 85 | **87** (+async CSS, +minified, +SW caching) |
 
 ---
 

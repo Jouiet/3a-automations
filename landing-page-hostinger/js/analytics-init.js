@@ -25,6 +25,13 @@ function gtag() { dataLayer.push(arguments); }
     });
 })();
 
+// ServiceWorker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').catch(function () {});
+    });
+}
+
 // Core Web Vitals Reporter - sends LCP, INP, CLS to GA4
 (function () {
     function sendCWV(name, value, rating) {
