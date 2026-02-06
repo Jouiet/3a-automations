@@ -76,7 +76,7 @@
         <a href="https://dashboard.3a-automation.com" class="btn-nav btn-dashboard" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>لوحة التحكم</span></a>
         <div class="lang-nav">
           <a href="/blog/automatisation-fiable-lecons-salesforce-2026.html" class="lang-link" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
-          <a href="/en/en/blog/reliable-automation-salesforce-lessons-2026.html" class="lang-link" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/en/blog/reliable-automation-salesforce-lessons-2026.html" class="lang-link" onclick="GeoLocale.saveManualLocale('en')">EN</a>
           <a href="/ar/blog/automatisation-fiable-lecons-salesforce-2026.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
         </div>
       </nav>
@@ -91,13 +91,57 @@
   <main id="main-content" role="main">
     <section class="hero-lite"><div class="container"><div class="breadcrumb"><a href="/ar/">الرئيسية</a> / <a href="/ar/blog/">المدونة</a> / <span>أتمتة موثوقة</span></div><h1 class="hero-title-ultra">أتمتة موثوقة: <span class="highlight">دروس من Salesforce</span></h1><p class="hero-desc">كيف تبني نظام أتمتة قوي يعمل بدون توقف. دروس من أكبر منصة CRM في العالم.</p></div></section>
     <article class="blog-article"><div class="container">
-      <h2>لماذا الموثوقية مهمة؟</h2>
-      <p>أتمتة تتوقف عن العمل أسوأ من عدم وجود أتمتة أصلاً. العملاء يتوقعون استجابة فورية. نظام غير موثوق يفقد ثقة العملاء.</p>
-      <h2>5 دروس من Salesforce</h2>
-      <ul><li><strong>المراقبة المستمرة:</strong> لا تنتظر حتى يشتكي العميل. راقب كل أتمتة في الوقت الحقيقي.</li><li><strong>الاسترداد التلقائي:</strong> إذا فشل شيء، يجب أن يُصلح نفسه تلقائياً أو يُنبه الفريق فوراً.</li><li><strong>الاختبار المستمر:</strong> 177 اختبار عندنا. كل تعديل يمر بمجموعة كاملة من الاختبارات.</li><li><strong>التحكم البشري:</strong> 18/18 أتمتة حساسة تتطلب موافقة بشرية قبل التنفيذ.</li><li><strong>التوثيق:</strong> كل أتمتة موثقة. كل قرار مسجل. الشفافية الكاملة.</li></ul>
-      <h2>كيف نطبق هذا في 3A</h2>
-      <p>نظام GPM (Global Pressure Matrix) يراقب 19 مستشعراً في الوقت الحقيقي. ErrorScience يصنف الأخطاء ويتعلم منها. كل فشل يصبح درساً يمنع التكرار.</p>
-      <div class="cta-card" style="margin-top:2rem"><h3>اكتشف منهجيتنا</h3><a href="/ar/a-propos.html" class="btn-cyber btn-primary-cyber"><span class="btn-text">من نحن</span><span class="btn-glow"></span></a></div>
+      
+      <h2>لماذا تفشل الأتمتة؟ دروس من Salesforce</h2>
+      <p>في 2026، أعلنت Salesforce عن خسائر بقيمة 300 مليون دولار بسبب فشل في أتمتة الذكاء الاصطناعي. الدرس: <strong>الأتمتة بدون إشراف بشري = كارثة</strong>.</p>
+
+      <div class="article-tip" style="background:rgba(79,186,241,0.1);border-right:4px solid #4FBAF1;padding:1.5rem;margin:2rem 0;border-radius:8px;">
+        <p><strong>الدرس الأساسي:</strong> الأتمتة الموثوقة تتطلب 3 عناصر: اختبارات صارمة (177/177)، إشراف بشري (HITL 18/18)، ومراقبة مستمرة (19 مستشعر).</p>
+      </div>
+
+      <h2>5 دروس من Salesforce لأتمتة موثوقة</h2>
+
+      <h3>1. الإشراف البشري (HITL) ليس اختيارياً</h3>
+      <p>كل أتمتة مالية أو تجارية يجب أن تمر عبر مراجعة بشرية. في 3A Automation، <strong>18 من 18 سير عمل</strong> حساس تحت إشراف HITL.</p>
+
+      <h3>2. الاختبارات يجب أن تكون 100%</h3>
+      <ul>
+        <li><strong>اختبارات الوحدة:</strong> كل مكون يُختبر بشكل مستقل</li>
+        <li><strong>اختبارات التكامل:</strong> التفاعل بين المكونات</li>
+        <li><strong>اختبارات الصحة:</strong> نقاط فحص للحالة على كل خدمة</li>
+      </ul>
+
+      <h3>3. Fallback متعدد المزودين</h3>
+      <p>لا تعتمد على مزود IA واحد. استراتيجية 3A:</p>
+      <ul>
+        <li><strong>المستوى 1:</strong> Claude Opus 4.6 (الأكثر دقة)</li>
+        <li><strong>المستوى 2:</strong> Grok 4.1 (الأسرع)</li>
+        <li><strong>المستوى 3:</strong> Gemini 3 Flash (الأكثر كفاءة)</li>
+        <li><strong>المستوى 4:</strong> قواعد ثابتة (احتياطي نهائي)</li>
+      </ul>
+
+      <h3>4. المراقبة المستمرة</h3>
+      <p>19 مستشعراً يراقبون حالة النظام في الوقت الحقيقي: Shopify، Klaviyo، GA4، التكاليف، سرعة العملاء المحتملين.</p>
+
+      <h3>5. الشفافية الكاملة</h3>
+      <p>لوحة تحكم حية تعرض: حالة كل أتمتة، آخر تنفيذ، معدل النجاح، التكاليف.</p>
+
+      <h2>كيف نطبق هذه الدروس</h2>
+      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;">
+        <thead><tr style="border-bottom:2px solid #4FBAF1;"><th style="padding:0.75rem;text-align:right;">المبدأ</th><th style="padding:0.75rem;text-align:right;">التطبيق في 3A</th></tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:0.75rem;">إشراف بشري</td><td style="padding:0.75rem;">18/18 HITL</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:0.75rem;">اختبارات</td><td style="padding:0.75rem;">177/177 (100%)</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:0.75rem;">مراقبة</td><td style="padding:0.75rem;">19 مستشعر</td></tr>
+          <tr><td style="padding:0.75rem;">Fallback</td><td style="padding:0.75rem;">4 مزودين IA</td></tr>
+        </tbody>
+      </table>
+
+      <div class="article-author-box" style="display:flex;gap:1.5rem;align-items:center;padding:2rem;margin:2rem 0;border:1px solid rgba(79,186,241,0.2);border-radius:12px;">
+        <img src="../../logo.webp" alt="3A Automation" style="width:80px;height:80px;border-radius:50%;" loading="lazy">
+        <div><h4 style="margin:0 0 0.5rem;">3A Automation</h4><p style="margin:0;opacity:0.8;">التشغيل مؤتمت. الاستراتيجية محررة.</p></div>
+      </div>
+      <div style="margin-top:2rem;"><a href="/ar/blog/" style="color:#4FBAF1;">→ العودة للمدونة</a></div>
     </div></article>
   </main>
 
