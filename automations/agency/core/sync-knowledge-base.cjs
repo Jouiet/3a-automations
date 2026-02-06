@@ -63,11 +63,44 @@ const EXCLUDED_FILES = [
   'geo-markets.cjs',  // Module, not standalone
   'grok-client.cjs',  // API client library
   'prompt-feedback-tracker.cjs',  // Internal tool
-  'sync-knowledge-base.cjs'  // This script itself
+  'sync-knowledge-base.cjs',         // This script itself
+  'sync-catalog-to-registry.cjs'     // Internal sync tool
+];
+
+// Patterns that indicate INFRASTRUCTURE (not automations)
+const EXCLUDED_INFRA_PATTERNS = [
+  /^\d+\.bundle/,              // Webpack bundles (289.bundle.*)
+  /^(rpc-)?server\./,          // Server files
+  /^compat-layer\./,           // Compatibility layers
+  /^routes?\./,                // Route definitions
+  /^telemetry\./,              // Telemetry modules
+  /^index\./,                  // Index/barrel files
+  /^config\./,                 // Config files
+  /-proxy\./,                  // Proxy scripts
+  /^(content|dev|growth|logistics|marketing)director/i  // Agent role definitions
 ];
 
 // Directories to EXCLUDE entirely
-const EXCLUDED_DIRS = ['node_modules', 'legacy', 'test', 'tests', '.git', 'lib'];
+// Only agency/core (whitelist), generic/, clients/, and invoicing/ are scanned
+const EXCLUDED_DIRS = [
+  'node_modules', 'legacy', 'test', 'tests', '.git', 'lib',
+  '3a-global-mcp',       // MCP server infrastructure
+  '3a-sourcing-extension', // Browser extension
+  'a2a',                  // A2A protocol server
+  'acp',                  // Agent Communication Protocol
+  'ag-ui',                // AG-UI protocol
+  'alibaba-mcp',          // MCP server
+  'loom',                 // Loom integration
+  'mcp',                  // MCP infrastructure
+  'remotion-studio',      // Video rendering engine
+  'shared-components',    // Shared libraries
+  'skills',               // Claude skills
+  'subsidiaries',         // Subsidiary configs
+  'templates',            // Template assets (videos, etc.)
+  'scripts',              // Internal scripts
+  'archived-n8n',         // Archived n8n workflows
+  'data'                  // Data files
+];
 
 // ============================================
 // DETECTION LOGIC
@@ -119,7 +152,14 @@ function isClientFacing(filename, relPath) {
     }
   }
 
-  // 8. clients/* and generic/* - INCLUDE if passed all checks
+  // 8. Check infrastructure patterns
+  for (const regex of EXCLUDED_INFRA_PATTERNS) {
+    if (regex.test(lower)) {
+      return false;
+    }
+  }
+
+  // 9. clients/* and generic/* - INCLUDE if passed all checks
   return true;
 }
 
@@ -232,6 +272,19 @@ function main() {
     console.log('');
   }
 
+  // Safety cap: refuse to add if total would exceed 130
+  const MAX_AUTOMATIONS = 130;
+  const projectedTotal = registry.automations.length + found.filter(f => {
+    return !existingPaths.has(normalizePath(f.relPath));
+  }).length;
+
+  if (projectedTotal > MAX_AUTOMATIONS) {
+    console.error(`\n❌ SAFETY: projected ${projectedTotal} automations exceeds cap of ${MAX_AUTOMATIONS}.`);
+    console.error('   This likely means infrastructure files are leaking through filters.');
+    console.error('   Review the scan results above and update EXCLUDED_DIRS or EXCLUDED_INFRA_PATTERNS.');
+    process.exit(1);
+  }
+
   // Find NEW automations
   let newCount = 0;
   for (const file of found) {
@@ -306,13 +359,22 @@ function main() {
     summary: `3A Automation dispose de ${registry.totalCount} automatisations dans ${Object.keys(grouped).length} catégories.`,
     automationsByCategory: grouped,
     packs: {
-      quickWin: { price: '390€', automations: '1 flow optimisé', bonus: 'Voice AI + Booking' },
-      essentials: { price: '790€', automations: '3 flows + A/B tests', bonus: 'Voice AI + Booking + WhatsApp' },
-      growth: { price: '1399€', automations: '5 flows + dashboard', bonus: 'Voice AI + Booking + WhatsApp + Rappels' }
+      quickWin: { price: '390€', automations: '1 flow optimisé', includes: 'Audit express + Documentation PDF' },
+      essentials: { price: '790€', automations: '3 flows + A/B tests', includes: 'Audit complet + Support 30 jours' },
+      growth: { price: '1399€', automations: '5 flows + dashboard', includes: 'Segmentation RFM + Support 60 jours' }
     },
     retainers: {
       maintenance: { price: '290€/mois', hours: '3h' },
       optimization: { price: '490€/mois', hours: '5h' }
+    },
+    voiceAI: {
+      note: 'Services Voice AI disponibles via notre filiale spécialisée',
+      redirect: 'VocalIA.ma',
+      services: 'Widget vocal web, Téléphonie IA, Assistant 24/7'
+    },
+    _meta: {
+      version: '3.0.0',
+      note: 'Voice AI retiré des packs, redirection VocalIA.ma'
     }
   };
 

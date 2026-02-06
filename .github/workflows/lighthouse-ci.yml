@@ -1,0 +1,110 @@
+# 3A Automation - Lighthouse CI
+# Version: 1.0 | Date: 2026-02-06
+#
+# Runs Lighthouse audits on key pages after deployment
+# Reports scores in PR comments and job summary
+#
+# Triggers:
+# - After deploy-website workflow completes
+# - Manual dispatch
+
+name: Lighthouse CI
+
+on:
+  workflow_run:
+    workflows: ["Deploy Website"]
+    types: [completed]
+
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    name: Lighthouse Audit
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
+
+      - name: Run Lighthouse on FR Homepage
+        run: |
+          lhci collect \
+            --url="https://3a-automation.com/" \
+            --numberOfRuns=3 \
+            --settings.onlyCategories="performance,accessibility,best-practices,seo" \
+            --settings.throttling.cpuSlowdownMultiplier=2
+        continue-on-error: true
+
+      - name: Run Lighthouse on EN Homepage
+        run: |
+          lhci collect \
+            --url="https://3a-automation.com/en/" \
+            --numberOfRuns=3 \
+            --settings.onlyCategories="performance,accessibility,best-practices,seo" \
+            --settings.throttling.cpuSlowdownMultiplier=2
+        continue-on-error: true
+
+      - name: Run Lighthouse on Pricing
+        run: |
+          lhci collect \
+            --url="https://3a-automation.com/pricing.html" \
+            --numberOfRuns=1 \
+            --settings.onlyCategories="performance,accessibility,best-practices,seo"
+        continue-on-error: true
+
+      - name: Run Lighthouse on AR Homepage
+        run: |
+          lhci collect \
+            --url="https://3a-automation.com/ar/" \
+            --numberOfRuns=1 \
+            --settings.onlyCategories="performance,accessibility,best-practices,seo"
+        continue-on-error: true
+
+      - name: Assert Minimum Scores
+        run: |
+          lhci assert \
+            --preset="lighthouse:recommended" \
+            --assert.minScore.performance=0.70 \
+            --assert.minScore.accessibility=0.80 \
+            --assert.minScore.best-practices=0.80 \
+            --assert.minScore.seo=0.80
+        continue-on-error: true
+
+      - name: Generate Report Summary
+        if: always()
+        run: |
+          echo "## Lighthouse CI Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Page | Performance | Accessibility | Best Practices | SEO |" >> $GITHUB_STEP_SUMMARY
+          echo "|:-----|:----------:|:------------:|:--------------:|:---:|" >> $GITHUB_STEP_SUMMARY
+
+          for report in .lighthouseci/lhr-*.json; do
+            if [ -f "$report" ]; then
+              URL=$(node -e "var r=require('./$report'); console.log(r.finalUrl || r.requestedUrl)")
+              PERF=$(node -e "var r=require('./$report'); console.log(Math.round((r.categories.performance?.score || 0) * 100))")
+              A11Y=$(node -e "var r=require('./$report'); console.log(Math.round((r.categories.accessibility?.score || 0) * 100))")
+              BP=$(node -e "var r=require('./$report'); console.log(Math.round((r.categories['best-practices']?.score || 0) * 100))")
+              SEO=$(node -e "var r=require('./$report'); console.log(Math.round((r.categories.seo?.score || 0) * 100))")
+              echo "| $URL | $PERF | $A11Y | $BP | $SEO |" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Thresholds: Performance >= 70, Accessibility >= 80, Best Practices >= 80, SEO >= 80" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Lighthouse Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 14

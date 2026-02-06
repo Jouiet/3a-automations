@@ -1,7 +1,7 @@
 {
-  "version": "2026-01-08",
-  "generated": "2026-01-08T10:28:51.102Z",
-  "count": 112,
+  "version": "2026-02-06",
+  "generated": "2026-02-06T17:40:16.801Z",
+  "count": 121,
   "categories": {
     "lead-gen": {
       "name_fr": "Lead Generation & Acquisition",
@@ -11,7 +11,7 @@
     "seo": {
       "name_fr": "SEO & Contenu",
       "name_en": "SEO & Content",
-      "count": 9
+      "count": 10
     },
     "email": {
       "name_fr": "Email Marketing (CRM)",
@@ -67,12 +67,12 @@
     "voice-ai": {
       "name_fr": "Voice AI & Téléphonie",
       "name_en": "Voice AI & Telephony",
-      "count": 4
+      "count": 6
     },
     "marketing": {
       "name_fr": "Marketing Automation",
       "name_en": "Marketing Automation",
-      "count": 1
+      "count": 2
     },
     "dropshipping": {
       "name_fr": "Dropshipping & Fournisseurs",
@@ -92,7 +92,11 @@
       "frequency_en": "Every hour",
       "benefit_fr": "+15% leads capturés",
       "benefit_en": "+15% leads captured",
-      "semantic_description": "Synchronizes lead data from Meta Ads (Facebook/Instagram) lead forms directly into Shopify customer records. Use this for Meta-based acquisition workflows."
+      "semantic_description": "Synchronizes lead data from Meta Ads (Facebook/Instagram) lead forms directly into Shopify customer records. Use this for Meta-based acquisition workflows.",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "google-ads-sync",
@@ -104,7 +108,11 @@
       "frequency_fr": "Toutes les heures",
       "frequency_en": "Every hour",
       "benefit_fr": "Zéro perte de leads",
-      "benefit_en": "Zero lead loss"
+      "benefit_en": "Zero lead loss",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "tiktok-leads-sync",
@@ -116,19 +124,27 @@
       "frequency_fr": "Toutes les heures",
       "frequency_en": "Every hour",
       "benefit_fr": "Nouvelle audience captée",
-      "benefit_en": "New audience captured"
+      "benefit_en": "New audience captured",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "lead-scoring",
       "name_fr": "Qualification & Scoring",
       "name_en": "Lead Qualification & Scoring",
       "category": "lead-gen",
-      "type": "deprecated-workflow",
-      "script": null,
+      "type": "agentic-workflow",
+      "script": "agency/core/lead-scoring-agentic.cjs",
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
       "benefit_fr": "Focus sur leads chauds",
-      "benefit_en": "Focus on hot leads"
+      "benefit_en": "Focus on hot leads",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "hot-warm-cold",
@@ -140,7 +156,11 @@
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
       "benefit_fr": "Meilleur taux conversion",
-      "benefit_en": "Better conversion rate"
+      "benefit_en": "Better conversion rate",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "data-enrichment",
@@ -152,7 +172,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Leads B2B qualifiés",
-      "benefit_en": "Qualified B2B leads"
+      "benefit_en": "Qualified B2B leads",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "geo-segmentation",
@@ -164,7 +188,11 @@
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
       "benefit_fr": "Messages localisés",
-      "benefit_en": "Localized messages"
+      "benefit_en": "Localized messages",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "google-forms-crm",
@@ -176,19 +204,28 @@
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
       "benefit_fr": "Capture formulaires",
-      "benefit_en": "Form capture"
+      "benefit_en": "Form capture",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "typeform-klaviyo",
       "name_fr": "Typeform → Klaviyo",
       "name_en": "Typeform → Klaviyo",
       "category": "lead-gen",
-      "type": "deprecated-workflow",
-      "script": null,
+      "type": "agentic-workflow",
+      "script": "agency/core/lead-scoring-agentic.cjs",
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
       "benefit_fr": "Quiz → Email list",
-      "benefit_en": "Quiz → Email list"
+      "benefit_en": "Quiz → Email list",
+      "note": "Manual integration via lead-scoring-agentic.cjs",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "sourcing-google-maps",
@@ -201,7 +238,11 @@
       "frequency_en": "On demand",
       "benefit_fr": "Leads locaux ciblés",
       "benefit_en": "Targeted local leads",
-      "semantic_description": "Scrapes local business data from Google Maps based on query and location. Use this for local B2B lead generation or competitive research in a specific area."
+      "semantic_description": "Scrapes local business data from Google Maps based on query and location. Use this for local B2B lead generation or competitive research in a specific area.",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "sourcing-linkedin",
@@ -214,7 +255,11 @@
       "frequency_en": "On demand",
       "benefit_fr": "Base prospects B2B",
       "benefit_en": "B2B prospect database",
-      "semantic_description": "Extracts professional profiles from LinkedIn based on search criteria. Essential for B2B outreach and hiring intelligence."
+      "semantic_description": "Extracts professional profiles from LinkedIn based on search criteria. Essential for B2B outreach and hiring intelligence.",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "veille-recrutement",
@@ -226,7 +271,11 @@
       "frequency_fr": "Hebdo",
       "frequency_en": "Weekly",
       "benefit_fr": "Timing parfait",
-      "benefit_en": "Perfect timing"
+      "benefit_en": "Perfect timing",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "alt-text-fix",
@@ -238,7 +287,11 @@
       "frequency_fr": "Batch",
       "frequency_en": "Batch",
       "benefit_fr": "+20% trafic image Google",
-      "benefit_en": "+20% Google image traffic"
+      "benefit_en": "+20% Google image traffic",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "auto-meta-tags",
@@ -250,7 +303,11 @@
       "frequency_fr": "Batch",
       "frequency_en": "Batch",
       "benefit_fr": "Meilleur CTR Google",
-      "benefit_en": "Better Google CTR"
+      "benefit_en": "Better Google CTR",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "image-sitemap",
@@ -262,7 +319,11 @@
       "frequency_fr": "Hebdo",
       "frequency_en": "Weekly",
       "benefit_fr": "Indexation complète",
-      "benefit_en": "Full indexing"
+      "benefit_en": "Full indexing",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "schema-products",
@@ -274,7 +335,11 @@
       "frequency_fr": "Batch",
       "frequency_en": "Batch",
       "benefit_fr": "Meilleure visibilité SERP",
-      "benefit_en": "Better SERP visibility"
+      "benefit_en": "Better SERP visibility",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "internal-linking",
@@ -286,7 +351,11 @@
       "frequency_fr": "Batch",
       "frequency_en": "Batch",
       "benefit_fr": "Meilleur maillage SEO",
-      "benefit_en": "Better SEO structure"
+      "benefit_en": "Better SEO structure",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "llms-txt",
@@ -298,7 +367,11 @@
       "frequency_fr": "Une fois",
       "frequency_en": "One-time",
       "benefit_fr": "Visibilité IA",
-      "benefit_en": "AI visibility"
+      "benefit_en": "AI visibility",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "welcome-series",
@@ -310,7 +383,12 @@
       "frequency_fr": "5 emails",
       "frequency_en": "5 emails",
       "benefit_fr": "Open: 40-50%",
-      "benefit_en": "Open: 40-50%"
+      "benefit_en": "Open: 40-50%",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "abandoned-cart",
@@ -322,7 +400,12 @@
       "frequency_fr": "3 emails",
       "frequency_en": "3 emails",
       "benefit_fr": "Recovery: 10-15%",
-      "benefit_en": "Recovery: 10-15%"
+      "benefit_en": "Recovery: 10-15%",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "browse-abandonment",
@@ -334,7 +417,12 @@
       "frequency_fr": "2 emails",
       "frequency_en": "2 emails",
       "benefit_fr": "+5% conversions",
-      "benefit_en": "+5% conversions"
+      "benefit_en": "+5% conversions",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "post-purchase",
@@ -346,7 +434,12 @@
       "frequency_fr": "5 emails",
       "frequency_en": "5 emails",
       "benefit_fr": "Repeat: 25-35%",
-      "benefit_en": "Repeat: 25-35%"
+      "benefit_en": "Repeat: 25-35%",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "win-back",
@@ -358,7 +451,12 @@
       "frequency_fr": "3 emails",
       "frequency_en": "3 emails",
       "benefit_fr": "Réactivation: 5-10%",
-      "benefit_en": "Reactivation: 5-10%"
+      "benefit_en": "Reactivation: 5-10%",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "vip-tiers",
@@ -370,7 +468,12 @@
       "frequency_fr": "4 segments",
       "frequency_en": "4 segments",
       "benefit_fr": "LTV +30%",
-      "benefit_en": "LTV +30%"
+      "benefit_en": "LTV +30%",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "flows-audit",
@@ -382,7 +485,12 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Diagnostic email",
-      "benefit_en": "Email diagnostic"
+      "benefit_en": "Email diagnostic",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "ab-sender-rotation",
@@ -394,7 +502,12 @@
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
       "benefit_fr": "+5-10% opens",
-      "benefit_en": "+5-10% opens"
+      "benefit_en": "+5-10% opens",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "product-enrichment",
@@ -406,7 +519,11 @@
       "frequency_fr": "50 produits/batch",
       "frequency_en": "50 products/batch",
       "benefit_fr": "Meilleur SEO produits",
-      "benefit_en": "Better product SEO"
+      "benefit_en": "Better product SEO",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "shopping-attributes",
@@ -418,7 +535,11 @@
       "frequency_fr": "100 produits/batch",
       "frequency_en": "100 products/batch",
       "benefit_fr": "Approbation GMC",
-      "benefit_en": "GMC approval"
+      "benefit_en": "GMC approval",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "collection-management",
@@ -430,7 +551,11 @@
       "frequency_fr": "250 produits/batch",
       "frequency_en": "250 products/batch",
       "benefit_fr": "Organisation auto",
-      "benefit_en": "Auto organization"
+      "benefit_en": "Auto organization",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "legal-pages",
@@ -442,7 +567,11 @@
       "frequency_fr": "Une fois",
       "frequency_en": "One-time",
       "benefit_fr": "Conformité légale",
-      "benefit_en": "Legal compliance"
+      "benefit_en": "Legal compliance",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "gtm-installation",
@@ -454,7 +583,11 @@
       "frequency_fr": "Une fois",
       "frequency_en": "One-time",
       "benefit_fr": "Tracking complet",
-      "benefit_en": "Complete tracking"
+      "benefit_en": "Complete tracking",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "loyalty-webhooks",
@@ -466,19 +599,27 @@
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
       "benefit_fr": "Fidélisation auto",
-      "benefit_en": "Auto loyalty"
+      "benefit_en": "Auto loyalty",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "store-audit",
       "name_fr": "Audit Store Complet",
       "name_en": "Complete Store Audit",
       "category": "shopify",
-      "type": "script",
-      "script": "templates/shopify/audit-shopify-complete.cjs",
+      "type": "agentic-workflow",
+      "script": "agency/core/store-audit-agentic.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Diagnostic complet",
-      "benefit_en": "Full diagnostic"
+      "benefit_en": "Full diagnostic",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "facebook-audiences",
@@ -490,7 +631,11 @@
       "frequency_fr": "Hebdo",
       "frequency_en": "Weekly",
       "benefit_fr": "Retargeting précis",
-      "benefit_en": "Precise retargeting"
+      "benefit_en": "Precise retargeting",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "google-taxonomy",
@@ -502,7 +647,11 @@
       "frequency_fr": "Une fois",
       "frequency_en": "One-time",
       "benefit_fr": "GMC compliant",
-      "benefit_en": "GMC compliant"
+      "benefit_en": "GMC compliant",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "looker-dashboard",
@@ -514,7 +663,11 @@
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
       "benefit_fr": "Vision 360° business",
-      "benefit_en": "360° business view"
+      "benefit_en": "360° business view",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "ga4-source-report",
@@ -526,7 +679,11 @@
       "frequency_fr": "Hebdo",
       "frequency_en": "Weekly",
       "benefit_fr": "Optimisation budget ads",
-      "benefit_en": "Ads budget optimization"
+      "benefit_en": "Ads budget optimization",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "system-audit",
@@ -538,7 +695,11 @@
       "frequency_fr": "Mensuel",
       "frequency_en": "Monthly",
       "benefit_fr": "Identification gaps",
-      "benefit_en": "Gap identification"
+      "benefit_en": "Gap identification",
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "low-stock-alert",
@@ -550,7 +711,11 @@
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
       "benefit_fr": "Zéro rupture stock",
-      "benefit_en": "Zero stockouts"
+      "benefit_en": "Zero stockouts",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "margin-projections",
@@ -562,7 +727,11 @@
       "frequency_fr": "Mensuel",
       "frequency_en": "Monthly",
       "benefit_fr": "Vraie rentabilité",
-      "benefit_en": "True profitability"
+      "benefit_en": "True profitability",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "inventory-analysis",
@@ -574,7 +743,11 @@
       "frequency_fr": "Hebdo",
       "frequency_en": "Weekly",
       "benefit_fr": "Cash flow optimisé",
-      "benefit_en": "Optimized cash flow"
+      "benefit_en": "Optimized cash flow",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "bnpl-tracking",
@@ -586,7 +759,11 @@
       "frequency_fr": "Hebdo",
       "frequency_en": "Weekly",
       "benefit_fr": "Optimisation checkout",
-      "benefit_en": "Checkout optimization"
+      "benefit_en": "Checkout optimization",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "pixel-verification",
@@ -598,7 +775,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Tracking fiable",
-      "benefit_en": "Reliable tracking"
+      "benefit_en": "Reliable tracking",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "promo-video",
@@ -610,7 +791,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Contenu social ready",
-      "benefit_en": "Social ready content"
+      "benefit_en": "Social ready content",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "cart-recovery-video",
@@ -622,7 +807,12 @@
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
       "benefit_fr": "+5% recovery rate",
-      "benefit_en": "+5% recovery rate"
+      "benefit_en": "+5% recovery rate",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "portrait-video",
@@ -634,7 +824,13 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Multi-plateforme",
-      "benefit_en": "Multi-platform"
+      "benefit_en": "Multi-platform",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "shopping-feed",
@@ -646,7 +842,11 @@
       "frequency_fr": "Quotidien",
       "frequency_en": "Daily",
       "benefit_fr": "Produits toujours à jour",
-      "benefit_en": "Always up-to-date products"
+      "benefit_en": "Always up-to-date products",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "gmc-diagnostic",
@@ -658,14 +858,18 @@
       "frequency_fr": "Hebdo",
       "frequency_en": "Weekly",
       "benefit_fr": "Approbation produits",
-      "benefit_en": "Product approval"
+      "benefit_en": "Product approval",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "auto-blog",
       "name_fr": "Article Blog + Distribution Multi-Canal",
       "name_en": "Auto Blog + Multi-Channel Distribution",
       "category": "content",
-      "type": "deprecated-workflow",
+      "type": "script",
       "script": "agency/core/blog-generator-resilient.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
@@ -677,19 +881,28 @@
         "linkedin"
       ],
       "description_fr": "Génère article SEO via Claude AI et publie simultanément sur site web + Facebook + LinkedIn",
-      "description_en": "Generates SEO article via Claude AI and publishes simultaneously to website + Facebook + LinkedIn"
+      "description_en": "Generates SEO article via Claude AI and publishes simultaneously to website + Facebook + LinkedIn",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
-      "id": "deprecated-workflow",
-      "name_fr": "Workflow Déprécié",
-      "name_en": "Deprecated Workflow",
+      "id": "custom-workflow-deprecated",
+      "name_fr": "Workflow Personnalisé (Obsolète)",
+      "name_en": "Custom Workflow (Deprecated)",
       "category": "content",
-      "type": "deprecated-workflow",
+      "type": "deprecated",
       "script": null,
-      "frequency_fr": "Personnalisé",
-      "frequency_en": "Custom",
-      "benefit_fr": "Automation sur-mesure",
-      "benefit_en": "Tailor-made automation"
+      "frequency_fr": "N/A",
+      "frequency_en": "N/A",
+      "benefit_fr": "Remplacé par scripts natifs",
+      "benefit_en": "Replaced by native scripts",
+      "note": "Deprecated - replaced by native Node.js scripts",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "google-apps-script-booking",
@@ -701,7 +914,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Booking + annulation + report automatisé",
-      "benefit_en": "Booking + cancel + reschedule automation"
+      "benefit_en": "Booking + cancel + reschedule automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "google-calendar-booking",
@@ -713,7 +930,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "analyze-ga4-conversion-source",
@@ -725,7 +946,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "geo-segment-generic",
@@ -737,7 +962,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "audit-klaviyo-flows-v2",
@@ -749,7 +978,12 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "import-facebook-lead-ads",
@@ -761,7 +995,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "segment-leads",
@@ -773,7 +1011,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "generate-tags-csv",
@@ -785,7 +1027,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "import-alt-text-api",
@@ -797,7 +1043,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "upload-llms",
@@ -809,19 +1059,27 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "audit-shopify-store",
       "name_fr": "Audit Shopify Store",
       "name_en": "Audit Shopify Store",
       "category": "shopify",
-      "type": "script",
-      "script": "templates/shopify/audit-shopify-store.cjs",
+      "type": "agentic-workflow",
+      "script": "agency/core/store-audit-agentic.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "create-warehouse-metafield",
@@ -833,7 +1091,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "import-taxonomy-metafield",
@@ -845,7 +1107,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "parse-warehouse-csv",
@@ -857,7 +1123,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "enable-apify-schedulers",
@@ -869,7 +1139,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "generate-all-promo-videos",
@@ -881,7 +1155,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "cinematic-director",
@@ -894,7 +1172,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Vidéos cinématiques AI (Gemini 3 Pro + Imagen 4 + Veo 3.1)",
-      "benefit_en": "AI cinematic videos (Gemini 3 Pro + Imagen 4 + Veo 3.1)"
+      "benefit_en": "AI cinematic videos (Gemini 3 Pro + Imagen 4 + Veo 3.1)",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "competitor-clone",
@@ -907,7 +1189,13 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Clone pubs concurrents (analyse + script + production multi-scènes)",
-      "benefit_en": "Clone competitor ads (analysis + script + multi-scene production)"
+      "benefit_en": "Clone competitor ads (analysis + script + multi-scene production)",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "ecommerce-factory",
@@ -920,7 +1208,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Ads multi-ratio (Google Ads 1.91:1, Social 1:1, TikTok 9:16)",
-      "benefit_en": "Multi-ratio ads (Google Ads 1.91:1, Social 1:1, TikTok 9:16)"
+      "benefit_en": "Multi-ratio ads (Google Ads 1.91:1, Social 1:1, TikTok 9:16)",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "asset-factory",
@@ -933,7 +1225,13 @@
       "frequency_fr": "Core engine",
       "frequency_en": "Core engine",
       "benefit_fr": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
-      "benefit_en": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1"
+      "benefit_en": "Vertex AI (Imagen 4, Veo 3.1) + xAI Grok 4.1",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "ai-avatar-generator",
@@ -946,7 +1244,13 @@
       "benefit_fr": "Avatar IA consistent multi-scenes (Imagen 3 + Gemini API)",
       "benefit_en": "Consistent AI avatar multi-scenes (Imagen 3 + Gemini API)",
       "external_url": "https://cinematicads.studio",
-      "note": "Redirects to CinematicAds partner platform"
+      "note": "Redirects to CinematicAds partner platform",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "ai-talking-video",
@@ -959,31 +1263,45 @@
       "benefit_fr": "Video lip-sync IA (ElevenLabs + fal.ai Kling)",
       "benefit_en": "AI lip-sync video (ElevenLabs + fal.ai Kling)",
       "external_url": "https://cinematicads.studio",
-      "note": "Redirects to CinematicAds partner platform"
+      "note": "Redirects to CinematicAds partner platform",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "whatsapp-booking-confirmation",
       "name_fr": "Confirmation WhatsApp RDV",
       "name_en": "WhatsApp Booking Confirmation",
       "category": "whatsapp",
-      "type": "deprecated-workflow",
+      "type": "script",
       "script": "agency/core/whatsapp-booking-notifications.cjs",
       "frequency_fr": "À chaque réservation",
       "frequency_en": "On each booking",
       "benefit_fr": "98% taux d'ouverture vs 20% SMS",
-      "benefit_en": "98% open rate vs 20% SMS"
+      "benefit_en": "98% open rate vs 20% SMS",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "whatsapp-booking-reminders",
       "name_fr": "Rappels WhatsApp 24h + 1h",
       "name_en": "WhatsApp Reminders 24h + 1h",
       "category": "whatsapp",
-      "type": "deprecated-workflow",
+      "type": "script",
       "script": "agency/core/whatsapp-booking-notifications.cjs",
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
       "benefit_fr": "-30% no-shows",
-      "benefit_en": "-30% no-shows"
+      "benefit_en": "-30% no-shows",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "voice-ai-web-widget",
@@ -995,7 +1313,14 @@
       "frequency_fr": "24/7 disponible",
       "frequency_en": "24/7 available",
       "benefit_fr": "Qualification leads + RDV auto par la voix",
-      "benefit_en": "Lead qualification + auto booking by voice"
+      "benefit_en": "Lead qualification + auto booking by voice",
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning",
+        "Interactive Autonomy"
+      ]
     },
     {
       "id": "grok-voice-telephony",
@@ -1009,7 +1334,14 @@
       "benefit_fr": "Reservation par telephone automatique",
       "benefit_en": "Automatic phone booking",
       "replaces": "legacy:Grok Voice Telephony (latence 4x meilleure)",
-      "port": 3009
+      "port": 3009,
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning",
+        "Interactive Autonomy"
+      ]
     },
     {
       "id": "linkedin-lead-scraper",
@@ -1023,7 +1355,12 @@
       "benefit_fr": "+400 leads/jour avec scoring AI",
       "benefit_en": "+400 leads/day with AI scoring",
       "replaces": "legacy:LinkedIn Lead Scraper (used $env → FAILED)",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "newsletter-automation",
@@ -1037,7 +1374,12 @@
       "benefit_fr": "Newsletter AI générée automatiquement",
       "benefit_en": "AI-generated newsletter automatically",
       "replaces": "legacy:Newsletter 3A Automation (used $env → FAILED + INACTIVE)",
-      "status": "ready-blocked-api-credits"
+      "status": "ready-blocked-api-credits",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "email-outreach-sequence",
@@ -1051,7 +1393,13 @@
       "benefit_fr": "Séquence 3 emails personnalisée",
       "benefit_en": "3-email personalized sequence",
       "replaces": "legacy:Email Outreach Sequence (used $env → FAILED)",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "linkedin-to-klaviyo-pipeline",
@@ -1072,7 +1420,11 @@
         "hr",
         "other"
       ],
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "google-maps-to-klaviyo-pipeline",
@@ -1093,7 +1445,11 @@
         "hr",
         "other"
       ],
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "b2b-email-templates-module",
@@ -1113,7 +1469,13 @@
         "validateBranding",
         "personalizeEmail"
       ],
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "voice-widget-templates",
@@ -1136,7 +1498,14 @@
         "healthcare",
         "realestate"
       ],
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning",
+        "Interactive Autonomy"
+      ]
     },
     {
       "id": "blog-generator-resilient",
@@ -1151,7 +1520,13 @@
       "benefit_en": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X",
       "port": 3003,
       "replaces": "legacy:Blog Article Generator",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "podcast-generator-resilient",
@@ -1177,7 +1552,13 @@
         "tts": "ElevenLabs→Gemini TTS→fal.ai MiniMax"
       },
       "superiority": "NotebookLM: 2 generic voices, no API, max 30min. This: unlimited, API, customizable",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "grok-voice-realtime",
@@ -1191,7 +1572,14 @@
       "benefit_fr": "Audio natif $0.05/min + fallback Gemini TTS",
       "benefit_en": "Native audio $0.05/min + Gemini TTS fallback",
       "port": 3007,
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning",
+        "Interactive Autonomy"
+      ]
     },
     {
       "id": "whatsapp-booking-notifications",
@@ -1206,7 +1594,11 @@
       "benefit_en": "Confirmation + 24h/1h reminders",
       "port": 3008,
       "replaces": "legacy:WhatsApp Confirmation + WhatsApp Reminders",
-      "status": "awaiting-credentials"
+      "status": "awaiting-credentials",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "hubspot-b2b-crm",
@@ -1227,13 +1619,11 @@
         "rate-limit-monitoring",
         "jitter"
       ],
-      "capabilities": {
-        "contacts": "CRUD + batch",
-        "companies": "CRUD + batch",
-        "deals": "CRUD",
-        "associations": "full"
-      },
-      "status": "tested-ok"
+      "capabilities": [
+        "Data Interoperability"
+      ],
+      "status": "tested-ok",
+      "agentic_level": 1
     },
     {
       "id": "omnisend-b2c-ecommerce",
@@ -1254,16 +1644,13 @@
         "exponential-backoff",
         "jitter"
       ],
-      "capabilities": {
-        "contacts": "CRUD",
-        "events": "send (with eventID dedup)",
-        "products": "CRUD",
-        "carts": "CRUD (abandoned cart)",
-        "automations": "READ-ONLY",
-        "campaigns": "READ-ONLY"
-      },
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ],
       "api_limitation": "automations=READ-ONLY (create via UI)",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 2
     },
     {
       "id": "email-personalization-resilient",
@@ -1285,7 +1672,13 @@
       ],
       "providers": "Grok 4.1→OpenAI GPT-5.2→Gemini 3→Claude Sonnet 4→Static",
       "benchmark": "+69% orders vs single email (Klaviyo)",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "sms-automation-resilient",
@@ -1317,7 +1710,12 @@
         "sms_back_in_stock"
       ],
       "benchmark": "98% open rate, +15-25% cart recovery",
-      "status": "awaiting-credentials"
+      "status": "awaiting-credentials",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "churn-prediction-resilient",
@@ -1353,7 +1751,13 @@
         "Lost"
       ],
       "benchmark": "-25% churn rate, 5x retention ROI",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 3,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning"
+      ]
     },
     {
       "id": "review-request-automation",
@@ -1383,7 +1787,12 @@
       },
       "alert_threshold": "3 stars (escalate to support)",
       "benchmark": "+270% reviews (Yotpo benchmark)",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "at-risk-customer-flow",
@@ -1428,7 +1837,11 @@
       "vip_call_threshold": "churnScore >= 80%",
       "depends_on": "churn-prediction-resilient",
       "benchmark": "+260% conversion at-risk (industry)",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "price-drop-alerts",
@@ -1457,7 +1870,11 @@
         "flashSalePercent": 30
       },
       "benchmark": "8.8% conversion (Barilliance 2024)",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "replenishment-reminder",
@@ -1492,7 +1909,11 @@
         "petfood": 21
       },
       "benchmark": "+90% repeat purchase (Shopify 2024)",
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "cjdropshipping-automation",
@@ -1519,7 +1940,12 @@
         "CJ_API_KEY",
         "CJ_EMAIL"
       ],
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "bigbuy-supplier-sync",
@@ -1545,7 +1971,11 @@
       "requirements": [
         "BIGBUY_API_KEY"
       ],
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "dropshipping-order-flow",
@@ -1578,7 +2008,11 @@
         "BIGBUY_API_KEY",
         "SHOPIFY_ACCESS_TOKEN"
       ],
-      "status": "tested-ok"
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "agency-env-check",
@@ -1588,7 +2022,11 @@
       "script": "agency/core/check-env-status.cjs",
       "frequency": "daily",
       "benefit": "Ensures all agency APIs and keys are valid",
-      "semantic_description": "Checks the status of environment variables and core infrastructure connectivity."
+      "semantic_description": "Checks the status of environment variables and core infrastructure connectivity.",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "agency-api-test",
@@ -1598,7 +2036,11 @@
       "script": "generic/test-all-apis.cjs",
       "frequency": "manual",
       "benefit": "Deep diagnostic of all external integrations",
-      "semantic_description": "Performs a full connectivity test across Shopify, Klaviyo, Apify, and Meta APIs."
+      "semantic_description": "Performs a full connectivity test across Shopify, Klaviyo, Apify, and Meta APIs.",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "index",
@@ -1610,7 +2052,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "content",
@@ -1622,7 +2068,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "popup",
@@ -1634,7 +2084,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "markets",
@@ -1646,7 +2100,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "lead-gen-scheduler",
@@ -1658,7 +2116,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "index-1",
@@ -1670,7 +2132,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "search",
@@ -1682,7 +2148,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "invoice-generator",
@@ -1694,7 +2164,14 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning",
+        "Interactive Autonomy"
+      ]
     },
     {
       "id": "config-3a-automation",
@@ -1706,7 +2183,12 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution"
+      ]
     },
     {
       "id": "config-cinematicads",
@@ -1718,7 +2200,11 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     },
     {
       "id": "config.example",
@@ -1730,7 +2216,217 @@
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
       "benefit_fr": "Automatisation efficace",
-      "benefit_en": "Efficient automation"
+      "benefit_en": "Efficient automation",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
+    },
+    {
+      "id": "lead-scoring-agentic",
+      "name": "Lead Scoring - Agentic (Level 3)",
+      "category": "Lead Generation & Acquisition",
+      "type": "script",
+      "script": "agency/core/lead-scoring-agentic.cjs",
+      "scriptPath": "agency/core/lead-scoring-agentic.cjs",
+      "frequency": "on-demand",
+      "benefits": [
+        "AI critique of scoring accuracy",
+        "Multi-provider fallback",
+        "+10% lead quality"
+      ],
+      "platforms": [
+        "Klaviyo",
+        "HubSpot"
+      ],
+      "agentic": true,
+      "agenticLevel": 3,
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
+    },
+    {
+      "id": "flows-audit-agentic",
+      "name": "Flows Audit - Agentic (Level 3)",
+      "category": "Email Marketing & Klaviyo",
+      "type": "script",
+      "script": "agency/core/flows-audit-agentic.cjs",
+      "scriptPath": "agency/core/flows-audit-agentic.cjs",
+      "frequency": "weekly",
+      "benefits": [
+        "AI-prioritized fix list",
+        "Revenue impact estimates",
+        "-50% audit time"
+      ],
+      "platforms": [
+        "Klaviyo",
+        "Shopify"
+      ],
+      "agentic": true,
+      "agenticLevel": 3,
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
+    },
+    {
+      "id": "product-enrichment-agentic",
+      "name": "Product Enrichment - Agentic (Level 3)",
+      "category": "SEO & Content",
+      "type": "script",
+      "script": "agency/core/product-enrichment-agentic.cjs",
+      "scriptPath": "agency/core/product-enrichment-agentic.cjs",
+      "frequency": "daily",
+      "benefits": [
+        "SEO quality scoring (0-10)",
+        "Auto-publish if ≥8",
+        "+20% organic traffic"
+      ],
+      "platforms": [
+        "Shopify"
+      ],
+      "agentic": true,
+      "agenticLevel": 3,
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
+    },
+    {
+      "id": "ga4-budget-optimizer-agentic",
+      "name": "GA4 Budget Optimizer - Agentic (Level 4)",
+      "category": "Analytics & Reporting",
+      "type": "script",
+      "script": "agency/core/ga4-budget-optimizer-agentic.cjs",
+      "scriptPath": "agency/core/ga4-budget-optimizer-agentic.cjs",
+      "frequency": "weekly",
+      "benefits": [
+        "AI budget reallocation",
+        "ROI analysis per source",
+        "+15% ROAS"
+      ],
+      "platforms": [
+        "GA4",
+        "Google Ads",
+        "Meta Ads"
+      ],
+      "agentic": true,
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Autonomous Execution"
+      ]
+    },
+    {
+      "id": "store-audit-agentic",
+      "name": "Store Audit - Agentic (Level 3)",
+      "category": "Shopify Admin & Operations",
+      "type": "script",
+      "script": "agency/core/store-audit-agentic.cjs",
+      "scriptPath": "agency/core/store-audit-agentic.cjs",
+      "frequency": "monthly",
+      "benefits": [
+        "Conversion impact prediction",
+        "A/B test simulation",
+        "+10% CVR"
+      ],
+      "platforms": [
+        "Shopify"
+      ],
+      "agentic": true,
+      "agenticLevel": 3,
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
+    },
+    {
+      "id": "content-strategist-agentic",
+      "name_fr": "Stratège de Contenu IA",
+      "name_en": "AI Content Strategist",
+      "category": "seo",
+      "type": "script",
+      "script": "agency/core/content-strategist-agentic.cjs",
+      "frequency_fr": "Hebdo",
+      "frequency_en": "Weekly",
+      "benefit_fr": "Identification des opportunités SEO",
+      "benefit_en": "SEO opportunity identification",
+      "agentic_level": 4,
+      "agenticLevel": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Reasoning",
+        "Agent Orchestration",
+        "Autonomous Execution"
+      ]
+    },
+    {
+      "id": "harvest-market-trends",
+      "name_fr": "Récolte Tendances Marché (RSS)",
+      "name_en": "Market Trends Harvesting (RSS)",
+      "category": "marketing",
+      "type": "script",
+      "script": "agency/core/trends-discovery-rss.cjs",
+      "frequency_fr": "Quotidien",
+      "frequency_en": "Daily",
+      "benefit_fr": "Discovery trends sans blocage",
+      "benefit_en": "Unblocked trends discovery",
+      "agentic_level": 2,
+      "capabilities": [
+        "Data Interoperability"
+      ]
+    },
+    {
+      "id": "voice-agent-b2b",
+      "name_fr": "Agent Vocal B2B (Sales + Support)",
+      "name_en": "B2B Voice Agent (Sales + Support)",
+      "category": "voice-ai",
+      "type": "script",
+      "script": "agency/core/voice-agent-b2b.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "24/7 disponible",
+      "frequency_en": "24/7 available",
+      "benefit_fr": "Ventes + Support automatisés pour agence B2B",
+      "benefit_en": "Automated Sales + Support for B2B agency",
+      "features": [
+        "RAG Knowledge Base (129 chunks)",
+        "TF-IDF search (598 terms)",
+        "Multi-AI fallback",
+        "Service pack recommendations"
+      ],
+      "status": "tested-ok",
+      "agentic_level": 4,
+      "capabilities": [
+        "Data Interoperability",
+        "Conditional Execution",
+        "LLM Reasoning",
+        "Interactive Autonomy"
+      ]
+    },
+    {
+      "id": "knowledge-base-services",
+      "name_fr": "Knowledge Base Services (TF-IDF)",
+      "name_en": "Service Knowledge Base (TF-IDF)",
+      "category": "voice-ai",
+      "type": "script",
+      "script": "agency/core/knowledge-base-services.cjs",
+      "version": "1.0.0",
+      "frequency_fr": "Build on demand",
+      "frequency_en": "Build on demand",
+      "benefit_fr": "Index 119 automations pour Voice AI",
+      "benefit_en": "Index 119 automations for Voice AI",
+      "features": [
+        "TF-IDF indexing",
+        "129 searchable chunks",
+        "598 vocabulary terms",
+        "Cosine similarity search"
+      ],
+      "status": "tested-ok",
+      "agentic_level": 1,
+      "capabilities": [
+        "Data Interoperability"
+      ]
     }
   ]
 }

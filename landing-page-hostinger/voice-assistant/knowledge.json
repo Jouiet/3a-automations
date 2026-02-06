@@ -1,9 +1,9 @@
 {
-  "version": "2026-01-28",
-  "generated": "2026-01-28T21:30:00.000Z",
+  "version": "2026-02-06",
+  "generated": "2026-02-06T17:40:16.801Z",
   "totalAutomations": 121,
   "categories": 15,
-  "summary": "3A Automation dispose de 121 automatisations vérifiées pour e-commerce et PME.",
+  "summary": "3A Automation dispose de 121 automatisations dans 15 catégories.",
   "automationsByCategory": {
     "Lead Generation & Acquisition": [
       "Sync Meta Leads → Shopify",
@@ -29,7 +29,7 @@
       "Pipeline LinkedIn → Klaviyo (B2B)",
       "Pipeline Google Maps → Klaviyo (Local B2B)",
       "Module Templates Email B2B",
-      "HubSpot B2B CRM Integration",
+      "HubSpot B2B CRM Integration v1.1.0",
       "Lead Gen Scheduler",
       "Invoice Generator"
     ],
@@ -42,7 +42,8 @@
       "llms.txt (AEO)",
       "Generate Tags Csv",
       "Import Alt Text Api",
-      "Upload Llms"
+      "Upload Llms",
+      "Stratège de Contenu IA"
     ],
     "Email Marketing (CRM)": [
       "Welcome Series",
@@ -54,8 +55,8 @@
       "Audit Flows Complet",
       "Rotation A/B Sender",
       "Audit Klaviyo Flows V2",
-      "Omnisend B2C E-commerce Integration",
-      "Email Personalization Résilient"
+      "Omnisend B2C E-commerce Integration v1.1.0",
+      "Email Personalization Résilient (4 AI + 3-Email Cart Series)"
     ],
     "Shopify Admin": [
       "Enrichissement Produits",
@@ -71,7 +72,7 @@
       "Create Warehouse Metafield",
       "Import Taxonomy Metafield",
       "Parse Warehouse Csv",
-      "Demande d'Avis Automatisée"
+      "Demande d'Avis Automatisée (Shopify → Klaviyo)"
     ],
     "Analytics & Reporting": [
       "Dashboard Looker Studio",
@@ -91,14 +92,25 @@
       "Feed Google Shopping",
       "Diagnostic GMC",
       "Article Blog + Distribution Multi-Canal",
-      "Blog Generator Résilient",
-      "Podcast Generator"
+      "Workflow Personnalisé (Obsolète)",
+      "Generate All Promo Videos",
+      "Blog Generator Résilient (3 AI + 3 Social)",
+      "Podcast Generator (Blog → Audio)",
+      "Index",
+      "Content",
+      "Popup",
+      "Markets",
+      "Index",
+      "Search",
+      "Config 3a Automation",
+      "Config Cinematicads",
+      "Config.Example"
     ],
     "CinematicAds AI": [
       "CinematicAds Director",
       "Competitor Clone AI",
       "E-commerce Ads Factory",
-      "Asset Factory"
+      "Asset Factory (Dual AI)"
     ],
     "AI Avatar & Influencer": [
       "AI Avatar Generator",
@@ -109,22 +121,40 @@
       "Rappels WhatsApp 24h + 1h",
       "WhatsApp Booking Notifications"
     ],
+    "Voice AI & Téléphonie": [
+      "Assistant Vocal IA Web",
+      "Assistant Telephonique IA",
+      "Templates Voice Widget (8 industries)",
+      "Grok Voice Realtime (WebSocket + TTS)",
+      "Agent Vocal B2B (Sales + Support)",
+      "Knowledge Base Services (TF-IDF)"
+    ],
     "Marketing Automation": [
-      "Newsletter Automation"
+      "Newsletter Automation",
+      "Récolte Tendances Marché (RSS)"
     ],
     "SMS Marketing": [
-      "SMS Automation Résilient"
+      "SMS Automation Résilient (Omnisend + Twilio)"
     ],
     "Rétention & Prédiction Churn": [
-      "Prédiction Churn Résilient",
-      "Flow Client At-Risk",
-      "Alertes Price Drop",
+      "Prédiction Churn Résilient (RFM + AI)",
+      "Flow Client At-Risk (Intervention Anti-Churn)",
+      "Alertes Price Drop (Wishlist)",
       "Rappel Réapprovisionnement"
     ],
     "Dropshipping & Fournisseurs": [
-      "CJDropshipping Automation",
-      "BigBuy Synchronisation",
-      "Dropshipping Orchestration"
+      "CJDropshipping - Automatisation Fournisseur",
+      "BigBuy - Synchronisation Fournisseur",
+      "Dropshipping - Orchestration Multi-Fournisseurs"
+    ],
+    "Général": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ]
   },
   "packs": {
@@ -161,8 +191,6 @@
   },
   "_meta": {
     "version": "3.0.0",
-    "session": "189",
-    "updated": "2026-01-28",
-    "note": "Compteurs corrigés (121), Voice AI retiré des packs, redirection VocalIA.ma"
+    "note": "Voice AI retiré des packs, redirection VocalIA.ma"
   }
 }

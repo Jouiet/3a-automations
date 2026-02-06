@@ -7,12 +7,12 @@
     "lead-gen": {
       "name_fr": "Lead Generation & Acquisition",
       "name_en": "Lead Generation & Acquisition",
-      "count": 41
+      "count": 26
     },
     "seo": {
       "name_fr": "SEO & Contenu",
       "name_en": "SEO & Content",
-      "count": 9
+      "count": 10
     },
     "email": {
       "name_fr": "Email Marketing (CRM)",
@@ -32,17 +32,17 @@
     "shopify": {
       "name_fr": "Shopify Admin",
       "name_en": "Shopify Admin",
-      "count": 24
+      "count": 14
     },
     "analytics": {
       "name_fr": "Analytics & Reporting",
       "name_en": "Analytics & Reporting",
-      "count": 19
+      "count": 9
     },
     "content": {
       "name_fr": "Contenu & Vidéo & Podcast",
       "name_en": "Content & Video & Podcast",
-      "count": 39
+      "count": 19
     },
     "ai-avatar": {
       "name_fr": "AI Avatar & Influencer",
@@ -68,12 +68,12 @@
     "voice-ai": {
       "name_fr": "Voice AI & Téléphonie",
       "name_en": "Voice AI & Telephony",
-      "count": 13
+      "count": 6
     },
     "marketing": {
       "name_fr": "Marketing Automation",
       "name_en": "Marketing Automation",
-      "count": 1
+      "count": 2
     },
     "dropshipping": {
       "name_fr": "Dropshipping & Fournisseurs",
@@ -2454,8 +2454,8 @@
     "external-service": "Service partenaire externe (SaaS)"
   },
   "stats": {
-    "withScript": 78,
-    "withoutScript": 35
+    "withScript": 88,
+    "withoutScript": 33
   },
   "lastAudit": "2026-01-08T19:25:27.250Z",
   "auditSummary": {
