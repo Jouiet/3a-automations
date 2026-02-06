@@ -9,7 +9,7 @@ automations/
 └── generic/                   # Utilitaires
 ```
 
-## Compteurs Vérifiés (Session 192quinquies - 06/02/2026)
+## Compteurs Vérifiés (Session 192octies - 06/02/2026)
 | Composant | Count | Vérification |
 |:----------|:-----:|:-------------|
 | Workflows Core | 103 | `ls agency/core/*.cjs \| wc -l` |
@@ -21,6 +21,10 @@ automations/
 | MCP Tools | 124 | 121 automations + 3 meta |
 | HTML Pages | 115 | 36 FR + 36 EN + 35 AR + 8 stitch |
 | Trilingual Nav | 105/105 | `grep -rl 'class="lang-nav"' \| wc -l` |
+| BreadcrumbList | 102/107 | 95% coverage (excl. 404+dashboard) |
+| Course Schema | 24/24 | 100% of course pages |
+| Preconnect | 106/107 | Google Fonts optimization |
+| Fetchpriority | 105/107 | Header logo LCP |
 
 ## Standards Code
 - CommonJS (.cjs), 2 espaces, single quotes

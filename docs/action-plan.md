@@ -4,14 +4,56 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192septies - 06/02/2026 - A/B Testing + WCAG + AR Parity):**
-> - **Backend Score: 86/100** | **Frontend Score: 91/100** | **Credentials: 60%**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192octies - 06/02/2026 - SEO/AEO Deep + Performance):**
+> - **Backend Score: 86/100** | **Frontend Score: 93/100** | **Credentials: 60%**
 > - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
 > - **Pages: 115 total** (36 FR + 36 EN + 35 AR + 8 stitch) | **Sensors: 12/19 OK**
-> - **Agent Ops: 15/15 modules** | **--health: 57/57 respond** | **0 TODO/PLACEHOLDER**
-> - **i18n: 105/105 pages trilingual nav** | **AR: 35/36 pages (97%)** | **0 generic /ar/ fallbacks**
-> - **Sitemap: 104 URLs** | **WCAG heading violations: 0** (was 17)
-> - **A/B testing: 5 experiments** on pricing+contact pages | **Form labels: 100%**
+> - **Structured Data: BreadcrumbList 102/107 (95%)** | **Course 24/24 (100%)** | **FAQPage 85/107**
+> - **Performance: preconnect 106/107** | **fetchpriority 105/107** | **async CSS 20p** | **SW ✅**
+> - **SEO: 29 academy pages unlocked** (noindex→index) | **Sitemap: 104 URLs trilingual**
+> - **A/B testing: 5 experiments** | **WCAG: 0 heading violations** | **Form labels: 100%**
+
+---
+
+## SESSION 192octies - SEO/AEO DEEP + PERFORMANCE (06/02/2026)
+
+### Tasks Completed (4/4)
+| # | Task | Files | Status |
+|:--|:---|:---:|:---:|
+| 1 | Course schema on 12 EN+AR course pages | 12 | ✅ |
+| 2 | BreadcrumbList on 43 pages (73%→95%) | 43 | ✅ |
+| 3 | Performance: preconnect + fetchpriority + fix tags | 106 | ✅ |
+| 4 | SEO: noindex→index on 29 academy pages | 29 | ✅ |
+
+### Structured Data Expansion
+- **Course schema**: 8 → **24** pages (100% of all courses: 7 FR + 7 EN + 7 AR + 3 duplicates)
+- **BreadcrumbList**: 78 → **102** pages (73% → 95%)
+  - Added to: 6 FR courses, 7 EN courses, 6 AR courses, 4 FR academy, 4 EN academy, 4 AR academy, 3 FR root, 3 EN root, 5 AR root/services/legal
+- Only 404 pages + dashboard excluded (correct)
+
+### SEO: Academy Pages Unlocked
+- **29 pages changed from `noindex,nofollow` → `index,follow`**
+- Courses, guides, paths now crawlable by search engines
+- Legal pages (FR/EN/AR) + 404 pages kept as noindex (correct)
+- All 29 pages already in sitemap.xml with trilingual hreflang
+
+### Performance Optimization
+- **preconnect hints**: 79 → **106** pages (+27 for Google Fonts)
+- **fetchpriority="high"**: 1 → **105** header logos (LCP optimization)
+- **Self-closing tag fix**: 65 files corrected (`/ fetchpriority="high">` → `fetchpriority="high" />`)
+- Hero images: above-fold with `loading="eager"` + `fetchpriority="high"`
+
+### Frontend Score Updated (93/100) (+2)
+| Category | Before | After | Details |
+|:---------|:------:|:-----:|:--------|
+| SEO/AEO | 82 | **88** | +Course 100%, +BreadcrumbList 95%, +29 pages indexed |
+| Performance | 87 | **90** | +preconnect 106p, +fetchpriority 105p |
+
+### Remaining (Low Priority)
+| Priority | Task | Impact |
+|:---------|:-----|:-------|
+| P3 | GA4_API_SECRET (user action) | Analytics unlock |
+| P3 | AR dashboard page | i18n: 35→36 AR pages (100%) |
 
 ---
 

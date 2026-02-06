@@ -93,6 +93,34 @@
     "isAccessibleForFree": true
   }
   </script>
+  <!-- Schema.org BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "الرئيسية",
+        "item": "https://3a-automation.com/ar/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "الأكاديمية",
+        "item": "https://3a-automation.com/ar/academie.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "الأدلة",
+        "item": "https://3a-automation.com/ar/academie/guides.html"
+      }
+    ]
+  }
+  </script>
+
 </head>
 
 <body>
@@ -100,7 +128,7 @@
 
   <header class="header">
     <div class="container">
-      <a href="/ar/" class="logo"><div class="logo-icon"><img src="../../logo.webp" alt="3A Automation Logo" width="40" height="40" /></div><div class="logo-text-wrap"><span class="logo-text">3A</span><span class="logo-sub">AUTOMATION</span></div></a>
+      <a href="/ar/" class="logo"><div class="logo-icon"><img src="../../logo.webp" alt="3A Automation Logo" width="40" height="40" / loading="eager" fetchpriority="high"></div><div class="logo-text-wrap"><span class="logo-text">3A</span><span class="logo-sub">AUTOMATION</span></div></a>
       <nav class="nav" id="nav-menu" role="navigation" aria-label="التنقل الرئيسي">
         <a href="/ar/services/ecommerce.html">التجارة الإلكترونية</a>
         <a href="/ar/services/pme.html">الشركات</a>

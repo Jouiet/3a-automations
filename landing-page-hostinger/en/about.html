@@ -114,6 +114,28 @@
     ]
   }
   </script>
+  <!-- Schema.org BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://3a-automation.com/en/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "item": "https://3a-automation.com/en/about.html"
+      }
+    ]
+  }
+  </script>
+
 </head>
 
 <body class="lite">
@@ -137,7 +159,7 @@
     <div class="container">
       <a href="/en/" class="logo">
         <div class="logo-icon">
-          <img loading="eager" src="/logo.webp" alt="3A Automation Logo" width="40" height="40" />
+          <img loading="eager" src="/logo.webp" alt="3A Automation Logo" width="40" height="40" fetchpriority="high" />
         </div>
         <div class="logo-text-wrap">
           <span class="logo-text">3A</span>
