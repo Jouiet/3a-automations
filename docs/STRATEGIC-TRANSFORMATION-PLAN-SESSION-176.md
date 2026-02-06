@@ -87,27 +87,41 @@ Monétiser le support (Premium SLAs) pour financer l'ingénierie.
 | **Cognitive Engine** | 7/10 | **8/10** | +1 (ErrorScience Self-Healing) |
 | **Financial Ops** | 4/10 | **6/10** | +2 (BillingAgent auto-draft) |
 
-### Priorités Stratégiques (Status Session 177)
+### Priorités Stratégiques (Status Session 177-191bis)
 
-1. ✅ **Context Box IMPLÉMENTÉ** : `ContextBox.cjs` (119 lignes) - Unified Memory Layer avec Context Pillars (identity, intent, qualification, sentiment, history).
-2. ✅ **Self-Healing IMPLÉMENTÉ** : `ErrorScience.cjs` (128 lignes) - Analyse des échecs, génération de règles apprises, injection dans MarketingScience.
-3. ✅ **Facturation Horizontale IMPLÉMENTÉE** : `BillingAgent.cjs` (115 lignes) - Stripe auto-billing + Meta CAPI tracking.
+1. ✅ **Context Box IMPLÉMENTÉ** : `ContextBox.cjs` v3.0 - EventBus subscriptions, predictive context, state machine.
+2. ✅ **Self-Healing IMPLÉMENTÉ** : `ErrorScience.cjs` v3.0 - EventBus integration, recordError() API, CLI --health.
+3. ✅ **Facturation Horizontale IMPLÉMENTÉE** : `BillingAgent.cjs` v3.0 - Event emission, state machine, cost tracking.
+4. ✅ **Multi-Tenant IMPLÉMENTÉ** : 8/8 semaines complètes (S180-S191bis).
+5. ✅ **Tests S8** : 78/78 pass (OAuth + Multi-Tenant Runner).
 
-### Bonus Implémentés (Session 177)
+### Modules Implémentés (Session 177-179)
 
-| Module | Lignes | Fonction |
-|:-------|:------:|:---------|
-| RevenueScience.cjs | 73 | Yield Management (Dynamic Pricing) |
-| meta-capi-gateway.cjs | 175 | Meta Conversions API (ROAS +13-41%) |
+| Module | Version | Fonction |
+|:-------|:-------:|:---------|
+| RevenueScience.cjs | 3.0 | EventBus integration, pricing analytics |
+| meta-capi-gateway.cjs | 2.0 | Meta Conversions API (event dedup, retry backoff) |
+| AgencyEventBus.cjs | 3.0 | Event persistence, idempotency, DLQ, multi-tenant |
+| KBEnrichment.cjs | 2.0 | KB versioning, rollback, audit trail |
+| ConversationLearner.cjs | 2.0 | Pattern extraction, HITL queue |
+
+### Score Progression
+
+| Session | Flow | Cognitive | Financial | Multi-Tenant |
+|:--------|:----:|:---------:|:---------:|:------------:|
+| 176 | 7/10 | 7/10 | 4/10 | 0/10 |
+| 177 | 8/10 | 8/10 | 6/10 | 0/10 |
+| **191bis** | **9/10** | **9/10** | **6/10** | **10/10** |
 
 ---
 
-## Prochaines Priorités (Post Session 177)
+## Prochaines Priorités (Post Session 191bis)
 
-1. **Configurer Credentials** : META_PIXEL_ID, META_ACCESS_TOKEN pour activer CAPI.
-2. **Stripe Live Test** : Tester BillingAgent en environnement sandbox.
-3. **Expansion Rétention** : Implémenter agents CSQL Identification, Parent-Child Mapping.
+1. **Configurer Credentials** : META_PIXEL_ID, META_ACCESS_TOKEN pour activer CAPI (USER ACTION).
+2. **Stripe Live Test** : Tester BillingAgent en sandbox (requires STRIPE_SECRET_KEY - USER ACTION).
+3. **Start Voice Services** : 3004, 3007, 3009 (DEVELOPER ACTION).
+4. **Deploy Infisical** : Self-hosted vault on VPS (USER ACTION).
 
 ---
 *Ce document complète le `AUDIT-SESSION-176` en intégrant la vision "Command Center".*
-*Mis à jour Session 177 (27/01/2026)*
+*Mis à jour Session 191bis (06/02/2026) - Multi-Tenant 100%, S8 Tests 78/78*

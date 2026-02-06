@@ -1,8 +1,8 @@
 # 3A-GLOBAL-MCP - Documentation Forensique Complète
 
-> **Version:** 1.5.1 | **Date:** 27/01/2026 | **Session:** 173
+> **Version:** 1.5.2 | **Date:** 06/02/2026 | **Session:** 191bis
 > **Status:** OPERATIONAL | **Tools:** 124 | **Resources:** 3 | **Prompts:** 3 | **SDK:** @modelcontextprotocol/sdk v1.25.3
-> **SOTA Score:** 95% | **Transport:** STDIO + HTTP | **Auth:** Bearer Token | **Features:** Full stack + Resources/Prompts Verified
+> **Tests:** 99/99 MCP + 78/78 S8 | **Transport:** STDIO + HTTP | **Auth:** Bearer Token
 
 ---
 

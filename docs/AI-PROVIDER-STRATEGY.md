@@ -1,8 +1,9 @@
 # STRATÉGIE AI PROVIDERS - 3A AUTOMATION
 
-> **Version**: 1.2.0 | **Date**: 27/01/2026 | **Session**: 170 (Atlas-Chat-9B Darija)
+> **Version**: 1.3.0 | **Date**: 06/02/2026 | **Session**: 191bis
 > **Source**: Analyse comparative OpenAI vs Anthropic ecosystems + Audit interne
 > **Principe Fondamental**: "The Right Tool for the Right Purpose"
+> **Frontier Models (Feb 2026)**: Claude Opus 4.6 | Grok 4.1 Fast Reasoning | GPT-5.2 | Gemini 3 Flash Preview
 
 ---
 
@@ -103,23 +104,23 @@ AI PROVIDERS (Fallback Chain - ANCIEN):
 AI PROVIDERS (Segmenté par criticité):
 
 TÂCHES CRITIQUES (décisions, scoring, interventions):
-├── Primary: Anthropic Claude (Opus 4.5 / Sonnet 4)
-├── Secondary: xAI Grok 4
-└── Tertiary: Google Gemini 3
+├── Primary: Anthropic Claude (claude-opus-4-6)
+├── Secondary: xAI Grok (grok-4-1-fast-reasoning)
+└── Tertiary: Google Gemini (gemini-3-flash-preview)
 
 TÂCHES VOLUME (content, emails, traductions):
-├── Primary: Google Gemini 3 Flash
-├── Secondary: xAI Grok
-└── Tertiary: Anthropic Claude Haiku
+├── Primary: Google Gemini (gemini-3-flash-preview)
+├── Secondary: xAI Grok (grok-4-1-fast-reasoning)
+└── Tertiary: OpenAI (gpt-5.2)
 
 TÂCHES REAL-TIME (voice, streaming):
-├── Primary: xAI Grok (spécialisé real-time)
+├── Primary: xAI Grok (grok-4-1-fast-reasoning)
 ├── Secondary: Atlas-Chat-9B (Darija ary only - Session 170)
-├── Tertiary: ElevenLabs
+├── Tertiary: ElevenLabs (eleven_flash_v2_5)
 └── Quaternary: Gemini Live
 
 DÉVELOPPEMENT (tooling, Claude Code):
-├── Primary: Anthropic Claude Opus 4.5
+├── Primary: Anthropic Claude (claude-opus-4-6)
 └── Secondary: N/A (single provider)
 ```
 
@@ -310,8 +311,9 @@ Sous-message: "Exécution par systèmes AI autonomes"
 | Métrique | Valeur | Comparable Industrie |
 |----------|--------|----------------------|
 | Automations registry | 121 | Équipe 20-50 dev traditionnelle |
-| Scripts .cjs | 85 | Équipe 10-20 dev |
+| Workflows .cjs | **103** | Équipe 10-20 dev |
 | MCP servers | 14 | Infrastructure enterprise |
+| Test suites | **78/78** | S8 OAuth + Multi-Tenant |
 | Développeur principal | 1-3 | Leveragé par Claude Code |
 | Temps développement | Continu depuis S1 | Accéléré x5-10 vs manuel |
 
@@ -400,4 +402,5 @@ Sous-message: "Exécution par systèmes AI autonomes"
 ---
 
 **Document créé**: Session 168duodecies (26/01/2026)
+**Dernière màj**: Session 191bis (06/02/2026) - Frontier models Feb 2026, scripts→workflows count
 **Prochaine révision**: Q2 2026 ou changement majeur marché

@@ -119,7 +119,7 @@ export default function AnalyticsPage() {
         setWorkflows(wfs);
       }
 
-      // Mock execution data from automations
+      // Empty execution data (no backend API yet - shows zeros, not fake numbers)
       const executionsData = { success: true, data: [], stats: { total: 0, success: 0, error: 0, running: 0, waiting: 0 } };
 
       if (executionsData.success) {

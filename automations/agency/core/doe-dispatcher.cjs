@@ -116,15 +116,34 @@ class DOEOrchestrator {
 
         console.log(c.blue(`[EXECUTION]: Running node ${relativeScriptPath} ${plan.params.join(' ')}`));
 
+        const MarketingScience = require('./marketing-science-core.cjs');
+
         try {
             const output = execSync(`node ${scriptPath} --dry-run ${plan.params.join(' ')}`, { encoding: 'utf8' });
             const result = { success: true, output: output.trim() };
             this.saveSession(plan, result);
+
+            // Session 177: Universal Telemetry
+            MarketingScience.trackV2('DOE_EXECUTION_SUCCESS', {
+                sector: 'OPERATIONS',
+                toolId: plan.toolId,
+                script: plan.script,
+                params: plan.params
+            });
+
             console.log(c.gray(output));
             return result;
         } catch (error) {
             const result = { success: false, error: error.message };
             this.saveSession(plan, result);
+
+            // Session 177: Universal Telemetry
+            MarketingScience.trackV2('DOE_EXECUTION_FAILURE', {
+                sector: 'OPERATIONS',
+                toolId: plan.toolId,
+                error: error.message
+            });
+
             console.error(c.red(`[EXECUTION ERROR]: ${error.message}`));
             return result;
         }
