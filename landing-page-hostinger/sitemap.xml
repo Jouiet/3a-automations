@@ -750,6 +750,7 @@
     <loc>https://3a-automation.com/academy/courses/architecture-hybride.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/courses/architecture-hybride.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/hybrid-architecture.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/academie/cours/architecture-hybride.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -760,6 +761,7 @@
     <loc>https://3a-automation.com/en/academy/courses/hybrid-architecture.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/courses/architecture-hybride.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/hybrid-architecture.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/academie/cours/architecture-hybride.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1091,6 +1093,16 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academie/cours/contenu.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/content.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/academie/cours/contenu.html"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://3a-automation.com/ar/academie/cours/architecture-hybride.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/courses/architecture-hybride.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/hybrid-architecture.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/academie/cours/architecture-hybride.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

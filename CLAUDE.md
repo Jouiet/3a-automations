@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 155.0 | 06/02/2026 | Session 192sexies | Engineering Score: 86/100 | Frontend: 89/100 | Runtime: 3/4 Services ✅
+> Version: 156.0 | 06/02/2026 | Session 192septies | Engineering Score: 86/100 | Frontend: 91/100 | Runtime: 3/4 Services ✅
 
 ## Identité
 
@@ -222,6 +222,21 @@
 - Cyan accent (#4FBAF1) ✅
 - Sober, futuriste, puissant ✅
 
+### Session 192septies - AR Parity + A/B Testing + WCAG (06/02/2026) ✅
+
+**Frontend Score: 89 → 91/100 (+2: CRO 82→85, WCAG 82→85)**
+
+| Task | Files | Impact |
+|:-----|:-----:|:-------|
+| AR architecture-hybride course page (34→35 AR) | 4 | i18n: 100% AR parity all courses |
+| A/B testing framework (js/ab-test.js) | 6 | CRO: 5 experiments on high-conversion pages |
+| WCAG heading hierarchy fix (17→0 violations) | 20+ | WCAG: proper h1→h2→h3 nesting |
+| Form labels on select elements (FR/EN/AR) | 3 | WCAG: all form fields labeled |
+| Sitemap: +1 AR course URL (104 total) | 1 | SEO: trilingual hreflang |
+| FR/EN lang-nav → AR course page (was fallback) | 2 | i18n: cross-linking |
+
+**Pages:** 36 FR + 36 EN + 35 AR + 8 stitch = 115 total
+
 ### Session 192quinquies - Full AR Parity (06/02/2026) ✅
 
 **Frontend Score: 89/100 (i18n 80→83, honest assessment)**
@@ -299,13 +314,13 @@
 |:----------|:-----:|:----:|:--------|
 | SEO/AEO | 78 | 78 | SpeakableSpecification added, og:locale fixed |
 | Securite | 88 | **93** | +CSP server header via .htaccess |
-| i18n | 72 | **83** | AR 34/36=94%, trilingual lang-nav 104/104 pages, 103 sitemap URLs |
+| i18n | 72 | **85** | AR 35/36=97%, trilingual lang-nav 105/105 pages, 104 sitemap URLs |
 | WCAG | 75 | **80** | +skip-links AR, focus-visible confirmed |
 | Design/UX | 92 | 92 | theme-color consistent |
 | Architecture | 90 | 90 | Clean semantic HTML |
 | Performance | 80 | **85** | +CWV monitoring (LCP/INP/CLS→GA4), +resource hints |
 | CRO | 70 | **80** | +trust metrics bar, +CTA trust signals |
-| **Weighted** | **81** | **85→89** | +4 (S192) +1 (S192bis) +2 (S192ter) +1 (S192q) |
+| **Weighted** | **81** | **85→91** | +4 (S192) +1 (S192bis) +2 (S192ter) +1 (S192q) +1 (S192sex) +2 (S192sept) |
 
 **P0 fixes applied (commit `8a9ad32`):**
 - "22 Hardened Agents" → "18" across **66 HTML files**
@@ -738,7 +753,7 @@ node SCRIPT.cjs --reject=<id>
 | Sensors | **19** (12 OK, 2 warn, 1 err, 4 blocked) | Individual --health |
 | Agent Ops Modules | **15** | All loaded |
 | MCP Tools | **124** (121 + 3 meta) | verify-core.js |
-| HTML Pages | **106** (+ 8 stitch = **114**) | 36 FR + 36 EN + 34 AR |
+| HTML Pages | **107** (+ 8 stitch = **115**) | 36 FR + 36 EN + 35 AR |
 | Trilingual Nav | **104/104** | `grep -rl 'class="lang-nav"'` |
 | Sitemap URLs | **103** | All with trilingual hreflang |
 | Tests | **177** (78 S8 + 99 MCP) | 100% pass |

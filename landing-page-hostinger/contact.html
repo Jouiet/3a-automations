@@ -290,6 +290,7 @@
                 </div>
 
                 <div class="form-field">
+                  <label for="subject" class="visually-hidden">Sujet</label>
                   <select name="subject" id="subject" required>
                     <option value="" disabled selected>Sujet de votre message</option>
                     <option value="audit">Demande d'audit</option>
@@ -302,6 +303,7 @@
                 </div>
 
                 <div class="form-field">
+                  <label for="addon" class="visually-hidden">Add-on</label>
                   <select name="addon" id="addon">
                     <option value="" selected>Add-on souhaité (optionnel)</option>
                     <option value="anti-churn">Anti-Churn AI (-25% churn)</option>
@@ -532,5 +534,18 @@
   <script src="js/ui-init.js?v=52.0" defer></script>
   <script src="geo-locale.js"></script>
   <script src="agentic-transparency.js"></script>
+  <script src="js/ab-test.js"></script>
+  <script>
+    ABTest.run('contact-submit-fr', {
+      A: function () { /* Control */ },
+      B: function () {
+        var t = document.querySelector('.btn-submit .btn-text');
+        if (t) t.textContent = 'Planifier mon appel gratuit';
+      }
+    });
+    document.querySelectorAll('.btn-submit').forEach(function (btn) {
+      btn.addEventListener('click', function () { ABTest.trackConversion('contact-submit-fr', 'form_submit'); });
+    });
+  </script>
 </body>
 </html>

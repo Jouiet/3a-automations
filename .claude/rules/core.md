@@ -19,8 +19,8 @@ automations/
 | Tests | 177 | 78 S8 + 99 MCP (100%) |
 | Agent Ops Modules | 15 | verify-agent-ops.cjs |
 | MCP Tools | 124 | 121 automations + 3 meta |
-| HTML Pages | 114 | 36 FR + 36 EN + 34 AR + 8 stitch |
-| Trilingual Nav | 104/104 | `grep -rl 'class="lang-nav"' \| wc -l` |
+| HTML Pages | 115 | 36 FR + 36 EN + 35 AR + 8 stitch |
+| Trilingual Nav | 105/105 | `grep -rl 'class="lang-nav"' \| wc -l` |
 
 ## Standards Code
 - CommonJS (.cjs), 2 espaces, single quotes

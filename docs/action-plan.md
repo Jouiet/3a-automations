@@ -4,14 +4,54 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192sexies - 06/02/2026 - Content Depth + CRO + WCAG):**
-> - **Backend Score: 86/100** | **Frontend Score: 90/100** | **Credentials: 60%**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192septies - 06/02/2026 - A/B Testing + WCAG + AR Parity):**
+> - **Backend Score: 86/100** | **Frontend Score: 91/100** | **Credentials: 60%**
 > - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
-> - **Pages: 114 total** (36 FR + 36 EN + 34 AR + 8 stitch) | **Sensors: 12/19 OK**
+> - **Pages: 115 total** (36 FR + 36 EN + 35 AR + 8 stitch) | **Sensors: 12/19 OK**
 > - **Agent Ops: 15/15 modules** | **--health: 57/57 respond** | **0 TODO/PLACEHOLDER**
-> - **i18n: 104/104 pages trilingual nav** | **AR: 34/36 pages (94%)** | **0 generic /ar/ fallbacks**
-> - **Sitemap: 103 URLs** | **Content depth: 53-89% (corrected from 22-32% post-expansion)**
-> - **WCAG: 75/75 pages role=navigation + aria-label** | **Social proof: 6/6 high-traffic pages**
+> - **i18n: 105/105 pages trilingual nav** | **AR: 35/36 pages (97%)** | **0 generic /ar/ fallbacks**
+> - **Sitemap: 104 URLs** | **WCAG heading violations: 0** (was 17)
+> - **A/B testing: 5 experiments** on pricing+contact pages | **Form labels: 100%**
+
+---
+
+## SESSION 192septies - A/B TESTING + WCAG + AR PARITY (06/02/2026)
+
+### Tasks Completed (3/3)
+| # | Task | Files | Status |
+|:--|:---|:---:|:---:|
+| 1 | AR architecture-hybride course page (35th AR page) | 4 | ✅ |
+| 2 | A/B testing framework + 5 experiments | 6 | ✅ |
+| 3 | WCAG heading hierarchy fix (17→0) + form labels | 23+ | ✅ |
+
+### A/B Testing Framework
+- `js/ab-test.js`: Lightweight client-side experiment runner with GA4 tracking
+- localStorage-based variant assignment (persistent across sessions)
+- `ABTest.run()` / `ABTest.trackConversion()` API
+- 5 experiments: pricing-cta-text-fr/en/ar, contact-submit-fr/en
+
+### WCAG 2.2 AA Improvements
+- Heading hierarchy: 17 violations → **0** (h1→h2→h3 proper nesting)
+- Fixed: guides (h3→h2), parcours/paths (added h2 section titles), blog (h4→h3), investors (h4→h3)
+- Form labels: Added `<label class="visually-hidden">` to select elements on FR/EN/AR contact pages
+
+### AR Parity Complete
+- 35th AR page: `ar/academie/cours/architecture-hybride.html` (full Arabic translation of hybrid architecture course)
+- FR/EN hreflang + lang-nav updated to point to exact AR page (was fallback)
+- Sitemap: 104 URLs (was 103)
+
+### Frontend Score Updated (91/100) (+2)
+| Category | Before | After | Details |
+|:---------|:------:|:-----:|:--------|
+| CRO | 82 | **85** | +A/B testing framework, 5 active experiments |
+| WCAG | 82 | **85** | +heading hierarchy 0 violations, +form labels |
+| i18n | 85 | **85** | AR 35/36 (97%), 105 pages trilingual nav |
+
+### Remaining P3 (Low Priority)
+| Priority | Task | Impact |
+|:---------|:-----|:-------|
+| P3 | GA4_API_SECRET (user action) | Analytics unlock |
+| P3 | AR dashboard page | i18n: 35→36 AR pages (100%) |
 
 ---
 

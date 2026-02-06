@@ -403,5 +403,18 @@
   <script src="../js/ui-init.js?v=52.0" defer></script>
   <script src="../geo-locale.js"></script>
   <script src="../agentic-transparency.js"></script>
+  <script src="../js/ab-test.js"></script>
+  <script>
+    ABTest.run('pricing-cta-text-ar', {
+      A: function () { /* Control: default CTA text */ },
+      B: function () {
+        var cta = document.querySelector('.cta-section .btn-primary, .btn-cyber');
+        if (cta) { var t = cta.querySelector('.btn-text'); if (t) t.textContent = '\u0627\u0637\u0644\u0628 \u0627\u0644\u062a\u062f\u0642\u064a\u0642 \u0627\u0644\u0622\u0646 \u2190'; }
+      }
+    });
+    document.querySelectorAll('.cta-section .btn-primary, .btn-cyber').forEach(function (btn) {
+      btn.addEventListener('click', function () { ABTest.trackConversion('pricing-cta-text-ar', 'cta_click'); });
+    });
+  </script>
 </body>
 </html>
