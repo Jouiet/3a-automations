@@ -271,7 +271,7 @@ Note: Sur fond clair, utiliser version sombre du logo (a creer si necessaire)
 ║   DIFFÉRENCIATION:                                                           ║
 ║   • Approche technique (code/APIs, pas de no-code limité)                   ║
 ║   • Focus résultats mesurables (ROI, temps gagné)                           ║
-║   • Stack moderne: n8n, Apify, Claude, Gemini                               ║
+║   • Stack moderne: Node.js natif, Apify, Claude, Gemini, Grok               ║
 ║                                                                               ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```

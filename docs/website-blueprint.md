@@ -41,7 +41,7 @@
 ```text
 /
 ├── index.html               # Homepage (Landing principale)
-├── automations.html         # Catalogue (119 tools listés)
+├── automations.html         # Catalogue (121 automations listées)
 ├── pricing.html             # Grille tarifaire (3 offres + Retainers)
 ├── booking.html             # Prise de RDV (Iframe Cal)
 ├── cas-clients.html         # Preuve sociale (Racine)

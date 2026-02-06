@@ -1,7 +1,7 @@
 # VOICE MULTILINGUAL STRATEGY - 3A AUTOMATION
 
 > **Version:** 3.2.0 | **Date:** 27/01/2026 | **Session:** 171 (Atlas-Chat-9B Integrated)
-> **Statut:** COMPLET - Widget 5 Langues + Telephony Multilingue + **Services 3/3 HEALTHY** + **Atlas-Chat-9B Fallback**
+> **Statut:** COMPLET - Widget 5 Langues + Telephony Multilingue + **Services 2/3 (Telephony needs TELNYX)** + **Atlas-Chat-9B Fallback**
 
 ---
 
@@ -173,7 +173,7 @@ MULTI-TENANT DIRECTOR - Session 166sexies FIX
 
 | Fichier | Chemin | Langues | Statut |
 |---------|--------|---------|--------|
-| `knowledge_base.json` | `automations/agency/core/` | FR (119 automations) | ✅ **HYBRID V3.0** |
+| `knowledge_base.json` | `automations/agency/core/` | FR (121 automations) | ✅ **HYBRID V3.0** |
 | `knowledge_base_ary.json` | `automations/agency/core/` | ARY (Darija) | ✅ **HYBRID V3.0** |
 | `dialplus-knowledge-base.json` | `automations/shared-components/` | FR | ✅ |
 

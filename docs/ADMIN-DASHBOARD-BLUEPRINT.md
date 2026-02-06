@@ -225,8 +225,8 @@ Day 14: Final follow-up
 
 ## IMPLEMENTATION STATUS (Updated Session 119 - 02/01/2026)
 
-> **NOTE:** n8n workflows mentioned below have ALL been migrated to native Node.js scripts in Session 115-119.
-> See `automations/agency/core/` for the 10 resilient scripts that replaced n8n.
+> **NOTE:** n8n workflows were ALL migrated to native Node.js scripts in Session 115-119.
+> See `automations/agency/core/` for 103 workflows including 7 resilient scripts. Stack is 100% Node.js native.
 
 ### Phase 1: MVP ✅ COMPLETE (Session 86-88)
 ```

@@ -669,5 +669,5 @@ verify-resources.js: 6 tests (Added Session 173)
 ---
 
 **Document créé:** 26/01/2026
-**Auteur:** Claude Opus 4.5 + Analyse Forensique
+**Auteur:** Claude Opus 4.6 + Analyse Forensique
 **Prochaine révision:** Après implémentation P0-P2

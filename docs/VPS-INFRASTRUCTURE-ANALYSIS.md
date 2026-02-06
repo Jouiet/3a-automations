@@ -26,7 +26,7 @@ The current VPS (Hostinger 1168256) hosts multiple projects on a single server. 
 | RAM | 8 GB |
 | Disk | 100 GB |
 | Bandwidth | 8 TB |
-| OS | Ubuntu 24.04 with n8n |
+| OS | Ubuntu 24.04 |
 | Created | 2025-12-01 |
 | Price | $17.99/mo (full) / $6.99/mo (promo) |
 
@@ -39,7 +39,7 @@ The current VPS (Hostinger 1168256) hosts multiple projects on a single server. 
 | wordpress-wordpress-1 | wordpress:latest | wordpress | 3A Automation |
 | wordpress-db-1 | mariadb:10.11 | wordpress | 3A Automation |
 | root-traefik-1 | traefik | root | Shared Infrastructure |
-| root-n8n-1 | n8n | root | Shared Infrastructure |
+| ~~root-n8n-1~~ | ~~n8n~~ | ~~root~~ | **REMOVED (S191 - migrated to native Node.js)** |
 | cinematicads-webapp | webapp:latest | cinematicads | **OTHER PROJECT** |
 
 ### Ownership Summary
@@ -47,7 +47,7 @@ The current VPS (Hostinger 1168256) hosts multiple projects on a single server. 
 | Category | Containers | Description |
 |----------|------------|-------------|
 | 3A Automation | 4 | site, dashboard, wordpress, mariadb |
-| Shared Infrastructure | 2 | traefik (reverse proxy), n8n (workflows) |
+| Shared Infrastructure | 1 | traefik (reverse proxy) |
 | Other Projects | 1 | CinematicAds (separate project) |
 
 ---

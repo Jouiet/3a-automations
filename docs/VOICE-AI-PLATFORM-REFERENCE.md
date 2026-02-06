@@ -331,7 +331,7 @@ Personas avec prompts en FR, EN, et ARY (Darija):
 providers: [
   { name: 'grok', model: 'grok-4-1-fast-reasoning' },
   { name: 'gemini', model: 'gemini-3-flash' },
-  { name: 'anthropic', model: 'claude-opus-4-5' },
+  { name: 'anthropic', model: 'claude-opus-4-6' },
   { name: 'local', model: 'rule-based-fallback' }
 ]
 // Auto-rotate on failure (latency > 15s OR status != 200)

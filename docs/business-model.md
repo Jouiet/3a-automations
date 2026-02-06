@@ -138,7 +138,7 @@ AUTOMATION:
 AI PROVIDERS (Segmenté par criticité - S168duodecies):
 
 TÂCHES CRITIQUES (décisions, scoring, interventions):
-├── Primary: Anthropic Claude (Opus 4.5 / Sonnet 4)
+├── Primary: Anthropic Claude (Opus 4.6)
 ├── Secondary: xAI Grok 4
 └── Tertiary: Google Gemini 3
 

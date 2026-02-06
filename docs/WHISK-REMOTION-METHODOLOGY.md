@@ -2,7 +2,7 @@
 ## Production Vidéo Programmatique - Écosystème 3A
 
 > **Version**: 1.0 | **Date**: 23/01/2026 | **Session**: 146bis
-> **Auteur**: Claude Opus 4.5 | **Méthode**: Bottom-up factuelle
+> **Auteur**: Claude Opus 4.6 | **Méthode**: Bottom-up factuelle
 > **Scope**: 3A Automation + Alpha Medical + MyDealz
 
 ---
@@ -470,7 +470,7 @@ export const MyComposition = () => {
 | Type Vidéo | Usage | Workflow |
 |------------|-------|----------|
 | **Hero Background** | Homepage, landing pages | Whisk (abstract tech) → Remotion (overlay text) |
-| **Service Demo** | Présentation 119 automations | Whisk (concept art) → Remotion (features animation) |
+| **Service Demo** | Présentation 121 automations | Whisk (concept art) → Remotion (features animation) |
 | **Client Pitch** | Présentations commerciales | Whisk (custom scenes) → Remotion (full composition) |
 | **Social Ads** | LinkedIn, Twitter | Whisk (visuals) → Remotion AdVideo (15s) |
 
@@ -806,4 +806,4 @@ Deadline: [date]
 *Document créé: 23/01/2026 23:45 UTC*
 *Version: 1.0*
 *Méthode: Bottom-up factuelle, sources vérifiées*
-*Auteur: Claude Opus 4.5 (Session 146bis)*
+*Auteur: Claude Opus 4.6 (Session 146bis→191ter)*

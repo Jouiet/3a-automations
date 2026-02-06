@@ -1,7 +1,7 @@
 # ADD-ONS CATALOG - 3A Automation
 >
 > Version: 1.8 | Date: 26/01/2026 | Session: 165quater
-> Source: Analyse bottom-up des 85 scripts agency/core/
+> Source: Analyse bottom-up des 103 workflows agency/core/ (S191ter verified)
 > Updated: Session 165quater - HITL Coverage 100% (18/18 scripts) ✅
 
 ## Executive Summary

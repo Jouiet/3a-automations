@@ -302,8 +302,8 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 | **UCP Protocol** | ✅ Production | `pages/api/ucp/products.js` | Exists | ✅ OUI |
 | **ACP Protocol** | ❌ **DEPRECATED** | `automations/acp/DEPRECATED.md` | Merged into A2A | ❌ NON |
 | **GPM Central** | ✅ Production | `landing-page-hostinger/data/pressure-matrix.json` | 8 sectors | ✅ OUI |
-| **87 Scripts Core** | ✅ Production | `agency/core/*.cjs` | `ls \| wc -l` = 87 | ✅ OUI |
-| **19 Sensors** | ✅ ALL v1.1.0 | `agency/core/*-sensor.cjs` | 10 OK, 6 NO_CREDS, 3 BLOCKED | ✅ OUI |
+| **103 Workflows Core** | ✅ Production | `agency/core/*.cjs` | `ls \| wc -l` = 103 (S191ter) | ✅ OUI |
+| **19 Sensors** | ✅ Production | `agency/core/*-sensor.cjs` | 12 OK, 2 warn, 1 err, 4 blocked (S191ter) | ✅ OUI |
 | **7 Resilient Scripts** | ✅ Production | `*-resilient.cjs` | Multi-AI fallback | ✅ OUI |
 | **Stylelint Config** | ✅ Production | `.stylelintrc.json` | Exists | ✅ OUI |
 | **VPS Docker** | ✅ Production | `docker-compose.yml` | | ⚠️ Spécifique |

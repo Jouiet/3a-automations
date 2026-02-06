@@ -446,7 +446,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 |----------|--------|--------|-------------|---------|--------|
 | **xAI** | Grok-4-1-fast-reasoning | - | Darija natif, temps réel | ~$5/1M tokens | ✅ **TESTÉ OK** |
 | **Mistral** | Saba-24B | 24B | Premier LLM arabe-natif multilingue | ~$2/1M tokens | 🔄 À tester |
-| **Anthropic** | Claude Opus 4.5 | - | Arabe excellent, Darija acceptable | ~$15/1M tokens | ✅ Production |
+| **Anthropic** | Claude Opus 4.6 | - | Arabe excellent, Darija acceptable, 1M context | ~$15/1M tokens | ✅ Production |
 | **Google** | Gemini 3 Flash | - | Arabe bon, Darija moyen | ~$0.35/1M tokens | ✅ Production |
 | **MBZUAI** | Atlas-Chat-9B | 9B | Modèle marocain open-source | Gratuit (OSS) | 🔄 À évaluer |
 | **Jais** | Jais-13B/30B | 13-30B | LLM arabe UAE | Gratuit (OSS) | 🟡 MSA surtout |
@@ -1174,7 +1174,7 @@ curl -X POST https://api.telnyx.com/v2/number_orders \
 | **xAI** | Grok 4.1 Fast | $0.20 | $0.50 | ✅ Excellent | **$0.002** | [xAI](https://docs.x.ai/docs/models) |
 | **Anthropic** | Haiku 4.5 | $1.00 | $5.00 | 🟡 Bon | **$0.008** | [Claude](https://platform.claude.com/docs/en/about-claude/pricing) |
 | **Anthropic** | Sonnet 4.5 | $3.00 | $15.00 | 🟡 Bon | **$0.024** | [Claude](https://platform.claude.com/docs/en/about-claude/pricing) |
-| **Anthropic** | Opus 4.5 | $5.00 | $25.00 | 🟡 Bon | **$0.040** | [Claude](https://platform.claude.com/docs/en/about-claude/pricing) |
+| **Anthropic** | Opus 4.6 | $5.00 | $25.00 | 🟡 Bon | **$0.040** | [Claude](https://platform.claude.com/docs/en/about-claude/pricing) |
 | **Google** | Gemini 2.5 Flash | $0.15 | $0.60 | 🟡 Moyen | **$0.001** | [Google](https://ai.google.dev/gemini-api/docs/pricing) |
 | **Mistral** | Saba 24B | ~$0.02 | ~$0.10 | ✅ **Natif** | **$0.0002** | [Mistral](https://mistral.ai/news/mistral-saba) |
 | **MBZUAI** | Atlas-Chat 9B | GRATUIT | GRATUIT | ✅ **Darija** | **$0.005*** | [HuggingFace](https://huggingface.co/MBZUAI-Paris/Atlas-Chat-9B) |
