@@ -650,6 +650,7 @@ node SCRIPT.cjs --reject=<id>
 | Tests | **177** (78 S8 + 99 MCP) | 100% pass |
 | Credentials | **60%** | credential-validator |
 | Multi-Tenant Plan | **8/8 Weeks** (100%) | IMPLEMENTATION-METHODOLOGY |
+| Documentation | **40 actifs + 17 archivés** | DOCS-INDEX.md |
 
 ---
 
@@ -710,21 +711,21 @@ node automations/agency/core/stitch-api.cjs list
 
 ## Références
 
-**Index:** `@docs/DOCS-INDEX.md`
+**Index complet:** `@docs/DOCS-INDEX.md` (40 actifs + 17 archivés)
 
-### Auto-load (petits)
-- `docs/external_workflows.md` (0.6K)
-- `docs/reference/infrastructure.md` (1.3K)
-
-### Manual-load (gros)
+### Sources de Vérité (priorité de lecture)
 ```bash
-@docs/SESSION-HISTORY.md                  # Historique sessions complet
-@docs/VOICE-AI-PLATFORM-REFERENCE.md      # Voice AI Master Doc (Session 184)
-@docs/VOICE-MENA-PLATFORM-ANALYSIS.md     # Voice MENA v5.5.6
-@docs/AI-PROVIDER-STRATEGY.md             # Stratégie AI providers
-@docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md
-@.claude/rules/scripts.md                 # Scripts reference (60+ ENV)
+@docs/ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md  # Architecture tech (S191ter)
+@docs/AI-PROVIDER-STRATEGY.md                  # Stratégie AI providers (S191ter)
+@docs/IMPLEMENTATION-METHODOLOGY-ANALYSIS.md   # Multi-tenant (S191ter)
+@docs/3A-GLOBAL-MCP-DOCUMENTATION.md           # MCP 124 tools (S191ter)
+@docs/VOICE-AI-PLATFORM-REFERENCE.md           # VocalIA master (S184bis)
+@docs/reference/mcps-status.md                 # Stack MCP 13 serveurs (S191ter)
+@.claude/rules/scripts.md                      # Workflows + HITL (S191ter)
 ```
+
+### Archives (données périmées - consultation seulement)
+`docs/archive/` - 17 docs historiques (S138→S178)
 
 ---
 

@@ -6,46 +6,30 @@ paths:
 
 # Native Scripts
 
-## Status VÉRIFIÉ (26/01/2026 - Session 165ter)
+## Status VÉRIFIÉ (06/02/2026 - Session 191ter - Forensic Audit)
 
-### Scripts Core
+### Workflows Core
 | Category | Count | Status |
-|----------|-------|--------|
-| Total core | **85** | `ls agency/core/*.cjs` (+stitch-to-3a-css.cjs S163) |
-| Avec --health | **26** | Testables (verified S165) |
-| Resilient | 7 | Multi-AI fallback |
-| Sensors | 20 | Data fetchers → GPM |
+|:---------|:-----:|:-------|
+| Total core | **103** | `ls agency/core/*.cjs \| wc -l` (103/103 load OK) |
+| Avec --health | **57** | All respond with structured output |
+| Resilient | 7 | Multi-AI fallback (Grok→Gemini→Claude) |
+| Sensors | 19 | Data fetchers → GPM |
+| Agent Ops | 15 | EventBus v3.0, State Machine |
+| Tests | 177 | 78 S8 + 99 MCP (100%) |
 
-### Add-Ons Health (TOP 10 - Verified Session 165)
-| Status | Count | Add-Ons |
-|--------|-------|---------|
-| ✅ OPERATIONAL | 7 | Anti-Churn, Review Booster, Replenishment, Email Cart, Price Drop, Blog Factory, Podcast |
-| ⚠️ PARTIAL | 2 | SMS Automation (no providers), Dropshipping Suite (no API keys) |
-| ❌ BLOCKED | 1 | WhatsApp Booking (no META tokens) |
-
-### Sensors (19 total - Verified Session 178quater - 27/01/2026)
+### Sensors (19 total - Verified Session 191ter - 06/02/2026)
 | Status | Count | Sensors |
-|--------|-------|---------|
-| ✅ OK | 14 | shopify, klaviyo, email-health, cost-tracking, lead-velocity, ga4, retention, gsc, lead-scoring, apify-trends, google-trends, product-seo, content-performance, voice-quality |
+|:-------|:-----:|:--------|
+| ✅ OK | 12 | shopify, klaviyo, email-health, cost-tracking, lead-velocity, ga4, retention, gsc, lead-scoring, apify-trends, google-trends, product-seo |
+| ⚠️ DEGRADED | 1 | voice-quality (2/3 endpoints - telephony offline) |
 | ⚠️ WARNING | 1 | supplier-health (CJ_API_KEY, BIGBUY_API_KEY missing) |
-| ❌ BLOCKED | 4 | meta-ads (META_ACCESS_TOKEN), tiktok-ads (TIKTOK tokens), whatsapp-status (WHATSAPP tokens), google-ads-planner (GOOGLE_ADS_* 5 keys) |
+| ❌ ERROR | 1 | content-performance (WP API timeout) |
+| ❌ BLOCKED | 4 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner |
 
-### New Sensors (Session 139) - Per DOE v2 Spec
-| Sensor | Description | Priority |
-|--------|-------------|----------|
-| shopify-sensor | Store health, orders, inventory | HAUTE |
-| klaviyo-sensor | Email flows, campaigns | HAUTE |
-| google-trends (REWRITTEN) | AI-powered market analysis (Grok→OpenAI→Gemini) | HAUTE |
-| email-health-sensor | Bounce/spam/open rates | CRITIQUE |
-| content-performance-sensor | WordPress blog metrics | HAUTE |
-| supplier-health-sensor | CJ/BigBuy API health | MOYENNE |
-| whatsapp-status-sensor | Template approval, quality | MOYENNE |
-| voice-quality-sensor | Voice API latency, providers | HAUTE |
-| cost-tracking-sensor | API costs, burn rate | MOYENNE |
-
-### Blockers Sensors (4 blocked - Session 178quater)
+### Blockers Sensors (4 blocked - credentials manquantes)
 | Sensor | Missing Credentials | Fix |
-|--------|---------------------|-----|
+|:-------|:--------------------|:----|
 | meta-ads | META_ACCESS_TOKEN | [Meta Business](https://business.facebook.com/settings/system-users) |
 | tiktok-ads | TIKTOK_ACCESS_TOKEN, TIKTOK_ADVERTISER_ID | [TikTok Business](https://ads.tiktok.com/marketing_api/docs) |
 | whatsapp-status | WHATSAPP_ACCESS_TOKEN, WHATSAPP_PHONE_NUMBER_ID | [Meta WhatsApp](https://developers.facebook.com/docs/whatsapp/cloud-api) |

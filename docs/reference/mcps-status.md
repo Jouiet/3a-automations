@@ -1,85 +1,59 @@
-# MCPs Status (Verified 27/01/2026 - Session 178quater)
+# MCPs Status (Verified 06/02/2026 - Session 191ter)
 
-## Stack MCP (14 serveurs)
+## Stack MCP (13 serveurs)
 
-### Global (8) - `~/.config/claude-code/mcp.json`
+### Global (7) - `~/.config/claude-code/mcp.json`
 
 | MCP | Status | Notes |
-|-----|--------|-------|
+|:----|:------:|:------|
 | chrome-devtools | ✅ OK | list_pages, screenshots, console |
 | playwright | ✅ OK | browser_tabs, automation |
-| gemini | ✅ OK | gemini-2.5-pro-latest |
+| gemini | ✅ OK | gemini-3-flash-preview |
 | hostinger | ✅ OK | VPS 1168256 |
 | github | ✅ OK | Repo access working |
-| wordpress | ⚠️ Config | Needs wp-sites.json |
-| google-analytics | ⚠️ API | GA4 API disabled in console |
-| gmail | ⚠️ OAuth | Needs local auth |
+| filesystem | ✅ OK | Built-in |
+| memory | ✅ OK | Built-in |
 
 ### Projet (6) - `.mcp.json`
 
 | MCP | Status | Notes |
-|-----|--------|-------|
-| **3a-global-mcp** | ✅ OK | **124 tools (121 automations + 3 meta)** |
+|:----|:------:|:------|
+| **3a-global-mcp** | ✅ OK | **124 tools (121 automations + 3 meta), 99/99 tests** |
 | grok | ✅ OK | XAI_API_KEY configured |
 | google-sheets | ✅ OK | Service account |
 | klaviyo | ⚠️ SSL | Local cert issue, API works direct |
 | shopify-dev | ✅ OK | API docs, no auth needed |
 | shopify-admin | ✅ OK | Store management |
 
-### Built-in (3)
+### Supprimés (Session 168ter → 191)
 
-| MCP | Status |
-|-----|--------|
-| filesystem | ✅ OK |
-| memory | ✅ OK |
-| claude-mcp | ✅ OK |
-
-## Removed - Session 168ter
-
-| MCP | Reason |
-|-----|--------|
+| MCP | Raison |
+|:----|:-------|
+| wordpress | Needs wp-sites.json (removed S191) |
+| google-analytics | GA4 API disabled (removed S191) |
+| gmail | OAuth not configured (removed S191) |
+| n8n-mcp | Stack n8n supprimé (removed S191) |
 | powerbi-remote | Entra ID not configured |
 | meta-ads | META_PAGE_ACCESS_TOKEN empty |
-| apify | Token invalid/expired |
-| shopify (global) | Empty credentials |
+| apify (global) | Token invalid/expired |
 | slack | Empty credentials |
 | stitch | Auth incompatible (use stitch-api.cjs) |
 
-## 3A-MCP Custom Servers
+## 3A-MCP Custom Server
 
-### 3a-global-mcp ✅ OPERATIONAL (99/99 tests passed)
+### 3a-global-mcp ✅ OPERATIONAL
 
 | Aspect | Valeur |
-|--------|--------|
+|:-------|:-------|
 | Location | `automations/3a-global-mcp/` |
 | Version | 1.5.0 |
-| SDK | @modelcontextprotocol/sdk 1.25.3 |
+| SDK | @modelcontextprotocol/sdk ^1.25.3 |
 | Tools | **124** (121 automations + 3 meta) |
-| Tests | **99/99 (100%)** - Verified 27/01/2026 |
+| Tests | **99/99 (100%)** + 78 S8 = **177/177 total** |
 | Meta Tools | `get_global_status`, `get_tool_catalog`, `chain_tools` |
 | Transport | stdio, http |
 | Auth | Bearer token (optional) |
-| Registry | `automations-registry.json` |
-
-### alibaba-mcp ⚠️ NEEDS CREDENTIALS
-
-| Aspect | Valeur |
-|--------|--------|
-| Location | `automations/alibaba-mcp/` |
-| Tools | `search_products` (AliExpress) |
-| Requires | `ALIBABA_APP_KEY`, `ALIBABA_APP_SECRET` |
-
-## Scripts Direct API (sans MCP communautaire)
-
-```
-tiktok-ads-sensor, omnisend-b2c-ecommerce, bigbuy-supplier-sync,
-supplier-health-sensor, dropshipping-order-flow, at-risk-customer-flow,
-birthday-anniversary-flow, price-drop-alerts, referral-program-automation,
-replenishment-reminder, review-request-automation, sms-automation-resilient,
-ga4-budget-optimizer-agentic
-```
-
-**Note:** Ces scripts sont exposés via 3a-global-mcp (124 tools)
+| Registry | `automations-registry.json` (121 entries) |
 
 ## Service Account
 
@@ -89,3 +63,5 @@ id-a-automation-service@a-automation-agency.iam.gserviceaccount.com
 
 GA4 Property: 516832662
 Sheets ID: 1OPJmd6lBxhnBfmX5F2nDkDEPjykGjCbC6UAQHV6Fy8w
+
+*Màj: 06/02/2026 - Session 191ter*
