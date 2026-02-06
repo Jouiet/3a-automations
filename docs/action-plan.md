@@ -4,11 +4,46 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192ter - 06/02/2026 - PWA+AEO+CRP):**
-> - **Backend Score: 86/100** | **Frontend Score: 88/100** (+2) | **Credentials: 60%**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192quater - 06/02/2026 - Trilingual i18n):**
+> - **Backend Score: 86/100** | **Frontend Score: 89/100** (+1) | **Credentials: 60%**
 > - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
-> - **Pages: 75 (+8 stitch)** | **Sensors: 12/19 OK** | **Dashboard: 8/8 APIs**
+> - **Pages: 79 (+8 stitch)** | **Sensors: 12/19 OK** | **Dashboard: 8/8 APIs**
 > - **Agent Ops: 15/15 modules** | **--health: 57/57 respond** | **0 TODO/PLACEHOLDER**
+> - **i18n: 77/77 pages trilingual nav** | **AR: 7/35 pages (20%)** | **0 lang-switch remaining**
+
+---
+
+## SESSION 192quater - TRILINGUAL i18n DEEP SURGERY (06/02/2026)
+
+### Tasks Completed (6/6)
+| # | Task | Files | Status |
+|:--|:---|:---:|:---:|
+| 1 | Trilingual lang-nav (FR/EN/AR) on ALL 77 pages | 68 | ✅ |
+| 2 | ar/index.html complete rewrite (339→942 lines) | 1 | ✅ |
+| 3 | ar hreflang added to ALL 13 FR+EN pages | 13 | ✅ |
+| 4 | ar hreflang to 8 sitemap entries (ecommerce/pme/automations/booking) | 1 | ✅ |
+| 5 | Fix 3 broken lang-switch links (legal/free-audit) | 3 | ✅ |
+| 6 | Fix 10+ FR pages wrong EN target (→/en/ instead of specific) | 68 | ✅ |
+
+### i18n Transformation
+- **Before**: 67 pages `lang-switch` (1 link), 3 pages `lang-nav` (trilingual)
+- **After**: **0** `lang-switch`, **77/77** `lang-nav` (FR/EN/AR + GeoLocale.saveManualLocale)
+- AR pages: 3 → **7** (index, automations, booking, contact, pricing, services/ecommerce, services/pme)
+- AR link strategy: exact page if AR exists, `/ar/` fallback otherwise
+- 10+ FR pages were linking to `/en/` (homepage) → now link to correct EN equivalent
+
+### Frontend Score Updated (89/100) (+1)
+| Category | Before | After | Details |
+|:---------|:------:|:-----:|:--------|
+| i18n | 72 | **80** | +trilingual nav 77/77, +AR 3→7 pages (20%), +correct cross-linking |
+
+### Remaining P2-P3 (Updated)
+| Priority | Task | Impact |
+|:---------|:-----|:-------|
+| P2 | AR page expansion (7→35 pages) | i18n +10 |
+| P2 | GA4_API_SECRET credential (user action) | Analytics unlock |
+| P3 | Full WCAG 2.2 AA audit | Accessibility +5 |
+| P3 | A/B testing framework | CRO +5 |
 
 ---
 
@@ -86,7 +121,7 @@
 ### Remaining P2-P3 (User Action or Future Sessions)
 | Priority | Task | Impact |
 |:---------|:-----|:-------|
-| P2 | AR page expansion (3→35 pages) | i18n +20 |
+| P2 | AR page expansion (7→35 pages) | i18n +10 |
 | P2 | GA4_API_SECRET credential (user action) | Analytics unlock |
 | P3 | Full WCAG 2.2 AA audit | Accessibility +5 |
 | P3 | A/B testing framework | CRO +5 |
@@ -152,7 +187,7 @@
 | Priority | Task | Impact |
 |:---------|:-----|:-------|
 | P2 | CSP server header via .htaccess | Security +5 |
-| P2 | AR page expansion (3→35 pages) | i18n +20 |
+| P2 | AR page expansion (7→35 pages) | i18n +10 |
 | P2 | focus-visible CSS for keyboard nav | WCAG +5 |
 | P2 | Core Web Vitals monitoring | Performance +5 |
 | P3 | Social proof (testimonials, logos) | CRO +15 |
