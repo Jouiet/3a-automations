@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * WhatsApp Booking Notifications - Native Script
- * Replaces n8n workflows: WhatsApp Booking Confirmation + WhatsApp Booking Reminders
+ * WhatsApp Booking Confirmation + Booking Reminders
  *
  * Version: 1.0.0
  * Date: 2025-12-30
@@ -743,7 +743,7 @@ async function main() {
     console.log(`
 WhatsApp Booking Notifications v1.0.0
 =====================================
-Replaces n8n workflows: WhatsApp Booking Confirmation + WhatsApp Booking Reminders
+WhatsApp Booking Confirmation + WhatsApp Booking Reminders
 
 USAGE:
   node whatsapp-booking-notifications.cjs [OPTIONS]

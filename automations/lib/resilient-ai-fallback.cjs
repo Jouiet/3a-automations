@@ -5,8 +5,8 @@
  *
  * TRANSFER TARGETS: Alpha Medical, MyDealz, Future Subsidiaries
  *
- * FRONTIER MODELS (Jan 2026):
- *   - Claude: claude-sonnet-4-20250514 / claude-opus-4-5-20251101
+ * FRONTIER MODELS (Feb 2026):
+ *   - Claude: claude-sonnet-4-5-20250929 / claude-opus-4-6
  *   - Grok: grok-4-1-fast-reasoning
  *   - OpenAI: gpt-5.2
  *   - Gemini: gemini-3-flash-preview
@@ -79,7 +79,7 @@ const PROVIDERS = {
   anthropic: {
     name: 'Claude Opus 4.5',
     url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-opus-4-5-20251101',
+    model: 'claude-opus-4-6',
     fallbackModel: 'claude-sonnet-4-20250514',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY,

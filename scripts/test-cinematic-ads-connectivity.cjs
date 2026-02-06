@@ -1,6 +1,6 @@
 const https = require('https');
 
-const WEBHOOK_URL = 'https://n8n.3a-automation.com/webhook/cinematicads/blog/generate';
+const WEBHOOK_URL = process.env.CINEMATIC_ADS_WEBHOOK_URL || '';
 
 console.log(`[Test] Checking connectivity to CinematicAds Webhook: ${WEBHOOK_URL}`);
 
@@ -20,7 +20,7 @@ const req = https.request(WEBHOOK_URL, {
 
 req.on('error', (e) => {
     console.error(`[Error] Connection failed: ${e.message}`);
-    console.log('[Info] This is expected if the n8n server is behind a firewall or not currently running.');
+    console.log('[Info] This is expected if the webhook server is not currently running.');
     process.exit(0); // Soft fail for the test script
 });
 

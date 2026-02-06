@@ -104,55 +104,6 @@ async function testKlaviyo() {
   return test;
 }
 
-async function testN8n() {
-  const start = Date.now();
-  const test = {
-    name: 'n8n API',
-    status: 'unknown',
-    details: {}
-  };
-
-  try {
-    const host = process.env.N8N_HOST;
-    const apiKey = process.env.N8N_API_KEY;
-
-    if (!host || !apiKey) {
-      test.status = 'MISSING_CREDENTIALS';
-      test.details = { host: !!host, apiKey: !!apiKey };
-      return test;
-    }
-
-    const url = `${host}/api/v1/workflows`;
-    const response = await fetch(url, {
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'accept': 'application/json'
-      }
-    });
-
-    test.details.httpStatus = response.status;
-    test.details.latency = Date.now() - start;
-
-    if (response.ok) {
-      const data = await response.json();
-      test.status = 'OK';
-      test.details.workflowCount = data.data?.length || 0;
-      test.details.workflows = data.data?.slice(0, 5).map(w => ({
-        name: w.name,
-        active: w.active
-      })) || [];
-    } else {
-      test.status = 'FAILED';
-      test.details.error = await response.text();
-    }
-  } catch (err) {
-    test.status = 'ERROR';
-    test.details.error = err.message;
-  }
-
-  return test;
-}
-
 async function testXAI() {
   const start = Date.now();
   const test = {
@@ -242,7 +193,6 @@ async function main() {
   const tests = await Promise.all([
     testShopify(),
     testKlaviyo(),
-    testN8n(),
     testXAI(),
     testGoogleServiceAccount()
   ]);

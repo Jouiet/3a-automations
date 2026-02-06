@@ -241,7 +241,7 @@ R: 1-3 semaines selon complexite. Audit gratuit sous 24-48h.
 R: Corrections jusqu'a satisfaction, sans limite de revisions.
 
 **Q: Quels outils ?**
-R: Klaviyo, Shopify, GA4, n8n, Google Sheets. Adaptation a vos outils.
+R: Klaviyo, Shopify, GA4, Google Sheets, Node.js. Adaptation a vos outils.
 
 **Q: Difference avec agence ?**
 R: Agence boutique = relation directe avec Jouiet Hatim (fondateur), pas de commercial, expertise senior, prix transparents.

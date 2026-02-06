@@ -7,7 +7,7 @@
                                               → [Email Confirmation]
 ```
 
-**100% gratuit, sans serveur, sans n8n!**
+**100% gratuit, sans serveur externe!**
 
 ## Installation (5 minutes)
 

@@ -35,7 +35,6 @@ const importantVars = [
 const optionalVars = [
   { name: 'META_ACCESS_TOKEN', desc: 'Token Meta/Facebook' },
   { name: 'APIFY_TOKEN', desc: 'Token Apify' },
-  { name: 'N8N_HOST', desc: 'URL n8n' },
   { name: 'OPENAI_API_KEY', desc: 'Clé OpenAI' },
   { name: 'ANTHROPIC_API_KEY', desc: 'Clé Anthropic' },
   { name: 'GEMINI_API_KEY', desc: 'Clé Gemini' },

@@ -107,7 +107,7 @@ const PROVIDERS = {
     name: 'Claude Opus 4.5',
     // claude-opus-4-5: best quality for fallback (Nov 2025)
     url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-opus-4-5-20251101',
+    model: 'claude-opus-4-6',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY,
   },
@@ -390,7 +390,7 @@ const STATIC_TEMPLATES = {
     preheader: "Intégrations sur-mesure et robustes",
     greeting: "Bonjour {firstName},",
     intro: "En tant que professionnel technique, vous appréciez les solutions bien architecturées.",
-    body: "Nos scripts CommonJS avec fallback multi-provider garantissent une résilience maximale. Stack: Node.js, Klaviyo, n8n, APIs REST.",
+    body: "Nos scripts CommonJS avec fallback multi-provider garantissent une résilience maximale. Stack: Node.js, Klaviyo, Shopify, APIs REST.",
     cta: "Voir notre stack technique",
     signature: BRAND.signature
   },

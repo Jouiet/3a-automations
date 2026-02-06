@@ -8,7 +8,7 @@ Dashboard complet pour 3A Automation - Gestion des leads, automations et analyti
 - **UI**: Shadcn/UI + Tailwind CSS
 - **Auth**: JWT + bcrypt (Email/Password)
 - **Database**: Google Sheets (via Apps Script)
-- **Orchestration**: n8n
+- **Orchestration**: Node.js native scripts
 
 ## Structure
 
@@ -102,7 +102,7 @@ npm run start
 ### Admin Dashboard
 - Vue d'ensemble KPIs
 - Gestion Leads CRM complet
-- Gestion Automations n8n
+- Gestion Automations
 - Analytics et rapports
 - Gestion utilisateurs
 
@@ -118,14 +118,6 @@ npm run start
 - Passwords hashes avec bcrypt (12 rounds)
 - Verification des roles (ADMIN, CLIENT, VIEWER)
 - CORS configure
-
-## Integration n8n
-
-Le dashboard communique avec n8n via API pour:
-- Lister les workflows
-- Executer des automations
-- Mettre en pause/reprendre
-- Voir les logs d'execution
 
 ---
 

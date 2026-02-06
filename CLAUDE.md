@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 145.0 | 28/01/2026 | Session 190bis | Engineering Score: 96/100 | Runtime: 4/4 Services ✅
+> Version: 146.0 | 06/02/2026 | Session 191 (Forensic Audit) | Engineering Score: 81/100 | Runtime: 1/4 Services (verified)
 
 ## Identité
 
@@ -64,30 +64,52 @@
 
 ---
 
-## Engineering Scores (Session 189 - ALL SERVICES RUNNING ✅)
+## Engineering Scores (Session 191 - FORENSIC AUDIT 06/02/2026)
 
 **3A = Agence qui vend des services automation, PAS un e-commerce**
 
 | Discipline | Max | Current | Note |
 |:---|:---:|:---:|:---|
-| **Voice AI** | 15 | **15** | **RUNTIME: 3/3** ✅ (3004, 3007, 3009) |
-| **Dashboard** | 15 | **15** | **RUNTIME: ✅** Port 3000, 100% Real API |
+| **Voice AI** | 15 | **5** | 0/3 RUNNING (not started), code exists |
+| **Dashboard** | 15 | **12** | Build OK, not running, 100% Real API |
 | **Agent Ops v3.0** | 20 | **20** | ✅ ALL 5 modules @ v3.0, EventBus, State Machine |
-| **Tools/Scripts** | 15 | **14** | 102 scripts, HITL 18/18, 0 TODO/placeholders |
+| **Tools/Scripts** | 15 | **13** | 103 scripts, HITL 18/18, 1 MOCK_PATH found |
 | **MCP Platform** | 15 | **15** | 99/99 tests, 124 tools exposés |
-| **Sensors** | 10 | **8** | 10/12 OK (runtime verified), 4 blocked creds |
-| **Integrations** | 10 | **8** | 8/16 connected (53%), 6 creds missing |
-| **TOTAL** | **100** | **95** | 4/4 Services RUNNING ✅ |
+| **Sensors** | 10 | **7** | 12/19 OK, 3 partial, 4 blocked creds |
+| **Integrations** | 10 | **9** | Credentials: 63 SET / 38 empty (60%) |
+| **TOTAL** | **100** | **81** | 1/4 Services verified running |
 
-### Runtime Status VÉRIFIÉ (28/01/2026 22:10 CET)
+### Runtime Status VÉRIFIÉ (06/02/2026 - Forensic)
 | Service | Status | Details |
 |:---|:---:|:---|
-| Dashboard (3000) | ⏳ | Needs start |
-| Voice API (3004) | ✅ | **RUNNING** - 5 providers (Grok, Gemini, Claude, Atlas, Local) |
-| Grok Realtime (3007) | ✅ | **RUNNING** - 7 voices, WebSocket proxy |
-| Telephony Bridge (3009) | ✅ | **RUNNING** - PSTN ↔ WebSocket |
-| Credentials SET | **67%** | 101 vars in .env |
+| Dashboard (3000) | ❌ | Build OK, not started |
+| Voice API (3004) | ❌ | Not started |
+| Grok Realtime (3007) | ❌ | Not started |
+| Telephony Bridge (3009) | ❌ | Not started, TWILIO_* missing |
+| Credentials SET | **60%** | 63 SET / 38 empty |
 | Critical Creds | **54%** | 7/13 (missing META, TIKTOK, STRIPE, TELNYX, TWILIO, FAL) |
+
+### Session 191 - Forensic Audit (06/02/2026) - 17 Discrepancies Found
+**Corrections applied:**
+| Claim (CLAUDE.md) | Reality (Verified) | Action |
+|:---|:---|:---|
+| 85 scripts core | **103** scripts | Updated |
+| 79 HTML pages | **83** pages | Updated |
+| 4/4 services running | **0/4** running (cold start) | Updated |
+| 14/19 sensors OK | **12/19** OK | Updated |
+| claude-opus-4-5-20251101 | **claude-opus-4-6** (released Feb 5 2026) | Updated 28 files |
+| Score 95/100 | **81/100** (recalculated) | Updated |
+| n8n in stack | **Removed** - 35+ files cleaned | Done |
+| content-performance-sensor OK | **ERROR** (WordPress timeout) | Documented |
+
+**n8n Cleanup (Session 191):**
+- 35+ active files cleaned of n8n references
+- 2 scripts archived to `scripts/archived-n8n/`
+- Stack: Node.js native scripts (no n8n)
+
+**AI Model Update (Session 191):**
+- `claude-opus-4-6` updated across 28 files
+- All other models verified correct: grok-4-1-fast-reasoning, gpt-5.2, gemini-3-flash-preview
 
 ### Agent Ops v3.0 (Session 179 - ALL COMPLETE ✅)
 | Module | Version | SOTA Features |
@@ -520,7 +542,7 @@ done
 ### CRITICAL (churn, scoring, decisions)
 | Ordre | Provider | Model |
 |:---|:---|:---|
-| 1 | **Claude** | claude-opus-4-5-20251101 |
+| 1 | **Claude** | claude-opus-4-6 |
 | 2 | Grok | grok-4-1-fast-reasoning |
 | 3 | Gemini | gemini-3-flash |
 | 4 | Rules | rule-based-fallback |
@@ -562,17 +584,17 @@ node SCRIPT.cjs --reject=<id>
 
 ---
 
-## Ecosystem Counts (Vérifiés S165)
+## Ecosystem Counts (Vérifiés S191 - 06/02/2026)
 
 | Component | Count |
 |:---|:---|
-| Scripts Core | 85 |
+| Scripts Core | **103** |
 | Automations Registry | 121 |
 | Skills | 42 |
-| Sensors | 19 (15 OK) |
+| Sensors | 19 (12 OK, 3 partial, 4 blocked) |
 | MCP Servers | 14 |
-| HTML Pages | 79 |
-| Credentials SET | 61% |
+| HTML Pages | **83** |
+| Credentials SET | **60%** (63/101) |
 
 ---
 

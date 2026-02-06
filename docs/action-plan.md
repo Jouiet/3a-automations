@@ -4,11 +4,50 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 190 - 28/01/2026 23:00 CET):**
-> - **Score: 95/100** | **Credentials: 101 vars** | **Critical: 7/13 (54%)**
-> - **Voice: 3/3 RUNTIME ✅** | **Dashboard: ✅ RUNNING** | **Integrations: 8/16 (53%)**
-> - **KB Audit: 7 fichiers corrigés** | **Voice AI: INTERNE uniquement** | **Clients → VocalIA.ma**
-> - **Multi-Tenant: 7 modules ✅** | **OAuth: 3 providers ✅** | **Geo-Locale: 3 markets ✅**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 191 - 06/02/2026 - Forensic Audit):**
+> - **Score: 81/100** (recalculated) | **Credentials: 63 SET / 38 empty (60%)**
+> - **Voice: 0/3 RUNNING** (cold start) | **Dashboard: Build OK, not running** | **MCP: 99/99 ✅**
+> - **n8n: SUPPRIMÉ** (35+ files cleaned) | **Claude model: updated to claude-opus-4-6** (28 files)
+> - **Scripts: 103** (was 85) | **HTML: 83** (was 79) | **Sensors: 12/19 OK** (was 14/19)
+
+---
+
+## SESSION 191 - FORENSIC AUDIT & n8n CLEANUP (06/02/2026)
+
+### Audit Results: 17 Discrepancies Corrected
+| # | Discrepancy | Before | After |
+|:--|:---|:---|:---|
+| 1 | Scripts count | 85 | **103** |
+| 2 | HTML pages | 79 | **83** |
+| 3 | Services running | 4/4 | **0/4** (cold) |
+| 4 | Sensors OK | 14/19 | **12/19** |
+| 5 | Claude model | claude-opus-4-5-20251101 | **claude-opus-4-6** |
+| 6 | Engineering score | 95/100 | **81/100** |
+| 7 | n8n in stack | YES (35+ files) | **REMOVED** |
+| 8 | content-performance-sensor | OK | **ERROR** (WP timeout) |
+| 9 | Credentials | 67% SET | **60%** (63/101) |
+
+### n8n Cleanup Completed
+- **35+ files** cleaned of n8n references in active codebase
+- **2 scripts** archived to `scripts/archived-n8n/`
+- **ENDPOINTS removed**: n8n health checks, webhooks, API configs
+- **Remaining**: 82 files in archived/outputs/templates (historical, not active)
+
+### AI Model Updates
+- `claude-opus-4-6` (released Feb 5, 2026) → **28 files** updated
+- All other models verified correct
+
+### P0 Actions (Immediate)
+| # | Action | Impact | Status |
+|:--|:---|:---|:---|
+| 1 | Start Dashboard (port 3000) | Admin access | `cd dashboard && npm run dev` |
+| 2 | Start Voice API (port 3004) | Widget backend | `node voice-api-resilient.cjs` |
+| 3 | Start Grok Realtime (port 3007) | Audio WebSocket | `node grok-voice-realtime.cjs` |
+| 4 | Configure TWILIO_* | Telephony Bridge | USER ACTION: [Telnyx Portal](https://portal.telnyx.com) |
+| 5 | Fix MOCK_PATH in migrate-leads.cjs | Code hygiene | Replace with real path |
+| 6 | Fix content-performance-sensor | WordPress connectivity | Check WP_SITE_URL |
+| 7 | Configure META_ACCESS_TOKEN | Meta Ads sensor | USER ACTION |
+| 8 | Configure STRIPE_SECRET_KEY | Billing | USER ACTION |
 
 ---
 
@@ -943,7 +982,7 @@ CLIENT → 3A Platform (numéro INCLUS) → Providers (invisible)
 
 ### Logique Opus 4.5 pour Churn
 
-Utilisation de `claude-opus-4-5-20251101` pour churn prediction car:
+Utilisation de `claude-opus-4-6` pour churn prediction car:
 
 - Décision financière critique (LTV €300+ en jeu)
 - Coût erreur >> Coût API

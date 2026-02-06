@@ -3,7 +3,6 @@
  * NEWSLETTER AUTOMATION - 3A Automation
  *
  * Bi-monthly newsletter: AI Content Generation → Klaviyo Campaign → Send
- * OFFICIAL replacement for n8n workflow "Newsletter 3A Automation" (deleted Session 114)
  *
  * PIPELINE:
  * 1. Generate newsletter content with AI (Grok/Gemini/Claude)
@@ -25,7 +24,7 @@
  * 3. Claude (paid) - Final fallback
  *
  * Created: 2025-12-28 | Session 111
- * Updated: 2025-12-29 | Session 114 (Optimized, n8n workflow deleted)
+ * Updated: 2025-12-29 | Session 114
  * Version: 2.0.0
  */
 
@@ -793,7 +792,6 @@ SCHEDULE (via cron):
   # 1st and 15th of month at 10:00
   0 10 1,15 * * node newsletter-automation.cjs --send --topic="automation trends"
 
-REPLACED: n8n workflow "Newsletter 3A Automation" (deleted Session 114)
     `);
     process.exit(0);
   }

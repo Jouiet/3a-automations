@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Voice Telephony Bridge - Native Script (remplace n8n workflow)
+ * Voice Telephony Bridge - Native Script
  *
  * Bridge Twilio PSTN ↔ Grok Voice Realtime WebSocket
  *
@@ -10,9 +10,9 @@
  * Architecture:
  *   Twilio Inbound Call → HTTP Webhook → Grok WebSocket Session → Audio Bridge
  *
- * Avantages vs n8n:
- *   - Direct WebSocket (pas d'overhead n8n)
- *   - Latence réduite (~50ms vs ~200ms)
+ * Avantages:
+ *   - Direct WebSocket (zero overhead)
+ *   - Latence réduite (~50ms)
  *   - Contrôle total du flux audio
  *   - Intégration native avec modules existants
  */
@@ -51,6 +51,8 @@ const { VoicePersonaInjector } = require('./voice-persona-injector.cjs');
 // Import Advanced Cognitive Modules (Session 167)
 const { ServiceKnowledgeBase } = require('./knowledge-base-services.cjs');
 const VoiceEcommerceTools = require('./voice-ecommerce-tools.cjs');
+const ContextBox = require('./ContextBox.cjs');
+const BillingAgent = require('./BillingAgent.cjs');
 
 // Initialize Cognitive Modules
 const KB = new ServiceKnowledgeBase();
@@ -59,10 +61,7 @@ const ECOM_TOOLS = new VoiceEcommerceTools();
 // RAG Knowledge Base - Multilingual support (Session 167)
 const KNOWLEDGE_BASES = {
   fr: require('./knowledge_base.json'),
-  en: fs.existsSync(path.join(__dirname, 'knowledge_base_en.json')) ? require('./knowledge_base_en.json') : {},
-  es: fs.existsSync(path.join(__dirname, 'knowledge_base_es.json')) ? require('./knowledge_base_es.json') : {},
-  ar: fs.existsSync(path.join(__dirname, 'knowledge_base_ar.json')) ? require('./knowledge_base_ar.json') : {},
-  ary: fs.existsSync(path.join(__dirname, 'knowledge_base_ary.json')) ? require('./knowledge_base_ary.json') : {}
+  en: fs.existsSync(path.join(__dirname, 'knowledge_base_en.json')) ? require('./knowledge_base_en.json') : {}
 };
 
 // Dependency check
@@ -91,8 +90,8 @@ try {
 const CONFIG = {
   port: parseInt(process.env.VOICE_TELEPHONY_PORT || '3009'),
 
-  // Supported Languages (limited to 5 per Session 166quinquies)
-  supportedLanguages: ['fr', 'en', 'es', 'ar', 'ary'],
+  // Supported Languages - FR/EN Focus (Zero Gap)
+  supportedLanguages: ['fr', 'en'],
   defaultLanguage: process.env.VOICE_DEFAULT_LANGUAGE || 'fr',
 
   // Twilio
@@ -156,55 +155,37 @@ const TWIML_MESSAGES = {
   // Language mapping: internal code → Twilio language code
   languageCodes: {
     'fr': 'fr-FR',
-    'en': 'en-US',
-    'es': 'es-ES',
-    'ar': 'ar-XA',  // Arabic (generic)
-    'ary': 'ar-XA'  // Darija uses Arabic TTS (ElevenLabs handles actual Darija)
+    'en': 'en-US'
   },
 
   // Connection message
   connecting: {
     'fr': 'Connexion à l\'assistant vocal.',
-    'en': 'Connecting to voice assistant.',
-    'es': 'Conectando con el asistente de voz.',
-    'ar': 'جارٍ الاتصال بالمساعد الصوتي.',
-    'ary': 'كنتصل بالمساعد الصوتي.'
+    'en': 'Connecting to voice assistant.'
   },
 
   // Service unavailable
   serviceUnavailable: {
     'fr': 'Désolé, le service est temporairement indisponible. Veuillez réessayer plus tard.',
-    'en': 'Sorry, the service is temporarily unavailable. Please try again later.',
-    'es': 'Lo sentimos, el servicio no está disponible temporalmente. Por favor, inténtelo más tarde.',
-    'ar': 'عذراً، الخدمة غير متاحة مؤقتاً. يرجى المحاولة لاحقاً.',
-    'ary': 'سمحلينا، الخدمة ماشي متوفرة دابا. عاود من بعد.'
+    'en': 'Sorry, the service is temporarily unavailable. Please try again later.'
   },
 
   // Outbound greeting
   outboundGreeting: {
     'fr': 'Bonjour, ici 3A Automation. Je vous passe mon collègue IA.',
-    'en': 'Hello, this is 3A Automation. I\'m connecting you to my AI colleague.',
-    'es': 'Hola, aquí 3A Automation. Le paso con mi colega de IA.',
-    'ar': 'مرحباً، هذا 3A Automation. سأحولك إلى زميلي الذكاء الاصطناعي.',
-    'ary': 'السلام، هنا 3A Automation. غادي نعطيك زميلي الذكاء الاصطناعي.'
+    'en': 'Hello, this is 3A Automation. I\'m connecting you to my AI colleague.'
   },
 
   // Connection error
   connectionError: {
     'fr': 'Une erreur est survenue lors de la connexion.',
-    'en': 'An error occurred while connecting.',
-    'es': 'Se produjo un error durante la conexión.',
-    'ar': 'حدث خطأ أثناء الاتصال.',
-    'ary': 'كاين مشكل فالاتصال.'
+    'en': 'An error occurred while connecting.'
   },
 
   // Transfer to human
   transferToHuman: {
     'fr': 'Je vous transfère vers un conseiller humain. Veuillez patienter un instant.',
-    'en': 'I\'m transferring you to a human advisor. Please wait a moment.',
-    'es': 'Le transfiero a un asesor humano. Por favor, espere un momento.',
-    'ar': 'أقوم بتحويلك إلى مستشار بشري. يرجى الانتظار لحظة.',
-    'ary': 'غادي نحولك لواحد المستشار. تسنى شوية.'
+    'en': 'I\'m transferring you to a human advisor. Please wait a moment.'
   }
 };
 
@@ -576,6 +557,12 @@ async function createGrokSession(callInfo) {
     }
 
     console.log(`[Grok] Creating session for call ${callInfo.callSid}`);
+
+    // Initialize ContextBox for this journey
+    ContextBox.logEvent(callInfo.callSid, 'VoiceBridge', 'SESSION_INIT', {
+      direction: callInfo.direction,
+      from: callInfo.from
+    });
 
     const ws = new WebSocket(CONFIG.grok.realtimeUrl, {
       headers: {
@@ -1590,11 +1577,39 @@ function logConversionEvent(session, eventType, data) {
     data: data
   };
 
-  // Log to console in structured format
-  console.log(`[CONVERSION] ${JSON.stringify(logEntry)}`);
+  console.log(`[Analytics] LOGGING: ${eventType}`, JSON.stringify(logEntry));
 
-  // SOTA Optimization: Use Centralized Marketing Science Analytics
-  MarketingScience.trackV2(eventType, logEntry);
+  // Session 177: Integrated trackV2 (GA4 + JSONL)
+  MarketingScience.trackV2(eventType, {
+    ...logEntry,
+    clientId: session.metadata?.persona_id, // Match for cookie-less measurement
+    gclid: session.metadata?.attribution?.gclid,
+    fbclid: session.metadata?.attribution?.fbclid
+  }).catch(e => console.error(`[Analytics] trackV2 failed: ${e.message}`));
+
+  // Internal log for dashboard
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const logFile = path.join(DATA_DIR, 'conversion_events.jsonl');
+    fs.appendFileSync(logFile, JSON.stringify(logEntry) + '\n');
+  } catch (e) {
+    console.error(`[Analytics] Local log error: ${e.message}`);
+  }
+
+  // Agent Ops: Update Context Box (Session 178)
+  try {
+    ContextBox.logEvent(session.callSid, 'VoiceBridge', eventType, data);
+    if (eventType === 'qualification_updated') {
+      ContextBox.set(session.callSid, {
+        pillars: {
+          qualification: session.qualification
+        }
+      });
+    }
+  } catch (e) {
+    console.error(`[Analytics] ContextBox error: ${e.message}`);
+  }
 }
 
 // ============================================
@@ -2124,6 +2139,35 @@ async function finalizeSession(sessionId, wasAbandoned = false) {
 
   console.log(`[Analytics] Final: ${JSON.stringify(finalAnalytics)}`);
   logConversionEvent(session, 'call_completed', finalAnalytics);
+
+  // Agent Ops: Store full context pillars for post-call agents
+  const finalContext = ContextBox.set(session.callSid, {
+    status: 'completed',
+    pillars: {
+      identity: {
+        phone: session.bookingData.phone,
+        name: session.bookingData.name,
+        email: session.bookingData.email
+      },
+      intent: {
+        outcome: session.analytics.outcome,
+        need: session.qualification.need
+      },
+      qualification: session.qualification
+    }
+  });
+
+  // Agent Ops: TRIGGER HORIZONTAL BILLING (P3 - 7% Efficiency)
+  if (session.analytics.outcome === 'booked' || session.qualification.score >= 75) {
+    BillingAgent.processSessionBilling(finalContext).then(res => {
+      if (res.success) {
+        console.log(`[BillingAgent] SUCCESS: Invoice ${res.invoiceId} created for ${session.callSid}`);
+        ContextBox.logEvent(session.callSid, 'BillingAgent', 'INVOICE_CREATED', res);
+      }
+    }).catch(err => {
+      console.error(`[BillingAgent] CRITICAL ERROR: ${err.message}`);
+    });
+  }
 
   // ============================================
   // CONVERSION SUMMARY (for console visibility)

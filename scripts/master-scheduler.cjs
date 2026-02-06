@@ -48,7 +48,7 @@ const SCHEDULES = {
 
   // EVERY 6 HOURS
   'every-6-hours': [
-    // LinkedIn Scraper is handled by n8n directly
+    // LinkedIn Scraper is handled by dedicated script
   ],
 
   // DAILY (run at 6:00 AM)

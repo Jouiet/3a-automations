@@ -70,7 +70,7 @@ const CONFIG = {
     claude: {
       apiKey: process.env.ANTHROPIC_API_KEY,
       endpoint: 'https://api.anthropic.com/v1/messages',
-      model: 'claude-opus-4-5-20251101' // FRONTIER MODEL
+      model: 'claude-opus-4-6' // FRONTIER MODEL
     }
   },
 

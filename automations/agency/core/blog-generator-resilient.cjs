@@ -178,7 +178,7 @@ const PROVIDERS = {
   anthropic: {
     name: 'Claude Opus 4.5',
     url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-opus-4-5-20251101',
+    model: 'claude-opus-4-6',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY,
   },
@@ -235,7 +235,7 @@ const XTWITTER = {
 // CINEMATIC ADS CONFIG - Internal Video Factory via Webhook
 // ─────────────────────────────────────────────────────────────────────────────
 const CINEMATIC_ADS = {
-  webhookUrl: ENV.CINEMATIC_ADS_WEBHOOK_URL || 'https://n8n.3a-automation.com/webhook/cinematicads/blog/generate',
+  webhookUrl: ENV.CINEMATIC_ADS_WEBHOOK_URL || '',
   enabled: true // Always enabled as internal microservice
 };
 

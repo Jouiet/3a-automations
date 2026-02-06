@@ -36,7 +36,7 @@ const CONFIG = {
     QUALITY_THRESHOLD: 7,
     GPM_PATH: path.join(__dirname, '../../../landing-page-hostinger/data/pressure-matrix.json'),
     AI_PROVIDERS: [
-        { name: 'anthropic', model: 'claude-opus-4-5-20251101', apiKey: process.env.ANTHROPIC_API_KEY },
+        { name: 'anthropic', model: 'claude-opus-4-6', apiKey: process.env.ANTHROPIC_API_KEY },
         { name: 'google', model: 'gemini-3-flash-preview', apiKey: process.env.GEMINI_API_KEY },
         { name: 'xai', model: 'grok-4-1-fast-reasoning', apiKey: process.env.XAI_API_KEY }
     ]

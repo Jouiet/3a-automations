@@ -2,7 +2,7 @@
 /**
  * Google Calendar Booking System
  * Implements appointment scheduling with Google Calendar integration
- * Based on n8n workflow template #8635
+ * Native Node.js implementation
  *
  * @version 1.0.0
  * @date 2025-12-20
@@ -245,7 +245,7 @@ const BOOKING_SCHEMA = {
   notes: { required: false, type: 'string', maxLength: 1000 }
 };
 
-// Express server for webhook endpoints (used by n8n)
+// Express server for webhook endpoints
 async function startServer() {
   const express = require('express');
   const app = express();
@@ -380,8 +380,7 @@ async function main() {
     console.log('2. Activer Google Calendar API');
     console.log('3. Créer des credentials OAuth2');
     console.log('4. Ajouter les variables dans .env\n');
-    console.log('Ou utilisez le workflow n8n #8635:');
-    console.log('https://n8n.io/workflows/8635-complete-booking-system-with-google-calendar-business-hours-and-rest-api/');
+    console.log('Consultez la documentation Google Calendar API pour la configuration.');
     return;
   }
 

@@ -3,7 +3,7 @@
  * UNIFIED EMAIL AUTOMATION - 3A Automation
  *
  * Combines Email Outreach + Welcome Series via Klaviyo HTTP API
- * Works standalone (no n8n $env limitations)
+ * Works standalone (native Node.js implementation)
  *
  * MODES:
  * 1. CLI: node email-automation-unified.cjs --mode=welcome --email=test@example.com
@@ -455,8 +455,8 @@ function startServer(port) {
     console.log('ENDPOINTS:');
     console.log(`  POST http://localhost:${port}/welcome         - Welcome series`);
     console.log(`  POST http://localhost:${port}/outreach        - Outreach sequence`);
-    console.log(`  POST http://localhost:${port}/webhook/subscribe/new  - n8n compatible`);
-    console.log(`  POST http://localhost:${port}/webhook/leads/new      - n8n compatible`);
+    console.log(`  POST http://localhost:${port}/webhook/subscribe/new  - webhook compatible`);
+    console.log(`  POST http://localhost:${port}/webhook/leads/new      - webhook compatible`);
     console.log('================================================================================\n');
   });
 

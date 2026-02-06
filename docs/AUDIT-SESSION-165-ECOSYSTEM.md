@@ -650,7 +650,7 @@ cf0c8fb fix(registry): add missing script field to 5 agentic automations
 | Provider | Model ID | Status |
 |----------|----------|--------|
 | Claude | claude-sonnet-4-20250514 | ✅ CORRECT |
-| Claude Opus | claude-opus-4-5-20251101 | ✅ FALLBACK |
+| Claude Opus | claude-opus-4-6 | ✅ FALLBACK |
 | GPT | gpt-5.2 | ✅ CORRECT |
 | Grok | grok-4-1-fast-reasoning | ✅ CORRECT |
 | Gemini | gemini-3-flash-preview | ✅ CORRECT |

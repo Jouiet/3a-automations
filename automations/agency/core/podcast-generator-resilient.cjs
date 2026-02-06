@@ -103,7 +103,7 @@ const AI_PROVIDERS = {
   anthropic: {
     name: 'Claude Opus 4.5',
     url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-opus-4-5-20251101',
+    model: 'claude-opus-4-6',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY,
   },

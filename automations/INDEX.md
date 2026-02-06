@@ -26,7 +26,7 @@ automations/
 │
 ├── shared-components/         # Composants réutilisables
 │   ├── voice-widget/          # Widget vocal configurable
-│   └── whatsapp-workflows/    # Templates WhatsApp n8n
+│   └── whatsapp-workflows/    # Templates WhatsApp
 │
 ├── invoicing/                 # Système de facturation
 │   └── invoice-generator.cjs  # Multi-currency MAD/EUR/USD

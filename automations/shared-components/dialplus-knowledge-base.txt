@@ -237,7 +237,7 @@ Q: Y a-t-il une garantie ?
 R: Si les automatisations ne fonctionnent pas comme prevu, je corrige jusqu'a satisfaction. Pas de limite de revisions.
 
 Q: Quels outils utilisez-vous ?
-R: Klaviyo, Shopify, GA4, n8n, Google Sheets. Je m'adapte a vos outils existants.
+R: Klaviyo, Shopify, GA4, Google Sheets, Node.js. Je m'adapte a vos outils existants.
 
 Q: Quelle difference avec une agence ?
 R: Agence boutique = relation directe avec Jouiet Hatim (fondateur), pas de commercial, expertise senior, prix transparents.

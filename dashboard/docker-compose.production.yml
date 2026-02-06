@@ -21,7 +21,7 @@ services:
       - traefik.http.middlewares.dashboard-security.headers.browserXssFilter=true
       - traefik.http.middlewares.dashboard-security.headers.referrerPolicy=strict-origin-when-cross-origin
       - traefik.http.middlewares.dashboard-security.headers.permissionsPolicy=camera=(), microphone=(self), geolocation=(), payment=()
-      - traefik.http.middlewares.dashboard-security.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://n8n.srv1168256.hstgr.cloud https://www.google-analytics.com
+      - traefik.http.middlewares.dashboard-security.headers.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://www.google-analytics.com
     networks:
       - root_default
     env_file:
@@ -33,8 +33,6 @@ services:
       - GOOGLE_SHEETS_API_URL=${GOOGLE_SHEETS_API_URL}
       - JWT_SECRET=${JWT_SECRET}
       - NEXT_PUBLIC_SITE_URL=https://dashboard.3a-automation.com
-      - N8N_HOST=https://n8n.srv1168256.hstgr.cloud
-      - N8N_API_KEY=${N8N_API_KEY}
     command: >
       sh -c '
         apk add --no-cache git &&

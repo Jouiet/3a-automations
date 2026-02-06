@@ -12,7 +12,7 @@ https://3a-automation.com
 
 - **E-commerce**: Shopify, Klaviyo, Flow
 - **Analytics**: GA4, GTM
-- **Automation**: n8n, GitHub Actions
+- **Automation**: Node.js scripts, GitHub Actions
 - **AI**: Claude, Gemini, Grok
 
 ## Structure

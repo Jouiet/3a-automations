@@ -13,7 +13,7 @@
  *   SLACK_WEBHOOK_URL    - Slack webhook for alerts (optional)
  *   DISCORD_WEBHOOK_URL  - Discord webhook for alerts (optional)
  *   ALERT_EMAIL          - Email for alerts (optional)
- *   N8N_WEBHOOK_URL      - n8n webhook for alerts (optional)
+ *   DISCORD_WEBHOOK_URL  - Discord webhook for alerts (optional)
  */
 
 const https = require('https');
@@ -37,13 +37,6 @@ const ENDPOINTS = {
     url: 'https://dashboard.3a-automation.com',
     expectedStatus: 200,
     timeout: 10000,
-    critical: true,
-  },
-  n8n: {
-    name: 'n8n Workflows',
-    url: 'https://n8n.srv1168256.hstgr.cloud',
-    expectedStatus: 200,
-    timeout: 15000,
     critical: true,
   },
   wordpress: {
@@ -233,25 +226,6 @@ async function sendDiscordAlert(results) {
   }
 }
 
-async function sendN8nAlert(results) {
-  const webhookUrl = process.env.N8N_WEBHOOK_URL;
-  if (!webhookUrl) return;
-
-  const unhealthy = results.endpoints.filter(e => !e.healthy);
-  if (unhealthy.length === 0) return;
-
-  try {
-    await postJSON(webhookUrl, {
-      event: 'uptime_alert',
-      results,
-      unhealthy,
-    });
-    console.log('📤 n8n webhook triggered');
-  } catch (err) {
-    console.error('❌ n8n webhook failed:', err.message);
-  }
-}
-
 async function sendAlerts(results) {
   const unhealthy = results.endpoints.filter(e => !e.healthy && shouldAlert(e.key));
   if (unhealthy.length === 0) return;
@@ -259,7 +233,6 @@ async function sendAlerts(results) {
   await Promise.all([
     sendSlackAlert({ ...results, endpoints: unhealthy }),
     sendDiscordAlert({ ...results, endpoints: unhealthy }),
-    sendN8nAlert({ ...results, endpoints: unhealthy }),
   ]);
 }
 

@@ -28,10 +28,6 @@ const JSON_MODE = process.argv.includes('--json');
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const CONFIG = {
-  n8n: {
-    host: process.env.N8N_HOST || 'https://n8n.srv1168256.hstgr.cloud',
-    apiKey: process.env.N8N_API_KEY
-  },
   klaviyo: {
     apiKey: process.env.KLAVIYO_API_KEY
   },
@@ -119,31 +115,6 @@ function httpRequest(options) {
 // ═══════════════════════════════════════════════════════════════════════════════
 // HEALTH CHECKS
 // ═══════════════════════════════════════════════════════════════════════════════
-
-async function checkN8n() {
-  if (!CONFIG.n8n.apiKey) return { ok: false, reason: 'N8N_API_KEY missing' };
-
-  const url = new URL(CONFIG.n8n.host);
-  const result = await httpRequest({
-    hostname: url.hostname,
-    path: '/api/v1/workflows',
-    headers: { 'X-N8N-API-KEY': CONFIG.n8n.apiKey }
-  });
-
-  if (!result.ok) return { ok: false, reason: result.error || `HTTP ${result.status}` };
-
-  const workflows = result.data?.data || [];
-  const active = workflows.filter(w => w.active).length;
-  const inactive = workflows.filter(w => !w.active).length;
-
-  return {
-    ok: true,
-    totalWorkflows: workflows.length,
-    active,
-    inactive,
-    workflows: workflows.map(w => ({ id: w.id, name: w.name, active: w.active }))
-  };
-}
 
 async function checkKlaviyo() {
   if (!CONFIG.klaviyo.apiKey) return { ok: false, reason: 'KLAVIYO_API_KEY missing' };
@@ -442,7 +413,6 @@ async function main() {
 
   // API Checks
   const apiChecks = [
-    { name: 'n8n', fn: checkN8n },
     { name: 'klaviyo', fn: checkKlaviyo },
     { name: 'shopify', fn: checkShopify },
     { name: 'xai', fn: checkXai },

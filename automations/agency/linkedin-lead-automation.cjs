@@ -3,7 +3,6 @@
  * LINKEDIN LEAD AUTOMATION - 3A Automation
  *
  * Complete B2B lead pipeline: LinkedIn Scrape → Lead Scoring → Klaviyo Sync → Outreach
- * Replaces n8n workflow "LinkedIn Lead Scraper - Aggressive Outbound" (uses $env → FAILS)
  *
  * PIPELINE:
  * 1. Scrape LinkedIn profiles via Apify
@@ -13,12 +12,11 @@
  * 5. Log to dashboard
  *
  * MODES:
- * 1. Scheduled: Run via cron (every 6h like n8n workflow)
+ * 1. Scheduled: Run via cron (every 6h)
  * 2. CLI: node linkedin-lead-automation.cjs --search="marketing director Paris"
  * 3. File: node linkedin-lead-automation.cjs --file=leads.json
  *
  * Created: 2025-12-28 | Session 111
- * Replaces: n8n workflow "LinkedIn Lead Scraper - Aggressive Outbound"
  * Version: 1.0.0
  */
 
@@ -196,7 +194,6 @@ async function scrapeCompanyEmployees(companyUrl, maxResults = 100) {
 
 /**
  * Score a lead (0-100) based on profile data
- * Replaces n8n "AI Lead Scoring" node
  */
 function scoreLead(profile) {
   let score = 50; // Base score
@@ -752,7 +749,6 @@ PIPELINE:
   4. Sync to Klaviyo (profile + list + event)
   5. Log to dashboard
 
-REPLACES: n8n workflow "LinkedIn Lead Scraper - Aggressive Outbound"
     `);
     process.exit(0);
   }

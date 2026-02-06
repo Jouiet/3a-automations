@@ -363,7 +363,7 @@ function setupSheets() {
   createSheetWithHeaders(ss, CONFIG.SHEETS.LEADS, leadsHeaders);
 
   // Automations sheet headers
-  const automationsHeaders = ['id', 'name', 'description', 'type', 'status', 'n8nWorkflowId',
+  const automationsHeaders = ['id', 'name', 'description', 'type', 'status', 'workflowId',
     'schedule', 'lastRunAt', 'nextRunAt', 'runCount', 'successCount', 'errorCount',
     'ownerId', 'createdAt'];
   createSheetWithHeaders(ss, CONFIG.SHEETS.AUTOMATIONS, automationsHeaders);

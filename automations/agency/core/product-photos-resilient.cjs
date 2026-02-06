@@ -125,9 +125,9 @@ const VISION_PROVIDERS = {
   },
   anthropic: {
     name: 'Claude Opus 4.5 Vision',
-    // claude-opus-4-5-20251101 is frontier for vision (Jan 2026, same as text model)
+    // claude-opus-4-6 is frontier for vision (Jan 2026, same as text model)
     url: 'https://api.anthropic.com/v1/messages',
-    model: 'claude-opus-4-5-20251101',
+    model: 'claude-opus-4-6',
     apiKey: ENV.ANTHROPIC_API_KEY,
     enabled: !!ENV.ANTHROPIC_API_KEY
   }

@@ -330,7 +330,7 @@
     },
     "outils": {
       "question": "Quels outils utilisez-vous ?",
-      "answer": "Klaviyo, Shopify, GA4, n8n, Google Sheets. Je m'adapte à vos outils existants."
+      "answer": "Klaviyo, Shopify, GA4, Google Sheets, Node.js. Je m'adapte à vos outils existants."
     },
     "difference": {
       "question": "Quelle différence avec une agence ?",

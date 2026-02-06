@@ -108,7 +108,6 @@ console.log(`║  Test/POC (OK sans):      ${String(results.filter(r => r.isTest
 console.log(`║  À CORRIGER:              ${String(needsFix.length).padEnd(40)}║`);
 console.log('╚══════════════════════════════════════════════════════════════════╝');
 
-// Also check n8n workflows
 console.log('\n');
 console.log('═══════════════════════════════════════════════════════════════════');
 console.log('  AUTRES SYSTÈMES NÉCESSITANT FALLBACK');
@@ -116,9 +115,6 @@ console.log('══════════════════════�
 console.log('');
 console.log('📱 VOICE WIDGET (landing-page-hostinger/voice-assistant/):');
 console.log('   └─ Utilise Grok seul → BESOIN FALLBACK');
-console.log('');
-console.log('🔧 n8n WORKFLOWS:');
-console.log('   └─ Product Photos (Gemini seul) → BESOIN FALLBACK');
 console.log('');
 console.log('🎙️ GROK VOICE TELEPHONY:');
 console.log('   └─ Grok Voice seul → Fallback vers ElevenLabs?');

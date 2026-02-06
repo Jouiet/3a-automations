@@ -123,7 +123,7 @@
       "name_fr": "Qualification & Scoring",
       "name_en": "Lead Qualification & Scoring",
       "category": "lead-gen",
-      "type": "n8n-workflow",
+      "type": "deprecated-workflow",
       "script": null,
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
@@ -183,7 +183,7 @@
       "name_fr": "Typeform → Klaviyo",
       "name_en": "Typeform → Klaviyo",
       "category": "lead-gen",
-      "type": "n8n-workflow",
+      "type": "deprecated-workflow",
       "script": null,
       "frequency_fr": "Temps réel",
       "frequency_en": "Real-time",
@@ -665,7 +665,7 @@
       "name_fr": "Article Blog + Distribution Multi-Canal",
       "name_en": "Auto Blog + Multi-Channel Distribution",
       "category": "content",
-      "type": "n8n-workflow",
+      "type": "deprecated-workflow",
       "script": "agency/core/blog-generator-resilient.cjs",
       "frequency_fr": "Sur demande",
       "frequency_en": "On demand",
@@ -680,11 +680,11 @@
       "description_en": "Generates SEO article via Claude AI and publishes simultaneously to website + Facebook + LinkedIn"
     },
     {
-      "id": "n8n-workflow",
-      "name_fr": "Workflow n8n Complet",
-      "name_en": "Complete n8n Workflow",
+      "id": "deprecated-workflow",
+      "name_fr": "Workflow Déprécié",
+      "name_en": "Deprecated Workflow",
       "category": "content",
-      "type": "n8n-workflow",
+      "type": "deprecated-workflow",
       "script": null,
       "frequency_fr": "Personnalisé",
       "frequency_en": "Custom",
@@ -966,7 +966,7 @@
       "name_fr": "Confirmation WhatsApp RDV",
       "name_en": "WhatsApp Booking Confirmation",
       "category": "whatsapp",
-      "type": "n8n-workflow",
+      "type": "deprecated-workflow",
       "script": "agency/core/whatsapp-booking-notifications.cjs",
       "frequency_fr": "À chaque réservation",
       "frequency_en": "On each booking",
@@ -978,7 +978,7 @@
       "name_fr": "Rappels WhatsApp 24h + 1h",
       "name_en": "WhatsApp Reminders 24h + 1h",
       "category": "whatsapp",
-      "type": "n8n-workflow",
+      "type": "deprecated-workflow",
       "script": "agency/core/whatsapp-booking-notifications.cjs",
       "frequency_fr": "Automatique",
       "frequency_en": "Automatic",
@@ -1008,7 +1008,7 @@
       "frequency_en": "Inbound calls",
       "benefit_fr": "Reservation par telephone automatique",
       "benefit_en": "Automatic phone booking",
-      "replaces": "n8n-workflow:Grok Voice Telephony (latence 4x meilleure)",
+      "replaces": "legacy:Grok Voice Telephony (latence 4x meilleure)",
       "port": 3009
     },
     {
@@ -1022,7 +1022,7 @@
       "frequency_en": "Every 6 hours",
       "benefit_fr": "+400 leads/jour avec scoring AI",
       "benefit_en": "+400 leads/day with AI scoring",
-      "replaces": "n8n-workflow:LinkedIn Lead Scraper (used $env → FAILED)",
+      "replaces": "legacy:LinkedIn Lead Scraper (used $env → FAILED)",
       "status": "tested-ok"
     },
     {
@@ -1036,7 +1036,7 @@
       "frequency_en": "Bi-monthly",
       "benefit_fr": "Newsletter AI générée automatiquement",
       "benefit_en": "AI-generated newsletter automatically",
-      "replaces": "n8n-workflow:Newsletter 3A Automation (used $env → FAILED + INACTIVE)",
+      "replaces": "legacy:Newsletter 3A Automation (used $env → FAILED + INACTIVE)",
       "status": "ready-blocked-api-credits"
     },
     {
@@ -1050,7 +1050,7 @@
       "frequency_en": "Triggered",
       "benefit_fr": "Séquence 3 emails personnalisée",
       "benefit_en": "3-email personalized sequence",
-      "replaces": "n8n-workflow:Email Outreach Sequence (used $env → FAILED)",
+      "replaces": "legacy:Email Outreach Sequence (used $env → FAILED)",
       "status": "tested-ok"
     },
     {
@@ -1150,7 +1150,7 @@
       "benefit_fr": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X",
       "benefit_en": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X",
       "port": 3003,
-      "replaces": "n8n-workflow:Blog Article Generator",
+      "replaces": "legacy:Blog Article Generator",
       "status": "tested-ok"
     },
     {
@@ -1205,7 +1205,7 @@
       "benefit_fr": "Confirmation + rappels 24h/1h",
       "benefit_en": "Confirmation + 24h/1h reminders",
       "port": 3008,
-      "replaces": "n8n-workflow:WhatsApp Confirmation + WhatsApp Reminders",
+      "replaces": "legacy:WhatsApp Confirmation + WhatsApp Reminders",
       "status": "awaiting-credentials"
     },
     {

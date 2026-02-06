@@ -123,7 +123,7 @@ const PROVIDERS = {
   anthropic: {
     name: 'Claude Opus 4.5',
     enabled: !!process.env.ANTHROPIC_API_KEY,
-    model: 'claude-opus-4-5-20251101',
+    model: 'claude-opus-4-6',
     endpoint: 'https://api.anthropic.com/v1/messages',
     apiKey: process.env.ANTHROPIC_API_KEY
   }

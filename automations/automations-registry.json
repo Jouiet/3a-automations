@@ -222,7 +222,7 @@
       "frequency_en": "Real-time",
       "benefit_fr": "Quiz → Email list",
       "benefit_en": "Quiz → Email list",
-      "note": "Previously planned as n8n workflow, now manual integration",
+      "note": "Manual integration via lead-scoring-agentic.cjs",
       "agentic_level": 1,
       "capabilities": [
         "Data Interoperability"
@@ -899,7 +899,7 @@
       "frequency_en": "N/A",
       "benefit_fr": "Remplacé par scripts natifs",
       "benefit_en": "Replaced by native scripts",
-      "note": "n8n workflows replaced by native Node.js scripts",
+      "note": "Deprecated - replaced by native Node.js scripts",
       "agentic_level": 1,
       "capabilities": [
         "Data Interoperability"
@@ -1334,7 +1334,7 @@
       "frequency_en": "Inbound calls",
       "benefit_fr": "Reservation par telephone automatique",
       "benefit_en": "Automatic phone booking",
-      "replaces": "n8n-workflow:Grok Voice Telephony (latence 4x meilleure)",
+      "replaces": "legacy:Grok Voice Telephony (latence 4x meilleure)",
       "port": 3009,
       "agentic_level": 4,
       "capabilities": [
@@ -1355,7 +1355,7 @@
       "frequency_en": "Every 6 hours",
       "benefit_fr": "+400 leads/jour avec scoring AI",
       "benefit_en": "+400 leads/day with AI scoring",
-      "replaces": "n8n-workflow:LinkedIn Lead Scraper (used $env → FAILED)",
+      "replaces": "legacy:LinkedIn Lead Scraper (used $env → FAILED)",
       "status": "tested-ok",
       "agentic_level": 2,
       "capabilities": [
@@ -1374,7 +1374,7 @@
       "frequency_en": "Bi-monthly",
       "benefit_fr": "Newsletter AI générée automatiquement",
       "benefit_en": "AI-generated newsletter automatically",
-      "replaces": "n8n-workflow:Newsletter 3A Automation (used $env → FAILED + INACTIVE)",
+      "replaces": "legacy:Newsletter 3A Automation (used $env → FAILED + INACTIVE)",
       "status": "ready-blocked-api-credits",
       "agentic_level": 2,
       "capabilities": [
@@ -1393,7 +1393,7 @@
       "frequency_en": "Triggered",
       "benefit_fr": "Séquence 3 emails personnalisée",
       "benefit_en": "3-email personalized sequence",
-      "replaces": "n8n-workflow:Email Outreach Sequence (used $env → FAILED)",
+      "replaces": "legacy:Email Outreach Sequence (used $env → FAILED)",
       "status": "tested-ok",
       "agentic_level": 3,
       "capabilities": [
@@ -1520,7 +1520,7 @@
       "benefit_fr": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X",
       "benefit_en": "Fallback Anthropic→Grok→Gemini + FB/LinkedIn/X",
       "port": 3003,
-      "replaces": "n8n-workflow:Blog Article Generator",
+      "replaces": "legacy:Blog Article Generator",
       "status": "tested-ok",
       "agentic_level": 3,
       "capabilities": [
@@ -1594,7 +1594,7 @@
       "benefit_fr": "Confirmation + rappels 24h/1h",
       "benefit_en": "Confirmation + 24h/1h reminders",
       "port": 3008,
-      "replaces": "n8n-workflow:WhatsApp Confirmation + WhatsApp Reminders",
+      "replaces": "legacy:WhatsApp Confirmation + WhatsApp Reminders",
       "status": "awaiting-credentials",
       "agentic_level": 1,
       "capabilities": [
@@ -2434,7 +2434,7 @@
     "script": "Script .cjs exécutable",
     "klaviyo-flow": "Template flow Klaviyo",
     "klaviyo-segment": "Segment Klaviyo",
-    "n8n-workflow": "Workflow n8n",
+    "deprecated-workflow": "Workflow déprécié (migré vers scripts natifs)",
     "shopify-flow": "Shopify Flow automation",
     "shopify-theme": "Code dans thème Shopify",
     "shopify-metafield": "Metafields Shopify",

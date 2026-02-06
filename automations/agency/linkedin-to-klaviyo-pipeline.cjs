@@ -248,11 +248,11 @@ https://3a-automation.com`,
 En tant que profil tech chez {{company}}, vous apprécierez notre approche technique :
 
 • Intégrations API robustes (REST, webhooks, GraphQL)
-• Workflows n8n et scripts Node.js maintenables
+• Workflows Node.js natifs et scripts maintenables
 • Architecture event-driven et scalable
 • Documentation technique complète
 
-Notre stack : n8n, Apify, Claude, Gemini, Klaviyo, Shopify.
+Notre stack : Node.js, Apify, Claude, Gemini, Klaviyo, Shopify.
 
 Résultat : 90% de réduction du temps d'intégration grâce à notre approche hybride code + low-code.
 

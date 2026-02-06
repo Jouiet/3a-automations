@@ -87,7 +87,7 @@ function parseAutomations(content) {
     { id: 'analytics', regex: /### 2\.5 ANALYTICS & REPORTING[\s\S]*?(?=### 2\.6|## 3|$)/, name: 'Analytics & Reporting' },
     { id: 'merchant_center', regex: /### 2\.6 GOOGLE MERCHANT CENTER[\s\S]*?(?=### 2\.7|## 3|$)/, name: 'Google Merchant Center' },
     { id: 'video', regex: /### 2\.7 VIDEO GENERATION[\s\S]*?(?=### 2\.8|## 3|$)/, name: 'Video Generation' },
-    { id: 'n8n', regex: /### 2\.8 N8N WORKFLOW AUTOMATION[\s\S]*?(?=## 3|$)/, name: 'n8n Workflows' }
+    { id: 'deprecated_workflows', regex: /### 2\.8 DEPRECATED WORKFLOWS[\s\S]*?(?=## 3|$)/, name: 'Deprecated Workflows' }
   ];
 
   for (const cat of categories) {
