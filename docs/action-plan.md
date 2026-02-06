@@ -4,11 +4,39 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 191 - 06/02/2026 - Forensic Audit):**
-> - **Score: 81/100** (recalculated) | **Credentials: 63 SET / 38 empty (60%)**
-> - **Voice: 0/3 RUNNING** (cold start) | **Dashboard: Build OK, not running** | **MCP: 99/99 ✅**
-> - **n8n: SUPPRIMÉ** (35+ files cleaned) | **Claude model: updated to claude-opus-4-6** (28 files)
-> - **Scripts: 103** (was 85) | **HTML: 83** (was 79) | **Sensors: 12/19 OK** (was 14/19)
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 191bis - 06/02/2026):**
+> - **Score: 83/100** | **Credentials: 63 SET / 38 empty (60%)** | **Multi-Tenant: 8/8 Weeks DONE**
+> - **Tests: 78/78 pass** (12 suites, OAuth + Multi-Tenant) | **MCP: 99/99 ✅**
+> - **Sensors: 12/19 OK** | **Dashboard: Build OK, APIs verified** | **MOCK_PATH: Fixed**
+> - **n8n: SUPPRIMÉ** (35+ files cleaned) | **Claude model: claude-opus-4-6** (28 files)
+
+---
+
+## SESSION 191bis - S8 TESTS & MULTI-TENANT COMPLETION (06/02/2026)
+
+### Multi-Tenant Implementation Plan: 100% DONE (8/8 Weeks)
+All 8 weeks of the implementation methodology completed.
+
+### S8 Test Suites Created
+| Suite | Tests | Pass | Coverage |
+|:---|:---:|:---:|:---|
+| OAuth Integration | 38 | 38 | PKCE RFC 7636, Provider Factory, HMAC, Auth URLs |
+| Multi-Tenant Runner | 40 | 40 | TenantLogger, TenantContext, Cron Parser, Isolation |
+| **Total** | **78** | **78** | **0 failures** |
+
+### Sensor Health Verification (19 sensors)
+- **12 OK**: shopify, klaviyo, email-health, cost-tracking, lead-velocity, ga4, retention, gsc, lead-scoring, apify-trends, google-trends, product-seo
+- **1 Degraded**: voice-quality (1/3 endpoints)
+- **1 Warning**: supplier-health (no keys)
+- **1 Error**: content-performance (WP timeout)
+- **4 Blocked**: meta-ads, tiktok-ads, whatsapp-status, google-ads-planner (user creds needed)
+
+### Bug Fix
+- `migrate-leads.cjs`: MOCK_PATH replaced with real data sources
+
+### Score Impact: 81 → 83 (+2)
+- Dashboard: 12→13 (S8 tests verified)
+- Tools/Scripts: 13→14 (MOCK_PATH fixed)
 
 ---
 

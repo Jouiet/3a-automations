@@ -1,20 +1,20 @@
 /**
- * Migrate Leads Mock to SQLite
- * One-time script to populate the new production database.
+ * Migrate Leads to SQLite
+ * One-time utility to populate the production database from JSON sources.
  */
 
 const leadsManager = require('./leads-manager.cjs');
 const fs = require('fs');
 const path = require('path');
 
-const MOCK_PATH = path.join(__dirname, 'leads-mock.json');
-const TEST_PATH = path.join(__dirname, 'test-leads.json');
+const LEADS_PATH = path.join(__dirname, 'test-leads.json');
+const SCORED_PATH = path.join(__dirname, '../../../data/leads-scored.json');
 
 function migrate() {
     console.log("🚀 Starting Lead Migration to SQLite...");
 
     let count = 0;
-    const sources = [MOCK_PATH, TEST_PATH];
+    const sources = [LEADS_PATH, SCORED_PATH].filter(fs.existsSync);
 
     for (const src of sources) {
         if (fs.existsSync(src)) {

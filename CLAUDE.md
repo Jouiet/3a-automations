@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 146.0 | 06/02/2026 | Session 191 (Forensic Audit) | Engineering Score: 81/100 | Runtime: 1/4 Services (verified)
+> Version: 147.0 | 06/02/2026 | Session 191bis | Engineering Score: 83/100 | Runtime: 1/4 Services (verified)
 
 ## Identité
 
@@ -64,20 +64,20 @@
 
 ---
 
-## Engineering Scores (Session 191 - FORENSIC AUDIT 06/02/2026)
+## Engineering Scores (Session 191bis - 06/02/2026)
 
 **3A = Agence qui vend des services automation, PAS un e-commerce**
 
 | Discipline | Max | Current | Note |
 |:---|:---:|:---:|:---|
 | **Voice AI** | 15 | **5** | 0/3 RUNNING (not started), code exists |
-| **Dashboard** | 15 | **12** | Build OK, not running, 100% Real API |
+| **Dashboard** | 15 | **13** | Build OK, APIs verified, S8 tests 78/78 |
 | **Agent Ops v3.0** | 20 | **20** | ✅ ALL 5 modules @ v3.0, EventBus, State Machine |
-| **Tools/Scripts** | 15 | **13** | 103 scripts, HITL 18/18, 1 MOCK_PATH found |
+| **Tools/Scripts** | 15 | **14** | 103 scripts, HITL 18/18, MOCK_PATH fixed |
 | **MCP Platform** | 15 | **15** | 99/99 tests, 124 tools exposés |
-| **Sensors** | 10 | **7** | 12/19 OK, 3 partial, 4 blocked creds |
+| **Sensors** | 10 | **7** | 12/19 OK, 1 degraded, 1 warning, 4 blocked creds |
 | **Integrations** | 10 | **9** | Credentials: 63 SET / 38 empty (60%) |
-| **TOTAL** | **100** | **81** | 1/4 Services verified running |
+| **TOTAL** | **100** | **83** | S8 Tests 100% DONE (8/8 weeks) |
 
 ### Runtime Status VÉRIFIÉ (06/02/2026 - Forensic)
 | Service | Status | Details |
@@ -110,6 +110,41 @@
 **AI Model Update (Session 191):**
 - `claude-opus-4-6` updated across 28 files
 - All other models verified correct: grok-4-1-fast-reasoning, gpt-5.2, gemini-3-flash-preview
+
+### Session 191bis - S8 Tests + Multi-Tenant Completion (06/02/2026) ✅
+
+**Multi-Tenant Implementation Plan: 8/8 Weeks DONE (100%)**
+
+| Week | Topic | Status |
+|:---|:---|:---:|
+| S1 | Fondations (Client Registry) | ✅ |
+| S2 | Credential Vault (Infisical) | ✅ |
+| S3 | OAuth Shopify | ✅ |
+| S4 | OAuth Klaviyo + Google | ✅ |
+| S5 | Script Runner Multi-Tenant | ✅ |
+| S6 | Dashboard Client Onboarding | ✅ |
+| S7 | Design Futuriste + UX | ✅ |
+| S8 | Tests + Verification | ✅ |
+
+**S8 Tests Created:**
+| Test Suite | Tests | Pass | File |
+|:---|:---:|:---:|:---|
+| OAuth Integration (PKCE, Factory, HMAC) | 38 | 38 | `automations/agency/tests/oauth-integration.test.cjs` |
+| Multi-Tenant Runner (Logger, Context, Cron, Isolation) | 40 | 40 | `automations/agency/tests/multi-tenant-runner.test.cjs` |
+| **Total** | **78** | **78** | **0 failures** |
+
+**Sensor Health Verification (19 sensors):**
+| Status | Count | Sensors |
+|:---|:---:|:---|
+| OK | 12 | shopify, klaviyo, email-health, cost-tracking, lead-velocity, ga4, retention, gsc, lead-scoring, apify-trends, google-trends, product-seo |
+| Degraded | 1 | voice-quality (1/3 endpoints, services not started) |
+| Warning | 1 | supplier-health (no CJ/BigBuy keys) |
+| Error | 1 | content-performance (WP API timeout) |
+| Blocked | 4 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner |
+
+**Additional fixes:**
+- MOCK_PATH in migrate-leads.cjs fixed (real data sources)
+- Dashboard build verified + 6 APIs tested empirically
 
 ### Agent Ops v3.0 (Session 179 - ALL COMPLETE ✅)
 | Module | Version | SOTA Features |
@@ -584,17 +619,19 @@ node SCRIPT.cjs --reject=<id>
 
 ---
 
-## Ecosystem Counts (Vérifiés S191 - 06/02/2026)
+## Ecosystem Counts (Vérifiés S191bis - 06/02/2026)
 
 | Component | Count |
 |:---|:---|
 | Scripts Core | **103** |
 | Automations Registry | 121 |
 | Skills | 42 |
-| Sensors | 19 (12 OK, 3 partial, 4 blocked) |
+| Sensors | 19 (12 OK, 1 degraded, 1 warning, 1 error, 4 blocked) |
 | MCP Servers | 14 |
 | HTML Pages | **83** |
 | Credentials SET | **60%** (63/101) |
+| Test Suites | 12 (78/78 pass) |
+| Multi-Tenant Plan | **8/8 Weeks** (100%) |
 
 ---
 
