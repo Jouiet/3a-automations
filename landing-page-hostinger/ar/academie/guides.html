@@ -5,10 +5,10 @@
     content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://ipapi.co https://script.google.com https://www.google-analytics.com; frame-src 'self' https://www.googletagmanager.com;">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="أدلة عملية قابلة للتحميل بصيغة PDF. إعداد سريع لأدوات الأتمتة.">
+  <meta name="description" content="أدلة سريعة من 3A Automation - 8 أدلة عملية لإتقان الأتمتة في 15 دقيقة أو أقل.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#4FBAF1">
-  <title>الأدلة السريعة | أكاديمية 3A</title>
+  <title>الأدلة السريعة | أكاديمية 3A Automation</title>
 
   <link rel="icon" type="image/x-icon" href="../../favicon.ico">
   <link rel="canonical" href="https://3a-automation.com/ar/academie/guides.html">
@@ -19,15 +19,15 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://3a-automation.com/ar/academie/guides.html">
-  <meta property="og:title" content="الأدلة السريعة | أكاديمية 3A">
-  <meta property="og:description" content="أدلة عملية قابلة للتحميل بصيغة PDF. إعداد سريع لأدوات الأتمتة.">
+  <meta property="og:title" content="الأدلة السريعة | أكاديمية 3A Automation">
+  <meta property="og:description" content="أدلة سريعة من 3A Automation - 8 أدلة عملية لإتقان الأتمتة في 15 دقيقة أو أقل.">
   <meta property="og:image" content="https://3a-automation.com/og-image.webp">
   <meta property="og:locale" content="ar_AR">
   <meta property="og:site_name" content="3A Automation">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@3a_automation">
-  <meta name="twitter:title" content="الأدلة السريعة | أكاديمية 3A">
-  <meta name="twitter:description" content="أدلة عملية قابلة للتحميل بصيغة PDF. إعداد سريع لأدوات الأتمتة.">
+  <meta name="twitter:title" content="الأدلة السريعة | أكاديمية 3A Automation">
+  <meta name="twitter:description" content="أدلة سريعة من 3A Automation - 8 أدلة عملية لإتقان الأتمتة في 15 دقيقة أو أقل.">
   <meta name="twitter:image" content="https://3a-automation.com/og-image.webp">
 
   <link rel="preload" href="../../logo.webp" as="image" type="image/webp">
@@ -51,10 +51,47 @@
     .breadcrumb { direction: rtl; }
     .course-content { text-align: right; line-height: 1.8; }
     .course-content ul { padding-right: 1.5rem; padding-left: 0; }
+    .guide { border: 1px solid rgba(79,186,241,0.15); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; background: rgba(13,15,26,0.6); backdrop-filter: blur(10px); }
+    .guide-header { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem; cursor: pointer; transition: background 0.3s; flex-direction: row-reverse; }
+    .guide-header:hover { background: rgba(79,186,241,0.05); }
+    .guide-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(79,186,241,0.1); display: flex; align-items: center; justify-content: center; color: #4FBAF1; flex-shrink: 0; }
+    .guide-info { flex: 1; text-align: right; }
+    .guide-title { font-size: 1.1rem; font-weight: 600; margin: 0; color: #fff; }
+    .guide-toggle { transition: transform 0.3s; color: #4FBAF1; flex-shrink: 0; }
+    .guide.open .guide-toggle { transform: rotate(180deg); }
+    .guide-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .guide.open .guide-content { max-height: 2000px; }
+    .guide-body { padding: 0 1.5rem 1.5rem; color: rgba(255,255,255,0.8); line-height: 1.8; }
+    .guide-body h4 { color: #4FBAF1; margin: 1.5rem 0 0.75rem; font-size: 1rem; }
+    .guide-body ul { padding-right: 1.5rem; padding-left: 0; }
+    .guide-body li { margin-bottom: 0.5rem; }
+    .step { background: rgba(79,186,241,0.05); border-radius: 8px; padding: 1rem 1.2rem; margin: 0.75rem 0; border-right: 3px solid #4FBAF1; border-left: none; }
+    .step h5 { color: #4FBAF1; margin: 0 0 0.5rem; font-size: 0.95rem; }
+    .step p { margin: 0; }
+    .tip { background: rgba(76,175,80,0.1); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0; border-right: 3px solid #4CAF50; border-left: none; }
+    .tip h5 { color: #4CAF50; margin: 0 0 0.5rem; }
+    .tip p { margin: 0; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #4FBAF1; text-decoration: none; margin: 2rem 0; font-weight: 600; flex-direction: row-reverse; }
+    .back-link:hover { text-decoration: underline; }
   </style>
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Course","name":"الأدلة السريعة","description":"أدلة عملية قابلة للتحميل بصيغة PDF. إعداد سريع لأدوات الأتمتة.","provider":{"@type":"Organization","name":"3A Automation","url":"https://3a-automation.com"},"inLanguage":"ar","url":"https://3a-automation.com/ar/academie/guides.html"}
+  {
+    "@context": "https://schema.org",
+    "@type": "LearningResource",
+    "name": "الأدلة السريعة من 3A Automation",
+    "description": "مجموعة من الأدلة العملية لإعداد وتحسين الأتمتة.",
+    "provider": {
+      "@type": "Organization",
+      "name": "3A Automation",
+      "url": "https://3a-automation.com"
+    },
+    "url": "https://3a-automation.com/ar/academie/guides.html",
+    "educationalUse": "reference",
+    "learningResourceType": "tutorial",
+    "inLanguage": "ar",
+    "isAccessibleForFree": true
+  }
   </script>
 </head>
 
@@ -84,8 +121,390 @@
 
   <div class="agentic-status-banner" id="agentic-status-banner"><div class="container"><div class="status-content"><div class="status-left"><span class="pulse-indicator online"></span><span class="status-text">النظام الوكيل: <strong id="system-status-text">يعمل</strong></span><span class="status-divider">|</span><span class="status-metric">تغطية HITL: <strong id="config-rate-text">18/18</strong></span><span class="status-divider">|</span><span class="status-metric">الوكالة: <strong id="agentic-count-text">18 عميلاً محصناً</strong></span></div><div class="status-right" id="verified-apis-scroll"><span class="api-tag ok">Shopify</span><span class="api-tag ok">Klaviyo</span><span class="api-tag ok">xAI</span><span class="api-tag ok">Google</span></div></div></div></div>
 
-  <main id="main-content" role="main"><section class="hero-lite"><div class="container"><div class="breadcrumb"><a href="/ar/">الرئيسية</a> / <a href="/ar/academie.html">الأكاديمية</a> / <span>الأدلة</span></div><h1 class="hero-title-ultra">الأدلة <span class="highlight">السريعة</span></h1><p class="hero-desc">أدلة عملية مختصرة لإعداد أدوات الأتمتة بسرعة.</p></div></section>
-    <section class="course-content"><div class="container"><div class="vision-grid"><div class="vision-card holographic"><h3 class="card-title">دليل إعداد Klaviyo</h3><p>ربط Shopify بـ Klaviyo وإعداد أول flow في 15 دقيقة.</p></div><div class="vision-card holographic"><h3 class="card-title">دليل GA4</h3><p>إعداد Google Analytics 4 وتتبع التحويلات.</p></div><div class="vision-card holographic"><h3 class="card-title">دليل Lead Magnets</h3><p>إنشاء Lead Magnet فعال يجمع عملاء محتملين مؤهلين.</p></div><div class="vision-card holographic"><h3 class="card-title">دليل A/B Testing</h3><p>أفضل ممارسات اختبار A/B للبريد والصفحات.</p></div></div><div class="cta-card" style="margin-top:2rem"><h3>هل تحتاج مساعدة شخصية؟</h3><a href="/ar/booking.html" class="btn-cyber btn-primary-cyber"><span class="btn-text">احجز استشارة</span><span class="btn-glow"></span></a></div></div></section></main>
+  <main id="main-content" role="main">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/ar/">الرئيسية</a> / <a href="/ar/academie.html">الأكاديمية</a> / <span>الأدلة السريعة</span>
+      </div>
+
+      <section class="page-hero" style="padding: 3rem 0 2rem;">
+        <h1 style="font-size:2.5rem; font-weight:800; margin-bottom:1rem;">الأدلة <span class="highlight">السريعة</span></h1>
+        <p style="font-size:1.15rem; color:rgba(255,255,255,0.7); max-width:700px;">
+          تعلّم في 15 دقيقة أو أقل. 8 أدلة عملية لحل مشكلات محددة. اضغط على أي دليل لفتحه.
+        </p>
+      </section>
+
+      <!-- دليل 1: ربط Klaviyo -->
+      <div class="guide" id="guide-klaviyo">
+        <div class="guide-header" onclick="toggleGuide('guide-klaviyo')">
+          <div class="guide-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">ربط Klaviyo</h3>
+          </div>
+          <svg width="20" height="20" class="guide-toggle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>يوضح لك هذا الدليل كيفية ربط حساب Klaviyo الخاص بك مع 3A Automation لمزامنة جهات الاتصال والأتمتة.</p>
+
+            <h4>المتطلبات</h4>
+            <ul>
+              <li>حساب Klaviyo نشط</li>
+              <li>صلاحيات المسؤول على الحساب</li>
+            </ul>
+
+            <h4>الخطوات</h4>
+            <div class="step">
+              <h5>1. الحصول على مفتاح API من Klaviyo</h5>
+              <p>في Klaviyo، اذهب إلى Account > Settings > API Keys. اضغط على "Create Private API Key". سمّها "3A Automation" واختر "Full Access".</p>
+            </div>
+
+            <div class="step">
+              <h5>2. نسخ المفتاح</h5>
+              <p>انسخ المفتاح الخاص (يبدأ بـ "pk_"). تنبيه: لن يظهر إلا مرة واحدة.</p>
+            </div>
+
+            <div class="step">
+              <h5>3. الإضافة في 3A Automation</h5>
+              <p>في لوحة التحكم 3A، اذهب إلى التكاملات > Klaviyo. الصق مفتاح API واضغط "ربط".</p>
+            </div>
+
+            <div class="step">
+              <h5>4. التحقق من الاتصال</h5>
+              <p>ستظهر رسالة تأكيد. قوائم Klaviyo الخاصة بك ستكون مرئية الآن في الواجهة.</p>
+            </div>
+
+            <div class="tip">
+              <h5>نصيحة أمنية</h5>
+              <p>لا تشارك مفتاح API أبدًا. إذا تم اختراقه، احذفه في Klaviyo وأنشئ واحدًا جديدًا.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- دليل 2: ربط Shopify -->
+      <div class="guide" id="guide-shopify">
+        <div class="guide-header" onclick="toggleGuide('guide-shopify')">
+          <div class="guide-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">ربط Shopify</h3>
+          </div>
+          <svg width="20" height="20" class="guide-toggle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>اربط متجر Shopify الخاص بك لمزامنة المنتجات والطلبات والعملاء.</p>
+
+            <h4>الخطوات</h4>
+            <div class="step">
+              <h5>1. الوصول إلى التثبيت</h5>
+              <p>في بريد الترحيب من 3A، اضغط على رابط تثبيت Shopify. أو في لوحة تحكم Shopify، ابحث عن "3A Automation" في متجر التطبيقات.</p>
+            </div>
+
+            <div class="step">
+              <h5>2. منح الصلاحيات</h5>
+              <p>يعرض Shopify الأذونات المطلوبة: قراءة المنتجات، الطلبات، العملاء. اضغط "تثبيت التطبيق".</p>
+            </div>
+
+            <div class="step">
+              <h5>3. المزامنة الأولية</h5>
+              <p>قد تستغرق المزامنة الأولى بضع دقائق حسب حجم الكتالوج. يظهر مؤشر التقدم.</p>
+            </div>
+
+            <div class="step">
+              <h5>4. التحقق</h5>
+              <p>في 3A > التكاملات > Shopify، يجب أن تشير الحالة إلى "متصل" مع تاريخ آخر مزامنة.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- دليل 3: إنشاء سلسلة بريد إلكتروني -->
+      <div class="guide" id="guide-sequence">
+        <div class="guide-header" onclick="toggleGuide('guide-sequence')">
+          <div class="guide-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">إنشاء سلسلة بريد إلكتروني</h3>
+          </div>
+          <svg width="20" height="20" class="guide-toggle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>أنشئ سلسلة تلقائية ترسل عدة رسائل بريد إلكتروني على فترات محددة.</p>
+
+            <h4>الخطوات</h4>
+            <div class="step">
+              <h5>1. إنشاء أتمتة جديدة</h5>
+              <p>الأتمتة > إنشاء. أعطها اسمًا وصفيًا (مثال: "ترحيب بالمشتركين الجدد").</p>
+            </div>
+
+            <div class="step">
+              <h5>2. تحديد المحفّز</h5>
+              <p>اختر الحدث الذي يبدأ السلسلة: الاشتراك في قائمة، شراء، سلة متروكة، إلخ.</p>
+            </div>
+
+            <div class="step">
+              <h5>3. إضافة البريد الأول</h5>
+              <p>اضغط "+ إضافة خطوة" > "بريد إلكتروني". اكتب العنوان والمحتوى. يتم إرسال البريد الأول فورًا بعد المحفّز.</p>
+            </div>
+
+            <div class="step">
+              <h5>4. إضافة تأخير</h5>
+              <p>اضغط "+ إضافة خطوة" > "تأخير". حدد الوقت قبل البريد التالي (مثال: يوم واحد، 3 أيام).</p>
+            </div>
+
+            <div class="step">
+              <h5>5. التكرار لكل بريد</h5>
+              <p>أضف تأخير + بريد لكل رسالة في السلسلة. يُنصح بـ 3 إلى 5 رسائل.</p>
+            </div>
+
+            <div class="step">
+              <h5>6. تفعيل السلسلة</h5>
+              <p>اضغط "تفعيل". تبدأ السلسلة للمحفّزات الجديدة.</p>
+            </div>
+
+            <div class="tip">
+              <h5>نصيحة</h5>
+              <p>اختبر أولاً ببريدك الإلكتروني الخاص. في الإعدادات، أضف عنوانك كـ "بريد اختبار" لتلقي المعاينات.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- دليل 4: قراءة التقارير التحليلية -->
+      <div class="guide" id="guide-analytics">
+        <div class="guide-header" onclick="toggleGuide('guide-analytics')">
+          <div class="guide-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">قراءة التقارير التحليلية</h3>
+          </div>
+          <svg width="20" height="20" class="guide-toggle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>افهم المقاييس المعروضة في لوحة التحكم واستخدمها لاتخاذ القرارات.</p>
+
+            <h4>المقاييس الرئيسية</h4>
+            <ul>
+              <li><strong>معدل الفتح</strong>: نسبة المستلمين الذين فتحوا البريد. الهدف: أكثر من 20%</li>
+              <li><strong>معدل النقر (CTR)</strong>: نسبة الفتحات التي نقرت. الهدف: أكثر من 2%</li>
+              <li><strong>الإيرادات المنسوبة</strong>: المبيعات الناتجة عن الأتمتة</li>
+              <li><strong>التحويل</strong>: نسبة العملاء المحتملين الذين أصبحوا عملاء</li>
+            </ul>
+
+            <h4>تفسير البيانات</h4>
+            <ul>
+              <li>فتح منخفض ← حسّن عنوان البريد</li>
+              <li>نقرات منخفضة ← حسّن المحتوى وأزرار الدعوة للعمل</li>
+              <li>تحويل منخفض ← راجع العرض أو الاستهداف</li>
+            </ul>
+
+            <div class="tip">
+              <h5>نصيحة</h5>
+              <p>قارن دائمًا بسجلاتك الخاصة بدلاً من "متوسطات القطاع". كل جمهور مختلف.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- دليل 5: تقسيم جهات الاتصال -->
+      <div class="guide" id="guide-segments">
+        <div class="guide-header" onclick="toggleGuide('guide-segments')">
+          <div class="guide-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">تقسيم جهات الاتصال</h3>
+          </div>
+          <svg width="20" height="20" class="guide-toggle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>أنشئ شرائح لإرسال رسائل مستهدفة لمجموعات مختلفة من جهات الاتصال.</p>
+
+            <h4>الخطوات</h4>
+            <div class="step">
+              <h5>1. الوصول إلى الشرائح</h5>
+              <p>جهات الاتصال > الشرائح > إنشاء شريحة.</p>
+            </div>
+
+            <div class="step">
+              <h5>2. تحديد الشروط</h5>
+              <p>أضف قواعد: "اشترى في آخر 30 يومًا"، "متوسط السلة أكثر من 100€"، "لم يفتح بريدًا منذ 90 يومًا".</p>
+            </div>
+
+            <div class="step">
+              <h5>3. دمج الشروط</h5>
+              <p>استخدم "و" للتراكم (أكثر تقييدًا) أو "أو" للتوسيع.</p>
+            </div>
+
+            <div class="step">
+              <h5>4. المعاينة</h5>
+              <p>يظهر عدد جهات الاتصال المطابقة. تحقق من التناسق قبل الحفظ.</p>
+            </div>
+
+            <h4>الشرائح الموصى بها</h4>
+            <ul>
+              <li><strong>VIP</strong>: 3+ طلبات أو إجمالي مبيعات أكثر من 500€</li>
+              <li><strong>معرّض للخطر</strong>: اشترى منذ 60-90 يومًا ولم يفتح بريدًا منذ 30 يومًا</li>
+              <li><strong>جدد</strong>: مسجّل في آخر 7 أيام</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- دليل 6: استرداد السلات المتروكة -->
+      <div class="guide" id="guide-cart">
+        <div class="guide-header" onclick="toggleGuide('guide-cart')">
+          <div class="guide-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">استرداد السلات المتروكة</h3>
+          </div>
+          <svg width="20" height="20" class="guide-toggle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>إعداد سلسلة تلقائية لاسترداد 10-15% من السلات المتروكة.</p>
+
+            <h4>استراتيجية 3 رسائل</h4>
+            <div class="step">
+              <h5>البريد 1 - بعد ساعة واحدة</h5>
+              <p>تذكير بسيط: "نسيت شيئًا". اعرض منتجات السلة بالصور. بدون خصم بعد.</p>
+            </div>
+
+            <div class="step">
+              <h5>البريد 2 - بعد 24 ساعة</h5>
+              <p>أضف الاستعجال: "هذه المنتجات مطلوبة بكثرة". أضف مراجعة عميل على أحد منتجات السلة.</p>
+            </div>
+
+            <div class="step">
+              <h5>البريد 3 - بعد 72 ساعة</h5>
+              <p>محاولة أخيرة مع حافز: شحن مجاني أو خصم 10%. اخلق شعور الفرصة الأخيرة.</p>
+            </div>
+
+            <h4>الإعدادات</h4>
+            <ul>
+              <li>المحفّز: "بدء الدفع" (إنشاء سلة)</li>
+              <li>شرط الاستبعاد: "إتمام الطلب" (أنهى الشراء)</li>
+              <li>كتلة ديناميكية: منتجات السلة مع الصور</li>
+            </ul>
+
+            <div class="tip">
+              <h5>نصيحة</h5>
+              <p>لا تقدم خصمًا من أول بريد. كثير من العملاء يُنهون الشراء بدون حافز - حافظ على هوامشك.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- دليل 7: تخصيص القوالب -->
+      <div class="guide" id="guide-templates">
+        <div class="guide-header" onclick="toggleGuide('guide-templates')">
+          <div class="guide-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">تخصيص القوالب</h3>
+          </div>
+          <svg width="20" height="20" class="guide-toggle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>عدّل قوالب البريد الإلكتروني لتتوافق مع هويتك البصرية.</p>
+
+            <h4>العناصر القابلة للتخصيص</h4>
+            <ul>
+              <li><strong>الشعار</strong>: ارفع شعارك في رأس الصفحة</li>
+              <li><strong>الألوان</strong>: اللون الرئيسي، الأزرار، الروابط</li>
+              <li><strong>الخطوط</strong>: نوع الخط المستخدم</li>
+              <li><strong>التذييل</strong>: المعلومات القانونية، مواقع التواصل</li>
+            </ul>
+
+            <h4>الخطوات</h4>
+            <div class="step">
+              <h5>1. الوصول إلى إعدادات التصميم</h5>
+              <p>الإعدادات > العلامة التجارية > قوالب البريد.</p>
+            </div>
+
+            <div class="step">
+              <h5>2. رفع الشعار</h5>
+              <p>الصيغة الموصى بها: PNG شفاف، عرض 200-400 بكسل.</p>
+            </div>
+
+            <div class="step">
+              <h5>3. تحديد الألوان</h5>
+              <p>أدخل رموز HEX لهويتك: اللون الرئيسي، الثانوي، الأزرار.</p>
+            </div>
+
+            <div class="step">
+              <h5>4. المعاينة والحفظ</h5>
+              <p>تحقق من العرض على الكمبيوتر والجوال قبل التأكيد.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- دليل 8: إعداد التنبيهات -->
+      <div class="guide" id="guide-notifications">
+        <div class="guide-header" onclick="toggleGuide('guide-notifications')">
+          <div class="guide-icon">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          </div>
+          <div class="guide-info">
+            <h3 class="guide-title">إعداد التنبيهات</h3>
+          </div>
+          <svg width="20" height="20" class="guide-toggle" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="guide-content">
+          <div class="guide-body">
+            <p>تلقّ تنبيهات عن الأحداث المهمة: عملاء محتملون جدد، مبيعات، أخطاء.</p>
+
+            <h4>أنواع التنبيهات</h4>
+            <ul>
+              <li><strong>عميل محتمل جديد</strong>: عندما يدخل عميل محتمل النظام</li>
+              <li><strong>عميل محتمل مؤهل</strong>: عندما يتجاوز العميل المحتمل عتبة التقييم</li>
+              <li><strong>بيع منسوب</strong>: عندما تولّد أتمتة عملية بيع</li>
+              <li><strong>خطأ</strong>: عندما تفشل أتمتة</li>
+              <li><strong>مخزون منخفض</strong>: عندما يصل منتج إلى عتبة التنبيه</li>
+            </ul>
+
+            <h4>القنوات المتاحة</h4>
+            <ul>
+              <li><strong>البريد الإلكتروني</strong>: تنبيهات عبر البريد</li>
+              <li><strong>Slack</strong>: رسائل في قناة مخصصة</li>
+              <li><strong>لوحة التحكم</strong>: شارة إشعار في الواجهة</li>
+            </ul>
+
+            <div class="step">
+              <h5>الإعدادات</h5>
+              <p>الإعدادات > التنبيهات. فعّل/عطّل كل نوع. لـ Slack، أضف عنوان webhook الخاص بك.</p>
+            </div>
+
+            <div class="tip">
+              <h5>نصيحة</h5>
+              <p>فعّل فقط التنبيهات القابلة للتنفيذ. كثرة التنبيهات = ستتجاهلها جميعًا.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/ar/academie.html" class="back-link">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l-7 7 7 7"/></svg>
+        العودة إلى الأكاديمية
+      </a>
+    </div>
+  </main>
+
   <footer class="footer-ultra">
     <div class="container">
       <div class="footer-status-bar">
@@ -119,6 +538,12 @@
 
   <div id="cookie-consent" class="cookie-banner hidden"><div class="cookie-content"><div class="cookie-text"><p>نستخدم ملفات تعريف الارتباط لتحسين تجربتك. <a href="/ar/legal/politique-confidentialite.html">سياسة الخصوصية</a></p></div><div class="cookie-actions"><button id="cookie-reject" class="cookie-btn cookie-btn-secondary">رفض</button><button id="cookie-accept" class="cookie-btn cookie-btn-primary">قبول</button></div></div></div>
 
+  <script>
+    function toggleGuide(id) {
+      const guide = document.getElementById(id);
+      guide.classList.toggle('open');
+    }
+  </script>
   <script src="../../script-lite.min.js"></script>
   <script src="../../js/ui-init.js?v=52.0" defer></script>
   <script src="../../geo-locale.js"></script>

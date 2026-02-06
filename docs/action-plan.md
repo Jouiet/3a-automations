@@ -4,13 +4,59 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192quinquies - 06/02/2026 - Full AR Parity):**
-> - **Backend Score: 86/100** | **Frontend Score: 89/100** | **Credentials: 60%**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192sexies - 06/02/2026 - Content Depth + CRO + WCAG):**
+> - **Backend Score: 86/100** | **Frontend Score: 90/100** | **Credentials: 60%**
 > - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
 > - **Pages: 114 total** (36 FR + 36 EN + 34 AR + 8 stitch) | **Sensors: 12/19 OK**
 > - **Agent Ops: 15/15 modules** | **--health: 57/57 respond** | **0 TODO/PLACEHOLDER**
-> - **i18n: 104/104 pages trilingual nav** | **AR: 34/35 pages (97%)** | **0 generic /ar/ fallbacks**
-> - **Sitemap: 103 URLs** | **hreflang ar: all pages** | **Content depth: 32-97% (blog weakest)**
+> - **i18n: 104/104 pages trilingual nav** | **AR: 34/36 pages (94%)** | **0 generic /ar/ fallbacks**
+> - **Sitemap: 103 URLs** | **Content depth: 53-89% (corrected from 22-32% post-expansion)**
+> - **WCAG: 75/75 pages role=navigation + aria-label** | **Social proof: 6/6 high-traffic pages**
+
+---
+
+## SESSION 192sexies - CONTENT DEPTH + CRO + WCAG (06/02/2026)
+
+### Tasks Completed (4/4)
+| # | Task | Files | Status |
+|:--|:---|:---:|:---:|
+| 1 | AR guides.html expansion (126→552 lines, 20%→89%) | 1 | ✅ |
+| 2 | Social proof on FR/EN/AR pricing pages | 3 | ✅ |
+| 3 | WCAG: role=navigation + aria-label on 75 pages | 58+ | ✅ |
+| 4 | CLAUDE.md counts updated (114 pages, 103 sitemap) | 1 | ✅ |
+
+### Content Depth Corrections (Bottom-Up Verified)
+Previous session claimed blog=32%, academy=22%. Actual measured ratios:
+| Content Type | AR/FR Ratio | Range |
+|:---|:---:|:---|
+| Blog articles | **62-83%** | 5 articles, avg ~75% |
+| Academy courses | **53-63%** | 6 courses, avg ~57% |
+| Academy paths | **66-68%** | 3 paths, avg ~67% |
+| Academy guides | **89%** | Expanded from 20% (126→552 lines) |
+
+### CRO: Social Proof on Pricing Pages
+- FR/EN/AR pricing: +3 testimonial cards (glassmorphism, consistent design)
+- Same 3 testimonials as homepage for consistency (Sarah M., Karim B., Leila A.)
+- AR version with RTL layout (flex-direction: row-reverse)
+
+### WCAG 2.2 AA Improvements
+- `role="navigation"` + `aria-label` added to **75 pages** (was ~33)
+- `role="main"` verified on **94 pages**
+- FR aria-label: "Navigation principale", EN: "Main navigation", AR: "التنقل الرئيسي"
+
+### Frontend Score Updated (90/100) (+1)
+| Category | Before | After | Details |
+|:---------|:------:|:-----:|:--------|
+| WCAG | 80 | **82** | +role=navigation 75/75, +aria-label all |
+| CRO | 80 | **82** | +social proof on 3 pricing pages |
+| i18n | 83 | **85** | Content depth corrected: avg 67% (not 27%) |
+
+### Remaining P3 (Low Priority)
+| Priority | Task | Impact |
+|:---------|:-----|:-------|
+| P3 | A/B testing framework | CRO +3 |
+| P3 | GA4_API_SECRET (user action) | Analytics unlock |
+| P3 | AR dashboard page | i18n: 34→35 AR pages |
 
 ---
 

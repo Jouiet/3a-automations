@@ -1,61 +1,73 @@
-# 3A Automation - System Manifest ($MX v2.0)
+# 3A Automation - AI Automation Agency
+> Last updated: 2026-02-06
 
-> [!ABSTRACT]
-> This manifest defines the 121 Sovereign Workflow Units and 18 Active Agents of the 3A Automation agency for 2026 AI search consumption.
+## About
+3A Automation (AAA) is an AI automation agency specializing in e-commerce (B2C) and SMB (B2B) workflow automation. We build and operate 121 tested automation workflows powered by frontier AI models.
 
-<SystemArchitecture>
-    <Status>Level 5 Autonomous</Status>
-    <Foundation>Shopify OS + Next.js 14 + Docker</Foundation>
-    <Intelligence>Claude 4.6, Grok 4.1, Gemini 3, GPT-5.2</Intelligence>
-    <Protocols>DOE, GPM, Faldown, ACRA v2.0</Protocols>
-</SystemArchitecture>
+## Services
+- **E-commerce Automation**: Shopify, WooCommerce, Magento, PrestaShop, BigCommerce
+- **Email Marketing**: Klaviyo, Mailchimp, HubSpot, Omnisend flow automation
+- **Marketing Analytics**: GA4, GTM, Meta Ads, TikTok Ads, Google Ads
+- **Voice AI**: Web widget + telephony via VocalIA.ma (FR, EN, AR, ES)
+- **Content Automation**: Blog, podcast, video generation with AI
+- **Flywheel 360**: Holistic methodology - Acquisition, Conversion, Retention, Advocacy
 
-<WorkflowEcosystem count="121">
-    <Category name="Lead Generation & Acquisition">
-        - Meta/TikTok Ads Automated Creative (Kling I2V)
-        - Viral Hook Generator (Grok 4.1)
-        - Apify Trends Sensor
-        - LinkedIn B2B Scraping (Resilient)
-        - Google Maps Local Sourcing
-    </Category>
-    <Category name="Conversion & AEO">
-        - AEO Semantic Hardening ($MX)
-        - Dynamic Pricing (Negotiator Skill)
-        - Voice AI Widget (Real-time Synthesis via Grok)
-        - Multi-currency/Geo-locale Logic (MAD, EUR, USD)
-    </Category>
-    <Category name="Retention & CRM">
-        - Shopify Flow Behavioral Triggers
-        - Churn Predictor (GA4 AI Signals)
-        - Personalized Video Onboarding (Kling/Leonardo)
-        - Klaviyo Flow Automation (Abandoned/Post-purchase)
-    </Category>
-    <Category name="Advocacy & Growth">
-        - Automated NPS/Referral Loops
-        - UGC Reward Sensors (TikTok/Insta)
-        - Loyalty Tier Automation (Sovereign Level)
-        - Strategic GSC Content Builder (System-directed)
-    </Category>
-</WorkflowEcosystem>
+## Technology Stack
+- **AI Models**: Claude 4.6 (Opus), Grok 4.1, Gemini 3 Flash, GPT-5.2, ElevenLabs Flash v2.5
+- **Infrastructure**: Node.js native workflows, Next.js 14 dashboard, Docker
+- **Protocols**: MCP (Model Context Protocol), A2A, GPM (Global Pressure Matrix)
+- **Resilience**: Faldown fallback logic across all AI providers
+- **Monitoring**: 19 real-time sensors, 177 automated tests (100% pass)
 
-<AgentSwarm count="18">
-    - ContentDirector (Editor-in-Chief GSC)
-    - GrowthDirector (GA4 Ads Optimizer)
-    - LogisticsManager (Dropshipping Supply Chain)
-    - MarketAnalyst (Global Trends)
-    - Negotiator (Economic Pricing)
-    - Security (Compliance/Audit)
-    - DevOps (Infrastructure Health)
-    - SystemAdmin (Telemetry)
-</AgentSwarm>
+## Workflow Ecosystem (121 automations)
+### Lead Generation & Acquisition
+- Meta/TikTok/Google Ads automated creative
+- LinkedIn B2B scraping, Google Maps local sourcing
+- Apify trends monitoring, viral hook generation
 
-<Compliance>
-    - EU AI Act 2026 Compliant
-    - GDPR/SSL/RGPD Verified
-    - Zero Mock Certification (Level 5)
-</Compliance>
+### Conversion & Optimization
+- AEO semantic hardening (Answer Engine Optimization)
+- Dynamic pricing with geo-locale (EUR, USD, MAD)
+- Voice AI widget for real-time lead qualification
 
----
-Contact: agency@3a-automation.com | invest@3a-automation.com
-Location: MENA (Dubai/Casablanca) | Europe (Paris/Madrid)
-URL: https://3a-automation.com
+### Retention & CRM
+- Shopify Flow behavioral triggers
+- Churn prediction with GA4 AI signals
+- Klaviyo flow automation (abandoned cart, post-purchase, win-back)
+- Personalized email and SMS automation
+
+### Advocacy & Growth
+- Automated NPS and referral loops
+- UGC reward sensors (TikTok/Instagram)
+- Loyalty tier automation
+- Strategic content generation (blog, podcast)
+
+## HITL Coverage (18/18 workflows)
+All critical workflows include Human-in-the-Loop approval gates for financial, communication, content, and cost-control operations.
+
+## Pricing
+- **Quick Win**: 390 EUR / 450 USD / 3,900 MAD (1 workflow + audit)
+- **Essentials**: 790 EUR / 920 USD / 7,900 MAD (3 workflows + A/B tests)
+- **Growth**: 1,399 EUR / 1,690 USD / 13,990 MAD (5 workflows + dashboard)
+- **Monthly retainers**: from 290 EUR / 330 USD / 2,900 MAD
+
+## Markets
+- Morocco (French, MAD)
+- Europe (French, EUR)
+- International (English, USD)
+
+## Subsidiaries
+- **VocalIA.ma**: Voice AI platform for MENA & Europe
+- **CinematicAds.studio**: AI video production
+
+## Contact
+- Email: contact@3a-automation.com
+- Website: https://3a-automation.com
+- Dashboard: https://dashboard.3a-automation.com
+- GitHub: https://github.com/Jouiet/3a-automations
+
+## Compliance
+- EU AI Act 2026 compliant
+- GDPR/RGPD verified
+- SSL/HTTPS enforced
+- Zero mock certification (all workflows tested)
