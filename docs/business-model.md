@@ -446,7 +446,7 @@ STRUCTURE: SAFE ou actions ordinaires
 |---------|-------|
 | SEO Technique | 92% |
 | AEO (Answer Engine) | 89% |
-| FAQPage Schema | 16/63 pages |
+| FAQPage Schema | 16/75 pages |
 | AI Crawlers | 100% allowed |
 
 ---

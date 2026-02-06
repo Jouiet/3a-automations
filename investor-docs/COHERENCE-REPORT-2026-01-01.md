@@ -152,7 +152,7 @@
 | Pricing Supabase | supabase.com/pricing |
 | Pricing GCP | cloud.google.com/run/pricing |
 | Automations | automations-registry.json v2.1.0 (86) |
-| Pages web | landing-page-hostinger/ (63 pages) |
+| Pages web | landing-page-hostinger/ (75 pages) |
 
 ---
 
