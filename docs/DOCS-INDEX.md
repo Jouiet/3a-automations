@@ -1,5 +1,5 @@
 # Documentation Index - 3A Automation
-> 40 docs actifs + 17 archivés = 57 total | Màj: 06/02/2026 Session 191ter
+> 45 docs actifs + 20 archivés = 65 total | Màj: 06/02/2026 Session 191ter
 > Charger à la demande via `@docs/FICHIER.md`
 > Archives historiques: `docs/archive/` (données périmées, consultation seulement)
 
@@ -11,13 +11,14 @@ Ces documents sont les références canoniques, maintenus à jour à chaque sess
 
 | Doc | Taille | Contenu | Dernière MàJ |
 |:----|:------:|:--------|:-------------|
+| **`GETTING-STARTED.md`** | **5K** | **Onboarding développeurs, quick start, commandes** | **S191ter** |
 | `../CLAUDE.md` | 22K | Config Claude, scores, état système, compteurs | S191ter |
 | `ETAGERE-TECHNOLOGIQUE-ECOSYSTEME-3A.md` | 50K | Etagère tech complète, architecture couches | S191ter |
 | `AI-PROVIDER-STRATEGY.md` | 16K | Stratégie AI, fallback chains, matrice task→provider | S191ter |
 | `IMPLEMENTATION-METHODOLOGY-ANALYSIS.md` | 46K | Multi-tenant, méthodologie 8 semaines | S191ter |
 | `3A-GLOBAL-MCP-DOCUMENTATION.md` | 20K | MCP server, 124 tools, tests 99/99 | S191ter |
 | `VOICE-AI-PLATFORM-REFERENCE.md` | 28K | VocalIA master doc, pricing, concurrents | S184bis |
-| `action-plan.md` | 80K | Plan d'action exécutable, historique sessions | S191ter |
+| `action-plan.md` | 26K | Plan d'action exécutable (sessions historiques archivées) | S191ter |
 | `reference/infrastructure.md` | 1.3K | VPS, Docker, déploiement | S178 |
 | `reference/mcps-status.md` | 2K | Stack MCP 13 serveurs, statuts | S191ter |
 | `reference/pricing.md` | 1K | Packs setup + retainers | S165 |
@@ -41,13 +42,9 @@ Ces documents sont les références canoniques, maintenus à jour à chaque sess
 
 | Doc | Taille | Contenu |
 |:----|:------:|:--------|
-| `VOICE-MENA-PLATFORM-ANALYSIS.md` | 117K | Analyse MENA exhaustive (historique lourd) |
+| `VOICE-MENA-PLATFORM-ANALYSIS.md` | 110K | Analyse MENA exhaustive (plan S169 archivé) |
 | `VOICE-MULTILINGUAL-STRATEGY.md` | 32K | Stratégie multilingue Voice AI |
-| `VOICE-AI-ARCHITECTURE.md` | 8K | Architecture Voice (redirige vers PLATFORM-REFERENCE) |
-| `VOICE-DARIJA-FORENSIC.md` | 5K | Audit Darija STT/TTS/LLM |
-| `VOICE-AUDIT-FINAL.md` | 5K | Audit forensique Voice couches C2 |
 | `mcp-catalog.md` | 13K | Catalogue 121 tools MCP |
-| `mcp-integration.md` | 29K | Analyse intégration MCP-Flywheel |
 | `scoring-matrix.md` | 10K | Matrice scoring leads |
 | `SEGMENTATION-PROFONDE.md` | 29K | Segmentation clients avancée |
 | `PERSONAS-3A-AUTOMATION.md` | 20K | 30 personas Voice AI |
@@ -111,6 +108,12 @@ Ces documents sont des snapshots de sessions passées. Les données sont **péri
 | `ANALYSE-TRANSFERT-DESIGN-AUTOMATION-SHOPIFY.md` | 13K | S138 | Analyse transfert Shopify |
 | `ANALYSE-GENERICISATION-DESIGN-AUTOMATION.md` | 11K | S138 | Analyse généricisation |
 | `SIMULATION-SCORING-IMPACT.md` | 4K | S138 | Simulation scoring |
+| `VOICE-AI-ARCHITECTURE.md` | 8K | S166 | Architecture Voice (redirige PLATFORM-REFERENCE) |
+| `VOICE-AUDIT-FINAL.md` | 5K | S166 | Audit forensique Voice couches C2 |
+| `VOICE-DARIJA-FORENSIC.md` | 5K | S169 | Audit Darija STT/TTS/LLM |
+| `mcp-integration.md` | 29K | S168 | Analyse intégration MCP-Flywheel |
+| `action-plan-sessions-165-180.md` | 50K | S165-180 | Sessions historiques extraites de action-plan.md |
+| `voice-mena-session-169-plan.md` | 8K | S169 | Plan d'action S169 extrait de VOICE-MENA |
 | `SESSION-HISTORY.md` | 4K | S165+ | Index sessions |
 
 ---
@@ -130,6 +133,7 @@ Ces documents sont des snapshots de sessions passées. Les données sont **péri
 | Archive | Sessions |
 |:--------|:---------|
 | `session-history/sessions-115-131.md` | 115-131 |
+| `session-history/sessions-claude-115-131.md` | 115-131 (Claude) |
 | `session-history/sessions-141-164.md` | 141-164 |
 
 ---
@@ -155,4 +159,4 @@ Ces documents sont des snapshots de sessions passées. Les données sont **péri
 
 ---
 
-*56/56 docs indexés (100%) - Màj: 06/02/2026 Session 191ter*
+*65/65 docs indexés (100%) - Màj: 06/02/2026 Session 191ter*
