@@ -9,7 +9,7 @@ automations/
 └── generic/                   # Utilitaires
 ```
 
-## Compteurs Vérifiés (Session 192quater - 06/02/2026)
+## Compteurs Vérifiés (Session 192quinquies - 06/02/2026)
 | Composant | Count | Vérification |
 |:----------|:-----:|:-------------|
 | Workflows Core | 103 | `ls agency/core/*.cjs \| wc -l` |
@@ -19,8 +19,8 @@ automations/
 | Tests | 177 | 78 S8 + 99 MCP (100%) |
 | Agent Ops Modules | 15 | verify-agent-ops.cjs |
 | MCP Tools | 124 | 121 automations + 3 meta |
-| HTML Pages | 87 | `find landing-page-hostinger -name "*.html"` (79 real + 8 stitch) |
-| Trilingual Nav | 77/77 | `grep -rl 'class="lang-nav"' \| wc -l` |
+| HTML Pages | 114 | 36 FR + 36 EN + 34 AR + 8 stitch |
+| Trilingual Nav | 104/104 | `grep -rl 'class="lang-nav"' \| wc -l` |
 
 ## Standards Code
 - CommonJS (.cjs), 2 espaces, single quotes
