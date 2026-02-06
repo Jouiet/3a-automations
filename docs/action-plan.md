@@ -4,8 +4,8 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192 - 06/02/2026 - Frontend P2 Implementation):**
-> - **Backend Score: 86/100** | **Frontend Score: 85/100** (+4) | **Credentials: 60%**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192bis - 06/02/2026 - SEO+CI+Registry Safety):**
+> - **Backend Score: 86/100** | **Frontend Score: 86/100** (+1) | **Credentials: 60%**
 > - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
 > - **Pages: 75 (+8 stitch)** | **Sensors: 12/19 OK** | **Dashboard: 8/8 APIs**
 > - **Agent Ops: 15/15 modules** | **--health: 57/57 respond** | **0 TODO/PLACEHOLDER**
@@ -48,8 +48,36 @@
 | P2 | AR page expansion (3→35 pages) | i18n +20 |
 | P2 | GA4_API_SECRET credential (user action) | Analytics unlock |
 | P3 | Full WCAG 2.2 AA audit | Accessibility +5 |
-| P3 | Lighthouse CI in GitHub Actions | Automation |
 | P3 | A/B testing framework | CRO +5 |
+
+---
+
+## SESSION 192bis - SEO+CI+REGISTRY SAFETY (06/02/2026)
+
+### Tasks Completed (4/4)
+| # | Task | Files | Status |
+|:--|:---|:---:|:---:|
+| 1 | Fix sync-knowledge-base.cjs registry corruption | 1 | ✅ |
+| 2 | Add BreadcrumbList + schemas to 9 pages | 10 | ✅ |
+| 3 | Verify geo-locale currency display | 0 | ✅ (verified) |
+| 4 | Create Lighthouse CI GitHub Action | 1 | ✅ |
+
+### Registry Safety Fixes
+- Added 15 excluded infrastructure directories to sync script
+- Added regex patterns for bundle/server/route/telemetry files
+- Added safety cap (130 max automations)
+- Corrected category counts (were inflated by old sync)
+- Fixed voice KB: removed Voice AI from packs, added VocalIA.ma redirect
+
+### Structured Data Improvements
+- AR pages: 0 → 3 schemas (Organization + WebPage + BreadcrumbList)
+- BreadcrumbList total: 34 → 43 pages
+- Added to: AR×3, FR/EN FAQ, contact, automations, EN index
+
+### Frontend Score Updated (86/100) (+1)
+| Category | Before | After |
+|:---------|:------:|:-----:|
+| SEO/AEO | 78 | **80** (+BreadcrumbList 9 pages, AR schemas) |
 
 ---
 
