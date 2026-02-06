@@ -1,12 +1,12 @@
 # 3A Automation - System Manifest ($MX v2.0)
 
 > [!ABSTRACT]
-> This manifest defines the 121 Sovereign Workflow Units and 22 Active Agents of the 3A Automation agency for 2026 AI search consumption.
+> This manifest defines the 121 Sovereign Workflow Units and 18 Active Agents of the 3A Automation agency for 2026 AI search consumption.
 
 <SystemArchitecture>
     <Status>Level 5 Autonomous</Status>
     <Foundation>Shopify OS + Next.js 14 + Docker</Foundation>
-    <Intelligence>Claude 4.5, Grok 4.1, Gemini 3, GPT-5.2</Intelligence>
+    <Intelligence>Claude 4.6, Grok 4.1, Gemini 3, GPT-5.2</Intelligence>
     <Protocols>DOE, GPM, Faldown, ACRA v2.0</Protocols>
 </SystemArchitecture>
 

@@ -111,6 +111,8 @@ const TRANSLATION_CONFIG = {
 
 // Import Marketing Science Core (Persuasion Psychology)
 const MarketingScience = require('./marketing-science-core.cjs');
+// Session 191quater: Phase 4 - ErrorScience self-healing feedback loop
+const ErrorScience = require('./ErrorScience.cjs');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONFIGURATION
@@ -544,6 +546,15 @@ Output format: Valid JSON only, no markdown fences, no explanations:
   "category": "automation|ecommerce|ai|marketing",
   "sources_used": ["source1", "source2"]
 }`;
+
+  // Phase 4: Inject ErrorScience learned rules for SEO sector
+  let selfHealingRules = '';
+  try {
+    const seoRules = ErrorScience.getLearnedInstructions('seo', 0.5);
+    if (seoRules) {
+      baseContext += `\n\nSELF_HEALING_DIRECTIVES:\n${seoRules}`;
+    }
+  } catch (e) { /* ErrorScience unavailable */ }
 
   // Inject Psychology Framework (PAS, AIDA, SB7, CIALDINI)
   return MarketingScience.inject(framework || 'PAS', baseContext);

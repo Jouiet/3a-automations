@@ -58,7 +58,7 @@ const path = require('path');
 const CONFIG = {
   SITE_DIR: path.join(__dirname, '..', 'landing-page-hostinger'),
   EXPECTED_AUTOMATIONS: 121,
-  EXPECTED_AGENTS: 22,
+  EXPECTED_AGENTS: 18,
 
   // Directories to exclude from validation (generated assets, not production)
   EXCLUDE_DIRS: [
@@ -295,18 +295,28 @@ function validateAgentCount() {
   console.log('\n🤖 Validating Agent Count...');
 
   const htmlFiles = findFiles(CONFIG.SITE_DIR, '.html');
-  const pattern18 = /18\s*(agent|Agent)/g;
+  const expected = CONFIG.EXPECTED_AGENTS;
+  const agentPattern = /(\d+)\s*(agent|Agent)/g;
+  // Skip "Level X agents" or "L5 agents" (autonomy classification, not count)
+  const levelPattern = /(?:Level|L|Niveau)\s*\d+\s*(?:agent|Agent)/i;
 
   for (const file of htmlFiles) {
     const content = fs.readFileSync(file, 'utf8');
-    const matches = content.match(pattern18);
-    if (matches) {
-      addError('Count', file, `Found "18 agents" but expected "${CONFIG.EXPECTED_AGENTS}"`,
-        `Replace with ${CONFIG.EXPECTED_AGENTS}`);
+    let match;
+    while ((match = agentPattern.exec(content)) !== null) {
+      const found = parseInt(match[1], 10);
+      // Check surrounding context - skip autonomy level references
+      const start = Math.max(0, match.index - 10);
+      const context = content.substring(start, match.index + match[0].length);
+      if (levelPattern.test(context)) continue;
+      if (found !== expected) {
+        addError('Count', file, `Found "${found} agents" but expected "${expected}"`,
+          `Replace with ${expected}`);
+      }
     }
   }
 
-  addPassed('Count', `Agent count validation complete (expected: ${CONFIG.EXPECTED_AGENTS})`);
+  addPassed('Count', `Agent count validation complete (expected: ${expected})`);
 }
 
 function validateCSSVariables() {

@@ -36,6 +36,8 @@ const CRM_MOD = require('./voice-crm-tools.cjs');
 const { VoicePersonaInjector, VOICE_CONFIG } = require('./voice-persona-injector.cjs');
 // Session 178: SOTA - ContextBox integration for persistent session state
 const ContextBox = require('./ContextBox.cjs');
+// Session 191quater: Phase 4 - ErrorScience self-healing feedback loop
+const ErrorScience = require('./ErrorScience.cjs');
 // Security constants
 const MAX_BODY_SIZE = 1024 * 1024; // 1MB limit
 const CORS_WHITELIST = [
@@ -1035,9 +1037,20 @@ async function getResilisentResponse(userMessage, conversationHistory = [], sess
     }
   }
 
-  // 3. Dynamic Prompt Construction (Session 176ter: Language-aware prompts)
+  // 3. Self-Healing Rules Injection (Phase 4 - Session 191quater)
+  let selfHealingContext = '';
+  try {
+    const voiceRules = ErrorScience.getLearnedInstructions('voice', 0.5);
+    if (voiceRules) {
+      selfHealingContext = `\nSELF_HEALING_DIRECTIVES:\n${voiceRules}`;
+    }
+  } catch (e) {
+    // ErrorScience unavailable - continue without self-healing
+  }
+
+  // 4. Dynamic Prompt Construction (Session 176ter: Language-aware prompts)
   const basePrompt = getSystemPromptForLanguage(language);
-  const fullSystemPrompt = `${basePrompt}\n\nRELEVANT_SYSTEMS (RLS Isolated):\n${ragContext}${graphContext}${toolContext}${crmContext}\n\nTENANT_ID: ${tenantId}`;
+  const fullSystemPrompt = `${basePrompt}\n\nRELEVANT_SYSTEMS (RLS Isolated):\n${ragContext}${graphContext}${toolContext}${crmContext}${selfHealingContext}\n\nTENANT_ID: ${tenantId}`;
 
   // Fallback order: Grok → [Atlas-Chat for Darija] → OpenAI → Gemini → Anthropic → Local
   // Session 170: Language-aware chain - Atlas-Chat-9B prioritized for Darija (ary)
@@ -1087,6 +1100,15 @@ async function getResilisentResponse(userMessage, conversationHistory = [], sess
     } catch (err) {
       errors.push({ provider: provider.name, error: err.message });
       console.log(`[Voice API] ${provider.name} failed:`, err.message);
+      // Phase 4: Record error for self-healing analysis
+      try {
+        ErrorScience.recordError({
+          component: 'VoiceAPI',
+          error: `${provider.name}: ${err.message}`,
+          severity: 'medium',
+          tenantId
+        });
+      } catch (e) { /* silent */ }
     }
   }
 
