@@ -4,14 +4,41 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192octies - 06/02/2026 - SEO/AEO Deep + Performance):**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 192novies - 06/02/2026 - AEO + Internal Linking + Sitemap):**
 > - **Backend Score: 86/100** | **Frontend Score: 93/100** | **Credentials: 60%**
 > - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
 > - **Pages: 115 total** (36 FR + 36 EN + 35 AR + 8 stitch) | **Sensors: 12/19 OK**
 > - **Structured Data: BreadcrumbList 102/107 (95%)** | **Course 24/24 (100%)** | **FAQPage 85/107**
 > - **Performance: preconnect 106/107** | **fetchpriority 105/107** | **async CSS 20p** | **SW ✅**
-> - **SEO: 29 academy pages unlocked** (noindex→index) | **Sitemap: 104 URLs trilingual**
+> - **SEO: 29 academy pages unlocked** (noindex→index) | **Sitemap: 104 URLs, 103/103 trilingual hreflang**
+> - **AEO: llms.txt enhanced** (academy courses + paths + blog links) | **Cross-links: 24 pages**
+> - **Internal linking: 10 blog→course + 14 course→blog** cross-links added
 > - **A/B testing: 5 experiments** | **WCAG: 0 heading violations** | **Form labels: 100%**
+
+---
+
+## SESSION 192novies - AEO + INTERNAL LINKING + SITEMAP (06/02/2026)
+
+### Tasks Completed (3/3)
+| # | Task | Files | Status |
+|:--|:---|:---:|:---:|
+| 1 | llms.txt: academy courses + paths + blog URLs | 1 | ✅ |
+| 2 | Sitemap: AR hreflang on 28 FR/EN entries (103/103) | 1 | ✅ |
+| 3 | Blog↔Course cross-links (10 blog + 14 course) | 24 | ✅ |
+
+### AEO Enhancement
+- **llms.txt**: Added Academy section (7 courses, 3 paths, 1 guide hub) + Blog section (5 articles)
+- AI crawlers can now discover all educational content through llms.txt
+
+### Sitemap Trilingual Coverage
+- **Before**: 75/103 entries had AR hreflang (blog + course entries missing)
+- **After**: **103/103 trilingual** (100% coverage, +28 AR hreflang added)
+- Only llms.txt has no hreflang (language-neutral, correct)
+
+### Internal Cross-Linking
+- **Blog → Course**: 10/10 articles link to 2 related courses each
+- **Course → Blog**: 14/14 courses link to 1 related blog article each
+- Bidirectional linking strengthens topical authority for SEO
 
 ---
 

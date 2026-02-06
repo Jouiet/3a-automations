@@ -66,6 +66,31 @@ All critical workflows include Human-in-the-Loop approval gates for financial, c
 - Dashboard: https://dashboard.3a-automation.com
 - GitHub: https://github.com/Jouiet/3a-automations
 
+## Academy (Free Educational Content)
+### Courses
+- Getting Started: https://3a-automation.com/academie/cours/demarrer.html
+- E-commerce Automation: https://3a-automation.com/academie/cours/ecommerce.html
+- Email Marketing: https://3a-automation.com/academie/cours/emails.html
+- Lead Generation: https://3a-automation.com/academie/cours/leads.html
+- Analytics & Reporting: https://3a-automation.com/academie/cours/analytics.html
+- Content Automation: https://3a-automation.com/academie/cours/contenu.html
+- Hybrid Architecture: https://3a-automation.com/academy/courses/architecture-hybride.html
+
+### Learning Paths
+- E-commerce Path: https://3a-automation.com/academie/parcours/e-commerce.html
+- Growth Path: https://3a-automation.com/academie/parcours/growth.html
+- Marketing Automation Path: https://3a-automation.com/academie/parcours/marketing-automation.html
+
+### Guides
+- Practical Guides: https://3a-automation.com/academie/guides.html
+
+## Blog (Industry Insights)
+- E-commerce Automation 2026: https://3a-automation.com/blog/automatisation-ecommerce-2026.html
+- Voice AI for SMBs: https://3a-automation.com/blog/assistant-vocal-ia-pme-2026.html
+- Reliable Automation (Salesforce Lessons): https://3a-automation.com/blog/automatisation-fiable-lecons-salesforce-2026.html
+- AI Customer Service: https://3a-automation.com/blog/comment-automatiser-votre-service-client-avec-l-ia.html
+- Marketing Automation for Startups: https://3a-automation.com/blog/marketing-automation-pour-startups-2026-guide-complet.html
+
 ## Compliance
 - EU AI Act 2026 compliant
 - GDPR/RGPD verified
