@@ -1,7 +1,7 @@
 # ÉTAGÈRE TECHNOLOGIQUE - ÉCOSYSTÈME 3A
 ## Mutualisation des Technologies Selon le Modèle du "Potentiel de Situation"
 
-> **Version**: 6.0 | **Date**: 28/01/2026 | **Session**: 185 (3A-Shelf FUNCTIONAL)
+> **Version**: 7.0 | **Date**: 06/02/2026 | **Session**: 191ter (Forensic Audit)
 
 ---
 
@@ -71,7 +71,7 @@ const { EventBus, ContextBox } = require('@3a/agent-ops');
 │  │  Location:                  │    │  Location:                  │        │
 │  │  ~/Desktop/VocalIA/         │    │  ~/Desktop/Ads-Automations/ │        │
 │  │                             │    │                             │        │
-│  │  Code: 8,098 lines          │    │  Compositions: 7            │        │
+│  │  Code: 22,361 lines         │    │  Compositions: 7            │        │
 │  └─────────────────────────────┘    └─────────────────────────────┘        │
 │                                                                             │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
@@ -87,7 +87,7 @@ const { EventBus, ContextBox } = require('@3a/agent-ops');
 
 | Plateforme | Domain | Type | Location | Lignes Code |
 |:-----------|:-------|:-----|:---------|:------------|
-| **VocalIA** | vocalia.ma | Voice AI SaaS | `~/Desktop/VocalIA/` | 8,098 |
+| **VocalIA** | vocalia.ma | Voice AI SaaS | `~/Desktop/VocalIA/` | 22,361 |
 | **CinematicAds** | cinematicads.studio | Video Production | `~/Desktop/Ads-Automations/` | ~5,000 |
 
 ### Technologies Partagées (Étagère) - VÉRIFIÉ 28/01/2026
@@ -119,19 +119,20 @@ const { EventBus, ContextBox } = require('@3a/agent-ops');
 
 ## AUDIT FORENSIQUE - FAITS VÉRIFIÉS (28/01/2026)
 
-### Métriques Factuelles (Bottom-Up Verification)
+### Métriques Factuelles (Bottom-Up Verification - S191ter 06/02/2026)
 
 | Composant | Valeur | Source Vérification | Status |
 |:---|:---|:---|:---|
-| **MCP Servers (Projet)** | **6** | `jq '.mcpServers \| keys' .mcp.json` | ✅ VÉRIFIÉ |
-| **Scripts Core** | **87** | `ls automations/agency/core/*.cjs \| wc -l` | ✅ VÉRIFIÉ |
-| **Sensors** | **19** | `ls *sensor*.cjs \| wc -l` (bigquery supprimé S168quaterdecies) | ✅ VÉRIFIÉ |
+| **MCP Servers (Projet)** | **7** | `jq '.mcpServers \| keys' .mcp.json` | ✅ VÉRIFIÉ |
+| **Core Workflows** | **103** | `ls automations/agency/core/*.cjs \| wc -l` | ✅ VÉRIFIÉ |
+| **Sensors** | **19** | `ls *sensor*.cjs \| wc -l` | ✅ VÉRIFIÉ |
 | **Automations Registry** | **121** | `jq '.automations \| length' registry.json` | ✅ VÉRIFIÉ |
-| **HTML Pages** | **79** | `find -name "*.html" \| wc -l` | ✅ VÉRIFIÉ |
-| **KB Chunks** | **135** | `jq 'length' chunks.json` | ✅ VÉRIFIÉ |
-| **CSS Version** | **87.0** | `grep styles.css *.html` | ✅ VÉRIFIÉ |
-| **HITL Scripts** | **17** | `grep -l HITL *.cjs \| wc -l` | ✅ VÉRIFIÉ |
-| **Remotion Compositions** | **7** | `ls compositions/*.tsx` | ✅ VÉRIFIÉ |
+| **HTML Pages** | **83** | `find -name "*.html" \| wc -l` | ✅ VÉRIFIÉ |
+| **Tests** | **177** | 78 S8 + 99 MCP (100% pass) | ✅ VÉRIFIÉ |
+| **--health Endpoints** | **57** | All respond with structured output | ✅ VÉRIFIÉ |
+| **HITL Scripts** | **18** | `grep -l HITL *.cjs \| wc -l` | ✅ VÉRIFIÉ |
+| **Agent Ops Modules** | **15** | verify-agent-ops.cjs | ✅ VÉRIFIÉ |
+| **Credentials** | **60%** | `credential-validator.cjs --check` | ✅ VÉRIFIÉ |
 
 ### MCP Servers (CONFIGURÉ 27/01/2026 02:15 UTC)
 
@@ -140,11 +141,11 @@ const { EventBus, ContextBox } = require('@3a/agent-ops');
 
 | Couche | Count | Servers | Source |
 |:---|:---|:---|:---|
-| **Global** | **13** | chrome-devtools, playwright, gemini, github, hostinger, wordpress, google-analytics, gmail, fal, n8n-mcp, grok-search-mcp, grok2-image, stitch | settings.json |
+| **Global** | **7** | chrome-devtools, playwright, gemini, github, hostinger, filesystem, memory | settings.json |
 | **Projet** | **6** | 3a-global-mcp, grok, google-sheets, klaviyo, shopify-dev, shopify-admin | .mcp.json |
-| **Total** | **19** | | |
+| **Total** | **13+** | (plus apify, google-analytics in global) | |
 
-#### Détail Global (13 serveurs - ~/.claude/settings.json)
+#### Détail Global (7 serveurs - ~/.config/claude-code/mcp.json)
 
 | Server | Package | Description |
 |:---|:---|:---|
@@ -153,21 +154,15 @@ const { EventBus, ContextBox } = require('@3a/agent-ops');
 | **gemini** | mcp-server-gemini | Google Gemini API |
 | **github** | @modelcontextprotocol/server-github | Repos, issues, PRs |
 | **hostinger** | hostinger-api-mcp | VPS, domains, WordPress |
-| **wordpress** | @instawp/mcp-wp | Posts, pages, plugins |
-| **google-analytics** | mcp-server-google-analytics | GA4 metrics |
-| **gmail** | @gongrzhe/server-gmail-autoauth-mcp | Email with auto-auth |
-| **fal** | URL: docs.fal.ai/mcp | AI image/video |
-| **n8n-mcp** | n8n-mcp | Workflow automation |
-| **grok-search-mcp** | grok-search-mcp | Web search + AI |
-| **grok2-image** | grok2-image-mcp-server | Image generation |
-| **stitch** | @_davideast/stitch-mcp | Google Stitch UI |
+| **filesystem** | @modelcontextprotocol/server-filesystem | File operations |
+| **memory** | @modelcontextprotocol/server-memory | Knowledge graph |
 
 #### Détail Projet (6 serveurs - .mcp.json)
 
 | Server | Command | Description |
 |:---|:---|:---|
-| **3a-global-mcp** | node automations/3a-global-mcp/build/index.js | 121 automations propriétaires, v1.5.0, SOTA 95% |
-| **grok** | npx grok-search-mcp@latest | Web search (overlap global) |
+| **3a-global-mcp** | node automations/3a-global-mcp/build/index.js | 121 automations, v1.5.0, 99/99 tests |
+| **grok** | npx grok-search-mcp@latest | Web search + AI |
 | **google-sheets** | npx google-sheets-mcp | Read/write spreadsheets |
 | **klaviyo** | uvx klaviyo-mcp-server@latest | Email flows, campaigns |
 | **shopify-dev** | npx @shopify/dev-mcp@latest | API docs, schema exploration |
@@ -202,18 +197,19 @@ GOOGLE_API_KEY=xxxxx
 |:---|:---|:---|
 | Version | **1.5.0** | package.json |
 | Location | `automations/3a-global-mcp/` | ls |
-| SDK | @modelcontextprotocol/sdk | dependencies |
-| Features | tools, resources, prompts, logging, caching, output-schemas, streamable-http, bearer-auth | SOTA 95% |
+| SDK | @modelcontextprotocol/sdk ^1.25.3 | dependencies |
+| Tests | **99/99** (100%) | verify-core.js |
+| Features | tools, resources, prompts, logging, caching, output-schemas, streamable-http, bearer-auth | Operational |
 
-### Sensors Status (19/19 avec REAL API Tests)
-
-**Session 168quaterdecies**: Tous sensors upgraded v1.1.0 avec vrais tests API
+### Sensors Status (19 total - Vérifié S191ter 06/02/2026)
 
 | Status | Count | Sensors |
 |:---|:---|:---|
-| ✅ API OK | 10 | ga4, shopify, klaviyo, email-health, google-trends, cost-tracking, lead-velocity, product-seo, apify-trends, gsc |
-| ⚠️ NO CREDS | 6 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner, supplier-health, content-perf |
-| ❌ BLOCKED | 3 | retention(NETWORK), voice-quality(NO_PROVIDERS), lead-scoring(NO_DATA) |
+| ✅ OK | 12 | shopify, klaviyo, email-health, cost-tracking, lead-velocity, ga4, retention, gsc, lead-scoring, apify-trends, google-trends, product-seo |
+| ⚠️ DEGRADED | 1 | voice-quality (2/3 endpoints healthy) |
+| ⚠️ WARNING | 1 | supplier-health (CJ/BigBuy keys missing) |
+| ❌ ERROR | 1 | content-performance (WordPress API timeout) |
+| 🔒 BLOCKED | 4 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner (credentials missing) |
 
 **Supprimé**: bigquery-trends-sensor (non nécessaire <3000 clients)
 
@@ -226,7 +222,7 @@ GOOGLE_API_KEY=xxxxx
 | WHATSAPP_ACCESS_TOKEN vide | whatsapp-status-sensor OFF | Configurer token WhatsApp Business |
 | 5 Google Ads creds missing | google-ads-planner-sensor OFF | CLIENT_ID, SECRET, DEVELOPER_TOKEN, CUSTOMER_ID, REFRESH_TOKEN |
 | CJ/BigBuy API keys vides | supplier-health-sensor partial | Configurer CJ_API_KEY, BIGBUY_API_KEY |
-| WordPress SSL issue | content-performance-sensor OFF | Vérifier certificat self-signed |
+| WordPress API timeout | content-performance-sensor ERROR | Debug WP connectivity (creds set but API timeout) |
 
 ### Commande de Vérification
 
