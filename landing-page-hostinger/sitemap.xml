@@ -427,7 +427,8 @@
   <url>
     <loc>https://3a-automation.com/blog/marketing-automation-pour-startups-2026-guide-complet.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/marketing-automation-pour-startups-2026-guide-complet.html"/>
-    <lastmod>2026-01-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/marketing-automation-for-startups-2026-complete-guide.html"/>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -696,6 +697,57 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/academy/courses/architecture-hybride.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/academy/courses/hybrid-architecture.html"/>
     <lastmod>2026-01-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ARABIC PAGES
+       ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Homepage AR -->
+  <url>
+    <loc>https://3a-automation.com/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pricing AR -->
+  <url>
+    <loc>https://3a-automation.com/ar/pricing.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/pricing.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/pricing.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/pricing.html"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contact AR -->
+  <url>
+    <loc>https://3a-automation.com/ar/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/contact.html"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MISSING BLOG ARTICLES
+       ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Blog - Marketing Automation Startups 2026 EN -->
+  <url>
+    <loc>https://3a-automation.com/en/blog/marketing-automation-for-startups-2026-complete-guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/blog/marketing-automation-pour-startups-2026-guide-complet.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/blog/marketing-automation-for-startups-2026-complete-guide.html"/>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

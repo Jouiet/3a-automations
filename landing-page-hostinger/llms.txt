@@ -38,7 +38,7 @@
     </Category>
 </WorkflowEcosystem>
 
-<AgentSwarm count="22">
+<AgentSwarm count="18">
     - ContentDirector (Editor-in-Chief GSC)
     - GrowthDirector (GA4 Ads Optimizer)
     - LogisticsManager (Dropshipping Supply Chain)
