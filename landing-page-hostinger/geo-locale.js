@@ -8,40 +8,95 @@
  * - Europe: French + EUR
  * - International: English + USD
  *
- * @version 5.0.0
- * @date 2026-01-08
+ * @version 6.0.0
+ * @date 2026-02-06
  */
 (function () {
   'use strict';
 
   const GeoLocale = {
 
-    // Country to locale mapping
+    // Country to locale mapping (comprehensive coverage)
     locales: {
       // 1. Morocco -> French + MAD
       'MA': { lang: 'fr', currency: 'MAD', region: 'maghreb' },
 
-      // 2. Algeria, Tunisie, Europe -> French + EUR
-      // (User request: "Maroc, Algerie, Tunisie, Europe (français + devise: Euro (€))")
-      // Correction: Morocco is MAD as per point #1 of user request.
+      // 2. Maghreb -> French + EUR
       'DZ': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'TN': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'LY': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'MR': { lang: 'fr', currency: 'EUR', region: 'europe' },
 
-      // Europe
+      // 3. Europe -> French + EUR
       'FR': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'BE': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'CH': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'LU': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'MC': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'DE': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'IT': { lang: 'fr', currency: 'EUR', region: 'europe' },
       'ES': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'PT': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'NL': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'AT': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'IE': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'GR': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'PL': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'CZ': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'RO': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'HU': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'SE': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'DK': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'NO': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'FI': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'HR': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'BG': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'SK': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'SI': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'LT': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'LV': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'EE': { lang: 'fr', currency: 'EUR', region: 'europe' },
 
-      // 4. International -> English + USD
-      'GB': { lang: 'en', currency: 'USD', region: 'international' },
-      'CA': { lang: 'en', currency: 'USD', region: 'international' },
-      'US': { lang: 'en', currency: 'USD', region: 'international' },
-      'AU': { lang: 'en', currency: 'USD', region: 'international' },
-      'AE': { lang: 'en', currency: 'USD', region: 'international' }, // MENA defaults to English/USD
+      // 4. Francophone Africa -> French + EUR
+      'SN': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'CI': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'CM': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'CG': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'CD': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'ML': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'BF': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'NE': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'TD': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'GN': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'GA': { lang: 'fr', currency: 'EUR', region: 'europe' },
+      'MG': { lang: 'fr', currency: 'EUR', region: 'europe' },
+
+      // 5. MENA Gulf -> English + USD
+      'AE': { lang: 'en', currency: 'USD', region: 'international' },
       'SA': { lang: 'en', currency: 'USD', region: 'international' },
+      'QA': { lang: 'en', currency: 'USD', region: 'international' },
+      'KW': { lang: 'en', currency: 'USD', region: 'international' },
+      'BH': { lang: 'en', currency: 'USD', region: 'international' },
+      'OM': { lang: 'en', currency: 'USD', region: 'international' },
+      'JO': { lang: 'en', currency: 'USD', region: 'international' },
+      'IQ': { lang: 'en', currency: 'USD', region: 'international' },
+      'EG': { lang: 'en', currency: 'USD', region: 'international' },
+      'LB': { lang: 'en', currency: 'USD', region: 'international' },
+
+      // 6. Anglophone -> English + USD
+      'GB': { lang: 'en', currency: 'USD', region: 'international' },
+      'US': { lang: 'en', currency: 'USD', region: 'international' },
+      'CA': { lang: 'en', currency: 'USD', region: 'international' },
+      'AU': { lang: 'en', currency: 'USD', region: 'international' },
+      'NZ': { lang: 'en', currency: 'USD', region: 'international' },
+      'IN': { lang: 'en', currency: 'USD', region: 'international' },
+      'NG': { lang: 'en', currency: 'USD', region: 'international' },
+      'ZA': { lang: 'en', currency: 'USD', region: 'international' },
+      'KE': { lang: 'en', currency: 'USD', region: 'international' },
+      'GH': { lang: 'en', currency: 'USD', region: 'international' },
+      'SG': { lang: 'en', currency: 'USD', region: 'international' },
+      'PH': { lang: 'en', currency: 'USD', region: 'international' },
+      'MY': { lang: 'en', currency: 'USD', region: 'international' },
     },
 
     // Default locale for unknown countries
