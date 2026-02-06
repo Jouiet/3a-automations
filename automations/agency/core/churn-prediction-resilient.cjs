@@ -174,7 +174,7 @@ const CONFIG = {
 
 const PROVIDERS = {
   anthropic: {
-    name: 'Claude Opus 4.5',
+    name: 'Claude Opus 4.6',
     // CRITICAL TASK: Use best model - cost of wrong churn prediction > API cost
     enabled: !!process.env.ANTHROPIC_API_KEY,
     model: 'claude-opus-4-6',

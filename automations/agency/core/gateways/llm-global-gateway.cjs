@@ -76,9 +76,9 @@ class LLMGateway {
 
     /**
      * FRONTIER FALDOWN PROTOCOL (Resilient Chain) - Updated 26/01/2026
-     * Models: Claude Opus 4.5 -> GPT-5.2 -> Grok 4.1 -> Gemini 3 Flash
+     * Models: Claude Opus 4.6 -> GPT-5.2 -> Grok 4.1 -> Gemini 3 Flash
      * IDs: claude-opus-4-6, gpt-5.2, grok-4-1-fast-reasoning, gemini-3-flash-preview
-     * Fallbacks: Claude Opus 4.5 -> Claude 3.5 Sonnet (within Claude chain)
+     * Fallbacks: Claude Opus 4.6 -> Claude 3.5 Sonnet (within Claude chain)
      */
     async generateWithFallback(prompt) {
         const chain = ['claude', 'openai', 'grok', 'gemini'];
@@ -144,12 +144,12 @@ class LLMGateway {
         let res = await tryModel("claude-opus-4-6");
 
         if (res.status === 400 || res.status === 404) {
-            console.warn("[LLM] Claude Opus 4.5 not available. Trying Claude Opus 4.5...");
+            console.warn("[LLM] Claude Opus 4.6 not available. Trying Claude Opus 4.6...");
             res = await tryModel("claude-opus-4-6");
         }
 
         if (res.status === 400 || res.status === 404) {
-            console.warn("[LLM] Claude Opus 4.5 not available. Falling back to Claude 3.5 Sonnet...");
+            console.warn("[LLM] Claude Opus 4.6 not available. Falling back to Claude 3.5 Sonnet...");
             res = await tryModel("claude-3-5-sonnet-20241022");
         }
 

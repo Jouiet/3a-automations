@@ -452,7 +452,7 @@ Tone: Helpful, not pushy. Focus on convenience and ensuring they don't run out.`
     { name: 'Grok 4.1 Fast Reasoning', fn: () => generateWithGrok(prompt) },
     { name: 'OpenAI GPT-5.2', fn: () => generateWithOpenAI(prompt) },
     { name: 'Gemini 3 Flash', fn: () => generateWithGemini(prompt) },
-    { name: 'Claude Opus 4.5', fn: () => generateWithClaude(prompt) }
+    { name: 'Claude Opus 4.6', fn: () => generateWithClaude(prompt) }
   ];
 
   for (const provider of providers) {
@@ -849,7 +849,7 @@ async function healthCheck() {
       'Grok 4.1': CONFIG.ai.grok.apiKey ? '✅ Configured' : '⚠️ Not configured',
       'OpenAI GPT-5.2': CONFIG.ai.openai.apiKey ? '✅ Configured' : '⚠️ Not configured',
       'Gemini 3': CONFIG.ai.gemini.apiKey ? '✅ Configured' : '⚠️ Not configured',
-      'Claude Opus 4.5': CONFIG.ai.claude.apiKey ? '✅ Configured' : '⚠️ Not configured'
+      'Claude Opus 4.6': CONFIG.ai.claude.apiKey ? '✅ Configured' : '⚠️ Not configured'
     },
     email: {
       'Klaviyo': CONFIG.email.klaviyo.apiKey ? '✅ Configured' : '⚠️ Not configured',

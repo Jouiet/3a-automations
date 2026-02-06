@@ -15,7 +15,7 @@
  *
  * Benchmark: +16% CLV, -80% acquisition cost (ReferralCandy)
  *
- * AI Fallback: Grok 4.1 → OpenAI GPT-5.2 → Gemini 3 → Claude Opus 4.5 → Template
+ * AI Fallback: Grok 4.1 → OpenAI GPT-5.2 → Gemini 3 → Claude Opus 4.6 → Template
  * Email Fallback: Klaviyo → Omnisend
  *
  * Usage:
@@ -635,7 +635,7 @@ async function generateWithClaude(prompt, systemPrompt) {
 
   return {
     content: data.content[0].text,
-    provider: 'Claude Opus 4.5',
+    provider: 'Claude Opus 4.6',
     model: CONFIG.ai.claude.model
   };
 }
@@ -1133,7 +1133,7 @@ async function healthCheck() {
     { name: 'Grok 4.1', key: CONFIG.ai.grok.apiKey, model: CONFIG.ai.grok.model },
     { name: 'OpenAI GPT-5.2', key: CONFIG.ai.openai.apiKey, model: CONFIG.ai.openai.model },
     { name: 'Gemini 3', key: CONFIG.ai.gemini.apiKey, model: CONFIG.ai.gemini.model },
-    { name: 'Claude Opus 4.5', key: CONFIG.ai.claude.apiKey, model: CONFIG.ai.claude.model }
+    { name: 'Claude Opus 4.6', key: CONFIG.ai.claude.apiKey, model: CONFIG.ai.claude.model }
   ];
 
   for (const p of aiProviders) {

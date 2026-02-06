@@ -9,7 +9,7 @@
  * - Need: What problems are they trying to solve?
  * - Timeline: When do they want to implement?
  *
- * Fallback chain: Grok 4.1 → OpenAI GPT-5.2 → Gemini 3 → Claude Opus 4.5 → Rule-based
+ * Fallback chain: Grok 4.1 → OpenAI GPT-5.2 → Gemini 3 → Claude Opus 4.6 → Rule-based
  *
  * Benchmark: +138% qualified leads, +70% conversion (vs static forms)
  *
@@ -287,7 +287,7 @@ const PROVIDERS = {
     enabled: !!ENV.GEMINI_API_KEY,
   },
   anthropic: {
-    name: 'Claude Opus 4.5',
+    name: 'Claude Opus 4.6',
     url: 'https://api.anthropic.com/v1/messages',
     model: 'claude-opus-4-6',
     apiKey: ENV.ANTHROPIC_API_KEY,
@@ -1073,7 +1073,7 @@ function healthCheck() {
       'Grok 4.1': PROVIDERS.grok.enabled ? '✅ Configured' : '⚠️ Not configured',
       'OpenAI GPT-5.2': PROVIDERS.openai.enabled ? '✅ Configured' : '⚠️ Not configured',
       'Gemini 3': PROVIDERS.gemini.enabled ? '✅ Configured' : '⚠️ Not configured',
-      'Claude Opus 4.5': PROVIDERS.anthropic.enabled ? '✅ Configured' : '⚠️ Not configured',
+      'Claude Opus 4.6': PROVIDERS.anthropic.enabled ? '✅ Configured' : '⚠️ Not configured',
     },
     crm: {
       'Klaviyo': ENV.KLAVIYO_API_KEY ? '✅ Configured' : '⚠️ Not configured'

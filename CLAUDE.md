@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 157.0 | 06/02/2026 | Session 192octies | Engineering Score: 86/100 | Frontend: 93/100 | Runtime: 3/4 Services ✅
+> Version: 158.0 | 06/02/2026 | Session 192novies | Engineering Score: 79/100 | Frontend: 93/100 | Runtime: 2/4 Services ✅
 
 ## Identité
 
@@ -64,30 +64,47 @@
 
 ---
 
-## Engineering Scores (Session 191ter - 06/02/2026 - Forensic Audit)
+## Engineering Scores (Session 192novies - 06/02/2026 - Bottom-Up Re-Audit)
 
 **3A = Agence qui vend des services automation, PAS un e-commerce**
 
 | Discipline | Max | Current | Note |
 |:---|:---:|:---:|:---|
-| **Voice AI** | 15 | **12** | 2/3 RUNNING (3004+3007), Telephony needs TELNYX |
-| **Dashboard** | 15 | **13** | 8/8 APIs, Next.js 14.2.35, JWT auth |
+| **Voice AI** | 15 | **11** | 2/3 running (3004+3007), Telephony ❌, ElevenLabs ERROR |
+| **Dashboard** | 15 | **8** | Code complet, process CRASHED (port 3000 down) |
 | **Agent Ops v3.0** | 20 | **20** | ✅ 15/15 modules loaded, EventBus v3.0 |
-| **Workflows** | 15 | **14** | 103/103 load OK, 57 --health, 0 TODO |
+| **Workflows** | 15 | **14** | 103/103 load OK, 78/78 S8 tests, 0 TODO |
 | **MCP Platform** | 15 | **15** | 99/99 MCP + 78/78 S8 = 177/177 tests |
-| **Sensors** | 10 | **7** | 12/19 OK, 2 warn/degraded, 1 error, 4 blocked |
+| **Sensors** | 10 | **6** | 11/19 OK, 1 degraded, 3 error, 4 blocked |
 | **Integrations** | 10 | **5** | Credentials 60%, 4 sensors blocked |
-| **TOTAL** | **100** | **86** | Forensic audit S191ter verified |
+| **TOTAL** | **100** | **79** | Bottom-up re-audit S192novies |
 
-### Runtime Status VÉRIFIÉ (06/02/2026 14:00 CET - Forensic S191ter)
+### Runtime Status VÉRIFIÉ (06/02/2026 23:55 CET - Re-Audit S192novies)
 | Service | Status | Details |
 |:---|:---:|:---|
-| Dashboard (3000) | ✅ | Next.js 14.2.35, 8/8 APIs responding |
-| Voice API (3004) | ✅ | Grok+Gemini+Claude+Atlas providers |
-| Grok Realtime (3007) | ✅ | 7 voices, WebSocket proxy |
+| Dashboard (3000) | ❌ CRASHED | Process died, port no longer listening |
+| Voice API (3004) | ✅ | Grok+Gemini+Claude+Atlas, healthy=true |
+| Grok Realtime (3007) | ✅ | 7 voices, WebSocket proxy, status=ok |
 | Telephony Bridge (3009) | ❌ | TELNYX/TWILIO credentials missing |
 | Credentials SET | **60%** | credential-validator --check |
 | Critical Creds | **54%** | 7/13 (missing META, TIKTOK, STRIPE, TELNYX, TWILIO, FAL) |
+
+### Sensors Status VÉRIFIÉ (06/02/2026 23:51 CET - Individual Tests)
+| Status | Count | Sensors |
+|:---|:---:|:---|
+| ✅ OK | 11 | klaviyo, email-health, cost-tracking, lead-velocity, ga4, retention, gsc, lead-scoring, apify-trends, product-seo, supplier-health |
+| ⚠️ DEGRADED | 1 | voice-quality (ElevenLabs ERROR, Whisper OK) |
+| ❌ ERROR | 3 | shopify (fetch failed), google-trends (AI providers failed), content-performance (WP timeout) |
+| 🚫 BLOCKED | 4 | meta-ads, tiktok-ads, whatsapp-status, google-ads-planner |
+
+### Score Corrections (S192novies vs S191ter claims)
+| Claim | Reality | Action |
+|:---|:---|:---|
+| 12/19 sensors OK | **11/19** (shopify fetch fail, google-trends AI fail) | Score corrected |
+| Dashboard 13/15 | **8/15** (process crashed) | Score corrected |
+| Voice AI 12/15 | **11/15** (ElevenLabs ERROR) | Score corrected |
+| "Claude Opus 4.5" in 16 files | **FIXED** → claude-opus-4-6 in all files | 16 scripts updated |
+| Score 86/100 | **79/100** | Honest bottom-up |
 
 ### Session 191 - Forensic Audit (06/02/2026) - 17 Discrepancies Found
 **Corrections applied:**

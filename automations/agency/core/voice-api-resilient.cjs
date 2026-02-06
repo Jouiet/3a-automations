@@ -90,8 +90,8 @@ const PROVIDERS = {
     enabled: !!ENV.GEMINI_API_KEY,
   },
   anthropic: {
-    name: 'Claude Opus 4.5',
-    // claude-opus-4-5: best quality for fallback (Nov 2025)
+    name: 'Claude Opus 4.6',
+    // claude-opus-4-6: best quality for fallback (Feb 2026)
     url: 'https://api.anthropic.com/v1/messages',
     model: 'claude-opus-4-6',
     apiKey: ENV.ANTHROPIC_API_KEY,
@@ -1515,7 +1515,7 @@ Usage:
   node voice-api-resilient.cjs --health
 
 Fallback chain:
-  Grok 4.1 → Gemini 3 → Claude Opus 4.5 → Local patterns
+  Grok 4.1 → Gemini 3 → Claude Opus 4.6 → Local patterns
 
 Lead Qualification:
   - Auto-extracts: budget, timeline, decision maker, industry, contact info

@@ -32,7 +32,7 @@ const PRICING = {
         'whisper': { perMinute: 0.006 }
     },
     anthropic: {
-        'claude-opus-4-5': { input: 0.015, output: 0.075 },
+        'claude-opus-4-6': { input: 0.015, output: 0.075 },
         'claude-sonnet-4': { input: 0.003, output: 0.015 }
     },
     xai: {

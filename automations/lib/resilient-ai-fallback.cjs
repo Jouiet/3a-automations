@@ -77,7 +77,7 @@ const ENV = loadEnv();
 
 const PROVIDERS = {
   anthropic: {
-    name: 'Claude Opus 4.5',
+    name: 'Claude Opus 4.6',
     url: 'https://api.anthropic.com/v1/messages',
     model: 'claude-opus-4-6',
     fallbackModel: 'claude-sonnet-4-20250514',
@@ -402,7 +402,7 @@ Programmatic Usage:
   const result = await callWithFallback('Your prompt here', { maxTokens: 1024 });
 
 Providers (Fallback Order):
-  1. Anthropic Claude Opus 4.5
+  1. Anthropic Claude Opus 4.6
   2. Grok 4.1 Fast Reasoning
   3. OpenAI GPT-5.2
   4. Google Gemini 3 Flash

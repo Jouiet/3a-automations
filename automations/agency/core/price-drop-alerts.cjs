@@ -502,7 +502,7 @@ async function generateWithClaude(prompt, systemPrompt) {
 
   return {
     content: data.content[0].text,
-    provider: 'Claude Opus 4.5'
+    provider: 'Claude Opus 4.6'
   };
 }
 
@@ -929,7 +929,7 @@ async function healthCheck() {
       'Grok 4.1': CONFIG.ai.grok.apiKey ? '✅ Configured' : '❌ Missing',
       'OpenAI GPT-5.2': CONFIG.ai.openai.apiKey ? '✅ Configured' : '❌ Missing',
       'Gemini 3': CONFIG.ai.gemini.apiKey ? '✅ Configured' : '❌ Missing',
-      'Claude Opus 4.5': CONFIG.ai.claude.apiKey ? '✅ Configured' : '❌ Missing'
+      'Claude Opus 4.6': CONFIG.ai.claude.apiKey ? '✅ Configured' : '❌ Missing'
     },
     email: {
       'Klaviyo': CONFIG.email.klaviyo.apiKey ? '✅ Configured' : '⚠️ Not configured',

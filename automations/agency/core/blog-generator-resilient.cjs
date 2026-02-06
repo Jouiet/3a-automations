@@ -178,7 +178,7 @@ const PROVIDERS = {
     enabled: !!ENV.XAI_API_KEY,
   },
   anthropic: {
-    name: 'Claude Opus 4.5',
+    name: 'Claude Opus 4.6',
     url: 'https://api.anthropic.com/v1/messages',
     model: 'claude-opus-4-6',
     apiKey: ENV.ANTHROPIC_API_KEY,

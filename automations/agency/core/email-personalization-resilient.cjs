@@ -104,8 +104,8 @@ const PROVIDERS = {
     enabled: !!ENV.XAI_API_KEY,
   },
   anthropic: {
-    name: 'Claude Opus 4.5',
-    // claude-opus-4-5: best quality for fallback (Nov 2025)
+    name: 'Claude Opus 4.6',
+    // claude-opus-4-6: best quality for fallback (Nov 2025)
     url: 'https://api.anthropic.com/v1/messages',
     model: 'claude-opus-4-6',
     apiKey: ENV.ANTHROPIC_API_KEY,

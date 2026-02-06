@@ -124,7 +124,7 @@ const VISION_PROVIDERS = {
     enabled: !!ENV.XAI_API_KEY
   },
   anthropic: {
-    name: 'Claude Opus 4.5 Vision',
+    name: 'Claude Opus 4.6 Vision',
     // claude-opus-4-6 is frontier for vision (Jan 2026, same as text model)
     url: 'https://api.anthropic.com/v1/messages',
     model: 'claude-opus-4-6',

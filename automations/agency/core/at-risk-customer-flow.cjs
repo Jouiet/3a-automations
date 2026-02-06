@@ -121,7 +121,7 @@ const PROVIDERS = {
     apiKey: process.env.GEMINI_API_KEY
   },
   anthropic: {
-    name: 'Claude Opus 4.5',
+    name: 'Claude Opus 4.6',
     enabled: !!process.env.ANTHROPIC_API_KEY,
     model: 'claude-opus-4-6',
     endpoint: 'https://api.anthropic.com/v1/messages',
