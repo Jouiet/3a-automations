@@ -183,7 +183,11 @@
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
-        <a href="/blog/comment-automatiser-votre-service-client-avec-l-ia.html" class="lang-switch" title="Passer en francais">FR</a>
+        <div class="lang-nav">
+          <a href="/blog/comment-automatiser-votre-service-client-avec-l-ia.html" class="lang-link" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/blog/how-to-automate-customer-service-with-ai-effectively.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/ar/" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+        </div>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>
@@ -214,6 +218,7 @@
   </div>
 
 
+  <main id="main-content" role="main">
   <!-- Article -->
   <article class="article-container">
     <div class="container article-max-width">
@@ -324,6 +329,7 @@
 
     </div>
   </article>
+  </main>
 
   <!-- Footer Ultra -->
   <footer class="footer-ultra">

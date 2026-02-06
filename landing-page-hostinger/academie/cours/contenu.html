@@ -126,7 +126,11 @@
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
-        <a href="/en/academy/courses/content.html" class="lang-switch" title="Switch to English">EN</a>
+        <div class="lang-nav">
+          <a href="/academie/cours/contenu.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/academy/courses/content.html" class="lang-link" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/ar/" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+        </div>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>

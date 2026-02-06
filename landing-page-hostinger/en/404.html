@@ -89,7 +89,11 @@
         <a href="/en/automations.html">Automations</a>
         <a href="/en/pricing.html">Pricing</a>
         <a href="/en/booking.html">Book</a>
-        <a href="/404.html" class="lang-switch" title="Français">FR</a>
+        <div class="lang-nav">
+          <a href="/404.html" class="lang-link" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/404.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/ar/" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+        </div>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>

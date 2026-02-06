@@ -16,6 +16,7 @@
   <link rel="canonical" href="https://3a-automation.com/en/automations.html">
   <link rel="alternate" hreflang="fr" href="https://3a-automation.com/automations.html">
   <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/automations.html">
+  <link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/automations.html">
   <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/automations.html">
 
   <meta property="og:title" content="Automation Catalog | 3A Automation">
@@ -219,7 +220,11 @@
         <a href="/en/automations.html">Automations</a>
         <a href="/en/pricing.html">Pricing</a>
         <a href="/en/booking.html">Book</a>
-        <a href="/automations.html" class="lang-switch" title="Switch to French">FR</a>
+        <div class="lang-nav">
+          <a href="/automations.html" class="lang-link" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/automations.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/ar/automations.html" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+        </div>
         <a href="..#contact" class="btn-nav">
           <span>Contact</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

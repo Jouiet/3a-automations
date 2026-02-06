@@ -14,6 +14,7 @@
   <link rel="canonical" href="https://3a-automation.com/booking.html">
   <link rel="alternate" hreflang="fr" href="https://3a-automation.com/booking.html">
   <link rel="alternate" hreflang="en" href="https://3a-automation.com/en/booking.html">
+  <link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/booking.html">
   <link rel="alternate" hreflang="x-default" href="https://3a-automation.com/booking.html">
 
   <meta property="og:title" content="Réserver un RDV | 3A Automation">
@@ -148,7 +149,11 @@
           </svg>
           <span>Dashboard</span>
         </a>
-        <a href="/en/" class="lang-switch" title="Switch to English">EN</a>
+        <div class="lang-nav">
+          <a href="/booking.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/booking.html" class="lang-link" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/ar/booking.html" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+        </div>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>

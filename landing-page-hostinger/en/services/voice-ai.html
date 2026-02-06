@@ -172,7 +172,11 @@
         <a href="https://dashboard.3a-automation.com" target="_blank" rel="noopener">Dashboard</a>
       </nav>
       <div class="header-actions">
-        <a href="/services/voice-ai.html" class="lang-switch" title="Français">FR</a>
+        <div class="lang-nav">
+          <a href="/services/voice-ai.html" class="lang-link" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/services/voice-ai.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/ar/" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+        </div>
         <a href="/en/booking.html" class="btn btn-primary btn-small">Book a Call</a>
       </div>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">

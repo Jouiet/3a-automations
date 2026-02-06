@@ -150,7 +150,11 @@
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>
       </button>
-      <a href="/en/faq.html" class="lang-switch" title="English">EN</a>
+      <div class="lang-nav">
+        <a href="/faq.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+        <a href="/en/faq.html" class="lang-link" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+        <a href="/ar/" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+      </div>
     </div>
   </header>
 

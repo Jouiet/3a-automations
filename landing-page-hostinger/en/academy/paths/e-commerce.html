@@ -97,7 +97,11 @@
         <a href="/en/automations.html">Automations</a>
         <a href="/en/academy.html" class="active">Academy</a>
         <a href="/en/contact.html">Contact</a>
-        <a href="/academie/parcours/e-commerce.html" class="lang-switch" title="Français">FR</a>
+        <div class="lang-nav">
+          <a href="/academie/parcours/e-commerce.html" class="lang-link" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/academy/paths/e-commerce.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/ar/" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+        </div>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>

@@ -174,7 +174,11 @@
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
-        <a href="/en/blog/reliable-automation-salesforce-lessons-2026.html" class="lang-switch" title="Switch to English">EN</a>
+        <div class="lang-nav">
+          <a href="/blog/automatisation-fiable-lecons-salesforce-2026.html" class="lang-link active" onclick="GeoLocale.saveManualLocale('fr')">FR</a>
+          <a href="/en/blog/reliable-automation-salesforce-lessons-2026.html" class="lang-link" onclick="GeoLocale.saveManualLocale('en')">EN</a>
+          <a href="/ar/" class="lang-link" onclick="GeoLocale.saveManualLocale('ar')">AR</a>
+        </div>
       </nav>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
         <span class="hamburger"></span>
@@ -204,6 +208,7 @@
     </div>
   </div>
 
+  <main id="main-content" role="main">
   <!-- Article -->
   <article class="article-container" role="article" id="main-content">
     <div class="container article-max-width">
@@ -422,6 +427,7 @@
 
     </div>
   </article>
+  </main>
 
   <footer class="footer-ultra">
     <div class="container">

@@ -31,6 +31,7 @@
     <loc>https://3a-automation.com/services/ecommerce.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/ecommerce.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/ecommerce.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/services/ecommerce.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -41,6 +42,7 @@
     <loc>https://3a-automation.com/services/pme.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/pme.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/smb.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/services/pme.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -81,6 +83,7 @@
     <loc>https://3a-automation.com/automations.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/automations.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/automations.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/automations.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -163,6 +166,7 @@
     <loc>https://3a-automation.com/booking.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/booking.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/booking.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/booking.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -189,6 +193,7 @@
     <loc>https://3a-automation.com/en/services/ecommerce.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/ecommerce.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/ecommerce.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/services/ecommerce.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -199,6 +204,7 @@
     <loc>https://3a-automation.com/en/services/smb.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/pme.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/smb.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/services/pme.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -239,6 +245,7 @@
     <loc>https://3a-automation.com/en/automations.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/automations.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/automations.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/automations.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -321,6 +328,7 @@
     <loc>https://3a-automation.com/en/booking.html</loc>
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/booking.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/booking.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/booking.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -742,6 +750,50 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/contact.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/contact.html"/>
     <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/contact.html"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Automations AR -->
+  <url>
+    <loc>https://3a-automation.com/ar/automations.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/automations.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/automations.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/automations.html"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Booking AR -->
+  <url>
+    <loc>https://3a-automation.com/ar/booking.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/booking.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/booking.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/booking.html"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Services - E-commerce AR -->
+  <url>
+    <loc>https://3a-automation.com/ar/services/ecommerce.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/ecommerce.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/ecommerce.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/services/ecommerce.html"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Services - PME AR -->
+  <url>
+    <loc>https://3a-automation.com/ar/services/pme.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://3a-automation.com/services/pme.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://3a-automation.com/en/services/smb.html"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://3a-automation.com/ar/services/pme.html"/>
     <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
