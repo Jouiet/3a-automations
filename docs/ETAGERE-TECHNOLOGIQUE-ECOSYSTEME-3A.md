@@ -558,7 +558,7 @@ Source: [L'ADN - L'automobile à l'heure chinoise](https://www.ladn.eu/entrepris
 │   └── voice-api-resilient.cjs
 │
 ├── Fallback Chains (Session 168terdecies)
-│   ├── CRITICAL: Claude Opus 4.5 → Grok → Gemini
+│   ├── CRITICAL: Claude Opus 4.6 (1M ctx) → Grok → Gemini
 │   ├── VOLUME: Gemini → Grok → Claude
 │   └── REAL-TIME: Grok → ElevenLabs → Gemini Live
 │

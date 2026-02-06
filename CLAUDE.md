@@ -596,13 +596,13 @@ done
 |:---|:---|:---|
 | 1 | **Claude** | claude-opus-4-6 |
 | 2 | Grok | grok-4-1-fast-reasoning |
-| 3 | Gemini | gemini-3-flash |
+| 3 | Gemini | gemini-3-flash-preview |
 | 4 | Rules | rule-based-fallback |
 
 ### VOLUME (content, emails)
 | Ordre | Provider | Model |
 |:---|:---|:---|
-| 1 | **Gemini** | gemini-3-flash |
+| 1 | **Gemini** | gemini-3-flash-preview |
 | 2 | Grok | grok-4-1-fast-reasoning |
 | 3 | Claude | claude-haiku |
 

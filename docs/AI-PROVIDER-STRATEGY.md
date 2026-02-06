@@ -128,7 +128,7 @@ DÉVELOPPEMENT (tooling, Claude Code):
 
 | Provider | Force Documentée | Faiblesse | Use Case Optimal |
 |----------|------------------|-----------|------------------|
-| **Claude** | Raisonnement multi-step, nuance, code | Latence plus élevée, coût | Décisions complexes, refactoring |
+| **Claude** | Raisonnement multi-step, nuance, code, 1M context (beta), agent teams | Latence plus élevée, coût | Décisions complexes, refactoring |
 | **Grok** | Real-time streaming, contexte 128k | Moins de benchmarks publics | Voice, conversations longues |
 | **Gemini** | Multimodal, coût/token bas, vitesse | Hallucinations sur edge cases | Volume, images, batch |
 | **OpenAI** | Ecosystem mature, fine-tuning | Dilution "horizontal" | Exploration, prototypage |
@@ -158,7 +158,7 @@ DÉVELOPPEMENT (tooling, Claude Code):
 | Budget serré, tâche simple | Gemini Flash | 10x moins cher |
 | Multimodal (image → texte) | Gemini | Natif, optimisé |
 | Prototypage rapide | GPT-4o ou Gemini | Itération rapide |
-| Contexte > 100k tokens | Grok (128k) | Claude limité |
+| Contexte > 100k tokens | Grok (128k) ou Claude (1M beta) | Évaluer coût vs volume |
 
 ### 2.6 Quand NE PAS Utiliser Grok
 
