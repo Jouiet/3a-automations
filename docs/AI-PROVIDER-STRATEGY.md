@@ -1,6 +1,6 @@
 # STRATÉGIE AI PROVIDERS - 3A AUTOMATION
 
-> **Version**: 1.3.0 | **Date**: 06/02/2026 | **Session**: 191bis
+> **Version**: 1.3.1 | **Date**: 06/02/2026 | **Session**: 191ter
 > **Source**: Analyse comparative OpenAI vs Anthropic ecosystems + Audit interne
 > **Principe Fondamental**: "The Right Tool for the Right Purpose"
 > **Frontier Models (Feb 2026)**: Claude Opus 4.6 | Grok 4.1 Fast Reasoning | GPT-5.2 | Gemini 3 Flash Preview

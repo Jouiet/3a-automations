@@ -4,11 +4,41 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 191bis - 06/02/2026):**
-> - **Score: 83/100** | **Credentials: 63 SET / 38 empty (60%)** | **Multi-Tenant: 8/8 Weeks DONE**
-> - **Tests: 78/78 pass** (12 suites, OAuth + Multi-Tenant) | **MCP: 99/99 ✅**
-> - **Sensors: 12/19 OK** | **Dashboard: Build OK, APIs verified** | **MOCK_PATH: Fixed**
-> - **n8n: SUPPRIMÉ** (35+ files cleaned) | **Claude model: claude-opus-4-6** (28 files)
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 191ter - 06/02/2026 - Forensic Audit):**
+> - **Score: 86/100** | **Credentials: 60%** | **Multi-Tenant: 8/8 Weeks DONE**
+> - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
+> - **Sensors: 12/19 OK** | **Dashboard: 8/8 APIs** | **Voice: 2/3 running**
+> - **Agent Ops: 15/15 modules** | **--health: 57/57 respond** | **0 TODO/PLACEHOLDER**
+
+---
+
+## SESSION 191ter - FORENSIC AUDIT COMPLETE (06/02/2026)
+
+### Bottom-Up Empirical Verification
+Every component executed individually. No trust assumptions.
+
+| Category | Tested | Pass | Rate |
+|:---------|-------:|-----:|:-----|
+| S8 Tests (OAuth + Multi-Tenant) | 78 | 78 | 100% |
+| MCP Tests (verify-core) | 99 | 99 | 100% |
+| Core Workflow Load Test | 103 | 103 | 100% |
+| --health Endpoints | 57 | 57 | 100% |
+| Agent Ops Modules | 15 | 15 | 100% |
+| Dashboard APIs | 8 | 8 | 100% |
+| Sensors | 19 | 12 | 63% |
+| Voice Services | 3 | 2 | 67% |
+
+### Runtime Verified (06/02/2026 14:00 CET)
+| Service | Port | Status |
+|:--------|:----:|:------:|
+| Dashboard | 3000 | ✅ Next.js 14.2.35 |
+| Voice API | 3004 | ✅ Grok+Gemini+Claude+Atlas |
+| Grok Realtime | 3007 | ✅ 7 voices, WebSocket |
+| Telephony Bridge | 3009 | ❌ TELNYX/TWILIO missing |
+
+### Score Impact: 83 → 86 (+3)
+- Voice AI: 5→12 (2/3 services verified running)
+- Integrations: 9→5 (honest recalculation based on credential-validator 60%)
 
 ---
 

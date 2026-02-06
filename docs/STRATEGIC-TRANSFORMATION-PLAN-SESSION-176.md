@@ -115,13 +115,37 @@ Monétiser le support (Premium SLAs) pour financer l'ingénierie.
 
 ---
 
-## Prochaines Priorités (Post Session 191bis)
+## Session 191ter - Forensic Audit (06/02/2026) ✅
 
-1. **Configurer Credentials** : META_PIXEL_ID, META_ACCESS_TOKEN pour activer CAPI (USER ACTION).
-2. **Stripe Live Test** : Tester BillingAgent en sandbox (requires STRIPE_SECRET_KEY - USER ACTION).
-3. **Start Voice Services** : 3004, 3007, 3009 (DEVELOPER ACTION).
+**Vérification bottom-up empirique complète:**
+
+| Catégorie | Testé | Pass | Taux |
+|:----------|------:|-----:|:-----|
+| Tests (S8 + MCP) | 177 | 177 | 100% |
+| Core Workflows (.cjs) | 103 | 103 | 100% |
+| --health Endpoints | 57 | 57 | 100% |
+| Agent Ops Modules | 15 | 15 | 100% |
+| Dashboard APIs | 8 | 8 | 100% |
+| Sensors | 19 | 12 | 63% |
+| Voice Services | 3 | 2 | 67% |
+
+**Score Progression:**
+
+| Session | Flow | Cognitive | Financial | Multi-Tenant | Engineering |
+|:--------|:----:|:---------:|:---------:|:------------:|:-----------:|
+| 176 | 7/10 | 7/10 | 4/10 | 0/10 | - |
+| 177 | 8/10 | 8/10 | 6/10 | 0/10 | - |
+| 191bis | 9/10 | 9/10 | 6/10 | 10/10 | 83/100 |
+| **191ter** | **9/10** | **9/10** | **6/10** | **10/10** | **86/100** |
+
+## Prochaines Priorités (Post Session 191ter)
+
+1. **Configurer Credentials** : META_ACCESS_TOKEN, META_PIXEL_ID pour CAPI (USER ACTION).
+2. **Stripe Live Test** : Tester BillingAgent (requires STRIPE_SECRET_KEY - USER ACTION).
+3. **Telephony Bridge** : TELNYX_API_KEY pour activer port 3009 (USER ACTION).
 4. **Deploy Infisical** : Self-hosted vault on VPS (USER ACTION).
+5. **Fix WP Timeout** : content-performance-sensor - debug WordPress API connectivity.
 
 ---
 *Ce document complète le `AUDIT-SESSION-176` en intégrant la vision "Command Center".*
-*Mis à jour Session 191bis (06/02/2026) - Multi-Tenant 100%, S8 Tests 78/78*
+*Mis à jour Session 191ter (06/02/2026) - Forensic Audit: 177/177 tests, Score 86/100*
