@@ -4,11 +4,64 @@
 
 ## Document Exécutable - Janvier 2026
 
-> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 191ter - 06/02/2026 - Forensic Audit):**
-> - **Score: 86/100** | **Credentials: 60%** | **Multi-Tenant: 8/8 Weeks DONE**
+> **⚠️ ÉTAT RÉEL VÉRIFIÉ (Session 191sexies - 06/02/2026 - DOE Frontend Audit):**
+> - **Backend Score: 86/100** | **Frontend Score: 81/100** | **Credentials: 60%**
 > - **Tests: 177/177 pass** (78 S8 + 99 MCP) | **Scripts: 103/103 load OK**
-> - **Sensors: 12/19 OK** | **Dashboard: 8/8 APIs** | **Voice: 2/3 running**
+> - **Pages: 75 (+8 stitch)** | **Sensors: 12/19 OK** | **Dashboard: 8/8 APIs**
 > - **Agent Ops: 15/15 modules** | **--health: 57/57 respond** | **0 TODO/PLACEHOLDER**
+
+---
+
+## SESSION 191sexies - DOE FRONTEND P1 IMPLEMENTATION (06/02/2026)
+
+### P1 Fixes Applied (All 4/4 DONE)
+| # | Task | Files | Status |
+|:--|:---|:---:|:---:|
+| P1-1 | SpeakableSpecification on index FR + EN | 2 | ✅ |
+| P1-2 | OG tags + hreflang ar self-ref on ar/pricing + ar/contact | 2 | ✅ |
+| P1-3 | theme-color meta on index FR (was missing, present on EN) | 1 | ✅ |
+| P1-4 | Status banner "ENV CONFIG: 100%" → "HITL COVERAGE: 18/18" | 66 | ✅ |
+
+### Additional Fixes
+- EN FAQ schema: "99 automations" → "121 automations"
+- ar/pricing + ar/contact: Added theme-color meta alongside OG tags
+
+### Frontend Score Breakdown (Weighted - 81/100)
+| Category | Weight | Score | Details |
+|:---------|:------:|:-----:|:--------|
+| SEO/AEO | 20% | 78/100 | llms.txt + robots.txt + sitemap + Schema.org |
+| Security Headers | 15% | 88/100 | CSP meta (no server header), HSTS, X-Frame |
+| i18n/hreflang | 15% | 72/100 | FR/EN 100%, AR 8.6% (3/35 pages) |
+| WCAG Accessibility | 10% | 75/100 | Basic alt tags, missing focus-visible |
+| Design System | 15% | 92/100 | Futuriste, sobre, puissant |
+| Architecture | 10% | 90/100 | Clean semantic HTML, BEM-like CSS |
+| Performance | 10% | 80/100 | critical.css, lazy loading, no CWV monitoring |
+| CRO | 5% | 70/100 | CTAs present, no A/B testing, no social proof |
+
+### Remaining P2-P3 (User Action or Future Sessions)
+| Priority | Task | Impact |
+|:---------|:-----|:-------|
+| P2 | CSP server header via .htaccess | Security +5 |
+| P2 | AR page expansion (3→35 pages) | i18n +20 |
+| P2 | focus-visible CSS for keyboard nav | WCAG +5 |
+| P2 | Core Web Vitals monitoring | Performance +5 |
+| P3 | Social proof (testimonials, logos) | CRO +15 |
+| P3 | Full WCAG 2.2 AA audit | Accessibility +10 |
+| P3 | Lighthouse CI in GitHub Actions | Automation |
+
+---
+
+## SESSION 191quinquies - DOE FRONTEND AUDIT (06/02/2026)
+
+### Fixes Applied
+| Fix | Files Affected |
+|:----|:---:|
+| "22 Hardened Agents" → "18" in status banner | 66 |
+| llms.txt `<AgentSwarm count="22">` → `count="18"` | 1 |
+| ar/index.html hero "22 عمیلاً" → "18 عمیلاً" | 1 |
+| investisseurs.html "63 pages bilingue" → "75+ pages trilingue" | 1 |
+| en/investors.html "63-page bilingual" → "75+ page trilingual" | 1 |
+| sitemap.xml +3 AR pages + 1 EN blog + hreflang fix | 1 |
 
 ---
 

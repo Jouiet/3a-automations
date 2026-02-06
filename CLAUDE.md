@@ -1,5 +1,5 @@
 # 3A Automation
-> Version: 149.0 | 06/02/2026 | Session 191quinquies | Engineering Score: 86/100 | Frontend: 81/100 | Runtime: 3/4 Services ✅
+> Version: 150.0 | 06/02/2026 | Session 191sexies | Engineering Score: 86/100 | Frontend: 81/100 | Runtime: 3/4 Services ✅
 
 ## Identité
 
@@ -221,6 +221,18 @@
 - Glassmorphism cards ✅
 - Cyan accent (#4FBAF1) ✅
 - Sober, futuriste, puissant ✅
+
+### Session 191sexies - DOE Frontend P1 Implementation (06/02/2026) ✅
+
+**All 4 P1 tasks completed:**
+| Task | Files | Fix |
+|:-----|:-----:|:----|
+| SpeakableSpecification | 2 | WebPage schema + cssSelector on index FR/EN |
+| OG tags AR pages | 2 | og:title/desc/image/locale + hreflang ar self-ref |
+| theme-color FR | 1 | Added `#4FBAF1` (was missing, present on EN) |
+| Status banner factual | 66 | "ENV CONFIG: 100%" → "HITL COVERAGE: 18/18" |
+
+**Additional:** EN FAQ "99 automations" → "121", theme-color on AR pages
 
 ### Session 191quinquies - DOE Frontend Forensic Audit (06/02/2026) ✅
 
